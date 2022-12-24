@@ -27,8 +27,8 @@ use RuntimeException;
  * In your controller, you could do the following:
  *
  * ```
- * this.set(['posts' => $posts]);
- * this.viewBuilder()->setOption('serialize', true);
+ * this.set(['posts': $posts]);
+ * this.viewBuilder().setOption('serialize', true);
  * ```
  *
  * When the view is rendered, the `$posts` view variable will be serialized
@@ -39,7 +39,7 @@ use RuntimeException;
  *
  * ```
  * this.set(compact('posts', 'users', 'stuff'));
- * this.viewBuilder()->setOption('serialize', true);
+ * this.viewBuilder().setOption('serialize', true);
  * ```
  *
  * The above would generate a JSON object that looks like:
@@ -90,9 +90,9 @@ class JsonView : SerializedView
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'serialize' => null,
-        'jsonOptions' => null,
-        'jsonp' => null,
+        'serialize': null,
+        'jsonOptions': null,
+        'jsonp': null,
     ];
 
     /**
@@ -121,9 +121,9 @@ class JsonView : SerializedView
             if ($jsonp == true) {
                 $jsonp = 'callback';
             }
-            if (this.request->getQuery($jsonp)) {
-                $return = sprintf('%s(%s)', h(this.request->getQuery($jsonp)), $return);
-                this.response = this.response->withType('js');
+            if (this.request.getQuery($jsonp)) {
+                $return = sprintf('%s(%s)', h(this.request.getQuery($jsonp)), $return);
+                this.response = this.response.withType('js');
             }
         }
 
@@ -170,7 +170,7 @@ class JsonView : SerializedView
     {
         if (is_array($serialize)) {
             $data = [];
-            foreach ($serialize as $alias => $key) {
+            foreach ($serialize as $alias: $key) {
                 if (is_numeric($alias)) {
                     $alias = $key;
                 }

@@ -47,7 +47,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
     public this(View $view)
     {
         _View = $view;
-        this.setEventManager($view->getEventManager());
+        this.setEventManager($view.getEventManager());
     }
 
     /**
@@ -69,7 +69,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
         try {
             this.load($helper);
         } catch (MissingHelperException $exception) {
-            $plugin = _View->getPlugin();
+            $plugin = _View.getPlugin();
             if (!empty($plugin)) {
                 this.load($plugin . '.' . $helper);
 
@@ -130,8 +130,8 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingHelperException([
-            'class' => $class . 'Helper',
-            'plugin' => $plugin,
+            'class': $class . 'Helper',
+            'plugin': $plugin,
         ]);
     }
 
@@ -154,7 +154,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
 
         $enable = $config['enabled'] ?? true;
         if ($enable) {
-            this.getEventManager()->on($instance);
+            this.getEventManager().on($instance);
         }
 
         return $instance;

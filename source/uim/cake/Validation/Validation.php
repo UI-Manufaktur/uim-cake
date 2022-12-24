@@ -119,9 +119,9 @@ class Validation
      * @var array<string, string>
      */
     protected static $_pattern = [
-        'hostname' => '(?:[_\p{L}0-9][-_\p{L}0-9]*\.)*(?:[\p{L}0-9][-\p{L}0-9]{0,62})\.(?:(?:[a-z]{2}\.)?[a-z]{2,})',
-        'latitude' => '[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)',
-        'longitude' => '[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)',
+        'hostname': '(?:[_\p{L}0-9][-_\p{L}0-9]*\.)*(?:[\p{L}0-9][-\p{L}0-9]{0,62})\.(?:(?:[a-z]{2}\.)?[a-z]{2,})',
+        'latitude': '[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)',
+        'longitude': '[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)',
     ];
 
     /**
@@ -255,24 +255,24 @@ class Validation
             return !$deep || static::luhn($check);
         }
         $cards = [
-            'all' => [
-                'amex' => '/^3[47]\\d{13}$/',
-                'bankcard' => '/^56(10\\d\\d|022[1-5])\\d{10}$/',
-                'diners' => '/^(?:3(0[0-5]|[68]\\d)\\d{11})|(?:5[1-5]\\d{14})$/',
-                'disc' => '/^(?:6011|650\\d)\\d{12}$/',
-                'electron' => '/^(?:417500|4917\\d{2}|4913\\d{2})\\d{10}$/',
-                'enroute' => '/^2(?:014|149)\\d{11}$/',
-                'jcb' => '/^(3\\d{4}|2131|1800)\\d{11}$/',
-                'maestro' => '/^(?:5020|6\\d{3})\\d{12}$/',
-                'mc' => '/^(5[1-5]\\d{14})|(2(?:22[1-9]|2[3-9][0-9]|[3-6][0-9]{2}|7[0-1][0-9]|720)\\d{12})$/',
-                'solo' => '/^(6334[5-9][0-9]|6767[0-9]{2})\\d{10}(\\d{2,3})?$/',
+            'all': [
+                'amex': '/^3[47]\\d{13}$/',
+                'bankcard': '/^56(10\\d\\d|022[1-5])\\d{10}$/',
+                'diners': '/^(?:3(0[0-5]|[68]\\d)\\d{11})|(?:5[1-5]\\d{14})$/',
+                'disc': '/^(?:6011|650\\d)\\d{12}$/',
+                'electron': '/^(?:417500|4917\\d{2}|4913\\d{2})\\d{10}$/',
+                'enroute': '/^2(?:014|149)\\d{11}$/',
+                'jcb': '/^(3\\d{4}|2131|1800)\\d{11}$/',
+                'maestro': '/^(?:5020|6\\d{3})\\d{12}$/',
+                'mc': '/^(5[1-5]\\d{14})|(2(?:22[1-9]|2[3-9][0-9]|[3-6][0-9]{2}|7[0-1][0-9]|720)\\d{12})$/',
+                'solo': '/^(6334[5-9][0-9]|6767[0-9]{2})\\d{10}(\\d{2,3})?$/',
                 // phpcs:ignore Generic.Files.LineLength
-                'switch' => '/^(?:49(03(0[2-9]|3[5-9])|11(0[1-2]|7[4-9]|8[1-2])|36[0-9]{2})\\d{10}(\\d{2,3})?)|(?:564182\\d{10}(\\d{2,3})?)|(6(3(33[0-4][0-9])|759[0-9]{2})\\d{10}(\\d{2,3})?)$/',
-                'visa' => '/^4\\d{12}(\\d{3})?$/',
-                'voyager' => '/^8699[0-9]{11}$/',
+                'switch': '/^(?:49(03(0[2-9]|3[5-9])|11(0[1-2]|7[4-9]|8[1-2])|36[0-9]{2})\\d{10}(\\d{2,3})?)|(?:564182\\d{10}(\\d{2,3})?)|(6(3(33[0-4][0-9])|759[0-9]{2})\\d{10}(\\d{2,3})?)$/',
+                'visa': '/^4\\d{12}(\\d{3})?$/',
+                'voyager': '/^8699[0-9]{11}$/',
             ],
             // phpcs:ignore Generic.Files.LineLength
-            'fast' => '/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6011[0-9]{12}|3(?:0[0-5]|[68][0-9])[0-9]{11}|3[47][0-9]{13})$/',
+            'fast': '/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6011[0-9]{12}|3(?:0[0-5]|[68][0-9])[0-9]{11}|3[47][0-9]{13})$/',
         ];
 
         if (is_array($type)) {
@@ -678,9 +678,9 @@ class Validation
             return false;
         }
         static $methods = [
-            'date' => 'parseDate',
-            'time' => 'parseTime',
-            'datetime' => 'parseDateTime',
+            'date': 'parseDate',
+            'time': 'parseTime',
+            'datetime': 'parseDateTime',
         ];
         if (empty($methods[$type])) {
             throw new InvalidArgumentException('Unsupported parser type given.');
@@ -749,9 +749,9 @@ class Validation
      *
      * Valid Places:
      *
-     * - null => Any number of decimal places, including none. The '.' is not required.
-     * - true => Any number of decimal places greater than 0, or a float|double. The '.' is required.
-     * - 1..N => Exactly that many number of decimal places. The '.' is required.
+     * - null: Any number of decimal places, including none. The '.' is not required.
+     * - true: Any number of decimal places greater than 0, or a float|double. The '.' is required.
+     * - 1..N: Exactly that many number of decimal places. The '.' is required.
      *
      * @param mixed $check The value the test for decimal.
      * @param int|true|null $places Decimal places.
@@ -789,8 +789,8 @@ class Validation
         // account for localized floats.
         $locale = ini_get('intl.default_locale') ?: static::DEFAULT_LOCALE;
         $formatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
-        $decimalPoint = $formatter->getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
-        $groupingSep = $formatter->getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
+        $decimalPoint = $formatter.getSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL);
+        $groupingSep = $formatter.getSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
 
         // There are two types of non-breaking spaces - we inject a space to account for human input
         if ($groupingSep == "\xc2\xa0" || $groupingSep == "\xe2\x80\xaf") {
@@ -864,7 +864,7 @@ class Validation
     public static function extension($check, array $extensions = ['gif', 'jpeg', 'png', 'jpg']): bool
     {
         if ($check instanceof UploadedFileInterface) {
-            $check = $check->getClientFilename();
+            $check = $check.getClientFilename();
         } elseif (is_array($check) && isset($check['name'])) {
             $check = $check['name'];
         } elseif (is_array($check)) {
@@ -907,7 +907,7 @@ class Validation
             $flags = FILTER_FLAG_IPV6;
         }
 
-        return (bool)filter_var($check, FILTER_VALIDATE_IP, ['flags' => $flags]);
+        return (bool)filter_var($check, FILTER_VALIDATE_IP, ['flags': $flags]);
     }
 
     /**
@@ -998,9 +998,9 @@ class Validation
      *
      * Valid Options
      *
-     * - in => provide a list of choices that selections must be made from
-     * - max => maximum number of non-zero choices that can be made
-     * - min => minimum number of non-zero choices that can be made
+     * - in: provide a list of choices that selections must be made from
+     * - max: maximum number of non-zero choices that can be made
+     * - min: minimum number of non-zero choices that can be made
      *
      * @param mixed $check Value to check
      * @param array<string, mixed> $options Options for the check.
@@ -1009,7 +1009,7 @@ class Validation
      */
     public static function multiple($check, array $options = [], bool $caseInsensitive = false): bool
     {
-        $defaults = ['in' => null, 'max' => null, 'min' => null];
+        $defaults = ['in': null, 'max': null, 'min': null];
         $options += $defaults;
 
         $check = array_filter((array)$check, function ($value) {
@@ -1253,7 +1253,7 @@ class Validation
             return self::_check($mime, $mimeTypes);
         }
 
-        foreach ($mimeTypes as $key => $val) {
+        foreach ($mimeTypes as $key: $val) {
             $mimeTypes[$key] = strtolower($val);
         }
 
@@ -1272,7 +1272,7 @@ class Validation
         if ($check instanceof UploadedFileInterface) {
             // Uploaded files throw exceptions on upload errors.
             try {
-                $uri = $check->getStream()->getMetadata('uri');
+                $uri = $check.getStream().getMetadata('uri');
                 if (is_string($uri)) {
                     return $uri;
                 }
@@ -1331,7 +1331,7 @@ class Validation
     public static function uploadError($check, bool $allowNoFile = false): bool
     {
         if ($check instanceof UploadedFileInterface) {
-            $code = $check->getError();
+            $code = $check.getError();
         } elseif (is_array($check)) {
             if (!isset($check['error'])) {
                 return false;
@@ -1371,17 +1371,17 @@ class Validation
     public static function uploadedFile($file, array $options = []): bool
     {
         $options += [
-            'minSize' => null,
-            'maxSize' => null,
-            'types' => null,
-            'optional' => false,
+            'minSize': null,
+            'maxSize': null,
+            'types': null,
+            'optional': false,
         ];
         if (!is_array($file) && !($file instanceof UploadedFileInterface)) {
             return false;
         }
         $error = $isUploaded = false;
         if ($file instanceof UploadedFileInterface) {
-            $error = $file->getError();
+            $error = $file.getError();
             $isUploaded = true;
         }
         if (is_array($file)) {
@@ -1474,7 +1474,7 @@ class Validation
     public static function imageWidth($file, string $operator, int $width): bool
     {
         return self::imageSize($file, [
-            'width' => [
+            'width': [
                 $operator,
                 $width,
             ],
@@ -1492,7 +1492,7 @@ class Validation
     public static function imageHeight($file, string $operator, int $height): bool
     {
         return self::imageSize($file, [
-            'height' => [
+            'height': [
                 $operator,
                 $height,
             ],
@@ -1523,8 +1523,8 @@ class Validation
         }
 
         $options += [
-            'format' => 'both',
-            'type' => 'latLong',
+            'format': 'both',
+            'type': 'latLong',
         ];
         if ($options['type'] != 'latLong') {
             throw new RuntimeException(sprintf(
@@ -1612,7 +1612,7 @@ class Validation
         if (!is_string($value)) {
             return false;
         }
-        $options += ['extended' => false];
+        $options += ['extended': false];
         if ($options['extended']) {
             return true;
         }
@@ -1744,7 +1744,7 @@ class Validation
             if (isset($value['meridian'])) {
                 $value['hour'] = strtolower($value['meridian']) == 'am' ? $value['hour'] : $value['hour'] + 12;
             }
-            $value += ['minute' => 0, 'second' => 0, 'microsecond' => 0];
+            $value += ['minute': 0, 'second': 0, 'microsecond': 0];
             if (
                 is_numeric($value['hour']) &&
                 is_numeric($value['minute']) &&

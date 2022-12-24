@@ -46,7 +46,7 @@ abstract class SerializedView : View
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'serialize' => null,
+        'serialize': null,
     ];
 
     /**
@@ -56,7 +56,7 @@ abstract class SerializedView : View
     {
         parent::initialize();
         if (_responseType) {
-            $response = this.getResponse()->withType(_responseType);
+            $response = this.getResponse().withType(_responseType);
             this.setResponse($response);
         }
     }

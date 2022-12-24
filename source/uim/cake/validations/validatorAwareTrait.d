@@ -56,8 +56,8 @@ trait ValidatorAwareTrait
      * function validationForSubscription($validator)
      * {
      *     return $validator
-     *         .add("email", "valid-email", ["rule" => "email"])
-     *         .add("password", "valid", ["rule" => "notBlank"])
+     *         .add("email", "valid-email", ["rule": "email"])
+     *         .add("password", "valid", ["rule": "notBlank"])
      *         .requirePresence("username");
      * }
      *
@@ -133,8 +133,8 @@ trait ValidatorAwareTrait
      * ```
      * $validator = new \Cake\Validation\Validator();
      * $validator
-     *     .add("email", "valid-email", ["rule" => "email"])
-     *     .add("password", "valid", ["rule" => "notBlank"])
+     *     .add("email", "valid-email", ["rule": "email"])
+     *     .add("password", "valid", ["rule": "notBlank"])
      *     .allowEmpty("bio");
      * this.setValidator("forSubscription", $validator);
      * ```

@@ -107,7 +107,7 @@ class Hash
      *  - `>`, `<`, `>=`, `<=` Value comparison.
      *  - `=/.../` Regular expression pattern match.
      *
-     * Given a set of User array data, from a `$usersTable->find('all')` call:
+     * Given a set of User array data, from a `$usersTable.find('all')` call:
      *
      * - `1.User.name` Get the name of the user at index 1.
      * - `{n}.User.name` Get the name of every user in the set of users.
@@ -152,7 +152,7 @@ class Hash
 
         $_key = '__set_item__';
 
-        $context = [$_key => [$data]];
+        $context = [$_key: [$data]];
 
         foreach ($tokens as $token) {
             $next = [];
@@ -162,9 +162,9 @@ class Hash
             foreach ($context[$_key] as $item) {
                 if (is_object($item) && method_exists($item, 'toArray')) {
                     /** @var \Cake\Datasource\EntityInterface $item */
-                    $item = $item->toArray();
+                    $item = $item.toArray();
                 }
-                foreach ((array)$item as $k => $v) {
+                foreach ((array)$item as $k: $v) {
                     if (static::_matchToken($k, $token)) {
                         $next[] = $v;
                     }
@@ -187,7 +187,7 @@ class Hash
                 }
                 $next = $filter;
             }
-            $context = [$_key => $next];
+            $context = [$_key: $next];
         }
 
         return $context[$_key];
@@ -261,7 +261,7 @@ class Hash
             if (is_array($data)) {
                 $attrPresent = array_key_exists($attr, $data);
             } else {
-                $attrPresent = $data->offsetExists($attr);
+                $attrPresent = $data.offsetExists($attr);
             }
             // Empty attribute = fail.
             if (!$attrPresent) {
@@ -334,7 +334,7 @@ class Hash
 
         [$token, $conditions] = static::_splitConditions($token);
 
-        foreach ($data as $k => $v) {
+        foreach ($data as $k: $v) {
             if (static::_matchToken($k, $token)) {
                 if (!$conditions || static::_matches($v, $conditions)) {
                     $data[$k] = $nextPath
@@ -362,7 +362,7 @@ class Hash
 
         $count = count($path);
         $last = $count - 1;
-        foreach ($path as $i => $key) {
+        foreach ($path as $i: $key) {
             if ($op == 'insert') {
                 if ($i == $last) {
                     $_list[$key] = $values;
@@ -424,7 +424,7 @@ class Hash
 
         [$token, $conditions] = self::_splitConditions($token);
 
-        foreach ($data as $k => $v) {
+        foreach ($data as $k: $v) {
             $match = static::_matchToken($k, $token);
             if ($match && is_array($v)) {
                 if ($conditions) {
@@ -651,7 +651,7 @@ class Hash
      */
     public static function filter(array $data, $callback = [Hash::class, '_filter']): array
     {
-        foreach ($data as $k => $v) {
+        foreach ($data as $k: $v) {
             if (is_array($v)) {
                 $data[$k] = static::filter($v, $callback);
             }
@@ -673,8 +673,8 @@ class Hash
 
     /**
      * Collapses a multi-dimensional array into a single dimension, using a delimited array path for
-     * each array element's key, i.e. [['Foo' => ['Bar' => 'Far']]] becomes
-     * ['0.Foo.Bar' => 'Far'].)
+     * each array element's key, i.e. [['Foo': ['Bar': 'Far']]] becomes
+     * ['0.Foo.Bar': 'Far'].)
      *
      * @param array $data Array to flatten
      * @param string $separator String used to separate array key elements in a path, defaults to '.'
@@ -717,8 +717,8 @@ class Hash
      * Expands a flat array to a nested array.
      *
      * For example, unflattens an array that was collapsed with `Hash::flatten()`
-     * into a multi-dimensional array. So, `['0.Foo.Bar' => 'Far']` becomes
-     * `[['Foo' => ['Bar' => 'Far']]]`.
+     * into a multi-dimensional array. So, `['0.Foo.Bar': 'Far']` becomes
+     * `[['Foo': ['Bar': 'Far']]]`.
      *
      * @phpstan-param non-empty-string $separator
      * @param array $data Flattened array
@@ -729,7 +729,7 @@ class Hash
     public static function expand(array $data, string $separator = '.'): array
     {
         $hash = [];
-        foreach ($data as $path => $value) {
+        foreach ($data as $path: $value) {
             $keys = explode($separator, (string)$path);
             if (count($keys) == 1) {
                 $hash[$path] = $value;
@@ -791,8 +791,8 @@ class Hash
     protected static function _merge(array $stack, array &$return): void
     {
         while (!empty($stack)) {
-            foreach ($stack as $curKey => &$curMerge) {
-                foreach ($curMerge[0] as $key => &$val) {
+            foreach ($stack as $curKey: &$curMerge) {
+                foreach ($curMerge[0] as $key: &$val) {
                     if (!is_array($curMerge[1])) {
                         continue;
                     }
@@ -971,7 +971,7 @@ class Hash
      * To do case insensitive sorting, pass the type as an array as follows:
      *
      * ```
-     * Hash::sort($data, 'some.attribute', 'asc', ['type' => 'regular', 'ignoreCase' => true]);
+     * Hash::sort($data, 'some.attribute', 'asc', ['type': 'regular', 'ignoreCase': true]);
      * ```
      *
      * When using the array form, `type` defaults to 'regular'. The `ignoreCase` option
@@ -1004,7 +1004,7 @@ class Hash
         if ($missingData && $numeric) {
             // Get the path without the leading '{n}.'
             $itemPath = substr($path, 4);
-            foreach ($data as $key => $value) {
+            foreach ($data as $key: $value) {
                 $sortValues[$key] = static::get($value, $itemPath);
             }
         } elseif ($missingData) {
@@ -1027,7 +1027,7 @@ class Hash
 
         // $type can be overloaded for case insensitive sort
         if (is_array($type)) {
-            $type += ['ignoreCase' => false, 'type' => 'regular'];
+            $type += ['ignoreCase': false, 'type': 'regular'];
             $ignoreCase = $type['ignoreCase'];
             $type = $type['type'];
         }
@@ -1077,7 +1077,7 @@ class Hash
     protected static function _squash(array $data, $key = null): array
     {
         $stack = [];
-        foreach ($data as $k => $r) {
+        foreach ($data as $k: $r) {
             $id = $k;
             if ($key != null) {
                 $id = $key;
@@ -1085,7 +1085,7 @@ class Hash
             if (is_array($r) && !empty($r)) {
                 $stack = array_merge($stack, static::_squash($r, $id));
             } else {
-                $stack[] = ['id' => $id, 'value' => $r];
+                $stack[] = ['id': $id, 'value': $r];
             }
         }
 
@@ -1099,7 +1099,7 @@ class Hash
      *
      * @param array $data First value
      * @param array $compare Second value
-     * @return array Returns the key => value pairs that are not common in $data and $compare
+     * @return array Returns the key: value pairs that are not common in $data and $compare
      *    The expression for this function is ($data - $compare) + ($compare - ($data - $compare))
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::diff
      */
@@ -1139,7 +1139,7 @@ class Hash
         if (empty($compare)) {
             return $data;
         }
-        foreach ($compare as $key => $value) {
+        foreach ($compare as $key: $value) {
             if (!array_key_exists($key, $data)) {
                 $data[$key] = $value;
             } elseif (is_array($value) && is_array($data[$key])) {
@@ -1214,10 +1214,10 @@ class Hash
 
         $alias = key(current($data));
         $options += [
-            'idPath' => "{n}.$alias.id",
-            'parentPath' => "{n}.$alias.parent_id",
-            'children' => 'children',
-            'root' => null,
+            'idPath': "{n}.$alias.id",
+            'parentPath': "{n}.$alias.parent_id",
+            'children': 'children',
+            'root': null,
         ];
 
         $return = $idMap = [];
@@ -1239,7 +1239,7 @@ class Hash
             if (isset($idMap[$id][$options['children']])) {
                 $idMap[$id] = array_merge($result, $idMap[$id]);
             } else {
-                $idMap[$id] = array_merge($result, [$options['children'] => []]);
+                $idMap[$id] = array_merge($result, [$options['children']: []]);
             }
             if (!$parentId || !in_array($parentId, $ids)) {
                 $return[] = &$idMap[$id];
@@ -1258,7 +1258,7 @@ class Hash
             $root = static::get($return[0], $parentKeys);
         }
 
-        foreach ($return as $i => $result) {
+        foreach ($return as $i: $result) {
             $id = static::get($result, $idKeys);
             $parentId = static::get($result, $parentKeys);
             if ($id != $root && $parentId != $root) {

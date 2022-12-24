@@ -32,10 +32,10 @@ trait CellTrait
      *
      * ```
      * // Taxonomy\View\Cell\TagCloudCell::smallList()
-     * $cell = this.cell('Taxonomy.TagCloud::smallList', ['limit' => 10]);
+     * $cell = this.cell('Taxonomy.TagCloud::smallList', ['limit': 10]);
      *
      * // App\View\Cell\TagCloudCell::smallList()
-     * $cell = this.cell('TagCloud::smallList', ['limit' => 10]);
+     * $cell = this.cell('TagCloud::smallList', ['limit': 10]);
      * ```
      *
      * The `display` action will be used by default when no action is provided:
@@ -50,7 +50,7 @@ trait CellTrait
      * @param string $cell You must indicate cell name, and optionally a cell action. e.g.: `TagCloud::smallList` will
      *  invoke `View\Cell\TagCloudCell::smallList()`, `display` action will be invoked by default when none is provided.
      * @param array $data Additional arguments for cell method. e.g.:
-     *    `cell('TagCloud::smallList', ['a1' => 'v1', 'a2' => 'v2'])` maps to `View\Cell\TagCloud::smallList(v1, v2)`
+     *    `cell('TagCloud::smallList', ['a1': 'v1', 'a2': 'v2'])` maps to `View\Cell\TagCloud::smallList(v1, v2)`
      * @param array<string, mixed> $options Options for Cell's constructor
      * @return \Cake\View\Cell The cell instance
      * @throws \Cake\View\Exception\MissingCellException If Cell class was not found.
@@ -69,13 +69,13 @@ trait CellTrait
         $className = App::className($pluginAndCell, 'View/Cell', 'Cell');
 
         if (!$className) {
-            throw new MissingCellException(['className' => $pluginAndCell . 'Cell']);
+            throw new MissingCellException(['className': $pluginAndCell . 'Cell']);
         }
 
         if (!empty($data)) {
             $data = array_values($data);
         }
-        $options = ['action' => $action, 'args' => $data] + $options;
+        $options = ['action': $action, 'args': $data] + $options;
 
         return _createCell($className, $action, $plugin, $options);
     }
@@ -94,33 +94,33 @@ trait CellTrait
         /** @var \Cake\View\Cell $instance */
         $instance = new $className(this.request, this.response, this.getEventManager(), $options);
 
-        $builder = $instance->viewBuilder();
-        $builder->setTemplate(Inflector::underscore($action));
+        $builder = $instance.viewBuilder();
+        $builder.setTemplate(Inflector::underscore($action));
 
         if (!empty($plugin)) {
-            $builder->setPlugin($plugin);
+            $builder.setPlugin($plugin);
         }
         if (!empty(this.helpers)) {
-            $builder->addHelpers(this.helpers);
+            $builder.addHelpers(this.helpers);
         }
 
         if (this instanceof View) {
             if (!empty(this.theme)) {
-                $builder->setTheme(this.theme);
+                $builder.setTheme(this.theme);
             }
 
             $class = static::class;
-            $builder->setClassName($class);
-            $instance->viewBuilder()->setClassName($class);
+            $builder.setClassName($class);
+            $instance.viewBuilder().setClassName($class);
 
             return $instance;
         }
 
         if (method_exists(this, 'viewBuilder')) {
-            $builder->setTheme(this.viewBuilder()->getTheme());
+            $builder.setTheme(this.viewBuilder().getTheme());
 
-            if (this.viewBuilder()->getClassName() != null) {
-                $builder->setClassName(this.viewBuilder()->getClassName());
+            if (this.viewBuilder().getClassName() != null) {
+                $builder.setClassName(this.viewBuilder().getClassName());
             }
         }
 

@@ -312,7 +312,7 @@ class ViewBuilder : JsonSerializable, Serializable
     function addHelper(string $helper, array $options = [])
     {
         if ($options) {
-            $array = [$helper => $options];
+            $array = [$helper: $options];
         } else {
             $array = [$helper];
         }
@@ -331,7 +331,7 @@ class ViewBuilder : JsonSerializable, Serializable
      */
     function addHelpers(array $helpers)
     {
-        foreach ($helpers as $helper => $config) {
+        foreach ($helpers as $helper: $config) {
             if (is_int($helper)) {
                 $helper = $config;
                 $config = [];
@@ -576,7 +576,7 @@ class ViewBuilder : JsonSerializable, Serializable
             $className = App::className($className, 'View', 'View');
         }
         if ($className == null) {
-            throw new MissingViewException(['class' => _className]);
+            throw new MissingViewException(['class': _className]);
         }
 
         if (!empty($vars)) {
@@ -586,16 +586,16 @@ class ViewBuilder : JsonSerializable, Serializable
         }
 
         $data = [
-            'name' => _name,
-            'templatePath' => _templatePath,
-            'template' => _template,
-            'plugin' => _plugin,
-            'theme' => _theme,
-            'layout' => _layout,
-            'autoLayout' => _autoLayout,
-            'layoutPath' => _layoutPath,
-            'helpers' => _helpers,
-            'viewVars' => $vars + _vars,
+            'name': _name,
+            'templatePath': _templatePath,
+            'template': _template,
+            'plugin': _plugin,
+            'theme': _theme,
+            'layout': _layout,
+            'autoLayout': _autoLayout,
+            'layoutPath': _layoutPath,
+            'helpers': _helpers,
+            'viewVars': $vars + _vars,
         ];
         $data += _options;
 
@@ -672,7 +672,7 @@ class ViewBuilder : JsonSerializable, Serializable
      */
     function createFromArray(array $config)
     {
-        foreach ($config as $property => $value) {
+        foreach ($config as $property: $value) {
             this.{$property} = $value;
         }
 

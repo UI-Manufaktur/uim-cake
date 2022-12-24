@@ -88,7 +88,7 @@ class ValidationRule
      * callable for the configured scope
      */
     function process(myValue, array $providers, array $context = []) {
-        $context += ["data" => [], "newRecord" => true, "providers" => $providers];
+        $context += ["data": [], "newRecord": true, "providers": $providers];
 
         if (_skip($context)) {
             return true;
@@ -162,7 +162,7 @@ class ValidationRule
      * @param array $validator [optional]
      */
     protected void _addValidatorProps(array $validator = []) {
-      foreach (myKey => myValue; $validator) {
+      foreach (myKey: myValue; $validator) {
         if (empty(myValue)) continue;
 
         if (myKey == "rule" && is_array(myValue) && !is_callable(myValue)) {

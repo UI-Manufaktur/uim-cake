@@ -23,7 +23,7 @@ class Xml {
      * Building XML from string (output DOMDocument):
      *
      * ```
-     * $xml = Xml::build("<example>text</example>", ["return" => "domdocument"]);
+     * $xml = Xml::build("<example>text</example>", ["return": "domdocument"]);
      * ```
      *
      * Building XML from a file path:
@@ -46,15 +46,15 @@ class Xml {
      *
      * ```
      *  myValue = [
-     *      "tags" => [
-     *          "tag" => [
+     *      "tags": [
+     *          "tag": [
      *              [
-     *                  "id" => "1",
-     *                  "name" => "defect"
+     *                  "id": "1",
+     *                  "name": "defect"
      *              ],
      *              [
-     *                  "id" => "2",
-     *                  "name" => "enhancement"
+     *                  "id": "2",
+     *                  "name": "enhancement"
      *              ]
      *          ]
      *      ]
@@ -82,10 +82,10 @@ class Xml {
      */
     static function build($input, array myOptions = []) {
         $defaults = [
-            "return" => "simplexml",
-            "loadEntities" => false,
-            "readFile" => false,
-            "parseHuge" => false,
+            "return": "simplexml",
+            "loadEntities": false,
+            "readFile": false,
+            "parseHuge": false,
         ];
         myOptions += $defaults;
 
@@ -145,8 +145,8 @@ class Xml {
      */
     static function loadHtml(string input, array myOptions = []) {
         $defaults = [
-            "return" => "simplexml",
-            "loadEntities" => false,
+            "return": "simplexml",
+            "loadEntities": false,
         ];
         myOptions += $defaults;
 
@@ -217,11 +217,11 @@ class Xml {
      *
      * ```
      * myValue = [
-     *    "root" => [
-     *        "tag" => [
-     *            "id" => 1,
-     *            "value" => "defect",
-     *            "@" => "description"
+     *    "root": [
+     *        "tag": [
+     *            "id": 1,
+     *            "value": "defect",
+     *            "@": "description"
      *         ]
      *     ]
      * ];
@@ -253,11 +253,11 @@ class Xml {
         }
 
         $defaults = [
-            "format" => "tags",
-            "version" => "1.0",
-            "encoding" => mb_internal_encoding(),
-            "return" => "simplexml",
-            "pretty" => false,
+            "format": "tags",
+            "version": "1.0",
+            "encoding": mb_internal_encoding(),
+            "return": "simplexml",
+            "pretty": false,
         ];
         myOptions += $defaults;
 
@@ -289,7 +289,7 @@ class Xml {
         if (empty(myData) || !is_array(myData)) {
             return;
         }
-        foreach (myData as myKey => myValue) {
+        foreach (myData as myKey: myValue) {
             if (is_string(myKey)) {
                 if (is_object(myValue) && method_exists(myValue, "toArray") && is_callable([myValue, "toArray"])) {
                     myValue = myValue.toArray();
@@ -355,11 +355,11 @@ class Xml {
      */
     protected static void _createChild(array myData) {
         myData += [
-            "dom" => null,
-            "node" => null,
-            "key" => null,
-            "value" => null,
-            "format" => null,
+            "dom": null,
+            "node": null,
+            "key": null,
+            "value": null,
+            "format": null,
         ];
 
         myValue = myData["value"];
@@ -413,7 +413,7 @@ class Xml {
             throw new XmlException("The input is not instance of SimpleXMLElement, DOMDocument or DOMNode.");
         }
         myResult = [];
-        $modules = array_merge(["" => ""], $obj.getmodules(true));
+        $modules = array_merge(["": ""], $obj.getmodules(true));
         static::_toArray($obj, myResult, "", array_keys($modules));
 
         return myResult;
@@ -436,7 +436,7 @@ class Xml {
              * @psalm-suppress PossiblyNullIterator
              * @var string myKey
              */
-            foreach ($xml.attributes($module, true) as myKey => myValue) {
+            foreach ($xml.attributes($module, true) as myKey: myValue) {
                 if (!empty($module)) {
                     myKey = $module . ":" . myKey;
                 }

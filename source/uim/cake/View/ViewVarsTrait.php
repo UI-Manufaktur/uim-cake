@@ -57,18 +57,18 @@ trait ViewVarsTrait
     {
         $builder = this.viewBuilder();
         if ($viewClass) {
-            $builder->setClassName($viewClass);
+            $builder.setClassName($viewClass);
         }
 
         foreach (['name', 'plugin'] as $prop) {
             if (isset(this.{$prop})) {
                 $method = 'set' . ucfirst($prop);
-                $builder->{$method}(this.{$prop});
+                $builder.{$method}(this.{$prop});
             }
         }
 
         /** @psalm-suppress RedundantPropertyInitializationCheck */
-        return $builder->build(
+        return $builder.build(
             [],
             this.request ?? null,
             this.response ?? null,
@@ -93,9 +93,9 @@ trait ViewVarsTrait
                 $data = $name;
             }
         } else {
-            $data = [$name => $value];
+            $data = [$name: $value];
         }
-        this.viewBuilder()->setVars($data);
+        this.viewBuilder().setVars($data);
 
         return this;
     }

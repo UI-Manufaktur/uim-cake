@@ -109,8 +109,8 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
      *
      * ```
      *      $set
-     *          .add("notBlank", ["rule" => "notBlank"])
-     *          .add("inRange", ["rule" => ["between", 4, 10])
+     *          .add("notBlank", ["rule": "notBlank"])
+     *          .add("inRange", ["rule": ["between", 4, 10])
      * ```
      *
      * @param string myName The name under which the rule should be set

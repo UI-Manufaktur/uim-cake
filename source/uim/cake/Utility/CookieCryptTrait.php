@@ -104,7 +104,7 @@ trait CookieCryptTrait
         }
 
         $decrypted = [];
-        foreach ($values as $name => $value) {
+        foreach ($values as $name: $value) {
             $decrypted[$name] = _decode($value, $mode, $key);
         }
 

@@ -204,7 +204,7 @@ class Security
         $key = mb_substr(hash('sha256', $key . $hmacSalt), 0, 32, '8bit');
 
         $crypto = static::engine();
-        $ciphertext = $crypto->encrypt($plain, $key);
+        $ciphertext = $crypto.encrypt($plain, $key);
         $hmac = hash_hmac('sha256', $ciphertext, $key);
 
         return $hmac . $ciphertext;
@@ -262,7 +262,7 @@ class Security
 
         $crypto = static::engine();
 
-        return $crypto->decrypt($cipher, $key);
+        return $crypto.decrypt($cipher, $key);
     }
 
     /**

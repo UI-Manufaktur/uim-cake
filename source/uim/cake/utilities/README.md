@@ -13,9 +13,9 @@ A ``Hash`` (as in PHP arrays) class, capable of extracting data using an intuiti
 
 ```php
 $things = [
-    ["name" => "Mark", "age" => 15],
-    ["name" => "Susan", "age" => 30],
-    ["name" => "Lucy", "age" => 25]
+    ["name": "Mark", "age": 15],
+    ["name": "Susan", "age": 30],
+    ["name": "Lucy", "age": 25]
 ];
 
 $bigPeople = Hash::extract($things, "{n}[age>21].name");
@@ -45,7 +45,7 @@ The Text class includes convenience methods for creating and manipulating string
 ```php
 Text::insert(
     "My name is :name and I am :age years old.",
-    ["name" => "Bob", "age" => "65"]
+    ["name": "Bob", "age": "65"]
 );
 // Returns: "My name is Bob and I am 65 years old."
 
@@ -79,10 +79,10 @@ and back into arrays again
 
 ```php
 myData = [
-    "post" => [
-        "id" => 1,
-        "title" => "Best post",
-        "body" => " ... "
+    "post": [
+        "id": 1,
+        "title": "Best post",
+        "body": " ... "
     ]
 ];
 $xml = Xml::build(myData);

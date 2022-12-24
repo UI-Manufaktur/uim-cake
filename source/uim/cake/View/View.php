@@ -50,7 +50,7 @@ use Throwable;
  * ```
  * function beforeRender(\Cake\Event\EventInterface $event)
  * {
- *      this.viewBuilder()->setTheme('SuperHot');
+ *      this.viewBuilder().setTheme('SuperHot');
  * }
  * ```
  *
@@ -351,7 +351,7 @@ class View : EventDispatcherInterface
             this.setEventManager($eventManager);
         }
         if ($request == null) {
-            $request = Router::getRequest() ?: new ServerRequest(['base' => '', 'url' => '', 'webroot' => '/']);
+            $request = Router::getRequest() ?: new ServerRequest(['base': '', 'url': '', 'webroot': '/']);
         }
         this.request = $request;
         this.response = $response ?: new Response();
@@ -387,9 +387,9 @@ class View : EventDispatcherInterface
             return;
         }
         $response = this.getResponse();
-        $responseType = $response->getHeaderLine('Content-Type');
+        $responseType = $response.getHeaderLine('Content-Type');
         if ($responseType == '' || substr($responseType, 0, 9) == 'text/html') {
-            $response = $response->withType($viewContentType);
+            $response = $response.withType($viewContentType);
         }
         this.setResponse($response);
     }
@@ -420,7 +420,7 @@ class View : EventDispatcherInterface
      * based on the contents of the request. The properties that get set are:
      *
      * - this.request - To the $request parameter
-     * - this.plugin - To the value returned by $request->getParam('plugin')
+     * - this.plugin - To the value returned by $request.getParam('plugin')
      *
      * @param \Cake\Http\ServerRequest $request Request instance.
      * @return this
@@ -428,7 +428,7 @@ class View : EventDispatcherInterface
     function setRequest(ServerRequest $request)
     {
         this.request = $request;
-        this.plugin = $request->getParam('plugin');
+        this.plugin = $request.getParam('plugin');
 
         return this;
     }
@@ -679,12 +679,12 @@ class View : EventDispatcherInterface
      */
     function element(string $name, array $data = [], array $options = []): string
     {
-        $options += ['callbacks' => false, 'cache' => null, 'plugin' => null, 'ignoreMissing' => false];
+        $options += ['callbacks': false, 'cache': null, 'plugin': null, 'ignoreMissing': false];
         if (isset($options['cache'])) {
             $options['cache'] = _elementCache(
                 $name,
                 $data,
-                array_diff_key($options, ['callbacks' => false, 'plugin' => null, 'ignoreMissing' => null])
+                array_diff_key($options, ['callbacks': false, 'plugin': null, 'ignoreMissing': null])
             );
         }
 
@@ -724,7 +724,7 @@ class View : EventDispatcherInterface
      */
     function cache(callable $block, array $options = []): string
     {
-        $options += ['key' => '', 'config' => this.elementCache];
+        $options += ['key': '', 'config': this.elementCache];
         if (empty($options['key'])) {
             throw new RuntimeException('Cannot cache content with an empty key');
         }
@@ -805,7 +805,7 @@ class View : EventDispatcherInterface
         $templateFileName = _getTemplateFileName($template);
         _currentType = static::TYPE_TEMPLATE;
         this.dispatchEvent('View.beforeRender', [$templateFileName]);
-        this.Blocks->set('content', _render($templateFileName));
+        this.Blocks.set('content', _render($templateFileName));
         this.dispatchEvent('View.afterRender', [$templateFileName]);
 
         if (this.autoLayout) {
@@ -816,7 +816,7 @@ class View : EventDispatcherInterface
                 );
             }
 
-            this.Blocks->set('content', this.renderLayout('', this.layout));
+            this.Blocks.set('content', this.renderLayout('', this.layout));
         }
         if ($layout != null) {
             this.layout = $defaultLayout;
@@ -825,7 +825,7 @@ class View : EventDispatcherInterface
             this.autoLayout = $defaultAutoLayout;
         }
 
-        return this.Blocks->get('content');
+        return this.Blocks.get('content');
     }
 
     /**
@@ -845,23 +845,23 @@ class View : EventDispatcherInterface
         $layoutFileName = _getLayoutFileName($layout);
 
         if (!empty($content)) {
-            this.Blocks->set('content', $content);
+            this.Blocks.set('content', $content);
         }
 
         this.dispatchEvent('View.beforeLayout', [$layoutFileName]);
 
-        $title = this.Blocks->get('title');
+        $title = this.Blocks.get('title');
         if ($title == '') {
             $title = Inflector::humanize(str_replace(DIRECTORY_SEPARATOR, '/', this.templatePath));
-            this.Blocks->set('title', $title);
+            this.Blocks.set('title', $title);
         }
 
         _currentType = static::TYPE_LAYOUT;
-        this.Blocks->set('content', _render($layoutFileName));
+        this.Blocks.set('content', _render($layoutFileName));
 
         this.dispatchEvent('View.afterLayout', [$layoutFileName]);
 
-        return this.Blocks->get('content');
+        return this.Blocks.get('content');
     }
 
     /**
@@ -910,7 +910,7 @@ class View : EventDispatcherInterface
                 $data = $name;
             }
         } else {
-            $data = [$name => $value];
+            $data = [$name: $value];
         }
         this.viewVars = $data + this.viewVars;
 
@@ -925,7 +925,7 @@ class View : EventDispatcherInterface
      */
     function blocks(): array
     {
-        return this.Blocks->keys();
+        return this.Blocks.keys();
     }
 
     /**
@@ -954,7 +954,7 @@ class View : EventDispatcherInterface
      */
     function start(string $name)
     {
-        this.Blocks->start($name);
+        this.Blocks.start($name);
 
         return this;
     }
@@ -972,7 +972,7 @@ class View : EventDispatcherInterface
      */
     function append(string $name, $value = null)
     {
-        this.Blocks->concat($name, $value);
+        this.Blocks.concat($name, $value);
 
         return this;
     }
@@ -990,7 +990,7 @@ class View : EventDispatcherInterface
      */
     function prepend(string $name, $value)
     {
-        this.Blocks->concat($name, $value, ViewBlock::PREPEND);
+        this.Blocks.concat($name, $value, ViewBlock::PREPEND);
 
         return this;
     }
@@ -1007,7 +1007,7 @@ class View : EventDispatcherInterface
      */
     function assign(string $name, $value)
     {
-        this.Blocks->set($name, $value);
+        this.Blocks.set($name, $value);
 
         return this;
     }
@@ -1038,7 +1038,7 @@ class View : EventDispatcherInterface
      */
     function fetch(string $name, string $default = ''): string
     {
-        return this.Blocks->get($name, $default);
+        return this.Blocks.get($name, $default);
     }
 
     /**
@@ -1049,7 +1049,7 @@ class View : EventDispatcherInterface
      */
     function end()
     {
-        this.Blocks->end();
+        this.Blocks.end();
 
         return this;
     }
@@ -1062,7 +1062,7 @@ class View : EventDispatcherInterface
      */
     function exists(string $name): bool
     {
-        return this.Blocks->exists($name);
+        return this.Blocks.exists($name);
     }
 
     /**
@@ -1127,13 +1127,13 @@ class View : EventDispatcherInterface
     function __get(string $name)
     {
         $registry = this.helpers();
-        if (!isset($registry->{$name})) {
+        if (!isset($registry.{$name})) {
             return null;
         }
 
-        this.{$name} = $registry->{$name};
+        this.{$name} = $registry.{$name};
 
-        return $registry->{$name};
+        return $registry.{$name};
     }
 
     /**
@@ -1144,7 +1144,7 @@ class View : EventDispatcherInterface
     function loadHelpers()
     {
         $registry = this.helpers();
-        $helpers = $registry->normalizeArray(this.helpers);
+        $helpers = $registry.normalizeArray(this.helpers);
         foreach ($helpers as $properties) {
             this.loadHelper($properties['class'], $properties['config']);
         }
@@ -1170,15 +1170,15 @@ class View : EventDispatcherInterface
             $data = this.viewVars;
         }
         _current = $templateFile;
-        $initialBlocks = count(this.Blocks->unclosed());
+        $initialBlocks = count(this.Blocks.unclosed());
 
         this.dispatchEvent('View.beforeRenderFile', [$templateFile]);
 
         $content = _evaluate($templateFile, $data);
 
         $afterEvent = this.dispatchEvent('View.afterRenderFile', [$templateFile, $content]);
-        if ($afterEvent->getResult() != null) {
-            $content = $afterEvent->getResult();
+        if ($afterEvent.getResult() != null) {
+            $content = $afterEvent.getResult();
         }
 
         if (isset(_parents[$templateFile])) {
@@ -1189,12 +1189,12 @@ class View : EventDispatcherInterface
             this.assign('content', array_pop(_stack));
         }
 
-        $remainingBlocks = count(this.Blocks->unclosed());
+        $remainingBlocks = count(this.Blocks.unclosed());
 
         if ($initialBlocks != $remainingBlocks) {
             throw new LogicException(sprintf(
                 'The "%s" block was left open. Blocks are not allowed to cross files.',
-                (string)this.Blocks->active()
+                (string)this.Blocks.active()
             ));
         }
 
@@ -1256,7 +1256,7 @@ class View : EventDispatcherInterface
         [, $class] = pluginSplit($name);
         $helpers = this.helpers();
 
-        return this.{$class} = $helpers->load($name, $config);
+        return this.{$class} = $helpers.load($name, $config);
     }
 
     /**
@@ -1443,7 +1443,7 @@ class View : EventDispatcherInterface
      *
      * @param string $name The name you want to plugin split.
      * @param bool $fallback If true uses the plugin set in the current Request when parsed plugin is not loaded
-     * @return array Array with 2 indexes. 0 => plugin name, 1 => filename.
+     * @return array Array with 2 indexes. 0: plugin name, 1: filename.
      * @psalm-return array{string|null, string}
      */
     function pluginSplit(string $name, bool $fallback = true): array
@@ -1565,8 +1565,8 @@ class View : EventDispatcherInterface
     protected function _getSubPaths(string $basePath): array
     {
         $paths = [$basePath];
-        if (this.request->getParam('prefix')) {
-            $prefixPath = explode('/', this.request->getParam('prefix'));
+        if (this.request.getParam('prefix')) {
+            $prefixPath = explode('/', this.request.getParam('prefix'));
             $path = '';
             foreach ($prefixPath as $prefixPart) {
                 $path .= Inflector::camelize($prefixPart) . DIRECTORY_SEPARATOR;
@@ -1677,8 +1677,8 @@ class View : EventDispatcherInterface
             array_keys($data)
         );
         $config = [
-            'config' => this.elementCache,
-            'key' => implode('_', $keys),
+            'config': this.elementCache,
+            'key': implode('_', $keys),
         ];
         if (is_array($cache)) {
             $config = $cache + $config;

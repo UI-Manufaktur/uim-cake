@@ -166,7 +166,7 @@ class Text {
      * - clean: A boolean or array with instructions for Text::cleanInsert
      *
      * @param string str A string containing variable placeholders
-     * @param array myData A key => val array where each key stands for a placeholder variable name
+     * @param array myData A key: val array where each key stands for a placeholder variable name
      *     to be replaced with val
      * @param array<string, mixed> myOptions An array of options, see description above
      * @return string
@@ -212,13 +212,13 @@ class Text {
         $tempData = array_combine(myDataKeys, $hashKeys);
         krsort($tempData);
 
-        foreach ($tempData as myKey => $hashVal) {
+        foreach ($tempData as myKey: $hashVal) {
             myKey = sprintf($format, preg_quote(myKey, "/"));
             $str = preg_replace(myKey, $hashVal, $str);
         }
         /** @var array<string, mixed> myDataReplacements */
         myDataReplacements = array_combine($hashKeys, array_values(myData));
-        foreach (myDataReplacements as $tmpHash => $tmpValue) {
+        foreach (myDataReplacements as $tmpHash: $tmpValue) {
             $tmpValue = is_array($tmpValue) ? "" : (string)$tmpValue;
             $str = str_replace($tmpHash, $tmpValue, $str);
         }
@@ -487,7 +487,7 @@ class Text {
             $replace = [];
             $with = [];
 
-            foreach ($phrase as myKey => $segment) {
+            foreach ($phrase as myKey: $segment) {
                 $segment = "(" . preg_quote($segment, "|") . ")";
                 if (myOptions["html"]) {
                     $segment = "(?![^<]+>)$segment(?![^<]+>)";
@@ -1132,7 +1132,7 @@ class Text {
         $quotedReplacement = preg_quote((string)myOptions["replacement"], "/");
         $map = [
             "/[" . $regex . "]/mu":myOptions["replacement"],
-            sprintf("/^[%s]+|[%s]+$/", $quotedReplacement, $quotedReplacement) => "",
+            sprintf("/^[%s]+|[%s]+$/", $quotedReplacement, $quotedReplacement): "",
         ];
         if (is_string(myOptions["replacement"]) && myOptions["replacement"] != "") {
             $map[sprintf("/[%s]+/mu", $quotedReplacement)] = myOptions["replacement"];

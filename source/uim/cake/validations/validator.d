@@ -196,7 +196,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     {
         myErrors = [];
 
-        foreach (_fields as myName => myField) {
+        foreach (_fields as myName: myField) {
             myKeyPresent = array_key_exists(myName, myData);
 
             $providers = _providers;
@@ -390,7 +390,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     void offsetSet(myField, $rules) {
         if (!$rules instanceof ValidationSet) {
             $set = new ValidationSet();
-            foreach ($rules as myName => $rule) {
+            foreach ($rules as myName: $rule) {
                 $set.add(myName, $rule);
             }
             $rules = $set;
@@ -433,12 +433,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * ```
      *      $validator
-     *          .add("title", "required", ["rule" => "notBlank"])
-     *          .add("user_id", "valid", ["rule" => "numeric", "message" => "Invalid User"])
+     *          .add("title", "required", ["rule": "notBlank"])
+     *          .add("user_id", "valid", ["rule": "numeric", "message": "Invalid User"])
      *
      *      $validator.add("password", [
-     *          "size" => ["rule" => ["lengthBetween", 8, 20]],
-     *          "hasSpecialCharacter" => ["rule" => "validateSpecialchar", "message" => "not valid"]
+     *          "size": ["rule": ["lengthBetween", 8, 20]],
+     *          "hasSpecialCharacter": ["rule": "validateSpecialchar", "message": "not valid"]
      *      ]);
      * ```
      *
@@ -452,16 +452,16 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         $validationSet = this.field(myField);
 
         if (!is_array(myName)) {
-            $rules = [myName => $rule];
+            $rules = [myName: $rule];
         } else {
             $rules = myName;
         }
 
-        foreach ($rules as myName => $rule) {
+        foreach ($rules as myName: $rule) {
             if (is_array($rule)) {
                 $rule += [
-                    "rule" => myName,
-                    "last" => _stopOnFailure,
+                    "rule": myName,
+                    "last": _stopOnFailure,
                 ];
             }
             if (!is_string(myName)) {
@@ -508,10 +508,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function addNested(string myField, Validator $validator, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["message" => myMessage, "on" => $when]);
+        $extra = array_filter(["message": myMessage, "on": $when]);
 
         $validationSet = this.field(myField);
-        $validationSet.add(static::NESTED, $extra + ["rule" => function (myValue, $context) use ($validator, myMessage) {
+        $validationSet.add(static::NESTED, $extra + ["rule": function (myValue, $context) use ($validator, myMessage) {
             if (!is_array(myValue)) {
                 return false;
             }
@@ -521,7 +521,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             }
             myErrors = $validator.validate(myValue, $context["newRecord"]);
 
-            myMessage = myMessage ? [static::NESTED => myMessage] : [];
+            myMessage = myMessage ? [static::NESTED: myMessage] : [];
 
             return empty(myErrors) ? true : myErrors + myMessage;
         }]);
@@ -550,10 +550,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function addNestedMany(string myField, Validator $validator, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["message" => myMessage, "on" => $when]);
+        $extra = array_filter(["message": myMessage, "on": $when]);
 
         $validationSet = this.field(myField);
-        $validationSet.add(static::NESTED, $extra + ["rule" => function (myValue, $context) use ($validator, myMessage) {
+        $validationSet.add(static::NESTED, $extra + ["rule": function (myValue, $context) use ($validator, myMessage) {
             if (!is_array(myValue)) {
                 return false;
             }
@@ -562,7 +562,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
                 $validator.setProvider($provider, this.getProvider($provider));
             }
             myErrors = [];
-            foreach (myValue as $i => $row) {
+            foreach (myValue as $i: $row) {
                 if (!is_array($row)) {
                     return false;
                 }
@@ -572,7 +572,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
                 }
             }
 
-            myMessage = myMessage ? [static::NESTED => myMessage] : [];
+            myMessage = myMessage ? [static::NESTED: myMessage] : [];
 
             return empty(myErrors) ? true : myErrors + myMessage;
         }]);
@@ -625,15 +625,15 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      */
     function requirePresence(myField, myMode = true, Nullable!string myMessage = null) {
         $defaults = [
-            "mode" => myMode,
-            "message" => myMessage,
+            "mode": myMode,
+            "message": myMessage,
         ];
 
         if (!is_array(myField)) {
             myField = _convertValidatorToArray(myField, $defaults);
         }
 
-        foreach (myField as myFieldName => $setting) {
+        foreach (myField as myFieldName: $setting) {
             $settings = _convertValidatorToArray(myFieldName, $defaults, $setting);
             myFieldName = current(array_keys($settings));
 
@@ -678,11 +678,11 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * // Email can be always empty, subject and content can be empty on update.
      * $validator.allowEmpty(
      *      [
-     *          "email" => [
-     *              "when" => true
+     *          "email": [
+     *              "when": true
      *          ],
-     *          "content" => [
-     *              "message" => "Content cannot be empty"
+     *          "content": [
+     *              "message": "Content cannot be empty"
      *          ],
      *          "subject"
      *      ],
@@ -722,14 +722,14 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         );
 
         $defaults = [
-            "when" => $when,
-            "message" => myMessage,
+            "when": $when,
+            "message": myMessage,
         ];
         if (!is_array(myField)) {
             myField = _convertValidatorToArray(myField, $defaults);
         }
 
-        foreach (myField as myFieldName => $setting) {
+        foreach (myField as myFieldName: $setting) {
             $settings = _convertValidatorToArray(myFieldName, $defaults, $setting);
             myFieldName = array_keys($settings)[0];
             this.allowEmptyFor(
@@ -1065,7 +1065,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     }
 
     /**
-     * Converts validator to fieldName => $settings array
+     * Converts validator to fieldName: $settings array
      *
      * @param string|int myFieldName name of field
      * @param array<string, mixed> $defaults default settings
@@ -1086,7 +1086,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         }
         $settings += $defaults;
 
-        return [myFieldName => $settings];
+        return [myFieldName: $settings];
     }
 
     /**
@@ -1124,9 +1124,9 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * $validator.notEmpty(
      *      [
      *          "email",
-     *          "title" => [
-     *              "when" => true,
-     *              "message" => "Title cannot be empty"
+     *          "title": [
+     *              "when": true,
+     *              "message": "Title cannot be empty"
      *          ]
      *      ],
      *      myMessage,
@@ -1165,15 +1165,15 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         );
 
         $defaults = [
-            "when" => $when,
-            "message" => myMessage,
+            "when": $when,
+            "message": myMessage,
         ];
 
         if (!is_array(myField)) {
             myField = _convertValidatorToArray(myField, $defaults);
         }
 
-        foreach (myField as myFieldName => $setting) {
+        foreach (myField as myFieldName: $setting) {
             $settings = _convertValidatorToArray(myFieldName, $defaults, $setting);
             myFieldName = current(array_keys($settings));
 
@@ -1222,10 +1222,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function notBlank(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "notBlank", $extra + [
-            "rule" => "notBlank",
+            "rule": "notBlank",
         ]);
     }
 
@@ -1240,10 +1240,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function alphaNumeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "alphaNumeric", $extra + [
-            "rule" => "alphaNumeric",
+            "rule": "alphaNumeric",
         ]);
     }
 
@@ -1258,10 +1258,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function notAlphaNumeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "notAlphaNumeric", $extra + [
-            "rule" => "notAlphaNumeric",
+            "rule": "notAlphaNumeric",
         ]);
     }
 
@@ -1276,10 +1276,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function asciiAlphaNumeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "asciiAlphaNumeric", $extra + [
-            "rule" => "asciiAlphaNumeric",
+            "rule": "asciiAlphaNumeric",
         ]);
     }
 
@@ -1294,10 +1294,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function notAsciiAlphaNumeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "notAsciiAlphaNumeric", $extra + [
-            "rule" => "notAsciiAlphaNumeric",
+            "rule": "notAsciiAlphaNumeric",
         ]);
     }
 
@@ -1317,10 +1317,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         if (count($range) != 2) {
             throw new InvalidArgumentException("The $range argument requires 2 numbers");
         }
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "lengthBetween", $extra + [
-            "rule" => ["lengthBetween", array_shift($range), array_shift($range)],
+            "rule": ["lengthBetween", array_shift($range), array_shift($range)],
         ]);
     }
 
@@ -1337,10 +1337,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function creditCard(string myField, string myType = "all", Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "creditCard", $extra + [
-            "rule" => ["creditCard", myType, true],
+            "rule": ["creditCard", myType, true],
         ]);
     }
 
@@ -1356,10 +1356,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function greaterThan(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "greaterThan", $extra + [
-            "rule" => ["comparison", Validation::COMPARE_GREATER, myValue],
+            "rule": ["comparison", Validation::COMPARE_GREATER, myValue],
         ]);
     }
 
@@ -1375,10 +1375,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function greaterThanOrEqual(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "greaterThanOrEqual", $extra + [
-            "rule" => ["comparison", Validation::COMPARE_GREATER_OR_EQUAL, myValue],
+            "rule": ["comparison", Validation::COMPARE_GREATER_OR_EQUAL, myValue],
         ]);
     }
 
@@ -1394,10 +1394,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function lessThan(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "lessThan", $extra + [
-            "rule" => ["comparison", Validation::COMPARE_LESS, myValue],
+            "rule": ["comparison", Validation::COMPARE_LESS, myValue],
         ]);
     }
 
@@ -1413,10 +1413,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function lessThanOrEqual(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "lessThanOrEqual", $extra + [
-            "rule" => ["comparison", Validation::COMPARE_LESS_OR_EQUAL, myValue],
+            "rule": ["comparison", Validation::COMPARE_LESS_OR_EQUAL, myValue],
         ]);
     }
 
@@ -1432,10 +1432,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function equals(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "equals", $extra + [
-            "rule" => ["comparison", Validation::COMPARE_EQUAL, myValue],
+            "rule": ["comparison", Validation::COMPARE_EQUAL, myValue],
         ]);
     }
 
@@ -1451,10 +1451,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function notEquals(string myField, myValue, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "notEquals", $extra + [
-            "rule" => ["comparison", Validation::COMPARE_NOT_EQUAL, myValue],
+            "rule": ["comparison", Validation::COMPARE_NOT_EQUAL, myValue],
         ]);
     }
 
@@ -1472,10 +1472,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function sameAs(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "sameAs", $extra + [
-            "rule" => ["compareFields", $secondField, Validation::COMPARE_SAME],
+            "rule": ["compareFields", $secondField, Validation::COMPARE_SAME],
         ]);
     }
 
@@ -1492,10 +1492,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      */
     function notSameAs(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "notSameAs", $extra + [
-            "rule" => ["compareFields", $secondField, Validation::COMPARE_NOT_SAME],
+            "rule": ["compareFields", $secondField, Validation::COMPARE_NOT_SAME],
         ]);
     }
 
@@ -1512,10 +1512,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      */
     function equalToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "equalToField", $extra + [
-            "rule" => ["compareFields", $secondField, Validation::COMPARE_EQUAL],
+            "rule": ["compareFields", $secondField, Validation::COMPARE_EQUAL],
         ]);
     }
 
@@ -1532,10 +1532,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      */
     function notEqualToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "notEqualToField", $extra + [
-            "rule" => ["compareFields", $secondField, Validation::COMPARE_NOT_EQUAL],
+            "rule": ["compareFields", $secondField, Validation::COMPARE_NOT_EQUAL],
         ]);
     }
 
@@ -1552,10 +1552,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      */
     function greaterThanField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "greaterThanField", $extra + [
-            "rule" => ["compareFields", $secondField, Validation::COMPARE_GREATER],
+            "rule": ["compareFields", $secondField, Validation::COMPARE_GREATER],
         ]);
     }
 
@@ -1572,10 +1572,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      */
     function greaterThanOrEqualToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "greaterThanOrEqualToField", $extra + [
-            "rule" => ["compareFields", $secondField, Validation::COMPARE_GREATER_OR_EQUAL],
+            "rule": ["compareFields", $secondField, Validation::COMPARE_GREATER_OR_EQUAL],
         ]);
     }
 
@@ -1592,10 +1592,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      */
     function lessThanField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "lessThanField", $extra + [
-            "rule" => ["compareFields", $secondField, Validation::COMPARE_LESS],
+            "rule": ["compareFields", $secondField, Validation::COMPARE_LESS],
         ]);
     }
 
@@ -1612,10 +1612,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
 
      */
     function lessThanOrEqualToField(string myField, string secondField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "lessThanOrEqualToField", $extra + [
-            "rule" => ["compareFields", $secondField, Validation::COMPARE_LESS_OR_EQUAL],
+            "rule": ["compareFields", $secondField, Validation::COMPARE_LESS_OR_EQUAL],
         ]);
     }
 
@@ -1633,10 +1633,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      */
     function containsNonAlphaNumeric(string myField, int $limit = 1, Nullable!string myMessage = null, $when = null) {
         deprecationWarning("Validator::containsNonAlphaNumeric() is deprecated. Use notAlphaNumeric() instead.");
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "containsNonAlphaNumeric", $extra + [
-            "rule" => ["containsNonAlphaNumeric", $limit],
+            "rule": ["containsNonAlphaNumeric", $limit],
         ]);
     }
 
@@ -1652,10 +1652,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function date(string myField, string[] $formats = ["ymd"], Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "date", $extra + [
-            "rule" => ["date", $formats],
+            "rule": ["date", $formats],
         ]);
     }
 
@@ -1671,10 +1671,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function dateTime(string myField, array $formats = ["ymd"], Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "dateTime", $extra + [
-            "rule" => ["datetime", $formats],
+            "rule": ["datetime", $formats],
         ]);
     }
 
@@ -1689,10 +1689,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function time(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "time", $extra + [
-            "rule" => "time",
+            "rule": "time",
         ]);
     }
 
@@ -1708,10 +1708,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function localizedTime(string myField, string myType = "datetime", Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "localizedTime", $extra + [
-            "rule" => ["localizedTime", myType],
+            "rule": ["localizedTime", myType],
         ]);
     }
 
@@ -1726,10 +1726,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function boolean(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "boolean", $extra + [
-            "rule" => "boolean",
+            "rule": "boolean",
         ]);
     }
 
@@ -1745,10 +1745,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function decimal(string myField, Nullable!int $places = null, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "decimal", $extra + [
-            "rule" => ["decimal", $places],
+            "rule": ["decimal", $places],
         ]);
     }
 
@@ -1764,10 +1764,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function email(string myField, bool $checkMX = false, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "email", $extra + [
-            "rule" => ["email", $checkMX],
+            "rule": ["email", $checkMX],
         ]);
     }
 
@@ -1784,10 +1784,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function ip(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "ip", $extra + [
-            "rule" => "ip",
+            "rule": "ip",
         ]);
     }
 
@@ -1802,10 +1802,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function ipv4(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "ipv4", $extra + [
-            "rule" => ["ip", "ipv4"],
+            "rule": ["ip", "ipv4"],
         ]);
     }
 
@@ -1820,10 +1820,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function ipv6(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "ipv6", $extra + [
-            "rule" => ["ip", "ipv6"],
+            "rule": ["ip", "ipv6"],
         ]);
     }
 
@@ -1839,10 +1839,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function minLength(string myField, int $min, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "minLength", $extra + [
-            "rule" => ["minLength", $min],
+            "rule": ["minLength", $min],
         ]);
     }
 
@@ -1858,10 +1858,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function minLengthBytes(string myField, int $min, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "minLengthBytes", $extra + [
-            "rule" => ["minLengthBytes", $min],
+            "rule": ["minLengthBytes", $min],
         ]);
     }
 
@@ -1877,10 +1877,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function maxLength(string myField, int $max, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "maxLength", $extra + [
-            "rule" => ["maxLength", $max],
+            "rule": ["maxLength", $max],
         ]);
     }
 
@@ -1896,10 +1896,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function maxLengthBytes(string myField, int $max, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "maxLengthBytes", $extra + [
-            "rule" => ["maxLengthBytes", $max],
+            "rule": ["maxLengthBytes", $max],
         ]);
     }
 
@@ -1914,10 +1914,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function numeric(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "numeric", $extra + [
-            "rule" => "numeric",
+            "rule": "numeric",
         ]);
     }
 
@@ -1932,10 +1932,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function naturalNumber(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "naturalNumber", $extra + [
-            "rule" => ["naturalNumber", false],
+            "rule": ["naturalNumber", false],
         ]);
     }
 
@@ -1950,10 +1950,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function nonNegativeInteger(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "nonNegativeInteger", $extra + [
-            "rule" => ["naturalNumber", true],
+            "rule": ["naturalNumber", true],
         ]);
     }
 
@@ -1973,10 +1973,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         if (count($range) != 2) {
             throw new InvalidArgumentException("The $range argument requires 2 numbers");
         }
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "range", $extra + [
-            "rule" => ["range", array_shift($range), array_shift($range)],
+            "rule": ["range", array_shift($range), array_shift($range)],
         ]);
     }
 
@@ -1993,10 +1993,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function url(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "url", $extra + [
-            "rule" => ["url", false],
+            "rule": ["url", false],
         ]);
     }
 
@@ -2013,10 +2013,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function urlWithProtocol(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "urlWithProtocol", $extra + [
-            "rule" => ["url", true],
+            "rule": ["url", true],
         ]);
     }
 
@@ -2032,10 +2032,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function inList(string myField, array $list, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "inList", $extra + [
-            "rule" => ["inList", $list],
+            "rule": ["inList", $list],
         ]);
     }
 
@@ -2050,10 +2050,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function uuid(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "uuid", $extra + [
-            "rule" => "uuid",
+            "rule": "uuid",
         ]);
     }
 
@@ -2069,10 +2069,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function uploadedFile(string myField, array myOptions, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "uploadedFile", $extra + [
-            "rule" => ["uploadedFile", myOptions],
+            "rule": ["uploadedFile", myOptions],
         ]);
     }
 
@@ -2089,10 +2089,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function latLong(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "latLong", $extra + [
-            "rule" => "geoCoordinate",
+            "rule": "geoCoordinate",
         ]);
     }
 
@@ -2107,10 +2107,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function latitude(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "latitude", $extra + [
-            "rule" => "latitude",
+            "rule": "latitude",
         ]);
     }
 
@@ -2125,10 +2125,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function longitude(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "longitude", $extra + [
-            "rule" => "longitude",
+            "rule": "longitude",
         ]);
     }
 
@@ -2143,10 +2143,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function ascii(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "ascii", $extra + [
-            "rule" => "ascii",
+            "rule": "ascii",
         ]);
     }
 
@@ -2161,10 +2161,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function utf8(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "utf8", $extra + [
-            "rule" => ["utf8", ["extended" => false]],
+            "rule": ["utf8", ["extended": false]],
         ]);
     }
 
@@ -2181,10 +2181,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function utf8Extended(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "utf8Extended", $extra + [
-            "rule" => ["utf8", ["extended" => true]],
+            "rule": ["utf8", ["extended": true]],
         ]);
     }
 
@@ -2199,10 +2199,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function integer(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "integer", $extra + [
-            "rule" => "isInteger",
+            "rule": "isInteger",
         ]);
     }
 
@@ -2217,10 +2217,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function isArray(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "isArray", $extra + [
-                "rule" => "isArray",
+                "rule": "isArray",
             ]);
     }
 
@@ -2235,10 +2235,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function scalar(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "scalar", $extra + [
-                "rule" => "isScalar",
+                "rule": "isScalar",
             ]);
     }
 
@@ -2253,10 +2253,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function hexColor(string myField, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "hexColor", $extra + [
-            "rule" => "hexColor",
+            "rule": "hexColor",
         ]);
     }
 
@@ -2273,12 +2273,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function multipleOptions(string myField, array myOptions = [], Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
         $caseInsensitive = myOptions["caseInsensitive"] ?? false;
         unset(myOptions["caseInsensitive"]);
 
         return this.add(myField, "multipleOptions", $extra + [
-            "rule" => ["multiple", myOptions, $caseInsensitive],
+            "rule": ["multiple", myOptions, $caseInsensitive],
         ]);
     }
 
@@ -2295,10 +2295,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function hasAtLeast(string myField, int myCount, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "hasAtLeast", $extra + [
-            "rule" => function (myValue) use (myCount) {
+            "rule": function (myValue) use (myCount) {
                 if (is_array(myValue) && isset(myValue["_ids"])) {
                     myValue = myValue["_ids"];
                 }
@@ -2321,10 +2321,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function hasAtMost(string myField, int myCount, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "hasAtMost", $extra + [
-            "rule" => function (myValue) use (myCount) {
+            "rule": function (myValue) use (myCount) {
                 if (is_array(myValue) && isset(myValue["_ids"])) {
                     myValue = myValue["_ids"];
                 }
@@ -2377,10 +2377,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return this
      */
     function regex(string myField, string regex, Nullable!string myMessage = null, $when = null) {
-        $extra = array_filter(["on" => $when, "message" => myMessage]);
+        $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "regex", $extra + [
-            "rule" => ["custom", $regex],
+            "rule": ["custom", $regex],
         ]);
     }
 
@@ -2567,7 +2567,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
         /**
          * @var \Cake\Validation\ValidationRule $rule
          */
-        foreach ($rules as myName => $rule) {
+        foreach ($rules as myName: $rule) {
             myResult = $rule.process(myData[myField], _providers, compact("newRecord", "data", "field"));
             if (myResult == true) {
                 continue;
@@ -2597,22 +2597,22 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     auto __debugInfo(): array
     {
         myFields = [];
-        foreach (_fields as myName => myFieldSet) {
+        foreach (_fields as myName: myFieldSet) {
             myFields[myName] = [
-                "isPresenceRequired" => myFieldSet.isPresenceRequired(),
-                "isEmptyAllowed" => myFieldSet.isEmptyAllowed(),
-                "rules" => array_keys(myFieldSet.rules()),
+                "isPresenceRequired": myFieldSet.isPresenceRequired(),
+                "isEmptyAllowed": myFieldSet.isEmptyAllowed(),
+                "rules": array_keys(myFieldSet.rules()),
             ];
         }
 
         return [
-            "_presenceMessages" => _presenceMessages,
-            "_allowEmptyMessages" => _allowEmptyMessages,
-            "_allowEmptyFlags" => _allowEmptyFlags,
-            "_useI18n" => _useI18n,
-            "_stopOnFailure" => _stopOnFailure,
-            "_providers" => array_keys(_providers),
-            "_fields" => myFields,
+            "_presenceMessages": _presenceMessages,
+            "_allowEmptyMessages": _allowEmptyMessages,
+            "_allowEmptyFlags": _allowEmptyFlags,
+            "_useI18n": _useI18n,
+            "_stopOnFailure": _stopOnFailure,
+            "_providers": array_keys(_providers),
+            "_fields": myFields,
         ];
     }
 }

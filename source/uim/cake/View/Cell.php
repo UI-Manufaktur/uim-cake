@@ -171,7 +171,7 @@ abstract class Cell : EventDispatcherInterface
         $render = function () use ($template) {
             try {
                 $reflect = new ReflectionMethod(this, this.action);
-                $reflect->invokeArgs(this, this.args);
+                $reflect.invokeArgs(this, this.args);
             } catch (ReflectionException $e) {
                 throw new BadMethodCallException(sprintf(
                     'Class %s does not have a "%s" method.',
@@ -183,7 +183,7 @@ abstract class Cell : EventDispatcherInterface
             $builder = this.viewBuilder();
 
             if ($template != null) {
-                $builder->setTemplate($template);
+                $builder.setTemplate($template);
             }
 
             $className = static::class;
@@ -191,18 +191,18 @@ abstract class Cell : EventDispatcherInterface
             /** @psalm-suppress PossiblyFalseOperand */
             $name = substr($className, strpos($className, $namePrefix) + strlen($namePrefix));
             $name = substr($name, 0, -4);
-            if (!$builder->getTemplatePath()) {
-                $builder->setTemplatePath(
+            if (!$builder.getTemplatePath()) {
+                $builder.setTemplatePath(
                     static::TEMPLATE_FOLDER . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $name)
                 );
             }
-            $template = $builder->getTemplate();
+            $template = $builder.getTemplate();
 
             $view = this.createView();
             try {
-                return $view->render($template, false);
+                return $view.render($template, false);
             } catch (MissingTemplateException $e) {
-                $attributes = $e->getAttributes();
+                $attributes = $e.getAttributes();
                 throw new MissingCellTemplateException(
                     $name,
                     $attributes['file'],
@@ -238,8 +238,8 @@ abstract class Cell : EventDispatcherInterface
         $key = 'cell_' . Inflector::underscore(static::class) . '_' . $action . '_' . $template;
         $key = str_replace('\\', '_', $key);
         $default = [
-            'config' => 'default',
-            'key' => $key,
+            'config': 'default',
+            'key': $key,
         ];
         if (_cache == true) {
             return $default;
@@ -267,18 +267,18 @@ abstract class Cell : EventDispatcherInterface
         } catch (Exception $e) {
             trigger_error(sprintf(
                 'Could not render cell - %s [%s, line %d]',
-                $e->getMessage(),
-                $e->getFile(),
-                $e->getLine()
+                $e.getMessage(),
+                $e.getFile(),
+                $e.getLine()
             ), E_USER_WARNING);
 
             return '';
         } catch (Error $e) {
             throw new Error(sprintf(
                 'Could not render cell - %s [%s, line %d]',
-                $e->getMessage(),
-                $e->getFile(),
-                $e->getLine()
+                $e.getMessage(),
+                $e.getFile(),
+                $e.getLine()
             ), 0, $e);
         }
     }
@@ -291,11 +291,11 @@ abstract class Cell : EventDispatcherInterface
     function __debugInfo(): array
     {
         return [
-            'action' => this.action,
-            'args' => this.args,
-            'request' => this.request,
-            'response' => this.response,
-            'viewBuilder' => this.viewBuilder(),
+            'action': this.action,
+            'args': this.args,
+            'request': this.request,
+            'response': this.response,
+            'viewBuilder': this.viewBuilder(),
         ];
     }
 }

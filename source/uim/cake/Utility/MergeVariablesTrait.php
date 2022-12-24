@@ -107,7 +107,7 @@ trait MergeVariablesTrait
             return array_merge($parent, $current);
         }
         $parent = Hash::normalize($parent);
-        foreach ($parent as $key => $value) {
+        foreach ($parent as $key: $value) {
             if (!isset($current[$key])) {
                 $current[$key] = $value;
             }

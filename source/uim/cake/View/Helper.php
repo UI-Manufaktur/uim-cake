@@ -85,7 +85,7 @@ class Helper : EventListenerInterface
         this.setConfig($config);
 
         if (!empty(this.helpers)) {
-            _helperMap = $view->helpers()->normalizeArray(this.helpers);
+            _helperMap = $view.helpers().normalizeArray(this.helpers);
         }
 
         this.initialize($config);
@@ -112,8 +112,8 @@ class Helper : EventListenerInterface
     function __get(string $name)
     {
         if (isset(_helperMap[$name]) && !isset(this.{$name})) {
-            $config = ['enabled' => false] + (array)_helperMap[$name]['config'];
-            this.{$name} = _View->loadHelper(_helperMap[$name]['class'], $config);
+            $config = ['enabled': false] + (array)_helperMap[$name]['config'];
+            this.{$name} = _View.loadHelper(_helperMap[$name]['class'], $config);
 
             return this.{$name};
         }
@@ -176,15 +176,15 @@ class Helper : EventListenerInterface
     function implementedEvents(): array
     {
         $eventMap = [
-            'View.beforeRenderFile' => 'beforeRenderFile',
-            'View.afterRenderFile' => 'afterRenderFile',
-            'View.beforeRender' => 'beforeRender',
-            'View.afterRender' => 'afterRender',
-            'View.beforeLayout' => 'beforeLayout',
-            'View.afterLayout' => 'afterLayout',
+            'View.beforeRenderFile': 'beforeRenderFile',
+            'View.afterRenderFile': 'afterRenderFile',
+            'View.beforeRender': 'beforeRender',
+            'View.afterRender': 'afterRender',
+            'View.beforeLayout': 'beforeLayout',
+            'View.afterLayout': 'afterLayout',
         ];
         $events = [];
-        foreach ($eventMap as $event => $method) {
+        foreach ($eventMap as $event: $method) {
             if (method_exists(this, $method)) {
                 $events[$event] = $method;
             }
@@ -214,9 +214,9 @@ class Helper : EventListenerInterface
     function __debugInfo(): array
     {
         return [
-            'helpers' => this.helpers,
-            'implementedEvents' => this.implementedEvents(),
-            '_config' => this.getConfig(),
+            'helpers': this.helpers,
+            'implementedEvents': this.implementedEvents(),
+            '_config': this.getConfig(),
         ];
     }
 }

@@ -41,7 +41,7 @@ trait StringTemplateTrait
      */
     function setTemplates(array $templates)
     {
-        this.templater()->add($templates);
+        this.templater().add($templates);
 
         return this;
     }
@@ -54,7 +54,7 @@ trait StringTemplateTrait
      */
     function getTemplates(?string $template = null)
     {
-        return this.templater()->get($template);
+        return this.templater().get($template);
     }
 
     /**
@@ -66,7 +66,7 @@ trait StringTemplateTrait
      */
     function formatTemplate(string $name, array $data): string
     {
-        return this.templater()->format($name, $data);
+        return this.templater().format($name, $data);
     }
 
     /**
@@ -84,10 +84,10 @@ trait StringTemplateTrait
             $templates = this.getConfig('templates');
             if ($templates) {
                 if (is_string($templates)) {
-                    _templater->add(_defaultConfig['templates']);
-                    _templater->load($templates);
+                    _templater.add(_defaultConfig['templates']);
+                    _templater.load($templates);
                 } else {
-                    _templater->add($templates);
+                    _templater.add($templates);
                 }
             }
         }

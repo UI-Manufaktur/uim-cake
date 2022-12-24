@@ -18,8 +18,8 @@ $validator = new Validator();
 $validator
     .requirePresence("email")
     .add("email", "validFormat", [
-        "rule" => "email",
-        "message" => "E-mail must be valid"
+        "rule": "email",
+        "message": "E-mail must be valid"
     ])
     .requirePresence("name")
     .notEmptyString("name", "We need your name.")

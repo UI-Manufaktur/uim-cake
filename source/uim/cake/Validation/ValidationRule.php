@@ -112,7 +112,7 @@ class ValidationRule
      */
     function process($value, array $providers, array $context = [])
     {
-        $context += ['data' => [], 'newRecord' => true, 'providers' => $providers];
+        $context += ['data': [], 'newRecord': true, 'providers': $providers];
 
         if (_skip($context)) {
             return true;
@@ -189,7 +189,7 @@ class ValidationRule
      */
     protected function _addValidatorProps(array $validator = []): void
     {
-        foreach ($validator as $key => $value) {
+        foreach ($validator as $key: $value) {
             if (empty($value)) {
                 continue;
             }
