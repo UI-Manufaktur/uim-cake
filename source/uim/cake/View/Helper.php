@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -17,7 +16,7 @@ declare(strict_types=1);
 namespace Cake\View;
 
 use Cake\Core\InstanceConfigTrait;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\IEventListener;
 
 /**
  * Abstract base class for all other Helpers in CakePHP.
@@ -41,7 +40,7 @@ use Cake\Event\EventListenerInterface;
  *   If a listener returns a non-null value, the output of the rendered file will be set to that.
  */
 #[\AllowDynamicProperties]
-class Helper : EventListenerInterface
+class Helper : IEventListener
 {
     use InstanceConfigTrait;
 
