@@ -38,7 +38,7 @@ class EventList : ArrayAccess, Countable
      */
     function flush(): void
     {
-        this._events = [];
+        _events = [];
     }
 
     /**
@@ -49,7 +49,7 @@ class EventList : ArrayAccess, Countable
      */
     function add(EventInterface $event): void
     {
-        this._events[] = $event;
+        _events[] = $event;
     }
 
     /**
@@ -61,7 +61,7 @@ class EventList : ArrayAccess, Countable
      */
     function offsetExists($offset): bool
     {
-        return isset(this._events[$offset]);
+        return isset(_events[$offset]);
     }
 
     /**
@@ -75,7 +75,7 @@ class EventList : ArrayAccess, Countable
     function offsetGet($offset)
     {
         if (this.offsetExists($offset)) {
-            return this._events[$offset];
+            return _events[$offset];
         }
 
         return null;
@@ -91,7 +91,7 @@ class EventList : ArrayAccess, Countable
      */
     function offsetSet($offset, $value): void
     {
-        this._events[$offset] = $value;
+        _events[$offset] = $value;
     }
 
     /**
@@ -103,7 +103,7 @@ class EventList : ArrayAccess, Countable
      */
     function offsetUnset($offset): void
     {
-        unset(this._events[$offset]);
+        unset(_events[$offset]);
     }
 
     /**
@@ -114,7 +114,7 @@ class EventList : ArrayAccess, Countable
      */
     function count(): int
     {
-        return count(this._events);
+        return count(_events);
     }
 
     /**
@@ -125,7 +125,7 @@ class EventList : ArrayAccess, Countable
      */
     function hasEvent(string $name): bool
     {
-        foreach (this._events as $event) {
+        foreach (_events as $event) {
             if ($event->getName() == $name) {
                 return true;
             }

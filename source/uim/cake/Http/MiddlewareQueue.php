@@ -282,8 +282,8 @@ class MiddlewareQueue : Countable, SeekableIterator
         }
 
 <<<<<<< HEAD
-        if (this->queue[this->position] instanceof IMiddleware) {
-            return this->queue[this->position];
+        if (.queue[.position] instanceof IMiddleware) {
+            return .queue[.position];
 =======
         if (this.queue[this.position] instanceof MiddlewareInterface) {
             return this.queue[this.position];

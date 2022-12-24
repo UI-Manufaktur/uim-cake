@@ -145,7 +145,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
      */
     function setSchema(Schema $schema)
     {
-        this._schema = $schema;
+        _schema = $schema;
 
         return this;
     }
@@ -162,11 +162,11 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
      */
     function getSchema(): Schema
     {
-        if (this._schema == null) {
-            this._schema = this._buildSchema(new this._schemaClass());
+        if (_schema == null) {
+            _schema = _buildSchema(new _schemaClass());
         }
 
-        return this._schema;
+        return _schema;
     }
 
     /**
@@ -215,10 +215,10 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
      */
     function validate(array $data, ?string $validator = null): bool
     {
-        this._errors = this.getValidator($validator ?: static::DEFAULT_VALIDATOR)
+        _errors = this.getValidator($validator ?: static::DEFAULT_VALIDATOR)
             ->validate($data);
 
-        return count(this._errors) == 0;
+        return count(_errors) == 0;
     }
 
     /**
@@ -231,7 +231,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
      */
     function getErrors(): array
     {
-        return this._errors;
+        return _errors;
     }
 
     /**
@@ -250,7 +250,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
      */
     function setErrors(array $errors)
     {
-        this._errors = $errors;
+        _errors = $errors;
 
         return this;
     }
@@ -275,17 +275,17 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
      */
     function execute(array $data, array $options = []): bool
     {
-        this._data = $data;
+        _data = $data;
 
         $options += ['validate' => true];
 
         if ($options['validate'] == false) {
-            return this._execute($data);
+            return _execute($data);
         }
 
         $validator = $options['validate'] == true ? static::DEFAULT_VALIDATOR : $options['validate'];
 
-        return this.validate($data, $validator) ? this._execute($data) : false;
+        return this.validate($data, $validator) ? _execute($data) : false;
     }
 
     /**
@@ -311,10 +311,10 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
     function getData(?string $field = null)
     {
         if ($field == null) {
-            return this._data;
+            return _data;
         }
 
-        return Hash::get(this._data, $field);
+        return Hash::get(_data, $field);
     }
 
     /**
@@ -334,7 +334,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
 
         /** @psalm-suppress PossiblyInvalidIterator */
         foreach ($write as $key => $val) {
-            this._data = Hash::insert(this._data, $key, $val);
+            _data = Hash::insert(_data, $key, $val);
         }
 
         return this;
@@ -348,7 +348,7 @@ class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInt
      */
     function setData(array $data)
     {
-        this._data = $data;
+        _data = $data;
 
         return this;
     }

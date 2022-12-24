@@ -63,12 +63,12 @@ class FormData : Countable
      */
     function boundary(): string
     {
-        if (this._boundary) {
-            return this._boundary;
+        if (_boundary) {
+            return _boundary;
         }
-        this._boundary = md5(uniqid((string)time()));
+        _boundary = md5(uniqid((string)time()));
 
-        return this._boundary;
+        return _boundary;
     }
 
     /**
@@ -105,11 +105,11 @@ class FormData : Countable
             } elseif (is_resource($value) || $value instanceof UploadedFileInterface) {
                 this.addFile($name, $value);
             } else {
-                this._parts[] = this.newPart($name, (string)$value);
+                _parts[] = this.newPart($name, (string)$value);
             }
         } else {
-            this._hasComplexPart = true;
-            this._parts[] = $name;
+            _hasComplexPart = true;
+            _parts[] = $name;
         }
 
         return this;
@@ -143,7 +143,7 @@ class FormData : Countable
      */
     function addFile(string $name, $value): FormDataPart
     {
-        this._hasFile = true;
+        _hasFile = true;
 
         $filename = false;
         $contentType = 'application/octet-stream';
@@ -198,7 +198,7 @@ class FormData : Countable
      */
     function count(): int
     {
-        return count(this._parts);
+        return count(_parts);
     }
 
     /**
@@ -209,7 +209,7 @@ class FormData : Countable
      */
     function hasFile(): bool
     {
-        return this._hasFile;
+        return _hasFile;
     }
 
     /**
@@ -223,7 +223,7 @@ class FormData : Countable
      */
     function isMultipart(): bool
     {
-        return this.hasFile() || this._hasComplexPart;
+        return this.hasFile() || _hasComplexPart;
     }
 
     /**
@@ -254,7 +254,7 @@ class FormData : Countable
         if (this.isMultipart()) {
             $boundary = this.boundary();
             $out = '';
-            foreach (this._parts as $part) {
+            foreach (_parts as $part) {
                 $out .= "--$boundary\r\n";
                 $out .= (string)$part;
                 $out .= "\r\n";
@@ -264,7 +264,7 @@ class FormData : Countable
             return $out;
         }
         $data = [];
-        foreach (this._parts as $part) {
+        foreach (_parts as $part) {
             $data[$part->name()] = $part->value();
         }
 

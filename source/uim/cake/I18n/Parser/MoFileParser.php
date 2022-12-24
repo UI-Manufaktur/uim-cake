@@ -80,9 +80,9 @@ class MoFileParser
         // offset formatRevision
         fread($stream, 4);
 
-        $count = this._readLong($stream, $isBigEndian);
-        $offsetId = this._readLong($stream, $isBigEndian);
-        $offsetTranslated = this._readLong($stream, $isBigEndian);
+        $count = _readLong($stream, $isBigEndian);
+        $offsetId = _readLong($stream, $isBigEndian);
+        $offsetTranslated = _readLong($stream, $isBigEndian);
 
         // Offset to start of translations
         fread($stream, 8);
@@ -95,8 +95,8 @@ class MoFileParser
 
             fseek($stream, $offsetId + $i * 8);
 
-            $length = this._readLong($stream, $isBigEndian);
-            $offset = this._readLong($stream, $isBigEndian);
+            $length = _readLong($stream, $isBigEndian);
+            $offset = _readLong($stream, $isBigEndian);
 
             if ($length < 1) {
                 continue;
@@ -114,8 +114,8 @@ class MoFileParser
             }
 
             fseek($stream, $offsetTranslated + $i * 8);
-            $length = this._readLong($stream, $isBigEndian);
-            $offset = this._readLong($stream, $isBigEndian);
+            $length = _readLong($stream, $isBigEndian);
+            $offset = _readLong($stream, $isBigEndian);
             fseek($stream, $offset);
             $translated = fread($stream, $length);
 

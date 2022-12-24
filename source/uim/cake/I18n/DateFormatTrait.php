@@ -196,7 +196,7 @@ trait DateFormatTrait
         $format = $format ?? static::$_toStringFormat;
         $locale = $locale ?: static::$defaultLocale;
 
-        return this._formatObject($time, $format, $locale);
+        return _formatObject($time, $format, $locale);
     }
 
     /**

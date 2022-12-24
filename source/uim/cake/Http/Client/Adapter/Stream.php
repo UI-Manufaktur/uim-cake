@@ -71,15 +71,15 @@ class Stream : AdapterInterface
      */
     function send(RequestInterface $request, array $options): array
     {
-        this._stream = null;
-        this._context = null;
-        this._contextOptions = [];
-        this._sslContextOptions = [];
-        this._connectionErrors = [];
+        _stream = null;
+        _context = null;
+        _contextOptions = [];
+        _sslContextOptions = [];
+        _connectionErrors = [];
 
-        this._buildContext($request, $options);
+        _buildContext($request, $options);
 
-        return this._send($request);
+        return _send($request);
     }
 
     /**
@@ -107,7 +107,7 @@ class Stream : AdapterInterface
             /** @psalm-suppress PossiblyInvalidArgument */
             $headerSlice = array_slice($headers, $start, $end);
             $body = $i == $last ? $content : '';
-            $responses[] = this._buildResponse($headerSlice, $body);
+            $responses[] = _buildResponse($headerSlice, $body);
         }
 
         return $responses;
@@ -122,18 +122,18 @@ class Stream : AdapterInterface
      */
     protected function _buildContext(RequestInterface $request, array $options): void
     {
-        this._buildContent($request, $options);
-        this._buildHeaders($request, $options);
-        this._buildOptions($request, $options);
+        _buildContent($request, $options);
+        _buildHeaders($request, $options);
+        _buildOptions($request, $options);
 
         $url = $request->getUri();
         $scheme = parse_url((string)$url, PHP_URL_SCHEME);
         if ($scheme == 'https') {
-            this._buildSslContext($request, $options);
+            _buildSslContext($request, $options);
         }
-        this._context = stream_context_create([
-            'http' => this._contextOptions,
-            'ssl' => this._sslContextOptions,
+        _context = stream_context_create([
+            'http' => _contextOptions,
+            'ssl' => _sslContextOptions,
         ]);
     }
 
@@ -152,7 +152,7 @@ class Stream : AdapterInterface
         foreach ($request->getHeaders() as $name => $values) {
             $headers[] = sprintf('%s: %s', $name, implode(', ', $values));
         }
-        this._contextOptions['header'] = implode("\r\n", $headers);
+        _contextOptions['header'] = implode("\r\n", $headers);
     }
 
     /**
@@ -169,7 +169,7 @@ class Stream : AdapterInterface
     {
         $body = $request->getBody();
         $body->rewind();
-        this._contextOptions['content'] = $body->getContents();
+        _contextOptions['content'] = $body->getContents();
     }
 
     /**
@@ -181,19 +181,19 @@ class Stream : AdapterInterface
      */
     protected function _buildOptions(RequestInterface $request, array $options): void
     {
-        this._contextOptions['method'] = $request->getMethod();
-        this._contextOptions['protocol_version'] = $request->getProtocolVersion();
-        this._contextOptions['ignore_errors'] = true;
+        _contextOptions['method'] = $request->getMethod();
+        _contextOptions['protocol_version'] = $request->getProtocolVersion();
+        _contextOptions['ignore_errors'] = true;
 
         if (isset($options['timeout'])) {
-            this._contextOptions['timeout'] = $options['timeout'];
+            _contextOptions['timeout'] = $options['timeout'];
         }
         // Redirects are handled in the client layer because of cookie handling issues.
-        this._contextOptions['max_redirects'] = 0;
+        _contextOptions['max_redirects'] = 0;
 
         if (isset($options['proxy']['proxy'])) {
-            this._contextOptions['request_fulluri'] = true;
-            this._contextOptions['proxy'] = $options['proxy']['proxy'];
+            _contextOptions['request_fulluri'] = true;
+            _contextOptions['proxy'] = $options['proxy']['proxy'];
         }
     }
 
@@ -222,12 +222,12 @@ class Stream : AdapterInterface
         if (!empty($options['ssl_verify_host'])) {
             $url = $request->getUri();
             $host = parse_url((string)$url, PHP_URL_HOST);
-            this._sslContextOptions['peer_name'] = $host;
+            _sslContextOptions['peer_name'] = $host;
         }
         foreach ($sslOptions as $key) {
             if (isset($options[$key])) {
                 $name = substr($key, 4);
-                this._sslContextOptions[$name] = $options[$key];
+                _sslContextOptions[$name] = $options[$key];
             }
         }
     }
@@ -242,33 +242,33 @@ class Stream : AdapterInterface
     protected function _send(RequestInterface $request): array
     {
         $deadline = false;
-        if (isset(this._contextOptions['timeout']) && this._contextOptions['timeout'] > 0) {
-            $deadline = time() + this._contextOptions['timeout'];
+        if (isset(_contextOptions['timeout']) && _contextOptions['timeout'] > 0) {
+            $deadline = time() + _contextOptions['timeout'];
         }
 
         $url = $request->getUri();
-        this._open((string)$url, $request);
+        _open((string)$url, $request);
         $content = '';
         $timedOut = false;
 
         /** @psalm-suppress PossiblyNullArgument  */
-        while (!feof(this._stream)) {
+        while (!feof(_stream)) {
             if ($deadline != false) {
-                stream_set_timeout(this._stream, max($deadline - time(), 1));
+                stream_set_timeout(_stream, max($deadline - time(), 1));
             }
 
-            $content .= fread(this._stream, 8192);
+            $content .= fread(_stream, 8192);
 
-            $meta = stream_get_meta_data(this._stream);
+            $meta = stream_get_meta_data(_stream);
             if ($meta['timed_out'] || ($deadline != false && time() > $deadline)) {
                 $timedOut = true;
                 break;
             }
         }
         /** @psalm-suppress PossiblyNullArgument */
-        $meta = stream_get_meta_data(this._stream);
+        $meta = stream_get_meta_data(_stream);
         /** @psalm-suppress InvalidPropertyAssignmentValue */
-        fclose(this._stream);
+        fclose(_stream);
 
         if ($timedOut) {
             throw new NetworkException('Connection timed out ' . $url, $request);
@@ -309,19 +309,19 @@ class Stream : AdapterInterface
         }
 
         set_error_handler(function ($code, $message): bool {
-            this._connectionErrors[] = $message;
+            _connectionErrors[] = $message;
 
             return true;
         });
         try {
             /** @psalm-suppress PossiblyNullArgument */
-            this._stream = fopen($url, 'rb', false, this._context);
+            _stream = fopen($url, 'rb', false, _context);
         } finally {
             restore_error_handler();
         }
 
-        if (!this._stream || this._connectionErrors) {
-            throw new RequestException(implode("\n", this._connectionErrors), $request);
+        if (!_stream || _connectionErrors) {
+            throw new RequestException(implode("\n", _connectionErrors), $request);
         }
     }
 
@@ -334,6 +334,6 @@ class Stream : AdapterInterface
      */
     function contextOptions(): array
     {
-        return array_merge(this._contextOptions, this._sslContextOptions);
+        return array_merge(_contextOptions, _sslContextOptions);
     }
 }

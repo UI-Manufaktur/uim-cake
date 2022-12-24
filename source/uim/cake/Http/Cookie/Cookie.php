@@ -157,7 +157,7 @@ class Cookie : CookieInterface
         this.validateName($name);
         this.name = $name;
 
-        this._setValue($value);
+        _setValue($value);
 
         this.domain = $domain ?? static::$defaults['domain'];
         this.httpOnly = $httpOnly ?? static::$defaults['httponly'];
@@ -336,7 +336,7 @@ class Cookie : CookieInterface
         $value = this.value;
         if (this.isExpanded) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            $value = this._flatten(this.value);
+            $value = _flatten(this.value);
         }
         $headerValue = [];
         /** @psalm-suppress PossiblyInvalidArgument */
@@ -443,7 +443,7 @@ class Cookie : CookieInterface
     {
         if (this.isExpanded) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            return this._flatten(this.value);
+            return _flatten(this.value);
         }
 
         return this.value;
@@ -678,7 +678,7 @@ class Cookie : CookieInterface
     {
         if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            this.value = this._expand(this.value);
+            this.value = _expand(this.value);
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
@@ -739,7 +739,7 @@ class Cookie : CookieInterface
     {
         if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            this.value = this._expand(this.value);
+            this.value = _expand(this.value);
         }
 
         if ($path == null) {

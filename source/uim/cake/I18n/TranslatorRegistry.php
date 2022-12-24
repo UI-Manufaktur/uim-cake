@@ -112,7 +112,7 @@ class TranslatorRegistry
                 new MessagesFileLoader($name, $locale, 'po'),
             ]);
 
-            $formatter = $name == 'cake' ? 'default' : this._defaultFormatter;
+            $formatter = $name == 'cake' ? 'default' : _defaultFormatter;
             $package = $loader();
             $package->setFormatter($formatter);
 
@@ -170,7 +170,7 @@ class TranslatorRegistry
      */
     function setCacher($cacher): void
     {
-        this._cacher = $cacher;
+        _cacher = $cacher;
     }
 
     /**
@@ -193,22 +193,22 @@ class TranslatorRegistry
             return this.registry[$name][$locale];
         }
 
-        if (this._cacher == null) {
-            return this.registry[$name][$locale] = this._getTranslator($name, $locale);
+        if (_cacher == null) {
+            return this.registry[$name][$locale] = _getTranslator($name, $locale);
         }
 
         // Cache keys cannot contain / if they go to file engine.
         $keyName = str_replace('/', '.', $name);
         $key = "translations.{$keyName}.{$locale}";
-        $translator = this._cacher->get($key);
+        $translator = _cacher->get($key);
 
         // PHP <8.1 does not correctly garbage collect strings created
         // by unserialized arrays.
         gc_collect_cycles();
 
         if (!$translator || !$translator->getPackage()) {
-            $translator = this._getTranslator($name, $locale);
-            this._cacher->set($key, $translator);
+            $translator = _getTranslator($name, $locale);
+            _cacher->set($key, $translator);
         }
 
         return this.registry[$name][$locale] = $translator;
@@ -228,10 +228,10 @@ class TranslatorRegistry
             return this.createInstance($name, $locale);
         }
 
-        if (isset(this._loaders[$name])) {
-            $package = this._loaders[$name]($name, $locale);
+        if (isset(_loaders[$name])) {
+            $package = _loaders[$name]($name, $locale);
         } else {
-            $package = this._loaders[static::FALLBACK_LOADER]($name, $locale);
+            $package = _loaders[static::FALLBACK_LOADER]($name, $locale);
         }
 
         $package = this.setFallbackPackage($name, $package);
@@ -272,7 +272,7 @@ class TranslatorRegistry
      */
     function registerLoader(string $name, callable $loader): void
     {
-        this._loaders[$name] = $loader;
+        _loaders[$name] = $loader;
     }
 
     /**
@@ -287,10 +287,10 @@ class TranslatorRegistry
     function defaultFormatter(?string $name = null): string
     {
         if ($name == null) {
-            return this._defaultFormatter;
+            return _defaultFormatter;
         }
 
-        return this._defaultFormatter = $name;
+        return _defaultFormatter = $name;
     }
 
     /**
@@ -301,7 +301,7 @@ class TranslatorRegistry
      */
     function useFallback(bool $enable = true): void
     {
-        this._useFallback = $enable;
+        _useFallback = $enable;
     }
 
     /**
@@ -318,7 +318,7 @@ class TranslatorRegistry
         }
 
         $fallbackDomain = null;
-        if (this._useFallback && $name != 'default') {
+        if (_useFallback && $name != 'default') {
             $fallbackDomain = 'default';
         }
 
@@ -337,7 +337,7 @@ class TranslatorRegistry
     function setLoaderFallback(string $name, callable $loader): callable
     {
         $fallbackDomain = 'default';
-        if (!this._useFallback || $name == $fallbackDomain) {
+        if (!_useFallback || $name == $fallbackDomain) {
             return $loader;
         }
 

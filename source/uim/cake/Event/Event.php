@@ -83,9 +83,9 @@ class Event : EventInterface
      */
     public this(string $name, $subject = null, $data = null)
     {
-        this._name = $name;
-        this._subject = $subject;
-        this._data = (array)$data;
+        _name = $name;
+        _subject = $subject;
+        _data = (array)$data;
     }
 
     /**
@@ -95,7 +95,7 @@ class Event : EventInterface
      */
     function getName(): string
     {
-        return this._name;
+        return _name;
     }
 
     /**
@@ -109,11 +109,11 @@ class Event : EventInterface
      */
     function getSubject()
     {
-        if (this._subject == null) {
+        if (_subject == null) {
             throw new CakeException('No subject set for this event');
         }
 
-        return this._subject;
+        return _subject;
     }
 
     /**
@@ -123,7 +123,7 @@ class Event : EventInterface
      */
     function stopPropagation(): void
     {
-        this._stopped = true;
+        _stopped = true;
     }
 
     /**
@@ -133,7 +133,7 @@ class Event : EventInterface
      */
     function isStopped(): bool
     {
-        return this._stopped;
+        return _stopped;
     }
 
     /**
@@ -169,10 +169,10 @@ class Event : EventInterface
     function getData(?string $key = null)
     {
         if ($key != null) {
-            return this._data[$key] ?? null;
+            return _data[$key] ?? null;
         }
 
-        return this._data;
+        return _data;
     }
 
     /**
@@ -185,9 +185,9 @@ class Event : EventInterface
     function setData($key, $value = null)
     {
         if (is_array($key)) {
-            this._data = $key;
+            _data = $key;
         } else {
-            this._data[$key] = $value;
+            _data[$key] = $value;
         }
 
         return this;

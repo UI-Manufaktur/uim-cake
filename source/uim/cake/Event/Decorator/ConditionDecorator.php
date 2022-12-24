@@ -37,7 +37,7 @@ class ConditionDecorator : AbstractDecorator
             return;
         }
 
-        return this._call($args);
+        return _call($args);
     }
 
     /**
@@ -48,8 +48,8 @@ class ConditionDecorator : AbstractDecorator
      */
     function canTrigger(EventInterface $event): bool
     {
-        $if = this._evaluateCondition('if', $event);
-        $unless = this._evaluateCondition('unless', $event);
+        $if = _evaluateCondition('if', $event);
+        $unless = _evaluateCondition('unless', $event);
 
         return $if && !$unless;
     }
@@ -63,13 +63,13 @@ class ConditionDecorator : AbstractDecorator
      */
     protected function _evaluateCondition(string $condition, EventInterface $event): bool
     {
-        if (!isset(this._options[$condition])) {
+        if (!isset(_options[$condition])) {
             return $condition != 'unless';
         }
-        if (!is_callable(this._options[$condition])) {
+        if (!is_callable(_options[$condition])) {
             throw new RuntimeException(self::class . ' the `' . $condition . '` condition is not a callable!');
         }
 
-        return (bool)this._options[$condition]($event);
+        return (bool)_options[$condition]($event);
     }
 }

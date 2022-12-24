@@ -127,9 +127,9 @@ class Response : Message : IResponse
      */
     public this(array $headers = [], string $body = '')
     {
-        this._parseHeaders($headers);
+        _parseHeaders($headers);
         if (this.getHeaderLine('Content-Encoding') == 'gzip') {
-            $body = this._decodeGzipBody($body);
+            $body = _decodeGzipBody($body);
         }
         $stream = new Stream('php://memory', 'wb+');
         $stream->write($body);
@@ -304,7 +304,7 @@ class Response : Message : IResponse
      */
     function getCookies(): array
     {
-        return this._getCookies();
+        return _getCookies();
     }
 
     /**
@@ -395,7 +395,7 @@ class Response : Message : IResponse
      */
     function getStringBody(): string
     {
-        return this._getBody();
+        return _getBody();
     }
 
     /**
@@ -405,7 +405,7 @@ class Response : Message : IResponse
      */
     function getJson()
     {
-        return this._getJson();
+        return _getJson();
     }
 
     /**
@@ -415,11 +415,11 @@ class Response : Message : IResponse
      */
     protected function _getJson()
     {
-        if (this._json) {
-            return this._json;
+        if (_json) {
+            return _json;
         }
 
-        return this._json = json_decode(this._getBody(), true);
+        return _json = json_decode(_getBody(), true);
     }
 
     /**
@@ -429,7 +429,7 @@ class Response : Message : IResponse
      */
     function getXml(): ?SimpleXMLElement
     {
-        return this._getXml();
+        return _getXml();
     }
 
     /**
@@ -439,15 +439,15 @@ class Response : Message : IResponse
      */
     protected function _getXml(): ?SimpleXMLElement
     {
-        if (this._xml != null) {
-            return this._xml;
+        if (_xml != null) {
+            return _xml;
         }
         libxml_use_internal_errors();
-        $data = simplexml_load_string(this._getBody());
+        $data = simplexml_load_string(_getBody());
         if ($data) {
-            this._xml = $data;
+            _xml = $data;
 
-            return this._xml;
+            return _xml;
         }
 
         return null;

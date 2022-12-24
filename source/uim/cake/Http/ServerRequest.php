@@ -245,7 +245,7 @@ class ServerRequest : IServerRequest
             'input' => null,
         ];
 
-        this._setConfig($config);
+        _setConfig($config);
     }
 
     /**
@@ -280,7 +280,7 @@ class ServerRequest : IServerRequest
             $uri = ServerRequestFactory::createUri($config['environment']);
         }
 
-        this._environment = $config['environment'];
+        _environment = $config['environment'];
 
         this.uri = $uri;
         this.base = $config['base'];
@@ -503,10 +503,10 @@ class ServerRequest : IServerRequest
             return false;
         }
         if ($args) {
-            return this._is($type, $args);
+            return _is($type, $args);
         }
 
-        return this._detectorCache[$type] = this._detectorCache[$type] ?? this._is($type, $args);
+        return _detectorCache[$type] = _detectorCache[$type] ?? _is($type, $args);
     }
 
     /**
@@ -516,7 +516,7 @@ class ServerRequest : IServerRequest
      */
     function clearDetectorCache(): void
     {
-        this._detectorCache = [];
+        _detectorCache = [];
     }
 
     /**
@@ -534,16 +534,16 @@ class ServerRequest : IServerRequest
 
             return $detect(...$args);
         }
-        if (isset($detect['env']) && this._environmentDetector($detect)) {
+        if (isset($detect['env']) && _environmentDetector($detect)) {
             return true;
         }
-        if (isset($detect['header']) && this._headerDetector($detect)) {
+        if (isset($detect['header']) && _headerDetector($detect)) {
             return true;
         }
-        if (isset($detect['accept']) && this._acceptHeaderDetector($detect)) {
+        if (isset($detect['accept']) && _acceptHeaderDetector($detect)) {
             return true;
         }
-        if (isset($detect['param']) && this._paramDetector($detect)) {
+        if (isset($detect['param']) && _paramDetector($detect)) {
             return true;
         }
 
@@ -792,7 +792,7 @@ class ServerRequest : IServerRequest
     function getHeaders(): array
     {
         $headers = [];
-        foreach (this._environment as $key => $value) {
+        foreach (_environment as $key => $value) {
             $name = null;
             if (strpos($key, 'HTTP_') == 0) {
                 $name = substr($key, 5);
@@ -821,7 +821,7 @@ class ServerRequest : IServerRequest
     {
         $name = this.normalizeHeaderName($name);
 
-        return isset(this._environment[$name]);
+        return isset(_environment[$name]);
     }
 
     /**
@@ -838,8 +838,8 @@ class ServerRequest : IServerRequest
     function getHeader($name): array
     {
         $name = this.normalizeHeaderName($name);
-        if (isset(this._environment[$name])) {
-            return (array)this._environment[$name];
+        if (isset(_environment[$name])) {
+            return (array)_environment[$name];
         }
 
         return [];
@@ -972,7 +972,7 @@ class ServerRequest : IServerRequest
      */
     function getServerParams(): array
     {
-        return this._environment;
+        return _environment;
     }
 
     /**
@@ -1438,11 +1438,11 @@ class ServerRequest : IServerRequest
     function getEnv(string $key, ?string $default = null): ?string
     {
         $key = strtoupper($key);
-        if (!array_key_exists($key, this._environment)) {
-            this._environment[$key] = env($key);
+        if (!array_key_exists($key, _environment)) {
+            _environment[$key] = env($key);
         }
 
-        return this._environment[$key] != null ? (string)this._environment[$key] : $default;
+        return _environment[$key] != null ? (string)_environment[$key] : $default;
     }
 
     /**

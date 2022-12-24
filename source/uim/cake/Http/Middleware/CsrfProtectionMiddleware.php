@@ -112,7 +112,7 @@ class CsrfProtectionMiddleware : IMiddleware
             deprecationWarning('Option `httpOnly` is deprecated. Use lowercased `httponly` instead.');
         }
 
-        this._config = $config + this._config;
+        _config = $config + _config;
     }
 
     /**
@@ -133,7 +133,7 @@ class CsrfProtectionMiddleware : IMiddleware
             && this.skipCheckCallback != null
             && call_user_func(this.skipCheckCallback, $request) == true
         ) {
-            $request = this._unsetTokenField($request);
+            $request = _unsetTokenField($request);
 
             return $handler->handle($request);
         }
@@ -147,7 +147,7 @@ class CsrfProtectionMiddleware : IMiddleware
         }
 
         $cookies = $request->getCookieParams();
-        $cookieData = Hash::get($cookies, this._config['cookieName']);
+        $cookieData = Hash::get($cookies, _config['cookieName']);
 
         if (is_string($cookieData) && $cookieData != '') {
             try {
@@ -163,12 +163,12 @@ class CsrfProtectionMiddleware : IMiddleware
             /** @var mixed $response */
             $response = $handler->handle($request);
 
-            return this._addTokenCookie($token, $request, $response);
+            return _addTokenCookie($token, $request, $response);
         }
 
         if ($hasData) {
-            this._validateToken($request);
-            $request = this._unsetTokenField($request);
+            _validateToken($request);
+            $request = _unsetTokenField($request);
         }
 
         return $handler->handle($request);
@@ -218,7 +218,7 @@ class CsrfProtectionMiddleware : IMiddleware
     {
         $body = $request->getParsedBody();
         if (is_array($body)) {
-            unset($body[this._config['field']]);
+            unset($body[_config['field']]);
             $request = $request->withParsedBody($body);
         }
 
@@ -367,7 +367,7 @@ class CsrfProtectionMiddleware : IMiddleware
         IServerRequest $request,
         IResponse $response
     ): IResponse {
-        $cookie = this._createCookie($token, $request);
+        $cookie = _createCookie($token, $request);
         if ($response instanceof Response) {
             return $response->withCookie($cookie);
         }
@@ -384,16 +384,16 @@ class CsrfProtectionMiddleware : IMiddleware
      */
     protected function _validateToken(IServerRequest $request): void
     {
-        $cookie = Hash::get($request->getCookieParams(), this._config['cookieName']);
+        $cookie = Hash::get($request->getCookieParams(), _config['cookieName']);
 
         if (!$cookie || !is_string($cookie)) {
             throw new InvalidCsrfTokenException(__d('cake', 'Missing or incorrect CSRF cookie type.'));
         }
 
-        if (!this._verifyToken($cookie)) {
+        if (!_verifyToken($cookie)) {
             $exception = new InvalidCsrfTokenException(__d('cake', 'Missing or invalid CSRF cookie.'));
 
-            $expiredCookie = this._createCookie('', $request)->withExpired();
+            $expiredCookie = _createCookie('', $request)->withExpired();
             $exception->setHeader('Set-Cookie', $expiredCookie->toHeaderValue());
 
             throw $exception;
@@ -401,7 +401,7 @@ class CsrfProtectionMiddleware : IMiddleware
 
         $body = $request->getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
-            $post = (string)Hash::get($body, this._config['field']);
+            $post = (string)Hash::get($body, _config['field']);
             $post = this.unsaltToken($post);
             if (hash_equals($post, $cookie)) {
                 return;
@@ -430,14 +430,14 @@ class CsrfProtectionMiddleware : IMiddleware
     protected function _createCookie(string $value, IServerRequest $request): CookieInterface
     {
         return Cookie::create(
-            this._config['cookieName'],
+            _config['cookieName'],
             $value,
             [
-                'expires' => this._config['expiry'] ?: null,
+                'expires' => _config['expiry'] ?: null,
                 'path' => $request->getAttribute('webroot'),
-                'secure' => this._config['secure'],
-                'httponly' => this._config['httponly'],
-                'samesite' => this._config['samesite'],
+                'secure' => _config['secure'],
+                'httponly' => _config['httponly'],
+                'samesite' => _config['samesite'],
             ]
         );
     }

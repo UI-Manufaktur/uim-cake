@@ -187,7 +187,7 @@ class Client : ClientInterface
     {
         this.setConfig($config);
 
-        $adapter = this._config['adapter'];
+        $adapter = _config['adapter'];
         if ($adapter == null) {
             $adapter = Curl::class;
 
@@ -205,13 +205,13 @@ class Client : ClientInterface
         if (!$adapter instanceof AdapterInterface) {
             throw new InvalidArgumentException('Adapter must be an instance of Cake\Http\Client\AdapterInterface');
         }
-        this._adapter = $adapter;
+        _adapter = $adapter;
 
-        if (!empty(this._config['cookieJar'])) {
-            this._cookies = this._config['cookieJar'];
+        if (!empty(_config['cookieJar'])) {
+            _cookies = _config['cookieJar'];
             this.setConfig('cookieJar', null);
         } else {
-            this._cookies = new CookieCollection();
+            _cookies = new CookieCollection();
         }
     }
 
@@ -254,7 +254,7 @@ class Client : ClientInterface
      */
     function cookies(): CookieCollection
     {
-        return this._cookies;
+        return _cookies;
     }
 
     /**
@@ -269,7 +269,7 @@ class Client : ClientInterface
         if (!$cookie->getDomain() || !$cookie->getPath()) {
             throw new InvalidArgumentException('Cookie must have a domain and a path set.');
         }
-        this._cookies = this._cookies->add($cookie);
+        _cookies = _cookies->add($cookie);
 
         return this;
     }
@@ -289,7 +289,7 @@ class Client : ClientInterface
      */
     function get(string $url, $data = [], array $options = []): Response
     {
-        $options = this._mergeOptions($options);
+        $options = _mergeOptions($options);
         $body = null;
         if (is_array($data) && isset($data['_content'])) {
             $body = $data['_content'];
@@ -297,7 +297,7 @@ class Client : ClientInterface
         }
         $url = this.buildUrl($url, $data, $options);
 
-        return this._doRequest(
+        return _doRequest(
             Request::METHOD_GET,
             $url,
             $body,
@@ -315,10 +315,10 @@ class Client : ClientInterface
      */
     function post(string $url, $data = [], array $options = []): Response
     {
-        $options = this._mergeOptions($options);
+        $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
 
-        return this._doRequest(Request::METHOD_POST, $url, $data, $options);
+        return _doRequest(Request::METHOD_POST, $url, $data, $options);
     }
 
     /**
@@ -331,10 +331,10 @@ class Client : ClientInterface
      */
     function put(string $url, $data = [], array $options = []): Response
     {
-        $options = this._mergeOptions($options);
+        $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
 
-        return this._doRequest(Request::METHOD_PUT, $url, $data, $options);
+        return _doRequest(Request::METHOD_PUT, $url, $data, $options);
     }
 
     /**
@@ -347,10 +347,10 @@ class Client : ClientInterface
      */
     function patch(string $url, $data = [], array $options = []): Response
     {
-        $options = this._mergeOptions($options);
+        $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
 
-        return this._doRequest(Request::METHOD_PATCH, $url, $data, $options);
+        return _doRequest(Request::METHOD_PATCH, $url, $data, $options);
     }
 
     /**
@@ -363,10 +363,10 @@ class Client : ClientInterface
      */
     function options(string $url, $data = [], array $options = []): Response
     {
-        $options = this._mergeOptions($options);
+        $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
 
-        return this._doRequest(Request::METHOD_OPTIONS, $url, $data, $options);
+        return _doRequest(Request::METHOD_OPTIONS, $url, $data, $options);
     }
 
     /**
@@ -379,10 +379,10 @@ class Client : ClientInterface
      */
     function trace(string $url, $data = [], array $options = []): Response
     {
-        $options = this._mergeOptions($options);
+        $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
 
-        return this._doRequest(Request::METHOD_TRACE, $url, $data, $options);
+        return _doRequest(Request::METHOD_TRACE, $url, $data, $options);
     }
 
     /**
@@ -395,10 +395,10 @@ class Client : ClientInterface
      */
     function delete(string $url, $data = [], array $options = []): Response
     {
-        $options = this._mergeOptions($options);
+        $options = _mergeOptions($options);
         $url = this.buildUrl($url, [], $options);
 
-        return this._doRequest(Request::METHOD_DELETE, $url, $data, $options);
+        return _doRequest(Request::METHOD_DELETE, $url, $data, $options);
     }
 
     /**
@@ -411,10 +411,10 @@ class Client : ClientInterface
      */
     function head(string $url, array $data = [], array $options = []): Response
     {
-        $options = this._mergeOptions($options);
+        $options = _mergeOptions($options);
         $url = this.buildUrl($url, $data, $options);
 
-        return this._doRequest(Request::METHOD_HEAD, $url, '', $options);
+        return _doRequest(Request::METHOD_HEAD, $url, '', $options);
     }
 
     /**
@@ -428,7 +428,7 @@ class Client : ClientInterface
      */
     protected function _doRequest(string $method, string $url, $data, $options): Response
     {
-        $request = this._createRequest(
+        $request = _createRequest(
             $method,
             $url,
             $data,
@@ -446,7 +446,7 @@ class Client : ClientInterface
      */
     protected function _mergeOptions(array $options): array
     {
-        return Hash::merge(this._config, $options);
+        return Hash::merge(_config, $options);
     }
 
     /**
@@ -458,7 +458,7 @@ class Client : ClientInterface
      */
     function sendRequest(RequestInterface $request): IResponse
     {
-        return this.send($request, this._config);
+        return this.send($request, _config);
     }
 
     /**
@@ -480,7 +480,7 @@ class Client : ClientInterface
         }
 
         do {
-            $response = this._sendRequest($request, $options);
+            $response = _sendRequest($request, $options);
 
             $handleRedirect = $response->isRedirect() && $redirects-- > 0;
             if ($handleRedirect) {
@@ -494,7 +494,7 @@ class Client : ClientInterface
                     'protocolRelative' => true,
                 ]);
                 $request = $request->withUri(new Uri($locationUrl));
-                $request = this._cookies->addToRequest($request, []);
+                $request = _cookies->addToRequest($request, []);
             }
         } while ($handleRedirect);
 
@@ -553,10 +553,10 @@ class Client : ClientInterface
             $responses = static::$_mockAdapter->send($request, $options);
         }
         if (empty($responses)) {
-            $responses = this._adapter->send($request, $options);
+            $responses = _adapter->send($request, $options);
         }
         foreach ($responses as $response) {
-            this._cookies = this._cookies->addFromResponse($response, $request);
+            _cookies = _cookies->addFromResponse($response, $request);
         }
 
         return array_pop($responses);
@@ -627,7 +627,7 @@ class Client : ClientInterface
         /** @var array<non-empty-string, non-empty-string> $headers */
         $headers = (array)($options['headers'] ?? []);
         if (isset($options['type'])) {
-            $headers = array_merge($headers, this._typeHeaders($options['type']));
+            $headers = array_merge($headers, _typeHeaders($options['type']));
         }
         if (is_string($data) && !isset($headers['Content-Type']) && !isset($headers['content-type'])) {
             $headers['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -637,12 +637,12 @@ class Client : ClientInterface
         $request = $request->withProtocolVersion(this.getConfig('protocolVersion'));
         $cookies = $options['cookies'] ?? [];
         /** @var \Cake\Http\Client\Request $request */
-        $request = this._cookies->addToRequest($request, $cookies);
+        $request = _cookies->addToRequest($request, $cookies);
         if (isset($options['auth'])) {
-            $request = this._addAuthentication($request, $options);
+            $request = _addAuthentication($request, $options);
         }
         if (isset($options['proxy'])) {
-            $request = this._addProxy($request, $options);
+            $request = _addProxy($request, $options);
         }
 
         return $request;
@@ -694,7 +694,7 @@ class Client : ClientInterface
     {
         $auth = $options['auth'];
         /** @var \Cake\Http\Client\Auth\Basic $adapter */
-        $adapter = this._createAuth($auth, $options);
+        $adapter = _createAuth($auth, $options);
 
         return $adapter->authentication($request, $options['auth']);
     }
@@ -713,7 +713,7 @@ class Client : ClientInterface
     {
         $auth = $options['proxy'];
         /** @var \Cake\Http\Client\Auth\Basic $adapter */
-        $adapter = this._createAuth($auth, $options);
+        $adapter = _createAuth($auth, $options);
 
         return $adapter->proxyAuthentication($request, $options['proxy']);
     }

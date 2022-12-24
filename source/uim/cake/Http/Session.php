@@ -233,8 +233,8 @@ class Session
             this.engine($class, $config['handler']);
         }
 
-        this._lifetime = (int)ini_get('session.gc_maxlifetime');
-        this._isCLI = (PHP_SAPI == 'cli' || PHP_SAPI == 'phpdbg');
+        _lifetime = (int)ini_get('session.gc_maxlifetime');
+        _isCLI = (PHP_SAPI == 'cli' || PHP_SAPI == 'phpdbg');
         session_register_shutdown();
     }
 
@@ -258,7 +258,7 @@ class Session
     function engine($class = null, array $options = []): ?SessionHandlerInterface
     {
         if ($class == null) {
-            return this._engine;
+            return _engine;
         }
         if ($class instanceof SessionHandlerInterface) {
             return this.setEngine($class);
@@ -287,7 +287,7 @@ class Session
             session_set_save_handler($handler, false);
         }
 
-        return this._engine = $handler;
+        return _engine = $handler;
     }
 
     /**
@@ -327,15 +327,15 @@ class Session
      */
     function start(): bool
     {
-        if (this._started) {
+        if (_started) {
             return true;
         }
 
-        if (this._isCLI) {
+        if (_isCLI) {
             $_SESSION = [];
             this.id('cli');
 
-            return this._started = true;
+            return _started = true;
         }
 
         if (session_status() == \PHP_SESSION_ACTIVE) {
@@ -350,15 +350,15 @@ class Session
             throw new RuntimeException('Could not start the session');
         }
 
-        this._started = true;
+        _started = true;
 
-        if (this._timedOut()) {
+        if (_timedOut()) {
             this.destroy();
 
             return this.start();
         }
 
-        return this._started;
+        return _started;
     }
 
     /**
@@ -368,12 +368,12 @@ class Session
      */
     function close(): bool
     {
-        if (!this._started) {
+        if (!_started) {
             return true;
         }
 
-        if (this._isCLI) {
-            this._started = false;
+        if (_isCLI) {
+            _started = false;
 
             return true;
         }
@@ -382,7 +382,7 @@ class Session
             throw new RuntimeException('Could not close the session');
         }
 
-        this._started = false;
+        _started = false;
 
         return true;
     }
@@ -394,7 +394,7 @@ class Session
      */
     function started(): bool
     {
-        return this._started || session_status() == \PHP_SESSION_ACTIVE;
+        return _started || session_status() == \PHP_SESSION_ACTIVE;
     }
 
     /**
@@ -405,7 +405,7 @@ class Session
      */
     function check(?string $name = null): bool
     {
-        if (this._hasSession() && !this.started()) {
+        if (_hasSession() && !this.started()) {
             this.start();
         }
 
@@ -430,7 +430,7 @@ class Session
      */
     function read(?string $name = null, $default = null)
     {
-        if (this._hasSession() && !this.started()) {
+        if (_hasSession() && !this.started()) {
             this.start();
         }
 
@@ -476,7 +476,7 @@ class Session
         $value = this.read($name);
         if ($value != null) {
             /** @psalm-suppress InvalidScalarArgument */
-            this._overwrite($_SESSION, Hash::remove($_SESSION, $name));
+            _overwrite($_SESSION, Hash::remove($_SESSION, $name));
         }
 
         return $value;
@@ -505,7 +505,7 @@ class Session
         }
 
         /** @psalm-suppress PossiblyNullArgument */
-        this._overwrite($_SESSION, $data);
+        _overwrite($_SESSION, $data);
     }
 
     /**
@@ -541,7 +541,7 @@ class Session
     {
         if (this.check($name)) {
             /** @psalm-suppress InvalidScalarArgument */
-            this._overwrite($_SESSION, Hash::remove($_SESSION, $name));
+            _overwrite($_SESSION, Hash::remove($_SESSION, $name));
         }
     }
 
@@ -572,16 +572,16 @@ class Session
      */
     function destroy(): void
     {
-        if (this._hasSession() && !this.started()) {
+        if (_hasSession() && !this.started()) {
             this.start();
         }
 
-        if (!this._isCLI && session_status() == \PHP_SESSION_ACTIVE) {
+        if (!_isCLI && session_status() == \PHP_SESSION_ACTIVE) {
             session_destroy();
         }
 
         $_SESSION = [];
-        this._started = false;
+        _started = false;
     }
 
     /**
@@ -609,7 +609,7 @@ class Session
     {
         return !ini_get('session.use_cookies')
             || isset($_COOKIE[session_name()])
-            || this._isCLI
+            || _isCLI
             || (ini_get('session.use_trans_sid') && isset($_GET[session_name()]));
     }
 
@@ -620,7 +620,7 @@ class Session
      */
     function renew(): void
     {
-        if (!this._hasSession() || this._isCLI) {
+        if (!_hasSession() || _isCLI) {
             return;
         }
 
@@ -652,8 +652,8 @@ class Session
         $time = this.read('Config.time');
         $result = false;
 
-        $checkTime = $time != null && this._lifetime > 0;
-        if ($checkTime && (time() - (int)$time > this._lifetime)) {
+        $checkTime = $time != null && _lifetime > 0;
+        if ($checkTime && (time() - (int)$time > _lifetime)) {
             $result = true;
         }
 

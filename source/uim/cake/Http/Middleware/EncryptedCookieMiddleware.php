@@ -124,7 +124,7 @@ class EncryptedCookieMiddleware : IMiddleware
         $cookies = $request->getCookieParams();
         foreach (this.cookieNames as $name) {
             if (isset($cookies[$name])) {
-                $cookies[$name] = this._decrypt($cookies[$name], this.cipherType, this.key);
+                $cookies[$name] = _decrypt($cookies[$name], this.cipherType, this.key);
             }
         }
 
@@ -143,7 +143,7 @@ class EncryptedCookieMiddleware : IMiddleware
         $cookies = $response->getCookieCollection();
         foreach ($cookies as $cookie) {
             if (in_array($cookie->getName(), this.cookieNames, true)) {
-                $value = this._encrypt($cookie->getValue(), this.cipherType);
+                $value = _encrypt($cookie->getValue(), this.cipherType);
                 $response = $response->withCookie($cookie->withValue($value));
             }
         }
@@ -164,7 +164,7 @@ class EncryptedCookieMiddleware : IMiddleware
         $header = [];
         foreach ($cookies as $cookie) {
             if (in_array($cookie->getName(), this.cookieNames, true)) {
-                $value = this._encrypt($cookie->getValue(), this.cipherType);
+                $value = _encrypt($cookie->getValue(), this.cipherType);
                 $cookie = $cookie->withValue($value);
             }
             $header[] = $cookie->toHeaderValue();
