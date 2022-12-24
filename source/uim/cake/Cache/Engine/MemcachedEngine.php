@@ -30,7 +30,7 @@ use RuntimeException;
  * serialization (if memcached extension is compiled with --enable-igbinary).
  * Compressed keys can also be incremented/decremented.
  */
-class MemcachedEngine extends CacheEngine
+class MemcachedEngine : CacheEngine
 {
     /**
      * memcached wrapper.

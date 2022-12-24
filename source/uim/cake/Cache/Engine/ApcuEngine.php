@@ -23,7 +23,7 @@ use RuntimeException;
 /**
  * APCu storage engine for cache
  */
-class ApcuEngine extends CacheEngine
+class ApcuEngine : CacheEngine
 {
     /**
      * Contains the compiled group names

@@ -24,7 +24,7 @@ use Cake\Console\ConsoleOptionParser;
 /**
  * CacheClearall command.
  */
-class CacheClearallCommand extends Command
+class CacheClearallCommand : Command
 {
     /**
      * Get the command name.

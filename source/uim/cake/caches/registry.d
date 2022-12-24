@@ -8,7 +8,7 @@ import uim.cake;
  *
  * Used by {@link \Cake\Cache\Cache} to load and manage cache engines.
  *
- * @extends \Cake\Core\ObjectRegistry<\Cake\Cache\CacheEngine>
+ * @: \Cake\Core\ObjectRegistry<\Cake\Cache\CacheEngine>
  */
 class CacheRegistry : ObjectRegistry
 {

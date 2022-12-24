@@ -25,7 +25,7 @@ use Serializable;
  * A collection is an immutable list of elements with a handful of functions to
  * iterate, group, transform and extract information from it.
  */
-class Collection extends IteratorIterator implements CollectionInterface, Serializable
+class Collection : IteratorIterator implements CollectionInterface, Serializable
 {
     use CollectionTrait;
 

@@ -65,7 +65,7 @@ use Cake\Utility\Security;
  *
  * @see https://book.cakephp.org/4/en/controllers/components/authentication.html
  */
-class DigestAuthenticate extends BasicAuthenticate
+class DigestAuthenticate : BasicAuthenticate
 {
     /**
      * Constructor

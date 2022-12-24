@@ -24,7 +24,7 @@ use Cake\Console\ConsoleOptionParser;
 /**
  * CacheList command.
  */
-class CacheListCommand extends Command
+class CacheListCommand : Command
 {
     /**
      * @inheritDoc

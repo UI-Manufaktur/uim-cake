@@ -25,7 +25,7 @@ use Traversable;
  * Creates an iterator from another iterator that extract the requested column
  * or property based on a path
  */
-class ExtractIterator extends Collection
+class ExtractIterator : Collection
 {
     /**
      * A callable responsible for extracting a single value for each

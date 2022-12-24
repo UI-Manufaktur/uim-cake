@@ -26,7 +26,7 @@ use RuntimeException;
 /**
  * Redis storage engine for cache.
  */
-class RedisEngine extends CacheEngine
+class RedisEngine : CacheEngine
 {
     /**
      * Redis wrapper.

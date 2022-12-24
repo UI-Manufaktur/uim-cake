@@ -31,7 +31,7 @@ use Cake\ORM\Locator\LocatorAwareTrait;
  * and ORM models to console commands.
  */
 #[\AllowDynamicProperties]
-class Command extends BaseCommand
+class Command : BaseCommand
 {
     use LocatorAwareTrait;
     use LogTrait;

@@ -29,7 +29,7 @@ use Traversable;
  * @internal
  * @see \Cake\Collection\Collection::stopWhen()
  */
-class StoppableIterator extends Collection
+class StoppableIterator : Collection
 {
     /**
      * The condition to evaluate for each item of the collection

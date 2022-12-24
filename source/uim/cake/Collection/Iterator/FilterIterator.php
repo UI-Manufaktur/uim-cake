@@ -28,7 +28,7 @@ use Traversable;
  * passing a callback function to each of the elements and taking them out if
  * it does not return true.
  */
-class FilterIterator extends Collection
+class FilterIterator : Collection
 {
     /**
      * The callback used to filter the elements in this collection

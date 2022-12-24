@@ -41,7 +41,7 @@ use Cake\Http\ServerRequest;
  *
  * @see \Cake\Controller\Component\AuthComponent::$authenticate
  */
-class ControllerAuthorize extends BaseAuthorize
+class ControllerAuthorize : BaseAuthorize
 {
     /**
      * Controller for the request.

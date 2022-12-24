@@ -24,7 +24,7 @@ use RuntimeException;
  *
  * Supports wincache 1.1.0 and higher.
  */
-class WincacheEngine extends CacheEngine
+class WincacheEngine : CacheEngine
 {
     /**
      * Contains the compiled group names

@@ -23,7 +23,7 @@ use Cake\Cache\CacheEngine;
  *
  * This is used internally for when Cache::disable() has been called.
  */
-class NullEngine extends CacheEngine
+class NullEngine : CacheEngine
 {
     /**
      * @inheritDoc

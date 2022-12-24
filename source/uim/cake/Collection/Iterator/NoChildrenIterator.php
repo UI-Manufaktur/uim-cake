@@ -24,7 +24,7 @@ use RecursiveIterator;
  * a RecursiveIterator but do not want children. This iterator will
  * always behave as having no nested items.
  */
-class NoChildrenIterator extends Collection implements RecursiveIterator
+class NoChildrenIterator : Collection implements RecursiveIterator
 {
     /**
      * Returns false as there are no children iterators in this collection

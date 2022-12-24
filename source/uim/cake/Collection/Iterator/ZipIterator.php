@@ -44,7 +44,7 @@ use Serializable;
  *  $iterator->toList(); // Returns [4, 6]
  * ```
  */
-class ZipIterator extends MultipleIterator implements CollectionInterface, Serializable
+class ZipIterator : MultipleIterator implements CollectionInterface, Serializable
 {
     use CollectionTrait;
 

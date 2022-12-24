@@ -33,7 +33,7 @@ use SplFileObject;
  *
  * You can configure a FileEngine cache, using Cache::config()
  */
-class FileEngine extends CacheEngine
+class FileEngine : CacheEngine
 {
     /**
      * Instance of SplFileObject class

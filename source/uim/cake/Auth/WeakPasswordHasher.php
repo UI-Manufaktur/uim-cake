@@ -25,7 +25,7 @@ use Cake\Utility\Security;
  * intended only to be used with legacy databases where passwords have
  * not been migrated to a stronger algorithm yet.
  */
-class WeakPasswordHasher extends AbstractPasswordHasher
+class WeakPasswordHasher : AbstractPasswordHasher
 {
     /**
      * Default config for this object.

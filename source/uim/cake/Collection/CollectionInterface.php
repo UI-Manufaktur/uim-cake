@@ -25,7 +25,7 @@ use Traversable;
  * list of elements exposing a number of traversing and extracting method for
  * generating other collections.
  */
-interface CollectionInterface extends Iterator, JsonSerializable
+interface CollectionInterface : Iterator, JsonSerializable
 {
     /**
      * Applies a callback to the elements in this collection.

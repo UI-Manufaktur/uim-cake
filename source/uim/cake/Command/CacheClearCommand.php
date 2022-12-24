@@ -27,7 +27,7 @@ use Cake\Console\ConsoleOptionParser;
 /**
  * CacheClear command.
  */
-class CacheClearCommand extends Command
+class CacheClearCommand : Command
 {
     /**
      * @inheritDoc

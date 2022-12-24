@@ -25,7 +25,7 @@ use RecursiveIteratorIterator;
  * A Recursive iterator used to flatten nested structures and also exposes
  * all Collection methods
  */
-class TreeIterator extends RecursiveIteratorIterator implements CollectionInterface
+class TreeIterator : RecursiveIteratorIterator implements CollectionInterface
 {
     use CollectionTrait;
 

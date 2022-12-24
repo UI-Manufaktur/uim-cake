@@ -28,7 +28,7 @@ use Cake\Cache\CacheEngine;
  * with a cache servers, but want the work saving properties a cache
  * provides.
  */
-class ArrayEngine extends CacheEngine
+class ArrayEngine : CacheEngine
 {
     /**
      * Cached data.

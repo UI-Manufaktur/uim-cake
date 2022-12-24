@@ -40,7 +40,7 @@ use Traversable;
  *
  * This iterator does not preserve the keys passed in the original elements.
  */
-class SortIterator extends Collection
+class SortIterator : Collection
 {
     /**
      * Wraps this iterator around the passed items so when iterated they are returned

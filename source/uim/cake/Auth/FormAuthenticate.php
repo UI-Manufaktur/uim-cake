@@ -45,7 +45,7 @@ use Cake\Http\ServerRequest;
  *
  * @see https://book.cakephp.org/4/en/controllers/components/authentication.html
  */
-class FormAuthenticate extends BaseAuthenticate
+class FormAuthenticate : BaseAuthenticate
 {
     /**
      * Checks the fields to ensure they are supplied.
