@@ -23,7 +23,7 @@ use Cake\Database\Exception\DatabaseException;
  *
  * @internal
  */
-class SqliteSchemaDialect extends SchemaDialect
+class SqliteSchemaDialect : SchemaDialect
 {
     /**
      * Array containing the foreign keys constraints names

@@ -40,7 +40,7 @@ use Psr\SimpleCache\CacheInterface;
  * @method \Cake\Database\StatementInterface query(string $sql) Executes a SQL statement and returns the Statement
  *   object as result. {@see \Cake\Database\Connnection::query()}
  */
-interface ConnectionInterface extends LoggerAwareInterface
+interface ConnectionInterface : LoggerAwareInterface
 {
     /**
      * Gets the current logger object.

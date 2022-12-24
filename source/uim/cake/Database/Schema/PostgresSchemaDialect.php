@@ -23,7 +23,7 @@ use Cake\Database\Exception\DatabaseException;
  *
  * @internal
  */
-class PostgresSchemaDialect extends SchemaDialect
+class PostgresSchemaDialect : SchemaDialect
 {
     /**
      * Generate the SQL to list the tables and views.

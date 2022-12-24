@@ -23,7 +23,7 @@ use Countable;
  * Generic ResultSet decorator. This will make any traversable object appear to
  * be a database result
  */
-class ResultSetDecorator extends Collection implements ResultSetInterface
+class ResultSetDecorator : Collection implements ResultSetInterface
 {
     /**
      * Make this object countable.

@@ -25,7 +25,7 @@ use Psr\Log\LoggerInterface;
  *
  * @internal
  */
-class LoggingStatement extends StatementDecorator
+class LoggingStatement : StatementDecorator
 {
     /**
      * Logger instance responsible for actually doing the logging task

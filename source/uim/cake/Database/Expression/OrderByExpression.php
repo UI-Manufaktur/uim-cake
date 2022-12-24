@@ -23,7 +23,7 @@ use RuntimeException;
 /**
  * An expression object for ORDER BY clauses
  */
-class OrderByExpression extends QueryExpression
+class OrderByExpression : QueryExpression
 {
     /**
      * Constructor

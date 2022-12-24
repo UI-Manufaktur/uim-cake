@@ -26,7 +26,7 @@ use PDO;
  *
  * Use to convert binary uuid data between PHP and the database types.
  */
-class BinaryUuidType extends BaseType
+class BinaryUuidType : BaseType
 {
     /**
      * Convert binary uuid data into the database format.

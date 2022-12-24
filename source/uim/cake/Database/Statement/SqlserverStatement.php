@@ -23,7 +23,7 @@ use PDO;
  *
  * @internal
  */
-class SqlserverStatement extends PDOStatement
+class SqlserverStatement : PDOStatement
 {
     /**
      * {@inheritDoc}

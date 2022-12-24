@@ -21,7 +21,7 @@ namespace Cake\Database\Schema;
  *
  * @internal
  */
-class SqlserverSchemaDialect extends SchemaDialect
+class SqlserverSchemaDialect : SchemaDialect
 {
     /**
      * @var string

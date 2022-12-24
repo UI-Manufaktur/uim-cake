@@ -24,9 +24,9 @@ use Cake\Datasource\Exception\MissingDatasourceException;
  * A registry object for connection instances.
  *
  * @see \Cake\Datasource\ConnectionManager
- * @extends \Cake\Core\ObjectRegistry<\Cake\Datasource\ConnectionInterface>
+ * @: \Cake\Core\ObjectRegistry<\Cake\Datasource\ConnectionInterface>
  */
-class ConnectionRegistry extends ObjectRegistry
+class ConnectionRegistry : ObjectRegistry
 {
     /**
      * Resolve a datasource classname.

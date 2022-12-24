@@ -17,9 +17,9 @@ declare(strict_types=1);
 namespace Cake\Database\Type;
 
 /**
- * Extends DateTimeType with support for time zones.
+ * : DateTimeType with support for time zones.
  */
-class DateTimeTimezoneType extends DateTimeType
+class DateTimeTimezoneType : DateTimeType
 {
     /**
      * @inheritDoc

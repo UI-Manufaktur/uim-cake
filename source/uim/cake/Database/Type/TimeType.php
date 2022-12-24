@@ -23,7 +23,7 @@ use Cake\I18n\I18nDateTimeInterface;
  *
  * Use to convert time instances to strings & back.
  */
-class TimeType extends DateTimeType
+class TimeType : DateTimeType
 {
     /**
      * @inheritDoc

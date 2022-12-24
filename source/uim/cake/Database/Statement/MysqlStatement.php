@@ -23,7 +23,7 @@ use PDO;
  *
  * @internal
  */
-class MysqlStatement extends PDOStatement
+class MysqlStatement : PDOStatement
 {
     use BufferResultsTrait;
 

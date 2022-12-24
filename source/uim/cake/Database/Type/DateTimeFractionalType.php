@@ -17,9 +17,9 @@ declare(strict_types=1);
 namespace Cake\Database\Type;
 
 /**
- * Extends DateTimeType with support for fractional seconds up to microseconds.
+ * : DateTimeType with support for fractional seconds up to microseconds.
  */
-class DateTimeFractionalType extends DateTimeType
+class DateTimeFractionalType : DateTimeType
 {
     /**
      * @inheritDoc

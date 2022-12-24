@@ -25,7 +25,7 @@ use Cake\Log\Log;
  *
  * @internal
  */
-class QueryLogger extends BaseLog
+class QueryLogger : BaseLog
 {
     /**
      * Constructor.

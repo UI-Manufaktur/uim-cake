@@ -25,7 +25,7 @@ use Closure;
  * For security reasons, all params passed are quoted by default unless
  * explicitly told otherwise.
  */
-class AggregateExpression extends FunctionExpression implements WindowInterface
+class AggregateExpression : FunctionExpression implements WindowInterface
 {
     /**
      * @var \Cake\Database\Expression\QueryExpression

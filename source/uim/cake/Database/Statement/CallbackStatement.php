@@ -25,7 +25,7 @@ use Cake\Database\StatementInterface;
  *
  * This is used by CakePHP to eagerly load association data.
  */
-class CallbackStatement extends StatementDecorator
+class CallbackStatement : StatementDecorator
 {
     /**
      * A callback function to be applied to results.

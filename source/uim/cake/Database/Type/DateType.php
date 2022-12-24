@@ -26,7 +26,7 @@ use DateTimeInterface;
 /**
  * Class DateType
  */
-class DateType extends DateTimeType
+class DateType : DateTimeType
 {
     /**
      * @inheritDoc

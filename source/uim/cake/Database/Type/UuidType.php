@@ -22,7 +22,7 @@ use Cake\Utility\Text;
 /**
  * Provides behavior for the UUID type
  */
-class UuidType extends StringType
+class UuidType : StringType
 {
     /**
      * Casts given value from a PHP type to one acceptable by database

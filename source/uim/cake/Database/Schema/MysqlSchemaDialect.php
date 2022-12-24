@@ -24,7 +24,7 @@ use Cake\Database\Exception\DatabaseException;
  *
  * @internal
  */
-class MysqlSchemaDialect extends SchemaDialect
+class MysqlSchemaDialect : SchemaDialect
 {
     /**
      * The driver instance being used.

@@ -25,7 +25,7 @@ use InvalidArgumentException;
  * This expression represents SQL fragments that are used for comparing one tuple
  * to another, one tuple to a set of other tuples or one tuple to an expression
  */
-class TupleComparison extends ComparisonExpression
+class TupleComparison : ComparisonExpression
 {
     /**
      * The type to be used for casting the value to a database representation

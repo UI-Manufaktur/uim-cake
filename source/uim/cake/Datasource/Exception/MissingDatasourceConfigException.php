@@ -19,7 +19,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Exception class to be thrown when a datasource configuration is not found
  */
-class MissingDatasourceConfigException extends CakeException
+class MissingDatasourceConfigException : CakeException
 {
     /**
      * @var string

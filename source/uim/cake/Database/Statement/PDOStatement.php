@@ -25,7 +25,7 @@ use PDOStatement as Statement;
  * Decorator for \PDOStatement class mainly used for converting human readable
  * fetch modes into PDO constants.
  */
-class PDOStatement extends StatementDecorator
+class PDOStatement : StatementDecorator
 {
     /**
      * PDOStatement instance

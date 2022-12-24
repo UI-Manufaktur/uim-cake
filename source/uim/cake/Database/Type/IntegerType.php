@@ -25,7 +25,7 @@ use PDO;
  *
  * Use to convert integer data between PHP and the database types.
  */
-class IntegerType extends BaseType implements BatchCastingInterface
+class IntegerType : BaseType implements BatchCastingInterface
 {
     /**
      * Checks if the value is not a numeric value
