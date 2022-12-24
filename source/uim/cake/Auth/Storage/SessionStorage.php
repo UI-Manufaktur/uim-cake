@@ -68,8 +68,8 @@ class SessionStorage implements StorageInterface
      */
     public this(ServerRequest $request, Response $response, array $config = [])
     {
-        this->_session = $request->getSession();
-        this->setConfig($config);
+        this._session = $request->getSession();
+        this.setConfig($config);
     }
 
     /**
@@ -80,15 +80,15 @@ class SessionStorage implements StorageInterface
      */
     function read()
     {
-        if (this->_user != null) {
-            return this->_user ?: null;
+        if (this._user != null) {
+            return this._user ?: null;
         }
 
         /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
-        this->_user = this->_session->read(this->_config['key']) ?: false;
+        this._user = this._session->read(this._config['key']) ?: false;
 
         /** @psalm-suppress InvalidReturnStatement */
-        return this->_user ?: null;
+        return this._user ?: null;
     }
 
     /**
@@ -101,10 +101,10 @@ class SessionStorage implements StorageInterface
      */
     function write($user): void
     {
-        this->_user = $user;
+        this._user = $user;
 
-        this->_session->renew();
-        this->_session->write(this->_config['key'], $user);
+        this._session->renew();
+        this._session->write(this._config['key'], $user);
     }
 
     /**
@@ -116,10 +116,10 @@ class SessionStorage implements StorageInterface
      */
     function delete(): void
     {
-        this->_user = false;
+        this._user = false;
 
-        this->_session->delete(this->_config['key']);
-        this->_session->renew();
+        this._session->delete(this._config['key']);
+        this._session->renew();
     }
 
     /**
@@ -128,16 +128,16 @@ class SessionStorage implements StorageInterface
     function redirectUrl($url = null)
     {
         if ($url == null) {
-            return this->_session->read(this->_config['redirect']);
+            return this._session->read(this._config['redirect']);
         }
 
         if ($url == false) {
-            this->_session->delete(this->_config['redirect']);
+            this._session->delete(this._config['redirect']);
 
             return null;
         }
 
-        this->_session->write(this->_config['redirect'], $url);
+        this._session->write(this._config['redirect'], $url);
 
         return null;
     }

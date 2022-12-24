@@ -40,7 +40,7 @@ class MemoryStorage implements StorageInterface
      */
     function read()
     {
-        return this->_user;
+        return this._user;
     }
 
     /**
@@ -48,7 +48,7 @@ class MemoryStorage implements StorageInterface
      */
     function write($user): void
     {
-        this->_user = $user;
+        this._user = $user;
     }
 
     /**
@@ -56,7 +56,7 @@ class MemoryStorage implements StorageInterface
      */
     function delete(): void
     {
-        this->_user = null;
+        this._user = null;
     }
 
     /**
@@ -65,16 +65,16 @@ class MemoryStorage implements StorageInterface
     function redirectUrl($url = null)
     {
         if ($url == null) {
-            return this->_redirectUrl;
+            return this._redirectUrl;
         }
 
         if ($url == false) {
-            this->_redirectUrl = null;
+            this._redirectUrl = null;
 
             return null;
         }
 
-        this->_redirectUrl = $url;
+        this._redirectUrl = $url;
 
         return null;
     }

@@ -63,8 +63,8 @@ class ApcuEngine extends CacheEngine
      */
     function set($key, $value, $ttl = null): bool
     {
-        $key = this->_key($key);
-        $duration = this->duration($ttl);
+        $key = this._key($key);
+        $duration = this.duration($ttl);
 
         return apcu_store($key, $value, $duration);
     }
@@ -80,7 +80,7 @@ class ApcuEngine extends CacheEngine
      */
     function get($key, $default = null)
     {
-        $value = apcu_fetch(this->_key($key), $success);
+        $value = apcu_fetch(this._key($key), $success);
         if ($success == false) {
             return $default;
         }
@@ -98,7 +98,7 @@ class ApcuEngine extends CacheEngine
      */
     function increment(string $key, int $offset = 1)
     {
-        $key = this->_key($key);
+        $key = this._key($key);
 
         return apcu_inc($key, $offset);
     }
@@ -113,7 +113,7 @@ class ApcuEngine extends CacheEngine
      */
     function decrement(string $key, int $offset = 1)
     {
-        $key = this->_key($key);
+        $key = this._key($key);
 
         return apcu_dec($key, $offset);
     }
@@ -127,7 +127,7 @@ class ApcuEngine extends CacheEngine
      */
     function delete($key): bool
     {
-        $key = this->_key($key);
+        $key = this._key($key);
 
         return apcu_delete($key);
     }
@@ -143,7 +143,7 @@ class ApcuEngine extends CacheEngine
     {
         if (class_exists(APCUIterator::class, false)) {
             $iterator = new APCUIterator(
-                '/^' . preg_quote(this->_config['prefix'], '/') . '/',
+                '/^' . preg_quote(this._config['prefix'], '/') . '/',
                 APC_ITER_NONE
             );
             apcu_delete($iterator);
@@ -153,7 +153,7 @@ class ApcuEngine extends CacheEngine
 
         $cache = apcu_cache_info(); // Raises warning by itself already
         foreach ($cache['cache_list'] as $key) {
-            if (strpos($key['info'], this->_config['prefix']) == 0) {
+            if (strpos($key['info'], this._config['prefix']) == 0) {
                 apcu_delete($key['info']);
             }
         }
@@ -172,8 +172,8 @@ class ApcuEngine extends CacheEngine
      */
     function add(string $key, $value): bool
     {
-        $key = this->_key($key);
-        $duration = this->_config['duration'];
+        $key = this._key($key);
+        $duration = this._config['duration'];
 
         return apcu_add($key, $value, $duration);
     }
@@ -189,20 +189,20 @@ class ApcuEngine extends CacheEngine
      */
     function groups(): array
     {
-        if (empty(this->_compiledGroupNames)) {
-            foreach (this->_config['groups'] as $group) {
-                this->_compiledGroupNames[] = this->_config['prefix'] . $group;
+        if (empty(this._compiledGroupNames)) {
+            foreach (this._config['groups'] as $group) {
+                this._compiledGroupNames[] = this._config['prefix'] . $group;
             }
         }
 
         $success = false;
-        $groups = apcu_fetch(this->_compiledGroupNames, $success);
-        if ($success && count($groups) != count(this->_config['groups'])) {
-            foreach (this->_compiledGroupNames as $group) {
+        $groups = apcu_fetch(this._compiledGroupNames, $success);
+        if ($success && count($groups) != count(this._config['groups'])) {
+            foreach (this._compiledGroupNames as $group) {
                 if (!isset($groups[$group])) {
                     $value = 1;
                     if (apcu_store($group, $value) == false) {
-                        this->warning(
+                        this.warning(
                             sprintf('Failed to store key "%s" with value "%s" into APCu cache.', $group, $value)
                         );
                     }
@@ -214,7 +214,7 @@ class ApcuEngine extends CacheEngine
 
         $result = [];
         $groups = array_values($groups);
-        foreach (this->_config['groups'] as $i => $group) {
+        foreach (this._config['groups'] as $i => $group) {
             $result[] = $group . $groups[$i];
         }
 
@@ -232,7 +232,7 @@ class ApcuEngine extends CacheEngine
     function clearGroup(string $group): bool
     {
         $success = false;
-        apcu_inc(this->_config['prefix'] . $group, 1, $success);
+        apcu_inc(this._config['prefix'] . $group, 1, $success);
 
         return $success;
     }
