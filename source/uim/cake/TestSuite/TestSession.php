@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * A class to contain and retain the session during integration testing.
