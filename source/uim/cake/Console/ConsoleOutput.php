@@ -164,7 +164,7 @@ class ConsoleOutput
      */
     public this(string $stream = 'php://stdout')
     {
-        this._output = fopen($stream, 'wb');
+        _output = fopen($stream, 'wb');
 
         if (
             (
@@ -176,13 +176,13 @@ class ConsoleOutput
             ) ||
             (
                 function_exists('posix_isatty') &&
-                !posix_isatty(this._output)
+                !posix_isatty(_output)
             ) ||
             (
                 env('NO_COLOR') != null
             )
         ) {
-            this._outputAs = self::PLAIN;
+            _outputAs = self::PLAIN;
         }
     }
 
@@ -200,7 +200,7 @@ class ConsoleOutput
             $message = implode(static::LF, $message);
         }
 
-        return this._write(this.styleText($message . str_repeat(static::LF, $newlines)));
+        return _write(this.styleText($message . str_repeat(static::LF, $newlines)));
     }
 
     /**
@@ -211,10 +211,10 @@ class ConsoleOutput
      */
     function styleText(string $text): string
     {
-        if (this._outputAs == static::RAW) {
+        if (_outputAs == static::RAW) {
             return $text;
         }
-        if (this._outputAs == static::PLAIN) {
+        if (_outputAs == static::PLAIN) {
             $tags = implode('|', array_keys(static::$_styles));
 
             return preg_replace('#</?(?:' . $tags . ')>#', '', $text);
@@ -265,7 +265,7 @@ class ConsoleOutput
      */
     protected function _write(string $message): int
     {
-        return (int)fwrite(this._output, $message);
+        return (int)fwrite(_output, $message);
     }
 
     /**
@@ -326,7 +326,7 @@ class ConsoleOutput
      */
     function getOutputAs(): int
     {
-        return this._outputAs;
+        return _outputAs;
     }
 
     /**
@@ -342,7 +342,7 @@ class ConsoleOutput
             throw new InvalidArgumentException(sprintf('Invalid output type "%s".', $type));
         }
 
-        this._outputAs = $type;
+        _outputAs = $type;
     }
 
     /**
@@ -350,8 +350,8 @@ class ConsoleOutput
      */
     function __destruct()
     {
-        if (is_resource(this._output)) {
-            fclose(this._output);
+        if (is_resource(_output)) {
+            fclose(_output);
         }
     }
 }

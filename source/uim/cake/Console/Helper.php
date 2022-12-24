@@ -51,12 +51,12 @@ abstract class Helper
      */
     public this(ConsoleIo $io, array $config = [])
     {
-        this._io = $io;
+        _io = $io;
         this.setConfig($config);
     }
 
     /**
-     * This method should output content using `this._io`.
+     * This method should output content using `_io`.
      *
      * @param array $args The arguments for the helper.
      * @return void

@@ -50,12 +50,12 @@ class StubConsoleOutput : ConsoleOutput
     function write($message, int $newlines = 1): int
     {
         foreach ((array)$message as $line) {
-            this._out[] = $line;
+            _out[] = $line;
         }
 
         $newlines--;
         while ($newlines > 0) {
-            this._out[] = '';
+            _out[] = '';
             $newlines--;
         }
 
@@ -69,7 +69,7 @@ class StubConsoleOutput : ConsoleOutput
      */
     function messages(): array
     {
-        return this._out;
+        return _out;
     }
 
     /**
@@ -79,6 +79,6 @@ class StubConsoleOutput : ConsoleOutput
      */
     function output(): string
     {
-        return implode("\n", this._out);
+        return implode("\n", _out);
     }
 }

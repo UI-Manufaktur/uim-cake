@@ -65,7 +65,7 @@ class ShellDispatcher
         this.addShortPluginAliases();
 
         if ($bootstrap) {
-            this._initEnvironment();
+            _initEnvironment();
         }
     }
 
@@ -138,7 +138,7 @@ class ShellDispatcher
      */
     protected function _initEnvironment(): void
     {
-        this._bootstrap();
+        _bootstrap();
 
         if (function_exists('ini_set')) {
             ini_set('html_errors', '0');
@@ -177,7 +177,7 @@ class ShellDispatcher
     function dispatch(array $extra = []): int
     {
         try {
-            $result = this._dispatch($extra);
+            $result = _dispatch($extra);
         } catch (StopException $e) {
             return $e->getCode();
         }
@@ -317,10 +317,10 @@ class ShellDispatcher
      */
     function findShell(string $shell): Shell
     {
-        $className = this._shellExists($shell);
+        $className = _shellExists($shell);
         if (!$className) {
-            $shell = this._handleAlias($shell);
-            $className = this._shellExists($shell);
+            $shell = _handleAlias($shell);
+            $className = _shellExists($shell);
         }
 
         if (!$className) {
@@ -329,7 +329,7 @@ class ShellDispatcher
             ]);
         }
 
-        return this._createShell($className, $shell);
+        return _createShell($className, $shell);
     }
 
     /**

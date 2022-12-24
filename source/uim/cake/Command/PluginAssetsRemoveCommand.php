@@ -52,14 +52,14 @@ class PluginAssetsRemoveCommand : Command
         this.args = $args;
 
         $name = $args->getArgument('name');
-        $plugins = this._list($name);
+        $plugins = _list($name);
 
         foreach ($plugins as $plugin => $config) {
             this.io->out();
             this.io->out('For plugin: ' . $plugin);
             this.io->hr();
 
-            this._remove($config);
+            _remove($config);
         }
 
         this.io->out();

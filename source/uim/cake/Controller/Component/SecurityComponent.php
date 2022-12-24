@@ -92,24 +92,24 @@ class SecurityComponent : Component
         /** @var \Cake\Controller\Controller $controller */
         $controller = $event->getSubject();
         $request = $controller->getRequest();
-        this._action = $request->getParam('action');
+        _action = $request->getParam('action');
         $hasData = ($request->getData() || $request->is(['put', 'post', 'delete', 'patch']));
         try {
-            this._secureRequired($controller);
+            _secureRequired($controller);
 
-            if (this._action == this._config['blackHoleCallback']) {
+            if (_action == _config['blackHoleCallback']) {
                 throw new AuthSecurityException(sprintf(
                     'Action %s is defined as the blackhole callback.',
-                    this._action
+                    _action
                 ));
             }
 
             if (
-                !in_array(this._action, (array)this._config['unlockedActions'], true) &&
+                !in_array(_action, (array)_config['unlockedActions'], true) &&
                 $hasData &&
-                this._config['validatePost']
+                _config['validatePost']
             ) {
-                this._validatePost($controller);
+                _validatePost($controller);
             }
         } catch (SecurityException $se) {
             return this.blackHole($controller, $se->getType(), $se);
@@ -162,11 +162,11 @@ class SecurityComponent : Component
      */
     function blackHole(Controller $controller, string $error = '', ?SecurityException $exception = null)
     {
-        if (!this._config['blackHoleCallback']) {
-            this._throwException($exception);
+        if (!_config['blackHoleCallback']) {
+            _throwException($exception);
         }
 
-        return this._callback($controller, this._config['blackHoleCallback'], [$error, $exception]);
+        return _callback($controller, _config['blackHoleCallback'], [$error, $exception]);
     }
 
     /**
@@ -198,16 +198,16 @@ class SecurityComponent : Component
     protected function _secureRequired(Controller $controller): void
     {
         if (
-            empty(this._config['requireSecure']) ||
-            !is_array(this._config['requireSecure'])
+            empty(_config['requireSecure']) ||
+            !is_array(_config['requireSecure'])
         ) {
             return;
         }
 
-        $requireSecure = this._config['requireSecure'];
+        $requireSecure = _config['requireSecure'];
         if (
             ($requireSecure[0] == '*' ||
-                in_array(this._action, $requireSecure, true)
+                in_array(_action, $requireSecure, true)
             ) &&
             !$controller->getRequest()->is('ssl')
         ) {
@@ -226,8 +226,8 @@ class SecurityComponent : Component
      */
     protected function _validatePost(Controller $controller): void
     {
-        $token = this._validToken($controller);
-        $hashParts = this._hashParts($controller);
+        $token = _validToken($controller);
+        $hashParts = _hashParts($controller);
         $check = hash_hmac('sha1', implode('', $hashParts), Security::getSalt());
 
         if (hash_equals($check, $token)) {
@@ -236,7 +236,7 @@ class SecurityComponent : Component
 
         $msg = static::DEFAULT_EXCEPTION_MESSAGE;
         if (Configure::read('debug')) {
-            $msg = this._debugPostTokenNotMatching($controller, $hashParts);
+            $msg = _debugPostTokenNotMatching($controller, $hashParts);
         }
 
         throw new AuthSecurityException($msg);
@@ -296,8 +296,8 @@ class SecurityComponent : Component
         $session->start();
 
         $data = (array)$request->getData();
-        $fieldList = this._fieldsList($data);
-        $unlocked = this._sortedUnlocked($data);
+        $fieldList = _fieldsList($data);
+        $unlocked = _sortedUnlocked($data);
 
         return [
             Router::url($request->getRequestTarget()),
@@ -317,7 +317,7 @@ class SecurityComponent : Component
     {
         $locked = '';
         $token = urldecode($check['_Token']['fields']);
-        $unlocked = this._unlocked($check);
+        $unlocked = _unlocked($check);
 
         if (strpos($token, ':')) {
             [, $locked] = explode(':', $token, 2);
@@ -346,7 +346,7 @@ class SecurityComponent : Component
 
         $unlockedFields = array_unique(
             array_merge(
-                (array)this._config['unlockedFields'],
+                (array)_config['unlockedFields'],
                 $unlocked
             )
         );
@@ -398,7 +398,7 @@ class SecurityComponent : Component
      */
     protected function _sortedUnlocked(array $data): string
     {
-        $unlocked = this._unlocked($data);
+        $unlocked = _unlocked($data);
         $unlocked = explode('|', $unlocked);
         sort($unlocked, SORT_STRING);
 
@@ -429,7 +429,7 @@ class SecurityComponent : Component
         if ($dataFields) {
             $dataFields = unserialize($dataFields);
         }
-        $fieldsMessages = this._debugCheckFields(
+        $fieldsMessages = _debugCheckFields(
             $dataFields,
             $expectedFields,
             'Unexpected field \'%s\' in POST data',
@@ -441,7 +441,7 @@ class SecurityComponent : Component
         if ($dataUnlockedFields) {
             $dataUnlockedFields = explode('|', $dataUnlockedFields);
         }
-        $unlockFieldsMessages = this._debugCheckFields(
+        $unlockFieldsMessages = _debugCheckFields(
             (array)$dataUnlockedFields,
             $expectedUnlockedFields,
             'Unexpected unlocked field \'%s\' in POST data',
@@ -472,8 +472,8 @@ class SecurityComponent : Component
         string $stringKeyMessage = '',
         string $missingMessage = ''
     ): array {
-        $messages = this._matchExistingFields($dataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
-        $expectedFieldsMessage = this._debugExpectedFields($expectedFields, $missingMessage);
+        $messages = _matchExistingFields($dataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
+        $expectedFieldsMessage = _debugExpectedFields($expectedFields, $missingMessage);
         if ($expectedFieldsMessage != null) {
             $messages[] = $expectedFieldsMessage;
         }
@@ -491,7 +491,7 @@ class SecurityComponent : Component
     function generateToken(ServerRequest $request): ServerRequest
     {
         $token = [
-            'unlockedFields' => this._config['unlockedFields'],
+            'unlockedFields' => _config['unlockedFields'],
         ];
 
         return $request->withAttribute('formTokenData', [

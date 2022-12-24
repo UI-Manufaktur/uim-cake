@@ -217,7 +217,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         if (this.modelClass == null) {
             $plugin = this.request->getParam('plugin');
             $modelClass = ($plugin ? $plugin . '.' : '') . this.name;
-            this._setModelClass($modelClass);
+            _setModelClass($modelClass);
 
             this.defaultTable = $modelClass;
         }
@@ -260,7 +260,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     /**
      * Get the component registry for this controller.
      *
-     * If called with the first parameter, it will be set as the controller this._components property
+     * If called with the first parameter, it will be set as the controller _components property
      *
      * @param \Cake\Controller\ComponentRegistry|null $components Component registry.
      * @return \Cake\Controller\ComponentRegistry
@@ -270,14 +270,14 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         if ($components != null) {
             $components->setController(this);
 
-            return this._components = $components;
+            return _components = $components;
         }
 
-        if (this._components == null) {
-            this._components = new ComponentRegistry(this);
+        if (_components == null) {
+            _components = new ComponentRegistry(this);
         }
 
-        return this._components;
+        return _components;
     }
 
     /**
@@ -743,7 +743,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     {
         $builder = this.viewBuilder();
         if (!$builder->getTemplatePath()) {
-            $builder->setTemplatePath(this._templatePath());
+            $builder->setTemplatePath(_templatePath());
         }
 
         this.autoRender = false;

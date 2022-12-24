@@ -72,12 +72,12 @@ trait InstanceConfigTrait
      */
     function setConfig($key, $value = null, $merge = true)
     {
-        if (!this._configInitialized) {
-            this._config = this._defaultConfig;
-            this._configInitialized = true;
+        if (!_configInitialized) {
+            _config = _defaultConfig;
+            _configInitialized = true;
         }
 
-        this._configWrite($key, $value, $merge);
+        _configWrite($key, $value, $merge);
 
         return this;
     }
@@ -117,12 +117,12 @@ trait InstanceConfigTrait
      */
     function getConfig(?string $key = null, $default = null)
     {
-        if (!this._configInitialized) {
-            this._config = this._defaultConfig;
-            this._configInitialized = true;
+        if (!_configInitialized) {
+            _config = _defaultConfig;
+            _configInitialized = true;
         }
 
-        $return = this._configRead($key);
+        $return = _configRead($key);
 
         return $return ?? $default;
     }
@@ -174,12 +174,12 @@ trait InstanceConfigTrait
      */
     function configShallow($key, $value = null)
     {
-        if (!this._configInitialized) {
-            this._config = this._defaultConfig;
-            this._configInitialized = true;
+        if (!_configInitialized) {
+            _config = _defaultConfig;
+            _configInitialized = true;
         }
 
-        this._configWrite($key, $value, 'shallow');
+        _configWrite($key, $value, 'shallow');
 
         return this;
     }
@@ -193,14 +193,14 @@ trait InstanceConfigTrait
     protected function _configRead(?string $key)
     {
         if ($key == null) {
-            return this._config;
+            return _config;
         }
 
         if (strpos($key, '.') == false) {
-            return this._config[$key] ?? null;
+            return _config[$key] ?? null;
         }
 
-        $return = this._config;
+        $return = _config;
 
         foreach (explode('.', $key) as $k) {
             if (!is_array($return) || !isset($return[$k])) {
@@ -227,7 +227,7 @@ trait InstanceConfigTrait
     protected function _configWrite($key, $value, $merge = false): void
     {
         if (is_string($key) && $value == null) {
-            this._configDelete($key);
+            _configDelete($key);
 
             return;
         }
@@ -235,9 +235,9 @@ trait InstanceConfigTrait
         if ($merge) {
             $update = is_array($key) ? $key : [$key => $value];
             if ($merge == 'shallow') {
-                this._config = array_merge(this._config, Hash::expand($update));
+                _config = array_merge(_config, Hash::expand($update));
             } else {
-                this._config = Hash::merge(this._config, Hash::expand($update));
+                _config = Hash::merge(_config, Hash::expand($update));
             }
 
             return;
@@ -245,19 +245,19 @@ trait InstanceConfigTrait
 
         if (is_array($key)) {
             foreach ($key as $k => $val) {
-                this._configWrite($k, $val);
+                _configWrite($k, $val);
             }
 
             return;
         }
 
         if (strpos($key, '.') == false) {
-            this._config[$key] = $value;
+            _config[$key] = $value;
 
             return;
         }
 
-        $update = &this._config;
+        $update = &_config;
         $stack = explode('.', $key);
 
         foreach ($stack as $k) {
@@ -283,12 +283,12 @@ trait InstanceConfigTrait
     protected function _configDelete(string $key): void
     {
         if (strpos($key, '.') == false) {
-            unset(this._config[$key]);
+            unset(_config[$key]);
 
             return;
         }
 
-        $update = &this._config;
+        $update = &_config;
         $stack = explode('.', $key);
         $length = count($stack);
 

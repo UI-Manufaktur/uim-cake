@@ -55,7 +55,7 @@ class PaginatorComponent : Component
             'PaginatorComponent is deprecated, use a Cake\Datasource\Pagination\NumericPaginator instance directly.'
         );
 
-        if (!empty(this._defaultConfig)) {
+        if (!empty(_defaultConfig)) {
             throw new UnexpectedValueException('Default configuration must be set using a custom Paginator class.');
         }
 
@@ -71,10 +71,10 @@ class PaginatorComponent : Component
             if (!$config['className'] instanceof NumericPaginator) {
                 throw new InvalidArgumentException('Paginator must be an instance of ' . NumericPaginator::class);
             }
-            this._paginator = $config['className'];
+            _paginator = $config['className'];
             unset($config['className']);
         } else {
-            this._paginator = new NumericPaginator();
+            _paginator = new NumericPaginator();
         }
 
         parent::__construct($registry, $config);
@@ -190,18 +190,18 @@ class PaginatorComponent : Component
      */
     function paginate(object $object, array $settings = []): ResultSetInterface
     {
-        $request = this._registry->getController()->getRequest();
+        $request = _registry->getController()->getRequest();
 
         try {
-            $results = this._paginator->paginate(
+            $results = _paginator->paginate(
                 $object,
                 $request->getQueryParams(),
                 $settings
             );
 
-            this._setPagingParams();
+            _setPagingParams();
         } catch (PageOutOfBoundsException $e) {
-            this._setPagingParams();
+            _setPagingParams();
 
             throw new NotFoundException(null, null, $e);
         }
@@ -227,11 +227,11 @@ class PaginatorComponent : Component
      */
     function mergeOptions(string $alias, array $settings): array
     {
-        $request = this._registry->getController()->getRequest();
+        $request = _registry->getController()->getRequest();
 
-        return this._paginator->mergeOptions(
+        return _paginator->mergeOptions(
             $request->getQueryParams(),
-            this._paginator->getDefaults($alias, $settings)
+            _paginator->getDefaults($alias, $settings)
         );
     }
 
@@ -243,7 +243,7 @@ class PaginatorComponent : Component
      */
     function setPaginator(NumericPaginator $paginator)
     {
-        this._paginator = $paginator;
+        _paginator = $paginator;
 
         return this;
     }
@@ -255,7 +255,7 @@ class PaginatorComponent : Component
      */
     function getPaginator(): NumericPaginator
     {
-        return this._paginator;
+        return _paginator;
     }
 
     /**
@@ -267,7 +267,7 @@ class PaginatorComponent : Component
     {
         $controller = this.getController();
         $request = $controller->getRequest();
-        $paging = this._paginator->getPagingParams() + (array)$request->getAttribute('paging', []);
+        $paging = _paginator->getPagingParams() + (array)$request->getAttribute('paging', []);
 
         $controller->setRequest($request->withAttribute('paging', $paging));
     }
@@ -282,7 +282,7 @@ class PaginatorComponent : Component
      */
     function setConfig($key, $value = null, $merge = true)
     {
-        this._paginator->setConfig($key, $value, $merge);
+        _paginator->setConfig($key, $value, $merge);
 
         return this;
     }
@@ -296,7 +296,7 @@ class PaginatorComponent : Component
      */
     function getConfig(?string $key = null, $default = null)
     {
-        return this._paginator->getConfig($key, $default);
+        return _paginator->getConfig($key, $default);
     }
 
     /**
@@ -308,7 +308,7 @@ class PaginatorComponent : Component
      */
     function configShallow($key, $value = null)
     {
-        this._paginator->configShallow($key, null);
+        _paginator->configShallow($key, null);
 
         return this;
     }
@@ -322,6 +322,6 @@ class PaginatorComponent : Component
      */
     function __call(string $method, array $args)
     {
-        return this._paginator->{$method}(...$args);
+        return _paginator->{$method}(...$args);
     }
 }

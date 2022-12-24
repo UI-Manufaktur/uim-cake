@@ -59,7 +59,7 @@ class JsonConfig : ConfigEngineInterface
         if ($path == null) {
             $path = CONFIG;
         }
-        this._path = $path;
+        _path = $path;
     }
 
     /**
@@ -77,7 +77,7 @@ class JsonConfig : ConfigEngineInterface
      */
     function read(string $key): array
     {
-        $file = this._getFilePath($key, true);
+        $file = _getFilePath($key, true);
 
         $values = json_decode(file_get_contents($file), true);
         if (json_last_error() != JSON_ERROR_NONE) {
@@ -108,7 +108,7 @@ class JsonConfig : ConfigEngineInterface
      */
     function dump(string $key, array $data): bool
     {
-        $filename = this._getFilePath($key);
+        $filename = _getFilePath($key);
 
         return file_put_contents($filename, json_encode($data, JSON_PRETTY_PRINT)) > 0;
     }

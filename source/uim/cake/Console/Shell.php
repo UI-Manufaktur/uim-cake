@@ -189,13 +189,13 @@ class Shell
             [, $class] = namespaceSplit(static::class);
             this.name = str_replace(['Shell', 'Task'], '', $class);
         }
-        this._io = $io ?: new ConsoleIo();
-        this._tableLocator = $locator;
+        _io = $io ?: new ConsoleIo();
+        _tableLocator = $locator;
 
         this.modelFactory('Table', [this.getTableLocator(), 'get']);
         this.Tasks = new TaskRegistry(this);
 
-        this._mergeVars(
+        _mergeVars(
             ['tasks'],
             ['associative' => ['tasks']]
         );
@@ -225,7 +225,7 @@ class Shell
      */
     function getIo(): ConsoleIo
     {
-        return this._io;
+        return _io;
     }
 
     /**
@@ -236,7 +236,7 @@ class Shell
      */
     function setIo(ConsoleIo $io): void
     {
-        this._io = $io;
+        _io = $io;
     }
 
     /**
@@ -265,7 +265,7 @@ class Shell
     function startup(): void
     {
         if (!this.param('requested')) {
-            this._welcome();
+            _welcome();
         }
     }
 
@@ -288,10 +288,10 @@ class Shell
         if (this.tasks == true || empty(this.tasks)) {
             return true;
         }
-        this._taskMap = this.Tasks->normalizeArray(this.tasks);
-        this.taskNames = array_merge(this.taskNames, array_keys(this._taskMap));
+        _taskMap = this.Tasks->normalizeArray(this.tasks);
+        this.taskNames = array_merge(this.taskNames, array_keys(_taskMap));
 
-        this._validateTasks();
+        _validateTasks();
 
         return true;
     }
@@ -304,7 +304,7 @@ class Shell
      */
     protected function _validateTasks(): void
     {
-        foreach (this._taskMap as $taskName => $task) {
+        foreach (_taskMap as $taskName => $task) {
             $class = App::className($task['class'], 'Shell/Task', 'Task');
             if ($class == null) {
                 throw new RuntimeException(sprintf(
@@ -324,7 +324,7 @@ class Shell
      */
     function hasTask(string $task): bool
     {
-        return isset(this._taskMap[Inflector::camelize($task)]);
+        return isset(_taskMap[Inflector::camelize($task)]);
     }
 
     /**
@@ -469,7 +469,7 @@ class Shell
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         this.OptionParser = this.getOptionParser();
         try {
-            [this.params, this.args] = this.OptionParser->parse($argv, this._io);
+            [this.params, this.args] = this.OptionParser->parse($argv, _io);
         } catch (ConsoleException $e) {
             this.err('Error: ' . $e->getMessage());
 
@@ -477,10 +477,10 @@ class Shell
         }
 
         this.params = array_merge(this.params, $extra);
-        this._setOutputLevel();
+        _setOutputLevel();
         this.command = $command;
         if ($command && !empty(this.params['help'])) {
-            return this._displayHelp($command);
+            return _displayHelp($command);
         }
 
         $subcommands = this.OptionParser->subcommands();
@@ -516,7 +516,7 @@ class Shell
 
         this.err('No subcommand provided. Choose one of the available subcommands.', 2);
         try {
-            this._io->err(this.OptionParser->help($command));
+            _io->err(this.OptionParser->help($command));
         } catch (ConsoleException $e) {
             this.err('Error: ' . $e->getMessage());
         }
@@ -534,14 +534,14 @@ class Shell
      */
     protected function _setOutputLevel(): void
     {
-        this._io->setLoggers(ConsoleIo::NORMAL);
+        _io->setLoggers(ConsoleIo::NORMAL);
         if (!empty(this.params['quiet'])) {
-            this._io->level(ConsoleIo::QUIET);
-            this._io->setLoggers(ConsoleIo::QUIET);
+            _io->level(ConsoleIo::QUIET);
+            _io->setLoggers(ConsoleIo::QUIET);
         }
         if (!empty(this.params['verbose'])) {
-            this._io->level(ConsoleIo::VERBOSE);
-            this._io->setLoggers(ConsoleIo::VERBOSE);
+            _io->level(ConsoleIo::VERBOSE);
+            _io->setLoggers(ConsoleIo::VERBOSE);
         }
     }
 
@@ -556,9 +556,9 @@ class Shell
         $format = 'text';
         if (!empty(this.args[0]) && this.args[0] == 'xml') {
             $format = 'xml';
-            this._io->setOutputAs(ConsoleOutput::RAW);
+            _io->setOutputAs(ConsoleOutput::RAW);
         } else {
-            this._welcome();
+            _welcome();
         }
 
         $subcommands = this.OptionParser->subcommands();
@@ -595,7 +595,7 @@ class Shell
     function __get(string $name)
     {
         if (empty(this.{$name}) && in_array($name, this.taskNames, true)) {
-            $properties = this._taskMap[$name];
+            $properties = _taskMap[$name];
             this.{$name} = this.Tasks->load($properties['class'], $properties['config']);
             this.{$name}->args = &this.args;
             this.{$name}->params = &this.params;
@@ -632,10 +632,10 @@ class Shell
             return $default;
         }
         if ($options) {
-            return this._io->askChoice($prompt, $options, $default);
+            return _io->askChoice($prompt, $options, $default);
         }
 
-        return this._io->ask($prompt, $default);
+        return _io->ask($prompt, $default);
     }
 
     /**
@@ -668,7 +668,7 @@ class Shell
      */
     function verbose($message, int $newlines = 1): ?int
     {
-        return this._io->verbose($message, $newlines);
+        return _io->verbose($message, $newlines);
     }
 
     /**
@@ -680,7 +680,7 @@ class Shell
      */
     function quiet($message, int $newlines = 1): ?int
     {
-        return this._io->quiet($message, $newlines);
+        return _io->quiet($message, $newlines);
     }
 
     /**
@@ -702,7 +702,7 @@ class Shell
      */
     function out($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
     {
-        return this._io->out($message, $newlines, $level);
+        return _io->out($message, $newlines, $level);
     }
 
     /**
@@ -715,7 +715,7 @@ class Shell
      */
     function err($message, int $newlines = 1): int
     {
-        return this._io->error($message, $newlines);
+        return _io->error($message, $newlines);
     }
 
     /**
@@ -729,7 +729,7 @@ class Shell
      */
     function info($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
     {
-        return this._io->info($message, $newlines, $level);
+        return _io->info($message, $newlines, $level);
     }
 
     /**
@@ -742,7 +742,7 @@ class Shell
      */
     function warn($message, int $newlines = 1): int
     {
-        return this._io->warning($message, $newlines);
+        return _io->warning($message, $newlines);
     }
 
     /**
@@ -756,7 +756,7 @@ class Shell
      */
     function success($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
     {
-        return this._io->success($message, $newlines, $level);
+        return _io->success($message, $newlines, $level);
     }
 
     /**
@@ -768,7 +768,7 @@ class Shell
      */
     function nl(int $multiplier = 1): string
     {
-        return this._io->nl($multiplier);
+        return _io->nl($multiplier);
     }
 
     /**
@@ -781,7 +781,7 @@ class Shell
      */
     function hr(int $newlines = 0, int $width = 63): void
     {
-        this._io->hr($newlines, $width);
+        _io->hr($newlines, $width);
     }
 
     /**
@@ -797,7 +797,7 @@ class Shell
      */
     function abort(string $message, int $exitCode = self::CODE_ERROR): void
     {
-        this._io->err('<error>' . $message . '</error>');
+        _io->err('<error>' . $message . '</error>');
         throw new StopException($message, $exitCode);
     }
 
@@ -832,22 +832,22 @@ class Shell
     {
         $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
 
-        this._io->out();
+        _io->out();
 
         $fileExists = is_file($path);
         if ($fileExists && empty(this.params['force']) && !this.interactive) {
-            this._io->out('<warning>File exists, skipping</warning>.');
+            _io->out('<warning>File exists, skipping</warning>.');
 
             return false;
         }
 
         if ($fileExists && this.interactive && empty(this.params['force'])) {
-            this._io->out(sprintf('<warning>File `%s` exists</warning>', $path));
-            $key = this._io->askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
+            _io->out(sprintf('<warning>File `%s` exists</warning>', $path));
+            $key = _io->askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
 
             if (strtolower($key) == 'q') {
-                this._io->out('<error>Quitting</error>.', 2);
-                this._stop();
+                _io->out('<error>Quitting</error>.', 2);
+                _stop();
 
                 return false;
             }
@@ -856,7 +856,7 @@ class Shell
                 $key = 'y';
             }
             if (strtolower($key) != 'y') {
-                this._io->out(sprintf('Skip `%s`', $path), 2);
+                _io->out(sprintf('Skip `%s`', $path), 2);
 
                 return false;
             }
@@ -868,9 +868,9 @@ class Shell
             $fs = new Filesystem();
             $fs->dumpFile($path, $contents);
 
-            this._io->out(sprintf('<success>Wrote</success> `%s`', $path));
+            _io->out(sprintf('<success>Wrote</success> `%s`', $path));
         } catch (CakeException $e) {
-            this._io->err(sprintf('<error>Could not write to `%s`</error>.', $path), 2);
+            _io->err(sprintf('<error>Could not write to `%s`</error>.', $path), 2);
 
             return false;
         }
@@ -906,7 +906,7 @@ class Shell
      */
     function helper(string $name, array $config = []): Helper
     {
-        return this._io->helper($name, $config);
+        return _io->helper($name, $config);
     }
 
     /**

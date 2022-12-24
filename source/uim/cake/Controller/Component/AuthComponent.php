@@ -232,7 +232,7 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function initialize(array $config): void
     {
-        $controller = this._registry->getController();
+        $controller = _registry->getController();
         this.setEventManager($controller->getEventManager());
     }
 
@@ -260,7 +260,7 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function authCheck(EventInterface $event): ?Response
     {
-        if (this._config['checkAuthIn'] != $event->getName()) {
+        if (_config['checkAuthIn'] != $event->getName()) {
             return null;
         }
 
@@ -272,19 +272,19 @@ class AuthComponent : Component : EventDispatcherInterface
             return null;
         }
 
-        this._setDefaults();
+        _setDefaults();
 
-        if (this._isAllowed($controller)) {
+        if (_isAllowed($controller)) {
             return null;
         }
 
-        $isLoginAction = this._isLoginAction($controller);
+        $isLoginAction = _isLoginAction($controller);
 
-        if (!this._getUser()) {
+        if (!_getUser()) {
             if ($isLoginAction) {
                 return null;
             }
-            $result = this._unauthenticated($controller);
+            $result = _unauthenticated($controller);
             if ($result instanceof Response) {
                 $event->stopPropagation();
             }
@@ -294,7 +294,7 @@ class AuthComponent : Component : EventDispatcherInterface
 
         if (
             $isLoginAction ||
-            empty(this._config['authorize']) ||
+            empty(_config['authorize']) ||
             this.isAuthorized(this.user())
         ) {
             return null;
@@ -302,7 +302,7 @@ class AuthComponent : Component : EventDispatcherInterface
 
         $event->stopPropagation();
 
-        return this._unauthorized($controller);
+        return _unauthorized($controller);
     }
 
     /**
@@ -346,11 +346,11 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     protected function _unauthenticated(Controller $controller): ?Response
     {
-        if (empty(this._authenticateObjects)) {
+        if (empty(_authenticateObjects)) {
             this.constructAuthenticate();
         }
         $response = $controller->getResponse();
-        $auth = end(this._authenticateObjects);
+        $auth = end(_authenticateObjects);
         if ($auth == false) {
             throw new CakeException('At least one authenticate object must be available.');
         }
@@ -360,9 +360,9 @@ class AuthComponent : Component : EventDispatcherInterface
         }
 
         if (!$controller->getRequest()->is('ajax')) {
-            this.flash(this._config['authError']);
+            this.flash(_config['authError']);
 
-            return $controller->redirect(this._loginActionRedirectUrl());
+            return $controller->redirect(_loginActionRedirectUrl());
         }
 
         return $response->withStatus(403);
@@ -377,9 +377,9 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     protected function _loginActionRedirectUrl()
     {
-        $urlToRedirectBackTo = this._getUrlToRedirectBackTo();
+        $urlToRedirectBackTo = _getUrlToRedirectBackTo();
 
-        $loginAction = this._config['loginAction'];
+        $loginAction = _config['loginAction'];
         if ($urlToRedirectBackTo == '/') {
             return $loginAction;
         }
@@ -404,7 +404,7 @@ class AuthComponent : Component : EventDispatcherInterface
     {
         $uri = $controller->getRequest()->getUri();
         $url = Router::normalize($uri->getPath());
-        $loginAction = Router::normalize(this._config['loginAction']);
+        $loginAction = Router::normalize(_config['loginAction']);
 
         return $loginAction == $url;
     }
@@ -418,22 +418,22 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     protected function _unauthorized(Controller $controller): ?Response
     {
-        if (this._config['unauthorizedRedirect'] == false) {
-            throw new ForbiddenException(this._config['authError']);
+        if (_config['unauthorizedRedirect'] == false) {
+            throw new ForbiddenException(_config['authError']);
         }
 
-        this.flash(this._config['authError']);
-        if (this._config['unauthorizedRedirect'] == true) {
+        this.flash(_config['authError']);
+        if (_config['unauthorizedRedirect'] == true) {
             $default = '/';
-            if (!empty(this._config['loginRedirect'])) {
-                $default = this._config['loginRedirect'];
+            if (!empty(_config['loginRedirect'])) {
+                $default = _config['loginRedirect'];
             }
             if (is_array($default)) {
                 $default['_base'] = false;
             }
             $url = $controller->referer($default, true);
         } else {
-            $url = this._config['unauthorizedRedirect'];
+            $url = _config['unauthorizedRedirect'];
         }
 
         return $controller->redirect($url);
@@ -458,7 +458,7 @@ class AuthComponent : Component : EventDispatcherInterface
                 'action' => 'login',
                 'plugin' => null,
             ],
-            'logoutRedirect' => this._config['loginAction'],
+            'logoutRedirect' => _config['loginAction'],
             'authError' => __d('cake', 'You are not authorized to access that location.'),
         ];
 
@@ -495,12 +495,12 @@ class AuthComponent : Component : EventDispatcherInterface
         if (empty($request)) {
             $request = this.getController()->getRequest();
         }
-        if (empty(this._authorizeObjects)) {
+        if (empty(_authorizeObjects)) {
             this.constructAuthorize();
         }
-        foreach (this._authorizeObjects as $authorizer) {
+        foreach (_authorizeObjects as $authorizer) {
             if ($authorizer->authorize($user, $request) == true) {
-                this._authorizationProvider = $authorizer;
+                _authorizationProvider = $authorizer;
 
                 return true;
             }
@@ -517,11 +517,11 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function constructAuthorize(): ?array
     {
-        if (empty(this._config['authorize'])) {
+        if (empty(_config['authorize'])) {
             return null;
         }
-        this._authorizeObjects = [];
-        $authorize = Hash::normalize((array)this._config['authorize']);
+        _authorizeObjects = [];
+        $authorize = Hash::normalize((array)_config['authorize']);
         $global = [];
         if (isset($authorize[AuthComponent::ALL])) {
             $global = $authorize[AuthComponent::ALL];
@@ -542,10 +542,10 @@ class AuthComponent : Component : EventDispatcherInterface
                 throw new CakeException('Authorization objects must implement an authorize() method.');
             }
             $config = (array)$config + $global;
-            this._authorizeObjects[$alias] = new $className(this._registry, $config);
+            _authorizeObjects[$alias] = new $className(_registry, $config);
         }
 
-        return this._authorizeObjects;
+        return _authorizeObjects;
     }
 
     /**
@@ -556,11 +556,11 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function getAuthorize(string $alias): ?BaseAuthorize
     {
-        if (empty(this._authorizeObjects)) {
+        if (empty(_authorizeObjects)) {
             this.constructAuthorize();
         }
 
-        return this._authorizeObjects[$alias] ?? null;
+        return _authorizeObjects[$alias] ?? null;
     }
 
     /**
@@ -585,7 +585,7 @@ class AuthComponent : Component : EventDispatcherInterface
     function allow($actions = null): void
     {
         if ($actions == null) {
-            $controller = this._registry->getController();
+            $controller = _registry->getController();
             this.allowedActions = get_class_methods($controller);
 
             return;
@@ -655,15 +655,15 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function logout(): string
     {
-        this._setDefaults();
-        if (empty(this._authenticateObjects)) {
+        _setDefaults();
+        if (empty(_authenticateObjects)) {
             this.constructAuthenticate();
         }
         $user = (array)this.user();
         this.dispatchEvent('Auth.logout', [$user]);
         this.storage()->delete();
 
-        return Router::normalize(this._config['logoutRedirect']);
+        return Router::normalize(_config['logoutRedirect']);
     }
 
     /**
@@ -703,13 +703,13 @@ class AuthComponent : Component : EventDispatcherInterface
             return true;
         }
 
-        if (empty(this._authenticateObjects)) {
+        if (empty(_authenticateObjects)) {
             this.constructAuthenticate();
         }
-        foreach (this._authenticateObjects as $auth) {
+        foreach (_authenticateObjects as $auth) {
             $result = $auth->getUser(this.getController()->getRequest());
             if (!empty($result) && is_array($result)) {
-                this._authenticationProvider = $auth;
+                _authenticationProvider = $auth;
                 $event = this.dispatchEvent('Auth.afterIdentify', [$result, $auth]);
                 if ($event->getResult() != null) {
                     $result = $event->getResult();
@@ -752,13 +752,13 @@ class AuthComponent : Component : EventDispatcherInterface
             $redirectUrl = $url;
         } elseif ($redirectUrl) {
             if (
-                this._config['loginAction']
-                && Router::normalize($redirectUrl) == Router::normalize(this._config['loginAction'])
+                _config['loginAction']
+                && Router::normalize($redirectUrl) == Router::normalize(_config['loginAction'])
             ) {
-                $redirectUrl = this._config['loginRedirect'];
+                $redirectUrl = _config['loginRedirect'];
             }
-        } elseif (this._config['loginRedirect']) {
-            $redirectUrl = this._config['loginRedirect'];
+        } elseif (_config['loginRedirect']) {
+            $redirectUrl = _config['loginRedirect'];
         } else {
             $redirectUrl = '/';
         }
@@ -780,18 +780,18 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function identify()
     {
-        this._setDefaults();
+        _setDefaults();
 
-        if (empty(this._authenticateObjects)) {
+        if (empty(_authenticateObjects)) {
             this.constructAuthenticate();
         }
-        foreach (this._authenticateObjects as $auth) {
+        foreach (_authenticateObjects as $auth) {
             $result = $auth->authenticate(
                 this.getController()->getRequest(),
                 this.getController()->getResponse()
             );
             if (!empty($result)) {
-                this._authenticationProvider = $auth;
+                _authenticationProvider = $auth;
                 $event = this.dispatchEvent('Auth.afterIdentify', [$result, $auth]);
                 if ($event->getResult() != null) {
                     return $event->getResult();
@@ -812,11 +812,11 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function constructAuthenticate(): ?array
     {
-        if (empty(this._config['authenticate'])) {
+        if (empty(_config['authenticate'])) {
             return null;
         }
-        this._authenticateObjects = [];
-        $authenticate = Hash::normalize((array)this._config['authenticate']);
+        _authenticateObjects = [];
+        $authenticate = Hash::normalize((array)_config['authenticate']);
         $global = [];
         if (isset($authenticate[AuthComponent::ALL])) {
             $global = $authenticate[AuthComponent::ALL];
@@ -837,11 +837,11 @@ class AuthComponent : Component : EventDispatcherInterface
                 throw new CakeException('Authentication objects must implement an authenticate() method.');
             }
             $config = array_merge($global, (array)$config);
-            this._authenticateObjects[$alias] = new $className(this._registry, $config);
-            this.getEventManager()->on(this._authenticateObjects[$alias]);
+            _authenticateObjects[$alias] = new $className(_registry, $config);
+            this.getEventManager()->on(_authenticateObjects[$alias]);
         }
 
-        return this._authenticateObjects;
+        return _authenticateObjects;
     }
 
     /**
@@ -854,16 +854,16 @@ class AuthComponent : Component : EventDispatcherInterface
     function storage(?StorageInterface $storage = null): ?StorageInterface
     {
         if ($storage != null) {
-            this._storage = $storage;
+            _storage = $storage;
 
             return null;
         }
 
-        if (this._storage) {
-            return this._storage;
+        if (_storage) {
+            return _storage;
         }
 
-        $config = this._config['storage'];
+        $config = _config['storage'];
         if (is_string($config)) {
             $class = $config;
             $config = [];
@@ -880,7 +880,7 @@ class AuthComponent : Component : EventDispatcherInterface
         /** @var \Cake\Auth\Storage\StorageInterface $storage */
         $storage = new $className($request, $response, $config);
 
-        return this._storage = $storage;
+        return _storage = $storage;
     }
 
     /**
@@ -908,7 +908,7 @@ class AuthComponent : Component : EventDispatcherInterface
     function __set(string $name, $value): void
     {
         if ($name == 'sessionKey') {
-            this._storage = null;
+            _storage = null;
 
             if ($value == false) {
                 this.setConfig('storage', 'Memory');
@@ -933,11 +933,11 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function getAuthenticate(string $alias): ?BaseAuthenticate
     {
-        if (empty(this._authenticateObjects)) {
+        if (empty(_authenticateObjects)) {
             this.constructAuthenticate();
         }
 
-        return this._authenticateObjects[$alias] ?? null;
+        return _authenticateObjects[$alias] ?? null;
     }
 
     /**
@@ -952,7 +952,7 @@ class AuthComponent : Component : EventDispatcherInterface
             return;
         }
 
-        this.Flash->set($message, this._config['flash']);
+        this.Flash->set($message, _config['flash']);
     }
 
     /**
@@ -964,7 +964,7 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function authenticationProvider(): ?BaseAuthenticate
     {
-        return this._authenticationProvider;
+        return _authenticationProvider;
     }
 
     /**
@@ -976,7 +976,7 @@ class AuthComponent : Component : EventDispatcherInterface
      */
     function authorizationProvider(): ?BaseAuthorize
     {
-        return this._authorizationProvider;
+        return _authorizationProvider;
     }
 
     /**

@@ -110,7 +110,7 @@ trait PluginAssetsTrait
             if (
                 $config['namespaced'] &&
                 !is_dir($config['destDir']) &&
-                !this._createDirectory($config['destDir'])
+                !_createDirectory($config['destDir'])
             ) {
                 continue;
             }
@@ -118,7 +118,7 @@ trait PluginAssetsTrait
             $dest = $config['destDir'] . $config['link'];
 
             if (file_exists($dest)) {
-                if ($overwrite && !this._remove($config)) {
+                if ($overwrite && !_remove($config)) {
                     continue;
                 } elseif (!$overwrite) {
                     this.io->verbose(
@@ -131,7 +131,7 @@ trait PluginAssetsTrait
             }
 
             if (!$copy) {
-                $result = this._createSymlink(
+                $result = _createSymlink(
                     $config['srcPath'],
                     $dest
                 );
@@ -140,7 +140,7 @@ trait PluginAssetsTrait
                 }
             }
 
-            this._copyDirectory(
+            _copyDirectory(
                 $config['srcPath'],
                 $dest
             );

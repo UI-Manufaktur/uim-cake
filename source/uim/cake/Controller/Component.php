@@ -103,12 +103,12 @@ class Component : EventListenerInterface
      */
     public this(ComponentRegistry $registry, array $config = [])
     {
-        this._registry = $registry;
+        _registry = $registry;
 
         this.setConfig($config);
 
         if (this.components) {
-            this._componentMap = $registry->normalizeArray(this.components);
+            _componentMap = $registry->normalizeArray(this.components);
         }
         this.initialize($config);
     }
@@ -120,7 +120,7 @@ class Component : EventListenerInterface
      */
     function getController(): Controller
     {
-        return this._registry->getController();
+        return _registry->getController();
     }
 
     /**
@@ -144,9 +144,9 @@ class Component : EventListenerInterface
      */
     function __get(string $name)
     {
-        if (isset(this._componentMap[$name]) && !isset(this.{$name})) {
-            $config = (array)this._componentMap[$name]['config'] + ['enabled' => false];
-            this.{$name} = this._registry->load(this._componentMap[$name]['class'], $config);
+        if (isset(_componentMap[$name]) && !isset(this.{$name})) {
+            $config = (array)_componentMap[$name]['config'] + ['enabled' => false];
+            this.{$name} = _registry->load(_componentMap[$name]['class'], $config);
         }
 
         return this.{$name} ?? null;

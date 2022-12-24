@@ -60,11 +60,11 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      */
     function getController(): Controller
     {
-        if (this._Controller == null) {
+        if (_Controller == null) {
             throw new CakeException('Controller not set for ComponentRegistry');
         }
 
-        return this._Controller;
+        return _Controller;
     }
 
     /**
@@ -75,7 +75,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      */
     function setController(Controller $controller)
     {
-        this._Controller = $controller;
+        _Controller = $controller;
         this.setEventManager($controller->getEventManager());
 
         return this;

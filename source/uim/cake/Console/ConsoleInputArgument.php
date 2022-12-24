@@ -71,21 +71,21 @@ class ConsoleInputArgument
             }
         } else {
             /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
-            this._name = $name;
-            this._help = $help;
-            this._required = $required;
-            this._choices = $choices;
+            _name = $name;
+            _help = $help;
+            _required = $required;
+            _choices = $choices;
         }
     }
 
     /**
      * Get the value of the name attribute.
      *
-     * @return string Value of this._name.
+     * @return string Value of _name.
      */
     function name(): string
     {
-        return this._name;
+        return _name;
     }
 
     /**
@@ -108,7 +108,7 @@ class ConsoleInputArgument
      */
     function help(int $width = 0): string
     {
-        $name = this._name;
+        $name = _name;
         if (strlen($name) < $width) {
             $name = str_pad($name, $width, ' ');
         }
@@ -116,11 +116,11 @@ class ConsoleInputArgument
         if (!this.isRequired()) {
             $optional = ' <comment>(optional)</comment>';
         }
-        if (this._choices) {
-            $optional .= sprintf(' <comment>(choices: %s)</comment>', implode('|', this._choices));
+        if (_choices) {
+            $optional .= sprintf(' <comment>(choices: %s)</comment>', implode('|', _choices));
         }
 
-        return sprintf('%s%s%s', $name, this._help, $optional);
+        return sprintf('%s%s%s', $name, _help, $optional);
     }
 
     /**
@@ -130,9 +130,9 @@ class ConsoleInputArgument
      */
     function usage(): string
     {
-        $name = this._name;
-        if (this._choices) {
-            $name = implode('|', this._choices);
+        $name = _name;
+        if (_choices) {
+            $name = implode('|', _choices);
         }
         $name = '<' . $name . '>';
         if (!this.isRequired()) {
@@ -149,7 +149,7 @@ class ConsoleInputArgument
      */
     function isRequired(): bool
     {
-        return this._required;
+        return _required;
     }
 
     /**
@@ -161,16 +161,16 @@ class ConsoleInputArgument
      */
     function validChoice(string $value): bool
     {
-        if (empty(this._choices)) {
+        if (empty(_choices)) {
             return true;
         }
-        if (!in_array($value, this._choices, true)) {
+        if (!in_array($value, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
                     '"%s" is not a valid value for %s. Please use one of "%s"',
                     $value,
-                    this._name,
-                    implode(', ', this._choices)
+                    _name,
+                    implode(', ', _choices)
                 )
             );
         }
@@ -187,11 +187,11 @@ class ConsoleInputArgument
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent->addChild('argument');
-        $option->addAttribute('name', this._name);
-        $option->addAttribute('help', this._help);
+        $option->addAttribute('name', _name);
+        $option->addAttribute('help', _help);
         $option->addAttribute('required', (string)(int)this.isRequired());
         $choices = $option->addChild('choices');
-        foreach (this._choices as $valid) {
+        foreach (_choices as $valid) {
             $choices->addChild('choice', $valid);
         }
 

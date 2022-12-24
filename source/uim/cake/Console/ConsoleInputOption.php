@@ -115,27 +115,27 @@ class ConsoleInputOption
         bool $required = false,
         ?string $prompt = null
     ) {
-        this._name = $name;
-        this._short = $short;
-        this._help = $help;
-        this._boolean = $isBoolean;
-        this._choices = $choices;
-        this._multiple = $multiple;
+        _name = $name;
+        _short = $short;
+        _help = $help;
+        _boolean = $isBoolean;
+        _choices = $choices;
+        _multiple = $multiple;
         this.required = $required;
         this.prompt = $prompt;
 
         if ($isBoolean) {
-            this._default = (bool)$default;
+            _default = (bool)$default;
         } elseif ($default != null) {
-            this._default = (string)$default;
+            _default = (string)$default;
         }
 
-        if (strlen(this._short) > 1) {
+        if (strlen(_short) > 1) {
             throw new ConsoleException(
-                sprintf('Short option "%s" is invalid, short options must be one letter.', this._short)
+                sprintf('Short option "%s" is invalid, short options must be one letter.', _short)
             );
         }
-        if (isset(this._default) && this.prompt) {
+        if (isset(_default) && this.prompt) {
             throw new ConsoleException(
                 'You cannot set both `prompt` and `default` options. ' .
                 'Use either a static `default` or interactive `prompt`'
@@ -146,21 +146,21 @@ class ConsoleInputOption
     /**
      * Get the value of the name attribute.
      *
-     * @return string Value of this._name.
+     * @return string Value of _name.
      */
     function name(): string
     {
-        return this._name;
+        return _name;
     }
 
     /**
      * Get the value of the short attribute.
      *
-     * @return string Value of this._short.
+     * @return string Value of _short.
      */
     function short(): string
     {
-        return this._short;
+        return _short;
     }
 
     /**
@@ -172,16 +172,16 @@ class ConsoleInputOption
     function help(int $width = 0): string
     {
         $default = $short = '';
-        if (this._default && this._default != true) {
-            $default = sprintf(' <comment>(default: %s)</comment>', this._default);
+        if (_default && _default != true) {
+            $default = sprintf(' <comment>(default: %s)</comment>', _default);
         }
-        if (this._choices) {
-            $default .= sprintf(' <comment>(choices: %s)</comment>', implode('|', this._choices));
+        if (_choices) {
+            $default .= sprintf(' <comment>(choices: %s)</comment>', implode('|', _choices));
         }
-        if (this._short != '') {
-            $short = ', -' . this._short;
+        if (_short != '') {
+            $short = ', -' . _short;
         }
-        $name = sprintf('--%s%s', this._name, $short);
+        $name = sprintf('--%s%s', _name, $short);
         if (strlen($name) < $width) {
             $name = str_pad($name, $width, ' ');
         }
@@ -190,7 +190,7 @@ class ConsoleInputOption
             $required = ' <comment>(required)</comment>';
         }
 
-        return sprintf('%s%s%s%s', $name, this._help, $default, $required);
+        return sprintf('%s%s%s%s', $name, _help, $default, $required);
     }
 
     /**
@@ -200,13 +200,13 @@ class ConsoleInputOption
      */
     function usage(): string
     {
-        $name = this._short == '' ? '--' . this._name : '-' . this._short;
+        $name = _short == '' ? '--' . _name : '-' . _short;
         $default = '';
-        if (this._default != null && !is_bool(this._default) && this._default != '') {
-            $default = ' ' . this._default;
+        if (_default != null && !is_bool(_default) && _default != '') {
+            $default = ' ' . _default;
         }
-        if (this._choices) {
-            $default = ' ' . implode('|', this._choices);
+        if (_choices) {
+            $default = ' ' . implode('|', _choices);
         }
         $template = '[%s%s]';
         if (this.isRequired()) {
@@ -223,7 +223,7 @@ class ConsoleInputOption
      */
     function defaultValue()
     {
-        return this._default;
+        return _default;
     }
 
     /**
@@ -243,7 +243,7 @@ class ConsoleInputOption
      */
     function isBoolean(): bool
     {
-        return this._boolean;
+        return _boolean;
     }
 
     /**
@@ -253,7 +253,7 @@ class ConsoleInputOption
      */
     function acceptsMultiple(): bool
     {
-        return this._multiple;
+        return _multiple;
     }
 
     /**
@@ -265,16 +265,16 @@ class ConsoleInputOption
      */
     function validChoice($value): bool
     {
-        if (empty(this._choices)) {
+        if (empty(_choices)) {
             return true;
         }
-        if (!in_array($value, this._choices, true)) {
+        if (!in_array($value, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
                     '"%s" is not a valid value for --%s. Please use one of "%s"',
                     (string)$value,
-                    this._name,
-                    implode(', ', this._choices)
+                    _name,
+                    implode(', ', _choices)
                 )
             );
         }
@@ -289,7 +289,7 @@ class ConsoleInputOption
      */
     function choices(): array
     {
-        return this._choices;
+        return _choices;
     }
 
     /**
@@ -311,24 +311,24 @@ class ConsoleInputOption
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent->addChild('option');
-        $option->addAttribute('name', '--' . this._name);
+        $option->addAttribute('name', '--' . _name);
         $short = '';
-        if (this._short != '') {
-            $short = '-' . this._short;
+        if (_short != '') {
+            $short = '-' . _short;
         }
-        $default = this._default;
+        $default = _default;
         if ($default == true) {
             $default = 'true';
         } elseif ($default == false) {
             $default = 'false';
         }
         $option->addAttribute('short', $short);
-        $option->addAttribute('help', this._help);
-        $option->addAttribute('boolean', (string)(int)this._boolean);
+        $option->addAttribute('help', _help);
+        $option->addAttribute('boolean', (string)(int)_boolean);
         $option->addAttribute('required', (string)(int)this.required);
         $option->addChild('default', (string)$default);
         $choices = $option->addChild('choices');
-        foreach (this._choices as $valid) {
+        foreach (_choices as $valid) {
             $choices->addChild('choice', $valid);
         }
 
