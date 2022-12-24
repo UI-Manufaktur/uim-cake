@@ -30,7 +30,7 @@ class ContentsEmpty extends ContentsBase
      */
     function matches($other): bool
     {
-        return this->contents == '';
+        return this.contents == '';
     }
 
     /**
@@ -40,7 +40,7 @@ class ContentsEmpty extends ContentsBase
      */
     function toString(): string
     {
-        return sprintf('%s is empty', this->output);
+        return sprintf('%s is empty', this.output);
     }
 
     /**
@@ -51,6 +51,6 @@ class ContentsEmpty extends ContentsBase
      */
     protected function failureDescription($other): string
     {
-        return this->toString();
+        return this.toString();
     }
 }

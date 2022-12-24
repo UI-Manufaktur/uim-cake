@@ -30,7 +30,7 @@ class ContentsNotContain extends ContentsBase
      */
     function matches($other): bool
     {
-        return mb_strpos(this->contents, $other) == false;
+        return mb_strpos(this.contents, $other) == false;
     }
 
     /**
@@ -40,6 +40,6 @@ class ContentsNotContain extends ContentsBase
      */
     function toString(): string
     {
-        return sprintf('is not in %s', this->output);
+        return sprintf('is not in %s', this.output);
     }
 }

@@ -30,7 +30,7 @@ class MissingConsoleInputException extends RuntimeException
      */
     function setQuestion($question)
     {
-        this->message .= "\nThe question asked was: " . $question;
+        this.message .= "\nThe question asked was: " . $question;
     }
 }
 
