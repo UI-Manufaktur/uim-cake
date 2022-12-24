@@ -13,7 +13,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\ORM;
+module uim.cake.ORM;
 
 /**
  * Contains methods for parsing the associated tables array that is typically

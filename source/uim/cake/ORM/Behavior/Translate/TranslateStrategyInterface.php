@@ -13,7 +13,7 @@
  * @since         4.0.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\ORM\Behavior\Translate;
+module uim.cake.ORM\Behavior\Translate;
 
 use ArrayObject;
 use Cake\Collection\CollectionInterface;

@@ -13,7 +13,7 @@
  * @since         3.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\ORM\Association\Loader;
+module uim.cake.ORM\Association\Loader;
 
 use Cake\Database\Expression\IdentifierExpression;
 use Cake\Database\Expression\TupleComparison;

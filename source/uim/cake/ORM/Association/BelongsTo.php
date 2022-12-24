@@ -13,7 +13,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\ORM\Association;
+module uim.cake.ORM\Association;
 
 use Cake\Database\Expression\IdentifierExpression;
 use Cake\Datasource\EntityInterface;

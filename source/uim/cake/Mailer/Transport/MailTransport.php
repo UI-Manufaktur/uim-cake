@@ -15,7 +15,7 @@
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Mailer\Transport;
+module uim.cake.Mailer\Transport;
 
 use Cake\Core\Exception\CakeException;
 use Cake\Mailer\AbstractTransport;
