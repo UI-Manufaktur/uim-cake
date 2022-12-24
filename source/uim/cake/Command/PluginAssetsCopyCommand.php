@@ -54,7 +54,7 @@ class PluginAssetsCopyCommand : Command
 
         $name = $args->getArgument('name');
         $overwrite = (bool)$args->getOption('overwrite');
-        this._process(this._list($name), true, $overwrite);
+        _process(_list($name), true, $overwrite);
 
         return static::CODE_SUCCESS;
     }

@@ -86,7 +86,7 @@ abstract class BaseAuthenticate : EventListenerInterface
      */
     public this(ComponentRegistry $registry, array $config = [])
     {
-        this._registry = $registry;
+        _registry = $registry;
         this.setConfig($config);
     }
 
@@ -103,7 +103,7 @@ abstract class BaseAuthenticate : EventListenerInterface
      */
     protected function _findUser(string $username, ?string $password = null)
     {
-        $result = this._query($username)->first();
+        $result = _query($username)->first();
 
         if ($result == null) {
             // Waste time hashing the password, to prevent
@@ -119,7 +119,7 @@ abstract class BaseAuthenticate : EventListenerInterface
             return false;
         }
 
-        $passwordField = this._config['fields']['password'];
+        $passwordField = _config['fields']['password'];
         if ($password != null) {
             $hasher = this.passwordHasher();
             $hashedPassword = $result->get($passwordField);
@@ -137,7 +137,7 @@ abstract class BaseAuthenticate : EventListenerInterface
                 return false;
             }
 
-            this._needsPasswordRehash = $hasher->needsRehash($hashedPassword);
+            _needsPasswordRehash = $hasher->needsRehash($hashedPassword);
             $result->unset($passwordField);
         }
         $hidden = $result->getHidden();
@@ -158,7 +158,7 @@ abstract class BaseAuthenticate : EventListenerInterface
      */
     protected function _query(string $username): Query
     {
-        $config = this._config;
+        $config = _config;
         $table = this.getTableLocator()->get($config['userModel']);
 
         $options = [
@@ -185,13 +185,13 @@ abstract class BaseAuthenticate : EventListenerInterface
      */
     function passwordHasher(): AbstractPasswordHasher
     {
-        if (this._passwordHasher != null) {
-            return this._passwordHasher;
+        if (_passwordHasher != null) {
+            return _passwordHasher;
         }
 
-        $passwordHasher = this._config['passwordHasher'];
+        $passwordHasher = _config['passwordHasher'];
 
-        return this._passwordHasher = PasswordHasherFactory::build($passwordHasher);
+        return _passwordHasher = PasswordHasherFactory::build($passwordHasher);
     }
 
     /**
@@ -202,7 +202,7 @@ abstract class BaseAuthenticate : EventListenerInterface
      */
     function needsPasswordRehash(): bool
     {
-        return this._needsPasswordRehash;
+        return _needsPasswordRehash;
     }
 
     /**

@@ -105,12 +105,12 @@ class DigestAuthenticate : BasicAuthenticate
      */
     function getUser(ServerRequest $request)
     {
-        $digest = this._getDigest($request);
+        $digest = _getDigest($request);
         if (empty($digest)) {
             return false;
         }
 
-        $user = this._findUser($digest['username']);
+        $user = _findUser($digest['username']);
         if (empty($user)) {
             return false;
         }
@@ -119,7 +119,7 @@ class DigestAuthenticate : BasicAuthenticate
             return false;
         }
 
-        $field = this._config['fields']['password'];
+        $field = _config['fields']['password'];
         $password = $user[$field];
         unset($user[$field]);
 
@@ -223,16 +223,16 @@ class DigestAuthenticate : BasicAuthenticate
      */
     function loginHeaders(ServerRequest $request): array
     {
-        $realm = this._config['realm'] ?: $request->getEnv('SERVER_NAME');
+        $realm = _config['realm'] ?: $request->getEnv('SERVER_NAME');
 
         $options = [
             'realm' => $realm,
-            'qop' => this._config['qop'],
+            'qop' => _config['qop'],
             'nonce' => this.generateNonce(),
-            'opaque' => this._config['opaque'] ?: md5($realm),
+            'opaque' => _config['opaque'] ?: md5($realm),
         ];
 
-        $digest = this._getDigest($request);
+        $digest = _getDigest($request);
         if ($digest && isset($digest['nonce']) && !this.validNonce($digest['nonce'])) {
             $options['stale'] = true;
         }

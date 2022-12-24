@@ -77,12 +77,12 @@ class FormAuthenticate : BaseAuthenticate
      */
     function authenticate(ServerRequest $request, Response $response)
     {
-        $fields = this._config['fields'];
-        if (!this._checkFields($request, $fields)) {
+        $fields = _config['fields'];
+        if (!_checkFields($request, $fields)) {
             return false;
         }
 
-        return this._findUser(
+        return _findUser(
             $request->getData($fields['username']),
             $request->getData($fields['password'])
         );

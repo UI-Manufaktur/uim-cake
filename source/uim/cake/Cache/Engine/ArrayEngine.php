@@ -51,7 +51,7 @@ class ArrayEngine : CacheEngine
      */
     function set($key, $value, $ttl = null): bool
     {
-        $key = this._key($key);
+        $key = _key($key);
         $expires = time() + this.duration($ttl);
         this.data[$key] = ['exp' => $expires, 'val' => $value];
 
@@ -68,7 +68,7 @@ class ArrayEngine : CacheEngine
      */
     function get($key, $default = null)
     {
-        $key = this._key($key);
+        $key = _key($key);
         if (!isset(this.data[$key])) {
             return $default;
         }
@@ -97,7 +97,7 @@ class ArrayEngine : CacheEngine
         if (this.get($key) == null) {
             this.set($key, 0);
         }
-        $key = this._key($key);
+        $key = _key($key);
         this.data[$key]['val'] += $offset;
 
         return this.data[$key]['val'];
@@ -115,7 +115,7 @@ class ArrayEngine : CacheEngine
         if (this.get($key) == null) {
             this.set($key, 0);
         }
-        $key = this._key($key);
+        $key = _key($key);
         this.data[$key]['val'] -= $offset;
 
         return this.data[$key]['val'];
@@ -129,7 +129,7 @@ class ArrayEngine : CacheEngine
      */
     function delete($key): bool
     {
-        $key = this._key($key);
+        $key = _key($key);
         unset(this.data[$key]);
 
         return true;
@@ -157,8 +157,8 @@ class ArrayEngine : CacheEngine
     function groups(): array
     {
         $result = [];
-        foreach (this._config['groups'] as $group) {
-            $key = this._config['prefix'] . $group;
+        foreach (_config['groups'] as $group) {
+            $key = _config['prefix'] . $group;
             if (!isset(this.data[$key])) {
                 this.data[$key] = ['exp' => PHP_INT_MAX, 'val' => 1];
             }
@@ -178,7 +178,7 @@ class ArrayEngine : CacheEngine
      */
     function clearGroup(string $group): bool
     {
-        $key = this._config['prefix'] . $group;
+        $key = _config['prefix'] . $group;
         if (isset(this.data[$key])) {
             this.data[$key]['val'] += 1;
         }

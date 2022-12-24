@@ -55,9 +55,9 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
      */
     public this(Traversable $items, callable $unfolder)
     {
-        this._unfolder = $unfolder;
+        _unfolder = $unfolder;
         parent::__construct($items);
-        this._innerIterator = this.getInnerIterator();
+        _innerIterator = this.getInnerIterator();
     }
 
     /**
@@ -81,8 +81,8 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
     {
         $current = this.current();
         $key = this.key();
-        $unfolder = this._unfolder;
+        $unfolder = _unfolder;
 
-        return new NoChildrenIterator($unfolder($current, $key, this._innerIterator));
+        return new NoChildrenIterator($unfolder($current, $key, _innerIterator));
     }
 }

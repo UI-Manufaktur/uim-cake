@@ -51,8 +51,8 @@ class DefaultPasswordHasher : AbstractPasswordHasher
         /** @psalm-suppress NullableReturnStatement */
         return password_hash(
             $password,
-            this._config['hashType'],
-            this._config['hashOptions']
+            _config['hashType'],
+            _config['hashOptions']
         );
     }
 
@@ -77,6 +77,6 @@ class DefaultPasswordHasher : AbstractPasswordHasher
      */
     function needsRehash(string $password): bool
     {
-        return password_needs_rehash($password, this._config['hashType'], this._config['hashOptions']);
+        return password_needs_rehash($password, _config['hashType'], _config['hashOptions']);
     }
 }

@@ -43,7 +43,7 @@ class NestIterator : Collection : RecursiveIterator
     public this(iterable $items, $nestKey)
     {
         parent::__construct($items);
-        this._nestKey = $nestKey;
+        _nestKey = $nestKey;
     }
 
     /**
@@ -53,9 +53,9 @@ class NestIterator : Collection : RecursiveIterator
      */
     function getChildren(): RecursiveIterator
     {
-        $property = this._propertyExtractor(this._nestKey);
+        $property = _propertyExtractor(_nestKey);
 
-        return new static($property(this.current()), this._nestKey);
+        return new static($property(this.current()), _nestKey);
     }
 
     /**
@@ -66,7 +66,7 @@ class NestIterator : Collection : RecursiveIterator
      */
     function hasChildren(): bool
     {
-        $property = this._propertyExtractor(this._nestKey);
+        $property = _propertyExtractor(_nestKey);
         $children = $property(this.current());
 
         if (is_array($children)) {

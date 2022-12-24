@@ -116,9 +116,9 @@ class MapReduce : IteratorAggregate
      */
     public this(Traversable $data, callable $mapper, ?callable $reducer = null)
     {
-        this._data = $data;
-        this._mapper = $mapper;
-        this._reducer = $reducer;
+        _data = $data;
+        _mapper = $mapper;
+        _reducer = $reducer;
     }
 
     /**
@@ -129,11 +129,11 @@ class MapReduce : IteratorAggregate
      */
     function getIterator(): Traversable
     {
-        if (!this._executed) {
-            this._execute();
+        if (!_executed) {
+            _execute();
         }
 
-        return new ArrayIterator(this._result);
+        return new ArrayIterator(_result);
     }
 
     /**
@@ -146,7 +146,7 @@ class MapReduce : IteratorAggregate
      */
     function emitIntermediate($val, $bucket): void
     {
-        this._intermediate[$bucket][] = $val;
+        _intermediate[$bucket][] = $val;
     }
 
     /**
@@ -159,8 +159,8 @@ class MapReduce : IteratorAggregate
      */
     function emit($val, $key = null): void
     {
-        this._result[$key ?? this._counter] = $val;
-        this._counter++;
+        _result[$key ?? _counter] = $val;
+        _counter++;
     }
 
     /**
@@ -174,21 +174,21 @@ class MapReduce : IteratorAggregate
      */
     protected function _execute(): void
     {
-        $mapper = this._mapper;
-        foreach (this._data as $key => $val) {
+        $mapper = _mapper;
+        foreach (_data as $key => $val) {
             $mapper($val, $key, this);
         }
 
-        if (!empty(this._intermediate) && empty(this._reducer)) {
+        if (!empty(_intermediate) && empty(_reducer)) {
             throw new LogicException('No reducer function was provided');
         }
 
         /** @var callable $reducer */
-        $reducer = this._reducer;
-        foreach (this._intermediate as $key => $list) {
+        $reducer = _reducer;
+        foreach (_intermediate as $key => $list) {
             $reducer($list, $key, this);
         }
-        this._intermediate = [];
-        this._executed = true;
+        _intermediate = [];
+        _executed = true;
     }
 }

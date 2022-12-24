@@ -65,7 +65,7 @@ class SortIterator : Collection
             $items = iterator_to_array((new Collection($items))->unwrap(), false);
         }
 
-        $callback = this._propertyExtractor($callback);
+        $callback = _propertyExtractor($callback);
         $results = [];
         foreach ($items as $key => $val) {
             $val = $callback($val);

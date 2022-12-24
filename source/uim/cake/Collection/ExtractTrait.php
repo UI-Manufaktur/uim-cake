@@ -44,12 +44,12 @@ trait ExtractTrait
 
         if (strpos($path, '{*}') != false) {
             return function ($element) use ($parts) {
-                return this._extract($element, $parts);
+                return _extract($element, $parts);
             };
         }
 
         return function ($element) use ($parts) {
-            return this._simpleExtract($element, $parts);
+            return _simpleExtract($element, $parts);
         };
     }
 
@@ -135,7 +135,7 @@ trait ExtractTrait
     {
         $matchers = [];
         foreach ($conditions as $property => $value) {
-            $extractor = this._propertyExtractor($property);
+            $extractor = _propertyExtractor($property);
             $matchers[] = function ($v) use ($extractor, $value) {
                 return $extractor($v) == $value;
             };

@@ -87,17 +87,17 @@ class FileEngine : CacheEngine
     {
         parent::init($config);
 
-        if (this._config['path'] == null) {
-            this._config['path'] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'cake_cache' . DIRECTORY_SEPARATOR;
+        if (_config['path'] == null) {
+            _config['path'] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'cake_cache' . DIRECTORY_SEPARATOR;
         }
-        if (substr(this._config['path'], -1) != DIRECTORY_SEPARATOR) {
-            this._config['path'] .= DIRECTORY_SEPARATOR;
+        if (substr(_config['path'], -1) != DIRECTORY_SEPARATOR) {
+            _config['path'] .= DIRECTORY_SEPARATOR;
         }
-        if (this._groupPrefix) {
-            this._groupPrefix = str_replace('_', DIRECTORY_SEPARATOR, this._groupPrefix);
+        if (_groupPrefix) {
+            _groupPrefix = str_replace('_', DIRECTORY_SEPARATOR, _groupPrefix);
         }
 
-        return this._active();
+        return _active();
     }
 
     /**
@@ -112,38 +112,38 @@ class FileEngine : CacheEngine
      */
     function set($key, $value, $ttl = null): bool
     {
-        if ($value == '' || !this._init) {
+        if ($value == '' || !_init) {
             return false;
         }
 
-        $key = this._key($key);
+        $key = _key($key);
 
-        if (this._setKey($key, true) == false) {
+        if (_setKey($key, true) == false) {
             return false;
         }
 
-        if (!empty(this._config['serialize'])) {
+        if (!empty(_config['serialize'])) {
             $value = serialize($value);
         }
 
         $expires = time() + this.duration($ttl);
         $contents = implode([$expires, PHP_EOL, $value, PHP_EOL]);
 
-        if (this._config['lock']) {
+        if (_config['lock']) {
             /** @psalm-suppress PossiblyNullReference */
-            this._File->flock(LOCK_EX);
+            _File->flock(LOCK_EX);
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        this._File->rewind();
-        $success = this._File->ftruncate(0) &&
-            this._File->fwrite($contents) &&
-            this._File->fflush();
+        _File->rewind();
+        $success = _File->ftruncate(0) &&
+            _File->fwrite($contents) &&
+            _File->fflush();
 
-        if (this._config['lock']) {
-            this._File->flock(LOCK_UN);
+        if (_config['lock']) {
+            _File->flock(LOCK_UN);
         }
-        this._File = null;
+        _File = null;
 
         return $success;
     }
@@ -158,46 +158,46 @@ class FileEngine : CacheEngine
      */
     function get($key, $default = null)
     {
-        $key = this._key($key);
+        $key = _key($key);
 
-        if (!this._init || this._setKey($key) == false) {
+        if (!_init || _setKey($key) == false) {
             return $default;
         }
 
-        if (this._config['lock']) {
+        if (_config['lock']) {
             /** @psalm-suppress PossiblyNullReference */
-            this._File->flock(LOCK_SH);
+            _File->flock(LOCK_SH);
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        this._File->rewind();
+        _File->rewind();
         $time = time();
         /** @psalm-suppress RiskyCast */
-        $cachetime = (int)this._File->current();
+        $cachetime = (int)_File->current();
 
         if ($cachetime < $time) {
-            if (this._config['lock']) {
-                this._File->flock(LOCK_UN);
+            if (_config['lock']) {
+                _File->flock(LOCK_UN);
             }
 
             return $default;
         }
 
         $data = '';
-        this._File->next();
-        while (this._File->valid()) {
+        _File->next();
+        while (_File->valid()) {
             /** @psalm-suppress PossiblyInvalidOperand */
-            $data .= this._File->current();
-            this._File->next();
+            $data .= _File->current();
+            _File->next();
         }
 
-        if (this._config['lock']) {
-            this._File->flock(LOCK_UN);
+        if (_config['lock']) {
+            _File->flock(LOCK_UN);
         }
 
         $data = trim($data);
 
-        if ($data != '' && !empty(this._config['serialize'])) {
+        if ($data != '' && !empty(_config['serialize'])) {
             $data = unserialize($data);
         }
 
@@ -213,15 +213,15 @@ class FileEngine : CacheEngine
      */
     function delete($key): bool
     {
-        $key = this._key($key);
+        $key = _key($key);
 
-        if (this._setKey($key) == false || !this._init) {
+        if (_setKey($key) == false || !_init) {
             return false;
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        $path = this._File->getRealPath();
-        this._File = null;
+        $path = _File->getRealPath();
+        _File = null;
 
         if ($path == false) {
             return false;
@@ -239,15 +239,15 @@ class FileEngine : CacheEngine
      */
     function clear(): bool
     {
-        if (!this._init) {
+        if (!_init) {
             return false;
         }
-        this._File = null;
+        _File = null;
 
-        this._clearDirectory(this._config['path']);
+        _clearDirectory(_config['path']);
 
         $directory = new RecursiveDirectoryIterator(
-            this._config['path'],
+            _config['path'],
             FilesystemIterator::SKIP_DOTS
         );
         $contents = new RecursiveIteratorIterator(
@@ -270,7 +270,7 @@ class FileEngine : CacheEngine
 
             $path = $realPath . DIRECTORY_SEPARATOR;
             if (!in_array($path, $cleared, true)) {
-                this._clearDirectory($path);
+                _clearDirectory($path);
                 $cleared[] = $path;
             }
 
@@ -302,10 +302,10 @@ class FileEngine : CacheEngine
             return;
         }
 
-        $prefixLength = strlen(this._config['prefix']);
+        $prefixLength = strlen(_config['prefix']);
 
         while (($entry = $dir->read()) != false) {
-            if (substr($entry, 0, $prefixLength) != this._config['prefix']) {
+            if (substr($entry, 0, $prefixLength) != _config['prefix']) {
                 continue;
             }
 
@@ -365,10 +365,10 @@ class FileEngine : CacheEngine
     protected function _setKey(string $key, bool $createKey = false): bool
     {
         $groups = null;
-        if (this._groupPrefix) {
-            $groups = vsprintf(this._groupPrefix, this.groups());
+        if (_groupPrefix) {
+            $groups = vsprintf(_groupPrefix, this.groups());
         }
-        $dir = this._config['path'] . $groups;
+        $dir = _config['path'] . $groups;
 
         if (!is_dir($dir)) {
             mkdir($dir, 0775, true);
@@ -380,13 +380,13 @@ class FileEngine : CacheEngine
             return false;
         }
         if (
-            empty(this._File) ||
-            this._File->getBasename() != $key ||
-            this._File->valid() == false
+            empty(_File) ||
+            _File->getBasename() != $key ||
+            _File->valid() == false
         ) {
             $exists = is_file($path->getPathname());
             try {
-                this._File = $path->openFile('c+');
+                _File = $path->openFile('c+');
             } catch (Exception $e) {
                 trigger_error($e->getMessage(), E_USER_WARNING);
 
@@ -394,11 +394,11 @@ class FileEngine : CacheEngine
             }
             unset($path);
 
-            if (!$exists && !chmod(this._File->getPathname(), (int)this._config['mask'])) {
+            if (!$exists && !chmod(_File->getPathname(), (int)_config['mask'])) {
                 trigger_error(sprintf(
                     'Could not apply permission mask "%s" on cache file "%s"',
-                    this._File->getPathname(),
-                    this._config['mask']
+                    _File->getPathname(),
+                    _config['mask']
                 ), E_USER_WARNING);
             }
         }
@@ -413,7 +413,7 @@ class FileEngine : CacheEngine
      */
     protected function _active(): bool
     {
-        $dir = new SplFileInfo(this._config['path']);
+        $dir = new SplFileInfo(_config['path']);
         $path = $dir->getPathname();
         $success = true;
         if (!is_dir($path)) {
@@ -423,11 +423,11 @@ class FileEngine : CacheEngine
         }
 
         $isWritableDir = ($dir->isDir() && $dir->isWritable());
-        if (!$success || (this._init && !$isWritableDir)) {
-            this._init = false;
+        if (!$success || (_init && !$isWritableDir)) {
+            _init = false;
             trigger_error(sprintf(
                 '%s is not writable',
-                this._config['path']
+                _config['path']
             ), E_USER_WARNING);
         }
 
@@ -452,11 +452,11 @@ class FileEngine : CacheEngine
      */
     function clearGroup(string $group): bool
     {
-        this._File = null;
+        _File = null;
 
-        $prefix = (string)this._config['prefix'];
+        $prefix = (string)_config['prefix'];
 
-        $directoryIterator = new RecursiveDirectoryIterator(this._config['path']);
+        $directoryIterator = new RecursiveDirectoryIterator(_config['path']);
         $contents = new RecursiveIteratorIterator(
             $directoryIterator,
             RecursiveIteratorIterator::CHILD_FIRST

@@ -80,12 +80,12 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
     {
         this.setConfig($config);
 
-        if (!empty(this._config['groups'])) {
-            sort(this._config['groups']);
-            this._groupPrefix = str_repeat('%s_', count(this._config['groups']));
+        if (!empty(_config['groups'])) {
+            sort(_config['groups']);
+            _groupPrefix = str_repeat('%s_', count(_config['groups']));
         }
-        if (!is_numeric(this._config['duration'])) {
-            this._config['duration'] = strtotime(this._config['duration']) - time();
+        if (!is_numeric(_config['duration'])) {
+            _config['duration'] = strtotime(_config['duration']) - time();
         }
 
         return true;
@@ -326,7 +326,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
      */
     function groups(): array
     {
-        return this._config['groups'];
+        return _config['groups'];
     }
 
     /**
@@ -344,12 +344,12 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
         this.ensureValidKey($key);
 
         $prefix = '';
-        if (this._groupPrefix) {
+        if (_groupPrefix) {
             $prefix = md5(implode('_', this.groups()));
         }
         $key = preg_replace('/[\s]+/', '_', $key);
 
-        return this._config['prefix'] . $prefix . $key;
+        return _config['prefix'] . $prefix . $key;
     }
 
     /**
@@ -378,7 +378,7 @@ abstract class CacheEngine : CacheInterface, CacheEngineInterface
     protected function duration($ttl): int
     {
         if ($ttl == null) {
-            return this._config['duration'];
+            return _config['duration'];
         }
         if (is_int($ttl)) {
             return $ttl;

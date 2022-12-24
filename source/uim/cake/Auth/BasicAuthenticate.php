@@ -81,7 +81,7 @@ class BasicAuthenticate : BaseAuthenticate
             return false;
         }
 
-        return this._findUser($username, $pass);
+        return _findUser($username, $pass);
     }
 
     /**

@@ -51,7 +51,7 @@ abstract class BaseAuthorize
      */
     public this(ComponentRegistry $registry, array $config = [])
     {
-        this._registry = $registry;
+        _registry = $registry;
         this.setConfig($config);
     }
 

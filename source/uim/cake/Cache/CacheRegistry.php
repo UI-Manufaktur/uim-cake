@@ -105,7 +105,7 @@ class CacheRegistry : ObjectRegistry
      */
     function unload(string $name)
     {
-        unset(this._loaded[$name]);
+        unset(_loaded[$name]);
 
         return this;
     }

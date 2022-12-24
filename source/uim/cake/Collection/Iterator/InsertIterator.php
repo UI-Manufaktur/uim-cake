@@ -76,9 +76,9 @@ class InsertIterator : Collection
 
         $path = explode('.', $path);
         $target = array_pop($path);
-        this._path = $path;
-        this._target = $target;
-        this._values = $values;
+        _path = $path;
+        _target = $target;
+        _values = $values;
     }
 
     /**
@@ -89,10 +89,10 @@ class InsertIterator : Collection
     function next(): void
     {
         parent::next();
-        if (this._validValues) {
-            this._values->next();
+        if (_validValues) {
+            _values->next();
         }
-        this._validValues = this._values->valid();
+        _validValues = _values->valid();
     }
 
     /**
@@ -106,19 +106,19 @@ class InsertIterator : Collection
     {
         $row = parent::current();
 
-        if (!this._validValues) {
+        if (!_validValues) {
             return $row;
         }
 
         $pointer = &$row;
-        foreach (this._path as $step) {
+        foreach (_path as $step) {
             if (!isset($pointer[$step])) {
                 return $row;
             }
             $pointer = &$pointer[$step];
         }
 
-        $pointer[this._target] = this._values->current();
+        $pointer[_target] = _values->current();
 
         return $row;
     }
@@ -131,7 +131,7 @@ class InsertIterator : Collection
     function rewind(): void
     {
         parent::rewind();
-        this._values->rewind();
-        this._validValues = this._values->valid();
+        _values->rewind();
+        _validValues = _values->valid();
     }
 }

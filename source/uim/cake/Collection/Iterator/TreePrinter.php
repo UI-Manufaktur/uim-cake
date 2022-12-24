@@ -77,9 +77,9 @@ class TreePrinter : RecursiveIteratorIterator : CollectionInterface
         int $mode = RecursiveIteratorIterator::SELF_FIRST
     ) {
         parent::__construct($items, $mode);
-        this._value = this._propertyExtractor($valuePath);
-        this._key = this._propertyExtractor($keyPath);
-        this._spacer = $spacer;
+        _value = _propertyExtractor($valuePath);
+        _key = _propertyExtractor($keyPath);
+        _spacer = $spacer;
     }
 
     /**
@@ -90,9 +90,9 @@ class TreePrinter : RecursiveIteratorIterator : CollectionInterface
     #[\ReturnTypeWillChange]
     function key()
     {
-        $extractor = this._key;
+        $extractor = _key;
 
-        return $extractor(this._fetchCurrent(), parent::key(), this);
+        return $extractor(_fetchCurrent(), parent::key(), this);
     }
 
     /**
@@ -102,9 +102,9 @@ class TreePrinter : RecursiveIteratorIterator : CollectionInterface
      */
     function current(): string
     {
-        $extractor = this._value;
-        $current = this._fetchCurrent();
-        $spacer = str_repeat(this._spacer, this.getDepth());
+        $extractor = _value;
+        $current = _fetchCurrent();
+        $spacer = str_repeat(_spacer, this.getDepth());
 
         return $spacer . $extractor($current, parent::key(), this);
     }
@@ -117,7 +117,7 @@ class TreePrinter : RecursiveIteratorIterator : CollectionInterface
     function next(): void
     {
         parent::next();
-        this._current = null;
+        _current = null;
     }
 
     /**
@@ -127,10 +127,10 @@ class TreePrinter : RecursiveIteratorIterator : CollectionInterface
      */
     protected function _fetchCurrent()
     {
-        if (this._current != null) {
-            return this._current;
+        if (_current != null) {
+            return _current;
         }
 
-        return this._current = parent::current();
+        return _current = parent::current();
     }
 }

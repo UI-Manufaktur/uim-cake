@@ -58,7 +58,7 @@ class ExtractIterator : Collection
      */
     public this(iterable $items, $path)
     {
-        this._extractor = this._propertyExtractor($path);
+        _extractor = _propertyExtractor($path);
         parent::__construct($items);
     }
 
@@ -71,7 +71,7 @@ class ExtractIterator : Collection
     #[\ReturnTypeWillChange]
     function current()
     {
-        $extractor = this._extractor;
+        $extractor = _extractor;
 
         return $extractor(parent::current());
     }
@@ -94,7 +94,7 @@ class ExtractIterator : Collection
         // ArrayIterator can be traversed strictly.
         // Let's do that for performance gains
 
-        $callback = this._extractor;
+        $callback = _extractor;
         $res = [];
 
         foreach ($iterator->getArrayCopy() as $k => $v) {

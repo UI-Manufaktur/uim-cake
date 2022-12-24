@@ -49,7 +49,7 @@ class TreeIterator : RecursiveIteratorIterator : CollectionInterface
         int $flags = 0
     ) {
         parent::__construct($items, $mode, $flags);
-        this._mode = $mode;
+        _mode = $mode;
     }
 
     /**
@@ -104,7 +104,7 @@ class TreeIterator : RecursiveIteratorIterator : CollectionInterface
             $valuePath,
             $keyPath,
             $spacer,
-            this._mode
+            _mode
         );
     }
 }

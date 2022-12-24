@@ -75,11 +75,11 @@ class ZipIterator : MultipleIterator : CollectionInterface, Serializable
             return (new Collection($items))->unwrap();
         }, $sets);
 
-        this._callback = $callable;
+        _callback = $callable;
         parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
         foreach ($sets as $set) {
-            this._iterators[] = $set;
+            _iterators[] = $set;
             this.attachIterator($set);
         }
     }
@@ -93,11 +93,11 @@ class ZipIterator : MultipleIterator : CollectionInterface, Serializable
     #[\ReturnTypeWillChange]
     function current()
     {
-        if (this._callback == null) {
+        if (_callback == null) {
             return parent::current();
         }
 
-        return call_user_func_array(this._callback, parent::current());
+        return call_user_func_array(_callback, parent::current());
     }
 
     /**
@@ -108,7 +108,7 @@ class ZipIterator : MultipleIterator : CollectionInterface, Serializable
      */
     function serialize(): string
     {
-        return serialize(this._iterators);
+        return serialize(_iterators);
     }
 
     /**
@@ -118,7 +118,7 @@ class ZipIterator : MultipleIterator : CollectionInterface, Serializable
      */
     function __serialize(): array
     {
-        return this._iterators;
+        return _iterators;
     }
 
     /**
@@ -130,8 +130,8 @@ class ZipIterator : MultipleIterator : CollectionInterface, Serializable
     function unserialize($iterators): void
     {
         parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
-        this._iterators = unserialize($iterators);
-        foreach (this._iterators as $it) {
+        _iterators = unserialize($iterators);
+        foreach (_iterators as $it) {
             this.attachIterator($it);
         }
     }
@@ -146,8 +146,8 @@ class ZipIterator : MultipleIterator : CollectionInterface, Serializable
     {
         parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
-        this._iterators = $data;
-        foreach (this._iterators as $it) {
+        _iterators = $data;
+        foreach (_iterators as $it) {
             this.attachIterator($it);
         }
     }

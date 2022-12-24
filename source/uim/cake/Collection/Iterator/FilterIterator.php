@@ -54,7 +54,7 @@ class FilterIterator : Collection
             $items = new Collection($items);
         }
 
-        this._callback = $callback;
+        _callback = $callback;
         $wrapper = new CallbackFilterIterator($items, $callback);
         parent::__construct($wrapper);
     }
@@ -78,7 +78,7 @@ class FilterIterator : Collection
 
         // ArrayIterator can be traversed strictly.
         // Let's do that for performance gains
-        $callback = this._callback;
+        $callback = _callback;
         $res = [];
 
         foreach ($iterator as $k => $v) {

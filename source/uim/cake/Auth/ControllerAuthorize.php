@@ -69,10 +69,10 @@ class ControllerAuthorize : BaseAuthorize
     function controller(?Controller $controller = null): Controller
     {
         if ($controller) {
-            this._Controller = $controller;
+            _Controller = $controller;
         }
 
-        return this._Controller;
+        return _Controller;
     }
 
     /**
@@ -85,13 +85,13 @@ class ControllerAuthorize : BaseAuthorize
      */
     function authorize($user, ServerRequest $request): bool
     {
-        if (!method_exists(this._Controller, 'isAuthorized')) {
+        if (!method_exists(_Controller, 'isAuthorized')) {
             throw new CakeException(sprintf(
                 '%s does not implement an isAuthorized() method.',
-                get_class(this._Controller)
+                get_class(_Controller)
             ));
         }
 
-        return (bool)this._Controller->isAuthorized($user);
+        return (bool)_Controller->isAuthorized($user);
     }
 }

@@ -73,7 +73,7 @@ class Collection : IteratorIterator : CollectionInterface, Serializable
      */
     function unserialize($collection): void
     {
-        this.__construct(unserialize($collection));
+        __construct(unserialize($collection));
     }
 
     /**
@@ -84,7 +84,7 @@ class Collection : IteratorIterator : CollectionInterface, Serializable
      */
     function __unserialize(array $data): void
     {
-        this.__construct($data);
+        __construct($data);
     }
 
     /**

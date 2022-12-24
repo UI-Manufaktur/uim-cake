@@ -78,7 +78,7 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     public this(iterable $items)
     {
-        this._buffer = new SplDoublyLinkedList();
+        _buffer = new SplDoublyLinkedList();
         parent::__construct($items);
     }
 
@@ -90,7 +90,7 @@ class BufferedIterator : Collection : Countable, Serializable
     #[\ReturnTypeWillChange]
     function key()
     {
-        return this._key;
+        return _key;
     }
 
     /**
@@ -101,7 +101,7 @@ class BufferedIterator : Collection : Countable, Serializable
     #[\ReturnTypeWillChange]
     function current()
     {
-        return this._current;
+        return _current;
     }
 
     /**
@@ -111,14 +111,14 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     function rewind(): void
     {
-        if (this._index == 0 && !this._started) {
-            this._started = true;
+        if (_index == 0 && !_started) {
+            _started = true;
             parent::rewind();
 
             return;
         }
 
-        this._index = 0;
+        _index = 0;
     }
 
     /**
@@ -128,10 +128,10 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     function valid(): bool
     {
-        if (this._buffer->offsetExists(this._index)) {
-            $current = this._buffer->offsetGet(this._index);
-            this._current = $current['value'];
-            this._key = $current['key'];
+        if (_buffer->offsetExists(_index)) {
+            $current = _buffer->offsetGet(_index);
+            _current = $current['value'];
+            _key = $current['key'];
 
             return true;
         }
@@ -139,15 +139,15 @@ class BufferedIterator : Collection : Countable, Serializable
         $valid = parent::valid();
 
         if ($valid) {
-            this._current = parent::current();
-            this._key = parent::key();
-            this._buffer->push([
-                'key' => this._key,
-                'value' => this._current,
+            _current = parent::current();
+            _key = parent::key();
+            _buffer->push([
+                'key' => _key,
+                'value' => _current,
             ]);
         }
 
-        this._finished = !$valid;
+        _finished = !$valid;
 
         return $valid;
     }
@@ -159,13 +159,13 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     function next(): void
     {
-        this._index++;
+        _index++;
 
         // Don't move inner iterator if we have more buffer
-        if (this._buffer->offsetExists(this._index)) {
+        if (_buffer->offsetExists(_index)) {
             return;
         }
-        if (!this._finished) {
+        if (!_finished) {
             parent::next();
         }
     }
@@ -177,7 +177,7 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     function count(): int
     {
-        if (!this._started) {
+        if (!_started) {
             this.rewind();
         }
 
@@ -185,7 +185,7 @@ class BufferedIterator : Collection : Countable, Serializable
             this.next();
         }
 
-        return this._buffer->count();
+        return _buffer->count();
     }
 
     /**
@@ -196,11 +196,11 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     function serialize(): string
     {
-        if (!this._finished) {
+        if (!_finished) {
             this.count();
         }
 
-        return serialize(this._buffer);
+        return serialize(_buffer);
     }
 
     /**
@@ -210,11 +210,11 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     function __serialize(): array
     {
-        if (!this._finished) {
+        if (!_finished) {
             this.count();
         }
 
-        return iterator_to_array(this._buffer);
+        return iterator_to_array(_buffer);
     }
 
     /**
@@ -225,10 +225,10 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     function unserialize($collection): void
     {
-        this.__construct([]);
-        this._buffer = unserialize($collection);
-        this._started = true;
-        this._finished = true;
+        __construct([]);
+        _buffer = unserialize($collection);
+        _started = true;
+        _finished = true;
     }
 
     /**
@@ -239,13 +239,13 @@ class BufferedIterator : Collection : Countable, Serializable
      */
     function __unserialize(array $data): void
     {
-        this.__construct([]);
+        __construct([]);
 
         foreach ($data as $value) {
-            this._buffer->push($value);
+            _buffer->push($value);
         }
 
-        this._started = true;
-        this._finished = true;
+        _started = true;
+        _finished = true;
     }
 }

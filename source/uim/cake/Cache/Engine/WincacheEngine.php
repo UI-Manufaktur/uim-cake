@@ -65,7 +65,7 @@ class WincacheEngine : CacheEngine
      */
     function set($key, $value, $ttl = null): bool
     {
-        $key = this._key($key);
+        $key = _key($key);
         $duration = this.duration($ttl);
 
         return wincache_ucache_set($key, $value, $duration);
@@ -81,7 +81,7 @@ class WincacheEngine : CacheEngine
      */
     function get($key, $default = null)
     {
-        $value = wincache_ucache_get(this._key($key), $success);
+        $value = wincache_ucache_get(_key($key), $success);
         if ($success == false) {
             return $default;
         }
@@ -98,7 +98,7 @@ class WincacheEngine : CacheEngine
      */
     function increment(string $key, int $offset = 1)
     {
-        $key = this._key($key);
+        $key = _key($key);
 
         return wincache_ucache_inc($key, $offset);
     }
@@ -112,7 +112,7 @@ class WincacheEngine : CacheEngine
      */
     function decrement(string $key, int $offset = 1)
     {
-        $key = this._key($key);
+        $key = _key($key);
 
         return wincache_ucache_dec($key, $offset);
     }
@@ -125,7 +125,7 @@ class WincacheEngine : CacheEngine
      */
     function delete($key): bool
     {
-        $key = this._key($key);
+        $key = _key($key);
 
         return wincache_ucache_delete($key);
     }
@@ -142,7 +142,7 @@ class WincacheEngine : CacheEngine
         $cacheKeys = $info['ucache_entries'];
         unset($info);
         foreach ($cacheKeys as $key) {
-            if (strpos($key['key_name'], this._config['prefix']) == 0) {
+            if (strpos($key['key_name'], _config['prefix']) == 0) {
                 wincache_ucache_delete($key['key_name']);
             }
         }
@@ -159,15 +159,15 @@ class WincacheEngine : CacheEngine
      */
     function groups(): array
     {
-        if (empty(this._compiledGroupNames)) {
-            foreach (this._config['groups'] as $group) {
-                this._compiledGroupNames[] = this._config['prefix'] . $group;
+        if (empty(_compiledGroupNames)) {
+            foreach (_config['groups'] as $group) {
+                _compiledGroupNames[] = _config['prefix'] . $group;
             }
         }
 
-        $groups = wincache_ucache_get(this._compiledGroupNames);
-        if (count($groups) != count(this._config['groups'])) {
-            foreach (this._compiledGroupNames as $group) {
+        $groups = wincache_ucache_get(_compiledGroupNames);
+        if (count($groups) != count(_config['groups'])) {
+            foreach (_compiledGroupNames as $group) {
                 if (!isset($groups[$group])) {
                     wincache_ucache_set($group, 1);
                     $groups[$group] = 1;
@@ -178,7 +178,7 @@ class WincacheEngine : CacheEngine
 
         $result = [];
         $groups = array_values($groups);
-        foreach (this._config['groups'] as $i => $group) {
+        foreach (_config['groups'] as $i => $group) {
             $result[] = $group . $groups[$i];
         }
 
@@ -195,7 +195,7 @@ class WincacheEngine : CacheEngine
     function clearGroup(string $group): bool
     {
         $success = false;
-        wincache_ucache_inc(this._config['prefix'] . $group, 1, $success);
+        wincache_ucache_inc(_config['prefix'] . $group, 1, $success);
 
         return $success;
     }
