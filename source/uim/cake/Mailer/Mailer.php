@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -18,7 +17,7 @@ use BadMethodCallException;
 use Cake\Core\Exception\CakeException;
 use Cake\Core\StaticConfigTrait;
 use Cake\Datasource\ModelAwareTrait;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\IEventListener;
 use Cake\Log\Log;
 use Cake\Mailer\Exception\MissingActionException;
 use Cake\ORM\Locator\LocatorAwareTrait;
@@ -132,7 +131,7 @@ use InvalidArgumentException;
  *   {@see \Cake\Mailer\Message::getBody()}
  */
 #[\AllowDynamicProperties]
-class Mailer : EventListenerInterface
+class Mailer : IEventListener
 {
     use ModelAwareTrait;
     use LocatorAwareTrait;

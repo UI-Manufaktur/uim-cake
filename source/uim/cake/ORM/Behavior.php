@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -18,7 +17,7 @@ namespace Cake\ORM;
 
 use Cake\Core\Exception\CakeException;
 use Cake\Core\InstanceConfigTrait;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\IEventListener;
 use ReflectionClass;
 use ReflectionMethod;
 
@@ -112,7 +111,7 @@ use ReflectionMethod;
  * @see \Cake\ORM\Table::addBehavior()
  * @see \Cake\Event\EventManager
  */
-class Behavior : EventListenerInterface
+class Behavior : IEventListener
 {
     use InstanceConfigTrait;
 

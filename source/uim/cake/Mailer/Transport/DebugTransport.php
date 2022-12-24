@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * Emulates the message sending process for testing purposes
