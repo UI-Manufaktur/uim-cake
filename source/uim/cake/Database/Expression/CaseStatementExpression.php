@@ -28,7 +28,7 @@ use LogicException;
 /**
  * Represents a SQL case statement with a fluid API
  */
-class CaseStatementExpression implements IExpression, TypedResultInterface
+class CaseStatementExpression : IExpression, TypedResultInterface
 {
     use CaseExpressionTrait;
     use ExpressionTypeCasterTrait;

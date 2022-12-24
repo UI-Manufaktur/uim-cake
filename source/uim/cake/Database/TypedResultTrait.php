@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace Cake\Database;
 
 /**
- * Implements the TypedResultInterface
+ * : the TypedResultInterface
  */
 trait TypedResultTrait
 {

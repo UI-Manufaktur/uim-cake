@@ -28,7 +28,7 @@ use Closure;
  *
  * @see \Cake\Database\Query::identifier()
  */
-class IdentifierExpression implements IExpression
+class IdentifierExpression : IExpression
 {
     /**
      * Holds the identifier string

@@ -26,7 +26,7 @@ use RuntimeException;
  *
  * Use to convert float/decimal data between PHP and the database types.
  */
-class FloatType : BaseType implements BatchCastingInterface
+class FloatType : BaseType : BatchCastingInterface
 {
     /**
      * The class to use for representing number objects

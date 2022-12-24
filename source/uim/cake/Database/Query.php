@@ -36,7 +36,7 @@ use RuntimeException;
  * for dynamically constructing each query part, execute it and transform it
  * to a specific SQL dialect.
  */
-class Query implements IExpression, IteratorAggregate
+class Query : IExpression, IteratorAggregate
 {
     use TypeMapTrait;
 

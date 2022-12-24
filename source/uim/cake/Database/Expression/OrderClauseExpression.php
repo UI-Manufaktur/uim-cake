@@ -24,7 +24,7 @@ use Closure;
 /**
  * An expression object for complex ORDER BY clauses
  */
-class OrderClauseExpression implements IExpression, FieldInterface
+class OrderClauseExpression : IExpression, FieldInterface
 {
     use FieldTrait;
 

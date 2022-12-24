@@ -24,7 +24,7 @@ use RuntimeException;
 /**
  * An expression that represents a common table expression definition.
  */
-class CommonTableExpression implements IExpression
+class CommonTableExpression : IExpression
 {
     /**
      * The CTE name.

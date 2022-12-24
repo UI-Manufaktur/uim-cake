@@ -22,12 +22,12 @@ use Cake\Database\TypeConverterTrait;
 use Iterator;
 
 /**
- * A statement decorator that implements buffered results.
+ * A statement decorator that : buffered results.
  *
  * This statement decorator will save fetched results in memory, allowing
  * the iterator to be rewound and reused.
  */
-class BufferedStatement implements Iterator, StatementInterface
+class BufferedStatement : Iterator, StatementInterface
 {
     use TypeConverterTrait;
 

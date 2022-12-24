@@ -21,11 +21,11 @@ use Exception;
 use PDOException;
 
 /**
- * Implements retry strategy based on db error codes and wait interval.
+ * : retry strategy based on db error codes and wait interval.
  *
  * @internal
  */
-class ErrorCodeWaitStrategy implements RetryStrategyInterface
+class ErrorCodeWaitStrategy : RetryStrategyInterface
 {
     /**
      * @var array<int>

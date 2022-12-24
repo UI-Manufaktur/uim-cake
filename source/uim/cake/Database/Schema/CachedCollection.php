@@ -21,7 +21,7 @@ use Psr\SimpleCache\CacheInterface;
 /**
  * Decorates a schema collection and adds caching
  */
-class CachedCollection implements CollectionInterface
+class CachedCollection : CollectionInterface
 {
     /**
      * Cacher instance.

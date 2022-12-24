@@ -27,7 +27,7 @@ use Closure;
  * involving a field an operator and a value. In its most common form the
  * string representation of a comparison is `field = value`
  */
-class ComparisonExpression implements IExpression, FieldInterface
+class ComparisonExpression : IExpression, FieldInterface
 {
     use ExpressionTypeCasterTrait;
     use FieldTrait;

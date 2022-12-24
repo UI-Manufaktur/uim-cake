@@ -20,13 +20,13 @@ use Cake\Database\TypeFactory;
 
 /**
  * Offers a method to convert values to IExpression objects
- * if the type they should be converted to implements ExpressionTypeInterface
+ * if the type they should be converted to : ExpressionTypeInterface
  */
 trait ExpressionTypeCasterTrait
 {
     /**
      * Conditionally converts the passed value to an IExpression object
-     * if the type class implements the ExpressionTypeInterface. Otherwise,
+     * if the type class : the ExpressionTypeInterface. Otherwise,
      * returns the value unmodified.
      *
      * @param mixed $value The value to convert to IExpression

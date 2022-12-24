@@ -29,7 +29,7 @@ use InvalidArgumentException;
  * expressions that can be compiled by converting this object to string
  * and will contain a correctly parenthesized and nested expression.
  */
-class QueryExpression implements IExpression, Countable
+class QueryExpression : IExpression, Countable
 {
     use TypeMapTrait;
 

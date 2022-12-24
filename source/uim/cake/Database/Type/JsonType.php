@@ -25,7 +25,7 @@ use PDO;
  *
  * Use to convert JSON data between PHP and the database types.
  */
-class JsonType : BaseType implements BatchCastingInterface
+class JsonType : BaseType : BatchCastingInterface
 {
     /**
      * @var int

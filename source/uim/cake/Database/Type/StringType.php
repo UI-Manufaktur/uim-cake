@@ -25,7 +25,7 @@ use PDO;
  *
  * Use to convert string data between PHP and the database types.
  */
-class StringType : BaseType implements OptionalConvertInterface
+class StringType : BaseType : OptionalConvertInterface
 {
     /**
      * Convert string data into the database format.

@@ -33,7 +33,7 @@ use IteratorAggregate;
  *
  * @property-read string $queryString
  */
-class StatementDecorator implements StatementInterface, Countable, IteratorAggregate
+class StatementDecorator : StatementInterface, Countable, IteratorAggregate
 {
     use TypeConverterTrait;
 

@@ -585,7 +585,7 @@ trait EntityTrait
     }
 
     /**
-     * Implements isset($entity);
+     * : isset($entity);
      *
      * @param string $offset The offset to check.
      * @return bool Success
@@ -596,7 +596,7 @@ trait EntityTrait
     }
 
     /**
-     * Implements $entity[$offset];
+     * : $entity[$offset];
      *
      * @param string $offset The offset to get.
      * @return mixed
@@ -608,7 +608,7 @@ trait EntityTrait
     }
 
     /**
-     * Implements $entity[$offset] = $value;
+     * : $entity[$offset] = $value;
      *
      * @param string $offset The offset to set.
      * @param mixed $value The value to set.
@@ -620,7 +620,7 @@ trait EntityTrait
     }
 
     /**
-     * Implements unset($result[$offset]);
+     * : unset($result[$offset]);
      *
      * @param string $offset The offset to remove.
      * @return void

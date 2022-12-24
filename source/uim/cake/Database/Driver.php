@@ -32,7 +32,7 @@ use PDOException;
  * Represents a database driver containing all specificities for
  * a database engine including its SQL dialect.
  */
-abstract class Driver implements DriverInterface
+abstract class Driver : DriverInterface
 {
     /**
      * @var int|null Maximum alias length or null if no limit

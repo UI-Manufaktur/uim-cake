@@ -25,7 +25,7 @@ use PDO;
  *
  * Use to convert bool data between PHP and the database types.
  */
-class BoolType : BaseType implements BatchCastingInterface
+class BoolType : BaseType : BatchCastingInterface
 {
     /**
      * Convert bool data into the database format.

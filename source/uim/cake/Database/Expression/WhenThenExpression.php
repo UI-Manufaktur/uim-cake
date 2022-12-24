@@ -28,7 +28,7 @@ use LogicException;
 /**
  * Represents a SQL when/then clause with a fluid API
  */
-class WhenThenExpression implements IExpression
+class WhenThenExpression : IExpression
 {
     use CaseExpressionTrait;
     use ExpressionTypeCasterTrait;

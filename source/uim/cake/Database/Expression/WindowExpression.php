@@ -23,7 +23,7 @@ use Closure;
 /**
  * This represents a SQL window expression used by aggregate and window functions.
  */
-class WindowExpression implements IExpression, WindowInterface
+class WindowExpression : IExpression, WindowInterface
 {
     /**
      * @var \Cake\Database\Expression\IdentifierExpression

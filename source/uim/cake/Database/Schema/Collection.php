@@ -26,7 +26,7 @@ use PDOException;
  * Used to access information about the tables,
  * and other data in a database.
  */
-class Collection implements CollectionInterface
+class Collection : CollectionInterface
 {
     /**
      * Connection object

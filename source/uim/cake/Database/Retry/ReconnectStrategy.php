@@ -26,7 +26,7 @@ use Exception;
  *
  * @internal
  */
-class ReconnectStrategy implements RetryStrategyInterface
+class ReconnectStrategy : RetryStrategyInterface
 {
     /**
      * The list of error strings to match when looking for a disconnection error.

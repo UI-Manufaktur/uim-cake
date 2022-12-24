@@ -29,7 +29,7 @@ use Cake\Database\ValueBinder;
  * For security reasons, all params passed are quoted by default unless
  * explicitly told otherwise.
  */
-class FunctionExpression : QueryExpression implements TypedResultInterface
+class FunctionExpression : QueryExpression : TypedResultInterface
 {
     use ExpressionTypeCasterTrait;
     use TypedResultTrait;

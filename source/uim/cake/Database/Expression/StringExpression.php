@@ -23,7 +23,7 @@ use Closure;
 /**
  * String expression with collation.
  */
-class StringExpression implements IExpression
+class StringExpression : IExpression
 {
     /**
      * @var string

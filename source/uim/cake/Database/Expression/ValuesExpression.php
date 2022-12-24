@@ -31,7 +31,7 @@ use Closure;
  * Helps generate SQL with the correct number of placeholders and bind
  * values correctly into the statement.
  */
-class ValuesExpression implements IExpression
+class ValuesExpression : IExpression
 {
     use ExpressionTypeCasterTrait;
     use TypeMapTrait;

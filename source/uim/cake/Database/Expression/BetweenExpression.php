@@ -24,7 +24,7 @@ use Closure;
 /**
  * An expression object that represents a SQL BETWEEN snippet
  */
-class BetweenExpression implements IExpression, FieldInterface
+class BetweenExpression : IExpression, FieldInterface
 {
     use ExpressionTypeCasterTrait;
     use FieldTrait;

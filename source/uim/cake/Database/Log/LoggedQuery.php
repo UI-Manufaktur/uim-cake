@@ -25,7 +25,7 @@ use JsonSerializable;
  *
  * @internal
  */
-class LoggedQuery implements JsonSerializable
+class LoggedQuery : JsonSerializable
 {
     /**
      * Driver executing the query

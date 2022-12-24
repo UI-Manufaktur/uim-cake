@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace Cake\Database;
 
 /**
- * Implements default and single-use mappings for columns to their associated types
+ * : default and single-use mappings for columns to their associated types
  */
 class TypeMap
 {
