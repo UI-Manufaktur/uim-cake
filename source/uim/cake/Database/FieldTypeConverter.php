@@ -65,7 +65,7 @@ class FieldTypeConverter
      */
     public this(TypeMap $typeMap, DriverInterface $driver)
     {
-        this._driver = $driver;
+        _driver = $driver;
         $map = $typeMap->toArray();
         $types = TypeFactory::buildAll();
 
@@ -109,7 +109,7 @@ class FieldTypeConverter
         }
 
         this.types = $types;
-        this._typeMap = $simpleResult;
+        _typeMap = $simpleResult;
         this.batchingTypeMap = $batchingResult;
     }
 
@@ -122,16 +122,16 @@ class FieldTypeConverter
      */
     function __invoke(array $row): array
     {
-        if (!empty(this._typeMap)) {
-            foreach (this._typeMap as $field => $type) {
-                $row[$field] = $type->toPHP($row[$field], this._driver);
+        if (!empty(_typeMap)) {
+            foreach (_typeMap as $field => $type) {
+                $row[$field] = $type->toPHP($row[$field], _driver);
             }
         }
 
         if (!empty(this.batchingTypeMap)) {
             foreach (this.batchingTypeMap as $t => $fields) {
                 /** @psalm-suppress PossiblyUndefinedMethod */
-                $row = this.types[$t]->manyToPHP($row, $fields, this._driver);
+                $row = this.types[$t]->manyToPHP($row, $fields, _driver);
             }
         }
 

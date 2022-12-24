@@ -213,8 +213,8 @@ class Query : IExpression, IteratorAggregate
      */
     function setConnection(Connection $connection)
     {
-        this._dirty();
-        this._connection = $connection;
+        _dirty();
+        _connection = $connection;
 
         return this;
     }
@@ -226,7 +226,7 @@ class Query : IExpression, IteratorAggregate
      */
     function getConnection(): Connection
     {
-        return this._connection;
+        return _connection;
     }
 
     /**
@@ -251,11 +251,11 @@ class Query : IExpression, IteratorAggregate
      */
     function execute(): StatementInterface
     {
-        $statement = this._connection->run(this);
-        this._iterator = this._decorateStatement($statement);
-        this._dirty = false;
+        $statement = _connection->run(this);
+        _iterator = _decorateStatement($statement);
+        _dirty = false;
 
-        return this._iterator;
+        return _iterator;
     }
 
     /**
@@ -337,7 +337,7 @@ class Query : IExpression, IteratorAggregate
      */
     public O traverse(this O)($callback)
     {
-        foreach (this._parts as $name => $part) {
+        foreach (_parts as $name => $part) {
             $callback($part, $name);
         }
 
@@ -371,7 +371,7 @@ class Query : IExpression, IteratorAggregate
     function traverseParts(callable $visitor, array $parts)
     {
         foreach ($parts as $name) {
-            $visitor(this._parts[$name], $name);
+            $visitor(_parts[$name], $name);
         }
 
         return this;
@@ -423,7 +423,7 @@ class Query : IExpression, IteratorAggregate
     function with($cte, bool $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['with'] = [];
+            _parts['with'] = [];
         }
 
         if ($cte instanceof Closure) {
@@ -436,8 +436,8 @@ class Query : IExpression, IteratorAggregate
             }
         }
 
-        this._parts['with'][] = $cte;
-        this._dirty();
+        _parts['with'][] = $cte;
+        _dirty();
 
         return this;
     }
@@ -488,13 +488,13 @@ class Query : IExpression, IteratorAggregate
         }
 
         if ($overwrite) {
-            this._parts['select'] = $fields;
+            _parts['select'] = $fields;
         } else {
-            this._parts['select'] = array_merge(this._parts['select'], $fields);
+            _parts['select'] = array_merge(_parts['select'], $fields);
         }
 
-        this._dirty();
-        this._type = 'select';
+        _dirty();
+        _type = 'select';
 
         return this;
     }
@@ -537,14 +537,14 @@ class Query : IExpression, IteratorAggregate
 
         if (is_array($on)) {
             $merge = [];
-            if (is_array(this._parts['distinct'])) {
-                $merge = this._parts['distinct'];
+            if (is_array(_parts['distinct'])) {
+                $merge = _parts['distinct'];
             }
             $on = $overwrite ? array_values($on) : array_merge($merge, array_values($on));
         }
 
-        this._parts['distinct'] = $on;
-        this._dirty();
+        _parts['distinct'] = $on;
+        _dirty();
 
         return this;
     }
@@ -573,14 +573,14 @@ class Query : IExpression, IteratorAggregate
      */
     function modifier($modifiers, $overwrite = false)
     {
-        this._dirty();
+        _dirty();
         if ($overwrite) {
-            this._parts['modifier'] = [];
+            _parts['modifier'] = [];
         }
         if (!is_array($modifiers)) {
             $modifiers = [$modifiers];
         }
-        this._parts['modifier'] = array_merge(this._parts['modifier'], $modifiers);
+        _parts['modifier'] = array_merge(_parts['modifier'], $modifiers);
 
         return this;
     }
@@ -619,12 +619,12 @@ class Query : IExpression, IteratorAggregate
         $tables = (array)$tables;
 
         if ($overwrite) {
-            this._parts['from'] = $tables;
+            _parts['from'] = $tables;
         } else {
-            this._parts['from'] = array_merge(this._parts['from'], $tables);
+            _parts['from'] = array_merge(_parts['from'], $tables);
         }
 
-        this._dirty();
+        _dirty();
 
         return this;
     }
@@ -722,7 +722,7 @@ class Query : IExpression, IteratorAggregate
         }
 
         $joins = [];
-        $i = count(this._parts['join']);
+        $i = count(_parts['join']);
         foreach ($tables as $alias => $t) {
             if (!is_array($t)) {
                 $t = ['table' => $t, 'conditions' => this.newExpr()];
@@ -740,12 +740,12 @@ class Query : IExpression, IteratorAggregate
         }
 
         if ($overwrite) {
-            this._parts['join'] = $joins;
+            _parts['join'] = $joins;
         } else {
-            this._parts['join'] = array_merge(this._parts['join'], $joins);
+            _parts['join'] = array_merge(_parts['join'], $joins);
         }
 
-        this._dirty();
+        _dirty();
 
         return this;
     }
@@ -761,8 +761,8 @@ class Query : IExpression, IteratorAggregate
      */
     function removeJoin(string $name)
     {
-        unset(this._parts['join'][$name]);
-        this._dirty();
+        unset(_parts['join'][$name]);
+        _dirty();
 
         return this;
     }
@@ -806,7 +806,7 @@ class Query : IExpression, IteratorAggregate
      */
     function leftJoin($table, $conditions = [], $types = [])
     {
-        this.join(this._makeJoin($table, $conditions, static::JOIN_TYPE_LEFT), $types);
+        this.join(_makeJoin($table, $conditions, static::JOIN_TYPE_LEFT), $types);
 
         return this;
     }
@@ -828,7 +828,7 @@ class Query : IExpression, IteratorAggregate
      */
     function rightJoin($table, $conditions = [], $types = [])
     {
-        this.join(this._makeJoin($table, $conditions, static::JOIN_TYPE_RIGHT), $types);
+        this.join(_makeJoin($table, $conditions, static::JOIN_TYPE_RIGHT), $types);
 
         return this;
     }
@@ -850,7 +850,7 @@ class Query : IExpression, IteratorAggregate
      */
     function innerJoin($table, $conditions = [], $types = [])
     {
-        this.join(this._makeJoin($table, $conditions, static::JOIN_TYPE_INNER), $types);
+        this.join(_makeJoin($table, $conditions, static::JOIN_TYPE_INNER), $types);
 
         return this;
     }
@@ -1010,9 +1010,9 @@ class Query : IExpression, IteratorAggregate
     function where($conditions = null, array $types = [], bool $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['where'] = this.newExpr();
+            _parts['where'] = this.newExpr();
         }
-        this._conjugate('where', $conditions, 'AND', $types);
+        _conjugate('where', $conditions, 'AND', $types);
 
         return this;
     }
@@ -1211,7 +1211,7 @@ class Query : IExpression, IteratorAggregate
      */
     function andWhere($conditions, array $types = [])
     {
-        this._conjugate('where', $conditions, 'AND', $types);
+        _conjugate('where', $conditions, 'AND', $types);
 
         return this;
     }
@@ -1280,17 +1280,17 @@ class Query : IExpression, IteratorAggregate
     function order($fields, $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['order'] = null;
+            _parts['order'] = null;
         }
 
         if (!$fields) {
             return this;
         }
 
-        if (!this._parts['order']) {
-            this._parts['order'] = new OrderByExpression();
+        if (!_parts['order']) {
+            _parts['order'] = new OrderByExpression();
         }
-        this._conjugate('order', $fields, '', []);
+        _conjugate('order', $fields, '', []);
 
         return this;
     }
@@ -1311,7 +1311,7 @@ class Query : IExpression, IteratorAggregate
     function orderAsc($field, $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['order'] = null;
+            _parts['order'] = null;
         }
         if (!$field) {
             return this;
@@ -1321,10 +1321,10 @@ class Query : IExpression, IteratorAggregate
             $field = $field(this.newExpr(), this);
         }
 
-        if (!this._parts['order']) {
-            this._parts['order'] = new OrderByExpression();
+        if (!_parts['order']) {
+            _parts['order'] = new OrderByExpression();
         }
-        this._parts['order']->add(new OrderClauseExpression($field, 'ASC'));
+        _parts['order']->add(new OrderClauseExpression($field, 'ASC'));
 
         return this;
     }
@@ -1345,7 +1345,7 @@ class Query : IExpression, IteratorAggregate
     function orderDesc($field, $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['order'] = null;
+            _parts['order'] = null;
         }
         if (!$field) {
             return this;
@@ -1355,10 +1355,10 @@ class Query : IExpression, IteratorAggregate
             $field = $field(this.newExpr(), this);
         }
 
-        if (!this._parts['order']) {
-            this._parts['order'] = new OrderByExpression();
+        if (!_parts['order']) {
+            _parts['order'] = new OrderByExpression();
         }
-        this._parts['order']->add(new OrderClauseExpression($field, 'DESC'));
+        _parts['order']->add(new OrderClauseExpression($field, 'DESC'));
 
         return this;
     }
@@ -1391,15 +1391,15 @@ class Query : IExpression, IteratorAggregate
     function group($fields, $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['group'] = [];
+            _parts['group'] = [];
         }
 
         if (!is_array($fields)) {
             $fields = [$fields];
         }
 
-        this._parts['group'] = array_merge(this._parts['group'], array_values($fields));
-        this._dirty();
+        _parts['group'] = array_merge(_parts['group'], array_values($fields));
+        _dirty();
 
         return this;
     }
@@ -1422,9 +1422,9 @@ class Query : IExpression, IteratorAggregate
     function having($conditions = null, $types = [], $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['having'] = this.newExpr();
+            _parts['having'] = this.newExpr();
         }
-        this._conjugate('having', $conditions, 'AND', $types);
+        _conjugate('having', $conditions, 'AND', $types);
 
         return this;
     }
@@ -1445,7 +1445,7 @@ class Query : IExpression, IteratorAggregate
      */
     function andHaving($conditions, $types = [])
     {
-        this._conjugate('having', $conditions, 'AND', $types);
+        _conjugate('having', $conditions, 'AND', $types);
 
         return this;
     }
@@ -1463,7 +1463,7 @@ class Query : IExpression, IteratorAggregate
     function window(string $name, $window, bool $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['window'] = [];
+            _parts['window'] = [];
         }
 
         if ($window instanceof Closure) {
@@ -1473,8 +1473,8 @@ class Query : IExpression, IteratorAggregate
             }
         }
 
-        this._parts['window'][] = ['name' => new IdentifierExpression($name), 'window' => $window];
-        this._dirty();
+        _parts['window'][] = ['name' => new IdentifierExpression($name), 'window' => $window];
+        _dirty();
 
         return this;
     }
@@ -1534,8 +1534,8 @@ class Query : IExpression, IteratorAggregate
      */
     function limit($limit)
     {
-        this._dirty();
-        this._parts['limit'] = $limit;
+        _dirty();
+        _parts['limit'] = $limit;
 
         return this;
     }
@@ -1560,8 +1560,8 @@ class Query : IExpression, IteratorAggregate
      */
     function offset($offset)
     {
-        this._dirty();
-        this._parts['offset'] = $offset;
+        _dirty();
+        _parts['offset'] = $offset;
 
         return this;
     }
@@ -1593,13 +1593,13 @@ class Query : IExpression, IteratorAggregate
     function union($query, $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['union'] = [];
+            _parts['union'] = [];
         }
-        this._parts['union'][] = [
+        _parts['union'][] = [
             'all' => false,
             'query' => $query,
         ];
-        this._dirty();
+        _dirty();
 
         return this;
     }
@@ -1628,13 +1628,13 @@ class Query : IExpression, IteratorAggregate
     function unionAll($query, $overwrite = false)
     {
         if ($overwrite) {
-            this._parts['union'] = [];
+            _parts['union'] = [];
         }
-        this._parts['union'][] = [
+        _parts['union'][] = [
             'all' => true,
             'query' => $query,
         ];
-        this._dirty();
+        _dirty();
 
         return this;
     }
@@ -1655,13 +1655,13 @@ class Query : IExpression, IteratorAggregate
         if (empty($columns)) {
             throw new RuntimeException('At least 1 column is required to perform an insert.');
         }
-        this._dirty();
-        this._type = 'insert';
-        this._parts['insert'][1] = $columns;
-        if (!this._parts['values']) {
-            this._parts['values'] = new ValuesExpression($columns, this.getTypeMap()->setTypes($types));
+        _dirty();
+        _type = 'insert';
+        _parts['insert'][1] = $columns;
+        if (!_parts['values']) {
+            _parts['values'] = new ValuesExpression($columns, this.getTypeMap()->setTypes($types));
         } else {
-            this._parts['values']->setColumns($columns);
+            _parts['values']->setColumns($columns);
         }
 
         return this;
@@ -1675,9 +1675,9 @@ class Query : IExpression, IteratorAggregate
      */
     function into(string $table)
     {
-        this._dirty();
-        this._type = 'insert';
-        this._parts['insert'][0] = $table;
+        _dirty();
+        _type = 'insert';
+        _parts['insert'][0] = $table;
 
         return this;
     }
@@ -1717,25 +1717,25 @@ class Query : IExpression, IteratorAggregate
      */
     function values($data)
     {
-        if (this._type != 'insert') {
+        if (_type != 'insert') {
             throw new DatabaseException(
                 'You cannot add values before defining columns to use.'
             );
         }
-        if (empty(this._parts['insert'])) {
+        if (empty(_parts['insert'])) {
             throw new DatabaseException(
                 'You cannot add values before defining columns to use.'
             );
         }
 
-        this._dirty();
+        _dirty();
         if ($data instanceof ValuesExpression) {
-            this._parts['values'] = $data;
+            _parts['values'] = $data;
 
             return this;
         }
 
-        this._parts['values']->add($data);
+        _parts['values']->add($data);
 
         return this;
     }
@@ -1756,9 +1756,9 @@ class Query : IExpression, IteratorAggregate
             throw new InvalidArgumentException($message);
         }
 
-        this._dirty();
-        this._type = 'update';
-        this._parts['update'][0] = $table;
+        _dirty();
+        _type = 'update';
+        _parts['update'][0] = $table;
 
         return this;
     }
@@ -1799,20 +1799,20 @@ class Query : IExpression, IteratorAggregate
      */
     function set($key, $value = null, $types = [])
     {
-        if (empty(this._parts['set'])) {
-            this._parts['set'] = this.newExpr()->setConjunction(',');
+        if (empty(_parts['set'])) {
+            _parts['set'] = this.newExpr()->setConjunction(',');
         }
 
         if ($key instanceof Closure) {
             $exp = this.newExpr()->setConjunction(',');
-            this._parts['set']->add($key($exp));
+            _parts['set']->add($key($exp));
 
             return this;
         }
 
         if (is_array($key) || $key instanceof IExpression) {
             $types = (array)$value;
-            this._parts['set']->add($key, $types);
+            _parts['set']->add($key, $types);
 
             return this;
         }
@@ -1820,7 +1820,7 @@ class Query : IExpression, IteratorAggregate
         if (!is_string($types)) {
             $types = null;
         }
-        this._parts['set']->eq($key, $value, $types);
+        _parts['set']->eq($key, $value, $types);
 
         return this;
     }
@@ -1836,8 +1836,8 @@ class Query : IExpression, IteratorAggregate
      */
     function delete(?string $table = null)
     {
-        this._dirty();
-        this._type = 'delete';
+        _dirty();
+        _type = 'delete';
         if ($table != null) {
             this.from($table);
         }
@@ -1864,8 +1864,8 @@ class Query : IExpression, IteratorAggregate
      */
     function epilog($expression = null)
     {
-        this._dirty();
-        this._parts['epilog'] = $expression;
+        _dirty();
+        _parts['epilog'] = $expression;
 
         return this;
     }
@@ -1877,7 +1877,7 @@ class Query : IExpression, IteratorAggregate
      */
     function type(): string
     {
-        return this._type;
+        return _type;
     }
 
     /**
@@ -1945,11 +1945,11 @@ class Query : IExpression, IteratorAggregate
      */
     function func(): FunctionsBuilder
     {
-        if (this._functionsBuilder == null) {
-            this._functionsBuilder = new FunctionsBuilder();
+        if (_functionsBuilder == null) {
+            _functionsBuilder = new FunctionsBuilder();
         }
 
-        return this._functionsBuilder;
+        return _functionsBuilder;
     }
 
     /**
@@ -1964,11 +1964,11 @@ class Query : IExpression, IteratorAggregate
     #[\ReturnTypeWillChange]
     function getIterator()
     {
-        if (this._iterator == null || this._dirty) {
-            this._iterator = this.execute();
+        if (_iterator == null || _dirty) {
+            _iterator = this.execute();
         }
 
-        return this._iterator;
+        return _iterator;
     }
 
     /**
@@ -2005,12 +2005,12 @@ class Query : IExpression, IteratorAggregate
      */
     function clause(string $name)
     {
-        if (!array_key_exists($name, this._parts)) {
-            $clauses = implode(', ', array_keys(this._parts));
+        if (!array_key_exists($name, _parts)) {
+            $clauses = implode(', ', array_keys(_parts));
             throw new InvalidArgumentException("The '$name' clause is not defined. Valid clauses are: $clauses");
         }
 
-        return this._parts[$name];
+        return _parts[$name];
     }
 
     /**
@@ -2044,11 +2044,11 @@ class Query : IExpression, IteratorAggregate
     function decorateResults(?callable $callback, bool $overwrite = false)
     {
         if ($overwrite) {
-            this._resultDecorators = [];
+            _resultDecorators = [];
         }
 
         if ($callback != null) {
-            this._resultDecorators[] = $callback;
+            _resultDecorators[] = $callback;
         }
 
         return this;
@@ -2072,8 +2072,8 @@ class Query : IExpression, IteratorAggregate
             $callback = Closure::fromCallable($callback);
         }
 
-        foreach (this._parts as $part) {
-            this._expressionsVisitor($part, $callback);
+        foreach (_parts as $part) {
+            _expressionsVisitor($part, $callback);
         }
 
         return this;
@@ -2092,7 +2092,7 @@ class Query : IExpression, IteratorAggregate
     {
         if (is_array($expression)) {
             foreach ($expression as $e) {
-                this._expressionsVisitor($e, $callback);
+                _expressionsVisitor($e, $callback);
             }
 
             return;
@@ -2100,7 +2100,7 @@ class Query : IExpression, IteratorAggregate
 
         if ($expression instanceof IExpression) {
             $expression->traverse(function ($exp) use ($callback) {
-                this._expressionsVisitor($exp, $callback);
+                _expressionsVisitor($exp, $callback);
             });
 
             if (!$expression instanceof self) {
@@ -2141,11 +2141,11 @@ class Query : IExpression, IteratorAggregate
      */
     function getValueBinder(): ValueBinder
     {
-        if (this._valueBinder == null) {
-            this._valueBinder = new ValueBinder();
+        if (_valueBinder == null) {
+            _valueBinder = new ValueBinder();
         }
 
-        return this._valueBinder;
+        return _valueBinder;
     }
 
     /**
@@ -2160,7 +2160,7 @@ class Query : IExpression, IteratorAggregate
      */
     function setValueBinder(?ValueBinder $binder)
     {
-        this._valueBinder = $binder;
+        _valueBinder = $binder;
 
         return this;
     }
@@ -2180,8 +2180,8 @@ class Query : IExpression, IteratorAggregate
      */
     function enableBufferedResults(bool $enable = true)
     {
-        this._dirty();
-        this._useBufferedResults = $enable;
+        _dirty();
+        _useBufferedResults = $enable;
 
         return this;
     }
@@ -2196,8 +2196,8 @@ class Query : IExpression, IteratorAggregate
      */
     function disableBufferedResults()
     {
-        this._dirty();
-        this._useBufferedResults = false;
+        _dirty();
+        _useBufferedResults = false;
 
         return this;
     }
@@ -2216,7 +2216,7 @@ class Query : IExpression, IteratorAggregate
      */
     function isBufferedResultsEnabled(): bool
     {
-        return this._useBufferedResults;
+        return _useBufferedResults;
     }
 
     /**
@@ -2228,8 +2228,8 @@ class Query : IExpression, IteratorAggregate
      */
     function setSelectTypeMap(TypeMap $typeMap)
     {
-        this._selectTypeMap = $typeMap;
-        this._dirty();
+        _selectTypeMap = $typeMap;
+        _dirty();
 
         return this;
     }
@@ -2242,11 +2242,11 @@ class Query : IExpression, IteratorAggregate
      */
     function getSelectTypeMap(): TypeMap
     {
-        if (this._selectTypeMap == null) {
-            this._selectTypeMap = new TypeMap();
+        if (_selectTypeMap == null) {
+            _selectTypeMap = new TypeMap();
         }
 
-        return this._selectTypeMap;
+        return _selectTypeMap;
     }
 
     /**
@@ -2313,7 +2313,7 @@ class Query : IExpression, IteratorAggregate
             $statement = new CallbackStatement($statement, $driver, new FieldTypeConverter($typeMap, $driver));
         }
 
-        foreach (this._resultDecorators as $f) {
+        foreach (_resultDecorators as $f) {
             $statement = new CallbackStatement($statement, $driver, $f);
         }
 
@@ -2332,9 +2332,9 @@ class Query : IExpression, IteratorAggregate
      */
     protected function _conjugate(string $part, $append, $conjunction, array $types): void
     {
-        $expression = this._parts[$part] ?: this.newExpr();
+        $expression = _parts[$part] ?: this.newExpr();
         if (empty($append)) {
-            this._parts[$part] = $expression;
+            _parts[$part] = $expression;
 
             return;
         }
@@ -2351,8 +2351,8 @@ class Query : IExpression, IteratorAggregate
                 ->add([$expression, $append], $types);
         }
 
-        this._parts[$part] = $expression;
-        this._dirty();
+        _parts[$part] = $expression;
+        _dirty();
     }
 
     /**
@@ -2363,9 +2363,9 @@ class Query : IExpression, IteratorAggregate
      */
     protected function _dirty(): void
     {
-        this._dirty = true;
+        _dirty = true;
 
-        if (this._iterator && this._valueBinder) {
+        if (_iterator && _valueBinder) {
             this.getValueBinder()->reset();
         }
     }
@@ -2377,14 +2377,14 @@ class Query : IExpression, IteratorAggregate
      */
     function __clone()
     {
-        this._iterator = null;
-        if (this._valueBinder != null) {
-            this._valueBinder = clone this._valueBinder;
+        _iterator = null;
+        if (_valueBinder != null) {
+            _valueBinder = clone _valueBinder;
         }
-        if (this._selectTypeMap != null) {
-            this._selectTypeMap = clone this._selectTypeMap;
+        if (_selectTypeMap != null) {
+            _selectTypeMap = clone _selectTypeMap;
         }
-        foreach (this._parts as $name => $part) {
+        foreach (_parts as $name => $part) {
             if (empty($part)) {
                 continue;
             }
@@ -2394,17 +2394,17 @@ class Query : IExpression, IteratorAggregate
                         foreach ($piece as $j => $value) {
                             if ($value instanceof IExpression) {
                                 /** @psalm-suppress PossiblyUndefinedMethod */
-                                this._parts[$name][$i][$j] = clone $value;
+                                _parts[$name][$i][$j] = clone $value;
                             }
                         }
                     } elseif ($piece instanceof IExpression) {
                         /** @psalm-suppress PossiblyUndefinedMethod */
-                        this._parts[$name][$i] = clone $piece;
+                        _parts[$name][$i] = clone $piece;
                     }
                 }
             }
             if ($part instanceof IExpression) {
-                this._parts[$name] = clone $part;
+                _parts[$name] = clone $part;
             }
         }
     }
@@ -2449,8 +2449,8 @@ class Query : IExpression, IteratorAggregate
             'sql' => $sql,
             'params' => $params,
             'defaultTypes' => this.getDefaultTypes(),
-            'decorators' => count(this._resultDecorators),
-            'executed' => this._iterator ? true : false,
+            'decorators' => count(_resultDecorators),
+            'executed' => _iterator ? true : false,
         ];
     }
 }

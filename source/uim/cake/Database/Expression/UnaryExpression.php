@@ -69,8 +69,8 @@ class UnaryExpression : IExpression
      */
     public this(string $operator, $value, $position = self::PREFIX)
     {
-        this._operator = $operator;
-        this._value = $value;
+        _operator = $operator;
+        _value = $value;
         this.position = $position;
     }
 
@@ -79,16 +79,16 @@ class UnaryExpression : IExpression
      */
     function sql(ValueBinder $binder): string
     {
-        $operand = this._value;
+        $operand = _value;
         if ($operand instanceof IExpression) {
             $operand = $operand->sql($binder);
         }
 
         if (this.position == self::POSTFIX) {
-            return '(' . $operand . ') ' . this._operator;
+            return '(' . $operand . ') ' . _operator;
         }
 
-        return this._operator . ' (' . $operand . ')';
+        return _operator . ' (' . $operand . ')';
     }
 
     /**
@@ -96,9 +96,9 @@ class UnaryExpression : IExpression
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this._value instanceof IExpression) {
-            $callback(this._value);
-            this._value->traverse($callback);
+        if (_value instanceof IExpression) {
+            $callback(_value);
+            _value->traverse($callback);
         }
 
         return this;
@@ -111,8 +111,8 @@ class UnaryExpression : IExpression
      */
     function __clone()
     {
-        if (this._value instanceof IExpression) {
-            this._value = clone this._value;
+        if (_value instanceof IExpression) {
+            _value = clone _value;
         }
     }
 }

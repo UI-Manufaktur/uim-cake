@@ -35,7 +35,7 @@ trait TypedResultTrait
      */
     function getReturnType(): string
     {
-        return this._returnType;
+        return _returnType;
     }
 
     /**
@@ -46,7 +46,7 @@ trait TypedResultTrait
      */
     function setReturnType(string $type)
     {
-        this._returnType = $type;
+        _returnType = $type;
 
         return this;
     }

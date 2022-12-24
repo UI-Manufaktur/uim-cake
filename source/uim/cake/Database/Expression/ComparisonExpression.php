@@ -78,10 +78,10 @@ class ComparisonExpression : IExpression, FieldInterface
      */
     public this($field, $value, ?string $type = null, string $operator = '=')
     {
-        this._type = $type;
+        _type = $type;
         this.setField($field);
         this.setValue($value);
-        this._operator = $operator;
+        _operator = $operator;
     }
 
     /**
@@ -92,15 +92,15 @@ class ComparisonExpression : IExpression, FieldInterface
      */
     function setValue($value): void
     {
-        $value = this._castToExpression($value, this._type);
+        $value = _castToExpression($value, _type);
 
-        $isMultiple = this._type && strpos(this._type, '[]') != false;
+        $isMultiple = _type && strpos(_type, '[]') != false;
         if ($isMultiple) {
-            [$value, this._valueExpressions] = this._collectExpressions($value);
+            [$value, _valueExpressions] = _collectExpressions($value);
         }
 
-        this._isMultiple = $isMultiple;
-        this._value = $value;
+        _isMultiple = $isMultiple;
+        _value = $value;
     }
 
     /**
@@ -110,7 +110,7 @@ class ComparisonExpression : IExpression, FieldInterface
      */
     function getValue()
     {
-        return this._value;
+        return _value;
     }
 
     /**
@@ -121,7 +121,7 @@ class ComparisonExpression : IExpression, FieldInterface
      */
     function setOperator(string $operator): void
     {
-        this._operator = $operator;
+        _operator = $operator;
     }
 
     /**
@@ -131,7 +131,7 @@ class ComparisonExpression : IExpression, FieldInterface
      */
     function getOperator(): string
     {
-        return this._operator;
+        return _operator;
     }
 
     /**
@@ -140,23 +140,23 @@ class ComparisonExpression : IExpression, FieldInterface
     function sql(ValueBinder $binder): string
     {
         /** @var \Cake\Database\IExpression|string $field */
-        $field = this._field;
+        $field = _field;
 
         if ($field instanceof IExpression) {
             $field = $field->sql($binder);
         }
 
-        if (this._value instanceof IdentifierExpression) {
+        if (_value instanceof IdentifierExpression) {
             $template = '%s %s %s';
-            $value = this._value->sql($binder);
-        } elseif (this._value instanceof IExpression) {
+            $value = _value->sql($binder);
+        } elseif (_value instanceof IExpression) {
             $template = '%s %s (%s)';
-            $value = this._value->sql($binder);
+            $value = _value->sql($binder);
         } else {
-            [$template, $value] = this._stringExpression($binder);
+            [$template, $value] = _stringExpression($binder);
         }
 
-        return sprintf($template, $field, this._operator, $value);
+        return sprintf($template, $field, _operator, $value);
     }
 
     /**
@@ -164,17 +164,17 @@ class ComparisonExpression : IExpression, FieldInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this._field instanceof IExpression) {
-            $callback(this._field);
-            this._field->traverse($callback);
+        if (_field instanceof IExpression) {
+            $callback(_field);
+            _field->traverse($callback);
         }
 
-        if (this._value instanceof IExpression) {
-            $callback(this._value);
-            this._value->traverse($callback);
+        if (_value instanceof IExpression) {
+            $callback(_value);
+            _value->traverse($callback);
         }
 
-        foreach (this._valueExpressions as $v) {
+        foreach (_valueExpressions as $v) {
             $callback($v);
             $v->traverse($callback);
         }
@@ -209,22 +209,22 @@ class ComparisonExpression : IExpression, FieldInterface
     {
         $template = '%s ';
 
-        if (this._field instanceof IExpression && !this._field instanceof IdentifierExpression) {
+        if (_field instanceof IExpression && !_field instanceof IdentifierExpression) {
             $template = '(%s) ';
         }
 
-        if (this._isMultiple) {
+        if (_isMultiple) {
             $template .= '%s (%s)';
-            $type = this._type;
+            $type = _type;
             if ($type != null) {
                 $type = str_replace('[]', '', $type);
             }
-            $value = this._flattenValue(this._value, $binder, $type);
+            $value = _flattenValue(_value, $binder, $type);
 
             // To avoid SQL errors when comparing a field to a list of empty values,
             // better just throw an exception here
             if ($value == '') {
-                $field = this._field instanceof IExpression ? this._field->sql($binder) : this._field;
+                $field = _field instanceof IExpression ? _field->sql($binder) : _field;
                 /** @psalm-suppress PossiblyInvalidCast */
                 throw new DatabaseException(
                     "Impossible to generate condition with empty list of values for field ($field)"
@@ -232,7 +232,7 @@ class ComparisonExpression : IExpression, FieldInterface
             }
         } else {
             $template .= '%s %s';
-            $value = this._bindValue(this._value, $binder, this._type);
+            $value = _bindValue(_value, $binder, _type);
         }
 
         return [$template, $value];
@@ -267,7 +267,7 @@ class ComparisonExpression : IExpression, FieldInterface
     {
         $parts = [];
         if (is_array($value)) {
-            foreach (this._valueExpressions as $k => $v) {
+            foreach (_valueExpressions as $k => $v) {
                 $parts[$k] = $v->sql($binder);
                 unset($value[$k]);
             }

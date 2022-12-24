@@ -119,10 +119,10 @@ class Sqlite : Driver
      */
     function connect(): bool
     {
-        if (this._connection) {
+        if (_connection) {
             return true;
         }
-        $config = this._config;
+        $config = _config;
         $config['flags'] += [
             PDO::ATTR_PERSISTENT => $config['persistent'],
             PDO::ATTR_EMULATE_PREPARES => false,
@@ -157,7 +157,7 @@ class Sqlite : Driver
             $dsn = 'sqlite:' . $config['database'];
         }
 
-        this._connect($dsn, $config);
+        _connect($dsn, $config);
         if ($chmodFile) {
             // phpcs:disable
             @chmod($config['database'], $config['mask']);
@@ -197,7 +197,7 @@ class Sqlite : Driver
          * @psalm-suppress PossiblyInvalidMethodCall
          * @psalm-suppress PossiblyInvalidArgument
          */
-        $statement = this._connection->prepare($isObject ? $query->sql() : $query);
+        $statement = _connection->prepare($isObject ? $query->sql() : $query);
         $result = new SqliteStatement(new PDOStatement($statement, this), this);
         /** @psalm-suppress PossiblyInvalidMethodCall */
         if ($isObject && $query->isBufferedResultsEnabled() == false) {
@@ -257,11 +257,11 @@ class Sqlite : Driver
      */
     function schemaDialect(): SchemaDialect
     {
-        if (this._schemaDialect == null) {
-            this._schemaDialect = new SqliteSchemaDialect(this);
+        if (_schemaDialect == null) {
+            _schemaDialect = new SqliteSchemaDialect(this);
         }
 
-        return this._schemaDialect;
+        return _schemaDialect;
     }
 
     /**
@@ -326,8 +326,8 @@ class Sqlite : Driver
                     ->iterateParts(function ($p, $key) {
                         if ($key == 0) {
                             $value = rtrim(strtolower($p), 's');
-                            if (isset(this._dateParts[$value])) {
-                                $p = ['value' => '%' . this._dateParts[$value], 'type' => null];
+                            if (isset(_dateParts[$value])) {
+                                $p = ['value' => '%' . _dateParts[$value], 'type' => null];
                             }
                         }
 

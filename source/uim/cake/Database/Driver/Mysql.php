@@ -124,10 +124,10 @@ class Mysql : Driver
      */
     function connect(): bool
     {
-        if (this._connection) {
+        if (_connection) {
             return true;
         }
-        $config = this._config;
+        $config = _config;
 
         if ($config['timezone'] == 'UTC') {
             $config['timezone'] = '+0:00';
@@ -161,7 +161,7 @@ class Mysql : Driver
             $dsn .= ";charset={$config['encoding']}";
         }
 
-        this._connect($dsn, $config);
+        _connect($dsn, $config);
 
         if (!empty($config['init'])) {
             $connection = this.getConnection();
@@ -197,7 +197,7 @@ class Mysql : Driver
          * @psalm-suppress PossiblyInvalidMethodCall
          * @psalm-suppress PossiblyInvalidArgument
          */
-        $statement = this._connection->prepare($isObject ? $query->sql() : $query);
+        $statement = _connection->prepare($isObject ? $query->sql() : $query);
         $result = new MysqlStatement($statement, this);
         /** @psalm-suppress PossiblyInvalidMethodCall */
         if ($isObject && $query->isBufferedResultsEnabled() == false) {
@@ -212,11 +212,11 @@ class Mysql : Driver
      */
     function schemaDialect(): SchemaDialect
     {
-        if (this._schemaDialect == null) {
-            this._schemaDialect = new MysqlSchemaDialect(this);
+        if (_schemaDialect == null) {
+            _schemaDialect = new MysqlSchemaDialect(this);
         }
 
-        return this._schemaDialect;
+        return _schemaDialect;
     }
 
     /**
@@ -224,7 +224,7 @@ class Mysql : Driver
      */
     function schema(): string
     {
-        return this._config['database'];
+        return _config['database'];
     }
 
     /**
@@ -289,18 +289,18 @@ class Mysql : Driver
      */
     function version(): string
     {
-        if (this._version == null) {
+        if (_version == null) {
             this.connect();
-            this._version = (string)this._connection->getAttribute(PDO::ATTR_SERVER_VERSION);
+            _version = (string)_connection->getAttribute(PDO::ATTR_SERVER_VERSION);
 
-            if (strpos(this._version, 'MariaDB') != false) {
+            if (strpos(_version, 'MariaDB') != false) {
                 this.serverType = static::SERVER_TYPE_MARIADB;
-                preg_match('/^(?:5\.5\.5-)?(\d+\.\d+\.\d+.*-MariaDB[^:]*)/', this._version, $matches);
-                this._version = $matches[1];
+                preg_match('/^(?:5\.5\.5-)?(\d+\.\d+\.\d+.*-MariaDB[^:]*)/', _version, $matches);
+                _version = $matches[1];
             }
         }
 
-        return this._version;
+        return _version;
     }
 
     /**

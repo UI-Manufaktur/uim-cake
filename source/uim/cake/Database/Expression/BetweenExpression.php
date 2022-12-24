@@ -61,14 +61,14 @@ class BetweenExpression : IExpression, FieldInterface
     public this($field, $from, $to, $type = null)
     {
         if ($type != null) {
-            $from = this._castToExpression($from, $type);
-            $to = this._castToExpression($to, $type);
+            $from = _castToExpression($from, $type);
+            $to = _castToExpression($to, $type);
         }
 
-        this._field = $field;
-        this._from = $from;
-        this._to = $to;
-        this._type = $type;
+        _field = $field;
+        _from = $from;
+        _to = $to;
+        _type = $type;
     }
 
     /**
@@ -77,12 +77,12 @@ class BetweenExpression : IExpression, FieldInterface
     function sql(ValueBinder $binder): string
     {
         $parts = [
-            'from' => this._from,
-            'to' => this._to,
+            'from' => _from,
+            'to' => _to,
         ];
 
         /** @var \Cake\Database\IExpression|string $field */
-        $field = this._field;
+        $field = _field;
         if ($field instanceof IExpression) {
             $field = $field->sql($binder);
         }
@@ -92,7 +92,7 @@ class BetweenExpression : IExpression, FieldInterface
                 $parts[$name] = $part->sql($binder);
                 continue;
             }
-            $parts[$name] = this._bindValue($part, $binder, this._type);
+            $parts[$name] = _bindValue($part, $binder, _type);
         }
 
         return sprintf('%s BETWEEN %s AND %s', $field, $parts['from'], $parts['to']);
@@ -103,7 +103,7 @@ class BetweenExpression : IExpression, FieldInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        foreach ([this._field, this._from, this._to] as $part) {
+        foreach ([_field, _from, _to] as $part) {
             if ($part instanceof IExpression) {
                 $callback($part);
             }

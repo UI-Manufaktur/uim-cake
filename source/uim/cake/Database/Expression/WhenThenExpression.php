@@ -99,7 +99,7 @@ class WhenThenExpression : IExpression
         if ($typeMap == null) {
             $typeMap = new TypeMap();
         }
-        this._typeMap = $typeMap;
+        _typeMap = $typeMap;
     }
 
     /**
@@ -162,7 +162,7 @@ class WhenThenExpression : IExpression
             }
 
             // avoid dirtying the type map for possible consecutive `when()` calls
-            $typeMap = clone this._typeMap;
+            $typeMap = clone _typeMap;
             if (
                 is_array($type) &&
                 count($type) > 0
@@ -291,7 +291,7 @@ class WhenThenExpression : IExpression
             is_string(this.whenType) &&
             !($when instanceof IExpression)
         ) {
-            $when = this._castToExpression($when, this.whenType);
+            $when = _castToExpression($when, this.whenType);
         }
         if ($when instanceof Query) {
             $when = sprintf('(%s)', $when->sql($binder));

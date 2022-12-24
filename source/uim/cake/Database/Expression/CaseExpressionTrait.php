@@ -64,10 +64,10 @@ trait CaseExpressionTrait
         ) {
             $type = 'string';
         } elseif (
-            this._typeMap != null &&
+            _typeMap != null &&
             $value instanceof IdentifierExpression
         ) {
-            $type = this._typeMap->type($value->getIdentifier());
+            $type = _typeMap->type($value->getIdentifier());
         } elseif ($value instanceof TypedResultInterface) {
             $type = $value->getReturnType();
         }
@@ -89,7 +89,7 @@ trait CaseExpressionTrait
             $type != null &&
             !($value instanceof IExpression)
         ) {
-            $value = this._castToExpression($value, $type);
+            $value = _castToExpression($value, $type);
         }
 
         if ($value == null) {

@@ -98,7 +98,7 @@ class CaseExpression : IExpression
         $values = is_array($values) ? $values : [$values];
         $types = is_array($types) ? $types : [$types];
 
-        this._addExpressions($conditions, $values, $types);
+        _addExpressions($conditions, $values, $types);
 
         return this;
     }
@@ -128,12 +128,12 @@ class CaseExpression : IExpression
                 continue;
             }
 
-            this._conditions[] = $c;
+            _conditions[] = $c;
             $value = $rawValues[$k] ?? 1;
 
             if ($value == 'literal') {
                 $value = $keyValues[$k];
-                this._values[] = $value;
+                _values[] = $value;
                 continue;
             }
 
@@ -141,22 +141,22 @@ class CaseExpression : IExpression
                 /** @var string $identifier */
                 $identifier = $keyValues[$k];
                 $value = new IdentifierExpression($identifier);
-                this._values[] = $value;
+                _values[] = $value;
                 continue;
             }
 
             $type = $types[$k] ?? null;
 
             if ($type != null && !$value instanceof IExpression) {
-                $value = this._castToExpression($value, $type);
+                $value = _castToExpression($value, $type);
             }
 
             if ($value instanceof IExpression) {
-                this._values[] = $value;
+                _values[] = $value;
                 continue;
             }
 
-            this._values[] = ['value' => $value, 'type' => $type];
+            _values[] = ['value' => $value, 'type' => $type];
         }
     }
 
@@ -175,14 +175,14 @@ class CaseExpression : IExpression
         }
 
         if ($value != null && !$value instanceof IExpression) {
-            $value = this._castToExpression($value, $type);
+            $value = _castToExpression($value, $type);
         }
 
         if (!$value instanceof IExpression) {
             $value = ['value' => $value, 'type' => $type];
         }
 
-        this._elseValue = $value;
+        _elseValue = $value;
     }
 
     /**
@@ -215,13 +215,13 @@ class CaseExpression : IExpression
     {
         $parts = [];
         $parts[] = 'CASE';
-        foreach (this._conditions as $k => $part) {
-            $value = this._values[$k];
-            $parts[] = 'WHEN ' . this._compile($part, $binder) . ' THEN ' . this._compile($value, $binder);
+        foreach (_conditions as $k => $part) {
+            $value = _values[$k];
+            $parts[] = 'WHEN ' . _compile($part, $binder) . ' THEN ' . _compile($value, $binder);
         }
-        if (this._elseValue != null) {
+        if (_elseValue != null) {
             $parts[] = 'ELSE';
-            $parts[] = this._compile(this._elseValue, $binder);
+            $parts[] = _compile(_elseValue, $binder);
         }
         $parts[] = 'END';
 
@@ -241,9 +241,9 @@ class CaseExpression : IExpression
                 }
             }
         }
-        if (this._elseValue instanceof IExpression) {
-            $callback(this._elseValue);
-            this._elseValue->traverse($callback);
+        if (_elseValue instanceof IExpression) {
+            $callback(_elseValue);
+            _elseValue->traverse($callback);
         }
 
         return this;

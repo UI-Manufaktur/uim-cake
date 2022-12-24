@@ -34,8 +34,8 @@ class QueryLogger : BaseLog
      */
     public this(array $config = [])
     {
-        this._defaultConfig['scopes'] = ['queriesLog'];
-        this._defaultConfig['connection'] = '';
+        _defaultConfig['scopes'] = ['queriesLog'];
+        _defaultConfig['connection'] = '';
 
         parent::__construct($config);
     }

@@ -81,7 +81,7 @@ class QueryExpression : IExpression, Countable
      */
     function setConjunction(string $conjunction)
     {
-        this._conjunction = strtoupper($conjunction);
+        _conjunction = strtoupper($conjunction);
 
         return this;
     }
@@ -93,7 +93,7 @@ class QueryExpression : IExpression, Countable
      */
     function getConjunction(): string
     {
-        return this._conjunction;
+        return _conjunction;
     }
 
     /**
@@ -119,18 +119,18 @@ class QueryExpression : IExpression, Countable
     function add($conditions, array $types = [])
     {
         if (is_string($conditions)) {
-            this._conditions[] = $conditions;
+            _conditions[] = $conditions;
 
             return this;
         }
 
         if ($conditions instanceof IExpression) {
-            this._conditions[] = $conditions;
+            _conditions[] = $conditions;
 
             return this;
         }
 
-        this._addConditions($conditions, $types);
+        _addConditions($conditions, $types);
 
         return this;
     }
@@ -148,7 +148,7 @@ class QueryExpression : IExpression, Countable
     function eq($field, $value, ?string $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
 
         return this.add(new ComparisonExpression($field, $value, $type, '='));
@@ -167,7 +167,7 @@ class QueryExpression : IExpression, Countable
     function notEq($field, $value, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
 
         return this.add(new ComparisonExpression($field, $value, $type, '!='));
@@ -184,7 +184,7 @@ class QueryExpression : IExpression, Countable
     function gt($field, $value, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
 
         return this.add(new ComparisonExpression($field, $value, $type, '>'));
@@ -201,7 +201,7 @@ class QueryExpression : IExpression, Countable
     function lt($field, $value, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
 
         return this.add(new ComparisonExpression($field, $value, $type, '<'));
@@ -218,7 +218,7 @@ class QueryExpression : IExpression, Countable
     function gte($field, $value, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
 
         return this.add(new ComparisonExpression($field, $value, $type, '>='));
@@ -235,7 +235,7 @@ class QueryExpression : IExpression, Countable
     function lte($field, $value, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
 
         return this.add(new ComparisonExpression($field, $value, $type, '<='));
@@ -284,7 +284,7 @@ class QueryExpression : IExpression, Countable
     function like($field, $value, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
 
         return this.add(new ComparisonExpression($field, $value, $type, 'LIKE'));
@@ -301,7 +301,7 @@ class QueryExpression : IExpression, Countable
     function notLike($field, $value, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
 
         return this.add(new ComparisonExpression($field, $value, $type, 'NOT LIKE'));
@@ -319,7 +319,7 @@ class QueryExpression : IExpression, Countable
     function in($field, $values, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
         $type = $type ?: 'string';
         $type .= '[]';
@@ -392,7 +392,7 @@ class QueryExpression : IExpression, Countable
     function notIn($field, $values, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
         $type = $type ?: 'string';
         $type .= '[]';
@@ -455,7 +455,7 @@ class QueryExpression : IExpression, Countable
     function between($field, $from, $to, $type = null)
     {
         if ($type == null) {
-            $type = this._calculateType($field);
+            $type = _calculateType($field);
         }
 
         return this.add(new BetweenExpression($field, $from, $to, $type));
@@ -560,7 +560,7 @@ class QueryExpression : IExpression, Countable
      */
     function count(): int
     {
-        return count(this._conditions);
+        return count(_conditions);
     }
 
     /**
@@ -592,10 +592,10 @@ class QueryExpression : IExpression, Countable
         if ($len == 0) {
             return '';
         }
-        $conjunction = this._conjunction;
+        $conjunction = _conjunction;
         $template = $len == 1 ? '%s' : '(%s)';
         $parts = [];
-        foreach (this._conditions as $part) {
+        foreach (_conditions as $part) {
             if ($part instanceof Query) {
                 $part = '(' . $part->sql($binder) . ')';
             } elseif ($part instanceof IExpression) {
@@ -614,7 +614,7 @@ class QueryExpression : IExpression, Countable
      */
     public O traverse(this O)(Closure $callback)
     {
-        foreach (this._conditions as $c) {
+        foreach (_conditions as $c) {
             if ($c instanceof IExpression) {
                 $callback($c);
                 $c->traverse($callback);
@@ -642,14 +642,14 @@ class QueryExpression : IExpression, Countable
     function iterateParts(callable $callback)
     {
         $parts = [];
-        foreach (this._conditions as $k => $c) {
+        foreach (_conditions as $k => $c) {
             $key = &$k;
             $part = $callback($c, $key);
             if ($part != null) {
                 $parts[$key] = $part;
             }
         }
-        this._conditions = $parts;
+        _conditions = $parts;
 
         return this;
     }
@@ -686,7 +686,7 @@ class QueryExpression : IExpression, Countable
      */
     function hasNestedExpression(): bool
     {
-        foreach (this._conditions as $c) {
+        foreach (_conditions as $c) {
             if ($c instanceof IExpression) {
                 return true;
             }
@@ -736,27 +736,27 @@ class QueryExpression : IExpression, Countable
             }
 
             if ($numericKey && $c instanceof IExpression) {
-                this._conditions[] = $c;
+                _conditions[] = $c;
                 continue;
             }
 
             if ($numericKey && is_string($c)) {
-                this._conditions[] = $c;
+                _conditions[] = $c;
                 continue;
             }
 
             if ($numericKey && $isArray || $isOperator) {
-                this._conditions[] = new static($c, $typeMap, $numericKey ? 'AND' : $k);
+                _conditions[] = new static($c, $typeMap, $numericKey ? 'AND' : $k);
                 continue;
             }
 
             if ($isNot) {
-                this._conditions[] = new UnaryExpression('NOT', new static($c, $typeMap));
+                _conditions[] = new UnaryExpression('NOT', new static($c, $typeMap));
                 continue;
             }
 
             if (!$numericKey) {
-                this._conditions[] = this._parseCondition($k, $c);
+                _conditions[] = _parseCondition($k, $c);
             }
         }
     }
@@ -840,7 +840,7 @@ class QueryExpression : IExpression, Countable
             $operator = '!=';
         }
 
-        if ($value == null && this._conjunction != ',') {
+        if ($value == null && _conjunction != ',') {
             throw new InvalidArgumentException(
                 sprintf('Expression `%s` is missing operator (IS, IS NOT) with `null` value.', $expression)
             );
@@ -872,9 +872,9 @@ class QueryExpression : IExpression, Countable
      */
     function __clone()
     {
-        foreach (this._conditions as $i => $condition) {
+        foreach (_conditions as $i => $condition) {
             if ($condition instanceof IExpression) {
-                this._conditions[$i] = clone $condition;
+                _conditions[$i] = clone $condition;
             }
         }
     }

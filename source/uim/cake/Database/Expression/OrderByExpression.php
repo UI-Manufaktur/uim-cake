@@ -43,7 +43,7 @@ class OrderByExpression : QueryExpression
     function sql(ValueBinder $binder): string
     {
         $order = [];
-        foreach (this._conditions as $k => $direction) {
+        foreach (_conditions as $k => $direction) {
             if ($direction instanceof IExpression) {
                 $direction = $direction->sql($binder);
             }
@@ -83,6 +83,6 @@ class OrderByExpression : QueryExpression
             }
         }
 
-        this._conditions = array_merge(this._conditions, $conditions);
+        _conditions = array_merge(_conditions, $conditions);
     }
 }

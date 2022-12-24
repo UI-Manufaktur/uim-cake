@@ -134,7 +134,7 @@ class Connection : ConnectionInterface
      */
     public this(array $config)
     {
-        this._config = $config;
+        _config = $config;
 
         $driverConfig = array_diff_key($config, array_flip([
             'name',
@@ -143,7 +143,7 @@ class Connection : ConnectionInterface
             'cacheMetaData',
             'cacheKeyPrefix',
         ]));
-        this._driver = this.createDriver($config['driver'] ?? '', $driverConfig);
+        _driver = this.createDriver($config['driver'] ?? '', $driverConfig);
 
         if (!empty($config['log'])) {
             this.enableQueryLogging((bool)$config['log']);
@@ -157,7 +157,7 @@ class Connection : ConnectionInterface
      */
     function __destruct()
     {
-        if (this._transactionStarted && class_exists(Log::class)) {
+        if (_transactionStarted && class_exists(Log::class)) {
             Log::warning('The connection is going to be closed but there is an active transaction.');
         }
     }
@@ -167,7 +167,7 @@ class Connection : ConnectionInterface
      */
     function config(): array
     {
-        return this._config;
+        return _config;
     }
 
     /**
@@ -175,7 +175,7 @@ class Connection : ConnectionInterface
      */
     function configName(): string
     {
-        return this._config['name'] ?? '';
+        return _config['name'] ?? '';
     }
 
     /**
@@ -193,7 +193,7 @@ class Connection : ConnectionInterface
     {
         deprecationWarning('Setting the driver is deprecated. Use the connection config instead.');
 
-        this._driver = this.createDriver($driver, $config);
+        _driver = this.createDriver($driver, $config);
 
         return this;
     }
@@ -244,7 +244,7 @@ class Connection : ConnectionInterface
      */
     function getDriver(): DriverInterface
     {
-        return this._driver;
+        return _driver;
     }
 
     /**
@@ -256,13 +256,13 @@ class Connection : ConnectionInterface
     function connect(): bool
     {
         try {
-            return this._driver->connect();
+            return _driver->connect();
         } catch (MissingConnectionException $e) {
             throw $e;
         } catch (Throwable $e) {
             throw new MissingConnectionException(
                 [
-                    'driver' => App::shortName(get_class(this._driver), 'Database/Driver'),
+                    'driver' => App::shortName(get_class(_driver), 'Database/Driver'),
                     'reason' => $e->getMessage(),
                 ],
                 null,
@@ -278,7 +278,7 @@ class Connection : ConnectionInterface
      */
     function disconnect(): void
     {
-        this._driver->disconnect();
+        _driver->disconnect();
     }
 
     /**
@@ -288,7 +288,7 @@ class Connection : ConnectionInterface
      */
     function isConnected(): bool
     {
-        return this._driver->isConnected();
+        return _driver->isConnected();
     }
 
     /**
@@ -300,10 +300,10 @@ class Connection : ConnectionInterface
     function prepare($query): StatementInterface
     {
         return this.getDisconnectRetry()->run(function () use ($query) {
-            $statement = this._driver->prepare($query);
+            $statement = _driver->prepare($query);
 
-            if (this._logQueries) {
-                $statement = this._newLogger($statement);
+            if (_logQueries) {
+                $statement = _newLogger($statement);
             }
 
             return $statement;
@@ -397,7 +397,7 @@ class Connection : ConnectionInterface
      */
     function setSchemaCollection(SchemaCollectionInterface $collection)
     {
-        this._schemaCollection = $collection;
+        _schemaCollection = $collection;
 
         return this;
     }
@@ -409,19 +409,19 @@ class Connection : ConnectionInterface
      */
     function getSchemaCollection(): SchemaCollectionInterface
     {
-        if (this._schemaCollection != null) {
-            return this._schemaCollection;
+        if (_schemaCollection != null) {
+            return _schemaCollection;
         }
 
-        if (!empty(this._config['cacheMetadata'])) {
-            return this._schemaCollection = new CachedCollection(
+        if (!empty(_config['cacheMetadata'])) {
+            return _schemaCollection = new CachedCollection(
                 new SchemaCollection(this),
-                empty(this._config['cacheKeyPrefix']) ? this.configName() : this._config['cacheKeyPrefix'],
+                empty(_config['cacheKeyPrefix']) ? this.configName() : _config['cacheKeyPrefix'],
                 this.getCacher()
             );
         }
 
-        return this._schemaCollection = new SchemaCollection(this);
+        return _schemaCollection = new SchemaCollection(this);
     }
 
     /**
@@ -487,25 +487,25 @@ class Connection : ConnectionInterface
      */
     function begin(): void
     {
-        if (!this._transactionStarted) {
-            if (this._logQueries) {
+        if (!_transactionStarted) {
+            if (_logQueries) {
                 this.log('BEGIN');
             }
 
             this.getDisconnectRetry()->run(function (): void {
-                this._driver->beginTransaction();
+                _driver->beginTransaction();
             });
 
-            this._transactionLevel = 0;
-            this._transactionStarted = true;
+            _transactionLevel = 0;
+            _transactionStarted = true;
             this.nestedTransactionRollbackException = null;
 
             return;
         }
 
-        this._transactionLevel++;
+        _transactionLevel++;
         if (this.isSavePointsEnabled()) {
-            this.createSavePoint((string)this._transactionLevel);
+            this.createSavePoint((string)_transactionLevel);
         }
     }
 
@@ -516,11 +516,11 @@ class Connection : ConnectionInterface
      */
     function commit(): bool
     {
-        if (!this._transactionStarted) {
+        if (!_transactionStarted) {
             return false;
         }
 
-        if (this._transactionLevel == 0) {
+        if (_transactionLevel == 0) {
             if (this.wasNestedTransactionRolledback()) {
                 /** @var \Cake\Database\Exception\NestedTransactionRollbackException $e */
                 $e = this.nestedTransactionRollbackException;
@@ -528,19 +528,19 @@ class Connection : ConnectionInterface
                 throw $e;
             }
 
-            this._transactionStarted = false;
+            _transactionStarted = false;
             this.nestedTransactionRollbackException = null;
-            if (this._logQueries) {
+            if (_logQueries) {
                 this.log('COMMIT');
             }
 
-            return this._driver->commitTransaction();
+            return _driver->commitTransaction();
         }
         if (this.isSavePointsEnabled()) {
-            this.releaseSavePoint((string)this._transactionLevel);
+            this.releaseSavePoint((string)_transactionLevel);
         }
 
-        this._transactionLevel--;
+        _transactionLevel--;
 
         return true;
     }
@@ -554,7 +554,7 @@ class Connection : ConnectionInterface
      */
     function rollback(?bool $toBeginning = null): bool
     {
-        if (!this._transactionStarted) {
+        if (!_transactionStarted) {
             return false;
         }
 
@@ -562,19 +562,19 @@ class Connection : ConnectionInterface
         if ($toBeginning == null) {
             $toBeginning = !$useSavePoint;
         }
-        if (this._transactionLevel == 0 || $toBeginning) {
-            this._transactionLevel = 0;
-            this._transactionStarted = false;
+        if (_transactionLevel == 0 || $toBeginning) {
+            _transactionLevel = 0;
+            _transactionStarted = false;
             this.nestedTransactionRollbackException = null;
-            if (this._logQueries) {
+            if (_logQueries) {
                 this.log('ROLLBACK');
             }
-            this._driver->rollbackTransaction();
+            _driver->rollbackTransaction();
 
             return true;
         }
 
-        $savePoint = this._transactionLevel--;
+        $savePoint = _transactionLevel--;
         if ($useSavePoint) {
             this.rollbackSavepoint($savePoint);
         } elseif (this.nestedTransactionRollbackException == null) {
@@ -596,9 +596,9 @@ class Connection : ConnectionInterface
     function enableSavePoints(bool $enable = true)
     {
         if ($enable == false) {
-            this._useSavePoints = false;
+            _useSavePoints = false;
         } else {
-            this._useSavePoints = this._driver->supports(DriverInterface::FEATURE_SAVEPOINT);
+            _useSavePoints = _driver->supports(DriverInterface::FEATURE_SAVEPOINT);
         }
 
         return this;
@@ -611,7 +611,7 @@ class Connection : ConnectionInterface
      */
     function disableSavePoints()
     {
-        this._useSavePoints = false;
+        _useSavePoints = false;
 
         return this;
     }
@@ -623,7 +623,7 @@ class Connection : ConnectionInterface
      */
     function isSavePointsEnabled(): bool
     {
-        return this._useSavePoints;
+        return _useSavePoints;
     }
 
     /**
@@ -634,7 +634,7 @@ class Connection : ConnectionInterface
      */
     function createSavePoint($name): void
     {
-        this.execute(this._driver->savePointSQL($name))->closeCursor();
+        this.execute(_driver->savePointSQL($name))->closeCursor();
     }
 
     /**
@@ -645,7 +645,7 @@ class Connection : ConnectionInterface
      */
     function releaseSavePoint($name): void
     {
-        $sql = this._driver->releaseSavePointSQL($name);
+        $sql = _driver->releaseSavePointSQL($name);
         if ($sql) {
             this.execute($sql)->closeCursor();
         }
@@ -659,7 +659,7 @@ class Connection : ConnectionInterface
      */
     function rollbackSavepoint($name): void
     {
-        this.execute(this._driver->rollbackSavePointSQL($name))->closeCursor();
+        this.execute(_driver->rollbackSavePointSQL($name))->closeCursor();
     }
 
     /**
@@ -670,7 +670,7 @@ class Connection : ConnectionInterface
     function disableForeignKeys(): void
     {
         this.getDisconnectRetry()->run(function (): void {
-            this.execute(this._driver->disableForeignKeySQL())->closeCursor();
+            this.execute(_driver->disableForeignKeySQL())->closeCursor();
         });
     }
 
@@ -682,7 +682,7 @@ class Connection : ConnectionInterface
     function enableForeignKeys(): void
     {
         this.getDisconnectRetry()->run(function (): void {
-            this.execute(this._driver->enableForeignKeySQL())->closeCursor();
+            this.execute(_driver->enableForeignKeySQL())->closeCursor();
         });
     }
 
@@ -695,7 +695,7 @@ class Connection : ConnectionInterface
      */
     function supportsDynamicConstraints(): bool
     {
-        return this._driver->supportsDynamicConstraints();
+        return _driver->supportsDynamicConstraints();
     }
 
     /**
@@ -763,7 +763,7 @@ class Connection : ConnectionInterface
      */
     function inTransaction(): bool
     {
-        return this._transactionStarted;
+        return _transactionStarted;
     }
 
     /**
@@ -779,7 +779,7 @@ class Connection : ConnectionInterface
     {
         [$value, $type] = this.cast($value, $type);
 
-        return this._driver->quote($value, $type);
+        return _driver->quote($value, $type);
     }
 
     /**
@@ -791,7 +791,7 @@ class Connection : ConnectionInterface
      */
     function supportsQuoting(): bool
     {
-        return this._driver->supports(DriverInterface::FEATURE_QUOTE);
+        return _driver->supports(DriverInterface::FEATURE_QUOTE);
     }
 
     /**
@@ -805,7 +805,7 @@ class Connection : ConnectionInterface
      */
     function quoteIdentifier(string $identifier): string
     {
-        return this._driver->quoteIdentifier($identifier);
+        return _driver->quoteIdentifier($identifier);
     }
 
     /**
@@ -819,8 +819,8 @@ class Connection : ConnectionInterface
      */
     function cacheMetadata($cache): void
     {
-        this._schemaCollection = null;
-        this._config['cacheMetadata'] = $cache;
+        _schemaCollection = null;
+        _config['cacheMetadata'] = $cache;
         if (is_string($cache)) {
             this.cacher = null;
         }
@@ -845,7 +845,7 @@ class Connection : ConnectionInterface
             return this.cacher;
         }
 
-        $configName = this._config['cacheMetadata'] ?? '_cake_model_';
+        $configName = _config['cacheMetadata'] ?? '_cake_model_';
         if (!is_string($configName)) {
             $configName = '_cake_model_';
         }
@@ -868,7 +868,7 @@ class Connection : ConnectionInterface
      */
     function enableQueryLogging(bool $enable = true)
     {
-        this._logQueries = $enable;
+        _logQueries = $enable;
 
         return this;
     }
@@ -880,7 +880,7 @@ class Connection : ConnectionInterface
      */
     function disableQueryLogging()
     {
-        this._logQueries = false;
+        _logQueries = false;
 
         return this;
     }
@@ -892,7 +892,7 @@ class Connection : ConnectionInterface
      */
     function isQueryLoggingEnabled(): bool
     {
-        return this._logQueries;
+        return _logQueries;
     }
 
     /**
@@ -904,7 +904,7 @@ class Connection : ConnectionInterface
      */
     function setLogger(LoggerInterface $logger)
     {
-        this._logger = $logger;
+        _logger = $logger;
 
         return this;
     }
@@ -916,8 +916,8 @@ class Connection : ConnectionInterface
      */
     function getLogger(): LoggerInterface
     {
-        if (this._logger != null) {
-            return this._logger;
+        if (_logger != null) {
+            return _logger;
         }
 
         if (!class_exists(BaseLog::class)) {
@@ -927,7 +927,7 @@ class Connection : ConnectionInterface
             );
         }
 
-        return this._logger = new QueryLogger(['connection' => this.configName()]);
+        return _logger = new QueryLogger(['connection' => this.configName()]);
     }
 
     /**
@@ -952,7 +952,7 @@ class Connection : ConnectionInterface
      */
     protected function _newLogger(StatementInterface $statement): LoggingStatement
     {
-        $log = new LoggingStatement($statement, this._driver);
+        $log = new LoggingStatement($statement, _driver);
         $log->setLogger(this.getLogger());
 
         return $log;
@@ -973,17 +973,17 @@ class Connection : ConnectionInterface
             'database' => '*****',
             'port' => '*****',
         ];
-        $replace = array_intersect_key($secrets, this._config);
-        $config = $replace + this._config;
+        $replace = array_intersect_key($secrets, _config);
+        $config = $replace + _config;
 
         return [
             'config' => $config,
-            'driver' => this._driver,
-            'transactionLevel' => this._transactionLevel,
-            'transactionStarted' => this._transactionStarted,
-            'useSavePoints' => this._useSavePoints,
-            'logQueries' => this._logQueries,
-            'logger' => this._logger,
+            'driver' => _driver,
+            'transactionLevel' => _transactionLevel,
+            'transactionStarted' => _transactionStarted,
+            'useSavePoints' => _useSavePoints,
+            'logQueries' => _logQueries,
+            'logger' => _logger,
         ];
     }
 }

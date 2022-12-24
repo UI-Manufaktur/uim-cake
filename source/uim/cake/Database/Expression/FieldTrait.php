@@ -36,7 +36,7 @@ trait FieldTrait
      */
     function setField($field): void
     {
-        this._field = $field;
+        _field = $field;
     }
 
     /**
@@ -46,6 +46,6 @@ trait FieldTrait
      */
     function getField()
     {
-        return this._field;
+        return _field;
     }
 }

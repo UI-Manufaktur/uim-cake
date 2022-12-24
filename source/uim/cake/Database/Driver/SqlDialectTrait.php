@@ -47,19 +47,19 @@ trait SqlDialectTrait
 
         // string
         if (preg_match('/^[\w-]+$/u', $identifier)) {
-            return this._startQuote . $identifier . this._endQuote;
+            return _startQuote . $identifier . _endQuote;
         }
 
         // string.string
         if (preg_match('/^[\w-]+\.[^ \*]*$/u', $identifier)) {
             $items = explode('.', $identifier);
 
-            return this._startQuote . implode(this._endQuote . '.' . this._startQuote, $items) . this._endQuote;
+            return _startQuote . implode(_endQuote . '.' . _startQuote, $items) . _endQuote;
         }
 
         // string.*
         if (preg_match('/^[\w-]+\.\*$/u', $identifier)) {
-            return this._startQuote . str_replace('.*', this._endQuote . '.*', $identifier);
+            return _startQuote . str_replace('.*', _endQuote . '.*', $identifier);
         }
 
         // Functions
@@ -75,13 +75,13 @@ trait SqlDialectTrait
         // string.string with spaces
         if (preg_match('/^([\w-]+\.[\w][\w\s-]*[\w])(.*)/u', $identifier, $matches)) {
             $items = explode('.', $matches[1]);
-            $field = implode(this._endQuote . '.' . this._startQuote, $items);
+            $field = implode(_endQuote . '.' . _startQuote, $items);
 
-            return this._startQuote . $field . this._endQuote . $matches[2];
+            return _startQuote . $field . _endQuote . $matches[2];
         }
 
         if (preg_match('/^[\w\s-]*[\w-]+/u', $identifier)) {
-            return this._startQuote . $identifier . this._endQuote;
+            return _startQuote . $identifier . _endQuote;
         }
 
         return $identifier;
@@ -105,7 +105,7 @@ trait SqlDialectTrait
 
             /** @var \Cake\ORM\Query $query */
             $query = this.{'_' . $type . 'QueryTranslator'}($query);
-            $translators = this._expressionTranslators();
+            $translators = _expressionTranslators();
             if (!$translators) {
                 return $query;
             }
@@ -143,7 +143,7 @@ trait SqlDialectTrait
      */
     protected function _selectQueryTranslator(Query $query): Query
     {
-        return this._transformDistinct($query);
+        return _transformDistinct($query);
     }
 
     /**
@@ -193,7 +193,7 @@ trait SqlDialectTrait
             return $query;
         }
 
-        return this._removeAliasesFromConditions($query);
+        return _removeAliasesFromConditions($query);
     }
 
     /**
@@ -209,7 +209,7 @@ trait SqlDialectTrait
      */
     protected function _updateQueryTranslator(Query $query): Query
     {
-        return this._removeAliasesFromConditions($query);
+        return _removeAliasesFromConditions($query);
     }
 
     /**

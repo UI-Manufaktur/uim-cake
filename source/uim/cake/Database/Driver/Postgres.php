@@ -86,10 +86,10 @@ class Postgres : Driver
      */
     function connect(): bool
     {
-        if (this._connection) {
+        if (_connection) {
             return true;
         }
-        $config = this._config;
+        $config = _config;
         $config['flags'] += [
             PDO::ATTR_PERSISTENT => $config['persistent'],
             PDO::ATTR_EMULATE_PREPARES => false,
@@ -101,8 +101,8 @@ class Postgres : Driver
             $dsn = "pgsql:dbname={$config['database']}";
         }
 
-        this._connect($dsn, $config);
-        this._connection = $connection = this.getConnection();
+        _connect($dsn, $config);
+        _connection = $connection = this.getConnection();
         if (!empty($config['encoding'])) {
             this.setEncoding($config['encoding']);
         }
@@ -137,11 +137,11 @@ class Postgres : Driver
      */
     function schemaDialect(): SchemaDialect
     {
-        if (this._schemaDialect == null) {
-            this._schemaDialect = new PostgresSchemaDialect(this);
+        if (_schemaDialect == null) {
+            _schemaDialect = new PostgresSchemaDialect(this);
         }
 
-        return this._schemaDialect;
+        return _schemaDialect;
     }
 
     /**
@@ -153,7 +153,7 @@ class Postgres : Driver
     function setEncoding(string $encoding): void
     {
         this.connect();
-        this._connection->exec('SET NAMES ' . this._connection->quote($encoding));
+        _connection->exec('SET NAMES ' . _connection->quote($encoding));
     }
 
     /**
@@ -166,7 +166,7 @@ class Postgres : Driver
     function setSchema(string $schema): void
     {
         this.connect();
-        this._connection->exec('SET search_path TO ' . this._connection->quote($schema));
+        _connection->exec('SET search_path TO ' . _connection->quote($schema));
     }
 
     /**

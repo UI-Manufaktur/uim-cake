@@ -64,8 +64,8 @@ trait ContainerStubTrait
      */
     function configApplication(string $class, ?array $constructorArgs): void
     {
-        this._appClass = $class;
-        this._appArgs = $constructorArgs;
+        _appClass = $class;
+        _appArgs = $constructorArgs;
     }
 
     /**
@@ -77,8 +77,8 @@ trait ContainerStubTrait
      */
     protected function createApp()
     {
-        if (this._appClass) {
-            $appClass = this._appClass;
+        if (_appClass) {
+            $appClass = _appClass;
         } else {
             /** @psalm-var class-string<\Cake\Http\BaseApplication> */
             $appClass = Configure::read('App.namespace') . '\Application';
@@ -86,7 +86,7 @@ trait ContainerStubTrait
         if (!class_exists($appClass)) {
             throw new LogicException("Cannot load `{$appClass}` for use in integration testing.");
         }
-        $appArgs = this._appArgs ?: [CONFIG];
+        $appArgs = _appArgs ?: [CONFIG];
 
         $app = new $appClass(...$appArgs);
         if (!empty(this.containerServices) && method_exists($app, 'getEventManager')) {
@@ -167,8 +167,8 @@ trait ContainerStubTrait
      */
     function cleanupContainer(): void
     {
-        this._appArgs = null;
-        this._appClass = null;
+        _appArgs = null;
+        _appClass = null;
         this.containerServices = [];
     }
 }

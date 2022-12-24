@@ -68,8 +68,8 @@ class LoggingStatement : StatementDecorator
         this.startTime = microtime(true);
 
         this.loggedQuery = new LoggedQuery();
-        this.loggedQuery->driver = this._driver;
-        this.loggedQuery->params = $params ?: this._compiledParams;
+        this.loggedQuery->driver = _driver;
+        this.loggedQuery->params = $params ?: _compiledParams;
 
         try {
             $result = parent::execute($params);
@@ -78,7 +78,7 @@ class LoggingStatement : StatementDecorator
             /** @psalm-suppress UndefinedPropertyAssignment */
             $e->queryString = this.queryString;
             this.loggedQuery->error = $e;
-            this._log();
+            _log();
             throw $e;
         }
 
@@ -126,7 +126,7 @@ class LoggingStatement : StatementDecorator
 
         if (this.loggedQuery) {
             this.loggedQuery->numRows = $result;
-            this._log();
+            _log();
         }
 
         return $result;
@@ -169,7 +169,7 @@ class LoggingStatement : StatementDecorator
         if (!ctype_digit($type)) {
             $value = this.cast($value, $type)[0];
         }
-        this._compiledParams[$column] = $value;
+        _compiledParams[$column] = $value;
     }
 
     /**
@@ -180,7 +180,7 @@ class LoggingStatement : StatementDecorator
      */
     function setLogger(LoggerInterface $logger): void
     {
-        this._logger = $logger;
+        _logger = $logger;
     }
 
     /**
@@ -190,6 +190,6 @@ class LoggingStatement : StatementDecorator
      */
     function getLogger(): LoggerInterface
     {
-        return this._logger;
+        return _logger;
     }
 }

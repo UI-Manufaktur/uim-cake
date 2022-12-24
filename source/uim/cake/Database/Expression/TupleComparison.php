@@ -46,9 +46,9 @@ class TupleComparison : ComparisonExpression
      */
     public this($fields, $values, array $types = [], string $conjunction = '=')
     {
-        this._type = $types;
+        _type = $types;
         this.setField($fields);
-        this._operator = $conjunction;
+        _operator = $conjunction;
         this.setValue($values);
     }
 
@@ -59,7 +59,7 @@ class TupleComparison : ComparisonExpression
      */
     function getType(): array
     {
-        return this._type;
+        return _type;
     }
 
     /**
@@ -84,7 +84,7 @@ class TupleComparison : ComparisonExpression
             }
         }
 
-        this._value = $value;
+        _value = $value;
     }
 
     /**
@@ -104,11 +104,11 @@ class TupleComparison : ComparisonExpression
             $fields[] = $field instanceof IExpression ? $field->sql($binder) : $field;
         }
 
-        $values = this._stringifyValues($binder);
+        $values = _stringifyValues($binder);
 
         $field = implode(', ', $fields);
 
-        return sprintf($template, $field, this._operator, $values);
+        return sprintf($template, $field, _operator, $values);
     }
 
     /**
@@ -133,7 +133,7 @@ class TupleComparison : ComparisonExpression
                 continue;
             }
 
-            $type = this._type;
+            $type = _type;
             $isMultiOperation = this.isMulti();
             if (empty($type)) {
                 $type = null;
@@ -144,7 +144,7 @@ class TupleComparison : ComparisonExpression
                 foreach ($value as $k => $val) {
                     /** @var string $valType */
                     $valType = $type && isset($type[$k]) ? $type[$k] : $type;
-                    $bound[] = this._bindValue($val, $binder, $valType);
+                    $bound[] = _bindValue($val, $binder, $valType);
                 }
 
                 $values[] = sprintf('(%s)', implode(',', $bound));
@@ -153,7 +153,7 @@ class TupleComparison : ComparisonExpression
 
             /** @var string $valType */
             $valType = $type && isset($type[$i]) ? $type[$i] : $type;
-            $values[] = this._bindValue($value, $binder, $valType);
+            $values[] = _bindValue($value, $binder, $valType);
         }
 
         return implode(', ', $values);
@@ -178,7 +178,7 @@ class TupleComparison : ComparisonExpression
         /** @var array<string> $fields */
         $fields = this.getField();
         foreach ($fields as $field) {
-            this._traverseValue($field, $callback);
+            _traverseValue($field, $callback);
         }
 
         $value = this.getValue();
@@ -192,10 +192,10 @@ class TupleComparison : ComparisonExpression
         foreach ($value as $val) {
             if (this.isMulti()) {
                 foreach ($val as $v) {
-                    this._traverseValue($v, $callback);
+                    _traverseValue($v, $callback);
                 }
             } else {
-                this._traverseValue($val, $callback);
+                _traverseValue($val, $callback);
             }
         }
 
@@ -226,6 +226,6 @@ class TupleComparison : ComparisonExpression
      */
     function isMulti(): bool
     {
-        return in_array(strtolower(this._operator), ['in', 'not in']);
+        return in_array(strtolower(_operator), ['in', 'not in']);
     }
 }

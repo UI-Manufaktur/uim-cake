@@ -101,8 +101,8 @@ abstract class Driver : DriverInterface
                 'Please pass "username" instead of "login" for connecting to the database'
             );
         }
-        $config += this._baseConfig;
-        this._config = $config;
+        $config += _baseConfig;
+        _config = $config;
         if (!empty($config['quoteIdentifiers'])) {
             this.enableAutoQuoting();
         }
@@ -156,8 +156,8 @@ abstract class Driver : DriverInterface
     function disconnect(): void
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
-        this._connection = null;
-        this._version = null;
+        _connection = null;
+        _version = null;
     }
 
     /**
@@ -167,12 +167,12 @@ abstract class Driver : DriverInterface
      */
     function version(): string
     {
-        if (this._version == null) {
+        if (_version == null) {
             this.connect();
-            this._version = (string)this._connection->getAttribute(PDO::ATTR_SERVER_VERSION);
+            _version = (string)_connection->getAttribute(PDO::ATTR_SERVER_VERSION);
         }
 
-        return this._version;
+        return _version;
     }
 
     /**
@@ -182,14 +182,14 @@ abstract class Driver : DriverInterface
      */
     function getConnection()
     {
-        if (this._connection == null) {
+        if (_connection == null) {
             throw new MissingConnectionException([
                 'driver' => App::shortName(static::class, 'Database/Driver'),
                 'reason' => 'Unknown',
             ]);
         }
 
-        return this._connection;
+        return _connection;
     }
 
     /**
@@ -201,7 +201,7 @@ abstract class Driver : DriverInterface
      */
     function setConnection($connection)
     {
-        this._connection = $connection;
+        _connection = $connection;
 
         return this;
     }
@@ -217,7 +217,7 @@ abstract class Driver : DriverInterface
     function prepare($query): StatementInterface
     {
         this.connect();
-        $statement = this._connection->prepare($query instanceof Query ? $query->sql() : $query);
+        $statement = _connection->prepare($query instanceof Query ? $query->sql() : $query);
 
         return new PDOStatement($statement, this);
     }
@@ -228,11 +228,11 @@ abstract class Driver : DriverInterface
     function beginTransaction(): bool
     {
         this.connect();
-        if (this._connection->inTransaction()) {
+        if (_connection->inTransaction()) {
             return true;
         }
 
-        return this._connection->beginTransaction();
+        return _connection->beginTransaction();
     }
 
     /**
@@ -241,11 +241,11 @@ abstract class Driver : DriverInterface
     function commitTransaction(): bool
     {
         this.connect();
-        if (!this._connection->inTransaction()) {
+        if (!_connection->inTransaction()) {
             return false;
         }
 
-        return this._connection->commit();
+        return _connection->commit();
     }
 
     /**
@@ -254,11 +254,11 @@ abstract class Driver : DriverInterface
     function rollbackTransaction(): bool
     {
         this.connect();
-        if (!this._connection->inTransaction()) {
+        if (!_connection->inTransaction()) {
             return false;
         }
 
-        return this._connection->rollBack();
+        return _connection->rollBack();
     }
 
     /**
@@ -270,7 +270,7 @@ abstract class Driver : DriverInterface
     {
         this.connect();
 
-        return this._connection->inTransaction();
+        return _connection->inTransaction();
     }
 
     /**
@@ -303,7 +303,7 @@ abstract class Driver : DriverInterface
     {
         this.connect();
 
-        return this._connection->quote((string)$value, $type);
+        return _connection->quote((string)$value, $type);
     }
 
     /**
@@ -367,7 +367,7 @@ abstract class Driver : DriverInterface
             return (string)$value;
         }
 
-        return this._connection->quote((string)$value, PDO::PARAM_STR);
+        return _connection->quote((string)$value, PDO::PARAM_STR);
     }
 
     /**
@@ -375,7 +375,7 @@ abstract class Driver : DriverInterface
      */
     function schema(): string
     {
-        return this._config['schema'];
+        return _config['schema'];
     }
 
     /**
@@ -385,11 +385,11 @@ abstract class Driver : DriverInterface
     {
         this.connect();
 
-        if (this._connection instanceof PDO) {
-            return this._connection->lastInsertId($table);
+        if (_connection instanceof PDO) {
+            return _connection->lastInsertId($table);
         }
 
-        return this._connection->lastInsertId($table);
+        return _connection->lastInsertId($table);
     }
 
     /**
@@ -397,11 +397,11 @@ abstract class Driver : DriverInterface
      */
     function isConnected(): bool
     {
-        if (this._connection == null) {
+        if (_connection == null) {
             $connected = false;
         } else {
             try {
-                $connected = (bool)this._connection->query('SELECT 1');
+                $connected = (bool)_connection->query('SELECT 1');
             } catch (PDOException $e) {
                 $connected = false;
             }
@@ -415,7 +415,7 @@ abstract class Driver : DriverInterface
      */
     function enableAutoQuoting(bool $enable = true)
     {
-        this._autoQuoting = $enable;
+        _autoQuoting = $enable;
 
         return this;
     }
@@ -425,7 +425,7 @@ abstract class Driver : DriverInterface
      */
     function disableAutoQuoting()
     {
-        this._autoQuoting = false;
+        _autoQuoting = false;
 
         return this;
     }
@@ -435,7 +435,7 @@ abstract class Driver : DriverInterface
      */
     function isAutoQuotingEnabled(): bool
     {
-        return this._autoQuoting;
+        return _autoQuoting;
     }
 
     /**
@@ -484,9 +484,9 @@ abstract class Driver : DriverInterface
     function newTableSchema(string $table, array $columns = []): TableSchema
     {
         $className = TableSchema::class;
-        if (isset(this._config['tableSchema'])) {
+        if (isset(_config['tableSchema'])) {
             /** @var class-string<\Cake\Database\Schema\TableSchema> $className */
-            $className = this._config['tableSchema'];
+            $className = _config['tableSchema'];
         }
 
         return new $className($table, $columns);
@@ -519,7 +519,7 @@ abstract class Driver : DriverInterface
     function __destruct()
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
-        this._connection = null;
+        _connection = null;
     }
 
     /**
@@ -531,7 +531,7 @@ abstract class Driver : DriverInterface
     function __debugInfo(): array
     {
         return [
-            'connected' => this._connection != null,
+            'connected' => _connection != null,
         ];
     }
 }

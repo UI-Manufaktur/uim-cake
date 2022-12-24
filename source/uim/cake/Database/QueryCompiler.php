@@ -105,7 +105,7 @@ class QueryCompiler
         $sql = '';
         $type = $query->type();
         $query->traverseParts(
-            this._sqlCompiler($sql, $query, $binder),
+            _sqlCompiler($sql, $query, $binder),
             this.{"_{$type}Parts"}
         );
 
@@ -146,9 +146,9 @@ class QueryCompiler
             if ($part instanceof IExpression) {
                 $part = [$part->sql($binder)];
             }
-            if (isset(this._templates[$partName])) {
-                $part = this._stringifyExpressions((array)$part, $binder);
-                $sql .= sprintf(this._templates[$partName], implode(', ', $part));
+            if (isset(_templates[$partName])) {
+                $part = _stringifyExpressions((array)$part, $binder);
+                $sql .= sprintf(_templates[$partName], implode(', ', $part));
 
                 return;
             }
@@ -195,16 +195,16 @@ class QueryCompiler
     protected function _buildSelectPart(array $parts, Query $query, ValueBinder $binder): string
     {
         $select = 'SELECT%s %s%s';
-        if (this._orderedUnion && $query->clause('union')) {
+        if (_orderedUnion && $query->clause('union')) {
             $select = '(SELECT%s %s%s';
         }
         $distinct = $query->clause('distinct');
-        $modifiers = this._buildModifierPart($query->clause('modifier'), $query, $binder);
+        $modifiers = _buildModifierPart($query->clause('modifier'), $query, $binder);
 
         $driver = $query->getConnection()->getDriver();
-        $quoteIdentifiers = $driver->isAutoQuotingEnabled() || this._quotedSelectAliases;
+        $quoteIdentifiers = $driver->isAutoQuotingEnabled() || _quotedSelectAliases;
         $normalized = [];
-        $parts = this._stringifyExpressions($parts, $binder);
+        $parts = _stringifyExpressions($parts, $binder);
         foreach ($parts as $k => $p) {
             if (!is_numeric($k)) {
                 $p = $p . ' AS ';
@@ -222,7 +222,7 @@ class QueryCompiler
         }
 
         if (is_array($distinct)) {
-            $distinct = this._stringifyExpressions($distinct, $binder);
+            $distinct = _stringifyExpressions($distinct, $binder);
             $distinct = sprintf('DISTINCT ON (%s) ', implode(', ', $distinct));
         }
 
@@ -243,7 +243,7 @@ class QueryCompiler
     {
         $select = ' FROM %s';
         $normalized = [];
-        $parts = this._stringifyExpressions($parts, $binder);
+        $parts = _stringifyExpressions($parts, $binder);
         foreach ($parts as $k => $p) {
             if (!is_numeric($k)) {
                 $p = $p . ' ' . $k;
@@ -354,14 +354,14 @@ class QueryCompiler
             $p['query'] = $p['query']->sql($binder);
             $p['query'] = $p['query'][0] == '(' ? trim($p['query'], '()') : $p['query'];
             $prefix = $p['all'] ? 'ALL ' : '';
-            if (this._orderedUnion) {
+            if (_orderedUnion) {
                 return "{$prefix}({$p['query']})";
             }
 
             return $prefix . $p['query'];
         }, $parts);
 
-        if (this._orderedUnion) {
+        if (_orderedUnion) {
             return sprintf(")\nUNION %s", implode("\nUNION ", $parts));
         }
 
@@ -385,8 +385,8 @@ class QueryCompiler
             );
         }
         $table = $parts[0];
-        $columns = this._stringifyExpressions($parts[1], $binder);
-        $modifiers = this._buildModifierPart($query->clause('modifier'), $query, $binder);
+        $columns = _stringifyExpressions($parts[1], $binder);
+        $modifiers = _buildModifierPart($query->clause('modifier'), $query, $binder);
 
         return sprintf('INSERT%s INTO %s (%s)', $modifiers, $table, implode(', ', $columns));
     }
@@ -401,7 +401,7 @@ class QueryCompiler
      */
     protected function _buildValuesPart(array $parts, Query $query, ValueBinder $binder): string
     {
-        return implode('', this._stringifyExpressions($parts, $binder));
+        return implode('', _stringifyExpressions($parts, $binder));
     }
 
     /**
@@ -414,8 +414,8 @@ class QueryCompiler
      */
     protected function _buildUpdatePart(array $parts, Query $query, ValueBinder $binder): string
     {
-        $table = this._stringifyExpressions($parts, $binder);
-        $modifiers = this._buildModifierPart($query->clause('modifier'), $query, $binder);
+        $table = _stringifyExpressions($parts, $binder);
+        $modifiers = _buildModifierPart($query->clause('modifier'), $query, $binder);
 
         return sprintf('UPDATE%s %s', $modifiers, implode(',', $table));
     }
@@ -434,7 +434,7 @@ class QueryCompiler
             return '';
         }
 
-        return ' ' . implode(' ', this._stringifyExpressions($parts, $binder, false));
+        return ' ' . implode(' ', _stringifyExpressions($parts, $binder, false));
     }
 
     /**

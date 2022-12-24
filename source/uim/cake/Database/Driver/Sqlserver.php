@@ -113,10 +113,10 @@ class Sqlserver : Driver
      */
     function connect(): bool
     {
-        if (this._connection) {
+        if (_connection) {
             return true;
         }
-        $config = this._config;
+        $config = _config;
 
         if (isset($config['persistent']) && $config['persistent']) {
             throw new InvalidArgumentException(
@@ -159,7 +159,7 @@ class Sqlserver : Driver
         if ($config['trustServerCertificate'] != null) {
             $dsn .= ";TrustServerCertificate={$config['trustServerCertificate']}";
         }
-        this._connect($dsn, $config);
+        _connect($dsn, $config);
 
         $connection = this.getConnection();
         if (!empty($config['init'])) {
@@ -223,7 +223,7 @@ class Sqlserver : Driver
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
-        $statement = this._connection->prepare($sql, $options);
+        $statement = _connection->prepare($sql, $options);
 
         return new SqlserverStatement($statement, this);
     }
@@ -283,7 +283,7 @@ class Sqlserver : Driver
             case static::FEATURE_QUOTE:
                 this.connect();
 
-                return this._connection->getAttribute(PDO::ATTR_DRIVER_NAME) != 'odbc';
+                return _connection->getAttribute(PDO::ATTR_DRIVER_NAME) != 'odbc';
         }
 
         return parent::supports($feature);
@@ -302,11 +302,11 @@ class Sqlserver : Driver
      */
     function schemaDialect(): SchemaDialect
     {
-        if (this._schemaDialect == null) {
-            this._schemaDialect = new SqlserverSchemaDialect(this);
+        if (_schemaDialect == null) {
+            _schemaDialect = new SqlserverSchemaDialect(this);
         }
 
-        return this._schemaDialect;
+        return _schemaDialect;
     }
 
     /**
@@ -336,10 +336,10 @@ class Sqlserver : Driver
         }
 
         if (this.version() < 11 && $offset != null) {
-            return this._pagingSubquery($query, $limit, $offset);
+            return _pagingSubquery($query, $limit, $offset);
         }
 
-        return this._transformDistinct($query);
+        return _transformDistinct($query);
     }
 
     /**

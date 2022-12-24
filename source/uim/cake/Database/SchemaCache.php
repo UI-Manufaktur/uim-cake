@@ -44,7 +44,7 @@ class SchemaCache
      */
     public this(Connection $connection)
     {
-        this._schema = this.getSchema($connection);
+        _schema = this.getSchema($connection);
     }
 
     /**
@@ -58,12 +58,12 @@ class SchemaCache
         if ($name) {
             $tables = [$name];
         } else {
-            $tables = this._schema->listTables();
+            $tables = _schema->listTables();
         }
 
         foreach ($tables as $table) {
             /** @psalm-suppress PossiblyNullArgument */
-            this._schema->describe($table, ['forceRefresh' => true]);
+            _schema->describe($table, ['forceRefresh' => true]);
         }
 
         return $tables;
@@ -80,14 +80,14 @@ class SchemaCache
         if ($name) {
             $tables = [$name];
         } else {
-            $tables = this._schema->listTables();
+            $tables = _schema->listTables();
         }
 
-        $cacher = this._schema->getCacher();
+        $cacher = _schema->getCacher();
 
         foreach ($tables as $table) {
             /** @psalm-suppress PossiblyNullArgument */
-            $key = this._schema->cacheKey($table);
+            $key = _schema->cacheKey($table);
             $cacher->delete($key);
         }
 

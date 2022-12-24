@@ -73,7 +73,7 @@ class ValuesExpression : IExpression
      */
     public this(array $columns, TypeMap $typeMap)
     {
-        this._columns = $columns;
+        _columns = $columns;
         this.setTypeMap($typeMap);
     }
 
@@ -89,11 +89,11 @@ class ValuesExpression : IExpression
     {
         if (
             (
-                count(this._values) &&
+                count(_values) &&
                 $values instanceof Query
             ) ||
             (
-                this._query &&
+                _query &&
                 is_array($values)
             )
         ) {
@@ -106,8 +106,8 @@ class ValuesExpression : IExpression
 
             return;
         }
-        this._values[] = $values;
-        this._castedExpressions = false;
+        _values[] = $values;
+        _castedExpressions = false;
     }
 
     /**
@@ -118,8 +118,8 @@ class ValuesExpression : IExpression
      */
     function setColumns(array $columns)
     {
-        this._columns = $columns;
-        this._castedExpressions = false;
+        _columns = $columns;
+        _castedExpressions = false;
 
         return this;
     }
@@ -131,7 +131,7 @@ class ValuesExpression : IExpression
      */
     function getColumns(): array
     {
-        return this._columns;
+        return _columns;
     }
 
     /**
@@ -145,7 +145,7 @@ class ValuesExpression : IExpression
     protected function _columnNames(): array
     {
         $columns = [];
-        foreach (this._columns as $col) {
+        foreach (_columns as $col) {
             if (is_string($col)) {
                 $col = trim($col, '`[]"');
             }
@@ -163,8 +163,8 @@ class ValuesExpression : IExpression
      */
     function setValues(array $values)
     {
-        this._values = $values;
-        this._castedExpressions = false;
+        _values = $values;
+        _castedExpressions = false;
 
         return this;
     }
@@ -176,11 +176,11 @@ class ValuesExpression : IExpression
      */
     function getValues(): array
     {
-        if (!this._castedExpressions) {
-            this._processExpressions();
+        if (!_castedExpressions) {
+            _processExpressions();
         }
 
-        return this._values;
+        return _values;
     }
 
     /**
@@ -192,7 +192,7 @@ class ValuesExpression : IExpression
      */
     function setQuery(Query $query)
     {
-        this._query = $query;
+        _query = $query;
 
         return this;
     }
@@ -205,7 +205,7 @@ class ValuesExpression : IExpression
      */
     function getQuery(): ?Query
     {
-        return this._query;
+        return _query;
     }
 
     /**
@@ -213,15 +213,15 @@ class ValuesExpression : IExpression
      */
     function sql(ValueBinder $binder): string
     {
-        if (empty(this._values) && empty(this._query)) {
+        if (empty(_values) && empty(_query)) {
             return '';
         }
 
-        if (!this._castedExpressions) {
-            this._processExpressions();
+        if (!_castedExpressions) {
+            _processExpressions();
         }
 
-        $columns = this._columnNames();
+        $columns = _columnNames();
         $defaults = array_fill_keys($columns, null);
         $placeholders = [];
 
@@ -231,7 +231,7 @@ class ValuesExpression : IExpression
             $types[$col] = $typeMap->type($col);
         }
 
-        foreach (this._values as $row) {
+        foreach (_values as $row) {
             $row += $defaults;
             $rowPlaceholders = [];
 
@@ -264,15 +264,15 @@ class ValuesExpression : IExpression
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this._query) {
+        if (_query) {
             return this;
         }
 
-        if (!this._castedExpressions) {
-            this._processExpressions();
+        if (!_castedExpressions) {
+            _processExpressions();
         }
 
-        foreach (this._values as $v) {
+        foreach (_values as $v) {
             if ($v instanceof IExpression) {
                 $v->traverse($callback);
             }
@@ -300,7 +300,7 @@ class ValuesExpression : IExpression
         $types = [];
         $typeMap = this.getTypeMap();
 
-        $columns = this._columnNames();
+        $columns = _columnNames();
         foreach ($columns as $c) {
             if (!is_string($c) && !is_int($c)) {
                 continue;
@@ -308,18 +308,18 @@ class ValuesExpression : IExpression
             $types[$c] = $typeMap->type($c);
         }
 
-        $types = this._requiresToExpressionCasting($types);
+        $types = _requiresToExpressionCasting($types);
 
         if (empty($types)) {
             return;
         }
 
-        foreach (this._values as $row => $values) {
+        foreach (_values as $row => $values) {
             foreach ($types as $col => $type) {
                 /** @var \Cake\Database\Type\ExpressionTypeInterface $type */
-                this._values[$row][$col] = $type->toExpression($values[$col]);
+                _values[$row][$col] = $type->toExpression($values[$col]);
             }
         }
-        this._castedExpressions = true;
+        _castedExpressions = true;
     }
 }

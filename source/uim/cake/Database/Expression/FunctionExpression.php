@@ -68,8 +68,8 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      */
     public this(string $name, array $params = [], array $types = [], string $returnType = 'string')
     {
-        this._name = $name;
-        this._returnType = $returnType;
+        _name = $name;
+        _returnType = $returnType;
         parent::__construct($params, $types, ',');
     }
 
@@ -81,7 +81,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      */
     function setName(string $name)
     {
-        this._name = $name;
+        _name = $name;
 
         return this;
     }
@@ -93,7 +93,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      */
     function getName(): string
     {
-        return this._name;
+        return _name;
     }
 
     /**
@@ -114,27 +114,27 @@ class FunctionExpression : QueryExpression : TypedResultInterface
         $typeMap = this.getTypeMap()->setTypes($types);
         foreach ($conditions as $k => $p) {
             if ($p == 'literal') {
-                $put(this._conditions, $k);
+                $put(_conditions, $k);
                 continue;
             }
 
             if ($p == 'identifier') {
-                $put(this._conditions, new IdentifierExpression($k));
+                $put(_conditions, new IdentifierExpression($k));
                 continue;
             }
 
             $type = $typeMap->type($k);
 
             if ($type != null && !$p instanceof IExpression) {
-                $p = this._castToExpression($p, $type);
+                $p = _castToExpression($p, $type);
             }
 
             if ($p instanceof IExpression) {
-                $put(this._conditions, $p);
+                $put(_conditions, $p);
                 continue;
             }
 
-            $put(this._conditions, ['value' => $p, 'type' => $type]);
+            $put(_conditions, ['value' => $p, 'type' => $type]);
         }
 
         return this;
@@ -146,7 +146,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
     function sql(ValueBinder $binder): string
     {
         $parts = [];
-        foreach (this._conditions as $condition) {
+        foreach (_conditions as $condition) {
             if ($condition instanceof Query) {
                 $condition = sprintf('(%s)', $condition->sql($binder));
             } elseif ($condition instanceof IExpression) {
@@ -159,8 +159,8 @@ class FunctionExpression : QueryExpression : TypedResultInterface
             $parts[] = $condition;
         }
 
-        return this._name . sprintf('(%s)', implode(
-            this._conjunction . ' ',
+        return _name . sprintf('(%s)', implode(
+            _conjunction . ' ',
             $parts
         ));
     }
@@ -173,6 +173,6 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      */
     function count(): int
     {
-        return 1 + count(this._conditions);
+        return 1 + count(_conditions);
     }
 }

@@ -51,7 +51,7 @@ class ValueBinder
      */
     function bind($param, $value, $type = null): void
     {
-        this._bindings[$param] = compact('value', 'type') + [
+        _bindings[$param] = compact('value', 'type') + [
             'placeholder' => is_int($param) ? $param : substr($param, 1),
         ];
     }
@@ -67,7 +67,7 @@ class ValueBinder
      */
     function placeholder(string $token): string
     {
-        $number = this._bindingsCount++;
+        $number = _bindingsCount++;
         if ($token[0] != ':' && $token != '?') {
             $token = sprintf(':%s%s', $token, $number);
         }
@@ -88,7 +88,7 @@ class ValueBinder
         $placeholders = [];
         foreach ($values as $k => $value) {
             $param = this.placeholder('c');
-            this._bindings[$param] = [
+            _bindings[$param] = [
                 'value' => $value,
                 'type' => $type,
                 'placeholder' => substr($param, 1),
@@ -107,7 +107,7 @@ class ValueBinder
      */
     function bindings(): array
     {
-        return this._bindings;
+        return _bindings;
     }
 
     /**
@@ -117,8 +117,8 @@ class ValueBinder
      */
     function reset(): void
     {
-        this._bindings = [];
-        this._bindingsCount = 0;
+        _bindings = [];
+        _bindingsCount = 0;
     }
 
     /**
@@ -128,7 +128,7 @@ class ValueBinder
      */
     function resetCount(): void
     {
-        this._bindingsCount = 0;
+        _bindingsCount = 0;
     }
 
     /**
