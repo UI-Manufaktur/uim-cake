@@ -31,7 +31,7 @@ class RoutesGenerateCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'routes generate';
+        return "routes generate";
     }
 
     /**
@@ -49,7 +49,7 @@ class RoutesGenerateCommand : Command
             $io.out("> $url");
             $io.out();
         } catch (MissingRouteException $e) {
-            $io.err('<warning>The provided parameters do not match any routes.</warning>');
+            $io.err("<warning>The provided parameters do not match any routes.</warning>");
             $io.out();
 
             return static::CODE_ERROR;
@@ -68,10 +68,10 @@ class RoutesGenerateCommand : Command
     {
         $out = [];
         foreach ($args as $arg) {
-            if (strpos($arg, ':') != false) {
-                [$key, $value] = explode(':', $arg);
-                if (in_array($value, ['true', 'false'], true)) {
-                    $value = $value == 'true';
+            if (strpos($arg, ":") != false) {
+                [$key, $value] = explode(":", $arg);
+                if (in_array($value, ["true", "false"], true)) {
+                    $value = $value == "true";
                 }
                 $out[$key] = $value;
             } else {
@@ -91,11 +91,11 @@ class RoutesGenerateCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription(
-            'Check a routing array against the routes. ' .
-            'Will output the URL if there is a match.' .
+            "Check a routing array against the routes. " .
+            "Will output the URL if there is a match." .
             "\n\n" .
-            'Routing parameters should be supplied in a key:value format. ' .
-            'For example `controller:Articles action:view 2`'
+            "Routing parameters should be supplied in a key:value format. " .
+            "For example `controller:Articles action:view 2`"
         );
 
         return $parser;

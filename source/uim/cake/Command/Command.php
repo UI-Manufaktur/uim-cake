@@ -44,7 +44,7 @@ class Command : BaseCommand
      */
     public this()
     {
-        this.modelFactory('Table', function ($alias) {
+        this.modelFactory("Table", function ($alias) {
             return this.getTableLocator().get($alias);
         });
 
@@ -57,7 +57,7 @@ class Command : BaseCommand
     }
 
     /**
-     * Implement this method with your command's logic.
+     * Implement this method with your command"s logic.
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
@@ -70,7 +70,7 @@ class Command : BaseCommand
 
 // phpcs:disable
 class_alias(
-    'Cake\Command\Command',
-    'Cake\Console\Command'
+    "Cake\Command\Command",
+    "Cake\Console\Command"
 );
 // phpcs:enable

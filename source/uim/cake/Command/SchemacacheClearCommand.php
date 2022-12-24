@@ -34,7 +34,7 @@ class SchemacacheClearCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'schema_cache clear';
+        return "schema_cache clear";
     }
 
     /**
@@ -48,7 +48,7 @@ class SchemacacheClearCommand : Command
     {
         try {
             /** @var \Cake\Database\Connection $connection */
-            $connection = ConnectionManager::get((string)$args.getOption('connection'));
+            $connection = ConnectionManager::get((string)$args.getOption("connection"));
 
             $cache = new SchemaCache($connection);
         } catch (RuntimeException $e) {
@@ -56,13 +56,13 @@ class SchemacacheClearCommand : Command
 
             return static::CODE_ERROR;
         }
-        $tables = $cache.clear($args.getArgument('name'));
+        $tables = $cache.clear($args.getArgument("name"));
 
         foreach ($tables as $table) {
-            $io.verbose(sprintf('Cleared "%s"', $table));
+            $io.verbose(sprintf("Cleared "%s"", $table));
         }
 
-        $io.out('<success>Cache clear complete</success>');
+        $io.out("<success>Cache clear complete</success>");
 
         return static::CODE_SUCCESS;
     }
@@ -76,15 +76,15 @@ class SchemacacheClearCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription(
-            'Clear all metadata caches for the connection. If a ' .
-            'table name is provided, only that table will be removed.'
-        ).addOption('connection', [
-            'help': 'The connection to build/clear metadata cache data for.',
-            'short': 'c',
-            'default': 'default',
-        ]).addArgument('name', [
-            'help': 'A specific table you want to clear cached data for.',
-            'required': false,
+            "Clear all metadata caches for the connection. If a " .
+            "table name is provided, only that table will be removed."
+        ).addOption("connection", [
+            "help": "The connection to build/clear metadata cache data for.",
+            "short": "c",
+            "default": "default",
+        ]).addArgument("name", [
+            "help": "A specific table you want to clear cached data for.",
+            "required": false,
         ]);
 
         return $parser;

@@ -120,9 +120,9 @@ class ConsoleIo
         ?ConsoleInput $in = null,
         ?HelperRegistry $helpers = null
     ) {
-        _out = $out ?: new ConsoleOutput('php://stdout');
-        _err = $err ?: new ConsoleOutput('php://stderr');
-        _in = $in ?: new ConsoleInput('php://stdin');
+        _out = $out ?: new ConsoleOutput("php://stdout");
+        _err = $err ?: new ConsoleOutput("php://stderr");
+        _in = $in ?: new ConsoleInput("php://stdin");
         _helpers = $helpers ?: new HelperRegistry();
         _helpers.setIo(this);
     }
@@ -190,11 +190,11 @@ class ConsoleIo
      *
      * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
-     * @param int $level The message's output level, see above.
+     * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
      */
-    function out($message = '', int $newlines = 1, int $level = self::NORMAL): ?int
+    function out($message = "", int $newlines = 1, int $level = self::NORMAL): ?int
     {
         if ($level <= _level) {
             _lastWritten = _out.write($message, $newlines);
@@ -210,14 +210,14 @@ class ConsoleIo
      *
      * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
-     * @param int $level The message's output level, see above.
+     * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
      */
     function info($message, int $newlines = 1, int $level = self::NORMAL): ?int
     {
-        $messageType = 'info';
+        $messageType = "info";
         $message = this.wrapMessageWithType($messageType, $message);
 
         return this.out($message, $newlines, $level);
@@ -228,14 +228,14 @@ class ConsoleIo
      *
      * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
-     * @param int $level The message's output level, see above.
+     * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
      */
     function comment($message, int $newlines = 1, int $level = self::NORMAL): ?int
     {
-        $messageType = 'comment';
+        $messageType = "comment";
         $message = this.wrapMessageWithType($messageType, $message);
 
         return this.out($message, $newlines, $level);
@@ -251,7 +251,7 @@ class ConsoleIo
      */
     function warning($message, int $newlines = 1): int
     {
-        $messageType = 'warning';
+        $messageType = "warning";
         $message = this.wrapMessageWithType($messageType, $message);
 
         return this.err($message, $newlines);
@@ -267,7 +267,7 @@ class ConsoleIo
      */
     function error($message, int $newlines = 1): int
     {
-        $messageType = 'error';
+        $messageType = "error";
         $message = this.wrapMessageWithType($messageType, $message);
 
         return this.err($message, $newlines);
@@ -278,14 +278,14 @@ class ConsoleIo
      *
      * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
-     * @param int $level The message's output level, see above.
+     * @param int $level The message"s output level, see above.
      * @return int|null The number of bytes returned from writing to stdout
      *   or null if provided $level is greater than current level.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::out
      */
     function success($message, int $newlines = 1, int $level = self::NORMAL): ?int
     {
-        $messageType = 'success';
+        $messageType = "success";
         $message = this.wrapMessageWithType($messageType, $message);
 
         return this.out($message, $newlines, $level);
@@ -353,7 +353,7 @@ class ConsoleIo
         // Fill any remaining bytes with spaces.
         $fill = $size - $newBytes;
         if ($fill > 0) {
-            this.out(str_repeat(' ', $fill), 0);
+            this.out(str_repeat(" ", $fill), 0);
         }
         if ($newlines) {
             this.out(this.nl($newlines), 0);
@@ -375,7 +375,7 @@ class ConsoleIo
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    function err($message = '', int $newlines = 1): int
+    function err($message = "", int $newlines = 1): int
     {
         return _err.write($message, $newlines);
     }
@@ -400,9 +400,9 @@ class ConsoleIo
      */
     function hr(int $newlines = 0, int $width = 79): void
     {
-        this.out('', $newlines);
-        this.out(str_repeat('-', $width));
-        this.out('', $newlines);
+        this.out("", $newlines);
+        this.out(str_repeat("-", $width));
+        this.out("", $newlines);
     }
 
     /**
@@ -476,23 +476,23 @@ class ConsoleIo
     function askChoice(string $prompt, $options, ?string $default = null): string
     {
         if (is_string($options)) {
-            if (strpos($options, ',')) {
-                $options = explode(',', $options);
-            } elseif (strpos($options, '/')) {
-                $options = explode('/', $options);
+            if (strpos($options, ",")) {
+                $options = explode(",", $options);
+            } elseif (strpos($options, "/")) {
+                $options = explode("/", $options);
             } else {
                 $options = [$options];
             }
         }
 
-        $printOptions = '(' . implode('/', $options) . ')';
+        $printOptions = "(" . implode("/", $options) . ")";
         $options = array_merge(
-            array_map('strtolower', $options),
-            array_map('strtoupper', $options),
+            array_map("strtolower", $options),
+            array_map("strtoupper", $options),
             $options
         );
-        $in = '';
-        while ($in == '' || !in_array($in, $options, true)) {
+        $in = "";
+        while ($in == "" || !in_array($in, $options, true)) {
             $in = _getInput($prompt, $printOptions, $default);
         }
 
@@ -513,20 +513,20 @@ class ConsoleIo
             return (string)$default;
         }
 
-        $optionsText = '';
+        $optionsText = "";
         if (isset($options)) {
             $optionsText = " $options ";
         }
 
-        $defaultText = '';
+        $defaultText = "";
         if ($default != null) {
             $defaultText = "[$default] ";
         }
-        _out.write('<question>' . $prompt . "</question>$optionsText\n$defaultText> ", 0);
+        _out.write("<question>" . $prompt . "</question>$optionsText\n$defaultText> ", 0);
         $result = _in.read();
 
-        $result = $result == null ? '' : trim($result);
-        if ($default != null && $result == '') {
+        $result = $result == null ? "" : trim($result);
+        if ($default != null && $result == "") {
             return $default;
         }
 
@@ -537,8 +537,8 @@ class ConsoleIo
      * Connects or disconnects the loggers to the console output.
      *
      * Used to enable or disable logging stream output to stdout and stderr
-     * If you don't wish all log output in stdout or stderr
-     * through Cake's Log class, call this function with `$enable=false`.
+     * If you don"t wish all log output in stdout or stderr
+     * through Cake"s Log class, call this function with `$enable=false`.
      *
      * @param int|bool $enable Use a boolean to enable/toggle all logging. Use
      *   one of the verbosity constants (self::VERBOSE, self::QUIET, self::NORMAL)
@@ -548,27 +548,27 @@ class ConsoleIo
      */
     function setLoggers($enable): void
     {
-        Log::drop('stdout');
-        Log::drop('stderr');
+        Log::drop("stdout");
+        Log::drop("stderr");
         if ($enable == false) {
             return;
         }
-        $outLevels = ['notice', 'info'];
+        $outLevels = ["notice", "info"];
         if ($enable == static::VERBOSE || $enable == true) {
-            $outLevels[] = 'debug';
+            $outLevels[] = "debug";
         }
         if ($enable != static::QUIET) {
             $stdout = new ConsoleLog([
-                'types': $outLevels,
-                'stream': _out,
+                "types": $outLevels,
+                "stream": _out,
             ]);
-            Log::setConfig('stdout', ['engine': $stdout]);
+            Log::setConfig("stdout", ["engine": $stdout]);
         }
         $stderr = new ConsoleLog([
-            'types': ['emergency', 'alert', 'critical', 'error', 'warning'],
-            'stream': _err,
+            "types": ["emergency", "alert", "critical", "error", "warning"],
+            "stream": _err,
         ]);
-        Log::setConfig('stderr', ['engine': $stderr]);
+        Log::setConfig("stderr", ["engine": $stderr]);
     }
 
     /**
@@ -613,18 +613,18 @@ class ConsoleIo
 
         if (file_exists($path) && $forceOverwrite == false) {
             this.warning("File `{$path}` exists");
-            $key = this.askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
+            $key = this.askChoice("Do you want to overwrite?", ["y", "n", "a", "q"], "n");
             $key = strtolower($key);
 
-            if ($key == 'q') {
-                this.error('Quitting.', 2);
-                throw new StopException('Not creating file. Quitting.');
+            if ($key == "q") {
+                this.error("Quitting.", 2);
+                throw new StopException("Not creating file. Quitting.");
             }
-            if ($key == 'a') {
+            if ($key == "a") {
                 this.forceOverwrite = true;
-                $key = 'y';
+                $key = "y";
             }
-            if ($key != 'y') {
+            if ($key != "y") {
                 this.out("Skip `{$path}`", 2);
 
                 return false;
@@ -640,7 +640,7 @@ class ConsoleIo
                 mkdir($directory, 0777 ^ umask(), true);
             }
 
-            $file = new SplFileObject($path, 'w');
+            $file = new SplFileObject($path, "w");
         } catch (RuntimeException $e) {
             this.error("Could not write to `{$path}`. Permission denied.", 2);
 

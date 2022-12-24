@@ -33,7 +33,7 @@ class PluginLoadCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'plugin load';
+        return "plugin load";
     }
 
     /**
@@ -62,17 +62,17 @@ class PluginLoadCommand : Command
         this.io = $io;
         this.args = $args;
 
-        $plugin = $args.getArgument('plugin') ?? '';
+        $plugin = $args.getArgument("plugin") ?? "";
         try {
             Plugin::getCollection().findPath($plugin);
         } catch (MissingPluginException $e) {
             this.io.err($e.getMessage());
-            this.io.err('Ensure you have the correct spelling and casing.');
+            this.io.err("Ensure you have the correct spelling and casing.");
 
             return static::CODE_ERROR;
         }
 
-        $app = APP . 'Application.php';
+        $app = APP . "Application.php";
         if (file_exists($app)) {
             this.modifyApplication($app, $plugin);
 
@@ -94,8 +94,8 @@ class PluginLoadCommand : Command
         $contents = file_get_contents($app);
 
         // Find start of bootstrap
-        if (!preg_match('/^(\s+)function bootstrap(?:\s*)\(\)/mu', $contents, $matches, PREG_OFFSET_CAPTURE)) {
-            this.io.err('Your Application class does not have a bootstrap() method. Please add one.');
+        if (!preg_match("/^(\s+)function bootstrap(?:\s*)\(\)/mu", $contents, $matches, PREG_OFFSET_CAPTURE)) {
+            this.io.err("Your Application class does not have a bootstrap() method. Please add one.");
             this.abort();
         }
 
@@ -104,20 +104,20 @@ class PluginLoadCommand : Command
 
         // Find closing function bracket
         if (!preg_match("/^$indent\}\n$/mu", $contents, $matches, PREG_OFFSET_CAPTURE, $offset)) {
-            this.io.err('Your Application class does not have a bootstrap() method. Please add one.');
+            this.io.err("Your Application class does not have a bootstrap() method. Please add one.");
             this.abort();
         }
 
-        $append = "$indent    \this.addPlugin('%s');\n";
-        $insert = str_replace(', []', '', sprintf($append, $plugin));
+        $append = "$indent    \this.addPlugin("%s");\n";
+        $insert = str_replace(", []", "", sprintf($append, $plugin));
 
         $offset = $matches[0][1];
         $contents = substr_replace($contents, $insert, $offset, 0);
 
         file_put_contents($app, $contents);
 
-        this.io.out('');
-        this.io.out(sprintf('%s modified', $app));
+        this.io.out("");
+        this.io.out(sprintf("%s modified", $app));
     }
 
     /**
@@ -129,11 +129,11 @@ class PluginLoadCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription([
-            'Command for loading plugins.',
+            "Command for loading plugins.",
         ])
-        .addArgument('plugin', [
-            'help': 'Name of the plugin to load. Must be in CamelCase format. Example: cake plugin load Example',
-            'required': true,
+        .addArgument("plugin", [
+            "help": "Name of the plugin to load. Must be in CamelCase format. Example: cake plugin load Example",
+            "required": true,
         ]);
 
         return $parser;

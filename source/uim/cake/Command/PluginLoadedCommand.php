@@ -30,7 +30,7 @@ class PluginLoadedCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'plugin loaded';
+        return "plugin loaded";
     }
 
     /**
@@ -56,7 +56,7 @@ class PluginLoadedCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser.setDescription('Displays all currently loaded plugins.');
+        $parser.setDescription("Displays all currently loaded plugins.");
 
         return $parser;
     }

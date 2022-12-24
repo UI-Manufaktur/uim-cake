@@ -33,14 +33,14 @@ class ConsoleInputSubcommand
      *
      * @var string
      */
-    protected $_name = '';
+    protected $_name = "";
 
     /**
      * Help string for the subcommand
      *
      * @var string
      */
-    protected $_help = '';
+    protected $_help = "";
 
     /**
      * The ConsoleOptionParser for this subcommand.
@@ -57,21 +57,21 @@ class ConsoleInputSubcommand
      * @param \Cake\Console\ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
      *   Either a ConsoleOptionParser, or an array that can be used with ConsoleOptionParser::buildFromArray().
      */
-    public this($name, $help = '', $parser = null)
+    public this($name, $help = "", $parser = null)
     {
         if (is_array($name)) {
-            $data = $name + ['name': null, 'help': '', 'parser': null];
-            if (empty($data['name'])) {
-                throw new InvalidArgumentException('"name" not provided for console option parser');
+            $data = $name + ["name": null, "help": "", "parser": null];
+            if (empty($data["name"])) {
+                throw new InvalidArgumentException(""name" not provided for console option parser");
             }
 
-            $name = $data['name'];
-            $help = $data['help'];
-            $parser = $data['parser'];
+            $name = $data["name"];
+            $help = $data["help"];
+            $parser = $data["parser"];
         }
 
         if (is_array($parser)) {
-            $parser['command'] = $name;
+            $parser["command"] = $name;
             $parser = ConsoleOptionParser::buildFromArray($parser);
         }
 
@@ -110,7 +110,7 @@ class ConsoleInputSubcommand
     {
         $name = _name;
         if (strlen($name) < $width) {
-            $name = str_pad($name, $width, ' ');
+            $name = str_pad($name, $width, " ");
         }
 
         return $name . _help;
@@ -134,9 +134,9 @@ class ConsoleInputSubcommand
      */
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
-        $command = $parent.addChild('command');
-        $command.addAttribute('name', _name);
-        $command.addAttribute('help', _help);
+        $command = $parent.addChild("command");
+        $command.addAttribute("name", _name);
+        $command.addAttribute("help", _help);
 
         return $parent;
     }

@@ -33,7 +33,7 @@ class RoutesCheckCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'routes check';
+        return "routes check";
     }
 
     /**
@@ -45,36 +45,36 @@ class RoutesCheckCommand : Command
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $url = $args.getArgument('url');
+        $url = $args.getArgument("url");
         try {
-            $request = new ServerRequest(['url': $url]);
+            $request = new ServerRequest(["url": $url]);
             $route = Router::parseRequest($request);
             $name = null;
             foreach (Router::routes() as $r) {
                 if ($r.match($route)) {
-                    $name = $r.options['_name'] ?? $r.getName();
+                    $name = $r.options["_name"] ?? $r.getName();
                     break;
                 }
             }
 
-            unset($route['_route'], $route['_matchedRoute']);
+            unset($route["_route"], $route["_matchedRoute"]);
             ksort($route);
 
             $output = [
-                ['Route name', 'URI template', 'Defaults'],
+                ["Route name", "URI template", "Defaults"],
                 [$name, $url, json_encode($route)],
             ];
-            $io.helper('table').output($output);
+            $io.helper("table").output($output);
             $io.out();
         } catch (RedirectException $e) {
             $output = [
-                ['URI template', 'Redirect'],
+                ["URI template", "Redirect"],
                 [$url, $e.getMessage()],
             ];
-            $io.helper('table').output($output);
+            $io.helper("table").output($output);
             $io.out();
         } catch (MissingRouteException $e) {
-            $io.warning("'$url' did not match any routes.");
+            $io.warning(""$url" did not match any routes.");
             $io.out();
 
             return static::CODE_ERROR;
@@ -92,12 +92,12 @@ class RoutesCheckCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription(
-            'Check a URL string against the routes. ' .
-            'Will output the routing parameters the route resolves to.'
+            "Check a URL string against the routes. " .
+            "Will output the routing parameters the route resolves to."
         )
-        .addArgument('url', [
-            'help': 'The URL to check.',
-            'required': true,
+        .addArgument("url", [
+            "help": "The URL to check.",
+            "required": true,
         ]);
 
         return $parser;

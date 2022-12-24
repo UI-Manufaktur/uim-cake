@@ -20,7 +20,7 @@ use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
 
 /**
- * Command for symlinking / copying plugin assets to app's webroot.
+ * Command for symlinking / copying plugin assets to app"s webroot.
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
@@ -33,13 +33,13 @@ class PluginAssetsSymlinkCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'plugin assets symlink';
+        return "plugin assets symlink";
     }
 
     /**
      * Execute the command
      *
-     * Attempt to symlink plugin assets to app's webroot. If symlinking fails it
+     * Attempt to symlink plugin assets to app"s webroot. If symlinking fails it
      * fallbacks to copying the assets. For vendor namespaced plugin, parent folder
      * for vendor name are created if required.
      *
@@ -52,8 +52,8 @@ class PluginAssetsSymlinkCommand : Command
         this.io = $io;
         this.args = $args;
 
-        $name = $args.getArgument('name');
-        $overwrite = (bool)$args.getOption('overwrite');
+        $name = $args.getArgument("name");
+        $overwrite = (bool)$args.getOption("overwrite");
         _process(_list($name), false, $overwrite);
 
         return static::CODE_SUCCESS;
@@ -68,14 +68,14 @@ class PluginAssetsSymlinkCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription([
-            'Symlink (copy as fallback) plugin assets to app\'s webroot.',
-        ]).addArgument('name', [
-            'help': 'A specific plugin you want to symlink assets for.',
-            'required': false,
-        ]).addOption('overwrite', [
-            'help': 'Overwrite existing symlink / folder / files.',
-            'default': false,
-            'boolean': true,
+            "Symlink (copy as fallback) plugin assets to app\"s webroot.",
+        ]).addArgument("name", [
+            "help": "A specific plugin you want to symlink assets for.",
+            "required": false,
+        ]).addOption("overwrite", [
+            "help": "Overwrite existing symlink / folder / files.",
+            "default": false,
+            "boolean": true,
         ]);
 
         return $parser;

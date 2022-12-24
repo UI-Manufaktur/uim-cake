@@ -25,13 +25,13 @@ bootstrap logic, and binds your commands. Lets put our entrypoint script in
 #!/usr/bin/php -q
 <?php
 // Check platform requirements
-require dirname(__DIR__) . '/vendor/autoload.php';
+require dirname(__DIR__) . "/vendor/autoload.php";
 
 use App\Application;
 use Cake\Console\CommandRunner;
 
 // Build the runner with an application and root executable name.
-$runner = new CommandRunner(new Application(), 'tool');
+$runner = new CommandRunner(new Application(), "tool");
 exit($runner.run($argv));
 ````
 
@@ -67,14 +67,14 @@ class Application : IConsoleApplication
      */
     function console(CommandCollection $commands): CommandCollection
     {
-        $commands.add('hello', HelloCommand::class);
+        $commands.add("hello", HelloCommand::class);
 
         return $commands;
     }
 }
 ```
 
-Next we'll build a very simple `HelloCommand`:
+Next we"ll build a very simple `HelloCommand`:
 
 ```php
 <?php
@@ -90,14 +90,14 @@ class HelloCommand : BaseCommand
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser
-            .addArgument('name', [
-                'required': true,
-                'help': 'The name to say hello to',
+            .addArgument("name", [
+                "required": true,
+                "help": "The name to say hello to",
             ])
-            .addOption('color', [
-                'choices': ['none', 'green'],
-                'default': 'none',
-                'help': 'The color to use.'
+            .addOption("color", [
+                "choices": ["none", "green"],
+                "default": "none",
+                "help": "The color to use."
             ]);
 
         return $parser;
@@ -105,11 +105,11 @@ class HelloCommand : BaseCommand
 
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $color = $args.getOption('color');
-        if ($color == 'none') {
-            $io.out("Hello {$args.getArgument('name')}");
-        } elseif ($color == 'green') {
-            $io.out("<success>Hello {$args.getArgument('name')}</success>");
+        $color = $args.getOption("color");
+        if ($color == "none") {
+            $io.out("Hello {$args.getArgument("name")}");
+        } elseif ($color == "green") {
+            $io.out("<success>Hello {$args.getArgument("name")}</success>");
         }
 
         return static::CODE_SUCCESS;
@@ -118,7 +118,7 @@ class HelloCommand : BaseCommand
 ```
 
 Next we can run our command with `php bin/tool.php hello Syd`. To learn more
-about the various features we've used in this example read the docs:
+about the various features we"ve used in this example read the docs:
 
 * [Option Parsing](https://book.cakephp.org/4/en/console-commands/option-parsers.html)
 * [Input & Output](https://book.cakephp.org/4/en/console-commands/input-output.html)

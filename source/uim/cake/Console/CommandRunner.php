@@ -76,16 +76,16 @@ class CommandRunner : EventDispatcherInterface
      */
     public this(
         IConsoleApplication $app,
-        string $root = 'cake',
+        string $root = "cake",
         ?CommandFactoryInterface $factory = null
     ) {
         this.app = $app;
         this.root = $root;
         this.factory = $factory;
         this.aliases = [
-            '--version': 'version',
-            '--help': 'help',
-            '-h': 'help',
+            "--version": "version",
+            "--help": "help",
+            "-h": "help",
         ];
     }
 
@@ -99,7 +99,7 @@ class CommandRunner : EventDispatcherInterface
      * ### Usage
      *
      * ```
-     * $runner.setAliases(['--version': 'version']);
+     * $runner.setAliases(["--version": "version"]);
      * ```
      *
      * @param array<string> $aliases The map of aliases to replace.
@@ -132,21 +132,21 @@ class CommandRunner : EventDispatcherInterface
         this.bootstrap();
 
         $commands = new CommandCollection([
-            'help': HelpCommand::class,
+            "help": HelpCommand::class,
         ]);
         if (class_exists(VersionCommand::class)) {
-            $commands.add('version', VersionCommand::class);
+            $commands.add("version", VersionCommand::class);
         }
         $commands = this.app.console($commands);
 
         if (this.app instanceof IPluginApplication) {
             $commands = this.app.pluginConsole($commands);
         }
-        this.dispatchEvent('Console.buildCommands', ['commands': $commands]);
+        this.dispatchEvent("Console.buildCommands", ["commands": $commands]);
         this.loadRoutes();
 
         if (empty($argv)) {
-            throw new RuntimeException('Cannot run any commands. No arguments received.');
+            throw new RuntimeException("Cannot run any commands. No arguments received.");
         }
         // Remove the root executable segment
         array_shift($argv);
@@ -184,7 +184,7 @@ class CommandRunner : EventDispatcherInterface
     /**
      * Application bootstrap wrapper.
      *
-     * Calls the application's `bootstrap()` hook. After the application the
+     * Calls the application"s `bootstrap()` hook. After the application the
      * plugins are bootstrapped.
      *
      * @return void
@@ -198,7 +198,7 @@ class CommandRunner : EventDispatcherInterface
     }
 
     /**
-     * Get the application's event manager or the global one.
+     * Get the application"s event manager or the global one.
      *
      * @return \Cake\Event\IEventManager
      */
@@ -212,7 +212,7 @@ class CommandRunner : EventDispatcherInterface
     }
 
     /**
-     * Get/set the application's event manager.
+     * Get/set the application"s event manager.
      *
      * If the application does not support events and this method is used as
      * a setter, an exception will be raised.
@@ -229,7 +229,7 @@ class CommandRunner : EventDispatcherInterface
             return this;
         }
 
-        throw new InvalidArgumentException('Cannot set the event manager, the application does not support events.');
+        throw new InvalidArgumentException("Cannot set the event manager, the application does not support events.");
     }
 
     /**
@@ -273,7 +273,7 @@ class CommandRunner : EventDispatcherInterface
     {
         for ($i = 3; $i > 1; $i--) {
             $parts = array_slice($argv, 0, $i);
-            $name = implode(' ', $parts);
+            $name = implode(" ", $parts);
             if ($commands.has($name)) {
                 return [$name, array_slice($argv, $i)];
             }
@@ -300,8 +300,8 @@ class CommandRunner : EventDispatcherInterface
     protected function resolveName(CommandCollection $commands, ConsoleIo $io, ?string $name): string
     {
         if (!$name) {
-            $io.err('<error>No command provided. Choose one of the available commands.</error>', 2);
-            $name = 'help';
+            $io.err("<error>No command provided. Choose one of the available commands.</error>", 2);
+            $name = "help";
         }
         $name = this.aliases[$name] ?? $name;
         if (!$commands.has($name)) {
@@ -380,7 +380,7 @@ class CommandRunner : EventDispatcherInterface
     }
 
     /**
-     * Ensure that the application's routes are loaded.
+     * Ensure that the application"s routes are loaded.
      *
      * Console commands and shells often need to generate URLs.
      *
@@ -391,7 +391,7 @@ class CommandRunner : EventDispatcherInterface
         if (!(this.app instanceof IRoutingApplication)) {
             return;
         }
-        $builder = Router::createRouteBuilder('/');
+        $builder = Router::createRouteBuilder("/");
 
         this.app.routes($builder);
         if (this.app instanceof IPluginApplication) {

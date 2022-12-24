@@ -95,7 +95,7 @@ class ConsoleInputOption
      * @param string $name The long name of the option, or an array with all the properties.
      * @param string $short The short alias for this option
      * @param string $help The help text for this option
-     * @param bool $isBoolean Whether this option is a boolean option. Boolean options don't consume extra tokens
+     * @param bool $isBoolean Whether this option is a boolean option. Boolean options don"t consume extra tokens
      * @param string|bool|null $default The default value for this option.
      * @param array<string> $choices Valid choices for this option.
      * @param bool $multiple Whether this option can accept multiple value definition.
@@ -105,8 +105,8 @@ class ConsoleInputOption
      */
     public this(
         string $name,
-        string $short = '',
-        string $help = '',
+        string $short = "",
+        string $help = "",
         bool $isBoolean = false,
         $default = null,
         array $choices = [],
@@ -131,13 +131,13 @@ class ConsoleInputOption
 
         if (strlen(_short) > 1) {
             throw new ConsoleException(
-                sprintf('Short option "%s" is invalid, short options must be one letter.', _short)
+                sprintf("Short option "%s" is invalid, short options must be one letter.", _short)
             );
         }
         if (isset(_default) && this.prompt) {
             throw new ConsoleException(
-                'You cannot set both `prompt` and `default` options. ' .
-                'Use either a static `default` or interactive `prompt`'
+                "You cannot set both `prompt` and `default` options. " .
+                "Use either a static `default` or interactive `prompt`"
             );
         }
     }
@@ -170,26 +170,26 @@ class ConsoleInputOption
      */
     function help(int $width = 0): string
     {
-        $default = $short = '';
+        $default = $short = "";
         if (_default && _default != true) {
-            $default = sprintf(' <comment>(default: %s)</comment>', _default);
+            $default = sprintf(" <comment>(default: %s)</comment>", _default);
         }
         if (_choices) {
-            $default .= sprintf(' <comment>(choices: %s)</comment>', implode('|', _choices));
+            $default .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
-        if (_short != '') {
-            $short = ', -' . _short;
+        if (_short != "") {
+            $short = ", -" . _short;
         }
-        $name = sprintf('--%s%s', _name, $short);
+        $name = sprintf("--%s%s", _name, $short);
         if (strlen($name) < $width) {
-            $name = str_pad($name, $width, ' ');
+            $name = str_pad($name, $width, " ");
         }
-        $required = '';
+        $required = "";
         if (this.isRequired()) {
-            $required = ' <comment>(required)</comment>';
+            $required = " <comment>(required)</comment>";
         }
 
-        return sprintf('%s%s%s%s', $name, _help, $default, $required);
+        return sprintf("%s%s%s%s", $name, _help, $default, $required);
     }
 
     /**
@@ -199,17 +199,17 @@ class ConsoleInputOption
      */
     function usage(): string
     {
-        $name = _short == '' ? '--' . _name : '-' . _short;
-        $default = '';
-        if (_default != null && !is_bool(_default) && _default != '') {
-            $default = ' ' . _default;
+        $name = _short == "" ? "--" . _name : "-" . _short;
+        $default = "";
+        if (_default != null && !is_bool(_default) && _default != "") {
+            $default = " " . _default;
         }
         if (_choices) {
-            $default = ' ' . implode('|', _choices);
+            $default = " " . implode("|", _choices);
         }
-        $template = '[%s%s]';
+        $template = "[%s%s]";
         if (this.isRequired()) {
-            $template = '%s%s';
+            $template = "%s%s";
         }
 
         return sprintf($template, $name, $default);
@@ -270,10 +270,10 @@ class ConsoleInputOption
         if (!in_array($value, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
-                    '"%s" is not a valid value for --%s. Please use one of "%s"',
+                    ""%s" is not a valid value for --%s. Please use one of "%s"",
                     (string)$value,
                     _name,
-                    implode(', ', _choices)
+                    implode(", ", _choices)
                 )
             );
         }
@@ -302,33 +302,33 @@ class ConsoleInputOption
     }
 
     /**
-     * Append the option's XML into the parent.
+     * Append the option"s XML into the parent.
      *
      * @param \SimpleXMLElement $parent The parent element.
      * @return \SimpleXMLElement The parent with this option appended.
      */
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
-        $option = $parent.addChild('option');
-        $option.addAttribute('name', '--' . _name);
-        $short = '';
-        if (_short != '') {
-            $short = '-' . _short;
+        $option = $parent.addChild("option");
+        $option.addAttribute("name", "--" . _name);
+        $short = "";
+        if (_short != "") {
+            $short = "-" . _short;
         }
         $default = _default;
         if ($default == true) {
-            $default = 'true';
+            $default = "true";
         } elseif ($default == false) {
-            $default = 'false';
+            $default = "false";
         }
-        $option.addAttribute('short', $short);
-        $option.addAttribute('help', _help);
-        $option.addAttribute('boolean', (string)(int)_boolean);
-        $option.addAttribute('required', (string)(int)this.required);
-        $option.addChild('default', (string)$default);
-        $choices = $option.addChild('choices');
+        $option.addAttribute("short", $short);
+        $option.addAttribute("help", _help);
+        $option.addAttribute("boolean", (string)(int)_boolean);
+        $option.addAttribute("required", (string)(int)this.required);
+        $option.addChild("default", (string)$default);
+        $choices = $option.addChild("choices");
         foreach (_choices as $valid) {
-            $choices.addChild('choice', $valid);
+            $choices.addChild("choice", $valid);
         }
 
         return $parent;

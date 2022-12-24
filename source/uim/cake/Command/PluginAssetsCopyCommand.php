@@ -20,7 +20,7 @@ use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
 
 /**
- * Command for copying plugin assets to app's webroot.
+ * Command for copying plugin assets to app"s webroot.
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
@@ -33,13 +33,13 @@ class PluginAssetsCopyCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'plugin assets copy';
+        return "plugin assets copy";
     }
 
     /**
      * Execute the command
      *
-     * Copying plugin assets to app's webroot. For vendor namespaced plugin,
+     * Copying plugin assets to app"s webroot. For vendor namespaced plugin,
      * parent folder for vendor name are created if required.
      *
      * @param \Cake\Console\Arguments $args The command arguments.
@@ -51,8 +51,8 @@ class PluginAssetsCopyCommand : Command
         this.io = $io;
         this.args = $args;
 
-        $name = $args.getArgument('name');
-        $overwrite = (bool)$args.getOption('overwrite');
+        $name = $args.getArgument("name");
+        $overwrite = (bool)$args.getOption("overwrite");
         _process(_list($name), true, $overwrite);
 
         return static::CODE_SUCCESS;
@@ -67,14 +67,14 @@ class PluginAssetsCopyCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription([
-            'Copy plugin assets to app\'s webroot.',
-        ]).addArgument('name', [
-            'help': 'A specific plugin you want to copy assets for.',
-            'required': false,
-        ]).addOption('overwrite', [
-            'help': 'Overwrite existing symlink / folder / files.',
-            'default': false,
-            'boolean': true,
+            "Copy plugin assets to app\"s webroot.",
+        ]).addArgument("name", [
+            "help": "A specific plugin you want to copy assets for.",
+            "required": false,
+        ]).addOption("overwrite", [
+            "help": "Overwrite existing symlink / folder / files.",
+            "default": false,
+            "boolean": true,
         ]);
 
         return $parser;

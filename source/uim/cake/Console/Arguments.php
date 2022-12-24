@@ -17,7 +17,7 @@ module uim.cake.Console;
 
 /**
  * Provides an interface for interacting with
- * a command's options and arguments.
+ * a command"s options and arguments.
  */
 class Arguments
 {
@@ -136,7 +136,7 @@ class Arguments
     }
 
     /**
-     * Get an option's value or null
+     * Get an option"s value or null
      *
      * @param string $name The name of the option to check.
      * @return string|int|bool|null The option value or null.

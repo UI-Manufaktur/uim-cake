@@ -33,7 +33,7 @@ class I18nInitCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'i18n init';
+        return "i18n init";
     }
 
     /**
@@ -45,23 +45,23 @@ class I18nInitCommand : Command
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $language = $args.getArgument('language');
+        $language = $args.getArgument("language");
         if (!$language) {
-            $language = $io.ask('Please specify language code, e.g. `en`, `eng`, `en_US` etc.');
+            $language = $io.ask("Please specify language code, e.g. `en`, `eng`, `en_US` etc.");
         }
         if (strlen($language) < 2) {
-            $io.err('Invalid language code. Valid is `en`, `eng`, `en_US` etc.');
+            $io.err("Invalid language code. Valid is `en`, `eng`, `en_US` etc.");
 
             return static::CODE_ERROR;
         }
 
-        $paths = App::path('locales');
-        if ($args.hasOption('plugin')) {
-            $plugin = Inflector::camelize((string)$args.getOption('plugin'));
-            $paths = [Plugin::path($plugin) . 'resources' . DIRECTORY_SEPARATOR . 'locales' . DIRECTORY_SEPARATOR];
+        $paths = App::path("locales");
+        if ($args.hasOption("plugin")) {
+            $plugin = Inflector::camelize((string)$args.getOption("plugin"));
+            $paths = [Plugin::path($plugin) . "resources" . DIRECTORY_SEPARATOR . "locales" . DIRECTORY_SEPARATOR];
         }
 
-        $response = $io.ask('What folder?', rtrim($paths[0], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
+        $response = $io.ask("What folder?", rtrim($paths[0], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
         $sourceFolder = rtrim($response, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $targetFolder = $sourceFolder . $language . DIRECTORY_SEPARATOR;
         if (!is_dir($targetFolder)) {
@@ -75,14 +75,14 @@ class I18nInitCommand : Command
                 continue;
             }
             $filename = $fileinfo.getFilename();
-            $newFilename = $fileinfo.getBasename('.pot');
-            $newFilename .= '.po';
+            $newFilename = $fileinfo.getBasename(".pot");
+            $newFilename .= ".po";
 
             $io.createFile($targetFolder . $newFilename, file_get_contents($sourceFolder . $filename));
             $count++;
         }
 
-        $io.out('Generated ' . $count . ' PO files in ' . $targetFolder);
+        $io.out("Generated " . $count . " PO files in " . $targetFolder);
 
         return static::CODE_SUCCESS;
     }
@@ -95,13 +95,13 @@ class I18nInitCommand : Command
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser.setDescription('Initialize a language PO file from the POT file')
-           .addOption('plugin', [
-               'help': 'The plugin to create a PO file in.',
-               'short': 'p',
+        $parser.setDescription("Initialize a language PO file from the POT file")
+           .addOption("plugin", [
+               "help": "The plugin to create a PO file in.",
+               "short": "p",
            ])
-           .addArgument('language', [
-               'help': 'Two-letter language code to create PO files for.',
+           .addArgument("language", [
+               "help": "Two-letter language code to create PO files for.",
            ]);
 
         return $parser;

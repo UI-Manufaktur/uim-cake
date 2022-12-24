@@ -59,9 +59,9 @@ class HelperRegistry : ObjectRegistry
      */
     protected function _resolveClassName(string $class): ?string
     {
-        $name = App::className($class, 'Command/Helper', 'Helper');
+        $name = App::className($class, "Command/Helper", "Helper");
         if ($name == null) {
-            return App::className($class, 'Shell/Helper', 'Helper');
+            return App::className($class, "Shell/Helper", "Helper");
         }
 
         return $name;
@@ -81,8 +81,8 @@ class HelperRegistry : ObjectRegistry
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingHelperException([
-            'class': $class,
-            'plugin': $plugin,
+            "class": $class,
+            "plugin": $plugin,
         ]);
     }
 

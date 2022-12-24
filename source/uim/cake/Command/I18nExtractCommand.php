@@ -34,7 +34,7 @@ class I18nExtractCommand : Command
      */
     public static function defaultName(): string
     {
-        return 'i18n extract';
+        return "i18n extract";
     }
 
     /**
@@ -63,7 +63,7 @@ class I18nExtractCommand : Command
      *
      * @var string
      */
-    protected $_file = '';
+    protected $_file = "";
 
     /**
      * Contains all content waiting to be written
@@ -91,7 +91,7 @@ class I18nExtractCommand : Command
      *
      * @var string
      */
-    protected $_output = '';
+    protected $_output = "";
 
     /**
      * An array of directories to exclude.
@@ -132,33 +132,33 @@ class I18nExtractCommand : Command
         /** @psalm-suppress UndefinedConstant */
         $defaultPaths = array_merge(
             [APP],
-            App::path('templates'),
-            ['D'] // This is required to break the loop below
+            App::path("templates"),
+            ["D"] // This is required to break the loop below
         );
         $defaultPathIndex = 0;
         while (true) {
-            $currentPaths = count(_paths) > 0 ? _paths : ['None'];
+            $currentPaths = count(_paths) > 0 ? _paths : ["None"];
             $message = sprintf(
                 "Current paths: %s\nWhat is the path you would like to extract?\n[Q]uit [D]one",
-                implode(', ', $currentPaths)
+                implode(", ", $currentPaths)
             );
-            $response = $io.ask($message, $defaultPaths[$defaultPathIndex] ?? 'D');
-            if (strtoupper($response) == 'Q') {
-                $io.err('Extract Aborted');
+            $response = $io.ask($message, $defaultPaths[$defaultPathIndex] ?? "D");
+            if (strtoupper($response) == "Q") {
+                $io.err("Extract Aborted");
                 this.abort();
             }
-            if (strtoupper($response) == 'D' && count(_paths)) {
+            if (strtoupper($response) == "D" && count(_paths)) {
                 $io.out();
 
                 return;
             }
-            if (strtoupper($response) == 'D') {
-                $io.warning('No directories selected. Please choose a directory.');
+            if (strtoupper($response) == "D") {
+                $io.warning("No directories selected. Please choose a directory.");
             } elseif (is_dir($response)) {
                 _paths[] = $response;
                 $defaultPathIndex++;
             } else {
-                $io.err('The directory path you supplied was not found. Please try again.');
+                $io.err("The directory path you supplied was not found. Please try again.");
             }
             $io.out();
         }
@@ -173,60 +173,60 @@ class I18nExtractCommand : Command
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $plugin = '';
-        if ($args.getOption('exclude')) {
-            _exclude = explode(',', (string)$args.getOption('exclude'));
+        $plugin = "";
+        if ($args.getOption("exclude")) {
+            _exclude = explode(",", (string)$args.getOption("exclude"));
         }
-        if ($args.getOption('files')) {
-            _files = explode(',', (string)$args.getOption('files'));
+        if ($args.getOption("files")) {
+            _files = explode(",", (string)$args.getOption("files"));
         }
-        if ($args.getOption('paths')) {
-            _paths = explode(',', (string)$args.getOption('paths'));
-        } elseif ($args.getOption('plugin')) {
-            $plugin = Inflector::camelize((string)$args.getOption('plugin'));
+        if ($args.getOption("paths")) {
+            _paths = explode(",", (string)$args.getOption("paths"));
+        } elseif ($args.getOption("plugin")) {
+            $plugin = Inflector::camelize((string)$args.getOption("plugin"));
             _paths = [Plugin::classPath($plugin), Plugin::templatePath($plugin)];
         } else {
             _getPaths($io);
         }
 
-        if ($args.hasOption('extract-core')) {
-            _extractCore = !(strtolower((string)$args.getOption('extract-core')) == 'no');
+        if ($args.hasOption("extract-core")) {
+            _extractCore = !(strtolower((string)$args.getOption("extract-core")) == "no");
         } else {
             $response = $io.askChoice(
-                'Would you like to extract the messages from the CakePHP core?',
-                ['y', 'n'],
-                'n'
+                "Would you like to extract the messages from the CakePHP core?",
+                ["y", "n"],
+                "n"
             );
-            _extractCore = strtolower($response) == 'y';
+            _extractCore = strtolower($response) == "y";
         }
 
-        if ($args.hasOption('exclude-plugins') && _isExtractingApp()) {
-            _exclude = array_merge(_exclude, App::path('plugins'));
+        if ($args.hasOption("exclude-plugins") && _isExtractingApp()) {
+            _exclude = array_merge(_exclude, App::path("plugins"));
         }
 
         if (_extractCore) {
             _paths[] = CAKE;
         }
 
-        if ($args.hasOption('output')) {
-            _output = (string)$args.getOption('output');
-        } elseif ($args.hasOption('plugin')) {
+        if ($args.hasOption("output")) {
+            _output = (string)$args.getOption("output");
+        } elseif ($args.hasOption("plugin")) {
             _output = Plugin::path($plugin)
-                . 'resources' . DIRECTORY_SEPARATOR
-                . 'locales' . DIRECTORY_SEPARATOR;
+                . "resources" . DIRECTORY_SEPARATOR
+                . "locales" . DIRECTORY_SEPARATOR;
         } else {
             $message = "What is the path you would like to output?\n[Q]uit";
-            $localePaths = App::path('locales');
+            $localePaths = App::path("locales");
             if (!$localePaths) {
-                $localePaths[] = ROOT . 'resources' . DIRECTORY_SEPARATOR . 'locales';
+                $localePaths[] = ROOT . "resources" . DIRECTORY_SEPARATOR . "locales";
             }
             while (true) {
                 $response = $io.ask(
                     $message,
                     $localePaths[0]
                 );
-                if (strtoupper($response) == 'Q') {
-                    $io.err('Extract Aborted');
+                if (strtoupper($response) == "Q") {
+                    $io.err("Extract Aborted");
 
                     return static::CODE_ERROR;
                 }
@@ -235,28 +235,28 @@ class I18nExtractCommand : Command
                     break;
                 }
 
-                $io.err('');
+                $io.err("");
                 $io.err(
-                    '<error>The directory path you supplied was ' .
-                    'not found. Please try again.</error>'
+                    "<error>The directory path you supplied was " .
+                    "not found. Please try again.</error>"
                 );
-                $io.err('');
+                $io.err("");
             }
         }
 
-        if ($args.hasOption('merge')) {
-            _merge = !(strtolower((string)$args.getOption('merge')) == 'no');
+        if ($args.hasOption("merge")) {
+            _merge = !(strtolower((string)$args.getOption("merge")) == "no");
         } else {
             $io.out();
             $response = $io.askChoice(
-                'Would you like to merge all domain strings into the default.pot file?',
-                ['y', 'n'],
-                'n'
+                "Would you like to merge all domain strings into the default.pot file?",
+                ["y", "n"],
+                "n"
             );
-            _merge = strtolower($response) == 'y';
+            _merge = strtolower($response) == "y";
         }
 
-        _markerError = (bool)$args.getOption('marker-error');
+        _markerError = (bool)$args.getOption("marker-error");
 
         if (empty(_files)) {
             _searchFiles();
@@ -264,7 +264,7 @@ class I18nExtractCommand : Command
 
         _output = rtrim(_output, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         if (!_isPathUsable(_output)) {
-            $io.err(sprintf('The output directory %s was not found or writable.', _output));
+            $io.err(sprintf("The output directory %s was not found or writable.", _output));
 
             return static::CODE_ERROR;
         }
@@ -286,21 +286,21 @@ class I18nExtractCommand : Command
      */
     protected function _addTranslation(string $domain, string $msgid, array $details = []): void
     {
-        $context = $details['msgctxt'] ?? '';
+        $context = $details["msgctxt"] ?? "";
 
         if (empty(_translations[$domain][$msgid][$context])) {
             _translations[$domain][$msgid][$context] = [
-                'msgid_plural': false,
+                "msgid_plural": false,
             ];
         }
 
-        if (isset($details['msgid_plural'])) {
-            _translations[$domain][$msgid][$context]['msgid_plural'] = $details['msgid_plural'];
+        if (isset($details["msgid_plural"])) {
+            _translations[$domain][$msgid][$context]["msgid_plural"] = $details["msgid_plural"];
         }
 
-        if (isset($details['file'])) {
-            $line = $details['line'] ?? 0;
-            _translations[$domain][$msgid][$context]['references'][$details['file']][] = $line;
+        if (isset($details["file"])) {
+            $line = $details["line"] ?? 0;
+            _translations[$domain][$msgid][$context]["references"][$details["file"]][] = $line;
         }
     }
 
@@ -315,13 +315,13 @@ class I18nExtractCommand : Command
     {
         $io.out();
         $io.out();
-        $io.out('Extracting...');
+        $io.out("Extracting...");
         $io.hr();
-        $io.out('Paths:');
+        $io.out("Paths:");
         foreach (_paths as $path) {
-            $io.out('   ' . $path);
+            $io.out("   " . $path);
         }
-        $io.out('Output Directory: ' . _output);
+        $io.out("Output Directory: " . _output);
         $io.hr();
         _extractTokens($args, $io);
         _buildFiles($args);
@@ -331,10 +331,10 @@ class I18nExtractCommand : Command
         $io.out();
         if (_countMarkerError) {
             $io.err("{_countMarkerError} marker error(s) detected.");
-            $io.err(': Use the --marker-error option to display errors.');
+            $io.err(": Use the --marker-error option to display errors.");
         }
 
-        $io.out('Done.');
+        $io.out("Done.");
     }
 
     /**
@@ -346,47 +346,47 @@ class I18nExtractCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription(
-            'Extract i18n POT files from application source files. ' .
-            'Source files are parsed and string literal format strings ' .
-            'provided to the <info>__</info> family of functions are extracted.'
-        ).addOption('app', [
-            'help': 'Directory where your application is located.',
-        ]).addOption('paths', [
-            'help': 'Comma separated list of paths that are searched for source files.',
-        ]).addOption('merge', [
-            'help': 'Merge all domain strings into a single default.po file.',
-            'default': 'no',
-            'choices': ['yes', 'no'],
-        ]).addOption('output', [
-            'help': 'Full path to output directory.',
-        ]).addOption('files', [
-            'help': 'Comma separated list of files to parse.',
-        ]).addOption('exclude-plugins', [
-            'boolean': true,
-            'default': true,
-            'help': 'Ignores all files in plugins if this command is run inside from the same app directory.',
-        ]).addOption('plugin', [
-            'help': 'Extracts tokens only from the plugin specified and '
-                . 'puts the result in the plugin\'s `locales` directory.',
-            'short': 'p',
-        ]).addOption('exclude', [
-            'help': 'Comma separated list of directories to exclude.' .
-                ' Any path containing a path segment with the provided values will be skipped. E.g. test,vendors',
-        ]).addOption('overwrite', [
-            'boolean': true,
-            'default': false,
-            'help': 'Always overwrite existing .pot files.',
-        ]).addOption('extract-core', [
-            'help': 'Extract messages from the CakePHP core libraries.',
-            'choices': ['yes', 'no'],
-        ]).addOption('no-location', [
-            'boolean': true,
-            'default': false,
-            'help': 'Do not write file locations for each extracted message.',
-        ]).addOption('marker-error', [
-            'boolean': true,
-            'default': false,
-            'help': 'Do not display marker error.',
+            "Extract i18n POT files from application source files. " .
+            "Source files are parsed and string literal format strings " .
+            "provided to the <info>__</info> family of functions are extracted."
+        ).addOption("app", [
+            "help": "Directory where your application is located.",
+        ]).addOption("paths", [
+            "help": "Comma separated list of paths that are searched for source files.",
+        ]).addOption("merge", [
+            "help": "Merge all domain strings into a single default.po file.",
+            "default": "no",
+            "choices": ["yes", "no"],
+        ]).addOption("output", [
+            "help": "Full path to output directory.",
+        ]).addOption("files", [
+            "help": "Comma separated list of files to parse.",
+        ]).addOption("exclude-plugins", [
+            "boolean": true,
+            "default": true,
+            "help": "Ignores all files in plugins if this command is run inside from the same app directory.",
+        ]).addOption("plugin", [
+            "help": "Extracts tokens only from the plugin specified and "
+                . "puts the result in the plugin\"s `locales` directory.",
+            "short": "p",
+        ]).addOption("exclude", [
+            "help": "Comma separated list of directories to exclude." .
+                " Any path containing a path segment with the provided values will be skipped. E.g. test,vendors",
+        ]).addOption("overwrite", [
+            "boolean": true,
+            "default": false,
+            "help": "Always overwrite existing .pot files.",
+        ]).addOption("extract-core", [
+            "help": "Extract messages from the CakePHP core libraries.",
+            "choices": ["yes", "no"],
+        ]).addOption("no-location", [
+            "boolean": true,
+            "default": false,
+            "help": "Do not write file locations for each extracted message.",
+        ]).addOption("marker-error", [
+            "boolean": true,
+            "default": false,
+            "help": "Do not display marker error.",
         ]);
 
         return $parser;
@@ -402,26 +402,26 @@ class I18nExtractCommand : Command
     protected function _extractTokens(Arguments $args, ConsoleIo $io): void
     {
         /** @var \Cake\Shell\Helper\ProgressHelper $progress */
-        $progress = $io.helper('progress');
-        $progress.init(['total': count(_files)]);
-        $isVerbose = $args.getOption('verbose');
+        $progress = $io.helper("progress");
+        $progress.init(["total": count(_files)]);
+        $isVerbose = $args.getOption("verbose");
 
         $functions = [
-            '__': ['singular'],
-            '__n': ['singular', 'plural'],
-            '__d': ['domain', 'singular'],
-            '__dn': ['domain', 'singular', 'plural'],
-            '__x': ['context', 'singular'],
-            '__xn': ['context', 'singular', 'plural'],
-            '__dx': ['domain', 'context', 'singular'],
-            '__dxn': ['domain', 'context', 'singular', 'plural'],
+            "__": ["singular"],
+            "__n": ["singular", "plural"],
+            "__d": ["domain", "singular"],
+            "__dn": ["domain", "singular", "plural"],
+            "__x": ["context", "singular"],
+            "__xn": ["context", "singular", "plural"],
+            "__dx": ["domain", "context", "singular"],
+            "__dxn": ["domain", "context", "singular", "plural"],
         ];
-        $pattern = '/(' . implode('|', array_keys($functions)) . ')\s*\(/';
+        $pattern = "/(" . implode("|", array_keys($functions)) . ")\s*\(/";
 
         foreach (_files as $file) {
             _file = $file;
             if ($isVerbose) {
-                $io.verbose(sprintf('Processing %s...', $file));
+                $io.verbose(sprintf("Processing %s...", $file));
             }
 
             $code = file_get_contents($file);
@@ -453,7 +453,7 @@ class I18nExtractCommand : Command
      * Parse tokens
      *
      * @param \Cake\Console\ConsoleIo $io The io instance
-     * @param string $functionName Function name that indicates translatable string (e.g: '__')
+     * @param string $functionName Function name that indicates translatable string (e.g: "__")
      * @param array $map Array containing what variables it will find (e.g: domain, singular, plural)
      * @return void
      */
@@ -471,14 +471,14 @@ class I18nExtractCommand : Command
             }
 
             [$type, $string, $line] = $countToken;
-            if (($type == T_STRING) && ($string == $functionName) && ($firstParenthesis == '(')) {
+            if (($type == T_STRING) && ($string == $functionName) && ($firstParenthesis == "(")) {
                 $position = $count;
                 $depth = 0;
 
                 while (!$depth) {
-                    if (_tokens[$position] == '(') {
+                    if (_tokens[$position] == "(") {
                         $depth++;
-                    } elseif (_tokens[$position] == ')') {
+                    } elseif (_tokens[$position] == ")") {
                         $depth--;
                     }
                     $position++;
@@ -488,21 +488,21 @@ class I18nExtractCommand : Command
                 $strings = _getStrings($position, $mapCount);
 
                 if ($mapCount == count($strings)) {
-                    $singular = '';
+                    $singular = "";
                     $plural = $context = null;
                     $vars = array_combine($map, $strings);
                     extract($vars);
-                    $domain = $domain ?? 'default';
+                    $domain = $domain ?? "default";
                     $details = [
-                        'file': _file,
-                        'line': $line,
+                        "file": _file,
+                        "line": $line,
                     ];
-                    $details['file'] = '.' . str_replace(ROOT, '', $details['file']);
+                    $details["file"] = "." . str_replace(ROOT, "", $details["file"]);
                     if ($plural != null) {
-                        $details['msgid_plural'] = $plural;
+                        $details["msgid_plural"] = $plural;
                     }
                     if ($context != null) {
-                        $details['msgctxt'] = $context;
+                        $details["msgctxt"] = $context;
                     }
                     _addTranslation($domain, $singular, $details);
                 } else {
@@ -532,27 +532,27 @@ class I18nExtractCommand : Command
         foreach (_translations as $domain: $translations) {
             foreach ($translations as $msgid: $contexts) {
                 foreach ($contexts as $context: $details) {
-                    $plural = $details['msgid_plural'];
-                    $files = $details['references'];
-                    $header = '';
+                    $plural = $details["msgid_plural"];
+                    $files = $details["references"];
+                    $header = "";
 
-                    if (!$args.getOption('no-location')) {
+                    if (!$args.getOption("no-location")) {
                         $occurrences = [];
                         foreach ($files as $file: $lines) {
                             $lines = array_unique($lines);
                             foreach ($lines as $line) {
-                                $occurrences[] = $file . ':' . $line;
+                                $occurrences[] = $file . ":" . $line;
                             }
                         }
                         $occurrences = implode("\n#: ", $occurrences);
 
-                        $header = '#: '
-                            . str_replace(DIRECTORY_SEPARATOR, '/', $occurrences)
+                        $header = "#: "
+                            . str_replace(DIRECTORY_SEPARATOR, "/", $occurrences)
                             . "\n";
                     }
 
-                    $sentence = '';
-                    if ($context != '') {
+                    $sentence = "";
+                    if ($context != "") {
                         $sentence .= "msgctxt \"{$context}\"\n";
                     }
                     if ($plural == false) {
@@ -565,8 +565,8 @@ class I18nExtractCommand : Command
                         $sentence .= "msgstr[1] \"\"\n\n";
                     }
 
-                    if ($domain != 'default' && _merge) {
-                        _store('default', $header, $sentence);
+                    if ($domain != "default" && _merge) {
+                        _store("default", $header, $sentence);
                     } else {
                         _store($domain, $header, $sentence);
                     }
@@ -605,7 +605,7 @@ class I18nExtractCommand : Command
     {
         $io.out();
         $overwriteAll = false;
-        if ($args.getOption('overwrite')) {
+        if ($args.getOption("overwrite")) {
             $overwriteAll = true;
         }
         foreach (_storage as $domain: $sentences) {
@@ -616,34 +616,34 @@ class I18nExtractCommand : Command
             }
 
             // Remove vendor prefix if present.
-            $slashPosition = strpos($domain, '/');
+            $slashPosition = strpos($domain, "/");
             if ($slashPosition != false) {
                 $domain = substr($domain, $slashPosition + 1);
             }
 
-            $filename = str_replace('/', '_', $domain) . '.pot';
+            $filename = str_replace("/", "_", $domain) . ".pot";
             $outputPath = _output . $filename;
 
             if (this.checkUnchanged($outputPath, $headerLength, $output) == true) {
-                $io.out($filename . ' is unchanged. Skipping.');
+                $io.out($filename . " is unchanged. Skipping.");
                 continue;
             }
 
-            $response = '';
-            while ($overwriteAll == false && file_exists($outputPath) && strtoupper($response) != 'Y') {
+            $response = "";
+            while ($overwriteAll == false && file_exists($outputPath) && strtoupper($response) != "Y") {
                 $io.out();
                 $response = $io.askChoice(
-                    sprintf('Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll', $filename),
-                    ['y', 'n', 'a'],
-                    'y'
+                    sprintf("Error: %s already exists in this location. Overwrite? [Y]es, [N]o, [A]ll", $filename),
+                    ["y", "n", "a"],
+                    "y"
                 );
-                if (strtoupper($response) == 'N') {
-                    $response = '';
+                if (strtoupper($response) == "N") {
+                    $response = "";
                     while (!$response) {
-                        $response = $io.ask('What would you like to name this file?', 'new_' . $filename);
+                        $response = $io.ask("What would you like to name this file?", "new_" . $filename);
                         $filename = $response;
                     }
-                } elseif (strtoupper($response) == 'A') {
+                } elseif (strtoupper($response) == "A") {
                     $overwriteAll = true;
                 }
             }
@@ -660,7 +660,7 @@ class I18nExtractCommand : Command
      */
     protected function _writeHeader(string $domain): string
     {
-        $projectIdVersion = $domain == 'cake' ? 'CakePHP ' . Configure::version() : 'PROJECT VERSION';
+        $projectIdVersion = $domain == "cake" ? "CakePHP " . Configure::version() : "PROJECT VERSION";
 
         $output = "# LANGUAGE translation of CakePHP Application\n";
         $output .= "# Copyright YEAR NAME <EMAIL@ADDRESS>\n";
@@ -668,8 +668,8 @@ class I18nExtractCommand : Command
         $output .= "#, fuzzy\n";
         $output .= "msgid \"\"\n";
         $output .= "msgstr \"\"\n";
-        $output .= '"Project-Id-Version: ' . $projectIdVersion . "\\n\"\n";
-        $output .= '"POT-Creation-Date: ' . date('Y-m-d H:iO') . "\\n\"\n";
+        $output .= ""Project-Id-Version: " . $projectIdVersion . "\\n\"\n";
+        $output .= ""POT-Creation-Date: " . date("Y-m-d H:iO") . "\\n\"\n";
         $output .= "\"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\\n\"\n";
         $output .= "\"Last-Translator: NAME <EMAIL@ADDRESS>\\n\"\n";
         $output .= "\"Language-Team: LANGUAGE <EMAIL@ADDRESS>\\n\"\n";
@@ -717,17 +717,17 @@ class I18nExtractCommand : Command
         $count = 0;
         while (
             $count < $target
-            && (_tokens[$position] == ','
+            && (_tokens[$position] == ","
                 || _tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING
                 || _tokens[$position][0] == T_LNUMBER
             )
         ) {
             $count = count($strings);
-            if (_tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING && _tokens[$position + 1] == '.') {
-                $string = '';
+            if (_tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING && _tokens[$position + 1] == ".") {
+                $string = "";
                 while (
                     _tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING
-                    || _tokens[$position] == '.'
+                    || _tokens[$position] == "."
                 ) {
                     if (_tokens[$position][0] == T_CONSTANT_ENCAPSED_STRING) {
                         $string .= _formatString(_tokens[$position][1]);
@@ -756,10 +756,10 @@ class I18nExtractCommand : Command
     {
         $quote = substr($string, 0, 1);
         $string = substr($string, 1, -1);
-        if ($quote == '"') {
+        if ($quote == """) {
             $string = stripcslashes($string);
         } else {
-            $string = strtr($string, ["\\'": "'", '\\\\': '\\']);
+            $string = strtr($string, ["\\"": """, "\\\\": "\\"]);
         }
         $string = str_replace("\r\n", "\n", $string);
 
@@ -796,11 +796,11 @@ class I18nExtractCommand : Command
                 $io.err(_tokens[$count][1], 0);
             } else {
                 $io.err(_tokens[$count], 0);
-                if (_tokens[$count] == '(') {
+                if (_tokens[$count] == "(") {
                     $parenthesis++;
                 }
 
-                if (_tokens[$count] == ')') {
+                if (_tokens[$count] == ")") {
                     $parenthesis--;
                 }
             }
@@ -820,18 +820,18 @@ class I18nExtractCommand : Command
         if (!empty(_exclude)) {
             $exclude = [];
             foreach (_exclude as $e) {
-                if (DIRECTORY_SEPARATOR != '\\' && $e[0] != DIRECTORY_SEPARATOR) {
+                if (DIRECTORY_SEPARATOR != "\\" && $e[0] != DIRECTORY_SEPARATOR) {
                     $e = DIRECTORY_SEPARATOR . $e;
                 }
-                $exclude[] = preg_quote($e, '/');
+                $exclude[] = preg_quote($e, "/");
             }
-            $pattern = '/' . implode('|', $exclude) . '/';
+            $pattern = "/" . implode("|", $exclude) . "/";
         }
 
         foreach (_paths as $path) {
             $path = realpath($path) . DIRECTORY_SEPARATOR;
             $fs = new Filesystem();
-            $files = $fs.findRecursive($path, '/\.php$/');
+            $files = $fs.findRecursive($path, "/\.php$/");
             $files = array_keys(iterator_to_array($files));
             sort($files);
             if (!empty($pattern)) {

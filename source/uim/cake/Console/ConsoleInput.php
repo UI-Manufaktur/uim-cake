@@ -45,10 +45,10 @@ class ConsoleInput
      *
      * @param string $handle The location of the stream to use as input.
      */
-    public this(string $handle = 'php://stdin')
+    public this(string $handle = "php://stdin")
     {
-        _canReadline = (extension_loaded('readline') && $handle == 'php://stdin');
-        _input = fopen($handle, 'rb');
+        _canReadline = (extension_loaded("readline") && $handle == "php://stdin");
+        _input = fopen($handle, "rb");
     }
 
     /**
@@ -59,9 +59,9 @@ class ConsoleInput
     function read(): ?string
     {
         if (_canReadline) {
-            $line = readline('');
+            $line = readline("");
 
-            if ($line != false && $line != '') {
+            if ($line != false && $line != "") {
                 readline_add_history($line);
             }
         } else {

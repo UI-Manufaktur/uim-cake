@@ -37,16 +37,16 @@ abstract class BaseCommand : CommandInterface
      *
      * @var string
      */
-    protected $name = 'cake unknown';
+    protected $name = "cake unknown";
 
     /**
      * @inheritDoc
      */
     function setName(string $name)
     {
-        if (strpos($name, ' ') < 1) {
+        if (strpos($name, " ") < 1) {
             throw new InvalidArgumentException(
-                "The name '{$name}' is missing a space. Names should look like `cake routes`"
+                "The name "{$name}" is missing a space. Names should look like `cake routes`"
             );
         }
         this.name = $name;
@@ -71,7 +71,7 @@ abstract class BaseCommand : CommandInterface
      */
     public static function getDescription(): string
     {
-        return '';
+        return "";
     }
 
     /**
@@ -81,7 +81,7 @@ abstract class BaseCommand : CommandInterface
      */
     function getRootName(): string
     {
-        [$root] = explode(' ', this.name);
+        [$root] = explode(" ", this.name);
 
         return $root;
     }
@@ -91,13 +91,13 @@ abstract class BaseCommand : CommandInterface
      *
      * Returns the command name based on class name.
      * For e.g. for a command with class name `UpdateTableCommand` the default
-     * name returned would be `'update_table'`.
+     * name returned would be `"update_table"`.
      *
      * @return string
      */
     public static function defaultName(): string
     {
-        $pos = strrpos(static::class, '\\');
+        $pos = strrpos(static::class, "\\");
         /** @psalm-suppress PossiblyFalseOperand */
         $name = substr(static::class, $pos + 1, -7);
 
@@ -114,7 +114,7 @@ abstract class BaseCommand : CommandInterface
      */
     function getOptionParser(): ConsoleOptionParser
     {
-        [$root, $name] = explode(' ', this.name, 2);
+        [$root, $name] = explode(" ", this.name, 2);
         $parser = new ConsoleOptionParser($name);
         $parser.setRootName($root);
         $parser.setDescription(static::getDescription());
@@ -122,7 +122,7 @@ abstract class BaseCommand : CommandInterface
         $parser = this.buildOptionParser($parser);
         if ($parser.subcommands()) {
             throw new RuntimeException(
-                'You cannot add sub-commands to `Command` sub-classes. Instead make a separate command.'
+                "You cannot add sub-commands to `Command` sub-classes. Instead make a separate command."
             );
         }
 
@@ -130,7 +130,7 @@ abstract class BaseCommand : CommandInterface
     }
 
     /**
-     * Hook method for defining this command's option parser.
+     * Hook method for defining this command"s option parser.
      *
      * @param \Cake\Console\ConsoleOptionParser $parser The parser to be defined
      * @return \Cake\Console\ConsoleOptionParser The built parser.
@@ -169,19 +169,19 @@ abstract class BaseCommand : CommandInterface
                 $parser.argumentNames()
             );
         } catch (ConsoleException $e) {
-            $io.err('Error: ' . $e.getMessage());
+            $io.err("Error: " . $e.getMessage());
 
             return static::CODE_ERROR;
         }
         this.setOutputLevel($args, $io);
 
-        if ($args.getOption('help')) {
+        if ($args.getOption("help")) {
             this.displayHelp($parser, $args, $io);
 
             return static::CODE_SUCCESS;
         }
 
-        if ($args.getOption('quiet')) {
+        if ($args.getOption("quiet")) {
             $io.setInteractive(false);
         }
 
@@ -198,9 +198,9 @@ abstract class BaseCommand : CommandInterface
      */
     protected function displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io): void
     {
-        $format = 'text';
-        if ($args.getArgumentAt(0) == 'xml') {
-            $format = 'xml';
+        $format = "text";
+        if ($args.getArgumentAt(0) == "xml") {
+            $format = "xml";
             $io.setOutputAs(ConsoleOutput::RAW);
         }
 
@@ -217,18 +217,18 @@ abstract class BaseCommand : CommandInterface
     protected function setOutputLevel(Arguments $args, ConsoleIo $io): void
     {
         $io.setLoggers(ConsoleIo::NORMAL);
-        if ($args.getOption('quiet')) {
+        if ($args.getOption("quiet")) {
             $io.level(ConsoleIo::QUIET);
             $io.setLoggers(ConsoleIo::QUIET);
         }
-        if ($args.getOption('verbose')) {
+        if ($args.getOption("verbose")) {
             $io.level(ConsoleIo::VERBOSE);
             $io.setLoggers(ConsoleIo::VERBOSE);
         }
     }
 
     /**
-     * Implement this method with your command's logic.
+     * Implement this method with your command"s logic.
      *
      * @param \Cake\Console\Arguments $args The command arguments.
      * @param \Cake\Console\ConsoleIo $io The console io
@@ -246,13 +246,13 @@ abstract class BaseCommand : CommandInterface
      */
     function abort(int $code = self::CODE_ERROR): void
     {
-        throw new StopException('Command aborted', $code);
+        throw new StopException("Command aborted", $code);
     }
 
     /**
      * Execute another command with the provided set of arguments.
      *
-     * If you are using a string command name, that command's dependencies
+     * If you are using a string command name, that command"s dependencies
      * will not be resolved with the application container. Instead you will
      * need to pass the command as an object with all of its dependencies.
      *
@@ -265,14 +265,14 @@ abstract class BaseCommand : CommandInterface
     {
         if (is_string($command)) {
             if (!class_exists($command)) {
-                throw new InvalidArgumentException("Command class '{$command}' does not exist.");
+                throw new InvalidArgumentException("Command class "{$command}" does not exist.");
             }
             $command = new $command();
         }
         if (!$command instanceof CommandInterface) {
             $commandType = getTypeName($command);
             throw new InvalidArgumentException(
-                "Command '{$commandType}' is not a subclass of Cake\Console\CommandInterface."
+                "Command "{$commandType}" is not a subclass of Cake\Console\CommandInterface."
             );
         }
         $io = $io ?: new ConsoleIo();

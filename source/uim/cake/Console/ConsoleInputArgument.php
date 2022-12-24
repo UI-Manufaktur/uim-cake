@@ -62,11 +62,11 @@ class ConsoleInputArgument
      * @param bool $required Whether this argument is required. Missing required args will trigger exceptions
      * @param array<string> $choices Valid choices for this option.
      */
-    public this($name, $help = '', $required = false, $choices = [])
+    public this($name, $help = "", $required = false, $choices = [])
     {
-        if (is_array($name) && isset($name['name'])) {
+        if (is_array($name) && isset($name["name"])) {
             foreach ($name as $key: $value) {
-                this.{'_' . $key} = $value;
+                this.{"_" . $key} = $value;
             }
         } else {
             /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
@@ -109,17 +109,17 @@ class ConsoleInputArgument
     {
         $name = _name;
         if (strlen($name) < $width) {
-            $name = str_pad($name, $width, ' ');
+            $name = str_pad($name, $width, " ");
         }
-        $optional = '';
+        $optional = "";
         if (!this.isRequired()) {
-            $optional = ' <comment>(optional)</comment>';
+            $optional = " <comment>(optional)</comment>";
         }
         if (_choices) {
-            $optional .= sprintf(' <comment>(choices: %s)</comment>', implode('|', _choices));
+            $optional .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
 
-        return sprintf('%s%s%s', $name, _help, $optional);
+        return sprintf("%s%s%s", $name, _help, $optional);
     }
 
     /**
@@ -131,11 +131,11 @@ class ConsoleInputArgument
     {
         $name = _name;
         if (_choices) {
-            $name = implode('|', _choices);
+            $name = implode("|", _choices);
         }
-        $name = '<' . $name . '>';
+        $name = "<" . $name . ">";
         if (!this.isRequired()) {
-            $name = '[' . $name . ']';
+            $name = "[" . $name . "]";
         }
 
         return $name;
@@ -166,10 +166,10 @@ class ConsoleInputArgument
         if (!in_array($value, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
-                    '"%s" is not a valid value for %s. Please use one of "%s"',
+                    ""%s" is not a valid value for %s. Please use one of "%s"",
                     $value,
                     _name,
-                    implode(', ', _choices)
+                    implode(", ", _choices)
                 )
             );
         }
@@ -185,13 +185,13 @@ class ConsoleInputArgument
      */
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
-        $option = $parent.addChild('argument');
-        $option.addAttribute('name', _name);
-        $option.addAttribute('help', _help);
-        $option.addAttribute('required', (string)(int)this.isRequired());
-        $choices = $option.addChild('choices');
+        $option = $parent.addChild("argument");
+        $option.addAttribute("name", _name);
+        $option.addAttribute("help", _help);
+        $option.addAttribute("required", (string)(int)this.isRequired());
+        $choices = $option.addChild("choices");
         foreach (_choices as $valid) {
-            $choices.addChild('choice', $valid);
+            $choices.addChild("choice", $valid);
         }
 
         return $parent;

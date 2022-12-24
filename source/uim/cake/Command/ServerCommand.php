@@ -31,7 +31,7 @@ class ServerCommand : Command
      *
      * @var string
      */
-    public const DEFAULT_HOST = 'localhost';
+    public const DEFAULT_HOST = "localhost";
 
     /**
      * Default ListenPort
@@ -66,7 +66,7 @@ class ServerCommand : Command
      *
      * @var string
      */
-    protected $_iniPath = '';
+    protected $_iniPath = "";
 
     /**
      * Starts up the Command and displays the welcome message.
@@ -79,17 +79,17 @@ class ServerCommand : Command
      */
     protected function startup(Arguments $args, ConsoleIo $io): void
     {
-        if ($args.getOption('host')) {
-            _host = (string)$args.getOption('host');
+        if ($args.getOption("host")) {
+            _host = (string)$args.getOption("host");
         }
-        if ($args.getOption('port')) {
-            _port = (int)$args.getOption('port');
+        if ($args.getOption("port")) {
+            _port = (int)$args.getOption("port");
         }
-        if ($args.getOption('document_root')) {
-            _documentRoot = (string)$args.getOption('document_root');
+        if ($args.getOption("document_root")) {
+            _documentRoot = (string)$args.getOption("document_root");
         }
-        if ($args.getOption('ini_path')) {
-            _iniPath = (string)$args.getOption('ini_path');
+        if ($args.getOption("ini_path")) {
+            _iniPath = (string)$args.getOption("ini_path");
         }
 
         // For Windows
@@ -97,21 +97,21 @@ class ServerCommand : Command
             _documentRoot = substr(_documentRoot, 0, strlen(_documentRoot) - 1);
         }
         if (preg_match("/^([a-z]:)[\\\]+(.+)$/i", _documentRoot, $m)) {
-            _documentRoot = $m[1] . '\\' . $m[2];
+            _documentRoot = $m[1] . "\\" . $m[2];
         }
 
         _iniPath = rtrim(_iniPath, DIRECTORY_SEPARATOR);
         if (preg_match("/^([a-z]:)[\\\]+(.+)$/i", _iniPath, $m)) {
-            _iniPath = $m[1] . '\\' . $m[2];
+            _iniPath = $m[1] . "\\" . $m[2];
         }
 
         $io.out();
-        $io.out(sprintf('<info>Welcome to CakePHP %s Console</info>', 'v' . Configure::version()));
+        $io.out(sprintf("<info>Welcome to CakePHP %s Console</info>", "v" . Configure::version()));
         $io.hr();
-        $io.out(sprintf('App : %s', Configure::read('App.dir')));
-        $io.out(sprintf('Path: %s', APP));
-        $io.out(sprintf('DocumentRoot: %s', _documentRoot));
-        $io.out(sprintf('Ini Path: %s', _iniPath));
+        $io.out(sprintf("App : %s", Configure::read("App.dir")));
+        $io.out(sprintf("Path: %s", APP));
+        $io.out(sprintf("DocumentRoot: %s", _documentRoot));
+        $io.out(sprintf("Ini Path: %s", _iniPath));
         $io.hr();
     }
 
@@ -125,9 +125,9 @@ class ServerCommand : Command
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
         this.startup($args, $io);
-        $phpBinary = (string)env('PHP', 'php');
+        $phpBinary = (string)env("PHP", "php");
         $command = sprintf(
-            '%s -S %s:%d -t %s',
+            "%s -S %s:%d -t %s",
             $phpBinary,
             _host,
             _port,
@@ -135,21 +135,21 @@ class ServerCommand : Command
         );
 
         if (!empty(_iniPath)) {
-            $command = sprintf('%s -c %s', $command, _iniPath);
+            $command = sprintf("%s -c %s", $command, _iniPath);
         }
 
-        $command = sprintf('%s %s', $command, escapeshellarg(_documentRoot . '/index.php'));
+        $command = sprintf("%s %s", $command, escapeshellarg(_documentRoot . "/index.php"));
 
-        $port = ':' . _port;
-        $io.out(sprintf('built-in server is running in http://%s%s/', _host, $port));
-        $io.out('You can exit with <info>`CTRL-C`</info>');
+        $port = ":" . _port;
+        $io.out(sprintf("built-in server is running in http://%s%s/", _host, $port));
+        $io.out("You can exit with <info>`CTRL-C`</info>");
         system($command);
 
         return static::CODE_SUCCESS;
     }
 
     /**
-     * Hook method for defining this command's option parser.
+     * Hook method for defining this command"s option parser.
      *
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
@@ -157,20 +157,20 @@ class ServerCommand : Command
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription([
-            'PHP Built-in Server for CakePHP',
-            '<warning>[WARN] Don\'t use this in a production environment</warning>',
-        ]).addOption('host', [
-            'short': 'H',
-            'help': 'ServerHost',
-        ]).addOption('port', [
-            'short': 'p',
-            'help': 'ListenPort',
-        ]).addOption('ini_path', [
-            'short': 'I',
-            'help': 'php.ini path',
-        ]).addOption('document_root', [
-            'short': 'd',
-            'help': 'DocumentRoot',
+            "PHP Built-in Server for CakePHP",
+            "<warning>[WARN] Don\"t use this in a production environment</warning>",
+        ]).addOption("host", [
+            "short": "H",
+            "help": "ServerHost",
+        ]).addOption("port", [
+            "short": "p",
+            "help": "ListenPort",
+        ]).addOption("ini_path", [
+            "short": "I",
+            "help": "php.ini path",
+        ]).addOption("document_root", [
+            "short": "d",
+            "help": "DocumentRoot",
         ]);
 
         return $parser;
