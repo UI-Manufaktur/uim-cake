@@ -58,12 +58,12 @@ class QueryCacher
         if (!is_string($key) && !($key instanceof Closure)) {
             throw new RuntimeException('Cache keys must be strings or callables.');
         }
-        this->_key = $key;
+        this._key = $key;
 
         if (!is_string($config) && !($config instanceof CacheInterface)) {
             throw new RuntimeException('Cache configs must be strings or \Psr\SimpleCache\CacheInterface instances.');
         }
-        this->_config = $config;
+        this._config = $config;
     }
 
     /**
@@ -74,8 +74,8 @@ class QueryCacher
      */
     function fetch(object $query)
     {
-        $key = this->_resolveKey($query);
-        $storage = this->_resolveCacher();
+        $key = this._resolveKey($query);
+        $storage = this._resolveCacher();
         $result = $storage->get($key);
         if (empty($result)) {
             return null;
@@ -93,8 +93,8 @@ class QueryCacher
      */
     function store(object $query, Traversable $results): bool
     {
-        $key = this->_resolveKey($query);
-        $storage = this->_resolveCacher();
+        $key = this._resolveKey($query);
+        $storage = this._resolveCacher();
 
         return $storage->set($key, $results);
     }
@@ -108,10 +108,10 @@ class QueryCacher
      */
     protected function _resolveKey(object $query): string
     {
-        if (is_string(this->_key)) {
-            return this->_key;
+        if (is_string(this._key)) {
+            return this._key;
         }
-        $func = this->_key;
+        $func = this._key;
         $key = $func($query);
         if (!is_string($key)) {
             $msg = sprintf('Cache key functions must return a string. Got %s.', var_export($key, true));
@@ -128,10 +128,10 @@ class QueryCacher
      */
     protected function _resolveCacher()
     {
-        if (is_string(this->_config)) {
-            return Cache::pool(this->_config);
+        if (is_string(this._config)) {
+            return Cache::pool(this._config);
         }
 
-        return this->_config;
+        return this._config;
     }
 }

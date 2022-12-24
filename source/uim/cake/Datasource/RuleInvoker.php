@@ -66,9 +66,9 @@ class RuleInvoker
      */
     public this(callable $rule, ?string $name, array $options = [])
     {
-        this->rule = $rule;
-        this->name = $name;
-        this->options = $options;
+        this.rule = $rule;
+        this.name = $name;
+        this.options = $options;
     }
 
     /**
@@ -81,7 +81,7 @@ class RuleInvoker
      */
     function setOptions(array $options)
     {
-        this->options = $options + this->options;
+        this.options = $options + this.options;
 
         return this;
     }
@@ -97,7 +97,7 @@ class RuleInvoker
     function setName(?string $name)
     {
         if ($name) {
-            this->name = $name;
+            this.name = $name;
         }
 
         return this;
@@ -113,22 +113,22 @@ class RuleInvoker
      */
     function __invoke(EntityInterface $entity, array $scope): bool
     {
-        $rule = this->rule;
-        $pass = $rule($entity, this->options + $scope);
-        if ($pass == true || empty(this->options['errorField'])) {
+        $rule = this.rule;
+        $pass = $rule($entity, this.options + $scope);
+        if ($pass == true || empty(this.options['errorField'])) {
             return $pass == true;
         }
 
-        $message = this->options['message'] ?? 'invalid';
+        $message = this.options['message'] ?? 'invalid';
         if (is_string($pass)) {
             $message = $pass;
         }
-        if (this->name) {
-            $message = [this->name => $message];
+        if (this.name) {
+            $message = [this.name => $message];
         } else {
             $message = [$message];
         }
-        $errorField = this->options['errorField'];
+        $errorField = this.options['errorField'];
         $entity->setError($errorField, $message);
 
         if ($entity instanceof InvalidPropertyInterface && isset($entity->{$errorField})) {
