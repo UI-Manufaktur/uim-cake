@@ -133,7 +133,7 @@ trait QueryTrait
      * iterated without having to call execute() manually, thus making it look like
      * a result set instead of the query itself.
      *
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[\ReturnTypeWillChange]
@@ -272,9 +272,9 @@ trait QueryTrait
      * ResultSetDecorator is a traversable object that : the methods found
      * on Cake\Collection\Collection.
      *
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      */
-    function all(): ResultSetInterface
+    function all(): IResultSet
     {
         if (_results != null) {
             return _results;
@@ -526,7 +526,7 @@ trait QueryTrait
      *  $query.getOptions(); // Returns ['doABarrelRoll': true]
      * ```
      *
-     * @see \Cake\Datasource\QueryInterface::applyOptions() to read about the options that will
+     * @see \Cake\Datasource\IQuery::applyOptions() to read about the options that will
      * be processed by this class and not returned by this function
      * @return array
      * @see applyOptions()
@@ -551,7 +551,7 @@ trait QueryTrait
             deprecationWarning(sprintf(
                 'Calling `%s` methods, such as `%s()`, on queries is deprecated. ' .
                 'You must call `all()` first (for example, `all().%s()`).',
-                ResultSetInterface::class,
+                IResultSet::class,
                 $method,
                 $method,
             ), 2);
@@ -576,17 +576,17 @@ trait QueryTrait
     /**
      * Executes this query and returns a traversable object containing the results
      *
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      */
-    abstract protected function _execute(): ResultSetInterface;
+    abstract protected function _execute(): IResultSet;
 
     /**
      * Decorates the results iterator with MapReduce routines and formatters
      *
      * @param \Traversable $result Original results
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      */
-    protected function _decorateResults(Traversable $result): ResultSetInterface
+    protected function _decorateResults(Traversable $result): IResultSet
     {
         $decorator = _decoratorClass();
         foreach (_mapReduce as $functions) {
@@ -612,7 +612,7 @@ trait QueryTrait
      * Returns the name of the class to be used for decorating results
      *
      * @return string
-     * @psalm-return class-string<\Cake\Datasource\ResultSetInterface>
+     * @psalm-return class-string<\Cake\Datasource\IResultSet>
      */
     protected function _decoratorClass(): string
     {

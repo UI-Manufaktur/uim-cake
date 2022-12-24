@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Datasource\Paging;
 
-use Cake\Datasource\QueryInterface;
+use Cake\Datasource\IQuery;
 
 /**
  * Simplified paginator which avoids potentially expensives queries
@@ -31,11 +31,11 @@ class SimplePaginator : NumericPaginator
     /**
      * Simple pagination does not perform any count query, so this method returns `null`.
      *
-     * @param \Cake\Datasource\QueryInterface $query Query instance.
+     * @param \Cake\Datasource\IQuery $query Query instance.
      * @param array $data Pagination data.
      * @return int|null
      */
-    protected function getCount(QueryInterface $query, array $data): ?int
+    protected function getCount(IQuery $query, array $data): ?int
     {
         return null;
     }

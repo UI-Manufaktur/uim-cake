@@ -20,7 +20,7 @@ use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 use Cake\Datasource\Paging\Exception\PageOutOfBoundsException;
 use Cake\Datasource\Paging\NumericPaginator;
-use Cake\Datasource\ResultSetInterface;
+use Cake\Datasource\IResultSet;
 use Cake\Http\Exception\NotFoundException;
 use InvalidArgumentException;
 use UnexpectedValueException;
@@ -183,12 +183,12 @@ class PaginatorComponent : Component
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param \Cake\Datasource\RepositoryInterface|\Cake\Datasource\QueryInterface $object Table or query to paginate.
+     * @param \Cake\Datasource\RepositoryInterface|\Cake\Datasource\IQuery $object Table or query to paginate.
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
-     * @return \Cake\Datasource\ResultSetInterface Query results
+     * @return \Cake\Datasource\IResultSet Query results
      * @throws \Cake\Http\Exception\NotFoundException
      */
-    function paginate(object $object, array $settings = []): ResultSetInterface
+    function paginate(object $object, array $settings = []): IResultSet
     {
         $request = _registry.getController().getRequest();
 

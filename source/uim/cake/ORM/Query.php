@@ -24,9 +24,9 @@ use Cake\Database\Query as DatabaseQuery;
 use Cake\Database\TypedResultInterface;
 use Cake\Database\TypeMap;
 use Cake\Database\ValueBinder;
-use Cake\Datasource\QueryInterface;
+use Cake\Datasource\IQuery;
 use Cake\Datasource\QueryTrait;
-use Cake\Datasource\ResultSetInterface;
+use Cake\Datasource\IResultSet;
 use InvalidArgumentException;
 use JsonSerializable;
 use RuntimeException;
@@ -77,7 +77,7 @@ use Traversable;
  * @method \Cake\Collection\CollectionInterface chunk(int $size) Groups the results in arrays of $size rows each.
  * @method bool isEmpty() Returns true if this query found no results.
  */
-class Query : DatabaseQuery : JsonSerializable, QueryInterface
+class Query : DatabaseQuery : JsonSerializable, IQuery
 {
     use QueryTrait {
         cache as private _cache;
@@ -1082,10 +1082,10 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
     /**
      * {@inheritDoc}
      *
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      * @throws \RuntimeException if this method is called on a non-select Query.
      */
-    function all(): ResultSetInterface
+    function all(): IResultSet
     {
         if (_type != 'select' && _type != null) {
             throw new RuntimeException(
@@ -1134,9 +1134,9 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * This will also setup the correct statement class in order to eager load deep
      * associations.
      *
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      */
-    protected function _execute(): ResultSetInterface
+    protected function _execute(): IResultSet
     {
         this.triggerBeforeFind();
         if (_results) {
@@ -1375,9 +1375,9 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      *
      * Part of JsonSerializable interface.
      *
-     * @return \Cake\Datasource\ResultSetInterface The data to convert to JSON.
+     * @return \Cake\Datasource\IResultSet The data to convert to JSON.
      */
-    function jsonSerialize(): ResultSetInterface
+    function jsonSerialize(): IResultSet
     {
         return this.all();
     }
@@ -1427,9 +1427,9 @@ class Query : DatabaseQuery : JsonSerializable, QueryInterface
      * Decorates the results iterator with MapReduce routines and formatters
      *
      * @param \Traversable $result Original results
-     * @return \Cake\Datasource\ResultSetInterface
+     * @return \Cake\Datasource\IResultSet
      */
-    protected function _decorateResults(Traversable $result): ResultSetInterface
+    protected function _decorateResults(Traversable $result): IResultSet
     {
         $result = _applyDecorators($result);
 

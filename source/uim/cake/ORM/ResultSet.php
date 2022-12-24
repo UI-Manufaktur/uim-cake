@@ -21,7 +21,7 @@ use Cake\Collection\CollectionTrait;
 use Cake\Database\Exception\DatabaseException;
 use Cake\Database\StatementInterface;
 use Cake\Datasource\EntityInterface;
-use Cake\Datasource\ResultSetInterface;
+use Cake\Datasource\IResultSet;
 use SplFixedArray;
 
 /**
@@ -30,7 +30,7 @@ use SplFixedArray;
  * the query, casting each field to the correct type and executing the extra
  * queries required for eager loading external associations.
  */
-class ResultSet : ResultSetInterface
+class ResultSet : IResultSet
 {
     use CollectionTrait;
 

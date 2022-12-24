@@ -66,7 +66,7 @@ interface RepositoryInterface
      *
      * @param string $type the type of query to perform
      * @param array<string, mixed> $options An array that will be passed to Query::applyOptions()
-     * @return \Cake\Datasource\QueryInterface
+     * @return \Cake\Datasource\IQuery
      */
     function find(string $type = 'all', array $options = []);
 
@@ -95,7 +95,7 @@ interface RepositoryInterface
     /**
      * Creates a new Query instance for this repository
      *
-     * @return \Cake\Datasource\QueryInterface
+     * @return \Cake\Datasource\IQuery
      */
     function query();
 

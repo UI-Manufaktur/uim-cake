@@ -23,6 +23,6 @@ use Serializable;
 /**
  * Describes how a collection of datasource results should look like
  */
-interface ResultSetInterface : CollectionInterface, Countable, Serializable
+interface IResultSet : CollectionInterface, Countable, Serializable
 {
 }

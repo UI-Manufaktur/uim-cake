@@ -23,7 +23,7 @@ use Cake\Core\ConventionsTrait;
 use Cake\Database\Expression\IdentifierExpression;
 use Cake\Datasource\EntityInterface;
 use Cake\Datasource\ResultSetDecorator;
-use Cake\Datasource\ResultSetInterface;
+use Cake\Datasource\IResultSet;
 use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\Utility\Inflector;
 use Closure;
@@ -1021,7 +1021,7 @@ abstract class Association
                 $extracted = new Collection($extracted);
                 foreach ($formatters as $callable) {
                     $extracted = $callable($extracted, $query);
-                    if (!$extracted instanceof ResultSetInterface) {
+                    if (!$extracted instanceof IResultSet) {
                         $extracted = new ResultSetDecorator($extracted);
                     }
                 }

@@ -19,9 +19,9 @@ namespace Cake\Datasource\Paging;
 use Cake\Core\Exception\CakeException;
 use Cake\Core\InstanceConfigTrait;
 use Cake\Datasource\Paging\Exception\PageOutOfBoundsException;
-use Cake\Datasource\QueryInterface;
+use Cake\Datasource\IQuery;
 use Cake\Datasource\RepositoryInterface;
-use Cake\Datasource\ResultSetInterface;
+use Cake\Datasource\IResultSet;
 
 /**
  * This class is used to handle automatic model data pagination.
@@ -158,17 +158,17 @@ class NumericPaginator : PaginatorInterface
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param \Cake\Datasource\RepositoryInterface|\Cake\Datasource\QueryInterface $object The repository or query
+     * @param \Cake\Datasource\RepositoryInterface|\Cake\Datasource\IQuery $object The repository or query
      *   to paginate.
      * @param array $params Request params
      * @param array $settings The settings/configuration used for pagination.
-     * @return \Cake\Datasource\ResultSetInterface Query results
+     * @return \Cake\Datasource\IResultSet Query results
      * @throws \Cake\Datasource\Paging\Exception\PageOutOfBoundsException
      */
-    function paginate(object $object, array $params = [], array $settings = []): ResultSetInterface
+    function paginate(object $object, array $params = [], array $settings = []): IResultSet
     {
         $query = null;
-        if ($object instanceof QueryInterface) {
+        if ($object instanceof IQuery) {
             $query = $object;
             $object = $query.getRepository();
             if ($object == null) {
@@ -201,11 +201,11 @@ class NumericPaginator : PaginatorInterface
      * Get query for fetching paginated results.
      *
      * @param \Cake\Datasource\RepositoryInterface $object Repository instance.
-     * @param \Cake\Datasource\QueryInterface|null $query Query Instance.
+     * @param \Cake\Datasource\IQuery|null $query Query Instance.
      * @param array<string, mixed> $data Pagination data.
-     * @return \Cake\Datasource\QueryInterface
+     * @return \Cake\Datasource\IQuery
      */
-    protected function getQuery(RepositoryInterface $object, ?QueryInterface $query, array $data): QueryInterface
+    protected function getQuery(RepositoryInterface $object, ?IQuery $query, array $data): IQuery
     {
         if ($query == null) {
             $query = $object.find($data['finder'], $data['options']);
@@ -219,11 +219,11 @@ class NumericPaginator : PaginatorInterface
     /**
      * Get total count of records.
      *
-     * @param \Cake\Datasource\QueryInterface $query Query instance.
+     * @param \Cake\Datasource\IQuery $query Query instance.
      * @param array $data Pagination data.
      * @return int|null
      */
-    protected function getCount(QueryInterface $query, array $data): ?int
+    protected function getCount(IQuery $query, array $data): ?int
     {
         return $query.count();
     }

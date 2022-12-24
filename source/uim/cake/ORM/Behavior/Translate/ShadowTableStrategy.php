@@ -466,7 +466,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * Modifies the results from a table find in order to merge the translated
      * fields into each entity for a given locale.
      *
-     * @param \Cake\Datasource\ResultSetInterface $results Results to map.
+     * @param \Cake\Datasource\IResultSet $results Results to map.
      * @param string $locale Locale string
      * @return \Cake\Collection\CollectionInterface
      */
@@ -531,7 +531,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * Modifies the results from a table find in order to merge full translation
      * records into each entity under the `_translations` key.
      *
-     * @param \Cake\Datasource\ResultSetInterface $results Results to modify.
+     * @param \Cake\Datasource\IResultSet $results Results to modify.
      * @return \Cake\Collection\CollectionInterface
      */
     function groupTranslations($results): CollectionInterface

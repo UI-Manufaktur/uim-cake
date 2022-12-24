@@ -31,7 +31,7 @@
     },
     "suggest": {
         "cakephp/utility": "If you decide to use EntityTrait.",
-        "cakephp/collection": "If you decide to use ResultSetInterface.",
+        "cakephp/collection": "If you decide to use IResultSet.",
         "cakephp/cache": "If you decide to use Query caching."
     },
     "autoload": {

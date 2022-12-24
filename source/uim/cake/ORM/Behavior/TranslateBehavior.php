@@ -316,7 +316,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
 
         return $query
             .contain([$targetAlias: function ($query) use ($locales, $targetAlias) {
-                /** @var \Cake\Datasource\QueryInterface $query */
+                /** @var \Cake\Datasource\IQuery $query */
                 if ($locales) {
                     $query.where(["$targetAlias.locale IN": $locales]);
                 }

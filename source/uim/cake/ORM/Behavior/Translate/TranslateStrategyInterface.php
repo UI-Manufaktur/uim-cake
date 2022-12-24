@@ -79,7 +79,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * Modifies the results from a table find in order to merge full translation records
      * into each entity under the `_translations` key
      *
-     * @param \Cake\Datasource\ResultSetInterface $results Results to modify.
+     * @param \Cake\Datasource\IResultSet $results Results to modify.
      * @return \Cake\Collection\CollectionInterface
      */
     function groupTranslations($results): CollectionInterface;
