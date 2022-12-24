@@ -120,23 +120,23 @@ abstract class Cell implements EventDispatcherInterface
         array $cellOptions = []
     ) {
         if ($eventManager != null) {
-            this->setEventManager($eventManager);
+            this.setEventManager($eventManager);
         }
-        this->request = $request;
-        this->response = $response;
-        this->modelFactory('Table', [this->getTableLocator(), 'get']);
+        this.request = $request;
+        this.response = $response;
+        this.modelFactory('Table', [this.getTableLocator(), 'get']);
 
-        this->_validCellOptions = array_merge(['action', 'args'], this->_validCellOptions);
-        foreach (this->_validCellOptions as $var) {
+        this._validCellOptions = array_merge(['action', 'args'], this._validCellOptions);
+        foreach (this._validCellOptions as $var) {
             if (isset($cellOptions[$var])) {
-                this->{$var} = $cellOptions[$var];
+                this.{$var} = $cellOptions[$var];
             }
         }
         if (!empty($cellOptions['cache'])) {
-            this->_cache = $cellOptions['cache'];
+            this._cache = $cellOptions['cache'];
         }
 
-        this->initialize();
+        this.initialize();
     }
 
     /**
@@ -164,23 +164,23 @@ abstract class Cell implements EventDispatcherInterface
     function render(?string $template = null): string
     {
         $cache = [];
-        if (this->_cache) {
-            $cache = this->_cacheConfig(this->action, $template);
+        if (this._cache) {
+            $cache = this._cacheConfig(this.action, $template);
         }
 
         $render = function () use ($template) {
             try {
-                $reflect = new ReflectionMethod(this, this->action);
-                $reflect->invokeArgs(this, this->args);
+                $reflect = new ReflectionMethod(this, this.action);
+                $reflect->invokeArgs(this, this.args);
             } catch (ReflectionException $e) {
                 throw new BadMethodCallException(sprintf(
                     'Class %s does not have a "%s" method.',
                     static::class,
-                    this->action
+                    this.action
                 ));
             }
 
-            $builder = this->viewBuilder();
+            $builder = this.viewBuilder();
 
             if ($template != null) {
                 $builder->setTemplate($template);
@@ -198,7 +198,7 @@ abstract class Cell implements EventDispatcherInterface
             }
             $template = $builder->getTemplate();
 
-            $view = this->createView();
+            $view = this.createView();
             try {
                 return $view->render($template, false);
             } catch (MissingTemplateException $e) {
@@ -231,7 +231,7 @@ abstract class Cell implements EventDispatcherInterface
      */
     protected function _cacheConfig(string $action, ?string $template = null): array
     {
-        if (empty(this->_cache)) {
+        if (empty(this._cache)) {
             return [];
         }
         $template = $template ?: 'default';
@@ -241,12 +241,12 @@ abstract class Cell implements EventDispatcherInterface
             'config' => 'default',
             'key' => $key,
         ];
-        if (this->_cache == true) {
+        if (this._cache == true) {
             return $default;
         }
 
         /** @psalm-suppress PossiblyFalseOperand */
-        return this->_cache + $default;
+        return this._cache + $default;
     }
 
     /**
@@ -263,7 +263,7 @@ abstract class Cell implements EventDispatcherInterface
     function __toString(): string
     {
         try {
-            return this->render();
+            return this.render();
         } catch (Exception $e) {
             trigger_error(sprintf(
                 'Could not render cell - %s [%s, line %d]',
@@ -291,11 +291,11 @@ abstract class Cell implements EventDispatcherInterface
     function __debugInfo(): array
     {
         return [
-            'action' => this->action,
-            'args' => this->args,
-            'request' => this->request,
-            'response' => this->response,
-            'viewBuilder' => this->viewBuilder(),
+            'action' => this.action,
+            'args' => this.args,
+            'request' => this.request,
+            'response' => this.response,
+            'viewBuilder' => this.viewBuilder(),
         ];
     }
 }

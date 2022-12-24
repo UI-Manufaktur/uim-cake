@@ -32,17 +32,17 @@ trait CellTrait
      *
      * ```
      * // Taxonomy\View\Cell\TagCloudCell::smallList()
-     * $cell = this->cell('Taxonomy.TagCloud::smallList', ['limit' => 10]);
+     * $cell = this.cell('Taxonomy.TagCloud::smallList', ['limit' => 10]);
      *
      * // App\View\Cell\TagCloudCell::smallList()
-     * $cell = this->cell('TagCloud::smallList', ['limit' => 10]);
+     * $cell = this.cell('TagCloud::smallList', ['limit' => 10]);
      * ```
      *
      * The `display` action will be used by default when no action is provided:
      *
      * ```
      * // Taxonomy\View\Cell\TagCloudCell::display()
-     * $cell = this->cell('Taxonomy.TagCloud');
+     * $cell = this.cell('Taxonomy.TagCloud');
      * ```
      *
      * Cells are not rendered until they are echoed.
@@ -77,7 +77,7 @@ trait CellTrait
         }
         $options = ['action' => $action, 'args' => $data] + $options;
 
-        return this->_createCell($className, $action, $plugin, $options);
+        return this._createCell($className, $action, $plugin, $options);
     }
 
     /**
@@ -92,7 +92,7 @@ trait CellTrait
     protected function _createCell(string $className, string $action, ?string $plugin, array $options): Cell
     {
         /** @var \Cake\View\Cell $instance */
-        $instance = new $className(this->request, this->response, this->getEventManager(), $options);
+        $instance = new $className(this.request, this.response, this.getEventManager(), $options);
 
         $builder = $instance->viewBuilder();
         $builder->setTemplate(Inflector::underscore($action));
@@ -100,13 +100,13 @@ trait CellTrait
         if (!empty($plugin)) {
             $builder->setPlugin($plugin);
         }
-        if (!empty(this->helpers)) {
-            $builder->addHelpers(this->helpers);
+        if (!empty(this.helpers)) {
+            $builder->addHelpers(this.helpers);
         }
 
         if (this instanceof View) {
-            if (!empty(this->theme)) {
-                $builder->setTheme(this->theme);
+            if (!empty(this.theme)) {
+                $builder->setTheme(this.theme);
             }
 
             $class = static::class;
@@ -117,10 +117,10 @@ trait CellTrait
         }
 
         if (method_exists(this, 'viewBuilder')) {
-            $builder->setTheme(this->viewBuilder()->getTheme());
+            $builder->setTheme(this.viewBuilder()->getTheme());
 
-            if (this->viewBuilder()->getClassName() != null) {
-                $builder->setClassName(this->viewBuilder()->getClassName());
+            if (this.viewBuilder()->getClassName() != null) {
+                $builder->setClassName(this.viewBuilder()->getClassName());
             }
         }
 

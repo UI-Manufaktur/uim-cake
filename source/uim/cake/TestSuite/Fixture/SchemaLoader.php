@@ -43,7 +43,7 @@ class SchemaLoader
      */
     public this()
     {
-        this->helper = new ConnectionHelper();
+        this.helper = new ConnectionHelper();
     }
 
     /**
@@ -69,7 +69,7 @@ class SchemaLoader
         }
 
         if ($dropTables) {
-            this->helper->dropTables($connectionName);
+            this.helper->dropTables($connectionName);
         }
 
         /** @var \Cake\Database\Connection $connection */
@@ -87,7 +87,7 @@ class SchemaLoader
         }
 
         if ($truncateTables) {
-            this->helper->truncateTables($connectionName);
+            this.helper->truncateTables($connectionName);
         }
     }
 
@@ -106,7 +106,7 @@ class SchemaLoader
             return;
         }
 
-        this->helper->dropTables($connectionName);
+        this.helper->dropTables($connectionName);
 
         $tables = include $file;
 
