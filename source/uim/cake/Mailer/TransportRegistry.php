@@ -24,9 +24,9 @@ use RuntimeException;
 /**
  * An object registry for mailer transports.
  *
- * @extends \Cake\Core\ObjectRegistry<\Cake\Mailer\AbstractTransport>
+ * @: \Cake\Core\ObjectRegistry<\Cake\Mailer\AbstractTransport>
  */
-class TransportRegistry extends ObjectRegistry
+class TransportRegistry : ObjectRegistry
 {
     /**
      * Resolve a mailer tranport classname.

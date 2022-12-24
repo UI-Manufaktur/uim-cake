@@ -37,7 +37,7 @@ use InvalidArgumentException;
  * logic. For example:
  *
  * ```
- * class UserMailer extends Mailer
+ * class UserMailer : Mailer
  * {
  *     function resetPassword($user)
  *     {

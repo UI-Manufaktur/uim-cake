@@ -22,7 +22,7 @@ use Cake\Log\Formatter\LegacySyslogFormatter;
 /**
  * Syslog stream for Logging. Writes logs to the system logger
  */
-class SyslogLog extends BaseLog
+class SyslogLog : BaseLog
 {
     /**
      * Default config for this class

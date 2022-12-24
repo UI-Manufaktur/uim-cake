@@ -34,7 +34,7 @@ use InvalidArgumentException;
  *
  * An example of a HasMany association would be Author has many Articles.
  */
-class HasMany extends Association
+class HasMany : Association
 {
     /**
      * Order in which target records should be returned

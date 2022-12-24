@@ -28,7 +28,7 @@ use Serializable;
 /**
  * Base log engine class.
  */
-abstract class BaseLog extends AbstractLogger
+abstract class BaseLog : AbstractLogger
 {
     use InstanceConfigTrait;
 

@@ -25,7 +25,7 @@ use Cake\Mailer\Message;
 /**
  * Send mail using mail() function
  */
-class MailTransport extends AbstractTransport
+class MailTransport : AbstractTransport
 {
     /**
      * @inheritDoc

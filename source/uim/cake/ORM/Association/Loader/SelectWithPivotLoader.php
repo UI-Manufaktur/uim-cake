@@ -24,7 +24,7 @@ use RuntimeException;
  *
  * @internal
  */
-class SelectWithPivotLoader extends SelectLoader
+class SelectWithPivotLoader : SelectLoader
 {
     /**
      * The name of the junction association

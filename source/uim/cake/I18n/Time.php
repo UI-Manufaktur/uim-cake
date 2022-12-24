@@ -22,12 +22,12 @@ use DateTimeZone;
 use IntlDateFormatter;
 
 /**
- * Extends the built-in DateTime class to provide handy methods and locale-aware
+ * : the built-in DateTime class to provide handy methods and locale-aware
  * formatting helpers
  *
  * @deprecated 4.3.0 Use the immutable alternative `FrozenTime` instead.
  */
-class Time extends MutableDateTime implements I18nDateTimeInterface
+class Time : MutableDateTime implements I18nDateTimeInterface
 {
     use DateFormatTrait;
 

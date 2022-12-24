@@ -20,13 +20,13 @@ use Cake\Chronos\MutableDate;
 use IntlDateFormatter;
 
 /**
- * Extends the Date class provided by Chronos.
+ * : the Date class provided by Chronos.
  *
  * Adds handy methods and locale-aware formatting helpers
  *
  * @deprecated 4.3.0 Use the immutable alternative `FrozenDate` instead.
  */
-class Date extends MutableDate implements I18nDateTimeInterface
+class Date : MutableDate implements I18nDateTimeInterface
 {
     use DateFormatTrait;
 

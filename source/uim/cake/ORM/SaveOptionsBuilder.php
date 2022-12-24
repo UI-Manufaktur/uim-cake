@@ -28,7 +28,7 @@ use RuntimeException;
  * @see \Cake\Datasource\RulesChecker
  * @deprecated 4.4.0 Use a normal array for options instead.
  */
-class SaveOptionsBuilder extends ArrayObject
+class SaveOptionsBuilder : ArrayObject
 {
     use AssociationsNormalizerTrait;
 

@@ -33,7 +33,7 @@ use RuntimeException;
 use Traversable;
 
 /**
- * Extends the base Query class to provide new methods related to association
+ * : the base Query class to provide new methods related to association
  * loading, automatic fields selection, automatic type casting and to wrap results
  * into a specific iterator that will be responsible for hydrating results if
  * required.
@@ -77,7 +77,7 @@ use Traversable;
  * @method \Cake\Collection\CollectionInterface chunk(int $size) Groups the results in arrays of $size rows each.
  * @method bool isEmpty() Returns true if this query found no results.
  */
-class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
+class Query : DatabaseQuery implements JsonSerializable, QueryInterface
 {
     use QueryTrait {
         cache as private _cache;

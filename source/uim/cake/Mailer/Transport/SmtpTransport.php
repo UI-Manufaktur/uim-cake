@@ -26,7 +26,7 @@ use RuntimeException;
 /**
  * Send mail using SMTP protocol
  */
-class SmtpTransport extends AbstractTransport
+class SmtpTransport : AbstractTransport
 {
     protected const AUTH_PLAIN = 'PLAIN';
     protected const AUTH_LOGIN = 'LOGIN';

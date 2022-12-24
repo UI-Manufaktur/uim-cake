@@ -16,7 +16,7 @@ declare(strict_types=1);
  */
 namespace Cake\Log\Formatter;
 
-class JsonFormatter extends AbstractFormatter
+class JsonFormatter : AbstractFormatter
 {
     /**
      * Default config for this class

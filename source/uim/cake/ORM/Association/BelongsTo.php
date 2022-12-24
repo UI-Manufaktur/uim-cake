@@ -31,7 +31,7 @@ use RuntimeException;
  *
  * An example of a BelongsTo association would be Article belongs to Author.
  */
-class BelongsTo extends Association
+class BelongsTo : Association
 {
     /**
      * Valid strategies for this type of association

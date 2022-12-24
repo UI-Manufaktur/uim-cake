@@ -18,7 +18,7 @@ namespace Cake\Log\Formatter;
 
 use DateTime;
 
-class DefaultFormatter extends AbstractFormatter
+class DefaultFormatter : AbstractFormatter
 {
     /**
      * Default config for this class

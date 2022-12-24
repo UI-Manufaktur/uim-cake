@@ -29,7 +29,7 @@ use Closure;
  *
  * An example of a HasOne association would be User has one Profile.
  */
-class HasOne extends Association
+class HasOne : Association
 {
     /**
      * Valid strategies for this type of association

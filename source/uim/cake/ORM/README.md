@@ -185,7 +185,7 @@ use Acme\Data\Entity\Article;
 use Acme\Data\Table\UsersTable;
 use Cake\ORM\Table;
 
-class ArticlesTable extends Table
+class ArticlesTable : Table
 {
     function initialize()
     {

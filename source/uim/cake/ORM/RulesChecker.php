@@ -31,7 +31,7 @@ use Cake\Utility\Inflector;
  *
  * @see \Cake\Datasource\RulesChecker
  */
-class RulesChecker extends BaseRulesChecker
+class RulesChecker : BaseRulesChecker
 {
     /**
      * Returns a callable that can be used as a rule for checking the uniqueness of a value

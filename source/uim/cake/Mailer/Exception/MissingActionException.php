@@ -19,7 +19,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Missing Action exception - used when a mailer action cannot be found.
  */
-class MissingActionException extends CakeException
+class MissingActionException : CakeException
 {
     /**
      * @inheritDoc

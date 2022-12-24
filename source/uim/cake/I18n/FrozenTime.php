@@ -22,12 +22,12 @@ use DateTimeZone;
 use IntlDateFormatter;
 
 /**
- * Extends the built-in DateTime class to provide handy methods and locale-aware
+ * : the built-in DateTime class to provide handy methods and locale-aware
  * formatting helpers
  *
  * This object provides an immutable variant of {@link \Cake\I18n\Time}
  */
-class FrozenTime extends Chronos implements I18nDateTimeInterface
+class FrozenTime : Chronos implements I18nDateTimeInterface
 {
     use DateFormatTrait;
 

@@ -25,7 +25,7 @@ use Cake\Log\Formatter\DefaultFormatter;
  * in testing where using mocks would be complicated. But can also
  * be used in scenarios where you need to capture logs in application code.
  */
-class ArrayLog extends BaseLog
+class ArrayLog : BaseLog
 {
     /**
      * Default config for this class

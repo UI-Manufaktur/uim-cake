@@ -23,7 +23,7 @@ use InvalidArgumentException;
 /**
  * Console logging. Writes logs to console output.
  */
-class ConsoleLog extends BaseLog
+class ConsoleLog : BaseLog
 {
     /**
      * Default config for this class

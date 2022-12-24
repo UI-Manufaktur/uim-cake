@@ -30,9 +30,9 @@ use LogicException;
  *
  * This class also provides method for checking and dispatching behavior methods.
  *
- * @extends \Cake\Core\ObjectRegistry<\Cake\ORM\Behavior>
+ * @: \Cake\Core\ObjectRegistry<\Cake\ORM\Behavior>
  */
-class BehaviorRegistry extends ObjectRegistry implements EventDispatcherInterface
+class BehaviorRegistry : ObjectRegistry implements EventDispatcherInterface
 {
     use EventDispatcherTrait;
 

@@ -101,7 +101,7 @@ use Closure;
  * this.Articles->save($article, ['ignoreCounterCache' => true]);
  * ```
  */
-class CounterCacheBehavior extends Behavior
+class CounterCacheBehavior : Behavior
 {
     /**
      * Store the fields which should be ignored

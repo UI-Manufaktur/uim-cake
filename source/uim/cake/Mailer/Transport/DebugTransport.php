@@ -25,7 +25,7 @@ use Cake\Mailer\Message;
  * Debug Transport class, useful for emulating the email sending process and inspecting
  * the resultant email message before actually sending it during development
  */
-class DebugTransport extends AbstractTransport
+class DebugTransport : AbstractTransport
 {
     /**
      * @inheritDoc

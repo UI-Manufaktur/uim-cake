@@ -29,7 +29,7 @@ use UnexpectedValueException;
 /**
  * Class TimestampBehavior
  */
-class TimestampBehavior extends Behavior
+class TimestampBehavior : Behavior
 {
     /**
      * Default config
