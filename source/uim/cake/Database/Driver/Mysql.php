@@ -15,12 +15,12 @@
  */
 module uim.cake.Database\Driver;
 
-use Cake\Database\Driver;
-use Cake\Database\Query;
-use Cake\Database\Schema\MysqlSchemaDialect;
-use Cake\Database\Schema\SchemaDialect;
-use Cake\Database\Statement\MysqlStatement;
-use Cake\Database\StatementInterface;
+import uim.cake.Database\Driver;
+import uim.cake.Database\Query;
+import uim.cake.Database\Schema\MysqlSchemaDialect;
+import uim.cake.Database\Schema\SchemaDialect;
+import uim.cake.Database\Statement\MysqlStatement;
+import uim.cake.Database\StatementInterface;
 use PDO;
 
 /**

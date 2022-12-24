@@ -15,12 +15,12 @@
  */
 module uim.cake.Database\Expression;
 
-use Cake\Chronos\Date;
-use Cake\Chronos\MutableDate;
-use Cake\Database\IExpression;
-use Cake\Database\Query;
-use Cake\Database\TypedResultInterface;
-use Cake\Database\ValueBinder;
+import uim.cake.Chronos\Date;
+import uim.cake.Chronos\MutableDate;
+import uim.cake.Database\IExpression;
+import uim.cake.Database\Query;
+import uim.cake.Database\TypedResultInterface;
+import uim.cake.Database\ValueBinder;
 use DateTimeInterface;
 
 /**

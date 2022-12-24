@@ -15,7 +15,7 @@
  */
 module uim.cake.Database;
 
-use Cake\Database\Schema\CachedCollection;
+import uim.cake.Database\Schema\CachedCollection;
 
 /**
  * Schema Cache.

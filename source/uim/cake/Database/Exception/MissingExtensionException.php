@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Class MissingExtensionException

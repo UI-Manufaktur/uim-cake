@@ -15,13 +15,13 @@
  */
 module uim.cake.Database;
 
-use Cake\Core\App;
-use Cake\Core\Retry\CommandRetry;
-use Cake\Database\Exception\MissingConnectionException;
-use Cake\Database\Retry\ErrorCodeWaitStrategy;
-use Cake\Database\Schema\SchemaDialect;
-use Cake\Database\Schema\TableSchema;
-use Cake\Database\Statement\PDOStatement;
+import uim.cake.Core\App;
+import uim.cake.Core\Retry\CommandRetry;
+import uim.cake.Database\Exception\MissingConnectionException;
+import uim.cake.Database\Retry\ErrorCodeWaitStrategy;
+import uim.cake.Database\Schema\SchemaDialect;
+import uim.cake.Database\Schema\TableSchema;
+import uim.cake.Database\Statement\PDOStatement;
 use Closure;
 use InvalidArgumentException;
 use PDO;

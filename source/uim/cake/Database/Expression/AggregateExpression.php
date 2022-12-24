@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Expression;
 
-use Cake\Database\ValueBinder;
+import uim.cake.Database\ValueBinder;
 use Closure;
 
 /**

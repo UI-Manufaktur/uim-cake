@@ -15,17 +15,17 @@
  */
 module uim.cake.Database\Driver;
 
-use Cake\Database\Driver;
-use Cake\Database\Expression\FunctionExpression;
-use Cake\Database\Expression\TupleComparison;
-use Cake\Database\Query;
-use Cake\Database\QueryCompiler;
-use Cake\Database\Schema\SchemaDialect;
-use Cake\Database\Schema\SqliteSchemaDialect;
-use Cake\Database\SqliteCompiler;
-use Cake\Database\Statement\PDOStatement;
-use Cake\Database\Statement\SqliteStatement;
-use Cake\Database\StatementInterface;
+import uim.cake.Database\Driver;
+import uim.cake.Database\Expression\FunctionExpression;
+import uim.cake.Database\Expression\TupleComparison;
+import uim.cake.Database\Query;
+import uim.cake.Database\QueryCompiler;
+import uim.cake.Database\Schema\SchemaDialect;
+import uim.cake.Database\Schema\SqliteSchemaDialect;
+import uim.cake.Database\SqliteCompiler;
+import uim.cake.Database\Statement\PDOStatement;
+import uim.cake.Database\Statement\SqliteStatement;
+import uim.cake.Database\StatementInterface;
 use InvalidArgumentException;
 use PDO;
 use RuntimeException;

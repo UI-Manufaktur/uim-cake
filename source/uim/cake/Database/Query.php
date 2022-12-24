@@ -15,15 +15,15 @@
  */
 module uim.cake.Database;
 
-use Cake\Database\Exception\DatabaseException;
-use Cake\Database\Expression\CommonTableExpression;
-use Cake\Database\Expression\IdentifierExpression;
-use Cake\Database\Expression\OrderByExpression;
-use Cake\Database\Expression\OrderClauseExpression;
-use Cake\Database\Expression\QueryExpression;
-use Cake\Database\Expression\ValuesExpression;
-use Cake\Database\Expression\WindowExpression;
-use Cake\Database\Statement\CallbackStatement;
+import uim.cake.Database\Exception\DatabaseException;
+import uim.cake.Database\Expression\CommonTableExpression;
+import uim.cake.Database\Expression\IdentifierExpression;
+import uim.cake.Database\Expression\OrderByExpression;
+import uim.cake.Database\Expression\OrderClauseExpression;
+import uim.cake.Database\Expression\QueryExpression;
+import uim.cake.Database\Expression\ValuesExpression;
+import uim.cake.Database\Expression\WindowExpression;
+import uim.cake.Database\Statement\CallbackStatement;
 use Closure;
 use InvalidArgumentException;
 use IteratorAggregate;

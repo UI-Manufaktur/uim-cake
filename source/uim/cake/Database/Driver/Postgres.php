@@ -15,15 +15,15 @@
  */
 module uim.cake.Database\Driver;
 
-use Cake\Database\Driver;
-use Cake\Database\Expression\FunctionExpression;
-use Cake\Database\Expression\IdentifierExpression;
-use Cake\Database\Expression\StringExpression;
-use Cake\Database\PostgresCompiler;
-use Cake\Database\Query;
-use Cake\Database\QueryCompiler;
-use Cake\Database\Schema\PostgresSchemaDialect;
-use Cake\Database\Schema\SchemaDialect;
+import uim.cake.Database\Driver;
+import uim.cake.Database\Expression\FunctionExpression;
+import uim.cake.Database\Expression\IdentifierExpression;
+import uim.cake.Database\Expression\StringExpression;
+import uim.cake.Database\PostgresCompiler;
+import uim.cake.Database\Query;
+import uim.cake.Database\QueryCompiler;
+import uim.cake.Database\Schema\PostgresSchemaDialect;
+import uim.cake.Database\Schema\SchemaDialect;
 use PDO;
 
 /**

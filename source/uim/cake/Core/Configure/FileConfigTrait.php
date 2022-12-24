@@ -15,8 +15,8 @@
  */
 module uim.cake.Core\Configure;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Core\Plugin;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\Plugin;
 
 /**
  * Trait providing utility methods for file based config engines.

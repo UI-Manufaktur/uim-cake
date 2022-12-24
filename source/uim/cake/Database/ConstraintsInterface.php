@@ -15,7 +15,7 @@
  */
 module uim.cake.Database;
 
-use Cake\Datasource\ConnectionInterface;
+import uim.cake.Datasource\ConnectionInterface;
 
 /**
  * Defines the interface for a fixture that needs to manage constraints.

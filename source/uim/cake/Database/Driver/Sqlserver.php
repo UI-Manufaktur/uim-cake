@@ -15,20 +15,20 @@
  */
 module uim.cake.Database\Driver;
 
-use Cake\Database\Driver;
-use Cake\Database\Expression\FunctionExpression;
-use Cake\Database\Expression\OrderByExpression;
-use Cake\Database\Expression\OrderClauseExpression;
-use Cake\Database\Expression\TupleComparison;
-use Cake\Database\Expression\UnaryExpression;
-use Cake\Database\IExpression;
-use Cake\Database\Query;
-use Cake\Database\QueryCompiler;
-use Cake\Database\Schema\SchemaDialect;
-use Cake\Database\Schema\SqlserverSchemaDialect;
-use Cake\Database\SqlserverCompiler;
-use Cake\Database\Statement\SqlserverStatement;
-use Cake\Database\StatementInterface;
+import uim.cake.Database\Driver;
+import uim.cake.Database\Expression\FunctionExpression;
+import uim.cake.Database\Expression\OrderByExpression;
+import uim.cake.Database\Expression\OrderClauseExpression;
+import uim.cake.Database\Expression\TupleComparison;
+import uim.cake.Database\Expression\UnaryExpression;
+import uim.cake.Database\IExpression;
+import uim.cake.Database\Query;
+import uim.cake.Database\QueryCompiler;
+import uim.cake.Database\Schema\SchemaDialect;
+import uim.cake.Database\Schema\SqlserverSchemaDialect;
+import uim.cake.Database\SqlserverCompiler;
+import uim.cake.Database\Statement\SqlserverStatement;
+import uim.cake.Database\StatementInterface;
 use InvalidArgumentException;
 use PDO;
 

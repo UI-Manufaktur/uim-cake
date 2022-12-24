@@ -15,9 +15,9 @@
  */
 module uim.cake.Core\Configure\Engine;
 
-use Cake\Core\Configure\ConfigEngineInterface;
-use Cake\Core\Configure\FileConfigTrait;
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Configure\ConfigEngineInterface;
+import uim.cake.Core\Configure\FileConfigTrait;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * PHP engine allows Configure to load configuration values from

@@ -15,9 +15,9 @@
  */
 module uim.cake.Database;
 
-use Cake\Database\Expression\FieldInterface;
-use Cake\Database\Expression\IdentifierExpression;
-use Cake\Database\Expression\OrderByExpression;
+import uim.cake.Database\Expression\FieldInterface;
+import uim.cake.Database\Expression\IdentifierExpression;
+import uim.cake.Database\Expression\OrderByExpression;
 
 /**
  * Contains all the logic related to quoting identifiers in a Query object

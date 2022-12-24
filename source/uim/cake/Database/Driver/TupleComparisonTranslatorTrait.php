@@ -15,10 +15,10 @@
  */
 module uim.cake.Database\Driver;
 
-use Cake\Database\Expression\IdentifierExpression;
-use Cake\Database\Expression\QueryExpression;
-use Cake\Database\Expression\TupleComparison;
-use Cake\Database\Query;
+import uim.cake.Database\Expression\IdentifierExpression;
+import uim.cake.Database\Expression\QueryExpression;
+import uim.cake.Database\Expression\TupleComparison;
+import uim.cake.Database\Query;
 use RuntimeException;
 
 /**

@@ -15,8 +15,8 @@
  */
 module uim.cake.Database;
 
-use Cake\Database\Type\BatchCastingInterface;
-use Cake\Database\Type\OptionalConvertInterface;
+import uim.cake.Database\Type\BatchCastingInterface;
+import uim.cake.Database\Type\OptionalConvertInterface;
 
 /**
  * A callable class to be used for processing each of the rows in a statement

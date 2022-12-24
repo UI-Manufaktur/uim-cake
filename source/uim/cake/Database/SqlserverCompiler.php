@@ -15,8 +15,8 @@
  */
 module uim.cake.Database;
 
-use Cake\Database\Exception\DatabaseException;
-use Cake\Database\Expression\FunctionExpression;
+import uim.cake.Database\Exception\DatabaseException;
+import uim.cake.Database\Expression\FunctionExpression;
 
 /**
  * Responsible for compiling a Query object into its SQL representation

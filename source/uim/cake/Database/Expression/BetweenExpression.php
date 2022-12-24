@@ -15,9 +15,9 @@
  */
 module uim.cake.Database\Expression;
 
-use Cake\Database\IExpression;
-use Cake\Database\Type\ExpressionTypeCasterTrait;
-use Cake\Database\ValueBinder;
+import uim.cake.Database\IExpression;
+import uim.cake.Database\Type\ExpressionTypeCasterTrait;
+import uim.cake.Database\ValueBinder;
 use Closure;
 
 /**

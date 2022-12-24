@@ -13,9 +13,9 @@
  */
 module uim.cake.Core;
 
-use Cake\Console\CommandCollection;
-use Cake\Http\MiddlewareQueue;
-use Cake\Routing\RouteBuilder;
+import uim.cake.Console\CommandCollection;
+import uim.cake.Http\MiddlewareQueue;
+import uim.cake.Routing\RouteBuilder;
 
 /**
  * Plugin Interface

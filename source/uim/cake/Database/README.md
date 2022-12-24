@@ -33,9 +33,9 @@ Before performing any operations with the connection, you need to specify a driv
 to use:
 
 ```php
-use Cake\Database\Connection;
-use Cake\Database\Driver\Mysql;
-use Cake\Database\Driver\Sqlite;
+import uim.cake.Database\Connection;
+import uim.cake.Database\Driver\Mysql;
+import uim.cake.Database\Driver\Sqlite;
 
 $connection = new Connection([
 	'driver': Mysql::class,

@@ -14,9 +14,9 @@
  */
 module uim.cake.Core\TestSuite;
 
-use Cake\Core\Configure;
-use Cake\Core\IContainer;
-use Cake\Event\EventInterface;
+import uim.cake.Core\Configure;
+import uim.cake.Core\IContainer;
+import uim.cake.Event\EventInterface;
 use Closure;
 use League\Container\Exception\NotFoundException;
 use LogicException;

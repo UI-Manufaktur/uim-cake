@@ -15,11 +15,11 @@
  */
 module uim.cake.Database\Expression;
 
-use Cake\Database\IExpression;
-use Cake\Database\Type\ExpressionTypeCasterTrait;
-use Cake\Database\TypedResultInterface;
-use Cake\Database\TypeMapTrait;
-use Cake\Database\ValueBinder;
+import uim.cake.Database\IExpression;
+import uim.cake.Database\Type\ExpressionTypeCasterTrait;
+import uim.cake.Database\TypedResultInterface;
+import uim.cake.Database\TypeMapTrait;
+import uim.cake.Database\ValueBinder;
 use Closure;
 use InvalidArgumentException;
 use LogicException;
