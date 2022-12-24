@@ -45,8 +45,8 @@ class Request : Message : RequestInterface
         this.setMethod($method);
         this.uri = this.createUri($url);
         $headers += [
-            'Connection' => 'close',
-            'User-Agent' => ini_get('user_agent') ?: 'CakePHP',
+            'Connection': 'close',
+            'User-Agent': ini_get('user_agent') ?: 'CakePHP',
         ];
         this.addHeaders($headers);
 
@@ -66,7 +66,7 @@ class Request : Message : RequestInterface
      */
     protected function addHeaders(array $headers): void
     {
-        foreach ($headers as $key => $val) {
+        foreach ($headers as $key: $val) {
             $normalized = strtolower($key);
             this.headers[$key] = (array)$val;
             this.headerNames[$normalized] = $key;
@@ -86,15 +86,15 @@ class Request : Message : RequestInterface
     {
         if (is_array($content)) {
             $formData = new FormData();
-            $formData->addMany($content);
+            $formData.addMany($content);
             /** @phpstan-var array<non-empty-string, non-empty-string> $headers */
-            $headers = ['Content-Type' => $formData->contentType()];
+            $headers = ['Content-Type': $formData.contentType()];
             this.addHeaders($headers);
             $content = (string)$formData;
         }
 
         $stream = new Stream('php://memory', 'rw');
-        $stream->write($content);
+        $stream.write($content);
         this.stream = $stream;
 
         return this;

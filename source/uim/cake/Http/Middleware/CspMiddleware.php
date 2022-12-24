@@ -50,8 +50,8 @@ class CspMiddleware : IMiddleware
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'scriptNonce' => false,
-        'styleNonce' => false,
+        'scriptNonce': false,
+        'styleNonce': false,
     ];
 
     /**
@@ -85,14 +85,14 @@ class CspMiddleware : IMiddleware
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         if (this.getConfig('scriptNonce')) {
-            $request = $request->withAttribute('cspScriptNonce', this.csp->nonce('script-src'));
+            $request = $request.withAttribute('cspScriptNonce', this.csp.nonce('script-src'));
         }
         if (this.getconfig('styleNonce')) {
-            $request = $request->withAttribute('cspStyleNonce', this.csp->nonce('style-src'));
+            $request = $request.withAttribute('cspStyleNonce', this.csp.nonce('style-src'));
         }
-        $response = $handler->handle($request);
+        $response = $handler.handle($request);
 
         /** @var \Psr\Http\Message\IResponse */
-        return this.csp->injectCSPHeader($response);
+        return this.csp.injectCSPHeader($response);
     }
 }

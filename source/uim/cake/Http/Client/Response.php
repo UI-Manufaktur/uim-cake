@@ -34,14 +34,14 @@ use SimpleXMLElement;
  * when the response is parsed.
  *
  * ```
- * $val = $response->getHeaderLine('content-type');
+ * $val = $response.getHeaderLine('content-type');
  * ```
  *
  * Will read the Content-Type header. You can get all set
  * headers using:
  *
  * ```
- * $response->getHeaders();
+ * $response.getHeaders();
  * ```
  *
  * ### Get the response body
@@ -49,13 +49,13 @@ use SimpleXMLElement;
  * You can access the response body stream using:
  *
  * ```
- * $content = $response->getBody();
+ * $content = $response.getBody();
  * ```
  *
  * You can get the body string using:
  *
  * ```
- * $content = $response->getStringBody();
+ * $content = $response.getStringBody();
  * ```
  *
  * If your response body is in XML or JSON you can use
@@ -65,9 +65,9 @@ use SimpleXMLElement;
  *
  * ```
  * // Get as XML
- * $content = $response->getXml()
+ * $content = $response.getXml()
  * // Get as JSON
- * $content = $response->getJson()
+ * $content = $response.getJson()
  * ```
  *
  * If the response cannot be decoded, null will be returned.
@@ -77,7 +77,7 @@ use SimpleXMLElement;
  * You can access the response status code using:
  *
  * ```
- * $content = $response->getStatusCode();
+ * $content = $response.getStatusCode();
  * ```
  */
 class Response : Message : IResponse
@@ -132,8 +132,8 @@ class Response : Message : IResponse
             $body = _decodeGzipBody($body);
         }
         $stream = new Stream('php://memory', 'wb+');
-        $stream->write($body);
-        $stream->rewind();
+        $stream.write($body);
+        $stream.rewind();
         this.stream = $stream;
     }
 
@@ -262,8 +262,8 @@ class Response : Message : IResponse
     function withStatus($code, $reasonPhrase = '')
     {
         $new = clone this;
-        $new->code = $code;
-        $new->reasonPhrase = $reasonPhrase;
+        $new.code = $code;
+        $new.reasonPhrase = $reasonPhrase;
 
         return $new;
     }
@@ -332,11 +332,11 @@ class Response : Message : IResponse
     {
         this.buildCookieCollection();
 
-        if (!this.cookies->has($name)) {
+        if (!this.cookies.has($name)) {
             return null;
         }
 
-        return this.cookies->get($name)->getValue();
+        return this.cookies.get($name).getValue();
     }
 
     /**
@@ -349,11 +349,11 @@ class Response : Message : IResponse
     {
         this.buildCookieCollection();
 
-        if (!this.cookies->has($name)) {
+        if (!this.cookies.has($name)) {
             return null;
         }
 
-        return this.cookies->get($name)->toArray();
+        return this.cookies.get($name).toArray();
     }
 
     /**
@@ -382,7 +382,7 @@ class Response : Message : IResponse
         /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
         $cookies = this.cookies;
         foreach ($cookies as $cookie) {
-            $out[$cookie->getName()] = $cookie->toArray();
+            $out[$cookie.getName()] = $cookie.toArray();
         }
 
         return $out;
@@ -461,7 +461,7 @@ class Response : Message : IResponse
     protected function _getHeaders(): array
     {
         $out = [];
-        foreach (this.headers as $key => $values) {
+        foreach (this.headers as $key: $values) {
             $out[$key] = implode(',', $values);
         }
 
@@ -475,8 +475,8 @@ class Response : Message : IResponse
      */
     protected function _getBody(): string
     {
-        this.stream->rewind();
+        this.stream.rewind();
 
-        return this.stream->getContents();
+        return this.stream.getContents();
     }
 }

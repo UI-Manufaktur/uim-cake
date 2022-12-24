@@ -125,7 +125,7 @@ class FormData : Countable
      */
     function addMany(array $data)
     {
-        foreach ($data as $name => $value) {
+        foreach ($data as $name: $value) {
             this.add($name, $value);
         }
 
@@ -148,15 +148,15 @@ class FormData : Countable
         $filename = false;
         $contentType = 'application/octet-stream';
         if ($value instanceof UploadedFileInterface) {
-            $content = (string)$value->getStream();
-            $contentType = $value->getClientMediaType();
-            $filename = $value->getClientFilename();
+            $content = (string)$value.getStream();
+            $contentType = $value.getClientMediaType();
+            $filename = $value.getClientFilename();
         } elseif (is_resource($value)) {
             $content = stream_get_contents($value);
             if (stream_is_local($value)) {
                 $finfo = new finfo(FILEINFO_MIME);
                 $metadata = stream_get_meta_data($value);
-                $contentType = $finfo->file($metadata['uri']);
+                $contentType = $finfo.file($metadata['uri']);
                 $filename = basename($metadata['uri']);
             }
         } else {
@@ -164,12 +164,12 @@ class FormData : Countable
             $value = substr($value, 1);
             $filename = basename($value);
             $content = file_get_contents($value);
-            $contentType = $finfo->file($value);
+            $contentType = $finfo.file($value);
         }
         $part = this.newPart($name, $content);
-        $part->type($contentType);
+        $part.type($contentType);
         if ($filename) {
-            $part->filename($filename);
+            $part.filename($filename);
         }
         this.add($part);
 
@@ -185,7 +185,7 @@ class FormData : Countable
      */
     function addRecursive(string $name, $value): void
     {
-        foreach ($value as $key => $value) {
+        foreach ($value as $key: $value) {
             $key = $name . '[' . $key . ']';
             this.add($key, $value);
         }
@@ -265,7 +265,7 @@ class FormData : Countable
         }
         $data = [];
         foreach (_parts as $part) {
-            $data[$part->name()] = $part->value();
+            $data[$part.name()] = $part.value();
         }
 
         return http_build_query($data);

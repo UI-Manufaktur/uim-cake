@@ -79,7 +79,7 @@ class DoublePassDecoratorMiddleware : IMiddleware
             $request,
             new Response(),
             function ($request, $res) use ($handler) {
-                return $handler->handle($request);
+                return $handler.handle($request);
             }
         );
     }

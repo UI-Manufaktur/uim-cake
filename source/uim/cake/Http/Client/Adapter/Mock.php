@@ -58,9 +58,9 @@ class Mock : AdapterInterface
             throw new InvalidArgumentException("The `match` option must be a `Closure`. Got `{$type}`.");
         }
         this.responses[] = [
-            'request' => $request,
-            'response' => $response,
-            'options' => $options,
+            'request': $request,
+            'response': $response,
+            'options': $options,
         ];
     }
 
@@ -74,11 +74,11 @@ class Mock : AdapterInterface
     function send(RequestInterface $request, array $options): array
     {
         $found = null;
-        $method = $request->getMethod();
-        $requestUri = (string)$request->getUri();
+        $method = $request.getMethod();
+        $requestUri = (string)$request.getUri();
 
-        foreach (this.responses as $index => $mock) {
-            if ($method != $mock['request']->getMethod()) {
+        foreach (this.responses as $index: $mock) {
+            if ($method != $mock['request'].getMethod()) {
                 continue;
             }
             if (!this.urlMatches($requestUri, $mock['request'])) {
@@ -106,7 +106,7 @@ class Mock : AdapterInterface
             return [$mock['response']];
         }
 
-        throw new MissingResponseException(['method' => $method, 'url' => $requestUri]);
+        throw new MissingResponseException(['method': $method, 'url': $requestUri]);
     }
 
     /**
@@ -118,7 +118,7 @@ class Mock : AdapterInterface
      */
     protected function urlMatches(string $requestUri, RequestInterface $mock): bool
     {
-        $mockUri = (string)$mock->getUri();
+        $mockUri = (string)$mock.getUri();
         if ($requestUri == $mockUri) {
             return true;
         }

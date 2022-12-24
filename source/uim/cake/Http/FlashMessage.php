@@ -33,12 +33,12 @@ class FlashMessage
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'key' => 'flash',
-        'element' => 'default',
-        'plugin' => null,
-        'params' => [],
-        'clear' => false,
-        'duplicate' => true,
+        'key': 'flash',
+        'element': 'default',
+        'plugin': null,
+        'params': [],
+        'clear': false,
+        'duplicate': true,
     ];
 
     /**
@@ -101,7 +101,7 @@ class FlashMessage
 
         $messages = [];
         if (!$options['clear']) {
-            $messages = (array)this.session->read('Flash.' . $options['key']);
+            $messages = (array)this.session.read('Flash.' . $options['key']);
         }
 
         if (!$options['duplicate']) {
@@ -113,13 +113,13 @@ class FlashMessage
         }
 
         $messages[] = [
-            'message' => $message,
-            'key' => $options['key'],
-            'element' => $options['element'],
-            'params' => $options['params'],
+            'message': $message,
+            'key': $options['key'],
+            'element': $options['element'],
+            'params': $options['params'],
         ];
 
-        this.session->write('Flash.' . $options['key'], $messages);
+        this.session.write('Flash.' . $options['key'], $messages);
     }
 
     /**
@@ -127,8 +127,8 @@ class FlashMessage
      *
      * The following options will be set by default if unset:
      * ```
-     * 'element' => 'error',
-     * `params' => ['code' => $exception->getCode()]
+     * 'element': 'error',
+     * `params': ['code': $exception.getCode()]
      * ```
      *
      * @param \Throwable $exception Exception instance.
@@ -139,9 +139,9 @@ class FlashMessage
     function setExceptionMessage(Throwable $exception, array $options = []): void
     {
         $options['element'] = $options['element'] ?? 'error';
-        $options['params']['code'] = $options['params']['code'] ?? $exception->getCode();
+        $options['params']['code'] = $options['params']['code'] ?? $exception.getCode();
 
-        $message = $exception->getMessage();
+        $message = $exception.getMessage();
         this.set($message, $options);
     }
 
@@ -153,7 +153,7 @@ class FlashMessage
      */
     function consume(string $key): ?array
     {
-        return this.session->consume("Flash.{$key}");
+        return this.session.consume("Flash.{$key}");
     }
 
     /**

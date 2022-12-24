@@ -61,7 +61,7 @@ class BodyParserMiddleware : IMiddleware
      */
     public this(array $options = [])
     {
-        $options += ['json' => true, 'xml' => false, 'methods' => null];
+        $options += ['json': true, 'xml': false, 'methods': null];
         if ($options['json']) {
             this.addParser(
                 ['application/json', 'text/json'],
@@ -112,7 +112,7 @@ class BodyParserMiddleware : IMiddleware
      * An naive CSV request body parser could be built like so:
      *
      * ```
-     * $parser->addParser(['text/csv'], function ($body) {
+     * $parser.addParser(['text/csv'], function ($body) {
      *   return str_getcsv($body);
      * });
      * ```
@@ -153,23 +153,23 @@ class BodyParserMiddleware : IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        if (!in_array($request->getMethod(), this.methods, true)) {
-            return $handler->handle($request);
+        if (!in_array($request.getMethod(), this.methods, true)) {
+            return $handler.handle($request);
         }
-        [$type] = explode(';', $request->getHeaderLine('Content-Type'));
+        [$type] = explode(';', $request.getHeaderLine('Content-Type'));
         $type = strtolower($type);
         if (!isset(this.parsers[$type])) {
-            return $handler->handle($request);
+            return $handler.handle($request);
         }
 
         $parser = this.parsers[$type];
-        $result = $parser($request->getBody()->getContents());
+        $result = $parser($request.getBody().getContents());
         if (!is_array($result)) {
             throw new BadRequestException();
         }
-        $request = $request->withParsedBody($result);
+        $request = $request.withParsedBody($result);
 
-        return $handler->handle($request);
+        return $handler.handle($request);
     }
 
     /**
@@ -200,9 +200,9 @@ class BodyParserMiddleware : IMiddleware
     protected function decodeXml(string $body): array
     {
         try {
-            $xml = Xml::build($body, ['return' => 'domdocument', 'readFile' => false]);
+            $xml = Xml::build($body, ['return': 'domdocument', 'readFile': false]);
             // We might not get child nodes if there are nested inline entities.
-            if ((int)$xml->childNodes->length > 0) {
+            if ((int)$xml.childNodes.length > 0) {
                 return Xml::toArray($xml);
             }
 

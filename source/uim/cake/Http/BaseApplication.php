@@ -113,8 +113,8 @@ abstract class BaseApplication implements
      */
     function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue
     {
-        foreach (this.plugins->with('middleware') as $plugin) {
-            $middleware = $plugin->middleware($middleware);
+        foreach (this.plugins.with('middleware') as $plugin) {
+            $middleware = $plugin.middleware($middleware);
         }
 
         return $middleware;
@@ -126,11 +126,11 @@ abstract class BaseApplication implements
     function addPlugin($name, array $config = [])
     {
         if (is_string($name)) {
-            $plugin = this.plugins->create($name, $config);
+            $plugin = this.plugins.create($name, $config);
         } else {
             $plugin = $name;
         }
-        this.plugins->add($plugin);
+        this.plugins.add($plugin);
 
         return this;
     }
@@ -178,8 +178,8 @@ abstract class BaseApplication implements
      */
     function pluginBootstrap(): void
     {
-        foreach (this.plugins->with('bootstrap') as $plugin) {
-            $plugin->bootstrap(this);
+        foreach (this.plugins.with('bootstrap') as $plugin) {
+            $plugin.bootstrap(this);
         }
     }
 
@@ -207,8 +207,8 @@ abstract class BaseApplication implements
      */
     function pluginRoutes(RouteBuilder $routes): RouteBuilder
     {
-        foreach (this.plugins->with('routes') as $plugin) {
-            $plugin->routes($routes);
+        foreach (this.plugins.with('routes') as $plugin) {
+            $plugin.routes($routes);
         }
 
         return $routes;
@@ -225,7 +225,7 @@ abstract class BaseApplication implements
      */
     function console(CommandCollection $commands): CommandCollection
     {
-        return $commands->addMany($commands->autoDiscover());
+        return $commands.addMany($commands.autoDiscover());
     }
 
     /**
@@ -233,8 +233,8 @@ abstract class BaseApplication implements
      */
     function pluginConsole(CommandCollection $commands): CommandCollection
     {
-        foreach (this.plugins->with('console') as $plugin) {
-            $commands = $plugin->console($commands);
+        foreach (this.plugins.with('console') as $plugin) {
+            $commands = $plugin.console($commands);
         }
 
         return $commands;
@@ -269,13 +269,13 @@ abstract class BaseApplication implements
     {
         $container = new Container();
         this.services($container);
-        foreach (this.plugins->with('services') as $plugin) {
-            $plugin->services($container);
+        foreach (this.plugins.with('services') as $plugin) {
+            $plugin.services($container);
         }
 
-        $event = this.dispatchEvent('Application.buildContainer', ['container' => $container]);
-        if ($event->getResult() instanceof IContainer) {
-            return $event->getResult();
+        $event = this.dispatchEvent('Application.buildContainer', ['container': $container]);
+        if ($event.getResult() instanceof IContainer) {
+            return $event.getResult();
         }
 
         return $container;
@@ -305,7 +305,7 @@ abstract class BaseApplication implements
         IServerRequest $request
     ): IResponse {
         $container = this.getContainer();
-        $container->add(ServerRequest::class, $request);
+        $container.add(ServerRequest::class, $request);
 
         if (this.controllerFactory == null) {
             this.controllerFactory = new ControllerFactory($container);
@@ -315,8 +315,8 @@ abstract class BaseApplication implements
             Router::setRequest($request);
         }
 
-        $controller = this.controllerFactory->create($request);
+        $controller = this.controllerFactory.create($request);
 
-        return this.controllerFactory->invoke($controller);
+        return this.controllerFactory.invoke($controller);
     }
 }

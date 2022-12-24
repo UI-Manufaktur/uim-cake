@@ -75,7 +75,7 @@ class ResponseEmitter : EmitterInterface
         this.emitHeaders($response);
         this.flush();
 
-        $range = this.parseContentRange($response->getHeaderLine('Content-Range'));
+        $range = this.parseContentRange($response.getHeaderLine('Content-Range'));
         if (is_array($range)) {
             this.emitBodyRange($range, $response);
         } else {
@@ -97,20 +97,20 @@ class ResponseEmitter : EmitterInterface
      */
     protected function emitBody(IResponse $response): void
     {
-        if (in_array($response->getStatusCode(), [204, 304], true)) {
+        if (in_array($response.getStatusCode(), [204, 304], true)) {
             return;
         }
-        $body = $response->getBody();
+        $body = $response.getBody();
 
-        if (!$body->isSeekable()) {
+        if (!$body.isSeekable()) {
             echo $body;
 
             return;
         }
 
-        $body->rewind();
-        while (!$body->eof()) {
-            echo $body->read(this.maxBufferLength);
+        $body.rewind();
+        while (!$body.eof()) {
+            echo $body.read(this.maxBufferLength);
         }
     }
 
@@ -125,27 +125,27 @@ class ResponseEmitter : EmitterInterface
     {
         [, $first, $last] = $range;
 
-        $body = $response->getBody();
+        $body = $response.getBody();
 
-        if (!$body->isSeekable()) {
-            $contents = $body->getContents();
+        if (!$body.isSeekable()) {
+            $contents = $body.getContents();
             echo substr($contents, $first, $last - $first + 1);
 
             return;
         }
 
         $body = new RelativeStream($body, $first);
-        $body->rewind();
+        $body.rewind();
         $pos = 0;
         $length = $last - $first + 1;
-        while (!$body->eof() && $pos < $length) {
+        while (!$body.eof() && $pos < $length) {
             if ($pos + this.maxBufferLength > $length) {
-                echo $body->read($length - $pos);
+                echo $body.read($length - $pos);
                 break;
             }
 
-            echo $body->read(this.maxBufferLength);
-            $pos = $body->tell();
+            echo $body.read(this.maxBufferLength);
+            $pos = $body.tell();
         }
     }
 
@@ -160,11 +160,11 @@ class ResponseEmitter : EmitterInterface
      */
     protected function emitStatusLine(IResponse $response): void
     {
-        $reasonPhrase = $response->getReasonPhrase();
+        $reasonPhrase = $response.getReasonPhrase();
         header(sprintf(
             'HTTP/%s %d%s',
-            $response->getProtocolVersion(),
-            $response->getStatusCode(),
+            $response.getProtocolVersion(),
+            $response.getStatusCode(),
             ($reasonPhrase ? ' ' . $reasonPhrase : '')
         ));
     }
@@ -184,10 +184,10 @@ class ResponseEmitter : EmitterInterface
     {
         $cookies = [];
         if (method_exists($response, 'getCookieCollection')) {
-            $cookies = iterator_to_array($response->getCookieCollection());
+            $cookies = iterator_to_array($response.getCookieCollection());
         }
 
-        foreach ($response->getHeaders() as $name => $values) {
+        foreach ($response.getHeaders() as $name: $values) {
             if (strtolower($name) == 'set-cookie') {
                 $cookies = array_merge($cookies, $values);
                 continue;
@@ -228,16 +228,16 @@ class ResponseEmitter : EmitterInterface
     protected function setCookie($cookie): bool
     {
         if (is_string($cookie)) {
-            $cookie = Cookie::createFromHeaderString($cookie, ['path' => '']);
+            $cookie = Cookie::createFromHeaderString($cookie, ['path': '']);
         }
 
         if (PHP_VERSION_ID >= 70300) {
             /** @psalm-suppress InvalidArgument */
-            return setcookie($cookie->getName(), $cookie->getScalarValue(), $cookie->getOptions());
+            return setcookie($cookie.getName(), $cookie.getScalarValue(), $cookie.getOptions());
         }
 
-        $path = $cookie->getPath();
-        $sameSite = $cookie->getSameSite();
+        $path = $cookie.getPath();
+        $sameSite = $cookie.getSameSite();
         if ($sameSite != null) {
             // Temporary hack for PHP 7.2 to set "SameSite" attribute
             // https://stackoverflow.com/questions/39750906/php-setcookie-samesite-strict
@@ -245,13 +245,13 @@ class ResponseEmitter : EmitterInterface
         }
 
         return setcookie(
-            $cookie->getName(),
-            $cookie->getScalarValue(),
-            $cookie->getExpiresTimestamp() ?: 0,
+            $cookie.getName(),
+            $cookie.getScalarValue(),
+            $cookie.getExpiresTimestamp() ?: 0,
             $path,
-            $cookie->getDomain(),
-            $cookie->isSecure(),
-            $cookie->isHttpOnly()
+            $cookie.getDomain(),
+            $cookie.isSecure(),
+            $cookie.isHttpOnly()
         );
     }
 

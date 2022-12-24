@@ -86,12 +86,12 @@ class EncryptedCookieMiddleware : IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        if ($request->getCookieParams()) {
+        if ($request.getCookieParams()) {
             $request = this.decodeCookies($request);
         }
 
-        $response = $handler->handle($request);
-        if ($response->hasHeader('Set-Cookie')) {
+        $response = $handler.handle($request);
+        if ($response.hasHeader('Set-Cookie')) {
             $response = this.encodeSetCookieHeader($response);
         }
         if ($response instanceof Response) {
@@ -121,14 +121,14 @@ class EncryptedCookieMiddleware : IMiddleware
      */
     protected function decodeCookies(IServerRequest $request): IServerRequest
     {
-        $cookies = $request->getCookieParams();
+        $cookies = $request.getCookieParams();
         foreach (this.cookieNames as $name) {
             if (isset($cookies[$name])) {
                 $cookies[$name] = _decrypt($cookies[$name], this.cipherType, this.key);
             }
         }
 
-        return $request->withCookieParams($cookies);
+        return $request.withCookieParams($cookies);
     }
 
     /**
@@ -140,11 +140,11 @@ class EncryptedCookieMiddleware : IMiddleware
     protected function encodeCookies(Response $response): Response
     {
         /** @var array<\Cake\Http\Cookie\CookieInterface> $cookies */
-        $cookies = $response->getCookieCollection();
+        $cookies = $response.getCookieCollection();
         foreach ($cookies as $cookie) {
-            if (in_array($cookie->getName(), this.cookieNames, true)) {
-                $value = _encrypt($cookie->getValue(), this.cipherType);
-                $response = $response->withCookie($cookie->withValue($value));
+            if (in_array($cookie.getName(), this.cookieNames, true)) {
+                $value = _encrypt($cookie.getValue(), this.cipherType);
+                $response = $response.withCookie($cookie.withValue($value));
             }
         }
 
@@ -160,16 +160,16 @@ class EncryptedCookieMiddleware : IMiddleware
     protected function encodeSetCookieHeader(IResponse $response): IResponse
     {
         /** @var array<\Cake\Http\Cookie\CookieInterface> $cookies */
-        $cookies = CookieCollection::createFromHeader($response->getHeader('Set-Cookie'));
+        $cookies = CookieCollection::createFromHeader($response.getHeader('Set-Cookie'));
         $header = [];
         foreach ($cookies as $cookie) {
-            if (in_array($cookie->getName(), this.cookieNames, true)) {
-                $value = _encrypt($cookie->getValue(), this.cipherType);
-                $cookie = $cookie->withValue($value);
+            if (in_array($cookie.getName(), this.cookieNames, true)) {
+                $value = _encrypt($cookie.getValue(), this.cipherType);
+                $cookie = $cookie.withValue($value);
             }
-            $header[] = $cookie->toHeaderValue();
+            $header[] = $cookie.toHeaderValue();
         }
 
-        return $response->withHeader('Set-Cookie', $header);
+        return $response.withHeader('Set-Cookie', $header);
     }
 }

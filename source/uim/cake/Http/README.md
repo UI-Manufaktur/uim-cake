@@ -17,14 +17,14 @@ use Cake\Http\Client;
 $http = new Client();
 
 // Simple get
-$response = $http->get('http://example.com/test.html');
+$response = $http.get('http://example.com/test.html');
 
 // Simple get with querystring
-$response = $http->get('http://example.com/search', ['q' => 'widget']);
+$response = $http.get('http://example.com/search', ['q': 'widget']);
 
 // Simple get with querystring & additional headers
-$response = $http->get('http://example.com/search', ['q' => 'widget'], [
-  'headers' => ['X-Requested-With' => 'XMLHttpRequest'],
+$response = $http.get('http://example.com/search', ['q': 'widget'], [
+  'headers': ['X-Requested-With': 'XMLHttpRequest'],
 ]);
 ```
 
@@ -99,7 +99,7 @@ use Cake\Http\Server;
 $server = new Server(new Application());
 
 // Run the request/response through the application and emit the response.
-$server->emit($server->run());
+$server.emit($server.run());
 ```
 
 You can then run your application using PHP's built in webserver:

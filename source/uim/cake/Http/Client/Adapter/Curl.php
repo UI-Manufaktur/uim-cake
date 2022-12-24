@@ -83,18 +83,18 @@ class Curl : AdapterInterface
     function buildOptions(RequestInterface $request, array $options): array
     {
         $headers = [];
-        foreach ($request->getHeaders() as $key => $values) {
+        foreach ($request.getHeaders() as $key: $values) {
             $headers[] = $key . ': ' . implode(', ', $values);
         }
 
         $out = [
-            CURLOPT_URL => (string)$request->getUri(),
-            CURLOPT_HTTP_VERSION => this.getProtocolVersion($request),
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HEADER => true,
-            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_URL: (string)$request.getUri(),
+            CURLOPT_HTTP_VERSION: this.getProtocolVersion($request),
+            CURLOPT_RETURNTRANSFER: true,
+            CURLOPT_HEADER: true,
+            CURLOPT_HTTPHEADER: $headers,
         ];
-        switch ($request->getMethod()) {
+        switch ($request.getMethod()) {
             case Request::METHOD_GET:
                 $out[CURLOPT_HTTPGET] = true;
                 break;
@@ -109,13 +109,13 @@ class Curl : AdapterInterface
 
             default:
                 $out[CURLOPT_POST] = true;
-                $out[CURLOPT_CUSTOMREQUEST] = $request->getMethod();
+                $out[CURLOPT_CUSTOMREQUEST] = $request.getMethod();
                 break;
         }
 
-        $body = $request->getBody();
-        $body->rewind();
-        $out[CURLOPT_POSTFIELDS] = $body->getContents();
+        $body = $request.getBody();
+        $body.rewind();
+        $out[CURLOPT_POSTFIELDS] = $body.getContents();
         // GET requests with bodies require custom request to be used.
         if ($out[CURLOPT_POSTFIELDS] != '' && isset($out[CURLOPT_HTTPGET])) {
             $out[CURLOPT_CUSTOMREQUEST] = 'get';
@@ -132,14 +132,14 @@ class Curl : AdapterInterface
             $options['ssl_verify_host'] = 2;
         }
         $optionMap = [
-            'timeout' => CURLOPT_TIMEOUT,
-            'ssl_verify_peer' => CURLOPT_SSL_VERIFYPEER,
-            'ssl_verify_host' => CURLOPT_SSL_VERIFYHOST,
-            'ssl_cafile' => CURLOPT_CAINFO,
-            'ssl_local_cert' => CURLOPT_SSLCERT,
-            'ssl_passphrase' => CURLOPT_SSLCERTPASSWD,
+            'timeout': CURLOPT_TIMEOUT,
+            'ssl_verify_peer': CURLOPT_SSL_VERIFYPEER,
+            'ssl_verify_host': CURLOPT_SSL_VERIFYHOST,
+            'ssl_cafile': CURLOPT_CAINFO,
+            'ssl_local_cert': CURLOPT_SSLCERT,
+            'ssl_passphrase': CURLOPT_SSLCERTPASSWD,
         ];
-        foreach ($optionMap as $option => $curlOpt) {
+        foreach ($optionMap as $option: $curlOpt) {
             if (isset($options[$option])) {
                 $out[$curlOpt] = $options[$option];
             }
@@ -153,7 +153,7 @@ class Curl : AdapterInterface
         }
         if (isset($options['curl']) && is_array($options['curl'])) {
             // Can't use array_merge() because keys will be re-ordered.
-            foreach ($options['curl'] as $key => $value) {
+            foreach ($options['curl'] as $key: $value) {
                 $out[$key] = $value;
             }
         }
@@ -169,7 +169,7 @@ class Curl : AdapterInterface
      */
     protected function getProtocolVersion(RequestInterface $request): int
     {
-        switch ($request->getProtocolVersion()) {
+        switch ($request.getProtocolVersion()) {
             case '1.0':
                 return CURL_HTTP_VERSION_1_0;
             case '1.1':

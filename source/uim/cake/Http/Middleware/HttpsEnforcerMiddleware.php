@@ -49,11 +49,11 @@ class HttpsEnforcerMiddleware : IMiddleware
      * @var array<string, mixed>
      */
     protected $config = [
-        'redirect' => true,
-        'statusCode' => 301,
-        'headers' => [],
-        'disableOnDebug' => true,
-        'hsts' => null,
+        'redirect': true,
+        'statusCode': 301,
+        'headers': [],
+        'disableOnDebug': true,
+        'hsts': null,
     ];
 
     /**
@@ -81,11 +81,11 @@ class HttpsEnforcerMiddleware : IMiddleware
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         if (
-            $request->getUri()->getScheme() == 'https'
+            $request.getUri().getScheme() == 'https'
             || (this.config['disableOnDebug']
                 && Configure::read('debug'))
         ) {
-            $response = $handler->handle($request);
+            $response = $handler.handle($request);
             if (this.config['hsts']) {
                 $response = this.addHsts($response);
             }
@@ -93,11 +93,11 @@ class HttpsEnforcerMiddleware : IMiddleware
             return $response;
         }
 
-        if (this.config['redirect'] && $request->getMethod() == 'GET') {
-            $uri = $request->getUri()->withScheme('https');
-            $base = $request->getAttribute('base');
+        if (this.config['redirect'] && $request.getMethod() == 'GET') {
+            $uri = $request.getUri().withScheme('https');
+            $base = $request.getAttribute('base');
             if ($base) {
-                $uri = $uri->withPath($base . $uri->getPath());
+                $uri = $uri.withPath($base . $uri.getPath());
             }
 
             return new RedirectResponse(
@@ -133,6 +133,6 @@ class HttpsEnforcerMiddleware : IMiddleware
             $value .= '; preload';
         }
 
-        return $response->withHeader('strict-transport-security', $value);
+        return $response.withHeader('strict-transport-security', $value);
     }
 }

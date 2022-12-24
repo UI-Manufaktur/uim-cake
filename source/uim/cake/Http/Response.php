@@ -59,71 +59,71 @@ class Response : IResponse
      * @var array<int, string>
      */
     protected $_statusCodes = [
-        100 => 'Continue',
-        101 => 'Switching Protocols',
-        102 => 'Processing',
-        200 => 'OK',
-        201 => 'Created',
-        202 => 'Accepted',
-        203 => 'Non-Authoritative Information',
-        204 => 'No Content',
-        205 => 'Reset Content',
-        206 => 'Partial Content',
-        207 => 'Multi-status',
-        208 => 'Already Reported',
-        226 => 'IM used',
-        300 => 'Multiple Choices',
-        301 => 'Moved Permanently',
-        302 => 'Found',
-        303 => 'See Other',
-        304 => 'Not Modified',
-        305 => 'Use Proxy',
-        306 => '(Unused)',
-        307 => 'Temporary Redirect',
-        308 => 'Permanent Redirect',
-        400 => 'Bad Request',
-        401 => 'Unauthorized',
-        402 => 'Payment Required',
-        403 => 'Forbidden',
-        404 => 'Not Found',
-        405 => 'Method Not Allowed',
-        406 => 'Not Acceptable',
-        407 => 'Proxy Authentication Required',
-        408 => 'Request Timeout',
-        409 => 'Conflict',
-        410 => 'Gone',
-        411 => 'Length Required',
-        412 => 'Precondition Failed',
-        413 => 'Request Entity Too Large',
-        414 => 'Request-URI Too Large',
-        415 => 'Unsupported Media Type',
-        416 => 'Requested range not satisfiable',
-        417 => 'Expectation Failed',
-        418 => 'I\'m a teapot',
-        421 => 'Misdirected Request',
-        422 => 'Unprocessable Entity',
-        423 => 'Locked',
-        424 => 'Failed Dependency',
-        425 => 'Unordered Collection',
-        426 => 'Upgrade Required',
-        428 => 'Precondition Required',
-        429 => 'Too Many Requests',
-        431 => 'Request Header Fields Too Large',
-        444 => 'Connection Closed Without Response',
-        451 => 'Unavailable For Legal Reasons',
-        499 => 'Client Closed Request',
-        500 => 'Internal Server Error',
-        501 => 'Not Implemented',
-        502 => 'Bad Gateway',
-        503 => 'Service Unavailable',
-        504 => 'Gateway Timeout',
-        505 => 'Unsupported Version',
-        506 => 'Variant Also Negotiates',
-        507 => 'Insufficient Storage',
-        508 => 'Loop Detected',
-        510 => 'Not Extended',
-        511 => 'Network Authentication Required',
-        599 => 'Network Connect Timeout Error',
+        100: 'Continue',
+        101: 'Switching Protocols',
+        102: 'Processing',
+        200: 'OK',
+        201: 'Created',
+        202: 'Accepted',
+        203: 'Non-Authoritative Information',
+        204: 'No Content',
+        205: 'Reset Content',
+        206: 'Partial Content',
+        207: 'Multi-status',
+        208: 'Already Reported',
+        226: 'IM used',
+        300: 'Multiple Choices',
+        301: 'Moved Permanently',
+        302: 'Found',
+        303: 'See Other',
+        304: 'Not Modified',
+        305: 'Use Proxy',
+        306: '(Unused)',
+        307: 'Temporary Redirect',
+        308: 'Permanent Redirect',
+        400: 'Bad Request',
+        401: 'Unauthorized',
+        402: 'Payment Required',
+        403: 'Forbidden',
+        404: 'Not Found',
+        405: 'Method Not Allowed',
+        406: 'Not Acceptable',
+        407: 'Proxy Authentication Required',
+        408: 'Request Timeout',
+        409: 'Conflict',
+        410: 'Gone',
+        411: 'Length Required',
+        412: 'Precondition Failed',
+        413: 'Request Entity Too Large',
+        414: 'Request-URI Too Large',
+        415: 'Unsupported Media Type',
+        416: 'Requested range not satisfiable',
+        417: 'Expectation Failed',
+        418: 'I\'m a teapot',
+        421: 'Misdirected Request',
+        422: 'Unprocessable Entity',
+        423: 'Locked',
+        424: 'Failed Dependency',
+        425: 'Unordered Collection',
+        426: 'Upgrade Required',
+        428: 'Precondition Required',
+        429: 'Too Many Requests',
+        431: 'Request Header Fields Too Large',
+        444: 'Connection Closed Without Response',
+        451: 'Unavailable For Legal Reasons',
+        499: 'Client Closed Request',
+        500: 'Internal Server Error',
+        501: 'Not Implemented',
+        502: 'Bad Gateway',
+        503: 'Service Unavailable',
+        504: 'Gateway Timeout',
+        505: 'Unsupported Version',
+        506: 'Variant Also Negotiates',
+        507: 'Insufficient Storage',
+        508: 'Loop Detected',
+        510: 'Not Extended',
+        511: 'Network Authentication Required',
+        599: 'Network Connect Timeout Error',
     ];
 
     /**
@@ -132,197 +132,197 @@ class Response : IResponse
      * @var array<string, mixed>
      */
     protected $_mimeTypes = [
-        'html' => ['text/html', '*/*'],
-        'json' => 'application/json',
-        'xml' => ['application/xml', 'text/xml'],
-        'xhtml' => ['application/xhtml+xml', 'application/xhtml', 'text/xhtml'],
-        'webp' => 'image/webp',
-        'rss' => 'application/rss+xml',
-        'ai' => 'application/postscript',
-        'bcpio' => 'application/x-bcpio',
-        'bin' => 'application/octet-stream',
-        'ccad' => 'application/clariscad',
-        'cdf' => 'application/x-netcdf',
-        'class' => 'application/octet-stream',
-        'cpio' => 'application/x-cpio',
-        'cpt' => 'application/mac-compactpro',
-        'csh' => 'application/x-csh',
-        'csv' => ['text/csv', 'application/vnd.ms-excel'],
-        'dcr' => 'application/x-director',
-        'dir' => 'application/x-director',
-        'dms' => 'application/octet-stream',
-        'doc' => 'application/msword',
-        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'drw' => 'application/drafting',
-        'dvi' => 'application/x-dvi',
-        'dwg' => 'application/acad',
-        'dxf' => 'application/dxf',
-        'dxr' => 'application/x-director',
-        'eot' => 'application/vnd.ms-fontobject',
-        'eps' => 'application/postscript',
-        'exe' => 'application/octet-stream',
-        'ez' => 'application/andrew-inset',
-        'flv' => 'video/x-flv',
-        'gtar' => 'application/x-gtar',
-        'gz' => 'application/x-gzip',
-        'bz2' => 'application/x-bzip',
-        '7z' => 'application/x-7z-compressed',
-        'hal' => ['application/hal+xml', 'application/vnd.hal+xml'],
-        'haljson' => ['application/hal+json', 'application/vnd.hal+json'],
-        'halxml' => ['application/hal+xml', 'application/vnd.hal+xml'],
-        'hdf' => 'application/x-hdf',
-        'hqx' => 'application/mac-binhex40',
-        'ico' => 'image/x-icon',
-        'ips' => 'application/x-ipscript',
-        'ipx' => 'application/x-ipix',
-        'js' => 'application/javascript',
-        'jsonapi' => 'application/vnd.api+json',
-        'latex' => 'application/x-latex',
-        'jsonld' => 'application/ld+json',
-        'kml' => 'application/vnd.google-earth.kml+xml',
-        'kmz' => 'application/vnd.google-earth.kmz',
-        'lha' => 'application/octet-stream',
-        'lsp' => 'application/x-lisp',
-        'lzh' => 'application/octet-stream',
-        'man' => 'application/x-troff-man',
-        'me' => 'application/x-troff-me',
-        'mif' => 'application/vnd.mif',
-        'ms' => 'application/x-troff-ms',
-        'nc' => 'application/x-netcdf',
-        'oda' => 'application/oda',
-        'otf' => 'font/otf',
-        'pdf' => 'application/pdf',
-        'pgn' => 'application/x-chess-pgn',
-        'pot' => 'application/vnd.ms-powerpoint',
-        'pps' => 'application/vnd.ms-powerpoint',
-        'ppt' => 'application/vnd.ms-powerpoint',
-        'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-        'ppz' => 'application/vnd.ms-powerpoint',
-        'pre' => 'application/x-freelance',
-        'prt' => 'application/pro_eng',
-        'ps' => 'application/postscript',
-        'roff' => 'application/x-troff',
-        'scm' => 'application/x-lotusscreencam',
-        'set' => 'application/set',
-        'sh' => 'application/x-sh',
-        'shar' => 'application/x-shar',
-        'sit' => 'application/x-stuffit',
-        'skd' => 'application/x-koan',
-        'skm' => 'application/x-koan',
-        'skp' => 'application/x-koan',
-        'skt' => 'application/x-koan',
-        'smi' => 'application/smil',
-        'smil' => 'application/smil',
-        'sol' => 'application/solids',
-        'spl' => 'application/x-futuresplash',
-        'src' => 'application/x-wais-source',
-        'step' => 'application/STEP',
-        'stl' => 'application/SLA',
-        'stp' => 'application/STEP',
-        'sv4cpio' => 'application/x-sv4cpio',
-        'sv4crc' => 'application/x-sv4crc',
-        'svg' => 'image/svg+xml',
-        'svgz' => 'image/svg+xml',
-        'swf' => 'application/x-shockwave-flash',
-        't' => 'application/x-troff',
-        'tar' => 'application/x-tar',
-        'tcl' => 'application/x-tcl',
-        'tex' => 'application/x-tex',
-        'texi' => 'application/x-texinfo',
-        'texinfo' => 'application/x-texinfo',
-        'tr' => 'application/x-troff',
-        'tsp' => 'application/dsptype',
-        'ttc' => 'font/ttf',
-        'ttf' => 'font/ttf',
-        'unv' => 'application/i-deas',
-        'ustar' => 'application/x-ustar',
-        'vcd' => 'application/x-cdlink',
-        'vda' => 'application/vda',
-        'xlc' => 'application/vnd.ms-excel',
-        'xll' => 'application/vnd.ms-excel',
-        'xlm' => 'application/vnd.ms-excel',
-        'xls' => 'application/vnd.ms-excel',
-        'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        'xlw' => 'application/vnd.ms-excel',
-        'zip' => 'application/zip',
-        'aif' => 'audio/x-aiff',
-        'aifc' => 'audio/x-aiff',
-        'aiff' => 'audio/x-aiff',
-        'au' => 'audio/basic',
-        'kar' => 'audio/midi',
-        'mid' => 'audio/midi',
-        'midi' => 'audio/midi',
-        'mp2' => 'audio/mpeg',
-        'mp3' => 'audio/mpeg',
-        'mpga' => 'audio/mpeg',
-        'ogg' => 'audio/ogg',
-        'oga' => 'audio/ogg',
-        'spx' => 'audio/ogg',
-        'ra' => 'audio/x-realaudio',
-        'ram' => 'audio/x-pn-realaudio',
-        'rm' => 'audio/x-pn-realaudio',
-        'rpm' => 'audio/x-pn-realaudio-plugin',
-        'snd' => 'audio/basic',
-        'tsi' => 'audio/TSP-audio',
-        'wav' => 'audio/x-wav',
-        'aac' => 'audio/aac',
-        'asc' => 'text/plain',
-        'c' => 'text/plain',
-        'cc' => 'text/plain',
-        'css' => 'text/css',
-        'etx' => 'text/x-setext',
-        'f' => 'text/plain',
-        'f90' => 'text/plain',
-        'h' => 'text/plain',
-        'hh' => 'text/plain',
-        'htm' => ['text/html', '*/*'],
-        'ics' => 'text/calendar',
-        'm' => 'text/plain',
-        'rtf' => 'text/rtf',
-        'rtx' => 'text/richtext',
-        'sgm' => 'text/sgml',
-        'sgml' => 'text/sgml',
-        'tsv' => 'text/tab-separated-values',
-        'tpl' => 'text/template',
-        'txt' => 'text/plain',
-        'text' => 'text/plain',
-        'avi' => 'video/x-msvideo',
-        'fli' => 'video/x-fli',
-        'mov' => 'video/quicktime',
-        'movie' => 'video/x-sgi-movie',
-        'mpe' => 'video/mpeg',
-        'mpeg' => 'video/mpeg',
-        'mpg' => 'video/mpeg',
-        'qt' => 'video/quicktime',
-        'viv' => 'video/vnd.vivo',
-        'vivo' => 'video/vnd.vivo',
-        'ogv' => 'video/ogg',
-        'webm' => 'video/webm',
-        'mp4' => 'video/mp4',
-        'm4v' => 'video/mp4',
-        'f4v' => 'video/mp4',
-        'f4p' => 'video/mp4',
-        'm4a' => 'audio/mp4',
-        'f4a' => 'audio/mp4',
-        'f4b' => 'audio/mp4',
-        'gif' => 'image/gif',
-        'ief' => 'image/ief',
-        'jpg' => 'image/jpeg',
-        'jpeg' => 'image/jpeg',
-        'jpe' => 'image/jpeg',
-        'pbm' => 'image/x-portable-bitmap',
-        'pgm' => 'image/x-portable-graymap',
-        'png' => 'image/png',
-        'pnm' => 'image/x-portable-anymap',
-        'ppm' => 'image/x-portable-pixmap',
-        'ras' => 'image/cmu-raster',
-        'rgb' => 'image/x-rgb',
-        'tif' => 'image/tiff',
-        'tiff' => 'image/tiff',
-        'xbm' => 'image/x-xbitmap',
-        'xpm' => 'image/x-xpixmap',
-        'xwd' => 'image/x-xwindowdump',
-        'psd' => [
+        'html': ['text/html', '*/*'],
+        'json': 'application/json',
+        'xml': ['application/xml', 'text/xml'],
+        'xhtml': ['application/xhtml+xml', 'application/xhtml', 'text/xhtml'],
+        'webp': 'image/webp',
+        'rss': 'application/rss+xml',
+        'ai': 'application/postscript',
+        'bcpio': 'application/x-bcpio',
+        'bin': 'application/octet-stream',
+        'ccad': 'application/clariscad',
+        'cdf': 'application/x-netcdf',
+        'class': 'application/octet-stream',
+        'cpio': 'application/x-cpio',
+        'cpt': 'application/mac-compactpro',
+        'csh': 'application/x-csh',
+        'csv': ['text/csv', 'application/vnd.ms-excel'],
+        'dcr': 'application/x-director',
+        'dir': 'application/x-director',
+        'dms': 'application/octet-stream',
+        'doc': 'application/msword',
+        'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'drw': 'application/drafting',
+        'dvi': 'application/x-dvi',
+        'dwg': 'application/acad',
+        'dxf': 'application/dxf',
+        'dxr': 'application/x-director',
+        'eot': 'application/vnd.ms-fontobject',
+        'eps': 'application/postscript',
+        'exe': 'application/octet-stream',
+        'ez': 'application/andrew-inset',
+        'flv': 'video/x-flv',
+        'gtar': 'application/x-gtar',
+        'gz': 'application/x-gzip',
+        'bz2': 'application/x-bzip',
+        '7z': 'application/x-7z-compressed',
+        'hal': ['application/hal+xml', 'application/vnd.hal+xml'],
+        'haljson': ['application/hal+json', 'application/vnd.hal+json'],
+        'halxml': ['application/hal+xml', 'application/vnd.hal+xml'],
+        'hdf': 'application/x-hdf',
+        'hqx': 'application/mac-binhex40',
+        'ico': 'image/x-icon',
+        'ips': 'application/x-ipscript',
+        'ipx': 'application/x-ipix',
+        'js': 'application/javascript',
+        'jsonapi': 'application/vnd.api+json',
+        'latex': 'application/x-latex',
+        'jsonld': 'application/ld+json',
+        'kml': 'application/vnd.google-earth.kml+xml',
+        'kmz': 'application/vnd.google-earth.kmz',
+        'lha': 'application/octet-stream',
+        'lsp': 'application/x-lisp',
+        'lzh': 'application/octet-stream',
+        'man': 'application/x-troff-man',
+        'me': 'application/x-troff-me',
+        'mif': 'application/vnd.mif',
+        'ms': 'application/x-troff-ms',
+        'nc': 'application/x-netcdf',
+        'oda': 'application/oda',
+        'otf': 'font/otf',
+        'pdf': 'application/pdf',
+        'pgn': 'application/x-chess-pgn',
+        'pot': 'application/vnd.ms-powerpoint',
+        'pps': 'application/vnd.ms-powerpoint',
+        'ppt': 'application/vnd.ms-powerpoint',
+        'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'ppz': 'application/vnd.ms-powerpoint',
+        'pre': 'application/x-freelance',
+        'prt': 'application/pro_eng',
+        'ps': 'application/postscript',
+        'roff': 'application/x-troff',
+        'scm': 'application/x-lotusscreencam',
+        'set': 'application/set',
+        'sh': 'application/x-sh',
+        'shar': 'application/x-shar',
+        'sit': 'application/x-stuffit',
+        'skd': 'application/x-koan',
+        'skm': 'application/x-koan',
+        'skp': 'application/x-koan',
+        'skt': 'application/x-koan',
+        'smi': 'application/smil',
+        'smil': 'application/smil',
+        'sol': 'application/solids',
+        'spl': 'application/x-futuresplash',
+        'src': 'application/x-wais-source',
+        'step': 'application/STEP',
+        'stl': 'application/SLA',
+        'stp': 'application/STEP',
+        'sv4cpio': 'application/x-sv4cpio',
+        'sv4crc': 'application/x-sv4crc',
+        'svg': 'image/svg+xml',
+        'svgz': 'image/svg+xml',
+        'swf': 'application/x-shockwave-flash',
+        't': 'application/x-troff',
+        'tar': 'application/x-tar',
+        'tcl': 'application/x-tcl',
+        'tex': 'application/x-tex',
+        'texi': 'application/x-texinfo',
+        'texinfo': 'application/x-texinfo',
+        'tr': 'application/x-troff',
+        'tsp': 'application/dsptype',
+        'ttc': 'font/ttf',
+        'ttf': 'font/ttf',
+        'unv': 'application/i-deas',
+        'ustar': 'application/x-ustar',
+        'vcd': 'application/x-cdlink',
+        'vda': 'application/vda',
+        'xlc': 'application/vnd.ms-excel',
+        'xll': 'application/vnd.ms-excel',
+        'xlm': 'application/vnd.ms-excel',
+        'xls': 'application/vnd.ms-excel',
+        'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'xlw': 'application/vnd.ms-excel',
+        'zip': 'application/zip',
+        'aif': 'audio/x-aiff',
+        'aifc': 'audio/x-aiff',
+        'aiff': 'audio/x-aiff',
+        'au': 'audio/basic',
+        'kar': 'audio/midi',
+        'mid': 'audio/midi',
+        'midi': 'audio/midi',
+        'mp2': 'audio/mpeg',
+        'mp3': 'audio/mpeg',
+        'mpga': 'audio/mpeg',
+        'ogg': 'audio/ogg',
+        'oga': 'audio/ogg',
+        'spx': 'audio/ogg',
+        'ra': 'audio/x-realaudio',
+        'ram': 'audio/x-pn-realaudio',
+        'rm': 'audio/x-pn-realaudio',
+        'rpm': 'audio/x-pn-realaudio-plugin',
+        'snd': 'audio/basic',
+        'tsi': 'audio/TSP-audio',
+        'wav': 'audio/x-wav',
+        'aac': 'audio/aac',
+        'asc': 'text/plain',
+        'c': 'text/plain',
+        'cc': 'text/plain',
+        'css': 'text/css',
+        'etx': 'text/x-setext',
+        'f': 'text/plain',
+        'f90': 'text/plain',
+        'h': 'text/plain',
+        'hh': 'text/plain',
+        'htm': ['text/html', '*/*'],
+        'ics': 'text/calendar',
+        'm': 'text/plain',
+        'rtf': 'text/rtf',
+        'rtx': 'text/richtext',
+        'sgm': 'text/sgml',
+        'sgml': 'text/sgml',
+        'tsv': 'text/tab-separated-values',
+        'tpl': 'text/template',
+        'txt': 'text/plain',
+        'text': 'text/plain',
+        'avi': 'video/x-msvideo',
+        'fli': 'video/x-fli',
+        'mov': 'video/quicktime',
+        'movie': 'video/x-sgi-movie',
+        'mpe': 'video/mpeg',
+        'mpeg': 'video/mpeg',
+        'mpg': 'video/mpeg',
+        'qt': 'video/quicktime',
+        'viv': 'video/vnd.vivo',
+        'vivo': 'video/vnd.vivo',
+        'ogv': 'video/ogg',
+        'webm': 'video/webm',
+        'mp4': 'video/mp4',
+        'm4v': 'video/mp4',
+        'f4v': 'video/mp4',
+        'f4p': 'video/mp4',
+        'm4a': 'audio/mp4',
+        'f4a': 'audio/mp4',
+        'f4b': 'audio/mp4',
+        'gif': 'image/gif',
+        'ief': 'image/ief',
+        'jpg': 'image/jpeg',
+        'jpeg': 'image/jpeg',
+        'jpe': 'image/jpeg',
+        'pbm': 'image/x-portable-bitmap',
+        'pgm': 'image/x-portable-graymap',
+        'png': 'image/png',
+        'pnm': 'image/x-portable-anymap',
+        'ppm': 'image/x-portable-pixmap',
+        'ras': 'image/cmu-raster',
+        'rgb': 'image/x-rgb',
+        'tif': 'image/tiff',
+        'tiff': 'image/tiff',
+        'xbm': 'image/x-xbitmap',
+        'xpm': 'image/x-xpixmap',
+        'xwd': 'image/x-xwindowdump',
+        'psd': [
             'application/photoshop',
             'application/psd',
             'image/psd',
@@ -330,43 +330,43 @@ class Response : IResponse
             'image/photoshop',
             'zz-application/zz-winassoc-psd',
         ],
-        'ice' => 'x-conference/x-cooltalk',
-        'iges' => 'model/iges',
-        'igs' => 'model/iges',
-        'mesh' => 'model/mesh',
-        'msh' => 'model/mesh',
-        'silo' => 'model/mesh',
-        'vrml' => 'model/vrml',
-        'wrl' => 'model/vrml',
-        'mime' => 'www/mime',
-        'pdb' => 'chemical/x-pdb',
-        'xyz' => 'chemical/x-pdb',
-        'javascript' => 'application/javascript',
-        'form' => 'application/x-www-form-urlencoded',
-        'file' => 'multipart/form-data',
-        'xhtml-mobile' => 'application/vnd.wap.xhtml+xml',
-        'atom' => 'application/atom+xml',
-        'amf' => 'application/x-amf',
-        'wap' => ['text/vnd.wap.wml', 'text/vnd.wap.wmlscript', 'image/vnd.wap.wbmp'],
-        'wml' => 'text/vnd.wap.wml',
-        'wmlscript' => 'text/vnd.wap.wmlscript',
-        'wbmp' => 'image/vnd.wap.wbmp',
-        'woff' => 'application/x-font-woff',
-        'appcache' => 'text/cache-manifest',
-        'manifest' => 'text/cache-manifest',
-        'htc' => 'text/x-component',
-        'rdf' => 'application/xml',
-        'crx' => 'application/x-chrome-extension',
-        'oex' => 'application/x-opera-extension',
-        'xpi' => 'application/x-xpinstall',
-        'safariextz' => 'application/octet-stream',
-        'webapp' => 'application/x-web-app-manifest+json',
-        'vcf' => 'text/x-vcard',
-        'vtt' => 'text/vtt',
-        'mkv' => 'video/x-matroska',
-        'pkpass' => 'application/vnd.apple.pkpass',
-        'ajax' => 'text/html',
-        'bmp' => 'image/bmp',
+        'ice': 'x-conference/x-cooltalk',
+        'iges': 'model/iges',
+        'igs': 'model/iges',
+        'mesh': 'model/mesh',
+        'msh': 'model/mesh',
+        'silo': 'model/mesh',
+        'vrml': 'model/vrml',
+        'wrl': 'model/vrml',
+        'mime': 'www/mime',
+        'pdb': 'chemical/x-pdb',
+        'xyz': 'chemical/x-pdb',
+        'javascript': 'application/javascript',
+        'form': 'application/x-www-form-urlencoded',
+        'file': 'multipart/form-data',
+        'xhtml-mobile': 'application/vnd.wap.xhtml+xml',
+        'atom': 'application/atom+xml',
+        'amf': 'application/x-amf',
+        'wap': ['text/vnd.wap.wml', 'text/vnd.wap.wmlscript', 'image/vnd.wap.wbmp'],
+        'wml': 'text/vnd.wap.wml',
+        'wmlscript': 'text/vnd.wap.wmlscript',
+        'wbmp': 'image/vnd.wap.wbmp',
+        'woff': 'application/x-font-woff',
+        'appcache': 'text/cache-manifest',
+        'manifest': 'text/cache-manifest',
+        'htc': 'text/x-component',
+        'rdf': 'application/xml',
+        'crx': 'application/x-chrome-extension',
+        'oex': 'application/x-opera-extension',
+        'xpi': 'application/x-xpinstall',
+        'safariextz': 'application/octet-stream',
+        'webapp': 'application/x-web-app-manifest+json',
+        'vcf': 'text/x-vcard',
+        'vtt': 'text/vtt',
+        'mkv': 'video/x-matroska',
+        'pkpass': 'application/vnd.apple.pkpass',
+        'ajax': 'text/html',
+        'bmp': 'image/bmp',
     ];
 
     /**
@@ -457,7 +457,7 @@ class Response : IResponse
             _createStream();
         }
         if (isset($options['body'])) {
-            this.stream->write($options['body']);
+            this.stream.write($options['body']);
         }
         if (isset($options['status'])) {
             _setStatus($options['status']);
@@ -532,8 +532,8 @@ class Response : IResponse
     function withLocation(string $url)
     {
         $new = this.withHeader('Location', $url);
-        if ($new->_status == 200) {
-            $new->_status = 302;
+        if ($new._status == 200) {
+            $new._status = 302;
         }
 
         return $new;
@@ -616,7 +616,7 @@ class Response : IResponse
     function withStatus($code, $reasonPhrase = '')
     {
         $new = clone this;
-        $new->_setStatus($code, $reasonPhrase);
+        $new._setStatus($code, $reasonPhrase);
 
         return $new;
     }
@@ -712,7 +712,7 @@ class Response : IResponse
     {
         $mappedType = this.resolveType($contentType);
         $new = clone this;
-        $new->_setContentType($mappedType);
+        $new._setContentType($mappedType);
 
         return $new;
     }
@@ -764,7 +764,7 @@ class Response : IResponse
             return array_map([this, 'mapType'], $ctype);
         }
 
-        foreach (_mimeTypes as $alias => $types) {
+        foreach (_mimeTypes as $alias: $types) {
             if (in_array($ctype, (array)$types, true)) {
                 return $alias;
             }
@@ -792,8 +792,8 @@ class Response : IResponse
     function withCharset(string $charset)
     {
         $new = clone this;
-        $new->_charset = $charset;
-        $new->_setContentType(this.getType());
+        $new._charset = $charset;
+        $new._setContentType(this.getType());
 
         return $new;
     }
@@ -806,8 +806,8 @@ class Response : IResponse
     function withDisabledCache()
     {
         return this.withHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT')
-            ->withHeader('Last-Modified', gmdate(DATE_RFC7231))
-            ->withHeader('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+            .withHeader('Last-Modified', gmdate(DATE_RFC7231))
+            .withHeader('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     }
 
     /**
@@ -829,10 +829,10 @@ class Response : IResponse
         }
 
         return this.withHeader('Date', gmdate(DATE_RFC7231, time()))
-            ->withModified($since)
-            ->withExpires($time)
-            ->withSharable(true)
-            ->withMaxAge($time - time());
+            .withModified($since)
+            .withExpires($time)
+            .withSharable(true)
+            .withMaxAge($time - time());
     }
 
     /**
@@ -846,15 +846,15 @@ class Response : IResponse
     function withSharable(bool $public, ?int $time = null)
     {
         $new = clone this;
-        unset($new->_cacheDirectives['private'], $new->_cacheDirectives['public']);
+        unset($new._cacheDirectives['private'], $new._cacheDirectives['public']);
 
         $key = $public ? 'public' : 'private';
-        $new->_cacheDirectives[$key] = true;
+        $new._cacheDirectives[$key] = true;
 
         if ($time != null) {
-            $new->_cacheDirectives['max-age'] = $time;
+            $new._cacheDirectives['max-age'] = $time;
         }
-        $new->_setCacheControl();
+        $new._setCacheControl();
 
         return $new;
     }
@@ -871,8 +871,8 @@ class Response : IResponse
     function withSharedMaxAge(int $seconds)
     {
         $new = clone this;
-        $new->_cacheDirectives['s-maxage'] = $seconds;
-        $new->_setCacheControl();
+        $new._cacheDirectives['s-maxage'] = $seconds;
+        $new._setCacheControl();
 
         return $new;
     }
@@ -889,8 +889,8 @@ class Response : IResponse
     function withMaxAge(int $seconds)
     {
         $new = clone this;
-        $new->_cacheDirectives['max-age'] = $seconds;
-        $new->_setCacheControl();
+        $new._cacheDirectives['max-age'] = $seconds;
+        $new._setCacheControl();
 
         return $new;
     }
@@ -910,11 +910,11 @@ class Response : IResponse
     {
         $new = clone this;
         if ($enable) {
-            $new->_cacheDirectives['must-revalidate'] = true;
+            $new._cacheDirectives['must-revalidate'] = true;
         } else {
-            unset($new->_cacheDirectives['must-revalidate']);
+            unset($new._cacheDirectives['must-revalidate']);
         }
-        $new->_setCacheControl();
+        $new._setCacheControl();
 
         return $new;
     }
@@ -928,7 +928,7 @@ class Response : IResponse
     protected function _setCacheControl(): void
     {
         $control = '';
-        foreach (_cacheDirectives as $key => $val) {
+        foreach (_cacheDirectives as $key: $val) {
             $control .= $val == true ? $key : sprintf('%s=%s', $key, $val);
             $control .= ', ';
         }
@@ -943,10 +943,10 @@ class Response : IResponse
      *
      * ```
      * // Will Expire the response cache now
-     * $response->withExpires('now')
+     * $response.withExpires('now')
      *
      * // Will set the expiration in next 24 hours
-     * $response->withExpires(new DateTime('+1 day'))
+     * $response.withExpires(new DateTime('+1 day'))
      * ```
      *
      * @param \DateTimeInterface|string|int|null $time Valid time string or \DateTime instance.
@@ -956,7 +956,7 @@ class Response : IResponse
     {
         $date = _getUTCDate($time);
 
-        return this.withHeader('Expires', $date->format(DATE_RFC7231));
+        return this.withHeader('Expires', $date.format(DATE_RFC7231));
     }
 
     /**
@@ -966,10 +966,10 @@ class Response : IResponse
      *
      * ```
      * // Will Expire the response cache now
-     * $response->withModified('now')
+     * $response.withModified('now')
      *
      * // Will set the expiration in next 24 hours
-     * $response->withModified(new DateTime('+1 day'))
+     * $response.withModified(new DateTime('+1 day'))
      * ```
      *
      * @param \DateTimeInterface|string|int $time Valid time string or \DateTime instance.
@@ -979,7 +979,7 @@ class Response : IResponse
     {
         $date = _getUTCDate($time);
 
-        return this.withHeader('Last-Modified', $date->format(DATE_RFC7231));
+        return this.withHeader('Last-Modified', $date.format(DATE_RFC7231));
     }
 
     /**
@@ -1027,7 +1027,7 @@ class Response : IResponse
     function withNotModified()
     {
         $new = this.withStatus(304);
-        $new->_createStream();
+        $new._createStream();
         $remove = [
             'Allow',
             'Content-Encoding',
@@ -1038,7 +1038,7 @@ class Response : IResponse
             'Last-Modified',
         ];
         foreach ($remove as $header) {
-            $new = $new->withoutHeader($header);
+            $new = $new.withoutHeader($header);
         }
 
         return $new;
@@ -1106,7 +1106,7 @@ class Response : IResponse
         }
 
         /** @psalm-suppress UndefinedInterfaceMethod */
-        return $result->setTimezone(new DateTimeZone('UTC'));
+        return $result.setTimezone(new DateTimeZone('UTC'));
     }
 
     /**
@@ -1163,8 +1163,8 @@ class Response : IResponse
      * ### Examples
      *
      * ```
-     * $response = $response->withAddedLink('http://example.com?page=1', ['rel' => 'prev'])
-     *     ->withAddedLink('http://example.com?page=3', ['rel' => 'next']);
+     * $response = $response.withAddedLink('http://example.com?page=1', ['rel': 'prev'])
+     *     .withAddedLink('http://example.com?page=3', ['rel': 'next']);
      * ```
      *
      * Will generate:
@@ -1182,7 +1182,7 @@ class Response : IResponse
     function withAddedLink(string $url, array $options = [])
     {
         $params = [];
-        foreach ($options as $key => $option) {
+        foreach ($options as $key: $option) {
             $params[] = $key . '="' . $option . '"';
         }
 
@@ -1208,14 +1208,14 @@ class Response : IResponse
      */
     function isNotModified(ServerRequest $request): bool
     {
-        $etags = preg_split('/\s*,\s*/', $request->getHeaderLine('If-None-Match'), 0, PREG_SPLIT_NO_EMPTY);
+        $etags = preg_split('/\s*,\s*/', $request.getHeaderLine('If-None-Match'), 0, PREG_SPLIT_NO_EMPTY);
         $responseTag = this.getHeaderLine('Etag');
         $etagMatches = null;
         if ($responseTag) {
             $etagMatches = in_array('*', $etags, true) || in_array($responseTag, $etags, true);
         }
 
-        $modifiedSince = $request->getHeaderLine('If-Modified-Since');
+        $modifiedSince = $request.getHeaderLine('If-Modified-Since');
         $timeMatches = null;
         if ($modifiedSince && this.hasHeader('Last-Modified')) {
             $timeMatches = strtotime(this.getHeaderLine('Last-Modified')) == strtotime($modifiedSince);
@@ -1267,9 +1267,9 @@ class Response : IResponse
      */
     function __toString(): string
     {
-        this.stream->rewind();
+        this.stream.rewind();
 
-        return this.stream->getContents();
+        return this.stream.getContents();
     }
 
     /**
@@ -1279,7 +1279,7 @@ class Response : IResponse
      *
      * ```
      * // add a cookie object
-     * $response = $response->withCookie(new Cookie('remember_me', 1));
+     * $response = $response.withCookie(new Cookie('remember_me', 1));
      * ```
      *
      * @param \Cake\Http\Cookie\CookieInterface $cookie cookie object
@@ -1288,7 +1288,7 @@ class Response : IResponse
     function withCookie(CookieInterface $cookie)
     {
         $new = clone this;
-        $new->_cookies = $new->_cookies->add($cookie);
+        $new._cookies = $new._cookies.add($cookie);
 
         return $new;
     }
@@ -1300,7 +1300,7 @@ class Response : IResponse
      *
      * ```
      * // add a cookie object
-     * $response = $response->withExpiredCookie(new Cookie('remember_me'));
+     * $response = $response.withExpiredCookie(new Cookie('remember_me'));
      * ```
      *
      * @param \Cake\Http\Cookie\CookieInterface $cookie cookie object
@@ -1308,10 +1308,10 @@ class Response : IResponse
      */
     function withExpiredCookie(CookieInterface $cookie)
     {
-        $cookie = $cookie->withExpired();
+        $cookie = $cookie.withExpired();
 
         $new = clone this;
-        $new->_cookies = $new->_cookies->add($cookie);
+        $new._cookies = $new._cookies.add($cookie);
 
         return $new;
     }
@@ -1327,17 +1327,17 @@ class Response : IResponse
      */
     function getCookie(string $name): ?array
     {
-        if (!_cookies->has($name)) {
+        if (!_cookies.has($name)) {
             return null;
         }
 
-        return _cookies->get($name)->toArray();
+        return _cookies.get($name).toArray();
     }
 
     /**
      * Get all cookies in the response.
      *
-     * Returns an associative array of cookie name => cookie data.
+     * Returns an associative array of cookie name: cookie data.
      *
      * @return array<string, array>
      */
@@ -1347,7 +1347,7 @@ class Response : IResponse
         /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
         $cookies = _cookies;
         foreach ($cookies as $cookie) {
-            $out[$cookie->getName()] = $cookie->toArray();
+            $out[$cookie.getName()] = $cookie.toArray();
         }
 
         return $out;
@@ -1372,7 +1372,7 @@ class Response : IResponse
     function withCookieCollection(CookieCollection $cookieCollection)
     {
         $new = clone this;
-        $new->_cookies = $cookieCollection;
+        $new._cookies = $cookieCollection;
 
         return $new;
     }
@@ -1386,8 +1386,8 @@ class Response : IResponse
      */
     function cors(ServerRequest $request): CorsBuilder
     {
-        $origin = $request->getHeaderLine('Origin');
-        $ssl = $request->is('ssl');
+        $origin = $request.getHeaderLine('Origin');
+        $ssl = $request.is('ssl');
 
         return new CorsBuilder(this, $origin, $ssl);
     }
@@ -1415,11 +1415,11 @@ class Response : IResponse
     {
         $file = this.validateFile($path);
         $options += [
-            'name' => null,
-            'download' => null,
+            'name': null,
+            'download': null,
         ];
 
-        $extension = strtolower($file->getExtension());
+        $extension = strtolower($file.getExtension());
         $mapped = this.getMimeType($extension);
         if ((!$extension || !$mapped) && $options['download'] == null) {
             $options['download'] = true;
@@ -1427,10 +1427,10 @@ class Response : IResponse
 
         $new = clone this;
         if ($mapped) {
-            $new = $new->withType($extension);
+            $new = $new.withType($extension);
         }
 
-        $fileSize = $file->getSize();
+        $fileSize = $file.getSize();
         if ($options['download']) {
             $agent = (string)env('HTTP_USER_AGENT');
 
@@ -1441,22 +1441,22 @@ class Response : IResponse
             }
 
             if (isset($contentType)) {
-                $new = $new->withType($contentType);
+                $new = $new.withType($contentType);
             }
-            $name = $options['name'] ?: $file->getFileName();
-            $new = $new->withDownload($name)
-                ->withHeader('Content-Transfer-Encoding', 'binary');
+            $name = $options['name'] ?: $file.getFileName();
+            $new = $new.withDownload($name)
+                .withHeader('Content-Transfer-Encoding', 'binary');
         }
 
-        $new = $new->withHeader('Accept-Ranges', 'bytes');
+        $new = $new.withHeader('Accept-Ranges', 'bytes');
         $httpRange = (string)env('HTTP_RANGE');
         if ($httpRange) {
-            $new->_fileRange($file, $httpRange);
+            $new._fileRange($file, $httpRange);
         } else {
-            $new = $new->withHeader('Content-Length', (string)$fileSize);
+            $new = $new.withHeader('Content-Length', (string)$fileSize);
         }
-        $new->_file = $file;
-        $new->stream = new Stream($file->getPathname(), 'rb');
+        $new._file = $file;
+        $new.stream = new Stream($file.getPathname(), 'rb');
 
         return $new;
     }
@@ -1470,8 +1470,8 @@ class Response : IResponse
     function withStringBody(?string $string)
     {
         $new = clone this;
-        $new->_createStream();
-        $new->stream->write((string)$string);
+        $new._createStream();
+        $new.stream.write((string)$string);
 
         return $new;
     }
@@ -1490,7 +1490,7 @@ class Response : IResponse
         }
 
         $file = new SplFileInfo($path);
-        if (!$file->isFile() || !$file->isReadable()) {
+        if (!$file.isFile() || !$file.isReadable()) {
             if (Configure::read('debug')) {
                 throw new NotFoundException(sprintf('The requested file %s was not found or not readable', $path));
             }
@@ -1522,7 +1522,7 @@ class Response : IResponse
      */
     protected function _fileRange(SplFileInfo $file, string $httpRange): void
     {
-        $fileSize = $file->getSize();
+        $fileSize = $file.getSize();
         $lastByte = $fileSize - 1;
         $start = 0;
         $end = $lastByte;
@@ -1568,14 +1568,14 @@ class Response : IResponse
     function __debugInfo(): array
     {
         return [
-            'status' => _status,
-            'contentType' => this.getType(),
-            'headers' => this.headers,
-            'file' => _file,
-            'fileRange' => _fileRange,
-            'cookies' => _cookies,
-            'cacheDirectives' => _cacheDirectives,
-            'body' => (string)this.getBody(),
+            'status': _status,
+            'contentType': this.getType(),
+            'headers': this.headers,
+            'file': _file,
+            'fileRange': _fileRange,
+            'cookies': _cookies,
+            'cacheDirectives': _cacheDirectives,
+            'body': (string)this.getBody(),
         ];
     }
 }

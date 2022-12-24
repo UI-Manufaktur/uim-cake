@@ -39,7 +39,7 @@ use InvalidArgumentException;
  * cookie objects:
  *
  * ```
- * $cookie = $cookie->withValue('0');
+ * $cookie = $cookie.withValue('0');
  * ```
  *
  * @link https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03
@@ -119,12 +119,12 @@ class Cookie : CookieInterface
      * @see \Cake\Http\Cookie\Cookie::setDefaults()
      */
     protected static $defaults = [
-        'expires' => null,
-        'path' => '/',
-        'domain' => '',
-        'secure' => false,
-        'httponly' => false,
-        'samesite' => null,
+        'expires': null,
+        'path': '/',
+        'domain': '',
+        'secure': false,
+        'httponly': false,
+        'samesite': null,
     ];
 
     /**
@@ -171,7 +171,7 @@ class Cookie : CookieInterface
         }
 
         if ($expiresAt) {
-            $expiresAt = $expiresAt->setTimezone(new DateTimeZone('GMT'));
+            $expiresAt = $expiresAt.setTimezone(new DateTimeZone('GMT'));
         } else {
             $expiresAt = static::$defaults['expires'];
         }
@@ -246,7 +246,7 @@ class Cookie : CookieInterface
 
         if ($expires instanceof DateTimeInterface) {
             /** @psalm-suppress UndefinedInterfaceMethod */
-            return $expires->setTimezone(new DateTimeZone('GMT'));
+            return $expires.setTimezone(new DateTimeZone('GMT'));
         }
 
         if (!is_string($expires) && !is_int($expires)) {
@@ -286,8 +286,8 @@ class Cookie : CookieInterface
 
         [$name, $value] = explode('=', array_shift($parts), 2);
         $data = [
-                'name' => urldecode($name),
-                'value' => urldecode($value),
+                'name': urldecode($name),
+                'value': urldecode($value),
             ] + $defaults;
 
         foreach ($parts as $part) {
@@ -371,7 +371,7 @@ class Cookie : CookieInterface
     {
         this.validateName($name);
         $new = clone this;
-        $new->name = $name;
+        $new.name = $name;
 
         return $new;
     }
@@ -455,7 +455,7 @@ class Cookie : CookieInterface
     function withValue($value)
     {
         $new = clone this;
-        $new->_setValue($value);
+        $new._setValue($value);
 
         return $new;
     }
@@ -478,7 +478,7 @@ class Cookie : CookieInterface
     function withPath(string $path)
     {
         $new = clone this;
-        $new->path = $path;
+        $new.path = $path;
 
         return $new;
     }
@@ -497,7 +497,7 @@ class Cookie : CookieInterface
     function withDomain(string $domain)
     {
         $new = clone this;
-        $new->domain = $domain;
+        $new.domain = $domain;
 
         return $new;
     }
@@ -524,7 +524,7 @@ class Cookie : CookieInterface
     function withSecure(bool $secure)
     {
         $new = clone this;
-        $new->secure = $secure;
+        $new.secure = $secure;
 
         return $new;
     }
@@ -535,7 +535,7 @@ class Cookie : CookieInterface
     function withHttpOnly(bool $httpOnly)
     {
         $new = clone this;
-        $new->httpOnly = $httpOnly;
+        $new.httpOnly = $httpOnly;
 
         return $new;
     }
@@ -554,7 +554,7 @@ class Cookie : CookieInterface
     function withExpiry($dateTime)
     {
         $new = clone this;
-        $new->expiresAt = $dateTime->setTimezone(new DateTimeZone('GMT'));
+        $new.expiresAt = $dateTime.setTimezone(new DateTimeZone('GMT'));
 
         return $new;
     }
@@ -576,7 +576,7 @@ class Cookie : CookieInterface
             return null;
         }
 
-        return (int)this.expiresAt->format('U');
+        return (int)this.expiresAt.format('U');
     }
 
     /**
@@ -588,7 +588,7 @@ class Cookie : CookieInterface
             return '';
         }
 
-        return this.expiresAt->format(static::EXPIRES_FORMAT);
+        return this.expiresAt.format(static::EXPIRES_FORMAT);
     }
 
     /**
@@ -610,7 +610,7 @@ class Cookie : CookieInterface
     function withNeverExpire()
     {
         $new = clone this;
-        $new->expiresAt = new DateTimeImmutable('2038-01-01');
+        $new.expiresAt = new DateTimeImmutable('2038-01-01');
 
         return $new;
     }
@@ -621,7 +621,7 @@ class Cookie : CookieInterface
     function withExpired()
     {
         $new = clone this;
-        $new->expiresAt = new DateTimeImmutable('1970-01-01 00:00:01');
+        $new.expiresAt = new DateTimeImmutable('1970-01-01 00:00:01');
 
         return $new;
     }
@@ -644,7 +644,7 @@ class Cookie : CookieInterface
         }
 
         $new = clone this;
-        $new->sameSite = $sameSite;
+        $new.sameSite = $sameSite;
 
         return $new;
     }
@@ -695,13 +695,13 @@ class Cookie : CookieInterface
     function withAddedValue(string $path, $value)
     {
         $new = clone this;
-        if ($new->isExpanded == false) {
+        if ($new.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            $new->value = $new->_expand($new->value);
+            $new.value = $new._expand($new.value);
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
-        $new->value = Hash::insert($new->value, $path, $value);
+        $new.value = Hash::insert($new.value, $path, $value);
 
         return $new;
     }
@@ -715,13 +715,13 @@ class Cookie : CookieInterface
     function withoutAddedValue(string $path)
     {
         $new = clone this;
-        if ($new->isExpanded == false) {
+        if ($new.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            $new->value = $new->_expand($new->value);
+            $new.value = $new._expand($new.value);
         }
 
         /** @psalm-suppress PossiblyInvalidArgument */
-        $new->value = Hash::remove($new->value, $path);
+        $new.value = Hash::remove($new.value, $path);
 
         return $new;
     }
@@ -766,11 +766,11 @@ class Cookie : CookieInterface
     function getOptions(): array
     {
         $options = [
-            'expires' => (int)this.getExpiresTimestamp(),
-            'path' => this.path,
-            'domain' => this.domain,
-            'secure' => this.secure,
-            'httponly' => this.httpOnly,
+            'expires': (int)this.getExpiresTimestamp(),
+            'path': this.path,
+            'domain': this.domain,
+            'secure': this.secure,
+            'httponly': this.httpOnly,
         ];
 
         if (this.sameSite != null) {
@@ -786,8 +786,8 @@ class Cookie : CookieInterface
     function toArray(): array
     {
         return [
-            'name' => this.name,
-            'value' => this.getScalarValue(),
+            'name': this.name,
+            'value': this.getScalarValue(),
         ] + this.getOptions();
     }
 

@@ -52,7 +52,7 @@ class Runner : RequestHandlerInterface
         ?RequestHandlerInterface $fallbackHandler = null
     ): IResponse {
         this.queue = $queue;
-        this.queue->rewind();
+        this.queue.rewind();
         this.fallbackHandler = $fallbackHandler;
 
         return this.handle($request);
@@ -66,21 +66,21 @@ class Runner : RequestHandlerInterface
      */
     function handle(IServerRequest $request): IResponse
     {
-        if (this.queue->valid()) {
-            $middleware = this.queue->current();
-            this.queue->next();
+        if (this.queue.valid()) {
+            $middleware = this.queue.current();
+            this.queue.next();
 
-            return $middleware->process($request, this);
+            return $middleware.process($request, this);
         }
 
         if (this.fallbackHandler) {
-            return this.fallbackHandler->handle($request);
+            return this.fallbackHandler.handle($request);
         }
 
         return new Response([
-            'body' => 'Middleware queue was exhausted without returning a response '
+            'body': 'Middleware queue was exhausted without returning a response '
                 . 'and no fallback request handler was set for Runner',
-            'status' => 500,
+            'status': 500,
         ]);
     }
 }

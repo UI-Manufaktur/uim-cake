@@ -95,13 +95,13 @@ class Stream : AdapterInterface
     function createResponses(array $headers, string $content): array
     {
         $indexes = $responses = [];
-        foreach ($headers as $i => $header) {
+        foreach ($headers as $i: $header) {
             if (strtoupper(substr($header, 0, 5)) == 'HTTP/') {
                 $indexes[] = $i;
             }
         }
         $last = count($indexes) - 1;
-        foreach ($indexes as $i => $start) {
+        foreach ($indexes as $i: $start) {
             /** @psalm-suppress InvalidOperand */
             $end = isset($indexes[$i + 1]) ? $indexes[$i + 1] - $start : null;
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -126,14 +126,14 @@ class Stream : AdapterInterface
         _buildHeaders($request, $options);
         _buildOptions($request, $options);
 
-        $url = $request->getUri();
+        $url = $request.getUri();
         $scheme = parse_url((string)$url, PHP_URL_SCHEME);
         if ($scheme == 'https') {
             _buildSslContext($request, $options);
         }
         _context = stream_context_create([
-            'http' => _contextOptions,
-            'ssl' => _sslContextOptions,
+            'http': _contextOptions,
+            'ssl': _sslContextOptions,
         ]);
     }
 
@@ -149,7 +149,7 @@ class Stream : AdapterInterface
     protected function _buildHeaders(RequestInterface $request, array $options): void
     {
         $headers = [];
-        foreach ($request->getHeaders() as $name => $values) {
+        foreach ($request.getHeaders() as $name: $values) {
             $headers[] = sprintf('%s: %s', $name, implode(', ', $values));
         }
         _contextOptions['header'] = implode("\r\n", $headers);
@@ -158,7 +158,7 @@ class Stream : AdapterInterface
     /**
      * Builds the request content based on the request object.
      *
-     * If the $request->body() is a string, it will be used as is.
+     * If the $request.body() is a string, it will be used as is.
      * Array data will be processed with {@link \Cake\Http\Client\FormData}
      *
      * @param \Psr\Http\Message\RequestInterface $request The request being sent.
@@ -167,9 +167,9 @@ class Stream : AdapterInterface
      */
     protected function _buildContent(RequestInterface $request, array $options): void
     {
-        $body = $request->getBody();
-        $body->rewind();
-        _contextOptions['content'] = $body->getContents();
+        $body = $request.getBody();
+        $body.rewind();
+        _contextOptions['content'] = $body.getContents();
     }
 
     /**
@@ -181,8 +181,8 @@ class Stream : AdapterInterface
      */
     protected function _buildOptions(RequestInterface $request, array $options): void
     {
-        _contextOptions['method'] = $request->getMethod();
-        _contextOptions['protocol_version'] = $request->getProtocolVersion();
+        _contextOptions['method'] = $request.getMethod();
+        _contextOptions['protocol_version'] = $request.getProtocolVersion();
         _contextOptions['ignore_errors'] = true;
 
         if (isset($options['timeout'])) {
@@ -220,7 +220,7 @@ class Stream : AdapterInterface
             $options['ssl_cafile'] = CaBundle::getBundledCaBundlePath();
         }
         if (!empty($options['ssl_verify_host'])) {
-            $url = $request->getUri();
+            $url = $request.getUri();
             $host = parse_url((string)$url, PHP_URL_HOST);
             _sslContextOptions['peer_name'] = $host;
         }
@@ -246,7 +246,7 @@ class Stream : AdapterInterface
             $deadline = time() + _contextOptions['timeout'];
         }
 
-        $url = $request->getUri();
+        $url = $request.getUri();
         _open((string)$url, $request);
         $content = '';
         $timedOut = false;

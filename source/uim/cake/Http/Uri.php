@@ -109,7 +109,7 @@ class Uri : UriInterface
      */
     function getScheme()
     {
-        return this.uri->getScheme();
+        return this.uri.getScheme();
     }
 
     /**
@@ -117,7 +117,7 @@ class Uri : UriInterface
      */
     function getAuthority()
     {
-        return this.uri->getAuthority();
+        return this.uri.getAuthority();
     }
 
     /**
@@ -125,7 +125,7 @@ class Uri : UriInterface
      */
     function getUserInfo()
     {
-        return this.uri->getUserInfo();
+        return this.uri.getUserInfo();
     }
 
     /**
@@ -133,7 +133,7 @@ class Uri : UriInterface
      */
     function getHost()
     {
-        return this.uri->getHost();
+        return this.uri.getHost();
     }
 
     /**
@@ -141,7 +141,7 @@ class Uri : UriInterface
      */
     function getPort()
     {
-        return this.uri->getPort();
+        return this.uri.getPort();
     }
 
     /**
@@ -149,7 +149,7 @@ class Uri : UriInterface
      */
     function getPath()
     {
-        return this.uri->getPath();
+        return this.uri.getPath();
     }
 
     /**
@@ -157,7 +157,7 @@ class Uri : UriInterface
      */
     function getQuery()
     {
-        return this.uri->getQuery();
+        return this.uri.getQuery();
     }
 
     /**
@@ -165,7 +165,7 @@ class Uri : UriInterface
      */
     function getFragment()
     {
-        return this.uri->getFragment();
+        return this.uri.getFragment();
     }
 
     /**
@@ -174,7 +174,7 @@ class Uri : UriInterface
     function withScheme($scheme)
     {
         $new = clone this;
-        $new->uri = this.uri->withScheme($scheme);
+        $new.uri = this.uri.withScheme($scheme);
 
         return $new;
     }
@@ -185,7 +185,7 @@ class Uri : UriInterface
     function withUserInfo($user, $password = null)
     {
         $new = clone this;
-        $new->uri = this.uri->withUserInfo($user, $password);
+        $new.uri = this.uri.withUserInfo($user, $password);
 
         return $new;
     }
@@ -196,7 +196,7 @@ class Uri : UriInterface
     function withHost($host)
     {
         $new = clone this;
-        $new->uri = this.uri->withHost($host);
+        $new.uri = this.uri.withHost($host);
 
         return $new;
     }
@@ -207,7 +207,7 @@ class Uri : UriInterface
     function withPort($port)
     {
         $new = clone this;
-        $new->uri = this.uri->withPort($port);
+        $new.uri = this.uri.withPort($port);
 
         return $new;
     }
@@ -218,7 +218,7 @@ class Uri : UriInterface
     function withPath($path)
     {
         $new = clone this;
-        $new->uri = this.uri->withPath($path);
+        $new.uri = this.uri.withPath($path);
 
         return $new;
     }
@@ -229,7 +229,7 @@ class Uri : UriInterface
     function withQuery($query)
     {
         $new = clone this;
-        $new->uri = this.uri->withQuery($query);
+        $new.uri = this.uri.withQuery($query);
 
         return $new;
     }
@@ -240,7 +240,7 @@ class Uri : UriInterface
     function withFragment($fragment)
     {
         $new = clone this;
-        $new->uri = this.uri->withFragment($fragment);
+        $new.uri = this.uri.withFragment($fragment);
 
         return $new;
     }
@@ -250,6 +250,6 @@ class Uri : UriInterface
      */
     function __toString()
     {
-        return this.uri->__toString();
+        return this.uri.__toString();
     }
 }

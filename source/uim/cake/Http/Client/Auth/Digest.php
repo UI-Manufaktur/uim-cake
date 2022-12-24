@@ -65,7 +65,7 @@ class Digest
         }
         $value = _generateHeader($request, $credentials);
 
-        return $request->withHeader('Authorization', $value);
+        return $request.withHeader('Authorization', $value);
     }
 
     /**
@@ -81,18 +81,18 @@ class Digest
      */
     protected function _getServerInfo(Request $request, array $credentials): array
     {
-        $response = _client->get(
-            (string)$request->getUri(),
+        $response = _client.get(
+            (string)$request.getUri(),
             [],
-            ['auth' => ['type' => null]]
+            ['auth': ['type': null]]
         );
 
-        if (!$response->getHeader('WWW-Authenticate')) {
+        if (!$response.getHeader('WWW-Authenticate')) {
             return [];
         }
         preg_match_all(
             '@(\w+)=(?:(?:")([^"]+)"|([^\s,$]+))@',
-            $response->getHeaderLine('WWW-Authenticate'),
+            $response.getHeaderLine('WWW-Authenticate'),
             $matches,
             PREG_SET_ORDER
         );
@@ -115,9 +115,9 @@ class Digest
      */
     protected function _generateHeader(Request $request, array $credentials): string
     {
-        $path = $request->getUri()->getPath();
+        $path = $request.getUri().getPath();
         $a1 = md5($credentials['username'] . ':' . $credentials['realm'] . ':' . $credentials['password']);
-        $a2 = md5($request->getMethod() . ':' . $path);
+        $a2 = md5($request.getMethod() . ':' . $path);
         $nc = '';
 
         if (empty($credentials['qop'])) {

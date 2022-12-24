@@ -42,7 +42,7 @@ class RedirectException : HttpException
     {
         parent::__construct($target, $code);
 
-        foreach ($headers as $key => $value) {
+        foreach ($headers as $key: $value) {
             this.setHeader($key, (array)$value);
         }
     }
@@ -50,7 +50,7 @@ class RedirectException : HttpException
     /**
      * Add headers to be included in the response generated from this exception
      *
-     * @param array $headers An array of `header => value` to append to the exception.
+     * @param array $headers An array of `header: value` to append to the exception.
      *  If a header already exists, the new values will be appended to the existing ones.
      * @return this
      * @deprecated 4.2.0 Use `setHeaders()` instead.
@@ -59,7 +59,7 @@ class RedirectException : HttpException
     {
         deprecationWarning('RedirectException::addHeaders() is deprecated, use setHeaders() instead.');
 
-        foreach ($headers as $key => $value) {
+        foreach ($headers as $key: $value) {
             this.headers[$key][] = $value;
         }
 

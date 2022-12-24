@@ -89,7 +89,7 @@ class MiddlewareQueue : Countable, SeekableIterator
         }
 
         $info = new ReflectionFunction($middleware);
-        if ($info->getNumberOfParameters() > 2) {
+        if ($info.getNumberOfParameters() > 2) {
             return new DoublePassDecoratorMiddleware($middleware);
         }
 
@@ -176,7 +176,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     {
         $found = false;
         $i = 0;
-        foreach (this.queue as $i => $object) {
+        foreach (this.queue as $i: $object) {
             /** @psalm-suppress ArgumentTypeCoercion */
             if (
                 (
@@ -210,7 +210,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     {
         $found = false;
         $i = 0;
-        foreach (this.queue as $i => $object) {
+        foreach (this.queue as $i: $object) {
             /** @psalm-suppress ArgumentTypeCoercion */
             if (
                 (

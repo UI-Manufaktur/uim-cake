@@ -66,27 +66,27 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             // Unwrap our shim for base and webroot.
             // For 5.x we should change the interface on createUri() to return a
             // tuple of [$uri, $base, $webroot] and remove the wrapper.
-            $webroot = $uri->getWebroot();
-            $base = $uri->getBase();
-            $uri->getUri();
+            $webroot = $uri.getWebroot();
+            $base = $uri.getBase();
+            $uri.getUri();
         }
 
         /** @psalm-suppress NoInterfaceProperties */
         $sessionConfig = (array)Configure::read('Session') + [
-            'defaults' => 'php',
-            'cookiePath' => $webroot,
+            'defaults': 'php',
+            'cookiePath': $webroot,
         ];
         $session = Session::create($sessionConfig);
 
         $request = new ServerRequest([
-            'environment' => $server,
-            'uri' => $uri,
-            'cookies' => $cookies ?: $_COOKIE,
-            'query' => $query ?: $_GET,
-            'webroot' => $webroot,
-            'base' => $base,
-            'session' => $session,
-            'input' => $server['CAKEPHP_INPUT'] ?? null,
+            'environment': $server,
+            'uri': $uri,
+            'cookies': $cookies ?: $_COOKIE,
+            'query': $query ?: $_GET,
+            'webroot': $webroot,
+            'base': $base,
+            'session': $session,
+            'input': $server['CAKEPHP_INPUT'] ?? null,
         ]);
 
         $request = static::marshalBodyAndRequestMethod($parsedBody ?? $_POST, $request);
@@ -94,8 +94,8 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         // `HTTP_X_FORWARDED_PROTO` unless `trustProxy` is enabled, while the
         // `Uri` instance intially created always takes values of `HTTP_X_FORWARDED_PROTO`
         // into account.
-        $uri = $request->getUri()->withScheme($request->scheme());
-        $request = $request->withUri($uri, true);
+        $uri = $request.getUri().withScheme($request.scheme());
+        $request = $request.withUri($uri, true);
 
         return static::marshalFiles($files ?? $_FILES, $request);
     }
@@ -114,36 +114,36 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      */
     protected static function marshalBodyAndRequestMethod(array $parsedBody, ServerRequest $request): ServerRequest
     {
-        $method = $request->getMethod();
+        $method = $request.getMethod();
         $override = false;
 
         if (
             in_array($method, ['PUT', 'DELETE', 'PATCH'], true) &&
-            strpos((string)$request->contentType(), 'application/x-www-form-urlencoded') == 0
+            strpos((string)$request.contentType(), 'application/x-www-form-urlencoded') == 0
         ) {
-            $data = (string)$request->getBody();
+            $data = (string)$request.getBody();
             parse_str($data, $parsedBody);
         }
-        if ($request->hasHeader('X-Http-Method-Override')) {
-            $parsedBody['_method'] = $request->getHeaderLine('X-Http-Method-Override');
+        if ($request.hasHeader('X-Http-Method-Override')) {
+            $parsedBody['_method'] = $request.getHeaderLine('X-Http-Method-Override');
             $override = true;
         }
 
-        $request = $request->withEnv('ORIGINAL_REQUEST_METHOD', $method);
+        $request = $request.withEnv('ORIGINAL_REQUEST_METHOD', $method);
         if (isset($parsedBody['_method'])) {
-            $request = $request->withEnv('REQUEST_METHOD', $parsedBody['_method']);
+            $request = $request.withEnv('REQUEST_METHOD', $parsedBody['_method']);
             unset($parsedBody['_method']);
             $override = true;
         }
 
         if (
             $override &&
-            !in_array($request->getMethod(), ['PUT', 'POST', 'DELETE', 'PATCH'], true)
+            !in_array($request.getMethod(), ['PUT', 'POST', 'DELETE', 'PATCH'], true)
         ) {
             $parsedBody = [];
         }
 
-        return $request->withParsedBody($parsedBody);
+        return $request.withParsedBody($parsedBody);
     }
 
     /**
@@ -156,9 +156,9 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     protected static function marshalFiles(array $files, ServerRequest $request): ServerRequest
     {
         $files = normalizeUploadedFiles($files);
-        $request = $request->withUploadedFiles($files);
+        $request = $request.withUploadedFiles($files);
 
-        $parsedBody = $request->getParsedBody();
+        $parsedBody = $request.getParsedBody();
         if (!is_array($parsedBody)) {
             return $request;
         }
@@ -168,23 +168,23 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         } else {
             // Make a flat map that can be inserted into body for BC.
             $fileMap = Hash::flatten($files);
-            foreach ($fileMap as $key => $file) {
-                $error = $file->getError();
+            foreach ($fileMap as $key: $file) {
+                $error = $file.getError();
                 $tmpName = '';
                 if ($error == UPLOAD_ERR_OK) {
-                    $tmpName = $file->getStream()->getMetadata('uri');
+                    $tmpName = $file.getStream().getMetadata('uri');
                 }
                 $parsedBody = Hash::insert($parsedBody, (string)$key, [
-                    'tmp_name' => $tmpName,
-                    'error' => $error,
-                    'name' => $file->getClientFilename(),
-                    'type' => $file->getClientMediaType(),
-                    'size' => $file->getSize(),
+                    'tmp_name': $tmpName,
+                    'error': $error,
+                    'name': $file.getClientFilename(),
+                    'type': $file.getClientMediaType(),
+                    'size': $file.getSize(),
                 ]);
             }
         }
 
-        return $request->withParsedBody($parsedBody);
+        return $request.withParsedBody($parsedBody);
     }
 
     /**
@@ -205,7 +205,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     function createServerRequest(string $method, $uri, array $serverParams = []): IServerRequest
     {
         $serverParams['REQUEST_METHOD'] = $method;
-        $options = ['environment' => $serverParams];
+        $options = ['environment': $serverParams];
 
         if ($uri instanceof UriInterface) {
             $options['uri'] = $uri;
@@ -252,13 +252,13 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         // by PHP.
         $pathInfo = Hash::get($server, 'PATH_INFO');
         if ($pathInfo) {
-            $uri = $uri->withPath($pathInfo);
+            $uri = $uri.withPath($pathInfo);
         } else {
             $uri = static::updatePath($base, $uri);
         }
 
-        if (!$uri->getHost()) {
-            $uri = $uri->withHost('localhost');
+        if (!$uri.getHost()) {
+            $uri = $uri.withHost('localhost');
         }
 
         return new CakeUri($uri, $base, $webroot);
@@ -273,12 +273,12 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      */
     protected static function updatePath(string $base, UriInterface $uri): UriInterface
     {
-        $path = $uri->getPath();
+        $path = $uri.getPath();
         if ($base != '' && strpos($path, $base) == 0) {
             $path = substr($path, strlen($base));
         }
-        if ($path == '/index.php' && $uri->getQuery()) {
-            $path = $uri->getQuery();
+        if ($path == '/index.php' && $uri.getQuery()) {
+            $path = $uri.getQuery();
         }
         if (empty($path) || $path == '/' || $path == '//' || $path == '/index.php') {
             $path = '/';
@@ -292,7 +292,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             $path = '/';
         }
 
-        return $uri->withPath($path);
+        return $uri.withPath($path);
     }
 
     /**
@@ -305,9 +305,9 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     protected static function getBase(UriInterface $uri, array $server): array
     {
         $config = (array)Configure::read('App') + [
-            'base' => null,
-            'webroot' => null,
-            'baseUrl' => null,
+            'base': null,
+            'webroot': null,
+            'baseUrl': null,
         ];
         $base = $config['base'];
         $baseUrl = $config['baseUrl'];

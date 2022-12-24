@@ -42,7 +42,7 @@ use RuntimeException;
  *
  * This middleware integrates with the FormHelper automatically and when
  * used together your forms will have CSRF tokens automatically added
- * when `this.Form->create(...)` is used in a view.
+ * when `this.Form.create(...)` is used in a view.
  *
  * @see https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie
  */
@@ -65,12 +65,12 @@ class CsrfProtectionMiddleware : IMiddleware
      * @var array<string, mixed>
      */
     protected $_config = [
-        'cookieName' => 'csrfToken',
-        'expiry' => 0,
-        'secure' => false,
-        'httponly' => false,
-        'samesite' => null,
-        'field' => '_csrfToken',
+        'cookieName': 'csrfToken',
+        'expiry': 0,
+        'secure': false,
+        'httponly': false,
+        'samesite': null,
+        'field': '_csrfToken',
     ];
 
     /**
@@ -124,9 +124,9 @@ class CsrfProtectionMiddleware : IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        $method = $request->getMethod();
+        $method = $request.getMethod();
         $hasData = in_array($method, ['PUT', 'POST', 'DELETE', 'PATCH'], true)
-            || $request->getParsedBody();
+            || $request.getParsedBody();
 
         if (
             $hasData
@@ -135,9 +135,9 @@ class CsrfProtectionMiddleware : IMiddleware
         ) {
             $request = _unsetTokenField($request);
 
-            return $handler->handle($request);
+            return $handler.handle($request);
         }
-        if ($request->getAttribute('csrfToken')) {
+        if ($request.getAttribute('csrfToken')) {
             throw new RuntimeException(
                 'A CSRF token is already set in the request.' .
                 "\n" .
@@ -146,12 +146,12 @@ class CsrfProtectionMiddleware : IMiddleware
             );
         }
 
-        $cookies = $request->getCookieParams();
+        $cookies = $request.getCookieParams();
         $cookieData = Hash::get($cookies, _config['cookieName']);
 
         if (is_string($cookieData) && $cookieData != '') {
             try {
-                $request = $request->withAttribute('csrfToken', this.saltToken($cookieData));
+                $request = $request.withAttribute('csrfToken', this.saltToken($cookieData));
             } catch (InvalidArgumentException $e) {
                 $cookieData = null;
             }
@@ -159,9 +159,9 @@ class CsrfProtectionMiddleware : IMiddleware
 
         if ($method == 'GET' && $cookieData == null) {
             $token = this.createToken();
-            $request = $request->withAttribute('csrfToken', this.saltToken($token));
+            $request = $request.withAttribute('csrfToken', this.saltToken($token));
             /** @var mixed $response */
-            $response = $handler->handle($request);
+            $response = $handler.handle($request);
 
             return _addTokenCookie($token, $request, $response);
         }
@@ -171,7 +171,7 @@ class CsrfProtectionMiddleware : IMiddleware
             $request = _unsetTokenField($request);
         }
 
-        return $handler->handle($request);
+        return $handler.handle($request);
     }
 
     /**
@@ -216,10 +216,10 @@ class CsrfProtectionMiddleware : IMiddleware
      */
     protected function _unsetTokenField(IServerRequest $request): IServerRequest
     {
-        $body = $request->getParsedBody();
+        $body = $request.getParsedBody();
         if (is_array($body)) {
             unset($body[_config['field']]);
-            $request = $request->withParsedBody($body);
+            $request = $request.withParsedBody($body);
         }
 
         return $request;
@@ -369,10 +369,10 @@ class CsrfProtectionMiddleware : IMiddleware
     ): IResponse {
         $cookie = _createCookie($token, $request);
         if ($response instanceof Response) {
-            return $response->withCookie($cookie);
+            return $response.withCookie($cookie);
         }
 
-        return $response->withAddedHeader('Set-Cookie', $cookie->toHeaderValue());
+        return $response.withAddedHeader('Set-Cookie', $cookie.toHeaderValue());
     }
 
     /**
@@ -384,7 +384,7 @@ class CsrfProtectionMiddleware : IMiddleware
      */
     protected function _validateToken(IServerRequest $request): void
     {
-        $cookie = Hash::get($request->getCookieParams(), _config['cookieName']);
+        $cookie = Hash::get($request.getCookieParams(), _config['cookieName']);
 
         if (!$cookie || !is_string($cookie)) {
             throw new InvalidCsrfTokenException(__d('cake', 'Missing or incorrect CSRF cookie type.'));
@@ -393,13 +393,13 @@ class CsrfProtectionMiddleware : IMiddleware
         if (!_verifyToken($cookie)) {
             $exception = new InvalidCsrfTokenException(__d('cake', 'Missing or invalid CSRF cookie.'));
 
-            $expiredCookie = _createCookie('', $request)->withExpired();
-            $exception->setHeader('Set-Cookie', $expiredCookie->toHeaderValue());
+            $expiredCookie = _createCookie('', $request).withExpired();
+            $exception.setHeader('Set-Cookie', $expiredCookie.toHeaderValue());
 
             throw $exception;
         }
 
-        $body = $request->getParsedBody();
+        $body = $request.getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
             $post = (string)Hash::get($body, _config['field']);
             $post = this.unsaltToken($post);
@@ -408,7 +408,7 @@ class CsrfProtectionMiddleware : IMiddleware
             }
         }
 
-        $header = $request->getHeaderLine('X-CSRF-Token');
+        $header = $request.getHeaderLine('X-CSRF-Token');
         $header = this.unsaltToken($header);
         if (hash_equals($header, $cookie)) {
             return;
@@ -433,11 +433,11 @@ class CsrfProtectionMiddleware : IMiddleware
             _config['cookieName'],
             $value,
             [
-                'expires' => _config['expiry'] ?: null,
-                'path' => $request->getAttribute('webroot'),
-                'secure' => _config['secure'],
-                'httponly' => _config['httponly'],
-                'samesite' => _config['samesite'],
+                'expires': _config['expiry'] ?: null,
+                'path': $request.getAttribute('webroot'),
+                'secure': _config['secure'],
+                'httponly': _config['httponly'],
+                'samesite': _config['samesite'],
             ]
         );
     }

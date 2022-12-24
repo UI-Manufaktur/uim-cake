@@ -52,7 +52,7 @@ class CookieCollection : IteratorAggregate, Countable
     {
         this.checkCookies($cookies);
         foreach ($cookies as $cookie) {
-            this.cookies[$cookie->getId()] = $cookie;
+            this.cookies[$cookie.getId()] = $cookie;
         }
     }
 
@@ -85,9 +85,9 @@ class CookieCollection : IteratorAggregate, Countable
      */
     public static function createFromServerRequest(IServerRequest $request)
     {
-        $data = $request->getCookieParams();
+        $data = $request.getCookieParams();
         $cookies = [];
-        foreach ($data as $name => $value) {
+        foreach ($data as $name: $value) {
             $cookies[] = new Cookie($name, $value);
         }
 
@@ -117,7 +117,7 @@ class CookieCollection : IteratorAggregate, Countable
     function add(CookieInterface $cookie)
     {
         $new = clone this;
-        $new->cookies[$cookie->getId()] = $cookie;
+        $new.cookies[$cookie.getId()] = $cookie;
 
         return $new;
     }
@@ -133,7 +133,7 @@ class CookieCollection : IteratorAggregate, Countable
     {
         $key = mb_strtolower($name);
         foreach (this.cookies as $cookie) {
-            if (mb_strtolower($cookie->getName()) == $key) {
+            if (mb_strtolower($cookie.getName()) == $key) {
                 return $cookie;
             }
         }
@@ -156,7 +156,7 @@ class CookieCollection : IteratorAggregate, Countable
     {
         $key = mb_strtolower($name);
         foreach (this.cookies as $cookie) {
-            if (mb_strtolower($cookie->getName()) == $key) {
+            if (mb_strtolower($cookie.getName()) == $key) {
                 return true;
             }
         }
@@ -176,9 +176,9 @@ class CookieCollection : IteratorAggregate, Countable
     {
         $new = clone this;
         $key = mb_strtolower($name);
-        foreach ($new->cookies as $i => $cookie) {
-            if (mb_strtolower($cookie->getName()) == $key) {
-                unset($new->cookies[$i]);
+        foreach ($new.cookies as $i: $cookie) {
+            if (mb_strtolower($cookie.getName()) == $key) {
+                unset($new.cookies[$i]);
             }
         }
 
@@ -194,7 +194,7 @@ class CookieCollection : IteratorAggregate, Countable
      */
     protected function checkCookies(array $cookies): void
     {
-        foreach ($cookies as $index => $cookie) {
+        foreach ($cookies as $index: $cookie) {
             if (!$cookie instanceof CookieInterface) {
                 throw new InvalidArgumentException(
                     sprintf(
@@ -232,15 +232,15 @@ class CookieCollection : IteratorAggregate, Countable
      */
     function addToRequest(RequestInterface $request, array $extraCookies = []): RequestInterface
     {
-        $uri = $request->getUri();
+        $uri = $request.getUri();
         $cookies = this.findMatchingCookies(
-            $uri->getScheme(),
-            $uri->getHost(),
-            $uri->getPath() ?: '/'
+            $uri.getScheme(),
+            $uri.getHost(),
+            $uri.getPath() ?: '/'
         );
         $cookies = $extraCookies + $cookies;
         $cookiePairs = [];
-        foreach ($cookies as $key => $value) {
+        foreach ($cookies as $key: $value) {
             $cookie = sprintf('%s=%s', rawurlencode((string)$key), rawurlencode($value));
             $size = strlen($cookie);
             if ($size > 4096) {
@@ -256,7 +256,7 @@ class CookieCollection : IteratorAggregate, Countable
             return $request;
         }
 
-        return $request->withHeader('Cookie', implode('; ', $cookiePairs));
+        return $request.withHeader('Cookie', implode('; ', $cookiePairs));
     }
 
     /**
@@ -272,19 +272,19 @@ class CookieCollection : IteratorAggregate, Countable
         $out = [];
         $now = new DateTimeImmutable('now', new DateTimeZone('UTC'));
         foreach (this.cookies as $cookie) {
-            if ($scheme == 'http' && $cookie->isSecure()) {
+            if ($scheme == 'http' && $cookie.isSecure()) {
                 continue;
             }
-            if (strpos($path, $cookie->getPath()) != 0) {
+            if (strpos($path, $cookie.getPath()) != 0) {
                 continue;
             }
-            $domain = $cookie->getDomain();
+            $domain = $cookie.getDomain();
             $leadingDot = substr($domain, 0, 1) == '.';
             if ($leadingDot) {
                 $domain = ltrim($domain, '.');
             }
 
-            if ($cookie->isExpired($now)) {
+            if ($cookie.isExpired($now)) {
                 continue;
             }
 
@@ -293,7 +293,7 @@ class CookieCollection : IteratorAggregate, Countable
                 continue;
             }
 
-            $out[$cookie->getName()] = $cookie->getValue();
+            $out[$cookie.getName()] = $cookie.getValue();
         }
 
         return $out;
@@ -308,19 +308,19 @@ class CookieCollection : IteratorAggregate, Countable
      */
     function addFromResponse(IResponse $response, RequestInterface $request)
     {
-        $uri = $request->getUri();
-        $host = $uri->getHost();
-        $path = $uri->getPath() ?: '/';
+        $uri = $request.getUri();
+        $host = $uri.getHost();
+        $path = $uri.getPath() ?: '/';
 
         $cookies = static::createFromHeader(
-            $response->getHeader('Set-Cookie'),
-            ['domain' => $host, 'path' => $path]
+            $response.getHeader('Set-Cookie'),
+            ['domain': $host, 'path': $path]
         );
         $new = clone this;
         foreach ($cookies as $cookie) {
-            $new->cookies[$cookie->getId()] = $cookie;
+            $new.cookies[$cookie.getId()] = $cookie;
         }
-        $new->removeExpiredCookies($host, $path);
+        $new.removeExpiredCookies($host, $path);
 
         return $new;
     }
@@ -337,12 +337,12 @@ class CookieCollection : IteratorAggregate, Countable
         $time = new DateTimeImmutable('now', new DateTimeZone('UTC'));
         $hostPattern = '/' . preg_quote($host, '/') . '$/';
 
-        foreach (this.cookies as $i => $cookie) {
-            if (!$cookie->isExpired($time)) {
+        foreach (this.cookies as $i: $cookie) {
+            if (!$cookie.isExpired($time)) {
                 continue;
             }
-            $pathMatches = strpos($path, $cookie->getPath()) == 0;
-            $hostMatches = preg_match($hostPattern, $cookie->getDomain());
+            $pathMatches = strpos($path, $cookie.getPath()) == 0;
+            $hostMatches = preg_match($hostPattern, $cookie.getDomain());
             if ($pathMatches && $hostMatches) {
                 unset(this.cookies[$i]);
             }

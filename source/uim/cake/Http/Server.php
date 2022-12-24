@@ -61,8 +61,8 @@ class Server : EventDispatcherInterface
      *
      * This will invoke the following methods:
      *
-     * - App->bootstrap() - Perform any bootstrapping logic for your application here.
-     * - App->middleware() - Attach any application middleware here.
+     * - App.bootstrap() - Perform any bootstrapping logic for your application here.
+     * - App.middleware() - Attach any application middleware here.
      * - Trigger the 'Server.buildMiddleware' event. You can use this to modify the
      *   from event listeners.
      * - Run the middleware queue including the application.
@@ -80,17 +80,17 @@ class Server : EventDispatcherInterface
 
         $request = $request ?: ServerRequestFactory::fromGlobals();
 
-        $middleware = this.app->middleware($middlewareQueue ?? new MiddlewareQueue());
+        $middleware = this.app.middleware($middlewareQueue ?? new MiddlewareQueue());
         if (this.app instanceof IPluginApplication) {
-            $middleware = this.app->pluginMiddleware($middleware);
+            $middleware = this.app.pluginMiddleware($middleware);
         }
 
-        this.dispatchEvent('Server.buildMiddleware', ['middleware' => $middleware]);
+        this.dispatchEvent('Server.buildMiddleware', ['middleware': $middleware]);
 
-        $response = this.runner->run($middleware, $request, this.app);
+        $response = this.runner.run($middleware, $request, this.app);
 
         if ($request instanceof ServerRequest) {
-            $request->getSession()->close();
+            $request.getSession().close();
         }
 
         return $response;
@@ -106,9 +106,9 @@ class Server : EventDispatcherInterface
      */
     protected function bootstrap(): void
     {
-        this.app->bootstrap();
+        this.app.bootstrap();
         if (this.app instanceof IPluginApplication) {
-            this.app->pluginBootstrap();
+            this.app.pluginBootstrap();
         }
     }
 
@@ -125,7 +125,7 @@ class Server : EventDispatcherInterface
         if (!$emitter) {
             $emitter = new ResponseEmitter();
         }
-        $emitter->emit($response);
+        $emitter.emit($response);
     }
 
     /**
@@ -146,7 +146,7 @@ class Server : EventDispatcherInterface
     function getEventManager(): IEventManager
     {
         if (this.app instanceof EventDispatcherInterface) {
-            return this.app->getEventManager();
+            return this.app.getEventManager();
         }
 
         return EventManager::instance();
@@ -164,7 +164,7 @@ class Server : EventDispatcherInterface
     function setEventManager(IEventManager $eventManager)
     {
         if (this.app instanceof EventDispatcherInterface) {
-            this.app->setEventManager($eventManager);
+            this.app.setEventManager($eventManager);
 
             return this;
         }

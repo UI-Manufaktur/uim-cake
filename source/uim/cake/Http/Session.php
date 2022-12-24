@@ -137,38 +137,38 @@ class Session
     {
         $tmp = defined('TMP') ? TMP : sys_get_temp_dir() . DIRECTORY_SEPARATOR;
         $defaults = [
-            'php' => [
-                'ini' => [
-                    'session.use_trans_sid' => 0,
+            'php': [
+                'ini': [
+                    'session.use_trans_sid': 0,
                 ],
             ],
-            'cake' => [
-                'ini' => [
-                    'session.use_trans_sid' => 0,
-                    'session.serialize_handler' => 'php',
-                    'session.use_cookies' => 1,
-                    'session.save_path' => $tmp . 'sessions',
-                    'session.save_handler' => 'files',
+            'cake': [
+                'ini': [
+                    'session.use_trans_sid': 0,
+                    'session.serialize_handler': 'php',
+                    'session.use_cookies': 1,
+                    'session.save_path': $tmp . 'sessions',
+                    'session.save_handler': 'files',
                 ],
             ],
-            'cache' => [
-                'ini' => [
-                    'session.use_trans_sid' => 0,
-                    'session.use_cookies' => 1,
+            'cache': [
+                'ini': [
+                    'session.use_trans_sid': 0,
+                    'session.use_cookies': 1,
                 ],
-                'handler' => [
-                    'engine' => 'CacheSession',
-                    'config' => 'default',
+                'handler': [
+                    'engine': 'CacheSession',
+                    'config': 'default',
                 ],
             ],
-            'database' => [
-                'ini' => [
-                    'session.use_trans_sid' => 0,
-                    'session.use_cookies' => 1,
-                    'session.serialize_handler' => 'php',
+            'database': [
+                'ini': [
+                    'session.use_trans_sid': 0,
+                    'session.use_cookies': 1,
+                    'session.serialize_handler': 'php',
                 ],
-                'handler' => [
-                    'engine' => 'DatabaseSession',
+                'handler': [
+                    'engine': 'DatabaseSession',
                 ],
             ],
         ];
@@ -206,10 +206,10 @@ class Session
     public this(array $config = [])
     {
         $config += [
-            'timeout' => null,
-            'cookie' => null,
-            'ini' => [],
-            'handler' => [],
+            'timeout': null,
+            'cookie': null,
+            'ini': [],
+            'handler': [],
         ];
 
         if ($config['timeout']) {
@@ -297,7 +297,7 @@ class Session
      * ### Example:
      *
      * ```
-     * $session->options(['session.use_cookies' => 1]);
+     * $session.options(['session.use_cookies': 1]);
      * ```
      *
      * @param array<string, mixed> $options Ini options to set.
@@ -310,7 +310,7 @@ class Session
             return;
         }
 
-        foreach ($options as $setting => $value) {
+        foreach ($options as $setting: $value) {
             if (ini_set($setting, (string)$value) == false) {
                 throw new RuntimeException(
                     sprintf('Unable to configure the session, setting %s failed.', $setting)
@@ -496,11 +496,11 @@ class Session
         }
 
         if (!is_array($name)) {
-            $name = [$name => $value];
+            $name = [$name: $value];
         }
 
         $data = $_SESSION ?? [];
-        foreach ($name as $key => $val) {
+        foreach ($name as $key: $val) {
             $data = Hash::insert($data, $key, $val);
         }
 
@@ -548,19 +548,19 @@ class Session
     /**
      * Used to write new data to _SESSION, since PHP doesn't like us setting the _SESSION var itself.
      *
-     * @param array $old Set of old variables => values
-     * @param array $new New set of variable => value
+     * @param array $old Set of old variables: values
+     * @param array $new New set of variable: value
      * @return void
      */
     protected function _overwrite(array &$old, array $new): void
     {
-        foreach ($old as $key => $var) {
+        foreach ($old as $key: $var) {
             if (!isset($new[$key])) {
                 unset($old[$key]);
             }
         }
 
-        foreach ($new as $key => $var) {
+        foreach ($new as $key: $var) {
             $old[$key] = $var;
         }
     }

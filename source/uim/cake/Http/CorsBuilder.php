@@ -90,8 +90,8 @@ class CorsBuilder
         }
 
         if (isset(_headers['Access-Control-Allow-Origin'])) {
-            foreach (_headers as $key => $value) {
-                $response = $response->withHeader($key, $value);
+            foreach (_headers as $key: $value) {
+                $response = $response.withHeader($key, $value);
             }
         }
 
@@ -133,7 +133,7 @@ class CorsBuilder
         $result = [];
         foreach ($domains as $domain) {
             if ($domain == '*') {
-                $result[] = ['preg' => '@.@', 'original' => '*'];
+                $result[] = ['preg': '@.@', 'original': '*'];
                 continue;
             }
 
