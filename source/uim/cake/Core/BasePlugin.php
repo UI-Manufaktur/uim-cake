@@ -109,16 +109,16 @@ class BasePlugin implements PluginInterface
     {
         foreach (static::VALID_HOOKS as $key) {
             if (isset($options[$key])) {
-                this->{"{$key}Enabled"} = (bool)$options[$key];
+                this.{"{$key}Enabled"} = (bool)$options[$key];
             }
         }
         foreach (['name', 'path', 'classPath', 'configPath', 'templatePath'] as $path) {
             if (isset($options[$path])) {
-                this->{$path} = $options[$path];
+                this.{$path} = $options[$path];
             }
         }
 
-        this->initialize();
+        this.initialize();
     }
 
     /**
@@ -135,14 +135,14 @@ class BasePlugin implements PluginInterface
      */
     function getName(): string
     {
-        if (this->name) {
-            return this->name;
+        if (this.name) {
+            return this.name;
         }
         $parts = explode('\\', static::class);
         array_pop($parts);
-        this->name = implode('/', $parts);
+        this.name = implode('/', $parts);
 
-        return this->name;
+        return this.name;
     }
 
     /**
@@ -150,8 +150,8 @@ class BasePlugin implements PluginInterface
      */
     function getPath(): string
     {
-        if (this->path) {
-            return this->path;
+        if (this.path) {
+            return this.path;
         }
         $reflection = new ReflectionClass(this);
         $path = dirname($reflection->getFileName());
@@ -160,9 +160,9 @@ class BasePlugin implements PluginInterface
         if (substr($path, -3) == 'src') {
             $path = substr($path, 0, -3);
         }
-        this->path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        this.path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
-        return this->path;
+        return this.path;
     }
 
     /**
@@ -170,10 +170,10 @@ class BasePlugin implements PluginInterface
      */
     function getConfigPath(): string
     {
-        if (this->configPath) {
-            return this->configPath;
+        if (this.configPath) {
+            return this.configPath;
         }
-        $path = this->getPath();
+        $path = this.getPath();
 
         return $path . 'config' . DIRECTORY_SEPARATOR;
     }
@@ -183,10 +183,10 @@ class BasePlugin implements PluginInterface
      */
     function getClassPath(): string
     {
-        if (this->classPath) {
-            return this->classPath;
+        if (this.classPath) {
+            return this.classPath;
         }
-        $path = this->getPath();
+        $path = this.getPath();
 
         return $path . 'src' . DIRECTORY_SEPARATOR;
     }
@@ -196,12 +196,12 @@ class BasePlugin implements PluginInterface
      */
     function getTemplatePath(): string
     {
-        if (this->templatePath) {
-            return this->templatePath;
+        if (this.templatePath) {
+            return this.templatePath;
         }
-        $path = this->getPath();
+        $path = this.getPath();
 
-        return this->templatePath = $path . 'templates' . DIRECTORY_SEPARATOR;
+        return this.templatePath = $path . 'templates' . DIRECTORY_SEPARATOR;
     }
 
     /**
@@ -209,8 +209,8 @@ class BasePlugin implements PluginInterface
      */
     function enable(string $hook)
     {
-        this->checkHook($hook);
-        this->{"{$hook}Enabled}"} = true;
+        this.checkHook($hook);
+        this.{"{$hook}Enabled}"} = true;
 
         return this;
     }
@@ -220,8 +220,8 @@ class BasePlugin implements PluginInterface
      */
     function disable(string $hook)
     {
-        this->checkHook($hook);
-        this->{"{$hook}Enabled"} = false;
+        this.checkHook($hook);
+        this.{"{$hook}Enabled"} = false;
 
         return this;
     }
@@ -231,9 +231,9 @@ class BasePlugin implements PluginInterface
      */
     function isEnabled(string $hook): bool
     {
-        this->checkHook($hook);
+        this.checkHook($hook);
 
-        return this->{"{$hook}Enabled"} == true;
+        return this.{"{$hook}Enabled"} == true;
     }
 
     /**
@@ -257,7 +257,7 @@ class BasePlugin implements PluginInterface
      */
     function routes(RouteBuilder $routes): void
     {
-        $path = this->getConfigPath() . 'routes.php';
+        $path = this.getConfigPath() . 'routes.php';
         if (is_file($path)) {
             $return = require $path;
             if ($return instanceof Closure) {
@@ -271,7 +271,7 @@ class BasePlugin implements PluginInterface
      */
     function bootstrap(IPluginApplication $app): void
     {
-        $bootstrap = this->getConfigPath() . 'bootstrap.php';
+        $bootstrap = this.getConfigPath() . 'bootstrap.php';
         if (is_file($bootstrap)) {
             require $bootstrap;
         }
@@ -282,7 +282,7 @@ class BasePlugin implements PluginInterface
      */
     function console(CommandCollection $commands): CommandCollection
     {
-        return $commands->addMany($commands->discoverPlugin(this->getName()));
+        return $commands->addMany($commands->discoverPlugin(this.getName()));
     }
 
     /**

@@ -52,7 +52,7 @@ class ClosureDecoratorMiddleware implements IMiddleware
      */
     public this(Closure $callable)
     {
-        this->callable = $callable;
+        this.callable = $callable;
     }
 
     /**
@@ -64,7 +64,7 @@ class ClosureDecoratorMiddleware implements IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        return (this->callable)(
+        return (this.callable)(
             $request,
             $handler
         );
@@ -76,6 +76,6 @@ class ClosureDecoratorMiddleware implements IMiddleware
      */
     function getCallable(): callable
     {
-        return this->callable;
+        return this.callable;
     }
 }

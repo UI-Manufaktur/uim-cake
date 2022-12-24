@@ -83,9 +83,9 @@ class Event implements EventInterface
      */
     public this(string $name, $subject = null, $data = null)
     {
-        this->_name = $name;
-        this->_subject = $subject;
-        this->_data = (array)$data;
+        this._name = $name;
+        this._subject = $subject;
+        this._data = (array)$data;
     }
 
     /**
@@ -95,7 +95,7 @@ class Event implements EventInterface
      */
     function getName(): string
     {
-        return this->_name;
+        return this._name;
     }
 
     /**
@@ -109,11 +109,11 @@ class Event implements EventInterface
      */
     function getSubject()
     {
-        if (this->_subject == null) {
+        if (this._subject == null) {
             throw new CakeException('No subject set for this event');
         }
 
-        return this->_subject;
+        return this._subject;
     }
 
     /**
@@ -123,7 +123,7 @@ class Event implements EventInterface
      */
     function stopPropagation(): void
     {
-        this->_stopped = true;
+        this._stopped = true;
     }
 
     /**
@@ -133,7 +133,7 @@ class Event implements EventInterface
      */
     function isStopped(): bool
     {
-        return this->_stopped;
+        return this._stopped;
     }
 
     /**
@@ -143,7 +143,7 @@ class Event implements EventInterface
      */
     function getResult()
     {
-        return this->result;
+        return this.result;
     }
 
     /**
@@ -154,7 +154,7 @@ class Event implements EventInterface
      */
     function setResult($value = null)
     {
-        this->result = $value;
+        this.result = $value;
 
         return this;
     }
@@ -169,10 +169,10 @@ class Event implements EventInterface
     function getData(?string $key = null)
     {
         if ($key != null) {
-            return this->_data[$key] ?? null;
+            return this._data[$key] ?? null;
         }
 
-        return this->_data;
+        return this._data;
     }
 
     /**
@@ -185,9 +185,9 @@ class Event implements EventInterface
     function setData($key, $value = null)
     {
         if (is_array($key)) {
-            this->_data = $key;
+            this._data = $key;
         } else {
-            this->_data[$key] = $value;
+            this._data[$key] = $value;
         }
 
         return this;

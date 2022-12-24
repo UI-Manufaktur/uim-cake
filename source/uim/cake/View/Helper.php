@@ -81,14 +81,14 @@ class Helper implements EventListenerInterface
      */
     public this(View $view, array $config = [])
     {
-        this->_View = $view;
-        this->setConfig($config);
+        this._View = $view;
+        this.setConfig($config);
 
-        if (!empty(this->helpers)) {
-            this->_helperMap = $view->helpers()->normalizeArray(this->helpers);
+        if (!empty(this.helpers)) {
+            this._helperMap = $view->helpers()->normalizeArray(this.helpers);
         }
 
-        this->initialize($config);
+        this.initialize($config);
     }
 
     /**
@@ -111,11 +111,11 @@ class Helper implements EventListenerInterface
      */
     function __get(string $name)
     {
-        if (isset(this->_helperMap[$name]) && !isset(this->{$name})) {
-            $config = ['enabled' => false] + (array)this->_helperMap[$name]['config'];
-            this->{$name} = this->_View->loadHelper(this->_helperMap[$name]['class'], $config);
+        if (isset(this._helperMap[$name]) && !isset(this.{$name})) {
+            $config = ['enabled' => false] + (array)this._helperMap[$name]['config'];
+            this.{$name} = this._View->loadHelper(this._helperMap[$name]['class'], $config);
 
-            return this->{$name};
+            return this.{$name};
         }
     }
 
@@ -126,7 +126,7 @@ class Helper implements EventListenerInterface
      */
     function getView(): View
     {
-        return this->_View;
+        return this._View;
     }
 
     /**
@@ -214,9 +214,9 @@ class Helper implements EventListenerInterface
     function __debugInfo(): array
     {
         return [
-            'helpers' => this->helpers,
-            'implementedEvents' => this->implementedEvents(),
-            '_config' => this->getConfig(),
+            'helpers' => this.helpers,
+            'implementedEvents' => this.implementedEvents(),
+            '_config' => this.getConfig(),
         ];
     }
 }

@@ -39,9 +39,9 @@ class MailContains extends MailConstraintBase
     function matches($other): bool
     {
         $other = preg_quote($other, '/');
-        $messages = this->getMessages();
+        $messages = this.getMessages();
         foreach ($messages as $message) {
-            $method = this->getTypeMethod();
+            $method = this.getTypeMethod();
             $message = $message->$method();
 
             if (preg_match("/$other/", $message) > 0) {
@@ -57,25 +57,25 @@ class MailContains extends MailConstraintBase
      */
     protected function getTypeMethod(): string
     {
-        return 'getBody' . (this->type ? ucfirst(this->type) : 'String');
+        return 'getBody' . (this.type ? ucfirst(this.type) : 'String');
     }
 
     /**
      * Returns the type-dependent strings of all messages
-     * respects this->at
+     * respects this.at
      *
      * @return string
      */
     protected function getAssertedMessages(): string
     {
         $messageMembers = [];
-        $messages = this->getMessages();
+        $messages = this.getMessages();
         foreach ($messages as $message) {
-            $method = this->getTypeMethod();
+            $method = this.getTypeMethod();
             $messageMembers[] = $message->$method();
         }
-        if (this->at && isset($messageMembers[this->at - 1])) {
-            $messageMembers = [$messageMembers[this->at - 1]];
+        if (this.at && isset($messageMembers[this.at - 1])) {
+            $messageMembers = [$messageMembers[this.at - 1]];
         }
         $result = implode(PHP_EOL, $messageMembers);
 
@@ -89,10 +89,10 @@ class MailContains extends MailConstraintBase
      */
     function toString(): string
     {
-        if (this->at) {
-            return sprintf('is in email #%d', this->at) . this->getAssertedMessages();
+        if (this.at) {
+            return sprintf('is in email #%d', this.at) . this.getAssertedMessages();
         }
 
-        return 'is in an email' . this->getAssertedMessages();
+        return 'is in an email' . this.getAssertedMessages();
     }
 }

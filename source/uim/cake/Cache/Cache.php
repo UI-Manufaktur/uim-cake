@@ -570,7 +570,7 @@ class Cache
      *
      * ```
      * $results = Cache::remember('all_articles', function () {
-     *      return this->find('all')->toArray();
+     *      return this.find('all')->toArray();
      * });
      * ```
      *

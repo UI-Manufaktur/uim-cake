@@ -49,11 +49,11 @@ trait MergeVariablesTrait
             if (!property_exists(this, $property)) {
                 continue;
             }
-            thisValue = this->{$property};
+            thisValue = this.{$property};
             if (thisValue == null || thisValue == false) {
                 continue;
             }
-            this->_mergeProperty($property, $parents, $options);
+            this._mergeProperty($property, $parents, $options);
         }
     }
 
@@ -67,7 +67,7 @@ trait MergeVariablesTrait
      */
     protected function _mergeProperty(string $property, array $parentClasses, array $options): void
     {
-        thisValue = this->{$property};
+        thisValue = this.{$property};
         $isAssoc = false;
         if (
             isset($options['associative']) &&
@@ -88,9 +88,9 @@ trait MergeVariablesTrait
             if (!is_array($parentProperty)) {
                 continue;
             }
-            thisValue = this->_mergePropertyData(thisValue, $parentProperty, $isAssoc);
+            thisValue = this._mergePropertyData(thisValue, $parentProperty, $isAssoc);
         }
-        this->{$property} = thisValue;
+        this.{$property} = thisValue;
     }
 
     /**

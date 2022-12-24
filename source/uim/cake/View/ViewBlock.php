@@ -87,10 +87,10 @@ class ViewBlock
      */
     function start(string $name, string $mode = ViewBlock::OVERRIDE): void
     {
-        if (array_key_exists($name, this->_active)) {
+        if (array_key_exists($name, this._active)) {
             throw new CakeException(sprintf("A view block with the name '%s' is already/still open.", $name));
         }
-        this->_active[$name] = $mode;
+        this._active[$name] = $mode;
         ob_start();
     }
 
@@ -102,26 +102,26 @@ class ViewBlock
      */
     function end(): void
     {
-        if (this->_discardActiveBufferOnEnd) {
-            this->_discardActiveBufferOnEnd = false;
+        if (this._discardActiveBufferOnEnd) {
+            this._discardActiveBufferOnEnd = false;
             ob_end_clean();
 
             return;
         }
 
-        if (!this->_active) {
+        if (!this._active) {
             return;
         }
 
-        $mode = end(this->_active);
-        $active = key(this->_active);
+        $mode = end(this._active);
+        $active = key(this._active);
         $content = ob_get_clean();
         if ($mode == ViewBlock::OVERRIDE) {
-            this->_blocks[$active] = (string)$content;
+            this._blocks[$active] = (string)$content;
         } else {
-            this->concat($active, $content, $mode);
+            this.concat($active, $content, $mode);
         }
-        array_pop(this->_active);
+        array_pop(this._active);
     }
 
     /**
@@ -142,18 +142,18 @@ class ViewBlock
     function concat(string $name, $value = null, $mode = ViewBlock::APPEND): void
     {
         if ($value == null) {
-            this->start($name, $mode);
+            this.start($name, $mode);
 
             return;
         }
 
-        if (!isset(this->_blocks[$name])) {
-            this->_blocks[$name] = '';
+        if (!isset(this._blocks[$name])) {
+            this._blocks[$name] = '';
         }
         if ($mode == ViewBlock::PREPEND) {
-            this->_blocks[$name] = $value . this->_blocks[$name];
+            this._blocks[$name] = $value . this._blocks[$name];
         } else {
-            this->_blocks[$name] .= $value;
+            this._blocks[$name] .= $value;
         }
     }
 
@@ -168,7 +168,7 @@ class ViewBlock
      */
     function set(string $name, $value): void
     {
-        this->_blocks[$name] = (string)$value;
+        this._blocks[$name] = (string)$value;
     }
 
     /**
@@ -180,7 +180,7 @@ class ViewBlock
      */
     function get(string $name, string $default = ''): string
     {
-        return this->_blocks[$name] ?? $default;
+        return this._blocks[$name] ?? $default;
     }
 
     /**
@@ -191,7 +191,7 @@ class ViewBlock
      */
     function exists(string $name): bool
     {
-        return isset(this->_blocks[$name]);
+        return isset(this._blocks[$name]);
     }
 
     /**
@@ -201,7 +201,7 @@ class ViewBlock
      */
     function keys(): array
     {
-        return array_keys(this->_blocks);
+        return array_keys(this._blocks);
     }
 
     /**
@@ -211,9 +211,9 @@ class ViewBlock
      */
     function active(): ?string
     {
-        end(this->_active);
+        end(this._active);
 
-        return key(this->_active);
+        return key(this._active);
     }
 
     /**
@@ -223,6 +223,6 @@ class ViewBlock
      */
     function unclosed(): array
     {
-        return this->_active;
+        return this._active;
     }
 }

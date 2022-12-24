@@ -37,14 +37,14 @@ abstract class StatusCodeBase extends ResponseBase
     function matches($other): bool
     {
         if (!$other) {
-            $other = this->code;
+            $other = this.code;
         }
 
         if (is_array($other)) {
-            return this->statusCodeBetween($other[0], $other[1]);
+            return this.statusCodeBetween($other[0], $other[1]);
         }
 
-        return this->response->getStatusCode() == $other;
+        return this.response->getStatusCode() == $other;
     }
 
     /**
@@ -56,7 +56,7 @@ abstract class StatusCodeBase extends ResponseBase
      */
     protected function statusCodeBetween(int $min, int $max): bool
     {
-        return this->response->getStatusCode() >= $min && this->response->getStatusCode() <= $max;
+        return this.response->getStatusCode() >= $min && this.response->getStatusCode() <= $max;
     }
 
     /**
@@ -68,6 +68,6 @@ abstract class StatusCodeBase extends ResponseBase
     protected function failureDescription($other): string
     {
         /** @psalm-suppress InternalMethod */
-        return this->toString();
+        return this.toString();
     }
 }

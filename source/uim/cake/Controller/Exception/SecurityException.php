@@ -42,7 +42,7 @@ class SecurityException extends BadRequestException
      */
     function getType(): string
     {
-        return this->_type;
+        return this._type;
     }
 
     /**
@@ -53,7 +53,7 @@ class SecurityException extends BadRequestException
      */
     function setMessage(string $message): void
     {
-        this->message = $message;
+        this.message = $message;
     }
 
     /**
@@ -64,7 +64,7 @@ class SecurityException extends BadRequestException
      */
     function setReason(?string $reason = null)
     {
-        this->_reason = $reason;
+        this._reason = $reason;
 
         return this;
     }
@@ -76,6 +76,6 @@ class SecurityException extends BadRequestException
      */
     function getReason(): ?string
     {
-        return this->_reason;
+        return this._reason;
     }
 }

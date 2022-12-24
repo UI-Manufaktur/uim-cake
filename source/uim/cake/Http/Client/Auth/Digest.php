@@ -41,7 +41,7 @@ class Digest
      */
     public this(Client $client, ?array $options = null)
     {
-        this->_client = $client;
+        this._client = $client;
     }
 
     /**
@@ -58,12 +58,12 @@ class Digest
             return $request;
         }
         if (!isset($credentials['realm'])) {
-            $credentials = this->_getServerInfo($request, $credentials);
+            $credentials = this._getServerInfo($request, $credentials);
         }
         if (!isset($credentials['realm'])) {
             return $request;
         }
-        $value = this->_generateHeader($request, $credentials);
+        $value = this._generateHeader($request, $credentials);
 
         return $request->withHeader('Authorization', $value);
     }
@@ -81,7 +81,7 @@ class Digest
      */
     protected function _getServerInfo(Request $request, array $credentials): array
     {
-        $response = this->_client->get(
+        $response = this._client->get(
             (string)$request->getUri(),
             [],
             ['auth' => ['type' => null]]

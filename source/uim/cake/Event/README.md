@@ -25,11 +25,11 @@ class Orders
 
 	function placeOrder($order)
 	{
-		this->doStuff();
+		this.doStuff();
 		$event = new Event('Orders.afterPlace', this, [
 			'order' => $order
 		]);
-		this->getEventManager()->dispatch($event);
+		this.getEventManager()->dispatch($event);
 	}
 }
 

@@ -54,8 +54,8 @@ class CookieEncryptedEquals extends CookieEquals
     {
         parent::__construct($response, $cookieName);
 
-        this->key = $key;
-        this->mode = $mode;
+        this.key = $key;
+        this.mode = $mode;
     }
 
     /**
@@ -66,9 +66,9 @@ class CookieEncryptedEquals extends CookieEquals
      */
     function matches($other): bool
     {
-        $cookie = this->response->getCookie(this->cookieName);
+        $cookie = this.response->getCookie(this.cookieName);
 
-        return $cookie != null && this->_decrypt($cookie['value'], this->mode) == $other;
+        return $cookie != null && this._decrypt($cookie['value'], this.mode) == $other;
     }
 
     /**
@@ -78,7 +78,7 @@ class CookieEncryptedEquals extends CookieEquals
      */
     function toString(): string
     {
-        return sprintf('is encrypted in cookie \'%s\'', this->cookieName);
+        return sprintf('is encrypted in cookie \'%s\'', this.cookieName);
     }
 
     /**
@@ -88,6 +88,6 @@ class CookieEncryptedEquals extends CookieEquals
      */
     protected function _getCookieEncryptionKey(): string
     {
-        return this->key;
+        return this.key;
     }
 }

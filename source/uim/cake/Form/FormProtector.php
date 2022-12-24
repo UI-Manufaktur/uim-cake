@@ -63,15 +63,15 @@ class FormProtector
      */
     function validate($formData, string $url, string $sessionId): bool
     {
-        this->debugMessage = null;
+        this.debugMessage = null;
 
-        $extractedToken = this->extractToken($formData);
+        $extractedToken = this.extractToken($formData);
         if (empty($extractedToken)) {
             return false;
         }
 
-        $hashParts = this->extractHashParts($formData);
-        $generatedToken = this->generateHash(
+        $hashParts = this.extractHashParts($formData);
+        $generatedToken = this.generateHash(
             $hashParts['fields'],
             $hashParts['unlockedFields'],
             $url,
@@ -83,9 +83,9 @@ class FormProtector
         }
 
         if (Configure::read('debug')) {
-            $debugMessage = this->debugTokenNotMatching($formData, $hashParts + compact('url', 'sessionId'));
+            $debugMessage = this.debugTokenNotMatching($formData, $hashParts + compact('url', 'sessionId'));
             if ($debugMessage) {
-                this->debugMessage = $debugMessage;
+                this.debugMessage = $debugMessage;
             }
         }
 
@@ -100,7 +100,7 @@ class FormProtector
     public this(array $data = [])
     {
         if (!empty($data['unlockedFields'])) {
-            this->unlockedFields = $data['unlockedFields'];
+            this.unlockedFields = $data['unlockedFields'];
         }
     }
 
@@ -117,14 +117,14 @@ class FormProtector
     function addField($field, bool $lock = true, $value = null)
     {
         if (is_string($field)) {
-            $field = this->getFieldNameArray($field);
+            $field = this.getFieldNameArray($field);
         }
 
         if (empty($field)) {
             return this;
         }
 
-        foreach (this->unlockedFields as $unlockField) {
+        foreach (this.unlockedFields as $unlockField) {
             $unlockParts = explode('.', $unlockField);
             if (array_values(array_intersect($field, $unlockParts)) == $unlockParts) {
                 return this;
@@ -135,19 +135,19 @@ class FormProtector
         $field = preg_replace('/(\.\d+)+$/', '', $field);
 
         if ($lock) {
-            if (!in_array($field, this->fields, true)) {
+            if (!in_array($field, this.fields, true)) {
                 if ($value != null) {
-                    this->fields[$field] = $value;
+                    this.fields[$field] = $value;
 
                     return this;
                 }
-                if (isset(this->fields[$field])) {
-                    unset(this->fields[$field]);
+                if (isset(this.fields[$field])) {
+                    unset(this.fields[$field]);
                 }
-                this->fields[] = $field;
+                this.fields[] = $field;
             }
         } else {
-            this->unlockField($field);
+            this.unlockField($field);
         }
 
         return this;
@@ -189,15 +189,15 @@ class FormProtector
      */
     function unlockField($name)
     {
-        if (!in_array($name, this->unlockedFields, true)) {
-            this->unlockedFields[] = $name;
+        if (!in_array($name, this.unlockedFields, true)) {
+            this.unlockedFields[] = $name;
         }
 
-        $index = array_search($name, this->fields, true);
+        $index = array_search($name, this.fields, true);
         if ($index != false) {
-            unset(this->fields[$index]);
+            unset(this.fields[$index]);
         }
-        unset(this->fields[$name]);
+        unset(this.fields[$name]);
 
         return this;
     }
@@ -209,7 +209,7 @@ class FormProtector
      */
     function getError(): ?string
     {
-        return this->debugMessage;
+        return this.debugMessage;
     }
 
     /**
@@ -221,39 +221,39 @@ class FormProtector
     protected function extractToken($formData): ?string
     {
         if (!is_array($formData)) {
-            this->debugMessage = 'Request data is not an array.';
+            this.debugMessage = 'Request data is not an array.';
 
             return null;
         }
 
         $message = '`%s` was not found in request data.';
         if (!isset($formData['_Token'])) {
-            this->debugMessage = sprintf($message, '_Token');
+            this.debugMessage = sprintf($message, '_Token');
 
             return null;
         }
         if (!isset($formData['_Token']['fields'])) {
-            this->debugMessage = sprintf($message, '_Token.fields');
+            this.debugMessage = sprintf($message, '_Token.fields');
 
             return null;
         }
         if (!is_string($formData['_Token']['fields'])) {
-            this->debugMessage = '`_Token.fields` is invalid.';
+            this.debugMessage = '`_Token.fields` is invalid.';
 
             return null;
         }
         if (!isset($formData['_Token']['unlocked'])) {
-            this->debugMessage = sprintf($message, '_Token.unlocked');
+            this.debugMessage = sprintf($message, '_Token.unlocked');
 
             return null;
         }
         if (Configure::read('debug') && !isset($formData['_Token']['debug'])) {
-            this->debugMessage = sprintf($message, '_Token.debug');
+            this.debugMessage = sprintf($message, '_Token.debug');
 
             return null;
         }
         if (!Configure::read('debug') && isset($formData['_Token']['debug'])) {
-            this->debugMessage = 'Unexpected `_Token.debug` found in request data';
+            this.debugMessage = 'Unexpected `_Token.debug` found in request data';
 
             return null;
         }
@@ -275,8 +275,8 @@ class FormProtector
      */
     protected function extractHashParts(array $formData): array
     {
-        $fields = this->extractFields($formData);
-        $unlockedFields = this->sortedUnlockedFields($formData);
+        $fields = this.extractFields($formData);
+        $unlockedFields = this.sortedUnlockedFields($formData);
 
         return [
             'fields' => $fields,
@@ -323,7 +323,7 @@ class FormProtector
 
         $unlockedFields = array_unique(
             array_merge(
-                this->unlockedFields,
+                this.unlockedFields,
                 $unlocked
             )
         );
@@ -385,8 +385,8 @@ class FormProtector
      */
     function buildTokenData(string $url = '', string $sessionId = ''): array
     {
-        $fields = this->fields;
-        $unlockedFields = this->unlockedFields;
+        $fields = this.fields;
+        $unlockedFields = this.unlockedFields;
 
         $locked = [];
         foreach ($fields as $key => $value) {
@@ -404,7 +404,7 @@ class FormProtector
         ksort($locked, SORT_STRING);
         $fields += $locked;
 
-        $fields = this->generateHash($fields, $unlockedFields, $url, $sessionId);
+        $fields = this.generateHash($fields, $unlockedFields, $url, $sessionId);
         $locked = implode('|', array_keys($locked));
 
         return [
@@ -412,8 +412,8 @@ class FormProtector
             'unlocked' => urlencode(implode('|', $unlockedFields)),
             'debug' => urlencode(json_encode([
                 $url,
-                this->fields,
-                this->unlockedFields,
+                this.fields,
+                this.unlockedFields,
             ])),
         ];
     }
@@ -464,7 +464,7 @@ class FormProtector
         }
         $expectedFields = Hash::get($expectedParts, 1);
         $dataFields = Hash::get($hashParts, 'fields') ?: [];
-        $fieldsMessages = this->debugCheckFields(
+        $fieldsMessages = this.debugCheckFields(
             (array)$dataFields,
             $expectedFields,
             'Unexpected field `%s` in POST data',
@@ -473,7 +473,7 @@ class FormProtector
         );
         $expectedUnlockedFields = Hash::get($expectedParts, 2);
         $dataUnlockedFields = Hash::get($hashParts, 'unlockedFields') ?: [];
-        $unlockFieldsMessages = this->debugCheckFields(
+        $unlockFieldsMessages = this.debugCheckFields(
             (array)$dataUnlockedFields,
             $expectedUnlockedFields,
             'Unexpected unlocked field `%s` in POST data',
@@ -504,8 +504,8 @@ class FormProtector
         string $stringKeyMessage = '',
         string $missingMessage = ''
     ): array {
-        $messages = this->matchExistingFields($dataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
-        $expectedFieldsMessage = this->debugExpectedFields($expectedFields, $missingMessage);
+        $messages = this.matchExistingFields($dataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
+        $expectedFieldsMessage = this.debugExpectedFields($expectedFields, $missingMessage);
         if ($expectedFieldsMessage != null) {
             $messages[] = $expectedFieldsMessage;
         }
@@ -583,9 +583,9 @@ class FormProtector
     function __debugInfo(): array
     {
         return [
-            'fields' => this->fields,
-            'unlockedFields' => this->unlockedFields,
-            'debugMessage' => this->debugMessage,
+            'fields' => this.fields,
+            'unlockedFields' => this.unlockedFields,
+            'debugMessage' => this.debugMessage,
         ];
     }
 }

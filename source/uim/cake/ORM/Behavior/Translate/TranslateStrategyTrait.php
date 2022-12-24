@@ -56,7 +56,7 @@ trait TranslateStrategyTrait
      */
     function getTranslationTable(): Table
     {
-        return this->translationTable;
+        return this.translationTable;
     }
 
     /**
@@ -76,7 +76,7 @@ trait TranslateStrategyTrait
      */
     function setLocale(?string $locale)
     {
-        this->locale = $locale;
+        this.locale = $locale;
 
         return this;
     }
@@ -93,13 +93,13 @@ trait TranslateStrategyTrait
      */
     function getLocale(): string
     {
-        return this->locale ?: I18n::getLocale();
+        return this.locale ?: I18n::getLocale();
     }
 
     /**
      * Unset empty translations to avoid persistence.
      *
-     * Should only be called if this->_config['allowEmptyTranslations'] is false.
+     * Should only be called if this._config['allowEmptyTranslations'] is false.
      *
      * @param \Cake\Datasource\EntityInterface $entity The entity to check for empty translations fields inside.
      * @return void
@@ -109,14 +109,14 @@ trait TranslateStrategyTrait
         /** @var array<\Cake\ORM\Entity> $translations */
         $translations = (array)$entity->get('_translations');
         foreach ($translations as $locale => $translation) {
-            $fields = $translation->extract(this->_config['fields'], false);
+            $fields = $translation->extract(this._config['fields'], false);
             foreach ($fields as $field => $value) {
                 if ($value == null || $value == '') {
                     $translation->unset($field);
                 }
             }
 
-            $translation = $translation->extract(this->_config['fields']);
+            $translation = $translation->extract(this._config['fields']);
 
             // If now, the current locale property is empty,
             // unset it completely.
@@ -162,11 +162,11 @@ trait TranslateStrategyTrait
                     $translations = [];
                 }
 
-                $options['validate'] = this->_config['validator'];
+                $options['validate'] = this._config['validator'];
                 $errors = [];
                 foreach ($value as $language => $fields) {
                     if (!isset($translations[$language])) {
-                        $translations[$language] = this->table->newEmptyEntity();
+                        $translations[$language] = this.table->newEmptyEntity();
                     }
                     $marshaller->merge($translations[$language], $fields, $options);
 

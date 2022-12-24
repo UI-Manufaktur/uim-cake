@@ -43,8 +43,8 @@ abstract class AbstractDecorator
      */
     public this(callable $callable, array $options = [])
     {
-        this->_callable = $callable;
-        this->_options = $options;
+        this._callable = $callable;
+        this._options = $options;
     }
 
     /**
@@ -55,7 +55,7 @@ abstract class AbstractDecorator
      */
     function __invoke()
     {
-        return this->_call(func_get_args());
+        return this._call(func_get_args());
     }
 
     /**
@@ -66,7 +66,7 @@ abstract class AbstractDecorator
      */
     protected function _call(array $args)
     {
-        $callable = this->_callable;
+        $callable = this._callable;
 
         return $callable(...$args);
     }

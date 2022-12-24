@@ -131,7 +131,7 @@ class ConnectionHelper
             return $collection->describe($table);
         }, $tables);
 
-        this->runWithoutConstraints($connection, function (Connection $connection) use ($schemas): void {
+        this.runWithoutConstraints($connection, function (Connection $connection) use ($schemas): void {
             $dialect = $connection->getDriver()->schemaDialect();
             /** @var \Cake\Database\Schema\TableSchema $schema */
             foreach ($schemas as $schema) {

@@ -50,8 +50,8 @@ class DebugContext
      */
     public this(int $maxDepth)
     {
-        this->maxDepth = $maxDepth;
-        this->refs = new SplObjectStorage();
+        this.maxDepth = $maxDepth;
+        this.refs = new SplObjectStorage();
     }
 
     /**
@@ -74,7 +74,7 @@ class DebugContext
      */
     function remainingDepth(): int
     {
-        return this->maxDepth - this->depth;
+        return this.maxDepth - this.depth;
     }
 
     /**
@@ -88,11 +88,11 @@ class DebugContext
      */
     function getReferenceId(object $object): int
     {
-        if (this->refs->contains($object)) {
-            return this->refs[$object];
+        if (this.refs->contains($object)) {
+            return this.refs[$object];
         }
-        $refId = this->refs->count();
-        this->refs->attach($object, $refId);
+        $refId = this.refs->count();
+        this.refs->attach($object, $refId);
 
         return $refId;
     }
@@ -105,6 +105,6 @@ class DebugContext
      */
     function hasReference(object $object): bool
     {
-        return this->refs->contains($object);
+        return this.refs->contains($object);
     }
 }

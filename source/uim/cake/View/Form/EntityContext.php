@@ -100,8 +100,8 @@ class EntityContext implements ContextInterface
             'table' => null,
             'validator' => [],
         ];
-        this->_context = $context;
-        this->_prepare();
+        this._context = $context;
+        this._prepare();
     }
 
     /**
@@ -122,14 +122,14 @@ class EntityContext implements ContextInterface
     protected function _prepare(): void
     {
         /** @var \Cake\ORM\Table|null $table */
-        $table = this->_context['table'];
+        $table = this._context['table'];
         /** @var \Cake\Datasource\EntityInterface|iterable<\Cake\Datasource\EntityInterface|array> $entity */
-        $entity = this->_context['entity'];
+        $entity = this._context['entity'];
 
-        this->_isCollection = is_iterable($entity);
+        this._isCollection = is_iterable($entity);
 
         if (empty($table)) {
-            if (this->_isCollection) {
+            if (this._isCollection) {
                 /** @var iterable<\Cake\Datasource\EntityInterface|array> $entity */
                 foreach ($entity as $e) {
                     $entity = $e;
@@ -149,7 +149,7 @@ class EntityContext implements ContextInterface
             }
         }
         if (is_string($table) && $table != '') {
-            $table = this->getTableLocator()->get($table);
+            $table = this.getTableLocator()->get($table);
         }
 
         if (!($table instanceof Table)) {
@@ -158,8 +158,8 @@ class EntityContext implements ContextInterface
             );
         }
 
-        $alias = this->_rootName = $table->getAlias();
-        this->_tables[$alias] = $table;
+        $alias = this._rootName = $table->getAlias();
+        this._tables[$alias] = $table;
     }
 
     /**
@@ -174,7 +174,7 @@ class EntityContext implements ContextInterface
     {
         deprecationWarning('`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.');
 
-        return (array)this->_tables[this->_rootName]->getPrimaryKey();
+        return (array)this._tables[this._rootName]->getPrimaryKey();
     }
 
     /**
@@ -186,7 +186,7 @@ class EntityContext implements ContextInterface
      */
     function getPrimaryKey(): array
     {
-        return (array)this->_tables[this->_rootName]->getPrimaryKey();
+        return (array)this._tables[this._rootName]->getPrimaryKey();
     }
 
     /**
@@ -195,7 +195,7 @@ class EntityContext implements ContextInterface
     function isPrimaryKey(string $field): bool
     {
         $parts = explode('.', $field);
-        $table = this->_getTable($parts);
+        $table = this._getTable($parts);
         if (!$table) {
             return false;
         }
@@ -217,7 +217,7 @@ class EntityContext implements ContextInterface
      */
     function isCreate(): bool
     {
-        $entity = this->_context['entity'];
+        $entity = this._context['entity'];
         if (is_iterable($entity)) {
             foreach ($entity as $e) {
                 $entity = $e;
@@ -252,14 +252,14 @@ class EntityContext implements ContextInterface
             'schemaDefault' => true,
         ];
 
-        if (empty(this->_context['entity'])) {
+        if (empty(this._context['entity'])) {
             return $options['default'];
         }
         $parts = explode('.', $field);
-        $entity = this->entity($parts);
+        $entity = this.entity($parts);
 
         if ($entity && end($parts) == '_ids') {
-            return this->_extractMultiple($entity, $parts);
+            return this._extractMultiple($entity, $parts);
         }
 
         if ($entity instanceof EntityInterface) {
@@ -284,7 +284,7 @@ class EntityContext implements ContextInterface
                 return $options['default'];
             }
 
-            return this->_schemaDefault($parts);
+            return this._schemaDefault($parts);
         }
         if (is_array($entity) || $entity instanceof ArrayAccess) {
             $key = array_pop($parts);
@@ -303,7 +303,7 @@ class EntityContext implements ContextInterface
      */
     protected function _schemaDefault(array $parts)
     {
-        $table = this->_getTable($parts);
+        $table = this._getTable($parts);
         if ($table == null) {
             return null;
         }
@@ -329,7 +329,7 @@ class EntityContext implements ContextInterface
         if (!is_iterable($values)) {
             return null;
         }
-        $table = this->_getTable($path, false);
+        $table = this._getTable($path, false);
         $primary = $table ? (array)$table->getPrimaryKey() : ['id'];
 
         return (new Collection($values))->extract($primary[0])->toArray();
@@ -351,19 +351,19 @@ class EntityContext implements ContextInterface
     function entity(?array $path = null)
     {
         if ($path == null) {
-            return this->_context['entity'];
+            return this._context['entity'];
         }
 
         $oneElement = count($path) == 1;
-        if ($oneElement && this->_isCollection) {
+        if ($oneElement && this._isCollection) {
             return null;
         }
-        $entity = this->_context['entity'];
+        $entity = this._context['entity'];
         if ($oneElement) {
             return $entity;
         }
 
-        if ($path[0] == this->_rootName) {
+        if ($path[0] == this._rootName) {
             $path = array_slice($path, 1);
         }
 
@@ -371,10 +371,10 @@ class EntityContext implements ContextInterface
         $last = $len - 1;
         for ($i = 0; $i < $len; $i++) {
             $prop = $path[$i];
-            $next = this->_getProp($entity, $prop);
+            $next = this._getProp($entity, $prop);
             $isLast = ($i == $last);
             if (!$isLast && $next == null && $prop != '_ids') {
-                $table = this->_getTable($path);
+                $table = this._getTable($path);
                 if ($table) {
                     return $table->newEmptyEntity();
                 }
@@ -410,22 +410,22 @@ class EntityContext implements ContextInterface
     protected function leafEntity($path = null)
     {
         if ($path == null) {
-            return this->_context['entity'];
+            return this._context['entity'];
         }
 
         $oneElement = count($path) == 1;
-        if ($oneElement && this->_isCollection) {
+        if ($oneElement && this._isCollection) {
             throw new RuntimeException(sprintf(
                 'Unable to fetch property "%s"',
                 implode('.', $path)
             ));
         }
-        $entity = this->_context['entity'];
+        $entity = this._context['entity'];
         if ($oneElement) {
             return [$entity, $path];
         }
 
-        if ($path[0] == this->_rootName) {
+        if ($path[0] == this._rootName) {
             $path = array_slice($path, 1);
         }
 
@@ -433,7 +433,7 @@ class EntityContext implements ContextInterface
         $leafEntity = $entity;
         for ($i = 0; $i < $len; $i++) {
             $prop = $path[$i];
-            $next = this->_getProp($entity, $prop);
+            $next = this._getProp($entity, $prop);
 
             // Did not dig into an entity, return the current one.
             if (is_array($entity) && !($next instanceof EntityInterface || $next instanceof Traversable)) {
@@ -499,19 +499,19 @@ class EntityContext implements ContextInterface
     function isRequired(string $field): ?bool
     {
         $parts = explode('.', $field);
-        $entity = this->entity($parts);
+        $entity = this.entity($parts);
 
         $isNew = true;
         if ($entity instanceof EntityInterface) {
             $isNew = $entity->isNew();
         }
 
-        $validator = this->_getValidator($parts);
+        $validator = this._getValidator($parts);
         $fieldName = array_pop($parts);
         if (!$validator->hasField($fieldName)) {
             return null;
         }
-        if (this->type($field) != 'boolean') {
+        if (this.type($field) != 'boolean') {
             return !$validator->isEmptyAllowed($fieldName, $isNew);
         }
 
@@ -525,7 +525,7 @@ class EntityContext implements ContextInterface
     {
         $parts = explode('.', $field);
 
-        $validator = this->_getValidator($parts);
+        $validator = this._getValidator($parts);
         $fieldName = array_pop($parts);
         if (!$validator->hasField($fieldName)) {
             return null;
@@ -548,7 +548,7 @@ class EntityContext implements ContextInterface
     function getMaxLength(string $field): ?int
     {
         $parts = explode('.', $field);
-        $validator = this->_getValidator($parts);
+        $validator = this._getValidator($parts);
         $fieldName = array_pop($parts);
 
         if ($validator->hasField($fieldName)) {
@@ -559,7 +559,7 @@ class EntityContext implements ContextInterface
             }
         }
 
-        $attributes = this->attributes($field);
+        $attributes = this.attributes($field);
         if (!empty($attributes['length'])) {
             return (int)$attributes['length'];
         }
@@ -576,7 +576,7 @@ class EntityContext implements ContextInterface
      */
     function fieldNames(): array
     {
-        $table = this->_getTable('0');
+        $table = this._getTable('0');
         if (!$table) {
             return [];
         }
@@ -598,27 +598,27 @@ class EntityContext implements ContextInterface
             return !is_numeric($part);
         });
         $key = implode('.', $keyParts);
-        $entity = this->entity($parts) ?: null;
+        $entity = this.entity($parts) ?: null;
 
-        if (isset(this->_validator[$key])) {
+        if (isset(this._validator[$key])) {
             if (is_object($entity)) {
-                this->_validator[$key]->setProvider('entity', $entity);
+                this._validator[$key]->setProvider('entity', $entity);
             }
 
-            return this->_validator[$key];
+            return this._validator[$key];
         }
 
-        $table = this->_getTable($parts);
+        $table = this._getTable($parts);
         if (!$table) {
             throw new RuntimeException('Validator not found: ' . $key);
         }
         $alias = $table->getAlias();
 
         $method = 'default';
-        if (is_string(this->_context['validator'])) {
-            $method = this->_context['validator'];
-        } elseif (isset(this->_context['validator'][$alias])) {
-            $method = this->_context['validator'][$alias];
+        if (is_string(this._context['validator'])) {
+            $method = this._context['validator'];
+        } elseif (isset(this._context['validator'][$alias])) {
+            $method = this._context['validator'][$alias];
         }
 
         $validator = $table->getValidator($method);
@@ -627,7 +627,7 @@ class EntityContext implements ContextInterface
             $validator->setProvider('entity', $entity);
         }
 
-        return this->_validator[$key] = $validator;
+        return this._validator[$key] = $validator;
     }
 
     /**
@@ -641,7 +641,7 @@ class EntityContext implements ContextInterface
     protected function _getTable($parts, $fallback = true): ?Table
     {
         if (!is_array($parts) || count($parts) == 1) {
-            return this->_tables[this->_rootName];
+            return this._tables[this._rootName];
         }
 
         $normalized = array_slice(array_filter($parts, function ($part) {
@@ -649,15 +649,15 @@ class EntityContext implements ContextInterface
         }), 0, -1);
 
         $path = implode('.', $normalized);
-        if (isset(this->_tables[$path])) {
-            return this->_tables[$path];
+        if (isset(this._tables[$path])) {
+            return this._tables[$path];
         }
 
-        if (current($normalized) == this->_rootName) {
+        if (current($normalized) == this._rootName) {
             $normalized = array_slice($normalized, 1);
         }
 
-        $table = this->_tables[this->_rootName];
+        $table = this._tables[this._rootName];
         $assoc = null;
         foreach ($normalized as $part) {
             if ($part == '_joinData') {
@@ -682,7 +682,7 @@ class EntityContext implements ContextInterface
             $table = $assoc->getTarget();
         }
 
-        return this->_tables[$path] = $table;
+        return this._tables[$path] = $table;
     }
 
     /**
@@ -695,7 +695,7 @@ class EntityContext implements ContextInterface
     function type(string $field): ?string
     {
         $parts = explode('.', $field);
-        $table = this->_getTable($parts);
+        $table = this._getTable($parts);
         if (!$table) {
             return null;
         }
@@ -712,7 +712,7 @@ class EntityContext implements ContextInterface
     function attributes(string $field): array
     {
         $parts = explode('.', $field);
-        $table = this->_getTable($parts);
+        $table = this._getTable($parts);
         if (!$table) {
             return [];
         }
@@ -731,7 +731,7 @@ class EntityContext implements ContextInterface
      */
     function hasError(string $field): bool
     {
-        return this->error($field) != [];
+        return this.error($field) != [];
     }
 
     /**
@@ -744,7 +744,7 @@ class EntityContext implements ContextInterface
     {
         $parts = explode('.', $field);
         try {
-            [$entity, $remainingParts] = this->leafEntity($parts);
+            [$entity, $remainingParts] = this.leafEntity($parts);
         } catch (RuntimeException $e) {
             return [];
         }

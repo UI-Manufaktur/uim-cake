@@ -41,7 +41,7 @@ class CheckHttpCacheComponent extends Component
      */
     function beforeRender(EventInterface $event): void
     {
-        $controller = this->getController();
+        $controller = this.getController();
         $response = $controller->getResponse();
         $request = $controller->getRequest();
         if (!$response->isNotModified($request)) {

@@ -112,7 +112,7 @@ class SecurityHeadersMiddleware implements IMiddleware
      */
     function noSniff()
     {
-        this->headers['x-content-type-options'] = self::NOSNIFF;
+        this.headers['x-content-type-options'] = self::NOSNIFF;
 
         return this;
     }
@@ -127,7 +127,7 @@ class SecurityHeadersMiddleware implements IMiddleware
      */
     function noOpen()
     {
-        this->headers['x-download-options'] = self::NOOPEN;
+        this.headers['x-download-options'] = self::NOOPEN;
 
         return this;
     }
@@ -153,8 +153,8 @@ class SecurityHeadersMiddleware implements IMiddleware
             self::UNSAFE_URL,
         ];
 
-        this->checkValues($policy, $available);
-        this->headers['referrer-policy'] = $policy;
+        this.checkValues($policy, $available);
+        this.headers['referrer-policy'] = $policy;
 
         return this;
     }
@@ -169,7 +169,7 @@ class SecurityHeadersMiddleware implements IMiddleware
      */
     function setXFrameOptions(string $option = self::SAMEORIGIN, ?string $url = null)
     {
-        this->checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
+        this.checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
 
         if ($option == self::ALLOW_FROM) {
             if (empty($url)) {
@@ -178,7 +178,7 @@ class SecurityHeadersMiddleware implements IMiddleware
             $option .= ' ' . $url;
         }
 
-        this->headers['x-frame-options'] = $option;
+        this.headers['x-frame-options'] = $option;
 
         return this;
     }
@@ -196,8 +196,8 @@ class SecurityHeadersMiddleware implements IMiddleware
             $mode = self::XSS_ENABLED_BLOCK;
         }
 
-        this->checkValues($mode, [self::XSS_ENABLED, self::XSS_DISABLED, self::XSS_ENABLED_BLOCK]);
-        this->headers['x-xss-protection'] = $mode;
+        this.checkValues($mode, [self::XSS_ENABLED, self::XSS_DISABLED, self::XSS_ENABLED_BLOCK]);
+        this.headers['x-xss-protection'] = $mode;
 
         return this;
     }
@@ -212,14 +212,14 @@ class SecurityHeadersMiddleware implements IMiddleware
      */
     function setCrossDomainPolicy(string $policy = self::ALL)
     {
-        this->checkValues($policy, [
+        this.checkValues($policy, [
             self::ALL,
             self::NONE,
             self::MASTER_ONLY,
             self::BY_CONTENT_TYPE,
             self::BY_FTP_FILENAME,
         ]);
-        this->headers['x-permitted-cross-domain-policies'] = $policy;
+        this.headers['x-permitted-cross-domain-policies'] = $policy;
 
         return this;
     }
@@ -253,7 +253,7 @@ class SecurityHeadersMiddleware implements IMiddleware
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         $response = $handler->handle($request);
-        foreach (this->headers as $header => $value) {
+        foreach (this.headers as $header => $value) {
             $response = $response->withHeader($header, $value);
         }
 

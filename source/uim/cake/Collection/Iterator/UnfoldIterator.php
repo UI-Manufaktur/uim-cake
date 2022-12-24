@@ -55,9 +55,9 @@ class UnfoldIterator extends IteratorIterator implements RecursiveIterator
      */
     public this(Traversable $items, callable $unfolder)
     {
-        this->_unfolder = $unfolder;
+        this._unfolder = $unfolder;
         parent::__construct($items);
-        this->_innerIterator = this->getInnerIterator();
+        this._innerIterator = this.getInnerIterator();
     }
 
     /**
@@ -79,10 +79,10 @@ class UnfoldIterator extends IteratorIterator implements RecursiveIterator
      */
     function getChildren(): RecursiveIterator
     {
-        $current = this->current();
-        $key = this->key();
-        $unfolder = this->_unfolder;
+        $current = this.current();
+        $key = this.key();
+        $unfolder = this._unfolder;
 
-        return new NoChildrenIterator($unfolder($current, $key, this->_innerIterator));
+        return new NoChildrenIterator($unfolder($current, $key, this._innerIterator));
     }
 }

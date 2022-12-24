@@ -48,11 +48,11 @@ class HasOne extends Association
      */
     function getForeignKey()
     {
-        if (this->_foreignKey == null) {
-            this->_foreignKey = this->_modelKey(this->getSource()->getAlias());
+        if (this._foreignKey == null) {
+            this._foreignKey = this._modelKey(this.getSource()->getAlias());
         }
 
-        return this->_foreignKey;
+        return this._foreignKey;
     }
 
     /**
@@ -62,7 +62,7 @@ class HasOne extends Association
      */
     protected function _propertyName(): string
     {
-        [, $name] = pluginSplit(this->_name);
+        [, $name] = pluginSplit(this._name);
 
         return Inflector::underscore(Inflector::singularize($name));
     }
@@ -77,7 +77,7 @@ class HasOne extends Association
      */
     function isOwningSide(Table $side): bool
     {
-        return $side == this->getSource();
+        return $side == this.getSource();
     }
 
     /**
@@ -104,18 +104,18 @@ class HasOne extends Association
      */
     function saveAssociated(EntityInterface $entity, array $options = [])
     {
-        $targetEntity = $entity->get(this->getProperty());
+        $targetEntity = $entity->get(this.getProperty());
         if (empty($targetEntity) || !($targetEntity instanceof EntityInterface)) {
             return $entity;
         }
 
         $properties = array_combine(
-            (array)this->getForeignKey(),
-            $entity->extract((array)this->getBindingKey())
+            (array)this.getForeignKey(),
+            $entity->extract((array)this.getBindingKey())
         );
         $targetEntity->set($properties, ['guard' => false]);
 
-        if (!this->getTarget()->save($targetEntity, $options)) {
+        if (!this.getTarget()->save($targetEntity, $options)) {
             $targetEntity->unset(array_keys($properties));
 
             return false;
@@ -130,13 +130,13 @@ class HasOne extends Association
     function eagerLoader(array $options): Closure
     {
         $loader = new SelectLoader([
-            'alias' => this->getAlias(),
-            'sourceAlias' => this->getSource()->getAlias(),
-            'targetAlias' => this->getTarget()->getAlias(),
-            'foreignKey' => this->getForeignKey(),
-            'bindingKey' => this->getBindingKey(),
-            'strategy' => this->getStrategy(),
-            'associationType' => this->type(),
+            'alias' => this.getAlias(),
+            'sourceAlias' => this.getSource()->getAlias(),
+            'targetAlias' => this.getTarget()->getAlias(),
+            'foreignKey' => this.getForeignKey(),
+            'bindingKey' => this.getBindingKey(),
+            'strategy' => this.getStrategy(),
+            'associationType' => this.type(),
             'finder' => [this, 'find'],
         ]);
 

@@ -49,13 +49,13 @@ trait RulesAwareTrait
      */
     function checkRules(EntityInterface $entity, string $operation = RulesChecker::CREATE, $options = null): bool
     {
-        $rules = this->rulesChecker();
+        $rules = this.rulesChecker();
         $options = $options ?: new ArrayObject();
         $options = is_array($options) ? new ArrayObject($options) : $options;
         $hasEvents = (this instanceof EventDispatcherInterface);
 
         if ($hasEvents) {
-            $event = this->dispatchEvent(
+            $event = this.dispatchEvent(
                 'Model.beforeRules',
                 compact('entity', 'options', 'operation')
             );
@@ -67,7 +67,7 @@ trait RulesAwareTrait
         $result = $rules->check($entity, $operation, $options->getArrayCopy());
 
         if ($hasEvents) {
-            $event = this->dispatchEvent(
+            $event = this.dispatchEvent(
                 'Model.afterRules',
                 compact('entity', 'options', 'result', 'operation')
             );
@@ -92,16 +92,16 @@ trait RulesAwareTrait
      */
     function rulesChecker(): RulesChecker
     {
-        if (this->_rulesChecker != null) {
-            return this->_rulesChecker;
+        if (this._rulesChecker != null) {
+            return this._rulesChecker;
         }
         /** @psalm-var class-string<\Cake\Datasource\RulesChecker> $class */
         $class = defined('static::RULES_CLASS') ? static::RULES_CLASS : RulesChecker::class;
         /** @psalm-suppress ArgumentTypeCoercion */
-        this->_rulesChecker = this->buildRules(new $class(['repository' => this]));
-        this->dispatchEvent('Model.buildRules', ['rules' => this->_rulesChecker]);
+        this._rulesChecker = this.buildRules(new $class(['repository' => this]));
+        this.dispatchEvent('Model.buildRules', ['rules' => this._rulesChecker]);
 
-        return this->_rulesChecker;
+        return this._rulesChecker;
     }
 
     /**

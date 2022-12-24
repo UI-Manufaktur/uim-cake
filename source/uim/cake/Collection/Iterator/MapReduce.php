@@ -116,9 +116,9 @@ class MapReduce implements IteratorAggregate
      */
     public this(Traversable $data, callable $mapper, ?callable $reducer = null)
     {
-        this->_data = $data;
-        this->_mapper = $mapper;
-        this->_reducer = $reducer;
+        this._data = $data;
+        this._mapper = $mapper;
+        this._reducer = $reducer;
     }
 
     /**
@@ -129,11 +129,11 @@ class MapReduce implements IteratorAggregate
      */
     function getIterator(): Traversable
     {
-        if (!this->_executed) {
-            this->_execute();
+        if (!this._executed) {
+            this._execute();
         }
 
-        return new ArrayIterator(this->_result);
+        return new ArrayIterator(this._result);
     }
 
     /**
@@ -146,7 +146,7 @@ class MapReduce implements IteratorAggregate
      */
     function emitIntermediate($val, $bucket): void
     {
-        this->_intermediate[$bucket][] = $val;
+        this._intermediate[$bucket][] = $val;
     }
 
     /**
@@ -159,8 +159,8 @@ class MapReduce implements IteratorAggregate
      */
     function emit($val, $key = null): void
     {
-        this->_result[$key ?? this->_counter] = $val;
-        this->_counter++;
+        this._result[$key ?? this._counter] = $val;
+        this._counter++;
     }
 
     /**
@@ -174,21 +174,21 @@ class MapReduce implements IteratorAggregate
      */
     protected function _execute(): void
     {
-        $mapper = this->_mapper;
-        foreach (this->_data as $key => $val) {
+        $mapper = this._mapper;
+        foreach (this._data as $key => $val) {
             $mapper($val, $key, this);
         }
 
-        if (!empty(this->_intermediate) && empty(this->_reducer)) {
+        if (!empty(this._intermediate) && empty(this._reducer)) {
             throw new LogicException('No reducer function was provided');
         }
 
         /** @var callable $reducer */
-        $reducer = this->_reducer;
-        foreach (this->_intermediate as $key => $list) {
+        $reducer = this._reducer;
+        foreach (this._intermediate as $key => $list) {
             $reducer($list, $key, this);
         }
-        this->_intermediate = [];
-        this->_executed = true;
+        this._intermediate = [];
+        this._executed = true;
     }
 }

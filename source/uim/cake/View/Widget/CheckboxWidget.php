@@ -58,19 +58,19 @@ class CheckboxWidget extends BasicWidget
      */
     function render(array $data, ContextInterface $context): string
     {
-        $data += this->mergeDefaults($data, $context);
+        $data += this.mergeDefaults($data, $context);
 
-        if (this->_isChecked($data)) {
+        if (this._isChecked($data)) {
             $data['checked'] = true;
         }
         unset($data['val']);
 
-        $attrs = this->_templates->formatAttributes(
+        $attrs = this._templates->formatAttributes(
             $data,
             ['name', 'value']
         );
 
-        return this->_templates->format('checkbox', [
+        return this._templates->format('checkbox', [
             'name' => $data['name'],
             'value' => $data['value'],
             'templateVars' => $data['templateVars'],

@@ -54,9 +54,9 @@ class ReplaceIterator extends Collection
      */
     public this(iterable $items, callable $callback)
     {
-        this->_callback = $callback;
+        this._callback = $callback;
         parent::__construct($items);
-        this->_innerIterator = this->getInnerIterator();
+        this._innerIterator = this.getInnerIterator();
     }
 
     /**
@@ -68,9 +68,9 @@ class ReplaceIterator extends Collection
     #[\ReturnTypeWillChange]
     function current()
     {
-        $callback = this->_callback;
+        $callback = this._callback;
 
-        return $callback(parent::current(), this->key(), this->_innerIterator);
+        return $callback(parent::current(), this.key(), this._innerIterator);
     }
 
     /**
@@ -78,7 +78,7 @@ class ReplaceIterator extends Collection
      */
     function unwrap(): Traversable
     {
-        $iterator = this->_innerIterator;
+        $iterator = this._innerIterator;
 
         if ($iterator instanceof CollectionInterface) {
             $iterator = $iterator->unwrap();
@@ -91,7 +91,7 @@ class ReplaceIterator extends Collection
         // ArrayIterator can be traversed strictly.
         // Let's do that for performance gains
 
-        $callback = this->_callback;
+        $callback = this._callback;
         $res = [];
 
         foreach ($iterator as $k => $v) {

@@ -72,9 +72,9 @@ class EncryptedCookieMiddleware implements IMiddleware
      */
     public this(array $cookieNames, string $key, string $cipherType = 'aes')
     {
-        this->cookieNames = $cookieNames;
-        this->key = $key;
-        this->cipherType = $cipherType;
+        this.cookieNames = $cookieNames;
+        this.key = $key;
+        this.cipherType = $cipherType;
     }
 
     /**
@@ -87,15 +87,15 @@ class EncryptedCookieMiddleware implements IMiddleware
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
         if ($request->getCookieParams()) {
-            $request = this->decodeCookies($request);
+            $request = this.decodeCookies($request);
         }
 
         $response = $handler->handle($request);
         if ($response->hasHeader('Set-Cookie')) {
-            $response = this->encodeSetCookieHeader($response);
+            $response = this.encodeSetCookieHeader($response);
         }
         if ($response instanceof Response) {
-            $response = this->encodeCookies($response);
+            $response = this.encodeCookies($response);
         }
 
         return $response;
@@ -110,7 +110,7 @@ class EncryptedCookieMiddleware implements IMiddleware
      */
     protected function _getCookieEncryptionKey(): string
     {
-        return this->key;
+        return this.key;
     }
 
     /**
@@ -122,9 +122,9 @@ class EncryptedCookieMiddleware implements IMiddleware
     protected function decodeCookies(IServerRequest $request): IServerRequest
     {
         $cookies = $request->getCookieParams();
-        foreach (this->cookieNames as $name) {
+        foreach (this.cookieNames as $name) {
             if (isset($cookies[$name])) {
-                $cookies[$name] = this->_decrypt($cookies[$name], this->cipherType, this->key);
+                $cookies[$name] = this._decrypt($cookies[$name], this.cipherType, this.key);
             }
         }
 
@@ -142,8 +142,8 @@ class EncryptedCookieMiddleware implements IMiddleware
         /** @var array<\Cake\Http\Cookie\CookieInterface> $cookies */
         $cookies = $response->getCookieCollection();
         foreach ($cookies as $cookie) {
-            if (in_array($cookie->getName(), this->cookieNames, true)) {
-                $value = this->_encrypt($cookie->getValue(), this->cipherType);
+            if (in_array($cookie->getName(), this.cookieNames, true)) {
+                $value = this._encrypt($cookie->getValue(), this.cipherType);
                 $response = $response->withCookie($cookie->withValue($value));
             }
         }
@@ -163,8 +163,8 @@ class EncryptedCookieMiddleware implements IMiddleware
         $cookies = CookieCollection::createFromHeader($response->getHeader('Set-Cookie'));
         $header = [];
         foreach ($cookies as $cookie) {
-            if (in_array($cookie->getName(), this->cookieNames, true)) {
-                $value = this->_encrypt($cookie->getValue(), this->cipherType);
+            if (in_array($cookie->getName(), this.cookieNames, true)) {
+                $value = this._encrypt($cookie->getValue(), this.cipherType);
                 $cookie = $cookie->withValue($value);
             }
             $header[] = $cookie->toHeaderValue();

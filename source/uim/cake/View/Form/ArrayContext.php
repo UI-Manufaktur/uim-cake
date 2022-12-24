@@ -91,7 +91,7 @@ class ArrayContext implements ContextInterface
             'defaults' => [],
             'errors' => [],
         ];
-        this->_context = $context;
+        this._context = $context;
     }
 
     /**
@@ -104,7 +104,7 @@ class ArrayContext implements ContextInterface
     {
         deprecationWarning('`ArrayContext::primaryKey()` is deprecated. Use `ArrayContext::getPrimaryKey()`.');
 
-        return this->getPrimaryKey();
+        return this.getPrimaryKey();
     }
 
     /**
@@ -115,12 +115,12 @@ class ArrayContext implements ContextInterface
     function getPrimaryKey(): array
     {
         if (
-            empty(this->_context['schema']['_constraints']) ||
-            !is_array(this->_context['schema']['_constraints'])
+            empty(this._context['schema']['_constraints']) ||
+            !is_array(this._context['schema']['_constraints'])
         ) {
             return [];
         }
-        foreach (this->_context['schema']['_constraints'] as $data) {
+        foreach (this._context['schema']['_constraints'] as $data) {
             if (isset($data['type']) && $data['type'] == 'primary') {
                 return (array)($data['columns'] ?? []);
             }
@@ -134,7 +134,7 @@ class ArrayContext implements ContextInterface
      */
     function isPrimaryKey(string $field): bool
     {
-        $primaryKey = this->getPrimaryKey();
+        $primaryKey = this.getPrimaryKey();
 
         return in_array($field, $primaryKey, true);
     }
@@ -150,9 +150,9 @@ class ArrayContext implements ContextInterface
      */
     function isCreate(): bool
     {
-        $primary = this->getPrimaryKey();
+        $primary = this.getPrimaryKey();
         foreach ($primary as $column) {
-            if (!empty(this->_context['defaults'][$column])) {
+            if (!empty(this._context['defaults'][$column])) {
                 return false;
             }
         }
@@ -182,23 +182,23 @@ class ArrayContext implements ContextInterface
             'schemaDefault' => true,
         ];
 
-        if (Hash::check(this->_context['data'], $field)) {
-            return Hash::get(this->_context['data'], $field);
+        if (Hash::check(this._context['data'], $field)) {
+            return Hash::get(this._context['data'], $field);
         }
 
         if ($options['default'] != null || !$options['schemaDefault']) {
             return $options['default'];
         }
-        if (empty(this->_context['defaults']) || !is_array(this->_context['defaults'])) {
+        if (empty(this._context['defaults']) || !is_array(this._context['defaults'])) {
             return null;
         }
 
         // Using Hash::check here incase the default value is actually null
-        if (Hash::check(this->_context['defaults'], $field)) {
-            return Hash::get(this->_context['defaults'], $field);
+        if (Hash::check(this._context['defaults'], $field)) {
+            return Hash::get(this._context['defaults'], $field);
         }
 
-        return Hash::get(this->_context['defaults'], this->stripNesting($field));
+        return Hash::get(this._context['defaults'], this.stripNesting($field));
     }
 
     /**
@@ -211,14 +211,14 @@ class ArrayContext implements ContextInterface
      */
     function isRequired(string $field): ?bool
     {
-        if (!is_array(this->_context['required'])) {
+        if (!is_array(this._context['required'])) {
             return null;
         }
 
-        $required = Hash::get(this->_context['required'], $field);
+        $required = Hash::get(this._context['required'], $field);
 
         if ($required == null) {
-            $required = Hash::get(this->_context['required'], this->stripNesting($field));
+            $required = Hash::get(this._context['required'], this.stripNesting($field));
         }
 
         if (!empty($required) || $required == '0') {
@@ -233,12 +233,12 @@ class ArrayContext implements ContextInterface
      */
     function getRequiredMessage(string $field): ?string
     {
-        if (!is_array(this->_context['required'])) {
+        if (!is_array(this._context['required'])) {
             return null;
         }
-        $required = Hash::get(this->_context['required'], $field);
+        $required = Hash::get(this._context['required'], $field);
         if ($required == null) {
-            $required = Hash::get(this->_context['required'], this->stripNesting($field));
+            $required = Hash::get(this._context['required'], this.stripNesting($field));
         }
 
         if ($required == false) {
@@ -262,11 +262,11 @@ class ArrayContext implements ContextInterface
      */
     function getMaxLength(string $field): ?int
     {
-        if (!is_array(this->_context['schema'])) {
+        if (!is_array(this._context['schema'])) {
             return null;
         }
 
-        return Hash::get(this->_context['schema'], "$field.length");
+        return Hash::get(this._context['schema'], "$field.length");
     }
 
     /**
@@ -274,7 +274,7 @@ class ArrayContext implements ContextInterface
      */
     function fieldNames(): array
     {
-        $schema = this->_context['schema'];
+        $schema = this._context['schema'];
         unset($schema['_constraints'], $schema['_indexes']);
 
         return array_keys($schema);
@@ -289,13 +289,13 @@ class ArrayContext implements ContextInterface
      */
     function type(string $field): ?string
     {
-        if (!is_array(this->_context['schema'])) {
+        if (!is_array(this._context['schema'])) {
             return null;
         }
 
-        $schema = Hash::get(this->_context['schema'], $field);
+        $schema = Hash::get(this._context['schema'], $field);
         if ($schema == null) {
-            $schema = Hash::get(this->_context['schema'], this->stripNesting($field));
+            $schema = Hash::get(this._context['schema'], this.stripNesting($field));
         }
 
         return $schema['type'] ?? null;
@@ -309,12 +309,12 @@ class ArrayContext implements ContextInterface
      */
     function attributes(string $field): array
     {
-        if (!is_array(this->_context['schema'])) {
+        if (!is_array(this._context['schema'])) {
             return [];
         }
-        $schema = Hash::get(this->_context['schema'], $field);
+        $schema = Hash::get(this._context['schema'], $field);
         if ($schema == null) {
-            $schema = Hash::get(this->_context['schema'], this->stripNesting($field));
+            $schema = Hash::get(this._context['schema'], this.stripNesting($field));
         }
 
         return array_intersect_key(
@@ -331,11 +331,11 @@ class ArrayContext implements ContextInterface
      */
     function hasError(string $field): bool
     {
-        if (empty(this->_context['errors'])) {
+        if (empty(this._context['errors'])) {
             return false;
         }
 
-        return Hash::check(this->_context['errors'], $field);
+        return Hash::check(this._context['errors'], $field);
     }
 
     /**
@@ -347,11 +347,11 @@ class ArrayContext implements ContextInterface
      */
     function error(string $field): array
     {
-        if (empty(this->_context['errors'])) {
+        if (empty(this._context['errors'])) {
             return [];
         }
 
-        return (array)Hash::get(this->_context['errors'], $field);
+        return (array)Hash::get(this._context['errors'], $field);
     }
 
     /**

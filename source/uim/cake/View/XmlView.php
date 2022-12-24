@@ -31,8 +31,8 @@ use Cake\Utility\Xml;
  * In your controller, you could do the following:
  *
  * ```
- * this->set(['posts' => $posts]);
- * this->viewBuilder()->setOption('serialize', true);
+ * this.set(['posts' => $posts]);
+ * this.viewBuilder()->setOption('serialize', true);
  * ```
  *
  * When the view is rendered, the `$posts` view variable will be serialized
@@ -44,8 +44,8 @@ use Cake\Utility\Xml;
  * top level element named `<response>` containing all the named view variables:
  *
  * ```
- * this->set(compact('posts', 'users', 'stuff'));
- * this->viewBuilder()->setOption('serialize', true);
+ * this.set(compact('posts', 'users', 'stuff'));
+ * this.viewBuilder()->setOption('serialize', true);
  * ```
  *
  * The above would generate a XML object that looks like:
@@ -110,7 +110,7 @@ class XmlView extends SerializedView
      */
     protected function _serialize($serialize): string
     {
-        $rootNode = this->getConfig('rootNode', 'response');
+        $rootNode = this.getConfig('rootNode', 'response');
 
         if (is_array($serialize)) {
             if (empty($serialize)) {
@@ -126,12 +126,12 @@ class XmlView extends SerializedView
                 if (is_numeric($alias)) {
                     $alias = $key;
                 }
-                if (array_key_exists($key, this->viewVars)) {
-                    $data[$rootNode][$alias] = this->viewVars[$key];
+                if (array_key_exists($key, this.viewVars)) {
+                    $data[$rootNode][$alias] = this.viewVars[$key];
                 }
             }
         } else {
-            $data = this->viewVars[$serialize] ?? [];
+            $data = this.viewVars[$serialize] ?? [];
             if (
                 $data &&
                 (!is_array($data) || Hash::numeric(array_keys($data)))
@@ -141,7 +141,7 @@ class XmlView extends SerializedView
             }
         }
 
-        $options = this->getConfig('xmlOptions', []);
+        $options = this.getConfig('xmlOptions', []);
         if (Configure::read('debug')) {
             $options['pretty'] = true;
         }

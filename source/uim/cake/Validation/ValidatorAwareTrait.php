@@ -74,7 +74,7 @@ trait ValidatorAwareTrait
      *         ->requirePresence('username');
      * }
      *
-     * $validator = this->getValidator('forSubscription');
+     * $validator = this.getValidator('forSubscription');
      * ```
      *
      * You can implement the method in `validationDefault` in your Table subclass
@@ -91,11 +91,11 @@ trait ValidatorAwareTrait
     function getValidator(?string $name = null): Validator
     {
         $name = $name ?: static::DEFAULT_VALIDATOR;
-        if (!isset(this->_validators[$name])) {
-            this->setValidator($name, this->createValidator($name));
+        if (!isset(this._validators[$name])) {
+            this.setValidator($name, this.createValidator($name));
         }
 
-        return this->_validators[$name];
+        return this._validators[$name];
     }
 
     /**
@@ -112,18 +112,18 @@ trait ValidatorAwareTrait
     protected function createValidator(string $name): Validator
     {
         $method = 'validation' . ucfirst($name);
-        if (!this->validationMethodExists($method)) {
+        if (!this.validationMethodExists($method)) {
             $message = sprintf('The %s::%s() validation method does not exists.', static::class, $method);
             throw new RuntimeException($message);
         }
 
-        $validator = new this->_validatorClass();
-        $validator = this->$method($validator);
+        $validator = new this._validatorClass();
+        $validator = this.$method($validator);
         if (this instanceof EventDispatcherInterface) {
             $event = defined(static::class . '::BUILD_VALIDATOR_EVENT')
                 ? static::BUILD_VALIDATOR_EVENT
                 : 'Model.buildValidator';
-            this->dispatchEvent($event, compact('validator', 'name'));
+            this.dispatchEvent($event, compact('validator', 'name'));
         }
 
         if (!$validator instanceof Validator) {
@@ -149,7 +149,7 @@ trait ValidatorAwareTrait
      *     ->add('email', 'valid-email', ['rule' => 'email'])
      *     ->add('password', 'valid', ['rule' => 'notBlank'])
      *     ->allowEmpty('bio');
-     * this->setValidator('forSubscription', $validator);
+     * this.setValidator('forSubscription', $validator);
      * ```
      *
      * @param string $name The name of a validator to be set.
@@ -159,7 +159,7 @@ trait ValidatorAwareTrait
     function setValidator(string $name, Validator $validator)
     {
         $validator->setProvider(static::VALIDATOR_PROVIDER_NAME, this);
-        this->_validators[$name] = $validator;
+        this._validators[$name] = $validator;
 
         return this;
     }
@@ -173,11 +173,11 @@ trait ValidatorAwareTrait
     function hasValidator(string $name): bool
     {
         $method = 'validation' . ucfirst($name);
-        if (this->validationMethodExists($method)) {
+        if (this.validationMethodExists($method)) {
             return true;
         }
 
-        return isset(this->_validators[$name]);
+        return isset(this._validators[$name]);
     }
 
     /**

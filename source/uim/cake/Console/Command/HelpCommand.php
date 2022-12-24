@@ -45,7 +45,7 @@ class HelpCommand extends BaseCommand implements CommandCollectionAwareInterface
      */
     function setCommandCollection(CommandCollection $commands): void
     {
-        this->commands = $commands;
+        this.commands = $commands;
     }
 
     /**
@@ -57,18 +57,18 @@ class HelpCommand extends BaseCommand implements CommandCollectionAwareInterface
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $commands = this->commands->getIterator();
+        $commands = this.commands->getIterator();
         if ($commands instanceof ArrayIterator) {
             $commands->ksort();
         }
 
         if ($args->getOption('xml')) {
-            this->asXml($io, $commands);
+            this.asXml($io, $commands);
 
             return static::CODE_SUCCESS;
         }
 
-        this->asText($io, $commands);
+        this.asText($io, $commands);
 
         return static::CODE_SUCCESS;
     }
@@ -107,7 +107,7 @@ class HelpCommand extends BaseCommand implements CommandCollectionAwareInterface
             } elseif (in_array($namespace, $plugins, true)) {
                 $prefix = $namespace;
             }
-            $shortestName = this->getShortestName($names);
+            $shortestName = this.getShortestName($names);
             if (strpos($shortestName, '.') != false) {
                 [, $shortestName] = explode('.', $shortestName, 2);
             }
@@ -119,7 +119,7 @@ class HelpCommand extends BaseCommand implements CommandCollectionAwareInterface
         }
         ksort($grouped);
 
-        this->outputPaths($io);
+        this.outputPaths($io);
         $io->out('<info>Available Commands:</info>', 2);
 
         foreach ($grouped as $prefix => $names) {
@@ -133,7 +133,7 @@ class HelpCommand extends BaseCommand implements CommandCollectionAwareInterface
             }
             $io->out('');
         }
-        $root = this->getRootName();
+        $root = this.getRootName();
 
         $io->out("To run a command, type <info>`{$root} command_name [args|options]`</info>");
         $io->out("To get help on a specific command, type <info>`{$root} command_name --help`</info>", 2);

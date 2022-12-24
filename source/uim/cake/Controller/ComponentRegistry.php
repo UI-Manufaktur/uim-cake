@@ -49,7 +49,7 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
     public this(?Controller $controller = null)
     {
         if ($controller) {
-            this->setController($controller);
+            this.setController($controller);
         }
     }
 
@@ -60,11 +60,11 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
      */
     function getController(): Controller
     {
-        if (this->_Controller == null) {
+        if (this._Controller == null) {
             throw new CakeException('Controller not set for ComponentRegistry');
         }
 
-        return this->_Controller;
+        return this._Controller;
     }
 
     /**
@@ -75,8 +75,8 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
      */
     function setController(Controller $controller)
     {
-        this->_Controller = $controller;
-        this->setEventManager($controller->getEventManager());
+        this._Controller = $controller;
+        this.setEventManager($controller->getEventManager());
 
         return this;
     }
@@ -133,7 +133,7 @@ class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterfa
         $instance = new $class(this, $config);
         $enable = $config['enabled'] ?? true;
         if ($enable) {
-            this->getEventManager()->on($instance);
+            this.getEventManager()->on($instance);
         }
 
         return $instance;

@@ -30,7 +30,7 @@ use Cake\Http\ServerRequest;
  * Load `AuthComponent` in your controller's `initialize()` and add 'Form' in 'authenticate' key
  *
  * ```
- * this->loadComponent('Auth', [
+ * this.loadComponent('Auth', [
  *     'authenticate' => [
  *         'Form' => [
  *             'fields' => ['username' => 'email', 'password' => 'passwd'],
@@ -77,12 +77,12 @@ class FormAuthenticate extends BaseAuthenticate
      */
     function authenticate(ServerRequest $request, Response $response)
     {
-        $fields = this->_config['fields'];
-        if (!this->_checkFields($request, $fields)) {
+        $fields = this._config['fields'];
+        if (!this._checkFields($request, $fields)) {
             return false;
         }
 
-        return this->_findUser(
+        return this._findUser(
             $request->getData($fields['username']),
             $request->getData($fields['password'])
         );

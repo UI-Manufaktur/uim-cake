@@ -120,20 +120,20 @@ class SyslogLog extends BaseLog
      */
     function log($level, $message, array $context = []): void
     {
-        if (!this->_open) {
-            $config = this->_config;
-            this->_open($config['prefix'], $config['flag'], $config['facility']);
-            this->_open = true;
+        if (!this._open) {
+            $config = this._config;
+            this._open($config['prefix'], $config['flag'], $config['facility']);
+            this._open = true;
         }
 
         $priority = LOG_DEBUG;
-        if (isset(this->_levelMap[$level])) {
-            $priority = this->_levelMap[$level];
+        if (isset(this._levelMap[$level])) {
+            $priority = this._levelMap[$level];
         }
 
-        $lines = explode("\n", this->_format($message, $context));
+        $lines = explode("\n", this._format($message, $context));
         foreach ($lines as $line) {
-            this->_write($priority, this->formatter->format($level, $line, $context));
+            this._write($priority, this.formatter->format($level, $line, $context));
         }
     }
 

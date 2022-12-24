@@ -94,10 +94,10 @@ class FormDataPart
      */
     public this(string $name, string $value, string $disposition = 'form-data', ?string $charset = null)
     {
-        this->_name = $name;
-        this->_value = $value;
-        this->_disposition = $disposition;
-        this->_charset = $charset;
+        this._name = $name;
+        this._value = $value;
+        this._disposition = $disposition;
+        this._charset = $charset;
     }
 
     /**
@@ -112,10 +112,10 @@ class FormDataPart
     function disposition(?string $disposition = null): string
     {
         if ($disposition == null) {
-            return this->_disposition;
+            return this._disposition;
         }
 
-        return this->_disposition = $disposition;
+        return this._disposition = $disposition;
     }
 
     /**
@@ -127,10 +127,10 @@ class FormDataPart
     function contentId(?string $id = null): ?string
     {
         if ($id == null) {
-            return this->_contentId;
+            return this._contentId;
         }
 
-        return this->_contentId = $id;
+        return this._contentId = $id;
     }
 
     /**
@@ -145,10 +145,10 @@ class FormDataPart
     function filename(?string $filename = null): ?string
     {
         if ($filename == null) {
-            return this->_filename;
+            return this._filename;
         }
 
-        return this->_filename = $filename;
+        return this._filename = $filename;
     }
 
     /**
@@ -160,10 +160,10 @@ class FormDataPart
     function type(?string $type): ?string
     {
         if ($type == null) {
-            return this->_type;
+            return this._type;
         }
 
-        return this->_type = $type;
+        return this._type = $type;
     }
 
     /**
@@ -177,10 +177,10 @@ class FormDataPart
     function transferEncoding(?string $type): ?string
     {
         if ($type == null) {
-            return this->_transferEncoding;
+            return this._transferEncoding;
         }
 
-        return this->_transferEncoding = $type;
+        return this._transferEncoding = $type;
     }
 
     /**
@@ -190,7 +190,7 @@ class FormDataPart
      */
     function name(): string
     {
-        return this->_name;
+        return this._name;
     }
 
     /**
@@ -200,7 +200,7 @@ class FormDataPart
      */
     function value(): string
     {
-        return this->_value;
+        return this._value;
     }
 
     /**
@@ -213,27 +213,27 @@ class FormDataPart
     function __toString(): string
     {
         $out = '';
-        if (this->_disposition) {
-            $out .= 'Content-Disposition: ' . this->_disposition;
-            if (this->_name) {
-                $out .= '; ' . this->_headerParameterToString('name', this->_name);
+        if (this._disposition) {
+            $out .= 'Content-Disposition: ' . this._disposition;
+            if (this._name) {
+                $out .= '; ' . this._headerParameterToString('name', this._name);
             }
-            if (this->_filename) {
-                $out .= '; ' . this->_headerParameterToString('filename', this->_filename);
+            if (this._filename) {
+                $out .= '; ' . this._headerParameterToString('filename', this._filename);
             }
             $out .= "\r\n";
         }
-        if (this->_type) {
-            $out .= 'Content-Type: ' . this->_type . "\r\n";
+        if (this._type) {
+            $out .= 'Content-Type: ' . this._type . "\r\n";
         }
-        if (this->_transferEncoding) {
-            $out .= 'Content-Transfer-Encoding: ' . this->_transferEncoding . "\r\n";
+        if (this._transferEncoding) {
+            $out .= 'Content-Transfer-Encoding: ' . this._transferEncoding . "\r\n";
         }
-        if (this->_contentId) {
-            $out .= 'Content-ID: <' . this->_contentId . ">\r\n";
+        if (this._contentId) {
+            $out .= 'Content-ID: <' . this._contentId . ">\r\n";
         }
         $out .= "\r\n";
-        $out .= this->_value;
+        $out .= this._value;
 
         return $out;
     }
@@ -252,8 +252,8 @@ class FormDataPart
     {
         $transliterated = Text::transliterate(str_replace('"', '', $value));
         $return = sprintf('%s="%s"', $name, $transliterated);
-        if (this->_charset != null && $value != $transliterated) {
-            $return .= sprintf("; %s*=%s''%s", $name, strtolower(this->_charset), rawurlencode($value));
+        if (this._charset != null && $value != $transliterated) {
+            $return .= sprintf("; %s*=%s''%s", $name, strtolower(this._charset), rawurlencode($value));
         }
 
         return $return;

@@ -30,7 +30,7 @@ class ContentsRegExp extends ContentsBase
      */
     function matches($other): bool
     {
-        return preg_match($other, this->contents) > 0;
+        return preg_match($other, this.contents) > 0;
     }
 
     /**
@@ -40,7 +40,7 @@ class ContentsRegExp extends ContentsBase
      */
     function toString(): string
     {
-        return sprintf('PCRE pattern found in %s', this->output);
+        return sprintf('PCRE pattern found in %s', this.output);
     }
 
     /**
@@ -49,6 +49,6 @@ class ContentsRegExp extends ContentsBase
      */
     function failureDescription($other): string
     {
-        return '`' . $other . '` ' . this->toString();
+        return '`' . $other . '` ' . this.toString();
     }
 }

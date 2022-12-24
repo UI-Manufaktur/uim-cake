@@ -68,8 +68,8 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     public this(StatementInterface $statement, DriverInterface $driver)
     {
-        this->_statement = $statement;
-        this->_driver = $driver;
+        this._statement = $statement;
+        this._driver = $driver;
     }
 
     /**
@@ -82,7 +82,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
     {
         if ($property == 'queryString') {
             /** @psalm-suppress NoInterfaceProperties */
-            return this->_statement->queryString;
+            return this._statement->queryString;
         }
 
         return null;
@@ -110,7 +110,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function bindValue($column, $value, $type = 'string'): void
     {
-        this->_statement->bindValue($column, $value, $type);
+        this._statement->bindValue($column, $value, $type);
     }
 
     /**
@@ -122,7 +122,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function closeCursor(): void
     {
-        this->_statement->closeCursor();
+        this._statement->closeCursor();
     }
 
     /**
@@ -140,7 +140,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function columnCount(): int
     {
-        return this->_statement->columnCount();
+        return this._statement->columnCount();
     }
 
     /**
@@ -150,7 +150,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function errorCode()
     {
-        return this->_statement->errorCode();
+        return this._statement->errorCode();
     }
 
     /**
@@ -161,7 +161,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function errorInfo(): array
     {
-        return this->_statement->errorInfo();
+        return this._statement->errorInfo();
     }
 
     /**
@@ -175,9 +175,9 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function execute(?array $params = null): bool
     {
-        this->_hasExecuted = true;
+        this._hasExecuted = true;
 
-        return this->_statement->execute($params);
+        return this._statement->execute($params);
     }
 
     /**
@@ -199,7 +199,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function fetch($type = self::FETCH_TYPE_NUM)
     {
-        return this->_statement->fetch($type);
+        return this._statement->fetch($type);
     }
 
     /**
@@ -210,7 +210,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function fetchAssoc(): array
     {
-        $result = this->fetch(static::FETCH_TYPE_ASSOC);
+        $result = this.fetch(static::FETCH_TYPE_ASSOC);
 
         return $result ?: [];
     }
@@ -223,7 +223,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function fetchColumn(int $position)
     {
-        $result = this->fetch(static::FETCH_TYPE_NUM);
+        $result = this.fetch(static::FETCH_TYPE_NUM);
         if ($result && isset($result[$position])) {
             return $result[$position];
         }
@@ -247,7 +247,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function fetchAll($type = self::FETCH_TYPE_NUM)
     {
-        return this->_statement->fetchAll($type);
+        return this._statement->fetchAll($type);
     }
 
     /**
@@ -265,7 +265,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function rowCount(): int
     {
-        return this->_statement->rowCount();
+        return this._statement->rowCount();
     }
 
     /**
@@ -287,11 +287,11 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
     #[\ReturnTypeWillChange]
     function getIterator()
     {
-        if (!this->_hasExecuted) {
-            this->execute();
+        if (!this._hasExecuted) {
+            this.execute();
         }
 
-        return this->_statement;
+        return this._statement;
     }
 
     /**
@@ -302,7 +302,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function count(): int
     {
-        return this->rowCount();
+        return this.rowCount();
     }
 
     /**
@@ -327,7 +327,7 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
                 $index += $offset;
             }
             /** @psalm-suppress InvalidScalarArgument */
-            this->bindValue($index, $value, $type);
+            this.bindValue($index, $value, $type);
         }
     }
 
@@ -340,15 +340,15 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function lastInsertId(?string $table = null, ?string $column = null)
     {
-        if ($column && this->columnCount()) {
-            $row = this->fetch(static::FETCH_TYPE_ASSOC);
+        if ($column && this.columnCount()) {
+            $row = this.fetch(static::FETCH_TYPE_ASSOC);
 
             if ($row && isset($row[$column])) {
                 return $row[$column];
             }
         }
 
-        return this->_driver->lastInsertId($table, $column);
+        return this._driver->lastInsertId($table, $column);
     }
 
     /**
@@ -358,6 +358,6 @@ class StatementDecorator implements StatementInterface, Countable, IteratorAggre
      */
     function getInnerStatement()
     {
-        return this->_statement;
+        return this._statement;
     }
 }

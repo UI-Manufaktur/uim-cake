@@ -73,7 +73,7 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      */
     function boot(): void
     {
-        this->bootstrap(this->getContainer());
+        this.bootstrap(this.getContainer());
     }
 
     /**
@@ -101,7 +101,7 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      */
     function register(): void
     {
-        this->services(this->getContainer());
+        this.services(this.getContainer());
     }
 
     /**
@@ -116,7 +116,7 @@ abstract class ServiceProvider extends AbstractServiceProvider implements Bootab
      */
     function provides(string $id): bool
     {
-        return in_array($id, this->provides, true);
+        return in_array($id, this.provides, true);
     }
 
     /**

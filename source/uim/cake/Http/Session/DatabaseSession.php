@@ -52,18 +52,18 @@ class DatabaseSession implements SessionHandlerInterface
     public this(array $config = [])
     {
         if (isset($config['tableLocator'])) {
-            this->setTableLocator($config['tableLocator']);
+            this.setTableLocator($config['tableLocator']);
         }
-        $tableLocator = this->getTableLocator();
+        $tableLocator = this.getTableLocator();
 
         if (empty($config['model'])) {
             $config = $tableLocator->exists('Sessions') ? [] : ['table' => 'sessions', 'allowFallbackClass' => true];
-            this->_table = $tableLocator->get('Sessions', $config);
+            this._table = $tableLocator->get('Sessions', $config);
         } else {
-            this->_table = $tableLocator->get($config['model']);
+            this._table = $tableLocator->get($config['model']);
         }
 
-        this->_timeout = (int)ini_get('session.gc_maxlifetime');
+        this._timeout = (int)ini_get('session.gc_maxlifetime');
     }
 
     /**
@@ -76,7 +76,7 @@ class DatabaseSession implements SessionHandlerInterface
      */
     function setTimeout(int $timeout)
     {
-        this->_timeout = $timeout;
+        this._timeout = $timeout;
 
         return this;
     }
@@ -113,8 +113,8 @@ class DatabaseSession implements SessionHandlerInterface
     function read($id)
     {
         /** @var string $pkField */
-        $pkField = this->_table->getPrimaryKey();
-        $result = this->_table
+        $pkField = this._table->getPrimaryKey();
+        $result = this._table
             ->find('all')
             ->select(['data'])
             ->where([$pkField => $id])
@@ -152,14 +152,14 @@ class DatabaseSession implements SessionHandlerInterface
         }
 
         /** @var string $pkField */
-        $pkField = this->_table->getPrimaryKey();
-        $session = this->_table->newEntity([
+        $pkField = this._table->getPrimaryKey();
+        $session = this._table->newEntity([
             $pkField => $id,
             'data' => $data,
-            'expires' => time() + this->_timeout,
+            'expires' => time() + this._timeout,
         ], ['accessibleFields' => [$pkField => true]]);
 
-        return (bool)this->_table->save($session);
+        return (bool)this._table->save($session);
     }
 
     /**
@@ -171,8 +171,8 @@ class DatabaseSession implements SessionHandlerInterface
     function destroy($id): bool
     {
         /** @var string $pkField */
-        $pkField = this->_table->getPrimaryKey();
-        this->_table->deleteAll([$pkField => $id]);
+        $pkField = this._table->getPrimaryKey();
+        this._table->deleteAll([$pkField => $id]);
 
         return true;
     }
@@ -186,6 +186,6 @@ class DatabaseSession implements SessionHandlerInterface
     #[\ReturnTypeWillChange]
     function gc($maxlifetime)
     {
-        return this->_table->deleteAll(['expires <' => time()]);
+        return this._table->deleteAll(['expires <' => time()]);
     }
 }

@@ -51,11 +51,11 @@ class Runner implements RequestHandlerInterface
         IServerRequest $request,
         ?RequestHandlerInterface $fallbackHandler = null
     ): IResponse {
-        this->queue = $queue;
-        this->queue->rewind();
-        this->fallbackHandler = $fallbackHandler;
+        this.queue = $queue;
+        this.queue->rewind();
+        this.fallbackHandler = $fallbackHandler;
 
-        return this->handle($request);
+        return this.handle($request);
     }
 
     /**
@@ -66,15 +66,15 @@ class Runner implements RequestHandlerInterface
      */
     function handle(IServerRequest $request): IResponse
     {
-        if (this->queue->valid()) {
-            $middleware = this->queue->current();
-            this->queue->next();
+        if (this.queue->valid()) {
+            $middleware = this.queue->current();
+            this.queue->next();
 
             return $middleware->process($request, this);
         }
 
-        if (this->fallbackHandler) {
-            return this->fallbackHandler->handle($request);
+        if (this.fallbackHandler) {
+            return this.fallbackHandler->handle($request);
         }
 
         return new Response([

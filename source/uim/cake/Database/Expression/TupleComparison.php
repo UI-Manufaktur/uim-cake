@@ -46,10 +46,10 @@ class TupleComparison extends ComparisonExpression
      */
     public this($fields, $values, array $types = [], string $conjunction = '=')
     {
-        this->_type = $types;
-        this->setField($fields);
-        this->_operator = $conjunction;
-        this->setValue($values);
+        this._type = $types;
+        this.setField($fields);
+        this._operator = $conjunction;
+        this.setValue($values);
     }
 
     /**
@@ -59,7 +59,7 @@ class TupleComparison extends ComparisonExpression
      */
     function getType(): array
     {
-        return this->_type;
+        return this._type;
     }
 
     /**
@@ -70,7 +70,7 @@ class TupleComparison extends ComparisonExpression
      */
     function setValue($value): void
     {
-        if (this->isMulti()) {
+        if (this.isMulti()) {
             if (is_array($value) && !is_array(current($value))) {
                 throw new InvalidArgumentException(
                     'Multi-tuple comparisons require a multi-tuple value, single-tuple given.'
@@ -84,7 +84,7 @@ class TupleComparison extends ComparisonExpression
             }
         }
 
-        this->_value = $value;
+        this._value = $value;
     }
 
     /**
@@ -94,7 +94,7 @@ class TupleComparison extends ComparisonExpression
     {
         $template = '(%s) %s (%s)';
         $fields = [];
-        $originalFields = this->getField();
+        $originalFields = this.getField();
 
         if (!is_array($originalFields)) {
             $originalFields = [$originalFields];
@@ -104,11 +104,11 @@ class TupleComparison extends ComparisonExpression
             $fields[] = $field instanceof IExpression ? $field->sql($binder) : $field;
         }
 
-        $values = this->_stringifyValues($binder);
+        $values = this._stringifyValues($binder);
 
         $field = implode(', ', $fields);
 
-        return sprintf($template, $field, this->_operator, $values);
+        return sprintf($template, $field, this._operator, $values);
     }
 
     /**
@@ -121,7 +121,7 @@ class TupleComparison extends ComparisonExpression
     protected function _stringifyValues(ValueBinder $binder): string
     {
         $values = [];
-        $parts = this->getValue();
+        $parts = this.getValue();
 
         if ($parts instanceof IExpression) {
             return $parts->sql($binder);
@@ -133,8 +133,8 @@ class TupleComparison extends ComparisonExpression
                 continue;
             }
 
-            $type = this->_type;
-            $isMultiOperation = this->isMulti();
+            $type = this._type;
+            $isMultiOperation = this.isMulti();
             if (empty($type)) {
                 $type = null;
             }
@@ -144,7 +144,7 @@ class TupleComparison extends ComparisonExpression
                 foreach ($value as $k => $val) {
                     /** @var string $valType */
                     $valType = $type && isset($type[$k]) ? $type[$k] : $type;
-                    $bound[] = this->_bindValue($val, $binder, $valType);
+                    $bound[] = this._bindValue($val, $binder, $valType);
                 }
 
                 $values[] = sprintf('(%s)', implode(',', $bound));
@@ -153,7 +153,7 @@ class TupleComparison extends ComparisonExpression
 
             /** @var string $valType */
             $valType = $type && isset($type[$i]) ? $type[$i] : $type;
-            $values[] = this->_bindValue($value, $binder, $valType);
+            $values[] = this._bindValue($value, $binder, $valType);
         }
 
         return implode(', ', $values);
@@ -176,12 +176,12 @@ class TupleComparison extends ComparisonExpression
     public O traverse(this O)(Closure $callback)
     {
         /** @var array<string> $fields */
-        $fields = this->getField();
+        $fields = this.getField();
         foreach ($fields as $field) {
-            this->_traverseValue($field, $callback);
+            this._traverseValue($field, $callback);
         }
 
-        $value = this->getValue();
+        $value = this.getValue();
         if ($value instanceof IExpression) {
             $callback($value);
             $value->traverse($callback);
@@ -190,12 +190,12 @@ class TupleComparison extends ComparisonExpression
         }
 
         foreach ($value as $val) {
-            if (this->isMulti()) {
+            if (this.isMulti()) {
                 foreach ($val as $v) {
-                    this->_traverseValue($v, $callback);
+                    this._traverseValue($v, $callback);
                 }
             } else {
-                this->_traverseValue($val, $callback);
+                this._traverseValue($val, $callback);
             }
         }
 
@@ -226,6 +226,6 @@ class TupleComparison extends ComparisonExpression
      */
     function isMulti(): bool
     {
-        return in_array(strtolower(this->_operator), ['in', 'not in']);
+        return in_array(strtolower(this._operator), ['in', 'not in']);
     }
 }

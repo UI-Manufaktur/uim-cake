@@ -37,7 +37,7 @@ trait TypeMapTrait
      */
     function setTypeMap($typeMap)
     {
-        this->_typeMap = is_array($typeMap) ? new TypeMap($typeMap) : $typeMap;
+        this._typeMap = is_array($typeMap) ? new TypeMap($typeMap) : $typeMap;
 
         return this;
     }
@@ -49,11 +49,11 @@ trait TypeMapTrait
      */
     function getTypeMap(): TypeMap
     {
-        if (this->_typeMap == null) {
-            this->_typeMap = new TypeMap();
+        if (this._typeMap == null) {
+            this._typeMap = new TypeMap();
         }
 
-        return this->_typeMap;
+        return this._typeMap;
     }
 
     /**
@@ -72,7 +72,7 @@ trait TypeMapTrait
      */
     function setDefaultTypes(array $types)
     {
-        this->getTypeMap()->setDefaults($types);
+        this.getTypeMap()->setDefaults($types);
 
         return this;
     }
@@ -84,6 +84,6 @@ trait TypeMapTrait
      */
     function getDefaultTypes(): array
     {
-        return this->getTypeMap()->getDefaults();
+        return this.getTypeMap()->getDefaults();
     }
 }

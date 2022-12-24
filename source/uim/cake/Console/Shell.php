@@ -185,23 +185,23 @@ class Shell
      */
     public this(?ConsoleIo $io = null, ?LocatorInterface $locator = null)
     {
-        if (!this->name) {
+        if (!this.name) {
             [, $class] = namespaceSplit(static::class);
-            this->name = str_replace(['Shell', 'Task'], '', $class);
+            this.name = str_replace(['Shell', 'Task'], '', $class);
         }
-        this->_io = $io ?: new ConsoleIo();
-        this->_tableLocator = $locator;
+        this._io = $io ?: new ConsoleIo();
+        this._tableLocator = $locator;
 
-        this->modelFactory('Table', [this->getTableLocator(), 'get']);
-        this->Tasks = new TaskRegistry(this);
+        this.modelFactory('Table', [this.getTableLocator(), 'get']);
+        this.Tasks = new TaskRegistry(this);
 
-        this->_mergeVars(
+        this._mergeVars(
             ['tasks'],
             ['associative' => ['tasks']]
         );
 
-        if (isset(this->modelClass)) {
-            this->loadModel();
+        if (isset(this.modelClass)) {
+            this.loadModel();
         }
     }
 
@@ -213,7 +213,7 @@ class Shell
      */
     function setRootName(string $name)
     {
-        this->rootName = $name;
+        this.rootName = $name;
 
         return this;
     }
@@ -225,7 +225,7 @@ class Shell
      */
     function getIo(): ConsoleIo
     {
-        return this->_io;
+        return this._io;
     }
 
     /**
@@ -236,7 +236,7 @@ class Shell
      */
     function setIo(ConsoleIo $io): void
     {
-        this->_io = $io;
+        this._io = $io;
     }
 
     /**
@@ -249,7 +249,7 @@ class Shell
      */
     function initialize(): void
     {
-        this->loadTasks();
+        this.loadTasks();
     }
 
     /**
@@ -264,8 +264,8 @@ class Shell
      */
     function startup(): void
     {
-        if (!this->param('requested')) {
-            this->_welcome();
+        if (!this.param('requested')) {
+            this._welcome();
         }
     }
 
@@ -285,13 +285,13 @@ class Shell
      */
     function loadTasks(): bool
     {
-        if (this->tasks == true || empty(this->tasks)) {
+        if (this.tasks == true || empty(this.tasks)) {
             return true;
         }
-        this->_taskMap = this->Tasks->normalizeArray(this->tasks);
-        this->taskNames = array_merge(this->taskNames, array_keys(this->_taskMap));
+        this._taskMap = this.Tasks->normalizeArray(this.tasks);
+        this.taskNames = array_merge(this.taskNames, array_keys(this._taskMap));
 
-        this->_validateTasks();
+        this._validateTasks();
 
         return true;
     }
@@ -304,7 +304,7 @@ class Shell
      */
     protected function _validateTasks(): void
     {
-        foreach (this->_taskMap as $taskName => $task) {
+        foreach (this._taskMap as $taskName => $task) {
             $class = App::className($task['class'], 'Shell/Task', 'Task');
             if ($class == null) {
                 throw new RuntimeException(sprintf(
@@ -324,7 +324,7 @@ class Shell
      */
     function hasTask(string $task): bool
     {
-        return isset(this->_taskMap[Inflector::camelize($task)]);
+        return isset(this._taskMap[Inflector::camelize($task)]);
     }
 
     /**
@@ -357,7 +357,7 @@ class Shell
      * With a string command:
      *
      * ```
-     * return this->dispatchShell('schema create DbAcl');
+     * return this.dispatchShell('schema create DbAcl');
      * ```
      *
      * Avoid using this form if you have string arguments, with spaces in them.
@@ -367,7 +367,7 @@ class Shell
      * With an array command:
      *
      * ```
-     * return this->dispatchShell('schema', 'create', 'i18n', '--dry');
+     * return this.dispatchShell('schema', 'create', 'i18n', '--dry');
      * ```
      *
      * With an array having two key / value pairs:
@@ -376,14 +376,14 @@ class Shell
      *  - `extra` can accept an array of extra parameters to pass on to the dispatcher. This
      *    parameters will be available in the `param` property of the called `Shell`
      *
-     * `return this->dispatchShell([
+     * `return this.dispatchShell([
      *      'command' => 'schema create DbAcl',
      *      'extra' => ['param' => 'value']
      * ]);`
      *
      * or
      *
-     * `return this->dispatchShell([
+     * `return this.dispatchShell([
      *      'command' => ['schema', 'create', 'DbAcl'],
      *      'extra' => ['param' => 'value']
      * ]);`
@@ -393,7 +393,7 @@ class Shell
      */
     function dispatchShell(): int
     {
-        [$args, $extra] = this->parseDispatchArguments(func_get_args());
+        [$args, $extra] = this.parseDispatchArguments(func_get_args());
 
         $extra['requested'] = $extra['requested'] ?? true;
         /** @psalm-suppress DeprecatedClass */
@@ -467,58 +467,58 @@ class Shell
     function runCommand(array $argv, bool $autoMethod = false, array $extra = [])
     {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
-        this->OptionParser = this->getOptionParser();
+        this.OptionParser = this.getOptionParser();
         try {
-            [this->params, this->args] = this->OptionParser->parse($argv, this->_io);
+            [this.params, this.args] = this.OptionParser->parse($argv, this._io);
         } catch (ConsoleException $e) {
-            this->err('Error: ' . $e->getMessage());
+            this.err('Error: ' . $e->getMessage());
 
             return false;
         }
 
-        this->params = array_merge(this->params, $extra);
-        this->_setOutputLevel();
-        this->command = $command;
-        if ($command && !empty(this->params['help'])) {
-            return this->_displayHelp($command);
+        this.params = array_merge(this.params, $extra);
+        this._setOutputLevel();
+        this.command = $command;
+        if ($command && !empty(this.params['help'])) {
+            return this._displayHelp($command);
         }
 
-        $subcommands = this->OptionParser->subcommands();
+        $subcommands = this.OptionParser->subcommands();
         $method = Inflector::camelize((string)$command);
-        $isMethod = this->hasMethod($method);
+        $isMethod = this.hasMethod($method);
 
         if ($isMethod && $autoMethod && count($subcommands) == 0) {
-            array_shift(this->args);
-            this->startup();
+            array_shift(this.args);
+            this.startup();
 
-            return this->$method(...this->args);
+            return this.$method(...this.args);
         }
 
         if ($isMethod && isset($subcommands[$command])) {
-            this->startup();
+            this.startup();
 
-            return this->$method(...this->args);
+            return this.$method(...this.args);
         }
 
-        if ($command && this->hasTask($command) && isset($subcommands[$command])) {
-            this->startup();
+        if ($command && this.hasTask($command) && isset($subcommands[$command])) {
+            this.startup();
             array_shift($argv);
 
-            return this->{$method}->runCommand($argv, false, ['requested' => true]);
+            return this.{$method}->runCommand($argv, false, ['requested' => true]);
         }
 
-        if (this->hasMethod('main')) {
-            this->command = 'main';
-            this->startup();
+        if (this.hasMethod('main')) {
+            this.command = 'main';
+            this.startup();
 
-            return this->main(...this->args);
+            return this.main(...this.args);
         }
 
-        this->err('No subcommand provided. Choose one of the available subcommands.', 2);
+        this.err('No subcommand provided. Choose one of the available subcommands.', 2);
         try {
-            this->_io->err(this->OptionParser->help($command));
+            this._io->err(this.OptionParser->help($command));
         } catch (ConsoleException $e) {
-            this->err('Error: ' . $e->getMessage());
+            this.err('Error: ' . $e->getMessage());
         }
 
         return false;
@@ -534,14 +534,14 @@ class Shell
      */
     protected function _setOutputLevel(): void
     {
-        this->_io->setLoggers(ConsoleIo::NORMAL);
-        if (!empty(this->params['quiet'])) {
-            this->_io->level(ConsoleIo::QUIET);
-            this->_io->setLoggers(ConsoleIo::QUIET);
+        this._io->setLoggers(ConsoleIo::NORMAL);
+        if (!empty(this.params['quiet'])) {
+            this._io->level(ConsoleIo::QUIET);
+            this._io->setLoggers(ConsoleIo::QUIET);
         }
-        if (!empty(this->params['verbose'])) {
-            this->_io->level(ConsoleIo::VERBOSE);
-            this->_io->setLoggers(ConsoleIo::VERBOSE);
+        if (!empty(this.params['verbose'])) {
+            this._io->level(ConsoleIo::VERBOSE);
+            this._io->setLoggers(ConsoleIo::VERBOSE);
         }
     }
 
@@ -554,19 +554,19 @@ class Shell
     protected function _displayHelp(?string $command = null)
     {
         $format = 'text';
-        if (!empty(this->args[0]) && this->args[0] == 'xml') {
+        if (!empty(this.args[0]) && this.args[0] == 'xml') {
             $format = 'xml';
-            this->_io->setOutputAs(ConsoleOutput::RAW);
+            this._io->setOutputAs(ConsoleOutput::RAW);
         } else {
-            this->_welcome();
+            this._welcome();
         }
 
-        $subcommands = this->OptionParser->subcommands();
+        $subcommands = this.OptionParser->subcommands();
         if ($command != null) {
             $command = isset($subcommands[$command]) ? $command : null;
         }
 
-        return this->out(this->OptionParser->help($command, $format));
+        return this.out(this.OptionParser->help($command, $format));
     }
 
     /**
@@ -579,9 +579,9 @@ class Shell
      */
     function getOptionParser(): ConsoleOptionParser
     {
-        $name = (this->plugin ? this->plugin . '.' : '') . this->name;
+        $name = (this.plugin ? this.plugin . '.' : '') . this.name;
         $parser = new ConsoleOptionParser($name);
-        $parser->setRootName(this->rootName);
+        $parser->setRootName(this.rootName);
 
         return $parser;
     }
@@ -594,27 +594,27 @@ class Shell
      */
     function __get(string $name)
     {
-        if (empty(this->{$name}) && in_array($name, this->taskNames, true)) {
-            $properties = this->_taskMap[$name];
-            this->{$name} = this->Tasks->load($properties['class'], $properties['config']);
-            this->{$name}->args = &this->args;
-            this->{$name}->params = &this->params;
-            this->{$name}->initialize();
-            this->{$name}->loadTasks();
+        if (empty(this.{$name}) && in_array($name, this.taskNames, true)) {
+            $properties = this._taskMap[$name];
+            this.{$name} = this.Tasks->load($properties['class'], $properties['config']);
+            this.{$name}->args = &this.args;
+            this.{$name}->params = &this.params;
+            this.{$name}->initialize();
+            this.{$name}->loadTasks();
         }
 
-        return this->{$name};
+        return this.{$name};
     }
 
     /**
-     * Safely access the values in this->params.
+     * Safely access the values in this.params.
      *
      * @param string $name The name of the parameter to get.
      * @return string|bool|null Value. Will return null if it doesn't exist.
      */
     function param(string $name)
     {
-        return this->params[$name] ?? null;
+        return this.params[$name] ?? null;
     }
 
     /**
@@ -628,14 +628,14 @@ class Shell
      */
     function in(string $prompt, $options = null, ?string $default = null): ?string
     {
-        if (!this->interactive) {
+        if (!this.interactive) {
             return $default;
         }
         if ($options) {
-            return this->_io->askChoice($prompt, $options, $default);
+            return this._io->askChoice($prompt, $options, $default);
         }
 
-        return this->_io->ask($prompt, $default);
+        return this._io->ask($prompt, $default);
     }
 
     /**
@@ -668,7 +668,7 @@ class Shell
      */
     function verbose($message, int $newlines = 1): ?int
     {
-        return this->_io->verbose($message, $newlines);
+        return this._io->verbose($message, $newlines);
     }
 
     /**
@@ -680,7 +680,7 @@ class Shell
      */
     function quiet($message, int $newlines = 1): ?int
     {
-        return this->_io->quiet($message, $newlines);
+        return this._io->quiet($message, $newlines);
     }
 
     /**
@@ -702,7 +702,7 @@ class Shell
      */
     function out($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
     {
-        return this->_io->out($message, $newlines, $level);
+        return this._io->out($message, $newlines, $level);
     }
 
     /**
@@ -715,7 +715,7 @@ class Shell
      */
     function err($message, int $newlines = 1): int
     {
-        return this->_io->error($message, $newlines);
+        return this._io->error($message, $newlines);
     }
 
     /**
@@ -729,7 +729,7 @@ class Shell
      */
     function info($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
     {
-        return this->_io->info($message, $newlines, $level);
+        return this._io->info($message, $newlines, $level);
     }
 
     /**
@@ -742,7 +742,7 @@ class Shell
      */
     function warn($message, int $newlines = 1): int
     {
-        return this->_io->warning($message, $newlines);
+        return this._io->warning($message, $newlines);
     }
 
     /**
@@ -756,7 +756,7 @@ class Shell
      */
     function success($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
     {
-        return this->_io->success($message, $newlines, $level);
+        return this._io->success($message, $newlines, $level);
     }
 
     /**
@@ -768,7 +768,7 @@ class Shell
      */
     function nl(int $multiplier = 1): string
     {
-        return this->_io->nl($multiplier);
+        return this._io->nl($multiplier);
     }
 
     /**
@@ -781,7 +781,7 @@ class Shell
      */
     function hr(int $newlines = 0, int $width = 63): void
     {
-        this->_io->hr($newlines, $width);
+        this._io->hr($newlines, $width);
     }
 
     /**
@@ -797,7 +797,7 @@ class Shell
      */
     function abort(string $message, int $exitCode = self::CODE_ERROR): void
     {
-        this->_io->err('<error>' . $message . '</error>');
+        this._io->err('<error>' . $message . '</error>');
         throw new StopException($message, $exitCode);
     }
 
@@ -809,7 +809,7 @@ class Shell
      */
     function clear(): void
     {
-        if (!empty(this->params['noclear'])) {
+        if (!empty(this.params['noclear'])) {
             return;
         }
 
@@ -832,45 +832,45 @@ class Shell
     {
         $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
 
-        this->_io->out();
+        this._io->out();
 
         $fileExists = is_file($path);
-        if ($fileExists && empty(this->params['force']) && !this->interactive) {
-            this->_io->out('<warning>File exists, skipping</warning>.');
+        if ($fileExists && empty(this.params['force']) && !this.interactive) {
+            this._io->out('<warning>File exists, skipping</warning>.');
 
             return false;
         }
 
-        if ($fileExists && this->interactive && empty(this->params['force'])) {
-            this->_io->out(sprintf('<warning>File `%s` exists</warning>', $path));
-            $key = this->_io->askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
+        if ($fileExists && this.interactive && empty(this.params['force'])) {
+            this._io->out(sprintf('<warning>File `%s` exists</warning>', $path));
+            $key = this._io->askChoice('Do you want to overwrite?', ['y', 'n', 'a', 'q'], 'n');
 
             if (strtolower($key) == 'q') {
-                this->_io->out('<error>Quitting</error>.', 2);
-                this->_stop();
+                this._io->out('<error>Quitting</error>.', 2);
+                this._stop();
 
                 return false;
             }
             if (strtolower($key) == 'a') {
-                this->params['force'] = true;
+                this.params['force'] = true;
                 $key = 'y';
             }
             if (strtolower($key) != 'y') {
-                this->_io->out(sprintf('Skip `%s`', $path), 2);
+                this._io->out(sprintf('Skip `%s`', $path), 2);
 
                 return false;
             }
         } else {
-            this->out(sprintf('Creating file %s', $path));
+            this.out(sprintf('Creating file %s', $path));
         }
 
         try {
             $fs = new Filesystem();
             $fs->dumpFile($path, $contents);
 
-            this->_io->out(sprintf('<success>Wrote</success> `%s`', $path));
+            this._io->out(sprintf('<success>Wrote</success> `%s`', $path));
         } catch (CakeException $e) {
-            this->_io->err(sprintf('<error>Could not write to `%s`</error>.', $path), 2);
+            this._io->err(sprintf('<error>Could not write to `%s`</error>.', $path), 2);
 
             return false;
         }
@@ -906,7 +906,7 @@ class Shell
      */
     function helper(string $name, array $config = []): Helper
     {
-        return this->_io->helper($name, $config);
+        return this._io->helper($name, $config);
     }
 
     /**
@@ -931,13 +931,13 @@ class Shell
     function __debugInfo(): array
     {
         return [
-            'name' => this->name,
-            'plugin' => this->plugin,
-            'command' => this->command,
-            'tasks' => this->tasks,
-            'params' => this->params,
-            'args' => this->args,
-            'interactive' => this->interactive,
+            'name' => this.name,
+            'plugin' => this.plugin,
+            'command' => this.command,
+            'tasks' => this.tasks,
+            'params' => this.params,
+            'args' => this.args,
+            'interactive' => this.interactive,
         ];
     }
 }

@@ -48,7 +48,7 @@ class ErrorLogger implements ErrorLoggerInterface
      */
     public this(array $config = [])
     {
-        this->setConfig($config);
+        this.setConfig($config);
     }
 
     /**
@@ -63,7 +63,7 @@ class ErrorLogger implements ErrorLoggerInterface
     {
         $message = $error->getMessage();
         if ($request) {
-            $message .= this->getRequestContext($request);
+            $message .= this.getRequestContext($request);
         }
         if ($includeTrace) {
             $message .= "\nTrace:\n" . $error->getTraceAsString() . "\n";
@@ -91,10 +91,10 @@ class ErrorLogger implements ErrorLoggerInterface
         ?IServerRequest $request = null,
         bool $includeTrace = false
     ): void {
-        $message = this->getMessage($exception, false, $includeTrace);
+        $message = this.getMessage($exception, false, $includeTrace);
 
         if ($request != null) {
-            $message .= this->getRequestContext($request);
+            $message .= this.getRequestContext($request);
         }
         Log::error($message);
     }
@@ -109,7 +109,7 @@ class ErrorLogger implements ErrorLoggerInterface
     function logMessage($level, string $message, array $context = []): bool
     {
         if (!empty($context['request'])) {
-            $message .= this->getRequestContext($context['request']);
+            $message .= this.getRequestContext($context['request']);
         }
         if (!empty($context['trace'])) {
             $message .= "\nTrace:\n" . $context['trace'] . "\n";
@@ -131,10 +131,10 @@ class ErrorLogger implements ErrorLoggerInterface
      */
     function log(Throwable $exception, ?IServerRequest $request = null): bool
     {
-        $message = this->getMessage($exception, false, this->getConfig('trace'));
+        $message = this.getMessage($exception, false, this.getConfig('trace'));
 
         if ($request != null) {
-            $message .= this->getRequestContext($request);
+            $message .= this.getRequestContext($request);
         }
 
         $message .= "\n\n";
@@ -184,7 +184,7 @@ class ErrorLogger implements ErrorLoggerInterface
 
         $previous = $exception->getPrevious();
         if ($previous) {
-            $message .= this->getMessage($previous, true, $includeTrace);
+            $message .= this.getMessage($previous, true, $includeTrace);
         }
 
         return $message;

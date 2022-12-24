@@ -33,7 +33,7 @@ class SpecialNode implements NodeInterface
      */
     public this(string $value)
     {
-        this->value = $value;
+        this.value = $value;
     }
 
     /**
@@ -43,7 +43,7 @@ class SpecialNode implements NodeInterface
      */
     function getValue(): string
     {
-        return this->value;
+        return this.value;
     }
 
     /**

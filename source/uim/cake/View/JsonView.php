@@ -27,8 +27,8 @@ use RuntimeException;
  * In your controller, you could do the following:
  *
  * ```
- * this->set(['posts' => $posts]);
- * this->viewBuilder()->setOption('serialize', true);
+ * this.set(['posts' => $posts]);
+ * this.viewBuilder()->setOption('serialize', true);
  * ```
  *
  * When the view is rendered, the `$posts` view variable will be serialized
@@ -38,8 +38,8 @@ use RuntimeException;
  * a top level object containing all the named view variables:
  *
  * ```
- * this->set(compact('posts', 'users', 'stuff'));
- * this->viewBuilder()->setOption('serialize', true);
+ * this.set(compact('posts', 'users', 'stuff'));
+ * this.viewBuilder()->setOption('serialize', true);
  * ```
  *
  * The above would generate a JSON object that looks like:
@@ -116,14 +116,14 @@ class JsonView extends SerializedView
     {
         $return = parent::render($template, $layout);
 
-        $jsonp = this->getConfig('jsonp');
+        $jsonp = this.getConfig('jsonp');
         if ($jsonp) {
             if ($jsonp == true) {
                 $jsonp = 'callback';
             }
-            if (this->request->getQuery($jsonp)) {
-                $return = sprintf('%s(%s)', h(this->request->getQuery($jsonp)), $return);
-                this->response = this->response->withType('js');
+            if (this.request->getQuery($jsonp)) {
+                $return = sprintf('%s(%s)', h(this.request->getQuery($jsonp)), $return);
+                this.response = this.response->withType('js');
             }
         }
 
@@ -135,9 +135,9 @@ class JsonView extends SerializedView
      */
     protected function _serialize($serialize): string
     {
-        $data = this->_dataToSerialize($serialize);
+        $data = this._dataToSerialize($serialize);
 
-        $jsonOptions = this->getConfig('jsonOptions');
+        $jsonOptions = this.getConfig('jsonOptions');
         if ($jsonOptions == null) {
             $jsonOptions = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_PARTIAL_OUTPUT_ON_ERROR;
         } elseif ($jsonOptions == false) {
@@ -174,14 +174,14 @@ class JsonView extends SerializedView
                 if (is_numeric($alias)) {
                     $alias = $key;
                 }
-                if (array_key_exists($key, this->viewVars)) {
-                    $data[$alias] = this->viewVars[$key];
+                if (array_key_exists($key, this.viewVars)) {
+                    $data[$alias] = this.viewVars[$key];
                 }
             }
 
             return !empty($data) ? $data : null;
         }
 
-        return this->viewVars[$serialize] ?? null;
+        return this.viewVars[$serialize] ?? null;
     }
 }

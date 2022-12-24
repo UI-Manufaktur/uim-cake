@@ -56,12 +56,12 @@ use UnexpectedValueException;
  * resource or collection of resources. For example adding or editing a new
  * object, or listing a set of objects.
  *
- * You can access request parameters, using `this->getRequest()`. The request object
+ * You can access request parameters, using `this.getRequest()`. The request object
  * contains all the POST, GET and FILES that were part of the request.
  *
  * After performing the required action, controllers are responsible for
  * creating a response. This usually takes the form of a generated `View`, or
- * possibly a redirection to another URL. In either case `this->getResponse()`
+ * possibly a redirection to another URL. In either case `this.getResponse()`
  * allows you to manipulate all aspects of the response.
  *
  * Controllers are created based on request parameters and
@@ -191,58 +191,58 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         ?ComponentRegistry $components = null
     ) {
         if ($name != null) {
-            this->name = $name;
-        } elseif (this->name == null && $request) {
-            this->name = $request->getParam('controller');
+            this.name = $name;
+        } elseif (this.name == null && $request) {
+            this.name = $request->getParam('controller');
         }
 
-        if (this->name == null) {
+        if (this.name == null) {
             [, $name] = namespaceSplit(static::class);
-            this->name = substr($name, 0, -10);
+            this.name = substr($name, 0, -10);
         }
 
-        this->setRequest($request ?: new ServerRequest());
-        this->response = $response ?: new Response();
+        this.setRequest($request ?: new ServerRequest());
+        this.response = $response ?: new Response();
 
         if ($eventManager != null) {
-            this->setEventManager($eventManager);
+            this.setEventManager($eventManager);
         }
 
-        this->modelFactory('Table', [this->getTableLocator(), 'get']);
+        this.modelFactory('Table', [this.getTableLocator(), 'get']);
 
-        if (this->defaultTable != null) {
-            this->modelClass = this->defaultTable;
+        if (this.defaultTable != null) {
+            this.modelClass = this.defaultTable;
         }
 
-        if (this->modelClass == null) {
-            $plugin = this->request->getParam('plugin');
-            $modelClass = ($plugin ? $plugin . '.' : '') . this->name;
-            this->_setModelClass($modelClass);
+        if (this.modelClass == null) {
+            $plugin = this.request->getParam('plugin');
+            $modelClass = ($plugin ? $plugin . '.' : '') . this.name;
+            this._setModelClass($modelClass);
 
-            this->defaultTable = $modelClass;
+            this.defaultTable = $modelClass;
         }
 
         if ($components != null) {
-            this->components($components);
+            this.components($components);
         }
 
-        this->initialize();
+        this.initialize();
 
-        if (isset(this->components)) {
+        if (isset(this.components)) {
             triggerWarning(
                 'Support for loading components using $components property is removed. ' .
-                'Use this->loadComponent() instead in initialize().'
+                'Use this.loadComponent() instead in initialize().'
             );
         }
 
-        if (isset(this->helpers)) {
+        if (isset(this.helpers)) {
             triggerWarning(
                 'Support for loading helpers using $helpers property is removed. ' .
-                'Use this->viewBuilder()->setHelpers() instead.'
+                'Use this.viewBuilder()->setHelpers() instead.'
             );
         }
 
-        this->getEventManager()->on(this);
+        this.getEventManager()->on(this);
     }
 
     /**
@@ -260,7 +260,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
     /**
      * Get the component registry for this controller.
      *
-     * If called with the first parameter, it will be set as the controller this->_components property
+     * If called with the first parameter, it will be set as the controller this._components property
      *
      * @param \Cake\Controller\ComponentRegistry|null $components Component registry.
      * @return \Cake\Controller\ComponentRegistry
@@ -270,14 +270,14 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         if ($components != null) {
             $components->setController(this);
 
-            return this->_components = $components;
+            return this._components = $components;
         }
 
-        if (this->_components == null) {
-            this->_components = new ComponentRegistry(this);
+        if (this._components == null) {
+            this._components = new ComponentRegistry(this);
         }
 
-        return this->_components;
+        return this._components;
     }
 
     /**
@@ -287,7 +287,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      * For example:
      *
      * ```
-     * this->loadComponent('Authentication.Authentication');
+     * this.loadComponent('Authentication.Authentication');
      * ```
      *
      * Will result in a `Authentication` property being set.
@@ -301,7 +301,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
     {
         [, $prop] = pluginSplit($name);
 
-        return this->{$prop} = this->components()->load($name, $config);
+        return this.{$prop} = this.components()->load($name, $config);
     }
 
     /**
@@ -312,15 +312,15 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function __get(string $name)
     {
-        if (!empty(this->modelClass)) {
-            if (strpos(this->modelClass, '\\') == false) {
-                [, $class] = pluginSplit(this->modelClass, true);
+        if (!empty(this.modelClass)) {
+            if (strpos(this.modelClass, '\\') == false) {
+                [, $class] = pluginSplit(this.modelClass, true);
             } else {
-                $class = App::shortName(this->modelClass, 'Model/Table', 'Table');
+                $class = App::shortName(this.modelClass, 'Model/Table', 'Table');
             }
 
             if ($class == $name) {
-                return this->loadModel();
+                return this.loadModel();
             }
         }
 
@@ -352,7 +352,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         if ($name == 'components') {
             triggerWarning(
                 'Support for loading components using $components property is removed. ' .
-                'Use this->loadComponent() instead in initialize().'
+                'Use this.loadComponent() instead in initialize().'
             );
 
             return;
@@ -361,13 +361,13 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         if ($name == 'helpers') {
             triggerWarning(
                 'Support for loading helpers using $helpers property is removed. ' .
-                'Use this->viewBuilder()->setHelpers() instead.'
+                'Use this.viewBuilder()->setHelpers() instead.'
             );
 
             return;
         }
 
-        this->{$name} = $value;
+        this.{$name} = $value;
     }
 
     /**
@@ -378,7 +378,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function getName(): string
     {
-        return this->name;
+        return this.name;
     }
 
     /**
@@ -390,7 +390,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function setName(string $name)
     {
-        this->name = $name;
+        this.name = $name;
 
         return this;
     }
@@ -403,7 +403,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function getPlugin(): ?string
     {
-        return this->plugin;
+        return this.plugin;
     }
 
     /**
@@ -415,7 +415,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function setPlugin(?string $name)
     {
-        this->plugin = $name;
+        this.plugin = $name;
 
         return this;
     }
@@ -428,7 +428,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function isAutoRenderEnabled(): bool
     {
-        return this->autoRender;
+        return this.autoRender;
     }
 
     /**
@@ -439,7 +439,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function enableAutoRender()
     {
-        this->autoRender = true;
+        this.autoRender = true;
 
         return this;
     }
@@ -452,7 +452,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function disableAutoRender()
     {
-        this->autoRender = false;
+        this.autoRender = false;
 
         return this;
     }
@@ -465,7 +465,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function getRequest(): ServerRequest
     {
-        return this->request;
+        return this.request;
     }
 
     /**
@@ -473,15 +473,15 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      * based on the contents of the request. Controller acts as a proxy for certain View variables
      * which must also be updated here. The properties that get set are:
      *
-     * - this->request - To the $request parameter
+     * - this.request - To the $request parameter
      *
      * @param \Cake\Http\ServerRequest $request Request instance.
      * @return this
      */
     function setRequest(ServerRequest $request)
     {
-        this->request = $request;
-        this->plugin = $request->getParam('plugin') ?: null;
+        this.request = $request;
+        this.plugin = $request->getParam('plugin') ?: null;
 
         return this;
     }
@@ -494,7 +494,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function getResponse(): Response
     {
-        return this->response;
+        return this.response;
     }
 
     /**
@@ -506,7 +506,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function setResponse(Response $response)
     {
-        this->response = $response;
+        this.response = $response;
 
         return this;
     }
@@ -519,12 +519,12 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function getAction(): Closure
     {
-        $request = this->request;
+        $request = this.request;
         $action = $request->getParam('action');
 
-        if (!this->isAction($action)) {
+        if (!this.isAction($action)) {
             throw new MissingActionException([
-                'controller' => this->name . 'Controller',
+                'controller' => this.name . 'Controller',
                 'action' => $request->getParam('action'),
                 'prefix' => $request->getParam('prefix') ?: '',
                 'plugin' => $request->getParam('plugin'),
@@ -552,11 +552,11 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
                 getTypeName($result)
             ));
         }
-        if ($result == null && this->isAutoRenderEnabled()) {
-            $result = this->render();
+        if ($result == null && this.isAutoRenderEnabled()) {
+            $result = this.render();
         }
         if ($result) {
-            this->response = $result;
+            this.response = $result;
         }
     }
 
@@ -573,7 +573,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function middleware($middleware, array $options = [])
     {
-        this->middlewares[] = [
+        this.middlewares[] = [
             'middleware' => $middleware,
             'options' => $options,
         ];
@@ -588,9 +588,9 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
     function getMiddleware(): array
     {
         $matching = [];
-        $action = this->request->getParam('action');
+        $action = this.request->getParam('action');
 
-        foreach (this->middlewares as $middleware) {
+        foreach (this.middlewares as $middleware) {
             $options = $middleware['options'];
             if (!empty($options['only'])) {
                 if (in_array($action, (array)$options['only'], true)) {
@@ -641,11 +641,11 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function startupProcess(): ?IResponse
     {
-        $event = this->dispatchEvent('Controller.initialize');
+        $event = this.dispatchEvent('Controller.initialize');
         if ($event->getResult() instanceof IResponse) {
             return $event->getResult();
         }
-        $event = this->dispatchEvent('Controller.startup');
+        $event = this.dispatchEvent('Controller.startup');
         if ($event->getResult() instanceof IResponse) {
             return $event->getResult();
         }
@@ -664,7 +664,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function shutdownProcess(): ?IResponse
     {
-        $event = this->dispatchEvent('Controller.shutdown');
+        $event = this.dispatchEvent('Controller.shutdown');
         if ($event->getResult() instanceof IResponse) {
             return $event->getResult();
         }
@@ -673,7 +673,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
     }
 
     /**
-     * Redirects to given $url, after turning off this->autoRender.
+     * Redirects to given $url, after turning off this.autoRender.
      *
      * @param \Psr\Http\Message\UriInterface|array|string $url A string, array-based URL or UriInterface instance.
      * @param int $status HTTP status code. Defaults to `302`.
@@ -682,26 +682,26 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function redirect($url, int $status = 302): ?Response
     {
-        this->autoRender = false;
+        this.autoRender = false;
 
         if ($status) {
-            this->response = this->response->withStatus($status);
+            this.response = this.response->withStatus($status);
         }
 
-        $event = this->dispatchEvent('Controller.beforeRedirect', [$url, this->response]);
+        $event = this.dispatchEvent('Controller.beforeRedirect', [$url, this.response]);
         if ($event->getResult() instanceof Response) {
-            return this->response = $event->getResult();
+            return this.response = $event->getResult();
         }
         if ($event->isStopped()) {
             return null;
         }
-        $response = this->response;
+        $response = this.response;
 
         if (!$response->getHeaderLine('Location')) {
             $response = $response->withLocation(Router::url($url, true));
         }
 
-        return this->response = $response;
+        return this.response = $response;
     }
 
     /**
@@ -726,9 +726,9 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             'Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, ' .
             'or call the other action as a method.'
         );
-        this->setRequest(this->request->withParam('action', $action));
+        this.setRequest(this.request->withParam('action', $action));
 
-        return this->$action(...$args);
+        return this.$action(...$args);
     }
 
     /**
@@ -741,12 +741,12 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function render(?string $template = null, ?string $layout = null): Response
     {
-        $builder = this->viewBuilder();
+        $builder = this.viewBuilder();
         if (!$builder->getTemplatePath()) {
-            $builder->setTemplatePath(this->_templatePath());
+            $builder->setTemplatePath(this._templatePath());
         }
 
-        this->autoRender = false;
+        this.autoRender = false;
 
         if ($template != null) {
             $builder->setTemplate($template);
@@ -756,24 +756,24 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             $builder->setLayout($layout);
         }
 
-        $event = this->dispatchEvent('Controller.beforeRender');
+        $event = this.dispatchEvent('Controller.beforeRender');
         if ($event->getResult() instanceof Response) {
             return $event->getResult();
         }
         if ($event->isStopped()) {
-            return this->response;
+            return this.response;
         }
 
         if ($builder->getTemplate() == null) {
-            $builder->setTemplate(this->request->getParam('action'));
+            $builder->setTemplate(this.request->getParam('action'));
         }
-        $viewClass = this->chooseViewClass();
-        $view = this->createView($viewClass);
+        $viewClass = this.chooseViewClass();
+        $view = this.createView($viewClass);
 
         $contents = $view->render();
         $response = $view->getResponse()->withStringBody($contents);
 
-        return this->setResponse($response)->response;
+        return this.setResponse($response)->response;
     }
 
     /**
@@ -798,13 +798,13 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     protected function chooseViewClass(): ?string
     {
-        $possibleViewClasses = this->viewClasses();
+        $possibleViewClasses = this.viewClasses();
         if (empty($possibleViewClasses)) {
             return null;
         }
         // Controller or component has already made a view class decision.
         // That decision should overwrite the framework behavior.
-        if (this->viewBuilder()->getClassName() != null) {
+        if (this.viewBuilder()->getClassName() != null) {
             return null;
         }
 
@@ -815,12 +815,12 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
                 $typeMap[$viewContentType] = $class;
             }
         }
-        $request = this->getRequest();
+        $request = this.getRequest();
 
         // Prefer the _ext route parameter if it is defined.
         $ext = $request->getParam('_ext');
         if ($ext) {
-            $extTypes = (array)(this->response->getMimeType($ext) ?: []);
+            $extTypes = (array)(this.response->getMimeType($ext) ?: []);
             foreach ($extTypes as $extType) {
                 if (isset($typeMap[$extType])) {
                     return $typeMap[$extType];
@@ -848,11 +848,11 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     protected function _templatePath(): string
     {
-        $templatePath = this->name;
-        if (this->request->getParam('prefix')) {
+        $templatePath = this.name;
+        if (this.request->getParam('prefix')) {
             $prefixes = array_map(
                 'Cake\Utility\Inflector::camelize',
-                explode('/', this->request->getParam('prefix'))
+                explode('/', this.request->getParam('prefix'))
             );
             $templatePath = implode(DIRECTORY_SEPARATOR, $prefixes) . DIRECTORY_SEPARATOR . $templatePath;
         }
@@ -870,10 +870,10 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      */
     function referer($default = '/', bool $local = true): string
     {
-        $referer = this->request->referer($local);
+        $referer = this.request->referer($local);
         if ($referer == null) {
             $url = Router::url($default, !$local);
-            $base = this->request->getAttribute('base');
+            $base = this.request->getAttribute('base');
             if ($local && $base && strpos($url, $base) == 0) {
                 $url = substr($url, strlen($base));
                 if ($url[0] != '/') {
@@ -893,7 +893,7 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
      * Handles pagination of records in Table objects.
      *
      * Will load the referenced Table object, and have the paginator
-     * paginate the query using the request date and settings defined in `this->paginate`.
+     * paginate the query using the request date and settings defined in `this.paginate`.
      *
      * This method will also make the PaginatorHelper available in the view.
      *
@@ -911,12 +911,12 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         }
 
         if (is_string($object) || $object == null) {
-            $try = [$object, this->modelClass];
+            $try = [$object, this.modelClass];
             foreach ($try as $tableName) {
                 if (empty($tableName)) {
                     continue;
                 }
-                $table = this->loadModel($tableName);
+                $table = this.loadModel($tableName);
                 break;
             }
         }
@@ -925,10 +925,10 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
             throw new RuntimeException('Unable to locate an object compatible with paginate.');
         }
 
-        $settings += this->paginate;
+        $settings += this.paginate;
 
-        if (isset(this->Paginator)) {
-            return this->Paginator->paginate($table, $settings);
+        if (isset(this.Paginator)) {
+            return this.Paginator->paginate($table, $settings);
         }
 
         if (isset($settings['paginator'])) {
@@ -956,14 +956,14 @@ class Controller implements EventListenerInterface, EventDispatcherInterface
         try {
             $results = $paginator->paginate(
                 $table,
-                this->request->getQueryParams(),
+                this.request->getQueryParams(),
                 $settings
             );
         } catch (PageOutOfBoundsException $e) {
             // Exception thrown below
         } finally {
-            $paging = $paginator->getPagingParams() + (array)this->request->getAttribute('paging', []);
-            this->request = this->request->withAttribute('paging', $paging);
+            $paging = $paginator->getPagingParams() + (array)this.request->getAttribute('paging', []);
+            this.request = this.request->withAttribute('paging', $paging);
         }
 
         if (isset($e)) {

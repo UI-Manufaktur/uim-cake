@@ -40,10 +40,10 @@ class FatalErrorException extends CakeException
     ) {
         parent::__construct($message, $code, $previous);
         if ($file) {
-            this->file = $file;
+            this.file = $file;
         }
         if ($line) {
-            this->line = $line;
+            this.line = $line;
         }
     }
 }

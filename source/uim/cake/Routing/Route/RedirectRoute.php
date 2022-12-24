@@ -49,7 +49,7 @@ class RedirectRoute extends Route
         if (isset($defaults['redirect'])) {
             $defaults = (array)$defaults['redirect'];
         }
-        this->redirect = $defaults;
+        this.redirect = $defaults;
     }
 
     /**
@@ -68,14 +68,14 @@ class RedirectRoute extends Route
         if (!$params) {
             return null;
         }
-        $redirect = this->redirect;
-        if (this->redirect && count(this->redirect) == 1 && !isset(this->redirect['controller'])) {
-            $redirect = this->redirect[0];
+        $redirect = this.redirect;
+        if (this.redirect && count(this.redirect) == 1 && !isset(this.redirect['controller'])) {
+            $redirect = this.redirect[0];
         }
-        if (isset(this->options['persist']) && is_array($redirect)) {
+        if (isset(this.options['persist']) && is_array($redirect)) {
             $redirect += ['pass' => $params['pass'], 'url' => []];
-            if (is_array(this->options['persist'])) {
-                foreach (this->options['persist'] as $elem) {
+            if (is_array(this.options['persist'])) {
+                foreach (this.options['persist'] as $elem) {
                     if (isset($params[$elem])) {
                         $redirect[$elem] = $params[$elem];
                     }
@@ -84,8 +84,8 @@ class RedirectRoute extends Route
             $redirect = Router::reverseToArray($redirect);
         }
         $status = 301;
-        if (isset(this->options['status']) && (this->options['status'] >= 300 && this->options['status'] < 400)) {
-            $status = this->options['status'];
+        if (isset(this.options['status']) && (this.options['status'] >= 300 && this.options['status'] < 400)) {
+            $status = this.options['status'];
         }
         throw new RedirectException(Router::url($redirect, true), $status);
     }
@@ -110,7 +110,7 @@ class RedirectRoute extends Route
      */
     function setStatus(int $status)
     {
-        this->options['status'] = $status;
+        this.options['status'] = $status;
 
         return this;
     }

@@ -99,7 +99,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
      */
     function timeAgoInWords(I18nDateTimeInterface $time, array $options = []): string
     {
-        $options = this->_options($options, FrozenTime::class);
+        $options = this._options($options, FrozenTime::class);
         if ($options['timezone']) {
             $time = $time->timezone($options['timezone']);
         }
@@ -124,7 +124,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
             return sprintf($options['absoluteString'], $time->i18nFormat($options['format']));
         }
 
-        $diffData = this->_diffData($futureTime, $pastTime, $backwards, $options);
+        $diffData = this._diffData($futureTime, $pastTime, $backwards, $options);
         [$fNum, $fWord, $years, $months, $weeks, $days, $hours, $minutes, $seconds] = array_values($diffData);
 
         $relativeDate = [];
@@ -321,7 +321,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
      */
     function dateAgoInWords(I18nDateTimeInterface $date, array $options = []): string
     {
-        $options = this->_options($options, FrozenDate::class);
+        $options = this._options($options, FrozenDate::class);
         if ($options['timezone']) {
             $date = $date->timezone($options['timezone']);
         }
@@ -346,7 +346,7 @@ class RelativeTimeFormatter implements DifferenceFormatterInterface
             return sprintf($options['absoluteString'], $date->i18nFormat($options['format']));
         }
 
-        $diffData = this->_diffData($futureTime, $pastTime, $backwards, $options);
+        $diffData = this._diffData($futureTime, $pastTime, $backwards, $options);
         [$fNum, $fWord, $years, $months, $weeks, $days] = array_values($diffData);
 
         $relativeDate = [];

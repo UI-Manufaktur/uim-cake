@@ -446,32 +446,32 @@ class Response implements IResponse
      */
     public this(array $options = [])
     {
-        this->_streamTarget = $options['streamTarget'] ?? this->_streamTarget;
-        this->_streamMode = $options['streamMode'] ?? this->_streamMode;
+        this._streamTarget = $options['streamTarget'] ?? this._streamTarget;
+        this._streamMode = $options['streamMode'] ?? this._streamMode;
         if (isset($options['stream'])) {
             if (!$options['stream'] instanceof StreamInterface) {
                 throw new InvalidArgumentException('Stream option must be an object that implements StreamInterface');
             }
-            this->stream = $options['stream'];
+            this.stream = $options['stream'];
         } else {
-            this->_createStream();
+            this._createStream();
         }
         if (isset($options['body'])) {
-            this->stream->write($options['body']);
+            this.stream->write($options['body']);
         }
         if (isset($options['status'])) {
-            this->_setStatus($options['status']);
+            this._setStatus($options['status']);
         }
         if (!isset($options['charset'])) {
             $options['charset'] = Configure::read('App.encoding');
         }
-        this->_charset = $options['charset'];
+        this._charset = $options['charset'];
         $type = 'text/html';
         if (isset($options['type'])) {
-            $type = this->resolveType($options['type']);
+            $type = this.resolveType($options['type']);
         }
-        this->_setContentType($type);
-        this->_cookies = new CookieCollection();
+        this._setContentType($type);
+        this._cookies = new CookieCollection();
     }
 
     /**
@@ -481,7 +481,7 @@ class Response implements IResponse
      */
     protected function _createStream(): void
     {
-        this->stream = new Stream(this->_streamTarget, this->_streamMode);
+        this.stream = new Stream(this._streamTarget, this._streamMode);
     }
 
     /**
@@ -493,8 +493,8 @@ class Response implements IResponse
      */
     protected function _setContentType(string $type): void
     {
-        if (in_array(this->_status, [304, 204], true)) {
-            this->_clearHeader('Content-Type');
+        if (in_array(this._status, [304, 204], true)) {
+            this._clearHeader('Content-Type');
 
             return;
         }
@@ -504,7 +504,7 @@ class Response implements IResponse
 
         $charset = false;
         if (
-            this->_charset &&
+            this._charset &&
             (
                 strpos($type, 'text/') == 0 ||
                 in_array($type, $allowed, true)
@@ -514,9 +514,9 @@ class Response implements IResponse
         }
 
         if ($charset && strpos($type, ';') == false) {
-            this->_setHeader('Content-Type', "{$type}; charset={this->_charset}");
+            this._setHeader('Content-Type', "{$type}; charset={this._charset}");
         } else {
-            this->_setHeader('Content-Type', $type);
+            this._setHeader('Content-Type', $type);
         }
     }
 
@@ -531,7 +531,7 @@ class Response implements IResponse
      */
     function withLocation(string $url)
     {
-        $new = this->withHeader('Location', $url);
+        $new = this.withHeader('Location', $url);
         if ($new->_status == 200) {
             $new->_status = 302;
         }
@@ -550,8 +550,8 @@ class Response implements IResponse
     protected function _setHeader(string $header, string $value): void
     {
         $normalized = strtolower($header);
-        this->headerNames[$normalized] = $header;
-        this->headers[$header] = [$value];
+        this.headerNames[$normalized] = $header;
+        this.headers[$header] = [$value];
     }
 
     /**
@@ -564,11 +564,11 @@ class Response implements IResponse
     protected function _clearHeader(string $header): void
     {
         $normalized = strtolower($header);
-        if (!isset(this->headerNames[$normalized])) {
+        if (!isset(this.headerNames[$normalized])) {
             return;
         }
-        $original = this->headerNames[$normalized];
-        unset(this->headerNames[$normalized], this->headers[$original]);
+        $original = this.headerNames[$normalized];
+        unset(this.headerNames[$normalized], this.headers[$original]);
     }
 
     /**
@@ -581,7 +581,7 @@ class Response implements IResponse
      */
     function getStatusCode(): int
     {
-        return this->_status;
+        return this._status;
     }
 
     /**
@@ -638,15 +638,15 @@ class Response implements IResponse
             ));
         }
 
-        this->_status = $code;
-        if ($reasonPhrase == '' && isset(this->_statusCodes[$code])) {
-            $reasonPhrase = this->_statusCodes[$code];
+        this._status = $code;
+        if ($reasonPhrase == '' && isset(this._statusCodes[$code])) {
+            $reasonPhrase = this._statusCodes[$code];
         }
-        this->_reasonPhrase = $reasonPhrase;
+        this._reasonPhrase = $reasonPhrase;
 
         // These status codes don't have bodies and can't have content-types.
         if (in_array($code, [304, 204], true)) {
-            this->_clearHeader('Content-Type');
+            this._clearHeader('Content-Type');
         }
     }
 
@@ -665,7 +665,7 @@ class Response implements IResponse
      */
     function getReasonPhrase(): string
     {
-        return this->_reasonPhrase;
+        return this._reasonPhrase;
     }
 
     /**
@@ -681,7 +681,7 @@ class Response implements IResponse
      */
     function setTypeMap(string $type, $mimeType): void
     {
-        this->_mimeTypes[$type] = $mimeType;
+        this._mimeTypes[$type] = $mimeType;
     }
 
     /**
@@ -691,7 +691,7 @@ class Response implements IResponse
      */
     function getType(): string
     {
-        $header = this->getHeaderLine('Content-Type');
+        $header = this.getHeaderLine('Content-Type');
         if (strpos($header, ';') != false) {
             return explode(';', $header)[0];
         }
@@ -710,7 +710,7 @@ class Response implements IResponse
      */
     function withType(string $contentType)
     {
-        $mappedType = this->resolveType($contentType);
+        $mappedType = this.resolveType($contentType);
         $new = clone this;
         $new->_setContentType($mappedType);
 
@@ -726,7 +726,7 @@ class Response implements IResponse
      */
     protected function resolveType(string $contentType): string
     {
-        $mapped = this->getMimeType($contentType);
+        $mapped = this.getMimeType($contentType);
         if ($mapped) {
             return is_array($mapped) ? current($mapped) : $mapped;
         }
@@ -747,7 +747,7 @@ class Response implements IResponse
      */
     function getMimeType(string $alias)
     {
-        return this->_mimeTypes[$alias] ?? false;
+        return this._mimeTypes[$alias] ?? false;
     }
 
     /**
@@ -764,7 +764,7 @@ class Response implements IResponse
             return array_map([this, 'mapType'], $ctype);
         }
 
-        foreach (this->_mimeTypes as $alias => $types) {
+        foreach (this._mimeTypes as $alias => $types) {
             if (in_array($ctype, (array)$types, true)) {
                 return $alias;
             }
@@ -780,7 +780,7 @@ class Response implements IResponse
      */
     function getCharset(): string
     {
-        return this->_charset;
+        return this._charset;
     }
 
     /**
@@ -793,7 +793,7 @@ class Response implements IResponse
     {
         $new = clone this;
         $new->_charset = $charset;
-        $new->_setContentType(this->getType());
+        $new->_setContentType(this.getType());
 
         return $new;
     }
@@ -805,7 +805,7 @@ class Response implements IResponse
      */
     function withDisabledCache()
     {
-        return this->withHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT')
+        return this.withHeader('Expires', 'Mon, 26 Jul 1997 05:00:00 GMT')
             ->withHeader('Last-Modified', gmdate(DATE_RFC7231))
             ->withHeader('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
     }
@@ -828,7 +828,7 @@ class Response implements IResponse
             }
         }
 
-        return this->withHeader('Date', gmdate(DATE_RFC7231, time()))
+        return this.withHeader('Date', gmdate(DATE_RFC7231, time()))
             ->withModified($since)
             ->withExpires($time)
             ->withSharable(true)
@@ -928,12 +928,12 @@ class Response implements IResponse
     protected function _setCacheControl(): void
     {
         $control = '';
-        foreach (this->_cacheDirectives as $key => $val) {
+        foreach (this._cacheDirectives as $key => $val) {
             $control .= $val == true ? $key : sprintf('%s=%s', $key, $val);
             $control .= ', ';
         }
         $control = rtrim($control, ', ');
-        this->_setHeader('Cache-Control', $control);
+        this._setHeader('Cache-Control', $control);
     }
 
     /**
@@ -954,9 +954,9 @@ class Response implements IResponse
      */
     function withExpires($time)
     {
-        $date = this->_getUTCDate($time);
+        $date = this._getUTCDate($time);
 
-        return this->withHeader('Expires', $date->format(DATE_RFC7231));
+        return this.withHeader('Expires', $date->format(DATE_RFC7231));
     }
 
     /**
@@ -977,9 +977,9 @@ class Response implements IResponse
      */
     function withModified($time)
     {
-        $date = this->_getUTCDate($time);
+        $date = this._getUTCDate($time);
 
-        return this->withHeader('Last-Modified', $date->format(DATE_RFC7231));
+        return this.withHeader('Last-Modified', $date->format(DATE_RFC7231));
     }
 
     /**
@@ -998,8 +998,8 @@ class Response implements IResponse
             'The `notModified()` method is deprecated. ' .
             'Use `withNotModified() instead, and remember immutability of with* methods.'
         );
-        this->_createStream();
-        this->_setStatus(304);
+        this._createStream();
+        this._setStatus(304);
 
         $remove = [
             'Allow',
@@ -1011,7 +1011,7 @@ class Response implements IResponse
             'Last-Modified',
         ];
         foreach ($remove as $header) {
-            this->_clearHeader($header);
+            this._clearHeader($header);
         }
     }
 
@@ -1026,7 +1026,7 @@ class Response implements IResponse
      */
     function withNotModified()
     {
-        $new = this->withStatus(304);
+        $new = this.withStatus(304);
         $new->_createStream();
         $remove = [
             'Allow',
@@ -1057,7 +1057,7 @@ class Response implements IResponse
      */
     function withVary($cacheVariances)
     {
-        return this->withHeader('Vary', (array)$cacheVariances);
+        return this.withHeader('Vary', (array)$cacheVariances);
     }
 
     /**
@@ -1085,7 +1085,7 @@ class Response implements IResponse
     {
         $hash = sprintf('%s"%s"', $weak ? 'W/' : '', $hash);
 
-        return this->withHeader('Etag', $hash);
+        return this.withHeader('Etag', $hash);
     }
 
     /**
@@ -1143,7 +1143,7 @@ class Response implements IResponse
      */
     function withDownload(string $filename)
     {
-        return this->withHeader('Content-Disposition', 'attachment; filename="' . $filename . '"');
+        return this.withHeader('Content-Disposition', 'attachment; filename="' . $filename . '"');
     }
 
     /**
@@ -1154,7 +1154,7 @@ class Response implements IResponse
      */
     function withLength($bytes)
     {
-        return this->withHeader('Content-Length', (string)$bytes);
+        return this.withHeader('Content-Length', (string)$bytes);
     }
 
     /**
@@ -1191,7 +1191,7 @@ class Response implements IResponse
             $param = '; ' . implode('; ', $params);
         }
 
-        return this->withAddedHeader('Link', '<' . $url . '>' . $param);
+        return this.withAddedHeader('Link', '<' . $url . '>' . $param);
     }
 
     /**
@@ -1209,7 +1209,7 @@ class Response implements IResponse
     function isNotModified(ServerRequest $request): bool
     {
         $etags = preg_split('/\s*,\s*/', $request->getHeaderLine('If-None-Match'), 0, PREG_SPLIT_NO_EMPTY);
-        $responseTag = this->getHeaderLine('Etag');
+        $responseTag = this.getHeaderLine('Etag');
         $etagMatches = null;
         if ($responseTag) {
             $etagMatches = in_array('*', $etags, true) || in_array($responseTag, $etags, true);
@@ -1217,8 +1217,8 @@ class Response implements IResponse
 
         $modifiedSince = $request->getHeaderLine('If-Modified-Since');
         $timeMatches = null;
-        if ($modifiedSince && this->hasHeader('Last-Modified')) {
-            $timeMatches = strtotime(this->getHeaderLine('Last-Modified')) == strtotime($modifiedSince);
+        if ($modifiedSince && this.hasHeader('Last-Modified')) {
+            $timeMatches = strtotime(this.getHeaderLine('Last-Modified')) == strtotime($modifiedSince);
         }
         if ($etagMatches == null && $timeMatches == null) {
             return false;
@@ -1249,8 +1249,8 @@ class Response implements IResponse
             'The `checkNotModified()` method is deprecated. ' .
             'Use `isNotModified() instead and `withNoModified()` instead.'
         );
-        if (this->isNotModified($request)) {
-            this->notModified();
+        if (this.isNotModified($request)) {
+            this.notModified();
 
             return true;
         }
@@ -1267,9 +1267,9 @@ class Response implements IResponse
      */
     function __toString(): string
     {
-        this->stream->rewind();
+        this.stream->rewind();
 
-        return this->stream->getContents();
+        return this.stream->getContents();
     }
 
     /**
@@ -1327,11 +1327,11 @@ class Response implements IResponse
      */
     function getCookie(string $name): ?array
     {
-        if (!this->_cookies->has($name)) {
+        if (!this._cookies->has($name)) {
             return null;
         }
 
-        return this->_cookies->get($name)->toArray();
+        return this._cookies->get($name)->toArray();
     }
 
     /**
@@ -1345,7 +1345,7 @@ class Response implements IResponse
     {
         $out = [];
         /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
-        $cookies = this->_cookies;
+        $cookies = this._cookies;
         foreach ($cookies as $cookie) {
             $out[$cookie->getName()] = $cookie->toArray();
         }
@@ -1360,7 +1360,7 @@ class Response implements IResponse
      */
     function getCookieCollection(): CookieCollection
     {
-        return this->_cookies;
+        return this._cookies;
     }
 
     /**
@@ -1413,14 +1413,14 @@ class Response implements IResponse
      */
     function withFile(string $path, array $options = [])
     {
-        $file = this->validateFile($path);
+        $file = this.validateFile($path);
         $options += [
             'name' => null,
             'download' => null,
         ];
 
         $extension = strtolower($file->getExtension());
-        $mapped = this->getMimeType($extension);
+        $mapped = this.getMimeType($extension);
         if ((!$extension || !$mapped) && $options['download'] == null) {
             $options['download'] = true;
         }
@@ -1507,7 +1507,7 @@ class Response implements IResponse
      */
     function getFile(): ?SplFileInfo
     {
-        return this->_file;
+        return this._file;
     }
 
     /**
@@ -1542,21 +1542,21 @@ class Response implements IResponse
         }
 
         if ($start > $end || $end > $lastByte || $start > $lastByte) {
-            this->_setStatus(416);
-            this->_setHeader('Content-Range', 'bytes 0-' . $lastByte . '/' . $fileSize);
+            this._setStatus(416);
+            this._setHeader('Content-Range', 'bytes 0-' . $lastByte . '/' . $fileSize);
 
             return;
         }
 
         /** @psalm-suppress PossiblyInvalidOperand */
-        this->_setHeader('Content-Length', (string)($end - $start + 1));
-        this->_setHeader('Content-Range', 'bytes ' . $start . '-' . $end . '/' . $fileSize);
-        this->_setStatus(206);
+        this._setHeader('Content-Length', (string)($end - $start + 1));
+        this._setHeader('Content-Range', 'bytes ' . $start . '-' . $end . '/' . $fileSize);
+        this._setStatus(206);
         /**
          * @var int $start
          * @var int $end
          */
-        this->_fileRange = [$start, $end];
+        this._fileRange = [$start, $end];
     }
 
     /**
@@ -1568,14 +1568,14 @@ class Response implements IResponse
     function __debugInfo(): array
     {
         return [
-            'status' => this->_status,
-            'contentType' => this->getType(),
-            'headers' => this->headers,
-            'file' => this->_file,
-            'fileRange' => this->_fileRange,
-            'cookies' => this->_cookies,
-            'cacheDirectives' => this->_cacheDirectives,
-            'body' => (string)this->getBody(),
+            'status' => this._status,
+            'contentType' => this.getType(),
+            'headers' => this.headers,
+            'file' => this._file,
+            'fileRange' => this._fileRange,
+            'cookies' => this._cookies,
+            'cacheDirectives' => this._cacheDirectives,
+            'body' => (string)this.getBody(),
         ];
     }
 }

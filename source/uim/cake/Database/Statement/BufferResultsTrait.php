@@ -38,7 +38,7 @@ trait BufferResultsTrait
      */
     function bufferResults(bool $buffer)
     {
-        this->_bufferResults = $buffer;
+        this._bufferResults = $buffer;
 
         return this;
     }

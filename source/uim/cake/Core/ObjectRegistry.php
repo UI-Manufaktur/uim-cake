@@ -86,20 +86,20 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
             [, $objName] = pluginSplit($name);
         }
 
-        $loaded = isset(this->_loaded[$objName]);
+        $loaded = isset(this._loaded[$objName]);
         if ($loaded && !empty($config)) {
-            this->_checkDuplicate($objName, $config);
+            this._checkDuplicate($objName, $config);
         }
         if ($loaded) {
-            return this->_loaded[$objName];
+            return this._loaded[$objName];
         }
 
         $className = $name;
         if (is_string($name)) {
-            $className = this->_resolveClassName($name);
+            $className = this._resolveClassName($name);
             if ($className == null) {
                 [$plugin, $name] = pluginSplit($name);
-                this->_throwMissingClassError($name, $plugin);
+                this._throwMissingClassError($name, $plugin);
             }
         }
 
@@ -107,8 +107,8 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
          * @psalm-var TObject $instance
          * @psalm-suppress PossiblyNullArgument
          **/
-        $instance = this->_create($className, $objName, $config);
-        this->_loaded[$objName] = $instance;
+        $instance = this._create($className, $objName, $config);
+        this._loaded[$objName] = $instance;
 
         return $instance;
     }
@@ -131,7 +131,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     protected function _checkDuplicate(string $name, array $config): void
     {
-        $existing = this->_loaded[$name];
+        $existing = this._loaded[$name];
         $msg = sprintf('The "%s" alias has already been loaded.', $name);
         $hasConfig = method_exists($existing, 'getConfig');
         if (!$hasConfig) {
@@ -205,7 +205,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function loaded(): array
     {
-        return array_keys(this->_loaded);
+        return array_keys(this._loaded);
     }
 
     /**
@@ -216,7 +216,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function has(string $name): bool
     {
-        return isset(this->_loaded[$name]);
+        return isset(this._loaded[$name]);
     }
 
     /**
@@ -229,11 +229,11 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function get(string $name)
     {
-        if (!isset(this->_loaded[$name])) {
+        if (!isset(this._loaded[$name])) {
             throw new RuntimeException(sprintf('Unknown object "%s"', $name));
         }
 
-        return this->_loaded[$name];
+        return this._loaded[$name];
     }
 
     /**
@@ -245,7 +245,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function __get(string $name)
     {
-        return this->_loaded[$name] ?? null;
+        return this._loaded[$name] ?? null;
     }
 
     /**
@@ -256,7 +256,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function __isset(string $name): bool
     {
-        return this->has($name);
+        return this.has($name);
     }
 
     /**
@@ -269,7 +269,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function __set(string $name, $object): void
     {
-        this->set($name, $object);
+        this.set($name, $object);
     }
 
     /**
@@ -280,7 +280,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function __unset(string $name): void
     {
-        this->unload($name);
+        this.unload($name);
     }
 
     /**
@@ -319,8 +319,8 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function reset()
     {
-        foreach (array_keys(this->_loaded) as $name) {
-            this->unload((string)$name);
+        foreach (array_keys(this._loaded) as $name) {
+            this.unload((string)$name);
         }
 
         return this;
@@ -343,13 +343,13 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
         [, $objName] = pluginSplit($name);
 
         // Just call unload if the object was loaded before
-        if (array_key_exists($name, this->_loaded)) {
-            this->unload($name);
+        if (array_key_exists($name, this._loaded)) {
+            this.unload($name);
         }
         if (this instanceof EventDispatcherInterface && $object instanceof EventListenerInterface) {
-            this->getEventManager()->on($object);
+            this.getEventManager()->on($object);
         }
-        this->_loaded[$objName] = $object;
+        this._loaded[$objName] = $object;
 
         /** @psalm-suppress LessSpecificReturnStatement */
         return this;
@@ -366,16 +366,16 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function unload(string $name)
     {
-        if (empty(this->_loaded[$name])) {
+        if (empty(this._loaded[$name])) {
             [$plugin, $name] = pluginSplit($name);
-            this->_throwMissingClassError($name, $plugin);
+            this._throwMissingClassError($name, $plugin);
         }
 
-        $object = this->_loaded[$name];
+        $object = this._loaded[$name];
         if (this instanceof EventDispatcherInterface && $object instanceof EventListenerInterface) {
-            this->getEventManager()->off($object);
+            this.getEventManager()->off($object);
         }
-        unset(this->_loaded[$name]);
+        unset(this._loaded[$name]);
 
         /** @psalm-suppress LessSpecificReturnStatement */
         return this;
@@ -389,7 +389,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function getIterator(): Traversable
     {
-        return new ArrayIterator(this->_loaded);
+        return new ArrayIterator(this._loaded);
     }
 
     /**
@@ -399,7 +399,7 @@ abstract class ObjectRegistry implements Countable, IteratorAggregate
      */
     function count(): int
     {
-        return count(this->_loaded);
+        return count(this._loaded);
     }
 
     /**

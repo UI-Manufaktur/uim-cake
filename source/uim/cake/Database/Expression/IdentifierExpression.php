@@ -50,8 +50,8 @@ class IdentifierExpression implements IExpression
      */
     public this(string $identifier, ?string $collation = null)
     {
-        this->_identifier = $identifier;
-        this->collation = $collation;
+        this._identifier = $identifier;
+        this.collation = $collation;
     }
 
     /**
@@ -62,7 +62,7 @@ class IdentifierExpression implements IExpression
      */
     function setIdentifier(string $identifier): void
     {
-        this->_identifier = $identifier;
+        this._identifier = $identifier;
     }
 
     /**
@@ -72,7 +72,7 @@ class IdentifierExpression implements IExpression
      */
     function getIdentifier(): string
     {
-        return this->_identifier;
+        return this._identifier;
     }
 
     /**
@@ -83,7 +83,7 @@ class IdentifierExpression implements IExpression
      */
     function setCollation(string $collation): void
     {
-        this->collation = $collation;
+        this.collation = $collation;
     }
 
     /**
@@ -93,7 +93,7 @@ class IdentifierExpression implements IExpression
      */
     function getCollation(): ?string
     {
-        return this->collation;
+        return this.collation;
     }
 
     /**
@@ -101,9 +101,9 @@ class IdentifierExpression implements IExpression
      */
     function sql(ValueBinder $binder): string
     {
-        $sql = this->_identifier;
-        if (this->collation) {
-            $sql .= ' COLLATE ' . this->collation;
+        $sql = this._identifier;
+        if (this.collation) {
+            $sql .= ' COLLATE ' . this.collation;
         }
 
         return $sql;

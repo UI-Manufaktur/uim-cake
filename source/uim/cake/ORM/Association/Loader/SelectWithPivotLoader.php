@@ -60,10 +60,10 @@ class SelectWithPivotLoader extends SelectLoader
     public this(array $options)
     {
         parent::__construct($options);
-        this->junctionAssociationName = $options['junctionAssociationName'];
-        this->junctionProperty = $options['junctionProperty'];
-        this->junctionAssoc = $options['junctionAssoc'];
-        this->junctionConditions = $options['junctionConditions'];
+        this.junctionAssociationName = $options['junctionAssociationName'];
+        this.junctionProperty = $options['junctionProperty'];
+        this.junctionAssoc = $options['junctionAssoc'];
+        this.junctionConditions = $options['junctionConditions'];
     }
 
     /**
@@ -79,8 +79,8 @@ class SelectWithPivotLoader extends SelectLoader
      */
     protected function _buildQuery(array $options): Query
     {
-        $name = this->junctionAssociationName;
-        $assoc = this->junctionAssoc;
+        $name = this.junctionAssociationName;
+        $assoc = this.junctionAssoc;
         $queryBuilder = false;
 
         if (!empty($options['queryBuilder'])) {
@@ -101,7 +101,7 @@ class SelectWithPivotLoader extends SelectLoader
         // Ensure that association conditions are applied
         // and that the required keys are in the selected columns.
 
-        $tempName = this->alias . '_CJoin';
+        $tempName = this.alias . '_CJoin';
         $schema = $assoc->getSchema();
         $joinFields = $types = [];
 
@@ -112,17 +112,17 @@ class SelectWithPivotLoader extends SelectLoader
         }
 
         $query
-            ->where(this->junctionConditions)
+            ->where(this.junctionConditions)
             ->select($joinFields);
 
         $query
             ->getEagerLoader()
-            ->addToJoinsMap($tempName, $assoc, false, this->junctionProperty);
+            ->addToJoinsMap($tempName, $assoc, false, this.junctionProperty);
 
         $assoc->attachTo($query, [
             'aliasPath' => $assoc->getAlias(),
             'includeFields' => false,
-            'propertyPath' => this->junctionProperty,
+            'propertyPath' => this.junctionProperty,
         ]);
         $query->getTypeMap()->addDefaults($types);
 
@@ -147,7 +147,7 @@ class SelectWithPivotLoader extends SelectLoader
     protected function _linkField(array $options)
     {
         $links = [];
-        $name = this->junctionAssociationName;
+        $name = this.junctionAssociationName;
 
         foreach ((array)$options['foreignKey'] as $key) {
             $links[] = sprintf('%s.%s', $name, $key);
@@ -175,16 +175,16 @@ class SelectWithPivotLoader extends SelectLoader
         $key = (array)$options['foreignKey'];
 
         foreach ($fetchQuery->all() as $result) {
-            if (!isset($result[this->junctionProperty])) {
+            if (!isset($result[this.junctionProperty])) {
                 throw new RuntimeException(sprintf(
                     '"%s" is missing from the belongsToMany results. Results cannot be created.',
-                    this->junctionProperty
+                    this.junctionProperty
                 ));
             }
 
             $values = [];
             foreach ($key as $k) {
-                $values[] = $result[this->junctionProperty][$k];
+                $values[] = $result[this.junctionProperty][$k];
             }
             $resultMap[implode(';', $values)][] = $result;
         }

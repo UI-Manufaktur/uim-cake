@@ -52,18 +52,18 @@ trait StringCompareTrait
     function assertSameAsFile(string $path, string $result): void
     {
         if (!file_exists($path)) {
-            $path = this->_compareBasePath . $path;
+            $path = this._compareBasePath . $path;
         }
 
-        if (this->_updateComparisons == null) {
-            this->_updateComparisons = env('UPDATE_TEST_COMPARISON_FILES');
+        if (this._updateComparisons == null) {
+            this._updateComparisons = env('UPDATE_TEST_COMPARISON_FILES');
         }
 
-        if (this->_updateComparisons) {
+        if (this._updateComparisons) {
             file_put_contents($path, $result);
         }
 
         $expected = file_get_contents($path);
-        this->assertTextEquals($expected, $result, 'Content does not match file ' . $path);
+        this.assertTextEquals($expected, $result, 'Content does not match file ' . $path);
     }
 }

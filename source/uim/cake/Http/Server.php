@@ -52,8 +52,8 @@ class Server implements EventDispatcherInterface
      */
     public this(IHttpApplication $app, ?Runner $runner = null)
     {
-        this->app = $app;
-        this->runner = $runner ?? new Runner();
+        this.app = $app;
+        this.runner = $runner ?? new Runner();
     }
 
     /**
@@ -76,18 +76,18 @@ class Server implements EventDispatcherInterface
         ?IServerRequest $request = null,
         ?MiddlewareQueue $middlewareQueue = null
     ): IResponse {
-        this->bootstrap();
+        this.bootstrap();
 
         $request = $request ?: ServerRequestFactory::fromGlobals();
 
-        $middleware = this->app->middleware($middlewareQueue ?? new MiddlewareQueue());
-        if (this->app instanceof IPluginApplication) {
-            $middleware = this->app->pluginMiddleware($middleware);
+        $middleware = this.app->middleware($middlewareQueue ?? new MiddlewareQueue());
+        if (this.app instanceof IPluginApplication) {
+            $middleware = this.app->pluginMiddleware($middleware);
         }
 
-        this->dispatchEvent('Server.buildMiddleware', ['middleware' => $middleware]);
+        this.dispatchEvent('Server.buildMiddleware', ['middleware' => $middleware]);
 
-        $response = this->runner->run($middleware, $request, this->app);
+        $response = this.runner->run($middleware, $request, this.app);
 
         if ($request instanceof ServerRequest) {
             $request->getSession()->close();
@@ -106,9 +106,9 @@ class Server implements EventDispatcherInterface
      */
     protected function bootstrap(): void
     {
-        this->app->bootstrap();
-        if (this->app instanceof IPluginApplication) {
-            this->app->pluginBootstrap();
+        this.app->bootstrap();
+        if (this.app instanceof IPluginApplication) {
+            this.app->pluginBootstrap();
         }
     }
 
@@ -135,7 +135,7 @@ class Server implements EventDispatcherInterface
      */
     function getApp(): IHttpApplication
     {
-        return this->app;
+        return this.app;
     }
 
     /**
@@ -145,8 +145,8 @@ class Server implements EventDispatcherInterface
      */
     function getEventManager(): IEventManager
     {
-        if (this->app instanceof EventDispatcherInterface) {
-            return this->app->getEventManager();
+        if (this.app instanceof EventDispatcherInterface) {
+            return this.app->getEventManager();
         }
 
         return EventManager::instance();
@@ -163,8 +163,8 @@ class Server implements EventDispatcherInterface
      */
     function setEventManager(IEventManager $eventManager)
     {
-        if (this->app instanceof EventDispatcherInterface) {
-            this->app->setEventManager($eventManager);
+        if (this.app instanceof EventDispatcherInterface) {
+            this.app->setEventManager($eventManager);
 
             return this;
         }

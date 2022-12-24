@@ -76,19 +76,19 @@ class ConsoleInputSubcommand
             $parser = ConsoleOptionParser::buildFromArray($parser);
         }
 
-        this->_name = $name;
-        this->_help = $help;
-        this->_parser = $parser;
+        this._name = $name;
+        this._help = $help;
+        this._parser = $parser;
     }
 
     /**
      * Get the value of the name attribute.
      *
-     * @return string Value of this->_name.
+     * @return string Value of this._name.
      */
     function name(): string
     {
-        return this->_name;
+        return this._name;
     }
 
     /**
@@ -98,7 +98,7 @@ class ConsoleInputSubcommand
      */
     function getRawHelp(): string
     {
-        return this->_help;
+        return this._help;
     }
 
     /**
@@ -109,12 +109,12 @@ class ConsoleInputSubcommand
      */
     function help(int $width = 0): string
     {
-        $name = this->_name;
+        $name = this._name;
         if (strlen($name) < $width) {
             $name = str_pad($name, $width, ' ');
         }
 
-        return $name . this->_help;
+        return $name . this._help;
     }
 
     /**
@@ -124,7 +124,7 @@ class ConsoleInputSubcommand
      */
     function parser(): ?ConsoleOptionParser
     {
-        return this->_parser;
+        return this._parser;
     }
 
     /**
@@ -136,8 +136,8 @@ class ConsoleInputSubcommand
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $command = $parent->addChild('command');
-        $command->addAttribute('name', this->_name);
-        $command->addAttribute('help', this->_help);
+        $command->addAttribute('name', this._name);
+        $command->addAttribute('help', this._help);
 
         return $parent;
     }

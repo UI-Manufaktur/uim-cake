@@ -39,7 +39,7 @@ class ValidCount
      */
     public this(string $field)
     {
-        this->_field = $field;
+        this._field = $field;
     }
 
     /**
@@ -51,7 +51,7 @@ class ValidCount
      */
     function __invoke(EntityInterface $entity, array $options): bool
     {
-        $value = $entity->{this->_field};
+        $value = $entity->{this._field};
         if (!is_array($value) && !$value instanceof Countable) {
             return false;
         }

@@ -43,7 +43,7 @@ class ContextFactory
     public this(array $providers = [])
     {
         foreach ($providers as $provider) {
-            this->addProvider($provider['type'], $provider['callable']);
+            this.addProvider($provider['type'], $provider['callable']);
         }
     }
 
@@ -122,8 +122,8 @@ class ContextFactory
      */
     function addProvider(string $type, callable $check)
     {
-        this->providers = [$type => ['type' => $type, 'callable' => $check]]
-            + this->providers;
+        this.providers = [$type => ['type' => $type, 'callable' => $check]]
+            + this.providers;
 
         return this;
     }
@@ -142,7 +142,7 @@ class ContextFactory
     {
         $data += ['entity' => null];
 
-        foreach (this->providers as $provider) {
+        foreach (this.providers as $provider) {
             $check = $provider['callable'];
             $context = $check($request, $data);
             if ($context) {

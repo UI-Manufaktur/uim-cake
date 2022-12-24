@@ -55,21 +55,21 @@ abstract class BaseLog extends AbstractLogger
      */
     public this(array $config = [])
     {
-        this->setConfig($config);
+        this.setConfig($config);
 
-        if (!is_array(this->_config['scopes']) && this->_config['scopes'] != false) {
-            this->_config['scopes'] = (array)this->_config['scopes'];
+        if (!is_array(this._config['scopes']) && this._config['scopes'] != false) {
+            this._config['scopes'] = (array)this._config['scopes'];
         }
 
-        if (!is_array(this->_config['levels'])) {
-            this->_config['levels'] = (array)this->_config['levels'];
+        if (!is_array(this._config['levels'])) {
+            this._config['levels'] = (array)this._config['levels'];
         }
 
-        if (!empty(this->_config['types']) && empty(this->_config['levels'])) {
-            this->_config['levels'] = (array)this->_config['types'];
+        if (!empty(this._config['types']) && empty(this._config['levels'])) {
+            this._config['levels'] = (array)this._config['types'];
         }
 
-        $formatter = this->_config['formatter'] ?? DefaultFormatter::class;
+        $formatter = this._config['formatter'] ?? DefaultFormatter::class;
         if (!is_object($formatter)) {
             if (is_array($formatter)) {
                 $class = $formatter['className'];
@@ -89,7 +89,7 @@ abstract class BaseLog extends AbstractLogger
                 get_class($formatter)
             ));
         }
-        this->formatter = $formatter;
+        this.formatter = $formatter;
     }
 
     /**
@@ -99,7 +99,7 @@ abstract class BaseLog extends AbstractLogger
      */
     function levels(): array
     {
-        return this->_config['levels'];
+        return this._config['levels'];
     }
 
     /**
@@ -109,7 +109,7 @@ abstract class BaseLog extends AbstractLogger
      */
     function scopes()
     {
-        return this->_config['scopes'];
+        return this._config['scopes'];
     }
 
     /**
@@ -125,7 +125,7 @@ abstract class BaseLog extends AbstractLogger
      */
     protected function _format(string $message, array $context = []): string
     {
-        return this->interpolate($message, $context);
+        return this.interpolate($message, $context);
     }
 
     /**

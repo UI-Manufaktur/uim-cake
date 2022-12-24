@@ -52,7 +52,7 @@ class FlashComponent extends Component
      * If you make consecutive calls to this method, the messages will stack (if they are
      * set with the same flash key)
      *
-     * In your controller: this->Flash->set('This has been saved');
+     * In your controller: this.Flash->set('This has been saved');
      *
      * ### Options:
      *
@@ -71,9 +71,9 @@ class FlashComponent extends Component
     function set($message, array $options = []): void
     {
         if ($message instanceof Throwable) {
-            this->flash()->setExceptionMessage($message, $options);
+            this.flash()->setExceptionMessage($message, $options);
         } else {
-            this->flash()->set($message, $options);
+            this.flash()->set($message, $options);
         }
     }
 
@@ -84,7 +84,7 @@ class FlashComponent extends Component
      */
     protected function flash(): FlashMessage
     {
-        return this->getController()->getRequest()->getFlash();
+        return this.getController()->getRequest()->getFlash();
     }
 
     /**
@@ -98,7 +98,7 @@ class FlashComponent extends Component
      */
     function setConfig($key, $value = null, $merge = true)
     {
-        this->flash()->setConfig($key, $value, $merge);
+        this.flash()->setConfig($key, $value, $merge);
 
         return this;
     }
@@ -112,7 +112,7 @@ class FlashComponent extends Component
      */
     function getConfig(?string $key = null, $default = null)
     {
-        return this->flash()->getConfig($key, $default);
+        return this.flash()->getConfig($key, $default);
     }
 
     /**
@@ -124,7 +124,7 @@ class FlashComponent extends Component
      */
     function getConfigOrFail(string $key)
     {
-        return this->flash()->getConfigOrFail($key);
+        return this.flash()->getConfigOrFail($key);
     }
 
     /**
@@ -136,7 +136,7 @@ class FlashComponent extends Component
      */
     function configShallow($key, $value = null)
     {
-        this->flash()->configShallow($key, $value);
+        this.flash()->configShallow($key, $value);
 
         return this;
     }
@@ -144,7 +144,7 @@ class FlashComponent extends Component
     /**
      * Magic method for verbose flash methods based on element names.
      *
-     * For example: this->Flash->success('My message') would use the
+     * For example: this.Flash->success('My message') would use the
      * `success.php` element under `templates/element/flash/` for rendering the
      * flash message.
      *
@@ -154,7 +154,7 @@ class FlashComponent extends Component
      * Note that the parameter `element` will be always overridden. In order to call a
      * specific element from a plugin, you should set the `plugin` option in $args.
      *
-     * For example: `this->Flash->warning('My message', ['plugin' => 'PluginName'])` would
+     * For example: `this.Flash->warning('My message', ['plugin' => 'PluginName'])` would
      * use the `warning.php` element under `plugins/PluginName/templates/element/flash/` for
      * rendering the flash message.
      *
@@ -181,6 +181,6 @@ class FlashComponent extends Component
             $options += (array)$args[1];
         }
 
-        this->set($args[0], $options);
+        this.set($args[0], $options);
     }
 }

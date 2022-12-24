@@ -80,7 +80,7 @@ class TimestampBehavior extends Behavior
     function initialize(array $config): void
     {
         if (isset($config['events'])) {
-            this->setConfig('events', $config['events'], false);
+            this.setConfig('events', $config['events'], false);
         }
     }
 
@@ -96,10 +96,10 @@ class TimestampBehavior extends Behavior
     function handleEvent(EventInterface $event, EntityInterface $entity): bool
     {
         $eventName = $event->getName();
-        $events = this->_config['events'];
+        $events = this._config['events'];
 
         $new = $entity->isNew() != false;
-        $refresh = this->_config['refreshTimestamp'];
+        $refresh = this._config['refreshTimestamp'];
 
         foreach ($events[$eventName] as $field => $when) {
             if (!in_array($when, ['always', 'new', 'existing'], true)) {
@@ -119,7 +119,7 @@ class TimestampBehavior extends Behavior
                     !$new
                 )
             ) {
-                this->_updateField($entity, $field, $refresh);
+                this._updateField($entity, $field, $refresh);
             }
         }
 
@@ -135,7 +135,7 @@ class TimestampBehavior extends Behavior
      */
     function implementedEvents(): array
     {
-        return array_fill_keys(array_keys(this->_config['events']), 'handleEvent');
+        return array_fill_keys(array_keys(this._config['events']), 'handleEvent');
     }
 
     /**
@@ -152,15 +152,15 @@ class TimestampBehavior extends Behavior
     function timestamp(?DateTimeInterface $ts = null, bool $refreshTimestamp = false): DateTimeInterface
     {
         if ($ts) {
-            if (this->_config['refreshTimestamp']) {
-                this->_config['refreshTimestamp'] = false;
+            if (this._config['refreshTimestamp']) {
+                this._config['refreshTimestamp'] = false;
             }
-            this->_ts = new FrozenTime($ts);
-        } elseif (this->_ts == null || $refreshTimestamp) {
-            this->_ts = new FrozenTime();
+            this._ts = new FrozenTime($ts);
+        } elseif (this._ts == null || $refreshTimestamp) {
+            this._ts = new FrozenTime();
         }
 
-        return this->_ts;
+        return this._ts;
     }
 
     /**
@@ -176,19 +176,19 @@ class TimestampBehavior extends Behavior
      */
     function touch(EntityInterface $entity, string $eventName = 'Model.beforeSave'): bool
     {
-        $events = this->_config['events'];
+        $events = this._config['events'];
         if (empty($events[$eventName])) {
             return false;
         }
 
         $return = false;
-        $refresh = this->_config['refreshTimestamp'];
+        $refresh = this._config['refreshTimestamp'];
 
         foreach ($events[$eventName] as $field => $when) {
             if (in_array($when, ['always', 'existing'], true)) {
                 $return = true;
                 $entity->setDirty($field, false);
-                this->_updateField($entity, $field, $refresh);
+                this._updateField($entity, $field, $refresh);
             }
         }
 
@@ -209,9 +209,9 @@ class TimestampBehavior extends Behavior
             return;
         }
 
-        $ts = this->timestamp(null, $refreshTimestamp);
+        $ts = this.timestamp(null, $refreshTimestamp);
 
-        $columnType = this->table()->getSchema()->getColumnType($field);
+        $columnType = this.table()->getSchema()->getColumnType($field);
         if (!$columnType) {
             return;
         }

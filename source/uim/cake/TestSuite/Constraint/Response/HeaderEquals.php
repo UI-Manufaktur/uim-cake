@@ -39,7 +39,7 @@ class HeaderEquals extends ResponseBase
     {
         parent::__construct($response);
 
-        this->headerName = $headerName;
+        this.headerName = $headerName;
     }
 
     /**
@@ -50,7 +50,7 @@ class HeaderEquals extends ResponseBase
      */
     function matches($other): bool
     {
-        return this->response->getHeaderLine(this->headerName) == $other;
+        return this.response->getHeaderLine(this.headerName) == $other;
     }
 
     /**
@@ -60,8 +60,8 @@ class HeaderEquals extends ResponseBase
      */
     function toString(): string
     {
-        $responseHeader = this->response->getHeaderLine(this->headerName);
+        $responseHeader = this.response->getHeaderLine(this.headerName);
 
-        return sprintf('equals content in header \'%s\' (`%s`)', this->headerName, $responseHeader);
+        return sprintf('equals content in header \'%s\' (`%s`)', this.headerName, $responseHeader);
     }
 }

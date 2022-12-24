@@ -45,7 +45,7 @@ class RoutesGenerateCommand extends Command
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
         try {
-            $args = this->_splitArgs($args->getArguments());
+            $args = this._splitArgs($args->getArguments());
             $url = Router::url($args);
             $io->out("> $url");
             $io->out();

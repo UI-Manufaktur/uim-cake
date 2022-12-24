@@ -50,12 +50,12 @@ class PluginAssetsSymlinkCommand extends Command
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        this->io = $io;
-        this->args = $args;
+        this.io = $io;
+        this.args = $args;
 
         $name = $args->getArgument('name');
         $overwrite = (bool)$args->getOption('overwrite');
-        this->_process(this->_list($name), false, $overwrite);
+        this._process(this._list($name), false, $overwrite);
 
         return static::CODE_SUCCESS;
     }

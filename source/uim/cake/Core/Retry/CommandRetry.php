@@ -51,8 +51,8 @@ class CommandRetry
      */
     public this(RetryStrategyInterface $strategy, int $maxRetries = 1)
     {
-        this->strategy = $strategy;
-        this->maxRetries = $maxRetries;
+        this.strategy = $strategy;
+        this.maxRetries = $maxRetries;
     }
 
     /**
@@ -64,16 +64,16 @@ class CommandRetry
      */
     function run(callable $action)
     {
-        this->numRetries = 0;
+        this.numRetries = 0;
         while (true) {
             try {
                 return $action();
             } catch (Exception $e) {
                 if (
-                    this->numRetries < this->maxRetries &&
-                    this->strategy->shouldRetry($e, this->numRetries)
+                    this.numRetries < this.maxRetries &&
+                    this.strategy->shouldRetry($e, this.numRetries)
                 ) {
-                    this->numRetries++;
+                    this.numRetries++;
                     continue;
                 }
 
@@ -89,6 +89,6 @@ class CommandRetry
      */
     function getRetries(): int
     {
-        return this->numRetries;
+        return this.numRetries;
     }
 }

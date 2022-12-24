@@ -42,13 +42,13 @@ class SqlserverStatement extends PDOStatement
             $type = 'string';
         }
         if (!is_int($type)) {
-            [$value, $type] = this->cast($value, $type);
+            [$value, $type] = this.cast($value, $type);
         }
         if ($type == PDO::PARAM_LOB) {
             /** @psalm-suppress UndefinedConstant */
-            this->_statement->bindParam($column, $value, $type, 0, PDO::SQLSRV_ENCODING_BINARY);
+            this._statement->bindParam($column, $value, $type, 0, PDO::SQLSRV_ENCODING_BINARY);
         } else {
-            this->_statement->bindValue($column, $value, $type);
+            this._statement->bindValue($column, $value, $type);
         }
     }
 }

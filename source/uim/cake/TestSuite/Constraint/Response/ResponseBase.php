@@ -42,7 +42,7 @@ abstract class ResponseBase extends Constraint
             throw new AssertionFailedError('No response set, cannot assert content.');
         }
 
-        this->response = $response;
+        this.response = $response;
     }
 
     /**
@@ -52,6 +52,6 @@ abstract class ResponseBase extends Constraint
      */
     protected function _getBodyAsString(): string
     {
-        return (string)this->response->getBody();
+        return (string)this.response->getBody();
     }
 }

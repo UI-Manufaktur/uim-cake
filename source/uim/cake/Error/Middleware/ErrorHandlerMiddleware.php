@@ -95,7 +95,7 @@ class ErrorHandlerMiddleware implements IMiddleware
         }
 
         if (is_array($errorHandler)) {
-            this->setConfig($errorHandler);
+            this.setConfig($errorHandler);
 
             return;
         }
@@ -103,12 +103,12 @@ class ErrorHandlerMiddleware implements IMiddleware
             deprecationWarning(
                 'Using an `ErrorHandler` is deprecated. You should migate to the `ExceptionTrap` sub-system instead.'
             );
-            this->errorHandler = $errorHandler;
+            this.errorHandler = $errorHandler;
 
             return;
         }
         if ($errorHandler instanceof ExceptionTrap) {
-            this->exceptionTrap = $errorHandler;
+            this.exceptionTrap = $errorHandler;
 
             return;
         }
@@ -130,9 +130,9 @@ class ErrorHandlerMiddleware implements IMiddleware
         try {
             return $handler->handle($request);
         } catch (RedirectException $exception) {
-            return this->handleRedirect($exception);
+            return this.handleRedirect($exception);
         } catch (Throwable $exception) {
-            return this->handleException($exception, $request);
+            return this.handleException($exception, $request);
         }
     }
 
@@ -145,13 +145,13 @@ class ErrorHandlerMiddleware implements IMiddleware
      */
     function handleException(Throwable $exception, IServerRequest $request): IResponse
     {
-        if (this->errorHandler == null) {
-            $handler = this->getExceptionTrap();
+        if (this.errorHandler == null) {
+            $handler = this.getExceptionTrap();
             $handler->logException($exception, $request);
 
             $renderer = $handler->renderer($exception, $request);
         } else {
-            $handler = this->getErrorHandler();
+            $handler = this.getErrorHandler();
             $handler->logException($exception, $request);
 
             $renderer = $handler->getRenderer($exception, $request);
@@ -168,7 +168,7 @@ class ErrorHandlerMiddleware implements IMiddleware
         } catch (Throwable $internalException) {
             $handler->logException($internalException, $request);
 
-            return this->handleInternalError();
+            return this.handleInternalError();
         }
     }
 
@@ -207,13 +207,13 @@ class ErrorHandlerMiddleware implements IMiddleware
      */
     protected function getErrorHandler(): ErrorHandler
     {
-        if (this->errorHandler == null) {
+        if (this.errorHandler == null) {
             /** @var class-string<\Cake\Error\ErrorHandler> $className */
             $className = App::className('ErrorHandler', 'Error');
-            this->errorHandler = new $className(this->getConfig());
+            this.errorHandler = new $className(this.getConfig());
         }
 
-        return this->errorHandler;
+        return this.errorHandler;
     }
 
     /**
@@ -223,12 +223,12 @@ class ErrorHandlerMiddleware implements IMiddleware
      */
     protected function getExceptionTrap(): ExceptionTrap
     {
-        if (this->exceptionTrap == null) {
+        if (this.exceptionTrap == null) {
             /** @var class-string<\Cake\Error\ExceptionTrap> $className */
             $className = App::className('ExceptionTrap', 'Error');
-            this->exceptionTrap = new $className(this->getConfig());
+            this.exceptionTrap = new $className(this.getConfig());
         }
 
-        return this->exceptionTrap;
+        return this.exceptionTrap;
     }
 }

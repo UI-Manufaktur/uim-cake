@@ -119,9 +119,9 @@ class SelectBoxWidget extends BasicWidget
      */
     function render(array $data, ContextInterface $context): string
     {
-        $data += this->mergeDefaults($data, $context);
+        $data += this.mergeDefaults($data, $context);
 
-        $options = this->_renderContent($data);
+        $options = this._renderContent($data);
         $name = $data['name'];
         unset($data['name'], $data['options'], $data['empty'], $data['val'], $data['escape']);
         if (isset($data['disabled']) && is_array($data['disabled'])) {
@@ -133,9 +133,9 @@ class SelectBoxWidget extends BasicWidget
             $template = 'selectMultiple';
             unset($data['multiple']);
         }
-        $attrs = this->_templates->formatAttributes($data);
+        $attrs = this._templates->formatAttributes($data);
 
-        return this->_templates->format($template, [
+        return this._templates->format($template, [
             'name' => $name,
             'templateVars' => $data['templateVars'],
             'attrs' => $attrs,
@@ -158,7 +158,7 @@ class SelectBoxWidget extends BasicWidget
         }
 
         if (!empty($data['empty'])) {
-            $options = this->_emptyValue($data['empty']) + (array)$options;
+            $options = this._emptyValue($data['empty']) + (array)$options;
         }
         if (empty($options)) {
             return [];
@@ -171,7 +171,7 @@ class SelectBoxWidget extends BasicWidget
         }
         $templateVars = $data['templateVars'];
 
-        return this->_renderOptions($options, $disabled, $selected, $templateVars, $data['escape']);
+        return this._renderOptions($options, $disabled, $selected, $templateVars, $data['escape']);
     }
 
     /**
@@ -221,13 +221,13 @@ class SelectBoxWidget extends BasicWidget
             $label = $optgroup['text'];
             $attrs = (array)$optgroup;
         }
-        $groupOptions = this->_renderOptions($opts, $disabled, $selected, $templateVars, $escape);
+        $groupOptions = this._renderOptions($opts, $disabled, $selected, $templateVars, $escape);
 
-        return this->_templates->format('optgroup', [
+        return this._templates->format('optgroup', [
             'label' => $escape ? h($label) : $label,
             'content' => implode('', $groupOptions),
             'templateVars' => $templateVars,
-            'attrs' => this->_templates->formatAttributes($attrs, ['text', 'options']),
+            'attrs' => this._templates->formatAttributes($attrs, ['text', 'options']),
         ]);
     }
 
@@ -263,7 +263,7 @@ class SelectBoxWidget extends BasicWidget
                     )
                 )
             ) {
-                $out[] = this->_renderOptgroup((string)$key, $val, $disabled, $selected, $templateVars, $escape);
+                $out[] = this._renderOptgroup((string)$key, $val, $disabled, $selected, $templateVars, $escape);
                 continue;
             }
 
@@ -278,10 +278,10 @@ class SelectBoxWidget extends BasicWidget
                 $key = $optAttrs['value'];
             }
             $optAttrs['templateVars'] = $optAttrs['templateVars'] ?? [];
-            if (this->_isSelected((string)$key, $selected)) {
+            if (this._isSelected((string)$key, $selected)) {
                 $optAttrs['selected'] = true;
             }
-            if (this->_isDisabled((string)$key, $disabled)) {
+            if (this._isDisabled((string)$key, $disabled)) {
                 $optAttrs['disabled'] = true;
             }
             if (!empty($templateVars)) {
@@ -289,11 +289,11 @@ class SelectBoxWidget extends BasicWidget
             }
             $optAttrs['escape'] = $escape;
 
-            $out[] = this->_templates->format('option', [
+            $out[] = this._templates->format('option', [
                 'value' => $escape ? h($optAttrs['value']) : $optAttrs['value'],
                 'text' => $escape ? h($optAttrs['text']) : $optAttrs['text'],
                 'templateVars' => $optAttrs['templateVars'],
-                'attrs' => this->_templates->formatAttributes($optAttrs, ['text', 'value']),
+                'attrs' => this._templates->formatAttributes($optAttrs, ['text', 'value']),
             ]);
         }
 

@@ -39,7 +39,7 @@ class HeaderSet extends ResponseBase
     {
         parent::__construct($response);
 
-        this->headerName = $headerName;
+        this.headerName = $headerName;
     }
 
     /**
@@ -50,7 +50,7 @@ class HeaderSet extends ResponseBase
      */
     function matches($other): bool
     {
-        return this->response->hasHeader(this->headerName);
+        return this.response->hasHeader(this.headerName);
     }
 
     /**
@@ -60,7 +60,7 @@ class HeaderSet extends ResponseBase
      */
     function toString(): string
     {
-        return sprintf('response has header \'%s\'', this->headerName);
+        return sprintf('response has header \'%s\'', this.headerName);
     }
 
     /**
@@ -71,6 +71,6 @@ class HeaderSet extends ResponseBase
      */
     protected function failureDescription($other): string
     {
-        return this->toString();
+        return this.toString();
     }
 }

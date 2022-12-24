@@ -48,7 +48,7 @@ class CommandCollection implements IteratorAggregate, Countable
     public this(array $commands = [])
     {
         foreach ($commands as $name => $command) {
-            this->add($name, $command);
+            this.add($name, $command);
         }
     }
 
@@ -78,7 +78,7 @@ class CommandCollection implements IteratorAggregate, Countable
             );
         }
 
-        this->commands[$name] = $command;
+        this.commands[$name] = $command;
 
         return this;
     }
@@ -93,7 +93,7 @@ class CommandCollection implements IteratorAggregate, Countable
     function addMany(array $commands)
     {
         foreach ($commands as $name => $class) {
-            this->add($name, $class);
+            this.add($name, $class);
         }
 
         return this;
@@ -107,7 +107,7 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     function remove(string $name)
     {
-        unset(this->commands[$name]);
+        unset(this.commands[$name]);
 
         return this;
     }
@@ -120,7 +120,7 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     function has(string $name): bool
     {
-        return isset(this->commands[$name]);
+        return isset(this.commands[$name]);
     }
 
     /**
@@ -133,11 +133,11 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     function get(string $name)
     {
-        if (!this->has($name)) {
+        if (!this.has($name)) {
             throw new InvalidArgumentException("The $name is not a known command name.");
         }
 
-        return this->commands[$name];
+        return this.commands[$name];
     }
 
     /**
@@ -148,7 +148,7 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     function getIterator(): Traversable
     {
-        return new ArrayIterator(this->commands);
+        return new ArrayIterator(this.commands);
     }
 
     /**
@@ -160,7 +160,7 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     function count(): int
     {
-        return count(this->commands);
+        return count(this.commands);
     }
 
     /**
@@ -179,7 +179,7 @@ class CommandCollection implements IteratorAggregate, Countable
         $scanner = new CommandScanner();
         $shells = $scanner->scanPlugin($plugin);
 
-        return this->resolveNames($shells);
+        return this.resolveNames($shells);
     }
 
     /**
@@ -198,7 +198,7 @@ class CommandCollection implements IteratorAggregate, Countable
             // If the short name has been used, use the full name.
             // This allows app shells to have name preference.
             // and app shells to overwrite core shells.
-            if (this->has($name) && $addLong) {
+            if (this.has($name) && $addLong) {
                 $name = $info['fullName'];
             }
 
@@ -229,8 +229,8 @@ class CommandCollection implements IteratorAggregate, Countable
     {
         $scanner = new CommandScanner();
 
-        $core = this->resolveNames($scanner->scanCore());
-        $app = this->resolveNames($scanner->scanApp());
+        $core = this.resolveNames($scanner->scanCore());
+        $app = this.resolveNames($scanner->scanApp());
 
         return $app + $core;
     }
@@ -242,6 +242,6 @@ class CommandCollection implements IteratorAggregate, Countable
      */
     function keys(): array
     {
-        return array_keys(this->commands);
+        return array_keys(this.commands);
     }
 }

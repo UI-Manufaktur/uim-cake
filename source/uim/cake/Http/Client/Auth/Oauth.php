@@ -62,14 +62,14 @@ class Oauth
                 if (!$hasKeys) {
                     return $request;
                 }
-                $value = this->_hmacSha1($request, $credentials);
+                $value = this._hmacSha1($request, $credentials);
                 break;
 
             case 'RSA-SHA1':
                 if (!isset($credentials['privateKey'])) {
                     return $request;
                 }
-                $value = this->_rsaSha1($request, $credentials);
+                $value = this._rsaSha1($request, $credentials);
                 break;
 
             case 'PLAINTEXT':
@@ -81,7 +81,7 @@ class Oauth
                 if (!$hasKeys) {
                     return $request;
                 }
-                $value = this->_plaintext($request, $credentials);
+                $value = this._plaintext($request, $credentials);
                 break;
 
             default:
@@ -119,7 +119,7 @@ class Oauth
         $key = implode('&', $key);
         $values['oauth_signature'] = $key;
 
-        return this->_buildAuth($values);
+        return this._buildAuth($values);
     }
 
     /**
@@ -141,9 +141,9 @@ class Oauth
             'oauth_timestamp' => $timestamp,
             'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_token' => $credentials['token'],
-            'oauth_consumer_key' => this->_encode($credentials['consumerKey']),
+            'oauth_consumer_key' => this._encode($credentials['consumerKey']),
         ];
-        $baseString = this->baseString($request, $values);
+        $baseString = this.baseString($request, $values);
 
         // Consumer key should only be encoded for base string calculation as
         // auth header generation already encodes independently
@@ -160,7 +160,7 @@ class Oauth
             hash_hmac('sha1', $baseString, $key, true)
         );
 
-        return this->_buildAuth($values);
+        return this._buildAuth($values);
     }
 
     /**
@@ -197,7 +197,7 @@ class Oauth
         if (isset($credentials['tokenSecret'])) {
             $values['oauth_token_secret'] = $credentials['tokenSecret'];
         }
-        $baseString = this->baseString($request, $values);
+        $baseString = this.baseString($request, $values);
 
         if (isset($credentials['realm'])) {
             $values['oauth_realm'] = $credentials['realm'];
@@ -220,11 +220,11 @@ class Oauth
             $credentials['privateKeyPassphrase'] = $passphrase;
         }
         $privateKey = openssl_pkey_get_private($credentials['privateKey'], $credentials['privateKeyPassphrase']);
-        this->checkSslError();
+        this.checkSslError();
 
         $signature = '';
         openssl_sign($baseString, $signature, $privateKey);
-        this->checkSslError();
+        this.checkSslError();
 
         if (PHP_MAJOR_VERSION < 8) {
             openssl_free_key($privateKey);
@@ -232,7 +232,7 @@ class Oauth
 
         $values['oauth_signature'] = base64_encode($signature);
 
-        return this->_buildAuth($values);
+        return this._buildAuth($values);
     }
 
     /**
@@ -252,8 +252,8 @@ class Oauth
     {
         $parts = [
             $request->getMethod(),
-            this->_normalizedUrl($request->getUri()),
-            this->_normalizedParams($request, $oauthValues),
+            this._normalizedUrl($request->getUri()),
+            this._normalizedParams($request, $oauthValues),
         ];
         $parts = array_map([this, '_encode'], $parts);
 
@@ -300,7 +300,7 @@ class Oauth
             parse_str((string)$request->getBody(), $post);
         }
         $args = array_merge($queryArgs, $oauthValues, $post);
-        $pairs = this->_normalizeData($args);
+        $pairs = this._normalizeData($args);
         $data = [];
         foreach ($pairs as $pair) {
             $data[] = implode('=', $pair);
@@ -334,7 +334,7 @@ class Oauth
             }
             if (is_array($value)) {
                 uksort($value, 'strcmp');
-                $data = array_merge($data, this->_normalizeData($value, $key));
+                $data = array_merge($data, this._normalizeData($value, $key));
             } else {
                 $data[] = [$key, $value];
             }
@@ -354,7 +354,7 @@ class Oauth
         $out = 'OAuth ';
         $params = [];
         foreach ($data as $key => $value) {
-            $params[] = $key . '="' . this->_encode((string)$value) . '"';
+            $params[] = $key . '="' . this._encode((string)$value) . '"';
         }
         $out .= implode(',', $params);
 

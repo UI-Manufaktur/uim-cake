@@ -63,7 +63,7 @@ class DoublePassDecoratorMiddleware implements IMiddleware
             . ' `($request, $handler)` or a class which implements `Psr\Http\Server\IMiddleware` instead.',
             0
         );
-        this->callable = $callable;
+        this.callable = $callable;
     }
 
     /**
@@ -75,7 +75,7 @@ class DoublePassDecoratorMiddleware implements IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        return (this->callable)(
+        return (this.callable)(
             $request,
             new Response(),
             function ($request, $res) use ($handler) {
@@ -90,6 +90,6 @@ class DoublePassDecoratorMiddleware implements IMiddleware
      */
     function getCallable(): callable
     {
-        return this->callable;
+        return this.callable;
     }
 }

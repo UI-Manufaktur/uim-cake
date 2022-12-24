@@ -39,7 +39,7 @@ use RuntimeException;
  *
  * This middleware integrates with the FormHelper automatically and when
  * used together your forms will have CSRF tokens automatically added
- * when `this->Form->create(...)` is used in a view.
+ * when `this.Form->create(...)` is used in a view.
  *
  * If you use this middleware *do not* also use CsrfProtectionMiddleware.
  *
@@ -82,7 +82,7 @@ class SessionCsrfProtectionMiddleware implements IMiddleware
      */
     public this(array $config = [])
     {
-        this->_config = $config + this->_config;
+        this._config = $config + this._config;
     }
 
     /**
@@ -100,10 +100,10 @@ class SessionCsrfProtectionMiddleware implements IMiddleware
 
         if (
             $hasData
-            && this->skipCheckCallback != null
-            && call_user_func(this->skipCheckCallback, $request) == true
+            && this.skipCheckCallback != null
+            && call_user_func(this.skipCheckCallback, $request) == true
         ) {
-            $request = this->unsetTokenField($request);
+            $request = this.unsetTokenField($request);
 
             return $handler->handle($request);
         }
@@ -113,20 +113,20 @@ class SessionCsrfProtectionMiddleware implements IMiddleware
             throw new RuntimeException('You must have a `session` attribute to use session based CSRF tokens');
         }
 
-        $token = $session->read(this->_config['key']);
+        $token = $session->read(this._config['key']);
         if ($token == null) {
-            $token = this->createToken();
-            $session->write(this->_config['key'], $token);
+            $token = this.createToken();
+            $session->write(this._config['key'], $token);
         }
-        $request = $request->withAttribute('csrfToken', this->saltToken($token));
+        $request = $request->withAttribute('csrfToken', this.saltToken($token));
 
         if ($method == 'GET') {
             return $handler->handle($request);
         }
 
         if ($hasData) {
-            this->validateToken($request, $session);
-            $request = this->unsetTokenField($request);
+            this.validateToken($request, $session);
+            $request = this.unsetTokenField($request);
         }
 
         return $handler->handle($request);
@@ -143,7 +143,7 @@ class SessionCsrfProtectionMiddleware implements IMiddleware
      */
     function skipCheckCallback(callable $callback)
     {
-        this->skipCheckCallback = $callback;
+        this.skipCheckCallback = $callback;
 
         return this;
     }
@@ -212,7 +212,7 @@ class SessionCsrfProtectionMiddleware implements IMiddleware
     {
         $body = $request->getParsedBody();
         if (is_array($body)) {
-            unset($body[this->_config['field']]);
+            unset($body[this._config['field']]);
             $request = $request->withParsedBody($body);
         }
 
@@ -242,22 +242,22 @@ class SessionCsrfProtectionMiddleware implements IMiddleware
      */
     protected function validateToken(IServerRequest $request, Session $session): void
     {
-        $token = $session->read(this->_config['key']);
+        $token = $session->read(this._config['key']);
         if (!$token || !is_string($token)) {
             throw new InvalidCsrfTokenException(__d('cake', 'Missing or incorrect CSRF session key'));
         }
 
         $body = $request->getParsedBody();
         if (is_array($body) || $body instanceof ArrayAccess) {
-            $post = (string)Hash::get($body, this->_config['field']);
-            $post = this->unsaltToken($post);
+            $post = (string)Hash::get($body, this._config['field']);
+            $post = this.unsaltToken($post);
             if (hash_equals($post, $token)) {
                 return;
             }
         }
 
         $header = $request->getHeaderLine('X-CSRF-Token');
-        $header = this->unsaltToken($header);
+        $header = this.unsaltToken($header);
         if (hash_equals($header, $token)) {
             return;
         }

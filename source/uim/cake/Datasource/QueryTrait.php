@@ -92,7 +92,7 @@ trait QueryTrait
      */
     function repository(RepositoryInterface $repository)
     {
-        this->_repository = $repository;
+        this._repository = $repository;
 
         return this;
     }
@@ -105,7 +105,7 @@ trait QueryTrait
      */
     function getRepository(): RepositoryInterface
     {
-        return this->_repository;
+        return this._repository;
     }
 
     /**
@@ -122,7 +122,7 @@ trait QueryTrait
      */
     function setResult(iterable $results)
     {
-        this->_results = $results;
+        this._results = $results;
 
         return this;
     }
@@ -139,7 +139,7 @@ trait QueryTrait
     #[\ReturnTypeWillChange]
     function getIterator()
     {
-        return this->all();
+        return this.all();
     }
 
     /**
@@ -181,11 +181,11 @@ trait QueryTrait
     function cache($key, $config = 'default')
     {
         if ($key == false) {
-            this->_cache = null;
+            this._cache = null;
 
             return this;
         }
-        this->_cache = new QueryCacher($key, $config);
+        this._cache = new QueryCacher($key, $config);
 
         return this;
     }
@@ -197,7 +197,7 @@ trait QueryTrait
      */
     function isEagerLoaded(): bool
     {
-        return this->_eagerLoaded;
+        return this._eagerLoaded;
     }
 
     /**
@@ -209,7 +209,7 @@ trait QueryTrait
      */
     function eagerLoaded(bool $value)
     {
-        this->_eagerLoaded = $value;
+        this._eagerLoaded = $value;
 
         return this;
     }
@@ -229,7 +229,7 @@ trait QueryTrait
     function aliasField(string $field, ?string $alias = null): array
     {
         if (strpos($field, '.') == false) {
-            $alias = $alias ?: this->getRepository()->getAlias();
+            $alias = $alias ?: this.getRepository()->getAlias();
             $aliasedField = $alias . '.' . $field;
         } else {
             $aliasedField = $field;
@@ -254,7 +254,7 @@ trait QueryTrait
         $aliased = [];
         foreach ($fields as $alias => $field) {
             if (is_numeric($alias) && is_string($field)) {
-                $aliased += this->aliasField($field, $defaultAlias);
+                $aliased += this.aliasField($field, $defaultAlias);
                 continue;
             }
             $aliased[$alias] = $field;
@@ -276,23 +276,23 @@ trait QueryTrait
      */
     function all(): ResultSetInterface
     {
-        if (this->_results != null) {
-            return this->_results;
+        if (this._results != null) {
+            return this._results;
         }
 
         $results = null;
-        if (this->_cache) {
-            $results = this->_cache->fetch(this);
+        if (this._cache) {
+            $results = this._cache->fetch(this);
         }
         if ($results == null) {
-            $results = this->_decorateResults(this->_execute());
-            if (this->_cache) {
-                this->_cache->store(this, $results);
+            $results = this._decorateResults(this._execute());
+            if (this._cache) {
+                this._cache->store(this, $results);
             }
         }
-        this->_results = $results;
+        this._results = $results;
 
-        return this->_results;
+        return this._results;
     }
 
     /**
@@ -302,7 +302,7 @@ trait QueryTrait
      */
     function toArray(): array
     {
-        return this->all()->toArray();
+        return this.all()->toArray();
     }
 
     /**
@@ -324,7 +324,7 @@ trait QueryTrait
     function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false)
     {
         if ($overwrite) {
-            this->_mapReduce = [];
+            this._mapReduce = [];
         }
         if ($mapper == null) {
             if (!$overwrite) {
@@ -333,7 +333,7 @@ trait QueryTrait
 
             return this;
         }
-        this->_mapReduce[] = compact('mapper', 'reducer');
+        this._mapReduce[] = compact('mapper', 'reducer');
 
         return this;
     }
@@ -345,7 +345,7 @@ trait QueryTrait
      */
     function getMapReducers(): array
     {
-        return this->_mapReduce;
+        return this._mapReduce;
     }
 
     /**
@@ -443,7 +443,7 @@ trait QueryTrait
     function formatResults(?callable $formatter = null, $mode = self::APPEND)
     {
         if ($mode == self::OVERWRITE) {
-            this->_formatters = [];
+            this._formatters = [];
         }
         if ($formatter == null) {
             if ($mode != self::OVERWRITE) {
@@ -454,12 +454,12 @@ trait QueryTrait
         }
 
         if ($mode == self::PREPEND) {
-            array_unshift(this->_formatters, $formatter);
+            array_unshift(this._formatters, $formatter);
 
             return this;
         }
 
-        this->_formatters[] = $formatter;
+        this._formatters[] = $formatter;
 
         return this;
     }
@@ -471,7 +471,7 @@ trait QueryTrait
      */
     function getResultFormatters(): array
     {
-        return this->_formatters;
+        return this._formatters;
     }
 
     /**
@@ -488,11 +488,11 @@ trait QueryTrait
      */
     function first()
     {
-        if (this->_dirty) {
-            this->limit(1);
+        if (this._dirty) {
+            this.limit(1);
         }
 
-        return this->all()->first();
+        return this.all()->first();
     }
 
     /**
@@ -503,9 +503,9 @@ trait QueryTrait
      */
     function firstOrFail()
     {
-        $entity = this->first();
+        $entity = this.first();
         if (!$entity) {
-            $table = this->getRepository();
+            $table = this.getRepository();
             throw new RecordNotFoundException(sprintf(
                 'Record not found in table "%s"',
                 $table->getTable()
@@ -533,7 +533,7 @@ trait QueryTrait
      */
     function getOptions(): array
     {
-        return this->_options;
+        return this._options;
     }
 
     /**
@@ -546,7 +546,7 @@ trait QueryTrait
      */
     function __call(string $method, array $arguments)
     {
-        $resultSetClass = this->_decoratorClass();
+        $resultSetClass = this._decoratorClass();
         if (in_array($method, get_class_methods($resultSetClass), true)) {
             deprecationWarning(sprintf(
                 'Calling `%s` methods, such as `%s()`, on queries is deprecated. ' .
@@ -555,7 +555,7 @@ trait QueryTrait
                 $method,
                 $method,
             ), 2);
-            $results = this->all();
+            $results = this.all();
 
             return $results->$method(...$arguments);
         }
@@ -588,20 +588,20 @@ trait QueryTrait
      */
     protected function _decorateResults(Traversable $result): ResultSetInterface
     {
-        $decorator = this->_decoratorClass();
-        foreach (this->_mapReduce as $functions) {
+        $decorator = this._decoratorClass();
+        foreach (this._mapReduce as $functions) {
             $result = new MapReduce($result, $functions['mapper'], $functions['reducer']);
         }
 
-        if (!empty(this->_mapReduce)) {
+        if (!empty(this._mapReduce)) {
             $result = new $decorator($result);
         }
 
-        foreach (this->_formatters as $formatter) {
+        foreach (this._formatters as $formatter) {
             $result = $formatter($result, this);
         }
 
-        if (!empty(this->_formatters) && !($result instanceof $decorator)) {
+        if (!empty(this._formatters) && !($result instanceof $decorator)) {
             $result = new $decorator($result);
         }
 

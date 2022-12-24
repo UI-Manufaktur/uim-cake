@@ -58,8 +58,8 @@ class FormContext implements ContextInterface
             throw new CakeException('`$context[\'entity\']` must be an instance of Cake\Form\Form');
         }
 
-        this->_form = $context['entity'];
-        this->_validator = $context['validator'] ?? null;
+        this._form = $context['entity'];
+        this._validator = $context['validator'] ?? null;
     }
 
     /**
@@ -109,7 +109,7 @@ class FormContext implements ContextInterface
             'schemaDefault' => true,
         ];
 
-        $val = this->_form->getData($field);
+        $val = this._form->getData($field);
         if ($val != null) {
             return $val;
         }
@@ -118,7 +118,7 @@ class FormContext implements ContextInterface
             return $options['default'];
         }
 
-        return this->_schemaDefault($field);
+        return this._schemaDefault($field);
     }
 
     /**
@@ -129,7 +129,7 @@ class FormContext implements ContextInterface
      */
     protected function _schemaDefault(string $field)
     {
-        $field = this->_form->getSchema()->field($field);
+        $field = this._form->getSchema()->field($field);
         if ($field) {
             return $field['default'];
         }
@@ -142,12 +142,12 @@ class FormContext implements ContextInterface
      */
     function isRequired(string $field): ?bool
     {
-        $validator = this->_form->getValidator(this->_validator);
+        $validator = this._form->getValidator(this._validator);
         if (!$validator->hasField($field)) {
             return null;
         }
-        if (this->type($field) != 'boolean') {
-            return !$validator->isEmptyAllowed($field, this->isCreate());
+        if (this.type($field) != 'boolean') {
+            return !$validator->isEmptyAllowed($field, this.isCreate());
         }
 
         return false;
@@ -160,7 +160,7 @@ class FormContext implements ContextInterface
     {
         $parts = explode('.', $field);
 
-        $validator = this->_form->getValidator(this->_validator);
+        $validator = this._form->getValidator(this._validator);
         $fieldName = array_pop($parts);
         if (!$validator->hasField($fieldName)) {
             return null;
@@ -179,7 +179,7 @@ class FormContext implements ContextInterface
      */
     function getMaxLength(string $field): ?int
     {
-        $validator = this->_form->getValidator(this->_validator);
+        $validator = this._form->getValidator(this._validator);
         if (!$validator->hasField($field)) {
             return null;
         }
@@ -189,7 +189,7 @@ class FormContext implements ContextInterface
             }
         }
 
-        $attributes = this->attributes($field);
+        $attributes = this.attributes($field);
         if (!empty($attributes['length'])) {
             return $attributes['length'];
         }
@@ -202,7 +202,7 @@ class FormContext implements ContextInterface
      */
     function fieldNames(): array
     {
-        return this->_form->getSchema()->fields();
+        return this._form->getSchema()->fields();
     }
 
     /**
@@ -210,7 +210,7 @@ class FormContext implements ContextInterface
      */
     function type(string $field): ?string
     {
-        return this->_form->getSchema()->fieldType($field);
+        return this._form->getSchema()->fieldType($field);
     }
 
     /**
@@ -219,7 +219,7 @@ class FormContext implements ContextInterface
     function attributes(string $field): array
     {
         return array_intersect_key(
-            (array)this->_form->getSchema()->field($field),
+            (array)this._form->getSchema()->field($field),
             array_flip(static::VALID_ATTRIBUTES)
         );
     }
@@ -229,7 +229,7 @@ class FormContext implements ContextInterface
      */
     function hasError(string $field): bool
     {
-        $errors = this->error($field);
+        $errors = this.error($field);
 
         return count($errors) > 0;
     }
@@ -239,6 +239,6 @@ class FormContext implements ContextInterface
      */
     function error(string $field): array
     {
-        return (array)Hash::get(this->_form->getErrors(), $field, []);
+        return (array)Hash::get(this._form->getErrors(), $field, []);
     }
 }

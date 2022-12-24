@@ -49,8 +49,8 @@ class ConsoleErrorRenderer implements ErrorRendererInterface
      */
     public this(array $config)
     {
-        this->output = $config['stderr'] ?? new ConsoleOutput('php://stderr');
-        this->trace = (bool)($config['trace'] ?? false);
+        this.output = $config['stderr'] ?? new ConsoleOutput('php://stderr');
+        this.trace = (bool)($config['trace'] ?? false);
     }
 
     /**
@@ -58,7 +58,7 @@ class ConsoleErrorRenderer implements ErrorRendererInterface
      */
     function write(string $out): void
     {
-        this->output->write($out);
+        this.output->write($out);
     }
 
     /**
@@ -67,7 +67,7 @@ class ConsoleErrorRenderer implements ErrorRendererInterface
     function render(PhpError $error, bool $debug): string
     {
         $trace = '';
-        if (this->trace) {
+        if (this.trace) {
             $trace = "\n<info>Stack Trace:</info>\n\n" . $error->getTraceAsString();
         }
 

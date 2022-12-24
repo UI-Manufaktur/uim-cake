@@ -86,8 +86,8 @@ abstract class BaseAuthenticate implements EventListenerInterface
      */
     public this(ComponentRegistry $registry, array $config = [])
     {
-        this->_registry = $registry;
-        this->setConfig($config);
+        this._registry = $registry;
+        this.setConfig($config);
     }
 
     /**
@@ -103,7 +103,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
      */
     protected function _findUser(string $username, ?string $password = null)
     {
-        $result = this->_query($username)->first();
+        $result = this._query($username)->first();
 
         if ($result == null) {
             // Waste time hashing the password, to prevent
@@ -112,16 +112,16 @@ abstract class BaseAuthenticate implements EventListenerInterface
             // like digest auth don't use passwords
             // and hashing *could* create a timing side-channel.
             if ($password != null) {
-                $hasher = this->passwordHasher();
+                $hasher = this.passwordHasher();
                 $hasher->hash($password);
             }
 
             return false;
         }
 
-        $passwordField = this->_config['fields']['password'];
+        $passwordField = this._config['fields']['password'];
         if ($password != null) {
-            $hasher = this->passwordHasher();
+            $hasher = this.passwordHasher();
             $hashedPassword = $result->get($passwordField);
 
             if ($hashedPassword == null || $hashedPassword == '') {
@@ -137,7 +137,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
                 return false;
             }
 
-            this->_needsPasswordRehash = $hasher->needsRehash($hashedPassword);
+            this._needsPasswordRehash = $hasher->needsRehash($hashedPassword);
             $result->unset($passwordField);
         }
         $hidden = $result->getHidden();
@@ -158,8 +158,8 @@ abstract class BaseAuthenticate implements EventListenerInterface
      */
     protected function _query(string $username): Query
     {
-        $config = this->_config;
-        $table = this->getTableLocator()->get($config['userModel']);
+        $config = this._config;
+        $table = this.getTableLocator()->get($config['userModel']);
 
         $options = [
             'conditions' => [$table->aliasField($config['fields']['username']) => $username],
@@ -185,13 +185,13 @@ abstract class BaseAuthenticate implements EventListenerInterface
      */
     function passwordHasher(): AbstractPasswordHasher
     {
-        if (this->_passwordHasher != null) {
-            return this->_passwordHasher;
+        if (this._passwordHasher != null) {
+            return this._passwordHasher;
         }
 
-        $passwordHasher = this->_config['passwordHasher'];
+        $passwordHasher = this._config['passwordHasher'];
 
-        return this->_passwordHasher = PasswordHasherFactory::build($passwordHasher);
+        return this._passwordHasher = PasswordHasherFactory::build($passwordHasher);
     }
 
     /**
@@ -202,7 +202,7 @@ abstract class BaseAuthenticate implements EventListenerInterface
      */
     function needsPasswordRehash(): bool
     {
-        return this->_needsPasswordRehash;
+        return this._needsPasswordRehash;
     }
 
     /**

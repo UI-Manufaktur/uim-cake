@@ -89,7 +89,7 @@ class RedisEngine extends CacheEngine
 
         parent::init($config);
 
-        return this->_connect();
+        return this._connect();
     }
 
     /**
@@ -100,21 +100,21 @@ class RedisEngine extends CacheEngine
     protected function _connect(): bool
     {
         try {
-            this->_Redis = new Redis();
-            if (!empty(this->_config['unix_socket'])) {
-                $return = this->_Redis->connect(this->_config['unix_socket']);
-            } elseif (empty(this->_config['persistent'])) {
-                $return = this->_Redis->connect(
-                    this->_config['server'],
-                    (int)this->_config['port'],
-                    (int)this->_config['timeout']
+            this._Redis = new Redis();
+            if (!empty(this._config['unix_socket'])) {
+                $return = this._Redis->connect(this._config['unix_socket']);
+            } elseif (empty(this._config['persistent'])) {
+                $return = this._Redis->connect(
+                    this._config['server'],
+                    (int)this._config['port'],
+                    (int)this._config['timeout']
                 );
             } else {
-                $persistentId = this->_config['port'] . this->_config['timeout'] . this->_config['database'];
-                $return = this->_Redis->pconnect(
-                    this->_config['server'],
-                    (int)this->_config['port'],
-                    (int)this->_config['timeout'],
+                $persistentId = this._config['port'] . this._config['timeout'] . this._config['database'];
+                $return = this._Redis->pconnect(
+                    this._config['server'],
+                    (int)this._config['port'],
+                    (int)this._config['timeout'],
                     $persistentId
                 );
             }
@@ -125,11 +125,11 @@ class RedisEngine extends CacheEngine
 
             return false;
         }
-        if ($return && this->_config['password']) {
-            $return = this->_Redis->auth(this->_config['password']);
+        if ($return && this._config['password']) {
+            $return = this._Redis->auth(this._config['password']);
         }
         if ($return) {
-            $return = this->_Redis->select((int)this->_config['database']);
+            $return = this._Redis->select((int)this._config['database']);
         }
 
         return $return;
@@ -147,15 +147,15 @@ class RedisEngine extends CacheEngine
      */
     function set($key, $value, $ttl = null): bool
     {
-        $key = this->_key($key);
-        $value = this->serialize($value);
+        $key = this._key($key);
+        $value = this.serialize($value);
 
-        $duration = this->duration($ttl);
+        $duration = this.duration($ttl);
         if ($duration == 0) {
-            return this->_Redis->set($key, $value);
+            return this._Redis->set($key, $value);
         }
 
-        return this->_Redis->setEx($key, $duration, $value);
+        return this._Redis->setEx($key, $duration, $value);
     }
 
     /**
@@ -168,12 +168,12 @@ class RedisEngine extends CacheEngine
      */
     function get($key, $default = null)
     {
-        $value = this->_Redis->get(this->_key($key));
+        $value = this._Redis->get(this._key($key));
         if ($value == false) {
             return $default;
         }
 
-        return this->unserialize($value);
+        return this.unserialize($value);
     }
 
     /**
@@ -185,12 +185,12 @@ class RedisEngine extends CacheEngine
      */
     function increment(string $key, int $offset = 1)
     {
-        $duration = this->_config['duration'];
-        $key = this->_key($key);
+        $duration = this._config['duration'];
+        $key = this._key($key);
 
-        $value = this->_Redis->incrBy($key, $offset);
+        $value = this._Redis->incrBy($key, $offset);
         if ($duration > 0) {
-            this->_Redis->expire($key, $duration);
+            this._Redis->expire($key, $duration);
         }
 
         return $value;
@@ -205,12 +205,12 @@ class RedisEngine extends CacheEngine
      */
     function decrement(string $key, int $offset = 1)
     {
-        $duration = this->_config['duration'];
-        $key = this->_key($key);
+        $duration = this._config['duration'];
+        $key = this._key($key);
 
-        $value = this->_Redis->decrBy($key, $offset);
+        $value = this._Redis->decrBy($key, $offset);
         if ($duration > 0) {
-            this->_Redis->expire($key, $duration);
+            this._Redis->expire($key, $duration);
         }
 
         return $value;
@@ -224,9 +224,9 @@ class RedisEngine extends CacheEngine
      */
     function delete($key): bool
     {
-        $key = this->_key($key);
+        $key = this._key($key);
 
-        return this->_Redis->del($key) > 0;
+        return this._Redis->del($key) > 0;
     }
 
     /**
@@ -239,9 +239,9 @@ class RedisEngine extends CacheEngine
      */
     function deleteAsync(string $key): bool
     {
-        $key = this->_key($key);
+        $key = this._key($key);
 
-        return this->_Redis->unlink($key) > 0;
+        return this._Redis->unlink($key) > 0;
     }
 
     /**
@@ -251,21 +251,21 @@ class RedisEngine extends CacheEngine
      */
     function clear(): bool
     {
-        this->_Redis->setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
+        this._Redis->setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
 
         $isAllDeleted = true;
         $iterator = null;
-        $pattern = this->_config['prefix'] . '*';
+        $pattern = this._config['prefix'] . '*';
 
         while (true) {
-            $keys = this->_Redis->scan($iterator, $pattern, (int)this->_config['scanCount']);
+            $keys = this._Redis->scan($iterator, $pattern, (int)this._config['scanCount']);
 
             if ($keys == false) {
                 break;
             }
 
             foreach ($keys as $key) {
-                $isDeleted = (this->_Redis->del($key) > 0);
+                $isDeleted = (this._Redis->del($key) > 0);
                 $isAllDeleted = $isAllDeleted && $isDeleted;
             }
         }
@@ -282,21 +282,21 @@ class RedisEngine extends CacheEngine
      */
     function clearBlocking(): bool
     {
-        this->_Redis->setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
+        this._Redis->setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
 
         $isAllDeleted = true;
         $iterator = null;
-        $pattern = this->_config['prefix'] . '*';
+        $pattern = this._config['prefix'] . '*';
 
         while (true) {
-            $keys = this->_Redis->scan($iterator, $pattern, (int)this->_config['scanCount']);
+            $keys = this._Redis->scan($iterator, $pattern, (int)this._config['scanCount']);
 
             if ($keys == false) {
                 break;
             }
 
             foreach ($keys as $key) {
-                $isDeleted = (this->_Redis->unlink($key) > 0);
+                $isDeleted = (this._Redis->unlink($key) > 0);
                 $isAllDeleted = $isAllDeleted && $isDeleted;
             }
         }
@@ -315,11 +315,11 @@ class RedisEngine extends CacheEngine
      */
     function add(string $key, $value): bool
     {
-        $duration = this->_config['duration'];
-        $key = this->_key($key);
-        $value = this->serialize($value);
+        $duration = this._config['duration'];
+        $key = this._key($key);
+        $value = this.serialize($value);
 
-        if (this->_Redis->set($key, $value, ['nx', 'ex' => $duration])) {
+        if (this._Redis->set($key, $value, ['nx', 'ex' => $duration])) {
             return true;
         }
 
@@ -336,11 +336,11 @@ class RedisEngine extends CacheEngine
     function groups(): array
     {
         $result = [];
-        foreach (this->_config['groups'] as $group) {
-            $value = this->_Redis->get(this->_config['prefix'] . $group);
+        foreach (this._config['groups'] as $group) {
+            $value = this._Redis->get(this._config['prefix'] . $group);
             if (!$value) {
-                $value = this->serialize(1);
-                this->_Redis->set(this->_config['prefix'] . $group, $value);
+                $value = this.serialize(1);
+                this._Redis->set(this._config['prefix'] . $group, $value);
             }
             $result[] = $group . $value;
         }
@@ -357,7 +357,7 @@ class RedisEngine extends CacheEngine
      */
     function clearGroup(string $group): bool
     {
-        return (bool)this->_Redis->incr(this->_config['prefix'] . $group);
+        return (bool)this._Redis->incr(this._config['prefix'] . $group);
     }
 
     /**
@@ -399,8 +399,8 @@ class RedisEngine extends CacheEngine
      */
     function __destruct()
     {
-        if (empty(this->_config['persistent']) && this->_Redis instanceof Redis) {
-            this->_Redis->close();
+        if (empty(this._config['persistent']) && this._Redis instanceof Redis) {
+            this._Redis->close();
         }
     }
 }

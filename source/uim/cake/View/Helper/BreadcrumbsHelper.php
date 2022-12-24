@@ -82,13 +82,13 @@ class BreadcrumbsHelper extends Helper
     {
         if (is_array($title)) {
             foreach ($title as $crumb) {
-                this->crumbs[] = $crumb + ['title' => '', 'url' => null, 'options' => []];
+                this.crumbs[] = $crumb + ['title' => '', 'url' => null, 'options' => []];
             }
 
             return this;
         }
 
-        this->crumbs[] = compact('title', 'url', 'options');
+        this.crumbs[] = compact('title', 'url', 'options');
 
         return this;
     }
@@ -122,12 +122,12 @@ class BreadcrumbsHelper extends Helper
                 $crumbs[] = $crumb + ['title' => '', 'url' => null, 'options' => []];
             }
 
-            array_splice(this->crumbs, 0, 0, $crumbs);
+            array_splice(this.crumbs, 0, 0, $crumbs);
 
             return this;
         }
 
-        array_unshift(this->crumbs, compact('title', 'url', 'options'));
+        array_unshift(this.crumbs, compact('title', 'url', 'options'));
 
         return this;
     }
@@ -156,11 +156,11 @@ class BreadcrumbsHelper extends Helper
      */
     function insertAt(int $index, string $title, $url = null, array $options = [])
     {
-        if (!isset(this->crumbs[$index]) && $index != count(this->crumbs)) {
+        if (!isset(this.crumbs[$index]) && $index != count(this.crumbs)) {
             throw new LogicException(sprintf("No crumb could be found at index '%s'", $index));
         }
 
-        array_splice(this->crumbs, $index, 0, [compact('title', 'url', 'options')]);
+        array_splice(this.crumbs, $index, 0, [compact('title', 'url', 'options')]);
 
         return this;
     }
@@ -186,13 +186,13 @@ class BreadcrumbsHelper extends Helper
      */
     function insertBefore(string $matchingTitle, string $title, $url = null, array $options = [])
     {
-        $key = this->findCrumb($matchingTitle);
+        $key = this.findCrumb($matchingTitle);
 
         if ($key == null) {
             throw new LogicException(sprintf("No crumb matching '%s' could be found.", $matchingTitle));
         }
 
-        return this->insertAt($key, $title, $url, $options);
+        return this.insertAt($key, $title, $url, $options);
     }
 
     /**
@@ -216,13 +216,13 @@ class BreadcrumbsHelper extends Helper
      */
     function insertAfter(string $matchingTitle, string $title, $url = null, array $options = [])
     {
-        $key = this->findCrumb($matchingTitle);
+        $key = this.findCrumb($matchingTitle);
 
         if ($key == null) {
             throw new LogicException(sprintf("No crumb matching '%s' could be found.", $matchingTitle));
         }
 
-        return this->insertAt($key + 1, $title, $url, $options);
+        return this.insertAt($key + 1, $title, $url, $options);
     }
 
     /**
@@ -232,7 +232,7 @@ class BreadcrumbsHelper extends Helper
      */
     function getCrumbs(): array
     {
-        return this->crumbs;
+        return this.crumbs;
     }
 
     /**
@@ -242,7 +242,7 @@ class BreadcrumbsHelper extends Helper
      */
     function reset()
     {
-        this->crumbs = [];
+        this.crumbs = [];
 
         return this;
     }
@@ -265,13 +265,13 @@ class BreadcrumbsHelper extends Helper
      */
     function render(array $attributes = [], array $separator = []): string
     {
-        if (!this->crumbs) {
+        if (!this.crumbs) {
             return '';
         }
 
-        $crumbs = this->crumbs;
+        $crumbs = this.crumbs;
         $crumbsCount = count($crumbs);
-        $templater = this->templater();
+        $templater = this.templater();
         $separatorString = '';
 
         if ($separator) {
@@ -284,12 +284,12 @@ class BreadcrumbsHelper extends Helper
                 ['innerAttrs', 'separator']
             );
 
-            $separatorString = this->formatTemplate('separator', $separator);
+            $separatorString = this.formatTemplate('separator', $separator);
         }
 
         $crumbTrail = '';
         foreach ($crumbs as $key => $crumb) {
-            $url = $crumb['url'] ? this->Url->build($crumb['url']) : null;
+            $url = $crumb['url'] ? this.Url->build($crumb['url']) : null;
             $title = $crumb['title'];
             $options = $crumb['options'];
 
@@ -317,10 +317,10 @@ class BreadcrumbsHelper extends Helper
                 $templateParams['separator'] = $separatorString;
             }
 
-            $crumbTrail .= this->formatTemplate($template, $templateParams);
+            $crumbTrail .= this.formatTemplate($template, $templateParams);
         }
 
-        return this->formatTemplate('wrapper', [
+        return this.formatTemplate('wrapper', [
             'content' => $crumbTrail,
             'attrs' => $templater->formatAttributes($attributes, ['templateVars']),
             'templateVars' => $attributes['templateVars'] ?? [],
@@ -336,7 +336,7 @@ class BreadcrumbsHelper extends Helper
      */
     protected function findCrumb(string $title): ?int
     {
-        foreach (this->crumbs as $key => $crumb) {
+        foreach (this.crumbs as $key => $crumb) {
             if ($crumb['title'] == $title) {
                 return $key;
             }

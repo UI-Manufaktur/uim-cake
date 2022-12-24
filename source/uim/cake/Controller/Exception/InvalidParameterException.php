@@ -44,7 +44,7 @@ class InvalidParameterException extends CakeException
     public this($message = '', ?int $code = null, ?Throwable $previous = null)
     {
         if (is_array($message)) {
-            this->_messageTemplate = this->templates[$message['template']] ?? '';
+            this._messageTemplate = this.templates[$message['template']] ?? '';
             unset($message['template']);
         }
         parent::__construct($message, $code, $previous);

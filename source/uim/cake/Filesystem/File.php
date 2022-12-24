@@ -87,12 +87,12 @@ class File
     public this(string $path, bool $create = false, int $mode = 0755)
     {
         $splInfo = new SplFileInfo($path);
-        this->Folder = new Folder($splInfo->getPath(), $create, $mode);
+        this.Folder = new Folder($splInfo->getPath(), $create, $mode);
         if (!is_dir($path)) {
-            this->name = ltrim($splInfo->getFilename(), '/\\');
+            this.name = ltrim($splInfo->getFilename(), '/\\');
         }
-        this->pwd();
-        $create && !this->exists() && this->safe($path) && this->create();
+        this.pwd();
+        $create && !this.exists() && this.safe($path) && this.create();
     }
 
     /**
@@ -100,7 +100,7 @@ class File
      */
     function __destruct()
     {
-        this->close();
+        this.close();
     }
 
     /**
@@ -110,9 +110,9 @@ class File
      */
     function create(): bool
     {
-        $dir = this->Folder->pwd();
+        $dir = this.Folder->pwd();
 
-        if (is_dir($dir) && is_writable($dir) && !this->exists() && touch(this->path)) {
+        if (is_dir($dir) && is_writable($dir) && !this.exists() && touch(this.path)) {
             return true;
         }
 
@@ -128,16 +128,16 @@ class File
      */
     function open(string $mode = 'r', bool $force = false): bool
     {
-        if (!$force && is_resource(this->handle)) {
+        if (!$force && is_resource(this.handle)) {
             return true;
         }
-        if (this->exists() == false && this->create() == false) {
+        if (this.exists() == false && this.create() == false) {
             return false;
         }
 
-        this->handle = fopen(this->path, $mode);
+        this.handle = fopen(this.path, $mode);
 
-        return is_resource(this->handle);
+        return is_resource(this.handle);
     }
 
     /**
@@ -150,29 +150,29 @@ class File
      */
     function read($bytes = false, string $mode = 'rb', bool $force = false)
     {
-        if ($bytes == false && this->lock == null) {
-            return file_get_contents(this->path);
+        if ($bytes == false && this.lock == null) {
+            return file_get_contents(this.path);
         }
-        if (this->open($mode, $force) == false) {
+        if (this.open($mode, $force) == false) {
             return false;
         }
-        if (this->lock != null && flock(this->handle, LOCK_SH) == false) {
+        if (this.lock != null && flock(this.handle, LOCK_SH) == false) {
             return false;
         }
         if (is_int($bytes)) {
-            return fread(this->handle, $bytes);
+            return fread(this.handle, $bytes);
         }
 
         $data = '';
-        while (!feof(this->handle)) {
-            $data .= fgets(this->handle, 4096);
+        while (!feof(this.handle)) {
+            $data .= fgets(this.handle, 4096);
         }
 
-        if (this->lock != null) {
-            flock(this->handle, LOCK_UN);
+        if (this.lock != null) {
+            flock(this.handle, LOCK_UN);
         }
         if ($bytes == false) {
-            this->close();
+            this.close();
         }
 
         return trim($data);
@@ -189,11 +189,11 @@ class File
     function offset($offset = false, int $seek = SEEK_SET)
     {
         if ($offset == false) {
-            if (is_resource(this->handle)) {
-                return ftell(this->handle);
+            if (is_resource(this.handle)) {
+                return ftell(this.handle);
             }
-        } elseif (this->open() == true) {
-            return fseek(this->handle, $offset, $seek) == 0;
+        } elseif (this.open() == true) {
+            return fseek(this.handle, $offset, $seek) == 0;
         }
 
         return false;
@@ -229,16 +229,16 @@ class File
     function write(string $data, string $mode = 'w', bool $force = false): bool
     {
         $success = false;
-        if (this->open($mode, $force) == true) {
-            if (this->lock != null && flock(this->handle, LOCK_EX) == false) {
+        if (this.open($mode, $force) == true) {
+            if (this.lock != null && flock(this.handle, LOCK_EX) == false) {
                 return false;
             }
 
-            if (fwrite(this->handle, $data) != false) {
+            if (fwrite(this.handle, $data) != false) {
                 $success = true;
             }
-            if (this->lock != null) {
-                flock(this->handle, LOCK_UN);
+            if (this.lock != null) {
+                flock(this.handle, LOCK_UN);
             }
         }
 
@@ -254,7 +254,7 @@ class File
      */
     function append(string $data, bool $force = false): bool
     {
-        return this->write($data, 'a', $force);
+        return this.write($data, 'a', $force);
     }
 
     /**
@@ -264,11 +264,11 @@ class File
      */
     function close(): bool
     {
-        if (!is_resource(this->handle)) {
+        if (!is_resource(this.handle)) {
             return true;
         }
 
-        return fclose(this->handle);
+        return fclose(this.handle);
     }
 
     /**
@@ -278,10 +278,10 @@ class File
      */
     function delete(): bool
     {
-        this->close();
-        this->handle = null;
-        if (this->exists()) {
-            return unlink(this->path);
+        this.close();
+        this.handle = null;
+        if (this.exists()) {
+            return unlink(this.path);
         }
 
         return false;
@@ -301,15 +301,15 @@ class File
      */
     function info(): array
     {
-        if (!this->info) {
-            this->info = pathinfo(this->path);
+        if (!this.info) {
+            this.info = pathinfo(this.path);
         }
 
-        this->info['filename'] = this->info['filename'] ?? this->name();
-        this->info['filesize'] = this->info['filesize'] ?? this->size();
-        this->info['mime'] = this->info['mime'] ?? this->mime();
+        this.info['filename'] = this.info['filename'] ?? this.name();
+        this.info['filesize'] = this.info['filesize'] ?? this.size();
+        this.info['mime'] = this.info['mime'] ?? this.mime();
 
-        return this->info;
+        return this.info;
     }
 
     /**
@@ -319,11 +319,11 @@ class File
      */
     function ext()
     {
-        if (!this->info) {
-            this->info();
+        if (!this.info) {
+            this.info();
         }
 
-        return this->info['extension'] ?? false;
+        return this.info['extension'] ?? false;
     }
 
     /**
@@ -333,14 +333,14 @@ class File
      */
     function name()
     {
-        if (!this->info) {
-            this->info();
+        if (!this.info) {
+            this.info();
         }
-        if (isset(this->info['extension'])) {
-            return static::_basename(this->name, '.' . this->info['extension']);
+        if (isset(this.info['extension'])) {
+            return static::_basename(this.name, '.' . this.info['extension']);
         }
-        if (this->name) {
-            return this->name;
+        if (this.name) {
+            return this.name;
         }
 
         return false;
@@ -376,17 +376,17 @@ class File
     /**
      * Makes file name safe for saving
      *
-     * @param string|null $name The name of the file to make safe if different from this->name
-     * @param string|null $ext The name of the extension to make safe if different from this->ext
+     * @param string|null $name The name of the file to make safe if different from this.name
+     * @param string|null $ext The name of the extension to make safe if different from this.ext
      * @return string The extension of the file
      */
     function safe(?string $name = null, ?string $ext = null): string
     {
         if (!$name) {
-            $name = (string)this->name;
+            $name = (string)this.name;
         }
         if (!$ext) {
-            $ext = (string)this->ext();
+            $ext = (string)this.ext();
         }
 
         return preg_replace("/(?:[^\w\.-]+)/", '_', static::_basename($name, $ext));
@@ -402,12 +402,12 @@ class File
     function md5($maxsize = 5)
     {
         if ($maxsize == true) {
-            return md5_file(this->path);
+            return md5_file(this.path);
         }
 
-        $size = this->size();
+        $size = this.size();
         if ($size && $size < $maxsize * 1024 * 1024) {
-            return md5_file(this->path);
+            return md5_file(this.path);
         }
 
         return false;
@@ -420,14 +420,14 @@ class File
      */
     function pwd()
     {
-        if (this->path == null) {
-            $dir = this->Folder->pwd();
+        if (this.path == null) {
+            $dir = this.Folder->pwd();
             if ($dir && is_dir($dir)) {
-                this->path = this->Folder->slashTerm($dir) . this->name;
+                this.path = this.Folder->slashTerm($dir) . this.name;
             }
         }
 
-        return this->path;
+        return this.path;
     }
 
     /**
@@ -437,9 +437,9 @@ class File
      */
     function exists(): bool
     {
-        this->clearStatCache();
+        this.clearStatCache();
 
-        return this->path && file_exists(this->path) && is_file(this->path);
+        return this.path && file_exists(this.path) && is_file(this.path);
     }
 
     /**
@@ -449,8 +449,8 @@ class File
      */
     function perms()
     {
-        if (this->exists()) {
-            return decoct(fileperms(this->path) & 0777);
+        if (this.exists()) {
+            return decoct(fileperms(this.path) & 0777);
         }
 
         return false;
@@ -463,8 +463,8 @@ class File
      */
     function size()
     {
-        if (this->exists()) {
-            return filesize(this->path);
+        if (this.exists()) {
+            return filesize(this.path);
         }
 
         return false;
@@ -477,7 +477,7 @@ class File
      */
     function writable(): bool
     {
-        return is_writable(this->path);
+        return is_writable(this.path);
     }
 
     /**
@@ -487,7 +487,7 @@ class File
      */
     function executable(): bool
     {
-        return is_executable(this->path);
+        return is_executable(this.path);
     }
 
     /**
@@ -497,7 +497,7 @@ class File
      */
     function readable(): bool
     {
-        return is_readable(this->path);
+        return is_readable(this.path);
     }
 
     /**
@@ -507,8 +507,8 @@ class File
      */
     function owner()
     {
-        if (this->exists()) {
-            return fileowner(this->path);
+        if (this.exists()) {
+            return fileowner(this.path);
         }
 
         return false;
@@ -521,8 +521,8 @@ class File
      */
     function group()
     {
-        if (this->exists()) {
-            return filegroup(this->path);
+        if (this.exists()) {
+            return filegroup(this.path);
         }
 
         return false;
@@ -535,8 +535,8 @@ class File
      */
     function lastAccess()
     {
-        if (this->exists()) {
-            return fileatime(this->path);
+        if (this.exists()) {
+            return fileatime(this.path);
         }
 
         return false;
@@ -549,8 +549,8 @@ class File
      */
     function lastChange()
     {
-        if (this->exists()) {
-            return filemtime(this->path);
+        if (this.exists()) {
+            return filemtime(this.path);
         }
 
         return false;
@@ -563,7 +563,7 @@ class File
      */
     function folder(): Folder
     {
-        return this->Folder;
+        return this.Folder;
     }
 
     /**
@@ -575,11 +575,11 @@ class File
      */
     function copy(string $dest, bool $overwrite = true): bool
     {
-        if (!this->exists() || is_file($dest) && !$overwrite) {
+        if (!this.exists() || is_file($dest) && !$overwrite) {
             return false;
         }
 
-        return copy(this->path, $dest);
+        return copy(this.path, $dest);
     }
 
     /**
@@ -590,12 +590,12 @@ class File
      */
     function mime()
     {
-        if (!this->exists()) {
+        if (!this.exists()) {
             return false;
         }
         if (class_exists('finfo')) {
             $finfo = new finfo(FILEINFO_MIME);
-            $type = $finfo->file(this->pwd());
+            $type = $finfo->file(this.pwd());
             if (!$type) {
                 return false;
             }
@@ -604,7 +604,7 @@ class File
             return $type;
         }
         if (function_exists('mime_content_type')) {
-            return mime_content_type(this->pwd());
+            return mime_content_type(this.pwd());
         }
 
         return false;
@@ -619,8 +619,8 @@ class File
      */
     function clearStatCache($all = false): void
     {
-        if ($all == false && this->path) {
-            clearstatcache(true, this->path);
+        if ($all == false && this.path) {
+            clearstatcache(true, this.path);
         }
 
         clearstatcache();
@@ -635,20 +635,20 @@ class File
      */
     function replaceText($search, $replace): bool
     {
-        if (!this->open('r+')) {
+        if (!this.open('r+')) {
             return false;
         }
 
-        if (this->lock != null && flock(this->handle, LOCK_EX) == false) {
+        if (this.lock != null && flock(this.handle, LOCK_EX) == false) {
             return false;
         }
 
-        $replaced = this->write(str_replace($search, $replace, this->read()), 'w', true);
+        $replaced = this.write(str_replace($search, $replace, this.read()), 'w', true);
 
-        if (this->lock != null) {
-            flock(this->handle, LOCK_UN);
+        if (this.lock != null) {
+            flock(this.handle, LOCK_UN);
         }
-        this->close();
+        this.close();
 
         return $replaced;
     }

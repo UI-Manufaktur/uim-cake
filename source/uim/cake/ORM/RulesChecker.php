@@ -59,7 +59,7 @@ class RulesChecker extends BaseRulesChecker
         unset($options['message']);
 
         if (!$message) {
-            if (this->_useI18n) {
+            if (this._useI18n) {
                 $message = __d('cake', 'This value is already in use');
             } else {
                 $message = 'This value is already in use';
@@ -68,7 +68,7 @@ class RulesChecker extends BaseRulesChecker
 
         $errorField = current($fields);
 
-        return this->_addError(new IsUnique($fields, $options), '_isUnique', compact('errorField', 'message'));
+        return this._addError(new IsUnique($fields, $options), '_isUnique', compact('errorField', 'message'));
     }
 
     /**
@@ -106,7 +106,7 @@ class RulesChecker extends BaseRulesChecker
         }
 
         if (!$message) {
-            if (this->_useI18n) {
+            if (this._useI18n) {
                 $message = __d('cake', 'This value does not exist');
             } else {
                 $message = 'This value does not exist';
@@ -115,7 +115,7 @@ class RulesChecker extends BaseRulesChecker
 
         $errorField = is_string($field) ? $field : current($field);
 
-        return this->_addError(new ExistsIn($field, $table, $options), '_existsIn', compact('errorField', 'message'));
+        return this._addError(new ExistsIn($field, $table, $options), '_existsIn', compact('errorField', 'message'));
     }
 
     /**
@@ -139,7 +139,7 @@ class RulesChecker extends BaseRulesChecker
      */
     function isLinkedTo($association, ?string $field = null, ?string $message = null): RuleInvoker
     {
-        return this->_addLinkConstraintRule(
+        return this._addLinkConstraintRule(
             $association,
             $field,
             $message,
@@ -169,7 +169,7 @@ class RulesChecker extends BaseRulesChecker
      */
     function isNotLinkedTo($association, ?string $field = null, ?string $message = null): RuleInvoker
     {
-        return this->_addLinkConstraintRule(
+        return this._addLinkConstraintRule(
             $association,
             $field,
             $message,
@@ -212,7 +212,7 @@ class RulesChecker extends BaseRulesChecker
             $associationAlias = $association;
 
             if ($errorField == null) {
-                $repository = this->_options['repository'] ?? null;
+                $repository = this._options['repository'] ?? null;
                 if ($repository instanceof Table) {
                     $association = $repository->getAssociation($association);
                     $errorField = $association->getProperty();
@@ -228,7 +228,7 @@ class RulesChecker extends BaseRulesChecker
         }
 
         if (!$message) {
-            if (this->_useI18n) {
+            if (this._useI18n) {
                 $message = __d(
                     'cake',
                     'Cannot modify row: a constraint for the `{0}` association fails.',
@@ -247,7 +247,7 @@ class RulesChecker extends BaseRulesChecker
             $linkStatus
         );
 
-        return this->_addError($rule, $ruleName, compact('errorField', 'message'));
+        return this._addError($rule, $ruleName, compact('errorField', 'message'));
     }
 
     /**
@@ -266,7 +266,7 @@ class RulesChecker extends BaseRulesChecker
         ?string $message = null
     ): RuleInvoker {
         if (!$message) {
-            if (this->_useI18n) {
+            if (this._useI18n) {
                 $message = __d('cake', 'The count does not match {0}{1}', [$operator, $count]);
             } else {
                 $message = sprintf('The count does not match %s%d', $operator, $count);
@@ -275,7 +275,7 @@ class RulesChecker extends BaseRulesChecker
 
         $errorField = $field;
 
-        return this->_addError(
+        return this._addError(
             new ValidCount($field),
             '_validCount',
             compact('count', 'operator', 'errorField', 'message')

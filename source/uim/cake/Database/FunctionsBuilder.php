@@ -51,7 +51,7 @@ class FunctionsBuilder
             $returnType = 'integer';
         }
 
-        return this->aggregate('SUM', this->toLiteralParam($expression), $types, $returnType);
+        return this.aggregate('SUM', this.toLiteralParam($expression), $types, $returnType);
     }
 
     /**
@@ -63,7 +63,7 @@ class FunctionsBuilder
      */
     function avg($expression, $types = []): AggregateExpression
     {
-        return this->aggregate('AVG', this->toLiteralParam($expression), $types, 'float');
+        return this.aggregate('AVG', this.toLiteralParam($expression), $types, 'float');
     }
 
     /**
@@ -75,7 +75,7 @@ class FunctionsBuilder
      */
     function max($expression, $types = []): AggregateExpression
     {
-        return this->aggregate('MAX', this->toLiteralParam($expression), $types, current($types) ?: 'float');
+        return this.aggregate('MAX', this.toLiteralParam($expression), $types, current($types) ?: 'float');
     }
 
     /**
@@ -87,7 +87,7 @@ class FunctionsBuilder
      */
     function min($expression, $types = []): AggregateExpression
     {
-        return this->aggregate('MIN', this->toLiteralParam($expression), $types, current($types) ?: 'float');
+        return this.aggregate('MIN', this.toLiteralParam($expression), $types, current($types) ?: 'float');
     }
 
     /**
@@ -99,7 +99,7 @@ class FunctionsBuilder
      */
     function count($expression, $types = []): AggregateExpression
     {
-        return this->aggregate('COUNT', this->toLiteralParam($expression), $types, 'integer');
+        return this.aggregate('COUNT', this.toLiteralParam($expression), $types, 'integer');
     }
 
     /**
@@ -151,7 +151,7 @@ class FunctionsBuilder
             throw new InvalidArgumentException('The `$type` in a cast cannot be empty.');
         }
 
-        $expression = new FunctionExpression('CAST', this->toLiteralParam($field));
+        $expression = new FunctionExpression('CAST', this.toLiteralParam($field));
         $expression->setConjunction(' AS')->add([$type => 'literal']);
 
         return $expression;
@@ -180,7 +180,7 @@ class FunctionsBuilder
      */
     function datePart(string $part, $expression, array $types = []): FunctionExpression
     {
-        return this->extract($part, $expression, $types);
+        return this.extract($part, $expression, $types);
     }
 
     /**
@@ -193,7 +193,7 @@ class FunctionsBuilder
      */
     function extract(string $part, $expression, array $types = []): FunctionExpression
     {
-        $expression = new FunctionExpression('EXTRACT', this->toLiteralParam($expression), $types, 'integer');
+        $expression = new FunctionExpression('EXTRACT', this.toLiteralParam($expression), $types, 'integer');
         $expression->setConjunction(' FROM')->add([$part => 'literal'], [], true);
 
         return $expression;
@@ -214,7 +214,7 @@ class FunctionsBuilder
             $value = 0;
         }
         $interval = $value . ' ' . $unit;
-        $expression = new FunctionExpression('DATE_ADD', this->toLiteralParam($expression), $types, 'datetime');
+        $expression = new FunctionExpression('DATE_ADD', this.toLiteralParam($expression), $types, 'datetime');
         $expression->setConjunction(', INTERVAL')->add([$interval => 'literal']);
 
         return $expression;
@@ -230,7 +230,7 @@ class FunctionsBuilder
      */
     function dayOfWeek($expression, $types = []): FunctionExpression
     {
-        return new FunctionExpression('DAYOFWEEK', this->toLiteralParam($expression), $types, 'integer');
+        return new FunctionExpression('DAYOFWEEK', this.toLiteralParam($expression), $types, 'integer');
     }
 
     /**
@@ -243,7 +243,7 @@ class FunctionsBuilder
      */
     function weekday($expression, $types = []): FunctionExpression
     {
-        return this->dayOfWeek($expression, $types);
+        return this.dayOfWeek($expression, $types);
     }
 
     /**
@@ -290,7 +290,7 @@ class FunctionsBuilder
      */
     function lag($expression, int $offset, $default = null, $type = null): AggregateExpression
     {
-        $params = this->toLiteralParam($expression) + [$offset => 'literal'];
+        $params = this.toLiteralParam($expression) + [$offset => 'literal'];
         if ($default != null) {
             $params[] = $default;
         }
@@ -314,7 +314,7 @@ class FunctionsBuilder
      */
     function lead($expression, int $offset, $default = null, $type = null): AggregateExpression
     {
-        $params = this->toLiteralParam($expression) + [$offset => 'literal'];
+        $params = this.toLiteralParam($expression) + [$offset => 'literal'];
         if ($default != null) {
             $params[] = $default;
         }

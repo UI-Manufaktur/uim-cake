@@ -58,8 +58,8 @@ class YearWidget extends BasicWidget
      */
     public this(StringTemplate $templates, SelectBoxWidget $selectBox)
     {
-        this->_select = $selectBox;
-        this->_templates = $templates;
+        this._select = $selectBox;
+        this._templates = $templates;
     }
 
     /**
@@ -71,7 +71,7 @@ class YearWidget extends BasicWidget
      */
     function render(array $data, ContextInterface $context): string
     {
-        $data += this->mergeDefaults($data, $context);
+        $data += this.mergeDefaults($data, $context);
 
         if (empty($data['min'])) {
             $data['min'] = date('Y', strtotime('-5 years'));
@@ -106,6 +106,6 @@ class YearWidget extends BasicWidget
 
         unset($data['order'], $data['min'], $data['max']);
 
-        return this->_select->render($data, $context);
+        return this._select->render($data, $context);
     }
 }

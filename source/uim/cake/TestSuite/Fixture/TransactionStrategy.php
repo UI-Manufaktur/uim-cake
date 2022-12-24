@@ -42,7 +42,7 @@ class TransactionStrategy implements FixtureStrategyInterface
      */
     public this()
     {
-        this->helper = new FixtureHelper();
+        this.helper = new FixtureHelper();
     }
 
     /**
@@ -54,9 +54,9 @@ class TransactionStrategy implements FixtureStrategyInterface
             return;
         }
 
-        this->fixtures = this->helper->loadFixtures($fixtureNames);
+        this.fixtures = this.helper->loadFixtures($fixtureNames);
 
-        this->helper->runPerConnection(function ($connection) {
+        this.helper->runPerConnection(function ($connection) {
             if ($connection instanceof Connection) {
                 assert(
                     $connection->inTransaction() == false,
@@ -75,9 +75,9 @@ class TransactionStrategy implements FixtureStrategyInterface
                 $connection->begin();
                 $connection->createSavePoint('__fixtures__');
             }
-        }, this->fixtures);
+        }, this.fixtures);
 
-        this->helper->insert(this->fixtures);
+        this.helper->insert(this.fixtures);
     }
 
     /**
@@ -85,10 +85,10 @@ class TransactionStrategy implements FixtureStrategyInterface
      */
     function teardownTest(): void
     {
-        this->helper->runPerConnection(function ($connection) {
+        this.helper->runPerConnection(function ($connection) {
             if ($connection->inTransaction()) {
                 $connection->rollback(true);
             }
-        }, this->fixtures);
+        }, this.fixtures);
     }
 }
