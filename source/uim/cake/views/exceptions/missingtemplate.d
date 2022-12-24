@@ -81,8 +81,8 @@ class MissingTemplateException : CakeException
     auto getAttributes(): array
     {
         return [
-            "file" => this.filename,
-            "paths" => this.paths,
+            "file": this.filename,
+            "paths": this.paths,
         ];
     }
 }

@@ -67,9 +67,9 @@ class EntityContext : IContext {
      */
     this(array $context) {
         $context += [
-            "entity" => null,
-            "table" => null,
-            "validator" => [],
+            "entity": null,
+            "table": null,
+            "validator": [],
         ];
         _context = $context;
         _prepare();
@@ -205,8 +205,8 @@ class EntityContext : IContext {
      */
     function val(string myField, array myOptions = []) {
         myOptions += [
-            "default" => null,
-            "schemaDefault" => true,
+            "default": null,
+            "schemaDefault": true,
         ];
 
         if (empty(_context["entity"])) {
@@ -431,7 +431,7 @@ class EntityContext : IContext {
             return myTarget.get(myField);
         }
         if (myTarget instanceof Traversable) {
-            foreach (myTarget as $i => $val) {
+            foreach (myTarget as $i: $val) {
                 if ((string)$i == myField) {
                     return $val;
                 }

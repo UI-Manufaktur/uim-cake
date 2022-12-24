@@ -24,7 +24,7 @@ class FormContext : IContext
      */
     this(array $context) {
         $context += [
-            "entity" => null,
+            "entity": null,
         ];
         _form = $context["entity"];
     }
@@ -58,8 +58,8 @@ class FormContext : IContext
 
     function val(string myField, array myOptions = []) {
         myOptions += [
-            "default" => null,
-            "schemaDefault" => true,
+            "default": null,
+            "schemaDefault": true,
         ];
 
         $val = _form.getData(myField);

@@ -18,7 +18,7 @@ import uim.cakeility\Xml; */
  * In your controller, you could do the following:
  *
  * ```
- * this.set(["posts" => $posts]);
+ * this.set(["posts": $posts]);
  * this.viewBuilder().setOption("serialize", true);
  * ```
  *
@@ -78,9 +78,9 @@ class XmlView : SerializedView
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        "serialize" => null,
-        "xmlOptions" => null,
-        "rootNode" => null,
+        "serialize": null,
+        "xmlOptions": null,
+        "rootNode": null,
     ];
 
     
@@ -96,8 +96,8 @@ class XmlView : SerializedView
         }
 
         if (is_array($serialize)) {
-            myData = [$rootNode => []];
-            foreach ($serialize as myAlias => myKey) {
+            myData = [$rootNode: []];
+            foreach ($serialize as myAlias: myKey) {
                 if (is_numeric(myAlias)) {
                     myAlias = myKey;
                 }
@@ -112,7 +112,7 @@ class XmlView : SerializedView
                 (!is_array(myData) || Hash::numeric(array_keys(myData)))
             ) {
                 /** @psalm-suppress InvalidArrayOffset */
-                myData = [$rootNode => [$serialize => myData]];
+                myData = [$rootNode: [$serialize: myData]];
             }
         }
 

@@ -262,7 +262,7 @@ class View : IEventDispatcher {
             this.setEventManager(myEventManager);
         }
         if (myRequest is null) {
-            myRequest = Router::getRequest() ?: new ServerRequest(["base" => "", "url" => "", "webroot" => "/"]);
+            myRequest = Router::getRequest() ?: new ServerRequest(["base": "", "url": "", "webroot": "/"]);
         }
         this.request = myRequest;
         this.response = $response ?: new Response();
@@ -487,12 +487,12 @@ class View : IEventDispatcher {
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} myOptions
      */
     string element(string myName, array myData = [], array myOptions = []) {
-        myOptions += ["callbacks" => false, "cache" => null, "plugin" => null, "ignoreMissing" => false];
+        myOptions += ["callbacks": false, "cache": null, "plugin": null, "ignoreMissing": false];
         if (isset(myOptions["cache"])) {
             myOptions["cache"] = _elementCache(
                 myName,
                 myData,
-                array_diff_key(myOptions, ["callbacks" => false, "plugin" => null, "ignoreMissing" => null])
+                array_diff_key(myOptions, ["callbacks": false, "plugin": null, "ignoreMissing": null])
             );
         }
 
@@ -531,7 +531,7 @@ class View : IEventDispatcher {
      * @throws \RuntimeException When myOptions is lacking a "key" option.
      */
     string cache(callable $block, array myOptions = []) {
-        myOptions += ["key" => "", "config" => this.elementCache];
+        myOptions += ["key": "", "config": this.elementCache];
         if (empty(myOptions["key"])) {
             throw new RuntimeException("Cannot cache content with an empty key");
         }
@@ -710,7 +710,7 @@ class View : IEventDispatcher {
                 myData = myName;
             }
         } else {
-            myData = [myName => myValue];
+            myData = [myName: myValue];
         }
         this.viewVars = myData + this.viewVars;
 
@@ -1218,7 +1218,7 @@ class View : IEventDispatcher {
      *
      * @param string myName The name you want to plugin split.
      * @param bool $fallback If true uses the plugin set in the current Request when parsed plugin is not loaded
-     * @return array Array with 2 indexes. 0 => plugin name, 1 => filename.
+     * @return array Array with 2 indexes. 0: plugin name, 1: filename.
      * @psalm-return array{string|null, string}
      */
     function pluginSplit(string myName, bool $fallback = true): array
@@ -1446,8 +1446,8 @@ class View : IEventDispatcher {
             array_keys(myData)
         );
         myConfig = [
-            "config" => this.elementCache,
-            "key" => implode("_", myKeys),
+            "config": this.elementCache,
+            "key": implode("_", myKeys),
         ];
         if (is_array($cache)) {
             myConfig = $cache + myConfig;

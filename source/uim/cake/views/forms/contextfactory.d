@@ -19,7 +19,7 @@ class ContextFactory
      * Constructor.
      *
      * @param array $providers Array of provider callables. Each element should
-     *   be of form `["type" => "a-string", "callable" => ..]`
+     *   be of form `["type": "a-string", "callable": ..]`
      */
     this(array $providers = []) {
         foreach ($providers as $provider) {
@@ -31,14 +31,14 @@ class ContextFactory
      * Create factory instance with providers "array", "form" and "orm".
      *
      * @param array $providers Array of provider callables. Each element should
-     *   be of form `["type" => "a-string", "callable" => ..]`
+     *   be of form `["type": "a-string", "callable": ..]`
      * @return static
      */
     static function createWithDefaults(array $providers = []) {
         $providers = [
             [
-                "type" => "orm",
-                "callable" => function (myRequest, myData) {
+                "type": "orm",
+                "callable": function (myRequest, myData) {
                     if (myData["entity"] instanceof IEntity) {
                         return new EntityContext(myData);
                     }
@@ -56,24 +56,24 @@ class ContextFactory
                 },
             ],
             [
-                "type" => "form",
-                "callable" => function (myRequest, myData) {
+                "type": "form",
+                "callable": function (myRequest, myData) {
                     if (myData["entity"] instanceof Form) {
                         return new FormContext(myData);
                     }
                 },
             ],
             [
-                "type" => "array",
-                "callable" => function (myRequest, myData) {
+                "type": "array",
+                "callable": function (myRequest, myData) {
                     if (is_array(myData["entity"]) && isset(myData["entity"]["schema"])) {
                         return new ArrayContext(myData["entity"]);
                     }
                 },
             ],
             [
-                "type" => "null",
-                "callable" => function (myRequest, myData) {
+                "type": "null",
+                "callable": function (myRequest, myData) {
                     if (myData["entity"] is null) {
                         return new NullContext(myData);
                     }
@@ -100,7 +100,7 @@ class ContextFactory
      * @return this
      */
     function addProvider(string myType, callable $check) {
-        this.providers = [myType => ["type" => myType, "callable" => $check]]
+        this.providers = [myType: ["type": myType, "callable": $check]]
             + this.providers;
 
         return this;
@@ -118,7 +118,7 @@ class ContextFactory
      */
     auto get(ServerRequest myRequest, array myData = []): IContext
     {
-        myData += ["entity" => null];
+        myData += ["entity": null];
 
         foreach (this.providers as $provider) {
             $check = $provider["callable"];

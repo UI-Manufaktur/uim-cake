@@ -79,7 +79,7 @@ trait ViewVarsTrait {
                 myData = myName;
             }
         } else {
-            myData = [myName => myValue];
+            myData = [myName: myValue];
         }
         this.viewBuilder().setVars(myData);
 

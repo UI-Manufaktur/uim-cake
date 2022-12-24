@@ -227,7 +227,7 @@ class ViewBuilder : JsonSerializable, Serializable
      */
     function addHelper(string helper, array myOptions = []) {
         if (myOptions) {
-            $array = [$helper => myOptions];
+            $array = [$helper: myOptions];
         } else {
             $array = [$helper];
         }
@@ -245,7 +245,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @since 4.3.0
      */
     function addHelpers(array $helpers) {
-        foreach ($helpers as $helper => myConfig) {
+        foreach ($helpers as $helper: myConfig) {
             if (is_int($helper)) {
                 $helper = myConfig;
                 myConfig = [];
@@ -476,7 +476,7 @@ class ViewBuilder : JsonSerializable, Serializable
             myClassName = App::className(myClassName, "View", "View");
         }
         if (myClassName is null) {
-            throw new MissingViewException(["class" => _className]);
+            throw new MissingViewException(["class": _className]);
         }
 
         if (!empty($vars)) {
@@ -486,16 +486,16 @@ class ViewBuilder : JsonSerializable, Serializable
         }
 
         myData = [
-            "name" => _name,
-            "templatePath" => _templatePath,
-            "template" => _template,
-            "plugin" => _plugin,
-            "theme" => _theme,
-            "layout" => _layout,
-            "autoLayout" => _autoLayout,
-            "layoutPath" => _layoutPath,
-            "helpers" => _helpers,
-            "viewVars" => $vars + _vars,
+            "name": _name,
+            "templatePath": _templatePath,
+            "template": _template,
+            "plugin": _plugin,
+            "theme": _theme,
+            "layout": _layout,
+            "autoLayout": _autoLayout,
+            "layoutPath": _layoutPath,
+            "helpers": _helpers,
+            "viewVars": $vars + _vars,
         ];
         myData += _options;
 
@@ -569,7 +569,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      */
     function createFromArray(array myConfig) {
-        foreach (myConfig as $property => myValue) {
+        foreach (myConfig as $property: myValue) {
             this.{$property} = myValue;
         }
 
