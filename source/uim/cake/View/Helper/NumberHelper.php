@@ -64,7 +64,7 @@ class NumberHelper extends Helper
     {
         parent::__construct($view, $config);
 
-        $config = this->_config;
+        $config = this._config;
 
         /** @psalm-var class-string<\Cake\I18n\Number>|null $engineClass */
         $engineClass = App::className($config['engine'], 'Utility');
@@ -72,7 +72,7 @@ class NumberHelper extends Helper
             throw new CakeException(sprintf('Class for %s could not be found', $config['engine']));
         }
 
-        this->_engine = new $engineClass($config);
+        this._engine = new $engineClass($config);
     }
 
     /**
@@ -84,7 +84,7 @@ class NumberHelper extends Helper
      */
     function __call(string $method, array $params)
     {
-        return this->_engine->{$method}(...$params);
+        return this._engine->{$method}(...$params);
     }
 
     /**
@@ -99,7 +99,7 @@ class NumberHelper extends Helper
      */
     function precision($number, int $precision = 3, array $options = []): string
     {
-        return this->_engine->precision($number, $precision, $options);
+        return this._engine->precision($number, $precision, $options);
     }
 
     /**
@@ -112,7 +112,7 @@ class NumberHelper extends Helper
      */
     function toReadableSize($size): string
     {
-        return this->_engine->toReadableSize($size);
+        return this._engine->toReadableSize($size);
     }
 
     /**
@@ -131,7 +131,7 @@ class NumberHelper extends Helper
      */
     function toPercentage($number, int $precision = 2, array $options = []): string
     {
-        return this->_engine->toPercentage($number, $precision, $options);
+        return this._engine->toPercentage($number, $precision, $options);
     }
 
     /**
@@ -153,7 +153,7 @@ class NumberHelper extends Helper
      */
     function format($number, array $options = []): string
     {
-        $formatted = this->_engine->format($number, $options);
+        $formatted = this._engine->format($number, $options);
         $options += ['escape' => true];
 
         return $options['escape'] ? h($formatted) : $formatted;
@@ -185,7 +185,7 @@ class NumberHelper extends Helper
      */
     function currency($number, ?string $currency = null, array $options = []): string
     {
-        $formatted = this->_engine->currency($number, $currency, $options);
+        $formatted = this._engine->currency($number, $currency, $options);
         $options += ['escape' => true];
 
         return $options['escape'] ? h($formatted) : $formatted;
@@ -209,7 +209,7 @@ class NumberHelper extends Helper
      */
     function formatDelta($value, array $options = []): string
     {
-        $formatted = this->_engine->formatDelta($value, $options);
+        $formatted = this._engine->formatDelta($value, $options);
         $options += ['escape' => true];
 
         return $options['escape'] ? h($formatted) : $formatted;
@@ -230,7 +230,7 @@ class NumberHelper extends Helper
             'NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead.'
         );
 
-        return this->_engine->defaultCurrency($currency);
+        return this._engine->defaultCurrency($currency);
     }
 
     /**
@@ -252,6 +252,6 @@ class NumberHelper extends Helper
      */
     function ordinal($value, array $options = []): string
     {
-        return this->_engine->ordinal($value, $options);
+        return this._engine->ordinal($value, $options);
     }
 }

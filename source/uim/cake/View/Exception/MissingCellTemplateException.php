@@ -47,7 +47,7 @@ class MissingCellTemplateException extends MissingTemplateException
         ?int $code = null,
         ?Throwable $previous = null
     ) {
-        this->name = $name;
+        this.name = $name;
 
         parent::__construct($file, $paths, $code, $previous);
     }
@@ -61,9 +61,9 @@ class MissingCellTemplateException extends MissingTemplateException
     function getAttributes(): array
     {
         return [
-            'name' => this->name,
-            'file' => this->file,
-            'paths' => this->paths,
+            'name' => this.name,
+            'file' => this.file,
+            'paths' => this.paths,
         ];
     }
 }

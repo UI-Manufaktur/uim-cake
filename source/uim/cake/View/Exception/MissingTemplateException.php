@@ -53,15 +53,15 @@ class MissingTemplateException extends CakeException
     public this($file, array $paths = [], ?int $code = null, ?Throwable $previous = null)
     {
         if (is_array($file)) {
-            this->filename = array_pop($file);
-            this->templateName = array_pop($file);
+            this.filename = array_pop($file);
+            this.templateName = array_pop($file);
         } else {
-            this->filename = $file;
-            this->templateName = null;
+            this.filename = $file;
+            this.templateName = null;
         }
-        this->paths = $paths;
+        this.paths = $paths;
 
-        parent::__construct(this->formatMessage(), $code, $previous);
+        parent::__construct(this.formatMessage(), $code, $previous);
     }
 
     /**
@@ -71,12 +71,12 @@ class MissingTemplateException extends CakeException
      */
     function formatMessage(): string
     {
-        $name = this->templateName ?? this->filename;
-        $message = "{this->type} file `{$name}` could not be found.";
-        if (this->paths) {
+        $name = this.templateName ?? this.filename;
+        $message = "{this.type} file `{$name}` could not be found.";
+        if (this.paths) {
             $message .= "\n\nThe following paths were searched:\n\n";
-            foreach (this->paths as $path) {
-                $message .= "- `{$path}{this->filename}`\n";
+            foreach (this.paths as $path) {
+                $message .= "- `{$path}{this.filename}`\n";
             }
         }
 
@@ -92,8 +92,8 @@ class MissingTemplateException extends CakeException
     function getAttributes(): array
     {
         return [
-            'file' => this->filename,
-            'paths' => this->paths,
+            'file' => this.filename,
+            'paths' => this.paths,
         ];
     }
 }
