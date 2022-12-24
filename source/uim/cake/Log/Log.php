@@ -14,8 +14,8 @@
  */
 module uim.cake.Log;
 
-use Cake\Core\StaticConfigTrait;
-use Cake\Log\Engine\BaseLog;
+import uim.cake.Core\StaticConfigTrait;
+import uim.cake.Log\Engine\BaseLog;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 

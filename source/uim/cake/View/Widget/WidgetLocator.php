@@ -15,10 +15,10 @@
  */
 module uim.cake.View\Widget;
 
-use Cake\Core\App;
-use Cake\Core\Configure\Engine\PhpConfig;
-use Cake\View\StringTemplate;
-use Cake\View\View;
+import uim.cake.Core\App;
+import uim.cake.Core\Configure\Engine\PhpConfig;
+import uim.cake.View\StringTemplate;
+import uim.cake.View\View;
 use ReflectionClass;
 use RuntimeException;
 

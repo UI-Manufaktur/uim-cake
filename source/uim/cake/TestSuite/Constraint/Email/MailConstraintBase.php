@@ -15,7 +15,7 @@
  */
 module uim.cake.TestSuite\Constraint\Email;
 
-use Cake\TestSuite\TestEmailTransport;
+import uim.cake.TestSuite\TestEmailTransport;
 use PHPUnit\Framework\Constraint\Constraint;
 
 /**

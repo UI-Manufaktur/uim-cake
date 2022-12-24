@@ -15,10 +15,10 @@
  */
 module uim.cake.Datasource;
 
-use Cake\Collection\Collection;
-use Cake\ORM\Entity;
-use Cake\Utility\Hash;
-use Cake\Utility\Inflector;
+import uim.cake.Collection\Collection;
+import uim.cake.ORM\Entity;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Inflector;
 use InvalidArgumentException;
 use Traversable;
 

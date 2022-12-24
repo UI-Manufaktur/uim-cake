@@ -15,7 +15,7 @@
  */
 module uim.cake.Log\Engine;
 
-use Cake\Log\Formatter\DefaultFormatter;
+import uim.cake.Log\Formatter\DefaultFormatter;
 
 /**
  * Array logger.

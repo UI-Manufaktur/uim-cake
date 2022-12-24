@@ -15,17 +15,17 @@
  */
 module uim.cake.ORM\Association;
 
-use Cake\Core\App;
-use Cake\Database\Expression\IdentifierExpression;
-use Cake\Database\Expression\QueryExpression;
-use Cake\Database\IExpression;
-use Cake\Datasource\EntityInterface;
-use Cake\ORM\Association;
-use Cake\ORM\Association\Loader\SelectWithPivotLoader;
-use Cake\ORM\Query;
-use Cake\ORM\Table;
-use Cake\Utility\Hash;
-use Cake\Utility\Inflector;
+import uim.cake.Core\App;
+import uim.cake.Database\Expression\IdentifierExpression;
+import uim.cake.Database\Expression\QueryExpression;
+import uim.cake.Database\IExpression;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.ORM\Association;
+import uim.cake.ORM\Association\Loader\SelectWithPivotLoader;
+import uim.cake.ORM\Query;
+import uim.cake.ORM\Table;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Inflector;
 use Closure;
 use InvalidArgumentException;
 use SplObjectStorage;

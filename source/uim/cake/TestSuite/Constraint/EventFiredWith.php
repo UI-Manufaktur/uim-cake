@@ -2,8 +2,8 @@
 
 module uim.cake.TestSuite\Constraint;
 
-use Cake\Event\EventInterface;
-use Cake\Event\EventManager;
+import uim.cake.Event\EventInterface;
+import uim.cake.Event\EventManager;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
 

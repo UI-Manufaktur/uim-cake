@@ -15,14 +15,14 @@
  */
 module uim.cake.Error\Middleware;
 
-use Cake\Core\App;
-use Cake\Core\Configure;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Error\ErrorHandler;
-use Cake\Error\ExceptionTrap;
-use Cake\Error\Renderer\WebExceptionRenderer;
-use Cake\Http\Exception\RedirectException;
-use Cake\Http\Response;
+import uim.cake.Core\App;
+import uim.cake.Core\Configure;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Error\ErrorHandler;
+import uim.cake.Error\ExceptionTrap;
+import uim.cake.Error\Renderer\WebExceptionRenderer;
+import uim.cake.Http\Exception\RedirectException;
+import uim.cake.Http\Response;
 use InvalidArgumentException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;

@@ -18,7 +18,7 @@ should you wish to create them manually instead of using the conventions this li
 ### Setting the Current Locale
 
 ```php
-use Cake\I18n\I18n;
+import uim.cake.I18n\I18n;
 
 I18n::setLocale('en_US');
 ```
@@ -26,7 +26,7 @@ I18n::setLocale('en_US');
 ### Setting path to folder containing po files.
 
 ```php
-use Cake\Core\Configure;
+import uim.cake.Core\Configure;
 
 Configure::write('App.paths.locales', ['/path/with/trailing/slash/']);
 ```
@@ -49,8 +49,8 @@ Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
 ### Creating Your Own Translators
 
 ```php
-use Cake\I18n\I18n;
-use Cake\I18n\Package;
+import uim.cake.I18n\I18n;
+import uim.cake.I18n\Package;
 
 I18n::translator('animals', 'fr_FR', function () {
     $package = new Package(

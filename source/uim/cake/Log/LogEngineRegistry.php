@@ -15,8 +15,8 @@
  */
 module uim.cake.Log;
 
-use Cake\Core\App;
-use Cake\Core\ObjectRegistry;
+import uim.cake.Core\App;
+import uim.cake.Core\ObjectRegistry;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 

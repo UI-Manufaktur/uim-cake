@@ -15,8 +15,8 @@
  */
 module uim.cake.Routing\Route;
 
-use Cake\Http\Exception\RedirectException;
-use Cake\Routing\Router;
+import uim.cake.Http\Exception\RedirectException;
+import uim.cake.Routing\Router;
 
 /**
  * Redirect route will perform an immediate redirect. Redirect routes

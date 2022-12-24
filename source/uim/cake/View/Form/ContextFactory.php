@@ -15,10 +15,10 @@
  */
 module uim.cake.View\Form;
 
-use Cake\Collection\Collection;
-use Cake\Datasource\EntityInterface;
-use Cake\Form\Form;
-use Cake\Http\ServerRequest;
+import uim.cake.Collection\Collection;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Form\Form;
+import uim.cake.Http\ServerRequest;
 use RuntimeException;
 
 /**

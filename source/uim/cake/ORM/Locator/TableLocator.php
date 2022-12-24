@@ -15,14 +15,14 @@
  */
 module uim.cake.ORM\Locator;
 
-use Cake\Core\App;
-use Cake\Datasource\ConnectionManager;
-use Cake\Datasource\Locator\AbstractLocator;
-use Cake\Datasource\RepositoryInterface;
-use Cake\ORM\AssociationCollection;
-use Cake\ORM\Exception\MissingTableClassException;
-use Cake\ORM\Table;
-use Cake\Utility\Inflector;
+import uim.cake.Core\App;
+import uim.cake.Datasource\ConnectionManager;
+import uim.cake.Datasource\Locator\AbstractLocator;
+import uim.cake.Datasource\RepositoryInterface;
+import uim.cake.ORM\AssociationCollection;
+import uim.cake.ORM\Exception\MissingTableClassException;
+import uim.cake.ORM\Table;
+import uim.cake.Utility\Inflector;
 use RuntimeException;
 
 /**

@@ -14,7 +14,7 @@
  */
 module uim.cake.Shell\Helper;
 
-use Cake\Console\Helper;
+import uim.cake.Console\Helper;
 use UnexpectedValueException;
 
 /**

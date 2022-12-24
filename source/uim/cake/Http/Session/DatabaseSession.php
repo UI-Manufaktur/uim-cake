@@ -17,7 +17,7 @@
  */
 module uim.cake.Http\Session;
 
-use Cake\ORM\Locator\LocatorAwareTrait;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
 use SessionHandlerInterface;
 
 /**

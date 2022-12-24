@@ -15,8 +15,8 @@ Listeners need to be registered into a manager and events can then be triggered 
 of the action.
 
 ```php
-use Cake\Event\Event;
-use Cake\Event\EventDispatcherTrait;
+import uim.cake.Event\Event;
+import uim.cake.Event\EventDispatcherTrait;
 
 class Orders
 {

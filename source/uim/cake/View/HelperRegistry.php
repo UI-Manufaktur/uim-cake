@@ -15,11 +15,11 @@
  */
 module uim.cake.View;
 
-use Cake\Core\App;
-use Cake\Core\ObjectRegistry;
-use Cake\Event\EventDispatcherInterface;
-use Cake\Event\EventDispatcherTrait;
-use Cake\View\Exception\MissingHelperException;
+import uim.cake.Core\App;
+import uim.cake.Core\ObjectRegistry;
+import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.Event\EventDispatcherTrait;
+import uim.cake.View\Exception\MissingHelperException;
 
 /**
  * HelperRegistry is used as a registry for loaded helpers and handles loading

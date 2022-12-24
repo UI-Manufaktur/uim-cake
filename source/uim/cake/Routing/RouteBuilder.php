@@ -16,12 +16,12 @@
 module uim.cake.Routing;
 
 use BadMethodCallException;
-use Cake\Core\App;
-use Cake\Core\Exception\MissingPluginException;
-use Cake\Core\Plugin;
-use Cake\Routing\Route\RedirectRoute;
-use Cake\Routing\Route\Route;
-use Cake\Utility\Inflector;
+import uim.cake.Core\App;
+import uim.cake.Core\Exception\MissingPluginException;
+import uim.cake.Core\Plugin;
+import uim.cake.Routing\Route\RedirectRoute;
+import uim.cake.Routing\Route\Route;
+import uim.cake.Utility\Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 

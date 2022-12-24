@@ -15,12 +15,12 @@
  */
 module uim.cake.Datasource\Paging;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Datasource\Paging\Exception\PageOutOfBoundsException;
-use Cake\Datasource\IQuery;
-use Cake\Datasource\RepositoryInterface;
-use Cake\Datasource\IResultSet;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
+import uim.cake.Datasource\IQuery;
+import uim.cake.Datasource\RepositoryInterface;
+import uim.cake.Datasource\IResultSet;
 
 /**
  * This class is used to handle automatic model data pagination.

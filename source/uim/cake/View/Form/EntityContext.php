@@ -16,14 +16,14 @@
 module uim.cake.View\Form;
 
 use ArrayAccess;
-use Cake\Collection\Collection;
-use Cake\Datasource\EntityInterface;
-use Cake\Datasource\InvalidPropertyInterface;
-use Cake\ORM\Entity;
-use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\ORM\Table;
-use Cake\Utility\Inflector;
-use Cake\Validation\Validator;
+import uim.cake.Collection\Collection;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Datasource\InvalidPropertyInterface;
+import uim.cake.ORM\Entity;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.ORM\Table;
+import uim.cake.Utility\Inflector;
+import uim.cake.Validation\Validator;
 use RuntimeException;
 use Traversable;
 

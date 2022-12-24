@@ -15,7 +15,7 @@
  */
 module uim.cake.Http\Middleware;
 
-use Cake\Http\Response;
+import uim.cake.Http\Response;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\IMiddleware;

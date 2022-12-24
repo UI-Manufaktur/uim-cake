@@ -15,9 +15,9 @@
  */
 module uim.cake.View;
 
-use Cake\Core\App;
-use Cake\Utility\Inflector;
-use Cake\View\Exception\MissingCellException;
+import uim.cake.Core\App;
+import uim.cake.Utility\Inflector;
+import uim.cake.View\Exception\MissingCellException;
 
 /**
  * Provides cell() method for usage in Controller and View classes.

@@ -16,11 +16,11 @@
 module uim.cake.ORM;
 
 use BadMethodCallException;
-use Cake\Core\App;
-use Cake\Core\ObjectRegistry;
-use Cake\Event\EventDispatcherInterface;
-use Cake\Event\EventDispatcherTrait;
-use Cake\ORM\Exception\MissingBehaviorException;
+import uim.cake.Core\App;
+import uim.cake.Core\ObjectRegistry;
+import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.Event\EventDispatcherTrait;
+import uim.cake.ORM\Exception\MissingBehaviorException;
 use LogicException;
 
 /**

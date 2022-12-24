@@ -15,10 +15,10 @@
  */
 module uim.cake.ORM;
 
-use Cake\Collection\Collection;
-use Cake\Collection\ICollection;
-use Cake\Database\Expression\TupleComparison;
-use Cake\Datasource\EntityInterface;
+import uim.cake.Collection\Collection;
+import uim.cake.Collection\ICollection;
+import uim.cake.Database\Expression\TupleComparison;
+import uim.cake.Datasource\EntityInterface;
 
 /**
  * Contains methods that are capable of injecting eagerly loaded associations into

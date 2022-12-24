@@ -15,13 +15,13 @@
  */
 module uim.cake.ORM;
 
-use Cake\Datasource\RuleInvoker;
-use Cake\Datasource\RulesChecker as BaseRulesChecker;
-use Cake\ORM\Rule\ExistsIn;
-use Cake\ORM\Rule\IsUnique;
-use Cake\ORM\Rule\LinkConstraint;
-use Cake\ORM\Rule\ValidCount;
-use Cake\Utility\Inflector;
+import uim.cake.Datasource\RuleInvoker;
+import uim.cake.Datasource\RulesChecker as BaseRulesChecker;
+import uim.cake.ORM\Rule\ExistsIn;
+import uim.cake.ORM\Rule\IsUnique;
+import uim.cake.ORM\Rule\LinkConstraint;
+import uim.cake.ORM\Rule\ValidCount;
+import uim.cake.Utility\Inflector;
 
 /**
  * ORM flavoured rules checker.

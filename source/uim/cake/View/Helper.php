@@ -15,8 +15,8 @@
  */
 module uim.cake.View;
 
-use Cake\Core\InstanceConfigTrait;
-use Cake\Event\IEventListener;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Event\IEventListener;
 
 /**
  * Abstract base class for all other Helpers in CakePHP.

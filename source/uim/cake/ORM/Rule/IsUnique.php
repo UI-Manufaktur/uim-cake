@@ -15,8 +15,8 @@
  */
 module uim.cake.ORM\Rule;
 
-use Cake\Datasource\EntityInterface;
-use Cake\Utility\Hash;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Utility\Hash;
 
 /**
  * Checks that a list of fields from an entity are unique in the table

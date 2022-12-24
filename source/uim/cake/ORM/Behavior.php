@@ -15,9 +15,9 @@
  */
 module uim.cake.ORM;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Event\IEventListener;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Event\IEventListener;
 use ReflectionClass;
 use ReflectionMethod;
 

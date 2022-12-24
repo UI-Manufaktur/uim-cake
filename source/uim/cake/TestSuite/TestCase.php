@@ -14,21 +14,21 @@
  */
 module uim.cake.TestSuite;
 
-use Cake\Core\App;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Datasource\ConnectionManager;
-use Cake\Event\EventManager;
-use Cake\Http\BaseApplication;
-use Cake\ORM\Entity;
-use Cake\ORM\Exception\MissingTableClassException;
-use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\Routing\Router;
-use Cake\TestSuite\Constraint\EventFired;
-use Cake\TestSuite\Constraint\EventFiredWith;
-use Cake\TestSuite\Fixture\FixtureStrategyInterface;
-use Cake\TestSuite\Fixture\TruncateStrategy;
-use Cake\Utility\Inflector;
+import uim.cake.Core\App;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Plugin;
+import uim.cake.Datasource\ConnectionManager;
+import uim.cake.Event\EventManager;
+import uim.cake.Http\BaseApplication;
+import uim.cake.ORM\Entity;
+import uim.cake.ORM\Exception\MissingTableClassException;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.Routing\Router;
+import uim.cake.TestSuite\Constraint\EventFired;
+import uim.cake.TestSuite\Constraint\EventFiredWith;
+import uim.cake.TestSuite\Fixture\FixtureStrategyInterface;
+import uim.cake.TestSuite\Fixture\TruncateStrategy;
+import uim.cake.Utility\Inflector;
 use LogicException;
 use PHPUnit\Framework\Constraint\DirectoryExists;
 use PHPUnit\Framework\Constraint\FileExists;

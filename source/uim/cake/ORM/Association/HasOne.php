@@ -15,11 +15,11 @@
  */
 module uim.cake.ORM\Association;
 
-use Cake\Datasource\EntityInterface;
-use Cake\ORM\Association;
-use Cake\ORM\Association\Loader\SelectLoader;
-use Cake\ORM\Table;
-use Cake\Utility\Inflector;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.ORM\Association;
+import uim.cake.ORM\Association\Loader\SelectLoader;
+import uim.cake.ORM\Table;
+import uim.cake.Utility\Inflector;
 use Closure;
 
 /**

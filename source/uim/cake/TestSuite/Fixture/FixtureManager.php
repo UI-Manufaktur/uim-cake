@@ -15,15 +15,15 @@
  */
 module uim.cake.TestSuite\Fixture;
 
-use Cake\Core\Configure;
-use Cake\Core\Exception\CakeException;
-use Cake\Database\ConstraintsInterface;
-use Cake\Database\Schema\TableSchema;
-use Cake\Database\Schema\TableSchemaAwareInterface;
-use Cake\Datasource\ConnectionInterface;
-use Cake\Datasource\ConnectionManager;
-use Cake\Datasource\FixtureInterface;
-use Cake\TestSuite\TestCase;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Database\ConstraintsInterface;
+import uim.cake.Database\Schema\TableSchema;
+import uim.cake.Database\Schema\TableSchemaAwareInterface;
+import uim.cake.Datasource\ConnectionInterface;
+import uim.cake.Datasource\ConnectionManager;
+import uim.cake.Datasource\FixtureInterface;
+import uim.cake.TestSuite\TestCase;
 use PDOException;
 use RuntimeException;
 use UnexpectedValueException;

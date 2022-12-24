@@ -24,7 +24,7 @@ object.  Before performing any operations with the connection, you need to
 specify a driver to use:
 
 ```php
-use Cake\Datasource\ConnectionManager;
+import uim.cake.Datasource\ConnectionManager;
 
 ConnectionManager::setConfig("default", [
 	"className": \Cake\Database\Connection::class,
@@ -45,7 +45,7 @@ mappers if no explicit connection is defined.
 In order to access table instances you need to use a *Table Locator*.
 
 ```php
-use Cake\ORM\Locator\TableLocator;
+import uim.cake.ORM\Locator\TableLocator;
 
 $locator = new TableLocator();
 $articles = $locator.get("Articles");
@@ -54,7 +54,7 @@ $articles = $locator.get("Articles");
 You can also use a trait for easy access to the locator instance:
 
 ```php
-use Cake\ORM\Locator\LocatorAwareTrait;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
 
 $articles = this.getTableLocator().get("Articles");
 ```
@@ -63,8 +63,8 @@ By default, classes using `LocatorAwareTrait` will share a global locator instan
 You can inject your own locator instance into the object:
 
 ```php
-use Cake\ORM\Locator\TableLocator;
-use Cake\ORM\Locator\LocatorAwareTrait;
+import uim.cake.ORM\Locator\TableLocator;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
 
 $locator = new TableLocator();
 this.setTableLocator($locator);
@@ -91,7 +91,7 @@ complete examples.
 Once you"ve defined some table classes you can read existing data in your tables:
 
 ```php
-use Cake\ORM\Locator\LocatorAwareTrait;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
 
 $articles = this.getTableLocator().get("Articles");
 foreach ($articles.find() as $article) {
@@ -109,7 +109,7 @@ Table objects provide ways to convert request data into entities, and then persi
 those entities to the database:
 
 ```php
-use Cake\ORM\Locator\LocatorAwareTrait;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
 
 $data = [
 	"title": "My first article",
@@ -153,7 +153,7 @@ It is recommended to enable metadata cache for production systems to avoid perfo
 For e.g. file system strategy your bootstrap file could look like this:
 
 ```php
-use Cake\Cache\Engine\FileEngine;
+import uim.cake.Cache\Engine\FileEngine;
 
 $cacheConfig = [
    "className": FileEngine::class,
@@ -183,7 +183,7 @@ namespace Acme\Data\Table;
 
 use Acme\Data\Entity\Article;
 use Acme\Data\Table\UsersTable;
-use Cake\ORM\Table;
+import uim.cake.ORM\Table;
 
 class ArticlesTable : Table
 {
@@ -202,7 +202,7 @@ get an instance of this class, as shown before, you can use the `TableLocator`:
 ```php
 <?php
 use Acme\Data\Table\ArticlesTable;
-use Cake\ORM\Locator\TableLocator;
+import uim.cake.ORM\Locator\TableLocator;
 
 $locator = new TableLocator();
 $articles = $locator.get("Articles", ["className": ArticlesTable::class]);
@@ -220,7 +220,7 @@ need to inform Cake of the namespace your application lives in:
 
 ```php
 <?php
-use Cake\Core\Configure;
+import uim.cake.Core\Configure;
 
 Configure::write("App.namespace", "Acme");
 ```
@@ -229,7 +229,7 @@ You can also set a longer namaspace up to the place where the `Model` folder is:
 
 ```php
 <?php
-use Cake\Core\Configure;
+import uim.cake.Core\Configure;
 
 Configure::write("App.namespace", "My\Log\SubNamespace");
 ```

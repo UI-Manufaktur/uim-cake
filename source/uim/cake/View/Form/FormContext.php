@@ -15,9 +15,9 @@
  */
 module uim.cake.View\Form;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Form\Form;
-use Cake\Utility\Hash;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Form\Form;
+import uim.cake.Utility\Hash;
 
 /**
  * Provides a context provider for {@link \Cake\Form\Form} instances.

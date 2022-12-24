@@ -16,16 +16,16 @@
 module uim.cake.ORM\Behavior\Translate;
 
 use ArrayObject;
-use Cake\Collection\ICollection;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Database\Expression\FieldInterface;
-use Cake\Datasource\EntityInterface;
-use Cake\Event\EventInterface;
-use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\ORM\Marshaller;
-use Cake\ORM\Query;
-use Cake\ORM\Table;
-use Cake\Utility\Hash;
+import uim.cake.Collection\ICollection;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Database\Expression\FieldInterface;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Event\EventInterface;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.ORM\Marshaller;
+import uim.cake.ORM\Query;
+import uim.cake.ORM\Table;
+import uim.cake.Utility\Hash;
 
 /**
  * This class provides a way to translate dynamic data by keeping translations

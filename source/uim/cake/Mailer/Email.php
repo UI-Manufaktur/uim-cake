@@ -16,8 +16,8 @@
 module uim.cake.Mailer;
 
 use BadMethodCallException;
-use Cake\Log\Log;
-use Cake\View\ViewBuilder;
+import uim.cake.Log\Log;
+import uim.cake.View\ViewBuilder;
 use InvalidArgumentException;
 use JsonSerializable;
 use LogicException;

@@ -15,7 +15,7 @@
  */
 module uim.cake.Datasource;
 
-use Cake\Collection\Collection;
+import uim.cake.Collection\Collection;
 use Countable;
 
 /**

@@ -13,9 +13,9 @@
  */
 module uim.cake.ORM\Exception;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Datasource\EntityInterface;
-use Cake\Utility\Hash;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Utility\Hash;
 use Throwable;
 
 /**

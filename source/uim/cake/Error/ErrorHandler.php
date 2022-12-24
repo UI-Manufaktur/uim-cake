@@ -17,9 +17,9 @@
  */
 module uim.cake.Error;
 
-use Cake\Core\App;
-use Cake\Http\ResponseEmitter;
-use Cake\Routing\Router;
+import uim.cake.Core\App;
+import uim.cake.Http\ResponseEmitter;
+import uim.cake.Routing\Router;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;
 use Throwable;

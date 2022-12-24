@@ -15,7 +15,7 @@
  */
 module uim.cake.Routing\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Thrown when unable to cache route collection.

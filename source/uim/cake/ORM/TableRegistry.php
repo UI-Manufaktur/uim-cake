@@ -15,8 +15,8 @@
  */
 module uim.cake.ORM;
 
-use Cake\Datasource\FactoryLocator;
-use Cake\ORM\Locator\ILocator;
+import uim.cake.Datasource\FactoryLocator;
+import uim.cake.ORM\Locator\ILocator;
 
 /**
  * Provides a registry/factory for Table objects.

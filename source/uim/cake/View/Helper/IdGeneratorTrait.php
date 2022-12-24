@@ -15,7 +15,7 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\Utility\Text;
+import uim.cake.Utility\Text;
 
 /**
  * A trait that provides id generating methods to be

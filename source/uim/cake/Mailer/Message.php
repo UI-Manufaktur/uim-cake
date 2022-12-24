@@ -15,12 +15,12 @@
  */
 module uim.cake.Mailer;
 
-use Cake\Core\Configure;
-use Cake\Core\Exception\CakeException;
-use Cake\Http\Client\FormDataPart;
-use Cake\Utility\Hash;
-use Cake\Utility\Security;
-use Cake\Utility\Text;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Http\Client\FormDataPart;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Security;
+import uim.cake.Utility\Text;
 use Closure;
 use InvalidArgumentException;
 use JsonSerializable;

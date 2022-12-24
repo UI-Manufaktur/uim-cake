@@ -15,11 +15,11 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\Core\App;
-use Cake\Core\Exception\CakeException;
-use Cake\Routing\Asset;
-use Cake\Routing\Router;
-use Cake\View\Helper;
+import uim.cake.Core\App;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Routing\Asset;
+import uim.cake.Routing\Router;
+import uim.cake.View\Helper;
 
 /**
  * UrlHelper class for generating URLs.

@@ -42,7 +42,7 @@ to existing connections. Creating connections with the `ConnectionManager` is
 easy:
 
 ```php
-use Cake\Datasource\ConnectionManager;
+import uim.cake.Datasource\ConnectionManager;
 
 ConnectionManager::config('connection-one', [
     'className': 'MyApp\Connections\CustomConnection',
@@ -66,14 +66,14 @@ This method will construct and load a connection if it has not been built
 before, or return the existing known connection:
 
 ```php
-use Cake\Datasource\ConnectionManager;
+import uim.cake.Datasource\ConnectionManager;
 $conn = ConnectionManager::get('master');
 ```
 
 It is also possible to store connection objects by passing the instance directly to the manager:
 
 ```php
-use Cake\Datasource\ConnectionManager;
+import uim.cake.Datasource\ConnectionManager;
 $conn = ConnectionManager::config('other', $connectionInstance);
 ```
 

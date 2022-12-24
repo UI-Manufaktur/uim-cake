@@ -15,7 +15,7 @@
  */
 module uim.cake.Validation;
 
-use Cake\Event\EventDispatcherInterface;
+import uim.cake.Event\EventDispatcherInterface;
 use RuntimeException;
 
 /**

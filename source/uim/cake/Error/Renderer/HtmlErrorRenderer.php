@@ -15,9 +15,9 @@
  */
 module uim.cake.Error\Renderer;
 
-use Cake\Error\Debugger;
-use Cake\Error\ErrorRendererInterface;
-use Cake\Error\PhpError;
+import uim.cake.Error\Debugger;
+import uim.cake.Error\ErrorRendererInterface;
+import uim.cake.Error\PhpError;
 
 /**
  * Interactive HTML error rendering with a stack trace.

@@ -2,10 +2,10 @@
 
 module uim.cake.Error;
 
-use Cake\Core\InstanceConfigTrait;
-use Cake\Error\Renderer\ConsoleExceptionRenderer;
-use Cake\Event\EventDispatcherTrait;
-use Cake\Routing\Router;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Error\Renderer\ConsoleExceptionRenderer;
+import uim.cake.Event\EventDispatcherTrait;
+import uim.cake.Routing\Router;
 use InvalidArgumentException;
 use Psr\Http\Message\IServerRequest;
 use Throwable;

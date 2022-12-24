@@ -15,9 +15,9 @@
  */
 module uim.cake.ORM;
 
-use Cake\Datasource\EntityInterface;
-use Cake\Datasource\EntityTrait;
-use Cake\Datasource\InvalidPropertyInterface;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Datasource\EntityTrait;
+import uim.cake.Datasource\InvalidPropertyInterface;
 
 /**
  * An entity represents a single result row from a repository. It exposes the

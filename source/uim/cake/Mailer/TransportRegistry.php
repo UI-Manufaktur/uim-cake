@@ -16,8 +16,8 @@
 module uim.cake.Mailer;
 
 use BadMethodCallException;
-use Cake\Core\App;
-use Cake\Core\ObjectRegistry;
+import uim.cake.Core\App;
+import uim.cake.Core\ObjectRegistry;
 use RuntimeException;
 
 /**
@@ -80,7 +80,7 @@ class TransportRegistry : ObjectRegistry
         }
 
         throw new RuntimeException(
-            "Mailer transports must use Cake\Mailer\AbstractTransport as a base class."
+            "Mailer transports must import uim.cake.Mailer\AbstractTransport as a base class."
         );
     }
 

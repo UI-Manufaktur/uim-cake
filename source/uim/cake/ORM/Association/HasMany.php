@@ -15,15 +15,15 @@
  */
 module uim.cake.ORM\Association;
 
-use Cake\Collection\Collection;
-use Cake\Database\Expression\FieldInterface;
-use Cake\Database\Expression\QueryExpression;
-use Cake\Datasource\EntityInterface;
-use Cake\Datasource\InvalidPropertyInterface;
-use Cake\ORM\Association;
-use Cake\ORM\Association\Loader\SelectLoader;
-use Cake\ORM\Query;
-use Cake\ORM\Table;
+import uim.cake.Collection\Collection;
+import uim.cake.Database\Expression\FieldInterface;
+import uim.cake.Database\Expression\QueryExpression;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Datasource\InvalidPropertyInterface;
+import uim.cake.ORM\Association;
+import uim.cake.ORM\Association\Loader\SelectLoader;
+import uim.cake.ORM\Query;
+import uim.cake.ORM\Table;
 use Closure;
 use InvalidArgumentException;
 

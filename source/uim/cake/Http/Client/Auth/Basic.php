@@ -14,7 +14,7 @@
  */
 module uim.cake.Http\Client\Auth;
 
-use Cake\Http\Client\Request;
+import uim.cake.Http\Client\Request;
 
 /**
  * Basic authentication adapter for Cake\Http\Client

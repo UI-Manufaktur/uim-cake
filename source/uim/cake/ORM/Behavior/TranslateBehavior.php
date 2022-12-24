@@ -15,15 +15,15 @@
  */
 module uim.cake.ORM\Behavior;
 
-use Cake\I18n\I18n;
-use Cake\ORM\Behavior;
-use Cake\ORM\Behavior\Translate\EavStrategy;
-use Cake\ORM\Behavior\Translate\TranslateStrategyInterface;
-use Cake\ORM\Marshaller;
-use Cake\ORM\PropertyMarshalInterface;
-use Cake\ORM\Query;
-use Cake\ORM\Table;
-use Cake\Utility\Inflector;
+import uim.cake.I18n\I18n;
+import uim.cake.ORM\Behavior;
+import uim.cake.ORM\Behavior\Translate\EavStrategy;
+import uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface;
+import uim.cake.ORM\Marshaller;
+import uim.cake.ORM\PropertyMarshalInterface;
+import uim.cake.ORM\Query;
+import uim.cake.ORM\Table;
+import uim.cake.Utility\Inflector;
 
 /**
  * This behavior provides a way to translate dynamic data by keeping translations

@@ -15,8 +15,8 @@
  */
 module uim.cake.Datasource;
 
-use Cake\Datasource\Locator\ILocator;
-use Cake\ORM\Locator\TableLocator;
+import uim.cake.Datasource\Locator\ILocator;
+import uim.cake.ORM\Locator\TableLocator;
 use InvalidArgumentException;
 
 /**

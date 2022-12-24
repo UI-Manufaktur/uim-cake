@@ -14,13 +14,13 @@
  */
 module uim.cake.Http\Client\Adapter;
 
-use Cake\Http\Client\AdapterInterface;
-use Cake\Http\Client\Exception\ClientException;
-use Cake\Http\Client\Exception\NetworkException;
-use Cake\Http\Client\Exception\RequestException;
-use Cake\Http\Client\Request;
-use Cake\Http\Client\Response;
-use Cake\Http\Exception\HttpException;
+import uim.cake.Http\Client\AdapterInterface;
+import uim.cake.Http\Client\Exception\ClientException;
+import uim.cake.Http\Client\Exception\NetworkException;
+import uim.cake.Http\Client\Exception\RequestException;
+import uim.cake.Http\Client\Request;
+import uim.cake.Http\Client\Response;
+import uim.cake.Http\Exception\HttpException;
 use Composer\CaBundle\CaBundle;
 use Psr\Http\Message\RequestInterface;
 

@@ -15,13 +15,13 @@
  */
 module uim.cake.Datasource;
 
-use Cake\Core\StaticConfigTrait;
-use Cake\Database\Connection;
-use Cake\Database\Driver\Mysql;
-use Cake\Database\Driver\Postgres;
-use Cake\Database\Driver\Sqlite;
-use Cake\Database\Driver\Sqlserver;
-use Cake\Datasource\Exception\MissingDatasourceConfigException;
+import uim.cake.Core\StaticConfigTrait;
+import uim.cake.Database\Connection;
+import uim.cake.Database\Driver\Mysql;
+import uim.cake.Database\Driver\Postgres;
+import uim.cake.Database\Driver\Sqlite;
+import uim.cake.Database\Driver\Sqlserver;
+import uim.cake.Datasource\Exception\MissingDatasourceConfigException;
 
 /**
  * Manages and loads instances of Connection

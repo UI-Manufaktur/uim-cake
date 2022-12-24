@@ -15,9 +15,9 @@
  */
 module uim.cake.Routing;
 
-use Cake\Routing\Exception\DuplicateNamedRouteException;
-use Cake\Routing\Exception\MissingRouteException;
-use Cake\Routing\Route\Route;
+import uim.cake.Routing\Exception\DuplicateNamedRouteException;
+import uim.cake.Routing\Exception\MissingRouteException;
+import uim.cake.Routing\Route\Route;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;
 

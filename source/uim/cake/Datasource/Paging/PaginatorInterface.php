@@ -15,7 +15,7 @@
  */
 module uim.cake.Datasource\Paging;
 
-use Cake\Datasource\IResultSet;
+import uim.cake.Datasource\IResultSet;
 
 /**
  * This interface describes the methods for paginator instance.

@@ -15,16 +15,16 @@
  */
 module uim.cake.ORM;
 
-use Cake\Collection\Collection;
-use Cake\Collection\ICollection;
-use Cake\Core\App;
-use Cake\Core\ConventionsTrait;
-use Cake\Database\Expression\IdentifierExpression;
-use Cake\Datasource\EntityInterface;
-use Cake\Datasource\ResultSetDecorator;
-use Cake\Datasource\IResultSet;
-use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\Utility\Inflector;
+import uim.cake.Collection\Collection;
+import uim.cake.Collection\ICollection;
+import uim.cake.Core\App;
+import uim.cake.Core\ConventionsTrait;
+import uim.cake.Database\Expression\IdentifierExpression;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Datasource\ResultSetDecorator;
+import uim.cake.Datasource\IResultSet;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.Utility\Inflector;
 use Closure;
 use InvalidArgumentException;
 use RuntimeException;

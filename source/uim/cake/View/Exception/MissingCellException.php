@@ -15,7 +15,7 @@
  */
 module uim.cake.View\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Used when a cell class file cannot be found.

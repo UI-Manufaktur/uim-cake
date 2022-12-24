@@ -15,17 +15,17 @@
  */
 module uim.cake.Routing\Middleware;
 
-use Cake\Cache\Cache;
-use Cake\Cache\InvalidArgumentException;
-use Cake\Core\IPluginApplication;
-use Cake\Http\Exception\RedirectException;
-use Cake\Http\MiddlewareQueue;
-use Cake\Http\Runner;
-use Cake\Routing\Exception\FailedRouteCacheException;
-use Cake\Routing\Exception\RedirectException as DeprecatedRedirectException;
-use Cake\Routing\RouteCollection;
-use Cake\Routing\Router;
-use Cake\Routing\IRoutingApplication;
+import uim.cake.Cache\Cache;
+import uim.cake.Cache\InvalidArgumentException;
+import uim.cake.Core\IPluginApplication;
+import uim.cake.Http\Exception\RedirectException;
+import uim.cake.Http\MiddlewareQueue;
+import uim.cake.Http\Runner;
+import uim.cake.Routing\Exception\FailedRouteCacheException;
+import uim.cake.Routing\Exception\RedirectException as DeprecatedRedirectException;
+import uim.cake.Routing\RouteCollection;
+import uim.cake.Routing\Router;
+import uim.cake.Routing\IRoutingApplication;
 use Exception;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;

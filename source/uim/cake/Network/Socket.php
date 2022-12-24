@@ -15,10 +15,10 @@
  */
 module uim.cake.Network;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Network\Exception\SocketException;
-use Cake\Validation\Validation;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Network\Exception\SocketException;
+import uim.cake.Validation\Validation;
 use Composer\CaBundle\CaBundle;
 use Exception;
 use InvalidArgumentException;

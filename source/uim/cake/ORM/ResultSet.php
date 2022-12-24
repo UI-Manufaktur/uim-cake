@@ -15,12 +15,12 @@
  */
 module uim.cake.ORM;
 
-use Cake\Collection\Collection;
-use Cake\Collection\CollectionTrait;
-use Cake\Database\Exception\DatabaseException;
-use Cake\Database\StatementInterface;
-use Cake\Datasource\EntityInterface;
-use Cake\Datasource\IResultSet;
+import uim.cake.Collection\Collection;
+import uim.cake.Collection\CollectionTrait;
+import uim.cake.Database\Exception\DatabaseException;
+import uim.cake.Database\StatementInterface;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Datasource\IResultSet;
 use SplFixedArray;
 
 /**

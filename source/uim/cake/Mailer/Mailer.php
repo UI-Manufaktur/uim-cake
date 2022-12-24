@@ -14,14 +14,14 @@
 module uim.cake.Mailer;
 
 use BadMethodCallException;
-use Cake\Core\Exception\CakeException;
-use Cake\Core\StaticConfigTrait;
-use Cake\Datasource\ModelAwareTrait;
-use Cake\Event\IEventListener;
-use Cake\Log\Log;
-use Cake\Mailer\Exception\MissingActionException;
-use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\View\ViewBuilder;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\StaticConfigTrait;
+import uim.cake.Datasource\ModelAwareTrait;
+import uim.cake.Event\IEventListener;
+import uim.cake.Log\Log;
+import uim.cake.Mailer\Exception\MissingActionException;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.View\ViewBuilder;
 use InvalidArgumentException;
 
 /**

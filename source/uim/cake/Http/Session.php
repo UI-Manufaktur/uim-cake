@@ -15,8 +15,8 @@
  */
 module uim.cake.Http;
 
-use Cake\Core\App;
-use Cake\Utility\Hash;
+import uim.cake.Core\App;
+import uim.cake.Utility\Hash;
 use InvalidArgumentException;
 use RuntimeException;
 use SessionHandlerInterface;

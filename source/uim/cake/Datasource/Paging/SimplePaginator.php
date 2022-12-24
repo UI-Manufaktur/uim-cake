@@ -15,7 +15,7 @@
  */
 module uim.cake.Datasource\Paging;
 
-use Cake\Datasource\IQuery;
+import uim.cake.Datasource\IQuery;
 
 /**
  * Simplified paginator which avoids potentially expensives queries

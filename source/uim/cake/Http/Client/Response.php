@@ -14,7 +14,7 @@
  */
 module uim.cake.Http\Client;
 
-use Cake\Http\Cookie\CookieCollection;
+import uim.cake.Http\Cookie\CookieCollection;
 use Laminas\Diactoros\MessageTrait;
 use Laminas\Diactoros\Stream;
 use Psr\Http\Message\IResponse;

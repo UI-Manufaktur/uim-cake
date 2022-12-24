@@ -15,8 +15,8 @@
  */
 module uim.cake.Event\Decorator;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Event\EventInterface;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Event\EventInterface;
 use RuntimeException;
 
 /**

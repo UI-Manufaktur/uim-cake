@@ -13,7 +13,7 @@
  */
 module uim.cake.Utility\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Exception class for Xml. This exception will be thrown from Xml when it

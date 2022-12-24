@@ -12,7 +12,7 @@ The Folder and File utilities are convenience classes to help you read from and 
 Create a folder instance and search for all the `.php` files within it:
 
 ```php
-use Cake\Filesystem\Folder;
+import uim.cake.Filesystem\Folder;
 
 $dir = new Folder('/path/to/folder');
 $files = $dir.find('.*\.php');

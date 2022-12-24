@@ -15,10 +15,10 @@
  */
 module uim.cake.Http;
 
-use Cake\Core\Configure;
-use Cake\Http\Cookie\CookieCollection;
-use Cake\Http\Cookie\CookieInterface;
-use Cake\Http\Exception\NotFoundException;
+import uim.cake.Core\Configure;
+import uim.cake.Http\Cookie\CookieCollection;
+import uim.cake.Http\Cookie\CookieInterface;
+import uim.cake.Http\Exception\NotFoundException;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;

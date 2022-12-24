@@ -15,9 +15,9 @@
  */
 module uim.cake.I18n;
 
-use Cake\Core\App;
-use Cake\Core\Plugin;
-use Cake\Utility\Inflector;
+import uim.cake.Core\App;
+import uim.cake.Core\Plugin;
+import uim.cake.Utility\Inflector;
 use Locale;
 use RuntimeException;
 

@@ -15,8 +15,8 @@
  */
 module uim.cake.Mailer;
 
-use Cake\Core\App;
-use Cake\Mailer\Exception\MissingMailerException;
+import uim.cake.Core\App;
+import uim.cake.Mailer\Exception\MissingMailerException;
 
 /**
  * Provides functionality for loading mailer classes

@@ -15,13 +15,13 @@
  */
 module uim.cake.ORM\Behavior;
 
-use Cake\Collection\ICollection;
-use Cake\Database\Expression\IdentifierExpression;
-use Cake\Datasource\EntityInterface;
-use Cake\Datasource\Exception\RecordNotFoundException;
-use Cake\Event\EventInterface;
-use Cake\ORM\Behavior;
-use Cake\ORM\Query;
+import uim.cake.Collection\ICollection;
+import uim.cake.Database\Expression\IdentifierExpression;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Datasource\Exception\RecordNotFoundException;
+import uim.cake.Event\EventInterface;
+import uim.cake.ORM\Behavior;
+import uim.cake.ORM\Query;
 use InvalidArgumentException;
 use RuntimeException;
 

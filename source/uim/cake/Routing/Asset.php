@@ -15,9 +15,9 @@
  */
 module uim.cake.Routing;
 
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Utility\Inflector;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Plugin;
+import uim.cake.Utility\Inflector;
 
 /**
  * Class for generating asset URLs.

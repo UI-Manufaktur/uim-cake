@@ -15,8 +15,8 @@
  */
 module uim.cake.Mailer;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Core\InstanceConfigTrait;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\InstanceConfigTrait;
 
 /**
  * Abstract transport for sending email

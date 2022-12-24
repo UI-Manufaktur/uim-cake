@@ -1,5 +1,5 @@
 
 
-use Cake\Console\TestSuite\Constraint\ContentsEmpty;
+import uim.cake.Console\TestSuite\Constraint\ContentsEmpty;
 
 class_alias(ContentsEmpty::class, 'Cake\TestSuite\Constraint\Console\ContentsEmpty');

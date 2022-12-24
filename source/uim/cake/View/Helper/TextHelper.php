@@ -15,12 +15,12 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\Core\App;
-use Cake\Core\Exception\CakeException;
-use Cake\Utility\Security;
-use Cake\Utility\Text;
-use Cake\View\Helper;
-use Cake\View\View;
+import uim.cake.Core\App;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Utility\Security;
+import uim.cake.Utility\Text;
+import uim.cake.View\Helper;
+import uim.cake.View\View;
 
 /**
  * Text helper library.

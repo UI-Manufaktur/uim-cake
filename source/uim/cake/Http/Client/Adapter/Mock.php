@@ -14,9 +14,9 @@
  */
 module uim.cake.Http\Client\Adapter;
 
-use Cake\Http\Client\AdapterInterface;
-use Cake\Http\Client\Exception\MissingResponseException;
-use Cake\Http\Client\Response;
+import uim.cake.Http\Client\AdapterInterface;
+import uim.cake.Http\Client\Exception\MissingResponseException;
+import uim.cake.Http\Client\Response;
 use Closure;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;

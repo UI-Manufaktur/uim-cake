@@ -13,7 +13,7 @@
  */
 module uim.cake.Network\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Exception class for Socket. This exception will be thrown from Socket, Email, HttpSocket

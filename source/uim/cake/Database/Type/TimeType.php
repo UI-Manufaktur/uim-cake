@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\I18n\I18nDateTimeInterface;
+import uim.cake.I18n\I18nDateTimeInterface;
 
 /**
  * Time type converter.

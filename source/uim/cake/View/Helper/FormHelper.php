@@ -15,18 +15,18 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\Core\Configure;
-use Cake\Core\Exception\CakeException;
-use Cake\Form\FormProtector;
-use Cake\Routing\Router;
-use Cake\Utility\Hash;
-use Cake\Utility\Inflector;
-use Cake\View\Form\ContextFactory;
-use Cake\View\Form\ContextInterface;
-use Cake\View\Helper;
-use Cake\View\StringTemplateTrait;
-use Cake\View\View;
-use Cake\View\Widget\WidgetLocator;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Form\FormProtector;
+import uim.cake.Routing\Router;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Inflector;
+import uim.cake.View\Form\ContextFactory;
+import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Helper;
+import uim.cake.View\StringTemplateTrait;
+import uim.cake.View\View;
+import uim.cake.View\Widget\WidgetLocator;
 use InvalidArgumentException;
 use RuntimeException;
 

@@ -13,7 +13,7 @@
  */
 module uim.cake.ORM\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Used when a behavior cannot be found.

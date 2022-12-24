@@ -16,9 +16,9 @@
 module uim.cake.Log\Engine;
 
 use ArrayObject;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Log\Formatter\AbstractFormatter;
-use Cake\Log\Formatter\DefaultFormatter;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Log\Formatter\AbstractFormatter;
+import uim.cake.Log\Formatter\DefaultFormatter;
 use InvalidArgumentException;
 use JsonSerializable;
 use Psr\Log\AbstractLogger;

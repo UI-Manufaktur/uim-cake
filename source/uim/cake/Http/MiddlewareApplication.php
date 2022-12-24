@@ -15,7 +15,7 @@
  */
 module uim.cake.Http;
 
-use Cake\Core\IHttpApplication;
+import uim.cake.Core\IHttpApplication;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 

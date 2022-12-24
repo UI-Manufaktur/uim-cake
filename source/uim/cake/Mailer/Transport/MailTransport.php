@@ -17,9 +17,9 @@
  */
 module uim.cake.Mailer\Transport;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Mailer\AbstractTransport;
-use Cake\Mailer\Message;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Mailer\AbstractTransport;
+import uim.cake.Mailer\Message;
 
 /**
  * Send mail using mail() function

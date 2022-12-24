@@ -15,9 +15,9 @@
  */
 module uim.cake.Http;
 
-use Cake\Core\Configure;
-use Cake\Http\Uri as CakeUri;
-use Cake\Utility\Hash;
+import uim.cake.Core\Configure;
+import uim.cake.Http\Uri as CakeUri;
+import uim.cake.Utility\Hash;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Message\UriInterface;

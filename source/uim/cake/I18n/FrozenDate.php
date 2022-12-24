@@ -15,7 +15,7 @@
  */
 module uim.cake.I18n;
 
-use Cake\Chronos\Date as ChronosDate;
+import uim.cake.Chronos\Date as ChronosDate;
 use IntlDateFormatter;
 
 /**

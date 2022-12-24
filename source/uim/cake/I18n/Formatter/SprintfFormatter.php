@@ -15,7 +15,7 @@
  */
 module uim.cake.I18n\Formatter;
 
-use Cake\I18n\FormatterInterface;
+import uim.cake.I18n\FormatterInterface;
 
 /**
  * A formatter that will interpolate variables using sprintf and

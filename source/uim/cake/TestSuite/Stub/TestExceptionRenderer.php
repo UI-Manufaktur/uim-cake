@@ -15,7 +15,7 @@
  */
 module uim.cake.TestSuite\Stub;
 
-use Cake\Error\ExceptionRendererInterface;
+import uim.cake.Error\ExceptionRendererInterface;
 use LogicException;
 use Psr\Http\Message\IResponse;
 use Throwable;

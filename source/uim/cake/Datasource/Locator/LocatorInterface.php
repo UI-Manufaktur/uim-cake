@@ -15,7 +15,7 @@
  */
 module uim.cake.Datasource\Locator;
 
-use Cake\Datasource\RepositoryInterface;
+import uim.cake.Datasource\RepositoryInterface;
 
 /**
  * Registries for repository objects should implement this interface.

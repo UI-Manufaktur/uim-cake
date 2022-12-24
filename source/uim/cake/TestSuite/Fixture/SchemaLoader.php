@@ -14,9 +14,9 @@
  */
 module uim.cake.TestSuite\Fixture;
 
-use Cake\Database\Schema\TableSchema;
-use Cake\Datasource\ConnectionManager;
-use Cake\TestSuite\ConnectionHelper;
+import uim.cake.Database\Schema\TableSchema;
+import uim.cake.Datasource\ConnectionManager;
+import uim.cake.TestSuite\ConnectionHelper;
 use InvalidArgumentException;
 
 /**

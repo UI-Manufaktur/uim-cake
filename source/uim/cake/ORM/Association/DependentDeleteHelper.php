@@ -15,8 +15,8 @@
  */
 module uim.cake.ORM\Association;
 
-use Cake\Datasource\EntityInterface;
-use Cake\ORM\Association;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.ORM\Association;
 
 /**
  * Helper class for cascading deletes in associations.

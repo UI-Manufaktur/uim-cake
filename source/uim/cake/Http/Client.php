@@ -14,18 +14,18 @@
  */
 module uim.cake.Http;
 
-use Cake\Core\App;
-use Cake\Core\Exception\CakeException;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Http\Client\Adapter\Curl;
-use Cake\Http\Client\Adapter\Mock as MockAdapter;
-use Cake\Http\Client\Adapter\Stream;
-use Cake\Http\Client\AdapterInterface;
-use Cake\Http\Client\Request;
-use Cake\Http\Client\Response;
-use Cake\Http\Cookie\CookieCollection;
-use Cake\Http\Cookie\CookieInterface;
-use Cake\Utility\Hash;
+import uim.cake.Core\App;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Http\Client\Adapter\Curl;
+import uim.cake.Http\Client\Adapter\Mock as MockAdapter;
+import uim.cake.Http\Client\Adapter\Stream;
+import uim.cake.Http\Client\AdapterInterface;
+import uim.cake.Http\Client\Request;
+import uim.cake.Http\Client\Response;
+import uim.cake.Http\Cookie\CookieCollection;
+import uim.cake.Http\Cookie\CookieInterface;
+import uim.cake.Utility\Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\Uri;
 use Psr\Http\Client\ClientInterface;

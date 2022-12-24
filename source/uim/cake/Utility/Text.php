@@ -15,7 +15,7 @@
  */
 module uim.cake.Utility;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 use InvalidArgumentException;
 use Transliterator;
 

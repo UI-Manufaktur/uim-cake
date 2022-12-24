@@ -15,7 +15,7 @@
  */
 module uim.cake.TestSuite\Constraint\Email;
 
-use Cake\Mailer\Message;
+import uim.cake.Mailer\Message;
 
 /**
  * MailContainsText

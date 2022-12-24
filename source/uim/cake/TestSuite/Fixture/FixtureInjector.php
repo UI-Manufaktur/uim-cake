@@ -15,8 +15,8 @@
  */
 module uim.cake.TestSuite\Fixture;
 
-use Cake\TestSuite\TestCase;
-use Cake\TestSuite\TestListenerTrait;
+import uim.cake.TestSuite\TestCase;
+import uim.cake.TestSuite\TestListenerTrait;
 use PHPUnit\Framework\Test;
 use PHPUnit\Framework\TestListener;
 use PHPUnit\Framework\TestSuite;

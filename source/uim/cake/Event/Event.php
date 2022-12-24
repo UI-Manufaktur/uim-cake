@@ -15,7 +15,7 @@
  */
 module uim.cake.Event;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Class Event

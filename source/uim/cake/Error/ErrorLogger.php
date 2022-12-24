@@ -15,10 +15,10 @@
  */
 module uim.cake.Error;
 
-use Cake\Core\Configure;
-use Cake\Core\Exception\CakeException;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Log\Log;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Log\Log;
 use Psr\Http\Message\IServerRequest;
 use Throwable;
 

@@ -15,12 +15,12 @@
  */
 module uim.cake.Http;
 
-use Cake\Core\IHttpApplication;
-use Cake\Core\IPluginApplication;
-use Cake\Event\EventDispatcherInterface;
-use Cake\Event\EventDispatcherTrait;
-use Cake\Event\EventManager;
-use Cake\Event\IEventManager;
+import uim.cake.Core\IHttpApplication;
+import uim.cake.Core\IPluginApplication;
+import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.Event\EventDispatcherTrait;
+import uim.cake.Event\EventManager;
+import uim.cake.Event\IEventManager;
 use InvalidArgumentException;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\IResponse;

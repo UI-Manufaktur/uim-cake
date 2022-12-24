@@ -15,7 +15,7 @@
  */
 module uim.cake.Error;
 
-use Cake\Error\Renderer\WebExceptionRenderer;
+import uim.cake.Error\Renderer\WebExceptionRenderer;
 
 /**
  * Backwards compatible Exception Renderer.

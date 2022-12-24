@@ -15,10 +15,10 @@
  */
 module uim.cake.Mailer\Transport;
 
-use Cake\Mailer\AbstractTransport;
-use Cake\Mailer\Message;
-use Cake\Network\Exception\SocketException;
-use Cake\Network\Socket;
+import uim.cake.Mailer\AbstractTransport;
+import uim.cake.Mailer\Message;
+import uim.cake.Network\Exception\SocketException;
+import uim.cake.Network\Socket;
 use Exception;
 use RuntimeException;
 

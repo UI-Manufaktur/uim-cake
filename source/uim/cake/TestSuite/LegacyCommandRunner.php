@@ -1,5 +1,5 @@
 
 
-use Cake\Console\TestSuite\LegacyCommandRunner;
+import uim.cake.Console\TestSuite\LegacyCommandRunner;
 
 class_alias(LegacyCommandRunner::class, 'Cake\TestSuite\LegacyCommandRunner');

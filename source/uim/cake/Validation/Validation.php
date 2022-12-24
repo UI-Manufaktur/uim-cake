@@ -15,8 +15,8 @@
  */
 module uim.cake.Validation;
 
-use Cake\I18n\FrozenTime;
-use Cake\Utility\Text;
+import uim.cake.I18n\FrozenTime;
+import uim.cake.Utility\Text;
 use Countable;
 use DateTimeInterface;
 use InvalidArgumentException;

@@ -12,7 +12,7 @@ Validator objects define the rules that apply to a set of fields. Validator obje
 fields and validation sets. Creating a validator is simple:
 
 ```php
-use Cake\Validation\Validator;
+import uim.cake.Validation\Validator;
 
 $validator = new Validator();
 $validator

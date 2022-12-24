@@ -15,9 +15,9 @@
  */
 module uim.cake.Error\Renderer;
 
-use Cake\Console\ConsoleOutput;
-use Cake\Error\ErrorRendererInterface;
-use Cake\Error\PhpError;
+import uim.cake.Console\ConsoleOutput;
+import uim.cake.Error\ErrorRendererInterface;
+import uim.cake.Error\PhpError;
 
 /**
  * Plain text error rendering with a stack trace.

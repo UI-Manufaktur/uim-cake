@@ -2,12 +2,12 @@
 
 module uim.cake.Error;
 
-use Cake\Core\Configure;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Error\Renderer\ConsoleErrorRenderer;
-use Cake\Error\Renderer\HtmlErrorRenderer;
-use Cake\Event\EventDispatcherTrait;
-use Cake\Routing\Router;
+import uim.cake.Core\Configure;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Error\Renderer\ConsoleErrorRenderer;
+import uim.cake.Error\Renderer\HtmlErrorRenderer;
+import uim.cake.Event\EventDispatcherTrait;
+import uim.cake.Routing\Router;
 use Exception;
 
 /**

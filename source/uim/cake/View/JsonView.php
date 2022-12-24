@@ -15,7 +15,7 @@
  */
 module uim.cake.View;
 
-use Cake\Core\Configure;
+import uim.cake.Core\Configure;
 use RuntimeException;
 
 /**

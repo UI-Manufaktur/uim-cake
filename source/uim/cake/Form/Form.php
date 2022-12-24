@@ -15,13 +15,13 @@
  */
 module uim.cake.Form;
 
-use Cake\Event\EventDispatcherInterface;
-use Cake\Event\EventDispatcherTrait;
-use Cake\Event\IEventListener;
-use Cake\Event\EventManager;
-use Cake\Utility\Hash;
-use Cake\Validation\ValidatorAwareInterface;
-use Cake\Validation\ValidatorAwareTrait;
+import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.Event\EventDispatcherTrait;
+import uim.cake.Event\IEventListener;
+import uim.cake.Event\EventManager;
+import uim.cake.Utility\Hash;
+import uim.cake.Validation\ValidatorAwareInterface;
+import uim.cake.Validation\ValidatorAwareTrait;
 
 /**
  * Form abstraction used to create forms not tied to ORM backed models,

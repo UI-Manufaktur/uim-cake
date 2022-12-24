@@ -15,12 +15,12 @@
  */
 module uim.cake.ORM\Behavior;
 
-use Cake\Database\Type\DateTimeType;
-use Cake\Database\TypeFactory;
-use Cake\Datasource\EntityInterface;
-use Cake\Event\EventInterface;
-use Cake\I18n\FrozenTime;
-use Cake\ORM\Behavior;
+import uim.cake.Database\Type\DateTimeType;
+import uim.cake.Database\TypeFactory;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Event\EventInterface;
+import uim.cake.I18n\FrozenTime;
+import uim.cake.ORM\Behavior;
 use DateTimeInterface;
 use RuntimeException;
 use UnexpectedValueException;

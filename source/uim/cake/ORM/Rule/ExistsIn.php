@@ -15,9 +15,9 @@
  */
 module uim.cake.ORM\Rule;
 
-use Cake\Datasource\EntityInterface;
-use Cake\ORM\Association;
-use Cake\ORM\Table;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.ORM\Association;
+import uim.cake.ORM\Table;
 use RuntimeException;
 
 /**

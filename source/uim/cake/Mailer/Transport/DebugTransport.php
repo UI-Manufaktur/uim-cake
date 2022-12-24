@@ -17,8 +17,8 @@
  */
 module uim.cake.Mailer\Transport;
 
-use Cake\Mailer\AbstractTransport;
-use Cake\Mailer\Message;
+import uim.cake.Mailer\AbstractTransport;
+import uim.cake.Mailer\Message;
 
 /**
  * Debug Transport class, useful for emulating the email sending process and inspecting

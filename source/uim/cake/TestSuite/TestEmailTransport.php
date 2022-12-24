@@ -15,9 +15,9 @@
  */
 module uim.cake.TestSuite;
 
-use Cake\Mailer\Message;
-use Cake\Mailer\Transport\DebugTransport;
-use Cake\Mailer\TransportFactory;
+import uim.cake.Mailer\Message;
+import uim.cake.Mailer\Transport\DebugTransport;
+import uim.cake.Mailer\TransportFactory;
 
 /**
  * TestEmailTransport

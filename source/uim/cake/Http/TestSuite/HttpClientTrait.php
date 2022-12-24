@@ -15,8 +15,8 @@
  */
 module uim.cake.Http\TestSuite;
 
-use Cake\Http\Client;
-use Cake\Http\Client\Response;
+import uim.cake.Http\Client;
+import uim.cake.Http\Client\Response;
 
 /**
  * Define mock responses and have mocks automatically cleared.

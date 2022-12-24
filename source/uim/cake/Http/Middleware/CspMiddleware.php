@@ -16,7 +16,7 @@
 
 module uim.cake.Http\Middleware;
 
-use Cake\Core\InstanceConfigTrait;
+import uim.cake.Core\InstanceConfigTrait;
 use ParagonIE\CSPBuilder\CSPBuilder;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

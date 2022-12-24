@@ -15,7 +15,7 @@
  */
 module uim.cake.Http;
 
-use Cake\Core\InstanceConfigTrait;
+import uim.cake.Core\InstanceConfigTrait;
 use Throwable;
 
 /**

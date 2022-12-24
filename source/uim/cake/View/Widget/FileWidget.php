@@ -15,8 +15,8 @@
  */
 module uim.cake.View\Widget;
 
-use Cake\Core\Configure;
-use Cake\View\Form\ContextInterface;
+import uim.cake.Core\Configure;
+import uim.cake.View\Form\ContextInterface;
 
 /**
  * Input widget class for generating a file upload control.

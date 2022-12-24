@@ -15,7 +15,7 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\View\Helper;
+import uim.cake.View\Helper;
 
 /**
  * FlashHelper class to render flash messages.

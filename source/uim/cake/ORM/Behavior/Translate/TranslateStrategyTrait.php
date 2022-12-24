@@ -15,11 +15,11 @@
  */
 module uim.cake.ORM\Behavior\Translate;
 
-use Cake\Datasource\EntityInterface;
-use Cake\Event\EventInterface;
-use Cake\I18n\I18n;
-use Cake\ORM\Marshaller;
-use Cake\ORM\Table;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Event\EventInterface;
+import uim.cake.I18n\I18n;
+import uim.cake.ORM\Marshaller;
+import uim.cake.ORM\Table;
 
 /**
  * Contains common code needed by TranslateBehavior strategy classes.

@@ -15,8 +15,8 @@
  */
 module uim.cake.Datasource;
 
-use Cake\Datasource\Exception\MissingModelException;
-use Cake\Datasource\Locator\ILocator;
+import uim.cake.Datasource\Exception\MissingModelException;
+import uim.cake.Datasource\Locator\ILocator;
 use InvalidArgumentException;
 use UnexpectedValueException;
 

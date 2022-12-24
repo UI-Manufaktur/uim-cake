@@ -15,8 +15,8 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\Database\DriverInterface;
-use Cake\Utility\Text;
+import uim.cake.Database\DriverInterface;
+import uim.cake.Utility\Text;
 
 /**
  * Provides behavior for the UUID type

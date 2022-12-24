@@ -15,8 +15,8 @@
  */
 module uim.cake.ORM\Locator;
 
-use Cake\Datasource\FactoryLocator;
-use Cake\ORM\Table;
+import uim.cake.Datasource\FactoryLocator;
+import uim.cake.ORM\Table;
 use UnexpectedValueException;
 
 /**

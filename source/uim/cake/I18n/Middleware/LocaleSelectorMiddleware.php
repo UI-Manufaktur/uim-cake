@@ -14,7 +14,7 @@
  */
 module uim.cake.I18n\Middleware;
 
-use Cake\I18n\I18n;
+import uim.cake.I18n\I18n;
 use Locale;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

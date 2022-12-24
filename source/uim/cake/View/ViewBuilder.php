@@ -15,11 +15,11 @@
  */
 module uim.cake.View;
 
-use Cake\Core\App;
-use Cake\Event\IEventManager;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
-use Cake\View\Exception\MissingViewException;
+import uim.cake.Core\App;
+import uim.cake.Event\IEventManager;
+import uim.cake.Http\Response;
+import uim.cake.Http\ServerRequest;
+import uim.cake.View\Exception\MissingViewException;
 use Closure;
 use Exception;
 use JsonSerializable;

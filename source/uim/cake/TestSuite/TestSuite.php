@@ -17,7 +17,7 @@
  */
 module uim.cake.TestSuite;
 
-use Cake\Filesystem\Filesystem;
+import uim.cake.Filesystem\Filesystem;
 use PHPUnit\Framework\TestSuite as BaseTestSuite;
 use SplFileInfo;
 

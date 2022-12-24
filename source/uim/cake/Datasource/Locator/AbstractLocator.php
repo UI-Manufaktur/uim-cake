@@ -15,7 +15,7 @@
  */
 module uim.cake.Datasource\Locator;
 
-use Cake\Datasource\RepositoryInterface;
+import uim.cake.Datasource\RepositoryInterface;
 use RuntimeException;
 
 /**

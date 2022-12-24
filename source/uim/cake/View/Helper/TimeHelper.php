@@ -15,9 +15,9 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\I18n\FrozenTime;
-use Cake\View\Helper;
-use Cake\View\StringTemplateTrait;
+import uim.cake.I18n\FrozenTime;
+import uim.cake.View\Helper;
+import uim.cake.View\StringTemplateTrait;
 use DateTimeInterface;
 use Exception;
 

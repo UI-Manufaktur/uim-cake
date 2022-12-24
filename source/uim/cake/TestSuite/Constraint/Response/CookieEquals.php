@@ -14,7 +14,7 @@
  */
 module uim.cake.TestSuite\Constraint\Response;
 
-use Cake\Http\Response;
+import uim.cake.Http\Response;
 
 /**
  * CookieEquals

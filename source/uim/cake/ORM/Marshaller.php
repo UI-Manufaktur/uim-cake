@@ -16,13 +16,13 @@
 module uim.cake.ORM;
 
 use ArrayObject;
-use Cake\Collection\Collection;
-use Cake\Database\Expression\TupleComparison;
-use Cake\Database\TypeFactory;
-use Cake\Datasource\EntityInterface;
-use Cake\Datasource\InvalidPropertyInterface;
-use Cake\ORM\Association\BelongsToMany;
-use Cake\Utility\Hash;
+import uim.cake.Collection\Collection;
+import uim.cake.Database\Expression\TupleComparison;
+import uim.cake.Database\TypeFactory;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Datasource\InvalidPropertyInterface;
+import uim.cake.ORM\Association\BelongsToMany;
+import uim.cake.Utility\Hash;
 use InvalidArgumentException;
 use RuntimeException;
 

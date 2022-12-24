@@ -15,8 +15,8 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\View\Helper;
-use Cake\View\StringTemplateTrait;
+import uim.cake.View\Helper;
+import uim.cake.View\StringTemplateTrait;
 use LogicException;
 
 /**

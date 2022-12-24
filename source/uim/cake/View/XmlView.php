@@ -15,9 +15,9 @@
  */
 module uim.cake.View;
 
-use Cake\Core\Configure;
-use Cake\Utility\Hash;
-use Cake\Utility\Xml;
+import uim.cake.Core\Configure;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Xml;
 
 /**
  * A view class that is used for creating XML responses.

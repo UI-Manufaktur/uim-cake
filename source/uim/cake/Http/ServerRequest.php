@@ -16,11 +16,11 @@
 module uim.cake.Http;
 
 use BadMethodCallException;
-use Cake\Core\Configure;
-use Cake\Core\Exception\CakeException;
-use Cake\Http\Cookie\CookieCollection;
-use Cake\Http\Exception\MethodNotAllowedException;
-use Cake\Utility\Hash;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Http\Cookie\CookieCollection;
+import uim.cake.Http\Exception\MethodNotAllowedException;
+import uim.cake.Utility\Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\PhpInputStream;
 use Laminas\Diactoros\Stream;

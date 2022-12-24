@@ -15,9 +15,9 @@
  */
 module uim.cake.Form;
 
-use Cake\Core\Configure;
-use Cake\Utility\Hash;
-use Cake\Utility\Security;
+import uim.cake.Core\Configure;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Security;
 
 /**
  * Protects against form tampering. It ensures that:

@@ -16,12 +16,12 @@
 module uim.cake.Http\Middleware;
 
 use ArrayAccess;
-use Cake\Http\Cookie\Cookie;
-use Cake\Http\Cookie\CookieInterface;
-use Cake\Http\Exception\InvalidCsrfTokenException;
-use Cake\Http\Response;
-use Cake\Utility\Hash;
-use Cake\Utility\Security;
+import uim.cake.Http\Cookie\Cookie;
+import uim.cake.Http\Cookie\CookieInterface;
+import uim.cake.Http\Exception\InvalidCsrfTokenException;
+import uim.cake.Http\Response;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Security;
 use InvalidArgumentException;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

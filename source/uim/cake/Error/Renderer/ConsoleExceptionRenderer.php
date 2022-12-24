@@ -15,9 +15,9 @@
  */
 module uim.cake.Error\Renderer;
 
-use Cake\Console\ConsoleOutput;
-use Cake\Core\Configure;
-use Cake\Core\Exception\CakeException;
+import uim.cake.Console\ConsoleOutput;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Exception\CakeException;
 use Psr\Http\Message\IServerRequest;
 use Throwable;
 

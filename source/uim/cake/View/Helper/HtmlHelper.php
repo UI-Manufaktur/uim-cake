@@ -15,9 +15,9 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\Core\Configure;
-use Cake\View\Helper;
-use Cake\View\StringTemplateTrait;
+import uim.cake.Core\Configure;
+import uim.cake.View\Helper;
+import uim.cake.View\StringTemplateTrait;
 
 /**
  * Html Helper class for easy use of HTML widgets.

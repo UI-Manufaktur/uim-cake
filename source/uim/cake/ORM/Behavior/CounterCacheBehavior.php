@@ -16,10 +16,10 @@
 module uim.cake.ORM\Behavior;
 
 use ArrayObject;
-use Cake\Datasource\EntityInterface;
-use Cake\Event\EventInterface;
-use Cake\ORM\Association;
-use Cake\ORM\Behavior;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Event\EventInterface;
+import uim.cake.ORM\Association;
+import uim.cake.ORM\Behavior;
 use Closure;
 
 /**

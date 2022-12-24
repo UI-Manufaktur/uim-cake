@@ -15,11 +15,11 @@
  */
 module uim.cake.ORM\Association\Loader;
 
-use Cake\Database\Expression\IdentifierExpression;
-use Cake\Database\Expression\TupleComparison;
-use Cake\Database\ValueBinder;
-use Cake\ORM\Association;
-use Cake\ORM\Query;
+import uim.cake.Database\Expression\IdentifierExpression;
+import uim.cake.Database\Expression\TupleComparison;
+import uim.cake.Database\ValueBinder;
+import uim.cake.ORM\Association;
+import uim.cake.ORM\Query;
 use Closure;
 use InvalidArgumentException;
 use RuntimeException;

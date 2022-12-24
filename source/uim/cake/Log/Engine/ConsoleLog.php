@@ -15,8 +15,8 @@
  */
 module uim.cake.Log\Engine;
 
-use Cake\Console\ConsoleOutput;
-use Cake\Log\Formatter\DefaultFormatter;
+import uim.cake.Console\ConsoleOutput;
+import uim.cake.Log\Formatter\DefaultFormatter;
 use InvalidArgumentException;
 
 /**

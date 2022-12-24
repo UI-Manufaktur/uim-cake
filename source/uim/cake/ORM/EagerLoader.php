@@ -15,9 +15,9 @@
  */
 module uim.cake.ORM;
 
-use Cake\Database\Statement\BufferedStatement;
-use Cake\Database\Statement\CallbackStatement;
-use Cake\Database\StatementInterface;
+import uim.cake.Database\Statement\BufferedStatement;
+import uim.cake.Database\Statement\CallbackStatement;
+import uim.cake.Database\StatementInterface;
 use Closure;
 use InvalidArgumentException;
 

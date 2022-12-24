@@ -17,7 +17,7 @@
  */
 module uim.cake.TestSuite;
 
-use Cake\Utility\Hash;
+import uim.cake.Utility\Hash;
 
 /**
  * Read only access to the session during testing.

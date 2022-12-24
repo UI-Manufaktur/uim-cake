@@ -14,7 +14,7 @@
  */
 module uim.cake.Http\Cookie;
 
-use Cake\Utility\Hash;
+import uim.cake.Utility\Hash;
 use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;

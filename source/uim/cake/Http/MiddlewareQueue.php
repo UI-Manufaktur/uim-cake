@@ -15,9 +15,9 @@
  */
 module uim.cake.Http;
 
-use Cake\Core\App;
-use Cake\Http\Middleware\ClosureDecoratorMiddleware;
-use Cake\Http\Middleware\DoublePassDecoratorMiddleware;
+import uim.cake.Core\App;
+import uim.cake.Http\Middleware\ClosureDecoratorMiddleware;
+import uim.cake.Http\Middleware\DoublePassDecoratorMiddleware;
 use Closure;
 use Countable;
 use LogicException;

@@ -14,7 +14,7 @@
  */
 module uim.cake.View;
 
-use Cake\Event\EventDispatcherInterface;
+import uim.cake.Event\EventDispatcherInterface;
 
 /**
  * Provides the set() method for collecting template context.

@@ -15,9 +15,9 @@
  */
 module uim.cake.Http\Middleware;
 
-use Cake\Http\Cookie\CookieCollection;
-use Cake\Http\Response;
-use Cake\Utility\CookieCryptTrait;
+import uim.cake.Http\Cookie\CookieCollection;
+import uim.cake.Http\Response;
+import uim.cake.Utility\CookieCryptTrait;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\IMiddleware;

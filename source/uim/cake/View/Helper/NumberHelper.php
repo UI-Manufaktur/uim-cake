@@ -15,11 +15,11 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\Core\App;
-use Cake\Core\Exception\CakeException;
-use Cake\I18n\Number;
-use Cake\View\Helper;
-use Cake\View\View;
+import uim.cake.Core\App;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.I18n\Number;
+import uim.cake.View\Helper;
+import uim.cake.View\View;
 
 /**
  * Number helper library.

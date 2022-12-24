@@ -15,8 +15,8 @@
  */
 module uim.cake.Log\Engine;
 
-use Cake\Log\Formatter\DefaultFormatter;
-use Cake\Log\Formatter\LegacySyslogFormatter;
+import uim.cake.Log\Formatter\DefaultFormatter;
+import uim.cake.Log\Formatter\LegacySyslogFormatter;
 
 /**
  * Syslog stream for Logging. Writes logs to the system logger

@@ -15,10 +15,10 @@
  */
 module uim.cake.Routing;
 
-use Cake\Core\Configure;
-use Cake\Http\ServerRequest;
-use Cake\Routing\Exception\MissingRouteException;
-use Cake\Utility\Inflector;
+import uim.cake.Core\Configure;
+import uim.cake.Http\ServerRequest;
+import uim.cake.Routing\Exception\MissingRouteException;
+import uim.cake.Utility\Inflector;
 use InvalidArgumentException;
 use ReflectionFunction;
 use ReflectionMethod;

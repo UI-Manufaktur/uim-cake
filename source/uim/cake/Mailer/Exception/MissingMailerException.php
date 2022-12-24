@@ -15,7 +15,7 @@
  */
 module uim.cake.Mailer\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Used when a mailer cannot be found.

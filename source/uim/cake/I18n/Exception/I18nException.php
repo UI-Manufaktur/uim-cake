@@ -16,7 +16,7 @@
  */
 module uim.cake.I18n\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * I18n exception.

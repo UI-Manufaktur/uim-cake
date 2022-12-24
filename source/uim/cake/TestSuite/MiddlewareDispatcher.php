@@ -14,14 +14,14 @@
  */
 module uim.cake.TestSuite;
 
-use Cake\Core\IHttpApplication;
-use Cake\Core\IPluginApplication;
-use Cake\Http\FlashMessage;
-use Cake\Http\Server;
-use Cake\Http\ServerRequest;
-use Cake\Http\ServerRequestFactory;
-use Cake\Routing\Router;
-use Cake\Routing\IRoutingApplication;
+import uim.cake.Core\IHttpApplication;
+import uim.cake.Core\IPluginApplication;
+import uim.cake.Http\FlashMessage;
+import uim.cake.Http\Server;
+import uim.cake.Http\ServerRequest;
+import uim.cake.Http\ServerRequestFactory;
+import uim.cake.Routing\Router;
+import uim.cake.Routing\IRoutingApplication;
 use Psr\Http\Message\IResponse;
 
 /**

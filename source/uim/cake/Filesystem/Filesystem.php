@@ -15,7 +15,7 @@
  */
 module uim.cake.Filesystem;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 use CallbackFilterIterator;
 use FilesystemIterator;
 use Iterator;

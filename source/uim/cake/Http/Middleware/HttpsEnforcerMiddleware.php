@@ -15,8 +15,8 @@
  */
 module uim.cake.Http\Middleware;
 
-use Cake\Core\Configure;
-use Cake\Http\Exception\BadRequestException;
+import uim.cake.Core\Configure;
+import uim.cake.Http\Exception\BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

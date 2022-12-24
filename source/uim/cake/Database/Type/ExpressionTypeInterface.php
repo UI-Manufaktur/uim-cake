@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\Database\IExpression;
+import uim.cake.Database\IExpression;
 
 /**
  * An interface used by Type objects to signal whether the value should

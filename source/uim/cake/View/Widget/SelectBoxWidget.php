@@ -15,7 +15,7 @@
  */
 module uim.cake.View\Widget;
 
-use Cake\View\Form\ContextInterface;
+import uim.cake.View\Form\ContextInterface;
 use Traversable;
 
 /**

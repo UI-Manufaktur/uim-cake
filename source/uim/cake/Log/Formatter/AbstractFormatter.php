@@ -15,7 +15,7 @@
  */
 module uim.cake.Log\Formatter;
 
-use Cake\Core\InstanceConfigTrait;
+import uim.cake.Core\InstanceConfigTrait;
 
 abstract class AbstractFormatter
 {

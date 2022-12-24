@@ -15,7 +15,7 @@
  */
 module uim.cake.Utility;
 
-use Cake\Utility\Exception\XmlException;
+import uim.cake.Utility\Exception\XmlException;
 use Closure;
 use DOMDocument;
 use DOMNode;
@@ -56,7 +56,7 @@ class Xml
      * Building XML from a remote URL:
      *
      * ```
-     * use Cake\Http\Client;
+     * import uim.cake.Http\Client;
      *
      * $http = new Client();
      * $response = $http.get('http://example.com/example.xml');

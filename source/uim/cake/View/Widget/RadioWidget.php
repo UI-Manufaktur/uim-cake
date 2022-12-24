@@ -15,9 +15,9 @@
  */
 module uim.cake.View\Widget;
 
-use Cake\View\Form\ContextInterface;
-use Cake\View\Helper\IdGeneratorTrait;
-use Cake\View\StringTemplate;
+import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Helper\IdGeneratorTrait;
+import uim.cake.View\StringTemplate;
 use Traversable;
 
 /**

@@ -15,7 +15,7 @@
  */
 module uim.cake.Mailer;
 
-use Cake\Core\StaticConfigTrait;
+import uim.cake.Core\StaticConfigTrait;
 use InvalidArgumentException;
 
 /**

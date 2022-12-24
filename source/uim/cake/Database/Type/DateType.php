@@ -15,9 +15,9 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\I18n\Date;
-use Cake\I18n\FrozenDate;
-use Cake\I18n\I18nDateTimeInterface;
+import uim.cake.I18n\Date;
+import uim.cake.I18n\FrozenDate;
+import uim.cake.I18n\I18nDateTimeInterface;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;

@@ -14,7 +14,7 @@
  */
 module uim.cake.Http\Client;
 
-use Cake\Utility\Text;
+import uim.cake.Utility\Text;
 
 /**
  * Contains the data and behavior for a single

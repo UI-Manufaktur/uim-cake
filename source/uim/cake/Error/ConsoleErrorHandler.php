@@ -15,9 +15,9 @@
  */
 module uim.cake.Error;
 
-use Cake\Command\Command;
-use Cake\Console\ConsoleOutput;
-use Cake\Console\Exception\ConsoleException;
+import uim.cake.Command\Command;
+import uim.cake.Console\ConsoleOutput;
+import uim.cake.Console\Exception\ConsoleException;
 use Throwable;
 
 /**

@@ -15,7 +15,7 @@
  */
 module uim.cake.ORM\Association\Loader;
 
-use Cake\ORM\Query;
+import uim.cake.ORM\Query;
 use RuntimeException;
 
 /**

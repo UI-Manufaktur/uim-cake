@@ -15,16 +15,16 @@
  */
 module uim.cake.TestSuite;
 
-use Cake\TestSuite\Constraint\Email\MailContains;
-use Cake\TestSuite\Constraint\Email\MailContainsAttachment;
-use Cake\TestSuite\Constraint\Email\MailContainsHtml;
-use Cake\TestSuite\Constraint\Email\MailContainsText;
-use Cake\TestSuite\Constraint\Email\MailCount;
-use Cake\TestSuite\Constraint\Email\MailSentFrom;
-use Cake\TestSuite\Constraint\Email\MailSentTo;
-use Cake\TestSuite\Constraint\Email\MailSentWith;
-use Cake\TestSuite\Constraint\Email\MailSubjectContains;
-use Cake\TestSuite\Constraint\Email\NoMailSent;
+import uim.cake.TestSuite\Constraint\Email\MailContains;
+import uim.cake.TestSuite\Constraint\Email\MailContainsAttachment;
+import uim.cake.TestSuite\Constraint\Email\MailContainsHtml;
+import uim.cake.TestSuite\Constraint\Email\MailContainsText;
+import uim.cake.TestSuite\Constraint\Email\MailCount;
+import uim.cake.TestSuite\Constraint\Email\MailSentFrom;
+import uim.cake.TestSuite\Constraint\Email\MailSentTo;
+import uim.cake.TestSuite\Constraint\Email\MailSentWith;
+import uim.cake.TestSuite\Constraint\Email\MailSubjectContains;
+import uim.cake.TestSuite\Constraint\Email\NoMailSent;
 
 /**
  * Make assertions on emails sent through the Cake\TestSuite\TestEmailTransport

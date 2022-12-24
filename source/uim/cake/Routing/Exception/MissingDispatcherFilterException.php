@@ -13,7 +13,7 @@
  */
 module uim.cake.Routing\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Exception raised when a Dispatcher filter could not be found

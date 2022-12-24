@@ -16,12 +16,12 @@
 module uim.cake.ORM\Behavior\Translate;
 
 use ArrayObject;
-use Cake\Collection\ICollection;
-use Cake\Datasource\EntityInterface;
-use Cake\Event\EventInterface;
-use Cake\ORM\PropertyMarshalInterface;
-use Cake\ORM\Query;
-use Cake\ORM\Table;
+import uim.cake.Collection\ICollection;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Event\EventInterface;
+import uim.cake.ORM\PropertyMarshalInterface;
+import uim.cake.ORM\Query;
+import uim.cake.ORM\Table;
 
 /**
  * This interface describes the methods for translate behavior strategies.

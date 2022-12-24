@@ -15,10 +15,10 @@
  */
 module uim.cake.View;
 
-use Cake\Core\Configure\Engine\PhpConfig;
-use Cake\Core\Exception\CakeException;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Utility\Hash;
+import uim.cake.Core\Configure\Engine\PhpConfig;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Utility\Hash;
 use RuntimeException;
 
 /**

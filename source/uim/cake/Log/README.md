@@ -17,7 +17,7 @@ You can define as many or as few loggers as your application needs. Loggers
 should be configured using `Cake\Log\Log.` An example would be:
 
 ```php
-use Cake\Log\Log;
+import uim.cake.Log\Log;
 
 // Short classname
 Log::setConfig("local", [

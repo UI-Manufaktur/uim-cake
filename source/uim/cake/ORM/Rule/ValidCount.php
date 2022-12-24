@@ -15,8 +15,8 @@
  */
 module uim.cake.ORM\Rule;
 
-use Cake\Datasource\EntityInterface;
-use Cake\Validation\Validation;
+import uim.cake.Datasource\EntityInterface;
+import uim.cake.Validation\Validation;
 use Countable;
 
 /**

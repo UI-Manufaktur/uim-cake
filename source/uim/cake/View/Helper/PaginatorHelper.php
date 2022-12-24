@@ -15,12 +15,12 @@
  */
 module uim.cake.View\Helper;
 
-use Cake\Utility\Hash;
-use Cake\Utility\Inflector;
-use Cake\View\Helper;
-use Cake\View\StringTemplate;
-use Cake\View\StringTemplateTrait;
-use Cake\View\View;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Inflector;
+import uim.cake.View\Helper;
+import uim.cake.View\StringTemplate;
+import uim.cake.View\StringTemplateTrait;
+import uim.cake.View\View;
 
 /**
  * Pagination Helper class for easy generation of pagination links.

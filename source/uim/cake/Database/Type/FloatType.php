@@ -15,8 +15,8 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\Database\DriverInterface;
-use Cake\I18n\Number;
+import uim.cake.Database\DriverInterface;
+import uim.cake.I18n\Number;
 use PDO;
 use RuntimeException;
 

@@ -1,5 +1,5 @@
 
 
-use Cake\Console\TestSuite\Constraint\ContentsBase;
+import uim.cake.Console\TestSuite\Constraint\ContentsBase;
 
 class_alias(ContentsBase::class, 'Cake\TestSuite\Constraint\Console\ContentsBase');

@@ -15,11 +15,11 @@
  */
 module uim.cake.Shell\Task;
 
-use Cake\Console\Shell;
-use Cake\Core\App;
-use Cake\Core\Plugin;
-use Cake\Filesystem\Filesystem;
-use Cake\Utility\Inflector;
+import uim.cake.Console\Shell;
+import uim.cake.Core\App;
+import uim.cake.Core\Plugin;
+import uim.cake.Filesystem\Filesystem;
+import uim.cake.Utility\Inflector;
 
 /**
  * Base class for Shell Command reflection.

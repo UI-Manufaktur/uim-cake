@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\Database\TypeFactory;
+import uim.cake.Database\TypeFactory;
 
 /**
  * Offers a method to convert values to IExpression objects

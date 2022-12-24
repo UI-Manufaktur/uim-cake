@@ -16,10 +16,10 @@
 module uim.cake.Http\Middleware;
 
 use ArrayAccess;
-use Cake\Http\Exception\InvalidCsrfTokenException;
-use Cake\Http\Session;
-use Cake\Utility\Hash;
-use Cake\Utility\Security;
+import uim.cake.Http\Exception\InvalidCsrfTokenException;
+import uim.cake.Http\Session;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Security;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\IMiddleware;

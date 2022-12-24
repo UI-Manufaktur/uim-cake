@@ -15,7 +15,7 @@
  */
 module uim.cake.I18n;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 use Locale;
 
 /**

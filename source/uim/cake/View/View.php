@@ -15,21 +15,21 @@
  */
 module uim.cake.View;
 
-use Cake\Cache\Cache;
-use Cake\Core\App;
-use Cake\Core\InstanceConfigTrait;
-use Cake\Core\Plugin;
-use Cake\Event\EventDispatcherInterface;
-use Cake\Event\EventDispatcherTrait;
-use Cake\Event\EventManager;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
-use Cake\Log\LogTrait;
-use Cake\Routing\Router;
-use Cake\Utility\Inflector;
-use Cake\View\Exception\MissingElementException;
-use Cake\View\Exception\MissingLayoutException;
-use Cake\View\Exception\MissingTemplateException;
+import uim.cake.Cache\Cache;
+import uim.cake.Core\App;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Core\Plugin;
+import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.Event\EventDispatcherTrait;
+import uim.cake.Event\EventManager;
+import uim.cake.Http\Response;
+import uim.cake.Http\ServerRequest;
+import uim.cake.Log\LogTrait;
+import uim.cake.Routing\Router;
+import uim.cake.Utility\Inflector;
+import uim.cake.View\Exception\MissingElementException;
+import uim.cake.View\Exception\MissingLayoutException;
+import uim.cake.View\Exception\MissingTemplateException;
 use InvalidArgumentException;
 use LogicException;
 use RuntimeException;

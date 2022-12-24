@@ -15,7 +15,7 @@
  */
 module uim.cake.Routing\Route;
 
-use Cake\Http\Exception\BadRequestException;
+import uim.cake.Http\Exception\BadRequestException;
 use InvalidArgumentException;
 use Psr\Http\Message\IServerRequest;
 

@@ -15,9 +15,9 @@
  */
 module uim.cake.ORM\Locator;
 
-use Cake\Datasource\Locator\ILocatoras BaseILocator;
-use Cake\Datasource\RepositoryInterface;
-use Cake\ORM\Table;
+import uim.cake.Datasource\Locator\ILocatoras BaseILocator;
+import uim.cake.Datasource\RepositoryInterface;
+import uim.cake.ORM\Table;
 
 /**
  * Registries for Table objects should implement this interface.

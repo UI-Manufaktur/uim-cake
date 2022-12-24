@@ -19,7 +19,7 @@
  */
 module uim.cake.Http;
 
-use Cake\Http\Cookie\Cookie;
+import uim.cake.Http\Cookie\Cookie;
 use Laminas\Diactoros\RelativeStream;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\IResponse;

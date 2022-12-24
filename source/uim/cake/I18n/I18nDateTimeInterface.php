@@ -15,8 +15,8 @@
  */
 module uim.cake.I18n;
 
-use Cake\Chronos\ChronosInterface;
-use Cake\Chronos\DifferenceFormatterInterface;
+import uim.cake.Chronos\ChronosInterface;
+import uim.cake.Chronos\DifferenceFormatterInterface;
 use JsonSerializable;
 
 /**

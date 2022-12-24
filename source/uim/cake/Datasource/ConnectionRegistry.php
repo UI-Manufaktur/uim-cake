@@ -15,9 +15,9 @@
  */
 module uim.cake.Datasource;
 
-use Cake\Core\App;
-use Cake\Core\ObjectRegistry;
-use Cake\Datasource\Exception\MissingDatasourceException;
+import uim.cake.Core\App;
+import uim.cake.Core\ObjectRegistry;
+import uim.cake.Datasource\Exception\MissingDatasourceException;
 
 /**
  * A registry object for connection instances.

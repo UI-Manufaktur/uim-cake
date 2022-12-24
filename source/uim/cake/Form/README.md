@@ -11,9 +11,9 @@ API services, or contact forms.
 
 
 ```php
-use Cake\Form\Form;
-use Cake\Form\Schema;
-use Cake\Validation\Validator;
+import uim.cake.Form\Form;
+import uim.cake.Form\Schema;
+import uim.cake.Validation\Validator;
 
 class ContactForm : Form
 {

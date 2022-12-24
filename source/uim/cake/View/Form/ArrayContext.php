@@ -15,7 +15,7 @@
  */
 module uim.cake.View\Form;
 
-use Cake\Utility\Hash;
+import uim.cake.Utility\Hash;
 
 /**
  * Provides a basic array based context provider for FormHelper.
