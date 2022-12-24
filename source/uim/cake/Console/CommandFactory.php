@@ -11,7 +11,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Console;
+module uim.cake.Console;
 
 use Cake\Core\IContainer;
 use InvalidArgumentException;

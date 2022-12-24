@@ -13,7 +13,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Console;
+module uim.cake.Console;
 
 use ArrayIterator;
 use Countable;

@@ -13,7 +13,7 @@
  * @since         3.0.5
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Collection\Iterator;
+module uim.cake.Collection\Iterator;
 
 use Cake\Collection\Collection;
 use Cake\Collection\CollectionInterface;

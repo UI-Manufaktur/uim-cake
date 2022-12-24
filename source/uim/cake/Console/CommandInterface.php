@@ -13,7 +13,7 @@
  * @since         4.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Console;
+module uim.cake.Console;
 
 /**
  * Describe the interface between a command

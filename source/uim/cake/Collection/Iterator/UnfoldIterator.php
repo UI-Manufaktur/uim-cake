@@ -13,7 +13,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Collection\Iterator;
+module uim.cake.Collection\Iterator;
 
 use IteratorIterator;
 use RecursiveIterator;

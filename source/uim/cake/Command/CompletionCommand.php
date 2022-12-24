@@ -13,7 +13,7 @@
  * @since         2.5.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Command;
+module uim.cake.Command;
 
 use Cake\Console\Arguments;
 use Cake\Console\CommandCollection;
