@@ -12,7 +12,7 @@
  * @since         2.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Utility;
+module uim.cake.Utility;
 
 use ArrayAccess;
 use InvalidArgumentException;

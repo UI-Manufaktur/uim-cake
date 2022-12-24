@@ -13,7 +13,7 @@
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\TestSuite\Fixture;
+module uim.cake.TestSuite\Fixture;
 
 use Cake\Log\Log;
 use Cake\TestSuite\ConnectionHelper;

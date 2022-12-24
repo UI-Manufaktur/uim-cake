@@ -13,7 +13,7 @@
  * @since         1.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Utility;
+module uim.cake.Utility;
 
 use Cake\Core\Exception\CakeException;
 use InvalidArgumentException;

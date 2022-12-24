@@ -13,7 +13,7 @@
  * @since         0.10.3
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Utility;
+module uim.cake.Utility;
 
 use Cake\Utility\Exception\XmlException;
 use Closure;

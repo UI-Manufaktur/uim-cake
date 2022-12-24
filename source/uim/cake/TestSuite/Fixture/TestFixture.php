@@ -12,7 +12,7 @@
  * @since         1.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\TestSuite\Fixture;
+module uim.cake.TestSuite\Fixture;
 
 use Cake\Core\Exception\CakeException;
 use Cake\Database\ConstraintsInterface;

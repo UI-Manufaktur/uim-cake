@@ -13,7 +13,7 @@
  * @since         3.1.6
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Utility;
+module uim.cake.Utility;
 
 use RuntimeException;
 

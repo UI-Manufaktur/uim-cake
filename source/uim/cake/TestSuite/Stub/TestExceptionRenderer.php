@@ -13,7 +13,7 @@
  * @since         3.5.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\TestSuite\Stub;
+module uim.cake.TestSuite\Stub;
 
 use Cake\Error\ExceptionRendererInterface;
 use LogicException;

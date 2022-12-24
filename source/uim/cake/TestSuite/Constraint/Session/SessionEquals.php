@@ -12,7 +12,7 @@
  * @since         3.7.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\TestSuite\Constraint\Session;
+module uim.cake.TestSuite\Constraint\Session;
 
 use Cake\Utility\Hash;
 use PHPUnit\Framework\Constraint\Constraint;
