@@ -13,7 +13,7 @@
  * @since         0.2.9
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Filesystem;
+module uim.cake.Filesystem;
 
 use DirectoryIterator;
 use Exception;

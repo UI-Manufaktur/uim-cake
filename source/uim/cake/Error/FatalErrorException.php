@@ -11,7 +11,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Error;
+module uim.cake.Error;
 
 use Cake\Core\Exception\CakeException;
 use Throwable;

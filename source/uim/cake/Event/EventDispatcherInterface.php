@@ -13,7 +13,7 @@
  * @since         3.0.7
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Event;
+module uim.cake.Event;
 
 /**
  * Objects implementing this interface can emit events.

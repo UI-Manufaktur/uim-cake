@@ -13,7 +13,7 @@
  * @since         4.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Error\Renderer;
+module uim.cake.Error\Renderer;
 
 use Cake\Error\Debugger;
 use Cake\Error\ErrorRendererInterface;

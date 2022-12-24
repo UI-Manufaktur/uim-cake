@@ -13,7 +13,7 @@
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Error\Middleware;
+module uim.cake.Error\Middleware;
 
 use Cake\Core\App;
 use Cake\Core\Configure;

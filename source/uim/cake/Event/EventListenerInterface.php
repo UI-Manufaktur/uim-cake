@@ -13,7 +13,7 @@
  * @since         2.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Event;
+module uim.cake.Event;
 
 /**
  * Objects implementing this interface should declare the `implementedEvents()` method
