@@ -71,7 +71,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *   when users are identified.
      *
      *   ```
-     *   this->Auth->setConfig('authenticate', [
+     *   this.Auth->setConfig('authenticate', [
      *      'Form' => [
      *         'userModel' => 'Users.Users'
      *      ]
@@ -83,7 +83,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *   config that should be set to all authentications objects using the 'all' key:
      *
      *   ```
-     *   this->Auth->setConfig('authenticate', [
+     *   this.Auth->setConfig('authenticate', [
      *       AuthComponent::ALL => [
      *          'userModel' => 'Users.Users',
      *          'scope' => ['Users.active' => 1]
@@ -98,7 +98,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *   when authorization checks are done.
      *
      *   ```
-     *   this->Auth->setConfig('authorize', [
+     *   this.Auth->setConfig('authorize', [
      *      'Crud' => [
      *          'actionPath' => 'controllers/'
      *      ]
@@ -110,7 +110,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      *   that should be set to all authorization objects using the AuthComponent::ALL key:
      *
      *   ```
-     *   this->Auth->setConfig('authorize', [
+     *   this.Auth->setConfig('authorize', [
      *      AuthComponent::ALL => [
      *          'actionPath' => 'controllers/'
      *      ],
@@ -232,8 +232,8 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function initialize(array $config): void
     {
-        $controller = this->_registry->getController();
-        this->setEventManager($controller->getEventManager());
+        $controller = this._registry->getController();
+        this.setEventManager($controller->getEventManager());
     }
 
     /**
@@ -244,7 +244,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function startup(EventInterface $event): ?Response
     {
-        return this->authCheck($event);
+        return this.authCheck($event);
     }
 
     /**
@@ -260,7 +260,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function authCheck(EventInterface $event): ?Response
     {
-        if (this->_config['checkAuthIn'] != $event->getName()) {
+        if (this._config['checkAuthIn'] != $event->getName()) {
             return null;
         }
 
@@ -272,19 +272,19 @@ class AuthComponent extends Component implements EventDispatcherInterface
             return null;
         }
 
-        this->_setDefaults();
+        this._setDefaults();
 
-        if (this->_isAllowed($controller)) {
+        if (this._isAllowed($controller)) {
             return null;
         }
 
-        $isLoginAction = this->_isLoginAction($controller);
+        $isLoginAction = this._isLoginAction($controller);
 
-        if (!this->_getUser()) {
+        if (!this._getUser()) {
             if ($isLoginAction) {
                 return null;
             }
-            $result = this->_unauthenticated($controller);
+            $result = this._unauthenticated($controller);
             if ($result instanceof Response) {
                 $event->stopPropagation();
             }
@@ -294,15 +294,15 @@ class AuthComponent extends Component implements EventDispatcherInterface
 
         if (
             $isLoginAction ||
-            empty(this->_config['authorize']) ||
-            this->isAuthorized(this->user())
+            empty(this._config['authorize']) ||
+            this.isAuthorized(this.user())
         ) {
             return null;
         }
 
         $event->stopPropagation();
 
-        return this->_unauthorized($controller);
+        return this._unauthorized($controller);
     }
 
     /**
@@ -329,7 +329,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
     {
         $action = strtolower($controller->getRequest()->getParam('action', ''));
 
-        return in_array($action, array_map('strtolower', this->allowedActions), true);
+        return in_array($action, array_map('strtolower', this.allowedActions), true);
     }
 
     /**
@@ -346,11 +346,11 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     protected function _unauthenticated(Controller $controller): ?Response
     {
-        if (empty(this->_authenticateObjects)) {
-            this->constructAuthenticate();
+        if (empty(this._authenticateObjects)) {
+            this.constructAuthenticate();
         }
         $response = $controller->getResponse();
-        $auth = end(this->_authenticateObjects);
+        $auth = end(this._authenticateObjects);
         if ($auth == false) {
             throw new CakeException('At least one authenticate object must be available.');
         }
@@ -360,9 +360,9 @@ class AuthComponent extends Component implements EventDispatcherInterface
         }
 
         if (!$controller->getRequest()->is('ajax')) {
-            this->flash(this->_config['authError']);
+            this.flash(this._config['authError']);
 
-            return $controller->redirect(this->_loginActionRedirectUrl());
+            return $controller->redirect(this._loginActionRedirectUrl());
         }
 
         return $response->withStatus(403);
@@ -377,9 +377,9 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     protected function _loginActionRedirectUrl()
     {
-        $urlToRedirectBackTo = this->_getUrlToRedirectBackTo();
+        $urlToRedirectBackTo = this._getUrlToRedirectBackTo();
 
-        $loginAction = this->_config['loginAction'];
+        $loginAction = this._config['loginAction'];
         if ($urlToRedirectBackTo == '/') {
             return $loginAction;
         }
@@ -404,7 +404,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
     {
         $uri = $controller->getRequest()->getUri();
         $url = Router::normalize($uri->getPath());
-        $loginAction = Router::normalize(this->_config['loginAction']);
+        $loginAction = Router::normalize(this._config['loginAction']);
 
         return $loginAction == $url;
     }
@@ -418,22 +418,22 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     protected function _unauthorized(Controller $controller): ?Response
     {
-        if (this->_config['unauthorizedRedirect'] == false) {
-            throw new ForbiddenException(this->_config['authError']);
+        if (this._config['unauthorizedRedirect'] == false) {
+            throw new ForbiddenException(this._config['authError']);
         }
 
-        this->flash(this->_config['authError']);
-        if (this->_config['unauthorizedRedirect'] == true) {
+        this.flash(this._config['authError']);
+        if (this._config['unauthorizedRedirect'] == true) {
             $default = '/';
-            if (!empty(this->_config['loginRedirect'])) {
-                $default = this->_config['loginRedirect'];
+            if (!empty(this._config['loginRedirect'])) {
+                $default = this._config['loginRedirect'];
             }
             if (is_array($default)) {
                 $default['_base'] = false;
             }
             $url = $controller->referer($default, true);
         } else {
-            $url = this->_config['unauthorizedRedirect'];
+            $url = this._config['unauthorizedRedirect'];
         }
 
         return $controller->redirect($url);
@@ -458,17 +458,17 @@ class AuthComponent extends Component implements EventDispatcherInterface
                 'action' => 'login',
                 'plugin' => null,
             ],
-            'logoutRedirect' => this->_config['loginAction'],
+            'logoutRedirect' => this._config['loginAction'],
             'authError' => __d('cake', 'You are not authorized to access that location.'),
         ];
 
-        $config = this->getConfig();
+        $config = this.getConfig();
         foreach ($config as $key => $value) {
             if ($value != null) {
                 unset($defaults[$key]);
             }
         }
-        this->setConfig($defaults);
+        this.setConfig($defaults);
     }
 
     /**
@@ -486,21 +486,21 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function isAuthorized($user = null, ?ServerRequest $request = null): bool
     {
-        if (empty($user) && !this->user()) {
+        if (empty($user) && !this.user()) {
             return false;
         }
         if (empty($user)) {
-            $user = this->user();
+            $user = this.user();
         }
         if (empty($request)) {
-            $request = this->getController()->getRequest();
+            $request = this.getController()->getRequest();
         }
-        if (empty(this->_authorizeObjects)) {
-            this->constructAuthorize();
+        if (empty(this._authorizeObjects)) {
+            this.constructAuthorize();
         }
-        foreach (this->_authorizeObjects as $authorizer) {
+        foreach (this._authorizeObjects as $authorizer) {
             if ($authorizer->authorize($user, $request) == true) {
-                this->_authorizationProvider = $authorizer;
+                this._authorizationProvider = $authorizer;
 
                 return true;
             }
@@ -517,11 +517,11 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function constructAuthorize(): ?array
     {
-        if (empty(this->_config['authorize'])) {
+        if (empty(this._config['authorize'])) {
             return null;
         }
-        this->_authorizeObjects = [];
-        $authorize = Hash::normalize((array)this->_config['authorize']);
+        this._authorizeObjects = [];
+        $authorize = Hash::normalize((array)this._config['authorize']);
         $global = [];
         if (isset($authorize[AuthComponent::ALL])) {
             $global = $authorize[AuthComponent::ALL];
@@ -542,10 +542,10 @@ class AuthComponent extends Component implements EventDispatcherInterface
                 throw new CakeException('Authorization objects must implement an authorize() method.');
             }
             $config = (array)$config + $global;
-            this->_authorizeObjects[$alias] = new $className(this->_registry, $config);
+            this._authorizeObjects[$alias] = new $className(this._registry, $config);
         }
 
-        return this->_authorizeObjects;
+        return this._authorizeObjects;
     }
 
     /**
@@ -556,11 +556,11 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function getAuthorize(string $alias): ?BaseAuthorize
     {
-        if (empty(this->_authorizeObjects)) {
-            this->constructAuthorize();
+        if (empty(this._authorizeObjects)) {
+            this.constructAuthorize();
         }
 
-        return this->_authorizeObjects[$alias] ?? null;
+        return this._authorizeObjects[$alias] ?? null;
     }
 
     /**
@@ -570,12 +570,12 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * You can use allow with either an array or a simple string.
      *
      * ```
-     * this->Auth->allow('view');
-     * this->Auth->allow(['edit', 'add']);
+     * this.Auth->allow('view');
+     * this.Auth->allow(['edit', 'add']);
      * ```
      * or to allow all actions
      * ```
-     * this->Auth->allow();
+     * this.Auth->allow();
      * ```
      *
      * @param array<string>|string|null $actions Controller action name or array of actions
@@ -585,12 +585,12 @@ class AuthComponent extends Component implements EventDispatcherInterface
     function allow($actions = null): void
     {
         if ($actions == null) {
-            $controller = this->_registry->getController();
-            this->allowedActions = get_class_methods($controller);
+            $controller = this._registry->getController();
+            this.allowedActions = get_class_methods($controller);
 
             return;
         }
-        this->allowedActions = array_merge(this->allowedActions, (array)$actions);
+        this.allowedActions = array_merge(this.allowedActions, (array)$actions);
     }
 
     /**
@@ -599,12 +599,12 @@ class AuthComponent extends Component implements EventDispatcherInterface
      * You can use deny with either an array or a simple string.
      *
      * ```
-     * this->Auth->deny('view');
-     * this->Auth->deny(['edit', 'add']);
+     * this.Auth->deny('view');
+     * this.Auth->deny(['edit', 'add']);
      * ```
      * or
      * ```
-     * this->Auth->deny();
+     * this.Auth->deny();
      * ```
      * to remove all items from the allowed list
      *
@@ -616,17 +616,17 @@ class AuthComponent extends Component implements EventDispatcherInterface
     function deny($actions = null): void
     {
         if ($actions == null) {
-            this->allowedActions = [];
+            this.allowedActions = [];
 
             return;
         }
         foreach ((array)$actions as $action) {
-            $i = array_search($action, this->allowedActions, true);
+            $i = array_search($action, this.allowedActions, true);
             if (is_int($i)) {
-                unset(this->allowedActions[$i]);
+                unset(this.allowedActions[$i]);
             }
         }
-        this->allowedActions = array_values(this->allowedActions);
+        this.allowedActions = array_values(this.allowedActions);
     }
 
     /**
@@ -641,7 +641,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function setUser($user): void
     {
-        this->storage()->write($user);
+        this.storage()->write($user);
     }
 
     /**
@@ -655,15 +655,15 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function logout(): string
     {
-        this->_setDefaults();
-        if (empty(this->_authenticateObjects)) {
-            this->constructAuthenticate();
+        this._setDefaults();
+        if (empty(this._authenticateObjects)) {
+            this.constructAuthenticate();
         }
-        $user = (array)this->user();
-        this->dispatchEvent('Auth.logout', [$user]);
-        this->storage()->delete();
+        $user = (array)this.user();
+        this.dispatchEvent('Auth.logout', [$user]);
+        this.storage()->delete();
 
-        return Router::normalize(this->_config['logoutRedirect']);
+        return Router::normalize(this._config['logoutRedirect']);
     }
 
     /**
@@ -675,7 +675,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function user(?string $key = null)
     {
-        $user = this->storage()->read();
+        $user = this.storage()->read();
         if (!$user) {
             return null;
         }
@@ -698,23 +698,23 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     protected function _getUser(): bool
     {
-        $user = this->user();
+        $user = this.user();
         if ($user) {
             return true;
         }
 
-        if (empty(this->_authenticateObjects)) {
-            this->constructAuthenticate();
+        if (empty(this._authenticateObjects)) {
+            this.constructAuthenticate();
         }
-        foreach (this->_authenticateObjects as $auth) {
-            $result = $auth->getUser(this->getController()->getRequest());
+        foreach (this._authenticateObjects as $auth) {
+            $result = $auth->getUser(this.getController()->getRequest());
             if (!empty($result) && is_array($result)) {
-                this->_authenticationProvider = $auth;
-                $event = this->dispatchEvent('Auth.afterIdentify', [$result, $auth]);
+                this._authenticationProvider = $auth;
+                $event = this.dispatchEvent('Auth.afterIdentify', [$result, $auth]);
                 if ($event->getResult() != null) {
                     $result = $event->getResult();
                 }
-                this->storage()->write($result);
+                this.storage()->write($result);
 
                 return true;
             }
@@ -743,7 +743,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function redirectUrl($url = null): string
     {
-        $redirectUrl = this->getController()->getRequest()->getQuery(static::QUERY_STRING_REDIRECT);
+        $redirectUrl = this.getController()->getRequest()->getQuery(static::QUERY_STRING_REDIRECT);
         if ($redirectUrl && (substr($redirectUrl, 0, 1) != '/' || substr($redirectUrl, 0, 2) == '//')) {
             $redirectUrl = null;
         }
@@ -752,13 +752,13 @@ class AuthComponent extends Component implements EventDispatcherInterface
             $redirectUrl = $url;
         } elseif ($redirectUrl) {
             if (
-                this->_config['loginAction']
-                && Router::normalize($redirectUrl) == Router::normalize(this->_config['loginAction'])
+                this._config['loginAction']
+                && Router::normalize($redirectUrl) == Router::normalize(this._config['loginAction'])
             ) {
-                $redirectUrl = this->_config['loginRedirect'];
+                $redirectUrl = this._config['loginRedirect'];
             }
-        } elseif (this->_config['loginRedirect']) {
-            $redirectUrl = this->_config['loginRedirect'];
+        } elseif (this._config['loginRedirect']) {
+            $redirectUrl = this._config['loginRedirect'];
         } else {
             $redirectUrl = '/';
         }
@@ -780,19 +780,19 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function identify()
     {
-        this->_setDefaults();
+        this._setDefaults();
 
-        if (empty(this->_authenticateObjects)) {
-            this->constructAuthenticate();
+        if (empty(this._authenticateObjects)) {
+            this.constructAuthenticate();
         }
-        foreach (this->_authenticateObjects as $auth) {
+        foreach (this._authenticateObjects as $auth) {
             $result = $auth->authenticate(
-                this->getController()->getRequest(),
-                this->getController()->getResponse()
+                this.getController()->getRequest(),
+                this.getController()->getResponse()
             );
             if (!empty($result)) {
-                this->_authenticationProvider = $auth;
-                $event = this->dispatchEvent('Auth.afterIdentify', [$result, $auth]);
+                this._authenticationProvider = $auth;
+                $event = this.dispatchEvent('Auth.afterIdentify', [$result, $auth]);
                 if ($event->getResult() != null) {
                     return $event->getResult();
                 }
@@ -812,11 +812,11 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function constructAuthenticate(): ?array
     {
-        if (empty(this->_config['authenticate'])) {
+        if (empty(this._config['authenticate'])) {
             return null;
         }
-        this->_authenticateObjects = [];
-        $authenticate = Hash::normalize((array)this->_config['authenticate']);
+        this._authenticateObjects = [];
+        $authenticate = Hash::normalize((array)this._config['authenticate']);
         $global = [];
         if (isset($authenticate[AuthComponent::ALL])) {
             $global = $authenticate[AuthComponent::ALL];
@@ -837,11 +837,11 @@ class AuthComponent extends Component implements EventDispatcherInterface
                 throw new CakeException('Authentication objects must implement an authenticate() method.');
             }
             $config = array_merge($global, (array)$config);
-            this->_authenticateObjects[$alias] = new $className(this->_registry, $config);
-            this->getEventManager()->on(this->_authenticateObjects[$alias]);
+            this._authenticateObjects[$alias] = new $className(this._registry, $config);
+            this.getEventManager()->on(this._authenticateObjects[$alias]);
         }
 
-        return this->_authenticateObjects;
+        return this._authenticateObjects;
     }
 
     /**
@@ -854,16 +854,16 @@ class AuthComponent extends Component implements EventDispatcherInterface
     function storage(?StorageInterface $storage = null): ?StorageInterface
     {
         if ($storage != null) {
-            this->_storage = $storage;
+            this._storage = $storage;
 
             return null;
         }
 
-        if (this->_storage) {
-            return this->_storage;
+        if (this._storage) {
+            return this._storage;
         }
 
-        $config = this->_config['storage'];
+        $config = this._config['storage'];
         if (is_string($config)) {
             $class = $config;
             $config = [];
@@ -875,12 +875,12 @@ class AuthComponent extends Component implements EventDispatcherInterface
         if ($className == null) {
             throw new CakeException(sprintf('Auth storage adapter "%s" was not found.', $class));
         }
-        $request = this->getController()->getRequest();
-        $response = this->getController()->getResponse();
+        $request = this.getController()->getRequest();
+        $response = this.getController()->getResponse();
         /** @var \Cake\Auth\Storage\StorageInterface $storage */
         $storage = new $className($request, $response, $config);
 
-        return this->_storage = $storage;
+        return this._storage = $storage;
     }
 
     /**
@@ -892,7 +892,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
     function __get(string $name)
     {
         if ($name == 'sessionKey') {
-            return this->storage()->getConfig('key');
+            return this.storage()->getConfig('key');
         }
 
         return parent::__get($name);
@@ -908,21 +908,21 @@ class AuthComponent extends Component implements EventDispatcherInterface
     function __set(string $name, $value): void
     {
         if ($name == 'sessionKey') {
-            this->_storage = null;
+            this._storage = null;
 
             if ($value == false) {
-                this->setConfig('storage', 'Memory');
+                this.setConfig('storage', 'Memory');
 
                 return;
             }
 
-            this->setConfig('storage', 'Session');
-            this->storage()->setConfig('key', $value);
+            this.setConfig('storage', 'Session');
+            this.storage()->setConfig('key', $value);
 
             return;
         }
 
-        this->{$name} = $value;
+        this.{$name} = $value;
     }
 
     /**
@@ -933,11 +933,11 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function getAuthenticate(string $alias): ?BaseAuthenticate
     {
-        if (empty(this->_authenticateObjects)) {
-            this->constructAuthenticate();
+        if (empty(this._authenticateObjects)) {
+            this.constructAuthenticate();
         }
 
-        return this->_authenticateObjects[$alias] ?? null;
+        return this._authenticateObjects[$alias] ?? null;
     }
 
     /**
@@ -952,7 +952,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
             return;
         }
 
-        this->Flash->set($message, this->_config['flash']);
+        this.Flash->set($message, this._config['flash']);
     }
 
     /**
@@ -964,7 +964,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function authenticationProvider(): ?BaseAuthenticate
     {
-        return this->_authenticationProvider;
+        return this._authenticationProvider;
     }
 
     /**
@@ -976,7 +976,7 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     function authorizationProvider(): ?BaseAuthorize
     {
-        return this->_authorizationProvider;
+        return this._authorizationProvider;
     }
 
     /**
@@ -989,9 +989,9 @@ class AuthComponent extends Component implements EventDispatcherInterface
      */
     protected function _getUrlToRedirectBackTo(): string
     {
-        $urlToRedirectBackTo = this->getController()->getRequest()->getRequestTarget();
-        if (!this->getController()->getRequest()->is('get')) {
-            $urlToRedirectBackTo = this->getController()->referer();
+        $urlToRedirectBackTo = this.getController()->getRequest()->getRequestTarget();
+        if (!this.getController()->getRequest()->is('get')) {
+            $urlToRedirectBackTo = this.getController()->referer();
         }
 
         return $urlToRedirectBackTo;

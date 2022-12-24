@@ -49,7 +49,7 @@ class TreeIterator extends RecursiveIteratorIterator implements CollectionInterf
         int $flags = 0
     ) {
         parent::__construct($items, $mode, $flags);
-        this->_mode = $mode;
+        this._mode = $mode;
     }
 
     /**
@@ -100,11 +100,11 @@ class TreeIterator extends RecursiveIteratorIterator implements CollectionInterf
         }
 
         return new TreePrinter(
-            this->getInnerIterator(),
+            this.getInnerIterator(),
             $valuePath,
             $keyPath,
             $spacer,
-            this->_mode
+            this._mode
         );
     }
 }

@@ -77,29 +77,29 @@ class FormProtectionComponent extends Component
      */
     function startup(EventInterface $event): ?Response
     {
-        $request = this->getController()->getRequest();
+        $request = this.getController()->getRequest();
         $data = $request->getParsedBody();
         $hasData = ($data || $request->is(['put', 'post', 'delete', 'patch']));
 
         if (
-            !in_array($request->getParam('action'), this->_config['unlockedActions'], true)
+            !in_array($request->getParam('action'), this._config['unlockedActions'], true)
             && $hasData
-            && this->_config['validate']
+            && this._config['validate']
         ) {
             $session = $request->getSession();
             $session->start();
             $url = Router::url($request->getRequestTarget());
 
-            $formProtector = new FormProtector(this->_config);
+            $formProtector = new FormProtector(this._config);
             $isValid = $formProtector->validate($data, $url, $session->id());
 
             if (!$isValid) {
-                return this->validationFailure($formProtector);
+                return this.validationFailure($formProtector);
             }
         }
 
         $token = [
-            'unlockedFields' => this->_config['unlockedFields'],
+            'unlockedFields' => this._config['unlockedFields'],
         ];
         $request = $request->withAttribute('formTokenData', [
             'unlockedFields' => $token['unlockedFields'],
@@ -110,7 +110,7 @@ class FormProtectionComponent extends Component
             $request = $request->withParsedBody($data);
         }
 
-        this->getController()->setRequest($request);
+        this.getController()->setRequest($request);
 
         return null;
     }
@@ -145,8 +145,8 @@ class FormProtectionComponent extends Component
             $exception = new BadRequestException(static::DEFAULT_EXCEPTION_MESSAGE);
         }
 
-        if (this->_config['validationFailureCallback']) {
-            return this->executeCallback(this->_config['validationFailureCallback'], $exception);
+        if (this._config['validationFailureCallback']) {
+            return this.executeCallback(this._config['validationFailureCallback'], $exception);
         }
 
         throw $exception;
