@@ -11,7 +11,7 @@
  * @since         3.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\ORM\Exception;
+module uim.cake.ORM\Exception;
 
 use Cake\Core\Exception\CakeException;
 use Cake\Datasource\EntityInterface;

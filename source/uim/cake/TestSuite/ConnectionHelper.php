@@ -12,7 +12,7 @@
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\TestSuite;
+module uim.cake.TestSuite;
 
 use Cake\Database\Connection;
 use Cake\Database\DriverInterface;

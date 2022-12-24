@@ -13,7 +13,7 @@
  * @since         1.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Routing\Route;
+module uim.cake.Routing\Route;
 
 /**
  * Plugin short route, that copies the plugin param to the controller parameters

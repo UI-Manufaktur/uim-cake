@@ -13,7 +13,7 @@
  * @since         0.2.9
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Routing;
+module uim.cake.Routing;
 
 use Cake\Core\Configure;
 use Cake\Http\ServerRequest;

@@ -13,7 +13,7 @@
  * @since         3.6.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Routing\Route;
+module uim.cake.Routing\Route;
 
 use ArrayAccess;
 use RuntimeException;

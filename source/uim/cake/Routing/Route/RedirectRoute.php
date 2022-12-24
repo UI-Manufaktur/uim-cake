@@ -13,7 +13,7 @@
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Routing\Route;
+module uim.cake.Routing\Route;
 
 use Cake\Http\Exception\RedirectException;
 use Cake\Routing\Router;

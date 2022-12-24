@@ -12,7 +12,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\TestSuite;
+module uim.cake.TestSuite;
 
 use Cake\Console\TestSuite\ConsoleIntegrationTestTrait;
 

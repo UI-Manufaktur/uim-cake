@@ -13,7 +13,7 @@
  * @since         2.5.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Shell\Task;
+module uim.cake.Shell\Task;
 
 use Cake\Console\Shell;
 use Cake\Core\App;

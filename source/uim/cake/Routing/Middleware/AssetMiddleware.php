@@ -13,7 +13,7 @@
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Routing\Middleware;
+module uim.cake.Routing\Middleware;
 
 use Cake\Core\Plugin;
 use Cake\Http\Response;

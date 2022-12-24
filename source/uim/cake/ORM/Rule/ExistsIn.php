@@ -13,7 +13,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\ORM\Rule;
+module uim.cake.ORM\Rule;
 
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Association;

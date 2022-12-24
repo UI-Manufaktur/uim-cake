@@ -12,7 +12,7 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Shell\Helper;
+module uim.cake.Shell\Helper;
 
 use Cake\Console\Helper;
 use UnexpectedValueException;
