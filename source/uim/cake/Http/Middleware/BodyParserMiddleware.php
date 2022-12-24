@@ -13,7 +13,7 @@
  * @since         3.6.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http\Middleware;
+module uim.cake.Http\Middleware;
 
 use Cake\Http\Exception\BadRequestException;
 use Cake\Utility\Exception\XmlException;

@@ -15,7 +15,7 @@
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http\Session;
+module uim.cake.Http\Session;
 
 use Cake\Cache\Cache;
 use InvalidArgumentException;

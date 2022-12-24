@@ -13,7 +13,7 @@
  * @since         1.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\I18n;
+module uim.cake.I18n;
 
 use Cake\Cache\Cache;
 use Cake\I18n\Exception\I18nException;

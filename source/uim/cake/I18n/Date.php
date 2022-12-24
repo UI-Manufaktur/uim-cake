@@ -13,7 +13,7 @@
  * @since         3.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\I18n;
+module uim.cake.I18n;
 
 use Cake\Chronos\MutableDate;
 use IntlDateFormatter;

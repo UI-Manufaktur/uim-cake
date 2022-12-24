@@ -13,7 +13,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http\Middleware;
+module uim.cake.Http\Middleware;
 
 use ArrayAccess;
 use Cake\Http\Cookie\Cookie;

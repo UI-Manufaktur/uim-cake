@@ -13,7 +13,7 @@
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http\TestSuite;
+module uim.cake.Http\TestSuite;
 
 use Cake\Http\Client;
 use Cake\Http\Client\Response;

@@ -14,7 +14,7 @@
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Cake\Http\Middleware;
+module uim.cake.Http\Middleware;
 
 use Cake\Core\InstanceConfigTrait;
 use ParagonIE\CSPBuilder\CSPBuilder;
