@@ -54,7 +54,7 @@ class StubConsoleOutput : ConsoleOutput
 
         $newlines--;
         while ($newlines > 0) {
-            _out[] = '';
+            _out[] = "";
             $newlines--;
         }
 

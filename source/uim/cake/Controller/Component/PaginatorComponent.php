@@ -51,27 +51,27 @@ class PaginatorComponent : Component
     public this(ComponentRegistry $registry, array $config = [])
     {
         deprecationWarning(
-            'PaginatorComponent is deprecated, use a Cake\Datasource\Pagination\NumericPaginator instance directly.'
+            "PaginatorComponent is deprecated, use a Cake\Datasource\Pagination\NumericPaginator instance directly."
         );
 
         if (!empty(_defaultConfig)) {
-            throw new UnexpectedValueException('Default configuration must be set using a custom Paginator class.');
+            throw new UnexpectedValueException("Default configuration must be set using a custom Paginator class.");
         }
 
-        if (isset($config['paginator'])) {
-            $config['className'] = $config['paginator'];
+        if (isset($config["paginator"])) {
+            $config["className"] = $config["paginator"];
             deprecationWarning(
-                '`paginator` option is deprecated,'
-                . ' use `className` instead a specify a paginator name/FQCN.'
+                "`paginator` option is deprecated,"
+                . " use `className` instead a specify a paginator name/FQCN."
             );
         }
 
-        if (isset($config['className'])) {
-            if (!$config['className'] instanceof NumericPaginator) {
-                throw new InvalidArgumentException('Paginator must be an instance of ' . NumericPaginator::class);
+        if (isset($config["className"])) {
+            if (!$config["className"] instanceof NumericPaginator) {
+                throw new InvalidArgumentException("Paginator must be an instance of " . NumericPaginator::class);
             }
-            _paginator = $config['className'];
-            unset($config['className']);
+            _paginator = $config["className"];
+            unset($config["className"]);
         } else {
             _paginator = new NumericPaginator();
         }
@@ -97,13 +97,13 @@ class PaginatorComponent : Component
      * When calling `paginate()` you can use the $settings parameter to pass in pagination settings.
      * These settings are used to build the queries made and control other pagination settings.
      *
-     * If your settings contain a key with the current table's alias. The data inside that key will be used.
+     * If your settings contain a key with the current table"s alias. The data inside that key will be used.
      * Otherwise, the top level configuration will be used.
      *
      * ```
      *  $settings = [
-     *    'limit': 20,
-     *    'maxLimit': 100
+     *    "limit": 20,
+     *    "maxLimit": 100
      *  ];
      *  $results = $paginator.paginate($table, $settings);
      * ```
@@ -113,11 +113,11 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    'Articles': [
-     *      'limit': 20,
-     *      'maxLimit': 100
+     *    "Articles": [
+     *      "limit": 20,
+     *      "maxLimit": 100
      *    ],
-     *    'Comments': [ ... ]
+     *    "Comments": [ ... ]
      *  ];
      *  $results = $paginator.paginate($table, $settings);
      * ```
@@ -133,9 +133,9 @@ class PaginatorComponent : Component
      *
      * ```
      * $settings = [
-     *   'Articles': [
-     *     'finder': 'custom',
-     *     'sortableFields': ['title', 'author_id', 'comment_count'],
+     *   "Articles": [
+     *     "finder": "custom",
+     *     "sortableFields": ["title", "author_id", "comment_count"],
      *   ]
      * ];
      * ```
@@ -148,20 +148,20 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    'Articles': [
-     *      'finder': 'popular'
+     *    "Articles": [
+     *      "finder": "popular"
      *    ]
      *  ];
      *  $results = $paginator.paginate($table, $settings);
      * ```
      *
-     * Would paginate using the `find('popular')` method.
+     * Would paginate using the `find("popular")` method.
      *
      * You can also pass an already created instance of a query to this method:
      *
      * ```
-     * $query = this.Articles.find('popular').matching('Tags', function ($q) {
-     *   return $q.where(['name': 'CakePHP'])
+     * $query = this.Articles.find("popular").matching("Tags", function ($q) {
+     *   return $q.where(["name": "CakePHP"])
      * });
      * $results = $paginator.paginate($query);
      * ```
@@ -171,8 +171,8 @@ class PaginatorComponent : Component
      * By using request parameter scopes you can paginate multiple queries in the same controller action:
      *
      * ```
-     * $articles = $paginator.paginate($articlesQuery, ['scope': 'articles']);
-     * $tags = $paginator.paginate($tagsQuery, ['scope': 'tags']);
+     * $articles = $paginator.paginate($articlesQuery, ["scope": "articles"]);
+     * $tags = $paginator.paginate($tagsQuery, ["scope": "tags"]);
      * ```
      *
      * Each of the above queries will use different query string parameter sets
@@ -220,7 +220,7 @@ class PaginatorComponent : Component
      * config value `allowedParameters` to modify which options/values can be set using request parameters.
      *
      * @param string $alias Model alias being paginated, if the general settings has a key with this value
-     *   that key's settings will be used for pagination instead of the general ones.
+     *   that key"s settings will be used for pagination instead of the general ones.
      * @param array<string, mixed> $settings The settings to merge with the request data.
      * @return array<string, mixed> Array of merged options.
      */
@@ -266,9 +266,9 @@ class PaginatorComponent : Component
     {
         $controller = this.getController();
         $request = $controller.getRequest();
-        $paging = _paginator.getPagingParams() + (array)$request.getAttribute('paging', []);
+        $paging = _paginator.getPagingParams() + (array)$request.getAttribute("paging", []);
 
-        $controller.setRequest($request.withAttribute('paging', $paging));
+        $controller.setRequest($request.withAttribute("paging", $paging));
     }
 
     /**

@@ -39,7 +39,7 @@ class ContentsRegExp : ContentsBase
      */
     function toString(): string
     {
-        return sprintf('PCRE pattern found in %s', this.output);
+        return sprintf("PCRE pattern found in %s", this.output);
     }
 
     /**
@@ -48,6 +48,6 @@ class ContentsRegExp : ContentsBase
      */
     function failureDescription($other): string
     {
-        return '`' . $other . '` ' . this.toString();
+        return "`" . $other . "` " . this.toString();
     }
 }

@@ -62,7 +62,7 @@ class SchemaCache
 
         foreach ($tables as $table) {
             /** @psalm-suppress PossiblyNullArgument */
-            _schema.describe($table, ['forceRefresh': true]);
+            _schema.describe($table, ["forceRefresh": true]);
         }
 
         return $tables;
@@ -103,7 +103,7 @@ class SchemaCache
     function getSchema(Connection $connection): CachedCollection
     {
         $config = $connection.config();
-        if (empty($config['cacheMetadata'])) {
+        if (empty($config["cacheMetadata"])) {
             $connection.cacheMetadata(true);
         }
 

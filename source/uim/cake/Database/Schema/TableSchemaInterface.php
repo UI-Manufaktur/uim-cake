@@ -27,147 +27,147 @@ interface TableSchemaInterface : SchemaInterface
      *
      * @var string
      */
-    public const TYPE_BINARY = 'binary';
+    public const TYPE_BINARY = "binary";
 
     /**
      * Binary UUID column type
      *
      * @var string
      */
-    public const TYPE_BINARY_UUID = 'binaryuuid';
+    public const TYPE_BINARY_UUID = "binaryuuid";
 
     /**
      * Date column type
      *
      * @var string
      */
-    public const TYPE_DATE = 'date';
+    public const TYPE_DATE = "date";
 
     /**
      * Datetime column type
      *
      * @var string
      */
-    public const TYPE_DATETIME = 'datetime';
+    public const TYPE_DATETIME = "datetime";
 
     /**
      * Datetime with fractional seconds column type
      *
      * @var string
      */
-    public const TYPE_DATETIME_FRACTIONAL = 'datetimefractional';
+    public const TYPE_DATETIME_FRACTIONAL = "datetimefractional";
 
     /**
      * Time column type
      *
      * @var string
      */
-    public const TYPE_TIME = 'time';
+    public const TYPE_TIME = "time";
 
     /**
      * Timestamp column type
      *
      * @var string
      */
-    public const TYPE_TIMESTAMP = 'timestamp';
+    public const TYPE_TIMESTAMP = "timestamp";
 
     /**
      * Timestamp with fractional seconds column type
      *
      * @var string
      */
-    public const TYPE_TIMESTAMP_FRACTIONAL = 'timestampfractional';
+    public const TYPE_TIMESTAMP_FRACTIONAL = "timestampfractional";
 
     /**
      * Timestamp with time zone column type
      *
      * @var string
      */
-    public const TYPE_TIMESTAMP_TIMEZONE = 'timestamptimezone';
+    public const TYPE_TIMESTAMP_TIMEZONE = "timestamptimezone";
 
     /**
      * JSON column type
      *
      * @var string
      */
-    public const TYPE_JSON = 'json';
+    public const TYPE_JSON = "json";
 
     /**
      * String column type
      *
      * @var string
      */
-    public const TYPE_STRING = 'string';
+    public const TYPE_STRING = "string";
 
     /**
      * Char column type
      *
      * @var string
      */
-    public const TYPE_CHAR = 'char';
+    public const TYPE_CHAR = "char";
 
     /**
      * Text column type
      *
      * @var string
      */
-    public const TYPE_TEXT = 'text';
+    public const TYPE_TEXT = "text";
 
     /**
      * Tiny Integer column type
      *
      * @var string
      */
-    public const TYPE_TINYINTEGER = 'tinyinteger';
+    public const TYPE_TINYINTEGER = "tinyinteger";
 
     /**
      * Small Integer column type
      *
      * @var string
      */
-    public const TYPE_SMALLINTEGER = 'smallinteger';
+    public const TYPE_SMALLINTEGER = "smallinteger";
 
     /**
      * Integer column type
      *
      * @var string
      */
-    public const TYPE_INTEGER = 'integer';
+    public const TYPE_INTEGER = "integer";
 
     /**
      * Big Integer column type
      *
      * @var string
      */
-    public const TYPE_BIGINTEGER = 'biginteger';
+    public const TYPE_BIGINTEGER = "biginteger";
 
     /**
      * Float column type
      *
      * @var string
      */
-    public const TYPE_FLOAT = 'float';
+    public const TYPE_FLOAT = "float";
 
     /**
      * Decimal column type
      *
      * @var string
      */
-    public const TYPE_DECIMAL = 'decimal';
+    public const TYPE_DECIMAL = "decimal";
 
     /**
      * Boolean column type
      *
      * @var string
      */
-    public const TYPE_BOOLEAN = 'boolean';
+    public const TYPE_BOOLEAN = "boolean";
 
     /**
      * UUID column type
      *
      * @var string
      */
-    public const TYPE_UUID = 'uuid';
+    public const TYPE_UUID = "uuid";
 
     /**
      * Check whether a table has an autoIncrement column defined.
@@ -244,10 +244,10 @@ interface TableSchemaInterface : SchemaInterface
      * - `type` The type of constraint being added.
      * - `columns` The columns in the index.
      * - `references` The table, column a foreign key references.
-     * - `update` The behavior on update. Options are 'restrict', 'setNull', 'cascade', 'noAction'.
-     * - `delete` The behavior on delete. Options are 'restrict', 'setNull', 'cascade', 'noAction'.
+     * - `update` The behavior on update. Options are "restrict", "setNull", "cascade", "noAction".
+     * - `delete` The behavior on delete. Options are "restrict", "setNull", "cascade", "noAction".
      *
-     * The default for 'update' & 'delete' is 'cascade'.
+     * The default for "update" & "delete" is "cascade".
      *
      * @param string $name The name of the constraint.
      * @param array<string, mixed>|string $attrs The attributes for the constraint.

@@ -26,7 +26,7 @@ class MissingOptionException : ConsoleException
      *
      * @var string
      */
-    protected $requested = '';
+    protected $requested = "";
 
     /**
      * The valid suggestions.
@@ -46,7 +46,7 @@ class MissingOptionException : ConsoleException
      */
     public this(
         string $message,
-        string $requested = '',
+        string $requested = "",
         array $suggestions = [],
         ?int $code = null,
         ?Throwable $previous = null
@@ -71,7 +71,7 @@ class MissingOptionException : ConsoleException
         $good = [];
         foreach (this.suggestions as $option) {
             if (levenshtein($option, this.requested) < 8) {
-                $good[] = '- ' . $option;
+                $good[] = "- " . $option;
             }
         }
 

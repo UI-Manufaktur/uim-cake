@@ -49,7 +49,7 @@ use UnexpectedValueException;
  * Provides basic functionality, such as rendering views inside layouts,
  * automatic model availability, redirection, callbacks, and more.
  *
- * Controllers should provide a number of 'action' methods. These are public
+ * Controllers should provide a number of "action" methods. These are public
  * methods on a controller that are not inherited from `Controller`.
  * Each action serves as an endpoint for performing a specific action on a
  * resource or collection of resources. For example adding or editing a new
@@ -192,7 +192,7 @@ class Controller : IEventListener, EventDispatcherInterface
         if ($name != null) {
             this.name = $name;
         } elseif (this.name == null && $request) {
-            this.name = $request.getParam('controller');
+            this.name = $request.getParam("controller");
         }
 
         if (this.name == null) {
@@ -207,15 +207,15 @@ class Controller : IEventListener, EventDispatcherInterface
             this.setEventManager($eventManager);
         }
 
-        this.modelFactory('Table', [this.getTableLocator(), 'get']);
+        this.modelFactory("Table", [this.getTableLocator(), "get"]);
 
         if (this.defaultTable != null) {
             this.modelClass = this.defaultTable;
         }
 
         if (this.modelClass == null) {
-            $plugin = this.request.getParam('plugin');
-            $modelClass = ($plugin ? $plugin . '.' : '') . this.name;
+            $plugin = this.request.getParam("plugin");
+            $modelClass = ($plugin ? $plugin . "." : "") . this.name;
             _setModelClass($modelClass);
 
             this.defaultTable = $modelClass;
@@ -229,15 +229,15 @@ class Controller : IEventListener, EventDispatcherInterface
 
         if (isset(this.components)) {
             triggerWarning(
-                'Support for loading components using $components property is removed. ' .
-                'Use this.loadComponent() instead in initialize().'
+                "Support for loading components using $components property is removed. " .
+                "Use this.loadComponent() instead in initialize()."
             );
         }
 
         if (isset(this.helpers)) {
             triggerWarning(
-                'Support for loading helpers using $helpers property is removed. ' .
-                'Use this.viewBuilder().setHelpers() instead.'
+                "Support for loading helpers using $helpers property is removed. " .
+                "Use this.viewBuilder().setHelpers() instead."
             );
         }
 
@@ -280,13 +280,13 @@ class Controller : IEventListener, EventDispatcherInterface
     }
 
     /**
-     * Add a component to the controller's registry.
+     * Add a component to the controller"s registry.
      *
      * This method will also set the component to a property.
      * For example:
      *
      * ```
-     * this.loadComponent('Authentication.Authentication');
+     * this.loadComponent("Authentication.Authentication");
      * ```
      *
      * Will result in a `Authentication` property being set.
@@ -312,10 +312,10 @@ class Controller : IEventListener, EventDispatcherInterface
     function __get(string $name)
     {
         if (!empty(this.modelClass)) {
-            if (strpos(this.modelClass, '\\') == false) {
+            if (strpos(this.modelClass, "\\") == false) {
                 [, $class] = pluginSplit(this.modelClass, true);
             } else {
-                $class = App::shortName(this.modelClass, 'Model/Table', 'Table');
+                $class = App::shortName(this.modelClass, "Model/Table", "Table");
             }
 
             if ($class == $name) {
@@ -324,14 +324,14 @@ class Controller : IEventListener, EventDispatcherInterface
         }
 
         $trace = debug_backtrace();
-        $parts = explode('\\', static::class);
+        $parts = explode("\\", static::class);
         trigger_error(
             sprintf(
-                'Undefined property: %s::$%s in %s on line %s',
+                "Undefined property: %s::$%s in %s on line %s",
                 array_pop($parts),
                 $name,
-                $trace[0]['file'],
-                $trace[0]['line']
+                $trace[0]["file"],
+                $trace[0]["line"]
             ),
             E_USER_NOTICE
         );
@@ -348,19 +348,19 @@ class Controller : IEventListener, EventDispatcherInterface
      */
     function __set(string $name, $value): void
     {
-        if ($name == 'components') {
+        if ($name == "components") {
             triggerWarning(
-                'Support for loading components using $components property is removed. ' .
-                'Use this.loadComponent() instead in initialize().'
+                "Support for loading components using $components property is removed. " .
+                "Use this.loadComponent() instead in initialize()."
             );
 
             return;
         }
 
-        if ($name == 'helpers') {
+        if ($name == "helpers") {
             triggerWarning(
-                'Support for loading helpers using $helpers property is removed. ' .
-                'Use this.viewBuilder().setHelpers() instead.'
+                "Support for loading helpers using $helpers property is removed. " .
+                "Use this.viewBuilder().setHelpers() instead."
             );
 
             return;
@@ -480,7 +480,7 @@ class Controller : IEventListener, EventDispatcherInterface
     function setRequest(ServerRequest $request)
     {
         this.request = $request;
-        this.plugin = $request.getParam('plugin') ?: null;
+        this.plugin = $request.getParam("plugin") ?: null;
 
         return this;
     }
@@ -519,14 +519,14 @@ class Controller : IEventListener, EventDispatcherInterface
     function getAction(): Closure
     {
         $request = this.request;
-        $action = $request.getParam('action');
+        $action = $request.getParam("action");
 
         if (!this.isAction($action)) {
             throw new MissingActionException([
-                'controller': this.name . 'Controller',
-                'action': $request.getParam('action'),
-                'prefix': $request.getParam('prefix') ?: '',
-                'plugin': $request.getParam('plugin'),
+                "controller": this.name . "Controller",
+                "action": $request.getParam("action"),
+                "prefix": $request.getParam("prefix") ?: "",
+                "plugin": $request.getParam("plugin"),
             ]);
         }
 
@@ -546,8 +546,8 @@ class Controller : IEventListener, EventDispatcherInterface
         $result = $action(...$args);
         if ($result != null && !$result instanceof IResponse) {
             throw new UnexpectedValueException(sprintf(
-                'Controller actions can only return IResponse instance or null. '
-                . 'Got %s instead.',
+                "Controller actions can only return IResponse instance or null. "
+                . "Got %s instead.",
                 getTypeName($result)
             ));
         }
@@ -573,8 +573,8 @@ class Controller : IEventListener, EventDispatcherInterface
     function middleware($middleware, array $options = [])
     {
         this.middlewares[] = [
-            'middleware': $middleware,
-            'options': $options,
+            "middleware": $middleware,
+            "options": $options,
         ];
     }
 
@@ -587,26 +587,26 @@ class Controller : IEventListener, EventDispatcherInterface
     function getMiddleware(): array
     {
         $matching = [];
-        $action = this.request.getParam('action');
+        $action = this.request.getParam("action");
 
         foreach (this.middlewares as $middleware) {
-            $options = $middleware['options'];
-            if (!empty($options['only'])) {
-                if (in_array($action, (array)$options['only'], true)) {
-                    $matching[] = $middleware['middleware'];
+            $options = $middleware["options"];
+            if (!empty($options["only"])) {
+                if (in_array($action, (array)$options["only"], true)) {
+                    $matching[] = $middleware["middleware"];
                 }
 
                 continue;
             }
 
             if (
-                !empty($options['except']) &&
-                in_array($action, (array)$options['except'], true)
+                !empty($options["except"]) &&
+                in_array($action, (array)$options["except"], true)
             ) {
                 continue;
             }
 
-            $matching[] = $middleware['middleware'];
+            $matching[] = $middleware["middleware"];
         }
 
         return $matching;
@@ -621,10 +621,10 @@ class Controller : IEventListener, EventDispatcherInterface
     function implementedEvents(): array
     {
         return [
-            'Controller.initialize': 'beforeFilter',
-            'Controller.beforeRender': 'beforeRender',
-            'Controller.beforeRedirect': 'beforeRedirect',
-            'Controller.shutdown': 'afterFilter',
+            "Controller.initialize": "beforeFilter",
+            "Controller.beforeRender": "beforeRender",
+            "Controller.beforeRedirect": "beforeRedirect",
+            "Controller.shutdown": "afterFilter",
         ];
     }
 
@@ -640,11 +640,11 @@ class Controller : IEventListener, EventDispatcherInterface
      */
     function startupProcess(): ?IResponse
     {
-        $event = this.dispatchEvent('Controller.initialize');
+        $event = this.dispatchEvent("Controller.initialize");
         if ($event.getResult() instanceof IResponse) {
             return $event.getResult();
         }
-        $event = this.dispatchEvent('Controller.startup');
+        $event = this.dispatchEvent("Controller.startup");
         if ($event.getResult() instanceof IResponse) {
             return $event.getResult();
         }
@@ -657,13 +657,13 @@ class Controller : IEventListener, EventDispatcherInterface
      * Fire the Components and Controller callbacks in the correct order.
      *
      * - triggers the component `shutdown` callback.
-     * - calls the Controller's `afterFilter` method.
+     * - calls the Controller"s `afterFilter` method.
      *
      * @return \Psr\Http\Message\IResponse|null
      */
     function shutdownProcess(): ?IResponse
     {
-        $event = this.dispatchEvent('Controller.shutdown');
+        $event = this.dispatchEvent("Controller.shutdown");
         if ($event.getResult() instanceof IResponse) {
             return $event.getResult();
         }
@@ -687,7 +687,7 @@ class Controller : IEventListener, EventDispatcherInterface
             this.response = this.response.withStatus($status);
         }
 
-        $event = this.dispatchEvent('Controller.beforeRedirect', [$url, this.response]);
+        $event = this.dispatchEvent("Controller.beforeRedirect", [$url, this.response]);
         if ($event.getResult() instanceof Response) {
             return this.response = $event.getResult();
         }
@@ -696,7 +696,7 @@ class Controller : IEventListener, EventDispatcherInterface
         }
         $response = this.response;
 
-        if (!$response.getHeaderLine('Location')) {
+        if (!$response.getHeaderLine("Location")) {
             $response = $response.withLocation(Router::url($url, true));
         }
 
@@ -709,11 +709,11 @@ class Controller : IEventListener, EventDispatcherInterface
      * Examples:
      *
      * ```
-     * setAction('another_action');
-     * setAction('action_with_parameters', $parameter1);
+     * setAction("another_action");
+     * setAction("action_with_parameters", $parameter1);
      * ```
      *
-     * @param string $action The new action to be 'redirected' to.
+     * @param string $action The new action to be "redirected" to.
      *   Any other parameters passed to this method will be passed as parameters to the new action.
      * @param mixed ...$args Arguments passed to the action
      * @return mixed Returns the return value of the called action
@@ -722,10 +722,10 @@ class Controller : IEventListener, EventDispatcherInterface
     function setAction(string $action, ...$args)
     {
         deprecationWarning(
-            'Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, ' .
-            'or call the other action as a method.'
+            "Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, " .
+            "or call the other action as a method."
         );
-        this.setRequest(this.request.withParam('action', $action));
+        this.setRequest(this.request.withParam("action", $action));
 
         return this.$action(...$args);
     }
@@ -755,7 +755,7 @@ class Controller : IEventListener, EventDispatcherInterface
             $builder.setLayout($layout);
         }
 
-        $event = this.dispatchEvent('Controller.beforeRender');
+        $event = this.dispatchEvent("Controller.beforeRender");
         if ($event.getResult() instanceof Response) {
             return $event.getResult();
         }
@@ -764,7 +764,7 @@ class Controller : IEventListener, EventDispatcherInterface
         }
 
         if ($builder.getTemplate() == null) {
-            $builder.setTemplate(this.request.getParam('action'));
+            $builder.setTemplate(this.request.getParam("action"));
         }
         $viewClass = this.chooseViewClass();
         $view = this.createView($viewClass);
@@ -817,7 +817,7 @@ class Controller : IEventListener, EventDispatcherInterface
         $request = this.getRequest();
 
         // Prefer the _ext route parameter if it is defined.
-        $ext = $request.getParam('_ext');
+        $ext = $request.getParam("_ext");
         if ($ext) {
             $extTypes = (array)(this.response.getMimeType($ext) ?: []);
             foreach ($extTypes as $extType) {
@@ -848,10 +848,10 @@ class Controller : IEventListener, EventDispatcherInterface
     protected function _templatePath(): string
     {
         $templatePath = this.name;
-        if (this.request.getParam('prefix')) {
+        if (this.request.getParam("prefix")) {
             $prefixes = array_map(
-                'Cake\Utility\Inflector::camelize',
-                explode('/', this.request.getParam('prefix'))
+                "Cake\Utility\Inflector::camelize",
+                explode("/", this.request.getParam("prefix"))
             );
             $templatePath = implode(DIRECTORY_SEPARATOR, $prefixes) . DIRECTORY_SEPARATOR . $templatePath;
         }
@@ -867,16 +867,16 @@ class Controller : IEventListener, EventDispatcherInterface
      *   Careful with trusting external sources.
      * @return string Referring URL
      */
-    function referer($default = '/', bool $local = true): string
+    function referer($default = "/", bool $local = true): string
     {
         $referer = this.request.referer($local);
         if ($referer == null) {
             $url = Router::url($default, !$local);
-            $base = this.request.getAttribute('base');
+            $base = this.request.getAttribute("base");
             if ($local && $base && strpos($url, $base) == 0) {
                 $url = substr($url, strlen($base));
-                if ($url[0] != '/') {
-                    $url = '/' . $url;
+                if ($url[0] != "/") {
+                    $url = "/" . $url;
                 }
 
                 return $url;
@@ -897,7 +897,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * This method will also make the PaginatorHelper available in the view.
      *
      * @param \Cake\ORM\Table|\Cake\ORM\Query|string|null $object Table to paginate
-     * (e.g: Table instance, 'TableName' or a Query object)
+     * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return \Cake\ORM\ResultSet|\Cake\Datasource\IResultSet Query results
      * @link https://book.cakephp.org/4/en/controllers.html#paginating-a-model
@@ -921,7 +921,7 @@ class Controller : IEventListener, EventDispatcherInterface
         }
 
         if (empty($table)) {
-            throw new RuntimeException('Unable to locate an object compatible with paginate.');
+            throw new RuntimeException("Unable to locate an object compatible with paginate.");
         }
 
         $settings += this.paginate;
@@ -930,25 +930,25 @@ class Controller : IEventListener, EventDispatcherInterface
             return this.Paginator.paginate($table, $settings);
         }
 
-        if (isset($settings['paginator'])) {
-            $settings['className'] = $settings['paginator'];
+        if (isset($settings["paginator"])) {
+            $settings["className"] = $settings["paginator"];
             deprecationWarning(
-                '`paginator` option is deprecated,'
-                . ' use `className` instead a specify a paginator name/FQCN.'
+                "`paginator` option is deprecated,"
+                . " use `className` instead a specify a paginator name/FQCN."
             );
         }
 
-        $paginator = $settings['className'] ?? NumericPaginator::class;
-        unset($settings['className']);
+        $paginator = $settings["className"] ?? NumericPaginator::class;
+        unset($settings["className"]);
         if (is_string($paginator)) {
-            $className = App::className($paginator, 'Datasource/Paging', 'Paginator');
+            $className = App::className($paginator, "Datasource/Paging", "Paginator");
             if ($className == null) {
-                throw new InvalidArgumentException('Invalid paginator: ' . $paginator);
+                throw new InvalidArgumentException("Invalid paginator: " . $paginator);
             }
             $paginator = new $className();
         }
         if (!$paginator instanceof PaginatorInterface) {
-            throw new InvalidArgumentException('Paginator must be an instance of ' . PaginatorInterface::class);
+            throw new InvalidArgumentException("Paginator must be an instance of " . PaginatorInterface::class);
         }
 
         $results = null;
@@ -961,8 +961,8 @@ class Controller : IEventListener, EventDispatcherInterface
         } catch (PageOutOfBoundsException $e) {
             // Exception thrown below
         } finally {
-            $paging = $paginator.getPagingParams() + (array)this.request.getAttribute('paging', []);
-            this.request = this.request.withAttribute('paging', $paging);
+            $paging = $paginator.getPagingParams() + (array)this.request.getAttribute("paging", []);
+            this.request = this.request.withAttribute("paging", $paging);
         }
 
         if (isset($e)) {
@@ -1024,13 +1024,13 @@ class Controller : IEventListener, EventDispatcherInterface
     }
 
     /**
-     * The beforeRedirect method is invoked when the controller's redirect method is called but before any
+     * The beforeRedirect method is invoked when the controller"s redirect method is called but before any
      * further action.
      *
      * If the event is stopped the controller will not continue on to redirect the request.
-     * The $url and $status variables have same meaning as for the controller's method.
+     * The $url and $status variables have same meaning as for the controller"s method.
      * You can set the event result to response instance or modify the redirect location
-     * using controller's response instance.
+     * using controller"s response instance.
      *
      * @param \Cake\Event\IEvent $event An Event instance
      * @param array|string $url A string or array-based URL pointing to another location within the app,

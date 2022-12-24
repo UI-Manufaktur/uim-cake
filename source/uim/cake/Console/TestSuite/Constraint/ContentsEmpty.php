@@ -29,7 +29,7 @@ class ContentsEmpty : ContentsBase
      */
     function matches($other): bool
     {
-        return this.contents == '';
+        return this.contents == "";
     }
 
     /**
@@ -39,7 +39,7 @@ class ContentsEmpty : ContentsBase
      */
     function toString(): string
     {
-        return sprintf('%s is empty', this.output);
+        return sprintf("%s is empty", this.output);
     }
 
     /**

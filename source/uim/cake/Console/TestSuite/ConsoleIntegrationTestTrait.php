@@ -95,7 +95,7 @@ trait ConsoleIntegrationTestTrait
         if (_in == null) {
             _in = new StubConsoleInput($input);
         } elseif ($input) {
-            throw new RuntimeException('You can use `$input` only if `$_in` property is null and will be reset.');
+            throw new RuntimeException("You can use `$input` only if `$_in` property is null and will be reset.");
         }
 
         $args = this.commandStringToArgs("cake $command");
@@ -148,7 +148,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertExitCode(int $expected, string $message = ''): void
+    function assertExitCode(int $expected, string $message = ""): void
     {
         this.assertThat($expected, new ExitCode(_exitCode), $message);
     }
@@ -159,7 +159,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertExitSuccess($message = '')
+    function assertExitSuccess($message = "")
     {
         this.assertThat(Command::CODE_SUCCESS, new ExitCode(_exitCode), $message);
     }
@@ -170,7 +170,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertExitError($message = '')
+    function assertExitError($message = "")
     {
         this.assertThat(Command::CODE_ERROR, new ExitCode(_exitCode), $message);
     }
@@ -181,9 +181,9 @@ trait ConsoleIntegrationTestTrait
      * @param string $message The message to output when the assertion fails.
      * @return void
      */
-    function assertOutputEmpty(string $message = ''): void
+    function assertOutputEmpty(string $message = ""): void
     {
-        this.assertThat(null, new ContentsEmpty(_out.messages(), 'output'), $message);
+        this.assertThat(null, new ContentsEmpty(_out.messages(), "output"), $message);
     }
 
     /**
@@ -193,9 +193,9 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertOutputContains(string $expected, string $message = ''): void
+    function assertOutputContains(string $expected, string $message = ""): void
     {
-        this.assertThat($expected, new ContentsContain(_out.messages(), 'output'), $message);
+        this.assertThat($expected, new ContentsContain(_out.messages(), "output"), $message);
     }
 
     /**
@@ -205,9 +205,9 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertOutputNotContains(string $expected, string $message = ''): void
+    function assertOutputNotContains(string $expected, string $message = ""): void
     {
-        this.assertThat($expected, new ContentsNotContain(_out.messages(), 'output'), $message);
+        this.assertThat($expected, new ContentsNotContain(_out.messages(), "output"), $message);
     }
 
     /**
@@ -217,9 +217,9 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertOutputRegExp(string $pattern, string $message = ''): void
+    function assertOutputRegExp(string $pattern, string $message = ""): void
     {
-        this.assertThat($pattern, new ContentsRegExp(_out.messages(), 'output'), $message);
+        this.assertThat($pattern, new ContentsRegExp(_out.messages(), "output"), $message);
     }
 
     /**
@@ -229,9 +229,9 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message.
      * @return void
      */
-    protected function assertOutputContainsRow(array $row, string $message = ''): void
+    protected function assertOutputContainsRow(array $row, string $message = ""): void
     {
-        this.assertThat($row, new ContentsContainRow(_out.messages(), 'output'), $message);
+        this.assertThat($row, new ContentsContainRow(_out.messages(), "output"), $message);
     }
 
     /**
@@ -241,9 +241,9 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertErrorContains(string $expected, string $message = ''): void
+    function assertErrorContains(string $expected, string $message = ""): void
     {
-        this.assertThat($expected, new ContentsContain(_err.messages(), 'error output'), $message);
+        this.assertThat($expected, new ContentsContain(_err.messages(), "error output"), $message);
     }
 
     /**
@@ -253,9 +253,9 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertErrorRegExp(string $pattern, string $message = ''): void
+    function assertErrorRegExp(string $pattern, string $message = ""): void
     {
-        this.assertThat($pattern, new ContentsRegExp(_err.messages(), 'error output'), $message);
+        this.assertThat($pattern, new ContentsRegExp(_err.messages(), "error output"), $message);
     }
 
     /**
@@ -264,9 +264,9 @@ trait ConsoleIntegrationTestTrait
      * @param string $message The message to output when the assertion fails.
      * @return void
      */
-    function assertErrorEmpty(string $message = ''): void
+    function assertErrorEmpty(string $message = ""): void
     {
-        this.assertThat(null, new ContentsEmpty(_err.messages(), 'error output'), $message);
+        this.assertThat(null, new ContentsEmpty(_err.messages(), "error output"), $message);
     }
 
     /**
@@ -296,41 +296,41 @@ trait ConsoleIntegrationTestTrait
     {
         $charCount = strlen($command);
         $argv = [];
-        $arg = '';
+        $arg = "";
         $inDQuote = false;
         $inSQuote = false;
         for ($i = 0; $i < $charCount; $i++) {
             $char = substr($command, $i, 1);
 
             // end of argument
-            if ($char == ' ' && !$inDQuote && !$inSQuote) {
-                if ($arg != '') {
+            if ($char == " " && !$inDQuote && !$inSQuote) {
+                if ($arg != "") {
                     $argv[] = $arg;
                 }
-                $arg = '';
+                $arg = "";
                 continue;
             }
 
             // exiting single quote
-            if ($inSQuote && $char == "'") {
+            if ($inSQuote && $char == """) {
                 $inSQuote = false;
                 continue;
             }
 
             // exiting double quote
-            if ($inDQuote && $char == '"') {
+            if ($inDQuote && $char == """) {
                 $inDQuote = false;
                 continue;
             }
 
             // entering double quote
-            if ($char == '"' && !$inSQuote) {
+            if ($char == """ && !$inSQuote) {
                 $inDQuote = true;
                 continue;
             }
 
             // entering single quote
-            if ($char == "'" && !$inDQuote) {
+            if ($char == """ && !$inDQuote) {
                 $inSQuote = true;
                 continue;
             }

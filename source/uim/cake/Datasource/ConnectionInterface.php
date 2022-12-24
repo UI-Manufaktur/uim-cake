@@ -90,7 +90,7 @@ interface ConnectionInterface : LoggerAwareInterface
      *
      * ```
      * $connection.transactional(function ($connection) {
-     *   $connection.newQuery().delete('users').execute();
+     *   $connection.newQuery().delete("users").execute();
      * });
      * ```
      *
@@ -110,7 +110,7 @@ interface ConnectionInterface : LoggerAwareInterface
      *
      * ```
      * $connection.disableConstraints(function ($connection) {
-     *   $connection.newQuery().delete('users').execute();
+     *   $connection.newQuery().delete("users").execute();
      * });
      * ```
      *

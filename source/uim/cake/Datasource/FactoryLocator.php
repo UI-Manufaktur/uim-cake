@@ -48,8 +48,8 @@ class FactoryLocator
 
         if (is_callable($factory)) {
             deprecationWarning(
-                'Using a callable as a locator has been deprecated.'
-                . ' Use an instance of Cake\Datasource\Locator\ILocatorinstead.'
+                "Using a callable as a locator has been deprecated."
+                . " Use an instance of Cake\Datasource\Locator\ILocatorinstead."
             );
 
             static::$_modelFactories[$type] = $factory;
@@ -58,8 +58,8 @@ class FactoryLocator
         }
 
         throw new InvalidArgumentException(sprintf(
-            '`$factory` must be an instance of Cake\Datasource\Locator\ILocatoror a callable.'
-            . ' Got type `%s` instead.',
+            "`$factory` must be an instance of Cake\Datasource\Locator\ILocatoror a callable."
+            . " Got type `%s` instead.",
             getTypeName($factory)
         ));
     }
@@ -84,13 +84,13 @@ class FactoryLocator
      */
     public static function get(string $type)
     {
-        if (!isset(static::$_modelFactories['Table'])) {
-            static::$_modelFactories['Table'] = new TableLocator();
+        if (!isset(static::$_modelFactories["Table"])) {
+            static::$_modelFactories["Table"] = new TableLocator();
         }
 
         if (!isset(static::$_modelFactories[$type])) {
             throw new InvalidArgumentException(sprintf(
-                'Unknown repository type "%s". Make sure you register a type before trying to use it.',
+                "Unknown repository type "%s". Make sure you register a type before trying to use it.",
                 $type
             ));
         }

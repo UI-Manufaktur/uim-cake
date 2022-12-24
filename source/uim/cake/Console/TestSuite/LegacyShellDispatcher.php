@@ -55,7 +55,7 @@ class LegacyShellDispatcher : ShellDispatcher
         /** @var \Cake\Console\Shell $instance */
         $instance = new $className(_io);
         if ($plugin) {
-            $instance.plugin = trim($plugin, '.');
+            $instance.plugin = trim($plugin, ".");
         }
 
         return $instance;

@@ -55,7 +55,7 @@ class TaskRegistry : ObjectRegistry
      */
     protected function _resolveClassName(string $class): ?string
     {
-        return App::className($class, 'Shell/Task', 'Task');
+        return App::className($class, "Shell/Task", "Task");
     }
 
     /**
@@ -72,8 +72,8 @@ class TaskRegistry : ObjectRegistry
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingTaskException([
-            'class': $class,
-            'plugin': $plugin,
+            "class": $class,
+            "plugin": $plugin,
         ]);
     }
 

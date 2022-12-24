@@ -54,16 +54,16 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * Loads/constructs an object instance.
      *
      * Will return the instance in the registry if it already exists.
-     * If a subclass provides event support, you can use `$config['enabled'] = false`
+     * If a subclass provides event support, you can use `$config["enabled"] = false`
      * to exclude constructed objects from being registered for events.
      *
      * Using {@link \Cake\Controller\Component::$components} as an example. You can alias
-     * an object by setting the 'className' key, i.e.,
+     * an object by setting the "className" key, i.e.,
      *
      * ```
      * protected $components = [
-     *   'Email': [
-     *     'className': 'App\Controller\Component\AliasedEmailComponent'
+     *   "Email": [
+     *     "className": "App\Controller\Component\AliasedEmailComponent"
      *   ];
      * ];
      * ```
@@ -78,9 +78,9 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      */
     function load(string $name, array $config = [])
     {
-        if (isset($config['className'])) {
+        if (isset($config["className"])) {
             $objName = $name;
-            $name = $config['className'];
+            $name = $config["className"];
         } else {
             [, $objName] = pluginSplit($name);
         }
@@ -131,8 +131,8 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     protected function _checkDuplicate(string $name, array $config): void
     {
         $existing = _loaded[$name];
-        $msg = sprintf('The "%s" alias has already been loaded.', $name);
-        $hasConfig = method_exists($existing, 'getConfig');
+        $msg = sprintf("The "%s" alias has already been loaded.", $name);
+        $hasConfig = method_exists($existing, "getConfig");
         if (!$hasConfig) {
             throw new RuntimeException($msg);
         }
@@ -140,7 +140,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
             return;
         }
         $existingConfig = $existing.getConfig();
-        unset($config['enabled'], $existingConfig['enabled']);
+        unset($config["enabled"], $existingConfig["enabled"]);
 
         $failure = null;
         foreach ($config as $key: $value) {
@@ -150,7 +150,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
             }
             if (isset($existingConfig[$key]) && $existingConfig[$key] != $value) {
                 $failure = sprintf(
-                    ' The `%s` key has a value of `%s` but previously had a value of `%s`',
+                    " The `%s` key has a value of `%s` but previously had a value of `%s`",
                     $key,
                     json_encode($value),
                     json_encode($existingConfig[$key])
@@ -229,7 +229,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     function get(string $name)
     {
         if (!isset(_loaded[$name])) {
-            throw new RuntimeException(sprintf('Unknown object "%s"', $name));
+            throw new RuntimeException(sprintf("Unknown object "%s"", $name));
         }
 
         return _loaded[$name];
@@ -299,10 +299,10 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
                 $objectName = $i;
             }
             [, $name] = pluginSplit($objectName);
-            if (isset($config['class'])) {
-                $normal[$name] = $config + ['config': []];
+            if (isset($config["class"])) {
+                $normal[$name] = $config + ["config": []];
             } else {
-                $normal[$name] = ['class': $objectName, 'config': $config];
+                $normal[$name] = ["class": $objectName, "config": $config];
             }
         }
 
@@ -409,8 +409,8 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     function __debugInfo(): array
     {
         $properties = get_object_vars(this);
-        if (isset($properties['_loaded'])) {
-            $properties['_loaded'] = array_keys($properties['_loaded']);
+        if (isset($properties["_loaded"])) {
+            $properties["_loaded"] = array_keys($properties["_loaded"]);
         }
 
         return $properties;

@@ -22,19 +22,19 @@ module uim.cake.Core;
  *
  * Additional paths for Templates and Plugins are configured with Configure now. See config/app.php for an
  * example. The `App.paths.plugins` and `App.paths.templates` variables are used to configure paths for plugins
- * and templates respectively. All class based resources should be mapped using your application's autoloader.
+ * and templates respectively. All class based resources should be mapped using your application"s autoloader.
  *
  * ### Inspecting loaded paths
  *
- * You can inspect the currently loaded paths using `App::classPath('Controller')` for example to see loaded
+ * You can inspect the currently loaded paths using `App::classPath("Controller")` for example to see loaded
  * controller paths.
  *
  * It is also possible to inspect paths for plugin classes, for instance, to get
- * the path to a plugin's helpers you would call `App::classPath('View/Helper', 'MyPlugin')`
+ * the path to a plugin"s helpers you would call `App::classPath("View/Helper", "MyPlugin")`
  *
  * ### Locating plugins
  *
- * Plugins can be located with App as well. Using Plugin::path('DebugKit') for example, will
+ * Plugins can be located with App as well. Using Plugin::path("DebugKit") for example, will
  * give you the full path to the DebugKit plugin.
  *
  * @link https://book.cakephp.org/4/en/core-libraries/app.html
@@ -51,18 +51,18 @@ class App
      * @return string|null Namespaced class name, null if the class is not found.
      * @psalm-return class-string|null
      */
-    public static function className(string $class, string $type = '', string $suffix = ''): ?string
+    public static function className(string $class, string $type = "", string $suffix = ""): ?string
     {
-        if (strpos($class, '\\') != false) {
+        if (strpos($class, "\\") != false) {
             return class_exists($class) ? $class : null;
         }
 
         [$plugin, $name] = pluginSplit($class);
-        $fullname = '\\' . str_replace('/', '\\', $type . '\\' . $name) . $suffix;
+        $fullname = "\\" . str_replace("/", "\\", $type . "\\" . $name) . $suffix;
 
-        $base = $plugin ?: Configure::read('App.namespace');
+        $base = $plugin ?: Configure::read("App.namespace");
         if ($base != null) {
-            $base = str_replace('/', '\\', rtrim($base, '\\'));
+            $base = str_replace("/", "\\", rtrim($base, "\\"));
 
             if (static::_classExistsInBase($fullname, $base)) {
                 /** @var class-string */
@@ -70,12 +70,12 @@ class App
             }
         }
 
-        if ($plugin || !static::_classExistsInBase($fullname, 'Cake')) {
+        if ($plugin || !static::_classExistsInBase($fullname, "Cake")) {
             return null;
         }
 
         /** @var class-string */
-        return 'Cake' . $fullname;
+        return "Cake" . $fullname;
     }
 
     /**
@@ -85,9 +85,9 @@ class App
      *
      * ```
      * App::shortName(
-     *     'SomeVendor\SomePlugin\Controller\Component\TestComponent',
-     *     'Controller/Component',
-     *     'Component'
+     *     "SomeVendor\SomePlugin\Controller\Component\TestComponent",
+     *     "Controller/Component",
+     *     "Component"
      * )
      * ```
      *
@@ -95,9 +95,9 @@ class App
      *
      * ```
      * App::shortName(
-     *     'SomeVendor\SomePlugin\Controller\Component\Subfolder\TestComponent',
-     *     'Controller/Component',
-     *     'Component'
+     *     "SomeVendor\SomePlugin\Controller\Component\Subfolder\TestComponent",
+     *     "Controller/Component",
+     *     "Component"
      * )
      * ```
      *
@@ -105,9 +105,9 @@ class App
      *
      * ```
      * App::shortName(
-     *     'Cake\Controller\Component\AuthComponent',
-     *     'Controller/Component',
-     *     'Component'
+     *     "Cake\Controller\Component\AuthComponent",
+     *     "Controller/Component",
+     *     "Component"
      * )
      * ```
      *
@@ -118,10 +118,10 @@ class App
      * @param string $suffix Class name suffix
      * @return string Plugin split name of class
      */
-    public static function shortName(string $class, string $type, string $suffix = ''): string
+    public static function shortName(string $class, string $type, string $suffix = ""): string
     {
-        $class = str_replace('\\', '/', $class);
-        $type = '/' . $type . '/';
+        $class = str_replace("\\", "/", $class);
+        $type = "/" . $type . "/";
 
         $pos = strrpos($class, $type);
         if ($pos == false) {
@@ -136,14 +136,14 @@ class App
         }
 
         $nonPluginNamespaces = [
-            'Cake',
-            str_replace('\\', '/', (string)Configure::read('App.namespace')),
+            "Cake",
+            str_replace("\\", "/", (string)Configure::read("App.namespace")),
         ];
         if (in_array($pluginName, $nonPluginNamespaces, true)) {
             return $name;
         }
 
-        return $pluginName . '.' . $name;
+        return $pluginName . "." . $name;
     }
 
     /**
@@ -174,7 +174,7 @@ class App
      * Example:
      *
      * ```
-     * App::path('plugins');
+     * App::path("plugins");
      * ```
      *
      * Will return the value of `App.paths.plugins` config.
@@ -188,22 +188,22 @@ class App
     public static string[] path(string $type, ?string $plugin = null): array
     {
         if ($plugin == null && $type[0] == strtolower($type[0])) {
-            return (array)Configure::read('App.paths.' . $type);
+            return (array)Configure::read("App.paths." . $type);
         }
 
-        if ($type == 'templates') {
+        if ($type == "templates") {
             /** @psalm-suppress PossiblyNullArgument */
             return [Plugin::templatePath($plugin)];
         }
 
-        if ($type == 'locales') {
+        if ($type == "locales") {
             /** @psalm-suppress PossiblyNullArgument */
-            return [Plugin::path($plugin) . 'resources' . DIRECTORY_SEPARATOR . 'locales' . DIRECTORY_SEPARATOR];
+            return [Plugin::path($plugin) . "resources" . DIRECTORY_SEPARATOR . "locales" . DIRECTORY_SEPARATOR];
         }
 
         deprecationWarning(
-            'App::path() is deprecated for class path.'
-            . ' Use \Cake\Core\App::classPath() or \Cake\Core\Plugin::classPath() instead.'
+            "App::path() is deprecated for class path."
+            . " Use \Cake\Core\App::classPath() or \Cake\Core\Plugin::classPath() instead."
         );
 
         return static::classPath($type, $plugin);
@@ -215,13 +215,13 @@ class App
      * Example:
      *
      * ```
-     * App::classPath('Model/Table');
+     * App::classPath("Model/Table");
      * ```
      *
      * Will return the path for tables - e.g. `src/Model/Table/`.
      *
      * ```
-     * App::classPath('Model/Table', 'My/Plugin');
+     * App::classPath("Model/Table", "My/Plugin");
      * ```
      *
      * Will return the plugin based path for those.
@@ -247,7 +247,7 @@ class App
      * Usage:
      *
      * ```
-     * App::core('Cache/Engine');
+     * App::core("Cache/Engine");
      * ```
      *
      * Will return the full path to the cache engines package.
@@ -257,10 +257,10 @@ class App
      */
     public static function core(string $type): array
     {
-        if ($type == 'templates') {
-            return [CORE_PATH . 'templates' . DIRECTORY_SEPARATOR];
+        if ($type == "templates") {
+            return [CORE_PATH . "templates" . DIRECTORY_SEPARATOR];
         }
 
-        return [CAKE . str_replace('/', DIRECTORY_SEPARATOR, $type) . DIRECTORY_SEPARATOR];
+        return [CAKE . str_replace("/", DIRECTORY_SEPARATOR, $type) . DIRECTORY_SEPARATOR];
     }
 }

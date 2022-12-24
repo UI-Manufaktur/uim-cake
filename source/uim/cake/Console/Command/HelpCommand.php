@@ -61,7 +61,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
             $commands.ksort();
         }
 
-        if ($args.getOption('xml')) {
+        if ($args.getOption("xml")) {
             this.asXml($io, $commands);
 
             return static::CODE_SUCCESS;
@@ -94,43 +94,43 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
         $grouped = [];
         $plugins = Plugin::loaded();
         foreach ($invert as $class: $names) {
-            preg_match('/^(.+)\\\\(Command|Shell)\\\\/', $class, $matches);
+            preg_match("/^(.+)\\\\(Command|Shell)\\\\/", $class, $matches);
             // Probably not a useful class
             if (empty($matches)) {
                 continue;
             }
-            $namespace = str_replace('\\', '/', $matches[1]);
-            $prefix = 'App';
-            if ($namespace == 'Cake') {
-                $prefix = 'CakePHP';
+            $namespace = str_replace("\\", "/", $matches[1]);
+            $prefix = "App";
+            if ($namespace == "Cake") {
+                $prefix = "CakePHP";
             } elseif (in_array($namespace, $plugins, true)) {
                 $prefix = $namespace;
             }
             $shortestName = this.getShortestName($names);
-            if (strpos($shortestName, '.') != false) {
-                [, $shortestName] = explode('.', $shortestName, 2);
+            if (strpos($shortestName, ".") != false) {
+                [, $shortestName] = explode(".", $shortestName, 2);
             }
 
             $grouped[$prefix][] = [
-                'name': $shortestName,
-                'description': is_subclass_of($class, BaseCommand::class) ? $class::getDescription() : '',
+                "name": $shortestName,
+                "description": is_subclass_of($class, BaseCommand::class) ? $class::getDescription() : "",
             ];
         }
         ksort($grouped);
 
         this.outputPaths($io);
-        $io.out('<info>Available Commands:</info>', 2);
+        $io.out("<info>Available Commands:</info>", 2);
 
         foreach ($grouped as $prefix: $names) {
             $io.out("<info>{$prefix}</info>:");
             sort($names);
             foreach ($names as $data) {
-                $io.out(' - ' . $data['name']);
-                if ($data['description']) {
-                    $io.info(str_pad(" \u{2514}", 13, "\u{2500}") . ' ' . $data['description']);
+                $io.out(" - " . $data["name"]);
+                if ($data["description"]) {
+                    $io.info(str_pad(" \u{2514}", 13, "\u{2500}") . " " . $data["description"]);
                 }
             }
-            $io.out('');
+            $io.out("");
         }
         $root = this.getRootName();
 
@@ -147,25 +147,25 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     protected function outputPaths(ConsoleIo $io): void
     {
         $paths = [];
-        if (Configure::check('App.dir')) {
-            $appPath = rtrim(Configure::read('App.dir'), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (Configure::check("App.dir")) {
+            $appPath = rtrim(Configure::read("App.dir"), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
             // Extra space is to align output
-            $paths['app'] = ' ' . $appPath;
+            $paths["app"] = " " . $appPath;
         }
-        if (defined('ROOT')) {
-            $paths['root'] = rtrim(ROOT, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (defined("ROOT")) {
+            $paths["root"] = rtrim(ROOT, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         }
-        if (defined('CORE_PATH')) {
-            $paths['core'] = rtrim(CORE_PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        if (defined("CORE_PATH")) {
+            $paths["core"] = rtrim(CORE_PATH, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         }
         if (!count($paths)) {
             return;
         }
-        $io.out('<info>Current Paths:</info>', 2);
+        $io.out("<info>Current Paths:</info>", 2);
         foreach ($paths as $key: $value) {
             $io.out("* {$key}: {$value}");
         }
-        $io.out('');
+        $io.out("");
     }
 
     /**
@@ -194,16 +194,16 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      */
     protected function asXml(ConsoleIo $io, iterable $commands): void
     {
-        $shells = new SimpleXMLElement('<shells></shells>');
+        $shells = new SimpleXMLElement("<shells></shells>");
         foreach ($commands as $name: $class) {
             if (is_object($class)) {
                 $class = get_class($class);
             }
-            $shell = $shells.addChild('shell');
-            $shell.addAttribute('name', $name);
-            $shell.addAttribute('call_as', $name);
-            $shell.addAttribute('provider', $class);
-            $shell.addAttribute('help', $name . ' -h');
+            $shell = $shells.addChild("shell");
+            $shell.addAttribute("name", $name);
+            $shell.addAttribute("call_as", $name);
+            $shell.addAttribute("provider", $class);
+            $shell.addAttribute("help", $name . " -h");
         }
         $io.setOutputAs(ConsoleOutput::RAW);
         $io.out($shells.saveXML());
@@ -218,10 +218,10 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser.setDescription(
-            'Get the list of available commands for this application.'
-        ).addOption('xml', [
-            'help': 'Get the listing as XML.',
-            'boolean': true,
+            "Get the list of available commands for this application."
+        ).addOption("xml", [
+            "help": "Get the listing as XML.",
+            "boolean": true,
         ]);
 
         return $parser;

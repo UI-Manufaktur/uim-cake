@@ -21,5 +21,5 @@ class MissingTaskException : ConsoleException
     /**
      * @var string
      */
-    protected $_messageTemplate = 'Task class %s could not be found.';
+    protected $_messageTemplate = "Task class %s could not be found.";
 }
