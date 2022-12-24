@@ -12,7 +12,7 @@
  * @since         3.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Console\Exception;
+module uim.cake.Console\Exception;
 
 /**
  * Exception class for halting errors in console tasks

@@ -12,7 +12,7 @@
  * @since         3.7.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Console\TestSuite;
+module uim.cake.Console\TestSuite;
 
 use Cake\Command\Command;
 use Cake\Console\CommandRunner;

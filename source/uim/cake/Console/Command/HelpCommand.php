@@ -13,7 +13,7 @@
  * @since         3.6.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Console\Command;
+module uim.cake.Console\Command;
 
 use ArrayIterator;
 use Cake\Console\Arguments;
