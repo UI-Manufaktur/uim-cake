@@ -27,7 +27,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  *
  * @link https://book.cakephp.org/4/en/controllers/middleware.html#security-header-middleware
  */
-class SecurityHeadersMiddleware implements IMiddleware
+class SecurityHeadersMiddleware : IMiddleware
 {
     /** @var string X-Content-Type-Option nosniff */
     public const NOSNIFF = 'nosniff';

@@ -29,7 +29,7 @@ use UnexpectedValueException;
  *
  * @internal
  */
-class Uri implements UriInterface
+class Uri : UriInterface
 {
     /**
      * @var string

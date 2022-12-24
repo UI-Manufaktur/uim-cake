@@ -36,7 +36,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  *
  * such that it will operate as PSR-15 middleware.
  */
-class ClosureDecoratorMiddleware implements IMiddleware
+class ClosureDecoratorMiddleware : IMiddleware
 {
     /**
      * A Closure.

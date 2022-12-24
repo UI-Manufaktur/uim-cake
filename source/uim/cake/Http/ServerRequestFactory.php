@@ -34,7 +34,7 @@ use function Laminas\Diactoros\normalizeUploadedFiles;
  * attributes. Furthermore the Uri's path is corrected to only contain the
  * 'virtual' path for the request.
  */
-abstract class ServerRequestFactory implements ServerRequestFactoryInterface
+abstract class ServerRequestFactory : ServerRequestFactoryInterface
 {
     /**
      * Create a request from the supplied superglobal values.

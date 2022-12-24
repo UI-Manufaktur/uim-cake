@@ -23,7 +23,7 @@ use RuntimeException;
 use SimpleXMLElement;
 
 /**
- * Implements methods for HTTP responses.
+ * : methods for HTTP responses.
  *
  * All the following examples assume that `$response` is an
  * instance of this class.
@@ -80,7 +80,7 @@ use SimpleXMLElement;
  * $content = $response->getStatusCode();
  * ```
  */
-class Response : Message implements IResponse
+class Response : Message : IResponse
 {
     use MessageTrait;
 

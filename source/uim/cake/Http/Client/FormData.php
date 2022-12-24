@@ -26,7 +26,7 @@ use Psr\Http\Message\UploadedFileInterface;
  * Used by Http\Client to upload POST/PUT data
  * and files.
  */
-class FormData implements Countable
+class FormData : Countable
 {
     /**
      * Boundary marker.

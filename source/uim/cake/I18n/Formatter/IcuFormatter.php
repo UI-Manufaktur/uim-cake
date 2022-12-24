@@ -23,7 +23,7 @@ use MessageFormatter;
 /**
  * A formatter that will interpolate variables using the MessageFormatter class
  */
-class IcuFormatter implements FormatterInterface
+class IcuFormatter : FormatterInterface
 {
     /**
      * Returns a string with all passed variables interpolated into the original

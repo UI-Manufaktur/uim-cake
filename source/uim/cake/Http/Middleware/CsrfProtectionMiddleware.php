@@ -46,7 +46,7 @@ use RuntimeException;
  *
  * @see https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie
  */
-class CsrfProtectionMiddleware implements IMiddleware
+class CsrfProtectionMiddleware : IMiddleware
 {
     /**
      * Config for the CSRF handling.

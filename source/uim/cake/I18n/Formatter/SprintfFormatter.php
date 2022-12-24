@@ -22,7 +22,7 @@ use Cake\I18n\FormatterInterface;
  * A formatter that will interpolate variables using sprintf and
  * select the correct plural form when required
  */
-class SprintfFormatter implements FormatterInterface
+class SprintfFormatter : FormatterInterface
 {
     /**
      * Returns a string with all passed variables interpolated into the original

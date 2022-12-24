@@ -27,7 +27,7 @@ use IntlDateFormatter;
  *
  * @deprecated 4.3.0 Use the immutable alternative `FrozenTime` instead.
  */
-class Time : MutableDateTime implements I18nDateTimeInterface
+class Time : MutableDateTime : I18nDateTimeInterface
 {
     use DateFormatTrait;
 

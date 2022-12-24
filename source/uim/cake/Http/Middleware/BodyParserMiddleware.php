@@ -31,7 +31,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Enables JSON and XML request payloads to be parsed into the request's body.
  * You can also add your own request body parsers using the `addParser()` method.
  */
-class BodyParserMiddleware implements IMiddleware
+class BodyParserMiddleware : IMiddleware
 {
     /**
      * Registered Parsers

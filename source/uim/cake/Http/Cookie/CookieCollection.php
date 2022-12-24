@@ -34,7 +34,7 @@ use TypeError;
  * Provides an immutable collection of cookies objects. Adding or removing
  * to a collection returns a *new* collection that you must retain.
  */
-class CookieCollection implements IteratorAggregate, Countable
+class CookieCollection : IteratorAggregate, Countable
 {
     /**
      * Cookie objects

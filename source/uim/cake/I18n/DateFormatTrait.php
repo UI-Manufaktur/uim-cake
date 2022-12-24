@@ -201,7 +201,7 @@ trait DateFormatTrait
 
     /**
      * Returns a translated and localized date string.
-     * Implements what IntlDateFormatter::formatObject() is in PHP 5.5+
+     * : what IntlDateFormatter::formatObject() is in PHP 5.5+
      *
      * @param \DateTime|\DateTimeImmutable $date Date.
      * @param array<int>|string|int $format Format.

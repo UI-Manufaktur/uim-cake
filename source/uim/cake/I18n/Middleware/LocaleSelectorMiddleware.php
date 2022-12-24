@@ -27,7 +27,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Accept-Language header. The default will only be set if it
  * matches the list of passed valid locales.
  */
-class LocaleSelectorMiddleware implements IMiddleware
+class LocaleSelectorMiddleware : IMiddleware
 {
     /**
      * List of valid locales for the request

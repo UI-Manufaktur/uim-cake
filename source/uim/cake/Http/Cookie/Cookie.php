@@ -47,7 +47,7 @@ use InvalidArgumentException;
  * @see \Cake\Http\Cookie\CookieCollection for working with collections of cookies.
  * @see \Cake\Http\Response::getCookieCollection() for working with response cookies.
  */
-class Cookie implements CookieInterface
+class Cookie : CookieInterface
 {
     /**
      * Cookie name

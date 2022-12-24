@@ -20,12 +20,12 @@ use Laminas\Diactoros\Stream;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * Implements methods for HTTP requests.
+ * : methods for HTTP requests.
  *
  * Used by Cake\Http\Client to contain request information
  * for making requests.
  */
-class Request : Message implements RequestInterface
+class Request : Message : RequestInterface
 {
     use RequestTrait;
 

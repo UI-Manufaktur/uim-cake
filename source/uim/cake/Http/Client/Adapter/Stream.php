@@ -24,12 +24,12 @@ use Composer\CaBundle\CaBundle;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * Implements sending Cake\Http\Client\Request
+ * : sending Cake\Http\Client\Request
  * via php's stream API.
  *
  * This approach and implementation is partly inspired by Aura.Http
  */
-class Stream implements AdapterInterface
+class Stream : AdapterInterface
 {
     /**
      * Context resource used by the stream API.

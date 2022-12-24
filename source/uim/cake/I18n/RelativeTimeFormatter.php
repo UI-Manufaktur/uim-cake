@@ -24,7 +24,7 @@ use Cake\Chronos\DifferenceFormatterInterface;
  *
  * @internal
  */
-class RelativeTimeFormatter implements DifferenceFormatterInterface
+class RelativeTimeFormatter : DifferenceFormatterInterface
 {
     /**
      * Get the difference in a human readable format.

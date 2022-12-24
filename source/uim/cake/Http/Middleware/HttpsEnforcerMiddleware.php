@@ -28,7 +28,7 @@ use UnexpectedValueException;
 /**
  * Enforces use of HTTPS (SSL) for requests.
  */
-class HttpsEnforcerMiddleware implements IMiddleware
+class HttpsEnforcerMiddleware : IMiddleware
 {
     /**
      * Configuration.

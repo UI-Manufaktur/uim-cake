@@ -116,7 +116,7 @@ class FileLog : BaseLog
     }
 
     /**
-     * Implements writing to log files.
+     * : writing to log files.
      *
      * @param mixed $level The severity level of the message being written.
      * @param string $message The message you want to log.

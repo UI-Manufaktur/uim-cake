@@ -49,7 +49,7 @@ class ArrayLog : BaseLog
     protected $content = [];
 
     /**
-     * Implements writing to the internal storage.
+     * : writing to the internal storage.
      *
      * @param mixed $level The severity level of log you are making.
      * @param string $message The message you want to log.

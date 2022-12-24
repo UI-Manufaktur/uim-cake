@@ -27,7 +27,7 @@ use SessionHandlerInterface;
  *
  * @see \Cake\Http\Session for configuration information.
  */
-class CacheSession implements SessionHandlerInterface
+class CacheSession : SessionHandlerInterface
 {
     /**
      * Options for this session engine

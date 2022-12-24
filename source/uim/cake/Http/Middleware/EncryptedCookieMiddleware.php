@@ -38,7 +38,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * The encryption types and padding are compatible with those used by CookieComponent
  * for backwards compatibility.
  */
-class EncryptedCookieMiddleware implements IMiddleware
+class EncryptedCookieMiddleware : IMiddleware
 {
     use CookieCryptTrait;
 

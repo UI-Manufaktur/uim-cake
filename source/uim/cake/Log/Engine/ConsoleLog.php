@@ -86,7 +86,7 @@ class ConsoleLog : BaseLog
     }
 
     /**
-     * Implements writing to console.
+     * : writing to console.
      *
      * @param mixed $level The severity level of log you are making.
      * @param string $message The message you want to log.

@@ -23,14 +23,14 @@ use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * Implements sending requests to an array of stubbed responses
+ * : sending requests to an array of stubbed responses
  *
  * This adapter is not intended for production use. Instead
  * it is the backend used by `Client::addMockResponse()`
  *
  * @internal
  */
-class Mock implements AdapterInterface
+class Mock : AdapterInterface
 {
     /**
      * List of mocked responses.
