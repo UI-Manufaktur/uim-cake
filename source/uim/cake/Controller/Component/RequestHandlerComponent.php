@@ -157,10 +157,10 @@ class RequestHandlerComponent : Component
      * If the XML data is POSTed, the data is parsed into an XML object, which is assigned
      * to the $data property of the controller, which can then be saved to a model object.
      *
-     * @param \Cake\Event\EventInterface $event The startup event that was fired.
+     * @param \Cake\Event\IEvent $event The startup event that was fired.
      * @return void
      */
-    function startup(EventInterface $event): void
+    function startup(IEvent $event): void
     {
         $controller = this.getController();
         $request = $controller.getRequest();
@@ -199,11 +199,11 @@ class RequestHandlerComponent : Component
      * - If the extension is of a type that RequestHandler understands, it will
      *   set that Content-type in the response header.
      *
-     * @param \Cake\Event\EventInterface $event The Controller.beforeRender event.
+     * @param \Cake\Event\IEvent $event The Controller.beforeRender event.
      * @return void
      * @throws \Cake\Http\Exception\NotFoundException If invoked extension is not configured.
      */
-    function beforeRender(EventInterface $event): void
+    function beforeRender(IEvent $event): void
     {
         $controller = this.getController();
         $response = $controller.getResponse();

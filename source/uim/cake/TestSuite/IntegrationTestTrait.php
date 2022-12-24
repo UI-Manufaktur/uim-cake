@@ -507,11 +507,11 @@ trait IntegrationTestTrait
     /**
      * Adds additional event spies to the controller/view event manager.
      *
-     * @param \Cake\Event\EventInterface $event A dispatcher event.
+     * @param \Cake\Event\IEvent $event A dispatcher event.
      * @param \Cake\Controller\Controller|null $controller Controller instance.
      * @return void
      */
-    function controllerSpy(EventInterface $event, ?Controller $controller = null): void
+    function controllerSpy(IEvent $event, ?Controller $controller = null): void
     {
         if (!$controller) {
             /** @var \Cake\Controller\Controller $controller */
@@ -519,7 +519,7 @@ trait IntegrationTestTrait
         }
         _controller = $controller;
         $events = $controller.getEventManager();
-        $flashCapture = function (EventInterface $event): void {
+        $flashCapture = function (IEvent $event): void {
             if (!_retainFlashMessages) {
                 return;
             }

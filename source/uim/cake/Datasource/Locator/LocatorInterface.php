@@ -21,7 +21,7 @@ use Cake\Datasource\RepositoryInterface;
 /**
  * Registries for repository objects should implement this interface.
  */
-interface LocatorInterface
+interface ILocator
 {
     /**
      * Get a repository instance from the registry.

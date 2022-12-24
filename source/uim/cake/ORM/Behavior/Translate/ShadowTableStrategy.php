@@ -117,12 +117,12 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * table. It modifies the passed query by eager loading the translated fields
      * and adding a formatter to copy the values into the main table records.
      *
-     * @param \Cake\Event\EventInterface $event The beforeFind event that was fired.
+     * @param \Cake\Event\IEvent $event The beforeFind event that was fired.
      * @param \Cake\ORM\Query $query Query.
      * @param \ArrayObject $options The options for the query.
      * @return void
      */
-    function beforeFind(EventInterface $event, Query $query, ArrayObject $options)
+    function beforeFind(IEvent $event, Query $query, ArrayObject $options)
     {
         $locale = Hash::get($options, 'locale', this.getLocale());
         $config = this.getConfig();
@@ -337,12 +337,12 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * Modifies the entity before it is saved so that translated fields are persisted
      * in the database too.
      *
-     * @param \Cake\Event\EventInterface $event The beforeSave event that was fired.
+     * @param \Cake\Event\IEvent $event The beforeSave event that was fired.
      * @param \Cake\Datasource\EntityInterface $entity The entity that is going to be saved.
      * @param \ArrayObject $options the options passed to the save method.
      * @return void
      */
-    function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    function beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options)
     {
         $locale = $entity.get('_locale') ?: this.getLocale();
         $newOptions = [this.translationTable.getAlias(): ['validate': false]];

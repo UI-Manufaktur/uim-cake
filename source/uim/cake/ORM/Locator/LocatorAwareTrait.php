@@ -35,17 +35,17 @@ trait LocatorAwareTrait
     /**
      * Table locator instance
      *
-     * @var \Cake\ORM\Locator\LocatorInterface|null
+     * @var \Cake\ORM\Locator\ILocator|null
      */
     protected $_tableLocator;
 
     /**
      * Sets the table locator.
      *
-     * @param \Cake\ORM\Locator\ILocator$tableLocator ILocatorinstance.
+     * @param \Cake\ORM\Locator\ILocator $tableLocator ILocatorinstance.
      * @return this
      */
-    function setTableLocator(ILocator$tableLocator)
+    function setTableLocator(ILocator $tableLocator)
     {
         _tableLocator = $tableLocator;
 
@@ -55,9 +55,9 @@ trait LocatorAwareTrait
     /**
      * Gets the table locator.
      *
-     * @return \Cake\ORM\Locator\LocatorInterface
+     * @return \Cake\ORM\Locator\ILocator
      */
-    function getTableLocator(): LocatorInterface
+    function getTableLocator(): ILocator
     {
         if (_tableLocator == null) {
             /** @psalm-suppress InvalidPropertyAssignmentValue */

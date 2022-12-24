@@ -69,7 +69,7 @@ use Closure;
  * ```
  * [
  *     'Users': [
- *         'posts_published': function (EventInterface $event, EntityInterface $entity, Table $table) {
+ *         'posts_published': function (IEvent $event, EntityInterface $entity, Table $table) {
  *             $query = $table.find('all').where([
  *                 'published': true,
  *                 'user_id': $entity.get('user_id')
@@ -115,12 +115,12 @@ class CounterCacheBehavior : Behavior
      *
      * Check if a field, which should be ignored, is dirty
      *
-     * @param \Cake\Event\EventInterface $event The beforeSave event that was fired
+     * @param \Cake\Event\IEvent $event The beforeSave event that was fired
      * @param \Cake\Datasource\EntityInterface $entity The entity that is going to be saved
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    function beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options)
     {
         if (isset($options['ignoreCounterCache']) && $options['ignoreCounterCache'] == true) {
             return;
@@ -153,12 +153,12 @@ class CounterCacheBehavior : Behavior
      *
      * Makes sure to update counter cache when a new record is created or updated.
      *
-     * @param \Cake\Event\EventInterface $event The afterSave event that was fired.
+     * @param \Cake\Event\IEvent $event The afterSave event that was fired.
      * @param \Cake\Datasource\EntityInterface $entity The entity that was saved.
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    function afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
+    function afterSave(IEvent $event, EntityInterface $entity, ArrayObject $options): void
     {
         if (isset($options['ignoreCounterCache']) && $options['ignoreCounterCache'] == true) {
             return;
@@ -173,12 +173,12 @@ class CounterCacheBehavior : Behavior
      *
      * Makes sure to update counter cache when a record is deleted.
      *
-     * @param \Cake\Event\EventInterface $event The afterDelete event that was fired.
+     * @param \Cake\Event\IEvent $event The afterDelete event that was fired.
      * @param \Cake\Datasource\EntityInterface $entity The entity that was deleted.
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    function afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)
+    function afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)
     {
         if (isset($options['ignoreCounterCache']) && $options['ignoreCounterCache'] == true) {
             return;
@@ -190,11 +190,11 @@ class CounterCacheBehavior : Behavior
     /**
      * Iterate all associations and update counter caches.
      *
-     * @param \Cake\Event\EventInterface $event Event instance.
+     * @param \Cake\Event\IEvent $event Event instance.
      * @param \Cake\Datasource\EntityInterface $entity Entity.
      * @return void
      */
-    protected function _processAssociations(EventInterface $event, EntityInterface $entity): void
+    protected function _processAssociations(IEvent $event, EntityInterface $entity): void
     {
         foreach (_config as $assoc: $settings) {
             $assoc = _table.getAssociation($assoc);
@@ -205,7 +205,7 @@ class CounterCacheBehavior : Behavior
     /**
      * Updates counter cache for a single association
      *
-     * @param \Cake\Event\EventInterface $event Event instance.
+     * @param \Cake\Event\IEvent $event Event instance.
      * @param \Cake\Datasource\EntityInterface $entity Entity
      * @param \Cake\ORM\Association $assoc The association object
      * @param array $settings The settings for counter cache for this association
@@ -213,7 +213,7 @@ class CounterCacheBehavior : Behavior
      * @throws \RuntimeException If invalid callable is passed.
      */
     protected function _processAssociation(
-        EventInterface $event,
+        IEvent $event,
         EntityInterface $entity,
         Association $assoc,
         array $settings

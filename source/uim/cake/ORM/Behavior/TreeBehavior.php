@@ -92,12 +92,12 @@ class TreeBehavior : Behavior
      * Transparently manages setting the lft and rght fields if the parent field is
      * included in the parameters to be saved.
      *
-     * @param \Cake\Event\EventInterface $event The beforeSave event that was fired
+     * @param \Cake\Event\IEvent $event The beforeSave event that was fired
      * @param \Cake\Datasource\EntityInterface $entity the entity that is going to be saved
      * @return void
      * @throws \RuntimeException if the parent to set for the node is invalid
      */
-    function beforeSave(EventInterface $event, EntityInterface $entity)
+    function beforeSave(IEvent $event, EntityInterface $entity)
     {
         $isNew = $entity.isNew();
         $config = this.getConfig();
@@ -161,11 +161,11 @@ class TreeBehavior : Behavior
      *
      * Manages updating level of descendants of currently saved entity.
      *
-     * @param \Cake\Event\EventInterface $event The afterSave event that was fired
+     * @param \Cake\Event\IEvent $event The afterSave event that was fired
      * @param \Cake\Datasource\EntityInterface $entity the entity that is going to be saved
      * @return void
      */
-    function afterSave(EventInterface $event, EntityInterface $entity)
+    function afterSave(IEvent $event, EntityInterface $entity)
     {
         if (!_config['level'] || $entity.isNew()) {
             return;
@@ -214,11 +214,11 @@ class TreeBehavior : Behavior
     /**
      * Also deletes the nodes in the subtree of the entity to be delete
      *
-     * @param \Cake\Event\EventInterface $event The beforeDelete event that was fired
+     * @param \Cake\Event\IEvent $event The beforeDelete event that was fired
      * @param \Cake\Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */
-    function beforeDelete(EventInterface $event, EntityInterface $entity)
+    function beforeDelete(IEvent $event, EntityInterface $entity)
     {
         $config = this.getConfig();
         _ensureFields($entity);

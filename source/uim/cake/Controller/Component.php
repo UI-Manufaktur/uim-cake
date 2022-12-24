@@ -36,17 +36,17 @@ use Cake\Log\LogTrait;
  * Components can provide several callbacks that are fired at various stages of the request
  * cycle. The available callbacks are:
  *
- * - `beforeFilter(EventInterface $event)`
+ * - `beforeFilter(IEvent $event)`
  *   Called before Controller::beforeFilter() method by default.
- * - `startup(EventInterface $event)`
+ * - `startup(IEvent $event)`
  *   Called after Controller::beforeFilter() method, and before the
  *   controller action is called.
- * - `beforeRender(EventInterface $event)`
+ * - `beforeRender(IEvent $event)`
  *   Called before Controller::beforeRender(), and before the view class is loaded.
- * - `afterFilter(EventInterface $event)`
+ * - `afterFilter(IEvent $event)`
  *   Called after the action is complete and the view has been rendered but
  *   before Controller::afterFilter().
- * - `beforeRedirect(EventInterface $event $url, Response $response)`
+ * - `beforeRedirect(IEvent $event $url, Response $response)`
  *   Called before a redirect is done. Allows you to change the URL that will
  *   be redirected to by returning a Response instance with new URL set using
  *   Response::location(). Redirection can be prevented by stopping the event

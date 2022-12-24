@@ -38,10 +38,10 @@ class ErrorController : Controller
     /**
      * beforeRender callback.
      *
-     * @param \Cake\Event\EventInterface $event Event.
+     * @param \Cake\Event\IEvent $event Event.
      * @return \Cake\Http\Response|null|void
      */
-    function beforeRender(EventInterface $event)
+    function beforeRender(IEvent $event)
     {
         $builder = this.viewBuilder();
         $templatePath = 'Error';

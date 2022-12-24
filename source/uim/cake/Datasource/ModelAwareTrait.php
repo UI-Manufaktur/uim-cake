@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace Cake\Datasource;
 
 use Cake\Datasource\Exception\MissingModelException;
-use Cake\Datasource\Locator\LocatorInterface;
+use Cake\Datasource\Locator\ILocator;
 use InvalidArgumentException;
 use UnexpectedValueException;
 
@@ -51,7 +51,7 @@ trait ModelAwareTrait
     /**
      * A list of overridden model factory functions.
      *
-     * @var array<callable|\Cake\Datasource\Locator\LocatorInterface>
+     * @var array<callable|\Cake\Datasource\Locator\ILocator>
      */
     protected $_modelFactories = [];
 
@@ -122,7 +122,7 @@ trait ModelAwareTrait
         }
 
         $factory = _modelFactories[$modelType] ?? FactoryLocator::get($modelType);
-        if ($factory instanceof LocatorInterface) {
+        if ($factory instanceof ILocator) {
             this.{$alias} = $factory.get($modelClass, $options);
         } else {
             this.{$alias} = $factory($modelClass, $options);
@@ -139,7 +139,7 @@ trait ModelAwareTrait
      * Override a existing callable to generate repositories of a given type.
      *
      * @param string $type The name of the repository type the factory function is for.
-     * @param \Cake\Datasource\Locator\LocatorInterface|callable $factory The factory function used to create instances.
+     * @param \Cake\Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      * @return void
      */
     function modelFactory(string $type, $factory): void

@@ -299,10 +299,10 @@ class EventManager : IEventManager
      * Calls a listener.
      *
      * @param callable $listener The listener to trigger.
-     * @param \Cake\Event\EventInterface $event Event instance.
+     * @param \Cake\Event\IEvent $event Event instance.
      * @return mixed The result of the $listener function.
      */
-    protected function _callListener(callable $listener, EventInterface $event)
+    protected function _callListener(callable $listener, IEvent $event)
     {
         $data = (array)$event.getData();
 
@@ -385,10 +385,10 @@ class EventManager : IEventManager
     /**
      * Adds an event to the list if the event list object is present.
      *
-     * @param \Cake\Event\EventInterface $event An event to add to the list.
+     * @param \Cake\Event\IEvent $event An event to add to the list.
      * @return this
      */
-    function addEventToList(EventInterface $event)
+    function addEventToList(IEvent $event)
     {
         if (_eventList) {
             _eventList.add($event);

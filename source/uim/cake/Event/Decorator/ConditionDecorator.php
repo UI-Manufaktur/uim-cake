@@ -43,10 +43,10 @@ class ConditionDecorator : AbstractDecorator
     /**
      * Checks if the event is triggered for this listener.
      *
-     * @param \Cake\Event\EventInterface $event Event object.
+     * @param \Cake\Event\IEvent $event Event object.
      * @return bool
      */
-    function canTrigger(EventInterface $event): bool
+    function canTrigger(IEvent $event): bool
     {
         $if = _evaluateCondition('if', $event);
         $unless = _evaluateCondition('unless', $event);
@@ -58,10 +58,10 @@ class ConditionDecorator : AbstractDecorator
      * Evaluates the filter conditions
      *
      * @param string $condition Condition type
-     * @param \Cake\Event\EventInterface $event Event object
+     * @param \Cake\Event\IEvent $event Event object
      * @return bool
      */
-    protected function _evaluateCondition(string $condition, EventInterface $event): bool
+    protected function _evaluateCondition(string $condition, IEvent $event): bool
     {
         if (!isset(_options[$condition])) {
             return $condition != 'unless';

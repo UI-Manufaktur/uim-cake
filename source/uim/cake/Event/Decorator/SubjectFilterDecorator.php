@@ -47,10 +47,10 @@ class SubjectFilterDecorator : AbstractDecorator
     /**
      * Checks if the event is triggered for this listener.
      *
-     * @param \Cake\Event\EventInterface $event Event object.
+     * @param \Cake\Event\IEvent $event Event object.
      * @return bool
      */
-    function canTrigger(EventInterface $event): bool
+    function canTrigger(IEvent $event): bool
     {
         if (!isset(_options['allowedSubject'])) {
             throw new RuntimeException(self::class . ' Missing subject filter options!');

@@ -24,7 +24,7 @@ use Cake\Datasource\ModelAwareTrait;
 use Cake\Filesystem\Filesystem;
 use Cake\Log\LogTrait;
 use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\ORM\Locator\LocatorInterface;
+use Cake\ORM\Locator\ILocator;
 use Cake\Utility\Inflector;
 use Cake\Utility\MergeVariablesTrait;
 use Cake\Utility\Text;
@@ -180,10 +180,10 @@ class Shell
      * Constructs this Shell instance.
      *
      * @param \Cake\Console\ConsoleIo|null $io An io instance.
-     * @param \Cake\ORM\Locator\LocatorInterface|null $locator Table locator instance.
+     * @param \Cake\ORM\Locator\ILocator|null $locator Table locator instance.
      * @link https://book.cakephp.org/4/en/console-commands/shells.html
      */
-    public this(?ConsoleIo $io = null, ?ILocator$locator = null)
+    public this(?ConsoleIo $io = null, ?ILocator $locator = null)
     {
         if (!this.name) {
             [, $class] = namespaceSplit(static::class);

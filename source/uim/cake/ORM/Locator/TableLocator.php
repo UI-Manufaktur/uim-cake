@@ -29,7 +29,7 @@ use RuntimeException;
 /**
  * Provides a default registry/factory for Table objects.
  */
-class TableLocator : AbstractLocator : LocatorInterface
+class TableLocator : AbstractLocator : ILocator
 {
     /**
      * Contains a list of locations where table classes should be looked for.

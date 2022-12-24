@@ -36,10 +36,10 @@ class CheckHttpCacheComponent : Component
     /**
      * Before Render hook
      *
-     * @param \Cake\Event\EventInterface $event The Controller.beforeRender event.
+     * @param \Cake\Event\IEvent $event The Controller.beforeRender event.
      * @return void
      */
-    function beforeRender(EventInterface $event): void
+    function beforeRender(IEvent $event): void
     {
         $controller = this.getController();
         $response = $controller.getResponse();

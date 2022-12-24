@@ -75,14 +75,14 @@ use UnexpectedValueException;
  * By implementing a method you can receive the related events. The available
  * callbacks are:
  *
- * - `beforeFilter(EventInterface $event)`
+ * - `beforeFilter(IEvent $event)`
  *   Called before each action. This is a good place to do general logic that
  *   applies to all actions.
- * - `beforeRender(EventInterface $event)`
+ * - `beforeRender(IEvent $event)`
  *   Called before the view is rendered.
- * - `beforeRedirect(EventInterface $event, $url, Response $response)`
+ * - `beforeRedirect(IEvent $event, $url, Response $response)`
  *    Called before a redirect is done.
- * - `afterFilter(EventInterface $event)`
+ * - `afterFilter(IEvent $event)`
  *   Called after each action is complete and after the view is rendered.
  *
  * @property \Cake\Controller\Component\FlashComponent $Flash
@@ -1004,11 +1004,11 @@ class Controller : EventListenerInterface, EventDispatcherInterface
      * Called before the controller action. You can use this method to configure and customize components
      * or perform logic that needs to happen before each controller action.
      *
-     * @param \Cake\Event\EventInterface $event An Event instance
+     * @param \Cake\Event\IEvent $event An Event instance
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function beforeFilter(EventInterface $event)
+    function beforeFilter(IEvent $event)
     {
     }
 
@@ -1016,11 +1016,11 @@ class Controller : EventListenerInterface, EventDispatcherInterface
      * Called after the controller action is run, but before the view is rendered. You can use this method
      * to perform logic or set view variables that are required on every request.
      *
-     * @param \Cake\Event\EventInterface $event An Event instance
+     * @param \Cake\Event\IEvent $event An Event instance
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function beforeRender(EventInterface $event)
+    function beforeRender(IEvent $event)
     {
     }
 
@@ -1033,25 +1033,25 @@ class Controller : EventListenerInterface, EventDispatcherInterface
      * You can set the event result to response instance or modify the redirect location
      * using controller's response instance.
      *
-     * @param \Cake\Event\EventInterface $event An Event instance
+     * @param \Cake\Event\IEvent $event An Event instance
      * @param array|string $url A string or array-based URL pointing to another location within the app,
      *     or an absolute URL
      * @param \Cake\Http\Response $response The response object.
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function beforeRedirect(EventInterface $event, $url, Response $response)
+    function beforeRedirect(IEvent $event, $url, Response $response)
     {
     }
 
     /**
      * Called after the controller action is run and rendered.
      *
-     * @param \Cake\Event\EventInterface $event An Event instance
+     * @param \Cake\Event\IEvent $event An Event instance
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function afterFilter(EventInterface $event)
+    function afterFilter(IEvent $event)
     {
     }
 }

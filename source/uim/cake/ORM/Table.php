@@ -125,19 +125,19 @@ use RuntimeException;
  * You can subscribe to the events listed above in your table classes by implementing the
  * lifecycle methods below:
  *
- * - `beforeFind(EventInterface $event, Query $query, ArrayObject $options, boolean $primary)`
- * - `beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options)`
- * - `afterMarshal(EventInterface $event, EntityInterface $entity, ArrayObject $options)`
- * - `buildValidator(EventInterface $event, Validator $validator, string $name)`
+ * - `beforeFind(IEvent $event, Query $query, ArrayObject $options, boolean $primary)`
+ * - `beforeMarshal(IEvent $event, ArrayObject $data, ArrayObject $options)`
+ * - `afterMarshal(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `buildValidator(IEvent $event, Validator $validator, string $name)`
  * - `buildRules(RulesChecker $rules)`
- * - `beforeRules(EventInterface $event, EntityInterface $entity, ArrayObject $options, string $operation)`
- * - `afterRules(EventInterface $event, EntityInterface $entity, ArrayObject $options, bool $result, string $operation)`
- * - `beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)`
- * - `afterSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)`
- * - `afterSaveCommit(EventInterface $event, EntityInterface $entity, ArrayObject $options)`
- * - `beforeDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)`
- * - `afterDelete(EventInterface $event, EntityInterface $entity, ArrayObject $options)`
- * - `afterDeleteCommit(EventInterface $event, EntityInterface $entity, ArrayObject $options)`
+ * - `beforeRules(IEvent $event, EntityInterface $entity, ArrayObject $options, string $operation)`
+ * - `afterRules(IEvent $event, EntityInterface $entity, ArrayObject $options, bool $result, string $operation)`
+ * - `beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `afterSave(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `afterSaveCommit(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `beforeDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `afterDeleteCommit(IEvent $event, EntityInterface $entity, ArrayObject $options)`
  *
  * @see \Cake\Event\EventManager for reference on the events system.
  * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list

@@ -134,11 +134,11 @@ trait ContainerStubTrait
      * will be replaced with one containing mocks. The original
      * container will be set as a delegate to the mock container.
      *
-     * @param \Cake\Event\EventInterface $event The event
+     * @param \Cake\Event\IEvent $event The event
      * @param \Cake\Core\IContainer $container The container to wrap.
      * @return \Cake\Core\IContainer|null
      */
-    function modifyContainer(EventInterface $event, IContainer $container): ?IContainer
+    function modifyContainer(IEvent $event, IContainer $container): ?IContainer
     {
         if (empty(this.containerServices)) {
             return null;

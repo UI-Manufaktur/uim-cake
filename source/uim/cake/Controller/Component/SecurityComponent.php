@@ -84,10 +84,10 @@ class SecurityComponent : Component
     /**
      * Component startup. All security checking happens here.
      *
-     * @param \Cake\Event\EventInterface $event An Event instance
+     * @param \Cake\Event\IEvent $event An Event instance
      * @return \Cake\Http\Response|null
      */
-    function startup(EventInterface $event): ?Response
+    function startup(IEvent $event): ?Response
     {
         /** @var \Cake\Controller\Controller $controller */
         $controller = $event.getSubject();

@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace Cake\ORM;
 
 use Cake\Datasource\FactoryLocator;
-use Cake\ORM\Locator\LocatorInterface;
+use Cake\ORM\Locator\ILocator;
 
 /**
  * Provides a registry/factory for Table objects.
@@ -61,9 +61,9 @@ class TableRegistry
     /**
      * Returns a singleton instance of ILocatorimplementation.
      *
-     * @return \Cake\ORM\Locator\LocatorInterface
+     * @return \Cake\ORM\Locator\ILocator
      */
-    public static function getTableLocator(): LocatorInterface
+    public static function getTableLocator(): ILocator
     {
         /** @var \Cake\ORM\Locator\ILocator*/
         return FactoryLocator::get('Table');
@@ -72,10 +72,10 @@ class TableRegistry
     /**
      * Sets singleton instance of ILocatorimplementation.
      *
-     * @param \Cake\ORM\Locator\ILocator$tableLocator Instance of a locator to use.
+     * @param \Cake\ORM\Locator\ILocator $tableLocator Instance of a locator to use.
      * @return void
      */
-    public static function setTableLocator(ILocator$tableLocator): void
+    public static function setTableLocator(ILocator $tableLocator): void
     {
         FactoryLocator::add('Table', $tableLocator);
     }

@@ -19,7 +19,7 @@ namespace Cake\ORM;
 use ArrayIterator;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\ORM\Locator\LocatorInterface;
+use Cake\ORM\Locator\ILocator;
 use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;
@@ -48,9 +48,9 @@ class AssociationCollection : IteratorAggregate
      * Sets the default table locator for associations.
      * If no locator is provided, the global one will be used.
      *
-     * @param \Cake\ORM\Locator\LocatorInterface|null $tableLocator Table locator instance.
+     * @param \Cake\ORM\Locator\ILocator|null $tableLocator Table locator instance.
      */
-    public this(?ILocator$tableLocator = null)
+    public this(?ILocator $tableLocator = null)
     {
         if ($tableLocator != null) {
             _tableLocator = $tableLocator;

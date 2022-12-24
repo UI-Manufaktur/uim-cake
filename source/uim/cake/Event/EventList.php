@@ -44,10 +44,10 @@ class EventList : ArrayAccess, Countable
     /**
      * Adds an event to the list when event listing is enabled.
      *
-     * @param \Cake\Event\EventInterface $event An event to the list of dispatched events.
+     * @param \Cake\Event\IEvent $event An event to the list of dispatched events.
      * @return void
      */
-    function add(EventInterface $event): void
+    function add(IEvent $event): void
     {
         _events[] = $event;
     }

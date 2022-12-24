@@ -189,11 +189,11 @@ trait TranslateStrategyTrait
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
      *
-     * @param \Cake\Event\EventInterface $event The beforeSave event that was fired
+     * @param \Cake\Event\IEvent $event The beforeSave event that was fired
      * @param \Cake\Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */
-    function afterSave(EventInterface $event, EntityInterface $entity)
+    function afterSave(IEvent $event, EntityInterface $entity)
     {
         $entity.unset('_i18n');
     }

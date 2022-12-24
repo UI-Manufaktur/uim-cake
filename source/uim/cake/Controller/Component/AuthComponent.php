@@ -239,10 +239,10 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Callback for Controller.startup event.
      *
-     * @param \Cake\Event\EventInterface $event Event instance.
+     * @param \Cake\Event\IEvent $event Event instance.
      * @return \Cake\Http\Response|null
      */
-    function startup(EventInterface $event): ?Response
+    function startup(IEvent $event): ?Response
     {
         return this.authCheck($event);
     }
@@ -254,11 +254,11 @@ class AuthComponent : Component : EventDispatcherInterface
      * The auth check is done when event name is same as the one configured in
      * `checkAuthIn` config.
      *
-     * @param \Cake\Event\EventInterface $event Event instance.
+     * @param \Cake\Event\IEvent $event Event instance.
      * @return \Cake\Http\Response|null
      * @throws \ReflectionException
      */
-    function authCheck(EventInterface $event): ?Response
+    function authCheck(IEvent $event): ?Response
     {
         if (_config['checkAuthIn'] != $event.getName()) {
             return null;
