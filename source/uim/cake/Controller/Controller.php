@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -25,7 +24,7 @@ use Cake\Datasource\Paging\PaginatorInterface;
 use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventDispatcherTrait;
 use Cake\Event\EventInterface;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\IEventListener;
 use Cake\Event\IEventManager;
 use Cake\Http\ContentTypeNegotiation;
 use Cake\Http\Exception\NotFoundException;
@@ -94,7 +93,7 @@ use UnexpectedValueException;
  * @link https://book.cakephp.org/4/en/controllers.html
  */
 #[\AllowDynamicProperties]
-class Controller : EventListenerInterface, EventDispatcherInterface
+class Controller : IEventListener, EventDispatcherInterface
 {
     use EventDispatcherTrait;
     use LocatorAwareTrait;

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -17,7 +16,7 @@ declare(strict_types=1);
 namespace Cake\Controller;
 
 use Cake\Core\InstanceConfigTrait;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\IEventListener;
 use Cake\Log\LogTrait;
 
 /**
@@ -59,7 +58,7 @@ use Cake\Log\LogTrait;
  * @see \Cake\Controller\Controller::$components
  */
 #[\AllowDynamicProperties]
-class Component : EventListenerInterface
+class Component : IEventListener
 {
     use InstanceConfigTrait;
     use LogTrait;
