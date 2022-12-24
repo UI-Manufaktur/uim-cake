@@ -107,25 +107,25 @@ class DateTimeWidget extends BasicWidget
      */
     function render(array $data, ContextInterface $context): string
     {
-        $data += this->mergeDefaults($data, $context);
+        $data += this.mergeDefaults($data, $context);
 
-        if (!isset(this->formatMap[$data['type']])) {
+        if (!isset(this.formatMap[$data['type']])) {
             throw new InvalidArgumentException(sprintf(
                 'Invalid type `%s` for input tag, expected datetime-local, date, time, month or week',
                 $data['type']
             ));
         }
 
-        $data = this->setStep($data, $context, $data['fieldName'] ?? '');
+        $data = this.setStep($data, $context, $data['fieldName'] ?? '');
 
-        $data['value'] = this->formatDateTime($data['val'], $data);
+        $data['value'] = this.formatDateTime($data['val'], $data);
         unset($data['val'], $data['timezone'], $data['format']);
 
-        return this->_templates->format('input', [
+        return this._templates->format('input', [
             'name' => $data['name'],
             'type' => $data['type'],
             'templateVars' => $data['templateVars'],
-            'attrs' => this->_templates->formatAttributes(
+            'attrs' => this._templates->formatAttributes(
                 $data,
                 ['name', 'type']
             ),
@@ -149,7 +149,7 @@ class DateTimeWidget extends BasicWidget
         if (isset($data['format'])) {
             $data['step'] = null;
         } else {
-            $data['step'] = this->defaultStep[$data['type']];
+            $data['step'] = this.defaultStep[$data['type']];
         }
 
         if (empty($data['fieldName'])) {
@@ -210,7 +210,7 @@ class DateTimeWidget extends BasicWidget
         if (isset($options['format'])) {
             $format = $options['format'];
         } else {
-            $format = this->formatMap[$options['type']];
+            $format = this.formatMap[$options['type']];
 
             if (
                 $options['type'] == 'datetime-local'

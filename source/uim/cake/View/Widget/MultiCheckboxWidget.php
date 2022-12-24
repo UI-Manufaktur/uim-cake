@@ -71,8 +71,8 @@ class MultiCheckboxWidget extends BasicWidget
      */
     public this(StringTemplate $templates, LabelWidget $label)
     {
-        this->_templates = $templates;
-        this->_label = $label;
+        this._templates = $templates;
+        this._label = $label;
     }
 
     /**
@@ -119,12 +119,12 @@ class MultiCheckboxWidget extends BasicWidget
      */
     function render(array $data, ContextInterface $context): string
     {
-        $data += this->mergeDefaults($data, $context);
+        $data += this.mergeDefaults($data, $context);
 
-        this->_idPrefix = $data['idPrefix'];
-        this->_clearIds();
+        this._idPrefix = $data['idPrefix'];
+        this._clearIds();
 
-        return implode('', this->_renderInputs($data, $context));
+        return implode('', this._renderInputs($data, $context));
     }
 
     /**
@@ -140,9 +140,9 @@ class MultiCheckboxWidget extends BasicWidget
         foreach ($data['options'] as $key => $val) {
             // Grouped inputs in a fieldset.
             if (is_string($key) && is_array($val) && !isset($val['text'], $val['value'])) {
-                $inputs = this->_renderInputs(['options' => $val] + $data, $context);
-                $title = this->_templates->format('multicheckboxTitle', ['text' => $key]);
-                $out[] = this->_templates->format('multicheckboxWrapper', [
+                $inputs = this._renderInputs(['options' => $val] + $data, $context);
+                $title = this._templates->format('multicheckboxTitle', ['text' => $key]);
+                $out[] = this._templates->format('multicheckboxWrapper', [
                     'content' => $title . implode('', $inputs),
                 ]);
                 continue;
@@ -167,19 +167,19 @@ class MultiCheckboxWidget extends BasicWidget
             }
             $checkbox['name'] = $data['name'];
             $checkbox['escape'] = $data['escape'];
-            $checkbox['checked'] = this->_isSelected((string)$checkbox['value'], $data['val']);
-            $checkbox['disabled'] = this->_isDisabled((string)$checkbox['value'], $data['disabled']);
+            $checkbox['checked'] = this._isSelected((string)$checkbox['value'], $data['val']);
+            $checkbox['disabled'] = this._isDisabled((string)$checkbox['value'], $data['disabled']);
             if (empty($checkbox['id'])) {
                 if (isset($data['id'])) {
                     $checkbox['id'] = $data['id'] . '-' . trim(
-                        this->_idSuffix((string)$checkbox['value']),
+                        this._idSuffix((string)$checkbox['value']),
                         '-'
                     );
                 } else {
-                    $checkbox['id'] = this->_id($checkbox['name'], (string)$checkbox['value']);
+                    $checkbox['id'] = this._id($checkbox['name'], (string)$checkbox['value']);
                 }
             }
-            $out[] = this->_renderInput($checkbox + $data, $context);
+            $out[] = this._renderInput($checkbox + $data, $context);
         }
 
         return $out;
@@ -194,17 +194,17 @@ class MultiCheckboxWidget extends BasicWidget
      */
     protected function _renderInput(array $checkbox, ContextInterface $context): string
     {
-        $input = this->_templates->format('checkbox', [
+        $input = this._templates->format('checkbox', [
             'name' => $checkbox['name'] . '[]',
             'value' => $checkbox['escape'] ? h($checkbox['value']) : $checkbox['value'],
             'templateVars' => $checkbox['templateVars'],
-            'attrs' => this->_templates->formatAttributes(
+            'attrs' => this._templates->formatAttributes(
                 $checkbox,
                 ['name', 'value', 'text', 'options', 'label', 'val', 'type']
             ),
         ]);
 
-        if ($checkbox['label'] == false && strpos(this->_templates->get('checkboxWrapper'), '{{input}}') == false) {
+        if ($checkbox['label'] == false && strpos(this._templates->get('checkboxWrapper'), '{{input}}') == false) {
             $label = $input;
         } else {
             $labelAttrs = is_array($checkbox['label']) ? $checkbox['label'] : [];
@@ -217,14 +217,14 @@ class MultiCheckboxWidget extends BasicWidget
             ];
 
             if ($checkbox['checked']) {
-                $selectedClass = this->_templates->format('selectedClass', []);
-                $labelAttrs = (array)this->_templates->addClass($labelAttrs, $selectedClass);
+                $selectedClass = this._templates->format('selectedClass', []);
+                $labelAttrs = (array)this._templates->addClass($labelAttrs, $selectedClass);
             }
 
-            $label = this->_label->render($labelAttrs, $context);
+            $label = this._label->render($labelAttrs, $context);
         }
 
-        return this->_templates->format('checkboxWrapper', [
+        return this._templates->format('checkboxWrapper', [
             'templateVars' => $checkbox['templateVars'],
             'label' => $label,
             'input' => $input,

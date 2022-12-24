@@ -56,14 +56,14 @@ class FileWidget extends BasicWidget
      */
     function render(array $data, ContextInterface $context): string
     {
-        $data += this->mergeDefaults($data, $context);
+        $data += this.mergeDefaults($data, $context);
 
         unset($data['val']);
 
-        return this->_templates->format('file', [
+        return this._templates->format('file', [
             'name' => $data['name'],
             'templateVars' => $data['templateVars'],
-            'attrs' => this->_templates->formatAttributes(
+            'attrs' => this._templates->formatAttributes(
                 $data,
                 ['name']
             ),
