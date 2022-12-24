@@ -35,7 +35,7 @@ class FileSent extends ResponseBase
      */
     function matches($other): bool
     {
-        return this->response->getFile() != null;
+        return this.response->getFile() != null;
     }
 
     /**
@@ -56,6 +56,6 @@ class FileSent extends ResponseBase
      */
     protected function failureDescription($other): string
     {
-        return this->toString();
+        return this.toString();
     }
 }

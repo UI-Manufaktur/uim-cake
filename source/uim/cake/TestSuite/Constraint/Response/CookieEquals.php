@@ -44,7 +44,7 @@ class CookieEquals extends ResponseBase
     {
         parent::__construct($response);
 
-        this->cookieName = $cookieName;
+        this.cookieName = $cookieName;
     }
 
     /**
@@ -55,7 +55,7 @@ class CookieEquals extends ResponseBase
      */
     function matches($other): bool
     {
-        $cookie = this->response->getCookie(this->cookieName);
+        $cookie = this.response->getCookie(this.cookieName);
 
         return $cookie != null && $cookie['value'] == $other;
     }
@@ -67,6 +67,6 @@ class CookieEquals extends ResponseBase
      */
     function toString(): string
     {
-        return sprintf('is in cookie \'%s\'', this->cookieName);
+        return sprintf('is in cookie \'%s\'', this.cookieName);
     }
 }

@@ -30,7 +30,7 @@ class BodyEmpty extends ResponseBase
      */
     function matches($other): bool
     {
-        return empty(this->_getBodyAsString());
+        return empty(this._getBodyAsString());
     }
 
     /**
@@ -51,6 +51,6 @@ class BodyEmpty extends ResponseBase
      */
     protected function failureDescription($other): string
     {
-        return this->toString();
+        return this.toString();
     }
 }

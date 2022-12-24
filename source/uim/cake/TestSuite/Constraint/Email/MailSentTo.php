@@ -35,8 +35,8 @@ class MailSentTo extends MailSentWith
      */
     function toString(): string
     {
-        if (this->at) {
-            return sprintf('was sent email #%d', this->at);
+        if (this.at) {
+            return sprintf('was sent email #%d', this.at);
         }
 
         return 'was sent an email';
