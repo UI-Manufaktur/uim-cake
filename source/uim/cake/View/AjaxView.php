@@ -13,7 +13,7 @@
  * @since         3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\View;
+module uim.cake.View;
 
 /**
  * A view class that is used for AJAX responses.

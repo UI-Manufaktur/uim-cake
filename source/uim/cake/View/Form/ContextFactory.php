@@ -13,7 +13,7 @@
  * @since         3.5.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\View\Form;
+module uim.cake.View\Form;
 
 use Cake\Collection\Collection;
 use Cake\Datasource\EntityInterface;

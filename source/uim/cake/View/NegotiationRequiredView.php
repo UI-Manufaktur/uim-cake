@@ -13,7 +13,7 @@
  * @since         4.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\View;
+module uim.cake.View;
 
 /**
  * A view class that responds to any content-type and can be used to create

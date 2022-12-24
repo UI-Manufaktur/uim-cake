@@ -13,7 +13,7 @@
  * @since         1.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Validation;
+module uim.cake.Validation;
 
 use Cake\I18n\FrozenTime;
 use Cake\Utility\Text;

@@ -13,7 +13,7 @@
  * @since         0.2.9
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\View;
+module uim.cake.View;
 
 use Cake\Core\InstanceConfigTrait;
 use Cake\Event\IEventListener;

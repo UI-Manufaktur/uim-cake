@@ -13,7 +13,7 @@
  * @since         0.10.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\View;
+module uim.cake.View;
 
 use Cake\Cache\Cache;
 use Cake\Core\App;

@@ -13,7 +13,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\View\Form;
+module uim.cake.View\Form;
 
 /**
  * Provides a context provider that does nothing.
