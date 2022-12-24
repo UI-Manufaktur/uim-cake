@@ -12,7 +12,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Auth;
+module uim.cake.Auth;
 
 use Cake\Controller\ComponentRegistry;
 use Cake\Core\InstanceConfigTrait;

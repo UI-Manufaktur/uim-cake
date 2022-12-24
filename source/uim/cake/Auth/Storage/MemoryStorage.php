@@ -13,7 +13,7 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Auth\Storage;
+module uim.cake.Auth\Storage;
 
 /**
  * Memory based non-persistent storage for authenticated user record.

@@ -13,7 +13,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Auth;
+module uim.cake.Auth;
 
 use Cake\Core\Configure;
 use Cake\Error\Debugger;

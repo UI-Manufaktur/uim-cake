@@ -13,7 +13,7 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Auth\Storage;
+module uim.cake.Auth\Storage;
 
 /**
  * Describes the methods that any class representing an Auth data storage should

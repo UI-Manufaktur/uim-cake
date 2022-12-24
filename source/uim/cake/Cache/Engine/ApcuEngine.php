@@ -13,7 +13,7 @@
  * @since         3.5.4
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Cache\Engine;
+module uim.cake.Cache\Engine;
 
 use APCUIterator;
 use Cake\Cache\CacheEngine;

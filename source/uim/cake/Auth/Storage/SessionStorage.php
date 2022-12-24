@@ -13,7 +13,7 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Auth\Storage;
+module uim.cake.Auth\Storage;
 
 use Cake\Core\InstanceConfigTrait;
 use Cake\Http\Response;

@@ -14,7 +14,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Cake\Cache\Engine;
+module uim.cake.Cache\Engine;
 
 use Cake\Cache\CacheEngine;
 use Cake\Log\Log;

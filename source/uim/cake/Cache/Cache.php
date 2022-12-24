@@ -13,7 +13,7 @@
  * @since         1.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Cache;
+module uim.cake.Cache;
 
 use Cake\Cache\Engine\NullEngine;
 use Cake\Core\StaticConfigTrait;
