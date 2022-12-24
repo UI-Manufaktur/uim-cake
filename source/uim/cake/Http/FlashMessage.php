@@ -55,8 +55,8 @@ class FlashMessage
      */
     public this(Session $session, array $config = [])
     {
-        this->session = $session;
-        this->setConfig($config);
+        this.session = $session;
+        this.setConfig($config);
     }
 
     /**
@@ -82,7 +82,7 @@ class FlashMessage
      */
     function set($message, array $options = []): void
     {
-        $options += (array)this->getConfig();
+        $options += (array)this.getConfig();
 
         if (isset($options['escape']) && !isset($options['params']['escape'])) {
             $options['params']['escape'] = $options['escape'];
@@ -101,7 +101,7 @@ class FlashMessage
 
         $messages = [];
         if (!$options['clear']) {
-            $messages = (array)this->session->read('Flash.' . $options['key']);
+            $messages = (array)this.session->read('Flash.' . $options['key']);
         }
 
         if (!$options['duplicate']) {
@@ -119,7 +119,7 @@ class FlashMessage
             'params' => $options['params'],
         ];
 
-        this->session->write('Flash.' . $options['key'], $messages);
+        this.session->write('Flash.' . $options['key'], $messages);
     }
 
     /**
@@ -142,7 +142,7 @@ class FlashMessage
         $options['params']['code'] = $options['params']['code'] ?? $exception->getCode();
 
         $message = $exception->getMessage();
-        this->set($message, $options);
+        this.set($message, $options);
     }
 
     /**
@@ -153,7 +153,7 @@ class FlashMessage
      */
     function consume(string $key): ?array
     {
-        return this->session->consume("Flash.{$key}");
+        return this.session->consume("Flash.{$key}");
     }
 
     /**
@@ -169,7 +169,7 @@ class FlashMessage
     function success(string $message, array $options = []): void
     {
         $options['element'] = 'success';
-        this->set($message, $options);
+        this.set($message, $options);
     }
 
     /**
@@ -185,7 +185,7 @@ class FlashMessage
     function error(string $message, array $options = []): void
     {
         $options['element'] = 'error';
-        this->set($message, $options);
+        this.set($message, $options);
     }
 
     /**
@@ -201,7 +201,7 @@ class FlashMessage
     function warning(string $message, array $options = []): void
     {
         $options['element'] = 'warning';
-        this->set($message, $options);
+        this.set($message, $options);
     }
 
     /**
@@ -217,6 +217,6 @@ class FlashMessage
     function info(string $message, array $options = []): void
     {
         $options['element'] = 'info';
-        this->set($message, $options);
+        this.set($message, $options);
     }
 }
