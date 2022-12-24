@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Retry;
 
-use Cake\Core\Retry\RetryStrategyInterface;
+import uim.cake.Core\Retry\RetryStrategyInterface;
 use Exception;
 use PDOException;
 

@@ -15,12 +15,12 @@
  */
 module uim.cake.Database\Expression;
 
-use Cake\Database\IExpression;
-use Cake\Database\Query;
-use Cake\Database\Type\ExpressionTypeCasterTrait;
-use Cake\Database\TypedResultInterface;
-use Cake\Database\TypedResultTrait;
-use Cake\Database\ValueBinder;
+import uim.cake.Database\IExpression;
+import uim.cake.Database\Query;
+import uim.cake.Database\Type\ExpressionTypeCasterTrait;
+import uim.cake.Database\TypedResultInterface;
+import uim.cake.Database\TypedResultTrait;
+import uim.cake.Database\ValueBinder;
 
 /**
  * This class represents a function call string in a SQL statement. Calls can be

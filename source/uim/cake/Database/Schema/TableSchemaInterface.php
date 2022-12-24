@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Schema;
 
-use Cake\Datasource\SchemaInterface;
+import uim.cake.Datasource\SchemaInterface;
 
 /**
  * An interface used by database TableSchema objects.

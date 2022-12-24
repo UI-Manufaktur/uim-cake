@@ -15,9 +15,9 @@
  */
 module uim.cake.Database\Statement;
 
-use Cake\Database\DriverInterface;
-use Cake\Database\StatementInterface;
-use Cake\Database\TypeConverterTrait;
+import uim.cake.Database\DriverInterface;
+import uim.cake.Database\StatementInterface;
+import uim.cake.Database\TypeConverterTrait;
 use Countable;
 use IteratorAggregate;
 

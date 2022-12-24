@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Log;
 
-use Cake\Database\Driver\Sqlserver;
+import uim.cake.Database\Driver\Sqlserver;
 use JsonSerializable;
 
 /**

@@ -15,8 +15,8 @@
  */
 module uim.cake.Database\Schema;
 
-use Cake\Database\DriverInterface;
-use Cake\Database\Exception\DatabaseException;
+import uim.cake.Database\DriverInterface;
+import uim.cake.Database\Exception\DatabaseException;
 
 /**
  * Schema generation/reflection features for MySQL

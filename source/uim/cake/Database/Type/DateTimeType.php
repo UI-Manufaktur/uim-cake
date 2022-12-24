@@ -15,10 +15,10 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\Database\DriverInterface;
-use Cake\I18n\FrozenTime;
-use Cake\I18n\I18nDateTimeInterface;
-use Cake\I18n\Time;
+import uim.cake.Database\DriverInterface;
+import uim.cake.I18n\FrozenTime;
+import uim.cake.I18n\I18nDateTimeInterface;
+import uim.cake.I18n\Time;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;

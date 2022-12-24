@@ -15,8 +15,8 @@
  */
 module uim.cake.Database\Retry;
 
-use Cake\Core\Retry\RetryStrategyInterface;
-use Cake\Database\Connection;
+import uim.cake.Core\Retry\RetryStrategyInterface;
+import uim.cake.Database\Connection;
 use Exception;
 
 /**

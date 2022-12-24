@@ -15,9 +15,9 @@
  */
 module uim.cake.Database\Schema;
 
-use Cake\Database\DriverInterface;
-use Cake\Database\Type\ColumnSchemaAwareInterface;
-use Cake\Database\TypeFactory;
+import uim.cake.Database\DriverInterface;
+import uim.cake.Database\Type\ColumnSchemaAwareInterface;
+import uim.cake.Database\TypeFactory;
 use InvalidArgumentException;
 
 /**

@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Log;
 
-use Cake\Database\Statement\StatementDecorator;
+import uim.cake.Database\Statement\StatementDecorator;
 use Exception;
 use Psr\Log\LoggerInterface;
 

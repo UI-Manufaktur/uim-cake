@@ -2,8 +2,8 @@
 
 module uim.cake.Database\Type;
 
-use Cake\Database\DriverInterface;
-use Cake\Database\Schema\TableSchemaInterface;
+import uim.cake.Database\DriverInterface;
+import uim.cake.Database\Schema\TableSchemaInterface;
 
 interface ColumnSchemaAwareInterface
 {

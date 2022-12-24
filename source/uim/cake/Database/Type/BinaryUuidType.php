@@ -15,9 +15,9 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Database\DriverInterface;
-use Cake\Utility\Text;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Database\DriverInterface;
+import uim.cake.Utility\Text;
 use PDO;
 
 /**

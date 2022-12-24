@@ -15,9 +15,9 @@
  */
 module uim.cake.Database\Schema;
 
-use Cake\Database\Connection;
-use Cake\Database\Exception\DatabaseException;
-use Cake\Database\TypeFactory;
+import uim.cake.Database\Connection;
+import uim.cake.Database\Exception\DatabaseException;
+import uim.cake.Database\TypeFactory;
 
 /**
  * Represents a single table in a database schema.

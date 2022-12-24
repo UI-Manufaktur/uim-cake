@@ -15,8 +15,8 @@
  */
 module uim.cake.Database\Statement;
 
-use Cake\Database\DriverInterface;
-use Cake\Database\StatementInterface;
+import uim.cake.Database\DriverInterface;
+import uim.cake.Database\StatementInterface;
 
 /**
  * Wraps a statement in a callback that allows row results

@@ -15,8 +15,8 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\Database\DriverInterface;
-use Cake\Database\TypeInterface;
+import uim.cake.Database\DriverInterface;
+import uim.cake.Database\TypeInterface;
 use PDO;
 
 /**

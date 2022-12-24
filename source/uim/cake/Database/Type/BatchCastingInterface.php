@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Type;
 
-use Cake\Database\DriverInterface;
+import uim.cake.Database\DriverInterface;
 
 /**
  * Denotes type objects capable of converting many values from their original

@@ -15,10 +15,10 @@
  */
 module uim.cake.Database\Expression;
 
-use Cake\Database\IExpression;
-use Cake\Database\Query;
-use Cake\Database\TypeMapTrait;
-use Cake\Database\ValueBinder;
+import uim.cake.Database\IExpression;
+import uim.cake.Database\Query;
+import uim.cake.Database\TypeMapTrait;
+import uim.cake.Database\ValueBinder;
 use Closure;
 use Countable;
 use InvalidArgumentException;
