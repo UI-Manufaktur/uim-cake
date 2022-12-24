@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 class_exists('Cake\Http\Exception\MissingControllerException');
 deprecationWarning(
