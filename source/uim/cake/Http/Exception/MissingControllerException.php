@@ -20,7 +20,7 @@ use Cake\Core\Exception\CakeException;
  * Missing Controller exception - used when a controller
  * cannot be found.
  */
-class MissingControllerException extends CakeException
+class MissingControllerException : CakeException
 {
     /**
      * @inheritDoc

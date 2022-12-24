@@ -23,6 +23,6 @@ use Cake\Error\Renderer\WebExceptionRenderer;
  *
  * @deprecated 4.4.0 Use `Cake\Error\Renderer\WebExceptionRenderer` instead.
  */
-class ExceptionRenderer extends WebExceptionRenderer
+class ExceptionRenderer : WebExceptionRenderer
 {
 }

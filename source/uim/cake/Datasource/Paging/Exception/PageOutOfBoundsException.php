@@ -19,7 +19,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Exception raised when requested page number does not exist.
  */
-class PageOutOfBoundsException extends CakeException
+class PageOutOfBoundsException : CakeException
 {
     /**
      * @inheritDoc

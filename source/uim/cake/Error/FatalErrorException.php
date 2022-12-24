@@ -20,7 +20,7 @@ use Throwable;
 /**
  * Represents a fatal error
  */
-class FatalErrorException extends CakeException
+class FatalErrorException : CakeException
 {
     /**
      * Constructor

@@ -21,6 +21,6 @@ use Cake\Core\Exception\CakeException;
 /**
  * Exception raised when a particular record was not found
  */
-class RecordNotFoundException extends CakeException
+class RecordNotFoundException : CakeException
 {
 }

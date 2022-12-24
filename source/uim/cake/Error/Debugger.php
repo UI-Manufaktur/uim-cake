@@ -48,7 +48,7 @@ use Throwable;
 /**
  * Provide custom logging and error handling.
  *
- * Debugger extends PHP's default error handling and gives
+ * Debugger : PHP's default error handling and gives
  * simpler to use more powerful interfaces.
  *
  * @link https://book.cakephp.org/4/en/development/debugging.html#namespace-Cake\Error

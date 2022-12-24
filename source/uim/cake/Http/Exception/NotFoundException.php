@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Represents an HTTP 404 error.
  */
-class NotFoundException extends HttpException
+class NotFoundException : HttpException
 {
     /**
      * @inheritDoc

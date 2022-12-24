@@ -29,7 +29,7 @@ use RuntimeException;
  * The `allowedSubject` option can be a list of class names, if you want
  * to check multiple classes.
  */
-class SubjectFilterDecorator extends AbstractDecorator
+class SubjectFilterDecorator : AbstractDecorator
 {
     /**
      * @inheritDoc

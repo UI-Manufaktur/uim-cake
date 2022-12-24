@@ -80,7 +80,7 @@ use SimpleXMLElement;
  * $content = $response->getStatusCode();
  * ```
  */
-class Response extends Message implements IResponse
+class Response : Message implements IResponse
 {
     use MessageTrait;
 

@@ -25,7 +25,7 @@ use RuntimeException;
  * Use this decorator to allow your event listener to only
  * be invoked if the `if` and/or `unless` conditions pass.
  */
-class ConditionDecorator extends AbstractDecorator
+class ConditionDecorator : AbstractDecorator
 {
     /**
      * @inheritDoc

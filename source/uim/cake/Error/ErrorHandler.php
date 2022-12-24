@@ -88,7 +88,7 @@ use Throwable;
  *
  * @see \Cake\Error\ExceptionRenderer for more information on how to customize exception rendering.
  */
-class ErrorHandler extends BaseErrorHandler
+class ErrorHandler : BaseErrorHandler
 {
     /**
      * Constructor

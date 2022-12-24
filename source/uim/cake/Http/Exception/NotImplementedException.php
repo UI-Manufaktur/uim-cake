@@ -17,7 +17,7 @@ namespace Cake\Http\Exception;
 /**
  * Not Implemented Exception - used when an API method is not implemented
  */
-class NotImplementedException extends HttpException
+class NotImplementedException : HttpException
 {
     /**
      * @inheritDoc

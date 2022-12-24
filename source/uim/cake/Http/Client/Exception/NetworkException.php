@@ -27,7 +27,7 @@ use Throwable;
  *
  * Example: the target host name can not be resolved or the connection failed.
  */
-class NetworkException extends RuntimeException implements NetworkExceptionInterface
+class NetworkException : RuntimeException implements NetworkExceptionInterface
 {
     /**
      * @var \Psr\Http\Message\RequestInterface

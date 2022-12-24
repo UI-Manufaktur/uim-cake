@@ -29,7 +29,7 @@ namespace Cake\Http\Exception;
  * Additional headers can also be provided in the constructor, or
  * using the addHeaders() method.
  */
-class RedirectException extends HttpException
+class RedirectException : HttpException
 {
     /**
      * Constructor

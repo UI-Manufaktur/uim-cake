@@ -31,7 +31,7 @@ use Laminas\Diactoros\CallbackStream as BaseCallbackStream;
  *
  * @internal
  */
-class CallbackStream extends BaseCallbackStream
+class CallbackStream : BaseCallbackStream
 {
     /**
      * @inheritDoc

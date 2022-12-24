@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Represents an HTTP 409 error.
  */
-class ConflictException extends HttpException
+class ConflictException : HttpException
 {
     /**
      * @inheritDoc

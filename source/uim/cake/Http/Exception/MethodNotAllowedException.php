@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Represents an HTTP 405 error.
  */
-class MethodNotAllowedException extends HttpException
+class MethodNotAllowedException : HttpException
 {
     /**
      * @inheritDoc

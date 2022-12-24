@@ -25,7 +25,7 @@ use Psr\Http\Message\RequestInterface;
  * Used by Cake\Http\Client to contain request information
  * for making requests.
  */
-class Request extends Message implements RequestInterface
+class Request : Message implements RequestInterface
 {
     use RequestTrait;
 

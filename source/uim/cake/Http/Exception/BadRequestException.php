@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Represents an HTTP 400 error.
  */
-class BadRequestException extends HttpException
+class BadRequestException : HttpException
 {
     /**
      * @inheritDoc

@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Represents an HTTP 406 error.
  */
-class NotAcceptableException extends HttpException
+class NotAcceptableException : HttpException
 {
     /**
      * @inheritDoc

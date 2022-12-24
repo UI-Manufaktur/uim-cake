@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Represents an HTTP 403 error.
  */
-class ForbiddenException extends HttpException
+class ForbiddenException : HttpException
 {
     /**
      * @inheritDoc

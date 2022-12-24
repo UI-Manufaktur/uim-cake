@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Represents an HTTP 500 error.
  */
-class InternalErrorException extends HttpException
+class InternalErrorException : HttpException
 {
     /**
      * Constructor

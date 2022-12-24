@@ -21,7 +21,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Used when a model cannot be found.
  */
-class MissingModelException extends CakeException
+class MissingModelException : CakeException
 {
     /**
      * @var string

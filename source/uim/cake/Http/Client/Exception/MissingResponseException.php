@@ -20,7 +20,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Used to indicate that a request did not have a matching mock response.
  */
-class MissingResponseException extends CakeException
+class MissingResponseException : CakeException
 {
     /**
      * @var string

@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Represents an HTTP 410 error.
  */
-class GoneException extends HttpException
+class GoneException : HttpException
 {
     /**
      * @inheritDoc

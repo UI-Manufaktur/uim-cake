@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Represents an HTTP 401 error.
  */
-class UnauthorizedException extends HttpException
+class UnauthorizedException : HttpException
 {
     /**
      * @inheritDoc
