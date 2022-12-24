@@ -65,7 +65,7 @@ class HelpFormatter
      */
     public this(ConsoleOptionParser $parser)
     {
-        this->_parser = $parser;
+        this._parser = $parser;
     }
 
     /**
@@ -76,7 +76,7 @@ class HelpFormatter
      */
     function setAlias(string $alias): void
     {
-        this->_alias = $alias;
+        this._alias = $alias;
     }
 
     /**
@@ -87,7 +87,7 @@ class HelpFormatter
      */
     function text(int $width = 72): string
     {
-        $parser = this->_parser;
+        $parser = this._parser;
         $out = [];
         $description = $parser->getDescription();
         if (!empty($description)) {
@@ -95,13 +95,13 @@ class HelpFormatter
             $out[] = '';
         }
         $out[] = '<info>Usage:</info>';
-        $out[] = this->_generateUsage();
+        $out[] = this._generateUsage();
         $out[] = '';
         $subcommands = $parser->subcommands();
         if (!empty($subcommands)) {
             $out[] = '<info>Subcommands:</info>';
             $out[] = '';
-            $max = this->_getMaxLength($subcommands) + 2;
+            $max = this._getMaxLength($subcommands) + 2;
             foreach ($subcommands as $command) {
                 $out[] = Text::wrapBlock($command->help($max), [
                     'width' => $width,
@@ -111,7 +111,7 @@ class HelpFormatter
             }
             $out[] = '';
             $out[] = sprintf(
-                'To see help on a subcommand use <info>`' . this->_alias . ' %s [subcommand] --help`</info>',
+                'To see help on a subcommand use <info>`' . this._alias . ' %s [subcommand] --help`</info>',
                 $parser->getCommand()
             );
             $out[] = '';
@@ -119,7 +119,7 @@ class HelpFormatter
 
         $options = $parser->options();
         if ($options) {
-            $max = this->_getMaxLength($options) + 8;
+            $max = this._getMaxLength($options) + 8;
             $out[] = '<info>Options:</info>';
             $out[] = '';
             foreach ($options as $option) {
@@ -134,7 +134,7 @@ class HelpFormatter
 
         $arguments = $parser->arguments();
         if (!empty($arguments)) {
-            $max = this->_getMaxLength($arguments) + 2;
+            $max = this._getMaxLength($arguments) + 2;
             $out[] = '<info>Arguments:</info>';
             $out[] = '';
             foreach ($arguments as $argument) {
@@ -164,24 +164,24 @@ class HelpFormatter
      */
     protected function _generateUsage(): string
     {
-        $usage = [this->_alias . ' ' . this->_parser->getCommand()];
-        $subcommands = this->_parser->subcommands();
+        $usage = [this._alias . ' ' . this._parser->getCommand()];
+        $subcommands = this._parser->subcommands();
         if (!empty($subcommands)) {
             $usage[] = '[subcommand]';
         }
         $options = [];
-        foreach (this->_parser->options() as $option) {
+        foreach (this._parser->options() as $option) {
             $options[] = $option->usage();
         }
-        if (count($options) > this->_maxOptions) {
+        if (count($options) > this._maxOptions) {
             $options = ['[options]'];
         }
         $usage = array_merge($usage, $options);
         $args = [];
-        foreach (this->_parser->arguments() as $argument) {
+        foreach (this._parser->arguments() as $argument) {
             $args[] = $argument->usage();
         }
-        if (count($args) > this->_maxArgs) {
+        if (count($args) > this._maxArgs) {
             $args = ['[arguments]'];
         }
         $usage = array_merge($usage, $args);
@@ -213,7 +213,7 @@ class HelpFormatter
      */
     function xml(bool $string = true)
     {
-        $parser = this->_parser;
+        $parser = this._parser;
         $xml = new SimpleXMLElement('<shell></shell>');
         $xml->addChild('command', $parser->getCommand());
         $xml->addChild('description', $parser->getDescription());

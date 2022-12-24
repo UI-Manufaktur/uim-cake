@@ -43,7 +43,7 @@ class HelperRegistry extends ObjectRegistry
      */
     function setIo(ConsoleIo $io): void
     {
-        this->_io = $io;
+        this._io = $io;
     }
 
     /**
@@ -101,6 +101,6 @@ class HelperRegistry extends ObjectRegistry
     protected function _create($class, string $alias, array $config): Helper
     {
         /** @var \Cake\Console\Helper */
-        return new $class(this->_io, $config);
+        return new $class(this._io, $config);
     }
 }

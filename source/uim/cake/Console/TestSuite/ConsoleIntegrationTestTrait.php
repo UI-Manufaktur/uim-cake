@@ -85,33 +85,33 @@ trait ConsoleIntegrationTestTrait
      */
     function exec(string $command, array $input = []): void
     {
-        $runner = this->makeRunner();
+        $runner = this.makeRunner();
 
-        if (this->_out == null) {
-            this->_out = new StubConsoleOutput();
+        if (this._out == null) {
+            this._out = new StubConsoleOutput();
         }
-        if (this->_err == null) {
-            this->_err = new StubConsoleOutput();
+        if (this._err == null) {
+            this._err = new StubConsoleOutput();
         }
-        if (this->_in == null) {
-            this->_in = new StubConsoleInput($input);
+        if (this._in == null) {
+            this._in = new StubConsoleInput($input);
         } elseif ($input) {
             throw new RuntimeException('You can use `$input` only if `$_in` property is null and will be reset.');
         }
 
-        $args = this->commandStringToArgs("cake $command");
-        $io = new ConsoleIo(this->_out, this->_err, this->_in);
+        $args = this.commandStringToArgs("cake $command");
+        $io = new ConsoleIo(this._out, this._err, this._in);
 
         try {
-            this->_exitCode = $runner->run($args, $io);
+            this._exitCode = $runner->run($args, $io);
         } catch (MissingConsoleInputException $e) {
-            $messages = this->_out->messages();
+            $messages = this._out->messages();
             if (count($messages)) {
                 $e->setQuestion($messages[count($messages) - 1]);
             }
             throw $e;
         } catch (StopException $exception) {
-            this->_exitCode = $exception->getCode();
+            this._exitCode = $exception->getCode();
         }
     }
 
@@ -124,11 +124,11 @@ trait ConsoleIntegrationTestTrait
      */
     function cleanupConsoleTrait(): void
     {
-        this->_exitCode = null;
-        this->_out = null;
-        this->_err = null;
-        this->_in = null;
-        this->_useCommandRunner = false;
+        this._exitCode = null;
+        this._out = null;
+        this._err = null;
+        this._in = null;
+        this._useCommandRunner = false;
     }
 
     /**
@@ -139,7 +139,7 @@ trait ConsoleIntegrationTestTrait
      */
     function useCommandRunner(): void
     {
-        this->_useCommandRunner = true;
+        this._useCommandRunner = true;
     }
 
     /**
@@ -151,7 +151,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertExitCode(int $expected, string $message = ''): void
     {
-        this->assertThat($expected, new ExitCode(this->_exitCode), $message);
+        this.assertThat($expected, new ExitCode(this._exitCode), $message);
     }
 
     /**
@@ -162,7 +162,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertExitSuccess($message = '')
     {
-        this->assertThat(Command::CODE_SUCCESS, new ExitCode(this->_exitCode), $message);
+        this.assertThat(Command::CODE_SUCCESS, new ExitCode(this._exitCode), $message);
     }
 
     /**
@@ -173,7 +173,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertExitError($message = '')
     {
-        this->assertThat(Command::CODE_ERROR, new ExitCode(this->_exitCode), $message);
+        this.assertThat(Command::CODE_ERROR, new ExitCode(this._exitCode), $message);
     }
 
     /**
@@ -184,7 +184,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertOutputEmpty(string $message = ''): void
     {
-        this->assertThat(null, new ContentsEmpty(this->_out->messages(), 'output'), $message);
+        this.assertThat(null, new ContentsEmpty(this._out->messages(), 'output'), $message);
     }
 
     /**
@@ -196,7 +196,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertOutputContains(string $expected, string $message = ''): void
     {
-        this->assertThat($expected, new ContentsContain(this->_out->messages(), 'output'), $message);
+        this.assertThat($expected, new ContentsContain(this._out->messages(), 'output'), $message);
     }
 
     /**
@@ -208,7 +208,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertOutputNotContains(string $expected, string $message = ''): void
     {
-        this->assertThat($expected, new ContentsNotContain(this->_out->messages(), 'output'), $message);
+        this.assertThat($expected, new ContentsNotContain(this._out->messages(), 'output'), $message);
     }
 
     /**
@@ -220,7 +220,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertOutputRegExp(string $pattern, string $message = ''): void
     {
-        this->assertThat($pattern, new ContentsRegExp(this->_out->messages(), 'output'), $message);
+        this.assertThat($pattern, new ContentsRegExp(this._out->messages(), 'output'), $message);
     }
 
     /**
@@ -232,7 +232,7 @@ trait ConsoleIntegrationTestTrait
      */
     protected function assertOutputContainsRow(array $row, string $message = ''): void
     {
-        this->assertThat($row, new ContentsContainRow(this->_out->messages(), 'output'), $message);
+        this.assertThat($row, new ContentsContainRow(this._out->messages(), 'output'), $message);
     }
 
     /**
@@ -244,7 +244,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertErrorContains(string $expected, string $message = ''): void
     {
-        this->assertThat($expected, new ContentsContain(this->_err->messages(), 'error output'), $message);
+        this.assertThat($expected, new ContentsContain(this._err->messages(), 'error output'), $message);
     }
 
     /**
@@ -256,7 +256,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertErrorRegExp(string $pattern, string $message = ''): void
     {
-        this->assertThat($pattern, new ContentsRegExp(this->_err->messages(), 'error output'), $message);
+        this.assertThat($pattern, new ContentsRegExp(this._err->messages(), 'error output'), $message);
     }
 
     /**
@@ -267,7 +267,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertErrorEmpty(string $message = ''): void
     {
-        this->assertThat(null, new ContentsEmpty(this->_err->messages(), 'error output'), $message);
+        this.assertThat(null, new ContentsEmpty(this._err->messages(), 'error output'), $message);
     }
 
     /**
@@ -277,9 +277,9 @@ trait ConsoleIntegrationTestTrait
      */
     protected function makeRunner()
     {
-        if (this->_useCommandRunner) {
+        if (this._useCommandRunner) {
             /** @var \Cake\Core\IConsoleApplication $app */
-            $app = this->createApp();
+            $app = this.createApp();
 
             return new CommandRunner($app);
         }

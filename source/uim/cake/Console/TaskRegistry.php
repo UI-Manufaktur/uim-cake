@@ -42,7 +42,7 @@ class TaskRegistry extends ObjectRegistry
      */
     public this(Shell $shell)
     {
-        this->_Shell = $shell;
+        this._Shell = $shell;
     }
 
     /**
@@ -92,6 +92,6 @@ class TaskRegistry extends ObjectRegistry
     protected function _create($class, string $alias, array $config): Shell
     {
         /** @var \Cake\Console\Shell */
-        return new $class(this->_Shell->getIo());
+        return new $class(this._Shell->getIo());
     }
 }
