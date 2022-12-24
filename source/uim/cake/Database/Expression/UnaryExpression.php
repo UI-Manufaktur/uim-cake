@@ -69,9 +69,9 @@ class UnaryExpression implements IExpression
      */
     public this(string $operator, $value, $position = self::PREFIX)
     {
-        this->_operator = $operator;
-        this->_value = $value;
-        this->position = $position;
+        this._operator = $operator;
+        this._value = $value;
+        this.position = $position;
     }
 
     /**
@@ -79,16 +79,16 @@ class UnaryExpression implements IExpression
      */
     function sql(ValueBinder $binder): string
     {
-        $operand = this->_value;
+        $operand = this._value;
         if ($operand instanceof IExpression) {
             $operand = $operand->sql($binder);
         }
 
-        if (this->position == self::POSTFIX) {
-            return '(' . $operand . ') ' . this->_operator;
+        if (this.position == self::POSTFIX) {
+            return '(' . $operand . ') ' . this._operator;
         }
 
-        return this->_operator . ' (' . $operand . ')';
+        return this._operator . ' (' . $operand . ')';
     }
 
     /**
@@ -96,9 +96,9 @@ class UnaryExpression implements IExpression
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this->_value instanceof IExpression) {
-            $callback(this->_value);
-            this->_value->traverse($callback);
+        if (this._value instanceof IExpression) {
+            $callback(this._value);
+            this._value->traverse($callback);
         }
 
         return this;
@@ -111,8 +111,8 @@ class UnaryExpression implements IExpression
      */
     function __clone()
     {
-        if (this->_value instanceof IExpression) {
-            this->_value = clone this->_value;
+        if (this._value instanceof IExpression) {
+            this._value = clone this._value;
         }
     }
 }

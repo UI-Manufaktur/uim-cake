@@ -34,8 +34,8 @@ class QueryLogger extends BaseLog
      */
     public this(array $config = [])
     {
-        this->_defaultConfig['scopes'] = ['queriesLog'];
-        this->_defaultConfig['connection'] = '';
+        this._defaultConfig['scopes'] = ['queriesLog'];
+        this._defaultConfig['connection'] = '';
 
         parent::__construct($config);
     }
@@ -45,8 +45,8 @@ class QueryLogger extends BaseLog
      */
     function log($level, $message, array $context = [])
     {
-        $context['scope'] = this->scopes() ?: ['queriesLog'];
-        $context['connection'] = this->getConfig('connection');
+        $context['scope'] = this.scopes() ?: ['queriesLog'];
+        $context['connection'] = this.getConfig('connection');
 
         if ($context['query'] instanceof LoggedQuery) {
             $context = $context['query']->getContext() + $context;

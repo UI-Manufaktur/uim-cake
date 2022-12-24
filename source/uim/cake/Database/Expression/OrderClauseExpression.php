@@ -43,8 +43,8 @@ class OrderClauseExpression implements IExpression, FieldInterface
      */
     public this($field, $direction)
     {
-        this->_field = $field;
-        this->_direction = strtolower($direction) == 'asc' ? 'ASC' : 'DESC';
+        this._field = $field;
+        this._direction = strtolower($direction) == 'asc' ? 'ASC' : 'DESC';
     }
 
     /**
@@ -53,14 +53,14 @@ class OrderClauseExpression implements IExpression, FieldInterface
     function sql(ValueBinder $binder): string
     {
         /** @var \Cake\Database\IExpression|string $field */
-        $field = this->_field;
+        $field = this._field;
         if ($field instanceof Query) {
             $field = sprintf('(%s)', $field->sql($binder));
         } elseif ($field instanceof IExpression) {
             $field = $field->sql($binder);
         }
 
-        return sprintf('%s %s', $field, this->_direction);
+        return sprintf('%s %s', $field, this._direction);
     }
 
     /**
@@ -68,9 +68,9 @@ class OrderClauseExpression implements IExpression, FieldInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this->_field instanceof IExpression) {
-            $callback(this->_field);
-            this->_field->traverse($callback);
+        if (this._field instanceof IExpression) {
+            $callback(this._field);
+            this._field->traverse($callback);
         }
 
         return this;
@@ -83,8 +83,8 @@ class OrderClauseExpression implements IExpression, FieldInterface
      */
     function __clone()
     {
-        if (this->_field instanceof IExpression) {
-            this->_field = clone this->_field;
+        if (this._field instanceof IExpression) {
+            this._field = clone this._field;
         }
     }
 }

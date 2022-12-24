@@ -68,7 +68,7 @@ class ReconnectStrategy implements RetryStrategyInterface
      */
     public this(Connection $connection)
     {
-        this->connection = $connection;
+        this.connection = $connection;
     }
 
     /**
@@ -83,7 +83,7 @@ class ReconnectStrategy implements RetryStrategyInterface
 
         foreach (static::$causes as $cause) {
             if (strstr($message, $cause) != false) {
-                return this->reconnect();
+                return this.reconnect();
             }
         }
 
@@ -97,21 +97,21 @@ class ReconnectStrategy implements RetryStrategyInterface
      */
     protected function reconnect(): bool
     {
-        if (this->connection->inTransaction()) {
+        if (this.connection->inTransaction()) {
             // It is not safe to blindly reconnect in the middle of a transaction
             return false;
         }
 
         try {
             // Make sure we free any resources associated with the old connection
-            this->connection->disconnect();
+            this.connection->disconnect();
         } catch (Exception $e) {
         }
 
         try {
-            this->connection->connect();
-            if (this->connection->isQueryLoggingEnabled()) {
-                this->connection->log('[RECONNECT]');
+            this.connection->connect();
+            if (this.connection->isQueryLoggingEnabled()) {
+                this.connection->log('[RECONNECT]');
             }
 
             return true;
