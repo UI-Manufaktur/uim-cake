@@ -50,7 +50,7 @@ class AssetMiddleware implements MiddlewareInterface
     public this(array $options = [])
     {
         if (!empty($options['cacheTime'])) {
-            this->cacheTime = $options['cacheTime'];
+            this.cacheTime = $options['cacheTime'];
         }
     }
 
@@ -72,14 +72,14 @@ class AssetMiddleware implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $assetFile = this->_getAssetFile($url);
+        $assetFile = this._getAssetFile($url);
         if ($assetFile == null || !is_file($assetFile)) {
             return $handler->handle($request);
         }
 
         $file = new SplFileInfo($assetFile);
         $modifiedTime = $file->getMTime();
-        if (this->isNotModified($request, $file)) {
+        if (this.isNotModified($request, $file)) {
             return (new Response())
                 ->withStringBody('')
                 ->withStatus(304)
@@ -89,7 +89,7 @@ class AssetMiddleware implements MiddlewareInterface
                 );
         }
 
-        return this->deliverAsset($request, $file);
+        return this.deliverAsset($request, $file);
     }
 
     /**
@@ -152,7 +152,7 @@ class AssetMiddleware implements MiddlewareInterface
 
         $contentType = (array)($response->getMimeType($file->getExtension()) ?: 'application/octet-stream');
         $modified = $file->getMTime();
-        $expire = strtotime(this->cacheTime);
+        $expire = strtotime(this.cacheTime);
         $maxAge = $expire - time();
 
         return $response

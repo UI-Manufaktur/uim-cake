@@ -71,7 +71,7 @@ class DashedRoute extends Route
             $params['controller'] = Inflector::camelize($params['controller'], '-');
         }
         if (!empty($params['plugin'])) {
-            $params['plugin'] = this->_camelizePlugin($params['plugin']);
+            $params['plugin'] = this._camelizePlugin($params['plugin']);
         }
         if (!empty($params['action'])) {
             $params['action'] = Inflector::variable(str_replace(
@@ -96,10 +96,10 @@ class DashedRoute extends Route
      */
     function match(array $url, array $context = []): ?string
     {
-        $url = this->_dasherize($url);
-        if (!this->_inflectedDefaults) {
-            this->_inflectedDefaults = true;
-            this->defaults = this->_dasherize(this->defaults);
+        $url = this._dasherize($url);
+        if (!this._inflectedDefaults) {
+            this._inflectedDefaults = true;
+            this.defaults = this._dasherize(this.defaults);
         }
 
         return parent::match($url, $context);

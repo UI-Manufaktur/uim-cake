@@ -90,7 +90,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
         }
 
         foreach ($locations as $location) {
-            this->addLocation($location);
+            this.addLocation($location);
         }
     }
 
@@ -105,7 +105,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      */
     function allowFallbackClass(bool $allow)
     {
-        this->allowFallbackClass = $allow;
+        this.allowFallbackClass = $allow;
 
         return this;
     }
@@ -123,7 +123,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      */
     function setFallbackClassName($className)
     {
-        this->fallbackClassName = $className;
+        this.fallbackClassName = $className;
 
         return this;
     }
@@ -134,19 +134,19 @@ class TableLocator extends AbstractLocator implements LocatorInterface
     function setConfig($alias, $options = null)
     {
         if (!is_string($alias)) {
-            this->_config = $alias;
+            this._config = $alias;
 
             return this;
         }
 
-        if (isset(this->instances[$alias])) {
+        if (isset(this.instances[$alias])) {
             throw new RuntimeException(sprintf(
                 'You cannot configure "%s", it has already been constructed.',
                 $alias
             ));
         }
 
-        this->_config[$alias] = $options;
+        this._config[$alias] = $options;
 
         return this;
     }
@@ -157,10 +157,10 @@ class TableLocator extends AbstractLocator implements LocatorInterface
     function getConfig(?string $alias = null): array
     {
         if ($alias == null) {
-            return this->_config;
+            return this._config;
         }
 
-        return this->_config[$alias] ?? [];
+        return this._config[$alias] ?? [];
     }
 
     /**
@@ -217,12 +217,12 @@ class TableLocator extends AbstractLocator implements LocatorInterface
             $options['className'] = $alias;
         }
 
-        if (isset(this->_config[$alias])) {
-            $options += this->_config[$alias];
+        if (isset(this._config[$alias])) {
+            $options += this._config[$alias];
         }
 
-        $allowFallbackClass = $options['allowFallbackClass'] ?? this->allowFallbackClass;
-        $className = this->_getClassName($alias, $options);
+        $allowFallbackClass = $options['allowFallbackClass'] ?? this.allowFallbackClass;
+        $className = this._getClassName($alias, $options);
         if ($className) {
             $options['className'] = $className;
         } elseif ($allowFallbackClass) {
@@ -233,7 +233,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
                 [, $table] = pluginSplit($options['className']);
                 $options['table'] = Inflector::underscore($table);
             }
-            $options['className'] = this->fallbackClassName;
+            $options['className'] = this.fallbackClassName;
         } else {
             $message = $options['className'] ?? $alias;
             $message = '`' . $message . '`';
@@ -259,10 +259,10 @@ class TableLocator extends AbstractLocator implements LocatorInterface
         }
 
         $options['registryAlias'] = $alias;
-        $instance = this->_create($options);
+        $instance = this._create($options);
 
-        if ($options['className'] == this->fallbackClassName) {
-            this->_fallbacked[$alias] = $instance;
+        if ($options['className'] == this.fallbackClassName) {
+            this._fallbacked[$alias] = $instance;
         }
 
         return $instance;
@@ -285,7 +285,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
             return $options['className'];
         }
 
-        foreach (this->locations as $location) {
+        foreach (this.locations as $location) {
             $class = App::className($options['className'], $location, 'Table');
             if ($class != null) {
                 return $class;
@@ -317,7 +317,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      */
     function set(string $alias, RepositoryInterface $repository): Table
     {
-        return this->instances[$alias] = $repository;
+        return this.instances[$alias] = $repository;
     }
 
     /**
@@ -327,8 +327,8 @@ class TableLocator extends AbstractLocator implements LocatorInterface
     {
         parent::clear();
 
-        this->_fallbacked = [];
-        this->_config = [];
+        this._fallbacked = [];
+        this._config = [];
     }
 
     /**
@@ -341,7 +341,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
      */
     function genericInstances(): array
     {
-        return this->_fallbacked;
+        return this._fallbacked;
     }
 
     /**
@@ -351,7 +351,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
     {
         parent::remove($alias);
 
-        unset(this->_fallbacked[$alias]);
+        unset(this._fallbacked[$alias]);
     }
 
     /**
@@ -364,7 +364,7 @@ class TableLocator extends AbstractLocator implements LocatorInterface
     function addLocation(string $location)
     {
         $location = str_replace('\\', '/', $location);
-        this->locations[] = trim($location, '/');
+        this.locations[] = trim($location, '/');
 
         return this;
     }

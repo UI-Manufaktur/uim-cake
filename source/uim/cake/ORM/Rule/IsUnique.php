@@ -52,8 +52,8 @@ class IsUnique
      */
     public this(array $fields, array $options = [])
     {
-        this->_fields = $fields;
-        this->_options = $options + this->_options;
+        this._fields = $fields;
+        this._options = $options + this._options;
     }
 
     /**
@@ -66,20 +66,20 @@ class IsUnique
      */
     function __invoke(EntityInterface $entity, array $options): bool
     {
-        if (!$entity->extract(this->_fields, true)) {
+        if (!$entity->extract(this._fields, true)) {
             return true;
         }
 
-        $fields = $entity->extract(this->_fields);
-        if (this->_options['allowMultipleNulls'] && array_filter($fields, 'is_null')) {
+        $fields = $entity->extract(this._fields);
+        if (this._options['allowMultipleNulls'] && array_filter($fields, 'is_null')) {
             return true;
         }
 
         $alias = $options['repository']->getAlias();
-        $conditions = this->_alias($alias, $fields);
+        $conditions = this._alias($alias, $fields);
         if ($entity->isNew() == false) {
             $keys = (array)$options['repository']->getPrimaryKey();
-            $keys = this->_alias($alias, $entity->extract($keys));
+            $keys = this._alias($alias, $entity->extract($keys));
             if (Hash::filter($keys)) {
                 $conditions['NOT'] = $keys;
             }

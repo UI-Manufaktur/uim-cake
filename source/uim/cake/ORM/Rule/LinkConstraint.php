@@ -78,8 +78,8 @@ class LinkConstraint
             );
         }
 
-        this->_association = $association;
-        this->_requiredLinkState = $requiredLinkStatus;
+        this._association = $association;
+        this._requiredLinkState = $requiredLinkStatus;
     }
 
     /**
@@ -100,20 +100,20 @@ class LinkConstraint
             );
         }
 
-        $association = this->_association;
+        $association = this._association;
         if (!$association instanceof Association) {
             $association = $table->getAssociation($association);
         }
 
-        $count = this->_countLinks($association, $entity);
+        $count = this._countLinks($association, $entity);
 
         if (
             (
-                this->_requiredLinkState == static::STATUS_LINKED &&
+                this._requiredLinkState == static::STATUS_LINKED &&
                 $count < 1
             ) ||
             (
-                this->_requiredLinkState == static::STATUS_NOT_LINKED &&
+                this._requiredLinkState == static::STATUS_NOT_LINKED &&
                 $count != 0
             )
         ) {
@@ -181,8 +181,8 @@ class LinkConstraint
             ));
         }
 
-        $aliasedPrimaryKey = this->_aliasFields($primaryKey, $source);
-        $conditions = this->_buildConditions(
+        $aliasedPrimaryKey = this._aliasFields($primaryKey, $source);
+        $conditions = this._buildConditions(
             $aliasedPrimaryKey,
             $entity->extract($primaryKey)
         );
