@@ -15,7 +15,7 @@
  */
 module uim.cake.Console;
 
-use Cake\Utility\Text;
+import uim.cake.Utility\Text;
 use SimpleXMLElement;
 
 /**

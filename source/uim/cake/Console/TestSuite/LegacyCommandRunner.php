@@ -14,7 +14,7 @@
  */
 module uim.cake.Console\TestSuite;
 
-use Cake\Console\ConsoleIo;
+import uim.cake.Console\ConsoleIo;
 
 /**
  * Class that dispatches to the legacy ShellDispatcher using the same signature

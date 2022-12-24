@@ -14,7 +14,7 @@
  */
 module uim.cake.Console\TestSuite;
 
-use Cake\Console\ConsoleOutput;
+import uim.cake.Console\ConsoleOutput;
 
 /**
  * StubOutput makes testing shell commands/shell helpers easier.
@@ -23,8 +23,8 @@ use Cake\Console\ConsoleOutput;
  * that your command/task/helper uses:
  *
  * ```
- * use Cake\Console\ConsoleIo;
- * use Cake\Console\TestSuite\StubConsoleOutput;
+ * import uim.cake.Console\ConsoleIo;
+ * import uim.cake.Console\TestSuite\StubConsoleOutput;
  *
  * $output = new StubConsoleOutput();
  * $io = new ConsoleIo($output);

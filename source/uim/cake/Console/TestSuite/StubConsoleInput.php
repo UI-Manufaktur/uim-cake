@@ -14,7 +14,7 @@
  */
 module uim.cake.Console\TestSuite;
 
-use Cake\Console\ConsoleInput;
+import uim.cake.Console\ConsoleInput;
 use NumberFormatter;
 
 /**

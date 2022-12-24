@@ -15,11 +15,11 @@
  */
 module uim.cake.Core;
 
-use Cake\Cache\Cache;
-use Cake\Core\Configure\ConfigEngineInterface;
-use Cake\Core\Configure\Engine\PhpConfig;
-use Cake\Core\Exception\CakeException;
-use Cake\Utility\Hash;
+import uim.cake.Cache\Cache;
+import uim.cake.Core\Configure\ConfigEngineInterface;
+import uim.cake.Core\Configure\Engine\PhpConfig;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Utility\Hash;
 use RuntimeException;
 
 /**

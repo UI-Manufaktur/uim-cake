@@ -15,12 +15,12 @@
  */
 module uim.cake.Controller\Component;
 
-use Cake\Controller\Component;
-use Cake\Controller\ComponentRegistry;
-use Cake\Datasource\Paging\Exception\PageOutOfBoundsException;
-use Cake\Datasource\Paging\NumericPaginator;
-use Cake\Datasource\IResultSet;
-use Cake\Http\Exception\NotFoundException;
+import uim.cake.Controller\Component;
+import uim.cake.Controller\ComponentRegistry;
+import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
+import uim.cake.Datasource\Paging\NumericPaginator;
+import uim.cake.Datasource\IResultSet;
+import uim.cake.Http\Exception\NotFoundException;
 use InvalidArgumentException;
 use UnexpectedValueException;
 

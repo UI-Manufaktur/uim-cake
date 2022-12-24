@@ -16,15 +16,15 @@
 module uim.cake.Console\Command;
 
 use ArrayIterator;
-use Cake\Console\Arguments;
-use Cake\Console\BaseCommand;
-use Cake\Console\CommandCollection;
-use Cake\Console\CommandCollectionAwareInterface;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
-use Cake\Console\ConsoleOutput;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\BaseCommand;
+import uim.cake.Console\CommandCollection;
+import uim.cake.Console\CommandCollectionAwareInterface;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
+import uim.cake.Console\ConsoleOutput;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Plugin;
 use SimpleXMLElement;
 
 /**

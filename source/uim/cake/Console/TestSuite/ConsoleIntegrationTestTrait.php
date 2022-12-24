@@ -14,17 +14,17 @@
  */
 module uim.cake.Console\TestSuite;
 
-use Cake\Command\Command;
-use Cake\Console\CommandRunner;
-use Cake\Console\ConsoleIo;
-use Cake\Console\Exception\StopException;
-use Cake\Console\TestSuite\Constraint\ContentsContain;
-use Cake\Console\TestSuite\Constraint\ContentsContainRow;
-use Cake\Console\TestSuite\Constraint\ContentsEmpty;
-use Cake\Console\TestSuite\Constraint\ContentsNotContain;
-use Cake\Console\TestSuite\Constraint\ContentsRegExp;
-use Cake\Console\TestSuite\Constraint\ExitCode;
-use Cake\Core\TestSuite\ContainerStubTrait;
+import uim.cake.Command\Command;
+import uim.cake.Console\CommandRunner;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\Exception\StopException;
+import uim.cake.Console\TestSuite\Constraint\ContentsContain;
+import uim.cake.Console\TestSuite\Constraint\ContentsContainRow;
+import uim.cake.Console\TestSuite\Constraint\ContentsEmpty;
+import uim.cake.Console\TestSuite\Constraint\ContentsNotContain;
+import uim.cake.Console\TestSuite\Constraint\ContentsRegExp;
+import uim.cake.Console\TestSuite\Constraint\ExitCode;
+import uim.cake.Core\TestSuite\ContainerStubTrait;
 use RuntimeException;
 
 /**

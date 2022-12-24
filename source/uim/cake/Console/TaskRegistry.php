@@ -15,9 +15,9 @@
  */
 module uim.cake.Console;
 
-use Cake\Console\Exception\MissingTaskException;
-use Cake\Core\App;
-use Cake\Core\ObjectRegistry;
+import uim.cake.Console\Exception\MissingTaskException;
+import uim.cake.Core\App;
+import uim.cake.Core\ObjectRegistry;
 
 /**
  * Registry for Tasks. Provides features

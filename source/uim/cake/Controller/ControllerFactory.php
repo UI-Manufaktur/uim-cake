@@ -15,15 +15,15 @@
  */
 module uim.cake.Controller;
 
-use Cake\Controller\Exception\InvalidParameterException;
-use Cake\Core\App;
-use Cake\Core\IContainer;
-use Cake\Http\ControllerFactoryInterface;
-use Cake\Http\Exception\MissingControllerException;
-use Cake\Http\MiddlewareQueue;
-use Cake\Http\Runner;
-use Cake\Http\ServerRequest;
-use Cake\Utility\Inflector;
+import uim.cake.Controller\Exception\InvalidParameterException;
+import uim.cake.Core\App;
+import uim.cake.Core\IContainer;
+import uim.cake.Http\ControllerFactoryInterface;
+import uim.cake.Http\Exception\MissingControllerException;
+import uim.cake.Http\MiddlewareQueue;
+import uim.cake.Http\Runner;
+import uim.cake.Http\ServerRequest;
+import uim.cake.Utility\Inflector;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

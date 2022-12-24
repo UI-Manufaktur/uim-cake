@@ -13,7 +13,7 @@
  */
 module uim.cake.Controller\Exception;
 
-use Cake\Core\Exception\CakeException;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Missing Action exception - used when a controller action

@@ -14,7 +14,7 @@
  */
 module uim.cake.Core;
 
-use Cake\Console\CommandCollection;
+import uim.cake.Console\CommandCollection;
 
 /**
  * An interface defining the methods that the

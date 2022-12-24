@@ -14,8 +14,8 @@
  */
 module uim.cake.Console\Exception;
 
-use Cake\Console\CommandInterface;
-use Cake\Core\Exception\CakeException;
+import uim.cake.Console\ICommand;
+import uim.cake.Core\Exception\CakeException;
 
 /**
  * Exception class for Console libraries. This exception will be thrown from Console library
@@ -28,5 +28,5 @@ class ConsoleException : CakeException
      *
      * @var int
      */
-    protected $_defaultCode = CommandInterface::CODE_ERROR;
+    protected $_defaultCode = ICommand::CODE_ERROR;
 }

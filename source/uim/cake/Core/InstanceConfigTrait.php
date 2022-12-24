@@ -15,8 +15,8 @@
  */
 module uim.cake.Core;
 
-use Cake\Core\Exception\CakeException;
-use Cake\Utility\Hash;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Utility\Hash;
 use InvalidArgumentException;
 
 /**

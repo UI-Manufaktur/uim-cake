@@ -14,9 +14,9 @@
  */
 module uim.cake.Console\TestSuite;
 
-use Cake\Console\ConsoleIo;
-use Cake\Console\Shell;
-use Cake\Console\ShellDispatcher;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\Shell;
+import uim.cake.Console\ShellDispatcher;
 
 /**
  * Allows injecting mock IO into shells

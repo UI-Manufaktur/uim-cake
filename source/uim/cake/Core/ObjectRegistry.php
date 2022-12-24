@@ -16,8 +16,8 @@
 module uim.cake.Core;
 
 use ArrayIterator;
-use Cake\Event\EventDispatcherInterface;
-use Cake\Event\IEventListener;
+import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.Event\IEventListener;
 use Countable;
 use IteratorAggregate;
 use RuntimeException;

@@ -15,13 +15,13 @@
  */
 module uim.cake.Controller\Component;
 
-use Cake\Controller\Component;
-use Cake\Core\Configure;
-use Cake\Event\EventInterface;
-use Cake\Form\FormProtector;
-use Cake\Http\Exception\BadRequestException;
-use Cake\Http\Response;
-use Cake\Routing\Router;
+import uim.cake.Controller\Component;
+import uim.cake.Core\Configure;
+import uim.cake.Event\EventInterface;
+import uim.cake.Form\FormProtector;
+import uim.cake.Http\Exception\BadRequestException;
+import uim.cake.Http\Response;
+import uim.cake.Routing\Router;
 use Closure;
 
 /**

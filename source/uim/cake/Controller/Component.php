@@ -15,9 +15,9 @@
  */
 module uim.cake.Controller;
 
-use Cake\Core\InstanceConfigTrait;
-use Cake\Event\IEventListener;
-use Cake\Log\LogTrait;
+import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.Event\IEventListener;
+import uim.cake.Log\LogTrait;
 
 /**
  * Base class for an individual Component. Components provide reusable bits of

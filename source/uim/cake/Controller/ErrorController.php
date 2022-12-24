@@ -15,7 +15,7 @@
  */
 module uim.cake.Controller;
 
-use Cake\Event\EventInterface;
+import uim.cake.Event\EventInterface;
 
 /**
  * Error Handling Controller

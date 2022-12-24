@@ -15,10 +15,10 @@
  */
 module uim.cake.Controller\Component;
 
-use Cake\Controller\Component;
-use Cake\Http\Exception\InternalErrorException;
-use Cake\Http\FlashMessage;
-use Cake\Utility\Inflector;
+import uim.cake.Controller\Component;
+import uim.cake.Http\Exception\InternalErrorException;
+import uim.cake.Http\FlashMessage;
+import uim.cake.Utility\Inflector;
 use Throwable;
 
 /**

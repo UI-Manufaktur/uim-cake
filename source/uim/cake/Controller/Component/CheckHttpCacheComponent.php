@@ -15,8 +15,8 @@
  */
 module uim.cake.Controller\Component;
 
-use Cake\Controller\Component;
-use Cake\Event\EventInterface;
+import uim.cake.Controller\Component;
+import uim.cake.Event\EventInterface;
 
 /**
  * Use HTTP caching headers to see if rendering can be skipped.

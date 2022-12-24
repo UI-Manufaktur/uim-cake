@@ -15,14 +15,14 @@
  */
 module uim.cake.Console;
 
-use Cake\Console\Exception\MissingShellException;
-use Cake\Console\Exception\StopException;
-use Cake\Core\App;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Log\Log;
-use Cake\Shell\Task\CommandTask;
-use Cake\Utility\Inflector;
+import uim.cake.Console\Exception\MissingShellException;
+import uim.cake.Console\Exception\StopException;
+import uim.cake.Core\App;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Plugin;
+import uim.cake.Log\Log;
+import uim.cake.Shell\Task\CommandTask;
+import uim.cake.Utility\Inflector;
 
 /**
  * Shell dispatcher handles dispatching CLI commands.
@@ -401,7 +401,7 @@ class ShellDispatcher
     {
         trigger_error(
             "Console help cannot be generated from Shell classes anymore. " .
-            "Upgrade your application to use Cake\Console\CommandRunner instead.",
+            "Upgrade your application to import uim.cake.Console\CommandRunner instead.",
             E_USER_WARNING
         );
     }
@@ -415,7 +415,7 @@ class ShellDispatcher
     {
         trigger_error(
             "Version information cannot be generated from Shell classes anymore. " .
-            "Upgrade your application to use Cake\Console\CommandRunner instead.",
+            "Upgrade your application to import uim.cake.Console\CommandRunner instead.",
             E_USER_WARNING
         );
     }

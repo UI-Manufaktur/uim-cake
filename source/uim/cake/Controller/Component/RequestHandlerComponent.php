@@ -15,18 +15,18 @@
  */
 module uim.cake.Controller\Component;
 
-use Cake\Controller\Component;
-use Cake\Controller\ComponentRegistry;
-use Cake\Controller\Controller;
-use Cake\Core\App;
-use Cake\Core\Configure;
-use Cake\Event\EventInterface;
-use Cake\Http\ContentTypeNegotiation;
-use Cake\Http\Exception\NotFoundException;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
-use Cake\Routing\Router;
-use Cake\Utility\Inflector;
+import uim.cake.Controller\Component;
+import uim.cake.Controller\ComponentRegistry;
+import uim.cake.Controller\Controller;
+import uim.cake.Core\App;
+import uim.cake.Core\Configure;
+import uim.cake.Event\EventInterface;
+import uim.cake.Http\ContentTypeNegotiation;
+import uim.cake.Http\Exception\NotFoundException;
+import uim.cake.Http\Response;
+import uim.cake.Http\ServerRequest;
+import uim.cake.Routing\Router;
+import uim.cake.Utility\Inflector;
 
 /**
  * Request object handling for alternative HTTP requests.

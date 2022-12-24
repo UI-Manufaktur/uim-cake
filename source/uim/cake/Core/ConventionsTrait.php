@@ -15,7 +15,7 @@
  */
 module uim.cake.Core;
 
-use Cake\Utility\Inflector;
+import uim.cake.Utility\Inflector;
 
 /**
  * Provides methods that allow other classes access to conventions based inflections.

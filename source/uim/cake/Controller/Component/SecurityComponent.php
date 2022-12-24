@@ -15,18 +15,18 @@
  */
 module uim.cake.Controller\Component;
 
-use Cake\Controller\Component;
-use Cake\Controller\Controller;
-use Cake\Controller\Exception\AuthSecurityException;
-use Cake\Controller\Exception\SecurityException;
-use Cake\Core\Configure;
-use Cake\Event\EventInterface;
-use Cake\Http\Exception\BadRequestException;
-use Cake\Http\Response;
-use Cake\Http\ServerRequest;
-use Cake\Routing\Router;
-use Cake\Utility\Hash;
-use Cake\Utility\Security;
+import uim.cake.Controller\Component;
+import uim.cake.Controller\Controller;
+import uim.cake.Controller\Exception\AuthSecurityException;
+import uim.cake.Controller\Exception\SecurityException;
+import uim.cake.Core\Configure;
+import uim.cake.Event\EventInterface;
+import uim.cake.Http\Exception\BadRequestException;
+import uim.cake.Http\Response;
+import uim.cake.Http\ServerRequest;
+import uim.cake.Routing\Router;
+import uim.cake.Utility\Hash;
+import uim.cake.Utility\Security;
 
 /**
  * The Security Component creates an easy way to integrate tighter security in

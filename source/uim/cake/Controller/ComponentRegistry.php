@@ -15,12 +15,12 @@
  */
 module uim.cake.Controller;
 
-use Cake\Controller\Exception\MissingComponentException;
-use Cake\Core\App;
-use Cake\Core\Exception\CakeException;
-use Cake\Core\ObjectRegistry;
-use Cake\Event\EventDispatcherInterface;
-use Cake\Event\EventDispatcherTrait;
+import uim.cake.Controller\Exception\MissingComponentException;
+import uim.cake.Core\App;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Core\ObjectRegistry;
+import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.Event\EventDispatcherTrait;
 
 /**
  * ComponentRegistry is a registry for loaded components

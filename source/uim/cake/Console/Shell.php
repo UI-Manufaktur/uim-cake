@@ -15,18 +15,18 @@
  */
 module uim.cake.Console;
 
-use Cake\Console\Exception\ConsoleException;
-use Cake\Console\Exception\StopException;
-use Cake\Core\App;
-use Cake\Core\Exception\CakeException;
-use Cake\Datasource\ModelAwareTrait;
-use Cake\Filesystem\Filesystem;
-use Cake\Log\LogTrait;
-use Cake\ORM\Locator\LocatorAwareTrait;
-use Cake\ORM\Locator\ILocator;
-use Cake\Utility\Inflector;
-use Cake\Utility\MergeVariablesTrait;
-use Cake\Utility\Text;
+import uim.cake.Console\Exception\ConsoleException;
+import uim.cake.Console\Exception\StopException;
+import uim.cake.Core\App;
+import uim.cake.Core\Exception\CakeException;
+import uim.cake.Datasource\ModelAwareTrait;
+import uim.cake.Filesystem\Filesystem;
+import uim.cake.Log\LogTrait;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.ORM\Locator\ILocator;
+import uim.cake.Utility\Inflector;
+import uim.cake.Utility\MergeVariablesTrait;
+import uim.cake.Utility\Text;
 use ReflectionException;
 use ReflectionMethod;
 use RuntimeException;

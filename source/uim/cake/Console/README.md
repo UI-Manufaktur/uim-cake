@@ -28,7 +28,7 @@ bootstrap logic, and binds your commands. Lets put our entrypoint script in
 require dirname(__DIR__) . "/vendor/autoload.php";
 
 use App\Application;
-use Cake\Console\CommandRunner;
+import uim.cake.Console\CommandRunner;
 
 // Build the runner with an application and root executable name.
 $runner = new CommandRunner(new Application(), "tool");
@@ -42,8 +42,8 @@ For our `Application` class we can start with:
 namespace App;
 
 use App\Command\HelloCommand;
-use Cake\Core\IConsoleApplication;
-use Cake\Console\CommandCollection;
+import uim.cake.Core\IConsoleApplication;
+import uim.cake.Console\CommandCollection;
 
 class Application : IConsoleApplication
 {
@@ -80,10 +80,10 @@ Next we"ll build a very simple `HelloCommand`:
 <?php
 namespace App\Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\BaseCommand;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\BaseCommand;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
 
 class HelloCommand : BaseCommand
 {
