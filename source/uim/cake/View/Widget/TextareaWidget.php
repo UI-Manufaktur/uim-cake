@@ -24,7 +24,7 @@ use Cake\View\Form\ContextInterface;
  * This class is usually used internally by `Cake\View\Helper\FormHelper`,
  * it but can be used to generate standalone text areas.
  */
-class TextareaWidget extends BasicWidget
+class TextareaWidget : BasicWidget
 {
     /**
      * Data defaults.

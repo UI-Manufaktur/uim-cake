@@ -58,7 +58,7 @@ use Cake\Utility\Xml;
  * If you don't set the `serialize` option, you will need a view. You can use extended
  * views to provide layout like functionality.
  */
-class XmlView extends SerializedView
+class XmlView : SerializedView
 {
     /**
      * XML layouts are located in the `layouts/xml/` subdirectory

@@ -34,7 +34,7 @@ use Cake\View\View;
  * @property \Cake\View\Helper\FormHelper $Form
  * @link https://book.cakephp.org/4/en/views/helpers/paginator.html
  */
-class PaginatorHelper extends Helper
+class PaginatorHelper : Helper
 {
     use StringTemplateTrait;
 

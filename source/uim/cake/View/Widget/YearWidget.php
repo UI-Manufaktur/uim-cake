@@ -27,7 +27,7 @@ use InvalidArgumentException;
  * This class is usually used internally by `Cake\View\Helper\FormHelper`,
  * it but can be used to generate standalone calendar year select boxes.
  */
-class YearWidget extends BasicWidget
+class YearWidget : BasicWidget
 {
     /**
      * Data defaults.

@@ -17,7 +17,7 @@ namespace Cake\View\Exception;
 /**
  * Used when a layout file cannot be found.
  */
-class MissingLayoutException extends MissingTemplateException
+class MissingLayoutException : MissingTemplateException
 {
     /**
      * @var string

@@ -25,7 +25,7 @@ namespace Cake\View;
  * to require clients to pick an available content-type and that you have no
  * default type.
  */
-class NegotiationRequiredView extends View
+class NegotiationRequiredView : View
 {
     /**
      * Get the content-type

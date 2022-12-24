@@ -23,7 +23,7 @@ use TypeError;
 /**
  * Parent class for view classes generating serialized outputs like JsonView and XmlView.
  */
-abstract class SerializedView extends View
+abstract class SerializedView : View
 {
     /**
      * Response type.

@@ -30,7 +30,7 @@ use Exception;
  * @link https://book.cakephp.org/4/en/views/helpers/time.html
  * @see \Cake\I18n\Time
  */
-class TimeHelper extends Helper
+class TimeHelper : Helper
 {
     use StringTemplateTrait;
 

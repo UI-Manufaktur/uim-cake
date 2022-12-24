@@ -1066,7 +1066,7 @@ class View implements EventDispatcherInterface
     }
 
     /**
-     * Provides template or element extension/inheritance. Templates can extends a
+     * Provides template or element extension/inheritance. Templates can : a
      * parent template and populate blocks in the parent template.
      *
      * @param string $name The template or element to 'extend' the current one with.

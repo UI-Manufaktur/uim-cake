@@ -17,7 +17,7 @@ namespace Cake\View\Exception;
 /**
  * Used when an element file cannot be found.
  */
-class MissingElementException extends MissingTemplateException
+class MissingElementException : MissingTemplateException
 {
     /**
      * @var string

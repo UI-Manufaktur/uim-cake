@@ -21,7 +21,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Used when a cell class file cannot be found.
  */
-class MissingCellException extends CakeException
+class MissingCellException : CakeException
 {
     /**
      * @inheritDoc

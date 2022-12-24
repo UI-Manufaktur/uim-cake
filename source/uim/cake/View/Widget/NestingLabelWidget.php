@@ -22,7 +22,7 @@ namespace Cake\View\Widget;
  * Generally this element is used by other widgets,
  * and FormHelper itself.
  */
-class NestingLabelWidget extends LabelWidget
+class NestingLabelWidget : LabelWidget
 {
     /**
      * The template to use.

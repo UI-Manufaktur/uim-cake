@@ -32,7 +32,7 @@ use Cake\View\View;
  * @link https://book.cakephp.org/4/en/views/helpers/text.html
  * @see \Cake\Utility\Text
  */
-class TextHelper extends Helper
+class TextHelper : Helper
 {
     /**
      * helpers

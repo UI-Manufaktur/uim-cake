@@ -19,7 +19,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Used when a helper cannot be found.
  */
-class MissingHelperException extends CakeException
+class MissingHelperException : CakeException
 {
     /**
      * @inheritDoc

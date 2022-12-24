@@ -19,7 +19,7 @@ use Throwable;
 /**
  * Used when a template file for a cell cannot be found.
  */
-class MissingCellTemplateException extends MissingTemplateException
+class MissingCellTemplateException : MissingTemplateException
 {
     /**
      * @var string

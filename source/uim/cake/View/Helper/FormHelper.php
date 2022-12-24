@@ -45,7 +45,7 @@ use RuntimeException;
  * @property \Cake\View\Helper\UrlHelper $Url
  * @link https://book.cakephp.org/4/en/views/helpers/form.html
  */
-class FormHelper extends Helper
+class FormHelper : Helper
 {
     use IdGeneratorTrait;
     use StringTemplateTrait;

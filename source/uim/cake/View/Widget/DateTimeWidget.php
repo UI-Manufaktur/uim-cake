@@ -30,7 +30,7 @@ use InvalidArgumentException;
  * This class is usually used internally by `Cake\View\Helper\FormHelper`,
  * it but can be used to generate standalone date time inputs.
  */
-class DateTimeWidget extends BasicWidget
+class DateTimeWidget : BasicWidget
 {
     /**
      * Template instance.

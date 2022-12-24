@@ -25,7 +25,7 @@ use Traversable;
  * This class is usually used internally by `Cake\View\Helper\FormHelper`,
  * it but can be used to generate standalone select boxes.
  */
-class SelectBoxWidget extends BasicWidget
+class SelectBoxWidget : BasicWidget
 {
     /**
      * Data defaults.

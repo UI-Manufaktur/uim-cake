@@ -26,9 +26,9 @@ use Cake\View\Exception\MissingHelperException;
  * HelperRegistry is used as a registry for loaded helpers and handles loading
  * and constructing helper class objects.
  *
- * @extends \Cake\Core\ObjectRegistry<\Cake\View\Helper>
+ * @: \Cake\Core\ObjectRegistry<\Cake\View\Helper>
  */
-class HelperRegistry extends ObjectRegistry implements EventDispatcherInterface
+class HelperRegistry : ObjectRegistry implements EventDispatcherInterface
 {
     use EventDispatcherTrait;
 

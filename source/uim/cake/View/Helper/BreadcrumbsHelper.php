@@ -25,7 +25,7 @@ use LogicException;
  *
  * @property \Cake\View\Helper\UrlHelper $Url
  */
-class BreadcrumbsHelper extends Helper
+class BreadcrumbsHelper : Helper
 {
     use StringTemplateTrait;
 

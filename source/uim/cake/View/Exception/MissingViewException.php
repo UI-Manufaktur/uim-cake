@@ -21,7 +21,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Used when a view class file cannot be found.
  */
-class MissingViewException extends CakeException
+class MissingViewException : CakeException
 {
     /**
      * @inheritDoc

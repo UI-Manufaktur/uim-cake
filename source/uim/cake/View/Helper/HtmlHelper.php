@@ -28,7 +28,7 @@ use Cake\View\StringTemplateTrait;
  * @property \Cake\View\Helper\UrlHelper $Url
  * @link https://book.cakephp.org/4/en/views/helpers/html.html
  */
-class HtmlHelper extends Helper
+class HtmlHelper : Helper
 {
     use StringTemplateTrait;
 

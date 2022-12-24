@@ -21,7 +21,7 @@ namespace Cake\View;
  * Currently, only switches the default layout and sets the response type - which just maps to
  * text/html by default.
  */
-class AjaxView extends View
+class AjaxView : View
 {
     /**
      * @inheritDoc

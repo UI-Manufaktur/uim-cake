@@ -26,7 +26,7 @@ use Cake\View\StringTemplate;
  * This class is usually used internally by `Cake\View\Helper\FormHelper`,
  * it but can be used to generate standalone multiple checkboxes.
  */
-class MultiCheckboxWidget extends BasicWidget
+class MultiCheckboxWidget : BasicWidget
 {
     use IdGeneratorTrait;
 

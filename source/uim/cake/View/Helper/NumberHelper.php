@@ -30,7 +30,7 @@ use Cake\View\View;
  * @link https://book.cakephp.org/4/en/views/helpers/number.html
  * @see \Cake\I18n\Number
  */
-class NumberHelper extends Helper
+class NumberHelper : Helper
 {
     /**
      * Default config for this class
