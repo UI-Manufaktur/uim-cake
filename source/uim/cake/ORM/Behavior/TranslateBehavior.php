@@ -109,7 +109,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
     {
         $config += [
             'defaultLocale' => I18n::getDefaultLocale(),
-            'referenceName' => this->referenceName($table),
+            'referenceName' => this.referenceName($table),
             'tableLocator' => $table->associations()->getTableLocator(),
         ];
 
@@ -124,7 +124,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      */
     function initialize(array $config): void
     {
-        this->getStrategy();
+        this.getStrategy();
     }
 
     /**
@@ -160,11 +160,11 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      */
     function getStrategy(): TranslateStrategyInterface
     {
-        if (this->strategy != null) {
-            return this->strategy;
+        if (this.strategy != null) {
+            return this.strategy;
         }
 
-        return this->strategy = this->createStrategy();
+        return this.strategy = this.createStrategy();
     }
 
     /**
@@ -176,13 +176,13 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
     protected function createStrategy()
     {
         $config = array_diff_key(
-            this->_config,
+            this._config,
             ['implementedFinders', 'implementedMethods', 'strategyClass']
         );
         /** @var class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface> $className */
-        $className = this->getConfig('strategyClass', static::$defaultStrategyClass);
+        $className = this.getConfig('strategyClass', static::$defaultStrategyClass);
 
-        return new $className(this->_table, $config);
+        return new $className(this._table, $config);
     }
 
     /**
@@ -194,7 +194,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      */
     function setStrategy(TranslateStrategyInterface $strategy)
     {
-        this->strategy = $strategy;
+        this.strategy = $strategy;
 
         return this;
     }
@@ -227,7 +227,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      */
     function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
     {
-        return this->getStrategy()->buildMarshalMap($marshaller, $map, $options);
+        return this.getStrategy()->buildMarshalMap($marshaller, $map, $options);
     }
 
     /**
@@ -252,7 +252,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      */
     function setLocale(?string $locale)
     {
-        this->getStrategy()->setLocale($locale);
+        this.getStrategy()->setLocale($locale);
 
         return this;
     }
@@ -269,7 +269,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      */
     function getLocale(): string
     {
-        return this->getStrategy()->getLocale();
+        return this.getStrategy()->getLocale();
     }
 
     /**
@@ -284,7 +284,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      */
     function translationField(string $field): string
     {
-        return this->getStrategy()->translationField($field);
+        return this.getStrategy()->translationField($field);
     }
 
     /**
@@ -312,7 +312,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
     function findTranslations(Query $query, array $options): Query
     {
         $locales = $options['locales'] ?? [];
-        $targetAlias = this->getStrategy()->getTranslationTable()->getAlias();
+        $targetAlias = this.getStrategy()->getTranslationTable()->getAlias();
 
         return $query
             ->contain([$targetAlias => function ($query) use ($locales, $targetAlias) {
@@ -323,7 +323,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
 
                 return $query;
             }])
-            ->formatResults([this->getStrategy(), 'groupTranslations'], $query::PREPEND);
+            ->formatResults([this.getStrategy(), 'groupTranslations'], $query::PREPEND);
     }
 
     /**
@@ -335,7 +335,7 @@ class TranslateBehavior extends Behavior implements PropertyMarshalInterface
      */
     function __call($method, $args)
     {
-        return this->strategy->{$method}(...$args);
+        return this.strategy->{$method}(...$args);
     }
 
     /**

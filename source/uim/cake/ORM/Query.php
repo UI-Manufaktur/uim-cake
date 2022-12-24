@@ -178,10 +178,10 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
     public this(Connection $connection, Table $table)
     {
         parent::__construct($connection);
-        this->repository($table);
+        this.repository($table);
 
-        if (this->_repository != null) {
-            this->addDefaultTypes(this->_repository);
+        if (this._repository != null) {
+            this.addDefaultTypes(this._repository);
         }
     }
 
@@ -232,8 +232,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
         }
 
         if ($fields instanceof Table) {
-            if (this->aliasingEnabled) {
-                $fields = this->aliasFields($fields->getSchema()->columns(), $fields->getAlias());
+            if (this.aliasingEnabled) {
+                $fields = this.aliasFields($fields->getSchema()->columns(), $fields->getAlias());
             } else {
                 $fields = $fields->getSchema()->columns();
             }
@@ -266,11 +266,11 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
         }
 
         $fields = array_diff($table->getSchema()->columns(), $excludedFields);
-        if (this->aliasingEnabled) {
-            $fields = this->aliasFields($fields);
+        if (this.aliasingEnabled) {
+            $fields = this.aliasFields($fields);
         }
 
-        return this->select($fields, $overwrite);
+        return this.select($fields, $overwrite);
     }
 
     /**
@@ -292,7 +292,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
         foreach ($map as $f => $type) {
             $fields[$f] = $fields[$alias . '.' . $f] = $fields[$alias . '__' . $f] = $type;
         }
-        this->getTypeMap()->addDefaults($fields);
+        this.getTypeMap()->addDefaults($fields);
 
         return this;
     }
@@ -306,7 +306,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function setEagerLoader(EagerLoader $instance)
     {
-        this->_eagerLoader = $instance;
+        this._eagerLoader = $instance;
 
         return this;
     }
@@ -318,11 +318,11 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function getEagerLoader(): EagerLoader
     {
-        if (this->_eagerLoader == null) {
-            this->_eagerLoader = new EagerLoader();
+        if (this._eagerLoader == null) {
+            this._eagerLoader = new EagerLoader();
         }
 
-        return this->_eagerLoader;
+        return this._eagerLoader;
     }
 
     /**
@@ -443,9 +443,9 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function contain($associations, $override = false)
     {
-        $loader = this->getEagerLoader();
+        $loader = this.getEagerLoader();
         if ($override == true) {
-            this->clearContain();
+            this.clearContain();
         }
 
         $queryBuilder = null;
@@ -456,9 +456,9 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
         if ($associations) {
             $loader->contain($associations, $queryBuilder);
         }
-        this->_addAssociationsToTypeMap(
-            this->getRepository(),
-            this->getTypeMap(),
+        this._addAssociationsToTypeMap(
+            this.getRepository(),
+            this.getTypeMap(),
             $loader->getContain()
         );
 
@@ -470,7 +470,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function getContain(): array
     {
-        return this->getEagerLoader()->getContain();
+        return this.getEagerLoader()->getContain();
     }
 
     /**
@@ -480,8 +480,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function clearContain()
     {
-        this->getEagerLoader()->clearContain();
-        this->_dirty();
+        this.getEagerLoader()->clearContain();
+        this._dirty();
 
         return this;
     }
@@ -506,10 +506,10 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
             $target = $association->getTarget();
             $primary = (array)$target->getPrimaryKey();
             if (empty($primary) || $typeMap->type($target->aliasField($primary[0])) == null) {
-                this->addDefaultTypes($target);
+                this.addDefaultTypes($target);
             }
             if (!empty($nested)) {
-                this->_addAssociationsToTypeMap($target, $typeMap, $nested);
+                this._addAssociationsToTypeMap($target, $typeMap, $nested);
             }
         }
     }
@@ -566,9 +566,9 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function matching(string $assoc, ?callable $builder = null)
     {
-        $result = this->getEagerLoader()->setMatching($assoc, $builder)->getMatching();
-        this->_addAssociationsToTypeMap(this->getRepository(), this->getTypeMap(), $result);
-        this->_dirty();
+        $result = this.getEagerLoader()->setMatching($assoc, $builder)->getMatching();
+        this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
+        this._dirty();
 
         return this;
     }
@@ -638,14 +638,14 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function leftJoinWith(string $assoc, ?callable $builder = null)
     {
-        $result = this->getEagerLoader()
+        $result = this.getEagerLoader()
             ->setMatching($assoc, $builder, [
                 'joinType' => Query::JOIN_TYPE_LEFT,
                 'fields' => false,
             ])
             ->getMatching();
-        this->_addAssociationsToTypeMap(this->getRepository(), this->getTypeMap(), $result);
-        this->_dirty();
+        this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
+        this._dirty();
 
         return this;
     }
@@ -687,14 +687,14 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function innerJoinWith(string $assoc, ?callable $builder = null)
     {
-        $result = this->getEagerLoader()
+        $result = this.getEagerLoader()
             ->setMatching($assoc, $builder, [
                 'joinType' => Query::JOIN_TYPE_INNER,
                 'fields' => false,
             ])
             ->getMatching();
-        this->_addAssociationsToTypeMap(this->getRepository(), this->getTypeMap(), $result);
-        this->_dirty();
+        this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
+        this._dirty();
 
         return this;
     }
@@ -751,15 +751,15 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function notMatching(string $assoc, ?callable $builder = null)
     {
-        $result = this->getEagerLoader()
+        $result = this.getEagerLoader()
             ->setMatching($assoc, $builder, [
                 'joinType' => Query::JOIN_TYPE_LEFT,
                 'fields' => false,
                 'negateMatch' => true,
             ])
             ->getMatching();
-        this->_addAssociationsToTypeMap(this->getRepository(), this->getTypeMap(), $result);
-        this->_dirty();
+        this._addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
+        this._dirty();
 
         return this;
     }
@@ -845,9 +845,9 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
         ksort($options);
         foreach ($options as $option => $values) {
             if (isset($valid[$option], $values)) {
-                this->{$valid[$option]}($values);
+                this.{$valid[$option]}($values);
             } else {
-                this->_options[$option] = $values;
+                this._options[$option] = $values;
             }
         }
 
@@ -895,7 +895,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function clearResult()
     {
-        this->_dirty();
+        this._dirty();
 
         return this;
     }
@@ -908,8 +908,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
     function __clone()
     {
         parent::__clone();
-        if (this->_eagerLoader != null) {
-            this->_eagerLoader = clone this->_eagerLoader;
+        if (this._eagerLoader != null) {
+            this._eagerLoader = clone this._eagerLoader;
         }
     }
 
@@ -924,11 +924,11 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function count(): int
     {
-        if (this->_resultsCount == null) {
-            this->_resultsCount = this->_performCount();
+        if (this._resultsCount == null) {
+            this._resultsCount = this._performCount();
         }
 
-        return this->_resultsCount;
+        return this._resultsCount;
     }
 
     /**
@@ -938,8 +938,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     protected function _performCount(): int
     {
-        $query = this->cleanCopy();
-        $counter = this->_counter;
+        $query = this.cleanCopy();
+        $counter = this._counter;
         if ($counter != null) {
             $query->counter(null);
 
@@ -963,8 +963,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
             }
         }
 
-        if (!$complex && this->_valueBinder != null) {
-            $order = this->clause('order');
+        if (!$complex && this._valueBinder != null) {
+            $order = this.clause('order');
             $complex = $order == null ? false : $order->hasNestedExpression();
         }
 
@@ -977,7 +977,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
                 ->disableAutoFields()
                 ->execute();
         } else {
-            $statement = this->getConnection()->newQuery()
+            $statement = this.getConnection()->newQuery()
                 ->select($count)
                 ->from(['count_source' => $query])
                 ->execute();
@@ -1013,7 +1013,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function counter(?callable $counter)
     {
-        this->_counter = $counter;
+        this._counter = $counter;
 
         return this;
     }
@@ -1028,8 +1028,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function enableHydration(bool $enable = true)
     {
-        this->_dirty();
-        this->_hydrate = $enable;
+        this._dirty();
+        this._hydrate = $enable;
 
         return this;
     }
@@ -1044,8 +1044,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function disableHydration()
     {
-        this->_dirty();
-        this->_hydrate = false;
+        this._dirty();
+        this._hydrate = false;
 
         return this;
     }
@@ -1057,7 +1057,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function isHydrationEnabled(): bool
     {
-        return this->_hydrate;
+        return this._hydrate;
     }
 
     /**
@@ -1072,11 +1072,11 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function cache($key, $config = 'default')
     {
-        if (this->_type != 'select' && this->_type != null) {
+        if (this._type != 'select' && this._type != null) {
             throw new RuntimeException('You cannot cache the results of non-select queries.');
         }
 
-        return this->_cache($key, $config);
+        return this._cache($key, $config);
     }
 
     /**
@@ -1087,13 +1087,13 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function all(): ResultSetInterface
     {
-        if (this->_type != 'select' && this->_type != null) {
+        if (this._type != 'select' && this._type != null) {
             throw new RuntimeException(
                 'You cannot call all() on a non-select query. Use execute() instead.'
             );
         }
 
-        return this->_all();
+        return this._all();
     }
 
     /**
@@ -1105,14 +1105,14 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function triggerBeforeFind(): void
     {
-        if (!this->_beforeFindFired && this->_type == 'select') {
-            this->_beforeFindFired = true;
+        if (!this._beforeFindFired && this._type == 'select') {
+            this._beforeFindFired = true;
 
-            $repository = this->getRepository();
+            $repository = this.getRepository();
             $repository->dispatchEvent('Model.beforeFind', [
                 this,
-                new ArrayObject(this->_options),
-                !this->isEagerLoaded(),
+                new ArrayObject(this._options),
+                !this.isEagerLoaded(),
             ]);
         }
     }
@@ -1122,9 +1122,9 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function sql(?ValueBinder $binder = null): string
     {
-        this->triggerBeforeFind();
+        this.triggerBeforeFind();
 
-        this->_transformQuery();
+        this._transformQuery();
 
         return parent::sql($binder);
     }
@@ -1138,14 +1138,14 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     protected function _execute(): ResultSetInterface
     {
-        this->triggerBeforeFind();
-        if (this->_results) {
-            $decorator = this->_decoratorClass();
+        this.triggerBeforeFind();
+        if (this._results) {
+            $decorator = this._decoratorClass();
 
-            return new $decorator(this->_results);
+            return new $decorator(this._results);
         }
 
-        $statement = this->getEagerLoader()->loadExternal(this, this->execute());
+        $statement = this.getEagerLoader()->loadExternal(this, this.execute());
 
         return new ResultSet(this, $statement);
     }
@@ -1164,18 +1164,18 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     protected function _transformQuery(): void
     {
-        if (!this->_dirty || this->_type != 'select') {
+        if (!this._dirty || this._type != 'select') {
             return;
         }
 
-        $repository = this->getRepository();
+        $repository = this.getRepository();
 
-        if (empty(this->_parts['from'])) {
-            this->from([$repository->getAlias() => $repository->getTable()]);
+        if (empty(this._parts['from'])) {
+            this.from([$repository->getAlias() => $repository->getTable()]);
         }
-        this->_addDefaultFields();
-        this->getEagerLoader()->attachAssociations(this, $repository, !this->_hasFields);
-        this->_addDefaultSelectTypes();
+        this._addDefaultFields();
+        this.getEagerLoader()->attachAssociations(this, $repository, !this._hasFields);
+        this._addDefaultSelectTypes();
     }
 
     /**
@@ -1186,21 +1186,21 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     protected function _addDefaultFields(): void
     {
-        $select = this->clause('select');
-        this->_hasFields = true;
+        $select = this.clause('select');
+        this._hasFields = true;
 
-        $repository = this->getRepository();
+        $repository = this.getRepository();
 
-        if (!count($select) || this->_autoFields == true) {
-            this->_hasFields = false;
-            this->select($repository->getSchema()->columns());
-            $select = this->clause('select');
+        if (!count($select) || this._autoFields == true) {
+            this._hasFields = false;
+            this.select($repository->getSchema()->columns());
+            $select = this.clause('select');
         }
 
-        if (this->aliasingEnabled) {
-            $select = this->aliasFields($select, $repository->getAlias());
+        if (this.aliasingEnabled) {
+            $select = this.aliasFields($select, $repository->getAlias());
         }
-        this->select($select, true);
+        this.select($select, true);
     }
 
     /**
@@ -1210,8 +1210,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     protected function _addDefaultSelectTypes(): void
     {
-        $typeMap = this->getTypeMap()->getDefaults();
-        $select = this->clause('select');
+        $typeMap = this.getTypeMap()->getDefaults();
+        $select = this.clause('select');
         $types = [];
 
         foreach ($select as $alias => $value) {
@@ -1227,7 +1227,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
                 $types[$alias] = $typeMap[$value];
             }
         }
-        this->getSelectTypeMap()->addDefaults($types);
+        this.getSelectTypeMap()->addDefaults($types);
     }
 
     /**
@@ -1240,7 +1240,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function find(string $finder, array $options = [])
     {
-        $table = this->getRepository();
+        $table = this.getRepository();
 
         /** @psalm-suppress LessSpecificReturnStatement */
         return $table->callFinder($finder, this, $options);
@@ -1254,8 +1254,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     protected function _dirty(): void
     {
-        this->_results = null;
-        this->_resultsCount = null;
+        this._results = null;
+        this._resultsCount = null;
         parent::_dirty();
     }
 
@@ -1271,7 +1271,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
     function update($table = null)
     {
         if (!$table) {
-            $repository = this->getRepository();
+            $repository = this.getRepository();
             $table = $repository->getTable();
         }
 
@@ -1289,8 +1289,8 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function delete(?string $table = null)
     {
-        $repository = this->getRepository();
-        this->from([$repository->getAlias() => $repository->getTable()]);
+        $repository = this.getRepository();
+        this.from([$repository->getAlias() => $repository->getTable()]);
 
         // We do not pass $table to parent class here
         return parent::delete();
@@ -1311,9 +1311,9 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function insert(array $columns, array $types = [])
     {
-        $repository = this->getRepository();
+        $repository = this.getRepository();
         $table = $repository->getTable();
-        this->into($table);
+        this.into($table);
 
         return parent::insert($columns, $types);
     }
@@ -1342,12 +1342,12 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function __call(string $method, array $arguments)
     {
-        if (this->type() == 'select') {
-            return this->_call($method, $arguments);
+        if (this.type() == 'select') {
+            return this._call($method, $arguments);
         }
 
         throw new BadMethodCallException(
-            sprintf('Cannot call method "%s" on a "%s" query', $method, this->type())
+            sprintf('Cannot call method "%s" on a "%s" query', $method, this.type())
         );
     }
 
@@ -1356,17 +1356,17 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function __debugInfo(): array
     {
-        $eagerLoader = this->getEagerLoader();
+        $eagerLoader = this.getEagerLoader();
 
         return parent::__debugInfo() + [
-            'hydrate' => this->_hydrate,
-            'buffered' => this->_useBufferedResults,
-            'formatters' => count(this->_formatters),
-            'mapReducers' => count(this->_mapReduce),
+            'hydrate' => this._hydrate,
+            'buffered' => this._useBufferedResults,
+            'formatters' => count(this._formatters),
+            'mapReducers' => count(this._mapReduce),
             'contain' => $eagerLoader->getContain(),
             'matching' => $eagerLoader->getMatching(),
-            'extraOptions' => this->_options,
-            'repository' => this->_repository,
+            'extraOptions' => this._options,
+            'repository' => this._repository,
         ];
     }
 
@@ -1379,7 +1379,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function jsonSerialize(): ResultSetInterface
     {
-        return this->all();
+        return this.all();
     }
 
     /**
@@ -1393,7 +1393,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function enableAutoFields(bool $value = true)
     {
-        this->_autoFields = $value;
+        this._autoFields = $value;
 
         return this;
     }
@@ -1405,7 +1405,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function disableAutoFields()
     {
-        this->_autoFields = false;
+        this._autoFields = false;
 
         return this;
     }
@@ -1420,7 +1420,7 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     function isAutoFieldsEnabled(): ?bool
     {
-        return this->_autoFields;
+        return this._autoFields;
     }
 
     /**
@@ -1431,10 +1431,10 @@ class Query extends DatabaseQuery implements JsonSerializable, QueryInterface
      */
     protected function _decorateResults(Traversable $result): ResultSetInterface
     {
-        $result = this->_applyDecorators($result);
+        $result = this._applyDecorators($result);
 
-        if (!($result instanceof ResultSet) && this->isBufferedResultsEnabled()) {
-            $class = this->_decoratorClass();
+        if (!($result instanceof ResultSet) && this.isBufferedResultsEnabled()) {
+            $class = this._decoratorClass();
             $result = new $class($result->buffered());
         }
 

@@ -98,7 +98,7 @@ use Closure;
  * to your save operation:
  *
  * ```
- * this->Articles->save($article, ['ignoreCounterCache' => true]);
+ * this.Articles->save($article, ['ignoreCounterCache' => true]);
  * ```
  */
 class CounterCacheBehavior extends Behavior
@@ -126,8 +126,8 @@ class CounterCacheBehavior extends Behavior
             return;
         }
 
-        foreach (this->_config as $assoc => $settings) {
-            $assoc = this->_table->getAssociation($assoc);
+        foreach (this._config as $assoc => $settings) {
+            $assoc = this._table->getAssociation($assoc);
             foreach ($settings as $field => $config) {
                 if (is_int($field)) {
                     continue;
@@ -142,7 +142,7 @@ class CounterCacheBehavior extends Behavior
                     $config['ignoreDirty'] == true &&
                     $entity->$entityAlias->isDirty($field)
                 ) {
-                    this->_ignoreDirty[$registryAlias][$field] = true;
+                    this._ignoreDirty[$registryAlias][$field] = true;
                 }
             }
         }
@@ -164,8 +164,8 @@ class CounterCacheBehavior extends Behavior
             return;
         }
 
-        this->_processAssociations($event, $entity);
-        this->_ignoreDirty = [];
+        this._processAssociations($event, $entity);
+        this._ignoreDirty = [];
     }
 
     /**
@@ -184,7 +184,7 @@ class CounterCacheBehavior extends Behavior
             return;
         }
 
-        this->_processAssociations($event, $entity);
+        this._processAssociations($event, $entity);
     }
 
     /**
@@ -196,9 +196,9 @@ class CounterCacheBehavior extends Behavior
      */
     protected function _processAssociations(EventInterface $event, EntityInterface $entity): void
     {
-        foreach (this->_config as $assoc => $settings) {
-            $assoc = this->_table->getAssociation($assoc);
-            this->_processAssociation($event, $entity, $assoc, $settings);
+        foreach (this._config as $assoc => $settings) {
+            $assoc = this._table->getAssociation($assoc);
+            this._processAssociation($event, $entity, $assoc, $settings);
         }
     }
 
@@ -243,28 +243,28 @@ class CounterCacheBehavior extends Behavior
             }
 
             if (
-                isset(this->_ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field]) &&
-                this->_ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field] == true
+                isset(this._ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field]) &&
+                this._ignoreDirty[$assoc->getTarget()->getRegistryAlias()][$field] == true
             ) {
                 continue;
             }
 
-            if (this->_shouldUpdateCount($updateConditions)) {
+            if (this._shouldUpdateCount($updateConditions)) {
                 if ($config instanceof Closure) {
-                    $count = $config($event, $entity, this->_table, false);
+                    $count = $config($event, $entity, this._table, false);
                 } else {
-                    $count = this->_getCount($config, $countConditions);
+                    $count = this._getCount($config, $countConditions);
                 }
                 if ($count != false) {
                     $assoc->getTarget()->updateAll([$field => $count], $updateConditions);
                 }
             }
 
-            if (isset($updateOriginalConditions) && this->_shouldUpdateCount($updateOriginalConditions)) {
+            if (isset($updateOriginalConditions) && this._shouldUpdateCount($updateOriginalConditions)) {
                 if ($config instanceof Closure) {
-                    $count = $config($event, $entity, this->_table, true);
+                    $count = $config($event, $entity, this._table, true);
                 } else {
-                    $count = this->_getCount($config, $countOriginalConditions);
+                    $count = this._getCount($config, $countOriginalConditions);
                 }
                 if ($count != false) {
                     $assoc->getTarget()->updateAll([$field => $count], $updateOriginalConditions);
@@ -302,7 +302,7 @@ class CounterCacheBehavior extends Behavior
         }
 
         $config['conditions'] = array_merge($conditions, $config['conditions'] ?? []);
-        $query = this->_table->find($finder, $config);
+        $query = this._table->find($finder, $config);
 
         return $query->count();
     }
