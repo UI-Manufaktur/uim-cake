@@ -33,7 +33,7 @@ use Cake\Datasource\ConnectionInterface;
 use Cake\Log\Engine\BaseLog;
 use Cake\Log\Log;
 use Psr\Log\LoggerInterface;
-use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\ICache;
 use RuntimeException;
 use Throwable;
 
@@ -98,7 +98,7 @@ class Connection : ConnectionInterface
     /**
      * Cacher object instance.
      *
-     * @var \Psr\SimpleCache\CacheInterface|null
+     * @var \Psr\SimpleCache\ICache|null
      */
     protected $cacher;
 
@@ -828,7 +828,7 @@ class Connection : ConnectionInterface
     /**
      * @inheritDoc
      */
-    function setCacher(CacheInterface $cacher)
+    function setCacher(ICache $cacher)
     {
         this.cacher = $cacher;
 
@@ -838,7 +838,7 @@ class Connection : ConnectionInterface
     /**
      * @inheritDoc
      */
-    function getCacher(): CacheInterface
+    function getCacher(): ICache
     {
         if (this.cacher != null) {
             return this.cacher;

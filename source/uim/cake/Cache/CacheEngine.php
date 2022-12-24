@@ -18,12 +18,12 @@ module uim.cake.Cache;
 use Cake\Core\InstanceConfigTrait;
 use DateInterval;
 use DateTime;
-use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\ICache;
 
 /**
  * Storage engine for CakePHP caching
  */
-abstract class CacheEngine : CacheInterface, CacheEngineInterface
+abstract class CacheEngine : ICache, ICacheEngine
 {
     use InstanceConfigTrait;
 

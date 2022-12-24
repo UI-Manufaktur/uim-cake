@@ -17,7 +17,7 @@ module uim.cake.Datasource;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
-use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\ICache;
 
 /**
  * This interface defines the methods you can depend on in
@@ -51,17 +51,17 @@ interface ConnectionInterface : LoggerAwareInterface
     /**
      * Set a cacher.
      *
-     * @param \Psr\SimpleCache\CacheInterface $cacher Cacher object
+     * @param \Psr\SimpleCache\ICache $cacher Cacher object
      * @return this
      */
-    function setCacher(CacheInterface $cacher);
+    function setCacher(ICache $cacher);
 
     /**
      * Get a cacher.
      *
-     * @return \Psr\SimpleCache\CacheInterface $cacher Cacher object
+     * @return \Psr\SimpleCache\ICache $cacher Cacher object
      */
-    function getCacher(): CacheInterface;
+    function getCacher(): ICache;
 
     /**
      * Get the configuration name for this connection.

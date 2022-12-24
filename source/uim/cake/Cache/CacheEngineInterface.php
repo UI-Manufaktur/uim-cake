@@ -24,7 +24,7 @@ module uim.cake.Cache;
  *
  * @since 3.7.0
  */
-interface CacheEngineInterface
+interface ICacheEngine
 {
     /**
      * Write data for key into a cache engine if it doesn't exist already.

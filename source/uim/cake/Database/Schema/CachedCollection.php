@@ -15,7 +15,7 @@
  */
 module uim.cake.Database\Schema;
 
-use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\ICache;
 
 /**
  * Decorates a schema collection and adds caching
@@ -25,7 +25,7 @@ class CachedCollection : ICollection
     /**
      * Cacher instance.
      *
-     * @var \Psr\SimpleCache\CacheInterface
+     * @var \Psr\SimpleCache\ICache
      */
     protected $cacher;
 
@@ -48,9 +48,9 @@ class CachedCollection : ICollection
      *
      * @param \Cake\Database\Schema\ICollection $collection The collection to wrap.
      * @param string $prefix The cache key prefix to use. Typically the connection name.
-     * @param \Psr\SimpleCache\CacheInterface $cacher Cacher instance.
+     * @param \Psr\SimpleCache\ICache $cacher Cacher instance.
      */
-    public this(ICollection $collection, string $prefix, CacheInterface $cacher)
+    public this(ICollection $collection, string $prefix, ICache $cacher)
     {
         this.collection = $collection;
         this.prefix = $prefix;
@@ -108,10 +108,10 @@ class CachedCollection : ICollection
     /**
      * Set a cacher.
      *
-     * @param \Psr\SimpleCache\CacheInterface $cacher Cacher object
+     * @param \Psr\SimpleCache\ICache $cacher Cacher object
      * @return this
      */
-    function setCacher(CacheInterface $cacher)
+    function setCacher(ICache $cacher)
     {
         this.cacher = $cacher;
 
@@ -121,9 +121,9 @@ class CachedCollection : ICollection
     /**
      * Get a cacher.
      *
-     * @return \Psr\SimpleCache\CacheInterface $cacher Cacher object
+     * @return \Psr\SimpleCache\ICache $cacher Cacher object
      */
-    function getCacher(): CacheInterface
+    function getCacher(): ICache
     {
         return this.cacher;
     }

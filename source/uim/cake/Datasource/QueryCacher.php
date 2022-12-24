@@ -17,7 +17,7 @@ module uim.cake.Datasource;
 
 use Cake\Cache\Cache;
 use Closure;
-use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\ICache;
 use RuntimeException;
 use Traversable;
 
@@ -41,7 +41,7 @@ class QueryCacher
     /**
      * Config for cache engine.
      *
-     * @var \Psr\SimpleCache\CacheInterface|string
+     * @var \Psr\SimpleCache\ICache|string
      */
     protected $_config;
 
@@ -49,7 +49,7 @@ class QueryCacher
      * Constructor.
      *
      * @param \Closure|string $key The key or function to generate a key.
-     * @param \Psr\SimpleCache\CacheInterface|string $config The cache config name or cache engine instance.
+     * @param \Psr\SimpleCache\ICache|string $config The cache config name or cache engine instance.
      * @throws \RuntimeException
      */
     public this($key, $config)
@@ -59,8 +59,8 @@ class QueryCacher
         }
         _key = $key;
 
-        if (!is_string($config) && !($config instanceof CacheInterface)) {
-            throw new RuntimeException("Cache configs must be strings or \Psr\SimpleCache\CacheInterface instances.");
+        if (!is_string($config) && !($config instanceof ICache)) {
+            throw new RuntimeException("Cache configs must be strings or \Psr\SimpleCache\ICache instances.");
         }
         _config = $config;
     }
@@ -123,7 +123,7 @@ class QueryCacher
     /**
      * Get the cache engine.
      *
-     * @return \Psr\SimpleCache\CacheInterface
+     * @return \Psr\SimpleCache\ICache
      */
     protected function _resolveCacher()
     {
