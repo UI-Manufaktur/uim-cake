@@ -142,7 +142,7 @@ use RuntimeException;
  * @see \Cake\Event\EventManager for reference on the events system.
  * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list
  */
-class Table implements RepositoryInterface, EventListenerInterface, EventDispatcherInterface, ValidatorAwareInterface
+class Table : RepositoryInterface, EventListenerInterface, EventDispatcherInterface, ValidatorAwareInterface
 {
     use EventDispatcherTrait;
     use RulesAwareTrait;

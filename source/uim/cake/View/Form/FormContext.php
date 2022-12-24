@@ -26,7 +26,7 @@ use Cake\Utility\Hash;
  * This context provider simply fulfils the interface requirements
  * that FormHelper has and allows access to the form data.
  */
-class FormContext implements ContextInterface
+class FormContext : ContextInterface
 {
     /**
      * The form object.

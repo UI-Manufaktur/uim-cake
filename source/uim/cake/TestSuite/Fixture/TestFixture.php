@@ -31,7 +31,7 @@ use Exception;
  * Cake TestFixture is responsible for building and destroying tables to be used
  * during testing.
  */
-class TestFixture implements ConstraintsInterface, FixtureInterface, TableSchemaAwareInterface
+class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInterface
 {
     use LocatorAwareTrait;
 

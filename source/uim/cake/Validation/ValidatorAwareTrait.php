@@ -35,7 +35,7 @@ use RuntimeException;
  * - `BUILD_VALIDATOR_EVENT` - The name of the event to be triggred when validators
  *   are built.
  *
- * If the including class also implements events the `Model.buildValidator` event
+ * If the including class also : events the `Model.buildValidator` event
  * will be triggered when validators are created.
  */
 trait ValidatorAwareTrait

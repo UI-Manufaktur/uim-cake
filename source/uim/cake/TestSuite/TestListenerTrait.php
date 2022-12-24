@@ -23,7 +23,7 @@ use PHPUnit\Framework\Warning;
 use Throwable;
 
 /**
- * Implements empty default methods for PHPUnit\Framework\TestListener.
+ * : empty default methods for PHPUnit\Framework\TestListener.
  */
 trait TestListenerTrait
 {

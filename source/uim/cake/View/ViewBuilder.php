@@ -34,7 +34,7 @@ use Serializable;
  * Once you have configured the view and established all the context
  * you can create a view instance with `build()`.
  */
-class ViewBuilder implements JsonSerializable, Serializable
+class ViewBuilder : JsonSerializable, Serializable
 {
     /**
      * The subdirectory to the template.

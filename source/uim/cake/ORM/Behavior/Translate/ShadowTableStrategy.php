@@ -32,7 +32,7 @@ use Cake\Utility\Hash;
  * This class provides a way to translate dynamic data by keeping translations
  * in a separate shadow table where each row corresponds to a row of primary table.
  */
-class ShadowTableStrategy implements TranslateStrategyInterface
+class ShadowTableStrategy : TranslateStrategyInterface
 {
     use InstanceConfigTrait;
     use LocatorAwareTrait;

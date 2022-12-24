@@ -77,7 +77,7 @@ use Traversable;
  * @method \Cake\Collection\CollectionInterface chunk(int $size) Groups the results in arrays of $size rows each.
  * @method bool isEmpty() Returns true if this query found no results.
  */
-class Query : DatabaseQuery implements JsonSerializable, QueryInterface
+class Query : DatabaseQuery : JsonSerializable, QueryInterface
 {
     use QueryTrait {
         cache as private _cache;

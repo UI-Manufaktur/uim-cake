@@ -33,7 +33,7 @@ use SplFileInfo;
  * has sub-optimal performance when compared to serving files
  * with a real webserver.
  */
-class AssetMiddleware implements IMiddleware
+class AssetMiddleware : IMiddleware
 {
     /**
      * The amount of time to cache the asset.

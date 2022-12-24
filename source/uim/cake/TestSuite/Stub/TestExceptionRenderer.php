@@ -31,7 +31,7 @@ use Throwable;
  * @see \Cake\TestSuite\IntegrationTestCase::disableErrorHandlerMiddleware()
  * @internal
  */
-class TestExceptionRenderer implements ExceptionRendererInterface
+class TestExceptionRenderer : ExceptionRendererInterface
 {
     /**
      * Simply rethrow the given exception

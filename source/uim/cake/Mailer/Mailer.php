@@ -132,7 +132,7 @@ use InvalidArgumentException;
  *   {@see \Cake\Mailer\Message::getBody()}
  */
 #[\AllowDynamicProperties]
-class Mailer implements EventListenerInterface
+class Mailer : EventListenerInterface
 {
     use ModelAwareTrait;
     use LocatorAwareTrait;

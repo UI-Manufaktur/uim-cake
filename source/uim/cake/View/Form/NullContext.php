@@ -22,7 +22,7 @@ namespace Cake\View\Form;
  * This context provider simply fulfils the interface requirements
  * that FormHelper has.
  */
-class NullContext implements ContextInterface
+class NullContext : ContextInterface
 {
     /**
      * Constructor.

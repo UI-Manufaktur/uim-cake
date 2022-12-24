@@ -28,11 +28,11 @@ use Traversable;
  * Validator object encapsulates all methods related to data validations for a model
  * It also provides an API to dynamically change validation rules for each model field.
  *
- * Implements ArrayAccess to easily modify rules in the set
+ * : ArrayAccess to easily modify rules in the set
  *
  * @link https://book.cakephp.org/4/en/core-libraries/validation.html
  */
-class Validator implements ArrayAccess, IteratorAggregate, Countable
+class Validator : ArrayAccess, IteratorAggregate, Countable
 {
     /**
      * By using 'create' you can make fields required when records are first created.

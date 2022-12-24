@@ -35,7 +35,7 @@ use SimpleXMLElement;
  * This class is used for sending Internet Message Format based
  * on the standard outlined in https://www.rfc-editor.org/rfc/rfc2822.txt
  */
-class Message implements JsonSerializable, Serializable
+class Message : JsonSerializable, Serializable
 {
     /**
      * Line length - no should more - RFC 2822 - 2.1.1

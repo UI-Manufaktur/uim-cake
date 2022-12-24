@@ -32,7 +32,7 @@ use LogicException;
  *
  * @: \Cake\Core\ObjectRegistry<\Cake\ORM\Behavior>
  */
-class BehaviorRegistry : ObjectRegistry implements EventDispatcherInterface
+class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
 {
     use EventDispatcherTrait;
 
@@ -204,7 +204,7 @@ class BehaviorRegistry : ObjectRegistry implements EventDispatcherInterface
     }
 
     /**
-     * Check if any loaded behavior implements a method.
+     * Check if any loaded behavior : a method.
      *
      * Will return true if any behavior provides a public non-finder method
      * with the chosen name.
@@ -220,7 +220,7 @@ class BehaviorRegistry : ObjectRegistry implements EventDispatcherInterface
     }
 
     /**
-     * Check if any loaded behavior implements the named finder.
+     * Check if any loaded behavior : the named finder.
      *
      * Will return true if any behavior provides a public method with
      * the chosen name.

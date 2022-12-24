@@ -19,7 +19,7 @@ namespace Cake\View;
 use Cake\Core\Exception\CakeException;
 
 /**
- * ViewBlock implements the concept of Blocks or Slots in the View layer.
+ * ViewBlock : the concept of Blocks or Slots in the View layer.
  * Slots or blocks are combined with extending views and layouts to afford slots
  * of content that are present in a layout or parent view, but are defined by the child
  * view or elements used in the view.

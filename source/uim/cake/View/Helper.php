@@ -41,7 +41,7 @@ use Cake\Event\EventListenerInterface;
  *   If a listener returns a non-null value, the output of the rendered file will be set to that.
  */
 #[\AllowDynamicProperties]
-class Helper implements EventListenerInterface
+class Helper : EventListenerInterface
 {
     use InstanceConfigTrait;
 

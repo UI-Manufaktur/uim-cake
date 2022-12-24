@@ -71,7 +71,7 @@ use Throwable;
  * @property \Cake\View\ViewBlock $Blocks
  */
 #[\AllowDynamicProperties]
-class View implements EventDispatcherInterface
+class View : EventDispatcherInterface
 {
     use CellTrait {
         cell as public;

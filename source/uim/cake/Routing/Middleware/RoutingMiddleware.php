@@ -38,7 +38,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Applies routing rules to the request and creates the controller
  * instance if possible.
  */
-class RoutingMiddleware implements IMiddleware
+class RoutingMiddleware : IMiddleware
 {
     /**
      * Key used to store the route collection in the cache engine

@@ -38,7 +38,7 @@ use Cake\Utility\Inflector;
  * If you want to bring all or certain languages for each of the fetched records,
  * you can use the custom `translations` finders that is exposed to the table.
  */
-class TranslateBehavior : Behavior implements PropertyMarshalInterface
+class TranslateBehavior : Behavior : PropertyMarshalInterface
 {
     /**
      * Default config

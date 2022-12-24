@@ -112,7 +112,7 @@ use ReflectionMethod;
  * @see \Cake\ORM\Table::addBehavior()
  * @see \Cake\Event\EventManager
  */
-class Behavior implements EventListenerInterface
+class Behavior : EventListenerInterface
 {
     use InstanceConfigTrait;
 

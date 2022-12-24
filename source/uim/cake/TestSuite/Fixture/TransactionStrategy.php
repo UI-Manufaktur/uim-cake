@@ -25,7 +25,7 @@ use RuntimeException;
  *
  * Any test that calls Connection::rollback(true) will break this strategy.
  */
-class TransactionStrategy implements FixtureStrategyInterface
+class TransactionStrategy : FixtureStrategyInterface
 {
     /**
      * @var \Cake\TestSuite\Fixture\FixtureHelper

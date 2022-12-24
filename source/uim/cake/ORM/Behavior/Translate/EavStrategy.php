@@ -41,7 +41,7 @@ use Cake\Utility\Hash;
  * you can use the custom `translations` finder of `TranslateBehavior` that is
  * exposed to the table.
  */
-class EavStrategy implements TranslateStrategyInterface
+class EavStrategy : TranslateStrategyInterface
 {
     use InstanceConfigTrait;
     use LocatorAwareTrait;

@@ -30,7 +30,7 @@ use Traversable;
  * Contains methods for managing associations, and
  * ordering operations around saving and deleting.
  */
-class AssociationCollection implements IteratorAggregate
+class AssociationCollection : IteratorAggregate
 {
     use AssociationsNormalizerTrait;
     use LocatorAwareTrait;

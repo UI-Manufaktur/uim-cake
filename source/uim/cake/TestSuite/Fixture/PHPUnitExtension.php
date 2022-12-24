@@ -23,7 +23,7 @@ use PHPUnit\Runner\BeforeFirstTestHook;
 /**
  * PHPUnit extension to integrate CakePHP's data-only fixtures.
  */
-class PHPUnitExtension implements BeforeFirstTestHook
+class PHPUnitExtension : BeforeFirstTestHook
 {
     /**
      * Initializes before any tests are run.

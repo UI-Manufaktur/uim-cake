@@ -26,7 +26,7 @@ use InvalidArgumentException;
 use RuntimeException;
 
 /**
- * Implements the logic for loading an association using a SELECT query
+ * : the logic for loading an association using a SELECT query
  *
  * @internal
  */

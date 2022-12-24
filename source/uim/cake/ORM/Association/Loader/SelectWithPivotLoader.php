@@ -20,7 +20,7 @@ use Cake\ORM\Query;
 use RuntimeException;
 
 /**
- * Implements the logic for loading an association using a SELECT query and a pivot table
+ * : the logic for loading an association using a SELECT query and a pivot table
  *
  * @internal
  */

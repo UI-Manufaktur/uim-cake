@@ -28,7 +28,7 @@ use PHPUnit\Framework\TestSuite;
  *
  * @deprecated 4.3.0
  */
-class FixtureInjector implements TestListener
+class FixtureInjector : TestListener
 {
     use TestListenerTrait;
 

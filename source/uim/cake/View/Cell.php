@@ -37,7 +37,7 @@ use ReflectionMethod;
  * Cell base.
  */
 #[\AllowDynamicProperties]
-abstract class Cell implements EventDispatcherInterface
+abstract class Cell : EventDispatcherInterface
 {
     use EventDispatcherTrait;
     use LocatorAwareTrait;

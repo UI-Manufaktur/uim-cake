@@ -26,7 +26,7 @@ use Traversable;
  * ValidationSet object. Holds all validation rules for a field and exposes
  * methods to dynamically add or remove validation rules
  */
-class ValidationSet implements ArrayAccess, IteratorAggregate, Countable
+class ValidationSet : ArrayAccess, IteratorAggregate, Countable
 {
     /**
      * Holds the ValidationRule objects

@@ -30,7 +30,7 @@ use SplFixedArray;
  * the query, casting each field to the correct type and executing the extra
  * queries required for eager loading external associations.
  */
-class ResultSet implements ResultSetInterface
+class ResultSet : ResultSetInterface
 {
     use CollectionTrait;
 

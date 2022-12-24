@@ -68,7 +68,7 @@ use Cake\Utility\Hash;
  *  ];
  *  ```
  */
-class ArrayContext implements ContextInterface
+class ArrayContext : ContextInterface
 {
     /**
      * Context data for this object.
