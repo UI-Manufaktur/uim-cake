@@ -57,7 +57,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
             return null;
         }
 
-        this->checkNumeric($value);
+        this.checkNumeric($value);
 
         return (int)$value;
     }
@@ -88,7 +88,7 @@ class IntegerType extends BaseType implements BatchCastingInterface
                 continue;
             }
 
-            this->checkNumeric($values[$field]);
+            this.checkNumeric($values[$field]);
 
             $values[$field] = (int)$values[$field];
         }
