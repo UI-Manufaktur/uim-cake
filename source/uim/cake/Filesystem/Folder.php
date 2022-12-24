@@ -143,17 +143,17 @@ class Folder
             $path = TMP;
         }
         if ($mode) {
-            this->mode = $mode;
+            this.mode = $mode;
         }
 
         if (!file_exists($path) && $create == true) {
-            this->create($path, this->mode);
+            this.create($path, this.mode);
         }
         if (!Folder::isAbsolute($path)) {
             $path = realpath($path);
         }
         if (!empty($path)) {
-            this->cd($path);
+            this.cd($path);
         }
     }
 
@@ -164,7 +164,7 @@ class Folder
      */
     function pwd(): ?string
     {
-        return this->path;
+        return this.path;
     }
 
     /**
@@ -175,9 +175,9 @@ class Folder
      */
     function cd(string $path)
     {
-        $path = this->realpath($path);
+        $path = this.realpath($path);
         if ($path != false && is_dir($path)) {
-            return this->path = $path;
+            return this.path = $path;
         }
 
         return false;
@@ -197,7 +197,7 @@ class Folder
     {
         $dirs = $files = [];
 
-        if (!this->pwd()) {
+        if (!this.pwd()) {
             return [$dirs, $files];
         }
         if (is_array($exceptions)) {
@@ -206,15 +206,15 @@ class Folder
         $skipHidden = isset($exceptions['.']) || $exceptions == true;
 
         try {
-            $iterator = new DirectoryIterator(this->path);
+            $iterator = new DirectoryIterator(this.path);
         } catch (Exception $e) {
             return [$dirs, $files];
         }
 
-        if (!is_bool($sort) && isset(this->_fsorts[$sort])) {
-            $methodName = this->_fsorts[$sort];
+        if (!is_bool($sort) && isset(this._fsorts[$sort])) {
+            $methodName = this._fsorts[$sort];
         } else {
-            $methodName = this->_fsorts[self::SORT_NAME];
+            $methodName = this._fsorts[self::SORT_NAME];
         }
 
         foreach ($iterator as $item) {
@@ -236,7 +236,7 @@ class Folder
             }
         }
 
-        if ($sort || this->sort) {
+        if ($sort || this.sort) {
             ksort($dirs);
             ksort($files);
         }
@@ -261,7 +261,7 @@ class Folder
      */
     function find(string $regexpPattern = '.*', $sort = false): array
     {
-        [, $files] = this->read($sort);
+        [, $files] = this.read($sort);
 
         return array_values(preg_grep('/^' . $regexpPattern . '$/i', $files));
     }
@@ -275,12 +275,12 @@ class Folder
      */
     function findRecursive(string $pattern = '.*', $sort = false): array
     {
-        if (!this->pwd()) {
+        if (!this.pwd()) {
             return [];
         }
-        $startsOn = this->path;
-        $out = this->_findRecursive($pattern, $sort);
-        this->cd($startsOn);
+        $startsOn = this.path;
+        $out = this._findRecursive($pattern, $sort);
+        this.cd($startsOn);
 
         return $out;
     }
@@ -294,19 +294,19 @@ class Folder
      */
     protected function _findRecursive(string $pattern, bool $sort = false): array
     {
-        [$dirs, $files] = this->read($sort);
+        [$dirs, $files] = this.read($sort);
         $found = [];
 
         foreach ($files as $file) {
             if (preg_match('/^' . $pattern . '$/i', $file)) {
-                $found[] = Folder::addPathElement(this->path, $file);
+                $found[] = Folder::addPathElement(this.path, $file);
             }
         }
-        $start = this->path;
+        $start = this.path;
 
         foreach ($dirs as $dir) {
-            this->cd(Folder::addPathElement($start, $dir));
-            $found = array_merge($found, this->findRecursive($pattern, $sort));
+            this.cd(Folder::addPathElement($start, $dir));
+            $found = array_merge($found, this.findRecursive($pattern, $sort));
         }
 
         return $found;
@@ -423,7 +423,7 @@ class Folder
         }
 
         $dir = Folder::slashTerm($path);
-        $current = Folder::slashTerm(this->pwd());
+        $current = Folder::slashTerm(this.pwd());
 
         if (!$reverse) {
             $return = preg_match('/^' . preg_quote($dir, '/') . '(.*)/', $current);
@@ -446,25 +446,25 @@ class Folder
     function chmod(string $path, ?int $mode = null, bool $recursive = true, array $exceptions = []): bool
     {
         if (!$mode) {
-            $mode = this->mode;
+            $mode = this.mode;
         }
 
         if ($recursive == false && is_dir($path)) {
             // phpcs:disable
             if (@chmod($path, intval($mode, 8))) {
                 // phpcs:enable
-                this->_messages[] = sprintf('%s changed to %s', $path, $mode);
+                this._messages[] = sprintf('%s changed to %s', $path, $mode);
 
                 return true;
             }
 
-            this->_errors[] = sprintf('%s NOT changed to %s', $path, $mode);
+            this._errors[] = sprintf('%s NOT changed to %s', $path, $mode);
 
             return false;
         }
 
         if (is_dir($path)) {
-            $paths = this->tree($path);
+            $paths = this.tree($path);
 
             foreach ($paths as $type) {
                 foreach ($type as $fullpath) {
@@ -478,14 +478,14 @@ class Folder
                     // phpcs:disable
                     if (@chmod($fullpath, intval($mode, 8))) {
                         // phpcs:enable
-                        this->_messages[] = sprintf('%s changed to %s', $fullpath, $mode);
+                        this._messages[] = sprintf('%s changed to %s', $fullpath, $mode);
                     } else {
-                        this->_errors[] = sprintf('%s NOT changed to %s', $fullpath, $mode);
+                        this._errors[] = sprintf('%s NOT changed to %s', $fullpath, $mode);
                     }
                 }
             }
 
-            if (empty(this->_errors)) {
+            if (empty(this._errors)) {
                 return true;
             }
         }
@@ -503,7 +503,7 @@ class Folder
     function subdirectories(?string $path = null, bool $fullPath = true): array
     {
         if (!$path) {
-            $path = this->path;
+            $path = this.path;
         }
         $subdirectories = [];
 
@@ -535,7 +535,7 @@ class Folder
     function tree(?string $path = null, $exceptions = false, ?string $type = null): array
     {
         if (!$path) {
-            $path = this->path;
+            $path = this.path;
         }
         $files = [];
         $directories = [$path];
@@ -628,31 +628,31 @@ class Folder
         }
 
         if (!self::isAbsolute($pathname)) {
-            $pathname = self::addPathElement(this->pwd(), $pathname);
+            $pathname = self::addPathElement(this.pwd(), $pathname);
         }
 
         if (!$mode) {
-            $mode = this->mode;
+            $mode = this.mode;
         }
 
         if (is_file($pathname)) {
-            this->_errors[] = sprintf('%s is a file', $pathname);
+            this._errors[] = sprintf('%s is a file', $pathname);
 
             return false;
         }
         $pathname = rtrim($pathname, DIRECTORY_SEPARATOR);
         $nextPathname = substr($pathname, 0, strrpos($pathname, DIRECTORY_SEPARATOR));
 
-        if (this->create($nextPathname, $mode)) {
+        if (this.create($nextPathname, $mode)) {
             if (!file_exists($pathname)) {
                 $old = umask(0);
                 if (mkdir($pathname, $mode, true)) {
-                    this->_messages[] = sprintf('%s created', $pathname);
+                    this._messages[] = sprintf('%s created', $pathname);
                     umask($old);
 
                     return true;
                 }
-                this->_errors[] = sprintf('%s NOT created', $pathname);
+                this._errors[] = sprintf('%s NOT created', $pathname);
                 umask($old);
 
                 return false;
@@ -670,7 +670,7 @@ class Folder
     function dirsize(): int
     {
         $size = 0;
-        $directory = Folder::slashTerm(this->path);
+        $directory = Folder::slashTerm(this.path);
         $stack = [$directory];
         $count = count($stack);
         for ($i = 0, $j = $count; $i < $j; $i++) {
@@ -708,7 +708,7 @@ class Folder
     function delete(?string $path = null): bool
     {
         if (!$path) {
-            $path = this->pwd();
+            $path = this.pwd();
         }
         if (!$path) {
             return false;
@@ -730,17 +730,17 @@ class Folder
                     // phpcs:disable
                     if (@unlink($filePath)) {
                         // phpcs:enable
-                        this->_messages[] = sprintf('%s removed', $filePath);
+                        this._messages[] = sprintf('%s removed', $filePath);
                     } else {
-                        this->_errors[] = sprintf('%s NOT removed', $filePath);
+                        this._errors[] = sprintf('%s NOT removed', $filePath);
                     }
                 } elseif ($item->isDir() && !$item->isDot()) {
                     // phpcs:disable
                     if (@rmdir($filePath)) {
                         // phpcs:enable
-                        this->_messages[] = sprintf('%s removed', $filePath);
+                        this._messages[] = sprintf('%s removed', $filePath);
                     } else {
-                        this->_errors[] = sprintf('%s NOT removed', $filePath);
+                        this._errors[] = sprintf('%s NOT removed', $filePath);
 
                         unset($directory, $iterator, $item);
 
@@ -760,9 +760,9 @@ class Folder
             // phpcs:disable
             if (@rmdir($path)) {
                 // phpcs:enable
-                this->_messages[] = sprintf('%s removed', $path);
+                this._messages[] = sprintf('%s removed', $path);
             } else {
-                this->_errors[] = sprintf('%s NOT removed', $path);
+                this._errors[] = sprintf('%s NOT removed', $path);
 
                 return false;
             }
@@ -788,12 +788,12 @@ class Folder
      */
     function copy(string $to, array $options = []): bool
     {
-        if (!this->pwd()) {
+        if (!this.pwd()) {
             return false;
         }
         $options += [
-            'from' => this->path,
-            'mode' => this->mode,
+            'from' => this.path,
+            'mode' => this.mode,
             'skip' => [],
             'scheme' => Folder::MERGE,
             'recursive' => true,
@@ -803,18 +803,18 @@ class Folder
         $toDir = $to;
         $mode = $options['mode'];
 
-        if (!this->cd($fromDir)) {
-            this->_errors[] = sprintf('%s not found', $fromDir);
+        if (!this.cd($fromDir)) {
+            this._errors[] = sprintf('%s not found', $fromDir);
 
             return false;
         }
 
         if (!is_dir($toDir)) {
-            this->create($toDir, $mode);
+            this.create($toDir, $mode);
         }
 
         if (!is_writable($toDir)) {
-            this->_errors[] = sprintf('%s not writable', $toDir);
+            this._errors[] = sprintf('%s not writable', $toDir);
 
             return false;
         }
@@ -831,14 +831,14 @@ class Folder
                         if (copy($from, $to)) {
                             chmod($to, intval($mode, 8));
                             touch($to, filemtime($from));
-                            this->_messages[] = sprintf('%s copied to %s', $from, $to);
+                            this._messages[] = sprintf('%s copied to %s', $from, $to);
                         } else {
-                            this->_errors[] = sprintf('%s NOT copied to %s', $from, $to);
+                            this._errors[] = sprintf('%s NOT copied to %s', $from, $to);
                         }
                     }
 
                     if (is_dir($from) && file_exists($to) && $options['scheme'] == Folder::OVERWRITE) {
-                        this->delete($to);
+                        this.delete($to);
                     }
 
                     if (is_dir($from) && $options['recursive'] == false) {
@@ -852,15 +852,15 @@ class Folder
                             $old = umask(0);
                             chmod($to, $mode);
                             umask($old);
-                            this->_messages[] = sprintf('%s created', $to);
+                            this._messages[] = sprintf('%s created', $to);
                             $options = ['from' => $from] + $options;
-                            this->copy($to, $options);
+                            this.copy($to, $options);
                         } else {
-                            this->_errors[] = sprintf('%s not created', $to);
+                            this._errors[] = sprintf('%s not created', $to);
                         }
                     } elseif (is_dir($from) && $options['scheme'] == Folder::MERGE) {
                         $options = ['from' => $from] + $options;
-                        this->copy($to, $options);
+                        this.copy($to, $options);
                     }
                 }
             }
@@ -869,7 +869,7 @@ class Folder
             return false;
         }
 
-        return empty(this->_errors);
+        return empty(this._errors);
     }
 
     /**
@@ -889,10 +889,10 @@ class Folder
      */
     function move(string $to, array $options = []): bool
     {
-        $options += ['from' => this->path, 'mode' => this->mode, 'skip' => [], 'recursive' => true];
+        $options += ['from' => this.path, 'mode' => this.mode, 'skip' => [], 'recursive' => true];
 
-        if (this->copy($to, $options) && this->delete($options['from'])) {
-            return (bool)this->cd($to);
+        if (this.copy($to, $options) && this.delete($options['from'])) {
+            return (bool)this.cd($to);
         }
 
         return false;
@@ -906,9 +906,9 @@ class Folder
      */
     function messages(bool $reset = true): array
     {
-        $messages = this->_messages;
+        $messages = this._messages;
         if ($reset) {
-            this->_messages = [];
+            this._messages = [];
         }
 
         return $messages;
@@ -922,9 +922,9 @@ class Folder
      */
     function errors(bool $reset = true): array
     {
-        $errors = this->_errors;
+        $errors = this._errors;
         if ($reset) {
-            this->_errors = [];
+            this._errors = [];
         }
 
         return $errors;
@@ -940,7 +940,7 @@ class Folder
     {
         if (strpos($path, '..') == false) {
             if (!Folder::isAbsolute($path)) {
-                $path = Folder::addPathElement(this->path, $path);
+                $path = Folder::addPathElement(this.path, $path);
             }
 
             return $path;

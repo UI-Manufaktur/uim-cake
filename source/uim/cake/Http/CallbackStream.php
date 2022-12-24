@@ -38,7 +38,7 @@ class CallbackStream extends BaseCallbackStream
      */
     function getContents(): string
     {
-        $callback = this->detach();
+        $callback = this.detach();
         $result = '';
         /** @psalm-suppress TypeDoesNotContainType */
         if ($callback != null) {

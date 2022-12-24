@@ -46,11 +46,11 @@ trait EventDispatcherTrait
      */
     function getEventManager(): IEventManager
     {
-        if (this->_eventManager == null) {
-            this->_eventManager = new EventManager();
+        if (this._eventManager == null) {
+            this._eventManager = new EventManager();
         }
 
-        return this->_eventManager;
+        return this._eventManager;
     }
 
     /**
@@ -64,7 +64,7 @@ trait EventDispatcherTrait
      */
     function setEventManager(IEventManager $eventManager)
     {
-        this->_eventManager = $eventManager;
+        this._eventManager = $eventManager;
 
         return this;
     }
@@ -88,8 +88,8 @@ trait EventDispatcherTrait
         }
 
         /** @var \Cake\Event\EventInterface $event */
-        $event = new this->_eventClass($name, $subject, $data);
-        this->getEventManager()->dispatch($event);
+        $event = new this._eventClass($name, $subject, $data);
+        this.getEventManager()->dispatch($event);
 
         return $event;
     }
