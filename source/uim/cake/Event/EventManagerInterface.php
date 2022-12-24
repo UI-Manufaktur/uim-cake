@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -25,7 +24,7 @@ interface IEventManager
      *
      * A variadic interface to add listeners that emulates jQuery.on().
      *
-     * Binding an EventListenerInterface:
+     * Binding an IEventListener:
      *
      * ```
      * $eventManager.on($listener);
@@ -43,9 +42,9 @@ interface IEventManager
      * $eventManager.on('Model.beforeSave', ['priority': 90], $callable);
      * ```
      *
-     * @param \Cake\Event\EventListenerInterface|string $eventKey The event unique identifier name
+     * @param \Cake\Event\IEventListener|string $eventKey The event unique identifier name
      * with which the callback will be associated. If $eventKey is an instance of
-     * Cake\Event\EventListenerInterface its events will be bound using the `implementedEvents()` methods.
+     * Cake\Event\IEventListener its events will be bound using the `implementedEvents()` methods.
      *
      * @param callable|array $options Either an array of options or the callable you wish to
      * bind to $eventKey. If an array of options, the `priority` key can be used to define the order.
@@ -55,14 +54,14 @@ interface IEventManager
      * @param callable|null $callable The callable function you want invoked.
      * @return this
      * @throws \InvalidArgumentException When event key is missing or callable is not an
-     *   instance of Cake\Event\EventListenerInterface.
+     *   instance of Cake\Event\IEventListener.
      */
     function on($eventKey, $options = [], ?callable $callable = null);
 
     /**
      * Remove a listener from the active listeners.
      *
-     * Remove a EventListenerInterface entirely:
+     * Remove a IEventListener entirely:
      *
      * ```
      * $manager.off($listener);
@@ -86,9 +85,9 @@ interface IEventManager
      * $manager.off($callback);
      * ```
      *
-     * @param \Cake\Event\EventListenerInterface|callable|string $eventKey The event unique identifier name
+     * @param \Cake\Event\IEventListener|callable|string $eventKey The event unique identifier name
      *   with which the callback has been associated, or the $listener you want to remove.
-     * @param \Cake\Event\EventListenerInterface|callable|null $callable The callback you want to detach.
+     * @param \Cake\Event\IEventListener|callable|null $callable The callback you want to detach.
      * @return this
      */
     function off($eventKey, $callable = null);

@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -98,7 +97,7 @@ class EventManager : IEventManager
      */
     function on($eventKey, $options = [], ?callable $callable = null)
     {
-        if ($eventKey instanceof EventListenerInterface) {
+        if ($eventKey instanceof IEventListener) {
             _attachSubscriber($eventKey);
 
             return this;
@@ -122,13 +121,13 @@ class EventManager : IEventManager
     }
 
     /**
-     * Auxiliary function to attach all implemented callbacks of a Cake\Event\EventListenerInterface class instance
+     * Auxiliary function to attach all implemented callbacks of a Cake\Event\IEventListener class instance
      * as individual methods on this manager
      *
-     * @param \Cake\Event\EventListenerInterface $subscriber Event listener.
+     * @param \Cake\Event\IEventListener $subscriber Event listener.
      * @return void
      */
-    protected function _attachSubscriber(EventListenerInterface $subscriber): void
+    protected function _attachSubscriber(IEventListener $subscriber): void
     {
         foreach ($subscriber.implementedEvents() as $eventKey: $function) {
             $options = [];
@@ -151,13 +150,13 @@ class EventManager : IEventManager
 
     /**
      * Auxiliary function to extract and return a PHP callback type out of the callable definition
-     * from the return value of the `implementedEvents()` method on a {@link \Cake\Event\EventListenerInterface}
+     * from the return value of the `implementedEvents()` method on a {@link \Cake\Event\IEventListener}
      *
      * @param array $function the array taken from a handler definition for an event
-     * @param \Cake\Event\EventListenerInterface $object The handler object
+     * @param \Cake\Event\IEventListener $object The handler object
      * @return array
      */
-    protected function _extractCallable(array $function, EventListenerInterface $object): array
+    protected function _extractCallable(array $function, IEventListener $object): array
     {
         /** @var callable $method */
         $method = $function['callable'];
@@ -176,7 +175,7 @@ class EventManager : IEventManager
      */
     function off($eventKey, $callable = null)
     {
-        if ($eventKey instanceof EventListenerInterface) {
+        if ($eventKey instanceof IEventListener) {
             _detachSubscriber($eventKey);
 
             return this;
@@ -186,7 +185,7 @@ class EventManager : IEventManager
             if (!is_callable($eventKey)) {
                 throw new CakeException(
                     'First argument of EventManager::off() must be ' .
-                    ' string or EventListenerInterface instance or callable.'
+                    ' string or IEventListener instance or callable.'
                 );
             }
 
@@ -197,7 +196,7 @@ class EventManager : IEventManager
             return this;
         }
 
-        if ($callable instanceof EventListenerInterface) {
+        if ($callable instanceof IEventListener) {
             _detachSubscriber($callable, $eventKey);
 
             return this;
@@ -226,13 +225,13 @@ class EventManager : IEventManager
     }
 
     /**
-     * Auxiliary function to help detach all listeners provided by an object implementing EventListenerInterface
+     * Auxiliary function to help detach all listeners provided by an object implementing IEventListener
      *
-     * @param \Cake\Event\EventListenerInterface $subscriber the subscriber to be detached
+     * @param \Cake\Event\IEventListener $subscriber the subscriber to be detached
      * @param string|null $eventKey optional event key name to unsubscribe the listener from
      * @return void
      */
-    protected function _detachSubscriber(EventListenerInterface $subscriber, ?string $eventKey = null): void
+    protected function _detachSubscriber(IEventListener $subscriber, ?string $eventKey = null): void
     {
         $events = $subscriber.implementedEvents();
         if (!empty($eventKey) && empty($events[$eventKey])) {

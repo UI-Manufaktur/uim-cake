@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+
 
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -18,7 +17,7 @@ namespace Cake\Form;
 
 use Cake\Event\EventDispatcherInterface;
 use Cake\Event\EventDispatcherTrait;
-use Cake\Event\EventListenerInterface;
+use Cake\Event\IEventListener;
 use Cake\Event\EventManager;
 use Cake\Utility\Hash;
 use Cake\Validation\ValidatorAwareInterface;
@@ -38,7 +37,7 @@ use Cake\Validation\ValidatorAwareTrait;
  *
  * Forms are conventionally placed in the `App\Form` namespace.
  */
-class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInterface
+class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
 {
     use EventDispatcherTrait;
     use ValidatorAwareTrait;
