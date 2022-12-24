@@ -37,7 +37,7 @@ class CommandFactory implements CommandFactoryInterface
      */
     public this(?IContainer $container = null)
     {
-        this->container = $container;
+        this.container = $container;
     }
 
     /**
@@ -45,8 +45,8 @@ class CommandFactory implements CommandFactoryInterface
      */
     function create(string $className)
     {
-        if (this->container && this->container->has($className)) {
-            $command = this->container->get($className);
+        if (this.container && this.container->has($className)) {
+            $command = this.container->get($className);
         } else {
             $command = new $className();
         }

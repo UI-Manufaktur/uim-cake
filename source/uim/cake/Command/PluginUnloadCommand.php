@@ -51,7 +51,7 @@ class PluginUnloadCommand extends Command
         }
 
         $app = APP . 'Application.php';
-        if (file_exists($app) && this->modifyApplication($app, $plugin)) {
+        if (file_exists($app) && this.modifyApplication($app, $plugin)) {
             $io->out('');
             $io->out(sprintf('%s modified', $app));
 

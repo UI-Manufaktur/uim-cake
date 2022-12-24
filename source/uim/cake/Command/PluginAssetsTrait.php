@@ -62,8 +62,8 @@ trait PluginAssetsTrait
         foreach ($pluginsList as $plugin) {
             $path = Plugin::path($plugin) . 'webroot';
             if (!is_dir($path)) {
-                this->io->verbose('', 1);
-                this->io->verbose(
+                this.io->verbose('', 1);
+                this.io->verbose(
                     sprintf('Skipping plugin %s. It does not have webroot folder.', $plugin),
                     2
                 );
@@ -103,14 +103,14 @@ trait PluginAssetsTrait
     protected function _process(array $plugins, bool $copy = false, bool $overwrite = false): void
     {
         foreach ($plugins as $plugin => $config) {
-            this->io->out();
-            this->io->out('For plugin: ' . $plugin);
-            this->io->hr();
+            this.io->out();
+            this.io->out('For plugin: ' . $plugin);
+            this.io->hr();
 
             if (
                 $config['namespaced'] &&
                 !is_dir($config['destDir']) &&
-                !this->_createDirectory($config['destDir'])
+                !this._createDirectory($config['destDir'])
             ) {
                 continue;
             }
@@ -118,10 +118,10 @@ trait PluginAssetsTrait
             $dest = $config['destDir'] . $config['link'];
 
             if (file_exists($dest)) {
-                if ($overwrite && !this->_remove($config)) {
+                if ($overwrite && !this._remove($config)) {
                     continue;
                 } elseif (!$overwrite) {
-                    this->io->verbose(
+                    this.io->verbose(
                         $dest . ' already exists',
                         1
                     );
@@ -131,7 +131,7 @@ trait PluginAssetsTrait
             }
 
             if (!$copy) {
-                $result = this->_createSymlink(
+                $result = this._createSymlink(
                     $config['srcPath'],
                     $dest
                 );
@@ -140,14 +140,14 @@ trait PluginAssetsTrait
                 }
             }
 
-            this->_copyDirectory(
+            this._copyDirectory(
                 $config['srcPath'],
                 $dest
             );
         }
 
-        this->io->out();
-        this->io->out('Done');
+        this.io->out();
+        this.io->out('Done');
     }
 
     /**
@@ -159,7 +159,7 @@ trait PluginAssetsTrait
     protected function _remove(array $config): bool
     {
         if ($config['namespaced'] && !is_dir($config['destDir'])) {
-            this->io->verbose(
+            this.io->verbose(
                 $config['destDir'] . $config['link'] . ' does not exist',
                 1
             );
@@ -170,7 +170,7 @@ trait PluginAssetsTrait
         $dest = $config['destDir'] . $config['link'];
 
         if (!file_exists($dest)) {
-            this->io->verbose(
+            this.io->verbose(
                 $dest . ' does not exist',
                 1
             );
@@ -182,11 +182,11 @@ trait PluginAssetsTrait
             // phpcs:ignore
             $success = DS == '\\' ? @rmdir($dest) : @unlink($dest);
             if ($success) {
-                this->io->out('Unlinked ' . $dest);
+                this.io->out('Unlinked ' . $dest);
 
                 return true;
             } else {
-                this->io->err('Failed to unlink  ' . $dest);
+                this.io->err('Failed to unlink  ' . $dest);
 
                 return false;
             }
@@ -194,11 +194,11 @@ trait PluginAssetsTrait
 
         $fs = new Filesystem();
         if ($fs->deleteDir($dest)) {
-            this->io->out('Deleted ' . $dest);
+            this.io->out('Deleted ' . $dest);
 
             return true;
         } else {
-            this->io->err('Failed to delete ' . $dest);
+            this.io->err('Failed to delete ' . $dest);
 
             return false;
         }
@@ -219,12 +219,12 @@ trait PluginAssetsTrait
         umask($old);
 
         if ($result) {
-            this->io->out('Created directory ' . $dir);
+            this.io->out('Created directory ' . $dir);
 
             return true;
         }
 
-        this->io->err('Failed creating directory ' . $dir);
+        this.io->err('Failed creating directory ' . $dir);
 
         return false;
     }
@@ -243,7 +243,7 @@ trait PluginAssetsTrait
         // phpcs:enable
 
         if ($result) {
-            this->io->out('Created symlink ' . $link);
+            this.io->out('Created symlink ' . $link);
 
             return true;
         }
@@ -262,12 +262,12 @@ trait PluginAssetsTrait
     {
         $fs = new Filesystem();
         if ($fs->copyDir($source, $destination)) {
-            this->io->out('Copied assets to directory ' . $destination);
+            this.io->out('Copied assets to directory ' . $destination);
 
             return true;
         }
 
-        this->io->err('Error copying assets to directory ' . $destination);
+        this.io->err('Error copying assets to directory ' . $destination);
 
         return false;
     }

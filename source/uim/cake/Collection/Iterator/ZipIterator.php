@@ -75,12 +75,12 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
             return (new Collection($items))->unwrap();
         }, $sets);
 
-        this->_callback = $callable;
+        this._callback = $callable;
         parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
         foreach ($sets as $set) {
-            this->_iterators[] = $set;
-            this->attachIterator($set);
+            this._iterators[] = $set;
+            this.attachIterator($set);
         }
     }
 
@@ -93,11 +93,11 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
     #[\ReturnTypeWillChange]
     function current()
     {
-        if (this->_callback == null) {
+        if (this._callback == null) {
             return parent::current();
         }
 
-        return call_user_func_array(this->_callback, parent::current());
+        return call_user_func_array(this._callback, parent::current());
     }
 
     /**
@@ -108,7 +108,7 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
      */
     function serialize(): string
     {
-        return serialize(this->_iterators);
+        return serialize(this._iterators);
     }
 
     /**
@@ -118,7 +118,7 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
      */
     function __serialize(): array
     {
-        return this->_iterators;
+        return this._iterators;
     }
 
     /**
@@ -130,9 +130,9 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
     function unserialize($iterators): void
     {
         parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
-        this->_iterators = unserialize($iterators);
-        foreach (this->_iterators as $it) {
-            this->attachIterator($it);
+        this._iterators = unserialize($iterators);
+        foreach (this._iterators as $it) {
+            this.attachIterator($it);
         }
     }
 
@@ -146,9 +146,9 @@ class ZipIterator extends MultipleIterator implements CollectionInterface, Seria
     {
         parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
-        this->_iterators = $data;
-        foreach (this->_iterators as $it) {
-            this->attachIterator($it);
+        this._iterators = $data;
+        foreach (this._iterators as $it) {
+            this.attachIterator($it);
         }
     }
 }

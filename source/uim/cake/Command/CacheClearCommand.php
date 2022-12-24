@@ -85,7 +85,7 @@ class CacheClearCommand extends Command
             }
         } catch (InvalidArgumentException $e) {
             $io->error($e->getMessage());
-            this->abort();
+            this.abort();
         }
 
         return static::CODE_SUCCESS;
