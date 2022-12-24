@@ -48,7 +48,7 @@ use Throwable;
  * View class supports using plugins as themes. You can set
  *
  * ```
- * function beforeRender(\Cake\Event\EventInterface $event)
+ * function beforeRender(\Cake\Event\IEvent $event)
  * {
  *      this.viewBuilder().setTheme('SuperHot');
  * }
