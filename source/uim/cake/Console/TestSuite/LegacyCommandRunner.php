@@ -34,6 +34,6 @@ class LegacyCommandRunner
     {
         $dispatcher = new LegacyShellDispatcher($argv, true, $io);
 
-        return $dispatcher->dispatch();
+        return $dispatcher.dispatch();
     }
 }

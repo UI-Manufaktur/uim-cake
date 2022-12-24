@@ -154,7 +154,7 @@ class BasePlugin : PluginInterface
             return this.path;
         }
         $reflection = new ReflectionClass(this);
-        $path = dirname($reflection->getFileName());
+        $path = dirname($reflection.getFileName());
 
         // Trim off src
         if (substr($path, -3) == 'src') {
@@ -282,7 +282,7 @@ class BasePlugin : PluginInterface
      */
     function console(CommandCollection $commands): CommandCollection
     {
-        return $commands->addMany($commands->discoverPlugin(this.getName()));
+        return $commands.addMany($commands.discoverPlugin(this.getName()));
     }
 
     /**

@@ -193,7 +193,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         if ($name != null) {
             this.name = $name;
         } elseif (this.name == null && $request) {
-            this.name = $request->getParam('controller');
+            this.name = $request.getParam('controller');
         }
 
         if (this.name == null) {
@@ -215,7 +215,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         }
 
         if (this.modelClass == null) {
-            $plugin = this.request->getParam('plugin');
+            $plugin = this.request.getParam('plugin');
             $modelClass = ($plugin ? $plugin . '.' : '') . this.name;
             _setModelClass($modelClass);
 
@@ -238,11 +238,11 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         if (isset(this.helpers)) {
             triggerWarning(
                 'Support for loading helpers using $helpers property is removed. ' .
-                'Use this.viewBuilder()->setHelpers() instead.'
+                'Use this.viewBuilder().setHelpers() instead.'
             );
         }
 
-        this.getEventManager()->on(this);
+        this.getEventManager().on(this);
     }
 
     /**
@@ -268,7 +268,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function components(?ComponentRegistry $components = null): ComponentRegistry
     {
         if ($components != null) {
-            $components->setController(this);
+            $components.setController(this);
 
             return _components = $components;
         }
@@ -301,7 +301,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     {
         [, $prop] = pluginSplit($name);
 
-        return this.{$prop} = this.components()->load($name, $config);
+        return this.{$prop} = this.components().load($name, $config);
     }
 
     /**
@@ -361,7 +361,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         if ($name == 'helpers') {
             triggerWarning(
                 'Support for loading helpers using $helpers property is removed. ' .
-                'Use this.viewBuilder()->setHelpers() instead.'
+                'Use this.viewBuilder().setHelpers() instead.'
             );
 
             return;
@@ -481,7 +481,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function setRequest(ServerRequest $request)
     {
         this.request = $request;
-        this.plugin = $request->getParam('plugin') ?: null;
+        this.plugin = $request.getParam('plugin') ?: null;
 
         return this;
     }
@@ -520,14 +520,14 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function getAction(): Closure
     {
         $request = this.request;
-        $action = $request->getParam('action');
+        $action = $request.getParam('action');
 
         if (!this.isAction($action)) {
             throw new MissingActionException([
-                'controller' => this.name . 'Controller',
-                'action' => $request->getParam('action'),
-                'prefix' => $request->getParam('prefix') ?: '',
-                'plugin' => $request->getParam('plugin'),
+                'controller': this.name . 'Controller',
+                'action': $request.getParam('action'),
+                'prefix': $request.getParam('prefix') ?: '',
+                'plugin': $request.getParam('plugin'),
             ]);
         }
 
@@ -574,8 +574,8 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function middleware($middleware, array $options = [])
     {
         this.middlewares[] = [
-            'middleware' => $middleware,
-            'options' => $options,
+            'middleware': $middleware,
+            'options': $options,
         ];
     }
 
@@ -588,7 +588,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function getMiddleware(): array
     {
         $matching = [];
-        $action = this.request->getParam('action');
+        $action = this.request.getParam('action');
 
         foreach (this.middlewares as $middleware) {
             $options = $middleware['options'];
@@ -622,10 +622,10 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function implementedEvents(): array
     {
         return [
-            'Controller.initialize' => 'beforeFilter',
-            'Controller.beforeRender' => 'beforeRender',
-            'Controller.beforeRedirect' => 'beforeRedirect',
-            'Controller.shutdown' => 'afterFilter',
+            'Controller.initialize': 'beforeFilter',
+            'Controller.beforeRender': 'beforeRender',
+            'Controller.beforeRedirect': 'beforeRedirect',
+            'Controller.shutdown': 'afterFilter',
         ];
     }
 
@@ -642,12 +642,12 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function startupProcess(): ?IResponse
     {
         $event = this.dispatchEvent('Controller.initialize');
-        if ($event->getResult() instanceof IResponse) {
-            return $event->getResult();
+        if ($event.getResult() instanceof IResponse) {
+            return $event.getResult();
         }
         $event = this.dispatchEvent('Controller.startup');
-        if ($event->getResult() instanceof IResponse) {
-            return $event->getResult();
+        if ($event.getResult() instanceof IResponse) {
+            return $event.getResult();
         }
 
         return null;
@@ -665,8 +665,8 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function shutdownProcess(): ?IResponse
     {
         $event = this.dispatchEvent('Controller.shutdown');
-        if ($event->getResult() instanceof IResponse) {
-            return $event->getResult();
+        if ($event.getResult() instanceof IResponse) {
+            return $event.getResult();
         }
 
         return null;
@@ -685,20 +685,20 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         this.autoRender = false;
 
         if ($status) {
-            this.response = this.response->withStatus($status);
+            this.response = this.response.withStatus($status);
         }
 
         $event = this.dispatchEvent('Controller.beforeRedirect', [$url, this.response]);
-        if ($event->getResult() instanceof Response) {
-            return this.response = $event->getResult();
+        if ($event.getResult() instanceof Response) {
+            return this.response = $event.getResult();
         }
-        if ($event->isStopped()) {
+        if ($event.isStopped()) {
             return null;
         }
         $response = this.response;
 
-        if (!$response->getHeaderLine('Location')) {
-            $response = $response->withLocation(Router::url($url, true));
+        if (!$response.getHeaderLine('Location')) {
+            $response = $response.withLocation(Router::url($url, true));
         }
 
         return this.response = $response;
@@ -726,7 +726,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
             'Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, ' .
             'or call the other action as a method.'
         );
-        this.setRequest(this.request->withParam('action', $action));
+        this.setRequest(this.request.withParam('action', $action));
 
         return this.$action(...$args);
     }
@@ -742,38 +742,38 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function render(?string $template = null, ?string $layout = null): Response
     {
         $builder = this.viewBuilder();
-        if (!$builder->getTemplatePath()) {
-            $builder->setTemplatePath(_templatePath());
+        if (!$builder.getTemplatePath()) {
+            $builder.setTemplatePath(_templatePath());
         }
 
         this.autoRender = false;
 
         if ($template != null) {
-            $builder->setTemplate($template);
+            $builder.setTemplate($template);
         }
 
         if ($layout != null) {
-            $builder->setLayout($layout);
+            $builder.setLayout($layout);
         }
 
         $event = this.dispatchEvent('Controller.beforeRender');
-        if ($event->getResult() instanceof Response) {
-            return $event->getResult();
+        if ($event.getResult() instanceof Response) {
+            return $event.getResult();
         }
-        if ($event->isStopped()) {
+        if ($event.isStopped()) {
             return this.response;
         }
 
-        if ($builder->getTemplate() == null) {
-            $builder->setTemplate(this.request->getParam('action'));
+        if ($builder.getTemplate() == null) {
+            $builder.setTemplate(this.request.getParam('action'));
         }
         $viewClass = this.chooseViewClass();
         $view = this.createView($viewClass);
 
-        $contents = $view->render();
-        $response = $view->getResponse()->withStringBody($contents);
+        $contents = $view.render();
+        $response = $view.getResponse().withStringBody($contents);
 
-        return this.setResponse($response)->response;
+        return this.setResponse($response).response;
     }
 
     /**
@@ -804,7 +804,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         }
         // Controller or component has already made a view class decision.
         // That decision should overwrite the framework behavior.
-        if (this.viewBuilder()->getClassName() != null) {
+        if (this.viewBuilder().getClassName() != null) {
             return null;
         }
 
@@ -818,9 +818,9 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         $request = this.getRequest();
 
         // Prefer the _ext route parameter if it is defined.
-        $ext = $request->getParam('_ext');
+        $ext = $request.getParam('_ext');
         if ($ext) {
-            $extTypes = (array)(this.response->getMimeType($ext) ?: []);
+            $extTypes = (array)(this.response.getMimeType($ext) ?: []);
             foreach ($extTypes as $extType) {
                 if (isset($typeMap[$extType])) {
                     return $typeMap[$extType];
@@ -832,7 +832,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
 
         // Use accept header based negotiation.
         $contentType = new ContentTypeNegotiation();
-        $preferredType = $contentType->preferredType($request, array_keys($typeMap));
+        $preferredType = $contentType.preferredType($request, array_keys($typeMap));
         if ($preferredType) {
             return $typeMap[$preferredType];
         }
@@ -849,10 +849,10 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     protected function _templatePath(): string
     {
         $templatePath = this.name;
-        if (this.request->getParam('prefix')) {
+        if (this.request.getParam('prefix')) {
             $prefixes = array_map(
                 'Cake\Utility\Inflector::camelize',
-                explode('/', this.request->getParam('prefix'))
+                explode('/', this.request.getParam('prefix'))
             );
             $templatePath = implode(DIRECTORY_SEPARATOR, $prefixes) . DIRECTORY_SEPARATOR . $templatePath;
         }
@@ -870,10 +870,10 @@ class Controller : EventListenerInterface, EventDispatcherInterface
      */
     function referer($default = '/', bool $local = true): string
     {
-        $referer = this.request->referer($local);
+        $referer = this.request.referer($local);
         if ($referer == null) {
             $url = Router::url($default, !$local);
-            $base = this.request->getAttribute('base');
+            $base = this.request.getAttribute('base');
             if ($local && $base && strpos($url, $base) == 0) {
                 $url = substr($url, strlen($base));
                 if ($url[0] != '/') {
@@ -928,7 +928,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
         $settings += this.paginate;
 
         if (isset(this.Paginator)) {
-            return this.Paginator->paginate($table, $settings);
+            return this.Paginator.paginate($table, $settings);
         }
 
         if (isset($settings['paginator'])) {
@@ -954,16 +954,16 @@ class Controller : EventListenerInterface, EventDispatcherInterface
 
         $results = null;
         try {
-            $results = $paginator->paginate(
+            $results = $paginator.paginate(
                 $table,
-                this.request->getQueryParams(),
+                this.request.getQueryParams(),
                 $settings
             );
         } catch (PageOutOfBoundsException $e) {
             // Exception thrown below
         } finally {
-            $paging = $paginator->getPagingParams() + (array)this.request->getAttribute('paging', []);
-            this.request = this.request->withAttribute('paging', $paging);
+            $paging = $paginator.getPagingParams() + (array)this.request.getAttribute('paging', []);
+            this.request = this.request.withAttribute('paging', $paging);
         }
 
         if (isset($e)) {
@@ -988,7 +988,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
     function isAction(string $action): bool
     {
         $baseClass = new ReflectionClass(self::class);
-        if ($baseClass->hasMethod($action)) {
+        if ($baseClass.hasMethod($action)) {
             return false;
         }
         try {
@@ -997,7 +997,7 @@ class Controller : EventListenerInterface, EventDispatcherInterface
             return false;
         }
 
-        return $method->isPublic() && $method->getName() == $action;
+        return $method.isPublic() && $method.getName() == $action;
     }
 
     /**

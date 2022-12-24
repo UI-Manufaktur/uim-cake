@@ -108,7 +108,7 @@ class Component : EventListenerInterface
         this.setConfig($config);
 
         if (this.components) {
-            _componentMap = $registry->normalizeArray(this.components);
+            _componentMap = $registry.normalizeArray(this.components);
         }
         this.initialize($config);
     }
@@ -120,7 +120,7 @@ class Component : EventListenerInterface
      */
     function getController(): Controller
     {
-        return _registry->getController();
+        return _registry.getController();
     }
 
     /**
@@ -145,8 +145,8 @@ class Component : EventListenerInterface
     function __get(string $name)
     {
         if (isset(_componentMap[$name]) && !isset(this.{$name})) {
-            $config = (array)_componentMap[$name]['config'] + ['enabled' => false];
-            this.{$name} = _registry->load(_componentMap[$name]['class'], $config);
+            $config = (array)_componentMap[$name]['config'] + ['enabled': false];
+            this.{$name} = _registry.load(_componentMap[$name]['class'], $config);
         }
 
         return this.{$name} ?? null;
@@ -167,14 +167,14 @@ class Component : EventListenerInterface
     function implementedEvents(): array
     {
         $eventMap = [
-            'Controller.initialize' => 'beforeFilter',
-            'Controller.startup' => 'startup',
-            'Controller.beforeRender' => 'beforeRender',
-            'Controller.beforeRedirect' => 'beforeRedirect',
-            'Controller.shutdown' => 'afterFilter',
+            'Controller.initialize': 'beforeFilter',
+            'Controller.startup': 'startup',
+            'Controller.beforeRender': 'beforeRender',
+            'Controller.beforeRedirect': 'beforeRedirect',
+            'Controller.shutdown': 'afterFilter',
         ];
         $events = [];
-        foreach ($eventMap as $event => $method) {
+        foreach ($eventMap as $event: $method) {
             if (method_exists(this, $method)) {
                 $events[$event] = $method;
             }
@@ -200,9 +200,9 @@ class Component : EventListenerInterface
     function __debugInfo(): array
     {
         return [
-            'components' => this.components,
-            'implementedEvents' => this.implementedEvents(),
-            '_config' => this.getConfig(),
+            'components': this.components,
+            'implementedEvents': this.implementedEvents(),
+            '_config': this.getConfig(),
         ];
     }
 }

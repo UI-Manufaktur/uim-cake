@@ -42,13 +42,13 @@ class CheckHttpCacheComponent : Component
     function beforeRender(EventInterface $event): void
     {
         $controller = this.getController();
-        $response = $controller->getResponse();
-        $request = $controller->getRequest();
-        if (!$response->isNotModified($request)) {
+        $response = $controller.getResponse();
+        $request = $controller.getRequest();
+        if (!$response.isNotModified($request)) {
             return;
         }
 
-        $controller->setResponse($response->withNotModified());
-        $event->stopPropagation();
+        $controller.setResponse($response.withNotModified());
+        $event.stopPropagation();
     }
 }

@@ -30,7 +30,7 @@ use Cake\Utility\Hash;
  * to create nested array structures through usage of `.` delimited names. This allows
  * you to create nested arrays structures in an ini config file. For example:
  *
- * `db.password = secret` would turn into `['db' => ['password' => 'secret']]`
+ * `db.password = secret` would turn into `['db': ['password': 'secret']]`
  *
  * You can nest properties as deeply as needed using `.`'s. In addition to using `.` you
  * can use standard ini section notation to create nested structures:
@@ -106,7 +106,7 @@ class IniConfig : ConfigEngineInterface
             $values = _parseNestedValues($contents[_section]);
         } else {
             $values = [];
-            foreach ($contents as $section => $attribs) {
+            foreach ($contents as $section: $attribs) {
                 if (is_array($attribs)) {
                     $values[$section] = _parseNestedValues($attribs);
                 } else {
@@ -127,7 +127,7 @@ class IniConfig : ConfigEngineInterface
      */
     protected function _parseNestedValues(array $values): array
     {
-        foreach ($values as $key => $value) {
+        foreach ($values as $key: $value) {
             if ($value == '1') {
                 $value = true;
             }
@@ -156,7 +156,7 @@ class IniConfig : ConfigEngineInterface
     function dump(string $key, array $data): bool
     {
         $result = [];
-        foreach ($data as $k => $value) {
+        foreach ($data as $k: $value) {
             $isSection = false;
             /** @psalm-suppress InvalidArrayAccess */
             if ($k[0] != '[') {
@@ -165,7 +165,7 @@ class IniConfig : ConfigEngineInterface
             }
             if (is_array($value)) {
                 $kValues = Hash::flatten($value, '.');
-                foreach ($kValues as $k2 => $v) {
+                foreach ($kValues as $k2: $v) {
                     $result[] = "$k2 = " . _value($v);
                 }
             }

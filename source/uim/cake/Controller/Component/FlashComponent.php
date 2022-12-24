@@ -40,11 +40,11 @@ class FlashComponent : Component
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'key' => 'flash',
-        'element' => 'default',
-        'params' => [],
-        'clear' => false,
-        'duplicate' => true,
+        'key': 'flash',
+        'element': 'default',
+        'params': [],
+        'clear': false,
+        'duplicate': true,
     ];
 
     /**
@@ -52,7 +52,7 @@ class FlashComponent : Component
      * If you make consecutive calls to this method, the messages will stack (if they are
      * set with the same flash key)
      *
-     * In your controller: this.Flash->set('This has been saved');
+     * In your controller: this.Flash.set('This has been saved');
      *
      * ### Options:
      *
@@ -71,9 +71,9 @@ class FlashComponent : Component
     function set($message, array $options = []): void
     {
         if ($message instanceof Throwable) {
-            this.flash()->setExceptionMessage($message, $options);
+            this.flash().setExceptionMessage($message, $options);
         } else {
-            this.flash()->set($message, $options);
+            this.flash().set($message, $options);
         }
     }
 
@@ -84,7 +84,7 @@ class FlashComponent : Component
      */
     protected function flash(): FlashMessage
     {
-        return this.getController()->getRequest()->getFlash();
+        return this.getController().getRequest().getFlash();
     }
 
     /**
@@ -98,7 +98,7 @@ class FlashComponent : Component
      */
     function setConfig($key, $value = null, $merge = true)
     {
-        this.flash()->setConfig($key, $value, $merge);
+        this.flash().setConfig($key, $value, $merge);
 
         return this;
     }
@@ -112,7 +112,7 @@ class FlashComponent : Component
      */
     function getConfig(?string $key = null, $default = null)
     {
-        return this.flash()->getConfig($key, $default);
+        return this.flash().getConfig($key, $default);
     }
 
     /**
@@ -124,7 +124,7 @@ class FlashComponent : Component
      */
     function getConfigOrFail(string $key)
     {
-        return this.flash()->getConfigOrFail($key);
+        return this.flash().getConfigOrFail($key);
     }
 
     /**
@@ -136,7 +136,7 @@ class FlashComponent : Component
      */
     function configShallow($key, $value = null)
     {
-        this.flash()->configShallow($key, $value);
+        this.flash().configShallow($key, $value);
 
         return this;
     }
@@ -144,7 +144,7 @@ class FlashComponent : Component
     /**
      * Magic method for verbose flash methods based on element names.
      *
-     * For example: this.Flash->success('My message') would use the
+     * For example: this.Flash.success('My message') would use the
      * `success.php` element under `templates/element/flash/` for rendering the
      * flash message.
      *
@@ -154,7 +154,7 @@ class FlashComponent : Component
      * Note that the parameter `element` will be always overridden. In order to call a
      * specific element from a plugin, you should set the `plugin` option in $args.
      *
-     * For example: `this.Flash->warning('My message', ['plugin' => 'PluginName'])` would
+     * For example: `this.Flash.warning('My message', ['plugin': 'PluginName'])` would
      * use the `warning.php` element under `plugins/PluginName/templates/element/flash/` for
      * rendering the flash message.
      *
@@ -171,11 +171,11 @@ class FlashComponent : Component
             throw new InternalErrorException('Flash message missing.');
         }
 
-        $options = ['element' => $element];
+        $options = ['element': $element];
 
         if (!empty($args[1])) {
             if (!empty($args[1]['plugin'])) {
-                $options = ['element' => $args[1]['plugin'] . '.' . $element];
+                $options = ['element': $args[1]['plugin'] . '.' . $element];
                 unset($args[1]['plugin']);
             }
             $options += (array)$args[1];

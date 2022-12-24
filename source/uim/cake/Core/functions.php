@@ -44,14 +44,14 @@ if (!function_exists('h')) {
             //optimize for strings
         } elseif (is_array($text)) {
             $texts = [];
-            foreach ($text as $k => $t) {
+            foreach ($text as $k: $t) {
                 $texts[$k] = h($t, $double, $charset);
             }
 
             return $texts;
         } elseif (is_object($text)) {
             if (method_exists($text, '__toString')) {
-                $text = $text->__toString();
+                $text = $text.__toString();
             } else {
                 $text = '(object)' . get_class($text);
             }
@@ -82,7 +82,7 @@ if (!function_exists('pluginSplit')) {
      * @param string $name The name you want to plugin split.
      * @param bool $dotAppend Set to true if you want the plugin to have a '.' appended to it.
      * @param string|null $plugin Optional default plugin to use if no plugin is found. Defaults to null.
-     * @return array Array with 2 indexes. 0 => plugin name, 1 => class name.
+     * @return array Array with 2 indexes. 0: plugin name, 1: class name.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#pluginSplit
      * @psalm-return array{string|null, string}
      */
@@ -110,7 +110,7 @@ if (!function_exists('namespaceSplit')) {
      * Commonly used like `list($namespace, $className) = namespaceSplit($class);`.
      *
      * @param string $class The full class name, ie `Cake\Core\App`.
-     * @return array<string> Array with 2 indexes. 0 => namespace, 1 => classname.
+     * @return array<string> Array with 2 indexes. 0: namespace, 1: classname.
      */
     function namespaceSplit(string $class): array
     {
@@ -257,7 +257,7 @@ if (!function_exists('triggerWarning')) {
         $trace = debug_backtrace();
         if (isset($trace[1])) {
             $frame = $trace[1];
-            $frame += ['file' => '[internal]', 'line' => '??'];
+            $frame += ['file': '[internal]', 'line': '??'];
             $message = sprintf(
                 '%s - %s, line: %s',
                 $message,
@@ -287,7 +287,7 @@ if (!function_exists('deprecationWarning')) {
         $trace = debug_backtrace();
         if (isset($trace[$stackFrame])) {
             $frame = $trace[$stackFrame];
-            $frame += ['file' => '[internal]', 'line' => '??'];
+            $frame += ['file': '[internal]', 'line': '??'];
 
             $relative = str_replace(DIRECTORY_SEPARATOR, '/', substr($frame['file'], strlen(ROOT) + 1));
             $patterns = (array)Configure::read('Error.ignoredDeprecationPaths');

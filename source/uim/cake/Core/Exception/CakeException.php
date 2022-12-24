@@ -89,7 +89,7 @@ class CakeException : RuntimeException
      * See also {@link \Cake\Http\Response::withHeader()}
      *
      * @param array|string|null $header A single header string or an associative
-     *   array of "header name" => "header value"
+     *   array of "header name": "header value"
      * @param string|null $value The header value.
      * @return array|null
      * @deprecated 4.2.0 Use `HttpException::setHeaders()` instead. Response headers
@@ -110,7 +110,7 @@ class CakeException : RuntimeException
             return _responseHeaders = $header;
         }
 
-        return _responseHeaders = [$header => $value];
+        return _responseHeaders = [$header: $value];
     }
 }
 

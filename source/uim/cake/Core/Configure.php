@@ -40,7 +40,7 @@ class Configure
      * @var array<string, mixed>
      */
     protected static $_values = [
-        'debug' => false,
+        'debug': false,
     ];
 
     /**
@@ -64,15 +64,15 @@ class Configure
      * Usage:
      * ```
      * Configure::write('One.key1', 'value of the Configure::One[key1]');
-     * Configure::write(['One.key1' => 'value of the Configure::One[key1]']);
+     * Configure::write(['One.key1': 'value of the Configure::One[key1]']);
      * Configure::write('One', [
-     *     'key1' => 'value of the Configure::One[key1]',
-     *     'key2' => 'value of the Configure::One[key2]'
+     *     'key1': 'value of the Configure::One[key1]',
+     *     'key2': 'value of the Configure::One[key2]'
      * ]);
      *
      * Configure::write([
-     *     'One.key1' => 'value of the Configure::One[key1]',
-     *     'One.key2' => 'value of the Configure::One[key2]'
+     *     'One.key1': 'value of the Configure::One[key1]',
+     *     'One.key2': 'value of the Configure::One[key2]'
      * ]);
      * ```
      *
@@ -85,10 +85,10 @@ class Configure
     public static function write($config, $value = null): void
     {
         if (!is_array($config)) {
-            $config = [$config => $value];
+            $config = [$config: $value];
         }
 
-        foreach ($config as $name => $value) {
+        foreach ($config as $name: $value) {
             static::$_values = Hash::insert(static::$_values, $name, $value);
         }
 
@@ -338,7 +338,7 @@ class Configure
             );
         }
 
-        $values = $engine->read($key);
+        $values = $engine.read($key);
 
         if ($merge) {
             $values = Hash::merge(static::$_values, $values);
@@ -389,7 +389,7 @@ class Configure
             $values = array_intersect_key($values, array_flip($keys));
         }
 
-        return $engine->dump($key, $values);
+        return $engine.dump($key, $values);
     }
 
     /**

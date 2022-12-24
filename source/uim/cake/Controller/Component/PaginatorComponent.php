@@ -103,10 +103,10 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    'limit' => 20,
-     *    'maxLimit' => 100
+     *    'limit': 20,
+     *    'maxLimit': 100
      *  ];
-     *  $results = $paginator->paginate($table, $settings);
+     *  $results = $paginator.paginate($table, $settings);
      * ```
      *
      * The above settings will be used to paginate any Table. You can configure Table specific settings by
@@ -114,13 +114,13 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    'Articles' => [
-     *      'limit' => 20,
-     *      'maxLimit' => 100
+     *    'Articles': [
+     *      'limit': 20,
+     *      'maxLimit': 100
      *    ],
-     *    'Comments' => [ ... ]
+     *    'Comments': [ ... ]
      *  ];
-     *  $results = $paginator->paginate($table, $settings);
+     *  $results = $paginator.paginate($table, $settings);
      * ```
      *
      * This would allow you to have different pagination settings for `Articles` and `Comments` tables.
@@ -134,9 +134,9 @@ class PaginatorComponent : Component
      *
      * ```
      * $settings = [
-     *   'Articles' => [
-     *     'finder' => 'custom',
-     *     'sortableFields' => ['title', 'author_id', 'comment_count'],
+     *   'Articles': [
+     *     'finder': 'custom',
+     *     'sortableFields': ['title', 'author_id', 'comment_count'],
      *   ]
      * ];
      * ```
@@ -149,11 +149,11 @@ class PaginatorComponent : Component
      *
      * ```
      *  $settings = [
-     *    'Articles' => [
-     *      'finder' => 'popular'
+     *    'Articles': [
+     *      'finder': 'popular'
      *    ]
      *  ];
-     *  $results = $paginator->paginate($table, $settings);
+     *  $results = $paginator.paginate($table, $settings);
      * ```
      *
      * Would paginate using the `find('popular')` method.
@@ -161,10 +161,10 @@ class PaginatorComponent : Component
      * You can also pass an already created instance of a query to this method:
      *
      * ```
-     * $query = this.Articles->find('popular')->matching('Tags', function ($q) {
-     *   return $q->where(['name' => 'CakePHP'])
+     * $query = this.Articles.find('popular').matching('Tags', function ($q) {
+     *   return $q.where(['name': 'CakePHP'])
      * });
-     * $results = $paginator->paginate($query);
+     * $results = $paginator.paginate($query);
      * ```
      *
      * ### Scoping Request parameters
@@ -172,8 +172,8 @@ class PaginatorComponent : Component
      * By using request parameter scopes you can paginate multiple queries in the same controller action:
      *
      * ```
-     * $articles = $paginator->paginate($articlesQuery, ['scope' => 'articles']);
-     * $tags = $paginator->paginate($tagsQuery, ['scope' => 'tags']);
+     * $articles = $paginator.paginate($articlesQuery, ['scope': 'articles']);
+     * $tags = $paginator.paginate($tagsQuery, ['scope': 'tags']);
      * ```
      *
      * Each of the above queries will use different query string parameter sets
@@ -190,12 +190,12 @@ class PaginatorComponent : Component
      */
     function paginate(object $object, array $settings = []): ResultSetInterface
     {
-        $request = _registry->getController()->getRequest();
+        $request = _registry.getController().getRequest();
 
         try {
-            $results = _paginator->paginate(
+            $results = _paginator.paginate(
                 $object,
-                $request->getQueryParams(),
+                $request.getQueryParams(),
                 $settings
             );
 
@@ -227,11 +227,11 @@ class PaginatorComponent : Component
      */
     function mergeOptions(string $alias, array $settings): array
     {
-        $request = _registry->getController()->getRequest();
+        $request = _registry.getController().getRequest();
 
-        return _paginator->mergeOptions(
-            $request->getQueryParams(),
-            _paginator->getDefaults($alias, $settings)
+        return _paginator.mergeOptions(
+            $request.getQueryParams(),
+            _paginator.getDefaults($alias, $settings)
         );
     }
 
@@ -266,10 +266,10 @@ class PaginatorComponent : Component
     protected function _setPagingParams(): void
     {
         $controller = this.getController();
-        $request = $controller->getRequest();
-        $paging = _paginator->getPagingParams() + (array)$request->getAttribute('paging', []);
+        $request = $controller.getRequest();
+        $paging = _paginator.getPagingParams() + (array)$request.getAttribute('paging', []);
 
-        $controller->setRequest($request->withAttribute('paging', $paging));
+        $controller.setRequest($request.withAttribute('paging', $paging));
     }
 
     /**
@@ -282,7 +282,7 @@ class PaginatorComponent : Component
      */
     function setConfig($key, $value = null, $merge = true)
     {
-        _paginator->setConfig($key, $value, $merge);
+        _paginator.setConfig($key, $value, $merge);
 
         return this;
     }
@@ -296,7 +296,7 @@ class PaginatorComponent : Component
      */
     function getConfig(?string $key = null, $default = null)
     {
-        return _paginator->getConfig($key, $default);
+        return _paginator.getConfig($key, $default);
     }
 
     /**
@@ -308,7 +308,7 @@ class PaginatorComponent : Component
      */
     function configShallow($key, $value = null)
     {
-        _paginator->configShallow($key, null);
+        _paginator.configShallow($key, null);
 
         return this;
     }
@@ -322,6 +322,6 @@ class PaginatorComponent : Component
      */
     function __call(string $method, array $args)
     {
-        return _paginator->{$method}(...$args);
+        return _paginator.{$method}(...$args);
     }
 }

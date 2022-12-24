@@ -61,10 +61,10 @@ class FormProtectionComponent : Component
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'validate' => true,
-        'unlockedFields' => [],
-        'unlockedActions' => [],
-        'validationFailureCallback' => null,
+        'validate': true,
+        'unlockedFields': [],
+        'unlockedActions': [],
+        'validationFailureCallback': null,
     ];
 
     /**
@@ -77,21 +77,21 @@ class FormProtectionComponent : Component
      */
     function startup(EventInterface $event): ?Response
     {
-        $request = this.getController()->getRequest();
-        $data = $request->getParsedBody();
-        $hasData = ($data || $request->is(['put', 'post', 'delete', 'patch']));
+        $request = this.getController().getRequest();
+        $data = $request.getParsedBody();
+        $hasData = ($data || $request.is(['put', 'post', 'delete', 'patch']));
 
         if (
-            !in_array($request->getParam('action'), _config['unlockedActions'], true)
+            !in_array($request.getParam('action'), _config['unlockedActions'], true)
             && $hasData
             && _config['validate']
         ) {
-            $session = $request->getSession();
-            $session->start();
-            $url = Router::url($request->getRequestTarget());
+            $session = $request.getSession();
+            $session.start();
+            $url = Router::url($request.getRequestTarget());
 
             $formProtector = new FormProtector(_config);
-            $isValid = $formProtector->validate($data, $url, $session->id());
+            $isValid = $formProtector.validate($data, $url, $session.id());
 
             if (!$isValid) {
                 return this.validationFailure($formProtector);
@@ -99,18 +99,18 @@ class FormProtectionComponent : Component
         }
 
         $token = [
-            'unlockedFields' => _config['unlockedFields'],
+            'unlockedFields': _config['unlockedFields'],
         ];
-        $request = $request->withAttribute('formTokenData', [
-            'unlockedFields' => $token['unlockedFields'],
+        $request = $request.withAttribute('formTokenData', [
+            'unlockedFields': $token['unlockedFields'],
         ]);
 
         if (is_array($data)) {
             unset($data['_Token']);
-            $request = $request->withParsedBody($data);
+            $request = $request.withParsedBody($data);
         }
 
-        this.getController()->setRequest($request);
+        this.getController().setRequest($request);
 
         return null;
     }
@@ -123,7 +123,7 @@ class FormProtectionComponent : Component
     function implementedEvents(): array
     {
         return [
-            'Controller.startup' => 'startup',
+            'Controller.startup': 'startup',
         ];
     }
 
@@ -140,7 +140,7 @@ class FormProtectionComponent : Component
     protected function validationFailure(FormProtector $formProtector): ?Response
     {
         if (Configure::read('debug')) {
-            $exception = new BadRequestException($formProtector->getError());
+            $exception = new BadRequestException($formProtector.getError());
         } else {
             $exception = new BadRequestException(static::DEFAULT_EXCEPTION_MESSAGE);
         }

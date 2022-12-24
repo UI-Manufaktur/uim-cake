@@ -68,7 +68,7 @@ trait StaticConfigTrait
      * ```
      *
      * @param array<string, mixed>|string $key The name of the configuration, or an array of multiple configs.
-     * @param object|array<string, mixed>|null $config An array of name => configuration data for adapter.
+     * @param object|array<string, mixed>|null $config An array of name: configuration data for adapter.
      * @throws \BadMethodCallException When trying to modify an existing config.
      * @throws \LogicException When trying to store an invalid structured config array.
      * @return void
@@ -79,7 +79,7 @@ trait StaticConfigTrait
             if (!is_array($key)) {
                 throw new LogicException('If config is null, key must be an array.');
             }
-            foreach ($key as $name => $settings) {
+            foreach ($key as $name: $settings) {
                 static::setConfig($name, $settings);
             }
 
@@ -92,7 +92,7 @@ trait StaticConfigTrait
         }
 
         if (is_object($config)) {
-            $config = ['className' => $config];
+            $config = ['className': $config];
         }
 
         if (isset($config['url'])) {
@@ -157,7 +157,7 @@ trait StaticConfigTrait
         }
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (isset(static::$_registry)) {
-            static::$_registry->unload($config);
+            static::$_registry.unload($config);
         }
         unset(static::$_config[$config]);
 
@@ -255,7 +255,7 @@ REGEXP;
         }
 
         $exists = [];
-        foreach ($parsed as $k => $v) {
+        foreach ($parsed as $k: $v) {
             if (is_int($k)) {
                 unset($parsed[$k]);
             } elseif (strpos($k, '_') == 0) {
@@ -275,7 +275,7 @@ REGEXP;
 
         parse_str($query, $queryArgs);
 
-        foreach ($queryArgs as $key => $value) {
+        foreach ($queryArgs as $key: $value) {
             if ($value == 'true') {
                 $queryArgs[$key] = true;
             } elseif ($value == 'false') {

@@ -32,12 +32,12 @@ use Cake\Core\Exception\CakeException;
  * ```
  * <?php
  * return [
- *     'debug' => false,
- *     'Security' => [
- *         'salt' => 'its-secret'
+ *     'debug': false,
+ *     'Security': [
+ *         'salt': 'its-secret'
  *     ],
- *     'App' => [
- *         'namespace' => 'App'
+ *     'App': [
+ *         'namespace': 'App'
  *     ]
  * ];
  * ```

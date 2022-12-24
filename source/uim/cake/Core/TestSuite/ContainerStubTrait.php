@@ -90,7 +90,7 @@ trait ContainerStubTrait
 
         $app = new $appClass(...$appArgs);
         if (!empty(this.containerServices) && method_exists($app, 'getEventManager')) {
-            $app->getEventManager()->on('Application.buildContainer', [this, 'modifyContainer']);
+            $app.getEventManager().on('Application.buildContainer', [this, 'modifyContainer']);
         }
 
         return $app;
@@ -143,15 +143,15 @@ trait ContainerStubTrait
         if (empty(this.containerServices)) {
             return null;
         }
-        foreach (this.containerServices as $key => $factory) {
-            if ($container->has($key)) {
+        foreach (this.containerServices as $key: $factory) {
+            if ($container.has($key)) {
                 try {
-                    $container->extend($key)->setConcrete($factory);
+                    $container.extend($key).setConcrete($factory);
                 } catch (NotFoundException $e) {
-                    $container->add($key, $factory);
+                    $container.add($key, $factory);
                 }
             } else {
-                $container->add($key, $factory);
+                $container.add($key, $factory);
             }
         }
 

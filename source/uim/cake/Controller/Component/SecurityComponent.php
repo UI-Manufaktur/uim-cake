@@ -67,11 +67,11 @@ class SecurityComponent : Component
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'blackHoleCallback' => null,
-        'requireSecure' => [],
-        'unlockedFields' => [],
-        'unlockedActions' => [],
-        'validatePost' => true,
+        'blackHoleCallback': null,
+        'requireSecure': [],
+        'unlockedFields': [],
+        'unlockedActions': [],
+        'validatePost': true,
     ];
 
     /**
@@ -90,10 +90,10 @@ class SecurityComponent : Component
     function startup(EventInterface $event): ?Response
     {
         /** @var \Cake\Controller\Controller $controller */
-        $controller = $event->getSubject();
-        $request = $controller->getRequest();
-        _action = $request->getParam('action');
-        $hasData = ($request->getData() || $request->is(['put', 'post', 'delete', 'patch']));
+        $controller = $event.getSubject();
+        $request = $controller.getRequest();
+        _action = $request.getParam('action');
+        $hasData = ($request.getData() || $request.is(['put', 'post', 'delete', 'patch']));
         try {
             _secureRequired($controller);
 
@@ -112,14 +112,14 @@ class SecurityComponent : Component
                 _validatePost($controller);
             }
         } catch (SecurityException $se) {
-            return this.blackHole($controller, $se->getType(), $se);
+            return this.blackHole($controller, $se.getType(), $se);
         }
 
         $request = this.generateToken($request);
-        if ($hasData && is_array($controller->getRequest()->getData())) {
-            $request = $request->withoutData('_Token');
+        if ($hasData && is_array($controller.getRequest().getData())) {
+            $request = $request.withoutData('_Token');
         }
-        $controller->setRequest($request);
+        $controller.setRequest($request);
 
         return null;
     }
@@ -132,7 +132,7 @@ class SecurityComponent : Component
     function implementedEvents(): array
     {
         return [
-            'Controller.startup' => 'startup',
+            'Controller.startup': 'startup',
         ];
     }
 
@@ -180,8 +180,8 @@ class SecurityComponent : Component
     {
         if ($exception != null) {
             if (!Configure::read('debug')) {
-                $exception->setReason($exception->getMessage());
-                $exception->setMessage(static::DEFAULT_EXCEPTION_MESSAGE);
+                $exception.setReason($exception.getMessage());
+                $exception.setMessage(static::DEFAULT_EXCEPTION_MESSAGE);
             }
             throw $exception;
         }
@@ -209,7 +209,7 @@ class SecurityComponent : Component
             ($requireSecure[0] == '*' ||
                 in_array(_action, $requireSecure, true)
             ) &&
-            !$controller->getRequest()->is('ssl')
+            !$controller.getRequest().is('ssl')
         ) {
             throw new SecurityException(
                 'Request is not SSL and the action is required to be secure'
@@ -251,7 +251,7 @@ class SecurityComponent : Component
      */
     protected function _validToken(Controller $controller): string
     {
-        $check = $controller->getRequest()->getData();
+        $check = $controller.getRequest().getData();
 
         $message = '\'%s\' was not found in request data.';
         if (!isset($check['_Token'])) {
@@ -289,21 +289,21 @@ class SecurityComponent : Component
      */
     protected function _hashParts(Controller $controller): array
     {
-        $request = $controller->getRequest();
+        $request = $controller.getRequest();
 
         // Start the session to ensure we get the correct session id.
-        $session = $request->getSession();
-        $session->start();
+        $session = $request.getSession();
+        $session.start();
 
-        $data = (array)$request->getData();
+        $data = (array)$request.getData();
         $fieldList = _fieldsList($data);
         $unlocked = _sortedUnlocked($data);
 
         return [
-            Router::url($request->getRequestTarget()),
+            Router::url($request.getRequestTarget()),
             serialize($fieldList),
             $unlocked,
-            $session->id(),
+            $session.id(),
         ];
     }
 
@@ -332,7 +332,7 @@ class SecurityComponent : Component
         $multi = $lockedFields = [];
         $isUnlocked = false;
 
-        foreach ($fieldList as $i => $key) {
+        foreach ($fieldList as $i: $key) {
             if (is_string($key) && preg_match('/(\.\d+){1,10}$/', $key)) {
                 $multi[$i] = preg_replace('/(\.\d+){1,10}$/', '', $key);
                 unset($fieldList[$i]);
@@ -351,7 +351,7 @@ class SecurityComponent : Component
             )
         );
 
-        foreach ($fieldList as $i => $key) {
+        foreach ($fieldList as $i: $key) {
             $isLocked = in_array($key, $locked, true);
 
             if (!empty($unlockedFields)) {
@@ -415,7 +415,7 @@ class SecurityComponent : Component
     protected function _debugPostTokenNotMatching(Controller $controller, array $hashParts): string
     {
         $messages = [];
-        $expectedParts = json_decode(urldecode($controller->getRequest()->getData('_Token.debug')), true);
+        $expectedParts = json_decode(urldecode($controller.getRequest().getData('_Token.debug')), true);
         if (!is_array($expectedParts) || count($expectedParts) != 3) {
             return 'Invalid security debug token.';
         }
@@ -491,11 +491,11 @@ class SecurityComponent : Component
     function generateToken(ServerRequest $request): ServerRequest
     {
         $token = [
-            'unlockedFields' => _config['unlockedFields'],
+            'unlockedFields': _config['unlockedFields'],
         ];
 
-        return $request->withAttribute('formTokenData', [
-            'unlockedFields' => $token['unlockedFields'],
+        return $request.withAttribute('formTokenData', [
+            'unlockedFields': $token['unlockedFields'],
         ]);
     }
 
@@ -537,7 +537,7 @@ class SecurityComponent : Component
         string $stringKeyMessage
     ): array {
         $messages = [];
-        foreach ($dataFields as $key => $value) {
+        foreach ($dataFields as $key: $value) {
             if (is_int($key)) {
                 $foundKey = array_search($value, $expectedFields, true);
                 if ($foundKey == false) {
@@ -570,7 +570,7 @@ class SecurityComponent : Component
         }
 
         $expectedFieldNames = [];
-        foreach ($expectedFields as $key => $expectedField) {
+        foreach ($expectedFields as $key: $expectedField) {
             if (is_int($key)) {
                 $expectedFieldNames[] = $expectedField;
             } else {

@@ -103,15 +103,15 @@ trait ConsoleIntegrationTestTrait
         $io = new ConsoleIo(_out, _err, _in);
 
         try {
-            _exitCode = $runner->run($args, $io);
+            _exitCode = $runner.run($args, $io);
         } catch (MissingConsoleInputException $e) {
-            $messages = _out->messages();
+            $messages = _out.messages();
             if (count($messages)) {
-                $e->setQuestion($messages[count($messages) - 1]);
+                $e.setQuestion($messages[count($messages) - 1]);
             }
             throw $e;
         } catch (StopException $exception) {
-            _exitCode = $exception->getCode();
+            _exitCode = $exception.getCode();
         }
     }
 
@@ -184,7 +184,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertOutputEmpty(string $message = ''): void
     {
-        this.assertThat(null, new ContentsEmpty(_out->messages(), 'output'), $message);
+        this.assertThat(null, new ContentsEmpty(_out.messages(), 'output'), $message);
     }
 
     /**
@@ -196,7 +196,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertOutputContains(string $expected, string $message = ''): void
     {
-        this.assertThat($expected, new ContentsContain(_out->messages(), 'output'), $message);
+        this.assertThat($expected, new ContentsContain(_out.messages(), 'output'), $message);
     }
 
     /**
@@ -208,7 +208,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertOutputNotContains(string $expected, string $message = ''): void
     {
-        this.assertThat($expected, new ContentsNotContain(_out->messages(), 'output'), $message);
+        this.assertThat($expected, new ContentsNotContain(_out.messages(), 'output'), $message);
     }
 
     /**
@@ -220,7 +220,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertOutputRegExp(string $pattern, string $message = ''): void
     {
-        this.assertThat($pattern, new ContentsRegExp(_out->messages(), 'output'), $message);
+        this.assertThat($pattern, new ContentsRegExp(_out.messages(), 'output'), $message);
     }
 
     /**
@@ -232,7 +232,7 @@ trait ConsoleIntegrationTestTrait
      */
     protected function assertOutputContainsRow(array $row, string $message = ''): void
     {
-        this.assertThat($row, new ContentsContainRow(_out->messages(), 'output'), $message);
+        this.assertThat($row, new ContentsContainRow(_out.messages(), 'output'), $message);
     }
 
     /**
@@ -244,7 +244,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertErrorContains(string $expected, string $message = ''): void
     {
-        this.assertThat($expected, new ContentsContain(_err->messages(), 'error output'), $message);
+        this.assertThat($expected, new ContentsContain(_err.messages(), 'error output'), $message);
     }
 
     /**
@@ -256,7 +256,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertErrorRegExp(string $pattern, string $message = ''): void
     {
-        this.assertThat($pattern, new ContentsRegExp(_err->messages(), 'error output'), $message);
+        this.assertThat($pattern, new ContentsRegExp(_err.messages(), 'error output'), $message);
     }
 
     /**
@@ -267,7 +267,7 @@ trait ConsoleIntegrationTestTrait
      */
     function assertErrorEmpty(string $message = ''): void
     {
-        this.assertThat(null, new ContentsEmpty(_err->messages(), 'error output'), $message);
+        this.assertThat(null, new ContentsEmpty(_err.messages(), 'error output'), $message);
     }
 
     /**

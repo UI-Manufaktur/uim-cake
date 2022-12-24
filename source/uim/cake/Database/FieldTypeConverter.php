@@ -66,14 +66,14 @@ class FieldTypeConverter
     public this(TypeMap $typeMap, DriverInterface $driver)
     {
         _driver = $driver;
-        $map = $typeMap->toArray();
+        $map = $typeMap.toArray();
         $types = TypeFactory::buildAll();
 
         $simpleMap = $batchingMap = [];
         $simpleResult = $batchingResult = [];
 
-        foreach ($types as $k => $type) {
-            if ($type instanceof OptionalConvertInterface && !$type->requiresToPhpCast()) {
+        foreach ($types as $k: $type) {
+            if ($type instanceof OptionalConvertInterface && !$type.requiresToPhpCast()) {
                 continue;
             }
 
@@ -85,7 +85,7 @@ class FieldTypeConverter
             $simpleMap[$k] = $type;
         }
 
-        foreach ($map as $field => $type) {
+        foreach ($map as $field: $type) {
             if (isset($simpleMap[$type])) {
                 $simpleResult[$field] = $simpleMap[$type];
                 continue;
@@ -97,7 +97,7 @@ class FieldTypeConverter
 
         // Using batching when there is only a couple for the type is actually slower,
         // so, let's check for that case here.
-        foreach ($batchingResult as $type => $fields) {
+        foreach ($batchingResult as $type: $fields) {
             if (count($fields) > 2) {
                 continue;
             }
@@ -123,15 +123,15 @@ class FieldTypeConverter
     function __invoke(array $row): array
     {
         if (!empty(_typeMap)) {
-            foreach (_typeMap as $field => $type) {
-                $row[$field] = $type->toPHP($row[$field], _driver);
+            foreach (_typeMap as $field: $type) {
+                $row[$field] = $type.toPHP($row[$field], _driver);
             }
         }
 
         if (!empty(this.batchingTypeMap)) {
-            foreach (this.batchingTypeMap as $t => $fields) {
+            foreach (this.batchingTypeMap as $t: $fields) {
                 /** @psalm-suppress PossiblyUndefinedMethod */
-                $row = this.types[$t]->manyToPHP($row, $fields, _driver);
+                $row = this.types[$t].manyToPHP($row, $fields, _driver);
             }
         }
 

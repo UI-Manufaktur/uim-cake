@@ -63,8 +63,8 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * ```
      * protected $components = [
-     *   'Email' => [
-     *     'className' => 'App\Controller\Component\AliasedEmailComponent'
+     *   'Email': [
+     *     'className': 'App\Controller\Component\AliasedEmailComponent'
      *   ];
      * ];
      * ```
@@ -140,11 +140,11 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         if (empty($config)) {
             return;
         }
-        $existingConfig = $existing->getConfig();
+        $existingConfig = $existing.getConfig();
         unset($config['enabled'], $existingConfig['enabled']);
 
         $failure = null;
-        foreach ($config as $key => $value) {
+        foreach ($config as $key: $value) {
             if (!array_key_exists($key, $existingConfig)) {
                 $failure = " The `{$key}` was not defined in the previous configuration data.";
                 break;
@@ -293,7 +293,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     function normalizeArray(array $objects): array
     {
         $normal = [];
-        foreach ($objects as $i => $objectName) {
+        foreach ($objects as $i: $objectName) {
             $config = [];
             if (!is_int($i)) {
                 $config = (array)$objectName;
@@ -301,9 +301,9 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
             }
             [, $name] = pluginSplit($objectName);
             if (isset($config['class'])) {
-                $normal[$name] = $config + ['config' => []];
+                $normal[$name] = $config + ['config': []];
             } else {
-                $normal[$name] = ['class' => $objectName, 'config' => $config];
+                $normal[$name] = ['class': $objectName, 'config': $config];
             }
         }
 
@@ -347,7 +347,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
             this.unload($name);
         }
         if (this instanceof EventDispatcherInterface && $object instanceof EventListenerInterface) {
-            this.getEventManager()->on($object);
+            this.getEventManager().on($object);
         }
         _loaded[$objName] = $object;
 
@@ -373,7 +373,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
 
         $object = _loaded[$name];
         if (this instanceof EventDispatcherInterface && $object instanceof EventListenerInterface) {
-            this.getEventManager()->off($object);
+            this.getEventManager().off($object);
         }
         unset(_loaded[$name]);
 

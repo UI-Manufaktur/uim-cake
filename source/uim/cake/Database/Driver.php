@@ -128,18 +128,18 @@ abstract class Driver : DriverInterface
 
         $retry = new CommandRetry(new ErrorCodeWaitStrategy(static::RETRY_ERROR_CODES, 5), 4);
         try {
-            $retry->run($action);
+            $retry.run($action);
         } catch (PDOException $e) {
             throw new MissingConnectionException(
                 [
-                    'driver' => App::shortName(static::class, 'Database/Driver'),
-                    'reason' => $e->getMessage(),
+                    'driver': App::shortName(static::class, 'Database/Driver'),
+                    'reason': $e.getMessage(),
                 ],
                 null,
                 $e
             );
         } finally {
-            this.connectRetries = $retry->getRetries();
+            this.connectRetries = $retry.getRetries();
         }
 
         return true;
@@ -169,7 +169,7 @@ abstract class Driver : DriverInterface
     {
         if (_version == null) {
             this.connect();
-            _version = (string)_connection->getAttribute(PDO::ATTR_SERVER_VERSION);
+            _version = (string)_connection.getAttribute(PDO::ATTR_SERVER_VERSION);
         }
 
         return _version;
@@ -184,8 +184,8 @@ abstract class Driver : DriverInterface
     {
         if (_connection == null) {
             throw new MissingConnectionException([
-                'driver' => App::shortName(static::class, 'Database/Driver'),
-                'reason' => 'Unknown',
+                'driver': App::shortName(static::class, 'Database/Driver'),
+                'reason': 'Unknown',
             ]);
         }
 
@@ -217,7 +217,7 @@ abstract class Driver : DriverInterface
     function prepare($query): StatementInterface
     {
         this.connect();
-        $statement = _connection->prepare($query instanceof Query ? $query->sql() : $query);
+        $statement = _connection.prepare($query instanceof Query ? $query.sql() : $query);
 
         return new PDOStatement($statement, this);
     }
@@ -228,11 +228,11 @@ abstract class Driver : DriverInterface
     function beginTransaction(): bool
     {
         this.connect();
-        if (_connection->inTransaction()) {
+        if (_connection.inTransaction()) {
             return true;
         }
 
-        return _connection->beginTransaction();
+        return _connection.beginTransaction();
     }
 
     /**
@@ -241,11 +241,11 @@ abstract class Driver : DriverInterface
     function commitTransaction(): bool
     {
         this.connect();
-        if (!_connection->inTransaction()) {
+        if (!_connection.inTransaction()) {
             return false;
         }
 
-        return _connection->commit();
+        return _connection.commit();
     }
 
     /**
@@ -254,11 +254,11 @@ abstract class Driver : DriverInterface
     function rollbackTransaction(): bool
     {
         this.connect();
-        if (!_connection->inTransaction()) {
+        if (!_connection.inTransaction()) {
             return false;
         }
 
-        return _connection->rollBack();
+        return _connection.rollBack();
     }
 
     /**
@@ -270,7 +270,7 @@ abstract class Driver : DriverInterface
     {
         this.connect();
 
-        return _connection->inTransaction();
+        return _connection.inTransaction();
     }
 
     /**
@@ -303,7 +303,7 @@ abstract class Driver : DriverInterface
     {
         this.connect();
 
-        return _connection->quote((string)$value, $type);
+        return _connection.quote((string)$value, $type);
     }
 
     /**
@@ -367,7 +367,7 @@ abstract class Driver : DriverInterface
             return (string)$value;
         }
 
-        return _connection->quote((string)$value, PDO::PARAM_STR);
+        return _connection.quote((string)$value, PDO::PARAM_STR);
     }
 
     /**
@@ -386,10 +386,10 @@ abstract class Driver : DriverInterface
         this.connect();
 
         if (_connection instanceof PDO) {
-            return _connection->lastInsertId($table);
+            return _connection.lastInsertId($table);
         }
 
-        return _connection->lastInsertId($table);
+        return _connection.lastInsertId($table);
     }
 
     /**
@@ -401,7 +401,7 @@ abstract class Driver : DriverInterface
             $connected = false;
         } else {
             try {
-                $connected = (bool)_connection->query('SELECT 1');
+                $connected = (bool)_connection.query('SELECT 1');
             } catch (PDOException $e) {
                 $connected = false;
             }
@@ -464,10 +464,10 @@ abstract class Driver : DriverInterface
     function compileQuery(Query $query, ValueBinder $binder): array
     {
         $processor = this.newCompiler();
-        $translator = this.queryTranslator($query->type());
+        $translator = this.queryTranslator($query.type());
         $query = $translator($query);
 
-        return [$query, $processor->compile($query, $binder)];
+        return [$query, $processor.compile($query, $binder)];
     }
 
     /**
@@ -531,7 +531,7 @@ abstract class Driver : DriverInterface
     function __debugInfo(): array
     {
         return [
-            'connected' => _connection != null,
+            'connected': _connection != null,
         ];
     }
 }

@@ -61,7 +61,7 @@ trait InstanceConfigTrait
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.setConfig(['one' => 'value', 'another' => 'value']);
+     * this.setConfig(['one': 'value', 'another': 'value']);
      * ```
      *
      * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
@@ -165,7 +165,7 @@ trait InstanceConfigTrait
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.configShallow(['one' => 'value', 'another' => 'value']);
+     * this.configShallow(['one': 'value', 'another': 'value']);
      * ```
      *
      * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
@@ -233,7 +233,7 @@ trait InstanceConfigTrait
         }
 
         if ($merge) {
-            $update = is_array($key) ? $key : [$key => $value];
+            $update = is_array($key) ? $key : [$key: $value];
             if ($merge == 'shallow') {
                 _config = array_merge(_config, Hash::expand($update));
             } else {
@@ -244,7 +244,7 @@ trait InstanceConfigTrait
         }
 
         if (is_array($key)) {
-            foreach ($key as $k => $val) {
+            foreach ($key as $k: $val) {
                 _configWrite($k, $val);
             }
 
@@ -292,7 +292,7 @@ trait InstanceConfigTrait
         $stack = explode('.', $key);
         $length = count($stack);
 
-        foreach ($stack as $i => $k) {
+        foreach ($stack as $i: $k) {
             if (!is_array($update)) {
                 throw new CakeException(sprintf('Cannot unset %s value', $key));
             }

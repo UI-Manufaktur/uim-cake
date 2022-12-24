@@ -57,12 +57,12 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
-        $commands = this.commands->getIterator();
+        $commands = this.commands.getIterator();
         if ($commands instanceof ArrayIterator) {
-            $commands->ksort();
+            $commands.ksort();
         }
 
-        if ($args->getOption('xml')) {
+        if ($args.getOption('xml')) {
             this.asXml($io, $commands);
 
             return static::CODE_SUCCESS;
@@ -83,7 +83,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     protected function asText(ConsoleIo $io, iterable $commands): void
     {
         $invert = [];
-        foreach ($commands as $name => $class) {
+        foreach ($commands as $name: $class) {
             if (is_object($class)) {
                 $class = get_class($class);
             }
@@ -94,7 +94,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
         }
         $grouped = [];
         $plugins = Plugin::loaded();
-        foreach ($invert as $class => $names) {
+        foreach ($invert as $class: $names) {
             preg_match('/^(.+)\\\\(Command|Shell)\\\\/', $class, $matches);
             // Probably not a useful class
             if (empty($matches)) {
@@ -113,30 +113,30 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
             }
 
             $grouped[$prefix][] = [
-                'name' => $shortestName,
-                'description' => is_subclass_of($class, BaseCommand::class) ? $class::getDescription() : '',
+                'name': $shortestName,
+                'description': is_subclass_of($class, BaseCommand::class) ? $class::getDescription() : '',
             ];
         }
         ksort($grouped);
 
         this.outputPaths($io);
-        $io->out('<info>Available Commands:</info>', 2);
+        $io.out('<info>Available Commands:</info>', 2);
 
-        foreach ($grouped as $prefix => $names) {
-            $io->out("<info>{$prefix}</info>:");
+        foreach ($grouped as $prefix: $names) {
+            $io.out("<info>{$prefix}</info>:");
             sort($names);
             foreach ($names as $data) {
-                $io->out(' - ' . $data['name']);
+                $io.out(' - ' . $data['name']);
                 if ($data['description']) {
-                    $io->info(str_pad(" \u{2514}", 13, "\u{2500}") . ' ' . $data['description']);
+                    $io.info(str_pad(" \u{2514}", 13, "\u{2500}") . ' ' . $data['description']);
                 }
             }
-            $io->out('');
+            $io.out('');
         }
         $root = this.getRootName();
 
-        $io->out("To run a command, type <info>`{$root} command_name [args|options]`</info>");
-        $io->out("To get help on a specific command, type <info>`{$root} command_name --help`</info>", 2);
+        $io.out("To run a command, type <info>`{$root} command_name [args|options]`</info>");
+        $io.out("To get help on a specific command, type <info>`{$root} command_name --help`</info>", 2);
     }
 
     /**
@@ -162,11 +162,11 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
         if (!count($paths)) {
             return;
         }
-        $io->out('<info>Current Paths:</info>', 2);
-        foreach ($paths as $key => $value) {
-            $io->out("* {$key}: {$value}");
+        $io.out('<info>Current Paths:</info>', 2);
+        foreach ($paths as $key: $value) {
+            $io.out("* {$key}: {$value}");
         }
-        $io->out('');
+        $io.out('');
     }
 
     /**
@@ -196,18 +196,18 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     protected function asXml(ConsoleIo $io, iterable $commands): void
     {
         $shells = new SimpleXMLElement('<shells></shells>');
-        foreach ($commands as $name => $class) {
+        foreach ($commands as $name: $class) {
             if (is_object($class)) {
                 $class = get_class($class);
             }
-            $shell = $shells->addChild('shell');
-            $shell->addAttribute('name', $name);
-            $shell->addAttribute('call_as', $name);
-            $shell->addAttribute('provider', $class);
-            $shell->addAttribute('help', $name . ' -h');
+            $shell = $shells.addChild('shell');
+            $shell.addAttribute('name', $name);
+            $shell.addAttribute('call_as', $name);
+            $shell.addAttribute('provider', $class);
+            $shell.addAttribute('help', $name . ' -h');
         }
-        $io->setOutputAs(ConsoleOutput::RAW);
-        $io->out($shells->saveXML());
+        $io.setOutputAs(ConsoleOutput::RAW);
+        $io.out($shells.saveXML());
     }
 
     /**
@@ -218,11 +218,11 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      */
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser->setDescription(
+        $parser.setDescription(
             'Get the list of available commands for this application.'
-        )->addOption('xml', [
-            'help' => 'Get the listing as XML.',
-            'boolean' => true,
+        ).addOption('xml', [
+            'help': 'Get the listing as XML.',
+            'boolean': true,
         ]);
 
         return $parser;

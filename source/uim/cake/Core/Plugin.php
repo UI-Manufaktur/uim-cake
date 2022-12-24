@@ -42,9 +42,9 @@ class Plugin
      */
     public static function path(string $name): string
     {
-        $plugin = static::getCollection()->get($name);
+        $plugin = static::getCollection().get($name);
 
-        return $plugin->getPath();
+        return $plugin.getPath();
     }
 
     /**
@@ -56,9 +56,9 @@ class Plugin
      */
     public static function classPath(string $name): string
     {
-        $plugin = static::getCollection()->get($name);
+        $plugin = static::getCollection().get($name);
 
-        return $plugin->getClassPath();
+        return $plugin.getClassPath();
     }
 
     /**
@@ -70,9 +70,9 @@ class Plugin
      */
     public static function configPath(string $name): string
     {
-        $plugin = static::getCollection()->get($name);
+        $plugin = static::getCollection().get($name);
 
-        return $plugin->getConfigPath();
+        return $plugin.getConfigPath();
     }
 
     /**
@@ -84,9 +84,9 @@ class Plugin
      */
     public static function templatePath(string $name): string
     {
-        $plugin = static::getCollection()->get($name);
+        $plugin = static::getCollection().get($name);
 
-        return $plugin->getTemplatePath();
+        return $plugin.getTemplatePath();
     }
 
     /**
@@ -98,7 +98,7 @@ class Plugin
      */
     public static function isLoaded(string $plugin): bool
     {
-        return static::getCollection()->has($plugin);
+        return static::getCollection().has($plugin);
     }
 
     /**
@@ -110,7 +110,7 @@ class Plugin
     {
         $names = [];
         foreach (static::getCollection() as $plugin) {
-            $names[] = $plugin->getName();
+            $names[] = $plugin.getName();
         }
         sort($names);
 

@@ -76,7 +76,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     function setController(Controller $controller)
     {
         _Controller = $controller;
-        this.setEventManager($controller->getEventManager());
+        this.setEventManager($controller.getEventManager());
 
         return this;
     }
@@ -109,8 +109,8 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingComponentException([
-            'class' => $class . 'Component',
-            'plugin' => $plugin,
+            'class': $class . 'Component',
+            'plugin': $plugin,
         ]);
     }
 
@@ -133,7 +133,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
         $instance = new $class(this, $config);
         $enable = $config['enabled'] ?? true;
         if ($enable) {
-            this.getEventManager()->on($instance);
+            this.getEventManager().on($instance);
         }
 
         return $instance;

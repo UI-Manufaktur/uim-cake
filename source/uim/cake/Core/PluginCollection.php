@@ -97,7 +97,7 @@ class PluginCollection : Iterator, Countable
         if (!is_file($vendorFile)) {
             $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . 'cakephp-plugins.php';
             if (!is_file($vendorFile)) {
-                Configure::write(['plugins' => []]);
+                Configure::write(['plugins': []]);
 
                 return;
             }
@@ -140,7 +140,7 @@ class PluginCollection : Iterator, Countable
             }
         }
 
-        throw new MissingPluginException(['plugin' => $name]);
+        throw new MissingPluginException(['plugin': $name]);
     }
 
     /**
@@ -153,7 +153,7 @@ class PluginCollection : Iterator, Countable
      */
     function add(PluginInterface $plugin)
     {
-        $name = $plugin->getName();
+        $name = $plugin.getName();
         this.plugins[$name] = $plugin;
         this.names = array_keys(this.plugins);
 
@@ -237,7 +237,7 @@ class PluginCollection : Iterator, Countable
             return new $name($config);
         }
 
-        $config += ['name' => $name];
+        $config += ['name': $name];
         $namespace = str_replace('/', '\\', $name);
 
         $className = $namespace . '\\' . 'Plugin';
@@ -348,7 +348,7 @@ class PluginCollection : Iterator, Countable
             throw new InvalidArgumentException("The `{$hook}` hook is not a known plugin hook.");
         }
         foreach (this as $plugin) {
-            if ($plugin->isEnabled($hook)) {
+            if ($plugin.isEnabled($hook)) {
                 yield $plugin;
             }
         }

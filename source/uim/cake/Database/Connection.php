@@ -214,13 +214,13 @@ class Connection : ConnectionInterface
             /** @psalm-var class-string<\Cake\Database\DriverInterface>|null $className */
             $className = App::className($driver, 'Database/Driver');
             if ($className == null) {
-                throw new MissingDriverException(['driver' => $driver, 'connection' => this.configName()]);
+                throw new MissingDriverException(['driver': $driver, 'connection': this.configName()]);
             }
             $driver = new $className($config);
         }
 
-        if (!$driver->enabled()) {
-            throw new MissingExtensionException(['driver' => get_class($driver), 'name' => this.configName()]);
+        if (!$driver.enabled()) {
+            throw new MissingExtensionException(['driver': get_class($driver), 'name': this.configName()]);
         }
 
         return $driver;
@@ -256,14 +256,14 @@ class Connection : ConnectionInterface
     function connect(): bool
     {
         try {
-            return _driver->connect();
+            return _driver.connect();
         } catch (MissingConnectionException $e) {
             throw $e;
         } catch (Throwable $e) {
             throw new MissingConnectionException(
                 [
-                    'driver' => App::shortName(get_class(_driver), 'Database/Driver'),
-                    'reason' => $e->getMessage(),
+                    'driver': App::shortName(get_class(_driver), 'Database/Driver'),
+                    'reason': $e.getMessage(),
                 ],
                 null,
                 $e
@@ -278,7 +278,7 @@ class Connection : ConnectionInterface
      */
     function disconnect(): void
     {
-        _driver->disconnect();
+        _driver.disconnect();
     }
 
     /**
@@ -288,7 +288,7 @@ class Connection : ConnectionInterface
      */
     function isConnected(): bool
     {
-        return _driver->isConnected();
+        return _driver.isConnected();
     }
 
     /**
@@ -299,8 +299,8 @@ class Connection : ConnectionInterface
      */
     function prepare($query): StatementInterface
     {
-        return this.getDisconnectRetry()->run(function () use ($query) {
-            $statement = _driver->prepare($query);
+        return this.getDisconnectRetry().run(function () use ($query) {
+            $statement = _driver.prepare($query);
 
             if (_logQueries) {
                 $statement = _newLogger($statement);
@@ -321,12 +321,12 @@ class Connection : ConnectionInterface
      */
     function execute(string $sql, array $params = [], array $types = []): StatementInterface
     {
-        return this.getDisconnectRetry()->run(function () use ($sql, $params, $types) {
+        return this.getDisconnectRetry().run(function () use ($sql, $params, $types) {
             $statement = this.prepare($sql);
             if (!empty($params)) {
-                $statement->bind($params, $types);
+                $statement.bind($params, $types);
             }
-            $statement->execute();
+            $statement.execute();
 
             return $statement;
         });
@@ -342,7 +342,7 @@ class Connection : ConnectionInterface
      */
     function compileQuery(Query $query, ValueBinder $binder): string
     {
-        return this.getDriver()->compileQuery($query, $binder)[1];
+        return this.getDriver().compileQuery($query, $binder)[1];
     }
 
     /**
@@ -354,10 +354,10 @@ class Connection : ConnectionInterface
      */
     function run(Query $query): StatementInterface
     {
-        return this.getDisconnectRetry()->run(function () use ($query) {
+        return this.getDisconnectRetry().run(function () use ($query) {
             $statement = this.prepare($query);
-            $query->getValueBinder()->attachTo($statement);
-            $statement->execute();
+            $query.getValueBinder().attachTo($statement);
+            $statement.execute();
 
             return $statement;
         });
@@ -371,9 +371,9 @@ class Connection : ConnectionInterface
      */
     function query(string $sql): StatementInterface
     {
-        return this.getDisconnectRetry()->run(function () use ($sql) {
+        return this.getDisconnectRetry().run(function () use ($sql) {
             $statement = this.prepare($sql);
-            $statement->execute();
+            $statement.execute();
 
             return $statement;
         });
@@ -434,13 +434,13 @@ class Connection : ConnectionInterface
      */
     function insert(string $table, array $values, array $types = []): StatementInterface
     {
-        return this.getDisconnectRetry()->run(function () use ($table, $values, $types) {
+        return this.getDisconnectRetry().run(function () use ($table, $values, $types) {
             $columns = array_keys($values);
 
-            return this.newQuery()->insert($columns, $types)
-                ->into($table)
-                ->values($values)
-                ->execute();
+            return this.newQuery().insert($columns, $types)
+                .into($table)
+                .values($values)
+                .execute();
         });
     }
 
@@ -455,11 +455,11 @@ class Connection : ConnectionInterface
      */
     function update(string $table, array $values, array $conditions = [], array $types = []): StatementInterface
     {
-        return this.getDisconnectRetry()->run(function () use ($table, $values, $conditions, $types) {
-            return this.newQuery()->update($table)
-                ->set($values, $types)
-                ->where($conditions, $types)
-                ->execute();
+        return this.getDisconnectRetry().run(function () use ($table, $values, $conditions, $types) {
+            return this.newQuery().update($table)
+                .set($values, $types)
+                .where($conditions, $types)
+                .execute();
         });
     }
 
@@ -473,10 +473,10 @@ class Connection : ConnectionInterface
      */
     function delete(string $table, array $conditions = [], array $types = []): StatementInterface
     {
-        return this.getDisconnectRetry()->run(function () use ($table, $conditions, $types) {
-            return this.newQuery()->delete($table)
-                ->where($conditions, $types)
-                ->execute();
+        return this.getDisconnectRetry().run(function () use ($table, $conditions, $types) {
+            return this.newQuery().delete($table)
+                .where($conditions, $types)
+                .execute();
         });
     }
 
@@ -492,8 +492,8 @@ class Connection : ConnectionInterface
                 this.log('BEGIN');
             }
 
-            this.getDisconnectRetry()->run(function (): void {
-                _driver->beginTransaction();
+            this.getDisconnectRetry().run(function (): void {
+                _driver.beginTransaction();
             });
 
             _transactionLevel = 0;
@@ -534,7 +534,7 @@ class Connection : ConnectionInterface
                 this.log('COMMIT');
             }
 
-            return _driver->commitTransaction();
+            return _driver.commitTransaction();
         }
         if (this.isSavePointsEnabled()) {
             this.releaseSavePoint((string)_transactionLevel);
@@ -569,7 +569,7 @@ class Connection : ConnectionInterface
             if (_logQueries) {
                 this.log('ROLLBACK');
             }
-            _driver->rollbackTransaction();
+            _driver.rollbackTransaction();
 
             return true;
         }
@@ -598,7 +598,7 @@ class Connection : ConnectionInterface
         if ($enable == false) {
             _useSavePoints = false;
         } else {
-            _useSavePoints = _driver->supports(DriverInterface::FEATURE_SAVEPOINT);
+            _useSavePoints = _driver.supports(DriverInterface::FEATURE_SAVEPOINT);
         }
 
         return this;
@@ -634,7 +634,7 @@ class Connection : ConnectionInterface
      */
     function createSavePoint($name): void
     {
-        this.execute(_driver->savePointSQL($name))->closeCursor();
+        this.execute(_driver.savePointSQL($name)).closeCursor();
     }
 
     /**
@@ -645,9 +645,9 @@ class Connection : ConnectionInterface
      */
     function releaseSavePoint($name): void
     {
-        $sql = _driver->releaseSavePointSQL($name);
+        $sql = _driver.releaseSavePointSQL($name);
         if ($sql) {
-            this.execute($sql)->closeCursor();
+            this.execute($sql).closeCursor();
         }
     }
 
@@ -659,7 +659,7 @@ class Connection : ConnectionInterface
      */
     function rollbackSavepoint($name): void
     {
-        this.execute(_driver->rollbackSavePointSQL($name))->closeCursor();
+        this.execute(_driver.rollbackSavePointSQL($name)).closeCursor();
     }
 
     /**
@@ -669,8 +669,8 @@ class Connection : ConnectionInterface
      */
     function disableForeignKeys(): void
     {
-        this.getDisconnectRetry()->run(function (): void {
-            this.execute(_driver->disableForeignKeySQL())->closeCursor();
+        this.getDisconnectRetry().run(function (): void {
+            this.execute(_driver.disableForeignKeySQL()).closeCursor();
         });
     }
 
@@ -681,8 +681,8 @@ class Connection : ConnectionInterface
      */
     function enableForeignKeys(): void
     {
-        this.getDisconnectRetry()->run(function (): void {
-            this.execute(_driver->enableForeignKeySQL())->closeCursor();
+        this.getDisconnectRetry().run(function (): void {
+            this.execute(_driver.enableForeignKeySQL()).closeCursor();
         });
     }
 
@@ -695,7 +695,7 @@ class Connection : ConnectionInterface
      */
     function supportsDynamicConstraints(): bool
     {
-        return _driver->supportsDynamicConstraints();
+        return _driver.supportsDynamicConstraints();
     }
 
     /**
@@ -743,7 +743,7 @@ class Connection : ConnectionInterface
      */
     function disableConstraints(callable $callback)
     {
-        return this.getDisconnectRetry()->run(function () use ($callback) {
+        return this.getDisconnectRetry().run(function () use ($callback) {
             this.disableForeignKeys();
 
             try {
@@ -779,7 +779,7 @@ class Connection : ConnectionInterface
     {
         [$value, $type] = this.cast($value, $type);
 
-        return _driver->quote($value, $type);
+        return _driver.quote($value, $type);
     }
 
     /**
@@ -791,7 +791,7 @@ class Connection : ConnectionInterface
      */
     function supportsQuoting(): bool
     {
-        return _driver->supports(DriverInterface::FEATURE_QUOTE);
+        return _driver.supports(DriverInterface::FEATURE_QUOTE);
     }
 
     /**
@@ -805,7 +805,7 @@ class Connection : ConnectionInterface
      */
     function quoteIdentifier(string $identifier): string
     {
-        return _driver->quoteIdentifier($identifier);
+        return _driver.quoteIdentifier($identifier);
     }
 
     /**
@@ -927,7 +927,7 @@ class Connection : ConnectionInterface
             );
         }
 
-        return _logger = new QueryLogger(['connection' => this.configName()]);
+        return _logger = new QueryLogger(['connection': this.configName()]);
     }
 
     /**
@@ -939,8 +939,8 @@ class Connection : ConnectionInterface
     function log(string $sql): void
     {
         $query = new LoggedQuery();
-        $query->query = $sql;
-        this.getLogger()->debug((string)$query, ['query' => $query]);
+        $query.query = $sql;
+        this.getLogger().debug((string)$query, ['query': $query]);
     }
 
     /**
@@ -953,7 +953,7 @@ class Connection : ConnectionInterface
     protected function _newLogger(StatementInterface $statement): LoggingStatement
     {
         $log = new LoggingStatement($statement, _driver);
-        $log->setLogger(this.getLogger());
+        $log.setLogger(this.getLogger());
 
         return $log;
     }
@@ -967,23 +967,23 @@ class Connection : ConnectionInterface
     function __debugInfo(): array
     {
         $secrets = [
-            'password' => '*****',
-            'username' => '*****',
-            'host' => '*****',
-            'database' => '*****',
-            'port' => '*****',
+            'password': '*****',
+            'username': '*****',
+            'host': '*****',
+            'database': '*****',
+            'port': '*****',
         ];
         $replace = array_intersect_key($secrets, _config);
         $config = $replace + _config;
 
         return [
-            'config' => $config,
-            'driver' => _driver,
-            'transactionLevel' => _transactionLevel,
-            'transactionStarted' => _transactionStarted,
-            'useSavePoints' => _useSavePoints,
-            'logQueries' => _logQueries,
-            'logger' => _logger,
+            'config': $config,
+            'driver': _driver,
+            'transactionLevel': _transactionLevel,
+            'transactionStarted': _transactionStarted,
+            'useSavePoints': _useSavePoints,
+            'logQueries': _logQueries,
+            'logger': _logger,
         ];
     }
 }

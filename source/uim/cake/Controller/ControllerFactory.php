@@ -75,16 +75,16 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
         }
 
         $reflection = new ReflectionClass($className);
-        if ($reflection->isAbstract()) {
+        if ($reflection.isAbstract()) {
             throw this.missingController($request);
         }
 
         // Get the controller from the container if defined.
         // The request is in the container by default.
-        if (this.container->has($className)) {
-            $controller = this.container->get($className);
+        if (this.container.has($className)) {
+            $controller = this.container.get($className);
         } else {
-            $controller = $reflection->newInstance($request);
+            $controller = $reflection.newInstance($request);
         }
 
         return $controller;
@@ -102,16 +102,16 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     {
         this.controller = $controller;
 
-        $middlewares = $controller->getMiddleware();
+        $middlewares = $controller.getMiddleware();
 
         if ($middlewares) {
             $middlewareQueue = new MiddlewareQueue($middlewares);
             $runner = new Runner();
 
-            return $runner->run($middlewareQueue, $controller->getRequest(), this);
+            return $runner.run($middlewareQueue, $controller.getRequest(), this);
         }
 
-        return this.handle($controller->getRequest());
+        return this.handle($controller.getRequest());
     }
 
     /**
@@ -124,26 +124,26 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     {
         $controller = this.controller;
         /** @psalm-suppress ArgumentTypeCoercion */
-        $controller->setRequest($request);
+        $controller.setRequest($request);
 
-        $result = $controller->startupProcess();
+        $result = $controller.startupProcess();
         if ($result instanceof IResponse) {
             return $result;
         }
 
-        $action = $controller->getAction();
+        $action = $controller.getAction();
         $args = this.getActionArgs(
             $action,
-            array_values((array)$controller->getRequest()->getParam('pass'))
+            array_values((array)$controller.getRequest().getParam('pass'))
         );
-        $controller->invokeAction($action, $args);
+        $controller.invokeAction($action, $args);
 
-        $result = $controller->shutdownProcess();
+        $result = $controller.shutdownProcess();
         if ($result instanceof IResponse) {
             return $result;
         }
 
-        return $controller->getResponse();
+        return $controller.getResponse();
     }
 
     /**
@@ -157,25 +157,25 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     {
         $resolved = [];
         $function = new ReflectionFunction($action);
-        foreach ($function->getParameters() as $parameter) {
-            $type = $parameter->getType();
+        foreach ($function.getParameters() as $parameter) {
+            $type = $parameter.getType();
             if ($type && !$type instanceof ReflectionNamedType) {
                 // Only single types are supported
                 throw new InvalidParameterException([
-                    'template' => 'unsupported_type',
-                    'parameter' => $parameter->getName(),
-                    'controller' => this.controller->getName(),
-                    'action' => this.controller->getRequest()->getParam('action'),
-                    'prefix' => this.controller->getRequest()->getParam('prefix'),
-                    'plugin' => this.controller->getRequest()->getParam('plugin'),
+                    'template': 'unsupported_type',
+                    'parameter': $parameter.getName(),
+                    'controller': this.controller.getName(),
+                    'action': this.controller.getRequest().getParam('action'),
+                    'prefix': this.controller.getRequest().getParam('prefix'),
+                    'plugin': this.controller.getRequest().getParam('plugin'),
                 ]);
             }
 
             // Check for dependency injection for classes
-            if ($type instanceof ReflectionNamedType && !$type->isBuiltin()) {
-                $typeName = $type->getName();
-                if (this.container->has($typeName)) {
-                    $resolved[] = this.container->get($typeName);
+            if ($type instanceof ReflectionNamedType && !$type.isBuiltin()) {
+                $typeName = $type.getName();
+                if (this.container.has($typeName)) {
+                    $resolved[] = this.container.get($typeName);
                     continue;
                 }
 
@@ -188,19 +188,19 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
 
                 // Add default value if provided
                 // Do not allow positional arguments for classes
-                if ($parameter->isDefaultValueAvailable()) {
-                    $resolved[] = $parameter->getDefaultValue();
+                if ($parameter.isDefaultValueAvailable()) {
+                    $resolved[] = $parameter.getDefaultValue();
                     continue;
                 }
 
                 throw new InvalidParameterException([
-                    'template' => 'missing_dependency',
-                    'parameter' => $parameter->getName(),
-                    'type' => $typeName,
-                    'controller' => this.controller->getName(),
-                    'action' => this.controller->getRequest()->getParam('action'),
-                    'prefix' => this.controller->getRequest()->getParam('prefix'),
-                    'plugin' => this.controller->getRequest()->getParam('plugin'),
+                    'template': 'missing_dependency',
+                    'parameter': $parameter.getName(),
+                    'type': $typeName,
+                    'controller': this.controller.getName(),
+                    'action': this.controller.getRequest().getParam('action'),
+                    'prefix': this.controller.getRequest().getParam('prefix'),
+                    'plugin': this.controller.getRequest().getParam('plugin'),
                 ]);
             }
 
@@ -212,14 +212,14 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
 
                     if ($typedArgument == null) {
                         throw new InvalidParameterException([
-                            'template' => 'failed_coercion',
-                            'passed' => $argument,
-                            'type' => $type->getName(),
-                            'parameter' => $parameter->getName(),
-                            'controller' => this.controller->getName(),
-                            'action' => this.controller->getRequest()->getParam('action'),
-                            'prefix' => this.controller->getRequest()->getParam('prefix'),
-                            'plugin' => this.controller->getRequest()->getParam('plugin'),
+                            'template': 'failed_coercion',
+                            'passed': $argument,
+                            'type': $type.getName(),
+                            'parameter': $parameter.getName(),
+                            'controller': this.controller.getName(),
+                            'action': this.controller.getRequest().getParam('action'),
+                            'prefix': this.controller.getRequest().getParam('prefix'),
+                            'plugin': this.controller.getRequest().getParam('plugin'),
                         ]);
                     }
                     $argument = $typedArgument;
@@ -230,23 +230,23 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
             }
 
             // Add default value if provided
-            if ($parameter->isDefaultValueAvailable()) {
-                $resolved[] = $parameter->getDefaultValue();
+            if ($parameter.isDefaultValueAvailable()) {
+                $resolved[] = $parameter.getDefaultValue();
                 continue;
             }
 
             // Variadic parameter can have 0 arguments
-            if ($parameter->isVariadic()) {
+            if ($parameter.isVariadic()) {
                 continue;
             }
 
             throw new InvalidParameterException([
-                'template' => 'missing_parameter',
-                'parameter' => $parameter->getName(),
-                'controller' => this.controller->getName(),
-                'action' => this.controller->getRequest()->getParam('action'),
-                'prefix' => this.controller->getRequest()->getParam('prefix'),
-                'plugin' => this.controller->getRequest()->getParam('plugin'),
+                'template': 'missing_parameter',
+                'parameter': $parameter.getName(),
+                'controller': this.controller.getName(),
+                'action': this.controller.getRequest().getParam('action'),
+                'prefix': this.controller.getRequest().getParam('prefix'),
+                'plugin': this.controller.getRequest().getParam('plugin'),
             ]);
         }
 
@@ -262,7 +262,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      */
     protected function coerceStringToType(string $argument, ReflectionNamedType $type)
     {
-        switch ($type->getName()) {
+        switch ($type.getName()) {
             case 'string':
                 return $argument;
             case 'float':
@@ -289,12 +289,12 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     {
         $pluginPath = '';
         $namespace = 'Controller';
-        $controller = $request->getParam('controller', '');
-        if ($request->getParam('plugin')) {
-            $pluginPath = $request->getParam('plugin') . '.';
+        $controller = $request.getParam('controller', '');
+        if ($request.getParam('plugin')) {
+            $pluginPath = $request.getParam('plugin') . '.';
         }
-        if ($request->getParam('prefix')) {
-            $prefix = $request->getParam('prefix');
+        if ($request.getParam('prefix')) {
+            $prefix = $request.getParam('prefix');
 
             $firstChar = substr($prefix, 0, 1);
             if ($firstChar != strtoupper($firstChar)) {
@@ -346,10 +346,10 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     protected function missingController(ServerRequest $request)
     {
         return new MissingControllerException([
-            'class' => $request->getParam('controller'),
-            'plugin' => $request->getParam('plugin'),
-            'prefix' => $request->getParam('prefix'),
-            '_ext' => $request->getParam('_ext'),
+            'class': $request.getParam('controller'),
+            'plugin': $request.getParam('plugin'),
+            'prefix': $request.getParam('prefix'),
+            '_ext': $request.getParam('_ext'),
         ]);
     }
 }
