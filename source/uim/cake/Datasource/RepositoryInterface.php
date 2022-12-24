@@ -78,9 +78,9 @@ interface RepositoryInterface
      *
      * ```
      * $id = 10;
-     * $article = $articles->get($id);
+     * $article = $articles.get($id);
      *
-     * $article = $articles->get($id, ['contain' => ['Comments]]);
+     * $article = $articles.get($id, ['contain': ['Comments]]);
      * ```
      *
      * @param mixed $primaryKey primary key value to find
@@ -106,7 +106,7 @@ interface RepositoryInterface
      * This method will *not* trigger beforeSave/afterSave events. If you need those
      * first load a collection of records and update them.
      *
-     * @param \Cake\Database\Expression\QueryExpression|\Closure|array|string $fields A hash of field => new value.
+     * @param \Cake\Database\Expression\QueryExpression|\Closure|array|string $fields A hash of field: new value.
      * @param mixed $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Count Returns the affected rows.
@@ -180,7 +180,7 @@ interface RepositoryInterface
      * For example, in your controller code:
      *
      * ```
-     * $article = this.Articles->newEntity(this.request->getData());
+     * $article = this.Articles.newEntity(this.request.getData());
      * ```
      *
      * The hydrated entity will correctly do an insert/update based
@@ -200,7 +200,7 @@ interface RepositoryInterface
      * For example, in your controller code:
      *
      * ```
-     * $articles = this.Articles->newEntities(this.request->getData());
+     * $articles = this.Articles.newEntities(this.request.getData());
      * ```
      *
      * The hydrated entities can then be iterated and saved.
@@ -219,7 +219,7 @@ interface RepositoryInterface
      * This is most useful when editing an existing entity using request data:
      *
      * ```
-     * $article = this.Articles->patchEntity($article, this.request->getData());
+     * $article = this.Articles.patchEntity($article, this.request.getData());
      * ```
      *
      * @param \Cake\Datasource\EntityInterface $entity the entity that will get the
@@ -239,7 +239,7 @@ interface RepositoryInterface
      * This is most useful when editing a list of existing entities using request data:
      *
      * ```
-     * $article = this.Articles->patchEntities($articles, this.request->getData());
+     * $article = this.Articles.patchEntities($articles, this.request.getData());
      * ```
      *
      * @param iterable<\Cake\Datasource\EntityInterface> $entities the entities that will get the

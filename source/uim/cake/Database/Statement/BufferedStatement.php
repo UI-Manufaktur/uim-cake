@@ -95,7 +95,7 @@ class BufferedStatement : Iterator, StatementInterface
     {
         if ($property == 'queryString') {
             /** @psalm-suppress NoInterfaceProperties */
-            return this.statement->queryString;
+            return this.statement.queryString;
         }
 
         return null;
@@ -106,7 +106,7 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function bindValue($column, $value, $type = 'string'): void
     {
-        this.statement->bindValue($column, $value, $type);
+        this.statement.bindValue($column, $value, $type);
     }
 
     /**
@@ -114,7 +114,7 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function closeCursor(): void
     {
-        this.statement->closeCursor();
+        this.statement.closeCursor();
     }
 
     /**
@@ -122,7 +122,7 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function columnCount(): int
     {
-        return this.statement->columnCount();
+        return this.statement.columnCount();
     }
 
     /**
@@ -130,7 +130,7 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function errorCode()
     {
-        return this.statement->errorCode();
+        return this.statement.errorCode();
     }
 
     /**
@@ -138,7 +138,7 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function errorInfo(): array
     {
-        return this.statement->errorInfo();
+        return this.statement.errorInfo();
     }
 
     /**
@@ -149,7 +149,7 @@ class BufferedStatement : Iterator, StatementInterface
         _reset();
         _hasExecuted = true;
 
-        return this.statement->execute($params);
+        return this.statement.execute($params);
     }
 
     /**
@@ -181,7 +181,7 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function bind(array $params, array $types): void
     {
-        this.statement->bind($params, $types);
+        this.statement.bind($params, $types);
     }
 
     /**
@@ -189,7 +189,7 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function lastInsertId(?string $table = null, ?string $column = null)
     {
-        return this.statement->lastInsertId($table, $column);
+        return this.statement.lastInsertId($table, $column);
     }
 
     /**
@@ -214,10 +214,10 @@ class BufferedStatement : Iterator, StatementInterface
             return $row;
         }
 
-        $record = this.statement->fetch($type);
+        $record = this.statement.fetch($type);
         if ($record == false) {
             _allFetched = true;
-            this.statement->closeCursor();
+            this.statement.closeCursor();
 
             return false;
         }
@@ -244,12 +244,12 @@ class BufferedStatement : Iterator, StatementInterface
         if (_allFetched) {
             return this.buffer;
         }
-        $results = this.statement->fetchAll($type);
+        $results = this.statement.fetchAll($type);
         if ($results != false) {
             this.buffer = array_merge(this.buffer, $results);
         }
         _allFetched = true;
-        this.statement->closeCursor();
+        this.statement.closeCursor();
 
         return this.buffer;
     }

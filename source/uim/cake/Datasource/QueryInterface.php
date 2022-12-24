@@ -43,7 +43,7 @@ interface QueryInterface
     function select($fields, bool $overwrite = false);
 
     /**
-     * Returns a key => value array representing a single aliased field
+     * Returns a key: value array representing a single aliased field
      * that can be passed directly to the select() method.
      * The key will contain the alias and the value the actual field name.
      *
@@ -97,12 +97,12 @@ interface QueryInterface
      * ### Example:
      *
      * ```
-     * $query->applyOptions([
-     *   'fields' => ['id', 'name'],
-     *   'conditions' => [
-     *     'created >=' => '2013-01-01'
+     * $query.applyOptions([
+     *   'fields': ['id', 'name'],
+     *   'conditions': [
+     *     'created >=': '2013-01-01'
      *   ],
-     *   'limit' => 10
+     *   'limit': 10
      * ]);
      * ```
      *
@@ -110,9 +110,9 @@ interface QueryInterface
      *
      * ```
      *  $query
-     *  ->select(['id', 'name'])
-     *  ->where(['created >=' => '2013-01-01'])
-     *  ->limit(10)
+     *  .select(['id', 'name'])
+     *  .where(['created >=': '2013-01-01'])
+     *  .limit(10)
      * ```
      *
      * @param array<string, mixed> $options list of query clauses to apply new parts to.
@@ -126,7 +126,7 @@ interface QueryInterface
      * Allows custom find methods to be combined and applied to each other.
      *
      * ```
-     * $repository->find('all')->find('recent');
+     * $repository.find('all').find('recent');
      * ```
      *
      * The above is an example of stacking multiple finder methods onto
@@ -145,7 +145,7 @@ interface QueryInterface
      * ### Example:
      *
      * ```
-     * $singleUser = $query->select(['id', 'username'])->first();
+     * $singleUser = $query.select(['id', 'username']).first();
      * ```
      *
      * @return \Cake\Datasource\EntityInterface|array|null the first result from the ResultSet
@@ -168,8 +168,8 @@ interface QueryInterface
      * ### Examples
      *
      * ```
-     * $query->limit(10) // generates LIMIT 10
-     * $query->limit($query->newExpr()->add(['1 + 1'])); // LIMIT (1 + 1)
+     * $query.limit(10) // generates LIMIT 10
+     * $query.limit($query.newExpr().add(['1 + 1'])); // LIMIT (1 + 1)
      * ```
      *
      * @param \Cake\Database\IExpression|int|null $limit number of records to be returned
@@ -188,8 +188,8 @@ interface QueryInterface
      * ### Examples
      *
      * ```
-     *  $query->offset(10) // generates OFFSET 10
-     *  $query->offset($query->newExpr()->add(['1 + 1'])); // OFFSET (1 + 1)
+     *  $query.offset(10) // generates OFFSET 10
+     *  $query.offset($query.newExpr().add(['1 + 1'])); // OFFSET (1 + 1)
      * ```
      *
      * @param \Cake\Database\IExpression|int|null $offset number of records to be skipped
@@ -213,7 +213,7 @@ interface QueryInterface
      * ### Examples:
      *
      * ```
-     * $query->order(['title' => 'DESC', 'author_id' => 'ASC']);
+     * $query.order(['title': 'DESC', 'author_id': 'ASC']);
      * ```
      *
      * Produces:
@@ -222,8 +222,8 @@ interface QueryInterface
      *
      * ```
      * $query
-     *     ->order(['title' => $query->newExpr('DESC NULLS FIRST')])
-     *     ->order('author_id');
+     *     .order(['title': $query.newExpr('DESC NULLS FIRST')])
+     *     .order('author_id');
      * ```
      *
      * Will generate:
@@ -231,8 +231,8 @@ interface QueryInterface
      * `ORDER BY title DESC NULLS FIRST, author_id`
      *
      * ```
-     * $expression = $query->newExpr()->add(['id % 2 = 0']);
-     * $query->order($expression)->order(['title' => 'ASC']);
+     * $expression = $query.newExpr().add(['id % 2 = 0']);
+     * $query.order($expression).order(['title': 'ASC']);
      * ```
      *
      * Will become:
@@ -307,11 +307,11 @@ interface QueryInterface
      * ### Conditions using operators:
      *
      * ```
-     *  $query->where([
-     *      'posted >=' => new DateTime('3 days ago'),
-     *      'title LIKE' => 'Hello W%',
-     *      'author_id' => 1,
-     *  ], ['posted' => 'datetime']);
+     *  $query.where([
+     *      'posted >=': new DateTime('3 days ago'),
+     *      'title LIKE': 'Hello W%',
+     *      'author_id': 1,
+     *  ], ['posted': 'datetime']);
      * ```
      *
      * The previous example produces:
@@ -324,11 +324,11 @@ interface QueryInterface
      * ### Nesting conditions with conjunctions:
      *
      * ```
-     *  $query->where([
-     *      'author_id !=' => 1,
-     *      'OR' => ['published' => true, 'posted <' => new DateTime('now')],
-     *      'NOT' => ['title' => 'Hello']
-     *  ], ['published' => boolean, 'posted' => 'datetime']
+     *  $query.where([
+     *      'author_id !=': 1,
+     *      'OR': ['published': true, 'posted <': new DateTime('now')],
+     *      'NOT': ['title': 'Hello']
+     *  ], ['published': boolean, 'posted': 'datetime']
      * ```
      *
      * The previous example produces:
@@ -339,7 +339,7 @@ interface QueryInterface
      * may want to define 2 different options for the same key, in that case, you can
      * wrap each condition inside a new array:
      *
-     * `$query->where(['OR' => [['published' => false], ['published' => true]])`
+     * `$query.where(['OR': [['published': false], ['published': true]])`
      *
      * Keep in mind that every time you call where() with the third param set to false
      * (default), it will join the passed conditions to the previous stored list using
@@ -349,8 +349,8 @@ interface QueryInterface
      * ### Using expressions objects:
      *
      * ```
-     *  $exp = $query->newExpr()->add(['id !=' => 100, 'author_id' != 1])->tieWith('OR');
-     *  $query->where(['published' => true], ['published' => 'boolean'])->where($exp);
+     *  $exp = $query.newExpr().add(['id !=': 100, 'author_id' != 1]).tieWith('OR');
+     *  $query.where(['published': true], ['published': 'boolean']).where($exp);
      * ```
      *
      * The previous example produces:
@@ -368,11 +368,11 @@ interface QueryInterface
      *
      * ```
      *  $query
-     *  ->where(['title !=' => 'Hello World'])
-     *  ->where(function ($exp, $query) {
-     *      $or = $exp->or(['id' => 1]);
-     *      $and = $exp->and(['id >' => 2, 'id <' => 10]);
-     *  return $or->add($and);
+     *  .where(['title !=': 'Hello World'])
+     *  .where(function ($exp, $query) {
+     *      $or = $exp.or(['id': 1]);
+     *      $and = $exp.and(['id >': 2, 'id <': 10]);
+     *  return $or.add($and);
      *  });
      * ```
      *
@@ -383,7 +383,7 @@ interface QueryInterface
      * ### Conditions as strings:
      *
      * ```
-     *  $query->where(['articles.author_id = authors.id', 'modified IS NULL']);
+     *  $query.where(['articles.author_id = authors.id', 'modified IS NULL']);
      * ```
      *
      * The previous example produces:

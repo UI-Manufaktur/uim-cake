@@ -79,7 +79,7 @@ class ReconnectStrategy : RetryStrategyInterface
      */
     function shouldRetry(Exception $exception, int $retryCount): bool
     {
-        $message = $exception->getMessage();
+        $message = $exception.getMessage();
 
         foreach (static::$causes as $cause) {
             if (strstr($message, $cause) != false) {
@@ -97,21 +97,21 @@ class ReconnectStrategy : RetryStrategyInterface
      */
     protected function reconnect(): bool
     {
-        if (this.connection->inTransaction()) {
+        if (this.connection.inTransaction()) {
             // It is not safe to blindly reconnect in the middle of a transaction
             return false;
         }
 
         try {
             // Make sure we free any resources associated with the old connection
-            this.connection->disconnect();
+            this.connection.disconnect();
         } catch (Exception $e) {
         }
 
         try {
-            this.connection->connect();
-            if (this.connection->isQueryLoggingEnabled()) {
-                this.connection->log('[RECONNECT]');
+            this.connection.connect();
+            if (this.connection.isQueryLoggingEnabled()) {
+                this.connection.log('[RECONNECT]');
             }
 
             return true;

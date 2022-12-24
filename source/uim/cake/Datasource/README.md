@@ -45,15 +45,15 @@ easy:
 use Cake\Datasource\ConnectionManager;
 
 ConnectionManager::config('connection-one', [
-    'className' => 'MyApp\Connections\CustomConnection',
-    'param1' => 'value',
-    'param2' => 'another value'
+    'className': 'MyApp\Connections\CustomConnection',
+    'param1': 'value',
+    'param2': 'another value'
 ]);
 
 ConnectionManager::config('connection-two', [
-    'className' => 'MyApp\Connections\CustomConnection',
-    'param1' => 'different value',
-    'param2' => 'another value'
+    'className': 'MyApp\Connections\CustomConnection',
+    'param1': 'different value',
+    'param2': 'another value'
 ]);
 ```
 

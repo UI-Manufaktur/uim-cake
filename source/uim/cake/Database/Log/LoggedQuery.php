@@ -98,9 +98,9 @@ class LoggedQuery : JsonSerializable
                 }
 
                 $replacements = [
-                    '$' => '\\$',
-                    '\\' => '\\\\\\\\',
-                    "'" => "''",
+                    '$': '\\$',
+                    '\\': '\\\\\\\\',
+                    "'": "''",
                 ];
 
                 $p = strtr($p, $replacements);
@@ -113,7 +113,7 @@ class LoggedQuery : JsonSerializable
 
         $keys = [];
         $limit = is_int(key($params)) ? 1 : -1;
-        foreach ($params as $key => $param) {
+        foreach ($params as $key: $param) {
             $keys[] = is_string($key) ? "/:$key\b/" : '/[?]/';
         }
 
@@ -128,8 +128,8 @@ class LoggedQuery : JsonSerializable
     function getContext(): array
     {
         return [
-            'numRows' => this.numRows,
-            'took' => this.took,
+            'numRows': this.numRows,
+            'took': this.took,
         ];
     }
 
@@ -143,18 +143,18 @@ class LoggedQuery : JsonSerializable
         $error = this.error;
         if ($error != null) {
             $error = [
-                'class' => get_class($error),
-                'message' => $error->getMessage(),
-                'code' => $error->getCode(),
+                'class': get_class($error),
+                'message': $error.getMessage(),
+                'code': $error.getCode(),
             ];
         }
 
         return [
-            'query' => this.query,
-            'numRows' => this.numRows,
-            'params' => this.params,
-            'took' => this.took,
-            'error' => $error,
+            'query': this.query,
+            'numRows': this.numRows,
+            'params': this.params,
+            'took': this.took,
+            'error': $error,
         ];
     }
 

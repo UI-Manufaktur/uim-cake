@@ -55,8 +55,8 @@ class ConnectionRegistry : ObjectRegistry
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingDatasourceException([
-            'class' => $class,
-            'plugin' => $plugin,
+            'class': $class,
+            'plugin': $plugin,
         ]);
     }
 

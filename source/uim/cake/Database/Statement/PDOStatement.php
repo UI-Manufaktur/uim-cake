@@ -54,9 +54,9 @@ class PDOStatement : StatementDecorator
      */
     function __get(string $property)
     {
-        if ($property == 'queryString' && isset(_statement->queryString)) {
+        if ($property == 'queryString' && isset(_statement.queryString)) {
             /** @psalm-suppress NoInterfaceProperties */
-            return _statement->queryString;
+            return _statement.queryString;
         }
 
         return null;
@@ -76,10 +76,10 @@ class PDOStatement : StatementDecorator
      * ### Examples:
      *
      * ```
-     * $statement->bindValue(1, 'a title');
-     * $statement->bindValue(2, 5, PDO::INT);
-     * $statement->bindValue('active', true, 'boolean');
-     * $statement->bindValue(5, new \DateTime(), 'date');
+     * $statement.bindValue(1, 'a title');
+     * $statement.bindValue(2, 5, PDO::INT);
+     * $statement.bindValue('active', true, 'boolean');
+     * $statement.bindValue(5, new \DateTime(), 'date');
      * ```
      *
      * @param string|int $column name or param position to be bound
@@ -95,7 +95,7 @@ class PDOStatement : StatementDecorator
         if (!is_int($type)) {
             [$value, $type] = this.cast($value, $type);
         }
-        _statement->bindValue($column, $value, $type);
+        _statement.bindValue($column, $value, $type);
     }
 
     /**
@@ -106,9 +106,9 @@ class PDOStatement : StatementDecorator
      * ### Example:
      *
      * ```
-     *  $statement = $connection->prepare('SELECT id, title from articles');
-     *  $statement->execute();
-     *  print_r($statement->fetch('assoc')); // will show ['id' => 1, 'title' => 'a title']
+     *  $statement = $connection.prepare('SELECT id, title from articles');
+     *  $statement.execute();
+     *  print_r($statement.fetch('assoc')); // will show ['id': 1, 'title': 'a title']
      * ```
      *
      * @param string|int $type 'num' for positional columns, assoc for named columns
@@ -118,13 +118,13 @@ class PDOStatement : StatementDecorator
     function fetch($type = parent::FETCH_TYPE_NUM)
     {
         if ($type == static::FETCH_TYPE_NUM) {
-            return _statement->fetch(PDO::FETCH_NUM);
+            return _statement.fetch(PDO::FETCH_NUM);
         }
         if ($type == static::FETCH_TYPE_ASSOC) {
-            return _statement->fetch(PDO::FETCH_ASSOC);
+            return _statement.fetch(PDO::FETCH_ASSOC);
         }
         if ($type == static::FETCH_TYPE_OBJ) {
-            return _statement->fetch(PDO::FETCH_OBJ);
+            return _statement.fetch(PDO::FETCH_OBJ);
         }
 
         if (!is_int($type)) {
@@ -134,7 +134,7 @@ class PDOStatement : StatementDecorator
             ));
         }
 
-        return _statement->fetch($type);
+        return _statement.fetch($type);
     }
 
     /**
@@ -143,9 +143,9 @@ class PDOStatement : StatementDecorator
      * ### Example:
      *
      * ```
-     *  $statement = $connection->prepare('SELECT id, title from articles');
-     *  $statement->execute();
-     *  print_r($statement->fetchAll('assoc')); // will show [0 => ['id' => 1, 'title' => 'a title']]
+     *  $statement = $connection.prepare('SELECT id, title from articles');
+     *  $statement.execute();
+     *  print_r($statement.fetchAll('assoc')); // will show [0: ['id': 1, 'title': 'a title']]
      * ```
      *
      * @param string|int $type num for fetching columns as positional keys or assoc for column names as keys
@@ -155,13 +155,13 @@ class PDOStatement : StatementDecorator
     function fetchAll($type = parent::FETCH_TYPE_NUM)
     {
         if ($type == static::FETCH_TYPE_NUM) {
-            return _statement->fetchAll(PDO::FETCH_NUM);
+            return _statement.fetchAll(PDO::FETCH_NUM);
         }
         if ($type == static::FETCH_TYPE_ASSOC) {
-            return _statement->fetchAll(PDO::FETCH_ASSOC);
+            return _statement.fetchAll(PDO::FETCH_ASSOC);
         }
         if ($type == static::FETCH_TYPE_OBJ) {
-            return _statement->fetchAll(PDO::FETCH_OBJ);
+            return _statement.fetchAll(PDO::FETCH_OBJ);
         }
 
         if (!is_int($type)) {
@@ -171,6 +171,6 @@ class PDOStatement : StatementDecorator
             ));
         }
 
-        return _statement->fetchAll($type);
+        return _statement.fetchAll($type);
     }
 }

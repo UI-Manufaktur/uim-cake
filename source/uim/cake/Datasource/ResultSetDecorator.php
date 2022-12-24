@@ -38,7 +38,7 @@ class ResultSetDecorator : Collection : ResultSetInterface
     {
         $iterator = this.getInnerIterator();
         if ($iterator instanceof Countable) {
-            return $iterator->count();
+            return $iterator.count();
         }
 
         return count(this.toArray());

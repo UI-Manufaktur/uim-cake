@@ -58,7 +58,7 @@ class CallbackStatement : StatementDecorator
     function fetch($type = parent::FETCH_TYPE_NUM)
     {
         $callback = _callback;
-        $row = _statement->fetch($type);
+        $row = _statement.fetch($type);
 
         return $row == false ? $row : $callback($row);
     }
@@ -70,7 +70,7 @@ class CallbackStatement : StatementDecorator
      */
     function fetchAll($type = parent::FETCH_TYPE_NUM)
     {
-        $results = _statement->fetchAll($type);
+        $results = _statement.fetchAll($type);
 
         return $results != false ? array_map(_callback, $results) : false;
     }

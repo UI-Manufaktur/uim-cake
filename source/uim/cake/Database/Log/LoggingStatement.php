@@ -68,16 +68,16 @@ class LoggingStatement : StatementDecorator
         this.startTime = microtime(true);
 
         this.loggedQuery = new LoggedQuery();
-        this.loggedQuery->driver = _driver;
-        this.loggedQuery->params = $params ?: _compiledParams;
+        this.loggedQuery.driver = _driver;
+        this.loggedQuery.params = $params ?: _compiledParams;
 
         try {
             $result = parent::execute($params);
-            this.loggedQuery->took = (int)round((microtime(true) - this.startTime) * 1000, 0);
+            this.loggedQuery.took = (int)round((microtime(true) - this.startTime) * 1000, 0);
         } catch (Exception $e) {
             /** @psalm-suppress UndefinedPropertyAssignment */
-            $e->queryString = this.queryString;
-            this.loggedQuery->error = $e;
+            $e.queryString = this.queryString;
+            this.loggedQuery.error = $e;
             _log();
             throw $e;
         }
@@ -125,7 +125,7 @@ class LoggingStatement : StatementDecorator
         $result = parent::rowCount();
 
         if (this.loggedQuery) {
-            this.loggedQuery->numRows = $result;
+            this.loggedQuery.numRows = $result;
             _log();
         }
 
@@ -144,8 +144,8 @@ class LoggingStatement : StatementDecorator
             return;
         }
 
-        this.loggedQuery->query = this.queryString;
-        this.getLogger()->debug((string)this.loggedQuery, ['query' => this.loggedQuery]);
+        this.loggedQuery.query = this.queryString;
+        this.getLogger().debug((string)this.loggedQuery, ['query': this.loggedQuery]);
 
         this.loggedQuery = null;
     }

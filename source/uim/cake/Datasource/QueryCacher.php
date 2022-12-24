@@ -76,7 +76,7 @@ class QueryCacher
     {
         $key = _resolveKey($query);
         $storage = _resolveCacher();
-        $result = $storage->get($key);
+        $result = $storage.get($key);
         if (empty($result)) {
             return null;
         }
@@ -96,7 +96,7 @@ class QueryCacher
         $key = _resolveKey($query);
         $storage = _resolveCacher();
 
-        return $storage->set($key, $results);
+        return $storage.set($key, $results);
     }
 
     /**

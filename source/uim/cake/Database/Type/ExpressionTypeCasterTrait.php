@@ -53,7 +53,7 @@ trait ExpressionTypeCasterTrait
             return array_map([$converter, 'toExpression'], $value);
         }
 
-        return $converter->toExpression($value);
+        return $converter.toExpression($value);
     }
 
     /**
@@ -68,7 +68,7 @@ trait ExpressionTypeCasterTrait
     {
         $result = [];
         $types = array_filter($types);
-        foreach ($types as $k => $type) {
+        foreach ($types as $k: $type) {
             $object = TypeFactory::build($type);
             if ($object instanceof ExpressionTypeInterface) {
                 $result[$k] = $object;

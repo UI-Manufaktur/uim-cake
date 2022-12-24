@@ -41,7 +41,7 @@ class StringType : BaseType : OptionalConvertInterface
         }
 
         if (is_object($value) && method_exists($value, '__toString')) {
-            return $value->__toString();
+            return $value.__toString();
         }
 
         if (is_scalar($value)) {

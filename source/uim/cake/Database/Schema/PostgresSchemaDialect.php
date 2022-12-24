@@ -120,66 +120,66 @@ class PostgresSchemaDialect : SchemaDialect
         }
 
         if (in_array($col, ['date', 'time', 'boolean'], true)) {
-            return ['type' => $col, 'length' => null];
+            return ['type': $col, 'length': null];
         }
         if (in_array($col, ['timestamptz', 'timestamp with time zone'], true)) {
-            return ['type' => TableSchema::TYPE_TIMESTAMP_TIMEZONE, 'length' => null];
+            return ['type': TableSchema::TYPE_TIMESTAMP_TIMEZONE, 'length': null];
         }
         if (strpos($col, 'timestamp') != false) {
-            return ['type' => TableSchema::TYPE_TIMESTAMP_FRACTIONAL, 'length' => null];
+            return ['type': TableSchema::TYPE_TIMESTAMP_FRACTIONAL, 'length': null];
         }
         if (strpos($col, 'time') != false) {
-            return ['type' => TableSchema::TYPE_TIME, 'length' => null];
+            return ['type': TableSchema::TYPE_TIME, 'length': null];
         }
         if ($col == 'serial' || $col == 'integer') {
-            return ['type' => TableSchema::TYPE_INTEGER, 'length' => 10];
+            return ['type': TableSchema::TYPE_INTEGER, 'length': 10];
         }
         if ($col == 'bigserial' || $col == 'bigint') {
-            return ['type' => TableSchema::TYPE_BIGINTEGER, 'length' => 20];
+            return ['type': TableSchema::TYPE_BIGINTEGER, 'length': 20];
         }
         if ($col == 'smallint') {
-            return ['type' => TableSchema::TYPE_SMALLINTEGER, 'length' => 5];
+            return ['type': TableSchema::TYPE_SMALLINTEGER, 'length': 5];
         }
         if ($col == 'inet') {
-            return ['type' => TableSchema::TYPE_STRING, 'length' => 39];
+            return ['type': TableSchema::TYPE_STRING, 'length': 39];
         }
         if ($col == 'uuid') {
-            return ['type' => TableSchema::TYPE_UUID, 'length' => null];
+            return ['type': TableSchema::TYPE_UUID, 'length': null];
         }
         if ($col == 'char') {
-            return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
+            return ['type': TableSchema::TYPE_CHAR, 'length': $length];
         }
         if (strpos($col, 'character') != false) {
-            return ['type' => TableSchema::TYPE_STRING, 'length' => $length];
+            return ['type': TableSchema::TYPE_STRING, 'length': $length];
         }
         // money is 'string' as it includes arbitrary text content
         // before the number value.
         if (strpos($col, 'money') != false || $col == 'string') {
-            return ['type' => TableSchema::TYPE_STRING, 'length' => $length];
+            return ['type': TableSchema::TYPE_STRING, 'length': $length];
         }
         if (strpos($col, 'text') != false) {
-            return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
+            return ['type': TableSchema::TYPE_TEXT, 'length': null];
         }
         if ($col == 'bytea') {
-            return ['type' => TableSchema::TYPE_BINARY, 'length' => null];
+            return ['type': TableSchema::TYPE_BINARY, 'length': null];
         }
         if ($col == 'real' || strpos($col, 'double') != false) {
-            return ['type' => TableSchema::TYPE_FLOAT, 'length' => null];
+            return ['type': TableSchema::TYPE_FLOAT, 'length': null];
         }
         if (
             strpos($col, 'numeric') != false ||
             strpos($col, 'decimal') != false
         ) {
-            return ['type' => TableSchema::TYPE_DECIMAL, 'length' => null];
+            return ['type': TableSchema::TYPE_DECIMAL, 'length': null];
         }
 
         if (strpos($col, 'json') != false) {
-            return ['type' => TableSchema::TYPE_JSON, 'length' => null];
+            return ['type': TableSchema::TYPE_JSON, 'length': null];
         }
 
         $length = is_numeric($length) ? $length : null;
 
-        return ['type' => TableSchema::TYPE_STRING, 'length' => $length];
+        return ['type': TableSchema::TYPE_STRING, 'length': $length];
     }
 
     /**
@@ -202,10 +202,10 @@ class PostgresSchemaDialect : SchemaDialect
         }
 
         $field += [
-            'default' => _defaultValue($row['default']),
-            'null' => $row['null'] == 'YES',
-            'collate' => $row['collation_name'],
-            'comment' => $row['comment'],
+            'default': _defaultValue($row['default']),
+            'null': $row['null'] == 'YES',
+            'collate': $row['collation_name'],
+            'comment': $row['comment'],
         ];
         $field['length'] = $row['char_length'] ?: $field['length'];
 
@@ -225,7 +225,7 @@ class PostgresSchemaDialect : SchemaDialect
             $field['precision'] = $row['datetime_precision'];
         }
 
-        $schema->addColumn($row['name'], $field);
+        $schema.addColumn($row['name'], $field);
     }
 
     /**
@@ -305,15 +305,15 @@ class PostgresSchemaDialect : SchemaDialect
 
             return;
         }
-        $index = $schema->getIndex($name);
+        $index = $schema.getIndex($name);
         if (!$index) {
             $index = [
-                'type' => $type,
-                'columns' => [],
+                'type': $type,
+                'columns': [],
             ];
         }
         $index['columns'][] = $row['attname'];
-        $schema->addIndex($name, $index);
+        $schema.addIndex($name, $index);
     }
 
     /**
@@ -327,15 +327,15 @@ class PostgresSchemaDialect : SchemaDialect
      */
     protected function _convertConstraint(TableSchema $schema, string $name, string $type, array $row): void
     {
-        $constraint = $schema->getConstraint($name);
+        $constraint = $schema.getConstraint($name);
         if (!$constraint) {
             $constraint = [
-                'type' => $type,
-                'columns' => [],
+                'type': $type,
+                'columns': [],
             ];
         }
         $constraint['columns'][] = $row['attname'];
-        $schema->addConstraint($name, $constraint);
+        $schema.addConstraint($name, $constraint);
     }
 
     /**
@@ -374,13 +374,13 @@ class PostgresSchemaDialect : SchemaDialect
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         $data = [
-            'type' => TableSchema::CONSTRAINT_FOREIGN,
-            'columns' => $row['column_name'],
-            'references' => [$row['references_table'], $row['references_field']],
-            'update' => _convertOnClause($row['on_update']),
-            'delete' => _convertOnClause($row['on_delete']),
+            'type': TableSchema::CONSTRAINT_FOREIGN,
+            'columns': $row['column_name'],
+            'references': [$row['references_table'], $row['references_field']],
+            'update': _convertOnClause($row['on_update']),
+            'delete': _convertOnClause($row['on_delete']),
         ];
-        $schema->addConstraint($row['name'], $data);
+        $schema.addConstraint($row['name'], $data);
     }
 
     /**
@@ -407,31 +407,31 @@ class PostgresSchemaDialect : SchemaDialect
     function columnSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
-        $data = $schema->getColumn($name);
+        $data = $schema.getColumn($name);
 
         $sql = _getTypeSpecificColumnSql($data['type'], $schema, $name);
         if ($sql != null) {
             return $sql;
         }
 
-        $out = _driver->quoteIdentifier($name);
+        $out = _driver.quoteIdentifier($name);
         $typeMap = [
-            TableSchema::TYPE_TINYINTEGER => ' SMALLINT',
-            TableSchema::TYPE_SMALLINTEGER => ' SMALLINT',
-            TableSchema::TYPE_BINARY_UUID => ' UUID',
-            TableSchema::TYPE_BOOLEAN => ' BOOLEAN',
-            TableSchema::TYPE_FLOAT => ' FLOAT',
-            TableSchema::TYPE_DECIMAL => ' DECIMAL',
-            TableSchema::TYPE_DATE => ' DATE',
-            TableSchema::TYPE_TIME => ' TIME',
-            TableSchema::TYPE_DATETIME => ' TIMESTAMP',
-            TableSchema::TYPE_DATETIME_FRACTIONAL => ' TIMESTAMP',
-            TableSchema::TYPE_TIMESTAMP => ' TIMESTAMP',
-            TableSchema::TYPE_TIMESTAMP_FRACTIONAL => ' TIMESTAMP',
-            TableSchema::TYPE_TIMESTAMP_TIMEZONE => ' TIMESTAMPTZ',
-            TableSchema::TYPE_UUID => ' UUID',
-            TableSchema::TYPE_CHAR => ' CHAR',
-            TableSchema::TYPE_JSON => ' JSONB',
+            TableSchema::TYPE_TINYINTEGER: ' SMALLINT',
+            TableSchema::TYPE_SMALLINTEGER: ' SMALLINT',
+            TableSchema::TYPE_BINARY_UUID: ' UUID',
+            TableSchema::TYPE_BOOLEAN: ' BOOLEAN',
+            TableSchema::TYPE_FLOAT: ' FLOAT',
+            TableSchema::TYPE_DECIMAL: ' DECIMAL',
+            TableSchema::TYPE_DATE: ' DATE',
+            TableSchema::TYPE_TIME: ' TIME',
+            TableSchema::TYPE_DATETIME: ' TIMESTAMP',
+            TableSchema::TYPE_DATETIME_FRACTIONAL: ' TIMESTAMP',
+            TableSchema::TYPE_TIMESTAMP: ' TIMESTAMP',
+            TableSchema::TYPE_TIMESTAMP_FRACTIONAL: ' TIMESTAMP',
+            TableSchema::TYPE_TIMESTAMP_TIMEZONE: ' TIMESTAMPTZ',
+            TableSchema::TYPE_UUID: ' UUID',
+            TableSchema::TYPE_CHAR: ' CHAR',
+            TableSchema::TYPE_JSON: ' JSONB',
         ];
 
         if (isset($typeMap[$data['type']])) {
@@ -440,7 +440,7 @@ class PostgresSchemaDialect : SchemaDialect
 
         if ($data['type'] == TableSchema::TYPE_INTEGER || $data['type'] == TableSchema::TYPE_BIGINTEGER) {
             $type = $data['type'] == TableSchema::TYPE_INTEGER ? ' INTEGER' : ' BIGINT';
-            if ($schema->getPrimaryKey() == [$name] || $data['autoIncrement'] == true) {
+            if ($schema.getPrimaryKey() == [$name] || $data['autoIncrement'] == true) {
                 $type = $data['type'] == TableSchema::TYPE_INTEGER ? ' SERIAL' : ' BIGSERIAL';
                 unset($data['null'], $data['default']);
             }
@@ -520,7 +520,7 @@ class PostgresSchemaDialect : SchemaDialect
             if ($data['type'] == 'boolean') {
                 $defaultValue = (bool)$defaultValue;
             }
-            $out .= ' DEFAULT ' . _driver->schemaValue($defaultValue);
+            $out .= ' DEFAULT ' . _driver.schemaValue($defaultValue);
         } elseif (isset($data['null']) && $data['null'] != false) {
             $out .= ' DEFAULT NULL';
         }
@@ -536,11 +536,11 @@ class PostgresSchemaDialect : SchemaDialect
         $sqlPattern = 'ALTER TABLE %s ADD %s;';
         $sql = [];
 
-        foreach ($schema->constraints() as $name) {
+        foreach ($schema.constraints() as $name) {
             /** @var array $constraint */
-            $constraint = $schema->getConstraint($name);
+            $constraint = $schema.getConstraint($name);
             if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
-                $tableName = _driver->quoteIdentifier($schema->name());
+                $tableName = _driver.quoteIdentifier($schema.name());
                 $sql[] = sprintf($sqlPattern, $tableName, this.constraintSql($schema, $name));
             }
         }
@@ -556,12 +556,12 @@ class PostgresSchemaDialect : SchemaDialect
         $sqlPattern = 'ALTER TABLE %s DROP CONSTRAINT %s;';
         $sql = [];
 
-        foreach ($schema->constraints() as $name) {
+        foreach ($schema.constraints() as $name) {
             /** @var array $constraint */
-            $constraint = $schema->getConstraint($name);
+            $constraint = $schema.getConstraint($name);
             if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
-                $tableName = _driver->quoteIdentifier($schema->name());
-                $constraintName = _driver->quoteIdentifier($name);
+                $tableName = _driver.quoteIdentifier($schema.name());
+                $constraintName = _driver.quoteIdentifier($name);
                 $sql[] = sprintf($sqlPattern, $tableName, $constraintName);
             }
         }
@@ -575,7 +575,7 @@ class PostgresSchemaDialect : SchemaDialect
     function indexSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
-        $data = $schema->getIndex($name);
+        $data = $schema.getIndex($name);
         $columns = array_map(
             [_driver, 'quoteIdentifier'],
             $data['columns']
@@ -583,8 +583,8 @@ class PostgresSchemaDialect : SchemaDialect
 
         return sprintf(
             'CREATE INDEX %s ON %s (%s)',
-            _driver->quoteIdentifier($name),
-            _driver->quoteIdentifier($schema->name()),
+            _driver.quoteIdentifier($name),
+            _driver.quoteIdentifier($schema.name()),
             implode(', ', $columns)
         );
     }
@@ -595,8 +595,8 @@ class PostgresSchemaDialect : SchemaDialect
     function constraintSql(TableSchema $schema, string $name): string
     {
         /** @var array<string, mixed> $data */
-        $data = $schema->getConstraint($name);
-        $out = 'CONSTRAINT ' . _driver->quoteIdentifier($name);
+        $data = $schema.getConstraint($name);
+        $out = 'CONSTRAINT ' . _driver.quoteIdentifier($name);
         if ($data['type'] == TableSchema::CONSTRAINT_PRIMARY) {
             $out = 'PRIMARY KEY';
         }
@@ -624,7 +624,7 @@ class PostgresSchemaDialect : SchemaDialect
             return $prefix . sprintf(
                 ' FOREIGN KEY (%s) REFERENCES %s (%s) ON UPDATE %s ON DELETE %s DEFERRABLE INITIALLY IMMEDIATE',
                 implode(', ', $columns),
-                _driver->quoteIdentifier($data['references'][0]),
+                _driver.quoteIdentifier($data['references'][0]),
                 _convertConstraintColumns($data['references'][1]),
                 _foreignOnClause($data['update']),
                 _foreignOnClause($data['delete'])
@@ -641,21 +641,21 @@ class PostgresSchemaDialect : SchemaDialect
     {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
-        $tableName = _driver->quoteIdentifier($schema->name());
-        $temporary = $schema->isTemporary() ? ' TEMPORARY ' : ' ';
+        $tableName = _driver.quoteIdentifier($schema.name());
+        $temporary = $schema.isTemporary() ? ' TEMPORARY ' : ' ';
         $out = [];
         $out[] = sprintf("CREATE%sTABLE %s (\n%s\n)", $temporary, $tableName, $content);
         foreach ($indexes as $index) {
             $out[] = $index;
         }
-        foreach ($schema->columns() as $column) {
-            $columnData = $schema->getColumn($column);
+        foreach ($schema.columns() as $column) {
+            $columnData = $schema.getColumn($column);
             if (isset($columnData['comment'])) {
                 $out[] = sprintf(
                     'COMMENT ON COLUMN %s.%s IS %s',
                     $tableName,
-                    _driver->quoteIdentifier($column),
-                    _driver->schemaValue($columnData['comment'])
+                    _driver.quoteIdentifier($column),
+                    _driver.schemaValue($columnData['comment'])
                 );
             }
         }
@@ -668,7 +668,7 @@ class PostgresSchemaDialect : SchemaDialect
      */
     function truncateTableSql(TableSchema $schema): array
     {
-        $name = _driver->quoteIdentifier($schema->name());
+        $name = _driver.quoteIdentifier($schema.name());
 
         return [
             sprintf('TRUNCATE %s RESTART IDENTITY CASCADE', $name),
@@ -685,7 +685,7 @@ class PostgresSchemaDialect : SchemaDialect
     {
         $sql = sprintf(
             'DROP TABLE %s CASCADE',
-            _driver->quoteIdentifier($schema->name())
+            _driver.quoteIdentifier($schema.name())
         );
 
         return [$sql];

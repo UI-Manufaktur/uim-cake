@@ -54,8 +54,8 @@ class ErrorCodeWaitStrategy : RetryStrategyInterface
     {
         if (
             $exception instanceof PDOException &&
-            $exception->errorInfo &&
-            in_array($exception->errorInfo[1], this.errorCodes)
+            $exception.errorInfo &&
+            in_array($exception.errorInfo[1], this.errorCodes)
         ) {
             if (this.retryInterval > 0) {
                 sleep(this.retryInterval);

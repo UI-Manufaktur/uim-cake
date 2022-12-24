@@ -90,8 +90,8 @@ interface ConnectionInterface : LoggerAwareInterface
      * ### Example:
      *
      * ```
-     * $connection->transactional(function ($connection) {
-     *   $connection->newQuery()->delete('users')->execute();
+     * $connection.transactional(function ($connection) {
+     *   $connection.newQuery().delete('users').execute();
      * });
      * ```
      *
@@ -110,8 +110,8 @@ interface ConnectionInterface : LoggerAwareInterface
      * ### Example:
      *
      * ```
-     * $connection->disableConstraints(function ($connection) {
-     *   $connection->newQuery()->delete('users')->execute();
+     * $connection.disableConstraints(function ($connection) {
+     *   $connection.newQuery().delete('users').execute();
      * });
      * ```
      *

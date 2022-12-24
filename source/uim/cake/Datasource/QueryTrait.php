@@ -156,20 +156,20 @@ trait QueryTrait
      *
      * ```
      * // Simple string key + config
-     * $query->cache('my_key', 'db_results');
+     * $query.cache('my_key', 'db_results');
      *
      * // Function to generate key.
-     * $query->cache(function ($q) {
-     *   $key = serialize($q->clause('select'));
-     *   $key .= serialize($q->clause('where'));
+     * $query.cache(function ($q) {
+     *   $key = serialize($q.clause('select'));
+     *   $key .= serialize($q.clause('where'));
      *   return md5($key);
      * });
      *
      * // Using a pre-built cache engine.
-     * $query->cache('my_key', $engine);
+     * $query.cache('my_key', $engine);
      *
      * // Disable caching
-     * $query->cache(false);
+     * $query.cache(false);
      * ```
      *
      * @param \Closure|string|false $key Either the cache key or a function to generate the cache key.
@@ -215,7 +215,7 @@ trait QueryTrait
     }
 
     /**
-     * Returns a key => value array representing a single aliased field
+     * Returns a key: value array representing a single aliased field
      * that can be passed directly to the select() method.
      * The key will contain the alias and the value the actual field name.
      *
@@ -229,7 +229,7 @@ trait QueryTrait
     function aliasField(string $field, ?string $alias = null): array
     {
         if (strpos($field, '.') == false) {
-            $alias = $alias ?: this.getRepository()->getAlias();
+            $alias = $alias ?: this.getRepository().getAlias();
             $aliasedField = $alias . '.' . $field;
         } else {
             $aliasedField = $field;
@@ -238,7 +238,7 @@ trait QueryTrait
 
         $key = sprintf('%s__%s', $alias, $field);
 
-        return [$key => $aliasedField];
+        return [$key: $aliasedField];
     }
 
     /**
@@ -252,7 +252,7 @@ trait QueryTrait
     function aliasFields(array $fields, ?string $defaultAlias = null): array
     {
         $aliased = [];
-        foreach ($fields as $alias => $field) {
+        foreach ($fields as $alias: $field) {
             if (is_numeric($alias) && is_string($field)) {
                 $aliased += this.aliasField($field, $defaultAlias);
                 continue;
@@ -282,12 +282,12 @@ trait QueryTrait
 
         $results = null;
         if (_cache) {
-            $results = _cache->fetch(this);
+            $results = _cache.fetch(this);
         }
         if ($results == null) {
             $results = _decorateResults(_execute());
             if (_cache) {
-                _cache->store(this, $results);
+                _cache.store(this, $results);
             }
         }
         _results = $results;
@@ -302,7 +302,7 @@ trait QueryTrait
      */
     function toArray(): array
     {
-        return this.all()->toArray();
+        return this.all().toArray();
     }
 
     /**
@@ -375,17 +375,17 @@ trait QueryTrait
      * Return all results from the table indexed by id:
      *
      * ```
-     * $query->select(['id', 'name'])->formatResults(function ($results) {
-     *     return $results->indexBy('id');
+     * $query.select(['id', 'name']).formatResults(function ($results) {
+     *     return $results.indexBy('id');
      * });
      * ```
      *
      * Add a new column to the ResultSet:
      *
      * ```
-     * $query->select(['name', 'birth_date'])->formatResults(function ($results) {
-     *     return $results->map(function ($row) {
-     *         $row['age'] = $row['birth_date']->diff(new DateTime)->y;
+     * $query.select(['name', 'birth_date']).formatResults(function ($results) {
+     *     return $results.map(function ($row) {
+     *         $row['age'] = $row['birth_date'].diff(new DateTime).y;
      *
      *         return $row;
      *     });
@@ -395,13 +395,13 @@ trait QueryTrait
      * Add a new column to the results with respect to the query's hydration configuration:
      *
      * ```
-     * $query->formatResults(function ($results, $query) {
-     *     return $results->map(function ($row) use ($query) {
+     * $query.formatResults(function ($results, $query) {
+     *     return $results.map(function ($row) use ($query) {
      *         $data = [
-     *             'bar' => 'baz',
+     *             'bar': 'baz',
      *         ];
      *
-     *         if ($query->isHydrationEnabled()) {
+     *         if ($query.isHydrationEnabled()) {
      *             $row['foo'] = new Foo($data)
      *         } else {
      *             $row['foo'] = $data;
@@ -418,8 +418,8 @@ trait QueryTrait
      * ```
      * // Assuming a `Articles belongsTo Authors` association that uses the join strategy
      *
-     * $articlesQuery->contain('Authors', function ($authorsQuery) {
-     *     return $authorsQuery->formatResults(function ($results, $query) use ($authorsQuery) {
+     * $articlesQuery.contain('Authors', function ($authorsQuery) {
+     *     return $authorsQuery.formatResults(function ($results, $query) use ($authorsQuery) {
      *         // Here `$authorsQuery` will always be the instance
      *         // where the callback was attached to.
      *
@@ -481,7 +481,7 @@ trait QueryTrait
      * ### Example:
      *
      * ```
-     * $singleUser = $query->select(['id', 'username'])->first();
+     * $singleUser = $query.select(['id', 'username']).first();
      * ```
      *
      * @return \Cake\Datasource\EntityInterface|array|null The first result from the ResultSet.
@@ -492,7 +492,7 @@ trait QueryTrait
             this.limit(1);
         }
 
-        return this.all()->first();
+        return this.all().first();
     }
 
     /**
@@ -508,7 +508,7 @@ trait QueryTrait
             $table = this.getRepository();
             throw new RecordNotFoundException(sprintf(
                 'Record not found in table "%s"',
-                $table->getTable()
+                $table.getTable()
             ));
         }
 
@@ -522,8 +522,8 @@ trait QueryTrait
      * ### Example:
      *
      * ```
-     *  $query->applyOptions(['doABarrelRoll' => true, 'fields' => ['id', 'name']);
-     *  $query->getOptions(); // Returns ['doABarrelRoll' => true]
+     *  $query.applyOptions(['doABarrelRoll': true, 'fields': ['id', 'name']);
+     *  $query.getOptions(); // Returns ['doABarrelRoll': true]
      * ```
      *
      * @see \Cake\Datasource\QueryInterface::applyOptions() to read about the options that will
@@ -550,14 +550,14 @@ trait QueryTrait
         if (in_array($method, get_class_methods($resultSetClass), true)) {
             deprecationWarning(sprintf(
                 'Calling `%s` methods, such as `%s()`, on queries is deprecated. ' .
-                'You must call `all()` first (for example, `all()->%s()`).',
+                'You must call `all()` first (for example, `all().%s()`).',
                 ResultSetInterface::class,
                 $method,
                 $method,
             ), 2);
             $results = this.all();
 
-            return $results->$method(...$arguments);
+            return $results.$method(...$arguments);
         }
         throw new BadMethodCallException(
             sprintf('Unknown method "%s"', $method)

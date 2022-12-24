@@ -124,16 +124,16 @@ class RuleInvoker
             $message = $pass;
         }
         if (this.name) {
-            $message = [this.name => $message];
+            $message = [this.name: $message];
         } else {
             $message = [$message];
         }
         $errorField = this.options['errorField'];
-        $entity->setError($errorField, $message);
+        $entity.setError($errorField, $message);
 
-        if ($entity instanceof InvalidPropertyInterface && isset($entity->{$errorField})) {
-            $invalidValue = $entity->{$errorField};
-            $entity->setInvalidField($errorField, $invalidValue);
+        if ($entity instanceof InvalidPropertyInterface && isset($entity.{$errorField})) {
+            $invalidValue = $entity.{$errorField};
+            $entity.setInvalidField($errorField, $invalidValue);
         }
 
         /** @phpstan-ignore-next-line */

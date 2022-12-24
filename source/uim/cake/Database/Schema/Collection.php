@@ -50,7 +50,7 @@ class Collection : CollectionInterface
     public this(Connection $connection)
     {
         _connection = $connection;
-        _dialect = $connection->getDriver()->schemaDialect();
+        _dialect = $connection.getDriver().schemaDialect();
     }
 
     /**
@@ -60,13 +60,13 @@ class Collection : CollectionInterface
      */
     function listTablesWithoutViews(): array
     {
-        [$sql, $params] = _dialect->listTablesWithoutViewsSql(_connection->config());
+        [$sql, $params] = _dialect.listTablesWithoutViewsSql(_connection.config());
         $result = [];
-        $statement = _connection->execute($sql, $params);
-        while ($row = $statement->fetch()) {
+        $statement = _connection.execute($sql, $params);
+        while ($row = $statement.fetch()) {
             $result[] = $row[0];
         }
-        $statement->closeCursor();
+        $statement.closeCursor();
 
         return $result;
     }
@@ -78,13 +78,13 @@ class Collection : CollectionInterface
      */
     function listTables(): array
     {
-        [$sql, $params] = _dialect->listTablesSql(_connection->config());
+        [$sql, $params] = _dialect.listTablesSql(_connection.config());
         $result = [];
-        $statement = _connection->execute($sql, $params);
-        while ($row = $statement->fetch()) {
+        $statement = _connection.execute($sql, $params);
+        while ($row = $statement.fetch()) {
             $result[] = $row[0];
         }
-        $statement->closeCursor();
+        $statement.closeCursor();
 
         return $result;
     }
@@ -109,14 +109,14 @@ class Collection : CollectionInterface
      */
     function describe(string $name, array $options = []): TableSchemaInterface
     {
-        $config = _connection->config();
+        $config = _connection.config();
         if (strpos($name, '.')) {
             [$config['schema'], $name] = explode('.', $name);
         }
-        $table = _connection->getDriver()->newTableSchema($name);
+        $table = _connection.getDriver().newTableSchema($name);
 
         _reflect('Column', $name, $config, $table);
-        if (count($table->columns()) == 0) {
+        if (count($table.columns()) == 0) {
             throw new DatabaseException(sprintf('Cannot describe %s. It has 0 columns.', $name));
         }
 
@@ -150,19 +150,19 @@ class Collection : CollectionInterface
         $describeMethod = "describe{$stage}Sql";
         $convertMethod = "convert{$stage}Description";
 
-        [$sql, $params] = _dialect->{$describeMethod}($name, $config);
+        [$sql, $params] = _dialect.{$describeMethod}($name, $config);
         if (empty($sql)) {
             return;
         }
         try {
-            $statement = _connection->execute($sql, $params);
+            $statement = _connection.execute($sql, $params);
         } catch (PDOException $e) {
-            throw new DatabaseException($e->getMessage(), 500, $e);
+            throw new DatabaseException($e.getMessage(), 500, $e);
         }
         /** @psalm-suppress PossiblyFalseIterator */
-        foreach ($statement->fetchAll('assoc') as $row) {
-            _dialect->{$convertMethod}($schema, $row);
+        foreach ($statement.fetchAll('assoc') as $row) {
+            _dialect.{$convertMethod}($schema, $row);
         }
-        $statement->closeCursor();
+        $statement.closeCursor();
     }
 }

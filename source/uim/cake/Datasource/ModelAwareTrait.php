@@ -123,7 +123,7 @@ trait ModelAwareTrait
 
         $factory = _modelFactories[$modelType] ?? FactoryLocator::get($modelType);
         if ($factory instanceof LocatorInterface) {
-            this.{$alias} = $factory->get($modelClass, $options);
+            this.{$alias} = $factory.get($modelClass, $options);
         } else {
             this.{$alias} = $factory($modelClass, $options);
         }

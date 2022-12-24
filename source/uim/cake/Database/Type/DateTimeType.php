@@ -150,15 +150,15 @@ class DateTimeType : BaseType : BatchCastingInterface
 
         if (
             this.dbTimezone != null
-            && this.dbTimezone->getName() != $value->getTimezone()->getName()
+            && this.dbTimezone.getName() != $value.getTimezone().getName()
         ) {
             if (!$value instanceof DateTimeImmutable) {
                 $value = clone $value;
             }
-            $value = $value->setTimezone(this.dbTimezone);
+            $value = $value.setTimezone(this.dbTimezone);
         }
 
-        return $value->format(_format);
+        return $value.format(_format);
     }
 
     /**
@@ -238,13 +238,13 @@ class DateTimeType : BaseType : BatchCastingInterface
 
         if (
             !this.keepDatabaseTimezone &&
-            $instance->getTimezone()->getName() != this.defaultTimezone->getName()
+            $instance.getTimezone().getName() != this.defaultTimezone.getName()
         ) {
-            $instance = $instance->setTimezone(this.defaultTimezone);
+            $instance = $instance.setTimezone(this.defaultTimezone);
         }
 
         if (this.setToDateStart) {
-            $instance = $instance->setTime(0, 0, 0);
+            $instance = $instance.setTime(0, 0, 0);
         }
 
         return $instance;
@@ -296,13 +296,13 @@ class DateTimeType : BaseType : BatchCastingInterface
 
             if (
                 !this.keepDatabaseTimezone &&
-                $instance->getTimezone()->getName() != this.defaultTimezone->getName()
+                $instance.getTimezone().getName() != this.defaultTimezone.getName()
             ) {
-                $instance = $instance->setTimezone(this.defaultTimezone);
+                $instance = $instance.setTimezone(this.defaultTimezone);
             }
 
             if (this.setToDateStart) {
-                $instance = $instance->setTime(0, 0, 0);
+                $instance = $instance.setTime(0, 0, 0);
             }
 
             $values[$field] = $instance;
@@ -325,7 +325,7 @@ class DateTimeType : BaseType : BatchCastingInterface
             }
 
             /** @var \Datetime|\DateTimeImmutable $value */
-            return $value->setTimezone(this.defaultTimezone);
+            return $value.setTimezone(this.defaultTimezone);
         }
 
         /** @var class-string<\DateTimeInterface> $class */
@@ -339,7 +339,7 @@ class DateTimeType : BaseType : BatchCastingInterface
                 /** @var \DateTime|\DateTimeImmutable $dateTime */
                 $dateTime = new $class('@' . $value);
 
-                return $dateTime->setTimezone(this.defaultTimezone);
+                return $dateTime.setTimezone(this.defaultTimezone);
             }
 
             if (is_string($value)) {
@@ -351,7 +351,7 @@ class DateTimeType : BaseType : BatchCastingInterface
 
                 /** @var \DateTime|\DateTimeImmutable $dateTime */
                 if ($dateTime != null) {
-                    $dateTime = $dateTime->setTimezone(this.defaultTimezone);
+                    $dateTime = $dateTime.setTimezone(this.defaultTimezone);
                 }
 
                 return $dateTime;
@@ -363,7 +363,7 @@ class DateTimeType : BaseType : BatchCastingInterface
         if (is_array($value) && implode('', $value) == '') {
             return null;
         }
-        $value += ['hour' => 0, 'minute' => 0, 'second' => 0, 'microsecond' => 0];
+        $value += ['hour': 0, 'minute': 0, 'second': 0, 'microsecond': 0];
 
         $format = '';
         if (
@@ -395,7 +395,7 @@ class DateTimeType : BaseType : BatchCastingInterface
         /** @var \DateTime|\DateTimeImmutable $dateTime */
         $dateTime = new $class($format, $value['timezone'] ?? this.userTimezone);
 
-        return $dateTime->setTimezone(this.defaultTimezone);
+        return $dateTime.setTimezone(this.defaultTimezone);
     }
 
     /**

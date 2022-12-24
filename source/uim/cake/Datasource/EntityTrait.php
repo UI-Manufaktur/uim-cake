@@ -104,12 +104,12 @@ trait EntityTrait
      * means no fields are accessible
      *
      * The special field '\*' can also be mapped, meaning that any other field
-     * not defined in the map will take its value. For example, `'*' => true`
+     * not defined in the map will take its value. For example, `'*': true`
      * means that any field not defined in the map will be accessible by default
      *
      * @var array<string, bool>
      */
-    protected $_accessible = ['*' => true];
+    protected $_accessible = ['*': true];
 
     /**
      * The alias of the repository this entity came from
@@ -171,19 +171,19 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity->set('name', 'Andrew');
+     * $entity.set('name', 'Andrew');
      * ```
      *
      * It is also possible to mass-assign multiple fields to this entity
      * with one call by passing a hashed array as fields in the form of
-     * field => value pairs
+     * field: value pairs
      *
      * ### Example:
      *
      * ```
-     * $entity->set(['name' => 'andrew', 'id' => 1]);
-     * echo $entity->name // prints andrew
-     * echo $entity->id // prints 1
+     * $entity.set(['name': 'andrew', 'id': 1]);
+     * echo $entity.name // prints andrew
+     * echo $entity.id // prints 1
      * ```
      *
      * Some times it is handy to bypass setter functions in this entity when assigning
@@ -191,8 +191,8 @@ trait EntityTrait
      * `$options` parameter:
      *
      * ```
-     * $entity->set('name', 'Andrew', ['setter' => false]);
-     * $entity->set(['name' => 'Andrew', 'id' => 1], ['setter' => false]);
+     * $entity.set('name', 'Andrew', ['setter': false]);
+     * $entity.set(['name': 'Andrew', 'id': 1], ['setter': false]);
      * ```
      *
      * Mass assignment should be treated carefully when accepting user input, by default
@@ -200,14 +200,14 @@ trait EntityTrait
      * the guarding for a single set call with the `guard` option:
      *
      * ```
-     * $entity->set(['name' => 'Andrew', 'id' => 1], ['guard' => false]);
+     * $entity.set(['name': 'Andrew', 'id': 1], ['guard': false]);
      * ```
      *
      * You do not need to use the guard option when assigning fields individually:
      *
      * ```
      * // No need to use the guard option.
-     * $entity->set('name', 'Andrew');
+     * $entity.set('name', 'Andrew');
      * ```
      *
      * @param array<string, mixed>|string $field the name of field to set or a list of
@@ -223,7 +223,7 @@ trait EntityTrait
     {
         if (is_string($field) && $field != '') {
             $guard = false;
-            $field = [$field => $value];
+            $field = [$field: $value];
         } else {
             $guard = true;
             $options = (array)$value;
@@ -232,9 +232,9 @@ trait EntityTrait
         if (!is_array($field)) {
             throw new InvalidArgumentException('Cannot set an empty field');
         }
-        $options += ['setter' => true, 'guard' => $guard];
+        $options += ['setter': true, 'guard': $guard];
 
-        foreach ($field as $name => $value) {
+        foreach ($field as $name: $value) {
             $name = (string)$name;
             if ($options['guard'] == true && !this.isAccessible($name)) {
                 continue;
@@ -322,7 +322,7 @@ trait EntityTrait
     {
         $originals = _original;
         $originalKeys = array_keys($originals);
-        foreach (_fields as $key => $value) {
+        foreach (_fields as $key: $value) {
             if (!in_array($key, $originalKeys, true)) {
                 $originals[$key] = $value;
             }
@@ -338,16 +338,16 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity = new Entity(['id' => 1, 'name' => null]);
-     * $entity->has('id'); // true
-     * $entity->has('name'); // false
-     * $entity->has('last_name'); // false
+     * $entity = new Entity(['id': 1, 'name': null]);
+     * $entity.has('id'); // true
+     * $entity.has('name'); // false
+     * $entity.has('last_name'); // false
      * ```
      *
      * You can check multiple fields by passing an array:
      *
      * ```
-     * $entity->has(['name', 'last_name']);
+     * $entity.has(['name', 'last_name']);
      * ```
      *
      * All fields must not be null to get a truthy result.
@@ -431,8 +431,8 @@ trait EntityTrait
      * ### Examples:
      *
      * ```
-     * $entity->unset('name');
-     * $entity->unset(['name', 'last_name']);
+     * $entity.unset('name');
+     * $entity.unset(['name', 'last_name']);
      * ```
      *
      * @param array<string>|string $field The field to unset.
@@ -557,15 +557,15 @@ trait EntityTrait
             $value = this.get($field);
             if (is_array($value)) {
                 $result[$field] = [];
-                foreach ($value as $k => $entity) {
+                foreach ($value as $k: $entity) {
                     if ($entity instanceof EntityInterface) {
-                        $result[$field][$k] = $entity->toArray();
+                        $result[$field][$k] = $entity.toArray();
                     } else {
                         $result[$field][$k] = $entity;
                     }
                 }
             } elseif ($value instanceof EntityInterface) {
-                $result[$field] = $value->toArray();
+                $result[$field] = $value.toArray();
             } else {
                 $result[$field] = $value;
             }
@@ -811,7 +811,7 @@ trait EntityTrait
     function setNew(bool $new)
     {
         if ($new) {
-            foreach (_fields as $k => $p) {
+            foreach (_fields as $k: $p) {
                 _dirty[$k] = true;
             }
         }
@@ -872,14 +872,14 @@ trait EntityTrait
         $diff = array_diff_key(_fields, _errors);
 
         return _errors + (new Collection($diff))
-            ->filter(function ($value) {
+            .filter(function ($value) {
                 return is_array($value) || $value instanceof EntityInterface;
             })
-            ->map(function ($value) {
+            .map(function ($value) {
                 return _readError($value);
             })
-            ->filter()
-            ->toArray();
+            .filter()
+            .toArray();
     }
 
     /**
@@ -905,7 +905,7 @@ trait EntityTrait
      *
      * ```
      * // Sets the error messages for multiple fields at once
-     * $entity->setErrors(['salary' => ['message'], 'name' => ['another message']]);
+     * $entity.setErrors(['salary': ['message'], 'name': ['another message']]);
      * ```
      *
      * @param array $errors The array of errors to set.
@@ -915,15 +915,15 @@ trait EntityTrait
     function setErrors(array $errors, bool $overwrite = false)
     {
         if ($overwrite) {
-            foreach ($errors as $f => $error) {
+            foreach ($errors as $f: $error) {
                 _errors[$f] = (array)$error;
             }
 
             return this;
         }
 
-        foreach ($errors as $f => $error) {
-            _errors += [$f => []];
+        foreach ($errors as $f: $error) {
+            _errors += [$f: []];
 
             // String messages are appended to the list,
             // while more complex error structures need their
@@ -931,7 +931,7 @@ trait EntityTrait
             if (is_string($error)) {
                 _errors[$f][] = $error;
             } else {
-                foreach ($error as $k => $v) {
+                foreach ($error as $k: $v) {
                     _errors[$f][$k] = $v;
                 }
             }
@@ -947,7 +947,7 @@ trait EntityTrait
      *
      * ```
      * // Sets the error messages for a single field
-     * $entity->setError('salary', ['must be numeric', 'must be a positive number']);
+     * $entity.setError('salary', ['must be numeric', 'must be a positive number']);
      * ```
      *
      * @param string $field The field to get errors for, or the array of errors to set.
@@ -961,7 +961,7 @@ trait EntityTrait
             $errors = [$errors];
         }
 
-        return this.setErrors([$field => $errors], $overwrite);
+        return this.setErrors([$field: $errors], $overwrite);
     }
 
     /**
@@ -992,7 +992,7 @@ trait EntityTrait
             $len = count($path);
             $val = null;
             if ($entity instanceof EntityInterface) {
-                $val = $entity->get($part);
+                $val = $entity.get($part);
             } elseif (is_array($entity)) {
                 $val = $entity[$part] ?? false;
             }
@@ -1023,7 +1023,7 @@ trait EntityTrait
      */
     protected function _readHasErrors($object): bool
     {
-        if ($object instanceof EntityInterface && $object->hasErrors()) {
+        if ($object instanceof EntityInterface && $object.hasErrors()) {
             return true;
         }
 
@@ -1048,15 +1048,15 @@ trait EntityTrait
     protected function _readError($object, $path = null): array
     {
         if ($path != null && $object instanceof EntityInterface) {
-            return $object->getError($path);
+            return $object.getError($path);
         }
         if ($object instanceof EntityInterface) {
-            return $object->getErrors();
+            return $object.getErrors();
         }
         if (is_iterable($object)) {
             $array = array_map(function ($val) {
                 if ($val instanceof EntityInterface) {
-                    return $val->getErrors();
+                    return $val.getErrors();
                 }
 
                 return null;
@@ -1102,12 +1102,12 @@ trait EntityTrait
      */
     function setInvalid(array $fields, bool $overwrite = false)
     {
-        foreach ($fields as $field => $value) {
+        foreach ($fields as $field: $value) {
             if ($overwrite == true) {
                 _invalid[$field] = $value;
                 continue;
             }
-            _invalid += [$field => $value];
+            _invalid += [$field: $value];
         }
 
         return this;
@@ -1131,7 +1131,7 @@ trait EntityTrait
      * Stores whether a field value can be changed or set in this entity.
      * The special field `*` can also be marked as accessible or protected, meaning
      * that any other field specified before will take its value. For example
-     * `$entity->setAccess('*', true)` means that any field not specified already
+     * `$entity.setAccess('*', true)` means that any field not specified already
      * will be accessible by default.
      *
      * You can also call this method with an array of fields, in which case they
@@ -1140,10 +1140,10 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity->setAccess('id', true); // Mark id as not protected
-     * $entity->setAccess('author_id', false); // Mark author_id as protected
-     * $entity->setAccess(['id', 'user_id'], true); // Mark both fields as accessible
-     * $entity->setAccess('*', false); // Mark all fields as protected
+     * $entity.setAccess('id', true); // Mark id as not protected
+     * $entity.setAccess('author_id', false); // Mark author_id as protected
+     * $entity.setAccess(['id', 'user_id'], true); // Mark both fields as accessible
+     * $entity.setAccess('*', false); // Mark all fields as protected
      * ```
      *
      * @param array<string>|string $field Single or list of fields to change its accessibility
@@ -1186,7 +1186,7 @@ trait EntityTrait
      * ### Example:
      *
      * ```
-     * $entity->isAccessible('id'); // Returns whether it can be set or not
+     * $entity.isAccessible('id'); // Returns whether it can be set or not
      * ```
      *
      * @param string $field Field name to check
@@ -1246,15 +1246,15 @@ trait EntityTrait
         }
 
         return $fields + [
-            '[new]' => this.isNew(),
-            '[accessible]' => _accessible,
-            '[dirty]' => _dirty,
-            '[original]' => _original,
-            '[virtual]' => _virtual,
-            '[hasErrors]' => this.hasErrors(),
-            '[errors]' => _errors,
-            '[invalid]' => _invalid,
-            '[repository]' => _registryAlias,
+            '[new]': this.isNew(),
+            '[accessible]': _accessible,
+            '[dirty]': _dirty,
+            '[original]': _original,
+            '[virtual]': _virtual,
+            '[hasErrors]': this.hasErrors(),
+            '[errors]': _errors,
+            '[invalid]': _invalid,
+            '[repository]': _registryAlias,
         ];
     }
 }

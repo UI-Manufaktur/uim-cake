@@ -124,12 +124,12 @@ class SqlserverSchemaDialect : SchemaDialect
         }
 
         if (in_array($col, ['date', 'time'])) {
-            return ['type' => $col, 'length' => null];
+            return ['type': $col, 'length': null];
         }
 
         if ($col == 'datetime') {
             // datetime cannot parse more than 3 digits of precision and isn't accurate
-            return ['type' => TableSchema::TYPE_DATETIME, 'length' => null];
+            return ['type': TableSchema::TYPE_DATETIME, 'length': null];
         }
         if (strpos($col, 'datetime') != false) {
             $typeName = TableSchema::TYPE_DATETIME;
@@ -137,38 +137,38 @@ class SqlserverSchemaDialect : SchemaDialect
                 $typeName = TableSchema::TYPE_DATETIME_FRACTIONAL;
             }
 
-            return ['type' => $typeName, 'length' => null, 'precision' => $scale];
+            return ['type': $typeName, 'length': null, 'precision': $scale];
         }
 
         if ($col == 'char') {
-            return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
+            return ['type': TableSchema::TYPE_CHAR, 'length': $length];
         }
 
         if ($col == 'tinyint') {
-            return ['type' => TableSchema::TYPE_TINYINTEGER, 'length' => $precision ?: 3];
+            return ['type': TableSchema::TYPE_TINYINTEGER, 'length': $precision ?: 3];
         }
         if ($col == 'smallint') {
-            return ['type' => TableSchema::TYPE_SMALLINTEGER, 'length' => $precision ?: 5];
+            return ['type': TableSchema::TYPE_SMALLINTEGER, 'length': $precision ?: 5];
         }
         if ($col == 'int' || $col == 'integer') {
-            return ['type' => TableSchema::TYPE_INTEGER, 'length' => $precision ?: 10];
+            return ['type': TableSchema::TYPE_INTEGER, 'length': $precision ?: 10];
         }
         if ($col == 'bigint') {
-            return ['type' => TableSchema::TYPE_BIGINTEGER, 'length' => $precision ?: 20];
+            return ['type': TableSchema::TYPE_BIGINTEGER, 'length': $precision ?: 20];
         }
         if ($col == 'bit') {
-            return ['type' => TableSchema::TYPE_BOOLEAN, 'length' => null];
+            return ['type': TableSchema::TYPE_BOOLEAN, 'length': null];
         }
         if (
             strpos($col, 'numeric') != false ||
             strpos($col, 'money') != false ||
             strpos($col, 'decimal') != false
         ) {
-            return ['type' => TableSchema::TYPE_DECIMAL, 'length' => $precision, 'precision' => $scale];
+            return ['type': TableSchema::TYPE_DECIMAL, 'length': $precision, 'precision': $scale];
         }
 
         if ($col == 'real' || $col == 'float') {
-            return ['type' => TableSchema::TYPE_FLOAT, 'length' => null];
+            return ['type': TableSchema::TYPE_FLOAT, 'length': null];
         }
         // SqlServer schema reflection returns double length for unicode
         // columns because internally it uses UTF16/UCS2
@@ -176,19 +176,19 @@ class SqlserverSchemaDialect : SchemaDialect
             $length /= 2;
         }
         if (strpos($col, 'varchar') != false && $length < 0) {
-            return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
+            return ['type': TableSchema::TYPE_TEXT, 'length': null];
         }
 
         if (strpos($col, 'varchar') != false) {
-            return ['type' => TableSchema::TYPE_STRING, 'length' => $length ?: 255];
+            return ['type': TableSchema::TYPE_STRING, 'length': $length ?: 255];
         }
 
         if (strpos($col, 'char') != false) {
-            return ['type' => TableSchema::TYPE_CHAR, 'length' => $length];
+            return ['type': TableSchema::TYPE_CHAR, 'length': $length];
         }
 
         if (strpos($col, 'text') != false) {
-            return ['type' => TableSchema::TYPE_TEXT, 'length' => null];
+            return ['type': TableSchema::TYPE_TEXT, 'length': null];
         }
 
         if ($col == 'image' || strpos($col, 'binary') != false) {
@@ -197,14 +197,14 @@ class SqlserverSchemaDialect : SchemaDialect
                 $length = TableSchema::LENGTH_LONG;
             }
 
-            return ['type' => TableSchema::TYPE_BINARY, 'length' => $length];
+            return ['type': TableSchema::TYPE_BINARY, 'length': $length];
         }
 
         if ($col == 'uniqueidentifier') {
-            return ['type' => TableSchema::TYPE_UUID];
+            return ['type': TableSchema::TYPE_UUID];
         }
 
-        return ['type' => TableSchema::TYPE_STRING, 'length' => null];
+        return ['type': TableSchema::TYPE_STRING, 'length': null];
     }
 
     /**
@@ -224,11 +224,11 @@ class SqlserverSchemaDialect : SchemaDialect
         }
 
         $field += [
-            'null' => $row['null'] == '1',
-            'default' => _defaultValue($field['type'], $row['default']),
-            'collate' => $row['collation_name'],
+            'null': $row['null'] == '1',
+            'default': _defaultValue($field['type'], $row['default']),
+            'collate': $row['collation_name'],
         ];
-        $schema->addColumn($row['name'], $field);
+        $schema.addColumn($row['name'], $field);
     }
 
     /**
@@ -308,9 +308,9 @@ class SqlserverSchemaDialect : SchemaDialect
         }
 
         if ($type == TableSchema::INDEX_INDEX) {
-            $existing = $schema->getIndex($name);
+            $existing = $schema.getIndex($name);
         } else {
-            $existing = $schema->getConstraint($name);
+            $existing = $schema.getConstraint($name);
         }
 
         $columns = [$row['column_name']];
@@ -319,16 +319,16 @@ class SqlserverSchemaDialect : SchemaDialect
         }
 
         if ($type == TableSchema::CONSTRAINT_PRIMARY || $type == TableSchema::CONSTRAINT_UNIQUE) {
-            $schema->addConstraint($name, [
-                'type' => $type,
-                'columns' => $columns,
+            $schema.addConstraint($name, [
+                'type': $type,
+                'columns': $columns,
             ]);
 
             return;
         }
-        $schema->addIndex($name, [
-            'type' => $type,
-            'columns' => $columns,
+        $schema.addIndex($name, [
+            'type': $type,
+            'columns': $columns,
         ]);
     }
 
@@ -363,14 +363,14 @@ class SqlserverSchemaDialect : SchemaDialect
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         $data = [
-            'type' => TableSchema::CONSTRAINT_FOREIGN,
-            'columns' => [$row['column']],
-            'references' => [$row['reference_table'], $row['reference_column']],
-            'update' => _convertOnClause($row['update_type']),
-            'delete' => _convertOnClause($row['delete_type']),
+            'type': TableSchema::CONSTRAINT_FOREIGN,
+            'columns': [$row['column']],
+            'references': [$row['reference_table'], $row['reference_column']],
+            'update': _convertOnClause($row['update_type']),
+            'delete': _convertOnClause($row['delete_type']),
         ];
         $name = $row['foreign_key_name'];
-        $schema->addConstraint($name, $data);
+        $schema.addConstraint($name, $data);
     }
 
     /**
@@ -408,33 +408,33 @@ class SqlserverSchemaDialect : SchemaDialect
     function columnSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
-        $data = $schema->getColumn($name);
+        $data = $schema.getColumn($name);
 
         $sql = _getTypeSpecificColumnSql($data['type'], $schema, $name);
         if ($sql != null) {
             return $sql;
         }
 
-        $out = _driver->quoteIdentifier($name);
+        $out = _driver.quoteIdentifier($name);
         $typeMap = [
-            TableSchema::TYPE_TINYINTEGER => ' TINYINT',
-            TableSchema::TYPE_SMALLINTEGER => ' SMALLINT',
-            TableSchema::TYPE_INTEGER => ' INTEGER',
-            TableSchema::TYPE_BIGINTEGER => ' BIGINT',
-            TableSchema::TYPE_BINARY_UUID => ' UNIQUEIDENTIFIER',
-            TableSchema::TYPE_BOOLEAN => ' BIT',
-            TableSchema::TYPE_CHAR => ' NCHAR',
-            TableSchema::TYPE_FLOAT => ' FLOAT',
-            TableSchema::TYPE_DECIMAL => ' DECIMAL',
-            TableSchema::TYPE_DATE => ' DATE',
-            TableSchema::TYPE_TIME => ' TIME',
-            TableSchema::TYPE_DATETIME => ' DATETIME2',
-            TableSchema::TYPE_DATETIME_FRACTIONAL => ' DATETIME2',
-            TableSchema::TYPE_TIMESTAMP => ' DATETIME2',
-            TableSchema::TYPE_TIMESTAMP_FRACTIONAL => ' DATETIME2',
-            TableSchema::TYPE_TIMESTAMP_TIMEZONE => ' DATETIME2',
-            TableSchema::TYPE_UUID => ' UNIQUEIDENTIFIER',
-            TableSchema::TYPE_JSON => ' NVARCHAR(MAX)',
+            TableSchema::TYPE_TINYINTEGER: ' TINYINT',
+            TableSchema::TYPE_SMALLINTEGER: ' SMALLINT',
+            TableSchema::TYPE_INTEGER: ' INTEGER',
+            TableSchema::TYPE_BIGINTEGER: ' BIGINT',
+            TableSchema::TYPE_BINARY_UUID: ' UNIQUEIDENTIFIER',
+            TableSchema::TYPE_BOOLEAN: ' BIT',
+            TableSchema::TYPE_CHAR: ' NCHAR',
+            TableSchema::TYPE_FLOAT: ' FLOAT',
+            TableSchema::TYPE_DECIMAL: ' DECIMAL',
+            TableSchema::TYPE_DATE: ' DATE',
+            TableSchema::TYPE_TIME: ' TIME',
+            TableSchema::TYPE_DATETIME: ' DATETIME2',
+            TableSchema::TYPE_DATETIME_FRACTIONAL: ' DATETIME2',
+            TableSchema::TYPE_TIMESTAMP: ' DATETIME2',
+            TableSchema::TYPE_TIMESTAMP_FRACTIONAL: ' DATETIME2',
+            TableSchema::TYPE_TIMESTAMP_TIMEZONE: ' DATETIME2',
+            TableSchema::TYPE_UUID: ' UNIQUEIDENTIFIER',
+            TableSchema::TYPE_JSON: ' NVARCHAR(MAX)',
         ];
 
         if (isset($typeMap[$data['type']])) {
@@ -442,7 +442,7 @@ class SqlserverSchemaDialect : SchemaDialect
         }
 
         if ($data['type'] == TableSchema::TYPE_INTEGER || $data['type'] == TableSchema::TYPE_BIGINTEGER) {
-            if ($schema->getPrimaryKey() == [$name] || $data['autoIncrement'] == true) {
+            if ($schema.getPrimaryKey() == [$name] || $data['autoIncrement'] == true) {
                 unset($data['null'], $data['default']);
                 $out .= ' IDENTITY(1, 1)';
             }
@@ -538,7 +538,7 @@ class SqlserverSchemaDialect : SchemaDialect
         } elseif (isset($data['default'])) {
             $default = is_bool($data['default'])
                 ? (int)$data['default']
-                : _driver->schemaValue($data['default']);
+                : _driver.schemaValue($data['default']);
             $out .= ' DEFAULT ' . $default;
         } elseif (isset($data['null']) && $data['null'] != false) {
             $out .= ' DEFAULT NULL';
@@ -555,11 +555,11 @@ class SqlserverSchemaDialect : SchemaDialect
         $sqlPattern = 'ALTER TABLE %s ADD %s;';
         $sql = [];
 
-        foreach ($schema->constraints() as $name) {
+        foreach ($schema.constraints() as $name) {
             /** @var array $constraint */
-            $constraint = $schema->getConstraint($name);
+            $constraint = $schema.getConstraint($name);
             if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
-                $tableName = _driver->quoteIdentifier($schema->name());
+                $tableName = _driver.quoteIdentifier($schema.name());
                 $sql[] = sprintf($sqlPattern, $tableName, this.constraintSql($schema, $name));
             }
         }
@@ -575,12 +575,12 @@ class SqlserverSchemaDialect : SchemaDialect
         $sqlPattern = 'ALTER TABLE %s DROP CONSTRAINT %s;';
         $sql = [];
 
-        foreach ($schema->constraints() as $name) {
+        foreach ($schema.constraints() as $name) {
             /** @var array $constraint */
-            $constraint = $schema->getConstraint($name);
+            $constraint = $schema.getConstraint($name);
             if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
-                $tableName = _driver->quoteIdentifier($schema->name());
-                $constraintName = _driver->quoteIdentifier($name);
+                $tableName = _driver.quoteIdentifier($schema.name());
+                $constraintName = _driver.quoteIdentifier($name);
                 $sql[] = sprintf($sqlPattern, $tableName, $constraintName);
             }
         }
@@ -594,7 +594,7 @@ class SqlserverSchemaDialect : SchemaDialect
     function indexSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
-        $data = $schema->getIndex($name);
+        $data = $schema.getIndex($name);
         $columns = array_map(
             [_driver, 'quoteIdentifier'],
             $data['columns']
@@ -602,8 +602,8 @@ class SqlserverSchemaDialect : SchemaDialect
 
         return sprintf(
             'CREATE INDEX %s ON %s (%s)',
-            _driver->quoteIdentifier($name),
-            _driver->quoteIdentifier($schema->name()),
+            _driver.quoteIdentifier($name),
+            _driver.quoteIdentifier($schema.name()),
             implode(', ', $columns)
         );
     }
@@ -614,8 +614,8 @@ class SqlserverSchemaDialect : SchemaDialect
     function constraintSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
-        $data = $schema->getConstraint($name);
-        $out = 'CONSTRAINT ' . _driver->quoteIdentifier($name);
+        $data = $schema.getConstraint($name);
+        $out = 'CONSTRAINT ' . _driver.quoteIdentifier($name);
         if ($data['type'] == TableSchema::CONSTRAINT_PRIMARY) {
             $out = 'PRIMARY KEY';
         }
@@ -643,7 +643,7 @@ class SqlserverSchemaDialect : SchemaDialect
             return $prefix . sprintf(
                 ' FOREIGN KEY (%s) REFERENCES %s (%s) ON UPDATE %s ON DELETE %s',
                 implode(', ', $columns),
-                _driver->quoteIdentifier($data['references'][0]),
+                _driver.quoteIdentifier($data['references'][0]),
                 _convertConstraintColumns($data['references'][1]),
                 _foreignOnClause($data['update']),
                 _foreignOnClause($data['delete'])
@@ -660,7 +660,7 @@ class SqlserverSchemaDialect : SchemaDialect
     {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
-        $tableName = _driver->quoteIdentifier($schema->name());
+        $tableName = _driver.quoteIdentifier($schema.name());
         $out = [];
         $out[] = sprintf("CREATE TABLE %s (\n%s\n)", $tableName, $content);
         foreach ($indexes as $index) {
@@ -675,22 +675,22 @@ class SqlserverSchemaDialect : SchemaDialect
      */
     function truncateTableSql(TableSchema $schema): array
     {
-        $name = _driver->quoteIdentifier($schema->name());
+        $name = _driver.quoteIdentifier($schema.name());
         $queries = [
             sprintf('DELETE FROM %s', $name),
         ];
 
         // Restart identity sequences
-        $pk = $schema->getPrimaryKey();
+        $pk = $schema.getPrimaryKey();
         if (count($pk) == 1) {
             /** @var array $column */
-            $column = $schema->getColumn($pk[0]);
+            $column = $schema.getColumn($pk[0]);
             if (in_array($column['type'], ['integer', 'biginteger'])) {
                 $queries[] = sprintf(
                     "IF EXISTS (SELECT * FROM sys.identity_columns WHERE OBJECT_NAME(OBJECT_ID) = '%s' AND " .
                     "last_value IS NOT NULL) DBCC CHECKIDENT('%s', RESEED, 0)",
-                    $schema->name(),
-                    $schema->name()
+                    $schema.name(),
+                    $schema.name()
                 );
             }
         }

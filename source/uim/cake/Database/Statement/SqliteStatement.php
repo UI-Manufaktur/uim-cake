@@ -31,14 +31,14 @@ class SqliteStatement : StatementDecorator
     function execute(?array $params = null): bool
     {
         if (_statement instanceof BufferedStatement) {
-            _statement = _statement->getInnerStatement();
+            _statement = _statement.getInnerStatement();
         }
 
         if (_bufferResults) {
             _statement = new BufferedStatement(_statement, _driver);
         }
 
-        return _statement->execute($params);
+        return _statement.execute($params);
     }
 
     /**
@@ -50,13 +50,13 @@ class SqliteStatement : StatementDecorator
     {
         /** @psalm-suppress NoInterfaceProperties */
         if (
-            _statement->queryString &&
-            preg_match('/^(?:DELETE|UPDATE|INSERT)/i', _statement->queryString)
+            _statement.queryString &&
+            preg_match('/^(?:DELETE|UPDATE|INSERT)/i', _statement.queryString)
         ) {
-            $changes = _driver->prepare('SELECT CHANGES()');
-            $changes->execute();
-            $row = $changes->fetch();
-            $changes->closeCursor();
+            $changes = _driver.prepare('SELECT CHANGES()');
+            $changes.execute();
+            $row = $changes.fetch();
+            $changes.closeCursor();
 
             if (!$row) {
                 return 0;

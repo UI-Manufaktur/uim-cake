@@ -109,9 +109,9 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @var array<string, int>
      */
     public static $columnLengths = [
-        'tiny' => self::LENGTH_TINY,
-        'medium' => self::LENGTH_MEDIUM,
-        'long' => self::LENGTH_LONG,
+        'tiny': self::LENGTH_TINY,
+        'medium': self::LENGTH_MEDIUM,
+        'long': self::LENGTH_LONG,
     ];
 
     /**
@@ -121,13 +121,13 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @var array<string, mixed>
      */
     protected static $_columnKeys = [
-        'type' => null,
-        'baseType' => null,
-        'length' => null,
-        'precision' => null,
-        'null' => null,
-        'default' => null,
-        'comment' => null,
+        'type': null,
+        'baseType': null,
+        'length': null,
+        'precision': null,
+        'null': null,
+        'default': null,
+        'comment': null,
     ];
 
     /**
@@ -136,34 +136,34 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @var array<string, array<string, mixed>>
      */
     protected static $_columnExtras = [
-        'string' => [
-            'collate' => null,
+        'string': [
+            'collate': null,
         ],
-        'char' => [
-            'collate' => null,
+        'char': [
+            'collate': null,
         ],
-        'text' => [
-            'collate' => null,
+        'text': [
+            'collate': null,
         ],
-        'tinyinteger' => [
-            'unsigned' => null,
+        'tinyinteger': [
+            'unsigned': null,
         ],
-        'smallinteger' => [
-            'unsigned' => null,
+        'smallinteger': [
+            'unsigned': null,
         ],
-        'integer' => [
-            'unsigned' => null,
-            'autoIncrement' => null,
+        'integer': [
+            'unsigned': null,
+            'autoIncrement': null,
         ],
-        'biginteger' => [
-            'unsigned' => null,
-            'autoIncrement' => null,
+        'biginteger': [
+            'unsigned': null,
+            'autoIncrement': null,
         ],
-        'decimal' => [
-            'unsigned' => null,
+        'decimal': [
+            'unsigned': null,
         ],
-        'float' => [
-            'unsigned' => null,
+        'float': [
+            'unsigned': null,
         ],
     ];
 
@@ -174,12 +174,12 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @var array<string, mixed>
      */
     protected static $_indexKeys = [
-        'type' => null,
-        'columns' => [],
-        'length' => [],
-        'references' => [],
-        'update' => 'restrict',
-        'delete' => 'restrict',
+        'type': null,
+        'columns': [],
+        'length': [],
+        'references': [],
+        'update': 'restrict',
+        'delete': 'restrict',
     ];
 
     /**
@@ -295,7 +295,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     public this(string $table, array $columns = [])
     {
         _table = $table;
-        foreach ($columns as $field => $definition) {
+        foreach ($columns as $field: $definition) {
             this.addColumn($field, $definition);
         }
     }
@@ -314,7 +314,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     function addColumn(string $name, $attrs)
     {
         if (is_string($attrs)) {
-            $attrs = ['type' => $attrs];
+            $attrs = ['type': $attrs];
         }
         $valid = static::$_columnKeys;
         if (isset(static::$_columnExtras[$attrs['type']])) {
@@ -410,7 +410,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         }
 
         if (TypeFactory::getMap($type)) {
-            $type = TypeFactory::build($type)->getBaseType();
+            $type = TypeFactory::build($type).getBaseType();
         }
 
         return _columns[$column]['baseType'] = $type;
@@ -442,7 +442,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     function defaultValues(): array
     {
         $defaults = [];
-        foreach (_columns as $name => $data) {
+        foreach (_columns as $name: $data) {
             if (!array_key_exists('default', $data)) {
                 continue;
             }
@@ -461,7 +461,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     function addIndex(string $name, $attrs)
     {
         if (is_string($attrs)) {
-            $attrs = ['type' => $attrs];
+            $attrs = ['type': $attrs];
         }
         $attrs = array_intersect_key($attrs, static::$_indexKeys);
         $attrs += static::$_indexKeys;
@@ -554,7 +554,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     function addConstraint(string $name, $attrs)
     {
         if (is_string($attrs)) {
-            $attrs = ['type' => $attrs];
+            $attrs = ['type': $attrs];
         }
         $attrs = array_intersect_key($attrs, static::$_indexKeys);
         $attrs += static::$_indexKeys;
@@ -724,19 +724,19 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function createSql(Connection $connection): array
     {
-        $dialect = $connection->getDriver()->schemaDialect();
+        $dialect = $connection.getDriver().schemaDialect();
         $columns = $constraints = $indexes = [];
         foreach (array_keys(_columns) as $name) {
-            $columns[] = $dialect->columnSql(this, $name);
+            $columns[] = $dialect.columnSql(this, $name);
         }
         foreach (array_keys(_constraints) as $name) {
-            $constraints[] = $dialect->constraintSql(this, $name);
+            $constraints[] = $dialect.constraintSql(this, $name);
         }
         foreach (array_keys(_indexes) as $name) {
-            $indexes[] = $dialect->indexSql(this, $name);
+            $indexes[] = $dialect.indexSql(this, $name);
         }
 
-        return $dialect->createTableSql(this, $columns, $constraints, $indexes);
+        return $dialect.createTableSql(this, $columns, $constraints, $indexes);
     }
 
     /**
@@ -744,9 +744,9 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function dropSql(Connection $connection): array
     {
-        $dialect = $connection->getDriver()->schemaDialect();
+        $dialect = $connection.getDriver().schemaDialect();
 
-        return $dialect->dropTableSql(this);
+        return $dialect.dropTableSql(this);
     }
 
     /**
@@ -754,9 +754,9 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function truncateSql(Connection $connection): array
     {
-        $dialect = $connection->getDriver()->schemaDialect();
+        $dialect = $connection.getDriver().schemaDialect();
 
-        return $dialect->truncateTableSql(this);
+        return $dialect.truncateTableSql(this);
     }
 
     /**
@@ -764,9 +764,9 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function addConstraintSql(Connection $connection): array
     {
-        $dialect = $connection->getDriver()->schemaDialect();
+        $dialect = $connection.getDriver().schemaDialect();
 
-        return $dialect->addConstraintSql(this);
+        return $dialect.addConstraintSql(this);
     }
 
     /**
@@ -774,9 +774,9 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function dropConstraintSql(Connection $connection): array
     {
-        $dialect = $connection->getDriver()->schemaDialect();
+        $dialect = $connection.getDriver().schemaDialect();
 
-        return $dialect->dropConstraintSql(this);
+        return $dialect.dropConstraintSql(this);
     }
 
     /**
@@ -787,13 +787,13 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     function __debugInfo(): array
     {
         return [
-            'table' => _table,
-            'columns' => _columns,
-            'indexes' => _indexes,
-            'constraints' => _constraints,
-            'options' => _options,
-            'typeMap' => _typeMap,
-            'temporary' => _temporary,
+            'table': _table,
+            'columns': _columns,
+            'indexes': _indexes,
+            'constraints': _constraints,
+            'options': _options,
+            'typeMap': _typeMap,
+            'temporary': _temporary,
         ];
     }
 }
