@@ -63,27 +63,27 @@ class AssetMiddleware : IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        $url = $request->getUri()->getPath();
+        $url = $request.getUri().getPath();
         if (strpos($url, '..') != false || strpos($url, '.') == false) {
-            return $handler->handle($request);
+            return $handler.handle($request);
         }
 
         if (strpos($url, '/.') != false) {
-            return $handler->handle($request);
+            return $handler.handle($request);
         }
 
         $assetFile = _getAssetFile($url);
         if ($assetFile == null || !is_file($assetFile)) {
-            return $handler->handle($request);
+            return $handler.handle($request);
         }
 
         $file = new SplFileInfo($assetFile);
-        $modifiedTime = $file->getMTime();
+        $modifiedTime = $file.getMTime();
         if (this.isNotModified($request, $file)) {
             return (new Response())
-                ->withStringBody('')
-                ->withStatus(304)
-                ->withHeader(
+                .withStringBody('')
+                .withStatus(304)
+                .withHeader(
                     'Last-Modified',
                     date(DATE_RFC850, $modifiedTime)
                 );
@@ -101,12 +101,12 @@ class AssetMiddleware : IMiddleware
      */
     protected function isNotModified(IServerRequest $request, SplFileInfo $file): bool
     {
-        $modifiedSince = $request->getHeaderLine('If-Modified-Since');
+        $modifiedSince = $request.getHeaderLine('If-Modified-Since');
         if (!$modifiedSince) {
             return false;
         }
 
-        return strtotime($modifiedSince) == $file->getMTime();
+        return strtotime($modifiedSince) == $file.getMTime();
     }
 
     /**
@@ -146,20 +146,20 @@ class AssetMiddleware : IMiddleware
      */
     protected function deliverAsset(IServerRequest $request, SplFileInfo $file): Response
     {
-        $stream = new Stream(fopen($file->getPathname(), 'rb'));
+        $stream = new Stream(fopen($file.getPathname(), 'rb'));
 
-        $response = new Response(['stream' => $stream]);
+        $response = new Response(['stream': $stream]);
 
-        $contentType = (array)($response->getMimeType($file->getExtension()) ?: 'application/octet-stream');
-        $modified = $file->getMTime();
+        $contentType = (array)($response.getMimeType($file.getExtension()) ?: 'application/octet-stream');
+        $modified = $file.getMTime();
         $expire = strtotime(this.cacheTime);
         $maxAge = $expire - time();
 
         return $response
-            ->withHeader('Content-Type', $contentType[0])
-            ->withHeader('Cache-Control', 'public,max-age=' . $maxAge)
-            ->withHeader('Date', gmdate(DATE_RFC7231, time()))
-            ->withHeader('Last-Modified', gmdate(DATE_RFC7231, $modified))
-            ->withHeader('Expires', gmdate(DATE_RFC7231, $expire));
+            .withHeader('Content-Type', $contentType[0])
+            .withHeader('Cache-Control', 'public,max-age=' . $maxAge)
+            .withHeader('Date', gmdate(DATE_RFC7231, time()))
+            .withHeader('Last-Modified', gmdate(DATE_RFC7231, $modified))
+            .withHeader('Expires', gmdate(DATE_RFC7231, $expire));
     }
 }

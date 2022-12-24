@@ -117,12 +117,12 @@ class Router
      * @var array<string, string>
      */
     protected static $_namedExpressions = [
-        'Action' => Router::ACTION,
-        'Year' => Router::YEAR,
-        'Month' => Router::MONTH,
-        'Day' => Router::DAY,
-        'ID' => Router::ID,
-        'UUID' => Router::UUID,
+        'Action': Router::ACTION,
+        'Year': Router::YEAR,
+        'Month': Router::MONTH,
+        'Day': Router::DAY,
+        'ID': Router::ID,
+        'UUID': Router::UUID,
     ];
 
     /**
@@ -216,7 +216,7 @@ class Router
 
         static::scope('/', function ($routes) use ($route, $defaults, $options): void {
             /** @var \Cake\Routing\RouteBuilder $routes */
-            $routes->connect($route, $defaults, $options);
+            $routes.connect($route, $defaults, $options);
         });
     }
 
@@ -229,7 +229,7 @@ class Router
      */
     public static function parseRequest(ServerRequest $request): array
     {
-        return static::$_collection->parseRequest($request);
+        return static::$_collection.parseRequest($request);
     }
 
     /**
@@ -242,14 +242,14 @@ class Router
     {
         static::$_request = $request;
 
-        static::$_requestContext['_base'] = $request->getAttribute('base');
-        static::$_requestContext['params'] = $request->getAttribute('params', []);
+        static::$_requestContext['_base'] = $request.getAttribute('base');
+        static::$_requestContext['params'] = $request.getAttribute('params', []);
 
-        $uri = $request->getUri();
+        $uri = $request.getUri();
         static::$_requestContext += [
-            '_scheme' => $uri->getScheme(),
-            '_host' => $uri->getHost(),
-            '_port' => $uri->getPort(),
+            '_scheme': $uri.getScheme(),
+            '_host': $uri.getHost(),
+            '_port': $uri.getPort(),
         ];
     }
 
@@ -277,7 +277,7 @@ class Router
 
             return;
         }
-        foreach (static::$_initialState as $key => $val) {
+        foreach (static::$_initialState as $key: $val) {
             if ($key != '_initialState') {
                 static::${$key} = $val;
             }
@@ -327,8 +327,8 @@ class Router
      *
      * ```
      * Router::addUrlFilter(function ($params, $request) {
-     *  if ($request->getParam('lang') && !isset($params['lang'])) {
-     *    $params['lang'] = $request->getParam('lang');
+     *  if ($request.getParam('lang') && !isset($params['lang'])) {
+     *    $params['lang'] = $request.getParam('lang');
      *  }
      *  return $params;
      * });
@@ -365,11 +365,11 @@ class Router
                 }
                 $message = sprintf(
                     'URL filter defined in %s on line %s could not be applied. The filter failed with: %s',
-                    $ref->getFileName(),
-                    $ref->getStartLine(),
-                    $e->getMessage()
+                    $ref.getFileName(),
+                    $ref.getStartLine(),
+                    $e.getMessage()
                 );
-                throw new RuntimeException($message, (int)$e->getCode(), $e);
+                throw new RuntimeException($message, (int)$e.getCode(), $e);
             }
         }
 
@@ -385,9 +385,9 @@ class Router
      *
      * - `Router::url('/posts/edit/1');` Returns the string with the base dir prepended.
      *   This usage does not use reverser routing.
-     * - `Router::url(['controller' => 'Posts', 'action' => 'edit']);` Returns a URL
+     * - `Router::url(['controller': 'Posts', 'action': 'edit']);` Returns a URL
      *   generated through reverse routing.
-     * - `Router::url(['_name' => 'custom-name', ...]);` Returns a URL generated
+     * - `Router::url(['_name': 'custom-name', ...]);` Returns a URL generated
      *   through reverse routing. This form allows you to leverage named routes.
      *
      * There are a few 'special' parameters that can change the final URL string that is generated
@@ -422,7 +422,7 @@ class Router
         $context['_base'] = $context['_base'] ?? Configure::read('App.base') ?: '';
 
         if (empty($url)) {
-            $here = $request ? $request->getRequestTarget() : '/';
+            $here = $request ? $request.getRequestTarget() : '/';
             $output = $context['_base'] . $here;
             if ($full) {
                 $output = static::fullBaseUrl() . $output;
@@ -432,10 +432,10 @@ class Router
         }
 
         $params = [
-            'plugin' => null,
-            'controller' => null,
-            'action' => 'index',
-            '_ext' => null,
+            'plugin': null,
+            'controller': null,
+            'action': 'index',
+            '_ext': null,
         ];
         if (!empty($context['params'])) {
             $params = $context['params'];
@@ -480,10 +480,10 @@ class Router
                 }
 
                 $url += [
-                    'plugin' => $params['plugin'],
-                    'controller' => $params['controller'],
-                    'action' => 'index',
-                    '_ext' => null,
+                    'plugin': $params['plugin'],
+                    'controller': $params['controller'],
+                    'action': 'index',
+                    '_ext': null,
                 ];
             }
 
@@ -494,7 +494,7 @@ class Router
             }
             $context['params'] = $params;
 
-            $output = static::$_collection->match($url, $context);
+            $output = static::$_collection.match($url, $context);
         } else {
             $url = (string)$url;
 
@@ -544,7 +544,7 @@ class Router
      */
     public static function pathUrl(string $path, array $params = [], bool $full = false): string
     {
-        return static::url(['_path' => $path] + $params, $full);
+        return static::url(['_path': $path] + $params, $full);
     }
 
     /**
@@ -622,9 +622,9 @@ class Router
 
         $parts = parse_url(static::$_fullBaseUrl);
         static::$_requestContext = [
-            '_scheme' => $parts['scheme'] ?? null,
-            '_host' => $parts['host'] ?? null,
-            '_port' => $parts['port'] ?? null,
+            '_scheme': $parts['scheme'] ?? null,
+            '_host': $parts['host'] ?? null,
+            '_port': $parts['port'] ?? null,
         ] + static::$_requestContext;
 
         return static::$_fullBaseUrl;
@@ -645,9 +645,9 @@ class Router
     {
         $route = null;
         if ($params instanceof ServerRequest) {
-            $route = $params->getAttribute('route');
-            $queryString = $params->getQueryParams();
-            $params = $params->getAttribute('params');
+            $route = $params.getAttribute('route');
+            $queryString = $params.getQueryParams();
+            $params = $params.getAttribute('params');
             $params['?'] = $queryString;
         }
         $pass = $params['pass'] ?? [];
@@ -661,8 +661,8 @@ class Router
         if (!$route && $template) {
             // Locate the route that was used to match this route
             // so we can access the pass parameter configuration.
-            foreach (static::getRouteCollection()->routes() as $maybe) {
-                if ($maybe->template == $template) {
+            foreach (static::getRouteCollection().routes() as $maybe) {
+                if ($maybe.template == $template) {
                     $route = $maybe;
                     break;
                 }
@@ -670,7 +670,7 @@ class Router
         }
         if ($route) {
             // If we found a route, slice off the number of passed args.
-            $routePass = $route->options['pass'] ?? [];
+            $routePass = $route.options['pass'] ?? [];
             $pass = array_slice($pass, count($routePass));
         }
 
@@ -717,7 +717,7 @@ class Router
         $request = static::getRequest();
 
         if ($request) {
-            $base = $request->getAttribute('base', '');
+            $base = $request.getAttribute('base', '');
             if ($base != '' && stristr($url, $base)) {
                 $url = preg_replace('/^' . preg_quote($base, '/') . '/', '', $url, 1);
             }
@@ -742,7 +742,7 @@ class Router
      * Instructs the router to parse out file extensions
      * from the URL. For example, http://example.com/posts.rss would yield a file
      * extension of "rss". The file extension itself is made available in the
-     * controller as `this.request->getParam('_ext')`, and is used by the RequestHandler
+     * controller as `this.request.getParam('_ext')`, and is used by the RequestHandler
      * component to automatically switch to alternate layouts and templates, and
      * load helpers corresponding to the given content, i.e. RssHelper. Switching
      * layouts and helpers requires that the chosen extension has a defined mime type
@@ -760,7 +760,7 @@ class Router
     {
         $collection = static::$_collection;
         if ($extensions == null) {
-            return array_unique(array_merge(static::$_defaultExtensions, $collection->getExtensions()));
+            return array_unique(array_merge(static::$_defaultExtensions, $collection.getExtensions()));
         }
 
         $extensions = (array)$extensions;
@@ -781,14 +781,14 @@ class Router
     public static function createRouteBuilder(string $path, array $options = []): RouteBuilder
     {
         $defaults = [
-            'routeClass' => static::defaultRouteClass(),
-            'extensions' => static::$_defaultExtensions,
+            'routeClass': static::defaultRouteClass(),
+            'extensions': static::$_defaultExtensions,
         ];
         $options += $defaults;
 
         return new RouteBuilder(static::$_collection, $path, [], [
-            'routeClass' => $options['routeClass'],
-            'extensions' => $options['extensions'],
+            'routeClass': $options['routeClass'],
+            'extensions': $options['extensions'],
         ]);
     }
 
@@ -815,8 +815,8 @@ class Router
      * ### Example
      *
      * ```
-     * Router::scope('/blog', ['plugin' => 'Blog'], function ($routes) {
-     *    $routes->connect('/', ['controller' => 'Articles']);
+     * Router::scope('/blog', ['plugin': 'Blog'], function ($routes) {
+     *    $routes.connect('/', ['controller': 'Articles']);
      * });
      * ```
      *
@@ -847,7 +847,7 @@ class Router
             unset($params['routeClass'], $params['extensions']);
         }
         $builder = static::createRouteBuilder('/', $options);
-        $builder->scope($path, $params, $callback);
+        $builder.scope($path, $params, $callback);
     }
 
     /**
@@ -857,7 +857,7 @@ class Router
      * relevant prefix information.
      *
      * The path parameter is used to generate the routing parameter name.
-     * For example a path of `admin` would result in `'prefix' => 'Admin'` being
+     * For example a path of `admin` would result in `'prefix': 'Admin'` being
      * applied to all connected routes.
      *
      * The prefix name will be inflected to the dasherized version to create
@@ -888,7 +888,7 @@ class Router
         $path = $params['path'] ?? '/' . Inflector::dasherize($name);
         unset($params['path']);
 
-        $params = array_merge($params, ['prefix' => Inflector::camelize($name)]);
+        $params = array_merge($params, ['prefix': Inflector::camelize($name)]);
         static::scope($path, $params, $callback);
     }
 
@@ -921,7 +921,7 @@ class Router
             $callback = $options;
             $options = [];
         }
-        $params = ['plugin' => $name];
+        $params = ['plugin': $name];
         $path = $options['path'] ?? '/' . Inflector::dasherize($name);
         if (isset($options['_namePrefix'])) {
             $params['_namePrefix'] = $options['_namePrefix'];
@@ -936,7 +936,7 @@ class Router
      */
     public static function routes(): array
     {
-        return static::$_collection->routes();
+        return static::$_collection.routes();
     }
 
     /**
@@ -977,8 +977,8 @@ class Router
         }
         $url += static::parseRoutePath($url['_path']);
         $url += [
-            'plugin' => false,
-            'prefix' => false,
+            'plugin': false,
+            'prefix': false,
         ];
         unset($url['_path']);
 

@@ -140,7 +140,7 @@ class Route
     {
         this.template = $template;
         this.defaults = $defaults;
-        this.options = $options + ['_ext' => [], '_middleware' => []];
+        this.options = $options + ['_ext': [], '_middleware': []];
         this.setExtensions((array)this.options['_ext']);
         this.setMiddleware((array)this.options['_middleware']);
         unset(this.options['_middleware']);
@@ -265,7 +265,7 @@ class Route
      *
      * ```
      * // remove a persistent 'date' parameter
-     * Router::url(['date' => false', ...]);
+     * Router::url(['date': false', ...]);
      * ```
      *
      * @param array $names The names of the parameters that should be passed.
@@ -402,12 +402,12 @@ class Route
         }
         $name = '';
         $keys = [
-            'prefix' => ':',
-            'plugin' => '.',
-            'controller' => ':',
-            'action' => '',
+            'prefix': ':',
+            'plugin': '.',
+            'controller': ':',
+            'action': '',
         ];
-        foreach ($keys as $key => $glue) {
+        foreach ($keys as $key: $glue) {
             $value = null;
             if (
                 strpos(this.template, '{' . $key . '}') != false
@@ -441,12 +441,12 @@ class Route
      */
     function parseRequest(IServerRequest $request): ?array
     {
-        $uri = $request->getUri();
-        if (isset(this.options['_host']) && !this.hostMatches($uri->getHost())) {
+        $uri = $request.getUri();
+        if (isset(this.options['_host']) && !this.hostMatches($uri.getHost())) {
             return null;
         }
 
-        return this.parse($uri->getPath(), $request->getMethod());
+        return this.parse($uri.getPath(), $request.getMethod());
     }
 
     /**
@@ -467,7 +467,7 @@ class Route
                 $method = this.normalizeAndValidateMethods($method);
             }
         } catch (InvalidArgumentException $e) {
-            throw new BadRequestException($e->getMessage());
+            throw new BadRequestException($e.getMessage());
         }
 
         $compiledRoute = this.compile();
@@ -497,7 +497,7 @@ class Route
         $route['pass'] = [];
 
         // Assign defaults, set passed args to pass
-        foreach (this.defaults as $key => $value) {
+        foreach (this.defaults as $key: $value) {
             if (isset($route[$key])) {
                 continue;
             }
@@ -648,7 +648,7 @@ class Route
             this.compile();
         }
         $defaults = this.defaults;
-        $context += ['params' => [], '_port' => null, '_scheme' => null, '_host' => null];
+        $context += ['params': [], '_port': null, '_scheme': null, '_host': null];
 
         if (
             !empty(this.options['persist']) &&
@@ -718,7 +718,7 @@ class Route
         // If this route uses pass option, and the passed elements are
         // not set, rekey elements.
         if (isset(this.options['pass'])) {
-            foreach (this.options['pass'] as $i => $name) {
+            foreach (this.options['pass'] as $i: $name) {
                 if (isset($url[$i]) && !isset($url[$name])) {
                     $url[$name] = $url[$i];
                     unset($url[$i]);
@@ -733,7 +733,7 @@ class Route
         }
 
         $pass = [];
-        foreach ($url as $key => $value) {
+        foreach ($url as $key: $value) {
             // If the key is a routed key, it's not different yet.
             if (array_key_exists($key, $keyNames)) {
                 continue;
@@ -758,7 +758,7 @@ class Route
 
         // check patterns for routed params
         if (!empty(this.options)) {
-            foreach (this.options as $key => $pattern) {
+            foreach (this.options as $key: $pattern) {
                 if (isset($url[$key]) && !preg_match('#^' . $pattern . '$#u', (string)$url[$key])) {
                     return null;
                 }
@@ -948,8 +948,8 @@ class Route
     {
         $class = static::class;
         $obj = new $class('');
-        foreach ($fields as $field => $value) {
-            $obj->$field = $value;
+        foreach ($fields as $field: $value) {
+            $obj.$field = $value;
         }
 
         return $obj;

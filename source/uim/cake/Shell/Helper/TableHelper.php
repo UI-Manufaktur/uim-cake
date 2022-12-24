@@ -30,9 +30,9 @@ class TableHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'headers' => true,
-        'rowSeparator' => false,
-        'headerStyle' => 'info',
+        'headers': true,
+        'rowSeparator': false,
+        'headerStyle': 'info',
     ];
 
     /**
@@ -45,7 +45,7 @@ class TableHelper : Helper
     {
         $widths = [];
         foreach ($rows as $line) {
-            foreach (array_values($line) as $k => $v) {
+            foreach (array_values($line) as $k: $v) {
                 $columnLength = _cellWidth((string)$v);
                 if ($columnLength >= ($widths[$k] ?? 0)) {
                     $widths[$k] = $columnLength;
@@ -72,7 +72,7 @@ class TableHelper : Helper
             return mb_strwidth($text);
         }
 
-        $styles = _io->styles();
+        $styles = _io.styles();
         $tags = implode('|', array_keys($styles));
         $text = preg_replace('#</?(?:' . $tags . ')>#', '', $text);
 
@@ -92,7 +92,7 @@ class TableHelper : Helper
             $out .= '+' . str_repeat('-', $column + 2);
         }
         $out .= '+';
-        _io->out($out);
+        _io.out($out);
     }
 
     /**
@@ -110,7 +110,7 @@ class TableHelper : Helper
         }
 
         $out = '';
-        foreach (array_values($row) as $i => $column) {
+        foreach (array_values($row) as $i: $column) {
             $column = (string)$column;
             $pad = $widths[$i] - _cellWidth($column);
             if (!empty($options['style'])) {
@@ -127,7 +127,7 @@ class TableHelper : Helper
             }
         }
         $out .= '|';
-        _io->out($out);
+        _io.out($out);
     }
 
     /**
@@ -145,14 +145,14 @@ class TableHelper : Helper
             return;
         }
 
-        _io->setStyle('text-right', ['text' => null]);
+        _io.setStyle('text-right', ['text': null]);
 
         $config = this.getConfig();
         $widths = _calculateWidths($args);
 
         _rowSeparator($widths);
         if ($config['headers'] == true) {
-            _render(array_shift($args), $widths, ['style' => $config['headerStyle']]);
+            _render(array_shift($args), $widths, ['style': $config['headerStyle']]);
             _rowSeparator($widths);
         }
 

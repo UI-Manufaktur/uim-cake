@@ -20,7 +20,7 @@ use Cake\Utility\Inflector;
 
 /**
  * This route class will transparently inflect the controller and plugin routing
- * parameters, so that requesting `/my_controller` is parsed as `['controller' => 'MyController']`
+ * parameters, so that requesting `/my_controller` is parsed as `['controller': 'MyController']`
  */
 class InflectedRoute : Route
 {

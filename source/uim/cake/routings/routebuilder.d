@@ -26,7 +26,7 @@ class RouteBuilder {
     public const string UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
 
     /**
-     * Default HTTP request method => controller action map.
+     * Default HTTP request method: controller action map.
      *
      * @var array<string, array>
      */
@@ -320,7 +320,7 @@ class RouteBuilder {
             "path":null,
         ];
 
-        foreach (myOptions["map"] as $k => $mapped) {
+        foreach (myOptions["map"] as $k: $mapped) {
             myOptions["map"][$k] += ["method":"GET", "path":$k, "action":""];
         }
 
@@ -349,7 +349,7 @@ class RouteBuilder {
             $prefix = _params["prefix"] . "/" . $prefix;
         }
 
-        foreach ($resourceMap as $method => myParams) {
+        foreach ($resourceMap as $method: myParams) {
             if (!in_array($method, $only, true)) {
                 continue;
             }
@@ -681,7 +681,7 @@ class RouteBuilder {
                 $route = rtrim($route, "/");
             }
 
-            foreach (_params as $param => $val) {
+            foreach (_params as $param: $val) {
                 if (isset($defaults[$param]) && $param != "prefix" && $defaults[$param] != $val) {
                     $msg = "You cannot define routes that conflict with the scope. " .
                         "Scope had %s = %s, while route had %s = %s";

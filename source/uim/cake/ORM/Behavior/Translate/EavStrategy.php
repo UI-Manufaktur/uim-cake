@@ -55,15 +55,15 @@ class EavStrategy : TranslateStrategyInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'fields' => [],
-        'translationTable' => 'I18n',
-        'defaultLocale' => null,
-        'referenceName' => null,
-        'allowEmptyTranslations' => true,
-        'onlyTranslated' => false,
-        'strategy' => 'subquery',
-        'tableLocator' => null,
-        'validator' => false,
+        'fields': [],
+        'translationTable': 'I18n',
+        'defaultLocale': null,
+        'referenceName': null,
+        'allowEmptyTranslations': true,
+        'onlyTranslated': false,
+        'strategy': 'subquery',
+        'tableLocator': null,
+        'validator': false,
     ];
 
     /**
@@ -80,9 +80,9 @@ class EavStrategy : TranslateStrategyInterface
 
         this.setConfig($config);
         this.table = $table;
-        this.translationTable = this.getTableLocator()->get(
+        this.translationTable = this.getTableLocator().get(
             _config['translationTable'],
-            ['allowFallbackClass' => true]
+            ['allowFallbackClass': true]
         );
 
         this.setupAssociations();
@@ -105,53 +105,53 @@ class EavStrategy : TranslateStrategyInterface
         $strategy = _config['strategy'];
         $filter = _config['onlyTranslated'];
 
-        $targetAlias = this.translationTable->getAlias();
-        $alias = this.table->getAlias();
+        $targetAlias = this.translationTable.getAlias();
+        $alias = this.table.getAlias();
         $tableLocator = this.getTableLocator();
 
         foreach ($fields as $field) {
             $name = $alias . '_' . $field . '_translation';
 
-            if (!$tableLocator->exists($name)) {
-                $fieldTable = $tableLocator->get($name, [
-                    'className' => $table,
-                    'alias' => $name,
-                    'table' => this.translationTable->getTable(),
-                    'allowFallbackClass' => true,
+            if (!$tableLocator.exists($name)) {
+                $fieldTable = $tableLocator.get($name, [
+                    'className': $table,
+                    'alias': $name,
+                    'table': this.translationTable.getTable(),
+                    'allowFallbackClass': true,
                 ]);
             } else {
-                $fieldTable = $tableLocator->get($name);
+                $fieldTable = $tableLocator.get($name);
             }
 
             $conditions = [
-                $name . '.model' => $model,
-                $name . '.field' => $field,
+                $name . '.model': $model,
+                $name . '.field': $field,
             ];
             if (!_config['allowEmptyTranslations']) {
                 $conditions[$name . '.content !='] = '';
             }
 
-            this.table->hasOne($name, [
-                'targetTable' => $fieldTable,
-                'foreignKey' => 'foreign_key',
-                'joinType' => $filter ? Query::JOIN_TYPE_INNER : Query::JOIN_TYPE_LEFT,
-                'conditions' => $conditions,
-                'propertyName' => $field . '_translation',
+            this.table.hasOne($name, [
+                'targetTable': $fieldTable,
+                'foreignKey': 'foreign_key',
+                'joinType': $filter ? Query::JOIN_TYPE_INNER : Query::JOIN_TYPE_LEFT,
+                'conditions': $conditions,
+                'propertyName': $field . '_translation',
             ]);
         }
 
-        $conditions = ["$targetAlias.model" => $model];
+        $conditions = ["$targetAlias.model": $model];
         if (!_config['allowEmptyTranslations']) {
             $conditions["$targetAlias.content !="] = '';
         }
 
-        this.table->hasMany($targetAlias, [
-            'className' => $table,
-            'foreignKey' => 'foreign_key',
-            'strategy' => $strategy,
-            'conditions' => $conditions,
-            'propertyName' => '_i18n',
-            'dependent' => true,
+        this.table.hasMany($targetAlias, [
+            'className': $table,
+            'foreignKey': 'foreign_key',
+            'strategy': $strategy,
+            'conditions': $conditions,
+            'propertyName': '_i18n',
+            'dependent': true,
         ]);
     }
 
@@ -175,14 +175,14 @@ class EavStrategy : TranslateStrategyInterface
 
         $conditions = function ($field, $locale, $query, $select) {
             return function ($q) use ($field, $locale, $query, $select) {
-                $q->where([$q->getRepository()->aliasField('locale') => $locale]);
+                $q.where([$q.getRepository().aliasField('locale'): $locale]);
 
                 if (
-                    $query->isAutoFieldsEnabled() ||
+                    $query.isAutoFieldsEnabled() ||
                     in_array($field, $select, true) ||
-                    in_array(this.table->aliasField($field), $select, true)
+                    in_array(this.table.aliasField($field), $select, true)
                 ) {
-                    $q->select(['id', 'content']);
+                    $q.select(['id', 'content']);
                 }
 
                 return $q;
@@ -191,8 +191,8 @@ class EavStrategy : TranslateStrategyInterface
 
         $contain = [];
         $fields = _config['fields'];
-        $alias = this.table->getAlias();
-        $select = $query->clause('select');
+        $alias = this.table.getAlias();
+        $select = $query.clause('select');
 
         $changeFilter = isset($options['filterByCurrentLocale']) &&
             $options['filterByCurrentLocale'] != _config['onlyTranslated'];
@@ -215,8 +215,8 @@ class EavStrategy : TranslateStrategyInterface
             }
         }
 
-        $query->contain($contain);
-        $query->formatResults(function ($results) use ($locale) {
+        $query.contain($contain);
+        $query.formatResults(function ($results) use ($locale) {
             return this.rowMapper($results, $locale);
         }, $query::PREPEND);
     }
@@ -232,8 +232,8 @@ class EavStrategy : TranslateStrategyInterface
      */
     function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options)
     {
-        $locale = $entity->get('_locale') ?: this.getLocale();
-        $newOptions = [this.translationTable->getAlias() => ['validate' => false]];
+        $locale = $entity.get('_locale') ?: this.getLocale();
+        $newOptions = [this.translationTable.getAlias(): ['validate': false]];
         $options['associated'] = $newOptions + $options['associated'];
 
         // Check early if empty translations are present in the entity.
@@ -244,7 +244,7 @@ class EavStrategy : TranslateStrategyInterface
         }
 
         this.bundleTranslatedFields($entity);
-        $bundled = $entity->get('_i18n') ?: [];
+        $bundled = $entity.get('_i18n') ?: [];
         $noBundled = count($bundled) == 0;
 
         // No additional translation records need to be saved,
@@ -253,7 +253,7 @@ class EavStrategy : TranslateStrategyInterface
             return;
         }
 
-        $values = $entity->extract(_config['fields'], true);
+        $values = $entity.extract(_config['fields'], true);
         $fields = array_keys($values);
         $noFields = empty($fields);
 
@@ -264,15 +264,15 @@ class EavStrategy : TranslateStrategyInterface
             return;
         }
 
-        $primaryKey = (array)this.table->getPrimaryKey();
-        $key = $entity->get(current($primaryKey));
+        $primaryKey = (array)this.table.getPrimaryKey();
+        $key = $entity.get(current($primaryKey));
 
         // When we have no key and bundled translations, we
         // need to mark the entity dirty so the root
         // entity persists.
         if ($noFields && $bundled && !$key) {
             foreach (_config['fields'] as $field) {
-                $entity->setDirty($field, true);
+                $entity.setDirty($field, true);
             }
 
             return;
@@ -286,39 +286,39 @@ class EavStrategy : TranslateStrategyInterface
 
         $preexistent = [];
         if ($key) {
-            $preexistent = this.translationTable->find()
-                ->select(['id', 'field'])
-                ->where([
-                    'field IN' => $fields,
-                    'locale' => $locale,
-                    'foreign_key' => $key,
-                    'model' => $model,
+            $preexistent = this.translationTable.find()
+                .select(['id', 'field'])
+                .where([
+                    'field IN': $fields,
+                    'locale': $locale,
+                    'foreign_key': $key,
+                    'model': $model,
                 ])
-                ->disableBufferedResults()
-                ->all()
-                ->indexBy('field');
+                .disableBufferedResults()
+                .all()
+                .indexBy('field');
         }
 
         $modified = [];
-        foreach ($preexistent as $field => $translation) {
-            $translation->set('content', $values[$field]);
+        foreach ($preexistent as $field: $translation) {
+            $translation.set('content', $values[$field]);
             $modified[$field] = $translation;
         }
 
         $new = array_diff_key($values, $modified);
-        foreach ($new as $field => $content) {
+        foreach ($new as $field: $content) {
             $new[$field] = new Entity(compact('locale', 'field', 'content', 'model'), [
-                'useSetters' => false,
-                'markNew' => true,
+                'useSetters': false,
+                'markNew': true,
             ]);
         }
 
-        $entity->set('_i18n', array_merge($bundled, array_values($modified + $new)));
-        $entity->set('_locale', $locale, ['setter' => false]);
-        $entity->setDirty('_locale', false);
+        $entity.set('_i18n', array_merge($bundled, array_values($modified + $new)));
+        $entity.set('_locale', $locale, ['setter': false]);
+        $entity.setDirty('_locale', false);
 
         foreach ($fields as $field) {
-            $entity->setDirty($field, false);
+            $entity.setDirty($field, false);
         }
     }
 
@@ -336,15 +336,15 @@ class EavStrategy : TranslateStrategyInterface
     {
         $table = this.table;
         if (this.getLocale() == this.getConfig('defaultLocale')) {
-            return $table->aliasField($field);
+            return $table.aliasField($field);
         }
-        $associationName = $table->getAlias() . '_' . $field . '_translation';
+        $associationName = $table.getAlias() . '_' . $field . '_translation';
 
-        if ($table->associations()->has($associationName)) {
+        if ($table.associations().has($associationName)) {
             return $associationName . '.content';
         }
 
-        return $table->aliasField($field);
+        return $table.aliasField($field);
     }
 
     /**
@@ -357,7 +357,7 @@ class EavStrategy : TranslateStrategyInterface
      */
     protected function rowMapper($results, $locale)
     {
-        return $results->map(function ($row) use ($locale) {
+        return $results.map(function ($row) use ($locale) {
             /** @var \Cake\Datasource\EntityInterface|array|null $row */
             if ($row == null) {
                 return $row;
@@ -384,7 +384,7 @@ class EavStrategy : TranslateStrategyInterface
             $row['_locale'] = $locale;
             if ($hydrated) {
                 /** @psalm-suppress PossiblyInvalidMethodCall */
-                $row->clean();
+                $row.clean();
             }
 
             return $row;
@@ -400,31 +400,31 @@ class EavStrategy : TranslateStrategyInterface
      */
     function groupTranslations($results): CollectionInterface
     {
-        return $results->map(function ($row) {
+        return $results.map(function ($row) {
             if (!$row instanceof EntityInterface) {
                 return $row;
             }
-            $translations = (array)$row->get('_i18n');
-            if (empty($translations) && $row->get('_translations')) {
+            $translations = (array)$row.get('_i18n');
+            if (empty($translations) && $row.get('_translations')) {
                 return $row;
             }
             $grouped = new Collection($translations);
 
             $result = [];
-            foreach ($grouped->combine('field', 'content', 'locale') as $locale => $keys) {
-                $entityClass = this.table->getEntityClass();
-                $translation = new $entityClass($keys + ['locale' => $locale], [
-                    'markNew' => false,
-                    'useSetters' => false,
-                    'markClean' => true,
+            foreach ($grouped.combine('field', 'content', 'locale') as $locale: $keys) {
+                $entityClass = this.table.getEntityClass();
+                $translation = new $entityClass($keys + ['locale': $locale], [
+                    'markNew': false,
+                    'useSetters': false,
+                    'markClean': true,
                 ]);
                 $result[$locale] = $translation;
             }
 
-            $options = ['setter' => false, 'guard' => false];
-            $row->set('_translations', $result, $options);
+            $options = ['setter': false, 'guard': false];
+            $row.set('_translations', $result, $options);
             unset($row['_i18n']);
-            $row->clean();
+            $row.clean();
 
             return $row;
         });
@@ -440,26 +440,26 @@ class EavStrategy : TranslateStrategyInterface
      */
     protected function bundleTranslatedFields($entity)
     {
-        $translations = (array)$entity->get('_translations');
+        $translations = (array)$entity.get('_translations');
 
-        if (empty($translations) && !$entity->isDirty('_translations')) {
+        if (empty($translations) && !$entity.isDirty('_translations')) {
             return;
         }
 
         $fields = _config['fields'];
-        $primaryKey = (array)this.table->getPrimaryKey();
-        $key = $entity->get(current($primaryKey));
+        $primaryKey = (array)this.table.getPrimaryKey();
+        $key = $entity.get(current($primaryKey));
         $find = [];
         $contents = [];
 
-        foreach ($translations as $lang => $translation) {
+        foreach ($translations as $lang: $translation) {
             foreach ($fields as $field) {
-                if (!$translation->isDirty($field)) {
+                if (!$translation.isDirty($field)) {
                     continue;
                 }
-                $find[] = ['locale' => $lang, 'field' => $field, 'foreign_key IS' => $key];
-                $contents[] = new Entity(['content' => $translation->get($field)], [
-                    'useSetters' => false,
+                $find[] = ['locale': $lang, 'field': $field, 'foreign_key IS': $key];
+                $contents[] = new Entity(['content': $translation.get($field)], [
+                    'useSetters': false,
                 ]);
             }
         }
@@ -470,18 +470,18 @@ class EavStrategy : TranslateStrategyInterface
 
         $results = this.findExistingTranslations($find);
 
-        foreach ($find as $i => $translation) {
+        foreach ($find as $i: $translation) {
             if (!empty($results[$i])) {
-                $contents[$i]->set('id', $results[$i], ['setter' => false]);
-                $contents[$i]->setNew(false);
+                $contents[$i].set('id', $results[$i], ['setter': false]);
+                $contents[$i].setNew(false);
             } else {
                 $translation['model'] = _config['referenceName'];
-                $contents[$i]->set($translation, ['setter' => false, 'guard' => false]);
-                $contents[$i]->setNew(true);
+                $contents[$i].set($translation, ['setter': false, 'guard': false]);
+                $contents[$i].setNew(true);
             }
         }
 
-        $entity->set('_i18n', $contents);
+        $entity.set('_i18n', $contents);
     }
 
     /**
@@ -494,22 +494,22 @@ class EavStrategy : TranslateStrategyInterface
      */
     protected function findExistingTranslations($ruleSet)
     {
-        $association = this.table->getAssociation(this.translationTable->getAlias());
+        $association = this.table.getAssociation(this.translationTable.getAlias());
 
-        $query = $association->find()
-            ->select(['id', 'num' => 0])
-            ->where(current($ruleSet))
-            ->disableHydration()
-            ->disableBufferedResults();
+        $query = $association.find()
+            .select(['id', 'num': 0])
+            .where(current($ruleSet))
+            .disableHydration()
+            .disableBufferedResults();
 
         unset($ruleSet[0]);
-        foreach ($ruleSet as $i => $conditions) {
-            $q = $association->find()
-                ->select(['id', 'num' => $i])
-                ->where($conditions);
-            $query->unionAll($q);
+        foreach ($ruleSet as $i: $conditions) {
+            $q = $association.find()
+                .select(['id', 'num': $i])
+                .where($conditions);
+            $query.unionAll($q);
         }
 
-        return $query->all()->combine('num', 'id')->toArray();
+        return $query.all().combine('num', 'id').toArray();
     }
 }

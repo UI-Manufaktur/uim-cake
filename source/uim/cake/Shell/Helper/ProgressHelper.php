@@ -27,9 +27,9 @@ use RuntimeException;
  * The ProgressHelper can be accessed from shells using the helper() method
  *
  * ```
- * this.helper('Progress')->output(['callback' => function ($progress) {
+ * this.helper('Progress').output(['callback': function ($progress) {
  *     // Do work
- *     $progress->increment();
+ *     $progress.increment();
  * });
  * ```
  */
@@ -71,7 +71,7 @@ class ProgressHelper : Helper
      */
     function output(array $args): void
     {
-        $args += ['callback' => null];
+        $args += ['callback': null];
         if (isset($args[0])) {
             $args['callback'] = $args[0];
         }
@@ -82,12 +82,12 @@ class ProgressHelper : Helper
 
         $callback = $args['callback'];
 
-        _io->out('', 0);
+        _io.out('', 0);
         while (_progress < _total) {
             $callback(this);
             this.draw();
         }
-        _io->out('');
+        _io.out('');
     }
 
     /**
@@ -102,7 +102,7 @@ class ProgressHelper : Helper
      */
     function init(array $args = [])
     {
-        $args += ['total' => 100, 'width' => 80];
+        $args += ['total': 100, 'width': 80];
         _progress = 0;
         _width = $args['width'];
         _total = $args['total'];
@@ -145,7 +145,7 @@ class ProgressHelper : Helper
         $percent = ($complete * 100) . '%';
         $bar .= str_pad($percent, $numberLen, ' ', STR_PAD_LEFT);
 
-        _io->overwrite($bar, 0);
+        _io.overwrite($bar, 0);
 
         return this;
     }

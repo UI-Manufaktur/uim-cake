@@ -132,9 +132,9 @@ class RoutingMiddleware : IMiddleware
     protected function prepareRouteCollection(): RouteCollection
     {
         $builder = Router::createRouteBuilder('/');
-        this.app->routes($builder);
+        this.app.routes($builder);
         if (this.app instanceof IPluginApplication) {
-            this.app->pluginRoutes($builder);
+            this.app.pluginRoutes($builder);
         }
 
         return Router::getRouteCollection();
@@ -155,7 +155,7 @@ class RoutingMiddleware : IMiddleware
         this.loadRoutes();
         try {
             Router::setRequest($request);
-            $params = (array)$request->getAttribute('params', []);
+            $params = (array)$request.getAttribute('params', []);
             $middleware = [];
             if (empty($params['controller'])) {
                 $params = Router::parseRequest($request) + $params;
@@ -165,30 +165,30 @@ class RoutingMiddleware : IMiddleware
                 $route = $params['_route'];
                 unset($params['_middleware'], $params['_route']);
 
-                $request = $request->withAttribute('route', $route);
+                $request = $request.withAttribute('route', $route);
                 /** @var \Cake\Http\ServerRequest $request */
-                $request = $request->withAttribute('params', $params);
+                $request = $request.withAttribute('params', $params);
                 Router::setRequest($request);
             }
         } catch (RedirectException $e) {
             return new RedirectResponse(
-                $e->getMessage(),
-                $e->getCode()
+                $e.getMessage(),
+                $e.getCode()
             );
         } catch (DeprecatedRedirectException $e) {
             return new RedirectResponse(
-                $e->getMessage(),
-                $e->getCode()
+                $e.getMessage(),
+                $e.getCode()
             );
         }
-        $matching = Router::getRouteCollection()->getMiddleware($middleware);
+        $matching = Router::getRouteCollection().getMiddleware($middleware);
         if (!$matching) {
-            return $handler->handle($request);
+            return $handler.handle($request);
         }
 
         $middleware = new MiddlewareQueue($matching);
         $runner = new Runner();
 
-        return $runner->run($middleware, $request, $handler);
+        return $runner.run($middleware, $request, $handler);
     }
 }

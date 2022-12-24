@@ -89,6 +89,6 @@ trait LocatorAwareTrait
             );
         }
 
-        return this.getTableLocator()->get($alias, $options);
+        return this.getTableLocator().get($alias, $options);
     }
 }

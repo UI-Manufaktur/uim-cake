@@ -102,7 +102,7 @@ class LinkConstraint
 
         $association = _association;
         if (!$association instanceof Association) {
-            $association = $table->getAssociation($association);
+            $association = $table.getAssociation($association);
         }
 
         $count = _countLinks($association, $entity);
@@ -132,8 +132,8 @@ class LinkConstraint
      */
     protected function _aliasFields(array $fields, Table $source): array
     {
-        foreach ($fields as $key => $value) {
-            $fields[$key] = $source->aliasField($value);
+        foreach ($fields as $key: $value) {
+            $fields[$key] = $source.aliasField($value);
         }
 
         return $fields;
@@ -168,29 +168,29 @@ class LinkConstraint
      */
     protected function _countLinks(Association $association, EntityInterface $entity): int
     {
-        $source = $association->getSource();
+        $source = $association.getSource();
 
-        $primaryKey = (array)$source->getPrimaryKey();
-        if (!$entity->has($primaryKey)) {
+        $primaryKey = (array)$source.getPrimaryKey();
+        if (!$entity.has($primaryKey)) {
             throw new \RuntimeException(sprintf(
                 'LinkConstraint rule on `%s` requires all primary key values for building the counting ' .
                 'conditions, expected values for `(%s)`, got `(%s)`.',
-                $source->getAlias(),
+                $source.getAlias(),
                 implode(', ', $primaryKey),
-                implode(', ', $entity->extract($primaryKey))
+                implode(', ', $entity.extract($primaryKey))
             ));
         }
 
         $aliasedPrimaryKey = _aliasFields($primaryKey, $source);
         $conditions = _buildConditions(
             $aliasedPrimaryKey,
-            $entity->extract($primaryKey)
+            $entity.extract($primaryKey)
         );
 
         return $source
-            ->find()
-            ->matching($association->getName())
-            ->where($conditions)
-            ->count();
+            .find()
+            .matching($association.getName())
+            .where($conditions)
+            .count();
     }
 }

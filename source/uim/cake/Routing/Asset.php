@@ -289,7 +289,7 @@ class Asset
      */
     public static function webroot(string $file, array $options = []): string
     {
-        $options += ['theme' => null];
+        $options += ['theme': null];
         $requestWebroot = static::requestWebroot();
 
         $asset = explode('?', $file);
@@ -346,7 +346,7 @@ class Asset
             return '/';
         }
 
-        return $request->getAttribute('webroot');
+        return $request.getAttribute('webroot');
     }
 
     /**
@@ -355,7 +355,7 @@ class Asset
      * It checks if the plugin is loaded, else filename will stay unchanged for filenames containing dot.
      *
      * @param string $name The name you want to plugin split.
-     * @return array Array with 2 indexes. 0 => plugin name, 1 => filename.
+     * @return array Array with 2 indexes. 0: plugin name, 1: filename.
      * @psalm-return array{string|null, string}
      */
     protected static function pluginSplit(string $name): array

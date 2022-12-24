@@ -16,7 +16,7 @@ class CommandTask : Shell {
         $skipFiles = ["app"];
         myHiddenCommands = ["command_list", "completion"];
         myPlugins = Plugin::loaded();
-        myShellList = array_fill_keys(myPlugins, null) + ["CORE" => null, "app" => null];
+        myShellList = array_fill_keys(myPlugins, null) + ["CORE": null, "app": null];
 
         $appPath = App::classPath("Shell");
         myShellList = _findShells(myShellList, $appPath[0], "app", $skipFiles);

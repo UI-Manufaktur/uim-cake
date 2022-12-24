@@ -212,7 +212,7 @@ class TableLocator : AbstractLocator : LocatorInterface
     {
         if (strpos($alias, '\\') == false) {
             [, $classAlias] = pluginSplit($alias);
-            $options = ['alias' => $classAlias] + $options;
+            $options = ['alias': $classAlias] + $options;
         } elseif (!isset($options['alias'])) {
             $options['className'] = $alias;
         }

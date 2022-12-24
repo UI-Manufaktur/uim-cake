@@ -16,7 +16,7 @@ import uim.cake;
  * The ProgressHelper can be accessed from shells using the helper() method
  *
  * ```
- * this.helper("Progress").output(["callback" => function ($progress) {
+ * this.helper("Progress").output(["callback": function ($progress) {
  *     // Do work
  *     $progress.increment();
  * });
@@ -58,7 +58,7 @@ class ProgressHelper : Helper
      * @param array $args The arguments/options to use when outputing the progress bar.
      */
     void output(array $args) {
-        $args += ["callback" => null];
+        $args += ["callback": null];
         if (isset($args[0])) {
             $args["callback"] = $args[0];
         }
@@ -88,7 +88,7 @@ class ProgressHelper : Helper
      * @return this
      */
     function init(array $args = []) {
-        $args += ["total" => 100, "width" => 80];
+        $args += ["total": 100, "width": 80];
         _progress = 0;
         _width = $args["width"];
         _total = $args["total"];

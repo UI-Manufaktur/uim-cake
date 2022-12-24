@@ -31,8 +31,8 @@ if (!function_exists('urlArray')) {
     {
         $url = Router::parseRoutePath($path);
         $url += [
-            'plugin' => false,
-            'prefix' => false,
+            'plugin': false,
+            'prefix': false,
         ];
 
         return $url + $params;

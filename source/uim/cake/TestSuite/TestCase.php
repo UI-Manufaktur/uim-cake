@@ -272,7 +272,7 @@ abstract class TestCase : BaseTestCase
             Configure::clear();
             Configure::write(_configure);
         }
-        this.getTableLocator()->clear();
+        this.getTableLocator().clear();
         _configure = [];
         _tableLocator = null;
     }
@@ -298,7 +298,7 @@ abstract class TestCase : BaseTestCase
         }
 
         this.fixtureStrategy = this.getFixtureStrategy();
-        this.fixtureStrategy->setupTest($fixtureNames);
+        this.fixtureStrategy.setupTest($fixtureNames);
     }
 
     /**
@@ -309,7 +309,7 @@ abstract class TestCase : BaseTestCase
     protected function teardownFixtures(): void
     {
         if (this.fixtureStrategy) {
-            this.fixtureStrategy->teardownTest();
+            this.fixtureStrategy.teardownTest();
             this.fixtureStrategy = null;
         }
     }
@@ -346,13 +346,13 @@ abstract class TestCase : BaseTestCase
 
         $args = func_get_args();
         foreach ($args as $class) {
-            static::$fixtureManager->loadSingle($class, null, this.dropTables);
+            static::$fixtureManager.loadSingle($class, null, this.dropTables);
         }
 
         if (empty($args)) {
             $autoFixtures = this.autoFixtures;
             this.autoFixtures = true;
-            static::$fixtureManager->load(this);
+            static::$fixtureManager.load(this);
             this.autoFixtures = $autoFixtures;
         }
     }
@@ -377,12 +377,12 @@ abstract class TestCase : BaseTestCase
         try {
             $reflect = new ReflectionClass($className);
             /** @var \Cake\Routing\IRoutingApplication $app */
-            $app = $reflect->newInstanceArgs($appArgs);
+            $app = $reflect.newInstanceArgs($appArgs);
         } catch (ReflectionException $e) {
             throw new LogicException(sprintf('Cannot load "%s" to load routes from.', $className), 0, $e);
         }
         $builder = Router::createRouteBuilder('/');
-        $app->routes($builder);
+        $app.routes($builder);
     }
 
     /**
@@ -402,16 +402,16 @@ abstract class TestCase : BaseTestCase
             ['']
         );
 
-        foreach ($plugins as $pluginName => $config) {
+        foreach ($plugins as $pluginName: $config) {
             if (is_array($config)) {
-                $app->addPlugin($pluginName, $config);
+                $app.addPlugin($pluginName, $config);
             } else {
-                $app->addPlugin($config);
+                $app.addPlugin($config);
             }
         }
-        $app->pluginBootstrap();
+        $app.pluginBootstrap();
         $builder = Router::createRouteBuilder('/');
-        $app->pluginRoutes($builder);
+        $app.pluginRoutes($builder);
 
         return $app;
     }
@@ -428,7 +428,7 @@ abstract class TestCase : BaseTestCase
     {
         $collection = Plugin::getCollection();
         foreach ($names as $name) {
-            $collection->remove($name);
+            $collection.remove($name);
         }
     }
 
@@ -441,7 +441,7 @@ abstract class TestCase : BaseTestCase
      */
     function clearPlugins(): void
     {
-        Plugin::getCollection()->clear();
+        Plugin::getCollection().clear();
     }
 
     /**
@@ -678,17 +678,17 @@ abstract class TestCase : BaseTestCase
      * attribute that contains 'my-input':
      *
      * ```
-     * ['input' => ['name', 'id' => 'my-input']]
+     * ['input': ['name', 'id': 'my-input']]
      * ```
      *
      * Checks for two p elements with some text in them:
      *
      * ```
      * [
-     *   ['p' => true],
+     *   ['p': true],
      *   'textA',
      *   '/p',
-     *   ['p' => true],
+     *   ['p': true],
      *   'textB',
      *   '/p'
      * ]
@@ -699,7 +699,7 @@ abstract class TestCase : BaseTestCase
      *
      * ```
      * [
-     *   ['input' => ['name', 'id' => 'preg:/FieldName\d+/']],
+     *   ['input': ['name', 'id': 'preg:/FieldName\d+/']],
      *   'preg:/My\s+field/'
      * ]
      * ```
@@ -716,9 +716,9 @@ abstract class TestCase : BaseTestCase
     {
         $regex = [];
         $normalized = [];
-        foreach ($expected as $key => $val) {
+        foreach ($expected as $key: $val) {
             if (!is_numeric($key)) {
-                $normalized[] = [$key => $val];
+                $normalized[] = [$key: $val];
             } else {
                 $normalized[] = $val;
             }
@@ -731,7 +731,7 @@ abstract class TestCase : BaseTestCase
             $i++;
             if (is_string($tags) && $tags[0] == '<') {
                 /** @psalm-suppress InvalidArrayOffset */
-                $tags = [substr($tags, 1) => []];
+                $tags = [substr($tags, 1): []];
             } elseif (is_string($tags)) {
                 $tagsTrimmed = preg_replace('/\s+/m', '', $tags);
 
@@ -762,7 +762,7 @@ abstract class TestCase : BaseTestCase
                 ];
                 continue;
             }
-            foreach ($tags as $tag => $attributes) {
+            foreach ($tags as $tag: $attributes) {
                 /** @psalm-suppress PossiblyFalseArgument */
                 $regex[] = [
                     sprintf('Open %s tag', $tag),
@@ -775,7 +775,7 @@ abstract class TestCase : BaseTestCase
                 $attrs = [];
                 $explanations = [];
                 $i = 1;
-                foreach ($attributes as $attr => $val) {
+                foreach ($attributes as $attr: $val) {
                     if (is_numeric($attr) && preg_match('/^preg\:\/(.+)\/$/i', (string)$val, $matches)) {
                         $attrs[] = $matches[1];
                         $explanations[] = sprintf('Regex "%s" matches', $matches[1]);
@@ -806,8 +806,8 @@ abstract class TestCase : BaseTestCase
                 }
                 if ($attrs) {
                     $regex[] = [
-                        'explains' => $explanations,
-                        'attrs' => $attrs,
+                        'explains': $explanations,
+                        'attrs': $attrs,
                     ];
                 }
                 /** @psalm-suppress PossiblyFalseArgument */
@@ -821,7 +821,7 @@ abstract class TestCase : BaseTestCase
         /**
          * @var array<string, mixed> $assertion
          */
-        foreach ($regex as $i => $assertion) {
+        foreach ($regex as $i: $assertion) {
             $matches = false;
             if (isset($assertion['attrs'])) {
                 $string = _assertAttributes($assertion, $string, $fullDebug, $regex);
@@ -880,7 +880,7 @@ abstract class TestCase : BaseTestCase
         do {
             $matches = false;
             $j = null;
-            foreach ($asserts as $j => $assert) {
+            foreach ($asserts as $j: $assert) {
                 if (preg_match(sprintf('/^%s/s', $assert), $string, $match)) {
                     $matches = true;
                     $string = substr($string, strlen($match[0]));
@@ -998,45 +998,45 @@ abstract class TestCase : BaseTestCase
         $locator = this.getTableLocator();
 
         [, $baseClass] = pluginSplit($alias);
-        $options += ['alias' => $baseClass, 'connection' => $connection];
-        $options += $locator->getConfig($alias);
+        $options += ['alias': $baseClass, 'connection': $connection];
+        $options += $locator.getConfig($alias);
         $reflection = new ReflectionClass($className);
         $classMethods = array_map(function ($method) {
-            return $method->name;
-        }, $reflection->getMethods());
+            return $method.name;
+        }, $reflection.getMethods());
 
         $existingMethods = array_intersect($classMethods, $methods);
         $nonExistingMethods = array_diff($methods, $existingMethods);
 
         $builder = this.getMockBuilder($className)
-            ->setConstructorArgs([$options]);
+            .setConstructorArgs([$options]);
 
         if ($existingMethods || !$nonExistingMethods) {
-            $builder->onlyMethods($existingMethods);
+            $builder.onlyMethods($existingMethods);
         }
 
         if ($nonExistingMethods) {
-            $builder->addMethods($nonExistingMethods);
+            $builder.addMethods($nonExistingMethods);
         }
 
         /** @var \Cake\ORM\Table $mock */
-        $mock = $builder->getMock();
+        $mock = $builder.getMock();
 
-        if (empty($options['entityClass']) && $mock->getEntityClass() == Entity::class) {
+        if (empty($options['entityClass']) && $mock.getEntityClass() == Entity::class) {
             $parts = explode('\\', $className);
             $entityAlias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
             $entityClass = implode('\\', array_slice($parts, 0, -1)) . '\\Entity\\' . $entityAlias;
             if (class_exists($entityClass)) {
-                $mock->setEntityClass($entityClass);
+                $mock.setEntityClass($entityClass);
             }
         }
 
-        if (stripos($mock->getTable(), 'mock') == 0) {
-            $mock->setTable(Inflector::tableize($baseClass));
+        if (stripos($mock.getTable(), 'mock') == 0) {
+            $mock.setTable(Inflector::tableize($baseClass));
         }
 
-        $locator->set($baseClass, $mock);
-        $locator->set($alias, $mock);
+        $locator.set($baseClass, $mock);
+        $locator.set($alias, $mock);
 
         return $mock;
     }

@@ -81,12 +81,12 @@ class Router
      * @var array<string, string>
      */
     protected static $_namedExpressions = [
-        "Action" => Router::ACTION,
-        "Year" => Router::YEAR,
-        "Month" => Router::MONTH,
-        "Day" => Router::DAY,
-        "ID" => Router::ID,
-        "UUID" => Router::UUID,
+        "Action": Router::ACTION,
+        "Year": Router::YEAR,
+        "Month": Router::MONTH,
+        "Day": Router::DAY,
+        "ID": Router::ID,
+        "UUID": Router::UUID,
     ];
 
     /**
@@ -207,9 +207,9 @@ class Router
 
         $uri = myRequest.getUri();
         static::$_requestContext += [
-            "_scheme" => $uri.getScheme(),
-            "_host" => $uri.getHost(),
-            "_port" => $uri.getPort(),
+            "_scheme": $uri.getScheme(),
+            "_host": $uri.getHost(),
+            "_port": $uri.getPort(),
         ];
     }
 
@@ -236,7 +236,7 @@ class Router
 
             return;
         }
-        foreach (static::$_initialState as myKey => $val) {
+        foreach (static::$_initialState as myKey: $val) {
             if (myKey != "_initialState") {
                 static::${myKey} = $val;
             }
@@ -342,9 +342,9 @@ class Router
      *
      * - `Router::url("/posts/edit/1");` Returns the string with the base dir prepended.
      *   This usage does not use reverser routing.
-     * - `Router::url(["controller" => "Posts", "action" => "edit"]);` Returns a URL
+     * - `Router::url(["controller": "Posts", "action": "edit"]);` Returns a URL
      *   generated through reverse routing.
-     * - `Router::url(["_name" => "custom-name", ...]);` Returns a URL generated
+     * - `Router::url(["_name": "custom-name", ...]);` Returns a URL generated
      *   through reverse routing. This form allows you to leverage named routes.
      *
      * There are a few "special" parameters that can change the final URL string that is generated
@@ -388,10 +388,10 @@ class Router
         }
 
         myParams = [
-            "plugin" => null,
-            "controller" => null,
-            "action" => "index",
-            "_ext" => null,
+            "plugin": null,
+            "controller": null,
+            "action": "index",
+            "_ext": null,
         ];
         if (!empty($context["params"])) {
             myParams = $context["params"];
@@ -436,10 +436,10 @@ class Router
                 }
 
                 myUrl += [
-                    "plugin" => myParams["plugin"],
-                    "controller" => myParams["controller"],
-                    "action" => "index",
-                    "_ext" => null,
+                    "plugin": myParams["plugin"],
+                    "controller": myParams["controller"],
+                    "action": "index",
+                    "_ext": null,
                 ];
             }
 
@@ -499,7 +499,7 @@ class Router
      * @return string Full translated URL with base path.
      */
     static string pathUrl(string myPath, array myParams = [], bool $full = false) {
-        return static::url(["_path" => myPath] + myParams, $full);
+        return static::url(["_path": myPath] + myParams, $full);
     }
 
     /**
@@ -575,9 +575,9 @@ class Router
 
         $parts = parse_url(static::$_fullBaseUrl);
         static::$_requestContext = [
-            "_scheme" => $parts["scheme"] ?? null,
-            "_host" => $parts["host"] ?? null,
-            "_port" => $parts["port"] ?? null,
+            "_scheme": $parts["scheme"] ?? null,
+            "_host": $parts["host"] ?? null,
+            "_port": $parts["port"] ?? null,
         ] + static::$_requestContext;
 
         return static::$_fullBaseUrl;
@@ -714,14 +714,14 @@ class Router
     static function createRouteBuilder(string myPath, array myOptions = []): RouteBuilder
     {
         $defaults = [
-            "routeClass" => static::defaultRouteClass(),
-            "extensions" => static::$_defaultExtensions,
+            "routeClass": static::defaultRouteClass(),
+            "extensions": static::$_defaultExtensions,
         ];
         myOptions += $defaults;
 
         return new RouteBuilder(static::$_collection, myPath, [], [
-            "routeClass" => myOptions["routeClass"],
-            "extensions" => myOptions["extensions"],
+            "routeClass": myOptions["routeClass"],
+            "extensions": myOptions["extensions"],
         ]);
     }
 
@@ -748,8 +748,8 @@ class Router
      * ### Example
      *
      * ```
-     * Router::scope("/blog", ["plugin" => "Blog"], function ($routes) {
-     *    $routes.connect("/", ["controller" => "Articles"]);
+     * Router::scope("/blog", ["plugin": "Blog"], function ($routes) {
+     *    $routes.connect("/", ["controller": "Articles"]);
      * });
      * ```
      *
@@ -789,7 +789,7 @@ class Router
      * relevant prefix information.
      *
      * The path parameter is used to generate the routing parameter name.
-     * For example a path of `admin` would result in `"prefix" => "Admin"` being
+     * For example a path of `admin` would result in `"prefix": "Admin"` being
      * applied to all connected routes.
      *
      * The prefix name will be inflected to the dasherized version to create
@@ -819,7 +819,7 @@ class Router
         myPath = myParams["path"] ?? "/" . Inflector::dasherize(myName);
         unset(myParams["path"]);
 
-        myParams = array_merge(myParams, ["prefix" => Inflector::camelize(myName)]);
+        myParams = array_merge(myParams, ["prefix": Inflector::camelize(myName)]);
         static::scope(myPath, myParams, $callback);
     }
 
@@ -851,7 +851,7 @@ class Router
             $callback = myOptions;
             myOptions = [];
         }
-        myParams = ["plugin" => myName];
+        myParams = ["plugin": myName];
         myPath = myOptions["path"] ?? "/" . Inflector::dasherize(myName);
         if (isset(myOptions["_namePrefix"])) {
             myParams["_namePrefix"] = myOptions["_namePrefix"];
@@ -905,8 +905,8 @@ class Router
         }
         myUrl += static::parseRoutePath(myUrl["_path"]);
         myUrl += [
-            "plugin" => false,
-            "prefix" => false,
+            "plugin": false,
+            "prefix": false,
         ];
         unset(myUrl["_path"]);
 

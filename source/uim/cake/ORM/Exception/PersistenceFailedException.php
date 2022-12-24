@@ -50,7 +50,7 @@ class PersistenceFailedException : CakeException
         _entity = $entity;
         if (is_array($message)) {
             $errors = [];
-            foreach (Hash::flatten($entity->getErrors()) as $field => $error) {
+            foreach (Hash::flatten($entity.getErrors()) as $field: $error) {
                 $errors[] = $field . ': "' . $error . '"';
             }
             if ($errors) {

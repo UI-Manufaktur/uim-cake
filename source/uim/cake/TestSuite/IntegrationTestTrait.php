@@ -471,14 +471,14 @@ trait IntegrationTestTrait
     protected function _sendRequest($url, $method, $data = []): void
     {
         $dispatcher = _makeDispatcher();
-        $url = $dispatcher->resolveUrl($url);
+        $url = $dispatcher.resolveUrl($url);
 
         try {
             $request = _buildRequest($url, $method, $data);
-            $response = $dispatcher->execute($request);
+            $response = $dispatcher.execute($request);
             _requestSession = $request['session'];
             if (_retainFlashMessages && _flashMessages) {
-                _requestSession->write('Flash', _flashMessages);
+                _requestSession.write('Flash', _flashMessages);
             }
             _response = $response;
         } catch (PHPUnitException | DatabaseException $e) {
@@ -497,7 +497,7 @@ trait IntegrationTestTrait
      */
     protected function _makeDispatcher(): MiddlewareDispatcher
     {
-        EventManager::instance()->on('Controller.initialize', [this, 'controllerSpy']);
+        EventManager::instance().on('Controller.initialize', [this, 'controllerSpy']);
         /** @var \Cake\Core\IHttpApplication $app */
         $app = this.createApp();
 
@@ -515,28 +515,28 @@ trait IntegrationTestTrait
     {
         if (!$controller) {
             /** @var \Cake\Controller\Controller $controller */
-            $controller = $event->getSubject();
+            $controller = $event.getSubject();
         }
         _controller = $controller;
-        $events = $controller->getEventManager();
+        $events = $controller.getEventManager();
         $flashCapture = function (EventInterface $event): void {
             if (!_retainFlashMessages) {
                 return;
             }
-            $controller = $event->getSubject();
+            $controller = $event.getSubject();
             _flashMessages = Hash::merge(
                 _flashMessages,
-                $controller->getRequest()->getSession()->read('Flash')
+                $controller.getRequest().getSession().read('Flash')
             );
         };
-        $events->on('Controller.beforeRedirect', ['priority' => -100], $flashCapture);
-        $events->on('Controller.beforeRender', ['priority' => -100], $flashCapture);
-        $events->on('View.beforeRender', function ($event, $viewFile): void {
+        $events.on('Controller.beforeRedirect', ['priority': -100], $flashCapture);
+        $events.on('Controller.beforeRender', ['priority': -100], $flashCapture);
+        $events.on('View.beforeRender', function ($event, $viewFile): void {
             if (!_viewName) {
                 _viewName = $viewFile;
             }
         });
-        $events->on('View.beforeLayout', function ($event, $viewFile): void {
+        $events.on('View.beforeLayout', function ($event, $viewFile): void {
             _layoutName = $viewFile;
         });
     }
@@ -558,7 +558,7 @@ trait IntegrationTestTrait
         }
         /** @var \Cake\Error\Renderer\WebExceptionRenderer $instance */
         $instance = new $class($exception);
-        _response = $instance->render();
+        _response = $instance.render();
     }
 
     /**
@@ -572,7 +572,7 @@ trait IntegrationTestTrait
     protected function _buildRequest(string $url, $method, $data = []): array
     {
         $sessionConfig = (array)Configure::read('Session') + [
-            'defaults' => 'php',
+            'defaults': 'php',
         ];
         $session = Session::create($sessionConfig);
         [$url, $query, $hostInfo] = _url($url);
@@ -585,9 +585,9 @@ trait IntegrationTestTrait
         parse_str($query, $queryData);
 
         $env = [
-            'REQUEST_METHOD' => $method,
-            'QUERY_STRING' => $query,
-            'REQUEST_URI' => $url,
+            'REQUEST_METHOD': $method,
+            'QUERY_STRING': $query,
+            'REQUEST_URI': $url,
         ];
         if (!empty($hostInfo['ssl'])) {
             $env['HTTPS'] = 'on';
@@ -596,7 +596,7 @@ trait IntegrationTestTrait
             $env['HTTP_HOST'] = $hostInfo['host'];
         }
         if (isset(_request['headers'])) {
-            foreach (_request['headers'] as $k => $v) {
+            foreach (_request['headers'] as $k: $v) {
                 $name = strtoupper(str_replace('-', '_', $k));
                 if (!in_array($name, ['CONTENT_LENGTH', 'CONTENT_TYPE'], true)) {
                     $name = 'HTTP_' . $name;
@@ -606,11 +606,11 @@ trait IntegrationTestTrait
             unset(_request['headers']);
         }
         $props = [
-            'url' => $url,
-            'session' => $session,
-            'query' => $queryData,
-            'files' => [],
-            'environment' => $env,
+            'url': $url,
+            'session': $session,
+            'query': $queryData,
+            'files': [],
+            'environment': $env,
         ];
 
         if (is_string($data)) {
@@ -627,7 +627,7 @@ trait IntegrationTestTrait
         }
 
         $props['cookies'] = _cookie;
-        $session->write(_session);
+        $session.write(_session);
 
         return Hash::merge($props, _request);
     }
@@ -648,11 +648,11 @@ trait IntegrationTestTrait
                 return preg_replace('/(\.\d+)+$/', '', $field);
             }, array_keys(Hash::flatten($fields)));
 
-            $formProtector = new FormProtector(['unlockedFields' => _unlockedFields]);
+            $formProtector = new FormProtector(['unlockedFields': _unlockedFields]);
             foreach ($keys as $field) {
-                $formProtector->addField($field);
+                $formProtector.addField($field);
             }
-            $tokenData = $formProtector->buildTokenData($url, 'cli');
+            $tokenData = $formProtector.buildTokenData($url, 'cli');
 
             $data['_Token'] = $tokenData;
             $data['_Token']['debug'] = 'FormProtector debug data would be added here';
@@ -661,7 +661,7 @@ trait IntegrationTestTrait
         if (_csrfToken == true) {
             $middleware = new CsrfProtectionMiddleware();
             if (!isset(_cookie[_csrfKeyName]) && !isset(_session[_csrfKeyName])) {
-                $token = $middleware->createToken();
+                $token = $middleware.createToken();
             } elseif (isset(_cookie[_csrfKeyName])) {
                 $token = _cookie[_csrfKeyName];
             } else {
@@ -691,7 +691,7 @@ trait IntegrationTestTrait
      */
     protected function _castToString(array $data): array
     {
-        foreach ($data as $key => $value) {
+        foreach ($data as $key: $value) {
             if (is_scalar($value)) {
                 $data[$key] = $value == false ? '0' : (string)$value;
 
@@ -720,15 +720,15 @@ trait IntegrationTestTrait
     protected function _url(string $url): array
     {
         $uri = new Uri($url);
-        $path = $uri->getPath();
-        $query = $uri->getQuery();
+        $path = $uri.getPath();
+        $query = $uri.getQuery();
 
         $hostData = [];
-        if ($uri->getHost()) {
-            $hostData['host'] = $uri->getHost();
+        if ($uri.getHost()) {
+            $hostData['host'] = $uri.getHost();
         }
-        if ($uri->getScheme()) {
-            $hostData['ssl'] = $uri->getScheme() == 'https';
+        if ($uri.getScheme()) {
+            $hostData['ssl'] = $uri.getScheme() == 'https';
         }
 
         return [$path, $query, $hostData];
@@ -745,7 +745,7 @@ trait IntegrationTestTrait
             this.fail('No response set, cannot assert content.');
         }
 
-        return (string)_response->getBody();
+        return (string)_response.getBody();
     }
 
     /**
@@ -758,7 +758,7 @@ trait IntegrationTestTrait
      */
     function viewVariable(string $name)
     {
-        return _controller ? _controller->viewBuilder()->getVar($name) : null;
+        return _controller ? _controller.viewBuilder().getVar($name) : null;
     }
 
     /**
@@ -1324,7 +1324,7 @@ trait IntegrationTestTrait
         if (!_response) {
             return;
         }
-        _response->getBody()->close();
+        _response.getBody().close();
     }
 
     /**
@@ -1341,7 +1341,7 @@ trait IntegrationTestTrait
         if (_controller == null) {
             return $message;
         }
-        $error = _controller->viewBuilder()->getVar('error');
+        $error = _controller.viewBuilder().getVar('error');
         if ($error instanceof Exception) {
             $message .= this.extractExceptionMessage(this.viewVariable('error'));
         }
@@ -1358,21 +1358,21 @@ trait IntegrationTestTrait
     protected function extractExceptionMessage(Exception $exception): string
     {
         $exceptions = [$exception];
-        $previous = $exception->getPrevious();
+        $previous = $exception.getPrevious();
         while ($previous != null) {
             $exceptions[] = $previous;
-            $previous = $previous->getPrevious();
+            $previous = $previous.getPrevious();
         }
         $message = PHP_EOL;
-        foreach ($exceptions as $i => $error) {
+        foreach ($exceptions as $i: $error) {
             if ($i == 0) {
-                $message .= sprintf('Possibly related to %s: "%s"', get_class($error), $error->getMessage());
+                $message .= sprintf('Possibly related to %s: "%s"', get_class($error), $error.getMessage());
                 $message .= PHP_EOL;
             } else {
-                $message .= sprintf('Caused by %s: "%s"', get_class($error), $error->getMessage());
+                $message .= sprintf('Caused by %s: "%s"', get_class($error), $error.getMessage());
                 $message .= PHP_EOL;
             }
-            $message .= $error->getTraceAsString();
+            $message .= $error.getTraceAsString();
             $message .= PHP_EOL;
         }
 

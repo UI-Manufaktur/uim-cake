@@ -49,16 +49,16 @@ class RouteBuilder
     public const UUID = '[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}';
 
     /**
-     * Default HTTP request method => controller action map.
+     * Default HTTP request method: controller action map.
      *
      * @var array<string, array>
      */
     protected static $_resourceMap = [
-        'index' => ['action' => 'index', 'method' => 'GET', 'path' => ''],
-        'create' => ['action' => 'add', 'method' => 'POST', 'path' => ''],
-        'view' => ['action' => 'view', 'method' => 'GET', 'path' => '{id}'],
-        'update' => ['action' => 'edit', 'method' => ['PUT', 'PATCH'], 'path' => '{id}'],
-        'delete' => ['action' => 'delete', 'method' => 'DELETE', 'path' => '{id}'],
+        'index': ['action': 'index', 'method': 'GET', 'path': ''],
+        'create': ['action': 'add', 'method': 'POST', 'path': ''],
+        'view': ['action': 'view', 'method': 'GET', 'path': '{id}'],
+        'update': ['action': 'edit', 'method': ['PUT', 'PATCH'], 'path': '{id}'],
+        'delete': ['action': 'delete', 'method': 'DELETE', 'path': '{id}'],
     ];
 
     /**
@@ -246,7 +246,7 @@ class RouteBuilder
      */
     function nameExists(string $name): bool
     {
-        return array_key_exists($name, _collection->named());
+        return array_key_exists($name, _collection.named());
     }
 
     /**
@@ -277,7 +277,7 @@ class RouteBuilder
      * Connect resource routes for an app controller:
      *
      * ```
-     * $routes->resources('Posts');
+     * $routes.resources('Posts');
      * ```
      *
      * Connect resource routes for the Comments controller in the
@@ -285,7 +285,7 @@ class RouteBuilder
      *
      * ```
      * Router::plugin('Comments', function ($routes) {
-     *   $routes->resources('Comments');
+     *   $routes.resources('Comments');
      * });
      * ```
      *
@@ -297,7 +297,7 @@ class RouteBuilder
      *
      * ```
      * Router::prefix('Admin', function ($routes) {
-     *   $routes->resources('Articles');
+     *   $routes.resources('Articles');
      * });
      * ```
      *
@@ -307,8 +307,8 @@ class RouteBuilder
      * You can create nested resources by passing a callback in:
      *
      * ```
-     * $routes->resources('Articles', function ($routes) {
-     *   $routes->resources('Comments');
+     * $routes.resources('Articles', function ($routes) {
+     *   $routes.resources('Comments');
      * });
      * ```
      *
@@ -316,8 +316,8 @@ class RouteBuilder
      * You can use the `map` option to connect additional resource methods:
      *
      * ```
-     * $routes->resources('Articles', [
-     *   'map' => ['deleteAll' => ['action' => 'deleteAll', 'method' => 'DELETE']]
+     * $routes.resources('Articles', [
+     *   'map': ['deleteAll': ['action': 'deleteAll', 'method': 'DELETE']]
      * ]);
      * ```
      *
@@ -328,7 +328,7 @@ class RouteBuilder
      * You can use the `inflect` option to change how path segments are generated:
      *
      * ```
-     * $routes->resources('PaymentTypes', ['inflect' => 'underscore']);
+     * $routes.resources('PaymentTypes', ['inflect': 'underscore']);
      * ```
      *
      * Will generate routes like `/payment-types` instead of `/payment_types`
@@ -361,18 +361,18 @@ class RouteBuilder
             $options = [];
         }
         $options += [
-            'connectOptions' => [],
-            'inflect' => 'dasherize',
-            'id' => static::ID . '|' . static::UUID,
-            'only' => [],
-            'actions' => [],
-            'map' => [],
-            'prefix' => null,
-            'path' => null,
+            'connectOptions': [],
+            'inflect': 'dasherize',
+            'id': static::ID . '|' . static::UUID,
+            'only': [],
+            'actions': [],
+            'map': [],
+            'prefix': null,
+            'path': null,
         ];
 
-        foreach ($options['map'] as $k => $mapped) {
-            $options['map'][$k] += ['method' => 'GET', 'path' => $k, 'action' => ''];
+        foreach ($options['map'] as $k: $mapped) {
+            $options['map'][$k] += ['method': 'GET', 'path': $k, 'action': ''];
         }
 
         $ext = null;
@@ -400,7 +400,7 @@ class RouteBuilder
             $prefix = _params['prefix'] . '/' . $prefix;
         }
 
-        foreach ($resourceMap as $method => $params) {
+        foreach ($resourceMap as $method: $params) {
             if (!in_array($method, $only, true)) {
                 continue;
             }
@@ -409,17 +409,17 @@ class RouteBuilder
 
             $url = '/' . implode('/', array_filter([$options['path'], $params['path']]));
             $params = [
-                'controller' => $name,
-                'action' => $action,
-                '_method' => $params['method'],
+                'controller': $name,
+                'action': $action,
+                '_method': $params['method'],
             ];
             if ($prefix) {
                 $params['prefix'] = $prefix;
             }
             $routeOptions = $connectOptions + [
-                'id' => $options['id'],
-                'pass' => ['id'],
-                '_ext' => $ext,
+                'id': $options['id'],
+                'pass': ['id'],
+                '_ext': $ext,
             ];
             this.connect($url, $params, $routeOptions);
         }
@@ -547,17 +547,17 @@ class RouteBuilder
             $name = _namePrefix . $name;
         }
         $options = [
-            '_name' => $name,
-            '_ext' => _extensions,
-            '_middleware' => this.middleware,
-            'routeClass' => _routeClass,
+            '_name': $name,
+            '_ext': _extensions,
+            '_middleware': this.middleware,
+            'routeClass': _routeClass,
         ];
 
         $target = this.parseDefaults($target);
         $target['_method'] = $method;
 
         $route = _makeRoute($template, $target, $options);
-        _collection->add($route, $options);
+        _collection.add($route, $options);
 
         return $route;
     }
@@ -576,14 +576,14 @@ class RouteBuilder
     function loadPlugin(string $name)
     {
         $plugins = Plugin::getCollection();
-        if (!$plugins->has($name)) {
-            throw new MissingPluginException(['plugin' => $name]);
+        if (!$plugins.has($name)) {
+            throw new MissingPluginException(['plugin': $name]);
         }
-        $plugin = $plugins->get($name);
-        $plugin->routes(this);
+        $plugin = $plugins.get($name);
+        $plugin.routes(this);
 
         // Disable the routes hook to prevent duplicate route issues.
-        $plugin->disable('routes');
+        $plugin.disable('routes');
 
         return this;
     }
@@ -598,7 +598,7 @@ class RouteBuilder
      * Examples:
      *
      * ```
-     * $routes->connect('/{controller}/{action}/*');
+     * $routes.connect('/{controller}/{action}/*');
      * ```
      *
      * The first parameter will be used as a controller name while the second is
@@ -607,17 +607,17 @@ class RouteBuilder
      * like `/posts/edit/1/foo/bar`.
      *
      * ```
-     * $routes->connect('/home-page', ['controller' => 'Pages', 'action' => 'display', 'home']);
+     * $routes.connect('/home-page', ['controller': 'Pages', 'action': 'display', 'home']);
      * ```
      *
      * The above shows the use of route parameter defaults. And providing routing
      * parameters for a static route.
      *
      * ```
-     * $routes->connect(
+     * $routes.connect(
      *   '/{lang}/{controller}/{action}/{id}',
      *   [],
-     *   ['id' => '[0-9]+', 'lang' => '[a-z]{3}']
+     *   ['id': '[0-9]+', 'lang': '[a-z]{3}']
      * );
      * ```
      *
@@ -630,14 +630,14 @@ class RouteBuilder
      *
      * - `routeClass` is used to extend and change how individual routes parse requests
      *   and handle reverse routing, via a custom routing class.
-     *   Ex. `'routeClass' => 'SlugRoute'`
+     *   Ex. `'routeClass': 'SlugRoute'`
      * - `pass` is used to define which of the routed parameters should be shifted
      *   into the pass array. Adding a parameter to pass will remove it from the
-     *   regular route array. Ex. `'pass' => ['slug']`.
+     *   regular route array. Ex. `'pass': ['slug']`.
      * -  `persist` is used to define which route parameters should be automatically
      *   included when generating new URLs. You can override persistent parameters
      *   by redefining them in a URL or remove them by setting the parameter to `false`.
-     *   Ex. `'persist' => ['lang']`
+     *   Ex. `'persist': ['lang']`
      * - `multibytePattern` Set to true to enable multibyte pattern support in route
      *   parameter patterns.
      * - `_name` is used to define a specific name for routes. This can be used to optimize
@@ -654,7 +654,7 @@ class RouteBuilder
      * Example of using the `_method` condition:
      *
      * ```
-     * $routes->connect('/tasks', ['controller' => 'Tasks', 'action' => 'index', '_method' => 'GET']);
+     * $routes.connect('/tasks', ['controller': 'Tasks', 'action': 'index', '_method': 'GET']);
      * ```
      *
      * The above route will only be matched for GET requests. POST requests will fail to match this route.
@@ -687,7 +687,7 @@ class RouteBuilder
         }
 
         $route = _makeRoute($route, $defaults, $options);
-        _collection->add($route, $options);
+        _collection.add($route, $options);
 
         return $route;
     }
@@ -734,7 +734,7 @@ class RouteBuilder
                 $route = rtrim($route, '/');
             }
 
-            foreach (_params as $param => $val) {
+            foreach (_params as $param: $val) {
                 if (isset($defaults[$param]) && $param != 'prefix' && $defaults[$param] != $val) {
                     $msg = 'You cannot define routes that conflict with the scope. ' .
                         'Scope had %s = %s, while route had %s = %s';
@@ -747,7 +747,7 @@ class RouteBuilder
                     ));
                 }
             }
-            $defaults += _params + ['plugin' => null];
+            $defaults += _params + ['plugin': null];
             if (!isset($defaults['action']) && !isset($options['action'])) {
                 $defaults['action'] = 'index';
             }
@@ -768,14 +768,14 @@ class RouteBuilder
      * Examples:
      *
      * ```
-     * $routes->redirect('/home/*', ['controller' => 'Posts', 'action' => 'view']);
+     * $routes.redirect('/home/*', ['controller': 'Posts', 'action': 'view']);
      * ```
      *
      * Redirects /home/* to /posts/view and passes the parameters to /posts/view. Using an array as the
      * redirect destination allows you to use other routes to define where a URL string should be redirected to.
      *
      * ```
-     * $routes->redirect('/posts/*', 'http://google.com', ['status' => 302]);
+     * $routes.redirect('/posts/*', 'http://google.com', ['status': 302]);
      * ```
      *
      * Redirects /posts/* to http://google.com with a HTTP status of 302
@@ -797,7 +797,7 @@ class RouteBuilder
     {
         $options['routeClass'] = $options['routeClass'] ?? RedirectRoute::class;
         if (is_string($url)) {
-            $url = ['redirect' => $url];
+            $url = ['redirect': $url];
         }
 
         return this.connect($route, $url, $options);
@@ -810,7 +810,7 @@ class RouteBuilder
      * relevant prefix information.
      *
      * The $name parameter is used to generate the routing parameter name.
-     * For example a path of `admin` would result in `'prefix' => 'admin'` being
+     * For example a path of `admin` would result in `'prefix': 'admin'` being
      * applied to all connected routes.
      *
      * You can re-open a prefix as many times as necessary, as well as nest prefixes.
@@ -821,8 +821,8 @@ class RouteBuilder
      * for $params argument:
      *
      * ```
-     * $route->prefix('Api', function($route) {
-     *     $route->prefix('V10', ['path' => '/v1.0'], function($route) {
+     * $route.prefix('Api', function($route) {
+     *     $route.prefix('V10', ['path': '/v1.0'], function($route) {
      *         // Translates to `Controller\Api\V10\` namespace
      *     });
      * });
@@ -850,7 +850,7 @@ class RouteBuilder
         if (isset(_params['prefix'])) {
             $name = _params['prefix'] . '/' . $name;
         }
-        $params = array_merge($params, ['prefix' => $name]);
+        $params = array_merge($params, ['prefix': $name]);
         this.scope($path, $params, $callback);
 
         return this;
@@ -889,7 +889,7 @@ class RouteBuilder
 
         $path = $options['path'] ?? '/' . Inflector::dasherize($name);
         unset($options['path']);
-        $options = ['plugin' => $name] + $options;
+        $options = ['plugin': $name] + $options;
         this.scope($path, $options, $callback);
 
         return this;
@@ -938,10 +938,10 @@ class RouteBuilder
 
         $params += _params;
         $builder = new static(_collection, $path, $params, [
-            'routeClass' => _routeClass,
-            'extensions' => _extensions,
-            'namePrefix' => $namePrefix,
-            'middleware' => this.middleware,
+            'routeClass': _routeClass,
+            'extensions': _extensions,
+            'namePrefix': $namePrefix,
+            'middleware': this.middleware,
         ]);
         $callback($builder);
 
@@ -960,7 +960,7 @@ class RouteBuilder
     function fallbacks(?string $routeClass = null)
     {
         $routeClass = $routeClass ?: _routeClass;
-        this.connect('/{controller}', ['action' => 'index'], compact('routeClass'));
+        this.connect('/{controller}', ['action': 'index'], compact('routeClass'));
         this.connect('/{controller}/{action}/*', [], compact('routeClass'));
 
         return this;
@@ -979,7 +979,7 @@ class RouteBuilder
      */
     function registerMiddleware(string $name, $middleware)
     {
-        _collection->registerMiddleware($name, $middleware);
+        _collection.registerMiddleware($name, $middleware);
 
         return this;
     }
@@ -997,7 +997,7 @@ class RouteBuilder
     function applyMiddleware(string ...$names)
     {
         foreach ($names as $name) {
-            if (!_collection->middlewareExists($name)) {
+            if (!_collection.middlewareExists($name)) {
                 $message = "Cannot apply '$name' middleware or middleware group. " .
                     'Use registerMiddleware() to register middleware.';
                 throw new RuntimeException($message);
@@ -1027,7 +1027,7 @@ class RouteBuilder
      */
     function middlewareGroup(string $name, array $middlewareNames)
     {
-        _collection->middlewareGroup($name, $middlewareNames);
+        _collection.middlewareGroup($name, $middlewareNames);
 
         return this;
     }

@@ -89,24 +89,24 @@ class RouteCollection
             if (isset(_named[$options['_name']])) {
                 $matched = _named[$options['_name']];
                 throw new DuplicateNamedRouteException([
-                    'name' => $options['_name'],
-                    'url' => $matched->template,
-                    'duplicate' => $matched,
+                    'name': $options['_name'],
+                    'url': $matched.template,
+                    'duplicate': $matched,
                 ]);
             }
             _named[$options['_name']] = $route;
         }
 
         // Generated names.
-        $name = $route->getName();
+        $name = $route.getName();
         _routeTable[$name] = _routeTable[$name] ?? [];
         _routeTable[$name][] = $route;
 
         // Index path prefixes (for parsing)
-        $path = $route->staticPath();
+        $path = $route.staticPath();
         _paths[$path][] = $route;
 
-        $extensions = $route->getExtensions();
+        $extensions = $route.getExtensions();
         if (count($extensions) > 0) {
             this.setExtensions($extensions);
         }
@@ -127,7 +127,7 @@ class RouteCollection
         // Sort path segments matching longest paths first.
         krsort(_paths);
 
-        foreach (_paths as $path => $routes) {
+        foreach (_paths as $path: $routes) {
             if (strpos($decoded, $path) != 0) {
                 continue;
             }
@@ -139,7 +139,7 @@ class RouteCollection
             }
 
             foreach ($routes as $route) {
-                $r = $route->parse($url, $method);
+                $r = $route.parse($url, $method);
                 if ($r == null) {
                     continue;
                 }
@@ -151,12 +151,12 @@ class RouteCollection
             }
         }
 
-        $exceptionProperties = ['url' => $url];
+        $exceptionProperties = ['url': $url];
         if ($method != '') {
             // Ensure that if the method is included, it is the first element of
             // the array, to match the order that the strings are printed in the
             // MissingRouteException error message, $_messageTemplateWithMethod.
-            $exceptionProperties = array_merge(['method' => $method], $exceptionProperties);
+            $exceptionProperties = array_merge(['method': $method], $exceptionProperties);
         }
         throw new MissingRouteException($exceptionProperties);
     }
@@ -170,31 +170,31 @@ class RouteCollection
      */
     function parseRequest(IServerRequest $request): array
     {
-        $uri = $request->getUri();
-        $urlPath = urldecode($uri->getPath());
+        $uri = $request.getUri();
+        $urlPath = urldecode($uri.getPath());
 
         // Sort path segments matching longest paths first.
         krsort(_paths);
 
-        foreach (_paths as $path => $routes) {
+        foreach (_paths as $path: $routes) {
             if (strpos($urlPath, $path) != 0) {
                 continue;
             }
 
             foreach ($routes as $route) {
-                $r = $route->parseRequest($request);
+                $r = $route.parseRequest($request);
                 if ($r == null) {
                     continue;
                 }
-                if ($uri->getQuery()) {
-                    parse_str($uri->getQuery(), $queryParameters);
+                if ($uri.getQuery()) {
+                    parse_str($uri.getQuery(), $queryParameters);
                     $r['?'] = $queryParameters;
                 }
 
                 return $r;
             }
         }
-        throw new MissingRouteException(['url' => $urlPath]);
+        throw new MissingRouteException(['url': $urlPath]);
     }
 
     /**
@@ -299,17 +299,17 @@ class RouteCollection
             unset($url['_name']);
             if (isset(_named[$name])) {
                 $route = _named[$name];
-                $out = $route->match($url + $route->defaults, $context);
+                $out = $route.match($url + $route.defaults, $context);
                 if ($out) {
                     return $out;
                 }
                 throw new MissingRouteException([
-                    'url' => $name,
-                    'context' => $context,
-                    'message' => "A named route was found for `{$name}`, but matching failed.",
+                    'url': $name,
+                    'context': $context,
+                    'message': "A named route was found for `{$name}`, but matching failed.",
                 ]);
             }
-            throw new MissingRouteException(['url' => $name, 'context' => $context]);
+            throw new MissingRouteException(['url': $name, 'context': $context]);
         }
 
         foreach (_getNames($url) as $name) {
@@ -317,13 +317,13 @@ class RouteCollection
                 continue;
             }
             foreach (_routeTable[$name] as $route) {
-                $match = $route->match($url, $context);
+                $match = $route.match($url, $context);
                 if ($match) {
                     return $match == '/' ? $match : trim($match, '/');
                 }
             }
         }
-        throw new MissingRouteException(['url' => var_export($url, true), 'context' => $context]);
+        throw new MissingRouteException(['url': var_export($url, true), 'context': $context]);
     }
 
     /**

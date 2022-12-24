@@ -107,28 +107,28 @@ trait TranslateStrategyTrait
     protected function unsetEmptyFields($entity)
     {
         /** @var array<\Cake\ORM\Entity> $translations */
-        $translations = (array)$entity->get('_translations');
-        foreach ($translations as $locale => $translation) {
-            $fields = $translation->extract(_config['fields'], false);
-            foreach ($fields as $field => $value) {
+        $translations = (array)$entity.get('_translations');
+        foreach ($translations as $locale: $translation) {
+            $fields = $translation.extract(_config['fields'], false);
+            foreach ($fields as $field: $value) {
                 if ($value == null || $value == '') {
-                    $translation->unset($field);
+                    $translation.unset($field);
                 }
             }
 
-            $translation = $translation->extract(_config['fields']);
+            $translation = $translation.extract(_config['fields']);
 
             // If now, the current locale property is empty,
             // unset it completely.
             if (empty(array_filter($translation))) {
-                unset($entity->get('_translations')[$locale]);
+                unset($entity.get('_translations')[$locale]);
             }
         }
 
         // If now, the whole _translations property is empty,
         // unset it completely and return
-        if (empty($entity->get('_translations'))) {
-            $entity->unset('_translations');
+        if (empty($entity.get('_translations'))) {
+            $entity.unset('_translations');
         }
     }
 
@@ -136,13 +136,13 @@ trait TranslateStrategyTrait
      * Build a set of properties that should be included in the marshalling process.
 
      * Add in `_translations` marshalling handlers. You can disable marshalling
-     * of translations by setting `'translations' => false` in the options
+     * of translations by setting `'translations': false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
      * @param \Cake\ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
      * @param array $map The property map being built.
      * @param array<string, mixed> $options The options array used in the marshalling call.
-     * @return array A map of `[property => callable]` of additional properties to marshal.
+     * @return array A map of `[property: callable]` of additional properties to marshal.
      */
     function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
     {
@@ -151,26 +151,26 @@ trait TranslateStrategyTrait
         }
 
         return [
-            '_translations' => function ($value, $entity) use ($marshaller, $options) {
+            '_translations': function ($value, $entity) use ($marshaller, $options) {
                 if (!is_array($value)) {
                     return null;
                 }
 
                 /** @var array<string, \Cake\Datasource\EntityInterface>|null $translations */
-                $translations = $entity->get('_translations');
+                $translations = $entity.get('_translations');
                 if ($translations == null) {
                     $translations = [];
                 }
 
                 $options['validate'] = _config['validator'];
                 $errors = [];
-                foreach ($value as $language => $fields) {
+                foreach ($value as $language: $fields) {
                     if (!isset($translations[$language])) {
-                        $translations[$language] = this.table->newEmptyEntity();
+                        $translations[$language] = this.table.newEmptyEntity();
                     }
-                    $marshaller->merge($translations[$language], $fields, $options);
+                    $marshaller.merge($translations[$language], $fields, $options);
 
-                    $translationErrors = $translations[$language]->getErrors();
+                    $translationErrors = $translations[$language].getErrors();
                     if ($translationErrors) {
                         $errors[$language] = $translationErrors;
                     }
@@ -178,7 +178,7 @@ trait TranslateStrategyTrait
 
                 // Set errors into the root entity, so validation errors match the original form data position.
                 if ($errors) {
-                    $entity->setErrors(['_translations' => $errors]);
+                    $entity.setErrors(['_translations': $errors]);
                 }
 
                 return $translations;
@@ -195,6 +195,6 @@ trait TranslateStrategyTrait
      */
     function afterSave(EventInterface $event, EntityInterface $entity)
     {
-        $entity->unset('_i18n');
+        $entity.unset('_i18n');
     }
 }

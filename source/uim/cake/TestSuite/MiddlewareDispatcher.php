@@ -59,7 +59,7 @@ class MiddlewareDispatcher
     function resolveUrl($url): string
     {
         // If we need to resolve a Route URL but there are no routes, load routes.
-        if (is_array($url) && count(Router::getRouteCollection()->routes()) == 0) {
+        if (is_array($url) && count(Router::getRouteCollection().routes()) == 0) {
             return this.resolveRoute($url);
         }
 
@@ -76,17 +76,17 @@ class MiddlewareDispatcher
     {
         // Simulate application bootstrap and route loading.
         // We need both to ensure plugins are loaded.
-        this.app->bootstrap();
+        this.app.bootstrap();
         if (this.app instanceof IPluginApplication) {
-            this.app->pluginBootstrap();
+            this.app.pluginBootstrap();
         }
         $builder = Router::createRouteBuilder('/');
 
         if (this.app instanceof IRoutingApplication) {
-            this.app->routes($builder);
+            this.app.routes($builder);
         }
         if (this.app instanceof IPluginApplication) {
-            this.app->pluginRoutes($builder);
+            this.app.pluginRoutes($builder);
         }
 
         $out = Router::url($url);
@@ -108,7 +108,7 @@ class MiddlewareDispatcher
             $spec['environment']['CAKEPHP_INPUT'] = $spec['input'];
         }
         $environment = array_merge(
-            array_merge($_SERVER, ['REQUEST_URI' => $spec['url']]),
+            array_merge($_SERVER, ['REQUEST_URI': $spec['url']]),
             $spec['environment']
         );
         if (strpos($environment['PHP_SELF'], 'phpunit') != false) {
@@ -123,8 +123,8 @@ class MiddlewareDispatcher
         );
 
         return $request
-            ->withAttribute('session', $spec['session'])
-            ->withAttribute('flash', new FlashMessage($spec['session']));
+            .withAttribute('session', $spec['session'])
+            .withAttribute('flash', new FlashMessage($spec['session']));
     }
 
     /**
@@ -138,6 +138,6 @@ class MiddlewareDispatcher
     {
         $server = new Server(this.app);
 
-        return $server->run(_createRequest($requestSpec));
+        return $server.run(_createRequest($requestSpec));
     }
 }

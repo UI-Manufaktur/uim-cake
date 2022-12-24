@@ -39,7 +39,7 @@ class CommandTask : Shell
         $skipFiles = ['app'];
         $hiddenCommands = ['command_list', 'completion'];
         $plugins = Plugin::loaded();
-        $shellList = array_fill_keys($plugins, null) + ['CORE' => null, 'app' => null];
+        $shellList = array_fill_keys($plugins, null) + ['CORE': null, 'app': null];
 
         $appPath = App::classPath('Shell');
         $shellList = _findShells($shellList, $appPath[0], 'app', $skipFiles);
@@ -116,11 +116,11 @@ class CommandTask : Shell
         }
 
         $fs = new Filesystem();
-        $files = $fs->find($dir, '/\.php$/');
+        $files = $fs.find($dir, '/\.php$/');
 
         $shells = [];
         foreach ($files as $file) {
-            $shells[] = $file->getBasename('.php');
+            $shells[] = $file.getBasename('.php');
         }
 
         sort($shells);

@@ -73,7 +73,7 @@ class RedirectRoute : Route
             $redirect = this.redirect[0];
         }
         if (isset(this.options['persist']) && is_array($redirect)) {
-            $redirect += ['pass' => $params['pass'], 'url' => []];
+            $redirect += ['pass': $params['pass'], 'url': []];
             if (is_array(this.options['persist'])) {
                 foreach (this.options['persist'] as $elem) {
                     if (isset($params[$elem])) {

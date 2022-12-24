@@ -87,7 +87,7 @@ class LinkConstraint
      */
     protected string[] _aliasFields(array myFields, Table $source): array
     {
-        foreach (myFields as myKey => myValue) {
+        foreach (myFields as myKey: myValue) {
             myFields[myKey] = $source.aliasField(myValue);
         }
 

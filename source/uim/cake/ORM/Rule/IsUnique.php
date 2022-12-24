@@ -37,7 +37,7 @@ class IsUnique
      * @var array<string, mixed>
      */
     protected $_options = [
-        'allowMultipleNulls' => false,
+        'allowMultipleNulls': false,
     ];
 
     /**
@@ -66,26 +66,26 @@ class IsUnique
      */
     function __invoke(EntityInterface $entity, array $options): bool
     {
-        if (!$entity->extract(_fields, true)) {
+        if (!$entity.extract(_fields, true)) {
             return true;
         }
 
-        $fields = $entity->extract(_fields);
+        $fields = $entity.extract(_fields);
         if (_options['allowMultipleNulls'] && array_filter($fields, 'is_null')) {
             return true;
         }
 
-        $alias = $options['repository']->getAlias();
+        $alias = $options['repository'].getAlias();
         $conditions = _alias($alias, $fields);
-        if ($entity->isNew() == false) {
-            $keys = (array)$options['repository']->getPrimaryKey();
-            $keys = _alias($alias, $entity->extract($keys));
+        if ($entity.isNew() == false) {
+            $keys = (array)$options['repository'].getPrimaryKey();
+            $keys = _alias($alias, $entity.extract($keys));
             if (Hash::filter($keys)) {
                 $conditions['NOT'] = $keys;
             }
         }
 
-        return !$options['repository']->exists($conditions);
+        return !$options['repository'].exists($conditions);
     }
 
     /**
@@ -98,7 +98,7 @@ class IsUnique
     protected function _alias(string $alias, array $conditions): array
     {
         $aliased = [];
-        foreach ($conditions as $key => $value) {
+        foreach ($conditions as $key: $value) {
             $aliased["$alias.$key IS"] = $value;
         }
 

@@ -19,9 +19,9 @@ class TableHelper : Helper {
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        "headers" => true,
-        "rowSeparator" => false,
-        "headerStyle" => "info",
+        "headers": true,
+        "rowSeparator": false,
+        "headerStyle": "info",
     ];
 
     /**
@@ -33,7 +33,7 @@ class TableHelper : Helper {
     protected array _calculateWidths(array someRows) {
         $widths = [];
         foreach (line; someRows) {
-            foreach (array_values($line) as $k => $v) {
+            foreach (array_values($line) as $k: $v) {
                 $columnLength = _cellWidth((string)$v);
                 if ($columnLength >= ($widths[$k] ?? 0)) {
                     $widths[$k] = $columnLength;
@@ -93,7 +93,7 @@ class TableHelper : Helper {
         }
 
         $out = "";
-        foreach (array_values($row) as $i => $column) {
+        foreach (array_values($row) as $i: $column) {
             $column = (string)$column;
             $pad = $widths[$i] - _cellWidth($column);
             if (!empty(myOptions["style"])) {
@@ -126,14 +126,14 @@ class TableHelper : Helper {
             return;
         }
 
-        _io.setStyle("text-right", ["text" => null]);
+        _io.setStyle("text-right", ["text": null]);
 
         myConfig = this.getConfig();
         $widths = _calculateWidths($args);
 
         _rowSeparator($widths);
         if (myConfig["headers"] == true) {
-            _render(array_shift($args), $widths, ["style" => myConfig["headerStyle"]]);
+            _render(array_shift($args), $widths, ["style": myConfig["headerStyle"]]);
             _rowSeparator($widths);
         }
 
