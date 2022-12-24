@@ -15,12 +15,12 @@
  */
 module uim.cake.Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\BaseCommand;
-use Cake\Console\ConsoleIo;
-use Cake\Datasource\ModelAwareTrait;
-use Cake\Log\LogTrait;
-use Cake\ORM\Locator\LocatorAwareTrait;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\BaseCommand;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Datasource\ModelAwareTrait;
+import uim.cake.Log\LogTrait;
+import uim.cake.ORM\Locator\LocatorAwareTrait;
 
 /**
  * Base class for commands using the full stack

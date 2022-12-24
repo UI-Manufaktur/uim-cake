@@ -15,13 +15,13 @@
  */
 module uim.cake.Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\CommandCollection;
-use Cake\Console\CommandCollectionAwareInterface;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
-use Cake\Console\Shell;
-use Cake\Utility\Inflector;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\CommandCollection;
+import uim.cake.Console\CommandCollectionAwareInterface;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
+import uim.cake.Console\Shell;
+import uim.cake.Utility\Inflector;
 use ReflectionClass;
 use ReflectionMethod;
 

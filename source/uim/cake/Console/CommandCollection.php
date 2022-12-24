@@ -33,8 +33,8 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Command list
      *
-     * @var array<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|string>
-     * @psalm-var array<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|class-string>
+     * @var array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string>
+     * @psalm-var array<string, \Cake\Console\Shell|\Cake\Console\ICommand|class-string>
      * @psalm-suppress DeprecatedClass
      */
     protected $commands = [];
@@ -42,7 +42,7 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Constructor
      *
-     * @param array<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|string> $commands The map of commands to add to the collection.
+     * @param array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string> $commands The map of commands to add to the collection.
      */
     public this(array $commands = [])
     {
@@ -55,14 +55,14 @@ class CommandCollection : IteratorAggregate, Countable
      * Add a command to the collection
      *
      * @param string $name The name of the command you want to map.
-     * @param \Cake\Console\CommandInterface|\Cake\Console\Shell|string $command The command to map.
-     *   Can be a FQCN, Shell instance or CommandInterface instance.
+     * @param \Cake\Console\ICommand|\Cake\Console\Shell|string $command The command to map.
+     *   Can be a FQCN, Shell instance or ICommand instance.
      * @return this
      * @throws \InvalidArgumentException
      */
     function add(string $name, $command)
     {
-        if (!is_subclass_of($command, Shell::class) && !is_subclass_of($command, CommandInterface::class)) {
+        if (!is_subclass_of($command, Shell::class) && !is_subclass_of($command, ICommand::class)) {
             $class = is_string($command) ? $command : get_class($command);
             throw new InvalidArgumentException(sprintf(
                 "Cannot use "%s" for command "%s". " .
@@ -85,7 +85,7 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Add multiple commands at once.
      *
-     * @param array<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|string> $commands A map of command names: command classes/instances.
+     * @param array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string> $commands A map of command names: command classes/instances.
      * @return this
      * @see \Cake\Console\CommandCollection::add()
      */
@@ -126,9 +126,9 @@ class CommandCollection : IteratorAggregate, Countable
      * Get the target for a command.
      *
      * @param string $name The named shell.
-     * @return \Cake\Console\CommandInterface|\Cake\Console\Shell|string Either the command class or an instance.
+     * @return \Cake\Console\ICommand|\Cake\Console\Shell|string Either the command class or an instance.
      * @throws \InvalidArgumentException when unknown commands are fetched.
-     * @psalm-return \Cake\Console\CommandInterface|\Cake\Console\Shell|class-string
+     * @psalm-return \Cake\Console\ICommand|\Cake\Console\Shell|class-string
      */
     function get(string $name)
     {
@@ -143,7 +143,7 @@ class CommandCollection : IteratorAggregate, Countable
      * Implementation of IteratorAggregate.
      *
      * @return \Traversable
-     * @psalm-return \Traversable<string, \Cake\Console\Shell|\Cake\Console\CommandInterface|class-string>
+     * @psalm-return \Traversable<string, \Cake\Console\Shell|\Cake\Console\ICommand|class-string>
      */
     function getIterator(): Traversable
     {

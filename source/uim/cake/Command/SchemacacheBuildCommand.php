@@ -15,11 +15,11 @@
  */
 module uim.cake.Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
-use Cake\Database\SchemaCache;
-use Cake\Datasource\ConnectionManager;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
+import uim.cake.Database\SchemaCache;
+import uim.cake.Datasource\ConnectionManager;
 use RuntimeException;
 
 /**

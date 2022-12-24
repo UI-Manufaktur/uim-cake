@@ -19,7 +19,7 @@ module uim.cake.Console;
  * Describe the interface between a command
  * and the surrounding console libraries.
  */
-interface CommandInterface
+interface ICommand
 {
     /**
      * Default error code

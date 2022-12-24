@@ -15,13 +15,13 @@
  */
 module uim.cake.Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
-use Cake\Http\Exception\RedirectException;
-use Cake\Http\ServerRequest;
-use Cake\Routing\Exception\MissingRouteException;
-use Cake\Routing\Router;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
+import uim.cake.Http\Exception\RedirectException;
+import uim.cake.Http\ServerRequest;
+import uim.cake.Routing\Exception\MissingRouteException;
+import uim.cake.Routing\Router;
 
 /**
  * Provides interactive CLI tool for testing routes.

@@ -15,9 +15,9 @@
  */
 module uim.cake.Console;
 
-use Cake\Console\Exception\ConsoleException;
-use Cake\Console\Exception\StopException;
-use Cake\Utility\Inflector;
+import uim.cake.Console\Exception\ConsoleException;
+import uim.cake.Console\Exception\StopException;
+import uim.cake.Utility\Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -30,7 +30,7 @@ use RuntimeException;
  * - `buildOptionParser` Build/Configure the option parser for your command.
  * - `execute` Execute your command with parsed Arguments and ConsoleIo
  */
-abstract class BaseCommand : CommandInterface
+abstract class BaseCommand : ICommand
 {
     /**
      * The name of this command.
@@ -256,7 +256,7 @@ abstract class BaseCommand : CommandInterface
      * will not be resolved with the application container. Instead you will
      * need to pass the command as an object with all of its dependencies.
      *
-     * @param \Cake\Console\CommandInterface|string $command The command class name or command instance.
+     * @param \Cake\Console\ICommand|string $command The command class name or command instance.
      * @param array $args The arguments to invoke the command with.
      * @param \Cake\Console\ConsoleIo|null $io The ConsoleIo instance to use for the executed command.
      * @return int|null The exit code or null for success of the command.
@@ -269,10 +269,10 @@ abstract class BaseCommand : CommandInterface
             }
             $command = new $command();
         }
-        if (!$command instanceof CommandInterface) {
+        if (!$command instanceof ICommand) {
             $commandType = getTypeName($command);
             throw new InvalidArgumentException(
-                "Command "{$commandType}" is not a subclass of Cake\Console\CommandInterface."
+                "Command "{$commandType}" is not a subclass of Cake\Console\ICommand."
             );
         }
         $io = $io ?: new ConsoleIo();

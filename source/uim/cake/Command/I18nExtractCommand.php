@@ -15,14 +15,14 @@
  */
 module uim.cake.Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
-use Cake\Core\App;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Filesystem\Filesystem;
-use Cake\Utility\Inflector;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
+import uim.cake.Core\App;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Plugin;
+import uim.cake.Filesystem\Filesystem;
+import uim.cake.Utility\Inflector;
 
 /**
  * Language string extractor

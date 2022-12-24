@@ -15,10 +15,10 @@
  */
 module uim.cake.Command;
 
-use Cake\Cache\Cache;
-use Cake\Console\Arguments;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
+import uim.cake.Cache\Cache;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
 
 /**
  * CacheList command.

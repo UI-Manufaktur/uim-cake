@@ -15,9 +15,9 @@
  */
 module uim.cake.Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
 
 /**
  * Command for removing plugin assets from app"s webroot.

@@ -13,7 +13,7 @@
  */
 module uim.cake.Console;
 
-use Cake\Core\IContainer;
+import uim.cake.Core\IContainer;
 use InvalidArgumentException;
 
 /**
@@ -50,9 +50,9 @@ class CommandFactory : CommandFactoryInterface
             $command = new $className();
         }
 
-        if (!($command instanceof CommandInterface) && !($command instanceof Shell)) {
+        if (!($command instanceof ICommand) && !($command instanceof Shell)) {
             /** @psalm-suppress DeprecatedClass */
-            $valid = implode("` or `", [Shell::class, CommandInterface::class]);
+            $valid = implode("` or `", [Shell::class, ICommand::class]);
             $message = sprintf("Class `%s` must be an instance of `%s`.", $className, $valid);
             throw new InvalidArgumentException($message);
         }

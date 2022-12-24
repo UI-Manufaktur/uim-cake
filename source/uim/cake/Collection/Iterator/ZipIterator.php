@@ -15,9 +15,9 @@
  */
 module uim.cake.Collection\Iterator;
 
-use Cake\Collection\Collection;
-use Cake\Collection\ICollection;
-use Cake\Collection\CollectionTrait;
+import uim.cake.Collection\Collection;
+import uim.cake.Collection\ICollection;
+import uim.cake.Collection\CollectionTrait;
 use MultipleIterator;
 use Serializable;
 

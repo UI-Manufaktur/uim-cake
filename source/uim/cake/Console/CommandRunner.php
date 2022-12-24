@@ -15,20 +15,20 @@
  */
 module uim.cake.Console;
 
-use Cake\Command\VersionCommand;
-use Cake\Console\Command\HelpCommand;
-use Cake\Console\Exception\MissingOptionException;
-use Cake\Console\Exception\StopException;
-use Cake\Core\IConsoleApplication;
-use Cake\Core\IContainerApplication;
-use Cake\Core\IPluginApplication;
-use Cake\Event\EventDispatcherInterface;
-use Cake\Event\EventDispatcherTrait;
-use Cake\Event\EventManager;
-use Cake\Event\IEventManager;
-use Cake\Routing\Router;
-use Cake\Routing\IRoutingApplication;
-use Cake\Utility\Inflector;
+import uim.cake.Command\VersionCommand;
+import uim.cake.Console\Command\HelpCommand;
+import uim.cake.Console\Exception\MissingOptionException;
+import uim.cake.Console\Exception\StopException;
+import uim.cake.Core\IConsoleApplication;
+import uim.cake.Core\IContainerApplication;
+import uim.cake.Core\IPluginApplication;
+import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.Event\EventDispatcherTrait;
+import uim.cake.Event\EventManager;
+import uim.cake.Event\IEventManager;
+import uim.cake.Routing\Router;
+import uim.cake.Routing\IRoutingApplication;
+import uim.cake.Utility\Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -159,26 +159,26 @@ class CommandRunner : EventDispatcherInterface
         } catch (MissingOptionException $e) {
             $io.error($e.getFullMessage());
 
-            return CommandInterface::CODE_ERROR;
+            return ICommand::CODE_ERROR;
         }
 
-        $result = CommandInterface::CODE_ERROR;
+        $result = ICommand::CODE_ERROR;
         $shell = this.getCommand($io, $commands, $name);
         if ($shell instanceof Shell) {
             $result = this.runShell($shell, $argv);
         }
-        if ($shell instanceof CommandInterface) {
+        if ($shell instanceof ICommand) {
             $result = this.runCommand($shell, $argv, $io);
         }
 
         if ($result == null || $result == true) {
-            return CommandInterface::CODE_SUCCESS;
+            return ICommand::CODE_SUCCESS;
         }
         if (is_int($result) && $result >= 0 && $result <= 255) {
             return $result;
         }
 
-        return CommandInterface::CODE_ERROR;
+        return ICommand::CODE_ERROR;
     }
 
     /**
@@ -238,7 +238,7 @@ class CommandRunner : EventDispatcherInterface
      * @param \Cake\Console\ConsoleIo $io The IO wrapper for the created shell class.
      * @param \Cake\Console\CommandCollection $commands The command collection to find the shell in.
      * @param string $name The command name to find
-     * @return \Cake\Console\CommandInterface|\Cake\Console\Shell
+     * @return \Cake\Console\ICommand|\Cake\Console\Shell
      */
     protected function getCommand(ConsoleIo $io, CommandCollection $commands, string $name)
     {
@@ -249,7 +249,7 @@ class CommandRunner : EventDispatcherInterface
         if ($instance instanceof Shell) {
             $instance.setRootName(this.root);
         }
-        if ($instance instanceof CommandInterface) {
+        if ($instance instanceof ICommand) {
             $instance.setName("{this.root} {$name}");
         }
         if ($instance instanceof CommandCollectionAwareInterface) {
@@ -322,12 +322,12 @@ class CommandRunner : EventDispatcherInterface
     /**
      * Execute a Command class.
      *
-     * @param \Cake\Console\CommandInterface $command The command to run.
+     * @param \Cake\Console\ICommand $command The command to run.
      * @param array $argv The CLI arguments to invoke.
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null Exit code
      */
-    protected function runCommand(CommandInterface $command, array $argv, ConsoleIo $io): ?int
+    protected function runCommand(ICommand $command, array $argv, ConsoleIo $io): ?int
     {
         try {
             return $command.run($argv, $io);
@@ -359,7 +359,7 @@ class CommandRunner : EventDispatcherInterface
      *
      * @param string $className Shell class name.
      * @param \Cake\Console\ConsoleIo $io The IO wrapper for the created shell class.
-     * @return \Cake\Console\CommandInterface|\Cake\Console\Shell
+     * @return \Cake\Console\ICommand|\Cake\Console\Shell
      */
     protected function createCommand(string $className, ConsoleIo $io)
     {

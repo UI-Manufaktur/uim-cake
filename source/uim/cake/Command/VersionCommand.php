@@ -15,9 +15,9 @@
  */
 module uim.cake.Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\ConsoleIo;
-use Cake\Core\Configure;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Core\Configure;
 
 /**
  * Print out the version of CakePHP in use.

@@ -15,11 +15,11 @@
  */
 module uim.cake.Console;
 
-use Cake\Core\App;
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Filesystem\Filesystem;
-use Cake\Utility\Inflector;
+import uim.cake.Core\App;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Plugin;
+import uim.cake.Filesystem\Filesystem;
+import uim.cake.Utility\Inflector;
 
 /**
  * Used by CommandCollection and CommandTask to scan the filesystem
@@ -134,7 +134,7 @@ class CommandScanner
             /** @psalm-suppress DeprecatedClass */
             if (
                 !is_subclass_of($class, Shell::class)
-                && !is_subclass_of($class, CommandInterface::class)
+                && !is_subclass_of($class, ICommand::class)
             ) {
                 continue;
             }

@@ -15,11 +15,11 @@
  */
 module uim.cake.Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
-use Cake\Core\Exception\MissingPluginException;
-use Cake\Core\Plugin;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
+import uim.cake.Core\Exception\MissingPluginException;
+import uim.cake.Core\Plugin;
 
 /**
  * Command for loading plugins.

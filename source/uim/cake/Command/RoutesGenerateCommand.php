@@ -15,11 +15,11 @@
  */
 module uim.cake.Command;
 
-use Cake\Console\Arguments;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
-use Cake\Routing\Exception\MissingRouteException;
-use Cake\Routing\Router;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
+import uim.cake.Routing\Exception\MissingRouteException;
+import uim.cake.Routing\Router;
 
 /**
  * Provides interactive CLI tools for URL generation

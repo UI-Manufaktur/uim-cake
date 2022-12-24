@@ -15,9 +15,9 @@
  */
 module uim.cake.Console;
 
-use Cake\Console\Exception\StopException;
-use Cake\Log\Engine\ConsoleLog;
-use Cake\Log\Log;
+import uim.cake.Console\Exception\StopException;
+import uim.cake.Log\Engine\ConsoleLog;
+import uim.cake.Log\Log;
 use RuntimeException;
 use SplFileObject;
 
@@ -300,7 +300,7 @@ class ConsoleIo
      * @psalm-return never-return
      * @throws \Cake\Console\Exception\StopException
      */
-    function abort($message, $code = CommandInterface::CODE_ERROR): void
+    function abort($message, $code = ICommand::CODE_ERROR): void
     {
         this.error($message);
 

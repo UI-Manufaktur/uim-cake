@@ -15,10 +15,10 @@
  */
 module uim.cake.Command;
 
-use Cake\Core\Configure;
-use Cake\Core\Plugin;
-use Cake\Filesystem\Filesystem;
-use Cake\Utility\Inflector;
+import uim.cake.Core\Configure;
+import uim.cake.Core\Plugin;
+import uim.cake.Filesystem\Filesystem;
+import uim.cake.Utility\Inflector;
 
 /**
  * trait for symlinking / copying plugin assets to app"s webroot.

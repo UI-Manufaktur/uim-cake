@@ -15,7 +15,7 @@
  */
 module uim.cake.Console;
 
-use Cake\Core\InstanceConfigTrait;
+import uim.cake.Core\InstanceConfigTrait;
 
 /**
  * Base class for Helpers.

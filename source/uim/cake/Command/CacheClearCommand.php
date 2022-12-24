@@ -15,13 +15,13 @@
  */
 module uim.cake.Command;
 
-use Cake\Cache\Cache;
-use Cake\Cache\Engine\ApcuEngine;
-use Cake\Cache\Engine\WincacheEngine;
-use Cake\Cache\InvalidArgumentException;
-use Cake\Console\Arguments;
-use Cake\Console\ConsoleIo;
-use Cake\Console\ConsoleOptionParser;
+import uim.cake.Cache\Cache;
+import uim.cake.Cache\Engine\ApcuEngine;
+import uim.cake.Cache\Engine\WincacheEngine;
+import uim.cake.Cache\InvalidArgumentException;
+import uim.cake.Console\Arguments;
+import uim.cake.Console\ConsoleIo;
+import uim.cake.Console\ConsoleOptionParser;
 
 /**
  * CacheClear command.
