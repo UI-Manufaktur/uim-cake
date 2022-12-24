@@ -55,7 +55,7 @@ class PackageLocator
     {
         foreach ($registry as $name => $locales) {
             foreach ($locales as $locale => $spec) {
-                this->set($name, $locale, $spec);
+                this.set($name, $locale, $spec);
             }
         }
     }
@@ -70,8 +70,8 @@ class PackageLocator
      */
     function set(string $name, string $locale, $spec): void
     {
-        this->registry[$name][$locale] = $spec;
-        this->converted[$name][$locale] = $spec instanceof Package;
+        this.registry[$name][$locale] = $spec;
+        this.converted[$name][$locale] = $spec instanceof Package;
     }
 
     /**
@@ -83,19 +83,19 @@ class PackageLocator
      */
     function get(string $name, string $locale): Package
     {
-        if (!isset(this->registry[$name][$locale])) {
+        if (!isset(this.registry[$name][$locale])) {
             throw new I18nException("Package '$name' with locale '$locale' is not registered.");
         }
 
-        if (!this->converted[$name][$locale]) {
+        if (!this.converted[$name][$locale]) {
             /** @var callable $func */
-            $func = this->registry[$name][$locale];
-            this->registry[$name][$locale] = $func();
-            this->converted[$name][$locale] = true;
+            $func = this.registry[$name][$locale];
+            this.registry[$name][$locale] = $func();
+            this.converted[$name][$locale] = true;
         }
 
         /** @var \Cake\I18n\Package */
-        return this->registry[$name][$locale];
+        return this.registry[$name][$locale];
     }
 
     /**
@@ -107,6 +107,6 @@ class PackageLocator
      */
     function has(string $name, string $locale): bool
     {
-        return isset(this->registry[$name][$locale]);
+        return isset(this.registry[$name][$locale]);
     }
 }

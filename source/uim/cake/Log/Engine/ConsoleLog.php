@@ -66,22 +66,22 @@ class ConsoleLog extends BaseLog
     {
         parent::__construct($config);
 
-        $config = this->_config;
+        $config = this._config;
         if ($config['stream'] instanceof ConsoleOutput) {
-            this->_output = $config['stream'];
+            this._output = $config['stream'];
         } elseif (is_string($config['stream'])) {
-            this->_output = new ConsoleOutput($config['stream']);
+            this._output = new ConsoleOutput($config['stream']);
         } else {
             throw new InvalidArgumentException('`stream` not a ConsoleOutput nor string');
         }
 
         if (isset($config['outputAs'])) {
-            this->_output->setOutputAs($config['outputAs']);
+            this._output->setOutputAs($config['outputAs']);
         }
 
-        if (isset(this->_config['dateFormat'])) {
+        if (isset(this._config['dateFormat'])) {
             deprecationWarning('`dateFormat` option should now be set in the formatter options.', 0);
-            this->formatter->setConfig('dateFormat', this->_config['dateFormat']);
+            this.formatter->setConfig('dateFormat', this._config['dateFormat']);
         }
     }
 
@@ -96,7 +96,7 @@ class ConsoleLog extends BaseLog
      */
     function log($level, $message, array $context = [])
     {
-        $message = this->_format($message, $context);
-        this->_output->write(this->formatter->format($level, $message, $context));
+        $message = this._format($message, $context);
+        this._output->write(this.formatter->format($level, $message, $context));
     }
 }

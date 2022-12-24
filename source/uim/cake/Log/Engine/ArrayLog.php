@@ -59,8 +59,8 @@ class ArrayLog extends BaseLog
      */
     function log($level, $message, array $context = [])
     {
-        $message = this->_format($message, $context);
-        this->content[] = this->formatter->format($level, $message, $context);
+        $message = this._format($message, $context);
+        this.content[] = this.formatter->format($level, $message, $context);
     }
 
     /**
@@ -70,7 +70,7 @@ class ArrayLog extends BaseLog
      */
     function read(): array
     {
-        return this->content;
+        return this.content;
     }
 
     /**
@@ -80,6 +80,6 @@ class ArrayLog extends BaseLog
      */
     function clear(): void
     {
-        this->content = [];
+        this.content = [];
     }
 }
