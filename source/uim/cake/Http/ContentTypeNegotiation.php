@@ -1,6 +1,6 @@
 
 
-namespace Cake\Http;
+module uim.cake.Http;
 
 use Psr\Http\Message\RequestInterface;
 

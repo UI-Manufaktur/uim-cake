@@ -12,7 +12,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http\Cookie;
+module uim.cake.Http\Cookie;
 
 use Cake\Utility\Hash;
 use DateTimeImmutable;

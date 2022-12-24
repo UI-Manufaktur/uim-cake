@@ -12,7 +12,7 @@
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http\Client;
+module uim.cake.Http\Client;
 
 use Psr\Http\Message\RequestInterface;
 

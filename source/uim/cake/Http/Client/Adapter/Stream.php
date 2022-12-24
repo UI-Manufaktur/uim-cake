@@ -12,7 +12,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http\Client\Adapter;
+module uim.cake.Http\Client\Adapter;
 
 use Cake\Http\Client\AdapterInterface;
 use Cake\Http\Client\Exception\ClientException;

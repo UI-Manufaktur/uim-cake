@@ -12,7 +12,7 @@
  * @since         4.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http\Client\Exception;
+module uim.cake.Http\Client\Exception;
 
 use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\Message\RequestInterface;

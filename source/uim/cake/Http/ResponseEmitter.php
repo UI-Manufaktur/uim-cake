@@ -17,7 +17,7 @@
  * @copyright Copyright (c) 2015-2016 Zend Technologies USA Inc. (https://www.zend.com/)
  * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
  */
-namespace Cake\Http;
+module uim.cake.Http;
 
 use Cake\Http\Cookie\Cookie;
 use Laminas\Diactoros\RelativeStream;

@@ -13,7 +13,7 @@
  * @since         4.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http;
+module uim.cake.Http;
 
 use Cake\Core\InstanceConfigTrait;
 use Throwable;

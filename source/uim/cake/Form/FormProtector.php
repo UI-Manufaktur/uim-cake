@@ -13,7 +13,7 @@
  * @since         4.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Form;
+module uim.cake.Form;
 
 use Cake\Core\Configure;
 use Cake\Utility\Hash;

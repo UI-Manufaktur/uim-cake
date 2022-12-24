@@ -12,7 +12,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\Http\Client\Auth;
+module uim.cake.Http\Client\Auth;
 
 use Cake\Core\Exception\CakeException;
 use Cake\Http\Client\Request;

@@ -14,7 +14,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-namespace Cake\Http;
+module uim.cake.Http;
 
 use Cake\Console\CommandCollection;
 use Cake\Controller\ControllerFactory;
