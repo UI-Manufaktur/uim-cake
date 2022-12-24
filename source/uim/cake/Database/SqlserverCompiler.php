@@ -25,7 +25,7 @@ use Cake\Database\Expression\FunctionExpression;
  *
  * @internal
  */
-class SqlserverCompiler extends QueryCompiler
+class SqlserverCompiler : QueryCompiler
 {
     /**
      * SQLserver does not support ORDER BY in UNION queries.

@@ -31,7 +31,7 @@ use Cake\Event\EventInterface;
  * or `Etag` header. Without one of these headers being set this component
  * will have no effect.
  */
-class CheckHttpCacheComponent extends Component
+class CheckHttpCacheComponent : Component
 {
     /**
      * Before Render hook

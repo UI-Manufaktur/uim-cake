@@ -23,7 +23,7 @@ use Cake\Event\EventInterface;
  *
  * Controller used by ErrorHandler to render error views.
  */
-class ErrorController extends Controller
+class ErrorController : Controller
 {
     /**
      * Initialization hook method.

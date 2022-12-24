@@ -19,7 +19,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Used when a component cannot be found.
  */
-class MissingComponentException extends CakeException
+class MissingComponentException : CakeException
 {
     /**
      * @inheritDoc

@@ -21,12 +21,12 @@ use League\Container\DefinitionIContainer;
 /**
  * Interface for the Dependency Injection Container in CakePHP applications
  *
- * This interface extends the PSR-11 container interface and adds
+ * This interface : the PSR-11 container interface and adds
  * methods to add services and service providers to the container.
  *
  * The methods defined in this interface use the conventions provided
  * by league/container as that is the library that CakePHP uses.
  */
-interface IContainer extends DefinitionIContainer
+interface IContainer : DefinitionIContainer
 {
 }

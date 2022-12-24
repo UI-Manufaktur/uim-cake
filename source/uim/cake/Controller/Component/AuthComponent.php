@@ -44,7 +44,7 @@ use Cake\Utility\Hash;
  * @see https://github.com/cakephp/authentication
  * @see https://github.com/cakephp/authorization
  */
-class AuthComponent extends Component implements EventDispatcherInterface
+class AuthComponent : Component implements EventDispatcherInterface
 {
     use EventDispatcherTrait;
 

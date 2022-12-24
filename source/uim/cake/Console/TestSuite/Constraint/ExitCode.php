@@ -22,7 +22,7 @@ use PHPUnit\Framework\Constraint\Constraint;
  *
  * @internal
  */
-class ExitCode extends Constraint
+class ExitCode : Constraint
 {
     /**
      * @var int|null

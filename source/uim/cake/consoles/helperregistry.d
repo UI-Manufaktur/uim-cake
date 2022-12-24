@@ -7,7 +7,7 @@ import uim.cake;
  * Registry for Helpers. Provides features
  * for lazily loading helpers.
  *
- * @extends \Cake\Core\ObjectRegistry<\Cake\Console\Helper>
+ * @: \Cake\Core\ObjectRegistry<\Cake\Console\Helper>
  */
 class HelperRegistry : ObjectRegistry
 {

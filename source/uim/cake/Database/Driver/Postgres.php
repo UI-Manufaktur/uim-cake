@@ -30,7 +30,7 @@ use PDO;
 /**
  * Class Postgres
  */
-class Postgres extends Driver
+class Postgres : Driver
 {
     use SqlDialectTrait;
 

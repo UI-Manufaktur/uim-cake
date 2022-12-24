@@ -22,7 +22,7 @@ use Throwable;
  *
  * @method int getCode() Gets the Exception code.
  */
-class CakeException extends RuntimeException
+class CakeException : RuntimeException
 {
     /**
      * Array of attributes that are passed in from the constructor, and

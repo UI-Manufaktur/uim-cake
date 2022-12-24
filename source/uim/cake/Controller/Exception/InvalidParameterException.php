@@ -20,7 +20,7 @@ use Throwable;
 /**
  * Used when a passed parameter or action parameter type declaration is missing or invalid.
  */
-class InvalidParameterException extends CakeException
+class InvalidParameterException : CakeException
 {
     /**
      * @var array<string, string>

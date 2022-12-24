@@ -12,7 +12,7 @@ import uim.cakeents\EventDispatcherTrait;
  *
  * Handles loading, constructing and binding events for component class objects.
  *
- * @extends \Cake\Core\ObjectRegistry<\Cake\Controller\Component>
+ * @: \Cake\Core\ObjectRegistry<\Cake\Controller\Component>
  */
 class ComponentRegistry : ObjectRegistry : IEventDispatcher
 {

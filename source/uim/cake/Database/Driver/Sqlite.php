@@ -34,7 +34,7 @@ use RuntimeException;
 /**
  * Class Sqlite
  */
-class Sqlite extends Driver
+class Sqlite : Driver
 {
     use SqlDialectTrait;
     use TupleComparisonTranslatorTrait;

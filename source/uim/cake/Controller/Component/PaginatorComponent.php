@@ -37,7 +37,7 @@ use UnexpectedValueException;
  * @mixin \Cake\Datasource\Paging\NumericPaginator
  * @deprecated 4.4.0 Use Cake\Datasource\Paging\Paginator directly.
  */
-class PaginatorComponent extends Component
+class PaginatorComponent : Component
 {
     /**
      * Datasource paginator instance.

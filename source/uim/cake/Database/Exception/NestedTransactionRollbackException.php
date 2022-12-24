@@ -22,7 +22,7 @@ use Throwable;
 /**
  * Class NestedTransactionRollbackException
  */
-class NestedTransactionRollbackException extends CakeException
+class NestedTransactionRollbackException : CakeException
 {
     /**
      * Constructor

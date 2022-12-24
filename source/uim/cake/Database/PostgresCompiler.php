@@ -24,7 +24,7 @@ use Cake\Database\Expression\FunctionExpression;
  *
  * @internal
  */
-class PostgresCompiler extends QueryCompiler
+class PostgresCompiler : QueryCompiler
 {
     /**
      * Always quote aliases in SELECT clause.

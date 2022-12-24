@@ -8,7 +8,7 @@ import uim.cake.core.ObjectRegistry;
  * Registry for Tasks. Provides features
  * for lazily loading tasks.
  *
- * @extends \Cake\Core\ObjectRegistry<\Cake\Console\Shell>
+ * @: \Cake\Core\ObjectRegistry<\Cake\Console\Shell>
  */
 class TaskRegistry : ObjectRegistry
 {

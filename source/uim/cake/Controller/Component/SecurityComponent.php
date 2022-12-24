@@ -40,7 +40,7 @@ use Cake\Utility\Security;
  * @deprecated 4.0.0 Use {@link FormProtectionComponent} instead, for form tampering protection
  *   or {@link HttpsEnforcerMiddleware} to enforce use of HTTPS (SSL) for requests.
  */
-class SecurityComponent extends Component
+class SecurityComponent : Component
 {
     /**
      * Default message used for exceptions thrown

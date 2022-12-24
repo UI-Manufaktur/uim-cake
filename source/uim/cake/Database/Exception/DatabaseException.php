@@ -21,7 +21,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Exception for the database package.
  */
-class DatabaseException extends CakeException
+class DatabaseException : CakeException
 {
 }
 

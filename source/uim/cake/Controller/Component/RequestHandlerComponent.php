@@ -42,7 +42,7 @@ use Cake\Utility\Inflector;
  * @deprecated 4.4.0 See the 4.4 migration guide for how to upgrade.
  *   https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#requesthandlercomponent
  */
-class RequestHandlerComponent extends Component
+class RequestHandlerComponent : Component
 {
     /**
      * Contains the file extension parsed out by the Router

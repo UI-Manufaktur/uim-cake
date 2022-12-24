@@ -36,7 +36,7 @@ use PDO;
 /**
  * SQLServer driver.
  */
-class Sqlserver extends Driver
+class Sqlserver : Driver
 {
     use SqlDialectTrait;
     use TupleComparisonTranslatorTrait;

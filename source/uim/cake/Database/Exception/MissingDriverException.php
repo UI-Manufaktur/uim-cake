@@ -21,7 +21,7 @@ use Cake\Core\Exception\CakeException;
 /**
  * Class MissingDriverException
  */
-class MissingDriverException extends CakeException
+class MissingDriverException : CakeException
 {
     /**
      * @inheritDoc

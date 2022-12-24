@@ -32,7 +32,7 @@ use Throwable;
  * @method void warning(string $message, array $options = []) Set a message using "warning" element
  * @method void error(string $message, array $options = []) Set a message using "error" element
  */
-class FlashComponent extends Component
+class FlashComponent : Component
 {
     /**
      * Default configuration

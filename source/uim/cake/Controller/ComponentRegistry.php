@@ -28,9 +28,9 @@ use Cake\Event\EventDispatcherTrait;
  *
  * Handles loading, constructing and binding events for component class objects.
  *
- * @extends \Cake\Core\ObjectRegistry<\Cake\Controller\Component>
+ * @: \Cake\Core\ObjectRegistry<\Cake\Controller\Component>
  */
-class ComponentRegistry extends ObjectRegistry implements EventDispatcherInterface
+class ComponentRegistry : ObjectRegistry implements EventDispatcherInterface
 {
     use EventDispatcherTrait;
 

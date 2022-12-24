@@ -35,7 +35,7 @@ use Closure;
  *
  * @psalm-property array{validate:bool, unlockedFields:array, unlockedActions:array, validationFailureCallback:?\Closure} $_config
  */
-class FormProtectionComponent extends Component
+class FormProtectionComponent : Component
 {
     /**
      * Default message used for exceptions thrown.
