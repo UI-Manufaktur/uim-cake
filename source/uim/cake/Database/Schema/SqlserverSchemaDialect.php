@@ -115,7 +115,7 @@ class SqlserverSchemaDialect : SchemaDialect
     ): array {
         $col = strtolower($col);
 
-        $type = this._applyTypeSpecificColumnConversion(
+        $type = _applyTypeSpecificColumnConversion(
             $col,
             compact('length', 'precision', 'scale')
         );
@@ -212,7 +212,7 @@ class SqlserverSchemaDialect : SchemaDialect
      */
     function convertColumnDescription(TableSchema $schema, array $row): void
     {
-        $field = this._convertColumn(
+        $field = _convertColumn(
             $row['type'],
             $row['char_length'] != null ? (int)$row['char_length'] : null,
             $row['precision'] != null ? (int)$row['precision'] : null,
@@ -225,7 +225,7 @@ class SqlserverSchemaDialect : SchemaDialect
 
         $field += [
             'null' => $row['null'] == '1',
-            'default' => this._defaultValue($field['type'], $row['default']),
+            'default' => _defaultValue($field['type'], $row['default']),
             'collate' => $row['collation_name'],
         ];
         $schema->addColumn($row['name'], $field);
@@ -366,8 +366,8 @@ class SqlserverSchemaDialect : SchemaDialect
             'type' => TableSchema::CONSTRAINT_FOREIGN,
             'columns' => [$row['column']],
             'references' => [$row['reference_table'], $row['reference_column']],
-            'update' => this._convertOnClause($row['update_type']),
-            'delete' => this._convertOnClause($row['delete_type']),
+            'update' => _convertOnClause($row['update_type']),
+            'delete' => _convertOnClause($row['delete_type']),
         ];
         $name = $row['foreign_key_name'];
         $schema->addConstraint($name, $data);
@@ -410,12 +410,12 @@ class SqlserverSchemaDialect : SchemaDialect
         /** @var array $data */
         $data = $schema->getColumn($name);
 
-        $sql = this._getTypeSpecificColumnSql($data['type'], $schema, $name);
+        $sql = _getTypeSpecificColumnSql($data['type'], $schema, $name);
         if ($sql != null) {
             return $sql;
         }
 
-        $out = this._driver->quoteIdentifier($name);
+        $out = _driver->quoteIdentifier($name);
         $typeMap = [
             TableSchema::TYPE_TINYINTEGER => ' TINYINT',
             TableSchema::TYPE_SMALLINTEGER => ' SMALLINT',
@@ -538,7 +538,7 @@ class SqlserverSchemaDialect : SchemaDialect
         } elseif (isset($data['default'])) {
             $default = is_bool($data['default'])
                 ? (int)$data['default']
-                : this._driver->schemaValue($data['default']);
+                : _driver->schemaValue($data['default']);
             $out .= ' DEFAULT ' . $default;
         } elseif (isset($data['null']) && $data['null'] != false) {
             $out .= ' DEFAULT NULL';
@@ -559,7 +559,7 @@ class SqlserverSchemaDialect : SchemaDialect
             /** @var array $constraint */
             $constraint = $schema->getConstraint($name);
             if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
-                $tableName = this._driver->quoteIdentifier($schema->name());
+                $tableName = _driver->quoteIdentifier($schema->name());
                 $sql[] = sprintf($sqlPattern, $tableName, this.constraintSql($schema, $name));
             }
         }
@@ -579,8 +579,8 @@ class SqlserverSchemaDialect : SchemaDialect
             /** @var array $constraint */
             $constraint = $schema->getConstraint($name);
             if ($constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
-                $tableName = this._driver->quoteIdentifier($schema->name());
-                $constraintName = this._driver->quoteIdentifier($name);
+                $tableName = _driver->quoteIdentifier($schema->name());
+                $constraintName = _driver->quoteIdentifier($name);
                 $sql[] = sprintf($sqlPattern, $tableName, $constraintName);
             }
         }
@@ -596,14 +596,14 @@ class SqlserverSchemaDialect : SchemaDialect
         /** @var array $data */
         $data = $schema->getIndex($name);
         $columns = array_map(
-            [this._driver, 'quoteIdentifier'],
+            [_driver, 'quoteIdentifier'],
             $data['columns']
         );
 
         return sprintf(
             'CREATE INDEX %s ON %s (%s)',
-            this._driver->quoteIdentifier($name),
-            this._driver->quoteIdentifier($schema->name()),
+            _driver->quoteIdentifier($name),
+            _driver->quoteIdentifier($schema->name()),
             implode(', ', $columns)
         );
     }
@@ -615,7 +615,7 @@ class SqlserverSchemaDialect : SchemaDialect
     {
         /** @var array $data */
         $data = $schema->getConstraint($name);
-        $out = 'CONSTRAINT ' . this._driver->quoteIdentifier($name);
+        $out = 'CONSTRAINT ' . _driver->quoteIdentifier($name);
         if ($data['type'] == TableSchema::CONSTRAINT_PRIMARY) {
             $out = 'PRIMARY KEY';
         }
@@ -623,7 +623,7 @@ class SqlserverSchemaDialect : SchemaDialect
             $out .= ' UNIQUE';
         }
 
-        return this._keySql($out, $data);
+        return _keySql($out, $data);
     }
 
     /**
@@ -636,17 +636,17 @@ class SqlserverSchemaDialect : SchemaDialect
     protected function _keySql(string $prefix, array $data): string
     {
         $columns = array_map(
-            [this._driver, 'quoteIdentifier'],
+            [_driver, 'quoteIdentifier'],
             $data['columns']
         );
         if ($data['type'] == TableSchema::CONSTRAINT_FOREIGN) {
             return $prefix . sprintf(
                 ' FOREIGN KEY (%s) REFERENCES %s (%s) ON UPDATE %s ON DELETE %s',
                 implode(', ', $columns),
-                this._driver->quoteIdentifier($data['references'][0]),
-                this._convertConstraintColumns($data['references'][1]),
-                this._foreignOnClause($data['update']),
-                this._foreignOnClause($data['delete'])
+                _driver->quoteIdentifier($data['references'][0]),
+                _convertConstraintColumns($data['references'][1]),
+                _foreignOnClause($data['update']),
+                _foreignOnClause($data['delete'])
             );
         }
 
@@ -660,7 +660,7 @@ class SqlserverSchemaDialect : SchemaDialect
     {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
-        $tableName = this._driver->quoteIdentifier($schema->name());
+        $tableName = _driver->quoteIdentifier($schema->name());
         $out = [];
         $out[] = sprintf("CREATE TABLE %s (\n%s\n)", $tableName, $content);
         foreach ($indexes as $index) {
@@ -675,7 +675,7 @@ class SqlserverSchemaDialect : SchemaDialect
      */
     function truncateTableSql(TableSchema $schema): array
     {
-        $name = this._driver->quoteIdentifier($schema->name());
+        $name = _driver->quoteIdentifier($schema->name());
         $queries = [
             sprintf('DELETE FROM %s', $name),
         ];

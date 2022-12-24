@@ -85,7 +85,7 @@ class ErrorTrap
      */
     function register(): void
     {
-        $level = this._config['errorLevel'] ?? -1;
+        $level = _config['errorLevel'] ?? -1;
         error_reporting($level);
         set_error_handler([this, 'handleError'], $level);
     }
@@ -151,12 +151,12 @@ class ErrorTrap
      */
     protected function logError(PhpError $error): void
     {
-        if (!this._config['log']) {
+        if (!_config['log']) {
             return;
         }
         $logger = this.logger();
         if (method_exists($logger, 'logError')) {
-            $logger->logError($error, Router::getRequest(), this._config['trace']);
+            $logger->logError($error, Router::getRequest(), _config['trace']);
         } else {
             $loggerClass = get_class($logger);
             deprecationWarning(
@@ -164,7 +164,7 @@ class ErrorTrap
                 'which will be required in future versions of CakePHP.'
             );
             $context = [];
-            if (this._config['trace']) {
+            if (_config['trace']) {
                 $context = [
                     'trace' => $error->getTraceAsString(),
                     'request' => Router::getRequest(),
@@ -184,7 +184,7 @@ class ErrorTrap
         /** @var class-string<\Cake\Error\ErrorRendererInterface> $class */
         $class = this.getConfig('errorRenderer') ?: this.chooseErrorRenderer();
 
-        return new $class(this._config);
+        return new $class(_config);
     }
 
     /**
@@ -201,8 +201,8 @@ class ErrorTrap
         }
 
         /** @var class-string<\Cake\Error\ErrorLoggerInterface> $class */
-        $class = this.getConfig('logger', this._defaultConfig['logger']);
+        $class = this.getConfig('logger', _defaultConfig['logger']);
 
-        return new $class(this._config);
+        return new $class(_config);
     }
 }

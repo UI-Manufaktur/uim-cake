@@ -92,7 +92,7 @@ trait QueryTrait
      */
     function repository(RepositoryInterface $repository)
     {
-        this._repository = $repository;
+        _repository = $repository;
 
         return this;
     }
@@ -105,7 +105,7 @@ trait QueryTrait
      */
     function getRepository(): RepositoryInterface
     {
-        return this._repository;
+        return _repository;
     }
 
     /**
@@ -122,7 +122,7 @@ trait QueryTrait
      */
     function setResult(iterable $results)
     {
-        this._results = $results;
+        _results = $results;
 
         return this;
     }
@@ -181,11 +181,11 @@ trait QueryTrait
     function cache($key, $config = 'default')
     {
         if ($key == false) {
-            this._cache = null;
+            _cache = null;
 
             return this;
         }
-        this._cache = new QueryCacher($key, $config);
+        _cache = new QueryCacher($key, $config);
 
         return this;
     }
@@ -197,7 +197,7 @@ trait QueryTrait
      */
     function isEagerLoaded(): bool
     {
-        return this._eagerLoaded;
+        return _eagerLoaded;
     }
 
     /**
@@ -209,7 +209,7 @@ trait QueryTrait
      */
     function eagerLoaded(bool $value)
     {
-        this._eagerLoaded = $value;
+        _eagerLoaded = $value;
 
         return this;
     }
@@ -276,23 +276,23 @@ trait QueryTrait
      */
     function all(): ResultSetInterface
     {
-        if (this._results != null) {
-            return this._results;
+        if (_results != null) {
+            return _results;
         }
 
         $results = null;
-        if (this._cache) {
-            $results = this._cache->fetch(this);
+        if (_cache) {
+            $results = _cache->fetch(this);
         }
         if ($results == null) {
-            $results = this._decorateResults(this._execute());
-            if (this._cache) {
-                this._cache->store(this, $results);
+            $results = _decorateResults(_execute());
+            if (_cache) {
+                _cache->store(this, $results);
             }
         }
-        this._results = $results;
+        _results = $results;
 
-        return this._results;
+        return _results;
     }
 
     /**
@@ -324,7 +324,7 @@ trait QueryTrait
     function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false)
     {
         if ($overwrite) {
-            this._mapReduce = [];
+            _mapReduce = [];
         }
         if ($mapper == null) {
             if (!$overwrite) {
@@ -333,7 +333,7 @@ trait QueryTrait
 
             return this;
         }
-        this._mapReduce[] = compact('mapper', 'reducer');
+        _mapReduce[] = compact('mapper', 'reducer');
 
         return this;
     }
@@ -345,7 +345,7 @@ trait QueryTrait
      */
     function getMapReducers(): array
     {
-        return this._mapReduce;
+        return _mapReduce;
     }
 
     /**
@@ -443,7 +443,7 @@ trait QueryTrait
     function formatResults(?callable $formatter = null, $mode = self::APPEND)
     {
         if ($mode == self::OVERWRITE) {
-            this._formatters = [];
+            _formatters = [];
         }
         if ($formatter == null) {
             if ($mode != self::OVERWRITE) {
@@ -454,12 +454,12 @@ trait QueryTrait
         }
 
         if ($mode == self::PREPEND) {
-            array_unshift(this._formatters, $formatter);
+            array_unshift(_formatters, $formatter);
 
             return this;
         }
 
-        this._formatters[] = $formatter;
+        _formatters[] = $formatter;
 
         return this;
     }
@@ -471,7 +471,7 @@ trait QueryTrait
      */
     function getResultFormatters(): array
     {
-        return this._formatters;
+        return _formatters;
     }
 
     /**
@@ -488,7 +488,7 @@ trait QueryTrait
      */
     function first()
     {
-        if (this._dirty) {
+        if (_dirty) {
             this.limit(1);
         }
 
@@ -533,7 +533,7 @@ trait QueryTrait
      */
     function getOptions(): array
     {
-        return this._options;
+        return _options;
     }
 
     /**
@@ -546,7 +546,7 @@ trait QueryTrait
      */
     function __call(string $method, array $arguments)
     {
-        $resultSetClass = this._decoratorClass();
+        $resultSetClass = _decoratorClass();
         if (in_array($method, get_class_methods($resultSetClass), true)) {
             deprecationWarning(sprintf(
                 'Calling `%s` methods, such as `%s()`, on queries is deprecated. ' .
@@ -588,20 +588,20 @@ trait QueryTrait
      */
     protected function _decorateResults(Traversable $result): ResultSetInterface
     {
-        $decorator = this._decoratorClass();
-        foreach (this._mapReduce as $functions) {
+        $decorator = _decoratorClass();
+        foreach (_mapReduce as $functions) {
             $result = new MapReduce($result, $functions['mapper'], $functions['reducer']);
         }
 
-        if (!empty(this._mapReduce)) {
+        if (!empty(_mapReduce)) {
             $result = new $decorator($result);
         }
 
-        foreach (this._formatters as $formatter) {
+        foreach (_formatters as $formatter) {
             $result = $formatter($result, this);
         }
 
-        if (!empty(this._formatters) && !($result instanceof $decorator)) {
+        if (!empty(_formatters) && !($result instanceof $decorator)) {
             $result = new $decorator($result);
         }
 

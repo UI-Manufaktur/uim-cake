@@ -186,11 +186,11 @@ class NumericPaginator : PaginatorInterface
 
         $pagingParams = this.buildParams($data);
         $alias = $object->getAlias();
-        this._pagingParams = [$alias => $pagingParams];
+        _pagingParams = [$alias => $pagingParams];
         if ($pagingParams['requestedPage'] > $pagingParams['page']) {
             throw new PageOutOfBoundsException([
                 'requestedPage' => $pagingParams['requestedPage'],
-                'pagingParams' => this._pagingParams,
+                'pagingParams' => _pagingParams,
             ]);
         }
 
@@ -246,7 +246,7 @@ class NumericPaginator : PaginatorInterface
 
         $options += ['page' => 1, 'scope' => null];
         $options['page'] = (int)$options['page'] < 1 ? 1 : (int)$options['page'];
-        [$finder, $options] = this._extractFinder($options);
+        [$finder, $options] = _extractFinder($options);
 
         return compact('defaults', 'options', 'finder');
     }
@@ -406,7 +406,7 @@ class NumericPaginator : PaginatorInterface
      */
     function getPagingParams(): array
     {
-        return this._pagingParams;
+        return _pagingParams;
     }
 
     /**
@@ -549,7 +549,7 @@ class NumericPaginator : PaginatorInterface
 
             $order = isset($options['order']) && is_array($options['order']) ? $options['order'] : [];
             if ($order && $options['sort'] && strpos($options['sort'], '.') == false) {
-                $order = this._removeAliases($order, $object->getAlias());
+                $order = _removeAliases($order, $object->getAlias());
             }
 
             $options['order'] = [$options['sort'] => $direction] + $order;
@@ -588,7 +588,7 @@ class NumericPaginator : PaginatorInterface
             $options['sort'] = key($options['order']);
         }
 
-        $options['order'] = this._prefix($object, $options['order'], $sortAllowed);
+        $options['order'] = _prefix($object, $options['order'], $sortAllowed);
 
         return $options;
     }

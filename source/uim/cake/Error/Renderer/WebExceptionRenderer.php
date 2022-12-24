@@ -133,7 +133,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     {
         this.error = $exception;
         this.request = $request;
-        this.controller = this._getController();
+        this.controller = _getController();
     }
 
     /**
@@ -223,15 +223,15 @@ class WebExceptionRenderer : ExceptionRendererInterface
     {
         $exception = this.error;
         $code = this.getHttpCode($exception);
-        $method = this._method($exception);
-        $template = this._template($exception, $method, $code);
+        $method = _method($exception);
+        $template = _template($exception, $method, $code);
         this.clearOutput();
 
         if (method_exists(this, $method)) {
-            return this._customMethod($method, $exception);
+            return _customMethod($method, $exception);
         }
 
-        $message = this._message($exception, $code);
+        $message = _message($exception, $code);
         $url = this.controller->getRequest()->getRequestTarget();
         $response = this.controller->getResponse();
 
@@ -289,7 +289,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
         }
         this.controller->setResponse($response);
 
-        return this._outputMessage($template);
+        return _outputMessage($template);
     }
 
     /**
@@ -320,7 +320,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     protected function _customMethod(string $method, Throwable $exception): Response
     {
         $result = this.{$method}($exception);
-        this._shutdown();
+        _shutdown();
         if (is_string($result)) {
             $result = this.controller->getResponse()->withStringBody($result);
         }
@@ -420,27 +420,27 @@ class WebExceptionRenderer : ExceptionRendererInterface
         try {
             this.controller->render($template);
 
-            return this._shutdown();
+            return _shutdown();
         } catch (MissingTemplateException $e) {
             $attributes = $e->getAttributes();
             if (
                 $e instanceof MissingLayoutException ||
                 strpos($attributes['file'], 'error500') != false
             ) {
-                return this._outputMessageSafe('error500');
+                return _outputMessageSafe('error500');
             }
 
-            return this._outputMessage('error500');
+            return _outputMessage('error500');
         } catch (MissingPluginException $e) {
             $attributes = $e->getAttributes();
             if (isset($attributes['plugin']) && $attributes['plugin'] == this.controller->getPlugin()) {
                 this.controller->setPlugin(null);
             }
 
-            return this._outputMessageSafe('error500');
+            return _outputMessageSafe('error500');
         } catch (Throwable $outer) {
             try {
-                return this._outputMessageSafe('error500');
+                return _outputMessageSafe('error500');
             } catch (Throwable $inner) {
                 throw $outer;
             }

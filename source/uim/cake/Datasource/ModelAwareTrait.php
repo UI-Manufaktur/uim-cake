@@ -121,7 +121,7 @@ trait ModelAwareTrait
             return this.{$alias};
         }
 
-        $factory = this._modelFactories[$modelType] ?? FactoryLocator::get($modelType);
+        $factory = _modelFactories[$modelType] ?? FactoryLocator::get($modelType);
         if ($factory instanceof LocatorInterface) {
             this.{$alias} = $factory->get($modelClass, $options);
         } else {
@@ -152,7 +152,7 @@ trait ModelAwareTrait
             ));
         }
 
-        this._modelFactories[$type] = $factory;
+        _modelFactories[$type] = $factory;
     }
 
     /**
@@ -162,7 +162,7 @@ trait ModelAwareTrait
      */
     function getModelType(): string
     {
-        return this._modelType;
+        return _modelType;
     }
 
     /**
@@ -173,7 +173,7 @@ trait ModelAwareTrait
      */
     function setModelType(string $modelType)
     {
-        this._modelType = $modelType;
+        _modelType = $modelType;
 
         return this;
     }

@@ -128,7 +128,7 @@ class DateTimeType : BaseType : BatchCastingInterface
         parent::__construct($name);
 
         this.defaultTimezone = new DateTimeZone(date_default_timezone_get());
-        this._setClassName(FrozenTime::class, DateTimeImmutable::class);
+        _setClassName(FrozenTime::class, DateTimeImmutable::class);
     }
 
     /**
@@ -144,7 +144,7 @@ class DateTimeType : BaseType : BatchCastingInterface
             return $value;
         }
         if (is_int($value)) {
-            $class = this._className;
+            $class = _className;
             $value = new $class('@' . $value);
         }
 
@@ -158,7 +158,7 @@ class DateTimeType : BaseType : BatchCastingInterface
             $value = $value->setTimezone(this.dbTimezone);
         }
 
-        return $value->format(this._format);
+        return $value->format(_format);
     }
 
     /**
@@ -226,7 +226,7 @@ class DateTimeType : BaseType : BatchCastingInterface
             return null;
         }
 
-        $class = this._className;
+        $class = _className;
         if (is_int($value)) {
             $instance = new $class('@' . $value);
         } else {
@@ -287,7 +287,7 @@ class DateTimeType : BaseType : BatchCastingInterface
                 continue;
             }
 
-            $class = this._className;
+            $class = _className;
             if (is_int($value)) {
                 $instance = new $class('@' . $value);
             } else {
@@ -329,7 +329,7 @@ class DateTimeType : BaseType : BatchCastingInterface
         }
 
         /** @var class-string<\DateTimeInterface> $class */
-        $class = this._className;
+        $class = _className;
         try {
             if ($value == '' || $value == null || is_bool($value)) {
                 return null;
@@ -343,10 +343,10 @@ class DateTimeType : BaseType : BatchCastingInterface
             }
 
             if (is_string($value)) {
-                if (this._useLocaleMarshal) {
-                    $dateTime = this._parseLocaleValue($value);
+                if (_useLocaleMarshal) {
+                    $dateTime = _parseLocaleValue($value);
                 } else {
-                    $dateTime = this._parseValue($value);
+                    $dateTime = _parseValue($value);
                 }
 
                 /** @var \DateTime|\DateTimeImmutable $dateTime */
@@ -408,17 +408,17 @@ class DateTimeType : BaseType : BatchCastingInterface
     function useLocaleParser(bool $enable = true)
     {
         if ($enable == false) {
-            this._useLocaleMarshal = $enable;
+            _useLocaleMarshal = $enable;
 
             return this;
         }
-        if (is_subclass_of(this._className, I18nDateTimeInterface::class)) {
-            this._useLocaleMarshal = $enable;
+        if (is_subclass_of(_className, I18nDateTimeInterface::class)) {
+            _useLocaleMarshal = $enable;
 
             return this;
         }
         throw new RuntimeException(
-            sprintf('Cannot use locale parsing with the %s class', this._className)
+            sprintf('Cannot use locale parsing with the %s class', _className)
         );
     }
 
@@ -433,7 +433,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      */
     function setLocaleFormat($format)
     {
-        this._localeMarshalFormat = $format;
+        _localeMarshalFormat = $format;
 
         return this;
     }
@@ -451,7 +451,7 @@ class DateTimeType : BaseType : BatchCastingInterface
             . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'
         );
 
-        this._setClassName(FrozenTime::class, DateTimeImmutable::class);
+        _setClassName(FrozenTime::class, DateTimeImmutable::class);
 
         return this;
     }
@@ -470,7 +470,7 @@ class DateTimeType : BaseType : BatchCastingInterface
         if (!class_exists($class)) {
             $class = $fallback;
         }
-        this._className = $class;
+        _className = $class;
     }
 
     /**
@@ -481,7 +481,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      */
     function getDateTimeClassName(): string
     {
-        return this._className;
+        return _className;
     }
 
     /**
@@ -497,7 +497,7 @@ class DateTimeType : BaseType : BatchCastingInterface
             . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'
         );
 
-        this._setClassName(Time::class, DateTime::class);
+        _setClassName(Time::class, DateTime::class);
 
         return this;
     }
@@ -512,9 +512,9 @@ class DateTimeType : BaseType : BatchCastingInterface
     protected function _parseLocaleValue(string $value): ?I18nDateTimeInterface
     {
         /** @psalm-var class-string<\Cake\I18n\I18nDateTimeInterface> $class */
-        $class = this._className;
+        $class = _className;
 
-        return $class::parseDateTime($value, this._localeMarshalFormat, this.userTimezone);
+        return $class::parseDateTime($value, _localeMarshalFormat, this.userTimezone);
     }
 
     /**
@@ -526,9 +526,9 @@ class DateTimeType : BaseType : BatchCastingInterface
      */
     protected function _parseValue(string $value): ?DateTimeInterface
     {
-        $class = this._className;
+        $class = _className;
 
-        foreach (this._marshalFormats as $format) {
+        foreach (_marshalFormats as $format) {
             try {
                 $dateTime = $class::createFromFormat($format, $value, this.userTimezone);
                 // Check for false in case DateTime is used directly

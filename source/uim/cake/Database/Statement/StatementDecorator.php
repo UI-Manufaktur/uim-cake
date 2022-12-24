@@ -68,8 +68,8 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     public this(StatementInterface $statement, DriverInterface $driver)
     {
-        this._statement = $statement;
-        this._driver = $driver;
+        _statement = $statement;
+        _driver = $driver;
     }
 
     /**
@@ -82,7 +82,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     {
         if ($property == 'queryString') {
             /** @psalm-suppress NoInterfaceProperties */
-            return this._statement->queryString;
+            return _statement->queryString;
         }
 
         return null;
@@ -110,7 +110,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function bindValue($column, $value, $type = 'string'): void
     {
-        this._statement->bindValue($column, $value, $type);
+        _statement->bindValue($column, $value, $type);
     }
 
     /**
@@ -122,7 +122,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function closeCursor(): void
     {
-        this._statement->closeCursor();
+        _statement->closeCursor();
     }
 
     /**
@@ -140,7 +140,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function columnCount(): int
     {
-        return this._statement->columnCount();
+        return _statement->columnCount();
     }
 
     /**
@@ -150,7 +150,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function errorCode()
     {
-        return this._statement->errorCode();
+        return _statement->errorCode();
     }
 
     /**
@@ -161,7 +161,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function errorInfo(): array
     {
-        return this._statement->errorInfo();
+        return _statement->errorInfo();
     }
 
     /**
@@ -175,9 +175,9 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function execute(?array $params = null): bool
     {
-        this._hasExecuted = true;
+        _hasExecuted = true;
 
-        return this._statement->execute($params);
+        return _statement->execute($params);
     }
 
     /**
@@ -199,7 +199,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function fetch($type = self::FETCH_TYPE_NUM)
     {
-        return this._statement->fetch($type);
+        return _statement->fetch($type);
     }
 
     /**
@@ -247,7 +247,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function fetchAll($type = self::FETCH_TYPE_NUM)
     {
-        return this._statement->fetchAll($type);
+        return _statement->fetchAll($type);
     }
 
     /**
@@ -265,7 +265,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function rowCount(): int
     {
-        return this._statement->rowCount();
+        return _statement->rowCount();
     }
 
     /**
@@ -287,11 +287,11 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     #[\ReturnTypeWillChange]
     function getIterator()
     {
-        if (!this._hasExecuted) {
+        if (!_hasExecuted) {
             this.execute();
         }
 
-        return this._statement;
+        return _statement;
     }
 
     /**
@@ -348,7 +348,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
             }
         }
 
-        return this._driver->lastInsertId($table, $column);
+        return _driver->lastInsertId($table, $column);
     }
 
     /**
@@ -358,6 +358,6 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      */
     function getInnerStatement()
     {
-        return this._statement;
+        return _statement;
     }
 }

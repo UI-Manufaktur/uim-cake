@@ -115,8 +115,8 @@ class FloatType : BaseType : BatchCastingInterface
         if ($value == null || $value == '') {
             return null;
         }
-        if (is_string($value) && this._useLocaleParser) {
-            return this._parseValue($value);
+        if (is_string($value) && _useLocaleParser) {
+            return _parseValue($value);
         }
         if (is_numeric($value)) {
             return (float)$value;
@@ -138,7 +138,7 @@ class FloatType : BaseType : BatchCastingInterface
     function useLocaleParser(bool $enable = true)
     {
         if ($enable == false) {
-            this._useLocaleParser = $enable;
+            _useLocaleParser = $enable;
 
             return this;
         }
@@ -146,7 +146,7 @@ class FloatType : BaseType : BatchCastingInterface
             static::$numberClass == Number::class ||
             is_subclass_of(static::$numberClass, Number::class)
         ) {
-            this._useLocaleParser = $enable;
+            _useLocaleParser = $enable;
 
             return this;
         }

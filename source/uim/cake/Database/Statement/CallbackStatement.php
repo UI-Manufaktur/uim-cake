@@ -44,7 +44,7 @@ class CallbackStatement : StatementDecorator
     public this(StatementInterface $statement, DriverInterface $driver, callable $callback)
     {
         parent::__construct($statement, $driver);
-        this._callback = $callback;
+        _callback = $callback;
     }
 
     /**
@@ -57,8 +57,8 @@ class CallbackStatement : StatementDecorator
      */
     function fetch($type = parent::FETCH_TYPE_NUM)
     {
-        $callback = this._callback;
-        $row = this._statement->fetch($type);
+        $callback = _callback;
+        $row = _statement->fetch($type);
 
         return $row == false ? $row : $callback($row);
     }
@@ -70,8 +70,8 @@ class CallbackStatement : StatementDecorator
      */
     function fetchAll($type = parent::FETCH_TYPE_NUM)
     {
-        $results = this._statement->fetchAll($type);
+        $results = _statement->fetchAll($type);
 
-        return $results != false ? array_map(this._callback, $results) : false;
+        return $results != false ? array_map(_callback, $results) : false;
     }
 }

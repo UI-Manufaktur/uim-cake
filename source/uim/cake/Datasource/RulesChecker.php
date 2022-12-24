@@ -111,8 +111,8 @@ class RulesChecker
      */
     public this(array $options = [])
     {
-        this._options = $options;
-        this._useI18n = function_exists('__d');
+        _options = $options;
+        _useI18n = function_exists('__d');
     }
 
     /**
@@ -136,7 +136,7 @@ class RulesChecker
      */
     function add(callable $rule, $name = null, array $options = [])
     {
-        this._rules[] = this._addError($rule, $name, $options);
+        _rules[] = _addError($rule, $name, $options);
 
         return this;
     }
@@ -161,7 +161,7 @@ class RulesChecker
      */
     function addCreate(callable $rule, $name = null, array $options = [])
     {
-        this._createRules[] = this._addError($rule, $name, $options);
+        _createRules[] = _addError($rule, $name, $options);
 
         return this;
     }
@@ -186,7 +186,7 @@ class RulesChecker
      */
     function addUpdate(callable $rule, $name = null, array $options = [])
     {
-        this._updateRules[] = this._addError($rule, $name, $options);
+        _updateRules[] = _addError($rule, $name, $options);
 
         return this;
     }
@@ -211,7 +211,7 @@ class RulesChecker
      */
     function addDelete(callable $rule, $name = null, array $options = [])
     {
-        this._deleteRules[] = this._addError($rule, $name, $options);
+        _deleteRules[] = _addError($rule, $name, $options);
 
         return this;
     }
@@ -254,7 +254,7 @@ class RulesChecker
      */
     function checkCreate(EntityInterface $entity, array $options = []): bool
     {
-        return this._checkRules($entity, $options, array_merge(this._rules, this._createRules));
+        return _checkRules($entity, $options, array_merge(_rules, _createRules));
     }
 
     /**
@@ -267,7 +267,7 @@ class RulesChecker
      */
     function checkUpdate(EntityInterface $entity, array $options = []): bool
     {
-        return this._checkRules($entity, $options, array_merge(this._rules, this._updateRules));
+        return _checkRules($entity, $options, array_merge(_rules, _updateRules));
     }
 
     /**
@@ -280,7 +280,7 @@ class RulesChecker
      */
     function checkDelete(EntityInterface $entity, array $options = []): bool
     {
-        return this._checkRules($entity, $options, this._deleteRules);
+        return _checkRules($entity, $options, _deleteRules);
     }
 
     /**
@@ -295,7 +295,7 @@ class RulesChecker
     protected function _checkRules(EntityInterface $entity, array $options = [], array $rules = []): bool
     {
         $success = true;
-        $options += this._options;
+        $options += _options;
         foreach ($rules as $rule) {
             $success = $rule($entity, $options) && $success;
         }

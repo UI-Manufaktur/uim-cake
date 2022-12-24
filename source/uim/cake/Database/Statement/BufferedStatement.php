@@ -82,7 +82,7 @@ class BufferedStatement : Iterator, StatementInterface
     public this(StatementInterface $statement, DriverInterface $driver)
     {
         this.statement = $statement;
-        this._driver = $driver;
+        _driver = $driver;
     }
 
     /**
@@ -146,8 +146,8 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function execute(?array $params = null): bool
     {
-        this._reset();
-        this._hasExecuted = true;
+        _reset();
+        _hasExecuted = true;
 
         return this.statement->execute($params);
     }
@@ -200,7 +200,7 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function fetch($type = self::FETCH_TYPE_NUM)
     {
-        if (this._allFetched) {
+        if (_allFetched) {
             $row = false;
             if (isset(this.buffer[this.index])) {
                 $row = this.buffer[this.index];
@@ -216,7 +216,7 @@ class BufferedStatement : Iterator, StatementInterface
 
         $record = this.statement->fetch($type);
         if ($record == false) {
-            this._allFetched = true;
+            _allFetched = true;
             this.statement->closeCursor();
 
             return false;
@@ -241,14 +241,14 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function fetchAll($type = self::FETCH_TYPE_NUM)
     {
-        if (this._allFetched) {
+        if (_allFetched) {
             return this.buffer;
         }
         $results = this.statement->fetchAll($type);
         if ($results != false) {
             this.buffer = array_merge(this.buffer, $results);
         }
-        this._allFetched = true;
+        _allFetched = true;
         this.statement->closeCursor();
 
         return this.buffer;
@@ -259,7 +259,7 @@ class BufferedStatement : Iterator, StatementInterface
      */
     function rowCount(): int
     {
-        if (!this._allFetched) {
+        if (!_allFetched) {
             this.fetchAll(static::FETCH_TYPE_ASSOC);
         }
 
@@ -274,7 +274,7 @@ class BufferedStatement : Iterator, StatementInterface
     protected function _reset(): void
     {
         this.buffer = [];
-        this._allFetched = false;
+        _allFetched = false;
         this.index = 0;
     }
 

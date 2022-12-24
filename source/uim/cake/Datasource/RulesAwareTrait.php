@@ -92,16 +92,16 @@ trait RulesAwareTrait
      */
     function rulesChecker(): RulesChecker
     {
-        if (this._rulesChecker != null) {
-            return this._rulesChecker;
+        if (_rulesChecker != null) {
+            return _rulesChecker;
         }
         /** @psalm-var class-string<\Cake\Datasource\RulesChecker> $class */
         $class = defined('static::RULES_CLASS') ? static::RULES_CLASS : RulesChecker::class;
         /** @psalm-suppress ArgumentTypeCoercion */
-        this._rulesChecker = this.buildRules(new $class(['repository' => this]));
-        this.dispatchEvent('Model.buildRules', ['rules' => this._rulesChecker]);
+        _rulesChecker = this.buildRules(new $class(['repository' => this]));
+        this.dispatchEvent('Model.buildRules', ['rules' => _rulesChecker]);
 
-        return this._rulesChecker;
+        return _rulesChecker;
     }
 
     /**

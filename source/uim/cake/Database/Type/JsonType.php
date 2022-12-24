@@ -50,7 +50,7 @@ class JsonType : BaseType : BatchCastingInterface
             return null;
         }
 
-        return json_encode($value, this._encodingOptions);
+        return json_encode($value, _encodingOptions);
     }
 
     /**
@@ -117,7 +117,7 @@ class JsonType : BaseType : BatchCastingInterface
      */
     function setEncodingOptions(int $options)
     {
-        this._encodingOptions = $options;
+        _encodingOptions = $options;
 
         return this;
     }

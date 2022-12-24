@@ -141,7 +141,7 @@ class ExceptionTrap
             }
 
             /** @var class-string<\Cake\Error\ExceptionRendererInterface> $class */
-            return new $class($exception, $request, this._config);
+            return new $class($exception, $request, _config);
         }
 
         return $class($exception, $request);
@@ -166,9 +166,9 @@ class ExceptionTrap
     function logger(): ErrorLoggerInterface
     {
         /** @var class-string<\Cake\Error\ErrorLoggerInterface> $class */
-        $class = this.getConfig('logger', this._defaultConfig['logger']);
+        $class = this.getConfig('logger', _defaultConfig['logger']);
 
-        return new $class(this._config);
+        return new $class(_config);
     }
 
     /**
@@ -260,7 +260,7 @@ class ExceptionTrap
         if (this.disabled) {
             return;
         }
-        $megabytes = this._config['extraFatalErrorMemory'] ?? 4;
+        $megabytes = _config['extraFatalErrorMemory'] ?? 4;
         if ($megabytes > 0) {
             this.increaseMemoryLimit($megabytes * 1024);
         }
@@ -343,7 +343,7 @@ class ExceptionTrap
      */
     function logException(Throwable $exception, ?IServerRequest $request = null): void
     {
-        $shouldLog = this._config['log'];
+        $shouldLog = _config['log'];
         if ($shouldLog) {
             foreach (this.getConfig('skipLog') as $class) {
                 if ($exception instanceof $class) {
@@ -354,7 +354,7 @@ class ExceptionTrap
         if ($shouldLog) {
             $logger = this.logger();
             if (method_exists($logger, 'logException')) {
-                $logger->logException($exception, $request, this._config['trace']);
+                $logger->logException($exception, $request, _config['trace']);
             } else {
                 $loggerClass = get_class($logger);
                 deprecationWarning(

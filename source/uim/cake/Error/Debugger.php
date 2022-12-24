@@ -163,7 +163,7 @@ class Debugger
             define('E_RECOVERABLE_ERROR', 4096);
         }
 
-        $config = array_intersect_key((array)Configure::read('Debugger'), this._defaultConfig);
+        $config = array_intersect_key((array)Configure::read('Debugger'), _defaultConfig);
         this.setConfig($config);
 
         $e = '<pre class="cake-error">';
@@ -175,11 +175,11 @@ class Debugger
         $e .= '<div id="{:id}-trace" class="cake-stack-trace" style="display: none;">';
         $e .= '{:links}{:info}</div>';
         $e .= '</pre>';
-        this._templates['js']['error'] = $e;
+        _templates['js']['error'] = $e;
 
         $t = '<div id="{:id}-trace" class="cake-stack-trace" style="display: none;">';
         $t .= '{:context}{:code}{:trace}</div>';
-        this._templates['js']['info'] = $t;
+        _templates['js']['info'] = $t;
 
         $links = [];
         $link = '<a href="javascript:void(0);" onclick="document.getElementById(\'{:id}-code\')';
@@ -192,20 +192,20 @@ class Debugger
         $link .= '\'none\' ? \'\' : \'none\')">Context</a>';
         $links['context'] = $link;
 
-        this._templates['js']['links'] = $links;
+        _templates['js']['links'] = $links;
 
-        this._templates['js']['context'] = '<pre id="{:id}-context" class="cake-context cake-debug" ';
-        this._templates['js']['context'] .= 'style="display: none;">{:context}</pre>';
+        _templates['js']['context'] = '<pre id="{:id}-context" class="cake-context cake-debug" ';
+        _templates['js']['context'] .= 'style="display: none;">{:context}</pre>';
 
-        this._templates['js']['code'] = '<pre id="{:id}-code" class="cake-code-dump" ';
-        this._templates['js']['code'] .= 'style="display: none;">{:code}</pre>';
+        _templates['js']['code'] = '<pre id="{:id}-code" class="cake-code-dump" ';
+        _templates['js']['code'] .= 'style="display: none;">{:code}</pre>';
 
         $e = '<pre class="cake-error"><b>{:error}</b> ({:code}) : {:description} ';
         $e .= '[<b>{:path}</b>, line <b>{:line}]</b></pre>';
-        this._templates['html']['error'] = $e;
+        _templates['html']['error'] = $e;
 
-        this._templates['html']['context'] = '<pre class="cake-context cake-debug"><b>Context</b> ';
-        this._templates['html']['context'] .= '<p>{:context}</p></pre>';
+        _templates['html']['context'] = '<pre class="cake-context cake-debug"><b>Context</b> ';
+        _templates['html']['context'] .= '<p>{:context}</p></pre>';
     }
 
     /**
@@ -975,7 +975,7 @@ class Debugger
         ];
         $data += $defaults;
 
-        $outputFormat = this._outputFormat;
+        $outputFormat = _outputFormat;
         if (isset(this.renderers[$outputFormat])) {
             /** @var array $trace */
             $trace = static::trace(['start' => $data['start'], 'format' => 'points']);
@@ -1007,9 +1007,9 @@ class Debugger
             $context[] = "\${$var} = " . static::exportVar($value, 3);
         }
 
-        switch (this._outputFormat) {
+        switch (_outputFormat) {
             case false:
-                this._data[] = compact('context', 'trace') + $data;
+                _data[] = compact('context', 'trace') + $data;
 
                 return;
             case 'log':
@@ -1020,7 +1020,7 @@ class Debugger
 
         $data['trace'] = $trace;
         $data['id'] = 'cakeErr' . uniqid();
-        $tpl = this._templates[$outputFormat] + this._templates['base'];
+        $tpl = _templates[$outputFormat] + _templates['base'];
 
         if (isset($tpl['links'])) {
             foreach ($tpl['links'] as $key => $val) {
