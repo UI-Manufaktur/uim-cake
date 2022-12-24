@@ -24,7 +24,7 @@ use NumberFormatter;
  * This class enables input to be stubbed and have exceptions
  * raised when no answer is available.
  */
-class StubConsoleInput extends ConsoleInput
+class StubConsoleInput : ConsoleInput
 {
     /**
      * Reply values for ask() and askChoice()

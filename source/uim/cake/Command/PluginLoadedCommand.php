@@ -24,7 +24,7 @@ use Cake\Core\Plugin;
 /**
  * Displays all currently loaded plugins.
  */
-class PluginLoadedCommand extends Command
+class PluginLoadedCommand : Command
 {
     /**
      * @inheritDoc

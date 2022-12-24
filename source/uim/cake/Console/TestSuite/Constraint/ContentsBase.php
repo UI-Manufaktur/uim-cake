@@ -22,7 +22,7 @@ use PHPUnit\Framework\Constraint\Constraint;
  *
  * @internal
  */
-abstract class ContentsBase extends Constraint
+abstract class ContentsBase : Constraint
 {
     /**
      * @var string

@@ -26,7 +26,7 @@ use RuntimeException;
 /**
  * Provides CLI tool for clearing schema cache.
  */
-class SchemacacheClearCommand extends Command
+class SchemacacheClearCommand : Command
 {
     /**
      * Get the command name.

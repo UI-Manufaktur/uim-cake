@@ -20,7 +20,7 @@ namespace Cake\Console\TestSuite\Constraint;
  *
  * @internal
  */
-class ContentsEmpty extends ContentsBase
+class ContentsEmpty : ContentsBase
 {
     /**
      * Checks if contents are empty

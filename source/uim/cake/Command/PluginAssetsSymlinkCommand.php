@@ -25,7 +25,7 @@ use Cake\Console\ConsoleOptionParser;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class PluginAssetsSymlinkCommand extends Command
+class PluginAssetsSymlinkCommand : Command
 {
     use PluginAssetsTrait;
 

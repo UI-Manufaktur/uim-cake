@@ -25,7 +25,7 @@ use Cake\Console\ConsoleOptionParser;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class PluginAssetsRemoveCommand extends Command
+class PluginAssetsRemoveCommand : Command
 {
     use PluginAssetsTrait;
 

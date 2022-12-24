@@ -27,7 +27,7 @@ use Cake\Routing\Router;
 /**
  * Provides interactive CLI tool for testing routes.
  */
-class RoutesCheckCommand extends Command
+class RoutesCheckCommand : Command
 {
     /**
      * @inheritDoc

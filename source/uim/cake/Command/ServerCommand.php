@@ -25,7 +25,7 @@ use Cake\Core\Configure;
 /**
  * built-in Server command
  */
-class ServerCommand extends Command
+class ServerCommand : Command
 {
     /**
      * Default ServerHost

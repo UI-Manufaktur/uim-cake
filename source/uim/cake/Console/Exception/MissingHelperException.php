@@ -17,7 +17,7 @@ namespace Cake\Console\Exception;
 /**
  * Used when a Helper cannot be found.
  */
-class MissingHelperException extends ConsoleException
+class MissingHelperException : ConsoleException
 {
     /**
      * @var string

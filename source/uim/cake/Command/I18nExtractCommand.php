@@ -28,7 +28,7 @@ use Cake\Utility\Inflector;
 /**
  * Language string extractor
  */
-class I18nExtractCommand extends Command
+class I18nExtractCommand : Command
 {
     /**
      * @inheritDoc

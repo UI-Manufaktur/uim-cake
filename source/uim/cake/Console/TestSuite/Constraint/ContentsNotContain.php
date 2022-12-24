@@ -20,7 +20,7 @@ namespace Cake\Console\TestSuite\Constraint;
  *
  * @internal
  */
-class ContentsNotContain extends ContentsBase
+class ContentsNotContain : ContentsBase
 {
     /**
      * Checks if contents contain expected

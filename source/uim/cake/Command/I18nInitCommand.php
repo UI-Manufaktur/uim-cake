@@ -27,7 +27,7 @@ use DirectoryIterator;
 /**
  * Command for interactive I18N management.
  */
-class I18nInitCommand extends Command
+class I18nInitCommand : Command
 {
     /**
      * @inheritDoc

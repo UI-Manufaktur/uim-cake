@@ -24,7 +24,7 @@ use Cake\Routing\Router;
 /**
  * Provides interactive CLI tools for routing.
  */
-class RoutesCommand extends Command
+class RoutesCommand : Command
 {
     /**
      * Display all routes in an application

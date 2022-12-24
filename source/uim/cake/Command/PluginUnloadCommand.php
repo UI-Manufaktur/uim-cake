@@ -23,7 +23,7 @@ use Cake\Console\ConsoleOptionParser;
 /**
  * Command for unloading plugins.
  */
-class PluginUnloadCommand extends Command
+class PluginUnloadCommand : Command
 {
     /**
      * @inheritDoc

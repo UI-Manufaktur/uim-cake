@@ -23,7 +23,7 @@ use Cake\Core\Configure;
 /**
  * Print out the version of CakePHP in use.
  */
-class VersionCommand extends Command
+class VersionCommand : Command
 {
     /**
      * Print out the version of CakePHP in use.

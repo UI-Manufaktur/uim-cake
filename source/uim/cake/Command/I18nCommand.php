@@ -23,7 +23,7 @@ use Cake\Console\ConsoleOptionParser;
 /**
  * Command for interactive I18N management.
  */
-class I18nCommand extends Command
+class I18nCommand : Command
 {
     /**
      * Execute interactive mode

@@ -17,7 +17,7 @@ namespace Cake\Console\Exception;
 /**
  * Used when a Task cannot be found.
  */
-class MissingTaskException extends ConsoleException
+class MissingTaskException : ConsoleException
 {
     /**
      * @var string

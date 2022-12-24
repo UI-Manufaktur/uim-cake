@@ -27,7 +27,7 @@ use Cake\Core\Plugin;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class PluginLoadCommand extends Command
+class PluginLoadCommand : Command
 {
     /**
      * @inheritDoc

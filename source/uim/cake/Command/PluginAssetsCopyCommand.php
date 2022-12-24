@@ -25,7 +25,7 @@ use Cake\Console\ConsoleOptionParser;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class PluginAssetsCopyCommand extends Command
+class PluginAssetsCopyCommand : Command
 {
     use PluginAssetsTrait;
 

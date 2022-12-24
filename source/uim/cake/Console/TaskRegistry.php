@@ -24,9 +24,9 @@ use Cake\Core\ObjectRegistry;
  * Registry for Tasks. Provides features
  * for lazily loading tasks.
  *
- * @extends \Cake\Core\ObjectRegistry<\Cake\Console\Shell>
+ * @: \Cake\Core\ObjectRegistry<\Cake\Console\Shell>
  */
-class TaskRegistry extends ObjectRegistry
+class TaskRegistry : ObjectRegistry
 {
     /**
      * Shell to use to set params to tasks.

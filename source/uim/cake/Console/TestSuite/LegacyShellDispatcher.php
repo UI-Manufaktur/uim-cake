@@ -22,7 +22,7 @@ use Cake\Console\ShellDispatcher;
 /**
  * Allows injecting mock IO into shells
  */
-class LegacyShellDispatcher extends ShellDispatcher
+class LegacyShellDispatcher : ShellDispatcher
 {
     /**
      * @var \Cake\Console\ConsoleIo

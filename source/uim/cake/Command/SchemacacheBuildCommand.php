@@ -26,7 +26,7 @@ use RuntimeException;
 /**
  * Provides CLI tool for updating schema cache.
  */
-class SchemacacheBuildCommand extends Command
+class SchemacacheBuildCommand : Command
 {
     /**
      * Get the command name.

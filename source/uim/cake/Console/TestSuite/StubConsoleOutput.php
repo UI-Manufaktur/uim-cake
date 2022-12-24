@@ -31,7 +31,7 @@ use Cake\Console\ConsoleOutput;
  * $io = new ConsoleIo($output);
  * ```
  */
-class StubConsoleOutput extends ConsoleOutput
+class StubConsoleOutput : ConsoleOutput
 {
     /**
      * Buffered messages.

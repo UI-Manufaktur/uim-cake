@@ -25,7 +25,7 @@ use Cake\Routing\Router;
 /**
  * Provides interactive CLI tools for URL generation
  */
-class RoutesGenerateCommand extends Command
+class RoutesGenerateCommand : Command
 {
     /**
      * @inheritDoc

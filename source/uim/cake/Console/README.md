@@ -85,7 +85,7 @@ use Cake\Console\BaseCommand;
 use Cake\Console\ConsoleIo;
 use Cake\Console\ConsoleOptionParser;
 
-class HelloCommand extends BaseCommand
+class HelloCommand : BaseCommand
 {
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {

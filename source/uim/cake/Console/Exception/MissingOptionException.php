@@ -20,7 +20,7 @@ use Throwable;
 /**
  * Exception raised with suggestions
  */
-class MissingOptionException extends ConsoleException
+class MissingOptionException : ConsoleException
 {
     /**
      * The requested thing that was not found.

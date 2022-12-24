@@ -17,7 +17,7 @@ namespace Cake\Console\Exception;
 /**
  * Used when a shell method cannot be found.
  */
-class MissingShellMethodException extends ConsoleException
+class MissingShellMethodException : ConsoleException
 {
     /**
      * @var string
