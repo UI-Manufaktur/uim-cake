@@ -48,7 +48,7 @@ class TypeMap
      */
     public this(array $defaults = [])
     {
-        this->setDefaults($defaults);
+        this.setDefaults($defaults);
     }
 
     /**
@@ -75,7 +75,7 @@ class TypeMap
      */
     function setDefaults(array $defaults)
     {
-        this->_defaults = $defaults;
+        this._defaults = $defaults;
 
         return this;
     }
@@ -87,7 +87,7 @@ class TypeMap
      */
     function getDefaults(): array
     {
-        return this->_defaults;
+        return this._defaults;
     }
 
     /**
@@ -100,7 +100,7 @@ class TypeMap
      */
     function addDefaults(array $types): void
     {
-        this->_defaults += $types;
+        this._defaults += $types;
     }
 
     /**
@@ -120,7 +120,7 @@ class TypeMap
      */
     function setTypes(array $types)
     {
-        this->_types = $types;
+        this._types = $types;
 
         return this;
     }
@@ -132,7 +132,7 @@ class TypeMap
      */
     function getTypes(): array
     {
-        return this->_types;
+        return this._types;
     }
 
     /**
@@ -145,7 +145,7 @@ class TypeMap
      */
     function type($column): ?string
     {
-        return this->_types[$column] ?? this->_defaults[$column] ?? null;
+        return this._types[$column] ?? this._defaults[$column] ?? null;
     }
 
     /**
@@ -155,6 +155,6 @@ class TypeMap
      */
     function toArray(): array
     {
-        return this->_types + this->_defaults;
+        return this._types + this._defaults;
     }
 }

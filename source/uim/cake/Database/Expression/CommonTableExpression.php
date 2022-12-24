@@ -69,9 +69,9 @@ class CommonTableExpression implements IExpression
      */
     public this(string $name = '', $query = null)
     {
-        this->name = new IdentifierExpression($name);
+        this.name = new IdentifierExpression($name);
         if ($query) {
-            this->query($query);
+            this.query($query);
         }
     }
 
@@ -86,7 +86,7 @@ class CommonTableExpression implements IExpression
      */
     function name(string $name)
     {
-        this->name = new IdentifierExpression($name);
+        this.name = new IdentifierExpression($name);
 
         return this;
     }
@@ -107,7 +107,7 @@ class CommonTableExpression implements IExpression
                 );
             }
         }
-        this->query = $query;
+        this.query = $query;
 
         return this;
     }
@@ -126,7 +126,7 @@ class CommonTableExpression implements IExpression
                 $field = new IdentifierExpression($field);
             }
         }
-        this->fields = array_merge(this->fields, $fields);
+        this.fields = array_merge(this.fields, $fields);
 
         return this;
     }
@@ -138,7 +138,7 @@ class CommonTableExpression implements IExpression
      */
     function materialized()
     {
-        this->materialized = 'MATERIALIZED';
+        this.materialized = 'MATERIALIZED';
 
         return this;
     }
@@ -150,7 +150,7 @@ class CommonTableExpression implements IExpression
      */
     function notMaterialized()
     {
-        this->materialized = 'NOT MATERIALIZED';
+        this.materialized = 'NOT MATERIALIZED';
 
         return this;
     }
@@ -162,7 +162,7 @@ class CommonTableExpression implements IExpression
      */
     function isRecursive(): bool
     {
-        return this->recursive;
+        return this.recursive;
     }
 
     /**
@@ -172,7 +172,7 @@ class CommonTableExpression implements IExpression
      */
     function recursive()
     {
-        this->recursive = true;
+        this.recursive = true;
 
         return this;
     }
@@ -183,21 +183,21 @@ class CommonTableExpression implements IExpression
     function sql(ValueBinder $binder): string
     {
         $fields = '';
-        if (this->fields) {
+        if (this.fields) {
             $expressions = array_map(function (IdentifierExpression $e) use ($binder) {
                 return $e->sql($binder);
-            }, this->fields);
+            }, this.fields);
             $fields = sprintf('(%s)', implode(', ', $expressions));
         }
 
-        $suffix = this->materialized ? this->materialized . ' ' : '';
+        $suffix = this.materialized ? this.materialized . ' ' : '';
 
         return sprintf(
             '%s%s AS %s(%s)',
-            this->name->sql($binder),
+            this.name->sql($binder),
             $fields,
             $suffix,
-            this->query ? this->query->sql($binder) : ''
+            this.query ? this.query->sql($binder) : ''
         );
     }
 
@@ -206,15 +206,15 @@ class CommonTableExpression implements IExpression
      */
     public O traverse(this O)(Closure $callback)
     {
-        $callback(this->name);
-        foreach (this->fields as $field) {
+        $callback(this.name);
+        foreach (this.fields as $field) {
             $callback($field);
             $field->traverse($callback);
         }
 
-        if (this->query) {
-            $callback(this->query);
-            this->query->traverse($callback);
+        if (this.query) {
+            $callback(this.query);
+            this.query->traverse($callback);
         }
 
         return this;
@@ -227,13 +227,13 @@ class CommonTableExpression implements IExpression
      */
     function __clone()
     {
-        this->name = clone this->name;
-        if (this->query) {
-            this->query = clone this->query;
+        this.name = clone this.name;
+        if (this.query) {
+            this.query = clone this.query;
         }
 
-        foreach (this->fields as $key => $field) {
-            this->fields[$key] = clone $field;
+        foreach (this.fields as $key => $field) {
+            this.fields[$key] = clone $field;
         }
     }
 }

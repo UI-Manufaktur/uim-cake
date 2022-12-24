@@ -71,13 +71,13 @@ class CaseExpression implements IExpression
         $types = is_array($types) ? $types : [$types];
 
         if (!empty($conditions)) {
-            this->add($conditions, $values, $types);
+            this.add($conditions, $values, $types);
         }
 
         if (count($values) > count($conditions)) {
             end($values);
             $key = key($values);
-            this->elseValue($values[$key], $types[$key] ?? null);
+            this.elseValue($values[$key], $types[$key] ?? null);
         }
     }
 
@@ -98,7 +98,7 @@ class CaseExpression implements IExpression
         $values = is_array($values) ? $values : [$values];
         $types = is_array($types) ? $types : [$types];
 
-        this->_addExpressions($conditions, $values, $types);
+        this._addExpressions($conditions, $values, $types);
 
         return this;
     }
@@ -128,12 +128,12 @@ class CaseExpression implements IExpression
                 continue;
             }
 
-            this->_conditions[] = $c;
+            this._conditions[] = $c;
             $value = $rawValues[$k] ?? 1;
 
             if ($value == 'literal') {
                 $value = $keyValues[$k];
-                this->_values[] = $value;
+                this._values[] = $value;
                 continue;
             }
 
@@ -141,22 +141,22 @@ class CaseExpression implements IExpression
                 /** @var string $identifier */
                 $identifier = $keyValues[$k];
                 $value = new IdentifierExpression($identifier);
-                this->_values[] = $value;
+                this._values[] = $value;
                 continue;
             }
 
             $type = $types[$k] ?? null;
 
             if ($type != null && !$value instanceof IExpression) {
-                $value = this->_castToExpression($value, $type);
+                $value = this._castToExpression($value, $type);
             }
 
             if ($value instanceof IExpression) {
-                this->_values[] = $value;
+                this._values[] = $value;
                 continue;
             }
 
-            this->_values[] = ['value' => $value, 'type' => $type];
+            this._values[] = ['value' => $value, 'type' => $type];
         }
     }
 
@@ -175,14 +175,14 @@ class CaseExpression implements IExpression
         }
 
         if ($value != null && !$value instanceof IExpression) {
-            $value = this->_castToExpression($value, $type);
+            $value = this._castToExpression($value, $type);
         }
 
         if (!$value instanceof IExpression) {
             $value = ['value' => $value, 'type' => $type];
         }
 
-        this->_elseValue = $value;
+        this._elseValue = $value;
     }
 
     /**
@@ -215,13 +215,13 @@ class CaseExpression implements IExpression
     {
         $parts = [];
         $parts[] = 'CASE';
-        foreach (this->_conditions as $k => $part) {
-            $value = this->_values[$k];
-            $parts[] = 'WHEN ' . this->_compile($part, $binder) . ' THEN ' . this->_compile($value, $binder);
+        foreach (this._conditions as $k => $part) {
+            $value = this._values[$k];
+            $parts[] = 'WHEN ' . this._compile($part, $binder) . ' THEN ' . this._compile($value, $binder);
         }
-        if (this->_elseValue != null) {
+        if (this._elseValue != null) {
             $parts[] = 'ELSE';
-            $parts[] = this->_compile(this->_elseValue, $binder);
+            $parts[] = this._compile(this._elseValue, $binder);
         }
         $parts[] = 'END';
 
@@ -234,16 +234,16 @@ class CaseExpression implements IExpression
     public O traverse(this O)(Closure $callback)
     {
         foreach (['_conditions', '_values'] as $part) {
-            foreach (this->{$part} as $c) {
+            foreach (this.{$part} as $c) {
                 if ($c instanceof IExpression) {
                     $callback($c);
                     $c->traverse($callback);
                 }
             }
         }
-        if (this->_elseValue instanceof IExpression) {
-            $callback(this->_elseValue);
-            this->_elseValue->traverse($callback);
+        if (this._elseValue instanceof IExpression) {
+            $callback(this._elseValue);
+            this._elseValue->traverse($callback);
         }
 
         return this;

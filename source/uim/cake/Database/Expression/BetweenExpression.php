@@ -61,14 +61,14 @@ class BetweenExpression implements IExpression, FieldInterface
     public this($field, $from, $to, $type = null)
     {
         if ($type != null) {
-            $from = this->_castToExpression($from, $type);
-            $to = this->_castToExpression($to, $type);
+            $from = this._castToExpression($from, $type);
+            $to = this._castToExpression($to, $type);
         }
 
-        this->_field = $field;
-        this->_from = $from;
-        this->_to = $to;
-        this->_type = $type;
+        this._field = $field;
+        this._from = $from;
+        this._to = $to;
+        this._type = $type;
     }
 
     /**
@@ -77,12 +77,12 @@ class BetweenExpression implements IExpression, FieldInterface
     function sql(ValueBinder $binder): string
     {
         $parts = [
-            'from' => this->_from,
-            'to' => this->_to,
+            'from' => this._from,
+            'to' => this._to,
         ];
 
         /** @var \Cake\Database\IExpression|string $field */
-        $field = this->_field;
+        $field = this._field;
         if ($field instanceof IExpression) {
             $field = $field->sql($binder);
         }
@@ -92,7 +92,7 @@ class BetweenExpression implements IExpression, FieldInterface
                 $parts[$name] = $part->sql($binder);
                 continue;
             }
-            $parts[$name] = this->_bindValue($part, $binder, this->_type);
+            $parts[$name] = this._bindValue($part, $binder, this._type);
         }
 
         return sprintf('%s BETWEEN %s AND %s', $field, $parts['from'], $parts['to']);
@@ -103,7 +103,7 @@ class BetweenExpression implements IExpression, FieldInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        foreach ([this->_field, this->_from, this->_to] as $part) {
+        foreach ([this._field, this._from, this._to] as $part) {
             if ($part instanceof IExpression) {
                 $callback($part);
             }
@@ -136,8 +136,8 @@ class BetweenExpression implements IExpression, FieldInterface
     function __clone()
     {
         foreach (['_field', '_from', '_to'] as $part) {
-            if (this->{$part} instanceof IExpression) {
-                this->{$part} = clone this->{$part};
+            if (this.{$part} instanceof IExpression) {
+                this.{$part} = clone this.{$part};
             }
         }
     }

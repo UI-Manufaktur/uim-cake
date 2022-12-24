@@ -138,18 +138,18 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
                 ));
             }
 
-            this->value = $value;
+            this.value = $value;
 
             if (
                 $value != null &&
                 $type == null &&
                 !($value instanceof IExpression)
             ) {
-                $type = this->inferType($value);
+                $type = this.inferType($value);
             }
-            this->valueType = $type;
+            this.valueType = $type;
 
-            this->isSimpleVariant = true;
+            this.isSimpleVariant = true;
         }
     }
 
@@ -293,12 +293,12 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
      */
     function when($when, $type = null)
     {
-        if (this->whenBuffer != null) {
+        if (this.whenBuffer != null) {
             throw new LogicException('Cannot call `when()` between `when()` and `then()`.');
         }
 
         if ($when instanceof Closure) {
-            $when = $when(new WhenThenExpression(this->getTypeMap()));
+            $when = $when(new WhenThenExpression(this.getTypeMap()));
             if (!($when instanceof WhenThenExpression)) {
                 throw new LogicException(sprintf(
                     '`when()` callables must return an instance of `\%s`, `%s` given.',
@@ -309,9 +309,9 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
         }
 
         if ($when instanceof WhenThenExpression) {
-            this->when[] = $when;
+            this.when[] = $when;
         } else {
-            this->whenBuffer = ['when' => $when, 'type' => $type];
+            this.whenBuffer = ['when' => $when, 'type' => $type];
         }
 
         return this;
@@ -375,17 +375,17 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
      */
     function then($result, ?string $type = null)
     {
-        if (this->whenBuffer == null) {
+        if (this.whenBuffer == null) {
             throw new LogicException('Cannot call `then()` before `when()`.');
         }
 
-        $whenThen = (new WhenThenExpression(this->getTypeMap()))
-            ->when(this->whenBuffer['when'], this->whenBuffer['type'])
+        $whenThen = (new WhenThenExpression(this.getTypeMap()))
+            ->when(this.whenBuffer['when'], this.whenBuffer['type'])
             ->then($result, $type);
 
-        this->whenBuffer = null;
+        this.whenBuffer = null;
 
-        this->when[] = $whenThen;
+        this.when[] = $whenThen;
 
         return this;
     }
@@ -403,7 +403,7 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
      */
     function else($result, ?string $type = null)
     {
-        if (this->whenBuffer != null) {
+        if (this.whenBuffer != null) {
             throw new LogicException('Cannot call `else()` between `when()` and `then()`.');
         }
 
@@ -421,11 +421,11 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
         }
 
         if ($type == null) {
-            $type = this->inferType($result);
+            $type = this.inferType($result);
         }
 
-        this->else = $result;
-        this->elseType = $type;
+        this.else = $result;
+        this.elseType = $type;
 
         return this;
     }
@@ -443,20 +443,20 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
      */
     function getReturnType(): string
     {
-        if (this->returnType != null) {
-            return this->returnType;
+        if (this.returnType != null) {
+            return this.returnType;
         }
 
         $types = [];
-        foreach (this->when as $when) {
+        foreach (this.when as $when) {
             $type = $when->getResultType();
             if ($type != null) {
                 $types[] = $type;
             }
         }
 
-        if (this->elseType != null) {
-            $types[] = this->elseType;
+        if (this.elseType != null) {
+            $types[] = this.elseType;
         }
 
         $types = array_unique($types);
@@ -479,7 +479,7 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
      */
     function setReturnType(string $type)
     {
-        this->returnType = $type;
+        this.returnType = $type;
 
         return this;
     }
@@ -501,17 +501,17 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
      */
     function clause(string $clause)
     {
-        if (!in_array($clause, this->validClauseNames, true)) {
+        if (!in_array($clause, this.validClauseNames, true)) {
             throw new InvalidArgumentException(
                 sprintf(
                     'The `$clause` argument must be one of `%s`, the given value `%s` is invalid.',
-                    implode('`, `', this->validClauseNames),
+                    implode('`, `', this.validClauseNames),
                     $clause
                 )
             );
         }
 
-        return this->{$clause};
+        return this.{$clause};
     }
 
     /**
@@ -519,26 +519,26 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
      */
     function sql(ValueBinder $binder): string
     {
-        if (this->whenBuffer != null) {
+        if (this.whenBuffer != null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }
 
-        if (empty(this->when)) {
+        if (empty(this.when)) {
             throw new LogicException('Case expression must have at least one when statement.');
         }
 
         $value = '';
-        if (this->isSimpleVariant) {
-            $value = this->compileNullableValue($binder, this->value, this->valueType) . ' ';
+        if (this.isSimpleVariant) {
+            $value = this.compileNullableValue($binder, this.value, this.valueType) . ' ';
         }
 
         $whenThenExpressions = [];
-        foreach (this->when as $whenThen) {
+        foreach (this.when as $whenThen) {
             $whenThenExpressions[] = $whenThen->sql($binder);
         }
         $whenThen = implode(' ', $whenThenExpressions);
 
-        $else = this->compileNullableValue($binder, this->else, this->elseType);
+        $else = this.compileNullableValue($binder, this.else, this.elseType);
 
         return "CASE {$value}{$whenThen} ELSE $else END";
     }
@@ -548,23 +548,23 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
      */
     public O traverse(this O)(Closure $callback)
     {
-        if (this->whenBuffer != null) {
+        if (this.whenBuffer != null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }
 
-        if (this->value instanceof IExpression) {
-            $callback(this->value);
-            this->value->traverse($callback);
+        if (this.value instanceof IExpression) {
+            $callback(this.value);
+            this.value->traverse($callback);
         }
 
-        foreach (this->when as $when) {
+        foreach (this.when as $when) {
             $callback($when);
             $when->traverse($callback);
         }
 
-        if (this->else instanceof IExpression) {
-            $callback(this->else);
-            this->else->traverse($callback);
+        if (this.else instanceof IExpression) {
+            $callback(this.else);
+            this.else->traverse($callback);
         }
 
         return this;
@@ -577,20 +577,20 @@ class CaseStatementExpression implements IExpression, TypedResultInterface
      */
     function __clone()
     {
-        if (this->whenBuffer != null) {
+        if (this.whenBuffer != null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }
 
-        if (this->value instanceof IExpression) {
-            this->value = clone this->value;
+        if (this.value instanceof IExpression) {
+            this.value = clone this.value;
         }
 
-        foreach (this->when as $key => $when) {
-            this->when[$key] = clone this->when[$key];
+        foreach (this.when as $key => $when) {
+            this.when[$key] = clone this.when[$key];
         }
 
-        if (this->else instanceof IExpression) {
-            this->else = clone this->else;
+        if (this.else instanceof IExpression) {
+            this.else = clone this.else;
         }
     }
 }
