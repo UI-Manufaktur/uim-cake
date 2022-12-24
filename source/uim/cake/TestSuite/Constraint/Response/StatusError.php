@@ -34,6 +34,6 @@ class StatusError extends StatusCodeBase
      */
     function toString(): string
     {
-        return sprintf('%d is between 400 and 429', this->response->getStatusCode());
+        return sprintf('%d is between 400 and 429', this.response->getStatusCode());
     }
 }

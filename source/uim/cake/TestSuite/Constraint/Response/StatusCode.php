@@ -29,7 +29,7 @@ class StatusCode extends StatusCodeBase
      */
     function toString(): string
     {
-        return sprintf('matches response status code `%d`', this->response->getStatusCode());
+        return sprintf('matches response status code `%d`', this.response->getStatusCode());
     }
 
     /**
@@ -40,6 +40,6 @@ class StatusCode extends StatusCodeBase
      */
     function failureDescription($other): string
     {
-        return '`' . $other . '` ' . this->toString();
+        return '`' . $other . '` ' . this.toString();
     }
 }

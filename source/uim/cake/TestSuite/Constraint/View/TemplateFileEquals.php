@@ -36,7 +36,7 @@ class TemplateFileEquals extends Constraint
      */
     public this(string $filename)
     {
-        this->filename = $filename;
+        this.filename = $filename;
     }
 
     /**
@@ -47,7 +47,7 @@ class TemplateFileEquals extends Constraint
      */
     function matches($other): bool
     {
-        return strpos(this->filename, $other) != false;
+        return strpos(this.filename, $other) != false;
     }
 
     /**
@@ -57,6 +57,6 @@ class TemplateFileEquals extends Constraint
      */
     function toString(): string
     {
-        return sprintf('equals template file `%s`', this->filename);
+        return sprintf('equals template file `%s`', this.filename);
     }
 }

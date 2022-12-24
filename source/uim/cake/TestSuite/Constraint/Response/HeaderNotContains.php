@@ -42,8 +42,8 @@ class HeaderNotContains extends HeaderContains
     {
         return sprintf(
             "is not in header '%s' (`%s`)",
-            this->headerName,
-            this->response->getHeaderLine(this->headerName)
+            this.headerName,
+            this.response->getHeaderLine(this.headerName)
         );
     }
 }
