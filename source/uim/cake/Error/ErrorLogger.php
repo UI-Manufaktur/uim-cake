@@ -26,7 +26,7 @@ use Throwable;
 /**
  * Log errors and unhandled exceptions to `Cake\Log\Log`
  */
-class ErrorLogger implements ErrorLoggerInterface
+class ErrorLogger : ErrorLoggerInterface
 {
     use InstanceConfigTrait;
 

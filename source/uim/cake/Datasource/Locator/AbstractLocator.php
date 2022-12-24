@@ -22,7 +22,7 @@ use RuntimeException;
 /**
  * Provides an abstract registry/factory for repository objects.
  */
-abstract class AbstractLocator implements LocatorInterface
+abstract class AbstractLocator : LocatorInterface
 {
     /**
      * Instances that belong to the registry.

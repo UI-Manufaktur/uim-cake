@@ -19,7 +19,7 @@ namespace Cake\Error\Debug;
 /**
  * Debug node for special messages like errors or recursion warnings.
  */
-class SpecialNode implements NodeInterface
+class SpecialNode : NodeInterface
 {
     /**
      * @var string

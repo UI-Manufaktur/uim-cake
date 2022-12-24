@@ -38,7 +38,7 @@ use Throwable;
  * Traps exceptions and converts them into HTML or content-type appropriate
  * error pages using the CakePHP ExceptionRenderer.
  */
-class ErrorHandlerMiddleware implements IMiddleware
+class ErrorHandlerMiddleware : IMiddleware
 {
     use InstanceConfigTrait;
 

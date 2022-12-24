@@ -45,7 +45,7 @@ use Cake\Http\Response;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 
-class Application implements IHttpApplication
+class Application : IHttpApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.

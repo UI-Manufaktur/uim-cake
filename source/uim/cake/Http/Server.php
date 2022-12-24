@@ -30,7 +30,7 @@ use Psr\Http\Message\IServerRequest;
 /**
  * Runs an application invoking all the PSR7 middleware and the registered application.
  */
-class Server implements EventDispatcherInterface
+class Server : EventDispatcherInterface
 {
     use EventDispatcherTrait;
 

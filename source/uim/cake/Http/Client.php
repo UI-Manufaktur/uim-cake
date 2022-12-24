@@ -101,7 +101,7 @@ use Psr\Http\Message\IResponse;
  * specify which authentication strategy you want to use.
  * CakePHP comes with built-in support for basic authentication.
  */
-class Client implements ClientInterface
+class Client : ClientInterface
 {
     use InstanceConfigTrait;
 

@@ -38,7 +38,7 @@ use Cake\Validation\ValidatorAwareTrait;
  *
  * Forms are conventionally placed in the `App\Form` namespace.
  */
-class Form implements EventListenerInterface, EventDispatcherInterface, ValidatorAwareInterface
+class Form : EventListenerInterface, EventDispatcherInterface, ValidatorAwareInterface
 {
     use EventDispatcherTrait;
     use ValidatorAwareTrait;
@@ -109,7 +109,7 @@ class Form implements EventListenerInterface, EventDispatcherInterface, Validato
 
         if (method_exists(this, '_buildValidator')) {
             deprecationWarning(
-                static::class . ' implements `_buildValidator` which is no longer used. ' .
+                static::class . ' : `_buildValidator` which is no longer used. ' .
                 'You should implement `buildValidator(Validator $validator, string $name): void` ' .
                 'or `validationDefault(Validator $validator): Validator` instead.'
             );

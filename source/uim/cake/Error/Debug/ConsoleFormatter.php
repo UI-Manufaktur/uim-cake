@@ -23,7 +23,7 @@ use RuntimeException;
  *
  * @internal
  */
-class ConsoleFormatter implements FormatterInterface
+class ConsoleFormatter : FormatterInterface
 {
     /**
      * text colors used in colored output.

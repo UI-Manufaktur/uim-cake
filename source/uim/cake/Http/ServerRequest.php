@@ -35,7 +35,7 @@ use Psr\Http\Message\UriInterface;
  * A class that helps wrap Request information and particulars about a single request.
  * Provides methods commonly used to introspect on the request headers and request body.
  */
-class ServerRequest implements IServerRequest
+class ServerRequest : IServerRequest
 {
     /**
      * Array of parameters parsed from the URL.

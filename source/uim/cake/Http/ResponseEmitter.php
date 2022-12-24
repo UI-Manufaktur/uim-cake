@@ -34,7 +34,7 @@ use Psr\Http\Message\IResponse;
  * - It logs headers sent using CakePHP's logging tools.
  * - Cookies are emitted using setcookie() to not conflict with ext/session
  */
-class ResponseEmitter implements EmitterInterface
+class ResponseEmitter : EmitterInterface
 {
     /**
      * Maximum output buffering size for each iteration.

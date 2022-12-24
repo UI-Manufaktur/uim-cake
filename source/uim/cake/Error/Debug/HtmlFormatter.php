@@ -23,7 +23,7 @@ use RuntimeException;
  *
  * @internal
  */
-class HtmlFormatter implements FormatterInterface
+class HtmlFormatter : FormatterInterface
 {
     /**
      * @var bool

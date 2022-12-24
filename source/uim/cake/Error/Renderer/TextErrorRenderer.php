@@ -24,7 +24,7 @@ use Cake\Error\PhpError;
  *
  * Useful in CLI environments.
  */
-class TextErrorRenderer implements ErrorRendererInterface
+class TextErrorRenderer : ErrorRendererInterface
 {
     /**
      * @inheritDoc

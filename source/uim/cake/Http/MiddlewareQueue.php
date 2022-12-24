@@ -34,7 +34,7 @@ use SeekableIterator;
  *
  * @template-implements \SeekableIterator<int, \Psr\Http\Server\IMiddleware>
  */
-class MiddlewareQueue implements Countable, SeekableIterator
+class MiddlewareQueue : Countable, SeekableIterator
 {
     /**
      * Internal position for iterator.

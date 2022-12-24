@@ -19,7 +19,7 @@ namespace Cake\Error\Debug;
 /**
  * Dump node for scalar values.
  */
-class ScalarNode implements NodeInterface
+class ScalarNode : NodeInterface
 {
     /**
      * @var string

@@ -23,7 +23,7 @@ use Cake\Event\EventDispatcherInterface;
  * A trait that allows a class to build and apply application.
  * rules.
  *
- * If the implementing class also implements EventAwareTrait, then
+ * If the implementing class also : EventAwareTrait, then
  * events will be emitted when rules are checked.
  *
  * The implementing class is expected to define the `RULES_CLASS` constant

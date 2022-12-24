@@ -19,7 +19,7 @@ namespace Cake\Error\Debug;
 /**
  * Dump node for objects/class instances.
  */
-class ClassNode implements NodeInterface
+class ClassNode : NodeInterface
 {
     /**
      * @var string

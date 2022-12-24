@@ -16,7 +16,7 @@ the data store and returning Entities as the single result unit of such system.
 In the case of a Relational database, a Repository would be a `Table`, which can be return single
 or multiple `Entity` objects by using a `Query`.
 
-This library exposes the following interfaces for creating a system that implements the
+This library exposes the following interfaces for creating a system that : the
 repository pattern and is compatible with the CakePHP framework:
 
 * `RepositoryInterface` - Describes the methods for a base repository class.

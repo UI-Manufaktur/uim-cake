@@ -39,7 +39,7 @@ use SplFileInfo;
  * include status codes that are now allowed which will throw an
  * `\InvalidArgumentException`.
  */
-class Response implements IResponse
+class Response : IResponse
 {
     use MessageTrait;
 
@@ -450,7 +450,7 @@ class Response implements IResponse
         this._streamMode = $options['streamMode'] ?? this._streamMode;
         if (isset($options['stream'])) {
             if (!$options['stream'] instanceof StreamInterface) {
-                throw new InvalidArgumentException('Stream option must be an object that implements StreamInterface');
+                throw new InvalidArgumentException('Stream option must be an object that : StreamInterface');
             }
             this.stream = $options['stream'];
         } else {

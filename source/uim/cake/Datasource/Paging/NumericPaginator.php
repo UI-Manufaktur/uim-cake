@@ -26,7 +26,7 @@ use Cake\Datasource\ResultSetInterface;
 /**
  * This class is used to handle automatic model data pagination.
  */
-class NumericPaginator implements PaginatorInterface
+class NumericPaginator : PaginatorInterface
 {
     use InstanceConfigTrait;
 

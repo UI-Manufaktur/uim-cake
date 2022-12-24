@@ -17,7 +17,7 @@ declare(strict_types=1);
 namespace Cake\Event;
 
 /**
- * Implements Cake\Event\EventDispatcherInterface.
+ * : Cake\Event\EventDispatcherInterface.
  */
 trait EventDispatcherTrait
 {

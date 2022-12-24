@@ -26,7 +26,7 @@ use RuntimeException;
  *
  * @internal
  */
-class TextFormatter implements FormatterInterface
+class TextFormatter : FormatterInterface
 {
     /**
      * @inheritDoc

@@ -62,7 +62,7 @@ use Throwable;
  * Using a subclass of WebExceptionRenderer gives you full control over how Exceptions are rendered, you
  * can configure your class in your config/app.php.
  */
-class WebExceptionRenderer implements ExceptionRendererInterface
+class WebExceptionRenderer : ExceptionRendererInterface
 {
     /**
      * The exception being handled.

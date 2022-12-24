@@ -23,7 +23,7 @@ namespace Cake\Error\Debug;
  * a reference node can be used after an object has been seen the
  * first time.
  */
-class ReferenceNode implements NodeInterface
+class ReferenceNode : NodeInterface
 {
     /**
      * @var string

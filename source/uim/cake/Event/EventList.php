@@ -22,7 +22,7 @@ use Countable;
 /**
  * The Event List
  */
-class EventList implements ArrayAccess, Countable
+class EventList : ArrayAccess, Countable
 {
     /**
      * Events list
