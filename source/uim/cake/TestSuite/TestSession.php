@@ -15,7 +15,7 @@
  * @since         4.0.5
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\TestSuite;
+module uim.cake.TestSuite;
 
 use Cake\Utility\Hash;
 

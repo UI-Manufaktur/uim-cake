@@ -12,7 +12,7 @@
  * @since         3.7.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\TestSuite\Constraint\Response;
+module uim.cake.TestSuite\Constraint\Response;
 
 /**
  * BodyNotEmpty

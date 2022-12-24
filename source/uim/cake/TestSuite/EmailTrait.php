@@ -13,7 +13,7 @@
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\TestSuite;
+module uim.cake.TestSuite;
 
 use Cake\TestSuite\Constraint\Email\MailContains;
 use Cake\TestSuite\Constraint\Email\MailContainsAttachment;

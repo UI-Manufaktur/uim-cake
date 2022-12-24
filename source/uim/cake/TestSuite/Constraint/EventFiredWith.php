@@ -1,6 +1,6 @@
 
 
-namespace Cake\TestSuite\Constraint;
+module uim.cake.TestSuite\Constraint;
 
 use Cake\Event\EventInterface;
 use Cake\Event\EventManager;
