@@ -15,7 +15,7 @@
  */
 module uim.cake.Collection\Iterator;
 
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Cake\Collection\CollectionTrait;
 use RecursiveIterator;
 use RecursiveIteratorIterator;
@@ -24,7 +24,7 @@ use RecursiveIteratorIterator;
  * Iterator for flattening elements in a tree structure while adding some
  * visual markers for their relative position in the tree
  */
-class TreePrinter : RecursiveIteratorIterator : CollectionInterface
+class TreePrinter : RecursiveIteratorIterator : ICollection
 {
     use CollectionTrait;
 

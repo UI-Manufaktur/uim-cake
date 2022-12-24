@@ -16,7 +16,7 @@
 module uim.cake.ORM\Behavior\Translate;
 
 use ArrayObject;
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Cake\Core\InstanceConfigTrait;
 use Cake\Database\Expression\FieldInterface;
 use Cake\Datasource\EntityInterface;
@@ -467,7 +467,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @param \Cake\Datasource\IResultSet $results Results to map.
      * @param string $locale Locale string
-     * @return \Cake\Collection\CollectionInterface
+     * @return \Cake\Collection\ICollection
      */
     protected function rowMapper($results, $locale)
     {
@@ -531,9 +531,9 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * records into each entity under the `_translations` key.
      *
      * @param \Cake\Datasource\IResultSet $results Results to modify.
-     * @return \Cake\Collection\CollectionInterface
+     * @return \Cake\Collection\ICollection
      */
-    function groupTranslations($results): CollectionInterface
+    function groupTranslations($results): ICollection
     {
         return $results.map(function ($row) {
             $translations = (array)$row["_i18n"];

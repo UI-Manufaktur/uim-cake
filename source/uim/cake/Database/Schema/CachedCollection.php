@@ -20,7 +20,7 @@ use Psr\SimpleCache\CacheInterface;
 /**
  * Decorates a schema collection and adds caching
  */
-class CachedCollection : CollectionInterface
+class CachedCollection : ICollection
 {
     /**
      * Cacher instance.
@@ -32,7 +32,7 @@ class CachedCollection : CollectionInterface
     /**
      * The decorated schema collection
      *
-     * @var \Cake\Database\Schema\CollectionInterface
+     * @var \Cake\Database\Schema\ICollection
      */
     protected $collection;
 
@@ -46,11 +46,11 @@ class CachedCollection : CollectionInterface
     /**
      * Constructor.
      *
-     * @param \Cake\Database\Schema\CollectionInterface $collection The collection to wrap.
+     * @param \Cake\Database\Schema\ICollection $collection The collection to wrap.
      * @param string $prefix The cache key prefix to use. Typically the connection name.
      * @param \Psr\SimpleCache\CacheInterface $cacher Cacher instance.
      */
-    public this(CollectionInterface $collection, string $prefix, CacheInterface $cacher)
+    public this(ICollection $collection, string $prefix, CacheInterface $cacher)
     {
         this.collection = $collection;
         this.prefix = $prefix;

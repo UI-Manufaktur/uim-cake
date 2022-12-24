@@ -16,7 +16,7 @@
 module uim.cake.ORM\Behavior\Translate;
 
 use ArrayObject;
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
 use Cake\ORM\PropertyMarshalInterface;
@@ -79,9 +79,9 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * into each entity under the `_translations` key
      *
      * @param \Cake\Datasource\IResultSet $results Results to modify.
-     * @return \Cake\Collection\CollectionInterface
+     * @return \Cake\Collection\ICollection
      */
-    function groupTranslations($results): CollectionInterface;
+    function groupTranslations($results): ICollection;
 
     /**
      * Callback method that listens to the `beforeFind` event in the bound

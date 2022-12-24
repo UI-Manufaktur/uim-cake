@@ -15,7 +15,7 @@
  */
 module uim.cake.ORM\Behavior;
 
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Cake\Database\Expression\IdentifierExpression;
 use Cake\Datasource\EntityInterface;
 use Cake\Datasource\Exception\RecordNotFoundException;
@@ -529,7 +529,7 @@ class TreeBehavior : Behavior
      */
     function formatTreeList(Query $query, array $options = []): Query
     {
-        return $query.formatResults(function (CollectionInterface $results) use ($options) {
+        return $query.formatResults(function (ICollection $results) use ($options) {
             $options += [
                 "keyPath": _getPrimaryKey(),
                 "valuePath": _table.getDisplayField(),

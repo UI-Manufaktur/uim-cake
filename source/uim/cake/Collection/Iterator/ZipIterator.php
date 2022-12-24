@@ -16,7 +16,7 @@
 module uim.cake.Collection\Iterator;
 
 use Cake\Collection\Collection;
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Cake\Collection\CollectionTrait;
 use MultipleIterator;
 use Serializable;
@@ -43,7 +43,7 @@ use Serializable;
  *  $iterator.toList(); // Returns [4, 6]
  * ```
  */
-class ZipIterator : MultipleIterator : CollectionInterface, Serializable
+class ZipIterator : MultipleIterator : ICollection, Serializable
 {
     use CollectionTrait;
 

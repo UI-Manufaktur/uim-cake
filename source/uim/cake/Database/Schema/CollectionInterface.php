@@ -24,7 +24,7 @@ module uim.cake.Database\Schema;
  * @method array<string> listTablesWithoutViews() Get the list of tables available in the current connection.
  * This will exclude any views in the schema.
  */
-interface CollectionInterface
+interface ICollection
 {
     /**
      * Get the list of tables available in the current connection.

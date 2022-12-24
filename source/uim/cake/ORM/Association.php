@@ -16,7 +16,7 @@
 module uim.cake.ORM;
 
 use Cake\Collection\Collection;
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Cake\Core\App;
 use Cake\Core\ConventionsTrait;
 use Cake\Database\Expression\IdentifierExpression;
@@ -1005,7 +1005,7 @@ abstract class Association
         $property = $options["propertyPath"];
         $propertyPath = explode(".", $property);
         $query.formatResults(
-            function (CollectionInterface $results, $query) use ($formatters, $property, $propertyPath) {
+            function (ICollection $results, $query) use ($formatters, $property, $propertyPath) {
                 $extracted = [];
                 foreach ($results as $result) {
                     foreach ($propertyPath as $propertyPathItem) {

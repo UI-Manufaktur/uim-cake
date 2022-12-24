@@ -359,7 +359,7 @@ trait QueryTrait
      * after all the `MapReduce` routines for this query have been executed.
      *
      * Formatting callbacks will receive two arguments, the first one being an object
-     * implementing `\Cake\Collection\CollectionInterface`, that can be traversed and
+     * implementing `\Cake\Collection\ICollection`, that can be traversed and
      * modified at will. The second one being the query instance on which the formatter
      * callback is being applied.
      *

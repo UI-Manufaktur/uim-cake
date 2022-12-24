@@ -15,7 +15,7 @@
  */
 
 use Cake\Collection\Collection;
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 
 if (!function_exists("collection")) {
     /**
@@ -24,7 +24,7 @@ if (!function_exists("collection")) {
      * @param iterable $items The items from which the collection will be built.
      * @return \Cake\Collection\Collection
      */
-    function collection(iterable $items): CollectionInterface
+    function collection(iterable $items): ICollection
     {
         return new Collection($items);
     }

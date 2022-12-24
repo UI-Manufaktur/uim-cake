@@ -15,13 +15,13 @@
  */
 module uim.cake.Datasource;
 
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Countable;
 use Serializable;
 
 /**
  * Describes how a collection of datasource results should look like
  */
-interface IResultSet : CollectionInterface, Countable, Serializable
+interface IResultSet : ICollection, Countable, Serializable
 {
 }

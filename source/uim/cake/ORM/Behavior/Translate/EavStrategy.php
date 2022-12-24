@@ -17,7 +17,7 @@ module uim.cake.ORM\Behavior\Translate;
 
 use ArrayObject;
 use Cake\Collection\Collection;
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Cake\Core\InstanceConfigTrait;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
@@ -352,7 +352,7 @@ class EavStrategy : TranslateStrategyInterface
      *
      * @param \Cake\Datasource\IResultSet $results Results to map.
      * @param string $locale Locale string
-     * @return \Cake\Collection\CollectionInterface
+     * @return \Cake\Collection\ICollection
      */
     protected function rowMapper($results, $locale)
     {
@@ -395,9 +395,9 @@ class EavStrategy : TranslateStrategyInterface
      * records into each entity under the `_translations` key.
      *
      * @param \Cake\Datasource\IResultSet $results Results to modify.
-     * @return \Cake\Collection\CollectionInterface
+     * @return \Cake\Collection\ICollection
      */
-    function groupTranslations($results): CollectionInterface
+    function groupTranslations($results): ICollection
     {
         return $results.map(function ($row) {
             if (!$row instanceof EntityInterface) {

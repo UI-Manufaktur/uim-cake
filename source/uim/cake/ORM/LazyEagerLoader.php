@@ -16,7 +16,7 @@
 module uim.cake.ORM;
 
 use Cake\Collection\Collection;
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Cake\Database\Expression\TupleComparison;
 use Cake\Datasource\EntityInterface;
 
@@ -63,12 +63,12 @@ class LazyEagerLoader
      * Builds a query for loading the passed list of entity objects along with the
      * associations specified in $contain.
      *
-     * @param \Cake\Collection\CollectionInterface $objects The original entities
+     * @param \Cake\Collection\ICollection $objects The original entities
      * @param array $contain The associations to be loaded
      * @param \Cake\ORM\Table $source The table to use for fetching the top level entities
      * @return \Cake\ORM\Query
      */
-    protected function _getQuery(CollectionInterface $objects, array $contain, Table $source): Query
+    protected function _getQuery(ICollection $objects, array $contain, Table $source): Query
     {
         $primaryKey = $source.getPrimaryKey();
         $method = is_string($primaryKey) ? "get" : "extract";

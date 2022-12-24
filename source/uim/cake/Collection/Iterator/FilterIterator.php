@@ -17,7 +17,7 @@ module uim.cake.Collection\Iterator;
 
 use ArrayIterator;
 use Cake\Collection\Collection;
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use CallbackFilterIterator;
 use Iterator;
 use Traversable;
@@ -67,7 +67,7 @@ class FilterIterator : Collection
         $filter = this.getInnerIterator();
         $iterator = $filter.getInnerIterator();
 
-        if ($iterator instanceof CollectionInterface) {
+        if ($iterator instanceof ICollection) {
             $iterator = $iterator.unwrap();
         }
 

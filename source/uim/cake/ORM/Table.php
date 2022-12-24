@@ -1391,7 +1391,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         );
 
         return $query.formatResults(function ($results) use ($options) {
-            /** @var \Cake\Collection\CollectionInterface $results */
+            /** @var \Cake\Collection\ICollection $results */
             return $results.combine(
                 $options["keyField"],
                 $options["valueField"],
@@ -1435,7 +1435,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $options = _setFieldMatchers($options, ["keyField", "parentField"]);
 
         return $query.formatResults(function ($results) use ($options) {
-            /** @var \Cake\Collection\CollectionInterface $results */
+            /** @var \Cake\Collection\ICollection $results */
             return $results.nest($options["keyField"], $options["parentField"], $options["nestingKey"]);
         });
     }

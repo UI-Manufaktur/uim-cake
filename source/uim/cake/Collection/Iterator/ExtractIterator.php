@@ -17,7 +17,7 @@ module uim.cake.Collection\Iterator;
 
 use ArrayIterator;
 use Cake\Collection\Collection;
-use Cake\Collection\CollectionInterface;
+use Cake\Collection\ICollection;
 use Traversable;
 
 /**
@@ -82,7 +82,7 @@ class ExtractIterator : Collection
     {
         $iterator = this.getInnerIterator();
 
-        if ($iterator instanceof CollectionInterface) {
+        if ($iterator instanceof ICollection) {
             $iterator = $iterator.unwrap();
         }
 

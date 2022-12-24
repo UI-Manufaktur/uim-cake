@@ -28,7 +28,7 @@ use Cake\Database\Log\QueryLogger;
 use Cake\Database\Retry\ReconnectStrategy;
 use Cake\Database\Schema\CachedCollection;
 use Cake\Database\Schema\Collection as SchemaCollection;
-use Cake\Database\Schema\CollectionInterface as SchemaCollectionInterface;
+use Cake\Database\Schema\ICollection as SchemaICollection;
 use Cake\Datasource\ConnectionInterface;
 use Cake\Log\Engine\BaseLog;
 use Cake\Log\Log;
@@ -105,7 +105,7 @@ class Connection : ConnectionInterface
     /**
      * The schema collection object
      *
-     * @var \Cake\Database\Schema\CollectionInterface|null
+     * @var \Cake\Database\Schema\ICollection|null
      */
     protected $_schemaCollection;
 
@@ -391,10 +391,10 @@ class Connection : ConnectionInterface
     /**
      * Sets a Schema\Collection object for this connection.
      *
-     * @param \Cake\Database\Schema\CollectionInterface $collection The schema collection object
+     * @param \Cake\Database\Schema\ICollection $collection The schema collection object
      * @return this
      */
-    function setSchemaCollection(SchemaCollectionInterface $collection)
+    function setSchemaCollection(SchemaICollection $collection)
     {
         _schemaCollection = $collection;
 
@@ -404,9 +404,9 @@ class Connection : ConnectionInterface
     /**
      * Gets a Schema\Collection object for this connection.
      *
-     * @return \Cake\Database\Schema\CollectionInterface
+     * @return \Cake\Database\Schema\ICollection
      */
-    function getSchemaCollection(): SchemaCollectionInterface
+    function getSchemaCollection(): SchemaICollection
     {
         if (_schemaCollection != null) {
             return _schemaCollection;
