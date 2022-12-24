@@ -13,7 +13,7 @@
  * @since         3.6.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\View\Widget;
+module uim.cake.View\Widget;
 
 use Cake\Core\App;
 use Cake\Core\Configure\Engine\PhpConfig;

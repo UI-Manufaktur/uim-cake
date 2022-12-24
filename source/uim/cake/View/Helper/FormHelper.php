@@ -13,7 +13,7 @@
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-namespace Cake\View\Helper;
+module uim.cake.View\Helper;
 
 use Cake\Core\Configure;
 use Cake\Core\Exception\CakeException;
