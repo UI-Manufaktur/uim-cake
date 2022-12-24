@@ -45,9 +45,9 @@ class PropertyNode implements NodeInterface
      */
     public this(string $name, ?string $visibility, NodeInterface $value)
     {
-        this->name = $name;
-        this->visibility = $visibility;
-        this->value = $value;
+        this.name = $name;
+        this.visibility = $visibility;
+        this.value = $value;
     }
 
     /**
@@ -57,7 +57,7 @@ class PropertyNode implements NodeInterface
      */
     function getValue(): NodeInterface
     {
-        return this->value;
+        return this.value;
     }
 
     /**
@@ -67,7 +67,7 @@ class PropertyNode implements NodeInterface
      */
     function getVisibility(): ?string
     {
-        return this->visibility;
+        return this.visibility;
     }
 
     /**
@@ -77,7 +77,7 @@ class PropertyNode implements NodeInterface
      */
     function getName(): string
     {
-        return this->name;
+        return this.name;
     }
 
     /**
@@ -85,6 +85,6 @@ class PropertyNode implements NodeInterface
      */
     function getChildren(): array
     {
-        return [this->value];
+        return [this.value];
     }
 }

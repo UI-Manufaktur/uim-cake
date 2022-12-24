@@ -44,8 +44,8 @@ class ClassNode implements NodeInterface
      */
     public this(string $class, int $id)
     {
-        this->class = $class;
-        this->id = $id;
+        this.class = $class;
+        this.id = $id;
     }
 
     /**
@@ -56,7 +56,7 @@ class ClassNode implements NodeInterface
      */
     function addProperty(PropertyNode $node): void
     {
-        this->properties[] = $node;
+        this.properties[] = $node;
     }
 
     /**
@@ -66,7 +66,7 @@ class ClassNode implements NodeInterface
      */
     function getValue(): string
     {
-        return this->class;
+        return this.class;
     }
 
     /**
@@ -76,7 +76,7 @@ class ClassNode implements NodeInterface
      */
     function getId(): int
     {
-        return this->id;
+        return this.id;
     }
 
     /**
@@ -86,6 +86,6 @@ class ClassNode implements NodeInterface
      */
     function getChildren(): array
     {
-        return this->properties;
+        return this.properties;
     }
 }
