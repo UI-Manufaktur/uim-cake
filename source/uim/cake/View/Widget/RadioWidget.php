@@ -37,15 +37,15 @@ class RadioWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'options' => [],
-        'disabled' => null,
-        'val' => null,
-        'escape' => true,
-        'label' => true,
-        'empty' => false,
-        'idPrefix' => null,
-        'templateVars' => [],
+        'name': '',
+        'options': [],
+        'disabled': null,
+        'val': null,
+        'escape': true,
+        'label': true,
+        'empty': false,
+        'idPrefix': null,
+        'templateVars': [],
     ];
 
     /**
@@ -107,14 +107,14 @@ class RadioWidget : BasicWidget
 
         if (!empty($data['empty'])) {
             $empty = $data['empty'] == true ? 'empty' : $data['empty'];
-            $options = ['' => $empty] + $options;
+            $options = ['': $empty] + $options;
         }
         unset($data['empty']);
 
         _idPrefix = $data['idPrefix'];
         _clearIds();
         $opts = [];
-        foreach ($options as $val => $text) {
+        foreach ($options as $val: $text) {
             $opts[] = _renderInput($val, $text, $data, $context);
         }
 
@@ -156,7 +156,7 @@ class RadioWidget : BasicWidget
         if (is_array($text) && isset($text['text'], $text['value'])) {
             $radio = $text;
         } else {
-            $radio = ['value' => $val, 'text' => $text];
+            $radio = ['value': $val, 'text': $text];
         }
         $radio['name'] = $data['name'];
 
@@ -184,8 +184,8 @@ class RadioWidget : BasicWidget
         }
 
         if (!is_bool($data['label']) && isset($radio['checked']) && $radio['checked']) {
-            $selectedClass = _templates->format('selectedClass', []);
-            $data['label'] = _templates->addClass($data['label'], $selectedClass);
+            $selectedClass = _templates.format('selectedClass', []);
+            $data['label'] = _templates.addClass($data['label'], $selectedClass);
         }
 
         $radio['disabled'] = _isDisabled($radio, $data['disabled']);
@@ -196,11 +196,11 @@ class RadioWidget : BasicWidget
             $radio['form'] = $data['form'];
         }
 
-        $input = _templates->format('radio', [
-            'name' => $radio['name'],
-            'value' => $escape ? h($radio['value']) : $radio['value'],
-            'templateVars' => $radio['templateVars'],
-            'attrs' => _templates->formatAttributes(
+        $input = _templates.format('radio', [
+            'name': $radio['name'],
+            'value': $escape ? h($radio['value']) : $radio['value'],
+            'templateVars': $radio['templateVars'],
+            'attrs': _templates.formatAttributes(
                 $radio + $data,
                 ['name', 'value', 'text', 'options', 'label', 'val', 'type']
             ),
@@ -216,15 +216,15 @@ class RadioWidget : BasicWidget
 
         if (
             $label == false &&
-            strpos(_templates->get('radioWrapper'), '{{input}}') == false
+            strpos(_templates.get('radioWrapper'), '{{input}}') == false
         ) {
             $label = $input;
         }
 
-        return _templates->format('radioWrapper', [
-            'input' => $input,
-            'label' => $label,
-            'templateVars' => $data['templateVars'],
+        return _templates.format('radioWrapper', [
+            'input': $input,
+            'label': $label,
+            'templateVars': $data['templateVars'],
         ]);
     }
 
@@ -250,13 +250,13 @@ class RadioWidget : BasicWidget
         }
         $labelAttrs = is_array($label) ? $label : [];
         $labelAttrs += [
-            'for' => $radio['id'],
-            'escape' => $escape,
-            'text' => $radio['text'],
-            'templateVars' => $radio['templateVars'],
-            'input' => $input,
+            'for': $radio['id'],
+            'escape': $escape,
+            'text': $radio['text'],
+            'templateVars': $radio['templateVars'],
+            'input': $input,
         ];
 
-        return _label->render($labelAttrs, $context);
+        return _label.render($labelAttrs, $context);
     }
 }

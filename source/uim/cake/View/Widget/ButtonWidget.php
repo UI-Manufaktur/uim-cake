@@ -65,17 +65,17 @@ class ButtonWidget : WidgetInterface
     function render(array $data, ContextInterface $context): string
     {
         $data += [
-            'text' => '',
-            'type' => 'submit',
-            'escapeTitle' => true,
-            'escape' => true,
-            'templateVars' => [],
+            'text': '',
+            'type': 'submit',
+            'escapeTitle': true,
+            'escape': true,
+            'templateVars': [],
         ];
 
-        return _templates->format('button', [
-            'text' => $data['escapeTitle'] ? h($data['text']) : $data['text'],
-            'templateVars' => $data['templateVars'],
-            'attrs' => _templates->formatAttributes($data, ['text', 'escapeTitle']),
+        return _templates.format('button', [
+            'text': $data['escapeTitle'] ? h($data['text']) : $data['text'],
+            'templateVars': $data['templateVars'],
+            'attrs': _templates.formatAttributes($data, ['text', 'escapeTitle']),
         ]);
     }
 

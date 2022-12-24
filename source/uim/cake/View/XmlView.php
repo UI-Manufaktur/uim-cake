@@ -31,8 +31,8 @@ use Cake\Utility\Xml;
  * In your controller, you could do the following:
  *
  * ```
- * this.set(['posts' => $posts]);
- * this.viewBuilder()->setOption('serialize', true);
+ * this.set(['posts': $posts]);
+ * this.viewBuilder().setOption('serialize', true);
  * ```
  *
  * When the view is rendered, the `$posts` view variable will be serialized
@@ -45,7 +45,7 @@ use Cake\Utility\Xml;
  *
  * ```
  * this.set(compact('posts', 'users', 'stuff'));
- * this.viewBuilder()->setOption('serialize', true);
+ * this.viewBuilder().setOption('serialize', true);
  * ```
  *
  * The above would generate a XML object that looks like:
@@ -90,9 +90,9 @@ class XmlView : SerializedView
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'serialize' => null,
-        'xmlOptions' => null,
-        'rootNode' => null,
+        'serialize': null,
+        'xmlOptions': null,
+        'rootNode': null,
     ];
 
     /**
@@ -121,8 +121,8 @@ class XmlView : SerializedView
         }
 
         if (is_array($serialize)) {
-            $data = [$rootNode => []];
-            foreach ($serialize as $alias => $key) {
+            $data = [$rootNode: []];
+            foreach ($serialize as $alias: $key) {
                 if (is_numeric($alias)) {
                     $alias = $key;
                 }
@@ -137,7 +137,7 @@ class XmlView : SerializedView
                 (!is_array($data) || Hash::numeric(array_keys($data)))
             ) {
                 /** @psalm-suppress InvalidArrayOffset */
-                $data = [$rootNode => [$serialize => $data]];
+                $data = [$rootNode: [$serialize: $data]];
             }
         }
 
@@ -146,6 +146,6 @@ class XmlView : SerializedView
             $options['pretty'] = true;
         }
 
-        return Xml::fromArray($data, $options)->saveXML();
+        return Xml::fromArray($data, $options).saveXML();
     }
 }

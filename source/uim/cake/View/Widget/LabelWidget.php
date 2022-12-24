@@ -74,19 +74,19 @@ class LabelWidget : WidgetInterface
     function render(array $data, ContextInterface $context): string
     {
         $data += [
-            'text' => '',
-            'input' => '',
-            'hidden' => '',
-            'escape' => true,
-            'templateVars' => [],
+            'text': '',
+            'input': '',
+            'hidden': '',
+            'escape': true,
+            'templateVars': [],
         ];
 
-        return _templates->format(_labelTemplate, [
-            'text' => $data['escape'] ? h($data['text']) : $data['text'],
-            'input' => $data['input'],
-            'hidden' => $data['hidden'],
-            'templateVars' => $data['templateVars'],
-            'attrs' => _templates->formatAttributes($data, ['text', 'input', 'hidden']),
+        return _templates.format(_labelTemplate, [
+            'text': $data['escape'] ? h($data['text']) : $data['text'],
+            'input': $data['input'],
+            'hidden': $data['hidden'],
+            'templateVars': $data['templateVars'],
+            'attrs': _templates.formatAttributes($data, ['text', 'input', 'hidden']),
         ]);
     }
 

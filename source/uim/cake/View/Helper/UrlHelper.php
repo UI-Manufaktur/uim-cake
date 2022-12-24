@@ -33,7 +33,7 @@ class UrlHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'assetUrlClassName' => Asset::class,
+        'assetUrlClassName': Asset::class,
     ];
 
     /**
@@ -82,8 +82,8 @@ class UrlHelper : Helper
     function build($url = null, array $options = []): string
     {
         $defaults = [
-            'fullBase' => false,
-            'escape' => true,
+            'fullBase': false,
+            'escape': true,
         ];
         $options += $defaults;
 
@@ -114,7 +114,7 @@ class UrlHelper : Helper
      */
     function buildFromPath(string $path, array $params = [], array $options = []): string
     {
-        return this.build(['_path' => $path] + $params, $options);
+        return this.build(['_path': $path] + $params, $options);
     }
 
     /**
@@ -136,7 +136,7 @@ class UrlHelper : Helper
      */
     function image(string $path, array $options = []): string
     {
-        $options += ['theme' => _View->getTheme()];
+        $options += ['theme': _View.getTheme()];
 
         return h(_assetUrlClassName::imageUrl($path, $options));
     }
@@ -161,7 +161,7 @@ class UrlHelper : Helper
      */
     function css(string $path, array $options = []): string
     {
-        $options += ['theme' => _View->getTheme()];
+        $options += ['theme': _View.getTheme()];
 
         return h(_assetUrlClassName::cssUrl($path, $options));
     }
@@ -186,7 +186,7 @@ class UrlHelper : Helper
      */
     function script(string $path, array $options = []): string
     {
-        $options += ['theme' => _View->getTheme()];
+        $options += ['theme': _View.getTheme()];
 
         return h(_assetUrlClassName::scriptUrl($path, $options));
     }
@@ -215,7 +215,7 @@ class UrlHelper : Helper
      */
     function assetUrl(string $path, array $options = []): string
     {
-        $options += ['theme' => _View->getTheme()];
+        $options += ['theme': _View.getTheme()];
 
         return h(_assetUrlClassName::url($path, $options));
     }
@@ -242,7 +242,7 @@ class UrlHelper : Helper
      */
     function webroot(string $file): string
     {
-        $options = ['theme' => _View->getTheme()];
+        $options = ['theme': _View.getTheme()];
 
         return h(_assetUrlClassName::webroot($file, $options));
     }

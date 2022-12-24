@@ -42,11 +42,11 @@ class BreadcrumbsHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'templates' => [
-            'wrapper' => '<ul{{attrs}}>{{content}}</ul>',
-            'item' => '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
-            'itemWithoutLink' => '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
-            'separator' => '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>',
+        'templates': [
+            'wrapper': '<ul{{attrs}}>{{content}}</ul>',
+            'item': '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
+            'itemWithoutLink': '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
+            'separator': '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>',
         ],
     ];
 
@@ -82,7 +82,7 @@ class BreadcrumbsHelper : Helper
     {
         if (is_array($title)) {
             foreach ($title as $crumb) {
-                this.crumbs[] = $crumb + ['title' => '', 'url' => null, 'options' => []];
+                this.crumbs[] = $crumb + ['title': '', 'url': null, 'options': []];
             }
 
             return this;
@@ -119,7 +119,7 @@ class BreadcrumbsHelper : Helper
         if (is_array($title)) {
             $crumbs = [];
             foreach ($title as $crumb) {
-                $crumbs[] = $crumb + ['title' => '', 'url' => null, 'options' => []];
+                $crumbs[] = $crumb + ['title': '', 'url': null, 'options': []];
             }
 
             array_splice(this.crumbs, 0, 0, $crumbs);
@@ -276,10 +276,10 @@ class BreadcrumbsHelper : Helper
 
         if ($separator) {
             if (isset($separator['innerAttrs'])) {
-                $separator['innerAttrs'] = $templater->formatAttributes($separator['innerAttrs']);
+                $separator['innerAttrs'] = $templater.formatAttributes($separator['innerAttrs']);
             }
 
-            $separator['attrs'] = $templater->formatAttributes(
+            $separator['attrs'] = $templater.formatAttributes(
                 $separator,
                 ['innerAttrs', 'separator']
             );
@@ -288,8 +288,8 @@ class BreadcrumbsHelper : Helper
         }
 
         $crumbTrail = '';
-        foreach ($crumbs as $key => $crumb) {
-            $url = $crumb['url'] ? this.Url->build($crumb['url']) : null;
+        foreach ($crumbs as $key: $crumb) {
+            $url = $crumb['url'] ? this.Url.build($crumb['url']) : null;
             $title = $crumb['title'];
             $options = $crumb['options'];
 
@@ -301,12 +301,12 @@ class BreadcrumbsHelper : Helper
 
             $template = 'item';
             $templateParams = [
-                'attrs' => $templater->formatAttributes($options, ['templateVars']),
-                'innerAttrs' => $templater->formatAttributes($optionsLink),
-                'title' => $title,
-                'url' => $url,
-                'separator' => '',
-                'templateVars' => $options['templateVars'] ?? [],
+                'attrs': $templater.formatAttributes($options, ['templateVars']),
+                'innerAttrs': $templater.formatAttributes($optionsLink),
+                'title': $title,
+                'url': $url,
+                'separator': '',
+                'templateVars': $options['templateVars'] ?? [],
             ];
 
             if (!$url) {
@@ -321,9 +321,9 @@ class BreadcrumbsHelper : Helper
         }
 
         return this.formatTemplate('wrapper', [
-            'content' => $crumbTrail,
-            'attrs' => $templater->formatAttributes($attributes, ['templateVars']),
-            'templateVars' => $attributes['templateVars'] ?? [],
+            'content': $crumbTrail,
+            'attrs': $templater.formatAttributes($attributes, ['templateVars']),
+            'templateVars': $attributes['templateVars'] ?? [],
         ]);
     }
 
@@ -336,7 +336,7 @@ class BreadcrumbsHelper : Helper
      */
     protected function findCrumb(string $title): ?int
     {
-        foreach (this.crumbs as $key => $crumb) {
+        foreach (this.crumbs as $key: $crumb) {
             if ($crumb['title'] == $title) {
                 return $key;
             }

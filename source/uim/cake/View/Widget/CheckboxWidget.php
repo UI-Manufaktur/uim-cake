@@ -32,11 +32,11 @@ class CheckboxWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'value' => 1,
-        'val' => null,
-        'disabled' => false,
-        'templateVars' => [],
+        'name': '',
+        'value': 1,
+        'val': null,
+        'disabled': false,
+        'templateVars': [],
     ];
 
     /**
@@ -65,16 +65,16 @@ class CheckboxWidget : BasicWidget
         }
         unset($data['val']);
 
-        $attrs = _templates->formatAttributes(
+        $attrs = _templates.formatAttributes(
             $data,
             ['name', 'value']
         );
 
-        return _templates->format('checkbox', [
-            'name' => $data['name'],
-            'value' => $data['value'],
-            'templateVars' => $data['templateVars'],
-            'attrs' => $attrs,
+        return _templates.format('checkbox', [
+            'name': $data['name'],
+            'value': $data['value'],
+            'templateVars': $data['templateVars'],
+            'attrs': $attrs,
         ]);
     }
 

@@ -89,7 +89,7 @@ class WidgetLocator
     function load(string $file): void
     {
         $loader = new PhpConfig();
-        $widgets = $loader->read($file);
+        $widgets = $loader.read($file);
         this.add($widgets);
     }
 
@@ -99,9 +99,9 @@ class WidgetLocator
      * Widget arrays can either be descriptions or instances. For example:
      *
      * ```
-     * $registry->add([
-     *   'label' => new MyLabelWidget($templates),
-     *   'checkbox' => ['Fancy.MyCheckbox', 'label']
+     * $registry.add([
+     *   'label': new MyLabelWidget($templates),
+     *   'checkbox': ['Fancy.MyCheckbox', 'label']
      * ]);
      * ```
      *
@@ -117,7 +117,7 @@ class WidgetLocator
     {
         $files = [];
 
-        foreach ($widgets as $key => $widget) {
+        foreach ($widgets as $key: $widget) {
             if (is_int($key)) {
                 $files[] = $widget;
                 continue;
@@ -211,7 +211,7 @@ class WidgetLocator
                 }
             }
             /** @var \Cake\View\Widget\WidgetInterface $instance */
-            $instance = $reflection->newInstanceArgs($arguments);
+            $instance = $reflection.newInstanceArgs($arguments);
         } else {
             /** @var \Cake\View\Widget\WidgetInterface $instance */
             $instance = new $className(_templates);

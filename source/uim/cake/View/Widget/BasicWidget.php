@@ -41,11 +41,11 @@ class BasicWidget : WidgetInterface
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'val' => null,
-        'type' => 'text',
-        'escape' => true,
-        'templateVars' => [],
+        'name': '',
+        'val': null,
+        'type': 'text',
+        'escape': true,
+        'templateVars': [],
     ];
 
     /**
@@ -99,11 +99,11 @@ class BasicWidget : WidgetInterface
             }
         }
 
-        return _templates->format('input', [
-            'name' => $data['name'],
-            'type' => $data['type'],
-            'templateVars' => $data['templateVars'],
-            'attrs' => _templates->formatAttributes(
+        return _templates.format('input', [
+            'name': $data['name'],
+            'type': $data['type'],
+            'templateVars': $data['templateVars'],
+            'attrs': _templates.formatAttributes(
                 $data,
                 ['name', 'type']
             ),
@@ -146,7 +146,7 @@ class BasicWidget : WidgetInterface
                 )
                 || !isset($data['type'])
             )
-            && $context->isRequired($fieldName)
+            && $context.isRequired($fieldName)
         ) {
             $data['required'] = true;
         }
@@ -164,7 +164,7 @@ class BasicWidget : WidgetInterface
      */
     protected function setMaxLength(array $data, ContextInterface $context, string $fieldName): array
     {
-        $maxLength = $context->getMaxLength($fieldName);
+        $maxLength = $context.getMaxLength($fieldName);
         if ($maxLength != null) {
             $data['maxlength'] = min($maxLength, 100000);
         }
@@ -182,8 +182,8 @@ class BasicWidget : WidgetInterface
      */
     protected function setStep(array $data, ContextInterface $context, string $fieldName): array
     {
-        $dbType = $context->type($fieldName);
-        $fieldDef = $context->attributes($fieldName);
+        $dbType = $context.type($fieldName);
+        $fieldDef = $context.attributes($fieldName);
 
         if ($dbType == 'decimal' && isset($fieldDef['precision'])) {
             $decimalPlaces = $fieldDef['precision'];

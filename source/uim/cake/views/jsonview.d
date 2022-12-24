@@ -11,7 +11,7 @@ import uim.cake;
  * In your controller, you could do the following:
  *
  * ```
- * this.set(["posts" => $posts]);
+ * this.set(["posts": $posts]);
  * this.viewBuilder().setOption("serialize", true);
  * ```
  *
@@ -74,9 +74,9 @@ class JsonView : SerializedView {
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        "serialize" => null,
-        "jsonOptions" => null,
-        "jsonp" => null,
+        "serialize": null,
+        "jsonOptions": null,
+        "jsonp": null,
     ];
 
     /**
@@ -139,7 +139,7 @@ class JsonView : SerializedView {
     protected auto _dataToSerialize(string[] serializeNames...) {
         if (is_array(serializeNames)) {
             myData = [];
-            foreach (myAlias => myKey; serializeNames) {
+            foreach (myAlias: myKey; serializeNames) {
                 if (is_numeric(myAlias)) {
                     myAlias = myKey;
                 }

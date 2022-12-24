@@ -96,9 +96,9 @@ class EntityContext : ContextInterface
     public this(array $context)
     {
         $context += [
-            'entity' => null,
-            'table' => null,
-            'validator' => [],
+            'entity': null,
+            'table': null,
+            'validator': [],
         ];
         _context = $context;
         _prepare();
@@ -140,7 +140,7 @@ class EntityContext : ContextInterface
 
             if ($isEntity) {
                 /** @psalm-suppress PossiblyInvalidMethodCall */
-                $table = $entity->getSource();
+                $table = $entity.getSource();
             }
             /** @psalm-suppress PossiblyInvalidArgument */
             if (!$table && $isEntity && get_class($entity) != Entity::class) {
@@ -149,7 +149,7 @@ class EntityContext : ContextInterface
             }
         }
         if (is_string($table) && $table != '') {
-            $table = this.getTableLocator()->get($table);
+            $table = this.getTableLocator().get($table);
         }
 
         if (!($table instanceof Table)) {
@@ -158,7 +158,7 @@ class EntityContext : ContextInterface
             );
         }
 
-        $alias = _rootName = $table->getAlias();
+        $alias = _rootName = $table.getAlias();
         _tables[$alias] = $table;
     }
 
@@ -174,7 +174,7 @@ class EntityContext : ContextInterface
     {
         deprecationWarning('`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.');
 
-        return (array)_tables[_rootName]->getPrimaryKey();
+        return (array)_tables[_rootName].getPrimaryKey();
     }
 
     /**
@@ -186,7 +186,7 @@ class EntityContext : ContextInterface
      */
     function getPrimaryKey(): array
     {
-        return (array)_tables[_rootName]->getPrimaryKey();
+        return (array)_tables[_rootName].getPrimaryKey();
     }
 
     /**
@@ -199,7 +199,7 @@ class EntityContext : ContextInterface
         if (!$table) {
             return false;
         }
-        $primaryKey = (array)$table->getPrimaryKey();
+        $primaryKey = (array)$table.getPrimaryKey();
 
         return in_array(array_pop($parts), $primaryKey, true);
     }
@@ -225,7 +225,7 @@ class EntityContext : ContextInterface
             }
         }
         if ($entity instanceof EntityInterface) {
-            return $entity->isNew() != false;
+            return $entity.isNew() != false;
         }
 
         return true;
@@ -248,8 +248,8 @@ class EntityContext : ContextInterface
     function val(string $field, array $options = [])
     {
         $options += [
-            'default' => null,
-            'schemaDefault' => true,
+            'default': null,
+            'schemaDefault': true,
         ];
 
         if (empty(_context['entity'])) {
@@ -266,20 +266,20 @@ class EntityContext : ContextInterface
             $part = end($parts);
 
             if ($entity instanceof InvalidPropertyInterface) {
-                $val = $entity->getInvalidField($part);
+                $val = $entity.getInvalidField($part);
                 if ($val != null) {
                     return $val;
                 }
             }
 
-            $val = $entity->get($part);
+            $val = $entity.get($part);
             if ($val != null) {
                 return $val;
             }
             if (
                 $options['default'] != null
                 || !$options['schemaDefault']
-                || !$entity->isNew()
+                || !$entity.isNew()
             ) {
                 return $options['default'];
             }
@@ -308,7 +308,7 @@ class EntityContext : ContextInterface
             return null;
         }
         $field = end($parts);
-        $defaults = $table->getSchema()->defaultValues();
+        $defaults = $table.getSchema().defaultValues();
         if (!array_key_exists($field, $defaults)) {
             return null;
         }
@@ -330,9 +330,9 @@ class EntityContext : ContextInterface
             return null;
         }
         $table = _getTable($path, false);
-        $primary = $table ? (array)$table->getPrimaryKey() : ['id'];
+        $primary = $table ? (array)$table.getPrimaryKey() : ['id'];
 
-        return (new Collection($values))->extract($primary[0])->toArray();
+        return (new Collection($values)).extract($primary[0]).toArray();
     }
 
     /**
@@ -376,7 +376,7 @@ class EntityContext : ContextInterface
             if (!$isLast && $next == null && $prop != '_ids') {
                 $table = _getTable($path);
                 if ($table) {
-                    return $table->newEmptyEntity();
+                    return $table.newEmptyEntity();
                 }
             }
 
@@ -475,10 +475,10 @@ class EntityContext : ContextInterface
             return $target[$field];
         }
         if ($target instanceof EntityInterface) {
-            return $target->get($field);
+            return $target.get($field);
         }
         if ($target instanceof Traversable) {
-            foreach ($target as $i => $val) {
+            foreach ($target as $i: $val) {
                 if ((string)$i == $field) {
                     return $val;
                 }
@@ -503,16 +503,16 @@ class EntityContext : ContextInterface
 
         $isNew = true;
         if ($entity instanceof EntityInterface) {
-            $isNew = $entity->isNew();
+            $isNew = $entity.isNew();
         }
 
         $validator = _getValidator($parts);
         $fieldName = array_pop($parts);
-        if (!$validator->hasField($fieldName)) {
+        if (!$validator.hasField($fieldName)) {
             return null;
         }
         if (this.type($field) != 'boolean') {
-            return !$validator->isEmptyAllowed($fieldName, $isNew);
+            return !$validator.isEmptyAllowed($fieldName, $isNew);
         }
 
         return false;
@@ -527,13 +527,13 @@ class EntityContext : ContextInterface
 
         $validator = _getValidator($parts);
         $fieldName = array_pop($parts);
-        if (!$validator->hasField($fieldName)) {
+        if (!$validator.hasField($fieldName)) {
             return null;
         }
 
-        $ruleset = $validator->field($fieldName);
-        if (!$ruleset->isEmptyAllowed()) {
-            return $validator->getNotEmptyMessage($fieldName);
+        $ruleset = $validator.field($fieldName);
+        if (!$ruleset.isEmptyAllowed()) {
+            return $validator.getNotEmptyMessage($fieldName);
         }
 
         return null;
@@ -551,10 +551,10 @@ class EntityContext : ContextInterface
         $validator = _getValidator($parts);
         $fieldName = array_pop($parts);
 
-        if ($validator->hasField($fieldName)) {
-            foreach ($validator->field($fieldName)->rules() as $rule) {
-                if ($rule->get('rule') == 'maxLength') {
-                    return $rule->get('pass')[0];
+        if ($validator.hasField($fieldName)) {
+            foreach ($validator.field($fieldName).rules() as $rule) {
+                if ($rule.get('rule') == 'maxLength') {
+                    return $rule.get('pass')[0];
                 }
             }
         }
@@ -581,7 +581,7 @@ class EntityContext : ContextInterface
             return [];
         }
 
-        return $table->getSchema()->columns();
+        return $table.getSchema().columns();
     }
 
     /**
@@ -602,7 +602,7 @@ class EntityContext : ContextInterface
 
         if (isset(_validator[$key])) {
             if (is_object($entity)) {
-                _validator[$key]->setProvider('entity', $entity);
+                _validator[$key].setProvider('entity', $entity);
             }
 
             return _validator[$key];
@@ -612,7 +612,7 @@ class EntityContext : ContextInterface
         if (!$table) {
             throw new RuntimeException('Validator not found: ' . $key);
         }
-        $alias = $table->getAlias();
+        $alias = $table.getAlias();
 
         $method = 'default';
         if (is_string(_context['validator'])) {
@@ -621,10 +621,10 @@ class EntityContext : ContextInterface
             $method = _context['validator'][$alias];
         }
 
-        $validator = $table->getValidator($method);
+        $validator = $table.getValidator($method);
 
         if (is_object($entity)) {
-            $validator->setProvider('entity', $entity);
+            $validator.setProvider('entity', $entity);
         }
 
         return _validator[$key] = $validator;
@@ -662,13 +662,13 @@ class EntityContext : ContextInterface
         foreach ($normalized as $part) {
             if ($part == '_joinData') {
                 if ($assoc != null) {
-                    $table = $assoc->junction();
+                    $table = $assoc.junction();
                     $assoc = null;
                     continue;
                 }
             } else {
-                $associationCollection = $table->associations();
-                $assoc = $associationCollection->getByProperty($part);
+                $associationCollection = $table.associations();
+                $assoc = $associationCollection.getByProperty($part);
             }
 
             if ($assoc == null) {
@@ -679,7 +679,7 @@ class EntityContext : ContextInterface
                 return null;
             }
 
-            $table = $assoc->getTarget();
+            $table = $assoc.getTarget();
         }
 
         return _tables[$path] = $table;
@@ -700,7 +700,7 @@ class EntityContext : ContextInterface
             return null;
         }
 
-        return $table->getSchema()->baseColumnType(array_pop($parts));
+        return $table.getSchema().baseColumnType(array_pop($parts));
     }
 
     /**
@@ -718,7 +718,7 @@ class EntityContext : ContextInterface
         }
 
         return array_intersect_key(
-            (array)$table->getSchema()->getColumn(array_pop($parts)),
+            (array)$table.getSchema().getColumn(array_pop($parts)),
             array_flip(static::VALID_ATTRIBUTES)
         );
     }
@@ -749,16 +749,16 @@ class EntityContext : ContextInterface
             return [];
         }
         if (count($remainingParts) == 0) {
-            return $entity->getErrors();
+            return $entity.getErrors();
         }
 
         if ($entity instanceof EntityInterface) {
-            $error = $entity->getError(implode('.', $remainingParts));
+            $error = $entity.getError(implode('.', $remainingParts));
             if ($error) {
                 return $error;
             }
 
-            return $entity->getError(array_pop($parts));
+            return $entity.getError(array_pop($parts));
         }
 
         return [];

@@ -61,9 +61,9 @@ class MissingCellTemplateException : MissingTemplateException
     function getAttributes(): array
     {
         return [
-            'name' => this.name,
-            'file' => this.file,
-            'paths' => this.paths,
+            'name': this.name,
+            'file': this.file,
+            'paths': this.paths,
         ];
     }
 }

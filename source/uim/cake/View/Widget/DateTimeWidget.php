@@ -45,12 +45,12 @@ class DateTimeWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'val' => null,
-        'type' => 'datetime-local',
-        'escape' => true,
-        'timezone' => null,
-        'templateVars' => [],
+        'name': '',
+        'val': null,
+        'type': 'datetime-local',
+        'escape': true,
+        'timezone': null,
+        'templateVars': [],
     ];
 
     /**
@@ -59,11 +59,11 @@ class DateTimeWidget : BasicWidget
      * @var array<string>
      */
     protected $formatMap = [
-        'datetime-local' => 'Y-m-d\TH:i:s',
-        'date' => 'Y-m-d',
-        'time' => 'H:i:s',
-        'month' => 'Y-m',
-        'week' => 'Y-\WW',
+        'datetime-local': 'Y-m-d\TH:i:s',
+        'date': 'Y-m-d',
+        'time': 'H:i:s',
+        'month': 'Y-m',
+        'week': 'Y-\WW',
     ];
 
     /**
@@ -74,11 +74,11 @@ class DateTimeWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaultStep = [
-        'datetime-local' => '1',
-        'date' => null,
-        'time' => '1',
-        'month' => null,
-        'week' => null,
+        'datetime-local': '1',
+        'date': null,
+        'time': '1',
+        'month': null,
+        'week': null,
     ];
 
     /**
@@ -121,11 +121,11 @@ class DateTimeWidget : BasicWidget
         $data['value'] = this.formatDateTime($data['val'], $data);
         unset($data['val'], $data['timezone'], $data['format']);
 
-        return _templates->format('input', [
-            'name' => $data['name'],
-            'type' => $data['type'],
-            'templateVars' => $data['templateVars'],
-            'attrs' => _templates->formatAttributes(
+        return _templates.format('input', [
+            'name': $data['name'],
+            'type': $data['type'],
+            'templateVars': $data['templateVars'],
+            'attrs': _templates.formatAttributes(
                 $data,
                 ['name', 'type']
             ),
@@ -156,7 +156,7 @@ class DateTimeWidget : BasicWidget
             return $data;
         }
 
-        $dbType = $context->type($fieldName);
+        $dbType = $context.type($fieldName);
         $fractionalTypes = [
             TableSchema::TYPE_DATETIME_FRACTIONAL,
             TableSchema::TYPE_TIMESTAMP_FRACTIONAL,
@@ -204,7 +204,7 @@ class DateTimeWidget : BasicWidget
                 $timezone = new DateTimeZone($timezone);
             }
 
-            $dateTime = $dateTime->setTimezone($timezone);
+            $dateTime = $dateTime.setTimezone($timezone);
         }
 
         if (isset($options['format'])) {
@@ -221,7 +221,7 @@ class DateTimeWidget : BasicWidget
             }
         }
 
-        return $dateTime->format($format);
+        return $dateTime.format($format);
     }
 
     /**

@@ -46,24 +46,24 @@ use Cake\Utility\Hash;
  *
  *  ```
  *  $article = [
- *    'data' => [
- *      'id' => '1',
- *      'title' => 'First post!',
+ *    'data': [
+ *      'id': '1',
+ *      'title': 'First post!',
  *    ],
- *    'schema' => [
- *      'id' => ['type' => 'integer'],
- *      'title' => ['type' => 'string', 'length' => 255],
- *      '_constraints' => [
- *        'primary' => ['type' => 'primary', 'columns' => ['id']]
+ *    'schema': [
+ *      'id': ['type': 'integer'],
+ *      'title': ['type': 'string', 'length': 255],
+ *      '_constraints': [
+ *        'primary': ['type': 'primary', 'columns': ['id']]
  *      ]
  *    ],
- *    'defaults' => [
- *      'title' => 'Default title',
+ *    'defaults': [
+ *      'title': 'Default title',
  *    ],
- *    'required' => [
- *      'id' => true, // will use default required message
- *      'title' => 'Please enter a title',
- *      'body' => false,
+ *    'required': [
+ *      'id': true, // will use default required message
+ *      'title': 'Please enter a title',
+ *      'body': false,
  *    ],
  *  ];
  *  ```
@@ -85,11 +85,11 @@ class ArrayContext : ContextInterface
     public this(array $context)
     {
         $context += [
-            'data' => [],
-            'schema' => [],
-            'required' => [],
-            'defaults' => [],
-            'errors' => [],
+            'data': [],
+            'schema': [],
+            'required': [],
+            'defaults': [],
+            'errors': [],
         ];
         _context = $context;
     }
@@ -178,8 +178,8 @@ class ArrayContext : ContextInterface
     function val(string $field, array $options = [])
     {
         $options += [
-            'default' => null,
-            'schemaDefault' => true,
+            'default': null,
+            'schemaDefault': true,
         ];
 
         if (Hash::check(_context['data'], $field)) {

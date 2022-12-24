@@ -104,8 +104,8 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingHelperException([
-            "class" => myClass . "Helper",
-            "plugin" => myPlugin,
+            "class": myClass . "Helper",
+            "plugin": myPlugin,
         ]);
     }
 

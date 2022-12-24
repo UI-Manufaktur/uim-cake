@@ -47,7 +47,7 @@ class TextHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'engine' => Text::class,
+        'engine': Text::class,
     ];
 
     /**
@@ -101,7 +101,7 @@ class TextHelper : Helper
      */
     function __call(string $method, array $params)
     {
-        return _engine->{$method}(...$params);
+        return _engine.{$method}(...$params);
     }
 
     /**
@@ -120,7 +120,7 @@ class TextHelper : Helper
     function autoLinkUrls(string $text, array $options = []): string
     {
         _placeholders = [];
-        $options += ['escape' => true];
+        $options += ['escape': true];
 
         // phpcs:disable Generic.Files.LineLength
         $pattern = '/(?:(?<!href="|src="|">)
@@ -178,8 +178,8 @@ class TextHelper : Helper
         }
         $key = hash_hmac('sha1', $match, Security::getSalt());
         _placeholders[$key] = [
-            'content' => $match,
-            'envelope' => $envelope,
+            'content': $match,
+            'envelope': $envelope,
         ];
 
         return $key;
@@ -195,13 +195,13 @@ class TextHelper : Helper
     protected function _linkUrls(string $text, array $htmlOptions): string
     {
         $replace = [];
-        foreach (_placeholders as $hash => $content) {
+        foreach (_placeholders as $hash: $content) {
             $link = $url = $content['content'];
             $envelope = $content['envelope'];
             if (!preg_match('#^[a-z]+\://#i', $url)) {
                 $url = 'http://' . $url;
             }
-            $replace[$hash] = $envelope[0] . this.Html->link($link, $url, $htmlOptions) . $envelope[1];
+            $replace[$hash] = $envelope[0] . this.Html.link($link, $url, $htmlOptions) . $envelope[1];
         }
 
         return strtr($text, $replace);
@@ -218,10 +218,10 @@ class TextHelper : Helper
     protected function _linkEmails(string $text, array $options): string
     {
         $replace = [];
-        foreach (_placeholders as $hash => $content) {
+        foreach (_placeholders as $hash: $content) {
             $url = $content['content'];
             $envelope = $content['envelope'];
-            $replace[$hash] = $envelope[0] . this.Html->link($url, 'mailto:' . $url, $options) . $envelope[1];
+            $replace[$hash] = $envelope[0] . this.Html.link($url, 'mailto:' . $url, $options) . $envelope[1];
         }
 
         return strtr($text, $replace);
@@ -241,7 +241,7 @@ class TextHelper : Helper
      */
     function autoLinkEmails(string $text, array $options = []): string
     {
-        $options += ['escape' => true];
+        $options += ['escape': true];
         _placeholders = [];
 
         $atom = '[\p{L}0-9!#$%&\'*+\/=?^_`{|}~-]';
@@ -273,7 +273,7 @@ class TextHelper : Helper
     {
         $text = this.autoLinkUrls($text, $options);
 
-        return this.autoLinkEmails($text, ['escape' => false] + $options);
+        return this.autoLinkEmails($text, ['escape': false] + $options);
     }
 
     /**
@@ -289,7 +289,7 @@ class TextHelper : Helper
      */
     function highlight(string $text, string $phrase, array $options = []): string
     {
-        return _engine->highlight($text, $phrase, $options);
+        return _engine.highlight($text, $phrase, $options);
     }
 
     /**
@@ -339,7 +339,7 @@ class TextHelper : Helper
      */
     function truncate(string $text, int $length = 100, array $options = []): string
     {
-        return _engine->truncate($text, $length, $options);
+        return _engine.truncate($text, $length, $options);
     }
 
     /**
@@ -362,7 +362,7 @@ class TextHelper : Helper
      */
     function tail(string $text, int $length = 100, array $options = []): string
     {
-        return _engine->tail($text, $length, $options);
+        return _engine.tail($text, $length, $options);
     }
 
     /**
@@ -379,7 +379,7 @@ class TextHelper : Helper
      */
     function excerpt(string $text, string $phrase, int $radius = 100, string $ending = '...'): string
     {
-        return _engine->excerpt($text, $phrase, $radius, $ending);
+        return _engine.excerpt($text, $phrase, $radius, $ending);
     }
 
     /**
@@ -394,7 +394,7 @@ class TextHelper : Helper
      */
     function toList(array $list, ?string $and = null, string $separator = ', '): string
     {
-        return _engine->toList($list, $and, $separator);
+        return _engine.toList($list, $and, $separator);
     }
 
     /**
@@ -420,7 +420,7 @@ class TextHelper : Helper
      */
     function slug(string $string, $options = []): string
     {
-        return _engine->slug($string, $options);
+        return _engine.slug($string, $options);
     }
 
     /**

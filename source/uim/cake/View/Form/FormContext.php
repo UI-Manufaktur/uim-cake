@@ -105,11 +105,11 @@ class FormContext : ContextInterface
     function val(string $field, array $options = [])
     {
         $options += [
-            'default' => null,
-            'schemaDefault' => true,
+            'default': null,
+            'schemaDefault': true,
         ];
 
-        $val = _form->getData($field);
+        $val = _form.getData($field);
         if ($val != null) {
             return $val;
         }
@@ -129,7 +129,7 @@ class FormContext : ContextInterface
      */
     protected function _schemaDefault(string $field)
     {
-        $field = _form->getSchema()->field($field);
+        $field = _form.getSchema().field($field);
         if ($field) {
             return $field['default'];
         }
@@ -142,12 +142,12 @@ class FormContext : ContextInterface
      */
     function isRequired(string $field): ?bool
     {
-        $validator = _form->getValidator(_validator);
-        if (!$validator->hasField($field)) {
+        $validator = _form.getValidator(_validator);
+        if (!$validator.hasField($field)) {
             return null;
         }
         if (this.type($field) != 'boolean') {
-            return !$validator->isEmptyAllowed($field, this.isCreate());
+            return !$validator.isEmptyAllowed($field, this.isCreate());
         }
 
         return false;
@@ -160,15 +160,15 @@ class FormContext : ContextInterface
     {
         $parts = explode('.', $field);
 
-        $validator = _form->getValidator(_validator);
+        $validator = _form.getValidator(_validator);
         $fieldName = array_pop($parts);
-        if (!$validator->hasField($fieldName)) {
+        if (!$validator.hasField($fieldName)) {
             return null;
         }
 
-        $ruleset = $validator->field($fieldName);
-        if (!$ruleset->isEmptyAllowed()) {
-            return $validator->getNotEmptyMessage($fieldName);
+        $ruleset = $validator.field($fieldName);
+        if (!$ruleset.isEmptyAllowed()) {
+            return $validator.getNotEmptyMessage($fieldName);
         }
 
         return null;
@@ -179,13 +179,13 @@ class FormContext : ContextInterface
      */
     function getMaxLength(string $field): ?int
     {
-        $validator = _form->getValidator(_validator);
-        if (!$validator->hasField($field)) {
+        $validator = _form.getValidator(_validator);
+        if (!$validator.hasField($field)) {
             return null;
         }
-        foreach ($validator->field($field)->rules() as $rule) {
-            if ($rule->get('rule') == 'maxLength') {
-                return $rule->get('pass')[0];
+        foreach ($validator.field($field).rules() as $rule) {
+            if ($rule.get('rule') == 'maxLength') {
+                return $rule.get('pass')[0];
             }
         }
 
@@ -202,7 +202,7 @@ class FormContext : ContextInterface
      */
     function fieldNames(): array
     {
-        return _form->getSchema()->fields();
+        return _form.getSchema().fields();
     }
 
     /**
@@ -210,7 +210,7 @@ class FormContext : ContextInterface
      */
     function type(string $field): ?string
     {
-        return _form->getSchema()->fieldType($field);
+        return _form.getSchema().fieldType($field);
     }
 
     /**
@@ -219,7 +219,7 @@ class FormContext : ContextInterface
     function attributes(string $field): array
     {
         return array_intersect_key(
-            (array)_form->getSchema()->field($field),
+            (array)_form.getSchema().field($field),
             array_flip(static::VALID_ATTRIBUTES)
         );
     }
@@ -239,6 +239,6 @@ class FormContext : ContextInterface
      */
     function error(string $field): array
     {
-        return (array)Hash::get(_form->getErrors(), $field, []);
+        return (array)Hash::get(_form.getErrors(), $field, []);
     }
 }

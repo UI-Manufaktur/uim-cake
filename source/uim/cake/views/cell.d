@@ -199,8 +199,8 @@ abstract class Cell : IEventDispatcher
         myKey = "cell_" . Inflector::underscore(static::class) . "_" . $action . "_" . myTemplate;
         myKey = str_replace("\\", "_", myKey);
         $default = [
-            "config" => "default",
-            "key" => myKey,
+            "config": "default",
+            "key": myKey,
         ];
         if (_cache == true) {
             return $default;
@@ -251,11 +251,11 @@ abstract class Cell : IEventDispatcher
     auto __debugInfo(): array
     {
         return [
-            "action" => this.action,
-            "args" => this.args,
-            "request" => this.request,
-            "response" => this.response,
-            "viewBuilder" => this.viewBuilder(),
+            "action": this.action,
+            "args": this.args,
+            "request": this.request,
+            "response": this.response,
+            "viewBuilder": this.viewBuilder(),
         ];
     }
 }

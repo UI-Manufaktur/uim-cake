@@ -27,7 +27,7 @@ abstract class SerializedView : View
      * @var array<string, mixed>
      */
     protected STRINGAA _defaultConfig = [
-        "serialize" => null,
+        "serialize": null,
     ];
 
 

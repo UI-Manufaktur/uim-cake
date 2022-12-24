@@ -38,7 +38,7 @@ class NumberHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'engine' => Number::class,
+        'engine': Number::class,
     ];
 
     /**
@@ -84,7 +84,7 @@ class NumberHelper : Helper
      */
     function __call(string $method, array $params)
     {
-        return _engine->{$method}(...$params);
+        return _engine.{$method}(...$params);
     }
 
     /**
@@ -99,7 +99,7 @@ class NumberHelper : Helper
      */
     function precision($number, int $precision = 3, array $options = []): string
     {
-        return _engine->precision($number, $precision, $options);
+        return _engine.precision($number, $precision, $options);
     }
 
     /**
@@ -112,7 +112,7 @@ class NumberHelper : Helper
      */
     function toReadableSize($size): string
     {
-        return _engine->toReadableSize($size);
+        return _engine.toReadableSize($size);
     }
 
     /**
@@ -131,7 +131,7 @@ class NumberHelper : Helper
      */
     function toPercentage($number, int $precision = 2, array $options = []): string
     {
-        return _engine->toPercentage($number, $precision, $options);
+        return _engine.toPercentage($number, $precision, $options);
     }
 
     /**
@@ -153,8 +153,8 @@ class NumberHelper : Helper
      */
     function format($number, array $options = []): string
     {
-        $formatted = _engine->format($number, $options);
-        $options += ['escape' => true];
+        $formatted = _engine.format($number, $options);
+        $options += ['escape': true];
 
         return $options['escape'] ? h($formatted) : $formatted;
     }
@@ -185,8 +185,8 @@ class NumberHelper : Helper
      */
     function currency($number, ?string $currency = null, array $options = []): string
     {
-        $formatted = _engine->currency($number, $currency, $options);
-        $options += ['escape' => true];
+        $formatted = _engine.currency($number, $currency, $options);
+        $options += ['escape': true];
 
         return $options['escape'] ? h($formatted) : $formatted;
     }
@@ -209,8 +209,8 @@ class NumberHelper : Helper
      */
     function formatDelta($value, array $options = []): string
     {
-        $formatted = _engine->formatDelta($value, $options);
-        $options += ['escape' => true];
+        $formatted = _engine.formatDelta($value, $options);
+        $options += ['escape': true];
 
         return $options['escape'] ? h($formatted) : $formatted;
     }
@@ -230,7 +230,7 @@ class NumberHelper : Helper
             'NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead.'
         );
 
-        return _engine->defaultCurrency($currency);
+        return _engine.defaultCurrency($currency);
     }
 
     /**
@@ -252,6 +252,6 @@ class NumberHelper : Helper
      */
     function ordinal($value, array $options = []): string
     {
-        return _engine->ordinal($value, $options);
+        return _engine.ordinal($value, $options);
     }
 }

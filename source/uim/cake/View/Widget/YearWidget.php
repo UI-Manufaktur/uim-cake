@@ -35,12 +35,12 @@ class YearWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'val' => null,
-        'min' => null,
-        'max' => null,
-        'order' => 'desc',
-        'templateVars' => [],
+        'name': '',
+        'val': null,
+        'min': null,
+        'max': null,
+        'order': 'desc',
+        'templateVars': [],
     ];
 
     /**
@@ -85,7 +85,7 @@ class YearWidget : BasicWidget
         $data['max'] = (int)$data['max'];
 
         if ($data['val'] instanceof DateTimeInterface) {
-            $data['val'] = $data['val']->format('Y');
+            $data['val'] = $data['val'].format('Y');
         }
 
         if (!empty($data['val'])) {
@@ -106,6 +106,6 @@ class YearWidget : BasicWidget
 
         unset($data['order'], $data['min'], $data['max']);
 
-        return _select->render($data, $context);
+        return _select.render($data, $context);
     }
 }

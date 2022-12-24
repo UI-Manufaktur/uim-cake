@@ -21,47 +21,47 @@ class StringTemplate {
      * @var array<string, bool>
      */
     protected _compactAttributes = [
-        "allowfullscreen" => true,
-        "async" => true,
-        "autofocus" => true,
-        "autoplay" => true,
-        "checked" => true,
-        "compact" => true,
-        "controls" => true,
-        "declare" => true,
-        "default" => true,
-        "defaultchecked" => true,
-        "defaultmuted" => true,
-        "defaultselected" => true,
-        "defer" => true,
-        "disabled" => true,
-        "enabled" => true,
-        "formnovalidate" => true,
-        "hidden" => true,
-        "indeterminate" => true,
-        "inert" => true,
-        "ismap" => true,
-        "itemscope" => true,
-        "loop" => true,
-        "multiple" => true,
-        "muted" => true,
-        "nohref" => true,
-        "noresize" => true,
-        "noshade" => true,
-        "novalidate" => true,
-        "nowrap" => true,
-        "open" => true,
-        "pauseonexit" => true,
-        "readonly" => true,
-        "required" => true,
-        "reversed" => true,
-        "scoped" => true,
-        "seamless" => true,
-        "selected" => true,
-        "sortable" => true,
-        "truespeed" => true,
-        "typemustmatch" => true,
-        "visible" => true,
+        "allowfullscreen": true,
+        "async": true,
+        "autofocus": true,
+        "autoplay": true,
+        "checked": true,
+        "compact": true,
+        "controls": true,
+        "declare": true,
+        "default": true,
+        "defaultchecked": true,
+        "defaultmuted": true,
+        "defaultselected": true,
+        "defer": true,
+        "disabled": true,
+        "enabled": true,
+        "formnovalidate": true,
+        "hidden": true,
+        "indeterminate": true,
+        "inert": true,
+        "ismap": true,
+        "itemscope": true,
+        "loop": true,
+        "multiple": true,
+        "muted": true,
+        "nohref": true,
+        "noresize": true,
+        "noshade": true,
+        "novalidate": true,
+        "nowrap": true,
+        "open": true,
+        "pauseonexit": true,
+        "readonly": true,
+        "required": true,
+        "reversed": true,
+        "scoped": true,
+        "seamless": true,
+        "selected": true,
+        "sortable": true,
+        "truespeed": true,
+        "typemustmatch": true,
+        "visible": true,
     ];
 
     /**
@@ -123,8 +123,8 @@ class StringTemplate {
      *
      * ```
      * myTemplater.add([
-     *   "link" => "<a href="{{url}}">{{title}}</a>"
-     *   "button" => "<button>{{text}}</button>"
+     *   "link": "<a href="{{url}}">{{title}}</a>"
+     *   "button": "<button>{{text}}</button>"
      * ]);
      * ```
      *
@@ -249,18 +249,18 @@ class StringTemplate {
      */
     string formatAttributes(?array myOptions, ?array $exclude = null) {
         $insertBefore = " ";
-        myOptions = (array)myOptions + ["escape" => true];
+        myOptions = (array)myOptions + ["escape": true];
 
         if (!is_array($exclude)) {
             $exclude = [];
         }
 
-        $exclude = ["escape" => true, "idPrefix" => true, "templateVars" => true, "fieldName" => true]
+        $exclude = ["escape": true, "idPrefix": true, "templateVars": true, "fieldName": true]
             + array_flip($exclude);
         $escape = myOptions["escape"];
         $attributes = [];
 
-        foreach (myOptions as myKey => myValue) {
+        foreach (myOptions as myKey: myValue) {
             if (!isset($exclude[myKey]) && myValue != false && myValue  !is null) {
                 $attributes[] = _formatAttribute((string)myKey, myValue, $escape);
             }

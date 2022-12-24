@@ -40,7 +40,7 @@ class TimeHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'outputTimezone' => null,
+        'outputTimezone': null,
     ];
 
     /**
@@ -71,7 +71,7 @@ class TimeHelper : Helper
     {
         $time = new FrozenTime($dateString);
         if ($timezone != null) {
-            $time = $time->timezone($timezone);
+            $time = $time.timezone($timezone);
         }
 
         return $time;
@@ -89,7 +89,7 @@ class TimeHelper : Helper
     {
         $timezone = _getTimezone($timezone);
 
-        return (new FrozenTime($dateString))->nice($timezone, $locale);
+        return (new FrozenTime($dateString)).nice($timezone, $locale);
     }
 
     /**
@@ -101,7 +101,7 @@ class TimeHelper : Helper
      */
     function isToday($dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->isToday();
+        return (new FrozenTime($dateString, $timezone)).isToday();
     }
 
     /**
@@ -113,7 +113,7 @@ class TimeHelper : Helper
      */
     function isFuture($dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->isFuture();
+        return (new FrozenTime($dateString, $timezone)).isFuture();
     }
 
     /**
@@ -125,7 +125,7 @@ class TimeHelper : Helper
      */
     function isPast($dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->isPast();
+        return (new FrozenTime($dateString, $timezone)).isPast();
     }
 
     /**
@@ -137,7 +137,7 @@ class TimeHelper : Helper
      */
     function isThisWeek($dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->isThisWeek();
+        return (new FrozenTime($dateString, $timezone)).isThisWeek();
     }
 
     /**
@@ -149,7 +149,7 @@ class TimeHelper : Helper
      */
     function isThisMonth($dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->isThisMonth();
+        return (new FrozenTime($dateString, $timezone)).isThisMonth();
     }
 
     /**
@@ -161,7 +161,7 @@ class TimeHelper : Helper
      */
     function isThisYear($dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->isThisYear();
+        return (new FrozenTime($dateString, $timezone)).isThisYear();
     }
 
     /**
@@ -173,7 +173,7 @@ class TimeHelper : Helper
      */
     function wasYesterday($dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->isYesterday();
+        return (new FrozenTime($dateString, $timezone)).isYesterday();
     }
 
     /**
@@ -185,7 +185,7 @@ class TimeHelper : Helper
      */
     function isTomorrow($dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->isTomorrow();
+        return (new FrozenTime($dateString, $timezone)).isTomorrow();
     }
 
     /**
@@ -198,7 +198,7 @@ class TimeHelper : Helper
      */
     function toQuarter($dateString, $range = false)
     {
-        return (new FrozenTime($dateString))->toQuarter($range);
+        return (new FrozenTime($dateString)).toQuarter($range);
     }
 
     /**
@@ -211,7 +211,7 @@ class TimeHelper : Helper
      */
     function toUnix($dateString, $timezone = null): string
     {
-        return (new FrozenTime($dateString, $timezone))->toUnixString();
+        return (new FrozenTime($dateString, $timezone)).toUnixString();
     }
 
     /**
@@ -226,7 +226,7 @@ class TimeHelper : Helper
     {
         $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
-        return (new FrozenTime($dateString))->timezone($timezone)->toAtomString();
+        return (new FrozenTime($dateString)).timezone($timezone).toAtomString();
     }
 
     /**
@@ -240,7 +240,7 @@ class TimeHelper : Helper
     {
         $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
-        return (new FrozenTime($dateString))->timezone($timezone)->toRssString();
+        return (new FrozenTime($dateString)).timezone($timezone).toRssString();
     }
 
     /**
@@ -264,21 +264,21 @@ class TimeHelper : Helper
     {
         $element = null;
         $options += [
-            'element' => null,
-            'timezone' => null,
+            'element': null,
+            'timezone': null,
         ];
         $options['timezone'] = _getTimezone($options['timezone']);
         /** @psalm-suppress UndefinedInterfaceMethod */
         if ($options['timezone'] && $dateTime instanceof DateTimeInterface) {
-            $dateTime = $dateTime->setTimezone($options['timezone']);
+            $dateTime = $dateTime.setTimezone($options['timezone']);
             unset($options['timezone']);
         }
 
         if (!empty($options['element'])) {
             $element = [
-                'tag' => 'span',
-                'class' => 'time-ago-in-words',
-                'title' => $dateTime,
+                'tag': 'span',
+                'class': 'time-ago-in-words',
+                'title': $dateTime,
             ];
 
             if (is_array($options['element'])) {
@@ -288,13 +288,13 @@ class TimeHelper : Helper
             }
             unset($options['element']);
         }
-        $relativeDate = (new FrozenTime($dateTime))->timeAgoInWords($options);
+        $relativeDate = (new FrozenTime($dateTime)).timeAgoInWords($options);
 
         if ($element) {
             $relativeDate = sprintf(
                 '<%s%s>%s</%s>',
                 $element['tag'],
-                this.templater()->formatAttributes($element, ['tag']),
+                this.templater().formatAttributes($element, ['tag']),
                 $relativeDate,
                 $element['tag']
             );
@@ -315,7 +315,7 @@ class TimeHelper : Helper
      */
     function wasWithinLast(string $timeInterval, $dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->wasWithinLast($timeInterval);
+        return (new FrozenTime($dateString, $timezone)).wasWithinLast($timeInterval);
     }
 
     /**
@@ -330,7 +330,7 @@ class TimeHelper : Helper
      */
     function isWithinNext(string $timeInterval, $dateString, $timezone = null): bool
     {
-        return (new FrozenTime($dateString, $timezone))->isWithinNext($timeInterval);
+        return (new FrozenTime($dateString, $timezone)).isWithinNext($timeInterval);
     }
 
     /**
@@ -342,7 +342,7 @@ class TimeHelper : Helper
      */
     function gmt($string = null): string
     {
-        return (new FrozenTime($string))->toUnixString();
+        return (new FrozenTime($string)).toUnixString();
     }
 
     /**
@@ -387,7 +387,7 @@ class TimeHelper : Helper
         try {
             $time = new FrozenTime($date);
 
-            return $time->i18nFormat($format, $timezone);
+            return $time.i18nFormat($format, $timezone);
         } catch (Exception $e) {
             if ($invalid == false) {
                 throw $e;

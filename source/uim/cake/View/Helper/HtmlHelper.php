@@ -45,36 +45,36 @@ class HtmlHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'templates' => [
-            'meta' => '<meta{{attrs}}/>',
-            'metalink' => '<link href="{{url}}"{{attrs}}/>',
-            'link' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
-            'mailto' => '<a href="mailto:{{url}}"{{attrs}}>{{content}}</a>',
-            'image' => '<img src="{{url}}"{{attrs}}/>',
-            'tableheader' => '<th{{attrs}}>{{content}}</th>',
-            'tableheaderrow' => '<tr{{attrs}}>{{content}}</tr>',
-            'tablecell' => '<td{{attrs}}>{{content}}</td>',
-            'tablerow' => '<tr{{attrs}}>{{content}}</tr>',
-            'block' => '<div{{attrs}}>{{content}}</div>',
-            'blockstart' => '<div{{attrs}}>',
-            'blockend' => '</div>',
-            'tag' => '<{{tag}}{{attrs}}>{{content}}</{{tag}}>',
-            'tagstart' => '<{{tag}}{{attrs}}>',
-            'tagend' => '</{{tag}}>',
-            'tagselfclosing' => '<{{tag}}{{attrs}}/>',
-            'para' => '<p{{attrs}}>{{content}}</p>',
-            'parastart' => '<p{{attrs}}>',
-            'css' => '<link rel="{{rel}}" href="{{url}}"{{attrs}}/>',
-            'style' => '<style{{attrs}}>{{content}}</style>',
-            'charset' => '<meta charset="{{charset}}"/>',
-            'ul' => '<ul{{attrs}}>{{content}}</ul>',
-            'ol' => '<ol{{attrs}}>{{content}}</ol>',
-            'li' => '<li{{attrs}}>{{content}}</li>',
-            'javascriptblock' => '<script{{attrs}}>{{content}}</script>',
-            'javascriptstart' => '<script>',
-            'javascriptlink' => '<script src="{{url}}"{{attrs}}></script>',
-            'javascriptend' => '</script>',
-            'confirmJs' => '{{confirm}}',
+        'templates': [
+            'meta': '<meta{{attrs}}/>',
+            'metalink': '<link href="{{url}}"{{attrs}}/>',
+            'link': '<a href="{{url}}"{{attrs}}>{{content}}</a>',
+            'mailto': '<a href="mailto:{{url}}"{{attrs}}>{{content}}</a>',
+            'image': '<img src="{{url}}"{{attrs}}/>',
+            'tableheader': '<th{{attrs}}>{{content}}</th>',
+            'tableheaderrow': '<tr{{attrs}}>{{content}}</tr>',
+            'tablecell': '<td{{attrs}}>{{content}}</td>',
+            'tablerow': '<tr{{attrs}}>{{content}}</tr>',
+            'block': '<div{{attrs}}>{{content}}</div>',
+            'blockstart': '<div{{attrs}}>',
+            'blockend': '</div>',
+            'tag': '<{{tag}}{{attrs}}>{{content}}</{{tag}}>',
+            'tagstart': '<{{tag}}{{attrs}}>',
+            'tagend': '</{{tag}}>',
+            'tagselfclosing': '<{{tag}}{{attrs}}/>',
+            'para': '<p{{attrs}}>{{content}}</p>',
+            'parastart': '<p{{attrs}}>',
+            'css': '<link rel="{{rel}}" href="{{url}}"{{attrs}}/>',
+            'style': '<style{{attrs}}>{{content}}</style>',
+            'charset': '<meta charset="{{charset}}"/>',
+            'ul': '<ul{{attrs}}>{{content}}</ul>',
+            'ol': '<ol{{attrs}}>{{content}}</ol>',
+            'li': '<li{{attrs}}>{{content}}</li>',
+            'javascriptblock': '<script{{attrs}}>{{content}}</script>',
+            'javascriptstart': '<script>',
+            'javascriptlink': '<script src="{{url}}"{{attrs}}></script>',
+            'javascriptend': '</script>',
+            'confirmJs': '{{confirm}}',
         ],
     ];
 
@@ -98,25 +98,25 @@ class HtmlHelper : Helper
      * Create a meta tag that is output inline:
      *
      * ```
-     * this.Html->meta('icon', 'favicon.ico');
+     * this.Html.meta('icon', 'favicon.ico');
      * ```
      *
      * Append the meta tag to custom view block "meta":
      *
      * ```
-     * this.Html->meta('description', 'A great page', ['block' => true]);
+     * this.Html.meta('description', 'A great page', ['block': true]);
      * ```
      *
      * Append the meta tag to custom view block:
      *
      * ```
-     * this.Html->meta('description', 'A great page', ['block' => 'metaTags']);
+     * this.Html.meta('description', 'A great page', ['block': 'metaTags']);
      * ```
      *
      * Create a custom meta tag:
      *
      * ```
-     * this.Html->meta(['property' => 'og:site_name', 'content' => 'CakePHP']);
+     * this.Html.meta(['property': 'og:site_name', 'content': 'CakePHP']);
      * ```
      *
      * ### Options
@@ -136,18 +136,18 @@ class HtmlHelper : Helper
     {
         if (!is_array($type)) {
             $types = [
-                'rss' => ['type' => 'application/rss+xml', 'rel' => 'alternate', 'title' => $type, 'link' => $content],
-                'atom' => ['type' => 'application/atom+xml', 'title' => $type, 'link' => $content],
-                'icon' => ['type' => 'image/x-icon', 'rel' => 'icon', 'link' => $content],
-                'keywords' => ['name' => 'keywords', 'content' => $content],
-                'description' => ['name' => 'description', 'content' => $content],
-                'robots' => ['name' => 'robots', 'content' => $content],
-                'viewport' => ['name' => 'viewport', 'content' => $content],
-                'canonical' => ['rel' => 'canonical', 'link' => $content],
-                'next' => ['rel' => 'next', 'link' => $content],
-                'prev' => ['rel' => 'prev', 'link' => $content],
-                'first' => ['rel' => 'first', 'link' => $content],
-                'last' => ['rel' => 'last', 'link' => $content],
+                'rss': ['type': 'application/rss+xml', 'rel': 'alternate', 'title': $type, 'link': $content],
+                'atom': ['type': 'application/atom+xml', 'title': $type, 'link': $content],
+                'icon': ['type': 'image/x-icon', 'rel': 'icon', 'link': $content],
+                'keywords': ['name': 'keywords', 'content': $content],
+                'description': ['name': 'description', 'content': $content],
+                'robots': ['name': 'robots', 'content': $content],
+                'viewport': ['name': 'viewport', 'content': $content],
+                'canonical': ['rel': 'canonical', 'link': $content],
+                'next': ['rel': 'next', 'link': $content],
+                'prev': ['rel': 'prev', 'link': $content],
+                'first': ['rel': 'first', 'link': $content],
+                'last': ['rel': 'last', 'link': $content],
             ];
 
             if ($type == 'icon' && $content == null) {
@@ -160,7 +160,7 @@ class HtmlHelper : Helper
                 if (is_array($content) && isset($content['_ext'])) {
                     $type = $types[$content['_ext']];
                 } else {
-                    $type = ['name' => $type, 'content' => $content];
+                    $type = ['name': $type, 'content': $content];
                 }
             } elseif (isset($options['type'], $types[$options['type']])) {
                 $type = $types[$options['type']];
@@ -170,29 +170,29 @@ class HtmlHelper : Helper
             }
         }
 
-        $options += $type + ['block' => null];
+        $options += $type + ['block': null];
         $out = '';
 
         if (isset($options['link'])) {
             if (is_array($options['link'])) {
-                $options['link'] = this.Url->build($options['link']);
+                $options['link'] = this.Url.build($options['link']);
             } else {
-                $options['link'] = this.Url->assetUrl($options['link']);
+                $options['link'] = this.Url.assetUrl($options['link']);
             }
             if (isset($options['rel']) && $options['rel'] == 'icon') {
                 $out = this.formatTemplate('metalink', [
-                    'url' => $options['link'],
-                    'attrs' => this.templater()->formatAttributes($options, ['block', 'link']),
+                    'url': $options['link'],
+                    'attrs': this.templater().formatAttributes($options, ['block', 'link']),
                 ]);
                 $options['rel'] = 'shortcut icon';
             }
             $out .= this.formatTemplate('metalink', [
-                'url' => $options['link'],
-                'attrs' => this.templater()->formatAttributes($options, ['block', 'link']),
+                'url': $options['link'],
+                'attrs': this.templater().formatAttributes($options, ['block', 'link']),
             ]);
         } else {
             $out = this.formatTemplate('meta', [
-                'attrs' => this.templater()->formatAttributes($options, ['block', 'type']),
+                'attrs': this.templater().formatAttributes($options, ['block', 'type']),
             ]);
         }
 
@@ -202,7 +202,7 @@ class HtmlHelper : Helper
         if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
-        _View->append($options['block'], $out);
+        _View.append($options['block'], $out);
 
         return null;
     }
@@ -222,7 +222,7 @@ class HtmlHelper : Helper
         }
 
         return this.formatTemplate('charset', [
-            'charset' => !empty($charset) ? $charset : 'utf-8',
+            'charset': !empty($charset) ? $charset : 'utf-8',
         ]);
     }
 
@@ -254,10 +254,10 @@ class HtmlHelper : Helper
     {
         $escapeTitle = true;
         if ($url != null) {
-            $url = this.Url->build($url, $options);
+            $url = this.Url.build($url, $options);
             unset($options['fullBase']);
         } else {
-            $url = this.Url->build($title);
+            $url = this.Url.build($title);
             $title = htmlspecialchars_decode($url, ENT_QUOTES);
             $title = h(urldecode($title));
             $escapeTitle = false;
@@ -286,16 +286,16 @@ class HtmlHelper : Helper
         if ($confirmMessage) {
             $confirm = _confirm('return true;', 'return false;');
             $options['data-confirm-message'] = $confirmMessage;
-            $options['onclick'] = $templater->format('confirmJs', [
-                'confirmMessage' => h($confirmMessage),
-                'confirm' => $confirm,
+            $options['onclick'] = $templater.format('confirmJs', [
+                'confirmMessage': h($confirmMessage),
+                'confirm': $confirm,
             ]);
         }
 
-        return $templater->format('link', [
-            'url' => $url,
-            'attrs' => $templater->formatAttributes($options),
-            'content' => $title,
+        return $templater.format('link', [
+            'url': $url,
+            'attrs': $templater.formatAttributes($options),
+            'content': $title,
         ]);
     }
 
@@ -320,7 +320,7 @@ class HtmlHelper : Helper
      */
     function linkFromPath(string $title, string $path, array $params = [], array $options = []): string
     {
-        return this.link($title, ['_path' => $path] + $params, $options);
+        return this.link($title, ['_path': $path] + $params, $options);
     }
 
     /**
@@ -331,25 +331,25 @@ class HtmlHelper : Helper
      * Include one CSS file:
      *
      * ```
-     * echo this.Html->css('styles.css');
+     * echo this.Html.css('styles.css');
      * ```
      *
      * Include multiple CSS files:
      *
      * ```
-     * echo this.Html->css(['one.css', 'two.css']);
+     * echo this.Html.css(['one.css', 'two.css']);
      * ```
      *
      * Add the stylesheet to view block "css":
      *
      * ```
-     * this.Html->css('styles.css', ['block' => true]);
+     * this.Html.css('styles.css', ['block': true]);
      * ```
      *
      * Add the stylesheet to a custom block:
      *
      * ```
-     * this.Html->css('styles.css', ['block' => 'layoutCss']);
+     * this.Html.css('styles.css', ['block': 'layoutCss']);
      * ```
      *
      * ### Options
@@ -377,10 +377,10 @@ class HtmlHelper : Helper
     function css($path, array $options = []): ?string
     {
         $options += [
-            'once' => true,
-            'block' => null,
-            'rel' => 'stylesheet',
-            'nonce' => _View->getRequest()->getAttribute('cspStyleNonce'),
+            'once': true,
+            'block': null,
+            'rel': 'stylesheet',
+            'nonce': _View.getRequest().getAttribute('cspStyleNonce'),
         ];
 
         if (is_array($path)) {
@@ -395,8 +395,8 @@ class HtmlHelper : Helper
             return null;
         }
 
-        $url = this.Url->css($path, $options);
-        $options = array_diff_key($options, ['fullBase' => null, 'pathPrefix' => null]);
+        $url = this.Url.css($path, $options);
+        $options = array_diff_key($options, ['fullBase': null, 'pathPrefix': null]);
 
         if ($options['once'] && isset(_includedAssets[__METHOD__][$path])) {
             return null;
@@ -406,15 +406,15 @@ class HtmlHelper : Helper
 
         $templater = this.templater();
         if ($options['rel'] == 'import') {
-            $out = $templater->format('style', [
-                'attrs' => $templater->formatAttributes($options, ['rel', 'block']),
-                'content' => '@import url(' . $url . ');',
+            $out = $templater.format('style', [
+                'attrs': $templater.formatAttributes($options, ['rel', 'block']),
+                'content': '@import url(' . $url . ');',
             ]);
         } else {
-            $out = $templater->format('css', [
-                'rel' => $options['rel'],
-                'url' => $url,
-                'attrs' => $templater->formatAttributes($options, ['rel', 'block']),
+            $out = $templater.format('css', [
+                'rel': $options['rel'],
+                'url': $url,
+                'attrs': $templater.formatAttributes($options, ['rel', 'block']),
             ]);
         }
 
@@ -424,7 +424,7 @@ class HtmlHelper : Helper
         if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
-        _View->append($options['block'], $out);
+        _View.append($options['block'], $out);
 
         return null;
     }
@@ -440,19 +440,19 @@ class HtmlHelper : Helper
      * Include one script file:
      *
      * ```
-     * echo this.Html->script('styles.js');
+     * echo this.Html.script('styles.js');
      * ```
      *
      * Include multiple script files:
      *
      * ```
-     * echo this.Html->script(['one.js', 'two.js']);
+     * echo this.Html.script(['one.js', 'two.js']);
      * ```
      *
      * Add the script file to a custom block:
      *
      * ```
-     * this.Html->script('styles.js', ['block' => 'bodyScript']);
+     * this.Html.script('styles.js', ['block': 'bodyScript']);
      * ```
      *
      * ### Options
@@ -477,9 +477,9 @@ class HtmlHelper : Helper
     function script($url, array $options = []): ?string
     {
         $defaults = [
-            'block' => null,
-            'once' => true,
-            'nonce' => _View->getRequest()->getAttribute('cspScriptNonce'),
+            'block': null,
+            'once': true,
+            'nonce': _View.getRequest().getAttribute('cspScriptNonce'),
         ];
         $options += $defaults;
 
@@ -495,8 +495,8 @@ class HtmlHelper : Helper
             return null;
         }
 
-        $url = this.Url->script($url, $options);
-        $options = array_diff_key($options, ['fullBase' => null, 'pathPrefix' => null]);
+        $url = this.Url.script($url, $options);
+        $options = array_diff_key($options, ['fullBase': null, 'pathPrefix': null]);
 
         if ($options['once'] && isset(_includedAssets[__METHOD__][$url])) {
             return null;
@@ -504,8 +504,8 @@ class HtmlHelper : Helper
         _includedAssets[__METHOD__][$url] = true;
 
         $out = this.formatTemplate('javascriptlink', [
-            'url' => $url,
-            'attrs' => this.templater()->formatAttributes($options, ['block', 'once']),
+            'url': $url,
+            'attrs': this.templater().formatAttributes($options, ['block', 'once']),
         ]);
 
         if (empty($options['block'])) {
@@ -514,7 +514,7 @@ class HtmlHelper : Helper
         if ($options['block'] == true) {
             $options['block'] = __FUNCTION__;
         }
-        _View->append($options['block'], $out);
+        _View.append($options['block'], $out);
 
         return null;
     }
@@ -535,11 +535,11 @@ class HtmlHelper : Helper
      */
     function scriptBlock(string $script, array $options = []): ?string
     {
-        $options += ['block' => null, 'nonce' => _View->getRequest()->getAttribute('cspScriptNonce')];
+        $options += ['block': null, 'nonce': _View.getRequest().getAttribute('cspScriptNonce')];
 
         $out = this.formatTemplate('javascriptblock', [
-            'attrs' => this.templater()->formatAttributes($options, ['block']),
-            'content' => $script,
+            'attrs': this.templater().formatAttributes($options, ['block']),
+            'content': $script,
         ]);
 
         if (empty($options['block'])) {
@@ -548,7 +548,7 @@ class HtmlHelper : Helper
         if ($options['block'] == true) {
             $options['block'] = 'script';
         }
-        _View->append($options['block'], $out);
+        _View.append($options['block'], $out);
 
         return null;
     }
@@ -596,7 +596,7 @@ class HtmlHelper : Helper
      * ### Usage:
      *
      * ```
-     * echo this.Html->style(['margin' => '10px', 'padding' => '10px'], true);
+     * echo this.Html.style(['margin': '10px', 'padding': '10px'], true);
      *
      * // creates
      * 'margin:10px;padding:10px;'
@@ -610,7 +610,7 @@ class HtmlHelper : Helper
     function style(array $data, bool $oneLine = true): string
     {
         $out = [];
-        foreach ($data as $key => $value) {
+        foreach ($data as $key: $value) {
             $out[] = $key . ':' . $value . ';';
         }
         if ($oneLine) {
@@ -630,13 +630,13 @@ class HtmlHelper : Helper
      * Create a regular image:
      *
      * ```
-     * echo this.Html->image('cake_icon.png', ['alt' => 'CakePHP']);
+     * echo this.Html.image('cake_icon.png', ['alt': 'CakePHP']);
      * ```
      *
      * Create an image link:
      *
      * ```
-     * echo this.Html->image('cake_icon.png', ['alt' => 'CakePHP', 'url' => 'https://cakephp.org']);
+     * echo this.Html.image('cake_icon.png', ['alt': 'CakePHP', 'url': 'https://cakephp.org']);
      * ```
      *
      * ### Options:
@@ -654,11 +654,11 @@ class HtmlHelper : Helper
     function image($path, array $options = []): string
     {
         if (is_string($path)) {
-            $path = this.Url->image($path, $options);
+            $path = this.Url.image($path, $options);
         } else {
-            $path = this.Url->build($path, $options);
+            $path = this.Url.build($path, $options);
         }
-        $options = array_diff_key($options, ['fullBase' => null, 'pathPrefix' => null]);
+        $options = array_diff_key($options, ['fullBase': null, 'pathPrefix': null]);
 
         if (!isset($options['alt'])) {
             $options['alt'] = '';
@@ -671,16 +671,16 @@ class HtmlHelper : Helper
         }
 
         $templater = this.templater();
-        $image = $templater->format('image', [
-            'url' => $path,
-            'attrs' => $templater->formatAttributes($options),
+        $image = $templater.format('image', [
+            'url': $path,
+            'attrs': $templater.formatAttributes($options),
         ]);
 
         if ($url) {
-            return $templater->format('link', [
-                'url' => this.Url->build($url),
-                'attrs' => null,
-                'content' => $image,
+            return $templater.format('link', [
+                'url': this.Url.build($url),
+                'attrs': null,
+                'content': $image,
             ]);
         }
 
@@ -713,8 +713,8 @@ class HtmlHelper : Helper
             }
 
             $out[] = this.formatTemplate('tableheader', [
-                'attrs' => this.templater()->formatAttributes($attrs),
-                'content' => $content,
+                'attrs': this.templater().formatAttributes($attrs),
+                'content': $content,
             ]);
         }
 
@@ -822,8 +822,8 @@ class HtmlHelper : Helper
     function tableRow(string $content, array $options = []): string
     {
         return this.formatTemplate('tablerow', [
-            'attrs' => this.templater()->formatAttributes($options),
-            'content' => $content,
+            'attrs': this.templater().formatAttributes($options),
+            'content': $content,
         ]);
     }
 
@@ -837,8 +837,8 @@ class HtmlHelper : Helper
     function tableCell(string $content, array $options = []): string
     {
         return this.formatTemplate('tablecell', [
-            'attrs' => this.templater()->formatAttributes($options),
-            'content' => $content,
+            'attrs': this.templater().formatAttributes($options),
+            'content': $content,
         ]);
     }
 
@@ -868,9 +868,9 @@ class HtmlHelper : Helper
         }
 
         return this.formatTemplate($tag, [
-            'attrs' => this.templater()->formatAttributes($options),
-            'tag' => $name,
-            'content' => $text,
+            'attrs': this.templater().formatAttributes($options),
+            'tag': $name,
+            'content': $text,
         ]);
     }
 
@@ -922,8 +922,8 @@ class HtmlHelper : Helper
         }
 
         return this.formatTemplate($tag, [
-            'attrs' => this.templater()->formatAttributes($options),
-            'content' => $text,
+            'attrs': this.templater().formatAttributes($options),
+            'content': $text,
         ]);
     }
 
@@ -935,7 +935,7 @@ class HtmlHelper : Helper
      * Using an audio file:
      *
      * ```
-     * echo this.Html->media('audio.mp3', ['fullBase' => true]);
+     * echo this.Html.media('audio.mp3', ['fullBase': true]);
      * ```
      *
      * Outputs:
@@ -947,7 +947,7 @@ class HtmlHelper : Helper
      * Using a video file:
      *
      * ```
-     * echo this.Html->media('video.mp4', ['text' => 'Fallback text']);
+     * echo this.Html.media('video.mp4', ['text': 'Fallback text']);
      * ```
      *
      * Outputs:
@@ -959,9 +959,9 @@ class HtmlHelper : Helper
      * Using multiple video files:
      *
      * ```
-     * echo this.Html->media(
-     *      ['video.mp4', ['src' => 'video.ogv', 'type' => "video/ogg; codecs='theora, vorbis'"]],
-     *      ['tag' => 'video', 'autoplay']
+     * echo this.Html.media(
+     *      ['video.mp4', ['src': 'video.ogv', 'type': "video/ogg; codecs='theora, vorbis'"]],
+     *      ['tag': 'video', 'autoplay']
      * );
      * ```
      *
@@ -990,9 +990,9 @@ class HtmlHelper : Helper
     function media($path, array $options = []): string
     {
         $options += [
-            'tag' => null,
-            'pathPrefix' => 'files/',
-            'text' => '',
+            'tag': null,
+            'pathPrefix': 'files/',
+            'text': '',
         ];
 
         if (!empty($options['tag'])) {
@@ -1006,17 +1006,17 @@ class HtmlHelper : Helper
             foreach ($path as &$source) {
                 if (is_string($source)) {
                     $source = [
-                        'src' => $source,
+                        'src': $source,
                     ];
                 }
                 if (!isset($source['type'])) {
                     $ext = pathinfo($source['src'], PATHINFO_EXTENSION);
-                    $source['type'] = _View->getResponse()->getMimeType($ext);
+                    $source['type'] = _View.getResponse().getMimeType($ext);
                 }
-                $source['src'] = this.Url->assetUrl($source['src'], $options);
+                $source['src'] = this.Url.assetUrl($source['src'], $options);
                 $sourceTags .= this.formatTemplate('tagselfclosing', [
-                    'tag' => 'source',
-                    'attrs' => this.templater()->formatAttributes($source),
+                    'tag': 'source',
+                    'attrs': this.templater().formatAttributes($source),
                 ]);
             }
             unset($source);
@@ -1026,7 +1026,7 @@ class HtmlHelper : Helper
             if (empty($path) && !empty($options['src'])) {
                 $path = $options['src'];
             }
-            $options['src'] = this.Url->assetUrl($path, $options);
+            $options['src'] = this.Url.assetUrl($path, $options);
         }
 
         if ($tag == null) {
@@ -1034,7 +1034,7 @@ class HtmlHelper : Helper
                 $mimeType = $path[0]['type'];
             } else {
                 /** @var string $mimeType */
-                $mimeType = _View->getResponse()->getMimeType(pathinfo($path, PATHINFO_EXTENSION));
+                $mimeType = _View.getResponse().getMimeType(pathinfo($path, PATHINFO_EXTENSION));
             }
             if (preg_match('#^video/#', $mimeType)) {
                 $tag = 'video';
@@ -1044,18 +1044,18 @@ class HtmlHelper : Helper
         }
 
         if (isset($options['poster'])) {
-            $options['poster'] = this.Url->assetUrl(
+            $options['poster'] = this.Url.assetUrl(
                 $options['poster'],
-                ['pathPrefix' => Configure::read('App.imageBaseUrl')] + $options
+                ['pathPrefix': Configure::read('App.imageBaseUrl')] + $options
             );
         }
         $text = $options['text'];
 
         $options = array_diff_key($options, [
-            'tag' => null,
-            'fullBase' => null,
-            'pathPrefix' => null,
-            'text' => null,
+            'tag': null,
+            'fullBase': null,
+            'pathPrefix': null,
+            'text': null,
         ]);
 
         return this.tag($tag, $text, $options);
@@ -1081,12 +1081,12 @@ class HtmlHelper : Helper
      */
     function nestedList(array $list, array $options = [], array $itemOptions = []): string
     {
-        $options += ['tag' => 'ul'];
+        $options += ['tag': 'ul'];
         $items = _nestedListItem($list, $options, $itemOptions);
 
         return this.formatTemplate($options['tag'], [
-            'attrs' => this.templater()->formatAttributes($options, ['tag']),
-            'content' => $items,
+            'attrs': this.templater().formatAttributes($options, ['tag']),
+            'content': $items,
         ]);
     }
 
@@ -1104,7 +1104,7 @@ class HtmlHelper : Helper
         $out = '';
 
         $index = 1;
-        foreach ($items as $key => $item) {
+        foreach ($items as $key: $item) {
             if (is_array($item)) {
                 $item = $key . this.nestedList($item, $options, $itemOptions);
             }
@@ -1114,8 +1114,8 @@ class HtmlHelper : Helper
                 $itemOptions['class'] = $itemOptions['odd'];
             }
             $out .= this.formatTemplate('li', [
-                'attrs' => this.templater()->formatAttributes($itemOptions, ['even', 'odd']),
-                'content' => $item,
+                'attrs': this.templater().formatAttributes($itemOptions, ['even', 'odd']),
+                'content': $item,
             ]);
             $index++;
         }

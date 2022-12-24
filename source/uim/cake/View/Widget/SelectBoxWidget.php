@@ -33,13 +33,13 @@ class SelectBoxWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name' => '',
-        'empty' => false,
-        'escape' => true,
-        'options' => [],
-        'disabled' => null,
-        'val' => null,
-        'templateVars' => [],
+        'name': '',
+        'empty': false,
+        'escape': true,
+        'options': [],
+        'disabled': null,
+        'val': null,
+        'templateVars': [],
     ];
 
     /**
@@ -67,15 +67,15 @@ class SelectBoxWidget : BasicWidget
      * You can generate simple options using a basic associative array:
      *
      * ```
-     * 'options' => ['elk' => 'Elk', 'beaver' => 'Beaver']
+     * 'options': ['elk': 'Elk', 'beaver': 'Beaver']
      * ```
      *
      * If you need to define additional attributes on your option elements
      * you can use the complex form for options:
      *
      * ```
-     * 'options' => [
-     *   ['value' => 'elk', 'text' => 'Elk', 'data-foo' => 'bar'],
+     * 'options': [
+     *   ['value': 'elk', 'text': 'Elk', 'data-foo': 'bar'],
      * ]
      * ```
      *
@@ -85,10 +85,10 @@ class SelectBoxWidget : BasicWidget
      * If you need to define option groups you can do those using nested arrays:
      *
      * ```
-     * 'options' => [
-     *  'Mammals' => [
-     *    'elk' => 'Elk',
-     *    'beaver' => 'Beaver'
+     * 'options': [
+     *  'Mammals': [
+     *    'elk': 'Elk',
+     *    'beaver': 'Beaver'
      *  ]
      * ]
      * ```
@@ -97,13 +97,13 @@ class SelectBoxWidget : BasicWidget
      * can do that with a more complex nested array form:
      *
      * ```
-     * 'options' => [
+     * 'options': [
      *   [
-     *     'text' => 'Mammals',
-     *     'data-id' => 1,
-     *     'options' => [
-     *       'elk' => 'Elk',
-     *       'beaver' => 'Beaver'
+     *     'text': 'Mammals',
+     *     'data-id': 1,
+     *     'options': [
+     *       'elk': 'Elk',
+     *       'beaver': 'Beaver'
      *     ]
      *  ],
      * ]
@@ -133,13 +133,13 @@ class SelectBoxWidget : BasicWidget
             $template = 'selectMultiple';
             unset($data['multiple']);
         }
-        $attrs = _templates->formatAttributes($data);
+        $attrs = _templates.formatAttributes($data);
 
-        return _templates->format($template, [
-            'name' => $name,
-            'templateVars' => $data['templateVars'],
-            'attrs' => $attrs,
-            'content' => implode('', $options),
+        return _templates.format($template, [
+            'name': $name,
+            'templateVars': $data['templateVars'],
+            'attrs': $attrs,
+            'content': implode('', $options),
         ]);
     }
 
@@ -183,10 +183,10 @@ class SelectBoxWidget : BasicWidget
     protected function _emptyValue($value): array
     {
         if ($value == true) {
-            return ['' => ''];
+            return ['': ''];
         }
         if (is_scalar($value)) {
-            return ['' => $value];
+            return ['': $value];
         }
         if (is_array($value)) {
             return $value;
@@ -223,11 +223,11 @@ class SelectBoxWidget : BasicWidget
         }
         $groupOptions = _renderOptions($opts, $disabled, $selected, $templateVars, $escape);
 
-        return _templates->format('optgroup', [
-            'label' => $escape ? h($label) : $label,
-            'content' => implode('', $groupOptions),
-            'templateVars' => $templateVars,
-            'attrs' => _templates->formatAttributes($attrs, ['text', 'options']),
+        return _templates.format('optgroup', [
+            'label': $escape ? h($label) : $label,
+            'content': implode('', $groupOptions),
+            'templateVars': $templateVars,
+            'attrs': _templates.formatAttributes($attrs, ['text', 'options']),
         ]);
     }
 
@@ -246,7 +246,7 @@ class SelectBoxWidget : BasicWidget
     protected function _renderOptions(iterable $options, ?array $disabled, $selected, $templateVars, $escape): array
     {
         $out = [];
-        foreach ($options as $key => $val) {
+        foreach ($options as $key: $val) {
             // Option groups
             $isIterable = is_iterable($val);
             if (
@@ -269,9 +269,9 @@ class SelectBoxWidget : BasicWidget
 
             // Basic options
             $optAttrs = [
-                'value' => $key,
-                'text' => $val,
-                'templateVars' => [],
+                'value': $key,
+                'text': $val,
+                'templateVars': [],
             ];
             if (is_array($val) && isset($val['text'], $val['value'])) {
                 $optAttrs = $val;
@@ -289,11 +289,11 @@ class SelectBoxWidget : BasicWidget
             }
             $optAttrs['escape'] = $escape;
 
-            $out[] = _templates->format('option', [
-                'value' => $escape ? h($optAttrs['value']) : $optAttrs['value'],
-                'text' => $escape ? h($optAttrs['text']) : $optAttrs['text'],
-                'templateVars' => $optAttrs['templateVars'],
-                'attrs' => _templates->formatAttributes($optAttrs, ['text', 'value']),
+            $out[] = _templates.format('option', [
+                'value': $escape ? h($optAttrs['value']) : $optAttrs['value'],
+                'text': $escape ? h($optAttrs['text']) : $optAttrs['text'],
+                'templateVars': $optAttrs['templateVars'],
+                'attrs': _templates.formatAttributes($optAttrs, ['text', 'value']),
             ]);
         }
 

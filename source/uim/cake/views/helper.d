@@ -93,7 +93,7 @@ class Helper : IEventListener
      */
     auto __get(string myName) {
         if (isset(_helperMap[myName]) && !isset(this.{myName})) {
-            myConfig = ["enabled" => false] + (array)_helperMap[myName]["config"];
+            myConfig = ["enabled": false] + (array)_helperMap[myName]["config"];
             this.{myName} = _View.loadHelper(_helperMap[myName]["class"], myConfig);
 
             return this.{myName};
@@ -156,15 +156,15 @@ class Helper : IEventListener
     function implementedEvents(): array
     {
         myEventMap = [
-            "View.beforeRenderFile" => "beforeRenderFile",
-            "View.afterRenderFile" => "afterRenderFile",
-            "View.beforeRender" => "beforeRender",
-            "View.afterRender" => "afterRender",
-            "View.beforeLayout" => "beforeLayout",
-            "View.afterLayout" => "afterLayout",
+            "View.beforeRenderFile": "beforeRenderFile",
+            "View.afterRenderFile": "afterRenderFile",
+            "View.beforeRender": "beforeRender",
+            "View.afterRender": "afterRender",
+            "View.beforeLayout": "beforeLayout",
+            "View.afterLayout": "afterLayout",
         ];
         myEvents = [];
-        foreach (myEventMap as myEvent => $method) {
+        foreach (myEventMap as myEvent: $method) {
             if (method_exists(this, $method)) {
                 myEvents[myEvent] = $method;
             }
@@ -191,9 +191,9 @@ class Helper : IEventListener
      */
     auto __debugInfo(): array {
         return [
-            "helpers" => this.helpers,
-            "implementedEvents" => this.implementedEvents(),
-            "_config" => this.getConfig(),
+            "helpers": this.helpers,
+            "implementedEvents": this.implementedEvents(),
+            "_config": this.getConfig(),
         ];
     }
 }
