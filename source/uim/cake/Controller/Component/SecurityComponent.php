@@ -153,8 +153,7 @@ class SecurityComponent : Component
      * @link https://book.cakephp.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
      * @throws \Cake\Http\Exception\BadRequestException
      */
-    function blackHole(Controller $controller, string $error = "", ?SecurityException $exception = null)
-    {
+    function blackHole(Controller $controller, string $error = "", ?SecurityException $exception = null) {
         if (!_config["blackHoleCallback"]) {
             _throwException($exception);
         }
@@ -500,8 +499,7 @@ class SecurityComponent : Component
      * @return mixed Controller callback method"s response
      * @throws \Cake\Http\Exception\BadRequestException When a the blackholeCallback is not callable.
      */
-    protected function _callback(Controller $controller, string $method, array $params = [])
-    {
+    protected function _callback(Controller $controller, string $method, array $params = []) {
         $callable = [$controller, $method];
 
         if (!is_callable($callable)) {

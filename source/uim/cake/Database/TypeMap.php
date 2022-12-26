@@ -39,8 +39,7 @@ class TypeMap
      *
      * @param array<int|string, string> $defaults The defaults to use.
      */
-    public this(array $defaults = [])
-    {
+    public this(array $defaults = []) {
         this.setDefaults($defaults);
     }
 
@@ -66,8 +65,7 @@ class TypeMap
      * are the correspondent type.
      * @return this
      */
-    function setDefaults(array $defaults)
-    {
+    function setDefaults(array $defaults) {
         _defaults = $defaults;
 
         return this;
@@ -111,8 +109,7 @@ class TypeMap
      * are the correspondent type.
      * @return this
      */
-    function setTypes(array $types)
-    {
+    function setTypes(array $types) {
         _types = $types;
 
         return this;

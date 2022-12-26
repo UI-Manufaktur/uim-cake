@@ -87,8 +87,7 @@ abstract class Driver : DriverInterface
      * @param array<string, mixed> $config The configuration for the driver.
      * @throws \InvalidArgumentException
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         if (empty($config['username']) && !empty($config['login'])) {
             throw new InvalidArgumentException(
                 'Please pass "username" instead of "login" for connecting to the database'
@@ -173,8 +172,7 @@ abstract class Driver : DriverInterface
      *
      * @return \PDO
      */
-    function getConnection()
-    {
+    function getConnection() {
         if (_connection == null) {
             throw new MissingConnectionException([
                 'driver': App::shortName(static::class, 'Database/Driver'),
@@ -192,8 +190,7 @@ abstract class Driver : DriverInterface
      * @return this
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    function setConnection($connection)
-    {
+    function setConnection($connection) {
         _connection = $connection;
 
         return this;
@@ -374,8 +371,7 @@ abstract class Driver : DriverInterface
     /**
      * @inheritDoc
      */
-    function lastInsertId(?string $table = null, ?string $column = null)
-    {
+    function lastInsertId(?string $table = null, ?string $column = null) {
         this.connect();
 
         if (_connection instanceof PDO) {
@@ -406,8 +402,7 @@ abstract class Driver : DriverInterface
     /**
      * @inheritDoc
      */
-    function enableAutoQuoting(bool $enable = true)
-    {
+    function enableAutoQuoting(bool $enable = true) {
         _autoQuoting = $enable;
 
         return this;
@@ -416,8 +411,7 @@ abstract class Driver : DriverInterface
     /**
      * @inheritDoc
      */
-    function disableAutoQuoting()
-    {
+    function disableAutoQuoting() {
         _autoQuoting = false;
 
         return this;
@@ -509,8 +503,7 @@ abstract class Driver : DriverInterface
     /**
      * Destructor
      */
-    function __destruct()
-    {
+    function __destruct() {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
         _connection = null;
     }

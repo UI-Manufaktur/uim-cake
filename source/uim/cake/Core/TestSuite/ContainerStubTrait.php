@@ -74,8 +74,7 @@ trait ContainerStubTrait
      *
      * @return \Cake\Core\IHttpApplication|\Cake\Core\IConsoleApplication
      */
-    protected function createApp()
-    {
+    protected function createApp() {
         if (_appClass) {
             $appClass = _appClass;
         } else {
@@ -106,8 +105,7 @@ trait ContainerStubTrait
      * @param \Closure $factory The factory function for mocked services.
      * @return this
      */
-    function mockService(string $class, Closure $factory)
-    {
+    function mockService(string $class, Closure $factory) {
         this.containerServices[$class] = $factory;
 
         return this;
@@ -119,8 +117,7 @@ trait ContainerStubTrait
      * @param string $class The class or interface you want to remove.
      * @return this
      */
-    function removeMockService(string $class)
-    {
+    function removeMockService(string $class) {
         unset(this.containerServices[$class]);
 
         return this;

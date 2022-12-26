@@ -61,8 +61,7 @@ class SecurityException : BadRequestException
      * @param string|null $reason Reason details
      * @return this
      */
-    function setReason(?string $reason = null)
-    {
+    function setReason(?string $reason = null) {
         _reason = $reason;
 
         return this;

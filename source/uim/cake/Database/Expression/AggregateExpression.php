@@ -39,8 +39,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
      * @return this
      * @see \Cake\Database\Query::where()
      */
-    function filter($conditions, array $types = [])
-    {
+    function filter($conditions, array $types = []) {
         if (this.filter == null) {
             this.filter = new QueryExpression();
         }
@@ -60,8 +59,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
      * @param string|null $name Window name
      * @return this
      */
-    function over(?string $name = null)
-    {
+    function over(?string $name = null) {
         if (this.window == null) {
             this.window = new WindowExpression();
         }
@@ -76,8 +74,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     /**
      * @inheritDoc
      */
-    function partition($partitions)
-    {
+    function partition($partitions) {
         this.over();
         this.window.partition($partitions);
 
@@ -87,8 +84,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     /**
      * @inheritDoc
      */
-    function order($fields)
-    {
+    function order($fields) {
         this.over();
         this.window.order($fields);
 
@@ -98,8 +94,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     /**
      * @inheritDoc
      */
-    function range($start, $end = 0)
-    {
+    function range($start, $end = 0) {
         this.over();
         this.window.range($start, $end);
 
@@ -109,8 +104,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     /**
      * @inheritDoc
      */
-    function rows(?int $start, ?int $end = 0)
-    {
+    function rows(?int $start, ?int $end = 0) {
         this.over();
         this.window.rows($start, $end);
 
@@ -120,8 +114,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     /**
      * @inheritDoc
      */
-    function groups(?int $start, ?int $end = 0)
-    {
+    function groups(?int $start, ?int $end = 0) {
         this.over();
         this.window.groups($start, $end);
 
@@ -147,8 +140,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     /**
      * @inheritDoc
      */
-    function excludeCurrent()
-    {
+    function excludeCurrent() {
         this.over();
         this.window.excludeCurrent();
 
@@ -158,8 +150,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     /**
      * @inheritDoc
      */
-    function excludeGroup()
-    {
+    function excludeGroup() {
         this.over();
         this.window.excludeGroup();
 
@@ -169,8 +160,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     /**
      * @inheritDoc
      */
-    function excludeTies()
-    {
+    function excludeTies() {
         this.over();
         this.window.excludeTies();
 
@@ -200,8 +190,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         parent::traverse($callback);
         if (this.filter != null) {
             $callback(this.filter);
@@ -233,8 +222,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         parent::__clone();
         if (this.filter != null) {
             this.filter = clone this.filter;

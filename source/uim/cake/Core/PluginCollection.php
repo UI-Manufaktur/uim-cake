@@ -69,8 +69,7 @@ class PluginCollection : Iterator, Countable
      *
      * @param array<\Cake\Core\PluginInterface> $plugins The map of plugins to add to the collection.
      */
-    public this(array $plugins = [])
-    {
+    public this(array $plugins = []) {
         foreach ($plugins as $plugin) {
             this.add($plugin);
         }
@@ -150,8 +149,7 @@ class PluginCollection : Iterator, Countable
      * @param \Cake\Core\PluginInterface $plugin The plugin to load.
      * @return this
      */
-    function add(PluginInterface $plugin)
-    {
+    function add(PluginInterface $plugin) {
         $name = $plugin.getName();
         this.plugins[$name] = $plugin;
         this.names = array_keys(this.plugins);
@@ -165,8 +163,7 @@ class PluginCollection : Iterator, Countable
      * @param string $name The named plugin.
      * @return this
      */
-    function remove(string $name)
-    {
+    function remove(string $name) {
         unset(this.plugins[$name]);
         this.names = array_keys(this.plugins);
 
@@ -178,8 +175,7 @@ class PluginCollection : Iterator, Countable
      *
      * @return this
      */
-    function clear()
-    {
+    function clear() {
         this.plugins = [];
         this.names = [];
         this.positions = [];

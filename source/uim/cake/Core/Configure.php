@@ -110,8 +110,7 @@ class Configure
      * @return mixed Value stored in configure, or null.
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-configuration-data
      */
-    public static function read(?string $var = null, $default = null)
-    {
+    public static function read(?string $var = null, $default = null) {
         if ($var == null) {
             return static::$_values;
         }
@@ -153,8 +152,7 @@ class Configure
      * @throws \RuntimeException if the requested configuration is not set.
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-configuration-data
      */
-    public static function readOrFail(string $var)
-    {
+    public static function readOrFail(string $var) {
         if (!static::check($var)) {
             throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
         }
@@ -193,8 +191,7 @@ class Configure
      * @throws \RuntimeException if the requested configuration is not set.
      * @since 3.6.0
      */
-    public static function consumeOrFail(string $var)
-    {
+    public static function consumeOrFail(string $var) {
         if (!static::check($var)) {
             throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
         }
@@ -211,8 +208,7 @@ class Configure
      * @param string $var The key to read and remove.
      * @return array|string|null
      */
-    public static function consume(string $var)
-    {
+    public static function consume(string $var) {
         if (strpos($var, ".") == false) {
             if (!isset(static::$_values[$var])) {
                 return null;

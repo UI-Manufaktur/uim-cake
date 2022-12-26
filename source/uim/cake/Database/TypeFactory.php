@@ -135,8 +135,7 @@ class TypeFactory
      * @param string|null $type Type name to get mapped class for or null to get map array.
      * @return array<string>|string|null Configured class name for given $type or map array.
      */
-    public static function getMap(?string $type = null)
-    {
+    public static function getMap(?string $type = null) {
         if ($type == null) {
             return static::$_types;
         }

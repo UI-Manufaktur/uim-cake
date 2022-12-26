@@ -104,8 +104,7 @@ class BasePlugin : PluginInterface
      *
      * @param array<string, mixed> $options Options
      */
-    public this(array $options = [])
-    {
+    public this(array $options = []) {
         foreach (static::VALID_HOOKS as $key) {
             if (isset($options[$key])) {
                 this.{"{$key}Enabled"} = (bool)$options[$key];
@@ -206,8 +205,7 @@ class BasePlugin : PluginInterface
     /**
      * @inheritDoc
      */
-    function enable(string $hook)
-    {
+    function enable(string $hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled}"} = true;
 
@@ -217,8 +215,7 @@ class BasePlugin : PluginInterface
     /**
      * @inheritDoc
      */
-    function disable(string $hook)
-    {
+    function disable(string $hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled"} = false;
 

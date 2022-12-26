@@ -75,8 +75,7 @@ class ClassLoader
      * @return string|false The mapped file name on success, or boolean false on
      * failure.
      */
-    function loadClass(string $class)
-    {
+    function loadClass(string $class) {
         $prefix = $class;
 
         while (($pos = strrpos($prefix, '\\')) != false) {
@@ -102,8 +101,7 @@ class ClassLoader
      * @return string|false Boolean false if no mapped file can be loaded, or the
      * name of the mapped file that was loaded.
      */
-    protected function _loadMappedFile(string $prefix, string $relativeClass)
-    {
+    protected function _loadMappedFile(string $prefix, string $relativeClass) {
         if (!isset(_prefixes[$prefix])) {
             return false;
         }

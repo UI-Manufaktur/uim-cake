@@ -42,8 +42,7 @@ class CommandRetry
      * @param \Cake\Core\Retry\RetryStrategyInterface $strategy The strategy to follow should the action fail
      * @param int $maxRetries The maximum number of retry attempts allowed
      */
-    public this(RetryStrategyInterface $strategy, int $maxRetries = 1)
-    {
+    public this(RetryStrategyInterface $strategy, int $maxRetries = 1) {
         this.strategy = $strategy;
         this.maxRetries = $maxRetries;
     }
@@ -55,8 +54,7 @@ class CommandRetry
      * @return mixed The return value of the passed action callable
      * @throws \Exception
      */
-    function run(callable $action)
-    {
+    function run(callable $action) {
         this.numRetries = 0;
         while (true) {
             try {

@@ -63,8 +63,7 @@ trait InstanceConfigTrait
      * @return this
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
-    function setConfig($key, $value = null, $merge = true)
-    {
+    function setConfig($key, $value = null, $merge = true) {
         if (!_configInitialized) {
             _config = _defaultConfig;
             _configInitialized = true;
@@ -108,8 +107,7 @@ trait InstanceConfigTrait
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    function getConfig(?string $key = null, $default = null)
-    {
+    function getConfig(?string $key = null, $default = null) {
         if (!_configInitialized) {
             _config = _defaultConfig;
             _configInitialized = true;
@@ -129,8 +127,7 @@ trait InstanceConfigTrait
      * @return mixed Configuration data at the named key
      * @throws \InvalidArgumentException
      */
-    function getConfigOrFail(string $key)
-    {
+    function getConfigOrFail(string $key) {
         $config = this.getConfig($key);
         if ($config == null) {
             throw new InvalidArgumentException(sprintf('Expected configuration `%s` not found.', $key));
@@ -165,8 +162,7 @@ trait InstanceConfigTrait
      * @param mixed|null $value The value to set.
      * @return this
      */
-    function configShallow($key, $value = null)
-    {
+    function configShallow($key, $value = null) {
         if (!_configInitialized) {
             _config = _defaultConfig;
             _configInitialized = true;
@@ -183,8 +179,7 @@ trait InstanceConfigTrait
      * @param string|null $key Key to read.
      * @return mixed
      */
-    protected function _configRead(?string $key)
-    {
+    protected function _configRead(?string $key) {
         if ($key == null) {
             return _config;
         }

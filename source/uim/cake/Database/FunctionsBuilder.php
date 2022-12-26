@@ -332,8 +332,7 @@ class FunctionsBuilder
      * @param string $return Return type of the entire expression. Defaults to float.
      * @return \Cake\Database\Expression\AggregateExpression
      */
-    function aggregate(string $name, array $params = [], array $types = [], string $return = 'float')
-    {
+    function aggregate(string $name, array $params = [], array $types = [], string $return = 'float') {
         return new AggregateExpression($name, $params, $types, $return);
     }
 
@@ -357,8 +356,7 @@ class FunctionsBuilder
      * @param \Cake\Database\IExpression|string $expression function argument
      * @return array<\Cake\Database\IExpression|string>
      */
-    protected function toLiteralParam($expression)
-    {
+    protected function toLiteralParam($expression) {
         if (is_string($expression)) {
             return [$expression: 'literal'];
         }

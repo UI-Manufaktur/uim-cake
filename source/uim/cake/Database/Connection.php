@@ -125,8 +125,7 @@ class Connection : ConnectionInterface
      *
      * @param array<string, mixed> $config Configuration array.
      */
-    public this(array $config)
-    {
+    public this(array $config) {
         _config = $config;
 
         $driverConfig = array_diff_key($config, array_flip([
@@ -148,8 +147,7 @@ class Connection : ConnectionInterface
      *
      * Disconnects the driver to release the connection.
      */
-    function __destruct()
-    {
+    function __destruct() {
         if (_transactionStarted && class_exists(Log::class)) {
             Log::warning('The connection is going to be closed but there is an active transaction.');
         }
@@ -182,8 +180,7 @@ class Connection : ConnectionInterface
      * @return this
      * @deprecated 4.4.0 Setting the driver is deprecated. Use the connection config instead.
      */
-    function setDriver($driver, $config = [])
-    {
+    function setDriver($driver, $config = []) {
         deprecationWarning('Setting the driver is deprecated. Use the connection config instead.');
 
         _driver = this.createDriver($driver, $config);
@@ -388,8 +385,7 @@ class Connection : ConnectionInterface
      * @param \Cake\Database\Schema\ICollection $collection The schema collection object
      * @return this
      */
-    function setSchemaCollection(SchemaICollection $collection)
-    {
+    function setSchemaCollection(SchemaICollection $collection) {
         _schemaCollection = $collection;
 
         return this;
@@ -586,8 +582,7 @@ class Connection : ConnectionInterface
      * @param bool $enable Whether save points should be used.
      * @return this
      */
-    function enableSavePoints(bool $enable = true)
-    {
+    function enableSavePoints(bool $enable = true) {
         if ($enable == false) {
             _useSavePoints = false;
         } else {
@@ -602,8 +597,7 @@ class Connection : ConnectionInterface
      *
      * @return this
      */
-    function disableSavePoints()
-    {
+    function disableSavePoints() {
         _useSavePoints = false;
 
         return this;
@@ -694,8 +688,7 @@ class Connection : ConnectionInterface
     /**
      * @inheritDoc
      */
-    function transactional(callable $callback)
-    {
+    function transactional(callable $callback) {
         this.begin();
 
         try {
@@ -734,8 +727,7 @@ class Connection : ConnectionInterface
     /**
      * @inheritDoc
      */
-    function disableConstraints(callable $callback)
-    {
+    function disableConstraints(callable $callback) {
         return this.getDisconnectRetry().run(function () use ($callback) {
             this.disableForeignKeys();
 
@@ -822,8 +814,7 @@ class Connection : ConnectionInterface
     /**
      * @inheritDoc
      */
-    function setCacher(ICache $cacher)
-    {
+    function setCacher(ICache $cacher) {
         this.cacher = $cacher;
 
         return this;
@@ -859,8 +850,7 @@ class Connection : ConnectionInterface
      * @param bool $enable Enable/disable query logging
      * @return this
      */
-    function enableQueryLogging(bool $enable = true)
-    {
+    function enableQueryLogging(bool $enable = true) {
         _logQueries = $enable;
 
         return this;
@@ -871,8 +861,7 @@ class Connection : ConnectionInterface
      *
      * @return this
      */
-    function disableQueryLogging()
-    {
+    function disableQueryLogging() {
         _logQueries = false;
 
         return this;
@@ -895,8 +884,7 @@ class Connection : ConnectionInterface
      * @return this
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
-    function setLogger(LoggerInterface $logger)
-    {
+    function setLogger(LoggerInterface $logger) {
         _logger = $logger;
 
         return this;

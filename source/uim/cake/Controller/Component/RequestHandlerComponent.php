@@ -74,8 +74,7 @@ class RequestHandlerComponent : Component
      * @param \Cake\Controller\ComponentRegistry $registry ComponentRegistry object.
      * @param array<string, mixed> $config Array of config.
      */
-    public this(ComponentRegistry $registry, array $config = [])
-    {
+    public this(ComponentRegistry $registry, array $config = []) {
         $config += [
             'viewClassMap': [
                 'json': 'Json',
@@ -248,8 +247,7 @@ class RequestHandlerComponent : Component
      *   if the client accepts one or more elements in the array.
      * @deprecated 4.4.0 Use ContentTypeNegotiation::prefersChoice() or Controller::getViewClasses() instead.
      */
-    function accepts($type = null)
-    {
+    function accepts($type = null) {
         $controller = this.getController();
         /** @var array $accepted */
         $accepted = $controller.getRequest().accepts();
@@ -284,8 +282,7 @@ class RequestHandlerComponent : Component
      *   The mapped value of CONTENT_TYPE will be returned. If an array is supplied the first type
      *   in the request content type will be returned.
      */
-    function requestedWith($type = null)
-    {
+    function requestedWith($type = null) {
         $controller = this.getController();
         $request = $controller.getRequest();
 
@@ -336,8 +333,7 @@ class RequestHandlerComponent : Component
      *    If no type is provided the first preferred type is returned.
      * @deprecated 4.4.0 Use Controller::getViewClasses() instead.
      */
-    function prefers($type = null)
-    {
+    function prefers($type = null) {
         $controller = this.getController();
         $request = $controller.getRequest();
         $content = new ContentTypeNegotiation();
@@ -497,8 +493,7 @@ class RequestHandlerComponent : Component
      *   alias maps to more than one content type, the first one will be returned. If an array is provided
      *   for $alias, an array of mapped types will be returned.
      */
-    function mapAlias($alias)
-    {
+    function mapAlias($alias) {
         if (is_array($alias)) {
             return array_map([this, 'mapAlias'], $alias);
         }

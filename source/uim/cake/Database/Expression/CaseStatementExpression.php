@@ -115,8 +115,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @param string|null $type The case value type. If no type is provided, the type will be tried to be inferred
      *  from the value.
      */
-    public this($value = null, ?string $type = null)
-    {
+    public this($value = null, ?string $type = null) {
         if (func_num_args() > 0) {
             if (
                 $value != null &&
@@ -284,8 +283,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @throws \LogicException In case the callable doesn't return an instance of
      *  `\Cake\Database\Expression\WhenThenExpression`.
      */
-    function when($when, $type = null)
-    {
+    function when($when, $type = null) {
         if (this.whenBuffer != null) {
             throw new LogicException('Cannot call `when()` between `when()` and `then()`.');
         }
@@ -366,8 +364,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @throws \LogicException In case `when()` wasn't previously called with a value other than a closure or an
      *  instance of `\Cake\Database\Expression\WhenThenExpression`.
      */
-    function then($result, ?string $type = null)
-    {
+    function then($result, ?string $type = null) {
         if (this.whenBuffer == null) {
             throw new LogicException('Cannot call `then()` before `when()`.');
         }
@@ -394,8 +391,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @throws \InvalidArgumentException In case the `$result` argument is neither a scalar value, nor an object, an
      *  instance of `\Cake\Database\IExpression`, or `null`.
      */
-    function else($result, ?string $type = null)
-    {
+    function else($result, ?string $type = null) {
         if (this.whenBuffer != null) {
             throw new LogicException('Cannot call `else()` between `when()` and `then()`.');
         }
@@ -470,8 +466,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @param string $type The type name to use.
      * @return this
      */
-    function setReturnType(string $type)
-    {
+    function setReturnType(string $type) {
         this.returnType = $type;
 
         return this;
@@ -492,8 +487,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @return \Cake\Database\IExpression|object|array<\Cake\Database\Expression\WhenThenExpression>|scalar|null
      * @throws \InvalidArgumentException In case the given clause name is invalid.
      */
-    function clause(string $clause)
-    {
+    function clause(string $clause) {
         if (!in_array($clause, this.validClauseNames, true)) {
             throw new InvalidArgumentException(
                 sprintf(
@@ -539,8 +533,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         if (this.whenBuffer != null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }
@@ -568,8 +561,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         if (this.whenBuffer != null) {
             throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
         }

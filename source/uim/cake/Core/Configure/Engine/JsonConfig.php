@@ -47,8 +47,7 @@ class JsonConfig : ConfigEngineInterface
      *
      * @param string|null $path The path to read config files from. Defaults to CONFIG.
      */
-    public this(?string $path = null)
-    {
+    public this(?string $path = null) {
         if ($path == null) {
             $path = CONFIG;
         }

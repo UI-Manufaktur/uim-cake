@@ -70,8 +70,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-return TObject
      * @throws \Exception If the class cannot be found.
      */
-    function load(string $name, array $config = [])
-    {
+    function load(string $name, array $config = []) {
         if (isset($config["className"])) {
             $objName = $name;
             $name = $config["className"];
@@ -220,8 +219,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @throws \RuntimeException If not loaded or found.
      * @psalm-return TObject
      */
-    function get(string $name)
-    {
+    function get(string $name) {
         if (!isset(_loaded[$name])) {
             throw new RuntimeException(sprintf("Unknown object "%s"", $name));
         }
@@ -236,8 +234,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return object|null
      * @psalm-return TObject|null
      */
-    function __get(string $name)
-    {
+    function __get(string $name) {
         return _loaded[$name] ?? null;
     }
 
@@ -310,8 +307,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @return this
      */
-    function reset()
-    {
+    function reset() {
         foreach (array_keys(_loaded) as $name) {
             this.unload((string)$name);
         }
@@ -331,8 +327,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-param TObject $object
      * @psalm-suppress MoreSpecificReturnType
      */
-    function set(string $name, object $object)
-    {
+    function set(string $name, object $object) {
         [, $objName] = pluginSplit($name);
 
         // Just call unload if the object was loaded before
@@ -357,8 +352,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return this
      * @psalm-suppress MoreSpecificReturnType
      */
-    function unload(string $name)
-    {
+    function unload(string $name) {
         if (empty(_loaded[$name])) {
             [$plugin, $name] = pluginSplit($name);
             _throwMissingClassError($name, $plugin);

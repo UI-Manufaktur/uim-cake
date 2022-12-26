@@ -42,8 +42,7 @@ class PaginatorComponent : Component
     /**
      * @inheritDoc
      */
-    public this(ComponentRegistry $registry, array $config = [])
-    {
+    public this(ComponentRegistry $registry, array $config = []) {
         deprecationWarning(
             "PaginatorComponent is deprecated, use a Cake\Datasource\Pagination\NumericPaginator instance directly."
         );
@@ -234,8 +233,7 @@ class PaginatorComponent : Component
      * @param \Cake\Datasource\Paging\NumericPaginator $paginator Paginator instance.
      * @return this
      */
-    function setPaginator(NumericPaginator $paginator)
-    {
+    function setPaginator(NumericPaginator $paginator) {
         _paginator = $paginator;
 
         return this;
@@ -273,8 +271,7 @@ class PaginatorComponent : Component
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
      */
-    function setConfig($key, $value = null, $merge = true)
-    {
+    function setConfig($key, $value = null, $merge = true) {
         _paginator.setConfig($key, $value, $merge);
 
         return this;
@@ -287,8 +284,7 @@ class PaginatorComponent : Component
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Config value being read.
      */
-    function getConfig(?string $key = null, $default = null)
-    {
+    function getConfig(?string $key = null, $default = null) {
         return _paginator.getConfig($key, $default);
     }
 
@@ -299,8 +295,7 @@ class PaginatorComponent : Component
      * @param mixed|null $value The value to set.
      * @return this
      */
-    function configShallow($key, $value = null)
-    {
+    function configShallow($key, $value = null) {
         _paginator.configShallow($key, null);
 
         return this;
@@ -313,8 +308,7 @@ class PaginatorComponent : Component
      * @param array $args Method arguments.
      * @return mixed
      */
-    function __call(string $method, array $args)
-    {
+    function __call(string $method, array $args) {
         return _paginator.{$method}(...$args);
     }
 }
