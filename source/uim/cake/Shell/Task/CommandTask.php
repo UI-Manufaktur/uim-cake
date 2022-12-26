@@ -13,7 +13,7 @@ import uim.cake.consoles.Shell;
 import uim.cake.cores.App;
 import uim.cake.cores.Plugin;
 import uim.cake.Filesystem\Filesystem;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 
 /**
  * Base class for Shell Command reflection.

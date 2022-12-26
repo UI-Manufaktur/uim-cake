@@ -23,7 +23,7 @@ import uim.cake.Datasource\ConnectionManager;
 import uim.cake.Datasource\FixtureInterface;
 import uim.cake.Log\Log;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use Exception;
 
 /**

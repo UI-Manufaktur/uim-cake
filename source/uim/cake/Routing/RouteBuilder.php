@@ -15,7 +15,7 @@ import uim.cake.cores.Exception\MissingPluginException;
 import uim.cake.cores.Plugin;
 import uim.cake.Routing\Route\RedirectRoute;
 import uim.cake.Routing\Route\Route;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 

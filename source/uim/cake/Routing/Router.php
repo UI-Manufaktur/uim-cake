@@ -12,7 +12,7 @@ module uim.cake.Routing;
 import uim.cake.cores.Configure;
 import uim.cake.Http\ServerRequest;
 import uim.cake.Routing\Exception\MissingRouteException;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
 use ReflectionFunction;
 use ReflectionMethod;

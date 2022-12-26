@@ -18,7 +18,7 @@ import uim.cake.Datasource\EntityInterface;
 import uim.cake.Datasource\ResultSetDecorator;
 import uim.cake.Datasource\IResultSet;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use Closure;
 use InvalidArgumentException;
 use RuntimeException;

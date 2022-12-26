@@ -19,7 +19,7 @@ import uim.cake.ORM\Entity;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
 import uim.cake.ORM\Query;
 import uim.cake.ORM\Table;
-import uim.cake.Utility\Hash;
+import uim.cake.utilities.Hash;
 
 /**
  * This class provides a way to translate dynamic data by keeping translations

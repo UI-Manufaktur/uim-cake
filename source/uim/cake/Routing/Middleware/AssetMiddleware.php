@@ -11,7 +11,7 @@ module uim.cake.Routing\Middleware;
 
 import uim.cake.cores.Plugin;
 import uim.cake.Http\Response;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use Laminas\Diactoros\Stream;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

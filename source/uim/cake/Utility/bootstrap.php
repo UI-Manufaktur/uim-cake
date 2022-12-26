@@ -8,7 +8,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 
 // Store the initial state
 Inflector::reset();

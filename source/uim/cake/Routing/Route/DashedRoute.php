@@ -9,7 +9,7 @@
  */
 module uim.cake.Routing\Route;
 
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 
 /**
  * This route class will transparently inflect the controller, action and plugin

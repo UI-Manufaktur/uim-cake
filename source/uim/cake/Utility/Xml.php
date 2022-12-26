@@ -9,7 +9,7 @@
  */
 module uim.cake.Utility;
 
-import uim.cake.Utility\Exception\XmlException;
+import uim.cake.utilities.Exception\XmlException;
 use Closure;
 use DOMDocument;
 use DOMNode;

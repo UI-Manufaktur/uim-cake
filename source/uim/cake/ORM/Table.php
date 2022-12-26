@@ -34,7 +34,7 @@ import uim.cake.ORM\Exception\MissingEntityException;
 import uim.cake.ORM\Exception\PersistenceFailedException;
 import uim.cake.ORM\Exception\RolledbackTransactionException;
 import uim.cake.ORM\Rule\IsUnique;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 import uim.cake.Validation\ValidatorAwareInterface;
 import uim.cake.Validation\ValidatorAwareTrait;
 use Exception;

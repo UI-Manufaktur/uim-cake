@@ -15,7 +15,7 @@ import uim.cake.ORM\Rule\ExistsIn;
 import uim.cake.ORM\Rule\IsUnique;
 import uim.cake.ORM\Rule\LinkConstraint;
 import uim.cake.ORM\Rule\ValidCount;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 
 /**
  * ORM flavoured rules checker.

@@ -9,7 +9,7 @@
  */
 module uim.cake.Utility;
 
-import uim.cake.Utility\Crypto\OpenSsl;
+import uim.cake.utilities.Crypto\OpenSsl;
 use InvalidArgumentException;
 use RuntimeException;
 

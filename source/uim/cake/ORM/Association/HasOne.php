@@ -13,7 +13,7 @@ import uim.cake.Datasource\EntityInterface;
 import uim.cake.ORM\Association;
 import uim.cake.ORM\Association\Loader\SelectLoader;
 import uim.cake.ORM\Table;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use Closure;
 
 /**

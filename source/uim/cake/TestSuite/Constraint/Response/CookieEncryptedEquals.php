@@ -15,7 +15,7 @@
 module uim.cake.TestSuite\Constraint\Response;
 
 import uim.cake.Http\Response;
-import uim.cake.Utility\CookieCryptTrait;
+import uim.cake.utilities.CookieCryptTrait;
 
 /**
  * CookieEncryptedEquals
