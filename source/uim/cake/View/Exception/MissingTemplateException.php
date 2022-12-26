@@ -60,7 +60,7 @@ class MissingTemplateException : CakeException
         }
         this.paths = $paths;
 
-        parent::__construct(this.formatMessage(), $code, $previous);
+        super((this.formatMessage(), $code, $previous);
     }
 
     /**

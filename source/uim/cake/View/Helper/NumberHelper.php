@@ -55,7 +55,7 @@ class NumberHelper : Helper
      */
     public this(View $view, array $config = [])
     {
-        parent::__construct($view, $config);
+        super(($view, $config);
 
         $config = _config;
 

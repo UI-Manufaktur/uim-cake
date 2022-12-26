@@ -96,7 +96,7 @@ class PaginatorHelper : Helper
      */
     public this(View $view, array $config = [])
     {
-        parent::__construct($view, $config);
+        super(($view, $config);
 
         $query = _View.getRequest().getQueryParams();
         unset($query['page'], $query['limit'], $query['sort'], $query['direction']);

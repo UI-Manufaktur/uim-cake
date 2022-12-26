@@ -272,7 +272,7 @@ class FormHelper : Helper
             unset($config['groupedInputTypes']);
         }
 
-        parent::__construct($view, $config);
+        super(($view, $config);
 
         if (!$locator) {
             $locator = new WidgetLocator(this.templater(), _View, $widgets);

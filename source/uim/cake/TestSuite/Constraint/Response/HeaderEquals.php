@@ -36,7 +36,7 @@ class HeaderEquals : ResponseBase
      */
     public this(IResponse $response, string $headerName)
     {
-        parent::__construct($response);
+        super(($response);
 
         this.headerName = $headerName;
     }

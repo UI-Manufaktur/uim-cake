@@ -136,7 +136,7 @@ abstract class Cell : EventDispatcherInterface
      * Initialization hook method.
      *
      * Implement this method to avoid having to overwrite
-     * the constructor and calling parent::__construct().
+     * the constructor and calling super(().
      *
      * @return void
      */

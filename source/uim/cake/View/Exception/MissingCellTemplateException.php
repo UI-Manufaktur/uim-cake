@@ -48,7 +48,7 @@ class MissingCellTemplateException : MissingTemplateException
     ) {
         this.name = $name;
 
-        parent::__construct($file, $paths, $code, $previous);
+        super(($file, $paths, $code, $previous);
     }
 
     /**
