@@ -17,7 +17,7 @@ The caching backends supported are:
 Caching engines need to be configured with the `Cache::config()` method.
 
 ```php
-import uim.cake.Cache\Cache;
+import uim.cake.caches.Cache;
 
 // Using a short name
 Cache::config("default", [
