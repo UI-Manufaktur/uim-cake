@@ -13,14 +13,14 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.Database\Driver;
-import uim.cake.Database\Query;
-import uim.cake.Database\Schema\MysqlSchemaDialect;
-import uim.cake.Database\Schema\SchemaDialect;
-import uim.cake.Database\Statement\MysqlStatement;
-import uim.cake.Database\StatementInterface;
+import uim.cake.databases.Driver;
+import uim.cake.databases.Query;
+import uim.cake.databases.Schema\MysqlSchemaDialect;
+import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.Statement\MysqlStatement;
+import uim.cake.databases.StatementInterface;
 use PDO;
 
 /**

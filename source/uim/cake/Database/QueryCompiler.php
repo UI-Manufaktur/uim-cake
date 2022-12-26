@@ -15,7 +15,7 @@
  */
 module uim.cake.Database;
 
-import uim.cake.Database\Exception\DatabaseException;
+import uim.cake.databases.Exception\DatabaseException;
 use Closure;
 use Countable;
 

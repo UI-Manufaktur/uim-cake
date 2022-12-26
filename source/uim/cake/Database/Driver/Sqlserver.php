@@ -13,22 +13,22 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.Database\Driver;
-import uim.cake.Database\Expression\FunctionExpression;
-import uim.cake.Database\Expression\OrderByExpression;
-import uim.cake.Database\Expression\OrderClauseExpression;
-import uim.cake.Database\Expression\TupleComparison;
-import uim.cake.Database\Expression\UnaryExpression;
-import uim.cake.Database\IExpression;
-import uim.cake.Database\Query;
-import uim.cake.Database\QueryCompiler;
-import uim.cake.Database\Schema\SchemaDialect;
-import uim.cake.Database\Schema\SqlserverSchemaDialect;
-import uim.cake.Database\SqlserverCompiler;
-import uim.cake.Database\Statement\SqlserverStatement;
-import uim.cake.Database\StatementInterface;
+import uim.cake.databases.Driver;
+import uim.cake.databases.Expression\FunctionExpression;
+import uim.cake.databases.Expression\OrderByExpression;
+import uim.cake.databases.Expression\OrderClauseExpression;
+import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.Expression\UnaryExpression;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Query;
+import uim.cake.databases.QueryCompiler;
+import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.Schema\SqlserverSchemaDialect;
+import uim.cake.databases.SqlserverCompiler;
+import uim.cake.databases.Statement\SqlserverStatement;
+import uim.cake.databases.StatementInterface;
 use InvalidArgumentException;
 use PDO;
 

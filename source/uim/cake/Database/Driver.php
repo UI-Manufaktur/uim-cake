@@ -17,11 +17,11 @@ module uim.cake.Database;
 
 import uim.cake.Core\App;
 import uim.cake.Core\Retry\CommandRetry;
-import uim.cake.Database\Exception\MissingConnectionException;
-import uim.cake.Database\Retry\ErrorCodeWaitStrategy;
-import uim.cake.Database\Schema\SchemaDialect;
-import uim.cake.Database\Schema\TableSchema;
-import uim.cake.Database\Statement\PDOStatement;
+import uim.cake.databases.Exception\MissingConnectionException;
+import uim.cake.databases.Retry\ErrorCodeWaitStrategy;
+import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.Schema\TableSchema;
+import uim.cake.databases.Statement\PDOStatement;
 use Closure;
 use InvalidArgumentException;
 use PDO;

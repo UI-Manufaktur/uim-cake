@@ -13,12 +13,12 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.Database\Expression\IdentifierExpression;
-import uim.cake.Database\Expression\QueryExpression;
-import uim.cake.Database\Expression\TupleComparison;
-import uim.cake.Database\Query;
+import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.Expression\QueryExpression;
+import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.Query;
 use RuntimeException;
 
 /**

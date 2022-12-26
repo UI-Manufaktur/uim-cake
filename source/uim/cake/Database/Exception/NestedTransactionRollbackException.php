@@ -13,7 +13,7 @@
  * @since         3.4.3
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Exception;
+module uim.cake.databases.Exception;
 
 import uim.cake.Core\Exception\CakeException;
 use Throwable;

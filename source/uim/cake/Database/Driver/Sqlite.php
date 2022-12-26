@@ -13,19 +13,19 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.Database\Driver;
-import uim.cake.Database\Expression\FunctionExpression;
-import uim.cake.Database\Expression\TupleComparison;
-import uim.cake.Database\Query;
-import uim.cake.Database\QueryCompiler;
-import uim.cake.Database\Schema\SchemaDialect;
-import uim.cake.Database\Schema\SqliteSchemaDialect;
-import uim.cake.Database\SqliteCompiler;
-import uim.cake.Database\Statement\PDOStatement;
-import uim.cake.Database\Statement\SqliteStatement;
-import uim.cake.Database\StatementInterface;
+import uim.cake.databases.Driver;
+import uim.cake.databases.Expression\FunctionExpression;
+import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.Query;
+import uim.cake.databases.QueryCompiler;
+import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.Schema\SqliteSchemaDialect;
+import uim.cake.databases.SqliteCompiler;
+import uim.cake.databases.Statement\PDOStatement;
+import uim.cake.databases.Statement\SqliteStatement;
+import uim.cake.databases.StatementInterface;
 use InvalidArgumentException;
 use PDO;
 use RuntimeException;

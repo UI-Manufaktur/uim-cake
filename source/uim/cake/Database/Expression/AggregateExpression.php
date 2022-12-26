@@ -13,9 +13,9 @@
  * @since         4.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Expression;
+module uim.cake.databases.Expression;
 
-import uim.cake.Database\ValueBinder;
+import uim.cake.databases.ValueBinder;
 use Closure;
 
 /**

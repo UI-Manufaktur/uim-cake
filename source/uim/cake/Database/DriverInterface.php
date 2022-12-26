@@ -15,8 +15,8 @@
  */
 module uim.cake.Database;
 
-import uim.cake.Database\Schema\SchemaDialect;
-import uim.cake.Database\Schema\TableSchema;
+import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.Schema\TableSchema;
 use Closure;
 
 /**

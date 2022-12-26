@@ -13,17 +13,17 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Driver;
+module uim.cake.databases.Driver;
 
-import uim.cake.Database\Driver;
-import uim.cake.Database\Expression\FunctionExpression;
-import uim.cake.Database\Expression\IdentifierExpression;
-import uim.cake.Database\Expression\StringExpression;
-import uim.cake.Database\PostgresCompiler;
-import uim.cake.Database\Query;
-import uim.cake.Database\QueryCompiler;
-import uim.cake.Database\Schema\PostgresSchemaDialect;
-import uim.cake.Database\Schema\SchemaDialect;
+import uim.cake.databases.Driver;
+import uim.cake.databases.Expression\FunctionExpression;
+import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.Expression\StringExpression;
+import uim.cake.databases.PostgresCompiler;
+import uim.cake.databases.Query;
+import uim.cake.databases.QueryCompiler;
+import uim.cake.databases.Schema\PostgresSchemaDialect;
+import uim.cake.databases.Schema\SchemaDialect;
 use PDO;
 
 /**

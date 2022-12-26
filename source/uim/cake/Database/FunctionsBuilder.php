@@ -15,8 +15,8 @@
  */
 module uim.cake.Database;
 
-import uim.cake.Database\Expression\AggregateExpression;
-import uim.cake.Database\Expression\FunctionExpression;
+import uim.cake.databases.Expression\AggregateExpression;
+import uim.cake.databases.Expression\FunctionExpression;
 use InvalidArgumentException;
 
 /**
