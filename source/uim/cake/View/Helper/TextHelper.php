@@ -70,8 +70,7 @@ class TextHelper : Helper
      * @param array<string, mixed> $config Settings array Settings array
      * @throws \Cake\Core\Exception\CakeException when the engine class could not be found.
      */
-    public this(View $view, array $config = [])
-    {
+    public this(View $view, array $config = []) {
         super(($view, $config);
 
         $config = _config;
@@ -92,8 +91,7 @@ class TextHelper : Helper
      * @param array $params Array of params for the method.
      * @return mixed Whatever is returned by called method, or false on failure
      */
-    function __call(string $method, array $params)
-    {
+    function __call(string $method, array $params) {
         return _engine.{$method}(...$params);
     }
 

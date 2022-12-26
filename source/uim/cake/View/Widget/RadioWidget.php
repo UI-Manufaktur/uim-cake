@@ -62,8 +62,7 @@ class RadioWidget : BasicWidget
      * @param \Cake\View\StringTemplate $templates Templates list.
      * @param \Cake\View\Widget\LabelWidget $label Label widget instance.
      */
-    public this(StringTemplate $templates, LabelWidget $label)
-    {
+    public this(StringTemplate $templates, LabelWidget $label) {
         _templates = $templates;
         _label = $label;
     }
@@ -234,8 +233,7 @@ class RadioWidget : BasicWidget
      * @param bool $escape Whether to HTML escape the label.
      * @return string|false Generated label.
      */
-    protected function _renderLabel(array $radio, $label, $input, $context, $escape)
-    {
+    protected function _renderLabel(array $radio, $label, $input, $context, $escape) {
         if (isset($radio['label'])) {
             $label = $radio['label'];
         } elseif ($label == false) {

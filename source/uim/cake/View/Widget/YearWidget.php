@@ -49,8 +49,7 @@ class YearWidget : BasicWidget
      * @param \Cake\View\StringTemplate $templates Templates list.
      * @param \Cake\View\Widget\SelectBoxWidget $selectBox Selectbox widget instance.
      */
-    public this(StringTemplate $templates, SelectBoxWidget $selectBox)
-    {
+    public this(StringTemplate $templates, SelectBoxWidget $selectBox) {
         _select = $selectBox;
         _templates = $templates;
     }
