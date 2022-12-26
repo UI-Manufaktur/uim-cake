@@ -9,7 +9,7 @@
  */
 module uim.cake.TestSuite\Stub;
 
-import uim.cake.Error\ExceptionRendererInterface;
+import uim.cake.errors.ExceptionRendererInterface;
 use LogicException;
 use Psr\Http\Message\IResponse;
 use Throwable;

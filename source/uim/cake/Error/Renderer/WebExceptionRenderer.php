@@ -7,7 +7,7 @@
  * @since         4.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Error\Renderer;
+module uim.cake.errors.Renderer;
 
 import uim.cake.Controller\Controller;
 import uim.cake.Controller\ControllerFactory;
@@ -20,8 +20,8 @@ import uim.cake.Core\Exception\CakeException;
 import uim.cake.Core\Exception\MissingPluginException;
 import uim.cake.Datasource\Exception\RecordNotFoundException;
 import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
-import uim.cake.Error\Debugger;
-import uim.cake.Error\ExceptionRendererInterface;
+import uim.cake.errors.Debugger;
+import uim.cake.errors.ExceptionRendererInterface;
 import uim.cake.Event\Event;
 import uim.cake.Http\Exception\HttpException;
 import uim.cake.Http\Exception\MissingControllerException;

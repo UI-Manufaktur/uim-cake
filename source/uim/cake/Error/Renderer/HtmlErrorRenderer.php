@@ -7,11 +7,11 @@
  * @since         4.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Error\Renderer;
+module uim.cake.errors.Renderer;
 
-import uim.cake.Error\Debugger;
-import uim.cake.Error\ErrorRendererInterface;
-import uim.cake.Error\PhpError;
+import uim.cake.errors.Debugger;
+import uim.cake.errors.ErrorRendererInterface;
+import uim.cake.errors.PhpError;
 
 /**
  * Interactive HTML error rendering with a stack trace.

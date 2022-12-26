@@ -7,7 +7,7 @@
  * @since         4.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Error\Debug;
+module uim.cake.errors.Debug;
 
 /**
  * Dump node for objects/class instances.

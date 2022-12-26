@@ -10,7 +10,7 @@
 module uim.cake.Auth;
 
 import uim.cake.Core\Configure;
-import uim.cake.Error\Debugger;
+import uim.cake.errors.Debugger;
 import uim.cake.Utility\Security;
 
 /**

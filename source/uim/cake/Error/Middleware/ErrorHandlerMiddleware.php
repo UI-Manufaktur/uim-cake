@@ -7,14 +7,14 @@
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Error\Middleware;
+module uim.cake.errors.Middleware;
 
 import uim.cake.Core\App;
 import uim.cake.Core\Configure;
 import uim.cake.Core\InstanceConfigTrait;
-import uim.cake.Error\ErrorHandler;
-import uim.cake.Error\ExceptionTrap;
-import uim.cake.Error\Renderer\WebExceptionRenderer;
+import uim.cake.errors.ErrorHandler;
+import uim.cake.errors.ExceptionTrap;
+import uim.cake.errors.Renderer\WebExceptionRenderer;
 import uim.cake.Http\Exception\RedirectException;
 import uim.cake.Http\Response;
 use InvalidArgumentException;

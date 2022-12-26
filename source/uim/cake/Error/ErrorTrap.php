@@ -4,8 +4,8 @@ module uim.cake.Error;
 
 import uim.cake.Core\Configure;
 import uim.cake.Core\InstanceConfigTrait;
-import uim.cake.Error\Renderer\ConsoleErrorRenderer;
-import uim.cake.Error\Renderer\HtmlErrorRenderer;
+import uim.cake.errors.Renderer\ConsoleErrorRenderer;
+import uim.cake.errors.Renderer\HtmlErrorRenderer;
 import uim.cake.Event\EventDispatcherTrait;
 import uim.cake.Routing\Router;
 use Exception;

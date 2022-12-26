@@ -7,7 +7,7 @@
  * @since         4.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Error\Renderer;
+module uim.cake.errors.Renderer;
 
 import uim.cake.consoles.ConsoleOutput;
 import uim.cake.Core\Configure;

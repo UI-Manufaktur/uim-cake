@@ -9,7 +9,7 @@
  */
 module uim.cake.Error;
 
-import uim.cake.Error\Renderer\WebExceptionRenderer;
+import uim.cake.errors.Renderer\WebExceptionRenderer;
 
 /**
  * Backwards compatible Exception Renderer.

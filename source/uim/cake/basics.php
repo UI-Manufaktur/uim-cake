@@ -9,7 +9,7 @@
  */
 
 import uim.cake.Core\Configure;
-import uim.cake.Error\Debugger;
+import uim.cake.errors.Debugger;
 use Psy\Shell as PsyShell;
 
 define("SECOND", 1);
