@@ -12,9 +12,9 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Console\TestSuite;
+module uim.cake.consoles.TestSuite;
 
-import uim.cake.Console\ConsoleIo;
+import uim.cake.consoles.ConsoleIo;
 
 /**
  * Class that dispatches to the legacy ShellDispatcher using the same signature

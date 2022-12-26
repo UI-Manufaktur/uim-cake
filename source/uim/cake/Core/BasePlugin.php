@@ -14,7 +14,7 @@
  */
 module uim.cake.Core;
 
-import uim.cake.Console\CommandCollection;
+import uim.cake.consoles.CommandCollection;
 import uim.cake.Http\MiddlewareQueue;
 import uim.cake.Routing\RouteBuilder;
 use Closure;

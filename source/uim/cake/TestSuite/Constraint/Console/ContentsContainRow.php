@@ -1,5 +1,5 @@
 
 
-import uim.cake.Console\TestSuite\Constraint\ContentsContainRow;
+import uim.cake.consoles.TestSuite\Constraint\ContentsContainRow;
 
 class_alias(ContentsContainRow::class, 'Cake\TestSuite\Constraint\Console\ContentsContainRow');

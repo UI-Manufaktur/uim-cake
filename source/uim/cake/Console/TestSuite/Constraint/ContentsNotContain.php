@@ -12,7 +12,7 @@
  * @since         3.7.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Console\TestSuite\Constraint;
+module uim.cake.consoles.TestSuite\Constraint;
 
 /**
  * ContentsNotContain

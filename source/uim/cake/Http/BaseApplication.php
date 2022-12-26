@@ -16,7 +16,7 @@
 
 module uim.cake.Http;
 
-import uim.cake.Console\CommandCollection;
+import uim.cake.consoles.CommandCollection;
 import uim.cake.Controller\ControllerFactory;
 import uim.cake.Core\IConsoleApplication;
 import uim.cake.Core\Container;

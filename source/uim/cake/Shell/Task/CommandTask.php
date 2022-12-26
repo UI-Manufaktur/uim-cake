@@ -15,7 +15,7 @@
  */
 module uim.cake.Shell\Task;
 
-import uim.cake.Console\Shell;
+import uim.cake.consoles.Shell;
 import uim.cake.Core\App;
 import uim.cake.Core\Plugin;
 import uim.cake.Filesystem\Filesystem;

@@ -15,7 +15,7 @@
  */
 module uim.cake.Error\Renderer;
 
-import uim.cake.Console\ConsoleOutput;
+import uim.cake.consoles.ConsoleOutput;
 import uim.cake.Error\ErrorRendererInterface;
 import uim.cake.Error\PhpError;
 

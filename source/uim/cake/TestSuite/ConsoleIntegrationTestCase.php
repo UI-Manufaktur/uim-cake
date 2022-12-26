@@ -14,7 +14,7 @@
  */
 module uim.cake.TestSuite;
 
-import uim.cake.Console\TestSuite\ConsoleIntegrationTestTrait;
+import uim.cake.consoles.TestSuite\ConsoleIntegrationTestTrait;
 
 /**
  * A test case class intended to make integration tests of cake console commands

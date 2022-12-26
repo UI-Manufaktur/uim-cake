@@ -12,18 +12,18 @@
  * @since         3.7.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Console\TestSuite;
+module uim.cake.consoles.TestSuite;
 
 import uim.cake.Command\Command;
-import uim.cake.Console\CommandRunner;
-import uim.cake.Console\ConsoleIo;
-import uim.cake.Console\Exception\StopException;
-import uim.cake.Console\TestSuite\Constraint\ContentsContain;
-import uim.cake.Console\TestSuite\Constraint\ContentsContainRow;
-import uim.cake.Console\TestSuite\Constraint\ContentsEmpty;
-import uim.cake.Console\TestSuite\Constraint\ContentsNotContain;
-import uim.cake.Console\TestSuite\Constraint\ContentsRegExp;
-import uim.cake.Console\TestSuite\Constraint\ExitCode;
+import uim.cake.consoles.CommandRunner;
+import uim.cake.consoles.ConsoleIo;
+import uim.cake.consoles.Exception\StopException;
+import uim.cake.consoles.TestSuite\Constraint\ContentsContain;
+import uim.cake.consoles.TestSuite\Constraint\ContentsContainRow;
+import uim.cake.consoles.TestSuite\Constraint\ContentsEmpty;
+import uim.cake.consoles.TestSuite\Constraint\ContentsNotContain;
+import uim.cake.consoles.TestSuite\Constraint\ContentsRegExp;
+import uim.cake.consoles.TestSuite\Constraint\ExitCode;
 import uim.cake.Core\TestSuite\ContainerStubTrait;
 use RuntimeException;
 

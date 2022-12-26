@@ -15,7 +15,7 @@
  */
 module uim.cake.Log\Engine;
 
-import uim.cake.Console\ConsoleOutput;
+import uim.cake.consoles.ConsoleOutput;
 import uim.cake.Log\Formatter\DefaultFormatter;
 use InvalidArgumentException;
 

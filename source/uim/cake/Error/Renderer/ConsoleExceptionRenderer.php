@@ -15,7 +15,7 @@
  */
 module uim.cake.Error\Renderer;
 
-import uim.cake.Console\ConsoleOutput;
+import uim.cake.consoles.ConsoleOutput;
 import uim.cake.Core\Configure;
 import uim.cake.Core\Exception\CakeException;
 use Psr\Http\Message\IServerRequest;

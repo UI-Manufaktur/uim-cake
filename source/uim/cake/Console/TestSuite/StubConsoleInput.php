@@ -12,9 +12,9 @@
  * @link          https://cakephp.org CakePHP Project
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Console\TestSuite;
+module uim.cake.consoles.TestSuite;
 
-import uim.cake.Console\ConsoleInput;
+import uim.cake.consoles.ConsoleInput;
 use NumberFormatter;
 
 /**

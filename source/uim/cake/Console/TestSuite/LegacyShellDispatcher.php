@@ -12,11 +12,11 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Console\TestSuite;
+module uim.cake.consoles.TestSuite;
 
-import uim.cake.Console\ConsoleIo;
-import uim.cake.Console\Shell;
-import uim.cake.Console\ShellDispatcher;
+import uim.cake.consoles.ConsoleIo;
+import uim.cake.consoles.Shell;
+import uim.cake.consoles.ShellDispatcher;
 
 /**
  * Allows injecting mock IO into shells

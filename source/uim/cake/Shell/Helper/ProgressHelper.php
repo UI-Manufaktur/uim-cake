@@ -15,7 +15,7 @@
  */
 module uim.cake.Shell\Helper;
 
-import uim.cake.Console\Helper;
+import uim.cake.consoles.Helper;
 use RuntimeException;
 
 /**

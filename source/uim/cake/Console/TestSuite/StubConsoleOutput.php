@@ -12,9 +12,9 @@
  * @link          https://cakephp.org CakePHP Project
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Console\TestSuite;
+module uim.cake.consoles.TestSuite;
 
-import uim.cake.Console\ConsoleOutput;
+import uim.cake.consoles.ConsoleOutput;
 
 /**
  * StubOutput makes testing shell commands/shell helpers easier.
@@ -23,8 +23,8 @@ import uim.cake.Console\ConsoleOutput;
  * that your command/task/helper uses:
  *
  * ```
- * import uim.cake.Console\ConsoleIo;
- * import uim.cake.Console\TestSuite\StubConsoleOutput;
+ * import uim.cake.consoles.ConsoleIo;
+ * import uim.cake.consoles.TestSuite\StubConsoleOutput;
  *
  * $output = new StubConsoleOutput();
  * $io = new ConsoleIo($output);
