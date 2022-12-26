@@ -52,8 +52,7 @@ abstract class BaseLog : AbstractLogger
      *
      * @param array<string, mixed> $config Configuration array
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         this.setConfig($config);
 
         if (!is_array(_config["scopes"]) && _config["scopes"] != false) {
@@ -106,8 +105,7 @@ abstract class BaseLog : AbstractLogger
      *
      * @return array<string>|false
      */
-    function scopes()
-    {
+    function scopes() {
         return _config["scopes"];
     }
 

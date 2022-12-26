@@ -73,8 +73,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      *
      * @param array<string, mixed> $config Config options. See $_config for valid keys.
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         _config = $config + _config;
     }
 
@@ -134,8 +133,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * @param callable $callback A callable.
      * @return this
      */
-    function skipCheckCallback(callable $callback)
-    {
+    function skipCheckCallback(callable $callback) {
         this.skipCheckCallback = $callback;
 
         return this;

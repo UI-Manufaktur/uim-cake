@@ -31,8 +31,7 @@ class RedirectException : HttpException
      * @param int $code The exception code that will be used as a HTTP status code
      * @param array $headers The headers that should be sent in the unauthorized challenge response.
      */
-    public this(string $target, int $code = 302, array $headers = [])
-    {
+    public this(string $target, int $code = 302, array $headers = []) {
         super(($target, $code);
 
         foreach ($headers as $key: $value) {
@@ -48,8 +47,7 @@ class RedirectException : HttpException
      * @return this
      * @deprecated 4.2.0 Use `setHeaders()` instead.
      */
-    function addHeaders(array $headers)
-    {
+    function addHeaders(array $headers) {
         deprecationWarning("RedirectException::addHeaders() is deprecated, use setHeaders() instead.");
 
         foreach ($headers as $key: $value) {
@@ -66,8 +64,7 @@ class RedirectException : HttpException
      * @return this
      * @deprecated 4.2.0 Use `setHeaders()` instead.
      */
-    function removeHeader(string $key)
-    {
+    function removeHeader(string $key) {
         deprecationWarning("RedirectException::removeHeader() is deprecated, use setHeaders() instead.");
 
         unset(this.headers[$key]);

@@ -98,8 +98,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param array<string, mixed> $config Config options. See $_config for valid keys.
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         if (array_key_exists("httpOnly", $config)) {
             $config["httponly"] = $config["httpOnly"];
             deprecationWarning("Option `httpOnly` is deprecated. Use lowercased `httponly` instead.");
@@ -177,8 +176,7 @@ class CsrfProtectionMiddleware : IMiddleware
      * @param callable $callback A callable.
      * @return this
      */
-    function whitelistCallback(callable $callback)
-    {
+    function whitelistCallback(callable $callback) {
         deprecationWarning("`whitelistCallback()` is deprecated. Use `skipCheckCallback()` instead.");
         this.skipCheckCallback = $callback;
 
@@ -194,8 +192,7 @@ class CsrfProtectionMiddleware : IMiddleware
      * @param callable $callback A callable.
      * @return this
      */
-    function skipCheckCallback(callable $callback)
-    {
+    function skipCheckCallback(callable $callback) {
         this.skipCheckCallback = $callback;
 
         return this;

@@ -40,8 +40,7 @@ class FormatterLocator
      * @param array<string, class-string<\Cake\I18n\FormatterInterface>> $registry An array of key-value pairs where the key is the
      * formatter name the value is a FQCN for the formatter.
      */
-    public this(array $registry = [])
-    {
+    public this(array $registry = []) {
         foreach ($registry as $name: $spec) {
             this.set($name, $spec);
         }

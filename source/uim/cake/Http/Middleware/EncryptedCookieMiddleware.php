@@ -63,8 +63,7 @@ class EncryptedCookieMiddleware : IMiddleware
      * @param string $key The encryption key to use.
      * @param string $cipherType The cipher type to use. Defaults to "aes".
      */
-    public this(array $cookieNames, string $key, string $cipherType = "aes")
-    {
+    public this(array $cookieNames, string $key, string $cipherType = "aes") {
         this.cookieNames = $cookieNames;
         this.key = $key;
         this.cipherType = $cipherType;

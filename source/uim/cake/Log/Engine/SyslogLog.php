@@ -88,8 +88,7 @@ class SyslogLog : BaseLog
     /**
      * @inheritDoc
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         if (isset($config["format"])) {
             deprecationWarning(
                 "`format` option is now deprecated in favor of custom formatters. " .
@@ -166,8 +165,7 @@ class SyslogLog : BaseLog
     /**
      * Closes the logger connection
      */
-    function __destruct()
-    {
+    function __destruct() {
         closelog();
     }
 }

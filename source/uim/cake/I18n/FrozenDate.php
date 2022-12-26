@@ -124,8 +124,7 @@ class FrozenDate : ChronosDate : I18nDateTimeInterface
      * @param \DateTimeZone|string|null $tz The timezone in which the date is taken.
      *                                  Ignored if `$time` is a DateTimeInterface instance.
      */
-    public this($time = 'now', $tz = null)
-    {
+    public this($time = 'now', $tz = null) {
         super(($time, $tz);
     }
 

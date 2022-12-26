@@ -83,8 +83,7 @@ class MessagesFileLoader
      * @param string $extension The file extension to use. This will also be mapped
      * to a messages parser class.
      */
-    public this(string $name, string $locale, string $extension = 'po')
-    {
+    public this(string $name, string $locale, string $extension = 'po') {
         _name = $name;
         _locale = $locale;
         _extension = $extension;
@@ -98,8 +97,7 @@ class MessagesFileLoader
      * @throws \RuntimeException if no file parser class could be found for the specified
      * file extension.
      */
-    function __invoke()
-    {
+    function __invoke() {
         $folders = this.translationsFolders();
         $ext = _extension;
         $file = false;

@@ -104,8 +104,7 @@ class Package
      * @param string $key the key of the message to return
      * @return array|string|false The message translation, or false if not found.
      */
-    function getMessage(string $key)
-    {
+    function getMessage(string $key) {
         return this.messages[$key] ?? false;
     }
 

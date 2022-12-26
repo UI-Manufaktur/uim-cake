@@ -120,8 +120,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @param \DateTimeInterface|string|int|null $time Fixed or relative time
      * @param \DateTimeZone|string|null $tz The timezone for the instance
      */
-    public this($time = null, $tz = null)
-    {
+    public this($time = null, $tz = null) {
         if ($time instanceof DateTimeInterface) {
             $tz = $time.getTimezone();
             $time = $time.format('Y-m-d H:i:s.u');

@@ -84,8 +84,7 @@ class FileLog : BaseLog
      *
      * @param array<string, mixed> $config Configuration array
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         super(($config);
 
         _path = this.getConfig("path", sys_get_temp_dir() . DIRECTORY_SEPARATOR);

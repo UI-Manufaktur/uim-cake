@@ -120,8 +120,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @param \DateTimeInterface|string|int|null $time Fixed or relative time
      * @param \DateTimeZone|string|null $tz The timezone for the instance
      */
-    public this($time = null, $tz = null)
-    {
+    public this($time = null, $tz = null) {
         deprecationWarning(
             'The `Time` class has been deprecated. Use the immutable alternative `FrozenTime` instead',
             0
@@ -190,8 +189,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @param bool $range Range.
      * @return array<string>|int 1, 2, 3, or 4 quarter of year, or array if $range true
      */
-    function toQuarter(bool $range = false)
-    {
+    function toQuarter(bool $range = false) {
         $quarter = (int)ceil((int)this.format('m') / 3);
         if ($range == false) {
             return $quarter;

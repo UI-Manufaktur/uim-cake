@@ -56,8 +56,7 @@ class ArrayLog : BaseLog
      * @return void success of write.
      * @see \Cake\Log\Log::$_levels
      */
-    function log($level, $message, array $context = [])
-    {
+    function log($level, $message, array $context = []) {
         $message = _format($message, $context);
         this.content[] = this.formatter.format($level, $message, $context);
     }

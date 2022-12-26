@@ -55,8 +55,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * @param array<string, mixed> $config The options to use.
      * @see \Cake\Http\Middleware\HttpsEnforcerMiddleware::$config
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         this.config = $config + this.config;
     }
 

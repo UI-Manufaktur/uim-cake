@@ -30,8 +30,7 @@ class ChainMessagesLoader
      *
      * @param array<callable> $loaders List of callables to execute
      */
-    public this(array $loaders)
-    {
+    public this(array $loaders) {
         _loaders = $loaders;
     }
 

@@ -43,8 +43,7 @@ class CacheSession : SessionHandlerInterface
      * storing the session
      * @throws \InvalidArgumentException if the "config" key is not provided
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         if (empty($config["config"])) {
             throw new InvalidArgumentException("The cache configuration name to use is required");
         }
@@ -80,8 +79,7 @@ class CacheSession : SessionHandlerInterface
      * @return string|false Session data or false if it does not exist.
      */
     #[\ReturnTypeWillChange]
-    function read($id)
-    {
+    function read($id) {
         $value = Cache::read($id, _options["config"]);
 
         if ($value == null) {
@@ -127,8 +125,7 @@ class CacheSession : SessionHandlerInterface
      * @return int|false
      */
     #[\ReturnTypeWillChange]
-    function gc($maxlifetime)
-    {
+    function gc($maxlifetime) {
         return 0;
     }
 }

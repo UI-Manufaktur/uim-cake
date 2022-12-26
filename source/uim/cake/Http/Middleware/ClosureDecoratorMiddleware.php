@@ -43,8 +43,7 @@ class ClosureDecoratorMiddleware : IMiddleware
      *
      * @param \Closure $callable A closure.
      */
-    public this(Closure $callable)
-    {
+    public this(Closure $callable) {
         this.callable = $callable;
     }
 

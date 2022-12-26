@@ -41,8 +41,7 @@ class LocaleSelectorMiddleware : IMiddleware
      * @param array $locales A list of accepted locales, or ['*'] to accept any
      *   locale header value.
      */
-    public this(array $locales = [])
-    {
+    public this(array $locales = []) {
         this.locales = $locales;
     }
 

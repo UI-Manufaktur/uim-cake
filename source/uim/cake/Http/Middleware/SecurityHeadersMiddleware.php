@@ -103,8 +103,7 @@ class SecurityHeadersMiddleware : IMiddleware
      * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options
      * @return this
      */
-    function noSniff()
-    {
+    function noSniff() {
         this.headers["x-content-type-options"] = self::NOSNIFF;
 
         return this;
@@ -118,8 +117,7 @@ class SecurityHeadersMiddleware : IMiddleware
      * @link https://msdn.microsoft.com/en-us/library/jj542450(v=vs.85).aspx
      * @return this
      */
-    function noOpen()
-    {
+    function noOpen() {
         this.headers["x-download-options"] = self::NOOPEN;
 
         return this;
@@ -133,8 +131,7 @@ class SecurityHeadersMiddleware : IMiddleware
      *     "origin-when-cross-origin", "same-origin", "strict-origin", "strict-origin-when-cross-origin", "unsafe-url"
      * @return this
      */
-    function setReferrerPolicy(string $policy = self::SAME_ORIGIN)
-    {
+    function setReferrerPolicy(string $policy = self::SAME_ORIGIN) {
         $available = [
             self::NO_REFERRER,
             self::NO_REFERRER_WHEN_DOWNGRADE,
@@ -160,8 +157,7 @@ class SecurityHeadersMiddleware : IMiddleware
      * @param string|null $url URL if mode is `allow-from`
      * @return this
      */
-    function setXFrameOptions(string $option = self::SAMEORIGIN, ?string $url = null)
-    {
+    function setXFrameOptions(string $option = self::SAMEORIGIN, ?string $url = null) {
         this.checkValues($option, [self::DENY, self::SAMEORIGIN, self::ALLOW_FROM]);
 
         if ($option == self::ALLOW_FROM) {
@@ -183,8 +179,7 @@ class SecurityHeadersMiddleware : IMiddleware
      * @param string $mode Mode value. Available Values: "1", "0", "block"
      * @return this
      */
-    function setXssProtection(string $mode = self::XSS_BLOCK)
-    {
+    function setXssProtection(string $mode = self::XSS_BLOCK) {
         if ($mode == self::XSS_BLOCK) {
             $mode = self::XSS_ENABLED_BLOCK;
         }
@@ -203,8 +198,7 @@ class SecurityHeadersMiddleware : IMiddleware
      *     "by-ftp-filename"
      * @return this
      */
-    function setCrossDomainPolicy(string $policy = self::ALL)
-    {
+    function setCrossDomainPolicy(string $policy = self::ALL) {
         this.checkValues($policy, [
             self::ALL,
             self::NONE,

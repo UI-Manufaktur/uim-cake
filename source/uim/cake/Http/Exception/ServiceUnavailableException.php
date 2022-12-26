@@ -32,8 +32,7 @@ class ServiceUnavailableException : HttpException
      * @param int|null $code Status code, defaults to 503
      * @param \Throwable|null $previous The previous exception.
      */
-    public this(?string $message = null, ?int $code = null, ?Throwable $previous = null)
-    {
+    public this(?string $message = null, ?int $code = null, ?Throwable $previous = null) {
         if (empty($message)) {
             $message = "Service Unavailable";
         }
