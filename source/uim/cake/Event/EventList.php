@@ -65,8 +65,7 @@ class EventList : ArrayAccess, Countable
      * @return mixed Can return all value types.
      */
     #[\ReturnTypeWillChange]
-    function offsetGet($offset)
-    {
+    function offsetGet($offset) {
         if (this.offsetExists($offset)) {
             return _events[$offset];
         }

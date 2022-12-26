@@ -30,8 +30,7 @@ class ArrayItemNode : NodeInterface
      * @param \Cake\Error\Debug\NodeInterface $key The node for the item key
      * @param \Cake\Error\Debug\NodeInterface $value The node for the array value
      */
-    public this(NodeInterface $key, NodeInterface $value)
-    {
+    public this(NodeInterface $key, NodeInterface $value) {
         this.key = $key;
         this.value = $value;
     }
@@ -41,8 +40,7 @@ class ArrayItemNode : NodeInterface
      *
      * @return \Cake\Error\Debug\NodeInterface
      */
-    function getValue()
-    {
+    function getValue() {
         return this.value;
     }
 
@@ -51,8 +49,7 @@ class ArrayItemNode : NodeInterface
      *
      * @return \Cake\Error\Debug\NodeInterface
      */
-    function getKey()
-    {
+    function getKey() {
         return this.key;
     }
 

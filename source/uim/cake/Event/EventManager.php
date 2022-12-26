@@ -72,8 +72,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\EventManager|null $manager Event manager instance.
      * @return \Cake\Event\EventManager The global event manager
      */
-    public static function instance(?EventManager $manager = null)
-    {
+    public static function instance(?EventManager $manager = null) {
         if ($manager instanceof EventManager) {
             static::$_generalManager = $manager;
         }
@@ -89,8 +88,7 @@ class EventManager : IEventManager
     /**
      * @inheritDoc
      */
-    function on($eventKey, $options = [], ?callable $callable = null)
-    {
+    function on($eventKey, $options = [], ?callable $callable = null) {
         if ($eventKey instanceof IEventListener) {
             _attachSubscriber($eventKey);
 
@@ -167,8 +165,7 @@ class EventManager : IEventManager
     /**
      * @inheritDoc
      */
-    function off($eventKey, $callable = null)
-    {
+    function off($eventKey, $callable = null) {
         if ($eventKey instanceof IEventListener) {
             _detachSubscriber($eventKey);
 
@@ -295,8 +292,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\IEvent $event Event instance.
      * @return mixed The result of the $listener function.
      */
-    protected function _callListener(callable $listener, IEvent $event)
-    {
+    protected function _callListener(callable $listener, IEvent $event) {
         $data = (array)$event.getData();
 
         return $listener($event, ...array_values($data));
@@ -381,8 +377,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\IEvent $event An event to add to the list.
      * @return this
      */
-    function addEventToList(IEvent $event)
-    {
+    function addEventToList(IEvent $event) {
         if (_eventList) {
             _eventList.add($event);
         }
@@ -396,8 +391,7 @@ class EventManager : IEventManager
      * @param bool $enabled True or false to enable / disable it.
      * @return this
      */
-    function trackEvents(bool $enabled)
-    {
+    function trackEvents(bool $enabled) {
         _trackEvents = $enabled;
 
         return this;
@@ -419,8 +413,7 @@ class EventManager : IEventManager
      * @param \Cake\Event\EventList $eventList The event list object to use.
      * @return this
      */
-    function setEventList(EventList $eventList)
-    {
+    function setEventList(EventList $eventList) {
         _eventList = $eventList;
         _trackEvents = true;
 
@@ -432,8 +425,7 @@ class EventManager : IEventManager
      *
      * @return this
      */
-    function unsetEventList()
-    {
+    function unsetEventList() {
         _eventList = null;
         _trackEvents = false;
 

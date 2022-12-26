@@ -30,8 +30,7 @@ class ScalarNode : NodeInterface
      * @param string $type The type of scalar value.
      * @param string|float|int|bool|null $value The wrapped value.
      */
-    public this(string $type, $value)
-    {
+    public this(string $type, $value) {
         this.type = $type;
         this.value = $value;
     }
@@ -51,8 +50,7 @@ class ScalarNode : NodeInterface
      *
      * @return string|float|int|bool|null
      */
-    function getValue()
-    {
+    function getValue() {
         return this.value;
     }
 

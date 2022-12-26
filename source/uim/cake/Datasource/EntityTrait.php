@@ -117,8 +117,7 @@ trait EntityTrait
      * @param string $field Name of the field to access
      * @return mixed
      */
-    function &__get(string $field)
-    {
+    function &__get(string $field) {
         return this.get($field);
     }
 
@@ -212,8 +211,7 @@ trait EntityTrait
      * @return this
      * @throws \InvalidArgumentException
      */
-    function set($field, $value = null, array $options = [])
-    {
+    function set($field, $value = null, array $options = []) {
         if (is_string($field) && $field != "") {
             $guard = false;
             $field = [$field: $value];
@@ -265,8 +263,7 @@ trait EntityTrait
      * @return mixed
      * @throws \InvalidArgumentException if an empty field name is passed
      */
-    function &get(string $field)
-    {
+    function &get(string $field) {
         if ($field == "") {
             throw new InvalidArgumentException("Cannot get an empty field");
         }
@@ -294,8 +291,7 @@ trait EntityTrait
      * @return mixed
      * @throws \InvalidArgumentException if an empty field name is passed.
      */
-    function getOriginal(string $field)
-    {
+    function getOriginal(string $field) {
         if ($field == "") {
             throw new InvalidArgumentException("Cannot get an empty field");
         }
@@ -431,8 +427,7 @@ trait EntityTrait
      * @param array<string>|string $field The field to unset.
      * @return this
      */
-    function unset($field)
-    {
+    function unset($field) {
         $field = (array)$field;
         foreach ($field as $p) {
             unset(_fields[$p], _original[$p], _dirty[$p]);
@@ -448,8 +443,7 @@ trait EntityTrait
      * @param array<string>|string $field The field to unset.
      * @return this
      */
-    function unsetProperty($field)
-    {
+    function unsetProperty($field) {
         deprecationWarning("EntityTrait::unsetProperty() is deprecated. Use unset() instead.");
 
         return this.unset($field);
@@ -462,8 +456,7 @@ trait EntityTrait
      * @param bool $merge Merge the new fields with the existing. By default false.
      * @return this
      */
-    function setHidden(array $fields, bool $merge = false)
-    {
+    function setHidden(array $fields, bool $merge = false) {
         if ($merge == false) {
             _hidden = $fields;
 
@@ -493,8 +486,7 @@ trait EntityTrait
      * @param bool $merge Merge the new fields with the existing. By default false.
      * @return this
      */
-    function setVirtual(array $fields, bool $merge = false)
-    {
+    function setVirtual(array $fields, bool $merge = false) {
         if ($merge == false) {
             _virtual = $fields;
 
@@ -595,8 +587,7 @@ trait EntityTrait
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function &offsetGet($offset)
-    {
+    function &offsetGet($offset) {
         return this.get($offset);
     }
 
@@ -738,8 +729,7 @@ trait EntityTrait
      * it was not changed. Defaults to true.
      * @return this
      */
-    function setDirty(string $field, bool $isDirty = true)
-    {
+    function setDirty(string $field, bool $isDirty = true) {
         if ($isDirty == false) {
             unset(_dirty[$field]);
 
@@ -801,8 +791,7 @@ trait EntityTrait
      * @param bool $new Indicate whether this entity has been persisted.
      * @return this
      */
-    function setNew(bool $new)
-    {
+    function setNew(bool $new) {
         if ($new) {
             foreach (_fields as $k: $p) {
                 _dirty[$k] = true;
@@ -905,8 +894,7 @@ trait EntityTrait
      * @param bool $overwrite Whether to overwrite pre-existing errors for $fields
      * @return this
      */
-    function setErrors(array $errors, bool $overwrite = false)
-    {
+    function setErrors(array $errors, bool $overwrite = false) {
         if ($overwrite) {
             foreach ($errors as $f: $error) {
                 _errors[$f] = (array)$error;
@@ -948,8 +936,7 @@ trait EntityTrait
      * @param bool $overwrite Whether to overwrite pre-existing errors for $field
      * @return this
      */
-    function setError(string $field, $errors, bool $overwrite = false)
-    {
+    function setError(string $field, $errors, bool $overwrite = false) {
         if (is_string($errors)) {
             $errors = [$errors];
         }
@@ -1077,8 +1064,7 @@ trait EntityTrait
      * @param string $field The name of the field.
      * @return mixed|null
      */
-    function getInvalidField(string $field)
-    {
+    function getInvalidField(string $field) {
         return _invalid[$field] ?? null;
     }
 
@@ -1093,8 +1079,7 @@ trait EntityTrait
      * @param bool $overwrite Whether to overwrite pre-existing values for $field.
      * @return this
      */
-    function setInvalid(array $fields, bool $overwrite = false)
-    {
+    function setInvalid(array $fields, bool $overwrite = false) {
         foreach ($fields as $field: $value) {
             if ($overwrite == true) {
                 _invalid[$field] = $value;
@@ -1113,8 +1098,7 @@ trait EntityTrait
      * @param mixed $value The invalid value to be set for $field.
      * @return this
      */
-    function setInvalidField(string $field, $value)
-    {
+    function setInvalidField(string $field, $value) {
         _invalid[$field] = $value;
 
         return this;
@@ -1144,8 +1128,7 @@ trait EntityTrait
      * mark it as protected.
      * @return this
      */
-    function setAccess($field, bool $set)
-    {
+    function setAccess($field, bool $set) {
         if ($field == "*") {
             _accessible = array_map(function ($p) use ($set) {
                 return $set;
@@ -1208,8 +1191,7 @@ trait EntityTrait
      * @param string $alias the alias of the repository
      * @return this
      */
-    function setSource(string $alias)
-    {
+    function setSource(string $alias) {
         _registryAlias = $alias;
 
         return this;

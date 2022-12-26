@@ -83,8 +83,7 @@ trait QueryTrait
      * @param \Cake\Datasource\RepositoryInterface|\Cake\ORM\Table $repository The default table object to use
      * @return this
      */
-    function repository(RepositoryInterface $repository)
-    {
+    function repository(RepositoryInterface $repository) {
         _repository = $repository;
 
         return this;
@@ -113,8 +112,7 @@ trait QueryTrait
      * @param iterable $results The results this query should return.
      * @return this
      */
-    function setResult(iterable $results)
-    {
+    function setResult(iterable $results) {
         _results = $results;
 
         return this;
@@ -130,8 +128,7 @@ trait QueryTrait
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[\ReturnTypeWillChange]
-    function getIterator()
-    {
+    function getIterator() {
         return this.all();
     }
 
@@ -171,8 +168,7 @@ trait QueryTrait
      *   a cache engine instance.
      * @return this
      */
-    function cache($key, $config = "default")
-    {
+    function cache($key, $config = "default") {
         if ($key == false) {
             _cache = null;
 
@@ -200,8 +196,7 @@ trait QueryTrait
      * @param bool $value Whether to eager load.
      * @return this
      */
-    function eagerLoaded(bool $value)
-    {
+    function eagerLoaded(bool $value) {
         _eagerLoaded = $value;
 
         return this;
@@ -314,8 +309,7 @@ trait QueryTrait
      * @return this
      * @see \Cake\Collection\Iterator\MapReduce for details on how to use emit data to the map reducer.
      */
-    function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false)
-    {
+    function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false) {
         if ($overwrite) {
             _mapReduce = [];
         }
@@ -433,8 +427,7 @@ trait QueryTrait
      * @return this
      * @throws \InvalidArgumentException
      */
-    function formatResults(?callable $formatter = null, $mode = self::APPEND)
-    {
+    function formatResults(?callable $formatter = null, $mode = self::APPEND) {
         if ($mode == self::OVERWRITE) {
             _formatters = [];
         }
@@ -479,8 +472,7 @@ trait QueryTrait
      *
      * @return \Cake\Datasource\EntityInterface|array|null The first result from the ResultSet.
      */
-    function first()
-    {
+    function first() {
         if (_dirty) {
             this.limit(1);
         }
@@ -494,8 +486,7 @@ trait QueryTrait
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When there is no first record.
      * @return \Cake\Datasource\EntityInterface|array The first result from the ResultSet.
      */
-    function firstOrFail()
-    {
+    function firstOrFail() {
         $entity = this.first();
         if (!$entity) {
             $table = this.getRepository();
@@ -537,8 +528,7 @@ trait QueryTrait
      * @return mixed
      * @throws \BadMethodCallException if no such method exists in result set
      */
-    function __call(string $method, array $arguments)
-    {
+    function __call(string $method, array $arguments) {
         $resultSetClass = _decoratorClass();
         if (in_array($method, get_class_methods($resultSetClass), true)) {
             deprecationWarning(sprintf(

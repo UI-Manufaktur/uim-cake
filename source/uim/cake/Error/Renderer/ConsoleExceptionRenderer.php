@@ -47,8 +47,7 @@ class ConsoleExceptionRenderer
      * @param \Psr\Http\Message\IServerRequest|null $request Not used.
      * @param array $config Error handling configuration.
      */
-    public this(Throwable $error, ?IServerRequest $request, array $config)
-    {
+    public this(Throwable $error, ?IServerRequest $request, array $config) {
         this.error = $error;
         this.output = $config['stderr'] ?? new ConsoleOutput('php://stderr');
         this.trace = $config['trace'] ?? true;
@@ -59,8 +58,7 @@ class ConsoleExceptionRenderer
      *
      * @return \Psr\Http\Message\IResponse|string
      */
-    function render()
-    {
+    function render() {
         $exceptions = [this.error];
         $previous = this.error.getPrevious();
         while ($previous != null) {

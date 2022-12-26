@@ -53,8 +53,7 @@ class JsonType : BaseType : BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
      * @return array|string|null
      */
-    function toPHP($value, DriverInterface $driver)
-    {
+    function toPHP($value, DriverInterface $driver) {
         if (!is_string($value)) {
             return null;
         }
@@ -96,8 +95,7 @@ class JsonType : BaseType : BatchCastingInterface
      * @param mixed $value The value to convert.
      * @return mixed Converted value.
      */
-    function marshal($value)
-    {
+    function marshal($value) {
         return $value;
     }
 
@@ -108,8 +106,7 @@ class JsonType : BaseType : BatchCastingInterface
      * @return this
      * @see https://www.php.net/manual/en/function.json-encode.php
      */
-    function setEncodingOptions(int $options)
-    {
+    function setEncodingOptions(int $options) {
         _encodingOptions = $options;
 
         return this;

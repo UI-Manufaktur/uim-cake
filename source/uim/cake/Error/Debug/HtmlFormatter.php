@@ -33,8 +33,7 @@ class HtmlFormatter : FormatterInterface
     /**
      * Constructor.
      */
-    public this()
-    {
+    public this() {
         this.id = uniqid('', true);
     }
 

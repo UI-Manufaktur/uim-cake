@@ -66,8 +66,7 @@ class ConnectionRegistry : ObjectRegistry
      * @param array<string, mixed> $config An array of settings to use for the datasource.
      * @return \Cake\Datasource\ConnectionInterface A connection with the correct settings.
      */
-    protected function _create($class, string $alias, array $config)
-    {
+    protected function _create($class, string $alias, array $config) {
         if (is_callable($class)) {
             return $class($alias);
         }
@@ -88,8 +87,7 @@ class ConnectionRegistry : ObjectRegistry
      * @param string $name The adapter name.
      * @return this
      */
-    function unload(string $name)
-    {
+    function unload(string $name) {
         unset(_loaded[$name]);
 
         return this;

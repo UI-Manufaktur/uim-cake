@@ -146,8 +146,7 @@ class Debugger
     /**
      * Constructor.
      */
-    public this()
-    {
+    public this() {
         $docRef = ini_get('docref_root');
         if (empty($docRef) && function_exists('ini_set')) {
             ini_set('docref_root', 'https://secure.php.net/');
@@ -207,8 +206,7 @@ class Debugger
      * @param string|null $class Class name.
      * @return static
      */
-    public static function getInstance(?string $class = null)
-    {
+    public static function getInstance(?string $class = null) {
         static $instance = [];
         if (!empty($class)) {
             if (!$instance || strtolower($class) != strtolower(get_class($instance[0]))) {
@@ -231,8 +229,7 @@ class Debugger
      * @return mixed Config value being read, or the object itself on write operations.
      * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
      */
-    public static function configInstance($key = null, $value = null, bool $merge = true)
-    {
+    public static function configInstance($key = null, $value = null, bool $merge = true) {
         if ($key == null) {
             return static::getInstance().getConfig($key);
         }
@@ -381,8 +378,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    public static function trace(array $options = [])
-    {
+    public static function trace(array $options = []) {
         return Debugger::formatTrace(debug_backtrace(), $options);
     }
 
@@ -403,8 +399,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    public static function formatTrace($backtrace, array $options = [])
-    {
+    public static function formatTrace($backtrace, array $options = []) {
         if ($backtrace instanceof Throwable) {
             $backtrace = $backtrace.getTrace();
         }

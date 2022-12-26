@@ -24,8 +24,7 @@ class ArrayNode : NodeInterface
      *
      * @param array<\Cake\Error\Debug\ArrayItemNode> $items The items for the array
      */
-    public this(array $items = [])
-    {
+    public this(array $items = []) {
         this.items = [];
         foreach ($items as $item) {
             this.add($item);

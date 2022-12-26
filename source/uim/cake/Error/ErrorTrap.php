@@ -50,8 +50,7 @@ class ErrorTrap
      *
      * @param array<string, mixed> $options An options array. See $_defaultConfig.
      */
-    public this(array $options = [])
-    {
+    public this(array $options = []) {
         this.setConfig($options);
     }
 

@@ -122,8 +122,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * @param \Cake\Http\ServerRequest|null $request The request if this is set it will be used
      *   instead of creating a new one.
      */
-    public this(Throwable $exception, ?ServerRequest $request = null)
-    {
+    public this(Throwable $exception, ?ServerRequest $request = null) {
         this.error = $exception;
         this.request = $request;
         this.controller = _getController();

@@ -164,8 +164,7 @@ trait ModelAwareTrait
      * @param string $modelType The model type
      * @return this
      */
-    function setModelType(string $modelType)
-    {
+    function setModelType(string $modelType) {
         _modelType = $modelType;
 
         return this;

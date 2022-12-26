@@ -96,8 +96,7 @@ class ExceptionTrap
      *
      * @param array<string, mixed> $options An options array. See $_defaultConfig.
      */
-    public this(array $options = [])
-    {
+    public this(array $options = []) {
         this.setConfig($options);
     }
 
@@ -108,8 +107,7 @@ class ExceptionTrap
      * @param \Psr\Http\Message\IServerRequest|null $request The request if possible.
      * @return \Cake\Error\ExceptionRendererInterface
      */
-    function renderer(Throwable $exception, $request = null)
-    {
+    function renderer(Throwable $exception, $request = null) {
         $request = $request ?? Router::getRequest();
 
         /** @var class-string|callable $class */

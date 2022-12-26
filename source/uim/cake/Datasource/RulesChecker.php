@@ -102,8 +102,7 @@ class RulesChecker
      *
      * @param array<string, mixed> $options The options to pass to every rule
      */
-    public this(array $options = [])
-    {
+    public this(array $options = []) {
         _options = $options;
         _useI18n = function_exists("__d");
     }
@@ -127,8 +126,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function add(callable $rule, $name = null, array $options = [])
-    {
+    function add(callable $rule, $name = null, array $options = []) {
         _rules[] = _addError($rule, $name, $options);
 
         return this;
@@ -152,8 +150,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addCreate(callable $rule, $name = null, array $options = [])
-    {
+    function addCreate(callable $rule, $name = null, array $options = []) {
         _createRules[] = _addError($rule, $name, $options);
 
         return this;
@@ -177,8 +174,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addUpdate(callable $rule, $name = null, array $options = [])
-    {
+    function addUpdate(callable $rule, $name = null, array $options = []) {
         _updateRules[] = _addError($rule, $name, $options);
 
         return this;
@@ -202,8 +198,7 @@ class RulesChecker
      * second argument.
      * @return this
      */
-    function addDelete(callable $rule, $name = null, array $options = [])
-    {
+    function addDelete(callable $rule, $name = null, array $options = []) {
         _deleteRules[] = _addError($rule, $name, $options);
 
         return this;

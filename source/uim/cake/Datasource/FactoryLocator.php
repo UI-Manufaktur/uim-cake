@@ -76,8 +76,7 @@ class FactoryLocator
      * @throws \InvalidArgumentException If the specified repository type has no factory.
      * @return \Cake\Datasource\Locator\ILocator|callable The factory for the repository type.
      */
-    public static function get(string $type)
-    {
+    public static function get(string $type) {
         if (!isset(static::$_modelFactories["Table"])) {
             static::$_modelFactories["Table"] = new TableLocator();
         }

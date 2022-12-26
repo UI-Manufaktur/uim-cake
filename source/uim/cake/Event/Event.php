@@ -74,8 +74,7 @@ class Event : EventInterface
      *   with this event to it can be read by listeners.
      * @psalm-param TSubject|null $subject
      */
-    public this(string $name, $subject = null, $data = null)
-    {
+    public this(string $name, $subject = null, $data = null) {
         _name = $name;
         _subject = $subject;
         _data = (array)$data;
@@ -100,8 +99,7 @@ class Event : EventInterface
      * @throws \Cake\Core\Exception\CakeException
      * @psalm-return TSubject
      */
-    function getSubject()
-    {
+    function getSubject() {
         if (_subject == null) {
             throw new CakeException("No subject set for this event");
         }
@@ -134,8 +132,7 @@ class Event : EventInterface
      *
      * @return mixed
      */
-    function getResult()
-    {
+    function getResult() {
         return this.result;
     }
 
@@ -145,8 +142,7 @@ class Event : EventInterface
      * @param mixed $value The value to set.
      * @return this
      */
-    function setResult($value = null)
-    {
+    function setResult($value = null) {
         this.result = $value;
 
         return this;
@@ -159,8 +155,7 @@ class Event : EventInterface
      * @return mixed|array|null The data payload if $key is null, or the data value for the given $key.
      *   If the $key does not exist a null value is returned.
      */
-    function getData(?string $key = null)
-    {
+    function getData(?string $key = null) {
         if ($key != null) {
             return _data[$key] ?? null;
         }
@@ -175,8 +170,7 @@ class Event : EventInterface
      * @param mixed $value The value to set.
      * @return this
      */
-    function setData($key, $value = null)
-    {
+    function setData($key, $value = null) {
         if (is_array($key)) {
             _data = $key;
         } else {

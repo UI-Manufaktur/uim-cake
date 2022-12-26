@@ -94,8 +94,7 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param array<string, mixed> $config The options for error handling.
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         $config += [
             'exceptionRenderer': ExceptionRenderer::class,
         ];

@@ -72,8 +72,7 @@ class ErrorHandlerMiddleware : IMiddleware
      *  or config array.
      * @throws \InvalidArgumentException
      */
-    public this($errorHandler = [])
-    {
+    public this($errorHandler = []) {
         if (func_num_args() > 1) {
             deprecationWarning(
                 'The signature of ErrorHandlerMiddleware::__construct() has changed. '

@@ -46,8 +46,7 @@ class QueryCacher
      * @param \Psr\SimpleCache\ICache|string $config The cache config name or cache engine instance.
      * @throws \RuntimeException
      */
-    public this($key, $config)
-    {
+    public this($key, $config) {
         if (!is_string($key) && !($key instanceof Closure)) {
             throw new RuntimeException("Cache keys must be strings or callables.");
         }
@@ -65,8 +64,7 @@ class QueryCacher
      * @param object $query The query the cache read is for.
      * @return mixed|null Either the cached results or null.
      */
-    function fetch(object $query)
-    {
+    function fetch(object $query) {
         $key = _resolveKey($query);
         $storage = _resolveCacher();
         $result = $storage.get($key);
@@ -119,8 +117,7 @@ class QueryCacher
      *
      * @return \Psr\SimpleCache\ICache
      */
-    protected function _resolveCacher()
-    {
+    protected function _resolveCacher() {
         if (is_string(_config)) {
             return Cache::pool(_config);
         }

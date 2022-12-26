@@ -40,8 +40,7 @@ abstract class AbstractLocator : ILocator
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
-    function get(string $alias, array $options = [])
-    {
+    function get(string $alias, array $options = []) {
         $storeOptions = $options;
         unset($storeOptions["allowFallbackClass"]);
 
@@ -73,8 +72,7 @@ abstract class AbstractLocator : ILocator
     /**
      * @inheritDoc
      */
-    function set(string $alias, RepositoryInterface $repository)
-    {
+    function set(string $alias, RepositoryInterface $repository) {
         return this.instances[$alias] = $repository;
     }
 

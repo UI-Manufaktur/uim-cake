@@ -31,8 +31,7 @@ class TextExceptionRenderer
      *
      * @param \Throwable $error The error to render.
      */
-    public this(Throwable $error)
-    {
+    public this(Throwable $error) {
         this.error = $error;
     }
 
@@ -41,8 +40,7 @@ class TextExceptionRenderer
      *
      * @return \Psr\Http\Message\IResponse|string
      */
-    function render()
-    {
+    function render() {
         return sprintf(
             "%s : %s on line %s of %s\nTrace:\n%s",
             this.error.getCode(),

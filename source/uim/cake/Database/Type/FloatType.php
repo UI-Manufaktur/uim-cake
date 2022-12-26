@@ -103,8 +103,7 @@ class FloatType : BaseType : BatchCastingInterface
      * @param mixed $value The value to convert.
      * @return string|float|null Converted value.
      */
-    function marshal($value)
-    {
+    function marshal($value) {
         if ($value == null || $value == '') {
             return null;
         }
@@ -128,8 +127,7 @@ class FloatType : BaseType : BatchCastingInterface
      * @param bool $enable Whether to enable
      * @return this
      */
-    function useLocaleParser(bool $enable = true)
-    {
+    function useLocaleParser(bool $enable = true) {
         if ($enable == false) {
             _useLocaleParser = $enable;
 

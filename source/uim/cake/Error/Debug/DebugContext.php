@@ -41,8 +41,7 @@ class DebugContext
      *
      * @param int $maxDepth The desired depth of dump output.
      */
-    public this(int $maxDepth)
-    {
+    public this(int $maxDepth) {
         this.maxDepth = $maxDepth;
         this.refs = new SplObjectStorage();
     }
@@ -52,8 +51,7 @@ class DebugContext
      *
      * @return static
      */
-    function withAddedDepth()
-    {
+    function withAddedDepth() {
         $new = clone this;
         $new.depth += 1;
 

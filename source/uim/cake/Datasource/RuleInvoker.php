@@ -57,8 +57,7 @@ class RuleInvoker
      * @param ?string $name The name of the rule. Used in error messages.
      * @param array<string, mixed> $options The options for the rule. See above.
      */
-    public this(callable $rule, ?string $name, array $options = [])
-    {
+    public this(callable $rule, ?string $name, array $options = []) {
         this.rule = $rule;
         this.name = $name;
         this.options = $options;
@@ -72,8 +71,7 @@ class RuleInvoker
      * @param array<string, mixed> $options The options to set.
      * @return this
      */
-    function setOptions(array $options)
-    {
+    function setOptions(array $options) {
         this.options = $options + this.options;
 
         return this;
@@ -87,8 +85,7 @@ class RuleInvoker
      * @param string|null $name The name to set.
      * @return this
      */
-    function setName(?string $name)
-    {
+    function setName(?string $name) {
         if ($name) {
             this.name = $name;
         }

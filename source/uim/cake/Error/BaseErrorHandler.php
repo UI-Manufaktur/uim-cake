@@ -343,8 +343,7 @@ abstract class BaseErrorHandler
      *
      * @return \Cake\Error\ErrorLoggerInterface
      */
-    function getLogger()
-    {
+    function getLogger() {
         if (this.logger == null) {
             /** @var \Cake\Error\ErrorLoggerInterface $logger */
             $logger = new _config['errorLogger'](_config);
