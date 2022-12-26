@@ -3,7 +3,7 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
@@ -13,7 +13,7 @@ import uim.cake.databases.Driver;
 import uim.cake.databases.Query;
 import uim.cake.databases.schemas.MysqlSchemaDialect;
 import uim.cake.databases.schemas.SchemaDialect;
-import uim.cake.databases.Statement\MysqlStatement;
+import uim.cake.databases.statements.MysqlStatement;
 import uim.cake.databases.StatementInterface;
 use PDO;
 
