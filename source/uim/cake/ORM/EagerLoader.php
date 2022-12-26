@@ -3,14 +3,14 @@
 
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
+
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 module uim.cake.ORM;
 
-import uim.cake.databases.Statement\BufferedStatement;
-import uim.cake.databases.Statement\CallbackStatement;
+import uim.cake.databases.statements.BufferedStatement;
+import uim.cake.databases.statements.CallbackStatement;
 import uim.cake.databases.StatementInterface;
 use Closure;
 use InvalidArgumentException;
