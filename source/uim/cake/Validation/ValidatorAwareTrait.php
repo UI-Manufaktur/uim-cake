@@ -149,8 +149,7 @@ trait ValidatorAwareTrait
      * @param \Cake\Validation\Validator $validator Validator object to be set.
      * @return this
      */
-    function setValidator(string $name, Validator $validator)
-    {
+    function setValidator(string $name, Validator $validator) {
         $validator.setProvider(static::VALIDATOR_PROVIDER_NAME, this);
         _validators[$name] = $validator;
 

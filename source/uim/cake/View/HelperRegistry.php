@@ -37,8 +37,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param \Cake\View\View $view View object.
      */
-    public this(View $view)
-    {
+    public this(View $view) {
         _View = $view;
         this.setEventManager($view.getEventManager());
     }
@@ -83,8 +82,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $name Name of property to read
      * @return \Cake\View\Helper|null
      */
-    function __get(string $name)
-    {
+    function __get(string $name) {
         if (isset(_loaded[$name])) {
             return _loaded[$name];
         }

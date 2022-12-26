@@ -126,8 +126,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param mixed $value Value.
      * @return this
      */
-    function setVar(string $name, $value = null)
-    {
+    function setVar(string $name, $value = null) {
         _vars[$name] = $value;
 
         return this;
@@ -140,8 +139,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param bool $merge Whether to merge with existing vars, default true.
      * @return this
      */
-    function setVars(array $data, bool $merge = true)
-    {
+    function setVars(array $data, bool $merge = true) {
         if ($merge) {
             _vars = $data + _vars;
         } else {
@@ -168,8 +166,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string $name Var name
      * @return mixed The var value or null if unset.
      */
-    function getVar(string $name)
-    {
+    function getVar(string $name) {
         return _vars[$name] ?? null;
     }
 
@@ -189,8 +186,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $path Path for view files.
      * @return this
      */
-    function setTemplatePath(?string $path)
-    {
+    function setTemplatePath(?string $path) {
         _templatePath = $path;
 
         return this;
@@ -212,8 +208,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $path Path for layout files.
      * @return this
      */
-    function setLayoutPath(?string $path)
-    {
+    function setLayoutPath(?string $path) {
         _layoutPath = $path;
 
         return this;
@@ -237,8 +232,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param bool $enable Boolean to turn on/off.
      * @return this
      */
-    function enableAutoLayout(bool $enable = true)
-    {
+    function enableAutoLayout(bool $enable = true) {
         _autoLayout = $enable;
 
         return this;
@@ -252,8 +246,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return this
      */
-    function disableAutoLayout()
-    {
+    function disableAutoLayout() {
         _autoLayout = false;
 
         return this;
@@ -277,8 +270,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *   Use null to remove the current plugin name.
      * @return this
      */
-    function setPlugin(?string $name)
-    {
+    function setPlugin(?string $name) {
         _plugin = $name;
 
         return this;
@@ -302,8 +294,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      * @since 4.1.0
      */
-    function addHelper(string $helper, array $options = [])
-    {
+    function addHelper(string $helper, array $options = []) {
         if ($options) {
             $array = [$helper: $options];
         } else {
@@ -322,8 +313,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return this
      * @since 4.3.0
      */
-    function addHelpers(array $helpers)
-    {
+    function addHelpers(array $helpers) {
         foreach ($helpers as $helper: $config) {
             if (is_int($helper)) {
                 $helper = $config;
@@ -342,8 +332,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param bool $merge Whether to merge existing data with the new data.
      * @return this
      */
-    function setHelpers(array $helpers, bool $merge = true)
-    {
+    function setHelpers(array $helpers, bool $merge = true) {
         if ($merge) {
             deprecationWarning("The $merge param is deprecated, use addHelper()/addHelpers() instead.");
             $helpers = array_merge(_helpers, $helpers);
@@ -370,8 +359,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *   Use null to remove the current theme.
      * @return this
      */
-    function setTheme(?string $theme)
-    {
+    function setTheme(?string $theme) {
         _theme = $theme;
 
         return this;
@@ -394,8 +382,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name View file name to set, or null to remove the template name.
      * @return this
      */
-    function setTemplate(?string $name)
-    {
+    function setTemplate(?string $name) {
         _template = $name;
 
         return this;
@@ -420,8 +407,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name Layout file name to set.
      * @return this
      */
-    function setLayout(?string $name)
-    {
+    function setLayout(?string $name) {
         _layout = $name;
 
         return this;
@@ -443,8 +429,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string $name The name of the option.
      * @return mixed
      */
-    function getOption(string $name)
-    {
+    function getOption(string $name) {
         return _options[$name] ?? null;
     }
 
@@ -455,8 +440,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param mixed $value Value to set.
      * @return this
      */
-    function setOption(string $name, $value)
-    {
+    function setOption(string $name, $value) {
         _options[$name] = $value;
 
         return this;
@@ -471,8 +455,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param bool $merge Whether to merge existing data with the new data.
      * @return this
      */
-    function setOptions(array $options, bool $merge = true)
-    {
+    function setOptions(array $options, bool $merge = true) {
         if ($merge) {
             $options = array_merge(_options, $options);
         }
@@ -497,8 +480,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name The name of the view, or null to remove the current name.
      * @return this
      */
-    function setName(?string $name)
-    {
+    function setName(?string $name) {
         _name = $name;
 
         return this;
@@ -524,8 +506,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name The class name for the view.
      * @return this
      */
-    function setClassName(?string $name)
-    {
+    function setClassName(?string $name) {
         _className = $name;
 
         return this;
@@ -663,8 +644,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param array<string, mixed> $config View builder configuration array.
      * @return this
      */
-    function createFromArray(array $config)
-    {
+    function createFromArray(array $config) {
         foreach ($config as $property: $value) {
             this.{$property} = $value;
         }

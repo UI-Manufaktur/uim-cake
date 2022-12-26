@@ -98,8 +98,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      *
      * @throws \Cake\Core\Exception\CakeException on invalid datasource usage.
      */
-    public this()
-    {
+    public this() {
         if (!empty(this.connection)) {
             $connection = this.connection;
             if (strpos($connection, 'test') != 0) {
@@ -330,8 +329,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     /**
      * @inheritDoc
      */
-    function insert(ConnectionInterface $connection)
-    {
+    function insert(ConnectionInterface $connection) {
         if (!empty(this.records)) {
             [$fields, $values, $types] = _getRecords();
             $query = $connection.newQuery()
@@ -447,16 +445,14 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     /**
      * @inheritDoc
      */
-    function getTableSchema()
-    {
+    function getTableSchema() {
         return _schema;
     }
 
     /**
      * @inheritDoc
      */
-    function setTableSchema($schema)
-    {
+    function setTableSchema($schema) {
         _schema = $schema;
 
         return this;

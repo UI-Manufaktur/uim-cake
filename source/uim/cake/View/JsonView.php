@@ -159,8 +159,7 @@ class JsonView : SerializedView
      * @param array|string $serialize The name(s) of the view variable(s) that need(s) to be serialized.
      * @return mixed The data to serialize.
      */
-    protected function _dataToSerialize($serialize)
-    {
+    protected function _dataToSerialize($serialize) {
         if (is_array($serialize)) {
             $data = [];
             foreach ($serialize as $alias: $key) {

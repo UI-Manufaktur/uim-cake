@@ -1260,8 +1260,7 @@ class Validation
      * @param mixed $check The data to read a filename out of.
      * @return string|false Either the filename or false on failure.
      */
-    protected static function getFilename($check)
-    {
+    protected static function getFilename($check) {
         if ($check instanceof UploadedFileInterface) {
             // Uploaded files throw exceptions on upload errors.
             try {

@@ -47,8 +47,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * @return callable|string|bool
      */
-    function isPresenceRequired()
-    {
+    function isPresenceRequired() {
         return _validatePresent;
     }
 
@@ -58,8 +57,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * @param callable|string|bool $validatePresent Valid values are true, false, "create", "update" or a callable.
      * @return this
      */
-    function requirePresence($validatePresent)
-    {
+    function requirePresence($validatePresent) {
         _validatePresent = $validatePresent;
 
         return this;
@@ -70,8 +68,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * @return callable|string|bool
      */
-    function isEmptyAllowed()
-    {
+    function isEmptyAllowed() {
         return _allowEmpty;
     }
 
@@ -82,8 +79,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * "create", "update" or a callable.
      * @return this
      */
-    function allowEmpty($allowEmpty)
-    {
+    function allowEmpty($allowEmpty) {
         _allowEmpty = $allowEmpty;
 
         return this;
@@ -129,8 +125,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * @param \Cake\Validation\ValidationRule|array $rule The validation rule to be set
      * @return this
      */
-    function add(string $name, $rule)
-    {
+    function add(string $name, $rule) {
         if (!($rule instanceof ValidationRule)) {
             $rule = new ValidationRule($rule);
         }
@@ -153,8 +148,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * @param string $name The name under which the rule should be unset
      * @return this
      */
-    function remove(string $name)
-    {
+    function remove(string $name) {
         unset(_rules[$name]);
 
         return this;

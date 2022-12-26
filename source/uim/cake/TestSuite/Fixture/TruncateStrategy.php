@@ -27,8 +27,7 @@ class TruncateStrategy : FixtureStrategyInterface
     /**
      * Initialize strategy.
      */
-    public this()
-    {
+    public this() {
         this.helper = new FixtureHelper();
     }
 

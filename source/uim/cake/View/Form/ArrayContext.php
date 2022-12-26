@@ -75,8 +75,7 @@ class ArrayContext : ContextInterface
      *
      * @param array $context Context info.
      */
-    public this(array $context)
-    {
+    public this(array $context) {
         $context += [
             'data': [],
             'schema': [],
@@ -168,8 +167,7 @@ class ArrayContext : ContextInterface
      *     context's schema should be used if it's not explicitly provided.
      * @return mixed
      */
-    function val(string $field, array $options = [])
-    {
+    function val(string $field, array $options = []) {
         $options += [
             'default': null,
             'schemaDefault': true,

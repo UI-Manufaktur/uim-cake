@@ -86,8 +86,7 @@ class EntityContext : ContextInterface
      *
      * @param array<string, mixed> $context Context info.
      */
-    public this(array $context)
-    {
+    public this(array $context) {
         $context += [
             'entity': null,
             'table': null,
@@ -238,8 +237,7 @@ class EntityContext : ContextInterface
      *     schema should be used if it's not explicitly provided.
      * @return mixed The value of the field or null on a miss.
      */
-    function val(string $field, array $options = [])
-    {
+    function val(string $field, array $options = []) {
         $options += [
             'default': null,
             'schemaDefault': true,
@@ -294,8 +292,7 @@ class EntityContext : ContextInterface
      * @param array<string> $parts Each one of the parts in a path for a field name
      * @return mixed
      */
-    protected function _schemaDefault(array $parts)
-    {
+    protected function _schemaDefault(array $parts) {
         $table = _getTable($parts);
         if ($table == null) {
             return null;
@@ -341,8 +338,7 @@ class EntityContext : ContextInterface
      * @return \Cake\Datasource\EntityInterface|iterable|null
      * @throws \RuntimeException When properties cannot be read.
      */
-    function entity(?array $path = null)
-    {
+    function entity(?array $path = null) {
         if ($path == null) {
             return _context['entity'];
         }
@@ -400,8 +396,7 @@ class EntityContext : ContextInterface
      * @return array Containing the found entity, and remaining un-matched path.
      * @throws \RuntimeException When properties cannot be read.
      */
-    protected function leafEntity($path = null)
-    {
+    protected function leafEntity($path = null) {
         if ($path == null) {
             return _context['entity'];
         }
@@ -462,8 +457,7 @@ class EntityContext : ContextInterface
      * @param string $field The next field to fetch.
      * @return mixed
      */
-    protected function _getProp($target, $field)
-    {
+    protected function _getProp($target, $field) {
         if (is_array($target) && isset($target[$field])) {
             return $target[$field];
         }

@@ -103,8 +103,7 @@ class StringTemplate
      *
      * @param array<string, mixed> $config A set of templates to add.
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         this.add($config);
     }
 
@@ -149,8 +148,7 @@ class StringTemplate
      * @param array<string> $templates An associative list of named templates.
      * @return this
      */
-    function add(array $templates)
-    {
+    function add(array $templates) {
         this.setConfig($templates);
         _compileTemplates(array_keys($templates));
 
@@ -337,8 +335,7 @@ class StringTemplate
      * @param string $useIndex if you are inputting an array with an element other than default of 'class'.
      * @return array<string>|string
      */
-    function addClass($input, $newClass, string $useIndex = 'class')
-    {
+    function addClass($input, $newClass, string $useIndex = 'class') {
         // NOOP
         if (empty($newClass)) {
             return $input;

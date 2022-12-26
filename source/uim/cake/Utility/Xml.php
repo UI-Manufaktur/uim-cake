@@ -95,8 +95,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    public static function build($input, array $options = [])
-    {
+    public static function build($input, array $options = []) {
         $defaults = [
             'return': 'simplexml',
             'loadEntities': false,
@@ -133,8 +132,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    protected static function _loadXml(string $input, array $options)
-    {
+    protected static function _loadXml(string $input, array $options) {
         return static::load(
             $input,
             $options,
@@ -160,8 +158,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    public static function loadHtml(string $input, array $options = [])
-    {
+    public static function loadHtml(string $input, array $options = []) {
         $defaults = [
             'return': 'simplexml',
             'loadEntities': false,
@@ -193,8 +190,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    protected static function load(string $input, array $options, Closure $callable)
-    {
+    protected static function load(string $input, array $options, Closure $callable) {
         $flags = 0;
         if (!empty($options['parseHuge'])) {
             $flags |= LIBXML_PARSEHUGE;
@@ -259,8 +255,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws \Cake\Utility\Exception\XmlException
      */
-    public static function fromArray($input, array $options = [])
-    {
+    public static function fromArray($input, array $options = []) {
         if (is_object($input) && method_exists($input, 'toArray') && is_callable([$input, 'toArray'])) {
             $input = $input.toArray();
         }

@@ -154,8 +154,7 @@ class Security
      * @throws \InvalidArgumentException When no compatible crypto extension is available.
      * @psalm-suppress MoreSpecificReturnType
      */
-    public static function engine($instance = null)
-    {
+    public static function engine($instance = null) {
         if ($instance) {
             return static::$_instance = $instance;
         }

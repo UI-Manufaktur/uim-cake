@@ -251,8 +251,7 @@ class FormHelper : Helper
      * @param \Cake\View\View $view The View this helper is being attached to.
      * @param array<string, mixed> $config Configuration settings for the helper.
      */
-    public this(View $view, array $config = [])
-    {
+    public this(View $view, array $config = []) {
         $locator = null;
         $widgets = _defaultWidgets;
         if (isset($config['locator'])) {
@@ -299,8 +298,7 @@ class FormHelper : Helper
      * @return this
      * @since 3.6.0
      */
-    function setWidgetLocator(WidgetLocator $instance)
-    {
+    function setWidgetLocator(WidgetLocator $instance) {
         _locator = $instance;
 
         return this;
@@ -477,8 +475,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options An array of options from create()
      * @return array|string The action attribute for the form.
      */
-    protected function _formUrl(ContextInterface $context, array $options)
-    {
+    protected function _formUrl(ContextInterface $context, array $options) {
         $request = _View.getRequest();
 
         if ($options['url'] == null) {
@@ -637,8 +634,7 @@ class FormHelper : Helper
      * @param string $name The dot separated name for the field.
      * @return this
      */
-    function unlockField(string $name)
-    {
+    function unlockField(string $name) {
         this.getFormProtector().unlockField($name);
 
         return this;
@@ -1187,8 +1183,7 @@ class FormHelper : Helper
      * @return array|string The generated input element string
      *  or array if checkbox() is called with option 'hiddenField' set to '_split'.
      */
-    protected function _getInput(string $fieldName, array $options)
-    {
+    protected function _getInput(string $fieldName, array $options) {
         $label = $options['labelOptions'];
         unset($options['labelOptions']);
         switch (strtolower($options['type'])) {
@@ -1355,8 +1350,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return array<string, mixed> Modified options list.
      */
-    protected function setRequiredAndCustomValidity(string $fieldName, array $options)
-    {
+    protected function setRequiredAndCustomValidity(string $fieldName, array $options) {
         $context = _getContext();
 
         if (!isset($options['required']) && $options['type'] != 'hidden') {
@@ -1387,8 +1381,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return string|false Generated label element or false.
      */
-    protected function _getLabel(string $fieldName, array $options)
-    {
+    protected function _getLabel(string $fieldName, array $options) {
         if ($options['type'] == 'hidden') {
             return false;
         }
@@ -1413,8 +1406,7 @@ class FormHelper : Helper
      * @param mixed $default The default option value
      * @return mixed the contents of the option or default
      */
-    protected function _extractOption(string $name, array $options, $default = null)
-    {
+    protected function _extractOption(string $name, array $options, $default = null) {
         if (array_key_exists($name, $options)) {
             return $options[$name];
         }
@@ -1481,8 +1473,7 @@ class FormHelper : Helper
      * @return array<string>|string An HTML text input element.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-checkboxes
      */
-    function checkbox(string $fieldName, array $options = [])
-    {
+    function checkbox(string $fieldName, array $options = []) {
         $options += ['hiddenField': true, 'value': 1];
 
         // Work around value=>val translations.
@@ -1595,8 +1586,7 @@ class FormHelper : Helper
      * @return string Formatted input method.
      * @throws \Cake\Core\Exception\CakeException When there are no params for the method call.
      */
-    function __call(string $method, array $params)
-    {
+    function __call(string $method, array $params) {
         if (empty($params)) {
             throw new CakeException(sprintf('Missing field name for FormHelper::%s', $method));
         }
@@ -2553,8 +2543,7 @@ class FormHelper : Helper
      * @return this
      * @throws \InvalidArgumentException If sources list contains invalid value.
      */
-    function setValueSources($sources)
-    {
+    function setValueSources($sources) {
         $sources = (array)$sources;
 
         this.validateValueSources($sources);
@@ -2570,8 +2559,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options The options containing default values.
      * @return mixed Field value derived from sources or defaults.
      */
-    function getSourceValue(string $fieldname, array $options = [])
-    {
+    function getSourceValue(string $fieldname, array $options = []) {
         $valueMap = [
             'data': 'getData',
             'query': 'getQuery',

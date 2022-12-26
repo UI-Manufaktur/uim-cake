@@ -22,8 +22,7 @@ class NullContext : ContextInterface
      *
      * @param array $context Context info.
      */
-    public this(array $context)
-    {
+    public this(array $context) {
     }
 
     /**
@@ -66,8 +65,7 @@ class NullContext : ContextInterface
     /**
      * @inheritDoc
      */
-    function val(string $field, array $options = [])
-    {
+    function val(string $field, array $options = []) {
         return null;
     }
 

@@ -40,8 +40,7 @@ class RulesProvider
      * @throws \ReflectionException
      * @psalm-param object|class-string $class
      */
-    public this($class = Validation::class)
-    {
+    public this($class = Validation::class) {
         _class = $class;
         _reflection = new ReflectionClass($class);
     }
@@ -58,8 +57,7 @@ class RulesProvider
      * @param array $arguments the list of arguments to pass to the method
      * @return bool Whether the validation rule passed
      */
-    function __call(string $method, array $arguments)
-    {
+    function __call(string $method, array $arguments) {
         $method = _reflection.getMethod($method);
         $argumentList = $method.getParameters();
         if (array_pop($argumentList).getName() != "context") {

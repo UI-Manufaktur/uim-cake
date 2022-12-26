@@ -45,8 +45,7 @@ class FormContext : ContextInterface
      * - `entity` The Form class instance this context is operating on. **(required)**
      * - `validator` Optional name of the validation method to call on the Form object.
      */
-    public this(array $context)
-    {
+    public this(array $context) {
         if (!isset($context['entity']) || !$context['entity'] instanceof Form) {
             throw new CakeException('`$context[\'entity\']` must be an instance of Cake\Form\Form');
         }
@@ -95,8 +94,7 @@ class FormContext : ContextInterface
     /**
      * @inheritDoc
      */
-    function val(string $field, array $options = [])
-    {
+    function val(string $field, array $options = []) {
         $options += [
             'default': null,
             'schemaDefault': true,
@@ -120,8 +118,7 @@ class FormContext : ContextInterface
      * @param string $field Field name.
      * @return mixed
      */
-    protected function _schemaDefault(string $field)
-    {
+    protected function _schemaDefault(string $field) {
         $field = _form.getSchema().field($field);
         if ($field) {
             return $field['default'];

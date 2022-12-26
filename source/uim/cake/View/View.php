@@ -418,8 +418,7 @@ class View : EventDispatcherInterface
      * @param \Cake\Http\ServerRequest $request Request instance.
      * @return this
      */
-    function setRequest(ServerRequest $request)
-    {
+    function setRequest(ServerRequest $request) {
         this.request = $request;
         this.plugin = $request.getParam("plugin");
 
@@ -442,8 +441,7 @@ class View : EventDispatcherInterface
      * @param \Cake\Http\Response $response Response instance.
      * @return this
      */
-    function setResponse(Response $response)
-    {
+    function setResponse(Response $response) {
         this.response = $response;
 
         return this;
@@ -465,8 +463,7 @@ class View : EventDispatcherInterface
      * @param string $path Path for template files.
      * @return this
      */
-    function setTemplatePath(string $path)
-    {
+    function setTemplatePath(string $path) {
         this.templatePath = $path;
 
         return this;
@@ -488,8 +485,7 @@ class View : EventDispatcherInterface
      * @param string $path Path for layout files.
      * @return this
      */
-    function setLayoutPath(string $path)
-    {
+    function setLayoutPath(string $path) {
         this.layoutPath = $path;
 
         return this;
@@ -514,8 +510,7 @@ class View : EventDispatcherInterface
      * @param bool $enable Boolean to turn on/off.
      * @return this
      */
-    function enableAutoLayout(bool $enable = true)
-    {
+    function enableAutoLayout(bool $enable = true) {
         this.autoLayout = $enable;
 
         return this;
@@ -527,8 +522,7 @@ class View : EventDispatcherInterface
      *
      * @return this
      */
-    function disableAutoLayout()
-    {
+    function disableAutoLayout() {
         this.autoLayout = false;
 
         return this;
@@ -550,8 +544,7 @@ class View : EventDispatcherInterface
      * @param string|null $theme Theme name.
      * @return this
      */
-    function setTheme(?string $theme)
-    {
+    function setTheme(?string $theme) {
         this.theme = $theme;
 
         return this;
@@ -575,8 +568,7 @@ class View : EventDispatcherInterface
      * @param string $name Template file name to set.
      * @return this
      */
-    function setTemplate(string $name)
-    {
+    function setTemplate(string $name) {
         this.template = $name;
 
         return this;
@@ -602,8 +594,7 @@ class View : EventDispatcherInterface
      * @param string $name Layout file name to set.
      * @return this
      */
-    function setLayout(string $name)
-    {
+    function setLayout(string $name) {
         this.layout = $name;
 
         return this;
@@ -621,8 +612,7 @@ class View : EventDispatcherInterface
      * @return mixed Config value being read.
      * @psalm-suppress PossiblyNullArgument
      */
-    function getConfig(?string $key = null, $default = null)
-    {
+    function getConfig(?string $key = null, $default = null) {
         $value = _getConfig($key);
 
         if ($value != null) {
@@ -874,8 +864,7 @@ class View : EventDispatcherInterface
      * @param mixed $default The default/fallback content of $var.
      * @return mixed The content of the named var if its set, otherwise $default.
      */
-    function get(string $var, $default = null)
-    {
+    function get(string $var, $default = null) {
         return this.viewVars[$var] ?? $default;
     }
 
@@ -888,8 +877,7 @@ class View : EventDispatcherInterface
      * @return this
      * @throws \RuntimeException If the array combine operation failed.
      */
-    function set($name, $value = null)
-    {
+    function set($name, $value = null) {
         if (is_array($name)) {
             if (is_array($value)) {
                 /** @var array|false $data */
@@ -945,8 +933,7 @@ class View : EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::start()
      */
-    function start(string $name)
-    {
+    function start(string $name) {
         this.Blocks.start($name);
 
         return this;
@@ -963,8 +950,7 @@ class View : EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::concat()
      */
-    function append(string $name, $value = null)
-    {
+    function append(string $name, $value = null) {
         this.Blocks.concat($name, $value);
 
         return this;
@@ -981,8 +967,7 @@ class View : EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::concat()
      */
-    function prepend(string $name, $value)
-    {
+    function prepend(string $name, $value) {
         this.Blocks.concat($name, $value, ViewBlock::PREPEND);
 
         return this;
@@ -998,8 +983,7 @@ class View : EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::set()
      */
-    function assign(string $name, $value)
-    {
+    function assign(string $name, $value) {
         this.Blocks.set($name, $value);
 
         return this;
@@ -1013,8 +997,7 @@ class View : EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::set()
      */
-    function reset(string $name)
-    {
+    function reset(string $name) {
         this.assign($name, "");
 
         return this;
@@ -1040,8 +1023,7 @@ class View : EventDispatcherInterface
      * @return this
      * @see \Cake\View\ViewBlock::end()
      */
-    function end()
-    {
+    function end() {
         this.Blocks.end();
 
         return this;
@@ -1067,8 +1049,7 @@ class View : EventDispatcherInterface
      * @throws \LogicException when you extend a template with itself or make extend loops.
      * @throws \LogicException when you extend an element which doesn"t exist
      */
-    function extend(string $name)
-    {
+    function extend(string $name) {
         $type = $name[0] == "/" ? static::TYPE_TEMPLATE : _currentType;
         switch ($type) {
             case static::TYPE_ELEMENT:
@@ -1117,8 +1098,7 @@ class View : EventDispatcherInterface
      * @param string $name Name of the attribute to get.
      * @return \Cake\View\Helper|null
      */
-    function __get(string $name)
-    {
+    function __get(string $name) {
         $registry = this.helpers();
         if (!isset($registry.{$name})) {
             return null;
@@ -1134,8 +1114,7 @@ class View : EventDispatcherInterface
      *
      * @return this
      */
-    function loadHelpers()
-    {
+    function loadHelpers() {
         $registry = this.helpers();
         $helpers = $registry.normalizeArray(this.helpers);
         foreach ($helpers as $properties) {
@@ -1260,8 +1239,7 @@ class View : EventDispatcherInterface
      * @see \Cake\View\View::$subDir
      * @since 3.7.0
      */
-    function setSubDir(string $subDir)
-    {
+    function setSubDir(string $subDir) {
         this.subDir = $subDir;
 
         return this;
@@ -1308,8 +1286,7 @@ class View : EventDispatcherInterface
      * @return this
      * @since 3.7.0
      */
-    function setPlugin(?string $name)
-    {
+    function setPlugin(?string $name) {
         this.plugin = $name;
 
         return this;
@@ -1323,8 +1300,7 @@ class View : EventDispatcherInterface
      * @see \Cake\View\View::$elementCache
      * @since 3.7.0
      */
-    function setElementCache(string $elementCache)
-    {
+    function setElementCache(string $elementCache) {
         this.elementCache = $elementCache;
 
         return this;
@@ -1492,8 +1468,7 @@ class View : EventDispatcherInterface
      * @param string|null $plugin The plugin to fetch paths for.
      * @return \Generator
      */
-    protected function getLayoutPaths(?string $plugin)
-    {
+    protected function getLayoutPaths(?string $plugin) {
         $subDir = "";
         if (this.layoutPath) {
             $subDir = this.layoutPath . DIRECTORY_SEPARATOR;
@@ -1514,8 +1489,7 @@ class View : EventDispatcherInterface
      * @param bool $pluginCheck - if false will ignore the request"s plugin if parsed plugin is not loaded
      * @return string|false Either a string to the element filename or false when one can"t be found.
      */
-    protected function _getElementFileName(string $name, bool $pluginCheck = true)
-    {
+    protected function _getElementFileName(string $name, bool $pluginCheck = true) {
         [$plugin, $name] = this.pluginSplit($name, $pluginCheck);
 
         $name .= _ext;
@@ -1534,8 +1508,7 @@ class View : EventDispatcherInterface
      * @param string|null $plugin The plugin to fetch paths for.
      * @return \Generator
      */
-    protected function getElementPaths(?string $plugin)
-    {
+    protected function getElementPaths(?string $plugin) {
         $elementPaths = _getSubPaths(static::TYPE_ELEMENT);
         foreach (_paths($plugin) as $path) {
             foreach ($elementPaths as $subdir) {

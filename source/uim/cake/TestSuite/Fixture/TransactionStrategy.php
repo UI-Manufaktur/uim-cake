@@ -33,8 +33,7 @@ class TransactionStrategy : FixtureStrategyInterface
     /**
      * Initialize strategy.
      */
-    public this()
-    {
+    public this() {
         this.helper = new FixtureHelper();
     }
 

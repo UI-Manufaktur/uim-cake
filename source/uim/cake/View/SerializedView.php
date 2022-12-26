@@ -59,8 +59,7 @@ abstract class SerializedView : View
      *
      * @return this
      */
-    function loadHelpers()
-    {
+    function loadHelpers() {
         if (!this.getConfig('serialize')) {
             parent::loadHelpers();
         }

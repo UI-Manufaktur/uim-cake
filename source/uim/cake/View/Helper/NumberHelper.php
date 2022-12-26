@@ -53,8 +53,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> $config Configuration settings for the helper
      * @throws \Cake\Core\Exception\CakeException When the engine class could not be found.
      */
-    public this(View $view, array $config = [])
-    {
+    public this(View $view, array $config = []) {
         super(($view, $config);
 
         $config = _config;
@@ -75,8 +74,7 @@ class NumberHelper : Helper
      * @param array $params Array of params for the method.
      * @return mixed Whatever is returned by called method, or false on failure
      */
-    function __call(string $method, array $params)
-    {
+    function __call(string $method, array $params) {
         return _engine.{$method}(...$params);
     }
 

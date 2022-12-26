@@ -178,8 +178,7 @@ class Inflector
      * @param string|false $value Inflected value
      * @return string|false Inflected value on cache hit or false on cache miss.
      */
-    protected static function _cache(string $type, string $key, $value = false)
-    {
+    protected static function _cache(string $type, string $key, $value = false) {
         $key = '_' . $key;
         $type = '_' . $type;
         if ($value != false) {

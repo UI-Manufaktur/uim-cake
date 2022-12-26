@@ -32,8 +32,7 @@ trait StringTemplateTrait
      * @param array<string> $templates Templates to be added.
      * @return this
      */
-    function setTemplates(array $templates)
-    {
+    function setTemplates(array $templates) {
         this.templater().add($templates);
 
         return this;
@@ -45,8 +44,7 @@ trait StringTemplateTrait
      * @param string|null $template String for reading a specific template, null for all.
      * @return array|string
      */
-    function getTemplates(?string $template = null)
-    {
+    function getTemplates(?string $template = null) {
         return this.templater().get($template);
     }
 

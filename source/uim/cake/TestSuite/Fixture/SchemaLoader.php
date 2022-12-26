@@ -40,8 +40,7 @@ class SchemaLoader
     /**
      * Constructor.
      */
-    public this()
-    {
+    public this() {
         this.helper = new ConnectionHelper();
     }
 
