@@ -16,11 +16,11 @@
 module uim.cake.Datasource;
 
 import uim.cake.Core\StaticConfigTrait;
-import uim.cake.Database\Connection;
-import uim.cake.Database\Driver\Mysql;
-import uim.cake.Database\Driver\Postgres;
-import uim.cake.Database\Driver\Sqlite;
-import uim.cake.Database\Driver\Sqlserver;
+import uim.cake.databases.Connection;
+import uim.cake.databases.Driver\Mysql;
+import uim.cake.databases.Driver\Postgres;
+import uim.cake.databases.Driver\Sqlite;
+import uim.cake.databases.Driver\Sqlserver;
 import uim.cake.Datasource\Exception\MissingDatasourceConfigException;
 
 /**

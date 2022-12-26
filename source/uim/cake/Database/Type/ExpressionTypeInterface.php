@@ -13,9 +13,9 @@
  * @since         3.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Type;
+module uim.cake.databases.Type;
 
-import uim.cake.Database\IExpression;
+import uim.cake.databases.IExpression;
 
 /**
  * An interface used by Type objects to signal whether the value should

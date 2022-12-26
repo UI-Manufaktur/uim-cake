@@ -13,9 +13,9 @@
  * @since         3.1.2
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Type;
+module uim.cake.databases.Type;
 
-import uim.cake.Database\DriverInterface;
+import uim.cake.databases.DriverInterface;
 use InvalidArgumentException;
 use PDO;
 

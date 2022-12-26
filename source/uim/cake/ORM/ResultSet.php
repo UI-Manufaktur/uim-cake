@@ -17,8 +17,8 @@ module uim.cake.ORM;
 
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\CollectionTrait;
-import uim.cake.Database\Exception\DatabaseException;
-import uim.cake.Database\StatementInterface;
+import uim.cake.databases.Exception\DatabaseException;
+import uim.cake.databases.StatementInterface;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.Datasource\IResultSet;
 use SplFixedArray;

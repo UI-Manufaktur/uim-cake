@@ -13,10 +13,10 @@
  * @since         3.6.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Type;
+module uim.cake.databases.Type;
 
 import uim.cake.Core\Exception\CakeException;
-import uim.cake.Database\DriverInterface;
+import uim.cake.databases.DriverInterface;
 import uim.cake.Utility\Text;
 use PDO;
 

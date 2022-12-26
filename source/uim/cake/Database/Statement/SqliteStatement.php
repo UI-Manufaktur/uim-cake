@@ -13,7 +13,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Statement;
+module uim.cake.databases.Statement;
 
 /**
  * Statement class meant to be used by an Sqlite driver
