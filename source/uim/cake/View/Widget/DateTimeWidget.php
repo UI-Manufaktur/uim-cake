@@ -15,7 +15,7 @@
  */
 module uim.cake.View\Widget;
 
-import uim.cake.Database\Schema\TableSchema;
+import uim.cake.databases.Schema\TableSchema;
 import uim.cake.View\Form\ContextInterface;
 use DateTime;
 use DateTimeInterface;

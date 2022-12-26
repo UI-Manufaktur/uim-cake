@@ -15,9 +15,9 @@
 module uim.cake.TestSuite\Fixture;
 
 import uim.cake.Core\Exception\CakeException;
-import uim.cake.Database\ConstraintsInterface;
-import uim.cake.Database\Schema\TableSchema;
-import uim.cake.Database\Schema\TableSchemaAwareInterface;
+import uim.cake.databases.ConstraintsInterface;
+import uim.cake.databases.Schema\TableSchema;
+import uim.cake.databases.Schema\TableSchemaAwareInterface;
 import uim.cake.Datasource\ConnectionInterface;
 import uim.cake.Datasource\ConnectionManager;
 import uim.cake.Datasource\FixtureInterface;

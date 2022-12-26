@@ -15,7 +15,7 @@
  */
 module uim.cake.TestSuite\Fixture;
 
-import uim.cake.Database\Connection;
+import uim.cake.databases.Connection;
 use RuntimeException;
 
 /**

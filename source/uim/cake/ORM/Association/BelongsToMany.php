@@ -16,9 +16,9 @@
 module uim.cake.ORM\Association;
 
 import uim.cake.Core\App;
-import uim.cake.Database\Expression\IdentifierExpression;
-import uim.cake.Database\Expression\QueryExpression;
-import uim.cake.Database\IExpression;
+import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.Expression\QueryExpression;
+import uim.cake.databases.IExpression;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.ORM\Association;
 import uim.cake.ORM\Association\Loader\SelectWithPivotLoader;

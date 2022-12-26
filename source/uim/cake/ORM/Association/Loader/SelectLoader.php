@@ -15,9 +15,9 @@
  */
 module uim.cake.ORM\Association\Loader;
 
-import uim.cake.Database\Expression\IdentifierExpression;
-import uim.cake.Database\Expression\TupleComparison;
-import uim.cake.Database\ValueBinder;
+import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.ValueBinder;
 import uim.cake.ORM\Association;
 import uim.cake.ORM\Query;
 use Closure;

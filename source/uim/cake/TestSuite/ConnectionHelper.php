@@ -14,8 +14,8 @@
  */
 module uim.cake.TestSuite;
 
-import uim.cake.Database\Connection;
-import uim.cake.Database\DriverInterface;
+import uim.cake.databases.Connection;
+import uim.cake.databases.DriverInterface;
 import uim.cake.Datasource\ConnectionManager;
 use Closure;
 
