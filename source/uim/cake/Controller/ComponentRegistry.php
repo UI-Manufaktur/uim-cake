@@ -10,9 +10,9 @@
 module uim.cake.Controller;
 
 import uim.cake.Controller\Exception\MissingComponentException;
-import uim.cake.Core\App;
-import uim.cake.Core\Exception\CakeException;
-import uim.cake.Core\ObjectRegistry;
+import uim.cake.cores.App;
+import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.ObjectRegistry;
 import uim.cake.Event\EventDispatcherInterface;
 import uim.cake.Event\EventDispatcherTrait;
 

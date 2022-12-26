@@ -10,8 +10,8 @@
 module uim.cake.Console;
 
 import uim.cake.consoles.Exception\MissingHelperException;
-import uim.cake.Core\App;
-import uim.cake.Core\ObjectRegistry;
+import uim.cake.cores.App;
+import uim.cake.cores.ObjectRegistry;
 
 /**
  * Registry for Helpers. Provides features

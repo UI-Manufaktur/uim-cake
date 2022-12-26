@@ -10,8 +10,8 @@
 module uim.cake.Cache;
 
 use BadMethodCallException;
-import uim.cake.Core\App;
-import uim.cake.Core\ObjectRegistry;
+import uim.cake.cores.App;
+import uim.cake.cores.ObjectRegistry;
 use RuntimeException;
 
 /**

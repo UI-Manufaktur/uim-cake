@@ -12,7 +12,7 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.Core\Plugin;
+import uim.cake.cores.Plugin;
 
 /**
  * Displays all currently loaded plugins.

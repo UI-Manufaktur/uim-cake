@@ -10,7 +10,7 @@
 module uim.cake.Controller;
 
 import uim.cake.Controller\Exception\MissingActionException;
-import uim.cake.Core\App;
+import uim.cake.cores.App;
 import uim.cake.Datasource\ModelAwareTrait;
 import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
 import uim.cake.Datasource\Paging\NumericPaginator;

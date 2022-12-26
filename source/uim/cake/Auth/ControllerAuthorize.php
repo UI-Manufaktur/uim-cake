@@ -11,7 +11,7 @@ module uim.cake.Auth;
 
 import uim.cake.Controller\ComponentRegistry;
 import uim.cake.Controller\Controller;
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 import uim.cake.Http\ServerRequest;
 
 /**

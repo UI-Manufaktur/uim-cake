@@ -15,7 +15,7 @@
  */
 module uim.cake.Cache;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 use Psr\SimpleCache\InvalidArgumentException as InvalidArgumentInterface;
 
 /**

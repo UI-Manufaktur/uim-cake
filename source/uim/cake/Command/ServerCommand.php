@@ -13,7 +13,7 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.Core\Configure;
+import uim.cake.cores.Configure;
 
 /**
  * built-in Server command

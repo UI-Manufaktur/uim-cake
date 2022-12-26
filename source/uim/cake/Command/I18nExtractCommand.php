@@ -12,9 +12,9 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.Core\App;
-import uim.cake.Core\Configure;
-import uim.cake.Core\Plugin;
+import uim.cake.cores.App;
+import uim.cake.cores.Configure;
+import uim.cake.cores.Plugin;
 import uim.cake.Filesystem\Filesystem;
 import uim.cake.Utility\Inflector;
 

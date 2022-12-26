@@ -10,8 +10,8 @@
 module uim.cake.Controller;
 
 import uim.cake.Controller\Exception\InvalidParameterException;
-import uim.cake.Core\App;
-import uim.cake.Core\IContainer;
+import uim.cake.cores.App;
+import uim.cake.cores.IContainer;
 import uim.cake.Http\ControllerFactoryInterface;
 import uim.cake.Http\Exception\MissingControllerException;
 import uim.cake.Http\MiddlewareQueue;

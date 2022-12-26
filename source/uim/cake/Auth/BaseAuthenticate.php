@@ -9,7 +9,7 @@
 module uim.cake.Auth;
 
 import uim.cake.Controller\ComponentRegistry;
-import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.Event\IEventListener;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;

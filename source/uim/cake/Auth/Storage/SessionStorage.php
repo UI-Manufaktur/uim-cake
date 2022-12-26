@@ -9,7 +9,7 @@
  */
 module uim.cake.Auth\Storage;
 
-import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 

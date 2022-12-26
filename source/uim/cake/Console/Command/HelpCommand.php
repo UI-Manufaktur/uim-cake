@@ -17,8 +17,8 @@ import uim.cake.consoles.CommandCollectionAwareInterface;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
 import uim.cake.consoles.ConsoleOutput;
-import uim.cake.Core\Configure;
-import uim.cake.Core\Plugin;
+import uim.cake.cores.Configure;
+import uim.cake.cores.Plugin;
 use SimpleXMLElement;
 
 /**

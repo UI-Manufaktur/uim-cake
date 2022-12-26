@@ -42,7 +42,7 @@ For our `Application` class we can start with:
 namespace App;
 
 use App\Command\HelloCommand;
-import uim.cake.Core\IConsoleApplication;
+import uim.cake.cores.IConsoleApplication;
 import uim.cake.consoles.CommandCollection;
 
 class Application : IConsoleApplication
