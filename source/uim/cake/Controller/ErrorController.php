@@ -34,8 +34,7 @@ class ErrorController : Controller
      * @param \Cake\Event\IEvent $event Event.
      * @return \Cake\Http\Response|null|void
      */
-    function beforeRender(IEvent $event)
-    {
+    function beforeRender(IEvent $event) {
         $builder = this.viewBuilder();
         $templatePath = 'Error';
 

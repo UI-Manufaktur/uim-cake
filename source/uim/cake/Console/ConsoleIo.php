@@ -308,8 +308,7 @@ class ConsoleIo
      * @param array<string>|string $message The message to wrap.
      * @return array<string>|string The message wrapped with the given message type.
      */
-    protected function wrapMessageWithType(string $messageType, $message)
-    {
+    protected function wrapMessageWithType(string $messageType, $message) {
         if (is_array($message)) {
             foreach ($message as $k: $v) {
                 $message[$k] = "<{$messageType}>{$v}</{$messageType}>";

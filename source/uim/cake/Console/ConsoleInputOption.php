@@ -214,8 +214,7 @@ class ConsoleInputOption
      *
      * @return string|bool|null
      */
-    function defaultValue()
-    {
+    function defaultValue() {
         return _default;
     }
 

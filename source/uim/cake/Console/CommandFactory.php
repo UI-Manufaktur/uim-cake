@@ -34,16 +34,14 @@ class CommandFactory : CommandFactoryInterface
      *
      * @param \Cake\Core\IContainer|null $container The container to use if available.
      */
-    public this(?IContainer $container = null)
-    {
+    public this(?IContainer $container = null) {
         this.container = $container;
     }
 
     /**
      * @inheritDoc
      */
-    function create(string $className)
-    {
+    function create(string $className) {
         if (this.container && this.container.has($className)) {
             $command = this.container.get($className);
         } else {

@@ -176,8 +176,7 @@ class Shell
      * @param \Cake\ORM\Locator\ILocator|null $locator Table locator instance.
      * @link https://book.cakephp.org/4/en/console-commands/shells.html
      */
-    public this(?ConsoleIo $io = null, ?ILocator $locator = null)
-    {
+    public this(?ConsoleIo $io = null, ?ILocator $locator = null) {
         if (!this.name) {
             [, $class] = namespaceSplit(static::class);
             this.name = str_replace(["Shell", "Task"], "", $class);
@@ -204,8 +203,7 @@ class Shell
      * @param string $name The name of the root command.
      * @return this
      */
-    function setRootName(string $name)
-    {
+    function setRootName(string $name) {
         this.rootName = $name;
 
         return this;
@@ -457,8 +455,7 @@ class Shell
      * @return int|bool|null
      * @link https://book.cakephp.org/4/en/console-and-shells.html#the-cakephp-console
      */
-    function runCommand(array $argv, bool $autoMethod = false, array $extra = [])
-    {
+    function runCommand(array $argv, bool $autoMethod = false, array $extra = []) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         this.OptionParser = this.getOptionParser();
         try {
@@ -544,8 +541,7 @@ class Shell
      * @param string|null $command The command to get help for.
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    protected function _displayHelp(?string $command = null)
-    {
+    protected function _displayHelp(?string $command = null) {
         $format = "text";
         if (!empty(this.args[0]) && this.args[0] == "xml") {
             $format = "xml";
@@ -585,8 +581,7 @@ class Shell
      * @param string $name The task to get.
      * @return \Cake\Console\Shell Object of Task
      */
-    function __get(string $name)
-    {
+    function __get(string $name) {
         if (empty(this.{$name}) && in_array($name, this.taskNames, true)) {
             $properties = _taskMap[$name];
             this.{$name} = this.Tasks.load($properties["class"], $properties["config"]);
@@ -605,8 +600,7 @@ class Shell
      * @param string $name The name of the parameter to get.
      * @return string|bool|null Value. Will return null if it doesn"t exist.
      */
-    function param(string $name)
-    {
+    function param(string $name) {
         return this.params[$name] ?? null;
     }
 

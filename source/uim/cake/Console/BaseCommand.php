@@ -36,8 +36,7 @@ abstract class BaseCommand : ICommand
     /**
      * @inheritDoc
      */
-    function setName(string $name)
-    {
+    function setName(string $name) {
         if (strpos($name, " ") < 1) {
             throw new InvalidArgumentException(
                 "The name "{$name}" is missing a space. Names should look like `cake routes`"

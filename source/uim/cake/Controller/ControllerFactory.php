@@ -48,8 +48,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      *
      * @param \Cake\Core\IContainer $container The container to build controllers with.
      */
-    public this(IContainer $container)
-    {
+    public this(IContainer $container) {
         this.container = $container;
     }
 
@@ -253,8 +252,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      * @param \ReflectionNamedType $type Parameter type
      * @return array|string|float|int|bool|null
      */
-    protected function coerceStringToType(string $argument, ReflectionNamedType $type)
-    {
+    protected function coerceStringToType(string $argument, ReflectionNamedType $type) {
         switch ($type.getName()) {
             case 'string':
                 return $argument;
@@ -336,8 +334,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      * @param \Cake\Http\ServerRequest $request The request.
      * @return \Cake\Http\Exception\MissingControllerException
      */
-    protected function missingController(ServerRequest $request)
-    {
+    protected function missingController(ServerRequest $request) {
         return new MissingControllerException([
             'class': $request.getParam('controller'),
             'plugin': $request.getParam('plugin'),

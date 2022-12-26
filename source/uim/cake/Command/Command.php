@@ -36,8 +36,7 @@ class Command : BaseCommand
      * By default CakePHP will construct command objects when
      * building the CommandCollection for your application.
      */
-    public this()
-    {
+    public this() {
         this.modelFactory("Table", function ($alias) {
             return this.getTableLocator().get($alias);
         });
@@ -57,8 +56,7 @@ class Command : BaseCommand
      * @param \Cake\Console\ConsoleIo $io The console io
      * @return int|null|void The exit code or null for success
      */
-    function execute(Arguments $args, ConsoleIo $io)
-    {
+    function execute(Arguments $args, ConsoleIo $io) {
     }
 }
 

@@ -56,8 +56,7 @@ class ConsoleInputArgument
      * @param bool $required Whether this argument is required. Missing required args will trigger exceptions
      * @param array<string> $choices Valid choices for this option.
      */
-    public this($name, $help = "", $required = false, $choices = [])
-    {
+    public this($name, $help = "", $required = false, $choices = []) {
         if (is_array($name) && isset($name["name"])) {
             foreach ($name as $key: $value) {
                 this.{"_" . $key} = $value;

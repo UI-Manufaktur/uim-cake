@@ -81,8 +81,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function key()
-    {
+    function key() {
         $extractor = _key;
 
         return $extractor(_fetchCurrent(), parent::key(), this);
@@ -118,8 +117,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      *
      * @return mixed
      */
-    protected function _fetchCurrent()
-    {
+    protected function _fetchCurrent() {
         if (_current != null) {
             return _current;
         }

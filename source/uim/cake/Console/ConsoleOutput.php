@@ -155,8 +155,7 @@ class ConsoleOutput
      *
      * @param string $stream The identifier of the stream to write output to.
      */
-    public this(string $stream = "php://stdout")
-    {
+    public this(string $stream = "php://stdout") {
         _output = fopen($stream, "wb");
 
         if (
@@ -341,8 +340,7 @@ class ConsoleOutput
     /**
      * Clean up and close handles
      */
-    function __destruct()
-    {
+    function __destruct() {
         if (is_resource(_output)) {
             fclose(_output);
         }

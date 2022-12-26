@@ -64,8 +64,7 @@ class StubConsoleOutput : ConsoleOutput
     /**
      * Get the buffered output.
      */
-    string[] messages()
-    {
+    string[] messages() {
         return _out;
     }
 

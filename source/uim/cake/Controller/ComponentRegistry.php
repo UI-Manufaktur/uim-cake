@@ -39,8 +39,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param \Cake\Controller\Controller|null $controller Controller instance.
      */
-    public this(?Controller $controller = null)
-    {
+    public this(?Controller $controller = null) {
         if ($controller) {
             this.setController($controller);
         }
@@ -66,8 +65,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      * @param \Cake\Controller\Controller $controller Controller instance.
      * @return this
      */
-    function setController(Controller $controller)
-    {
+    function setController(Controller $controller) {
         _Controller = $controller;
         this.setEventManager($controller.getEventManager());
 

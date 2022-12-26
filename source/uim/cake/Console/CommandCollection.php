@@ -38,8 +38,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @param array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string> $commands The map of commands to add to the collection.
      */
-    public this(array $commands = [])
-    {
+    public this(array $commands = []) {
         foreach ($commands as $name: $command) {
             this.add($name, $command);
         }
@@ -54,8 +53,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @return this
      * @throws \InvalidArgumentException
      */
-    function add(string $name, $command)
-    {
+    function add(string $name, $command) {
         if (!is_subclass_of($command, Shell::class) && !is_subclass_of($command, ICommand::class)) {
             $class = is_string($command) ? $command : get_class($command);
             throw new InvalidArgumentException(sprintf(
@@ -83,8 +81,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @return this
      * @see \Cake\Console\CommandCollection::add()
      */
-    function addMany(array $commands)
-    {
+    function addMany(array $commands) {
         foreach ($commands as $name: $class) {
             this.add($name, $class);
         }
@@ -98,8 +95,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @param string $name The named shell.
      * @return this
      */
-    function remove(string $name)
-    {
+    function remove(string $name) {
         unset(this.commands[$name]);
 
         return this;
@@ -124,8 +120,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @throws \InvalidArgumentException when unknown commands are fetched.
      * @psalm-return \Cake\Console\ICommand|\Cake\Console\Shell|class-string
      */
-    function get(string $name)
-    {
+    function get(string $name) {
         if (!this.has($name)) {
             throw new InvalidArgumentException("The $name is not a known command name.");
         }

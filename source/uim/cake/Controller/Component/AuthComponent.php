@@ -368,8 +368,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @return array|string
      */
-    protected function _loginActionRedirectUrl()
-    {
+    protected function _loginActionRedirectUrl() {
         $urlToRedirectBackTo = _getUrlToRedirectBackTo();
 
         $loginAction = _config['loginAction'];
@@ -666,8 +665,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @return mixed|null Either User record or null if no user is logged in, or retrieved field if key is specified.
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#accessing-the-logged-in-user
      */
-    function user(?string $key = null)
-    {
+    function user(?string $key = null) {
         $user = this.storage().read();
         if (!$user) {
             return null;
@@ -771,8 +769,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @return array|false User record data, or false, if the user could not be identified.
      */
-    function identify()
-    {
+    function identify() {
         _setDefaults();
 
         if (empty(_authenticateObjects)) {
@@ -882,8 +879,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @param string $name Property name
      * @return mixed
      */
-    function __get(string $name)
-    {
+    function __get(string $name) {
         if ($name == 'sessionKey') {
             return this.storage().getConfig('key');
         }

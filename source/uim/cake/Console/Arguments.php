@@ -44,8 +44,7 @@ class Arguments
      * @param array<int, string> $argNames List of argument names. Order is expected to be
      *  the same as $args.
      */
-    public this(array $args, array $options, array $argNames)
-    {
+    public this(array $args, array $options, array $argNames) {
         this.args = $args;
         this.options = $options;
         this.argNames = $argNames;
@@ -135,8 +134,7 @@ class Arguments
      * @param string $name The name of the option to check.
      * @return string|int|bool|null The option value or null.
      */
-    function getOption(string $name)
-    {
+    function getOption(string $name) {
         return this.options[$name] ?? null;
     }
 

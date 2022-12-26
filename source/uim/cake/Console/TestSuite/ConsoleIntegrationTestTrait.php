@@ -159,8 +159,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertExitSuccess($message = "")
-    {
+    function assertExitSuccess($message = "") {
         this.assertThat(Command::CODE_SUCCESS, new ExitCode(_exitCode), $message);
     }
 
@@ -170,8 +169,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    function assertExitError($message = "")
-    {
+    function assertExitError($message = "") {
         this.assertThat(Command::CODE_ERROR, new ExitCode(_exitCode), $message);
     }
 
@@ -274,8 +272,7 @@ trait ConsoleIntegrationTestTrait
      *
      * @return \Cake\Console\CommandRunner|\Cake\Console\TestSuite\LegacyCommandRunner
      */
-    protected function makeRunner()
-    {
+    protected function makeRunner() {
         if (_useCommandRunner) {
             /** @var \Cake\Core\IConsoleApplication $app */
             $app = this.createApp();

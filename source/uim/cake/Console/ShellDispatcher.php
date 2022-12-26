@@ -50,8 +50,7 @@ class ShellDispatcher
      * @param array $args the argv from PHP
      * @param bool $bootstrap Should the environment be bootstrapped.
      */
-    public this(array $args = [], bool $bootstrap = true)
-    {
+    public this(array $args = [], bool $bootstrap = true) {
         set_time_limit(0);
         this.args = $args;
 
@@ -147,8 +146,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    protected function _bootstrap()
-    {
+    protected function _bootstrap() {
         if (!Configure::read("App.fullBaseUrl")) {
             Configure::write("App.fullBaseUrl", "http://localhost");
         }
@@ -197,8 +195,7 @@ class ShellDispatcher
      * @return int|bool|null
      * @throws \Cake\Console\Exception\MissingShellMethodException
      */
-    protected function _dispatch(array $extra = [])
-    {
+    protected function _dispatch(array $extra = []) {
         $shellName = this.shiftArgs();
 
         if (!$shellName) {
@@ -381,8 +378,7 @@ class ShellDispatcher
      *
      * @return mixed Null if there are no arguments otherwise the shifted argument
      */
-    function shiftArgs()
-    {
+    function shiftArgs() {
         return array_shift(this.args);
     }
 

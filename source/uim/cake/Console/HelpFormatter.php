@@ -56,8 +56,7 @@ class HelpFormatter
      *
      * @param \Cake\Console\ConsoleOptionParser $parser The option parser help is being generated for.
      */
-    public this(ConsoleOptionParser $parser)
-    {
+    public this(ConsoleOptionParser $parser) {
         _parser = $parser;
     }
 
@@ -204,8 +203,7 @@ class HelpFormatter
      * @param bool $string Return the SimpleXml object or a string. Defaults to true.
      * @return \SimpleXMLElement|string See $string
      */
-    function xml(bool $string = true)
-    {
+    function xml(bool $string = true) {
         $parser = _parser;
         $xml = new SimpleXMLElement("<shell></shell>");
         $xml.addChild("command", $parser.getCommand());

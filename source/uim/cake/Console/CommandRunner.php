@@ -99,8 +99,7 @@ class CommandRunner : EventDispatcherInterface
      * @param array<string> $aliases The map of aliases to replace.
      * @return this
      */
-    function setAliases(array $aliases)
-    {
+    function setAliases(array $aliases) {
         this.aliases = $aliases;
 
         return this;
@@ -215,8 +214,7 @@ class CommandRunner : EventDispatcherInterface
      * @return this
      * @throws \InvalidArgumentException
      */
-    function setEventManager(IEventManager $eventManager)
-    {
+    function setEventManager(IEventManager $eventManager) {
         if (this.app instanceof IPluginApplication) {
             this.app.setEventManager($eventManager);
 
@@ -234,8 +232,7 @@ class CommandRunner : EventDispatcherInterface
      * @param string $name The command name to find
      * @return \Cake\Console\ICommand|\Cake\Console\Shell
      */
-    protected function getCommand(ConsoleIo $io, CommandCollection $commands, string $name)
-    {
+    protected function getCommand(ConsoleIo $io, CommandCollection $commands, string $name) {
         $instance = $commands.get($name);
         if (is_string($instance)) {
             $instance = this.createCommand($instance, $io);
@@ -337,8 +334,7 @@ class CommandRunner : EventDispatcherInterface
      * @param array $argv The CLI arguments to invoke.
      * @return int|bool|null Exit code
      */
-    protected function runShell(Shell $shell, array $argv)
-    {
+    protected function runShell(Shell $shell, array $argv) {
         try {
             $shell.initialize();
 
@@ -355,8 +351,7 @@ class CommandRunner : EventDispatcherInterface
      * @param \Cake\Console\ConsoleIo $io The IO wrapper for the created shell class.
      * @return \Cake\Console\ICommand|\Cake\Console\Shell
      */
-    protected function createCommand(string $className, ConsoleIo $io)
-    {
+    protected function createCommand(string $className, ConsoleIo $io) {
         if (!this.factory) {
             $container = null;
             if (this.app instanceof IContainerApplication) {
