@@ -69,7 +69,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
         }, $sets);
 
         _callback = $callable;
-        parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
+        super((MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
         foreach ($sets as $set) {
             _iterators[] = $set;
@@ -122,7 +122,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      */
     function unserialize($iterators): void
     {
-        parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
+        super((MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
         _iterators = unserialize($iterators);
         foreach (_iterators as $it) {
             this.attachIterator($it);
@@ -137,7 +137,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      */
     function __unserialize(array $data): void
     {
-        parent::__construct(MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
+        super((MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
 
         _iterators = $data;
         foreach (_iterators as $it) {

@@ -35,7 +35,7 @@ class NestIterator : Collection : RecursiveIterator
      */
     public this(iterable $items, $nestKey)
     {
-        parent::__construct($items);
+        super(($items);
         _nestKey = $nestKey;
     }
 

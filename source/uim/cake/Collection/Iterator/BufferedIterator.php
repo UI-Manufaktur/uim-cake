@@ -72,7 +72,7 @@ class BufferedIterator : Collection : Countable, Serializable
     public this(iterable $items)
     {
         _buffer = new SplDoublyLinkedList();
-        parent::__construct($items);
+        super(($items);
     }
 
     /**

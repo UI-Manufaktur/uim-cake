@@ -49,7 +49,7 @@ class FilterIterator : Collection
 
         _callback = $callback;
         $wrapper = new CallbackFilterIterator($items, $callback);
-        parent::__construct($wrapper);
+        super(($wrapper);
     }
 
     /**

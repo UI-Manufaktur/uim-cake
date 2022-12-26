@@ -69,7 +69,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
         string $spacer,
         int $mode = RecursiveIteratorIterator::SELF_FIRST
     ) {
-        parent::__construct($items, $mode);
+        super(($items, $mode);
         _value = _propertyExtractor($valuePath);
         _key = _propertyExtractor($keyPath);
         _spacer = $spacer;

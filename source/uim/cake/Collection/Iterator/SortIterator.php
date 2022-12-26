@@ -73,7 +73,7 @@ class SortIterator : Collection
         foreach (array_keys($results) as $key) {
             $results[$key] = $items[$key];
         }
-        parent::__construct($results);
+        super(($results);
     }
 
     /**

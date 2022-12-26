@@ -70,7 +70,7 @@ class PaginatorComponent : Component
             _paginator = new NumericPaginator();
         }
 
-        parent::__construct($registry, $config);
+        super(($registry, $config);
     }
 
     /**

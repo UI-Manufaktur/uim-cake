@@ -42,7 +42,7 @@ class ArrayEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
      */
-    function set($key, $value, $ttl = null): bool
+    bool set($key, $value, $ttl = null)
     {
         $key = _key($key);
         $expires = time() + this.duration($ttl);
@@ -120,7 +120,7 @@ class ArrayEngine : CacheEngine
      * @param string $key Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    function delete($key): bool
+    bool delete($key)
     {
         $key = _key($key);
         unset(this.data[$key]);
@@ -133,7 +133,7 @@ class ArrayEngine : CacheEngine
      *
      * @return bool True Returns true.
      */
-    function clear(): bool
+    bool clear()
     {
         this.data = [];
 
@@ -167,7 +167,7 @@ class ArrayEngine : CacheEngine
      * @param string $group The group to clear.
      * @return bool success
      */
-    function clearGroup(string $group): bool
+    bool clearGroup(string $group)
     {
         $key = _config["prefix"] . $group;
         if (isset(this.data[$key])) {

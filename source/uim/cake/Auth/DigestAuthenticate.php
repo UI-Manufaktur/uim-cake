@@ -87,7 +87,7 @@ class DigestAuthenticate : BasicAuthenticate
             "opaque": null,
         ]);
 
-        parent::__construct($registry, $config);
+        super(($registry, $config);
     }
 
     /**

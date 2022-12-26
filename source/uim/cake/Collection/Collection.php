@@ -34,7 +34,7 @@ class Collection : IteratorIterator : ICollection, Serializable
             $items = new ArrayIterator($items);
         }
 
-        parent::__construct($items);
+        super(($items);
     }
 
     /**

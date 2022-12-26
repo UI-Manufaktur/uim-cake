@@ -76,7 +76,7 @@ class FileEngine : CacheEngine
      * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    function init(array $config = []): bool
+    bool init(array $config = [])
     {
         parent::init($config);
 
@@ -103,7 +103,7 @@ class FileEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
      */
-    function set($key, $value, $ttl = null): bool
+    bool set($key, $value, $ttl = null)
     {
         if ($value == '' || !_init) {
             return false;
@@ -204,7 +204,7 @@ class FileEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn't
      *   exist or couldn't be removed
      */
-    function delete($key): bool
+    bool delete($key)
     {
         $key = _key($key);
 
@@ -230,7 +230,7 @@ class FileEngine : CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    function clear(): bool
+    bool clear()
     {
         if (!_init) {
             return false;
@@ -355,7 +355,7 @@ class FileEngine : CacheEngine
      * @param bool $createKey Whether the key should be created if it doesn't exists, or not
      * @return bool true if the cache key could be set, false otherwise
      */
-    protected function _setKey(string $key, bool $createKey = false): bool
+    protected bool _setKey(string $key, bool $createKey = false)
     {
         $groups = null;
         if (_groupPrefix) {
@@ -404,7 +404,7 @@ class FileEngine : CacheEngine
      *
      * @return bool
      */
-    protected function _active(): bool
+    protected bool _active()
     {
         $dir = new SplFileInfo(_config['path']);
         $path = $dir.getPathname();
@@ -443,7 +443,7 @@ class FileEngine : CacheEngine
      * @param string $group The group to clear.
      * @return bool success
      */
-    function clearGroup(string $group): bool
+    bool clearGroup(string $group)
     {
         _File = null;
 

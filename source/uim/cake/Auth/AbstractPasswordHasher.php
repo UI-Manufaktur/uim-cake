@@ -53,7 +53,7 @@ abstract class AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    abstract function check(string $password, string $hashedPassword): bool;
+    abstract bool check(string $password, string $hashedPassword);
 
     /**
      * Returns true if the password need to be rehashed, due to the password being
@@ -65,7 +65,7 @@ abstract class AbstractPasswordHasher
      * @param string $password The password to verify
      * @return bool
      */
-    function needsRehash(string $password): bool
+    bool needsRehash(string $password)
     {
         return password_needs_rehash($password, PASSWORD_DEFAULT);
     }

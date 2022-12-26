@@ -41,7 +41,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
         int $mode = RecursiveIteratorIterator::SELF_FIRST,
         int $flags = 0
     ) {
-        parent::__construct($items, $mode, $flags);
+        super(($items, $mode, $flags);
         _mode = $mode;
     }
 

@@ -83,7 +83,7 @@ class RequestHandlerComponent : Component
                 'ajax': 'Ajax',
             ],
         ];
-        parent::__construct($registry, $config);
+        super(($registry, $config);
     }
 
     /**

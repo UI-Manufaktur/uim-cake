@@ -39,7 +39,7 @@ class LegacyShellDispatcher : ShellDispatcher
     {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
         _io = $io;
-        parent::__construct($args, $bootstrap);
+        super(($args, $bootstrap);
     }
 
     /**

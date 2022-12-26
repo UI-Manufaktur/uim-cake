@@ -48,7 +48,7 @@ class ReplaceIterator : Collection
     public this(iterable $items, callable $callback)
     {
         _callback = $callback;
-        parent::__construct($items);
+        super(($items);
         _innerIterator = this.getInnerIterator();
     }
 

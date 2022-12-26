@@ -48,7 +48,7 @@ class ControllerAuthorize : BaseAuthorize
      */
     public this(ComponentRegistry $registry, array $config = [])
     {
-        parent::__construct($registry, $config);
+        super(($registry, $config);
         this.controller($registry.getController());
     }
 

@@ -63,7 +63,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
     {
         _name = $name;
         _returnType = $returnType;
-        parent::__construct($params, $types, ',');
+        super(($params, $types, ',');
     }
 
     /**

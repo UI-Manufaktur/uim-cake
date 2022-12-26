@@ -34,7 +34,7 @@ class ApcuEngine : CacheEngine
      * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    function init(array $config = []): bool
+    bool init(array $config = [])
     {
         if (!extension_loaded("apcu")) {
             throw new RuntimeException("The `apcu` extension must be enabled to use ApcuEngine.");
@@ -54,7 +54,7 @@ class ApcuEngine : CacheEngine
      * @return bool True on success and false on failure.
      * @link https://secure.php.net/manual/en/function.apcu-store.php
      */
-    function set($key, $value, $ttl = null): bool
+    bool set($key, $value, $ttl = null)
     {
         $key = _key($key);
         $duration = this.duration($ttl);
@@ -118,7 +118,7 @@ class ApcuEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
-    function delete($key): bool
+    bool delete($key)
     {
         $key = _key($key);
 
@@ -132,7 +132,7 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-cache-info.php
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
-    function clear(): bool
+    bool clear()
     {
         if (class_exists(APCUIterator::class, false)) {
             $iterator = new APCUIterator(
@@ -163,7 +163,7 @@ class ApcuEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      * @link https://secure.php.net/manual/en/function.apcu-add.php
      */
-    function add(string $key, $value): bool
+    bool add(string $key, $value)
     {
         $key = _key($key);
         $duration = _config["duration"];
@@ -218,7 +218,7 @@ class ApcuEngine : CacheEngine
      * @return bool success
      * @link https://secure.php.net/manual/en/function.apcu-inc.php
      */
-    function clearGroup(string $group): bool
+    bool clearGroup(string $group)
     {
         $success = false;
         apcu_inc(_config["prefix"] . $group, 1, $success);

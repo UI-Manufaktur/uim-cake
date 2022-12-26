@@ -69,7 +69,7 @@ class CakeException : RuntimeException
             _attributes = $message;
             $message = vsprintf(_messageTemplate, $message);
         }
-        parent::__construct($message, $code ?? _defaultCode, $previous);
+        super(($message, $code ?? _defaultCode, $previous);
     }
 
     /**

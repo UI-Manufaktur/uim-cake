@@ -41,7 +41,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher
      */
     public this(array $config = [])
     {
-        parent::__construct($config);
+        super(($config);
         foreach (_config["hashers"] as $key: $hasher) {
             if (is_array($hasher) && !isset($hasher["className"])) {
                 $hasher["className"] = $key;

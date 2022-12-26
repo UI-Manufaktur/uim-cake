@@ -56,7 +56,7 @@ class DefaultPasswordHasher : AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    function check(string $password, string $hashedPassword): bool
+    bool check(string $password, string $hashedPassword)
     {
         return password_verify($password, $hashedPassword);
     }
@@ -68,7 +68,7 @@ class DefaultPasswordHasher : AbstractPasswordHasher
      * @param string $password The password to verify
      * @return bool
      */
-    function needsRehash(string $password): bool
+    bool needsRehash(string $password)
     {
         return password_needs_rehash($password, _config["hashType"], _config["hashOptions"]);
     }

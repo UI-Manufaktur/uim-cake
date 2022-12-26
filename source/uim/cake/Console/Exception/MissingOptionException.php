@@ -53,7 +53,7 @@ class MissingOptionException : ConsoleException
     ) {
         this.suggestions = $suggestions;
         this.requested = $requested;
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 
     /**

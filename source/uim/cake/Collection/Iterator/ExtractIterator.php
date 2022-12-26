@@ -52,7 +52,7 @@ class ExtractIterator : Collection
     public this(iterable $items, $path)
     {
         _extractor = _propertyExtractor($path);
-        parent::__construct($items);
+        super(($items);
     }
 
     /**

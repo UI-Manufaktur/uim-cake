@@ -27,7 +27,7 @@ class OrderByExpression : QueryExpression
      */
     public this($conditions = [], $types = [], $conjunction = '')
     {
-        parent::__construct($conditions, $types, $conjunction);
+        super(($conditions, $types, $conjunction);
     }
 
     /**

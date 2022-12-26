@@ -61,7 +61,7 @@ class InsertIterator : Collection
      */
     public this(iterable $into, string $path, iterable $values)
     {
-        parent::__construct($into);
+        super(($into);
 
         if (!($values instanceof Collection)) {
             $values = new Collection($values);

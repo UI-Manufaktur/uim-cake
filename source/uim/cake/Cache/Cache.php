@@ -249,7 +249,7 @@ class Cache
      * @param string $config Optional string configuration name to write to. Defaults to "default"
      * @return bool True if the data was successfully cached, false on failure
      */
-    public static function write(string $key, $value, string $config = "default"): bool
+    public static bool write(string $key, $value, string $config = "default")
     {
         if (is_resource($value)) {
             return false;
@@ -294,7 +294,7 @@ class Cache
      * @return bool True on success, false on failure
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    public static function writeMany(iterable $data, string $config = "default"): bool
+    public static bool writeMany(iterable $data, string $config = "default")
     {
         return static::pool($config).setMultiple($data);
     }
@@ -413,7 +413,7 @@ class Cache
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    public static function delete(string $key, string $config = "default"): bool
+    public static bool delete(string $key, string $config = "default")
     {
         return static::pool($config).delete($key);
     }
@@ -440,7 +440,7 @@ class Cache
      * @return bool True on success, false on failure.
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    public static function deleteMany(iterable $keys, string $config = "default"): bool
+    public static bool deleteMany(iterable $keys, string $config = "default")
     {
         return static::pool($config).deleteMultiple($keys);
     }
@@ -451,7 +451,7 @@ class Cache
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    public static function clear(string $config = "default"): bool
+    public static bool clear(string $config = "default")
     {
         return static::pool($config).clear();
     }

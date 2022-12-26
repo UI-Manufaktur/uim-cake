@@ -36,7 +36,7 @@ class CallbackStatement : StatementDecorator
      */
     public this(StatementInterface $statement, DriverInterface $driver, callable $callback)
     {
-        parent::__construct($statement, $driver);
+        super(($statement, $driver);
         _callback = $callback;
     }
 

@@ -46,7 +46,7 @@ class StubConsoleInput : ConsoleInput
      */
     public this(array $replies)
     {
-        parent::__construct();
+        super(();
 
         this.replies = $replies;
     }

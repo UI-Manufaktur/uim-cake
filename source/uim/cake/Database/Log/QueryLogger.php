@@ -30,7 +30,7 @@ class QueryLogger : BaseLog
         _defaultConfig['scopes'] = ['queriesLog'];
         _defaultConfig['connection'] = '';
 
-        parent::__construct($config);
+        super(($config);
     }
 
     /**

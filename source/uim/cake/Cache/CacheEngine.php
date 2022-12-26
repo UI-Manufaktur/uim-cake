@@ -69,7 +69,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param array<string, mixed> $config Associative array of parameters for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    function init(array $config = []): bool
+    bool init(array $config = [])
     {
         this.setConfig($config);
 
@@ -156,7 +156,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws \Cake\Cache\InvalidArgumentException If $values is neither an array nor a Traversable,
      *   or if any of the $values are not a legal value.
      */
-    function setMultiple($values, $ttl = null): bool
+    bool setMultiple($values, $ttl = null)
     {
         this.ensureValidType($values, self::CHECK_KEY);
 
@@ -192,7 +192,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws \Cake\Cache\InvalidArgumentException If $keys is neither an array nor a Traversable,
      *   or if any of the $keys are not a legal value.
      */
-    function deleteMultiple($keys): bool
+    bool deleteMultiple($keys)
     {
         this.ensureValidType($keys);
 
@@ -218,7 +218,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return bool
      * @throws \Cake\Cache\InvalidArgumentException If the $key string is not a legal value.
      */
-    function has($key): bool
+    bool has($key)
     {
         return this.get($key) != null;
     }
@@ -245,7 +245,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws \Cake\Cache\InvalidArgumentException
      *   MUST be thrown if the $key string is not a legal value.
      */
-    abstract function set($key, $value, $ttl = null): bool;
+    abstract bool set($key, $value, $ttl = null);
 
     /**
      * Increment a number under the key and return incremented value
@@ -271,14 +271,14 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param string $key Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    abstract function delete($key): bool;
+    abstract bool delete($key);
 
     /**
      * Delete all keys from the cache
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    abstract function clear(): bool;
+    abstract bool clear();
 
     /**
      * Add a key to the cache if it does not already exist.
@@ -290,7 +290,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param mixed $value Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      */
-    function add(string $key, $value): bool
+    bool add(string $key, $value)
     {
         $cachedValue = this.get($key);
         if ($cachedValue == null) {
@@ -308,7 +308,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param string $group name of the group to be cleared
      * @return bool
      */
-    abstract function clearGroup(string $group): bool;
+    abstract bool clearGroup(string $group);
 
     /**
      * Does whatever initialization for each group is required

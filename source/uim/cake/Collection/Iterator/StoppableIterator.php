@@ -53,7 +53,7 @@ class StoppableIterator : Collection
     public this(iterable $items, callable $condition)
     {
         _condition = $condition;
-        parent::__construct($items);
+        super(($items);
         _innerIterator = this.getInnerIterator();
     }
 

@@ -49,7 +49,7 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
     public this(Traversable $items, callable $unfolder)
     {
         _unfolder = $unfolder;
-        parent::__construct($items);
+        super(($items);
         _innerIterator = this.getInnerIterator();
     }
 
