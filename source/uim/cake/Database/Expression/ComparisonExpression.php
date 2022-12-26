@@ -69,8 +69,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param string|null $type the type name used to cast the value
      * @param string $operator the operator used for comparing field and value
      */
-    public this($field, $value, ?string $type = null, string $operator = '=')
-    {
+    public this($field, $value, ?string $type = null, string $operator = '=') {
         _type = $type;
         this.setField($field);
         this.setValue($value);
@@ -101,8 +100,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @return mixed
      */
-    function getValue()
-    {
+    function getValue() {
         return _value;
     }
 
@@ -155,8 +153,7 @@ class ComparisonExpression : IExpression, FieldInterface
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         if (_field instanceof IExpression) {
             $callback(_field);
             _field.traverse($callback);
@@ -182,8 +179,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         foreach (['_value', '_field'] as $prop) {
             if (this.{$prop} instanceof IExpression) {
                 this.{$prop} = clone this.{$prop};

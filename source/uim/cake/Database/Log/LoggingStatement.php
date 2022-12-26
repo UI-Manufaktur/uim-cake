@@ -85,8 +85,7 @@ class LoggingStatement : StatementDecorator
     /**
      * @inheritDoc
      */
-    function fetch($type = self::FETCH_TYPE_NUM)
-    {
+    function fetch($type = self::FETCH_TYPE_NUM) {
         $record = parent::fetch($type);
 
         if (this.loggedQuery) {
@@ -99,8 +98,7 @@ class LoggingStatement : StatementDecorator
     /**
      * @inheritDoc
      */
-    function fetchAll($type = self::FETCH_TYPE_NUM)
-    {
+    function fetchAll($type = self::FETCH_TYPE_NUM) {
         $results = parent::fetchAll($type);
 
         if (this.loggedQuery) {

@@ -25,8 +25,7 @@ class QueryLogger : BaseLog
      *
      * @param array<string, mixed> $config Configuration array
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         _defaultConfig['scopes'] = ['queriesLog'];
         _defaultConfig['connection'] = '';
 
@@ -36,8 +35,7 @@ class QueryLogger : BaseLog
     /**
      * @inheritDoc
      */
-    function log($level, $message, array $context = [])
-    {
+    function log($level, $message, array $context = []) {
         $context['scope'] = this.scopes() ?: ['queriesLog'];
         $context['connection'] = this.getConfig('connection');
 

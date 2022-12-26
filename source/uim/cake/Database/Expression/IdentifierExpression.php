@@ -41,8 +41,7 @@ class IdentifierExpression : IExpression
      * @param string $identifier The identifier this expression represents
      * @param string|null $collation The identifier collation
      */
-    public this(string $identifier, ?string $collation = null)
-    {
+    public this(string $identifier, ?string $collation = null) {
         _identifier = $identifier;
         this.collation = $collation;
     }
@@ -105,8 +104,7 @@ class IdentifierExpression : IExpression
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         return this;
     }
 }

@@ -37,8 +37,7 @@ trait FieldTrait
      *
      * @return \Cake\Database\IExpression|array|string
      */
-    function getField()
-    {
+    function getField() {
         return _field;
     }
 }

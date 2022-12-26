@@ -57,8 +57,7 @@ class QueryExpression : IExpression, Countable
      * level of the expression tree. For example "AND", "OR", "XOR"...
      * @see \Cake\Database\Expression\QueryExpression::add() for more details on $conditions and $types
      */
-    public this($conditions = [], $types = [], $conjunction = 'AND')
-    {
+    public this($conditions = [], $types = [], $conjunction = 'AND') {
         this.setTypeMap($types);
         this.setConjunction(strtoupper($conjunction));
         if (!empty($conditions)) {
@@ -72,8 +71,7 @@ class QueryExpression : IExpression, Countable
      * @param string $conjunction Value to be used for joining conditions
      * @return this
      */
-    function setConjunction(string $conjunction)
-    {
+    function setConjunction(string $conjunction) {
         _conjunction = strtoupper($conjunction);
 
         return this;
@@ -109,8 +107,7 @@ class QueryExpression : IExpression, Countable
      * @see \Cake\Database\Query::where() for examples on conditions
      * @return this
      */
-    function add($conditions, array $types = [])
-    {
+    function add($conditions, array $types = []) {
         if (is_string($conditions)) {
             _conditions[] = $conditions;
 
@@ -138,8 +135,7 @@ class QueryExpression : IExpression, Countable
      * will be created, one per each value in the array.
      * @return this
      */
-    function eq($field, $value, ?string $type = null)
-    {
+    function eq($field, $value, ?string $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -157,8 +153,7 @@ class QueryExpression : IExpression, Countable
      * will be created, one per each value in the array.
      * @return this
      */
-    function notEq($field, $value, $type = null)
-    {
+    function notEq($field, $value, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -174,8 +169,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function gt($field, $value, $type = null)
-    {
+    function gt($field, $value, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -191,8 +185,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function lt($field, $value, $type = null)
-    {
+    function lt($field, $value, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -208,8 +201,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function gte($field, $value, $type = null)
-    {
+    function gte($field, $value, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -225,8 +217,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function lte($field, $value, $type = null)
-    {
+    function lte($field, $value, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -241,8 +232,7 @@ class QueryExpression : IExpression, Countable
      * tested for null
      * @return this
      */
-    function isNull($field)
-    {
+    function isNull($field) {
         if (!($field instanceof IExpression)) {
             $field = new IdentifierExpression($field);
         }
@@ -257,8 +247,7 @@ class QueryExpression : IExpression, Countable
      * tested for not null
      * @return this
      */
-    function isNotNull($field)
-    {
+    function isNotNull($field) {
         if (!($field instanceof IExpression)) {
             $field = new IdentifierExpression($field);
         }
@@ -274,8 +263,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function like($field, $value, $type = null)
-    {
+    function like($field, $value, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -291,8 +279,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function notLike($field, $value, $type = null)
-    {
+    function notLike($field, $value, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -309,8 +296,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function in($field, $values, $type = null)
-    {
+    function in($field, $values, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -334,8 +320,7 @@ class QueryExpression : IExpression, Countable
      * @return this
      * @deprecated 4.3.0 Use QueryExpression::case() or CaseStatementExpression instead
      */
-    function addCase($conditions, $values = [], $types = [])
-    {
+    function addCase($conditions, $values = [], $types = []) {
         deprecationWarning('QueryExpression::addCase() is deprecated, use case() instead.');
 
         return this.add(new CaseExpression($conditions, $values, $types));
@@ -382,8 +367,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function notIn($field, $values, $type = null)
-    {
+    function notIn($field, $values, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -403,8 +387,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function notInOrNull($field, $values, ?string $type = null)
-    {
+    function notInOrNull($field, $values, ?string $type = null) {
         $or = new static([], [], 'OR');
         $or
             .notIn($field, $values, $type)
@@ -419,8 +402,7 @@ class QueryExpression : IExpression, Countable
      * @param \Cake\Database\IExpression $expression the inner query
      * @return this
      */
-    function exists(IExpression $expression)
-    {
+    function exists(IExpression $expression) {
         return this.add(new UnaryExpression('EXISTS', $expression, UnaryExpression::PREFIX));
     }
 
@@ -430,8 +412,7 @@ class QueryExpression : IExpression, Countable
      * @param \Cake\Database\IExpression $expression the inner query
      * @return this
      */
-    function notExists(IExpression $expression)
-    {
+    function notExists(IExpression $expression) {
         return this.add(new UnaryExpression('NOT EXISTS', $expression, UnaryExpression::PREFIX));
     }
 
@@ -445,8 +426,7 @@ class QueryExpression : IExpression, Countable
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
-    function between($field, $from, $to, $type = null)
-    {
+    function between($field, $from, $to, $type = null) {
         if ($type == null) {
             $type = _calculateType($field);
         }
@@ -463,8 +443,7 @@ class QueryExpression : IExpression, Countable
      * values that are being passed. Used for correctly binding values to statements.
      * @return \Cake\Database\Expression\QueryExpression
      */
-    function and($conditions, $types = [])
-    {
+    function and($conditions, $types = []) {
         if ($conditions instanceof Closure) {
             return $conditions(new static([], this.getTypeMap().setTypes($types)));
         }
@@ -481,8 +460,7 @@ class QueryExpression : IExpression, Countable
      * values that are being passed. Used for correctly binding values to statements.
      * @return \Cake\Database\Expression\QueryExpression
      */
-    function or($conditions, $types = [])
-    {
+    function or($conditions, $types = []) {
         if ($conditions instanceof Closure) {
             return $conditions(new static([], this.getTypeMap().setTypes($types), 'OR'));
         }
@@ -502,8 +480,7 @@ class QueryExpression : IExpression, Countable
      * @return \Cake\Database\Expression\QueryExpression
      * @deprecated 4.0.0 Use {@link and()} instead.
      */
-    function and_($conditions, $types = [])
-    {
+    function and_($conditions, $types = []) {
         deprecationWarning('QueryExpression::and_() is deprecated use and() instead.');
 
         return this.and($conditions, $types);
@@ -519,8 +496,7 @@ class QueryExpression : IExpression, Countable
      * @return \Cake\Database\Expression\QueryExpression
      * @deprecated 4.0.0 Use {@link or()} instead.
      */
-    function or_($conditions, $types = [])
-    {
+    function or_($conditions, $types = []) {
         deprecationWarning('QueryExpression::or_() is deprecated use or() instead.');
 
         return this.or($conditions, $types);
@@ -539,8 +515,7 @@ class QueryExpression : IExpression, Countable
      * values that are being passed. Used for correctly binding values to statements.
      * @return this
      */
-    function not($conditions, $types = [])
-    {
+    function not($conditions, $types = []) {
         return this.add(['NOT': $conditions], $types);
     }
 
@@ -563,8 +538,7 @@ class QueryExpression : IExpression, Countable
      * @param string $rightField Right join condition field name.
      * @return this
      */
-    function equalFields(string $leftField, string $rightField)
-    {
+    function equalFields(string $leftField, string $rightField) {
         $wrapIdentifier = function ($field) {
             if ($field instanceof IExpression) {
                 return $field;
@@ -605,8 +579,7 @@ class QueryExpression : IExpression, Countable
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         foreach (_conditions as $c) {
             if ($c instanceof IExpression) {
                 $callback($c);
@@ -632,8 +605,7 @@ class QueryExpression : IExpression, Countable
      * @param callable $callback The callable to apply to each part.
      * @return this
      */
-    function iterateParts(callable $callback)
-    {
+    function iterateParts(callable $callback) {
         $parts = [];
         foreach (_conditions as $k: $c) {
             $key = &$k;
@@ -767,8 +739,7 @@ class QueryExpression : IExpression, Countable
      * @return \Cake\Database\IExpression
      * @throws \InvalidArgumentException If operator is invalid or missing on NULL usage.
      */
-    protected function _parseCondition(string $field, $value)
-    {
+    protected function _parseCondition(string $field, $value) {
         $field = trim($field);
         $operator = '=';
         $expression = $field;
@@ -863,8 +834,7 @@ class QueryExpression : IExpression, Countable
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         foreach (_conditions as $i: $condition) {
             if ($condition instanceof IExpression) {
                 _conditions[$i] = clone $condition;

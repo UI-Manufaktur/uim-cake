@@ -72,8 +72,7 @@ class BufferedStatement : Iterator, StatementInterface
      * @param \Cake\Database\StatementInterface $statement Statement implementation such as PDOStatement
      * @param \Cake\Database\DriverInterface $driver Driver instance
      */
-    public this(StatementInterface $statement, DriverInterface $driver)
-    {
+    public this(StatementInterface $statement, DriverInterface $driver) {
         this.statement = $statement;
         _driver = $driver;
     }
@@ -84,8 +83,7 @@ class BufferedStatement : Iterator, StatementInterface
      * @param string $property internal property to get
      * @return string|null
      */
-    function __get(string $property)
-    {
+    function __get(string $property) {
         if ($property == 'queryString') {
             /** @psalm-suppress NoInterfaceProperties */
             return this.statement.queryString;
@@ -121,8 +119,7 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    function errorCode()
-    {
+    function errorCode() {
         return this.statement.errorCode();
     }
 
@@ -148,8 +145,7 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    function fetchColumn(int $position)
-    {
+    function fetchColumn(int $position) {
         $result = this.fetch(static::FETCH_TYPE_NUM);
         if ($result != false && isset($result[$position])) {
             return $result[$position];
@@ -180,8 +176,7 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    function lastInsertId(?string $table = null, ?string $column = null)
-    {
+    function lastInsertId(?string $table = null, ?string $column = null) {
         return this.statement.lastInsertId($table, $column);
     }
 
@@ -191,8 +186,7 @@ class BufferedStatement : Iterator, StatementInterface
      * @param string|int $type The type to fetch.
      * @return array|false
      */
-    function fetch($type = self::FETCH_TYPE_NUM)
-    {
+    function fetch($type = self::FETCH_TYPE_NUM) {
         if (_allFetched) {
             $row = false;
             if (isset(this.buffer[this.index])) {
@@ -232,8 +226,7 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    function fetchAll($type = self::FETCH_TYPE_NUM)
-    {
+    function fetchAll($type = self::FETCH_TYPE_NUM) {
         if (_allFetched) {
             return this.buffer;
         }
@@ -277,8 +270,7 @@ class BufferedStatement : Iterator, StatementInterface
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function key()
-    {
+    function key() {
         return this.index;
     }
 
@@ -288,8 +280,7 @@ class BufferedStatement : Iterator, StatementInterface
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function current()
-    {
+    function current() {
         return this.buffer[this.index];
     }
 

@@ -60,8 +60,7 @@ class CommonTableExpression : IExpression
      * @param string $name The CTE name.
      * @param \Cake\Database\IExpression|\Closure $query CTE query
      */
-    public this(string $name = '', $query = null)
-    {
+    public this(string $name = '', $query = null) {
         this.name = new IdentifierExpression($name);
         if ($query) {
             this.query($query);
@@ -77,8 +76,7 @@ class CommonTableExpression : IExpression
      * @param string $name The CTE name.
      * @return this
      */
-    function name(string $name)
-    {
+    function name(string $name) {
         this.name = new IdentifierExpression($name);
 
         return this;
@@ -90,8 +88,7 @@ class CommonTableExpression : IExpression
      * @param \Cake\Database\IExpression|\Closure $query CTE query
      * @return this
      */
-    function query($query)
-    {
+    function query($query) {
         if ($query instanceof Closure) {
             $query = $query();
             if (!($query instanceof IExpression)) {
@@ -111,8 +108,7 @@ class CommonTableExpression : IExpression
      * @param \Cake\Database\Expression\IdentifierExpression|array<\Cake\Database\Expression\IdentifierExpression>|array<string>|string $fields Field names
      * @return this
      */
-    function field($fields)
-    {
+    function field($fields) {
         $fields = (array)$fields;
         foreach ($fields as &$field) {
             if (!($field instanceof IdentifierExpression)) {
@@ -129,8 +125,7 @@ class CommonTableExpression : IExpression
      *
      * @return this
      */
-    function materialized()
-    {
+    function materialized() {
         this.materialized = 'MATERIALIZED';
 
         return this;
@@ -141,8 +136,7 @@ class CommonTableExpression : IExpression
      *
      * @return this
      */
-    function notMaterialized()
-    {
+    function notMaterialized() {
         this.materialized = 'NOT MATERIALIZED';
 
         return this;
@@ -163,8 +157,7 @@ class CommonTableExpression : IExpression
      *
      * @return this
      */
-    function recursive()
-    {
+    function recursive() {
         this.recursive = true;
 
         return this;
@@ -197,8 +190,7 @@ class CommonTableExpression : IExpression
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         $callback(this.name);
         foreach (this.fields as $field) {
             $callback($field);
@@ -218,8 +210,7 @@ class CommonTableExpression : IExpression
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         this.name = clone this.name;
         if (this.query) {
             this.query = clone this.query;

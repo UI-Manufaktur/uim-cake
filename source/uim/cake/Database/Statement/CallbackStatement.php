@@ -34,8 +34,7 @@ class CallbackStatement : StatementDecorator
      * @param \Cake\Database\DriverInterface $driver The driver instance used by the statement.
      * @param callable $callback The callback to apply to results before they are returned.
      */
-    public this(StatementInterface $statement, DriverInterface $driver, callable $callback)
-    {
+    public this(StatementInterface $statement, DriverInterface $driver, callable $callback) {
         super(($statement, $driver);
         _callback = $callback;
     }
@@ -48,8 +47,7 @@ class CallbackStatement : StatementDecorator
      * @param string|int $type Either 'num' or 'assoc' to indicate the result format you would like.
      * @return array|false
      */
-    function fetch($type = parent::FETCH_TYPE_NUM)
-    {
+    function fetch($type = parent::FETCH_TYPE_NUM) {
         $callback = _callback;
         $row = _statement.fetch($type);
 
@@ -61,8 +59,7 @@ class CallbackStatement : StatementDecorator
      *
      * Each row in the result will be processed by the callback when it is not `false.
      */
-    function fetchAll($type = parent::FETCH_TYPE_NUM)
-    {
+    function fetchAll($type = parent::FETCH_TYPE_NUM) {
         $results = _statement.fetchAll($type);
 
         return $results != false ? array_map(_callback, $results) : false;

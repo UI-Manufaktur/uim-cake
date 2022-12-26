@@ -30,8 +30,7 @@ abstract class BaseType : TypeInterface
      *
      * @param string|null $name The name identifying this type
      */
-    public this(?string $name = null)
-    {
+    public this(?string $name = null) {
         _name = $name;
     }
 
@@ -54,8 +53,7 @@ abstract class BaseType : TypeInterface
     /**
      * @inheritDoc
      */
-    function toStatement($value, DriverInterface $driver)
-    {
+    function toStatement($value, DriverInterface $driver) {
         if ($value == null) {
             return PDO::PARAM_NULL;
         }
@@ -66,8 +64,7 @@ abstract class BaseType : TypeInterface
     /**
      * @inheritDoc
      */
-    function newId()
-    {
+    function newId() {
         return null;
     }
 }

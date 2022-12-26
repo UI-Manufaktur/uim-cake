@@ -44,8 +44,7 @@ class DateType : DateTimeType
     /**
      * @inheritDoc
      */
-    public this(?string $name = null)
-    {
+    public this(?string $name = null) {
         super(($name);
 
         _setClassName(FrozenDate::class, DateTimeImmutable::class);
@@ -57,8 +56,7 @@ class DateType : DateTimeType
      * @return this
      * @deprecated 4.3.0 This method is no longer needed as using immutable datetime class is the default behavior.
      */
-    function useImmutable()
-    {
+    function useImmutable() {
         deprecationWarning(
             'Configuring immutable or mutable classes is deprecated and immutable'
             . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'
@@ -75,8 +73,7 @@ class DateType : DateTimeType
      * @return this
      * @deprecated 4.3.0 Using mutable datetime objects is deprecated.
      */
-    function useMutable()
-    {
+    function useMutable() {
         deprecationWarning(
             'Configuring immutable or mutable classes is deprecated and immutable'
             . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'

@@ -39,8 +39,7 @@ abstract class SchemaDialect
      *
      * @param \Cake\Database\DriverInterface $driver The driver to use.
      */
-    public this(DriverInterface $driver)
-    {
+    public this(DriverInterface $driver) {
         $driver.connect();
         _driver = $driver;
     }

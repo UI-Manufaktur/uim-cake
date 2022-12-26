@@ -45,8 +45,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @return string|float|int|null
      * @throws \InvalidArgumentException
      */
-    function toDatabase($value, DriverInterface $driver)
-    {
+    function toDatabase($value, DriverInterface $driver) {
         if ($value == null || $value == '') {
             return null;
         }
@@ -145,8 +144,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @return this
      * @throws \RuntimeException
      */
-    function useLocaleParser(bool $enable = true)
-    {
+    function useLocaleParser(bool $enable = true) {
         if ($enable == false) {
             _useLocaleParser = $enable;
 

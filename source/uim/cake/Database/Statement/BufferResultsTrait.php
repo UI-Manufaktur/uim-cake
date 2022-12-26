@@ -29,8 +29,7 @@ trait BufferResultsTrait
      * @param bool $buffer Toggle buffering
      * @return this
      */
-    function bufferResults(bool $buffer)
-    {
+    function bufferResults(bool $buffer) {
         _bufferResults = $buffer;
 
         return this;

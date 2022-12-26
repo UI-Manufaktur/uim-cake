@@ -60,8 +60,7 @@ class UnaryExpression : IExpression
      * @param mixed $value the value to use as the operand for the expression
      * @param int $position either UnaryExpression::PREFIX or UnaryExpression::POSTFIX
      */
-    public this(string $operator, $value, $position = self::PREFIX)
-    {
+    public this(string $operator, $value, $position = self::PREFIX) {
         _operator = $operator;
         _value = $value;
         this.position = $position;
@@ -87,8 +86,7 @@ class UnaryExpression : IExpression
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         if (_value instanceof IExpression) {
             $callback(_value);
             _value.traverse($callback);
@@ -102,8 +100,7 @@ class UnaryExpression : IExpression
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         if (_value instanceof IExpression) {
             _value = clone _value;
         }

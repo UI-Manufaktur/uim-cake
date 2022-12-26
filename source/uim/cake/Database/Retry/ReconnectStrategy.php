@@ -59,8 +59,7 @@ class ReconnectStrategy : RetryStrategyInterface
      *
      * @param \Cake\Database\Connection $connection The connection to check
      */
-    public this(Connection $connection)
-    {
+    public this(Connection $connection) {
         this.connection = $connection;
     }
 

@@ -30,8 +30,7 @@ class BinaryType : BaseType
      * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
      * @return resource|string
      */
-    function toDatabase($value, DriverInterface $driver)
-    {
+    function toDatabase($value, DriverInterface $driver) {
         return $value;
     }
 
@@ -43,8 +42,7 @@ class BinaryType : BaseType
      * @return resource|null
      * @throws \Cake\Core\Exception\CakeException
      */
-    function toPHP($value, DriverInterface $driver)
-    {
+    function toPHP($value, DriverInterface $driver) {
         if ($value == null) {
             return null;
         }
@@ -78,8 +76,7 @@ class BinaryType : BaseType
      * @param mixed $value The value to convert.
      * @return mixed Converted value.
      */
-    function marshal($value)
-    {
+    function marshal($value) {
         return $value;
     }
 }

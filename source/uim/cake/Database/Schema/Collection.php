@@ -40,8 +40,7 @@ class Collection : ICollection
      *
      * @param \Cake\Database\Connection $connection The connection instance.
      */
-    public this(Connection $connection)
-    {
+    public this(Connection $connection) {
         _connection = $connection;
         _dialect = $connection.getDriver().schemaDialect();
     }

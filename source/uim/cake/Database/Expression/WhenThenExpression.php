@@ -87,8 +87,7 @@ class WhenThenExpression : IExpression
      * @param \Cake\Database\TypeMap|null $typeMap The type map to use when using an array of conditions for the `WHEN`
      *  value.
      */
-    public this(?TypeMap $typeMap = null)
-    {
+    public this(?TypeMap $typeMap = null) {
         if ($typeMap == null) {
             $typeMap = new TypeMap();
         }
@@ -116,8 +115,7 @@ class WhenThenExpression : IExpression
      * neither a string, nor null.
      * @see CaseStatementExpression::when() for a more detailed usage explanation.
      */
-    function when($when, $type = null)
-    {
+    function when($when, $type = null) {
         if (
             !(is_array($when) && !empty($when)) &&
             !is_scalar($when) &&
@@ -198,8 +196,7 @@ class WhenThenExpression : IExpression
      *  result value.
      * @return this
      */
-    function then($result, ?string $type = null)
-    {
+    function then($result, ?string $type = null) {
         if (
             $result != null &&
             !is_scalar($result) &&
@@ -251,8 +248,7 @@ class WhenThenExpression : IExpression
      * @return \Cake\Database\IExpression|object|scalar|null
      * @throws \InvalidArgumentException In case the given clause name is invalid.
      */
-    function clause(string $clause)
-    {
+    function clause(string $clause) {
         if (!in_array($clause, this.validClauseNames, true)) {
             throw new InvalidArgumentException(
                 sprintf(
@@ -309,8 +305,7 @@ class WhenThenExpression : IExpression
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         if (this.when instanceof IExpression) {
             $callback(this.when);
             this.when.traverse($callback);
@@ -329,8 +324,7 @@ class WhenThenExpression : IExpression
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         if (this.when instanceof IExpression) {
             this.when = clone this.when;
         }

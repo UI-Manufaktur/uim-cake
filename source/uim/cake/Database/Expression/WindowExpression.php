@@ -46,8 +46,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @param string $name Window name
      */
-    public this(string $name = '')
-    {
+    public this(string $name = '') {
         this.name = new IdentifierExpression($name);
     }
 
@@ -70,8 +69,7 @@ class WindowExpression : IExpression, WindowInterface
      * @param string $name Window name
      * @return this
      */
-    function name(string $name)
-    {
+    function name(string $name) {
         this.name = new IdentifierExpression($name);
 
         return this;
@@ -80,8 +78,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @inheritDoc
      */
-    function partition($partitions)
-    {
+    function partition($partitions) {
         if (!$partitions) {
             return this;
         }
@@ -108,8 +105,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @inheritDoc
      */
-    function order($fields)
-    {
+    function order($fields) {
         if (!$fields) {
             return this;
         }
@@ -130,24 +126,21 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @inheritDoc
      */
-    function range($start, $end = 0)
-    {
+    function range($start, $end = 0) {
         return this.frame(self::RANGE, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
     /**
      * @inheritDoc
      */
-    function rows(?int $start, ?int $end = 0)
-    {
+    function rows(?int $start, ?int $end = 0) {
         return this.frame(self::ROWS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
     /**
      * @inheritDoc
      */
-    function groups(?int $start, ?int $end = 0)
-    {
+    function groups(?int $start, ?int $end = 0) {
         return this.frame(self::GROUPS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
@@ -179,8 +172,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @inheritDoc
      */
-    function excludeCurrent()
-    {
+    function excludeCurrent() {
         this.exclusion = 'CURRENT ROW';
 
         return this;
@@ -189,8 +181,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @inheritDoc
      */
-    function excludeGroup()
-    {
+    function excludeGroup() {
         this.exclusion = 'GROUP';
 
         return this;
@@ -199,8 +190,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @inheritDoc
      */
-    function excludeTies()
-    {
+    function excludeTies() {
         this.exclusion = 'TIES';
 
         return this;
@@ -256,8 +246,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         $callback(this.name);
         foreach (this.partitions as $partition) {
             $callback($partition);
@@ -315,8 +304,7 @@ class WindowExpression : IExpression, WindowInterface
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         this.name = clone this.name;
         foreach (this.partitions as $i: $partition) {
             this.partitions[$i] = clone $partition;

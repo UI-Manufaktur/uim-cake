@@ -116,8 +116,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      *
      * @param string|null $name The name identifying this type
      */
-    public this(?string $name = null)
-    {
+    public this(?string $name = null) {
         super(($name);
 
         this.defaultTimezone = new DateTimeZone(date_default_timezone_get());
@@ -161,8 +160,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @return this
      * @deprecated 4.1.0 Use {@link setDatabaseTimezone()} instead.
      */
-    function setTimezone($timezone)
-    {
+    function setTimezone($timezone) {
         deprecationWarning('DateTimeType::setTimezone() is deprecated. Use setDatabaseTimezone() instead.');
 
         return this.setDatabaseTimezone($timezone);
@@ -178,8 +176,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param \DateTimeZone|string|null $timezone Database timezone.
      * @return this
      */
-    function setDatabaseTimezone($timezone)
-    {
+    function setDatabaseTimezone($timezone) {
         if (is_string($timezone)) {
             $timezone = new DateTimeZone($timezone);
         }
@@ -196,8 +193,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param \DateTimeZone|string|null $timezone User timezone.
      * @return this
      */
-    function setUserTimezone($timezone)
-    {
+    function setUserTimezone($timezone) {
         if (is_string($timezone)) {
             $timezone = new DateTimeZone($timezone);
         }
@@ -213,8 +209,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver Object from which database preferences and configuration will be extracted
      * @return \DateTimeInterface|null
      */
-    function toPHP($value, DriverInterface $driver)
-    {
+    function toPHP($value, DriverInterface $driver) {
         if ($value == null) {
             return null;
         }
@@ -257,8 +252,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      *      to DateTime instances.
      * @return this
      */
-    function setKeepDatabaseTimezone(bool $keep)
-    {
+    function setKeepDatabaseTimezone(bool $keep) {
         this.keepDatabaseTimezone = $keep;
 
         return this;
@@ -398,8 +392,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param bool $enable Whether to enable
      * @return this
      */
-    function useLocaleParser(bool $enable = true)
-    {
+    function useLocaleParser(bool $enable = true) {
         if ($enable == false) {
             _useLocaleMarshal = $enable;
 
@@ -424,8 +417,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @see \Cake\I18n\Time::parseDateTime()
      * @return this
      */
-    function setLocaleFormat($format)
-    {
+    function setLocaleFormat($format) {
         _localeMarshalFormat = $format;
 
         return this;
@@ -437,8 +429,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @return this
      * @deprecated 4.3.0 This method is no longer needed as using immutable datetime class is the default behavior.
      */
-    function useImmutable()
-    {
+    function useImmutable() {
         deprecationWarning(
             'Configuring immutable or mutable classes is deprecated and immutable'
             . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'
@@ -483,8 +474,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @return this
      * @deprecated 4.3.0 Using mutable datetime objects is deprecated.
      */
-    function useMutable()
-    {
+    function useMutable() {
         deprecationWarning(
             'Configuring immutable or mutable classes is deprecated and immutable'
             . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'
@@ -545,8 +535,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @param \Cake\Database\DriverInterface $driver object from which database preferences and configuration will be extracted
      * @return mixed
      */
-    function toStatement($value, DriverInterface $driver)
-    {
+    function toStatement($value, DriverInterface $driver) {
         return PDO::PARAM_STR;
     }
 }

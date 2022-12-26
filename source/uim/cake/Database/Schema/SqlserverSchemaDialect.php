@@ -234,8 +234,7 @@ class SqlserverSchemaDialect : SchemaDialect
      * @param string|null $default The default value.
      * @return string|int|null
      */
-    protected function _defaultValue($type, $default)
-    {
+    protected function _defaultValue($type, $default) {
         if ($default == null) {
             return null;
         }

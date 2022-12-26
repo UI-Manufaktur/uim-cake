@@ -64,8 +64,7 @@ class ValuesExpression : IExpression
      * @param array $columns The list of columns that are going to be part of the values.
      * @param \Cake\Database\TypeMap $typeMap A dictionary of column . type names
      */
-    public this(array $columns, TypeMap $typeMap)
-    {
+    public this(array $columns, TypeMap $typeMap) {
         _columns = $columns;
         this.setTypeMap($typeMap);
     }
@@ -109,8 +108,7 @@ class ValuesExpression : IExpression
      * @param array $columns Array with columns to be inserted.
      * @return this
      */
-    function setColumns(array $columns)
-    {
+    function setColumns(array $columns) {
         _columns = $columns;
         _castedExpressions = false;
 
@@ -154,8 +152,7 @@ class ValuesExpression : IExpression
      * @param array $values Array with values to be inserted.
      * @return this
      */
-    function setValues(array $values)
-    {
+    function setValues(array $values) {
         _values = $values;
         _castedExpressions = false;
 
@@ -183,8 +180,7 @@ class ValuesExpression : IExpression
      * @param \Cake\Database\Query $query The query to set
      * @return this
      */
-    function setQuery(Query $query)
-    {
+    function setQuery(Query $query) {
         _query = $query;
 
         return this;
@@ -255,8 +251,7 @@ class ValuesExpression : IExpression
     /**
      * @inheritDoc
      */
-    public O traverse(this O)(Closure $callback)
-    {
+    public O traverse(this O)(Closure $callback) {
         if (_query) {
             return this;
         }

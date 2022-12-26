@@ -234,8 +234,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @param string|int|null $default The default value.
      * @return string|int|null
      */
-    protected function _defaultValue($default)
-    {
+    protected function _defaultValue($default) {
         if ($default == 'NULL' || $default == null) {
             return null;
         }

@@ -285,8 +285,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @param string $table The table name.
      * @param array<string, array|string> $columns The list of columns for the schema.
      */
-    public this(string $table, array $columns = [])
-    {
+    public this(string $table, array $columns = []) {
         _table = $table;
         foreach ($columns as $field: $definition) {
             this.addColumn($field, $definition);
@@ -304,8 +303,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * @inheritDoc
      */
-    function addColumn(string $name, $attrs)
-    {
+    function addColumn(string $name, $attrs) {
         if (is_string($attrs)) {
             $attrs = ['type': $attrs];
         }
@@ -323,8 +321,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * @inheritDoc
      */
-    function removeColumn(string $name)
-    {
+    function removeColumn(string $name) {
         unset(_columns[$name], _typeMap[$name]);
 
         return this;
@@ -367,8 +364,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * @inheritDoc
      */
-    function setColumnType(string $name, string $type)
-    {
+    function setColumnType(string $name, string $type) {
         if (!isset(_columns[$name])) {
             return this;
         }
@@ -451,8 +447,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * @inheritDoc
      */
-    function addIndex(string $name, $attrs)
-    {
+    function addIndex(string $name, $attrs) {
         if (is_string($attrs)) {
             $attrs = ['type': $attrs];
         }
@@ -544,8 +539,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * @inheritDoc
      */
-    function addConstraint(string $name, $attrs)
-    {
+    function addConstraint(string $name, $attrs) {
         if (is_string($attrs)) {
             $attrs = ['type': $attrs];
         }
@@ -607,8 +601,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * @inheritDoc
      */
-    function dropConstraint(string $name)
-    {
+    function dropConstraint(string $name) {
         if (isset(_constraints[$name])) {
             unset(_constraints[$name]);
         }
@@ -679,8 +672,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * @inheritDoc
      */
-    function setOptions(array $options)
-    {
+    function setOptions(array $options) {
         _options = $options + _options;
 
         return this;
@@ -697,8 +689,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * @inheritDoc
      */
-    function setTemporary(bool $temporary)
-    {
+    function setTemporary(bool $temporary) {
         _temporary = $temporary;
 
         return this;

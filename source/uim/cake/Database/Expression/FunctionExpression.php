@@ -59,8 +59,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      * passed arguments
      * @param string $returnType The return type of this expression
      */
-    public this(string $name, array $params = [], array $types = [], string $returnType = 'string')
-    {
+    public this(string $name, array $params = [], array $types = [], string $returnType = 'string') {
         _name = $name;
         _returnType = $returnType;
         super(($params, $types, ',');
@@ -72,8 +71,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      * @param string $name The name of the function
      * @return this
      */
-    function setName(string $name)
-    {
+    function setName(string $name) {
         _name = $name;
 
         return this;
@@ -101,8 +99,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      * @return this
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    function add($conditions, array $types = [], bool $prepend = false)
-    {
+    function add($conditions, array $types = [], bool $prepend = false) {
         $put = $prepend ? 'array_unshift' : 'array_push';
         $typeMap = this.getTypeMap().setTypes($types);
         foreach ($conditions as $k: $p) {

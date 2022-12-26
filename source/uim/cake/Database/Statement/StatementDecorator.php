@@ -59,8 +59,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      *  such as PDOStatement.
      * @param \Cake\Database\DriverInterface $driver Driver instance
      */
-    public this(StatementInterface $statement, DriverInterface $driver)
-    {
+    public this(StatementInterface $statement, DriverInterface $driver) {
         _statement = $statement;
         _driver = $driver;
     }
@@ -71,8 +70,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @param string $property internal property to get
      * @return string|null
      */
-    function __get(string $property)
-    {
+    function __get(string $property) {
         if ($property == 'queryString') {
             /** @psalm-suppress NoInterfaceProperties */
             return _statement.queryString;
@@ -141,8 +139,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      *
      * @return string|int
      */
-    function errorCode()
-    {
+    function errorCode() {
         return _statement.errorCode();
     }
 
@@ -190,8 +187,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @return mixed Result array containing columns and values or false if no results
      * are left
      */
-    function fetch($type = self::FETCH_TYPE_NUM)
-    {
+    function fetch($type = self::FETCH_TYPE_NUM) {
         return _statement.fetch($type);
     }
 
@@ -214,8 +210,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @param int $position The numeric position of the column to retrieve in the result
      * @return mixed Returns the specific value of the column designated at $position
      */
-    function fetchColumn(int $position)
-    {
+    function fetchColumn(int $position) {
         $result = this.fetch(static::FETCH_TYPE_NUM);
         if ($result && isset($result[$position])) {
             return $result[$position];
@@ -238,8 +233,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @param string|int $type num for fetching columns as positional keys or assoc for column names as keys
      * @return array|false List of all results from database for this statement. False on failure.
      */
-    function fetchAll($type = self::FETCH_TYPE_NUM)
-    {
+    function fetchAll($type = self::FETCH_TYPE_NUM) {
         return _statement.fetchAll($type);
     }
 
@@ -278,8 +272,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[\ReturnTypeWillChange]
-    function getIterator()
-    {
+    function getIterator() {
         if (!_hasExecuted) {
             this.execute();
         }
@@ -331,8 +324,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @param string|null $column the name of the column representing the primary key
      * @return string|int
      */
-    function lastInsertId(?string $table = null, ?string $column = null)
-    {
+    function lastInsertId(?string $table = null, ?string $column = null) {
         if ($column && this.columnCount()) {
             $row = this.fetch(static::FETCH_TYPE_ASSOC);
 
@@ -349,8 +341,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      *
      * @return \Cake\Database\StatementInterface
      */
-    function getInnerStatement()
-    {
+    function getInnerStatement() {
         return _statement;
     }
 }
