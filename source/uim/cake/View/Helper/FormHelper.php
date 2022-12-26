@@ -9,8 +9,8 @@
  */
 module uim.cake.View\Helper;
 
-import uim.cake.Core\Configure;
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Configure;
+import uim.cake.cores.Exception\CakeException;
 import uim.cake.Form\FormProtector;
 import uim.cake.Routing\Router;
 import uim.cake.Utility\Hash;

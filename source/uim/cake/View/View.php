@@ -10,9 +10,9 @@
 module uim.cake.View;
 
 import uim.cake.caches.Cache;
-import uim.cake.Core\App;
-import uim.cake.Core\InstanceConfigTrait;
-import uim.cake.Core\Plugin;
+import uim.cake.cores.App;
+import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.cores.Plugin;
 import uim.cake.Event\EventDispatcherInterface;
 import uim.cake.Event\EventDispatcherTrait;
 import uim.cake.Event\EventManager;

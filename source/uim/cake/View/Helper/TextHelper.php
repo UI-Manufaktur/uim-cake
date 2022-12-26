@@ -9,8 +9,8 @@
  */
 module uim.cake.View\Helper;
 
-import uim.cake.Core\App;
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.App;
+import uim.cake.cores.Exception\CakeException;
 import uim.cake.Utility\Security;
 import uim.cake.Utility\Text;
 import uim.cake.View\Helper;

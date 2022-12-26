@@ -14,8 +14,8 @@
  */
 module uim.cake.TestSuite;
 
-import uim.cake.Core\IHttpApplication;
-import uim.cake.Core\IPluginApplication;
+import uim.cake.cores.IHttpApplication;
+import uim.cake.cores.IPluginApplication;
 import uim.cake.Http\FlashMessage;
 import uim.cake.Http\Server;
 import uim.cake.Http\ServerRequest;

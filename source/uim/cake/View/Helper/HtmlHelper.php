@@ -9,7 +9,7 @@
  */
 module uim.cake.View\Helper;
 
-import uim.cake.Core\Configure;
+import uim.cake.cores.Configure;
 import uim.cake.View\Helper;
 import uim.cake.View\StringTemplateTrait;
 

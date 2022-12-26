@@ -9,7 +9,7 @@
  */
 module uim.cake.Routing\Middleware;
 
-import uim.cake.Core\Plugin;
+import uim.cake.cores.Plugin;
 import uim.cake.Http\Response;
 import uim.cake.Utility\Inflector;
 use Laminas\Diactoros\Stream;

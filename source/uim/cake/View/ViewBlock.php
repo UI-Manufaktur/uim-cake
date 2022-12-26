@@ -9,7 +9,7 @@
  */
 module uim.cake.View;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 
 /**
  * ViewBlock : the concept of Blocks or Slots in the View layer.
