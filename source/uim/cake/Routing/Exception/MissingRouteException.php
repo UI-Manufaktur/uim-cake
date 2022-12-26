@@ -51,6 +51,6 @@ class MissingRouteException : CakeException
                 _messageTemplate = _messageTemplateWithMethod;
             }
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }

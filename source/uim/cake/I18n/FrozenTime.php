@@ -131,7 +131,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
             $time = '@' . $time;
         }
 
-        parent::__construct($time, $tz);
+        super(($time, $tz);
     }
 
     /**

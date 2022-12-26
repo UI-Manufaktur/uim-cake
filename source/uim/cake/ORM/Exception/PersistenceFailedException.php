@@ -57,7 +57,7 @@ class PersistenceFailedException : CakeException
                 _messageTemplate = "Entity %s failure. Found the following errors (%s).";
             }
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 
     /**

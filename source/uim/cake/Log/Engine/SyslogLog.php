@@ -102,7 +102,7 @@ class SyslogLog : BaseLog
                 "format": $config["format"],
             ];
         }
-        parent::__construct($config);
+        super(($config);
     }
 
     /**

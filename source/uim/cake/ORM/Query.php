@@ -170,7 +170,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      */
     public this(Connection $connection, Table $table)
     {
-        parent::__construct($connection);
+        super(($connection);
         this.repository($table);
 
         if (_repository != null) {

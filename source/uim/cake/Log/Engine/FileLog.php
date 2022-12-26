@@ -86,7 +86,7 @@ class FileLog : BaseLog
      */
     public this(array $config = [])
     {
-        parent::__construct($config);
+        super(($config);
 
         _path = this.getConfig("path", sys_get_temp_dir() . DIRECTORY_SEPARATOR);
         if (Configure::read("debug") && !is_dir(_path)) {

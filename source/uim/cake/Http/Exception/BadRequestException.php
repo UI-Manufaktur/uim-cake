@@ -37,6 +37,6 @@ class BadRequestException : HttpException
         if (empty($message)) {
             $message = "Bad Request";
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }

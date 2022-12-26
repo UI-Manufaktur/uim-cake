@@ -37,6 +37,6 @@ class ForbiddenException : HttpException
         if (empty($message)) {
             $message = "Forbidden";
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }

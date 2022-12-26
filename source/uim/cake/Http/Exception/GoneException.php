@@ -37,6 +37,6 @@ class GoneException : HttpException
         if (empty($message)) {
             $message = "Gone";
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }

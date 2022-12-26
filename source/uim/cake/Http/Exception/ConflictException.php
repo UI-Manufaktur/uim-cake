@@ -37,6 +37,6 @@ class ConflictException : HttpException
         if (empty($message)) {
             $message = "Conflict";
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }

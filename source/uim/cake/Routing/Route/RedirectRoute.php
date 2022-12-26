@@ -38,7 +38,7 @@ class RedirectRoute : Route
      */
     public this(string $template, array $defaults = [], array $options = [])
     {
-        parent::__construct($template, $defaults, $options);
+        super(($template, $defaults, $options);
         if (isset($defaults["redirect"])) {
             $defaults = (array)$defaults["redirect"];
         }

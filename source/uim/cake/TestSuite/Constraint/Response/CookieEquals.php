@@ -41,7 +41,7 @@ class CookieEquals : ResponseBase
      */
     public this(?Response $response, string $cookieName)
     {
-        parent::__construct($response);
+        super(($response);
 
         this.cookieName = $cookieName;
     }

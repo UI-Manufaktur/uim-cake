@@ -106,7 +106,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
             "tableLocator": $table.associations().getTableLocator(),
         ];
 
-        parent::__construct($table, $config);
+        super(($table, $config);
     }
 
     /**

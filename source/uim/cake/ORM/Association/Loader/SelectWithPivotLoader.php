@@ -52,7 +52,7 @@ class SelectWithPivotLoader : SelectLoader
      */
     public this(array $options)
     {
-        parent::__construct($options);
+        super(($options);
         this.junctionAssociationName = $options["junctionAssociationName"];
         this.junctionProperty = $options["junctionProperty"];
         this.junctionAssoc = $options["junctionAssoc"];

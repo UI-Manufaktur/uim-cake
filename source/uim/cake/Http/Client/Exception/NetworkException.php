@@ -43,7 +43,7 @@ class NetworkException : RuntimeException : NetworkExceptionInterface
     public this(string $message, RequestInterface $request, ?Throwable $previous = null)
     {
         this.request = $request;
-        parent::__construct($message, 0, $previous);
+        super(($message, 0, $previous);
     }
 
     /**

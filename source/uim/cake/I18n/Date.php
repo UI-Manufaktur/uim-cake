@@ -131,7 +131,7 @@ class Date : MutableDate : I18nDateTimeInterface
             0
         );
 
-        parent::__construct($time, $tz);
+        super(($time, $tz);
     }
 
     /**

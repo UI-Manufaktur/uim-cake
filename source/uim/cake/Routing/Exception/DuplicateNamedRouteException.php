@@ -39,6 +39,6 @@ class DuplicateNamedRouteException : CakeException
         if (is_array($message) && isset($message["message"])) {
             _messageTemplate = $message["message"];
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }

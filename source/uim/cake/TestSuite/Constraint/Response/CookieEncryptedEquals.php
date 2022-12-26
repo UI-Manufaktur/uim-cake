@@ -51,7 +51,7 @@ class CookieEncryptedEquals : CookieEquals
      */
     public this(?Response $response, string $cookieName, string $mode, string $key)
     {
-        parent::__construct($response, $cookieName);
+        super(($response, $cookieName);
 
         this.key = $key;
         this.mode = $mode;

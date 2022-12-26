@@ -37,7 +37,7 @@ class FatalErrorException : CakeException
         ?int $line = null,
         ?Throwable $previous = null
     ) {
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
         if ($file) {
             this.file = $file;
         }

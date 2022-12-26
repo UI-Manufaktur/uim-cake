@@ -33,7 +33,7 @@ class RedirectException : HttpException
      */
     public this(string $target, int $code = 302, array $headers = [])
     {
-        parent::__construct($target, $code);
+        super(($target, $code);
 
         foreach ($headers as $key: $value) {
             this.setHeader($key, (array)$value);

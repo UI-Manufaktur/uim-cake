@@ -37,6 +37,6 @@ class MethodNotAllowedException : HttpException
         if (empty($message)) {
             $message = "Method Not Allowed";
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }

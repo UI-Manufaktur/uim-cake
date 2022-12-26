@@ -36,7 +36,7 @@ class BodyContains : ResponseBase
      */
     public this(IResponse $response, bool $ignoreCase = false)
     {
-        parent::__construct($response);
+        super(($response);
 
         this.ignoreCase = $ignoreCase;
     }

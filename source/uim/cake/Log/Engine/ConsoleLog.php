@@ -63,7 +63,7 @@ class ConsoleLog : BaseLog
      */
     public this(array $config = [])
     {
-        parent::__construct($config);
+        super(($config);
 
         $config = _config;
         if ($config["stream"] instanceof ConsoleOutput) {

@@ -37,6 +37,6 @@ class UnavailableForLegalReasonsException : HttpException
         if (empty($message)) {
             $message = "Unavailable For Legal Reasons";
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }

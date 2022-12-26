@@ -46,7 +46,7 @@ class DateType : DateTimeType
      */
     public this(?string $name = null)
     {
-        parent::__construct($name);
+        super(($name);
 
         _setClassName(FrozenDate::class, DateTimeImmutable::class);
     }

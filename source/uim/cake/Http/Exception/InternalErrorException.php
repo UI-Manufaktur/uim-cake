@@ -32,6 +32,6 @@ class InternalErrorException : HttpException
         if (empty($message)) {
             $message = "Internal Server Error";
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }

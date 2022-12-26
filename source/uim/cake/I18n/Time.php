@@ -135,7 +135,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
         if (is_numeric($time)) {
             $time = '@' . $time;
         }
-        parent::__construct($time, $tz);
+        super(($time, $tz);
     }
 
     /**

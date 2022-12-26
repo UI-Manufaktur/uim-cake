@@ -118,7 +118,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      */
     public this(?string $name = null)
     {
-        parent::__construct($name);
+        super(($name);
 
         this.defaultTimezone = new DateTimeZone(date_default_timezone_get());
         _setClassName(FrozenTime::class, DateTimeImmutable::class);

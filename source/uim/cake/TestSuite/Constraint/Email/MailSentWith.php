@@ -34,7 +34,7 @@ class MailSentWith : MailConstraintBase
             this.method = $method;
         }
 
-        parent::__construct($at);
+        super(($at);
     }
 
     /**

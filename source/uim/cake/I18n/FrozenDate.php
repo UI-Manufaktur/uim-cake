@@ -126,7 +126,7 @@ class FrozenDate : ChronosDate : I18nDateTimeInterface
      */
     public this($time = 'now', $tz = null)
     {
-        parent::__construct($time, $tz);
+        super(($time, $tz);
     }
 
     /**

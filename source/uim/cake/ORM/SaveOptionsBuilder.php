@@ -50,7 +50,7 @@ class SaveOptionsBuilder : ArrayObject
         _table = $table;
         this.parseArrayOptions($options);
 
-        parent::__construct();
+        super(();
     }
 
     /**

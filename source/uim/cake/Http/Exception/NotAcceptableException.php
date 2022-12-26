@@ -37,6 +37,6 @@ class NotAcceptableException : HttpException
         if (empty($message)) {
             $message = "Not Acceptable";
         }
-        parent::__construct($message, $code, $previous);
+        super(($message, $code, $previous);
     }
 }
