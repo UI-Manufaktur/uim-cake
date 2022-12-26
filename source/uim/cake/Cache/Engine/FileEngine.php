@@ -76,8 +76,7 @@ class FileEngine : CacheEngine
      * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array $config = [])
-    {
+    bool init(array $config = []) {
         parent::init($config);
 
         if (_config['path'] == null) {
@@ -103,8 +102,7 @@ class FileEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
      */
-    bool set($key, $value, $ttl = null)
-    {
+    bool set($key, $value, $ttl = null) {
         if ($value == '' || !_init) {
             return false;
         }
@@ -149,8 +147,7 @@ class FileEngine : CacheEngine
      * @return mixed The cached data, or default value if the data doesn't exist, has
      *   expired, or if there was an error fetching it
      */
-    function get($key, $default = null)
-    {
+    function get($key, $default = null) {
         $key = _key($key);
 
         if (!_init || _setKey($key) == false) {
@@ -204,8 +201,7 @@ class FileEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn't
      *   exist or couldn't be removed
      */
-    bool delete($key)
-    {
+    bool delete($key) {
         $key = _key($key);
 
         if (_setKey($key) == false || !_init) {
@@ -230,8 +226,7 @@ class FileEngine : CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    bool clear()
-    {
+    bool clear() {
         if (!_init) {
             return false;
         }
@@ -329,8 +324,7 @@ class FileEngine : CacheEngine
      * @return int|false
      * @throws \LogicException
      */
-    function decrement(string $key, int $offset = 1)
-    {
+    function decrement(string $key, int $offset = 1) {
         throw new LogicException('Files cannot be atomically decremented.');
     }
 
@@ -342,8 +336,7 @@ class FileEngine : CacheEngine
      * @return int|false
      * @throws \LogicException
      */
-    function increment(string $key, int $offset = 1)
-    {
+    function increment(string $key, int $offset = 1) {
         throw new LogicException('Files cannot be atomically incremented.');
     }
 
@@ -355,8 +348,7 @@ class FileEngine : CacheEngine
      * @param bool $createKey Whether the key should be created if it doesn't exists, or not
      * @return bool true if the cache key could be set, false otherwise
      */
-    protected bool _setKey(string $key, bool $createKey = false)
-    {
+    protected bool _setKey(string $key, bool $createKey = false) {
         $groups = null;
         if (_groupPrefix) {
             $groups = vsprintf(_groupPrefix, this.groups());
@@ -404,8 +396,7 @@ class FileEngine : CacheEngine
      *
      * @return bool
      */
-    protected bool _active()
-    {
+    protected bool _active() {
         $dir = new SplFileInfo(_config['path']);
         $path = $dir.getPathname();
         $success = true;
@@ -443,8 +434,7 @@ class FileEngine : CacheEngine
      * @param string $group The group to clear.
      * @return bool success
      */
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         _File = null;
 
         $prefix = (string)_config['prefix'];

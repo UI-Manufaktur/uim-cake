@@ -39,8 +39,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher
      * `hashers` key to be present in the array with a list of other hashers to be
      * used.
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         super(($config);
         foreach (_config["hashers"] as $key: $hasher) {
             if (is_array($hasher) && !isset($hasher["className"])) {
@@ -58,8 +57,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher
      * @param string $password Plain text password to hash.
      * @return string|false Password hash or false
      */
-    function hash(string $password)
-    {
+    function hash(string $password) {
         return _hashers[0].hash($password);
     }
 

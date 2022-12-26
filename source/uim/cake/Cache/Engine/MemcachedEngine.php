@@ -275,8 +275,7 @@ class MemcachedEngine : CacheEngine
      * @return string|int|bool|null
      * @see https://secure.php.net/manual/en/memcached.getoption.php
      */
-    function getOption(int $name)
-    {
+    function getOption(int $name) {
         return _Memcached.getOption($name);
     }
 
@@ -329,8 +328,7 @@ class MemcachedEngine : CacheEngine
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
      */
-    function get($key, $default = null)
-    {
+    function get($key, $default = null) {
         $key = _key($key);
         $value = _Memcached.get($key);
         if (_Memcached.getResultCode() == Memcached::RES_NOTFOUND) {
@@ -371,8 +369,7 @@ class MemcachedEngine : CacheEngine
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string $key, int $offset = 1)
-    {
+    function increment(string $key, int $offset = 1) {
         return _Memcached.increment(_key($key), $offset);
     }
 
@@ -383,8 +380,7 @@ class MemcachedEngine : CacheEngine
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string $key, int $offset = 1)
-    {
+    function decrement(string $key, int $offset = 1) {
         return _Memcached.decrement(_key($key), $offset);
     }
 

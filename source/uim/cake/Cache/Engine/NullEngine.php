@@ -45,8 +45,7 @@ class NullEngine : CacheEngine
     /**
      * @inheritDoc
      */
-    function get($key, $default = null)
-    {
+    function get($key, $default = null) {
         return $default;
     }
 
@@ -61,16 +60,14 @@ class NullEngine : CacheEngine
     /**
      * @inheritDoc
      */
-    function increment(string $key, int $offset = 1)
-    {
+    function increment(string $key, int $offset = 1) {
         return 1;
     }
 
     /**
      * @inheritDoc
      */
-    function decrement(string $key, int $offset = 1)
-    {
+    function decrement(string $key, int $offset = 1) {
         return 0;
     }
 

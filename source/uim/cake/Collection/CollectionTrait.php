@@ -56,8 +56,7 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    function each(callable $callback)
-    {
+    function each(callable $callback) {
         foreach (this.optimizeUnwrap() as $k: $v) {
             $callback($v, $k);
         }
@@ -142,8 +141,7 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    function reduce(callable $callback, $initial = null)
-    {
+    function reduce(callable $callback, $initial = null) {
         $isFirst = false;
         if (func_num_args() < 2) {
             $isFirst = true;
@@ -182,24 +180,21 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    function max($path, int $sort = \SORT_NUMERIC)
-    {
+    function max($path, int $sort = \SORT_NUMERIC) {
         return (new SortIterator(this.unwrap(), $path, \SORT_DESC, $sort)).first();
     }
 
     /**
      * @inheritDoc
      */
-    function min($path, int $sort = \SORT_NUMERIC)
-    {
+    function min($path, int $sort = \SORT_NUMERIC) {
         return (new SortIterator(this.unwrap(), $path, \SORT_ASC, $sort)).first();
     }
 
     /**
      * @inheritDoc
      */
-    function avg($path = null)
-    {
+    function avg($path = null) {
         $result = this;
         if ($path != null) {
             $result = $result.extract($path);
@@ -221,8 +216,7 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    function median($path = null)
-    {
+    function median($path = null) {
         $items = this;
         if ($path != null) {
             $items = $items.extract($path);
@@ -317,8 +311,7 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    function sumOf($path = null)
-    {
+    function sumOf($path = null) {
         if ($path == null) {
             return array_sum(this.toList());
         }
@@ -378,16 +371,14 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    function firstMatch(array $conditions)
-    {
+    function firstMatch(array $conditions) {
         return this.match($conditions).first();
     }
 
     /**
      * @inheritDoc
      */
-    function first()
-    {
+    function first() {
         $iterator = new LimitIterator(this, 0, 1);
         foreach ($iterator as $result) {
             return $result;
@@ -397,8 +388,7 @@ trait CollectionTrait
     /**
      * @inheritDoc
      */
-    function last()
-    {
+    function last() {
         $iterator = this.optimizeUnwrap();
         if (is_array($iterator)) {
             return array_pop($iterator);

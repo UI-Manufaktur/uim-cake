@@ -34,8 +34,7 @@ class ApcuEngine : CacheEngine
      * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array $config = [])
-    {
+    bool init(array $config = []) {
         if (!extension_loaded("apcu")) {
             throw new RuntimeException("The `apcu` extension must be enabled to use ApcuEngine.");
         }
@@ -54,8 +53,7 @@ class ApcuEngine : CacheEngine
      * @return bool True on success and false on failure.
      * @link https://secure.php.net/manual/en/function.apcu-store.php
      */
-    bool set($key, $value, $ttl = null)
-    {
+    bool set($key, $value, $ttl = null) {
         $key = _key($key);
         $duration = this.duration($ttl);
 
@@ -71,8 +69,7 @@ class ApcuEngine : CacheEngine
      *   has expired, or if there was an error fetching it
      * @link https://secure.php.net/manual/en/function.apcu-fetch.php
      */
-    function get($key, $default = null)
-    {
+    function get($key, $default = null) {
         $value = apcu_fetch(_key($key), $success);
         if ($success == false) {
             return $default;
@@ -89,8 +86,7 @@ class ApcuEngine : CacheEngine
      * @return int|false New incremented value, false otherwise
      * @link https://secure.php.net/manual/en/function.apcu-inc.php
      */
-    function increment(string $key, int $offset = 1)
-    {
+    function increment(string $key, int $offset = 1) {
         $key = _key($key);
 
         return apcu_inc($key, $offset);
@@ -104,8 +100,7 @@ class ApcuEngine : CacheEngine
      * @return int|false New decremented value, false otherwise
      * @link https://secure.php.net/manual/en/function.apcu-dec.php
      */
-    function decrement(string $key, int $offset = 1)
-    {
+    function decrement(string $key, int $offset = 1) {
         $key = _key($key);
 
         return apcu_dec($key, $offset);
@@ -118,8 +113,7 @@ class ApcuEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
-    bool delete($key)
-    {
+    bool delete($key) {
         $key = _key($key);
 
         return apcu_delete($key);
@@ -132,8 +126,7 @@ class ApcuEngine : CacheEngine
      * @link https://secure.php.net/manual/en/function.apcu-cache-info.php
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
-    bool clear()
-    {
+    bool clear() {
         if (class_exists(APCUIterator::class, false)) {
             $iterator = new APCUIterator(
                 "/^" . preg_quote(_config["prefix"], "/") . "/",
@@ -163,8 +156,7 @@ class ApcuEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      * @link https://secure.php.net/manual/en/function.apcu-add.php
      */
-    bool add(string $key, $value)
-    {
+    bool add(string $key, $value) {
         $key = _key($key);
         $duration = _config["duration"];
 
@@ -176,8 +168,7 @@ class ApcuEngine : CacheEngine
      * If the group initial value was not found, then it initializes
      * the group accordingly.
      */
-    string[] groups()
-    {
+    string[] groups() {
         if (empty(_compiledGroupNames)) {
             foreach (_config["groups"] as $group) {
                 _compiledGroupNames[] = _config["prefix"] . $group;
@@ -218,8 +209,7 @@ class ApcuEngine : CacheEngine
      * @return bool success
      * @link https://secure.php.net/manual/en/function.apcu-inc.php
      */
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         $success = false;
         apcu_inc(_config["prefix"] . $group, 1, $success);
 

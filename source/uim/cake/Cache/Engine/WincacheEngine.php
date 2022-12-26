@@ -72,8 +72,7 @@ class WincacheEngine : CacheEngine
      * @return mixed The cached data, or default value if the data doesn"t exist,
      *   has expired, or if there was an error fetching it
      */
-    function get($key, $default = null)
-    {
+    function get($key, $default = null) {
         $value = wincache_ucache_get(_key($key), $success);
         if ($success == false) {
             return $default;
@@ -89,8 +88,7 @@ class WincacheEngine : CacheEngine
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string $key, int $offset = 1)
-    {
+    function increment(string $key, int $offset = 1) {
         $key = _key($key);
 
         return wincache_ucache_inc($key, $offset);
@@ -103,8 +101,7 @@ class WincacheEngine : CacheEngine
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string $key, int $offset = 1)
-    {
+    function decrement(string $key, int $offset = 1) {
         $key = _key($key);
 
         return wincache_ucache_dec($key, $offset);
@@ -148,8 +145,7 @@ class WincacheEngine : CacheEngine
      * If the group initial value was not found, then it initializes
      * the group accordingly.
      */
-    string[] groups()
-    {
+    string[] groups() {
         if (empty(_compiledGroupNames)) {
             foreach (_config["groups"] as $group) {
                 _compiledGroupNames[] = _config["prefix"] . $group;

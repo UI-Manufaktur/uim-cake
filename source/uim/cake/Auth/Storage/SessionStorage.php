@@ -59,8 +59,7 @@ class SessionStorage : IStorage
      * @param \Cake\Http\Response $response Response instance.
      * @param array<string, mixed> $config Configuration list.
      */
-    public this(ServerRequest $request, Response $response, array $config = [])
-    {
+    public this(ServerRequest $request, Response $response, array $config = []) {
         _session = $request.getSession();
         this.setConfig($config);
     }
@@ -71,8 +70,7 @@ class SessionStorage : IStorage
      * @return \ArrayAccess|array|null User record if available else null.
      * @psalm-suppress InvalidReturnType
      */
-    function read()
-    {
+    function read() {
         if (_user != null) {
             return _user ?: null;
         }
@@ -118,8 +116,7 @@ class SessionStorage : IStorage
     /**
      * @inheritDoc
      */
-    function redirectUrl($url = null)
-    {
+    function redirectUrl($url = null) {
         if ($url == null) {
             return _session.read(_config["redirect"]);
         }

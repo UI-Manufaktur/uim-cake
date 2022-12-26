@@ -42,8 +42,7 @@ class ArrayEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
      */
-    bool set($key, $value, $ttl = null)
-    {
+    bool set($key, $value, $ttl = null) {
         $key = _key($key);
         $expires = time() + this.duration($ttl);
         this.data[$key] = ["exp": $expires, "val": $value];
@@ -59,8 +58,7 @@ class ArrayEngine : CacheEngine
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
      */
-    function get($key, $default = null)
-    {
+    function get($key, $default = null) {
         $key = _key($key);
         if (!isset(this.data[$key])) {
             return $default;
@@ -85,8 +83,7 @@ class ArrayEngine : CacheEngine
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string $key, int $offset = 1)
-    {
+    function increment(string $key, int $offset = 1) {
         if (this.get($key) == null) {
             this.set($key, 0);
         }
@@ -103,8 +100,7 @@ class ArrayEngine : CacheEngine
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string $key, int $offset = 1)
-    {
+    function decrement(string $key, int $offset = 1) {
         if (this.get($key) == null) {
             this.set($key, 0);
         }
@@ -120,8 +116,7 @@ class ArrayEngine : CacheEngine
      * @param string $key Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    bool delete($key)
-    {
+    bool delete($key) {
         $key = _key($key);
         unset(this.data[$key]);
 
@@ -133,8 +128,7 @@ class ArrayEngine : CacheEngine
      *
      * @return bool True Returns true.
      */
-    bool clear()
-    {
+    bool clear() {
         this.data = [];
 
         return true;
@@ -145,8 +139,7 @@ class ArrayEngine : CacheEngine
      * If the group initial value was not found, then it initializes
      * the group accordingly.
      */
-    string[] groups()
-    {
+    string[] groups() {
         $result = [];
         foreach (_config["groups"] as $group) {
             $key = _config["prefix"] . $group;
@@ -167,8 +160,7 @@ class ArrayEngine : CacheEngine
      * @param string $group The group to clear.
      * @return bool success
      */
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         $key = _config["prefix"] . $group;
         if (isset(this.data[$key])) {
             this.data[$key]["val"] += 1;

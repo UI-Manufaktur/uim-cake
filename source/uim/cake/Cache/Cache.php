@@ -197,8 +197,7 @@ class Cache
      * @return \Psr\SimpleCache\ICache&\Cake\Cache\ICacheEngine
      * @deprecated 3.7.0 Use {@link pool()} instead. This method will be removed in 5.0.
      */
-    public static function engine(string $config)
-    {
+    public static function engine(string $config) {
         deprecationWarning("Cache::engine() is deprecated. Use Cache::pool() instead.");
 
         return static::pool($config);
@@ -210,8 +209,7 @@ class Cache
      * @param string $config The name of the configured cache backend.
      * @return \Psr\SimpleCache\ICache &\Cake\Cache\ICacheEngine
      */
-    public static function pool(string $config)
-    {
+    public static function pool(string $config) {
         if (!static::$_enabled) {
             return new NullEngine();
         }
@@ -249,8 +247,7 @@ class Cache
      * @param string $config Optional string configuration name to write to. Defaults to "default"
      * @return bool True if the data was successfully cached, false on failure
      */
-    public static bool write(string $key, $value, string $config = "default")
-    {
+    public static bool write(string $key, $value, string $config = "default") {
         if (is_resource($value)) {
             return false;
         }
@@ -294,8 +291,7 @@ class Cache
      * @return bool True on success, false on failure
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    public static bool writeMany(iterable $data, string $config = "default")
-    {
+    public static bool writeMany(iterable $data, string $config = "default") {
         return static::pool($config).setMultiple($data);
     }
 
@@ -321,8 +317,7 @@ class Cache
      * @return mixed The cached data, or null if the data doesn"t exist, has expired,
      *  or if there was an error fetching it.
      */
-    public static function read(string $key, string $config = "default")
-    {
+    public static function read(string $key, string $config = "default") {
         return static::pool($config).get($key);
     }
 
@@ -364,8 +359,7 @@ class Cache
      *    or if there was an error fetching it.
      * @throws \Cake\Cache\InvalidArgumentException When offset < 0
      */
-    public static function increment(string $key, int $offset = 1, string $config = "default")
-    {
+    public static function increment(string $key, int $offset = 1, string $config = "default") {
         if ($offset < 0) {
             throw new InvalidArgumentException("Offset cannot be less than 0.");
         }
@@ -383,8 +377,7 @@ class Cache
      *   or if there was an error fetching it
      * @throws \Cake\Cache\InvalidArgumentException when offset < 0
      */
-    public static function decrement(string $key, int $offset = 1, string $config = "default")
-    {
+    public static function decrement(string $key, int $offset = 1, string $config = "default") {
         if ($offset < 0) {
             throw new InvalidArgumentException("Offset cannot be less than 0.");
         }
@@ -413,8 +406,7 @@ class Cache
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    public static bool delete(string $key, string $config = "default")
-    {
+    public static bool delete(string $key, string $config = "default") {
         return static::pool($config).delete($key);
     }
 
@@ -440,8 +432,7 @@ class Cache
      * @return bool True on success, false on failure.
      * @throws \Cake\Cache\InvalidArgumentException
      */
-    public static bool deleteMany(iterable $keys, string $config = "default")
-    {
+    public static bool deleteMany(iterable $keys, string $config = "default") {
         return static::pool($config).deleteMultiple($keys);
     }
 
@@ -451,8 +442,7 @@ class Cache
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    public static bool clear(string $config = "default")
-    {
+    public static bool clear(string $config = "default") {
         return static::pool($config).clear();
     }
 
@@ -575,8 +565,7 @@ class Cache
      * @return mixed If the key is found: the cached data.
      *   If the key is not found the value returned by the callable.
      */
-    public static function remember(string $key, callable $callable, string $config = "default")
-    {
+    public static function remember(string $key, callable $callable, string $config = "default") {
         $existing = self::read($key, $config);
         if ($existing != null) {
             return $existing;

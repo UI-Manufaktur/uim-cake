@@ -159,8 +159,7 @@ class RedisEngine : CacheEngine
      * @return mixed The cached data, or the default if the data doesn"t exist, has
      *   expired, or if there was an error fetching it
      */
-    function get($key, $default = null)
-    {
+    function get($key, $default = null) {
         $value = _Redis.get(_key($key));
         if ($value == false) {
             return $default;
@@ -176,8 +175,7 @@ class RedisEngine : CacheEngine
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string $key, int $offset = 1)
-    {
+    function increment(string $key, int $offset = 1) {
         $duration = _config["duration"];
         $key = _key($key);
 
@@ -196,8 +194,7 @@ class RedisEngine : CacheEngine
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string $key, int $offset = 1)
-    {
+    function decrement(string $key, int $offset = 1) {
         $duration = _config["duration"];
         $key = _key($key);
 
@@ -378,8 +375,7 @@ class RedisEngine : CacheEngine
      * @param string $value Value to unserialize.
      * @return mixed
      */
-    protected function unserialize(string $value)
-    {
+    protected function unserialize(string $value) {
         if (preg_match("/^[-]?\d+$/", $value)) {
             return (int)$value;
         }
@@ -390,8 +386,7 @@ class RedisEngine : CacheEngine
     /**
      * Disconnects from the redis server
      */
-    function __destruct()
-    {
+    function __destruct() {
         if (empty(_config["persistent"]) && _Redis instanceof Redis) {
             _Redis.close();
         }

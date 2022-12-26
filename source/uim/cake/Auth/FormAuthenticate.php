@@ -47,8 +47,7 @@ class FormAuthenticate : BaseAuthenticate
      * @param array<string, string> $fields The fields to be checked.
      * @return bool False if the fields have not been supplied. True if they exist.
      */
-    protected bool _checkFields(ServerRequest $request, array $fields)
-    {
+    protected bool _checkFields(ServerRequest $request, array $fields) {
         foreach ([$fields["username"], $fields["password"]] as $field) {
             $value = $request.getData($field);
             if (empty($value) || !is_string($value)) {
@@ -68,8 +67,7 @@ class FormAuthenticate : BaseAuthenticate
      * @param \Cake\Http\Response $response Unused response object.
      * @return array<string, mixed>|false False on login failure. An array of User data on success.
      */
-    function authenticate(ServerRequest $request, Response $response)
-    {
+    function authenticate(ServerRequest $request, Response $response) {
         $fields = _config["fields"];
         if (!_checkFields($request, $fields)) {
             return false;

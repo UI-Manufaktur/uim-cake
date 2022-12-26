@@ -59,8 +59,7 @@ class InsertIterator : Collection
      * @param iterable $values The source collection from which the values will
      * be inserted at the specified path.
      */
-    public this(iterable $into, string $path, iterable $values)
-    {
+    public this(iterable $into, string $path, iterable $values) {
         super(($into);
 
         if (!($values instanceof Collection)) {
@@ -95,8 +94,7 @@ class InsertIterator : Collection
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function current()
-    {
+    function current() {
         $row = parent::current();
 
         if (!_validValues) {

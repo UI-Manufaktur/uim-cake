@@ -32,8 +32,7 @@ abstract class AbstractPasswordHasher
      *
      * @param array<string, mixed> $config Array of config.
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         this.setConfig($config);
     }
 
@@ -64,8 +63,7 @@ abstract class AbstractPasswordHasher
      *
      * @param string $password The password to verify
      */
-    bool needsRehash(string $password)
-    {
+    bool needsRehash(string $password) {
         return password_needs_rehash($password, PASSWORD_DEFAULT);
     }
 }

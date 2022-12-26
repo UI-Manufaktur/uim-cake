@@ -77,8 +77,7 @@ class DigestAuthenticate : BasicAuthenticate
      *   used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
-    public this(ComponentRegistry $registry, array $config = [])
-    {
+    public this(ComponentRegistry $registry, array $config = []) {
         this.setConfig([
             "nonceLifetime": 300,
             "secret": Security::getSalt(),
@@ -96,8 +95,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param \Cake\Http\ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    function getUser(ServerRequest $request)
-    {
+    function getUser(ServerRequest $request) {
         $digest = _getDigest($request);
         if (empty($digest)) {
             return false;

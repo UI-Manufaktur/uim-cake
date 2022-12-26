@@ -39,8 +39,7 @@ class DefaultPasswordHasher : AbstractPasswordHasher
      * @psalm-suppress InvalidNullableReturnType
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#hashing-passwords
      */
-    function hash(string $password)
-    {
+    function hash(string $password) {
         /** @psalm-suppress NullableReturnStatement */
         return password_hash(
             $password,
@@ -56,8 +55,7 @@ class DefaultPasswordHasher : AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    bool check(string $password, string $hashedPassword)
-    {
+    bool check(string $password, string $hashedPassword) {
         return password_verify($password, $hashedPassword);
     }
 
@@ -67,8 +65,7 @@ class DefaultPasswordHasher : AbstractPasswordHasher
      *
      * @param string $password The password to verify
      */
-    bool needsRehash(string $password)
-    {
+    bool needsRehash(string $password) {
         return password_needs_rehash($password, _config["hashType"], _config["hashOptions"]);
     }
 }

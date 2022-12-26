@@ -69,8 +69,7 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @param iterable $items The items to be filtered.
      */
-    public this(iterable $items)
-    {
+    public this(iterable $items) {
         _buffer = new SplDoublyLinkedList();
         super(($items);
     }
@@ -81,8 +80,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function key()
-    {
+    function key() {
         return _key;
     }
 
@@ -92,8 +90,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function current()
-    {
+    function current() {
         return _current;
     }
 

@@ -46,8 +46,7 @@ class ControllerAuthorize : BaseAuthorize
     /**
      * @inheritDoc
      */
-    public this(ComponentRegistry $registry, array $config = [])
-    {
+    public this(ComponentRegistry $registry, array $config = []) {
         super(($registry, $config);
         this.controller($registry.getController());
     }

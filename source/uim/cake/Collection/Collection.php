@@ -28,8 +28,7 @@ class Collection : IteratorIterator : ICollection, Serializable
      * @param iterable $items Items.
      * @throws \InvalidArgumentException If passed incorrect type for items.
      */
-    public this(iterable $items)
-    {
+    public this(iterable $items) {
         if (is_array($items)) {
             $items = new ArrayIterator($items);
         }

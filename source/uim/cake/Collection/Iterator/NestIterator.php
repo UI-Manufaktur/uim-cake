@@ -33,8 +33,7 @@ class NestIterator : Collection : RecursiveIterator
      * @param callable|string $nestKey the property that contains the nested items
      * If a callable is passed, it should return the childrens for the passed item
      */
-    public this(iterable $items, $nestKey)
-    {
+    public this(iterable $items, $nestKey) {
         super(($items);
         _nestKey = $nestKey;
     }

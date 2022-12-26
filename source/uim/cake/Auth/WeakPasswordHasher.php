@@ -32,8 +32,7 @@ class WeakPasswordHasher : AbstractPasswordHasher
     /**
      * @inheritDoc
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         if (Configure::read("debug")) {
             Debugger::checkSecurityKeys();
         }
@@ -44,8 +43,7 @@ class WeakPasswordHasher : AbstractPasswordHasher
     /**
      * @inheritDoc
      */
-    function hash(string $password)
-    {
+    function hash(string $password) {
         return Security::hash($password, _config["hashType"], true);
     }
 

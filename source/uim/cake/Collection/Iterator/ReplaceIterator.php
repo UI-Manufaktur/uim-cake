@@ -45,8 +45,7 @@ class ReplaceIterator : Collection
      * @param iterable $items The items to be filtered.
      * @param callable $callback Callback.
      */
-    public this(iterable $items, callable $callback)
-    {
+    public this(iterable $items, callable $callback) {
         _callback = $callback;
         super(($items);
         _innerIterator = this.getInnerIterator();
@@ -59,8 +58,7 @@ class ReplaceIterator : Collection
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function current()
-    {
+    function current() {
         $callback = _callback;
 
         return $callback(parent::current(), this.key(), _innerIterator);

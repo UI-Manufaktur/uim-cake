@@ -31,8 +31,7 @@ class MemoryStorage : IStorage
     /**
      * @inheritDoc
      */
-    function read()
-    {
+    function read() {
         return _user;
     }
 
@@ -55,8 +54,7 @@ class MemoryStorage : IStorage
     /**
      * @inheritDoc
      */
-    function redirectUrl($url = null)
-    {
+    function redirectUrl($url = null) {
         if ($url == null) {
             return _redirectUrl;
         }

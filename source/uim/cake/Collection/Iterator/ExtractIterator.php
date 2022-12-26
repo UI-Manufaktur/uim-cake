@@ -49,8 +49,7 @@ class ExtractIterator : Collection
      * so that the final one can be returned or a callable that will take care
      * of doing that.
      */
-    public this(iterable $items, $path)
-    {
+    public this(iterable $items, $path) {
         _extractor = _propertyExtractor($path);
         super(($items);
     }
@@ -62,8 +61,7 @@ class ExtractIterator : Collection
      * @return mixed
      */
     #[\ReturnTypeWillChange]
-    function current()
-    {
+    function current() {
         $extractor = _extractor;
 
         return $extractor(parent::current());

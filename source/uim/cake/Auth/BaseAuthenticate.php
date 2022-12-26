@@ -77,8 +77,7 @@ abstract class BaseAuthenticate : IEventListener
      * @param \Cake\Controller\ComponentRegistry $registry The Component registry used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
-    public this(ComponentRegistry $registry, array $config = [])
-    {
+    public this(ComponentRegistry $registry, array $config = []) {
         _registry = $registry;
         this.setConfig($config);
     }
@@ -94,8 +93,7 @@ abstract class BaseAuthenticate : IEventListener
      *   and result of find is returned.
      * @return array<string, mixed>|false Either false on failure, or an array of user data.
      */
-    protected function _findUser(string $username, ?string $password = null)
-    {
+    protected function _findUser(string $username, ?string $password = null) {
         $result = _query($username).first();
 
         if ($result == null) {
@@ -214,8 +212,7 @@ abstract class BaseAuthenticate : IEventListener
      * @param \Cake\Http\ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    function getUser(ServerRequest $request)
-    {
+    function getUser(ServerRequest $request) {
         return false;
     }
 
@@ -231,8 +228,7 @@ abstract class BaseAuthenticate : IEventListener
      * @param \Cake\Http\Response $response A response object.
      * @return \Cake\Http\Response|null|void
      */
-    function unauthenticated(ServerRequest $request, Response $response)
-    {
+    function unauthenticated(ServerRequest $request, Response $response) {
     }
 
     /**
