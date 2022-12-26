@@ -9,7 +9,7 @@
  */
 module uim.cake.databases.Retry;
 
-import uim.cake.Core\Retry\RetryStrategyInterface;
+import uim.cake.cores.Retry\RetryStrategyInterface;
 use Exception;
 use PDOException;
 

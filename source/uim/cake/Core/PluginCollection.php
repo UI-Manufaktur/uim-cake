@@ -14,7 +14,7 @@
  */
 module uim.cake.Core;
 
-import uim.cake.Core\Exception\MissingPluginException;
+import uim.cake.cores.Exception\MissingPluginException;
 use Countable;
 use Generator;
 use InvalidArgumentException;

@@ -8,7 +8,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-import uim.cake.Core\Configure;
+import uim.cake.cores.Configure;
 
 if (!defined("DS")) {
     /**

@@ -9,7 +9,7 @@
  */
 module uim.cake.Core;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 import uim.cake.Utility\Hash;
 use InvalidArgumentException;
 

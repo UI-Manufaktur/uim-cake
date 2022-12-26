@@ -13,7 +13,7 @@
  */
 module uim.cake.Datasource\Exception;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 
 /**
  * Exception class to be thrown when a datasource configuration is not found

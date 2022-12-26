@@ -10,8 +10,8 @@
 module uim.cake.Database;
 
 import uim.cake.caches.Cache;
-import uim.cake.Core\App;
-import uim.cake.Core\Retry\CommandRetry;
+import uim.cake.cores.App;
+import uim.cake.cores.Retry\CommandRetry;
 import uim.cake.databases.Exception\MissingConnectionException;
 import uim.cake.databases.Exception\MissingDriverException;
 import uim.cake.databases.Exception\MissingExtensionException;
