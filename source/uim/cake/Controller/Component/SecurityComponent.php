@@ -7,12 +7,12 @@
  * @since         0.10.8
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Controller\Component;
+module uim.cake.controllers.Component;
 
-import uim.cake.Controller\Component;
-import uim.cake.Controller\Controller;
-import uim.cake.Controller\Exception\AuthSecurityException;
-import uim.cake.Controller\Exception\SecurityException;
+import uim.cake.controllers.Component;
+import uim.cake.controllers.Controller;
+import uim.cake.controllers.Exception\AuthSecurityException;
+import uim.cake.controllers.Exception\SecurityException;
 import uim.cake.cores.Configure;
 import uim.cake.Event\EventInterface;
 import uim.cake.Http\Exception\BadRequestException;

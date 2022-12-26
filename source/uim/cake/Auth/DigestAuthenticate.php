@@ -9,7 +9,7 @@
  */
 module uim.cake.Auth;
 
-import uim.cake.Controller\ComponentRegistry;
+import uim.cake.controllers.ComponentRegistry;
 import uim.cake.Http\ServerRequest;
 import uim.cake.utilities.Security;
 

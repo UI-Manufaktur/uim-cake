@@ -9,10 +9,10 @@
  */
 module uim.cake.errors.Renderer;
 
-import uim.cake.Controller\Controller;
-import uim.cake.Controller\ControllerFactory;
-import uim.cake.Controller\Exception\InvalidParameterException;
-import uim.cake.Controller\Exception\MissingActionException;
+import uim.cake.controllers.Controller;
+import uim.cake.controllers.ControllerFactory;
+import uim.cake.controllers.Exception\InvalidParameterException;
+import uim.cake.controllers.Exception\MissingActionException;
 import uim.cake.cores.App;
 import uim.cake.cores.Configure;
 import uim.cake.cores.Container;

@@ -7,10 +7,10 @@
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Controller\Component;
+module uim.cake.controllers.Component;
 
-import uim.cake.Controller\Component;
-import uim.cake.Controller\ComponentRegistry;
+import uim.cake.controllers.Component;
+import uim.cake.controllers.ComponentRegistry;
 import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
 import uim.cake.Datasource\Paging\NumericPaginator;
 import uim.cake.Datasource\IResultSet;

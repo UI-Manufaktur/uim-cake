@@ -7,13 +7,13 @@
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Controller\Component;
+module uim.cake.controllers.Component;
 
 import uim.cake.Auth\BaseAuthenticate;
 import uim.cake.Auth\BaseAuthorize;
 import uim.cake.Auth\Storage\IStorage;
-import uim.cake.Controller\Component;
-import uim.cake.Controller\Controller;
+import uim.cake.controllers.Component;
+import uim.cake.controllers.Controller;
 import uim.cake.cores.App;
 import uim.cake.cores.Exception\CakeException;
 import uim.cake.Event\EventDispatcherInterface;

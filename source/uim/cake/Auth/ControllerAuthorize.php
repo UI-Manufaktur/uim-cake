@@ -9,8 +9,8 @@
  */
 module uim.cake.Auth;
 
-import uim.cake.Controller\ComponentRegistry;
-import uim.cake.Controller\Controller;
+import uim.cake.controllers.ComponentRegistry;
+import uim.cake.controllers.Controller;
 import uim.cake.cores.Exception\CakeException;
 import uim.cake.Http\ServerRequest;
 

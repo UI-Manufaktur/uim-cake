@@ -7,9 +7,9 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Controller\Component;
+module uim.cake.controllers.Component;
 
-import uim.cake.Controller\Component;
+import uim.cake.controllers.Component;
 import uim.cake.Http\Exception\InternalErrorException;
 import uim.cake.Http\FlashMessage;
 import uim.cake.utilities.Inflector;

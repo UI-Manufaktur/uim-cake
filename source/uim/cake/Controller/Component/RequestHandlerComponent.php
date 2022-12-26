@@ -7,11 +7,11 @@
  * @since         0.10.4
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Controller\Component;
+module uim.cake.controllers.Component;
 
-import uim.cake.Controller\Component;
-import uim.cake.Controller\ComponentRegistry;
-import uim.cake.Controller\Controller;
+import uim.cake.controllers.Component;
+import uim.cake.controllers.ComponentRegistry;
+import uim.cake.controllers.Controller;
 import uim.cake.cores.App;
 import uim.cake.cores.Configure;
 import uim.cake.Event\EventInterface;
