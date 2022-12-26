@@ -90,8 +90,7 @@ class FormProtector
      *
      * @param array<string, mixed> $data Data array, can contain key `unlockedFields` with list of unlocked fields.
      */
-    public this(array $data = [])
-    {
+    public this(array $data = []) {
         if (!empty($data['unlockedFields'])) {
             this.unlockedFields = $data['unlockedFields'];
         }
@@ -107,8 +106,7 @@ class FormProtector
      * @param mixed $value Field value, if value should not be tampered with.
      * @return this
      */
-    function addField($field, bool $lock = true, $value = null)
-    {
+    function addField($field, bool $lock = true, $value = null) {
         if (is_string($field)) {
             $field = this.getFieldNameArray($field);
         }
@@ -180,8 +178,7 @@ class FormProtector
      * @param string $name The dot separated name for the field.
      * @return this
      */
-    function unlockField($name)
-    {
+    function unlockField($name) {
         if (!in_array($name, this.unlockedFields, true)) {
             this.unlockedFields[] = $name;
         }
@@ -420,8 +417,7 @@ class FormProtector
      * @param string $sessionId Session Id.
      * @return string
      */
-    protected function generateHash(array $fields, array $unlockedFields, string $url, string $sessionId)
-    {
+    protected function generateHash(array $fields, array $unlockedFields, string $url, string $sessionId) {
         $hashParts = [
             $url,
             serialize($fields),

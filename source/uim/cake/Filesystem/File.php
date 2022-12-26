@@ -77,8 +77,7 @@ class File
      * @param int $mode Mode to apply to the folder holding the file
      * @link https://book.cakephp.org/4/en/core-libraries/file-folder.html#file-api
      */
-    public this(string $path, bool $create = false, int $mode = 0755)
-    {
+    public this(string $path, bool $create = false, int $mode = 0755) {
         $splInfo = new SplFileInfo($path);
         this.Folder = new Folder($splInfo.getPath(), $create, $mode);
         if (!is_dir($path)) {
@@ -91,8 +90,7 @@ class File
     /**
      * Closes the current file if it is opened
      */
-    function __destruct()
-    {
+    function __destruct() {
         this.close();
     }
 
@@ -141,8 +139,7 @@ class File
      * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won't
      * @return string|false String on success, false on failure
      */
-    function read($bytes = false, string $mode = 'rb', bool $force = false)
-    {
+    function read($bytes = false, string $mode = 'rb', bool $force = false) {
         if ($bytes == false && this.lock == null) {
             return file_get_contents(this.path);
         }
@@ -179,8 +176,7 @@ class File
      * @return int|bool True on success, false on failure (set mode), false on failure
      *   or integer offset on success (get mode).
      */
-    function offset($offset = false, int $seek = SEEK_SET)
-    {
+    function offset($offset = false, int $seek = SEEK_SET) {
         if ($offset == false) {
             if (is_resource(this.handle)) {
                 return ftell(this.handle);
@@ -310,8 +306,7 @@ class File
      *
      * @return string|false The file extension, false if extension cannot be extracted.
      */
-    function ext()
-    {
+    function ext() {
         if (!this.info) {
             this.info();
         }
@@ -324,8 +319,7 @@ class File
      *
      * @return string|false The file name without extension, false if name cannot be extracted.
      */
-    function name()
-    {
+    function name() {
         if (!this.info) {
             this.info();
         }
@@ -392,8 +386,7 @@ class File
      * @return string|false md5 Checksum {@link https://secure.php.net/md5_file See md5_file()},
      *  or false in case of an error.
      */
-    function md5($maxsize = 5)
-    {
+    function md5($maxsize = 5) {
         if ($maxsize == true) {
             return md5_file(this.path);
         }
@@ -411,8 +404,7 @@ class File
      *
      * @return string|null Full path to the file, or null on failure
      */
-    function pwd()
-    {
+    function pwd() {
         if (this.path == null) {
             $dir = this.Folder.pwd();
             if ($dir && is_dir($dir)) {
@@ -440,8 +432,7 @@ class File
      *
      * @return string|false Permissions for the file, or false in case of an error
      */
-    function perms()
-    {
+    function perms() {
         if (this.exists()) {
             return decoct(fileperms(this.path) & 0777);
         }
@@ -454,8 +445,7 @@ class File
      *
      * @return int|false Size of the file in bytes, or false in case of an error
      */
-    function size()
-    {
+    function size() {
         if (this.exists()) {
             return filesize(this.path);
         }
@@ -498,8 +488,7 @@ class File
      *
      * @return int|false The file owner, or bool in case of an error
      */
-    function owner()
-    {
+    function owner() {
         if (this.exists()) {
             return fileowner(this.path);
         }
@@ -512,8 +501,7 @@ class File
      *
      * @return int|false The file group, or false in case of an error
      */
-    function group()
-    {
+    function group() {
         if (this.exists()) {
             return filegroup(this.path);
         }
@@ -526,8 +514,7 @@ class File
      *
      * @return int|false Timestamp of last access time, or false in case of an error
      */
-    function lastAccess()
-    {
+    function lastAccess() {
         if (this.exists()) {
             return fileatime(this.path);
         }
@@ -540,8 +527,7 @@ class File
      *
      * @return int|false Timestamp of last modification, or false in case of an error
      */
-    function lastChange()
-    {
+    function lastChange() {
         if (this.exists()) {
             return filemtime(this.path);
         }
@@ -581,8 +567,7 @@ class File
      *
      * @return string|false The mimetype of the file, or false if reading fails.
      */
-    function mime()
-    {
+    function mime() {
         if (!this.exists()) {
             return false;
         }

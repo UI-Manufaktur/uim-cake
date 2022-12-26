@@ -48,8 +48,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      *
      * @param array $middleware The list of middleware to append.
      */
-    public this(array $middleware = [])
-    {
+    public this(array $middleware = []) {
         this.queue = $middleware;
     }
 
@@ -95,8 +94,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @param \Psr\Http\Server\IMiddleware|\Closure|array|string $middleware The middleware(s) to append.
      * @return this
      */
-    function add($middleware)
-    {
+    function add($middleware) {
         if (is_array($middleware)) {
             this.queue = array_merge(this.queue, $middleware);
 
@@ -114,8 +112,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return this
      * @see MiddlewareQueue::add()
      */
-    function push($middleware)
-    {
+    function push($middleware) {
         return this.add($middleware);
     }
 
@@ -125,8 +122,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @param \Psr\Http\Server\IMiddleware|\Closure|array|string $middleware The middleware(s) to prepend.
      * @return this
      */
-    function prepend($middleware)
-    {
+    function prepend($middleware) {
         if (is_array($middleware)) {
             this.queue = array_merge($middleware, this.queue);
 
@@ -147,8 +143,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to insert.
      * @return this
      */
-    function insertAt(int $index, $middleware)
-    {
+    function insertAt(int $index, $middleware) {
         array_splice(this.queue, $index, 0, [$middleware]);
 
         return this;
@@ -165,8 +160,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return this
      * @throws \LogicException If middleware to insert before is not found.
      */
-    function insertBefore(string $class, $middleware)
-    {
+    function insertBefore(string $class, $middleware) {
         $found = false;
         $i = 0;
         foreach (this.queue as $i: $object) {
@@ -199,8 +193,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to insert.
      * @return this
      */
-    function insertAfter(string $class, $middleware)
-    {
+    function insertAfter(string $class, $middleware) {
         $found = false;
         $i = 0;
         foreach (this.queue as $i: $object) {

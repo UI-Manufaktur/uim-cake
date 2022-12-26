@@ -96,8 +96,7 @@ class FormData : Countable
      * @param mixed $value The value for the part.
      * @return this
      */
-    function add($name, $value = null)
-    {
+    function add($name, $value = null) {
         if (is_string($name)) {
             if (is_array($value)) {
                 this.addRecursive($name, $value);
@@ -122,8 +121,7 @@ class FormData : Countable
      * @param array $data Array of data to add.
      * @return this
      */
-    function addMany(array $data)
-    {
+    function addMany(array $data) {
         foreach ($data as $name: $value) {
             this.add($name, $value);
         }

@@ -437,8 +437,7 @@ class Response : IResponse
      *  - charset: the charset for the response body
      * @throws \InvalidArgumentException
      */
-    public this(array $options = [])
-    {
+    public this(array $options = []) {
         _streamTarget = $options["streamTarget"] ?? _streamTarget;
         _streamMode = $options["streamMode"] ?? _streamMode;
         if (isset($options["stream"])) {
@@ -522,8 +521,7 @@ class Response : IResponse
      * @param string $url The location to redirect to.
      * @return static A new response with the Location header set.
      */
-    function withLocation(string $url)
-    {
+    function withLocation(string $url) {
         $new = this.withHeader("Location", $url);
         if ($new._status == 200) {
             $new._status = 302;
@@ -606,8 +604,7 @@ class Response : IResponse
      * @return static
      * @throws \InvalidArgumentException For invalid status code arguments.
      */
-    function withStatus($code, $reasonPhrase = "")
-    {
+    function withStatus($code, $reasonPhrase = "") {
         $new = clone this;
         $new._setStatus($code, $reasonPhrase);
 
@@ -701,8 +698,7 @@ class Response : IResponse
      * @param string $contentType Either a file extension which will be mapped to a mime-type or a concrete mime-type.
      * @return static
      */
-    function withType(string $contentType)
-    {
+    function withType(string $contentType) {
         $mappedType = this.resolveType($contentType);
         $new = clone this;
         $new._setContentType($mappedType);
@@ -738,8 +734,7 @@ class Response : IResponse
      * @param string $alias the content type alias to map
      * @return array|string|false String mapped mime type or false if $alias is not mapped
      */
-    function getMimeType(string $alias)
-    {
+    function getMimeType(string $alias) {
         return _mimeTypes[$alias] ?? false;
     }
 
@@ -751,8 +746,7 @@ class Response : IResponse
      * @param array|string $ctype Either a string content type to map, or an array of types.
      * @return array|string|null Aliases for the types provided.
      */
-    function mapType($ctype)
-    {
+    function mapType($ctype) {
         if (is_array($ctype)) {
             return array_map([this, "mapType"], $ctype);
         }
@@ -782,8 +776,7 @@ class Response : IResponse
      * @param string $charset Character set string.
      * @return static
      */
-    function withCharset(string $charset)
-    {
+    function withCharset(string $charset) {
         $new = clone this;
         $new._charset = $charset;
         $new._setContentType(this.getType());
@@ -796,8 +789,7 @@ class Response : IResponse
      *
      * @return static
      */
-    function withDisabledCache()
-    {
+    function withDisabledCache() {
         return this.withHeader("Expires", "Mon, 26 Jul 1997 05:00:00 GMT")
             .withHeader("Last-Modified", gmdate(DATE_RFC7231))
             .withHeader("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
@@ -810,8 +802,7 @@ class Response : IResponse
      * @param string|int $time a valid time for cache expiry
      * @return static
      */
-    function withCache($since, $time = "+1 day")
-    {
+    function withCache($since, $time = "+1 day") {
         if (!is_int($time)) {
             $time = strtotime($time);
             if ($time == false) {
@@ -836,8 +827,7 @@ class Response : IResponse
      * @param int|null $time time in seconds after which the response should no longer be considered fresh.
      * @return static
      */
-    function withSharable(bool $public, ?int $time = null)
-    {
+    function withSharable(bool $public, ?int $time = null) {
         $new = clone this;
         unset($new._cacheDirectives["private"], $new._cacheDirectives["public"]);
 
@@ -861,8 +851,7 @@ class Response : IResponse
      * @param int $seconds The number of seconds for shared max-age
      * @return static
      */
-    function withSharedMaxAge(int $seconds)
-    {
+    function withSharedMaxAge(int $seconds) {
         $new = clone this;
         $new._cacheDirectives["s-maxage"] = $seconds;
         $new._setCacheControl();
@@ -879,8 +868,7 @@ class Response : IResponse
      * @param int $seconds The seconds a cached response can be considered valid
      * @return static
      */
-    function withMaxAge(int $seconds)
-    {
+    function withMaxAge(int $seconds) {
         $new = clone this;
         $new._cacheDirectives["max-age"] = $seconds;
         $new._setCacheControl();
@@ -899,8 +887,7 @@ class Response : IResponse
      * @param bool $enable If boolean sets or unsets the directive.
      * @return static
      */
-    function withMustRevalidate(bool $enable)
-    {
+    function withMustRevalidate(bool $enable) {
         $new = clone this;
         if ($enable) {
             $new._cacheDirectives["must-revalidate"] = true;
@@ -945,8 +932,7 @@ class Response : IResponse
      * @param \DateTimeInterface|string|int|null $time Valid time string or \DateTime instance.
      * @return static
      */
-    function withExpires($time)
-    {
+    function withExpires($time) {
         $date = _getUTCDate($time);
 
         return this.withHeader("Expires", $date.format(DATE_RFC7231));
@@ -968,8 +954,7 @@ class Response : IResponse
      * @param \DateTimeInterface|string|int $time Valid time string or \DateTime instance.
      * @return static
      */
-    function withModified($time)
-    {
+    function withModified($time) {
         $date = _getUTCDate($time);
 
         return this.withHeader("Last-Modified", $date.format(DATE_RFC7231));
@@ -1017,8 +1002,7 @@ class Response : IResponse
      *
      * @return static
      */
-    function withNotModified()
-    {
+    function withNotModified() {
         $new = this.withStatus(304);
         $new._createStream();
         $remove = [
@@ -1048,8 +1032,7 @@ class Response : IResponse
      *   containing the list for variances.
      * @return static
      */
-    function withVary($cacheVariances)
-    {
+    function withVary($cacheVariances) {
         return this.withHeader("Vary", (array)$cacheVariances);
     }
 
@@ -1074,8 +1057,7 @@ class Response : IResponse
      *   other with the same hash or not. Defaults to false
      * @return static
      */
-    function withEtag(string $hash, bool $weak = false)
-    {
+    function withEtag(string $hash, bool $weak = false) {
         $hash = sprintf("%s"%s"", $weak ? "W/" : "", $hash);
 
         return this.withHeader("Etag", $hash);
@@ -1134,8 +1116,7 @@ class Response : IResponse
      * @param string $filename The name of the file as the browser will download the response
      * @return static
      */
-    function withDownload(string $filename)
-    {
+    function withDownload(string $filename) {
         return this.withHeader("Content-Disposition", "attachment; filename="" . $filename . """);
     }
 
@@ -1145,8 +1126,7 @@ class Response : IResponse
      * @param string|int $bytes Number of bytes
      * @return static
      */
-    function withLength($bytes)
-    {
+    function withLength($bytes) {
         return this.withHeader("Content-Length", (string)$bytes);
     }
 
@@ -1172,8 +1152,7 @@ class Response : IResponse
      * @return static
      * @since 3.6.0
      */
-    function withAddedLink(string $url, array $options = [])
-    {
+    function withAddedLink(string $url, array $options = []) {
         $params = [];
         foreach ($options as $key: $option) {
             $params[] = $key . "="" . $option . """;
@@ -1278,8 +1257,7 @@ class Response : IResponse
      * @param \Cake\Http\Cookie\CookieInterface $cookie cookie object
      * @return static
      */
-    function withCookie(CookieInterface $cookie)
-    {
+    function withCookie(CookieInterface $cookie) {
         $new = clone this;
         $new._cookies = $new._cookies.add($cookie);
 
@@ -1299,8 +1277,7 @@ class Response : IResponse
      * @param \Cake\Http\Cookie\CookieInterface $cookie cookie object
      * @return static
      */
-    function withExpiredCookie(CookieInterface $cookie)
-    {
+    function withExpiredCookie(CookieInterface $cookie) {
         $cookie = $cookie.withExpired();
 
         $new = clone this;
@@ -1362,8 +1339,7 @@ class Response : IResponse
      * @param \Cake\Http\Cookie\CookieCollection $cookieCollection Cookie collection to set.
      * @return static
      */
-    function withCookieCollection(CookieCollection $cookieCollection)
-    {
+    function withCookieCollection(CookieCollection $cookieCollection) {
         $new = clone this;
         $new._cookies = $cookieCollection;
 
@@ -1404,8 +1380,7 @@ class Response : IResponse
      * @return static
      * @throws \Cake\Http\Exception\NotFoundException
      */
-    function withFile(string $path, array $options = [])
-    {
+    function withFile(string $path, array $options = []) {
         $file = this.validateFile($path);
         $options += [
             "name": null,
@@ -1460,8 +1435,7 @@ class Response : IResponse
      * @param string|null $string The string to be sent
      * @return static
      */
-    function withStringBody(?string $string)
-    {
+    function withStringBody(?string $string) {
         $new = clone this;
         $new._createStream();
         $new.stream.write((string)$string);

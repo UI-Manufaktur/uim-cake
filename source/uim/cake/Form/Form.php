@@ -92,8 +92,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
      * @param \Cake\Event\EventManager|null $eventManager The event manager.
      *  Defaults to a new instance.
      */
-    public this(?EventManager $eventManager = null)
-    {
+    public this(?EventManager $eventManager = null) {
         if ($eventManager != null) {
             this.setEventManager($eventManager);
         }
@@ -136,8 +135,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
      * @param \Cake\Form\Schema $schema The schema to set
      * @return this
      */
-    function setSchema(Schema $schema)
-    {
+    function setSchema(Schema $schema) {
         _schema = $schema;
 
         return this;
@@ -241,8 +239,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
      * @param array $errors Errors list.
      * @return this
      */
-    function setErrors(array $errors)
-    {
+    function setErrors(array $errors) {
         _errors = $errors;
 
         return this;
@@ -301,8 +298,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
      *   all fields.
      * @return mixed
      */
-    function getData(?string $field = null)
-    {
+    function getData(?string $field = null) {
         if ($field == null) {
             return _data;
         }
@@ -318,8 +314,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
      * @param mixed $value Value to set for var
      * @return this
      */
-    function set($name, $value = null)
-    {
+    function set($name, $value = null) {
         $write = $name;
         if (!is_array($name)) {
             $write = [$name: $value];
@@ -339,8 +334,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
      * @param array $data Data array.
      * @return this
      */
-    function setData(array $data)
-    {
+    function setData(array $data) {
         _data = $data;
 
         return this;

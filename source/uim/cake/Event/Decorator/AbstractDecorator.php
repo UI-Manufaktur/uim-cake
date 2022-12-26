@@ -40,8 +40,7 @@ abstract class AbstractDecorator
      * @param callable $callable Callable.
      * @param array<string, mixed> $options Decorator options.
      */
-    public this(callable $callable, array $options = [])
-    {
+    public this(callable $callable, array $options = []) {
         _callable = $callable;
         _options = $options;
     }
@@ -52,8 +51,7 @@ abstract class AbstractDecorator
      * @link https://secure.php.net/manual/en/language.oop5.magic.php#object.invoke
      * @return mixed
      */
-    function __invoke()
-    {
+    function __invoke() {
         return _call(func_get_args());
     }
 
@@ -63,8 +61,7 @@ abstract class AbstractDecorator
      * @param array $args Arguments for the callable.
      * @return mixed
      */
-    protected function _call(array $args)
-    {
+    protected function _call(array $args) {
         $callable = _callable;
 
         return $callable(...$args);

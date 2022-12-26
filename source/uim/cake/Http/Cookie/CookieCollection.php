@@ -47,8 +47,7 @@ class CookieCollection : IteratorAggregate, Countable
      *
      * @param array<\Cake\Http\Cookie\CookieInterface> $cookies Array of cookie objects
      */
-    public this(array $cookies = [])
-    {
+    public this(array $cookies = []) {
         this.checkCookies($cookies);
         foreach ($cookies as $cookie) {
             this.cookies[$cookie.getId()] = $cookie;
@@ -62,8 +61,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param array<string, mixed> $defaults The defaults attributes.
      * @return static
      */
-    public static function createFromHeader(array $header, array $defaults = [])
-    {
+    public static function createFromHeader(array $header, array $defaults = []) {
         $cookies = [];
         foreach ($header as $value) {
             try {
@@ -82,8 +80,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param \Psr\Http\Message\IServerRequest $request The request to extract cookie data from
      * @return static
      */
-    public static function createFromServerRequest(IServerRequest $request)
-    {
+    public static function createFromServerRequest(IServerRequest $request) {
         $data = $request.getCookieParams();
         $cookies = [];
         foreach ($data as $name: $value) {
@@ -113,8 +110,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param \Cake\Http\Cookie\CookieInterface $cookie Cookie instance to add.
      * @return static
      */
-    function add(CookieInterface $cookie)
-    {
+    function add(CookieInterface $cookie) {
         $new = clone this;
         $new.cookies[$cookie.getId()] = $cookie;
 
@@ -171,8 +167,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param string $name The name of the cookie to remove.
      * @return static
      */
-    function remove(string $name)
-    {
+    function remove(string $name) {
         $new = clone this;
         $key = mb_strtolower($name);
         foreach ($new.cookies as $i: $cookie) {
@@ -305,8 +300,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param \Psr\Http\Message\RequestInterface $request Request to get cookie context from.
      * @return static
      */
-    function addFromResponse(IResponse $response, RequestInterface $request)
-    {
+    function addFromResponse(IResponse $response, RequestInterface $request) {
         $uri = $request.getUri();
         $host = $uri.getHost();
         $path = $uri.getPath() ?: "/";

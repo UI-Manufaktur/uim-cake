@@ -29,8 +29,7 @@ class ConditionDecorator : AbstractDecorator
     /**
      * @inheritDoc
      */
-    function __invoke()
-    {
+    function __invoke() {
         $args = func_get_args();
         if (!this.canTrigger($args[0])) {
             return;

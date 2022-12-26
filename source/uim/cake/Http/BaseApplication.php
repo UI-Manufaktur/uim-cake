@@ -116,8 +116,7 @@ abstract class BaseApplication implements
     /**
      * @inheritDoc
      */
-    function addPlugin($name, array $config = [])
-    {
+    function addPlugin($name, array $config = []) {
         if (is_string($name)) {
             $plugin = this.plugins.create($name, $config);
         } else {
@@ -137,8 +136,7 @@ abstract class BaseApplication implements
      * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
      * @return this
      */
-    function addOptionalPlugin($name, array $config = [])
-    {
+    function addOptionalPlugin($name, array $config = []) {
         try {
             this.addPlugin($name, $config);
         } catch (MissingPluginException $e) {

@@ -222,8 +222,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string, mixed> $config An array of request data to create a request with.
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         $config += [
             "params": this.params,
             "query": [],
@@ -455,8 +454,7 @@ class ServerRequest : IServerRequest
      * @return bool
      * @throws \BadMethodCallException when an invalid method is called.
      */
-    function __call(string $name, array $params)
-    {
+    function __call(string $name, array $params) {
         if (strpos($name, "is") == 0) {
             $type = strtolower(substr($name, 2));
 
@@ -860,8 +858,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withHeader($name, $value)
-    {
+    function withHeader($name, $value) {
         $new = clone this;
         $name = this.normalizeHeaderName($name);
         $new._environment[$name] = $value;
@@ -880,8 +877,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withAddedHeader($name, $value)
-    {
+    function withAddedHeader($name, $value) {
         $new = clone this;
         $name = this.normalizeHeaderName($name);
         $existing = [];
@@ -901,8 +897,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withoutHeader($name)
-    {
+    function withoutHeader($name) {
         $new = clone this;
         $name = this.normalizeHeaderName($name);
         unset($new._environment[$name]);
@@ -936,8 +931,7 @@ class ServerRequest : IServerRequest
      * @return static A new instance with the updated method.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withMethod($method)
-    {
+    function withMethod($method) {
         $new = clone this;
 
         if (
@@ -987,8 +981,7 @@ class ServerRequest : IServerRequest
      * @return static A new instance with the updated query string data.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function withQueryParams(array $query)
-    {
+    function withQueryParams(array $query) {
         $new = clone this;
         $new.query = $query;
 
@@ -1101,8 +1094,7 @@ class ServerRequest : IServerRequest
      * @return array<string>|bool Either an array of all the types the client accepts or a boolean if they accept the
      *   provided type.
      */
-    string[] accepts(?string $type = null)
-    {
+    string[] accepts(?string $type = null) {
         $content = new ContentTypeNegotiation();
         if ($type) {
             return $content.preferredType(this, [$type]) != null;
@@ -1145,8 +1137,7 @@ class ServerRequest : IServerRequest
      * @param string|null $language The language to test.
      * @return array|bool If a $language is provided, a boolean. Otherwise, the array of accepted languages.
      */
-    function acceptLanguage(?string $language = null)
-    {
+    function acceptLanguage(?string $language = null) {
         $content = new ContentTypeNegotiation();
         if ($language != null) {
             return $content.acceptLanguage(this, $language);
@@ -1172,8 +1163,7 @@ class ServerRequest : IServerRequest
      * @return array|string|null Query data.
      * @see ServerRequest::getQueryParams()
      */
-    function getQuery(?string $name = null, $default = null)
-    {
+    function getQuery(?string $name = null, $default = null) {
         if ($name == null) {
             return this.query;
         }
@@ -1213,8 +1203,7 @@ class ServerRequest : IServerRequest
      * @param mixed $default The default data.
      * @return mixed The value being read.
      */
-    function getData(?string $name = null, $default = null)
-    {
+    function getData(?string $name = null, $default = null) {
         if ($name == null) {
             return this.data;
         }
@@ -1253,8 +1242,7 @@ class ServerRequest : IServerRequest
      * @param mixed ...$args The additional arguments
      * @return mixed The decoded/processed request data.
      */
-    function input(?callable $callback = null, ...$args)
-    {
+    function input(?callable $callback = null, ...$args) {
         deprecationWarning(
             "Use `(string)$request.getBody()` to get the raw PHP input as string; "
             . "use `BodyParserMiddleware` to parse the request body so that it\"s available as array/object "
@@ -1278,8 +1266,7 @@ class ServerRequest : IServerRequest
      * @param array|string|null $default The default value if the cookie is not set.
      * @return array|string|null Either the cookie value, or null if the value doesn"t exist.
      */
-    function getCookie(string $key, $default = null)
-    {
+    function getCookie(string $key, $default = null) {
         return Hash::get(this.cookies, $key, $default);
     }
 
@@ -1310,8 +1297,7 @@ class ServerRequest : IServerRequest
      * @param \Cake\Http\Cookie\CookieCollection $cookies The cookie collection
      * @return static
      */
-    function withCookieCollection(CookieCollection $cookies)
-    {
+    function withCookieCollection(CookieCollection $cookies) {
         $new = clone this;
         $values = [];
         foreach ($cookies as $cookie) {
@@ -1338,8 +1324,7 @@ class ServerRequest : IServerRequest
      * @param array $cookies The new cookie data to use.
      * @return static
      */
-    function withCookieParams(array $cookies)
-    {
+    function withCookieParams(array $cookies) {
         $new = clone this;
         $new.cookies = $cookies;
 
@@ -1357,8 +1342,7 @@ class ServerRequest : IServerRequest
      * @return object|array|null The deserialized body parameters, if any.
      *     These will typically be an array.
      */
-    function getParsedBody()
-    {
+    function getParsedBody() {
         return this.data;
     }
 
@@ -1369,8 +1353,7 @@ class ServerRequest : IServerRequest
      *     typically be in an array or object.
      * @return static
      */
-    function withParsedBody($data)
-    {
+    function withParsedBody($data) {
         $new = clone this;
         $new.data = $data;
 
@@ -1408,8 +1391,7 @@ class ServerRequest : IServerRequest
      * @param string $version HTTP protocol version
      * @return static
      */
-    function withProtocolVersion($version)
-    {
+    function withProtocolVersion($version) {
         if (!preg_match("/^(1\.[01]|2)$/", $version)) {
             throw new InvalidArgumentException("Unsupported protocol version "{$version}" provided");
         }
@@ -1448,8 +1430,7 @@ class ServerRequest : IServerRequest
      * @param string $value Value to set
      * @return static
      */
-    function withEnv(string $key, string $value)
-    {
+    function withEnv(string $key, string $value) {
         $new = clone this;
         $new._environment[$key] = $value;
         $new.clearDetectorCache();
@@ -1500,8 +1481,7 @@ class ServerRequest : IServerRequest
      * @param mixed $value The value to insert into the request data.
      * @return static
      */
-    function withData(string $name, $value)
-    {
+    function withData(string $name, $value) {
         $copy = clone this;
 
         if (is_array($copy.data)) {
@@ -1520,8 +1500,7 @@ class ServerRequest : IServerRequest
      * @param string $name The dot separated path to remove.
      * @return static
      */
-    function withoutData(string $name)
-    {
+    function withoutData(string $name) {
         $copy = clone this;
 
         if (is_array($copy.data)) {
@@ -1541,8 +1520,7 @@ class ServerRequest : IServerRequest
      * @param mixed $value The value to insert into the the request parameters.
      * @return static
      */
-    function withParam(string $name, $value)
-    {
+    function withParam(string $name, $value) {
         $copy = clone this;
         $copy.params = Hash::insert($copy.params, $name, $value);
 
@@ -1556,8 +1534,7 @@ class ServerRequest : IServerRequest
      * @param mixed $default The default value if `$name` is not set. Default `null`.
      * @return mixed
      */
-    function getParam(string $name, $default = null)
-    {
+    function getParam(string $name, $default = null) {
         return Hash::get(this.params, $name, $default);
     }
 
@@ -1568,8 +1545,7 @@ class ServerRequest : IServerRequest
      * @param mixed $value The value of the attribute.
      * @return static
      */
-    function withAttribute($name, $value)
-    {
+    function withAttribute($name, $value) {
         $new = clone this;
         if (in_array($name, this.emulatedAttributes, true)) {
             $new.{$name} = $value;
@@ -1587,8 +1563,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @throws \InvalidArgumentException
      */
-    function withoutAttribute($name)
-    {
+    function withoutAttribute($name) {
         $new = clone this;
         if (in_array($name, this.emulatedAttributes, true)) {
             throw new InvalidArgumentException(
@@ -1607,8 +1582,7 @@ class ServerRequest : IServerRequest
      * @param mixed|null $default The default value if the attribute has not been set.
      * @return mixed
      */
-    function getAttribute($name, $default = null)
-    {
+    function getAttribute($name, $default = null) {
         if (in_array($name, this.emulatedAttributes, true)) {
             if ($name == "here") {
                 return this.base . this.uri.getPath();
@@ -1676,8 +1650,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @throws \InvalidArgumentException when $files contains an invalid object.
      */
-    function withUploadedFiles(array $uploadedFiles)
-    {
+    function withUploadedFiles(array $uploadedFiles) {
         this.validateUploadedFiles($uploadedFiles, "");
         $new = clone this;
         $new.uploadedFiles = $uploadedFiles;
@@ -1723,8 +1696,7 @@ class ServerRequest : IServerRequest
      * @param \Psr\Http\Message\StreamInterface $body The new request body
      * @return static
      */
-    function withBody(StreamInterface $body)
-    {
+    function withBody(StreamInterface $body) {
         $new = clone this;
         $new.stream = $body;
 
@@ -1752,8 +1724,7 @@ class ServerRequest : IServerRequest
      * @param bool $preserveHost Whether the host should be retained.
      * @return static
      */
-    function withUri(UriInterface $uri, $preserveHost = false)
-    {
+    function withUri(UriInterface $uri, $preserveHost = false) {
         $new = clone this;
         $new.uri = $uri;
 
@@ -1787,8 +1758,7 @@ class ServerRequest : IServerRequest
      * @return static
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    function withRequestTarget($requestTarget)
-    {
+    function withRequestTarget($requestTarget) {
         $new = clone this;
         $new.requestTarget = $requestTarget;
 

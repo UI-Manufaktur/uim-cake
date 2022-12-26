@@ -85,8 +85,7 @@ class Session
      * @return static
      * @see \Cake\Http\Session::__construct()
      */
-    public static function create(array $sessionConfig = [])
-    {
+    public static function create(array $sessionConfig = []) {
         if (isset($sessionConfig["defaults"])) {
             $defaults = static::_defaultConfig($sessionConfig["defaults"]);
             if ($defaults) {
@@ -126,8 +125,7 @@ class Session
      * @param string $name Config name.
      * @return array|false
      */
-    protected static function _defaultConfig(string $name)
-    {
+    protected static function _defaultConfig(string $name) {
         $tmp = defined("TMP") ? TMP : sys_get_temp_dir() . DIRECTORY_SEPARATOR;
         $defaults = [
             "php": [
@@ -196,8 +194,7 @@ class Session
      *
      * @param array<string, mixed> $config The Configuration to apply to this session object
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         $config += [
             "timeout": null,
             "cookie": null,
@@ -421,8 +418,7 @@ class Session
      * @return mixed|null The value of the session variable, or default value if a session
      *   is not available, can"t be started, or provided $name is not found in the session.
      */
-    function read(?string $name = null, $default = null)
-    {
+    function read(?string $name = null, $default = null) {
         if (_hasSession() && !this.started()) {
             this.start();
         }
@@ -445,8 +441,7 @@ class Session
      * @throws \RuntimeException
      * @return mixed|null
      */
-    function readOrFail(string $name)
-    {
+    function readOrFail(string $name) {
         if (!this.check($name)) {
             throw new RuntimeException(sprintf("Expected session key "%s" not found.", $name));
         }
@@ -461,8 +456,7 @@ class Session
      * @return mixed|null The value of the session variable, null if session not available,
      *   session not started, or provided name not found in the session.
      */
-    function consume(string $name)
-    {
+    function consume(string $name) {
         if (empty($name)) {
             return null;
         }

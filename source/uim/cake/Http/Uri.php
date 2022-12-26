@@ -46,8 +46,7 @@ class Uri : UriInterface
      * @param string $base The base path.
      * @param string $webroot The webroot path.
      */
-    public this(UriInterface $uri, string $base, string $webroot)
-    {
+    public this(UriInterface $uri, string $base, string $webroot) {
         this.uri = $uri;
         this.base = $base;
         this.webroot = $webroot;
@@ -59,8 +58,7 @@ class Uri : UriInterface
      * @param string $name The attribute to read.
      * @return mixed
      */
-    function __get(string $name)
-    {
+    function __get(string $name) {
         if ($name == "base" || $name == "webroot") {
             return this.{$name};
         }
@@ -100,72 +98,63 @@ class Uri : UriInterface
     /**
      * @inheritDoc
      */
-    function getScheme()
-    {
+    function getScheme() {
         return this.uri.getScheme();
     }
 
     /**
      * @inheritDoc
      */
-    function getAuthority()
-    {
+    function getAuthority() {
         return this.uri.getAuthority();
     }
 
     /**
      * @inheritDoc
      */
-    function getUserInfo()
-    {
+    function getUserInfo() {
         return this.uri.getUserInfo();
     }
 
     /**
      * @inheritDoc
      */
-    function getHost()
-    {
+    function getHost() {
         return this.uri.getHost();
     }
 
     /**
      * @inheritDoc
      */
-    function getPort()
-    {
+    function getPort() {
         return this.uri.getPort();
     }
 
     /**
      * @inheritDoc
      */
-    function getPath()
-    {
+    function getPath() {
         return this.uri.getPath();
     }
 
     /**
      * @inheritDoc
      */
-    function getQuery()
-    {
+    function getQuery() {
         return this.uri.getQuery();
     }
 
     /**
      * @inheritDoc
      */
-    function getFragment()
-    {
+    function getFragment() {
         return this.uri.getFragment();
     }
 
     /**
      * @inheritDoc
      */
-    function withScheme($scheme)
-    {
+    function withScheme($scheme) {
         $new = clone this;
         $new.uri = this.uri.withScheme($scheme);
 
@@ -175,8 +164,7 @@ class Uri : UriInterface
     /**
      * @inheritDoc
      */
-    function withUserInfo($user, $password = null)
-    {
+    function withUserInfo($user, $password = null) {
         $new = clone this;
         $new.uri = this.uri.withUserInfo($user, $password);
 
@@ -186,8 +174,7 @@ class Uri : UriInterface
     /**
      * @inheritDoc
      */
-    function withHost($host)
-    {
+    function withHost($host) {
         $new = clone this;
         $new.uri = this.uri.withHost($host);
 
@@ -197,8 +184,7 @@ class Uri : UriInterface
     /**
      * @inheritDoc
      */
-    function withPort($port)
-    {
+    function withPort($port) {
         $new = clone this;
         $new.uri = this.uri.withPort($port);
 
@@ -208,8 +194,7 @@ class Uri : UriInterface
     /**
      * @inheritDoc
      */
-    function withPath($path)
-    {
+    function withPath($path) {
         $new = clone this;
         $new.uri = this.uri.withPath($path);
 
@@ -219,8 +204,7 @@ class Uri : UriInterface
     /**
      * @inheritDoc
      */
-    function withQuery($query)
-    {
+    function withQuery($query) {
         $new = clone this;
         $new.uri = this.uri.withQuery($query);
 
@@ -230,8 +214,7 @@ class Uri : UriInterface
     /**
      * @inheritDoc
      */
-    function withFragment($fragment)
-    {
+    function withFragment($fragment) {
         $new = clone this;
         $new.uri = this.uri.withFragment($fragment);
 
@@ -241,8 +224,7 @@ class Uri : UriInterface
     /**
      * @inheritDoc
      */
-    function __toString()
-    {
+    function __toString() {
         return this.uri.__toString();
     }
 }

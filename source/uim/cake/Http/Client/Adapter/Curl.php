@@ -213,8 +213,7 @@ class Curl : AdapterInterface
      * @return string|bool
      * @psalm-suppress UndefinedDocblockClass
      */
-    protected function exec($ch)
-    {
+    protected function exec($ch) {
         /** @psalm-suppress PossiblyInvalidArgument */
         return curl_exec($ch);
     }

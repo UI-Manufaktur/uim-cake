@@ -214,8 +214,7 @@ class Cookie : CookieInterface
      * @return static
      * @see \Cake\Cookie\Cookie::setDefaults()
      */
-    public static function create(string $name, $value, array $options = [])
-    {
+    public static function create(string $name, $value, array $options = []) {
         $options += static::$defaults;
         $options["expires"] = static::dateTimeInstance($options["expires"]);
 
@@ -274,8 +273,7 @@ class Cookie : CookieInterface
      * @return static
      * @see \Cake\Http\Cookie\Cookie::setDefaults()
      */
-    public static function createFromHeaderString(string $cookie, array $defaults = [])
-    {
+    public static function createFromHeaderString(string $cookie, array $defaults = []) {
         if (strpos($cookie, "";"") != false) {
             $cookie = str_replace("";"", "{__cookie_replace__}", $cookie);
             $parts = str_replace("{__cookie_replace__}", "";"", explode(";", $cookie));
@@ -366,8 +364,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withName(string $name)
-    {
+    function withName(string $name) {
         this.validateName($name);
         $new = clone this;
         $new.name = $name;
@@ -415,8 +412,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function getValue()
-    {
+    function getValue() {
         return this.value;
     }
 
@@ -428,8 +424,7 @@ class Cookie : CookieInterface
      * @return mixed
      * @deprecated 4.0.0 Use {@link getScalarValue()} instead.
      */
-    function getStringValue()
-    {
+    function getStringValue() {
         deprecationWarning("Cookie::getStringValue() is deprecated. Use getScalarValue() instead.");
 
         return this.getScalarValue();
@@ -438,8 +433,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function getScalarValue()
-    {
+    function getScalarValue() {
         if (this.isExpanded) {
             /** @psalm-suppress PossiblyInvalidArgument */
             return _flatten(this.value);
@@ -451,8 +445,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withValue($value)
-    {
+    function withValue($value) {
         $new = clone this;
         $new._setValue($value);
 
@@ -474,8 +467,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withPath(string $path)
-    {
+    function withPath(string $path) {
         $new = clone this;
         $new.path = $path;
 
@@ -493,8 +485,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withDomain(string $domain)
-    {
+    function withDomain(string $domain) {
         $new = clone this;
         $new.domain = $domain;
 
@@ -520,8 +511,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withSecure(bool $secure)
-    {
+    function withSecure(bool $secure) {
         $new = clone this;
         $new.secure = $secure;
 
@@ -531,8 +521,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withHttpOnly(bool $httpOnly)
-    {
+    function withHttpOnly(bool $httpOnly) {
         $new = clone this;
         $new.httpOnly = $httpOnly;
 
@@ -550,8 +539,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withExpiry($dateTime)
-    {
+    function withExpiry($dateTime) {
         $new = clone this;
         $new.expiresAt = $dateTime.setTimezone(new DateTimeZone("GMT"));
 
@@ -561,8 +549,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function getExpiry()
-    {
+    function getExpiry() {
         return this.expiresAt;
     }
 
@@ -606,8 +593,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withNeverExpire()
-    {
+    function withNeverExpire() {
         $new = clone this;
         $new.expiresAt = new DateTimeImmutable("2038-01-01");
 
@@ -617,8 +603,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withExpired()
-    {
+    function withExpired() {
         $new = clone this;
         $new.expiresAt = new DateTimeImmutable("1970-01-01 00:00:01");
 
@@ -636,8 +621,7 @@ class Cookie : CookieInterface
     /**
      * @inheritDoc
      */
-    function withSameSite(?string $sameSite)
-    {
+    function withSameSite(?string $sameSite) {
         if ($sameSite != null) {
             this.validateSameSiteValue($sameSite);
         }
@@ -655,8 +639,7 @@ class Cookie : CookieInterface
      * @return void
      * @throws \InvalidArgumentException
      */
-    protected static function validateSameSiteValue(string $sameSite)
-    {
+    protected static function validateSameSiteValue(string $sameSite) {
         if (!in_array($sameSite, CookieInterface::SAMESITE_VALUES, true)) {
             throw new InvalidArgumentException(
                 "Samesite value must be either of: " . implode(", ", CookieInterface::SAMESITE_VALUES)
@@ -691,8 +674,7 @@ class Cookie : CookieInterface
      * @param mixed $value Value to write
      * @return static
      */
-    function withAddedValue(string $path, $value)
-    {
+    function withAddedValue(string $path, $value) {
         $new = clone this;
         if ($new.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -711,8 +693,7 @@ class Cookie : CookieInterface
      * @param string $path Path to remove
      * @return static
      */
-    function withoutAddedValue(string $path)
-    {
+    function withoutAddedValue(string $path) {
         $new = clone this;
         if ($new.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -734,8 +715,7 @@ class Cookie : CookieInterface
      * @param string|null $path Path to read the data from
      * @return mixed
      */
-    function read(?string $path = null)
-    {
+    function read(?string $path = null) {
         if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
             this.value = _expand(this.value);
@@ -808,8 +788,7 @@ class Cookie : CookieInterface
      * @param string $string A string containing JSON encoded data, or a bare string.
      * @return array|string Map of key and values
      */
-    protected function _expand(string $string)
-    {
+    protected function _expand(string $string) {
         this.isExpanded = true;
         $first = substr($string, 0, 1);
         if ($first == "{" || $first == "[") {

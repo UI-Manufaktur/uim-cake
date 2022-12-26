@@ -32,8 +32,7 @@ class MethodNotAllowedException : HttpException
      * @param int|null $code Status code, defaults to 405
      * @param \Throwable|null $previous The previous exception.
      */
-    public this(?string $message = null, ?int $code = null, ?Throwable $previous = null)
-    {
+    public this(?string $message = null, ?int $code = null, ?Throwable $previous = null) {
         if (empty($message)) {
             $message = "Method Not Allowed";
         }

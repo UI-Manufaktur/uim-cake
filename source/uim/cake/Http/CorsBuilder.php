@@ -60,8 +60,7 @@ class CorsBuilder
      * @param string $origin The request"s Origin header.
      * @param bool $isSsl Whether the request was over SSL.
      */
-    public this(MessageInterface $response, string $origin, bool $isSsl = false)
-    {
+    public this(MessageInterface $response, string $origin, bool $isSsl = false) {
         _origin = $origin;
         _isSsl = $isSsl;
         _response = $response;
@@ -100,8 +99,7 @@ class CorsBuilder
      * @param array<string>|string $domains The allowed domains
      * @return this
      */
-    function allowOrigin($domains)
-    {
+    function allowOrigin($domains) {
         $allowed = _normalizeDomains((array)$domains);
         foreach ($allowed as $domain) {
             if (!preg_match($domain["preg"], _origin)) {
@@ -147,8 +145,7 @@ class CorsBuilder
      * @param array<string> $methods The allowed HTTP methods
      * @return this
      */
-    function allowMethods(array $methods)
-    {
+    function allowMethods(array $methods) {
         _headers["Access-Control-Allow-Methods"] = implode(", ", $methods);
 
         return this;
@@ -159,8 +156,7 @@ class CorsBuilder
      *
      * @return this
      */
-    function allowCredentials()
-    {
+    function allowCredentials() {
         _headers["Access-Control-Allow-Credentials"] = "true";
 
         return this;
@@ -172,8 +168,7 @@ class CorsBuilder
      * @param array<string> $headers The list of headers to accept in CORS requests.
      * @return this
      */
-    function allowHeaders(array $headers)
-    {
+    function allowHeaders(array $headers) {
         _headers["Access-Control-Allow-Headers"] = implode(", ", $headers);
 
         return this;
@@ -185,8 +180,7 @@ class CorsBuilder
      * @param array<string> $headers The list of headers to expose CORS responses
      * @return this
      */
-    function exposeHeaders(array $headers)
-    {
+    function exposeHeaders(array $headers) {
         _headers["Access-Control-Expose-Headers"] = implode(", ", $headers);
 
         return this;
@@ -198,8 +192,7 @@ class CorsBuilder
      * @param string|int $age The max-age for OPTIONS requests in seconds
      * @return this
      */
-    function maxAge($age)
-    {
+    function maxAge($age) {
         _headers["Access-Control-Max-Age"] = $age;
 
         return this;

@@ -130,8 +130,7 @@ class Folder
      * @param bool $create Create folder if not found
      * @param int|null $mode Mode (CHMOD) to apply to created folder, false to ignore
      */
-    public this(?string $path = null, bool $create = false, ?int $mode = null)
-    {
+    public this(?string $path = null, bool $create = false, ?int $mode = null) {
         if (empty($path)) {
             $path = TMP;
         }
@@ -166,8 +165,7 @@ class Folder
      * @param string $path Path to the directory to change to
      * @return string|false The new path. Returns false on failure
      */
-    function cd(string $path)
-    {
+    function cd(string $path) {
         $path = this.realpath($path);
         if ($path != false && is_dir($path)) {
             return this.path = $path;
@@ -929,8 +927,7 @@ class Folder
      * @param string $path Path to resolve
      * @return string|false The resolved path
      */
-    function realpath($path)
-    {
+    function realpath($path) {
         if (strpos($path, '..') == false) {
             if (!Folder::isAbsolute($path)) {
                 $path = Folder::addPathElement(this.path, $path);
