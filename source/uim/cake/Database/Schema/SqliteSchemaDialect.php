@@ -13,9 +13,9 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Schema;
+module uim.cake.databases.Schema;
 
-import uim.cake.Database\Exception\DatabaseException;
+import uim.cake.databases.Exception\DatabaseException;
 
 /**
  * Schema management/reflection features for Sqlite

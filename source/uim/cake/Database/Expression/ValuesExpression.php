@@ -13,15 +13,15 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Expression;
+module uim.cake.databases.Expression;
 
-import uim.cake.Database\Exception\DatabaseException;
-import uim.cake.Database\IExpression;
-import uim.cake.Database\Query;
-import uim.cake.Database\Type\ExpressionTypeCasterTrait;
-import uim.cake.Database\TypeMap;
-import uim.cake.Database\TypeMapTrait;
-import uim.cake.Database\ValueBinder;
+import uim.cake.databases.Exception\DatabaseException;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Query;
+import uim.cake.databases.Type\ExpressionTypeCasterTrait;
+import uim.cake.databases.TypeMap;
+import uim.cake.databases.TypeMapTrait;
+import uim.cake.databases.ValueBinder;
 use Closure;
 
 /**

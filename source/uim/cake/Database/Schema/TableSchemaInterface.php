@@ -13,7 +13,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Schema;
+module uim.cake.databases.Schema;
 
 import uim.cake.Datasource\SchemaInterface;
 

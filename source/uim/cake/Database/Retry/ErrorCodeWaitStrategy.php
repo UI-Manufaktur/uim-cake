@@ -13,7 +13,7 @@
  * @since         4.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Retry;
+module uim.cake.databases.Retry;
 
 import uim.cake.Core\Retry\RetryStrategyInterface;
 use Exception;

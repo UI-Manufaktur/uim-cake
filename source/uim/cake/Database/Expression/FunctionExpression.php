@@ -13,14 +13,14 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Expression;
+module uim.cake.databases.Expression;
 
-import uim.cake.Database\IExpression;
-import uim.cake.Database\Query;
-import uim.cake.Database\Type\ExpressionTypeCasterTrait;
-import uim.cake.Database\TypedResultInterface;
-import uim.cake.Database\TypedResultTrait;
-import uim.cake.Database\ValueBinder;
+import uim.cake.databases.IExpression;
+import uim.cake.databases.Query;
+import uim.cake.databases.Type\ExpressionTypeCasterTrait;
+import uim.cake.databases.TypedResultInterface;
+import uim.cake.databases.TypedResultTrait;
+import uim.cake.databases.ValueBinder;
 
 /**
  * This class represents a function call string in a SQL statement. Calls can be

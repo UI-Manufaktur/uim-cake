@@ -13,7 +13,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Database\Log;
+module uim.cake.databases.Log;
 
 import uim.cake.Log\Engine\BaseLog;
 import uim.cake.Log\Log;
