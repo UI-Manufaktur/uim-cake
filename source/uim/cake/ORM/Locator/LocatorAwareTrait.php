@@ -38,8 +38,7 @@ trait LocatorAwareTrait
      * @param \Cake\ORM\Locator\ILocator $tableLocator ILocatorinstance.
      * @return this
      */
-    function setTableLocator(ILocator $tableLocator)
-    {
+    function setTableLocator(ILocator $tableLocator) {
         _tableLocator = $tableLocator;
 
         return this;

@@ -54,8 +54,7 @@ class ExistsIn
      *     Options "allowNullableNulls" will make the rule pass if given foreign keys are set to `null`.
      *     Notice: allowNullableNulls cannot pass by database columns set to `NOT NULL`.
      */
-    public this($fields, $repository, array $options = [])
-    {
+    public this($fields, $repository, array $options = []) {
         $options += ["allowNullableNulls": false];
         _options = $options;
 

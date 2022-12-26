@@ -872,8 +872,7 @@ abstract class TestCase : BaseTestCase
      * @param array|string $regex Full regexp from `assertHtml`
      * @return string|false
      */
-    protected function _assertAttributes(array $assertions, string $string, bool $fullDebug = false, $regex = '')
-    {
+    protected function _assertAttributes(array $assertions, string $string, bool $fullDebug = false, $regex = '') {
         $asserts = $assertions['attrs'];
         $explains = $assertions['explains'];
         do {
@@ -923,8 +922,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message the text to display if the assertion is not correct
      * @return void
      */
-    protected static function assertWithinRange($expected, $result, $margin, $message = '')
-    {
+    protected static function assertWithinRange($expected, $result, $margin, $message = '') {
         $upper = $result + $margin;
         $lower = $result - $margin;
         static::assertTrue(($expected <= $upper) && ($expected >= $lower), $message);
@@ -939,8 +937,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message the text to display if the assertion is not correct
      * @return void
      */
-    protected static function assertNotWithinRange($expected, $result, $margin, $message = '')
-    {
+    protected static function assertNotWithinRange($expected, $result, $margin, $message = '') {
         $upper = $result + $margin;
         $lower = $result - $margin;
         static::assertTrue(($expected > $upper) || ($expected < $lower), $message);
@@ -954,8 +951,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message the text to display if the assertion is not correct
      * @return void
      */
-    protected static function assertPathEquals($expected, $result, $message = '')
-    {
+    protected static function assertPathEquals($expected, $result, $message = '') {
         $expected = str_replace(DIRECTORY_SEPARATOR, '/', $expected);
         $result = str_replace(DIRECTORY_SEPARATOR, '/', $result);
         static::assertEquals($expected, $result, $message);
@@ -968,8 +964,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message Message for skip
      * @return bool
      */
-    protected function skipUnless($condition, $message = '')
-    {
+    protected function skipUnless($condition, $message = '') {
         if (!$condition) {
             this.markTestSkipped($message);
         }
@@ -988,8 +983,7 @@ abstract class TestCase : BaseTestCase
      * @throws \Cake\ORM\Exception\MissingTableClassException
      * @return \Cake\ORM\Table|\PHPUnit\Framework\MockObject\MockObject
      */
-    function getMockForModel(string $alias, array $methods = [], array $options = [])
-    {
+    function getMockForModel(string $alias, array $methods = [], array $options = []) {
         $className = _getTableClassName($alias, $options);
         $connectionName = $className::defaultConnectionName();
         $connection = ConnectionManager::get($connectionName);
@@ -1092,8 +1086,7 @@ abstract class TestCase : BaseTestCase
      * @param string $fixture Fixture
      * @return this
      */
-    protected function addFixture(string $fixture)
-    {
+    protected function addFixture(string $fixture) {
         this.fixtures[] = $fixture;
 
         return this;

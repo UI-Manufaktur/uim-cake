@@ -62,8 +62,7 @@ class TestEmailTransport : DebugTransport
      *
      * @return array<\Cake\Mailer\Message>
      */
-    public static function getMessages()
-    {
+    public static function getMessages() {
         return static::$messages;
     }
 

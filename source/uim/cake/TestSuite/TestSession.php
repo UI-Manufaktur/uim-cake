@@ -32,8 +32,7 @@ class TestSession
     /**
      * @param array|null $session Session data.
      */
-    public this(?array $session)
-    {
+    public this(?array $session) {
         this.session = $session;
     }
 
@@ -63,8 +62,7 @@ class TestSession
      * @return mixed The value of the session variable, null if session not available,
      *   session not started, or provided name not found in the session.
      */
-    function read(?string $name = null)
-    {
+    function read(?string $name = null) {
         if (this.session == null) {
             return null;
         }

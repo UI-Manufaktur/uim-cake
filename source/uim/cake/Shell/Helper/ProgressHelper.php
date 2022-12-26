@@ -93,8 +93,7 @@ class ProgressHelper : Helper
      * @param array $args The initialization data.
      * @return this
      */
-    function init(array $args = [])
-    {
+    function init(array $args = []) {
         $args += ['total': 100, 'width': 80];
         _progress = 0;
         _width = $args['width'];
@@ -109,8 +108,7 @@ class ProgressHelper : Helper
      * @param float|int $num The amount of progress to advance by.
      * @return this
      */
-    function increment($num = 1)
-    {
+    function increment($num = 1) {
         _progress = min(max(0, _progress + $num), _total);
 
         return this;
@@ -121,8 +119,7 @@ class ProgressHelper : Helper
      *
      * @return this
      */
-    function draw()
-    {
+    function draw() {
         $numberLen = strlen(' 100%');
         $complete = round(_progress / _total, 2);
         $barLen = (_width - $numberLen) * _progress / _total;

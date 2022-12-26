@@ -49,8 +49,7 @@ class CookieEncryptedEquals : CookieEquals
      * @param string $mode Mode
      * @param string $key Key
      */
-    public this(?Response $response, string $cookieName, string $mode, string $key)
-    {
+    public this(?Response $response, string $cookieName, string $mode, string $key) {
         super(($response, $cookieName);
 
         this.key = $key;

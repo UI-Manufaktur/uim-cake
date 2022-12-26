@@ -34,8 +34,7 @@ class SessionEquals : Constraint
      *
      * @param string $path Session Path
      */
-    public this(string $path)
-    {
+    public this(string $path) {
         this.path = $path;
     }
 

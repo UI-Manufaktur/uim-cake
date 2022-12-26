@@ -61,8 +61,7 @@ class RoutingMiddleware : IMiddleware
      * @param \Cake\Routing\IRoutingApplication $app The application instance that routes are defined on.
      * @param string|null $cacheConfig The cache config name to use or null to disable routes cache
      */
-    public this(IRoutingApplication $app, ?string $cacheConfig = null)
-    {
+    public this(IRoutingApplication $app, ?string $cacheConfig = null) {
         if ($cacheConfig != null) {
             deprecationWarning(
                 "Use of routing cache is deprecated and will be removed in 5.0. " .

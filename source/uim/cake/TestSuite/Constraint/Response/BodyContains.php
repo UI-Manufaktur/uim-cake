@@ -34,8 +34,7 @@ class BodyContains : ResponseBase
      * @param \Psr\Http\Message\IResponse $response A response instance.
      * @param bool $ignoreCase Ignore case
      */
-    public this(IResponse $response, bool $ignoreCase = false)
-    {
+    public this(IResponse $response, bool $ignoreCase = false) {
         super(($response);
 
         this.ignoreCase = $ignoreCase;

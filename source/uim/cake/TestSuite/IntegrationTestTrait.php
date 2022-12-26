@@ -755,8 +755,7 @@ trait IntegrationTestTrait
      * @param string $name The view variable to get.
      * @return mixed The view variable if set.
      */
-    function viewVariable(string $name)
-    {
+    function viewVariable(string $name) {
         return _controller ? _controller.viewBuilder().getVar($name) : null;
     }
 
@@ -854,8 +853,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
      */
-    function assertRedirectEquals($url = null, $message = '')
-    {
+    function assertRedirectEquals($url = null, $message = '') {
         if (!_response) {
             this.fail('No response set, cannot assert header.');
         }

@@ -27,8 +27,7 @@ class CommandTask : Shell
      *
      * @return array
      */
-    function getShellList()
-    {
+    function getShellList() {
         $skipFiles = ['app'];
         $hiddenCommands = ['command_list', 'completion'];
         $plugins = Plugin::loaded();

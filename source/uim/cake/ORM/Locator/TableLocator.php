@@ -74,8 +74,7 @@ class TableLocator : AbstractLocator : ILocator
      * @param array<string>|null $locations Locations where tables should be looked for.
      *   If none provided, the default `Model\Table` under your app"s namespace is used.
      */
-    public this(?array $locations = null)
-    {
+    public this(?array $locations = null) {
         if ($locations == null) {
             $locations = [
                 "Model/Table",
@@ -96,8 +95,7 @@ class TableLocator : AbstractLocator : ILocator
      * @param bool $allow Flag to enable or disable fallback
      * @return this
      */
-    function allowFallbackClass(bool $allow)
-    {
+    function allowFallbackClass(bool $allow) {
         this.allowFallbackClass = $allow;
 
         return this;
@@ -114,8 +112,7 @@ class TableLocator : AbstractLocator : ILocator
      * @return this
      * @psalm-param class-string<\Cake\ORM\Table> $className
      */
-    function setFallbackClassName($className)
-    {
+    function setFallbackClassName($className) {
         this.fallbackClassName = $className;
 
         return this;
@@ -124,8 +121,7 @@ class TableLocator : AbstractLocator : ILocator
     /**
      * @inheritDoc
      */
-    function setConfig($alias, $options = null)
-    {
+    function setConfig($alias, $options = null) {
         if (!is_string($alias)) {
             _config = $alias;
 
@@ -201,8 +197,7 @@ class TableLocator : AbstractLocator : ILocator
     /**
      * @inheritDoc
      */
-    protected function createInstance(string $alias, array $options)
-    {
+    protected function createInstance(string $alias, array $options) {
         if (strpos($alias, "\\") == false) {
             [, $classAlias] = pluginSplit($alias);
             $options = ["alias": $classAlias] + $options;
@@ -354,8 +349,7 @@ class TableLocator : AbstractLocator : ILocator
      * @return this
      * @since 3.8.0
      */
-    function addLocation(string $location)
-    {
+    function addLocation(string $location) {
         $location = str_replace("\\", "/", $location);
         this.locations[] = trim($location, "/");
 

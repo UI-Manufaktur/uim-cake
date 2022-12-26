@@ -30,8 +30,7 @@ class ValidCount
      *
      * @param string $field The field to check the count on.
      */
-    public this(string $field)
-    {
+    public this(string $field) {
         _field = $field;
     }
 

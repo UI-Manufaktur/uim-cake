@@ -37,8 +37,7 @@ class EventFired : Constraint
      *
      * @param \Cake\Event\EventManager $eventManager Event manager to check
      */
-    public this(EventManager $eventManager)
-    {
+    public this(EventManager $eventManager) {
         _eventManager = $eventManager;
 
         if (_eventManager.getEventList() == null) {

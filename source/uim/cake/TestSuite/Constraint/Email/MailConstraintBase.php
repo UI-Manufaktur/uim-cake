@@ -30,8 +30,7 @@ abstract class MailConstraintBase : Constraint
      * @param int|null $at At
      * @return void
      */
-    public this(?int $at = null)
-    {
+    public this(?int $at = null) {
         this.at = $at;
     }
 
@@ -40,8 +39,7 @@ abstract class MailConstraintBase : Constraint
      *
      * @return array<\Cake\Mailer\Message>
      */
-    function getMessages()
-    {
+    function getMessages() {
         $messages = TestEmailTransport::getMessages();
 
         if (this.at != null) {

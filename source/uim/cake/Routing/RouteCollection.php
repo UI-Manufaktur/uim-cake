@@ -363,8 +363,7 @@ class RouteCollection
      *   Defaults to `true`.
      * @return this
      */
-    function setExtensions(array $extensions, bool $merge = true)
-    {
+    function setExtensions(array $extensions, bool $merge = true) {
         if ($merge) {
             $extensions = array_unique(array_merge(
                 _extensions,
@@ -387,8 +386,7 @@ class RouteCollection
      * @return this
      * @throws \RuntimeException
      */
-    function registerMiddleware(string $name, $middleware)
-    {
+    function registerMiddleware(string $name, $middleware) {
         _middleware[$name] = $middleware;
 
         return this;
@@ -402,8 +400,7 @@ class RouteCollection
      * @return this
      * @throws \RuntimeException
      */
-    function middlewareGroup(string $name, array $middlewareNames)
-    {
+    function middlewareGroup(string $name, array $middlewareNames) {
         if (this.hasMiddleware($name)) {
             $message = "Cannot add middleware group "$name". A middleware by this name has already been registered.";
             throw new RuntimeException($message);

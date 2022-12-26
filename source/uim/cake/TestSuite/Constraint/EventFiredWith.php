@@ -42,8 +42,7 @@ class EventFiredWith : Constraint
      * @param string $dataKey Data key
      * @param mixed $dataValue Data value
      */
-    public this(EventManager $eventManager, string $dataKey, $dataValue)
-    {
+    public this(EventManager $eventManager, string $dataKey, $dataValue) {
         _eventManager = $eventManager;
         _dataKey = $dataKey;
         _dataValue = $dataValue;

@@ -129,8 +129,7 @@ class Route
      * @param array<string, mixed> $options Array of additional options for the Route
      * @throws \InvalidArgumentException When `$options['_method']` are not in `VALID_METHODS` list.
      */
-    public this(string $template, array $defaults = [], array $options = [])
-    {
+    public this(string $template, array $defaults = [], array $options = []) {
         this.template = $template;
         this.defaults = $defaults;
         this.options = $options + ['_ext': [], '_middleware': []];
@@ -149,8 +148,7 @@ class Route
      * @param array<string> $extensions The extensions to set.
      * @return this
      */
-    function setExtensions(array $extensions)
-    {
+    function setExtensions(array $extensions) {
         _extensions = array_map('strtolower', $extensions);
 
         return this;
@@ -173,8 +171,7 @@ class Route
      * @return this
      * @throws \InvalidArgumentException When methods are not in `VALID_METHODS` list.
      */
-    function setMethods(array $methods)
-    {
+    function setMethods(array $methods) {
         this.defaults['_method'] = this.normalizeAndValidateMethods($methods);
 
         return this;
@@ -187,8 +184,7 @@ class Route
      * @return array<string>|string
      * @throws \InvalidArgumentException When methods are not in `VALID_METHODS` list.
      */
-    protected function normalizeAndValidateMethods($methods)
-    {
+    protected function normalizeAndValidateMethods($methods) {
         $methods = is_array($methods)
             ? array_map('strtoupper', $methods)
             : strtoupper($methods);
@@ -212,8 +208,7 @@ class Route
      * @param array<string> $patterns The patterns to apply to routing elements
      * @return this
      */
-    function setPatterns(array $patterns)
-    {
+    function setPatterns(array $patterns) {
         $patternValues = implode('', $patterns);
         if (mb_strlen($patternValues) < strlen($patternValues)) {
             this.options['multibytePattern'] = true;
@@ -229,8 +224,7 @@ class Route
      * @param string $host The host name this route is bound to
      * @return this
      */
-    function setHost(string $host)
-    {
+    function setHost(string $host) {
         this.options['_host'] = $host;
 
         return this;
@@ -242,8 +236,7 @@ class Route
      * @param array<string> $names The names of the parameters that should be passed.
      * @return this
      */
-    function setPass(array $names)
-    {
+    function setPass(array $names) {
         this.options['pass'] = $names;
 
         return this;
@@ -264,8 +257,7 @@ class Route
      * @param array $names The names of the parameters that should be passed.
      * @return this
      */
-    function setPersist(array $names)
-    {
+    function setPersist(array $names) {
         this.options['persist'] = $names;
 
         return this;
@@ -911,8 +903,7 @@ class Route
      *   Middleware names will not be checked until the route is matched.
      * @return this
      */
-    function setMiddleware(array $middleware)
-    {
+    function setMiddleware(array $middleware) {
         this.middleware = $middleware;
 
         return this;
@@ -937,8 +928,7 @@ class Route
      * @param array<string, mixed> $fields Key/Value of object attributes
      * @return static A new instance of the route
      */
-    public static function __set_state(array $fields)
-    {
+    public static function __set_state(array $fields) {
         $class = static::class;
         $obj = new $class('');
         foreach ($fields as $field: $value) {
