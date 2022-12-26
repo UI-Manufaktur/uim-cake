@@ -9,7 +9,7 @@
  */
 module uim.cake.ORM\Association;
 
-import uim.cake.Core\App;
+import uim.cake.cores.App;
 import uim.cake.databases.Expression\IdentifierExpression;
 import uim.cake.databases.Expression\QueryExpression;
 import uim.cake.databases.IExpression;

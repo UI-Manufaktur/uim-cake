@@ -9,7 +9,7 @@
  */
 module uim.cake.I18n;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 use Locale;
 
 /**

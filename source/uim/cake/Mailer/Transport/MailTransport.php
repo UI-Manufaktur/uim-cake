@@ -17,7 +17,7 @@
  */
 module uim.cake.Mailer\Transport;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 import uim.cake.Mailer\AbstractTransport;
 import uim.cake.Mailer\Message;
 

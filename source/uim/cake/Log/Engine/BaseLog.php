@@ -16,7 +16,7 @@
 module uim.cake.Log\Engine;
 
 use ArrayObject;
-import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.Log\Formatter\AbstractFormatter;
 import uim.cake.Log\Formatter\DefaultFormatter;
 use InvalidArgumentException;

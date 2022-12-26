@@ -9,8 +9,8 @@
  */
 module uim.cake.Log;
 
-import uim.cake.Core\App;
-import uim.cake.Core\ObjectRegistry;
+import uim.cake.cores.App;
+import uim.cake.cores.ObjectRegistry;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 

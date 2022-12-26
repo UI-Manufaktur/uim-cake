@@ -9,8 +9,8 @@
  */
 module uim.cake.ORM;
 
-import uim.cake.Core\Exception\CakeException;
-import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.Event\IEventListener;
 use ReflectionClass;
 use ReflectionMethod;

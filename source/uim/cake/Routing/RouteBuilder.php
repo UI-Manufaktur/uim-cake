@@ -10,9 +10,9 @@
 module uim.cake.Routing;
 
 use BadMethodCallException;
-import uim.cake.Core\App;
-import uim.cake.Core\Exception\MissingPluginException;
-import uim.cake.Core\Plugin;
+import uim.cake.cores.App;
+import uim.cake.cores.Exception\MissingPluginException;
+import uim.cake.cores.Plugin;
 import uim.cake.Routing\Route\RedirectRoute;
 import uim.cake.Routing\Route\Route;
 import uim.cake.Utility\Inflector;

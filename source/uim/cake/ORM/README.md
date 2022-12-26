@@ -220,7 +220,7 @@ need to inform Cake of the namespace your application lives in:
 
 ```php
 <?php
-import uim.cake.Core\Configure;
+import uim.cake.cores.Configure;
 
 Configure::write("App.namespace", "Acme");
 ```
@@ -229,7 +229,7 @@ You can also set a longer namaspace up to the place where the `Model` folder is:
 
 ```php
 <?php
-import uim.cake.Core\Configure;
+import uim.cake.cores.Configure;
 
 Configure::write("App.namespace", "My\Log\SubNamespace");
 ```

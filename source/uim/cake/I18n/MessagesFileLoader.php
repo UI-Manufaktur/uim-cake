@@ -9,8 +9,8 @@
  */
 module uim.cake.I18n;
 
-import uim.cake.Core\App;
-import uim.cake.Core\Plugin;
+import uim.cake.cores.App;
+import uim.cake.cores.Plugin;
 import uim.cake.Utility\Inflector;
 use Locale;
 use RuntimeException;

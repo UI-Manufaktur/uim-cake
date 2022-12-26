@@ -11,9 +11,9 @@ module uim.cake.ORM;
 
 use ArrayObject;
 use BadMethodCallException;
-import uim.cake.Core\App;
-import uim.cake.Core\Configure;
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.App;
+import uim.cake.cores.Configure;
+import uim.cake.cores.Exception\CakeException;
 import uim.cake.databases.Connection;
 import uim.cake.databases.Schema\TableSchemaInterface;
 import uim.cake.databases.TypeFactory;

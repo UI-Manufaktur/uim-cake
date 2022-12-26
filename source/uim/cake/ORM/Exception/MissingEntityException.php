@@ -17,7 +17,7 @@
  */
 module uim.cake.ORM\Exception;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 
 /**
  * Exception raised when an Entity could not be found.

@@ -13,7 +13,7 @@
  */
 module uim.cake.Mailer\Exception;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 
 /**
  * Missing Action exception - used when a mailer action cannot be found.

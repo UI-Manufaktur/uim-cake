@@ -9,7 +9,7 @@
  */
 module uim.cake.Routing;
 
-import uim.cake.Core\Configure;
+import uim.cake.cores.Configure;
 import uim.cake.Http\ServerRequest;
 import uim.cake.Routing\Exception\MissingRouteException;
 import uim.cake.Utility\Inflector;

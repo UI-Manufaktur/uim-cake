@@ -14,7 +14,7 @@
  */
 module uim.cake.Log;
 
-import uim.cake.Core\StaticConfigTrait;
+import uim.cake.cores.StaticConfigTrait;
 import uim.cake.Log\Engine\BaseLog;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;

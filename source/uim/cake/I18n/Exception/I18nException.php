@@ -10,7 +10,7 @@
  */
 module uim.cake.I18n\Exception;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 
 /**
  * I18n exception.
