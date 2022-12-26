@@ -1,12 +1,6 @@
 
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
+
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @link          https://cakephp.org CakePHP(tm) Project
@@ -15,8 +9,8 @@
  */
 module uim.cake.Routing\Middleware;
 
-import uim.cake.Cache\Cache;
-import uim.cake.Cache\InvalidArgumentException;
+import uim.cake.caches.Cache;
+import uim.cake.caches.InvalidArgumentException;
 import uim.cake.Core\IPluginApplication;
 import uim.cake.Http\Exception\RedirectException;
 import uim.cake.Http\MiddlewareQueue;
