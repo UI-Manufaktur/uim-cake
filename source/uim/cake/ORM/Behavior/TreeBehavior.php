@@ -90,8 +90,7 @@ class TreeBehavior : Behavior
      * @return void
      * @throws \RuntimeException if the parent to set for the node is invalid
      */
-    function beforeSave(IEvent $event, EntityInterface $entity)
-    {
+    function beforeSave(IEvent $event, EntityInterface $entity) {
         $isNew = $entity.isNew();
         $config = this.getConfig();
         $parent = $entity.get($config["parent"]);
@@ -158,8 +157,7 @@ class TreeBehavior : Behavior
      * @param \Cake\Datasource\EntityInterface $entity the entity that is going to be saved
      * @return void
      */
-    function afterSave(IEvent $event, EntityInterface $entity)
-    {
+    function afterSave(IEvent $event, EntityInterface $entity) {
         if (!_config["level"] || $entity.isNew()) {
             return;
         }
@@ -211,8 +209,7 @@ class TreeBehavior : Behavior
      * @param \Cake\Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */
-    function beforeDelete(IEvent $event, EntityInterface $entity)
-    {
+    function beforeDelete(IEvent $event, EntityInterface $entity) {
         $config = this.getConfig();
         _ensureFields($entity);
         $left = $entity.get($config["left"]);
@@ -548,8 +545,7 @@ class TreeBehavior : Behavior
      * @return \Cake\Datasource\EntityInterface|false the node after being removed from the tree or
      * false on error
      */
-    function removeFromTree(EntityInterface $node)
-    {
+    function removeFromTree(EntityInterface $node) {
         return _table.getConnection().transactional(function () use ($node) {
             _ensureFields($node);
 
@@ -564,8 +560,7 @@ class TreeBehavior : Behavior
      * @return \Cake\Datasource\EntityInterface|false the node after being removed from the tree or
      * false on error
      */
-    protected function _removeFromTree(EntityInterface $node)
-    {
+    protected function _removeFromTree(EntityInterface $node) {
         $config = this.getConfig();
         $left = $node.get($config["left"]);
         $right = $node.get($config["right"]);
@@ -609,8 +604,7 @@ class TreeBehavior : Behavior
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
      * @return \Cake\Datasource\EntityInterface|false $node The node after being moved or false if `$number` is < 1
      */
-    function moveUp(EntityInterface $node, $number = 1)
-    {
+    function moveUp(EntityInterface $node, $number = 1) {
         if ($number < 1) {
             return false;
         }
@@ -701,8 +695,7 @@ class TreeBehavior : Behavior
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
      * @return \Cake\Datasource\EntityInterface|false the entity after being moved or false if `$number` is < 1
      */
-    function moveDown(EntityInterface $node, $number = 1)
-    {
+    function moveDown(EntityInterface $node, $number = 1) {
         if ($number < 1) {
             return false;
         }
@@ -992,8 +985,7 @@ class TreeBehavior : Behavior
      * @param \Cake\Datasource\EntityInterface|string|int $entity The entity or primary key get the level of.
      * @return int|false Integer of the level or false if the node does not exist.
      */
-    function getLevel($entity)
-    {
+    function getLevel($entity) {
         $primaryKey = _getPrimaryKey();
         $id = $entity;
         if ($entity instanceof EntityInterface) {

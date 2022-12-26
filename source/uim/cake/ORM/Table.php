@@ -269,8 +269,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param array<string, mixed> $config List of options for this table
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         if (!empty($config["registryAlias"])) {
             this.setRegistryAlias($config["registryAlias"]);
         }
@@ -363,8 +362,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param string $table Table name.
      * @return this
      */
-    function setTable(string $table)
-    {
+    function setTable(string $table) {
         _table = $table;
 
         return this;
@@ -399,8 +397,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param string $alias Table alias
      * @return this
      */
-    function setAlias(string $alias)
-    {
+    function setAlias(string $alias) {
         _alias = $alias;
 
         return this;
@@ -450,8 +447,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param string $registryAlias The key used to access this object.
      * @return this
      */
-    function setRegistryAlias(string $registryAlias)
-    {
+    function setRegistryAlias(string $registryAlias) {
         _registryAlias = $registryAlias;
 
         return this;
@@ -477,8 +473,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \Cake\Database\Connection $connection The connection instance
      * @return this
      */
-    function setConnection(Connection $connection)
-    {
+    function setConnection(Connection $connection) {
         _connection = $connection;
 
         return this;
@@ -530,8 +525,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \Cake\Database\Schema\TableSchemaInterface|array $schema Schema to be used for this table
      * @return this
      */
-    function setSchema($schema)
-    {
+    function setSchema($schema) {
         if (is_array($schema)) {
             $constraints = [];
 
@@ -636,8 +630,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array<string>|string $key Sets a new name to be used as primary key
      * @return this
      */
-    function setPrimaryKey($key)
-    {
+    function setPrimaryKey($key) {
         _primaryKey = $key;
 
         return this;
@@ -648,8 +641,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @return array<string>|string
      */
-    function getPrimaryKey()
-    {
+    function getPrimaryKey() {
         if (_primaryKey == null) {
             $key = this.getSchema().getPrimaryKey();
             if (count($key) == 1) {
@@ -667,8 +659,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array<string>|string $field Name to be used as display field.
      * @return this
      */
-    function setDisplayField($field)
-    {
+    function setDisplayField($field) {
         _displayField = $field;
 
         return this;
@@ -679,8 +670,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @return array<string>|string|null
      */
-    string[] getDisplayField()
-    {
+    string[] getDisplayField() {
         if (_displayField == null) {
             $schema = this.getSchema();
             _displayField = this.getPrimaryKey();
@@ -737,8 +727,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @throws \Cake\ORM\Exception\MissingEntityException when the entity class cannot be found
      * @return this
      */
-    function setEntityClass(string $name)
-    {
+    function setEntityClass(string $name) {
         /** @psalm-var class-string<\Cake\Datasource\EntityInterface>|null */
         $class = App::className($name, "Model/Entity");
         if ($class == null) {
@@ -774,8 +763,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @throws \RuntimeException If a behavior is being reloaded.
      * @see \Cake\ORM\Behavior
      */
-    function addBehavior(string $name, array $options = [])
-    {
+    function addBehavior(string $name, array $options = []) {
         _behaviors.load($name, $options);
 
         return this;
@@ -797,8 +785,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return this
      * @throws \RuntimeException If a behavior is being reloaded.
      */
-    function addBehaviors(array $behaviors)
-    {
+    function addBehaviors(array $behaviors) {
         foreach ($behaviors as $name: $options) {
             if (is_int($name)) {
                 $name = $options;
@@ -826,8 +813,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return this
      * @see \Cake\ORM\Behavior
      */
-    function removeBehavior(string $name)
-    {
+    function removeBehavior(string $name) {
         _behaviors.unload($name);
 
         return this;
@@ -992,8 +978,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @see \Cake\ORM\Table::hasMany()
      * @see \Cake\ORM\Table::belongsToMany()
      */
-    function addAssociations(array $params)
-    {
+    function addAssociations(array $params) {
         foreach ($params as $assocType: $tables) {
             foreach ($tables as $associated: $options) {
                 if (is_numeric($associated)) {
@@ -1556,8 +1541,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param bool $atomic Whether to execute the worker inside a database transaction.
      * @return mixed
      */
-    protected function _executeTransaction(callable $worker, bool $atomic = true)
-    {
+    protected function _executeTransaction(callable $worker, bool $atomic = true) {
         if ($atomic) {
             return this.getConnection().transactional(function () use ($worker) {
                 return $worker();
@@ -1644,8 +1628,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      * @throws \InvalidArgumentException
      */
-    protected function _processFindOrCreate($search, ?callable $callback = null, $options = [])
-    {
+    protected function _processFindOrCreate($search, ?callable $callback = null, $options = []) {
         $query = _getFindOrCreateQuery($search);
 
         $row = $query.first();
@@ -1848,8 +1831,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return \Cake\Datasource\EntityInterface|false
      * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction is aborted in the afterSave event.
      */
-    function save(EntityInterface $entity, $options = [])
-    {
+    function save(EntityInterface $entity, $options = []) {
         if ($options instanceof SaveOptionsBuilder) {
             deprecationWarning("SaveOptionsBuilder is deprecated. Use a normal array for options instead.");
             $options = $options.toArray();
@@ -1922,8 +1904,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
-    protected function _processSave(EntityInterface $entity, ArrayObject $options)
-    {
+    protected function _processSave(EntityInterface $entity, ArrayObject $options) {
         $primaryColumns = (array)this.getPrimaryKey();
 
         if ($options["checkExisting"] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
@@ -2038,8 +2019,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @throws \RuntimeException if not all the primary keys where supplied or could
      * be generated when the table has composite primary keys. Or when the table has no primary key.
      */
-    protected function _insert(EntityInterface $entity, array $data)
-    {
+    protected function _insert(EntityInterface $entity, array $data) {
         $primary = (array)this.getPrimaryKey();
         if (empty($primary)) {
             $msg = sprintf(
@@ -2117,8 +2097,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array<string> $primary The primary key columns to get a new ID for.
      * @return string|null Either null or the primary key value or a list of primary key values.
      */
-    protected function _newId(array $primary)
-    {
+    protected function _newId(array $primary) {
         if (!$primary || count($primary) > 1) {
             return null;
         }
@@ -2137,8 +2116,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return \Cake\Datasource\EntityInterface|false
      * @throws \InvalidArgumentException When primary key data is missing.
      */
-    protected function _update(EntityInterface $entity, array $data)
-    {
+    protected function _update(EntityInterface $entity, array $data) {
         $primaryColumns = (array)this.getPrimaryKey();
         $primaryKey = $entity.extract($primaryColumns);
 
@@ -2184,8 +2162,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return iterable<\Cake\Datasource\EntityInterface>|false False on failure, entities list on success.
      * @throws \Exception
      */
-    function saveMany(iterable $entities, $options = [])
-    {
+    function saveMany(iterable $entities, $options = []) {
         try {
             return _saveMany($entities, $options);
         } catch (PersistenceFailedException $exception) {
@@ -2366,8 +2343,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   on success, false on failure.
      * @see \Cake\ORM\Table::delete() for options and events related to this method.
      */
-    function deleteMany(iterable $entities, $options = [])
-    {
+    function deleteMany(iterable $entities, $options = []) {
         $failed = _deleteMany($entities, $options);
 
         if ($failed != null) {
@@ -2572,8 +2548,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @throws \BadMethodCallException when there are missing arguments, or when
      *  and & or are combined.
      */
-    protected function _dynamicFinder(string $method, array $args)
-    {
+    protected function _dynamicFinder(string $method, array $args) {
         $method = Inflector::underscore($method);
         preg_match("/^find_([\w]+)_by_/", $method, $matches);
         if (empty($matches)) {
@@ -2637,8 +2612,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return mixed
      * @throws \BadMethodCallException
      */
-    function __call($method, $args)
-    {
+    function __call($method, $args) {
         if (_behaviors.hasMethod($method)) {
             return _behaviors.call($method, $args);
         }
@@ -2659,8 +2633,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return \Cake\ORM\Association
      * @throws \RuntimeException if no association with such name exists
      */
-    function __get($property)
-    {
+    function __get($property) {
         $association = _associations.get($property);
         if (!$association) {
             throw new RuntimeException(sprintf(
@@ -2682,8 +2655,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param string $property the association name
      * @return bool
      */
-    function __isset($property)
-    {
+    function __isset($property) {
         return _associations.has($property);
     }
 
@@ -3089,8 +3061,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @see \Cake\ORM\Query::contain()
      * @return \Cake\Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface>
      */
-    function loadInto($entities, array $contain)
-    {
+    function loadInto($entities, array $contain) {
         return (new LazyEagerLoader()).loadInto($entities, $contain, this);
     }
 
@@ -3108,8 +3079,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @return array<string, mixed>
      */
-    function __debugInfo()
-    {
+    function __debugInfo() {
         $conn = this.getConnection();
 
         return [

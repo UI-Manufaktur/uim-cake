@@ -84,8 +84,7 @@ class TransportRegistry : ObjectRegistry
      * @param string $name The adapter name.
      * @return this
      */
-    function unload(string $name)
-    {
+    function unload(string $name) {
         unset(_loaded[$name]);
 
         return this;

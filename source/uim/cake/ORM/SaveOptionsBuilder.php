@@ -45,8 +45,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param \Cake\ORM\Table $table A table instance.
      * @param array<string, mixed> $options Options to parse when instantiating.
      */
-    public this(Table $table, array $options = [])
-    {
+    public this(Table $table, array $options = []) {
         _table = $table;
         this.parseArrayOptions($options);
 
@@ -62,8 +61,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param array<string, mixed> $array Options array.
      * @return this
      */
-    function parseArrayOptions(array $array)
-    {
+    function parseArrayOptions(array $array) {
         foreach ($array as $key: $value) {
             this.{$key}($value);
         }
@@ -77,8 +75,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param array|string $associated String or array of associations.
      * @return this
      */
-    function associated($associated)
-    {
+    function associated($associated) {
         $associated = _normalizeAssociations($associated);
         _associated(_table, $associated);
         _options["associated"] = $associated;
@@ -133,8 +130,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param bool $guard Guard the properties or not.
      * @return this
      */
-    function guard(bool $guard)
-    {
+    function guard(bool $guard) {
         _options["guard"] = $guard;
 
         return this;
@@ -146,8 +142,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param string $validate Name of the validation rule set to use.
      * @return this
      */
-    function validate(string $validate)
-    {
+    function validate(string $validate) {
         _table.getValidator($validate);
         _options["validate"] = $validate;
 
@@ -160,8 +155,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param bool $checkExisting Guard the properties or not.
      * @return this
      */
-    function checkExisting(bool $checkExisting)
-    {
+    function checkExisting(bool $checkExisting) {
         _options["checkExisting"] = $checkExisting;
 
         return this;
@@ -173,8 +167,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param bool $checkRules Check the rules or not.
      * @return this
      */
-    function checkRules(bool $checkRules)
-    {
+    function checkRules(bool $checkRules) {
         _options["checkRules"] = $checkRules;
 
         return this;
@@ -186,8 +179,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param bool $atomic Atomic or not.
      * @return this
      */
-    function atomic(bool $atomic)
-    {
+    function atomic(bool $atomic) {
         _options["atomic"] = $atomic;
 
         return this;
@@ -208,8 +200,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param mixed $value Option value.
      * @return this
      */
-    function set(string $option, $value)
-    {
+    function set(string $option, $value) {
         if (method_exists(this, $option)) {
             return this.{$option}($value);
         }

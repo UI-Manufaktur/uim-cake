@@ -32,8 +32,7 @@ class LegacySyslogFormatter : AbstractFormatter
     /**
      * @param array<string, mixed> $config Formatter config
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         this.setConfig($config);
     }
 

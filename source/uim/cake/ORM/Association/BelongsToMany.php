@@ -159,8 +159,7 @@ class BelongsToMany : Association
      * @param array<string>|string $key the key to be used to link both tables together
      * @return this
      */
-    function setTargetForeignKey($key)
-    {
+    function setTargetForeignKey($key) {
         _targetForeignKey = $key;
 
         return this;
@@ -171,8 +170,7 @@ class BelongsToMany : Association
      *
      * @return array<string>|string
      */
-    string[] getTargetForeignKey()
-    {
+    string[] getTargetForeignKey() {
         if (_targetForeignKey == null) {
             _targetForeignKey = _modelKey(this.getTarget().getAlias());
         }
@@ -197,8 +195,7 @@ class BelongsToMany : Association
      *
      * @return array<string>|string
      */
-    string[] getForeignKey()
-    {
+    string[] getForeignKey() {
         if (_foreignKey == null) {
             _foreignKey = _modelKey(this.getSource().getTable());
         }
@@ -212,8 +209,7 @@ class BelongsToMany : Association
      * @param mixed $sort A find() compatible order clause
      * @return this
      */
-    function setSort($sort)
-    {
+    function setSort($sort) {
         _sort = $sort;
 
         return this;
@@ -224,8 +220,7 @@ class BelongsToMany : Association
      *
      * @return mixed
      */
-    function getSort()
-    {
+    function getSort() {
         return _sort;
     }
 
@@ -629,8 +624,7 @@ class BelongsToMany : Association
      * @throws \InvalidArgumentException if an invalid strategy name is passed
      * @return this
      */
-    function setSaveStrategy(string $strategy)
-    {
+    function setSaveStrategy(string $strategy) {
         if (!in_array($strategy, [self::SAVE_APPEND, self::SAVE_REPLACE], true)) {
             $msg = sprintf("Invalid save strategy "%s"", $strategy);
             throw new InvalidArgumentException($msg);
@@ -675,8 +669,7 @@ class BelongsToMany : Association
      * @see \Cake\ORM\Table::save()
      * @see \Cake\ORM\Association\BelongsToMany::replaceLinks()
      */
-    function saveAssociated(EntityInterface $entity, array $options = [])
-    {
+    function saveAssociated(EntityInterface $entity, array $options = []) {
         $targetEntity = $entity.get(this.getProperty());
         $strategy = this.getSaveStrategy();
 
@@ -713,8 +706,7 @@ class BelongsToMany : Association
      * @return \Cake\Datasource\EntityInterface|false The parent entity after all links have been
      * created if no errors happened, false otherwise
      */
-    protected function _saveTarget(EntityInterface $parentEntity, array $entities, $options)
-    {
+    protected function _saveTarget(EntityInterface $parentEntity, array $entities, $options) {
         $joinAssociations = false;
         if (isset($options["associated"]) && is_array($options["associated"])) {
             if (!empty($options["associated"][_junctionProperty]["associated"])) {
@@ -952,8 +944,7 @@ class BelongsToMany : Association
     /**
      * @inheritDoc
      */
-    function setConditions($conditions)
-    {
+    function setConditions($conditions) {
         parent::setConditions($conditions);
         _targetConditions = _junctionConditions = null;
 
@@ -966,8 +957,7 @@ class BelongsToMany : Association
      * @param \Cake\ORM\Table|string $through Name of the Table instance or the instance itself
      * @return this
      */
-    function setThrough($through)
-    {
+    function setThrough($through) {
         _through = $through;
 
         return this;
@@ -978,8 +968,7 @@ class BelongsToMany : Association
      *
      * @return \Cake\ORM\Table|string
      */
-    function getThrough()
-    {
+    function getThrough() {
         return _through;
     }
 
@@ -993,8 +982,7 @@ class BelongsToMany : Association
      *   are not an array, the association conditions will be
      *   returned unmodified.
      */
-    protected function targetConditions()
-    {
+    protected function targetConditions() {
         if (_targetConditions != null) {
             return _targetConditions;
         }

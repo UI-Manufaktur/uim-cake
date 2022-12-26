@@ -187,8 +187,7 @@ import uim.cake.ORM\Table;
 
 class ArticlesTable : Table
 {
-    function initialize()
-    {
+    function initialize() {
         this.setEntityClass(Article::class);
         this.belongsTo("Users", ["className": UsersTable::class]);
     }

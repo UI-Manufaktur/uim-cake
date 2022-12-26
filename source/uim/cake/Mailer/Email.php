@@ -110,8 +110,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array<string, mixed>|string|null $config Array of configs, or string to load configs from app.php
      */
-    public this($config = null)
-    {
+    public this($config = null) {
         this.message = new this.messageClass();
 
         if ($config == null) {
@@ -128,8 +127,7 @@ class Email : JsonSerializable, Serializable
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         if (this.renderer) {
             this.renderer = clone this.renderer;
         }
@@ -146,8 +144,7 @@ class Email : JsonSerializable, Serializable
      * @param array $args Method arguments
      * @return this|mixed
      */
-    function __call(string $method, array $args)
-    {
+    function __call(string $method, array $args) {
         $result = this.message.$method(...$args);
 
         if (strpos($method, "get") == 0) {
@@ -178,8 +175,7 @@ class Email : JsonSerializable, Serializable
      * @param string $viewClass View class name.
      * @return this
      */
-    function setViewRenderer(string $viewClass)
-    {
+    function setViewRenderer(string $viewClass) {
         this.getRenderer().viewBuilder().setClassName($viewClass);
 
         return this;
@@ -203,8 +199,7 @@ class Email : JsonSerializable, Serializable
      * @param array<string, mixed> $viewVars Variables to set for view.
      * @return this
      */
-    function setViewVars(array $viewVars)
-    {
+    function setViewVars(array $viewVars) {
         this.getRenderer().viewBuilder().setVars($viewVars);
 
         return this;
@@ -232,8 +227,7 @@ class Email : JsonSerializable, Serializable
      * @throws \LogicException When the chosen transport lacks a send method.
      * @throws \InvalidArgumentException When $name is neither a string nor an object.
      */
-    function setTransport($name)
-    {
+    function setTransport($name) {
         if (is_string($name)) {
             $transport = TransportFactory::get($name);
         } elseif (is_object($name)) {
@@ -269,8 +263,7 @@ class Email : JsonSerializable, Serializable
      * @param string|null $type Use MESSAGE_* constants or null to return the full message as array
      * @return array|string String if type is given, array if type is null
      */
-    function message(?string $type = null)
-    {
+    function message(?string $type = null) {
         if ($type == null) {
             return this.message.getBody();
         }
@@ -287,8 +280,7 @@ class Email : JsonSerializable, Serializable
      *    an array with config.
      * @return this
      */
-    function setProfile($config)
-    {
+    function setProfile($config) {
         if (is_string($config)) {
             $name = $config;
             $config = Mailer::getConfig($name);
@@ -426,8 +418,7 @@ class Email : JsonSerializable, Serializable
      * @param \Cake\Mailer\Renderer $renderer Render instance.
      * @return this
      */
-    function setRenderer(Renderer $renderer)
-    {
+    function setRenderer(Renderer $renderer) {
         this.renderer = $renderer;
 
         return this;
@@ -524,8 +515,7 @@ class Email : JsonSerializable, Serializable
      *
      * @return this
      */
-    function reset()
-    {
+    function reset() {
         this.message.reset();
         if (this.renderer != null) {
             this.renderer.reset();
@@ -557,8 +547,7 @@ class Email : JsonSerializable, Serializable
      * @param array<string, mixed> $config Email configuration array.
      * @return this
      */
-    function createFromArray(array $config)
-    {
+    function createFromArray(array $config) {
         if (isset($config["viewConfig"])) {
             this.getRenderer().viewBuilder().createFromArray($config["viewConfig"]);
             unset($config["viewConfig"]);
@@ -631,8 +620,7 @@ class Email : JsonSerializable, Serializable
      * @param array $arguments Method argument.
      * @return mixed
      */
-    public static function __callStatic($name, $arguments)
-    {
+    public static function __callStatic($name, $arguments) {
         return [Mailer::class, $name](...$arguments);
     }
 }

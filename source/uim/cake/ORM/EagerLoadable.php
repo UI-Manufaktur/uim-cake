@@ -121,8 +121,7 @@ class EagerLoadable
      * @param string $name The Association name.
      * @param array<string, mixed> $config The list of properties to set.
      */
-    public this(string $name, array $config = [])
-    {
+    public this(string $name, array $config = []) {
         _name = $name;
         $allowed = [
             "associations", "instance", "config", "canBeJoined",
@@ -208,8 +207,7 @@ class EagerLoadable
      * @param bool $possible The value to set.
      * @return this
      */
-    function setCanBeJoined(bool $possible)
-    {
+    function setCanBeJoined(bool $possible) {
         _canBeJoined = $possible;
 
         return this;
@@ -232,8 +230,7 @@ class EagerLoadable
      * @param array<string, mixed> $config The value to set.
      * @return this
      */
-    function setConfig(array $config)
-    {
+    function setConfig(array $config) {
         _config = $config;
 
         return this;
@@ -310,8 +307,7 @@ class EagerLoadable
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         foreach (_associations as $i: $association) {
             _associations[$i] = clone $association;
         }

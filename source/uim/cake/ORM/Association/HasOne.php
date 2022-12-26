@@ -39,8 +39,7 @@ class HasOne : Association
      *
      * @return array<string>|string
      */
-    function getForeignKey()
-    {
+    function getForeignKey() {
         if (_foreignKey == null) {
             _foreignKey = _modelKey(this.getSource().getAlias());
         }
@@ -95,8 +94,7 @@ class HasOne : Association
      * the saved entity
      * @see \Cake\ORM\Table::save()
      */
-    function saveAssociated(EntityInterface $entity, array $options = [])
-    {
+    function saveAssociated(EntityInterface $entity, array $options = []) {
         $targetEntity = $entity.get(this.getProperty());
         if (empty($targetEntity) || !($targetEntity instanceof EntityInterface)) {
             return $entity;

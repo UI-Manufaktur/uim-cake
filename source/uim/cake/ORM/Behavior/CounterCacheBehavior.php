@@ -113,8 +113,7 @@ class CounterCacheBehavior : Behavior
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    function beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options)
-    {
+    function beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options) {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
         }
@@ -171,8 +170,7 @@ class CounterCacheBehavior : Behavior
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    function afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)
-    {
+    function afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options) {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
         }
@@ -272,8 +270,7 @@ class CounterCacheBehavior : Behavior
      * @param array $conditions Conditions to update count.
      * @return bool True if the count update should happen, false otherwise.
      */
-    protected function _shouldUpdateCount(array $conditions)
-    {
+    protected function _shouldUpdateCount(array $conditions) {
         return !empty(array_filter($conditions, function ($value) {
             return $value != null;
         }));

@@ -74,8 +74,7 @@ class SmtpTransport : AbstractTransport
      * Tries to disconnect to ensure that the connection is being
      * terminated properly before the socket gets closed.
      */
-    function __destruct()
-    {
+    function __destruct() {
         try {
             this.disconnect();
         } catch (Exception $e) {

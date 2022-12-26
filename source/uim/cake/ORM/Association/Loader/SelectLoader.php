@@ -94,8 +94,7 @@ class SelectLoader
      *
      * @param array<string, mixed> $options Properties to be copied to this class
      */
-    public this(array $options)
-    {
+    public this(array $options) {
         this.alias = $options["alias"];
         this.sourceAlias = $options["sourceAlias"];
         this.targetAlias = $options["targetAlias"];
@@ -360,8 +359,7 @@ class SelectLoader
      * @return array<string>|string
      * @throws \RuntimeException
      */
-    protected function _linkField(array $options)
-    {
+    protected function _linkField(array $options) {
         $links = [];
         $name = this.alias;
 

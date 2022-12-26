@@ -29,8 +29,7 @@ class Renderer
     /**
      * Constructor
      */
-    public this()
-    {
+    public this() {
         this.reset();
     }
 
@@ -87,8 +86,7 @@ class Renderer
      *
      * @return this
      */
-    function reset()
-    {
+    function reset() {
         _viewBuilder = null;
 
         this.viewBuilder()
@@ -104,8 +102,7 @@ class Renderer
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         if (_viewBuilder != null) {
             _viewBuilder = clone _viewBuilder;
         }

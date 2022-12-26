@@ -99,8 +99,7 @@ class Socket
      * @param array<string, mixed> $config Socket configuration, which will be merged with the base configuration
      * @see \Cake\Network\Socket::$_defaultConfig
      */
-    public this(array $config = [])
-    {
+    public this(array $config = []) {
         this.setConfig($config);
     }
 
@@ -197,8 +196,7 @@ class Socket
      * @param resource $context context
      * @return resource|null
      */
-    protected function _getStreamSocketClient($remoteSocketTarget, &$errNum, &$errStr, $timeout, $connectAs, $context)
-    {
+    protected function _getStreamSocketClient($remoteSocketTarget, &$errNum, &$errStr, $timeout, $connectAs, $context) {
         $resource = stream_socket_client(
             $remoteSocketTarget,
             $errNum,
@@ -424,8 +422,7 @@ class Socket
     /**
      * Destructor, used to disconnect from current connection.
      */
-    function __destruct()
-    {
+    function __destruct() {
         this.disconnect();
     }
 
@@ -514,8 +511,7 @@ class Socket
      * @param string $name Property name.
      * @return mixed
      */
-    function __get($name)
-    {
+    function __get($name) {
         switch ($name) {
             case "connected":
                 deprecationWarning("The property `$connected` is deprecated, use `isConnected()` instead.");

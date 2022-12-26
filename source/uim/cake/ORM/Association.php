@@ -199,8 +199,7 @@ abstract class Association
      * @param string $alias The name given to the association
      * @param array<string, mixed> $options A list of properties to be set on this object
      */
-    public this(string $alias, array $options = [])
-    {
+    public this(string $alias, array $options = []) {
         $defaults = [
             "cascadeCallbacks",
             "className",
@@ -244,8 +243,7 @@ abstract class Association
      * @deprecated 4.3.0 Changing the association name after object creation is
      *   no longer supported. The name should only be set through the constructor.
      */
-    function setName(string $name)
-    {
+    function setName(string $name) {
         deprecationWarning(
             "Changing the association name after object creation is no longer supported."
             . " The name should only be set through the constructor"
@@ -284,8 +282,7 @@ abstract class Association
      * @param bool $cascadeCallbacks cascade callbacks switch value
      * @return this
      */
-    function setCascadeCallbacks(bool $cascadeCallbacks)
-    {
+    function setCascadeCallbacks(bool $cascadeCallbacks) {
         _cascadeCallbacks = $cascadeCallbacks;
 
         return this;
@@ -309,8 +306,7 @@ abstract class Association
      * @throws \InvalidArgumentException In case the class name is set after the target table has been
      *  resolved, and it doesn"t match the target table"s class name.
      */
-    function setClassName(string $className)
-    {
+    function setClassName(string $className) {
         if (
             _targetTable != null &&
             get_class(_targetTable) != App::className($className, "Model/Table", "Table")
@@ -343,8 +339,7 @@ abstract class Association
      * @param \Cake\ORM\Table $table the instance to be assigned as source side
      * @return this
      */
-    function setSource(Table $table)
-    {
+    function setSource(Table $table) {
         _sourceTable = $table;
 
         return this;
@@ -366,8 +361,7 @@ abstract class Association
      * @param \Cake\ORM\Table $table the instance to be assigned as target side
      * @return this
      */
-    function setTarget(Table $table)
-    {
+    function setTarget(Table $table) {
         _targetTable = $table;
 
         return this;
@@ -428,8 +422,7 @@ abstract class Association
      * @see \Cake\Database\Query::where() for examples on the format of the array
      * @return this
      */
-    function setConditions($conditions)
-    {
+    function setConditions($conditions) {
         _conditions = $conditions;
 
         return this;
@@ -442,8 +435,7 @@ abstract class Association
      * @see \Cake\Database\Query::where() for examples on the format of the array
      * @return \Closure|array
      */
-    function getConditions()
-    {
+    function getConditions() {
         return _conditions;
     }
 
@@ -454,8 +446,7 @@ abstract class Association
      * @param array<string>|string $key the table field or fields to be used to link both tables together
      * @return this
      */
-    function setBindingKey($key)
-    {
+    function setBindingKey($key) {
         _bindingKey = $key;
 
         return this;
@@ -467,8 +458,7 @@ abstract class Association
      *
      * @return array<string>|string
      */
-    function getBindingKey()
-    {
+    function getBindingKey() {
         if (_bindingKey == null) {
             _bindingKey = this.isOwningSide(this.getSource()) ?
                 this.getSource().getPrimaryKey() :
@@ -483,8 +473,7 @@ abstract class Association
      *
      * @return array<string>|string
      */
-    function getForeignKey()
-    {
+    function getForeignKey() {
         return _foreignKey;
     }
 
@@ -494,8 +483,7 @@ abstract class Association
      * @param array<string>|string $key the key or keys to be used to link both tables together
      * @return this
      */
-    function setForeignKey($key)
-    {
+    function setForeignKey($key) {
         _foreignKey = $key;
 
         return this;
@@ -512,8 +500,7 @@ abstract class Association
      * @param bool $dependent Set the dependent mode. Use null to read the current state.
      * @return this
      */
-    function setDependent(bool $dependent)
-    {
+    function setDependent(bool $dependent) {
         _dependent = $dependent;
 
         return this;
@@ -551,8 +538,7 @@ abstract class Association
      * @param string $type the join type to be used (e.g. INNER)
      * @return this
      */
-    function setJoinType(string $type)
-    {
+    function setJoinType(string $type) {
         _joinType = $type;
 
         return this;
@@ -575,8 +561,7 @@ abstract class Association
      * @param string $name The name of the association property. Use null to read the current value.
      * @return this
      */
-    function setProperty(string $name)
-    {
+    function setProperty(string $name) {
         _propertyName = $name;
 
         return this;
@@ -626,8 +611,7 @@ abstract class Association
      * @return this
      * @throws \InvalidArgumentException When an invalid strategy is provided.
      */
-    function setStrategy(string $name)
-    {
+    function setStrategy(string $name) {
         if (!in_array($name, _validStrategies, true)) {
             throw new InvalidArgumentException(sprintf(
                 "Invalid strategy "%s" was provided. Valid options are (%s).",
@@ -657,8 +641,7 @@ abstract class Association
      *
      * @return array|string
      */
-    function getFinder()
-    {
+    function getFinder() {
         return _finder;
     }
 
@@ -668,8 +651,7 @@ abstract class Association
      * @param array|string $finder the finder name to use or array of finder name and option.
      * @return this
      */
-    function setFinder($finder)
-    {
+    function setFinder($finder) {
         _finder = $finder;
 
         return this;
@@ -1156,8 +1138,7 @@ abstract class Association
      * @return \Cake\ORM\Association
      * @throws \RuntimeException if no association with such name exists
      */
-    function __get($property)
-    {
+    function __get($property) {
         return this.getTarget().{$property};
     }
 
@@ -1168,8 +1149,7 @@ abstract class Association
      * @param string $property the property name
      * @return bool true if the property exists
      */
-    function __isset($property)
-    {
+    function __isset($property) {
         return isset(this.getTarget().{$property});
     }
 
@@ -1181,8 +1161,7 @@ abstract class Association
      * @return mixed
      * @throws \BadMethodCallException
      */
-    function __call($method, $argument)
-    {
+    function __call($method, $argument) {
         return this.getTarget().$method(...$argument);
     }
 

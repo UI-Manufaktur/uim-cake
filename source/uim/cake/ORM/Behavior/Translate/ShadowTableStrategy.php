@@ -57,8 +57,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \Cake\ORM\Table $table Table instance.
      * @param array<string, mixed> $config Configuration.
      */
-    public this(Table $table, array $config = [])
-    {
+    public this(Table $table, array $config = []) {
         $tableAlias = $table.getAlias();
         [$plugin] = pluginSplit($table.getRegistryAlias(), true);
         $tableReferenceName = $config["referenceName"];
@@ -91,8 +90,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @return void
      */
-    protected function setupAssociations()
-    {
+    protected function setupAssociations() {
         $config = this.getConfig();
 
         $targetAlias = this.translationTable.getAlias();
@@ -115,8 +113,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \ArrayObject $options The options for the query.
      * @return void
      */
-    function beforeFind(IEvent $event, Query $query, ArrayObject $options)
-    {
+    function beforeFind(IEvent $event, Query $query, ArrayObject $options) {
         $locale = Hash::get($options, "locale", this.getLocale());
         $config = this.getConfig();
 
@@ -198,8 +195,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param array<string, mixed> $config The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected function addFieldsToQuery($query, array $config)
-    {
+    protected function addFieldsToQuery($query, array $config) {
         if ($query.isAutoFieldsEnabled()) {
             return true;
         }
@@ -335,8 +331,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \ArrayObject $options the options passed to the save method.
      * @return void
      */
-    function beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options)
-    {
+    function beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options) {
         $locale = $entity.get("_locale") ?: this.getLocale();
         $newOptions = [this.translationTable.getAlias(): ["validate": false]];
         $options["associated"] = $newOptions + $options["associated"];
@@ -463,8 +458,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param string $locale Locale string
      * @return \Cake\Collection\ICollection
      */
-    protected function rowMapper($results, $locale)
-    {
+    protected function rowMapper($results, $locale) {
         $allowEmpty = _config["allowEmptyTranslations"];
 
         return $results.map(function ($row) use ($allowEmpty, $locale) {
@@ -559,8 +553,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \Cake\Datasource\EntityInterface $entity Entity.
      * @return void
      */
-    protected function bundleTranslatedFields($entity)
-    {
+    protected function bundleTranslatedFields($entity) {
         $translations = (array)$entity.get("_translations");
 
         if (empty($translations) && !$entity.isDirty("_translations")) {
@@ -588,8 +581,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @return array<string>
      */
-    protected string[] mainFields()
-    {
+    protected string[] mainFields() {
         $fields = this.getConfig("mainTableFields");
 
         if ($fields) {
@@ -608,8 +600,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @return array<string>
      */
-    protected function translatedFields()
-    {
+    protected function translatedFields() {
         $fields = this.getConfig("fields");
 
         if ($fields) {

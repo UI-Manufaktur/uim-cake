@@ -50,8 +50,7 @@ class SelectWithPivotLoader : SelectLoader
     /**
      * @inheritDoc
      */
-    public this(array $options)
-    {
+    public this(array $options) {
         super(($options);
         this.junctionAssociationName = $options["junctionAssociationName"];
         this.junctionProperty = $options["junctionProperty"];
@@ -137,8 +136,7 @@ class SelectWithPivotLoader : SelectLoader
      * @param array<string, mixed> $options the options to use for getting the link field.
      * @return array<string>|string
      */
-    protected function _linkField(array $options)
-    {
+    protected function _linkField(array $options) {
         $links = [];
         $name = this.junctionAssociationName;
 

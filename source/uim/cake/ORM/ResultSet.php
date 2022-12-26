@@ -150,8 +150,7 @@ class ResultSet : IResultSet
      * @param \Cake\ORM\Query $query Query from where results come
      * @param \Cake\Database\StatementInterface $statement The statement to fetch from
      */
-    public this(Query $query, StatementInterface $statement)
-    {
+    public this(Query $query, StatementInterface $statement) {
         $repository = $query.getRepository();
         _statement = $statement;
         _driver = $query.getConnection().getDriver();
@@ -178,8 +177,7 @@ class ResultSet : IResultSet
      * @return object|array
      */
     #[\ReturnTypeWillChange]
-    function current()
-    {
+    function current() {
         return _current;
     }
 
@@ -271,8 +269,7 @@ class ResultSet : IResultSet
      *
      * @return object|array|null
      */
-    function first()
-    {
+    function first() {
         foreach (this as $result) {
             if (_statement != null && !_useBuffering) {
                 _statement.closeCursor();
@@ -328,8 +325,7 @@ class ResultSet : IResultSet
      * @param string $serialized Serialized object
      * @return void
      */
-    function unserialize($serialized)
-    {
+    function unserialize($serialized) {
         __unserialize((array)(unserialize($serialized) ?: []));
     }
 
@@ -431,8 +427,7 @@ class ResultSet : IResultSet
      *
      * @return mixed
      */
-    protected function _fetchResult()
-    {
+    protected function _fetchResult() {
         if (_statement == null) {
             return false;
         }
@@ -451,8 +446,7 @@ class ResultSet : IResultSet
      * @param array $row Array containing columns and values or false if there is no results
      * @return \Cake\Datasource\EntityInterface|array Results
      */
-    protected function _groupResult(array $row)
-    {
+    protected function _groupResult(array $row) {
         $defaultAlias = _defaultAlias;
         $results = $presentAliases = [];
         $options = [
@@ -563,8 +557,7 @@ class ResultSet : IResultSet
      *
      * @return array<string, mixed>
      */
-    function __debugInfo()
-    {
+    function __debugInfo() {
         $currentIndex = _index;
         // toArray() adjusts the current index, so we have to reset it
         $items = this.toArray();

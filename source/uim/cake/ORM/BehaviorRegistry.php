@@ -55,8 +55,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param \Cake\ORM\Table|null $table The table this registry is attached to.
      */
-    public this(?Table $table = null)
-    {
+    public this(?Table $table = null) {
         if ($table != null) {
             this.setTable($table);
         }
@@ -236,8 +235,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      * @return mixed The return value depends on the underlying behavior method.
      * @throws \BadMethodCallException When the method is unknown.
      */
-    function call(string $method, array $args = [])
-    {
+    function call(string $method, array $args = []) {
         $method = strtolower($method);
         if (this.hasMethod($method) && this.has(_methodMap[$method][0])) {
             [$behavior, $callMethod] = _methodMap[$method];

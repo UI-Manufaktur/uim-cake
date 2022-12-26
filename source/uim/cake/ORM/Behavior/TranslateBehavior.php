@@ -98,8 +98,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param \Cake\ORM\Table $table The table this behavior is attached to.
      * @param array<string, mixed> $config The config for this behavior.
      */
-    public this(Table $table, array $config = [])
-    {
+    public this(Table $table, array $config = []) {
         $config += [
             "defaultLocale": I18n::getDefaultLocale(),
             "referenceName": this.referenceName($table),
@@ -128,8 +127,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @since 4.0.0
      * @psalm-param class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface> $class
      */
-    public static function setDefaultStrategyClass(string $class)
-    {
+    public static function setDefaultStrategyClass(string $class) {
         static::$defaultStrategyClass = $class;
     }
 
@@ -166,8 +164,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @return \Cake\ORM\Behavior\Translate\TranslateStrategyInterface
      * @since 4.0.0
      */
-    protected function createStrategy()
-    {
+    protected function createStrategy() {
         $config = array_diff_key(
             _config,
             ["implementedFinders", "implementedMethods", "strategyClass"]
@@ -185,8 +182,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @return this
      * @since 4.0.0
      */
-    function setStrategy(TranslateStrategyInterface $strategy)
-    {
+    function setStrategy(TranslateStrategyInterface $strategy) {
         this.strategy = $strategy;
 
         return this;
@@ -243,8 +239,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#saving-in-another-language
      */
-    function setLocale(?string $locale)
-    {
+    function setLocale(?string $locale) {
         this.getStrategy().setLocale($locale);
 
         return this;
@@ -326,8 +321,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param array $args Method arguments.
      * @return mixed
      */
-    function __call($method, $args)
-    {
+    function __call($method, $args) {
         return this.strategy.{$method}(...$args);
     }
 

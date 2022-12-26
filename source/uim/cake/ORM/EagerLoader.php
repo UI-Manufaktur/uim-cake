@@ -185,8 +185,7 @@ class EagerLoader
      * @param bool $enable The value to set.
      * @return this
      */
-    function enableAutoFields(bool $enable = true)
-    {
+    function enableAutoFields(bool $enable = true) {
         _autoFields = $enable;
 
         return this;
@@ -197,8 +196,7 @@ class EagerLoader
      *
      * @return this
      */
-    function disableAutoFields()
-    {
+    function disableAutoFields() {
         _autoFields = false;
 
         return this;
@@ -233,8 +231,7 @@ class EagerLoader
      * @param array<string, mixed> $options Extra options for the association matching.
      * @return this
      */
-    function setMatching(string $associationPath, ?callable $builder = null, array $options = [])
-    {
+    function setMatching(string $associationPath, ?callable $builder = null, array $options = []) {
         if (_matching == null) {
             _matching = new static();
         }
@@ -854,8 +851,7 @@ class EagerLoader
      *
      * @return void
      */
-    function __clone()
-    {
+    function __clone() {
         if (_matching) {
             _matching = clone _matching;
         }

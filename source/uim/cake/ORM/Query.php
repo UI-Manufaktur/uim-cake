@@ -168,8 +168,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param \Cake\Database\Connection $connection The connection object
      * @param \Cake\ORM\Table $table The table this query is starting on
      */
-    public this(Connection $connection, Table $table)
-    {
+    public this(Connection $connection, Table $table) {
         super(($connection);
         this.repository($table);
 
@@ -218,8 +217,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */
-    function select($fields = [], bool $overwrite = false)
-    {
+    function select($fields = [], bool $overwrite = false) {
         if ($fields instanceof Association) {
             $fields = $fields.getTarget();
         }
@@ -248,8 +246,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      * @throws \InvalidArgumentException If Association|Table is not passed in first argument
      */
-    function selectAllExcept($table, array $excludedFields, bool $overwrite = false)
-    {
+    function selectAllExcept($table, array $excludedFields, bool $overwrite = false) {
         if ($table instanceof Association) {
             $table = $table.getTarget();
         }
@@ -277,8 +274,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param \Cake\ORM\Table $table The table to pull types from
      * @return this
      */
-    function addDefaultTypes(Table $table)
-    {
+    function addDefaultTypes(Table $table) {
         $alias = $table.getAlias();
         $map = $table.getSchema().typeMap();
         $fields = [];
@@ -297,8 +293,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param \Cake\ORM\EagerLoader $instance The eager loader to use.
      * @return this
      */
-    function setEagerLoader(EagerLoader $instance)
-    {
+    function setEagerLoader(EagerLoader $instance) {
         _eagerLoader = $instance;
 
         return this;
@@ -434,8 +429,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * defaults to merging previous list with the new one.
      * @return this
      */
-    function contain($associations, $override = false)
-    {
+    function contain($associations, $override = false) {
         $loader = this.getEagerLoader();
         if ($override == true) {
             this.clearContain();
@@ -471,8 +465,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @return this
      */
-    function clearContain()
-    {
+    function clearContain() {
         this.getEagerLoader().clearContain();
         _dirty();
 
@@ -557,8 +550,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function matching(string $assoc, ?callable $builder = null)
-    {
+    function matching(string $assoc, ?callable $builder = null) {
         $result = this.getEagerLoader().setMatching($assoc, $builder).getMatching();
         _addAssociationsToTypeMap(this.getRepository(), this.getTypeMap(), $result);
         _dirty();
@@ -629,8 +621,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function leftJoinWith(string $assoc, ?callable $builder = null)
-    {
+    function leftJoinWith(string $assoc, ?callable $builder = null) {
         $result = this.getEagerLoader()
             .setMatching($assoc, $builder, [
                 "joinType": Query::JOIN_TYPE_LEFT,
@@ -678,8 +669,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      * @see \Cake\ORM\Query::matching()
      */
-    function innerJoinWith(string $assoc, ?callable $builder = null)
-    {
+    function innerJoinWith(string $assoc, ?callable $builder = null) {
         $result = this.getEagerLoader()
             .setMatching($assoc, $builder, [
                 "joinType": Query::JOIN_TYPE_INNER,
@@ -742,8 +732,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * that can be used to add custom conditions or selecting some fields
      * @return this
      */
-    function notMatching(string $assoc, ?callable $builder = null)
-    {
+    function notMatching(string $assoc, ?callable $builder = null) {
         $result = this.getEagerLoader()
             .setMatching($assoc, $builder, [
                 "joinType": Query::JOIN_TYPE_LEFT,
@@ -820,8 +809,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      * @see getOptions()
      */
-    function applyOptions(array $options)
-    {
+    function applyOptions(array $options) {
         $valid = [
             "fields": "select",
             "conditions": "where",
@@ -864,8 +852,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @return static
      */
-    function cleanCopy()
-    {
+    function cleanCopy() {
         $clone = clone this;
         $clone.triggerBeforeFind();
         $clone.disableAutoFields();
@@ -886,8 +873,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @return this
      */
-    function clearResult()
-    {
+    function clearResult() {
         _dirty();
 
         return this;
@@ -898,8 +884,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * Handles cloning eager loaders.
      */
-    function __clone()
-    {
+    function __clone() {
         parent::__clone();
         if (_eagerLoader != null) {
             _eagerLoader = clone _eagerLoader;
@@ -1004,8 +989,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param callable|null $counter The counter value
      * @return this
      */
-    function counter(?callable $counter)
-    {
+    function counter(?callable $counter) {
         _counter = $counter;
 
         return this;
@@ -1019,8 +1003,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param bool $enable Use a boolean to set the hydration mode.
      * @return this
      */
-    function enableHydration(bool $enable = true)
-    {
+    function enableHydration(bool $enable = true) {
         _dirty();
         _hydrate = $enable;
 
@@ -1035,8 +1018,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @return this
      */
-    function disableHydration()
-    {
+    function disableHydration() {
         _dirty();
         _hydrate = false;
 
@@ -1063,8 +1045,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return this
      * @throws \RuntimeException When you attempt to cache a non-select query.
      */
-    function cache($key, $config = "default")
-    {
+    function cache($key, $config = "default") {
         if (_type != "select" && _type != null) {
             throw new RuntimeException("You cannot cache the results of non-select queries.");
         }
@@ -1231,8 +1212,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return static Returns a modified query.
      * @psalm-suppress MoreSpecificReturnType
      */
-    function find(string $finder, array $options = [])
-    {
+    function find(string $finder, array $options = []) {
         $table = this.getRepository();
 
         /** @psalm-suppress LessSpecificReturnStatement */
@@ -1261,8 +1241,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param \Cake\Database\IExpression|string|null $table Unused parameter.
      * @return this
      */
-    function update($table = null)
-    {
+    function update($table = null) {
         if (!$table) {
             $repository = this.getRepository();
             $table = $repository.getTable();
@@ -1280,8 +1259,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param string|null $table Unused parameter.
      * @return this
      */
-    function delete(?string $table = null)
-    {
+    function delete(?string $table = null) {
         $repository = this.getRepository();
         this.from([$repository.getAlias(): $repository.getTable()]);
 
@@ -1302,8 +1280,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param array<string> $types A map between columns & their datatypes.
      * @return this
      */
-    function insert(array $columns, array $types = [])
-    {
+    function insert(array $columns, array $types = []) {
         $repository = this.getRepository();
         $table = $repository.getTable();
         this.into($table);
@@ -1317,8 +1294,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param \Cake\ORM\Table $table The table this query is starting on
      * @return static
      */
-    public static function subquery(Table $table)
-    {
+    public static function subquery(Table $table) {
         $query = new static($table.getConnection(), $table);
         $query.aliasingEnabled = false;
 
@@ -1333,8 +1309,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @return mixed
      * @throws \BadMethodCallException if the method is called for a non-select query
      */
-    function __call(string $method, array $arguments)
-    {
+    function __call(string $method, array $arguments) {
         if (this.type() == "select") {
             return _call($method, $arguments);
         }
@@ -1384,8 +1359,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param bool $value Set true to enable, false to disable.
      * @return this
      */
-    function enableAutoFields(bool $value = true)
-    {
+    function enableAutoFields(bool $value = true) {
         _autoFields = $value;
 
         return this;
@@ -1396,8 +1370,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @return this
      */
-    function disableAutoFields()
-    {
+    function disableAutoFields() {
         _autoFields = false;
 
         return this;

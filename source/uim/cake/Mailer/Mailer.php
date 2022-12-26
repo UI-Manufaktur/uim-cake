@@ -203,8 +203,7 @@ class Mailer : IEventListener
      *
      * @param array<string, mixed>|string|null $config Array of configs, or string to load configs from app.php
      */
-    public this($config = null)
-    {
+    public this($config = null) {
         this.message = new this.messageClass();
 
         if (this.defaultTable != null) {
@@ -250,8 +249,7 @@ class Mailer : IEventListener
      * @param \Cake\Mailer\Renderer $renderer Render instance.
      * @return this
      */
-    function setRenderer(Renderer $renderer)
-    {
+    function setRenderer(Renderer $renderer) {
         this.renderer = $renderer;
 
         return this;
@@ -273,8 +271,7 @@ class Mailer : IEventListener
      * @param \Cake\Mailer\Message $message Message instance.
      * @return this
      */
-    function setMessage(Message $message)
-    {
+    function setMessage(Message $message) {
         this.message = $message;
 
         return this;
@@ -287,8 +284,7 @@ class Mailer : IEventListener
      * @param array $args Method arguments
      * @return this|mixed
      */
-    function __call(string $method, array $args)
-    {
+    function __call(string $method, array $args) {
         $result = this.message.$method(...$args);
         if (strpos($method, "get") == 0) {
             return $result;
@@ -305,8 +301,7 @@ class Mailer : IEventListener
      * @return this
      * @deprecated 4.0.0 Use {@link Mailer::setViewVars()} instead.
      */
-    function set($key, $value = null)
-    {
+    function set($key, $value = null) {
         deprecationWarning("Mailer::set() is deprecated. Use setViewVars() instead.");
 
         return this.setViewVars($key, $value);
@@ -319,8 +314,7 @@ class Mailer : IEventListener
      * @param mixed $value View variable value.
      * @return this
      */
-    function setViewVars($key, $value = null)
-    {
+    function setViewVars($key, $value = null) {
         this.getRenderer().set($key, $value);
 
         return this;
@@ -379,8 +373,7 @@ class Mailer : IEventListener
      * @param string $content Content.
      * @return this
      */
-    function render(string $content = "")
-    {
+    function render(string $content = "") {
         $content = this.getRenderer().render(
             $content,
             this.message.getBodyTypes()
@@ -398,8 +391,7 @@ class Mailer : IEventListener
      * @return array
      * @psalm-return array{headers: string, message: string}
      */
-    function deliver(string $content = "")
-    {
+    function deliver(string $content = "") {
         this.render($content);
 
         $result = this.getTransport().send(this.message);
@@ -415,8 +407,7 @@ class Mailer : IEventListener
      *    an array with config.
      * @return this
      */
-    function setProfile($config)
-    {
+    function setProfile($config) {
         if (is_string($config)) {
             $name = $config;
             $config = static::getConfig($name);
@@ -486,8 +477,7 @@ class Mailer : IEventListener
      * @throws \LogicException When the chosen transport lacks a send method.
      * @throws \InvalidArgumentException When $name is neither a string nor an object.
      */
-    function setTransport($name)
-    {
+    function setTransport($name) {
         if (is_string($name)) {
             $transport = TransportFactory::get($name);
         } elseif (is_object($name)) {
@@ -529,8 +519,7 @@ class Mailer : IEventListener
      *
      * @return this
      */
-    protected function restore()
-    {
+    protected function restore() {
         foreach (array_keys(this.clonedInstances) as $key) {
             if (this.clonedInstances[$key] == null) {
                 this.{$key} = null;
@@ -548,8 +537,7 @@ class Mailer : IEventListener
      *
      * @return this
      */
-    function reset()
-    {
+    function reset() {
         this.message.reset();
         this.getRenderer().reset();
         this.transport = null;
@@ -588,8 +576,7 @@ class Mailer : IEventListener
      * @param array<string, mixed>|string|true $log Log config.
      * @return void
      */
-    protected function setLogConfig($log)
-    {
+    protected function setLogConfig($log) {
         $config = [
             "level": "debug",
             "scope": "email",
