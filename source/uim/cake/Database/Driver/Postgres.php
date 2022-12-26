@@ -16,8 +16,8 @@ import uim.cake.databases.Expression\StringExpression;
 import uim.cake.databases.PostgresCompiler;
 import uim.cake.databases.Query;
 import uim.cake.databases.QueryCompiler;
-import uim.cake.databases.Schema\PostgresSchemaDialect;
-import uim.cake.databases.Schema\SchemaDialect;
+import uim.cake.databases.schemas.PostgresSchemaDialect;
+import uim.cake.databases.schemas.SchemaDialect;
 use PDO;
 
 /**

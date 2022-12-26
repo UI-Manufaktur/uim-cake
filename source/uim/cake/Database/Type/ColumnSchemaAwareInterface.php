@@ -3,7 +3,7 @@
 module uim.cake.databases.Type;
 
 import uim.cake.databases.DriverInterface;
-import uim.cake.databases.Schema\TableSchemaInterface;
+import uim.cake.databases.schemas.TableSchemaInterface;
 
 interface ColumnSchemaAwareInterface
 {

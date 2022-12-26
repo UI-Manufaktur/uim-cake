@@ -15,7 +15,7 @@ import uim.cake.cores.App;
 import uim.cake.cores.Configure;
 import uim.cake.cores.Exception\CakeException;
 import uim.cake.databases.Connection;
-import uim.cake.databases.Schema\TableSchemaInterface;
+import uim.cake.databases.schemas.TableSchemaInterface;
 import uim.cake.databases.TypeFactory;
 import uim.cake.Datasource\ConnectionManager;
 import uim.cake.Datasource\EntityInterface;

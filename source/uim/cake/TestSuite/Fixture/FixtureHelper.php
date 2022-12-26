@@ -13,7 +13,7 @@ import uim.cake.cores.Configure;
 import uim.cake.cores.Exception\CakeException;
 import uim.cake.databases.Connection;
 import uim.cake.databases.DriverInterface;
-import uim.cake.databases.Schema\TableSchema;
+import uim.cake.databases.schemas.TableSchema;
 import uim.cake.Datasource\ConnectionInterface;
 import uim.cake.Datasource\ConnectionManager;
 import uim.cake.Datasource\FixtureInterface;
