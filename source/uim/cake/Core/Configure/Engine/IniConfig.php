@@ -11,7 +11,7 @@ module uim.cake.cores.Configure\Engine;
 
 import uim.cake.cores.Configure\ConfigEngineInterface;
 import uim.cake.cores.Configure\FileConfigTrait;
-import uim.cake.Utility\Hash;
+import uim.cake.utilities.Hash;
 
 /**
  * Ini file configuration engine.

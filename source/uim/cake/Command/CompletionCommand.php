@@ -15,7 +15,7 @@ import uim.cake.consoles.CommandCollectionAwareInterface;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
 import uim.cake.consoles.Shell;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use ReflectionClass;
 use ReflectionMethod;
 

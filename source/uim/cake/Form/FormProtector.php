@@ -10,8 +10,8 @@
 module uim.cake.Form;
 
 import uim.cake.cores.Configure;
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Security;
+import uim.cake.utilities.Hash;
+import uim.cake.utilities.Security;
 
 /**
  * Protects against form tampering. It ensures that:

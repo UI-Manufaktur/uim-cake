@@ -13,7 +13,7 @@ import uim.cake.Event\EventDispatcherInterface;
 import uim.cake.Event\EventDispatcherTrait;
 import uim.cake.Event\IEventListener;
 import uim.cake.Event\EventManager;
-import uim.cake.Utility\Hash;
+import uim.cake.utilities.Hash;
 import uim.cake.Validation\ValidatorAwareInterface;
 import uim.cake.Validation\ValidatorAwareTrait;
 

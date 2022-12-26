@@ -22,7 +22,7 @@ import uim.cake.Event\EventManager;
 import uim.cake.Event\IEventManager;
 import uim.cake.Routing\Router;
 import uim.cake.Routing\IRoutingApplication;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 

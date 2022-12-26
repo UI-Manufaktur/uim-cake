@@ -16,7 +16,7 @@ import uim.cake.cores.Configure;
 import uim.cake.cores.Plugin;
 import uim.cake.Log\Log;
 import uim.cake.Shell\Task\CommandTask;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 
 /**
  * Shell dispatcher handles dispatching CLI commands.

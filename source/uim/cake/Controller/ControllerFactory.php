@@ -17,7 +17,7 @@ import uim.cake.Http\Exception\MissingControllerException;
 import uim.cake.Http\MiddlewareQueue;
 import uim.cake.Http\Runner;
 import uim.cake.Http\ServerRequest;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use Closure;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

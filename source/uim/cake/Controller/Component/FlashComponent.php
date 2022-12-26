@@ -12,7 +12,7 @@ module uim.cake.Controller\Component;
 import uim.cake.Controller\Component;
 import uim.cake.Http\Exception\InternalErrorException;
 import uim.cake.Http\FlashMessage;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use Throwable;
 
 /**

@@ -9,7 +9,7 @@
  */
 module uim.cake.Console;
 
-import uim.cake.Utility\Text;
+import uim.cake.utilities.Text;
 use SimpleXMLElement;
 
 /**

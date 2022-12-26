@@ -31,7 +31,7 @@ import uim.cake.Http\ServerRequest;
 import uim.cake.Http\ServerRequestFactory;
 import uim.cake.Routing\Exception\MissingRouteException;
 import uim.cake.Routing\Router;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 import uim.cake.View\Exception\MissingLayoutException;
 import uim.cake.View\Exception\MissingTemplateException;
 use PDOException;

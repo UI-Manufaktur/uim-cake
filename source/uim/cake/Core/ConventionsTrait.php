@@ -9,7 +9,7 @@
  */
 module uim.cake.Core;
 
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 
 /**
  * Provides methods that allow other classes access to conventions based inflections.

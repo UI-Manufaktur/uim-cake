@@ -25,7 +25,7 @@ import uim.cake.Http\Client\Request;
 import uim.cake.Http\Client\Response;
 import uim.cake.Http\Cookie\CookieCollection;
 import uim.cake.Http\Cookie\CookieInterface;
-import uim.cake.Utility\Hash;
+import uim.cake.utilities.Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\Uri;
 use Psr\Http\Client\ClientInterface;

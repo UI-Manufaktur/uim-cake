@@ -14,7 +14,7 @@ import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
 import uim.cake.cores.App;
 import uim.cake.cores.Plugin;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 use DirectoryIterator;
 
 /**

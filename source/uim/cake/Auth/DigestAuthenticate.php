@@ -11,7 +11,7 @@ module uim.cake.Auth;
 
 import uim.cake.Controller\ComponentRegistry;
 import uim.cake.Http\ServerRequest;
-import uim.cake.Utility\Security;
+import uim.cake.utilities.Security;
 
 /**
  * Digest Authentication adapter for AuthComponent.

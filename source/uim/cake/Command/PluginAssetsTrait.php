@@ -12,7 +12,7 @@ module uim.cake.Command;
 import uim.cake.cores.Configure;
 import uim.cake.cores.Plugin;
 import uim.cake.Filesystem\Filesystem;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 
 /**
  * trait for symlinking / copying plugin assets to app"s webroot.

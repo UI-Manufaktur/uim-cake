@@ -11,8 +11,8 @@ module uim.cake.Datasource;
 
 import uim.cake.Collection\Collection;
 import uim.cake.ORM\Entity;
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Hash;
+import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
 use Traversable;
 

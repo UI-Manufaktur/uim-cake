@@ -10,7 +10,7 @@
 module uim.cake.databases.Type;
 
 import uim.cake.databases.DriverInterface;
-import uim.cake.Utility\Text;
+import uim.cake.utilities.Text;
 
 /**
  * Provides behavior for the UUID type

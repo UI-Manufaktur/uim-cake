@@ -11,7 +11,7 @@ module uim.cake.Auth;
 
 import uim.cake.cores.Configure;
 import uim.cake.errors.Debugger;
-import uim.cake.Utility\Security;
+import uim.cake.utilities.Security;
 
 /**
  * Password hashing class that use weak hashing algorithms. This class is
