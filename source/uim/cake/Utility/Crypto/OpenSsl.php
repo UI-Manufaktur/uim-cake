@@ -7,7 +7,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Utility\Crypto;
+module uim.cake.utilities.Crypto;
 
 /**
  * OpenSSL implementation of crypto features for Cake\Utility\Security

@@ -10,8 +10,8 @@
 module uim.cake.View;
 
 import uim.cake.cores.Configure;
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Xml;
+import uim.cake.utilities.Hash;
+import uim.cake.utilities.Xml;
 
 /**
  * A view class that is used for creating XML responses.

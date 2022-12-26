@@ -9,8 +9,8 @@
  */
 module uim.cake.View\Helper;
 
-import uim.cake.Utility\Hash;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Hash;
+import uim.cake.utilities.Inflector;
 import uim.cake.View\Helper;
 import uim.cake.View\StringTemplate;
 import uim.cake.View\StringTemplateTrait;

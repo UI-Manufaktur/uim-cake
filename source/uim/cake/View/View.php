@@ -20,7 +20,7 @@ import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 import uim.cake.Log\LogTrait;
 import uim.cake.Routing\Router;
-import uim.cake.Utility\Inflector;
+import uim.cake.utilities.Inflector;
 import uim.cake.View\Exception\MissingElementException;
 import uim.cake.View\Exception\MissingLayoutException;
 import uim.cake.View\Exception\MissingTemplateException;

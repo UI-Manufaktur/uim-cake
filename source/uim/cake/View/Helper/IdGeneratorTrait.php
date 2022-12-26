@@ -9,7 +9,7 @@
  */
 module uim.cake.View\Helper;
 
-import uim.cake.Utility\Text;
+import uim.cake.utilities.Text;
 
 /**
  * A trait that provides id generating methods to be
