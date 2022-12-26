@@ -13,7 +13,7 @@
  */
 module uim.cake.Http\Exception;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 
 /**
  * Parent class for all the HTTP related exceptions in CakePHP.

@@ -9,7 +9,7 @@
  */
 module uim.cake.Form;
 
-import uim.cake.Core\Configure;
+import uim.cake.cores.Configure;
 import uim.cake.Utility\Hash;
 import uim.cake.Utility\Security;
 

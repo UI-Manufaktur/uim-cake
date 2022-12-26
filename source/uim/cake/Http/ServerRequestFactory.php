@@ -9,7 +9,7 @@
  */
 module uim.cake.Http;
 
-import uim.cake.Core\Configure;
+import uim.cake.cores.Configure;
 import uim.cake.Http\Uri as CakeUri;
 import uim.cake.Utility\Hash;
 use Psr\Http\Message\ServerRequestFactoryInterface;

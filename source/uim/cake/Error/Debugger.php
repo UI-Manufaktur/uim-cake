@@ -9,8 +9,8 @@
  */
 module uim.cake.Error;
 
-import uim.cake.Core\Configure;
-import uim.cake.Core\InstanceConfigTrait;
+import uim.cake.cores.Configure;
+import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.errors.Debug\ArrayItemNode;
 import uim.cake.errors.Debug\ArrayNode;
 import uim.cake.errors.Debug\ClassNode;

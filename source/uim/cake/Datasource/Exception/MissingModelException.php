@@ -9,7 +9,7 @@
  */
 module uim.cake.Datasource\Exception;
 
-import uim.cake.Core\Exception\CakeException;
+import uim.cake.cores.Exception\CakeException;
 
 /**
  * Used when a model cannot be found.

@@ -39,7 +39,7 @@ emit responses. To get started first implement the
 ```php
 namespace App;
 
-import uim.cake.Core\IHttpApplication;
+import uim.cake.cores.IHttpApplication;
 import uim.cake.Http\MiddlewareQueue;
 import uim.cake.Http\Response;
 use Psr\Http\Message\IResponse;
