@@ -12,9 +12,9 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Console\Exception;
+module uim.cake.consoles.Exception;
 
-import uim.cake.Console\ICommand;
+import uim.cake.consoles.ICommand;
 import uim.cake.Core\Exception\CakeException;
 
 /**

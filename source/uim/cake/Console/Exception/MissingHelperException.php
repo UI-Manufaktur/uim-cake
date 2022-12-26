@@ -11,7 +11,7 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Console\Exception;
+module uim.cake.consoles.Exception;
 
 /**
  * Used when a Helper cannot be found.

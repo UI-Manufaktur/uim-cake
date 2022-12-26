@@ -19,9 +19,9 @@ import uim.cake.Cache\Cache;
 import uim.cake.Cache\Engine\ApcuEngine;
 import uim.cake.Cache\Engine\WincacheEngine;
 import uim.cake.Cache\InvalidArgumentException;
-import uim.cake.Console\Arguments;
-import uim.cake.Console\ConsoleIo;
-import uim.cake.Console\ConsoleOptionParser;
+import uim.cake.consoles.Arguments;
+import uim.cake.consoles.ConsoleIo;
+import uim.cake.consoles.ConsoleOptionParser;
 
 /**
  * CacheClear command.

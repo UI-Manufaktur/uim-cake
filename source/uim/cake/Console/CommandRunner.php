@@ -16,9 +16,9 @@
 module uim.cake.Console;
 
 import uim.cake.Command\VersionCommand;
-import uim.cake.Console\Command\HelpCommand;
-import uim.cake.Console\Exception\MissingOptionException;
-import uim.cake.Console\Exception\StopException;
+import uim.cake.consoles.Command\HelpCommand;
+import uim.cake.consoles.Exception\MissingOptionException;
+import uim.cake.consoles.Exception\StopException;
 import uim.cake.Core\IConsoleApplication;
 import uim.cake.Core\IContainerApplication;
 import uim.cake.Core\IPluginApplication;

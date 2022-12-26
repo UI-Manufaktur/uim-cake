@@ -15,8 +15,8 @@
  */
 module uim.cake.Console;
 
-import uim.cake.Console\Exception\ConsoleException;
-import uim.cake.Console\Exception\StopException;
+import uim.cake.consoles.Exception\ConsoleException;
+import uim.cake.consoles.Exception\StopException;
 import uim.cake.Utility\Inflector;
 use InvalidArgumentException;
 use RuntimeException;

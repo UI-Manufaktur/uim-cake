@@ -15,9 +15,9 @@
  */
 module uim.cake.Command;
 
-import uim.cake.Console\Arguments;
-import uim.cake.Console\BaseCommand;
-import uim.cake.Console\ConsoleIo;
+import uim.cake.consoles.Arguments;
+import uim.cake.consoles.BaseCommand;
+import uim.cake.consoles.ConsoleIo;
 import uim.cake.Datasource\ModelAwareTrait;
 import uim.cake.Log\LogTrait;
 import uim.cake.ORM\Locator\LocatorAwareTrait;

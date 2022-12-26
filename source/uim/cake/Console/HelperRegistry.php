@@ -15,7 +15,7 @@
  */
 module uim.cake.Console;
 
-import uim.cake.Console\Exception\MissingHelperException;
+import uim.cake.consoles.Exception\MissingHelperException;
 import uim.cake.Core\App;
 import uim.cake.Core\ObjectRegistry;
 

@@ -15,7 +15,7 @@
  */
 module uim.cake.Console;
 
-import uim.cake.Console\Exception\ConsoleException;
+import uim.cake.consoles.Exception\ConsoleException;
 use SimpleXMLElement;
 
 /**
