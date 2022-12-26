@@ -20,7 +20,6 @@ interface IContext
      *
      * @param string myField A dot separated path to the field a value
      *   is needed for.
-     * @return bool
      */
     bool isPrimaryKey(string myField);
 

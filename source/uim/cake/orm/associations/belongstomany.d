@@ -530,7 +530,6 @@ class BelongsToMany : Association
      * of the association via the joint table.
      *
      * @param \Cake\ORM\Table $side The potential Table with ownership
-     * @return bool
      */
     bool isOwningSide(Table $side) {
         return true;

@@ -125,7 +125,6 @@ class ViewBuilder : JsonSerializable, Serializable
      * Check if view var is set.
      *
      * @param string myName Var name
-     * @return bool
      */
     bool hasVar(string myName) {
         return array_key_exists(myName, _vars);
@@ -189,7 +188,6 @@ class ViewBuilder : JsonSerializable, Serializable
      * Returns if UIM"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      *
-     * @return bool
      */
     bool isAutoLayoutEnabled() {
         return _autoLayout;

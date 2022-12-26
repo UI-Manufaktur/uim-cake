@@ -119,7 +119,6 @@ class ArrayContext : IContext
      * must be defined in the "schema" data, and the "defaults" data must
      * contain a value for all fields in the key.
      *
-     * @return bool
      */
     bool isCreate() {
         $primary = this.getPrimaryKey();

@@ -80,7 +80,6 @@ class DebugContext
      * Check whether an object has been seen before.
      *
      * @param object $object The object to get a reference for.
-     * @return bool
      */
     bool hasReference(object $object) {
         return this.refs.contains($object);

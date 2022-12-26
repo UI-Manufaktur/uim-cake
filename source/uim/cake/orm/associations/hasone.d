@@ -51,7 +51,6 @@ class HasOne : Association
      * or required information if the row in "source" did not exist.
      *
      * @param \Cake\ORM\Table $side The potential Table with ownership
-     * @return bool
      */
     bool isOwningSide(Table $side) {
         return $side == this.getSource();

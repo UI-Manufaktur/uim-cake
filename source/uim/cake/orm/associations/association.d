@@ -380,7 +380,6 @@ abstract class Association {
      * Whether this association can be expressed directly in a query join
      *
      * @param array<string, mixed> myOptions custom options key that could alter the return value
-     * @return bool
      */
     bool canBeJoined(array myOptions = []) {
         $strategy = myOptions["strategy"] ?? this.getStrategy();
@@ -698,7 +697,6 @@ abstract class Association {
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions The conditions to use
      * for checking if any record matches.
      * @see \Cake\ORM\Table::exists()
-     * @return bool
      */
     bool exists($conditions) {
         $conditions = this.find()

@@ -208,7 +208,6 @@ class Filesystem
      *
      * @param string source Source path.
      * @param string destination Destination path.
-     * @return bool
      */
     bool copyDir(string source, string destination) {
         $destination = (new SplFileInfo($destination)).getPathname();
@@ -242,7 +241,6 @@ class Filesystem
      * Check whether the given path is a stream path.
      *
      * @param string myPath Path.
-     * @return bool
      */
     bool isStream(string myPath) {
         return indexOf(myPath, "://") != false;

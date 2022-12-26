@@ -29,7 +29,6 @@ trait RulesAwareTrait
      * @param \Cake\Datasource\IEntity $entity The entity to check for validity.
      * @param string operation The operation being run. Either "create", "update" or "delete".
      * @param \ArrayObject|array|null myOptions The options To be passed to the rules.
-     * @return bool
      */
     bool checkRules(IEntity $entity, string operation = RulesChecker::CREATE, myOptions = null) {
         $rules = this.rulesChecker();

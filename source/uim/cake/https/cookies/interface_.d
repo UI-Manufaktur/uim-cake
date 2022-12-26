@@ -153,7 +153,6 @@ interface ICookie {
      * Cookies without an expiration date always return false.
      *
      * @param \DateTime|\DateTimeImmutable $time The time to test against. Defaults to "now" in UTC.
-     * @return bool
      */
     bool isExpired($time = null);
 

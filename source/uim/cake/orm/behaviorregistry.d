@@ -181,7 +181,6 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * with the chosen name.
      *
      * @param string method The method to check for.
-     * @return bool
      */
     bool hasMethod(string method) {
         $method = strtolower($method);
@@ -196,7 +195,6 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * the chosen name.
      *
      * @param string method The method to check for.
-     * @return bool
      */
     bool hasFinder(string method) {
         $method = strtolower($method);

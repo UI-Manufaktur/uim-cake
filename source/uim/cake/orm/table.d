@@ -830,7 +830,6 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ```
      *
      * @param string myName The alias used for the association.
-     * @return bool
      */
     bool hasAssociation(string myName) {
         return this.findAssociation(myName)  !is null;
@@ -2379,7 +2378,6 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns true if the finder exists for the table
      *
      * @param string myType name of finder to check
-     * @return bool
      */
     bool hasFinder(string myType) {
         myFinder = "find" . myType;

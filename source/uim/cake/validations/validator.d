@@ -260,7 +260,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Check whether a validator contains any rules for the given field.
      *
      * @param string myName The field name to check.
-     * @return bool
      */
     bool hasField(string myName) {
         return isset(_fields[myName]);
@@ -364,7 +363,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Returns whether a rule set is defined for a field or not
      *
      * @param string myField name of the field to check
-     * @return bool
      */
     bool offsetExists(myField) {
         return isset(_fields[myField]);
@@ -2340,7 +2338,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @param string myField Field name.
      * @param bool $newRecord whether the data to be validated is new or to be updated.
-     * @return bool
      */
     bool isEmptyAllowed(string myField, bool $newRecord) {
         $providers = _providers;
@@ -2356,7 +2353,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @param string myField Field name.
      * @param bool $newRecord Whether the data to be validated is new or to be updated.
-     * @return bool
      */
     bool isPresenceRequired(string myField, bool $newRecord) {
         $providers = _providers;

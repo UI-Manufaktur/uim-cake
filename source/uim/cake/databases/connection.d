@@ -461,7 +461,6 @@ class Connection : IConnection {
      *
      * @param bool|null $toBeginning Whether the transaction should be rolled back to the
      * beginning of it. Defaults to false if using savepoints, or true if not.
-     * @return bool
      */
     bool rollback(?bool $toBeginning = null) {
         if (!_transactionStarted) {

@@ -172,7 +172,6 @@ class EntityContext : IContext {
      * If the context is for a collection or array the first object in the
      * collection will be used.
      *
-     * @return bool
      */
     bool isCreate() {
         $entity = _context["entity"];

@@ -325,7 +325,6 @@ class View : IEventDispatcher {
      * Returns if UIM"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      *
-     * @return bool
      */
     bool isAutoLayoutEnabled() {
         return this.autoLayout;
@@ -850,7 +849,6 @@ class View : IEventDispatcher {
      * Check if a block exists
      *
      * @param string myName Name of the block
-     * @return bool
      */
     bool exists(string myName) {
         return this.Blocks.exists(myName);

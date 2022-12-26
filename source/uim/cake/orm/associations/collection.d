@@ -280,7 +280,6 @@ class AssociationCollection : IteratorAggregate {
      *
      * @param \Cake\Datasource\IEntity $entity The entity to delete associations for.
      * @param array<string, mixed> myOptions The options used in the delete operation.
-     * @return bool
      */
     bool cascadeDelete(IEntity $entity, array myOptions) {
         $noCascade = [];

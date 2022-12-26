@@ -568,7 +568,6 @@ class Cookie : ICookie
      * on first use.
      *
      * @param string myPath Path to check
-     * @return bool
      */
     bool check(string myPath) {
         if (this.isExpanded == false) {

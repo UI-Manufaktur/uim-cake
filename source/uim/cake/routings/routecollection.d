@@ -405,7 +405,6 @@ class RouteCollection
      * Check if the named middleware group has been created.
      *
      * @param string myName The name of the middleware group to check.
-     * @return bool
      */
     bool hasMiddlewareGroup(string myName) {
         return array_key_exists(myName, _middlewareGroups);
@@ -415,7 +414,6 @@ class RouteCollection
      * Check if the named middleware has been registered.
      *
      * @param string myName The name of the middleware to check.
-     * @return bool
      */
     bool hasMiddleware(string myName) {
         return isset(_middleware[myName]);
@@ -425,7 +423,6 @@ class RouteCollection
      * Check if the named middleware or middleware group has been registered.
      *
      * @param string myName The name of the middleware to check.
-     * @return bool
      */
     bool middlewareExists(string myName) {
         return this.hasMiddleware(myName) || this.hasMiddlewareGroup(myName);
