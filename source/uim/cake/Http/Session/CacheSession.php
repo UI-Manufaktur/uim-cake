@@ -17,7 +17,7 @@
  */
 module uim.cake.Http\Session;
 
-import uim.cake.Cache\Cache;
+import uim.cake.caches.Cache;
 use InvalidArgumentException;
 use SessionHandlerInterface;
 

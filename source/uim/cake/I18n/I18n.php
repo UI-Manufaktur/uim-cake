@@ -1,12 +1,6 @@
 
 
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
+
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  * @link          https://cakephp.org CakePHP(tm) Project
@@ -15,7 +9,7 @@
  */
 module uim.cake.I18n;
 
-import uim.cake.Cache\Cache;
+import uim.cake.caches.Cache;
 import uim.cake.I18n\Exception\I18nException;
 import uim.cake.I18n\Formatter\IcuFormatter;
 import uim.cake.I18n\Formatter\SprintfFormatter;
