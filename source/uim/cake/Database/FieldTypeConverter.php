@@ -88,7 +88,7 @@ class FieldTypeConverter
         }
 
         // Using batching when there is only a couple for the type is actually slower,
-        // so, let's check for that case here.
+        // so, let"s check for that case here.
         foreach ($batchingResult as $type: $fields) {
             if (count($fields) > 2) {
                 continue;

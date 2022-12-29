@@ -18,7 +18,7 @@ import uim.cake.Routing\RouteBuilder;
  * Interface for Applications that leverage plugins & events.
  *
  * Events can be bound to the application event manager during
- * the application's bootstrap and plugin bootstrap.
+ * the application"s bootstrap and plugin bootstrap.
  */
 interface IPluginApplication : EventDispatcherInterface
 {

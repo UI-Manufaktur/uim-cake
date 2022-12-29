@@ -25,12 +25,12 @@ import uim.cake.cores.exceptions.CakeException;
  * ```
  * <?php
  * return [
- *     'debug': false,
- *     'Security': [
- *         'salt': 'its-secret'
+ *     "debug": false,
+ *     "Security": [
+ *         "salt": "its-secret"
  *     ],
- *     'App': [
- *         'namespace': 'App'
+ *     "App": [
+ *         "namespace": "App"
  *     ]
  * ];
  * ```
@@ -46,7 +46,7 @@ class PhpConfig : ConfigEngineInterface
      *
      * @var string
      */
-    protected $_extension = '.php';
+    protected $_extension = ".php";
 
     /**
      * Constructor for PHP Config file reading.
@@ -69,8 +69,8 @@ class PhpConfig : ConfigEngineInterface
      * @param string $key The identifier to read from. If the key has a . it will be treated
      *  as a plugin prefix.
      * @return array Parsed configuration values.
-     * @throws \Cake\Core\Exception\CakeException when files don't exist or they don't contain `$config`.
-     *  Or when files contain '..' as this could lead to abusive reads.
+     * @throws \Cake\Core\Exception\CakeException when files don"t exist or they don"t contain `$config`.
+     *  Or when files contain ".." as this could lead to abusive reads.
      */
     function read(string $key): array
     {
@@ -83,7 +83,7 @@ class PhpConfig : ConfigEngineInterface
             return $return;
         }
 
-        throw new CakeException(sprintf('Config file "%s" did not return an array', $key . '.php'));
+        throw new CakeException(sprintf("Config file "%s" did not return an array", $key . ".php"));
     }
 
     /**
@@ -97,7 +97,7 @@ class PhpConfig : ConfigEngineInterface
      */
     function dump(string $key, array $data): bool
     {
-        $contents = '<?php' . "\n" . 'return ' . var_export($data, true) . ';';
+        $contents = "<?php" . "\n" . "return " . var_export($data, true) . ";";
 
         $filename = _getFilePath($key);
 

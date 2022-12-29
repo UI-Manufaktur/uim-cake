@@ -28,7 +28,7 @@ use Iterator;
  * on criteria.
  *
  * This class : the Iterator interface to allow plugins
- * to be iterated, handling the situation where a plugin's hook
+ * to be iterated, handling the situation where a plugin"s hook
  * method (usually bootstrap) loads another plugin during iteration.
  *
  * While its implementation supported nested iteration it does not
@@ -88,14 +88,14 @@ class PluginCollection : Iterator, Countable
      */
     protected function loadConfig(): void
     {
-        if (Configure::check('plugins')) {
+        if (Configure::check("plugins")) {
             return;
         }
-        $vendorFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'cakephp-plugins.php';
+        $vendorFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "cakephp-plugins.php";
         if (!is_file($vendorFile)) {
-            $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . 'cakephp-plugins.php';
+            $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . "cakephp-plugins.php";
             if (!is_file($vendorFile)) {
-                Configure::write(['plugins': []]);
+                Configure::write(["plugins": []]);
 
                 return;
             }
@@ -108,7 +108,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Locate a plugin path by looking at configuration data.
      *
-     * This will use the `plugins` Configure key, and fallback to enumerating `App::path('plugins')`
+     * This will use the `plugins` Configure key, and fallback to enumerating `App::path("plugins")`
      *
      * This method is not part of the official public API as plugins with
      * no plugin class are being phased out.
@@ -125,20 +125,20 @@ class PluginCollection : Iterator, Countable
         // wipes out all configuration including plugin paths config.
         this.loadConfig();
 
-        $path = Configure::read('plugins.' . $name);
+        $path = Configure::read("plugins." . $name);
         if ($path) {
             return $path;
         }
 
-        $pluginPath = str_replace('/', DIRECTORY_SEPARATOR, $name);
-        $paths = App::path('plugins');
+        $pluginPath = str_replace("/", DIRECTORY_SEPARATOR, $name);
+        $paths = App::path("plugins");
         foreach ($paths as $path) {
             if (is_dir($path . $pluginPath)) {
                 return $path . $pluginPath . DIRECTORY_SEPARATOR;
             }
         }
 
-        throw new MissingPluginException(['plugin': $name]);
+        throw new MissingPluginException(["plugin": $name]);
     }
 
     /**
@@ -198,7 +198,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Get the a plugin by name.
      *
-     * If a plugin isn't already loaded it will be autoloaded on first access
+     * If a plugin isn"t already loaded it will be autoloaded on first access
      * and that plugins loaded this way may miss some hook methods.
      *
      * @param string $name The plugin to get.
@@ -227,29 +227,29 @@ class PluginCollection : Iterator, Countable
      */
     function create(string $name, array $config = []): PluginInterface
     {
-        if (strpos($name, '\\') != false) {
+        if (strpos($name, "\\") != false) {
             /** @var \Cake\Core\PluginInterface */
             return new $name($config);
         }
 
-        $config += ['name': $name];
-        $namespace = str_replace('/', '\\', $name);
+        $config += ["name": $name];
+        $namespace = str_replace("/", "\\", $name);
 
-        $className = $namespace . '\\' . 'Plugin';
+        $className = $namespace . "\\" . "Plugin";
         // Check for [Vendor/]Foo/Plugin class
         if (!class_exists($className)) {
-            $pos = strpos($name, '/');
+            $pos = strpos($name, "/");
             if ($pos == false) {
-                $className = $namespace . '\\' . $name . 'Plugin';
+                $className = $namespace . "\\" . $name . "Plugin";
             } else {
-                $className = $namespace . '\\' . substr($name, $pos + 1) . 'Plugin';
+                $className = $namespace . "\\" . substr($name, $pos + 1) . "Plugin";
             }
 
             // Check for [Vendor/]Foo/FooPlugin
             if (!class_exists($className)) {
                 $className = BasePlugin::class;
-                if (empty($config['path'])) {
-                    $config['path'] = this.findPath($name);
+                if (empty($config["path"])) {
+                    $config["path"] = this.findPath($name);
                 }
             }
         }

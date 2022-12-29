@@ -53,7 +53,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     function getController(): Controller
     {
         if (_Controller == null) {
-            throw new CakeException('Controller not set for ComponentRegistry');
+            throw new CakeException("Controller not set for ComponentRegistry");
         }
 
         return _Controller;
@@ -83,7 +83,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      */
     protected function _resolveClassName(string $class): ?string
     {
-        return App::className($class, 'Controller/Component', 'Component');
+        return App::className($class, "Controller/Component", "Component");
     }
 
     /**
@@ -100,8 +100,8 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingComponentException([
-            'class': $class . 'Component',
-            'plugin': $plugin,
+            "class": $class . "Component",
+            "plugin": $plugin,
         ]);
     }
 
@@ -122,7 +122,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     {
         /** @var \Cake\Controller\Component $instance */
         $instance = new $class(this, $config);
-        $enable = $config['enabled'] ?? true;
+        $enable = $config["enabled"] ?? true;
         if ($enable) {
             this.getEventManager().on($instance);
         }

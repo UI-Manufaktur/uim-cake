@@ -50,7 +50,7 @@ trait ConventionsTrait
     {
         [, $name] = pluginSplit($name);
 
-        return Inflector::underscore(Inflector::singularize($name)) . '_id';
+        return Inflector::underscore(Inflector::singularize($name)) . "_id";
     }
 
     /**
@@ -61,7 +61,7 @@ trait ConventionsTrait
      */
     protected function _modelNameFromKey(string $key): string
     {
-        $key = str_replace('_id', '', $key);
+        $key = str_replace("_id", "", $key);
 
         return Inflector::camelize(Inflector::pluralize($key));
     }
@@ -133,17 +133,17 @@ trait ConventionsTrait
             return Plugin::path($pluginName);
         }
 
-        return current(App::path('plugins')) . $pluginName . DIRECTORY_SEPARATOR;
+        return current(App::path("plugins")) . $pluginName . DIRECTORY_SEPARATOR;
     }
 
     /**
-     * Return plugin's namespace
+     * Return plugin"s namespace
      *
      * @param string $pluginName Plugin name
-     * @return string Plugin's namespace
+     * @return string Plugin"s namespace
      */
     protected function _pluginNamespace(string $pluginName): string
     {
-        return str_replace('/', '\\', $pluginName);
+        return str_replace("/", "\\", $pluginName);
     }
 }

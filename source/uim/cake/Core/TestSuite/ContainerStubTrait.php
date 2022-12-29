@@ -79,7 +79,7 @@ trait ContainerStubTrait
             $appClass = _appClass;
         } else {
             /** @psalm-var class-string<\Cake\Http\BaseApplication> */
-            $appClass = Configure::read('App.namespace') . '\Application';
+            $appClass = Configure::read("App.namespace") . "\Application";
         }
         if (!class_exists($appClass)) {
             throw new LogicException("Cannot load `{$appClass}` for use in integration testing.");
@@ -87,8 +87,8 @@ trait ContainerStubTrait
         $appArgs = _appArgs ?: [CONFIG];
 
         $app = new $appClass(...$appArgs);
-        if (!empty(this.containerServices) && method_exists($app, 'getEventManager')) {
-            $app.getEventManager().on('Application.buildContainer', [this, 'modifyContainer']);
+        if (!empty(this.containerServices) && method_exists($app, "getEventManager")) {
+            $app.getEventManager().on("Application.buildContainer", [this, "modifyContainer"]);
         }
 
         return $app;
@@ -124,9 +124,9 @@ trait ContainerStubTrait
     }
 
     /**
-     * Wrap the application's container with one containing mocks.
+     * Wrap the application"s container with one containing mocks.
      *
-     * If any mocked services are defined, the application's container
+     * If any mocked services are defined, the application"s container
      * will be replaced with one containing mocks. The original
      * container will be set as a delegate to the mock container.
      *

@@ -25,7 +25,7 @@ class ErrorController : Controller
      */
     function initialize(): void
     {
-        this.loadComponent('RequestHandler');
+        this.loadComponent("RequestHandler");
     }
 
     /**
@@ -36,14 +36,14 @@ class ErrorController : Controller
      */
     function beforeRender(IEvent $event) {
         $builder = this.viewBuilder();
-        $templatePath = 'Error';
+        $templatePath = "Error";
 
         if (
-            this.request.getParam('prefix') &&
-            in_array($builder.getTemplate(), ['error400', 'error500'], true)
+            this.request.getParam("prefix") &&
+            in_array($builder.getTemplate(), ["error400", "error500"], true)
         ) {
             $parts = explode(DIRECTORY_SEPARATOR, (string)$builder.getTemplatePath(), -1);
-            $templatePath = implode(DIRECTORY_SEPARATOR, $parts) . DIRECTORY_SEPARATOR . 'Error';
+            $templatePath = implode(DIRECTORY_SEPARATOR, $parts) . DIRECTORY_SEPARATOR . "Error";
         }
 
         $builder.setTemplatePath($templatePath);

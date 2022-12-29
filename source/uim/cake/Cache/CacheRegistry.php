@@ -34,7 +34,7 @@ class CacheRegistry : ObjectRegistry
      */
     protected function _resolveClassName(string $class): ?string
     {
-        return App::className($class, 'Cache/Engine', 'Engine');
+        return App::className($class, "Cache/Engine", "Engine");
     }
 
     /**
@@ -49,7 +49,7 @@ class CacheRegistry : ObjectRegistry
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
-        throw new BadMethodCallException(sprintf('Cache engine %s is not available.', $class));
+        throw new BadMethodCallException(sprintf("Cache engine %s is not available.", $class));
     }
 
     /**
@@ -61,7 +61,7 @@ class CacheRegistry : ObjectRegistry
      * @param string $alias The alias of the object.
      * @param array<string, mixed> $config An array of settings to use for the cache engine.
      * @return \Cake\Cache\CacheEngine The constructed CacheEngine class.
-     * @throws \RuntimeException when an object doesn't implement the correct interface.
+     * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
     protected function _create($class, string $alias, array $config): CacheEngine
     {
@@ -70,18 +70,18 @@ class CacheRegistry : ObjectRegistry
         } else {
             $instance = new $class($config);
         }
-        unset($config['className']);
+        unset($config["className"]);
 
         if (!($instance instanceof CacheEngine)) {
             throw new RuntimeException(
-                'Cache engines must import uim.cake.caches.CacheEngine as a base class.'
+                "Cache engines must import uim.cake.caches.CacheEngine as a base class."
             );
         }
 
         if (!$instance.init($config)) {
             throw new RuntimeException(
                 sprintf(
-                    'Cache engine %s is not properly configured. Check error log for additional information.',
+                    "Cache engine %s is not properly configured. Check error log for additional information.",
                     get_class($instance)
                 )
             );

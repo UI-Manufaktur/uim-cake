@@ -37,7 +37,7 @@ class ClassLoader
     function register(): void
     {
         /** @var callable $callable */
-        $callable = [this, 'loadClass'];
+        $callable = [this, "loadClass"];
         spl_autoload_register($callable);
     }
 
@@ -54,10 +54,10 @@ class ClassLoader
      */
     function addNamespace(string $prefix, string $baseDir, bool $prepend = false): void
     {
-        $prefix = trim($prefix, '\\') . '\\';
+        $prefix = trim($prefix, "\\") . "\\";
 
-        $baseDir = rtrim($baseDir, '/') . DIRECTORY_SEPARATOR;
-        $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) . '/';
+        $baseDir = rtrim($baseDir, "/") . DIRECTORY_SEPARATOR;
+        $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) . "/";
 
         _prefixes[$prefix] = _prefixes[$prefix] ?? [];
 
@@ -78,7 +78,7 @@ class ClassLoader
     function loadClass(string $class) {
         $prefix = $class;
 
-        while (($pos = strrpos($prefix, '\\')) != false) {
+        while (($pos = strrpos($prefix, "\\")) != false) {
             $prefix = substr($class, 0, $pos + 1);
             $relativeClass = substr($class, $pos + 1);
 
@@ -87,7 +87,7 @@ class ClassLoader
                 return $mappedFile;
             }
 
-            $prefix = rtrim($prefix, '\\');
+            $prefix = rtrim($prefix, "\\");
         }
 
         return false;
@@ -107,7 +107,7 @@ class ClassLoader
         }
 
         foreach (_prefixes[$prefix] as $baseDir) {
-            $file = $baseDir . str_replace('\\', DIRECTORY_SEPARATOR, $relativeClass) . '.php';
+            $file = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) . ".php";
 
             if (_requireFile($file)) {
                 return $file;

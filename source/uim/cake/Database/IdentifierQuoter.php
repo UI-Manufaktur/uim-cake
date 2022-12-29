@@ -48,15 +48,15 @@ class IdentifierQuoter
         $binder = $query.getValueBinder();
         $query.setValueBinder(null);
 
-        if ($query.type() == 'insert') {
+        if ($query.type() == "insert") {
             _quoteInsert($query);
-        } elseif ($query.type() == 'update') {
+        } elseif ($query.type() == "update") {
             _quoteUpdate($query);
         } else {
             _quoteParts($query);
         }
 
-        $query.traverseExpressions([this, 'quoteExpression']);
+        $query.traverseExpressions([this, "quoteExpression"]);
         $query.setValueBinder($binder);
 
         return $query;
@@ -97,7 +97,7 @@ class IdentifierQuoter
      */
     protected function _quoteParts(Query $query): void
     {
-        foreach (['distinct', 'select', 'from', 'group'] as $part) {
+        foreach (["distinct", "select", "from", "group"] as $part) {
             $contents = $query.clause($part);
 
             if (!is_array($contents)) {
@@ -110,7 +110,7 @@ class IdentifierQuoter
             }
         }
 
-        $joins = $query.clause('join');
+        $joins = $query.clause("join");
         if ($joins) {
             $joins = _quoteJoins($joins);
             $query.join($joins, [], true);
@@ -146,14 +146,14 @@ class IdentifierQuoter
     {
         $result = [];
         foreach ($joins as $value) {
-            $alias = '';
-            if (!empty($value['alias'])) {
-                $alias = _driver.quoteIdentifier($value['alias']);
-                $value['alias'] = $alias;
+            $alias = "";
+            if (!empty($value["alias"])) {
+                $alias = _driver.quoteIdentifier($value["alias"]);
+                $value["alias"] = $alias;
             }
 
-            if (is_string($value['table'])) {
-                $value['table'] = _driver.quoteIdentifier($value['table']);
+            if (is_string($value["table"])) {
+                $value["table"] = _driver.quoteIdentifier($value["table"]);
             }
 
             $result[$alias] = $value;
@@ -170,7 +170,7 @@ class IdentifierQuoter
      */
     protected function _quoteInsert(Query $query): void
     {
-        $insert = $query.clause('insert');
+        $insert = $query.clause("insert");
         if (!isset($insert[0]) || !isset($insert[1])) {
             return;
         }
@@ -192,7 +192,7 @@ class IdentifierQuoter
      */
     protected function _quoteUpdate(Query $query): void
     {
-        $table = $query.clause('update')[0];
+        $table = $query.clause("update")[0];
 
         if (is_string($table)) {
             $query.update(_driver.quoteIdentifier($table));
@@ -238,7 +238,7 @@ class IdentifierQuoter
 
                 return $part;
             }
-            if (is_string($part) && strpos($part, ' ') == false) {
+            if (is_string($part) && strpos($part, " ") == false) {
                 return _driver.quoteIdentifier($part);
             }
 

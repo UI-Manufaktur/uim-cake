@@ -40,7 +40,7 @@ class JsonConfig : ConfigEngineInterface
      *
      * @var string
      */
-    protected $_extension = '.json';
+    protected $_extension = ".json";
 
     /**
      * Constructor for JSON Config file reading.
@@ -63,8 +63,8 @@ class JsonConfig : ConfigEngineInterface
      * @param string $key The identifier to read from. If the key has a . it will be treated
      *   as a plugin prefix.
      * @return array Parsed configuration values.
-     * @throws \Cake\Core\Exception\CakeException When files don't exist or when
-     *   files contain '..' (as this could lead to abusive reads) or when there
+     * @throws \Cake\Core\Exception\CakeException When files don"t exist or when
+     *   files contain ".." (as this could lead to abusive reads) or when there
      *   is an error parsing the JSON string.
      */
     function read(string $key): array
@@ -74,14 +74,14 @@ class JsonConfig : ConfigEngineInterface
         $values = json_decode(file_get_contents($file), true);
         if (json_last_error() != JSON_ERROR_NONE) {
             throw new CakeException(sprintf(
-                'Error parsing JSON string fetched from config file "%s.json": %s',
+                "Error parsing JSON string fetched from config file "%s.json": %s",
                 $key,
                 json_last_error_msg()
             ));
         }
         if (!is_array($values)) {
             throw new CakeException(sprintf(
-                'Decoding JSON config file "%s.json" did not return an array',
+                "Decoding JSON config file "%s.json" did not return an array",
                 $key
             ));
         }

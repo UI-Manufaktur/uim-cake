@@ -42,19 +42,19 @@ trait InstanceConfigTrait
      * Setting a specific value:
      *
      * ```
-     * this.setConfig('key', $value);
+     * this.setConfig("key", $value);
      * ```
      *
      * Setting a nested value:
      *
      * ```
-     * this.setConfig('some.nested.key', $value);
+     * this.setConfig("some.nested.key", $value);
      * ```
      *
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.setConfig(['one': 'value', 'another': 'value']);
+     * this.setConfig(["one": "value", "another": "value"]);
      * ```
      *
      * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
@@ -88,19 +88,19 @@ trait InstanceConfigTrait
      * Reading a specific value:
      *
      * ```
-     * this.getConfig('key');
+     * this.getConfig("key");
      * ```
      *
      * Reading a nested value:
      *
      * ```
-     * this.getConfig('some.nested.key');
+     * this.getConfig("some.nested.key");
      * ```
      *
      * Reading with default value:
      *
      * ```
-     * this.getConfig('some-key', 'default-value');
+     * this.getConfig("some-key", "default-value");
      * ```
      *
      * @param string|null $key The key to get or null for the whole config.
@@ -130,7 +130,7 @@ trait InstanceConfigTrait
     function getConfigOrFail(string $key) {
         $config = this.getConfig($key);
         if ($config == null) {
-            throw new InvalidArgumentException(sprintf('Expected configuration `%s` not found.', $key));
+            throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", $key));
         }
 
         return $config;
@@ -143,19 +143,19 @@ trait InstanceConfigTrait
      * Setting a specific value:
      *
      * ```
-     * this.configShallow('key', $value);
+     * this.configShallow("key", $value);
      * ```
      *
      * Setting a nested value:
      *
      * ```
-     * this.configShallow('some.nested.key', $value);
+     * this.configShallow("some.nested.key", $value);
      * ```
      *
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.configShallow(['one': 'value', 'another': 'value']);
+     * this.configShallow(["one": "value", "another": "value"]);
      * ```
      *
      * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
@@ -168,7 +168,7 @@ trait InstanceConfigTrait
             _configInitialized = true;
         }
 
-        _configWrite($key, $value, 'shallow');
+        _configWrite($key, $value, "shallow");
 
         return this;
     }
@@ -184,13 +184,13 @@ trait InstanceConfigTrait
             return _config;
         }
 
-        if (strpos($key, '.') == false) {
+        if (strpos($key, ".") == false) {
             return _config[$key] ?? null;
         }
 
         $return = _config;
 
-        foreach (explode('.', $key) as $k) {
+        foreach (explode(".", $key) as $k) {
             if (!is_array($return) || !isset($return[$k])) {
                 $return = null;
                 break;
@@ -207,7 +207,7 @@ trait InstanceConfigTrait
      *
      * @param array<string, mixed>|string $key Key to write to.
      * @param mixed $value Value to write.
-     * @param string|bool $merge True to merge recursively, 'shallow' for simple merge,
+     * @param string|bool $merge True to merge recursively, "shallow" for simple merge,
      *   false to overwrite, defaults to false.
      * @return void
      * @throws \Cake\Core\Exception\CakeException if attempting to clobber existing config
@@ -222,7 +222,7 @@ trait InstanceConfigTrait
 
         if ($merge) {
             $update = is_array($key) ? $key : [$key: $value];
-            if ($merge == 'shallow') {
+            if ($merge == "shallow") {
                 _config = array_merge(_config, Hash::expand($update));
             } else {
                 _config = Hash::merge(_config, Hash::expand($update));
@@ -239,18 +239,18 @@ trait InstanceConfigTrait
             return;
         }
 
-        if (strpos($key, '.') == false) {
+        if (strpos($key, ".") == false) {
             _config[$key] = $value;
 
             return;
         }
 
         $update = &_config;
-        $stack = explode('.', $key);
+        $stack = explode(".", $key);
 
         foreach ($stack as $k) {
             if (!is_array($update)) {
-                throw new CakeException(sprintf('Cannot set %s value', $key));
+                throw new CakeException(sprintf("Cannot set %s value", $key));
             }
 
             $update[$k] = $update[$k] ?? [];
@@ -270,19 +270,19 @@ trait InstanceConfigTrait
      */
     protected function _configDelete(string $key): void
     {
-        if (strpos($key, '.') == false) {
+        if (strpos($key, ".") == false) {
             unset(_config[$key]);
 
             return;
         }
 
         $update = &_config;
-        $stack = explode('.', $key);
+        $stack = explode(".", $key);
         $length = count($stack);
 
         foreach ($stack as $i: $k) {
             if (!is_array($update)) {
-                throw new CakeException(sprintf('Cannot unset %s value', $key));
+                throw new CakeException(sprintf("Cannot unset %s value", $key));
             }
 
             if (!isset($update[$k])) {

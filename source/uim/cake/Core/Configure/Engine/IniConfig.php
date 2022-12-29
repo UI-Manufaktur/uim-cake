@@ -23,9 +23,9 @@ import uim.cake.utilities.Hash;
  * to create nested array structures through usage of `.` delimited names. This allows
  * you to create nested arrays structures in an ini config file. For example:
  *
- * `db.password = secret` would turn into `['db': ['password': 'secret']]`
+ * `db.password = secret` would turn into `["db": ["password": "secret"]]`
  *
- * You can nest properties as deeply as needed using `.`'s. In addition to using `.` you
+ * You can nest properties as deeply as needed using `.`"s. In addition to using `.` you
  * can use standard ini section notation to create nested structures:
  *
  * ```
@@ -35,13 +35,13 @@ import uim.cake.utilities.Hash;
  *
  * Once loaded into Configure, the above would be accessed using:
  *
- * `Configure::read('section.key');
+ * `Configure::read("section.key");
  *
  * You can also use `.` separated values in section names to create more deeply
  * nested structures.
  *
  * IniConfig also manipulates how the special ini values of
- * 'yes', 'no', 'on', 'off', 'null' are handled. These values will be
+ * "yes", "no", "on", "off", "null" are handled. These values will be
  * converted to their boolean equivalents.
  *
  * @see https://secure.php.net/parse_ini_file
@@ -55,7 +55,7 @@ class IniConfig : ConfigEngineInterface
      *
      * @var string
      */
-    protected $_extension = '.ini';
+    protected $_extension = ".ini";
 
     /**
      * The section to read, if null all sections will be read.
@@ -84,10 +84,10 @@ class IniConfig : ConfigEngineInterface
      * Read an ini file and return the results as an array.
      *
      * @param string $key The identifier to read from. If the key has a . it will be treated
-     *  as a plugin prefix. The chosen file must be on the engine's path.
+     *  as a plugin prefix. The chosen file must be on the engine"s path.
      * @return array Parsed configuration values.
-     * @throws \Cake\Core\Exception\CakeException when files don't exist.
-     *  Or when files contain '..' as this could lead to abusive reads.
+     * @throws \Cake\Core\Exception\CakeException when files don"t exist.
+     *  Or when files contain ".." as this could lead to abusive reads.
      */
     function read(string $key): array
     {
@@ -120,14 +120,14 @@ class IniConfig : ConfigEngineInterface
     protected function _parseNestedValues(array $values): array
     {
         foreach ($values as $key: $value) {
-            if ($value == '1') {
+            if ($value == "1") {
                 $value = true;
             }
-            if ($value == '') {
+            if ($value == "") {
                 $value = false;
             }
             unset($values[$key]);
-            if (strpos((string)$key, '.') != false) {
+            if (strpos((string)$key, ".") != false) {
                 $values = Hash::insert($values, $key, $value);
             } else {
                 $values[$key] = $value;
@@ -151,18 +151,18 @@ class IniConfig : ConfigEngineInterface
         foreach ($data as $k: $value) {
             $isSection = false;
             /** @psalm-suppress InvalidArrayAccess */
-            if ($k[0] != '[') {
+            if ($k[0] != "[") {
                 $result[] = "[$k]";
                 $isSection = true;
             }
             if (is_array($value)) {
-                $kValues = Hash::flatten($value, '.');
+                $kValues = Hash::flatten($value, ".");
                 foreach ($kValues as $k2: $v) {
                     $result[] = "$k2 = " . _value($v);
                 }
             }
             if ($isSection) {
-                $result[] = '';
+                $result[] = "";
             }
         }
         $contents = trim(implode("\n", $result));
@@ -181,13 +181,13 @@ class IniConfig : ConfigEngineInterface
     protected function _value($value): string
     {
         if ($value == null) {
-            return 'null';
+            return "null";
         }
         if ($value == true) {
-            return 'true';
+            return "true";
         }
         if ($value == false) {
-            return 'false';
+            return "false";
         }
 
         return (string)$value;

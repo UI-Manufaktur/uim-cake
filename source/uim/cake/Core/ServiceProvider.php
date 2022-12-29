@@ -18,7 +18,7 @@ use RuntimeException;
  * Container ServiceProvider
  *
  * Service provider bundle related services together helping
- * to organize your application's dependencies. They also help
+ * to organize your application"s dependencies. They also help
  * improve performance of applications with many services by
  * allowing service registration to be deferred until services are needed.
  */
@@ -35,8 +35,8 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
     /**
      * Get the container.
      *
-     * This method's actual return type and documented return type differ
-     * because PHP 7.2 doesn't support return type narrowing.
+     * This method"s actual return type and documented return type differ
+     * because PHP 7.2 doesn"t support return type narrowing.
      *
      * @return \Cake\Core\IContainer
      */
@@ -46,7 +46,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
 
         if (!($container instanceof IContainer)) {
             $message = sprintf(
-                'Unexpected container type. Expected `%s` got `%s` instead.',
+                "Unexpected container type. Expected `%s` got `%s` instead.",
                 IContainer::class,
                 getTypeName($container)
             );

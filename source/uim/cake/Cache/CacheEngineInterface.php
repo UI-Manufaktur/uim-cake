@@ -21,7 +21,7 @@ module uim.cake.Cache;
 interface ICacheEngine
 {
     /**
-     * Write data for key into a cache engine if it doesn't exist already.
+     * Write data for key into a cache engine if it doesn"t exist already.
      *
      * @param string $key Identifier for the data.
      * @param mixed $value Data to be cached - anything except a resource.
