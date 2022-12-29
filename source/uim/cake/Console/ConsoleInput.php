@@ -73,8 +73,7 @@ class ConsoleInput
      * @param int $timeout An optional time to wait for data
      * @return bool True for data available, false otherwise
      */
-    bool dataAvailable(int $timeout = 0)
-    {
+    bool dataAvailable(int $timeout = 0) {
         $readFds = [_input];
         $writeFds = null;
         $errorFds = null;

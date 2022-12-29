@@ -119,8 +119,7 @@ class Cache
      * @param uim.cake.Cache\CacheRegistry $registry Injectable registry object.
      * @return void
      */
-    static void setRegistry(CacheRegistry $registry)
-    {
+    static void setRegistry(CacheRegistry $registry) {
         static::$_registry = $registry;
     }
 
@@ -132,8 +131,7 @@ class Cache
      * @throws \RuntimeException If loading of the engine failed.
      * @return void
      */
-    protected static void _buildEngine(string $name)
-    {
+    protected static void _buildEngine(string $name) {
         $registry = static::getRegistry();
 
         if (empty(static::$_config[$name]["className"])) {
@@ -524,8 +522,7 @@ class Cache
      *
      * @return void
      */
-    static void disable()
-    {
+    static void disable() {
         static::$_enabled = false;
     }
 

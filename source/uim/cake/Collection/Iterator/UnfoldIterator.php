@@ -50,8 +50,7 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
      *
      * @return bool
      */
-    bool hasChildren()
-    {
+    bool hasChildren() {
         return true;
     }
 

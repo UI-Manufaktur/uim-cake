@@ -78,8 +78,7 @@ class StubConsoleInput : ConsoleInput
      * @param int $timeout An optional time to wait for data
      * @return bool True for data available, false otherwise
      */
-    bool dataAvailable($timeout = 0)
-    {
+    bool dataAvailable($timeout = 0) {
         return true;
     }
 }

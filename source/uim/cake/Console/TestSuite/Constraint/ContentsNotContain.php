@@ -10,7 +10,7 @@
  *
 
  * @since         3.7.0
- * @license       https://www.opensource.org/licenses/mit-license.php MIT License
+
  */
 module uim.cake.consoles.TestSuite\Constraint;
 
@@ -27,8 +27,7 @@ class ContentsNotContain : ContentsBase
      * @param mixed $other Expected
      * @return bool
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return mb_strpos(this.contents, $other) == false;
     }
 

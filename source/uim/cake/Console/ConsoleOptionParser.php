@@ -365,8 +365,7 @@ class ConsoleOptionParser
      *
      * @return bool
      */
-    bool isSubcommandSortEnabled()
-    {
+    bool isSubcommandSortEnabled() {
         return _subcommandSort;
     }
 
@@ -903,8 +902,7 @@ class ConsoleOptionParser
      * @param string $name The name of the option.
      * @return bool
      */
-    protected bool _optionExists(string $name)
-    {
+    protected bool _optionExists(string $name) {
         if (substr($name, 0, 2) == "--") {
             return isset(_options[substr($name, 2)]);
         }

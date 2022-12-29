@@ -1,12 +1,4 @@
 
-
-
- *
-
-
- * @since         3.5.0
- * @license       https://www.opensource.org/licenses/mit-license.php MIT License
- */
 module uim.cake.Console;
 
 import uim.cake.core.App;
@@ -101,8 +93,7 @@ class CommandScanner
      * @param array<string> $hide A list of command names to hide as they are internal commands.
      * @return array The list of shell info arrays based on scanning the filesystem and inflection.
      */
-    protected string[] scanDir(string $path, string $namespace, string $prefix, array $hide): array
-    {
+    protected string[] scanDir(string $path, string $namespace, string $prefix, array $hide) {
         if (!is_dir($path)) {
             return [];
         }

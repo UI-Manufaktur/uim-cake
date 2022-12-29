@@ -23,14 +23,12 @@ class MemoryStorage : IStorage {
     }
 
 
-    void write($user)
-    {
+    void write($user) {
         _user = $user;
     }
 
 
-    void delete()
-    {
+    void delete() {
         _user = null;
     }
 

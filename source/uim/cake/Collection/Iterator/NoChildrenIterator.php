@@ -16,8 +16,7 @@ class NoChildrenIterator : Collection : RecursiveIterator
      *
      * @return bool
      */
-    bool hasChildren()
-    {
+    bool hasChildren() {
         return false;
     }
 
