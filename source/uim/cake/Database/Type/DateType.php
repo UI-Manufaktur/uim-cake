@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.databases.Type;
 
 import uim.cake.I18n\Date;

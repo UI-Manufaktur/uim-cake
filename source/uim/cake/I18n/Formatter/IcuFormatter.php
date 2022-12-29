@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.I18n\Formatter;
 
 import uim.cake.I18n\Exception\I18nException;

@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Datasource;
 
 import uim.cake.core.App;

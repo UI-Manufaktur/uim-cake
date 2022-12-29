@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Form;
 
 import uim.cake.events.EventDispatcherInterface;

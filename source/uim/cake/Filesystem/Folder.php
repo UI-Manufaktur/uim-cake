@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Filesystem;
 
 use DirectoryIterator;

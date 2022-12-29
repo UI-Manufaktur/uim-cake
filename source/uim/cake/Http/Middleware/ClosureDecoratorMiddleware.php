@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.http.Middleware;
 
 use Closure;

@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Http;
 
 use Psr\Http\Message\IResponse;

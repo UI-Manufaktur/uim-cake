@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.I18n;
 
 use RuntimeException;

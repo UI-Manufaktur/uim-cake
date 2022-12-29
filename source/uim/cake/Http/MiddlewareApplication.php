@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Http;
 
 import uim.cake.core.IHttpApplication;
