@@ -113,7 +113,7 @@ class ContextFactory
      *
      * @param uim.cake.Http\ServerRequest myRequest Request instance.
      * @param array<string, mixed> myData The data to get a context provider for.
-     * @return \Cake\View\Form\IContext Context provider.
+     * @return uim.cake.View\Form\IContext Context provider.
      * @throws \RuntimeException When a context instance cannot be generated for given entity.
      */
     auto get(ServerRequest myRequest, array myData = []): IContext

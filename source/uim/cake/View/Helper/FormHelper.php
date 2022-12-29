@@ -283,7 +283,7 @@ class FormHelper : Helper
     /**
      * Get the widget locator currently used by the helper.
      *
-     * @return \Cake\View\Widget\WidgetLocator Current locator instance
+     * @return uim.cake.View\Widget\WidgetLocator Current locator instance
      * @since 3.6.0
      */
     function getWidgetLocator(): WidgetLocator
@@ -309,7 +309,7 @@ class FormHelper : Helper
      *
      * @param uim.cake.View\Form\ContextFactory|null $instance The context factory instance to set.
      * @param array $contexts An array of context providers.
-     * @return \Cake\View\Form\ContextFactory
+     * @return uim.cake.View\Form\ContextFactory
      */
     function contextFactory(?ContextFactory $instance = null, array $contexts = []): ContextFactory
     {
@@ -644,7 +644,7 @@ class FormHelper : Helper
      * Create FormProtector instance.
      *
      * @param array<string, mixed> $formTokenData Token data.
-     * @return \Cake\Form\FormProtector
+     * @return uim.cake.Form\FormProtector
      */
     protected function createFormProtector(array $formTokenData): FormProtector
     {
@@ -659,7 +659,7 @@ class FormHelper : Helper
     /**
      * Get form protector instance.
      *
-     * @return \Cake\Form\FormProtector
+     * @return uim.cake.Form\FormProtector
      * @throws \Cake\Core\Exception\CakeException
      */
     function getFormProtector(): FormProtector
@@ -2396,7 +2396,7 @@ class FormHelper : Helper
      * If there is no active form null will be returned.
      *
      * @param uim.cake.View\Form\ContextInterface|null $context Either the new context when setting, or null to get.
-     * @return \Cake\View\Form\ContextInterface The context for the form.
+     * @return uim.cake.View\Form\ContextInterface The context for the form.
      */
     function context(?ContextInterface $context = null): ContextInterface
     {
@@ -2413,7 +2413,7 @@ class FormHelper : Helper
      * If no type can be matched a NullContext will be returned.
      *
      * @param mixed $data The data to get a context provider for.
-     * @return \Cake\View\Form\ContextInterface Context provider.
+     * @return uim.cake.View\Form\ContextInterface Context provider.
      * @throws \RuntimeException when the context class does not implement the
      *   ContextInterface.
      */

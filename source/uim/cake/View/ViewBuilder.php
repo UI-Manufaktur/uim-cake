@@ -532,7 +532,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param uim.cake.Http\ServerRequest|null $request The request to use.
      * @param uim.cake.Http\Response|null $response The response to use.
      * @param uim.cake.Event\IEventManager|null $events The event manager to use.
-     * @return \Cake\View\View
+     * @return uim.cake.View\View
      * @throws \Cake\View\Exception\MissingViewException
      */
     function build(

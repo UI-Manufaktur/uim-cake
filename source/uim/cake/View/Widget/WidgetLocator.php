@@ -140,7 +140,7 @@ class WidgetLocator
      * the `_default` widget is undefined.
      *
      * @param string $name The widget name to get.
-     * @return \Cake\View\Widget\WidgetInterface WidgetInterface instance.
+     * @return uim.cake.View\Widget\WidgetInterface WidgetInterface instance.
      * @throws \RuntimeException when widget is undefined.
      */
     function get(string $name): WidgetInterface
@@ -174,7 +174,7 @@ class WidgetLocator
      * Resolves a widget spec into an instance.
      *
      * @param mixed $config The widget config.
-     * @return \Cake\View\Widget\WidgetInterface Widget instance.
+     * @return uim.cake.View\Widget\WidgetInterface Widget instance.
      * @throws \ReflectionException
      */
     protected function _resolveWidget($config): WidgetInterface

@@ -300,7 +300,7 @@ class EntityContext : IContext {
      *
      * @param array|null myPath Each one of the parts in a path for a field name
      *  or null to get the entity passed in constructor context.
-     * @return \Cake\Datasource\IEntity|iterable|null
+     * @return uim.cake.Datasource\IEntity|iterable|null
      * @throws \RuntimeException When properties cannot be read.
      */
     function entity(?array myPath = null) {
@@ -580,7 +580,7 @@ class EntityContext : IContext {
      * @param uim.cake.Datasource\IEntity|array<string>|string parts Each one of the parts in a path for a field name
      * @param bool $fallback Whether to fallback to the last found table
      *  when a nonexistent field/property is being encountered.
-     * @return \Cake\ORM\Table|null Table instance or null
+     * @return uim.cake.ORM\Table|null Table instance or null
      */
     protected auto _getTable($parts, $fallback = true): ?Table
     {

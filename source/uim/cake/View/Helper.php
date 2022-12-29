@@ -98,7 +98,7 @@ class Helper : IEventListener
      * Lazy loads helpers.
      *
      * @param string $name Name of the property being accessed.
-     * @return \Cake\View\Helper|null|void Helper instance if helper with provided name exists
+     * @return uim.cake.View\Helper|null|void Helper instance if helper with provided name exists
      */
     function __get(string $name) {
         if (isset(_helperMap[$name]) && !isset(this.{$name})) {
@@ -112,7 +112,7 @@ class Helper : IEventListener
     /**
      * Get the view instance this helper is bound to.
      *
-     * @return \Cake\View\View The bound view instance.
+     * @return uim.cake.View\View The bound view instance.
      */
     function getView(): View
     {

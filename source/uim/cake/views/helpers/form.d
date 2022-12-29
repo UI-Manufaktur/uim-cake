@@ -258,7 +258,7 @@ class FormHelper : Helper
     /**
      * Get the widget locator currently used by the helper.
      *
-     * @return \Cake\View\Widget\WidgetLocator Current locator instance
+     * @return uim.cake.View\Widget\WidgetLocator Current locator instance
 
      */
     auto getWidgetLocator(): WidgetLocator
@@ -284,7 +284,7 @@ class FormHelper : Helper
      *
      * @param uim.cake.View\Form\ContextFactory|null $instance The context factory instance to set.
      * @param array $contexts An array of context providers.
-     * @return \Cake\View\Form\ContextFactory
+     * @return uim.cake.View\Form\ContextFactory
      */
     ContextFactory contextFactory(?ContextFactory $instance = null, array $contexts = []) {
         if ($instance is null) {
@@ -615,7 +615,7 @@ class FormHelper : Helper
      * Create FormProtector instance.
      *
      * @param array<string, mixed> $formTokenData Token data.
-     * @return \Cake\Form\FormProtector
+     * @return uim.cake.Form\FormProtector
      */
     protected FormProtector createFormProtector(array $formTokenData) {
         $session = _View.getRequest().getSession();
@@ -629,7 +629,7 @@ class FormHelper : Helper
     /**
      * Get form protector instance.
      *
-     * @return \Cake\Form\FormProtector
+     * @return uim.cake.Form\FormProtector
      * @throws \Cake\Core\Exception\CakeException
      */
     FormProtector getFormProtector(): 
@@ -2314,7 +2314,7 @@ class FormHelper : Helper
      * If there is no active form null will be returned.
      *
      * @param uim.cake.View\Form\IContext|null $context Either the new context when setting, or null to get.
-     * @return \Cake\View\Form\IContext The context for the form.
+     * @return uim.cake.View\Form\IContext The context for the form.
      */
     IContext context(?IContext $context = null) {
         if ($context instanceof IContext) {
@@ -2330,7 +2330,7 @@ class FormHelper : Helper
      * If no type can be matched a NullContext will be returned.
      *
      * @param mixed myData The data to get a context provider for.
-     * @return \Cake\View\Form\IContext Context provider.
+     * @return uim.cake.View\Form\IContext Context provider.
      * @throws \RuntimeException when the context class does not implement the
      *   IContext.
      */

@@ -34,7 +34,7 @@ trait ViewVarsTrait
     /**
      * Get the view builder being used.
      *
-     * @return \Cake\View\ViewBuilder
+     * @return uim.cake.View\ViewBuilder
      */
     function viewBuilder(): ViewBuilder
     {
@@ -49,7 +49,7 @@ trait ViewVarsTrait
      * Constructs the view class instance based on the current configuration.
      *
      * @param string|null $viewClass Optional namespaced class name of the View class to instantiate.
-     * @return \Cake\View\View
+     * @return uim.cake.View\View
      * @throws \Cake\View\Exception\MissingViewException If view class was not found.
      */
     function createView(?string $viewClass = null): View

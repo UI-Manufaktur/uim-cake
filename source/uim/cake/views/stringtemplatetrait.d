@@ -56,7 +56,7 @@ trait StringTemplateTrait
     /**
      * Returns the templater instance.
      *
-     * @return \Cake\View\StringTemplate
+     * @return uim.cake.View\StringTemplate
      */
     function templater(): StringTemplate
     {

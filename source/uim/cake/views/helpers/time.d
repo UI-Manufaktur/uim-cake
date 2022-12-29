@@ -45,7 +45,7 @@ class TimeHelper : Helper
      *
      * @param \IDateTime|string|int $dateString UNIX timestamp, strtotime() valid string or DateTime object
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
-     * @return \Cake\I18n\FrozenTime
+     * @return uim.cake.I18n\FrozenTime
      */
     function fromString($dateString, $timezone = null): FrozenTime
     {

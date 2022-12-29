@@ -123,7 +123,7 @@ class WidgetLocator
      * the `_default` widget is undefined.
      *
      * @param string myName The widget name to get.
-     * @return \Cake\View\Widget\IWidget IWidget instance.
+     * @return uim.cake.View\Widget\IWidget IWidget instance.
      * @throws \RuntimeException when widget is undefined.
      */
     auto get(string myName): IWidget
@@ -152,7 +152,7 @@ class WidgetLocator
      * Resolves a widget spec into an instance.
      *
      * @param mixed myConfig The widget config.
-     * @return \Cake\View\Widget\IWidget Widget instance.
+     * @return uim.cake.View\Widget\IWidget Widget instance.
      * @throws \ReflectionException
      */
     protected IWidget _resolveWidget(myConfig) {

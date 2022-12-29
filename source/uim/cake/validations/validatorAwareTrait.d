@@ -73,7 +73,7 @@ trait ValidatorAwareTrait
      * class constant.
      *
      * @param string|null myName The name of the validation set to return.
-     * @return \Cake\Validation\Validator
+     * @return uim.cake.Validation\Validator
      */
     auto getValidator(Nullable!string myName = null): Validator
     {
@@ -93,7 +93,7 @@ trait ValidatorAwareTrait
      * use getValidator() method instead.
      *
      * @param string myName The name of the validation set to create.
-     * @return \Cake\Validation\Validator
+     * @return uim.cake.Validation\Validator
      * @throws \RuntimeException
      */
     protected auto createValidator(string myName): Validator
@@ -179,7 +179,7 @@ trait ValidatorAwareTrait
      *
      * @param uim.cake.Validation\Validator $validator The validator that can be modified to
      * add some rules to it.
-     * @return \Cake\Validation\Validator
+     * @return uim.cake.Validation\Validator
      */
     function validationDefault(Validator $validator): Validator
     {

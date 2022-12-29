@@ -80,7 +80,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      * Provide public read access to the loaded objects
      *
      * @param string $name Name of property to read
-     * @return \Cake\View\Helper|null
+     * @return uim.cake.View\Helper|null
      */
     function __get(string $name) {
         if (isset(_loaded[$name])) {
@@ -135,7 +135,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The class to create.
      * @param string $alias The alias of the loaded helper.
      * @param array<string, mixed> $config An array of settings to use for the helper.
-     * @return \Cake\View\Helper The constructed helper class.
+     * @return uim.cake.View\Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected function _create($class, string $alias, array $config): Helper

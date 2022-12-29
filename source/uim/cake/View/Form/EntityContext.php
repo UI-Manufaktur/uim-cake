@@ -333,7 +333,7 @@ class EntityContext : ContextInterface
      *
      * @param array|null $path Each one of the parts in a path for a field name
      *  or null to get the entity passed in constructor context.
-     * @return \Cake\Datasource\EntityInterface|iterable|null
+     * @return uim.cake.Datasource\EntityInterface|iterable|null
      * @throws \RuntimeException When properties cannot be read.
      */
     function entity(?array $path = null) {
@@ -572,7 +572,7 @@ class EntityContext : ContextInterface
      * conventions.
      *
      * @param array $parts Each one of the parts in a path for a field name
-     * @return \Cake\Validation\Validator
+     * @return uim.cake.Validation\Validator
      * @throws \RuntimeException If validator cannot be retrieved based on the parts.
      */
     protected function _getValidator(array $parts): Validator
@@ -619,7 +619,7 @@ class EntityContext : ContextInterface
      * @param uim.cake.Datasource\EntityInterface|array<string>|string $parts Each one of the parts in a path for a field name
      * @param bool $fallback Whether to fallback to the last found table
      *  when a nonexistent field/property is being encountered.
-     * @return \Cake\ORM\Table|null Table instance or null
+     * @return uim.cake.ORM\Table|null Table instance or null
      */
     protected function _getTable($parts, $fallback = true): ?Table
     {

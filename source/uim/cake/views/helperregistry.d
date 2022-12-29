@@ -66,7 +66,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
      * Provide public read access to the loaded objects
      *
      * @param string myName Name of property to read
-     * @return \Cake\View\Helper|null
+     * @return uim.cake.View\Helper|null
      */
     auto __get(string myName) {
         if (isset(_loaded[myName])) {
@@ -118,7 +118,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
      * @param string myClass The class to create.
      * @param string myAlias The alias of the loaded helper.
      * @param array<string, mixed> myConfig An array of settings to use for the helper.
-     * @return \Cake\View\Helper The constructed helper class.
+     * @return uim.cake.View\Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Helper _create(myClass, string myAlias, array myConfig) {

@@ -400,7 +400,7 @@ class View : EventDispatcherInterface
     /**
      * Gets the request instance.
      *
-     * @return \Cake\Http\ServerRequest
+     * @return uim.cake.Http\ServerRequest
      * @since 3.7.0
      */
     function getRequest(): ServerRequest
@@ -428,7 +428,7 @@ class View : EventDispatcherInterface
     /**
      * Gets the response instance.
      *
-     * @return \Cake\Http\Response
+     * @return uim.cake.Http\Response
      */
     function getResponse(): Response
     {
@@ -1096,7 +1096,7 @@ class View : EventDispatcherInterface
      * Magic accessor for helpers.
      *
      * @param string $name Name of the attribute to get.
-     * @return \Cake\View\Helper|null
+     * @return uim.cake.View\Helper|null
      */
     function __get(string $name) {
         $registry = this.helpers();
@@ -1204,7 +1204,7 @@ class View : EventDispatcherInterface
     /**
      * Get the helper registry in use by this View class.
      *
-     * @return \Cake\View\HelperRegistry
+     * @return uim.cake.View\HelperRegistry
      */
     function helpers(): HelperRegistry
     {
@@ -1220,7 +1220,7 @@ class View : EventDispatcherInterface
      *
      * @param string $name Name of the helper to load.
      * @param array<string, mixed> $config Settings for the helper
-     * @return \Cake\View\Helper a constructed helper object.
+     * @return uim.cake.View\Helper a constructed helper object.
      * @see uim.cake.View\HelperRegistry::load()
      */
     function loadHelper(string $name, array $config = []): Helper

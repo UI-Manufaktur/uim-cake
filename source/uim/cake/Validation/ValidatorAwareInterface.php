@@ -22,7 +22,7 @@ interface ValidatorAwareInterface
      * class constant.
      *
      * @param string|null $name The name of the validation set to return.
-     * @return \Cake\Validation\Validator
+     * @return uim.cake.Validation\Validator
      */
     function getValidator(?string $name = null): Validator;
 
