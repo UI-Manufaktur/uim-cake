@@ -51,8 +51,8 @@ class Command : BaseCommand
     /**
      * Implement this method with your command"s logic.
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null|void The exit code or null for success
      */
     function execute(Arguments $args, ConsoleIo $io) {

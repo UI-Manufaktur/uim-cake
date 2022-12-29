@@ -70,7 +70,7 @@ class InsertIterator : Collection
      *
      * @return void
      */
-    function next(): void
+    void next()
     {
         parent::next();
         if (_validValues) {
@@ -111,7 +111,7 @@ class InsertIterator : Collection
      *
      * @return void
      */
-    function rewind(): void
+    void rewind()
     {
         parent::rewind();
         _values.rewind();

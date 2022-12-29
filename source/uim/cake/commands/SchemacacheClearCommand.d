@@ -21,8 +21,8 @@ class SchemacacheClearCommand : Command {
     /**
      * Display all routes in an application
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
     int execute(Arguments $args, ConsoleIo $io) {
@@ -50,8 +50,8 @@ class SchemacacheClearCommand : Command {
     /**
      * Get the option parser.
      *
-     * @param uim.cake.Console\ConsoleOptionParser $parser The option parser to update
-     * @return uim.cake.Console\ConsoleOptionParser
+     * @param uim.cake.consoles.ConsoleOptionParser $parser The option parser to update
+     * @return uim.cake.consoles.ConsoleOptionParser
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
       $parser.setDescription(

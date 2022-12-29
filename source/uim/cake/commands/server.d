@@ -35,8 +35,8 @@ class ServerCommand : Command {
      * Starts up the Command and displays the welcome message.
      * Allows for checking and configuring prior to command or main execution
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @link https://book.UIM.org/4/en/console-and-shells.html#hook-methods
      */
     protected void startup(Arguments $args, ConsoleIo $io) {
@@ -79,8 +79,8 @@ class ServerCommand : Command {
     /**
      * Execute.
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
     Nullable!int execute(Arguments $args, ConsoleIo $io) {
@@ -111,8 +111,8 @@ class ServerCommand : Command {
     /**
      * Hook method for defining this command"s option parser.
      *
-     * @param uim.cake.Console\ConsoleOptionParser $parser The option parser to update
-     * @return uim.cake.Console\ConsoleOptionParser
+     * @param uim.cake.consoles.ConsoleOptionParser $parser The option parser to update
+     * @return uim.cake.consoles.ConsoleOptionParser
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
       $parser.setDescription([

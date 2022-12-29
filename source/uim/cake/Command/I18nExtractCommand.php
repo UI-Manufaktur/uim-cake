@@ -115,10 +115,10 @@ class I18nExtractCommand : Command
     /**
      * Method to interact with the user and get path selections.
      *
-     * @param uim.cake.Console\ConsoleIo $io The io instance.
+     * @param uim.cake.consoles.ConsoleIo $io The io instance.
      * @return void
      */
-    protected function _getPaths(ConsoleIo $io): void
+    protected void _getPaths(ConsoleIo $io)
     {
         /** @psalm-suppress UndefinedConstant */
         $defaultPaths = array_merge(
@@ -158,8 +158,8 @@ class I18nExtractCommand : Command
     /**
      * Execute the command
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
@@ -275,7 +275,7 @@ class I18nExtractCommand : Command
      * @param array $details Context and plural form if any, file and line references
      * @return void
      */
-    protected function _addTranslation(string $domain, string $msgid, array $details = []): void
+    protected void _addTranslation(string $domain, string $msgid, array $details = [])
     {
         $context = $details["msgctxt"] ?? "";
 
@@ -298,11 +298,11 @@ class I18nExtractCommand : Command
     /**
      * Extract text
      *
-     * @param uim.cake.Console\Arguments $args The Arguments instance
-     * @param uim.cake.Console\ConsoleIo $io The io instance
+     * @param uim.cake.consoles.Arguments $args The Arguments instance
+     * @param uim.cake.consoles.ConsoleIo $io The io instance
      * @return void
      */
-    protected function _extract(Arguments $args, ConsoleIo $io): void
+    protected void _extract(Arguments $args, ConsoleIo $io)
     {
         $io.out();
         $io.out();
@@ -331,8 +331,8 @@ class I18nExtractCommand : Command
     /**
      * Gets the option parser instance and configures it.
      *
-     * @param uim.cake.Console\ConsoleOptionParser $parser The parser to configure
-     * @return uim.cake.Console\ConsoleOptionParser
+     * @param uim.cake.consoles.ConsoleOptionParser $parser The parser to configure
+     * @return uim.cake.consoles.ConsoleOptionParser
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
@@ -386,11 +386,11 @@ class I18nExtractCommand : Command
     /**
      * Extract tokens out of all files to be processed
      *
-     * @param uim.cake.Console\Arguments $args The io instance
-     * @param uim.cake.Console\ConsoleIo $io The io instance
+     * @param uim.cake.consoles.Arguments $args The io instance
+     * @param uim.cake.consoles.ConsoleIo $io The io instance
      * @return void
      */
-    protected function _extractTokens(Arguments $args, ConsoleIo $io): void
+    protected void _extractTokens(Arguments $args, ConsoleIo $io)
     {
         /** @var uim.cake.Shell\Helper\ProgressHelper $progress */
         $progress = $io.helper("progress");
@@ -443,12 +443,12 @@ class I18nExtractCommand : Command
     /**
      * Parse tokens
      *
-     * @param uim.cake.Console\ConsoleIo $io The io instance
+     * @param uim.cake.consoles.ConsoleIo $io The io instance
      * @param string $functionName Function name that indicates translatable string (e.g: "__")
      * @param array $map Array containing what variables it will find (e.g: domain, singular, plural)
      * @return void
      */
-    protected function _parse(ConsoleIo $io, string $functionName, array $map): void
+    protected void _parse(ConsoleIo $io, string $functionName, array $map)
     {
         $count = 0;
         $tokenCount = count(_tokens);
@@ -507,10 +507,10 @@ class I18nExtractCommand : Command
     /**
      * Build the translate template file contents out of obtained strings
      *
-     * @param uim.cake.Console\Arguments $args Console arguments
+     * @param uim.cake.consoles.Arguments $args Console arguments
      * @return void
      */
-    protected function _buildFiles(Arguments $args): void
+    protected void _buildFiles(Arguments $args)
     {
         $paths = _paths;
         /** @psalm-suppress UndefinedConstant */
@@ -574,7 +574,7 @@ class I18nExtractCommand : Command
      * @param string $sentence The sentence to store.
      * @return void
      */
-    protected function _store(string $domain, string $header, string $sentence): void
+    protected void _store(string $domain, string $header, string $sentence)
     {
         _storage[$domain] = _storage[$domain] ?? [];
 
@@ -588,11 +588,11 @@ class I18nExtractCommand : Command
     /**
      * Write the files that need to be stored
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return void
      */
-    protected function _writeFiles(Arguments $args, ConsoleIo $io): void
+    protected void _writeFiles(Arguments $args, ConsoleIo $io)
     {
         $io.out();
         $overwriteAll = false;
@@ -759,14 +759,14 @@ class I18nExtractCommand : Command
     /**
      * Indicate an invalid marker on a processed file
      *
-     * @param uim.cake.Console\ConsoleIo $io The io instance.
+     * @param uim.cake.consoles.ConsoleIo $io The io instance.
      * @param string $file File where invalid marker resides
      * @param int $line Line number
      * @param string $marker Marker found
      * @param int $count Count
      * @return void
      */
-    protected function _markerError($io, string $file, int $line, string $marker, int $count): void
+    protected void _markerError($io, string $file, int $line, string $marker, int $count)
     {
         if (strpos(_file, CAKE_CORE_INCLUDE_PATH) == false) {
             _countMarkerError++;
@@ -804,7 +804,7 @@ class I18nExtractCommand : Command
      *
      * @return void
      */
-    protected function _searchFiles(): void
+    protected void _searchFiles()
     {
         $pattern = false;
         if (!empty(_exclude)) {

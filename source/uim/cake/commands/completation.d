@@ -16,14 +16,14 @@ use ReflectionMethod;
 class CompletionCommand : Command : ICommandCollectionAware
 {
     /**
-     * @var uim.cake.Console\CommandCollection
+     * @var uim.cake.consoles.CommandCollection
      */
     protected commands;
 
     /**
      * Set the command collection used to get completion data on.
      *
-     * @param uim.cake.Console\CommandCollection $commands The command collection
+     * @param uim.cake.consoles.CommandCollection $commands The command collection
      */
     void setCommandCollection(CommandCollection $commands) {
         this.commands = $commands;
@@ -32,8 +32,8 @@ class CompletionCommand : Command : ICommandCollectionAware
     /**
      * Gets the option parser instance and configures it.
      *
-     * @param uim.cake.Console\ConsoleOptionParser $parser The parser to build
-     * @return uim.cake.Console\ConsoleOptionParser
+     * @param uim.cake.consoles.ConsoleOptionParser $parser The parser to build
+     * @return uim.cake.consoles.ConsoleOptionParser
      */
     functConsoleOptionParserion buildOptionParser(ConsoleOptionParser $parser) {
         myModes = [
@@ -75,8 +75,8 @@ class CompletionCommand : Command : ICommandCollectionAware
     /**
      * Main function Prints out the list of commands.
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int
      */
     Nullable!int execute(Arguments $args, ConsoleIo $io) {
@@ -100,8 +100,8 @@ class CompletionCommand : Command : ICommandCollectionAware
     /**
      * Get the list of defined commands.
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      */
     protected int getCommands(Arguments $args, ConsoleIo $io) {
         myOptions = [];
@@ -118,8 +118,8 @@ class CompletionCommand : Command : ICommandCollectionAware
     /**
      * Get the list of defined sub-commands.
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int
      */
     protected int getSubcommands(Arguments $args, ConsoleIo $io) {
@@ -161,7 +161,7 @@ class CompletionCommand : Command : ICommandCollectionAware
     /**
      * Reflect the subcommands names out of a shell.
      *
-     * @param uim.cake.Console\Shell myShell The shell to get commands for
+     * @param uim.cake.consoles.Shell myShell The shell to get commands for
      * @return A list of commands
      */
     protected string[] shellSubcommands(Shell myShell) {
@@ -197,8 +197,8 @@ class CompletionCommand : Command : ICommandCollectionAware
     /**
      * Get the options for a command or subcommand
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int
      */
     protected Nullable!int getOptions(Arguments $args, ConsoleIo $io) {

@@ -16,14 +16,14 @@ trait PluginAssetsTrait
     /**
      * Arguments
      *
-     * @var uim.cake.Console\Arguments
+     * @var uim.cake.consoles.Arguments
      */
     protected $args;
 
     /**
      * Console IO
      *
-     * @var uim.cake.Console\ConsoleIo
+     * @var uim.cake.consoles.ConsoleIo
      */
     protected $io;
 
@@ -85,7 +85,7 @@ trait PluginAssetsTrait
      * @param bool $overwrite Overwrite existing files.
      * @return void
      */
-    protected function _process(array $plugins, bool $copy = false, bool $overwrite = false): void
+    protected void _process(array $plugins, bool $copy = false, bool $overwrite = false)
     {
         foreach ($plugins as $plugin: $config) {
             this.io.out();

@@ -91,7 +91,7 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @return void
      */
-    function rewind(): void
+    void rewind()
     {
         if (_index == 0 && !_started) {
             _started = true;
@@ -139,7 +139,7 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @return void
      */
-    function next(): void
+    void next()
     {
         _index++;
 
@@ -205,7 +205,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * @param string $collection The serialized buffer iterator
      * @return void
      */
-    function unserialize($collection): void
+    void unserialize($collection)
     {
         __construct([]);
         _buffer = unserialize($collection);
@@ -219,7 +219,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * @param array $data Data array.
      * @return void
      */
-    function __unserialize(array $data): void
+    void __unserialize(array $data)
     {
         __construct([]);
 

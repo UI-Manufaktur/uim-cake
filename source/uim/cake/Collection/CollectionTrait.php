@@ -251,12 +251,12 @@ trait CollectionTrait
     {
         $callback = _propertyExtractor($path);
 
-        $mapper = function ($value, $key, $mr) use ($callback): void {
+        $mapper = void ($value, $key, $mr) use ($callback) {
             /** @var uim.cake.Collection\Iterator\MapReduce $mr */
             $mr.emitIntermediate($value, $callback($value));
         };
 
-        $reducer = function ($values, $key, $mr): void {
+        $reducer = void ($values, $key, $mr) {
             /** @var uim.cake.Collection\Iterator\MapReduce $mr */
             $mr.emit(count($values), $key);
         };
@@ -512,7 +512,7 @@ trait CollectionTrait
             );
         };
 
-        $reducer = function ($values, $key, MapReduce $mapReduce): void {
+        $reducer = void ($values, $key, MapReduce $mapReduce) {
             $result = [];
             foreach ($values as $value) {
                 $result += $value;
@@ -531,7 +531,7 @@ trait CollectionTrait
         $parentPath = _propertyExtractor($parentPath);
         $isObject = true;
 
-        $mapper = function ($row, $key, MapReduce $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey): void {
+        $mapper = void ($row, $key, MapReduce $mapReduce) use (&$parents, $idPath, $parentPath, $nestingKey) {
             $row[$nestingKey] = [];
             $id = $idPath($row, $key);
             $parentId = $parentPath($row, $key);

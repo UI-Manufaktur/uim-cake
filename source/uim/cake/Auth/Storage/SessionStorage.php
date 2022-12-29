@@ -82,7 +82,7 @@ class SessionStorage : IStorage
      * @param \ArrayAccess|array $user User record.
      * @return void
      */
-    function write($user): void
+    void write($user)
     {
         _user = $user;
 
@@ -97,7 +97,7 @@ class SessionStorage : IStorage
      *
      * @return void
      */
-    function delete(): void
+    void delete()
     {
         _user = false;
 

@@ -23,22 +23,22 @@ class PluginLoadCommand : Command
     /**
      * Arguments
      *
-     * @var uim.cake.Console\Arguments
+     * @var uim.cake.consoles.Arguments
      */
     protected $args;
 
     /**
      * Console IO
      *
-     * @var uim.cake.Console\ConsoleIo
+     * @var uim.cake.consoles.ConsoleIo
      */
     protected $io;
 
     /**
      * Execute the command
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
@@ -73,7 +73,7 @@ class PluginLoadCommand : Command
      * @param string $plugin The plugin name to add.
      * @return void
      */
-    protected function modifyApplication(string $app, string $plugin): void
+    protected void modifyApplication(string $app, string $plugin)
     {
         $contents = file_get_contents($app);
 
@@ -107,8 +107,8 @@ class PluginLoadCommand : Command
     /**
      * Get the option parser.
      *
-     * @param uim.cake.Console\ConsoleOptionParser $parser The option parser to update
-     * @return uim.cake.Console\ConsoleOptionParser
+     * @param uim.cake.consoles.ConsoleOptionParser $parser The option parser to update
+     * @return uim.cake.consoles.ConsoleOptionParser
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
