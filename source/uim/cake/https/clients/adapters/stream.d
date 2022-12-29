@@ -67,7 +67,7 @@ class Stream : IAdapter
      *
      * @param array $headers The list of headers from the request(s)
      * @param string myContents The response content.
-     * @return array<\Cake\Http\Client\Response> The list of responses from the request(s)
+     * @return array<uim.cake.Http\Client\Response> The list of responses from the request(s)
      */
     array createResponses(array $headers, string myContents) {
         $indexes = $responses = [];
@@ -131,7 +131,7 @@ class Stream : IAdapter
      * Builds the request content based on the request object.
      *
      * If the myRequest.body() is a string, it will be used as is.
-     * Array data will be processed with {@link \Cake\Http\Client\FormData}
+     * Array data will be processed with {@link uim.cake.Http\Client\FormData}
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request being sent.
      * @param array<string, mixed> myOptions Array of options to use.

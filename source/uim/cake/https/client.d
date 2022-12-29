@@ -33,7 +33,7 @@ import uim.cake;
  *
  * You can use the "cookieJar" constructor option to provide a custom
  * cookie jar instance you"ve restored from cache/disk. By default,
- * an empty instance of {@link \Cake\Http\Client\CookieCollection} will be created.
+ * an empty instance of {@link uim.cake.Http\Client\CookieCollection} will be created.
  *
  * ### Sending request bodies
  *
@@ -141,8 +141,8 @@ class Client : ClientInterface
      *   Defaults to true.
      * - redirect - Number of redirects to follow. Defaults to false.
      * - adapter - The adapter class name or instance. Defaults to
-     *   \Cake\Http\Client\Adapter\Curl if `curl` extension is loaded else
-     *   \Cake\Http\Client\Adapter\Stream.
+     *   uim.cake.Http\Client\Adapter\Curl if `curl` extension is loaded else
+     *   uim.cake.Http\Client\Adapter\Stream.
      * - protocolVersion - The HTTP protocol version to use. Defaults to 1.1
      *
      * @param array<string, mixed> myConfig Config options for scoped clients.

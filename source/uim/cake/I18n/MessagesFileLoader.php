@@ -75,7 +75,7 @@ class MessagesFileLoader
      * @param string $extension The file extension to use. This will also be mapped
      * to a messages parser class.
      */
-    public this(string $name, string $locale, string $extension = "po") {
+    this(string $name, string $locale, string $extension = "po") {
         _name = $name;
         _locale = $locale;
         _extension = $extension;

@@ -69,7 +69,7 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * @var int
      */
-    public const TOKEN_VALUE_LENGTH = 16;
+    const TOKEN_VALUE_LENGTH = 16;
 
     /**
      * Tokens have an hmac generated so we can ensure
@@ -80,7 +80,7 @@ class CsrfProtectionMiddleware : IMiddleware
      * We are currently using sha1 for the hmac which
      * creates 40 bytes.
     */
-    public const int TOKEN_WITH_CHECKSUM_LENGTH = 56;
+    const int TOKEN_WITH_CHECKSUM_LENGTH = 56;
 
     /**
      * Constructor

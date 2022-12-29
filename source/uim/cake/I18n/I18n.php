@@ -24,7 +24,7 @@ class I18n
      *
      * @var string
      */
-    public const DEFAULT_LOCALE = "en_US";
+    const DEFAULT_LOCALE = "en_US";
 
     /**
      * The translators collection
@@ -47,7 +47,7 @@ class I18n
      *
      * @return uim.cake.I18n\TranslatorRegistry The translator collection.
      */
-    public static function translators(): TranslatorRegistry
+    static function translators(): TranslatorRegistry
     {
         if (static::$_collection != null) {
             return static::$_collection;
@@ -79,7 +79,7 @@ class I18n
      *
      * ```
      *  I18n::setTranslator("default", function () {
-     *      $package = new \Cake\I18n\Package();
+     *      $package = new uim.cake.I18n\Package();
      *      $package.setMessages([
      *          "Cake": "Gâteau"
      *      ]);
@@ -108,7 +108,7 @@ class I18n
      * @param string|null $locale The locale for the translator.
      * @return void
      */
-    public static function setTranslator(string $name, callable $loader, ?string $locale = null): void
+    static function setTranslator(string $name, callable $loader, ?string $locale = null): void
     {
         $locale = $locale ?: static::getLocale();
 
@@ -128,7 +128,7 @@ class I18n
      * @return uim.cake.I18n\Translator The configured translator.
      * @throws uim.cake.I18n\Exception\I18nException
      */
-    public static function getTranslator(string $name = "default", ?string $locale = null): Translator
+    static function getTranslator(string $name = "default", ?string $locale = null): Translator
     {
         $translators = static::translators();
 
@@ -195,7 +195,7 @@ class I18n
      * instance to be used for assembling a new translator.
      * @return void
      */
-    public static function config(string $name, callable $loader): void
+    static function config(string $name, callable $loader): void
     {
         static::translators().registerLoader($name, $loader);
     }
@@ -207,7 +207,7 @@ class I18n
      * @param string $locale The name of the locale to set as default.
      * @return void
      */
-    public static function setLocale(string $locale): void
+    static function setLocale(string $locale): void
     {
         static::getDefaultLocale();
         Locale::setDefault($locale);
@@ -222,7 +222,7 @@ class I18n
      *
      * @return string The name of the default locale.
      */
-    public static function getLocale(): string
+    static function getLocale(): string
     {
         static::getDefaultLocale();
         $current = Locale::getDefault();
@@ -243,7 +243,7 @@ class I18n
      *
      * @return string
      */
-    public static function getDefaultLocale(): string
+    static function getDefaultLocale(): string
     {
         if (static::$_defaultLocale == null) {
             static::$_defaultLocale = Locale::getDefault() ?: static::DEFAULT_LOCALE;
@@ -257,7 +257,7 @@ class I18n
      *
      * @return string The name of the formatter.
      */
-    public static function getDefaultFormatter(): string
+    static function getDefaultFormatter(): string
     {
         return static::translators().defaultFormatter();
     }
@@ -270,7 +270,7 @@ class I18n
      * @param string $name The name of the formatter to use.
      * @return void
      */
-    public static function setDefaultFormatter(string $name): void
+    static function setDefaultFormatter(string $name): void
     {
         static::translators().defaultFormatter($name);
     }
@@ -281,7 +281,7 @@ class I18n
      * @param bool $enable flag to enable or disable fallback
      * @return void
      */
-    public static function useFallback(bool $enable = true): void
+    static function useFallback(bool $enable = true): void
     {
         static::translators().useFallback($enable);
     }
@@ -292,7 +292,7 @@ class I18n
      *
      * @return void
      */
-    public static function clear(): void
+    static function clear(): void
     {
         static::$_collection = null;
     }

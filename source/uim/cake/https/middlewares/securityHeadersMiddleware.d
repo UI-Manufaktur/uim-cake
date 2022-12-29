@@ -10,70 +10,70 @@ import uim.cake;
  */
 class SecurityHeadersMiddleware : IMiddleware {
     /** @var string X-Content-Type-Option nosniff */
-    public const NOSNIFF = "nosniff";
+    const NOSNIFF = "nosniff";
 
     /** @var string X-Download-Option noopen */
-    public const NOOPEN = "noopen";
+    const NOOPEN = "noopen";
 
     /** @var string Referrer-Policy no-referrer */
-    public const NO_REFERRER = "no-referrer";
+    const NO_REFERRER = "no-referrer";
 
     /** @var string Referrer-Policy no-referrer-when-downgrade */
-    public const NO_REFERRER_WHEN_DOWNGRADE = "no-referrer-when-downgrade";
+    const NO_REFERRER_WHEN_DOWNGRADE = "no-referrer-when-downgrade";
 
     /** @var string Referrer-Policy origin */
-    public const ORIGIN = "origin";
+    const ORIGIN = "origin";
 
     /** @var string Referrer-Policy origin-when-cross-origin */
-    public const ORIGIN_WHEN_CROSS_ORIGIN = "origin-when-cross-origin";
+    const ORIGIN_WHEN_CROSS_ORIGIN = "origin-when-cross-origin";
 
     /** @var string Referrer-Policy same-origin */
-    public const SAME_ORIGIN = "same-origin";
+    const SAME_ORIGIN = "same-origin";
 
     /** @var string Referrer-Policy strict-origin */
-    public const STRICT_ORIGIN = "strict-origin";
+    const STRICT_ORIGIN = "strict-origin";
 
     /** @var string Referrer-Policy strict-origin-when-cross-origin */
-    public const STRICT_ORIGIN_WHEN_CROSS_ORIGIN = "strict-origin-when-cross-origin";
+    const STRICT_ORIGIN_WHEN_CROSS_ORIGIN = "strict-origin-when-cross-origin";
 
     /** @var string Referrer-Policy unsafe-url */
-    public const UNSAFE_URL = "unsafe-url";
+    const UNSAFE_URL = "unsafe-url";
 
     /** @var string X-Frame-Option deny */
-    public const DENY = "deny";
+    const DENY = "deny";
 
     /** @var string X-Frame-Option sameorigin */
-    public const SAMEORIGIN = "sameorigin";
+    const SAMEORIGIN = "sameorigin";
 
     /** @var string X-Frame-Option allow-from */
-    public const ALLOW_FROM = "allow-from";
+    const ALLOW_FROM = "allow-from";
 
     /** @var string X-XSS-Protection block, sets enabled with block */
-    public const XSS_BLOCK = "block";
+    const XSS_BLOCK = "block";
 
     /** @var string X-XSS-Protection enabled with block */
-    public const XSS_ENABLED_BLOCK = "1; mode=block";
+    const XSS_ENABLED_BLOCK = "1; mode=block";
 
     /** @var string X-XSS-Protection enabled */
-    public const XSS_ENABLED = "1";
+    const XSS_ENABLED = "1";
 
     /** @var string X-XSS-Protection disabled */
-    public const XSS_DISABLED = "0";
+    const XSS_DISABLED = "0";
 
     /** @var string X-Permitted-Cross-Domain-Policy all */
-    public const ALL = "all";
+    const ALL = "all";
 
     /** @var string X-Permitted-Cross-Domain-Policy none */
-    public const NONE = "none";
+    const NONE = "none";
 
     /** @var string X-Permitted-Cross-Domain-Policy master-only */
-    public const MASTER_ONLY = "master-only";
+    const MASTER_ONLY = "master-only";
 
     /** @var string X-Permitted-Cross-Domain-Policy by-content-type */
-    public const BY_CONTENT_TYPE = "by-content-type";
+    const BY_CONTENT_TYPE = "by-content-type";
 
     /** @var string X-Permitted-Cross-Domain-Policy by-ftp-filename */
-    public const BY_FTP_FILENAME = "by-ftp-filename";
+    const BY_FTP_FILENAME = "by-ftp-filename";
 
     /**
      * Security related headers to set

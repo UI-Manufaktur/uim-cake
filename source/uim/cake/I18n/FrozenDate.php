@@ -16,7 +16,7 @@ use IntlDateFormatter;
  *
  * Adds handy methods and locale-aware formatting helpers
  *
- * This object provides an immutable variant of {@link \Cake\I18n\Date}
+ * This object provides an immutable variant of {@link uim.cake.I18n\Date}
  */
 class FrozenDate : ChronosDate : I18nDateTimeInterface
 {
@@ -62,7 +62,7 @@ class FrozenDate : ChronosDate : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\DateFormatTrait::parseDate()
      */
-    public static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
+    static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
 
     /**
      * The format to use when formatting a time using `Cake\I18n\Date::nice()`
@@ -78,7 +78,7 @@ class FrozenDate : ChronosDate : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\DateFormatTrait::nice()
      */
-    public static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE];
+    static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE];
 
     /**
      * The format to use when formatting a time using `Date::timeAgoInWords()`
@@ -87,7 +87,7 @@ class FrozenDate : ChronosDate : I18nDateTimeInterface
      * @var array<string>
      * @see uim.cake.I18n\Date::timeAgoInWords()
      */
-    public static $wordAccuracy = [
+    static $wordAccuracy = [
         "year": "day",
         "month": "day",
         "week": "day",
@@ -103,7 +103,7 @@ class FrozenDate : ChronosDate : I18nDateTimeInterface
      * @var string
      * @see uim.cake.I18n\Date::timeAgoInWords()
      */
-    public static $wordEnd = "+1 month";
+    static $wordEnd = "+1 month";
 
     /**
      * Create a new Date instance.
@@ -123,7 +123,7 @@ class FrozenDate : ChronosDate : I18nDateTimeInterface
      * @param \DateTimeZone|string|null $tz The timezone in which the date is taken.
      *                                  Ignored if `$time` is a DateTimeInterface instance.
      */
-    public this($time = "now", $tz = null) {
+    this($time = "now", $tz = null) {
         super(($time, $tz);
     }
 

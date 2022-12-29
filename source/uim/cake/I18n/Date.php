@@ -62,7 +62,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\DateFormatTrait::parseDate()
      */
-    public static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
+    static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
 
     /**
      * The format to use when formatting a time using `Cake\I18n\Date::nice()`
@@ -78,7 +78,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\DateFormatTrait::nice()
      */
-    public static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE];
+    static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE];
 
     /**
      * The format to use when formatting a time using `Date::timeAgoInWords()`
@@ -87,7 +87,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * @var array<string>
      * @see uim.cake.I18n\Date::timeAgoInWords()
      */
-    public static $wordAccuracy = [
+    static $wordAccuracy = [
         "year": "day",
         "month": "day",
         "week": "day",
@@ -103,7 +103,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * @var string
      * @see uim.cake.I18n\Date::timeAgoInWords()
      */
-    public static $wordEnd = "+1 month";
+    static $wordEnd = "+1 month";
 
     /**
      * Create a new FrozenDate instance.
@@ -123,7 +123,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * @param \DateTimeZone|string|null $tz The timezone in which the date is taken.
      *                                  Ignored if `$time` is a DateTimeInterface instance.
      */
-    public this($time = "now", $tz = null) {
+    this($time = "now", $tz = null) {
         deprecationWarning(
             "The `Date` class has been deprecated. Use the immutable alternative `FrozenDate` instead",
             0

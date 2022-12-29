@@ -81,7 +81,7 @@ class ServerRequest : IServerRequest
      *
      * @var bool
      */
-    public $trustProxy = false;
+    $trustProxy = false;
 
     /**
      * Trusted proxies list
@@ -93,7 +93,7 @@ class ServerRequest : IServerRequest
     /**
      * The built in detectors used with `is()` can be modified with `addDetector()`.
      *
-     * There are several ways to specify a detector, see \Cake\Http\ServerRequest::addDetector() for the
+     * There are several ways to specify a detector, see uim.cake.Http\ServerRequest::addDetector() for the
      * various formats and ways to define detectors.
      *
      * @var array<callable|array>
@@ -437,7 +437,7 @@ class ServerRequest : IServerRequest
      * Check whether a Request is a certain type.
      *
      * Uses the built-in detection rules as well as additional rules
-     * defined with {@link \Cake\Http\ServerRequest::addDetector()}. Any detector can be called
+     * defined with {@link uim.cake.Http\ServerRequest::addDetector()}. Any detector can be called
      * as `is(myType)` or `is$Type()`.
      *
      * @param array<string>|string myType The type of request you want to check. If an array
@@ -475,7 +475,7 @@ class ServerRequest : IServerRequest
     }
 
     /**
-     * Worker for the public is() function
+     * Worker for the is() function
      *
      * @param string myType The type of request you want to check.
      * @param array $args Array of custom detector arguments.
@@ -1043,7 +1043,7 @@ class ServerRequest : IServerRequest
      * Parse the HTTP_ACCEPT header and return a sorted array with content types
      * as the keys, and pref values as the values.
      *
-     * Generally you want to use {@link \Cake\Http\ServerRequest::accepts()} to get a simple list
+     * Generally you want to use {@link uim.cake.Http\ServerRequest::accepts()} to get a simple list
      * of the accepted content types.
      *
      * @return array An array of `prefValue: [content/types]`
@@ -1057,11 +1057,11 @@ class ServerRequest : IServerRequest
      *
      * Get the list of accepted languages:
      *
-     * ``` \Cake\Http\ServerRequest::acceptLanguage(); ```
+     * ``` uim.cake.Http\ServerRequest::acceptLanguage(); ```
      *
      * Check if a specific language is accepted:
      *
-     * ``` \Cake\Http\ServerRequest::acceptLanguage("es-es"); ```
+     * ``` uim.cake.Http\ServerRequest::acceptLanguage("es-es"); ```
      *
      * @param string|null myLanguage The language to test.
      * @return array|bool If a myLanguage is provided, a boolean. Otherwise the array of accepted languages.
@@ -1253,7 +1253,7 @@ class ServerRequest : IServerRequest
      * Get a cookie collection based on the request"s cookies
      *
      * The CookieCollection lets you interact with request cookies using
-     * `\Cake\Http\Cookie\Cookie` objects and can make converting request cookies
+     * `uim.cake.Http\Cookie\Cookie` objects and can make converting request cookies
      * into response cookies easier.
      *
      * This method will create a new cookie collection each time it is called.

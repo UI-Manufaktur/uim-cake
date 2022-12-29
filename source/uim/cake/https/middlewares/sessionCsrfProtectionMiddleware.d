@@ -62,7 +62,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     /**
      * @var int
      */
-    public const TOKEN_VALUE_LENGTH = 32;
+    const TOKEN_VALUE_LENGTH = 32;
 
     /**
      * Constructor

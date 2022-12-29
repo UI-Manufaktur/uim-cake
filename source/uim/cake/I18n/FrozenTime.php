@@ -17,7 +17,7 @@ use IntlDateFormatter;
  * : the built-in DateTime class to provide handy methods and locale-aware
  * formatting helpers
  *
- * This object provides an immutable variant of {@link \Cake\I18n\Time}
+ * This object provides an immutable variant of {@link uim.cake.I18n\Time}
  */
 class FrozenTime : Chronos : I18nDateTimeInterface
 {
@@ -70,7 +70,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\FrozenTime::nice()
      */
-    public static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT];
+    static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT];
 
     /**
      * The format to use when formatting a time using `Cake\I18n\FrozenTime::timeAgoInWords()`
@@ -79,7 +79,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\FrozenTime::timeAgoInWords()
      */
-    public static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
+    static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
 
     /**
      * The format to use when formatting a time using `Time::timeAgoInWords()`
@@ -88,7 +88,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @var array<string>
      * @see uim.cake.I18n\FrozenTime::timeAgoInWords()
      */
-    public static $wordAccuracy = [
+    static $wordAccuracy = [
         "year": "day",
         "month": "day",
         "week": "day",
@@ -104,14 +104,14 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @var string
      * @see uim.cake.I18n\FrozenTime::timeAgoInWords()
      */
-    public static $wordEnd = "+1 month";
+    static $wordEnd = "+1 month";
 
     /**
      * serialise the value as a Unix Timestamp
      *
      * @var string
      */
-    public const UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
+    const UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
 
     /**
      * Create a new immutable time instance.
@@ -119,7 +119,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @param \DateTimeInterface|string|int|null $time Fixed or relative time
      * @param \DateTimeZone|string|null $tz The timezone for the instance
      */
-    public this($time = null, $tz = null) {
+    this($time = null, $tz = null) {
         if ($time instanceof DateTimeInterface) {
             $tz = $time.getTimezone();
             $time = $time.format("Y-m-d H:i:s.u");
@@ -190,7 +190,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @return array List of timezone identifiers
      * @since 2.2
      */
-    public static function listTimezones($filter = null, ?string $country = null, $options = []): array
+    static function listTimezones($filter = null, ?string $country = null, $options = []): array
     {
         if (is_bool($options)) {
             $options = [

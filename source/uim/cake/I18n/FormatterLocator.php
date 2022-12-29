@@ -21,7 +21,7 @@ class FormatterLocator
     /**
      * A registry to retain formatter objects.
      *
-     * @var array<string, \Cake\I18n\FormatterInterface|class-string<\Cake\I18n\FormatterInterface>>
+     * @var array<string, uim.cake.I18n\FormatterInterface|class-string<uim.cake.I18n\FormatterInterface>>
      */
     protected $registry = [];
 
@@ -36,10 +36,10 @@ class FormatterLocator
     /**
      * Constructor.
      *
-     * @param array<string, class-string<\Cake\I18n\FormatterInterface>> $registry An array of key-value pairs where the key is the
+     * @param array<string, class-string<uim.cake.I18n\FormatterInterface>> $registry An array of key-value pairs where the key is the
      * formatter name the value is a FQCN for the formatter.
      */
-    public this(array $registry = []) {
+    this(array $registry = []) {
         foreach ($registry as $name: $spec) {
             this.set($name, $spec);
         }
@@ -49,7 +49,7 @@ class FormatterLocator
      * Sets a formatter into the registry by name.
      *
      * @param string $name The formatter name.
-     * @param class-string<\Cake\I18n\FormatterInterface> $className A FQCN for a formatter.
+     * @param class-string<uim.cake.I18n\FormatterInterface> $className A FQCN for a formatter.
      * @return void
      */
     function set(string $name, string $className): void
@@ -72,7 +72,7 @@ class FormatterLocator
         }
 
         if (!this.converted[$name]) {
-            /** @var class-string<\Cake\I18n\FormatterInterface> $formatter */
+            /** @var class-string<uim.cake.I18n\FormatterInterface> $formatter */
             $formatter = this.registry[$name];
             this.registry[$name] = new $formatter();
             this.converted[$name] = true;

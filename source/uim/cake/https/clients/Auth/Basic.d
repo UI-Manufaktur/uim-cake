@@ -6,7 +6,7 @@ import uim.cake;
 /**
  * Basic authentication adapter for Cake\Http\Client
  *
- * Generally not directly constructed, but instead used by {@link \Cake\Http\Client}
+ * Generally not directly constructed, but instead used by {@link uim.cake.Http\Client}
  * when myOptions["auth"]["type"] is "basic"
  */
 class Basic

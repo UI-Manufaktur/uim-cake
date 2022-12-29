@@ -19,7 +19,7 @@ use SeekableIterator;
 
 /**
  * Provides methods for creating and manipulating a "queue" of middlewares.
- * This queue is used to process a request and generate response via \Cake\Http\Runner.
+ * This queue is used to process a request and generate response via uim.cake.Http\Runner.
  *
  * @template-: \SeekableIterator<int, \Psr\Http\Server\IMiddleware>
  */

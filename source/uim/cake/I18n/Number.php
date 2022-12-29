@@ -24,21 +24,21 @@ class Number
      *
      * @var string
      */
-    public const DEFAULT_LOCALE = "en_US";
+    const DEFAULT_LOCALE = "en_US";
 
     /**
      * Format type to format as currency
      *
      * @var string
      */
-    public const FORMAT_CURRENCY = "currency";
+    const FORMAT_CURRENCY = "currency";
 
     /**
      * Format type to format as currency, accounting style (negative numbers in parentheses)
      *
      * @var string
      */
-    public const FORMAT_CURRENCY_ACCOUNTING = "currency_accounting";
+    const FORMAT_CURRENCY_ACCOUNTING = "currency_accounting";
 
     /**
      * ICU Constant for accounting format; not yet widely supported by INTL library.
@@ -47,7 +47,7 @@ class Number
      *
      * @var int
      */
-    public const CURRENCY_ACCOUNTING = 12;
+    const CURRENCY_ACCOUNTING = 12;
 
     /**
      * A list of number formatters indexed by locale and type
@@ -83,7 +83,7 @@ class Number
      * @return string Formatted float.
      * @link https://book.cakephp.org/4/en/core-libraries/number.html#formatting-floating-point-numbers
      */
-    public static function precision($value, int $precision = 3, array $options = []): string
+    static function precision($value, int $precision = 3, array $options = []): string
     {
         $formatter = static::formatter(["precision": $precision, "places": $precision] + $options);
 
@@ -97,7 +97,7 @@ class Number
      * @return string Human readable size
      * @link https://book.cakephp.org/4/en/core-libraries/number.html#interacting-with-human-readable-values
      */
-    public static function toReadableSize($size): string
+    static function toReadableSize($size): string
     {
         $size = (int)$size;
 
@@ -129,7 +129,7 @@ class Number
      * @return string Percentage string
      * @link https://book.cakephp.org/4/en/core-libraries/number.html#formatting-percentages
      */
-    public static function toPercentage($value, int $precision = 2, array $options = []): string
+    static function toPercentage($value, int $precision = 2, array $options = []): string
     {
         $options += ["multiply": false, "type": NumberFormatter::PERCENT];
         if (!$options["multiply"]) {
@@ -155,7 +155,7 @@ class Number
      * @param array<string, mixed> $options An array with options.
      * @return string Formatted number
      */
-    public static function format($value, array $options = []): string
+    static function format($value, array $options = []): string
     {
         $formatter = static::formatter($options);
         $options += ["before": "", "after": ""];
@@ -176,7 +176,7 @@ class Number
      * @param array<string, mixed> $options An array with options.
      * @return float point number
      */
-    public static function parseFloat(string $value, array $options = []): float
+    static function parseFloat(string $value, array $options = []): float
     {
         $formatter = static::formatter($options);
 
@@ -198,7 +198,7 @@ class Number
      * @param array<string, mixed> $options Options list.
      * @return string formatted delta
      */
-    public static function formatDelta($value, array $options = []): string
+    static function formatDelta($value, array $options = []): string
     {
         $options += ["places": 0];
         $value = number_format((float)$value, $options["places"], ".", "");
@@ -231,7 +231,7 @@ class Number
      * @param array<string, mixed> $options Options list.
      * @return string Number formatted as a currency.
      */
-    public static function currency($value, ?string $currency = null, array $options = []): string
+    static function currency($value, ?string $currency = null, array $options = []): string
     {
         $value = (float)$value;
         $currency = $currency ?: static::getDefaultCurrency();
@@ -266,7 +266,7 @@ class Number
      * currently stored value
      * @return string|null Currency
      */
-    public static function defaultCurrency($currency = null): ?string
+    static function defaultCurrency($currency = null): ?string
     {
         deprecationWarning(
             "Number::defaultCurrency() is deprecated. " .
@@ -292,7 +292,7 @@ class Number
      *
      * @return string Currency
      */
-    public static function getDefaultCurrency(): string
+    static function getDefaultCurrency(): string
     {
         if (static::$_defaultCurrency == null) {
             $locale = ini_get("intl.default_locale") ?: static::DEFAULT_LOCALE;
@@ -311,7 +311,7 @@ class Number
      * currently stored value
      * @return void
      */
-    public static function setDefaultCurrency(?string $currency = null): void
+    static function setDefaultCurrency(?string $currency = null): void
     {
         static::$_defaultCurrency = $currency;
     }
@@ -321,7 +321,7 @@ class Number
      *
      * @return string Currency Format
      */
-    public static function getDefaultCurrencyFormat(): string
+    static function getDefaultCurrencyFormat(): string
     {
         if (static::$_defaultCurrencyFormat == null) {
             static::$_defaultCurrencyFormat = static::FORMAT_CURRENCY;
@@ -338,7 +338,7 @@ class Number
      * currently stored value
      * @return void
      */
-    public static function setDefaultCurrencyFormat($currencyFormat = null): void
+    static function setDefaultCurrencyFormat($currencyFormat = null): void
     {
         static::$_defaultCurrencyFormat = $currencyFormat;
     }
@@ -363,7 +363,7 @@ class Number
      * @param array<string, mixed> $options An array with options.
      * @return \NumberFormatter The configured formatter instance
      */
-    public static function formatter(array $options = []): NumberFormatter
+    static function formatter(array $options = []): NumberFormatter
     {
         $locale = $options["locale"] ?? ini_get("intl.default_locale");
 
@@ -418,7 +418,7 @@ class Number
      * @param array<string, mixed> $options See Number::formatter() for possible options.
      * @return void
      */
-    public static function config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = []): void
+    static function config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = []): void
     {
         static::$_formatters[$locale][$type] = static::_setAttributes(
             new NumberFormatter($locale, $type),
@@ -473,7 +473,7 @@ class Number
      * @param array<string, mixed> $options An array with options.
      * @return string
      */
-    public static function ordinal($value, array $options = []): string
+    static function ordinal($value, array $options = []): string
     {
         return static::formatter(["type": NumberFormatter::ORDINAL] + $options).format($value);
     }

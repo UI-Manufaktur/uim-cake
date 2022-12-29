@@ -54,7 +54,7 @@ trait DateFormatTrait
      *
      * @return string|null The default locale string to be used or null.
      */
-    public static function getDefaultLocale(): ?string
+    static function getDefaultLocale(): ?string
     {
         return static::$defaultLocale;
     }
@@ -67,7 +67,7 @@ trait DateFormatTrait
      * @param string|null $locale The default locale string to be used.
      * @return void
      */
-    public static function setDefaultLocale(?string $locale = null): void
+    static function setDefaultLocale(?string $locale = null): void
     {
         static::$defaultLocale = $locale;
     }
@@ -77,7 +77,7 @@ trait DateFormatTrait
      *
      * @return bool
      */
-    public static function lenientParsingEnabled(): bool
+    static function lenientParsingEnabled(): bool
     {
         return static::$lenientParsing;
     }
@@ -87,7 +87,7 @@ trait DateFormatTrait
      *
      * @return void
      */
-    public static function enableLenientParsing(): void
+    static function enableLenientParsing(): void
     {
         static::$lenientParsing = true;
     }
@@ -97,7 +97,7 @@ trait DateFormatTrait
      *
      * @return void
      */
-    public static function disableLenientParsing(): void
+    static function disableLenientParsing(): void
     {
         static::$lenientParsing = false;
     }
@@ -268,7 +268,7 @@ trait DateFormatTrait
      *
      * @return void
      */
-    public static function resetToStringFormat(): void
+    static function resetToStringFormat(): void
     {
         static::setToStringFormat([IntlDateFormatter::SHORT, IntlDateFormatter::SHORT]);
     }
@@ -287,13 +287,13 @@ trait DateFormatTrait
      * @param array<int>|string|int $format Format.
      * @return void
      */
-    public static function setToStringFormat($format): void
+    static function setToStringFormat($format): void
     {
         static::$_toStringFormat = $format;
     }
 
 
-    public static function setJsonEncodeFormat($format): void
+    static function setJsonEncodeFormat($format): void
     {
         static::$_jsonEncodeFormat = $format;
     }
@@ -325,7 +325,7 @@ trait DateFormatTrait
      * @param \DateTimeZone|string|null $tz The timezone for the instance
      * @return static|null
      */
-    public static function parseDateTime(string $time, $format = null, $tz = null) {
+    static function parseDateTime(string $time, $format = null, $tz = null) {
         $format = $format ?? static::$_toStringFormat;
         $pattern = "";
 
@@ -389,7 +389,7 @@ trait DateFormatTrait
      * @param array|string|int|null $format Any format accepted by IntlDateFormatter.
      * @return static|null
      */
-    public static function parseDate(string $date, $format = null) {
+    static function parseDate(string $date, $format = null) {
         if (is_int($format)) {
             $format = [$format, IntlDateFormatter::NONE];
         }
@@ -418,7 +418,7 @@ trait DateFormatTrait
      * @param string|int|null $format Any format accepted by IntlDateFormatter.
      * @return static|null
      */
-    public static function parseTime(string $time, $format = null) {
+    static function parseTime(string $time, $format = null) {
         if (is_int($format)) {
             $format = [IntlDateFormatter::NONE, $format];
         }
@@ -446,7 +446,7 @@ trait DateFormatTrait
      *
      * @return uim.cake.Chronos\DifferenceFormatterInterface
      */
-    public static function getDiffFormatter(): DifferenceFormatterInterface
+    static function getDiffFormatter(): DifferenceFormatterInterface
     {
         // Use the static property defined in chronos.
         if (static::$diffFormatter == null) {
@@ -462,7 +462,7 @@ trait DateFormatTrait
      * @param uim.cake.Chronos\DifferenceFormatterInterface $formatter The formatter instance when setting.
      * @return void
      */
-    public static function setDiffFormatter(DifferenceFormatterInterface $formatter): void
+    static function setDiffFormatter(DifferenceFormatterInterface $formatter): void
     {
         static::$diffFormatter = $formatter;
     }

@@ -8,27 +8,27 @@ interface ICookie {
     /**
      * Expires attribute format.
      */
-    public const string EXPIRES_FORMAT = "D, d-M-Y H:i:s T";
+    const string EXPIRES_FORMAT = "D, d-M-Y H:i:s T";
 
     /**
      * SameSite attribute value: Lax
      */
-    public const string SAMESITE_LAX = "Lax";
+    const string SAMESITE_LAX = "Lax";
 
     // SameSite attribute value: Strict
-    public const string SAMESITE_STRICT = "Strict";
+    const string SAMESITE_STRICT = "Strict";
 
     /**
      * SameSite attribute value: None
      */
-    public const string SAMESITE_NONE = "None";
+    const string SAMESITE_NONE = "None";
 
     /**
      * Valid values for "SameSite" attribute.
      *
      * @var array<string>
      */
-    public const SAMESITE_VALUES = [
+    const SAMESITE_VALUES = [
         self::SAMESITE_LAX,
         self::SAMESITE_STRICT,
         self::SAMESITE_NONE,

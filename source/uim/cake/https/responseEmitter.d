@@ -179,7 +179,7 @@ class ResponseEmitter : EmitterInterface
     /**
      * Emit cookies using setcookie()
      *
-     * @param array<\Cake\Http\Cookie\ICookie|string> $cookies An array of cookies.
+     * @param array<uim.cake.Http\Cookie\ICookie|string> $cookies An array of cookies.
      * @return void
      */
     protected void emitCookies(array $cookies) {

@@ -66,14 +66,14 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     /**
      * @var int
      */
-    public const TOKEN_VALUE_LENGTH = 32;
+    const TOKEN_VALUE_LENGTH = 32;
 
     /**
      * Constructor
      *
      * @param array<string, mixed> $config Config options. See $_config for valid keys.
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         _config = $config + _config;
     }
 

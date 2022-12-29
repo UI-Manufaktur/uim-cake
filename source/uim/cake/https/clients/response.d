@@ -331,7 +331,7 @@ class Response : Message : IResponse
         this.buildCookieCollection();
 
         $out = [];
-        /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
+        /** @var array<uim.cake.Http\Cookie\Cookie> $cookies */
         $cookies = this.cookies;
         foreach ($cookies as $cookie) {
             $out[$cookie.getName()] = $cookie.toArray();

@@ -13,14 +13,14 @@ class CookieCollection : IteratorAggregate, Countable {
     /**
      * Cookie objects
      *
-     * @var array<\Cake\Http\Cookie\ICookie>
+     * @var array<uim.cake.Http\Cookie\ICookie>
      */
     protected cookies = [];
 
     /**
      * Constructor
      *
-     * @param array<\Cake\Http\Cookie\ICookie> $cookies Array of cookie objects
+     * @param array<uim.cake.Http\Cookie\ICookie> $cookies Array of cookie objects
      */
     this(array $cookies = []) {
         this.checkCookies($cookies);
@@ -153,7 +153,7 @@ class CookieCollection : IteratorAggregate, Countable {
     /**
      * Checks if only valid cookie objects are in the array
      *
-     * @param array<\Cake\Http\Cookie\ICookie> $cookies Array of cookie objects
+     * @param array<uim.cake.Http\Cookie\ICookie> $cookies Array of cookie objects
      * @throws \InvalidArgumentException
      */
     protected void checkCookies(array $cookies) {
@@ -174,7 +174,7 @@ class CookieCollection : IteratorAggregate, Countable {
     /**
      * Gets the iterator
      *
-     * @return \Traversable<string, \Cake\Http\Cookie\ICookie>
+     * @return \Traversable<string, uim.cake.Http\Cookie\ICookie>
      */
     Traversable getIterator() {
         return new ArrayIterator(this.cookies);

@@ -33,7 +33,7 @@ class FormData : Countable {
     /**
      * The parts in the form data.
      *
-     * @var array<\Cake\Http\Client\FormDataPart>
+     * @var array<uim.cake.Http\Client\FormDataPart>
      */
     protected _parts = [];
 

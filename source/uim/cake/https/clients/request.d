@@ -61,7 +61,7 @@ class Request : Message : IRequest {
     /**
      * Set the body/payload for the message.
      *
-     * Array data will be serialized with {@link \Cake\Http\FormData},
+     * Array data will be serialized with {@link uim.cake.Http\FormData},
      * and the content-type will be set.
      *
      * @param array|string myContents The body for the request.
