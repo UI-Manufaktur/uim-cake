@@ -13,7 +13,7 @@ class FormContext : IContext
     /**
      * The form object.
      *
-     * @var \Cake\Form\Form
+     * @var uim.cake.Form\Form
      */
     protected _form;
 

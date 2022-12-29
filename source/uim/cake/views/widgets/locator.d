@@ -30,14 +30,14 @@ class WidgetLocator
     /**
      * Templates to use.
      *
-     * @var \Cake\View\StringTemplate
+     * @var uim.cake.View\StringTemplate
      */
     protected _templates;
 
     /**
      * View instance.
      *
-     * @var \Cake\View\View
+     * @var uim.cake.View\View
      */
     protected _view;
 
@@ -179,10 +179,10 @@ class WidgetLocator
                     $arguments[] = this.get($requirement);
                 }
             }
-            /** @var \Cake\View\Widget\IWidget $instance */
+            /** @var uim.cake.View\Widget\IWidget $instance */
             $instance = $reflection.newInstanceArgs($arguments);
         } else {
-            /** @var \Cake\View\Widget\IWidget $instance */
+            /** @var uim.cake.View\Widget\IWidget $instance */
             $instance = new myClassName(_templates);
         }
 

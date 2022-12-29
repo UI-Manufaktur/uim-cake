@@ -39,7 +39,7 @@ class YearWidget : BasicWidget
     /**
      * Select box widget.
      *
-     * @var \Cake\View\Widget\SelectBoxWidget
+     * @var uim.cake.View\Widget\SelectBoxWidget
      */
     protected $_select;
 

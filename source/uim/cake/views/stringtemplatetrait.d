@@ -16,7 +16,7 @@ trait StringTemplateTrait
     /**
      * StringTemplate instance.
      *
-     * @var \Cake\View\StringTemplate|null
+     * @var uim.cake.View\StringTemplate|null
      */
     protected _templater;
 

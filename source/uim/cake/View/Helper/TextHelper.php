@@ -54,7 +54,7 @@ class TextHelper : Helper
     /**
      * Cake Utility Text instance
      *
-     * @var \Cake\Utility\Text
+     * @var uim.cake.Utility\Text
      */
     protected $_engine;
 

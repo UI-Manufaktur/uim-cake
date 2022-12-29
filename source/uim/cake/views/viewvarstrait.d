@@ -15,7 +15,7 @@ trait ViewVarsTrait {
     /**
      * The view builder instance being used.
      *
-     * @var \Cake\View\ViewBuilder|null
+     * @var uim.cake.View\ViewBuilder|null
      */
     protected _viewBuilder;
 

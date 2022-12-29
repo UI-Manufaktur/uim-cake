@@ -53,7 +53,7 @@ class Helper : IEventListener
     /**
      * The View instance this helper is attached to
      *
-     * @var \Cake\View\View
+     * @var uim.cake.View\View
      */
     protected _View;
 

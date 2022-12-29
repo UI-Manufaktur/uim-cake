@@ -163,21 +163,21 @@ class FormHelper : Helper
     /**
      * Locator for input widgets.
      *
-     * @var \Cake\View\Widget\WidgetLocator
+     * @var uim.cake.View\Widget\WidgetLocator
      */
     protected _locator;
 
     /**
      * Context for the current form.
      *
-     * @var \Cake\View\Form\IContext|null
+     * @var uim.cake.View\Form\IContext|null
      */
     protected _context;
 
     /**
      * Context factory.
      *
-     * @var \Cake\View\Form\ContextFactory|null
+     * @var uim.cake.View\Form\ContextFactory|null
      */
     protected _contextFactory;
 
@@ -216,7 +216,7 @@ class FormHelper : Helper
     /**
      * Form protector
      *
-     * @var \Cake\Form\FormProtector|null
+     * @var uim.cake.Form\FormProtector|null
      */
     protected formProtector;
 

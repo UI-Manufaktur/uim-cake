@@ -13,7 +13,7 @@ class DateTimeWidget : BasicWidget {
     /**
      * Template instance.
      *
-     * @var \Cake\View\StringTemplate
+     * @var uim.cake.View\StringTemplate
      */
     protected _templates;
 

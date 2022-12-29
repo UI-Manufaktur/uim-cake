@@ -14,7 +14,7 @@ class LabelWidget : IWidget
     /**
      * Templates
      *
-     * @var \Cake\View\StringTemplate
+     * @var uim.cake.View\StringTemplate
      */
     protected _templates;
 

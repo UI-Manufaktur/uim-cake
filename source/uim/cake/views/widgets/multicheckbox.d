@@ -32,7 +32,7 @@ class MultiCheckboxWidget : BasicWidget
     /**
      * Label widget instance.
      *
-     * @var \Cake\View\Widget\LabelWidget
+     * @var uim.cake.View\Widget\LabelWidget
      */
     protected _label;
 

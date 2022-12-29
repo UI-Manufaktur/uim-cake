@@ -15,7 +15,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
     /**
      * View object to use when making helpers.
      *
-     * @var \Cake\View\View
+     * @var uim.cake.View\View
      */
     protected View _View;
 
@@ -122,7 +122,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Helper _create(myClass, string myAlias, array myConfig) {
-        /** @var \Cake\View\Helper $instance */
+        /** @var uim.cake.View\Helper $instance */
         $instance = new myClass(_View, myConfig);
 
         myEnable = myConfig["enabled"] ?? true;

@@ -25,7 +25,7 @@ class NumberHelper : Helper
     /**
      * Cake\I18n\Number instance
      *
-     * @var \Cake\I18n\Number
+     * @var uim.cake.I18n\Number
      */
     protected _engine;
 

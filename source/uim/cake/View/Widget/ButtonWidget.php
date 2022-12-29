@@ -24,7 +24,7 @@ class ButtonWidget : WidgetInterface
     /**
      * StringTemplate instance.
      *
-     * @var \Cake\View\StringTemplate
+     * @var uim.cake.View\StringTemplate
      */
     protected $_templates;
 

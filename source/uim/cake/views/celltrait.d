@@ -71,7 +71,7 @@ trait CellTrait {
      */
     protected auto _createCell(string myClassName, string action, Nullable!string myPlugin, array myOptions)Cell
     {
-        /** @var \Cake\View\Cell $instance */
+        /** @var uim.cake.View\Cell $instance */
         $instance = new myClassName(this.request, this.response, this.getEventManager(), myOptions);
 
         myBuilder = $instance.viewBuilder();
