@@ -18,7 +18,7 @@ trait RulesAwareTrait
     /**
      * The domain rules to be applied to entities saved by this table
      *
-     * @var \Cake\Datasource\RulesChecker
+     * @var uim.cake.datasources.RulesChecker
      */
     protected _rulesChecker;
 
@@ -69,7 +69,7 @@ trait RulesAwareTrait
      * on rules that may involve complex logic or data that
      * needs to be fetched from relevant datasources.
      *
-     * @see uim.cake.Datasource\RulesChecker
+     * @see uim.cake.datasources.RulesChecker
      * @return \Cake\Datasource\RulesChecker
      */
     function rulesChecker(): RulesChecker

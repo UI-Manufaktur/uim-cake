@@ -15,12 +15,12 @@ module uim.cake.errors.Debug;
 class ArrayItemNode : NodeInterface
 {
     /**
-     * @var \Cake\Error\Debug\NodeInterface
+     * @var uim.cake.Error\Debug\NodeInterface
      */
     private $key;
 
     /**
-     * @var \Cake\Error\Debug\NodeInterface
+     * @var uim.cake.Error\Debug\NodeInterface
      */
     private $value;
 

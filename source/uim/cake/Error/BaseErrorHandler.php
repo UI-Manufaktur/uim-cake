@@ -47,7 +47,7 @@ abstract class BaseErrorHandler
     /**
      * Exception logger instance.
      *
-     * @var \Cake\Error\ErrorLoggerInterface|null
+     * @var uim.cake.Error\ErrorLoggerInterface|null
      */
     protected $logger;
 
@@ -345,7 +345,7 @@ abstract class BaseErrorHandler
      */
     function getLogger() {
         if (this.logger == null) {
-            /** @var \Cake\Error\ErrorLoggerInterface $logger */
+            /** @var uim.cake.Error\ErrorLoggerInterface $logger */
             $logger = new _config["errorLogger"](_config);
 
             if (!$logger instanceof ErrorLoggerInterface) {

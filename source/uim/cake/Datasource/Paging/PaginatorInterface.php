@@ -7,9 +7,9 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Datasource\Paging;
+module uim.cake.datasources.Paging;
 
-import uim.cake.Datasource\IResultSet;
+import uim.cake.datasources.IResultSet;
 
 /**
  * This interface describes the methods for paginator instance.

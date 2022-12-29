@@ -31,7 +31,7 @@ class ConsoleExceptionRenderer
     private $error;
 
     /**
-     * @var \Cake\Console\ConsoleOutput
+     * @var uim.cake.Console\ConsoleOutput
      */
     private $output;
 

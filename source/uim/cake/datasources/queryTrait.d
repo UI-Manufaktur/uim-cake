@@ -12,7 +12,7 @@ trait QueryTrait
     /**
      * Instance of a table object this query is bound to
      *
-     * @var \Cake\Datasource\IRepository
+     * @var uim.cake.datasources.IRepository
      */
     protected _repository;
 
@@ -22,7 +22,7 @@ trait QueryTrait
      * When set, query execution will be bypassed.
      *
      * @var iterable|null
-     * @see uim.cake.Datasource\QueryTrait::setResult()
+     * @see uim.cake.datasources.QueryTrait::setResult()
      */
     protected _results;
 
@@ -45,7 +45,7 @@ trait QueryTrait
     /**
      * A query cacher instance if this query has caching enabled.
      *
-     * @var \Cake\Datasource\QueryCacher|null
+     * @var uim.cake.datasources.QueryCacher|null
      */
     protected _cache;
 
@@ -486,7 +486,7 @@ trait QueryTrait
      *  myQuery.getOptions(); // Returns ["doABarrelRoll":true]
      * ```
      *
-     * @see uim.cake.Datasource\IQuery::applyOptions() to read about the options that will
+     * @see uim.cake.datasources.IQuery::applyOptions() to read about the options that will
      * be processed by this class and not returned by this function
      * @return array
      * @see applyOptions()

@@ -23,7 +23,7 @@ class ConsoleErrorHandler : BaseErrorHandler
     /**
      * Standard error stream.
      *
-     * @var \Cake\Console\ConsoleOutput
+     * @var uim.cake.Console\ConsoleOutput
      */
     protected $_stderr;
 

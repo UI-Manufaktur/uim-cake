@@ -66,7 +66,7 @@ interface IRepository
      * @throws \Cake\Datasource\Exception\RecordNotFoundException if the record with such id
      * could not be found
      * @return \Cake\Datasource\IEntity
-     * @see uim.cake.Datasource\IRepository::find()
+     * @see uim.cake.datasources.IRepository::find()
      */
     IEntity get($primaryKey, array myOptions = []);
 
@@ -104,7 +104,7 @@ interface IRepository
      * @param mixed $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Returns the number of affected rows.
-     * @see uim.cake.Datasource\IRepository::delete()
+     * @see uim.cake.datasources.IRepository::delete()
      */
     int deleteAll($conditions);
 

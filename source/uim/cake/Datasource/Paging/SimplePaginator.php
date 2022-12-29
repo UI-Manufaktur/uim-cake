@@ -7,9 +7,9 @@
  * @since         3.9.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Datasource\Paging;
+module uim.cake.datasources.Paging;
 
-import uim.cake.Datasource\IQuery;
+import uim.cake.datasources.IQuery;
 
 /**
  * Simplified paginator which avoids potentially expensives queries

@@ -54,14 +54,14 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Error handler instance.
      *
-     * @var \Cake\Error\ErrorHandler|null
+     * @var uim.cake.Error\ErrorHandler|null
      */
     protected $errorHandler = null;
 
     /**
      * ExceptionTrap instance
      *
-     * @var \Cake\Error\ExceptionTrap|null
+     * @var uim.cake.Error\ExceptionTrap|null
      */
     protected $exceptionTrap = null;
 

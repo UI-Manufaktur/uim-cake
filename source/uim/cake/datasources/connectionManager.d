@@ -52,7 +52,7 @@ class ConnectionManager
     /**
      * The ConnectionRegistry used by the manager.
      *
-     * @var \Cake\Datasource\ConnectionRegistry
+     * @var uim.cake.datasources.ConnectionRegistry
      */
     protected static $_registry;
 

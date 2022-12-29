@@ -7,14 +7,14 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Datasource\Paging;
+module uim.cake.datasources.Paging;
 
 import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.InstanceConfigTrait;
-import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
-import uim.cake.Datasource\IQuery;
-import uim.cake.Datasource\RepositoryInterface;
-import uim.cake.Datasource\IResultSet;
+import uim.cake.datasources.Paging\Exception\PageOutOfBoundsException;
+import uim.cake.datasources.IQuery;
+import uim.cake.datasources.RepositoryInterface;
+import uim.cake.datasources.IResultSet;
 
 /**
  * This class is used to handle automatic model data pagination.

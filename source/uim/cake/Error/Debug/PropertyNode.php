@@ -25,7 +25,7 @@ class PropertyNode : NodeInterface
     private $visibility;
 
     /**
-     * @var \Cake\Error\Debug\NodeInterface
+     * @var uim.cake.Error\Debug\NodeInterface
      */
     private $value;
 

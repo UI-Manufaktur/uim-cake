@@ -6,12 +6,12 @@ module uim.cake.errors\Debug;
 class ArrayItemNode : INode
 {
     /**
-     * @var \Cake\Error\Debug\INode
+     * @var uim.cake.Error\Debug\INode
      */
     private myKey;
 
     /**
-     * @var \Cake\Error\Debug\INode
+     * @var uim.cake.Error\Debug\INode
      */
     private myValue;
 

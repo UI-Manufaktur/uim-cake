@@ -80,7 +80,7 @@ class ExceptionTrap
      * This is best effort as we can"t know if/when another
      * exception handler is registered.
      *
-     * @var \Cake\Error\ExceptionTrap|null
+     * @var uim.cake.Error\ExceptionTrap|null
      */
     protected static $registeredTrap = null;
 

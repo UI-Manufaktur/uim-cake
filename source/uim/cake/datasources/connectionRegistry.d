@@ -7,7 +7,7 @@ import uim.cake.datasources.exceptions\MissingDatasourceException;
 /**
  * A registry object for connection instances.
  *
- * @see uim.cake.Datasource\ConnectionManager
+ * @see uim.cake.datasources.ConnectionManager
  * @: \Cake\Core\ObjectRegistry<\Cake\Datasource\IConnection>
  */
 class ConnectionRegistry : ObjectRegistry
@@ -65,7 +65,7 @@ class ConnectionRegistry : ObjectRegistry
 
         unset(myConfig["className"]);
 
-        /** @var \Cake\Datasource\IConnection */
+        /** @var uim.cake.datasources.IConnection */
         return new myClass(myConfig);
     }
 

@@ -13,7 +13,7 @@ class PropertyNode : INode {
     private $visibility;
 
     /**
-     * @var \Cake\Error\Debug\INode
+     * @var uim.cake.Error\Debug\INode
      */
     private myValue;
 

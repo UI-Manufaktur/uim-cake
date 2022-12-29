@@ -7,9 +7,9 @@
  * @since         4.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Datasource\Locator;
+module uim.cake.datasources.Locator;
 
-import uim.cake.Datasource\RepositoryInterface;
+import uim.cake.datasources.RepositoryInterface;
 
 /**
  * Registries for repository objects should implement this interface.

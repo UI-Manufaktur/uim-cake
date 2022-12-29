@@ -11,7 +11,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Datasource\Paging\Exception;
+module uim.cake.datasources.Paging\Exception;
 
 import uim.cake.cores.exceptions.CakeException;
 

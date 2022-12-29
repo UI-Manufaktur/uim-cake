@@ -18,7 +18,7 @@ trait EventDispatcherTrait
      * Instance of the Cake\Event\EventManager this object is using
      * to dispatch inner events.
      *
-     * @var \Cake\Event\IEventManager|null
+     * @var uim.cake.Event\IEventManager|null
      */
     protected $_eventManager;
 
@@ -79,7 +79,7 @@ trait EventDispatcherTrait
             $subject = this;
         }
 
-        /** @var \Cake\Event\IEvent $event */
+        /** @var uim.cake.Event\IEvent $event */
         $event = new _eventClass($name, $subject, $data);
         this.getEventManager().dispatch($event);
 

@@ -21,7 +21,7 @@ import uim.cake.errors.PhpError;
 class ConsoleErrorRenderer : ErrorRendererInterface
 {
     /**
-     * @var \Cake\Console\ConsoleOutput
+     * @var uim.cake.Console\ConsoleOutput
      */
     protected $output;
 

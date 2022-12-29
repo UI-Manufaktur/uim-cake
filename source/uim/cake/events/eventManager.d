@@ -20,7 +20,7 @@ class EventManager : IEventManager
     /**
      * The globally available instance, used for dispatching events attached from any scope
      *
-     * @var \Cake\Event\EventManager|null
+     * @var uim.cake.Event\EventManager|null
      */
     protected static $_generalManager;
 
@@ -41,7 +41,7 @@ class EventManager : IEventManager
     /**
      * The event list object.
      *
-     * @var \Cake\Event\EventList|null
+     * @var uim.cake.Event\EventList|null
      */
     protected _eventList;
 

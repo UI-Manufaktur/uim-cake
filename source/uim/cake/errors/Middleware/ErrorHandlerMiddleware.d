@@ -43,7 +43,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Error handler instance.
      *
-     * @var \Cake\Error\ErrorHandler|null
+     * @var uim.cake.Error\ErrorHandler|null
      */
     protected myErrorHandler;
 

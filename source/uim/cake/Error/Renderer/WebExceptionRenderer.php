@@ -18,8 +18,8 @@ import uim.cake.cores.Configure;
 import uim.cake.cores.Container;
 import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.exceptions.MissingPluginException;
-import uim.cake.Datasource\Exception\RecordNotFoundException;
-import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
+import uim.cake.datasources.Exception\RecordNotFoundException;
+import uim.cake.datasources.Paging\Exception\PageOutOfBoundsException;
 import uim.cake.errors.Debugger;
 import uim.cake.errors.ExceptionRendererInterface;
 import uim.cake.events.Event;
@@ -67,7 +67,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     /**
      * Controller instance.
      *
-     * @var \Cake\Controller\Controller
+     * @var uim.cake.Controller\Controller
      */
     protected $controller;
 
@@ -89,7 +89,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * If set, this will be request used to create the controller that will render
      * the error.
      *
-     * @var \Cake\Http\ServerRequest|null
+     * @var uim.cake.Http\ServerRequest|null
      */
     protected $request;
 
@@ -166,7 +166,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
                 $class = App::className("Error", "Controller", "Controller");
             }
 
-            /** @var \Cake\Controller\Controller $controller */
+            /** @var uim.cake.Controller\Controller $controller */
             $controller = new $class($request);
             $controller.startupProcess();
         } catch (Throwable $e) {
