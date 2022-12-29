@@ -25,7 +25,7 @@ class ButtonWidget : WidgetInterface
      *
      * @param uim.cake.View\StringTemplate $templates Templates list.
      */
-    public this(StringTemplate $templates) {
+    this(StringTemplate $templates) {
         _templates = $templates;
     }
 

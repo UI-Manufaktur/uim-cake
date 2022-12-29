@@ -14,17 +14,17 @@ class ViewBlock
     /**
      * Override content
      */
-    public const string OVERRIDE = "override";
+    const string OVERRIDE = "override";
 
     /**
      * Append content
      */
-    public const string APPEND = "append";
+    const string APPEND = "append";
 
     /**
      * Prepend content
      */
-    public const string PREPEND = "prepend";
+    const string PREPEND = "prepend";
 
     /**
      * Block content. An array of blocks indexed by name.

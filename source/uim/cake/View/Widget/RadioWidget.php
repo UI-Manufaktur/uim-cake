@@ -54,7 +54,7 @@ class RadioWidget : BasicWidget
      * @param uim.cake.View\StringTemplate $templates Templates list.
      * @param uim.cake.View\Widget\LabelWidget $label Label widget instance.
      */
-    public this(StringTemplate $templates, LabelWidget $label) {
+    this(StringTemplate $templates, LabelWidget $label) {
         _templates = $templates;
         _label = $label;
     }

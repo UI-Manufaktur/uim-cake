@@ -3,7 +3,7 @@ module uim.cake.views.forms;
 import uim.cakeilities.Hash;
 
 /**
- * Provides a context provider for {@link \Cake\Form\Form} instances.
+ * Provides a context provider for {@link uim.cake.Form\Form} instances.
  *
  * This context provider simply fulfils the interface requirements
  * that FormHelper has and allows access to the form data.

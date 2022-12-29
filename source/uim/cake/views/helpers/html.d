@@ -8,7 +8,7 @@ import uim.cake;
  *
  * HtmlHelper encloses all methods needed while working with HTML pages.
  *
- * @property \Cake\View\Helper\UrlHelper myUrl
+ * @property uim.cake.View\Helper\UrlHelper myUrl
  * @link https://book.UIM.org/4/en/views/helpers/html.html
  */
 class HtmlHelper : Helper {

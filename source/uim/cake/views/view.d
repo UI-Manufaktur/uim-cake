@@ -15,7 +15,7 @@ import uim.cake;
  * View class supports using plugins as themes. You can set
  *
  * ```
- * function beforeRender(\Cake\Event\IEvent myEvent)
+ * function beforeRender(uim.cake.Event\IEvent myEvent)
  * {
  *      this.viewBuilder().setTheme("SuperHot");
  * }
@@ -26,16 +26,16 @@ import uim.cake;
  * `plugins/SuperHot/templates/Posts/index.php`. If a theme template
  * is not found for the current action the default app template file is used.
  *
- * @property \Cake\View\Helper\BreadcrumbsHelper $Breadcrumbs
- * @property \Cake\View\Helper\FlashHelper $Flash
- * @property \Cake\View\Helper\FormHelper $Form
- * @property \Cake\View\Helper\HtmlHelper $Html
- * @property \Cake\View\Helper\NumberHelper $Number
- * @property \Cake\View\Helper\PaginatorHelper $Paginator
- * @property \Cake\View\Helper\TextHelper $Text
- * @property \Cake\View\Helper\TimeHelper $Time
- * @property \Cake\View\Helper\UrlHelper myUrl
- * @property \Cake\View\ViewBlock $Blocks
+ * @property uim.cake.View\Helper\BreadcrumbsHelper $Breadcrumbs
+ * @property uim.cake.View\Helper\FlashHelper $Flash
+ * @property uim.cake.View\Helper\FormHelper $Form
+ * @property uim.cake.View\Helper\HtmlHelper $Html
+ * @property uim.cake.View\Helper\NumberHelper $Number
+ * @property uim.cake.View\Helper\PaginatorHelper $Paginator
+ * @property uim.cake.View\Helper\TextHelper $Text
+ * @property uim.cake.View\Helper\TimeHelper $Time
+ * @property uim.cake.View\Helper\UrlHelper myUrl
+ * @property uim.cake.View\ViewBlock $Blocks
  */
 class View : IEventDispatcher {
     use CellTrait {
@@ -126,7 +126,7 @@ class View : IEventDispatcher {
     protected theme;
 
     /**
-     * An instance of a \Cake\Http\ServerRequest object that contains information about the current request.
+     * An instance of a uim.cake.Http\ServerRequest object that contains information about the current request.
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
@@ -204,34 +204,34 @@ class View : IEventDispatcher {
      * ViewBlock class.
      *
      * @var string
-     * @psalm-var class-string<\Cake\View\ViewBlock>
+     * @psalm-var class-string<uim.cake.View\ViewBlock>
      */
     protected _viewBlockClass = ViewBlock::class;
 
     /**
      * Constant for view file type "template".
      */
-    public const string TYPE_TEMPLATE = "template";
+    const string TYPE_TEMPLATE = "template";
 
     /**
      * Constant for view file type "element"
      */
-    public const string TYPE_ELEMENT = "element";
+    const string TYPE_ELEMENT = "element";
 
     /**
      * Constant for view file type "layout"
      */
-    public const string TYPE_LAYOUT = "layout";
+    const string TYPE_LAYOUT = "layout";
 
     /**
      * Constant for type used for App::path().
      */
-    public const string NAME_TEMPLATE = "templates";
+    const string NAME_TEMPLATE = "templates";
 
     /**
      * Constant for folder name containing files for overriding plugin templates.
      */
-    public const string PLUGIN_TEMPLATE_FOLDER = "plugin";
+    const string PLUGIN_TEMPLATE_FOLDER = "plugin";
 
     /**
      * Constructor

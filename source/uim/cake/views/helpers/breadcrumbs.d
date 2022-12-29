@@ -6,7 +6,7 @@ import uim.cake;
 /**
  * BreadcrumbsHelper to register and display a breadcrumb trail for your views
  *
- * @property \Cake\View\Helper\UrlHelper myUrl
+ * @property uim.cake.View\Helper\UrlHelper myUrl
  */
 class BreadcrumbsHelper : Helper
 {

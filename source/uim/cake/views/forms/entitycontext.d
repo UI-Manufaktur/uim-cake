@@ -49,14 +49,14 @@ class EntityContext : IContext {
     /**
      * A dictionary of tables
      *
-     * @var array<\Cake\ORM\Table>
+     * @var array<uim.cake.ORM\Table>
      */
     protected _tables = [];
 
     /**
      * Dictionary of validators.
      *
-     * @var array<\Cake\Validation\Validator>
+     * @var array<uim.cake.Validation\Validator>
      */
     protected _validator = [];
 

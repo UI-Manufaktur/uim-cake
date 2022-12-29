@@ -13,8 +13,8 @@ import uim.cake;
  * @method string email(string myFieldName, array myOptions = []) Creates input of type email.
  * @method string password(string myFieldName, array myOptions = []) Creates input of type password.
  * @method string search(string myFieldName, array myOptions = []) Creates input of type search.
- * @property \Cake\View\Helper\HtmlHelper $Html
- * @property \Cake\View\Helper\UrlHelper myUrl
+ * @property uim.cake.View\Helper\HtmlHelper $Html
+ * @property uim.cake.View\Helper\UrlHelper myUrl
  * @link https://book.UIM.org/4/en/views/helpers/form.html
  */
 class FormHelper : Helper
@@ -151,14 +151,14 @@ class FormHelper : Helper
      * Constant used internally to skip the securing process,
      * and neither add the field to the hash or to the unlocked fields.
      */
-    public const string SECURE_SKIP = "skip";
+    const string SECURE_SKIP = "skip";
 
     /**
      * Defines the type of form being created. Set by FormHelper::create().
      *
      * @var string|null
      */
-    public myRequestType;
+    myRequestType;
 
     /**
      * Locator for input widgets.

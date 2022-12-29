@@ -41,7 +41,7 @@ class YearWidget : BasicWidget
      * @param uim.cake.View\StringTemplate $templates Templates list.
      * @param uim.cake.View\Widget\SelectBoxWidget $selectBox Selectbox widget instance.
      */
-    public this(StringTemplate $templates, SelectBoxWidget $selectBox) {
+    this(StringTemplate $templates, SelectBoxWidget $selectBox) {
         _select = $selectBox;
         _templates = $templates;
     }

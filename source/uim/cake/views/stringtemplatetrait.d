@@ -61,7 +61,7 @@ trait StringTemplateTrait
     function templater(): StringTemplate
     {
         if (_templater is null) {
-            /** @var class-string<\Cake\View\StringTemplate> myClass */
+            /** @var class-string<uim.cake.View\StringTemplate> myClass */
             myClass = this.getConfig("templateClass") ?: StringTemplate::class;
             _templater = new myClass();
 

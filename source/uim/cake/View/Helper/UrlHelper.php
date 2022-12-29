@@ -25,7 +25,7 @@ class UrlHelper : Helper
      * Asset URL engine class name
      *
      * @var string
-     * @psalm-var class-string<\Cake\Routing\Asset>
+     * @psalm-var class-string<uim.cake.Routing\Asset>
      */
     protected $_assetUrlClassName;
 
@@ -40,7 +40,7 @@ class UrlHelper : Helper
         parent::initialize($config);
         $engineClassConfig = this.getConfig("assetUrlClassName");
 
-        /** @psalm-var class-string<\Cake\Routing\Asset>|null $engineClass */
+        /** @psalm-var class-string<uim.cake.Routing\Asset>|null $engineClass */
         $engineClass = App::className($engineClassConfig, "Routing");
         if ($engineClass == null) {
             throw new CakeException(sprintf("Class for %s could not be found", $engineClassConfig));

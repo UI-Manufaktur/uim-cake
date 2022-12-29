@@ -8,7 +8,7 @@ import uim.cake;
  *
  * Text manipulations: Highlight, excerpt, truncate, strip of links, convert email addresses to mailto: links...
  *
- * @property \Cake\View\Helper\HtmlHelper $Html
+ * @property uim.cake.View\Helper\HtmlHelper $Html
  * @link https://book.UIM.org/4/en/views/helpers/text.html
  * @see uim.cake.Utility\Text
  */
@@ -62,7 +62,7 @@ class TextHelper : Helper
 
         myConfig = _config;
 
-        /** @psalm-var class-string<\Cake\Utility\Text>|null $engineClass */
+        /** @psalm-var class-string<uim.cake.Utility\Text>|null $engineClass */
         $engineClass = App::className(myConfig["engine"], "Utility");
         if ($engineClass is null) {
             throw new CakeException(sprintf("Class for %s could not be found", myConfig["engine"]));

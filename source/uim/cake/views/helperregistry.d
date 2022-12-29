@@ -7,7 +7,7 @@ import uim.cake;
  * HelperRegistry is used as a registry for loaded helpers and handles loading
  * and constructing helper class objects.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\View\Helper>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.View\Helper>
  */
 class HelperRegistry : ObjectRegistry : IEventDispatcher {
     use EventDispatcherTrait;
@@ -63,7 +63,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
     }
 
     /**
-     * Provide public read access to the loaded objects
+     * Provide read access to the loaded objects
      *
      * @param string myName Name of property to read
      * @return uim.cake.View\Helper|null

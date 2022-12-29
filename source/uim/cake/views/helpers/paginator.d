@@ -8,10 +8,10 @@ import uim.cake;
  *
  * PaginationHelper encloses all methods needed when working with pagination.
  *
- * @property \Cake\View\Helper\UrlHelper myUrl
- * @property \Cake\View\Helper\NumberHelper $Number
- * @property \Cake\View\Helper\HtmlHelper $Html
- * @property \Cake\View\Helper\FormHelper $Form
+ * @property uim.cake.View\Helper\UrlHelper myUrl
+ * @property uim.cake.View\Helper\NumberHelper $Number
+ * @property uim.cake.View\Helper\HtmlHelper $Html
+ * @property uim.cake.View\Helper\FormHelper $Form
  * @link https://book.UIM.org/4/en/views/helpers/paginator.html
  */
 class PaginatorHelper : Helper
