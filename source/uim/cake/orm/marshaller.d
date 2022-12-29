@@ -144,7 +144,7 @@ class Marshaller
      *
      * @param array myData The data to hydrate.
      * @param array<string, mixed> myOptions List of options
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.ORM\Table::newEntity()
      * @see uim.cake.ORM\Entity::$_accessible
      */
@@ -277,7 +277,7 @@ class Marshaller
      * @param uim.cake.ORM\Association $assoc The association to marshall
      * @param mixed myValue The data to hydrate. If not an array, this method will return null.
      * @param array<string, mixed> myOptions List of options.
-     * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
+     * @return uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
      */
     protected auto _marshalAssociation(Association $assoc, myValue, array myOptions) {
         if (!is_array(myValue)) {
@@ -508,7 +508,7 @@ class Marshaller
      * data merged in
      * @param array myData key value list of fields to be merged into the entity
      * @param array<string, mixed> myOptions List of options.
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.ORM\Entity::$_accessible
      */
     function merge(IEntity $entity, array myData, array myOptions = []): IEntity
@@ -706,7 +706,7 @@ class Marshaller
      * @param uim.cake.ORM\Association $assoc The association to merge
      * @param mixed myValue The array of data to hydrate. If not an array, this method will return null.
      * @param array<string, mixed> myOptions List of options.
-     * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
+     * @return uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
      */
     protected auto _mergeAssociation($original, Association $assoc, myValue, array myOptions) {
         if (!$original) {

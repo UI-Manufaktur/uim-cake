@@ -240,7 +240,7 @@ class BelongsToMany : Association
      * are passed, the current configured table instance is returned
      *
      * @param uim.cake.ORM\Table|string|null $table Name or instance for the join table
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
     function junction($table = null): Table
@@ -658,7 +658,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @throws \InvalidArgumentException if the property representing the association
      * in the parent entity cannot be traversed
-     * @return \Cake\Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
+     * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.ORM\Table::save()
      * @see uim.cake.ORM\Association\BelongsToMany::replaceLinks()
@@ -697,7 +697,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> $options list of options accepted by `Table::save()`
      * @throws \InvalidArgumentException if the property representing the association
      * in the parent entity cannot be traversed
-     * @return \Cake\Datasource\EntityInterface|false The parent entity after all links have been
+     * @return uim.cake.Datasource\EntityInterface|false The parent entity after all links have been
      * created if no errors happened, false otherwise
      */
     protected function _saveTarget(EntityInterface $parentEntity, array $entities, $options) {
@@ -958,7 +958,7 @@ class BelongsToMany : Association
     /**
      * Gets the current join table, either the name of the Table instance or the instance itself.
      *
-     * @return \Cake\ORM\Table|string
+     * @return uim.cake.ORM\Table|string
      */
     function getThrough() {
         return _through;
@@ -1039,7 +1039,7 @@ class BelongsToMany : Association
      *   it will be interpreted as the `$options` parameter
      * @param array<string, mixed> $options The options to for the find
      * @see uim.cake.ORM\Table::find()
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     function find($type = null, array $options = []): Query
     {
@@ -1062,7 +1062,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.ORM\Query $query The query to append.
      * @param array|null $conditions The query conditions to use.
-     * @return \Cake\ORM\Query The modified query.
+     * @return uim.cake.ORM\Query The modified query.
      */
     protected function _appendJunctionJoin(Query $query, ?array $conditions = null): Query
     {

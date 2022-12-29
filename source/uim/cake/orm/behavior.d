@@ -162,7 +162,7 @@ class Behavior : IEventListener
     /**
      * Get the table instance this behavior is bound to.
      *
-     * @return \Cake\ORM\Table The bound table instance.
+     * @return uim.cake.ORM\Table The bound table instance.
      * @deprecated 4.2.0 Use table() instead.
      */
     auto getTable(): Table
@@ -175,7 +175,7 @@ class Behavior : IEventListener
     /**
      * Get the table instance this behavior is bound to.
      *
-     * @return \Cake\ORM\Table The bound table instance.
+     * @return uim.cake.ORM\Table The bound table instance.
      */
     function table(): Table
     {

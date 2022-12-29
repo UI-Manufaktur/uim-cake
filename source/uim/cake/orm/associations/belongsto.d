@@ -80,7 +80,7 @@ class BelongsTo : Association
      *
      * @param uim.cake.Datasource\IEntity $entity an entity from the source table
      * @param array<string, mixed> myOptions options to be passed to the save method in the target table
-     * @return \Cake\Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
+     * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.ORM\Table::save()
      */

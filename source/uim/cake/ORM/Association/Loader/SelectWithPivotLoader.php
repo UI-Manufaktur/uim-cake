@@ -64,7 +64,7 @@ class SelectWithPivotLoader : SelectLoader
      * This is used for eager loading records on the target table based on conditions.
      *
      * @param array<string, mixed> $options options accepted by eagerLoader()
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      * @throws \InvalidArgumentException When a key is required for associations but not selected.
      */
     protected function _buildQuery(array $options): Query

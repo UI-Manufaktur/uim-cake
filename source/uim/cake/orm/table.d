@@ -420,7 +420,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Returns the connection instance.
      *
-     * @return \Cake\Database\Connection
+     * @return uim.cake.Database\Connection
      */
     Connection getConnection() {
         if (!_connection) {
@@ -435,7 +435,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Returns the schema table object describing this table"s properties.
      *
-     * @return \Cake\Database\Schema\TableSchemaInterface
+     * @return uim.cake.Database\Schema\TableSchemaInterface
      */
     auto getSchema(): TableSchemaInterface
     {
@@ -537,7 +537,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ```
      *
      * @param uim.cake.Database\Schema\TableSchemaInterface $schema The table definition fetched from database.
-     * @return \Cake\Database\Schema\TableSchemaInterface the altered schema
+     * @return uim.cake.Database\Schema\TableSchemaInterface the altered schema
      */
     protected auto _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
     {
@@ -748,7 +748,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Returns the behavior registry for this table.
      *
-     * @return \Cake\ORM\BehaviorRegistry The BehaviorRegistry instance.
+     * @return uim.cake.ORM\BehaviorRegistry The BehaviorRegistry instance.
      */
     function behaviors(): BehaviorRegistry
     {
@@ -759,7 +759,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Get a behavior from the registry.
      *
      * @param string myName The behavior alias to get from the registry.
-     * @return \Cake\ORM\Behavior
+     * @return uim.cake.ORM\Behavior
      * @throws \InvalidArgumentException If the behavior does not exist.
      */
     auto getBehavior(string myName): Behavior
@@ -801,7 +801,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * If you are not sure, use hasAssociation() before calling this method.
      *
      * @param string myName The alias used for the association.
-     * @return \Cake\ORM\Association The association.
+     * @return uim.cake.ORM\Association The association.
      * @throws \InvalidArgumentException
      */
     auto getAssociation(string myName): Association
@@ -845,7 +845,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ```
      *
      * @param string myName The alias used for the association.
-     * @return \Cake\ORM\Association|null Either the association or null.
+     * @return uim.cake.ORM\Association|null Either the association or null.
      */
     protected auto findAssociation(string myName): ?Association
     {
@@ -869,7 +869,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Get the associations collection for this table.
      *
-     * @return \Cake\ORM\AssociationCollection The collection of association objects.
+     * @return uim.cake.ORM\AssociationCollection The collection of association objects.
      */
     function associations(): AssociationCollection
     {
@@ -945,7 +945,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param string associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> myOptions list of options to configure the association definition
-     * @return \Cake\ORM\Association\BelongsTo
+     * @return uim.cake.ORM\Association\BelongsTo
      */
     function belongsTo(string associated, array myOptions = []): BelongsTo
     {
@@ -991,7 +991,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param string associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> myOptions list of options to configure the association definition
-     * @return \Cake\ORM\Association\HasOne
+     * @return uim.cake.ORM\Association\HasOne
      */
     function hasOne(string associated, array myOptions = []): HasOne
     {
@@ -1043,7 +1043,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param string associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> myOptions list of options to configure the association definition
-     * @return \Cake\ORM\Association\HasMany
+     * @return uim.cake.ORM\Association\HasMany
      */
     function hasMany(string associated, array myOptions = []): HasMany
     {
@@ -1097,7 +1097,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param string associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> myOptions list of options to configure the association definition
-     * @return \Cake\ORM\Association\BelongsToMany
+     * @return uim.cake.ORM\Association\BelongsToMany
      */
     function belongsToMany(string associated, array myOptions = []): BelongsToMany
     {
@@ -1165,7 +1165,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param string myType the type of query to perform
      * @param array<string, mixed> myOptions An array that will be passed to Query::applyOptions()
-     * @return \Cake\ORM\Query The query builder
+     * @return uim.cake.ORM\Query The query builder
      */
     function find(string myType = "all", array myOptions = []): Query
     {
@@ -1183,7 +1183,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.ORM\Query myQuery The query to find with
      * @param array<string, mixed> myOptions The options to use for the find
-     * @return \Cake\ORM\Query The query builder
+     * @return uim.cake.ORM\Query The query builder
      */
     function findAll(Query myQuery, array myOptions): Query
     {
@@ -1264,7 +1264,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.ORM\Query myQuery The query to find with
      * @param array<string, mixed> myOptions The options for the find
-     * @return \Cake\ORM\Query The query builder
+     * @return uim.cake.ORM\Query The query builder
      */
     function findList(Query myQuery, array myOptions): Query
     {
@@ -1329,7 +1329,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.ORM\Query myQuery The query to find with
      * @param array<string, mixed> myOptions The options to find with
-     * @return \Cake\ORM\Query The query builder
+     * @return uim.cake.ORM\Query The query builder
      */
     function findThreaded(Query myQuery, array myOptions): Query
     {
@@ -1400,7 +1400,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param mixed $primaryKey primary key value to find
      * @param array<string, mixed> myOptions options accepted by `Table::find()`
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      * @throws \Cake\Datasource\Exception\RecordNotFoundException if the record with such id
      * could not be found
      * @throws \Cake\Datasource\Exception\InvalidPrimaryKeyException When $primaryKey has an
@@ -1512,7 +1512,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *   created entities. This callback will be called *before* the entity
      *   is persisted.
      * @param array<string, mixed> myOptions The options to use when saving.
-     * @return \Cake\Datasource\IEntity An entity.
+     * @return uim.cake.Datasource\IEntity An entity.
      * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      */
     function findOrCreate($search, ?callable $callback = null, myOptions = []): IEntity
@@ -1542,7 +1542,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *   created entities. This callback will be called *before* the entity
      *   is persisted.
      * @param array<string, mixed> myOptions The options to use when saving.
-     * @return \Cake\Datasource\IEntity|array An entity.
+     * @return uim.cake.Datasource\IEntity|array An entity.
      * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      * @throws \InvalidArgumentException
      */
@@ -1577,7 +1577,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Gets the query object for findOrCreate().
      *
      * @param uim.cake.ORM\Query|callable|array $search The criteria to find existing records by.
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected auto _getFindOrCreateQuery($search): Query
     {
@@ -1601,7 +1601,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Creates a new Query instance for a table.
      *
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     function query(): Query
     {
@@ -1611,7 +1611,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Creates a new Query::subquery() instance for a table.
      *
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      * @see uim.cake.ORM\Query::subquery()
      */
     function subquery(): Query
@@ -1737,7 +1737,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions The options to use when saving.
-     * @return \Cake\Datasource\IEntity|false
+     * @return uim.cake.Datasource\IEntity|false
      * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction is aborted in the afterSave event.
      */
     function save(IEntity $entity, myOptions = []) {
@@ -1785,7 +1785,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayAccess|array myOptions The options to use when saving.
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      * @see uim.cake.ORM\Table::save()
      */
@@ -1804,7 +1804,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayObject myOptions the options to use for the save operation
-     * @return \Cake\Datasource\IEntity|false
+     * @return uim.cake.Datasource\IEntity|false
      * @throws \RuntimeException When an entity is missing some of the primary keys.
      * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
@@ -1919,7 +1919,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IEntity $entity the subject entity from were myData was extracted
      * @param array myData The actual data that needs to be saved
-     * @return \Cake\Datasource\IEntity|false
+     * @return uim.cake.Datasource\IEntity|false
      * @throws \RuntimeException if not all the primary keys where supplied or could
      * be generated when the table has composite primary keys. Or when the table has no primary key.
      */
@@ -2017,7 +2017,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IEntity $entity the subject entity from were myData was extracted
      * @param array myData The actual data that needs to be saved
-     * @return \Cake\Datasource\IEntity|false
+     * @return uim.cake.Datasource\IEntity|false
      * @throws \InvalidArgumentException When primary key data is missing.
      */
     protected auto _update(IEntity $entity, array myData) {
@@ -2066,7 +2066,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
      * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false False on failure, entities list on success.
+     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false False on failure, entities list on success.
      * @throws \Exception
      */
     function saveMany(iterable $entities, myOptions = []) {
@@ -2086,7 +2086,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
+     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      * @throws \Exception
      * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      */
@@ -2100,7 +2100,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      * @throws \Exception If an entity couldn"t be saved.
-     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
+     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      */
     protected auto _saveMany(iterable $entities, myOptions = []): iterable
     {
@@ -2219,7 +2219,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false Entities list
+     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false Entities list
      *   on success, false on failure.
      * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
@@ -2242,7 +2242,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
+     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      * @throws \Cake\ORM\Exception\PersistenceFailedException
      * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
@@ -2260,7 +2260,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used.
-     * @return \Cake\Datasource\IEntity|null
+     * @return uim.cake.Datasource\IEntity|null
      */
     protected auto _deleteMany(iterable $entities, myOptions = []): ?IEntity
     {
@@ -2392,7 +2392,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param string myType name of the finder to be called
      * @param uim.cake.ORM\Query myQuery The query object to apply the finder options to
      * @param array<string, mixed> myOptions List of options to pass to the finder
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      * @throws \BadMethodCallException
      * @uses findAll()
      * @uses findList()
@@ -2423,7 +2423,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param string method The method name that was fired.
      * @param array $args List of arguments passed to the function.
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      * @throws \BadMethodCallException when there are missing arguments, or when
      *  and & or are combined.
      */
@@ -2509,7 +2509,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * throws an exception.
      *
      * @param string property the association name
-     * @return \Cake\ORM\Association
+     * @return uim.cake.ORM\Association
      * @throws \RuntimeException if no association with such name exists
      */
     auto __get($property) {
@@ -2544,7 +2544,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Override this method if you want a table object to use custom
      * marshalling logic.
      *
-     * @return \Cake\ORM\Marshaller
+     * @return uim.cake.ORM\Marshaller
      * @see uim.cake.ORM\Marshaller
      */
     function marshaller(): Marshaller
@@ -2555,7 +2555,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * {@inheritDoc}
      *
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      */
     function newEmptyEntity(): IEntity
     {
@@ -2620,7 +2620,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param array myData The data to build an entity with.
      * @param array<string, mixed> myOptions A list of options for the object hydration.
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.ORM\Marshaller::one()
      */
     function newEntity(array myData, array myOptions = []): IEntity
@@ -2719,7 +2719,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * data merged in
      * @param array myData key value list of fields to be merged into the entity
      * @param array<string, mixed> myOptions A list of options for the object hydration.
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.ORM\Marshaller::merge()
      */
     function patchEntity(IEntity $entity, array myData, array myOptions = []): IEntity
@@ -2890,7 +2890,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * {@inheritDoc}
      *
      * @param uim.cake.ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
+     * @return uim.cake.ORM\RulesChecker
      */
     function buildRules(RulesChecker $rules): RulesChecker
     {
@@ -2901,7 +2901,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Gets a SaveOptionsBuilder instance.
      *
      * @param array<string, mixed> myOptions Options to parse by the builder.
-     * @return \Cake\ORM\SaveOptionsBuilder
+     * @return uim.cake.ORM\SaveOptionsBuilder
      */
     auto getSaveOptionsBuilder(array myOptions = []): SaveOptionsBuilder
     {
@@ -2936,7 +2936,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.ORM\Query::contain()
-     * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>
+     * @return uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity>
      */
     function loadInto($entities, array $contain) {
         return (new LazyEagerLoader()).loadInto($entities, $contain, this);

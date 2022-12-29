@@ -54,7 +54,7 @@ class TableRegistry
     /**
      * Returns a singleton instance of ILocatorimplementation.
      *
-     * @return \Cake\ORM\Locator\ILocator
+     * @return uim.cake.ORM\Locator\ILocator
      */
     public static function getTableLocator(): ILocator
     {
@@ -80,7 +80,7 @@ class TableRegistry
      *
      * @param string $alias The alias name you want to get.
      * @param array<string, mixed> $options The options you want to build the table with.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\LocatorAwareTrait::fetchTable()} instead. Will be removed in 5.0.
      */
     public static function get(string $alias, array $options = []): Table
@@ -105,7 +105,7 @@ class TableRegistry
      *
      * @param string $alias The alias to set.
      * @param uim.cake.ORM\Table $object The table to set.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::set()} instead. Will be removed in 5.0
      */
     public static function set(string $alias, Table $object): Table

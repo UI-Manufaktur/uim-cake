@@ -34,7 +34,7 @@ class RulesChecker : BaseRulesChecker
      * @param myFields The list of fields to check for uniqueness.
      * @param array<string, mixed>|string|null myMessage The error message to show in case the rule does not pass. Can
      *   also be an array of options. When an array, the "message" key can be used to provide a message.
-     * @return \Cake\Datasource\RuleInvoker
+     * @return uim.cake.Datasource\RuleInvoker
      */
     function isUnique(string[] myFields, myMessage = null): RuleInvoker
     {
@@ -78,7 +78,7 @@ class RulesChecker : BaseRulesChecker
      * @param uim.cake.ORM\Table|\Cake\ORM\Association|string myTable The table name where the fields existence will be checked.
      * @param array<string, mixed>|string|null myMessage The error message to show in case the rule does not pass. Can
      *   also be an array of options. When an array, the "message" key can be used to provide a message.
-     * @return \Cake\Datasource\RuleInvoker
+     * @return uim.cake.Datasource\RuleInvoker
      */
     function existsIn(myField, myTable, myMessage = null): RuleInvoker
     {
@@ -118,7 +118,7 @@ class RulesChecker : BaseRulesChecker
      * @param string|null myField The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
      * @param string|null myMessage The error message to show in case the rule does not pass.
-     * @return \Cake\Datasource\RuleInvoker
+     * @return uim.cake.Datasource\RuleInvoker
      * @since 4.0.0
      */
     function isLinkedTo($association, Nullable!string myField = null, Nullable!string myMessage = null): RuleInvoker
@@ -148,7 +148,7 @@ class RulesChecker : BaseRulesChecker
      * @param string|null myField The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
      * @param string|null myMessage The error message to show in case the rule does not pass.
-     * @return \Cake\Datasource\RuleInvoker
+     * @return uim.cake.Datasource\RuleInvoker
      * @since 4.0.0
      */
     function isNotLinkedTo($association, Nullable!string myField = null, Nullable!string myMessage = null): RuleInvoker
@@ -171,7 +171,7 @@ class RulesChecker : BaseRulesChecker
      * @param string|null myMessage The error message to show in case the rule does not pass.
      * @param string linkStatus The ink status required for the check to pass.
      * @param string ruleName The alias/name of the rule.
-     * @return \Cake\Datasource\RuleInvoker
+     * @return uim.cake.Datasource\RuleInvoker
      * @throws \InvalidArgumentException In case the `$association` argument is of an invalid type.
      * @since 4.0.0
      * @see uim.cake.ORM\RulesChecker::isLinkedTo()
@@ -241,7 +241,7 @@ class RulesChecker : BaseRulesChecker
      * @param int myCount The expected count.
      * @param string operator The operator for the count comparison.
      * @param string|null myMessage The error message to show in case the rule does not pass.
-     * @return \Cake\Datasource\RuleInvoker
+     * @return uim.cake.Datasource\RuleInvoker
      */
     function validCount(
         string myField,

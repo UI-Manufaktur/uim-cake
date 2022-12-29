@@ -143,7 +143,7 @@ class EagerLoadable
     /**
      * Gets the Association class instance to use for loading the records.
      *
-     * @return \Cake\ORM\Association
+     * @return uim.cake.ORM\Association
      * @throws \RuntimeException
      */
     function instance(): Association

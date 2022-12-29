@@ -470,7 +470,7 @@ class EagerLoader
      * separated strings representing associations that lead to this `$alias` in the
      * chain of associations to be loaded. The second value is the path to follow in
      * entities" properties to fetch a record of the corresponding association.
-     * @return \Cake\ORM\EagerLoadable Object with normalized associations
+     * @return uim.cake.ORM\EagerLoadable Object with normalized associations
      * @throws \InvalidArgumentException When containments refer to associations that do not exist.
      */
     protected function _normalizeContain(Table $parent, string $alias, array $options, array $paths): EagerLoadable
@@ -609,7 +609,7 @@ class EagerLoader
      * @param uim.cake.ORM\Query $query The query for which to eager load external
      * associations
      * @param uim.cake.Database\StatementInterface $statement The statement created after executing the $query
-     * @return \Cake\Database\StatementInterface statement modified statement with extra loaders
+     * @return uim.cake.Database\StatementInterface statement modified statement with extra loaders
      * @throws \RuntimeException
      */
     function loadExternal(Query $query, StatementInterface $statement): StatementInterface

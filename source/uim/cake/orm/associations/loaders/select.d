@@ -99,7 +99,7 @@ class SelectLoader {
      * the source table
      *
      * @param array<string, mixed> myOptions options accepted by eagerLoader()
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      * @throws \InvalidArgumentException When a key is required for associations but not selected.
      */
     protected auto _buildQuery(array myOptions): Query
@@ -229,7 +229,7 @@ class SelectLoader {
      * @param uim.cake.ORM\Query myQuery Target table"s query
      * @param array<string>|string myKey the fields that should be used for filtering
      * @param uim.cake.ORM\Query $subquery The Subquery to use for filtering
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected auto _addFilteringJoin(Query myQuery, myKey, $subquery): Query
     {
@@ -265,7 +265,7 @@ class SelectLoader {
      * @param uim.cake.ORM\Query myQuery Target table"s query
      * @param array<string>|string myKey The fields that should be used for filtering
      * @param mixed $filter The value that should be used to match for myKey
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected auto _addFilteringCondition(Query myQuery, myKey, $filter): Query
     {
@@ -286,7 +286,7 @@ class SelectLoader {
      * @param myKeys the fields that should be used for filtering
      * @param mixed $filter the value that should be used to match for myKey
      * @param string operator The operator for comparing the tuples
-     * @return \Cake\Database\Expression\TupleComparison
+     * @return uim.cake.Database\Expression\TupleComparison
      */
     protected auto _createTupleCondition(Query myQuery, string[] myKeys, $filter, $operator): TupleComparison
     {
@@ -339,7 +339,7 @@ class SelectLoader {
      * to load records in the source table.
      *
      * @param uim.cake.ORM\Query myQuery the original query used to load source records
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected auto _buildSubquery(Query myQuery): Query
     {

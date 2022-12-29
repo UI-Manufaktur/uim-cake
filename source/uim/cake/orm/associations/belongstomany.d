@@ -177,7 +177,7 @@ class BelongsToMany : Association
      * are passed, the current configured table instance is returned
      *
      * @param uim.cake.ORM\Table|string|null myTable Name or instance for the join table
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
     function junction(myTable = null): Table
@@ -581,7 +581,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> myOptions options to be passed to the save method in the target table
      * @throws \InvalidArgumentException if the property representing the association
      * in the parent entity cannot be traversed
-     * @return \Cake\Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
+     * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.ORM\Table::save()
      * @see uim.cake.ORM\Association\BelongsToMany::replaceLinks()
@@ -620,7 +620,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> myOptions list of options accepted by `Table::save()`
      * @throws \InvalidArgumentException if the property representing the association
      * in the parent entity cannot be traversed
-     * @return \Cake\Datasource\IEntity|false The parent entity after all links have been
+     * @return uim.cake.Datasource\IEntity|false The parent entity after all links have been
      * created if no errors happened, false otherwise
      */
     protected auto _saveTarget(IEntity $parentEntity, array $entities, myOptions) {
@@ -878,7 +878,7 @@ class BelongsToMany : Association
     /**
      * Gets the current join table, either the name of the Table instance or the instance itself.
      *
-     * @return \Cake\ORM\Table|string
+     * @return uim.cake.ORM\Table|string
      */
     auto getThrough() {
         return _through;
@@ -959,7 +959,7 @@ class BelongsToMany : Association
      *   it will be interpreted as the `myOptions` parameter
      * @param array<string, mixed> myOptions The options to for the find
      * @see uim.cake.ORM\Table::find()
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     function find(myType = null, array myOptions = []): Query
     {
@@ -982,7 +982,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.ORM\Query myQuery The query to append.
      * @param array|null $conditions The query conditions to use.
-     * @return \Cake\ORM\Query The modified query.
+     * @return uim.cake.ORM\Query The modified query.
      */
     protected auto _appendJunctionJoin(Query myQuery, ?array $conditions = null): Query
     {

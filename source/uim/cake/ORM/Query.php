@@ -302,7 +302,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Returns the currently configured instance.
      *
-     * @return \Cake\ORM\EagerLoader
+     * @return uim.cake.ORM\EagerLoader
      */
     function getEagerLoader(): EagerLoader
     {
@@ -1056,7 +1056,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * {@inheritDoc}
      *
-     * @return \Cake\Datasource\IResultSet
+     * @return uim.cake.Datasource\IResultSet
      * @throws \RuntimeException if this method is called on a non-select Query.
      */
     function all(): IResultSet
@@ -1106,7 +1106,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * This will also setup the correct statement class in order to eager load deep
      * associations.
      *
-     * @return \Cake\Datasource\IResultSet
+     * @return uim.cake.Datasource\IResultSet
      */
     protected function _execute(): IResultSet
     {
@@ -1339,7 +1339,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * Part of JsonSerializable interface.
      *
-     * @return \Cake\Datasource\IResultSet The data to convert to JSON.
+     * @return uim.cake.Datasource\IResultSet The data to convert to JSON.
      */
     function jsonSerialize(): IResultSet
     {
@@ -1389,7 +1389,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Decorates the results iterator with MapReduce routines and formatters
      *
      * @param \Traversable $result Original results
-     * @return \Cake\Datasource\IResultSet
+     * @return uim.cake.Datasource\IResultSet
      */
     protected function _decorateResults(Traversable $result): IResultSet
     {

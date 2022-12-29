@@ -144,7 +144,7 @@ class SelectLoader
      * the source table
      *
      * @param array<string, mixed> $options options accepted by eagerLoader()
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      * @throws \InvalidArgumentException When a key is required for associations but not selected.
      */
     protected function _buildQuery(array $options): Query
@@ -279,7 +279,7 @@ class SelectLoader
      * @param uim.cake.ORM\Query $query Target table"s query
      * @param array<string>|string $key the fields that should be used for filtering
      * @param uim.cake.ORM\Query $subquery The Subquery to use for filtering
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected function _addFilteringJoin(Query $query, $key, $subquery): Query
     {
@@ -315,7 +315,7 @@ class SelectLoader
      * @param uim.cake.ORM\Query $query Target table"s query
      * @param array<string>|string $key The fields that should be used for filtering
      * @param mixed $filter The value that should be used to match for $key
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected function _addFilteringCondition(Query $query, $key, $filter): Query
     {
@@ -336,7 +336,7 @@ class SelectLoader
      * @param array<string> $keys the fields that should be used for filtering
      * @param mixed $filter the value that should be used to match for $key
      * @param string $operator The operator for comparing the tuples
-     * @return \Cake\Database\Expression\TupleComparison
+     * @return uim.cake.Database\Expression\TupleComparison
      */
     protected function _createTupleCondition(Query $query, array $keys, $filter, $operator): TupleComparison
     {
@@ -390,7 +390,7 @@ class SelectLoader
      * to load records in the source table.
      *
      * @param uim.cake.ORM\Query $query the original query used to load source records
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected function _buildSubquery(Query $query): Query
     {

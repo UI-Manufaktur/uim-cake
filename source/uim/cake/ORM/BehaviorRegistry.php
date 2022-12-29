@@ -128,7 +128,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname that is missing.
      * @param string $alias The alias of the object.
      * @param array<string, mixed> $config An array of config to use for the behavior.
-     * @return \Cake\ORM\Behavior The constructed behavior class.
+     * @return uim.cake.ORM\Behavior The constructed behavior class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected function _create($class, string $alias, array $config): Behavior
@@ -253,7 +253,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param string $type The finder type to invoke.
      * @param array $args The arguments you want to invoke the method with.
-     * @return \Cake\ORM\Query The return value depends on the underlying behavior method.
+     * @return uim.cake.ORM\Query The return value depends on the underlying behavior method.
      * @throws \BadMethodCallException When the method is unknown.
      */
     function callFinder(string $type, array $args = []): Query

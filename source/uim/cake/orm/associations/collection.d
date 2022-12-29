@@ -40,7 +40,7 @@ class AssociationCollection : IteratorAggregate {
      *
      * @param string myAlias The association alias
      * @param uim.cake.ORM\Association $association The association to add.
-     * @return \Cake\ORM\Association The association object being added.
+     * @return uim.cake.ORM\Association The association object being added.
      */
     function add(string myAlias, Association $association): Association
     {
@@ -55,7 +55,7 @@ class AssociationCollection : IteratorAggregate {
      * @param string myClassName The name of association class.
      * @param string associated The alias for the target table.
      * @param array<string, mixed> myOptions List of options to configure the association definition.
-     * @return \Cake\ORM\Association
+     * @return uim.cake.ORM\Association
      * @throws \InvalidArgumentException
      */
     function load(string myClassName, string associated, array myOptions = []): Association
@@ -81,7 +81,7 @@ class AssociationCollection : IteratorAggregate {
      * Fetch an attached association by name.
      *
      * @param string myAlias The association alias to get.
-     * @return \Cake\ORM\Association|null Either the association or null.
+     * @return uim.cake.ORM\Association|null Either the association or null.
      */
     auto get(string myAlias): ?Association
     {
@@ -92,7 +92,7 @@ class AssociationCollection : IteratorAggregate {
      * Fetch an association by property name.
      *
      * @param string prop The property to find an association by.
-     * @return \Cake\ORM\Association|null Either the association or null.
+     * @return uim.cake.ORM\Association|null Either the association or null.
      */
     auto getByProperty(string prop): ?Association
     {

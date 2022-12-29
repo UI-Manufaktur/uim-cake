@@ -24,7 +24,7 @@ class LazyEagerLoader
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.ORM\Query::contain()
      * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
-     * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>
+     * @return uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity>
      */
     function loadInto($entities, array $contain, Table $source) {
         $returnSingle = false;
@@ -50,7 +50,7 @@ class LazyEagerLoader
      * @param uim.cake.Collection\ICollection $objects The original entities
      * @param array $contain The associations to be loaded
      * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected auto _getQuery(ICollection $objects, array $contain, Table $source): Query
     {

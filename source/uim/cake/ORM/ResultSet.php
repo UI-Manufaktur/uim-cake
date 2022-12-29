@@ -444,7 +444,7 @@ class ResultSet : IResultSet
      * Correctly nests results keys including those coming from associations
      *
      * @param array $row Array containing columns and values or false if there is no results
-     * @return \Cake\Datasource\EntityInterface|array Results
+     * @return uim.cake.Datasource\EntityInterface|array Results
      */
     protected function _groupResult(array $row) {
         $defaultAlias = _defaultAlias;
