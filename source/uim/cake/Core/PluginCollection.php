@@ -115,7 +115,7 @@ class PluginCollection : Iterator, Countable
      *
      * @param string $name The plugin name to locate a path for.
      * @return string
-     * @throws \Cake\Core\Exception\MissingPluginException when a plugin path cannot be resolved.
+     * @throws uim.cake.Core\Exception\MissingPluginException when a plugin path cannot be resolved.
      * @internal
      */
     function findPath(string $name): string
@@ -203,7 +203,7 @@ class PluginCollection : Iterator, Countable
      *
      * @param string $name The plugin to get.
      * @return uim.cake.Core\PluginInterface The plugin.
-     * @throws \Cake\Core\Exception\MissingPluginException when unknown plugins are fetched.
+     * @throws uim.cake.Core\Exception\MissingPluginException when unknown plugins are fetched.
      */
     function get(string $name): PluginInterface
     {
@@ -223,7 +223,7 @@ class PluginCollection : Iterator, Countable
      * @param string $name The plugin name or classname
      * @param array<string, mixed> $config Configuration options for the plugin.
      * @return uim.cake.Core\PluginInterface
-     * @throws \Cake\Core\Exception\MissingPluginException When plugin instance could not be created.
+     * @throws uim.cake.Core\Exception\MissingPluginException When plugin instance could not be created.
      */
     function create(string $name, array $config = []): PluginInterface
     {

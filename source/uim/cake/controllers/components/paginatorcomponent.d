@@ -165,7 +165,7 @@ class PaginatorComponent : Component
      * @param uim.cake.Datasource\IRepository|\Cake\Datasource\IQuery $object Table or query to paginate.
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return uim.cake.Datasource\IResultSet Query results
-     * @throws \Cake\Http\Exception\NotFoundException
+     * @throws uim.cake.Http\Exception\NotFoundException
      */
     IResultSet paginate(object $object, array $settings = []) {
         myRequest = _registry.getController().getRequest();

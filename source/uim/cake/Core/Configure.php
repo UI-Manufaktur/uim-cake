@@ -309,7 +309,7 @@ class Configure
      * @param string $config Name of the configured engine to use to read the resource identified by $key.
      * @param bool $merge if config files should be merged instead of simply overridden
      * @return bool True if load successful.
-     * @throws \Cake\Core\Exception\CakeException if the $config engine is not found
+     * @throws uim.cake.Core\Exception\CakeException if the $config engine is not found
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-and-writing-configuration-files
      */
     public static bool load(string $key, string $config = "default", bool $merge = true)
@@ -363,7 +363,7 @@ class Configure
      * @param array<string> $keys The name of the top-level keys you want to dump.
      *   This allows you save only some data stored in Configure.
      * @return bool Success
-     * @throws \Cake\Core\Exception\CakeException if the adapter does not implement a `dump` method.
+     * @throws uim.cake.Core\Exception\CakeException if the adapter does not implement a `dump` method.
      */
     public static bool dump(string $key, string $config = "default", array $keys = [])
     {

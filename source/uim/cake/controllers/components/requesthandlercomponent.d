@@ -168,7 +168,7 @@ class RequestHandlerComponent : Component {
      *   set that Content-type in the response header.
      *
      * @param uim.cake.Event\IEvent myEvent The Controller.beforeRender event.
-     * @throws \Cake\Http\Exception\NotFoundException If invoked extension is not configured.
+     * @throws uim.cake.Http\Exception\NotFoundException If invoked extension is not configured.
      */
     void beforeRender(IEvent myEvent) {
         $controller = this.getController();

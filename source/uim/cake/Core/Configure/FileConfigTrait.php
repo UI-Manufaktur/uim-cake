@@ -31,7 +31,7 @@ trait FileConfigTrait
      *  as a plugin prefix.
      * @param bool $checkExists Whether to check if file exists. Defaults to false.
      * @return string Full file path
-     * @throws \Cake\Core\Exception\CakeException When files don"t exist or when
+     * @throws uim.cake.Core\Exception\CakeException When files don"t exist or when
      *  files contain ".." as this could lead to abusive reads.
      */
     protected function _getFilePath(string $key, bool $checkExists = false): string

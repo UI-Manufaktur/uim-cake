@@ -208,7 +208,7 @@ interface TableSchemaInterface : SchemaInterface
      * @param array<string, mixed>|string $attrs The attributes for the index.
      *   If string it will be used as `type`.
      * @return this
-     * @throws \Cake\Database\Exception\DatabaseException
+     * @throws uim.cake.Database\Exception\DatabaseException
      */
     function addIndex(string $name, $attrs);
 
@@ -247,7 +247,7 @@ interface TableSchemaInterface : SchemaInterface
      * @param array<string, mixed>|string $attrs The attributes for the constraint.
      *   If string it will be used as `type`.
      * @return this
-     * @throws \Cake\Database\Exception\DatabaseException
+     * @throws uim.cake.Database\Exception\DatabaseException
      */
     function addConstraint(string $name, $attrs);
 

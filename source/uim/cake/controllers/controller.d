@@ -452,7 +452,7 @@ class Controller : IEventListener, IEventDispatcher
      * Get the closure for action to be invoked by ControllerFactory.
      *
      * @return \Closure
-     * @throws \Cake\Controller\Exception\MissingActionException
+     * @throws uim.cake.Controller\Exception\MissingActionException
      */
     Closure getAction() {
         myRequest = this.request;

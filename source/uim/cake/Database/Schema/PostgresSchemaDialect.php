@@ -86,7 +86,7 @@ class PostgresSchemaDialect : SchemaDialect
      * Cake\Database\TypeFactory can handle.
      *
      * @param string $column The column type + length
-     * @throws \Cake\Database\Exception\DatabaseException when column cannot be parsed.
+     * @throws uim.cake.Database\Exception\DatabaseException when column cannot be parsed.
      * @return array<string, mixed> Array of column information.
      */
     protected function _convertColumn(string $column): array

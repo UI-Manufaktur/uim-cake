@@ -40,7 +40,7 @@ class SqliteSchemaDialect : SchemaDialect
      * Cake\Database\TypeFactory can handle.
      *
      * @param string $column The column type + length
-     * @throws \Cake\Database\Exception\DatabaseException when unable to parse column type
+     * @throws uim.cake.Database\Exception\DatabaseException when unable to parse column type
      * @return array<string, mixed> Array of column information.
      */
     protected function _convertColumn(string $column): array
@@ -332,7 +332,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @param uim.cake.Database\Schema\TableSchema $schema The table instance the column is in.
      * @param string $name The name of the column.
      * @return string SQL fragment.
-     * @throws \Cake\Database\Exception\DatabaseException when the column type is unknown
+     * @throws uim.cake.Database\Exception\DatabaseException when the column type is unknown
      */
     function columnSql(TableSchema $schema, string $name): string
     {

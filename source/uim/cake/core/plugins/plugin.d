@@ -22,7 +22,7 @@ class Plugin {
      *
      * @param string myName name of the plugin in CamelCase format
      * @return path to the plugin folder
-     * @throws \Cake\Core\Exception\MissingPluginException If the folder for plugin was not found
+     * @throws uim.cake.Core\Exception\MissingPluginException If the folder for plugin was not found
      *   or plugin has not been loaded.
      */
     static string path(string myName) {
@@ -35,7 +35,7 @@ class Plugin {
      *
      * @param string myName name of the plugin in CamelCase format.
      * @return Path to the plugin folder containing class files.
-     * @throws \Cake\Core\Exception\MissingPluginException If plugin has not been loaded.
+     * @throws uim.cake.Core\Exception\MissingPluginException If plugin has not been loaded.
      */
     static string classPath(string myName) {
         myPlugin = static::getCollection().get(myName);
@@ -48,7 +48,7 @@ class Plugin {
      *
      * @param string myName name of the plugin in CamelCase format.
      * @return Path to the plugin folder containing config files.
-     * @throws \Cake\Core\Exception\MissingPluginException If plugin has not been loaded.
+     * @throws uim.cake.Core\Exception\MissingPluginException If plugin has not been loaded.
      */
     static string configPath(string myName) {
         myPlugin = static::getCollection().get(myName);
@@ -61,7 +61,7 @@ class Plugin {
      *
      * @param string myName name of the plugin in CamelCase format.
      * @return Path to the plugin folder containing template files.
-     * @throws \Cake\Core\Exception\MissingPluginException If plugin has not been loaded.
+     * @throws uim.cake.Core\Exception\MissingPluginException If plugin has not been loaded.
      */
     static string templatePath(string myName) {
         myPlugin = static::getCollection().get(myName);

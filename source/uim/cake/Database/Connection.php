@@ -171,8 +171,8 @@ class Connection : ConnectionInterface
      *
      * @param uim.cake.Database\DriverInterface|string $driver The driver instance to use.
      * @param array<string, mixed> $config Config for a new driver.
-     * @throws \Cake\Database\Exception\MissingDriverException When a driver class is missing.
-     * @throws \Cake\Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
+     * @throws uim.cake.Database\Exception\MissingDriverException When a driver class is missing.
+     * @throws uim.cake.Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
      * @return this
      * @deprecated 4.4.0 Setting the driver is deprecated. Use the connection config instead.
      */
@@ -190,8 +190,8 @@ class Connection : ConnectionInterface
      * @param uim.cake.Database\DriverInterface|string $name Driver name, class name or instance.
      * @param array $config Driver config if $name is not an instance.
      * @return uim.cake.Database\DriverInterface
-     * @throws \Cake\Database\Exception\MissingDriverException When a driver class is missing.
-     * @throws \Cake\Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
+     * @throws uim.cake.Database\Exception\MissingDriverException When a driver class is missing.
+     * @throws uim.cake.Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
      */
     protected function createDriver($name, array $config): DriverInterface
     {
@@ -236,7 +236,7 @@ class Connection : ConnectionInterface
     /**
      * Connects to the configured database.
      *
-     * @throws \Cake\Database\Exception\MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.Database\Exception\MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
     function connect(): bool

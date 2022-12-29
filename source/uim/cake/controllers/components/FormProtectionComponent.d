@@ -116,7 +116,7 @@ class FormProtectionComponent : Component
      *
      * @param uim.cake.Form\FormProtector $formProtector Form Protector instance.
      * @return uim.cake.Http\Response|null If specified, validationFailureCallback"s response, or no return otherwise.
-     * @throws \Cake\Http\Exception\BadRequestException
+     * @throws uim.cake.Http\Exception\BadRequestException
      */
     protected auto validationFailure(FormProtector $formProtector): ?Response
     {

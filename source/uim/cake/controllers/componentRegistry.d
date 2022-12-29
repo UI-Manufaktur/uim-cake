@@ -83,7 +83,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the component is missing in.
-     * @throws \Cake\Controller\Exception\MissingComponentException
+     * @throws uim.cake.Controller\Exception\MissingComponentException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingComponentException([

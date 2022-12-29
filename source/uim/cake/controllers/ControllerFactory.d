@@ -48,7 +48,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to build a controller for.
      * @return uim.cake.Controller\Controller
-     * @throws \Cake\Http\Exception\MissingControllerException
+     * @throws uim.cake.Http\Exception\MissingControllerException
      */
     Controller create(IServerRequest myRequest) {
         myClassName = this.getControllerClass(myRequest);
@@ -78,7 +78,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      *
      * @param uim.cake.Controller\Controller $controller The controller to invoke.
      * @return \Psr\Http\Message\IResponse The response
-     * @throws \Cake\Controller\Exception\MissingActionException If controller action is not found.
+     * @throws uim.cake.Controller\Exception\MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
      */
     IResponse invoke($controller) {
