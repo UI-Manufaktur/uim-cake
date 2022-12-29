@@ -777,7 +777,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    function getSubject(): string
+    string getSubject(): string
     {
         return this.subject;
     }
@@ -992,7 +992,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    function getEmailFormat(): string
+    string getEmailFormat(): string
     {
         return this.emailFormat;
     }
@@ -1064,7 +1064,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    function getDomain(): string
+    string getDomain(): string
     {
         return this.domain;
     }
@@ -1515,7 +1515,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    function getBodyText() {
+    string getBodyText() {
         return this.textMessage;
     }
 
@@ -1524,7 +1524,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    function getBodyHtml() {
+    string getBodyHtml() {
         return this.htmlMessage;
     }
 
@@ -1755,7 +1755,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    function getContentTransferEncoding(): string
+    string getContentTransferEncoding(): string
     {
         if (this.transferEncoding) {
             return this.transferEncoding;
@@ -1777,7 +1777,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    function getContentTypeCharset(): string
+    string getContentTypeCharset(): string
     {
         $charset = strtoupper(this.charset);
         if (array_key_exists($charset, this.contentTypeCharset)) {
@@ -1839,7 +1839,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string
      */
-    function serialize(): string
+    string serialize(): string
     {
         $array = __serialize();
 

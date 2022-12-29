@@ -9,7 +9,7 @@
   */
 module uim.cake.I18n;
 
-import uim.cake.I18n\Exception\I18nException;
+import uim.cake.I18n\exceptions.I18nException;
 
 /**
  * A ServiceLocator implementation for loading and retaining formatter objects.
@@ -63,7 +63,7 @@ class FormatterLocator
      *
      * @param string $name The formatter to retrieve.
      * @return uim.cake.I18n\FormatterInterface A formatter object.
-     * @throws uim.cake.I18n\Exception\I18nException
+     * @throws uim.cake.I18n\exceptions.I18nException
      */
     function get(string $name): FormatterInterface
     {

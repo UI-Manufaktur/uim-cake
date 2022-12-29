@@ -126,7 +126,7 @@ class Server : IEventDispatcher
     /**
      * Get the application"s event manager or the global one.
      *
-     * @return uim.cake.Event\IEventManager
+     * @return uim.cake.events.IEventManager
      */
     auto getEventManager(): IEventManager
     {
@@ -142,7 +142,7 @@ class Server : IEventDispatcher
      *
      * If the application does not support events, an exception will be raised.
      *
-     * @param uim.cake.Event\IEventManager myEventManager The event manager to set.
+     * @param uim.cake.events.IEventManager myEventManager The event manager to set.
      * @return this
      * @throws \InvalidArgumentException
      */

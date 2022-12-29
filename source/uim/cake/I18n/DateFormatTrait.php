@@ -490,7 +490,7 @@ trait DateFormatTrait
      * @param bool $absolute removes time difference modifiers ago, after, etc
      * @return string
      */
-    function diffForHumans(?ChronosInterface $other = null, bool $absolute = false): string
+    string diffForHumans(?ChronosInterface $other = null, bool $absolute = false): string
     {
         return static::getDiffFormatter().diffForHumans(this, $other, $absolute);
     }

@@ -18,7 +18,7 @@ import uim.cake.core.StaticConfigTrait;
 import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.Log\Log;
-import uim.cake.Mailer\Exception\MissingActionException;
+import uim.cake.Mailer\exceptions.MissingActionException;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.View\ViewBuilder;
 use InvalidArgumentException;
@@ -327,7 +327,7 @@ class Mailer : IEventListener
      * @param array $args Arguments to pass to the triggered mailer action.
      * @param array $headers Headers to set.
      * @return array
-     * @throws uim.cake.Mailer\Exception\MissingActionException
+     * @throws uim.cake.Mailer\exceptions.MissingActionException
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */

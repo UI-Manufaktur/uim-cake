@@ -19,7 +19,7 @@ use RuntimeException;
  * An Association is a relationship established between two tables and is used
  * to configure and customize the way interconnected records are retrieved.
  *
- * @mixin uim.cake.ORM\Table
+ * @mixin uim.cake.orm.Table
  */
 abstract class Association
 {
@@ -131,14 +131,14 @@ abstract class Association
     /**
      * Source table instance
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected $_sourceTable;
 
     /**
      * Target table instance
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected $_targetTable;
 
@@ -263,7 +263,7 @@ abstract class Association
      *
      * @return string
      */
-    function getName(): string
+    string getName(): string
     {
         return _name;
     }
@@ -320,7 +320,7 @@ abstract class Association
      *
      * @return string
      */
-    function getClassName(): string
+    string getClassName(): string
     {
         return _className;
     }
@@ -328,7 +328,7 @@ abstract class Association
     /**
      * Sets the table instance for the source side of the association.
      *
-     * @param uim.cake.ORM\Table $table the instance to be assigned as source side
+     * @param uim.cake.orm.Table $table the instance to be assigned as source side
      * @return this
      */
     function setSource(Table $table) {
@@ -340,7 +340,7 @@ abstract class Association
     /**
      * Gets the table instance for the source side of the association.
      *
-     * @return uim.cake.ORM\Table
+     * @return uim.cake.orm.Table
      */
     function getSource(): Table
     {
@@ -350,7 +350,7 @@ abstract class Association
     /**
      * Sets the table instance for the target side of the association.
      *
-     * @param uim.cake.ORM\Table $table the instance to be assigned as target side
+     * @param uim.cake.orm.Table $table the instance to be assigned as target side
      * @return this
      */
     function setTarget(Table $table) {
@@ -362,7 +362,7 @@ abstract class Association
     /**
      * Gets the table instance for the target side of the association.
      *
-     * @return uim.cake.ORM\Table
+     * @return uim.cake.orm.Table
      */
     function getTarget(): Table
     {
@@ -541,7 +541,7 @@ abstract class Association
      *
      * @return string
      */
-    function getJoinType(): string
+    string getJoinType(): string
     {
         return _joinType;
     }
@@ -565,7 +565,7 @@ abstract class Association
      *
      * @return string
      */
-    function getProperty(): string
+    string getProperty(): string
     {
         if (!_propertyName) {
             _propertyName = _propertyName();
@@ -623,7 +623,7 @@ abstract class Association
      *
      * @return string
      */
-    function getStrategy(): string
+    string getStrategy(): string
     {
         return _strategy;
     }
@@ -681,7 +681,7 @@ abstract class Association
      * - negateMatch: Will append a condition to the passed query for excluding matches.
      *   with this association.
      *
-     * @param uim.cake.ORM\Query $query the query to be altered to include the target table data
+     * @param uim.cake.orm.Query $query the query to be altered to include the target table data
      * @param array<string, mixed> $options Any extra options or overrides to be taken in account
      * @return void
      * @throws \RuntimeException Unable to build the query or associations.
@@ -758,7 +758,7 @@ abstract class Association
      * Conditionally adds a condition to the passed Query that will make it find
      * records where there is no match with this association.
      *
-     * @param uim.cake.ORM\Query $query The query to modify
+     * @param uim.cake.orm.Query $query The query to modify
      * @param array<string, mixed> $options Options array containing the `negateMatch` key.
      * @return void
      */
@@ -829,8 +829,8 @@ abstract class Association
      * @param array<string, mixed>|string|null $type the type of query to perform, if an array is passed,
      *   it will be interpreted as the `$options` parameter
      * @param array<string, mixed> $options The options to for the find
-     * @see uim.cake.ORM\Table::find()
-     * @return uim.cake.ORM\Query
+     * @see uim.cake.orm.Table::find()
+     * @return uim.cake.orm.Query
      */
     function find($type = null, array $options = []): Query
     {
@@ -848,7 +848,7 @@ abstract class Association
      *
      * @param uim.cake.Database\IExpression|\Closure|array|string|null $conditions The conditions to use
      * for checking if any record matches.
-     * @see uim.cake.ORM\Table::exists()
+     * @see uim.cake.orm.Table::exists()
      * @return bool
      */
     function exists($conditions): bool
@@ -866,7 +866,7 @@ abstract class Association
      * @param array $fields A hash of field: new value.
      * @param uim.cake.Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
-     * @see uim.cake.ORM\Table::updateAll()
+     * @see uim.cake.orm.Table::updateAll()
      * @return int Count Returns the affected rows.
      */
     function updateAll(array $fields, $conditions): int
@@ -884,7 +884,7 @@ abstract class Association
      * @param uim.cake.Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Returns the number of affected rows.
-     * @see uim.cake.ORM\Table::deleteAll()
+     * @see uim.cake.orm.Table::deleteAll()
      */
     function deleteAll($conditions): int
     {
@@ -913,7 +913,7 @@ abstract class Association
      * Triggers beforeFind on the target table for the query this association is
      * attaching to
      *
-     * @param uim.cake.ORM\Query $query the query this association is attaching itself to
+     * @param uim.cake.orm.Query $query the query this association is attaching itself to
      * @return void
      */
     protected function _dispatchBeforeFind(Query $query): void
@@ -925,8 +925,8 @@ abstract class Association
      * Helper function used to conditionally append fields to the select clause of
      * a query from the fields found in another query object.
      *
-     * @param uim.cake.ORM\Query $query the query that will get the fields appended to
-     * @param uim.cake.ORM\Query $surrogate the query having the fields to be copied from
+     * @param uim.cake.orm.Query $query the query that will get the fields appended to
+     * @param uim.cake.orm.Query $surrogate the query having the fields to be copied from
      * @param array<string, mixed> $options options passed to the method `attachTo`
      * @return void
      */
@@ -956,8 +956,8 @@ abstract class Association
      * applying the surrogate formatters to only the property corresponding to
      * such table.
      *
-     * @param uim.cake.ORM\Query $query the query that will get the formatter applied to
-     * @param uim.cake.ORM\Query $surrogate the query having formatters for the associated
+     * @param uim.cake.orm.Query $query the query that will get the formatter applied to
+     * @param uim.cake.orm.Query $surrogate the query having formatters for the associated
      * target table.
      * @param array<string, mixed> $options options passed to the method `attachTo`
      * @return void
@@ -1016,8 +1016,8 @@ abstract class Association
      * passed `$query`. Containments are altered so that they respect the associations
      * chain from which they originated.
      *
-     * @param uim.cake.ORM\Query $query the query that will get the associations attached to
-     * @param uim.cake.ORM\Query $surrogate the query having the containments to be attached
+     * @param uim.cake.orm.Query $query the query that will get the associations attached to
+     * @param uim.cake.orm.Query $surrogate the query having the containments to be attached
      * @param array<string, mixed> $options options passed to the method `attachTo`
      * @return void
      */
@@ -1127,7 +1127,7 @@ abstract class Association
      * association"s associations
      *
      * @param string $property the property name
-     * @return uim.cake.ORM\Association
+     * @return uim.cake.orm.Association
      * @throws \RuntimeException if no association with such name exists
      */
     function __get($property) {
@@ -1213,7 +1213,7 @@ abstract class Association
      * association. This means that rows in the "target" table would miss important
      * or required information if the row in "source" did not exist.
      *
-     * @param uim.cake.ORM\Table $side The potential Table with ownership
+     * @param uim.cake.orm.Table $side The potential Table with ownership
      * @return bool
      */
     abstract function isOwningSide(Table $side): bool;
@@ -1226,7 +1226,7 @@ abstract class Association
      * @param array<string, mixed> $options The options for saving associated data.
      * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see uim.cake.ORM\Table::save()
+     * @see uim.cake.orm.Table::save()
      */
     abstract function saveAssociated(EntityInterface $entity, array $options = []);
 }

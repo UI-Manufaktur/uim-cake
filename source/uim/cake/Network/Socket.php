@@ -10,7 +10,7 @@ module uim.cake.Network;
 
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Network\Exception\SocketException;
+import uim.cake.Network\exceptions.SocketException;
 import uim.cake.Validation\Validation;
 use Composer\CaBundle\CaBundle;
 use Exception;
@@ -106,7 +106,7 @@ class Socket
      * Connect the socket to the given host and port.
      *
      * @return bool Success
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      */
     function connect(): bool
     {
@@ -454,7 +454,7 @@ class Socket
      * @param bool $enable enable or disable encryption. Default is true (enable)
      * @return void
      * @throws \InvalidArgumentException When an invalid encryption scheme is chosen.
-     * @throws uim.cake.Network\Exception\SocketException When attempting to enable SSL/TLS fails
+     * @throws uim.cake.Network\exceptions.SocketException When attempting to enable SSL/TLS fails
      * @see stream_socket_enable_crypto
      */
     function enableCrypto(string $type, string $clientOrServer = "client", bool $enable = true): void

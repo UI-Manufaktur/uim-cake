@@ -1,7 +1,7 @@
 module uim.cake.http.clients.adapters;
 
 import uim.cake.http.clients.adaptersInterface;
-import uim.cake.http.clients\Exception\MissingResponseException;
+import uim.cake.http.clients\exceptions.MissingResponseException;
 import uim.cake.http.clients\Response;
 use Closure;
 use InvalidArgumentException;

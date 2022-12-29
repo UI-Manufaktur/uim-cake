@@ -565,7 +565,7 @@ class Email : JsonSerializable, Serializable
      *
      * @return string
      */
-    function serialize(): string
+    string serialize(): string
     {
         $array = __serialize();
 

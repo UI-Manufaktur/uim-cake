@@ -9,7 +9,7 @@
   */
 module uim.cake.I18n;
 
-import uim.cake.I18n\Exception\I18nException;
+import uim.cake.I18n\exceptions.I18nException;
 
 /**
  * A ServiceLocator implementation for loading and retaining package objects.

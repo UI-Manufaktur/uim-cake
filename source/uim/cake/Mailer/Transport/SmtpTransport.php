@@ -10,7 +10,7 @@ module uim.cake.Mailer\Transport;
 
 import uim.cake.Mailer\AbstractTransport;
 import uim.cake.Mailer\Message;
-import uim.cake.Network\Exception\SocketException;
+import uim.cake.Network\exceptions.SocketException;
 import uim.cake.Network\Socket;
 use Exception;
 use RuntimeException;
@@ -171,7 +171,7 @@ class SmtpTransport : AbstractTransport
      *
      * @param uim.cake.Mailer\Message $message Message instance
      * @return array{headers: string, message: string}
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      */
     function send(Message $message): array
     {
@@ -248,7 +248,7 @@ class SmtpTransport : AbstractTransport
      * Connect to SMTP Server
      *
      * @return void
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      */
     protected function _connect(): void
     {
@@ -303,7 +303,7 @@ class SmtpTransport : AbstractTransport
      * Send authentication
      *
      * @return void
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      */
     protected function _auth(): void
     {
@@ -463,7 +463,7 @@ class SmtpTransport : AbstractTransport
      * Send emails
      *
      * @param uim.cake.Mailer\Message $message Message instance
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      * @return void
      */
     protected function _sendRcpt(Message $message): void
@@ -482,7 +482,7 @@ class SmtpTransport : AbstractTransport
      *
      * @param uim.cake.Mailer\Message $message Message instance
      * @return void
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      */
     protected function _sendData(Message $message): void
     {
@@ -508,7 +508,7 @@ class SmtpTransport : AbstractTransport
      * Disconnect
      *
      * @return void
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      */
     protected function _disconnect(): void
     {
@@ -521,7 +521,7 @@ class SmtpTransport : AbstractTransport
      * Helper method to generate socket
      *
      * @return void
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      */
     protected function _generateSocket(): void
     {
@@ -534,7 +534,7 @@ class SmtpTransport : AbstractTransport
      * @param string|null $data Data to be sent to SMTP server
      * @param string|false $checkCode Code to check for in server response, false to skip
      * @return string|null The matched code, or null if nothing matched
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      */
     protected function _smtpSend(?string $data, $checkCode = "250"): ?string
     {

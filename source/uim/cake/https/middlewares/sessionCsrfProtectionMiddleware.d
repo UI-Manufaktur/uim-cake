@@ -6,7 +6,7 @@
 module uim.cake.https\Middleware;
 
 use ArrayAccess;
-import uim.cake.https\Exception\InvalidCsrfTokenException;
+import uim.cake.https\exceptions.InvalidCsrfTokenException;
 import uim.cake.https\Session;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
@@ -219,7 +219,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to validate against.
      * @param uim.cake.http.Session $session The session instance.
-     * @throws uim.cake.http.Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
+     * @throws uim.cake.http.exceptions.InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
     protected void validateToken(IServerRequest myRequest, Session $session) {
         $token = $session.read(_config["key"]);

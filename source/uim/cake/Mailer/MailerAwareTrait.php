@@ -2,7 +2,7 @@
 module uim.cake.Mailer;
 
 import uim.cake.core.App;
-import uim.cake.Mailer\Exception\MissingMailerException;
+import uim.cake.Mailer\exceptions.MissingMailerException;
 
 /**
  * Provides functionality for loading mailer classes
@@ -19,7 +19,7 @@ trait MailerAwareTrait
      * @param string $name Mailer"s name.
      * @param array<string, mixed>|string|null $config Array of configs, or profile name string.
      * @return uim.cake.Mailer\Mailer
-     * @throws uim.cake.Mailer\Exception\MissingMailerException if undefined mailer class.
+     * @throws uim.cake.Mailer\exceptions.MissingMailerException if undefined mailer class.
      */
     protected function getMailer(string $name, $config = null): Mailer
     {

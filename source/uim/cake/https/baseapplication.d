@@ -53,7 +53,7 @@ abstract class BaseApplication :
      * Constructor
      *
      * @param string myConfigDir The directory the bootstrap configuration is held in.
-     * @param uim.cake.Event\IEventManager|null myEventManager Application event manager instance.
+     * @param uim.cake.events.IEventManager|null myEventManager Application event manager instance.
      * @param uim.cake.http.IControllerFactory|null $controllerFactory Controller factory.
      */
     this(

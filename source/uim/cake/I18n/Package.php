@@ -123,7 +123,7 @@ class Package
      *
      * @return string
      */
-    function getFormatter(): string
+    string getFormatter(): string
     {
         return this.formatter;
     }

@@ -2,7 +2,7 @@ module uim.cake.networks;
 
 import uim.cake.core.exceptions\CakeException;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.networks\Exception\SocketException;
+import uim.cake.networks\exceptions.SocketException;
 import uim.cake.validations\Validation;
 use Composer\CaBundle\CaBundle;
 use Exception;
@@ -98,7 +98,7 @@ class Socket
      * Connect the socket to the given host and port.
      *
      * @return bool Success
-     * @throws uim.cake.Network\Exception\SocketException
+     * @throws uim.cake.Network\exceptions.SocketException
      */
     bool connect() {
         if (this.connection) {
@@ -430,7 +430,7 @@ class Socket
      * @param bool myEnable enable or disable encryption. Default is true (enable)
      * @return void
      * @throws \InvalidArgumentException When an invalid encryption scheme is chosen.
-     * @throws uim.cake.Network\Exception\SocketException When attempting to enable SSL/TLS fails
+     * @throws uim.cake.Network\exceptions.SocketException When attempting to enable SSL/TLS fails
      * @see stream_socket_enable_crypto
      */
     void enableCrypto(string myType, string clientOrServer = "client", bool myEnable = true) {

@@ -4,7 +4,7 @@ use BadMethodCallException;
 import uim.cake.core.Configure;
 import uim.cake.core.exceptions\CakeException;
 import uim.cake.https\Cookie\CookieCollection;
-import uim.cake.https\Exception\MethodNotAllowedException;
+import uim.cake.https\exceptions.MethodNotAllowedException;
 import uim.cake.utilities.Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\PhpInputStream;
@@ -1428,7 +1428,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string>|string methods Allowed HTTP request methods.
      * @return true
-     * @throws uim.cake.http.Exception\MethodNotAllowedException
+     * @throws uim.cake.http.exceptions.MethodNotAllowedException
      */
     bool allowMethod($methods) {
         $methods = (array)$methods;

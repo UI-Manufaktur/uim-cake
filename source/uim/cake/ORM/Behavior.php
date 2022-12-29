@@ -94,8 +94,8 @@ use ReflectionMethod;
  * findSlugged(Query $query, array $options)
  * ```
  *
- * @see uim.cake.ORM\Table::addBehavior()
- * @see uim.cake.Event\EventManager
+ * @see uim.cake.orm.Table::addBehavior()
+ * @see uim.cake.events.EventManager
  */
 class Behavior : IEventListener
 {
@@ -104,7 +104,7 @@ class Behavior : IEventListener
     /**
      * Table instance.
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected $_table;
 
@@ -132,7 +132,7 @@ class Behavior : IEventListener
      *
      * Merges config with the default and store in the config property
      *
-     * @param uim.cake.ORM\Table $table The table this behavior is attached to.
+     * @param uim.cake.orm.Table $table The table this behavior is attached to.
      * @param array<string, mixed> $config The config for this behavior.
      */
     this(Table $table, array $config = []) {
@@ -167,7 +167,7 @@ class Behavior : IEventListener
     /**
      * Get the table instance this behavior is bound to.
      *
-     * @return uim.cake.ORM\Table The bound table instance.
+     * @return uim.cake.orm.Table The bound table instance.
      * @deprecated 4.2.0 Use table() instead.
      */
     function getTable(): Table
@@ -180,7 +180,7 @@ class Behavior : IEventListener
     /**
      * Get the table instance this behavior is bound to.
      *
-     * @return uim.cake.ORM\Table The bound table instance.
+     * @return uim.cake.orm.Table The bound table instance.
      */
     function table(): Table
     {
@@ -226,7 +226,7 @@ class Behavior : IEventListener
      * Checks that implemented keys contain values pointing at callable.
      *
      * @return void
-     * @throws uim.cake.Core\Exception\CakeException if config are invalid
+     * @throws uim.cake.Core\exceptions.CakeException if config are invalid
      */
     function verifyConfig(): void
     {
@@ -366,7 +366,7 @@ class Behavior : IEventListener
      *
      * Uses the implementedEvents() method to exclude callback methods.
      * Methods starting with `_` will be ignored, as will methods
-     * declared on Cake\ORM\Behavior
+     * declared on Cake\orm.Behavior
      *
      * @return array
      * @throws \ReflectionException

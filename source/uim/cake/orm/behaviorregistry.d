@@ -9,7 +9,7 @@ import uim.cake;
  *
  * This class also provides method for checking and dispatching behavior methods.
  *
- * @: uim.cake.Core\ObjectRegistry<uim.cake.ORM\Behavior>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.orm.Behavior>
  */
 class BehaviorRegistry : ObjectRegistry : IEventDispatcher
 {
@@ -18,7 +18,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * The table using this registry.
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected _table;
 
@@ -39,7 +39,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Constructor
      *
-     * @param uim.cake.ORM\Table|null myTable The table this registry is attached to.
+     * @param uim.cake.orm.Table|null myTable The table this registry is attached to.
      */
     this(?Table myTable = null) {
         if (myTable  !is null) {
@@ -50,7 +50,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Attaches a table instance to this registry.
      *
-     * @param uim.cake.ORM\Table myTable The table this registry is attached to.
+     * @param uim.cake.orm.Table myTable The table this registry is attached to.
      * @return void
      */
     void setTable(Table myTable) {
@@ -91,7 +91,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the behavior is missing in.
-     * @throws uim.cake.ORM\Exception\MissingBehaviorException
+     * @throws uim.cake.orm.exceptions.MissingBehaviorException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingBehaviorException([
@@ -109,11 +109,11 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @param string myClass The classname that is missing.
      * @param string myAlias The alias of the object.
      * @param array<string, mixed> myConfig An array of config to use for the behavior.
-     * @return uim.cake.ORM\Behavior The constructed behavior class.
+     * @return uim.cake.orm.Behavior The constructed behavior class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Behavior _create(myClass, string myAlias, array myConfig) {
-        /** @var uim.cake.ORM\Behavior $instance */
+        /** @var uim.cake.orm.Behavior $instance */
         $instance = new myClass(_table, myConfig);
         myEnable = myConfig["enabled"] ?? true;
         if (myEnable) {
@@ -131,9 +131,9 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * Use the implementedEvents() method to exclude callback methods.
      * Methods starting with `_` will be ignored, as will methods
-     * declared on Cake\ORM\Behavior
+     * declared on Cake\orm.Behavior
      *
-     * @param uim.cake.ORM\Behavior $instance The behavior to get methods from.
+     * @param uim.cake.orm.Behavior $instance The behavior to get methods from.
      * @param string myClass The classname that is missing.
      * @param string myAlias The alias of the object.
      * @return array A list of implemented finders and methods.
@@ -228,7 +228,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string myType The finder type to invoke.
      * @param array $args The arguments you want to invoke the method with.
-     * @return uim.cake.ORM\Query The return value depends on the underlying behavior method.
+     * @return uim.cake.orm.Query The return value depends on the underlying behavior method.
      * @throws \BadMethodCallException When the method is unknown.
      */
     function callFinder(string myType, array $args = []): Query
