@@ -9,7 +9,7 @@
  */
 module uim.cake.Datasource\Paging;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
 import uim.cake.Datasource\IQuery;

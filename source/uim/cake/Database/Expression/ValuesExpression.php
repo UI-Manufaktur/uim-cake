@@ -9,7 +9,7 @@
  */
 module uim.cake.databases.Expression;
 
-import uim.cake.databases.Exception\DatabaseException;
+import uim.cake.databases.exceptions.DatabaseException;
 import uim.cake.databases.IExpression;
 import uim.cake.databases.Query;
 import uim.cake.databases.Type\ExpressionTypeCasterTrait;

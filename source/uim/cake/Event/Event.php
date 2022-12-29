@@ -9,7 +9,7 @@
  */
 module uim.cake.Event;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 
 /**
  * Class Event

@@ -14,7 +14,7 @@
  */
 module uim.cake.Http\Client\Auth;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 import uim.cake.Http\Client\Request;
 import uim.cake.utilities.Security;
 use Psr\Http\Message\UriInterface;

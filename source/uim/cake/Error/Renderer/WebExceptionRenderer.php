@@ -11,13 +11,13 @@ module uim.cake.errors.Renderer;
 
 import uim.cake.controllers.Controller;
 import uim.cake.controllers.ControllerFactory;
-import uim.cake.controllers.Exception\InvalidParameterException;
-import uim.cake.controllers.Exception\MissingActionException;
+import uim.cake.controllers.exceptions.InvalidParameterException;
+import uim.cake.controllers.exceptions.MissingActionException;
 import uim.cake.cores.App;
 import uim.cake.cores.Configure;
 import uim.cake.cores.Container;
-import uim.cake.cores.Exception\CakeException;
-import uim.cake.cores.Exception\MissingPluginException;
+import uim.cake.cores.exceptions.CakeException;
+import uim.cake.cores.exceptions.MissingPluginException;
 import uim.cake.Datasource\Exception\RecordNotFoundException;
 import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
 import uim.cake.errors.Debugger;

@@ -9,7 +9,7 @@
  */
 module uim.cake.Datasource\Exception;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 
 /**
  * Exception raised when the provided primary key does not match the table primary key

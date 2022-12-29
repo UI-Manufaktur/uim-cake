@@ -9,7 +9,7 @@
  */
 module uim.cake.Database;
 
-import uim.cake.databases.Exception\DatabaseException;
+import uim.cake.databases.exceptions.DatabaseException;
 import uim.cake.databases.Expression\FunctionExpression;
 
 /**

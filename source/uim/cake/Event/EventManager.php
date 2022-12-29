@@ -9,7 +9,7 @@
  */
 module uim.cake.Event;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 
 /**
  * The event manager is responsible for keeping track of event listeners, passing the correct

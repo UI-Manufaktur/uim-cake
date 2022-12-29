@@ -15,7 +15,7 @@
 module uim.cake.Http;
 
 import uim.cake.cores.App;
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.Http\Client\Adapter\Curl;
 import uim.cake.Http\Client\Adapter\Mock as MockAdapter;

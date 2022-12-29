@@ -16,7 +16,7 @@ import uim.cake.cores.IConsoleApplication;
 import uim.cake.cores.Container;
 import uim.cake.cores.IContainerApplication;
 import uim.cake.cores.IContainer;
-import uim.cake.cores.Exception\MissingPluginException;
+import uim.cake.cores.exceptions.MissingPluginException;
 import uim.cake.cores.IHttpApplication;
 import uim.cake.cores.Plugin;
 import uim.cake.cores.IPluginApplication;

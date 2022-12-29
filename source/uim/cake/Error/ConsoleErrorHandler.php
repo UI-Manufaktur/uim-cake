@@ -11,7 +11,7 @@ module uim.cake.Error;
 
 import uim.cake.Command\Command;
 import uim.cake.consoles.ConsoleOutput;
-import uim.cake.consoles.Exception\ConsoleException;
+import uim.cake.consoles.exceptions.ConsoleException;
 use Throwable;
 
 /**

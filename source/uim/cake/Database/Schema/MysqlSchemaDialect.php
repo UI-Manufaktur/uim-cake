@@ -10,7 +10,7 @@
 module uim.cake.databases.Schema;
 
 import uim.cake.databases.DriverInterface;
-import uim.cake.databases.Exception\DatabaseException;
+import uim.cake.databases.exceptions.DatabaseException;
 
 /**
  * Schema generation/reflection features for MySQL

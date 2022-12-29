@@ -11,7 +11,7 @@ module uim.cake.errors.Renderer;
 
 import uim.cake.consoles.ConsoleOutput;
 import uim.cake.cores.Configure;
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 use Psr\Http\Message\IServerRequest;
 use Throwable;
 
