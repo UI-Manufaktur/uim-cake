@@ -12,7 +12,7 @@ You can use the `Configure` class to store arbitrary configuration data:
 
 ```php
 import uim.cake.cores.Configure;
-import uim.cake.cores.configures.Engine\PhpConfig;
+import uim.cake.cores.configures.engines.PhpConfig;
 
 Configure::write("Company.name","Pizza, Inc.");
 Configure::read("Company.name"); // Returns: "Pizza, Inc."

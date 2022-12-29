@@ -2,7 +2,7 @@
 
 
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+
 
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
