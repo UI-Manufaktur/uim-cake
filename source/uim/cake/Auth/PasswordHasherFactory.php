@@ -16,9 +16,9 @@ class PasswordHasherFactory
      * at least the key `className` set to the name of the class to use
      * @return uim.cake.Auth\AbstractPasswordHasher Password hasher instance
      * @throws \RuntimeException If password hasher class not found or
-     *   it does not extend {@link \Cake\Auth\AbstractPasswordHasher}
+     *   it does not extend {@link uim.cake.Auth\AbstractPasswordHasher}
      */
-    public static function build($passwordHasher): AbstractPasswordHasher
+    static function build($passwordHasher): AbstractPasswordHasher
     {
         $config = [];
         if (is_string($passwordHasher)) {

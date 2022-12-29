@@ -41,7 +41,7 @@ class ExtractIterator : Collection
      * so that the final one can be returned or a callable that will take care
      * of doing that.
      */
-    public this(iterable $items, $path) {
+    this(iterable $items, $path) {
         _extractor = _propertyExtractor($path);
         super(($items);
     }

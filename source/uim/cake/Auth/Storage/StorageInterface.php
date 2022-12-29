@@ -1,18 +1,11 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.auths.Storage;
 
 /**
  * Describes the methods that any class representing an Auth data storage should
  * comply with.
  *
- * @mixin \Cake\Core\InstanceConfigTrait
+ * @mixin uim.cake.Core\InstanceConfigTrait
  */
 interface IStorage
 {

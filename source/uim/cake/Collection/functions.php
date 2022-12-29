@@ -12,7 +12,7 @@ import uim.cake.Collection\ICollection;
 
 if (!function_exists("collection")) {
     /**
-     * Returns a new {@link \Cake\Collection\Collection} object wrapping the passed argument.
+     * Returns a new {@link uim.cake.Collection\Collection} object wrapping the passed argument.
      *
      * @param iterable $items The items from which the collection will be built.
      * @return uim.cake.Collection\Collection

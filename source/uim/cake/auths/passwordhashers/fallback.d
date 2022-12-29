@@ -21,7 +21,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
     /**
      * Holds the list of password hasher objects that will be used
      *
-     * @var array<\Cake\Auth\AbstractPasswordHasher>
+     * @var array<uim.cake.Auth\AbstractPasswordHasher>
      */
     protected _hashers = [];
 

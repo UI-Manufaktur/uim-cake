@@ -51,7 +51,7 @@ class InsertIterator : Collection
      * @param iterable $values The source collection from which the values will
      * be inserted at the specified path.
      */
-    public this(iterable $into, string $path, iterable $values) {
+    this(iterable $into, string $path, iterable $values) {
         super(($into);
 
         if (!($values instanceof Collection)) {

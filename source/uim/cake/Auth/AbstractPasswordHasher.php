@@ -31,7 +31,7 @@ abstract class AbstractPasswordHasher
      *
      * @param array<string, mixed> $config Array of config.
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         this.setConfig($config);
     }
 

@@ -165,7 +165,7 @@ class Cache {
      * Get a cache engine object for the named cache config.
      *
      * @param string myConfig The name of the configured cache backend.
-     * @return \Psr\SimpleCache\ICache&\Cake\Cache\ICacheEngine
+     * @return \Psr\SimpleCache\ICache&uim.cake.Cache\ICacheEngine
      * @deprecated 3.7.0 Use {@link pool()} instead. This method will be removed in 5.0.
      */
     static function engine(string myConfig) {
@@ -178,7 +178,7 @@ class Cache {
      * Get a SimpleCacheEngine object for the named cache pool.
      *
      * @param string myConfig The name of the configured cache backend.
-     * @return \Psr\SimpleCache\ICache&\Cake\Cache\ICacheEngine
+     * @return \Psr\SimpleCache\ICache&uim.cake.Cache\ICacheEngine
      */
     static function pool(string myConfig) {
         if (!static::$_enabled) {

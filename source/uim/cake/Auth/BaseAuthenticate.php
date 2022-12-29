@@ -1,10 +1,4 @@
 
-
-
- *
-
-
-  */
 module uim.cake.Auth;
 
 import uim.cake.controllers.ComponentRegistry;
@@ -15,9 +9,7 @@ import uim.cake.http.ServerRequest;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.orm.Query;
 
-/**
- * Base Authentication class with common methods and properties.
- */
+// Base Authentication class with common methods and properties.
 abstract class BaseAuthenticate : IEventListener
 {
     use InstanceConfigTrait;
@@ -76,7 +68,7 @@ abstract class BaseAuthenticate : IEventListener
      * @param uim.cake.controllers.ComponentRegistry $registry The Component registry used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
-    public this(ComponentRegistry $registry, array $config = []) {
+    this(ComponentRegistry $registry, array $config = []) {
         _registry = $registry;
         this.setConfig($config);
     }
@@ -219,7 +211,7 @@ abstract class BaseAuthenticate : IEventListener
      * can be:
      *
      * - Null - No action taken, AuthComponent should return appropriate response.
-     * - \Cake\Http\Response - A response object, which will cause AuthComponent to
+     * - uim.cake.Http\Response - A response object, which will cause AuthComponent to
      *   simply return that response.
      *
      * @param uim.cake.http.ServerRequest $request A request object.

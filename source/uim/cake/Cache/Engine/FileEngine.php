@@ -278,7 +278,7 @@ class FileEngine : CacheEngine
      * @param string $path The path to search.
      * @return void
      */
-    protected function _clearDirectory(string $path): void
+    protected void _clearDirectory(string $path)
     {
         if (!is_dir($path)) {
             return;

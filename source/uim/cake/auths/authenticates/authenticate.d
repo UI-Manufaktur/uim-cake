@@ -192,7 +192,7 @@ abstract class DAuthenticate : IEventListener {
      * can be:
      *
      * - Null - No action taken, AuthComponent should return appropriate response.
-     * - \Cake\Http\Response - A response object, which will cause AuthComponent to
+     * - uim.cake.Http\Response - A response object, which will cause AuthComponent to
      *   simply return that response.
      *
      * @param uim.cake.http.ServerRequest myRequest A request object.

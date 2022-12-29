@@ -9,9 +9,9 @@ use RuntimeException;
 /**
  * An object registry for cache engines.
  *
- * Used by {@link \Cake\Cache\Cache} to load and manage cache engines.
+ * Used by {@link uim.cake.Cache\Cache} to load and manage cache engines.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\Cache\CacheEngine>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.Cache\CacheEngine>
  */
 class CacheRegistry : ObjectRegistry
 {

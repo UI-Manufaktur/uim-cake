@@ -54,7 +54,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      * their depth in the tree.
      * @param int $mode Iterator mode.
      */
-    public this(
+    this(
         RecursiveIterator $items,
         $valuePath,
         $keyPath,

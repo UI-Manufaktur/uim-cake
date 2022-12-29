@@ -28,7 +28,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
      * @param int $mode Iterator mode.
      * @param int $flags Iterator flags.
      */
-    public this(
+    this(
         RecursiveIterator $items,
         int $mode = RecursiveIteratorIterator::SELF_FIRST,
         int $flags = 0

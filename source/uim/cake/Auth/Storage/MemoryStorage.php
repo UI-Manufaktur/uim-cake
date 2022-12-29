@@ -1,18 +1,8 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.auths.Storage;
 
-/**
- * Memory based non-persistent storage for authenticated user record.
- */
-class MemoryStorage : IStorage
-{
+// Memory based non-persistent storage for authenticated user record.
+class MemoryStorage : IStorage {
     /**
      * User record.
      *
@@ -33,13 +23,13 @@ class MemoryStorage : IStorage
     }
 
 
-    function write($user): void
+    void write($user)
     {
         _user = $user;
     }
 
 
-    function delete(): void
+    void delete()
     {
         _user = null;
     }

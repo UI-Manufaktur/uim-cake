@@ -41,7 +41,7 @@ abstract class BaseAuthorize
      * @param uim.cake.controllers.ComponentRegistry $registry The controller for this request.
      * @param array<string, mixed> $config An array of config. This class does not use any config.
      */
-    public this(ComponentRegistry $registry, array $config = []) {
+    this(ComponentRegistry $registry, array $config = []) {
         _registry = $registry;
         this.setConfig($config);
     }

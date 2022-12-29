@@ -102,7 +102,7 @@ class Cache
      *
      * @return uim.cake.Cache\CacheRegistry
      */
-    public static function getRegistry(): CacheRegistry
+    static function getRegistry(): CacheRegistry
     {
         if (static::$_registry == null) {
             static::$_registry = new CacheRegistry();
@@ -119,7 +119,7 @@ class Cache
      * @param uim.cake.Cache\CacheRegistry $registry Injectable registry object.
      * @return void
      */
-    public static function setRegistry(CacheRegistry $registry): void
+    static void setRegistry(CacheRegistry $registry)
     {
         static::$_registry = $registry;
     }
@@ -132,7 +132,7 @@ class Cache
      * @throws \RuntimeException If loading of the engine failed.
      * @return void
      */
-    protected static function _buildEngine(string $name): void
+    protected static void _buildEngine(string $name)
     {
         $registry = static::getRegistry();
 
@@ -193,10 +193,10 @@ class Cache
      * Get a cache engine object for the named cache config.
      *
      * @param string $config The name of the configured cache backend.
-     * @return \Psr\SimpleCache\ICache&\Cake\Cache\ICacheEngine
+     * @return \Psr\SimpleCache\ICache&uim.cake.Cache\ICacheEngine
      * @deprecated 3.7.0 Use {@link pool()} instead. This method will be removed in 5.0.
      */
-    public static function engine(string $config) {
+    static function engine(string $config) {
         deprecationWarning("Cache::engine() is deprecated. Use Cache::pool() instead.");
 
         return static::pool($config);
@@ -206,9 +206,9 @@ class Cache
      * Get a SimpleCacheEngine object for the named cache pool.
      *
      * @param string $config The name of the configured cache backend.
-     * @return \Psr\SimpleCache\ICache &\Cake\Cache\ICacheEngine
+     * @return \Psr\SimpleCache\ICache &uim.cake.Cache\ICacheEngine
      */
-    public static function pool(string $config) {
+    static function pool(string $config) {
         if (!static::$_enabled) {
             return new NullEngine();
         }
@@ -246,7 +246,7 @@ class Cache
      * @param string $config Optional string configuration name to write to. Defaults to "default"
      * @return bool True if the data was successfully cached, false on failure
      */
-    public static bool write(string $key, $value, string $config = "default") {
+    static bool write(string $key, $value, string $config = "default") {
         if (is_resource($value)) {
             return false;
         }
@@ -290,7 +290,7 @@ class Cache
      * @return bool True on success, false on failure
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    public static bool writeMany(iterable $data, string $config = "default") {
+    static bool writeMany(iterable $data, string $config = "default") {
         return static::pool($config).setMultiple($data);
     }
 
@@ -316,7 +316,7 @@ class Cache
      * @return mixed The cached data, or null if the data doesn"t exist, has expired,
      *  or if there was an error fetching it.
      */
-    public static function read(string $key, string $config = "default") {
+    static function read(string $key, string $config = "default") {
         return static::pool($config).get($key);
     }
 
@@ -343,7 +343,7 @@ class Cache
      *   the cached data or false if cached data could not be retrieved.
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    public static function readMany(iterable $keys, string $config = "default"): iterable
+    static function readMany(iterable $keys, string $config = "default"): iterable
     {
         return static::pool($config).getMultiple($keys);
     }
@@ -358,7 +358,7 @@ class Cache
      *    or if there was an error fetching it.
      * @throws uim.cake.Cache\InvalidArgumentException When offset < 0
      */
-    public static function increment(string $key, int $offset = 1, string $config = "default") {
+    static function increment(string $key, int $offset = 1, string $config = "default") {
         if ($offset < 0) {
             throw new InvalidArgumentException("Offset cannot be less than 0.");
         }
@@ -376,7 +376,7 @@ class Cache
      *   or if there was an error fetching it
      * @throws uim.cake.Cache\InvalidArgumentException when offset < 0
      */
-    public static function decrement(string $key, int $offset = 1, string $config = "default") {
+    static function decrement(string $key, int $offset = 1, string $config = "default") {
         if ($offset < 0) {
             throw new InvalidArgumentException("Offset cannot be less than 0.");
         }
@@ -405,7 +405,7 @@ class Cache
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    public static bool delete(string $key, string $config = "default") {
+    static bool delete(string $key, string $config = "default") {
         return static::pool($config).delete($key);
     }
 
@@ -431,7 +431,7 @@ class Cache
      * @return bool True on success, false on failure.
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    public static bool deleteMany(iterable $keys, string $config = "default") {
+    static bool deleteMany(iterable $keys, string $config = "default") {
         return static::pool($config).deleteMultiple($keys);
     }
 
@@ -441,7 +441,7 @@ class Cache
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    public static bool clear(string $config = "default") {
+    static bool clear(string $config = "default") {
         return static::pool($config).clear();
     }
 
@@ -450,7 +450,7 @@ class Cache
      *
      * @return array<string, bool> Status code. For each configuration, it reports the status of the operation
      */
-    public static function clearAll(): array
+    static function clearAll(): array
     {
         $status = [];
 
@@ -468,7 +468,7 @@ class Cache
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True if the cache group was successfully cleared, false otherwise
      */
-    public static function clearGroup(string $group, string $config = "default"): bool
+    static function clearGroup(string $group, string $config = "default"): bool
     {
         return static::pool($config).clearGroup($group);
     }
@@ -489,7 +489,7 @@ class Cache
      * @return array<string, array> Map of group and all configuration that has the same group
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    public static function groupConfigs(?string $group = null): array
+    static function groupConfigs(?string $group = null): array
     {
         foreach (static::configured() as $config) {
             static::pool($config);
@@ -512,7 +512,7 @@ class Cache
      *
      * @return void
      */
-    public static function enable(): void
+    static function enable(): void
     {
         static::$_enabled = true;
     }
@@ -524,7 +524,7 @@ class Cache
      *
      * @return void
      */
-    public static function disable(): void
+    static void disable()
     {
         static::$_enabled = false;
     }
@@ -534,7 +534,7 @@ class Cache
      *
      * @return bool
      */
-    public static function enabled(): bool
+    static function enabled(): bool
     {
         return static::$_enabled;
     }
@@ -564,7 +564,7 @@ class Cache
      * @return mixed If the key is found: the cached data.
      *   If the key is not found the value returned by the callable.
      */
-    public static function remember(string $key, callable $callable, string $config = "default") {
+    static function remember(string $key, callable $callable, string $config = "default") {
         $existing = self::read($key, $config);
         if ($existing != null) {
             return $existing;
@@ -598,7 +598,7 @@ class Cache
      * @return bool True if the data was successfully cached, false on failure.
      *   Or if the key existed already.
      */
-    public static function add(string $key, $value, string $config = "default"): bool
+    static function add(string $key, $value, string $config = "default"): bool
     {
         if (is_resource($value)) {
             return false;

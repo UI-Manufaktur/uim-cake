@@ -5,7 +5,7 @@
 **********************************************************************************************************/
 module uim.cake.auths.authenticates;
 
-public import module uim.cake.auths.authenticates.authenticate;
-public import module uim.cake.auths.authenticates.basic;
-public import module uim.cake.auths.authenticates.digest;
-public import module uim.cake.auths.authenticates.form;
+import module uim.cake.auths.authenticates.authenticate;
+import module uim.cake.auths.authenticates.basic;
+import module uim.cake.auths.authenticates.digest;
+import module uim.cake.auths.authenticates.form;

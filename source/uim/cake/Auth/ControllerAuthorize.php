@@ -43,7 +43,7 @@ class ControllerAuthorize : BaseAuthorize
     protected $_Controller;
 
 
-    public this(ComponentRegistry $registry, array $config = []) {
+    this(ComponentRegistry $registry, array $config = []) {
         super(($registry, $config);
         this.controller($registry.getController());
     }

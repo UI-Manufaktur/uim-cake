@@ -61,7 +61,7 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @param iterable $items The items to be filtered.
      */
-    public this(iterable $items) {
+    this(iterable $items) {
         _buffer = new SplDoublyLinkedList();
         super(($items);
     }

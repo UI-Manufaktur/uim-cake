@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.auths.Storage;
 
 import uim.cake.core.InstanceConfigTrait;
@@ -58,7 +51,7 @@ class SessionStorage : IStorage
      * @param uim.cake.http.Response $response Response instance.
      * @param array<string, mixed> $config Configuration list.
      */
-    public this(ServerRequest $request, Response $response, array $config = []) {
+    this(ServerRequest $request, Response $response, array $config = []) {
         _session = $request.getSession();
         this.setConfig($config);
     }

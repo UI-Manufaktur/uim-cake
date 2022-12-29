@@ -76,7 +76,7 @@ class DigestAuthenticate : BasicAuthenticate
      *   used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
-    public this(ComponentRegistry $registry, array $config = []) {
+    this(ComponentRegistry $registry, array $config = []) {
         this.setConfig([
             "nonceLifetime": 300,
             "secret": Security::getSalt(),
@@ -200,7 +200,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $realm The realm the password is for.
      * @return string the hashed password that can later be used with Digest authentication.
      */
-    public static function password(string $username, string $password, string $realm): string
+    static function password(string $username, string $password, string $realm): string
     {
         return md5($username . ":" . $realm . ":" . $password);
     }

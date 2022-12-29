@@ -20,7 +20,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher
     /**
      * Holds the list of password hasher objects that will be used
      *
-     * @var array<\Cake\Auth\AbstractPasswordHasher>
+     * @var array<uim.cake.Auth\AbstractPasswordHasher>
      */
     protected $_hashers = [];
 
@@ -31,7 +31,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher
      * `hashers` key to be present in the array with a list of other hashers to be
      * used.
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         super(($config);
         foreach (_config["hashers"] as $key: $hasher) {
             if (is_array($hasher) && !isset($hasher["className"])) {
