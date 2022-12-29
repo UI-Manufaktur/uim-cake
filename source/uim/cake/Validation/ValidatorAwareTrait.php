@@ -9,7 +9,7 @@
  */
 module uim.cake.Validation;
 
-import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.events.EventDispatcherInterface;
 use RuntimeException;
 
 /**

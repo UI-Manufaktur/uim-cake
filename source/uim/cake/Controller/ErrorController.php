@@ -9,7 +9,7 @@
  */
 module uim.cake.Controller;
 
-import uim.cake.Event\EventInterface;
+import uim.cake.events.EventInterface;
 
 /**
  * Error Handling Controller

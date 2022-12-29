@@ -11,7 +11,7 @@ module uim.cake.ORM\Behavior;
 
 use ArrayObject;
 import uim.cake.Datasource\EntityInterface;
-import uim.cake.Event\EventInterface;
+import uim.cake.events.EventInterface;
 import uim.cake.ORM\Association;
 import uim.cake.ORM\Behavior;
 use Closure;

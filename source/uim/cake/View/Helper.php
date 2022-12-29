@@ -10,7 +10,7 @@
 module uim.cake.View;
 
 import uim.cake.cores.InstanceConfigTrait;
-import uim.cake.Event\IEventListener;
+import uim.cake.events.IEventListener;
 
 /**
  * Abstract base class for all other Helpers in CakePHP.

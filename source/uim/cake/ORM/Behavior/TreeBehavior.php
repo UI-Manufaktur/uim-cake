@@ -13,7 +13,7 @@ import uim.cake.Collection\ICollection;
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.Datasource\Exception\RecordNotFoundException;
-import uim.cake.Event\EventInterface;
+import uim.cake.events.EventInterface;
 import uim.cake.ORM\Behavior;
 import uim.cake.ORM\Query;
 use InvalidArgumentException;

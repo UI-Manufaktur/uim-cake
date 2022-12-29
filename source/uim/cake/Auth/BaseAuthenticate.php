@@ -10,7 +10,7 @@ module uim.cake.Auth;
 
 import uim.cake.controllers.ComponentRegistry;
 import uim.cake.cores.InstanceConfigTrait;
-import uim.cake.Event\IEventListener;
+import uim.cake.events.IEventListener;
 import uim.cake.Http\Response;
 import uim.cake.Http\ServerRequest;
 import uim.cake.ORM\Locator\LocatorAwareTrait;

@@ -18,7 +18,7 @@ import uim.cake.cores.App;
 import uim.cake.cores.Configure;
 import uim.cake.cores.Plugin;
 import uim.cake.Datasource\ConnectionManager;
-import uim.cake.Event\EventManager;
+import uim.cake.events.EventManager;
 import uim.cake.Http\BaseApplication;
 import uim.cake.ORM\Entity;
 import uim.cake.ORM\Exception\MissingTableClassException;

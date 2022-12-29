@@ -22,7 +22,7 @@ import uim.cake.Datasource\Exception\RecordNotFoundException;
 import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
 import uim.cake.errors.Debugger;
 import uim.cake.errors.ExceptionRendererInterface;
-import uim.cake.Event\Event;
+import uim.cake.events.Event;
 import uim.cake.Http\Exception\HttpException;
 import uim.cake.Http\Exception\MissingControllerException;
 import uim.cake.Http\Response;

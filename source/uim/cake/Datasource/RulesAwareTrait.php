@@ -10,7 +10,7 @@
 module uim.cake.Datasource;
 
 use ArrayObject;
-import uim.cake.Event\EventDispatcherInterface;
+import uim.cake.events.EventDispatcherInterface;
 
 /**
  * A trait that allows a class to build and apply application.

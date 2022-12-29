@@ -13,8 +13,8 @@ import uim.cake.controllers.exceptions.MissingComponentException;
 import uim.cake.cores.App;
 import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.ObjectRegistry;
-import uim.cake.Event\EventDispatcherInterface;
-import uim.cake.Event\EventDispatcherTrait;
+import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.EventDispatcherTrait;
 
 /**
  * ComponentRegistry is a registry for loaded components

@@ -14,7 +14,7 @@ import uim.cake.controllers.ComponentRegistry;
 import uim.cake.controllers.Controller;
 import uim.cake.cores.App;
 import uim.cake.cores.Configure;
-import uim.cake.Event\EventInterface;
+import uim.cake.events.EventInterface;
 import uim.cake.Http\ContentTypeNegotiation;
 import uim.cake.Http\Exception\NotFoundException;
 import uim.cake.Http\Response;

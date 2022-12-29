@@ -12,7 +12,7 @@ module uim.cake.ORM\Behavior;
 import uim.cake.databases.Type\DateTimeType;
 import uim.cake.databases.TypeFactory;
 import uim.cake.Datasource\EntityInterface;
-import uim.cake.Event\EventInterface;
+import uim.cake.events.EventInterface;
 import uim.cake.I18n\FrozenTime;
 import uim.cake.ORM\Behavior;
 use DateTimeInterface;

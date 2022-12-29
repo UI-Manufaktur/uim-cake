@@ -14,7 +14,7 @@ import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;
 import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.Datasource\EntityInterface;
-import uim.cake.Event\EventInterface;
+import uim.cake.events.EventInterface;
 import uim.cake.ORM\Entity;
 import uim.cake.ORM\Locator\LocatorAwareTrait;
 import uim.cake.ORM\Query;

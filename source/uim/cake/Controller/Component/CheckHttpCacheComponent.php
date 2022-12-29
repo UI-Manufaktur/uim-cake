@@ -16,7 +16,7 @@
 module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;
-import uim.cake.Event\EventInterface;
+import uim.cake.events.EventInterface;
 
 /**
  * Use HTTP caching headers to see if rendering can be skipped.

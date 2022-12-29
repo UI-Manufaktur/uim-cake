@@ -9,10 +9,10 @@
  */
 module uim.cake.Form;
 
-import uim.cake.Event\EventDispatcherInterface;
-import uim.cake.Event\EventDispatcherTrait;
-import uim.cake.Event\IEventListener;
-import uim.cake.Event\EventManager;
+import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.EventDispatcherTrait;
+import uim.cake.events.IEventListener;
+import uim.cake.events.EventManager;
 import uim.cake.utilities.Hash;
 import uim.cake.Validation\ValidatorAwareInterface;
 import uim.cake.Validation\ValidatorAwareTrait;

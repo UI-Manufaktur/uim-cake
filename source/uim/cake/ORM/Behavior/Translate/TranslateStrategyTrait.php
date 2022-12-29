@@ -10,7 +10,7 @@
 module uim.cake.ORM\Behavior\Translate;
 
 import uim.cake.Datasource\EntityInterface;
-import uim.cake.Event\EventInterface;
+import uim.cake.events.EventInterface;
 import uim.cake.I18n\I18n;
 import uim.cake.ORM\Marshaller;
 import uim.cake.ORM\Table;

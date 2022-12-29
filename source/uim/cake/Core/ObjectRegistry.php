@@ -10,8 +10,8 @@
 module uim.cake.Core;
 
 use ArrayIterator;
-import uim.cake.Event\EventDispatcherInterface;
-import uim.cake.Event\IEventListener;
+import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventListener;
 use Countable;
 use IteratorAggregate;
 use RuntimeException;
