@@ -71,9 +71,7 @@ class ButtonWidget : WidgetInterface
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function secureFields(array $data): array
     {
         if (!isset($data["name"]) || $data["name"] == "") {

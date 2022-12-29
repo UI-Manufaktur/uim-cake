@@ -181,9 +181,7 @@ class EntityContext : ContextInterface
         return (array)_tables[_rootName].getPrimaryKey();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isPrimaryKey(string $field): bool
     {
         $parts = explode(".", $field);
@@ -505,9 +503,7 @@ class EntityContext : ContextInterface
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getRequiredMessage(string $field): ?string
     {
         $parts = explode(".", $field);

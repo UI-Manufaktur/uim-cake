@@ -123,9 +123,7 @@ class JsonView : SerializedView
         return $return;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _serialize($serialize): string
     {
         $data = _dataToSerialize($serialize);

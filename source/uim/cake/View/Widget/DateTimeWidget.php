@@ -217,9 +217,7 @@ class DateTimeWidget : BasicWidget
         return $dateTime.format($format);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function secureFields(array $data): array
     {
         if (!isset($data["name"]) || $data["name"] == "") {

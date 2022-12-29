@@ -82,9 +82,7 @@ class LabelWidget : WidgetInterface
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function secureFields(array $data): array
     {
         return [];

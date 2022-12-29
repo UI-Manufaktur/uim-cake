@@ -113,17 +113,13 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         this.init();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function connection(): string
     {
         return this.connection;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sourceName(): string
     {
         return this.table;
@@ -262,9 +258,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function create(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
@@ -299,9 +293,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function drop(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
@@ -326,9 +318,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function insert(ConnectionInterface $connection) {
         if (!empty(this.records)) {
             [$fields, $values, $types] = _getRecords();
@@ -348,9 +338,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createConstraints(ConnectionInterface $connection): bool
     {
         if (empty(_constraints)) {
@@ -375,9 +363,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropConstraints(ConnectionInterface $connection): bool
     {
         if (empty(_constraints)) {
@@ -428,9 +414,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return [$fields, $values, $types];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncate(ConnectionInterface $connection): bool
     {
         /** @psalm-suppress ArgumentTypeCoercion */
@@ -442,16 +426,12 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getTableSchema() {
         return _schema;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function setTableSchema($schema) {
         _schema = $schema;
 

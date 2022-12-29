@@ -121,9 +121,7 @@ class ArrayContext : ContextInterface
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isPrimaryKey(string $field): bool
     {
         $primaryKey = this.getPrimaryKey();
@@ -219,9 +217,7 @@ class ArrayContext : ContextInterface
         return $required;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getRequiredMessage(string $field): ?string
     {
         if (!is_array(_context["required"])) {
@@ -260,9 +256,7 @@ class ArrayContext : ContextInterface
         return Hash::get(_context["schema"], "$field.length");
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fieldNames(): array
     {
         $schema = _context["schema"];

@@ -187,9 +187,7 @@ class BasicWidget : WidgetInterface
         return $data;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function secureFields(array $data): array
     {
         if (!isset($data["name"]) || $data["name"] == "") {

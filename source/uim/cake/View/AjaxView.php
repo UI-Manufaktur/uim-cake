@@ -16,9 +16,7 @@ module uim.cake.View;
  */
 class AjaxView : View
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $layout = "ajax";
 
     /**

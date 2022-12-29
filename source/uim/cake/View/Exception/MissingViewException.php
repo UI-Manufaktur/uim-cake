@@ -16,8 +16,6 @@ import uim.cake.cores.exceptions.CakeException;
  */
 class MissingViewException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = "View class "%s" is missing.";
 }

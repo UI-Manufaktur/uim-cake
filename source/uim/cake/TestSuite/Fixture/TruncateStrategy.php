@@ -31,9 +31,7 @@ class TruncateStrategy : FixtureStrategyInterface
         this.helper = new FixtureHelper();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function setupTest(array $fixtureNames): void
     {
         if (empty($fixtureNames)) {
@@ -44,9 +42,7 @@ class TruncateStrategy : FixtureStrategyInterface
         this.helper.insert(this.fixtures);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function teardownTest(): void
     {
         this.helper.truncate(this.fixtures);

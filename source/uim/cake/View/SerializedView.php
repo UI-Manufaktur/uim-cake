@@ -42,9 +42,7 @@ abstract class SerializedView : View
         "serialize": null,
     ];
 
-    /**
-     * @inheritDoc
-     */
+
     function initialize(): void
     {
         parent::initialize();

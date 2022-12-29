@@ -38,96 +38,72 @@ class NullContext : ContextInterface
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getPrimaryKey(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isPrimaryKey(string $field): bool
     {
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isCreate(): bool
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function val(string $field, array $options = []) {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isRequired(string $field): ?bool
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getRequiredMessage(string $field): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getMaxLength(string $field): ?int
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fieldNames(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function type(string $field): ?string
     {
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function attributes(string $field): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function hasError(string $field): bool
     {
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function error(string $field): array
     {
         return [];

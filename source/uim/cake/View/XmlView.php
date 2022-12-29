@@ -98,9 +98,7 @@ class XmlView : SerializedView
         return "application/xml";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _serialize($serialize): string
     {
         $rootNode = this.getConfig("rootNode", "response");

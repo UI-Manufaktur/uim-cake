@@ -20,72 +20,52 @@ use Throwable;
  */
 trait TestListenerTrait
 {
-    /**
-     * @inheritDoc
-     */
+
     function startTestSuite(TestSuite $suite): void
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function endTestSuite(TestSuite $suite): void
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function startTest(Test $test): void
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function endTest(Test $test, float $time): void
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addSkippedTest(Test $test, Throwable $t, float $time): void
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addError(Test $test, Throwable $t, float $time): void
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addWarning(Test $test, Warning $e, float $time): void
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addFailure(Test $test, AssertionFailedError $e, float $time): void
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addRiskyTest(Test $test, Throwable $t, float $time): void
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addIncompleteTest(Test $test, Throwable $t, float $time): void
     {
     }

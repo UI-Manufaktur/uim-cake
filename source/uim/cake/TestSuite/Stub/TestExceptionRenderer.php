@@ -37,9 +37,7 @@ class TestExceptionRenderer : ExceptionRendererInterface
         throw $exception;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function render(): IResponse
     {
         throw new LogicException("You cannot use this class to render exceptions.");

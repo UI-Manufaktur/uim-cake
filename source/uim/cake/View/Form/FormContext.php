@@ -67,33 +67,25 @@ class FormContext : ContextInterface
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getPrimaryKey(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isPrimaryKey(string $field): bool
     {
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isCreate(): bool
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function val(string $field, array $options = []) {
         $options += [
             "default": null,
@@ -127,9 +119,7 @@ class FormContext : ContextInterface
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isRequired(string $field): ?bool
     {
         $validator = _form.getValidator(_validator);
@@ -143,9 +133,7 @@ class FormContext : ContextInterface
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getRequiredMessage(string $field): ?string
     {
         $parts = explode(".", $field);
@@ -164,9 +152,7 @@ class FormContext : ContextInterface
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getMaxLength(string $field): ?int
     {
         $validator = _form.getValidator(_validator);
@@ -187,25 +173,19 @@ class FormContext : ContextInterface
         return null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fieldNames(): array
     {
         return _form.getSchema().fields();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function type(string $field): ?string
     {
         return _form.getSchema().fieldType($field);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function attributes(string $field): array
     {
         return array_intersect_key(
@@ -214,9 +194,7 @@ class FormContext : ContextInterface
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function hasError(string $field): bool
     {
         $errors = this.error($field);
@@ -224,9 +202,7 @@ class FormContext : ContextInterface
         return count($errors) > 0;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function error(string $field): array
     {
         return (array)Hash::get(_form.getErrors(), $field, []);
