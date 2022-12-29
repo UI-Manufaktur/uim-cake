@@ -182,7 +182,7 @@ abstract class TestCase : BaseTestCase
      * @param callable $callable callable function that will receive asserts
      * @return void
      */
-    function withErrorReporting(int $errorLevel, callable $callable): void
+    void withErrorReporting(int $errorLevel, callable $callable): void
     {
         $default = error_reporting();
         error_reporting($errorLevel);
@@ -199,7 +199,7 @@ abstract class TestCase : BaseTestCase
      * @param callable $callable callable function that will receive asserts
      * @return void
      */
-    function deprecated(callable $callable): void
+    void deprecated(callable $callable): void
     {
         $duplicate = Configure::read("Error.allowDuplicateDeprecations");
         Configure::write("Error.allowDuplicateDeprecations", true);
@@ -422,7 +422,7 @@ abstract class TestCase : BaseTestCase
      * @param array<string> $names A list of plugins you want to remove.
      * @return void
      */
-    function removePlugins(array $names = []): void
+    void removePlugins(array $names = []): void
     {
         $collection = Plugin::getCollection();
         foreach ($names as $name) {
@@ -437,7 +437,7 @@ abstract class TestCase : BaseTestCase
      *
      * @return void
      */
-    function clearPlugins(): void
+    void clearPlugins(): void
     {
         Plugin::getCollection().clear();
     }
@@ -450,7 +450,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message Assertion failure message
      * @return void
      */
-    function assertEventFired(string $name, ?EventManager $eventManager = null, string $message = ""): void
+    void assertEventFired(string $name, ?EventManager $eventManager = null, string $message = ""): void
     {
         if (!$eventManager) {
             $eventManager = EventManager::instance();
@@ -470,7 +470,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message Assertion failure message
      * @return void
      */
-    function assertEventFiredWith(
+    void assertEventFiredWith(
         string $name,
         string $dataKey,
         $dataValue,
@@ -492,7 +492,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextNotEquals(string $expected, string $result, string $message = ""): void
+    void assertTextNotEquals(string $expected, string $result, string $message = ""): void
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
@@ -508,7 +508,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextEquals(string $expected, string $result, string $message = ""): void
+    void assertTextEquals(string $expected, string $result, string $message = ""): void
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
@@ -524,7 +524,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextStartsWith(string $prefix, string $string, string $message = ""): void
+    void assertTextStartsWith(string $prefix, string $string, string $message = ""): void
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -540,7 +540,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextStartsNotWith(string $prefix, string $string, string $message = ""): void
+    void assertTextStartsNotWith(string $prefix, string $string, string $message = ""): void
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -556,7 +556,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertT:With(string $suffix, string $string, string $message = ""): void
+    void assertT:With(string $suffix, string $string, string $message = ""): void
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -572,7 +572,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertT:NotWith(string $suffix, string $string, string $message = ""): void
+    void assertT:NotWith(string $suffix, string $string, string $message = ""): void
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -589,7 +589,7 @@ abstract class TestCase : BaseTestCase
      * @param bool $ignoreCase Whether the search should be case-sensitive.
      * @return void
      */
-    function assertTextContains(
+    void assertTextContains(
         string $needle,
         string $haystack,
         string $message = "",
@@ -615,7 +615,7 @@ abstract class TestCase : BaseTestCase
      * @param bool $ignoreCase Whether the search should be case-sensitive.
      * @return void
      */
-    function assertTextNotContains(
+    void assertTextNotContains(
         string $needle,
         string $haystack,
         string $message = "",
@@ -639,7 +639,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to display on failure
      * @return void
      */
-    function assertEqualsSql(
+    void assertEqualsSql(
         string $expected,
         string $actual,
         string $message = ""
@@ -658,7 +658,7 @@ abstract class TestCase : BaseTestCase
      * @param bool $optional Whether quote characters (marked with <>) are optional
      * @return void
      */
-    function assertRegExpSql(string $pattern, string $actual, bool $optional = false): void
+    void assertRegExpSql(string $pattern, string $actual, bool $optional = false): void
     {
         $optional = $optional ? "?" : "";
         $pattern = str_replace("<", "[`"\[]" . $optional, $pattern);

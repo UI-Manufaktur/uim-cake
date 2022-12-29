@@ -36,7 +36,7 @@ class ConnectionHelper
      *
      * @return void
      */
-    function addTestAliases(): void
+    void addTestAliases(): void
     {
         ConnectionManager::alias("test", "default");
         foreach (ConnectionManager::configured() as $connection) {
@@ -60,7 +60,7 @@ class ConnectionHelper
      * @param array<int, string>|null $connections Connection names or null for all.
      * @return void
      */
-    function enableQueryLogging(?array $connections = null): void
+    void enableQueryLogging(?array $connections = null): void
     {
         $connections = $connections ?? ConnectionManager::configured();
         foreach ($connections as $connection) {
@@ -78,7 +78,7 @@ class ConnectionHelper
      * @param array<string>|null $tables List of tables names or null for all.
      * @return void
      */
-    function dropTables(string $connectionName, ?array $tables = null): void
+    void dropTables(string $connectionName, ?array $tables = null): void
     {
         /** @var uim.cake.Database\Connection $connection */
         $connection = ConnectionManager::get($connectionName);
@@ -117,7 +117,7 @@ class ConnectionHelper
      * @param array<string>|null $tables List of tables names or null for all.
      * @return void
      */
-    function truncateTables(string $connectionName, ?array $tables = null): void
+    void truncateTables(string $connectionName, ?array $tables = null): void
     {
         /** @var uim.cake.Database\Connection $connection */
         $connection = ConnectionManager::get($connectionName);
@@ -147,7 +147,7 @@ class ConnectionHelper
      * @param \Closure $callback callback
      * @return void
      */
-    function runWithoutConstraints(Connection $connection, Closure $callback): void
+    void runWithoutConstraints(Connection $connection, Closure $callback): void
     {
         if ($connection.getDriver().supports(DriverInterface::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION)) {
             $connection.disableConstraints(function (Connection $connection) use ($callback): void {

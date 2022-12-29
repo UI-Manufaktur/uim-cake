@@ -35,7 +35,7 @@ abstract class IntegrationTestCase : TestCase
      * @param bool $enable Unused.
      * @return void
      */
-    function useHttpServer(bool $enable): void
+    void useHttpServer(bool $enable): void
     {
     }
 }

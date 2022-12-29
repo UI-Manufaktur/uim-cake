@@ -105,7 +105,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \ArrayObject $options The options for the query.
      * @return void
      */
-    function beforeFind(IEvent $event, Query $query, ArrayObject $options) {
+    void beforeFind(IEvent $event, Query $query, ArrayObject $options) {
         $locale = Hash::get($options, "locale", this.getLocale());
         $config = this.getConfig();
 
@@ -323,7 +323,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \ArrayObject $options the options passed to the save method.
      * @return void
      */
-    function beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options) {
+    void beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options) {
         $locale = $entity.get("_locale") ?: this.getLocale();
         $newOptions = [this.translationTable.getAlias(): ["validate": false]];
         $options["associated"] = $newOptions + $options["associated"];

@@ -79,7 +79,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    function beforeFind(IEvent $event, Query $query, ArrayObject $options);
+    void beforeFind(IEvent $event, Query $query, ArrayObject $options);
 
     /**
      * Modifies the entity before it is saved so that translated fields are persisted
@@ -90,7 +90,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param \ArrayObject $options the options passed to the save method
      * @return void
      */
-    function beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options);
+    void beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options);
 
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
@@ -99,5 +99,5 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */
-    function afterSave(IEvent $event, EntityInterface $entity);
+    void afterSave(IEvent $event, EntityInterface $entity);
 }

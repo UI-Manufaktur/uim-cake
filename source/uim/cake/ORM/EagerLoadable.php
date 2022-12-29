@@ -133,7 +133,7 @@ class EagerLoadable
      * @param uim.cake.orm.EagerLoadable $association The association to load.
      * @return void
      */
-    function addAssociation(string $name, EagerLoadable $association): void
+    void addAssociation(string $name, EagerLoadable $association): void
     {
         _associations[$name] = $association;
     }
@@ -299,7 +299,7 @@ class EagerLoadable
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         foreach (_associations as $i: $association) {
             _associations[$i] = clone $association;
         }

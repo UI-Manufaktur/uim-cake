@@ -67,7 +67,7 @@ class RouteCollection
      *   `_name` option, which enables named routes.
      * @return void
      */
-    function add(Route $route, array $options = []): void
+    void add(Route $route, array $options = []): void
     {
         // Explicit names
         if (isset($options["_name"])) {

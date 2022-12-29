@@ -14,5 +14,5 @@ interface IRoutingApplication
      * @param uim.cake.routings.RouteBuilder $routes A route builder to add routes into.
      * @return void
      */
-    function routes(RouteBuilder $routes): void;
+    void routes(RouteBuilder $routes): void;
 }

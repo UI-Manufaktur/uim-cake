@@ -163,7 +163,7 @@ class EagerLoader
      *
      * @return void
      */
-    function clearContain(): void
+    void clearContain(): void
     {
         _containments = [];
         _normalized = null;
@@ -389,7 +389,7 @@ class EagerLoader
      * per association in the containments array
      * @return void
      */
-    function attachAssociations(Query $query, Table $repository, bool $includeFields): void
+    void attachAssociations(Query $query, Table $repository, bool $includeFields): void
     {
         if (empty(_containments) && _matching == null) {
             return;
@@ -739,7 +739,7 @@ class EagerLoader
      * If not passed, the default property for the association will be used.
      * @return void
      */
-    function addToJoinsMap(
+    void addToJoinsMap(
         string $alias,
         Association $assoc,
         bool $asMatching = false,
@@ -843,7 +843,7 @@ class EagerLoader
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         if (_matching) {
             _matching = clone _matching;
         }

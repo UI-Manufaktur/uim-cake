@@ -192,7 +192,7 @@ class ResultSet : IResultSet
      *
      * @return void
      */
-    function next(): void
+    void next(): void
     {
         _index++;
     }
@@ -205,7 +205,7 @@ class ResultSet : IResultSet
      * @throws uim.cake.Database\exceptions.DatabaseException
      * @return void
      */
-    function rewind(): void
+    void rewind(): void
     {
         if (_index == 0) {
             return;
@@ -317,7 +317,7 @@ class ResultSet : IResultSet
      * @param string $serialized Serialized object
      * @return void
      */
-    function unserialize($serialized) {
+    void unserialize($serialized) {
         __unserialize((array)(unserialize($serialized) ?: []));
     }
 
@@ -327,7 +327,7 @@ class ResultSet : IResultSet
      * @param array $data Data array.
      * @return void
      */
-    function __unserialize(array $data): void
+    void __unserialize(array $data): void
     {
         _results = SplFixedArray::fromArray($data);
         _useBuffering = true;

@@ -147,7 +147,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $entity the entity that is going to be saved
      * @return void
      */
-    function afterSave(IEvent $event, EntityInterface $entity) {
+    void afterSave(IEvent $event, EntityInterface $entity) {
         if (!_config["level"] || $entity.isNew()) {
             return;
         }
@@ -199,7 +199,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */
-    function beforeDelete(IEvent $event, EntityInterface $entity) {
+    void beforeDelete(IEvent $event, EntityInterface $entity) {
         $config = this.getConfig();
         _ensureFields($entity);
         $left = $entity.get($config["left"]);
@@ -802,7 +802,7 @@ class TreeBehavior : Behavior
      *
      * @return void
      */
-    function recover(): void
+    void recover(): void
     {
         _table.getConnection().transactional(function (): void {
             _recoverTree();

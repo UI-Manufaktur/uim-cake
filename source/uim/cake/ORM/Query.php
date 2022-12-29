@@ -1069,7 +1069,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @return void
      */
-    function triggerBeforeFind(): void
+    void triggerBeforeFind(): void
     {
         if (!_beforeFindFired && _type == "select") {
             _beforeFindFired = true;

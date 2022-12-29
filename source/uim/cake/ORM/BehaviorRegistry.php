@@ -59,7 +59,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      * @param uim.cake.orm.Table $table The table this registry is attached to.
      * @return void
      */
-    function setTable(Table $table): void
+    void setTable(Table $table): void
     {
         _table = $table;
         this.setEventManager($table.getEventManager());

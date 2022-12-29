@@ -429,7 +429,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> $options Any extra options or overrides to be taken in account
      * @return void
      */
-    function attachTo(Query $query, array $options = []): void
+    void attachTo(Query $query, array $options = []): void
     {
         if (!empty($options["negateMatch"])) {
             _appendNotMatching($query, $options);

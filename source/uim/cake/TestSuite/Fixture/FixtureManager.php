@@ -75,7 +75,7 @@ class FixtureManager
      * @param bool $debug Whether fixture debug mode is enabled.
      * @return void
      */
-    function setDebug(bool $debug): void
+    void setDebug(bool $debug): void
     {
         _debug = $debug;
     }
@@ -84,7 +84,7 @@ class FixtureManager
      * @param uim.cake.TestSuite\TestCase $test Test case
      * @return void
      */
-    function fixturize(TestCase $test): void
+    void fixturize(TestCase $test): void
     {
         _initDb();
         if (!$test.getFixtures() || !empty(_processed[get_class($test)])) {
@@ -419,7 +419,7 @@ class FixtureManager
      * @param uim.cake.TestSuite\TestCase $test The test to inspect for fixture unloading.
      * @return void
      */
-    function unload(TestCase $test): void
+    void unload(TestCase $test): void
     {
         $fixtures = $test.getFixtures();
         if (!$fixtures) {
@@ -481,7 +481,7 @@ class FixtureManager
      *
      * @return void
      */
-    function shutDown(): void
+    void shutDown(): void
     {
         $shutdown = function (ConnectionInterface $db, array $fixtures): void {
             $connection = $db.configName();

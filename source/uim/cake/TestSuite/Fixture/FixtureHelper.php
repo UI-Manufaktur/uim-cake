@@ -104,7 +104,7 @@ class FixtureHelper
      * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Test fixtures
      * @return void
      */
-    function runPerConnection(Closure $callback, array $fixtures): void
+    void runPerConnection(Closure $callback, array $fixtures): void
     {
         $groups = [];
         foreach ($fixtures as $fixture) {

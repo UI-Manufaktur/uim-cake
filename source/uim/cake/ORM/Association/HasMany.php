@@ -324,7 +324,7 @@ class HasMany : Association
      * any of them is lacking a primary key value
      * @return void
      */
-    function unlink(EntityInterface $sourceEntity, array $targetEntities, $options = []): void
+    void unlink(EntityInterface $sourceEntity, array $targetEntities, $options = []): void
     {
         if (is_bool($options)) {
             $options = [

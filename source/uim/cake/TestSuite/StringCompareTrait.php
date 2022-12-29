@@ -34,7 +34,7 @@ trait StringCompareTrait
      * @param string $result test result as a string
      * @return void
      */
-    function assertSameAsFile(string $path, string $result): void
+    void assertSameAsFile(string $path, string $result): void
     {
         if (!file_exists($path)) {
             $path = _compareBasePath . $path;

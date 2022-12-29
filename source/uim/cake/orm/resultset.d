@@ -190,7 +190,7 @@ class ResultSet : IResultSet
      * @throws uim.cake.Database\exceptions.DatabaseException
      * @return void
      */
-    function rewind() {
+    void rewind() {
         if (_index == 0) {
             return;
         }

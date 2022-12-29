@@ -62,7 +62,7 @@ class TimestampBehavior : Behavior
      * @param array<string, mixed> $config The config for this behavior.
      * @return void
      */
-    function initialize(array $config): void
+    void initialize(array $config): void
     {
         if (isset($config["events"])) {
             this.setConfig("events", $config["events"], false);

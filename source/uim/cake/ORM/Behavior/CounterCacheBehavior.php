@@ -105,7 +105,7 @@ class CounterCacheBehavior : Behavior
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    function beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options) {
+    void beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options) {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
         }
@@ -142,7 +142,7 @@ class CounterCacheBehavior : Behavior
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    function afterSave(IEvent $event, EntityInterface $entity, ArrayObject $options): void
+    void afterSave(IEvent $event, EntityInterface $entity, ArrayObject $options): void
     {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
@@ -162,7 +162,7 @@ class CounterCacheBehavior : Behavior
      * @param \ArrayObject $options The options for the query
      * @return void
      */
-    function afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options) {
+    void afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options) {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
         }

@@ -125,7 +125,7 @@ class TableHelper : Helper
      * @param array $args The data to render out.
      * @return void
      */
-    function output(array $args): void
+    void output(array $args): void
     {
         if (empty($args)) {
             return;

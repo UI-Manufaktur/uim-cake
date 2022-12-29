@@ -140,7 +140,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity $entity the entity that is going to be saved
      * @return void
      */
-    function afterSave(IEvent myEvent, IEntity $entity) {
+    void afterSave(IEvent myEvent, IEntity $entity) {
         if (!_config["level"] || $entity.isNew()) {
             return;
         }
@@ -191,7 +191,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @return void
      */
-    function beforeDelete(IEvent myEvent, IEntity $entity) {
+    void beforeDelete(IEvent myEvent, IEntity $entity) {
         myConfig = this.getConfig();
         _ensureFields($entity);
         $left = $entity.get(myConfig["left"]);
