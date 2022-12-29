@@ -5,8 +5,7 @@
 
 
  * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.View\Helper;
 
 import uim.cake.I18n\FrozenTime;

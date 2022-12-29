@@ -5,8 +5,7 @@
 
 
 
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.View\Widget;
 
 import uim.cake.View\Form\ContextInterface;

@@ -5,8 +5,7 @@
 
 
  * @since         2.5.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Shell\Task;
 
 import uim.cake.consoles.Shell;

@@ -9,8 +9,7 @@
  *
 
  * @since         3.3.1
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Routing\Exception;
 
 import uim.cake.core.exceptions.CakeException;

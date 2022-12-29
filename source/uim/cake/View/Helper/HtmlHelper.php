@@ -5,8 +5,7 @@
 
 
  * @since         0.9.1
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.View\Helper;
 
 import uim.cake.core.Configure;

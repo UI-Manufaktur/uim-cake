@@ -5,8 +5,7 @@
 
 
  * @since         3.5.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.View\Form;
 
 import uim.cake.Collection\Collection;

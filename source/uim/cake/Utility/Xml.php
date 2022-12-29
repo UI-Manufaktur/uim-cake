@@ -5,8 +5,7 @@
 
 
  * @since         0.10.3
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Utility;
 
 import uim.cake.utilities.exceptions.XmlException;
