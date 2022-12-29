@@ -1,6 +1,6 @@
 module uim.cake.views;
 
-import uim.cake.views.Exception\SerializationFailureException;
+import uim.cake.views.exceptions.SerializationFailureException;
 use Exception;
 use TypeError;
 

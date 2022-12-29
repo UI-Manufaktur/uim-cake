@@ -9,7 +9,7 @@
  */
 module uim.cake.View\Exception;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 
 /**
  * Used when a SerializedView class fails to serialize data.

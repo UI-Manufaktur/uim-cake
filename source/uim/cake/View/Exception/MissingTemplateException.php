@@ -13,7 +13,7 @@
  */
 module uim.cake.View\Exception;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 use Throwable;
 
 /**
