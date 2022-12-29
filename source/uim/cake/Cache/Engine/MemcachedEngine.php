@@ -94,8 +94,7 @@ class MemcachedEngine : CacheEngine
      * @throws \InvalidArgumentException When you try use authentication without
      *   Memcached compiled with SASL support
      */
-    bool init(array $config = [])
-    {
+    bool init(array $config = []) {
         if (!extension_loaded("memcached")) {
             throw new RuntimeException("The `memcached` extension must be enabled to use MemcachedEngine.");
         }
@@ -293,8 +292,7 @@ class MemcachedEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure
      * @see https://www.php.net/manual/en/memcached.set.php
      */
-    bool set($key, $value, $ttl = null)
-    {
+    bool set($key, $value, $ttl = null) {
         $duration = this.duration($ttl);
 
         return _Memcached.set(_key($key), $value, $duration);
@@ -309,8 +307,7 @@ class MemcachedEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool Whether the write was successful or not.
      */
-    bool setMultiple($values, $ttl = null)
-    {
+    bool setMultiple($values, $ttl = null) {
         $cacheData = [];
         foreach ($values as $key: $value) {
             $cacheData[_key($key)] = $value;
@@ -391,8 +388,7 @@ class MemcachedEngine : CacheEngine
      * @return bool True if the value was successfully deleted, false if it didn"t
      *   exist or couldn"t be removed.
      */
-    bool delete($key)
-    {
+    bool delete($key) {
         return _Memcached.delete(_key($key));
     }
 
@@ -403,8 +399,7 @@ class MemcachedEngine : CacheEngine
      * @return bool of boolean values that are true if the key was successfully
      *   deleted, false if it didn"t exist or couldn"t be removed.
      */
-    bool deleteMultiple($keys)
-    {
+    bool deleteMultiple($keys) {
         $cacheKeys = [];
         foreach ($keys as $key) {
             $cacheKeys[] = _key($key);
@@ -418,8 +413,7 @@ class MemcachedEngine : CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    bool clear()
-    {
+    bool clear() {
         $keys = _Memcached.getAllKeys();
         if ($keys == false) {
             return false;
@@ -441,8 +435,7 @@ class MemcachedEngine : CacheEngine
      * @param mixed $value Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      */
-    bool add(string $key, $value)
-    {
+    bool add(string $key, $value) {
         $duration = _config["duration"];
         $key = _key($key);
 
@@ -489,8 +482,7 @@ class MemcachedEngine : CacheEngine
      * @param string $group name of the group to be cleared
      * @return bool success
      */
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         return (bool)_Memcached.increment(_config["prefix"] . $group);
     }
 }

@@ -86,8 +86,7 @@ class ConsoleInputArgument
      * @param \Cake\Console\ConsoleInputArgument $argument ConsoleInputArgument to compare to.
      * @return bool
      */
-    function isEqualTo(ConsoleInputArgument $argument): bool
-    {
+    bool isEqualTo(ConsoleInputArgument $argument) {
         return this.name() == $argument.name() &&
             this.usage() == $argument.usage();
     }
@@ -98,7 +97,7 @@ class ConsoleInputArgument
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    function help(int $width = 0): string
+    bool help(int $width = 0): string
     {
         $name = _name;
         if (strlen($name) < $width) {
@@ -139,8 +138,7 @@ class ConsoleInputArgument
      *
      * @return bool
      */
-    function isRequired(): bool
-    {
+    bool isRequired() {
         return _required;
     }
 
@@ -151,8 +149,7 @@ class ConsoleInputArgument
      * @return true
      * @throws \Cake\Console\Exception\ConsoleException
      */
-    function validChoice(string $value): bool
-    {
+    bool validChoice(string $value) {
         if (empty(_choices)) {
             return true;
         }

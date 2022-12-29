@@ -19,20 +19,17 @@ import uim.cake.caches.CacheEngine;
 class NullEngine : CacheEngine
 {
 
-    bool init(array $config = [])
-    {
+    bool init(array $config = []) {
         return true;
     }
 
 
-    bool set($key, $value, $ttl = null)
-    {
+    bool set($key, $value, $ttl = null) {
         return true;
     }
 
 
-    bool setMultiple($values, $ttl = null)
-    {
+    bool setMultiple($values, $ttl = null) {
         return true;
     }
 
@@ -58,26 +55,22 @@ class NullEngine : CacheEngine
     }
 
 
-    bool delete($key)
-    {
+    bool delete($key) {
         return true;
     }
 
 
-    bool deleteMultiple($keys)
-    {
+    bool deleteMultiple($keys) {
         return true;
     }
 
 
-    bool clear()
-    {
+    bool clear() {
         return true;
     }
 
 
-    bool clearGroup(string $group)
-    {
+    bool clearGroup(string $group) {
         return true;
     }
 }

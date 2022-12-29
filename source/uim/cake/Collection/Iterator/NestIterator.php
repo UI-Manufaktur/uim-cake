@@ -56,8 +56,7 @@ class NestIterator : Collection : RecursiveIterator
      *
      * @return bool
      */
-    function hasChildren(): bool
-    {
+    bool hasChildren() {
         $property = _propertyExtractor(_nestKey);
         $children = $property(this.current());
 

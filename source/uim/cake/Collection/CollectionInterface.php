@@ -109,7 +109,7 @@ interface ICollection : Iterator, JsonSerializable
      * @return bool true if for all elements in this collection the provided
      *   callback returns true, false otherwise.
      */
-    function every(callable $callback): bool;
+    bool every(callable $callback);
 
     /**
      * Returns true if any of the values in this collection pass the truth test
@@ -130,7 +130,7 @@ interface ICollection : Iterator, JsonSerializable
      * @return bool true if the provided callback returns true for any element in this
      * collection, false otherwise
      */
-    function some(callable $callback): bool;
+    bool some(callable $callback);
 
     /**
      * Returns true if $value is present in this collection. Comparisons are made
@@ -139,7 +139,7 @@ interface ICollection : Iterator, JsonSerializable
      * @param mixed $value The value to check for
      * @return bool true if $value is present in this collection
      */
-    function contains($value): bool;
+    bool contains($value);
 
     /**
      * Returns another collection after modifying each of the values in this one using
@@ -1064,7 +1064,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return bool
      */
-    function isEmpty(): bool;
+    bool isEmpty();
 
     /**
      * Returns the closest nested iterator that can be safely traversed without

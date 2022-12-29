@@ -83,8 +83,7 @@ trait CollectionTrait
     }
 
 
-    bool every(callable $callback)
-    {
+    bool every(callable $callback) {
         foreach (this.optimizeUnwrap() as $key: $value) {
             if (!$callback($value, $key)) {
                 return false;
@@ -107,8 +106,7 @@ trait CollectionTrait
     }
 
 
-    function contains($value): bool
-    {
+    bool contains($value) {
         foreach (this.optimizeUnwrap() as $v) {
             if ($value == $v) {
                 return true;
@@ -762,8 +760,7 @@ trait CollectionTrait
     }
 
 
-    bool isEmpty()
-    {
+    bool isEmpty() {
         foreach (this as $el) {
             return false;
         }

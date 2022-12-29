@@ -149,8 +149,7 @@ trait PluginAssetsTrait
      * @param array<string, mixed> $config Plugin config.
      * @return bool
      */
-    protected function _remove(array $config): bool
-    {
+    protected bool _remove(array $config) {
         if ($config["namespaced"] && !is_dir($config["destDir"])) {
             this.io.verbose(
                 $config["destDir"] . $config["link"] . " does not exist",
@@ -203,8 +202,7 @@ trait PluginAssetsTrait
      * @param string $dir Directory name
      * @return bool
      */
-    protected function _createDirectory(string $dir): bool
-    {
+    protected bool _createDirectory(string $dir) {
         $old = umask(0);
         // phpcs:disable
         $result = @mkdir($dir, 0755, true);
@@ -229,8 +227,7 @@ trait PluginAssetsTrait
      * @param string $link Link name
      * @return bool
      */
-    protected function _createSymlink(string $target, string $link): bool
-    {
+    protected bool _createSymlink(string $target, string $link) {
         // phpcs:disable
         $result = @symlink($target, $link);
         // phpcs:enable
@@ -251,8 +248,7 @@ trait PluginAssetsTrait
      * @param string $destination Destination directory
      * @return bool
      */
-    protected function _copyDirectory(string $source, string $destination): bool
-    {
+    protected bool _copyDirectory(string $source, string $destination) {
         $fs = new Filesystem();
         if ($fs.copyDir($source, $destination)) {
             this.io.out("Copied assets to directory " . $destination);
