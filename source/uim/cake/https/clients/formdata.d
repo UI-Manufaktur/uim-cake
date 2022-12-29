@@ -1,4 +1,4 @@
-module uim.cake.https.clients;
+module uim.cake.http.clients;
 
 @safe:
 import uim.cake;
@@ -54,7 +54,7 @@ class FormData : Countable {
      *
      * @param string myName The name of the part.
      * @param string myValue The value to add.
-     * @return uim.cake.Http\Client\FormDataPart
+     * @return uim.cake.http.Client\FormDataPart
      */
     function newPart(string myName, string myValue): FormDataPart
     {
@@ -70,7 +70,7 @@ class FormData : Countable {
      * If the myValue is an array, multiple parts will be added.
      * Files will be read from their current position and saved in memory.
      *
-     * @param uim.cake.Http\Client\FormDataPart|string myName The name of the part to add,
+     * @param uim.cake.http.Client\FormDataPart|string myName The name of the part to add,
      *   or the part data object.
      * @param mixed myValue The value for the part.
      * @return this
@@ -114,7 +114,7 @@ class FormData : Countable {
      *
      * @param string myName The name to use.
      * @param mixed myValue Either a string filename, or a filehandle.
-     * @return uim.cake.Http\Client\FormDataPart
+     * @return uim.cake.http.Client\FormDataPart
      */
     function addFile(string myName, myValue): FormDataPart
     {

@@ -1,4 +1,4 @@
-module uim.cake.https.clients\Auth;
+module uim.cake.http.clients\Auth;
 
 @safe:
 import uim.cake;
@@ -14,16 +14,16 @@ class Basic
     /**
      * Add Authorization header to the request.
      *
-     * @param uim.cake.Http\Client\Request myRequest Request instance.
+     * @param uim.cake.http.Client\Request myRequest Request instance.
      * @param array $credentials Credentials.
-     * @return uim.cake.Http\Client\Request The updated request.
+     * @return uim.cake.http.Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
     function authentication(Request myRequest, array $credentials): Request
     {
         if (isset($credentials["username"], $credentials["password"])) {
             myValue = _generateHeader($credentials["username"], $credentials["password"]);
-            /** @var uim.cake.Http\Client\Request myRequest */
+            /** @var uim.cake.http.Client\Request myRequest */
             myRequest = myRequest.withHeader("Authorization", myValue);
         }
 
@@ -33,16 +33,16 @@ class Basic
     /**
      * Proxy Authentication
      *
-     * @param uim.cake.Http\Client\Request myRequest Request instance.
+     * @param uim.cake.http.Client\Request myRequest Request instance.
      * @param array $credentials Credentials.
-     * @return uim.cake.Http\Client\Request The updated request.
+     * @return uim.cake.http.Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
     function proxyAuthentication(Request myRequest, array $credentials): Request
     {
         if (isset($credentials["username"], $credentials["password"])) {
             myValue = _generateHeader($credentials["username"], $credentials["password"]);
-            /** @var uim.cake.Http\Client\Request myRequest */
+            /** @var uim.cake.http.Client\Request myRequest */
             myRequest = myRequest.withHeader("Proxy-Authorization", myValue);
         }
 

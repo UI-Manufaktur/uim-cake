@@ -37,7 +37,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * Constructor
      *
      * @param array<string, mixed> myConfig The options to use.
-     * @see uim.cake.Http\Middleware\HttpsEnforcerMiddleware::myConfig
+     * @see uim.cake.http.Middleware\HttpsEnforcerMiddleware::myConfig
      */
     this(array myConfig = []) {
         this.config = myConfig + this.config;
@@ -52,7 +52,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * @param \Psr\Http\Message\IServerRequest myRequest The request.
      * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
      * @return \Psr\Http\Message\IResponse A response.
-     * @throws uim.cake.Http\Exception\BadRequestException
+     * @throws uim.cake.http.Exception\BadRequestException
      */
     function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
     {

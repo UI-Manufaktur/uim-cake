@@ -1,4 +1,4 @@
-module uim.cake.https.clients;
+module uim.cake.http.clients;
 
 /**
  * Base class for other HTTP requests/responses

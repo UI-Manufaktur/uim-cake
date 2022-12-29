@@ -1,4 +1,4 @@
-module uim.cake.https.clients\Exception;
+module uim.cake.http.clients\Exception;
 
 import uim.cake.core.exceptions\CakeException;
 

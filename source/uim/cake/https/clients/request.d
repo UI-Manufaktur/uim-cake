@@ -1,4 +1,4 @@
-module uim.cake.https.clients.request;
+module uim.cake.http.clients.request;
 
 @safe:
 import uim.cake;

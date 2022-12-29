@@ -1,8 +1,8 @@
-module uim.cake.https.clients.adapters;
+module uim.cake.http.clients.adapters;
 
-import uim.cake.https.clients.adaptersInterface;
-import uim.cake.https.clients\Exception\MissingResponseException;
-import uim.cake.https.clients\Response;
+import uim.cake.http.clients.adaptersInterface;
+import uim.cake.http.clients\Exception\MissingResponseException;
+import uim.cake.http.clients\Response;
 use Closure;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
@@ -32,7 +32,7 @@ class Mock : IAdapter
      * - `match` An additional closure to match requests with.
      *
      * @param \Psr\Http\Message\RequestInterface myRequest A partial request to use for matching.
-     * @param uim.cake.Http\Client\Response $response The response that matches the request.
+     * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> myOptions See above.
      */
     void addResponse(RequestInterface myRequest, Response $response, array myOptions) {
@@ -52,7 +52,7 @@ class Mock : IAdapter
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request to match
      * @param array<string, mixed> myOptions Unused.
-     * @return uim.cake.Http\Client\Response[] The matched response or an empty array for no matches.
+     * @return uim.cake.http.Client\Response[] The matched response or an empty array for no matches.
      */
     function send(RequestInterface myRequest, array myOptions): array
     {

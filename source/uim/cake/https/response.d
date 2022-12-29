@@ -379,7 +379,7 @@ class Response : IResponse
     /**
      * Collection of cookies to send to the client
      *
-     * @var uim.cake.Http\Cookie\CookieCollection
+     * @var uim.cake.http.Cookie\CookieCollection
      */
     protected _cookies;
 
@@ -1120,7 +1120,7 @@ class Response : IResponse
      *
      * *Warning* This method mutates the response in-place and should be avoided.
      *
-     * @param uim.cake.Http\ServerRequest myRequest Request object
+     * @param uim.cake.http.ServerRequest myRequest Request object
      * @return bool Whether the response was marked as not modified or not.
      */
     bool checkNotModified(ServerRequest myRequest) {
@@ -1168,7 +1168,7 @@ class Response : IResponse
      * $response = $response.withCookie(new Cookie("remember_me", 1));
      * ```
      *
-     * @param uim.cake.Http\Cookie\ICookie $cookie cookie object
+     * @param uim.cake.http.Cookie\ICookie $cookie cookie object
      * @return static
      */
     function withCookie(ICookie $cookie) {
@@ -1188,7 +1188,7 @@ class Response : IResponse
      * $response = $response.withExpiredCookie(new Cookie("remember_me"));
      * ```
      *
-     * @param uim.cake.Http\Cookie\ICookie $cookie cookie object
+     * @param uim.cake.http.Cookie\ICookie $cookie cookie object
      * @return static
      */
     function withExpiredCookie(ICookie $cookie) {
@@ -1236,7 +1236,7 @@ class Response : IResponse
     /**
      * Get the CookieCollection from the response
      *
-     * @return uim.cake.Http\Cookie\CookieCollection
+     * @return uim.cake.http.Cookie\CookieCollection
      */
     CookieCollection getCookieCollection() {
       return _cookies;
@@ -1245,7 +1245,7 @@ class Response : IResponse
     /**
      * Get a new instance with provided cookie collection.
      *
-     * @param uim.cake.Http\Cookie\CookieCollection $cookieCollection Cookie collection to set.
+     * @param uim.cake.http.Cookie\CookieCollection $cookieCollection Cookie collection to set.
      * @return static
      */
     function withCookieCollection(CookieCollection $cookieCollection) {
@@ -1288,8 +1288,8 @@ class Response : IResponse
      * *Note* The `$allowedDomains`, `$allowedMethods`, `$allowedHeaders` parameters are deprecated.
      * Instead the builder object should be used.
      *
-     * @param uim.cake.Http\ServerRequest myRequest Request object
-     * @return uim.cake.Http\CorsBuilder A builder object the provides a fluent interface for defining
+     * @param uim.cake.http.ServerRequest myRequest Request object
+     * @return uim.cake.http.CorsBuilder A builder object the provides a fluent interface for defining
      *   additional CORS headers.
      */
     CorsBuilder cors(ServerRequest myRequest) {
@@ -1316,7 +1316,7 @@ class Response : IResponse
      * @param string myPath Absolute path to file.
      * @param array<string, mixed> myOptions Options See above.
      * @return static
-     * @throws uim.cake.Http\Exception\NotFoundException
+     * @throws uim.cake.http.Exception\NotFoundException
      */
     function withFile(string myPath, array myOptions = []) {
         myfile = this.validateFile(myPath);
@@ -1385,7 +1385,7 @@ class Response : IResponse
      * Validate a file path is a valid response body.
      *
      * @param string myPath The path to the file.
-     * @throws uim.cake.Http\Exception\NotFoundException
+     * @throws uim.cake.http.Exception\NotFoundException
      * @return \SplFileInfo
      */
     protected auto validateFile(string myPath): SplFileInfo

@@ -349,7 +349,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to validate against.
      * @return void
-     * @throws uim.cake.Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
+     * @throws uim.cake.http.Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
     protected auto _validateToken(IServerRequest myRequest): void
     {
@@ -394,7 +394,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param string myValue Cookie value
      * @param \Psr\Http\Message\IServerRequest myRequest The request object.
-     * @return uim.cake.Http\Cookie\ICookie
+     * @return uim.cake.http.Cookie\ICookie
      */
     protected auto _createCookie(string myValue, IServerRequest myRequest): ICookie
     {

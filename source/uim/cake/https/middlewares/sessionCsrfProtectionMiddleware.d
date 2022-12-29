@@ -218,8 +218,8 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * Validate the request data against the cookie token.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to validate against.
-     * @param uim.cake.Http\Session $session The session instance.
-     * @throws uim.cake.Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
+     * @param uim.cake.http.Session $session The session instance.
+     * @throws uim.cake.http.Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
     protected void validateToken(IServerRequest myRequest, Session $session) {
         $token = $session.read(_config["key"]);

@@ -1,4 +1,4 @@
-module uim.cake.https.clients\Auth;
+module uim.cake.http.clients\Auth;
 
 @safe:
 import uim.cake;
@@ -14,14 +14,14 @@ class Digest
     /**
      * Instance of Cake\Http\Client
      *
-     * @var uim.cake.Http\Client
+     * @var uim.cake.http.Client
      */
     protected _client;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Http\Client $client Http client object.
+     * @param uim.cake.http.Client $client Http client object.
      * @param array|null myOptions Options list.
      */
     this(Client $client, ?array myOptions = null) {
@@ -31,9 +31,9 @@ class Digest
     /**
      * Add Authorization header to the request.
      *
-     * @param uim.cake.Http\Client\Request myRequest The request object.
+     * @param uim.cake.http.Client\Request myRequest The request object.
      * @param array<string, mixed> $credentials Authentication credentials.
-     * @return uim.cake.Http\Client\Request The updated request.
+     * @return uim.cake.http.Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
     function authentication(Request myRequest, array $credentials): Request
@@ -59,7 +59,7 @@ class Digest
      * another request without authentication to get authentication
      * challenge.
      *
-     * @param uim.cake.Http\Client\Request myRequest The request object.
+     * @param uim.cake.http.Client\Request myRequest The request object.
      * @param array $credentials Authentication credentials.
      * @return array modified credentials.
      */
@@ -93,7 +93,7 @@ class Digest
     /**
      * Generate the header Authorization
      *
-     * @param uim.cake.Http\Client\Request myRequest The request object.
+     * @param uim.cake.http.Client\Request myRequest The request object.
      * @param array<string, mixed> $credentials Authentication credentials.
      * @return string
      */

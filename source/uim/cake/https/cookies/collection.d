@@ -1,4 +1,4 @@
-module uim.cake.https.cookies.collection;
+module uim.cake.http.cookies.collection;
 
 @safe:
 import uim.cake;
@@ -79,7 +79,7 @@ class CookieCollection : IteratorAggregate, Countable {
      * cookies if a cookie collection is used for cookies across multiple
      * domains. This can impact how get(), has() and remove() behave.
      *
-     * @param uim.cake.Http\Cookie\ICookie $cookie Cookie instance to add.
+     * @param uim.cake.http.Cookie\ICookie $cookie Cookie instance to add.
      * @return static
      */
     function add(ICookie $cookie) {
@@ -93,7 +93,7 @@ class CookieCollection : IteratorAggregate, Countable {
      * Get the first cookie by name.
      *
      * @param string myName The name of the cookie.
-     * @return uim.cake.Http\Cookie\ICookie
+     * @return uim.cake.http.Cookie\ICookie
      * @throws \InvalidArgumentException If cookie not found.
      */
     auto get(string myName): ICookie

@@ -1,4 +1,4 @@
-module uim.cake.https.cookies.cookie;
+module uim.cake.http.cookies.cookie;
 
 @safe:
 import uim.cake;
@@ -26,8 +26,8 @@ import uim.cake;
  *
  * @link https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-03
  * @link https://en.wikipedia.org/wiki/HTTP_cookie
- * @see uim.cake.Http\Cookie\CookieCollection for working with collections of cookies.
- * @see uim.cake.Http\Response::getCookieCollection() for working with response cookies.
+ * @see uim.cake.http.Cookie\CookieCollection for working with collections of cookies.
+ * @see uim.cake.http.Response::getCookieCollection() for working with response cookies.
  */
 class Cookie : ICookie
 {
@@ -92,7 +92,7 @@ class Cookie : ICookie
      * Default attributes for a cookie.
      *
      * @var array<string, mixed>
-     * @see uim.cake.Http\Cookie\Cookie::setDefaults()
+     * @see uim.cake.http.Cookie\Cookie::setDefaults()
      */
     protected static $defaults = [
         "expires":null,
@@ -247,7 +247,7 @@ class Cookie : ICookie
      * @param string cookie Cookie header string.
      * @param array<string, mixed> $defaults Default attributes.
      * @return static
-     * @see uim.cake.Http\Cookie\Cookie::setDefaults()
+     * @see uim.cake.http.Cookie\Cookie::setDefaults()
      */
     static function createFromHeaderString(string cookie, array $defaults = []) {
         if (indexOf($cookie, "";"") != false) {

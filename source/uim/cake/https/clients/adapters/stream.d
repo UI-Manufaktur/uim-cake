@@ -1,4 +1,4 @@
-module uim.cake.https.clients.adapters;
+module uim.cake.http.clients.adapters;
 
 @safe:
 import uim.cake;
@@ -252,7 +252,7 @@ class Stream : IAdapter
      *
      * @param array $headers Unparsed headers.
      * @param string body The response body.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     protected Response _buildResponse(array $headers, string body) {
         return new Response($headers, $body);

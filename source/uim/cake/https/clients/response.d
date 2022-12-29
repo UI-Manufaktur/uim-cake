@@ -1,4 +1,4 @@
-module uim.baklava.https.clients.response;
+module uim.baklava.http.clients.response;
 
 @safe:
 import uim.cake;
@@ -75,7 +75,7 @@ class Response : Message : IResponse
     /**
      * Cookie Collection instance
      *
-     * @var uim.cake.Http\Cookie\CookieCollection
+     * @var uim.cake.http.Cookie\CookieCollection
      */
     protected cookies;
 
@@ -269,7 +269,7 @@ class Response : Message : IResponse
      * This method exposes the response"s CookieCollection
      * instance allowing you to interact with cookie objects directly.
      *
-     * @return uim.cake.Http\Cookie\CookieCollection
+     * @return uim.cake.http.Cookie\CookieCollection
      */
     CookieCollection getCookieCollection() {
         this.buildCookieCollection();
