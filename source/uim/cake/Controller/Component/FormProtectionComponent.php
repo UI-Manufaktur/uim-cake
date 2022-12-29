@@ -5,8 +5,7 @@
 
 
 
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;

@@ -10,8 +10,7 @@
 
  * @link          https://book.cakephp.org/4/en/development/errors.html#error-exception-configuration
  * @since         3.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.consoles.Exception;
 
 import uim.cake.consoles.ICommand;
