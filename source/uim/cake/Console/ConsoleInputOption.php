@@ -96,7 +96,7 @@ class ConsoleInputOption
      * @param string|null $prompt The prompt string.
      * @throws uim.cake.Console\Exception\ConsoleException
      */
-    public this(
+    this(
         string $name,
         string $short = "",
         string $help = "",

@@ -38,7 +38,7 @@ class ConsoleInput
      *
      * @param string $handle The location of the stream to use as input.
      */
-    public this(string $handle = "php://stdin") {
+    this(string $handle = "php://stdin") {
         _canReadline = (extension_loaded("readline") && $handle == "php://stdin");
         _input = fopen($handle, "rb");
     }

@@ -21,21 +21,21 @@ class ConsoleIo
      *
      * @var int
      */
-    public const VERBOSE = 2;
+    const VERBOSE = 2;
 
     /**
      * Output constant for making normal shells.
      *
      * @var int
      */
-    public const NORMAL = 1;
+    const NORMAL = 1;
 
     /**
      * Output constants for making quiet shells.
      *
      * @var int
      */
-    public const QUIET = 0;
+    const QUIET = 0;
 
     /**
      * The output stream
@@ -100,7 +100,7 @@ class ConsoleIo
      * @param uim.cake.Console\ConsoleInput|null $in A ConsoleInput object for stdin.
      * @param uim.cake.Console\HelperRegistry|null $helpers A HelperRegistry instance
      */
-    public this(
+    this(
         ?ConsoleOutput $out = null,
         ?ConsoleOutput $err = null,
         ?ConsoleInput $in = null,

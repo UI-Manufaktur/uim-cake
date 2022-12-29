@@ -23,7 +23,7 @@ import uim.cake.utilities.Inflector;
 class I18nExtractCommand : Command
 {
 
-    public static function defaultName(): string
+    static function defaultName(): string
     {
         return "i18n extract";
     }

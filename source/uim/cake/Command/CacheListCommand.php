@@ -12,7 +12,7 @@ import uim.cake.consoles.ConsoleOptionParser;
 class CacheListCommand : Command
 {
 
-    public static function defaultName(): string
+    static function defaultName(): string
     {
         return "cache list";
     }

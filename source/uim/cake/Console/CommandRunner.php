@@ -68,7 +68,7 @@ class CommandRunner : EventDispatcherInterface
      * @param string $root The root command name to be removed from argv.
      * @param uim.cake.Console\CommandFactoryInterface|null $factory Command factory instance.
      */
-    public this(
+    this(
         IConsoleApplication $app,
         string $root = "cake",
         ?CommandFactoryInterface $factory = null
@@ -230,7 +230,7 @@ class CommandRunner : EventDispatcherInterface
      * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
      * @param uim.cake.Console\CommandCollection $commands The command collection to find the shell in.
      * @param string $name The command name to find
-     * @return uim.cake.Console\ICommand|\Cake\Console\Shell
+     * @return uim.cake.Console\ICommand|uim.cake.Console\Shell
      */
     protected function getCommand(ConsoleIo $io, CommandCollection $commands, string $name) {
         $instance = $commands.get($name);
@@ -349,7 +349,7 @@ class CommandRunner : EventDispatcherInterface
      *
      * @param string $className Shell class name.
      * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
-     * @return uim.cake.Console\ICommand|\Cake\Console\Shell
+     * @return uim.cake.Console\ICommand|uim.cake.Console\Shell
      */
     protected function createCommand(string $className, ConsoleIo $io) {
         if (!this.factory) {

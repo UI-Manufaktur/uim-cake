@@ -35,7 +35,7 @@ class Command : BaseCommand
      * By default CakePHP will construct command objects when
      * building the CommandCollection for your application.
      */
-    public this() {
+    this() {
         this.modelFactory("Table", function ($alias) {
             return this.getTableLocator().get($alias);
         });

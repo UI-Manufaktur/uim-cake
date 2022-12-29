@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.Command;
 
 import uim.cake.consoles.Arguments;

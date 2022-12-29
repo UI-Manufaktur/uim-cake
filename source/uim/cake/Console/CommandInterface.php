@@ -12,14 +12,14 @@ interface ICommand
      *
      * @var int
      */
-    public const CODE_ERROR = 1;
+    const CODE_ERROR = 1;
 
     /**
      * Default success code
      *
      * @var int
      */
-    public const CODE_SUCCESS = 0;
+    const CODE_SUCCESS = 0;
 
     /**
      * Set the name this command uses in the collection.

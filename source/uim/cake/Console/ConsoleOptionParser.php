@@ -87,7 +87,7 @@ class ConsoleOptionParser
      * Option definitions.
      *
      * @see uim.cake.Console\ConsoleOptionParser::addOption()
-     * @var array<string, \Cake\Console\ConsoleInputOption>
+     * @var array<string, uim.cake.Console\ConsoleInputOption>
      */
     protected $_options = [];
 
@@ -102,7 +102,7 @@ class ConsoleOptionParser
      * Positional argument definitions.
      *
      * @see uim.cake.Console\ConsoleOptionParser::addArgument()
-     * @var array<\Cake\Console\ConsoleInputArgument>
+     * @var array<uim.cake.Console\ConsoleInputArgument>
      */
     protected $_args = [];
 
@@ -110,7 +110,7 @@ class ConsoleOptionParser
      * Subcommands for this Shell.
      *
      * @see uim.cake.Console\ConsoleOptionParser::addSubcommand()
-     * @var array<string, \Cake\Console\ConsoleInputSubcommand>
+     * @var array<string, uim.cake.Console\ConsoleInputSubcommand>
      */
     protected $_subcommands = [];
 
@@ -150,7 +150,7 @@ class ConsoleOptionParser
      * @param bool $defaultOptions Whether you want the verbose and quiet options set. Setting
      *  this to false will prevent the addition of `--verbose` & `--quiet` options.
      */
-    public this(string $command = "", bool $defaultOptions = true) {
+    this(string $command = "", bool $defaultOptions = true) {
         this.setCommand($command);
 
         this.addOption("help", [
@@ -179,7 +179,7 @@ class ConsoleOptionParser
      * @param bool $defaultOptions Whether you want the verbose and quiet options set.
      * @return static
      */
-    public static function create(string $command, bool $defaultOptions = true) {
+    static function create(string $command, bool $defaultOptions = true) {
         return new static($command, $defaultOptions);
     }
 
@@ -206,7 +206,7 @@ class ConsoleOptionParser
      * @param bool $defaultOptions Whether you want the verbose and quiet options set.
      * @return static
      */
-    public static function buildFromArray(array $spec, bool $defaultOptions = true) {
+    static function buildFromArray(array $spec, bool $defaultOptions = true) {
         $parser = new static($spec["command"], $defaultOptions);
         if (!empty($spec["arguments"])) {
             $parser.addArguments($spec["arguments"]);
@@ -605,7 +605,7 @@ class ConsoleOptionParser
     /**
      * Gets the arguments defined in the parser.
      *
-     * @return array<\Cake\Console\ConsoleInputArgument>
+     * @return array<uim.cake.Console\ConsoleInputArgument>
      */
     function arguments() {
         return _args;
@@ -626,7 +626,7 @@ class ConsoleOptionParser
     /**
      * Get the defined options in the parser.
      *
-     * @return array<string, \Cake\Console\ConsoleInputOption>
+     * @return array<string, uim.cake.Console\ConsoleInputOption>
      */
     function options() {
         return _options;
@@ -635,7 +635,7 @@ class ConsoleOptionParser
     /**
      * Get the array of defined subcommands
      *
-     * @return array<string, \Cake\Console\ConsoleInputSubcommand>
+     * @return array<string, uim.cake.Console\ConsoleInputSubcommand>
      */
     function subcommands() {
         return _subcommands;

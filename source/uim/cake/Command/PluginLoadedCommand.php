@@ -12,7 +12,7 @@ import uim.cake.core.Plugin;
 class PluginLoadedCommand : Command
 {
 
-    public static function defaultName(): string
+    static function defaultName(): string
     {
         return "plugin loaded";
     }

@@ -44,28 +44,28 @@ class ConsoleOutput
      *
      * @var int
      */
-    public const RAW = 0;
+    const RAW = 0;
 
     /**
      * Plain output - tags will be stripped.
      *
      * @var int
      */
-    public const PLAIN = 1;
+    const PLAIN = 1;
 
     /**
      * Color output - Convert known tags in to ANSI color escape codes.
      *
      * @var int
      */
-    public const COLOR = 2;
+    const COLOR = 2;
 
     /**
      * Constant for a newline.
      *
      * @var string
      */
-    public const LF = PHP_EOL;
+    const LF = PHP_EOL;
 
     /**
      * File handle for output.
@@ -154,7 +154,7 @@ class ConsoleOutput
      *
      * @param string $stream The identifier of the stream to write output to.
      */
-    public this(string $stream = "php://stdout") {
+    this(string $stream = "php://stdout") {
         _output = fopen($stream, "wb");
 
         if (

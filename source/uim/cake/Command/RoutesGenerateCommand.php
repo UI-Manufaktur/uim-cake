@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.Command;
 
 import uim.cake.consoles.Arguments;
@@ -20,7 +13,7 @@ import uim.cake.Routing\Router;
 class RoutesGenerateCommand : Command
 {
 
-    public static function defaultName(): string
+    static function defaultName(): string
     {
         return "routes generate";
     }

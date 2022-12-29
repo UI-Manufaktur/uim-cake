@@ -11,7 +11,7 @@ import uim.cake.consoles.ConsoleOptionParser;
 class PluginUnloadCommand : Command
 {
 
-    public static function defaultName(): string
+    static function defaultName(): string
     {
         return "plugin unload";
     }

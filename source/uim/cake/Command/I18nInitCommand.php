@@ -22,7 +22,7 @@ use DirectoryIterator;
 class I18nInitCommand : Command
 {
 
-    public static function defaultName(): string
+    static function defaultName(): string
     {
         return "i18n init";
     }

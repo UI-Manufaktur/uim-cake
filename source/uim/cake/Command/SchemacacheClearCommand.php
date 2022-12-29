@@ -25,7 +25,7 @@ class SchemacacheClearCommand : Command
      *
      * @return string
      */
-    public static function defaultName(): string
+    static function defaultName(): string
     {
         return "schema_cache clear";
     }

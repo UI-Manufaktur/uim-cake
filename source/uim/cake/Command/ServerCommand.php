@@ -24,14 +24,14 @@ class ServerCommand : Command
      *
      * @var string
      */
-    public const DEFAULT_HOST = "localhost";
+    const DEFAULT_HOST = "localhost";
 
     /**
      * Default ListenPort
      *
      * @var int
      */
-    public const DEFAULT_PORT = 8765;
+    const DEFAULT_PORT = 8765;
 
     /**
      * server host

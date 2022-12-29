@@ -16,7 +16,7 @@ class CacheClearallCommand : Command
      *
      * @return string
      */
-    public static function defaultName(): string
+    static function defaultName(): string
     {
         return "cache clear_all";
     }

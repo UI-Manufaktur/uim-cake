@@ -10,10 +10,10 @@ import uim.cake.core.Configure;
  */
 class ServerCommand : Command {
     // Default ServerHost
-    public const string DEFAULT_HOST = "localhost";
+    const string DEFAULT_HOST = "localhost";
 
     // Default ListenPort
-    public const int DEFAULT_PORT = 8765;
+    const int DEFAULT_PORT = 8765;
 
     // server host
     protected string _host = self::DEFAULT_HOST;

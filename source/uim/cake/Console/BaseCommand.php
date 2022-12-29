@@ -52,7 +52,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    public static function getDescription(): string
+    static function getDescription(): string
     {
         return "";
     }
@@ -78,7 +78,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    public static function defaultName(): string
+    static function defaultName(): string
     {
         $pos = strrpos(static::class, "\\");
         /** @psalm-suppress PossiblyFalseOperand */

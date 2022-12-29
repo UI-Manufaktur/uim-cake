@@ -34,7 +34,7 @@ class CommandFactory : CommandFactoryInterface
      *
      * @param uim.cake.Core\IContainer|null $container The container to use if available.
      */
-    public this(?IContainer $container = null) {
+    this(?IContainer $container = null) {
         this.container = $container;
     }
 
