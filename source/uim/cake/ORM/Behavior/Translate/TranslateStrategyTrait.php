@@ -7,13 +7,13 @@
 
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.events.EventInterface;
 import uim.cake.I18n\I18n;
-import uim.cake.ORM\Marshaller;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Marshaller;
+import uim.cake.orm.Table;
 
 /**
  * Contains common code needed by TranslateBehavior strategy classes.
@@ -80,8 +80,8 @@ trait TranslateStrategyTrait
      * the currently configured global locale.
      *
      * @return string
-     * @see \Cake\I18n\I18n::getLocale()
-     * @see \Cake\ORM\Behavior\TranslateBehavior::setLocale()
+     * @see uim.cake.I18n\I18n::getLocale()
+     * @see uim.cake.ORM\Behavior\TranslateBehavior::setLocale()
      */
     function getLocale(): string
     {

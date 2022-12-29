@@ -22,7 +22,7 @@ class LazyEagerLoader
      *
      * @param \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
-     * @see \Cake\ORM\Query::contain()
+     * @see uim.cake.ORM\Query::contain()
      * @param \Cake\ORM\Table $source The table to use for fetching the top level entities
      * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>
      */

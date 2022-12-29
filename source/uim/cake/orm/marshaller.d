@@ -8,10 +8,10 @@ import uim.cake;
  *
  * Useful when converting request data into entities.
  *
- * @see \Cake\ORM\Table::newEntity()
- * @see \Cake\ORM\Table::newEntities()
- * @see \Cake\ORM\Table::patchEntity()
- * @see \Cake\ORM\Table::patchEntities()
+ * @see uim.cake.ORM\Table::newEntity()
+ * @see uim.cake.ORM\Table::newEntities()
+ * @see uim.cake.ORM\Table::patchEntity()
+ * @see uim.cake.ORM\Table::patchEntities()
  */
 class Marshaller
 {
@@ -145,8 +145,8 @@ class Marshaller
      * @param array myData The data to hydrate.
      * @param array<string, mixed> myOptions List of options
      * @return \Cake\Datasource\IEntity
-     * @see \Cake\ORM\Table::newEntity()
-     * @see \Cake\ORM\Entity::$_accessible
+     * @see uim.cake.ORM\Table::newEntity()
+     * @see uim.cake.ORM\Entity::$_accessible
      */
     function one(array myData, array myOptions = []): IEntity
     {
@@ -327,8 +327,8 @@ class Marshaller
      * @param array myData The data to hydrate.
      * @param array<string, mixed> myOptions List of options
      * @return array<\Cake\Datasource\IEntity> An array of hydrated records.
-     * @see \Cake\ORM\Table::newEntities()
-     * @see \Cake\ORM\Entity::$_accessible
+     * @see uim.cake.ORM\Table::newEntities()
+     * @see uim.cake.ORM\Entity::$_accessible
      */
     array many(array myData, array myOptions = []) {
         $output = [];
@@ -509,7 +509,7 @@ class Marshaller
      * @param array myData key value list of fields to be merged into the entity
      * @param array<string, mixed> myOptions List of options.
      * @return \Cake\Datasource\IEntity
-     * @see \Cake\ORM\Entity::$_accessible
+     * @see uim.cake.ORM\Entity::$_accessible
      */
     function merge(IEntity $entity, array myData, array myOptions = []): IEntity
     {
@@ -626,7 +626,7 @@ class Marshaller
      * @param array myData list of arrays to be merged into the entities
      * @param array<string, mixed> myOptions List of options.
      * @return array<\Cake\Datasource\IEntity>
-     * @see \Cake\ORM\Entity::$_accessible
+     * @see uim.cake.ORM\Entity::$_accessible
      * @psalm-suppress NullArrayOffset
      */
     array mergeMany(iterable $entities, array myData, array myOptions = []) {

@@ -7,17 +7,17 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Association;
+module uim.cake.orm.Association;
 
 import uim.cake.cores.App;
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.databases.expressions.QueryExpression;
 import uim.cake.databases.IExpression;
 import uim.cake.Datasource\EntityInterface;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Association\Loader\SelectWithPivotLoader;
-import uim.cake.ORM\Query;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Association;
+import uim.cake.orm.Association\Loader\SelectWithPivotLoader;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Inflector;
 use Closure;
@@ -660,8 +660,8 @@ class BelongsToMany : Association
      * in the parent entity cannot be traversed
      * @return \Cake\Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see \Cake\ORM\Table::save()
-     * @see \Cake\ORM\Association\BelongsToMany::replaceLinks()
+     * @see uim.cake.ORM\Table::save()
+     * @see uim.cake.ORM\Association\BelongsToMany::replaceLinks()
      */
     function saveAssociated(EntityInterface $entity, array $options = []) {
         $targetEntity = $entity.get(this.getProperty());
@@ -1038,7 +1038,7 @@ class BelongsToMany : Association
      * @param array<string, mixed>|string|null $type the type of query to perform, if an array is passed,
      *   it will be interpreted as the `$options` parameter
      * @param array<string, mixed> $options The options to for the find
-     * @see \Cake\ORM\Table::find()
+     * @see uim.cake.ORM\Table::find()
      * @return \Cake\ORM\Query
      */
     function find($type = null, array $options = []): Query

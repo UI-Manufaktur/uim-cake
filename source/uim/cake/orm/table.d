@@ -99,7 +99,7 @@ import uim.cake;
  * - `afterDelete(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
  * - `afterDeleteCommit(IEvent myEvent, IEntity $entity, ArrayObject myOptions)`
  *
- * @see \Cake\Event\EventManager for reference on the events system.
+ * @see uim.cake.Event\EventManager for reference on the events system.
  * @link https://book.UIM.org/4/en/orm/table-objects.html#event-list
  */
 class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
@@ -281,7 +281,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * instance is created through the TableLocator without a connection.
      *
      * @return string
-     * @see \Cake\ORM\Locator\TableLocator::get()
+     * @see uim.cake.ORM\Locator\TableLocator::get()
      */
     static string defaultConnectionName() {
         return "default";
@@ -687,7 +687,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param array<string, mixed> myOptions The options for the behavior to use.
      * @return this
      * @throws \RuntimeException If a behavior is being reloaded.
-     * @see \Cake\ORM\Behavior
+     * @see uim.cake.ORM\Behavior
      */
     function addBehavior(string myName, array myOptions = []) {
         _behaviors.load(myName, myOptions);
@@ -737,7 +737,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param string myName The alias that the behavior was added with.
      * @return this
-     * @see \Cake\ORM\Behavior
+     * @see uim.cake.ORM\Behavior
      */
     function removeBehavior(string myName) {
         _behaviors.unload(myName);
@@ -898,10 +898,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param array myParams Set of associations to bind (indexed by association type)
      * @return this
-     * @see \Cake\ORM\Table::belongsTo()
-     * @see \Cake\ORM\Table::hasOne()
-     * @see \Cake\ORM\Table::hasMany()
-     * @see \Cake\ORM\Table::belongsToMany()
+     * @see uim.cake.ORM\Table::belongsTo()
+     * @see uim.cake.ORM\Table::hasOne()
+     * @see uim.cake.ORM\Table::hasMany()
+     * @see uim.cake.ORM\Table::belongsToMany()
      */
     function addAssociations(array myParams) {
         foreach (myParams as $assocType: myTables) {
@@ -1405,7 +1405,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * could not be found
      * @throws \Cake\Datasource\Exception\InvalidPrimaryKeyException When $primaryKey has an
      *      incorrect number of elements.
-     * @see \Cake\Datasource\IRepository::find()
+     * @see uim.cake.Datasource\IRepository::find()
      * @psalm-suppress InvalidReturnType
      */
     auto get($primaryKey, array myOptions = []): IEntity
@@ -1612,7 +1612,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Creates a new Query::subquery() instance for a table.
      *
      * @return \Cake\ORM\Query
-     * @see \Cake\ORM\Query::subquery()
+     * @see uim.cake.ORM\Query::subquery()
      */
     function subquery(): Query
     {
@@ -1787,7 +1787,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param \ArrayAccess|array myOptions The options to use when saving.
      * @return \Cake\Datasource\IEntity
      * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
-     * @see \Cake\ORM\Table::save()
+     * @see uim.cake.ORM\Table::save()
      */
     function saveOrFail(IEntity $entity, myOptions = []): IEntity
     {
@@ -2221,7 +2221,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false Entities list
      *   on success, false on failure.
-     * @see \Cake\ORM\Table::delete() for options and events related to this method.
+     * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
     function deleteMany(iterable $entities, myOptions = []) {
         $failed = _deleteMany($entities, myOptions);
@@ -2244,7 +2244,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      * @throws \Cake\ORM\Exception\PersistenceFailedException
-     * @see \Cake\ORM\Table::delete() for options and events related to this method.
+     * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
     function deleteManyOrFail(iterable $entities, myOptions = []): iterable
     {
@@ -2300,7 +2300,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param \ArrayAccess|array myOptions The options for the delete.
      * @return true
      * @throws \Cake\ORM\Exception\PersistenceFailedException
-     * @see \Cake\ORM\Table::delete()
+     * @see uim.cake.ORM\Table::delete()
      */
     bool deleteOrFail(IEntity $entity, myOptions = []) {
         $deleted = this.delete($entity, myOptions);
@@ -2545,7 +2545,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * marshalling logic.
      *
      * @return \Cake\ORM\Marshaller
-     * @see \Cake\ORM\Marshaller
+     * @see uim.cake.ORM\Marshaller
      */
     function marshaller(): Marshaller
     {
@@ -2621,7 +2621,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param array myData The data to build an entity with.
      * @param array<string, mixed> myOptions A list of options for the object hydration.
      * @return \Cake\Datasource\IEntity
-     * @see \Cake\ORM\Marshaller::one()
+     * @see uim.cake.ORM\Marshaller::one()
      */
     function newEntity(array myData, array myOptions = []): IEntity
     {
@@ -2720,7 +2720,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param array myData key value list of fields to be merged into the entity
      * @param array<string, mixed> myOptions A list of options for the object hydration.
      * @return \Cake\Datasource\IEntity
-     * @see \Cake\ORM\Marshaller::merge()
+     * @see uim.cake.ORM\Marshaller::merge()
      */
     function patchEntity(IEntity $entity, array myData, array myOptions = []): IEntity
     {
@@ -2935,7 +2935,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
-     * @see \Cake\ORM\Query::contain()
+     * @see uim.cake.ORM\Query::contain()
      * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>
      */
     function loadInto($entities, array $contain) {

@@ -7,13 +7,13 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Association;
+module uim.cake.orm.Association;
 
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.Datasource\EntityInterface;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Association\Loader\SelectLoader;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Association;
+import uim.cake.orm.Association\Loader\SelectLoader;
+import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
 use Closure;
 use RuntimeException;
@@ -108,7 +108,7 @@ class BelongsTo : Association
      * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @return \Cake\Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see \Cake\ORM\Table::save()
+     * @see uim.cake.ORM\Table::save()
      */
     function saveAssociated(EntityInterface $entity, array $options = []) {
         $targetEntity = $entity.get(this.getProperty());

@@ -583,8 +583,8 @@ class BelongsToMany : Association
      * in the parent entity cannot be traversed
      * @return \Cake\Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see \Cake\ORM\Table::save()
-     * @see \Cake\ORM\Association\BelongsToMany::replaceLinks()
+     * @see uim.cake.ORM\Table::save()
+     * @see uim.cake.ORM\Association\BelongsToMany::replaceLinks()
      */
     function saveAssociated(IEntity $entity, array myOptions = []) {
         myTargetEntity = $entity.get(this.getProperty());
@@ -958,7 +958,7 @@ class BelongsToMany : Association
      * @param array<string, mixed>|string|null myType the type of query to perform, if an array is passed,
      *   it will be interpreted as the `myOptions` parameter
      * @param array<string, mixed> myOptions The options to for the find
-     * @see \Cake\ORM\Table::find()
+     * @see uim.cake.ORM\Table::find()
      * @return \Cake\ORM\Query
      */
     function find(myType = null, array myOptions = []): Query

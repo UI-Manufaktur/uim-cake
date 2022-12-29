@@ -7,14 +7,14 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Behavior;
+module uim.cake.orm.Behavior;
 
 import uim.cake.databases.Type\DateTimeType;
 import uim.cake.databases.TypeFactory;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.events.EventInterface;
 import uim.cake.I18n\FrozenTime;
-import uim.cake.ORM\Behavior;
+import uim.cake.orm.Behavior;
 use DateTimeInterface;
 use RuntimeException;
 use UnexpectedValueException;

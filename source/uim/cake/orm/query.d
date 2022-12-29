@@ -9,7 +9,7 @@ import uim.cake;
  * into a specific iterator that will be responsible for hydrating results if
  * required.
  *
- * @see \Cake\Collection\ICollection For a full description of the collection methods supported by this class
+ * @see uim.cake.Collection\ICollection For a full description of the collection methods supported by this class
  * @property \Cake\ORM\Table $_repository Instance of a table object this query is bound to.
  * @method \Cake\ORM\Table getRepository() Returns the default table object that will be used by this query,
  *   that is, the table that will appear in the from clause.
@@ -593,7 +593,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * @param callable|null myBuilder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
-     * @see \Cake\ORM\Query::matching()
+     * @see uim.cake.ORM\Query::matching()
      */
     function innerJoinWith(string assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
@@ -1046,7 +1046,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * It also sets the default types for the columns in the select clause
      *
-     * @see \Cake\Database\Query::execute()
+     * @see uim.cake.Database\Query::execute()
      */
     protected void _transformQuery() {
         if (!_dirty || _type != "select") {

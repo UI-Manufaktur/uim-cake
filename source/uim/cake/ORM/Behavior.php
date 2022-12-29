@@ -102,8 +102,8 @@ use ReflectionMethod;
  * findSlugged(Query $query, array $options)
  * ```
  *
- * @see \Cake\ORM\Table::addBehavior()
- * @see \Cake\Event\EventManager
+ * @see uim.cake.ORM\Table::addBehavior()
+ * @see uim.cake.Event\EventManager
  */
 class Behavior : IEventListener
 {

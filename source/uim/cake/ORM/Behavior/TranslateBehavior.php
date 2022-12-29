@@ -7,16 +7,16 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Behavior;
+module uim.cake.orm.Behavior;
 
 import uim.cake.I18n\I18n;
-import uim.cake.ORM\Behavior;
-import uim.cake.ORM\Behavior\Translate\EavStrategy;
-import uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface;
-import uim.cake.ORM\Marshaller;
-import uim.cake.ORM\PropertyMarshalInterface;
-import uim.cake.ORM\Query;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Behavior;
+import uim.cake.orm.Behavior\Translate\EavStrategy;
+import uim.cake.orm.Behavior\Translate\TranslateStrategyInterface;
+import uim.cake.orm.Marshaller;
+import uim.cake.orm.PropertyMarshalInterface;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
 
 /**
@@ -235,7 +235,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * in order to unset the current locale, and to make the behavior fall back to using the
      * globally configured locale.
      * @return this
-     * @see \Cake\ORM\Behavior\TranslateBehavior::getLocale()
+     * @see uim.cake.ORM\Behavior\TranslateBehavior::getLocale()
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#saving-in-another-language
      */
@@ -252,8 +252,8 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * the currently configured global locale.
      *
      * @return string
-     * @see \Cake\I18n\I18n::getLocale()
-     * @see \Cake\ORM\Behavior\TranslateBehavior::setLocale()
+     * @see uim.cake.I18n\I18n::getLocale()
+     * @see uim.cake.ORM\Behavior\TranslateBehavior::setLocale()
      */
     function getLocale(): string
     {

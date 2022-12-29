@@ -26,14 +26,14 @@ import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.events.EventManager;
-import uim.cake.ORM\Association\BelongsTo;
-import uim.cake.ORM\Association\BelongsToMany;
-import uim.cake.ORM\Association\HasMany;
-import uim.cake.ORM\Association\HasOne;
-import uim.cake.ORM\Exception\MissingEntityException;
-import uim.cake.ORM\Exception\PersistenceFailedException;
-import uim.cake.ORM\Exception\RolledbackTransactionException;
-import uim.cake.ORM\Rule\IsUnique;
+import uim.cake.orm.Association\BelongsTo;
+import uim.cake.orm.Association\BelongsToMany;
+import uim.cake.orm.Association\HasMany;
+import uim.cake.orm.Association\HasOne;
+import uim.cake.orm.Exception\MissingEntityException;
+import uim.cake.orm.Exception\PersistenceFailedException;
+import uim.cake.orm.Exception\RolledbackTransactionException;
+import uim.cake.orm.Rule\IsUnique;
 import uim.cake.utilities.Inflector;
 import uim.cake.Validation\ValidatorAwareInterface;
 import uim.cake.Validation\ValidatorAwareTrait;
@@ -132,7 +132,7 @@ use RuntimeException;
  * - `afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)`
  * - `afterDeleteCommit(IEvent $event, EntityInterface $entity, ArrayObject $options)`
  *
- * @see \Cake\Event\EventManager for reference on the events system.
+ * @see uim.cake.Event\EventManager for reference on the events system.
  * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list
  */
 class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, ValidatorAwareInterface
@@ -324,7 +324,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * instance is created through the TableLocator without a connection.
      *
      * @return string
-     * @see \Cake\ORM\Locator\TableLocator::get()
+     * @see uim.cake.ORM\Locator\TableLocator::get()
      */
     public static function defaultConnectionName(): string
     {
@@ -761,7 +761,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array<string, mixed> $options The options for the behavior to use.
      * @return this
      * @throws \RuntimeException If a behavior is being reloaded.
-     * @see \Cake\ORM\Behavior
+     * @see uim.cake.ORM\Behavior
      */
     function addBehavior(string $name, array $options = []) {
         _behaviors.load($name, $options);
@@ -811,7 +811,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param string $name The alias that the behavior was added with.
      * @return this
-     * @see \Cake\ORM\Behavior
+     * @see uim.cake.ORM\Behavior
      */
     function removeBehavior(string $name) {
         _behaviors.unload($name);
@@ -973,10 +973,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param array $params Set of associations to bind (indexed by association type)
      * @return this
-     * @see \Cake\ORM\Table::belongsTo()
-     * @see \Cake\ORM\Table::hasOne()
-     * @see \Cake\ORM\Table::hasMany()
-     * @see \Cake\ORM\Table::belongsToMany()
+     * @see uim.cake.ORM\Table::belongsTo()
+     * @see uim.cake.ORM\Table::hasOne()
+     * @see uim.cake.ORM\Table::hasMany()
+     * @see uim.cake.ORM\Table::belongsToMany()
      */
     function addAssociations(array $params) {
         foreach ($params as $assocType: $tables) {
@@ -1477,7 +1477,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * could not be found
      * @throws \Cake\Datasource\Exception\InvalidPrimaryKeyException When $primaryKey has an
      *      incorrect number of elements.
-     * @see \Cake\Datasource\RepositoryInterface::find()
+     * @see uim.cake.Datasource\RepositoryInterface::find()
      * @psalm-suppress InvalidReturnType
      */
     function get($primaryKey, array $options = []): EntityInterface
@@ -1694,7 +1694,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Creates a new Query::subquery() instance for a table.
      *
      * @return \Cake\ORM\Query
-     * @see \Cake\ORM\Query::subquery()
+     * @see uim.cake.ORM\Query::subquery()
      */
     function subquery(): Query
     {
@@ -1876,7 +1876,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \ArrayAccess|array $options The options to use when saving.
      * @return \Cake\Datasource\EntityInterface
      * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
-     * @see \Cake\ORM\Table::save()
+     * @see uim.cake.ORM\Table::save()
      */
     function saveOrFail(EntityInterface $entity, $options = []): EntityInterface
     {
@@ -2335,7 +2335,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @return iterable<\Cake\Datasource\EntityInterface>|false Entities list
      *   on success, false on failure.
-     * @see \Cake\ORM\Table::delete() for options and events related to this method.
+     * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
     function deleteMany(iterable $entities, $options = []) {
         $failed = _deleteMany($entities, $options);
@@ -2358,7 +2358,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @return iterable<\Cake\Datasource\EntityInterface> Entities list.
      * @throws \Cake\ORM\Exception\PersistenceFailedException
-     * @see \Cake\ORM\Table::delete() for options and events related to this method.
+     * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
     function deleteManyOrFail(iterable $entities, $options = []): iterable
     {
@@ -2414,7 +2414,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \ArrayAccess|array $options The options for the delete.
      * @return true
      * @throws \Cake\ORM\Exception\PersistenceFailedException
-     * @see \Cake\ORM\Table::delete()
+     * @see uim.cake.ORM\Table::delete()
      */
     function deleteOrFail(EntityInterface $entity, $options = []): bool
     {
@@ -2660,7 +2660,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * marshalling logic.
      *
      * @return \Cake\ORM\Marshaller
-     * @see \Cake\ORM\Marshaller
+     * @see uim.cake.ORM\Marshaller
      */
     function marshaller(): Marshaller
     {
@@ -2736,7 +2736,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array $data The data to build an entity with.
      * @param array<string, mixed> $options A list of options for the object hydration.
      * @return \Cake\Datasource\EntityInterface
-     * @see \Cake\ORM\Marshaller::one()
+     * @see uim.cake.ORM\Marshaller::one()
      */
     function newEntity(array $data, array $options = []): EntityInterface
     {
@@ -2835,7 +2835,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array $data key value list of fields to be merged into the entity
      * @param array<string, mixed> $options A list of options for the object hydration.
      * @return \Cake\Datasource\EntityInterface
-     * @see \Cake\ORM\Marshaller::merge()
+     * @see uim.cake.ORM\Marshaller::merge()
      */
     function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
@@ -3052,7 +3052,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param \Cake\Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
-     * @see \Cake\ORM\Query::contain()
+     * @see uim.cake.ORM\Query::contain()
      * @return \Cake\Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface>
      */
     function loadInto($entities, array $contain) {

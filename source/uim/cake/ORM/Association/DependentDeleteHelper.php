@@ -7,10 +7,10 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Association;
+module uim.cake.orm.Association;
 
 import uim.cake.Datasource\EntityInterface;
-import uim.cake.ORM\Association;
+import uim.cake.orm.Association;
 
 /**
  * Helper class for cascading deletes in associations.

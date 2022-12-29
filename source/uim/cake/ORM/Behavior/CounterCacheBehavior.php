@@ -7,13 +7,13 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Behavior;
+module uim.cake.orm.Behavior;
 
 use ArrayObject;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.events.EventInterface;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Behavior;
+import uim.cake.orm.Association;
+import uim.cake.orm.Behavior;
 use Closure;
 
 /**

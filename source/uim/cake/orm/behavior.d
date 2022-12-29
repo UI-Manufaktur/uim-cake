@@ -90,8 +90,8 @@ import uim.cake;
  * findSlugged(Query myQuery, array myOptions)
  * ```
  *
- * @see \Cake\ORM\Table::addBehavior()
- * @see \Cake\Event\EventManager
+ * @see uim.cake.ORM\Table::addBehavior()
+ * @see uim.cake.Event\EventManager
  */
 class Behavior : IEventListener
 {

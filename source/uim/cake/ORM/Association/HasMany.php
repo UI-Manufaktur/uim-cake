@@ -7,17 +7,17 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Association;
+module uim.cake.orm.Association;
 
 import uim.cake.Collection\Collection;
 import uim.cake.databases.expressions.FieldInterface;
 import uim.cake.databases.expressions.QueryExpression;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.Datasource\InvalidPropertyInterface;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Association\Loader\SelectLoader;
-import uim.cake.ORM\Query;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Association;
+import uim.cake.orm.Association\Loader\SelectLoader;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
 use Closure;
 use InvalidArgumentException;
 
@@ -132,7 +132,7 @@ class HasMany : Association
      * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @return \Cake\Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see \Cake\ORM\Table::save()
+     * @see uim.cake.ORM\Table::save()
      * @throws \InvalidArgumentException when the association data cannot be traversed.
      */
     function saveAssociated(EntityInterface $entity, array $options = []) {

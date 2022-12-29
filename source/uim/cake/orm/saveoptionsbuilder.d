@@ -14,7 +14,7 @@ use RuntimeException;
  * This allows you to build options to save entities in a OOP style and helps
  * you to avoid mistakes by validating the options as you build them.
  *
- * @see \Cake\Datasource\RulesChecker
+ * @see uim.cake.Datasource\RulesChecker
  */
 class SaveOptionsBuilder : ArrayObject {
     use AssociationsNormalizerTrait;

@@ -15,7 +15,7 @@ import uim.cake.databases.expressions.TupleComparison;
 import uim.cake.databases.TypeFactory;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.Datasource\InvalidPropertyInterface;
-import uim.cake.ORM\Association\BelongsToMany;
+import uim.cake.orm.Association\BelongsToMany;
 import uim.cake.utilities.Hash;
 use InvalidArgumentException;
 use RuntimeException;
@@ -25,10 +25,10 @@ use RuntimeException;
  *
  * Useful when converting request data into entities.
  *
- * @see \Cake\ORM\Table::newEntity()
- * @see \Cake\ORM\Table::newEntities()
- * @see \Cake\ORM\Table::patchEntity()
- * @see \Cake\ORM\Table::patchEntities()
+ * @see uim.cake.ORM\Table::newEntity()
+ * @see uim.cake.ORM\Table::newEntities()
+ * @see uim.cake.ORM\Table::patchEntity()
+ * @see uim.cake.ORM\Table::patchEntities()
  */
 class Marshaller
 {
@@ -163,8 +163,8 @@ class Marshaller
      * @param array $data The data to hydrate.
      * @param array<string, mixed> $options List of options
      * @return \Cake\Datasource\EntityInterface
-     * @see \Cake\ORM\Table::newEntity()
-     * @see \Cake\ORM\Entity::$_accessible
+     * @see uim.cake.ORM\Table::newEntity()
+     * @see uim.cake.ORM\Entity::$_accessible
      */
     function one(array $data, array $options = []): EntityInterface
     {
@@ -347,8 +347,8 @@ class Marshaller
      * @param array $data The data to hydrate.
      * @param array<string, mixed> $options List of options
      * @return array<\Cake\Datasource\EntityInterface> An array of hydrated records.
-     * @see \Cake\ORM\Table::newEntities()
-     * @see \Cake\ORM\Entity::$_accessible
+     * @see uim.cake.ORM\Table::newEntities()
+     * @see uim.cake.ORM\Entity::$_accessible
      */
     function many(array $data, array $options = []): array
     {
@@ -532,7 +532,7 @@ class Marshaller
      * @param array $data key value list of fields to be merged into the entity
      * @param array<string, mixed> $options List of options.
      * @return \Cake\Datasource\EntityInterface
-     * @see \Cake\ORM\Entity::$_accessible
+     * @see uim.cake.ORM\Entity::$_accessible
      */
     function merge(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
@@ -649,7 +649,7 @@ class Marshaller
      * @param array $data list of arrays to be merged into the entities
      * @param array<string, mixed> $options List of options.
      * @return array<\Cake\Datasource\EntityInterface>
-     * @see \Cake\ORM\Entity::$_accessible
+     * @see uim.cake.ORM\Entity::$_accessible
      * @psalm-suppress NullArrayOffset
      */
     function mergeMany(iterable $entities, array $data, array $options = []): array

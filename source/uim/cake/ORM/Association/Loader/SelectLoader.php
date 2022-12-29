@@ -7,13 +7,13 @@
  * @since         3.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Association\Loader;
+module uim.cake.orm.Association\Loader;
 
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.databases.expressions.TupleComparison;
 import uim.cake.databases.ValueBinder;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Query;
+import uim.cake.orm.Association;
+import uim.cake.orm.Query;
 use Closure;
 use InvalidArgumentException;
 use RuntimeException;

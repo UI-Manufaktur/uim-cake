@@ -11,10 +11,10 @@ module uim.cake.ORM;
 
 import uim.cake.Datasource\RuleInvoker;
 import uim.cake.Datasource\RulesChecker as BaseRulesChecker;
-import uim.cake.ORM\Rule\ExistsIn;
-import uim.cake.ORM\Rule\IsUnique;
-import uim.cake.ORM\Rule\LinkConstraint;
-import uim.cake.ORM\Rule\ValidCount;
+import uim.cake.orm.Rule\ExistsIn;
+import uim.cake.orm.Rule\IsUnique;
+import uim.cake.orm.Rule\LinkConstraint;
+import uim.cake.orm.Rule\ValidCount;
 import uim.cake.utilities.Inflector;
 
 /**
@@ -22,7 +22,7 @@ import uim.cake.utilities.Inflector;
  *
  * Adds ORM related features to the RulesChecker class.
  *
- * @see \Cake\Datasource\RulesChecker
+ * @see uim.cake.Datasource\RulesChecker
  */
 class RulesChecker : BaseRulesChecker
 {
@@ -183,10 +183,10 @@ class RulesChecker : BaseRulesChecker
      * @return \Cake\Datasource\RuleInvoker
      * @throws \InvalidArgumentException In case the `$association` argument is of an invalid type.
      * @since 4.0.0
-     * @see \Cake\ORM\RulesChecker::isLinkedTo()
-     * @see \Cake\ORM\RulesChecker::isNotLinkedTo()
-     * @see \Cake\ORM\Rule\LinkConstraint::STATUS_LINKED
-     * @see \Cake\ORM\Rule\LinkConstraint::STATUS_NOT_LINKED
+     * @see uim.cake.ORM\RulesChecker::isLinkedTo()
+     * @see uim.cake.ORM\RulesChecker::isNotLinkedTo()
+     * @see uim.cake.ORM\Rule\LinkConstraint::STATUS_LINKED
+     * @see uim.cake.ORM\Rule\LinkConstraint::STATUS_NOT_LINKED
      */
     protected function _addLinkConstraintRule(
         $association,

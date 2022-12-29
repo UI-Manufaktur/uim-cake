@@ -7,15 +7,15 @@
 
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Behavior\Translate;
+module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;
 import uim.cake.Collection\ICollection;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.events.EventInterface;
-import uim.cake.ORM\PropertyMarshalInterface;
-import uim.cake.ORM\Query;
-import uim.cake.ORM\Table;
+import uim.cake.orm.PropertyMarshalInterface;
+import uim.cake.orm.Query;
+import uim.cake.orm.Table;
 
 /**
  * This interface describes the methods for translate behavior strategies.

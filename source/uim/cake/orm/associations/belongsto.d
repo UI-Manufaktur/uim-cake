@@ -82,7 +82,7 @@ class BelongsTo : Association
      * @param array<string, mixed> myOptions options to be passed to the save method in the target table
      * @return \Cake\Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see \Cake\ORM\Table::save()
+     * @see uim.cake.ORM\Table::save()
      */
     function saveAssociated(IEntity $entity, array myOptions = []) {
         myTargetEntity = $entity.get(this.getProperty());

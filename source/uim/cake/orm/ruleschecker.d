@@ -13,7 +13,7 @@ import uim.cake;
  *
  * Adds ORM related features to the RulesChecker class.
  *
- * @see \Cake\Datasource\RulesChecker
+ * @see uim.cake.Datasource\RulesChecker
  */
 class RulesChecker : BaseRulesChecker
 {
@@ -174,10 +174,10 @@ class RulesChecker : BaseRulesChecker
      * @return \Cake\Datasource\RuleInvoker
      * @throws \InvalidArgumentException In case the `$association` argument is of an invalid type.
      * @since 4.0.0
-     * @see \Cake\ORM\RulesChecker::isLinkedTo()
-     * @see \Cake\ORM\RulesChecker::isNotLinkedTo()
-     * @see \Cake\ORM\Rule\LinkConstraint::STATUS_LINKED
-     * @see \Cake\ORM\Rule\LinkConstraint::STATUS_NOT_LINKED
+     * @see uim.cake.ORM\RulesChecker::isLinkedTo()
+     * @see uim.cake.ORM\RulesChecker::isNotLinkedTo()
+     * @see uim.cake.ORM\Rule\LinkConstraint::STATUS_LINKED
+     * @see uim.cake.ORM\Rule\LinkConstraint::STATUS_NOT_LINKED
      */
     protected auto _addLinkConstraintRule(
         $association,

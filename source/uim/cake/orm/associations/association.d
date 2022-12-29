@@ -285,7 +285,7 @@ abstract class Association {
      * the target association.
      *
      * @param \Closure|array $conditions list of conditions to be used
-     * @see \Cake\Database\Query::where() for examples on the format of the array
+     * @see uim.cake.Database\Query::where() for examples on the format of the array
      * @return \Cake\ORM\Association
      */
     auto setConditions($conditions) {
@@ -298,7 +298,7 @@ abstract class Association {
      * Gets a list of conditions to be always included when fetching records from
      * the target association.
      *
-     * @see \Cake\Database\Query::where() for examples on the format of the array
+     * @see uim.cake.Database\Query::where() for examples on the format of the array
      * @return \Closure|array
      */
     auto getConditions() {
@@ -677,7 +677,7 @@ abstract class Association {
      * @param array<string, mixed>|string|null myType the type of query to perform, if an array is passed,
      *   it will be interpreted as the `myOptions` parameter
      * @param array<string, mixed> myOptions The options to for the find
-     * @see \Cake\ORM\Table::find()
+     * @see uim.cake.ORM\Table::find()
      * @return \Cake\ORM\Query
      */
     function find(myType = null, array myOptions = []): Query
@@ -696,7 +696,7 @@ abstract class Association {
      *
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions The conditions to use
      * for checking if any record matches.
-     * @see \Cake\ORM\Table::exists()
+     * @see uim.cake.ORM\Table::exists()
      */
     bool exists($conditions) {
         $conditions = this.find()
@@ -712,7 +712,7 @@ abstract class Association {
      * @param array myFields A hash of field: new value.
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
-     * @see \Cake\ORM\Table::updateAll()
+     * @see uim.cake.ORM\Table::updateAll()
      * @return int Count Returns the affected rows.
      */
     int updateAll(array myFields, $conditions) {
@@ -729,7 +729,7 @@ abstract class Association {
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Returns the number of affected rows.
-     * @see \Cake\ORM\Table::deleteAll()
+     * @see uim.cake.ORM\Table::deleteAll()
      */
     int deleteAll($conditions) {
         $expression = this.find()
@@ -1057,7 +1057,7 @@ abstract class Association {
      * @param array<string, mixed> myOptions The options for saving associated data.
      * @return \Cake\Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see \Cake\ORM\Table::save()
+     * @see uim.cake.ORM\Table::save()
      */
     abstract function saveAssociated(IEntity $entity, array myOptions = []);
 }
