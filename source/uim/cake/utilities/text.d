@@ -235,7 +235,7 @@ class Text {
      * @param string str String to clean.
      * @param array<string, mixed> myOptions Options list.
      * @return string
-     * @see \Cake\Utility\Text::insert()
+     * @see uim.cake.Utility\Text::insert()
      */
     static string cleanInsert(string str, array myOptions) {
         $clean = myOptions["clean"];
@@ -665,7 +665,7 @@ class Text {
      * @param int $length Length of returned string, including ellipsis.
      * @param array<string, mixed> myOptions An array of HTML attributes and options.
      * @return string Trimmed string.
-     * @see \Cake\Utility\Text::truncate()
+     * @see uim.cake.Utility\Text::truncate()
      */
     static string truncateByWidth(string text, int $length = 100, array myOptions = []) {
         return static::truncate($text, $length, ["trimWidth":true] + myOptions);

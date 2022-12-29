@@ -140,7 +140,7 @@ class View : IEventDispatcher {
      * per element.
      *
      * @var string
-     * @see \Cake\View\View::element()
+     * @see uim.cake.View\View::element()
      */
     protected elementCache = "default";
 
@@ -720,7 +720,7 @@ class View : IEventDispatcher {
      * Get the names of all the existing blocks.
      *
      * @return An array containing the blocks.
-     * @see \Cake\View\ViewBlock::keys()
+     * @see uim.cake.View\ViewBlock::keys()
      */
     string[] blocks() {
         return this.Blocks.keys();
@@ -748,7 +748,7 @@ class View : IEventDispatcher {
      *
      * @param string myName The name of the block to capture for.
      * @return this
-     * @see \Cake\View\ViewBlock::start()
+     * @see uim.cake.View\ViewBlock::start()
      */
     function start(string myName) {
         this.Blocks.start(myName);
@@ -765,7 +765,7 @@ class View : IEventDispatcher {
      * @param mixed myValue The content for the block. Value will be type cast
      *   to string.
      * @return this
-     * @see \Cake\View\ViewBlock::concat()
+     * @see uim.cake.View\ViewBlock::concat()
      */
     function append(string myName, myValue = null) {
         this.Blocks.concat(myName, myValue);
@@ -782,7 +782,7 @@ class View : IEventDispatcher {
      * @param mixed myValue The content for the block. Value will be type cast
      *   to string.
      * @return this
-     * @see \Cake\View\ViewBlock::concat()
+     * @see uim.cake.View\ViewBlock::concat()
      */
     function prepend(string myName, myValue) {
         this.Blocks.concat(myName, myValue, ViewBlock::PREPEND);
@@ -798,7 +798,7 @@ class View : IEventDispatcher {
      * @param mixed myValue The content for the block. Value will be type cast
      *   to string.
      * @return this
-     * @see \Cake\View\ViewBlock::set()
+     * @see uim.cake.View\ViewBlock::set()
      */
     function assign(string myName, myValue) {
         this.Blocks.set(myName, myValue);
@@ -812,7 +812,7 @@ class View : IEventDispatcher {
      *
      * @param string myName Name of the block
      * @return this
-     * @see \Cake\View\ViewBlock::set()
+     * @see uim.cake.View\ViewBlock::set()
      */
     function reset(string myName) {
         this.assign(myName, "");
@@ -827,7 +827,7 @@ class View : IEventDispatcher {
      * @param string myName Name of the block
      * @param string default Default text
      * @return string The block content or $default if the block does not exist.
-     * @see \Cake\View\ViewBlock::get()
+     * @see uim.cake.View\ViewBlock::get()
      */
     string fetch(string myName, string default = "") {
         return this.Blocks.get(myName, $default);
@@ -837,7 +837,7 @@ class View : IEventDispatcher {
      * End a capturing block. The compliment to View::start()
      *
      * @return this
-     * @see \Cake\View\ViewBlock::end()
+     * @see uim.cake.View\ViewBlock::end()
      */
     function end() {
         this.Blocks.end();
@@ -1032,7 +1032,7 @@ class View : IEventDispatcher {
      * @param string myName Name of the helper to load.
      * @param array<string, mixed> myConfig Settings for the helper
      * @return \Cake\View\Helper a constructed helper object.
-     * @see \Cake\View\HelperRegistry::load()
+     * @see uim.cake.View\HelperRegistry::load()
      */
     Helper loadHelper(string myName, array myConfig = []) {
         [, myClass] = pluginSplit(myName);
@@ -1046,7 +1046,7 @@ class View : IEventDispatcher {
      *
      * @param string subDir Sub-directory name.
      * @return this
-     * @see \Cake\View\View::$subDir
+     * @see uim.cake.View\View::$subDir
 
      */
     auto setSubDir(string subDir) {
@@ -1059,7 +1059,7 @@ class View : IEventDispatcher {
      * Get sub-directory for this template files.
      *
      * @return string
-     * @see \Cake\View\View::$subDir
+     * @see uim.cake.View\View::$subDir
 
      */
     string getSubDir() {
@@ -1104,7 +1104,7 @@ class View : IEventDispatcher {
      *
      * @param string elementCache Cache config name.
      * @return this
-     * @see \Cake\View\View::$elementCache
+     * @see uim.cake.View\View::$elementCache
 
      */
     auto setElementCache(string elementCache) {

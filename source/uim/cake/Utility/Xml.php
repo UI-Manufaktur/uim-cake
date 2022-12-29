@@ -50,7 +50,7 @@ class Xml
      * Building XML from a remote URL:
      *
      * ```
-     * import uim.cake.Http\Client;
+     * import uim.cake.https.Client;
      *
      * $http = new Client();
      * $response = $http.get("http://example.com/example.xml");

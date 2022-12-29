@@ -2011,7 +2011,7 @@ class FormHelper : Helper
      *   SELECT element
      * @param array<string, mixed> $attributes The HTML attributes of the select element.
      * @return string Formatted SELECT element
-     * @see \Cake\View\Helper\FormHelper::multiCheckbox() for creating multiple checkboxes.
+     * @see uim.cake.View\Helper\FormHelper::multiCheckbox() for creating multiple checkboxes.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-select-pickers
      */
     function select(string $fieldName, iterable $options = [], array $attributes = []): string
@@ -2090,7 +2090,7 @@ class FormHelper : Helper
      *   (as "value"=>"Text" pairs) to be used in the checkboxes element.
      * @param array<string, mixed> $attributes The HTML attributes of the select element.
      * @return string Formatted SELECT element
-     * @see \Cake\View\Helper\FormHelper::select() for supported option formats.
+     * @see uim.cake.View\Helper\FormHelper::select() for supported option formats.
      */
     function multiCheckbox(string $fieldName, iterable $options, array $attributes = []): string
     {

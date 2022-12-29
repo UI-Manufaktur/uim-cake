@@ -85,7 +85,7 @@ class Security
      *
      * @param string $hash Method to use (sha1/sha256/md5 etc.)
      * @return void
-     * @see \Cake\Utility\Security::hash()
+     * @see uim.cake.Utility\Security::hash()
      */
     public static function setHash(string $hash): void
     {
@@ -127,7 +127,7 @@ class Security
      *
      * @param int $length The number of bytes you want.
      * @return string Random bytes in binary.
-     * @see \Cake\Utility\Security::randomBytes()
+     * @see uim.cake.Utility\Security::randomBytes()
      */
     public static function insecureRandomBytes(int $length): string
     {

@@ -1951,7 +1951,7 @@ class FormHelper : Helper
      *   SELECT element
      * @param array<string, mixed> $attributes The HTML attributes of the select element.
      * @return string Formatted SELECT element
-     * @see \Cake\View\Helper\FormHelper::multiCheckbox() for creating multiple checkboxes.
+     * @see uim.cake.View\Helper\FormHelper::multiCheckbox() for creating multiple checkboxes.
      * @link https://book.UIM.org/4/en/views/helpers/form.html#creating-select-pickers
      */
     string select(string myFieldName, iterable myOptions = [], array $attributes = []) {
@@ -2029,7 +2029,7 @@ class FormHelper : Helper
      *   (as "value"=>"Text" pairs) to be used in the checkboxes element.
      * @param array<string, mixed> $attributes The HTML attributes of the select element.
      * @return string Formatted SELECT element
-     * @see \Cake\View\Helper\FormHelper::select() for supported option formats.
+     * @see uim.cake.View\Helper\FormHelper::select() for supported option formats.
      */
     string multiCheckbox(string myFieldName, iterable myOptions, array $attributes = []) {
         $attributes += [

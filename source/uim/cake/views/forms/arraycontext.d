@@ -249,7 +249,7 @@ class ArrayContext : IContext
      *
      * @param string myField A dot separated path to get a schema type for.
      * @return string|null An abstract data type or null.
-     * @see \Cake\Database\TypeFactory
+     * @see uim.cake.Database\TypeFactory
      */
     Nullable!string type(string myField) {
         if (!is_array(_context["schema"])) {

@@ -231,7 +231,7 @@ class Validation
      * @param bool $deep set to true this will check the Luhn algorithm of the credit card.
      * @param string|null $regex A custom regex, this will be used instead of the defined regex values.
      * @return bool Success
-     * @see \Cake\Validation\Validation::luhn()
+     * @see uim.cake.Validation\Validation::luhn()
      */
     public static function creditCard($check, $type = "fast", bool $deep = false, ?string $regex = null): bool
     {
@@ -559,8 +559,8 @@ class Validation
      * @param string|null $regex Regex for the date part. If a custom regular expression is used
      *   this is the only validation that will occur.
      * @return bool True if the value is valid, false otherwise
-     * @see \Cake\Validation\Validation::date()
-     * @see \Cake\Validation\Validation::time()
+     * @see uim.cake.Validation\Validation::date()
+     * @see uim.cake.Validation\Validation::time()
      */
     public static function datetime($check, $dateFormat = "ymd", ?string $regex = null): bool
     {
@@ -599,7 +599,7 @@ class Validation
 
     /**
      * Validates an iso8601 datetime format
-     * ISO8601 recognize datetime like 2019 as a valid date. To validate and check date integrity, use @see \Cake\Validation\Validation::datetime()
+     * ISO8601 recognize datetime like 2019 as a valid date. To validate and check date integrity, use @see uim.cake.Validation\Validation::datetime()
      *
      * @param mixed $check Value to check
      * @return bool True if the value is valid, false otherwise
@@ -658,9 +658,9 @@ class Validation
      * @param string|int|null $format any format accepted by IntlDateFormatter
      * @return bool Success
      * @throws \InvalidArgumentException when unsupported $type given
-     * @see \Cake\I18n\Time::parseDate()
-     * @see \Cake\I18n\Time::parseTime()
-     * @see \Cake\I18n\Time::parseDateTime()
+     * @see uim.cake.I18n\Time::parseDate()
+     * @see uim.cake.I18n\Time::parseTime()
+     * @see uim.cake.I18n\Time::parseDateTime()
      */
     public static function localizedTime($check, string $type = "datetime", $format = null): bool
     {
@@ -1542,7 +1542,7 @@ class Validation
      * @param array<string, mixed> $options Options for the validation logic.
      * @return bool
      * @link https://en.wikipedia.org/wiki/Latitude
-     * @see \Cake\Validation\Validation::geoCoordinate()
+     * @see uim.cake.Validation\Validation::geoCoordinate()
      */
     public static function latitude($value, array $options = []): bool
     {
@@ -1558,7 +1558,7 @@ class Validation
      * @param array<string, mixed> $options Options for the validation logic.
      * @return bool
      * @link https://en.wikipedia.org/wiki/Longitude
-     * @see \Cake\Validation\Validation::geoCoordinate()
+     * @see uim.cake.Validation\Validation::geoCoordinate()
      */
     public static function longitude($value, array $options = []): bool
     {

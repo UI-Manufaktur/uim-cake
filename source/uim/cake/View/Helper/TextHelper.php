@@ -23,7 +23,7 @@ import uim.cake.View\View;
  *
  * @property \Cake\View\Helper\HtmlHelper $Html
  * @link https://book.cakephp.org/4/en/views/helpers/text.html
- * @see \Cake\Utility\Text
+ * @see uim.cake.Utility\Text
  */
 class TextHelper : Helper
 {
@@ -204,7 +204,7 @@ class TextHelper : Helper
      * @param string $text The text to operate on
      * @param array<string, mixed> $options An array of options to use for the HTML.
      * @return string
-     * @see \Cake\View\Helper\TextHelper::autoLinkEmails()
+     * @see uim.cake.View\Helper\TextHelper::autoLinkEmails()
      */
     protected function _linkEmails(string $text, array $options): string
     {
@@ -275,7 +275,7 @@ class TextHelper : Helper
      * @param string $phrase The phrase that will be searched
      * @param array<string, mixed> $options An array of HTML attributes and options.
      * @return string The highlighted text
-     * @see \Cake\Utility\Text::highlight()
+     * @see uim.cake.Utility\Text::highlight()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#highlighting-substrings
      */
     function highlight(string $text, string $phrase, array $options = []): string
@@ -325,7 +325,7 @@ class TextHelper : Helper
      * @param int $length Length of returned string, including ellipsis.
      * @param array<string, mixed> $options An array of HTML attributes and options.
      * @return string Trimmed string.
-     * @see \Cake\Utility\Text::truncate()
+     * @see uim.cake.Utility\Text::truncate()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-text
      */
     function truncate(string $text, int $length = 100, array $options = []): string
@@ -348,7 +348,7 @@ class TextHelper : Helper
      * @param int $length Length of returned string, including ellipsis.
      * @param array<string, mixed> $options An array of HTML attributes and options.
      * @return string Trimmed string.
-     * @see \Cake\Utility\Text::tail()
+     * @see uim.cake.Utility\Text::tail()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
     function tail(string $text, int $length = 100, array $options = []): string
@@ -365,7 +365,7 @@ class TextHelper : Helper
      * @param int $radius The amount of characters that will be returned on each side of the founded phrase
      * @param string $ending Ending that will be appended
      * @return string Modified string
-     * @see \Cake\Utility\Text::excerpt()
+     * @see uim.cake.Utility\Text::excerpt()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#extracting-an-excerpt
      */
     function excerpt(string $text, string $phrase, int $radius = 100, string $ending = "..."): string
@@ -380,7 +380,7 @@ class TextHelper : Helper
      * @param string|null $and The word used to join the last and second last items together with. Defaults to "and".
      * @param string $separator The separator used to join all the other items together. Defaults to ", ".
      * @return string The glued together string.
-     * @see \Cake\Utility\Text::toList()
+     * @see uim.cake.Utility\Text::toList()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
      */
     function toList(array $list, ?string $and = null, string $separator = ", "): string
@@ -406,8 +406,8 @@ class TextHelper : Helper
      * @param array<string, mixed>|string $options If string it will be used as replacement character
      *   or an array of options.
      * @return string
-     * @see \Cake\Utility\Text::setTransliterator()
-     * @see \Cake\Utility\Text::setTransliteratorId()
+     * @see uim.cake.Utility\Text::setTransliterator()
+     * @see uim.cake.Utility\Text::setTransliteratorId()
      */
     function slug(string $string, $options = []): string
     {

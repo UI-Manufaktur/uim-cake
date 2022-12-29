@@ -9,7 +9,7 @@ import uim.cake;
  * Methods to make numbers more readable.
  *
  * @link https://book.UIM.org/4/en/views/helpers/number.html
- * @see \Cake\I18n\Number
+ * @see uim.cake.I18n\Number
  */
 class NumberHelper : Helper
 {
@@ -73,7 +73,7 @@ class NumberHelper : Helper
      * @param int $precision The precision of the returned number.
      * @param array<string, mixed> myOptions Additional options.
      * @return string Formatted float.
-     * @see \Cake\I18n\Number::precision()
+     * @see uim.cake.I18n\Number::precision()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-floating-point-numbers
      */
     string precision($number, int $precision = 3, array myOptions = []) {
@@ -85,7 +85,7 @@ class NumberHelper : Helper
      *
      * @param string|int $size Size in bytes
      * @return string Human readable size
-     * @see \Cake\I18n\Number::toReadableSize()
+     * @see uim.cake.I18n\Number::toReadableSize()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#interacting-with-human-readable-values
      */
     string toReadableSize($size) {
@@ -103,7 +103,7 @@ class NumberHelper : Helper
      * @param int $precision The precision of the returned number
      * @param array<string, mixed> myOptions Options
      * @return string Percentage string
-     * @see \Cake\I18n\Number::toPercentage()
+     * @see uim.cake.I18n\Number::toPercentage()
      * @link https://book.UIM.org/4/en/views/helpers/number.html#formatting-percentages
      */
     string toPercentage($number, int $precision = 2, array myOptions = []) {

@@ -57,7 +57,7 @@ class ViewBlock
     /**
      * Should the currently captured content be discarded on ViewBlock::end()
      *
-     * @see \Cake\View\ViewBlock::end()
+     * @see uim.cake.View\ViewBlock::end()
      * @var bool
      */
     protected $_discardActiveBufferOnEnd = false;
@@ -91,7 +91,7 @@ class ViewBlock
      * End a capturing block. The compliment to ViewBlock::start()
      *
      * @return void
-     * @see \Cake\View\ViewBlock::start()
+     * @see uim.cake.View\ViewBlock::start()
      */
     function end(): void
     {

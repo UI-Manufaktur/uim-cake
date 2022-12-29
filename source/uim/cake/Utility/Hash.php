@@ -536,7 +536,7 @@ class Hash
      * @return array<string>|null An array of strings extracted from `$path` and formatted with `$format`
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::format
      * @see sprintf()
-     * @see \Cake\Utility\Hash::extract()
+     * @see uim.cake.Utility\Hash::extract()
      */
     public static function format(array $data, array $paths, string $format): ?array
     {
@@ -618,7 +618,7 @@ class Hash
      * @param array $data The data to check.
      * @param string $path The path to check for.
      * @return bool Existence of path.
-     * @see \Cake\Utility\Hash::extract()
+     * @see uim.cake.Utility\Hash::extract()
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::check
      */
     public static function check(array $data, string $path): bool
@@ -1191,7 +1191,7 @@ class Hash
      * @param array $data The data to nest.
      * @param array<string, mixed> $options Options are:
      * @return array<array> of results, nested
-     * @see \Cake\Utility\Hash::extract()
+     * @see uim.cake.Utility\Hash::extract()
      * @throws \InvalidArgumentException When providing invalid data.
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::nest
      */

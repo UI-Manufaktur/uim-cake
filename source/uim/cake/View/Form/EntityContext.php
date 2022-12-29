@@ -13,9 +13,9 @@ use ArrayAccess;
 import uim.cake.Collection\Collection;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.Datasource\InvalidPropertyInterface;
-import uim.cake.ORM\Entity;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Entity;
+import uim.cake.orm.locators.LocatorAwareTrait;
+import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
 import uim.cake.Validation\Validator;
 use RuntimeException;
@@ -673,7 +673,7 @@ class EntityContext : ContextInterface
      *
      * @param string $field A dot separated path to get a schema type for.
      * @return string|null An abstract data type or null.
-     * @see \Cake\Database\TypeFactory
+     * @see uim.cake.Database\TypeFactory
      */
     function type(string $field): ?string
     {

@@ -21,7 +21,7 @@ use Exception;
  * Manipulation of time data.
  *
  * @link https://book.cakephp.org/4/en/views/helpers/time.html
- * @see \Cake\I18n\Time
+ * @see uim.cake.I18n\Time
  */
 class TimeHelper : Helper
 {
@@ -186,7 +186,7 @@ class TimeHelper : Helper
      * @param \DateTimeInterface|string|int $dateString UNIX timestamp, strtotime() valid string or DateTime object
      * @param bool $range if true returns a range in Y-m-d format
      * @return array<string>|int 1, 2, 3, or 4 quarter of year or array if $range true
-     * @see \Cake\I18n\Time::toQuarter()
+     * @see uim.cake.I18n\Time::toQuarter()
      */
     function toQuarter($dateString, $range = false) {
         return (new FrozenTime($dateString)).toQuarter($range);
@@ -198,7 +198,7 @@ class TimeHelper : Helper
      * @param \DateTimeInterface|string|int $dateString UNIX timestamp, strtotime() valid string or DateTime object
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return string UNIX timestamp
-     * @see \Cake\I18n\Time::toUnix()
+     * @see uim.cake.I18n\Time::toUnix()
      */
     function toUnix($dateString, $timezone = null): string
     {
@@ -211,7 +211,7 @@ class TimeHelper : Helper
      * @param \DateTimeInterface|string|int $dateString UNIX timestamp, strtotime() valid string or DateTime object
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return string Formatted date string
-     * @see \Cake\I18n\Time::toAtom()
+     * @see uim.cake.I18n\Time::toAtom()
      */
     function toAtom($dateString, $timezone = null): string
     {
@@ -249,7 +249,7 @@ class TimeHelper : Helper
      *   string or DateTime object.
      * @param array<string, mixed> $options Default format if timestamp is used in $dateString
      * @return string Relative time string.
-     * @see \Cake\I18n\Time::timeAgoInWords()
+     * @see uim.cake.I18n\Time::timeAgoInWords()
      */
     function timeAgoInWords($dateTime, array $options = []): string
     {
@@ -302,7 +302,7 @@ class TimeHelper : Helper
      * @param \DateTimeInterface|string|int $dateString UNIX timestamp, strtotime() valid string or DateTime object
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool
-     * @see \Cake\I18n\Time::wasWithinLast()
+     * @see uim.cake.I18n\Time::wasWithinLast()
      */
     function wasWithinLast(string $timeInterval, $dateString, $timezone = null): bool
     {
@@ -317,7 +317,7 @@ class TimeHelper : Helper
      * @param \DateTimeInterface|string|int $dateString UNIX timestamp, strtotime() valid string or DateTime object
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool
-     * @see \Cake\I18n\Time::wasWithinLast()
+     * @see uim.cake.I18n\Time::wasWithinLast()
      */
     function isWithinNext(string $timeInterval, $dateString, $timezone = null): bool
     {
@@ -329,7 +329,7 @@ class TimeHelper : Helper
      *
      * @param \DateTimeInterface|string|int|null $string UNIX timestamp, strtotime() valid string or DateTime object
      * @return string UNIX timestamp
-     * @see \Cake\I18n\Time::gmt()
+     * @see uim.cake.I18n\Time::gmt()
      */
     function gmt($string = null): string
     {
@@ -349,7 +349,7 @@ class TimeHelper : Helper
      * @param string|false $invalid Default value to display on invalid dates
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return string|int|false Formatted and translated date string
-     * @see \Cake\I18n\Time::i18nFormat()
+     * @see uim.cake.I18n\Time::i18nFormat()
      */
     function format($date, $format = null, $invalid = false, $timezone = null) {
         return this.i18nFormat($date, $format, $invalid, $timezone);
@@ -365,7 +365,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return string|int|false Formatted and translated date string or value for `$invalid` on failure.
      * @throws \Exception When the date cannot be parsed
-     * @see \Cake\I18n\Time::i18nFormat()
+     * @see uim.cake.I18n\Time::i18nFormat()
      */
     function i18nFormat($date, $format = null, $invalid = false, $timezone = null) {
         if ($date == null) {

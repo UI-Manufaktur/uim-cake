@@ -11,8 +11,8 @@ module uim.cake.View;
 
 import uim.cake.cores.App;
 import uim.cake.events.IEventManager;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
+import uim.cake.https.Response;
+import uim.cake.https.ServerRequest;
 import uim.cake.View\Exception\MissingViewException;
 use Closure;
 use Exception;

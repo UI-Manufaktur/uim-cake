@@ -88,7 +88,7 @@ class UrlHelper : Helper
      *   Can be also any special parameters supported by `Router::url()`.
      * @param array<string, mixed> myOptions Array of options.
      * @return string Full translated URL with base path.
-     * @see \Cake\Routing\Router::pathUrl()
+     * @see uim.cake.Routing\Router::pathUrl()
      */
     string buildFromPath(string myPath, array myParams = [], array myOptions = []) {
         return this.build(["_path": myPath] + myParams, myOptions);

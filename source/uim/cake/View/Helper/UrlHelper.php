@@ -103,7 +103,7 @@ class UrlHelper : Helper
      *   Can be also any special parameters supported by `Router::url()`.
      * @param array<string, mixed> $options Array of options.
      * @return string Full translated URL with base path.
-     * @see \Cake\Routing\Router::pathUrl()
+     * @see uim.cake.Routing\Router::pathUrl()
      */
     function buildFromPath(string $path, array $params = [], array $options = []): string
     {

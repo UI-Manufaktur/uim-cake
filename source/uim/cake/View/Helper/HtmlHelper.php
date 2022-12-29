@@ -308,7 +308,7 @@ class HtmlHelper : Helper
      *   Can be also any special parameters supported by `Router::url()`.
      * @param array<string, mixed> $options Array of options and HTML attributes.
      * @return string An `<a />` element.
-     * @see \Cake\Routing\Router::pathUrl()
+     * @see uim.cake.Routing\Router::pathUrl()
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-links
      */
     function linkFromPath(string $title, string $path, array $params = [], array $options = []): string
@@ -1090,7 +1090,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the list (ol/ul) tag.
      * @param array<string, mixed> $itemOptions Options and additional HTML attributes of the list item (LI) tag.
      * @return string The nested list element
-     * @see \Cake\View\Helper\HtmlHelper::nestedList()
+     * @see uim.cake.View\Helper\HtmlHelper::nestedList()
      */
     protected function _nestedListItem(array $items, array $options, array $itemOptions): string
     {

@@ -16,8 +16,8 @@ import uim.cake.cores.Plugin;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventManager;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
+import uim.cake.https.Response;
+import uim.cake.https.ServerRequest;
 import uim.cake.Log\LogTrait;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Inflector;
@@ -200,7 +200,7 @@ class View : EventDispatcherInterface
      * per element.
      *
      * @var string
-     * @see \Cake\View\View::element()
+     * @see uim.cake.View\View::element()
      */
     protected $elementCache = "default";
 
@@ -902,7 +902,7 @@ class View : EventDispatcherInterface
      * Get the names of all the existing blocks.
      *
      * @return array<string> An array containing the blocks.
-     * @see \Cake\View\ViewBlock::keys()
+     * @see uim.cake.View\ViewBlock::keys()
      */
     string[] blocks(): array
     {
@@ -931,7 +931,7 @@ class View : EventDispatcherInterface
      *
      * @param string $name The name of the block to capture for.
      * @return this
-     * @see \Cake\View\ViewBlock::start()
+     * @see uim.cake.View\ViewBlock::start()
      */
     function start(string $name) {
         this.Blocks.start($name);
@@ -948,7 +948,7 @@ class View : EventDispatcherInterface
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
      * @return this
-     * @see \Cake\View\ViewBlock::concat()
+     * @see uim.cake.View\ViewBlock::concat()
      */
     function append(string $name, $value = null) {
         this.Blocks.concat($name, $value);
@@ -965,7 +965,7 @@ class View : EventDispatcherInterface
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
      * @return this
-     * @see \Cake\View\ViewBlock::concat()
+     * @see uim.cake.View\ViewBlock::concat()
      */
     function prepend(string $name, $value) {
         this.Blocks.concat($name, $value, ViewBlock::PREPEND);
@@ -981,7 +981,7 @@ class View : EventDispatcherInterface
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
      * @return this
-     * @see \Cake\View\ViewBlock::set()
+     * @see uim.cake.View\ViewBlock::set()
      */
     function assign(string $name, $value) {
         this.Blocks.set($name, $value);
@@ -995,7 +995,7 @@ class View : EventDispatcherInterface
      *
      * @param string $name Name of the block
      * @return this
-     * @see \Cake\View\ViewBlock::set()
+     * @see uim.cake.View\ViewBlock::set()
      */
     function reset(string $name) {
         this.assign($name, "");
@@ -1010,7 +1010,7 @@ class View : EventDispatcherInterface
      * @param string $name Name of the block
      * @param string $default Default text
      * @return string The block content or $default if the block does not exist.
-     * @see \Cake\View\ViewBlock::get()
+     * @see uim.cake.View\ViewBlock::get()
      */
     function fetch(string $name, string $default = ""): string
     {
@@ -1021,7 +1021,7 @@ class View : EventDispatcherInterface
      * End a capturing block. The compliment to View::start()
      *
      * @return this
-     * @see \Cake\View\ViewBlock::end()
+     * @see uim.cake.View\ViewBlock::end()
      */
     function end() {
         this.Blocks.end();
@@ -1221,7 +1221,7 @@ class View : EventDispatcherInterface
      * @param string $name Name of the helper to load.
      * @param array<string, mixed> $config Settings for the helper
      * @return \Cake\View\Helper a constructed helper object.
-     * @see \Cake\View\HelperRegistry::load()
+     * @see uim.cake.View\HelperRegistry::load()
      */
     function loadHelper(string $name, array $config = []): Helper
     {
@@ -1236,7 +1236,7 @@ class View : EventDispatcherInterface
      *
      * @param string $subDir Sub-directory name.
      * @return this
-     * @see \Cake\View\View::$subDir
+     * @see uim.cake.View\View::$subDir
      * @since 3.7.0
      */
     function setSubDir(string $subDir) {
@@ -1249,7 +1249,7 @@ class View : EventDispatcherInterface
      * Get sub-directory for this template files.
      *
      * @return string
-     * @see \Cake\View\View::$subDir
+     * @see uim.cake.View\View::$subDir
      * @since 3.7.0
      */
     function getSubDir(): string
@@ -1297,7 +1297,7 @@ class View : EventDispatcherInterface
      *
      * @param string $elementCache Cache config name.
      * @return this
-     * @see \Cake\View\View::$elementCache
+     * @see uim.cake.View\View::$elementCache
      * @since 3.7.0
      */
     function setElementCache(string $elementCache) {
