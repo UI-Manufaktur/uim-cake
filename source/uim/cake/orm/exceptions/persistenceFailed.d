@@ -16,7 +16,7 @@ class PersistenceFailedException : CakeException
     /**
      * The entity on which the persistence operation failed
      *
-     * @var \Cake\Datasource\IEntity
+     * @var uim.cake.datasources.IEntity
      */
     protected _entity;
 

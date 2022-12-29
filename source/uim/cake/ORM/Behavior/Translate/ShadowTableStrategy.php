@@ -13,7 +13,7 @@ use ArrayObject;
 import uim.cake.Collection\ICollection;
 import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.databases.expressions.FieldInterface;
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.orm.Marshaller;
@@ -387,7 +387,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
         if ($id) {
             $where["id"] = $id;
 
-            /** @var \Cake\Datasource\EntityInterface|null $translation */
+            /** @var uim.cake.datasources.EntityInterface|null $translation */
             $translation = this.translationTable.find()
                 .select(array_merge(["id", "locale"], $fields))
                 .where($where)
@@ -460,7 +460,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
         $allowEmpty = _config["allowEmptyTranslations"];
 
         return $results.map(function ($row) use ($allowEmpty, $locale) {
-            /** @var \Cake\Datasource\EntityInterface|array|null $row */
+            /** @var uim.cake.datasources.EntityInterface|array|null $row */
             if ($row == null) {
                 return $row;
             }
@@ -479,7 +479,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
                 return $row;
             }
 
-            /** @var \Cake\ORM\Entity|array $translation */
+            /** @var uim.cake.ORM\Entity|array $translation */
             $translation = $row["translation"];
 
             /**

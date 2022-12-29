@@ -9,7 +9,7 @@
  */
 module uim.cake.orm.Locator;
 
-import uim.cake.Datasource\FactoryLocator;
+import uim.cake.datasources.FactoryLocator;
 import uim.cake.orm.Table;
 use UnexpectedValueException;
 
@@ -28,7 +28,7 @@ trait LocatorAwareTrait
     /**
      * Table locator instance
      *
-     * @var \Cake\ORM\Locator\ILocator|null
+     * @var uim.cake.ORM\Locator\ILocator|null
      */
     protected $_tableLocator;
 
@@ -56,7 +56,7 @@ trait LocatorAwareTrait
             _tableLocator = FactoryLocator::get("Table");
         }
 
-        /** @var \Cake\ORM\Locator\ILocator*/
+        /** @var uim.cake.ORM\Locator\ILocator*/
         return _tableLocator;
     }
 

@@ -13,7 +13,7 @@ use ArrayObject;
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;
 import uim.cake.cores.InstanceConfigTrait;
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.Entity;
 import uim.cake.orm.locators.LocatorAwareTrait;
@@ -346,7 +346,7 @@ class EavStrategy : TranslateStrategyInterface
      */
     protected function rowMapper($results, $locale) {
         return $results.map(function ($row) use ($locale) {
-            /** @var \Cake\Datasource\EntityInterface|array|null $row */
+            /** @var uim.cake.datasources.EntityInterface|array|null $row */
             if ($row == null) {
                 return $row;
             }

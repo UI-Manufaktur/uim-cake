@@ -11,7 +11,7 @@ module uim.cake.orm.Behavior;
 
 import uim.cake.databases.Type\DateTimeType;
 import uim.cake.databases.TypeFactory;
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.events.EventInterface;
 import uim.cake.I18n\FrozenTime;
 import uim.cake.orm.Behavior;
@@ -57,7 +57,7 @@ class TimestampBehavior : Behavior
     /**
      * Current timestamp
      *
-     * @var \Cake\I18n\FrozenTime|null
+     * @var uim.cake.I18n\FrozenTime|null
      */
     protected $_ts;
 
@@ -209,7 +209,7 @@ class TimestampBehavior : Behavior
             return;
         }
 
-        /** @var \Cake\Database\Type\DateTimeType $type */
+        /** @var uim.cake.Database\Type\DateTimeType $type */
         $type = TypeFactory::build($columnType);
 
         if (!$type instanceof DateTimeType) {

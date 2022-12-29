@@ -364,7 +364,7 @@ class ShadowTableStrategy : ITranslateStrategy {
         if ($id) {
             $where["id"] = $id;
 
-            /** @var \Cake\Datasource\IEntity|null $translation */
+            /** @var uim.cake.datasources.IEntity|null $translation */
             $translation = this.translationTable.find()
                 .select(array_merge(["id", "locale"], myFields))
                 .where($where)
@@ -435,7 +435,7 @@ class ShadowTableStrategy : ITranslateStrategy {
         $allowEmpty = _config["allowEmptyTranslations"];
 
         return myResults.map(function ($row) use ($allowEmpty, $locale) {
-            /** @var \Cake\Datasource\IEntity|array|null $row */
+            /** @var uim.cake.datasources.IEntity|array|null $row */
             if ($row is null) {
                 return $row;
             }
@@ -454,7 +454,7 @@ class ShadowTableStrategy : ITranslateStrategy {
                 return $row;
             }
 
-            /** @var \Cake\ORM\Entity|array $translation */
+            /** @var uim.cake.ORM\Entity|array $translation */
             $translation = $row["translation"];
 
             /**

@@ -10,7 +10,7 @@ trait TranslateStrategyTrait {
     /**
      * Table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected myTable;
 
@@ -25,7 +25,7 @@ trait TranslateStrategyTrait {
     /**
      * Instance of Table responsible for translating
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected translationTable;
 

@@ -170,7 +170,7 @@ class TableLocator : AbstractLocator : ILocator
      */
     auto get(string myAlias, array myOptions = []): Table
     {
-        /** @var \Cake\ORM\Table */
+        /** @var uim.cake.ORM\Table */
         return super.get(myAlias, myOptions);
     }
 
@@ -215,7 +215,7 @@ class TableLocator : AbstractLocator : ILocator
             if (!empty(myOptions["connectionName"])) {
                 myConnectionName = myOptions["connectionName"];
             } else {
-                /** @var \Cake\ORM\Table myClassName */
+                /** @var uim.cake.ORM\Table myClassName */
                 myClassName = myOptions["className"];
                 myConnectionName = myClassName::defaultConnectionName();
             }
@@ -270,7 +270,7 @@ class TableLocator : AbstractLocator : ILocator
      */
     protected auto _create(array myOptions): Table
     {
-        /** @var \Cake\ORM\Table */
+        /** @var uim.cake.ORM\Table */
         return new myOptions["className"](myOptions);
     }
 

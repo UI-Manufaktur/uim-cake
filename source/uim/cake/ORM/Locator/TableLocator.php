@@ -10,9 +10,9 @@
 module uim.cake.orm.Locator;
 
 import uim.cake.cores.App;
-import uim.cake.Datasource\ConnectionManager;
-import uim.cake.Datasource\Locator\AbstractLocator;
-import uim.cake.Datasource\RepositoryInterface;
+import uim.cake.datasources.ConnectionManager;
+import uim.cake.datasources.Locator\AbstractLocator;
+import uim.cake.datasources.RepositoryInterface;
 import uim.cake.orm.AssociationCollection;
 import uim.cake.orm.Exception\MissingTableClassException;
 import uim.cake.orm.Table;
@@ -186,7 +186,7 @@ class TableLocator : AbstractLocator : ILocator
      */
     function get(string $alias, array $options = []): Table
     {
-        /** @var \Cake\ORM\Table */
+        /** @var uim.cake.ORM\Table */
         return parent::get($alias, $options);
     }
 
@@ -229,7 +229,7 @@ class TableLocator : AbstractLocator : ILocator
             if (!empty($options["connectionName"])) {
                 $connectionName = $options["connectionName"];
             } else {
-                /** @var \Cake\ORM\Table $className */
+                /** @var uim.cake.ORM\Table $className */
                 $className = $options["className"];
                 $connectionName = $className::defaultConnectionName();
             }
@@ -285,7 +285,7 @@ class TableLocator : AbstractLocator : ILocator
      */
     protected function _create(array $options): Table
     {
-        /** @var \Cake\ORM\Table */
+        /** @var uim.cake.ORM\Table */
         return new $options["className"]($options);
     }
 

@@ -68,7 +68,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     /**
      * Translation strategy instance.
      *
-     * @var \Cake\ORM\Behavior\Translate\TranslateStrategyInterface|null
+     * @var uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface|null
      */
     protected $strategy;
 
@@ -304,7 +304,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
 
         return $query
             .contain([$targetAlias: function ($query) use ($locales, $targetAlias) {
-                /** @var \Cake\Datasource\IQuery $query */
+                /** @var uim.cake.datasources.IQuery $query */
                 if ($locales) {
                     $query.where(["$targetAlias.locale IN": $locales]);
                 }

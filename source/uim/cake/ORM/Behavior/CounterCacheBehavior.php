@@ -10,7 +10,7 @@
 module uim.cake.orm.Behavior;
 
 use ArrayObject;
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.Association;
 import uim.cake.orm.Behavior;

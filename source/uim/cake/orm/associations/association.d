@@ -57,14 +57,14 @@ abstract class Association {
     /**
      * Source table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected _sourceTable;
 
     /**
      * Target table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected _targetTable;
 
@@ -828,7 +828,7 @@ abstract class Association {
                 $extracted = new ResultSetDecorator($callable($extracted, myQuery));
             }
 
-            /** @var \Cake\Collection\ICollection myResults */
+            /** @var uim.cake.Collection\ICollection myResults */
             myResults = myResults.insert($property, $extracted);
             if (myQuery.isHydrationEnabled()) {
                 myResults = myResults.map(function (myResult) {

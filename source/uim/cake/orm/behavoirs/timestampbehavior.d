@@ -39,7 +39,7 @@ class TimestampBehavior : Behavior {
     /**
      * Current timestamp
      *
-     * @var \Cake\I18n\FrozenTime|null
+     * @var uim.cake.I18n\FrozenTime|null
      */
     protected _ts;
 
@@ -186,7 +186,7 @@ class TimestampBehavior : Behavior {
             return;
         }
 
-        /** @var \Cake\Database\Type\DateTimeType myType */
+        /** @var uim.cake.Database\Type\DateTimeType myType */
         myType = TypeFactory::build($columnType);
 
         if (!myType instanceof DateTimeType) {

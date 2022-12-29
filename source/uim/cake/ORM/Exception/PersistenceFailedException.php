@@ -14,7 +14,7 @@
 module uim.cake.orm.Exception;
 
 import uim.cake.cores.exceptions.CakeException;
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.utilities.Hash;
 use Throwable;
 
@@ -26,7 +26,7 @@ class PersistenceFailedException : CakeException
     /**
      * The entity on which the persistence operation failed
      *
-     * @var \Cake\Datasource\EntityInterface
+     * @var uim.cake.datasources.EntityInterface
      */
     protected $_entity;
 

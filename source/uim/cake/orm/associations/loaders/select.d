@@ -110,7 +110,7 @@ class SelectLoader {
         myFinder = this.finder;
         myOptions["fields"] = myOptions["fields"] ?? [];
 
-        /** @var \Cake\ORM\Query myQuery */
+        /** @var uim.cake.ORM\Query myQuery */
         myQuery = myFinder();
         if (isset(myOptions["finder"])) {
             [myFinderName, $opts] = _extractFinder(myOptions["finder"]);

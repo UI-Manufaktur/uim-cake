@@ -171,7 +171,7 @@ class TreeBehavior : Behavior
             "order":myConfig["left"],
         ]);
 
-        /** @var \Cake\Datasource\IEntity myNode */
+        /** @var uim.cake.datasources.IEntity myNode */
         foreach ($children as myNode) {
             $parentIdValue = myNode.get(myConfig["parent"]);
             $depth = $depths[$parentIdValue] + 1;
@@ -202,7 +202,7 @@ class TreeBehavior : Behavior
             myQuery = _scope(_table.query())
                 .delete()
                 .where(function ($exp) use (myConfig, $left, $right) {
-                    /** @var \Cake\Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
                     return $exp
                         .gte(myConfig["leftField"], $left + 1)
                         .lte(myConfig["leftField"], $right - 1);
@@ -319,7 +319,7 @@ class TreeBehavior : Behavior
         myConfig = this.getConfig();
         _table.updateAll(
             function ($exp) use (myConfig) {
-                /** @var \Cake\Database\Expression\QueryExpression $exp */
+                /** @var uim.cake.Database\Expression\QueryExpression $exp */
                 $leftInverse = clone $exp;
                 $leftInverse.setConjunction("*").add("-1");
                 $rightInverse = clone $leftInverse;
@@ -329,7 +329,7 @@ class TreeBehavior : Behavior
                     .eq(myConfig["rightField"], $rightInverse.add(myConfig["rightField"]));
             },
             function ($exp) use (myConfig) {
-                /** @var \Cake\Database\Expression\QueryExpression $exp */
+                /** @var uim.cake.Database\Expression\QueryExpression $exp */
                 return $exp.lt(myConfig["leftField"], 0);
             }
         );
@@ -498,7 +498,7 @@ class TreeBehavior : Behavior
                 "spacer":"_",
             ];
 
-            /** @var \Cake\collection.iIterator\TreeIterator $nested */
+            /** @var uim.cake.collection.iIterator\TreeIterator $nested */
             $nested = myResults.listNested();
 
             return $nested.printer(myOptions["valuePath"], myOptions["keyPath"], myOptions["spacer"]);
@@ -603,12 +603,12 @@ class TreeBehavior : Behavior
 
         myTargetNode = null;
         if ($number != true) {
-            /** @var \Cake\Datasource\IEntity|null myTargetNode */
+            /** @var uim.cake.datasources.IEntity|null myTargetNode */
             myTargetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeLeft) {
-                    /** @var \Cake\Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
                     return $exp.lt(myConfig["rightField"], myNodeLeft);
                 })
                 .orderDesc(myConfig["leftField"])
@@ -617,12 +617,12 @@ class TreeBehavior : Behavior
                 .first();
         }
         if (!myTargetNode) {
-            /** @var \Cake\Datasource\IEntity|null myTargetNode */
+            /** @var uim.cake.datasources.IEntity|null myTargetNode */
             myTargetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeLeft) {
-                    /** @var \Cake\Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
                     return $exp.lt(myConfig["rightField"], myNodeLeft);
                 })
                 .orderAsc(myConfig["leftField"])
@@ -694,12 +694,12 @@ class TreeBehavior : Behavior
 
         myTargetNode = null;
         if ($number != true) {
-            /** @var \Cake\Datasource\IEntity|null myTargetNode */
+            /** @var uim.cake.datasources.IEntity|null myTargetNode */
             myTargetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeRight) {
-                    /** @var \Cake\Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
                     return $exp.gt(myConfig["leftField"], myNodeRight);
                 })
                 .orderAsc(myConfig["leftField"])
@@ -708,12 +708,12 @@ class TreeBehavior : Behavior
                 .first();
         }
         if (!myTargetNode) {
-            /** @var \Cake\Datasource\IEntity|null myTargetNode */
+            /** @var uim.cake.datasources.IEntity|null myTargetNode */
             myTargetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeRight) {
-                    /** @var \Cake\Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
                     return $exp.gt(myConfig["leftField"], myNodeRight);
                 })
                 .orderDesc(myConfig["leftField"])

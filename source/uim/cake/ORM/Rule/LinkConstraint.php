@@ -9,7 +9,7 @@
  */
 module uim.cake.orm.Rule;
 
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.orm.Association;
 import uim.cake.orm.Table;
 
@@ -35,7 +35,7 @@ class LinkConstraint
     /**
      * The association that should be checked.
      *
-     * @var \Cake\ORM\Association|string
+     * @var uim.cake.ORM\Association|string
      */
     protected $_association;
 

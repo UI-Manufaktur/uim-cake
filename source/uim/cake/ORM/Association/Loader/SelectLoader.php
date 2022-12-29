@@ -155,7 +155,7 @@ class SelectLoader
         $finder = this.finder;
         $options["fields"] = $options["fields"] ?? [];
 
-        /** @var \Cake\ORM\Query $query */
+        /** @var uim.cake.ORM\Query $query */
         $query = $finder();
         if (isset($options["finder"])) {
             [$finderName, $opts] = _extractFinder($options["finder"]);

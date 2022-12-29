@@ -9,7 +9,7 @@
  */
 module uim.cake.orm.Behavior\Translate;
 
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 
 /**
  * Contains a translation method aimed to help managing multiple translations

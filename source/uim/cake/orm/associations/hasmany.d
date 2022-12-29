@@ -320,7 +320,7 @@ class HasMany : Association
         $conditions = [
             "OR":(new Collection(myTargetEntities))
                 .map(function ($entity) use (myTargetPrimaryKey) {
-                    /** @var \Cake\Datasource\IEntity $entity */
+                    /** @var uim.cake.datasources.IEntity $entity */
                     return $entity.extract(myTargetPrimaryKey);
                 })
                 .toList(),
@@ -427,7 +427,7 @@ class HasMany : Association
         $exclusions = new Collection($remainingEntities);
         $exclusions = $exclusions.map(
             function ($ent) use ($primaryKey) {
-                /** @var \Cake\Datasource\IEntity $ent */
+                /** @var uim.cake.datasources.IEntity $ent */
                 return $ent.extract($primaryKey);
             }
         )

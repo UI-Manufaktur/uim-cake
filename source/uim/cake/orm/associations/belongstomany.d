@@ -26,7 +26,7 @@ class BelongsToMany : Association
     /**
      * Junction table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected _junctionTable;
 
@@ -58,7 +58,7 @@ class BelongsToMany : Association
     /**
      * The table instance for the junction relation.
      *
-     * @var \Cake\ORM\Table|string
+     * @var uim.cake.ORM\Table|string
      */
     protected _through;
 

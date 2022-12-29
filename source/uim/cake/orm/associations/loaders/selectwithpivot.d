@@ -28,14 +28,14 @@ class SelectWithPivotLoader : SelectLoader
     /**
      * The junction association instance
      *
-     * @var \Cake\ORM\Association\HasMany
+     * @var uim.cake.ORM\Association\HasMany
      */
     protected junctionAssoc;
 
     /**
      * Custom conditions for the junction association
      *
-     * @var \Cake\Database\IExpression|\Closure|array|string|null
+     * @var uim.cake.Database\IExpression|\Closure|array|string|null
      */
     protected junctionConditions;
 

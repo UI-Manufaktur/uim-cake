@@ -9,8 +9,8 @@
  */
 module uim.cake.orm.Locator;
 
-import uim.cake.Datasource\Locator\ILocatoras BaseILocator;
-import uim.cake.Datasource\RepositoryInterface;
+import uim.cake.datasources.Locator\ILocatoras BaseILocator;
+import uim.cake.datasources.RepositoryInterface;
 import uim.cake.orm.Table;
 
 /**

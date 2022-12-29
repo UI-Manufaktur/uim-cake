@@ -326,7 +326,7 @@ class EavStrategy : ITranslateStrategy
      */
     protected auto rowMapper(myResults, $locale) {
         return myResults.map(function ($row) use ($locale) {
-            /** @var \Cake\Datasource\IEntity|array|null $row */
+            /** @var uim.cake.datasources.IEntity|array|null $row */
             if ($row is null) {
                 return $row;
             }

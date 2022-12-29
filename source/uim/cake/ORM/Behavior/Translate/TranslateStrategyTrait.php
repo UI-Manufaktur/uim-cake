@@ -9,7 +9,7 @@
  */
 module uim.cake.orm.Behavior\Translate;
 
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.events.EventInterface;
 import uim.cake.I18n\I18n;
 import uim.cake.orm.Marshaller;
@@ -23,7 +23,7 @@ trait TranslateStrategyTrait
     /**
      * Table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $table;
 
@@ -38,7 +38,7 @@ trait TranslateStrategyTrait
     /**
      * Instance of Table responsible for translating
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $translationTable;
 

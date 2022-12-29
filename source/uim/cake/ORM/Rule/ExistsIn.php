@@ -9,7 +9,7 @@
  */
 module uim.cake.orm.Rule;
 
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.orm.Association;
 import uim.cake.orm.Table;
 use RuntimeException;
@@ -30,7 +30,7 @@ class ExistsIn
     /**
      * The repository where the field will be looked for
      *
-     * @var \Cake\ORM\Table|\Cake\ORM\Association|string
+     * @var uim.cake.ORM\Table|\Cake\ORM\Association|string
      */
     protected $_repository;
 

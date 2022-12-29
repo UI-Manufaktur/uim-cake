@@ -43,7 +43,7 @@ class RoutingMiddleware : IMiddleware
     /**
      * The application that will have its routing hook invoked.
      *
-     * @var \Cake\Routing\IRoutingApplication
+     * @var uim.cake.Routing\IRoutingApplication
      */
     protected $app;
 
@@ -158,7 +158,7 @@ class RoutingMiddleware : IMiddleware
                 unset($params["_middleware"], $params["_route"]);
 
                 $request = $request.withAttribute("route", $route);
-                /** @var \Cake\Http\ServerRequest $request */
+                /** @var uim.cake.Http\ServerRequest $request */
                 $request = $request.withAttribute("params", $params);
                 Router::setRequest($request);
             }
