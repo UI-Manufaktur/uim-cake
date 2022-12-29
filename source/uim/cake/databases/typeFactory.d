@@ -83,7 +83,7 @@ class TypeFactory
      * Set IType instance capable of converting a type identified by myName
      *
      * @param string myName The type identifier you want to set.
-     * @param \Cake\Database\IType $instance The type instance you want to set.
+     * @param uim.cake.Database\IType $instance The type instance you want to set.
      */
     static void set(string myName, IType $instance) {
         static::$_builtTypes[myName] = $instance;

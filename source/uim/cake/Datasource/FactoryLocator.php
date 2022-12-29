@@ -29,7 +29,7 @@ class FactoryLocator
      * Register a callable to generate repositories of a given type.
      *
      * @param string $type The name of the repository type the factory function is for.
-     * @param \Cake\Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
+     * @param uim.cake.Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      * @return void
      */
     public static function add(string $type, $factory): void

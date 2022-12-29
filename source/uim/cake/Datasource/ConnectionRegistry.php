@@ -61,7 +61,7 @@ class ConnectionRegistry : ObjectRegistry
      * If a callable is passed as first argument, The returned value of this
      * function will be the result of the callable.
      *
-     * @param \Cake\Datasource\ConnectionInterface|callable|string $class The classname or object to make.
+     * @param uim.cake.Datasource\ConnectionInterface|callable|string $class The classname or object to make.
      * @param string $alias The alias of the object.
      * @param array<string, mixed> $config An array of settings to use for the datasource.
      * @return \Cake\Datasource\ConnectionInterface A connection with the correct settings.

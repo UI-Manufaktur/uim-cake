@@ -10,7 +10,7 @@ trait TypeConverterTrait
      * and return relevant internal statement type
      *
      * @param mixed myValue The value to cast
-     * @param \Cake\Database\IType|string|int myType The type name or type instance to use.
+     * @param uim.cake.Database\IType|string|int myType The type name or type instance to use.
      * @return array list containing converted value and internal type
      * @pslam-return array{mixed, int}
      */

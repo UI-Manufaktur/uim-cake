@@ -41,7 +41,7 @@ class IntegerType : BaseType : BatchCastingInterface
      * Convert integer data into the database format.
      *
      * @param mixed $value The value to convert.
-     * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
      * @return int|null
      */
     function toDatabase($value, DriverInterface $driver): ?int
@@ -59,7 +59,7 @@ class IntegerType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value The value to convert.
-     * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
      * @return int|null
      */
     function toPHP($value, DriverInterface $driver): ?int
@@ -91,7 +91,7 @@ class IntegerType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for integer data.
      *
      * @param mixed $value The value being bound.
-     * @param \Cake\Database\DriverInterface $driver The driver.
+     * @param uim.cake.Database\DriverInterface $driver The driver.
      * @return int
      */
     function toStatement($value, DriverInterface $driver): int

@@ -29,7 +29,7 @@ class JsonType : BaseType : BatchCastingInterface
      * Convert a value data into a JSON string
      *
      * @param mixed $value The value to convert.
-     * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
      * @return string|null
      * @throws \InvalidArgumentException
      */
@@ -50,7 +50,7 @@ class JsonType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value The value to convert.
-     * @param \Cake\Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
      * @return array|string|null
      */
     function toPHP($value, DriverInterface $driver) {
@@ -79,7 +79,7 @@ class JsonType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for string data.
      *
      * @param mixed $value The value being bound.
-     * @param \Cake\Database\DriverInterface $driver The driver.
+     * @param uim.cake.Database\DriverInterface $driver The driver.
      * @return int
      */
     function toStatement($value, DriverInterface $driver): int

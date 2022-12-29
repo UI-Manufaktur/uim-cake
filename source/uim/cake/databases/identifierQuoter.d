@@ -21,7 +21,7 @@ class IdentifierQuoter
     /**
      * Constructor
      *
-     * @param \Cake\Database\Driver myDriver The driver instance used to do the identifier quoting
+     * @param uim.cake.Database\Driver myDriver The driver instance used to do the identifier quoting
      */
     this(Driver myDriver) {
         _driver = myDriver;
@@ -31,7 +31,7 @@ class IdentifierQuoter
      * Iterates over each of the clauses in a query looking for identifiers and
      * quotes them
      *
-     * @param \Cake\Database\Query myQuery The query to have its identifiers quoted
+     * @param uim.cake.Database\Query myQuery The query to have its identifiers quoted
      * @return \Cake\Database\Query
      */
     function quote(Query myQuery): Query
@@ -56,7 +56,7 @@ class IdentifierQuoter
     /**
      * Quotes identifiers inside expression objects
      *
-     * @param \Cake\Database\IExpression $expression The expression object to walk and quote.
+     * @param uim.cake.Database\IExpression $expression The expression object to walk and quote.
      */
     void quoteExpression(IExpression $expression) {
         if ($expression instanceof FieldInterface) {
@@ -81,7 +81,7 @@ class IdentifierQuoter
     /**
      * Quotes all identifiers in each of the clauses of a query
      *
-     * @param \Cake\Database\Query myQuery The query to quote.
+     * @param uim.cake.Database\Query myQuery The query to quote.
      */
     protected void _quoteParts(Query myQuery) {
         foreach (["distinct", "select", "from", "group"] as $part) {
@@ -148,7 +148,7 @@ class IdentifierQuoter
     /**
      * Quotes the table name and columns for an insert query
      *
-     * @param \Cake\Database\Query myQuery The insert query to quote.
+     * @param uim.cake.Database\Query myQuery The insert query to quote.
      */
     protected auto _quoteInsert(Query myQuery) {
         $insert = myQuery.clause("insert");
@@ -168,7 +168,7 @@ class IdentifierQuoter
     /**
      * Quotes the table name for an update query
      *
-     * @param \Cake\Database\Query myQuery The update query to quote.
+     * @param uim.cake.Database\Query myQuery The update query to quote.
      */
     protected void _quoteUpdate(Query myQuery) {
         myTable = myQuery.clause("update")[0];
@@ -181,7 +181,7 @@ class IdentifierQuoter
     /**
      * Quotes identifiers in expression objects implementing the field interface
      *
-     * @param \Cake\Database\Expression\FieldInterface $expression The expression to quote.
+     * @param uim.cake.Database\Expression\FieldInterface $expression The expression to quote.
      */
     protected void _quoteComparison(FieldInterface $expression) {
         myField = $expression.getField();
@@ -204,7 +204,7 @@ class IdentifierQuoter
      * Strings with spaces are treated as literal expressions
      * and will not have identifiers quoted.
      *
-     * @param \Cake\Database\Expression\OrderByExpression $expression The expression to quote.
+     * @param uim.cake.Database\Expression\OrderByExpression $expression The expression to quote.
      */
     protected void _quoteOrderBy(OrderByExpression $expression) {
         $expression.iterateParts(function ($part, &myField) {
@@ -224,7 +224,7 @@ class IdentifierQuoter
     /**
      * Quotes identifiers in "order by" expression objects
      *
-     * @param \Cake\Database\Expression\IdentifierExpression $expression The identifiers to quote.
+     * @param uim.cake.Database\Expression\IdentifierExpression $expression The identifiers to quote.
      */
     protected void _quoteIdentifierExpression(IdentifierExpression $expression) {
         $expression.setIdentifier(

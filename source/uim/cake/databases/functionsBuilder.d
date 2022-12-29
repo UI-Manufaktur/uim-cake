@@ -21,7 +21,7 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL SUM function.
      *
-     * @param \Cake\Database\IExpression|string expression the function argument
+     * @param uim.cake.Database\IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
      * @return \Cake\Database\Expression\AggregateExpression
      */
@@ -38,7 +38,7 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL AVG function.
      *
-     * @param \Cake\Database\IExpression|string expression the function argument
+     * @param uim.cake.Database\IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
      * @return \Cake\Database\Expression\AggregateExpression
      */
@@ -50,7 +50,7 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL MAX function.
      *
-     * @param \Cake\Database\IExpression|string expression the function argument
+     * @param uim.cake.Database\IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
      * @return \Cake\Database\Expression\AggregateExpression
      */
@@ -62,7 +62,7 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL MIN function.
      *
-     * @param \Cake\Database\IExpression|string expression the function argument
+     * @param uim.cake.Database\IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
      * @return \Cake\Database\Expression\AggregateExpression
      */
@@ -74,7 +74,7 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL COUNT function.
      *
-     * @param \Cake\Database\IExpression|string expression the function argument
+     * @param uim.cake.Database\IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
      * @return \Cake\Database\Expression\AggregateExpression
      */
@@ -113,7 +113,7 @@ class FunctionsBuilder {
      * The `myType` parameter is a SQL type. The return type for the returned expression
      * is the default type name. Use `setReturnType()` to update it.
      *
-     * @param \Cake\Database\IExpression|string myField Field or expression to cast.
+     * @param uim.cake.Database\IExpression|string myField Field or expression to cast.
      * @param string myType The SQL data type
      * @return \Cake\Database\Expression\FunctionExpression
      */
@@ -155,7 +155,7 @@ class FunctionsBuilder {
      * Returns the specified date part from the SQL expression.
      *
      * @param string part Part of the date to return.
-     * @param \Cake\Database\IExpression|string expression Expression to obtain the date part from.
+     * @param uim.cake.Database\IExpression|string expression Expression to obtain the date part from.
      * @param array myTypes list of types to bind to the arguments
      * @return \Cake\Database\Expression\FunctionExpression
      */
@@ -168,7 +168,7 @@ class FunctionsBuilder {
      * Returns the specified date part from the SQL expression.
      *
      * @param string part Part of the date to return.
-     * @param \Cake\Database\IExpression|string expression Expression to obtain the date part from.
+     * @param uim.cake.Database\IExpression|string expression Expression to obtain the date part from.
      * @param array myTypes list of types to bind to the arguments
      * @return \Cake\Database\Expression\FunctionExpression
      */
@@ -183,7 +183,7 @@ class FunctionsBuilder {
     /**
      * Add the time unit to the date expression
      *
-     * @param \Cake\Database\IExpression|string expression Expression to obtain the date part from.
+     * @param uim.cake.Database\IExpression|string expression Expression to obtain the date part from.
      * @param string|int myValue Value to be added. Use negative to subtract.
      * @param string unit Unit of the value e.g. hour or day.
      * @param array myTypes list of types to bind to the arguments
@@ -205,7 +205,7 @@ class FunctionsBuilder {
      * Returns a FunctionExpression representing a call to SQL WEEKDAY function.
      * 1 - Sunday, 2 - Monday, 3 - Tuesday...
      *
-     * @param \Cake\Database\IExpression|string expression the function argument
+     * @param uim.cake.Database\IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
      * @return \Cake\Database\Expression\FunctionExpression
      */
@@ -218,7 +218,7 @@ class FunctionsBuilder {
      * Returns a FunctionExpression representing a call to SQL WEEKDAY function.
      * 1 - Sunday, 2 - Monday, 3 - Tuesday...
      *
-     * @param \Cake\Database\IExpression|string expression the function argument
+     * @param uim.cake.Database\IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
      * @return \Cake\Database\Expression\FunctionExpression
      */
@@ -263,7 +263,7 @@ class FunctionsBuilder {
     /**
      * Returns an AggregateExpression representing call to SQL LAG().
      *
-     * @param \Cake\Database\IExpression|string expression The value evaluated at offset
+     * @param uim.cake.Database\IExpression|string expression The value evaluated at offset
      * @param int $offset The row offset
      * @param mixed $default The default value if offset doesn"t exist
      * @param string myType The output type of the lag expression. Defaults to float.
@@ -287,7 +287,7 @@ class FunctionsBuilder {
     /**
      * Returns an AggregateExpression representing call to SQL LEAD().
      *
-     * @param \Cake\Database\IExpression|string expression The value evaluated at offset
+     * @param uim.cake.Database\IExpression|string expression The value evaluated at offset
      * @param int $offset The row offset
      * @param mixed $default The default value if offset doesn"t exist
      * @param string myType The output type of the lead expression. Defaults to float.
@@ -341,7 +341,7 @@ class FunctionsBuilder {
     /**
      * Creates function parameter array from expression or string literal.
      *
-     * @param \Cake\Database\IExpression|string expression function argument
+     * @param uim.cake.Database\IExpression|string expression function argument
      * @return array<\Cake\Database\IExpression|string>
      */
     protected auto toLiteralParam($expression) {

@@ -31,7 +31,7 @@ class PDOStatement : StatementDecorator
      * Constructor
      *
      * @param \PDOStatement $statement Original statement to be decorated.
-     * @param \Cake\Database\DriverInterface $driver Driver instance.
+     * @param uim.cake.Database\DriverInterface $driver Driver instance.
      */
     public this(Statement $statement, DriverInterface $driver) {
         _statement = $statement;
