@@ -94,7 +94,7 @@ class Cache
     /**
      * Cache Registry used for creating and using cache adapters.
      *
-     * @var \Cake\Cache\CacheRegistry|null
+     * @var uim.cake.Cache\CacheRegistry|null
      */
     protected static $_registry;
 
@@ -167,7 +167,7 @@ class Cache
                 ), 0, $e);
             }
 
-            /** @var \Cake\Cache\CacheEngine $fallbackEngine */
+            /** @var uim.cake.Cache\CacheEngine $fallbackEngine */
             $fallbackEngine = clone static::pool($config["fallback"]);
             $newConfig = $config + ["groups": [], "prefix": null];
             $fallbackEngine.setConfig("groups", $newConfig["groups"], false);

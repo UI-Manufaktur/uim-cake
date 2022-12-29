@@ -39,7 +39,7 @@ class ControllerAuthorize : BaseAuthorize
     /**
      * Controller for the request.
      *
-     * @var \Cake\Controller\Controller
+     * @var uim.cake.Controller\Controller
      */
     protected $_Controller;
 

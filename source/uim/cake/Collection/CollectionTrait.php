@@ -260,12 +260,12 @@ trait CollectionTrait
         $callback = _propertyExtractor($path);
 
         $mapper = function ($value, $key, $mr) use ($callback): void {
-            /** @var \Cake\Collection\Iterator\MapReduce $mr */
+            /** @var uim.cake.Collection\Iterator\MapReduce $mr */
             $mr.emitIntermediate($value, $callback($value));
         };
 
         $reducer = function ($values, $key, $mr): void {
-            /** @var \Cake\Collection\Iterator\MapReduce $mr */
+            /** @var uim.cake.Collection\Iterator\MapReduce $mr */
             $mr.emit(count($values), $key);
         };
 

@@ -16,7 +16,7 @@ use ReflectionMethod;
 class CompletionCommand : Command : ICommandCollectionAware
 {
     /**
-     * @var \Cake\Console\CommandCollection
+     * @var uim.cake.Console\CommandCollection
      */
     protected commands;
 

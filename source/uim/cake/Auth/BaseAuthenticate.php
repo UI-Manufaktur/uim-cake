@@ -52,14 +52,14 @@ abstract class BaseAuthenticate : IEventListener
     /**
      * A Component registry, used to get more components.
      *
-     * @var \Cake\Controller\ComponentRegistry
+     * @var uim.cake.Controller\ComponentRegistry
      */
     protected $_registry;
 
     /**
      * Password hasher instance.
      *
-     * @var \Cake\Auth\AbstractPasswordHasher|null
+     * @var uim.cake.Auth\AbstractPasswordHasher|null
      */
     protected $_passwordHasher;
 

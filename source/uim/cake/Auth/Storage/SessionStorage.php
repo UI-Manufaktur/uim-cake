@@ -33,7 +33,7 @@ class SessionStorage : IStorage
     /**
      * Session object.
      *
-     * @var \Cake\Http\Session
+     * @var uim.cake.Http\Session
      */
     protected $_session;
 

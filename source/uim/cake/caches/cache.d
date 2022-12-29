@@ -138,7 +138,7 @@ class Cache {
                 ), 0, $e);
             }
 
-            /** @var \Cake\Cache\CacheEngine $fallbackEngine */
+            /** @var uim.cake.Cache\CacheEngine $fallbackEngine */
             $fallbackEngine = clone static::pool(myConfig["fallback"]);
             $newConfig = myConfig + ["groups":[], "prefix":null];
             $fallbackEngine.setConfig("groups", $newConfig["groups"], false);

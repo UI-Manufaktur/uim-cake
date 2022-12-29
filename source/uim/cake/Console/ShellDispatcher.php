@@ -366,7 +366,7 @@ class ShellDispatcher
     protected function _createShell(string $className, string $shortName): Shell
     {
         [$plugin] = pluginSplit($shortName);
-        /** @var \Cake\Console\Shell $instance */
+        /** @var uim.cake.Console\Shell $instance */
         $instance = new $className();
         $instance.plugin = trim((string)$plugin, ".");
 

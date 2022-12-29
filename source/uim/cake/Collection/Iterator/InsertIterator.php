@@ -22,7 +22,7 @@ class InsertIterator : Collection
     /**
      * The collection from which to extract the values to be inserted
      *
-     * @var \Cake\Collection\Collection
+     * @var uim.cake.Collection\Collection
      */
     protected $_values;
 

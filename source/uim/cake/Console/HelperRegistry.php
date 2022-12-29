@@ -24,7 +24,7 @@ class HelperRegistry : ObjectRegistry
     /**
      * Shell to use to set params to tasks.
      *
-     * @var \Cake\Console\ConsoleIo
+     * @var uim.cake.Console\ConsoleIo
      */
     protected $_io;
 
@@ -93,7 +93,7 @@ class HelperRegistry : ObjectRegistry
      */
     protected function _create($class, string $alias, array $config): Helper
     {
-        /** @var \Cake\Console\Helper */
+        /** @var uim.cake.Console\Helper */
         return new $class(_io, $config);
     }
 }

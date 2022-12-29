@@ -12,7 +12,7 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.BaseCommand;
 import uim.cake.consoles.ConsoleIo;
-import uim.cake.Datasource\ModelAwareTrait;
+import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.Log\LogTrait;
 import uim.cake.orm.locators.LocatorAwareTrait;
 

@@ -45,7 +45,7 @@ class ConsoleInputSubcommand
     /**
      * The ConsoleOptionParser for this subcommand.
      *
-     * @var \Cake\Console\ConsoleOptionParser|null
+     * @var uim.cake.Console\ConsoleOptionParser|null
      */
     protected $_parser;
 

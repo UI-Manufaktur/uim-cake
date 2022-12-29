@@ -13,7 +13,7 @@ import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
 import uim.cake.databases.SchemaCache;
-import uim.cake.Datasource\ConnectionManager;
+import uim.cake.datasources.ConnectionManager;
 use RuntimeException;
 
 /**
@@ -41,7 +41,7 @@ class SchemacacheClearCommand : Command
     function execute(Arguments $args, ConsoleIo $io): ?int
     {
         try {
-            /** @var \Cake\Database\Connection $connection */
+            /** @var uim.cake.Database\Connection $connection */
             $connection = ConnectionManager::get((string)$args.getOption("connection"));
 
             $cache = new SchemaCache($connection);

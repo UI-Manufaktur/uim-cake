@@ -55,21 +55,21 @@ trait ConsoleIntegrationTestTrait
     /**
      * Console output stub
      *
-     * @var \Cake\Console\TestSuite\StubConsoleOutput
+     * @var uim.cake.Console\TestSuite\StubConsoleOutput
      */
     protected $_out;
 
     /**
      * Console error output stub
      *
-     * @var \Cake\Console\TestSuite\StubConsoleOutput
+     * @var uim.cake.Console\TestSuite\StubConsoleOutput
      */
     protected $_err;
 
     /**
      * Console input mock
      *
-     * @var \Cake\Console\TestSuite\StubConsoleInput
+     * @var uim.cake.Console\TestSuite\StubConsoleInput
      */
     protected $_in;
 
@@ -274,7 +274,7 @@ trait ConsoleIntegrationTestTrait
      */
     protected function makeRunner() {
         if (_useCommandRunner) {
-            /** @var \Cake\Core\IConsoleApplication $app */
+            /** @var uim.cake.Core\IConsoleApplication $app */
             $app = this.createApp();
 
             return new CommandRunner($app);

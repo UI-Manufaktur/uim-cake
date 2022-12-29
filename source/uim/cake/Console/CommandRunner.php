@@ -36,14 +36,14 @@ class CommandRunner : EventDispatcherInterface
     /**
      * The application console commands are being run for.
      *
-     * @var \Cake\Core\IConsoleApplication
+     * @var uim.cake.Core\IConsoleApplication
      */
     protected $app;
 
     /**
      * The application console commands are being run for.
      *
-     * @var \Cake\Console\CommandFactoryInterface|null
+     * @var uim.cake.Console\CommandFactoryInterface|null
      */
     protected $factory;
 

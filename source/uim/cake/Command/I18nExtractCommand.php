@@ -393,7 +393,7 @@ class I18nExtractCommand : Command
      */
     protected function _extractTokens(Arguments $args, ConsoleIo $io): void
     {
-        /** @var \Cake\Shell\Helper\ProgressHelper $progress */
+        /** @var uim.cake.Shell\Helper\ProgressHelper $progress */
         $progress = $io.helper("progress");
         $progress.init(["total": count(_files)]);
         $isVerbose = $args.getOption("verbose");

@@ -25,7 +25,7 @@ use InvalidArgumentException;
 class CommandFactory : CommandFactoryInterface
 {
     /**
-     * @var \Cake\Core\IContainer|null
+     * @var uim.cake.Core\IContainer|null
      */
     protected $container;
 

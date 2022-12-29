@@ -29,7 +29,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * The command collection to get help on.
      *
-     * @var \Cake\Console\CommandCollection
+     * @var uim.cake.Console\CommandCollection
      */
     protected $commands;
 

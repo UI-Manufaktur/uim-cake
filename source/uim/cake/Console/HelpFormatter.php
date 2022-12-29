@@ -40,7 +40,7 @@ class HelpFormatter
     /**
      * Option parser.
      *
-     * @var \Cake\Console\ConsoleOptionParser
+     * @var uim.cake.Console\ConsoleOptionParser
      */
     protected $_parser;
 

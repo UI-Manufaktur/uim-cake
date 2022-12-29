@@ -24,7 +24,7 @@ class TaskRegistry : ObjectRegistry
     /**
      * Shell to use to set params to tasks.
      *
-     * @var \Cake\Console\Shell
+     * @var uim.cake.Console\Shell
      */
     protected $_Shell;
 
@@ -83,7 +83,7 @@ class TaskRegistry : ObjectRegistry
      */
     protected function _create($class, string $alias, array $config): Shell
     {
-        /** @var \Cake\Console\Shell */
+        /** @var uim.cake.Console\Shell */
         return new $class(_Shell.getIo());
     }
 }

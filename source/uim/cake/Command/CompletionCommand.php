@@ -25,7 +25,7 @@ use ReflectionMethod;
 class CompletionCommand : Command : CommandCollectionAwareInterface
 {
     /**
-     * @var \Cake\Console\CommandCollection
+     * @var uim.cake.Console\CommandCollection
      */
     protected $commands;
 

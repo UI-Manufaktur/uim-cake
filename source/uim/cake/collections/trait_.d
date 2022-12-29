@@ -221,12 +221,12 @@ trait CollectionTrait
         $callback = _propertyExtractor(myPath);
 
         $mapper = void (myValue, myKey, $mr) use ($callback) {
-            /** @var \Cake\collection.iIterator\MapReduce $mr */
+            /** @var uim.cake.collection.iIterator\MapReduce $mr */
             $mr.emitIntermediate(myValue, $callback(myValue));
         };
 
         $reducer = void (myValues, myKey, $mr) {
-            /** @var \Cake\collection.iIterator\MapReduce $mr */
+            /** @var uim.cake.collection.iIterator\MapReduce $mr */
             $mr.emit(count(myValues), myKey);
         };
 

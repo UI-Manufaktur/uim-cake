@@ -24,14 +24,14 @@ trait PluginAssetsTrait
     /**
      * Arguments
      *
-     * @var \Cake\Console\Arguments
+     * @var uim.cake.Console\Arguments
      */
     protected $args;
 
     /**
      * Console IO
      *
-     * @var \Cake\Console\ConsoleIo
+     * @var uim.cake.Console\ConsoleIo
      */
     protected $io;
 
