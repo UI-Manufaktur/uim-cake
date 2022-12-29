@@ -271,7 +271,7 @@ class ValuesExpression : IExpression
      *
      * @return void
      */
-    protected function _processExpressions(): void
+    protected void _processExpressions(): void
     {
         $types = [];
         $typeMap = this.getTypeMap();

@@ -58,7 +58,7 @@ trait StaticConfigTrait
      * @throws \LogicException When trying to store an invalid structured config array.
      * @return void
      */
-    static function setConfig($key, $config = null): void
+    static void setConfig($key, $config = null): void
     {
         if ($config == null) {
             if (!is_array($key)) {

@@ -113,7 +113,7 @@ class RequestHandlerComponent : Component
      * @param uim.cake.http.Response $response The response instance.
      * @return void
      */
-    protected function _setExtension(ServerRequest $request, Response $response): void
+    protected void _setExtension(ServerRequest $request, Response $response): void
     {
         $content = new ContentTypeNegotiation();
         $accept = $content.parseAccept($request);

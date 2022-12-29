@@ -19,7 +19,7 @@ class IntegerType : BaseType : BatchCastingInterface
      * @param mixed $value Value to check
      * @return void
      */
-    protected function checkNumeric($value): void
+    protected void checkNumeric($value): void
     {
         if (!is_numeric($value)) {
             throw new InvalidArgumentException(sprintf(

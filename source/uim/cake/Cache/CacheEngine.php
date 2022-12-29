@@ -344,7 +344,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param string $message The warning message.
      * @return void
      */
-    protected function warning(string $message): void
+    protected void warning(string $message): void
     {
         if (this.getConfig("warnOnWriteFailures") != true) {
             return;

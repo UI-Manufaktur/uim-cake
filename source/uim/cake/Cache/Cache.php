@@ -510,7 +510,7 @@ class Cache
      *
      * @return void
      */
-    static function enable(): void
+    static void enable()
     {
         static::$_enabled = true;
     }

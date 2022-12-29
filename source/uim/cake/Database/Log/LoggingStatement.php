@@ -115,7 +115,7 @@ class LoggingStatement : StatementDecorator
      *
      * @return void
      */
-    protected function _log(): void
+    protected void _log(): void
     {
         if (this.loggedQuery == null) {
             return;

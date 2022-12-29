@@ -222,7 +222,7 @@ class BasePlugin : PluginInterface
      * @throws \InvalidArgumentException on invalid hooks
      * @return void
      */
-    protected function checkHook(string $hook): void
+    protected void checkHook(string $hook): void
     {
         if (!in_array($hook, static::VALID_HOOKS, true)) {
             throw new InvalidArgumentException(

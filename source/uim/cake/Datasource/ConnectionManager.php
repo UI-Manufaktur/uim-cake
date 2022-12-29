@@ -146,7 +146,7 @@ class ConnectionManager
      * @param string $alias The alias name that resolves to `$source`.
      * @return void
      */
-    static function alias(string $source, string $alias): void
+    static void alias(string $source, string $alias): void
     {
         static::$_aliasMap[$alias] = $source;
     }
@@ -160,7 +160,7 @@ class ConnectionManager
      * @param string $alias The connection alias to drop
      * @return void
      */
-    static function dropAlias(string $alias): void
+    static void dropAlias(string $alias): void
     {
         unset(static::$_aliasMap[$alias]);
     }

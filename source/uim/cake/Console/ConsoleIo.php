@@ -117,7 +117,7 @@ class ConsoleIo
      * @param bool $value Value
      * @return void
      */
-    void setInteractive(bool $value): void
+    void setInteractive(bool $value)
     {
         this.interactive = $value;
     }
@@ -286,7 +286,7 @@ class ConsoleIo
      * @psalm-return never-return
      * @throws uim.cake.consoles.exceptions.StopException
      */
-    function abort($message, $code = ICommand::CODE_ERROR): void
+    void abort($message, $code = ICommand::CODE_ERROR)
     {
         this.error($message);
 
@@ -383,7 +383,7 @@ class ConsoleIo
      * @param int $width Width of the line, defaults to 79
      * @return void
      */
-    void hr(int $newlines = 0, int $width = 79): void
+    void hr(int $newlines = 0, int $width = 79)
     {
         this.out("", $newlines);
         this.out(str_repeat("-", $width));
@@ -409,7 +409,7 @@ class ConsoleIo
      * @return void
      * @see uim.cake.consoles.ConsoleOutput::setOutputAs()
      */
-    function setOutputAs(int $mode): void
+    void setOutputAs(int $mode)
     {
         _out.setOutputAs($mode);
     }
@@ -445,7 +445,7 @@ class ConsoleIo
      * @return void
      * @see uim.cake.consoles.ConsoleOutput::setStyle()
      */
-    function setStyle(string $style, array $definition): void
+    void setStyle(string $style, array $definition)
     {
         _out.setStyle($style, $definition);
     }
@@ -531,7 +531,7 @@ class ConsoleIo
      *   QUIET disables notice, info and debug logs.
      * @return void
      */
-    void setLoggers($enable): void
+    void setLoggers($enable)
     {
         Log::drop("stdout");
         Log::drop("stderr");

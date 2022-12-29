@@ -167,7 +167,7 @@ class SecurityComponent : Component
      * @throws uim.cake.http.exceptions.BadRequestException
      * @return void
      */
-    protected function _throwException(?SecurityException $exception = null): void
+    protected void _throwException(?SecurityException $exception = null): void
     {
         if ($exception != null) {
             if (!Configure::read("debug")) {

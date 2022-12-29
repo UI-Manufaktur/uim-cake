@@ -217,7 +217,7 @@ class Postgres : Driver
      * @param uim.cake.Database\Expression\IdentifierExpression $expression The expression to tranform.
      * @return void
      */
-    protected function _transformIdentifierExpression(IdentifierExpression $expression): void
+    protected void _transformIdentifierExpression(IdentifierExpression $expression): void
     {
         $collation = $expression.getCollation();
         if ($collation) {
@@ -234,7 +234,7 @@ class Postgres : Driver
      *   to postgres SQL.
      * @return void
      */
-    protected function _transformFunctionExpression(FunctionExpression $expression): void
+    protected void _transformFunctionExpression(FunctionExpression $expression): void
     {
         switch ($expression.getName()) {
             case "CONCAT":
@@ -297,7 +297,7 @@ class Postgres : Driver
      * @param uim.cake.Database\Expression\StringExpression $expression The string expression to tranform.
      * @return void
      */
-    protected function _transformStringExpression(StringExpression $expression): void
+    protected void _transformStringExpression(StringExpression $expression): void
     {
         // use trim() to work around expression being transformed multiple times
         $expression.setCollation(""" . trim($expression.getCollation(), """) . """);

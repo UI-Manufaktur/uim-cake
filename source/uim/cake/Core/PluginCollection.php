@@ -85,7 +85,7 @@ class PluginCollection : Iterator, Countable
      * @internal
      * @return void
      */
-    protected function loadConfig(): void
+    protected void loadConfig(): void
     {
         if (Configure::check("plugins")) {
             return;

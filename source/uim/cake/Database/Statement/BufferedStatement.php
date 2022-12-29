@@ -227,7 +227,7 @@ class BufferedStatement : Iterator, StatementInterface
      *
      * @return void
      */
-    protected function _reset(): void
+    protected void _reset(): void
     {
         this.buffer = [];
         _allFetched = false;

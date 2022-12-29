@@ -87,7 +87,7 @@ class IdentifierQuoter
      * @param uim.cake.Database\Query $query The query to quote.
      * @return void
      */
-    protected function _quoteParts(Query $query): void
+    protected void _quoteParts(Query $query): void
     {
         foreach (["distinct", "select", "from", "group"] as $part) {
             $contents = $query.clause($part);
@@ -160,7 +160,7 @@ class IdentifierQuoter
      * @param uim.cake.Database\Query $query The insert query to quote.
      * @return void
      */
-    protected function _quoteInsert(Query $query): void
+    protected void _quoteInsert(Query $query): void
     {
         $insert = $query.clause("insert");
         if (!isset($insert[0]) || !isset($insert[1])) {
@@ -182,7 +182,7 @@ class IdentifierQuoter
      * @param uim.cake.Database\Query $query The update query to quote.
      * @return void
      */
-    protected function _quoteUpdate(Query $query): void
+    protected void _quoteUpdate(Query $query): void
     {
         $table = $query.clause("update")[0];
 
@@ -197,7 +197,7 @@ class IdentifierQuoter
      * @param uim.cake.Database\Expression\FieldInterface $expression The expression to quote.
      * @return void
      */
-    protected function _quoteComparison(FieldInterface $expression): void
+    protected void _quoteComparison(FieldInterface $expression): void
     {
         $field = $expression.getField();
         if (is_string($field)) {
@@ -222,7 +222,7 @@ class IdentifierQuoter
      * @param uim.cake.Database\Expression\OrderByExpression $expression The expression to quote.
      * @return void
      */
-    protected function _quoteOrderBy(OrderByExpression $expression): void
+    protected void _quoteOrderBy(OrderByExpression $expression): void
     {
         $expression.iterateParts(function ($part, &$field) {
             if (is_string($field)) {
@@ -244,7 +244,7 @@ class IdentifierQuoter
      * @param uim.cake.Database\Expression\IdentifierExpression $expression The identifiers to quote.
      * @return void
      */
-    protected function _quoteIdentifierExpression(IdentifierExpression $expression): void
+    protected void _quoteIdentifierExpression(IdentifierExpression $expression): void
     {
         $expression.setIdentifier(
             _driver.quoteIdentifier($expression.getIdentifier())

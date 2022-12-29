@@ -95,7 +95,7 @@ class CaseExpression : IExpression
      * @param array<string> $types Associative array of types to be associated with the values
      * @return void
      */
-    protected function _addExpressions(array $conditions, array $values, array $types): void
+    protected void _addExpressions(array $conditions, array $values, array $types): void
     {
         $rawValues = array_values($values);
         $keyValues = array_keys($values);

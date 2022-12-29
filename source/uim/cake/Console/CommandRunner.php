@@ -174,7 +174,7 @@ class CommandRunner : EventDispatcherInterface
      *
      * @return void
      */
-    protected function bootstrap(): void
+    protected void bootstrap()
     {
         this.app.bootstrap();
         if (this.app instanceof IPluginApplication) {
@@ -367,7 +367,7 @@ class CommandRunner : EventDispatcherInterface
      *
      * @return void
      */
-    protected function loadRoutes(): void
+    protected void loadRoutes()
     {
         if (!(this.app instanceof IRoutingApplication)) {
             return;

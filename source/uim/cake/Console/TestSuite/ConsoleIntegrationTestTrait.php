@@ -82,7 +82,7 @@ trait ConsoleIntegrationTestTrait
      * @throws \RuntimeException
      * @return void
      */
-    void exec(string $command, array $input = []): void
+    void exec(string $command, array $input = [])
     {
         $runner = this.makeRunner();
 
@@ -121,7 +121,7 @@ trait ConsoleIntegrationTestTrait
      * @return void
      * @psalm-suppress PossiblyNullPropertyAssignmentValue
      */
-    function cleanupConsoleTrait(): void
+    void cleanupConsoleTrait()
     {
         _exitCode = null;
         _out = null;
@@ -136,7 +136,7 @@ trait ConsoleIntegrationTestTrait
      *
      * @return void
      */
-    void useCommandRunner(): void
+    void useCommandRunner()
     {
         _useCommandRunner = true;
     }
@@ -203,7 +203,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    void assertOutputNotContains(string $expected, string $message = ""): void
+    void assertOutputNotContains(string $expected, string $message = "")
     {
         this.assertThat($expected, new ContentsNotContain(_out.messages(), "output"), $message);
     }
@@ -215,7 +215,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    void assertOutputRegExp(string $pattern, string $message = ""): void
+    void assertOutputRegExp(string $pattern, string $message = "")
     {
         this.assertThat($pattern, new ContentsRegExp(_out.messages(), "output"), $message);
     }
@@ -227,7 +227,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message.
      * @return void
      */
-    protected function assertOutputContainsRow(array $row, string $message = ""): void
+    protected void assertOutputContainsRow(array $row, string $message = ""): void
     {
         this.assertThat($row, new ContentsContainRow(_out.messages(), "output"), $message);
     }

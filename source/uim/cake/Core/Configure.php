@@ -231,7 +231,7 @@ class Configure
      * @param uim.cake.Core\Configure\ConfigEngineInterface $engine The engine to append.
      * @return void
      */
-    static function config(string $name, ConfigEngineInterface $engine): void
+    static void config(string $name, ConfigEngineInterface $engine): void
     {
         static::$_engines[$name] = $engine;
     }
@@ -463,7 +463,7 @@ class Configure
      *
      * @return void
      */
-    static function clear(): void
+    static void clear(): void
     {
         static::$_values = [];
     }

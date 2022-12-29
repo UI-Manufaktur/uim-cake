@@ -289,7 +289,7 @@ class ConsoleOutput
      * @param array $definition The array definition of the style to change or create..
      * @return void
      */
-    void setStyle(string $style, array $definition): void
+    void setStyle(string $style, array $definition)
     {
         if (!$definition) {
             unset(static::$_styles[$style]);
@@ -327,7 +327,7 @@ class ConsoleOutput
      * @return void
      * @throws \InvalidArgumentException in case of a not supported output type.
      */
-    function setOutputAs(int $type): void
+    void setOutputAs(int $type)
     {
         if (!in_array($type, [self::RAW, self::PLAIN, self::COLOR], true)) {
             throw new InvalidArgumentException(sprintf("Invalid output type "%s".", $type));
@@ -336,9 +336,7 @@ class ConsoleOutput
         _outputAs = $type;
     }
 
-    /**
-     * Clean up and close handles
-     */
+    // Clean up and close handles
     function __destruct() {
         if (is_resource(_output)) {
             fclose(_output);

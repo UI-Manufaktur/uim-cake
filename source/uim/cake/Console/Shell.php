@@ -224,7 +224,7 @@ class Shell
      * @param uim.cake.consoles.ConsoleIo $io The ConsoleIo object to use.
      * @return void
      */
-    void setIo(ConsoleIo $io): void
+    void setIo(ConsoleIo $io)
     {
         _io = $io;
     }
@@ -237,7 +237,7 @@ class Shell
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::initialize
      */
-    function initialize(): void
+    void initialize()
     {
         this.loadTasks();
     }
@@ -252,7 +252,7 @@ class Shell
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Cake\Console\ConsoleOptionParser::startup
      */
-    function startup(): void
+    void startup()
     {
         if (!this.param("requested")) {
             _welcome();
@@ -264,7 +264,7 @@ class Shell
      *
      * @return void
      */
-    protected function _welcome(): void
+    protected void _welcome()
     {
     }
 
@@ -291,7 +291,7 @@ class Shell
      * @throws \RuntimeException
      * @return void
      */
-    protected function _validateTasks(): void
+    protected void _validateTasks()
     {
         foreach (_taskMap as $taskName: $task) {
             $class = App::className($task["class"], "Shell/Task", "Task");
@@ -518,7 +518,7 @@ class Shell
      *
      * @return void
      */
-    protected function _setOutputLevel(): void
+    protected void _setOutputLevel()
     {
         _io.setLoggers(ConsoleIo::NORMAL);
         if (!empty(this.params["quiet"])) {
@@ -762,7 +762,7 @@ class Shell
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::hr
      */
-    function hr(int $newlines = 0, int $width = 63): void
+    void hr(int $newlines = 0, int $width = 63)
     {
         _io.hr($newlines, $width);
     }
@@ -778,7 +778,7 @@ class Shell
      * @link https://book.cakephp.org/4/en/console-and-shells.html#styling-output
      * @psalm-return never-return
      */
-    function abort(string $message, int $exitCode = self::CODE_ERROR): void
+    void abort(string $message, int $exitCode = self::CODE_ERROR)
     {
         _io.err("<error>" . $message . "</error>");
         throw new StopException($message, $exitCode);
@@ -790,7 +790,7 @@ class Shell
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#console-output
      */
-    function clear(): void
+    void clear()
     {
         if (!empty(this.params["noclear"])) {
             return;
@@ -899,7 +899,7 @@ class Shell
      * @throws uim.cake.consoles.exceptions.StopException
      * @return void
      */
-    protected function _stop(int $status = self::CODE_SUCCESS): void
+    protected void _stop(int $status = self::CODE_SUCCESS)
     {
         throw new StopException("Halting error reached", $status);
     }

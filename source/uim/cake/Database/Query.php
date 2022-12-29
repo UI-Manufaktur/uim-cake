@@ -2029,7 +2029,7 @@ class Query : IExpression, IteratorAggregate
      *   found inside this query.
      * @return void
      */
-    protected function _expressionsVisitor($expression, Closure $callback): void
+    protected void _expressionsVisitor($expression, Closure $callback): void
     {
         if (is_array($expression)) {
             foreach ($expression as $e) {
@@ -2263,7 +2263,7 @@ class Query : IExpression, IteratorAggregate
      * @param array<string, string> $types Associative array of type names used to bind values to query
      * @return void
      */
-    protected function _conjugate(string $part, $append, $conjunction, array $types): void
+    protected void _conjugate(string $part, $append, $conjunction, array $types): void
     {
         $expression = _parts[$part] ?: this.newExpr();
         if (empty($append)) {
@@ -2294,7 +2294,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @return void
      */
-    protected function _dirty(): void
+    protected void _dirty(): void
     {
         _dirty = true;
 

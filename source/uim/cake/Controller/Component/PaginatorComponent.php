@@ -251,7 +251,7 @@ class PaginatorComponent : Component
      *
      * @return void
      */
-    protected function _setPagingParams(): void
+    protected void _setPagingParams(): void
     {
         $controller = this.getController();
         $request = $controller.getRequest();

@@ -187,7 +187,7 @@ class TupleComparison : ComparisonExpression
      * @param \Closure $callback The callable to use when traversing
      * @return void
      */
-    protected function _traverseValue($value, Closure $callback): void
+    protected void _traverseValue($value, Closure $callback): void
     {
         if ($value instanceof IExpression) {
             $callback($value);

@@ -435,7 +435,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @return void
      */
-    protected function _setDefaults(): void
+    protected void _setDefaults(): void
     {
         $defaults = [
             'authenticate': ['Form'],

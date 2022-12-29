@@ -658,7 +658,7 @@ class QueryExpression : IExpression, Countable
      * @param array<int|string, string> $types list of types associated on fields referenced in $conditions
      * @return void
      */
-    protected function _addConditions(array $conditions, array $types): void
+    protected void _addConditions(array $conditions, array $types): void
     {
         $operators = ["and", "or", "xor"];
 

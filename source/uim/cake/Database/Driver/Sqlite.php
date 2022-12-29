@@ -261,7 +261,7 @@ class Sqlite : Driver
      * @param uim.cake.Database\Expression\FunctionExpression $expression The function expression to convert to TSQL.
      * @return void
      */
-    protected function _transformFunctionExpression(FunctionExpression $expression): void
+    protected void _transformFunctionExpression(FunctionExpression $expression): void
     {
         switch ($expression.getName()) {
             case "CONCAT":

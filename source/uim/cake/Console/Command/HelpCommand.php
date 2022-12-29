@@ -70,7 +70,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      * @param iterable $commands The command collection to output.
      * @return void
      */
-    protected function asText(ConsoleIo $io, iterable $commands): void
+    protected void asText(ConsoleIo $io, iterable $commands): void
     {
         $invert = [];
         foreach ($commands as $name: $class) {
@@ -135,7 +135,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      * @param uim.cake.consoles.ConsoleIo $io IO object.
      * @return void
      */
-    protected function outputPaths(ConsoleIo $io): void
+    protected void outputPaths(ConsoleIo $io): void
     {
         $paths = [];
         if (Configure::check("App.dir")) {
@@ -183,7 +183,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      * @param iterable $commands The command collection to output
      * @return void
      */
-    protected function asXml(ConsoleIo $io, iterable $commands): void
+    protected void asXml(ConsoleIo $io, iterable $commands): void
     {
         $shells = new SimpleXMLElement("<shells></shells>");
         foreach ($commands as $name: $class) {

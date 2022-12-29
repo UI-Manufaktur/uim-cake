@@ -102,7 +102,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    static function resetAliases(): void
+    static void resetAliases()
     {
         static::$_aliases = [];
     }
@@ -127,7 +127,7 @@ class ShellDispatcher
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException
      */
-    protected function _initEnvironment(): void
+    protected void _initEnvironment()
     {
         _bootstrap();
 
@@ -145,7 +145,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    protected function _bootstrap() {
+    protected void _bootstrap() {
         if (!Configure::read("App.fullBaseUrl")) {
             Configure::write("App.fullBaseUrl", "http://localhost");
         }
@@ -386,7 +386,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    void help(): void
+    void help()
     {
         trigger_error(
             "Console help cannot be generated from Shell classes anymore. " .
@@ -400,7 +400,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    void version(): void
+    void version()
     {
         trigger_error(
             "Version information cannot be generated from Shell classes anymore. " .
