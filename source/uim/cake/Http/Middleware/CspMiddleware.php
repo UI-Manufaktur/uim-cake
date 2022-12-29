@@ -4,7 +4,7 @@
  *
 
 
- * @since         4.0.0
+
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
 
