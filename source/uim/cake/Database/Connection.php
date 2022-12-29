@@ -169,7 +169,7 @@ class Connection : ConnectionInterface
      * Sets the driver instance. If a string is passed it will be treated
      * as a class name and will be instantiated.
      *
-     * @param \Cake\Database\DriverInterface|string $driver The driver instance to use.
+     * @param uim.cake.Database\DriverInterface|string $driver The driver instance to use.
      * @param array<string, mixed> $config Config for a new driver.
      * @throws \Cake\Database\Exception\MissingDriverException When a driver class is missing.
      * @throws \Cake\Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
@@ -187,7 +187,7 @@ class Connection : ConnectionInterface
     /**
      * Creates driver from name, class name or instance.
      *
-     * @param \Cake\Database\DriverInterface|string $name Driver name, class name or instance.
+     * @param uim.cake.Database\DriverInterface|string $name Driver name, class name or instance.
      * @param array $config Driver config if $name is not an instance.
      * @return \Cake\Database\DriverInterface
      * @throws \Cake\Database\Exception\MissingDriverException When a driver class is missing.
@@ -280,7 +280,7 @@ class Connection : ConnectionInterface
     /**
      * Prepares a SQL statement to be executed.
      *
-     * @param \Cake\Database\Query|string $query The SQL to convert into a prepared statement.
+     * @param uim.cake.Database\Query|string $query The SQL to convert into a prepared statement.
      * @return \Cake\Database\StatementInterface
      */
     function prepare($query): StatementInterface
@@ -322,8 +322,8 @@ class Connection : ConnectionInterface
      * Compiles a Query object into a SQL string according to the dialect for this
      * connection's driver
      *
-     * @param \Cake\Database\Query $query The query to be compiled
-     * @param \Cake\Database\ValueBinder $binder Value binder
+     * @param uim.cake.Database\Query $query The query to be compiled
+     * @param uim.cake.Database\ValueBinder $binder Value binder
      * @return string
      */
     function compileQuery(Query $query, ValueBinder $binder): string
@@ -335,7 +335,7 @@ class Connection : ConnectionInterface
      * Executes the provided query after compiling it for the specific driver
      * dialect and returns the executed Statement object.
      *
-     * @param \Cake\Database\Query $query The query to be executed
+     * @param uim.cake.Database\Query $query The query to be executed
      * @return \Cake\Database\StatementInterface executed statement
      */
     function run(Query $query): StatementInterface
@@ -378,7 +378,7 @@ class Connection : ConnectionInterface
     /**
      * Sets a Schema\Collection object for this connection.
      *
-     * @param \Cake\Database\Schema\ICollection $collection The schema collection object
+     * @param uim.cake.Database\Schema\ICollection $collection The schema collection object
      * @return this
      */
     function setSchemaCollection(SchemaICollection $collection) {
@@ -749,7 +749,7 @@ class Connection : ConnectionInterface
      * This uses `PDO::quote()` and requires `supportsQuoting()` to work.
      *
      * @param mixed $value The value to quote.
-     * @param \Cake\Database\TypeInterface|string|int $type Type to be used for determining kind of quoting to perform
+     * @param uim.cake.Database\TypeInterface|string|int $type Type to be used for determining kind of quoting to perform
      * @return string Quoted value
      */
     function quote($value, $type = 'string'): string
@@ -916,7 +916,7 @@ class Connection : ConnectionInterface
      * Returns a new statement object that will log the activity
      * for the passed original statement instance.
      *
-     * @param \Cake\Database\StatementInterface $statement the instance to be decorated
+     * @param uim.cake.Database\StatementInterface $statement the instance to be decorated
      * @return \Cake\Database\Log\LoggingStatement
      */
     protected function _newLogger(StatementInterface $statement): LoggingStatement

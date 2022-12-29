@@ -223,7 +223,7 @@ class Configure
      *
      * @param string myName The name of the engine being configured. This alias is used later to
      *   read values from a specific engine.
-     * @param \Cake\Core\Configure\IConfigEngine $engine The engine to append.
+     * @param uim.cake.Core\Configure\IConfigEngine $engine The engine to append.
      */
     static void config(string myName, IConfigEngine $engine) {
         static::$_engines[myName] = $engine;

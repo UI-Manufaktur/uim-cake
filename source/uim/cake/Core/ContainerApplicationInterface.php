@@ -21,7 +21,7 @@ interface IContainerApplication
      * using `get()`. Dependencies and parameters will be resolved based
      * on service definitions.
      *
-     * @param \Cake\Core\IContainer $container The container to add services to
+     * @param uim.cake.Core\IContainer $container The container to add services to
      * @return void
      */
     function services(IContainer $container): void;

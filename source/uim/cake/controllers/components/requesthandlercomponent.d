@@ -54,7 +54,7 @@ class RequestHandlerComponent : Component {
     /**
      * Constructor. Parses the accepted content types accepted by the client using HTTP_ACCEPT
      *
-     * @param \Cake\Controller\ComponentRegistry $registry ComponentRegistry object.
+     * @param uim.cake.Controller\ComponentRegistry $registry ComponentRegistry object.
      * @param array<string, mixed> myConfig Array of config.
      */
     this(ComponentRegistry $registry, array myConfig = []) {
@@ -92,8 +92,8 @@ class RequestHandlerComponent : Component {
      * If html is one of the preferred types, no content type will be set, this
      * is to avoid issues with browsers that prefer HTML and several other content types.
      *
-     * @param \Cake\Http\ServerRequest myRequest The request instance.
-     * @param \Cake\Http\Response $response The response instance.
+     * @param uim.cake.Http\ServerRequest myRequest The request instance.
+     * @param uim.cake.Http\Response $response The response instance.
      */
     protected void _setExtension(ServerRequest myRequest, Response $response) {
         $accept = myRequest.parseAccept();
@@ -127,7 +127,7 @@ class RequestHandlerComponent : Component {
      * If the XML data is POSTed, the data is parsed into an XML object, which is assigned
      * to the myData property of the controller, which can then be saved to a model object.
      *
-     * @param \Cake\Event\IEvent myEvent The startup event that was fired.
+     * @param uim.cake.Event\IEvent myEvent The startup event that was fired.
      */
     void startup(IEvent myEvent) {
         $controller = this.getController();
@@ -167,7 +167,7 @@ class RequestHandlerComponent : Component {
      * - If the extension is of a type that RequestHandler understands, it will
      *   set that Content-type in the response header.
      *
-     * @param \Cake\Event\IEvent myEvent The Controller.beforeRender event.
+     * @param uim.cake.Event\IEvent myEvent The Controller.beforeRender event.
      * @throws \Cake\Http\Exception\NotFoundException If invoked extension is not configured.
      */
     void beforeRender(IEvent myEvent) {
@@ -362,10 +362,10 @@ class RequestHandlerComponent : Component {
      * this.RequestHandler.renderAs(this, "xml", ["attachment":"myfile.xml"];
      * ```
      *
-     * @param \Cake\Controller\Controller $controller A reference to a controller object
+     * @param uim.cake.Controller\Controller $controller A reference to a controller object
      * @param string myType Type of response to send (e.g: "ajax")
      * @param array<string, mixed> myOptions Array of options to use
-     * @see uim.cake.Controller\Component\RequestHandlerComponent::respondAs()
+     * @see uim.cake.controllers.Component\RequestHandlerComponent::respondAs()
      */
     void renderAs(Controller $controller, string myType, array myOptions = []) {
         $defaults = ["charset":"UTF-8"];

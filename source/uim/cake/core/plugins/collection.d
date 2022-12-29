@@ -112,7 +112,7 @@ class PluginCollection : Iterator, Countable
      *
      * Plugins will be keyed by their names.
      *
-     * @param \Cake\Core\IPlugin myPlugin The plugin to load.
+     * @param uim.cake.Core\IPlugin myPlugin The plugin to load.
      * @return this
      */
     function add(IPlugin myPlugin) {

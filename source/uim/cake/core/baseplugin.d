@@ -195,7 +195,7 @@ class BasePlugin : IPlugin {
     /**
      * Register container services for this plugin.
      *
-     * @param \Cake\Core\IContainer myContainer The container to add services to.
+     * @param uim.cake.Core\IContainer myContainer The container to add services to.
      */
     void services(IContainer myContainer) {
     }

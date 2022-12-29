@@ -29,7 +29,7 @@ interface IPluginApplication : EventDispatcherInterface
      * instance of `Cake\Core\BasePlugin` will be used. This generated class will have
      * all plugin hooks enabled.
      *
-     * @param \Cake\Core\PluginInterface|string $name The plugin name or plugin object.
+     * @param uim.cake.Core\PluginInterface|string $name The plugin name or plugin object.
      * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
      * @return this
      */
@@ -45,7 +45,7 @@ interface IPluginApplication : EventDispatcherInterface
     /**
      * Run routes hooks for loaded plugins
      *
-     * @param \Cake\Routing\RouteBuilder $routes The route builder to use.
+     * @param uim.cake.Routing\RouteBuilder $routes The route builder to use.
      * @return \Cake\Routing\RouteBuilder
      */
     function pluginRoutes(RouteBuilder $routes): RouteBuilder;
@@ -53,7 +53,7 @@ interface IPluginApplication : EventDispatcherInterface
     /**
      * Run middleware hooks for plugins
      *
-     * @param \Cake\Http\MiddlewareQueue $middleware The MiddlewareQueue to use.
+     * @param uim.cake.Http\MiddlewareQueue $middleware The MiddlewareQueue to use.
      * @return \Cake\Http\MiddlewareQueue
      */
     function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue;
@@ -61,7 +61,7 @@ interface IPluginApplication : EventDispatcherInterface
     /**
      * Run console hooks for plugins
      *
-     * @param \Cake\Console\CommandCollection $commands The CommandCollection to use.
+     * @param uim.cake.Console\CommandCollection $commands The CommandCollection to use.
      * @return \Cake\Console\CommandCollection
      */
     function pluginConsole(CommandCollection $commands): CommandCollection;

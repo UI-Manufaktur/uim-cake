@@ -53,8 +53,8 @@ class FieldTypeConverter
     /**
      * Builds the type map
      *
-     * @param \Cake\Database\TypeMap $typeMap Contains the types to use for converting results
-     * @param \Cake\Database\DriverInterface $driver The driver to use for the type conversion
+     * @param uim.cake.Database\TypeMap $typeMap Contains the types to use for converting results
+     * @param uim.cake.Database\DriverInterface $driver The driver to use for the type conversion
      */
     public this(TypeMap $typeMap, DriverInterface $driver) {
         _driver = $driver;

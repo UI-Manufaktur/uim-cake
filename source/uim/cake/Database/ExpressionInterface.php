@@ -19,7 +19,7 @@ interface IExpression
     /**
      * Converts the Node into a SQL string fragment.
      *
-     * @param \Cake\Database\ValueBinder $binder Parameter binder
+     * @param uim.cake.Database\ValueBinder $binder Parameter binder
      * @return string
      */
     function sql(ValueBinder $binder): string;

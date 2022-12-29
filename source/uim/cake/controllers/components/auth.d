@@ -167,7 +167,7 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Storage object.
      *
-     * @var uim.cake.Auth\Storage\IStorage|null
+     * @var uim.cake.auths.Storage\IStorage|null
      */
     protected _storage;
 
@@ -175,7 +175,7 @@ class AuthComponent : Component : IEventDispatcher
      * Controller actions for which user validation is not required.
      *
      * @var array<string>
-     * @see uim.cake.Controller\Component\AuthComponent::allow()
+     * @see uim.cake.controllers.Component\AuthComponent::allow()
      */
     public $allowedActions = [];
 
@@ -184,7 +184,7 @@ class AuthComponent : Component : IEventDispatcher
      * successfully logging in the current user after calling `login()`
      * in the same request
      *
-     * @var uim.cake.Auth\BaseAuthenticate|null
+     * @var uim.cake.auths.BaseAuthenticate|null
      */
     protected _authenticationProvider;
 
@@ -192,7 +192,7 @@ class AuthComponent : Component : IEventDispatcher
      * The instance of the Authorize provider that was used to grant
      * access to the current user to the URL they are requesting.
      *
-     * @var uim.cake.Auth\BaseAuthorize|null
+     * @var uim.cake.auths.BaseAuthorize|null
      */
     protected _authorizationProvider;
 
@@ -209,7 +209,7 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Callback for Controller.startup event.
      *
-     * @param \Cake\Event\IEvent myEvent Event instance.
+     * @param uim.cake.Event\IEvent myEvent Event instance.
      * @return \Cake\Http\Response|null
      */
     function startup(IEvent myEvent): ?Response
@@ -224,7 +224,7 @@ class AuthComponent : Component : IEventDispatcher
      * The auth check is done when event name is same as the one configured in
      * `checkAuthIn` config.
      *
-     * @param \Cake\Event\IEvent myEvent Event instance.
+     * @param uim.cake.Event\IEvent myEvent Event instance.
      * @return \Cake\Http\Response|null
      * @throws \ReflectionException
      */
@@ -234,7 +234,7 @@ class AuthComponent : Component : IEventDispatcher
             return null;
         }
 
-        /** @var uim.cake.Controller\Controller $controller */
+        /** @var uim.cake.controllers.Controller $controller */
         $controller = myEvent.getSubject();
 
         $action = $controller.getRequest().getParam("action");
@@ -290,7 +290,7 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Checks whether current action is accessible without authentication.
      *
-     * @param \Cake\Controller\Controller $controller A reference to the instantiating
+     * @param uim.cake.Controller\Controller $controller A reference to the instantiating
      *   controller object
      * @return bool True if action is accessible without authentication else false
      */
@@ -307,7 +307,7 @@ class AuthComponent : Component : IEventDispatcher
      * indicate no further action is necessary. If authenticator returns null this
      * method redirects user to login action.
      *
-     * @param \Cake\Controller\Controller $controller A reference to the controller object.
+     * @param uim.cake.Controller\Controller $controller A reference to the controller object.
      * @return \Cake\Http\Response|null Null if current action is login action
      *   else response object returned by authenticate object or Controller::redirect().
      * @throws \Cake\Core\Exception\CakeException
@@ -364,7 +364,7 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Normalizes config `loginAction` and checks if current request URL is same as login action.
      *
-     * @param \Cake\Controller\Controller $controller A reference to the controller object.
+     * @param uim.cake.Controller\Controller $controller A reference to the controller object.
      * @return bool True if current action is login action else false.
      */
     protected bool _isLoginAction(Controller $controller) {
@@ -378,7 +378,7 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Handle unauthorized access attempt
      *
-     * @param \Cake\Controller\Controller $controller A reference to the controller object
+     * @param uim.cake.Controller\Controller $controller A reference to the controller object
      * @return \Cake\Http\Response|null
      * @throws \Cake\Http\Exception\ForbiddenException
      */
@@ -444,7 +444,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @param \ArrayAccess|array|null myUser The user to check the authorization of.
      *   If empty the user fetched from storage will be used.
-     * @param \Cake\Http\ServerRequest|null myRequest The request to authenticate for.
+     * @param uim.cake.Http\ServerRequest|null myRequest The request to authenticate for.
      *   If empty, the current request will be used.
      * @return bool True if myUser is authorized, otherwise false
      */
@@ -570,7 +570,7 @@ class AuthComponent : Component : IEventDispatcher
      * to remove all items from the allowed list
      *
      * @param array<string>|string|null $actions Controller action name or array of actions
-     * @see uim.cake.Controller\Component\AuthComponent::allow()
+     * @see uim.cake.controllers.Component\AuthComponent::allow()
      * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
     void deny($actions = null) {
@@ -799,7 +799,7 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Get/set user record storage object.
      *
-     * @param \Cake\Auth\Storage\IStorage|null $storage Sets provided
+     * @param uim.cake.Auth\Storage\IStorage|null $storage Sets provided
      *   object as storage or if null returns configured storage object.
      * @return \Cake\Auth\Storage\IStorage|null
      */
@@ -829,7 +829,7 @@ class AuthComponent : Component : IEventDispatcher
         }
         myRequest = this.getController().getRequest();
         $response = this.getController().getResponse();
-        /** @var uim.cake.Auth\Storage\IStorage $storage */
+        /** @var uim.cake.auths.Storage\IStorage $storage */
         $storage = new myClassName(myRequest, $response, myConfig);
 
         return _storage = $storage;

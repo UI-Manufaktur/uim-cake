@@ -112,7 +112,7 @@ interface DriverInterface
     /**
      * Prepares a sql statement to be executed.
      *
-     * @param \Cake\Database\Query|string $query The query to turn into a prepared statement.
+     * @param uim.cake.Database\Query|string $query The query to turn into a prepared statement.
      * @return \Cake\Database\StatementInterface
      */
     function prepare($query): StatementInterface;
@@ -302,8 +302,8 @@ interface DriverInterface
      * Transforms the passed query to this Driver"s dialect and returns an instance
      * of the transformed query and the full compiled SQL string.
      *
-     * @param \Cake\Database\Query $query The query to compile.
-     * @param \Cake\Database\ValueBinder $binder The value binder to use.
+     * @param uim.cake.Database\Query $query The query to compile.
+     * @param uim.cake.Database\ValueBinder $binder The value binder to use.
      * @return array containing 2 entries. The first entity is the transformed query
      * and the second one the compiled SQL.
      */

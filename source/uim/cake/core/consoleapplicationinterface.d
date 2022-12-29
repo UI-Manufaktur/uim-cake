@@ -19,7 +19,7 @@ interface IConsoleApplication
     /**
      * Define the console commands for an application.
      *
-     * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
+     * @param uim.cake.Console\CommandCollection $commands The CommandCollection to add commands into.
      * @return \Cake\Console\CommandCollection The updated collection.
      */
     CommandCollection console(CommandCollection $commands);

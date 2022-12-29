@@ -76,7 +76,7 @@ interface PluginInterface
      * The host application is provided as an argument. This allows you to load additional
      * plugin dependencies, or attach events.
      *
-     * @param \Cake\Core\IPluginApplication $app The host application
+     * @param uim.cake.Core\IPluginApplication $app The host application
      * @return void
      */
     function bootstrap(IPluginApplication $app): void;
@@ -84,7 +84,7 @@ interface PluginInterface
     /**
      * Add console commands for the plugin.
      *
-     * @param \Cake\Console\CommandCollection $commands The command collection to update
+     * @param uim.cake.Console\CommandCollection $commands The command collection to update
      * @return \Cake\Console\CommandCollection
      */
     function console(CommandCollection $commands): CommandCollection;
@@ -92,7 +92,7 @@ interface PluginInterface
     /**
      * Add middleware for the plugin.
      *
-     * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to update.
+     * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to update.
      * @return \Cake\Http\MiddlewareQueue
      */
     function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
@@ -103,7 +103,7 @@ interface PluginInterface
      * The default implementation of this method will include the `config/routes.php` in the plugin if it exists. You
      * can override this method to replace that behavior.
      *
-     * @param \Cake\Routing\RouteBuilder $routes The route builder to update.
+     * @param uim.cake.Routing\RouteBuilder $routes The route builder to update.
      * @return void
      */
     function routes(RouteBuilder $routes): void;

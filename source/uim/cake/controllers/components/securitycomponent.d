@@ -58,12 +58,12 @@ class SecurityComponent : Component {
     /**
      * Component startup. All security checking happens here.
      *
-     * @param \Cake\Event\IEvent myEvent An Event instance
+     * @param uim.cake.Event\IEvent myEvent An Event instance
      * @return \Cake\Http\Response|null
      */
     function startup(IEvent myEvent): ?Response
     {
-        /** @var uim.cake.Controller\Controller $controller */
+        /** @var uim.cake.controllers.Controller $controller */
         $controller = myEvent.getSubject();
         myRequest = $controller.getRequest();
         _action = myRequest.getParam("action");
@@ -123,11 +123,11 @@ class SecurityComponent : Component {
      * Black-hole an invalid request with a 400 error or custom callback. If SecurityComponent::$blackHoleCallback
      * is specified, it will use this callback by executing the method indicated in myError
      *
-     * @param \Cake\Controller\Controller $controller Instantiating controller
+     * @param uim.cake.Controller\Controller $controller Instantiating controller
      * @param string myError Error method
-     * @param \Cake\Controller\Exception\SecurityException|null myException Additional debug info describing the cause
+     * @param uim.cake.Controller\Exception\SecurityException|null myException Additional debug info describing the cause
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
-     * @see uim.cake.Controller\Component\SecurityComponent::$blackHoleCallback
+     * @see uim.cake.controllers.Component\SecurityComponent::$blackHoleCallback
      * @link https://book.UIM.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
      * @throws \Cake\Http\Exception\BadRequestException
      */
@@ -142,7 +142,7 @@ class SecurityComponent : Component {
     /**
      * Check debug status and throw an Exception based on the existing one
      *
-     * @param \Cake\Controller\Exception\SecurityException|null myException Additional debug info describing the cause
+     * @param uim.cake.Controller\Exception\SecurityException|null myException Additional debug info describing the cause
      * @throws \Cake\Http\Exception\BadRequestException
      */
     protected void _throwException(?SecurityException myException = null) {
@@ -159,7 +159,7 @@ class SecurityComponent : Component {
     /**
      * Check if access requires secure connection
      *
-     * @param \Cake\Controller\Controller $controller Instantiating controller
+     * @param uim.cake.Controller\Controller $controller Instantiating controller
      * @throws \Cake\Controller\Exception\SecurityException
      */
     protected void _secureRequired(Controller $controller) {
@@ -186,7 +186,7 @@ class SecurityComponent : Component {
     /**
      * Validate submitted form
      *
-     * @param \Cake\Controller\Controller $controller Instantiating controller
+     * @param uim.cake.Controller\Controller $controller Instantiating controller
      * @throws \Cake\Controller\Exception\AuthSecurityException
      */
     protected void _validatePost(Controller $controller) {
@@ -209,7 +209,7 @@ class SecurityComponent : Component {
     /**
      * Check if token is valid
      *
-     * @param \Cake\Controller\Controller $controller Instantiating controller
+     * @param uim.cake.Controller\Controller $controller Instantiating controller
      * @throws \Cake\Controller\Exception\SecurityException
      * @return string fields token
      */
@@ -246,7 +246,7 @@ class SecurityComponent : Component {
 
     /**
      * Return hash parts for the Token generation
-     * @param \Cake\Controller\Controller $controller Instantiating controller
+     * @param uim.cake.Controller\Controller $controller Instantiating controller
      */
     protected string[] _hashParts(Controller $controller) {
         myRequest = $controller.getRequest();
@@ -365,7 +365,7 @@ class SecurityComponent : Component {
     /**
      * Create a message for humans to understand why Security token is not matching
      *
-     * @param \Cake\Controller\Controller $controller Instantiating controller
+     * @param uim.cake.Controller\Controller $controller Instantiating controller
      * @param $hashParts Elements used to generate the Token hash
      * @return string Message explaining why the tokens are not matching
      */
@@ -441,7 +441,7 @@ class SecurityComponent : Component {
      * Manually add form tampering prevention token information into the provided
      * request object.
      *
-     * @param \Cake\Http\ServerRequest myRequest The request object to add into.
+     * @param uim.cake.Http\ServerRequest myRequest The request object to add into.
      * @return \Cake\Http\ServerRequest The modified request.
      */
     ServerRequest generateToken(ServerRequest myRequest) {
@@ -457,7 +457,7 @@ class SecurityComponent : Component {
     /**
      * Calls a controller callback method
      *
-     * @param \Cake\Controller\Controller $controller Instantiating controller
+     * @param uim.cake.Controller\Controller $controller Instantiating controller
      * @param string method Method to execute
      * @param array myParams Parameters to send to method
      * @return mixed Controller callback method"s response

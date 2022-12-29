@@ -66,7 +66,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * files or do any other work when the service provider is added to the
      * container.
      *
-     * @param \Cake\Core\IContainer myContainer The container to add services to.
+     * @param uim.cake.Core\IContainer myContainer The container to add services to.
      */
     void bootstrap(IContainer myContainer) {
     }
@@ -101,7 +101,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * All services registered in this method should also be included in the $provides
      * property so that services can be located.
      *
-     * @param \Cake\Core\IContainer myContainer The container to add services to.
+     * @param uim.cake.Core\IContainer myContainer The container to add services to.
      */
     abstract void services(IContainer myContainer);
 }
