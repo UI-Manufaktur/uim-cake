@@ -37,8 +37,8 @@ use Traversable;
  *   If this is null the table name(s) will be determined using naming
  *   conventions.
  * - `validator` Either the Validation\Validator to use, or the name of the
- *   validation method to call on the table object. For example 'default'.
- *   Defaults to 'default'. Can be an array of table alias=>validators when
+ *   validation method to call on the table object. For example "default".
+ *   Defaults to "default". Can be an array of table alias=>validators when
  *   dealing with associated forms.
  */
 class EntityContext : ContextInterface
@@ -88,9 +88,9 @@ class EntityContext : ContextInterface
      */
     public this(array $context) {
         $context += [
-            'entity': null,
-            'table': null,
-            'validator': [],
+            "entity": null,
+            "table": null,
+            "validator": [],
         ];
         _context = $context;
         _prepare();
@@ -114,9 +114,9 @@ class EntityContext : ContextInterface
     protected function _prepare(): void
     {
         /** @var \Cake\ORM\Table|null $table */
-        $table = _context['table'];
+        $table = _context["table"];
         /** @var \Cake\Datasource\EntityInterface|iterable<\Cake\Datasource\EntityInterface|array> $entity */
-        $entity = _context['entity'];
+        $entity = _context["entity"];
 
         _isCollection = is_iterable($entity);
 
@@ -140,13 +140,13 @@ class EntityContext : ContextInterface
                 $table = Inflector::pluralize($entityClass);
             }
         }
-        if (is_string($table) && $table != '') {
+        if (is_string($table) && $table != "") {
             $table = this.getTableLocator().get($table);
         }
 
         if (!($table instanceof Table)) {
             throw new RuntimeException(
-                'Unable to find table class for current entity.'
+                "Unable to find table class for current entity."
             );
         }
 
@@ -157,14 +157,14 @@ class EntityContext : ContextInterface
     /**
      * Get the primary key data for the context.
      *
-     * Gets the primary key columns from the root entity's schema.
+     * Gets the primary key columns from the root entity"s schema.
      *
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
     function primaryKey(): array
     {
-        deprecationWarning('`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.');
+        deprecationWarning("`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.");
 
         return (array)_tables[_rootName].getPrimaryKey();
     }
@@ -172,7 +172,7 @@ class EntityContext : ContextInterface
     /**
      * Get the primary key data for the context.
      *
-     * Gets the primary key columns from the root entity's schema.
+     * Gets the primary key columns from the root entity"s schema.
      *
      * @return array<string>
      */
@@ -186,7 +186,7 @@ class EntityContext : ContextInterface
      */
     function isPrimaryKey(string $field): bool
     {
-        $parts = explode('.', $field);
+        $parts = explode(".", $field);
         $table = _getTable($parts);
         if (!$table) {
             return false;
@@ -199,7 +199,7 @@ class EntityContext : ContextInterface
     /**
      * Check whether this form is a create or update.
      *
-     * If the context is for a single entity, the entity's isNew() method will
+     * If the context is for a single entity, the entity"s isNew() method will
      * be used. If isNew() returns null, a create operation will be assumed.
      *
      * If the context is for a collection or array the first object in the
@@ -209,7 +209,7 @@ class EntityContext : ContextInterface
      */
     function isCreate(): bool
     {
-        $entity = _context['entity'];
+        $entity = _context["entity"];
         if (is_iterable($entity)) {
             foreach ($entity as $e) {
                 $entity = $e;
@@ -234,22 +234,22 @@ class EntityContext : ContextInterface
      *   - `default`: Default value to return if no value found in data or
      *     entity.
      *   - `schemaDefault`: Boolean indicating whether default value from table
-     *     schema should be used if it's not explicitly provided.
+     *     schema should be used if it"s not explicitly provided.
      * @return mixed The value of the field or null on a miss.
      */
     function val(string $field, array $options = []) {
         $options += [
-            'default': null,
-            'schemaDefault': true,
+            "default": null,
+            "schemaDefault": true,
         ];
 
-        if (empty(_context['entity'])) {
-            return $options['default'];
+        if (empty(_context["entity"])) {
+            return $options["default"];
         }
-        $parts = explode('.', $field);
+        $parts = explode(".", $field);
         $entity = this.entity($parts);
 
-        if ($entity && end($parts) == '_ids') {
+        if ($entity && end($parts) == "_ids") {
             return _extractMultiple($entity, $parts);
         }
 
@@ -268,11 +268,11 @@ class EntityContext : ContextInterface
                 return $val;
             }
             if (
-                $options['default'] != null
-                || !$options['schemaDefault']
+                $options["default"] != null
+                || !$options["schemaDefault"]
                 || !$entity.isNew()
             ) {
-                return $options['default'];
+                return $options["default"];
             }
 
             return _schemaDefault($parts);
@@ -280,7 +280,7 @@ class EntityContext : ContextInterface
         if (is_array($entity) || $entity instanceof ArrayAccess) {
             $key = array_pop($parts);
 
-            return $entity[$key] ?? $options['default'];
+            return $entity[$key] ?? $options["default"];
         }
 
         return null;
@@ -320,7 +320,7 @@ class EntityContext : ContextInterface
             return null;
         }
         $table = _getTable($path, false);
-        $primary = $table ? (array)$table.getPrimaryKey() : ['id'];
+        $primary = $table ? (array)$table.getPrimaryKey() : ["id"];
 
         return (new Collection($values)).extract($primary[0]).toArray();
     }
@@ -340,14 +340,14 @@ class EntityContext : ContextInterface
      */
     function entity(?array $path = null) {
         if ($path == null) {
-            return _context['entity'];
+            return _context["entity"];
         }
 
         $oneElement = count($path) == 1;
         if ($oneElement && _isCollection) {
             return null;
         }
-        $entity = _context['entity'];
+        $entity = _context["entity"];
         if ($oneElement) {
             return $entity;
         }
@@ -362,7 +362,7 @@ class EntityContext : ContextInterface
             $prop = $path[$i];
             $next = _getProp($entity, $prop);
             $isLast = ($i == $last);
-            if (!$isLast && $next == null && $prop != '_ids') {
+            if (!$isLast && $next == null && $prop != "_ids") {
                 $table = _getTable($path);
                 if ($table) {
                     return $table.newEmptyEntity();
@@ -379,8 +379,8 @@ class EntityContext : ContextInterface
             $entity = $next;
         }
         throw new RuntimeException(sprintf(
-            'Unable to fetch property "%s"',
-            implode('.', $path)
+            "Unable to fetch property "%s"",
+            implode(".", $path)
         ));
     }
 
@@ -398,17 +398,17 @@ class EntityContext : ContextInterface
      */
     protected function leafEntity($path = null) {
         if ($path == null) {
-            return _context['entity'];
+            return _context["entity"];
         }
 
         $oneElement = count($path) == 1;
         if ($oneElement && _isCollection) {
             throw new RuntimeException(sprintf(
-                'Unable to fetch property "%s"',
-                implode('.', $path)
+                "Unable to fetch property "%s"",
+                implode(".", $path)
             ));
         }
-        $entity = _context['entity'];
+        $entity = _context["entity"];
         if ($oneElement) {
             return [$entity, $path];
         }
@@ -445,8 +445,8 @@ class EntityContext : ContextInterface
             $entity = $next;
         }
         throw new RuntimeException(sprintf(
-            'Unable to fetch property "%s"',
-            implode('.', $path)
+            "Unable to fetch property "%s"",
+            implode(".", $path)
         ));
     }
 
@@ -485,7 +485,7 @@ class EntityContext : ContextInterface
      */
     function isRequired(string $field): ?bool
     {
-        $parts = explode('.', $field);
+        $parts = explode(".", $field);
         $entity = this.entity($parts);
 
         $isNew = true;
@@ -498,7 +498,7 @@ class EntityContext : ContextInterface
         if (!$validator.hasField($fieldName)) {
             return null;
         }
-        if (this.type($field) != 'boolean') {
+        if (this.type($field) != "boolean") {
             return !$validator.isEmptyAllowed($fieldName, $isNew);
         }
 
@@ -510,7 +510,7 @@ class EntityContext : ContextInterface
      */
     function getRequiredMessage(string $field): ?string
     {
-        $parts = explode('.', $field);
+        $parts = explode(".", $field);
 
         $validator = _getValidator($parts);
         $fieldName = array_pop($parts);
@@ -534,21 +534,21 @@ class EntityContext : ContextInterface
      */
     function getMaxLength(string $field): ?int
     {
-        $parts = explode('.', $field);
+        $parts = explode(".", $field);
         $validator = _getValidator($parts);
         $fieldName = array_pop($parts);
 
         if ($validator.hasField($fieldName)) {
             foreach ($validator.field($fieldName).rules() as $rule) {
-                if ($rule.get('rule') == 'maxLength') {
-                    return $rule.get('pass')[0];
+                if ($rule.get("rule") == "maxLength") {
+                    return $rule.get("pass")[0];
                 }
             }
         }
 
         $attributes = this.attributes($field);
-        if (!empty($attributes['length'])) {
-            return (int)$attributes['length'];
+        if (!empty($attributes["length"])) {
+            return (int)$attributes["length"];
         }
 
         return null;
@@ -563,7 +563,7 @@ class EntityContext : ContextInterface
      */
     function fieldNames(): array
     {
-        $table = _getTable('0');
+        $table = _getTable("0");
         if (!$table) {
             return [];
         }
@@ -584,12 +584,12 @@ class EntityContext : ContextInterface
         $keyParts = array_filter(array_slice($parts, 0, -1), function ($part) {
             return !is_numeric($part);
         });
-        $key = implode('.', $keyParts);
+        $key = implode(".", $keyParts);
         $entity = this.entity($parts) ?: null;
 
         if (isset(_validator[$key])) {
             if (is_object($entity)) {
-                _validator[$key].setProvider('entity', $entity);
+                _validator[$key].setProvider("entity", $entity);
             }
 
             return _validator[$key];
@@ -597,21 +597,21 @@ class EntityContext : ContextInterface
 
         $table = _getTable($parts);
         if (!$table) {
-            throw new RuntimeException('Validator not found: ' . $key);
+            throw new RuntimeException("Validator not found: " . $key);
         }
         $alias = $table.getAlias();
 
-        $method = 'default';
-        if (is_string(_context['validator'])) {
-            $method = _context['validator'];
-        } elseif (isset(_context['validator'][$alias])) {
-            $method = _context['validator'][$alias];
+        $method = "default";
+        if (is_string(_context["validator"])) {
+            $method = _context["validator"];
+        } elseif (isset(_context["validator"][$alias])) {
+            $method = _context["validator"][$alias];
         }
 
         $validator = $table.getValidator($method);
 
         if (is_object($entity)) {
-            $validator.setProvider('entity', $entity);
+            $validator.setProvider("entity", $entity);
         }
 
         return _validator[$key] = $validator;
@@ -635,7 +635,7 @@ class EntityContext : ContextInterface
             return !is_numeric($part);
         }), 0, -1);
 
-        $path = implode('.', $normalized);
+        $path = implode(".", $normalized);
         if (isset(_tables[$path])) {
             return _tables[$path];
         }
@@ -647,7 +647,7 @@ class EntityContext : ContextInterface
         $table = _tables[_rootName];
         $assoc = null;
         foreach ($normalized as $part) {
-            if ($part == '_joinData') {
+            if ($part == "_joinData") {
                 if ($assoc != null) {
                     $table = $assoc.junction();
                     $assoc = null;
@@ -681,7 +681,7 @@ class EntityContext : ContextInterface
      */
     function type(string $field): ?string
     {
-        $parts = explode('.', $field);
+        $parts = explode(".", $field);
         $table = _getTable($parts);
         if (!$table) {
             return null;
@@ -698,7 +698,7 @@ class EntityContext : ContextInterface
      */
     function attributes(string $field): array
     {
-        $parts = explode('.', $field);
+        $parts = explode(".", $field);
         $table = _getTable($parts);
         if (!$table) {
             return [];
@@ -729,7 +729,7 @@ class EntityContext : ContextInterface
      */
     function error(string $field): array
     {
-        $parts = explode('.', $field);
+        $parts = explode(".", $field);
         try {
             [$entity, $remainingParts] = this.leafEntity($parts);
         } catch (RuntimeException $e) {
@@ -740,7 +740,7 @@ class EntityContext : ContextInterface
         }
 
         if ($entity instanceof EntityInterface) {
-            $error = $entity.getError(implode('.', $remainingParts));
+            $error = $entity.getError(implode(".", $remainingParts));
             if ($error) {
                 return $error;
             }

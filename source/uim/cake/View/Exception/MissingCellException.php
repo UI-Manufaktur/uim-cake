@@ -19,5 +19,5 @@ class MissingCellException : CakeException
     /**
      * @inheritDoc
      */
-    protected $_messageTemplate = 'Cell class %s is missing.';
+    protected $_messageTemplate = "Cell class %s is missing.";
 }

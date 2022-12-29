@@ -17,7 +17,7 @@ interface ContextInterface
     /**
      * @var array<string>
      */
-    public const VALID_ATTRIBUTES = ['length', 'precision', 'comment', 'null', 'default'];
+    public const VALID_ATTRIBUTES = ["length", "precision", "comment", "null", "default"];
 
     /**
      * Get the fields used in the context as a primary key.
@@ -51,7 +51,7 @@ interface ContextInterface
      *   - `default`: Default value to return if no value found in data or
      *     context record.
      *   - `schemaDefault`: Boolean indicating whether default value from
-     *     context's schema should be used if it's not explicitly provided.
+     *     context"s schema should be used if it"s not explicitly provided.
      *
      * @param string $field A dot separated path to the field a value
      * @param array<string, mixed> $options Options.
@@ -61,9 +61,9 @@ interface ContextInterface
     function val(string $field, array $options = []);
 
     /**
-     * Check if a given field is 'required'.
+     * Check if a given field is "required".
      *
-     * In this context class, this is simply defined by the 'required' array.
+     * In this context class, this is simply defined by the "required" array.
      *
      * @param string $field A dot separated path to check required-ness for.
      * @return bool|null

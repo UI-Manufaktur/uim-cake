@@ -36,7 +36,7 @@ class PaginatorHelper : Helper
      *
      * @var array
      */
-    protected $helpers = ['Url', 'Number', 'Html', 'Form'];
+    protected $helpers = ["Url", "Number", "Html", "Form"];
 
     /**
      * Default config for this class
@@ -46,38 +46,38 @@ class PaginatorHelper : Helper
      * The values that may be specified are:
      *
      * - `url` Url of the action. See Router::url()
-     * - `url['?']['sort']` the key that the recordset is sorted.
-     * - `url['?']['direction']` Direction of the sorting (default: 'asc').
-     * - `url['?']['page']` Page number to use in links.
+     * - `url["?"]["sort"]` the key that the recordset is sorted.
+     * - `url["?"]["direction"]` Direction of the sorting (default: "asc").
+     * - `url["?"]["page"]` Page number to use in links.
      * - `model` The name of the model.
      * - `escape` Defines if the title field for the link should be escaped (default: true).
      * - `routePlaceholders` An array specifying which paging params should be
      *   passed as route placeholders instead of query string parameters. The array
-     *   can have values `'sort'`, `'direction'`, `'page'`.
+     *   can have values `"sort"`, `"direction"`, `"page"`.
      *
      * Templates: the templates used by this class
      *
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'options': [],
-        'templates': [
-            'nextActive': '<li class="next"><a rel="next" href="{{url}}">{{text}}</a></li>',
-            'nextDisabled': '<li class="next disabled"><a href="" onclick="return false;">{{text}}</a></li>',
-            'prevActive': '<li class="prev"><a rel="prev" href="{{url}}">{{text}}</a></li>',
-            'prevDisabled': '<li class="prev disabled"><a href="" onclick="return false;">{{text}}</a></li>',
-            'counterRange': '{{start}} - {{end}} of {{count}}',
-            'counterPages': '{{page}} of {{pages}}',
-            'first': '<li class="first"><a href="{{url}}">{{text}}</a></li>',
-            'last': '<li class="last"><a href="{{url}}">{{text}}</a></li>',
-            'number': '<li><a href="{{url}}">{{text}}</a></li>',
-            'current': '<li class="active"><a href="">{{text}}</a></li>',
-            'ellipsis': '<li class="ellipsis">&hellip;</li>',
-            'sort': '<a href="{{url}}">{{text}}</a>',
-            'sortAsc': '<a class="asc" href="{{url}}">{{text}}</a>',
-            'sortDesc': '<a class="desc" href="{{url}}">{{text}}</a>',
-            'sortAscLocked': '<a class="asc locked" href="{{url}}">{{text}}</a>',
-            'sortDescLocked': '<a class="desc locked" href="{{url}}">{{text}}</a>',
+        "options": [],
+        "templates": [
+            "nextActive": "<li class="next"><a rel="next" href="{{url}}">{{text}}</a></li>",
+            "nextDisabled": "<li class="next disabled"><a href="" onclick="return false;">{{text}}</a></li>",
+            "prevActive": "<li class="prev"><a rel="prev" href="{{url}}">{{text}}</a></li>",
+            "prevDisabled": "<li class="prev disabled"><a href="" onclick="return false;">{{text}}</a></li>",
+            "counterRange": "{{start}} - {{end}} of {{count}}",
+            "counterPages": "{{page}} of {{pages}}",
+            "first": "<li class="first"><a href="{{url}}">{{text}}</a></li>",
+            "last": "<li class="last"><a href="{{url}}">{{text}}</a></li>",
+            "number": "<li><a href="{{url}}">{{text}}</a></li>",
+            "current": "<li class="active"><a href="">{{text}}</a></li>",
+            "ellipsis": "<li class="ellipsis">&hellip;</li>",
+            "sort": "<a href="{{url}}">{{text}}</a>",
+            "sortAsc": "<a class="asc" href="{{url}}">{{text}}</a>",
+            "sortDesc": "<a class="desc" href="{{url}}">{{text}}</a>",
+            "sortAscLocked": "<a class="asc locked" href="{{url}}">{{text}}</a>",
+            "sortDescLocked": "<a class="desc locked" href="{{url}}">{{text}}</a>",
         ],
     ];
 
@@ -98,10 +98,10 @@ class PaginatorHelper : Helper
         super(($view, $config);
 
         $query = _View.getRequest().getQueryParams();
-        unset($query['page'], $query['limit'], $query['sort'], $query['direction']);
+        unset($query["page"], $query["limit"], $query["sort"], $query["direction"]);
         this.setConfig(
-            'options.url',
-            array_merge(_View.getRequest().getParam('pass', []), ['?': $query])
+            "options.url",
+            array_merge(_View.getRequest().getParam("pass", []), ["?": $query])
         );
     }
 
@@ -119,7 +119,7 @@ class PaginatorHelper : Helper
             $model = (string)this.defaultModel();
         }
 
-        $params = $request.getAttribute('paging');
+        $params = $request.getAttribute("paging");
 
         return empty($params[$model]) ? [] : $params[$model];
     }
@@ -148,30 +148,30 @@ class PaginatorHelper : Helper
     {
         $request = _View.getRequest();
 
-        if (!empty($options['paging'])) {
+        if (!empty($options["paging"])) {
             $request = $request.withAttribute(
-                'paging',
-                $options['paging'] + $request.getAttribute('paging', [])
+                "paging",
+                $options["paging"] + $request.getAttribute("paging", [])
             );
-            unset($options['paging']);
+            unset($options["paging"]);
         }
 
         $model = (string)this.defaultModel();
         if (!empty($options[$model])) {
-            $params = $request.getAttribute('paging', []);
+            $params = $request.getAttribute("paging", []);
             $params[$model] = $options[$model] + Hash::get($params, $model, []);
-            $request = $request.withAttribute('paging', $params);
+            $request = $request.withAttribute("paging", $params);
             unset($options[$model]);
         }
 
         _View.setRequest($request);
 
-        _config['options'] = array_filter($options + _config['options']);
-        if (empty(_config['options']['url'])) {
-            _config['options']['url'] = [];
+        _config["options"] = array_filter($options + _config["options"]);
+        if (empty(_config["options"]["url"])) {
+            _config["options"]["url"] = [];
         }
-        if (!empty(_config['options']['model'])) {
-            this.defaultModel(_config['options']['model']);
+        if (!empty(_config["options"]["model"])) {
+            this.defaultModel(_config["options"]["model"]);
         }
     }
 
@@ -186,7 +186,7 @@ class PaginatorHelper : Helper
     {
         $params = this.params($model);
 
-        return $params['page'] ?? 1;
+        return $params["page"] ?? 1;
     }
 
     /**
@@ -199,7 +199,7 @@ class PaginatorHelper : Helper
     {
         $params = this.params($model);
 
-        return $params['pageCount'] ?? 0;
+        return $params["pageCount"] ?? 0;
     }
 
     /**
@@ -216,8 +216,8 @@ class PaginatorHelper : Helper
         if (empty($options)) {
             $options = this.params($model);
         }
-        if (!empty($options['sort'])) {
-            return $options['sort'];
+        if (!empty($options["sort"])) {
+            return $options["sort"];
         }
 
         return null;
@@ -240,15 +240,15 @@ class PaginatorHelper : Helper
             $options = this.params($model);
         }
 
-        if (!empty($options['direction'])) {
-            $dir = strtolower($options['direction']);
+        if (!empty($options["direction"])) {
+            $dir = strtolower($options["direction"]);
         }
 
-        if ($dir == 'desc') {
-            return 'desc';
+        if ($dir == "desc") {
+            return "desc";
         }
 
-        return 'asc';
+        return "asc";
     }
 
     /**
@@ -257,33 +257,33 @@ class PaginatorHelper : Helper
      * @param string|false $text The enabled text for the link.
      * @param bool $enabled Whether the enabled/disabled version should be created.
      * @param array<string, mixed> $options An array of options from the calling method.
-     * @param array<string, mixed> $templates An array of templates with the 'active' and 'disabled' keys.
+     * @param array<string, mixed> $templates An array of templates with the "active" and "disabled" keys.
      * @return string Generated HTML
      */
     protected function _toggledLink($text, $enabled, $options, $templates): string
     {
-        $template = $templates['active'];
+        $template = $templates["active"];
         if (!$enabled) {
-            $text = $options['disabledTitle'];
-            $template = $templates['disabled'];
+            $text = $options["disabledTitle"];
+            $template = $templates["disabled"];
         }
 
         if (!$enabled && $text == false) {
-            return '';
+            return "";
         }
-        $text = $options['escape'] ? h($text) : $text;
+        $text = $options["escape"] ? h($text) : $text;
 
         $templater = this.templater();
-        $newTemplates = $options['templates'] ?? false;
+        $newTemplates = $options["templates"] ?? false;
         if ($newTemplates) {
             $templater.push();
-            $templateMethod = is_string($options['templates']) ? 'load' : 'add';
-            $templater.{$templateMethod}($options['templates']);
+            $templateMethod = is_string($options["templates"]) ? "load" : "add";
+            $templater.{$templateMethod}($options["templates"]);
         }
 
         if (!$enabled) {
             $out = $templater.format($template, [
-                'text': $text,
+                "text": $text,
             ]);
 
             if ($newTemplates) {
@@ -292,17 +292,17 @@ class PaginatorHelper : Helper
 
             return $out;
         }
-        $paging = this.params($options['model']);
+        $paging = this.params($options["model"]);
 
         $url = this.generateUrl(
-            ['page': $paging['page'] + $options['step']],
-            $options['model'],
-            $options['url']
+            ["page": $paging["page"] + $options["step"]],
+            $options["model"],
+            $options["url"]
         );
 
         $out = $templater.format($template, [
-            'url': $url,
-            'text': $text,
+            "url": $url,
+            "text": $text,
         ]);
 
         if ($newTemplates) {
@@ -319,34 +319,34 @@ class PaginatorHelper : Helper
      *
      * - `disabledTitle` The text to used when the link is disabled. This
      *   defaults to the same text at the active link. Setting to false will cause
-     *   this method to return ''.
+     *   this method to return "".
      * - `escape` Whether you want the contents html entity encoded, defaults to true
      * - `model` The model to use, defaults to PaginatorHelper::defaultModel()
      * - `url` An array of additional URL options to use for link generation.
      * - `templates` An array of templates, or template file name containing the
-     *   templates you'd like to use when generating the link for previous page.
-     *   The helper's original templates will be restored once prev() is done.
+     *   templates you"d like to use when generating the link for previous page.
+     *   The helper"s original templates will be restored once prev() is done.
      *
-     * @param string $title Title for the link. Defaults to '<< Previous'.
+     * @param string $title Title for the link. Defaults to "<< Previous".
      * @param array<string, mixed> $options Options for pagination link. See above for list of keys.
      * @return string A "previous" link or a disabled link.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    function prev(string $title = '<< Previous', array $options = []): string
+    function prev(string $title = "<< Previous", array $options = []): string
     {
         $defaults = [
-            'url': [],
-            'model': this.defaultModel(),
-            'disabledTitle': $title,
-            'escape': true,
+            "url": [],
+            "model": this.defaultModel(),
+            "disabledTitle": $title,
+            "escape": true,
         ];
         $options += $defaults;
-        $options['step'] = -1;
+        $options["step"] = -1;
 
-        $enabled = this.hasPrev($options['model']);
+        $enabled = this.hasPrev($options["model"]);
         $templates = [
-            'active': 'prevActive',
-            'disabled': 'prevDisabled',
+            "active": "prevActive",
+            "disabled": "prevDisabled",
         ];
 
         return _toggledLink($title, $enabled, $options, $templates);
@@ -359,34 +359,34 @@ class PaginatorHelper : Helper
      *
      * - `disabledTitle` The text to used when the link is disabled. This
      *   defaults to the same text at the active link. Setting to false will cause
-     *   this method to return ''.
+     *   this method to return "".
      * - `escape` Whether you want the contents html entity encoded, defaults to true
      * - `model` The model to use, defaults to PaginatorHelper::defaultModel()
      * - `url` An array of additional URL options to use for link generation.
      * - `templates` An array of templates, or template file name containing the
-     *   templates you'd like to use when generating the link for next page.
-     *   The helper's original templates will be restored once next() is done.
+     *   templates you"d like to use when generating the link for next page.
+     *   The helper"s original templates will be restored once next() is done.
      *
-     * @param string $title Title for the link. Defaults to 'Next >>'.
+     * @param string $title Title for the link. Defaults to "Next >>".
      * @param array<string, mixed> $options Options for pagination link. See above for list of keys.
      * @return string A "next" link or $disabledTitle text if the link is disabled.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    function next(string $title = 'Next >>', array $options = []): string
+    function next(string $title = "Next >>", array $options = []): string
     {
         $defaults = [
-            'url': [],
-            'model': this.defaultModel(),
-            'disabledTitle': $title,
-            'escape': true,
+            "url": [],
+            "model": this.defaultModel(),
+            "disabledTitle": $title,
+            "escape": true,
         ];
         $options += $defaults;
-        $options['step'] = 1;
+        $options["step"] = 1;
 
-        $enabled = this.hasNext($options['model']);
+        $enabled = this.hasNext($options["model"]);
         $templates = [
-            'active': 'nextActive',
-            'disabled': 'nextDisabled',
+            "active": "nextActive",
+            "disabled": "nextDisabled",
         ];
 
         return _toggledLink($title, $enabled, $options, $templates);
@@ -400,7 +400,7 @@ class PaginatorHelper : Helper
      *
      * - `escape` Whether you want the contents html entity encoded, defaults to true.
      * - `model` The model to use, defaults to PaginatorHelper::defaultModel().
-     * - `direction` The default direction to use when this link isn't active.
+     * - `direction` The default direction to use when this link isn"t active.
      * - `lock` Lock direction. Will only use the default direction then, defaults to false.
      *
      * @param string $key The name of the key that the recordset should be sorted.
@@ -408,65 +408,65 @@ class PaginatorHelper : Helper
      *   for the title and will be generated by inflection. It can also be an array
      *   with keys `asc` and `desc` for specifying separate titles based on the direction.
      * @param array<string, mixed> $options Options for sorting link. See above for list of keys.
-     * @return string A link sorting default by 'asc'. If the resultset is sorted 'asc' by the specified
-     *  key the returned link will sort by 'desc'.
+     * @return string A link sorting default by "asc". If the resultset is sorted "asc" by the specified
+     *  key the returned link will sort by "desc".
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
     function sort(string $key, $title = null, array $options = []): string
     {
-        $options += ['url': [], 'model': null, 'escape': true];
-        $url = $options['url'];
-        unset($options['url']);
+        $options += ["url": [], "model": null, "escape": true];
+        $url = $options["url"];
+        unset($options["url"]);
 
         if (empty($title)) {
             $title = $key;
 
-            if (strpos($title, '.') != false) {
-                $title = str_replace('.', ' ', $title);
+            if (strpos($title, ".") != false) {
+                $title = str_replace(".", " ", $title);
             }
 
-            $title = __(Inflector::humanize(preg_replace('/_id$/', '', $title)));
+            $title = __(Inflector::humanize(preg_replace("/_id$/", "", $title)));
         }
 
-        $defaultDir = isset($options['direction']) ? strtolower($options['direction']) : 'asc';
-        unset($options['direction']);
+        $defaultDir = isset($options["direction"]) ? strtolower($options["direction"]) : "asc";
+        unset($options["direction"]);
 
-        $locked = $options['lock'] ?? false;
-        unset($options['lock']);
+        $locked = $options["lock"] ?? false;
+        unset($options["lock"]);
 
-        $sortKey = (string)this.sortKey($options['model']);
+        $sortKey = (string)this.sortKey($options["model"]);
         $defaultModel = this.defaultModel();
-        $model = $options['model'] ?: $defaultModel;
-        [$table, $field] = explode('.', $key . '.');
+        $model = $options["model"] ?: $defaultModel;
+        [$table, $field] = explode(".", $key . ".");
         if (!$field) {
             $field = $table;
             $table = $model;
         }
         $isSorted = (
-            $sortKey == $table . '.' . $field ||
-            $sortKey == $model . '.' . $key ||
-            $table . '.' . $field == $model . '.' . $sortKey
+            $sortKey == $table . "." . $field ||
+            $sortKey == $model . "." . $key ||
+            $table . "." . $field == $model . "." . $sortKey
         );
 
-        $template = 'sort';
+        $template = "sort";
         $dir = $defaultDir;
         if ($isSorted) {
             if ($locked) {
-                $template = $dir == 'asc' ? 'sortDescLocked' : 'sortAscLocked';
+                $template = $dir == "asc" ? "sortDescLocked" : "sortAscLocked";
             } else {
-                $dir = this.sortDir($options['model']) == 'asc' ? 'desc' : 'asc';
-                $template = $dir == 'asc' ? 'sortDesc' : 'sortAsc';
+                $dir = this.sortDir($options["model"]) == "asc" ? "desc" : "asc";
+                $template = $dir == "asc" ? "sortDesc" : "sortAsc";
             }
         }
         if (is_array($title) && array_key_exists($dir, $title)) {
             $title = $title[$dir];
         }
 
-        $paging = ['sort': $key, 'direction': $dir, 'page': 1];
+        $paging = ["sort": $key, "direction": $dir, "page": 1];
 
         $vars = [
-            'text': $options['escape'] ? h($title) : $title,
-            'url': this.generateUrl($paging, $options['model'], $url),
+            "text": $options["escape"] ? h($title) : $title,
+            "url": this.generateUrl($paging, $options["model"], $url),
         ];
 
         return this.templater().format($template, $vars);
@@ -496,8 +496,8 @@ class PaginatorHelper : Helper
         array $urlOptions = []
     ): string {
         $urlOptions += [
-            'escape': true,
-            'fullBase': false,
+            "escape": true,
+            "fullBase": false,
         ];
 
         return this.Url.build(this.generateUrlParams($options, $model, $url), $urlOptions);
@@ -514,45 +514,45 @@ class PaginatorHelper : Helper
     function generateUrlParams(array $options = [], ?string $model = null, array $url = []): array
     {
         $paging = this.params($model);
-        $paging += ['page': null, 'sort': null, 'direction': null, 'limit': null];
+        $paging += ["page": null, "sort": null, "direction": null, "limit": null];
 
         if (
-            !empty($paging['sort'])
-            && !empty($options['sort'])
-            && strpos($options['sort'], '.') == false
+            !empty($paging["sort"])
+            && !empty($options["sort"])
+            && strpos($options["sort"], ".") == false
         ) {
-            $paging['sort'] = _removeAlias($paging['sort'], $model = null);
+            $paging["sort"] = _removeAlias($paging["sort"], $model = null);
         }
         if (
-            !empty($paging['sortDefault'])
-            && !empty($options['sort'])
-            && strpos($options['sort'], '.') == false
+            !empty($paging["sortDefault"])
+            && !empty($options["sort"])
+            && strpos($options["sort"], ".") == false
         ) {
-            $paging['sortDefault'] = _removeAlias($paging['sortDefault'], $model);
+            $paging["sortDefault"] = _removeAlias($paging["sortDefault"], $model);
         }
 
         $options += array_intersect_key(
             $paging,
-            ['page': null, 'limit': null, 'sort': null, 'direction': null]
+            ["page": null, "limit": null, "sort": null, "direction": null]
         );
 
-        if (!empty($options['page']) && $options['page'] == 1) {
-            $options['page'] = null;
+        if (!empty($options["page"]) && $options["page"] == 1) {
+            $options["page"] = null;
         }
 
         if (
-            isset($paging['sortDefault'], $paging['directionDefault'], $options['sort'], $options['direction'])
-            && $options['sort'] == $paging['sortDefault']
-            && strtolower($options['direction']) == strtolower($paging['directionDefault'])
+            isset($paging["sortDefault"], $paging["directionDefault"], $options["sort"], $options["direction"])
+            && $options["sort"] == $paging["sortDefault"]
+            && strtolower($options["direction"]) == strtolower($paging["directionDefault"])
         ) {
-            $options['sort'] = $options['direction'] = null;
+            $options["sort"] = $options["direction"] = null;
         }
-        $baseUrl = _config['options']['url'] ?? [];
-        if (!empty($paging['scope'])) {
-            $scope = $paging['scope'];
-            if (isset($baseUrl['?'][$scope]) && is_array($baseUrl['?'][$scope])) {
-                $options += $baseUrl['?'][$scope];
-                unset($baseUrl['?'][$scope]);
+        $baseUrl = _config["options"]["url"] ?? [];
+        if (!empty($paging["scope"])) {
+            $scope = $paging["scope"];
+            if (isset($baseUrl["?"][$scope]) && is_array($baseUrl["?"][$scope])) {
+                $options += $baseUrl["?"][$scope];
+                unset($baseUrl["?"][$scope]);
             }
             $options = [$scope: $options];
         }
@@ -561,17 +561,17 @@ class PaginatorHelper : Helper
             $url = Hash::merge($url, $baseUrl);
         }
 
-        $url['?'] = $url['?'] ?? [];
+        $url["?"] = $url["?"] ?? [];
 
-        if (!empty(_config['options']['routePlaceholders'])) {
-            $placeholders = array_flip(_config['options']['routePlaceholders']);
+        if (!empty(_config["options"]["routePlaceholders"])) {
+            $placeholders = array_flip(_config["options"]["routePlaceholders"]);
             $url += array_intersect_key($options, $placeholders);
-            $url['?'] += array_diff_key($options, $placeholders);
+            $url["?"] += array_diff_key($options, $placeholders);
         } else {
-            $url['?'] += $options;
+            $url["?"] += $options;
         }
 
-        $url['?'] = Hash::filter($url['?']);
+        $url["?"] = Hash::filter($url["?"]);
 
         return $url;
     }
@@ -587,11 +587,11 @@ class PaginatorHelper : Helper
     {
         $currentModel = $model ?: this.defaultModel();
 
-        if (strpos($field, '.') == false) {
+        if (strpos($field, ".") == false) {
             return $field;
         }
 
-        [$alias, $currentField] = explode('.', $field);
+        [$alias, $currentField] = explode(".", $field);
 
         if ($alias == $currentModel) {
             return $currentField;
@@ -609,7 +609,7 @@ class PaginatorHelper : Helper
      */
     function hasPrev(?string $model = null): bool
     {
-        return _hasPage($model, 'prev');
+        return _hasPage($model, "prev");
     }
 
     /**
@@ -621,7 +621,7 @@ class PaginatorHelper : Helper
      */
     function hasNext(?string $model = null): bool
     {
-        return _hasPage($model, 'next');
+        return _hasPage($model, "next");
     }
 
     /**
@@ -640,7 +640,7 @@ class PaginatorHelper : Helper
             return false;
         }
 
-        return $page <= $paging['pageCount'];
+        return $page <= $paging["pageCount"];
     }
 
     /**
@@ -654,14 +654,14 @@ class PaginatorHelper : Helper
     {
         $params = this.params($model);
 
-        return !empty($params) && $params[$dir . 'Page'];
+        return !empty($params) && $params[$dir . "Page"];
     }
 
     /**
      * Gets or sets the default model of the paged sets
      *
      * @param string|null $model Model name to set
-     * @return string|null Model name or null if the pagination isn't initialized.
+     * @return string|null Model name or null if the pagination isn"t initialized.
      */
     function defaultModel(?string $model = null): ?string
     {
@@ -672,7 +672,7 @@ class PaginatorHelper : Helper
             return _defaultModel;
         }
 
-        $params = _View.getRequest().getAttribute('paging');
+        $params = _View.getRequest().getAttribute("paging");
         if (!$params) {
             return null;
         }
@@ -688,8 +688,8 @@ class PaginatorHelper : Helper
      *
      * - `model` The model to use, defaults to PaginatorHelper::defaultModel();
      *
-     * @param string $format The format string you want to use, defaults to 'pages' Which generates output like '1 of 5'
-     *   set to 'range' to generate output like '1 - 3 of 13'. Can also be set to a custom string, containing the
+     * @param string $format The format string you want to use, defaults to "pages" Which generates output like "1 of 5"
+     *   set to "range" to generate output like "1 - 3 of 13". Can also be set to a custom string, containing the
      *   following placeholders `{{page}}`, `{{pages}}`, `{{current}}`, `{{count}}`, `{{model}}`, `{{start}}`, `{{end}}`
      *   and any custom content you would like.
      * @param array<string, mixed> $options Options for the counter string. See #options for list of keys.
@@ -697,37 +697,37 @@ class PaginatorHelper : Helper
      * @return string Counter string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-a-page-counter
      */
-    function counter(string $format = 'pages', array $options = []): string
+    function counter(string $format = "pages", array $options = []): string
     {
         $options += [
-            'model': this.defaultModel(),
+            "model": this.defaultModel(),
         ];
 
-        $paging = this.params($options['model']);
-        if (!$paging['pageCount']) {
-            $paging['pageCount'] = 1;
+        $paging = this.params($options["model"]);
+        if (!$paging["pageCount"]) {
+            $paging["pageCount"] = 1;
         }
 
         switch ($format) {
-            case 'range':
-            case 'pages':
-                $template = 'counter' . ucfirst($format);
+            case "range":
+            case "pages":
+                $template = "counter" . ucfirst($format);
                 break;
             default:
-                $template = 'counterCustom';
+                $template = "counterCustom";
                 this.templater().add([$template: $format]);
         }
-        $map = array_map([this.Number, 'format'], [
-            'page': $paging['page'],
-            'pages': $paging['pageCount'],
-            'current': $paging['current'],
-            'count': $paging['count'],
-            'start': $paging['start'],
-            'end': $paging['end'],
+        $map = array_map([this.Number, "format"], [
+            "page": $paging["page"],
+            "pages": $paging["pageCount"],
+            "current": $paging["current"],
+            "count": $paging["count"],
+            "start": $paging["start"],
+            "end": $paging["end"],
         ]);
 
         $map += [
-            'model': strtolower(Inflector::humanize(Inflector::tableize($options['model']))),
+            "model": strtolower(Inflector::humanize(Inflector::tableize($options["model"]))),
         ];
 
         return this.templater().format($template, $map);
@@ -738,7 +738,7 @@ class PaginatorHelper : Helper
      * uses a modulus to decide how many numbers to show on each side of the current page (default: 8).
      *
      * ```
-     * this.Paginator.numbers(['first': 2, 'last': 2]);
+     * this.Paginator.numbers(["first": 2, "last": 2]);
      * ```
      *
      * Using the first and last options you can create links to the beginning and end of the page set.
@@ -750,18 +750,18 @@ class PaginatorHelper : Helper
      * - `model` Model to create numbers for, defaults to PaginatorHelper::defaultModel()
      * - `modulus` How many numbers to include on either side of the current page, defaults to 8.
      *    Set to `false` to disable and to show all numbers.
-     * - `first` Whether you want first links generated, set to an integer to define the number of 'first'
+     * - `first` Whether you want first links generated, set to an integer to define the number of "first"
      *    links to generate. If a string is set a link to the first page will be generated with the value
      *    as the title.
-     * - `last` Whether you want last links generated, set to an integer to define the number of 'last'
+     * - `last` Whether you want last links generated, set to an integer to define the number of "last"
      *    links to generate. If a string is set a link to the last page will be generated with the value
      *    as the title.
-     * - `templates` An array of templates, or template file name containing the templates you'd like to
-     *    use when generating the numbers. The helper's original templates will be restored once
+     * - `templates` An array of templates, or template file name containing the templates you"d like to
+     *    use when generating the numbers. The helper"s original templates will be restored once
      *    numbers() is done.
      * - `url` An array of additional URL options to use for link generation.
      *
-     * The generated number links will include the 'ellipsis' template when the `first` and `last` options
+     * The generated number links will include the "ellipsis" template when the `first` and `last` options
      * and the number of pages exceed the modulus. For example if you have 25 pages, and use the first/last
      * options and a modulus of 8, ellipsis content will be inserted after the first and last link sets.
      *
@@ -772,30 +772,30 @@ class PaginatorHelper : Helper
     function numbers(array $options = []): string
     {
         $defaults = [
-            'before': null, 'after': null, 'model': this.defaultModel(),
-            'modulus': 8, 'first': null, 'last': null, 'url': [],
+            "before": null, "after": null, "model": this.defaultModel(),
+            "modulus": 8, "first": null, "last": null, "url": [],
         ];
         $options += $defaults;
 
-        $params = this.params($options['model']) + ['page': 1];
-        if ($params['pageCount'] <= 1) {
-            return '';
+        $params = this.params($options["model"]) + ["page": 1];
+        if ($params["pageCount"] <= 1) {
+            return "";
         }
 
         $templater = this.templater();
-        if (isset($options['templates'])) {
+        if (isset($options["templates"])) {
             $templater.push();
-            $method = is_string($options['templates']) ? 'load' : 'add';
-            $templater.{$method}($options['templates']);
+            $method = is_string($options["templates"]) ? "load" : "add";
+            $templater.{$method}($options["templates"]);
         }
 
-        if ($options['modulus'] != false && $params['pageCount'] > $options['modulus']) {
+        if ($options["modulus"] != false && $params["pageCount"] > $options["modulus"]) {
             $out = _modulusNumbers($templater, $params, $options);
         } else {
             $out = _numbers($templater, $params, $options);
         }
 
-        if (isset($options['templates'])) {
+        if (isset($options["templates"])) {
             $templater.pop();
         }
 
@@ -812,27 +812,27 @@ class PaginatorHelper : Helper
      */
     protected function _getNumbersStartAndEnd(array $params, array $options): array
     {
-        $half = (int)($options['modulus'] / 2);
-        $end = max(1 + $options['modulus'], $params['page'] + $half);
-        $start = min($params['pageCount'] - $options['modulus'], $params['page'] - $half - $options['modulus'] % 2);
+        $half = (int)($options["modulus"] / 2);
+        $end = max(1 + $options["modulus"], $params["page"] + $half);
+        $start = min($params["pageCount"] - $options["modulus"], $params["page"] - $half - $options["modulus"] % 2);
 
-        if ($options['first']) {
-            $first = is_int($options['first']) ? $options['first'] : 1;
+        if ($options["first"]) {
+            $first = is_int($options["first"]) ? $options["first"] : 1;
 
             if ($start <= $first + 2) {
                 $start = 1;
             }
         }
 
-        if ($options['last']) {
-            $last = is_int($options['last']) ? $options['last'] : 1;
+        if ($options["last"]) {
+            $last = is_int($options["last"]) ? $options["last"] : 1;
 
-            if ($end >= $params['pageCount'] - $last - 1) {
-                $end = $params['pageCount'];
+            if ($end >= $params["pageCount"] - $last - 1) {
+                $end = $params["pageCount"];
             }
         }
 
-        $end = (int)min($params['pageCount'], $end);
+        $end = (int)min($params["pageCount"], $end);
         $start = (int)max(1, $start);
 
         return [$start, $end];
@@ -848,11 +848,11 @@ class PaginatorHelper : Helper
     protected function _formatNumber(StringTemplate $templater, array $options): string
     {
         $vars = [
-            'text': $options['text'],
-            'url': this.generateUrl(['page': $options['page']], $options['model'], $options['url']),
+            "text": $options["text"],
+            "url": this.generateUrl(["page": $options["page"]], $options["model"], $options["url"]),
         ];
 
-        return $templater.format('number', $vars);
+        return $templater.format("number", $vars);
     }
 
     /**
@@ -865,52 +865,52 @@ class PaginatorHelper : Helper
      */
     protected function _modulusNumbers(StringTemplate $templater, array $params, array $options): string
     {
-        $out = '';
-        $ellipsis = $templater.format('ellipsis', []);
+        $out = "";
+        $ellipsis = $templater.format("ellipsis", []);
 
         [$start, $end] = _getNumbersStartAndEnd($params, $options);
 
         $out .= _firstNumber($ellipsis, $params, $start, $options);
-        $out .= $options['before'];
+        $out .= $options["before"];
 
-        for ($i = $start; $i < $params['page']; $i++) {
+        for ($i = $start; $i < $params["page"]; $i++) {
             $out .= _formatNumber($templater, [
-                'text': this.Number.format($i),
-                'page': $i,
-                'model': $options['model'],
-                'url': $options['url'],
+                "text": this.Number.format($i),
+                "page": $i,
+                "model": $options["model"],
+                "url": $options["url"],
             ]);
         }
 
-        $url = $options['url'];
-        $url['?']['page'] = $params['page'];
-        $out .= $templater.format('current', [
-            'text': this.Number.format($params['page']),
-            'url': this.generateUrl($url, $options['model']),
+        $url = $options["url"];
+        $url["?"]["page"] = $params["page"];
+        $out .= $templater.format("current", [
+            "text": this.Number.format($params["page"]),
+            "url": this.generateUrl($url, $options["model"]),
         ]);
 
-        $start = $params['page'] + 1;
+        $start = $params["page"] + 1;
         $i = $start;
         while ($i < $end) {
             $out .= _formatNumber($templater, [
-                'text': this.Number.format($i),
-                'page': $i,
-                'model': $options['model'],
-                'url': $options['url'],
+                "text": this.Number.format($i),
+                "page": $i,
+                "model": $options["model"],
+                "url": $options["url"],
             ]);
             $i++;
         }
 
-        if ($end != $params['page']) {
+        if ($end != $params["page"]) {
             $out .= _formatNumber($templater, [
-                'text': this.Number.format($i),
-                'page': $end,
-                'model': $options['model'],
-                'url': $options['url'],
+                "text": this.Number.format($i),
+                "page": $end,
+                "model": $options["model"],
+                "url": $options["url"],
             ]);
         }
 
-        $out .= $options['after'];
+        $out .= $options["after"];
         $out .= _lastNumber($ellipsis, $params, $end, $options);
 
         return $out;
@@ -927,10 +927,10 @@ class PaginatorHelper : Helper
      */
     protected function _firstNumber(string $ellipsis, array $params, int $start, array $options): string
     {
-        $out = '';
-        $first = is_int($options['first']) ? $options['first'] : 0;
-        if ($options['first'] && $start > 1) {
-            $offset = $start <= $first ? $start - 1 : $options['first'];
+        $out = "";
+        $first = is_int($options["first"]) ? $options["first"] : 0;
+        if ($options["first"] && $start > 1) {
+            $offset = $start <= $first ? $start - 1 : $options["first"];
             $out .= this.first($offset, $options);
             if ($first < $start - 1) {
                 $out .= $ellipsis;
@@ -951,11 +951,11 @@ class PaginatorHelper : Helper
      */
     protected function _lastNumber(string $ellipsis, array $params, int $end, array $options): string
     {
-        $out = '';
-        $last = is_int($options['last']) ? $options['last'] : 0;
-        if ($options['last'] && $end < $params['pageCount']) {
-            $offset = $params['pageCount'] < $end + $last ? $params['pageCount'] - $end : $options['last'];
-            if ($offset <= $options['last'] && $params['pageCount'] - $end > $last) {
+        $out = "";
+        $last = is_int($options["last"]) ? $options["last"] : 0;
+        if ($options["last"] && $end < $params["pageCount"]) {
+            $offset = $params["pageCount"] < $end + $last ? $params["pageCount"] - $end : $options["last"];
+            if ($offset <= $options["last"] && $params["pageCount"] - $end > $last) {
                 $out .= $ellipsis;
             }
             $out .= this.last($offset, $options);
@@ -974,24 +974,24 @@ class PaginatorHelper : Helper
      */
     protected function _numbers(StringTemplate $templater, array $params, array $options): string
     {
-        $out = '';
-        $out .= $options['before'];
+        $out = "";
+        $out .= $options["before"];
 
-        for ($i = 1; $i <= $params['pageCount']; $i++) {
-            if ($i == $params['page']) {
-                $out .= $templater.format('current', [
-                    'text': this.Number.format($params['page']),
-                    'url': this.generateUrl(['page': $i], $options['model'], $options['url']),
+        for ($i = 1; $i <= $params["pageCount"]; $i++) {
+            if ($i == $params["page"]) {
+                $out .= $templater.format("current", [
+                    "text": this.Number.format($params["page"]),
+                    "url": this.generateUrl(["page": $i], $options["model"], $options["url"]),
                 ]);
             } else {
                 $vars = [
-                    'text': this.Number.format($i),
-                    'url': this.generateUrl(['page': $i], $options['model'], $options['url']),
+                    "text": this.Number.format($i),
+                    "url": this.generateUrl(["page": $i], $options["model"], $options["url"]),
                 ];
-                $out .= $templater.format('number', $vars);
+                $out .= $templater.format("number", $vars);
             }
         }
-        $out .= $options['after'];
+        $out .= $options["after"];
 
         return $out;
     }
@@ -1000,7 +1000,7 @@ class PaginatorHelper : Helper
      * Returns a first or set of numbers for the first pages.
      *
      * ```
-     * echo this.Paginator.first('< first');
+     * echo this.Paginator.first("< first");
      * ```
      *
      * Creates a single link for the first page. Will output nothing if you are on the first page.
@@ -1024,34 +1024,34 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    function first($first = '<< first', array $options = []): string
+    function first($first = "<< first", array $options = []): string
     {
         $options += [
-            'url': [],
-            'model': this.defaultModel(),
-            'escape': true,
+            "url": [],
+            "model": this.defaultModel(),
+            "escape": true,
         ];
 
-        $params = this.params($options['model']);
+        $params = this.params($options["model"]);
 
-        if ($params['pageCount'] <= 1) {
-            return '';
+        if ($params["pageCount"] <= 1) {
+            return "";
         }
 
-        $out = '';
+        $out = "";
 
-        if (is_int($first) && $params['page'] >= $first) {
+        if (is_int($first) && $params["page"] >= $first) {
             for ($i = 1; $i <= $first; $i++) {
-                $out .= this.templater().format('number', [
-                    'url': this.generateUrl(['page': $i], $options['model'], $options['url']),
-                    'text': this.Number.format($i),
+                $out .= this.templater().format("number", [
+                    "url": this.generateUrl(["page": $i], $options["model"], $options["url"]),
+                    "text": this.Number.format($i),
                 ]);
             }
-        } elseif ($params['page'] > 1 && is_string($first)) {
-            $first = $options['escape'] ? h($first) : $first;
-            $out .= this.templater().format('first', [
-                'url': this.generateUrl(['page': 1], $options['model'], $options['url']),
-                'text': $first,
+        } elseif ($params["page"] > 1 && is_string($first)) {
+            $first = $options["escape"] ? h($first) : $first;
+            $out .= this.templater().format("first", [
+                "url": this.generateUrl(["page": 1], $options["model"], $options["url"]),
+                "text": $first,
             ]);
         }
 
@@ -1062,7 +1062,7 @@ class PaginatorHelper : Helper
      * Returns a last or set of numbers for the last pages.
      *
      * ```
-     * echo this.Paginator.last('last >');
+     * echo this.Paginator.last("last >");
      * ```
      *
      * Creates a single link for the last page. Will output nothing if you are on the last page.
@@ -1084,34 +1084,34 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    function last($last = 'last >>', array $options = []): string
+    function last($last = "last >>", array $options = []): string
     {
         $options += [
-            'model': this.defaultModel(),
-            'escape': true,
-            'url': [],
+            "model": this.defaultModel(),
+            "escape": true,
+            "url": [],
         ];
-        $params = this.params($options['model']);
+        $params = this.params($options["model"]);
 
-        if ($params['pageCount'] <= 1) {
-            return '';
+        if ($params["pageCount"] <= 1) {
+            return "";
         }
 
-        $out = '';
-        $lower = (int)$params['pageCount'] - (int)$last + 1;
+        $out = "";
+        $lower = (int)$params["pageCount"] - (int)$last + 1;
 
-        if (is_int($last) && $params['page'] <= $lower) {
-            for ($i = $lower; $i <= $params['pageCount']; $i++) {
-                $out .= this.templater().format('number', [
-                    'url': this.generateUrl(['page': $i], $options['model'], $options['url']),
-                    'text': this.Number.format($i),
+        if (is_int($last) && $params["page"] <= $lower) {
+            for ($i = $lower; $i <= $params["pageCount"]; $i++) {
+                $out .= this.templater().format("number", [
+                    "url": this.generateUrl(["page": $i], $options["model"], $options["url"]),
+                    "text": this.Number.format($i),
                 ]);
             }
-        } elseif ($params['page'] < $params['pageCount'] && is_string($last)) {
-            $last = $options['escape'] ? h($last) : $last;
-            $out .= this.templater().format('last', [
-                'url': this.generateUrl(['page': $params['pageCount']], $options['model'], $options['url']),
-                'text': $last,
+        } elseif ($params["page"] < $params["pageCount"] && is_string($last)) {
+            $last = $options["escape"] ? h($last) : $last;
+            $out .= this.templater().format("last", [
+                "url": this.generateUrl(["page": $params["pageCount"]], $options["model"], $options["url"]),
+                "text": $last,
             ]);
         }
 
@@ -1128,7 +1128,7 @@ class PaginatorHelper : Helper
      * Echos the links directly, will output nothing if there is neither a previous nor next page.
      *
      * ```
-     * this.Paginator.meta(['block': true]);
+     * this.Paginator.meta(["block": true]);
      * ```
      *
      * Will append the output of the meta function to the named block - if true is passed the "meta"
@@ -1149,54 +1149,54 @@ class PaginatorHelper : Helper
     function meta(array $options = []): ?string
     {
         $options += [
-                'model': null,
-                'block': false,
-                'prev': true,
-                'next': true,
-                'first': false,
-                'last': false,
+                "model": null,
+                "block": false,
+                "prev": true,
+                "next": true,
+                "first": false,
+                "last": false,
             ];
 
-        $model = $options['model'] ?? null;
+        $model = $options["model"] ?? null;
         $params = this.params($model);
         $links = [];
 
-        if ($options['prev'] && this.hasPrev()) {
+        if ($options["prev"] && this.hasPrev()) {
             $links[] = this.Html.meta(
-                'prev',
-                this.generateUrl(['page': $params['page'] - 1], null, [], ['escape': false, 'fullBase': true])
+                "prev",
+                this.generateUrl(["page": $params["page"] - 1], null, [], ["escape": false, "fullBase": true])
             );
         }
 
-        if ($options['next'] && this.hasNext()) {
+        if ($options["next"] && this.hasNext()) {
             $links[] = this.Html.meta(
-                'next',
-                this.generateUrl(['page': $params['page'] + 1], null, [], ['escape': false, 'fullBase': true])
+                "next",
+                this.generateUrl(["page": $params["page"] + 1], null, [], ["escape": false, "fullBase": true])
             );
         }
 
-        if ($options['first']) {
+        if ($options["first"]) {
             $links[] = this.Html.meta(
-                'first',
-                this.generateUrl(['page': 1], null, [], ['escape': false, 'fullBase': true])
+                "first",
+                this.generateUrl(["page": 1], null, [], ["escape": false, "fullBase": true])
             );
         }
 
-        if ($options['last']) {
+        if ($options["last"]) {
             $links[] = this.Html.meta(
-                'last',
-                this.generateUrl(['page': $params['pageCount']], null, [], ['escape': false, 'fullBase': true])
+                "last",
+                this.generateUrl(["page": $params["pageCount"]], null, [], ["escape": false, "fullBase": true])
             );
         }
 
         $out = implode($links);
 
-        if ($options['block'] == true) {
-            $options['block'] = __FUNCTION__;
+        if ($options["block"] == true) {
+            $options["block"] = __FUNCTION__;
         }
 
-        if ($options['block']) {
-            _View.append($options['block'], $out);
+        if ($options["block"]) {
+            _View.append($options["block"], $out);
 
             return null;
         }
@@ -1219,40 +1219,40 @@ class PaginatorHelper : Helper
      * This will generate a wrapping form.
      *
      * @param array<string, string> $limits The options array.
-     * @param int|null $default Default option for pagination limit. Defaults to `this.param('perPage')`.
+     * @param int|null $default Default option for pagination limit. Defaults to `this.param("perPage")`.
      * @param array<string, mixed> $options Options for Select tag attributes like class, id or event
      * @return string html output.
      */
     function limitControl(array $limits = [], ?int $default = null, array $options = []): string
     {
-        $model = $options['model'] ?? this.defaultModel();
-        unset($options['model']);
+        $model = $options["model"] ?? this.defaultModel();
+        unset($options["model"]);
 
         $params = this.params($model);
-        $scope = '';
-        if (!empty($params['scope'])) {
-            $scope = $params['scope'] . '.';
+        $scope = "";
+        if (!empty($params["scope"])) {
+            $scope = $params["scope"] . ".";
         }
 
         if (empty($default)) {
-            $default = $params['perPage'] ?? 0;
+            $default = $params["perPage"] ?? 0;
         }
 
         if (empty($limits)) {
             $limits = [
-                '20': '20',
-                '50': '50',
-                '100': '100',
+                "20": "20",
+                "50": "50",
+                "100": "100",
             ];
         }
-        $out = this.Form.create(null, ['type': 'get']);
-        $out .= this.Form.control($scope . 'limit', $options + [
-            'type': 'select',
-            'label': __('View'),
-            'default': $default,
-            'value': _View.getRequest().getQuery('limit'),
-            'options': $limits,
-            'onChange': 'this.form.submit()',
+        $out = this.Form.create(null, ["type": "get"]);
+        $out .= this.Form.control($scope . "limit", $options + [
+            "type": "select",
+            "label": __("View"),
+            "default": $default,
+            "value": _View.getRequest().getQuery("limit"),
+            "options": $limits,
+            "onChange": "this.form.submit()",
         ]);
         $out .= this.Form.end();
 

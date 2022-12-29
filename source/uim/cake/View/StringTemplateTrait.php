@@ -69,13 +69,13 @@ trait StringTemplateTrait
     {
         if (_templater == null) {
             /** @var class-string<\Cake\View\StringTemplate> $class */
-            $class = this.getConfig('templateClass') ?: StringTemplate::class;
+            $class = this.getConfig("templateClass") ?: StringTemplate::class;
             _templater = new $class();
 
-            $templates = this.getConfig('templates');
+            $templates = this.getConfig("templates");
             if ($templates) {
                 if (is_string($templates)) {
-                    _templater.add(_defaultConfig['templates']);
+                    _templater.add(_defaultConfig["templates"]);
                     _templater.load($templates);
                 } else {
                     _templater.add($templates);

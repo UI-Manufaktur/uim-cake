@@ -30,15 +30,15 @@ class RadioWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name': '',
-        'options': [],
-        'disabled': null,
-        'val': null,
-        'escape': true,
-        'label': true,
-        'empty': false,
-        'idPrefix': null,
-        'templateVars': [],
+        "name": "",
+        "options": [],
+        "disabled": null,
+        "val": null,
+        "escape": true,
+        "label": true,
+        "empty": false,
+        "idPrefix": null,
+        "templateVars": [],
     ];
 
     /**
@@ -91,26 +91,26 @@ class RadioWidget : BasicWidget
     {
         $data += this.mergeDefaults($data, $context);
 
-        if ($data['options'] instanceof Traversable) {
-            $options = iterator_to_array($data['options']);
+        if ($data["options"] instanceof Traversable) {
+            $options = iterator_to_array($data["options"]);
         } else {
-            $options = (array)$data['options'];
+            $options = (array)$data["options"];
         }
 
-        if (!empty($data['empty'])) {
-            $empty = $data['empty'] == true ? 'empty' : $data['empty'];
-            $options = ['': $empty] + $options;
+        if (!empty($data["empty"])) {
+            $empty = $data["empty"] == true ? "empty" : $data["empty"];
+            $options = ["": $empty] + $options;
         }
-        unset($data['empty']);
+        unset($data["empty"]);
 
-        _idPrefix = $data['idPrefix'];
+        _idPrefix = $data["idPrefix"];
         _clearIds();
         $opts = [];
         foreach ($options as $val: $text) {
             $opts[] = _renderInput($val, $text, $data, $context);
         }
 
-        return implode('', $opts);
+        return implode("", $opts);
     }
 
     /**
@@ -128,9 +128,9 @@ class RadioWidget : BasicWidget
         if ($disabled == true) {
             return true;
         }
-        $isNumeric = is_numeric($radio['value']);
+        $isNumeric = is_numeric($radio["value"]);
 
-        return !is_array($disabled) || in_array((string)$radio['value'], $disabled, !$isNumeric);
+        return !is_array($disabled) || in_array((string)$radio["value"], $disabled, !$isNumeric);
     }
 
     /**
@@ -144,63 +144,63 @@ class RadioWidget : BasicWidget
      */
     protected function _renderInput($val, $text, $data, $context): string
     {
-        $escape = $data['escape'];
-        if (is_array($text) && isset($text['text'], $text['value'])) {
+        $escape = $data["escape"];
+        if (is_array($text) && isset($text["text"], $text["value"])) {
             $radio = $text;
         } else {
-            $radio = ['value': $val, 'text': $text];
+            $radio = ["value": $val, "text": $text];
         }
-        $radio['name'] = $data['name'];
+        $radio["name"] = $data["name"];
 
-        $radio['templateVars'] = $radio['templateVars'] ?? [];
-        if (!empty($data['templateVars'])) {
-            $radio['templateVars'] = array_merge($data['templateVars'], $radio['templateVars']);
+        $radio["templateVars"] = $radio["templateVars"] ?? [];
+        if (!empty($data["templateVars"])) {
+            $radio["templateVars"] = array_merge($data["templateVars"], $radio["templateVars"]);
         }
 
-        if (empty($radio['id'])) {
-            if (isset($data['id'])) {
-                $radio['id'] = $data['id'] . '-' . rtrim(
-                    _idSuffix((string)$radio['value']),
-                    '-'
+        if (empty($radio["id"])) {
+            if (isset($data["id"])) {
+                $radio["id"] = $data["id"] . "-" . rtrim(
+                    _idSuffix((string)$radio["value"]),
+                    "-"
                 );
             } else {
-                $radio['id'] = _id((string)$radio['name'], (string)$radio['value']);
+                $radio["id"] = _id((string)$radio["name"], (string)$radio["value"]);
             }
         }
-        if (isset($data['val']) && is_bool($data['val'])) {
-            $data['val'] = $data['val'] ? 1 : 0;
+        if (isset($data["val"]) && is_bool($data["val"])) {
+            $data["val"] = $data["val"] ? 1 : 0;
         }
-        if (isset($data['val']) && (string)$data['val'] == (string)$radio['value']) {
-            $radio['checked'] = true;
-            $radio['templateVars']['activeClass'] = 'active';
-        }
-
-        if (!is_bool($data['label']) && isset($radio['checked']) && $radio['checked']) {
-            $selectedClass = _templates.format('selectedClass', []);
-            $data['label'] = _templates.addClass($data['label'], $selectedClass);
+        if (isset($data["val"]) && (string)$data["val"] == (string)$radio["value"]) {
+            $radio["checked"] = true;
+            $radio["templateVars"]["activeClass"] = "active";
         }
 
-        $radio['disabled'] = _isDisabled($radio, $data['disabled']);
-        if (!empty($data['required'])) {
-            $radio['required'] = true;
-        }
-        if (!empty($data['form'])) {
-            $radio['form'] = $data['form'];
+        if (!is_bool($data["label"]) && isset($radio["checked"]) && $radio["checked"]) {
+            $selectedClass = _templates.format("selectedClass", []);
+            $data["label"] = _templates.addClass($data["label"], $selectedClass);
         }
 
-        $input = _templates.format('radio', [
-            'name': $radio['name'],
-            'value': $escape ? h($radio['value']) : $radio['value'],
-            'templateVars': $radio['templateVars'],
-            'attrs': _templates.formatAttributes(
+        $radio["disabled"] = _isDisabled($radio, $data["disabled"]);
+        if (!empty($data["required"])) {
+            $radio["required"] = true;
+        }
+        if (!empty($data["form"])) {
+            $radio["form"] = $data["form"];
+        }
+
+        $input = _templates.format("radio", [
+            "name": $radio["name"],
+            "value": $escape ? h($radio["value"]) : $radio["value"],
+            "templateVars": $radio["templateVars"],
+            "attrs": _templates.formatAttributes(
                 $radio + $data,
-                ['name', 'value', 'text', 'options', 'label', 'val', 'type']
+                ["name", "value", "text", "options", "label", "val", "type"]
             ),
         ]);
 
         $label = _renderLabel(
             $radio,
-            $data['label'],
+            $data["label"],
             $input,
             $context,
             $escape
@@ -208,15 +208,15 @@ class RadioWidget : BasicWidget
 
         if (
             $label == false &&
-            strpos(_templates.get('radioWrapper'), '{{input}}') == false
+            strpos(_templates.get("radioWrapper"), "{{input}}") == false
         ) {
             $label = $input;
         }
 
-        return _templates.format('radioWrapper', [
-            'input': $input,
-            'label': $label,
-            'templateVars': $data['templateVars'],
+        return _templates.format("radioWrapper", [
+            "input": $input,
+            "label": $label,
+            "templateVars": $data["templateVars"],
         ]);
     }
 
@@ -234,18 +234,18 @@ class RadioWidget : BasicWidget
      * @return string|false Generated label.
      */
     protected function _renderLabel(array $radio, $label, $input, $context, $escape) {
-        if (isset($radio['label'])) {
-            $label = $radio['label'];
+        if (isset($radio["label"])) {
+            $label = $radio["label"];
         } elseif ($label == false) {
             return false;
         }
         $labelAttrs = is_array($label) ? $label : [];
         $labelAttrs += [
-            'for': $radio['id'],
-            'escape': $escape,
-            'text': $radio['text'],
-            'templateVars': $radio['templateVars'],
-            'input': $input,
+            "for": $radio["id"],
+            "escape": $escape,
+            "text": $radio["text"],
+            "templateVars": $radio["templateVars"],
+            "input": $input,
         ];
 
         return _label.render($labelAttrs, $context);

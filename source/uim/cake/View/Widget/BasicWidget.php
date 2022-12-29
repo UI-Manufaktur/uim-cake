@@ -34,11 +34,11 @@ class BasicWidget : WidgetInterface
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name': '',
-        'val': null,
-        'type': 'text',
-        'escape': true,
-        'templateVars': [],
+        "name": "",
+        "val": null,
+        "type": "text",
+        "escape": true,
+        "templateVars": [],
     ];
 
     /**
@@ -69,35 +69,35 @@ class BasicWidget : WidgetInterface
     {
         $data = this.mergeDefaults($data, $context);
 
-        $data['value'] = $data['val'];
-        unset($data['val']);
-        if ($data['value'] == false) {
+        $data["value"] = $data["val"];
+        unset($data["val"]);
+        if ($data["value"] == false) {
             // explicitly convert to 0 to avoid empty string which is marshaled as null
-            $data['value'] = '0';
+            $data["value"] = "0";
         }
 
-        $fieldName = $data['fieldName'] ?? null;
+        $fieldName = $data["fieldName"] ?? null;
         if ($fieldName) {
-            if ($data['type'] == 'number' && !isset($data['step'])) {
+            if ($data["type"] == "number" && !isset($data["step"])) {
                 $data = this.setStep($data, $context, $fieldName);
             }
 
-            $typesWithMaxLength = ['text', 'email', 'tel', 'url', 'search'];
+            $typesWithMaxLength = ["text", "email", "tel", "url", "search"];
             if (
-                !array_key_exists('maxlength', $data)
-                && in_array($data['type'], $typesWithMaxLength, true)
+                !array_key_exists("maxlength", $data)
+                && in_array($data["type"], $typesWithMaxLength, true)
             ) {
                 $data = this.setMaxLength($data, $context, $fieldName);
             }
         }
 
-        return _templates.format('input', [
-            'name': $data['name'],
-            'type': $data['type'],
-            'templateVars': $data['templateVars'],
-            'attrs': _templates.formatAttributes(
+        return _templates.format("input", [
+            "name": $data["name"],
+            "type": $data["type"],
+            "templateVars": $data["templateVars"],
+            "attrs": _templates.formatAttributes(
                 $data,
-                ['name', 'type']
+                ["name", "type"]
             ),
         ]);
     }
@@ -113,8 +113,8 @@ class BasicWidget : WidgetInterface
     {
         $data += this.defaults;
 
-        if (isset($data['fieldName']) && !array_key_exists('required', $data)) {
-            $data = this.setRequired($data, $context, $data['fieldName']);
+        if (isset($data["fieldName"]) && !array_key_exists("required", $data)) {
+            $data = this.setRequired($data, $context, $data["fieldName"]);
         }
 
         return $data;
@@ -131,16 +131,16 @@ class BasicWidget : WidgetInterface
     protected function setRequired(array $data, ContextInterface $context, string $fieldName): array
     {
         if (
-            empty($data['disabled'])
+            empty($data["disabled"])
             && (
-                (isset($data['type'])
-                    && $data['type'] != 'hidden'
+                (isset($data["type"])
+                    && $data["type"] != "hidden"
                 )
-                || !isset($data['type'])
+                || !isset($data["type"])
             )
             && $context.isRequired($fieldName)
         ) {
-            $data['required'] = true;
+            $data["required"] = true;
         }
 
         return $data;
@@ -158,7 +158,7 @@ class BasicWidget : WidgetInterface
     {
         $maxLength = $context.getMaxLength($fieldName);
         if ($maxLength != null) {
-            $data['maxlength'] = min($maxLength, 100000);
+            $data["maxlength"] = min($maxLength, 100000);
         }
 
         return $data;
@@ -177,11 +177,11 @@ class BasicWidget : WidgetInterface
         $dbType = $context.type($fieldName);
         $fieldDef = $context.attributes($fieldName);
 
-        if ($dbType == 'decimal' && isset($fieldDef['precision'])) {
-            $decimalPlaces = $fieldDef['precision'];
-            $data['step'] = sprintf('%.' . $decimalPlaces . 'F', pow(10, -1 * $decimalPlaces));
-        } elseif ($dbType == 'float') {
-            $data['step'] = 'any';
+        if ($dbType == "decimal" && isset($fieldDef["precision"])) {
+            $decimalPlaces = $fieldDef["precision"];
+            $data["step"] = sprintf("%." . $decimalPlaces . "F", pow(10, -1 * $decimalPlaces));
+        } elseif ($dbType == "float") {
+            $data["step"] = "any";
         }
 
         return $data;
@@ -192,10 +192,10 @@ class BasicWidget : WidgetInterface
      */
     function secureFields(array $data): array
     {
-        if (!isset($data['name']) || $data['name'] == '') {
+        if (!isset($data["name"]) || $data["name"] == "") {
             return [];
         }
 
-        return [$data['name']];
+        return [$data["name"]];
     }
 }

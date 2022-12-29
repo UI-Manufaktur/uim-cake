@@ -31,11 +31,11 @@ class ContextFactory
      * Constructor.
      *
      * @param array $providers Array of provider callables. Each element should
-     *   be of form `['type': 'a-string', 'callable': ..]`
+     *   be of form `["type": "a-string", "callable": ..]`
      */
     public this(array $providers = []) {
         foreach ($providers as $provider) {
-            this.addProvider($provider['type'], $provider['callable']);
+            this.addProvider($provider["type"], $provider["callable"]);
         }
     }
 
@@ -43,22 +43,22 @@ class ContextFactory
      * Create factory instance with providers "array", "form" and "orm".
      *
      * @param array $providers Array of provider callables. Each element should
-     *   be of form `['type': 'a-string', 'callable': ..]`
+     *   be of form `["type": "a-string", "callable": ..]`
      * @return static
      */
     public static function createWithDefaults(array $providers = []) {
         $providers = [
             [
-                'type': 'orm',
-                'callable': function ($request, $data) {
-                    if ($data['entity'] instanceof EntityInterface) {
+                "type": "orm",
+                "callable": function ($request, $data) {
+                    if ($data["entity"] instanceof EntityInterface) {
                         return new EntityContext($data);
                     }
-                    if (isset($data['table'])) {
+                    if (isset($data["table"])) {
                         return new EntityContext($data);
                     }
-                    if (is_iterable($data['entity'])) {
-                        $pass = (new Collection($data['entity'])).first() != null;
+                    if (is_iterable($data["entity"])) {
+                        $pass = (new Collection($data["entity"])).first() != null;
                         if ($pass) {
                             return new EntityContext($data);
                         } else {
@@ -68,25 +68,25 @@ class ContextFactory
                 },
             ],
             [
-                'type': 'form',
-                'callable': function ($request, $data) {
-                    if ($data['entity'] instanceof Form) {
+                "type": "form",
+                "callable": function ($request, $data) {
+                    if ($data["entity"] instanceof Form) {
                         return new FormContext($data);
                     }
                 },
             ],
             [
-                'type': 'array',
-                'callable': function ($request, $data) {
-                    if (is_array($data['entity']) && isset($data['entity']['schema'])) {
-                        return new ArrayContext($data['entity']);
+                "type": "array",
+                "callable": function ($request, $data) {
+                    if (is_array($data["entity"]) && isset($data["entity"]["schema"])) {
+                        return new ArrayContext($data["entity"]);
                     }
                 },
             ],
             [
-                'type': 'null',
-                'callable': function ($request, $data) {
-                    if ($data['entity'] == null) {
+                "type": "null",
+                "callable": function ($request, $data) {
+                    if ($data["entity"] == null) {
                         return new NullContext($data);
                     }
                 },
@@ -112,7 +112,7 @@ class ContextFactory
      * @return this
      */
     function addProvider(string $type, callable $check) {
-        this.providers = [$type: ['type': $type, 'callable': $check]]
+        this.providers = [$type: ["type": $type, "callable": $check]]
             + this.providers;
 
         return this;
@@ -130,10 +130,10 @@ class ContextFactory
      */
     function get(ServerRequest $request, array $data = []): ContextInterface
     {
-        $data += ['entity': null];
+        $data += ["entity": null];
 
         foreach (this.providers as $provider) {
-            $check = $provider['callable'];
+            $check = $provider["callable"];
             $context = $check($request, $data);
             if ($context) {
                 break;
@@ -142,9 +142,9 @@ class ContextFactory
 
         if (!isset($context)) {
             throw new RuntimeException(sprintf(
-                'No context provider found for value of type `%s`.'
-                . ' Use `null` as 1st argument of FormHelper::create() to create a context-less form.',
-                getTypeName($data['entity'])
+                "No context provider found for value of type `%s`."
+                . " Use `null` as 1st argument of FormHelper::create() to create a context-less form.",
+                getTypeName($data["entity"])
             ));
         }
 

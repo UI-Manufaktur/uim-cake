@@ -32,7 +32,7 @@ class TextHelper : Helper
      *
      * @var array
      */
-    protected $helpers = ['Html'];
+    protected $helpers = ["Html"];
 
     /**
      * Default config for this class
@@ -40,7 +40,7 @@ class TextHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'engine': Text::class,
+        "engine": Text::class,
     ];
 
     /**
@@ -76,9 +76,9 @@ class TextHelper : Helper
         $config = _config;
 
         /** @psalm-var class-string<\Cake\Utility\Text>|null $engineClass */
-        $engineClass = App::className($config['engine'], 'Utility');
+        $engineClass = App::className($config["engine"], "Utility");
         if ($engineClass == null) {
-            throw new CakeException(sprintf('Class for %s could not be found', $config['engine']));
+            throw new CakeException(sprintf("Class for %s could not be found", $config["engine"]));
         }
 
         _engine = new $engineClass($config);
@@ -111,10 +111,10 @@ class TextHelper : Helper
     function autoLinkUrls(string $text, array $options = []): string
     {
         _placeholders = [];
-        $options += ['escape': true];
+        $options += ["escape": true];
 
         // phpcs:disable Generic.Files.LineLength
-        $pattern = '/(?:(?<!href="|src="|">)
+        $pattern = "/(?:(?<!href="|src="|">)
             (?>
                 (
                     (?<left>[\[<(]) # left paren,brace
@@ -127,22 +127,22 @@ class TextHelper : Helper
                 |
                 (?<url_bare>(?P>url)) # A bare URL. Use subroutine
             )
-            )/ixu';
+            )/ixu";
         // phpcs:enable Generic.Files.LineLength
 
         $text = preg_replace_callback(
             $pattern,
-            [&this, '_insertPlaceHolder'],
+            [&this, "_insertPlaceHolder"],
             $text
         );
         // phpcs:disable Generic.Files.LineLength
         $text = preg_replace_callback(
-            '#(?<!href="|">)(?<!\b[[:punct:]])(?<!http://|https://|ftp://|nntp://)www\.[^\s\n\%\ <]+[^\s<\n\%\,\.\ ](?<!\))#i',
-            [&this, '_insertPlaceHolder'],
+            "#(?<!href="|">)(?<!\b[[:punct:]])(?<!http://|https://|ftp://|nntp://)www\.[^\s\n\%\ <]+[^\s<\n\%\,\.\ ](?<!\))#i",
+            [&this, "_insertPlaceHolder"],
             $text
         );
         // phpcs:enable Generic.Files.LineLength
-        if ($options['escape']) {
+        if ($options["escape"]) {
             $text = h($text);
         }
 
@@ -151,7 +151,7 @@ class TextHelper : Helper
 
     /**
      * Saves the placeholder for a string, for later use. This gets around double
-     * escaping content in URL's.
+     * escaping content in URL"s.
      *
      * @param array $matches An array of regexp matches.
      * @return string Replaced values.
@@ -159,18 +159,18 @@ class TextHelper : Helper
     protected function _insertPlaceHolder(array $matches): string
     {
         $match = $matches[0];
-        $envelope = ['', ''];
-        if (isset($matches['url'])) {
-            $match = $matches['url'];
-            $envelope = [$matches['left'], $matches['right']];
+        $envelope = ["", ""];
+        if (isset($matches["url"])) {
+            $match = $matches["url"];
+            $envelope = [$matches["left"], $matches["right"]];
         }
-        if (isset($matches['url_bare'])) {
-            $match = $matches['url_bare'];
+        if (isset($matches["url_bare"])) {
+            $match = $matches["url_bare"];
         }
-        $key = hash_hmac('sha1', $match, Security::getSalt());
+        $key = hash_hmac("sha1", $match, Security::getSalt());
         _placeholders[$key] = [
-            'content': $match,
-            'envelope': $envelope,
+            "content": $match,
+            "envelope": $envelope,
         ];
 
         return $key;
@@ -187,10 +187,10 @@ class TextHelper : Helper
     {
         $replace = [];
         foreach (_placeholders as $hash: $content) {
-            $link = $url = $content['content'];
-            $envelope = $content['envelope'];
-            if (!preg_match('#^[a-z]+\://#i', $url)) {
-                $url = 'http://' . $url;
+            $link = $url = $content["content"];
+            $envelope = $content["envelope"];
+            if (!preg_match("#^[a-z]+\://#i", $url)) {
+                $url = "http://" . $url;
             }
             $replace[$hash] = $envelope[0] . this.Html.link($link, $url, $htmlOptions) . $envelope[1];
         }
@@ -210,9 +210,9 @@ class TextHelper : Helper
     {
         $replace = [];
         foreach (_placeholders as $hash: $content) {
-            $url = $content['content'];
-            $envelope = $content['envelope'];
-            $replace[$hash] = $envelope[0] . this.Html.link($url, 'mailto:' . $url, $options) . $envelope[1];
+            $url = $content["content"];
+            $envelope = $content["envelope"];
+            $replace[$hash] = $envelope[0] . this.Html.link($url, "mailto:" . $url, $options) . $envelope[1];
         }
 
         return strtr($text, $replace);
@@ -232,16 +232,16 @@ class TextHelper : Helper
      */
     function autoLinkEmails(string $text, array $options = []): string
     {
-        $options += ['escape': true];
+        $options += ["escape": true];
         _placeholders = [];
 
-        $atom = '[\p{L}0-9!#$%&\'*+\/=?^_`{|}~-]';
+        $atom = "[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]";
         $text = preg_replace_callback(
-            '/(?<=\s|^|\(|\>|\;)(' . $atom . '*(?:\.' . $atom . '+)*@[\p{L}0-9-]+(?:\.[\p{L}0-9-]+)+)/ui',
-            [&this, '_insertPlaceholder'],
+            "/(?<=\s|^|\(|\>|\;)(" . $atom . "*(?:\." . $atom . "+)*@[\p{L}0-9-]+(?:\.[\p{L}0-9-]+)+)/ui",
+            [&this, "_insertPlaceholder"],
             $text
         );
-        if ($options['escape']) {
+        if ($options["escape"]) {
             $text = h($text);
         }
 
@@ -264,7 +264,7 @@ class TextHelper : Helper
     {
         $text = this.autoLinkUrls($text, $options);
 
-        return this.autoLinkEmails($text, ['escape': false] + $options);
+        return this.autoLinkEmails($text, ["escape": false] + $options);
     }
 
     /**
@@ -294,16 +294,16 @@ class TextHelper : Helper
      */
     function autoParagraph(?string $text): string
     {
-        $text = $text ?? '';
-        if (trim($text) != '') {
-            $text = preg_replace('|<br[^>]*>\s*<br[^>]*>|i', "\n\n", $text . "\n");
+        $text = $text ?? "";
+        if (trim($text) != "") {
+            $text = preg_replace("|<br[^>]*>\s*<br[^>]*>|i", "\n\n", $text . "\n");
             $text = preg_replace("/\n\n+/", "\n\n", str_replace(["\r\n", "\r"], "\n", $text));
-            $texts = preg_split('/\n\s*\n/', $text, -1, PREG_SPLIT_NO_EMPTY);
-            $text = '';
+            $texts = preg_split("/\n\s*\n/", $text, -1, PREG_SPLIT_NO_EMPTY);
+            $text = "";
             foreach ($texts as $txt) {
-                $text .= '<p>' . nl2br(trim($txt, "\n")) . "</p>\n";
+                $text .= "<p>" . nl2br(trim($txt, "\n")) . "</p>\n";
             }
-            $text = preg_replace('|<p>\s*</p>|', '', $text);
+            $text = preg_replace("|<p>\s*</p>|", "", $text);
         }
 
         return $text;
@@ -368,22 +368,22 @@ class TextHelper : Helper
      * @see \Cake\Utility\Text::excerpt()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#extracting-an-excerpt
      */
-    function excerpt(string $text, string $phrase, int $radius = 100, string $ending = '...'): string
+    function excerpt(string $text, string $phrase, int $radius = 100, string $ending = "..."): string
     {
         return _engine.excerpt($text, $phrase, $radius, $ending);
     }
 
     /**
-     * Creates a comma separated list where the last two items are joined with 'and', forming natural language.
+     * Creates a comma separated list where the last two items are joined with "and", forming natural language.
      *
      * @param array<string> $list The list to be joined.
-     * @param string|null $and The word used to join the last and second last items together with. Defaults to 'and'.
-     * @param string $separator The separator used to join all the other items together. Defaults to ', '.
+     * @param string|null $and The word used to join the last and second last items together with. Defaults to "and".
+     * @param string $separator The separator used to join all the other items together. Defaults to ", ".
      * @return string The glued together string.
      * @see \Cake\Utility\Text::toList()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
      */
-    function toList(array $list, ?string $and = null, string $separator = ', '): string
+    function toList(array $list, ?string $and = null, string $separator = ", "): string
     {
         return _engine.toList($list, $and, $separator);
     }
@@ -394,13 +394,13 @@ class TextHelper : Helper
      *
      * ### Options:
      *
-     * - `replacement`: Replacement string. Default '-'.
+     * - `replacement`: Replacement string. Default "-".
      * - `transliteratorId`: A valid transliterator id string.
      *   If `null` (default) the transliterator (identifier) set via
      *   `Text::setTransliteratorId()` or `Text::setTransliterator()` will be used.
      *   If `false` no transliteration will be done, only non-words will be removed.
      * - `preserve`: Specific non-word character to preserve. Default `null`.
-     *   For e.g. this option can be set to '.' to generate clean file names.
+     *   For e.g. this option can be set to "." to generate clean file names.
      *
      * @param string $string the string you want to slug
      * @param array<string, mixed>|string $options If string it will be used as replacement character

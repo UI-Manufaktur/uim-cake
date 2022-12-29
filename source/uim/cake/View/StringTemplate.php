@@ -34,47 +34,47 @@ class StringTemplate
      * @var array<string, bool>
      */
     protected $_compactAttributes = [
-        'allowfullscreen': true,
-        'async': true,
-        'autofocus': true,
-        'autoplay': true,
-        'checked': true,
-        'compact': true,
-        'controls': true,
-        'declare': true,
-        'default': true,
-        'defaultchecked': true,
-        'defaultmuted': true,
-        'defaultselected': true,
-        'defer': true,
-        'disabled': true,
-        'enabled': true,
-        'formnovalidate': true,
-        'hidden': true,
-        'indeterminate': true,
-        'inert': true,
-        'ismap': true,
-        'itemscope': true,
-        'loop': true,
-        'multiple': true,
-        'muted': true,
-        'nohref': true,
-        'noresize': true,
-        'noshade': true,
-        'novalidate': true,
-        'nowrap': true,
-        'open': true,
-        'pauseonexit': true,
-        'readonly': true,
-        'required': true,
-        'reversed': true,
-        'scoped': true,
-        'seamless': true,
-        'selected': true,
-        'sortable': true,
-        'truespeed': true,
-        'typemustmatch': true,
-        'visible': true,
+        "allowfullscreen": true,
+        "async": true,
+        "autofocus": true,
+        "autoplay": true,
+        "checked": true,
+        "compact": true,
+        "controls": true,
+        "declare": true,
+        "default": true,
+        "defaultchecked": true,
+        "defaultmuted": true,
+        "defaultselected": true,
+        "defer": true,
+        "disabled": true,
+        "enabled": true,
+        "formnovalidate": true,
+        "hidden": true,
+        "indeterminate": true,
+        "inert": true,
+        "ismap": true,
+        "itemscope": true,
+        "loop": true,
+        "multiple": true,
+        "muted": true,
+        "nohref": true,
+        "noresize": true,
+        "noshade": true,
+        "novalidate": true,
+        "nowrap": true,
+        "open": true,
+        "pauseonexit": true,
+        "readonly": true,
+        "required": true,
+        "reversed": true,
+        "scoped": true,
+        "seamless": true,
+        "selected": true,
+        "sortable": true,
+        "truespeed": true,
+        "typemustmatch": true,
+        "visible": true,
     ];
 
     /**
@@ -140,8 +140,8 @@ class StringTemplate
      *
      * ```
      * $templater.add([
-     *   'link': '<a href="{{url}}">{{title}}</a>'
-     *   'button': '<button>{{text}}</button>'
+     *   "link": "<a href="{{url}}">{{title}}</a>"
+     *   "button": "<button>{{text}}</button>"
      * ]);
      * ```
      *
@@ -172,10 +172,10 @@ class StringTemplate
                 _compiled[$name] = [null, null];
             }
 
-            $template = str_replace('%', '%%', $template);
-            preg_match_all('#\{\{([\w\.]+)\}\}#', $template, $matches);
+            $template = str_replace("%", "%%", $template);
+            preg_match_all("#\{\{([\w\.]+)\}\}#", $template, $matches);
             _compiled[$name] = [
-                str_replace($matches[0], '%s', $template),
+                str_replace($matches[0], "%s", $template),
                 $matches[1],
             ];
         }
@@ -193,8 +193,8 @@ class StringTemplate
      */
     function load(string $file): void
     {
-        if ($file == '') {
-            throw new CakeException('String template filename cannot be an empty string');
+        if ($file == "") {
+            throw new CakeException("String template filename cannot be an empty string");
         }
 
         $loader = new PhpConfig();
@@ -225,19 +225,19 @@ class StringTemplate
     function format(string $name, array $data): string
     {
         if (!isset(_compiled[$name])) {
-            throw new RuntimeException("Cannot find template named '$name'.");
+            throw new RuntimeException("Cannot find template named "$name".");
         }
         [$template, $placeholders] = _compiled[$name];
 
-        if (isset($data['templateVars'])) {
-            $data += $data['templateVars'];
-            unset($data['templateVars']);
+        if (isset($data["templateVars"])) {
+            $data += $data["templateVars"];
+            unset($data["templateVars"]);
         }
         $replace = [];
         foreach ($placeholders as $placeholder) {
             $replacement = $data[$placeholder] ?? null;
             if (is_array($replacement)) {
-                $replacement = implode('', $replacement);
+                $replacement = implode("", $replacement);
             }
             $replace[] = $replacement;
         }
@@ -250,20 +250,20 @@ class StringTemplate
      * of $options array happens to be one of those listed
      * in `StringTemplate::$_compactAttributes` and its value is one of:
      *
-     * - '1' (string)
+     * - "1" (string)
      * - 1 (integer)
      * - true (boolean)
-     * - 'true' (string)
+     * - "true" (string)
      *
-     * Then the value will be reset to be identical with key's name.
+     * Then the value will be reset to be identical with key"s name.
      * If the value is not one of these 4, the parameter is not output.
      *
-     * 'escape' is a special option in that it controls the conversion of
+     * "escape" is a special option in that it controls the conversion of
      * attributes to their HTML-entity encoded equivalents. Set to false to disable HTML-encoding.
      *
      * If value for any option key is set to `null` or `false`, that option will be excluded from output.
      *
-     * This method uses the 'attribute' and 'compactAttribute' templates. Each of
+     * This method uses the "attribute" and "compactAttribute" templates. Each of
      * these templates uses the `name` and `value` variables. You can modify these
      * templates to change how attributes are formatted.
      *
@@ -273,16 +273,16 @@ class StringTemplate
      */
     function formatAttributes(?array $options, ?array $exclude = null): string
     {
-        $insertBefore = ' ';
-        $options = (array)$options + ['escape': true];
+        $insertBefore = " ";
+        $options = (array)$options + ["escape": true];
 
         if (!is_array($exclude)) {
             $exclude = [];
         }
 
-        $exclude = ['escape': true, 'idPrefix': true, 'templateVars': true, 'fieldName': true]
+        $exclude = ["escape": true, "idPrefix": true, "templateVars": true, "fieldName": true]
             + array_flip($exclude);
-        $escape = $options['escape'];
+        $escape = $options["escape"];
         $attributes = [];
 
         foreach ($options as $key: $value) {
@@ -290,14 +290,14 @@ class StringTemplate
                 $attributes[] = _formatAttribute((string)$key, $value, $escape);
             }
         }
-        $out = trim(implode(' ', $attributes));
+        $out = trim(implode(" ", $attributes));
 
-        return $out ? $insertBefore . $out : '';
+        return $out ? $insertBefore . $out : "";
     }
 
     /**
      * Formats an individual attribute, and returns the string value of the composed attribute.
-     * Works with minimized attributes that have the same value as their name such as 'disabled' and 'checked'
+     * Works with minimized attributes that have the same value as their name such as "disabled" and "checked"
      *
      * @param string $key The name of the attribute to create
      * @param array<string>|string $value The value of the attribute to create.
@@ -307,24 +307,24 @@ class StringTemplate
     protected function _formatAttribute(string $key, $value, $escape = true): string
     {
         if (is_array($value)) {
-            $value = implode(' ', $value);
+            $value = implode(" ", $value);
         }
         if (is_numeric($key)) {
             return "$value=\"$value\"";
         }
-        $truthy = [1, '1', true, 'true', $key];
+        $truthy = [1, "1", true, "true", $key];
         $isMinimized = isset(_compactAttributes[$key]);
-        if (!preg_match('/\A(\w|[.-])+\z/', $key)) {
+        if (!preg_match("/\A(\w|[.-])+\z/", $key)) {
             $key = h($key);
         }
         if ($isMinimized && in_array($value, $truthy, true)) {
             return "$key=\"$key\"";
         }
         if ($isMinimized) {
-            return '';
+            return "";
         }
 
-        return $key . '="' . ($escape ? h($value) : $value) . '"';
+        return $key . "="" . ($escape ? h($value) : $value) . """;
     }
 
     /**
@@ -332,10 +332,10 @@ class StringTemplate
      *
      * @param array|string $input The array or string to add the class to
      * @param array<string>|string $newClass the new class or classes to add
-     * @param string $useIndex if you are inputting an array with an element other than default of 'class'.
+     * @param string $useIndex if you are inputting an array with an element other than default of "class".
      * @return array<string>|string
      */
-    function addClass($input, $newClass, string $useIndex = 'class') {
+    function addClass($input, $newClass, string $useIndex = "class") {
         // NOOP
         if (empty($newClass)) {
             return $input;
@@ -351,14 +351,14 @@ class StringTemplate
         // Convert and sanitise the inputs
         if (!is_array($class)) {
             if (is_string($class) && !empty($class)) {
-                $class = explode(' ', $class);
+                $class = explode(" ", $class);
             } else {
                 $class = [];
             }
         }
 
         if (is_string($newClass)) {
-            $newClass = explode(' ', $newClass);
+            $newClass = explode(" ", $newClass);
         }
 
         $class = array_unique(array_merge($class, $newClass));

@@ -38,12 +38,12 @@ class DateTimeWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name': '',
-        'val': null,
-        'type': 'datetime-local',
-        'escape': true,
-        'timezone': null,
-        'templateVars': [],
+        "name": "",
+        "val": null,
+        "type": "datetime-local",
+        "escape": true,
+        "timezone": null,
+        "templateVars": [],
     ];
 
     /**
@@ -52,11 +52,11 @@ class DateTimeWidget : BasicWidget
      * @var array<string>
      */
     protected $formatMap = [
-        'datetime-local': 'Y-m-d\TH:i:s',
-        'date': 'Y-m-d',
-        'time': 'H:i:s',
-        'month': 'Y-m',
-        'week': 'Y-\WW',
+        "datetime-local": "Y-m-d\TH:i:s",
+        "date": "Y-m-d",
+        "time": "H:i:s",
+        "month": "Y-m",
+        "week": "Y-\WW",
     ];
 
     /**
@@ -67,11 +67,11 @@ class DateTimeWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaultStep = [
-        'datetime-local': '1',
-        'date': null,
-        'time': '1',
-        'month': null,
-        'week': null,
+        "datetime-local": "1",
+        "date": null,
+        "time": "1",
+        "month": null,
+        "week": null,
     ];
 
     /**
@@ -102,25 +102,25 @@ class DateTimeWidget : BasicWidget
     {
         $data += this.mergeDefaults($data, $context);
 
-        if (!isset(this.formatMap[$data['type']])) {
+        if (!isset(this.formatMap[$data["type"]])) {
             throw new InvalidArgumentException(sprintf(
-                'Invalid type `%s` for input tag, expected datetime-local, date, time, month or week',
-                $data['type']
+                "Invalid type `%s` for input tag, expected datetime-local, date, time, month or week",
+                $data["type"]
             ));
         }
 
-        $data = this.setStep($data, $context, $data['fieldName'] ?? '');
+        $data = this.setStep($data, $context, $data["fieldName"] ?? "");
 
-        $data['value'] = this.formatDateTime($data['val'], $data);
-        unset($data['val'], $data['timezone'], $data['format']);
+        $data["value"] = this.formatDateTime($data["val"], $data);
+        unset($data["val"], $data["timezone"], $data["format"]);
 
-        return _templates.format('input', [
-            'name': $data['name'],
-            'type': $data['type'],
-            'templateVars': $data['templateVars'],
-            'attrs': _templates.formatAttributes(
+        return _templates.format("input", [
+            "name": $data["name"],
+            "type": $data["type"],
+            "templateVars": $data["templateVars"],
+            "attrs": _templates.formatAttributes(
                 $data,
-                ['name', 'type']
+                ["name", "type"]
             ),
         ]);
     }
@@ -135,17 +135,17 @@ class DateTimeWidget : BasicWidget
      */
     protected function setStep(array $data, ContextInterface $context, string $fieldName): array
     {
-        if (array_key_exists('step', $data)) {
+        if (array_key_exists("step", $data)) {
             return $data;
         }
 
-        if (isset($data['format'])) {
-            $data['step'] = null;
+        if (isset($data["format"])) {
+            $data["step"] = null;
         } else {
-            $data['step'] = this.defaultStep[$data['type']];
+            $data["step"] = this.defaultStep[$data["type"]];
         }
 
-        if (empty($data['fieldName'])) {
+        if (empty($data["fieldName"])) {
             return $data;
         }
 
@@ -157,7 +157,7 @@ class DateTimeWidget : BasicWidget
         ];
 
         if (in_array($dbType, $fractionalTypes, true)) {
-            $data['step'] = '0.001';
+            $data["step"] = "0.001";
         }
 
         return $data;
@@ -173,8 +173,8 @@ class DateTimeWidget : BasicWidget
      */
     protected function formatDateTime($value, array $options): string
     {
-        if ($value == '' || $value == null) {
-            return '';
+        if ($value == "" || $value == null) {
+            return "";
         }
 
         try {
@@ -183,7 +183,7 @@ class DateTimeWidget : BasicWidget
             } elseif (is_string($value) && !is_numeric($value)) {
                 $dateTime = new DateTime($value);
             } elseif (is_numeric($value)) {
-                $dateTime = new DateTime('@' . $value);
+                $dateTime = new DateTime("@" . $value);
             } else {
                 $dateTime = new DateTime();
             }
@@ -191,8 +191,8 @@ class DateTimeWidget : BasicWidget
             $dateTime = new DateTime();
         }
 
-        if (isset($options['timezone'])) {
-            $timezone = $options['timezone'];
+        if (isset($options["timezone"])) {
+            $timezone = $options["timezone"];
             if (!$timezone instanceof DateTimeZone) {
                 $timezone = new DateTimeZone($timezone);
             }
@@ -200,17 +200,17 @@ class DateTimeWidget : BasicWidget
             $dateTime = $dateTime.setTimezone($timezone);
         }
 
-        if (isset($options['format'])) {
-            $format = $options['format'];
+        if (isset($options["format"])) {
+            $format = $options["format"];
         } else {
-            $format = this.formatMap[$options['type']];
+            $format = this.formatMap[$options["type"]];
 
             if (
-                $options['type'] == 'datetime-local'
-                && is_numeric($options['step'])
-                && $options['step'] < 1
+                $options["type"] == "datetime-local"
+                && is_numeric($options["step"])
+                && $options["step"] < 1
             ) {
-                $format = 'Y-m-d\TH:i:s.v';
+                $format = "Y-m-d\TH:i:s.v";
             }
         }
 
@@ -222,10 +222,10 @@ class DateTimeWidget : BasicWidget
      */
     function secureFields(array $data): array
     {
-        if (!isset($data['name']) || $data['name'] == '') {
+        if (!isset($data["name"]) || $data["name"] == "") {
             return [];
         }
 
-        return [$data['name']];
+        return [$data["name"]];
     }
 }

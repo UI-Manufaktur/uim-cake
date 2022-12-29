@@ -44,7 +44,7 @@ trait IdGeneratorTrait
     /**
      * Generate an ID attribute for an element.
      *
-     * Ensures that id's for a given set of fields are unique.
+     * Ensures that id"s for a given set of fields are unique.
      *
      * @param string $name The ID attribute name.
      * @param string $val The ID attribute value.
@@ -55,20 +55,20 @@ trait IdGeneratorTrait
         $name = _domId($name);
         $suffix = _idSuffix($val);
 
-        return trim($name . '-' . $suffix, '-');
+        return trim($name . "-" . $suffix, "-");
     }
 
     /**
      * Generate an ID suffix.
      *
-     * Ensures that id's for a given set of fields are unique.
+     * Ensures that id"s for a given set of fields are unique.
      *
      * @param string $val The ID attribute value.
      * @return string Generated id suffix.
      */
     protected function _idSuffix(string $val): string
     {
-        $idSuffix = mb_strtolower(str_replace(['/', '@', '<', '>', ' ', '"', '\''], '-', $val));
+        $idSuffix = mb_strtolower(str_replace(["/", "@", "<", ">", " ", """, "\""], "-", $val));
         $count = 1;
         $check = $idSuffix;
         while (in_array($check, _idSuffixes, true)) {
@@ -87,9 +87,9 @@ trait IdGeneratorTrait
      */
     protected function _domId(string $value): string
     {
-        $domId = mb_strtolower(Text::slug($value, '-'));
+        $domId = mb_strtolower(Text::slug($value, "-"));
         if (_idPrefix) {
-            $domId = _idPrefix . '-' . $domId;
+            $domId = _idPrefix . "-" . $domId;
         }
 
         return $domId;

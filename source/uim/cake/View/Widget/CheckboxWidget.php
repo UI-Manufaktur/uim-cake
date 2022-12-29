@@ -25,11 +25,11 @@ class CheckboxWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name': '',
-        'value': 1,
-        'val': null,
-        'disabled': false,
-        'templateVars': [],
+        "name": "",
+        "value": 1,
+        "val": null,
+        "disabled": false,
+        "templateVars": [],
     ];
 
     /**
@@ -38,9 +38,9 @@ class CheckboxWidget : BasicWidget
      * Data supports the following keys:
      *
      * - `name` - The name of the input.
-     * - `value` - The value attribute. Defaults to '1'.
+     * - `value` - The value attribute. Defaults to "1".
      * - `val` - The current value. If it matches `value` the checkbox will be checked.
-     *   You can also use the 'checked' attribute to make the checkbox checked.
+     *   You can also use the "checked" attribute to make the checkbox checked.
      * - `disabled` - Whether the checkbox should be disabled.
      *
      * Any other attributes passed in will be treated as HTML attributes.
@@ -54,20 +54,20 @@ class CheckboxWidget : BasicWidget
         $data += this.mergeDefaults($data, $context);
 
         if (_isChecked($data)) {
-            $data['checked'] = true;
+            $data["checked"] = true;
         }
-        unset($data['val']);
+        unset($data["val"]);
 
         $attrs = _templates.formatAttributes(
             $data,
-            ['name', 'value']
+            ["name", "value"]
         );
 
-        return _templates.format('checkbox', [
-            'name': $data['name'],
-            'value': $data['value'],
-            'templateVars': $data['templateVars'],
-            'attrs': $attrs,
+        return _templates.format("checkbox", [
+            "name": $data["name"],
+            "value": $data["value"],
+            "templateVars": $data["templateVars"],
+            "attrs": $attrs,
         ]);
     }
 
@@ -79,10 +79,10 @@ class CheckboxWidget : BasicWidget
      */
     protected function _isChecked(array $data): bool
     {
-        if (array_key_exists('checked', $data)) {
-            return (bool)$data['checked'];
+        if (array_key_exists("checked", $data)) {
+            return (bool)$data["checked"];
         }
 
-        return (string)$data['val'] == (string)$data['value'];
+        return (string)$data["val"] == (string)$data["value"];
     }
 }

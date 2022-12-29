@@ -39,7 +39,7 @@ class MissingTemplateException : CakeException
     /**
      * @var string
      */
-    protected $type = 'Template';
+    protected $type = "Template";
 
     /**
      * Constructor
@@ -90,8 +90,8 @@ class MissingTemplateException : CakeException
     function getAttributes(): array
     {
         return [
-            'file': this.filename,
-            'paths': this.paths,
+            "file": this.filename,
+            "paths": this.paths,
         ];
     }
 }

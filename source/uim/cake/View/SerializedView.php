@@ -39,7 +39,7 @@ abstract class SerializedView : View
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'serialize': null,
+        "serialize": null,
     ];
 
     /**
@@ -60,7 +60,7 @@ abstract class SerializedView : View
      * @return this
      */
     function loadHelpers() {
-        if (!this.getConfig('serialize')) {
+        if (!this.getConfig("serialize")) {
             parent::loadHelpers();
         }
 
@@ -86,12 +86,12 @@ abstract class SerializedView : View
      */
     function render(?string $template = null, $layout = null): string
     {
-        $serialize = this.getConfig('serialize', false);
+        $serialize = this.getConfig("serialize", false);
 
         if ($serialize == true) {
             $options = array_map(
                 function ($v) {
-                    return '_' . $v;
+                    return "_" . $v;
                 },
                 array_keys(_defaultConfig)
             );
@@ -106,7 +106,7 @@ abstract class SerializedView : View
                 return _serialize($serialize);
             } catch (Exception | TypeError $e) {
                 throw new SerializationFailureException(
-                    'Serialization of View data failed.',
+                    "Serialization of View data failed.",
                     null,
                     $e
                 );

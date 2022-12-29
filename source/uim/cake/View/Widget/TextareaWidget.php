@@ -25,11 +25,11 @@ class TextareaWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'val': '',
-        'name': '',
-        'escape': true,
-        'rows': 5,
-        'templateVars': [],
+        "val": "",
+        "name": "",
+        "escape": true,
+        "rows": 5,
+        "templateVars": [],
     ];
 
     /**
@@ -52,19 +52,19 @@ class TextareaWidget : BasicWidget
         $data += this.mergeDefaults($data, $context);
 
         if (
-            !array_key_exists('maxlength', $data)
-            && isset($data['fieldName'])
+            !array_key_exists("maxlength", $data)
+            && isset($data["fieldName"])
         ) {
-            $data = this.setMaxLength($data, $context, $data['fieldName']);
+            $data = this.setMaxLength($data, $context, $data["fieldName"]);
         }
 
-        return _templates.format('textarea', [
-            'name': $data['name'],
-            'value': $data['escape'] ? h($data['val']) : $data['val'],
-            'templateVars': $data['templateVars'],
-            'attrs': _templates.formatAttributes(
+        return _templates.format("textarea", [
+            "name": $data["name"],
+            "value": $data["escape"] ? h($data["val"]) : $data["val"],
+            "templateVars": $data["templateVars"],
+            "attrs": _templates.formatAttributes(
                 $data,
-                ['name', 'val']
+                ["name", "val"]
             ),
         ]);
     }

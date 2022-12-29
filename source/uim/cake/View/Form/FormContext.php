@@ -46,12 +46,12 @@ class FormContext : ContextInterface
      * - `validator` Optional name of the validation method to call on the Form object.
      */
     public this(array $context) {
-        if (!isset($context['entity']) || !$context['entity'] instanceof Form) {
-            throw new CakeException('`$context[\'entity\']` must be an instance of Cake\Form\Form');
+        if (!isset($context["entity"]) || !$context["entity"] instanceof Form) {
+            throw new CakeException("`$context[\"entity\"]` must be an instance of Cake\Form\Form");
         }
 
-        _form = $context['entity'];
-        _validator = $context['validator'] ?? null;
+        _form = $context["entity"];
+        _validator = $context["validator"] ?? null;
     }
 
     /**
@@ -62,7 +62,7 @@ class FormContext : ContextInterface
      */
     function primaryKey(): array
     {
-        deprecationWarning('`FormContext::primaryKey()` is deprecated. Use `FormContext::getPrimaryKey()`.');
+        deprecationWarning("`FormContext::primaryKey()` is deprecated. Use `FormContext::getPrimaryKey()`.");
 
         return [];
     }
@@ -96,8 +96,8 @@ class FormContext : ContextInterface
      */
     function val(string $field, array $options = []) {
         $options += [
-            'default': null,
-            'schemaDefault': true,
+            "default": null,
+            "schemaDefault": true,
         ];
 
         $val = _form.getData($field);
@@ -105,8 +105,8 @@ class FormContext : ContextInterface
             return $val;
         }
 
-        if ($options['default'] != null || !$options['schemaDefault']) {
-            return $options['default'];
+        if ($options["default"] != null || !$options["schemaDefault"]) {
+            return $options["default"];
         }
 
         return _schemaDefault($field);
@@ -121,7 +121,7 @@ class FormContext : ContextInterface
     protected function _schemaDefault(string $field) {
         $field = _form.getSchema().field($field);
         if ($field) {
-            return $field['default'];
+            return $field["default"];
         }
 
         return null;
@@ -136,7 +136,7 @@ class FormContext : ContextInterface
         if (!$validator.hasField($field)) {
             return null;
         }
-        if (this.type($field) != 'boolean') {
+        if (this.type($field) != "boolean") {
             return !$validator.isEmptyAllowed($field, this.isCreate());
         }
 
@@ -148,7 +148,7 @@ class FormContext : ContextInterface
      */
     function getRequiredMessage(string $field): ?string
     {
-        $parts = explode('.', $field);
+        $parts = explode(".", $field);
 
         $validator = _form.getValidator(_validator);
         $fieldName = array_pop($parts);
@@ -174,14 +174,14 @@ class FormContext : ContextInterface
             return null;
         }
         foreach ($validator.field($field).rules() as $rule) {
-            if ($rule.get('rule') == 'maxLength') {
-                return $rule.get('pass')[0];
+            if ($rule.get("rule") == "maxLength") {
+                return $rule.get("pass")[0];
             }
         }
 
         $attributes = this.attributes($field);
-        if (!empty($attributes['length'])) {
-            return $attributes['length'];
+        if (!empty($attributes["length"])) {
+            return $attributes["length"];
         }
 
         return null;

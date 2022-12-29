@@ -632,7 +632,7 @@ class ViewBuilder : JsonSerializable, Serializable
             throw new RuntimeException(sprintf(
                 "Failed serializing the `%s` %s in the `%s` view var",
                 is_resource($item) ? get_resource_type($item) : get_class($item),
-                is_resource($item) ? "resource" : 'object',
+                is_resource($item) ? "resource" : "object",
                 $key
             ));
         }

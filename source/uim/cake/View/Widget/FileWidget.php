@@ -26,9 +26,9 @@ class FileWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name': '',
-        'escape': true,
-        'templateVars': [],
+        "name": "",
+        "escape": true,
+        "templateVars": [],
     ];
 
     /**
@@ -51,14 +51,14 @@ class FileWidget : BasicWidget
     {
         $data += this.mergeDefaults($data, $context);
 
-        unset($data['val']);
+        unset($data["val"]);
 
-        return _templates.format('file', [
-            'name': $data['name'],
-            'templateVars': $data['templateVars'],
-            'attrs': _templates.formatAttributes(
+        return _templates.format("file", [
+            "name": $data["name"],
+            "templateVars": $data["templateVars"],
+            "attrs": _templates.formatAttributes(
                 $data,
-                ['name']
+                ["name"]
             ),
         ]);
     }
@@ -69,14 +69,14 @@ class FileWidget : BasicWidget
     function secureFields(array $data): array
     {
         // PSR7 UploadedFileInterface objects are used.
-        if (Configure::read('App.uploadedFilesAsObjects', true)) {
-            return [$data['name']];
+        if (Configure::read("App.uploadedFilesAsObjects", true)) {
+            return [$data["name"]];
         }
 
         // Backwards compatibility for array files.
         $fields = [];
-        foreach (['name', 'type', 'tmp_name', 'error', 'size'] as $suffix) {
-            $fields[] = $data['name'] . '[' . $suffix . ']';
+        foreach (["name", "type", "tmp_name", "error", "size"] as $suffix) {
+            $fields[] = $data["name"] . "[" . $suffix . "]";
         }
 
         return $fields;

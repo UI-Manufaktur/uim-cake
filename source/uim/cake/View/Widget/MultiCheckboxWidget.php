@@ -29,14 +29,14 @@ class MultiCheckboxWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name': '',
-        'escape': true,
-        'options': [],
-        'disabled': null,
-        'val': null,
-        'idPrefix': null,
-        'templateVars': [],
-        'label': true,
+        "name": "",
+        "escape": true,
+        "options": [],
+        "disabled": null,
+        "val": null,
+        "idPrefix": null,
+        "templateVars": [],
+        "label": true,
     ];
 
     /**
@@ -90,15 +90,15 @@ class MultiCheckboxWidget : BasicWidget
      * You can generate simple options using a basic associative array:
      *
      * ```
-     * 'options': ['elk': 'Elk', 'beaver': 'Beaver']
+     * "options": ["elk": "Elk", "beaver": "Beaver"]
      * ```
      *
      * If you need to define additional attributes on your option elements
      * you can use the complex form for options:
      *
      * ```
-     * 'options': [
-     *   ['value': 'elk', 'text': 'Elk', 'data-foo': 'bar'],
+     * "options": [
+     *   ["value": "elk", "text": "Elk", "data-foo": "bar"],
      * ]
      * ```
      *
@@ -113,10 +113,10 @@ class MultiCheckboxWidget : BasicWidget
     {
         $data += this.mergeDefaults($data, $context);
 
-        _idPrefix = $data['idPrefix'];
+        _idPrefix = $data["idPrefix"];
         _clearIds();
 
-        return implode('', _renderInputs($data, $context));
+        return implode("", _renderInputs($data, $context));
     }
 
     /**
@@ -129,46 +129,46 @@ class MultiCheckboxWidget : BasicWidget
     protected function _renderInputs(array $data, ContextInterface $context): array
     {
         $out = [];
-        foreach ($data['options'] as $key: $val) {
+        foreach ($data["options"] as $key: $val) {
             // Grouped inputs in a fieldset.
-            if (is_string($key) && is_array($val) && !isset($val['text'], $val['value'])) {
-                $inputs = _renderInputs(['options': $val] + $data, $context);
-                $title = _templates.format('multicheckboxTitle', ['text': $key]);
-                $out[] = _templates.format('multicheckboxWrapper', [
-                    'content': $title . implode('', $inputs),
+            if (is_string($key) && is_array($val) && !isset($val["text"], $val["value"])) {
+                $inputs = _renderInputs(["options": $val] + $data, $context);
+                $title = _templates.format("multicheckboxTitle", ["text": $key]);
+                $out[] = _templates.format("multicheckboxWrapper", [
+                    "content": $title . implode("", $inputs),
                 ]);
                 continue;
             }
 
             // Standard inputs.
             $checkbox = [
-                'value': $key,
-                'text': $val,
+                "value": $key,
+                "text": $val,
             ];
-            if (is_array($val) && isset($val['text'], $val['value'])) {
+            if (is_array($val) && isset($val["text"], $val["value"])) {
                 $checkbox = $val;
             }
-            if (!isset($checkbox['templateVars'])) {
-                $checkbox['templateVars'] = $data['templateVars'];
+            if (!isset($checkbox["templateVars"])) {
+                $checkbox["templateVars"] = $data["templateVars"];
             }
-            if (!isset($checkbox['label'])) {
-                $checkbox['label'] = $data['label'];
+            if (!isset($checkbox["label"])) {
+                $checkbox["label"] = $data["label"];
             }
-            if (!empty($data['templateVars'])) {
-                $checkbox['templateVars'] = array_merge($data['templateVars'], $checkbox['templateVars']);
+            if (!empty($data["templateVars"])) {
+                $checkbox["templateVars"] = array_merge($data["templateVars"], $checkbox["templateVars"]);
             }
-            $checkbox['name'] = $data['name'];
-            $checkbox['escape'] = $data['escape'];
-            $checkbox['checked'] = _isSelected((string)$checkbox['value'], $data['val']);
-            $checkbox['disabled'] = _isDisabled((string)$checkbox['value'], $data['disabled']);
-            if (empty($checkbox['id'])) {
-                if (isset($data['id'])) {
-                    $checkbox['id'] = $data['id'] . '-' . trim(
-                        _idSuffix((string)$checkbox['value']),
-                        '-'
+            $checkbox["name"] = $data["name"];
+            $checkbox["escape"] = $data["escape"];
+            $checkbox["checked"] = _isSelected((string)$checkbox["value"], $data["val"]);
+            $checkbox["disabled"] = _isDisabled((string)$checkbox["value"], $data["disabled"]);
+            if (empty($checkbox["id"])) {
+                if (isset($data["id"])) {
+                    $checkbox["id"] = $data["id"] . "-" . trim(
+                        _idSuffix((string)$checkbox["value"]),
+                        "-"
                     );
                 } else {
-                    $checkbox['id'] = _id($checkbox['name'], (string)$checkbox['value']);
+                    $checkbox["id"] = _id($checkbox["name"], (string)$checkbox["value"]);
                 }
             }
             $out[] = _renderInput($checkbox + $data, $context);
@@ -186,40 +186,40 @@ class MultiCheckboxWidget : BasicWidget
      */
     protected function _renderInput(array $checkbox, ContextInterface $context): string
     {
-        $input = _templates.format('checkbox', [
-            'name': $checkbox['name'] . '[]',
-            'value': $checkbox['escape'] ? h($checkbox['value']) : $checkbox['value'],
-            'templateVars': $checkbox['templateVars'],
-            'attrs': _templates.formatAttributes(
+        $input = _templates.format("checkbox", [
+            "name": $checkbox["name"] . "[]",
+            "value": $checkbox["escape"] ? h($checkbox["value"]) : $checkbox["value"],
+            "templateVars": $checkbox["templateVars"],
+            "attrs": _templates.formatAttributes(
                 $checkbox,
-                ['name', 'value', 'text', 'options', 'label', 'val', 'type']
+                ["name", "value", "text", "options", "label", "val", "type"]
             ),
         ]);
 
-        if ($checkbox['label'] == false && strpos(_templates.get('checkboxWrapper'), '{{input}}') == false) {
+        if ($checkbox["label"] == false && strpos(_templates.get("checkboxWrapper"), "{{input}}") == false) {
             $label = $input;
         } else {
-            $labelAttrs = is_array($checkbox['label']) ? $checkbox['label'] : [];
+            $labelAttrs = is_array($checkbox["label"]) ? $checkbox["label"] : [];
             $labelAttrs += [
-                'for': $checkbox['id'],
-                'escape': $checkbox['escape'],
-                'text': $checkbox['text'],
-                'templateVars': $checkbox['templateVars'],
-                'input': $input,
+                "for": $checkbox["id"],
+                "escape": $checkbox["escape"],
+                "text": $checkbox["text"],
+                "templateVars": $checkbox["templateVars"],
+                "input": $input,
             ];
 
-            if ($checkbox['checked']) {
-                $selectedClass = _templates.format('selectedClass', []);
+            if ($checkbox["checked"]) {
+                $selectedClass = _templates.format("selectedClass", []);
                 $labelAttrs = (array)_templates.addClass($labelAttrs, $selectedClass);
             }
 
             $label = _label.render($labelAttrs, $context);
         }
 
-        return _templates.format('checkboxWrapper', [
-            'templateVars': $checkbox['templateVars'],
-            'label': $label,
-            'input': $input,
+        return _templates.format("checkboxWrapper", [
+            "templateVars": $checkbox["templateVars"],
+            "label": $label,
+            "input": $input,
         ]);
     }
 

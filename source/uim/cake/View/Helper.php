@@ -91,7 +91,7 @@ class Helper : IEventListener
      * @return mixed|void
      */
     function __call(string $method, array $params) {
-        trigger_error(sprintf('Method %1$s::%2$s does not exist', static::class, $method), E_USER_WARNING);
+        trigger_error(sprintf("Method %1$s::%2$s does not exist", static::class, $method), E_USER_WARNING);
     }
 
     /**
@@ -102,8 +102,8 @@ class Helper : IEventListener
      */
     function __get(string $name) {
         if (isset(_helperMap[$name]) && !isset(this.{$name})) {
-            $config = ['enabled': false] + (array)_helperMap[$name]['config'];
-            this.{$name} = _View.loadHelper(_helperMap[$name]['class'], $config);
+            $config = ["enabled": false] + (array)_helperMap[$name]["config"];
+            this.{$name} = _View.loadHelper(_helperMap[$name]["class"], $config);
 
             return this.{$name};
         }
@@ -122,8 +122,8 @@ class Helper : IEventListener
     /**
      * Returns a string to be used as onclick handler for confirm dialogs.
      *
-     * @param string $okCode Code to be executed after user chose 'OK'
-     * @param string $cancelCode Code to be executed after user chose 'Cancel'
+     * @param string $okCode Code to be executed after user chose "OK"
+     * @param string $cancelCode Code to be executed after user chose "Cancel"
      * @return string "onclick" JS code
      */
     protected function _confirm(string $okCode, string $cancelCode): string
@@ -136,15 +136,15 @@ class Helper : IEventListener
      *
      * @param array<string, mixed> $options Array options/attributes to add a class to
      * @param string $class The class name being added.
-     * @param string $key the key to use for class. Defaults to `'class'`.
+     * @param string $key the key to use for class. Defaults to `"class"`.
      * @return array<string, mixed> Array of options with $key set.
      */
-    function addClass(array $options, string $class, string $key = 'class'): array
+    function addClass(array $options, string $class, string $key = "class"): array
     {
         if (isset($options[$key]) && is_array($options[$key])) {
             $options[$key][] = $class;
         } elseif (isset($options[$key]) && trim($options[$key])) {
-            $options[$key] .= ' ' . $class;
+            $options[$key] .= " " . $class;
         } else {
             $options[$key] = $class;
         }
@@ -166,12 +166,12 @@ class Helper : IEventListener
     function implementedEvents(): array
     {
         $eventMap = [
-            'View.beforeRenderFile': 'beforeRenderFile',
-            'View.afterRenderFile': 'afterRenderFile',
-            'View.beforeRender': 'beforeRender',
-            'View.afterRender': 'afterRender',
-            'View.beforeLayout': 'beforeLayout',
-            'View.afterLayout': 'afterLayout',
+            "View.beforeRenderFile": "beforeRenderFile",
+            "View.afterRenderFile": "afterRenderFile",
+            "View.beforeRender": "beforeRender",
+            "View.afterRender": "afterRender",
+            "View.beforeLayout": "beforeLayout",
+            "View.afterLayout": "afterLayout",
         ];
         $events = [];
         foreach ($eventMap as $event: $method) {
@@ -204,9 +204,9 @@ class Helper : IEventListener
     function __debugInfo(): array
     {
         return [
-            'helpers': this.helpers,
-            'implementedEvents': this.implementedEvents(),
-            '_config': this.getConfig(),
+            "helpers": this.helpers,
+            "implementedEvents": this.implementedEvents(),
+            "_config": this.getConfig(),
         ];
     }
 }

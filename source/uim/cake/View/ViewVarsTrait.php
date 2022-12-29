@@ -59,9 +59,9 @@ trait ViewVarsTrait
             $builder.setClassName($viewClass);
         }
 
-        foreach (['name', 'plugin'] as $prop) {
+        foreach (["name", "plugin"] as $prop) {
             if (isset(this.{$prop})) {
-                $method = 'set' . ucfirst($prop);
+                $method = "set" . ucfirst($prop);
                 $builder.{$method}(this.{$prop});
             }
         }
@@ -80,7 +80,7 @@ trait ViewVarsTrait
      *
      * @param array|string $name A string or an array of data.
      * @param mixed $value Value in case $name is a string (which then works as the key).
-     *   Unused if $name is an associative array, otherwise serves as the values to $name's keys.
+     *   Unused if $name is an associative array, otherwise serves as the values to $name"s keys.
      * @return this
      */
     function set($name, $value = null) {

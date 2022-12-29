@@ -39,24 +39,24 @@ import uim.cake.utilities.Hash;
  *
  *  ```
  *  $article = [
- *    'data': [
- *      'id': '1',
- *      'title': 'First post!',
+ *    "data": [
+ *      "id": "1",
+ *      "title": "First post!",
  *    ],
- *    'schema': [
- *      'id': ['type': 'integer'],
- *      'title': ['type': 'string', 'length': 255],
- *      '_constraints': [
- *        'primary': ['type': 'primary', 'columns': ['id']]
+ *    "schema": [
+ *      "id": ["type": "integer"],
+ *      "title": ["type": "string", "length": 255],
+ *      "_constraints": [
+ *        "primary": ["type": "primary", "columns": ["id"]]
  *      ]
  *    ],
- *    'defaults': [
- *      'title': 'Default title',
+ *    "defaults": [
+ *      "title": "Default title",
  *    ],
- *    'required': [
- *      'id': true, // will use default required message
- *      'title': 'Please enter a title',
- *      'body': false,
+ *    "required": [
+ *      "id": true, // will use default required message
+ *      "title": "Please enter a title",
+ *      "body": false,
  *    ],
  *  ];
  *  ```
@@ -77,11 +77,11 @@ class ArrayContext : ContextInterface
      */
     public this(array $context) {
         $context += [
-            'data': [],
-            'schema': [],
-            'required': [],
-            'defaults': [],
-            'errors': [],
+            "data": [],
+            "schema": [],
+            "required": [],
+            "defaults": [],
+            "errors": [],
         ];
         _context = $context;
     }
@@ -94,7 +94,7 @@ class ArrayContext : ContextInterface
      */
     function primaryKey(): array
     {
-        deprecationWarning('`ArrayContext::primaryKey()` is deprecated. Use `ArrayContext::getPrimaryKey()`.');
+        deprecationWarning("`ArrayContext::primaryKey()` is deprecated. Use `ArrayContext::getPrimaryKey()`.");
 
         return this.getPrimaryKey();
     }
@@ -107,14 +107,14 @@ class ArrayContext : ContextInterface
     function getPrimaryKey(): array
     {
         if (
-            empty(_context['schema']['_constraints']) ||
-            !is_array(_context['schema']['_constraints'])
+            empty(_context["schema"]["_constraints"]) ||
+            !is_array(_context["schema"]["_constraints"])
         ) {
             return [];
         }
-        foreach (_context['schema']['_constraints'] as $data) {
-            if (isset($data['type']) && $data['type'] == 'primary') {
-                return (array)($data['columns'] ?? []);
+        foreach (_context["schema"]["_constraints"] as $data) {
+            if (isset($data["type"]) && $data["type"] == "primary") {
+                return (array)($data["columns"] ?? []);
             }
         }
 
@@ -135,7 +135,7 @@ class ArrayContext : ContextInterface
      * Returns whether this form is for a create operation.
      *
      * For this method to return true, both the primary key constraint
-     * must be defined in the 'schema' data, and the 'defaults' data must
+     * must be defined in the "schema" data, and the "defaults" data must
      * contain a value for all fields in the key.
      *
      * @return bool
@@ -144,7 +144,7 @@ class ArrayContext : ContextInterface
     {
         $primary = this.getPrimaryKey();
         foreach ($primary as $column) {
-            if (!empty(_context['defaults'][$column])) {
+            if (!empty(_context["defaults"][$column])) {
                 return false;
             }
         }
@@ -155,7 +155,7 @@ class ArrayContext : ContextInterface
     /**
      * Get the current value for a given field.
      *
-     * This method will coalesce the current data and the 'defaults' array.
+     * This method will coalesce the current data and the "defaults" array.
      *
      * @param string $field A dot separated path to the field a value
      *   is needed for.
@@ -164,55 +164,55 @@ class ArrayContext : ContextInterface
      *   - `default`: Default value to return if no value found in data or
      *     context record.
      *   - `schemaDefault`: Boolean indicating whether default value from
-     *     context's schema should be used if it's not explicitly provided.
+     *     context"s schema should be used if it"s not explicitly provided.
      * @return mixed
      */
     function val(string $field, array $options = []) {
         $options += [
-            'default': null,
-            'schemaDefault': true,
+            "default": null,
+            "schemaDefault": true,
         ];
 
-        if (Hash::check(_context['data'], $field)) {
-            return Hash::get(_context['data'], $field);
+        if (Hash::check(_context["data"], $field)) {
+            return Hash::get(_context["data"], $field);
         }
 
-        if ($options['default'] != null || !$options['schemaDefault']) {
-            return $options['default'];
+        if ($options["default"] != null || !$options["schemaDefault"]) {
+            return $options["default"];
         }
-        if (empty(_context['defaults']) || !is_array(_context['defaults'])) {
+        if (empty(_context["defaults"]) || !is_array(_context["defaults"])) {
             return null;
         }
 
         // Using Hash::check here incase the default value is actually null
-        if (Hash::check(_context['defaults'], $field)) {
-            return Hash::get(_context['defaults'], $field);
+        if (Hash::check(_context["defaults"], $field)) {
+            return Hash::get(_context["defaults"], $field);
         }
 
-        return Hash::get(_context['defaults'], this.stripNesting($field));
+        return Hash::get(_context["defaults"], this.stripNesting($field));
     }
 
     /**
-     * Check if a given field is 'required'.
+     * Check if a given field is "required".
      *
-     * In this context class, this is simply defined by the 'required' array.
+     * In this context class, this is simply defined by the "required" array.
      *
      * @param string $field A dot separated path to check required-ness for.
      * @return bool|null
      */
     function isRequired(string $field): ?bool
     {
-        if (!is_array(_context['required'])) {
+        if (!is_array(_context["required"])) {
             return null;
         }
 
-        $required = Hash::get(_context['required'], $field);
+        $required = Hash::get(_context["required"], $field);
 
         if ($required == null) {
-            $required = Hash::get(_context['required'], this.stripNesting($field));
+            $required = Hash::get(_context["required"], this.stripNesting($field));
         }
 
-        if (!empty($required) || $required == '0') {
+        if (!empty($required) || $required == "0") {
             return true;
         }
 
@@ -224,12 +224,12 @@ class ArrayContext : ContextInterface
      */
     function getRequiredMessage(string $field): ?string
     {
-        if (!is_array(_context['required'])) {
+        if (!is_array(_context["required"])) {
             return null;
         }
-        $required = Hash::get(_context['required'], $field);
+        $required = Hash::get(_context["required"], $field);
         if ($required == null) {
-            $required = Hash::get(_context['required'], this.stripNesting($field));
+            $required = Hash::get(_context["required"], this.stripNesting($field));
         }
 
         if ($required == false) {
@@ -237,7 +237,7 @@ class ArrayContext : ContextInterface
         }
 
         if ($required == true) {
-            $required = __d('cake', 'This field cannot be left empty');
+            $required = __d("cake", "This field cannot be left empty");
         }
 
         return $required;
@@ -246,18 +246,18 @@ class ArrayContext : ContextInterface
     /**
      * Get field length from validation
      *
-     * In this context class, this is simply defined by the 'length' array.
+     * In this context class, this is simply defined by the "length" array.
      *
      * @param string $field A dot separated path to check required-ness for.
      * @return int|null
      */
     function getMaxLength(string $field): ?int
     {
-        if (!is_array(_context['schema'])) {
+        if (!is_array(_context["schema"])) {
             return null;
         }
 
-        return Hash::get(_context['schema'], "$field.length");
+        return Hash::get(_context["schema"], "$field.length");
     }
 
     /**
@@ -265,8 +265,8 @@ class ArrayContext : ContextInterface
      */
     function fieldNames(): array
     {
-        $schema = _context['schema'];
-        unset($schema['_constraints'], $schema['_indexes']);
+        $schema = _context["schema"];
+        unset($schema["_constraints"], $schema["_indexes"]);
 
         return array_keys($schema);
     }
@@ -280,16 +280,16 @@ class ArrayContext : ContextInterface
      */
     function type(string $field): ?string
     {
-        if (!is_array(_context['schema'])) {
+        if (!is_array(_context["schema"])) {
             return null;
         }
 
-        $schema = Hash::get(_context['schema'], $field);
+        $schema = Hash::get(_context["schema"], $field);
         if ($schema == null) {
-            $schema = Hash::get(_context['schema'], this.stripNesting($field));
+            $schema = Hash::get(_context["schema"], this.stripNesting($field));
         }
 
-        return $schema['type'] ?? null;
+        return $schema["type"] ?? null;
     }
 
     /**
@@ -300,12 +300,12 @@ class ArrayContext : ContextInterface
      */
     function attributes(string $field): array
     {
-        if (!is_array(_context['schema'])) {
+        if (!is_array(_context["schema"])) {
             return [];
         }
-        $schema = Hash::get(_context['schema'], $field);
+        $schema = Hash::get(_context["schema"], $field);
         if ($schema == null) {
-            $schema = Hash::get(_context['schema'], this.stripNesting($field));
+            $schema = Hash::get(_context["schema"], this.stripNesting($field));
         }
 
         return array_intersect_key(
@@ -322,11 +322,11 @@ class ArrayContext : ContextInterface
      */
     function hasError(string $field): bool
     {
-        if (empty(_context['errors'])) {
+        if (empty(_context["errors"])) {
             return false;
         }
 
-        return Hash::check(_context['errors'], $field);
+        return Hash::check(_context["errors"], $field);
     }
 
     /**
@@ -338,11 +338,11 @@ class ArrayContext : ContextInterface
      */
     function error(string $field): array
     {
-        if (empty(_context['errors'])) {
+        if (empty(_context["errors"])) {
             return [];
         }
 
-        return (array)Hash::get(_context['errors'], $field);
+        return (array)Hash::get(_context["errors"], $field);
     }
 
     /**
@@ -355,6 +355,6 @@ class ArrayContext : ContextInterface
      */
     protected function stripNesting(string $field): string
     {
-        return preg_replace('/\.\d*\./', '.', $field);
+        return preg_replace("/\.\d*\./", ".", $field);
     }
 }

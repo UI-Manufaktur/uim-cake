@@ -46,7 +46,7 @@ class ButtonWidget : WidgetInterface
      *   do not escape their contents by default.
      * - `escapeTitle` Set to false to disable escaping of button text.
      * - `escape` Set to false to disable escaping of attributes.
-     * - `type` The button type defaults to 'submit'.
+     * - `type` The button type defaults to "submit".
      *
      * Any other keys provided in $data will be converted into HTML attributes.
      *
@@ -57,17 +57,17 @@ class ButtonWidget : WidgetInterface
     function render(array $data, ContextInterface $context): string
     {
         $data += [
-            'text': '',
-            'type': 'submit',
-            'escapeTitle': true,
-            'escape': true,
-            'templateVars': [],
+            "text": "",
+            "type": "submit",
+            "escapeTitle": true,
+            "escape": true,
+            "templateVars": [],
         ];
 
-        return _templates.format('button', [
-            'text': $data['escapeTitle'] ? h($data['text']) : $data['text'],
-            'templateVars': $data['templateVars'],
-            'attrs': _templates.formatAttributes($data, ['text', 'escapeTitle']),
+        return _templates.format("button", [
+            "text": $data["escapeTitle"] ? h($data["text"]) : $data["text"],
+            "templateVars": $data["templateVars"],
+            "attrs": _templates.formatAttributes($data, ["text", "escapeTitle"]),
         ]);
     }
 
@@ -76,10 +76,10 @@ class ButtonWidget : WidgetInterface
      */
     function secureFields(array $data): array
     {
-        if (!isset($data['name']) || $data['name'] == '') {
+        if (!isset($data["name"]) || $data["name"] == "") {
             return [];
         }
 
-        return [$data['name']];
+        return [$data["name"]];
     }
 }

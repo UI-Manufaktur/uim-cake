@@ -31,7 +31,7 @@ class NumberHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'engine': Number::class,
+        "engine": Number::class,
     ];
 
     /**
@@ -59,9 +59,9 @@ class NumberHelper : Helper
         $config = _config;
 
         /** @psalm-var class-string<\Cake\I18n\Number>|null $engineClass */
-        $engineClass = App::className($config['engine'], 'Utility');
+        $engineClass = App::className($config["engine"], "Utility");
         if ($engineClass == null) {
-            throw new CakeException(sprintf('Class for %s could not be found', $config['engine']));
+            throw new CakeException(sprintf("Class for %s could not be found", $config["engine"]));
         }
 
         _engine = new $engineClass($config);
@@ -133,8 +133,8 @@ class NumberHelper : Helper
      * - `places` - Minimum number or decimals to use, e.g 0
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. '['
-     * - `after` - The string to place after decimal numbers, e.g. ']'
+     * - `before` - The string to place before whole numbers, e.g. "["
+     * - `after` - The string to place after decimal numbers, e.g. "]"
      * - `escape` - Whether to escape html in resulting string
      *
      * @param string|int|float $number A floating point number.
@@ -145,9 +145,9 @@ class NumberHelper : Helper
     function format($number, array $options = []): string
     {
         $formatted = _engine.format($number, $options);
-        $options += ['escape': true];
+        $options += ["escape": true];
 
-        return $options['escape'] ? h($formatted) : $formatted;
+        return $options["escape"] ? h($formatted) : $formatted;
     }
 
     /**
@@ -158,10 +158,10 @@ class NumberHelper : Helper
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
      * - `fractionSymbol` - The currency symbol to use for fractional numbers.
      * - `fractionPosition` - The position the fraction symbol should be placed
-     *    valid options are 'before' & 'after'.
+     *    valid options are "before" & "after".
      * - `before` - Text to display before the rendered number
      * - `after` - Text to display after the rendered number
-     * - `zero` - The text to use for zero values, can be a string or a number. e.g. 0, 'Free!'
+     * - `zero` - The text to use for zero values, can be a string or a number. e.g. 0, "Free!"
      * - `places` - Number of decimal places to use. e.g. 2
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `pattern` - An ICU number pattern to use for formatting the number. e.g #,##0.00
@@ -170,16 +170,16 @@ class NumberHelper : Helper
      * - `escape` - Whether to escape html in resulting string
      *
      * @param string|float $number Value to format.
-     * @param string|null $currency International currency name such as 'USD', 'EUR', 'JPY', 'CAD'
+     * @param string|null $currency International currency name such as "USD", "EUR", "JPY", "CAD"
      * @param array<string, mixed> $options Options list.
      * @return string Number formatted as a currency.
      */
     function currency($number, ?string $currency = null, array $options = []): string
     {
         $formatted = _engine.currency($number, $currency, $options);
-        $options += ['escape': true];
+        $options += ["escape": true];
 
-        return $options['escape'] ? h($formatted) : $formatted;
+        return $options["escape"] ? h($formatted) : $formatted;
     }
 
     /**
@@ -190,8 +190,8 @@ class NumberHelper : Helper
      * - `places` - Minimum number or decimals to use, e.g 0
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. '['
-     * - `after` - The string to place after decimal numbers, e.g. ']'
+     * - `before` - The string to place before whole numbers, e.g. "["
+     * - `after` - The string to place after decimal numbers, e.g. "]"
      * - `escape` - Set to false to prevent escaping
      *
      * @param string|float $value A floating point number
@@ -201,9 +201,9 @@ class NumberHelper : Helper
     function formatDelta($value, array $options = []): string
     {
         $formatted = _engine.formatDelta($value, $options);
-        $options += ['escape': true];
+        $options += ["escape": true];
 
-        return $options['escape'] ? h($formatted) : $formatted;
+        return $options["escape"] ? h($formatted) : $formatted;
     }
 
     /**
@@ -218,7 +218,7 @@ class NumberHelper : Helper
     function defaultCurrency($currency): ?string
     {
         deprecationWarning(
-            'NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead.'
+            "NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead."
         );
 
         return _engine.defaultCurrency($currency);

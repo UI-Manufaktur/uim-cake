@@ -27,7 +27,7 @@ class BreadcrumbsHelper : Helper
      *
      * @var array
      */
-    protected $helpers = ['Url'];
+    protected $helpers = ["Url"];
 
     /**
      * Default config for the helper.
@@ -35,11 +35,11 @@ class BreadcrumbsHelper : Helper
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'templates': [
-            'wrapper': '<ul{{attrs}}>{{content}}</ul>',
-            'item': '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}',
-            'itemWithoutLink': '<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}',
-            'separator': '<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>',
+        "templates": [
+            "wrapper": "<ul{{attrs}}>{{content}}</ul>",
+            "item": "<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}",
+            "itemWithoutLink": "<li{{attrs}}><span{{innerAttrs}}>{{title}}</span></li>{{separator}}",
+            "separator": "<li{{attrs}}><span{{innerAttrs}}>{{separator}}</span></li>",
         ],
     ];
 
@@ -74,13 +74,13 @@ class BreadcrumbsHelper : Helper
     function add($title, $url = null, array $options = []) {
         if (is_array($title)) {
             foreach ($title as $crumb) {
-                this.crumbs[] = $crumb + ['title': '', 'url': null, 'options': []];
+                this.crumbs[] = $crumb + ["title": "", "url": null, "options": []];
             }
 
             return this;
         }
 
-        this.crumbs[] = compact('title', 'url', 'options');
+        this.crumbs[] = compact("title", "url", "options");
 
         return this;
     }
@@ -110,7 +110,7 @@ class BreadcrumbsHelper : Helper
         if (is_array($title)) {
             $crumbs = [];
             foreach ($title as $crumb) {
-                $crumbs[] = $crumb + ['title': '', 'url': null, 'options': []];
+                $crumbs[] = $crumb + ["title": "", "url": null, "options": []];
             }
 
             array_splice(this.crumbs, 0, 0, $crumbs);
@@ -118,7 +118,7 @@ class BreadcrumbsHelper : Helper
             return this;
         }
 
-        array_unshift(this.crumbs, compact('title', 'url', 'options'));
+        array_unshift(this.crumbs, compact("title", "url", "options"));
 
         return this;
     }
@@ -147,10 +147,10 @@ class BreadcrumbsHelper : Helper
      */
     function insertAt(int $index, string $title, $url = null, array $options = []) {
         if (!isset(this.crumbs[$index]) && $index != count(this.crumbs)) {
-            throw new LogicException(sprintf("No crumb could be found at index '%s'", $index));
+            throw new LogicException(sprintf("No crumb could be found at index "%s"", $index));
         }
 
-        array_splice(this.crumbs, $index, 0, [compact('title', 'url', 'options')]);
+        array_splice(this.crumbs, $index, 0, [compact("title", "url", "options")]);
 
         return this;
     }
@@ -178,7 +178,7 @@ class BreadcrumbsHelper : Helper
         $key = this.findCrumb($matchingTitle);
 
         if ($key == null) {
-            throw new LogicException(sprintf("No crumb matching '%s' could be found.", $matchingTitle));
+            throw new LogicException(sprintf("No crumb matching "%s" could be found.", $matchingTitle));
         }
 
         return this.insertAt($key, $title, $url, $options);
@@ -207,7 +207,7 @@ class BreadcrumbsHelper : Helper
         $key = this.findCrumb($matchingTitle);
 
         if ($key == null) {
-            throw new LogicException(sprintf("No crumb matching '%s' could be found.", $matchingTitle));
+            throw new LogicException(sprintf("No crumb matching "%s" could be found.", $matchingTitle));
         }
 
         return this.insertAt($key + 1, $title, $url, $options);
@@ -253,64 +253,64 @@ class BreadcrumbsHelper : Helper
     function render(array $attributes = [], array $separator = []): string
     {
         if (!this.crumbs) {
-            return '';
+            return "";
         }
 
         $crumbs = this.crumbs;
         $crumbsCount = count($crumbs);
         $templater = this.templater();
-        $separatorString = '';
+        $separatorString = "";
 
         if ($separator) {
-            if (isset($separator['innerAttrs'])) {
-                $separator['innerAttrs'] = $templater.formatAttributes($separator['innerAttrs']);
+            if (isset($separator["innerAttrs"])) {
+                $separator["innerAttrs"] = $templater.formatAttributes($separator["innerAttrs"]);
             }
 
-            $separator['attrs'] = $templater.formatAttributes(
+            $separator["attrs"] = $templater.formatAttributes(
                 $separator,
-                ['innerAttrs', 'separator']
+                ["innerAttrs", "separator"]
             );
 
-            $separatorString = this.formatTemplate('separator', $separator);
+            $separatorString = this.formatTemplate("separator", $separator);
         }
 
-        $crumbTrail = '';
+        $crumbTrail = "";
         foreach ($crumbs as $key: $crumb) {
-            $url = $crumb['url'] ? this.Url.build($crumb['url']) : null;
-            $title = $crumb['title'];
-            $options = $crumb['options'];
+            $url = $crumb["url"] ? this.Url.build($crumb["url"]) : null;
+            $title = $crumb["title"];
+            $options = $crumb["options"];
 
             $optionsLink = [];
-            if (isset($options['innerAttrs'])) {
-                $optionsLink = $options['innerAttrs'];
-                unset($options['innerAttrs']);
+            if (isset($options["innerAttrs"])) {
+                $optionsLink = $options["innerAttrs"];
+                unset($options["innerAttrs"]);
             }
 
-            $template = 'item';
+            $template = "item";
             $templateParams = [
-                'attrs': $templater.formatAttributes($options, ['templateVars']),
-                'innerAttrs': $templater.formatAttributes($optionsLink),
-                'title': $title,
-                'url': $url,
-                'separator': '',
-                'templateVars': $options['templateVars'] ?? [],
+                "attrs": $templater.formatAttributes($options, ["templateVars"]),
+                "innerAttrs": $templater.formatAttributes($optionsLink),
+                "title": $title,
+                "url": $url,
+                "separator": "",
+                "templateVars": $options["templateVars"] ?? [],
             ];
 
             if (!$url) {
-                $template = 'itemWithoutLink';
+                $template = "itemWithoutLink";
             }
 
             if ($separatorString && $key != $crumbsCount - 1) {
-                $templateParams['separator'] = $separatorString;
+                $templateParams["separator"] = $separatorString;
             }
 
             $crumbTrail .= this.formatTemplate($template, $templateParams);
         }
 
-        return this.formatTemplate('wrapper', [
-            'content': $crumbTrail,
-            'attrs': $templater.formatAttributes($attributes, ['templateVars']),
-            'templateVars': $attributes['templateVars'] ?? [],
+        return this.formatTemplate("wrapper", [
+            "content": $crumbTrail,
+            "attrs": $templater.formatAttributes($attributes, ["templateVars"]),
+            "templateVars": $attributes["templateVars"] ?? [],
         ]);
     }
 
@@ -324,7 +324,7 @@ class BreadcrumbsHelper : Helper
     protected function findCrumb(string $title): ?int
     {
         foreach (this.crumbs as $key: $crumb) {
-            if ($crumb['title'] == $title) {
+            if ($crumb["title"] == $title) {
                 return $key;
             }
         }
