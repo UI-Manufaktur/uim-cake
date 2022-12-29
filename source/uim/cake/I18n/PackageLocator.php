@@ -2,7 +2,7 @@
 
 
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+
  * @copyright     Copyright (c) 2017 Aura for PHP
 
  * @since         4.2.0
