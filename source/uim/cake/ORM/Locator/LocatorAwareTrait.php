@@ -35,7 +35,7 @@ trait LocatorAwareTrait
     /**
      * Sets the table locator.
      *
-     * @param \Cake\ORM\Locator\ILocator $tableLocator ILocatorinstance.
+     * @param uim.cake.ORM\Locator\ILocator $tableLocator ILocatorinstance.
      * @return this
      */
     function setTableLocator(ILocator $tableLocator) {

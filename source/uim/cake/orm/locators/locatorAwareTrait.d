@@ -22,7 +22,7 @@ trait LocatorAwareTrait
     /**
      * Sets the table locator.
      *
-     * @param \Cake\ORM\Locator\ILocator myTableLocator ILocator instance.
+     * @param uim.cake.ORM\Locator\ILocator myTableLocator ILocator instance.
      * @return this
      */
     auto setTableLocator(ILocator myTableLocator) {

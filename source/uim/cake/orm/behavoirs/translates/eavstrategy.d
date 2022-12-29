@@ -44,7 +44,7 @@ class EavStrategy : ITranslateStrategy
     /**
      * Constructor
      *
-     * @param \Cake\ORM\Table myTable The table this strategy is attached to.
+     * @param uim.cake.ORM\Table myTable The table this strategy is attached to.
      * @param array<string, mixed> myConfig The config for this strategy.
      */
     this(Table myTable, array myConfig = []) {
@@ -133,8 +133,8 @@ class EavStrategy : ITranslateStrategy
      * table. It modifies the passed query by eager loading the translated fields
      * and adding a formatter to copy the values into the main table records.
      *
-     * @param \Cake\Event\IEvent myEvent The beforeFind event that was fired.
-     * @param \Cake\ORM\Query myQuery Query
+     * @param uim.cake.Event\IEvent myEvent The beforeFind event that was fired.
+     * @param uim.cake.ORM\Query myQuery Query
      * @param \ArrayObject myOptions The options for the query
      * @return void
      */
@@ -197,8 +197,8 @@ class EavStrategy : ITranslateStrategy
      * Modifies the entity before it is saved so that translated fields are persisted
      * in the database too.
      *
-     * @param \Cake\Event\IEvent myEvent The beforeSave event that was fired
-     * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
+     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject myOptions the options passed to the save method
      * @return void
      */
@@ -320,7 +320,7 @@ class EavStrategy : ITranslateStrategy
      * Modifies the results from a table find in order to merge the translated fields
      * into each entity for a given locale.
      *
-     * @param \Cake\Datasource\IResultSet myResults Results to map.
+     * @param uim.cake.Datasource\IResultSet myResults Results to map.
      * @param string locale Locale string
      * @return \Cake\Collection\ICollection
      */
@@ -363,7 +363,7 @@ class EavStrategy : ITranslateStrategy
      * Modifies the results from a table find in order to merge full translation
      * records into each entity under the `_translations` key.
      *
-     * @param \Cake\Datasource\IResultSet myResults Results to modify.
+     * @param uim.cake.Datasource\IResultSet myResults Results to modify.
      * @return \Cake\Collection\ICollection
      */
     ICollection groupTranslations(myResults) {
@@ -402,7 +402,7 @@ class EavStrategy : ITranslateStrategy
      * out of the data found in the `_translations` property in the passed
      * entity. The result will be put into its `_i18n` property.
      *
-     * @param \Cake\Datasource\IEntity $entity Entity
+     * @param uim.cake.Datasource\IEntity $entity Entity
      * @return void
      */
     protected auto bundleTranslatedFields($entity) {

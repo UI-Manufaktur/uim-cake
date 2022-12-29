@@ -278,7 +278,7 @@ class TableLocator : AbstractLocator : ILocator
      * Set a Table instance.
      *
      * @param string myAlias The alias to set.
-     * @param \Cake\ORM\Table myRepository The Table to set.
+     * @param uim.cake.ORM\Table myRepository The Table to set.
      * @return \Cake\ORM\Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */

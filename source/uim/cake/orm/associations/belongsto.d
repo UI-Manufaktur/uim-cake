@@ -35,7 +35,7 @@ class BelongsTo : Association
      *
      * BelongsTo associations are never cleared in a cascading delete scenario.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity that started the cascaded delete.
+     * @param uim.cake.Datasource\IEntity $entity The entity that started the cascaded delete.
      * @param array<string, mixed> myOptions The options for the original delete.
      * @return bool Success.
      */
@@ -59,7 +59,7 @@ class BelongsTo : Association
      * association. This means that rows in the "target" table would miss important
      * or required information if the row in "source" did not exist.
      *
-     * @param \Cake\ORM\Table $side The potential Table with ownership
+     * @param uim.cake.ORM\Table $side The potential Table with ownership
      */
     bool isOwningSide(Table $side) {
         return $side == this.getTarget();
@@ -78,7 +78,7 @@ class BelongsTo : Association
      * saved on the target table for this association by passing supplied
      * `myOptions`
      *
-     * @param \Cake\Datasource\IEntity $entity an entity from the source table
+     * @param uim.cake.Datasource\IEntity $entity an entity from the source table
      * @param array<string, mixed> myOptions options to be passed to the save method in the target table
      * @return \Cake\Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity

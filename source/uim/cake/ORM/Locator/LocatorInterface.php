@@ -53,7 +53,7 @@ interface ILocator: BaseILocator
      * Set a table instance.
      *
      * @param string $alias The alias to set.
-     * @param \Cake\ORM\Table $repository The table to set.
+     * @param uim.cake.ORM\Table $repository The table to set.
      * @return \Cake\ORM\Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */

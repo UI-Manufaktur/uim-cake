@@ -95,8 +95,8 @@ class CounterCacheBehavior : Behavior
      *
      * Check if a field, which should be ignored, is dirty
      *
-     * @param \Cake\Event\IEvent myEvent The beforeSave event that was fired
-     * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
+     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject myOptions The options for the query
      * @return void
      */
@@ -132,8 +132,8 @@ class CounterCacheBehavior : Behavior
      *
      * Makes sure to update counter cache when a new record is created or updated.
      *
-     * @param \Cake\Event\IEvent myEvent The afterSave event that was fired.
-     * @param \Cake\Datasource\IEntity $entity The entity that was saved.
+     * @param uim.cake.Event\IEvent myEvent The afterSave event that was fired.
+     * @param uim.cake.Datasource\IEntity $entity The entity that was saved.
      * @param \ArrayObject myOptions The options for the query
      * @return void
      */
@@ -151,8 +151,8 @@ class CounterCacheBehavior : Behavior
      *
      * Makes sure to update counter cache when a record is deleted.
      *
-     * @param \Cake\Event\IEvent myEvent The afterDelete event that was fired.
-     * @param \Cake\Datasource\IEntity $entity The entity that was deleted.
+     * @param uim.cake.Event\IEvent myEvent The afterDelete event that was fired.
+     * @param uim.cake.Datasource\IEntity $entity The entity that was deleted.
      * @param \ArrayObject myOptions The options for the query
      * @return void
      */
@@ -167,8 +167,8 @@ class CounterCacheBehavior : Behavior
     /**
      * Iterate all associations and update counter caches.
      *
-     * @param \Cake\Event\IEvent myEvent Event instance.
-     * @param \Cake\Datasource\IEntity $entity Entity.
+     * @param uim.cake.Event\IEvent myEvent Event instance.
+     * @param uim.cake.Datasource\IEntity $entity Entity.
      * @return void
      */
     protected void _processAssociations(IEvent myEvent, IEntity $entity) {
@@ -181,9 +181,9 @@ class CounterCacheBehavior : Behavior
     /**
      * Updates counter cache for a single association
      *
-     * @param \Cake\Event\IEvent myEvent Event instance.
-     * @param \Cake\Datasource\IEntity $entity Entity
-     * @param \Cake\ORM\Association $assoc The association object
+     * @param uim.cake.Event\IEvent myEvent Event instance.
+     * @param uim.cake.Datasource\IEntity $entity Entity
+     * @param uim.cake.ORM\Association $assoc The association object
      * @param array $settings The settings for counter cache for this association
      * @return void
      * @throws \RuntimeException If invalid callable is passed.

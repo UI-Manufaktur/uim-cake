@@ -80,8 +80,8 @@ class TimestampBehavior : Behavior
     /**
      * There is only one event handler, it can be configured to be called for any event
      *
-     * @param \Cake\Event\IEvent $event Event instance.
-     * @param \Cake\Datasource\EntityInterface $entity Entity instance.
+     * @param uim.cake.Event\IEvent $event Event instance.
+     * @param uim.cake.Datasource\EntityInterface $entity Entity instance.
      * @throws \UnexpectedValueException if a field"s when value is misdefined
      * @return true Returns true irrespective of the behavior logic, the save will not be prevented.
      * @throws \UnexpectedValueException When the value for an event is not "always", "new" or "existing"
@@ -163,7 +163,7 @@ class TimestampBehavior : Behavior
      * "always" or "existing", update the timestamp value. This method will overwrite
      * any pre-existing value.
      *
-     * @param \Cake\Datasource\EntityInterface $entity Entity instance.
+     * @param uim.cake.Datasource\EntityInterface $entity Entity instance.
      * @param string $eventName Event name.
      * @return bool true if a field is updated, false if no action performed
      */
@@ -191,7 +191,7 @@ class TimestampBehavior : Behavior
     /**
      * Update a field, if it hasn"t been updated already
      *
-     * @param \Cake\Datasource\EntityInterface $entity Entity instance.
+     * @param uim.cake.Datasource\EntityInterface $entity Entity instance.
      * @param string $field Field name
      * @param bool $refreshTimestamp Whether to refresh timestamp.
      * @return void

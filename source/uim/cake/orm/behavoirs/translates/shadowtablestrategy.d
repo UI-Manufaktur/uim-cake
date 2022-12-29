@@ -35,7 +35,7 @@ class ShadowTableStrategy : ITranslateStrategy {
     /**
      * Constructor
      *
-     * @param \Cake\ORM\Table myTable Table instance.
+     * @param uim.cake.ORM\Table myTable Table instance.
      * @param array<string, mixed> myConfig Configuration.
      */
     this(Table myTable, array myConfig = []) {
@@ -89,8 +89,8 @@ class ShadowTableStrategy : ITranslateStrategy {
      * table. It modifies the passed query by eager loading the translated fields
      * and adding a formatter to copy the values into the main table records.
      *
-     * @param \Cake\Event\IEvent myEvent The beforeFind event that was fired.
-     * @param \Cake\ORM\Query myQuery Query.
+     * @param uim.cake.Event\IEvent myEvent The beforeFind event that was fired.
+     * @param uim.cake.ORM\Query myQuery Query.
      * @param \ArrayObject myOptions The options for the query.
      * @return void
      */
@@ -170,7 +170,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * Only add translations for fields that are in the main table, always
      * add the locale field though.
      *
-     * @param \Cake\ORM\Query myQuery The query to check.
+     * @param uim.cake.ORM\Query myQuery The query to check.
      * @param array<string, mixed> myConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
@@ -210,7 +210,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * prefixing fields with the appropriate table alias. This method currently
      * expects to receive an order clause only.
      *
-     * @param \Cake\ORM\Query myQuery the query to check.
+     * @param uim.cake.ORM\Query myQuery the query to check.
      * @param string myName The clause name.
      * @param array<string, mixed> myConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
@@ -255,7 +255,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * prefixing fields with the appropriate table alias. This method currently
      * expects to receive a where clause only.
      *
-     * @param \Cake\ORM\Query myQuery the query to check.
+     * @param uim.cake.ORM\Query myQuery the query to check.
      * @param string myName The clause name.
      * @param array<string, mixed> myConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
@@ -303,8 +303,8 @@ class ShadowTableStrategy : ITranslateStrategy {
      * Modifies the entity before it is saved so that translated fields are persisted
      * in the database too.
      *
-     * @param \Cake\Event\IEvent myEvent The beforeSave event that was fired.
-     * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved.
+     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired.
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved.
      * @param \ArrayObject myOptions the options passed to the save method.
      * @return void
      */
@@ -427,7 +427,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * Modifies the results from a table find in order to merge the translated
      * fields into each entity for a given locale.
      *
-     * @param \Cake\Datasource\IResultSet myResults Results to map.
+     * @param uim.cake.Datasource\IResultSet myResults Results to map.
      * @param string locale Locale string
      * @return \Cake\Collection\ICollection
      */
@@ -491,7 +491,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * Modifies the results from a table find in order to merge full translation
      * records into each entity under the `_translations` key.
      *
-     * @param \Cake\Datasource\IResultSet myResults Results to modify.
+     * @param uim.cake.Datasource\IResultSet myResults Results to modify.
      * @return \Cake\Collection\ICollection
      */
     ICollection groupTranslations(myResults) {
@@ -522,7 +522,7 @@ class ShadowTableStrategy : ITranslateStrategy {
      * out of the data found in the `_translations` property in the passed
      * entity. The result will be put into its `_i18n` property.
      *
-     * @param \Cake\Datasource\IEntity $entity Entity.
+     * @param uim.cake.Datasource\IEntity $entity Entity.
      * @return void
      */
     protected auto bundleTranslatedFields($entity) {

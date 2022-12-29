@@ -37,7 +37,7 @@ class ValidCount
     /**
      * Performs the count check
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity from where to extract the fields.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity from where to extract the fields.
      * @param array<string, mixed> $options Options passed to the check.
      * @return bool True if successful, else false.
      */

@@ -68,8 +68,8 @@ class TreeBehavior : Behavior
      * Transparently manages setting the lft and rght fields if the parent field is
      * included in the parameters to be saved.
      *
-     * @param \Cake\Event\IEvent myEvent The beforeSave event that was fired
-     * @param \Cake\Datasource\IEntity $entity the entity that is going to be saved
+     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.Datasource\IEntity $entity the entity that is going to be saved
      * @return void
      * @throws \RuntimeException if the parent to set for the node is invalid
      */
@@ -136,8 +136,8 @@ class TreeBehavior : Behavior
      *
      * Manages updating level of descendants of currently saved entity.
      *
-     * @param \Cake\Event\IEvent myEvent The afterSave event that was fired
-     * @param \Cake\Datasource\IEntity $entity the entity that is going to be saved
+     * @param uim.cake.Event\IEvent myEvent The afterSave event that was fired
+     * @param uim.cake.Datasource\IEntity $entity the entity that is going to be saved
      * @return void
      */
     function afterSave(IEvent myEvent, IEntity $entity) {
@@ -151,7 +151,7 @@ class TreeBehavior : Behavior
     /**
      * Set level for descendants.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity whose descendants need to be updated.
+     * @param uim.cake.Datasource\IEntity $entity The entity whose descendants need to be updated.
      * @return void
      */
     protected void _setChildrenLevel(IEntity $entity) {
@@ -187,8 +187,8 @@ class TreeBehavior : Behavior
     /**
      * Also deletes the nodes in the subtree of the entity to be delete
      *
-     * @param \Cake\Event\IEvent myEvent The beforeDelete event that was fired
-     * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
+     * @param uim.cake.Event\IEvent myEvent The beforeDelete event that was fired
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @return void
      */
     function beforeDelete(IEvent myEvent, IEntity $entity) {
@@ -219,7 +219,7 @@ class TreeBehavior : Behavior
      * updated to a new parent. It also makes the hole in the tree so the node
      * move can be done without corrupting the structure.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity to re-parent
+     * @param uim.cake.Datasource\IEntity $entity The entity to re-parent
      * @param mixed $parent the id of the parent to set
      * @return void
      * @throws \RuntimeException if the parent to set to the entity is not valid
@@ -280,7 +280,7 @@ class TreeBehavior : Behavior
      * a new root in the tree. It also modifies the ordering in the rest of the tree
      * so the structure remains valid
      *
-     * @param \Cake\Datasource\IEntity $entity The entity to set as a new root
+     * @param uim.cake.Datasource\IEntity $entity The entity to set as a new root
      * @return void
      */
     protected void _setAsRoot(IEntity $entity) {
@@ -340,7 +340,7 @@ class TreeBehavior : Behavior
      * to a specific node in the tree. This custom finder requires that the key "for"
      * is passed in the options containing the id of the node to get its path for.
      *
-     * @param \Cake\ORM\Query myQuery The constructed query to modify
+     * @param uim.cake.ORM\Query myQuery The constructed query to modify
      * @param array<string, mixed> myOptions the list of options for the query
      * @return \Cake\ORM\Query
      * @throws \InvalidArgumentException If the "for" key is missing in options
@@ -372,7 +372,7 @@ class TreeBehavior : Behavior
     /**
      * Get the number of children nodes.
      *
-     * @param \Cake\Datasource\IEntity myNode The entity to count children for
+     * @param uim.cake.Datasource\IEntity myNode The entity to count children for
      * @param bool $direct whether to count all nodes in the subtree or just
      * direct children
      * @return int Number of children nodes.
@@ -403,7 +403,7 @@ class TreeBehavior : Behavior
      *
      * If the direct option is set to true, only the direct children are returned (based upon the parent_id field)
      *
-     * @param \Cake\ORM\Query myQuery Query.
+     * @param uim.cake.ORM\Query myQuery Query.
      * @param array<string, mixed> myOptions Array of options as described above
      * @return \Cake\ORM\Query
      * @throws \InvalidArgumentException When the "for" key is not passed in myOptions
@@ -455,7 +455,7 @@ class TreeBehavior : Behavior
      *   return the value out of the provided row.
      * - spacer: A string to be used as prefix for denoting the depth in the tree for each item
      *
-     * @param \Cake\ORM\Query myQuery Query.
+     * @param uim.cake.ORM\Query myQuery Query.
      * @param array<string, mixed> myOptions Array of options as described above.
      * @return \Cake\ORM\Query
      */
@@ -485,7 +485,7 @@ class TreeBehavior : Behavior
      *   return the value from the provided row.
      * - spacer: A string to be used as prefix for denoting the depth in the tree for each item.
      *
-     * @param \Cake\ORM\Query myQuery The query object to format.
+     * @param uim.cake.ORM\Query myQuery The query object to format.
      * @param array<string, mixed> myOptions Array of options as described above.
      * @return \Cake\ORM\Query Augmented query.
      */
@@ -512,7 +512,7 @@ class TreeBehavior : Behavior
      * Note that the node will not be deleted just moved away from its current position
      * without moving its children with it.
      *
-     * @param \Cake\Datasource\IEntity myNode The node to remove from the tree
+     * @param uim.cake.Datasource\IEntity myNode The node to remove from the tree
      * @return \Cake\Datasource\IEntity|false the node after being removed from the tree or
      * false on error
      */
@@ -527,7 +527,7 @@ class TreeBehavior : Behavior
     /**
      * Helper function containing the actual code for removeFromTree
      *
-     * @param \Cake\Datasource\IEntity myNode The node to remove from the tree
+     * @param uim.cake.Datasource\IEntity myNode The node to remove from the tree
      * @return \Cake\Datasource\IEntity|false the node after being removed from the tree or
      * false on error
      */
@@ -570,7 +570,7 @@ class TreeBehavior : Behavior
      * If the node is the first child, or is a top level node with no previous node
      * this method will return the same node without any changes
      *
-     * @param \Cake\Datasource\IEntity myNode The node to move
+     * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
      * @return \Cake\Datasource\IEntity|false myNode The node after being moved or false if `$number` is < 1
@@ -590,7 +590,7 @@ class TreeBehavior : Behavior
     /**
      * Helper function used with the actual code for moveUp
      *
-     * @param \Cake\Datasource\IEntity myNode The node to move
+     * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
      * @return \Cake\Datasource\IEntity myNode The node after being moved
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
@@ -661,7 +661,7 @@ class TreeBehavior : Behavior
      * If the node is the last child, or is a top level node with no subsequent node
      * this method will return the same node without any changes
      *
-     * @param \Cake\Datasource\IEntity myNode The node to move
+     * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node or true to move to last position
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
      * @return \Cake\Datasource\IEntity|false the entity after being moved or false if `$number` is < 1
@@ -681,7 +681,7 @@ class TreeBehavior : Behavior
     /**
      * Helper function used with the actual code for moveDown
      *
-     * @param \Cake\Datasource\IEntity myNode The node to move
+     * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node, or true to move to last position
      * @return \Cake\Datasource\IEntity myNode The node after being moved
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
@@ -890,7 +890,7 @@ class TreeBehavior : Behavior
      * Alters the passed query so that it only returns scoped records as defined
      * in the tree configuration.
      *
-     * @param \Cake\ORM\Query myQuery the Query to modify
+     * @param uim.cake.ORM\Query myQuery the Query to modify
      * @return \Cake\ORM\Query
      */
     protected auto _scope(Query myQuery): Query
@@ -911,7 +911,7 @@ class TreeBehavior : Behavior
      * Ensures that the provided entity contains non-empty values for the left and
      * right fields
      *
-     * @param \Cake\Datasource\IEntity $entity The entity to ensure fields for
+     * @param uim.cake.Datasource\IEntity $entity The entity to ensure fields for
      * @return void
      */
     protected void _ensureFields(IEntity $entity) {
@@ -947,7 +947,7 @@ class TreeBehavior : Behavior
     /**
      * Returns the depth level of a node in the tree.
      *
-     * @param \Cake\Datasource\IEntity|string|int $entity The entity or primary key get the level of.
+     * @param uim.cake.Datasource\IEntity|string|int $entity The entity or primary key get the level of.
      * @return int|false Integer of the level or false if the node does not exist.
      */
     auto getLevel($entity) {

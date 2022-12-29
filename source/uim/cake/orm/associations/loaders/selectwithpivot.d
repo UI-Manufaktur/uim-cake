@@ -141,7 +141,7 @@ class SelectWithPivotLoader : SelectLoader
      * Builds an array containing the results from fetchQuery indexed by
      * the foreignKey value corresponding to this association.
      *
-     * @param \Cake\ORM\Query $fetchQuery The query to get results from
+     * @param uim.cake.ORM\Query $fetchQuery The query to get results from
      * @param array<string, mixed> myOptions The options passed to the eager loader
      * @return array<string, mixed>
      * @throws \RuntimeException when the association property is not part of the results set.

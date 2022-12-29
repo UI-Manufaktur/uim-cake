@@ -51,7 +51,7 @@ class IsUnique
     /**
      * Performs the uniqueness check
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity from where to extract the fields
+     * @param uim.cake.Datasource\EntityInterface $entity The entity from where to extract the fields
      *   where the `repository` key is required.
      * @param array<string, mixed> $options Options passed to the check,
      * @return bool

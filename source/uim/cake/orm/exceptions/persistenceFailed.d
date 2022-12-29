@@ -26,7 +26,7 @@ class PersistenceFailedException : CakeException
     /**
      * Constructor.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity on which the persistence operation failed
+     * @param uim.cake.Datasource\IEntity $entity The entity on which the persistence operation failed
      * @param array<string>|string myMessage Either the string of the error message, or an array of attributes
      *   that are made available in the view, and sprintf()"d into Exception::$_messageTemplate
      * @param int|null $code The code of the error, is also the HTTP status code for the error.

@@ -56,7 +56,7 @@ interface ITranslateStrategy : IPropertyMarshal
      * Modifies the results from a table find in order to merge full translation records
      * into each entity under the `_translations` key
      *
-     * @param \Cake\Datasource\IResultSet myResults Results to modify.
+     * @param uim.cake.Datasource\IResultSet myResults Results to modify.
      * @return \Cake\Collection\ICollection
      */
     ICollection
@@ -65,8 +65,8 @@ interface ITranslateStrategy : IPropertyMarshal
      * table. It modifies the passed query by eager loading the translated fields
      * and adding a formatter to copy the values into the main table records.
      *
-     * @param \Cake\Event\IEvent myEvent The beforeFind event that was fired.
-     * @param \Cake\ORM\Query myQuery Query
+     * @param uim.cake.Event\IEvent myEvent The beforeFind event that was fired.
+     * @param uim.cake.ORM\Query myQuery Query
      * @param \ArrayObject myOptions The options for the query
      */
     void beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions);
@@ -75,8 +75,8 @@ interface ITranslateStrategy : IPropertyMarshal
      * Modifies the entity before it is saved so that translated fields are persisted
      * in the database too.
      *
-     * @param \Cake\Event\IEvent myEvent The beforeSave event that was fired
-     * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
+     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject myOptions the options passed to the save method
      */
     void beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions);
@@ -84,8 +84,8 @@ interface ITranslateStrategy : IPropertyMarshal
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
      *
-     * @param \Cake\Event\IEvent myEvent The beforeSave event that was fired
-     * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
+     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      */
     void afterSave(IEvent myEvent, IEntity $entity);
 }

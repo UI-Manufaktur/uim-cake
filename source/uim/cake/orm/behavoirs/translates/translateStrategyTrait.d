@@ -79,7 +79,7 @@ trait TranslateStrategyTrait {
      *
      * Should only be called if _config["allowEmptyTranslations"] is false.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity to check for empty translations fields inside.
+     * @param uim.cake.Datasource\IEntity $entity The entity to check for empty translations fields inside.
      * @return void
      */
     protected auto unsetEmptyFields($entity) {
@@ -116,7 +116,7 @@ trait TranslateStrategyTrait {
      * of translations by setting `"translations":false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
-     * @param \Cake\ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
+     * @param uim.cake.ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
      * @param array $map The property map being built.
      * @param array<string, mixed> myOptions The options array used in the marshalling call.
      * @return array A map of `[property: callable]` of additional properties to marshal.
@@ -166,8 +166,8 @@ trait TranslateStrategyTrait {
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
      *
-     * @param \Cake\Event\IEvent myEvent The beforeSave event that was fired
-     * @param \Cake\Datasource\IEntity $entity The entity that is going to be saved
+     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @return void
      */
     function afterSave(IEvent myEvent, IEntity $entity) {

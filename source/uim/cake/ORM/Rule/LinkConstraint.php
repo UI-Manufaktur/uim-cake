@@ -49,7 +49,7 @@ class LinkConstraint
     /**
      * Constructor.
      *
-     * @param \Cake\ORM\Association|string $association The alias of the association that should be checked.
+     * @param uim.cake.ORM\Association|string $association The alias of the association that should be checked.
      * @param string $requiredLinkStatus The link status that is required to be present in order for the check to
      *  succeed.
      */
@@ -79,7 +79,7 @@ class LinkConstraint
      *
      * Performs the actual link check.
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity involved in the operation.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity involved in the operation.
      * @param array<string, mixed> $options Options passed from the rules checker.
      * @return bool Whether the check was successful.
      */
@@ -119,7 +119,7 @@ class LinkConstraint
      * Alias fields.
      *
      * @param array<string> $fields The fields that should be aliased.
-     * @param \Cake\ORM\Table $source The object to use for aliasing.
+     * @param uim.cake.ORM\Table $source The object to use for aliasing.
      * @return array<string> The aliased fields
      */
     protected string[] _aliasFields(array $fields, Table $source): array
@@ -154,8 +154,8 @@ class LinkConstraint
     /**
      * Count links.
      *
-     * @param \Cake\ORM\Association $association The association for which to count links.
-     * @param \Cake\Datasource\EntityInterface $entity The entity involved in the operation.
+     * @param uim.cake.ORM\Association $association The association for which to count links.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity involved in the operation.
      * @return int The number of links.
      */
     protected function _countLinks(Association $association, EntityInterface $entity): int
