@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.View\Form;
 
 import uim.cake.utilities.Hash;

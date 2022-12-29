@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.View;
 
 import uim.cake.core.App;

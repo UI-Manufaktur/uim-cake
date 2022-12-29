@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Routing\Route;
 
 import uim.cake.utilities.Inflector;

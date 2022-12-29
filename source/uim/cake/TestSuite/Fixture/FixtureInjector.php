@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.TestSuite\Fixture;
 
 import uim.cake.TestSuite\TestCase;

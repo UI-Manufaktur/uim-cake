@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.View\Helper;
 
 import uim.cake.utilities.Text;
