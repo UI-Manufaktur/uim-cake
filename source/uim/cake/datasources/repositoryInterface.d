@@ -184,7 +184,7 @@ interface IRepository
      *
      * @param array myData The data to build an entity with.
      * @param array<string, mixed> myOptions A list of options for the objects hydration.
-     * @return array<\Cake\Datasource\IEntity> An array of hydrated records.
+     * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
     array newEntities(array myData, array myOptions = []);
 
@@ -219,11 +219,11 @@ interface IRepository
      * $article = this.Articles.patchEntities($articles, this.request.getData());
      * ```
      *
-     * @param \Traversable|array<\Cake\Datasource\IEntity> $entities the entities that will get the
+     * @param \Traversable|array<uim.cake.Datasource\IEntity> $entities the entities that will get the
      * data merged in
      * @param array myData list of arrays to be merged into the entities
      * @param array<string, mixed> myOptions A list of options for the objects hydration.
-     * @return array<\Cake\Datasource\IEntity>
+     * @return array<uim.cake.Datasource\IEntity>
      */
     array patchEntities(iterable $entities, array myData, array myOptions = []);
 }

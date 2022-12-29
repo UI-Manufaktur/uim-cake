@@ -14,16 +14,16 @@ module uim.cake.errors.Debug;
 class ArrayNode : NodeInterface
 {
     /**
-     * @var array<\Cake\Error\Debug\ArrayItemNode>
+     * @var array<uim.cake.Error\Debug\ArrayItemNode>
      */
     private $items;
 
     /**
      * Constructor
      *
-     * @param array<\Cake\Error\Debug\ArrayItemNode> $items The items for the array
+     * @param array<uim.cake.Error\Debug\ArrayItemNode> $items The items for the array
      */
-    public this(array $items = []) {
+    this(array $items = []) {
         this.items = [];
         foreach ($items as $item) {
             this.add($item);
@@ -44,7 +44,7 @@ class ArrayNode : NodeInterface
     /**
      * Get the contained items
      *
-     * @return array<\Cake\Error\Debug\ArrayItemNode>
+     * @return array<uim.cake.Error\Debug\ArrayItemNode>
      */
     function getValue(): array
     {
@@ -54,7 +54,7 @@ class ArrayNode : NodeInterface
     /**
      * Get Item nodes
      *
-     * @return array<\Cake\Error\Debug\ArrayItemNode>
+     * @return array<uim.cake.Error\Debug\ArrayItemNode>
      */
     function getChildren(): array
     {

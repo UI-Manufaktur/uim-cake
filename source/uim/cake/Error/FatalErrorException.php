@@ -29,7 +29,7 @@ class FatalErrorException : CakeException
      * @param int|null $line Line number.
      * @param \Throwable|null $previous The previous exception.
      */
-    public this(
+    this(
         string $message,
         ?int $code = null,
         ?string $file = null,

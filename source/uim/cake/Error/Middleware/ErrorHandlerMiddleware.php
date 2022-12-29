@@ -67,11 +67,11 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Constructor
      *
-     * @param uim.cake.Error\ErrorHandler|\Cake\Error\ExceptionTrap|array $errorHandler The error handler instance
+     * @param uim.cake.Error\ErrorHandler|uim.cake.Error\ExceptionTrap|array $errorHandler The error handler instance
      *  or config array.
      * @throws \InvalidArgumentException
      */
-    public this($errorHandler = []) {
+    this($errorHandler = []) {
         if (func_num_args() > 1) {
             deprecationWarning(
                 "The signature of ErrorHandlerMiddleware::__construct() has changed. "
@@ -199,7 +199,7 @@ class ErrorHandlerMiddleware : IMiddleware
     protected function getErrorHandler(): ErrorHandler
     {
         if (this.errorHandler == null) {
-            /** @var class-string<\Cake\Error\ErrorHandler> $className */
+            /** @var class-string<uim.cake.Error\ErrorHandler> $className */
             $className = App::className("ErrorHandler", "Error");
             this.errorHandler = new $className(this.getConfig());
         }
@@ -215,7 +215,7 @@ class ErrorHandlerMiddleware : IMiddleware
     protected function getExceptionTrap(): ExceptionTrap
     {
         if (this.exceptionTrap == null) {
-            /** @var class-string<\Cake\Error\ExceptionTrap> $className */
+            /** @var class-string<uim.cake.Error\ExceptionTrap> $className */
             $className = App::className("ExceptionTrap", "Error");
             this.exceptionTrap = new $className(this.getConfig());
         }

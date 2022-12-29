@@ -138,7 +138,7 @@ class ErrorHandler : BaseErrorHandler
         $renderer = _config["exceptionRenderer"];
 
         if (is_string($renderer)) {
-            /** @var class-string<\Cake\Error\IExceptionRenderer>|null myClass */
+            /** @var class-string<uim.cake.Error\IExceptionRenderer>|null myClass */
             myClass = App::className($renderer, "Error");
             if (!myClass) {
                 throw new RuntimeException(sprintf(

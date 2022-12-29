@@ -19,7 +19,7 @@ use Throwable;
  *
  * Useful in CI or plain text environments.
  *
- * @todo 5.0 Implement \Cake\Error\ExceptionRendererInterface. This implementation can"t implement
+ * @todo 5.0 Implement uim.cake.Error\ExceptionRendererInterface. This implementation can"t implement
  *  the concrete interface because the return types are not compatible.
  */
 class ConsoleExceptionRenderer
@@ -46,7 +46,7 @@ class ConsoleExceptionRenderer
      * @param \Psr\Http\Message\IServerRequest|null $request Not used.
      * @param array $config Error handling configuration.
      */
-    public this(Throwable $error, ?IServerRequest $request, array $config) {
+    this(Throwable $error, ?IServerRequest $request, array $config) {
         this.error = $error;
         this.output = $config["stderr"] ?? new ConsoleOutput("php://stderr");
         this.trace = $config["trace"] ?? true;

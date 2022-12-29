@@ -163,7 +163,7 @@ abstract class BaseErrorHandler
 
         $debug = (bool)Configure::read("debug");
         if ($debug) {
-            // By default trim 3 frames off for the public and protected methods
+            // By default trim 3 frames off for the and protected methods
             // used by ErrorHandler instances.
             $start = 3;
 
@@ -367,7 +367,7 @@ abstract class BaseErrorHandler
      * @param int $code Error code to map
      * @return array Array of error word, and log location.
      */
-    public static function mapErrorCode(int $code): array
+    static function mapErrorCode(int $code): array
     {
         $levelMap = [
             E_PARSE: "error",

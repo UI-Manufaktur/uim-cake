@@ -112,7 +112,7 @@ TEXT;
     /**
      * Handles object to string conversion.
      *
-     * @param uim.cake.Error\Debug\ClassNode|\Cake\Error\Debug\ReferenceNode $var Object to convert.
+     * @param uim.cake.Error\Debug\ClassNode|uim.cake.Error\Debug\ReferenceNode $var Object to convert.
      * @param int $indent Current indentation level.
      * @return string
      * @see uim.cake.Error\Debugger::exportVar()

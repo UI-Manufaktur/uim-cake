@@ -96,7 +96,7 @@ class ExceptionTrap
      *
      * @param array<string, mixed> $options An options array. See $_defaultConfig.
      */
-    public this(array $options = []) {
+    this(array $options = []) {
         this.setConfig($options);
     }
 
@@ -137,7 +137,7 @@ class ExceptionTrap
                 );
             }
 
-            /** @var class-string<\Cake\Error\ExceptionRendererInterface> $class */
+            /** @var class-string<uim.cake.Error\ExceptionRendererInterface> $class */
             return new $class($exception, $request, _config);
         }
 
@@ -147,11 +147,11 @@ class ExceptionTrap
     /**
      * Choose an exception renderer based on config or the SAPI
      *
-     * @return class-string<\Cake\Error\ExceptionRendererInterface>
+     * @return class-string<uim.cake.Error\ExceptionRendererInterface>
      */
     protected function chooseRenderer(): string
     {
-        /** @var class-string<\Cake\Error\ExceptionRendererInterface> */
+        /** @var class-string<uim.cake.Error\ExceptionRendererInterface> */
         return PHP_SAPI == "cli" ? ConsoleExceptionRenderer::class : ExceptionRenderer::class;
     }
 
@@ -162,7 +162,7 @@ class ExceptionTrap
      */
     function logger(): ErrorLoggerInterface
     {
-        /** @var class-string<\Cake\Error\ErrorLoggerInterface> $class */
+        /** @var class-string<uim.cake.Error\ErrorLoggerInterface> $class */
         $class = this.getConfig("logger", _defaultConfig["logger"]);
 
         return new $class(_config);
@@ -208,7 +208,7 @@ class ExceptionTrap
      *
      * @return uim.cake.Error\ExceptionTrap|null The global instance or null.
      */
-    public static function instance(): ?self
+    static function instance(): ?self
     {
         return static::$registeredTrap;
     }

@@ -80,7 +80,7 @@ class PhpError
      * @param int|null $line The line number for the error.
      * @param array $trace The backtrace for the error.
      */
-    public this(
+    this(
         int $code,
         string $message,
         ?string $file = null,

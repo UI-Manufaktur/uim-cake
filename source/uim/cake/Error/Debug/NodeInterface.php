@@ -18,7 +18,7 @@ interface NodeInterface
     /**
      * Get the child nodes of this node.
      *
-     * @return array<\Cake\Error\Debug\NodeInterface>
+     * @return array<uim.cake.Error\Debug\NodeInterface>
      */
     function getChildren(): array;
 

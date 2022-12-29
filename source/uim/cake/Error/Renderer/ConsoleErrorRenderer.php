@@ -39,7 +39,7 @@ class ConsoleErrorRenderer : ErrorRendererInterface
      *
      * @param array $config Error handling configuration.
      */
-    public this(array $config) {
+    this(array $config) {
         this.output = $config["stderr"] ?? new ConsoleOutput("php://stderr");
         this.trace = (bool)($config["trace"] ?? false);
     }

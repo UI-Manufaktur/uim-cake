@@ -144,7 +144,7 @@ abstract class BaseErrorHandler
 
         $debug = (bool)Configure::read("debug");
         if ($debug) {
-            // By default trim 3 frames off for the public and protected methods
+            // By default trim 3 frames off for the and protected methods
             // used by ErrorHandler instances.
             $start = 3;
 

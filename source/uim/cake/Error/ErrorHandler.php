@@ -93,7 +93,7 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param array<string, mixed> $config The options for error handling.
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         $config += [
             "exceptionRenderer": ExceptionRenderer::class,
         ];
@@ -154,7 +154,7 @@ class ErrorHandler : BaseErrorHandler
         $renderer = _config["exceptionRenderer"];
 
         if (is_string($renderer)) {
-            /** @var class-string<\Cake\Error\ExceptionRendererInterface>|null $class */
+            /** @var class-string<uim.cake.Error\ExceptionRendererInterface>|null $class */
             $class = App::className($renderer, "Error");
             if (!$class) {
                 throw new RuntimeException(sprintf(

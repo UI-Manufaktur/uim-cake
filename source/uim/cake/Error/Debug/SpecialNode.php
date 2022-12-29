@@ -23,7 +23,7 @@ class SpecialNode : NodeInterface
      *
      * @param string $value The message/value to include in dump results.
      */
-    public this(string $value) {
+    this(string $value) {
         this.value = $value;
     }
 

@@ -145,7 +145,7 @@ class Debugger
     /**
      * Constructor.
      */
-    public this() {
+    this() {
         $docRef = ini_get('docref_root');
         if (empty($docRef) && function_exists('ini_set')) {
             ini_set('docref_root', 'https://secure.php.net/');
@@ -205,7 +205,7 @@ class Debugger
      * @param string|null $class Class name.
      * @return static
      */
-    public static function getInstance(?string $class = null) {
+    static function getInstance(?string $class = null) {
         static $instance = [];
         if (!empty($class)) {
             if (!$instance || strtolower($class) != strtolower(get_class($instance[0]))) {
@@ -228,7 +228,7 @@ class Debugger
      * @return mixed Config value being read, or the object itself on write operations.
      * @throws uim.cake.Core\Exception\CakeException When trying to set a key that is invalid.
      */
-    public static function configInstance($key = null, $value = null, bool $merge = true) {
+    static function configInstance($key = null, $value = null, bool $merge = true) {
         if ($key == null) {
             return static::getInstance().getConfig($key);
         }
@@ -245,7 +245,7 @@ class Debugger
      *
      * @return array<string, string>
      */
-    public static function outputMask(): array
+    static function outputMask(): array
     {
         return static::configInstance('outputMask');
     }
@@ -261,7 +261,7 @@ class Debugger
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return void
      */
-    public static function setOutputMask(array $value, bool $merge = true): void
+    static function setOutputMask(array $value, bool $merge = true): void
     {
         static::configInstance('outputMask', $value, $merge);
     }
@@ -277,7 +277,7 @@ class Debugger
      * @param \Closure|string $template The string template or closure
      * @return void
      */
-    public static function addEditor(string $name, $template): void
+    static function addEditor(string $name, $template): void
     {
         $instance = static::getInstance();
         if (!is_string($template) && !($template instanceof Closure)) {
@@ -293,7 +293,7 @@ class Debugger
      * @param string $name The editor name.
      * @return void
      */
-    public static function setEditor(string $name): void
+    static function setEditor(string $name): void
     {
         $instance = static::getInstance();
         if (!isset($instance.editors[$name])) {
@@ -310,7 +310,7 @@ class Debugger
      * @param int $line The line number to create a link for.
      * @return string The formatted URL.
      */
-    public static function editorUrl(string $file, int $line): string
+    static function editorUrl(string $file, int $line): string
     {
         $instance = static::getInstance();
         $editor = $instance.getConfig('editor');
@@ -335,7 +335,7 @@ class Debugger
      * @see uim.cake.Error\Debugger::exportVar()
      * @link https://book.cakephp.org/4/en/development/debugging.html#outputting-values
      */
-    public static function dump($var, int $maxDepth = 3): void
+    static function dump($var, int $maxDepth = 3): void
     {
         pr(static::exportVar($var, $maxDepth));
     }
@@ -349,7 +349,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return void
      */
-    public static function log($var, $level = 'debug', int $maxDepth = 3): void
+    static function log($var, $level = 'debug', int $maxDepth = 3): void
     {
         /** @var string $source */
         $source = static::trace(['start': 1]);
@@ -377,7 +377,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    public static function trace(array $options = []) {
+    static function trace(array $options = []) {
         return Debugger::formatTrace(debug_backtrace(), $options);
     }
 
@@ -398,7 +398,7 @@ class Debugger
      * @return array|string Formatted stack trace.
      * @link https://book.cakephp.org/4/en/development/debugging.html#generating-stack-traces
      */
-    public static function formatTrace($backtrace, array $options = []) {
+    static function formatTrace($backtrace, array $options = []) {
         if ($backtrace instanceof Throwable) {
             $backtrace = $backtrace.getTrace();
         }
@@ -485,7 +485,7 @@ class Debugger
      * @param string $path Path to shorten.
      * @return string Normalized path
      */
-    public static function trimPath(string $path): string
+    static function trimPath(string $path): string
     {
         if (defined('APP') && strpos($path, APP) == 0) {
             return str_replace(APP, 'APP/', $path);
@@ -521,7 +521,7 @@ class Debugger
      * @see https://secure.php.net/highlight_string
      * @link https://book.cakephp.org/4/en/development/debugging.html#getting-an-excerpt-from-a-file
      */
-    public static function excerpt(string $file, int $line, int $context = 2): array
+    static function excerpt(string $file, int $line, int $context = 2): array
     {
         $lines = [];
         if (!file_exists($file)) {
@@ -633,7 +633,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return string Variable as a formatted string
      */
-    public static function exportVar($var, int $maxDepth = 3): string
+    static function exportVar($var, int $maxDepth = 3): string
     {
         $context = new DebugContext($maxDepth);
         $node = static::export($var, $context);
@@ -648,7 +648,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return string Variable as a string
      */
-    public static function exportVarAsPlainText($var, int $maxDepth = 3): string
+    static function exportVarAsPlainText($var, int $maxDepth = 3): string
     {
         return (new TextFormatter()).dump(
             static::export($var, new DebugContext($maxDepth))
@@ -665,7 +665,7 @@ class Debugger
      * @param int $maxDepth The depth to generate nodes to. Defaults to 3.
      * @return uim.cake.Error\Debug\NodeInterface The root node of the tree.
      */
-    public static function exportVarAsNodes($var, int $maxDepth = 3): NodeInterface
+    static function exportVarAsNodes($var, int $maxDepth = 3): NodeInterface
     {
         return static::export($var, new DebugContext($maxDepth));
     }
@@ -830,7 +830,7 @@ class Debugger
      * @return string Returns the current format when getting.
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    public static function getOutputFormat(): string
+    static function getOutputFormat(): string
     {
         deprecationWarning('Debugger::getOutputFormat() is deprecated.');
 
@@ -845,7 +845,7 @@ class Debugger
      * @throws \InvalidArgumentException When choosing a format that doesn't exist.
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    public static function setOutputFormat(string $format): void
+    static function setOutputFormat(string $format): void
     {
         deprecationWarning('Debugger::setOutputFormat() is deprecated.');
         $self = Debugger::getInstance();
@@ -900,7 +900,7 @@ class Debugger
      * @return array The resulting format string set.
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    public static function addFormat(string $format, array $strings): array
+    static function addFormat(string $format, array $strings): array
     {
         deprecationWarning('Debugger::addFormat() is deprecated.');
         $self = Debugger::getInstance();
@@ -925,11 +925,11 @@ class Debugger
      * Add a renderer to the current instance.
      *
      * @param string $name The alias for the the renderer.
-     * @param class-string<\Cake\Error\ErrorRendererInterface> $class The classname of the renderer to use.
+     * @param class-string<uim.cake.Error\ErrorRendererInterface> $class The classname of the renderer to use.
      * @return void
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    public static function addRenderer(string $name, string $class): void
+    static function addRenderer(string $name, string $class): void
     {
         deprecationWarning('Debugger::addRenderer() is deprecated.');
         if (!in_array(ErrorRendererInterface::class, class_implements($class))) {
@@ -1046,7 +1046,7 @@ class Debugger
      * @param mixed $var The variable to get the type of.
      * @return string The type of variable.
      */
-    public static function getType($var): string
+    static function getType($var): string
     {
         $type = getTypeName($var);
 
@@ -1077,7 +1077,7 @@ class Debugger
      *    environment conditions.
      * @return void
      */
-    public static function printVar($var, array $location = [], ?bool $showHtml = null): void
+    static function printVar($var, array $location = [], ?bool $showHtml = null): void
     {
         $location += ['file': null, 'line': null];
         if ($location['file']) {
@@ -1111,7 +1111,7 @@ class Debugger
      * @param string $message The string message to format.
      * @return string Formatted message.
      */
-    public static function formatHtmlMessage(string $message): string
+    static function formatHtmlMessage(string $message): string
     {
         $message = h($message);
         $message = preg_replace('/`([^`]+)`/', '<code>$1</code>', $message);
@@ -1124,7 +1124,7 @@ class Debugger
      *
      * @return void
      */
-    public static function checkSecurityKeys(): void
+    static function checkSecurityKeys(): void
     {
         $salt = Security::getSalt();
         if ($salt == '__SALT__' || strlen($salt) < 32) {

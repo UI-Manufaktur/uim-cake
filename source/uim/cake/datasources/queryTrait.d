@@ -68,7 +68,7 @@ trait QueryTrait
      * Set the default Table object that will be used by this query
      * and form the `FROM` clause.
      *
-     * @param uim.cake.Datasource\IRepository|\Cake\ORM\Table myRepository The default table object to use
+     * @param uim.cake.Datasource\IRepository|uim.cake.ORM\Table myRepository The default table object to use
      * @return this
      */
     function repository(IRepository myRepository) {
@@ -324,7 +324,7 @@ trait QueryTrait
      * after all the `MapReduce` routines for this query have been executed.
      *
      * Formatting callbacks will receive two arguments, the first one being an object
-     * implementing `\Cake\Collection\ICollection`, that can be traversed and
+     * implementing `uim.cake.Collection\ICollection`, that can be traversed and
      * modified at will. The second one being the query instance on which the formatter
      * callback is being applied.
      *
@@ -567,7 +567,7 @@ trait QueryTrait
      * Returns the name of the class to be used for decorating results
      *
      * @return string
-     * @psalm-return class-string<\Cake\Datasource\IResultSet>
+     * @psalm-return class-string<uim.cake.Datasource\IResultSet>
      */
     protected string _decoratorClass() {
         return ResultSetDecorator::class;

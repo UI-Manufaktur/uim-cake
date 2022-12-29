@@ -8,7 +8,7 @@ module uim.cake.datasources;
 /**
  * Contains logic for invoking an application rule.
  *
- * Combined with {@link \Cake\Datasource\RulesChecker} as an implementation
+ * Combined with {@link uim.cake.Datasource\RulesChecker} as an implementation
  * detail to de-duplicate rule decoration and provide cleaner separation
  * of duties.
  *

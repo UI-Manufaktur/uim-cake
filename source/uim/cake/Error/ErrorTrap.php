@@ -50,14 +50,14 @@ class ErrorTrap
      *
      * @param array<string, mixed> $options An options array. See $_defaultConfig.
      */
-    public this(array $options = []) {
+    this(array $options = []) {
         this.setConfig($options);
     }
 
     /**
      * Choose an error renderer based on config or the SAPI
      *
-     * @return class-string<\Cake\Error\ErrorRendererInterface>
+     * @return class-string<uim.cake.Error\ErrorRendererInterface>
      */
     protected function chooseErrorRenderer(): string
     {
@@ -66,7 +66,7 @@ class ErrorTrap
             return $config;
         }
 
-        /** @var class-string<\Cake\Error\ErrorRendererInterface> */
+        /** @var class-string<uim.cake.Error\ErrorRendererInterface> */
         return PHP_SAPI == "cli" ? ConsoleErrorRenderer::class : HtmlErrorRenderer::class;
     }
 
@@ -179,7 +179,7 @@ class ErrorTrap
      */
     function renderer(): ErrorRendererInterface
     {
-        /** @var class-string<\Cake\Error\ErrorRendererInterface> $class */
+        /** @var class-string<uim.cake.Error\ErrorRendererInterface> $class */
         $class = this.getConfig("errorRenderer") ?: this.chooseErrorRenderer();
 
         return new $class(_config);
@@ -198,7 +198,7 @@ class ErrorTrap
             this.setConfig(["logger": $oldConfig, "errorLogger": null]);
         }
 
-        /** @var class-string<\Cake\Error\ErrorLoggerInterface> $class */
+        /** @var class-string<uim.cake.Error\ErrorLoggerInterface> $class */
         $class = this.getConfig("logger", _defaultConfig["logger"]);
 
         return new $class(_config);

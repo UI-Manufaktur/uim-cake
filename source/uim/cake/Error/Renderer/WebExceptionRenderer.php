@@ -71,7 +71,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     protected $controller;
 
     /**
-     * Template to render for {@link \Cake\Core\Exception\CakeException}
+     * Template to render for {@link uim.cake.Core\Exception\CakeException}
      *
      * @var string
      */
@@ -121,7 +121,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * @param uim.cake.http.ServerRequest|null $request The request if this is set it will be used
      *   instead of creating a new one.
      */
-    public this(Throwable $exception, ?ServerRequest $request = null) {
+    this(Throwable $exception, ?ServerRequest $request = null) {
         this.error = $exception;
         this.request = $request;
         this.controller = _getController();

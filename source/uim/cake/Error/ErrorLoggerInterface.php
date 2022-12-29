@@ -19,7 +19,7 @@ use Throwable;
  *
  * @method void logException(\Throwable $exception, ?\Psr\Http\Message\IServerRequest $request = null, bool $includeTrace = false)
  *   Log an exception with an optional HTTP request.
- * @method void logError(\Cake\Error\PhpError $error, ?\Psr\Http\Message\IServerRequest $request = null, bool $includeTrace = false)
+ * @method void logError(uim.cake.Error\PhpError $error, ?\Psr\Http\Message\IServerRequest $request = null, bool $includeTrace = false)
  *   Log an error with an optional HTTP request.
  */
 interface ErrorLoggerInterface

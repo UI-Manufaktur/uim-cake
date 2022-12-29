@@ -32,7 +32,7 @@ class HtmlFormatter : FormatterInterface
     /**
      * Constructor.
      */
-    public this() {
+    this() {
         this.id = uniqid("", true);
     }
 
@@ -41,7 +41,7 @@ class HtmlFormatter : FormatterInterface
      *
      * @return bool
      */
-    public static function environmentMatches(): bool
+    static function environmentMatches(): bool
     {
         if (PHP_SAPI == "cli" || PHP_SAPI == "phpdbg") {
             return false;
@@ -177,7 +177,7 @@ class HtmlFormatter : FormatterInterface
     /**
      * Handles object to string conversion.
      *
-     * @param uim.cake.Error\Debug\ClassNode|\Cake\Error\Debug\ReferenceNode $var Object to convert.
+     * @param uim.cake.Error\Debug\ClassNode|uim.cake.Error\Debug\ReferenceNode $var Object to convert.
      * @param int $indent The current indentation level.
      * @return string
      * @see uim.cake.Error\Debugger::exportVar()

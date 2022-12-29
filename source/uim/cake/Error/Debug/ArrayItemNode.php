@@ -29,7 +29,7 @@ class ArrayItemNode : NodeInterface
      * @param uim.cake.Error\Debug\NodeInterface $key The node for the item key
      * @param uim.cake.Error\Debug\NodeInterface $value The node for the array value
      */
-    public this(NodeInterface $key, NodeInterface $value) {
+    this(NodeInterface $key, NodeInterface $value) {
         this.key = $key;
         this.value = $value;
     }

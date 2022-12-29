@@ -33,7 +33,7 @@ class ReferenceNode : NodeInterface
      * @param string $class The class name
      * @param int $id The id of the referenced class.
      */
-    public this(string $class, int $id) {
+    this(string $class, int $id) {
         this.class = $class;
         this.id = $id;
     }

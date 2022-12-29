@@ -24,7 +24,7 @@ class ClassNode : NodeInterface
     private $id;
 
     /**
-     * @var array<\Cake\Error\Debug\PropertyNode>
+     * @var array<uim.cake.Error\Debug\PropertyNode>
      */
     private $properties = [];
 
@@ -34,7 +34,7 @@ class ClassNode : NodeInterface
      * @param string $class The class name
      * @param int $id The reference id of this object in the DumpContext
      */
-    public this(string $class, int $id) {
+    this(string $class, int $id) {
         this.class = $class;
         this.id = $id;
     }
@@ -73,7 +73,7 @@ class ClassNode : NodeInterface
     /**
      * Get property nodes
      *
-     * @return array<\Cake\Error\Debug\PropertyNode>
+     * @return array<uim.cake.Error\Debug\PropertyNode>
      */
     function getChildren(): array
     {
