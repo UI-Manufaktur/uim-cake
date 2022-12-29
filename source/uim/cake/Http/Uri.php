@@ -8,7 +8,7 @@
   */
 module uim.cake.Http;
 
-use Psr\Http\Message\UriInterface;
+use Psr\Http\messages.UriInterface;
 use UnexpectedValueException;
 
 /**
@@ -34,14 +34,14 @@ class Uri : UriInterface
     private $webroot = "";
 
     /**
-     * @var \Psr\Http\Message\UriInterface
+     * @var \Psr\Http\messages.UriInterface
      */
     private $uri;
 
     /**
      * Constructor
      *
-     * @param \Psr\Http\Message\UriInterface $uri Uri instance to decorate
+     * @param \Psr\Http\messages.UriInterface $uri Uri instance to decorate
      * @param string $base The base path.
      * @param string $webroot The webroot path.
      */
@@ -67,7 +67,7 @@ class Uri : UriInterface
     /**
      * Get the decorated URI
      *
-     * @return \Psr\Http\Message\UriInterface
+     * @return \Psr\Http\messages.UriInterface
      */
     function getUri(): UriInterface
     {

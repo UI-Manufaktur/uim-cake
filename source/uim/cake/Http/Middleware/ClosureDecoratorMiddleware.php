@@ -2,10 +2,10 @@
 module uim.cake.http.Middleware;
 
 use Closure;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
  * Decorate closures as PSR-15 middleware.
@@ -42,9 +42,9 @@ class ClosureDecoratorMiddleware : IMiddleware
     /**
      * Run the callable to process an incoming server request.
      *
-     * @param \Psr\Http\Message\IServerRequest $request Request instance.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler Request handler instance.
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest $request Request instance.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler Request handler instance.
+     * @return \Psr\Http\messages.IResponse
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {

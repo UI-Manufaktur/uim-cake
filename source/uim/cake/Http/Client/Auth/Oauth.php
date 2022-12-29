@@ -16,7 +16,7 @@ module uim.cake.http.Client\Auth;
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.http.Client\Request;
 import uim.cake.utilities.Security;
-use Psr\Http\Message\UriInterface;
+use Psr\Http\messages.UriInterface;
 use RuntimeException;
 
 /**
@@ -263,7 +263,7 @@ class Oauth
      *
      * Section 9.1.2. of the Oauth spec
      *
-     * @param \Psr\Http\Message\UriInterface $uri Uri object to build a normalized version of.
+     * @param \Psr\Http\messages.UriInterface $uri Uri object to build a normalized version of.
      * @return string Normalized URL
      */
     protected function _normalizedUrl(UriInterface $uri): string

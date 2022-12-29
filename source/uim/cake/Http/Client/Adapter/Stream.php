@@ -19,7 +19,7 @@ import uim.cake.http.Client\exceptions.NetworkException;
 import uim.cake.http.Client\exceptions.RequestException;
 import uim.cake.http.Client\Response;
 use Composer\CaBundle\CaBundle;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\messages.RequestInterface;
 
 /**
  * : sending Cake\Http\Client\Request
@@ -112,7 +112,7 @@ class Stream : AdapterInterface
     /**
      * Build the stream context out of the request object.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to build context from.
+     * @param \Psr\Http\messages.RequestInterface $request The request to build context from.
      * @param array<string, mixed> $options Additional request options.
      * @return void
      */
@@ -138,7 +138,7 @@ class Stream : AdapterInterface
      *
      * Creates cookies & headers.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request being sent.
+     * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      * @return void
      */
@@ -157,7 +157,7 @@ class Stream : AdapterInterface
      * If the $request.body() is a string, it will be used as is.
      * Array data will be processed with {@link uim.cake.Http\Client\FormData}
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request being sent.
+     * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      * @return void
      */
@@ -171,7 +171,7 @@ class Stream : AdapterInterface
     /**
      * Build miscellaneous options for the request.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request being sent.
+     * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      * @return void
      */
@@ -196,7 +196,7 @@ class Stream : AdapterInterface
     /**
      * Build SSL options for the request.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request being sent.
+     * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      * @return void
      */
@@ -231,7 +231,7 @@ class Stream : AdapterInterface
     /**
      * Open the stream and send the request.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request object.
+     * @param \Psr\Http\messages.RequestInterface $request The request object.
      * @return array Array of populated Response objects
      * @throws \Psr\Http\Client\NetworkExceptionInterface
      */
@@ -294,7 +294,7 @@ class Stream : AdapterInterface
      * Open the socket and handle any connection errors.
      *
      * @param string $url The url to connect to.
-     * @param \Psr\Http\Message\RequestInterface $request The request object.
+     * @param \Psr\Http\messages.RequestInterface $request The request object.
      * @return void
      * @throws \Psr\Http\Client\RequestExceptionInterface
      */

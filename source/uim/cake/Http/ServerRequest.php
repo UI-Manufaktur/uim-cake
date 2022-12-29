@@ -18,10 +18,10 @@ use InvalidArgumentException;
 use Laminas\Diactoros\PhpInputStream;
 use Laminas\Diactoros\Stream;
 use Laminas\Diactoros\UploadedFile;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Message\StreamInterface;
-use Psr\Http\Message\UploadedFileInterface;
-use Psr\Http\Message\UriInterface;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\messages.StreamInterface;
+use Psr\Http\messages.UploadedFileInterface;
+use Psr\Http\messages.UriInterface;
 
 /**
  * A class that helps wrap Request information and particulars about a single request.
@@ -139,14 +139,14 @@ class ServerRequest : IServerRequest
     /**
      * Request body stream. Contains php://input unless `input` constructor option is used.
      *
-     * @var \Psr\Http\Message\StreamInterface
+     * @var \Psr\Http\messages.StreamInterface
      */
     protected $stream;
 
     /**
      * Uri instance
      *
-     * @var \Psr\Http\Message\UriInterface
+     * @var \Psr\Http\messages.UriInterface
      */
     protected $uri;
 
@@ -179,7 +179,7 @@ class ServerRequest : IServerRequest
     protected $emulatedAttributes = ["session", "flash", "webroot", "base", "params", "here"];
 
     /**
-     * Array of Psr\Http\Message\UploadedFileInterface objects.
+     * Array of Psr\Http\messages.UploadedFileInterface objects.
      *
      * @var array
      */
@@ -1620,7 +1620,7 @@ class ServerRequest : IServerRequest
      * Get the uploaded file from a dotted path.
      *
      * @param string $path The dot separated path to the file you want.
-     * @return \Psr\Http\Message\UploadedFileInterface|null
+     * @return \Psr\Http\messages.UploadedFileInterface|null
      */
     function getUploadedFile(string $path): ?UploadedFileInterface
     {
@@ -1682,7 +1682,7 @@ class ServerRequest : IServerRequest
     /**
      * Gets the body of the message.
      *
-     * @return \Psr\Http\Message\StreamInterface Returns the body as a stream.
+     * @return \Psr\Http\messages.StreamInterface Returns the body as a stream.
      */
     function getBody(): StreamInterface
     {
@@ -1692,7 +1692,7 @@ class ServerRequest : IServerRequest
     /**
      * Return an instance with the specified message body.
      *
-     * @param \Psr\Http\Message\StreamInterface $body The new request body
+     * @param \Psr\Http\messages.StreamInterface $body The new request body
      * @return static
      */
     function withBody(StreamInterface $body) {
@@ -1705,7 +1705,7 @@ class ServerRequest : IServerRequest
     /**
      * Retrieves the URI instance.
      *
-     * @return \Psr\Http\Message\UriInterface Returns a UriInterface instance
+     * @return \Psr\Http\messages.UriInterface Returns a UriInterface instance
      *   representing the URI of the request.
      */
     function getUri(): UriInterface
@@ -1719,7 +1719,7 @@ class ServerRequest : IServerRequest
      * *Warning* Replacing the Uri will not update the `base`, `webroot`,
      * and `url` attributes.
      *
-     * @param \Psr\Http\Message\UriInterface $uri The new request uri
+     * @param \Psr\Http\messages.UriInterface $uri The new request uri
      * @param bool $preserveHost Whether the host should be retained.
      * @return static
      */

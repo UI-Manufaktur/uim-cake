@@ -15,7 +15,7 @@ module uim.cake.http.Client;
 
 use Laminas\Diactoros\RequestTrait;
 use Laminas\Diactoros\Stream;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\messages.RequestInterface;
 
 /**
  * : methods for HTTP requests.

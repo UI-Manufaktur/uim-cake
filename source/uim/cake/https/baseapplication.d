@@ -139,7 +139,7 @@ abstract class BaseApplication :
      *
      * By default, this will load `config/routes.php` for ease of use and backwards compatibility.
      *
-     * @param uim.cake.Routing\RouteBuilder $routes A route builder to add routes into.
+     * @param uim.cake.routings.RouteBuilder $routes A route builder to add routes into.
      */
     void routes(RouteBuilder $routes) {
       // Only load routes if the router is empty
@@ -235,8 +235,8 @@ abstract class BaseApplication :
      * - Create the controller that will handle this request.
      * - Invoke the controller.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest myRequest The request
+     * @return \Psr\Http\messages.IResponse
      */
     IResponse handle(
         IServerRequest myRequest

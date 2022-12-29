@@ -42,8 +42,8 @@ namespace App;
 import uim.cake.core.IHttpApplication;
 import uim.cake.http.MiddlewareQueue;
 import uim.cake.http.Response;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
 
 class Application : IHttpApplication
 {
@@ -73,8 +73,8 @@ class Application : IHttpApplication
     /**
      * Handle incoming server request and return a response.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest $request The request
+     * @return \Psr\Http\messages.IResponse
      */
     function handle(IServerRequest $request): IResponse
     {

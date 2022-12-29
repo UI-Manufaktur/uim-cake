@@ -8,9 +8,9 @@
   */
 module uim.cake.Http;
 
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
  * Executes the middleware queue and provides the `next` callable
@@ -28,15 +28,15 @@ class Runner : RequestHandlerInterface
     /**
      * Fallback handler to use if middleware queue does not generate response.
      *
-     * @var \Psr\Http\Server\RequestHandlerInterface|null
+     * @var \Psr\Http\servers.RequestHandlerInterface|null
      */
     protected $fallbackHandler;
 
     /**
      * @param uim.cake.http.MiddlewareQueue $queue The middleware queue
-     * @param \Psr\Http\Message\IServerRequest $request The Server Request
-     * @param \Psr\Http\Server\RequestHandlerInterface|null $fallbackHandler Fallback request handler.
-     * @return \Psr\Http\Message\IResponse A response object
+     * @param \Psr\Http\messages.IServerRequest $request The Server Request
+     * @param \Psr\Http\servers.RequestHandlerInterface|null $fallbackHandler Fallback request handler.
+     * @return \Psr\Http\messages.IResponse A response object
      */
     function run(
         MiddlewareQueue $queue,
@@ -53,8 +53,8 @@ class Runner : RequestHandlerInterface
     /**
      * Handle incoming server request and return a response.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The server request
-     * @return \Psr\Http\Message\IResponse An updated response
+     * @param \Psr\Http\messages.IServerRequest $request The server request
+     * @return \Psr\Http\messages.IResponse An updated response
      */
     function handle(IServerRequest $request): IResponse
     {

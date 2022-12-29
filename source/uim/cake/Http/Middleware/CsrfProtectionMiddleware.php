@@ -9,10 +9,10 @@ import uim.cake.http.Response;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 use InvalidArgumentException;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 use RuntimeException;
 
 /**
@@ -102,9 +102,9 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Checks and sets the CSRF token depending on the HTTP verb.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
@@ -193,8 +193,8 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Remove CSRF protection token from request data.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request object.
-     * @return \Psr\Http\Message\IServerRequest
+     * @param \Psr\Http\messages.IServerRequest $request The request object.
+     * @return \Psr\Http\messages.IServerRequest
      */
     protected function _unsetTokenField(IServerRequest $request): IServerRequest
     {
@@ -340,9 +340,9 @@ class CsrfProtectionMiddleware : IMiddleware
      * Add a CSRF token to the response cookies.
      *
      * @param string $token The token to add.
-     * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
-     * @param \Psr\Http\Message\IResponse $response The response.
-     * @return \Psr\Http\Message\IResponse $response Modified response.
+     * @param \Psr\Http\messages.IServerRequest $request The request to validate against.
+     * @param \Psr\Http\messages.IResponse $response The response.
+     * @return \Psr\Http\messages.IResponse $response Modified response.
      */
     protected function _addTokenCookie(
         string $token,
@@ -360,7 +360,7 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Validate the request data against the cookie token.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
+     * @param \Psr\Http\messages.IServerRequest $request The request to validate against.
      * @return void
      * @throws uim.cake.http.exceptions.InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
@@ -406,7 +406,7 @@ class CsrfProtectionMiddleware : IMiddleware
      * Create response cookie
      *
      * @param string $value Cookie value
-     * @param \Psr\Http\Message\IServerRequest $request The request object.
+     * @param \Psr\Http\messages.IServerRequest $request The request object.
      * @return uim.cake.http.Cookie\CookieInterface
      */
     protected function _createCookie(string $value, IServerRequest $request): CookieInterface

@@ -4,10 +4,10 @@ module uim.cake.http.Middleware;
 import uim.cake.core.Configure;
 import uim.cake.http.exceptions.BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 use UnexpectedValueException;
 
 /**
@@ -57,9 +57,9 @@ class HttpsEnforcerMiddleware : IMiddleware
      * Depending on the configuration and request method, either redirects to
      * same URL with https or throws an exception.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      * @throws uim.cake.http.exceptions.BadRequestException
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
@@ -99,8 +99,8 @@ class HttpsEnforcerMiddleware : IMiddleware
     /**
      * Adds Strict-Transport-Security header to response.
      *
-     * @param \Psr\Http\Message\IResponse $response Response
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IResponse $response Response
+     * @return \Psr\Http\messages.IResponse
      */
     protected function addHsts(IResponse $response): IResponse
     {

@@ -4,10 +4,10 @@ module uim.cake.http.Middleware;
 import uim.cake.http.Cookie\CookieCollection;
 import uim.cake.http.Response;
 import uim.cake.utilities.CookieCryptTrait;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
  * Middleware for encrypting & decrypting cookies.
@@ -64,9 +64,9 @@ class EncryptedCookieMiddleware : IMiddleware
     /**
      * Apply cookie encryption/decryption.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
@@ -100,8 +100,8 @@ class EncryptedCookieMiddleware : IMiddleware
     /**
      * Decode cookies from the request.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request to decode cookies from.
-     * @return \Psr\Http\Message\IServerRequest Updated request with decoded cookies.
+     * @param \Psr\Http\messages.IServerRequest $request The request to decode cookies from.
+     * @return \Psr\Http\messages.IServerRequest Updated request with decoded cookies.
      */
     protected function decodeCookies(IServerRequest $request): IServerRequest
     {
@@ -138,8 +138,8 @@ class EncryptedCookieMiddleware : IMiddleware
     /**
      * Encode cookies from a response"s Set-Cookie header
      *
-     * @param \Psr\Http\Message\IResponse $response The response to encode cookies in.
-     * @return \Psr\Http\Message\IResponse Updated response with encoded cookies.
+     * @param \Psr\Http\messages.IResponse $response The response to encode cookies in.
+     * @return \Psr\Http\messages.IResponse Updated response with encoded cookies.
      */
     protected function encodeSetCookieHeader(IResponse $response): IResponse
     {

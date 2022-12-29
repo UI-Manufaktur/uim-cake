@@ -14,10 +14,10 @@ import uim.cake.http.exceptions.InvalidCsrfTokenException;
 import uim.cake.http.Session;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 use RuntimeException;
 
 /**
@@ -80,9 +80,9 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     /**
      * Checks and sets the CSRF token depending on the HTTP verb.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
@@ -196,8 +196,8 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * This ensures that the token does not cause failures during
      * form tampering protection.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request object.
-     * @return \Psr\Http\Message\IServerRequest
+     * @param \Psr\Http\messages.IServerRequest $request The request object.
+     * @return \Psr\Http\messages.IServerRequest
      */
     protected function unsetTokenField(IServerRequest $request): IServerRequest
     {
@@ -226,7 +226,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
     /**
      * Validate the request data against the cookie token.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
+     * @param \Psr\Http\messages.IServerRequest $request The request to validate against.
      * @param uim.cake.http.Session $session The session instance.
      * @return void
      * @throws uim.cake.http.exceptions.InvalidCsrfTokenException When the CSRF token is invalid or missing.

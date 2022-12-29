@@ -21,9 +21,9 @@ use DateTimeZone;
 use Exception;
 use InvalidArgumentException;
 use IteratorAggregate;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.RequestInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
 use Traversable;
 use TypeError;
 
@@ -77,7 +77,7 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Create a new collection from the cookies in a ServerRequest
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request to extract cookie data from
+     * @param \Psr\Http\messages.IServerRequest $request The request to extract cookie data from
      * @return static
      */
     static function createFromServerRequest(IServerRequest $request) {
@@ -219,10 +219,10 @@ class CookieCollection : IteratorAggregate, Countable
      * situation. Cookies that match the request"s domain + path that are not expired
      * when this method is called will be applied to the request.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to update.
+     * @param \Psr\Http\messages.RequestInterface $request The request to update.
      * @param array $extraCookies Associative array of additional cookies to add into the request. This
      *   is useful when you have cookie data from outside the collection you want to send.
-     * @return \Psr\Http\Message\RequestInterface An updated request.
+     * @return \Psr\Http\messages.RequestInterface An updated request.
      */
     function addToRequest(RequestInterface $request, array $extraCookies = []): RequestInterface
     {
@@ -296,8 +296,8 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Create a new collection that includes cookies from the response.
      *
-     * @param \Psr\Http\Message\IResponse $response Response to extract cookies from.
-     * @param \Psr\Http\Message\RequestInterface $request Request to get cookie context from.
+     * @param \Psr\Http\messages.IResponse $response Response to extract cookies from.
+     * @param \Psr\Http\messages.RequestInterface $request Request to get cookie context from.
      * @return static
      */
     function addFromResponse(IResponse $response, RequestInterface $request) {

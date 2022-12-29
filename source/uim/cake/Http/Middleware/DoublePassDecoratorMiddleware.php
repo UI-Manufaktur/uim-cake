@@ -2,10 +2,10 @@
 module uim.cake.http.Middleware;
 
 import uim.cake.http.Response;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
  * Decorate double-pass middleware as PSR-15 middleware.
@@ -25,7 +25,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * Neither the arguments nor the return value need be typehinted.
  *
  * @deprecated 4.3.0 "Double pass" middleware are deprecated.
- *   Use a `Closure` or a class which : `Psr\Http\Server\IMiddleware` instead.
+ *   Use a `Closure` or a class which : `Psr\Http\servers.IMiddleware` instead.
  */
 class DoublePassDecoratorMiddleware : IMiddleware
 {
@@ -44,7 +44,7 @@ class DoublePassDecoratorMiddleware : IMiddleware
     this(callable $callable) {
         deprecationWarning(
             ""Double pass" middleware are deprecated. Use a `Closure` with the signature of"
-            . " `($request, $handler)` or a class which : `Psr\Http\Server\IMiddleware` instead.",
+            . " `($request, $handler)` or a class which : `Psr\Http\servers.IMiddleware` instead.",
             0
         );
         this.callable = $callable;
@@ -53,9 +53,9 @@ class DoublePassDecoratorMiddleware : IMiddleware
     /**
      * Run the internal double pass callable to process an incoming server request.
      *
-     * @param \Psr\Http\Message\IServerRequest $request Request instance.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler Request handler instance.
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest $request Request instance.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler Request handler instance.
+     * @return \Psr\Http\messages.IResponse
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {

@@ -16,7 +16,7 @@ module uim.cake.http.Client;
 import uim.cake.http.Cookie\CookieCollection;
 use Laminas\Diactoros\MessageTrait;
 use Laminas\Diactoros\Stream;
-use Psr\Http\Message\IResponse;
+use Psr\Http\messages.IResponse;
 use RuntimeException;
 use SimpleXMLElement;
 

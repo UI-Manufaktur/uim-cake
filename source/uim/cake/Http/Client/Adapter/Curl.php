@@ -21,7 +21,7 @@ import uim.cake.http.Client\Request;
 import uim.cake.http.Client\Response;
 import uim.cake.http.exceptions.HttpException;
 use Composer\CaBundle\CaBundle;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\messages.RequestInterface;
 
 /**
  * : sending Cake\Http\Client\Request via ext/curl.
@@ -72,7 +72,7 @@ class Curl : AdapterInterface
     /**
      * Convert client options into curl options.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request.
+     * @param \Psr\Http\messages.RequestInterface $request The request.
      * @param array<string, mixed> $options The client options
      * @return array
      */
@@ -160,7 +160,7 @@ class Curl : AdapterInterface
     /**
      * Convert HTTP version number into curl value.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to get a protocol version for.
+     * @param \Psr\Http\messages.RequestInterface $request The request to get a protocol version for.
      * @return int
      */
     protected function getProtocolVersion(RequestInterface $request): int

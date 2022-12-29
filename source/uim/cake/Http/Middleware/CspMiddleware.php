@@ -4,10 +4,10 @@ module uim.cake.http.Middleware;
 
 import uim.cake.core.InstanceConfigTrait;
 use ParagonIE\CSPBuilder\CSPBuilder;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 use RuntimeException;
 
 /**
@@ -62,9 +62,9 @@ class CspMiddleware : IMiddleware
     /**
      * Add nonces (if enabled) to the request and apply the CSP header to the response.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
@@ -76,7 +76,7 @@ class CspMiddleware : IMiddleware
         }
         $response = $handler.handle($request);
 
-        /** @var \Psr\Http\Message\IResponse */
+        /** @var \Psr\Http\messages.IResponse */
         return this.csp.injectCSPHeader($response);
     }
 }

@@ -2,7 +2,7 @@
 
 module uim.cake.Http;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\messages.RequestInterface;
 
 /**
  * Negotiates the prefered content type from what the application
@@ -16,7 +16,7 @@ class ContentTypeNegotiation
      * Only qualifiers will be extracted, any other accept extensions will be
      * discarded as they are not frequently used.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to get an accept from.
+     * @param \Psr\Http\messages.RequestInterface $request The request to get an accept from.
      * @return array<string, array<string>> A mapping of preference values: content types
      */
     function parseAccept(RequestInterface $request): array
@@ -32,7 +32,7 @@ class ContentTypeNegotiation
      * Only qualifiers will be extracted, other extensions will be ignored
      * as they are not frequently used.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to get an accept from.
+     * @param \Psr\Http\messages.RequestInterface $request The request to get an accept from.
      * @return array<string, array<string>> A mapping of preference values: languages
      */
     function parseAcceptLanguage(RequestInterface $request): array
@@ -92,7 +92,7 @@ class ContentTypeNegotiation
      *
      * You can expect null when the request has no Accept header.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to use.
+     * @param \Psr\Http\messages.RequestInterface $request The request to use.
      * @param array<string> $choices The supported content type choices.
      * @return string|null The prefered type or null if there is no match with choices or if the
      *   request had no Accept header.
@@ -125,7 +125,7 @@ class ContentTypeNegotiation
      * Language codes in the request will be normalized to lower case and have
      * `_` replaced with `-`.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to read headers from.
+     * @param \Psr\Http\messages.RequestInterface $request The request to read headers from.
      * @return array<string> A list of language codes that are accepted.
      */
     function acceptedLanguages(RequestInterface $request): array
@@ -151,7 +151,7 @@ class ContentTypeNegotiation
      * Language codes in the request will be normalized to lower case and have `_` replaced
      * with `-`.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to read headers from.
+     * @param \Psr\Http\messages.RequestInterface $request The request to read headers from.
      * @param string $lang The language code to check.
      * @return bool Whether the request accepts $lang
      */

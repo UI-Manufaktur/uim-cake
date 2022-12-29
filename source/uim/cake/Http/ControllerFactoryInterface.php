@@ -1,8 +1,8 @@
 
 module uim.cake.Http;
 
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
 
 /**
  * Factory method for building controllers from request/response pairs.
@@ -14,7 +14,7 @@ interface ControllerFactoryInterface
     /**
      * Create a controller for a given request
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request to build a controller for.
+     * @param \Psr\Http\messages.IServerRequest $request The request to build a controller for.
      * @return mixed
      * @throws uim.cake.http.exceptions.MissingControllerException
      * @psalm-return TController
@@ -25,7 +25,7 @@ interface ControllerFactoryInterface
      * Invoke a controller"s action and wrapping methods.
      *
      * @param mixed $controller The controller to invoke.
-     * @return \Psr\Http\Message\IResponse The response
+     * @return \Psr\Http\messages.IResponse The response
      * @psalm-param TController $controller
      */
     function invoke($controller): IResponse;

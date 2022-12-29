@@ -28,8 +28,8 @@ import uim.cake.utilities.Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\Uri;
 use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\IResponse;
+use Psr\Http\messages.RequestInterface;
+use Psr\Http\messages.IResponse;
 
 /**
  * The end user interface for doing HTTP requests.
@@ -447,8 +447,8 @@ class Client : ClientInterface
     /**
      * Sends a PSR-7 request and returns a PSR-7 response.
      *
-     * @param \Psr\Http\Message\RequestInterface $request Request instance.
-     * @return \Psr\Http\Message\IResponse Response instance.
+     * @param \Psr\Http\messages.RequestInterface $request Request instance.
+     * @return \Psr\Http\messages.IResponse Response instance.
      * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
      */
     function sendRequest(RequestInterface $request): IResponse
@@ -462,7 +462,7 @@ class Client : ClientInterface
      * Used internally by other methods, but can also be used to send
      * handcrafted Request objects.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to send.
+     * @param \Psr\Http\messages.RequestInterface $request The request to send.
      * @param array<string, mixed> $options Additional options to use.
      * @return uim.cake.http.Client\Response
      */
@@ -538,7 +538,7 @@ class Client : ClientInterface
     /**
      * Send a request without redirection.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request to send.
+     * @param \Psr\Http\messages.RequestInterface $request The request to send.
      * @param array<string, mixed> $options Additional options to use.
      * @return uim.cake.http.Client\Response
      */

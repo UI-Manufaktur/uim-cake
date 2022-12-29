@@ -15,7 +15,7 @@ module uim.cake.http.Client;
 
 use Countable;
 use finfo;
-use Psr\Http\Message\UploadedFileInterface;
+use Psr\Http\messages.UploadedFileInterface;
 
 /**
  * Provides an interface for building
@@ -133,7 +133,7 @@ class FormData : Countable
      * or a file handle.
      *
      * @param string $name The name to use.
-     * @param string|resource|\Psr\Http\Message\UploadedFileInterface $value Either a string filename, or a filehandle,
+     * @param string|resource|\Psr\Http\messages.UploadedFileInterface $value Either a string filename, or a filehandle,
      *  or a UploadedFileInterface instance.
      * @return uim.cake.http.Client\FormDataPart
      */

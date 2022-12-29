@@ -15,7 +15,7 @@ use Closure;
 use Countable;
 use LogicException;
 use OutOfBoundsException;
-use Psr\Http\Server\IMiddleware;
+use Psr\Http\servers.IMiddleware;
 use ReflectionFunction;
 use RuntimeException;
 use SeekableIterator;
@@ -24,7 +24,7 @@ use SeekableIterator;
  * Provides methods for creating and manipulating a "queue" of middlewares.
  * This queue is used to process a request and generate response via uim.cake.Http\Runner.
  *
- * @template-implements \SeekableIterator<int, \Psr\Http\Server\IMiddleware>
+ * @template-implements \SeekableIterator<int, \Psr\Http\servers.IMiddleware>
  */
 class MiddlewareQueue : Countable, SeekableIterator
 {
@@ -54,8 +54,8 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      * Resolve middleware name to a PSR 15 compliant middleware instance.
      *
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to resolve.
-     * @return \Psr\Http\Server\IMiddleware
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to resolve.
+     * @return \Psr\Http\servers.IMiddleware
      * @throws \RuntimeException If Middleware not found.
      */
     protected function resolve($middleware): IMiddleware
@@ -90,7 +90,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      * Append a middleware to the end of the queue.
      *
-     * @param \Psr\Http\Server\IMiddleware|\Closure|array|string $middleware The middleware(s) to append.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|array|string $middleware The middleware(s) to append.
      * @return this
      */
     function add($middleware) {
@@ -107,7 +107,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      * Alias for MiddlewareQueue::add().
      *
-     * @param \Psr\Http\Server\IMiddleware|\Closure|array|string $middleware The middleware(s) to append.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|array|string $middleware The middleware(s) to append.
      * @return this
      * @see MiddlewareQueue::add()
      */
@@ -118,7 +118,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      * Prepend a middleware to the start of the queue.
      *
-     * @param \Psr\Http\Server\IMiddleware|\Closure|array|string $middleware The middleware(s) to prepend.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|array|string $middleware The middleware(s) to prepend.
      * @return this
      */
     function prepend($middleware) {
@@ -139,7 +139,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * and the existing element will be shifted one index greater.
      *
      * @param int $index The index to insert at.
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to insert.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to insert.
      * @return this
      */
     function insertAt(int $index, $middleware) {
@@ -155,7 +155,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * and inserts the supplied middleware before it.
      *
      * @param string $class The classname to insert the middleware before.
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to insert.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to insert.
      * @return this
      * @throws \LogicException If middleware to insert before is not found.
      */
@@ -189,7 +189,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * this method will behave like add().
      *
      * @param string $class The classname to insert the middleware before.
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to insert.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to insert.
      * @return this
      */
     function insertAfter(string $class, $middleware) {
@@ -257,7 +257,7 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      *  Returns the current middleware.
      *
-     * @return \Psr\Http\Server\IMiddleware
+     * @return \Psr\Http\servers.IMiddleware
      * @see \Iterator::current()
      */
     function current(): IMiddleware

@@ -13,7 +13,7 @@
   */
 module uim.cake.http.Client;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\messages.RequestInterface;
 
 /**
  * Http client adapter interface.
@@ -23,7 +23,7 @@ interface AdapterInterface
     /**
      * Send a request and get a response back.
      *
-     * @param \Psr\Http\Message\RequestInterface $request The request object to send.
+     * @param \Psr\Http\messages.RequestInterface $request The request object to send.
      * @param array<string, mixed> $options Array of options for the stream.
      * @return array<uim.cake.Http\Client\Response> Array of populated Response objects
      */

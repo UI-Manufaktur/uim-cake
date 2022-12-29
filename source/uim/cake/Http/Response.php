@@ -18,8 +18,8 @@ use DateTimeZone;
 use InvalidArgumentException;
 use Laminas\Diactoros\MessageTrait;
 use Laminas\Diactoros\Stream;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\StreamInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.StreamInterface;
 use SplFileInfo;
 
 /**

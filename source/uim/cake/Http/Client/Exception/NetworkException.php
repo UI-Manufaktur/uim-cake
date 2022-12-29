@@ -14,7 +14,7 @@
 module uim.cake.http.Client\Exception;
 
 use Psr\Http\Client\NetworkExceptionInterface;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\messages.RequestInterface;
 use RuntimeException;
 use Throwable;
 
@@ -28,7 +28,7 @@ use Throwable;
 class NetworkException : RuntimeException : NetworkExceptionInterface
 {
     /**
-     * @var \Psr\Http\Message\RequestInterface
+     * @var \Psr\Http\messages.RequestInterface
      */
     protected $request;
 
@@ -36,7 +36,7 @@ class NetworkException : RuntimeException : NetworkExceptionInterface
      * Constructor.
      *
      * @param string $message Exeception message.
-     * @param \Psr\Http\Message\RequestInterface $request Request instance.
+     * @param \Psr\Http\messages.RequestInterface $request Request instance.
      * @param \Throwable|null $previous Previous Exception
      */
     this(string $message, RequestInterface $request, ?Throwable $previous = null) {
@@ -49,7 +49,7 @@ class NetworkException : RuntimeException : NetworkExceptionInterface
      *
      * The request object MAY be a different object from the one passed to ClientInterface::sendRequest()
      *
-     * @return \Psr\Http\Message\RequestInterface
+     * @return \Psr\Http\messages.RequestInterface
      */
     function getRequest(): RequestInterface
     {

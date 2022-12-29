@@ -2,8 +2,8 @@
 module uim.cake.Http;
 
 import uim.cake.core.IHttpApplication;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
 
 /**
  * Base class for standalone HTTP applications
@@ -26,8 +26,8 @@ abstract class MiddlewareApplication : IHttpApplication
     /**
      * Generate a 404 response as no middleware handled the request.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest $request The request
+     * @return \Psr\Http\messages.IResponse
      */
     function handle(
         IServerRequest $request
