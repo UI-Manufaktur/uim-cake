@@ -8,21 +8,21 @@ use Psr\SimpleCache\ICache;
  * This interface defines the methods you can depend on in
  * a connection.
  *
- * @method object getDriver() Gets the driver instance. {@see \Cake\Database\Connnection::getDriver()}
- * @method this setLogger($logger) Set the current logger. {@see \Cake\Database\Connnection::setLogger()}
+ * @method object getDriver() Gets the driver instance. {@see uim.cake.Database\Connnection::getDriver()}
+ * @method this setLogger($logger) Set the current logger. {@see uim.cake.Database\Connnection::setLogger()}
  * @method bool supportsDynamicConstraints() Returns whether the driver supports adding or dropping constraints to
- *   already created tables. {@see \Cake\Database\Connnection::supportsDynamicConstraints()}
+ *   already created tables. {@see uim.cake.Database\Connnection::supportsDynamicConstraints()}
  * @method \Cake\Database\Schema\Collection getSchemaCollection() Gets a Schema\Collection object for this connection.
- *    {@see \Cake\Database\Connnection::getSchemaCollection()}
+ *    {@see uim.cake.Database\Connnection::getSchemaCollection()}
  * @method \Cake\Database\Query newQuery() Create a new Query instance for this connection.
- *    {@see \Cake\Database\Connnection::newQuery()}
+ *    {@see uim.cake.Database\Connnection::newQuery()}
  * @method \Cake\Database\IStatement prepare(mySql) Prepares a SQL statement to be executed.
- *    {@see \Cake\Database\Connnection::prepare()}
+ *    {@see uim.cake.Database\Connnection::prepare()}
  * @method \Cake\Database\IStatement execute(myQuery, myParams = [], array myTypes = []) Executes a query using
  *   `myParams` for interpolating values and myTypes as a hint for each those params.
- *   {@see \Cake\Database\Connnection::execute()}
+ *   {@see uim.cake.Database\Connnection::execute()}
  * @method \Cake\Database\IStatement query(string mySql) Executes a SQL statement and returns the Statement
- *   object as result. {@see \Cake\Database\Connnection::query()}
+ *   object as result. {@see uim.cake.Database\Connnection::query()}
  */
 interface IConnection : ILoggerAware {
     /**

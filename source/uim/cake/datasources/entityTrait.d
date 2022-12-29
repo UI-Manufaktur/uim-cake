@@ -114,7 +114,7 @@ trait EntityTrait
      *
      * @param string myField The field to check.
      * @return bool
-     * @see \Cake\ORM\Entity::has()
+     * @see uim.cake.ORM\Entity::has()
      */
     bool __isset(string myField) {
         return this.has(myField);

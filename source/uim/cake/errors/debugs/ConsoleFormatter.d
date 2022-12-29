@@ -158,7 +158,7 @@ class ConsoleFormatter : IFormatter
      * @param \Cake\Error\Debug\ClassNode|\Cake\Error\Debug\ReferenceNode $var Object to convert.
      * @param int $indent Current indentation level.
      * @return string
-     * @see \Cake\Error\Debugger::exportVar()
+     * @see uim.cake.Error\Debugger::exportVar()
      */
     protected string exportObject($var, int $indent) {
         $props = [];

@@ -10,9 +10,9 @@
 module uim.cake.Http;
 
 import uim.cake.cores.Configure;
-import uim.cake.Http\Cookie\CookieCollection;
-import uim.cake.Http\Cookie\CookieInterface;
-import uim.cake.Http\Exception\NotFoundException;
+import uim.cake.https.Cookie\CookieCollection;
+import uim.cake.https.Cookie\CookieInterface;
+import uim.cake.https.Exception\NotFoundException;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;

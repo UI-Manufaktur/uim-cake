@@ -18,7 +18,7 @@
 module uim.cake.Error;
 
 import uim.cake.cores.App;
-import uim.cake.Http\ResponseEmitter;
+import uim.cake.https.ResponseEmitter;
 import uim.cake.Routing\Router;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;
@@ -85,7 +85,7 @@ use Throwable;
  *
  * Would enable handling for all non Notice errors.
  *
- * @see \Cake\Error\ExceptionRenderer for more information on how to customize exception rendering.
+ * @see uim.cake.Error\ExceptionRenderer for more information on how to customize exception rendering.
  */
 class ErrorHandler : BaseErrorHandler
 {

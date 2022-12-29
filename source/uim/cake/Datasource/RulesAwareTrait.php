@@ -80,7 +80,7 @@ trait RulesAwareTrait
      * on rules that may involve complex logic or data that
      * needs to be fetched from relevant datasources.
      *
-     * @see \Cake\Datasource\RulesChecker
+     * @see uim.cake.Datasource\RulesChecker
      * @return \Cake\Datasource\RulesChecker
      */
     function rulesChecker(): RulesChecker

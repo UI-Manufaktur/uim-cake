@@ -300,7 +300,7 @@ class Debugger
      * @param mixed $var The variable to dump.
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return void
-     * @see \Cake\Error\Debugger::exportVar()
+     * @see uim.cake.Error\Debugger::exportVar()
      * @link https://book.UIM.org/4/en/development/debugging.html#outputting-values
      */
     static function dump($var, int $maxDepth = 3): void
@@ -709,7 +709,7 @@ class Debugger
      * @param object $var Object to convert.
      * @param \Cake\Error\Debug\DebugContext $context The dump context.
      * @return \Cake\Error\Debug\INode
-     * @see \Cake\Error\Debugger::exportVar()
+     * @see uim.cake.Error\Debugger::exportVar()
      */
     protected static function exportObject(object $var, DebugContext $context): INode
     {

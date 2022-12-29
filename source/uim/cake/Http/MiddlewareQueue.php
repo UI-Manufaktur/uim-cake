@@ -10,8 +10,8 @@
 module uim.cake.Http;
 
 import uim.cake.cores.App;
-import uim.cake.Http\Middleware\ClosureDecoratorMiddleware;
-import uim.cake.Http\Middleware\DoublePassDecoratorMiddleware;
+import uim.cake.https.Middleware\ClosureDecoratorMiddleware;
+import uim.cake.https.Middleware\DoublePassDecoratorMiddleware;
 use Closure;
 use Countable;
 use LogicException;

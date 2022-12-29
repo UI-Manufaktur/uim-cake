@@ -15,8 +15,8 @@ import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.errors.ErrorHandler;
 import uim.cake.errors.ExceptionTrap;
 import uim.cake.errors.Renderer\WebExceptionRenderer;
-import uim.cake.Http\Exception\RedirectException;
-import uim.cake.Http\Response;
+import uim.cake.https.Exception\RedirectException;
+import uim.cake.https.Response;
 use InvalidArgumentException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
@@ -45,7 +45,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * class if you are using the array style constructor.
      *
      * @var array<string, mixed>
-     * @see \Cake\Error\ExceptionTrap
+     * @see uim.cake.Error\ExceptionTrap
      */
     protected $_defaultConfig = [
         "exceptionRenderer": WebExceptionRenderer::class,

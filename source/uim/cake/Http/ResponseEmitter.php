@@ -13,7 +13,7 @@
  */
 module uim.cake.Http;
 
-import uim.cake.Http\Cookie\Cookie;
+import uim.cake.https.Cookie\Cookie;
 use Laminas\Diactoros\RelativeStream;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\IResponse;

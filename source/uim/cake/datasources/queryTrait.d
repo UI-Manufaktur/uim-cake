@@ -22,7 +22,7 @@ trait QueryTrait
      * When set, query execution will be bypassed.
      *
      * @var iterable|null
-     * @see \Cake\Datasource\QueryTrait::setResult()
+     * @see uim.cake.Datasource\QueryTrait::setResult()
      */
     protected _results;
 
@@ -285,7 +285,7 @@ trait QueryTrait
      * @param callable|null $reducer The reducing function.
      * @param bool $overwrite Set to true to overwrite existing map + reduce functions.
      * @return this
-     * @see \Cake\collection.iIterator\MapReduce for details on how to use emit data to the map reducer.
+     * @see uim.cake.collection.iIterator\MapReduce for details on how to use emit data to the map reducer.
      */
     function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false) {
         if ($overwrite) {
@@ -486,7 +486,7 @@ trait QueryTrait
      *  myQuery.getOptions(); // Returns ["doABarrelRoll":true]
      * ```
      *
-     * @see \Cake\Datasource\IQuery::applyOptions() to read about the options that will
+     * @see uim.cake.Datasource\IQuery::applyOptions() to read about the options that will
      * be processed by this class and not returned by this function
      * @return array
      * @see applyOptions()

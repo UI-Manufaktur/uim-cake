@@ -10,7 +10,7 @@
 module uim.cake.Http;
 
 import uim.cake.cores.Configure;
-import uim.cake.Http\Uri as CakeUri;
+import uim.cake.https.Uri as CakeUri;
 import uim.cake.utilities.Hash;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\IServerRequest;

@@ -181,7 +181,7 @@ class HtmlFormatter : FormatterInterface
      * @param \Cake\Error\Debug\ClassNode|\Cake\Error\Debug\ReferenceNode $var Object to convert.
      * @param int $indent The current indentation level.
      * @return string
-     * @see \Cake\Error\Debugger::exportVar()
+     * @see uim.cake.Error\Debugger::exportVar()
      */
     protected function exportObject($var, int $indent): string
     {
