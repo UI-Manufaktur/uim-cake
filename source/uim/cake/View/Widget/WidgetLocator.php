@@ -77,7 +77,7 @@ class WidgetLocator
      * @param string $file The file to load
      * @return void
      */
-    function load(string $file): void
+    void load(string $file): void
     {
         $loader = new PhpConfig();
         $widgets = $loader.read($file);
@@ -164,7 +164,7 @@ class WidgetLocator
      *
      * @return void
      */
-    function clear(): void
+    void clear(): void
     {
         _widgets = [];
     }

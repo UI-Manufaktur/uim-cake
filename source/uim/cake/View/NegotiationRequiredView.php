@@ -34,7 +34,7 @@ class NegotiationRequiredView : View
      *
      * @return void
      */
-    function initialize(): void
+    void initialize(): void
     {
         $response = this.getResponse().withStatus(406);
         this.setResponse($response);

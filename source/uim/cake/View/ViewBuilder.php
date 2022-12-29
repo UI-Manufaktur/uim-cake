@@ -672,7 +672,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string $data Serialized string.
      * @return void
      */
-    function unserialize($data): void
+    void unserialize($data): void
     {
         this.createFromArray(unserialize($data));
     }
@@ -683,7 +683,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param array<string, mixed> $data Data array.
      * @return void
      */
-    function __unserialize(array $data): void
+    void __unserialize(array $data): void
     {
         this.createFromArray($data);
     }

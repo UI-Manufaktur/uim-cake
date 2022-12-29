@@ -104,7 +104,7 @@ class StringTemplate
      *
      * @return void
      */
-    function push(): void
+    void push(): void
     {
         _configStack[] = [
             _config,
@@ -117,7 +117,7 @@ class StringTemplate
      *
      * @return void
      */
-    function pop(): void
+    void pop(): void
     {
         if (empty(_configStack)) {
             return;
@@ -183,7 +183,7 @@ class StringTemplate
      * @param string $file The file to load
      * @return void
      */
-    function load(string $file): void
+    void load(string $file): void
     {
         if ($file == "") {
             throw new CakeException("String template filename cannot be an empty string");
@@ -200,7 +200,7 @@ class StringTemplate
      * @param string $name The template to remove.
      * @return void
      */
-    function remove(string $name): void
+    void remove(string $name): void
     {
         this.setConfig($name, null);
         unset(_compiled[$name]);

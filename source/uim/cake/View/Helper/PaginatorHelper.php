@@ -143,7 +143,7 @@ class PaginatorHelper : Helper
      *   See PaginatorHelper::$options for list of keys.
      * @return void
      */
-    function options(array $options = []): void
+    void options(array $options = []): void
     {
         $request = _View.getRequest();
 

@@ -182,7 +182,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * @param uim.cake.Validation\ValidationRule|array $rule Rule to add to $index
      * @return void
      */
-    function offsetSet($index, $rule): void
+    void offsetSet($index, $rule): void
     {
         this.add($index, $rule);
     }
@@ -193,7 +193,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * @param string $index name of the rule
      * @return void
      */
-    function offsetUnset($index): void
+    void offsetUnset($index): void
     {
         unset(_rules[$index]);
     }

@@ -22,7 +22,7 @@ class PHPUnitExtension : BeforeFirstTestHook
      *
      * @return void
      */
-    function executeBeforeFirstTest(): void
+    void executeBeforeFirstTest(): void
     {
         $helper = new ConnectionHelper();
         $helper.addTestAliases();

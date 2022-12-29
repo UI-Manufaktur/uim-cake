@@ -35,7 +35,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> $config The configuration settings provided to this helper.
      * @return void
      */
-    function initialize(array $config): void
+    void initialize(array $config): void
     {
         parent::initialize($config);
         $engineClassConfig = this.getConfig("assetUrlClassName");

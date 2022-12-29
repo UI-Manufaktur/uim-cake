@@ -77,7 +77,7 @@ class ViewBlock
      * @throws uim.cake.Core\exceptions.CakeException When starting a block twice
      * @return void
      */
-    function start(string $name, string $mode = ViewBlock::OVERRIDE): void
+    void start(string $name, string $mode = ViewBlock::OVERRIDE): void
     {
         if (array_key_exists($name, _active)) {
             throw new CakeException(sprintf("A view block with the name "%s" is already/still open.", $name));
@@ -131,7 +131,7 @@ class ViewBlock
      *   If ViewBlock::PREPEND it will be prepended.
      * @return void
      */
-    function concat(string $name, $value = null, $mode = ViewBlock::APPEND): void
+    void concat(string $name, $value = null, $mode = ViewBlock::APPEND): void
     {
         if ($value == null) {
             this.start($name, $mode);
@@ -158,7 +158,7 @@ class ViewBlock
      *   to string.
      * @return void
      */
-    function set(string $name, $value): void
+    void set(string $name, $value): void
     {
         _blocks[$name] = (string)$value;
     }

@@ -424,7 +424,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param uim.cake.Validation\ValidationSet|array $rules set of rules to apply to field
      * @return void
      */
-    function offsetSet($field, $rules): void
+    void offsetSet($field, $rules): void
     {
         if (!$rules instanceof ValidationSet) {
             $set = new ValidationSet();
@@ -442,7 +442,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string $field name of the field to unset
      * @return void
      */
-    function offsetUnset($field): void
+    void offsetUnset($field): void
     {
         unset(_fields[$field]);
     }

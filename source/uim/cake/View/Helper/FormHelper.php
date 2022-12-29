@@ -2384,7 +2384,7 @@ class FormHelper : Helper
      *   when the form context is the correct type.
      * @return void
      */
-    function addContextProvider(string $type, callable $check): void
+    void addContextProvider(string $type, callable $check): void
     {
         this.contextFactory().addProvider($type, $check);
     }
@@ -2437,7 +2437,7 @@ class FormHelper : Helper
      *   name or an object implementing the WidgetInterface.
      * @return void
      */
-    function addWidget(string $name, $spec): void
+    void addWidget(string $name, $spec): void
     {
         _locator.add([$name: $spec]);
     }
@@ -2484,7 +2484,7 @@ class FormHelper : Helper
      *
      * @return void
      */
-    function resetTemplates(): void
+    void resetTemplates(): void
     {
         this.setTemplates(_defaultConfig["templates"]);
     }

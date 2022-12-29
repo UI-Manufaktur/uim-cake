@@ -48,7 +48,7 @@ class TestExceptionRenderer : ExceptionRendererInterface
      * @param \Psr\Http\messages.IResponse|string $output The output or response to send.
      * @return void
      */
-    function write($output): void
+    void write($output): void
     {
     }
 }

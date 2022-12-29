@@ -363,7 +363,7 @@ class View : EventDispatcherInterface
      *
      * @return void
      */
-    function initialize(): void
+    void initialize(): void
     {
         this.setContentType();
     }

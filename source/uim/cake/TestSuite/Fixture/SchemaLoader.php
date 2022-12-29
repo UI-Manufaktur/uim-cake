@@ -52,7 +52,7 @@ class SchemaLoader
      * @param bool $truncateTables Truncate all tables after loading schema files
      * @return void
      */
-    function loadSqlFiles(
+    void loadSqlFiles(
         $paths,
         string $connectionName = "test",
         bool $dropTables = true,
