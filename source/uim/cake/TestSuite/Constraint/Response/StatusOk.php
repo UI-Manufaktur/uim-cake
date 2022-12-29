@@ -33,6 +33,6 @@ class StatusOk : StatusCodeBase
      */
     function toString(): string
     {
-        return sprintf('%d is between 200 and 204', this.response.getStatusCode());
+        return sprintf("%d is between 200 and 204", this.response.getStatusCode());
     }
 }

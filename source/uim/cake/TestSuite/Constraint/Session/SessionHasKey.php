@@ -60,6 +60,6 @@ class SessionHasKey : Constraint
      */
     function toString(): string
     {
-        return 'is a path present in the session';
+        return "is a path present in the session";
     }
 }

@@ -55,6 +55,6 @@ class TemplateFileEquals : Constraint
      */
     function toString(): string
     {
-        return sprintf('equals template file `%s`', this.filename);
+        return sprintf("equals template file `%s`", this.filename);
     }
 }

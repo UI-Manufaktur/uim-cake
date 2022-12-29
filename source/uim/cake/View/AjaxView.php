@@ -19,7 +19,7 @@ class AjaxView : View
     /**
      * @inheritDoc
      */
-    protected $layout = 'ajax';
+    protected $layout = "ajax";
 
     /**
      * Get content type for this view.
@@ -28,6 +28,6 @@ class AjaxView : View
      */
     public static function contentType(): string
     {
-        return 'text/html';
+        return "text/html";
     }
 }

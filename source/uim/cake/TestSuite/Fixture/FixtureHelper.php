@@ -28,7 +28,7 @@ use UnexpectedValueException;
 class FixtureHelper
 {
     /**
-     * Finds fixtures from their TestCase names such as 'core.Articles'.
+     * Finds fixtures from their TestCase names such as "core.Articles".
      *
      * @param array<string> $fixtureNames Fixture names from test case
      * @return array<\Cake\Datasource\FixtureInterface>
@@ -39,37 +39,37 @@ class FixtureHelper
 
         $fixtures = [];
         foreach ($fixtureNames as $fixtureName) {
-            if (strpos($fixtureName, '.')) {
-                [$type, $pathName] = explode('.', $fixtureName, 2);
-                $path = explode('/', $pathName);
+            if (strpos($fixtureName, ".")) {
+                [$type, $pathName] = explode(".", $fixtureName, 2);
+                $path = explode("/", $pathName);
                 $name = array_pop($path);
-                $additionalPath = implode('\\', $path);
+                $additionalPath = implode("\\", $path);
 
-                if ($type == 'core') {
-                    $baseNamespace = 'Cake';
-                } elseif ($type == 'app') {
-                    $baseNamespace = Configure::read('App.namespace');
-                } elseif ($type == 'plugin') {
-                    [$plugin, $name] = explode('.', $pathName);
-                    $baseNamespace = str_replace('/', '\\', $plugin);
+                if ($type == "core") {
+                    $baseNamespace = "Cake";
+                } elseif ($type == "app") {
+                    $baseNamespace = Configure::read("App.namespace");
+                } elseif ($type == "plugin") {
+                    [$plugin, $name] = explode(".", $pathName);
+                    $baseNamespace = str_replace("/", "\\", $plugin);
                     $additionalPath = null;
                 } else {
-                    $baseNamespace = '';
+                    $baseNamespace = "";
                     $name = $fixtureName;
                 }
 
-                if (strpos($name, '/') > 0) {
-                    $name = str_replace('/', '\\', $name);
+                if (strpos($name, "/") > 0) {
+                    $name = str_replace("/", "\\", $name);
                 }
 
                 $nameSegments = [
                     $baseNamespace,
-                    'Test\Fixture',
+                    "Test\Fixture",
                     $additionalPath,
-                    $name . 'Fixture',
+                    $name . "Fixture",
                 ];
                 /** @psalm-var class-string<\Cake\Datasource\FixtureInterface> */
-                $className = implode('\\', array_filter($nameSegments));
+                $className = implode("\\", array_filter($nameSegments));
             } else {
                 /** @psalm-var class-string<\Cake\Datasource\FixtureInterface> */
                 $className = $fixtureName;
@@ -160,7 +160,7 @@ class FixtureHelper
                 $fixture.insert($connection);
             } catch (PDOException $exception) {
                 $message = sprintf(
-                    'Unable to insert rows for table `%s`.'
+                    "Unable to insert rows for table `%s`."
                         . " Fixture records might have invalid data or unknown contraints.\n%s",
                     $fixture.sourceName(),
                     $exception.getMessage()
@@ -217,7 +217,7 @@ class FixtureHelper
                 $fixture.truncate($connection);
             } catch (PDOException $exception) {
                 $message = sprintf(
-                    'Unable to truncate table `%s`.'
+                    "Unable to truncate table `%s`."
                         . " Fixture records might have invalid data or unknown contraints.\n%s",
                     $fixture.sourceName(),
                     $exception.getMessage()
@@ -241,15 +241,15 @@ class FixtureHelper
         foreach ($fixtures as $fixture) {
             $references = this.getForeignReferences($connection, $fixture);
             if ($references) {
-                $constrained[$fixture.sourceName()] = ['references': $references, 'fixture': $fixture];
+                $constrained[$fixture.sourceName()] = ["references": $references, "fixture": $fixture];
             } else {
                 $unconstrained[] = $fixture;
             }
         }
 
         // Check if any fixtures reference another fixture with constrants
-        // If they do, then there might be cross-dependencies which we don't support sorting
-        foreach ($constrained as ['references': $references]) {
+        // If they do, then there might be cross-dependencies which we don"t support sorting
+        foreach ($constrained as ["references": $references]) {
             foreach ($references as $reference) {
                 if (isset($constrained[$reference])) {
                     return null;
@@ -257,7 +257,7 @@ class FixtureHelper
             }
         }
 
-        return array_merge($unconstrained, array_column($constrained, 'fixture'));
+        return array_merge($unconstrained, array_column($constrained, "fixture"));
     }
 
     /**
@@ -282,8 +282,8 @@ class FixtureHelper
         foreach ($schema.constraints() as $constraintName) {
             $constraint = $schema.getConstraint($constraintName);
 
-            if ($constraint && $constraint['type'] == TableSchema::CONSTRAINT_FOREIGN) {
-                $references[] = $constraint['references'][0];
+            if ($constraint && $constraint["type"] == TableSchema::CONSTRAINT_FOREIGN) {
+                $references[] = $constraint["references"][0];
             }
         }
 

@@ -40,7 +40,7 @@ class HeaderNotContains : HeaderContains
     function toString(): string
     {
         return sprintf(
-            "is not in header '%s' (`%s`)",
+            "is not in header "%s" (`%s`)",
             this.headerName,
             this.response.getHeaderLine(this.headerName)
         );

@@ -20,11 +20,11 @@ class Security
 {
     /**
      * Default hash method. If `$type` param for `Security::hash()` is not specified
-     * this value is used. Defaults to 'sha1'.
+     * this value is used. Defaults to "sha1".
      *
      * @var string
      */
-    public static $hashType = 'sha1';
+    public static $hashType = "sha1";
 
     /**
      * The HMAC salt to use for encryption and decryption routines
@@ -63,9 +63,9 @@ class Security
         $availableAlgorithms = hash_algos();
         if (!in_array($algorithm, $availableAlgorithms, true)) {
             throw new RuntimeException(sprintf(
-                'The hash type `%s` was not found. Available algorithms are: %s',
+                "The hash type `%s` was not found. Available algorithms are: %s",
                 $algorithm,
-                implode(', ', $availableAlgorithms)
+                implode(", ", $availableAlgorithms)
             ));
         }
 
@@ -133,15 +133,15 @@ class Security
     {
         $length *= 2;
 
-        $bytes = '';
+        $bytes = "";
         $byteLength = 0;
         while ($byteLength < $length) {
-            $bytes .= static::hash(Text::uuid() . uniqid((string)mt_rand(), true), 'sha512', true);
+            $bytes .= static::hash(Text::uuid() . uniqid((string)mt_rand(), true), "sha512", true);
             $byteLength = strlen($bytes);
         }
         $bytes = substr($bytes, 0, $length);
 
-        return pack('H*', $bytes);
+        return pack("H*", $bytes);
     }
 
     /**
@@ -162,12 +162,12 @@ class Security
             /** @psalm-suppress LessSpecificReturnStatement */
             return static::$_instance;
         }
-        if (extension_loaded('openssl')) {
+        if (extension_loaded("openssl")) {
             return static::$_instance = new OpenSsl();
         }
         throw new InvalidArgumentException(
-            'No compatible crypto engine available. ' .
-            'Load the openssl extension.'
+            "No compatible crypto engine available. " .
+            "Load the openssl extension."
         );
     }
 
@@ -187,17 +187,17 @@ class Security
      */
     public static function encrypt(string $plain, string $key, ?string $hmacSalt = null): string
     {
-        self::_checkKey($key, 'encrypt()');
+        self::_checkKey($key, "encrypt()");
 
         if ($hmacSalt == null) {
             $hmacSalt = static::getSalt();
         }
         // Generate the encryption and hmac key.
-        $key = mb_substr(hash('sha256', $key . $hmacSalt), 0, 32, '8bit');
+        $key = mb_substr(hash("sha256", $key . $hmacSalt), 0, 32, "8bit");
 
         $crypto = static::engine();
         $ciphertext = $crypto.encrypt($plain, $key);
-        $hmac = hash_hmac('sha256', $ciphertext, $key);
+        $hmac = hash_hmac("sha256", $ciphertext, $key);
 
         return $hmac . $ciphertext;
     }
@@ -212,9 +212,9 @@ class Security
      */
     protected static function _checkKey(string $key, string $method): void
     {
-        if (mb_strlen($key, '8bit') < 32) {
+        if (mb_strlen($key, "8bit") < 32) {
             throw new InvalidArgumentException(
-                sprintf('Invalid key for %s, key must be at least 256 bits (32 bytes) long.', $method)
+                sprintf("Invalid key for %s, key must be at least 256 bits (32 bytes) long.", $method)
             );
         }
     }
@@ -231,23 +231,23 @@ class Security
      */
     public static function decrypt(string $cipher, string $key, ?string $hmacSalt = null): ?string
     {
-        self::_checkKey($key, 'decrypt()');
+        self::_checkKey($key, "decrypt()");
         if (empty($cipher)) {
-            throw new InvalidArgumentException('The data to decrypt cannot be empty.');
+            throw new InvalidArgumentException("The data to decrypt cannot be empty.");
         }
         if ($hmacSalt == null) {
             $hmacSalt = static::getSalt();
         }
 
         // Generate the encryption and hmac key.
-        $key = mb_substr(hash('sha256', $key . $hmacSalt), 0, 32, '8bit');
+        $key = mb_substr(hash("sha256", $key . $hmacSalt), 0, 32, "8bit");
 
         // Split out hmac for comparison
         $macSize = 64;
-        $hmac = mb_substr($cipher, 0, $macSize, '8bit');
-        $cipher = mb_substr($cipher, $macSize, null, '8bit');
+        $hmac = mb_substr($cipher, 0, $macSize, "8bit");
+        $cipher = mb_substr($cipher, $macSize, null, "8bit");
 
-        $compareHmac = hash_hmac('sha256', $cipher, $key);
+        $compareHmac = hash_hmac("sha256", $cipher, $key);
         if (!static::constantEquals($hmac, $compareHmac)) {
             return null;
         }
@@ -280,7 +280,7 @@ class Security
     {
         if (static::$_salt == null) {
             throw new RuntimeException(
-                'Salt not set. Use Security::setSalt() to set one, ideally in `config/bootstrap.php`.'
+                "Salt not set. Use Security::setSalt() to set one, ideally in `config/bootstrap.php`."
             );
         }
 

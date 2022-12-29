@@ -42,7 +42,7 @@ class TestExceptionRenderer : ExceptionRendererInterface
      */
     function render(): IResponse
     {
-        throw new LogicException('You cannot use this class to render exceptions.');
+        throw new LogicException("You cannot use this class to render exceptions.");
     }
 
     /**

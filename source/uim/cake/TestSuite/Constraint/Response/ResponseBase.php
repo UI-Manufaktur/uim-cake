@@ -37,7 +37,7 @@ abstract class ResponseBase : Constraint
      */
     public this(?IResponse $response) {
         if (!$response) {
-            throw new AssertionFailedError('No response set, cannot assert content.');
+            throw new AssertionFailedError("No response set, cannot assert content.");
         }
 
         this.response = $response;

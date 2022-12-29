@@ -55,14 +55,14 @@ class SchemaLoader
      */
     function loadSqlFiles(
         $paths,
-        string $connectionName = 'test',
+        string $connectionName = "test",
         bool $dropTables = true,
         bool $truncateTables = false
     ): void {
         $files = (array)$paths;
 
-        // Don't create schema if we are in a phpunit separate process test method.
-        if (isset($GLOBALS['__PHPUNIT_BOOTSTRAP'])) {
+        // Don"t create schema if we are in a phpunit separate process test method.
+        if (isset($GLOBALS["__PHPUNIT_BOOTSTRAP"])) {
             return;
         }
 
@@ -79,7 +79,7 @@ class SchemaLoader
             $sql = file_get_contents($file);
 
             // Use the underlying PDO connection so we can avoid prepared statements
-            // which don't support multiple queries in postgres.
+            // which don"t support multiple queries in postgres.
             $driver = $connection.getDriver();
             $driver.getConnection().exec($sql);
         }
@@ -97,10 +97,10 @@ class SchemaLoader
      * @return void
      * @internal
      */
-    function loadInternalFile(string $file, string $connectionName = 'test'): void
+    function loadInternalFile(string $file, string $connectionName = "test"): void
     {
-        // Don't reload schema when we are in a separate process state.
-        if (isset($GLOBALS['__PHPUNIT_BOOTSTRAP'])) {
+        // Don"t reload schema when we are in a separate process state.
+        if (isset($GLOBALS["__PHPUNIT_BOOTSTRAP"])) {
             return;
         }
 
@@ -111,14 +111,14 @@ class SchemaLoader
         $connection = ConnectionManager::get($connectionName);
         $connection.disableConstraints(function ($connection) use ($tables) {
             foreach ($tables as $table) {
-                $schema = new TableSchema($table['table'], $table['columns']);
-                if (isset($table['indexes'])) {
-                    foreach ($table['indexes'] as $key: $index) {
+                $schema = new TableSchema($table["table"], $table["columns"]);
+                if (isset($table["indexes"])) {
+                    foreach ($table["indexes"] as $key: $index) {
                         $schema.addIndex($key, $index);
                     }
                 }
-                if (isset($table['constraints'])) {
-                    foreach ($table['constraints'] as $key: $index) {
+                if (isset($table["constraints"])) {
+                    foreach ($table["constraints"] as $key: $index) {
                         $schema.addConstraint($key, $index);
                     }
                 }

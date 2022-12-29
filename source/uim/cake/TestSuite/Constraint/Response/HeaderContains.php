@@ -40,7 +40,7 @@ class HeaderContains : HeaderEquals
     function toString(): string
     {
         return sprintf(
-            'is in header \'%s\' (`%s`)',
+            "is in header \"%s\" (`%s`)",
             this.headerName,
             this.response.getHeaderLine(this.headerName)
         );

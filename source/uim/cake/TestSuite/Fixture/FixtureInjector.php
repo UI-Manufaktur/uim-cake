@@ -45,8 +45,8 @@ class FixtureInjector : TestListener
      * @param \Cake\TestSuite\Fixture\FixtureManager $manager The fixture manager
      */
     public this(FixtureManager $manager) {
-        if (isset($_SERVER['argv'])) {
-            $manager.setDebug(in_array('--debug', $_SERVER['argv'], true));
+        if (isset($_SERVER["argv"])) {
+            $manager.setDebug(in_array("--debug", $_SERVER["argv"], true));
         }
         _fixtureManager = $manager;
         _fixtureManager.shutDown();
@@ -64,10 +64,10 @@ class FixtureInjector : TestListener
     {
         if (empty(_first)) {
             deprecationWarning(
-                'You are using the listener based PHPUnit integration. ' .
-                'This fixture system is deprecated, and we recommend you ' .
-                'upgrade to the extension based PHPUnit integration. ' .
-                'See https://book.cakephp.org/4/en/appendices/fixture-upgrade.html',
+                "You are using the listener based PHPUnit integration. " .
+                "This fixture system is deprecated, and we recommend you " .
+                "upgrade to the extension based PHPUnit integration. " .
+                "See https://book.cakephp.org/4/en/appendices/fixture-upgrade.html",
                 0
             );
             _first = $suite;

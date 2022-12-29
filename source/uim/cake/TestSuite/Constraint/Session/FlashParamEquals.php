@@ -56,8 +56,8 @@ class FlashParamEquals : Constraint
      */
     public this(?Session $session, string $key, string $param, ?int $at = null) {
         if (!$session) {
-            $message = 'There is no stored session data. Perhaps you need to run a request?';
-            $message .= ' Additionally, ensure `this.enableRetainFlashMessages()` has been enabled for the test.';
+            $message = "There is no stored session data. Perhaps you need to run a request?";
+            $message .= " Additionally, ensure `this.enableRetainFlashMessages()` has been enabled for the test.";
             throw new AssertionFailedError($message);
         }
 
@@ -79,10 +79,10 @@ class FlashParamEquals : Constraint
         // Which means, that we cannot use Session object here to access the session data.
         // Call to Session::read will start new session (and will erase the data).
         /** @psalm-suppress InvalidScalarArgument */
-        $messages = (array)Hash::get($_SESSION, 'Flash.' . this.key);
+        $messages = (array)Hash::get($_SESSION, "Flash." . this.key);
         if (this.at) {
             /** @psalm-suppress InvalidScalarArgument */
-            $messages = [Hash::get($_SESSION, 'Flash.' . this.key . '.' . this.at)];
+            $messages = [Hash::get($_SESSION, "Flash." . this.key . "." . this.at)];
         }
 
         foreach ($messages as $message) {
@@ -105,9 +105,9 @@ class FlashParamEquals : Constraint
     function toString(): string
     {
         if (this.at != null) {
-            return sprintf('is in \'%s\' %s #%d', this.key, this.param, this.at);
+            return sprintf("is in \"%s\" %s #%d", this.key, this.param, this.at);
         }
 
-        return sprintf('is in \'%s\' %s', this.key, this.param);
+        return sprintf("is in \"%s\" %s", this.key, this.param);
     }
 }

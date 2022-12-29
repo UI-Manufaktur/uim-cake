@@ -39,7 +39,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      *
      * @var string
      */
-    public $connection = 'test';
+    public $connection = "test";
 
     /**
      * Full Table Name
@@ -101,9 +101,9 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     public this() {
         if (!empty(this.connection)) {
             $connection = this.connection;
-            if (strpos($connection, 'test') != 0) {
+            if (strpos($connection, "test") != 0) {
                 $message = sprintf(
-                    'Invalid datasource name "%s" for "%s" fixture. Fixture datasource names must begin with "test".',
+                    "Invalid datasource name "%s" for "%s" fixture. Fixture datasource names must begin with "test".",
                     $connection,
                     static::class
                 );
@@ -162,7 +162,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     protected function _tableFromClass(): string
     {
         [, $class] = namespaceSplit(static::class);
-        preg_match('/^(.*)Fixture$/', $class, $matches);
+        preg_match("/^(.*)Fixture$/", $class, $matches);
         $table = $matches[1] ?? $class;
 
         return Inflector::tableize($table);
@@ -178,27 +178,27 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         $connection = ConnectionManager::get(this.connection());
         _schema = $connection.getDriver().newTableSchema(this.table);
         foreach (this.fields as $field: $data) {
-            if ($field == '_constraints' || $field == '_indexes' || $field == '_options') {
+            if ($field == "_constraints" || $field == "_indexes" || $field == "_options") {
                 continue;
             }
             _schema.addColumn($field, $data);
         }
-        if (!empty(this.fields['_constraints'])) {
-            foreach (this.fields['_constraints'] as $name: $data) {
-                if (!$connection.supportsDynamicConstraints() || $data['type'] != TableSchema::CONSTRAINT_FOREIGN) {
+        if (!empty(this.fields["_constraints"])) {
+            foreach (this.fields["_constraints"] as $name: $data) {
+                if (!$connection.supportsDynamicConstraints() || $data["type"] != TableSchema::CONSTRAINT_FOREIGN) {
                     _schema.addConstraint($name, $data);
                 } else {
                     _constraints[$name] = $data;
                 }
             }
         }
-        if (!empty(this.fields['_indexes'])) {
-            foreach (this.fields['_indexes'] as $name: $data) {
+        if (!empty(this.fields["_indexes"])) {
+            foreach (this.fields["_indexes"] as $name: $data) {
                 _schema.addIndex($name, $data);
             }
         }
-        if (!empty(this.fields['_options'])) {
-            _schema.setOptions(this.fields['_options']);
+        if (!empty(this.fields["_options"])) {
+            _schema.setOptions(this.fields["_options"]);
         }
     }
 
@@ -213,24 +213,24 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         if (!is_array(this.import)) {
             return;
         }
-        $import = this.import + ['connection': 'default', 'table': null, 'model': null];
+        $import = this.import + ["connection": "default", "table": null, "model": null];
 
-        if (!empty($import['model'])) {
-            if (!empty($import['table'])) {
-                throw new CakeException('You cannot define both table and model.');
+        if (!empty($import["model"])) {
+            if (!empty($import["table"])) {
+                throw new CakeException("You cannot define both table and model.");
             }
-            $import['table'] = this.getTableLocator().get($import['model']).getTable();
+            $import["table"] = this.getTableLocator().get($import["model"]).getTable();
         }
 
-        if (empty($import['table'])) {
-            throw new CakeException('Cannot import from undefined table.');
+        if (empty($import["table"])) {
+            throw new CakeException("Cannot import from undefined table.");
         }
 
-        this.table = $import['table'];
+        this.table = $import["table"];
 
-        $db = ConnectionManager::get($import['connection'], false);
+        $db = ConnectionManager::get($import["connection"], false);
         $schemaCollection = $db.getSchemaCollection();
-        $table = $schemaCollection.describe($import['table']);
+        $table = $schemaCollection.describe($import["table"]);
         _schema = $table;
     }
 
@@ -245,7 +245,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         $db = ConnectionManager::get(this.connection());
         try {
             $name = Inflector::camelize(this.table);
-            $ormTable = this.fetchTable($name, ['connection': $db]);
+            $ormTable = this.fetchTable($name, ["connection": $db]);
 
             /** @var \Cake\Database\Schema\TableSchema $schema */
             $schema = $ormTable.getSchema();
@@ -254,7 +254,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
             this.getTableLocator().clear();
         } catch (CakeException $e) {
             $message = sprintf(
-                'Cannot describe schema for table `%s` for fixture `%s`. The table does not exist.',
+                "Cannot describe schema for table `%s` for fixture `%s`. The table does not exist.",
                 this.table,
                 static::class
             );
@@ -286,7 +286,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
             }
         } catch (Exception $e) {
             $msg = sprintf(
-                'Fixture creation for "%s" failed "%s"',
+                "Fixture creation for "%s" failed "%s"",
                 this.table,
                 $e.getMessage()
             );
@@ -418,7 +418,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
         foreach ($fields as $field) {
             /** @var array $column */
             $column = _schema.getColumn($field);
-            $types[$field] = $column['type'];
+            $types[$field] = $column["type"];
         }
         $default = array_fill_keys($fields, null);
         foreach (this.records as $record) {

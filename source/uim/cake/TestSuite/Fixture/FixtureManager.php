@@ -130,19 +130,19 @@ class FixtureManager
     protected function _aliasConnections(): void
     {
         $connections = ConnectionManager::configured();
-        ConnectionManager::alias('test', 'default');
+        ConnectionManager::alias("test", "default");
         $map = [];
         foreach ($connections as $connection) {
-            if ($connection == 'test' || $connection == 'default') {
+            if ($connection == "test" || $connection == "default") {
                 continue;
             }
             if (isset($map[$connection])) {
                 continue;
             }
-            if (strpos($connection, 'test_') == 0) {
+            if (strpos($connection, "test_") == 0) {
                 $map[$connection] = substr($connection, 5);
             } else {
-                $map['test_' . $connection] = $connection;
+                $map["test_" . $connection] = $connection;
             }
         }
         foreach ($map as $testConnection: $normal) {
@@ -182,42 +182,42 @@ class FixtureManager
                 continue;
             }
 
-            if (strpos($fixture, '.')) {
-                [$type, $pathName] = explode('.', $fixture, 2);
-                $path = explode('/', $pathName);
+            if (strpos($fixture, ".")) {
+                [$type, $pathName] = explode(".", $fixture, 2);
+                $path = explode("/", $pathName);
                 $name = array_pop($path);
-                $additionalPath = implode('\\', $path);
+                $additionalPath = implode("\\", $path);
 
-                if ($type == 'core') {
-                    $baseNamespace = 'Cake';
-                } elseif ($type == 'app') {
-                    $baseNamespace = Configure::read('App.namespace');
-                } elseif ($type == 'plugin') {
-                    [$plugin, $name] = explode('.', $pathName);
-                    $baseNamespace = str_replace('/', '\\', $plugin);
+                if ($type == "core") {
+                    $baseNamespace = "Cake";
+                } elseif ($type == "app") {
+                    $baseNamespace = Configure::read("App.namespace");
+                } elseif ($type == "plugin") {
+                    [$plugin, $name] = explode(".", $pathName);
+                    $baseNamespace = str_replace("/", "\\", $plugin);
                     $additionalPath = null;
                 } else {
-                    $baseNamespace = '';
+                    $baseNamespace = "";
                     $name = $fixture;
                 }
 
-                if (strpos($name, '/') > 0) {
-                    $name = str_replace('/', '\\', $name);
+                if (strpos($name, "/") > 0) {
+                    $name = str_replace("/", "\\", $name);
                 }
 
                 $nameSegments = [
                     $baseNamespace,
-                    'Test\Fixture',
+                    "Test\Fixture",
                     $additionalPath,
-                    $name . 'Fixture',
+                    $name . "Fixture",
                 ];
                 /** @psalm-var class-string<\Cake\Datasource\FixtureInterface> */
-                $className = implode('\\', array_filter($nameSegments));
+                $className = implode("\\", array_filter($nameSegments));
             } else {
                 /** @psalm-var class-string<\Cake\Datasource\FixtureInterface> */
                 $className = $fixture;
                 /** @psalm-suppress PossiblyFalseArgument */
-                $name = preg_replace('/Fixture\z/', '', substr(strrchr($fixture, '\\'), 1));
+                $name = preg_replace("/Fixture\z/", "", substr(strrchr($fixture, "\\"), 1));
             }
 
             if (class_exists($className)) {
@@ -225,7 +225,7 @@ class FixtureManager
                 _fixtureMap[$name] = _loaded[$fixture];
             } else {
                 $msg = sprintf(
-                    'Referenced fixture class "%s" not found. Fixture "%s" was referenced in test case "%s".',
+                    "Referenced fixture class "%s" not found. Fixture "%s" was referenced in test case "%s".",
                     $className,
                     $fixture,
                     get_class($test)
@@ -302,7 +302,7 @@ class FixtureManager
                             $fixture.dropConstraints($db);
                         } catch (PDOException $e) {
                             $msg = sprintf(
-                                'Unable to drop constraints for fixture "%s" in "%s" test case: ' . "\n" . '%s',
+                                "Unable to drop constraints for fixture "%s" in "%s" test case: " . "\n" . "%s",
                                 get_class($fixture),
                                 get_class($test),
                                 $e.getMessage()
@@ -329,7 +329,7 @@ class FixtureManager
                         $fixture.createConstraints($db);
                     } catch (PDOException $e) {
                         $msg = sprintf(
-                            'Unable to create constraints for fixture "%s" in "%s" test case: ' . "\n" . '%s',
+                            "Unable to create constraints for fixture "%s" in "%s" test case: " . "\n" . "%s",
                             get_class($fixture),
                             get_class($test),
                             $e.getMessage()
@@ -347,7 +347,7 @@ class FixtureManager
                         $fixture.insert($db);
                     } catch (PDOException $e) {
                         $msg = sprintf(
-                            'Unable to insert fixture "%s" in "%s" test case: ' . "\n" . '%s',
+                            "Unable to insert fixture "%s" in "%s" test case: " . "\n" . "%s",
                             get_class($fixture),
                             get_class($test),
                             $e.getMessage()
@@ -359,7 +359,7 @@ class FixtureManager
             _runOperation($fixtures, $insert);
         } catch (PDOException $e) {
             $msg = sprintf(
-                'Unable to insert fixtures for "%s" test case. %s',
+                "Unable to insert fixtures for "%s" test case. %s",
                 get_class($test),
                 $e.getMessage()
             );
@@ -451,7 +451,7 @@ class FixtureManager
     function loadSingle(string $name, ?ConnectionInterface $connection = null, bool $dropTables = true): void
     {
         if (!isset(_fixtureMap[$name])) {
-            throw new UnexpectedValueException(sprintf('Referenced fixture class %s not found', $name));
+            throw new UnexpectedValueException(sprintf("Referenced fixture class %s not found", $name));
         }
 
         $fixture = _fixtureMap[$name];

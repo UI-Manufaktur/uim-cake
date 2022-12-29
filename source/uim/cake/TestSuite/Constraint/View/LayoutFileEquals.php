@@ -28,6 +28,6 @@ class LayoutFileEquals : TemplateFileEquals
      */
     function toString(): string
     {
-        return sprintf('equals layout file `%s`', this.filename);
+        return sprintf("equals layout file `%s`", this.filename);
     }
 }

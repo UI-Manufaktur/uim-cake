@@ -14,7 +14,7 @@ import uim.cake.TestSuite\ConnectionHelper;
 use PHPUnit\Runner\BeforeFirstTestHook;
 
 /**
- * PHPUnit extension to integrate CakePHP's data-only fixtures.
+ * PHPUnit extension to integrate CakePHP"s data-only fixtures.
  */
 class PHPUnitExtension : BeforeFirstTestHook
 {
@@ -28,14 +28,14 @@ class PHPUnitExtension : BeforeFirstTestHook
         $helper = new ConnectionHelper();
         $helper.addTestAliases();
 
-        $enableLogging = in_array('--debug', $_SERVER['argv'] ?? [], true);
+        $enableLogging = in_array("--debug", $_SERVER["argv"] ?? [], true);
         if ($enableLogging) {
             $helper.enableQueryLogging();
-            Log::drop('queries');
-            Log::setConfig('queries', [
-                'className': 'Console',
-                'stream': 'php://stderr',
-                'scopes': ['queriesLog'],
+            Log::drop("queries");
+            Log::setConfig("queries", [
+                "className": "Console",
+                "stream": "php://stderr",
+                "scopes": ["queriesLog"],
             ]);
         }
     }
