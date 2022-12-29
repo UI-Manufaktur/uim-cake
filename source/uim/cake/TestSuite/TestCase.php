@@ -241,7 +241,7 @@ abstract class TestCase : BaseTestCase
      *
      * @return void
      */
-    protected function setUp(): void
+    protected void setUp(): void
     {
         parent::setUp();
         this.setupFixtures();
@@ -261,7 +261,7 @@ abstract class TestCase : BaseTestCase
      *
      * @return void
      */
-    protected function tearDown(): void
+    protected void tearDown(): void
     {
         parent::tearDown();
         this.teardownFixtures();
@@ -280,7 +280,7 @@ abstract class TestCase : BaseTestCase
      *
      * @return void
      */
-    protected function setupFixtures(): void
+    protected void setupFixtures(): void
     {
         $fixtureNames = this.getFixtures();
 
@@ -304,7 +304,7 @@ abstract class TestCase : BaseTestCase
      *
      * @return void
      */
-    protected function teardownFixtures(): void
+    protected void teardownFixtures(): void
     {
         if (this.fixtureStrategy) {
             this.fixtureStrategy.teardownTest();

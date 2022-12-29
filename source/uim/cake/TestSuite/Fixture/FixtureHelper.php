@@ -152,7 +152,7 @@ class FixtureHelper
      * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Connection fixtures
      * @return void
      */
-    protected function insertConnection(ConnectionInterface $connection, array $fixtures): void
+    protected void insertConnection(ConnectionInterface $connection, array $fixtures): void
     {
         foreach ($fixtures as $fixture) {
             try {
@@ -209,7 +209,7 @@ class FixtureHelper
      * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Connection fixtures
      * @return void
      */
-    protected function truncateConnection(ConnectionInterface $connection, array $fixtures): void
+    protected void truncateConnection(ConnectionInterface $connection, array $fixtures): void
     {
         foreach ($fixtures as $fixture) {
             try {

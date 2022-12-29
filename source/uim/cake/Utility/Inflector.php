@@ -191,7 +191,7 @@ class Inflector
      *
      * @return void
      */
-    static function reset(): void
+    static void reset(): void
     {
         if (empty(static::$_initialState)) {
             static::$_initialState = get_class_vars(self::class);
@@ -224,7 +224,7 @@ class Inflector
      *        new rules that are being defined in $rules.
      * @return void
      */
-    static function rules(string $type, array $rules, bool $reset = false): void
+    static void rules(string $type, array $rules, bool $reset = false): void
     {
         $var = "_" . $type;
 

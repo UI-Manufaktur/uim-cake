@@ -298,7 +298,7 @@ class Route
      *
      * @return void
      */
-    protected function _writeRoute(): void
+    protected void _writeRoute(): void
     {
         if (empty(this.template) || (this.template == "/")) {
             _compiledRoute = "#^/*$#";

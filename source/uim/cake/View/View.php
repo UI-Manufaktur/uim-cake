@@ -373,7 +373,7 @@ class View : EventDispatcherInterface
      *
      * @return void
      */
-    protected function setContentType(): void
+    protected void setContentType(): void
     {
         $viewContentType = this.contentType();
         if (!$viewContentType || $viewContentType == static::TYPE_MATCH_ALL) {

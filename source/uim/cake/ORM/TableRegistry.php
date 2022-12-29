@@ -60,7 +60,7 @@ class TableRegistry
      * @param uim.cake.orm.Locator\ILocator $tableLocator Instance of a locator to use.
      * @return void
      */
-    static function setTableLocator(ILocator $tableLocator): void
+    static void setTableLocator(ILocator $tableLocator): void
     {
         FactoryLocator::add("Table", $tableLocator);
     }

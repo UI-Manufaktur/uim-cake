@@ -366,7 +366,7 @@ class ResultSet : IResultSet
      * @param uim.cake.orm.Query $query The query from where to derive the associations
      * @return void
      */
-    protected function _calculateAssociationMap(Query $query): void
+    protected void _calculateAssociationMap(Query $query): void
     {
         $map = $query.getEagerLoader().associationsMap(_defaultTable);
         _matchingMap = (new Collection($map))
@@ -387,7 +387,7 @@ class ResultSet : IResultSet
      * @param uim.cake.orm.Query $query The query from where to derive the column map
      * @return void
      */
-    protected function _calculateColumnMap(Query $query): void
+    protected void _calculateColumnMap(Query $query): void
     {
         $map = [];
         foreach ($query.clause("select") as $key: $field) {

@@ -153,7 +153,7 @@ class StringTemplate
      * @param array<string> $templates The template names to compile. If empty all templates will be compiled.
      * @return void
      */
-    protected function _compileTemplates(array $templates = []): void
+    protected void _compileTemplates(array $templates = []): void
     {
         if (empty($templates)) {
             $templates = array_keys(_config);

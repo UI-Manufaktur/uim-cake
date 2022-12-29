@@ -82,7 +82,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @return void
      */
-    protected function setupAssociations() {
+    protected void setupAssociations() {
         $config = this.getConfig();
 
         $targetAlias = this.translationTable.getAlias();
@@ -140,7 +140,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \ArrayObject $options Find options
      * @return void
      */
-    protected function setupHasOneAssociation(string $locale, ArrayObject $options): void
+    protected void setupHasOneAssociation(string $locale, ArrayObject $options): void
     {
         $config = this.getConfig();
 
@@ -543,7 +543,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param uim.cake.Datasource\EntityInterface $entity Entity.
      * @return void
      */
-    protected function bundleTranslatedFields($entity) {
+    protected void bundleTranslatedFields($entity) {
         $translations = (array)$entity.get("_translations");
 
         if (empty($translations) && !$entity.isDirty("_translations")) {

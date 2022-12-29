@@ -88,7 +88,7 @@ trait TranslateStrategyTrait
      * @param uim.cake.Datasource\EntityInterface $entity The entity to check for empty translations fields inside.
      * @return void
      */
-    protected function unsetEmptyFields($entity) {
+    protected void unsetEmptyFields($entity) {
         /** @var array<uim.cake.orm.Entity> $translations */
         $translations = (array)$entity.get("_translations");
         foreach ($translations as $locale: $translation) {

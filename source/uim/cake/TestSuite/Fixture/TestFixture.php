@@ -168,7 +168,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      *
      * @return void
      */
-    protected function _schemaFromFields(): void
+    protected void _schemaFromFields(): void
     {
         $connection = ConnectionManager::get(this.connection());
         _schema = $connection.getDriver().newTableSchema(this.table);

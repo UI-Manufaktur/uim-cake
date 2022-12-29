@@ -293,7 +293,7 @@ class Security
      * @param string $salt The salt to use for encryption routines.
      * @return void
      */
-    static function setSalt(string $salt): void
+    static void setSalt(string $salt): void
     {
         static::$_salt = $salt;
     }

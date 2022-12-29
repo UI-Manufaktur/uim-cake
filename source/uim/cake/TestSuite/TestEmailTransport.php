@@ -44,7 +44,7 @@ class TestEmailTransport : DebugTransport
      *
      * @return void
      */
-    static function replaceAllTransports(): void
+    static void replaceAllTransports(): void
     {
         $configuredTransports = TransportFactory::configured();
 
@@ -70,7 +70,7 @@ class TestEmailTransport : DebugTransport
      *
      * @return void
      */
-    static function clearMessages(): void
+    static void clearMessages(): void
     {
         static::$messages = [];
     }

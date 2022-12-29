@@ -28,7 +28,7 @@ trait IdGeneratorTrait
      *
      * @return void
      */
-    protected function _clearIds(): void
+    protected void _clearIds(): void
     {
         _idSuffixes = [];
     }

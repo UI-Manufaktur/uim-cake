@@ -161,7 +161,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $entity The entity whose descendants need to be updated.
      * @return void
      */
-    protected function _setChildrenLevel(EntityInterface $entity): void
+    protected void _setChildrenLevel(EntityInterface $entity): void
     {
         $config = this.getConfig();
 
@@ -299,7 +299,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $entity The entity to set as a new root
      * @return void
      */
-    protected function _setAsRoot(EntityInterface $entity): void
+    protected void _setAsRoot(EntityInterface $entity): void
     {
         $config = this.getConfig();
         $edge = _getMax();
@@ -332,7 +332,7 @@ class TreeBehavior : Behavior
      *
      * @return void
      */
-    protected function _unmarkInternalTree(): void
+    protected void _unmarkInternalTree(): void
     {
         $config = this.getConfig();
         _table.updateAll(
@@ -882,7 +882,7 @@ class TreeBehavior : Behavior
      * modified by future calls to this function.
      * @return void
      */
-    protected function _sync(int $shift, string $dir, string $conditions, bool $mark = false): void
+    protected void _sync(int $shift, string $dir, string $conditions, bool $mark = false): void
     {
         $config = _config;
 
@@ -937,7 +937,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $entity The entity to ensure fields for
      * @return void
      */
-    protected function _ensureFields(EntityInterface $entity): void
+    protected void _ensureFields(EntityInterface $entity): void
     {
         $config = this.getConfig();
         $fields = [$config["left"], $config["right"]];

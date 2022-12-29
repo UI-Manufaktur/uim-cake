@@ -177,7 +177,7 @@ class CounterCacheBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $entity Entity.
      * @return void
      */
-    protected function _processAssociations(IEvent $event, EntityInterface $entity): void
+    protected void _processAssociations(IEvent $event, EntityInterface $entity): void
     {
         foreach (_config as $assoc: $settings) {
             $assoc = _table.getAssociation($assoc);

@@ -548,7 +548,7 @@ trait IntegrationTestTrait
      * @param \Throwable $exception Exception to handle.
      * @return void
      */
-    protected function _handleError(Throwable $exception): void
+    protected void _handleError(Throwable $exception): void
     {
         $class = Configure::read("Error.exceptionRenderer");
         if (empty($class) || !class_exists($class)) {

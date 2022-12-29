@@ -504,7 +504,7 @@ class FormHelper : Helper
      * @param array|string|null $url The URL of the last form.
      * @return void
      */
-    protected function _lastAction($url = null): void
+    protected void _lastAction($url = null): void
     {
         $action = Router::url($url, true);
         $query = parse_url($action, PHP_URL_QUERY);

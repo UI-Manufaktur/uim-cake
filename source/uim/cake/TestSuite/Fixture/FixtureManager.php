@@ -126,7 +126,7 @@ class FixtureManager
      *
      * @return void
      */
-    protected function _aliasConnections(): void
+    protected void _aliasConnections(): void
     {
         $connections = ConnectionManager::configured();
         ConnectionManager::alias("test", "default");
@@ -154,7 +154,7 @@ class FixtureManager
      *
      * @return void
      */
-    protected function _initDb(): void
+    protected void _initDb(): void
     {
         if (_initialized) {
             return;
@@ -243,7 +243,7 @@ class FixtureManager
      * @param bool $drop whether drop the fixture if it is already created or not
      * @return void
      */
-    protected function _setupTable(
+    protected void _setupTable(
         FixtureInterface $fixture,
         ConnectionInterface $db,
         array $sources,
@@ -373,7 +373,7 @@ class FixtureManager
      * @param callable $operation The operation to run on each connection + fixture set.
      * @return void
      */
-    protected function _runOperation(array $fixtures, callable $operation): void
+    protected void _runOperation(array $fixtures, callable $operation): void
     {
         $dbs = _fixtureConnections($fixtures);
         foreach ($dbs as $connection: $fixtures) {

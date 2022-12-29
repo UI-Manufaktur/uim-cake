@@ -188,7 +188,7 @@ class TimestampBehavior : Behavior
      * @param bool $refreshTimestamp Whether to refresh timestamp.
      * @return void
      */
-    protected function _updateField(EntityInterface $entity, string $field, bool $refreshTimestamp): void
+    protected void _updateField(EntityInterface $entity, string $field, bool $refreshTimestamp): void
     {
         if ($entity.isDirty($field)) {
             return;

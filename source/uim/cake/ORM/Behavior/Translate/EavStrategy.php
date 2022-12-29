@@ -81,7 +81,7 @@ class EavStrategy : TranslateStrategyInterface
      *
      * @return void
      */
-    protected function setupAssociations() {
+    protected void setupAssociations() {
         $fields = _config["fields"];
         $table = _config["translationTable"];
         $model = _config["referenceName"];
@@ -418,7 +418,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param uim.cake.Datasource\EntityInterface $entity Entity
      * @return void
      */
-    protected function bundleTranslatedFields($entity) {
+    protected void bundleTranslatedFields($entity) {
         $translations = (array)$entity.get("_translations");
 
         if (empty($translations) && !$entity.isDirty("_translations")) {

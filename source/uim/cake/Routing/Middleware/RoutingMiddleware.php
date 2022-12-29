@@ -81,7 +81,7 @@ class RoutingMiddleware : IMiddleware
      *
      * @return void
      */
-    protected function loadRoutes(): void
+    protected void loadRoutes(): void
     {
         $routeCollection = this.buildRouteCollection();
         Router::setRouteCollection($routeCollection);

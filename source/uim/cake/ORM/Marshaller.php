@@ -860,7 +860,7 @@ class Marshaller
      * @param array<string, mixed> $options List of options that are readOnly.
      * @return void
      */
-    protected function dispatchAfterMarshal(EntityInterface $entity, array $data, array $options = []): void
+    protected void dispatchAfterMarshal(EntityInterface $entity, array $data, array $options = []): void
     {
         $data = new ArrayObject($data);
         $options = new ArrayObject($options);

@@ -223,7 +223,7 @@ class Router
      * @param uim.cake.http.ServerRequest $request request object.
      * @return void
      */
-    static function setRequest(ServerRequest $request): void
+    static void setRequest(ServerRequest $request): void
     {
         static::$_request = $request;
 
@@ -254,7 +254,7 @@ class Router
      *
      * @return void
      */
-    static function reload(): void
+    static void reload(): void
     {
         if (empty(static::$_initialState)) {
             static::$_collection = new RouteCollection();
@@ -287,7 +287,7 @@ class Router
      * @internal
      * @return void
      */
-    static function resetRoutes(): void
+    static void resetRoutes(): void
     {
         static::$_collection = new RouteCollection();
         static::$_urlFilters = [];
@@ -322,7 +322,7 @@ class Router
      * @param callable $function The function to add
      * @return void
      */
-    static function addUrlFilter(callable $function): void
+    static void addUrlFilter(callable $function): void
     {
         static::$_urlFilters[] = $function;
     }
@@ -940,7 +940,7 @@ class Router
      * @param uim.cake.routings.RouteCollection $routeCollection route collection
      * @return void
      */
-    static function setRouteCollection(RouteCollection $routeCollection): void
+    static void setRouteCollection(RouteCollection $routeCollection): void
     {
         static::$_collection = $routeCollection;
     }

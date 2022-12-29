@@ -71,7 +71,7 @@ class TableHelper : Helper
      * @param array<int> $widths The widths of each column to output.
      * @return void
      */
-    protected function _rowSeparator(array $widths): void
+    protected void _rowSeparator(array $widths): void
     {
         $out = "";
         foreach ($widths as $column) {
@@ -89,7 +89,7 @@ class TableHelper : Helper
      * @param array<string, mixed> $options Options to be passed.
      * @return void
      */
-    protected function _render(array $row, array $widths, array $options = []): void
+    protected void _render(array $row, array $widths, array $options = []): void
     {
         if (count($row) == 0) {
             return;

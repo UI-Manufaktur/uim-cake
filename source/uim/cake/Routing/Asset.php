@@ -24,7 +24,7 @@ class Asset
      *  method name of `Inflector` class like `"dasherize"` or `"underscore`"`.
      * @return void
      */
-    static function setInflectionType(string $inflectionType): void
+    static void setInflectionType(string $inflectionType): void
     {
         static::$inflectionType = $inflectionType;
     }

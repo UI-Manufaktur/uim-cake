@@ -31,7 +31,7 @@ trait MergeVariablesTrait
      * @param array<string, mixed> $options The options to use when merging properties.
      * @return void
      */
-    protected function _mergeVars(array $properties, array $options = []): void
+    protected void _mergeVars(array $properties, array $options = []): void
     {
         $class = static::class;
         $parents = [];
@@ -63,7 +63,7 @@ trait MergeVariablesTrait
      * @param array<string, mixed> $options Options for merging the property, see _mergeVars()
      * @return void
      */
-    protected function _mergeProperty(string $property, array $parentClasses, array $options): void
+    protected void _mergeProperty(string $property, array $parentClasses, array $options): void
     {
         thisValue = this.{$property};
         $isAssoc = false;

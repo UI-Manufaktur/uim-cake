@@ -297,7 +297,7 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Table $target The target table.
      * @return void
      */
-    protected function _generateTargetAssociations(Table $junction, Table $source, Table $target): void
+    protected void _generateTargetAssociations(Table $junction, Table $source, Table $target): void
     {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
@@ -343,7 +343,7 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Table $source The source table.
      * @return void
      */
-    protected function _generateSourceAssociations(Table $junction, Table $source): void
+    protected void _generateSourceAssociations(Table $junction, Table $source): void
     {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
@@ -1440,7 +1440,7 @@ class BelongsToMany : Association
      * @param array<string, mixed> $options original list of options passed in constructor
      * @return void
      */
-    protected function _options(array $options): void
+    protected void _options(array $options): void
     {
         if (!empty($options["targetForeignKey"])) {
             this.setTargetForeignKey($options["targetForeignKey"]);

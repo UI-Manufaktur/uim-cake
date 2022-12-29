@@ -89,7 +89,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param array $associations An associations array.
      * @return void
      */
-    protected function _associated(Table $table, array $associations): void
+    protected void _associated(Table $table, array $associations): void
     {
         foreach ($associations as $key: $associated) {
             if (is_int($key)) {
@@ -112,7 +112,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param string $association Association name.
      * @return void
      */
-    protected function _checkAssociation(Table $table, string $association): void
+    protected void _checkAssociation(Table $table, string $association): void
     {
         if (!$table.associations().has($association)) {
             throw new RuntimeException(sprintf(

@@ -618,7 +618,7 @@ class HasMany : Association
      * @param array<string, mixed> $options original list of options passed in constructor
      * @return void
      */
-    protected function _options(array $options): void
+    protected void _options(array $options): void
     {
         if (!empty($options["saveStrategy"])) {
             this.setSaveStrategy($options["saveStrategy"]);

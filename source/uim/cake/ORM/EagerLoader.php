@@ -521,7 +521,7 @@ class EagerLoader
      *
      * @return void
      */
-    protected function _fixStrategies(): void
+    protected void _fixStrategies(): void
     {
         foreach (_aliasList as $aliases) {
             foreach ($aliases as $configs) {
@@ -545,7 +545,7 @@ class EagerLoader
      * @param uim.cake.orm.EagerLoadable $loadable The association config
      * @return void
      */
-    protected function _correctStrategy(EagerLoadable $loadable): void
+    protected void _correctStrategy(EagerLoadable $loadable): void
     {
         $config = $loadable.getConfig();
         $currentStrategy = $config["strategy"] ??

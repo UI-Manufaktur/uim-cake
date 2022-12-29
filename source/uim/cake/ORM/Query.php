@@ -474,7 +474,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param array<string, array> $associations The nested tree of associations to walk.
      * @return void
      */
-    protected function _addAssociationsToTypeMap(Table $table, TypeMap $typeMap, array $associations): void
+    protected void _addAssociationsToTypeMap(Table $table, TypeMap $typeMap, array $associations): void
     {
         foreach ($associations as $name: $nested) {
             if (!$table.hasAssociation($name)) {
@@ -1126,7 +1126,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @see uim.cake.Database\Query::execute()
      * @return void
      */
-    protected function _transformQuery(): void
+    protected void _transformQuery(): void
     {
         if (!_dirty || _type != "select") {
             return;
@@ -1148,7 +1148,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @return void
      */
-    protected function _addDefaultFields(): void
+    protected void _addDefaultFields(): void
     {
         $select = this.clause("select");
         _hasFields = true;
@@ -1172,7 +1172,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @return void
      */
-    protected function _addDefaultSelectTypes(): void
+    protected void _addDefaultSelectTypes(): void
     {
         $typeMap = this.getTypeMap().getDefaults();
         $select = this.clause("select");
@@ -1215,7 +1215,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @return void
      */
-    protected function _dirty(): void
+    protected void _dirty(): void
     {
         _results = null;
         _resultsCount = null;
