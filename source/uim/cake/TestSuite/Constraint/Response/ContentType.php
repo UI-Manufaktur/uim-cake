@@ -47,7 +47,7 @@ class ContentType : ResponseBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "is set as the Content-Type (`" . this.response.getType() . "`)";
     }

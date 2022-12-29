@@ -61,7 +61,7 @@ class BodyContains : ResponseBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "is in response body";
     }

@@ -63,7 +63,7 @@ class CookieEquals : ResponseBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return sprintf("is in cookie \"%s\"", this.cookieName);
     }

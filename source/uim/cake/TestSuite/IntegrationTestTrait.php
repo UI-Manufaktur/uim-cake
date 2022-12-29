@@ -505,7 +505,7 @@ trait IntegrationTestTrait
     /**
      * Adds additional event spies to the controller/view event manager.
      *
-     * @param uim.cake.Event\IEvent $event A dispatcher event.
+     * @param uim.cake.events.IEvent $event A dispatcher event.
      * @param uim.cake.controllers.Controller|null $controller Controller instance.
      * @return void
      */

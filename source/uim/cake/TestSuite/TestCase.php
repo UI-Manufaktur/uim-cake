@@ -20,7 +20,7 @@ import uim.cake.datasources.ConnectionManager;
 import uim.cake.events.EventManager;
 import uim.cake.http.BaseApplication;
 import uim.cake.orm.Entity;
-import uim.cake.orm.Exception\MissingTableClassException;
+import uim.cake.orm.exceptions.MissingTableClassException;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.Routing\Router;
 import uim.cake.TestSuite\Constraint\EventFired;
@@ -446,7 +446,7 @@ abstract class TestCase : BaseTestCase
      * Asserts that a global event was fired. You must track events in your event manager for this assertion to work
      *
      * @param string $name Event name
-     * @param uim.cake.Event\EventManager|null $eventManager Event manager to check, defaults to global event manager
+     * @param uim.cake.events.EventManager|null $eventManager Event manager to check, defaults to global event manager
      * @param string $message Assertion failure message
      * @return void
      */
@@ -466,7 +466,7 @@ abstract class TestCase : BaseTestCase
      * @param string $name Event name
      * @param string $dataKey Data key
      * @param mixed $dataValue Data value
-     * @param uim.cake.Event\EventManager|null $eventManager Event manager to check, defaults to global event manager
+     * @param uim.cake.events.EventManager|null $eventManager Event manager to check, defaults to global event manager
      * @param string $message Assertion failure message
      * @return void
      */
@@ -979,8 +979,8 @@ abstract class TestCase : BaseTestCase
      * @param string $alias The model to get a mock for.
      * @param array<string> $methods The list of methods to mock
      * @param array<string, mixed> $options The config data for the mock"s constructor.
-     * @throws uim.cake.ORM\Exception\MissingTableClassException
-     * @return uim.cake.ORM\Table|\PHPUnit\Framework\MockObject\MockObject
+     * @throws uim.cake.orm.exceptions.MissingTableClassException
+     * @return uim.cake.orm.Table|\PHPUnit\Framework\MockObject\MockObject
      */
     function getMockForModel(string $alias, array $methods = [], array $options = []) {
         $className = _getTableClassName($alias, $options);
@@ -1011,7 +1011,7 @@ abstract class TestCase : BaseTestCase
             $builder.addMethods($nonExistingMethods);
         }
 
-        /** @var uim.cake.ORM\Table $mock */
+        /** @var uim.cake.orm.Table $mock */
         $mock = $builder.getMock();
 
         if (empty($options["entityClass"]) && $mock.getEntityClass() == Entity::class) {
@@ -1039,14 +1039,14 @@ abstract class TestCase : BaseTestCase
      * @param string $alias The model to get a mock for.
      * @param array<string, mixed> $options The config data for the mock"s constructor.
      * @return string
-     * @throws uim.cake.ORM\Exception\MissingTableClassException
-     * @psalm-return class-string<uim.cake.ORM\Table>
+     * @throws uim.cake.orm.exceptions.MissingTableClassException
+     * @psalm-return class-string<uim.cake.orm.Table>
      */
     protected function _getTableClassName(string $alias, array $options): string
     {
         if (empty($options["className"])) {
             $class = Inflector::camelize($alias);
-            /** @psalm-var class-string<uim.cake.ORM\Table>|null */
+            /** @psalm-var class-string<uim.cake.orm.Table>|null */
             $className = App::className($class, "Model/Table", "Table");
             if (!$className) {
                 throw new MissingTableClassException([$alias]);

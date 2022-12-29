@@ -37,7 +37,7 @@ class BodyEquals : ResponseBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "matches response body";
     }

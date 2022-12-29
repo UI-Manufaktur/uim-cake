@@ -37,7 +37,7 @@ class CookieNotSet : CookieSet
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "cookie is not set";
     }

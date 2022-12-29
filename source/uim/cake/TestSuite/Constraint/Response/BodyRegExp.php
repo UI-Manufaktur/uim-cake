@@ -37,7 +37,7 @@ class BodyRegExp : ResponseBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "PCRE pattern found in response body";
     }
@@ -46,7 +46,7 @@ class BodyRegExp : ResponseBase
      * @param mixed $other Expected
      * @return string
      */
-    function failureDescription($other): string
+    string failureDescription($other): string
     {
         return "`" . $other . "`" . " " . this.toString();
     }

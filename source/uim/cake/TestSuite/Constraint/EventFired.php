@@ -28,14 +28,14 @@ class EventFired : Constraint
     /**
      * Array of fired events
      *
-     * @var uim.cake.Event\EventManager
+     * @var uim.cake.events.EventManager
      */
     protected $_eventManager;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Event\EventManager $eventManager Event manager to check
+     * @param uim.cake.events.EventManager $eventManager Event manager to check
      */
     this(EventManager $eventManager) {
         _eventManager = $eventManager;
@@ -65,7 +65,7 @@ class EventFired : Constraint
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "was fired";
     }

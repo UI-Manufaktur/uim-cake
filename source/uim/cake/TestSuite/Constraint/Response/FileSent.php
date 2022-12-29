@@ -42,7 +42,7 @@ class FileSent : ResponseBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "file was sent";
     }

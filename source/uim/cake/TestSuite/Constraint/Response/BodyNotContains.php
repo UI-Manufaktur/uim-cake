@@ -37,7 +37,7 @@ class BodyNotContains : BodyContains
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "is not in response body";
     }

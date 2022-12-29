@@ -37,7 +37,7 @@ class BodyEmpty : ResponseBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "response body is empty";
     }

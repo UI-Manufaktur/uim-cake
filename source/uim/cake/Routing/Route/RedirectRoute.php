@@ -8,7 +8,7 @@
   */
 module uim.cake.Routing\Route;
 
-import uim.cake.http.Exception\RedirectException;
+import uim.cake.http.exceptions.RedirectException;
 import uim.cake.Routing\Router;
 
 /**
@@ -50,7 +50,7 @@ class RedirectRoute : Route
      * @param string $url The URL to parse.
      * @param string $method The HTTP method being used.
      * @return array|null Null on failure. An exception is raised on a successful match. Array return type is unused.
-     * @throws uim.cake.http.Exception\RedirectException An exception is raised on successful match.
+     * @throws uim.cake.http.exceptions.RedirectException An exception is raised on successful match.
      *   This is used to halt route matching and signal to the middleware that a redirect should happen.
      */
     function parse(string $url, string $method = ""): ?array

@@ -25,7 +25,7 @@ class MailSentFrom : MailSentWith
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         if (this.at) {
             return sprintf("sent email #%d", this.at);

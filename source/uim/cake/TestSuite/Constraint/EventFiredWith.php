@@ -17,7 +17,7 @@ class EventFiredWith : Constraint
     /**
      * Array of fired events
      *
-     * @var uim.cake.Event\EventManager
+     * @var uim.cake.events.EventManager
      */
     protected $_eventManager;
 
@@ -38,7 +38,7 @@ class EventFiredWith : Constraint
     /**
      * Constructor
      *
-     * @param uim.cake.Event\EventManager $eventManager Event manager to check
+     * @param uim.cake.events.EventManager $eventManager Event manager to check
      * @param string $dataKey Data key
      * @param mixed $dataValue Data value
      */
@@ -82,7 +82,7 @@ class EventFiredWith : Constraint
             return false;
         }
 
-        /** @var array<uim.cake.Event\EventInterface> $events */
+        /** @var array<uim.cake.events.EventInterface> $events */
         $events = $eventGroup[$other];
 
         if (count($events) > 1) {
@@ -107,7 +107,7 @@ class EventFiredWith : Constraint
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "was fired with " . _dataKey . " matching " . (string)_dataValue;
     }
