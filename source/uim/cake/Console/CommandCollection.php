@@ -79,7 +79,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @param array<string, \Cake\Console\Shell|\Cake\Console\ICommand|string> $commands A map of command names: command classes/instances.
      * @return this
-     * @see \Cake\Console\CommandCollection::add()
+     * @see uim.cake.Console\CommandCollection::add()
      */
     function addMany(array $commands) {
         foreach ($commands as $name: $class) {

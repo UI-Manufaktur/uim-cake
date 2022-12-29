@@ -356,7 +356,7 @@ class ConsoleIo {
      * Change the output mode of the stdout stream
      *
      * @param int myMode The output mode.
-     * @see \Cake\Console\ConsoleOutput::setOutputAs()
+     * @see uim.cake.Console\ConsoleOutput::setOutputAs()
      */
     void setOutputAs(int myMode) {
         _out.setOutputAs(myMode);
@@ -366,7 +366,7 @@ class ConsoleIo {
      * Gets defined styles.
      *
      * @return array
-     * @see \Cake\Console\ConsoleOutput::styles()
+     * @see uim.cake.Console\ConsoleOutput::styles()
      */
     array styles() {
         return _out.styles();
@@ -377,7 +377,7 @@ class ConsoleIo {
      *
      * @param string style The style to get.
      * @return array
-     * @see \Cake\Console\ConsoleOutput::getStyle()
+     * @see uim.cake.Console\ConsoleOutput::getStyle()
      */
     array getStyle(string style) {
       return _out.getStyle($style);
@@ -388,7 +388,7 @@ class ConsoleIo {
      *
      * @param string style The style to set.
      * @param array $definition The array definition of the style to change or create.
-     * @see \Cake\Console\ConsoleOutput::setStyle()
+     * @see uim.cake.Console\ConsoleOutput::setStyle()
      */
     void setStyle(string style, array $definition) {
         _out.setStyle($style, $definition);

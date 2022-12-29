@@ -11,12 +11,12 @@ module uim.cake.Auth;
 
 import uim.cake.controllers.ComponentRegistry;
 import uim.cake.cores.InstanceConfigTrait;
-import uim.cake.Http\ServerRequest;
+import uim.cake.https.ServerRequest;
 
 /**
  * Abstract base authorization adapter for AuthComponent.
  *
- * @see \Cake\Controller\Component\AuthComponent::$authenticate
+ * @see uim.cake.Controller\Component\AuthComponent::$authenticate
  */
 abstract class BaseAuthorize
 {

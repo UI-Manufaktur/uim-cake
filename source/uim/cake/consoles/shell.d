@@ -582,7 +582,7 @@ class Shell {
      * @param string text Text the text to format.
      * @param array<string, mixed>|int myOptions Array of options to use, or an integer to wrap the text to.
      * @return Wrapped / indented text
-     * @see \Cake\Utility\Text::wrap()
+     * @see uim.cake.Utility\Text::wrap()
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell::wrapText
      */
     string wrapText(string text, myOptions = []) {

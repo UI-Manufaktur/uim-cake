@@ -12,7 +12,7 @@ module uim.cake.Auth;
 import uim.cake.controllers.ComponentRegistry;
 import uim.cake.controllers.Controller;
 import uim.cake.cores.exceptions.CakeException;
-import uim.cake.Http\ServerRequest;
+import uim.cake.https.ServerRequest;
 
 /**
  * An authorization adapter for AuthComponent. Provides the ability to authorize
@@ -32,7 +32,7 @@ import uim.cake.Http\ServerRequest;
  * The above is simple implementation that would only authorize users of the
  * "admin" role to access admin routing.
  *
- * @see \Cake\Controller\Component\AuthComponent::$authenticate
+ * @see uim.cake.Controller\Component\AuthComponent::$authenticate
  */
 class ControllerAuthorize : BaseAuthorize
 {

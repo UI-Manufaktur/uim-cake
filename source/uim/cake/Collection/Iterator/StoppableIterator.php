@@ -20,7 +20,7 @@ use Traversable;
  * results.
  *
  * @internal
- * @see \Cake\Collection\Collection::stopWhen()
+ * @see uim.cake.Collection\Collection::stopWhen()
  */
 class StoppableIterator : Collection
 {

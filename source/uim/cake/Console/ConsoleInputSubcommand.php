@@ -24,7 +24,7 @@ use SimpleXMLElement;
  * An object to represent a single subcommand used in the command line.
  * Created when you call ConsoleOptionParser::addSubcommand()
  *
- * @see \Cake\Console\ConsoleOptionParser::addSubcommand()
+ * @see uim.cake.Console\ConsoleOptionParser::addSubcommand()
  */
 class ConsoleInputSubcommand
 {

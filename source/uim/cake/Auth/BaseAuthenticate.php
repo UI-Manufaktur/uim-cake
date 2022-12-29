@@ -11,10 +11,10 @@ module uim.cake.Auth;
 import uim.cake.controllers.ComponentRegistry;
 import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.events.IEventListener;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
-import uim.cake.ORM\Query;
+import uim.cake.https.Response;
+import uim.cake.https.ServerRequest;
+import uim.cake.orm.locators.LocatorAwareTrait;
+import uim.cake.orm.Query;
 
 /**
  * Base Authentication class with common methods and properties.

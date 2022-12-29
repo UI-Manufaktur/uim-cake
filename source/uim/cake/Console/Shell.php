@@ -16,8 +16,8 @@ import uim.cake.cores.exceptions.CakeException;
 import uim.cake.Datasource\ModelAwareTrait;
 import uim.cake.Filesystem\Filesystem;
 import uim.cake.Log\LogTrait;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
-import uim.cake.ORM\Locator\ILocator;
+import uim.cake.orm.locators.LocatorAwareTrait;
+import uim.cake.orm.locators.ILocator;
 import uim.cake.utilities.Inflector;
 import uim.cake.utilities.MergeVariablesTrait;
 import uim.cake.utilities.Text;
@@ -638,7 +638,7 @@ class Shell
      * @param string $text Text the text to format.
      * @param array<string, mixed>|int $options Array of options to use, or an integer to wrap the text to.
      * @return string Wrapped / indented text
-     * @see \Cake\Utility\Text::wrap()
+     * @see uim.cake.Utility\Text::wrap()
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::wrapText
      */
     function wrapText(string $text, $options = []): string

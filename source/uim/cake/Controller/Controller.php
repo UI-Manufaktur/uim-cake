@@ -20,12 +20,12 @@ import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventInterface;
 import uim.cake.events.IEventListener;
 import uim.cake.events.IEventManager;
-import uim.cake.Http\ContentTypeNegotiation;
-import uim.cake.Http\Exception\NotFoundException;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
+import uim.cake.https.ContentTypeNegotiation;
+import uim.cake.https.Exception\NotFoundException;
+import uim.cake.https.Response;
+import uim.cake.https.ServerRequest;
 import uim.cake.Log\LogTrait;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.Routing\Router;
 import uim.cake.View\View;
 import uim.cake.View\ViewVarsTrait;
@@ -129,7 +129,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * tables your controller will be paginating.
      *
      * @var array
-     * @see \Cake\Datasource\Paging\NumericPaginator
+     * @see uim.cake.Datasource\Paging\NumericPaginator
      */
     public $paginate = [];
 

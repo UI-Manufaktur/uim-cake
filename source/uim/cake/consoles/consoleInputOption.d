@@ -7,7 +7,7 @@ import uim.cake;
  * An object to represent a single option used in the command line.
  * ConsoleOptionParser creates these when you use addOption()
  *
- * @see \Cake\Console\ConsoleOptionParser::addOption()
+ * @see uim.cake.Console\ConsoleOptionParser::addOption()
  */
 class ConsoleInputOption {
     // Name of the option

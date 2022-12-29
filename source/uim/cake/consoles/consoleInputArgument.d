@@ -7,7 +7,7 @@ import uim.cake;
  * An object to represent a single argument used in the command line.
  * ConsoleOptionParser creates these when you use addArgument()
  *
- * @see \Cake\Console\ConsoleOptionParser::addArgument()
+ * @see uim.cake.Console\ConsoleOptionParser::addArgument()
  */
 class ConsoleInputArgument {
     // Name of the argument.

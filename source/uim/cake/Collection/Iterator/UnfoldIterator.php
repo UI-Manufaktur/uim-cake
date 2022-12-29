@@ -18,7 +18,7 @@ use Traversable;
  * of items by applying an function to each of the elements in this iterator.
  *
  * @internal
- * @see \Cake\Collection\Collection::unfold()
+ * @see uim.cake.Collection\Collection::unfold()
  */
 class UnfoldIterator : IteratorIterator : RecursiveIterator
 {

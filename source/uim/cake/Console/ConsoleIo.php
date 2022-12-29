@@ -415,7 +415,7 @@ class ConsoleIo
      *
      * @param int $mode The output mode.
      * @return void
-     * @see \Cake\Console\ConsoleOutput::setOutputAs()
+     * @see uim.cake.Console\ConsoleOutput::setOutputAs()
      */
     function setOutputAs(int $mode): void
     {
@@ -426,7 +426,7 @@ class ConsoleIo
      * Gets defined styles.
      *
      * @return array
-     * @see \Cake\Console\ConsoleOutput::styles()
+     * @see uim.cake.Console\ConsoleOutput::styles()
      */
     function styles(): array
     {
@@ -438,7 +438,7 @@ class ConsoleIo
      *
      * @param string $style The style to get.
      * @return array
-     * @see \Cake\Console\ConsoleOutput::getStyle()
+     * @see uim.cake.Console\ConsoleOutput::getStyle()
      */
     function getStyle(string $style): array
     {
@@ -451,7 +451,7 @@ class ConsoleIo
      * @param string $style The style to set.
      * @param array $definition The array definition of the style to change or create.
      * @return void
-     * @see \Cake\Console\ConsoleOutput::setStyle()
+     * @see uim.cake.Console\ConsoleOutput::setStyle()
      */
     function setStyle(string $style, array $definition): void
     {

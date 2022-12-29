@@ -11,7 +11,7 @@ import uim.cake
 /**
  * Abstract base authorization adapter for AuthComponent.
  *
- * @see \Cake\Controller\Component\AuthComponent::$authenticate
+ * @see uim.cake.Controller\Component\AuthComponent::$authenticate
  */
 abstract class BaseAuthorize {
     // ComponentRegistry instance for getting more components.

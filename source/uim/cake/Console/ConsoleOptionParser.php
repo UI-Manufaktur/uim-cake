@@ -71,7 +71,7 @@ class ConsoleOptionParser
     /**
      * Description text - displays before options when help is generated
      *
-     * @see \Cake\Console\ConsoleOptionParser::description()
+     * @see uim.cake.Console\ConsoleOptionParser::description()
      * @var string
      */
     protected $_description = "";
@@ -79,7 +79,7 @@ class ConsoleOptionParser
     /**
      * Epilog text - displays after options when help is generated
      *
-     * @see \Cake\Console\ConsoleOptionParser::epilog()
+     * @see uim.cake.Console\ConsoleOptionParser::epilog()
      * @var string
      */
     protected $_epilog = "";
@@ -87,7 +87,7 @@ class ConsoleOptionParser
     /**
      * Option definitions.
      *
-     * @see \Cake\Console\ConsoleOptionParser::addOption()
+     * @see uim.cake.Console\ConsoleOptionParser::addOption()
      * @var array<string, \Cake\Console\ConsoleInputOption>
      */
     protected $_options = [];
@@ -102,7 +102,7 @@ class ConsoleOptionParser
     /**
      * Positional argument definitions.
      *
-     * @see \Cake\Console\ConsoleOptionParser::addArgument()
+     * @see uim.cake.Console\ConsoleOptionParser::addArgument()
      * @var array<\Cake\Console\ConsoleInputArgument>
      */
     protected $_args = [];
@@ -110,7 +110,7 @@ class ConsoleOptionParser
     /**
      * Subcommands for this Shell.
      *
-     * @see \Cake\Console\ConsoleOptionParser::addSubcommand()
+     * @see uim.cake.Console\ConsoleOptionParser::addSubcommand()
      * @var array<string, \Cake\Console\ConsoleInputSubcommand>
      */
     protected $_subcommands = [];
@@ -139,7 +139,7 @@ class ConsoleOptionParser
     /**
      * Root alias used in help output
      *
-     * @see \Cake\Console\HelpFormatter::setAlias()
+     * @see uim.cake.Console\HelpFormatter::setAlias()
      * @var string
      */
     protected $rootName = "cake";
@@ -499,7 +499,7 @@ class ConsoleOptionParser
      * The keys are used as the argument names, and the values as params for the argument.
      *
      * @param array $args Array of arguments to add.
-     * @see \Cake\Console\ConsoleOptionParser::addArgument()
+     * @see uim.cake.Console\ConsoleOptionParser::addArgument()
      * @return this
      */
     function addArguments(array $args) {
@@ -519,7 +519,7 @@ class ConsoleOptionParser
      * The keys are used as option names, and the values as params for the option.
      *
      * @param array<string, mixed> $options Array of options to add.
-     * @see \Cake\Console\ConsoleOptionParser::addOption()
+     * @see uim.cake.Console\ConsoleOptionParser::addOption()
      * @return this
      */
     function addOptions(array $options) {

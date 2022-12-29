@@ -49,7 +49,7 @@ import uim.cake.Log\LogTrait;
  * is the subject of each event and can be fetched using EventInterface::getSubject().
  *
  * @link https://book.cakephp.org/4/en/controllers/components.html
- * @see \Cake\Controller\Controller::$components
+ * @see uim.cake.Controller\Controller::$components
  */
 #[\AllowDynamicProperties]
 class Component : IEventListener
