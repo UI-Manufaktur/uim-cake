@@ -71,7 +71,7 @@ interface CookieInterface
      *
      * @return string
      */
-    function getName(): string;
+    string getName(): string;
 
     /**
      * Gets the cookie value
@@ -104,14 +104,14 @@ interface CookieInterface
      *
      * @return string
      */
-    function getId(): string;
+    string getId(): string;
 
     /**
      * Get the path attribute.
      *
      * @return string
      */
-    function getPath(): string;
+    string getPath(): string;
 
     /**
      * Create a new cookie with an updated path
@@ -126,7 +126,7 @@ interface CookieInterface
      *
      * @return string
      */
-    function getDomain(): string;
+    string getDomain(): string;
 
     /**
      * Create a cookie with an updated domain
@@ -155,7 +155,7 @@ interface CookieInterface
      *
      * @return string
      */
-    function getFormattedExpires(): string;
+    string getFormattedExpires(): string;
 
     /**
      * Create a cookie with an updated expiration date
@@ -256,5 +256,5 @@ interface CookieInterface
      *
      * @return string
      */
-    function toHeaderValue(): string;
+    string toHeaderValue(): string;
 }

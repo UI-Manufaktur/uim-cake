@@ -59,7 +59,7 @@ class FormData : Countable
      *
      * @return string
      */
-    function boundary(): string
+    string boundary(): string
     {
         if (_boundary) {
             return _boundary;
@@ -230,7 +230,7 @@ class FormData : Countable
      *
      * @return string
      */
-    function contentType(): string
+    string contentType(): string
     {
         if (!this.isMultipart()) {
             return "application/x-www-form-urlencoded";
@@ -245,7 +245,7 @@ class FormData : Countable
      *
      * @return string
      */
-    function __toString(): string
+    string __toString(): string
     {
         if (this.isMultipart()) {
             $boundary = this.boundary();

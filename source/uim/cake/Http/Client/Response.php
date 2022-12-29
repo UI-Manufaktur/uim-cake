@@ -388,7 +388,7 @@ class Response : Message : IResponse
      *
      * @return string
      */
-    function getStringBody(): string
+    string getStringBody(): string
     {
         return _getBody();
     }

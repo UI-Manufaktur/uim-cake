@@ -14,9 +14,9 @@
 module uim.cake.http.Client\Adapter;
 
 import uim.cake.http.Client\AdapterInterface;
-import uim.cake.http.Client\Exception\ClientException;
-import uim.cake.http.Client\Exception\NetworkException;
-import uim.cake.http.Client\Exception\RequestException;
+import uim.cake.http.Client\exceptions.ClientException;
+import uim.cake.http.Client\exceptions.NetworkException;
+import uim.cake.http.Client\exceptions.RequestException;
 import uim.cake.http.Client\Response;
 use Composer\CaBundle\CaBundle;
 use Psr\Http\Message\RequestInterface;

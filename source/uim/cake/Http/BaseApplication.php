@@ -80,7 +80,7 @@ abstract class BaseApplication implements
      * Constructor
      *
      * @param string $configDir The directory the bootstrap configuration is held in.
-     * @param uim.cake.Event\IEventManager|null $eventManager Application event manager instance.
+     * @param uim.cake.events.IEventManager|null $eventManager Application event manager instance.
      * @param uim.cake.http.ControllerFactoryInterface|null $controllerFactory Controller factory.
      */
     this(

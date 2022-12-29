@@ -42,7 +42,7 @@ class SubjectFilterDecorator : AbstractDecorator
     /**
      * Checks if the event is triggered for this listener.
      *
-     * @param uim.cake.Event\IEvent $event Event object.
+     * @param uim.cake.events.IEvent $event Event object.
      * @return bool
      */
     function canTrigger(IEvent $event): bool

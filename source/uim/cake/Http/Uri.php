@@ -79,7 +79,7 @@ class Uri : UriInterface
      *
      * @return string
      */
-    function getBase(): string
+    string getBase(): string
     {
         return this.base;
     }
@@ -89,7 +89,7 @@ class Uri : UriInterface
      *
      * @return string
      */
-    function getWebroot(): string
+    string getWebroot(): string
     {
         return this.webroot;
     }

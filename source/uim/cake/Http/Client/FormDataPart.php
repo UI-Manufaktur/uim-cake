@@ -106,7 +106,7 @@ class FormDataPart
      * @param string|null $disposition Use null to get/string to set.
      * @return string
      */
-    function disposition(?string $disposition = null): string
+    string disposition(?string $disposition = null): string
     {
         if ($disposition == null) {
             return _disposition;
@@ -185,7 +185,7 @@ class FormDataPart
      *
      * @return string
      */
-    function name(): string
+    string name(): string
     {
         return _name;
     }
@@ -195,7 +195,7 @@ class FormDataPart
      *
      * @return string
      */
-    function value(): string
+    string value(): string
     {
         return _value;
     }
@@ -207,7 +207,7 @@ class FormDataPart
      *
      * @return string
      */
-    function __toString(): string
+    string __toString(): string
     {
         $out = "";
         if (_disposition) {

@@ -19,7 +19,7 @@ class EventList : ArrayAccess, Countable
     /**
      * Events list
      *
-     * @var array<uim.cake.Event\EventInterface>
+     * @var array<uim.cake.events.EventInterface>
      */
     protected $_events = [];
 
@@ -36,7 +36,7 @@ class EventList : ArrayAccess, Countable
     /**
      * Adds an event to the list when event listing is enabled.
      *
-     * @param uim.cake.Event\IEvent $event An event to the list of dispatched events.
+     * @param uim.cake.events.IEvent $event An event to the list of dispatched events.
      * @return void
      */
     function add(IEvent $event): void

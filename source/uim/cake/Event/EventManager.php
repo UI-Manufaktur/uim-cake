@@ -28,7 +28,7 @@ class EventManager : IEventManager
     /**
      * The globally available instance, used for dispatching events attached from any scope
      *
-     * @var uim.cake.Event\EventManager|null
+     * @var uim.cake.events.EventManager|null
      */
     protected static $_generalManager;
 
@@ -49,7 +49,7 @@ class EventManager : IEventManager
     /**
      * The event list object.
      *
-     * @var uim.cake.Event\EventList|null
+     * @var uim.cake.events.EventList|null
      */
     protected $_eventList;
 
@@ -61,15 +61,15 @@ class EventManager : IEventManager
     protected $_trackEvents = false;
 
     /**
-     * Returns the globally available instance of a Cake\Event\EventManager
+     * Returns the globally available instance of a Cake\events.EventManager
      * this is used for dispatching events attached from outside the scope
      * other managers were created. Usually for creating hook systems or inter-class
      * communication
      *
      * If called with the first parameter, it will be set as the globally available instance
      *
-     * @param uim.cake.Event\EventManager|null $manager Event manager instance.
-     * @return uim.cake.Event\EventManager The global event manager
+     * @param uim.cake.events.EventManager|null $manager Event manager instance.
+     * @return uim.cake.events.EventManager The global event manager
      */
     static function instance(?EventManager $manager = null) {
         if ($manager instanceof EventManager) {
@@ -110,10 +110,10 @@ class EventManager : IEventManager
     }
 
     /**
-     * Auxiliary function to attach all implemented callbacks of a Cake\Event\IEventListener class instance
+     * Auxiliary function to attach all implemented callbacks of a Cake\events.IEventListener class instance
      * as individual methods on this manager
      *
-     * @param uim.cake.Event\IEventListener $subscriber Event listener.
+     * @param uim.cake.events.IEventListener $subscriber Event listener.
      * @return void
      */
     protected function _attachSubscriber(IEventListener $subscriber): void
@@ -139,10 +139,10 @@ class EventManager : IEventManager
 
     /**
      * Auxiliary function to extract and return a PHP callback type out of the callable definition
-     * from the return value of the `implementedEvents()` method on a {@link uim.cake.Event\IEventListener}
+     * from the return value of the `implementedEvents()` method on a {@link uim.cake.events.IEventListener}
      *
      * @param array $function the array taken from a handler definition for an event
-     * @param uim.cake.Event\IEventListener $object The handler object
+     * @param uim.cake.events.IEventListener $object The handler object
      * @return array
      */
     protected function _extractCallable(array $function, IEventListener $object): array
@@ -213,7 +213,7 @@ class EventManager : IEventManager
     /**
      * Auxiliary function to help detach all listeners provided by an object implementing IEventListener
      *
-     * @param uim.cake.Event\IEventListener $subscriber the subscriber to be detached
+     * @param uim.cake.events.IEventListener $subscriber the subscriber to be detached
      * @param string|null $eventKey optional event key name to unsubscribe the listener from
      * @return void
      */
@@ -282,7 +282,7 @@ class EventManager : IEventManager
      * Calls a listener.
      *
      * @param callable $listener The listener to trigger.
-     * @param uim.cake.Event\IEvent $event Event instance.
+     * @param uim.cake.events.IEvent $event Event instance.
      * @return mixed The result of the $listener function.
      */
     protected function _callListener(callable $listener, IEvent $event) {
@@ -355,7 +355,7 @@ class EventManager : IEventManager
     /**
      * Returns the event list.
      *
-     * @return uim.cake.Event\EventList|null
+     * @return uim.cake.events.EventList|null
      */
     function getEventList(): ?EventList
     {
@@ -365,7 +365,7 @@ class EventManager : IEventManager
     /**
      * Adds an event to the list if the event list object is present.
      *
-     * @param uim.cake.Event\IEvent $event An event to add to the list.
+     * @param uim.cake.events.IEvent $event An event to add to the list.
      * @return this
      */
     function addEventToList(IEvent $event) {
@@ -401,7 +401,7 @@ class EventManager : IEventManager
     /**
      * Enables the listing of dispatched events.
      *
-     * @param uim.cake.Event\EventList $eventList The event list object to use.
+     * @param uim.cake.events.EventList $eventList The event list object to use.
      * @return this
      */
     function setEventList(EventList $eventList) {

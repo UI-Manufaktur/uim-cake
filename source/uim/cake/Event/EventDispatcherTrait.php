@@ -9,15 +9,15 @@
 module uim.cake.Event;
 
 /**
- * : Cake\Event\EventDispatcherInterface.
+ * : Cake\events.EventDispatcherInterface.
  */
 trait EventDispatcherTrait
 {
     /**
-     * Instance of the Cake\Event\EventManager this object is using
+     * Instance of the Cake\events.EventManager this object is using
      * to dispatch inner events.
      *
-     * @var uim.cake.Event\IEventManager|null
+     * @var uim.cake.events.IEventManager|null
      */
     protected $_eventManager;
 
@@ -29,12 +29,12 @@ trait EventDispatcherTrait
     protected $_eventClass = Event::class;
 
     /**
-     * Returns the Cake\Event\EventManager manager instance for this object.
+     * Returns the Cake\events.EventManager manager instance for this object.
      *
      * You can use this instance to register any new listeners or callbacks to the
      * object events, or create your own events and trigger them at will.
      *
-     * @return uim.cake.Event\IEventManager
+     * @return uim.cake.events.IEventManager
      */
     function getEventManager(): IEventManager
     {
@@ -46,12 +46,12 @@ trait EventDispatcherTrait
     }
 
     /**
-     * Returns the Cake\Event\IEventManager instance for this object.
+     * Returns the Cake\events.IEventManager instance for this object.
      *
      * You can use this instance to register any new listeners or callbacks to the
      * object events, or create your own events and trigger them at will.
      *
-     * @param uim.cake.Event\IEventManager $eventManager the eventManager to set
+     * @param uim.cake.events.IEventManager $eventManager the eventManager to set
      * @return this
      */
     function setEventManager(IEventManager $eventManager) {
@@ -70,7 +70,7 @@ trait EventDispatcherTrait
      * it can be read by listeners.
      * @param object|null $subject The object that this event applies to
      * (this by default).
-     * @return uim.cake.Event\EventInterface
+     * @return uim.cake.events.EventInterface
      */
     function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface
     {
@@ -78,7 +78,7 @@ trait EventDispatcherTrait
             $subject = this;
         }
 
-        /** @var uim.cake.Event\IEvent $event */
+        /** @var uim.cake.events.IEvent $event */
         $event = new _eventClass($name, $subject, $data);
         this.getEventManager().dispatch($event);
 

@@ -19,8 +19,8 @@ import uim.cake.core.exceptions.CakeException;
  * All HTTP status/error related exceptions should extend this class so
  * catch blocks can be specifically typed.
  *
- * You may also use this as a meaningful bridge to {@link uim.cake.Core\Exception\CakeException}, e.g.:
- * throw new uim.cake.Network\Exception\HttpException("HTTP Version Not Supported", 505);
+ * You may also use this as a meaningful bridge to {@link uim.cake.Core\exceptions.CakeException}, e.g.:
+ * throw new uim.cake.Network\exceptions.HttpException("HTTP Version Not Supported", 505);
  */
 class HttpException : CakeException
 {

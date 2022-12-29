@@ -2,7 +2,7 @@
 module uim.cake.http.Middleware;
 
 import uim.cake.core.Configure;
-import uim.cake.http.Exception\BadRequestException;
+import uim.cake.http.exceptions.BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
@@ -60,7 +60,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\Message\IResponse A response.
-     * @throws uim.cake.http.Exception\BadRequestException
+     * @throws uim.cake.http.exceptions.BadRequestException
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {

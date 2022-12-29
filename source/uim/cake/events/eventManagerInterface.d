@@ -28,9 +28,9 @@ interface IEventManager
      * myEventManager.on("Model.beforeSave", ["priority":90], $callable);
      * ```
      *
-     * @param uim.cake.Event\IEventListener|string myEventKey The event unique identifier name
+     * @param uim.cake.events.IEventListener|string myEventKey The event unique identifier name
      * with which the callback will be associated. If myEventKey is an instance of
-     * Cake\Event\IEventListener its events will be bound using the `implementedEvents()` methods.
+     * Cake\events.IEventListener its events will be bound using the `implementedEvents()` methods.
      *
      * @param callable|array myOptions Either an array of options or the callable you wish to
      * bind to myEventKey. If an array of options, the `priority` key can be used to define the order.
@@ -40,7 +40,7 @@ interface IEventManager
      * @param callable|null $callable The callable function you want invoked.
      * @return this
      * @throws \InvalidArgumentException When event key is missing or callable is not an
-     *   instance of Cake\Event\IEventListener.
+     *   instance of Cake\events.IEventListener.
      */
     function on(myEventKey, myOptions = [], ?callable $callable = null);
 
@@ -71,9 +71,9 @@ interface IEventManager
      * $manager.off($callback);
      * ```
      *
-     * @param uim.cake.Event\IEventListener|callable|string myEventKey The event unique identifier name
+     * @param uim.cake.events.IEventListener|callable|string myEventKey The event unique identifier name
      *   with which the callback has been associated, or the $listener you want to remove.
-     * @param uim.cake.Event\IEventListener|callable|null $callable The callback you want to detach.
+     * @param uim.cake.events.IEventListener|callable|null $callable The callback you want to detach.
      * @return this
      */
     function off(myEventKey, $callable = null);
@@ -81,8 +81,8 @@ interface IEventManager
     /**
      * Dispatches a new event to all configured listeners
      *
-     * @param uim.cake.Event\IEvent|string myEvent The event key name or instance of IEvent.
-     * @return uim.cake.Event\IEvent
+     * @param uim.cake.events.IEvent|string myEvent The event key name or instance of IEvent.
+     * @return uim.cake.events.IEvent
      * @triggers myEvent
      */
     IEvent dispatch(myEvent);

@@ -68,7 +68,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Constructor
      *
-     * @param uim.cake.Event\EventManager|null myEventManager The event manager.
+     * @param uim.cake.events.EventManager|null myEventManager The event manager.
      *  Defaults to a new instance.
      */
     this(?EventManager myEventManager = null) {

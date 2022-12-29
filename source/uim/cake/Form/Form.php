@@ -81,7 +81,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
     /**
      * Constructor
      *
-     * @param uim.cake.Event\EventManager|null $eventManager The event manager.
+     * @param uim.cake.events.EventManager|null $eventManager The event manager.
      *  Defaults to a new instance.
      */
     this(?EventManager $eventManager = null) {

@@ -4,7 +4,7 @@ module uim.cake.http.Middleware;
 use ArrayAccess;
 import uim.cake.http.Cookie\Cookie;
 import uim.cake.http.Cookie\CookieInterface;
-import uim.cake.http.Exception\InvalidCsrfTokenException;
+import uim.cake.http.exceptions.InvalidCsrfTokenException;
 import uim.cake.http.Response;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
@@ -241,7 +241,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @return string
      */
-    function createToken(): string
+    string createToken(): string
     {
         $value = Security::randomBytes(static::TOKEN_VALUE_LENGTH);
 
@@ -362,7 +362,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
      * @return void
-     * @throws uim.cake.http.Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
+     * @throws uim.cake.http.exceptions.InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
     protected function _validateToken(IServerRequest $request): void
     {

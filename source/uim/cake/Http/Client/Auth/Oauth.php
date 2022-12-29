@@ -37,7 +37,7 @@ class Oauth
      * @param uim.cake.http.Client\Request $request The request object.
      * @param array $credentials Authentication credentials.
      * @return uim.cake.http.Client\Request The updated request.
-     * @throws uim.cake.Core\Exception\CakeException On invalid signature types.
+     * @throws uim.cake.Core\exceptions.CakeException On invalid signature types.
      */
     function authentication(Request $request, array $credentials): Request
     {
@@ -246,7 +246,7 @@ class Oauth
      * @param array $oauthValues Oauth values.
      * @return string
      */
-    function baseString(Request $request, array $oauthValues): string
+    string baseString(Request $request, array $oauthValues): string
     {
         $parts = [
             $request.getMethod(),

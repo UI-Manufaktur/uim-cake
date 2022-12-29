@@ -11,7 +11,7 @@ module uim.cake.Http;
 import uim.cake.core.Configure;
 import uim.cake.http.Cookie\CookieCollection;
 import uim.cake.http.Cookie\CookieInterface;
-import uim.cake.http.Exception\NotFoundException;
+import uim.cake.http.exceptions.NotFoundException;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
@@ -678,7 +678,7 @@ class Response : IResponse
      *
      * @return string
      */
-    function getType(): string
+    string getType(): string
     {
         $header = this.getHeaderLine("Content-Type");
         if (strpos($header, ";") != false) {
@@ -764,7 +764,7 @@ class Response : IResponse
      *
      * @return string
      */
-    function getCharset(): string
+    string getCharset(): string
     {
         return _charset;
     }
@@ -1236,7 +1236,7 @@ class Response : IResponse
      *
      * @return string
      */
-    function __toString(): string
+    string __toString(): string
     {
         this.stream.rewind();
 
@@ -1377,7 +1377,7 @@ class Response : IResponse
      * @param string $path Absolute path to file.
      * @param array<string, mixed> $options Options See above.
      * @return static
-     * @throws uim.cake.http.Exception\NotFoundException
+     * @throws uim.cake.http.exceptions.NotFoundException
      */
     function withFile(string $path, array $options = []) {
         $file = this.validateFile($path);
@@ -1446,7 +1446,7 @@ class Response : IResponse
      * Validate a file path is a valid response body.
      *
      * @param string $path The path to the file.
-     * @throws uim.cake.http.Exception\NotFoundException
+     * @throws uim.cake.http.exceptions.NotFoundException
      * @return \SplFileInfo
      */
     protected function validateFile(string $path): SplFileInfo

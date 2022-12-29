@@ -38,7 +38,7 @@ class ConditionDecorator : AbstractDecorator
     /**
      * Checks if the event is triggered for this listener.
      *
-     * @param uim.cake.Event\IEvent $event Event object.
+     * @param uim.cake.events.IEvent $event Event object.
      * @return bool
      */
     function canTrigger(IEvent $event): bool
@@ -53,7 +53,7 @@ class ConditionDecorator : AbstractDecorator
      * Evaluates the filter conditions
      *
      * @param string $condition Condition type
-     * @param uim.cake.Event\IEvent $event Event object
+     * @param uim.cake.events.IEvent $event Event object
      * @return bool
      */
     protected function _evaluateCondition(string $condition, IEvent $event): bool

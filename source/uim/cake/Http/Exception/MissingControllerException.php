@@ -29,7 +29,7 @@ class MissingControllerException : CakeException
 
 // phpcs:disable
 class_alias(
-    "Cake\Http\Exception\MissingControllerException",
-    "Cake\Routing\Exception\MissingControllerException"
+    "Cake\Http\exceptions.MissingControllerException",
+    "Cake\Routing\exceptions.MissingControllerException"
 );
 // phpcs:enable

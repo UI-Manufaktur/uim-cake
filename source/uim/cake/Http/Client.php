@@ -650,7 +650,7 @@ class Client : ClientInterface
      * @phpstan-param non-empty-string $type
      * @param string $type short type alias or full mimetype.
      * @return array<string, string> Headers to set on the request.
-     * @throws uim.cake.Core\Exception\CakeException When an unknown type alias is used.
+     * @throws uim.cake.Core\exceptions.CakeException When an unknown type alias is used.
      * @psalm-return array<non-empty-string, non-empty-string>
      */
     protected function _typeHeaders(string $type): array
@@ -722,7 +722,7 @@ class Client : ClientInterface
      * @param array $auth The authentication options to use.
      * @param array<string, mixed> $options The overall request options to use.
      * @return object Authentication strategy instance.
-     * @throws uim.cake.Core\Exception\CakeException when an invalid strategy is chosen.
+     * @throws uim.cake.Core\exceptions.CakeException when an invalid strategy is chosen.
      */
     protected function _createAuth(array $auth, array $options) {
         if (empty($auth["type"])) {

@@ -22,7 +22,7 @@ interface EventInterface
      *
      * @return string
      */
-    function getName(): string;
+    string getName(): string;
 
     /**
      * Returns the subject of this event.

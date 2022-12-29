@@ -328,7 +328,7 @@ class Cookie : CookieInterface
      *
      * @return string
      */
-    function toHeaderValue(): string
+    string toHeaderValue(): string
     {
         $value = this.value;
         if (this.isExpanded) {

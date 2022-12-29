@@ -9,7 +9,7 @@
  */
 module uim.cake.http.Middleware;
 
-import uim.cake.http.Exception\BadRequestException;
+import uim.cake.http.exceptions.BadRequestException;
 import uim.cake.utilities.exceptions.XmlException;
 import uim.cake.utilities.Xml;
 use Closure;
