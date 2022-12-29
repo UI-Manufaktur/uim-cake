@@ -5,8 +5,7 @@
 
 
  * @since         2.0.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;

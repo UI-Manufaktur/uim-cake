@@ -4,8 +4,7 @@
  *
 
 
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Auth;
 
 import uim.cake.controllers.ComponentRegistry;

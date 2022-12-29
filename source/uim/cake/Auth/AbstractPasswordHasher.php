@@ -5,8 +5,7 @@
 
 
  * @since         2.4.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Auth;
 
 import uim.cake.core.InstanceConfigTrait;
