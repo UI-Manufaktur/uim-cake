@@ -50,7 +50,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Constructor
      *
-     * @param \Cake\Error\ErrorHandler|array myErrorHandler The error handler instance
+     * @param uim.cake.Error\ErrorHandler|array myErrorHandler The error handler instance
      *  or config array.
      * @throws \InvalidArgumentException
      */
@@ -126,7 +126,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Convert a redirect exception into a response.
      *
-     * @param \Cake\Http\Exception\RedirectException myException The exception to handle
+     * @param uim.cake.Http\Exception\RedirectException myException The exception to handle
      * @return \Psr\Http\Message\IResponse Response created from the redirect.
      */
     IResponse handleRedirect(RedirectException myException) {

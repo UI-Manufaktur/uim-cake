@@ -32,7 +32,7 @@ class ExceptionRenderer : IExceptionRenderer
     /**
      * Controller instance.
      *
-     * @var uim.cake.Controller\Controller
+     * @var uim.cake.controllers.Controller
      */
     protected controller;
 
@@ -80,7 +80,7 @@ class ExceptionRenderer : IExceptionRenderer
      * Creates the controller to perform rendering on the error response.
      *
      * @param \Throwable myException Exception.
-     * @param \Cake\Http\ServerRequest|null myRequest The request if this is set it will be used
+     * @param uim.cake.Http\ServerRequest|null myRequest The request if this is set it will be used
      *   instead of creating a new one.
      */
     this(Throwable myException, ?ServerRequest myRequest = null) {
@@ -126,7 +126,7 @@ class ExceptionRenderer : IExceptionRenderer
                 myClass = App::className("Error", "Controller", "Controller");
             }
 
-            /** @var uim.cake.Controller\Controller $controller */
+            /** @var uim.cake.controllers.Controller $controller */
             $controller = new myClass(myRequest);
             $controller.startupProcess();
         } catch (Throwable $e) {

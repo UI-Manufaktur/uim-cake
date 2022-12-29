@@ -34,7 +34,7 @@ class Runner : RequestHandlerInterface
     protected $fallbackHandler;
 
     /**
-     * @param \Cake\Http\MiddlewareQueue $queue The middleware queue
+     * @param uim.cake.Http\MiddlewareQueue $queue The middleware queue
      * @param \Psr\Http\Message\IServerRequest $request The Server Request
      * @param \Psr\Http\Server\RequestHandlerInterface|null $fallbackHandler Fallback request handler.
      * @return \Psr\Http\Message\IResponse A response object

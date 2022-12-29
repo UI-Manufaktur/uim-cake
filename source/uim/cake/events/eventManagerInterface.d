@@ -28,7 +28,7 @@ interface IEventManager
      * myEventManager.on("Model.beforeSave", ["priority":90], $callable);
      * ```
      *
-     * @param \Cake\Event\IEventListener|string myEventKey The event unique identifier name
+     * @param uim.cake.Event\IEventListener|string myEventKey The event unique identifier name
      * with which the callback will be associated. If myEventKey is an instance of
      * Cake\Event\IEventListener its events will be bound using the `implementedEvents()` methods.
      *
@@ -71,9 +71,9 @@ interface IEventManager
      * $manager.off($callback);
      * ```
      *
-     * @param \Cake\Event\IEventListener|callable|string myEventKey The event unique identifier name
+     * @param uim.cake.Event\IEventListener|callable|string myEventKey The event unique identifier name
      *   with which the callback has been associated, or the $listener you want to remove.
-     * @param \Cake\Event\IEventListener|callable|null $callable The callback you want to detach.
+     * @param uim.cake.Event\IEventListener|callable|null $callable The callback you want to detach.
      * @return this
      */
     function off(myEventKey, $callable = null);
@@ -81,7 +81,7 @@ interface IEventManager
     /**
      * Dispatches a new event to all configured listeners
      *
-     * @param \Cake\Event\IEvent|string myEvent The event key name or instance of IEvent.
+     * @param uim.cake.Event\IEvent|string myEvent The event key name or instance of IEvent.
      * @return \Cake\Event\IEvent
      * @triggers myEvent
      */

@@ -22,7 +22,7 @@ class PropertyNode : INode {
      *
      * @param string myName The property name
      * @param string|null $visibility The visibility of the property.
-     * @param \Cake\Error\Debug\INode myValue The property value node.
+     * @param uim.cake.Error\Debug\INode myValue The property value node.
      */
     this(string myName, Nullable!string visibility, INode myValue) {
         this.name = myName;

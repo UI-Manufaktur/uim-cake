@@ -60,7 +60,7 @@ class EventManager : IEventManager
      *
      * If called with the first parameter, it will be set as the globally available instance
      *
-     * @param \Cake\Event\EventManager|null $manager Event manager instance.
+     * @param uim.cake.Event\EventManager|null $manager Event manager instance.
      * @return \Cake\Event\EventManager The global event manager
      */
     static function instance(?EventManager $manager = null) {
@@ -105,7 +105,7 @@ class EventManager : IEventManager
      * Auxiliary function to attach all implemented callbacks of a Cake\Event\IEventListener class instance
      * as individual methods on this manager
      *
-     * @param \Cake\Event\IEventListener $subscriber Event listener.
+     * @param uim.cake.Event\IEventListener $subscriber Event listener.
      * @return void
      */
     protected void _attachSubscriber(IEventListener $subscriber) {
@@ -133,7 +133,7 @@ class EventManager : IEventManager
      * from the return value of the `implementedEvents()` method on a {@link \Cake\Event\IEventListener}
      *
      * @param array $function the array taken from a handler definition for an event
-     * @param \Cake\Event\IEventListener $object The handler object
+     * @param uim.cake.Event\IEventListener $object The handler object
      * @return array
      */
     protected auto _extractCallable(array $function, IEventListener $object): array
@@ -204,7 +204,7 @@ class EventManager : IEventManager
     /**
      * Auxiliary function to help detach all listeners provided by an object implementing IEventListener
      *
-     * @param \Cake\Event\IEventListener $subscriber the subscriber to be detached
+     * @param uim.cake.Event\IEventListener $subscriber the subscriber to be detached
      * @param string|null myEventKey optional event key name to unsubscribe the listener from
      * @return void
      */
@@ -272,7 +272,7 @@ class EventManager : IEventManager
      * Calls a listener.
      *
      * @param callable $listener The listener to trigger.
-     * @param \Cake\Event\IEvent myEvent Event instance.
+     * @param uim.cake.Event\IEvent myEvent Event instance.
      * @return mixed The result of the $listener function.
      */
     protected auto _callListener(callable $listener, IEvent myEvent) {
@@ -356,7 +356,7 @@ class EventManager : IEventManager
     /**
      * Adds an event to the list if the event list object is present.
      *
-     * @param \Cake\Event\IEvent myEvent An event to add to the list.
+     * @param uim.cake.Event\IEvent myEvent An event to add to the list.
      * @return this
      */
     function addEventToList(IEvent myEvent) {
@@ -389,7 +389,7 @@ class EventManager : IEventManager
     /**
      * Enables the listing of dispatched events.
      *
-     * @param \Cake\Event\EventList myEventList The event list object to use.
+     * @param uim.cake.Event\EventList myEventList The event list object to use.
      * @return this
      */
     auto setEventList(EventList myEventList) {

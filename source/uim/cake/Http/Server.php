@@ -40,8 +40,8 @@ class Server : EventDispatcherInterface
     /**
      * Constructor
      *
-     * @param \Cake\Core\IHttpApplication $app The application to use.
-     * @param \Cake\Http\Runner|null $runner Application runner.
+     * @param uim.cake.Core\IHttpApplication $app The application to use.
+     * @param uim.cake.Http\Runner|null $runner Application runner.
      */
     public this(IHttpApplication $app, ?Runner $runner = null) {
         this.app = $app;
@@ -60,7 +60,7 @@ class Server : EventDispatcherInterface
      * - Run the middleware queue including the application.
      *
      * @param \Psr\Http\Message\IServerRequest|null $request The request to use or null.
-     * @param \Cake\Http\MiddlewareQueue|null $middlewareQueue MiddlewareQueue or null.
+     * @param uim.cake.Http\MiddlewareQueue|null $middlewareQueue MiddlewareQueue or null.
      * @return \Psr\Http\Message\IResponse
      * @throws \RuntimeException When the application does not make a response.
      */
@@ -149,7 +149,7 @@ class Server : EventDispatcherInterface
      *
      * If the application does not support events, an exception will be raised.
      *
-     * @param \Cake\Event\IEventManager $eventManager The event manager to set.
+     * @param uim.cake.Event\IEventManager $eventManager The event manager to set.
      * @return this
      * @throws \InvalidArgumentException
      */

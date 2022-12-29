@@ -18,8 +18,8 @@ class ArrayItemNode : INode
     /**
      * Constructor
      *
-     * @param \Cake\Error\Debug\INode myKey The node for the item key
-     * @param \Cake\Error\Debug\INode myValue The node for the array value
+     * @param uim.cake.Error\Debug\INode myKey The node for the item key
+     * @param uim.cake.Error\Debug\INode myValue The node for the array value
      */
     this(INode myKey, INode myValue) {
         this.key = myKey;

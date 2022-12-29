@@ -52,7 +52,7 @@ trait EventDispatcherTrait
      * You can use this instance to register any new listeners or callbacks to the
      * object events, or create your own events and trigger them at will.
      *
-     * @param \Cake\Event\IEventManager $eventManager the eventManager to set
+     * @param uim.cake.Event\IEventManager $eventManager the eventManager to set
      * @return this
      */
     function setEventManager(IEventManager $eventManager) {

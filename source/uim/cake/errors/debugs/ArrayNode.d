@@ -25,7 +25,7 @@ class ArrayNode : INode
     /**
      * Add an item
      *
-     * @param \Cake\Error\Debug\ArrayItemNode myNode The item to add.
+     * @param uim.cake.Error\Debug\ArrayItemNode myNode The item to add.
      * @return void
      */
     function add(ArrayItemNode myNode): void

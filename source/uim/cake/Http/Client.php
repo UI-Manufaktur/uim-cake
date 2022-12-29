@@ -257,7 +257,7 @@ class Client : ClientInterface
     /**
      * Adds a cookie to the Client collection.
      *
-     * @param \Cake\Http\Cookie\CookieInterface $cookie Cookie object.
+     * @param uim.cake.Http\Cookie\CookieInterface $cookie Cookie object.
      * @return this
      * @throws \InvalidArgumentException
      */
@@ -523,7 +523,7 @@ class Client : ClientInterface
      *
      * @param string $method The HTTP method being mocked.
      * @param string $url The URL being matched. See above for examples.
-     * @param \Cake\Http\Client\Response $response The response that matches the request.
+     * @param uim.cake.Http\Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
      * @return void
      */
@@ -682,7 +682,7 @@ class Client : ClientInterface
      * Uses the authentication type to choose the correct strategy
      * and use its methods to add headers.
      *
-     * @param \Cake\Http\Client\Request $request The request to modify.
+     * @param uim.cake.Http\Client\Request $request The request to modify.
      * @param array<string, mixed> $options Array of options containing the "auth" key.
      * @return \Cake\Http\Client\Request The updated request object.
      */
@@ -701,7 +701,7 @@ class Client : ClientInterface
      * Uses the authentication type to choose the correct strategy
      * and use its methods to add headers.
      *
-     * @param \Cake\Http\Client\Request $request The request to modify.
+     * @param uim.cake.Http\Client\Request $request The request to modify.
      * @param array<string, mixed> $options Array of options containing the "proxy" key.
      * @return \Cake\Http\Client\Request The updated request object.
      */

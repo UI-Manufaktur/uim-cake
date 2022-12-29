@@ -67,7 +67,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     /**
      * Controller instance.
      *
-     * @var uim.cake.Controller\Controller
+     * @var uim.cake.controllers.Controller
      */
     protected $controller;
 
@@ -119,7 +119,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * Creates the controller to perform rendering on the error response.
      *
      * @param \Throwable $exception Exception.
-     * @param \Cake\Http\ServerRequest|null $request The request if this is set it will be used
+     * @param uim.cake.Http\ServerRequest|null $request The request if this is set it will be used
      *   instead of creating a new one.
      */
     public this(Throwable $exception, ?ServerRequest $request = null) {
@@ -166,7 +166,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
                 $class = App::className("Error", "Controller", "Controller");
             }
 
-            /** @var uim.cake.Controller\Controller $controller */
+            /** @var uim.cake.controllers.Controller $controller */
             $controller = new $class($request);
             $controller.startupProcess();
         } catch (Throwable $e) {

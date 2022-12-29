@@ -81,8 +81,8 @@ abstract class BaseApplication implements
      * Constructor
      *
      * @param string $configDir The directory the bootstrap configuration is held in.
-     * @param \Cake\Event\IEventManager|null $eventManager Application event manager instance.
-     * @param \Cake\Http\ControllerFactoryInterface|null $controllerFactory Controller factory.
+     * @param uim.cake.Event\IEventManager|null $eventManager Application event manager instance.
+     * @param uim.cake.Http\ControllerFactoryInterface|null $controllerFactory Controller factory.
      */
     public this(
         string $configDir,
@@ -96,7 +96,7 @@ abstract class BaseApplication implements
     }
 
     /**
-     * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
+     * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
      * @return \Cake\Http\MiddlewareQueue
      */
     abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
@@ -128,7 +128,7 @@ abstract class BaseApplication implements
      *
      * If it isn"t available, ignore it.
      *
-     * @param \Cake\Core\PluginInterface|string $name The plugin name or plugin object.
+     * @param uim.cake.Core\PluginInterface|string $name The plugin name or plugin object.
      * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
      * @return this
      */
@@ -171,7 +171,7 @@ abstract class BaseApplication implements
      *
      * By default, this will load `config/routes.php` for ease of use and backwards compatibility.
      *
-     * @param \Cake\Routing\RouteBuilder $routes A route builder to add routes into.
+     * @param uim.cake.Routing\RouteBuilder $routes A route builder to add routes into.
      * @return void
      */
     function routes(RouteBuilder $routes): void
@@ -201,7 +201,7 @@ abstract class BaseApplication implements
      * By default, all commands in CakePHP, plugins and the application will be
      * loaded using conventions based names.
      *
-     * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
+     * @param uim.cake.Console\CommandCollection $commands The CommandCollection to add commands into.
      * @return \Cake\Console\CommandCollection The updated collection.
      */
     function console(CommandCollection $commands): CommandCollection
@@ -263,7 +263,7 @@ abstract class BaseApplication implements
     /**
      * Register application container services.
      *
-     * @param \Cake\Core\IContainer $container The Container to update.
+     * @param uim.cake.Core\IContainer $container The Container to update.
      * @return void
      */
     function services(IContainer $container): void

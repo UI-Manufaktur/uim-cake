@@ -1294,7 +1294,7 @@ class ServerRequest : IServerRequest
      * Replace the cookies in the request with those contained in
      * the provided CookieCollection.
      *
-     * @param \Cake\Http\Cookie\CookieCollection $cookies The cookie collection
+     * @param uim.cake.Http\Cookie\CookieCollection $cookies The cookie collection
      * @return static
      */
     function withCookieCollection(CookieCollection $cookies) {

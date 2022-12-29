@@ -33,7 +33,7 @@ TEXT;
     /**
      * Convert a tree of INode objects into a plain text string.
      *
-     * @param \Cake\Error\Debug\INode myNode The node tree to dump.
+     * @param uim.cake.Error\Debug\INode myNode The node tree to dump.
      */
     string dump(INode myNode) {
         $indent = 0;
@@ -44,7 +44,7 @@ TEXT;
     /**
      * Convert a tree of INode objects into a plain text string.
      *
-     * @param \Cake\Error\Debug\INode $var The node tree to dump.
+     * @param uim.cake.Error\Debug\INode $var The node tree to dump.
      * @param int $indent The current indentation level.
      * @return string
      */
@@ -76,7 +76,7 @@ TEXT;
     /**
      * Export an array type object
      *
-     * @param \Cake\Error\Debug\ArrayNode $var The array to export.
+     * @param uim.cake.Error\Debug\ArrayNode $var The array to export.
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
@@ -100,7 +100,7 @@ TEXT;
     /**
      * Handles object to string conversion.
      *
-     * @param \Cake\Error\Debug\ClassNode|\Cake\Error\Debug\ReferenceNode $var Object to convert.
+     * @param uim.cake.Error\Debug\ClassNode|\Cake\Error\Debug\ReferenceNode $var Object to convert.
      * @param int $indent Current indentation level.
      * @return string
      * @see uim.cake.Error\Debugger::exportVar()

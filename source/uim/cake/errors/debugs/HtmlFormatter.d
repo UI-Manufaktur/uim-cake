@@ -77,7 +77,7 @@ class HtmlFormatter : IFormatter
     /**
      * Convert a tree of INode objects into HTML
      *
-     * @param \Cake\Error\Debug\INode myNode The node tree to dump.
+     * @param uim.cake.Error\Debug\INode myNode The node tree to dump.
      */
     string dump(INode myNode) {
         $html = this.export(myNode, 0);
@@ -93,7 +93,7 @@ class HtmlFormatter : IFormatter
     /**
      * Convert a tree of INode objects into HTML
      *
-     * @param \Cake\Error\Debug\INode $var The node tree to dump.
+     * @param uim.cake.Error\Debug\INode $var The node tree to dump.
      * @param int $indent The current indentation level.
      * @return string
      */
@@ -129,7 +129,7 @@ class HtmlFormatter : IFormatter
     /**
      * Export an array type object
      *
-     * @param \Cake\Error\Debug\ArrayNode $var The array to export.
+     * @param uim.cake.Error\Debug\ArrayNode $var The array to export.
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
@@ -161,7 +161,7 @@ class HtmlFormatter : IFormatter
     /**
      * Handles object to string conversion.
      *
-     * @param \Cake\Error\Debug\ClassNode|\Cake\Error\Debug\ReferenceNode $var Object to convert.
+     * @param uim.cake.Error\Debug\ClassNode|\Cake\Error\Debug\ReferenceNode $var Object to convert.
      * @param int $indent The current indentation level.
      * @return string
      * @see uim.cake.Error\Debugger::exportVar()

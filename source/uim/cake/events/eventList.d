@@ -20,7 +20,7 @@ class EventList : ArrayAccess, Countable
     /**
      * Adds an event to the list when event listing is enabled.
      *
-     * @param \Cake\Event\IEvent myEvent An event to the list of dispatched events.
+     * @param uim.cake.Event\IEvent myEvent An event to the list of dispatched events.
      * @return void
      */
     void add(IEvent myEvent) {

@@ -68,7 +68,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Constructor
      *
-     * @param \Cake\Event\EventManager|null myEventManager The event manager.
+     * @param uim.cake.Event\EventManager|null myEventManager The event manager.
      *  Defaults to a new instance.
      */
     this(?EventManager myEventManager = null) {
@@ -110,7 +110,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * Set the schema for this form.
      *
      * @since 4.1.0
-     * @param \Cake\Form\Schema $schema The schema to set
+     * @param uim.cake.Form\Schema $schema The schema to set
      * @return this
      */
     auto setSchema(Schema $schema) {
@@ -146,7 +146,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * schema or load a pre-defined one.
      *
      * @deprecated 4.1.0 Use {@link setSchema()}/{@link getSchema()} instead.
-     * @param \Cake\Form\Schema|null $schema The schema to set, or null.
+     * @param uim.cake.Form\Schema|null $schema The schema to set, or null.
      * @return \Cake\Form\Schema the schema instance.
      */
     function schema(?Schema $schema = null): Schema
@@ -166,7 +166,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * the methods on {@link \Cake\Form\Schema}, or loads a pre-defined
      * schema from a concrete class.
      *
-     * @param \Cake\Form\Schema $schema The schema to customize.
+     * @param uim.cake.Form\Schema $schema The schema to customize.
      * @return \Cake\Form\Schema The schema to use.
      */
     protected auto _buildSchema(Schema $schema): Schema
