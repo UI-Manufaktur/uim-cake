@@ -26,9 +26,7 @@ import uim.cake.Mailer\Message;
  */
 class DebugTransport : AbstractTransport
 {
-    /**
-     * @inheritDoc
-     */
+
     function send(Message $message): array
     {
         $headers = $message.getHeadersString(

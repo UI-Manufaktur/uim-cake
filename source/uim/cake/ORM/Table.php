@@ -1701,9 +1701,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         return Query::subquery(this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function updateAll($fields, $conditions): int
     {
         $statement = this.query()
@@ -1716,9 +1714,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         return $statement.rowCount();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function deleteAll($conditions): int
     {
         $statement = this.query()
@@ -1730,9 +1726,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         return $statement.rowCount();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function exists($conditions): bool
     {
         return (bool)count(
@@ -3065,9 +3059,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         return (new LazyEagerLoader()).loadInto($entities, $contain, this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function validationMethodExists(string $name): bool
     {
         return method_exists(this, $name) || this.behaviors().hasMethod($name);

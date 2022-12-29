@@ -20,9 +20,7 @@ use Throwable;
  */
 class MethodNotAllowedException : HttpException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_defaultCode = 405;
 
     /**

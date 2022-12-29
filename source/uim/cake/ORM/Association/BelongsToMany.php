@@ -224,9 +224,7 @@ class BelongsToMany : Association
         return _sort;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function defaultRowValue(array $row, bool $joined): array
     {
         $sourceAlias = this.getSource().getAlias();
@@ -472,9 +470,7 @@ class BelongsToMany : Association
         thisJoin["conditions"].add($assoc._joinCondition(["foreignKey": $foreignKey]));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _appendNotMatching(Query $query, array $options): void
     {
         if (empty($options["negateMatch"])) {
@@ -533,9 +529,7 @@ class BelongsToMany : Association
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function eagerLoader(array $options): Closure
     {
         $name = _junctionAssociationName();
@@ -941,9 +935,7 @@ class BelongsToMany : Association
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function setConditions($conditions) {
         parent::setConditions($conditions);
         _targetConditions = _junctionConditions = null;

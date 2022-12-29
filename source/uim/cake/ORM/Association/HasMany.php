@@ -609,9 +609,7 @@ class HasMany : Association
         return _sort;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function defaultRowValue(array $row, bool $joined): array
     {
         $sourceAlias = this.getSource().getAlias();
@@ -638,9 +636,7 @@ class HasMany : Association
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function eagerLoader(array $options): Closure
     {
         $loader = new SelectLoader([
@@ -658,9 +654,7 @@ class HasMany : Association
         return $loader.buildEagerLoader($options);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function cascadeDelete(EntityInterface $entity, array $options = []): bool
     {
         $helper = new DependentDeleteHelper();

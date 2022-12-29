@@ -47,9 +47,7 @@ class SelectWithPivotLoader : SelectLoader
      */
     protected $junctionConditions;
 
-    /**
-     * @inheritDoc
-     */
+
     public this(array $options) {
         super(($options);
         this.junctionAssociationName = $options["junctionAssociationName"];
@@ -121,9 +119,7 @@ class SelectWithPivotLoader : SelectLoader
         return $query;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _assertFieldsPresent(Query $fetchQuery, array $key): void
     {
         // _buildQuery() manually adds in required fields from junction table

@@ -20,9 +20,7 @@ use Throwable;
  */
 class GoneException : HttpException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_defaultCode = 410;
 
     /**

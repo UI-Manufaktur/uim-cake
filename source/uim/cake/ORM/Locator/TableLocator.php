@@ -118,9 +118,7 @@ class TableLocator : AbstractLocator : ILocator
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function setConfig($alias, $options = null) {
         if (!is_string($alias)) {
             _config = $alias;
@@ -140,9 +138,7 @@ class TableLocator : AbstractLocator : ILocator
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getConfig(?string $alias = null): array
     {
         if ($alias == null) {
@@ -194,9 +190,7 @@ class TableLocator : AbstractLocator : ILocator
         return parent::get($alias, $options);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function createInstance(string $alias, array $options) {
         if (strpos($alias, "\\") == false) {
             [, $classAlias] = pluginSplit($alias);
@@ -308,9 +302,7 @@ class TableLocator : AbstractLocator : ILocator
         return this.instances[$alias] = $repository;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function clear(): void
     {
         parent::clear();
@@ -332,9 +324,7 @@ class TableLocator : AbstractLocator : ILocator
         return _fallbacked;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function remove(string $alias): void
     {
         parent::remove($alias);

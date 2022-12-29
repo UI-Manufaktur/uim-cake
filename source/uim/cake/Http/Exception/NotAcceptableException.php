@@ -20,9 +20,7 @@ use Throwable;
  */
 class NotAcceptableException : HttpException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_defaultCode = 406;
 
     /**

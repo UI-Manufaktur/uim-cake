@@ -16,8 +16,6 @@ import uim.cake.cores.exceptions.CakeException;
  */
 class MissingMailerException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = "Mailer class "%s" could not be found.";
 }

@@ -115,9 +115,7 @@ class HasOne : Association
         return $entity;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function eagerLoader(array $options): Closure
     {
         $loader = new SelectLoader([
@@ -134,9 +132,7 @@ class HasOne : Association
         return $loader.buildEagerLoader($options);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function cascadeDelete(EntityInterface $entity, array $options = []): bool
     {
         $helper = new DependentDeleteHelper();

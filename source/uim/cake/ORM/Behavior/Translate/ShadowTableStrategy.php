@@ -416,9 +416,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array
     {
         this.translatedFields();

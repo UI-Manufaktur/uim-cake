@@ -35,9 +35,7 @@ class JsonFormatter : AbstractFormatter
         this.setConfig($config);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function format($level, string $message, array $context = []): string
     {
         $log = ["date": date(_config["dateFormat"]), "level": (string)$level, "message": $message];

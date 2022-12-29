@@ -20,9 +20,7 @@ use Throwable;
  */
 class InvalidCsrfTokenException : HttpException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_defaultCode = 403;
 
     /**

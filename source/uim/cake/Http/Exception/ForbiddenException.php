@@ -20,9 +20,7 @@ use Throwable;
  */
 class ForbiddenException : HttpException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_defaultCode = 403;
 
     /**

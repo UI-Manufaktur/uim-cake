@@ -20,8 +20,6 @@ import uim.cake.cores.exceptions.CakeException;
  */
 class MissingDispatcherFilterException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = "Dispatcher filter %s could not be found.";
 }

@@ -30,9 +30,7 @@ class PersistenceFailedException : CakeException
      */
     protected $_entity;
 
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = "Entity %s failure.";
 
     /**

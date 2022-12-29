@@ -85,9 +85,7 @@ class SyslogLog : BaseLog
      */
     protected $_open = false;
 
-    /**
-     * @inheritDoc
-     */
+
     public this(array $config = []) {
         if (isset($config["format"])) {
             deprecationWarning(

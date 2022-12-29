@@ -71,9 +71,7 @@ class TreeBehavior : Behavior
         "cascadeCallbacks": false,
     ];
 
-    /**
-     * @inheritDoc
-     */
+
     function initialize(array $config): void
     {
         _config["leftField"] = new IdentifierExpression(_config["left"]);

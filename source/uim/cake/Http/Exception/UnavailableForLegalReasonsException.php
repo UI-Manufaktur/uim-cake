@@ -20,9 +20,7 @@ use Throwable;
  */
 class UnavailableForLegalReasonsException : HttpException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_defaultCode = 451;
 
     /**
