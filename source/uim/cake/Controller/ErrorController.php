@@ -32,7 +32,7 @@ class ErrorController : Controller
      * beforeRender callback.
      *
      * @param uim.cake.Event\IEvent $event Event.
-     * @return \Cake\Http\Response|null|void
+     * @return uim.cake.Http\Response|null|void
      */
     function beforeRender(IEvent $event) {
         $builder = this.viewBuilder();

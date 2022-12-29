@@ -73,7 +73,7 @@ class FlashComponent : Component
     /**
      * Get flash message utility instance.
      *
-     * @return \Cake\Http\FlashMessage
+     * @return uim.cake.Http\FlashMessage
      */
     protected function flash(): FlashMessage
     {

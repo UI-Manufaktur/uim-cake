@@ -164,7 +164,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
      * Gets the option parser instance and configures it.
      *
      * @param uim.cake.Console\ConsoleOptionParser $parser The parser to build
-     * @return \Cake\Console\ConsoleOptionParser
+     * @return uim.cake.Console\ConsoleOptionParser
      */
     protected ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription(

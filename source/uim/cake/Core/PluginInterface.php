@@ -85,7 +85,7 @@ interface PluginInterface
      * Add console commands for the plugin.
      *
      * @param uim.cake.Console\CommandCollection $commands The command collection to update
-     * @return \Cake\Console\CommandCollection
+     * @return uim.cake.Console\CommandCollection
      */
     function console(CommandCollection $commands): CommandCollection;
 
@@ -93,7 +93,7 @@ interface PluginInterface
      * Add middleware for the plugin.
      *
      * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to update.
-     * @return \Cake\Http\MiddlewareQueue
+     * @return uim.cake.Http\MiddlewareQueue
      */
     function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 

@@ -47,7 +47,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * Create a controller for a given request.
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to build a controller for.
-     * @return \Cake\Controller\Controller
+     * @return uim.cake.Controller\Controller
      * @throws \Cake\Http\Exception\MissingControllerException
      */
     Controller create(IServerRequest myRequest) {
@@ -310,7 +310,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * Throws an exception when a controller is missing.
      *
      * @param uim.cake.Http\ServerRequest myRequest The request.
-     * @return \Cake\Http\Exception\MissingControllerException
+     * @return uim.cake.Http\Exception\MissingControllerException
      */
     protected auto missingController(ServerRequest myRequest) {
         return new MissingControllerException([

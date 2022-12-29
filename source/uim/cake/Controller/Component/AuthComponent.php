@@ -233,7 +233,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Callback for Controller.startup event.
      *
      * @param uim.cake.Event\IEvent $event Event instance.
-     * @return \Cake\Http\Response|null
+     * @return uim.cake.Http\Response|null
      */
     function startup(IEvent $event): ?Response
     {
@@ -248,7 +248,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * `checkAuthIn` config.
      *
      * @param uim.cake.Event\IEvent $event Event instance.
-     * @return \Cake\Http\Response|null
+     * @return uim.cake.Http\Response|null
      * @throws \ReflectionException
      */
     function authCheck(IEvent $event): ?Response
@@ -333,7 +333,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * method redirects user to login action.
      *
      * @param uim.cake.Controller\Controller $controller A reference to the controller object.
-     * @return \Cake\Http\Response|null Null if current action is login action
+     * @return uim.cake.Http\Response|null Null if current action is login action
      *   else response object returned by authenticate object or Controller::redirect().
      * @throws \Cake\Core\Exception\CakeException
      */
@@ -405,7 +405,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Handle unauthorized access attempt
      *
      * @param uim.cake.Controller\Controller $controller A reference to the controller object
-     * @return \Cake\Http\Response|null
+     * @return uim.cake.Http\Response|null
      * @throws \Cake\Http\Exception\ForbiddenException
      */
     protected function _unauthorized(Controller $controller): ?Response
@@ -544,7 +544,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Getter for authorize objects. Will return a particular authorize object.
      *
      * @param string $alias Alias for the authorize object
-     * @return \Cake\Auth\BaseAuthorize|null
+     * @return uim.cake.Auth\BaseAuthorize|null
      */
     function getAuthorize(string $alias): ?BaseAuthorize
     {
@@ -839,7 +839,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @param uim.cake.Auth\Storage\IStorage|null $storage Sets provided
      *   object as storage or if null returns configured storage object.
-     * @return \Cake\Auth\Storage\IStorage|null
+     * @return uim.cake.Auth\Storage\IStorage|null
      */
     function storage(?IStorage $storage = null): ?IStorage
     {
@@ -918,7 +918,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Getter for authenticate objects. Will return a particular authenticate object.
      *
      * @param string $alias Alias for the authenticate object
-     * @return \Cake\Auth\BaseAuthenticate|null
+     * @return uim.cake.Auth\BaseAuthenticate|null
      */
     function getAuthenticate(string $alias): ?BaseAuthenticate
     {
@@ -949,7 +949,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * authenticated, this function will return the instance of the authentication
      * object that was used for logging the user in.
      *
-     * @return \Cake\Auth\BaseAuthenticate|null
+     * @return uim.cake.Auth\BaseAuthenticate|null
      */
     function authenticationProvider(): ?BaseAuthenticate
     {
@@ -961,7 +961,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * will return the instance of the Authorization object that granted access to the
      * user to the current address.
      *
-     * @return \Cake\Auth\BaseAuthorize|null
+     * @return uim.cake.Auth\BaseAuthorize|null
      */
     function authorizationProvider(): ?BaseAuthorize
     {

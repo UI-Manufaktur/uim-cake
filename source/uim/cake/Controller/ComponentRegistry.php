@@ -48,7 +48,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Get the controller associated with the collection.
      *
-     * @return \Cake\Controller\Controller Controller instance or null if not set.
+     * @return uim.cake.Controller\Controller Controller instance or null if not set.
      */
     function getController(): Controller
     {
@@ -114,7 +114,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname to create.
      * @param string $alias The alias of the component.
      * @param array<string, mixed> $config An array of config to use for the component.
-     * @return \Cake\Controller\Component The constructed component class.
+     * @return uim.cake.Controller\Component The constructed component class.
      * @psalm-suppress MoreSpecificImplementedParamType
      * @psalm-param class-string $class
      */

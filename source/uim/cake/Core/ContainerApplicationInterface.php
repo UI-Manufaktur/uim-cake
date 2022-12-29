@@ -32,7 +32,7 @@ interface IContainerApplication
      * This will `register()` services provided by both the application
      * and any plugins if the application has plugin support.
      *
-     * @return \Cake\Core\IContainer A populated container
+     * @return uim.cake.Core\IContainer A populated container
      */
     function getContainer(): IContainer;
 }

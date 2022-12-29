@@ -21,7 +21,7 @@ interface IHttpApplication : IRequestHandler
      * Define the HTTP middleware layers for an application.
      *
      * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
-     * @return \Cake\Http\MiddlewareQueue
+     * @return uim.cake.Http\MiddlewareQueue
      */
     function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 }

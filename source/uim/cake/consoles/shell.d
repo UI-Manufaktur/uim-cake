@@ -176,7 +176,7 @@ class Shell {
     /**
      * Get the io object for this shell.
      *
-     * @return \Cake\Console\ConsoleIo The current ConsoleIo object.
+     * @return uim.cake.Console\ConsoleIo The current ConsoleIo object.
      */
     ConsoleIo getIo() {
         return _io;
@@ -509,7 +509,7 @@ class Shell {
      *
      * By overriding this method you can configure the ConsoleOptionParser before returning it.
      *
-     * @return \Cake\Console\ConsoleOptionParser
+     * @return uim.cake.Console\ConsoleOptionParser
      * @link https://book.UIM.org/4/en/console-and-shells.html#configuring-options-and-generating-help
      */
     ConsoleOptionParser getOptionParser() {
@@ -524,7 +524,7 @@ class Shell {
      * Overload get for lazy building of tasks
      *
      * @param string myName The task to get.
-     * @return \Cake\Console\Shell Object of Task
+     * @return uim.cake.Console\Shell Object of Task
      */
     auto __get(string myName) {
         if (empty(this.{myName}) && in_array(myName, this.taskNames, true)) {
@@ -817,7 +817,7 @@ class Shell {
      *
      * @param string myName The name of the helper to render
      * @param array<string, mixed> myConfig Configuration data for the helper.
-     * @return \Cake\Console\Helper The created helper instance.
+     * @return uim.cake.Console\Helper The created helper instance.
      */
     Helper helper(string myName, array myConfig = []) {
         return _io.helper(myName, myConfig);

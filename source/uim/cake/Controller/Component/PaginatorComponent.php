@@ -175,7 +175,7 @@ class PaginatorComponent : Component
      *
      * @param uim.cake.Datasource\RepositoryInterface|\Cake\Datasource\IQuery $object Table or query to paginate.
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
-     * @return \Cake\Datasource\IResultSet Query results
+     * @return uim.cake.Datasource\IResultSet Query results
      * @throws \Cake\Http\Exception\NotFoundException
      */
     function paginate(object $object, array $settings = []): IResultSet
@@ -240,7 +240,7 @@ class PaginatorComponent : Component
     /**
      * Get paginator instance.
      *
-     * @return \Cake\Datasource\Paging\NumericPaginator
+     * @return uim.cake.Datasource\Paging\NumericPaginator
      */
     function getPaginator(): NumericPaginator
     {

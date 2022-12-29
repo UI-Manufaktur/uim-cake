@@ -66,7 +66,7 @@ class TaskRegistry : ObjectRegistry
      * @param string myClass The classname to create.
      * @param string myAlias The alias of the task.
      * @param array<string, mixed> myConfig An array of settings to use for the task.
-     * @return \Cake\Console\Shell The constructed task class.
+     * @return uim.cake.Console\Shell The constructed task class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Shell _create(myClass, string myAlias, array myConfig) {

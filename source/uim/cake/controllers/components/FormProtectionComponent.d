@@ -55,7 +55,7 @@ class FormProtectionComponent : Component
      * Token check happens here.
      *
      * @param uim.cake.Event\IEvent myEvent An Event instance
-     * @return \Cake\Http\Response|null
+     * @return uim.cake.Http\Response|null
      */
     function startup(IEvent myEvent): ?Response
     {
@@ -115,7 +115,7 @@ class FormProtectionComponent : Component
      * callback by executing the method passing the argument as exception.
      *
      * @param uim.cake.Form\FormProtector $formProtector Form Protector instance.
-     * @return \Cake\Http\Response|null If specified, validationFailureCallback"s response, or no return otherwise.
+     * @return uim.cake.Http\Response|null If specified, validationFailureCallback"s response, or no return otherwise.
      * @throws \Cake\Http\Exception\BadRequestException
      */
     protected auto validationFailure(FormProtector $formProtector): ?Response
@@ -138,7 +138,7 @@ class FormProtectionComponent : Component
      *
      * @param \Closure $callback A valid callable
      * @param uim.cake.Http\Exception\BadRequestException myException Exception instance.
-     * @return \Cake\Http\Response|null
+     * @return uim.cake.Http\Response|null
      */
     protected auto executeCallback(Closure $callback, BadRequestException myException): ?Response {
         return $callback(myException);

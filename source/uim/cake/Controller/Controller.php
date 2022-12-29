@@ -256,7 +256,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * If called with the first parameter, it will be set as the controller _components property
      *
      * @param uim.cake.Controller\ComponentRegistry|null $components Component registry.
-     * @return \Cake\Controller\ComponentRegistry
+     * @return uim.cake.Controller\ComponentRegistry
      */
     function components(?ComponentRegistry $components = null): ComponentRegistry
     {
@@ -287,7 +287,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * @param string $name The name of the component to load.
      * @param array<string, mixed> $config The config for the component.
-     * @return \Cake\Controller\Component
+     * @return uim.cake.Controller\Component
      * @throws \Exception
      */
     function loadComponent(string $name, array $config = []): Component
@@ -301,7 +301,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Magic accessor for model autoloading.
      *
      * @param string $name Property name
-     * @return \Cake\Datasource\RepositoryInterface|null The model instance or null
+     * @return uim.cake.Datasource\RepositoryInterface|null The model instance or null
      */
     function __get(string $name) {
         if (!empty(this.modelClass)) {
@@ -448,7 +448,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Gets the request instance.
      *
-     * @return \Cake\Http\ServerRequest
+     * @return uim.cake.Http\ServerRequest
      * @since 3.6.0
      */
     function getRequest(): ServerRequest
@@ -476,7 +476,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Gets the response instance.
      *
-     * @return \Cake\Http\Response
+     * @return uim.cake.Http\Response
      * @since 3.6.0
      */
     function getResponse(): Response
@@ -662,7 +662,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * @param \Psr\Http\Message\UriInterface|array|string $url A string, array-based URL or UriInterface instance.
      * @param int $status HTTP status code. Defaults to `302`.
-     * @return \Cake\Http\Response|null
+     * @return uim.cake.Http\Response|null
      * @link https://book.cakephp.org/4/en/controllers.html#Controller::redirect
      */
     function redirect($url, int $status = 302): ?Response
@@ -720,7 +720,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * @param string|null $template Template to use for rendering
      * @param string|null $layout Layout to use
-     * @return \Cake\Http\Response A response object containing the rendered view.
+     * @return uim.cake.Http\Response A response object containing the rendered view.
      * @link https://book.cakephp.org/4/en/controllers.html#rendering-a-view
      */
     function render(?string $template = null, ?string $layout = null): Response
@@ -884,7 +884,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @param uim.cake.ORM\Table|\Cake\ORM\Query|string|null $object Table to paginate
      * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
-     * @return \Cake\ORM\ResultSet|\Cake\Datasource\IResultSet Query results
+     * @return uim.cake.ORM\ResultSet|\Cake\Datasource\IResultSet Query results
      * @link https://book.cakephp.org/4/en/controllers.html#paginating-a-model
      * @throws \RuntimeException When no compatible table object can be found.
      */
@@ -988,7 +988,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * or perform logic that needs to happen before each controller action.
      *
      * @param uim.cake.Event\IEvent $event An Event instance
-     * @return \Cake\Http\Response|null|void
+     * @return uim.cake.Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function beforeFilter(IEvent $event) {
@@ -999,7 +999,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * to perform logic or set view variables that are required on every request.
      *
      * @param uim.cake.Event\IEvent $event An Event instance
-     * @return \Cake\Http\Response|null|void
+     * @return uim.cake.Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function beforeRender(IEvent $event) {
@@ -1018,7 +1018,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @param array|string $url A string or array-based URL pointing to another location within the app,
      *     or an absolute URL
      * @param uim.cake.Http\Response $response The response object.
-     * @return \Cake\Http\Response|null|void
+     * @return uim.cake.Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function beforeRedirect(IEvent $event, $url, Response $response) {
@@ -1028,7 +1028,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Called after the controller action is run and rendered.
      *
      * @param uim.cake.Event\IEvent $event An Event instance
-     * @return \Cake\Http\Response|null|void
+     * @return uim.cake.Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function afterFilter(IEvent $event) {

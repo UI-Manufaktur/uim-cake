@@ -102,7 +102,7 @@ class CommandCollection : IteratorAggregate, Countable
      * Get the target for a command.
      *
      * @param string myName The named shell.
-     * @return \Cake\Console\ICommand|\Cake\Console\Shell|string Either the command class or an instance.
+     * @return uim.cake.Console\ICommand|\Cake\Console\Shell|string Either the command class or an instance.
      * @throws \InvalidArgumentException when unknown commands are fetched.
      * @psalm-return \Cake\Console\ICommand|\Cake\Console\Shell|class-string
      */

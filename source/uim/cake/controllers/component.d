@@ -98,7 +98,7 @@ class Component : IEventListener
     /**
      * Get the controller this component is bound to.
      *
-     * @return \Cake\Controller\Controller The bound controller.
+     * @return uim.cake.Controller\Controller The bound controller.
      */
     Controller getController() {
         return _registry.getController();
@@ -119,7 +119,7 @@ class Component : IEventListener
      * Magic method for lazy loading $components.
      *
      * @param string myName Name of component to get.
-     * @return \Cake\Controller\Component|null A Component object or null.
+     * @return uim.cake.Controller\Component|null A Component object or null.
      */
     auto __get(string myName) {
         if (isset(_componentMap[myName]) && !isset(this.{myName})) {

@@ -59,7 +59,7 @@ class SecurityComponent : Component {
      * Component startup. All security checking happens here.
      *
      * @param uim.cake.Event\IEvent myEvent An Event instance
-     * @return \Cake\Http\Response|null
+     * @return uim.cake.Http\Response|null
      */
     function startup(IEvent myEvent): ?Response
     {
@@ -442,7 +442,7 @@ class SecurityComponent : Component {
      * request object.
      *
      * @param uim.cake.Http\ServerRequest myRequest The request object to add into.
-     * @return \Cake\Http\ServerRequest The modified request.
+     * @return uim.cake.Http\ServerRequest The modified request.
      */
     ServerRequest generateToken(ServerRequest myRequest) {
         $token = [

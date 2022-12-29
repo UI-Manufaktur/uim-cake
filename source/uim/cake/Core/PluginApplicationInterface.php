@@ -46,7 +46,7 @@ interface IPluginApplication : EventDispatcherInterface
      * Run routes hooks for loaded plugins
      *
      * @param uim.cake.Routing\RouteBuilder $routes The route builder to use.
-     * @return \Cake\Routing\RouteBuilder
+     * @return uim.cake.Routing\RouteBuilder
      */
     function pluginRoutes(RouteBuilder $routes): RouteBuilder;
 
@@ -54,7 +54,7 @@ interface IPluginApplication : EventDispatcherInterface
      * Run middleware hooks for plugins
      *
      * @param uim.cake.Http\MiddlewareQueue $middleware The MiddlewareQueue to use.
-     * @return \Cake\Http\MiddlewareQueue
+     * @return uim.cake.Http\MiddlewareQueue
      */
     function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue;
 
@@ -62,7 +62,7 @@ interface IPluginApplication : EventDispatcherInterface
      * Run console hooks for plugins
      *
      * @param uim.cake.Console\CommandCollection $commands The CommandCollection to use.
-     * @return \Cake\Console\CommandCollection
+     * @return uim.cake.Console\CommandCollection
      */
     function pluginConsole(CommandCollection $commands): CommandCollection;
 }

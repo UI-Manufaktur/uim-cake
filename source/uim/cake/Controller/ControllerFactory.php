@@ -56,7 +56,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      * Create a controller for a given request.
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to build a controller for.
-     * @return \Cake\Controller\Controller
+     * @return uim.cake.Controller\Controller
      * @throws \Cake\Http\Exception\MissingControllerException
      */
     function create(IServerRequest $request): Controller
@@ -332,7 +332,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      * Throws an exception when a controller is missing.
      *
      * @param uim.cake.Http\ServerRequest $request The request.
-     * @return \Cake\Http\Exception\MissingControllerException
+     * @return uim.cake.Http\Exception\MissingControllerException
      */
     protected function missingController(ServerRequest $request) {
         return new MissingControllerException([

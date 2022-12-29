@@ -202,7 +202,7 @@ class PluginCollection : Iterator, Countable
      * and that plugins loaded this way may miss some hook methods.
      *
      * @param string $name The plugin to get.
-     * @return \Cake\Core\PluginInterface The plugin.
+     * @return uim.cake.Core\PluginInterface The plugin.
      * @throws \Cake\Core\Exception\MissingPluginException when unknown plugins are fetched.
      */
     function get(string $name): PluginInterface
@@ -222,7 +222,7 @@ class PluginCollection : Iterator, Countable
      *
      * @param string $name The plugin name or classname
      * @param array<string, mixed> $config Configuration options for the plugin.
-     * @return \Cake\Core\PluginInterface
+     * @return uim.cake.Core\PluginInterface
      * @throws \Cake\Core\Exception\MissingPluginException When plugin instance could not be created.
      */
     function create(string $name, array $config = []): PluginInterface
@@ -293,7 +293,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Part of Iterator Interface
      *
-     * @return \Cake\Core\PluginInterface
+     * @return uim.cake.Core\PluginInterface
      */
     function current(): PluginInterface
     {
