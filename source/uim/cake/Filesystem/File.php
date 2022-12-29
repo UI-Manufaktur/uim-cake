@@ -62,7 +62,7 @@ class File
     /**
      * Path property
      *
-     * Current file's absolute path
+     * Current file"s absolute path
      *
      * @var string|null
      * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$path
@@ -81,7 +81,7 @@ class File
         $splInfo = new SplFileInfo($path);
         this.Folder = new Folder($splInfo.getPath(), $create, $mode);
         if (!is_dir($path)) {
-            this.name = ltrim($splInfo.getFilename(), '/\\');
+            this.name = ltrim($splInfo.getFilename(), "/\\");
         }
         this.pwd();
         $create && !this.exists() && this.safe($path) && this.create();
@@ -113,11 +113,11 @@ class File
     /**
      * Opens the current file with a given $mode
      *
-     * @param string $mode A valid 'fopen' mode string (r|w|a ...)
-     * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won't
+     * @param string $mode A valid "fopen" mode string (r|w|a ...)
+     * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won"t
      * @return bool True on success, false on failure
      */
-    function open(string $mode = 'r', bool $force = false): bool
+    function open(string $mode = "r", bool $force = false): bool
     {
         if (!$force && is_resource(this.handle)) {
             return true;
@@ -136,10 +136,10 @@ class File
      *
      * @param string|false $bytes where to start
      * @param string $mode A `fread` compatible mode.
-     * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won't
+     * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won"t
      * @return string|false String on success, false on failure
      */
-    function read($bytes = false, string $mode = 'rb', bool $force = false) {
+    function read($bytes = false, string $mode = "rb", bool $force = false) {
         if ($bytes == false && this.lock == null) {
             return file_get_contents(this.path);
         }
@@ -153,7 +153,7 @@ class File
             return fread(this.handle, $bytes);
         }
 
-        $data = '';
+        $data = "";
         while (!feof(this.handle)) {
             $data .= fgets(this.handle, 4096);
         }
@@ -200,7 +200,7 @@ class File
     public static function prepare(string $data, bool $forceWindows = false): string
     {
         $lineBreak = "\n";
-        if (DIRECTORY_SEPARATOR == '\\' || $forceWindows == true) {
+        if (DIRECTORY_SEPARATOR == "\\" || $forceWindows == true) {
             $lineBreak = "\r\n";
         }
 
@@ -215,7 +215,7 @@ class File
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    function write(string $data, string $mode = 'w', bool $force = false): bool
+    function write(string $data, string $mode = "w", bool $force = false): bool
     {
         $success = false;
         if (this.open($mode, $force) == true) {
@@ -243,7 +243,7 @@ class File
      */
     function append(string $data, bool $force = false): bool
     {
-        return this.write($data, 'a', $force);
+        return this.write($data, "a", $force);
     }
 
     /**
@@ -294,9 +294,9 @@ class File
             this.info = pathinfo(this.path);
         }
 
-        this.info['filename'] = this.info['filename'] ?? this.name();
-        this.info['filesize'] = this.info['filesize'] ?? this.size();
-        this.info['mime'] = this.info['mime'] ?? this.mime();
+        this.info["filename"] = this.info["filename"] ?? this.name();
+        this.info["filesize"] = this.info["filesize"] ?? this.size();
+        this.info["mime"] = this.info["mime"] ?? this.mime();
 
         return this.info;
     }
@@ -311,7 +311,7 @@ class File
             this.info();
         }
 
-        return this.info['extension'] ?? false;
+        return this.info["extension"] ?? false;
     }
 
     /**
@@ -323,8 +323,8 @@ class File
         if (!this.info) {
             this.info();
         }
-        if (isset(this.info['extension'])) {
-            return static::_basename(this.name, '.' . this.info['extension']);
+        if (isset(this.info["extension"])) {
+            return static::_basename(this.name, "." . this.info["extension"]);
         }
         if (this.name) {
             return this.name;
@@ -348,16 +348,16 @@ class File
         }
 
         $splInfo = new SplFileInfo($path);
-        $name = ltrim($splInfo.getFilename(), '/\\');
+        $name = ltrim($splInfo.getFilename(), "/\\");
 
-        if ($ext == null || $ext == '') {
+        if ($ext == null || $ext == "") {
             return $name;
         }
         $ext = preg_quote($ext);
-        $new = preg_replace("/({$ext})$/u", '', $name);
+        $new = preg_replace("/({$ext})$/u", "", $name);
 
-        // basename of '/etc/.d' is '.d' not ''
-        return $new == '' ? $name : $new;
+        // basename of "/etc/.d" is ".d" not ""
+        return $new == "" ? $name : $new;
     }
 
     /**
@@ -376,7 +376,7 @@ class File
             $ext = (string)this.ext();
         }
 
-        return preg_replace("/(?:[^\w\.-]+)/", '_', static::_basename($name, $ext));
+        return preg_replace("/(?:[^\w\.-]+)/", "_", static::_basename($name, $ext));
     }
 
     /**
@@ -456,7 +456,7 @@ class File
     /**
      * Returns true if the file is writable.
      *
-     * @return bool True if it's writable, false otherwise
+     * @return bool True if it"s writable, false otherwise
      */
     function writable(): bool
     {
@@ -466,7 +466,7 @@ class File
     /**
      * Returns true if the File is executable.
      *
-     * @return bool True if it's executable, false otherwise
+     * @return bool True if it"s executable, false otherwise
      */
     function executable(): bool
     {
@@ -484,7 +484,7 @@ class File
     }
 
     /**
-     * Returns the file's owner.
+     * Returns the file"s owner.
      *
      * @return int|false The file owner, or bool in case of an error
      */
@@ -497,7 +497,7 @@ class File
     }
 
     /**
-     * Returns the file's group.
+     * Returns the file"s group.
      *
      * @return int|false The file group, or false in case of an error
      */
@@ -563,7 +563,7 @@ class File
 
     /**
      * Gets the mime type of the file. Uses the finfo extension if
-     * it's available, otherwise falls back to mime_content_type().
+     * it"s available, otherwise falls back to mime_content_type().
      *
      * @return string|false The mimetype of the file, or false if reading fails.
      */
@@ -571,17 +571,17 @@ class File
         if (!this.exists()) {
             return false;
         }
-        if (class_exists('finfo')) {
+        if (class_exists("finfo")) {
             $finfo = new finfo(FILEINFO_MIME);
             $type = $finfo.file(this.pwd());
             if (!$type) {
                 return false;
             }
-            [$type] = explode(';', $type);
+            [$type] = explode(";", $type);
 
             return $type;
         }
-        if (function_exists('mime_content_type')) {
+        if (function_exists("mime_content_type")) {
             return mime_content_type(this.pwd());
         }
 
@@ -589,7 +589,7 @@ class File
     }
 
     /**
-     * Clear PHP's internal stat cache
+     * Clear PHP"s internal stat cache
      *
      * @param bool $all Clear all cache or not. Passing false will clear
      *   the stat cache for the current path only.
@@ -613,7 +613,7 @@ class File
      */
     function replaceText($search, $replace): bool
     {
-        if (!this.open('r+')) {
+        if (!this.open("r+")) {
             return false;
         }
 
@@ -621,7 +621,7 @@ class File
             return false;
         }
 
-        $replaced = this.write(str_replace($search, $replace, this.read()), 'w', true);
+        $replaced = this.write(str_replace($search, $replace, this.read()), "w", true);
 
         if (this.lock != null) {
             flock(this.handle, LOCK_UN);

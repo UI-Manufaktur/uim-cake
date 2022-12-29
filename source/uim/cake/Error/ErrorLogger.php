@@ -31,7 +31,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'trace': false,
+        "trace": false,
     ];
 
     /**
@@ -44,7 +44,7 @@ class ErrorLogger : ErrorLoggerInterface
     }
 
     /**
-     * Log an error to Cake's Log subsystem
+     * Log an error to Cake"s Log subsystem
      *
      * @param \Cake\Error\PhpError $error The error to log
      * @param ?\Psr\Http\Message\IServerRequest $request The request if in an HTTP context.
@@ -61,8 +61,8 @@ class ErrorLogger : ErrorLoggerInterface
             $message .= "\nTrace:\n" . $error.getTraceAsString() . "\n";
         }
         $logMap = [
-            'strict': LOG_NOTICE,
-            'deprecated': LOG_NOTICE,
+            "strict": LOG_NOTICE,
+            "deprecated": LOG_NOTICE,
         ];
         $level = $error.getLabel();
         $level = $logMap[$level] ?? $level;
@@ -71,7 +71,7 @@ class ErrorLogger : ErrorLoggerInterface
     }
 
     /**
-     * Log an exception to Cake's Log subsystem
+     * Log an exception to Cake"s Log subsystem
      *
      * @param \Throwable $exception The exception to log a message for.
      * @param \Psr\Http\Message\IServerRequest|null $request The current request if available.
@@ -100,15 +100,15 @@ class ErrorLogger : ErrorLoggerInterface
      */
     function logMessage($level, string $message, array $context = []): bool
     {
-        if (!empty($context['request'])) {
-            $message .= this.getRequestContext($context['request']);
+        if (!empty($context["request"])) {
+            $message .= this.getRequestContext($context["request"]);
         }
-        if (!empty($context['trace'])) {
-            $message .= "\nTrace:\n" . $context['trace'] . "\n";
+        if (!empty($context["trace"])) {
+            $message .= "\nTrace:\n" . $context["trace"] . "\n";
         }
         $logMap = [
-            'strict': LOG_NOTICE,
-            'deprecated': LOG_NOTICE,
+            "strict": LOG_NOTICE,
+            "deprecated": LOG_NOTICE,
         ];
         $level = $logMap[$level] ?? $level;
 
@@ -123,7 +123,7 @@ class ErrorLogger : ErrorLoggerInterface
      */
     function log(Throwable $exception, ?IServerRequest $request = null): bool
     {
-        $message = this.getMessage($exception, false, this.getConfig('trace'));
+        $message = this.getMessage($exception, false, this.getConfig("trace"));
 
         if ($request != null) {
             $message .= this.getRequestContext($request);
@@ -145,14 +145,14 @@ class ErrorLogger : ErrorLoggerInterface
     protected function getMessage(Throwable $exception, bool $isPrevious = false, bool $includeTrace = false): string
     {
         $message = sprintf(
-            '%s[%s] %s in %s on line %s',
-            $isPrevious ? "\nCaused by: " : '',
+            "%s[%s] %s in %s on line %s",
+            $isPrevious ? "\nCaused by: " : "",
             get_class($exception),
             $exception.getMessage(),
             $exception.getFile(),
             $exception.getLine()
         );
-        $debug = Configure::read('debug');
+        $debug = Configure::read("debug");
 
         if ($debug && $exception instanceof CakeException) {
             $attributes = $exception.getAttributes();
@@ -163,13 +163,13 @@ class ErrorLogger : ErrorLoggerInterface
 
         if ($includeTrace) {
             /** @var array $trace */
-            $trace = Debugger::formatTrace($exception, ['format': 'points']);
+            $trace = Debugger::formatTrace($exception, ["format": "points"]);
             $message .= "\nStack Trace:\n";
             foreach ($trace as $line) {
                 if (is_string($line)) {
-                    $message .= '- ' . $line;
+                    $message .= "- " . $line;
                 } else {
-                    $message .= "- {$line['file']}:{$line['line']}\n";
+                    $message .= "- {$line["file"]}:{$line["line"]}\n";
                 }
             }
         }
@@ -192,14 +192,14 @@ class ErrorLogger : ErrorLoggerInterface
     {
         $message = "\nRequest URL: " . $request.getRequestTarget();
 
-        $referer = $request.getHeaderLine('Referer');
+        $referer = $request.getHeaderLine("Referer");
         if ($referer) {
             $message .= "\nReferer URL: " . $referer;
         }
 
-        if (method_exists($request, 'clientIp')) {
+        if (method_exists($request, "clientIp")) {
             $clientIp = $request.clientIp();
-            if ($clientIp && $clientIp != '::1') {
+            if ($clientIp && $clientIp != "::1") {
                 $message .= "\nClient IP: " . $clientIp;
             }
         }

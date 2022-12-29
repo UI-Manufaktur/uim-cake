@@ -33,7 +33,7 @@ class TextErrorRenderer : ErrorRendererInterface
     function render(PhpError $error, bool $debug): string
     {
         if (!$debug) {
-            return '';
+            return "";
         }
 
         return sprintf(
@@ -41,8 +41,8 @@ class TextErrorRenderer : ErrorRendererInterface
             $error.getLabel(),
             $error.getCode(),
             $error.getMessage(),
-            $error.getLine() ?? '',
-            $error.getFile() ?? '',
+            $error.getLine() ?? "",
+            $error.getFile() ?? "",
             $error.getTraceAsString(),
         );
     }

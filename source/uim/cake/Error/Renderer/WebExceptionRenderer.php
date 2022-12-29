@@ -76,14 +76,14 @@ class WebExceptionRenderer : ExceptionRendererInterface
      *
      * @var string
      */
-    protected $template = '';
+    protected $template = "";
 
     /**
      * The method corresponding to the Exception this object is for.
      *
      * @var string
      */
-    protected $method = '';
+    protected $method = "";
 
     /**
      * If set, this will be request used to create the controller that will render
@@ -96,7 +96,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     /**
      * Map of exceptions to http status codes.
      *
-     * This can be customized for users that don't want specific exceptions to throw 404 errors
+     * This can be customized for users that don"t want specific exceptions to throw 404 errors
      * or want their application exceptions to be automatically converted.
      *
      * @var array<string, int>
@@ -147,23 +147,23 @@ class WebExceptionRenderer : ExceptionRendererInterface
             $request = $routerRequest ?: ServerRequestFactory::fromGlobals();
         }
 
-        // If the current request doesn't have routing data, but we
+        // If the current request doesn"t have routing data, but we
         // found a request in the router context copy the params over
-        if ($request.getParam('controller') == null && $routerRequest != null) {
-            $request = $request.withAttribute('params', $routerRequest.getAttribute('params'));
+        if ($request.getParam("controller") == null && $routerRequest != null) {
+            $request = $request.withAttribute("params", $routerRequest.getAttribute("params"));
         }
 
         $errorOccured = false;
         try {
-            $params = $request.getAttribute('params');
-            $params['controller'] = 'Error';
+            $params = $request.getAttribute("params");
+            $params["controller"] = "Error";
 
             $factory = new ControllerFactory(new Container());
-            $class = $factory.getControllerClass($request.withAttribute('params', $params));
+            $class = $factory.getControllerClass($request.withAttribute("params", $params));
 
             if (!$class) {
                 /** @var string $class */
-                $class = App::className('Error', 'Controller', 'Controller');
+                $class = App::className("Error", "Controller", "Controller");
             }
 
             /** @var \Cake\Controller\Controller $controller */
@@ -182,7 +182,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
         // there could be userland input data parsers.
         if ($errorOccured && isset($controller.RequestHandler)) {
             try {
-                $event = new Event('Controller.startup', $controller);
+                $event = new Event("Controller.startup", $controller);
                 $controller.RequestHandler.startup($event);
             } catch (Throwable $e) {
             }
@@ -198,7 +198,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      */
     protected function clearOutput(): void
     {
-        if (in_array(PHP_SAPI, ['cli', 'phpdbg'])) {
+        if (in_array(PHP_SAPI, ["cli", "phpdbg"])) {
             return;
         }
         while (ob_get_level()) {
@@ -248,33 +248,33 @@ class WebExceptionRenderer : ExceptionRendererInterface
         }
 
         $viewVars = [
-            'message': $message,
-            'url': h($url),
-            'error': $exception,
-            'exceptions': $exceptions,
-            'code': $code,
+            "message": $message,
+            "url": h($url),
+            "error": $exception,
+            "exceptions": $exceptions,
+            "code": $code,
         ];
-        $serialize = ['message', 'url', 'code'];
+        $serialize = ["message", "url", "code"];
 
-        $isDebug = Configure::read('debug');
+        $isDebug = Configure::read("debug");
         if ($isDebug) {
             $trace = (array)Debugger::formatTrace($exception.getTrace(), [
-                'format': 'array',
-                'args': true,
+                "format": "array",
+                "args": true,
             ]);
             $origin = [
-                'file': $exception.getFile() ?: 'null',
-                'line': $exception.getLine() ?: 'null',
+                "file": $exception.getFile() ?: "null",
+                "line": $exception.getLine() ?: "null",
             ];
-            // Traces don't include the origin file/line.
+            // Traces don"t include the origin file/line.
             array_unshift($trace, $origin);
-            $viewVars['trace'] = $trace;
+            $viewVars["trace"] = $trace;
             $viewVars += $origin;
-            $serialize[] = 'file';
-            $serialize[] = 'line';
+            $serialize[] = "file";
+            $serialize[] = "line";
         }
         this.controller.set($viewVars);
-        this.controller.viewBuilder().setOption('serialize', $serialize);
+        this.controller.viewBuilder().setOption("serialize", $serialize);
 
         if ($exception instanceof CakeException && $isDebug) {
             this.controller.set($exception.getAttributes());
@@ -330,12 +330,12 @@ class WebExceptionRenderer : ExceptionRendererInterface
     {
         [, $baseClass] = namespaceSplit(get_class($exception));
 
-        if (substr($baseClass, -9) == 'Exception') {
+        if (substr($baseClass, -9) == "Exception") {
             $baseClass = substr($baseClass, 0, -9);
         }
 
         // $baseClass would be an empty string if the exception class is \Exception.
-        $method = $baseClass == '' ? 'error500' : Inflector::variable($baseClass);
+        $method = $baseClass == "" ? "error500" : Inflector::variable($baseClass);
 
         return this.method = $method;
     }
@@ -352,13 +352,13 @@ class WebExceptionRenderer : ExceptionRendererInterface
         $message = $exception.getMessage();
 
         if (
-            !Configure::read('debug') &&
+            !Configure::read("debug") &&
             !($exception instanceof HttpException)
         ) {
             if ($code < 500) {
-                $message = __d('cake', 'Not Found');
+                $message = __d("cake", "Not Found");
             } else {
-                $message = __d('cake', 'An Internal Error Has Occurred.');
+                $message = __d("cake", "An Internal Error Has Occurred.");
             }
         }
 
@@ -375,12 +375,12 @@ class WebExceptionRenderer : ExceptionRendererInterface
      */
     protected function _template(Throwable $exception, string $method, int $code): string
     {
-        if ($exception instanceof HttpException || !Configure::read('debug')) {
-            return this.template = $code < 500 ? 'error400' : 'error500';
+        if ($exception instanceof HttpException || !Configure::read("debug")) {
+            return this.template = $code < 500 ? "error400" : "error500";
         }
 
         if ($exception instanceof PDOException) {
-            return this.template = 'pdo_error';
+            return this.template = "pdo_error";
         }
 
         return this.template = $method;
@@ -417,22 +417,22 @@ class WebExceptionRenderer : ExceptionRendererInterface
             $attributes = $e.getAttributes();
             if (
                 $e instanceof MissingLayoutException ||
-                strpos($attributes['file'], 'error500') != false
+                strpos($attributes["file"], "error500") != false
             ) {
-                return _outputMessageSafe('error500');
+                return _outputMessageSafe("error500");
             }
 
-            return _outputMessage('error500');
+            return _outputMessage("error500");
         } catch (MissingPluginException $e) {
             $attributes = $e.getAttributes();
-            if (isset($attributes['plugin']) && $attributes['plugin'] == this.controller.getPlugin()) {
+            if (isset($attributes["plugin"]) && $attributes["plugin"] == this.controller.getPlugin()) {
                 this.controller.setPlugin(null);
             }
 
-            return _outputMessageSafe('error500');
+            return _outputMessageSafe("error500");
         } catch (Throwable $outer) {
             try {
-                return _outputMessageSafe('error500');
+                return _outputMessageSafe("error500");
             } catch (Throwable $inner) {
                 throw $outer;
             }
@@ -441,7 +441,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
 
     /**
      * A safer way to render error messages, replaces all helpers, with basics
-     * and doesn't call component methods.
+     * and doesn"t call component methods.
      *
      * @param string $template The template to render.
      * @return \Cake\Http\Response A response object that can be sent.
@@ -451,13 +451,13 @@ class WebExceptionRenderer : ExceptionRendererInterface
         $builder = this.controller.viewBuilder();
         $builder
             .setHelpers([], false)
-            .setLayoutPath('')
-            .setTemplatePath('Error');
-        $view = this.controller.createView('View');
+            .setLayoutPath("")
+            .setTemplatePath("Error");
+        $view = this.controller.createView("View");
 
         $response = this.controller.getResponse()
-            .withType('html')
-            .withStringBody($view.render($template, 'error'));
+            .withType("html")
+            .withStringBody($view.render($template, "error"));
         this.controller.setResponse($response);
 
         return $response;
@@ -472,7 +472,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      */
     protected function _shutdown(): Response
     {
-        this.controller.dispatchEvent('Controller.shutdown');
+        this.controller.dispatchEvent("Controller.shutdown");
 
         return this.controller.getResponse();
     }
@@ -486,11 +486,11 @@ class WebExceptionRenderer : ExceptionRendererInterface
     function __debugInfo(): array
     {
         return [
-            'error': this.error,
-            'request': this.request,
-            'controller': this.controller,
-            'template': this.template,
-            'method': this.method,
+            "error": this.error,
+            "request": this.request,
+            "controller": this.controller,
+            "template": this.template,
+            "method": this.method,
         ];
     }
 }

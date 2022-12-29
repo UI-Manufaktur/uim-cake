@@ -34,17 +34,17 @@ class ConsoleErrorHandler : BaseErrorHandler
      */
     public this(array $config = []) {
         $config += [
-            'stderr': new ConsoleOutput('php://stderr'),
-            'log': false,
+            "stderr": new ConsoleOutput("php://stderr"),
+            "log": false,
         ];
 
         this.setConfig($config);
-        _stderr = _config['stderr'];
+        _stderr = _config["stderr"];
     }
 
     /**
      * Handle errors in the console environment. Writes errors to stderr,
-     * and logs messages if Configure::read('debug') is false.
+     * and logs messages if Configure::read("debug") is false.
      *
      * @param \Throwable $exception Exception instance.
      * @return void
@@ -71,9 +71,9 @@ class ConsoleErrorHandler : BaseErrorHandler
      */
     protected function _displayException(Throwable $exception): void
     {
-        $errorName = 'Exception:';
+        $errorName = "Exception:";
         if ($exception instanceof FatalErrorException) {
-            $errorName = 'Fatal Error:';
+            $errorName = "Fatal Error:";
         }
 
         $message = sprintf(
@@ -99,13 +99,13 @@ class ConsoleErrorHandler : BaseErrorHandler
     {
         $message = sprintf(
             "%s\nIn [%s, line %s]",
-            $error['description'],
-            $error['file'],
-            $error['line']
+            $error["description"],
+            $error["file"],
+            $error["line"]
         );
         $message = sprintf(
             "<error>%s Error:</error> %s\n",
-            $error['error'],
+            $error["error"],
             $message
         );
         _stderr.write($message);
@@ -125,7 +125,7 @@ class ConsoleErrorHandler : BaseErrorHandler
 
 // phpcs:disable
 class_alias(
-    'Cake\Error\ConsoleErrorHandler',
-    'Cake\Console\ConsoleErrorHandler'
+    "Cake\Error\ConsoleErrorHandler",
+    "Cake\Console\ConsoleErrorHandler"
 );
 // phpcs:enable

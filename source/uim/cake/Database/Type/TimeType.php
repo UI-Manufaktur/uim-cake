@@ -21,14 +21,14 @@ class TimeType : DateTimeType
     /**
      * @inheritDoc
      */
-    protected $_format = 'H:i:s';
+    protected $_format = "H:i:s";
 
     /**
      * @inheritDoc
      */
     protected $_marshalFormats = [
-        'H:i:s',
-        'H:i',
+        "H:i:s",
+        "H:i",
     ];
 
     /**

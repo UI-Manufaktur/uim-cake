@@ -44,16 +44,16 @@ easy:
 ```php
 import uim.cake.Datasource\ConnectionManager;
 
-ConnectionManager::config('connection-one', [
-    'className': 'MyApp\Connections\CustomConnection',
-    'param1': 'value',
-    'param2': 'another value'
+ConnectionManager::config("connection-one", [
+    "className": "MyApp\Connections\CustomConnection",
+    "param1": "value",
+    "param2": "another value"
 ]);
 
-ConnectionManager::config('connection-two', [
-    'className': 'MyApp\Connections\CustomConnection',
-    'param1': 'different value',
-    'param2': 'another value'
+ConnectionManager::config("connection-two", [
+    "className": "MyApp\Connections\CustomConnection",
+    "param1": "different value",
+    "param2": "another value"
 ]);
 ```
 
@@ -67,14 +67,14 @@ before, or return the existing known connection:
 
 ```php
 import uim.cake.Datasource\ConnectionManager;
-$conn = ConnectionManager::get('master');
+$conn = ConnectionManager::get("master");
 ```
 
 It is also possible to store connection objects by passing the instance directly to the manager:
 
 ```php
 import uim.cake.Datasource\ConnectionManager;
-$conn = ConnectionManager::config('other', $connectionInstance);
+$conn = ConnectionManager::config("other", $connectionInstance);
 ```
 
 ## Documentation

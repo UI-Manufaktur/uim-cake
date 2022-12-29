@@ -49,7 +49,7 @@ use Throwable;
  *
  * #### Using a custom renderer with `exceptionRenderer`
  *
- * If you don't want to take control of the exception handling, but want to change how exceptions are
+ * If you don"t want to take control of the exception handling, but want to change how exceptions are
  * rendered you can use `exceptionRenderer` option to choose a class to render exception pages. By default
  * `Cake\Error\ExceptionRenderer` is used. Your custom exception renderer class should be placed in src/Error.
  *
@@ -80,7 +80,7 @@ use Throwable;
  * to one or a combination of a few of the E_* constants will only enable the specified errors:
  *
  * ```
- * $options['errorLevel'] = E_ALL & ~E_NOTICE;
+ * $options["errorLevel"] = E_ALL & ~E_NOTICE;
  * ```
  *
  * Would enable handling for all non Notice errors.
@@ -96,7 +96,7 @@ class ErrorHandler : BaseErrorHandler
      */
     public this(array $config = []) {
         $config += [
-            'exceptionRenderer': ExceptionRenderer::class,
+            "exceptionRenderer": ExceptionRenderer::class,
         ];
 
         this.setConfig($config);
@@ -152,14 +152,14 @@ class ErrorHandler : BaseErrorHandler
         Throwable $exception,
         ?IServerRequest $request = null
     ): ExceptionRendererInterface {
-        $renderer = _config['exceptionRenderer'];
+        $renderer = _config["exceptionRenderer"];
 
         if (is_string($renderer)) {
             /** @var class-string<\Cake\Error\ExceptionRendererInterface>|null $class */
-            $class = App::className($renderer, 'Error');
+            $class = App::className($renderer, "Error");
             if (!$class) {
                 throw new RuntimeException(sprintf(
-                    "The '%s' renderer class could not be found.",
+                    "The "%s" renderer class could not be found.",
                     $renderer
                 ));
             }
@@ -182,7 +182,7 @@ class ErrorHandler : BaseErrorHandler
     protected function _logInternalError(Throwable $exception): void
     {
         // Disable trace for internal errors.
-        _config['trace'] = false;
+        _config["trace"] = false;
         $message = sprintf(
             "[%s] %s (%s:%s)\n%s", // Keeping same message format
             get_class($exception),

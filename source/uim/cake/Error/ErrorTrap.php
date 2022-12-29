@@ -11,12 +11,12 @@ import uim.cake.Routing\Router;
 use Exception;
 
 /**
- * Entry point to CakePHP's error handling.
+ * Entry point to CakePHP"s error handling.
  *
- * Using the `register()` method you can attach an ErrorTrap to PHP's default error handler.
+ * Using the `register()` method you can attach an ErrorTrap to PHP"s default error handler.
  *
  * When errors are trapped, errors are logged (if logging is enabled). Then the `Error.beforeRender` event is triggered.
- * Finally, errors are 'rendered' using the defined renderer. If no error renderer is defined in configuration
+ * Finally, errors are "rendered" using the defined renderer. If no error renderer is defined in configuration
  * one of the default implementations will be chosen based on the PHP SAPI.
  */
 class ErrorTrap
@@ -38,11 +38,11 @@ class ErrorTrap
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [
-        'errorLevel': E_ALL,
-        'errorRenderer': null,
-        'log': true,
-        'logger': ErrorLogger::class,
-        'trace': false,
+        "errorLevel": E_ALL,
+        "errorRenderer": null,
+        "log": true,
+        "logger": ErrorLogger::class,
+        "trace": false,
     ];
 
     /**
@@ -61,17 +61,17 @@ class ErrorTrap
      */
     protected function chooseErrorRenderer(): string
     {
-        $config = this.getConfig('errorRenderer');
+        $config = this.getConfig("errorRenderer");
         if ($config != null) {
             return $config;
         }
 
         /** @var class-string<\Cake\Error\ErrorRendererInterface> */
-        return PHP_SAPI == 'cli' ? ConsoleErrorRenderer::class : HtmlErrorRenderer::class;
+        return PHP_SAPI == "cli" ? ConsoleErrorRenderer::class : HtmlErrorRenderer::class;
     }
 
     /**
-     * Attach this ErrorTrap to PHP's default error handler.
+     * Attach this ErrorTrap to PHP"s default error handler.
      *
      * This will replace the existing error handler, and the
      * previous error handler will be discarded.
@@ -83,9 +83,9 @@ class ErrorTrap
      */
     function register(): void
     {
-        $level = _config['errorLevel'] ?? -1;
+        $level = _config["errorLevel"] ?? -1;
         error_reporting($level);
-        set_error_handler([this, 'handleError'], $level);
+        set_error_handler([this, "handleError"], $level);
     }
 
     /**
@@ -117,23 +117,23 @@ class ErrorTrap
         }
 
         /** @var array $trace */
-        $trace = Debugger::trace(['start': 1, 'format': 'points']);
+        $trace = Debugger::trace(["start": 1, "format": "points"]);
         $error = new PhpError($code, $description, $file, $line, $trace);
 
-        $debug = Configure::read('debug');
+        $debug = Configure::read("debug");
         $renderer = this.renderer();
 
         try {
             // Log first incase rendering or event listeners fail
             this.logError($error);
-            $event = this.dispatchEvent('Error.beforeRender', ['error': $error]);
+            $event = this.dispatchEvent("Error.beforeRender", ["error": $error]);
             if ($event.isStopped()) {
                 return true;
             }
             $renderer.write($renderer.render($error, $debug));
         } catch (Exception $e) {
             // Fatal errors always log.
-            this.logger().logMessage('error', 'Could not render error. Got: ' . $e.getMessage());
+            this.logger().logMessage("error", "Could not render error. Got: " . $e.getMessage());
 
             return false;
         }
@@ -149,23 +149,23 @@ class ErrorTrap
      */
     protected function logError(PhpError $error): void
     {
-        if (!_config['log']) {
+        if (!_config["log"]) {
             return;
         }
         $logger = this.logger();
-        if (method_exists($logger, 'logError')) {
-            $logger.logError($error, Router::getRequest(), _config['trace']);
+        if (method_exists($logger, "logError")) {
+            $logger.logError($error, Router::getRequest(), _config["trace"]);
         } else {
             $loggerClass = get_class($logger);
             deprecationWarning(
                 "The configured logger `{$loggerClass}` does not implement `logError()` " .
-                'which will be required in future versions of CakePHP.'
+                "which will be required in future versions of CakePHP."
             );
             $context = [];
-            if (_config['trace']) {
+            if (_config["trace"]) {
                 $context = [
-                    'trace': $error.getTraceAsString(),
-                    'request': Router::getRequest(),
+                    "trace": $error.getTraceAsString(),
+                    "request": Router::getRequest(),
                 ];
             }
             $logger.logMessage($error.getLabel(), $error.getMessage(), $context);
@@ -180,7 +180,7 @@ class ErrorTrap
     function renderer(): ErrorRendererInterface
     {
         /** @var class-string<\Cake\Error\ErrorRendererInterface> $class */
-        $class = this.getConfig('errorRenderer') ?: this.chooseErrorRenderer();
+        $class = this.getConfig("errorRenderer") ?: this.chooseErrorRenderer();
 
         return new $class(_config);
     }
@@ -192,14 +192,14 @@ class ErrorTrap
      */
     function logger(): ErrorLoggerInterface
     {
-        $oldConfig = this.getConfig('errorLogger');
+        $oldConfig = this.getConfig("errorLogger");
         if ($oldConfig != null) {
-            deprecationWarning('The `errorLogger` configuration key is deprecated. Use `logger` instead.');
-            this.setConfig(['logger': $oldConfig, 'errorLogger': null]);
+            deprecationWarning("The `errorLogger` configuration key is deprecated. Use `logger` instead.");
+            this.setConfig(["logger": $oldConfig, "errorLogger": null]);
         }
 
         /** @var class-string<\Cake\Error\ErrorLoggerInterface> $class */
-        $class = this.getConfig('logger', _defaultConfig['logger']);
+        $class = this.getConfig("logger", _defaultConfig["logger"]);
 
         return new $class(_config);
     }

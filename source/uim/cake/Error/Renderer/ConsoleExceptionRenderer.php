@@ -20,7 +20,7 @@ use Throwable;
  *
  * Useful in CI or plain text environments.
  *
- * @todo 5.0 Implement \Cake\Error\ExceptionRendererInterface. This implementation can't implement
+ * @todo 5.0 Implement \Cake\Error\ExceptionRendererInterface. This implementation can"t implement
  *  the concrete interface because the return types are not compatible.
  */
 class ConsoleExceptionRenderer
@@ -49,8 +49,8 @@ class ConsoleExceptionRenderer
      */
     public this(Throwable $error, ?IServerRequest $request, array $config) {
         this.error = $error;
-        this.output = $config['stderr'] ?? new ConsoleOutput('php://stderr');
-        this.trace = $config['trace'] ?? true;
+        this.output = $config["stderr"] ?? new ConsoleOutput("php://stderr");
+        this.trace = $config["trace"] ?? true;
     }
 
     /**
@@ -84,8 +84,8 @@ class ConsoleExceptionRenderer
     {
         $out = [
             sprintf(
-                '<error>%s[%s] %s</error> in %s on line %s',
-                $index > 0 ? 'Caused by ' : '',
+                "<error>%s[%s] %s</error> in %s on line %s",
+                $index > 0 ? "Caused by " : "",
                 get_class($exception),
                 $exception.getMessage(),
                 $exception.getFile(),
@@ -93,23 +93,23 @@ class ConsoleExceptionRenderer
             ),
         ];
 
-        $debug = Configure::read('debug');
+        $debug = Configure::read("debug");
         if ($debug && $exception instanceof CakeException) {
             $attributes = $exception.getAttributes();
             if ($attributes) {
-                $out[] = '';
-                $out[] = '<info>Exception Attributes</info>';
-                $out[] = '';
+                $out[] = "";
+                $out[] = "<info>Exception Attributes</info>";
+                $out[] = "";
                 $out[] = var_export($exception.getAttributes(), true);
             }
         }
 
         if (this.trace) {
-            $out[] = '';
-            $out[] = '<info>Stack Trace:</info>';
-            $out[] = '';
+            $out[] = "";
+            $out[] = "<info>Stack Trace:</info>";
+            $out[] = "";
             $out[] = $exception.getTraceAsString();
-            $out[] = '';
+            $out[] = "";
         }
 
         return $out;

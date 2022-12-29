@@ -27,7 +27,7 @@ interface ErrorRendererInterface
     function render(PhpError $error, bool $debug): string;
 
     /**
-     * Write output to the renderer's output stream
+     * Write output to the renderer"s output stream
      *
      * @param string $out The content to output.
      * @return void

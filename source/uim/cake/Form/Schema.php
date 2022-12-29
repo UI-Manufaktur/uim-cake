@@ -27,10 +27,10 @@ class Schema
      * @var array<string, mixed>
      */
     protected $_fieldDefaults = [
-        'type': null,
-        'length': null,
-        'precision': null,
-        'default': null,
+        "type": null,
+        "length": null,
+        "precision": null,
+        "default": null,
     ];
 
     /**
@@ -57,7 +57,7 @@ class Schema
      */
     function addField(string $name, $attrs) {
         if (is_string($attrs)) {
-            $attrs = ['type': $attrs];
+            $attrs = ["type": $attrs];
         }
         $attrs = array_intersect_key($attrs, _fieldDefaults);
         _fields[$name] = $attrs + _fieldDefaults;
@@ -112,7 +112,7 @@ class Schema
             return null;
         }
 
-        return $field['type'];
+        return $field["type"];
     }
 
     /**
@@ -123,7 +123,7 @@ class Schema
     function __debugInfo(): array
     {
         return [
-            '_fields': _fields,
+            "_fields": _fields,
         ];
     }
 }

@@ -36,7 +36,7 @@ trait RulesAwareTrait
      * the rules checker.
      *
      * @param \Cake\Datasource\EntityInterface $entity The entity to check for validity.
-     * @param string $operation The operation being run. Either 'create', 'update' or 'delete'.
+     * @param string $operation The operation being run. Either "create", "update" or "delete".
      * @param \ArrayObject|array|null $options The options To be passed to the rules.
      * @return bool
      */
@@ -49,8 +49,8 @@ trait RulesAwareTrait
 
         if ($hasEvents) {
             $event = this.dispatchEvent(
-                'Model.beforeRules',
-                compact('entity', 'options', 'operation')
+                "Model.beforeRules",
+                compact("entity", "options", "operation")
             );
             if ($event.isStopped()) {
                 return $event.getResult();
@@ -61,8 +61,8 @@ trait RulesAwareTrait
 
         if ($hasEvents) {
             $event = this.dispatchEvent(
-                'Model.afterRules',
-                compact('entity', 'options', 'result', 'operation')
+                "Model.afterRules",
+                compact("entity", "options", "result", "operation")
             );
 
             if ($event.isStopped()) {
@@ -89,10 +89,10 @@ trait RulesAwareTrait
             return _rulesChecker;
         }
         /** @psalm-var class-string<\Cake\Datasource\RulesChecker> $class */
-        $class = defined('static::RULES_CLASS') ? static::RULES_CLASS : RulesChecker::class;
+        $class = defined("static::RULES_CLASS") ? static::RULES_CLASS : RulesChecker::class;
         /** @psalm-suppress ArgumentTypeCoercion */
-        _rulesChecker = this.buildRules(new $class(['repository': this]));
-        this.dispatchEvent('Model.buildRules', ['rules': _rulesChecker]);
+        _rulesChecker = this.buildRules(new $class(["repository": this]));
+        this.dispatchEvent("Model.buildRules", ["rules": _rulesChecker]);
 
         return _rulesChecker;
     }

@@ -36,7 +36,7 @@ class JsonType : BaseType : BatchCastingInterface
     function toDatabase($value, DriverInterface $driver): ?string
     {
         if (is_resource($value)) {
-            throw new InvalidArgumentException('Cannot convert a resource value to JSON');
+            throw new InvalidArgumentException("Cannot convert a resource value to JSON");
         }
 
         if ($value == null) {

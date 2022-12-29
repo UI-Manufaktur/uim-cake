@@ -48,7 +48,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * @see \Cake\Error\ExceptionTrap
      */
     protected $_defaultConfig = [
-        'exceptionRenderer': WebExceptionRenderer::class,
+        "exceptionRenderer": WebExceptionRenderer::class,
     ];
 
     /**
@@ -75,15 +75,15 @@ class ErrorHandlerMiddleware : IMiddleware
     public this($errorHandler = []) {
         if (func_num_args() > 1) {
             deprecationWarning(
-                'The signature of ErrorHandlerMiddleware::__construct() has changed. '
-                . 'Pass the config array as 1st argument instead.'
+                "The signature of ErrorHandlerMiddleware::__construct() has changed. "
+                . "Pass the config array as 1st argument instead."
             );
 
             $errorHandler = func_get_arg(1);
         }
 
-        if (PHP_VERSION_ID >= 70400 && Configure::read('debug')) {
-            ini_set('zend.exception_ignore_args', '0');
+        if (PHP_VERSION_ID >= 70400 && Configure::read("debug")) {
+            ini_set("zend.exception_ignore_args", "0");
         }
 
         if (is_array($errorHandler)) {
@@ -93,7 +93,7 @@ class ErrorHandlerMiddleware : IMiddleware
         }
         if ($errorHandler instanceof ErrorHandler) {
             deprecationWarning(
-                'Using an `ErrorHandler` is deprecated. You should migate to the `ExceptionTrap` sub-system instead.'
+                "Using an `ErrorHandler` is deprecated. You should migate to the `ExceptionTrap` sub-system instead."
             );
             this.errorHandler = $errorHandler;
 
@@ -105,7 +105,7 @@ class ErrorHandlerMiddleware : IMiddleware
             return;
         }
         throw new InvalidArgumentException(sprintf(
-            '$errorHandler argument must be a config array or ExceptionTrap instance. Got `%s` instead.',
+            "$errorHandler argument must be a config array or ExceptionTrap instance. Got `%s` instead.",
             getTypeName($errorHandler)
         ));
     }
@@ -153,7 +153,7 @@ class ErrorHandlerMiddleware : IMiddleware
             /** @var \Psr\Http\Message\IResponse|string $response */
             $response = $renderer.render();
             if (is_string($response)) {
-                return new Response(['body': $response, 'status': 500]);
+                return new Response(["body": $response, "status": 500]);
             }
 
             return $response;
@@ -187,8 +187,8 @@ class ErrorHandlerMiddleware : IMiddleware
     protected function handleInternalError(): IResponse
     {
         return new Response([
-            'body': 'An Internal Server Error Occurred',
-            'status': 500,
+            "body": "An Internal Server Error Occurred",
+            "status": 500,
         ]);
     }
 
@@ -201,7 +201,7 @@ class ErrorHandlerMiddleware : IMiddleware
     {
         if (this.errorHandler == null) {
             /** @var class-string<\Cake\Error\ErrorHandler> $className */
-            $className = App::className('ErrorHandler', 'Error');
+            $className = App::className("ErrorHandler", "Error");
             this.errorHandler = new $className(this.getConfig());
         }
 
@@ -217,7 +217,7 @@ class ErrorHandlerMiddleware : IMiddleware
     {
         if (this.exceptionTrap == null) {
             /** @var class-string<\Cake\Error\ExceptionTrap> $className */
-            $className = App::className('ExceptionTrap', 'Error');
+            $className = App::className("ExceptionTrap", "Error");
             this.exceptionTrap = new $className(this.getConfig());
         }
 

@@ -35,9 +35,9 @@ class HtmlErrorRenderer : ErrorRendererInterface
     function render(PhpError $error, bool $debug): string
     {
         if (!$debug) {
-            return '';
+            return "";
         }
-        $id = 'cakeErr' . uniqid();
+        $id = "cakeErr" . uniqid();
         $file = $error.getFile();
 
         // Some of the error data is not HTML safe so we escape everything.
@@ -47,12 +47,12 @@ class HtmlErrorRenderer : ErrorRendererInterface
         $line = $error.getLine();
 
         $errorMessage = sprintf(
-            '<b>%s</b> (%s)',
+            "<b>%s</b> (%s)",
             h(ucfirst($error.getLabel())),
             h($error.getCode())
         );
-        $toggle = this.renderToggle($errorMessage, $id, 'trace');
-        $codeToggle = this.renderToggle('Code', $id, 'code');
+        $toggle = this.renderToggle($errorMessage, $id, "trace");
+        $codeToggle = this.renderToggle("Code", $id, "code");
 
         $excerpt = [];
         if ($file && $line) {
@@ -82,12 +82,12 @@ HTML;
      */
     private function renderToggle(string $text, string $id, string $suffix): string
     {
-        $selector = $id . '-' . $suffix;
+        $selector = $id . "-" . $suffix;
 
         // phpcs:disable
         return <<<HTML
 <a href="javascript:void(0);"
-  onclick="document.getElementById('{$selector}').style.display = (document.getElementById('{$selector}').style.display == 'none' ? '' : 'none')"
+  onclick="document.getElementById("{$selector}").style.display = (document.getElementById("{$selector}").style.display == "none" ? "" : "none")"
 >
     {$text}
 </a>

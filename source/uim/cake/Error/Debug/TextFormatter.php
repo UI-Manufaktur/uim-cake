@@ -33,9 +33,9 @@ class TextFormatter : FormatterInterface
 ###########################
 
 TEXT;
-        $lineInfo = '';
-        if (isset($location['file'], $location['file'])) {
-            $lineInfo = sprintf('%s (line %s)', $location['file'], $location['line']);
+        $lineInfo = "";
+        if (isset($location["file"], $location["file"])) {
+            $lineInfo = sprintf("%s (line %s)", $location["file"], $location["line"]);
         }
 
         return sprintf($template, $lineInfo, $contents);
@@ -65,12 +65,12 @@ TEXT;
     {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {
-                case 'bool':
-                    return $var.getValue() ? 'true' : 'false';
-                case 'null':
-                    return 'null';
-                case 'string':
-                    return "'" . (string)$var.getValue() . "'";
+                case "bool":
+                    return $var.getValue() ? "true" : "false";
+                case "null":
+                    return "null";
+                case "string":
+                    return """ . (string)$var.getValue() . """;
                 default:
                     return "({$var.getType()}) {$var.getValue()}";
             }
@@ -84,7 +84,7 @@ TEXT;
         if ($var instanceof SpecialNode) {
             return $var.getValue();
         }
-        throw new RuntimeException('Unknown node received ' . get_class($var));
+        throw new RuntimeException("Unknown node received " . get_class($var));
     }
 
     /**
@@ -96,20 +96,20 @@ TEXT;
      */
     protected function exportArray(ArrayNode $var, int $indent): string
     {
-        $out = '[';
-        $break = "\n" . str_repeat('  ', $indent);
-        $end = "\n" . str_repeat('  ', $indent - 1);
+        $out = "[";
+        $break = "\n" . str_repeat("  ", $indent);
+        $end = "\n" . str_repeat("  ", $indent - 1);
         $vars = [];
 
         foreach ($var.getChildren() as $item) {
             $val = $item.getValue();
-            $vars[] = $break . this.export($item.getKey(), $indent) . ': ' . this.export($val, $indent);
+            $vars[] = $break . this.export($item.getKey(), $indent) . ": " . this.export($val, $indent);
         }
         if (count($vars)) {
-            return $out . implode(',', $vars) . $end . ']';
+            return $out . implode(",", $vars) . $end . "]";
         }
 
-        return $out . ']';
+        return $out . "]";
     }
 
     /**
@@ -122,7 +122,7 @@ TEXT;
      */
     protected function exportObject($var, int $indent): string
     {
-        $out = '';
+        $out = "";
         $props = [];
 
         if ($var instanceof ReferenceNode) {
@@ -130,13 +130,13 @@ TEXT;
         }
 
         $out .= "object({$var.getValue()}) id:{$var.getId()} {";
-        $break = "\n" . str_repeat('  ', $indent);
-        $end = "\n" . str_repeat('  ', $indent - 1) . '}';
+        $break = "\n" . str_repeat("  ", $indent);
+        $end = "\n" . str_repeat("  ", $indent - 1) . "}";
 
         foreach ($var.getChildren() as $property) {
             $visibility = $property.getVisibility();
             $name = $property.getName();
-            if ($visibility && $visibility != 'public') {
+            if ($visibility && $visibility != "public") {
                 $props[] = "[{$visibility}] {$name}: " . this.export($property.getValue(), $indent);
             } else {
                 $props[] = "{$name}: " . this.export($property.getValue(), $indent);
@@ -146,6 +146,6 @@ TEXT;
             return $out . $break . implode($break, $props) . $end;
         }
 
-        return $out . '}';
+        return $out . "}";
     }
 }

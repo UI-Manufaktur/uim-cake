@@ -16,7 +16,7 @@ use Throwable;
  *
  * Useful in CI or plain text environments.
  *
- * @todo 5.0 Implement \Cake\Error\ExceptionRendererInterface. This implementation can't implement
+ * @todo 5.0 Implement \Cake\Error\ExceptionRendererInterface. This implementation can"t implement
  *  the concrete interface because the return types are not compatible.
  */
 class TextExceptionRenderer

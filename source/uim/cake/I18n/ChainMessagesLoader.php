@@ -46,7 +46,7 @@ class ChainMessagesLoader
         foreach (_loaders as $k: $loader) {
             if (!is_callable($loader)) {
                 throw new RuntimeException(sprintf(
-                    'Loader "%s" in the chain is not a valid callable',
+                    "Loader "%s" in the chain is not a valid callable",
                     $k
                 ));
             }
@@ -58,7 +58,7 @@ class ChainMessagesLoader
 
             if (!($package instanceof Package)) {
                 throw new RuntimeException(sprintf(
-                    'Loader "%s" in the chain did not return a valid Package object',
+                    "Loader "%s" in the chain did not return a valid Package object",
                     $k
                 ));
             }
