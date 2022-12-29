@@ -50,7 +50,7 @@ interface StatementInterface
      * @param string|int|null $type name of configured Type class, or PDO type constant.
      * @return void
      */
-    function bindValue($column, $value, $type = "string"): void;
+    void bindValue($column, $value, $type = "string"): void;
 
     /**
      * Closes a cursor in the database, freeing up any resources and memory
@@ -59,7 +59,7 @@ interface StatementInterface
      *
      * @return void
      */
-    function closeCursor(): void;
+    void closeCursor(): void;
 
     /**
      * Returns the number of columns this statement"s results will contain
@@ -175,7 +175,7 @@ interface StatementInterface
      * @param array $types list of types to be used, keys should match those in $params
      * @return void
      */
-    function bind(array $params, array $types): void;
+    void bind(array $params, array $types): void;
 
     /**
      * Returns the latest primary inserted using this statement

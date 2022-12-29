@@ -88,7 +88,7 @@ class UnaryExpression : IExpression
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         if (_value instanceof IExpression) {
             _value = clone _value;
         }

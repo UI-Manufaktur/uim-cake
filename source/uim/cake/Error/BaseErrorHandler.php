@@ -78,7 +78,7 @@ abstract class BaseErrorHandler
      *
      * @return void
      */
-    function register(): void
+    void register(): void
     {
         deprecationWarning(
             "Use of `BaseErrorHandler` and subclasses are deprecated. " .
@@ -264,7 +264,7 @@ abstract class BaseErrorHandler
      * @param int $additionalKb Number in kilobytes
      * @return void
      */
-    function increaseMemoryLimit(int $additionalKb): void
+    void increaseMemoryLimit(int $additionalKb): void
     {
         $limit = ini_get("memory_limit");
         if ($limit == false || $limit == "" || $limit == "-1") {

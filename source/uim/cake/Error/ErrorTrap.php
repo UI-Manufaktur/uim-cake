@@ -81,7 +81,7 @@ class ErrorTrap
      *
      * @return void
      */
-    function register(): void
+    void register(): void
     {
         $level = _config["errorLevel"] ?? -1;
         error_reporting($level);

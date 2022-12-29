@@ -150,7 +150,7 @@ class CaseExpression : IExpression
      * @param string|null $type Type of value
      * @return void
      */
-    function elseValue($value = null, ?string $type = null): void
+    void elseValue($value = null, ?string $type = null): void
     {
         if (is_array($value)) {
             end($value);

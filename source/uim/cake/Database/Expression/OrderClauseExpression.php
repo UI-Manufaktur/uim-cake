@@ -60,7 +60,7 @@ class OrderClauseExpression : IExpression, FieldInterface
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         if (_field instanceof IExpression) {
             _field = clone _field;
         }

@@ -281,7 +281,7 @@ class WindowExpression : IExpression, WindowInterface
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         this.name = clone this.name;
         foreach (this.partitions as $i: $partition) {
             this.partitions[$i] = clone $partition;

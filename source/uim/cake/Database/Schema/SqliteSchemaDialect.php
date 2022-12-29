@@ -259,7 +259,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @param array $row The row data from `describeIndexSql`.
      * @return void
      */
-    function convertIndexDescription(TableSchema $schema, array $row): void
+    void convertIndexDescription(TableSchema $schema, array $row): void
     {
         $sql = sprintf(
             "PRAGMA index_info(%s)",

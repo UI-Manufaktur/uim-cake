@@ -44,7 +44,7 @@ class IdentifierExpression : IExpression
      * @param string $identifier The identifier
      * @return void
      */
-    function setIdentifier(string $identifier): void
+    void setIdentifier(string $identifier): void
     {
         _identifier = $identifier;
     }
@@ -65,7 +65,7 @@ class IdentifierExpression : IExpression
      * @param string $collation Identifier collation
      * @return void
      */
-    function setCollation(string $collation): void
+    void setCollation(string $collation): void
     {
         this.collation = $collation;
     }

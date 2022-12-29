@@ -19,7 +19,7 @@ trait FieldTrait
      * @param uim.cake.Database\IExpression|array|string $field The field to compare with.
      * @return void
      */
-    function setField($field): void
+    void setField($field): void
     {
         _field = $field;
     }

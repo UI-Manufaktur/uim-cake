@@ -319,7 +319,7 @@ class WhenThenExpression : IExpression
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         if (this.when instanceof IExpression) {
             this.when = clone this.when;
         }

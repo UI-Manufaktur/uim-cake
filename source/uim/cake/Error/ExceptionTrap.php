@@ -176,7 +176,7 @@ class ExceptionTrap
      *
      * @return void
      */
-    function register(): void
+    void register(): void
     {
         set_exception_handler([this, "handleException"]);
         register_shutdown_function([this, "handleShutdown"]);
@@ -191,7 +191,7 @@ class ExceptionTrap
      *
      * @return void
      */
-    function unregister(): void
+    void unregister(): void
     {
         if (static::$registeredTrap == this) {
             this.disabled = true;
@@ -252,7 +252,7 @@ class ExceptionTrap
      *
      * @return void
      */
-    function handleShutdown(): void
+    void handleShutdown(): void
     {
         if (this.disabled) {
             return;
@@ -288,7 +288,7 @@ class ExceptionTrap
      * @param int $additionalKb Number in kilobytes
      * @return void
      */
-    function increaseMemoryLimit(int $additionalKb): void
+    void increaseMemoryLimit(int $additionalKb): void
     {
         $limit = ini_get("memory_limit");
         if ($limit == false || $limit == "" || $limit == "-1") {
@@ -320,7 +320,7 @@ class ExceptionTrap
      * @param int $line Line that triggered the error
      * @return void
      */
-    function handleFatalError(int $code, string $description, string $file, int $line): void
+    void handleFatalError(int $code, string $description, string $file, int $line): void
     {
         this.handleException(new FatalErrorException("Fatal Error: " . $description, 500, $file, $line));
     }
@@ -338,7 +338,7 @@ class ExceptionTrap
      * @param \Psr\Http\messages.IServerRequest|null $request The optional request
      * @return void
      */
-    function logException(Throwable $exception, ?IServerRequest $request = null): void
+    void logException(Throwable $exception, ?IServerRequest $request = null): void
     {
         $shouldLog = _config["log"];
         if ($shouldLog) {
@@ -374,7 +374,7 @@ class ExceptionTrap
      * @param \Throwable $exception Exception to log
      * @return void
      */
-    function logInternalError(Throwable $exception): void
+    void logInternalError(Throwable $exception): void
     {
         $message = sprintf(
             "[%s] %s (%s:%s)", // Keeping same message format

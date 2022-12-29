@@ -259,7 +259,7 @@ class BufferedStatement : Iterator, StatementInterface
      *
      * @return void
      */
-    function rewind(): void
+    void rewind(): void
     {
         this.index = 0;
     }
@@ -286,7 +286,7 @@ class BufferedStatement : Iterator, StatementInterface
      *
      * @return void
      */
-    function next(): void
+    void next(): void
     {
         this.index += 1;
     }

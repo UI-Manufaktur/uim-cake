@@ -2308,7 +2308,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         _iterator = null;
         if (_valueBinder != null) {
             _valueBinder = clone _valueBinder;

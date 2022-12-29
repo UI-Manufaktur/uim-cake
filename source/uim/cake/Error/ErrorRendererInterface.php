@@ -31,5 +31,5 @@ interface ErrorRendererInterface
      * @param string $out The content to output.
      * @return void
      */
-    function write(string $out): void;
+    void write(string $out): void;
 }

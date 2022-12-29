@@ -205,7 +205,7 @@ class CommonTableExpression : IExpression
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         this.name = clone this.name;
         if (this.query) {
             this.query = clone this.query;

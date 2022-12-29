@@ -91,7 +91,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @param string|int|null $type name of configured Type class
      * @return void
      */
-    function bindValue($column, $value, $type = "string"): void
+    void bindValue($column, $value, $type = "string"): void
     {
         _statement.bindValue($column, $value, $type);
     }
@@ -103,7 +103,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      *
      * @return void
      */
-    function closeCursor(): void
+    void closeCursor(): void
     {
         _statement.closeCursor();
     }
@@ -290,7 +290,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @param array $types list of types to be used, keys should match those in $params
      * @return void
      */
-    function bind(array $params, array $types): void
+    void bind(array $params, array $types): void
     {
         if (empty($params)) {
             return;

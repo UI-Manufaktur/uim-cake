@@ -250,7 +250,7 @@ abstract class SchemaDialect
      * @param array $row The row of data.
      * @return void
      */
-    function convertOptionsDescription(TableSchema $schema, array $row): void
+    void convertOptionsDescription(TableSchema $schema, array $row): void
     {
     }
 

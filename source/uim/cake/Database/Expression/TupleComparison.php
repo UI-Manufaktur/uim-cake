@@ -52,7 +52,7 @@ class TupleComparison : ComparisonExpression
      * @param mixed $value The value to compare
      * @return void
      */
-    function setValue($value): void
+    void setValue($value): void
     {
         if (this.isMulti()) {
             if (is_array($value) && !is_array(current($value))) {

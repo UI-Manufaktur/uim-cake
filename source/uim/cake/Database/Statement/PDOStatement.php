@@ -70,7 +70,7 @@ class PDOStatement : StatementDecorator
      * @param string|int|null $type PDO type or name of configured Type class
      * @return void
      */
-    function bindValue($column, $value, $type = "string"): void
+    void bindValue($column, $value, $type = "string"): void
     {
         if ($type == null) {
             $type = "string";

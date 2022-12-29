@@ -49,12 +49,12 @@ interface ILocator
      * @param string $alias The alias to remove.
      * @return void
      */
-    function remove(string $alias): void;
+    void remove(string $alias): void;
 
     /**
      * Clears the registry of configuration and instances.
      *
      * @return void
      */
-    function clear(): void;
+    void clear(): void;
 }

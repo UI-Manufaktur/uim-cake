@@ -74,7 +74,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param mixed $value The value to compare
      * @return void
      */
-    function setValue($value): void
+    void setValue($value): void
     {
         $value = _castToExpression($value, _type);
 
@@ -102,7 +102,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param string $operator The operator to be used for the comparison.
      * @return void
      */
-    function setOperator(string $operator): void
+    void setOperator(string $operator): void
     {
         _operator = $operator;
     }
@@ -167,7 +167,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         foreach (["_value", "_field"] as $prop) {
             if (this.{$prop} instanceof IExpression) {
                 this.{$prop} = clone this.{$prop};

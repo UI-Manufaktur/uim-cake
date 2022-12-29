@@ -127,7 +127,7 @@ trait ModelAwareTrait
      * @param uim.cake.Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      * @return void
      */
-    function modelFactory(string $type, $factory): void
+    void modelFactory(string $type, $factory): void
     {
         if (!$factory instanceof ILocator&& !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(

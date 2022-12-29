@@ -556,7 +556,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         if (this.whenBuffer != null) {
             throw new LogicException("Case expression has incomplete when clause. Missing `then()` after `when()`.");
         }

@@ -34,7 +34,7 @@ class ValueBinder
      * to database
      * @return void
      */
-    function bind($param, $value, $type = null): void
+    void bind($param, $value, $type = null): void
     {
         _bindings[$param] = compact("value", "type") + [
             "placeholder": is_int($param) ? $param : substr($param, 1),
@@ -100,7 +100,7 @@ class ValueBinder
      *
      * @return void
      */
-    function reset(): void
+    void reset(): void
     {
         _bindings = [];
         _bindingsCount = 0;
@@ -111,7 +111,7 @@ class ValueBinder
      *
      * @return void
      */
-    function resetCount(): void
+    void resetCount(): void
     {
         _bindingsCount = 0;
     }
@@ -122,7 +122,7 @@ class ValueBinder
      * @param uim.cake.Database\StatementInterface $statement The statement to add parameters to.
      * @return void
      */
-    function attachTo(StatementInterface $statement): void
+    void attachTo(StatementInterface $statement): void
     {
         $bindings = this.bindings();
         if (empty($bindings)) {

@@ -112,7 +112,7 @@ class BetweenExpression : IExpression, FieldInterface
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         foreach (["_field", "_from", "_to"] as $part) {
             if (this.{$part} instanceof IExpression) {
                 this.{$part} = clone this.{$part};

@@ -197,7 +197,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         parent::__clone();
         if (this.filter != null) {
             this.filter = clone this.filter;

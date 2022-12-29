@@ -250,7 +250,7 @@ interface EntityInterface : ArrayAccess, JsonSerializable
      *
      * @return void
      */
-    function clean(): void;
+    void clean(): void;
 
     /**
      * Set the status of this entity.

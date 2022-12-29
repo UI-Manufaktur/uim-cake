@@ -131,7 +131,7 @@ class Postgres : Driver
      * @param string $encoding The encoding to use.
      * @return void
      */
-    function setEncoding(string $encoding): void
+    void setEncoding(string $encoding): void
     {
         this.connect();
         _connection.exec("SET NAMES " . _connection.quote($encoding));
@@ -144,7 +144,7 @@ class Postgres : Driver
      * @param string $schema The schema names to set `search_path` to.
      * @return void
      */
-    function setSchema(string $schema): void
+    void setSchema(string $schema): void
     {
         this.connect();
         _connection.exec("SET search_path TO " . _connection.quote($schema));

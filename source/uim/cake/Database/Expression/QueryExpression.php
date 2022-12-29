@@ -822,7 +822,7 @@ class QueryExpression : IExpression, Countable
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         foreach (_conditions as $i: $condition) {
             if ($condition instanceof IExpression) {
                 _conditions[$i] = clone $condition;

@@ -120,7 +120,7 @@ trait EntityTrait
      * @param mixed $value The value to set to the field
      * @return void
      */
-    function __set(string $field, $value): void
+    void __set(string $field, $value): void
     {
         this.set($field, $value);
     }
@@ -144,7 +144,7 @@ trait EntityTrait
      * @param string $field The field to unset
      * @return void
      */
-    function __unset(string $field): void
+    void __unset(string $field): void
     {
         this.unset($field);
     }
@@ -590,7 +590,7 @@ trait EntityTrait
      * @param mixed $value The value to set.
      * @return void
      */
-    function offsetSet($offset, $value): void
+    void offsetSet($offset, $value): void
     {
         this.set($offset, $value);
     }
@@ -601,7 +601,7 @@ trait EntityTrait
      * @param string $offset The offset to remove.
      * @return void
      */
-    function offsetUnset($offset): void
+    void offsetUnset($offset): void
     {
         this.unset($offset);
     }
@@ -766,7 +766,7 @@ trait EntityTrait
      *
      * @return void
      */
-    function clean(): void
+    void clean(): void
     {
         _dirty = [];
         _errors = [];

@@ -43,7 +43,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @param bool $includeTrace Should the log message include a stacktrace
      * @return void
      */
-    function logError(PhpError $error, ?IServerRequest $request = null, bool $includeTrace = false): void
+    void logError(PhpError $error, ?IServerRequest $request = null, bool $includeTrace = false): void
     {
         $message = $error.getMessage();
         if ($request) {
@@ -70,7 +70,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @param bool $includeTrace Whether or not a stack trace should be logged.
      * @return void
      */
-    function logException(
+    void logException(
         Throwable $exception,
         ?IServerRequest $request = null,
         bool $includeTrace = false
