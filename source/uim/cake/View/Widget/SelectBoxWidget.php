@@ -106,7 +106,7 @@ class SelectBoxWidget : BasicWidget
      * nest complex types as required.
      *
      * @param array<string, mixed> $data Data to render with.
-     * @param \Cake\View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\ContextInterface $context The current form context.
      * @return string A generated select box.
      * @throws \RuntimeException when the name attribute is empty.
      */

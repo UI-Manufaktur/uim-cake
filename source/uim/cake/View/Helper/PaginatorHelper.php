@@ -91,7 +91,7 @@ class PaginatorHelper : Helper
     /**
      * Constructor. Overridden to merge passed args with URL options.
      *
-     * @param \Cake\View\View $view The View this helper is being attached to.
+     * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> $config Configuration settings for the helper.
      */
     public this(View $view, array $config = []) {
@@ -841,7 +841,7 @@ class PaginatorHelper : Helper
     /**
      * Formats a number for the paginator number output.
      *
-     * @param \Cake\View\StringTemplate $templater StringTemplate instance.
+     * @param uim.cake.View\StringTemplate $templater StringTemplate instance.
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return string
      */
@@ -858,7 +858,7 @@ class PaginatorHelper : Helper
     /**
      * Generates the numbers for the paginator numbers() method.
      *
-     * @param \Cake\View\StringTemplate $templater StringTemplate instance.
+     * @param uim.cake.View\StringTemplate $templater StringTemplate instance.
      * @param array<string, mixed> $params Params from the numbers() method.
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return string Markup output.
@@ -967,7 +967,7 @@ class PaginatorHelper : Helper
     /**
      * Generates the numbers for the paginator numbers() method.
      *
-     * @param \Cake\View\StringTemplate $templater StringTemplate instance.
+     * @param uim.cake.View\StringTemplate $templater StringTemplate instance.
      * @param array<string, mixed> $params Params from the numbers() method.
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return string Markup output.

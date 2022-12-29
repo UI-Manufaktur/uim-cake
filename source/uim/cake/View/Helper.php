@@ -69,7 +69,7 @@ class Helper : IEventListener
     /**
      * Default Constructor
      *
-     * @param \Cake\View\View $view The View this helper is being attached to.
+     * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> $config Configuration settings for the helper.
      */
     public this(View $view, array $config = []) {

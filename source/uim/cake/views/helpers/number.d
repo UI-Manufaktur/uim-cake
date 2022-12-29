@@ -37,7 +37,7 @@ class NumberHelper : Helper
      * - `engine` Class name to use to replace Cake\I18n\Number functionality
      *            The class needs to be placed in the `Utility` directory.
      *
-     * @param \Cake\View\View $view The View this helper is being attached to.
+     * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> myConfig Configuration settings for the helper
      * @throws \Cake\Core\Exception\CakeException When the engine class could not be found.
      */

@@ -248,7 +248,7 @@ class FormHelper : Helper
     /**
      * Construct the widgets and binds the default context providers
      *
-     * @param \Cake\View\View $view The View this helper is being attached to.
+     * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> $config Configuration settings for the helper.
      */
     public this(View $view, array $config = []) {
@@ -294,7 +294,7 @@ class FormHelper : Helper
     /**
      * Set the widget locator the helper will use.
      *
-     * @param \Cake\View\Widget\WidgetLocator $instance The locator instance to set.
+     * @param uim.cake.View\Widget\WidgetLocator $instance The locator instance to set.
      * @return this
      * @since 3.6.0
      */
@@ -307,7 +307,7 @@ class FormHelper : Helper
     /**
      * Set the context factory the helper will use.
      *
-     * @param \Cake\View\Form\ContextFactory|null $instance The context factory instance to set.
+     * @param uim.cake.View\Form\ContextFactory|null $instance The context factory instance to set.
      * @param array $contexts An array of context providers.
      * @return \Cake\View\Form\ContextFactory
      */
@@ -471,7 +471,7 @@ class FormHelper : Helper
     /**
      * Create the URL for a form based on the options.
      *
-     * @param \Cake\View\Form\ContextInterface $context The context object to use.
+     * @param uim.cake.View\Form\ContextInterface $context The context object to use.
      * @param array<string, mixed> $options An array of options from create()
      * @return array|string The action attribute for the form.
      */
@@ -2395,7 +2395,7 @@ class FormHelper : Helper
      *
      * If there is no active form null will be returned.
      *
-     * @param \Cake\View\Form\ContextInterface|null $context Either the new context when setting, or null to get.
+     * @param uim.cake.View\Form\ContextInterface|null $context Either the new context when setting, or null to get.
      * @return \Cake\View\Form\ContextInterface The context for the form.
      */
     function context(?ContextInterface $context = null): ContextInterface
@@ -2434,7 +2434,7 @@ class FormHelper : Helper
      * Allows you to add or replace widget instances with custom code.
      *
      * @param string $name The name of the widget. e.g. "text".
-     * @param \Cake\View\Widget\WidgetInterface|array $spec Either a string class
+     * @param uim.cake.View\Widget\WidgetInterface|array $spec Either a string class
      *   name or an object implementing the WidgetInterface.
      * @return void
      */

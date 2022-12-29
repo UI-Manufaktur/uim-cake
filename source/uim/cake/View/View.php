@@ -318,9 +318,9 @@ class View : EventDispatcherInterface
     /**
      * Constructor
      *
-     * @param \Cake\Http\ServerRequest|null $request Request instance.
-     * @param \Cake\Http\Response|null $response Response instance.
-     * @param \Cake\Event\EventManager|null $eventManager Event manager instance.
+     * @param uim.cake.Http\ServerRequest|null $request Request instance.
+     * @param uim.cake.Http\Response|null $response Response instance.
+     * @param uim.cake.Event\EventManager|null $eventManager Event manager instance.
      * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
      *   options which get set as class properties.
      */
@@ -415,7 +415,7 @@ class View : EventDispatcherInterface
      * - this.request - To the $request parameter
      * - this.plugin - To the value returned by $request.getParam("plugin")
      *
-     * @param \Cake\Http\ServerRequest $request Request instance.
+     * @param uim.cake.Http\ServerRequest $request Request instance.
      * @return this
      */
     function setRequest(ServerRequest $request) {
@@ -438,7 +438,7 @@ class View : EventDispatcherInterface
     /**
      * Sets the response instance.
      *
-     * @param \Cake\Http\Response $response Response instance.
+     * @param uim.cake.Http\Response $response Response instance.
      * @return this
      */
     function setResponse(Response $response) {

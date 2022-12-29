@@ -22,7 +22,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
     /**
      * Constructor
      *
-     * @param \Cake\View\View $view View object.
+     * @param uim.cake.View\View $view View object.
      */
     this(View $view) {
         _View = $view;

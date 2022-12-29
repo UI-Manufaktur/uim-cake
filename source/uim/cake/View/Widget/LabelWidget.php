@@ -42,7 +42,7 @@ class LabelWidget : WidgetInterface
      * - `label` Used to generate the label for a radio button.
      *   Can use the following variables `attrs`, `text` and `input`.
      *
-     * @param \Cake\View\StringTemplate $templates Templates list.
+     * @param uim.cake.View\StringTemplate $templates Templates list.
      */
     public this(StringTemplate $templates) {
         _templates = $templates;
@@ -60,7 +60,7 @@ class LabelWidget : WidgetInterface
      * All other attributes will be converted into HTML attributes.
      *
      * @param array<string, mixed> $data Data array.
-     * @param \Cake\View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\ContextInterface $context The current form context.
      * @return string
      */
     function render(array $data, ContextInterface $context): string

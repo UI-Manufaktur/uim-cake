@@ -95,7 +95,7 @@ class DateTimeWidget : BasicWidget
      * All other keys will be converted into HTML attributes.
      *
      * @param array<string, mixed> $data The data to build a file input with.
-     * @param \Cake\View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\ContextInterface $context The current form context.
      * @return string HTML elements.
      */
     function render(array $data, ContextInterface $context): string
@@ -129,7 +129,7 @@ class DateTimeWidget : BasicWidget
      * Set value for "step" attribute if applicable.
      *
      * @param array<string, mixed> $data Data array
-     * @param \Cake\View\Form\ContextInterface $context Context instance.
+     * @param uim.cake.View\Form\ContextInterface $context Context instance.
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */

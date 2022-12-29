@@ -577,7 +577,7 @@ class EntityContext : IContext {
     /**
      * Get the table instance from a property path
      *
-     * @param \Cake\Datasource\IEntity|array<string>|string parts Each one of the parts in a path for a field name
+     * @param uim.cake.Datasource\IEntity|array<string>|string parts Each one of the parts in a path for a field name
      * @param bool $fallback Whether to fallback to the last found table
      *  when a nonexistent field/property is being encountered.
      * @return \Cake\ORM\Table|null Table instance or null

@@ -31,7 +31,7 @@ class ButtonWidget : WidgetInterface
     /**
      * Constructor.
      *
-     * @param \Cake\View\StringTemplate $templates Templates list.
+     * @param uim.cake.View\StringTemplate $templates Templates list.
      */
     public this(StringTemplate $templates) {
         _templates = $templates;
@@ -51,7 +51,7 @@ class ButtonWidget : WidgetInterface
      * Any other keys provided in $data will be converted into HTML attributes.
      *
      * @param array<string, mixed> $data The data to build a button with.
-     * @param \Cake\View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\ContextInterface $context The current form context.
      * @return string
      */
     function render(array $data, ContextInterface $context): string

@@ -236,9 +236,9 @@ class View : IEventDispatcher {
     /**
      * Constructor
      *
-     * @param \Cake\Http\ServerRequest|null myRequest Request instance.
-     * @param \Cake\Http\Response|null $response Response instance.
-     * @param \Cake\Event\EventManager|null myEventManager Event manager instance.
+     * @param uim.cake.Http\ServerRequest|null myRequest Request instance.
+     * @param uim.cake.Http\Response|null $response Response instance.
+     * @param uim.cake.Event\EventManager|null myEventManager Event manager instance.
      * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
      *   options which get set as class properties.
      */
@@ -302,7 +302,7 @@ class View : IEventDispatcher {
      * - this.request - To the myRequest parameter
      * - this.plugin - To the value returned by myRequest.getParam("plugin")
      *
-     * @param \Cake\Http\ServerRequest myRequest Request instance.
+     * @param uim.cake.Http\ServerRequest myRequest Request instance.
      * @return this
      */
     auto setRequest(ServerRequest myRequest) {

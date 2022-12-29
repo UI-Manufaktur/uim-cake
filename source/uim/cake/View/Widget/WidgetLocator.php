@@ -57,8 +57,8 @@ class WidgetLocator
     /**
      * Constructor
      *
-     * @param \Cake\View\StringTemplate $templates Templates instance to use.
-     * @param \Cake\View\View $view The view instance to set as a widget.
+     * @param uim.cake.View\StringTemplate $templates Templates instance to use.
+     * @param uim.cake.View\View $view The view instance to set as a widget.
      * @param array $widgets See add() method for more information.
      */
     public this(StringTemplate $templates, View $view, array $widgets = []) {

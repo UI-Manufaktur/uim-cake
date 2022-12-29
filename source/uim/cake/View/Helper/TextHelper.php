@@ -66,7 +66,7 @@ class TextHelper : Helper
      * - `engine` Class name to use to replace String functionality.
      *            The class needs to be placed in the `Utility` directory.
      *
-     * @param \Cake\View\View $view the view object the helper is attached to.
+     * @param uim.cake.View\View $view the view object the helper is attached to.
      * @param array<string, mixed> $config Settings array Settings array
      * @throws \Cake\Core\Exception\CakeException when the engine class could not be found.
      */

@@ -59,8 +59,8 @@ class MultiCheckboxWidget : BasicWidget
      * - `multicheckboxWrapper` Renders a wrapper around grouped inputs.
      * - `multicheckboxTitle` Renders the title element for grouped inputs.
      *
-     * @param \Cake\View\StringTemplate $templates Templates list.
-     * @param \Cake\View\Widget\LabelWidget $label Label widget instance.
+     * @param uim.cake.View\StringTemplate $templates Templates list.
+     * @param uim.cake.View\Widget\LabelWidget $label Label widget instance.
      */
     public this(StringTemplate $templates, LabelWidget $label) {
         _templates = $templates;
@@ -106,7 +106,7 @@ class MultiCheckboxWidget : BasicWidget
      * If either is not set options will not be generated correctly.
      *
      * @param array<string, mixed> $data The data to generate a checkbox set with.
-     * @param \Cake\View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\ContextInterface $context The current form context.
      * @return string
      */
     function render(array $data, ContextInterface $context): string
@@ -123,7 +123,7 @@ class MultiCheckboxWidget : BasicWidget
      * Render the checkbox inputs.
      *
      * @param array<string, mixed> $data The data array defining the checkboxes.
-     * @param \Cake\View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\ContextInterface $context The current form context.
      * @return array<string> An array of rendered inputs.
      */
     protected function _renderInputs(array $data, ContextInterface $context): array
@@ -181,7 +181,7 @@ class MultiCheckboxWidget : BasicWidget
      * Render a single checkbox & wrapper.
      *
      * @param array<string, mixed> $checkbox An array containing checkbox key/value option pairs
-     * @param \Cake\View\Form\ContextInterface $context Context object.
+     * @param uim.cake.View\Form\ContextInterface $context Context object.
      * @return string
      */
     protected function _renderInput(array $checkbox, ContextInterface $context): string

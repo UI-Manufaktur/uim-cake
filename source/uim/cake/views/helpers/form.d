@@ -223,7 +223,7 @@ class FormHelper : Helper
     /**
      * Construct the widgets and binds the default context providers
      *
-     * @param \Cake\View\View $view The View this helper is being attached to.
+     * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> myConfig Configuration settings for the helper.
      */
     this(View $view, array myConfig = []) {
@@ -269,7 +269,7 @@ class FormHelper : Helper
     /**
      * Set the widget locator the helper will use.
      *
-     * @param \Cake\View\Widget\WidgetLocator $instance The locator instance to set.
+     * @param uim.cake.View\Widget\WidgetLocator $instance The locator instance to set.
      * @return this
 
      */
@@ -282,7 +282,7 @@ class FormHelper : Helper
     /**
      * Set the context factory the helper will use.
      *
-     * @param \Cake\View\Form\ContextFactory|null $instance The context factory instance to set.
+     * @param uim.cake.View\Form\ContextFactory|null $instance The context factory instance to set.
      * @param array $contexts An array of context providers.
      * @return \Cake\View\Form\ContextFactory
      */
@@ -444,7 +444,7 @@ class FormHelper : Helper
     /**
      * Create the URL for a form based on the options.
      *
-     * @param \Cake\View\Form\IContext $context The context object to use.
+     * @param uim.cake.View\Form\IContext $context The context object to use.
      * @param array<string, mixed> myOptions An array of options from create()
      * @return array|string The action attribute for the form.
      */
@@ -2313,7 +2313,7 @@ class FormHelper : Helper
      *
      * If there is no active form null will be returned.
      *
-     * @param \Cake\View\Form\IContext|null $context Either the new context when setting, or null to get.
+     * @param uim.cake.View\Form\IContext|null $context Either the new context when setting, or null to get.
      * @return \Cake\View\Form\IContext The context for the form.
      */
     IContext context(?IContext $context = null) {
@@ -2350,7 +2350,7 @@ class FormHelper : Helper
      * Allows you to add or replace widget instances with custom code.
      *
      * @param string myName The name of the widget. e.g. "text".
-     * @param \Cake\View\Widget\IWidget|array $spec Either a string class
+     * @param uim.cake.View\Widget\IWidget|array $spec Either a string class
      *   name or an object implementing the IWidget.
      * @return void
      */

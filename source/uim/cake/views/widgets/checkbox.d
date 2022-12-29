@@ -38,7 +38,7 @@ class CheckboxWidget : BasicWidget
      * Any other attributes passed in will be treated as HTML attributes.
      *
      * @param array<string, mixed> myData The data to create a checkbox with.
-     * @param \Cake\View\Form\IContext $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string Generated HTML string.
      */
     string render(array myData, IContext $context) {

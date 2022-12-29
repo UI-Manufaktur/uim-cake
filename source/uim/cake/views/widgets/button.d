@@ -22,7 +22,7 @@ class ButtonWidget : IWidget
     /**
      * Constructor.
      *
-     * @param \Cake\View\StringTemplate myTemplates Templates list.
+     * @param uim.cake.View\StringTemplate myTemplates Templates list.
      */
     this(StringTemplate myTemplates) {
         _templates = myTemplates;
@@ -42,7 +42,7 @@ class ButtonWidget : IWidget
      * Any other keys provided in myData will be converted into HTML attributes.
      *
      * @param array<string, mixed> myData The data to build a button with.
-     * @param \Cake\View\Form\IContext $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      */
     string render(array myData, IContext $context) {
         myData += [
