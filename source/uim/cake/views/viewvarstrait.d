@@ -38,7 +38,7 @@ trait ViewVarsTrait {
      *
      * @param string|null $viewClass Optional moduled class name of the View class to instantiate.
      * @return uim.cake.View\View
-     * @throws \Cake\View\Exception\MissingViewException If view class was not found.
+     * @throws uim.cake.View\Exception\MissingViewException If view class was not found.
      */
     function createView(Nullable!string viewClass = null): View
     {

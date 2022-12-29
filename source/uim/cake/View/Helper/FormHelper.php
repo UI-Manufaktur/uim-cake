@@ -660,7 +660,7 @@ class FormHelper : Helper
      * Get form protector instance.
      *
      * @return uim.cake.Form\FormProtector
-     * @throws \Cake\Core\Exception\CakeException
+     * @throws uim.cake.Core\Exception\CakeException
      */
     function getFormProtector(): FormProtector
     {
@@ -1584,7 +1584,7 @@ class FormHelper : Helper
      * @param string $method Method name / input type to make.
      * @param array $params Parameters for the method call
      * @return string Formatted input method.
-     * @throws \Cake\Core\Exception\CakeException When there are no params for the method call.
+     * @throws uim.cake.Core\Exception\CakeException When there are no params for the method call.
      */
     function __call(string $method, array $params) {
         if (empty($params)) {

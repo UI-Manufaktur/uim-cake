@@ -150,7 +150,7 @@ abstract class Cell : EventDispatcherInterface
      * @param string|null $template Custom template name to render. If not provided (null), the last
      * value will be used. This value is automatically set by `CellTrait::cell()`.
      * @return string The rendered cell.
-     * @throws \Cake\View\Exception\MissingCellTemplateException
+     * @throws uim.cake.View\Exception\MissingCellTemplateException
      *   When a MissingTemplateException is raised during rendering.
      * @throws \BadMethodCallException
      */

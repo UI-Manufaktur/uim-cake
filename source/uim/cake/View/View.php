@@ -656,7 +656,7 @@ class View : EventDispatcherInterface
      * - `plugin` - setting to false will force to use the application"s element from plugin templates, when the
      *   plugin has element with same name. Defaults to true
      * @return string Rendered Element
-     * @throws \Cake\View\Exception\MissingElementException When an element is missing and `ignoreMissing`
+     * @throws uim.cake.View\Exception\MissingElementException When an element is missing and `ignoreMissing`
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} $options
      */
@@ -769,7 +769,7 @@ class View : EventDispatcherInterface
      * @param string|null $template Name of template file to use
      * @param string|false|null $layout Layout to use. False to disable.
      * @return string Rendered content.
-     * @throws \Cake\Core\Exception\CakeException If there is an error in the view.
+     * @throws uim.cake.Core\Exception\CakeException If there is an error in the view.
      * @triggers View.beforeRender this, [$templateFileName]
      * @triggers View.afterRender this, [$templateFileName]
      */
@@ -819,7 +819,7 @@ class View : EventDispatcherInterface
      * @param string $content Content to render in a template, wrapped by the surrounding layout.
      * @param string|null $layout Layout name
      * @return string Rendered output.
-     * @throws \Cake\Core\Exception\CakeException if there is an error in the view.
+     * @throws uim.cake.Core\Exception\CakeException if there is an error in the view.
      * @triggers View.beforeLayout this, [$layoutFileName]
      * @triggers View.afterLayout this, [$layoutFileName]
      */
@@ -1315,7 +1315,7 @@ class View : EventDispatcherInterface
      *
      * @param string|null $name Controller action to find template filename for
      * @return string Template filename
-     * @throws \Cake\View\Exception\MissingTemplateException when a template file could not be found.
+     * @throws uim.cake.View\Exception\MissingTemplateException when a template file could not be found.
      * @throws \RuntimeException When template name not provided.
      */
     protected function _getTemplateFileName(?string $name = null): string
@@ -1435,7 +1435,7 @@ class View : EventDispatcherInterface
      *
      * @param string|null $name The name of the layout to find.
      * @return string Filename for layout file.
-     * @throws \Cake\View\Exception\MissingLayoutException when a layout cannot be located
+     * @throws uim.cake.View\Exception\MissingLayoutException when a layout cannot be located
      * @throws \RuntimeException
      */
     protected function _getLayoutFileName(?string $name = null): string

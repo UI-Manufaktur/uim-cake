@@ -80,7 +80,7 @@ abstract class SerializedView : View
      * @param string|null $template The template being rendered.
      * @param string|false|null $layout The layout being rendered.
      * @return string The rendered view.
-     * @throws \Cake\View\Exception\SerializationFailureException When serialization fails.
+     * @throws uim.cake.View\Exception\SerializationFailureException When serialization fails.
      */
     function render(?string $template = null, $layout = null): string
     {

@@ -49,7 +49,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param string $helper The helper name to be loaded
      * @return bool whether the helper could be loaded or not
-     * @throws \Cake\View\Exception\MissingHelperException When a helper could not be found.
+     * @throws uim.cake.View\Exception\MissingHelperException When a helper could not be found.
      *    App helpers are searched, and then plugin helpers.
      */
     function __isset(string $helper): bool
@@ -116,7 +116,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the helper is missing in.
      * @return void
-     * @throws \Cake\View\Exception\MissingHelperException
+     * @throws uim.cake.View\Exception\MissingHelperException
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {

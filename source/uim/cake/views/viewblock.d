@@ -61,7 +61,7 @@ class ViewBlock
      * @param string myMode If ViewBlock::OVERRIDE existing content will be overridden by new content.
      *   If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
-     * @throws \Cake\Core\Exception\CakeException When starting a block twice
+     * @throws uim.cake.Core\Exception\CakeException When starting a block twice
      * @return void
      */
     void start(string myName, string myMode = ViewBlock::OVERRIDE) {
