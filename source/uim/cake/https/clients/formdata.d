@@ -70,7 +70,7 @@ class FormData : Countable {
      * If the myValue is an array, multiple parts will be added.
      * Files will be read from their current position and saved in memory.
      *
-     * @param \Cake\Http\Client\FormDataPart|string myName The name of the part to add,
+     * @param uim.cake.Http\Client\FormDataPart|string myName The name of the part to add,
      *   or the part data object.
      * @param mixed myValue The value for the part.
      * @return this

@@ -107,7 +107,7 @@ class CookieCollection : IteratorAggregate, Countable
      * cookies if a cookie collection is used for cookies across multiple
      * domains. This can impact how get(), has() and remove() behave.
      *
-     * @param \Cake\Http\Cookie\CookieInterface $cookie Cookie instance to add.
+     * @param uim.cake.Http\Cookie\CookieInterface $cookie Cookie instance to add.
      * @return static
      */
     function add(CookieInterface $cookie) {

@@ -126,7 +126,7 @@ class EncryptedCookieMiddleware : IMiddleware
     /**
      * Encode cookies from a response"s CookieCollection.
      *
-     * @param \Cake\Http\Response $response The response to encode cookies in.
+     * @param uim.cake.Http\Response $response The response to encode cookies in.
      * @return \Cake\Http\Response Updated response with encoded cookies.
      */
     protected function encodeCookies(Response $response): Response

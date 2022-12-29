@@ -227,7 +227,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * Validate the request data against the cookie token.
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
-     * @param \Cake\Http\Session $session The session instance.
+     * @param uim.cake.Http\Session $session The session instance.
      * @return void
      * @throws \Cake\Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */

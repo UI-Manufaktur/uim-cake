@@ -86,8 +86,8 @@ class TranslatorRegistry
     /**
      * Constructor.
      *
-     * @param \Cake\I18n\PackageLocator $packages The package locator.
-     * @param \Cake\I18n\FormatterLocator $formatters The formatter locator.
+     * @param uim.cake.I18n\PackageLocator $packages The package locator.
+     * @param uim.cake.I18n\FormatterLocator $formatters The formatter locator.
      * @param string $locale The default locale code to use.
      */
     public this(
@@ -301,7 +301,7 @@ class TranslatorRegistry
      * Set fallback domain for package.
      *
      * @param string $name The name of the package.
-     * @param \Cake\I18n\Package $package Package instance
+     * @param uim.cake.I18n\Package $package Package instance
      * @return \Cake\I18n\Package
      */
     function setFallbackPackage(string $name, Package $package): Package

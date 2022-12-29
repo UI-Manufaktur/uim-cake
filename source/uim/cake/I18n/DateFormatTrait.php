@@ -460,7 +460,7 @@ trait DateFormatTrait
     /**
      * Set the difference formatter instance.
      *
-     * @param \Cake\Chronos\DifferenceFormatterInterface $formatter The formatter instance when setting.
+     * @param uim.cake.Chronos\DifferenceFormatterInterface $formatter The formatter instance when setting.
      * @return void
      */
     public static function setDiffFormatter(DifferenceFormatterInterface $formatter): void
@@ -487,7 +487,7 @@ trait DateFormatTrait
      * 1 hour after
      * 5 months after
      *
-     * @param \Cake\Chronos\ChronosInterface|null $other The datetime to compare with.
+     * @param uim.cake.Chronos\ChronosInterface|null $other The datetime to compare with.
      * @param bool $absolute removes time difference modifiers ago, after, etc
      * @return string
      */

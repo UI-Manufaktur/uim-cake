@@ -1120,7 +1120,7 @@ class Response : IResponse
      *
      * *Warning* This method mutates the response in-place and should be avoided.
      *
-     * @param \Cake\Http\ServerRequest myRequest Request object
+     * @param uim.cake.Http\ServerRequest myRequest Request object
      * @return bool Whether the response was marked as not modified or not.
      */
     bool checkNotModified(ServerRequest myRequest) {
@@ -1168,7 +1168,7 @@ class Response : IResponse
      * $response = $response.withCookie(new Cookie("remember_me", 1));
      * ```
      *
-     * @param \Cake\Http\Cookie\ICookie $cookie cookie object
+     * @param uim.cake.Http\Cookie\ICookie $cookie cookie object
      * @return static
      */
     function withCookie(ICookie $cookie) {
@@ -1188,7 +1188,7 @@ class Response : IResponse
      * $response = $response.withExpiredCookie(new Cookie("remember_me"));
      * ```
      *
-     * @param \Cake\Http\Cookie\ICookie $cookie cookie object
+     * @param uim.cake.Http\Cookie\ICookie $cookie cookie object
      * @return static
      */
     function withExpiredCookie(ICookie $cookie) {
@@ -1245,7 +1245,7 @@ class Response : IResponse
     /**
      * Get a new instance with provided cookie collection.
      *
-     * @param \Cake\Http\Cookie\CookieCollection $cookieCollection Cookie collection to set.
+     * @param uim.cake.Http\Cookie\CookieCollection $cookieCollection Cookie collection to set.
      * @return static
      */
     function withCookieCollection(CookieCollection $cookieCollection) {
@@ -1288,7 +1288,7 @@ class Response : IResponse
      * *Note* The `$allowedDomains`, `$allowedMethods`, `$allowedHeaders` parameters are deprecated.
      * Instead the builder object should be used.
      *
-     * @param \Cake\Http\ServerRequest myRequest Request object
+     * @param uim.cake.Http\ServerRequest myRequest Request object
      * @return \Cake\Http\CorsBuilder A builder object the provides a fluent interface for defining
      *   additional CORS headers.
      */

@@ -32,7 +32,7 @@ class FlashMessage {
     /**
      * Constructor
      *
-     * @param \Cake\Http\Session $session Session instance.
+     * @param uim.cake.Http\Session $session Session instance.
      * @param array<string, mixed> myConfig Config array.
      * @see FlashMessage::set() For list of valid config keys.
      */

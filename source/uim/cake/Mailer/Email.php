@@ -221,7 +221,7 @@ class Email : JsonSerializable, Serializable
      * When setting the transport you can either use the name
      * of a configured transport or supply a constructed transport.
      *
-     * @param \Cake\Mailer\AbstractTransport|string $name Either the name of a configured
+     * @param uim.cake.Mailer\AbstractTransport|string $name Either the name of a configured
      *   transport, or a transport instance.
      * @return this
      * @throws \LogicException When the chosen transport lacks a send method.
@@ -415,7 +415,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Set email renderer.
      *
-     * @param \Cake\Mailer\Renderer $renderer Render instance.
+     * @param uim.cake.Mailer\Renderer $renderer Render instance.
      * @return this
      */
     function setRenderer(Renderer $renderer) {

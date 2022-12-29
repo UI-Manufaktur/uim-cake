@@ -32,7 +32,7 @@ class Mock : IAdapter
      * - `match` An additional closure to match requests with.
      *
      * @param \Psr\Http\Message\RequestInterface myRequest A partial request to use for matching.
-     * @param \Cake\Http\Client\Response $response The response that matches the request.
+     * @param uim.cake.Http\Client\Response $response The response that matches the request.
      * @param array<string, mixed> myOptions See above.
      */
     void addResponse(RequestInterface myRequest, Response $response, array myOptions) {

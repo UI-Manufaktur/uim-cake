@@ -85,7 +85,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * into array for PUT/PATCH/DELETE requests.
      *
      * @param array $parsedBody Parsed body.
-     * @param \Cake\Http\ServerRequest myRequest Request instance.
+     * @param uim.cake.Http\ServerRequest myRequest Request instance.
      * @return \Cake\Http\ServerRequest
      */
     protected static function marshalBodyAndRequestMethod(array $parsedBody, ServerRequest myRequest): ServerRequest
@@ -126,7 +126,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * Process uploaded files and move things onto the parsed body.
      *
      * @param array myfiles Files array for normalization and merging in parsed body.
-     * @param \Cake\Http\ServerRequest myRequest Request instance.
+     * @param uim.cake.Http\ServerRequest myRequest Request instance.
      * @return \Cake\Http\ServerRequest
      */
     protected static function marshalFiles(array myfiles, ServerRequest myRequest): ServerRequest

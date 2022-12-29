@@ -46,7 +46,7 @@ class Mock : AdapterInterface
      * - `match` An additional closure to match requests with.
      *
      * @param \Psr\Http\Message\RequestInterface $request A partial request to use for matching.
-     * @param \Cake\Http\Client\Response $response The response that matches the request.
+     * @param uim.cake.Http\Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
      * @return void
      */

@@ -14,7 +14,7 @@ class Basic
     /**
      * Add Authorization header to the request.
      *
-     * @param \Cake\Http\Client\Request myRequest Request instance.
+     * @param uim.cake.Http\Client\Request myRequest Request instance.
      * @param array $credentials Credentials.
      * @return \Cake\Http\Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
@@ -33,7 +33,7 @@ class Basic
     /**
      * Proxy Authentication
      *
-     * @param \Cake\Http\Client\Request myRequest Request instance.
+     * @param uim.cake.Http\Client\Request myRequest Request instance.
      * @param array $credentials Credentials.
      * @return \Cake\Http\Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt

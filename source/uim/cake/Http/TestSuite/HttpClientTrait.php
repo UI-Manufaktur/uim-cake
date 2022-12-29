@@ -47,7 +47,7 @@ trait HttpClientTrait
      * Add a mock response for a POST request.
      *
      * @param string $url The URL to mock
-     * @param \Cake\Http\Client\Response $response The response for the mock.
+     * @param uim.cake.Http\Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
@@ -60,7 +60,7 @@ trait HttpClientTrait
      * Add a mock response for a GET request.
      *
      * @param string $url The URL to mock
-     * @param \Cake\Http\Client\Response $response The response for the mock.
+     * @param uim.cake.Http\Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
@@ -73,7 +73,7 @@ trait HttpClientTrait
      * Add a mock response for a PATCH request.
      *
      * @param string $url The URL to mock
-     * @param \Cake\Http\Client\Response $response The response for the mock.
+     * @param uim.cake.Http\Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
@@ -86,7 +86,7 @@ trait HttpClientTrait
      * Add a mock response for a PUT request.
      *
      * @param string $url The URL to mock
-     * @param \Cake\Http\Client\Response $response The response for the mock.
+     * @param uim.cake.Http\Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
@@ -99,7 +99,7 @@ trait HttpClientTrait
      * Add a mock response for a DELETE request.
      *
      * @param string $url The URL to mock
-     * @param \Cake\Http\Client\Response $response The response for the mock.
+     * @param uim.cake.Http\Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */

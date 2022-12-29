@@ -222,7 +222,7 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
     /**
      * Set the difference formatter instance.
      *
-     * @param \Cake\Chronos\DifferenceFormatterInterface $formatter The formatter instance when setting.
+     * @param uim.cake.Chronos\DifferenceFormatterInterface $formatter The formatter instance when setting.
      * @return void
      */
     public static function setDiffFormatter(DifferenceFormatterInterface $formatter): void;

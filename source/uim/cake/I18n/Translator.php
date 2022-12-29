@@ -53,9 +53,9 @@ class Translator
      * Constructor
      *
      * @param string $locale The locale being used.
-     * @param \Cake\I18n\Package $package The Package containing keys and translations.
-     * @param \Cake\I18n\FormatterInterface $formatter A message formatter.
-     * @param \Cake\I18n\Translator|null $fallback A fallback translator.
+     * @param uim.cake.I18n\Package $package The Package containing keys and translations.
+     * @param uim.cake.I18n\FormatterInterface $formatter A message formatter.
+     * @param uim.cake.I18n\Translator|null $fallback A fallback translator.
      */
     public this(
         string $locale,

@@ -18,7 +18,7 @@ class Oauth
     /**
      * Add headers for Oauth authorization.
      *
-     * @param \Cake\Http\Client\Request myRequest The request object.
+     * @param uim.cake.Http\Client\Request myRequest The request object.
      * @param array $credentials Authentication credentials.
      * @return \Cake\Http\Client\Request The updated request.
      * @throws \Cake\Core\Exception\CakeException On invalid signature types.
@@ -80,7 +80,7 @@ class Oauth
      * You should only ever use PLAINTEXT when dealing with SSL
      * services.
      *
-     * @param \Cake\Http\Client\Request myRequest The request object.
+     * @param uim.cake.Http\Client\Request myRequest The request object.
      * @param array $credentials Authentication credentials.
      * @return string Authorization header.
      */
@@ -108,7 +108,7 @@ class Oauth
      *
      * This method is suitable for plain HTTP or HTTPS.
      *
-     * @param \Cake\Http\Client\Request myRequest The request object.
+     * @param uim.cake.Http\Client\Request myRequest The request object.
      * @param array $credentials Authentication credentials.
      * @return string
      */
@@ -148,7 +148,7 @@ class Oauth
      *
      * This method is suitable for plain HTTP or HTTPS.
      *
-     * @param \Cake\Http\Client\Request myRequest The request object.
+     * @param uim.cake.Http\Client\Request myRequest The request object.
      * @param array $credentials Authentication credentials.
      * @return string
      * @throws \RuntimeException
@@ -219,7 +219,7 @@ class Oauth
      * - The request URL (without querystring) is normalized.
      * - The HTTP method, URL and request parameters are concatenated and returned.
      *
-     * @param \Cake\Http\Client\Request myRequest The request object.
+     * @param uim.cake.Http\Client\Request myRequest The request object.
      * @param array $oauthValues Oauth values.
      */
     string baseString(Request myRequest, array $oauthValues) {
@@ -257,7 +257,7 @@ class Oauth
      * - URL encode keys + values.
      * - Sort keys & values by byte value.
      *
-     * @param \Cake\Http\Client\Request myRequest The request object.
+     * @param uim.cake.Http\Client\Request myRequest The request object.
      * @param array $oauthValues Oauth values.
      * @return string sorted and normalized values
      */

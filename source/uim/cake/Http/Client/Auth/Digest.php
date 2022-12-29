@@ -35,7 +35,7 @@ class Digest
     /**
      * Constructor
      *
-     * @param \Cake\Http\Client $client Http client object.
+     * @param uim.cake.Http\Client $client Http client object.
      * @param array|null $options Options list.
      */
     public this(Client $client, ?array $options = null) {
@@ -45,7 +45,7 @@ class Digest
     /**
      * Add Authorization header to the request.
      *
-     * @param \Cake\Http\Client\Request $request The request object.
+     * @param uim.cake.Http\Client\Request $request The request object.
      * @param array<string, mixed> $credentials Authentication credentials.
      * @return \Cake\Http\Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
@@ -73,7 +73,7 @@ class Digest
      * another request without authentication to get authentication
      * challenge.
      *
-     * @param \Cake\Http\Client\Request $request The request object.
+     * @param uim.cake.Http\Client\Request $request The request object.
      * @param array $credentials Authentication credentials.
      * @return array modified credentials.
      */
@@ -107,7 +107,7 @@ class Digest
     /**
      * Generate the header Authorization
      *
-     * @param \Cake\Http\Client\Request $request The request object.
+     * @param uim.cake.Http\Client\Request $request The request object.
      * @param array<string, mixed> $credentials Authentication credentials.
      * @return string
      */
