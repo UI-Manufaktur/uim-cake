@@ -49,10 +49,10 @@ class MailContainsAttachment : MailContains
     function toString(): string
     {
         if (this.at) {
-            return sprintf('is an attachment of email #%d', this.at);
+            return sprintf("is an attachment of email #%d", this.at);
         }
 
-        return 'is an attachment of an email';
+        return "is an attachment of an email";
     }
 
     /**
@@ -65,6 +65,6 @@ class MailContainsAttachment : MailContains
     {
         [$expectedFilename] = $other;
 
-        return '\'' . $expectedFilename . '\' ' . this.toString();
+        return "\"" . $expectedFilename . "\" " . this.toString();
     }
 }

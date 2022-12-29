@@ -32,10 +32,10 @@ class TestSuite : BaseTestSuite
      * @param string $directory The directory to add tests from.
      * @return void
      */
-    function addTestDirectory(string $directory = '.'): void
+    function addTestDirectory(string $directory = "."): void
     {
         $fs = new Filesystem();
-        $files = $fs.find($directory, '/\.php$/');
+        $files = $fs.find($directory, "/\.php$/");
         foreach ($files as $file: $fileInfo) {
             this.addTestFile($file);
         }
@@ -47,12 +47,12 @@ class TestSuite : BaseTestSuite
      * @param string $directory The directory subtree to add tests from.
      * @return void
      */
-    function addTestDirectoryRecursive(string $directory = '.'): void
+    function addTestDirectoryRecursive(string $directory = "."): void
     {
         $fs = new Filesystem();
         $files = $fs.findRecursive($directory, function (SplFileInfo $current) {
             $file = $current.getFilename();
-            if ($file[0] == '.' || !preg_match('/\.php$/', $file)) {
+            if ($file[0] == "." || !preg_match("/\.php$/", $file)) {
                 return false;
             }
 

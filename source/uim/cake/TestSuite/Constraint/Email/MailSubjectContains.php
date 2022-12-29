@@ -28,7 +28,7 @@ class MailSubjectContains : MailConstraintBase
     {
         if (!is_string($other)) {
             throw new InvalidArgumentException(
-                'Invalid data type, must be a string.'
+                "Invalid data type, must be a string."
             );
         }
         $messages = this.getMessages();
@@ -60,7 +60,7 @@ class MailSubjectContains : MailConstraintBase
         }
         $result = implode(PHP_EOL, $messageMembers);
 
-        return PHP_EOL . 'was: ' . mb_substr($result, 0, 1000);
+        return PHP_EOL . "was: " . mb_substr($result, 0, 1000);
     }
 
     /**
@@ -71,9 +71,9 @@ class MailSubjectContains : MailConstraintBase
     function toString(): string
     {
         if (this.at) {
-            return sprintf('is in an email subject #%d', this.at) . this.getAssertedMessages();
+            return sprintf("is in an email subject #%d", this.at) . this.getAssertedMessages();
         }
 
-        return 'is in an email subject' . this.getAssertedMessages();
+        return "is in an email subject" . this.getAssertedMessages();
     }
 }

@@ -55,7 +55,7 @@ class CookieEquals : ResponseBase
     {
         $cookie = this.response.getCookie(this.cookieName);
 
-        return $cookie != null && $cookie['value'] == $other;
+        return $cookie != null && $cookie["value"] == $other;
     }
 
     /**
@@ -65,6 +65,6 @@ class CookieEquals : ResponseBase
      */
     function toString(): string
     {
-        return sprintf('is in cookie \'%s\'', this.cookieName);
+        return sprintf("is in cookie \"%s\"", this.cookieName);
     }
 }

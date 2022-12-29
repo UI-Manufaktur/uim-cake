@@ -49,6 +49,6 @@ class FileSentAs : ResponseBase
      */
     function toString(): string
     {
-        return 'file was sent';
+        return "file was sent";
     }
 }

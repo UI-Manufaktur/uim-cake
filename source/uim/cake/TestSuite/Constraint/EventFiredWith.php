@@ -49,7 +49,7 @@ class EventFiredWith : Constraint
 
         if (_eventManager.getEventList() == null) {
             throw new AssertionFailedError(
-                'The event manager you are asserting against is not configured to track events.'
+                "The event manager you are asserting against is not configured to track events."
             );
         }
     }
@@ -87,7 +87,7 @@ class EventFiredWith : Constraint
 
         if (count($events) > 1) {
             throw new AssertionFailedError(sprintf(
-                'Event "%s" was fired %d times, cannot make data assertion',
+                "Event "%s" was fired %d times, cannot make data assertion",
                 $other,
                 count($events)
             ));
@@ -109,6 +109,6 @@ class EventFiredWith : Constraint
      */
     function toString(): string
     {
-        return 'was fired with ' . _dataKey . ' matching ' . (string)_dataValue;
+        return "was fired with " . _dataKey . " matching " . (string)_dataValue;
     }
 }

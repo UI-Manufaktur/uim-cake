@@ -36,7 +36,7 @@ class CookieSet : ResponseBase
     {
         $cookie = this.response.getCookie($other);
 
-        return $cookie != null && $cookie['value'] != '';
+        return $cookie != null && $cookie["value"] != "";
     }
 
     /**
@@ -46,6 +46,6 @@ class CookieSet : ResponseBase
      */
     function toString(): string
     {
-        return 'cookie is set';
+        return "cookie is set";
     }
 }

@@ -39,6 +39,6 @@ class BodyNotRegExp : BodyRegExp
      */
     function toString(): string
     {
-        return 'PCRE pattern not found in response body';
+        return "PCRE pattern not found in response body";
     }
 }

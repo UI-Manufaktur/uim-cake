@@ -39,6 +39,6 @@ class BodyEquals : ResponseBase
      */
     function toString(): string
     {
-        return 'matches response body';
+        return "matches response body";
     }
 }

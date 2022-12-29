@@ -34,6 +34,6 @@ class MailCount : MailConstraintBase
      */
     function toString(): string
     {
-        return 'emails were sent';
+        return "emails were sent";
     }
 }

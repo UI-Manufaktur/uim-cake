@@ -39,7 +39,7 @@ class BodyRegExp : ResponseBase
      */
     function toString(): string
     {
-        return 'PCRE pattern found in response body';
+        return "PCRE pattern found in response body";
     }
 
     /**
@@ -48,6 +48,6 @@ class BodyRegExp : ResponseBase
      */
     function failureDescription($other): string
     {
-        return '`' . $other . '`' . ' ' . this.toString();
+        return "`" . $other . "`" . " " . this.toString();
     }
 }

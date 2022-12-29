@@ -31,7 +31,7 @@ class MailContains : MailConstraintBase
      */
     function matches($other): bool
     {
-        $other = preg_quote($other, '/');
+        $other = preg_quote($other, "/");
         $messages = this.getMessages();
         foreach ($messages as $message) {
             $method = this.getTypeMethod();
@@ -50,7 +50,7 @@ class MailContains : MailConstraintBase
      */
     protected function getTypeMethod(): string
     {
-        return 'getBody' . (this.type ? ucfirst(this.type) : 'String');
+        return "getBody" . (this.type ? ucfirst(this.type) : "String");
     }
 
     /**
@@ -72,7 +72,7 @@ class MailContains : MailConstraintBase
         }
         $result = implode(PHP_EOL, $messageMembers);
 
-        return PHP_EOL . 'was: ' . mb_substr($result, 0, 1000);
+        return PHP_EOL . "was: " . mb_substr($result, 0, 1000);
     }
 
     /**
@@ -83,9 +83,9 @@ class MailContains : MailConstraintBase
     function toString(): string
     {
         if (this.at) {
-            return sprintf('is in email #%d', this.at) . this.getAssertedMessages();
+            return sprintf("is in email #%d", this.at) . this.getAssertedMessages();
         }
 
-        return 'is in an email' . this.getAssertedMessages();
+        return "is in an email" . this.getAssertedMessages();
     }
 }

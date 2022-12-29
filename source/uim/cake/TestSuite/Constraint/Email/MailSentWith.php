@@ -46,13 +46,13 @@ class MailSentWith : MailConstraintBase
     {
         $emails = this.getMessages();
         foreach ($emails as $email) {
-            $value = $email.{'get' . ucfirst(this.method)}();
+            $value = $email.{"get" . ucfirst(this.method)}();
             if ($value == $other) {
                 return true;
             }
             if (
                 !is_array($other)
-                && in_array(this.method, ['to', 'cc', 'bcc', 'from', 'replyTo', 'sender'])
+                && in_array(this.method, ["to", "cc", "bcc", "from", "replyTo", "sender"])
                 && array_key_exists($other, $value)
             ) {
                 return true;
@@ -70,9 +70,9 @@ class MailSentWith : MailConstraintBase
     function toString(): string
     {
         if (this.at) {
-            return sprintf('is in email #%d `%s`', this.at, this.method);
+            return sprintf("is in email #%d `%s`", this.at, this.method);
         }
 
-        return sprintf('is in an email `%s`', this.method);
+        return sprintf("is in an email `%s`", this.method);
     }
 }

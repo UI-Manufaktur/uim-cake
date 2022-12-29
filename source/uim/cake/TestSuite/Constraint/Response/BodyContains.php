@@ -48,9 +48,9 @@ class BodyContains : ResponseBase
      */
     function matches($other): bool
     {
-        $method = 'mb_strpos';
+        $method = "mb_strpos";
         if (this.ignoreCase) {
-            $method = 'mb_stripos';
+            $method = "mb_stripos";
         }
 
         return $method(_getBodyAsString(), $other) != false;
@@ -63,6 +63,6 @@ class BodyContains : ResponseBase
      */
     function toString(): string
     {
-        return 'is in response body';
+        return "is in response body";
     }
 }

@@ -42,7 +42,7 @@ class EventFired : Constraint
 
         if (_eventManager.getEventList() == null) {
             throw new AssertionFailedError(
-                'The event manager you are asserting against is not configured to track events.'
+                "The event manager you are asserting against is not configured to track events."
             );
         }
     }
@@ -67,6 +67,6 @@ class EventFired : Constraint
      */
     function toString(): string
     {
-        return 'was fired';
+        return "was fired";
     }
 }

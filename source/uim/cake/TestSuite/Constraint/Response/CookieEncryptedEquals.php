@@ -66,7 +66,7 @@ class CookieEncryptedEquals : CookieEquals
     {
         $cookie = this.response.getCookie(this.cookieName);
 
-        return $cookie != null && _decrypt($cookie['value'], this.mode) == $other;
+        return $cookie != null && _decrypt($cookie["value"], this.mode) == $other;
     }
 
     /**
@@ -76,7 +76,7 @@ class CookieEncryptedEquals : CookieEquals
      */
     function toString(): string
     {
-        return sprintf('is encrypted in cookie \'%s\'', this.cookieName);
+        return sprintf("is encrypted in cookie \"%s\"", this.cookieName);
     }
 
     /**

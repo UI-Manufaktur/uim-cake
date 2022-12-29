@@ -19,7 +19,7 @@ class MailSentTo : MailSentWith
     /**
      * @var string
      */
-    protected $method = 'to';
+    protected $method = "to";
 
     /**
      * Assertion message string
@@ -29,9 +29,9 @@ class MailSentTo : MailSentWith
     function toString(): string
     {
         if (this.at) {
-            return sprintf('was sent email #%d', this.at);
+            return sprintf("was sent email #%d", this.at);
         }
 
-        return 'was sent an email';
+        return "was sent an email";
     }
 }

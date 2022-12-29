@@ -104,7 +104,7 @@ abstract class TestCase : BaseTestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    public static function assertMatchesRegularExpression(string $pattern, string $string, string $message = ''): void
+    public static function assertMatchesRegularExpression(string $pattern, string $string, string $message = ""): void
     {
         static::assertThat($string, new RegularExpression($pattern), $message);
     }
@@ -121,7 +121,7 @@ abstract class TestCase : BaseTestCase
     public static function assertDoesNotMatchRegularExpression(
         string $pattern,
         string $string,
-        string $message = ''
+        string $message = ""
     ): void {
         static::assertThat(
             $string,
@@ -141,7 +141,7 @@ abstract class TestCase : BaseTestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    public static function assertFileDoesNotExist(string $filename, string $message = ''): void
+    public static function assertFileDoesNotExist(string $filename, string $message = ""): void
     {
         static::assertThat($filename, new LogicalNot(new FileExists()), $message);
     }
@@ -155,7 +155,7 @@ abstract class TestCase : BaseTestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    public static function assertDirectoryDoesNotExist(string $directory, string $message = ''): void
+    public static function assertDirectoryDoesNotExist(string $directory, string $message = ""): void
     {
         static::assertThat($directory, new LogicalNot(new DirectoryExists()), $message);
     }
@@ -167,7 +167,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to display.
      * @return bool
      */
-    function skipIf(bool $shouldSkip, string $message = ''): bool
+    function skipIf(bool $shouldSkip, string $message = ""): bool
     {
         if ($shouldSkip) {
             this.markTestSkipped($message);
@@ -202,8 +202,8 @@ abstract class TestCase : BaseTestCase
      */
     function deprecated(callable $callable): void
     {
-        $duplicate = Configure::read('Error.allowDuplicateDeprecations');
-        Configure::write('Error.allowDuplicateDeprecations', true);
+        $duplicate = Configure::read("Error.allowDuplicateDeprecations");
+        Configure::write("Error.allowDuplicateDeprecations", true);
         /** @var bool $deprecation */
         $deprecation = false;
 
@@ -228,11 +228,11 @@ abstract class TestCase : BaseTestCase
             $callable();
         } finally {
             restore_error_handler();
-            if ($duplicate != Configure::read('Error.allowDuplicateDeprecations')) {
-                Configure::write('Error.allowDuplicateDeprecations', $duplicate);
+            if ($duplicate != Configure::read("Error.allowDuplicateDeprecations")) {
+                Configure::write("Error.allowDuplicateDeprecations", $duplicate);
             }
         }
-        this.assertTrue($deprecation, 'Should have at least one deprecation warning');
+        this.assertTrue($deprecation, "Should have at least one deprecation warning");
     }
 
     /**
@@ -287,10 +287,10 @@ abstract class TestCase : BaseTestCase
 
         if (!empty($fixtureNames) && static::$fixtureManager) {
             if (!this.autoFixtures) {
-                deprecationWarning('`$autoFixtures` is deprecated and will be removed in 5.0.', 0);
+                deprecationWarning("`$autoFixtures` is deprecated and will be removed in 5.0.", 0);
             }
             if (this.dropTables) {
-                deprecationWarning('`$dropTables` is deprecated and will be removed in 5.0.', 0);
+                deprecationWarning("`$dropTables` is deprecated and will be removed in 5.0.", 0);
             }
             // legacy fixtures are managed by FixtureInjector
             return;
@@ -326,7 +326,7 @@ abstract class TestCase : BaseTestCase
     /**
      * Chooses which fixtures to load for a given test
      *
-     * Each parameter is a model name that corresponds to a fixture, i.e. 'Posts', 'Authors', etc.
+     * Each parameter is a model name that corresponds to a fixture, i.e. "Posts", "Authors", etc.
      * Passing no parameters will cause all fixtures on the test case to load.
      *
      * @return void
@@ -337,10 +337,10 @@ abstract class TestCase : BaseTestCase
     function loadFixtures(): void
     {
         if (this.autoFixtures) {
-            throw new RuntimeException('Cannot use `loadFixtures()` with `$autoFixtures` enabled.');
+            throw new RuntimeException("Cannot use `loadFixtures()` with `$autoFixtures` enabled.");
         }
         if (static::$fixtureManager == null) {
-            throw new RuntimeException('No fixture manager to load the test fixture');
+            throw new RuntimeException("No fixture manager to load the test fixture");
         }
 
         $args = func_get_args();
@@ -372,15 +372,15 @@ abstract class TestCase : BaseTestCase
     {
         $appArgs = $appArgs ?? [rtrim(CONFIG, DIRECTORY_SEPARATOR)];
         /** @psalm-var class-string */
-        $className = Configure::read('App.namespace') . '\\Application';
+        $className = Configure::read("App.namespace") . "\\Application";
         try {
             $reflect = new ReflectionClass($className);
             /** @var \Cake\Routing\IRoutingApplication $app */
             $app = $reflect.newInstanceArgs($appArgs);
         } catch (ReflectionException $e) {
-            throw new LogicException(sprintf('Cannot load "%s" to load routes from.', $className), 0, $e);
+            throw new LogicException(sprintf("Cannot load "%s" to load routes from.", $className), 0, $e);
         }
-        $builder = Router::createRouteBuilder('/');
+        $builder = Router::createRouteBuilder("/");
         $app.routes($builder);
     }
 
@@ -398,7 +398,7 @@ abstract class TestCase : BaseTestCase
         /** @var \Cake\Http\BaseApplication $app */
         $app = this.getMockForAbstractClass(
             BaseApplication::class,
-            ['']
+            [""]
         );
 
         foreach ($plugins as $pluginName: $config) {
@@ -409,7 +409,7 @@ abstract class TestCase : BaseTestCase
             }
         }
         $app.pluginBootstrap();
-        $builder = Router::createRouteBuilder('/');
+        $builder = Router::createRouteBuilder("/");
         $app.pluginRoutes($builder);
 
         return $app;
@@ -451,7 +451,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message Assertion failure message
      * @return void
      */
-    function assertEventFired(string $name, ?EventManager $eventManager = null, string $message = ''): void
+    function assertEventFired(string $name, ?EventManager $eventManager = null, string $message = ""): void
     {
         if (!$eventManager) {
             $eventManager = EventManager::instance();
@@ -476,7 +476,7 @@ abstract class TestCase : BaseTestCase
         string $dataKey,
         $dataValue,
         ?EventManager $eventManager = null,
-        string $message = ''
+        string $message = ""
     ): void {
         if (!$eventManager) {
             $eventManager = EventManager::instance();
@@ -493,7 +493,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextNotEquals(string $expected, string $result, string $message = ''): void
+    function assertTextNotEquals(string $expected, string $result, string $message = ""): void
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
@@ -509,7 +509,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextEquals(string $expected, string $result, string $message = ''): void
+    function assertTextEquals(string $expected, string $result, string $message = ""): void
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
@@ -525,7 +525,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextStartsWith(string $prefix, string $string, string $message = ''): void
+    function assertTextStartsWith(string $prefix, string $string, string $message = ""): void
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -541,7 +541,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertTextStartsNotWith(string $prefix, string $string, string $message = ''): void
+    function assertTextStartsNotWith(string $prefix, string $string, string $message = ""): void
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -557,7 +557,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertT:With(string $suffix, string $string, string $message = ''): void
+    function assertT:With(string $suffix, string $string, string $message = ""): void
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -573,7 +573,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message The message to use for failure.
      * @return void
      */
-    function assertT:NotWith(string $suffix, string $string, string $message = ''): void
+    function assertT:NotWith(string $suffix, string $string, string $message = ""): void
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -593,7 +593,7 @@ abstract class TestCase : BaseTestCase
     function assertTextContains(
         string $needle,
         string $haystack,
-        string $message = '',
+        string $message = "",
         bool $ignoreCase = false
     ): void {
         $needle = str_replace(["\r\n", "\r"], "\n", $needle);
@@ -607,7 +607,7 @@ abstract class TestCase : BaseTestCase
     }
 
     /**
-     * Assert that a text doesn't contain another text, ignoring differences in newlines.
+     * Assert that a text doesn"t contain another text, ignoring differences in newlines.
      * Helpful for doing cross platform tests of blocks of text.
      *
      * @param string $needle The string to search for.
@@ -619,7 +619,7 @@ abstract class TestCase : BaseTestCase
     function assertTextNotContains(
         string $needle,
         string $haystack,
-        string $message = '',
+        string $message = "",
         bool $ignoreCase = false
     ): void {
         $needle = str_replace(["\r\n", "\r"], "\n", $needle);
@@ -643,9 +643,9 @@ abstract class TestCase : BaseTestCase
     function assertEqualsSql(
         string $expected,
         string $actual,
-        string $message = ''
+        string $message = ""
     ): void {
-        this.assertEquals($expected, preg_replace('/[`"\[\]]/', '', $actual), $message);
+        this.assertEquals($expected, preg_replace("/[`"\[\]]/", "", $actual), $message);
     }
 
     /**
@@ -661,10 +661,10 @@ abstract class TestCase : BaseTestCase
      */
     function assertRegExpSql(string $pattern, string $actual, bool $optional = false): void
     {
-        $optional = $optional ? '?' : '';
-        $pattern = str_replace('<', '[`"\[]' . $optional, $pattern);
-        $pattern = str_replace('>', '[`"\]]' . $optional, $pattern);
-        this.assertMatchesRegularExpression('#' . $pattern . '#', $actual);
+        $optional = $optional ? "?" : "";
+        $pattern = str_replace("<", "[`"\[]" . $optional, $pattern);
+        $pattern = str_replace(">", "[`"\]]" . $optional, $pattern);
+        this.assertMatchesRegularExpression("#" . $pattern . "#", $actual);
     }
 
     /**
@@ -674,22 +674,22 @@ abstract class TestCase : BaseTestCase
      * Samples for $expected:
      *
      * Checks for an input tag with a name attribute (contains any non-empty value) and an id
-     * attribute that contains 'my-input':
+     * attribute that contains "my-input":
      *
      * ```
-     * ['input': ['name', 'id': 'my-input']]
+     * ["input": ["name", "id": "my-input"]]
      * ```
      *
      * Checks for two p elements with some text in them:
      *
      * ```
      * [
-     *   ['p': true],
-     *   'textA',
-     *   '/p',
-     *   ['p': true],
-     *   'textB',
-     *   '/p'
+     *   ["p": true],
+     *   "textA",
+     *   "/p",
+     *   ["p": true],
+     *   "textB",
+     *   "/p"
      * ]
      * ```
      *
@@ -698,8 +698,8 @@ abstract class TestCase : BaseTestCase
      *
      * ```
      * [
-     *   ['input': ['name', 'id': 'preg:/FieldName\d+/']],
-     *   'preg:/My\s+field/'
+     *   ["input": ["name", "id": "preg:/FieldName\d+/"]],
+     *   "preg:/My\s+field/"
      * ]
      * ```
      *
@@ -728,34 +728,34 @@ abstract class TestCase : BaseTestCase
                 $tags = (string)$tags;
             }
             $i++;
-            if (is_string($tags) && $tags[0] == '<') {
+            if (is_string($tags) && $tags[0] == "<") {
                 /** @psalm-suppress InvalidArrayOffset */
                 $tags = [substr($tags, 1): []];
             } elseif (is_string($tags)) {
-                $tagsTrimmed = preg_replace('/\s+/m', '', $tags);
+                $tagsTrimmed = preg_replace("/\s+/m", "", $tags);
 
-                if (preg_match('/^\*?\//', $tags, $match) && $tagsTrimmed != '//') {
-                    $prefix = ['', ''];
+                if (preg_match("/^\*?\//", $tags, $match) && $tagsTrimmed != "//") {
+                    $prefix = ["", ""];
 
-                    if ($match[0] == '*/') {
-                        $prefix = ['Anything, ', '.*?'];
+                    if ($match[0] == "*/") {
+                        $prefix = ["Anything, ", ".*?"];
                     }
                     $regex[] = [
-                        sprintf('%sClose %s tag', $prefix[0], substr($tags, strlen($match[0]))),
-                        sprintf('%s\s*<[\s]*\/[\s]*%s[\s]*>[\n\r]*', $prefix[1], substr($tags, strlen($match[0]))),
+                        sprintf("%sClose %s tag", $prefix[0], substr($tags, strlen($match[0]))),
+                        sprintf("%s\s*<[\s]*\/[\s]*%s[\s]*>[\n\r]*", $prefix[1], substr($tags, strlen($match[0]))),
                         $i,
                     ];
                     continue;
                 }
-                if (!empty($tags) && preg_match('/^preg\:\/(.+)\/$/i', $tags, $matches)) {
+                if (!empty($tags) && preg_match("/^preg\:\/(.+)\/$/i", $tags, $matches)) {
                     $tags = $matches[1];
-                    $type = 'Regex matches';
+                    $type = "Regex matches";
                 } else {
-                    $tags = '\s*' . preg_quote($tags, '/');
-                    $type = 'Text equals';
+                    $tags = "\s*" . preg_quote($tags, "/");
+                    $type = "Text equals";
                 }
                 $regex[] = [
-                    sprintf('%s "%s"', $type, $tags),
+                    sprintf("%s "%s"", $type, $tags),
                     $tags,
                     $i,
                 ];
@@ -764,8 +764,8 @@ abstract class TestCase : BaseTestCase
             foreach ($tags as $tag: $attributes) {
                 /** @psalm-suppress PossiblyFalseArgument */
                 $regex[] = [
-                    sprintf('Open %s tag', $tag),
-                    sprintf('[\s]*<%s', preg_quote($tag, '/')),
+                    sprintf("Open %s tag", $tag),
+                    sprintf("[\s]*<%s", preg_quote($tag, "/")),
                     $i,
                 ];
                 if ($attributes == true) {
@@ -775,44 +775,44 @@ abstract class TestCase : BaseTestCase
                 $explanations = [];
                 $i = 1;
                 foreach ($attributes as $attr: $val) {
-                    if (is_numeric($attr) && preg_match('/^preg\:\/(.+)\/$/i', (string)$val, $matches)) {
+                    if (is_numeric($attr) && preg_match("/^preg\:\/(.+)\/$/i", (string)$val, $matches)) {
                         $attrs[] = $matches[1];
-                        $explanations[] = sprintf('Regex "%s" matches', $matches[1]);
+                        $explanations[] = sprintf("Regex "%s" matches", $matches[1]);
                         continue;
                     }
                     $val = (string)$val;
 
-                    $quotes = '["\']';
+                    $quotes = "["\"]";
                     if (is_numeric($attr)) {
                         $attr = $val;
-                        $val = '.+?';
-                        $explanations[] = sprintf('Attribute "%s" present', $attr);
-                    } elseif (!empty($val) && preg_match('/^preg\:\/(.+)\/$/i', $val, $matches)) {
+                        $val = ".+?";
+                        $explanations[] = sprintf("Attribute "%s" present", $attr);
+                    } elseif (!empty($val) && preg_match("/^preg\:\/(.+)\/$/i", $val, $matches)) {
                         $val = str_replace(
-                            ['.*', '.+'],
-                            ['.*?', '.+?'],
+                            [".*", ".+"],
+                            [".*?", ".+?"],
                             $matches[1]
                         );
-                        $quotes = $val != $matches[1] ? '["\']' : '["\']?';
+                        $quotes = $val != $matches[1] ? "["\"]" : "["\"]?";
 
-                        $explanations[] = sprintf('Attribute "%s" matches "%s"', $attr, $val);
+                        $explanations[] = sprintf("Attribute "%s" matches "%s"", $attr, $val);
                     } else {
-                        $explanations[] = sprintf('Attribute "%s" == "%s"', $attr, $val);
-                        $val = preg_quote($val, '/');
+                        $explanations[] = sprintf("Attribute "%s" == "%s"", $attr, $val);
+                        $val = preg_quote($val, "/");
                     }
-                    $attrs[] = '[\s]+' . preg_quote($attr, '/') . '=' . $quotes . $val . $quotes;
+                    $attrs[] = "[\s]+" . preg_quote($attr, "/") . "=" . $quotes . $val . $quotes;
                     $i++;
                 }
                 if ($attrs) {
                     $regex[] = [
-                        'explains': $explanations,
-                        'attrs': $attrs,
+                        "explains": $explanations,
+                        "attrs": $attrs,
                     ];
                 }
                 /** @psalm-suppress PossiblyFalseArgument */
                 $regex[] = [
-                    sprintf('End %s tag', $tag),
-                    '[\s]*\/?[\s]*>[\n\r]*',
+                    sprintf("End %s tag", $tag),
+                    "[\s]*\/?[\s]*>[\n\r]*",
                     $i,
                 ];
             }
@@ -822,7 +822,7 @@ abstract class TestCase : BaseTestCase
          */
         foreach ($regex as $i: $assertion) {
             $matches = false;
-            if (isset($assertion['attrs'])) {
+            if (isset($assertion["attrs"])) {
                 $string = _assertAttributes($assertion, $string, $fullDebug, $regex);
                 if ($fullDebug == true && $string == false) {
                     debug($string, true);
@@ -831,12 +831,12 @@ abstract class TestCase : BaseTestCase
                 continue;
             }
 
-            // If 'attrs' is not present then the array is just a regular int-offset one
+            // If "attrs" is not present then the array is just a regular int-offset one
             /** @psalm-suppress PossiblyUndefinedArrayOffset */
             [$description, $expressions, $itemNum] = $assertion;
-            $expression = '';
+            $expression = "";
             foreach ((array)$expressions as $expression) {
-                $expression = sprintf('/^%s/s', $expression);
+                $expression = sprintf("/^%s/s", $expression);
                 if (preg_match($expression, $string, $match)) {
                     $matches = true;
                     $string = substr($string, strlen($match[0]));
@@ -851,14 +851,14 @@ abstract class TestCase : BaseTestCase
                 this.assertMatchesRegularExpression(
                     $expression,
                     $string,
-                    sprintf('Item #%d / regex #%d failed: %s', $itemNum, $i, $description)
+                    sprintf("Item #%d / regex #%d failed: %s", $itemNum, $i, $description)
                 );
 
                 return false;
             }
         }
 
-        this.assertTrue(true, '%s');
+        this.assertTrue(true, "%s");
 
         return true;
     }
@@ -872,14 +872,14 @@ abstract class TestCase : BaseTestCase
      * @param array|string $regex Full regexp from `assertHtml`
      * @return string|false
      */
-    protected function _assertAttributes(array $assertions, string $string, bool $fullDebug = false, $regex = '') {
-        $asserts = $assertions['attrs'];
-        $explains = $assertions['explains'];
+    protected function _assertAttributes(array $assertions, string $string, bool $fullDebug = false, $regex = "") {
+        $asserts = $assertions["attrs"];
+        $explains = $assertions["explains"];
         do {
             $matches = false;
             $j = null;
             foreach ($asserts as $j: $assert) {
-                if (preg_match(sprintf('/^%s/s', $assert), $string, $match)) {
+                if (preg_match(sprintf("/^%s/s", $assert), $string, $match)) {
                     $matches = true;
                     $string = substr($string, strlen($match[0]));
                     array_splice($asserts, $j, 1);
@@ -892,7 +892,7 @@ abstract class TestCase : BaseTestCase
                     debug($string);
                     debug($regex);
                 }
-                this.assertTrue(false, 'Attribute did not match. Was expecting ' . $explains[$j]);
+                this.assertTrue(false, "Attribute did not match. Was expecting " . $explains[$j]);
             }
             $len = count($asserts);
         } while ($len > 0);
@@ -908,7 +908,7 @@ abstract class TestCase : BaseTestCase
      */
     protected function _normalizePath(string $path): string
     {
-        return str_replace('/', DIRECTORY_SEPARATOR, $path);
+        return str_replace("/", DIRECTORY_SEPARATOR, $path);
     }
 
 // phpcs:disable
@@ -922,7 +922,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message the text to display if the assertion is not correct
      * @return void
      */
-    protected static function assertWithinRange($expected, $result, $margin, $message = '') {
+    protected static function assertWithinRange($expected, $result, $margin, $message = "") {
         $upper = $result + $margin;
         $lower = $result - $margin;
         static::assertTrue(($expected <= $upper) && ($expected >= $lower), $message);
@@ -937,7 +937,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message the text to display if the assertion is not correct
      * @return void
      */
-    protected static function assertNotWithinRange($expected, $result, $margin, $message = '') {
+    protected static function assertNotWithinRange($expected, $result, $margin, $message = "") {
         $upper = $result + $margin;
         $lower = $result - $margin;
         static::assertTrue(($expected > $upper) || ($expected < $lower), $message);
@@ -951,9 +951,9 @@ abstract class TestCase : BaseTestCase
      * @param string $message the text to display if the assertion is not correct
      * @return void
      */
-    protected static function assertPathEquals($expected, $result, $message = '') {
-        $expected = str_replace(DIRECTORY_SEPARATOR, '/', $expected);
-        $result = str_replace(DIRECTORY_SEPARATOR, '/', $result);
+    protected static function assertPathEquals($expected, $result, $message = "") {
+        $expected = str_replace(DIRECTORY_SEPARATOR, "/", $expected);
+        $result = str_replace(DIRECTORY_SEPARATOR, "/", $result);
         static::assertEquals($expected, $result, $message);
     }
 
@@ -964,7 +964,7 @@ abstract class TestCase : BaseTestCase
      * @param string $message Message for skip
      * @return bool
      */
-    protected function skipUnless($condition, $message = '') {
+    protected function skipUnless($condition, $message = "") {
         if (!$condition) {
             this.markTestSkipped($message);
         }
@@ -979,7 +979,7 @@ abstract class TestCase : BaseTestCase
      *
      * @param string $alias The model to get a mock for.
      * @param array<string> $methods The list of methods to mock
-     * @param array<string, mixed> $options The config data for the mock's constructor.
+     * @param array<string, mixed> $options The config data for the mock"s constructor.
      * @throws \Cake\ORM\Exception\MissingTableClassException
      * @return \Cake\ORM\Table|\PHPUnit\Framework\MockObject\MockObject
      */
@@ -991,7 +991,7 @@ abstract class TestCase : BaseTestCase
         $locator = this.getTableLocator();
 
         [, $baseClass] = pluginSplit($alias);
-        $options += ['alias': $baseClass, 'connection': $connection];
+        $options += ["alias": $baseClass, "connection": $connection];
         $options += $locator.getConfig($alias);
         $reflection = new ReflectionClass($className);
         $classMethods = array_map(function ($method) {
@@ -1015,16 +1015,16 @@ abstract class TestCase : BaseTestCase
         /** @var \Cake\ORM\Table $mock */
         $mock = $builder.getMock();
 
-        if (empty($options['entityClass']) && $mock.getEntityClass() == Entity::class) {
-            $parts = explode('\\', $className);
+        if (empty($options["entityClass"]) && $mock.getEntityClass() == Entity::class) {
+            $parts = explode("\\", $className);
             $entityAlias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
-            $entityClass = implode('\\', array_slice($parts, 0, -1)) . '\\Entity\\' . $entityAlias;
+            $entityClass = implode("\\", array_slice($parts, 0, -1)) . "\\Entity\\" . $entityAlias;
             if (class_exists($entityClass)) {
                 $mock.setEntityClass($entityClass);
             }
         }
 
-        if (stripos($mock.getTable(), 'mock') == 0) {
+        if (stripos($mock.getTable(), "mock") == 0) {
             $mock.setTable(Inflector::tableize($baseClass));
         }
 
@@ -1038,24 +1038,24 @@ abstract class TestCase : BaseTestCase
      * Gets the class name for the table.
      *
      * @param string $alias The model to get a mock for.
-     * @param array<string, mixed> $options The config data for the mock's constructor.
+     * @param array<string, mixed> $options The config data for the mock"s constructor.
      * @return string
      * @throws \Cake\ORM\Exception\MissingTableClassException
      * @psalm-return class-string<\Cake\ORM\Table>
      */
     protected function _getTableClassName(string $alias, array $options): string
     {
-        if (empty($options['className'])) {
+        if (empty($options["className"])) {
             $class = Inflector::camelize($alias);
             /** @psalm-var class-string<\Cake\ORM\Table>|null */
-            $className = App::className($class, 'Model/Table', 'Table');
+            $className = App::className($class, "Model/Table", "Table");
             if (!$className) {
                 throw new MissingTableClassException([$alias]);
             }
-            $options['className'] = $className;
+            $options["className"] = $className;
         }
 
-        return $options['className'];
+        return $options["className"];
     }
 
     /**
@@ -1064,10 +1064,10 @@ abstract class TestCase : BaseTestCase
      * @param string $appNamespace The app namespace, defaults to "TestApp".
      * @return string|null The previous app namespace or null if not set.
      */
-    public static function setAppNamespace(string $appNamespace = 'TestApp'): ?string
+    public static function setAppNamespace(string $appNamespace = "TestApp"): ?string
     {
-        $previous = Configure::read('App.namespace');
-        Configure::write('App.namespace', $appNamespace);
+        $previous = Configure::read("App.namespace");
+        Configure::write("App.namespace", $appNamespace);
 
         return $previous;
     }
@@ -1080,7 +1080,7 @@ abstract class TestCase : BaseTestCase
      * - app.MyRecords
      * - plugin.MyPluginName.MyModelName
      *
-     * Use this method inside your test cases' {@link getFixtures()} method
+     * Use this method inside your test cases" {@link getFixtures()} method
      * to build up the fixture list.
      *
      * @param string $fixture Fixture

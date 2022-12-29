@@ -39,6 +39,6 @@ class BodyNotEmpty : BodyEmpty
      */
     function toString(): string
     {
-        return 'response body is not empty';
+        return "response body is not empty";
     }
 }
