@@ -37,7 +37,7 @@ class ContentsEmpty : ContentsBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return sprintf("%s is empty", this.output);
     }

@@ -60,7 +60,7 @@ class MissingOptionException : ConsoleException
      *
      * @return string
      */
-    function getFullMessage(): string
+    string getFullMessage(): string
     {
         $out = this.getMessage();
         $bestGuess = this.findClosestItem(this.requested, this.suggestions);

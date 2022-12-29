@@ -14,7 +14,7 @@ import uim.cake.controllers.exceptions.AuthSecurityException;
 import uim.cake.controllers.exceptions.SecurityException;
 import uim.cake.core.Configure;
 import uim.cake.events.EventInterface;
-import uim.cake.http.Exception\BadRequestException;
+import uim.cake.http.exceptions.BadRequestException;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
 import uim.cake.Routing\Router;
@@ -76,7 +76,7 @@ class SecurityComponent : Component
     /**
      * Component startup. All security checking happens here.
      *
-     * @param uim.cake.Event\IEvent $event An Event instance
+     * @param uim.cake.events.IEvent $event An Event instance
      * @return uim.cake.http.Response|null
      */
     function startup(IEvent $event): ?Response
@@ -146,11 +146,11 @@ class SecurityComponent : Component
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
      * @param string $error Error method
-     * @param uim.cake.controllers.Exception\SecurityException|null $exception Additional debug info describing the cause
+     * @param uim.cake.controllers.exceptions.SecurityException|null $exception Additional debug info describing the cause
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
      * @see uim.cake.controllers.Component\SecurityComponent::$blackHoleCallback
      * @link https://book.cakephp.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
-     * @throws uim.cake.http.Exception\BadRequestException
+     * @throws uim.cake.http.exceptions.BadRequestException
      */
     function blackHole(Controller $controller, string $error = "", ?SecurityException $exception = null) {
         if (!_config["blackHoleCallback"]) {
@@ -163,8 +163,8 @@ class SecurityComponent : Component
     /**
      * Check debug status and throw an Exception based on the existing one
      *
-     * @param uim.cake.controllers.Exception\SecurityException|null $exception Additional debug info describing the cause
-     * @throws uim.cake.http.Exception\BadRequestException
+     * @param uim.cake.controllers.exceptions.SecurityException|null $exception Additional debug info describing the cause
+     * @throws uim.cake.http.exceptions.BadRequestException
      * @return void
      */
     protected function _throwException(?SecurityException $exception = null): void
@@ -184,7 +184,7 @@ class SecurityComponent : Component
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
      * @return void
-     * @throws uim.cake.controllers.Exception\SecurityException
+     * @throws uim.cake.controllers.exceptions.SecurityException
      */
     protected function _secureRequired(Controller $controller): void
     {
@@ -213,7 +213,7 @@ class SecurityComponent : Component
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
      * @return void
-     * @throws uim.cake.controllers.Exception\AuthSecurityException
+     * @throws uim.cake.controllers.exceptions.AuthSecurityException
      */
     protected function _validatePost(Controller $controller): void
     {
@@ -237,7 +237,7 @@ class SecurityComponent : Component
      * Check if token is valid
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
-     * @throws uim.cake.controllers.Exception\SecurityException
+     * @throws uim.cake.controllers.exceptions.SecurityException
      * @return string fields token
      */
     protected function _validToken(Controller $controller): string
@@ -496,7 +496,7 @@ class SecurityComponent : Component
      * @param string $method Method to execute
      * @param array $params Parameters to send to method
      * @return mixed Controller callback method"s response
-     * @throws uim.cake.http.Exception\BadRequestException When a the blackholeCallback is not callable.
+     * @throws uim.cake.http.exceptions.BadRequestException When a the blackholeCallback is not callable.
      */
     protected function _callback(Controller $controller, string $method, array $params = []) {
         $callable = [$controller, $method];

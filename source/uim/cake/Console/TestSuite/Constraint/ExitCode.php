@@ -53,7 +53,7 @@ class ExitCode : Constraint
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return sprintf("matches exit code %s", this.exitCode ?? "null");
     }

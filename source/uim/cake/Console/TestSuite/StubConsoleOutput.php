@@ -72,7 +72,7 @@ class StubConsoleOutput : ConsoleOutput
      *
      * @return string
      */
-    function output(): string
+    string output(): string
     {
         return implode("\n", _out);
     }

@@ -4,7 +4,7 @@ module uim.cake.Controller;
 import uim.cake.controllers.exceptions.MissingActionException;
 import uim.cake.core.App;
 import uim.cake.datasources.ModelAwareTrait;
-import uim.cake.datasources.Paging\Exception\PageOutOfBoundsException;
+import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
 import uim.cake.datasources.Paging\NumericPaginator;
 import uim.cake.datasources.Paging\PaginatorInterface;
 import uim.cake.events.EventDispatcherInterface;
@@ -13,7 +13,7 @@ import uim.cake.events.EventInterface;
 import uim.cake.events.IEventListener;
 import uim.cake.events.IEventManager;
 import uim.cake.http.ContentTypeNegotiation;
-import uim.cake.http.Exception\NotFoundException;
+import uim.cake.http.exceptions.NotFoundException;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
 import uim.cake.Log\LogTrait;
@@ -165,7 +165,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *   but expect that features that use the request parameters will not work.
      * @param uim.cake.http.Response|null $response Response object for this controller.
      * @param string|null $name Override the name useful in testing when using mocks.
-     * @param uim.cake.Event\IEventManager|null $eventManager The event manager. Defaults to a new instance.
+     * @param uim.cake.events.IEventManager|null $eventManager The event manager. Defaults to a new instance.
      * @param uim.cake.controllers.ComponentRegistry|null $components The component registry. Defaults to a new instance.
      */
     this(
@@ -492,7 +492,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Get the closure for action to be invoked by ControllerFactory.
      *
      * @return \Closure
-     * @throws uim.cake.controllers.Exception\MissingActionException
+     * @throws uim.cake.controllers.exceptions.MissingActionException
      */
     function getAction(): Closure
     {
@@ -872,10 +872,10 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * This method will also make the PaginatorHelper available in the view.
      *
-     * @param uim.cake.ORM\Table|uim.cake.ORM\Query|string|null $object Table to paginate
+     * @param uim.cake.orm.Table|uim.cake.orm.Query|string|null $object Table to paginate
      * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
-     * @return uim.cake.ORM\ResultSet|uim.cake.Datasource\IResultSet Query results
+     * @return uim.cake.orm.ResultSet|uim.cake.Datasource\IResultSet Query results
      * @link https://book.cakephp.org/4/en/controllers.html#paginating-a-model
      * @throws \RuntimeException When no compatible table object can be found.
      */
@@ -977,7 +977,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Called before the controller action. You can use this method to configure and customize components
      * or perform logic that needs to happen before each controller action.
      *
-     * @param uim.cake.Event\IEvent $event An Event instance
+     * @param uim.cake.events.IEvent $event An Event instance
      * @return uim.cake.http.Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
@@ -988,7 +988,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Called after the controller action is run, but before the view is rendered. You can use this method
      * to perform logic or set view variables that are required on every request.
      *
-     * @param uim.cake.Event\IEvent $event An Event instance
+     * @param uim.cake.events.IEvent $event An Event instance
      * @return uim.cake.http.Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
@@ -1004,7 +1004,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * You can set the event result to response instance or modify the redirect location
      * using controller"s response instance.
      *
-     * @param uim.cake.Event\IEvent $event An Event instance
+     * @param uim.cake.events.IEvent $event An Event instance
      * @param array|string $url A string or array-based URL pointing to another location within the app,
      *     or an absolute URL
      * @param uim.cake.http.Response $response The response object.
@@ -1017,7 +1017,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Called after the controller action is run and rendered.
      *
-     * @param uim.cake.Event\IEvent $event An Event instance
+     * @param uim.cake.events.IEvent $event An Event instance
      * @return uim.cake.http.Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */

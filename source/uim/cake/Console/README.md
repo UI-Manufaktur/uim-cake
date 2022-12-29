@@ -85,8 +85,7 @@ import uim.cake.consoles.BaseCommand;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
 
-class HelloCommand : BaseCommand
-{
+class HelloCommand : BaseCommand {
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
         $parser

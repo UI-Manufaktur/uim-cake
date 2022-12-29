@@ -240,7 +240,7 @@ class CommandRunner : IEventDispatcher {
      * @param uim.cake.consoles.ConsoleIo $io ConsoleIo object for errors.
      * @param string|null myName The name from the CLI args.
      * @return string The resolved name.
-     * @throws uim.cake.consoles.Exception\MissingOptionException
+     * @throws uim.cake.consoles.exceptions.MissingOptionException
      */
     protected string resolveName(CommandCollection $commands, ConsoleIo $io, Nullable!string myName) {
       if (!myName) {

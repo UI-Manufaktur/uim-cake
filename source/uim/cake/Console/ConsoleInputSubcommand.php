@@ -93,7 +93,7 @@ class ConsoleInputSubcommand
      *
      * @return string
      */
-    function getRawHelp(): string
+    string getRawHelp(): string
     {
         return _help;
     }
@@ -104,7 +104,7 @@ class ConsoleInputSubcommand
      * @param int $width The width to make the name of the subcommand.
      * @return string
      */
-    function help(int $width = 0): string
+    string help(int $width = 0): string
     {
         $name = _name;
         if (strlen($name) < $width) {

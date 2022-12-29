@@ -94,7 +94,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the component is missing in.
      * @return void
-     * @throws uim.cake.controllers.Exception\MissingComponentException
+     * @throws uim.cake.controllers.exceptions.MissingComponentException
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {

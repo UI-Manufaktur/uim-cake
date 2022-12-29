@@ -648,7 +648,7 @@ class ConsoleOptionParser
      * @param array $argv Array of args (argv) to parse.
      * @param uim.cake.consoles.ConsoleIo|null $io A ConsoleIo instance or null. If null prompt options will error.
      * @return array [$params, $args]
-     * @throws uim.cake.consoles.Exception\ConsoleException When an invalid parameter is encountered.
+     * @throws uim.cake.consoles.exceptions.ConsoleException When an invalid parameter is encountered.
      */
     function parse(array $argv, ?ConsoleIo $io = null): array
     {
@@ -828,7 +828,7 @@ class ConsoleOptionParser
      * @param string $option The option to parse.
      * @param array<string, mixed> $params The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
-     * @throws uim.cake.consoles.Exception\ConsoleException When unknown short options are encountered.
+     * @throws uim.cake.consoles.exceptions.ConsoleException When unknown short options are encountered.
      */
     protected function _parseShortOption(string $option, array $params): array
     {
@@ -862,7 +862,7 @@ class ConsoleOptionParser
      * @param string $name The name to parse.
      * @param array<string, mixed> $params The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
-     * @throws uim.cake.consoles.Exception\ConsoleException
+     * @throws uim.cake.consoles.exceptions.ConsoleException
      */
     protected function _parseOption(string $name, array $params): array
     {
@@ -920,7 +920,7 @@ class ConsoleOptionParser
      * @param string $argument The argument to append
      * @param array $args The array of parsed args to append to.
      * @return array<string> Args
-     * @throws uim.cake.consoles.Exception\ConsoleException
+     * @throws uim.cake.consoles.exceptions.ConsoleException
      */
     protected function _parseArg(string $argument, array $args): array
     {

@@ -53,7 +53,7 @@ class ConsoleInputOption {
      * @param array<string> $choices Valid choices for this option.
      * @param bool $multiple Whether this option can accept multiple value definition.
      * @param bool $required Whether this option is required or not.
-     * @throws uim.cake.consoles.Exception\ConsoleException
+     * @throws uim.cake.consoles.exceptions.ConsoleException
      */
     this(
       string myName,
@@ -175,7 +175,7 @@ class ConsoleInputOption {
      * Check that a value is a valid choice for this option.
      *
      * @param string|bool myValue The choice to validate.
-     * @throws uim.cake.consoles.Exception\ConsoleException
+     * @throws uim.cake.consoles.exceptions.ConsoleException
      */
     bool validChoice(myValue) {
         if (empty(_choices)) {

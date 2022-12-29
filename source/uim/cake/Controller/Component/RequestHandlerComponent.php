@@ -15,7 +15,7 @@ import uim.cake.core.App;
 import uim.cake.core.Configure;
 import uim.cake.events.EventInterface;
 import uim.cake.http.ContentTypeNegotiation;
-import uim.cake.http.Exception\NotFoundException;
+import uim.cake.http.exceptions.NotFoundException;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
 import uim.cake.Routing\Router;
@@ -148,7 +148,7 @@ class RequestHandlerComponent : Component
      * If the XML data is POSTed, the data is parsed into an XML object, which is assigned
      * to the $data property of the controller, which can then be saved to a model object.
      *
-     * @param uim.cake.Event\IEvent $event The startup event that was fired.
+     * @param uim.cake.events.IEvent $event The startup event that was fired.
      * @return void
      */
     function startup(IEvent $event): void
@@ -190,9 +190,9 @@ class RequestHandlerComponent : Component
      * - If the extension is of a type that RequestHandler understands, it will
      *   set that Content-type in the response header.
      *
-     * @param uim.cake.Event\IEvent $event The Controller.beforeRender event.
+     * @param uim.cake.events.IEvent $event The Controller.beforeRender event.
      * @return void
-     * @throws uim.cake.http.Exception\NotFoundException If invoked extension is not configured.
+     * @throws uim.cake.http.exceptions.NotFoundException If invoked extension is not configured.
      */
     function beforeRender(IEvent $event): void
     {

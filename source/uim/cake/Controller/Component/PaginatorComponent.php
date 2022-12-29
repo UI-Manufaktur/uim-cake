@@ -10,10 +10,10 @@ module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;
 import uim.cake.controllers.ComponentRegistry;
-import uim.cake.datasources.Paging\Exception\PageOutOfBoundsException;
+import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
 import uim.cake.datasources.Paging\NumericPaginator;
 import uim.cake.datasources.IResultSet;
-import uim.cake.http.Exception\NotFoundException;
+import uim.cake.http.exceptions.NotFoundException;
 use InvalidArgumentException;
 use UnexpectedValueException;
 
@@ -175,7 +175,7 @@ class PaginatorComponent : Component
      * @param uim.cake.Datasource\RepositoryInterface|uim.cake.Datasource\IQuery $object Table or query to paginate.
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return uim.cake.Datasource\IResultSet Query results
-     * @throws uim.cake.http.Exception\NotFoundException
+     * @throws uim.cake.http.exceptions.NotFoundException
      */
     function paginate(object $object, array $settings = []): IResultSet
     {

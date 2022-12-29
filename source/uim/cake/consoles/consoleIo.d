@@ -243,7 +243,7 @@ class ConsoleIo {
      *
      * @param string myMessage Error message.
      * @param int $code Error code.
-     * @throws uim.cake.consoles.Exception\StopException
+     * @throws uim.cake.consoles.exceptions.StopException
      */
     void abort(myMessage, $code = ICommand::CODE_ERROR) {
         this.error(myMessage);
@@ -528,7 +528,7 @@ class ConsoleIo {
      * @param bool $forceOverwrite Whether the file should be overwritten.
      *   If true, no question will be asked about whether to overwrite existing files.
      * @return bool Success.
-     * @throws uim.cake.consoles.Exception\StopException When `q` is given as an answer
+     * @throws uim.cake.consoles.exceptions.StopException When `q` is given as an answer
      *   to whether a file should be overwritten.
      */
     function createFile(string myPath, string myContentss, bool $forceOverwrite = false) {

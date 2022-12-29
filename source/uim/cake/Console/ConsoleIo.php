@@ -284,7 +284,7 @@ class ConsoleIo
      * @param int $code Error code.
      * @return void
      * @psalm-return never-return
-     * @throws uim.cake.consoles.Exception\StopException
+     * @throws uim.cake.consoles.exceptions.StopException
      */
     function abort($message, $code = ICommand::CODE_ERROR): void
     {
@@ -371,7 +371,7 @@ class ConsoleIo
      * @param int $multiplier Number of times the linefeed sequence should be repeated
      * @return string
      */
-    function nl(int $multiplier = 1): string
+    string nl(int $multiplier = 1): string
     {
         return str_repeat(ConsoleOutput::LF, $multiplier);
     }
@@ -588,7 +588,7 @@ class ConsoleIo
      * @param bool $forceOverwrite Whether the file should be overwritten.
      *   If true, no question will be asked about whether to overwrite existing files.
      * @return bool Success.
-     * @throws uim.cake.consoles.Exception\StopException When `q` is given as an answer
+     * @throws uim.cake.consoles.exceptions.StopException When `q` is given as an answer
      *   to whether a file should be overwritten.
      */
     bool createFile(string $path, string $contents, bool $forceOverwrite = false) {

@@ -137,7 +137,7 @@ class Shell {
      * Constructs this Shell instance.
      *
      * @param uim.cake.consoles.ConsoleIo|null $io An io instance.
-     * @param uim.cake.ORM\Locator\ILocator|null $locator Table locator instance.
+     * @param uim.cake.orm.Locator\ILocator|null $locator Table locator instance.
      * @link https://book.UIM.org/4/en/console-and-shells.html#Shell
      */
     this(?ConsoleIo $io = null, ?ILocator $locator = null) {
@@ -710,7 +710,7 @@ class Shell {
      *
      * @param string myMessage The error message
      * @param int $exitCode The exit code for the shell task.
-     * @throws uim.cake.consoles.Exception\StopException
+     * @throws uim.cake.consoles.exceptions.StopException
      * 
      * @link https://book.UIM.org/4/en/console-and-shells.html#styling-output
      * @psalm-return never-return
@@ -828,7 +828,7 @@ class Shell {
      * Raises a StopException to try and halt the execution.
      *
      * @param int $status see https://secure.php.net/exit for values
-     * @throws uim.cake.consoles.Exception\StopException
+     * @throws uim.cake.consoles.exceptions.StopException
      */
     protected void _stop(int $status = self::CODE_SUCCESS) {
         throw new StopException("Halting error reached", $status);

@@ -76,7 +76,7 @@ class HelpFormatter
      * @param int $width The width of the help output.
      * @return string
      */
-    function text(int $width = 72): string
+    string text(int $width = 72): string
     {
         $parser = _parser;
         $out = [];

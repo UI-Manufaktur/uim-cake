@@ -37,7 +37,7 @@ class ContentsContain : ContentsBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return sprintf("is in %s," . PHP_EOL . "actual result:" . PHP_EOL, this.output) . this.contents;
     }

@@ -12,7 +12,7 @@ import uim.cake.controllers.exceptions.InvalidParameterException;
 import uim.cake.core.App;
 import uim.cake.core.IContainer;
 import uim.cake.http.ControllerFactoryInterface;
-import uim.cake.http.Exception\MissingControllerException;
+import uim.cake.http.exceptions.MissingControllerException;
 import uim.cake.http.MiddlewareQueue;
 import uim.cake.http.Runner;
 import uim.cake.http.ServerRequest;
@@ -56,7 +56,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to build a controller for.
      * @return uim.cake.controllers.Controller
-     * @throws uim.cake.http.Exception\MissingControllerException
+     * @throws uim.cake.http.exceptions.MissingControllerException
      */
     function create(IServerRequest $request): Controller
     {
@@ -86,7 +86,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      *
      * @param uim.cake.controllers.Controller $controller The controller to invoke.
      * @return \Psr\Http\Message\IResponse The response
-     * @throws uim.cake.controllers.Exception\MissingActionException If controller action is not found.
+     * @throws uim.cake.controllers.exceptions.MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
      */
     function invoke($controller): IResponse
@@ -331,7 +331,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      * Throws an exception when a controller is missing.
      *
      * @param uim.cake.http.ServerRequest $request The request.
-     * @return uim.cake.http.Exception\MissingControllerException
+     * @return uim.cake.http.exceptions.MissingControllerException
      */
     protected function missingController(ServerRequest $request) {
         return new MissingControllerException([
