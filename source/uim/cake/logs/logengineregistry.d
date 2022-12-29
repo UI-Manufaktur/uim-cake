@@ -13,7 +13,7 @@ use RuntimeException;
 /**
  * Registry of loaded log engines
  *
- * @: \Cake\Core\ObjectRegistry<\Psr\Log\LoggerInterface>
+ * @: uim.cake.Core\ObjectRegistry<\Psr\Log\LoggerInterface>
  */
 class LogEngineRegistry : ObjectRegistry
 {

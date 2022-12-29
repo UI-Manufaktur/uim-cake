@@ -18,7 +18,7 @@ class Translator
     /**
      * @var string
      */
-    public const PLURAL_PREFIX = "p:";
+    const PLURAL_PREFIX = "p:";
 
     /**
      * A fallback translator.
@@ -56,7 +56,7 @@ class Translator
      * @param uim.cake.I18n\FormatterInterface $formatter A message formatter.
      * @param uim.cake.I18n\Translator|null $fallback A fallback translator.
      */
-    public this(
+    this(
         string $locale,
         Package $package,
         FormatterInterface $formatter,

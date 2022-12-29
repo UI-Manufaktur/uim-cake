@@ -63,7 +63,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\Time::nice()
      */
-    public static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT];
+    static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT];
 
     /**
      * The format to use when formatting a time using `Cake\I18n\Time::timeAgoInWords()`
@@ -72,7 +72,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @var array<int>|string|int
      * @see uim.cake.I18n\Time::timeAgoInWords()
      */
-    public static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
+    static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
 
     /**
      * The format to use when formatting a time using `Time::timeAgoInWords()`
@@ -81,7 +81,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @var array<string>
      * @see uim.cake.I18n\Time::timeAgoInWords()
      */
-    public static $wordAccuracy = [
+    static $wordAccuracy = [
         "year": "day",
         "month": "day",
         "week": "day",
@@ -97,14 +97,14 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @var string
      * @see uim.cake.I18n\Time::timeAgoInWords()
      */
-    public static $wordEnd = "+1 month";
+    static $wordEnd = "+1 month";
 
     /**
      * serialise the value as a Unix Timestamp
      *
      * @var string
      */
-    public const UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
+    const UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
 
     /**
      * Create a new mutable time instance.
@@ -112,7 +112,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @param \DateTimeInterface|string|int|null $time Fixed or relative time
      * @param \DateTimeZone|string|null $tz The timezone for the instance
      */
-    public this($time = null, $tz = null) {
+    this($time = null, $tz = null) {
         deprecationWarning(
             "The `Time` class has been deprecated. Use the immutable alternative `FrozenTime` instead",
             0
@@ -269,7 +269,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @return array List of timezone identifiers
      * @since 2.2
      */
-    public static function listTimezones($filter = null, ?string $country = null, $options = []): array
+    static function listTimezones($filter = null, ?string $country = null, $options = []): array
     {
         if (is_bool($options)) {
             $options = [

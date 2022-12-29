@@ -51,7 +51,7 @@ abstract class BaseLog : AbstractLogger
      *
      * @param array<string, mixed> $config Configuration array
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         this.setConfig($config);
 
         if (!is_array(_config["scopes"]) && _config["scopes"] != false) {
@@ -75,7 +75,7 @@ abstract class BaseLog : AbstractLogger
                 $class = $formatter;
                 $options = [];
             }
-            /** @var class-string<\Cake\Log\Formatter\AbstractFormatter> $class */
+            /** @var class-string<uim.cake.Log\Formatter\AbstractFormatter> $class */
             $formatter = new $class($options);
         }
 

@@ -14,7 +14,7 @@ class Translator
 {
     /**
      */
-    public const string PLURAL_PREFIX = "p:";
+    const string PLURAL_PREFIX = "p:";
 
     /**
      * A fallback translator.

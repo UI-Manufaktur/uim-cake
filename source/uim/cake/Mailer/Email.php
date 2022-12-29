@@ -30,8 +30,8 @@ use SimpleXMLElement;
  * Once made configuration profiles can be used to re-use across various email messages your
  * application sends.
  *
- * @mixin \Cake\Mailer\Mailer
- * @deprecated 4.0.0 This class will be removed in CakePHP 5.0, use {@link \Cake\Mailer\Mailer} instead.
+ * @mixin uim.cake.Mailer\Mailer
+ * @deprecated 4.0.0 This class will be removed in CakePHP 5.0, use {@link uim.cake.Mailer\Mailer} instead.
  */
 class Email : JsonSerializable, Serializable
 {
@@ -41,7 +41,7 @@ class Email : JsonSerializable, Serializable
      * @var string
      * @deprecated 4.0.0 Use Message::MESSAGE_HTML instead.
      */
-    public const MESSAGE_HTML = "html";
+    const MESSAGE_HTML = "html";
 
     /**
      * Type of message - TEXT
@@ -49,7 +49,7 @@ class Email : JsonSerializable, Serializable
      * @var string
      * @deprecated 4.0.0 Use Message::MESSAGE_TEXT instead.
      */
-    public const MESSAGE_TEXT = "text";
+    const MESSAGE_TEXT = "text";
 
     /**
      * Type of message - BOTH
@@ -57,7 +57,7 @@ class Email : JsonSerializable, Serializable
      * @var string
      * @deprecated 4.0.0 Use Message::MESSAGE_BOTH instead.
      */
-    public const MESSAGE_BOTH = "both";
+    const MESSAGE_BOTH = "both";
 
     /**
      * Holds the regex pattern for email validation
@@ -65,7 +65,7 @@ class Email : JsonSerializable, Serializable
      * @var string
      * @deprecated 4.0.0 Use Message::EMAIL_PATTERN instead.
      */
-    public const EMAIL_PATTERN = "/^((?:[\p{L}0-9.!#$%&\"*+\/=?^_`{|}~-]+)*@[\p{L}0-9-._]+)$/ui";
+    const EMAIL_PATTERN = "/^((?:[\p{L}0-9.!#$%&\"*+\/=?^_`{|}~-]+)*@[\p{L}0-9-._]+)$/ui";
 
     /**
      * The transport instance to use for sending mail.
@@ -93,7 +93,7 @@ class Email : JsonSerializable, Serializable
      * Message class name.
      *
      * @var string
-     * @psalm-var class-string<\Cake\Mailer\Message>
+     * @psalm-var class-string<uim.cake.Mailer\Message>
      */
     protected $messageClass = Message::class;
 
@@ -109,7 +109,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array<string, mixed>|string|null $config Array of configs, or string to load configs from app.php
      */
-    public this($config = null) {
+    this($config = null) {
         this.message = new this.messageClass();
 
         if ($config == null) {
@@ -463,7 +463,7 @@ class Email : JsonSerializable, Serializable
     }
 
     /**
-     * Static method to fast create an instance of \Cake\Mailer\Email
+     * Static method to fast create an instance of uim.cake.Mailer\Email
      *
      * @param array|string|null $to Address to send ({@see uim.cake.Mailer\Email::setTo()}).
      *   If null, will try to use "to" from transport config
@@ -474,7 +474,7 @@ class Email : JsonSerializable, Serializable
      * @return uim.cake.Mailer\Email
      * @throws \InvalidArgumentException
      */
-    public static function deliver(
+    static function deliver(
         $to = null,
         ?string $subject = null,
         $message = null,
@@ -619,7 +619,7 @@ class Email : JsonSerializable, Serializable
      * @param array $arguments Method argument.
      * @return mixed
      */
-    public static function __callStatic($name, $arguments) {
+    static function __callStatic($name, $arguments) {
         return [Mailer::class, $name](...$arguments);
     }
 }

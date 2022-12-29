@@ -388,7 +388,7 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
      * @param array<string, mixed> $options The options provided by the user.
      * @param string $class The class name to use for defaults.
      * @return array<string, mixed> Options with defaults applied.
-     * @psalm-param class-string<\Cake\I18n\FrozenDate>|class-string<\Cake\I18n\FrozenTime> $class
+     * @psalm-param class-string<uim.cake.I18n\FrozenDate>|class-string<uim.cake.I18n\FrozenTime> $class
      */
     protected function _options(array $options, string $class): array
     {

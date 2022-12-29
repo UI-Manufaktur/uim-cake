@@ -30,7 +30,7 @@ Log::config("local", [
 
 // Fully moduled name.
 Log::config("production", [
-    "className":\Cake\Log\Engine\SyslogLog::class,
+    "className":uim.cake.Log\Engine\SyslogLog::class,
     "levels":["warning", "error", "critical", "alert", "emergency"],
 ]);
 ```

@@ -8,7 +8,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
 
- * @since         3.1.0
+
   */
 module uim.cake.Mailer;
 
@@ -141,7 +141,7 @@ class Mailer : IEventListener
      *
      * @var string
      */
-    public static $name;
+    static $name;
 
     /**
      * The transport instance to use for sending mail.
@@ -154,7 +154,7 @@ class Mailer : IEventListener
      * Message class name.
      *
      * @var string
-     * @psalm-var class-string<\Cake\Mailer\Message>
+     * @psalm-var class-string<uim.cake.Mailer\Message>
      */
     protected $messageClass = Message::class;
 
@@ -202,7 +202,7 @@ class Mailer : IEventListener
      *
      * @param array<string, mixed>|string|null $config Array of configs, or string to load configs from app.php
      */
-    public this($config = null) {
+    this($config = null) {
         this.message = new this.messageClass();
 
         if (this.defaultTable != null) {

@@ -57,7 +57,7 @@ abstract class BaseLog : AbstractLogger {
                 myClass = $formatter;
                 myOptions = [];
             }
-            /** @var class-string<\Cake\Log\Formatter\AbstractFormatter> myClass */
+            /** @var class-string<uim.cake.Log\Formatter\AbstractFormatter> myClass */
             $formatter = new myClass(myOptions);
         }
 

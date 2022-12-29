@@ -16,7 +16,7 @@ use RuntimeException;
 /**
  * An object registry for mailer transports.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\Mailer\AbstractTransport>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.Mailer\AbstractTransport>
  */
 class TransportRegistry : ObjectRegistry
 {

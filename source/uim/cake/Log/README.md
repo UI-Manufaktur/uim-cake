@@ -28,7 +28,7 @@ Log::setConfig("local", [
 
 // Fully namespaced name.
 Log::setConfig("production", [
-    "className": \Cake\Log\Engine\SyslogLog::class,
+    "className": uim.cake.Log\Engine\SyslogLog::class,
     "levels": ["warning", "error", "critical", "alert", "emergency"],
 ]);
 ```

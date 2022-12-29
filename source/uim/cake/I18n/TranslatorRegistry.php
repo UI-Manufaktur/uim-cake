@@ -12,12 +12,12 @@ class TranslatorRegistry
      *
      * @var string
      */
-    public const FALLBACK_LOADER = "_fallback";
+    const FALLBACK_LOADER = "_fallback";
 
     /**
      * A registry to retain translator objects.
      *
-     * @var array<string, array<string, \Cake\I18n\Translator>>
+     * @var array<string, array<string, uim.cake.I18n\Translator>>
      */
     protected $registry = [];
 
@@ -71,7 +71,7 @@ class TranslatorRegistry
      * A CacheEngine object that is used to remember translator across
      * requests.
      *
-     * @var (\Psr\SimpleCache\ICache&\Cake\Cache\ICacheEngine)|null
+     * @var (\Psr\SimpleCache\ICache&uim.cake.Cache\ICacheEngine)|null
      */
     protected $_cacher;
 
@@ -82,7 +82,7 @@ class TranslatorRegistry
      * @param uim.cake.I18n\FormatterLocator $formatters The formatter locator.
      * @param string $locale The default locale code to use.
      */
-    public this(
+    this(
         PackageLocator $packages,
         FormatterLocator $formatters,
         string $locale
@@ -150,7 +150,7 @@ class TranslatorRegistry
      * Sets the CacheEngine instance used to remember translators across
      * requests.
      *
-     * @param \Psr\SimpleCache\ICache&\Cake\Cache\ICacheEngine $cacher The cacher instance.
+     * @param \Psr\SimpleCache\ICache&uim.cake.Cache\ICacheEngine $cacher The cacher instance.
      * @return void
      */
     function setCacher($cacher): void

@@ -17,7 +17,7 @@ class MoFileParser
      *
      * @var int
      */
-    public const MO_LITTLE_ENDIAN_MAGIC = 0x950412de;
+    const MO_LITTLE_ENDIAN_MAGIC = 0x950412de;
 
     /**
      * Magic used for validating the format of a MO file as well as
@@ -25,14 +25,14 @@ class MoFileParser
      *
      * @var int
      */
-    public const MO_BIG_ENDIAN_MAGIC = 0xde120495;
+    const MO_BIG_ENDIAN_MAGIC = 0xde120495;
 
     /**
      * The size of the header of a MO file in bytes.
      *
      * @var int
      */
-    public const MO_HEADER_SIZE = 28;
+    const MO_HEADER_SIZE = 28;
 
     /**
      * Parses machine object (MO) format, independent of the machine"s endian it

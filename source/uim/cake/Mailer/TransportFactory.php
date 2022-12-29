@@ -42,7 +42,7 @@ class TransportFactory
      *
      * @return uim.cake.Mailer\TransportRegistry
      */
-    public static function getRegistry(): TransportRegistry
+    static function getRegistry(): TransportRegistry
     {
         if (static::$_registry == null) {
             static::$_registry = new TransportRegistry();
@@ -59,7 +59,7 @@ class TransportFactory
      * @param uim.cake.Mailer\TransportRegistry $registry Injectable registry object.
      * @return void
      */
-    public static function setRegistry(TransportRegistry $registry): void
+    static function setRegistry(TransportRegistry $registry): void
     {
         static::$_registry = $registry;
     }
@@ -95,7 +95,7 @@ class TransportFactory
      * @param string $name Config name.
      * @return uim.cake.Mailer\AbstractTransport
      */
-    public static function get(string $name): AbstractTransport
+    static function get(string $name): AbstractTransport
     {
         $registry = static::getRegistry();
 

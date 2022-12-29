@@ -31,7 +31,7 @@ abstract class AbstractFormatter
     /**
      * @param array<string, mixed> $config Config options
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         this.setConfig($config);
     }
 

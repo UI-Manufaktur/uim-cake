@@ -27,42 +27,42 @@ class Message : JsonSerializable, Serializable
      *
      * @var int
      */
-    public const LINE_LENGTH_SHOULD = 78;
+    const LINE_LENGTH_SHOULD = 78;
 
     /**
      * Line length - no must more - RFC 2822 - 2.1.1
      *
      * @var int
      */
-    public const LINE_LENGTH_MUST = 998;
+    const LINE_LENGTH_MUST = 998;
 
     /**
      * Type of message - HTML
      *
      * @var string
      */
-    public const MESSAGE_HTML = "html";
+    const MESSAGE_HTML = "html";
 
     /**
      * Type of message - TEXT
      *
      * @var string
      */
-    public const MESSAGE_TEXT = "text";
+    const MESSAGE_TEXT = "text";
 
     /**
      * Type of message - BOTH
      *
      * @var string
      */
-    public const MESSAGE_BOTH = "both";
+    const MESSAGE_BOTH = "both";
 
     /**
      * Holds the regex pattern for email validation
      *
      * @var string
      */
-    public const EMAIL_PATTERN = "/^((?:[\p{L}0-9.!#$%&\"*+\/=?^_`{|}~-]+)*@[\p{L}0-9-._]+)$/ui";
+    const EMAIL_PATTERN = "/^((?:[\p{L}0-9.!#$%&\"*+\/=?^_`{|}~-]+)*@[\p{L}0-9-._]+)$/ui";
 
     /**
      * Recipient of the email
@@ -291,7 +291,7 @@ class Message : JsonSerializable, Serializable
      *
      * @param array<string,mixed>|null $config Array of configs, or string to load configs from app.php
      */
-    public this(?array $config = null) {
+    this(?array $config = null) {
         this.appCharset = Configure::read("App.encoding");
         if (this.appCharset != null) {
             this.charset = this.appCharset;

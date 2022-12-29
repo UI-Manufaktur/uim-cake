@@ -25,7 +25,7 @@ class PackageLocator
      * key is a package name, the second key is a locale code, and the value
      * is a callable that returns a Package object for that name and locale.
      *
-     * @var array<string, array<string, \Cake\I18n\Package|callable>>
+     * @var array<string, array<string, uim.cake.I18n\Package|callable>>
      */
     protected $registry = [];
 
@@ -40,10 +40,10 @@ class PackageLocator
     /**
      * Constructor.
      *
-     * @param array<string, array<string, \Cake\I18n\Package|callable>> $registry A registry of packages.
+     * @param array<string, array<string, uim.cake.I18n\Package|callable>> $registry A registry of packages.
      * @see PackageLocator::$registry
      */
-    public this(array $registry = []) {
+    this(array $registry = []) {
         foreach ($registry as $name: $locales) {
             foreach ($locales as $locale: $spec) {
                 this.set($name, $locale, $spec);
