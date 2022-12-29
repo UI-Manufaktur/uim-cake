@@ -30,7 +30,7 @@ interface EventDispatcherInterface
      * it can be read by listeners.
      * @param object|null $subject The object that this event applies to
      * (this by default).
-     * @return \Cake\Event\EventInterface
+     * @return uim.cake.Event\EventInterface
      */
     function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface;
 
@@ -48,7 +48,7 @@ interface EventDispatcherInterface
     /**
      * Returns the Cake\Event\EventManager manager instance for this object.
      *
-     * @return \Cake\Event\IEventManager
+     * @return uim.cake.Event\IEventManager
      */
     function getEventManager(): IEventManager;
 }

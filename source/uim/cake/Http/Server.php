@@ -123,7 +123,7 @@ class Server : EventDispatcherInterface
     /**
      * Get the current application.
      *
-     * @return \Cake\Core\IHttpApplication The application that will be run.
+     * @return uim.cake.Core\IHttpApplication The application that will be run.
      */
     function getApp(): IHttpApplication
     {
@@ -133,7 +133,7 @@ class Server : EventDispatcherInterface
     /**
      * Get the application"s event manager or the global one.
      *
-     * @return \Cake\Event\IEventManager
+     * @return uim.cake.Event\IEventManager
      */
     function getEventManager(): IEventManager
     {

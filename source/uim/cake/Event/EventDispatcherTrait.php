@@ -35,7 +35,7 @@ trait EventDispatcherTrait
      * You can use this instance to register any new listeners or callbacks to the
      * object events, or create your own events and trigger them at will.
      *
-     * @return \Cake\Event\IEventManager
+     * @return uim.cake.Event\IEventManager
      */
     function getEventManager(): IEventManager
     {
@@ -71,7 +71,7 @@ trait EventDispatcherTrait
      * it can be read by listeners.
      * @param object|null $subject The object that this event applies to
      * (this by default).
-     * @return \Cake\Event\EventInterface
+     * @return uim.cake.Event\EventInterface
      */
     function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface
     {

@@ -33,7 +33,7 @@ class PropertyNode : INode {
     /**
      * Get the value
      *
-     * @return \Cake\Error\Debug\INode
+     * @return uim.cake.Error\Debug\INode
      */
     INode getValue() {
       return this.value;

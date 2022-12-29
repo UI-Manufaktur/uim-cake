@@ -128,7 +128,7 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param \Throwable myException The exception being rendered.
      * @param \Psr\Http\Message\IServerRequest|null myRequest The request.
-     * @return \Cake\Error\IExceptionRenderer The exception renderer.
+     * @return uim.cake.Error\IExceptionRenderer The exception renderer.
      * @throws \RuntimeException When the renderer class cannot be found.
      */
     auto getRenderer(

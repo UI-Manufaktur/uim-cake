@@ -284,7 +284,7 @@ class Stream : AdapterInterface
      *
      * @param array $headers Unparsed headers.
      * @param string $body The response body.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     protected function _buildResponse(array $headers, string $body): Response
     {

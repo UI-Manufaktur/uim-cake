@@ -47,7 +47,7 @@ class Digest
      *
      * @param uim.cake.Http\Client\Request $request The request object.
      * @param array<string, mixed> $credentials Authentication credentials.
-     * @return \Cake\Http\Client\Request The updated request.
+     * @return uim.cake.Http\Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
     function authentication(Request $request, array $credentials): Request

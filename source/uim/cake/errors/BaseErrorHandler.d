@@ -303,7 +303,7 @@ abstract class BaseErrorHandler
     /**
      * Get exception logger.
      *
-     * @return \Cake\Error\IErrorLogger
+     * @return uim.cake.Error\IErrorLogger
      */
     auto getLogger() {
         if (this.logger is null) {

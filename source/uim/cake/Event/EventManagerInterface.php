@@ -96,7 +96,7 @@ interface IEventManager
      * Dispatches a new event to all configured listeners
      *
      * @param uim.cake.Event\EventInterface|string $event The event key name or instance of EventInterface.
-     * @return \Cake\Event\EventInterface
+     * @return uim.cake.Event\EventInterface
      * @triggers $event
      */
     function dispatch($event): EventInterface;

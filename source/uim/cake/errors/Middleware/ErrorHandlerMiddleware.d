@@ -151,7 +151,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Get a error handler instance
      *
-     * @return \Cake\Error\ErrorHandler The error handler.
+     * @return uim.cake.Error\ErrorHandler The error handler.
      */
     protected auto getErrorHandler(): ErrorHandler
     {

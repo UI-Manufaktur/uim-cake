@@ -95,7 +95,7 @@ class ExceptionRenderer : IExceptionRenderer
      * This method returns the built in `ErrorController` normally, or if an error is repeated
      * a bare controller will be used.
      *
-     * @return \Cake\Controller\Controller
+     * @return uim.cake.Controller\Controller
      * @triggers Controller.startup $controller
      */
     protected Controller _getController() {
@@ -240,7 +240,7 @@ class ExceptionRenderer : IExceptionRenderer
      *
      * @param string method The method name to invoke.
      * @param \Throwable myException The exception to render.
-     * @return \Cake\Http\Response The response to send.
+     * @return uim.cake.Http\Response The response to send.
      */
     protected Response _customMethod(string method, Throwable myException) {
         myResult = this.{$method}(myException);
@@ -333,7 +333,7 @@ class ExceptionRenderer : IExceptionRenderer
      * Generate the response using the controller object.
      *
      * @param string myTemplate The template to render.
-     * @return \Cake\Http\Response A response object that can be sent.
+     * @return uim.cake.Http\Response A response object that can be sent.
      */
     protected Response _outputMessage(string myTemplate) {
         try {
@@ -367,7 +367,7 @@ class ExceptionRenderer : IExceptionRenderer
      * and doesn"t call component methods.
      *
      * @param string myTemplate The template to render.
-     * @return \Cake\Http\Response A response object that can be sent.
+     * @return uim.cake.Http\Response A response object that can be sent.
      */
     protected Response _outputMessageSafe(string myTemplate) {
         myBuilder = this.controller.viewBuilder();
@@ -390,7 +390,7 @@ class ExceptionRenderer : IExceptionRenderer
      *
      * Triggers the afterFilter and afterDispatch events.
      *
-     * @return \Cake\Http\Response The response to serve.
+     * @return uim.cake.Http\Response The response to serve.
      */
     protected Response _shutdown() {
         this.controller.dispatchEvent("Controller.shutdown");

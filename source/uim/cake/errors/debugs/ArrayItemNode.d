@@ -29,7 +29,7 @@ class ArrayItemNode : INode
     /**
      * Get the value
      *
-     * @return \Cake\Error\Debug\INode
+     * @return uim.cake.Error\Debug\INode
      */
     auto getValue() {
         return this.value;
@@ -38,7 +38,7 @@ class ArrayItemNode : INode
     /**
      * Get the key
      *
-     * @return \Cake\Error\Debug\INode
+     * @return uim.cake.Error\Debug\INode
      */
     auto getKey() {
         return this.key;

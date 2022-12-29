@@ -134,7 +134,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * This method returns the built in `ErrorController` normally, or if an error is repeated
      * a bare controller will be used.
      *
-     * @return \Cake\Controller\Controller
+     * @return uim.cake.Controller\Controller
      * @triggers Controller.startup $controller
      */
     protected function _getController(): Controller
@@ -209,7 +209,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     /**
      * Renders the response for the exception.
      *
-     * @return \Cake\Http\Response The response to be sent.
+     * @return uim.cake.Http\Response The response to be sent.
      */
     function render(): IResponse
     {
@@ -307,7 +307,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      *
      * @param string $method The method name to invoke.
      * @param \Throwable $exception The exception to render.
-     * @return \Cake\Http\Response The response to send.
+     * @return uim.cake.Http\Response The response to send.
      */
     protected function _customMethod(string $method, Throwable $exception): Response
     {
@@ -405,7 +405,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * Generate the response using the controller object.
      *
      * @param string $template The template to render.
-     * @return \Cake\Http\Response A response object that can be sent.
+     * @return uim.cake.Http\Response A response object that can be sent.
      */
     protected function _outputMessage(string $template): Response
     {
@@ -444,7 +444,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * and doesn"t call component methods.
      *
      * @param string $template The template to render.
-     * @return \Cake\Http\Response A response object that can be sent.
+     * @return uim.cake.Http\Response A response object that can be sent.
      */
     protected function _outputMessageSafe(string $template): Response
     {
@@ -468,7 +468,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      *
      * Triggers the afterFilter and afterDispatch events.
      *
-     * @return \Cake\Http\Response The response to serve.
+     * @return uim.cake.Http\Response The response to serve.
      */
     protected function _shutdown(): Response
     {

@@ -82,7 +82,7 @@ interface IEventManager
      * Dispatches a new event to all configured listeners
      *
      * @param uim.cake.Event\IEvent|string myEvent The event key name or instance of IEvent.
-     * @return \Cake\Event\IEvent
+     * @return uim.cake.Event\IEvent
      * @triggers myEvent
      */
     IEvent dispatch(myEvent);

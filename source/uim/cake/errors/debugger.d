@@ -544,7 +544,7 @@ class Debugger
     /**
      * Get the configured export formatter or infer one based on the environment.
      *
-     * @return \Cake\Error\Debug\IFormatter
+     * @return uim.cake.Error\Debug\IFormatter
      * @unstable This method is not stable and may change in the future.
      * @since 4.1.0
      */
@@ -620,7 +620,7 @@ class Debugger
      *
      * @param mixed $var Variable to convert.
      * @param int $maxDepth The depth to generate nodes to. Defaults to 3.
-     * @return \Cake\Error\Debug\INode The root node of the tree.
+     * @return uim.cake.Error\Debug\INode The root node of the tree.
      */
     static function exportVarAsNodes($var, int $maxDepth = 3): INode
     {
@@ -632,7 +632,7 @@ class Debugger
      *
      * @param mixed $var The variable to dump.
      * @param uim.cake.Error\Debug\DebugContext $context Dump context
-     * @return \Cake\Error\Debug\INode The dumped variable.
+     * @return uim.cake.Error\Debug\INode The dumped variable.
      */
     protected static function export($var, DebugContext $context): INode
     {
@@ -672,7 +672,7 @@ class Debugger
      *
      * @param array $var The array to export.
      * @param uim.cake.Error\Debug\DebugContext $context The current dump context.
-     * @return \Cake\Error\Debug\ArrayNode Exported array.
+     * @return uim.cake.Error\Debug\ArrayNode Exported array.
      */
     protected static function exportArray(array $var, DebugContext $context): ArrayNode
     {
@@ -708,7 +708,7 @@ class Debugger
      *
      * @param object $var Object to convert.
      * @param uim.cake.Error\Debug\DebugContext $context The dump context.
-     * @return \Cake\Error\Debug\INode
+     * @return uim.cake.Error\Debug\INode
      * @see uim.cake.Error\Debugger::exportVar()
      */
     protected static function exportObject(object $var, DebugContext $context): INode

@@ -45,7 +45,7 @@ class PropertyNode : NodeInterface
     /**
      * Get the value
      *
-     * @return \Cake\Error\Debug\NodeInterface
+     * @return uim.cake.Error\Debug\NodeInterface
      */
     function getValue(): NodeInterface
     {

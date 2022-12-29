@@ -121,7 +121,7 @@ class CookieCollection : IteratorAggregate, Countable
      * Get the first cookie by name.
      *
      * @param string $name The name of the cookie.
-     * @return \Cake\Http\Cookie\CookieInterface
+     * @return uim.cake.Http\Cookie\CookieInterface
      * @throws \InvalidArgumentException If cookie not found.
      */
     function get(string $name): CookieInterface

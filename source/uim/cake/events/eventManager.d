@@ -61,7 +61,7 @@ class EventManager : IEventManager
      * If called with the first parameter, it will be set as the globally available instance
      *
      * @param uim.cake.Event\EventManager|null $manager Event manager instance.
-     * @return \Cake\Event\EventManager The global event manager
+     * @return uim.cake.Event\EventManager The global event manager
      */
     static function instance(?EventManager $manager = null) {
         if ($manager instanceof EventManager) {
@@ -346,7 +346,7 @@ class EventManager : IEventManager
     /**
      * Returns the event list.
      *
-     * @return \Cake\Event\EventList|null
+     * @return uim.cake.Event\EventList|null
      */
     auto getEventList(): ?EventList
     {

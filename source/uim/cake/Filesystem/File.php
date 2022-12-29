@@ -538,7 +538,7 @@ class File
     /**
      * Returns the current folder.
      *
-     * @return \Cake\Filesystem\Folder Current folder
+     * @return uim.cake.Filesystem\Folder Current folder
      */
     function folder(): Folder
     {

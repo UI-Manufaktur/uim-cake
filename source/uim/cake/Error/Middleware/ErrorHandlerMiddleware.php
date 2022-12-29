@@ -195,7 +195,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Get a error handler instance
      *
-     * @return \Cake\Error\ErrorHandler The error handler.
+     * @return uim.cake.Error\ErrorHandler The error handler.
      */
     protected function getErrorHandler(): ErrorHandler
     {
@@ -211,7 +211,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Get a exception trap instance
      *
-     * @return \Cake\Error\ExceptionTrap The exception trap.
+     * @return uim.cake.Error\ExceptionTrap The exception trap.
      */
     protected function getExceptionTrap(): ExceptionTrap
     {

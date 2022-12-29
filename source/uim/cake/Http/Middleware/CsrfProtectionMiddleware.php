@@ -415,7 +415,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param string $value Cookie value
      * @param \Psr\Http\Message\IServerRequest $request The request object.
-     * @return \Cake\Http\Cookie\CookieInterface
+     * @return uim.cake.Http\Cookie\CookieInterface
      */
     protected function _createCookie(string $value, IServerRequest $request): CookieInterface
     {

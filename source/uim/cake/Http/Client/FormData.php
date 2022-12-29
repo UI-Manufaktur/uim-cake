@@ -75,7 +75,7 @@ class FormData : Countable
      *
      * @param string $name The name of the part.
      * @param string $value The value to add.
-     * @return \Cake\Http\Client\FormDataPart
+     * @return uim.cake.Http\Client\FormDataPart
      */
     function newPart(string $name, string $value): FormDataPart
     {
@@ -136,7 +136,7 @@ class FormData : Countable
      * @param string $name The name to use.
      * @param string|resource|\Psr\Http\Message\UploadedFileInterface $value Either a string filename, or a filehandle,
      *  or a UploadedFileInterface instance.
-     * @return \Cake\Http\Client\FormDataPart
+     * @return uim.cake.Http\Client\FormDataPart
      */
     function addFile(string $name, $value): FormDataPart
     {

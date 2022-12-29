@@ -38,7 +38,7 @@ class ArrayItemNode : NodeInterface
     /**
      * Get the value
      *
-     * @return \Cake\Error\Debug\NodeInterface
+     * @return uim.cake.Error\Debug\NodeInterface
      */
     function getValue() {
         return this.value;
@@ -47,7 +47,7 @@ class ArrayItemNode : NodeInterface
     /**
      * Get the key
      *
-     * @return \Cake\Error\Debug\NodeInterface
+     * @return uim.cake.Error\Debug\NodeInterface
      */
     function getKey() {
         return this.key;

@@ -1326,7 +1326,7 @@ class Response : IResponse
     /**
      * Get the CookieCollection from the response
      *
-     * @return \Cake\Http\Cookie\CookieCollection
+     * @return uim.cake.Http\Cookie\CookieCollection
      */
     function getCookieCollection(): CookieCollection
     {
@@ -1350,7 +1350,7 @@ class Response : IResponse
      * Get a CorsBuilder instance for defining CORS headers.
      *
      * @param uim.cake.Http\ServerRequest $request Request object
-     * @return \Cake\Http\CorsBuilder A builder object the provides a fluent interface for defining
+     * @return uim.cake.Http\CorsBuilder A builder object the provides a fluent interface for defining
      *   additional CORS headers.
      */
     function cors(ServerRequest $request): CorsBuilder

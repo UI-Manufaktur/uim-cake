@@ -68,7 +68,7 @@ class Mock : AdapterInterface
      *
      * @param \Psr\Http\Message\RequestInterface $request The request to match
      * @param array<string, mixed> $options Unused.
-     * @return \Cake\Http\Client\Response[] The matched response or an empty array for no matches.
+     * @return uim.cake.Http\Client\Response[] The matched response or an empty array for no matches.
      */
     function send(RequestInterface $request, array $options): array
     {
