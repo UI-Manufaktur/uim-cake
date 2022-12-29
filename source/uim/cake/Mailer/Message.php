@@ -1229,7 +1229,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return void
      */
-    protected function createBoundary(): void
+    protected void createBoundary(): void
     {
         if (
             this.boundary == null &&

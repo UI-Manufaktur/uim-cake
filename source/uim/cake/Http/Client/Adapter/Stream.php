@@ -116,7 +116,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> $options Additional request options.
      * @return void
      */
-    protected function _buildContext(RequestInterface $request, array $options): void
+    protected void _buildContext(RequestInterface $request, array $options): void
     {
         _buildContent($request, $options);
         _buildHeaders($request, $options);
@@ -142,7 +142,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> $options Array of options to use.
      * @return void
      */
-    protected function _buildHeaders(RequestInterface $request, array $options): void
+    protected void _buildHeaders(RequestInterface $request, array $options): void
     {
         $headers = [];
         foreach ($request.getHeaders() as $name: $values) {
@@ -161,7 +161,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> $options Array of options to use.
      * @return void
      */
-    protected function _buildContent(RequestInterface $request, array $options): void
+    protected void _buildContent(RequestInterface $request, array $options): void
     {
         $body = $request.getBody();
         $body.rewind();
@@ -175,7 +175,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> $options Array of options to use.
      * @return void
      */
-    protected function _buildOptions(RequestInterface $request, array $options): void
+    protected void _buildOptions(RequestInterface $request, array $options): void
     {
         _contextOptions["method"] = $request.getMethod();
         _contextOptions["protocol_version"] = $request.getProtocolVersion();
@@ -200,7 +200,7 @@ class Stream : AdapterInterface
      * @param array<string, mixed> $options Array of options to use.
      * @return void
      */
-    protected function _buildSslContext(RequestInterface $request, array $options): void
+    protected void _buildSslContext(RequestInterface $request, array $options): void
     {
         $sslOptions = [
             "ssl_verify_peer",

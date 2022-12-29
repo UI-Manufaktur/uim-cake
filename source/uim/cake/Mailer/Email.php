@@ -429,7 +429,7 @@ class Email : JsonSerializable, Serializable
      * @param array<string, string> $contents The content with "headers" and "message" keys.
      * @return void
      */
-    protected function _logDelivery(array $contents): void
+    protected void _logDelivery(array $contents): void
     {
         if (empty(_profile["log"])) {
             return;

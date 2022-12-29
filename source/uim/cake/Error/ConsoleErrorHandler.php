@@ -68,7 +68,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      * @param \Throwable $exception The exception to handle
      * @return void
      */
-    protected function _displayException(Throwable $exception): void
+    protected void _displayException(Throwable $exception): void
     {
         $errorName = "Exception:";
         if ($exception instanceof FatalErrorException) {
@@ -94,7 +94,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      * @param bool $debug Whether the app is in debug mode.
      * @return void
      */
-    protected function _displayError(array $error, bool $debug): void
+    protected void _displayError(array $error, bool $debug): void
     {
         $message = sprintf(
             "%s\nIn [%s, line %s]",
@@ -116,7 +116,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      * @param int $code The exit code.
      * @return void
      */
-    protected function _stop(int $code): void
+    protected void _stop(int $code): void
     {
         exit($code);
     }

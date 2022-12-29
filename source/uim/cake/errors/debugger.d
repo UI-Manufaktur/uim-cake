@@ -246,7 +246,7 @@ class Debugger
      * @param \Closure|string myTemplate The string template or closure
      * @return void
      */
-    static function addEditor(string myName, myTemplate): void
+    static void addEditor(string myName, myTemplate): void
     {
         $instance = static::getInstance();
         if (!is_string(myTemplate) && !(myTemplate instanceof Closure)) {
@@ -317,7 +317,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return void
      */
-    static function log($var, $level = "debug", int $maxDepth = 3): void
+    static void log($var, $level = "debug", int $maxDepth = 3): void
     {
         /** @var string source */
         $source = static::trace(["start":1]);
@@ -991,7 +991,7 @@ class Debugger
      *    environment conditions.
      * @return void
      */
-    static function printVar($var, array myLocation = [], ?bool $showHtml = null): void
+    static void printVar($var, array myLocation = [], ?bool $showHtml = null): void
     {
         myLocation += ["file":null, "line":null];
         if (myLocation["file"]) {
@@ -1038,7 +1038,7 @@ class Debugger
      *
      * @return void
      */
-    static function checkSecurityKeys(): void
+    static void checkSecurityKeys(): void
     {
         $salt = Security::getSalt();
         if ($salt == "__SALT__" || strlen($salt) < 32) {

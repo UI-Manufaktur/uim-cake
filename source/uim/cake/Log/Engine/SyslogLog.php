@@ -141,7 +141,7 @@ class SyslogLog : BaseLog
      * @param int $facility the stream or facility to log to
      * @return void
      */
-    protected function _open(string $ident, int $options, int $facility): void
+    protected void _open(string $ident, int $options, int $facility): void
     {
         openlog($ident, $options, $facility);
     }

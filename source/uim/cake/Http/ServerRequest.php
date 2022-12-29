@@ -245,7 +245,7 @@ class ServerRequest : IServerRequest
      * @param array<string, mixed> $config The config data to use.
      * @return void
      */
-    protected function _setConfig(array $config): void
+    protected void _setConfig(array $config): void
     {
         if (empty($config["session"])) {
             $config["session"] = new Session([
@@ -736,7 +736,7 @@ class ServerRequest : IServerRequest
      * @param callable|array $detector A callable or options array for the detector definition.
      * @return void
      */
-    static function addDetector(string $name, $detector): void
+    static void addDetector(string $name, $detector): void
     {
         $name = strtolower($name);
         if (is_callable($detector)) {

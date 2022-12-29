@@ -575,7 +575,7 @@ class Mailer : IEventListener
      * @param array<string, mixed>|string|true $log Log config.
      * @return void
      */
-    protected function setLogConfig($log) {
+    protected void setLogConfig($log) {
         $config = [
             "level": "debug",
             "scope": "email",

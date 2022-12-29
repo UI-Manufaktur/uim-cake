@@ -59,7 +59,7 @@ class TransportFactory
      * @param uim.cake.Mailer\TransportRegistry $registry Injectable registry object.
      * @return void
      */
-    static function setRegistry(TransportRegistry $registry): void
+    static void setRegistry(TransportRegistry $registry): void
     {
         static::$_registry = $registry;
     }

@@ -116,7 +116,7 @@ class EventManager : IEventManager
      * @param uim.cake.events.IEventListener $subscriber Event listener.
      * @return void
      */
-    protected function _attachSubscriber(IEventListener $subscriber): void
+    protected void _attachSubscriber(IEventListener $subscriber): void
     {
         foreach ($subscriber.implementedEvents() as $eventKey: $function) {
             $options = [];
@@ -217,7 +217,7 @@ class EventManager : IEventManager
      * @param string|null $eventKey optional event key name to unsubscribe the listener from
      * @return void
      */
-    protected function _detachSubscriber(IEventListener $subscriber, ?string $eventKey = null): void
+    protected void _detachSubscriber(IEventListener $subscriber, ?string $eventKey = null): void
     {
         $events = $subscriber.implementedEvents();
         if (!empty($eventKey) && empty($events[$eventKey])) {

@@ -501,7 +501,7 @@ class Client : ClientInterface
      *
      * @return void
      */
-    static function clearMockResponses(): void
+    static void clearMockResponses(): void
     {
         static::$_mockAdapter = null;
     }
@@ -526,7 +526,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options See above.
      * @return void
      */
-    static function addMockResponse(string $method, string $url, Response $response, array $options = []): void
+    static void addMockResponse(string $method, string $url, Response $response, array $options = []): void
     {
         if (!static::$_mockAdapter) {
             static::$_mockAdapter = new MockAdapter();

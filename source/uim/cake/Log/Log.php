@@ -212,7 +212,7 @@ class Log
      *
      * @return void
      */
-    static function reset(): void
+    static void reset(): void
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (isset(static::$_registry)) {

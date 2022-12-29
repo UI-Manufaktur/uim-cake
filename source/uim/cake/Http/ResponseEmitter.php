@@ -86,7 +86,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\messages.IResponse $response The response to emit
      * @return void
      */
-    protected function emitBody(IResponse $response): void
+    protected void emitBody(IResponse $response): void
     {
         if (in_array($response.getStatusCode(), [204, 304], true)) {
             return;
@@ -112,7 +112,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\messages.IResponse $response The response to emit
      * @return void
      */
-    protected function emitBodyRange(array $range, IResponse $response): void
+    protected void emitBodyRange(array $range, IResponse $response): void
     {
         [, $first, $last] = $range;
 
@@ -149,7 +149,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\messages.IResponse $response The response to emit
      * @return void
      */
-    protected function emitStatusLine(IResponse $response): void
+    protected void emitStatusLine(IResponse $response): void
     {
         $reasonPhrase = $response.getReasonPhrase();
         header(sprintf(
@@ -171,7 +171,7 @@ class ResponseEmitter : EmitterInterface
      * @param \Psr\Http\messages.IResponse $response The response to emit
      * @return void
      */
-    protected function emitHeaders(IResponse $response): void
+    protected void emitHeaders(IResponse $response): void
     {
         $cookies = [];
         if (method_exists($response, "getCookieCollection")) {
@@ -203,7 +203,7 @@ class ResponseEmitter : EmitterInterface
      * @param array<uim.cake.Http\Cookie\CookieInterface|string> $cookies An array of cookies.
      * @return void
      */
-    protected function emitCookies(array $cookies): void
+    protected void emitCookies(array $cookies): void
     {
         foreach ($cookies as $cookie) {
             this.setCookie($cookie);
@@ -253,7 +253,7 @@ class ResponseEmitter : EmitterInterface
      * @param int|null $maxBufferLevel Flush up to this buffer level.
      * @return void
      */
-    protected function flush(?int $maxBufferLevel = null): void
+    protected void flush(?int $maxBufferLevel = null): void
     {
         if ($maxBufferLevel == null) {
             $maxBufferLevel = ob_get_level();

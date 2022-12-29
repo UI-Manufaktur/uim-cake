@@ -375,7 +375,7 @@ class Oauth
      *
      * @return void
      */
-    protected function checkSslError(): void
+    protected void checkSslError(): void
     {
         $error = "";
         while ($text = openssl_error_string()) {

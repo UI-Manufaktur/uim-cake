@@ -95,7 +95,7 @@ class Server : EventDispatcherInterface
      *
      * @return void
      */
-    protected function bootstrap(): void
+    protected void bootstrap(): void
     {
         this.app.bootstrap();
         if (this.app instanceof IPluginApplication) {

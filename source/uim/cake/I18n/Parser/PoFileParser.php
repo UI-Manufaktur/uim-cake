@@ -134,7 +134,7 @@ class PoFileParser
      * @param array $item The current item being inspected
      * @return void
      */
-    protected function _addMessage(array &$messages, array $item): void
+    protected void _addMessage(array &$messages, array $item): void
     {
         if (empty($item["ids"]["singular"]) && empty($item["ids"]["plural"])) {
             return;

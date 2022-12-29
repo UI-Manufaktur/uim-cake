@@ -200,7 +200,7 @@ class SmtpTransport : AbstractTransport
      * @param array<string> $responseLines Response lines to parse.
      * @return void
      */
-    protected function _bufferResponseLines(array $responseLines): void
+    protected void _bufferResponseLines(array $responseLines): void
     {
         $response = [];
         foreach ($responseLines as $responseLine) {
@@ -219,7 +219,7 @@ class SmtpTransport : AbstractTransport
      *
      * @return void
      */
-    protected function _parseAuthType(): void
+    protected void _parseAuthType(): void
     {
         this.authType = null;
 
@@ -362,7 +362,7 @@ class SmtpTransport : AbstractTransport
      * @param string $password Password.
      * @return void
      */
-    protected function _authLogin(string $username, string $password): void
+    protected void _authLogin(string $username, string $password): void
     {
         $replyCode = _smtpSend("AUTH LOGIN", "334|500|502|504");
         if ($replyCode == "334") {
@@ -466,7 +466,7 @@ class SmtpTransport : AbstractTransport
      * @throws uim.cake.Network\exceptions.SocketException
      * @return void
      */
-    protected function _sendRcpt(Message $message): void
+    protected void _sendRcpt(Message $message): void
     {
         $from = _prepareFromAddress($message);
         _smtpSend(_prepareFromCmd(key($from)));

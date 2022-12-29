@@ -195,7 +195,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      *
      * @return void
      */
-    protected function clearOutput(): void
+    protected void clearOutput(): void
     {
         if (in_array(PHP_SAPI, ["cli", "phpdbg"])) {
             return;

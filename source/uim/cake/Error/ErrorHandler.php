@@ -110,7 +110,7 @@ class ErrorHandler : BaseErrorHandler
      * @param bool $debug Whether the app is in debug mode.
      * @return void
      */
-    protected function _displayError(array $error, bool $debug): void
+    protected void _displayError(array $error, bool $debug): void
     {
         if (!$debug) {
             return;
@@ -178,7 +178,7 @@ class ErrorHandler : BaseErrorHandler
      * @param \Throwable $exception Exception.
      * @return void
      */
-    protected function _logInternalError(Throwable $exception): void
+    protected void _logInternalError(Throwable $exception): void
     {
         // Disable trace for internal errors.
         _config["trace"] = false;
@@ -199,7 +199,7 @@ class ErrorHandler : BaseErrorHandler
      * @param \Psr\Http\messages.IResponse|string $response Either the message or response object.
      * @return void
      */
-    protected function _sendResponse($response): void
+    protected void _sendResponse($response): void
     {
         if (is_string($response)) {
             echo $response;

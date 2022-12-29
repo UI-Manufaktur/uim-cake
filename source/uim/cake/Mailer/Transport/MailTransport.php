@@ -76,7 +76,7 @@ class MailTransport : AbstractTransport
      * @throws uim.cake.Network\exceptions.SocketException if mail could not be sent
      * @return void
      */
-    protected function _mail(
+    protected void _mail(
         string $to,
         string $subject,
         string $message,

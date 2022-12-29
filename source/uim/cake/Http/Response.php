@@ -470,7 +470,7 @@ class Response : IResponse
      *
      * @return void
      */
-    protected function _createStream(): void
+    protected void _createStream(): void
     {
         this.stream = new Stream(_streamTarget, _streamMode);
     }
@@ -482,7 +482,7 @@ class Response : IResponse
      * @param string $type The type to set.
      * @return void
      */
-    protected function _setContentType(string $type): void
+    protected void _setContentType(string $type): void
     {
         if (in_array(_status, [304, 204], true)) {
             _clearHeader("Content-Type");
@@ -537,7 +537,7 @@ class Response : IResponse
      * @param string $value Header value.
      * @return void
      */
-    protected function _setHeader(string $header, string $value): void
+    protected void _setHeader(string $header, string $value): void
     {
         $normalized = strtolower($header);
         this.headerNames[$normalized] = $header;
@@ -551,7 +551,7 @@ class Response : IResponse
      * @param string $header Header key.
      * @return void
      */
-    protected function _clearHeader(string $header): void
+    protected void _clearHeader(string $header): void
     {
         $normalized = strtolower($header);
         if (!isset(this.headerNames[$normalized])) {
@@ -904,7 +904,7 @@ class Response : IResponse
      *
      * @return void
      */
-    protected function _setCacheControl(): void
+    protected void _setCacheControl(): void
     {
         $control = "";
         foreach (_cacheDirectives as $key: $val) {
@@ -1486,7 +1486,7 @@ class Response : IResponse
      * @param string $httpRange The range to use.
      * @return void
      */
-    protected function _fileRange(SplFileInfo $file, string $httpRange): void
+    protected void _fileRange(SplFileInfo $file, string $httpRange): void
     {
         $fileSize = $file.getSize();
         $lastByte = $fileSize - 1;

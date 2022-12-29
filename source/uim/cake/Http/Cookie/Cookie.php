@@ -193,7 +193,7 @@ class Cookie : CookieInterface
      * @param array<string, mixed> $options Default options.
      * @return void
      */
-    static function setDefaults(array $options): void
+    static void setDefaults(array $options): void
     {
         if (isset($options["expires"])) {
             $options["expires"] = static::dateTimeInstance($options["expires"]);
@@ -446,7 +446,7 @@ class Cookie : CookieInterface
      * @param array|string $value The value to store.
      * @return void
      */
-    protected function _setValue($value): void
+    protected void _setValue($value): void
     {
         this.isExpanded = is_array($value);
         this.value = $value;

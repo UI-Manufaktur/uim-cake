@@ -55,7 +55,7 @@ trait ModelAwareTrait
      * @param string $name Class name.
      * @return void
      */
-    protected function _setModelClass(string $name): void
+    protected void _setModelClass(string $name): void
     {
         if (this.modelClass == null) {
             this.modelClass = $name;

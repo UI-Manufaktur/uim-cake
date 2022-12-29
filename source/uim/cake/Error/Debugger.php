@@ -261,7 +261,7 @@ class Debugger
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return void
      */
-    static function setOutputMask(array $value, bool $merge = true): void
+    static void setOutputMask(array $value, bool $merge = true): void
     {
         static::configInstance('outputMask', $value, $merge);
     }
@@ -277,7 +277,7 @@ class Debugger
      * @param \Closure|string $template The string template or closure
      * @return void
      */
-    static function addEditor(string $name, $template): void
+    static void addEditor(string $name, $template): void
     {
         $instance = static::getInstance();
         if (!is_string($template) && !($template instanceof Closure)) {
@@ -293,7 +293,7 @@ class Debugger
      * @param string $name The editor name.
      * @return void
      */
-    static function setEditor(string $name): void
+    static void setEditor(string $name): void
     {
         $instance = static::getInstance();
         if (!isset($instance.editors[$name])) {
@@ -349,7 +349,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return void
      */
-    static function log($var, $level = 'debug', int $maxDepth = 3): void
+    static void log($var, $level = 'debug', int $maxDepth = 3): void
     {
         /** @var string $source */
         $source = static::trace(['start': 1]);
@@ -1077,7 +1077,7 @@ class Debugger
      *    environment conditions.
      * @return void
      */
-    static function printVar($var, array $location = [], ?bool $showHtml = null): void
+    static void printVar($var, array $location = [], ?bool $showHtml = null): void
     {
         $location += ['file': null, 'line': null];
         if ($location['file']) {
@@ -1124,7 +1124,7 @@ class Debugger
      *
      * @return void
      */
-    static function checkSecurityKeys(): void
+    static void checkSecurityKeys(): void
     {
         $salt = Security::getSalt();
         if ($salt == '__SALT__' || strlen($salt) < 32) {

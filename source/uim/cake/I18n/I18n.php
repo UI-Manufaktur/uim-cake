@@ -108,7 +108,7 @@ class I18n
      * @param string|null $locale The locale for the translator.
      * @return void
      */
-    static function setTranslator(string $name, callable $loader, ?string $locale = null): void
+    static void setTranslator(string $name, callable $loader, ?string $locale = null): void
     {
         $locale = $locale ?: static::getLocale();
 
@@ -195,7 +195,7 @@ class I18n
      * instance to be used for assembling a new translator.
      * @return void
      */
-    static function config(string $name, callable $loader): void
+    static void config(string $name, callable $loader): void
     {
         static::translators().registerLoader($name, $loader);
     }
@@ -207,7 +207,7 @@ class I18n
      * @param string $locale The name of the locale to set as default.
      * @return void
      */
-    static function setLocale(string $locale): void
+    static void setLocale(string $locale): void
     {
         static::getDefaultLocale();
         Locale::setDefault($locale);
@@ -270,7 +270,7 @@ class I18n
      * @param string $name The name of the formatter to use.
      * @return void
      */
-    static function setDefaultFormatter(string $name): void
+    static void setDefaultFormatter(string $name): void
     {
         static::translators().defaultFormatter($name);
     }
@@ -281,7 +281,7 @@ class I18n
      * @param bool $enable flag to enable or disable fallback
      * @return void
      */
-    static function useFallback(bool $enable = true): void
+    static void useFallback(bool $enable = true): void
     {
         static::translators().useFallback($enable);
     }
@@ -292,7 +292,7 @@ class I18n
      *
      * @return void
      */
-    static function clear(): void
+    static void clear(): void
     {
         static::$_collection = null;
     }

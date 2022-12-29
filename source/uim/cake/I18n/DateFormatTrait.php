@@ -67,7 +67,7 @@ trait DateFormatTrait
      * @param string|null $locale The default locale string to be used.
      * @return void
      */
-    static function setDefaultLocale(?string $locale = null): void
+    static void setDefaultLocale(?string $locale = null): void
     {
         static::$defaultLocale = $locale;
     }
@@ -87,7 +87,7 @@ trait DateFormatTrait
      *
      * @return void
      */
-    static function enableLenientParsing(): void
+    static void enableLenientParsing(): void
     {
         static::$lenientParsing = true;
     }
@@ -97,7 +97,7 @@ trait DateFormatTrait
      *
      * @return void
      */
-    static function disableLenientParsing(): void
+    static void disableLenientParsing(): void
     {
         static::$lenientParsing = false;
     }
@@ -268,7 +268,7 @@ trait DateFormatTrait
      *
      * @return void
      */
-    static function resetToStringFormat(): void
+    static void resetToStringFormat(): void
     {
         static::setToStringFormat([IntlDateFormatter::SHORT, IntlDateFormatter::SHORT]);
     }
@@ -287,7 +287,7 @@ trait DateFormatTrait
      * @param array<int>|string|int $format Format.
      * @return void
      */
-    static function setToStringFormat($format): void
+    static void setToStringFormat($format): void
     {
         static::$_toStringFormat = $format;
     }
@@ -462,7 +462,7 @@ trait DateFormatTrait
      * @param uim.cake.Chronos\DifferenceFormatterInterface $formatter The formatter instance when setting.
      * @return void
      */
-    static function setDiffFormatter(DifferenceFormatterInterface $formatter): void
+    static void setDiffFormatter(DifferenceFormatterInterface $formatter): void
     {
         static::$diffFormatter = $formatter;
     }

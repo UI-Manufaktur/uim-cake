@@ -171,7 +171,7 @@ class Response : Message : IResponse
      * @param array $headers Headers to parse.
      * @return void
      */
-    protected function _parseHeaders(array $headers): void
+    protected void _parseHeaders(array $headers): void
     {
         foreach ($headers as $value) {
             if (substr($value, 0, 5) == "HTTP/") {
@@ -356,7 +356,7 @@ class Response : Message : IResponse
      *
      * @return void
      */
-    protected function buildCookieCollection(): void
+    protected void buildCookieCollection(): void
     {
         if (this.cookies != null) {
             return;

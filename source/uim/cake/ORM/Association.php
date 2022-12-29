@@ -656,7 +656,7 @@ abstract class Association
      * @param array<string, mixed> $options List of options used for initialization
      * @return void
      */
-    protected function _options(array $options): void
+    protected void _options(array $options): void
     {
     }
 
@@ -762,7 +762,7 @@ abstract class Association
      * @param array<string, mixed> $options Options array containing the `negateMatch` key.
      * @return void
      */
-    protected function _appendNotMatching(Query $query, array $options): void
+    protected void _appendNotMatching(Query $query, array $options): void
     {
         $target = _targetTable;
         if (!empty($options["negateMatch"])) {
@@ -916,7 +916,7 @@ abstract class Association
      * @param uim.cake.orm.Query $query the query this association is attaching itself to
      * @return void
      */
-    protected function _dispatchBeforeFind(Query $query): void
+    protected void _dispatchBeforeFind(Query $query): void
     {
         $query.triggerBeforeFind();
     }
@@ -930,7 +930,7 @@ abstract class Association
      * @param array<string, mixed> $options options passed to the method `attachTo`
      * @return void
      */
-    protected function _appendFields(Query $query, Query $surrogate, array $options): void
+    protected void _appendFields(Query $query, Query $surrogate, array $options): void
     {
         if ($query.getEagerLoader().isAutoFieldsEnabled() == false) {
             return;
@@ -962,7 +962,7 @@ abstract class Association
      * @param array<string, mixed> $options options passed to the method `attachTo`
      * @return void
      */
-    protected function _formatAssociationResults(Query $query, Query $surrogate, array $options): void
+    protected void _formatAssociationResults(Query $query, Query $surrogate, array $options): void
     {
         $formatters = $surrogate.getResultFormatters();
 
@@ -1021,7 +1021,7 @@ abstract class Association
      * @param array<string, mixed> $options options passed to the method `attachTo`
      * @return void
      */
-    protected function _bindNewAssociations(Query $query, Query $surrogate, array $options): void
+    protected void _bindNewAssociations(Query $query, Query $surrogate, array $options): void
     {
         $loader = $surrogate.getEagerLoader();
         $contain = $loader.getContain();

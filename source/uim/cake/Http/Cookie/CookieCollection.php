@@ -325,7 +325,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param string $path The path to check for expired cookies on.
      * @return void
      */
-    protected function removeExpiredCookies(string $host, string $path): void
+    protected void removeExpiredCookies(string $host, string $path): void
     {
         $time = new DateTimeImmutable("now", new DateTimeZone("UTC"));
         $hostPattern = "/" . preg_quote($host, "/") . "$/";

@@ -311,7 +311,7 @@ class Number
      * currently stored value
      * @return void
      */
-    static function setDefaultCurrency(?string $currency = null): void
+    static void setDefaultCurrency(?string $currency = null): void
     {
         static::$_defaultCurrency = $currency;
     }
@@ -338,7 +338,7 @@ class Number
      * currently stored value
      * @return void
      */
-    static function setDefaultCurrencyFormat($currencyFormat = null): void
+    static void setDefaultCurrencyFormat($currencyFormat = null): void
     {
         static::$_defaultCurrencyFormat = $currencyFormat;
     }
@@ -418,7 +418,7 @@ class Number
      * @param array<string, mixed> $options See Number::formatter() for possible options.
      * @return void
      */
-    static function config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = []): void
+    static void config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = []): void
     {
         static::$_formatters[$locale][$type] = static::_setAttributes(
             new NumberFormatter($locale, $type),

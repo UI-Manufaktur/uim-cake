@@ -227,7 +227,7 @@ abstract class BaseErrorHandler
      * @param int $code Exit code.
      * @return void
      */
-    protected function _stop(int $code): void
+    protected void _stop(int $code): void
     {
         // Do nothing.
     }

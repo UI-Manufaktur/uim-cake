@@ -218,7 +218,7 @@ class Socket
      * @param string $host The host name being connected to.
      * @return void
      */
-    protected function _setSslContext(string $host): void
+    protected void _setSslContext(string $host): void
     {
         foreach (_config as $key: $value) {
             if (substr($key, 0, 4) != "ssl_") {
@@ -255,7 +255,7 @@ class Socket
      * @param string $message Message.
      * @return void
      */
-    protected function _connectionErrorHandler(int $code, string $message): void
+    protected void _connectionErrorHandler(int $code, string $message): void
     {
         _connectionErrors[] = $message;
     }

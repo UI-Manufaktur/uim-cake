@@ -147,7 +147,7 @@ class ErrorTrap
      * @param uim.cake.Error\PhpError $error The error object to log.
      * @return void
      */
-    protected function logError(PhpError $error): void
+    protected void logError(PhpError $error): void
     {
         if (!_config["log"]) {
             return;

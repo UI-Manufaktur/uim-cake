@@ -61,7 +61,7 @@ class Request : Message : RequestInterface
      * @param array<string, string> $headers The headers to add.
      * @return void
      */
-    protected function addHeaders(array $headers): void
+    protected void addHeaders(array $headers): void
     {
         foreach ($headers as $key: $val) {
             $normalized = strtolower($key);
