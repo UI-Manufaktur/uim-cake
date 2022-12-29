@@ -21,14 +21,14 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     /**
      * The controller that this collection was initialized with.
      *
-     * @var uim.cake.Controller\Controller|null
+     * @var uim.cake.controllers.Controller|null
      */
     protected _controller;
 
     /**
      * Constructor.
      *
-     * @param \Cake\Controller\Controller|null $controller Controller instance.
+     * @param uim.cake.Controller\Controller|null $controller Controller instance.
      */
     this(?Controller $controller = null) {
         if ($controller) {
@@ -52,7 +52,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Set the controller associated with the collection.
      *
-     * @param \Cake\Controller\Controller $controller Controller instance.
+     * @param uim.cake.Controller\Controller $controller Controller instance.
      * @return this
      */
     auto setController(Controller $controller) {
@@ -106,7 +106,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @psalm-param class-string myClass
      */
     protected Component _create(myClass, string myAlias, array myConfig) {
-        /** @var uim.cake.Controller\Component $instance */
+        /** @var uim.cake.controllers.Component $instance */
         $instance = new myClass(this, myConfig);
         myEnable = myConfig["enabled"] ?? true;
         if (myEnable) {

@@ -39,7 +39,7 @@ abstract class Helper
     /**
      * Constructor.
      *
-     * @param \Cake\Console\ConsoleIo $io The ConsoleIo instance to use.
+     * @param uim.cake.Console\ConsoleIo $io The ConsoleIo instance to use.
      * @param array<string, mixed> $config The settings for this helper.
      */
     public this(ConsoleIo $io, array $config = []) {

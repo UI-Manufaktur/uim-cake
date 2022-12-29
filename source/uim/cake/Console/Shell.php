@@ -172,8 +172,8 @@ class Shell
     /**
      * Constructs this Shell instance.
      *
-     * @param \Cake\Console\ConsoleIo|null $io An io instance.
-     * @param \Cake\ORM\Locator\ILocator|null $locator Table locator instance.
+     * @param uim.cake.Console\ConsoleIo|null $io An io instance.
+     * @param uim.cake.ORM\Locator\ILocator|null $locator Table locator instance.
      * @link https://book.cakephp.org/4/en/console-commands/shells.html
      */
     public this(?ConsoleIo $io = null, ?ILocator $locator = null) {
@@ -222,7 +222,7 @@ class Shell
     /**
      * Set the io object for this shell.
      *
-     * @param \Cake\Console\ConsoleIo $io The ConsoleIo object to use.
+     * @param uim.cake.Console\ConsoleIo $io The ConsoleIo object to use.
      * @return void
      */
     function setIo(ConsoleIo $io): void

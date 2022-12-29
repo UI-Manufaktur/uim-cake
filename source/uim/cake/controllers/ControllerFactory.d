@@ -30,14 +30,14 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     protected myContainer;
 
     /**
-     * @var uim.cake.Controller\Controller
+     * @var uim.cake.controllers.Controller
      */
     protected controller;
 
     /**
      * Constructor
      *
-     * @param \Cake\Core\IContainer myContainer The container to build controllers with.
+     * @param uim.cake.Core\IContainer myContainer The container to build controllers with.
      */
     this(IContainer myContainer) {
         this.container = myContainer;
@@ -76,7 +76,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Invoke a controller"s action and wrapping methods.
      *
-     * @param \Cake\Controller\Controller $controller The controller to invoke.
+     * @param uim.cake.Controller\Controller $controller The controller to invoke.
      * @return \Psr\Http\Message\IResponse The response
      * @throws \Cake\Controller\Exception\MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
@@ -251,7 +251,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Determine the controller class name based on current request and controller param
      *
-     * @param \Cake\Http\ServerRequest myRequest The request to build a controller for.
+     * @param uim.cake.Http\ServerRequest myRequest The request to build a controller for.
      * @return string|null
      * @psalm-return class-string<\Cake\Controller\Controller>|null
      */
@@ -309,7 +309,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Throws an exception when a controller is missing.
      *
-     * @param \Cake\Http\ServerRequest myRequest The request.
+     * @param uim.cake.Http\ServerRequest myRequest The request.
      * @return \Cake\Http\Exception\MissingControllerException
      */
     protected auto missingController(ServerRequest myRequest) {

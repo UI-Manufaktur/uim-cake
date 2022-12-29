@@ -54,7 +54,7 @@ class HelpFormatter
     /**
      * Build the help formatter for an OptionParser
      *
-     * @param \Cake\Console\ConsoleOptionParser $parser The option parser help is being generated for.
+     * @param uim.cake.Console\ConsoleOptionParser $parser The option parser help is being generated for.
      */
     public this(ConsoleOptionParser $parser) {
         _parser = $parser;

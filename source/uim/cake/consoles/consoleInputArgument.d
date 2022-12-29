@@ -54,7 +54,7 @@ class ConsoleInputArgument {
     /**
      * Checks if this argument is equal to another argument.
      *
-     * @param \Cake\Console\ConsoleInputArgument $argument ConsoleInputArgument to compare to.
+     * @param uim.cake.Console\ConsoleInputArgument $argument ConsoleInputArgument to compare to.
      */
     bool isEqualTo(ConsoleInputArgument $argument) {
         return this.usage() == $argument.usage();

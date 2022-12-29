@@ -173,7 +173,7 @@ class PaginatorComponent : Component
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param \Cake\Datasource\RepositoryInterface|\Cake\Datasource\IQuery $object Table or query to paginate.
+     * @param uim.cake.Datasource\RepositoryInterface|\Cake\Datasource\IQuery $object Table or query to paginate.
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return \Cake\Datasource\IResultSet Query results
      * @throws \Cake\Http\Exception\NotFoundException
@@ -228,7 +228,7 @@ class PaginatorComponent : Component
     /**
      * Set paginator instance.
      *
-     * @param \Cake\Datasource\Paging\NumericPaginator $paginator Paginator instance.
+     * @param uim.cake.Datasource\Paging\NumericPaginator $paginator Paginator instance.
      * @return this
      */
     function setPaginator(NumericPaginator $paginator) {

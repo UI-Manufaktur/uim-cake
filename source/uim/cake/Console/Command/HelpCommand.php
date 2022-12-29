@@ -42,8 +42,8 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Main function Prints out the list of commands.
      *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\Arguments $args The command arguments.
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @return int
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
@@ -67,7 +67,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Output text.
      *
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @param iterable $commands The command collection to output.
      * @return void
      */
@@ -133,7 +133,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Output relevant paths if defined
      *
-     * @param \Cake\Console\ConsoleIo $io IO object.
+     * @param uim.cake.Console\ConsoleIo $io IO object.
      * @return void
      */
     protected function outputPaths(ConsoleIo $io): void
@@ -180,7 +180,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Output as XML
      *
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @param iterable $commands The command collection to output
      * @return void
      */
@@ -204,7 +204,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Gets the option parser instance and configures it.
      *
-     * @param \Cake\Console\ConsoleOptionParser $parser The parser to build
+     * @param uim.cake.Console\ConsoleOptionParser $parser The parser to build
      * @return \Cake\Console\ConsoleOptionParser
      */
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser

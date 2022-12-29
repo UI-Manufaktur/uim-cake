@@ -144,7 +144,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Instance of ComponentRegistry used to create Components
      *
-     * @var uim.cake.Controller\ComponentRegistry|null
+     * @var uim.cake.controllers.ComponentRegistry|null
      */
     protected $_components;
 
@@ -169,12 +169,12 @@ class Controller : IEventListener, EventDispatcherInterface
      * Sets a number of properties based on conventions if they are empty. To override the
      * conventions CakePHP uses you can define properties in your class declaration.
      *
-     * @param \Cake\Http\ServerRequest|null $request Request object for this controller. Can be null for testing,
+     * @param uim.cake.Http\ServerRequest|null $request Request object for this controller. Can be null for testing,
      *   but expect that features that use the request parameters will not work.
-     * @param \Cake\Http\Response|null $response Response object for this controller.
+     * @param uim.cake.Http\Response|null $response Response object for this controller.
      * @param string|null $name Override the name useful in testing when using mocks.
-     * @param \Cake\Event\IEventManager|null $eventManager The event manager. Defaults to a new instance.
-     * @param \Cake\Controller\ComponentRegistry|null $components The component registry. Defaults to a new instance.
+     * @param uim.cake.Event\IEventManager|null $eventManager The event manager. Defaults to a new instance.
+     * @param uim.cake.Controller\ComponentRegistry|null $components The component registry. Defaults to a new instance.
      */
     public this(
         ?ServerRequest $request = null,
@@ -255,7 +255,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * If called with the first parameter, it will be set as the controller _components property
      *
-     * @param \Cake\Controller\ComponentRegistry|null $components Component registry.
+     * @param uim.cake.Controller\ComponentRegistry|null $components Component registry.
      * @return \Cake\Controller\ComponentRegistry
      */
     function components(?ComponentRegistry $components = null): ComponentRegistry
@@ -463,7 +463,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * - this.request - To the $request parameter
      *
-     * @param \Cake\Http\ServerRequest $request Request instance.
+     * @param uim.cake.Http\ServerRequest $request Request instance.
      * @return this
      */
     function setRequest(ServerRequest $request) {
@@ -487,7 +487,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Sets the response instance.
      *
-     * @param \Cake\Http\Response $response Response instance.
+     * @param uim.cake.Http\Response $response Response instance.
      * @return this
      * @since 3.6.0
      */
@@ -881,7 +881,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * This method will also make the PaginatorHelper available in the view.
      *
-     * @param \Cake\ORM\Table|\Cake\ORM\Query|string|null $object Table to paginate
+     * @param uim.cake.ORM\Table|\Cake\ORM\Query|string|null $object Table to paginate
      * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return \Cake\ORM\ResultSet|\Cake\Datasource\IResultSet Query results
@@ -987,7 +987,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Called before the controller action. You can use this method to configure and customize components
      * or perform logic that needs to happen before each controller action.
      *
-     * @param \Cake\Event\IEvent $event An Event instance
+     * @param uim.cake.Event\IEvent $event An Event instance
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
@@ -998,7 +998,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Called after the controller action is run, but before the view is rendered. You can use this method
      * to perform logic or set view variables that are required on every request.
      *
-     * @param \Cake\Event\IEvent $event An Event instance
+     * @param uim.cake.Event\IEvent $event An Event instance
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
@@ -1014,10 +1014,10 @@ class Controller : IEventListener, EventDispatcherInterface
      * You can set the event result to response instance or modify the redirect location
      * using controller"s response instance.
      *
-     * @param \Cake\Event\IEvent $event An Event instance
+     * @param uim.cake.Event\IEvent $event An Event instance
      * @param array|string $url A string or array-based URL pointing to another location within the app,
      *     or an absolute URL
-     * @param \Cake\Http\Response $response The response object.
+     * @param uim.cake.Http\Response $response The response object.
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
@@ -1027,7 +1027,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Called after the controller action is run and rendered.
      *
-     * @param \Cake\Event\IEvent $event An Event instance
+     * @param uim.cake.Event\IEvent $event An Event instance
      * @return \Cake\Http\Response|null|void
      * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */

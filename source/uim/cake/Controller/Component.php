@@ -49,7 +49,7 @@ import uim.cake.Log\LogTrait;
  * is the subject of each event and can be fetched using EventInterface::getSubject().
  *
  * @link https://book.cakephp.org/4/en/controllers/components.html
- * @see uim.cake.Controller\Controller::$components
+ * @see uim.cake.controllers.Controller::$components
  */
 #[\AllowDynamicProperties]
 class Component : IEventListener
@@ -60,7 +60,7 @@ class Component : IEventListener
     /**
      * Component registry class used to lazy load components.
      *
-     * @var uim.cake.Controller\ComponentRegistry
+     * @var uim.cake.controllers.ComponentRegistry
      */
     protected $_registry;
 
@@ -90,7 +90,7 @@ class Component : IEventListener
     /**
      * Constructor
      *
-     * @param \Cake\Controller\ComponentRegistry $registry A component registry
+     * @param uim.cake.Controller\ComponentRegistry $registry A component registry
      *  this component can use to lazy load its components.
      * @param array<string, mixed> $config Array of configuration settings.
      */

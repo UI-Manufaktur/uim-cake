@@ -31,7 +31,7 @@ class TaskRegistry : ObjectRegistry
     /**
      * Constructor
      *
-     * @param \Cake\Console\Shell $shell Shell instance
+     * @param uim.cake.Console\Shell $shell Shell instance
      */
     public this(Shell $shell) {
         _Shell = $shell;

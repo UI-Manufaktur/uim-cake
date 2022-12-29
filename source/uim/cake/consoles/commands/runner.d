@@ -25,9 +25,9 @@ class CommandRunner : IEventDispatcher {
     /**
      * Constructor
      *
-     * @param \Cake\Core\IConsoleApplication _app The application to run CLI commands for.
+     * @param uim.cake.Core\IConsoleApplication _app The application to run CLI commands for.
      * @param string root The root command name to be removed from argv.
-     * @param \Cake\Console\ICommandFactory|null _factory Command factory instance.
+     * @param uim.cake.Console\ICommandFactory|null _factory Command factory instance.
      */
     this(
         IConsoleApplication _app,
@@ -77,7 +77,7 @@ class CommandRunner : IEventDispatcher {
      * - Run the requested command.
      *
      * @param array $argv The arguments from the CLI environment.
-     * @param \Cake\Console\ConsoleIo|null $io The ConsoleIo instance. Used primarily for testing.
+     * @param uim.cake.Console\ConsoleIo|null $io The ConsoleIo instance. Used primarily for testing.
      * @return int The exit code of the command.
      * @throws \RuntimeException
      */
@@ -182,8 +182,8 @@ class CommandRunner : IEventDispatcher {
     /**
      * Get the shell instance for a given command name
      *
-     * @param \Cake\Console\ConsoleIo $io The IO wrapper for the created shell class.
-     * @param \Cake\Console\CommandCollection $commands The command collection to find the shell in.
+     * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
+     * @param uim.cake.Console\CommandCollection $commands The command collection to find the shell in.
      * @param string myName The command name to find
      * @return \Cake\Console\ICommand|\Cake\Console\Shell
      */
@@ -211,7 +211,7 @@ class CommandRunner : IEventDispatcher {
      * Build the longest command name that matches a
      * defined command. This will traverse a maximum of 3 tokens.
      *
-     * @param \Cake\Console\CommandCollection $commands The command collection to check.
+     * @param uim.cake.Console\CommandCollection $commands The command collection to check.
      * @param array $argv The CLI arguments.
      * @return array An array of the resolved name and modified argv.
      */
@@ -236,8 +236,8 @@ class CommandRunner : IEventDispatcher {
      * a command name in the CommandCollection. More specific
      * command names take precedence over less specific ones.
      *
-     * @param \Cake\Console\CommandCollection $commands The command collection to check.
-     * @param \Cake\Console\ConsoleIo $io ConsoleIo object for errors.
+     * @param uim.cake.Console\CommandCollection $commands The command collection to check.
+     * @param uim.cake.Console\ConsoleIo $io ConsoleIo object for errors.
      * @param string|null myName The name from the CLI args.
      * @return string The resolved name.
      * @throws \Cake\Console\Exception\MissingOptionException
@@ -266,9 +266,9 @@ class CommandRunner : IEventDispatcher {
     /**
      * Execute a Command class.
      *
-     * @param \Cake\Console\ICommand $command The command to run.
+     * @param uim.cake.Console\ICommand $command The command to run.
      * @param array $argv The CLI arguments to invoke.
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @return int|null Exit code
      */
     protected Nullable!int runCommand(ICommand $command, array $argv, ConsoleIo $io) {
@@ -282,7 +282,7 @@ class CommandRunner : IEventDispatcher {
     /**
      * Execute a Shell class.
      *
-     * @param \Cake\Console\Shell myShell The shell to run.
+     * @param uim.cake.Console\Shell myShell The shell to run.
      * @param array $argv The CLI arguments to invoke.
      * @return int|bool|null Exit code
      */
@@ -300,7 +300,7 @@ class CommandRunner : IEventDispatcher {
      * The wrapper for creating shell instances.
      *
      * @param string myClassName Shell class name.
-     * @param \Cake\Console\ConsoleIo $io The IO wrapper for the created shell class.
+     * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
      * @return \Cake\Console\ICommand|\Cake\Console\Shell
      */
     protected auto createCommand(string myClassName, ConsoleIo $io) {

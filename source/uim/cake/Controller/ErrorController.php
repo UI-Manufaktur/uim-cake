@@ -31,7 +31,7 @@ class ErrorController : Controller
     /**
      * beforeRender callback.
      *
-     * @param \Cake\Event\IEvent $event Event.
+     * @param uim.cake.Event\IEvent $event Event.
      * @return \Cake\Http\Response|null|void
      */
     function beforeRender(IEvent $event) {

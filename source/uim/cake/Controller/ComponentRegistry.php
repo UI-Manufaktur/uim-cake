@@ -30,14 +30,14 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * The controller that this collection was initialized with.
      *
-     * @var uim.cake.Controller\Controller|null
+     * @var uim.cake.controllers.Controller|null
      */
     protected $_Controller;
 
     /**
      * Constructor.
      *
-     * @param \Cake\Controller\Controller|null $controller Controller instance.
+     * @param uim.cake.Controller\Controller|null $controller Controller instance.
      */
     public this(?Controller $controller = null) {
         if ($controller) {
@@ -62,7 +62,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Set the controller associated with the collection.
      *
-     * @param \Cake\Controller\Controller $controller Controller instance.
+     * @param uim.cake.Controller\Controller $controller Controller instance.
      * @return this
      */
     function setController(Controller $controller) {
@@ -120,7 +120,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      */
     protected function _create($class, string $alias, array $config): Component
     {
-        /** @var uim.cake.Controller\Component $instance */
+        /** @var uim.cake.controllers.Component $instance */
         $instance = new $class(this, $config);
         $enable = $config["enabled"] ?? true;
         if ($enable) {

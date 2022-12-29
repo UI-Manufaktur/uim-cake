@@ -71,7 +71,7 @@ class RequestHandlerComponent : Component
     /**
      * Constructor. Parses the accepted content types accepted by the client using HTTP_ACCEPT
      *
-     * @param \Cake\Controller\ComponentRegistry $registry ComponentRegistry object.
+     * @param uim.cake.Controller\ComponentRegistry $registry ComponentRegistry object.
      * @param array<string, mixed> $config Array of config.
      */
     public this(ComponentRegistry $registry, array $config = []) {
@@ -110,8 +110,8 @@ class RequestHandlerComponent : Component
      * If html is one of the preferred types, no content type will be set, this
      * is to avoid issues with browsers that prefer HTML and several other content types.
      *
-     * @param \Cake\Http\ServerRequest $request The request instance.
-     * @param \Cake\Http\Response $response The response instance.
+     * @param uim.cake.Http\ServerRequest $request The request instance.
+     * @param uim.cake.Http\Response $response The response instance.
      * @return void
      */
     protected function _setExtension(ServerRequest $request, Response $response): void
@@ -149,7 +149,7 @@ class RequestHandlerComponent : Component
      * If the XML data is POSTed, the data is parsed into an XML object, which is assigned
      * to the $data property of the controller, which can then be saved to a model object.
      *
-     * @param \Cake\Event\IEvent $event The startup event that was fired.
+     * @param uim.cake.Event\IEvent $event The startup event that was fired.
      * @return void
      */
     function startup(IEvent $event): void
@@ -191,7 +191,7 @@ class RequestHandlerComponent : Component
      * - If the extension is of a type that RequestHandler understands, it will
      *   set that Content-type in the response header.
      *
-     * @param \Cake\Event\IEvent $event The Controller.beforeRender event.
+     * @param uim.cake.Event\IEvent $event The Controller.beforeRender event.
      * @return void
      * @throws \Cake\Http\Exception\NotFoundException If invoked extension is not configured.
      */
@@ -388,11 +388,11 @@ class RequestHandlerComponent : Component
      * this.RequestHandler.renderAs(this, 'xml', ['attachment': 'myfile.xml'];
      * ```
      *
-     * @param \Cake\Controller\Controller $controller A reference to a controller object
+     * @param uim.cake.Controller\Controller $controller A reference to a controller object
      * @param string $type Type of response to send (e.g: 'ajax')
      * @param array<string, mixed> $options Array of options to use
      * @return void
-     * @see uim.cake.Controller\Component\RequestHandlerComponent::respondAs()
+     * @see uim.cake.controllers.Component\RequestHandlerComponent::respondAs()
      */
     function renderAs(Controller $controller, string $type, array $options = []): void
     {

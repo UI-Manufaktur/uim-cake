@@ -22,7 +22,7 @@ class TaskRegistry : ObjectRegistry
     /**
      * Constructor
      *
-     * @param \Cake\Console\Shell myShell Shell instance
+     * @param uim.cake.Console\Shell myShell Shell instance
      */
     this(Shell myShell) {
         _Shell = myShell;

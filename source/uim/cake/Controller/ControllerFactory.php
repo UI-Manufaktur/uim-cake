@@ -39,14 +39,14 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     protected $container;
 
     /**
-     * @var uim.cake.Controller\Controller
+     * @var uim.cake.controllers.Controller
      */
     protected $controller;
 
     /**
      * Constructor
      *
-     * @param \Cake\Core\IContainer $container The container to build controllers with.
+     * @param uim.cake.Core\IContainer $container The container to build controllers with.
      */
     public this(IContainer $container) {
         this.container = $container;
@@ -85,7 +85,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     /**
      * Invoke a controller"s action and wrapping methods.
      *
-     * @param \Cake\Controller\Controller $controller The controller to invoke.
+     * @param uim.cake.Controller\Controller $controller The controller to invoke.
      * @return \Psr\Http\Message\IResponse The response
      * @throws \Cake\Controller\Exception\MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
@@ -272,7 +272,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     /**
      * Determine the controller class name based on current request and controller param
      *
-     * @param \Cake\Http\ServerRequest $request The request to build a controller for.
+     * @param uim.cake.Http\ServerRequest $request The request to build a controller for.
      * @return string|null
      * @psalm-return class-string<\Cake\Controller\Controller>|null
      */
@@ -331,7 +331,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     /**
      * Throws an exception when a controller is missing.
      *
-     * @param \Cake\Http\ServerRequest $request The request.
+     * @param uim.cake.Http\ServerRequest $request The request.
      * @return \Cake\Http\Exception\MissingControllerException
      */
     protected function missingController(ServerRequest $request) {
