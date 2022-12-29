@@ -36,21 +36,21 @@ class FixtureManager
     /**
      * Holds the fixture classes that where instantiated
      *
-     * @var array<\Cake\Datasource\FixtureInterface>
+     * @var array<uim.cake.Datasource\FixtureInterface>
      */
     protected $_loaded = [];
 
     /**
      * Holds the fixture classes that where instantiated indexed by class name
      *
-     * @var array<\Cake\Datasource\FixtureInterface>
+     * @var array<uim.cake.Datasource\FixtureInterface>
      */
     protected $_fixtureMap = [];
 
     /**
      * A map of connection names and the fixture currently in it.
      *
-     * @var array<string, array<\Cake\Datasource\FixtureInterface>>
+     * @var array<string, array<uim.cake.Datasource\FixtureInterface>>
      */
     protected $_insertionMap = [];
 
@@ -210,10 +210,10 @@ class FixtureManager
                     $additionalPath,
                     $name . "Fixture",
                 ];
-                /** @psalm-var class-string<\Cake\Datasource\FixtureInterface> */
+                /** @psalm-var class-string<uim.cake.Datasource\FixtureInterface> */
                 $className = implode("\\", array_filter($nameSegments));
             } else {
-                /** @psalm-var class-string<\Cake\Datasource\FixtureInterface> */
+                /** @psalm-var class-string<uim.cake.Datasource\FixtureInterface> */
                 $className = $fixture;
                 /** @psalm-suppress PossiblyFalseArgument */
                 $name = preg_replace("/Fixture\z/", "", substr(strrchr($fixture, "\\"), 1));
@@ -286,7 +286,7 @@ class FixtureManager
 
         try {
             $createTables = function (ConnectionInterface $db, array $fixtures) use ($test): void {
-                /** @var array<\Cake\Datasource\FixtureInterface> $fixtures */
+                /** @var array<uim.cake.Datasource\FixtureInterface> $fixtures */
                 $tables = $db.getSchemaCollection().listTables();
                 $configName = $db.configName();
                 _insertionMap[$configName] = _insertionMap[$configName] ?? [];

@@ -50,7 +50,7 @@ abstract class TestCase : BaseTestCase
      *
      * @var uim.cake.TestSuite\Fixture\FixtureManager|null
      */
-    public static $fixtureManager;
+    static $fixtureManager;
 
     /**
      * Fixtures used by this test case.
@@ -67,7 +67,7 @@ abstract class TestCase : BaseTestCase
      * @deprecated 4.3.0 autoFixtures is only used by deprecated fixture features.
      *   This property will be removed in 5.0
      */
-    public $autoFixtures = true;
+    $autoFixtures = true;
 
     /**
      * Control table create/drops on each test method.
@@ -79,7 +79,7 @@ abstract class TestCase : BaseTestCase
      * @deprecated 4.3.0 dropTables is only used by deprecated fixture features.
      *   This property will be removed in 5.0
      */
-    public $dropTables = false;
+    $dropTables = false;
 
     /**
      * @var uim.cake.TestSuite\Fixture\FixtureStrategyInterface|null
@@ -103,7 +103,7 @@ abstract class TestCase : BaseTestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    public static function assertMatchesRegularExpression(string $pattern, string $string, string $message = ""): void
+    static function assertMatchesRegularExpression(string $pattern, string $string, string $message = ""): void
     {
         static::assertThat($string, new RegularExpression($pattern), $message);
     }
@@ -117,7 +117,7 @@ abstract class TestCase : BaseTestCase
      * @return void
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public static function assertDoesNotMatchRegularExpression(
+    static function assertDoesNotMatchRegularExpression(
         string $pattern,
         string $string,
         string $message = ""
@@ -140,7 +140,7 @@ abstract class TestCase : BaseTestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    public static function assertFileDoesNotExist(string $filename, string $message = ""): void
+    static function assertFileDoesNotExist(string $filename, string $message = ""): void
     {
         static::assertThat($filename, new LogicalNot(new FileExists()), $message);
     }
@@ -154,7 +154,7 @@ abstract class TestCase : BaseTestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    public static function assertDirectoryDoesNotExist(string $directory, string $message = ""): void
+    static function assertDirectoryDoesNotExist(string $directory, string $message = ""): void
     {
         static::assertThat($directory, new LogicalNot(new DirectoryExists()), $message);
     }
@@ -1040,13 +1040,13 @@ abstract class TestCase : BaseTestCase
      * @param array<string, mixed> $options The config data for the mock"s constructor.
      * @return string
      * @throws uim.cake.ORM\Exception\MissingTableClassException
-     * @psalm-return class-string<\Cake\ORM\Table>
+     * @psalm-return class-string<uim.cake.ORM\Table>
      */
     protected function _getTableClassName(string $alias, array $options): string
     {
         if (empty($options["className"])) {
             $class = Inflector::camelize($alias);
-            /** @psalm-var class-string<\Cake\ORM\Table>|null */
+            /** @psalm-var class-string<uim.cake.ORM\Table>|null */
             $className = App::className($class, "Model/Table", "Table");
             if (!$className) {
                 throw new MissingTableClassException([$alias]);
@@ -1063,7 +1063,7 @@ abstract class TestCase : BaseTestCase
      * @param string $appNamespace The app namespace, defaults to "TestApp".
      * @return string|null The previous app namespace or null if not set.
      */
-    public static function setAppNamespace(string $appNamespace = "TestApp"): ?string
+    static function setAppNamespace(string $appNamespace = "TestApp"): ?string
     {
         $previous = Configure::read("App.namespace");
         Configure::write("App.namespace", $appNamespace);

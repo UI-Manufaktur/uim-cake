@@ -43,7 +43,7 @@ class MiddlewareDispatcher
      *
      * @param uim.cake.Core\IHttpApplication $app The test case to run.
      */
-    public this(IHttpApplication $app) {
+    this(IHttpApplication $app) {
         this.app = $app;
     }
 

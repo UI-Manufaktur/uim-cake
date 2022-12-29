@@ -44,7 +44,7 @@ class TestEmailTransport : DebugTransport
      *
      * @return void
      */
-    public static function replaceAllTransports(): void
+    static function replaceAllTransports(): void
     {
         $configuredTransports = TransportFactory::configured();
 
@@ -59,9 +59,9 @@ class TestEmailTransport : DebugTransport
     /**
      * Gets emails sent
      *
-     * @return array<\Cake\Mailer\Message>
+     * @return array<uim.cake.Mailer\Message>
      */
-    public static function getMessages() {
+    static function getMessages() {
         return static::$messages;
     }
 
@@ -70,7 +70,7 @@ class TestEmailTransport : DebugTransport
      *
      * @return void
      */
-    public static function clearMessages(): void
+    static function clearMessages(): void
     {
         static::$messages = [];
     }

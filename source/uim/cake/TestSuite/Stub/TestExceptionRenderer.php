@@ -32,7 +32,7 @@ class TestExceptionRenderer : ExceptionRendererInterface
      * @return void
      * @throws \Throwable $exception Rethrows the passed exception.
      */
-    public this(Throwable $exception) {
+    this(Throwable $exception) {
         throw $exception;
     }
 

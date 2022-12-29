@@ -23,7 +23,7 @@ class Security
      *
      * @var string
      */
-    public static $hashType = "sha1";
+    static $hashType = "sha1";
 
     /**
      * The HMAC salt to use for encryption and decryption routines
@@ -52,7 +52,7 @@ class Security
      * @throws \RuntimeException
      * @link https://book.cakephp.org/4/en/core-libraries/security.html#hashing-data
      */
-    public static function hash(string $string, ?string $algorithm = null, $salt = false): string
+    static function hash(string $string, ?string $algorithm = null, $salt = false): string
     {
         if (empty($algorithm)) {
             $algorithm = static::$hashType;
@@ -86,7 +86,7 @@ class Security
      * @return void
      * @see uim.cake.Utility\Security::hash()
      */
-    public static function setHash(string $hash): void
+    static function setHash(string $hash): void
     {
         static::$hashType = $hash;
     }
@@ -100,7 +100,7 @@ class Security
      * @param int $length The number of bytes you want.
      * @return string Random bytes in binary.
      */
-    public static function randomBytes(int $length): string
+    static function randomBytes(int $length): string
     {
         /** @psalm-suppress ArgumentTypeCoercion */
         return random_bytes($length);
@@ -112,7 +112,7 @@ class Security
      * @param int $length String length. Default 64.
      * @return string
      */
-    public static function randomString(int $length = 64): string
+    static function randomString(int $length = 64): string
     {
         return substr(
             bin2hex(Security::randomBytes((int)ceil($length / 2))),
@@ -128,7 +128,7 @@ class Security
      * @return string Random bytes in binary.
      * @see uim.cake.Utility\Security::randomBytes()
      */
-    public static function insecureRandomBytes(int $length): string
+    static function insecureRandomBytes(int $length): string
     {
         $length *= 2;
 
@@ -153,7 +153,7 @@ class Security
      * @throws \InvalidArgumentException When no compatible crypto extension is available.
      * @psalm-suppress MoreSpecificReturnType
      */
-    public static function engine($instance = null) {
+    static function engine($instance = null) {
         if ($instance) {
             return static::$_instance = $instance;
         }
@@ -184,7 +184,7 @@ class Security
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    public static function encrypt(string $plain, string $key, ?string $hmacSalt = null): string
+    static function encrypt(string $plain, string $key, ?string $hmacSalt = null): string
     {
         self::_checkKey($key, "encrypt()");
 
@@ -228,7 +228,7 @@ class Security
      * @return string|null Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    public static function decrypt(string $cipher, string $key, ?string $hmacSalt = null): ?string
+    static function decrypt(string $cipher, string $key, ?string $hmacSalt = null): ?string
     {
         self::_checkKey($key, "decrypt()");
         if (empty($cipher)) {
@@ -264,7 +264,7 @@ class Security
      * @return bool
      * @since 3.6.2
      */
-    public static function constantEquals($original, $compare): bool
+    static function constantEquals($original, $compare): bool
     {
         return is_string($original) && is_string($compare) && hash_equals($original, $compare);
     }
@@ -275,7 +275,7 @@ class Security
      *
      * @return string The currently configured salt
      */
-    public static function getSalt(): string
+    static function getSalt(): string
     {
         if (static::$_salt == null) {
             throw new RuntimeException(
@@ -293,7 +293,7 @@ class Security
      * @param string $salt The salt to use for encryption routines.
      * @return void
      */
-    public static function setSalt(string $salt): void
+    static function setSalt(string $salt): void
     {
         static::$_salt = $salt;
     }

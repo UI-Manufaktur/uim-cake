@@ -38,7 +38,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      *
      * @var string
      */
-    public $connection = "test";
+    $connection = "test";
 
     /**
      * Full Table Name
@@ -46,18 +46,18 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      * @var string
      * @psalm-suppress PropertyNotSetInConstructor
      */
-    public $table;
+    $table;
 
     /**
      * Fields / Schema for the fixture.
      *
-     * This array should be compatible with {@link \Cake\Database\Schema\Schema}.
+     * This array should be compatible with {@link uim.cake.Database\Schema\Schema}.
      * The `_constraints`, `_options` and `_indexes` keys are reserved for defining
      * constraints, options and indexes respectively.
      *
      * @var array
      */
-    public $fields = [];
+    $fields = [];
 
     /**
      * Configuration for importing fixture schema
@@ -68,19 +68,19 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      *
      * @var array|null
      */
-    public $import;
+    $import;
 
     /**
      * Fixture records to be inserted.
      *
      * @var array
      */
-    public $records = [];
+    $records = [];
 
     /**
      * The schema for this fixture.
      *
-     * @var uim.cake.Database\Schema\TableSchemaInterface&\Cake\Database\Schema\SqlGeneratorInterface
+     * @var uim.cake.Database\Schema\TableSchemaInterface&uim.cake.Database\Schema\SqlGeneratorInterface
      * @psalm-suppress PropertyNotSetInConstructor
      */
     protected $_schema;
@@ -97,7 +97,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      *
      * @throws uim.cake.Core\Exception\CakeException on invalid datasource usage.
      */
-    public this() {
+    this() {
         if (!empty(this.connection)) {
             $connection = this.connection;
             if (strpos($connection, "test") != 0) {

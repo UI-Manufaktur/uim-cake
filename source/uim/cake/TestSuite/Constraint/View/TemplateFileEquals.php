@@ -33,7 +33,7 @@ class TemplateFileEquals : Constraint
      *
      * @param string $filename Template file name
      */
-    public this(string $filename) {
+    this(string $filename) {
         this.filename = $filename;
     }
 

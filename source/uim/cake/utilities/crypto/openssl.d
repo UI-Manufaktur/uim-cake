@@ -7,7 +7,7 @@ import uim.cake;
  * OpenSSL implementation of crypto features for Cake\Utility\Security
  *
  * This class is not intended to be used directly and should only
- * be used in the context of {@link \Cake\Utility\Security}.
+ * be used in the context of {@link uim.cake.Utility\Security}.
  *
  * @internal
  */

@@ -32,7 +32,7 @@ class Text {
      * Instead, you should use the openssl or mcrypt extensions.
      *
      * It should also not be used to create identifiers that have security implications, such as
-     * "unguessable" URL identifiers. Instead, you should use {@link \Cake\Utility\Security::randomBytes()}` for that.
+     * "unguessable" URL identifiers. Instead, you should use {@link uim.cake.Utility\Security::randomBytes()}` for that.
      *
      * @see https://www.ietf.org/rfc/rfc4122.txt
      * @return string RFC 4122 UUID

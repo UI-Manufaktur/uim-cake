@@ -36,7 +36,7 @@ class FixtureInjector : TestListener
      *
      * @param uim.cake.TestSuite\Fixture\FixtureManager $manager The fixture manager
      */
-    public this(FixtureManager $manager) {
+    this(FixtureManager $manager) {
         if (isset($_SERVER["argv"])) {
             $manager.setDebug(in_array("--debug", $_SERVER["argv"], true));
         }

@@ -27,7 +27,7 @@ trait CookieCryptTrait
     abstract protected string _getCookieEncryptionKey();
 
     /**
-     * Encrypts myValue using public myType method in Security class
+     * Encrypts myValue using myType method in Security class
      *
      * @param array|string myValue Value to encrypt
      * @param string|false $encrypt Encryption mode to use. False
@@ -72,7 +72,7 @@ trait CookieCryptTrait
     }
 
     /**
-     * Decrypts myValue using public myType method in Security class
+     * Decrypts myValue using myType method in Security class
      *
      * @param array<string>|string myValues Values to decrypt
      * @param string|false myMode Encryption mode

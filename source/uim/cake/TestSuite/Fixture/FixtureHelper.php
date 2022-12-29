@@ -30,7 +30,7 @@ class FixtureHelper
      * Finds fixtures from their TestCase names such as "core.Articles".
      *
      * @param array<string> $fixtureNames Fixture names from test case
-     * @return array<\Cake\Datasource\FixtureInterface>
+     * @return array<uim.cake.Datasource\FixtureInterface>
      */
     function loadFixtures(array $fixtureNames): array
     {
@@ -67,10 +67,10 @@ class FixtureHelper
                     $additionalPath,
                     $name . "Fixture",
                 ];
-                /** @psalm-var class-string<\Cake\Datasource\FixtureInterface> */
+                /** @psalm-var class-string<uim.cake.Datasource\FixtureInterface> */
                 $className = implode("\\", array_filter($nameSegments));
             } else {
-                /** @psalm-var class-string<\Cake\Datasource\FixtureInterface> */
+                /** @psalm-var class-string<uim.cake.Datasource\FixtureInterface> */
                 $className = $fixtureName;
             }
 
@@ -101,7 +101,7 @@ class FixtureHelper
      * ```
      *
      * @param \Closure $callback Callback run per connection
-     * @param array<\Cake\Datasource\FixtureInterface> $fixtures Test fixtures
+     * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Test fixtures
      * @return void
      */
     function runPerConnection(Closure $callback, array $fixtures): void
@@ -119,7 +119,7 @@ class FixtureHelper
     /**
      * Inserts fixture data.
      *
-     * @param array<\Cake\Datasource\FixtureInterface> $fixtures Test fixtures
+     * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Test fixtures
      * @return void
      * @internal
      */
@@ -149,7 +149,7 @@ class FixtureHelper
      * Inserts all fixtures for a connection and provides friendly errors for bad data.
      *
      * @param uim.cake.Datasource\ConnectionInterface $connection Fixture connection
-     * @param array<\Cake\Datasource\FixtureInterface> $fixtures Connection fixtures
+     * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Connection fixtures
      * @return void
      */
     protected function insertConnection(ConnectionInterface $connection, array $fixtures): void
@@ -172,7 +172,7 @@ class FixtureHelper
     /**
      * Truncates fixture tables.
      *
-     * @param array<\Cake\Datasource\FixtureInterface> $fixtures Test fixtures
+     * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Test fixtures
      * @return void
      * @internal
      */
@@ -206,7 +206,7 @@ class FixtureHelper
      * Truncates all fixtures for a connection and provides friendly errors for bad data.
      *
      * @param uim.cake.Datasource\ConnectionInterface $connection Fixture connection
-     * @param array<\Cake\Datasource\FixtureInterface> $fixtures Connection fixtures
+     * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Connection fixtures
      * @return void
      */
     protected function truncateConnection(ConnectionInterface $connection, array $fixtures): void
@@ -230,7 +230,7 @@ class FixtureHelper
      * Sort fixtures with foreign constraints last if possible, otherwise returns null.
      *
      * @param uim.cake.Database\Connection $connection Database connection
-     * @param array<\Cake\Datasource\FixtureInterface> $fixtures Database fixtures
+     * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Database fixtures
      * @return array|null
      */
     protected function sortByConstraint(Connection $connection, array $fixtures): ?array

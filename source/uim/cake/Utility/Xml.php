@@ -94,7 +94,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws uim.cake.Utility\Exception\XmlException
      */
-    public static function build($input, array $options = []) {
+    static function build($input, array $options = []) {
         $defaults = [
             "return": "simplexml",
             "loadEntities": false,
@@ -157,7 +157,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument
      * @throws uim.cake.Utility\Exception\XmlException
      */
-    public static function loadHtml(string $input, array $options = []) {
+    static function loadHtml(string $input, array $options = []) {
         $defaults = [
             "return": "simplexml",
             "loadEntities": false,
@@ -254,7 +254,7 @@ class Xml
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
      * @throws uim.cake.Utility\Exception\XmlException
      */
-    public static function fromArray($input, array $options = []) {
+    static function fromArray($input, array $options = []) {
         if (is_object($input) && method_exists($input, "toArray") && is_callable([$input, "toArray"])) {
             $input = $input.toArray();
         }
@@ -421,7 +421,7 @@ class Xml
      * @return array Array representation of the XML structure.
      * @throws uim.cake.Utility\Exception\XmlException
      */
-    public static function toArray($obj): array
+    static function toArray($obj): array
     {
         if ($obj instanceof DOMNode) {
             $obj = simplexml_import_dom($obj);

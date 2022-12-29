@@ -29,14 +29,14 @@ abstract class MailConstraintBase : Constraint
      * @param int|null $at At
      * @return void
      */
-    public this(?int $at = null) {
+    this(?int $at = null) {
         this.at = $at;
     }
 
     /**
      * Gets the email or emails to check
      *
-     * @return array<\Cake\Mailer\Message>
+     * @return array<uim.cake.Mailer\Message>
      */
     function getMessages() {
         $messages = TestEmailTransport::getMessages();

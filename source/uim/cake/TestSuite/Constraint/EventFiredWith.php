@@ -42,7 +42,7 @@ class EventFiredWith : Constraint
      * @param string $dataKey Data key
      * @param mixed $dataValue Data value
      */
-    public this(EventManager $eventManager, string $dataKey, $dataValue) {
+    this(EventManager $eventManager, string $dataKey, $dataValue) {
         _eventManager = $eventManager;
         _dataKey = $dataKey;
         _dataValue = $dataValue;
@@ -82,7 +82,7 @@ class EventFiredWith : Constraint
             return false;
         }
 
-        /** @var array<\Cake\Event\EventInterface> $events */
+        /** @var array<uim.cake.Event\EventInterface> $events */
         $events = $eventGroup[$other];
 
         if (count($events) > 1) {

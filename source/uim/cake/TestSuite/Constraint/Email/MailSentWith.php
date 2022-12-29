@@ -27,7 +27,7 @@ class MailSentWith : MailConstraintBase
      * @param string|null $method Method
      * @return void
      */
-    public this(?int $at = null, ?string $method = null) {
+    this(?int $at = null, ?string $method = null) {
         if ($method != null) {
             this.method = $method;
         }

@@ -35,7 +35,7 @@ abstract class ResponseBase : Constraint
      *
      * @param \Psr\Http\Message\IResponse|null $response Response
      */
-    public this(?IResponse $response) {
+    this(?IResponse $response) {
         if (!$response) {
             throw new AssertionFailedError("No response set, cannot assert content.");
         }

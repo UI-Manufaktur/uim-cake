@@ -31,7 +31,7 @@ class TestSession
     /**
      * @param array|null $session Session data.
      */
-    public this(?array $session) {
+    this(?array $session) {
         this.session = $session;
     }
 

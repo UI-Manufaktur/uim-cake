@@ -25,14 +25,14 @@ class TransactionStrategy : FixtureStrategyInterface
     protected $helper;
 
     /**
-     * @var array<\Cake\Datasource\FixtureInterface>
+     * @var array<uim.cake.Datasource\FixtureInterface>
      */
     protected $fixtures = [];
 
     /**
      * Initialize strategy.
      */
-    public this() {
+    this() {
         this.helper = new FixtureHelper();
     }
 
