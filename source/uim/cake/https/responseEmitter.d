@@ -36,7 +36,7 @@ class ResponseEmitter : EmitterInterface
      * Emits a response, including status line, headers, and the message body,
      * according to the environment.
      *
-     * @param \Psr\Http\Message\IResponse $response The response to emit.
+     * @param \Psr\Http\messages.IResponse $response The response to emit.
      */
     bool emit(IResponse $response) {
         myfile = "";
@@ -67,7 +67,7 @@ class ResponseEmitter : EmitterInterface
     /**
      * Emit the message body.
      *
-     * @param \Psr\Http\Message\IResponse $response The response to emit
+     * @param \Psr\Http\messages.IResponse $response The response to emit
      * @return void
      */
     protected void emitBody(IResponse $response) {
@@ -92,7 +92,7 @@ class ResponseEmitter : EmitterInterface
      * Emit a range of the message body.
      *
      * @param array $range The range data to emit
-     * @param \Psr\Http\Message\IResponse $response The response to emit
+     * @param \Psr\Http\messages.IResponse $response The response to emit
      * @return void
      */
     protected void emitBodyRange(array $range, IResponse $response) {
@@ -128,7 +128,7 @@ class ResponseEmitter : EmitterInterface
      * Emits the status line using the protocol version and status code from
      * the response; if a reason phrase is available, it, too, is emitted.
      *
-     * @param \Psr\Http\Message\IResponse $response The response to emit
+     * @param \Psr\Http\messages.IResponse $response The response to emit
      * @return void
      */
     protected void emitStatusLine(IResponse $response) {
@@ -149,7 +149,7 @@ class ResponseEmitter : EmitterInterface
      * in such a way as to create aggregate headers (instead of replace
      * the previous).
      *
-     * @param \Psr\Http\Message\IResponse $response The response to emit
+     * @param \Psr\Http\messages.IResponse $response The response to emit
      */
     protected void emitHeaders(IResponse $response) {
         $cookies = [];

@@ -52,7 +52,7 @@ class CookieCollection : IteratorAggregate, Countable {
     /**
      * Create a new collection from the cookies in a ServerRequest
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request to extract cookie data from
+     * @param \Psr\Http\messages.IServerRequest myRequest The request to extract cookie data from
      * @return static
      */
     static function createFromServerRequest(IServerRequest myRequest) {
@@ -187,10 +187,10 @@ class CookieCollection : IteratorAggregate, Countable {
      * situation. Cookies that match the request"s domain + path that are not expired
      * when this method is called will be applied to the request.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request to update.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request to update.
      * @param array $extraCookies Associative array of additional cookies to add into the request. This
      *   is useful when you have cookie data from outside the collection you want to send.
-     * @return \Psr\Http\Message\RequestInterface An updated request.
+     * @return \Psr\Http\messages.RequestInterface An updated request.
      */
     function addToRequest(RequestInterface myRequest, array $extraCookies = []): RequestInterface
     {
@@ -264,8 +264,8 @@ class CookieCollection : IteratorAggregate, Countable {
     /**
      * Create a new collection that includes cookies from the response.
      *
-     * @param \Psr\Http\Message\IResponse $response Response to extract cookies from.
-     * @param \Psr\Http\Message\RequestInterface myRequest Request to get cookie context from.
+     * @param \Psr\Http\messages.IResponse $response Response to extract cookies from.
+     * @param \Psr\Http\messages.RequestInterface myRequest Request to get cookie context from.
      * @return static
      */
     function addFromResponse(IResponse $response, RequestInterface myRequest) {

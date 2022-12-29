@@ -59,9 +59,9 @@ class CspMiddleware : IMiddleware {
     /**
      * Add nonces (if enabled) to the request and apply the CSP header to the response.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request.
-     * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest myRequest The request.
+     * @param \Psr\Http\servers.IRequestHandler $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
     {
@@ -73,7 +73,7 @@ class CspMiddleware : IMiddleware {
         }
         $response = $handler.handle(myRequest);
 
-        /** @var \Psr\Http\Message\IResponse */
+        /** @var \Psr\Http\messages.IResponse */
         return this.csp.injectCSPHeader($response);
     }
 }

@@ -13,8 +13,8 @@ import uim.cake.events\EventManager;
 import uim.cake.events\IEventManager;
 use InvalidArgumentException;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
 
 /**
  * Runs an application invoking all the PSR7 middleware and the registered application.
@@ -55,9 +55,9 @@ class Server : IEventDispatcher
      *   from event listeners.
      * - Run the middleware queue including the application.
      *
-     * @param \Psr\Http\Message\IServerRequest|null myRequest The request to use or null.
+     * @param \Psr\Http\messages.IServerRequest|null myRequest The request to use or null.
      * @param uim.cake.http.MiddlewareQueue|null $middlewareQueue MiddlewareQueue or null.
-     * @return \Psr\Http\Message\IResponse
+     * @return \Psr\Http\messages.IResponse
      * @throws \RuntimeException When the application does not make a response.
      */
     function run(
@@ -102,7 +102,7 @@ class Server : IEventDispatcher
     /**
      * Emit the response using the PHP SAPI.
      *
-     * @param \Psr\Http\Message\IResponse $response The response to emit
+     * @param \Psr\Http\messages.IResponse $response The response to emit
      * @param \Laminas\HttpHandlerRunner\Emitter\EmitterInterface|null $emitter The emitter to use.
      *   When null, a SAPI Stream Emitter will be used.
      */

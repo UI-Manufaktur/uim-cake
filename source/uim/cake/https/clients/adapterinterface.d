@@ -13,7 +13,7 @@ interface IAdapter {
     /**
      * Send a request and get a response back.
      *
-     * @param \Psr\Http\Message\IRequest myRequest The request object to send.
+     * @param \Psr\Http\messages.IRequest myRequest The request object to send.
      * @param array<string, mixed> myOptions Array of options for the stream.
      * @return array<uim.cake.Http\Client\Response> Array of populated Response objects
      */

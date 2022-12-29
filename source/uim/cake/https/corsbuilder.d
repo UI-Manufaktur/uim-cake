@@ -1,6 +1,6 @@
 module uim.cake.https;
 
-use Psr\Http\Message\IMessage;
+use Psr\Http\messages.IMessage;
 
 /**
  * A builder object that assists in defining Cross Origin Request related
@@ -19,7 +19,7 @@ class CorsBuilder
     /**
      * The response object this builder is attached to.
      *
-     * @var \Psr\Http\Message\IMessage
+     * @var \Psr\Http\messages.IMessage
      */
     protected _response;
 
@@ -45,7 +45,7 @@ class CorsBuilder
     /**
      * Constructor.
      *
-     * @param \Psr\Http\Message\IMessage $response The response object to add headers onto.
+     * @param \Psr\Http\messages.IMessage $response The response object to add headers onto.
      * @param string origin The request"s Origin header.
      * @param bool $isSsl Whether the request was over SSL.
      */
@@ -61,7 +61,7 @@ class CorsBuilder
      * If the builder has no Origin, or if there are no allowed domains,
      * or if the allowed domains do not match the Origin header no headers will be applied.
      *
-     * @return \Psr\Http\Message\IMessage A new instance of the response with new headers.
+     * @return \Psr\Http\messages.IMessage A new instance of the response with new headers.
      */
     function build(): IMessage
     {

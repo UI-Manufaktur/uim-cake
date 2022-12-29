@@ -41,8 +41,8 @@ emit responses. To get started first implement the
 import uim.cake.core.IHttpApplication;
 import uim.cake.https\MiddlewareQueue;
 import uim.cake.https\Response;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
 
 class Application : IHttpApplication
 {
@@ -72,8 +72,8 @@ class Application : IHttpApplication
     /**
      * Handle incoming server request and return a response.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest myRequest The request
+     * @return \Psr\Http\messages.IResponse
      */
     function handle(IServerRequest myRequest): IResponse
     {

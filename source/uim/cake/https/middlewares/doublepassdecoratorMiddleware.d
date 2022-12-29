@@ -21,7 +21,7 @@ import uim.cake;
  * Neither the arguments nor the return value need be typehinted.
  *
  * @deprecated 4.3.0 "Double pass" middleware are deprecated.
- *   Use a `Closure` or a class which : `Psr\Http\Server\IMiddleware` instead.
+ *   Use a `Closure` or a class which : `Psr\Http\servers.IMiddleware` instead.
  */
 class DoublePassDecoratorMiddleware : IMiddleware
 {
@@ -40,7 +40,7 @@ class DoublePassDecoratorMiddleware : IMiddleware
     this(callable $callable) {
         deprecationWarning(
             ""Double pass" middleware are deprecated. Use a `Closure` with the signature of"
-            . " `(myRequest, $handler)` or a class which : `Psr\Http\Server\IMiddleware` instead.",
+            . " `(myRequest, $handler)` or a class which : `Psr\Http\servers.IMiddleware` instead.",
             0
         );
         this.callable = $callable;
@@ -49,9 +49,9 @@ class DoublePassDecoratorMiddleware : IMiddleware
     /**
      * Run the internal double pass callable to process an incoming server request.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest Request instance.
-     * @param \Psr\Http\Server\IRequestHandler $handler Request handler instance.
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest myRequest Request instance.
+     * @param \Psr\Http\servers.IRequestHandler $handler Request handler instance.
+     * @return \Psr\Http\messages.IResponse
      */
     IResponse process(IServerRequest myRequest, IRequestHandler $handler) {
         return (this.callable)(

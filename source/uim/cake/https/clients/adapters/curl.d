@@ -51,7 +51,7 @@ class Curl : IAdapter
     /**
      * Convert client options into curl options.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request.
      * @param array<string, mixed> myOptions The client options
      * @return array
      */
@@ -138,7 +138,7 @@ class Curl : IAdapter
     /**
      * Convert HTTP version number into curl value.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request to get a protocol version for.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request to get a protocol version for.
      * @return int
      */
     protected int getProtocolVersion(RequestInterface myRequest) {

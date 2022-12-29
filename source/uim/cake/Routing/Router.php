@@ -3,7 +3,7 @@ module uim.cake.Routing;
 
 import uim.cake.core.Configure;
 import uim.cake.http.ServerRequest;
-import uim.cake.Routing\exceptions.MissingRouteException;
+import uim.cake.routings.exceptions.MissingRouteException;
 import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
 use ReflectionFunction;
@@ -85,7 +85,7 @@ class Router
     /**
      * The route collection routes would be added to.
      *
-     * @var uim.cake.Routing\RouteCollection
+     * @var uim.cake.routings.RouteCollection
      */
     protected static $_collection;
 
@@ -168,7 +168,7 @@ class Router
      * Gets the named route patterns for use in config/routes.php
      *
      * @return array<string, string> Named route elements
-     * @see uim.cake.Routing\Router::$_namedExpressions
+     * @see uim.cake.routings.Router::$_namedExpressions
      */
     static function getNamedExpressions(): array
     {
@@ -178,9 +178,9 @@ class Router
     /**
      * Connects a new Route in the router.
      *
-     * Compatibility proxy to uim.cake.Routing\RouteBuilder::connect() in the `/` scope.
+     * Compatibility proxy to uim.cake.routings.RouteBuilder::connect() in the `/` scope.
      *
-     * @param uim.cake.Routing\Route\Route|string $route A string describing the template of the route
+     * @param uim.cake.routings.Route\Route|string $route A string describing the template of the route
      * @param array|string $defaults An array describing the default route parameters.
      *   These parameters will be used by default and can supply routing parameters that are not dynamic. See above.
      * @param array<string, mixed> $options An array matching the named elements in the route to regular expressions which that
@@ -189,8 +189,8 @@ class Router
      *   custom routing class.
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException
-     * @see uim.cake.Routing\RouteBuilder::connect()
-     * @see uim.cake.Routing\Router::scope()
+     * @see uim.cake.routings.RouteBuilder::connect()
+     * @see uim.cake.routings.Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
      */
     static function connect($route, $defaults = [], $options = []): void
@@ -200,7 +200,7 @@ class Router
         );
 
         static::scope("/", function ($routes) use ($route, $defaults, $options): void {
-            /** @var uim.cake.Routing\RouteBuilder $routes */
+            /** @var uim.cake.routings.RouteBuilder $routes */
             $routes.connect($route, $defaults, $options);
         });
     }
@@ -210,7 +210,7 @@ class Router
      *
      * @param uim.cake.http.ServerRequest $request The request to parse request data from.
      * @return array Parsed elements from URL.
-     * @throws uim.cake.Routing\exceptions.MissingRouteException When a route cannot be handled
+     * @throws uim.cake.routings.exceptions.MissingRouteException When a route cannot be handled
      */
     static function parseRequest(ServerRequest $request): array
     {
@@ -332,8 +332,8 @@ class Router
      *
      * @param array $url The URL array being modified.
      * @return array The modified URL.
-     * @see uim.cake.Routing\Router::url()
-     * @see uim.cake.Routing\Router::addUrlFilter()
+     * @see uim.cake.routings.Router::url()
+     * @see uim.cake.routings.Router::addUrlFilter()
      */
     protected static function _applyUrlFilters(array $url): array
     {
@@ -390,7 +390,7 @@ class Router
      * - `_name` - Name of route. If you have setup named routes you can use this key
      *   to specify it.
      *
-     * @param \Psr\Http\Message\UriInterface|array|string|null $url An array specifying any of the following:
+     * @param \Psr\Http\messages.UriInterface|array|string|null $url An array specifying any of the following:
      *   "controller", "action", "plugin" additionally, you can provide routed
      *   elements or query string parameters. If string it can be name any valid url
      *   string or it can be an UriInterface instance.
@@ -761,7 +761,7 @@ class Router
      *
      * @param string $path The path to set the builder to.
      * @param array<string, mixed> $options The options for the builder
-     * @return uim.cake.Routing\RouteBuilder
+     * @return uim.cake.routings.RouteBuilder
      */
     static function createRouteBuilder(string $path, array $options = []): RouteBuilder
     {
@@ -917,7 +917,7 @@ class Router
     /**
      * Get the route scopes and their connected routes.
      *
-     * @return array<uim.cake.Routing\Route\Route>
+     * @return array<uim.cake.routings.Route\Route>
      */
     static function routes(): array
     {
@@ -927,7 +927,7 @@ class Router
     /**
      * Get the RouteCollection inside the Router
      *
-     * @return uim.cake.Routing\RouteCollection
+     * @return uim.cake.routings.RouteCollection
      */
     static function getRouteCollection(): RouteCollection
     {
@@ -937,7 +937,7 @@ class Router
     /**
      * Set the RouteCollection inside the Router
      *
-     * @param uim.cake.Routing\RouteCollection $routeCollection route collection
+     * @param uim.cake.routings.RouteCollection $routeCollection route collection
      * @return void
      */
     static function setRouteCollection(RouteCollection $routeCollection): void

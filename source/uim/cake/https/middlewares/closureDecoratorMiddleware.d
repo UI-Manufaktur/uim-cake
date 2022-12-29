@@ -38,9 +38,9 @@ class ClosureDecoratorMiddleware : IMiddleware
     /**
      * Run the callable to process an incoming server request.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest Request instance.
-     * @param \Psr\Http\Server\IRequestHandler $handler Request handler instance.
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest myRequest Request instance.
+     * @param \Psr\Http\servers.IRequestHandler $handler Request handler instance.
+     * @return \Psr\Http\messages.IResponse
      */
     function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
     {

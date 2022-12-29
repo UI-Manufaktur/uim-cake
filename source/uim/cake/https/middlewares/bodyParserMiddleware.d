@@ -120,9 +120,9 @@ class BodyParserMiddleware : IMiddleware
      *
      * Will modify the request adding a parsed body if the content-type is known.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request.
-     * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest myRequest The request.
+     * @param \Psr\Http\servers.IRequestHandler $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function process(IServerRequest myRequest, IRequestHandler $handler): IResponse
     {

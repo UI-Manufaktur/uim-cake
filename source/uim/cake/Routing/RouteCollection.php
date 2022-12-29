@@ -1,10 +1,10 @@
 
 module uim.cake.Routing;
 
-import uim.cake.Routing\exceptions.DuplicateNamedRouteException;
-import uim.cake.Routing\exceptions.MissingRouteException;
-import uim.cake.Routing\Route\Route;
-use Psr\Http\Message\IServerRequest;
+import uim.cake.routings.exceptions.DuplicateNamedRouteException;
+import uim.cake.routings.exceptions.MissingRouteException;
+import uim.cake.routings.Route\Route;
+use Psr\Http\messages.IServerRequest;
 use RuntimeException;
 
 /**
@@ -20,21 +20,21 @@ class RouteCollection
     /**
      * The routes connected to this collection.
      *
-     * @var array<string, array<uim.cake.Routing\Route\Route>>
+     * @var array<string, array<uim.cake.routings.Route\Route>>
      */
     protected $_routeTable = [];
 
     /**
      * The hash map of named routes that are in this collection.
      *
-     * @var array<uim.cake.Routing\Route\Route>
+     * @var array<uim.cake.routings.Route\Route>
      */
     protected $_named = [];
 
     /**
      * Routes indexed by path prefix.
      *
-     * @var array<string, array<uim.cake.Routing\Route\Route>>
+     * @var array<string, array<uim.cake.routings.Route\Route>>
      */
     protected $_paths = [];
 
@@ -62,7 +62,7 @@ class RouteCollection
     /**
      * Add a route to the collection.
      *
-     * @param uim.cake.Routing\Route\Route $route The route object to add.
+     * @param uim.cake.routings.Route\Route $route The route object to add.
      * @param array<string, mixed> $options Additional options for the route. Primarily for the
      *   `_name` option, which enables named routes.
      * @return void
@@ -103,7 +103,7 @@ class RouteCollection
      * @param string $url URL to parse.
      * @param string $method The HTTP method to use.
      * @return array An array of request parameters parsed from the URL.
-     * @throws uim.cake.Routing\exceptions.MissingRouteException When a URL has no matching route.
+     * @throws uim.cake.routings.exceptions.MissingRouteException When a URL has no matching route.
      */
     function parse(string $url, string $method = ""): array
     {
@@ -149,9 +149,9 @@ class RouteCollection
     /**
      * Takes the IServerRequest, iterates the routes until one is able to parse the route.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request to parse route data from.
+     * @param \Psr\Http\messages.IServerRequest $request The request to parse route data from.
      * @return array An array of request parameters parsed from the URL.
-     * @throws uim.cake.Routing\exceptions.MissingRouteException When a URL has no matching route.
+     * @throws uim.cake.routings.exceptions.MissingRouteException When a URL has no matching route.
      */
     function parseRequest(IServerRequest $request): array
     {
@@ -274,7 +274,7 @@ class RouteCollection
      * @param array $context The request context to use. Contains _base, _port,
      *    _host, _scheme and params keys.
      * @return string The URL string on match.
-     * @throws uim.cake.Routing\exceptions.MissingRouteException When no route could be matched.
+     * @throws uim.cake.routings.exceptions.MissingRouteException When no route could be matched.
      */
     function match(array $url, array $context): string
     {
@@ -314,7 +314,7 @@ class RouteCollection
     /**
      * Get all the connected routes as a flat list.
      *
-     * @return array<uim.cake.Routing\Route\Route>
+     * @return array<uim.cake.routings.Route\Route>
      */
     function routes(): array
     {
@@ -330,7 +330,7 @@ class RouteCollection
     /**
      * Get the connected named routes.
      *
-     * @return array<uim.cake.Routing\Route\Route>
+     * @return array<uim.cake.routings.Route\Route>
      */
     function named(): array
     {
@@ -374,7 +374,7 @@ class RouteCollection
      * scope or any child scopes that share the same RouteCollection.
      *
      * @param string $name The name of the middleware. Used when applying middleware to a scope.
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to register.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to register.
      * @return this
      * @throws \RuntimeException
      */

@@ -19,15 +19,15 @@ class Runner : IRequestHandler
     /**
      * Fallback handler to use if middleware queue does not generate response.
      *
-     * @var \Psr\Http\Server\IRequestHandler|null
+     * @var \Psr\Http\servers.IRequestHandler|null
      */
     protected fallbackHandler;
 
     /**
      * @param uim.cake.http.MiddlewareQueue $queue The middleware queue
-     * @param \Psr\Http\Message\IServerRequest myRequest The Server Request
-     * @param \Psr\Http\Server\IRequestHandler|null $fallbackHandler Fallback request handler.
-     * @return \Psr\Http\Message\IResponse A response object
+     * @param \Psr\Http\messages.IServerRequest myRequest The Server Request
+     * @param \Psr\Http\servers.IRequestHandler|null $fallbackHandler Fallback request handler.
+     * @return \Psr\Http\messages.IResponse A response object
      */
     function run(
         MiddlewareQueue $queue,
@@ -44,8 +44,8 @@ class Runner : IRequestHandler
     /**
      * Handle incoming server request and return a response.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The server request
-     * @return \Psr\Http\Message\IResponse An updated response
+     * @param \Psr\Http\messages.IServerRequest myRequest The server request
+     * @return \Psr\Http\messages.IResponse An updated response
      */
     function handle(IServerRequest myRequest): IResponse
     {

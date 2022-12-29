@@ -171,12 +171,12 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * determine the HTTP method or URI, which must be provided explicitly.
      *
      * @param string method The HTTP method associated with the request.
-     * @param \Psr\Http\Message\UriInterface|string uri The URI associated with the request. If
+     * @param \Psr\Http\messages.UriInterface|string uri The URI associated with the request. If
      *     the value is a string, the factory MUST create a UriInterface
      *     instance based on it.
      * @param array $serverParams Array of SAPI parameters with which to seed
      *     the generated request instance.
-     * @return \Psr\Http\Message\IServerRequest
+     * @return \Psr\Http\messages.IServerRequest
      */
     function createServerRequest(string method, $uri, array $serverParams = []): IServerRequest
     {
@@ -197,7 +197,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      *
      * @param array $server Array of server data to build the Uri from.
      *   $_SERVER will be added into the $server parameter.
-     * @return \Psr\Http\Message\UriInterface New instance.
+     * @return \Psr\Http\messages.UriInterface New instance.
      */
     static function createUri(array $server = []): UriInterface
     {
@@ -216,7 +216,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      *
      * @param array $server The server parameters.
      * @param array $headers The normalized headers
-     * @return \Psr\Http\Message\UriInterface a constructed Uri
+     * @return \Psr\Http\messages.UriInterface a constructed Uri
      */
     protected static function marshalUriFromSapi(array $server, array $headers): UriInterface
     {
@@ -250,8 +250,8 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * Updates the request URI to remove the base directory.
      *
      * @param string base The base path to remove.
-     * @param \Psr\Http\Message\UriInterface $uri The uri to update.
-     * @return \Psr\Http\Message\UriInterface The modified Uri instance.
+     * @param \Psr\Http\messages.UriInterface $uri The uri to update.
+     * @return \Psr\Http\messages.UriInterface The modified Uri instance.
      */
     protected static function updatePath(string base, UriInterface $uri): UriInterface
     {
@@ -280,7 +280,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
     /**
      * Calculate the base directory and webroot directory.
      *
-     * @param \Psr\Http\Message\UriInterface $uri The Uri instance.
+     * @param \Psr\Http\messages.UriInterface $uri The Uri instance.
      * @param array $server The SERVER data to use.
      * @return array An array containing the [baseDir, webroot]
      */

@@ -5,7 +5,7 @@ import uim.cake.http.clients\exceptions.MissingResponseException;
 import uim.cake.http.clients\Response;
 use Closure;
 use InvalidArgumentException;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\messages.RequestInterface;
 
 /**
  * : sending requests to an array of stubbed responses
@@ -31,7 +31,7 @@ class Mock : IAdapter
      *
      * - `match` An additional closure to match requests with.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest A partial request to use for matching.
+     * @param \Psr\Http\messages.RequestInterface myRequest A partial request to use for matching.
      * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> myOptions See above.
      */
@@ -50,7 +50,7 @@ class Mock : IAdapter
     /**
      * Find a response if one exists.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request to match
+     * @param \Psr\Http\messages.RequestInterface myRequest The request to match
      * @param array<string, mixed> myOptions Unused.
      * @return uim.cake.http.Client\Response[] The matched response or an empty array for no matches.
      */
@@ -96,7 +96,7 @@ class Mock : IAdapter
      * Check if the request URI matches the mock URI.
      *
      * @param string myRequestUri The request being sent.
-     * @param \Psr\Http\Message\RequestInterface $mock The request being mocked.
+     * @param \Psr\Http\messages.RequestInterface $mock The request being mocked.
      */
     protected bool urlMatches(string myRequestUri, RequestInterface $mock) {
         $mockUri = (string)$mock.getUri();

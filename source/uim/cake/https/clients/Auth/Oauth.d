@@ -238,7 +238,7 @@ class Oauth
      *
      * Section 9.1.2. of the Oauth spec
      *
-     * @param \Psr\Http\Message\UriInterface $uri Uri object to build a normalized version of.
+     * @param \Psr\Http\messages.UriInterface $uri Uri object to build a normalized version of.
      * @return string Normalized URL
      */
     protected string _normalizedUrl(UriInterface $uri) {

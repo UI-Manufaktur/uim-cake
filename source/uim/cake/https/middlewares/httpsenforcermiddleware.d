@@ -45,9 +45,9 @@ class HttpsEnforcerMiddleware : IMiddleware {
      * Depending on the configuration and request method, either redirects to
      * same URL with https or throws an exception.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request.
-     * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest myRequest The request.
+     * @param \Psr\Http\servers.IRequestHandler $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      * @throws uim.cake.http.exceptions.BadRequestException
      */
     IResponse process(IServerRequest myRequest, IRequestHandler $handler) {

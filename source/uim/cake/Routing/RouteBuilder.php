@@ -5,8 +5,8 @@ use BadMethodCallException;
 import uim.cake.core.App;
 import uim.cake.core.exceptions.MissingPluginException;
 import uim.cake.core.Plugin;
-import uim.cake.Routing\Route\RedirectRoute;
-import uim.cake.Routing\Route\Route;
+import uim.cake.routings.Route\RedirectRoute;
+import uim.cake.routings.Route\Route;
 import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
@@ -84,7 +84,7 @@ class RouteBuilder
     /**
      * The route collection routes should be added to.
      *
-     * @var uim.cake.Routing\RouteCollection
+     * @var uim.cake.routings.RouteCollection
      */
     protected $_collection;
 
@@ -106,7 +106,7 @@ class RouteBuilder
      * - `namePrefix` - The prefix to prepend to all route names.
      * - `middleware` - The names of the middleware routes should have applied.
      *
-     * @param uim.cake.Routing\RouteCollection $collection The route collection to append routes into.
+     * @param uim.cake.routings.RouteCollection $collection The route collection to append routes into.
      * @param string $path The path prefix the scope is for.
      * @param array $params The scope"s routing parameters.
      * @param array<string, mixed> $options Options list.
@@ -420,7 +420,7 @@ class RouteBuilder
      * @param array|string $target An array describing the target route parameters. These parameters
      *   should indicate the plugin, prefix, controller, and action that this route points to.
      * @param string|null $name The name of the route.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      */
     function get(string $template, $target, ?string $name = null): Route
     {
@@ -434,7 +434,7 @@ class RouteBuilder
      * @param array|string $target An array describing the target route parameters. These parameters
      *   should indicate the plugin, prefix, controller, and action that this route points to.
      * @param string|null $name The name of the route.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      */
     function post(string $template, $target, ?string $name = null): Route
     {
@@ -448,7 +448,7 @@ class RouteBuilder
      * @param array|string $target An array describing the target route parameters. These parameters
      *   should indicate the plugin, prefix, controller, and action that this route points to.
      * @param string|null $name The name of the route.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      */
     function put(string $template, $target, ?string $name = null): Route
     {
@@ -462,7 +462,7 @@ class RouteBuilder
      * @param array|string $target An array describing the target route parameters. These parameters
      *   should indicate the plugin, prefix, controller, and action that this route points to.
      * @param string|null $name The name of the route.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      */
     function patch(string $template, $target, ?string $name = null): Route
     {
@@ -476,7 +476,7 @@ class RouteBuilder
      * @param array|string $target An array describing the target route parameters. These parameters
      *   should indicate the plugin, prefix, controller, and action that this route points to.
      * @param string|null $name The name of the route.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      */
     function delete(string $template, $target, ?string $name = null): Route
     {
@@ -490,7 +490,7 @@ class RouteBuilder
      * @param array|string $target An array describing the target route parameters. These parameters
      *   should indicate the plugin, prefix, controller, and action that this route points to.
      * @param string|null $name The name of the route.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      */
     function head(string $template, $target, ?string $name = null): Route
     {
@@ -504,7 +504,7 @@ class RouteBuilder
      * @param array|string $target An array describing the target route parameters. These parameters
      *   should indicate the plugin, prefix, controller, and action that this route points to.
      * @param string|null $name The name of the route.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      */
     function options(string $template, $target, ?string $name = null): Route
     {
@@ -519,7 +519,7 @@ class RouteBuilder
      * @param array|string $target An array describing the target route parameters. These parameters
      *   should indicate the plugin, prefix, controller, and action that this route points to.
      * @param string|null $name The name of the route.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      */
     protected function _methodRoute(string $method, string $template, $target, ?string $name): Route
     {
@@ -623,7 +623,7 @@ class RouteBuilder
      *   reverse routing lookups. If undefined a name will be generated for each
      *   connected route.
      * - `_ext` is an array of filename extensions that will be parsed out of the url if present.
-     *   See {@link uim.cake.Routing\RouteCollection::setExtensions()}.
+     *   See {@link uim.cake.routings.RouteCollection::setExtensions()}.
      * - `_method` Only match requests with specific HTTP verbs.
      * - `_host` - Define the host name pattern if you want this route to only match
      *   specific host names. You can use `.*` and to create wildcard subdomains/hosts
@@ -638,14 +638,14 @@ class RouteBuilder
      *
      * The above route will only be matched for GET requests. POST requests will fail to match this route.
      *
-     * @param uim.cake.Routing\Route\Route|string $route A string describing the template of the route
+     * @param uim.cake.routings.Route\Route|string $route A string describing the template of the route
      * @param array|string $defaults An array describing the default route parameters.
      *   These parameters will be used by default and can supply routing parameters that are not dynamic. See above.
      * @param array<string, mixed> $options An array matching the named elements in the route to regular expressions which that
      *   element should match. Also contains additional parameters such as which routed parameters should be
      *   shifted into the passed arguments, supplying patterns for routing parameters and supplying the name of a
      *   custom routing class.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      * @throws \InvalidArgumentException
      * @throws \BadMethodCallException
      */
@@ -689,17 +689,17 @@ class RouteBuilder
     /**
      * Create a route object, or return the provided object.
      *
-     * @param uim.cake.Routing\Route\Route|string $route The route template or route object.
+     * @param uim.cake.routings.Route\Route|string $route The route template or route object.
      * @param array $defaults Default parameters.
      * @param array<string, mixed> $options Additional options parameters.
-     * @return uim.cake.Routing\Route\Route
+     * @return uim.cake.routings.Route\Route
      * @throws \InvalidArgumentException when route class or route object is invalid.
      * @throws \BadMethodCallException when the route to make conflicts with the current scope
      */
     protected function _makeRoute($route, $defaults, $options): Route
     {
         if (is_string($route)) {
-            /** @var class-string<uim.cake.Routing\Route\Route>|null $routeClass */
+            /** @var class-string<uim.cake.routings.Route\Route>|null $routeClass */
             $routeClass = App::className($options["routeClass"], "Routing/Route");
             if ($routeClass == null) {
                 throw new InvalidArgumentException(sprintf(
@@ -770,7 +770,7 @@ class RouteBuilder
      * @param array<string, mixed> $options An array matching the named elements in the route to regular expressions which that
      *   element should match. Also contains additional parameters such as which routed parameters should be
      *   shifted into the passed arguments. As well as supplying patterns for routing parameters.
-     * @return uim.cake.Routing\Route\Route|uim.cake.Routing\Route\RedirectRoute
+     * @return uim.cake.routings.Route\Route|uim.cake.routings.Route\RedirectRoute
      */
     function redirect(string $route, $url, array $options = []): Route
     {
@@ -948,9 +948,9 @@ class RouteBuilder
      * scope or any child scopes that share the same RouteCollection.
      *
      * @param string $name The name of the middleware. Used when applying middleware to a scope.
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to register.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to register.
      * @return this
-     * @see uim.cake.Routing\RouteCollection
+     * @see uim.cake.routings.RouteCollection
      */
     function registerMiddleware(string $name, $middleware) {
         _collection.registerMiddleware($name, $middleware);
@@ -966,7 +966,7 @@ class RouteBuilder
      * @param string ...$names The names of the middleware to apply to the current scope.
      * @return this
      * @throws \RuntimeException
-     * @see uim.cake.Routing\RouteCollection::addMiddlewareToScope()
+     * @see uim.cake.routings.RouteCollection::addMiddlewareToScope()
      */
     function applyMiddleware(string ...$names) {
         foreach ($names as $name) {

@@ -11,7 +11,7 @@ interface IRoutingApplication
      *
      * Use the provided RouteBuilder to define an application"s routing.
      *
-     * @param uim.cake.Routing\RouteBuilder $routes A route builder to add routes into.
+     * @param uim.cake.routings.RouteBuilder $routes A route builder to add routes into.
      * @return void
      */
     function routes(RouteBuilder $routes): void;

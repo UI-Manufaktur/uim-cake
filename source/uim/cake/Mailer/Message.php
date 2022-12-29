@@ -10,7 +10,7 @@ import uim.cake.utilities.Text;
 use Closure;
 use InvalidArgumentException;
 use JsonSerializable;
-use Psr\Http\Message\UploadedFileInterface;
+use Psr\Http\messages.UploadedFileInterface;
 use Serializable;
 use SimpleXMLElement;
 
@@ -1734,7 +1734,7 @@ class Message : JsonSerializable, Serializable
     /**
      * Read the file contents and return a base64 version of the file contents.
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|string $file The absolute path to the file to read
+     * @param \Psr\Http\messages.UploadedFileInterface|string $file The absolute path to the file to read
      *   or UploadedFileInterface instance.
      * @return string File contents in base64 encoding
      */

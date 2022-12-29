@@ -14,7 +14,7 @@ import uim.cake;
 class RequestException : RuntimeException : RequestExceptionInterface
 {
     /**
-     * @var \Psr\Http\Message\RequestInterface
+     * @var \Psr\Http\messages.RequestInterface
      */
     protected myRequest;
 
@@ -22,7 +22,7 @@ class RequestException : RuntimeException : RequestExceptionInterface
      * Constructor.
      *
      * @param string myMessage Exeception message.
-     * @param \Psr\Http\Message\RequestInterface myRequest Request instance.
+     * @param \Psr\Http\messages.RequestInterface myRequest Request instance.
      * @param \Throwable|null $previous Previous Exception
      */
     this(string myMessage, RequestInterface myRequest, ?Throwable $previous = null) {
@@ -35,7 +35,7 @@ class RequestException : RuntimeException : RequestExceptionInterface
      *
      * The request object MAY be a different object from the one passed to ClientInterface::sendRequest()
      *
-     * @return \Psr\Http\Message\RequestInterface
+     * @return \Psr\Http\messages.RequestInterface
      */
     auto getRequest(): RequestInterface
     {

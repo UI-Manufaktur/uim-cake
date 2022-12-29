@@ -92,7 +92,7 @@ class Stream : IAdapter
     /**
      * Build the stream context out of the request object.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request to build context from.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request to build context from.
      * @param array<string, mixed> myOptions Additional request options.
      */
     protected void _buildContext(RequestInterface myRequest, array myOptions) {
@@ -116,7 +116,7 @@ class Stream : IAdapter
      *
      * Creates cookies & headers.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request being sent.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request being sent.
      * @param array<string, mixed> myOptions Array of options to use.
      */
     protected void _buildHeaders(RequestInterface myRequest, array myOptions) {
@@ -133,7 +133,7 @@ class Stream : IAdapter
      * If the myRequest.body() is a string, it will be used as is.
      * Array data will be processed with {@link uim.cake.Http\Client\FormData}
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request being sent.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request being sent.
      * @param array<string, mixed> myOptions Array of options to use.
      */
     protected void _buildContent(RequestInterface myRequest, array myOptions) {
@@ -145,7 +145,7 @@ class Stream : IAdapter
     /**
      * Build miscellaneous options for the request.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request being sent.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request being sent.
      * @param array<string, mixed> myOptions Array of options to use.
      */
     protected void _buildOptions(RequestInterface myRequest, array myOptions) {
@@ -168,7 +168,7 @@ class Stream : IAdapter
     /**
      * Build SSL options for the request.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request being sent.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request being sent.
      * @param array<string, mixed> myOptions Array of options to use.
      */
     protected void _buildSslContext(RequestInterface myRequest, array myOptions) {
@@ -201,7 +201,7 @@ class Stream : IAdapter
     /**
      * Open the stream and send the request.
      *
-     * @param \Psr\Http\Message\RequestInterface myRequest The request object.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request object.
      * @return array Array of populated Response objects
      * @throws \Psr\Http\Client\NetworkExceptionInterface
      */
@@ -262,7 +262,7 @@ class Stream : IAdapter
      * Open the socket and handle any connection errors.
      *
      * @param string myUrl The url to connect to.
-     * @param \Psr\Http\Message\RequestInterface myRequest The request object.
+     * @param \Psr\Http\messages.RequestInterface myRequest The request object.
      * @return void
      * @throws \Psr\Http\Client\RequestExceptionInterface
      */

@@ -15,10 +15,10 @@ module uim.cake.I18n\Middleware;
 
 import uim.cake.I18n\I18n;
 use Locale;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
  * Sets the runtime default locale for the request based on the
@@ -47,9 +47,9 @@ class LocaleSelectorMiddleware : IMiddleware
     /**
      * Set locale based on request headers.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
