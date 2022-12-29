@@ -268,7 +268,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * }
      * ```
      *
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[\ReturnTypeWillChange]
@@ -339,7 +339,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     /**
      * Returns the statement object that was decorated by this class.
      *
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function getInnerStatement() {
         return _statement;

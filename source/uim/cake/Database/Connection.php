@@ -189,7 +189,7 @@ class Connection : ConnectionInterface
      *
      * @param uim.cake.Database\DriverInterface|string $name Driver name, class name or instance.
      * @param array $config Driver config if $name is not an instance.
-     * @return \Cake\Database\DriverInterface
+     * @return uim.cake.Database\DriverInterface
      * @throws \Cake\Database\Exception\MissingDriverException When a driver class is missing.
      * @throws \Cake\Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
      */
@@ -216,7 +216,7 @@ class Connection : ConnectionInterface
      * Get the retry wrapper object that is allows recovery from server disconnects
      * while performing certain database actions, such as executing a query.
      *
-     * @return \Cake\Core\Retry\CommandRetry The retry wrapper
+     * @return uim.cake.Core\Retry\CommandRetry The retry wrapper
      */
     function getDisconnectRetry(): CommandRetry
     {
@@ -226,7 +226,7 @@ class Connection : ConnectionInterface
     /**
      * Gets the driver instance.
      *
-     * @return \Cake\Database\DriverInterface
+     * @return uim.cake.Database\DriverInterface
      */
     function getDriver(): DriverInterface
     {
@@ -281,7 +281,7 @@ class Connection : ConnectionInterface
      * Prepares a SQL statement to be executed.
      *
      * @param uim.cake.Database\Query|string $query The SQL to convert into a prepared statement.
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function prepare($query): StatementInterface
     {
@@ -303,7 +303,7 @@ class Connection : ConnectionInterface
      * @param string $sql SQL to be executed and interpolated with $params
      * @param array $params list or associative array of params to be interpolated in $sql as values
      * @param array $types list or associative array of types to be used for casting values in query
-     * @return \Cake\Database\StatementInterface executed statement
+     * @return uim.cake.Database\StatementInterface executed statement
      */
     function execute(string $sql, array $params = [], array $types = []): StatementInterface
     {
@@ -336,7 +336,7 @@ class Connection : ConnectionInterface
      * dialect and returns the executed Statement object.
      *
      * @param uim.cake.Database\Query $query The query to be executed
-     * @return \Cake\Database\StatementInterface executed statement
+     * @return uim.cake.Database\StatementInterface executed statement
      */
     function run(Query $query): StatementInterface
     {
@@ -353,7 +353,7 @@ class Connection : ConnectionInterface
      * Executes a SQL statement and returns the Statement object as result.
      *
      * @param string $sql The SQL query to execute.
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function query(string $sql): StatementInterface
     {
@@ -368,7 +368,7 @@ class Connection : ConnectionInterface
     /**
      * Create a new Query instance for this connection.
      *
-     * @return \Cake\Database\Query
+     * @return uim.cake.Database\Query
      */
     function newQuery(): Query
     {
@@ -390,7 +390,7 @@ class Connection : ConnectionInterface
     /**
      * Gets a Schema\Collection object for this connection.
      *
-     * @return \Cake\Database\Schema\ICollection
+     * @return uim.cake.Database\Schema\ICollection
      */
     function getSchemaCollection(): SchemaICollection
     {
@@ -415,7 +415,7 @@ class Connection : ConnectionInterface
      * @param string $table the table to insert values in
      * @param array $values values to be inserted
      * @param array<int|string, string> $types Array containing the types to be used for casting
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function insert(string $table, array $values, array $types = []): StatementInterface
     {
@@ -436,7 +436,7 @@ class Connection : ConnectionInterface
      * @param array $values values to be updated
      * @param array $conditions conditions to be set for update statement
      * @param array<string> $types list of associative array containing the types to be used for casting
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function update(string $table, array $values, array $conditions = [], array $types = []): StatementInterface
     {
@@ -454,7 +454,7 @@ class Connection : ConnectionInterface
      * @param string $table the table to delete rows from
      * @param array $conditions conditions to be set for delete statement
      * @param array<string> $types list of associative array containing the types to be used for casting
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function delete(string $table, array $conditions = [], array $types = []): StatementInterface
     {
@@ -917,7 +917,7 @@ class Connection : ConnectionInterface
      * for the passed original statement instance.
      *
      * @param uim.cake.Database\StatementInterface $statement the instance to be decorated
-     * @return \Cake\Database\Log\LoggingStatement
+     * @return uim.cake.Database\Log\LoggingStatement
      */
     protected function _newLogger(StatementInterface $statement): LoggingStatement
     {

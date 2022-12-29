@@ -17,7 +17,7 @@ interface TableSchemaAwareInterface
     /**
      * Get and set the schema for this fixture.
      *
-     * @return \Cake\Database\Schema\TableSchemaInterface&\Cake\Database\Schema\SqlGeneratorInterface
+     * @return uim.cake.Database\Schema\TableSchemaInterface&\Cake\Database\Schema\SqlGeneratorInterface
      */
     function getTableSchema();
 

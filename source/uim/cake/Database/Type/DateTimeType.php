@@ -488,7 +488,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * aware parser with the format set by `setLocaleFormat()`.
      *
      * @param string $value The value to parse and convert to an object.
-     * @return \Cake\I18n\I18nDateTimeInterface|null
+     * @return uim.cake.I18n\I18nDateTimeInterface|null
      */
     protected function _parseLocaleValue(string $value): ?I18nDateTimeInterface
     {

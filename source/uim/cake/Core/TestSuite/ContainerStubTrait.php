@@ -72,7 +72,7 @@ trait ContainerStubTrait
      *
      * Uses the configuration set in `configApplication()`.
      *
-     * @return \Cake\Core\IHttpApplication|\Cake\Core\IConsoleApplication
+     * @return uim.cake.Core\IHttpApplication|\Cake\Core\IConsoleApplication
      */
     protected function createApp() {
         if (_appClass) {
@@ -132,7 +132,7 @@ trait ContainerStubTrait
      *
      * @param uim.cake.Event\IEvent $event The event
      * @param uim.cake.Core\IContainer $container The container to wrap.
-     * @return \Cake\Core\IContainer|null
+     * @return uim.cake.Core\IContainer|null
      */
     function modifyContainer(IEvent $event, IContainer $container): ?IContainer
     {

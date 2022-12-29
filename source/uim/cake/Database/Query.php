@@ -213,7 +213,7 @@ class Query : IExpression, IteratorAggregate
     /**
      * Gets the connection instance to be used for executing and transforming this query.
      *
-     * @return \Cake\Database\Connection
+     * @return uim.cake.Database\Connection
      */
     function getConnection(): Connection
     {
@@ -238,7 +238,7 @@ class Query : IExpression, IteratorAggregate
      * This method can be overridden in query subclasses to decorate behavior
      * around query execution.
      *
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function execute(): StatementInterface
     {
@@ -1654,7 +1654,7 @@ class Query : IExpression, IteratorAggregate
      * ```
      *
      * @param string $identifier The identifier for an expression
-     * @return \Cake\Database\IExpression
+     * @return uim.cake.Database\IExpression
      */
     function identifier(string $identifier): IExpression
     {
@@ -1848,7 +1848,7 @@ class Query : IExpression, IteratorAggregate
      * ```
      *
      * @param uim.cake.Database\IExpression|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
-     * @return \Cake\Database\Expression\QueryExpression
+     * @return uim.cake.Database\Expression\QueryExpression
      */
     function newExpr($rawExpression = null): QueryExpression
     {
@@ -1870,7 +1870,7 @@ class Query : IExpression, IteratorAggregate
      * ```
      *
      * @param uim.cake.Database\IExpression|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
-     * @return \Cake\Database\Expression\QueryExpression
+     * @return uim.cake.Database\Expression\QueryExpression
      */
     function expr($rawExpression = null): QueryExpression
     {
@@ -1894,7 +1894,7 @@ class Query : IExpression, IteratorAggregate
      * $query.func().dateDiff(["2012-01-05", "2012-01-02"])
      * ```
      *
-     * @return \Cake\Database\FunctionsBuilder
+     * @return uim.cake.Database\FunctionsBuilder
      */
     function func(): FunctionsBuilder
     {
@@ -1911,7 +1911,7 @@ class Query : IExpression, IteratorAggregate
      * iterated without having to call execute() manually, thus making it look like
      * a result set instead of the query itself.
      *
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[\ReturnTypeWillChange]
@@ -2085,7 +2085,7 @@ class Query : IExpression, IteratorAggregate
      * associate values to those placeholders so that they can be passed correctly
      * to the statement object.
      *
-     * @return \Cake\Database\ValueBinder
+     * @return uim.cake.Database\ValueBinder
      */
     function getValueBinder(): ValueBinder
     {
@@ -2182,7 +2182,7 @@ class Query : IExpression, IteratorAggregate
      * Gets the TypeMap class where the types for each of the fields in the
      * select clause are stored.
      *
-     * @return \Cake\Database\TypeMap
+     * @return uim.cake.Database\TypeMap
      */
     function getSelectTypeMap(): TypeMap
     {
@@ -2244,7 +2244,7 @@ class Query : IExpression, IteratorAggregate
      * any registered callbacks.
      *
      * @param uim.cake.Database\StatementInterface $statement to be decorated
-     * @return \Cake\Database\Statement\CallbackStatement|\Cake\Database\StatementInterface
+     * @return uim.cake.Database\Statement\CallbackStatement|\Cake\Database\StatementInterface
      */
     protected function _decorateStatement(StatementInterface $statement) {
         $typeMap = this.getSelectTypeMap();

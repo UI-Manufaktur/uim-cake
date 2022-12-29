@@ -113,7 +113,7 @@ interface DriverInterface
      * Prepares a sql statement to be executed.
      *
      * @param uim.cake.Database\Query|string $query The query to turn into a prepared statement.
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function prepare($query): StatementInterface;
 
@@ -230,7 +230,7 @@ interface DriverInterface
      * If all the tables that use this Driver specify their
      * own schemas, then this may return null.
      *
-     * @return \Cake\Database\Schema\SchemaDialect
+     * @return uim.cake.Database\Schema\SchemaDialect
      */
     function schemaDialect(): SchemaDialect;
 
@@ -312,7 +312,7 @@ interface DriverInterface
     /**
      * Returns an instance of a QueryCompiler.
      *
-     * @return \Cake\Database\QueryCompiler
+     * @return uim.cake.Database\QueryCompiler
      */
     function newCompiler(): QueryCompiler;
 
@@ -321,7 +321,7 @@ interface DriverInterface
      *
      * @param string $table The table name.
      * @param array $columns The list of columns for the schema.
-     * @return \Cake\Database\Schema\TableSchema
+     * @return uim.cake.Database\Schema\TableSchema
      */
     function newTableSchema(string $table, array $columns = []): TableSchema;
 }

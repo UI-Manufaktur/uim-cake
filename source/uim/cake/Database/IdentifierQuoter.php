@@ -41,7 +41,7 @@ class IdentifierQuoter
      * quotes them
      *
      * @param uim.cake.Database\Query $query The query to have its identifiers quoted
-     * @return \Cake\Database\Query
+     * @return uim.cake.Database\Query
      */
     function quote(Query $query): Query
     {

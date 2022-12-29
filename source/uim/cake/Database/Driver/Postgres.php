@@ -314,7 +314,7 @@ class Postgres : Driver
     /**
      * {@inheritDoc}
      *
-     * @return \Cake\Database\PostgresCompiler
+     * @return uim.cake.Database\PostgresCompiler
      */
     function newCompiler(): QueryCompiler
     {

@@ -60,7 +60,7 @@ class TypeFactory
      *
      * @param string $name type identifier
      * @throws \InvalidArgumentException If type identifier is unknown
-     * @return \Cake\Database\TypeInterface
+     * @return uim.cake.Database\TypeInterface
      */
     public static function build(string $name): TypeInterface
     {

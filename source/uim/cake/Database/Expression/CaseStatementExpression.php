@@ -484,7 +484,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * * `else`: The `ELSE` result value.
      *
      * @param string $clause The name of the clause to obtain.
-     * @return \Cake\Database\IExpression|object|array<\Cake\Database\Expression\WhenThenExpression>|scalar|null
+     * @return uim.cake.Database\IExpression|object|array<\Cake\Database\Expression\WhenThenExpression>|scalar|null
      * @throws \InvalidArgumentException In case the given clause name is invalid.
      */
     function clause(string $clause) {

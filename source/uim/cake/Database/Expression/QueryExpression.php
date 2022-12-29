@@ -345,7 +345,7 @@ class QueryExpression : IExpression, Countable
      * @param uim.cake.Database\IExpression|object|scalar|null $value The case value.
      * @param string|null $type The case value type. If no type is provided, the type will be tried to be inferred
      *  from the value.
-     * @return \Cake\Database\Expression\CaseStatementExpression
+     * @return uim.cake.Database\Expression\CaseStatementExpression
      */
     function case($value = null, ?string $type = null): CaseStatementExpression
     {
@@ -441,7 +441,7 @@ class QueryExpression : IExpression, Countable
      * @param uim.cake.Database\IExpression|\Closure|array|string $conditions to be joined with AND
      * @param array<string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @return \Cake\Database\Expression\QueryExpression
+     * @return uim.cake.Database\Expression\QueryExpression
      */
     function and($conditions, $types = []) {
         if ($conditions instanceof Closure) {
@@ -458,7 +458,7 @@ class QueryExpression : IExpression, Countable
      * @param uim.cake.Database\IExpression|\Closure|array|string $conditions to be joined with OR
      * @param array<string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @return \Cake\Database\Expression\QueryExpression
+     * @return uim.cake.Database\Expression\QueryExpression
      */
     function or($conditions, $types = []) {
         if ($conditions instanceof Closure) {
@@ -477,7 +477,7 @@ class QueryExpression : IExpression, Countable
      * @param uim.cake.Database\IExpression|\Closure|array|string $conditions to be joined with AND
      * @param array<string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @return \Cake\Database\Expression\QueryExpression
+     * @return uim.cake.Database\Expression\QueryExpression
      * @deprecated 4.0.0 Use {@link and()} instead.
      */
     function and_($conditions, $types = []) {
@@ -493,7 +493,7 @@ class QueryExpression : IExpression, Countable
      * @param uim.cake.Database\IExpression|\Closure|array|string $conditions to be joined with OR
      * @param array<string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @return \Cake\Database\Expression\QueryExpression
+     * @return uim.cake.Database\Expression\QueryExpression
      * @deprecated 4.0.0 Use {@link or()} instead.
      */
     function or_($conditions, $types = []) {
@@ -732,7 +732,7 @@ class QueryExpression : IExpression, Countable
      * @param string $field The value from which the actual field and operator will
      * be extracted.
      * @param mixed $value The value to be bound to a placeholder for the field
-     * @return \Cake\Database\IExpression
+     * @return uim.cake.Database\IExpression
      * @throws \InvalidArgumentException If operator is invalid or missing on NULL usage.
      */
     protected function _parseCondition(string $field, $value) {

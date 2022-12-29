@@ -45,7 +45,7 @@ interface IPlugin {
      * Add console commands for the plugin.
      *
      * @param uim.cake.Console\CommandCollection someCommands The command collection to update
-     * @return \Cake\Console\CommandCollection
+     * @return uim.cake.Console\CommandCollection
      */
     CommandCollection console(CommandCollection someCommands);
 
@@ -53,7 +53,7 @@ interface IPlugin {
      * Add middleware for the plugin.
      *
      * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to update.
-     * @return \Cake\Http\MiddlewareQueue
+     * @return uim.cake.Http\MiddlewareQueue
      */
     MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
 

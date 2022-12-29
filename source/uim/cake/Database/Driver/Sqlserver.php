@@ -184,7 +184,7 @@ class Sqlserver : Driver
      * Prepares a sql statement to be executed
      *
      * @param uim.cake.Database\Query|string $query The query to prepare.
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function prepare($query): StatementInterface
     {
@@ -285,7 +285,7 @@ class Sqlserver : Driver
     /**
      * {@inheritDoc}
      *
-     * @return \Cake\Database\SqlserverCompiler
+     * @return uim.cake.Database\SqlserverCompiler
      */
     function newCompiler(): QueryCompiler
     {
@@ -322,7 +322,7 @@ class Sqlserver : Driver
      * @param uim.cake.Database\Query $original The query to wrap in a subquery.
      * @param int|null $limit The number of rows to fetch.
      * @param int|null $offset The number of rows to offset.
-     * @return \Cake\Database\Query Modified query object.
+     * @return uim.cake.Database\Query Modified query object.
      */
     protected function _pagingSubquery(Query $original, ?int $limit, ?int $offset): Query
     {

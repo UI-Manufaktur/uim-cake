@@ -97,7 +97,7 @@ class Plugin {
      * This method should generally not be used during application
      * runtime as plugins should be set during Application startup.
      *
-     * @return \Cake\Core\PluginCollection
+     * @return uim.cake.Core\PluginCollection
      */
     static PluginCollection getCollection() {
         if (!isset(static::myPlugins)) {

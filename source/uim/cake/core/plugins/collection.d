@@ -162,7 +162,7 @@ class PluginCollection : Iterator, Countable
      * and that plugins loaded this way may miss some hook methods.
      *
      * @param string myName The plugin to get.
-     * @return \Cake\Core\IPlugin The plugin.
+     * @return uim.cake.Core\IPlugin The plugin.
      * @throws \Cake\Core\Exception\MissingPluginException when unknown plugins are fetched.
      */
     IPlugin get(string myName) {
@@ -181,7 +181,7 @@ class PluginCollection : Iterator, Countable
      *
      * @param string myName The plugin name or classname
      * @param array<string, mixed> myConfig Configuration options for the plugin.
-     * @return \Cake\Core\IPlugin
+     * @return uim.cake.Core\IPlugin
      * @throws \Cake\Core\Exception\MissingPluginException When plugin instance could not be created.
      */
     IPlugin create(string myName, array myConfig = []) {
@@ -228,7 +228,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Part of Iterator Interface
      *
-     * @return \Cake\Core\IPlugin
+     * @return uim.cake.Core\IPlugin
      */
     IPlugin current() {
         $position = this.positions[this.loopDepth];

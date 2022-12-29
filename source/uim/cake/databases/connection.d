@@ -154,7 +154,7 @@ class Connection : IConnection {
      * Get the retry wrapper object that is allows recovery from server disconnects
      * while performing certain database actions, such as executing a query.
      *
-     * @return \Cake\Core\Retry\CommandRetry The retry wrapper
+     * @return uim.cake.Core\Retry\CommandRetry The retry wrapper
      */
     CommandRetry getDisconnectRetry() {
         return new CommandRetry(new ReconnectStrategy(this));
@@ -163,7 +163,7 @@ class Connection : IConnection {
     /**
      * Gets the driver instance.
      *
-     * @return \Cake\Database\IDriver
+     * @return uim.cake.Database\IDriver
      */
     auto getDriver(): IDriver
     {
@@ -212,7 +212,7 @@ class Connection : IConnection {
      * Prepares a SQL statement to be executed.
      *
      * @param uim.cake.Database\Query|string myQuery The SQL to convert into a prepared statement.
-     * @return \Cake\Database\IStatement
+     * @return uim.cake.Database\IStatement
      */
     function prepare(myQuery): IStatement
     {
@@ -234,7 +234,7 @@ class Connection : IConnection {
      * @param string mySql SQL to be executed and interpolated with myParams
      * @param array myParams list or associative array of params to be interpolated in mySql as values
      * @param array myTypes list or associative array of types to be used for casting values in query
-     * @return \Cake\Database\IStatement executed statement
+     * @return uim.cake.Database\IStatement executed statement
      */
     auto execute(string mySql, array myParams = [], array myTypes = []): IStatement
     {
@@ -265,7 +265,7 @@ class Connection : IConnection {
      * dialect and returns the executed Statement object.
      *
      * @param uim.cake.Database\Query myQuery The query to be executed
-     * @return \Cake\Database\IStatement executed statement
+     * @return uim.cake.Database\IStatement executed statement
      */
     function run(Query myQuery): IStatement
     {
@@ -282,7 +282,7 @@ class Connection : IConnection {
      * Executes a SQL statement and returns the Statement object as result.
      *
      * @param string mySql The SQL query to execute.
-     * @return \Cake\Database\IStatement
+     * @return uim.cake.Database\IStatement
      */
     function query(string mySql): IStatement
     {
@@ -297,7 +297,7 @@ class Connection : IConnection {
     /**
      * Create a new Query instance for this connection.
      *
-     * @return \Cake\Database\Query
+     * @return uim.cake.Database\Query
      */
     function newQuery(): Query
     {
@@ -319,7 +319,7 @@ class Connection : IConnection {
     /**
      * Gets a Schema\Collection object for this connection.
      *
-     * @return \Cake\Database\Schema\ICollection
+     * @return uim.cake.Database\Schema\ICollection
      */
     auto getSchemaCollection(): SchemaICollection
     {
@@ -344,7 +344,7 @@ class Connection : IConnection {
      * @param string myTable the table to insert values in
      * @param array myValues values to be inserted
      * @param array<string, string> myTypes list of associative array containing the types to be used for casting
-     * @return \Cake\Database\IStatement
+     * @return uim.cake.Database\IStatement
      */
     function insert(string myTable, array myValues, array myTypes = []): IStatement
     {
@@ -365,7 +365,7 @@ class Connection : IConnection {
      * @param array myValues values to be updated
      * @param array $conditions conditions to be set for update statement
      * @param array myTypes list of associative array containing the types to be used for casting
-     * @return \Cake\Database\IStatement
+     * @return uim.cake.Database\IStatement
      */
     function update(string myTable, array myValues, array $conditions = [], array myTypes = []): IStatement
     {
@@ -383,7 +383,7 @@ class Connection : IConnection {
      * @param string myTable the table to delete rows from
      * @param array $conditions conditions to be set for delete statement
      * @param array myTypes list of associative array containing the types to be used for casting
-     * @return \Cake\Database\IStatement
+     * @return uim.cake.Database\IStatement
      */
     function delete(string myTable, array $conditions = [], array myTypes = []): IStatement
     {
@@ -813,7 +813,7 @@ class Connection : IConnection {
      * for the passed original statement instance.
      *
      * @param uim.cake.Database\IStatement $statement the instance to be decorated
-     * @return \Cake\Database\Log\LoggingStatement
+     * @return uim.cake.Database\Log\LoggingStatement
      */
     protected auto _newLogger(IStatement $statement): LoggingStatement
     {

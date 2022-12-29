@@ -26,7 +26,7 @@ interface FieldInterface
     /**
      * Returns the field name
      *
-     * @return \Cake\Database\IExpression|array|string
+     * @return uim.cake.Database\IExpression|array|string
      */
     function getField();
 }

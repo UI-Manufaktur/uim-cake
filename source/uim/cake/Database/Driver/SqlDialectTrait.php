@@ -132,7 +132,7 @@ trait SqlDialectTrait
      * Apply translation steps to select queries.
      *
      * @param uim.cake.Database\Query $query The query to translate
-     * @return \Cake\Database\Query The modified query
+     * @return uim.cake.Database\Query The modified query
      */
     protected function _selectQueryTranslator(Query $query): Query
     {
@@ -144,7 +144,7 @@ trait SqlDialectTrait
      * that do not support the "ON" part can provide the actual way it should be done
      *
      * @param uim.cake.Database\Query $query The query to be transformed
-     * @return \Cake\Database\Query
+     * @return uim.cake.Database\Query
      */
     protected function _transformDistinct(Query $query): Query
     {
@@ -166,7 +166,7 @@ trait SqlDialectTrait
      * We are intentionally not supporting deletes with joins as they have even poorer support.
      *
      * @param uim.cake.Database\Query $query The query to translate
-     * @return \Cake\Database\Query The modified query
+     * @return uim.cake.Database\Query The modified query
      */
     protected function _deleteQueryTranslator(Query $query): Query
     {
@@ -198,7 +198,7 @@ trait SqlDialectTrait
      * Just like for delete queries, joins are currently not supported for update queries.
      *
      * @param uim.cake.Database\Query $query The query to translate
-     * @return \Cake\Database\Query The modified query
+     * @return uim.cake.Database\Query The modified query
      */
     protected function _updateQueryTranslator(Query $query): Query
     {
@@ -209,7 +209,7 @@ trait SqlDialectTrait
      * Removes aliases from the `WHERE` clause of a query.
      *
      * @param uim.cake.Database\Query $query The query to process.
-     * @return \Cake\Database\Query The modified query.
+     * @return uim.cake.Database\Query The modified query.
      * @throws \RuntimeException In case the processed query contains any joins, as removing
      *  aliases from the conditions can break references to the joined tables.
      */
@@ -259,7 +259,7 @@ trait SqlDialectTrait
      * Apply translation steps to insert queries.
      *
      * @param uim.cake.Database\Query $query The query to translate
-     * @return \Cake\Database\Query The modified query
+     * @return uim.cake.Database\Query The modified query
      */
     protected function _insertQueryTranslator(Query $query): Query
     {

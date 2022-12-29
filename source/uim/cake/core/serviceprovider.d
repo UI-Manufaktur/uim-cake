@@ -30,7 +30,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * This method"s actual return type and documented return type differ
      * because PHP 7.2 doesn"t support return type narrowing.
      *
-     * @return \Cake\Core\IContainer
+     * @return uim.cake.Core\IContainer
      */
     IDefinitionContainer getContainer() {
         myContainer = super.getContainer();

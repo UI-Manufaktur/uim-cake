@@ -37,7 +37,7 @@ trait TypeMapTrait
     /**
      * Returns the existing type map.
      *
-     * @return \Cake\Database\TypeMap
+     * @return uim.cake.Database\TypeMap
      */
     function getTypeMap(): TypeMap
     {

@@ -302,7 +302,7 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * Get the wrapped statement
      *
-     * @return \Cake\Database\StatementInterface
+     * @return uim.cake.Database\StatementInterface
      */
     function getInnerStatement(): StatementInterface
     {

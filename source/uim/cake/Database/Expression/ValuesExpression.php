@@ -190,7 +190,7 @@ class ValuesExpression : IExpression
      * Gets the query object to be used as the values expression to be evaluated
      * to insert records in the table.
      *
-     * @return \Cake\Database\Query|null
+     * @return uim.cake.Database\Query|null
      */
     function getQuery(): ?Query
     {

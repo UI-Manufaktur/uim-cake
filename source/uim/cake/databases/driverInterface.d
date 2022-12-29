@@ -70,7 +70,7 @@ interface IDriver {
      * Prepares a sql statement to be executed.
      *
      * @param uim.cake.Database\Query|string myQuery The query to turn into a prepared statement.
-     * @return \Cake\Database\IStatement
+     * @return uim.cake.Database\IStatement
      */
     IStatement prepare(myQuery);
 
@@ -166,7 +166,7 @@ interface IDriver {
      * If all the tables that use this Driver specify their
      * own schemas, then this may return null.
      *
-     * @return \Cake\Database\Schema\SchemaDialect
+     * @return uim.cake.Database\Schema\SchemaDialect
      */
     SchemaDialect schemaDialect();
 
@@ -234,7 +234,7 @@ interface IDriver {
      *
      * @param string myTable The table name.
      * @param array $columns The list of columns for the schema.
-     * @return \Cake\Database\Schema\TableSchema
+     * @return uim.cake.Database\Schema\TableSchema
      */
     TableSchema newTableSchema(string myTable, array $columns = []);
 }
