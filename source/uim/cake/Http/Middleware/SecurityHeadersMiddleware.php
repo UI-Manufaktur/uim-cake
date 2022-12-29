@@ -7,7 +7,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Middleware;
+module uim.cake.http.Middleware;
 
 use InvalidArgumentException;
 use Psr\Http\Message\IResponse;

@@ -7,7 +7,7 @@
 
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Middleware;
+module uim.cake.http.Middleware;
 
 use Closure;
 use Psr\Http\Message\IResponse;

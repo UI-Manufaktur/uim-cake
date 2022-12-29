@@ -7,10 +7,10 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Middleware;
+module uim.cake.http.Middleware;
 
-import uim.cake.https.Cookie\CookieCollection;
-import uim.cake.https.Response;
+import uim.cake.http.Cookie\CookieCollection;
+import uim.cake.http.Response;
 import uim.cake.utilities.CookieCryptTrait;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
@@ -126,8 +126,8 @@ class EncryptedCookieMiddleware : IMiddleware
     /**
      * Encode cookies from a response"s CookieCollection.
      *
-     * @param uim.cake.Http\Response $response The response to encode cookies in.
-     * @return uim.cake.Http\Response Updated response with encoded cookies.
+     * @param uim.cake.http.Response $response The response to encode cookies in.
+     * @return uim.cake.http.Response Updated response with encoded cookies.
      */
     protected function encodeCookies(Response $response): Response
     {

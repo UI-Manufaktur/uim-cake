@@ -7,9 +7,9 @@
 
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Middleware;
+module uim.cake.http.Middleware;
 
-import uim.cake.https.Response;
+import uim.cake.http.Response;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 use Psr\Http\Server\IMiddleware;

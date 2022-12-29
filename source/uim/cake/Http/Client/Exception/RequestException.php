@@ -12,7 +12,7 @@
 
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Client\Exception;
+module uim.cake.http.Client\Exception;
 
 use Psr\Http\Client\RequestExceptionInterface;
 use Psr\Http\Message\RequestInterface;

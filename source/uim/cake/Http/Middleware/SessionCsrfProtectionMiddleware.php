@@ -7,11 +7,11 @@
  * @since         4.2.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Middleware;
+module uim.cake.http.Middleware;
 
 use ArrayAccess;
-import uim.cake.https.Exception\InvalidCsrfTokenException;
-import uim.cake.https.Session;
+import uim.cake.http.Exception\InvalidCsrfTokenException;
+import uim.cake.http.Session;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 use Psr\Http\Message\IResponse;
@@ -227,9 +227,9 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * Validate the request data against the cookie token.
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
-     * @param uim.cake.Http\Session $session The session instance.
+     * @param uim.cake.http.Session $session The session instance.
      * @return void
-     * @throws uim.cake.Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
+     * @throws uim.cake.http.Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
     protected function validateToken(IServerRequest $request, Session $session): void
     {

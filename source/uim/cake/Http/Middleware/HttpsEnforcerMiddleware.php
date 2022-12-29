@@ -7,10 +7,10 @@
 
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Middleware;
+module uim.cake.http.Middleware;
 
 import uim.cake.cores.Configure;
-import uim.cake.https.Exception\BadRequestException;
+import uim.cake.http.Exception\BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
@@ -53,7 +53,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * Constructor
      *
      * @param array<string, mixed> $config The options to use.
-     * @see uim.cake.Http\Middleware\HttpsEnforcerMiddleware::$config
+     * @see uim.cake.http.Middleware\HttpsEnforcerMiddleware::$config
      */
     public this(array $config = []) {
         this.config = $config + this.config;
@@ -68,7 +68,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\Message\IResponse A response.
-     * @throws uim.cake.Http\Exception\BadRequestException
+     * @throws uim.cake.http.Exception\BadRequestException
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {

@@ -8,7 +8,7 @@
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-module uim.cake.https.Middleware;
+module uim.cake.http.Middleware;
 
 import uim.cake.cores.InstanceConfigTrait;
 use ParagonIE\CSPBuilder\CSPBuilder;

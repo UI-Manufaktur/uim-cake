@@ -101,21 +101,21 @@ class Client : ClientInterface
      * Cookies are indexed by the cookie"s domain or
      * request host name.
      *
-     * @var uim.cake.Http\Cookie\CookieCollection
+     * @var uim.cake.http.Cookie\CookieCollection
      */
     protected _cookies;
 
     /**
      * Mock adapter for stubbing requests in tests.
      *
-     * @var uim.cake.Http\Client\Adapter\Mock|null
+     * @var uim.cake.http.Client\Adapter\Mock|null
      */
     protected static $_mockAdapter;
 
     /**
      * Adapter for sending requests.
      *
-     * @var uim.cake.Http\Client\IAdapter
+     * @var uim.cake.http.Client\IAdapter
      */
     protected _adapter;
 
@@ -213,7 +213,7 @@ class Client : ClientInterface
     /**
      * Get the cookies stored in the Client.
      *
-     * @return uim.cake.Http\Cookie\CookieCollection
+     * @return uim.cake.http.Cookie\CookieCollection
      */
     CookieCollection cookies() {
         return _cookies;
@@ -222,7 +222,7 @@ class Client : ClientInterface
     /**
      * Adds a cookie to the Client collection.
      *
-     * @param uim.cake.Http\Cookie\ICookie $cookie Cookie object.
+     * @param uim.cake.http.Cookie\ICookie $cookie Cookie object.
      * @return this
      * @throws \InvalidArgumentException
      */
@@ -246,7 +246,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param array|string myData The query data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     Response get(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -271,7 +271,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The post data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     Response post(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -286,7 +286,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     Response put(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -301,7 +301,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     Response patch(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -316,7 +316,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     Response options(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -331,7 +331,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     Response trace(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -346,7 +346,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     Response delete(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -361,7 +361,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param array myData The query string data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     Response head(string myUrl, array myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -377,7 +377,7 @@ class Client : ClientInterface
      * @param string myUrl URL to request.
      * @param mixed myData The request body.
      * @param array<string, mixed> myOptions The options to use. Contains auth, proxy, etc.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     protected Response _doRequest(string method, string myUrl, myData, myOptions) {
         myRequest = _createRequest(
@@ -419,7 +419,7 @@ class Client : ClientInterface
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request to send.
      * @param array<string, mixed> myOptions Additional options to use.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     Response send(RequestInterface myRequest, array myOptions = []) {
         $redirects = 0;
@@ -475,7 +475,7 @@ class Client : ClientInterface
      *
      * @param string method The HTTP method being mocked.
      * @param string myUrl The URL being matched. See above for examples.
-     * @param uim.cake.Http\Client\Response $response The response that matches the request.
+     * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> myOptions See above.
      */
     static void addMockResponse(string method, string myUrl, Response $response, array myOptions = []) {
@@ -491,7 +491,7 @@ class Client : ClientInterface
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request to send.
      * @param array<string, mixed> myOptions Additional options to use.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     protected Response _sendRequest(RequestInterface myRequest, array myOptions) {
         if (static::$_mockAdapter) {
@@ -564,7 +564,7 @@ class Client : ClientInterface
      * @param string myUrl The url including query string.
      * @param mixed myData The request body.
      * @param array<string, mixed> myOptions The options to use. Contains auth, proxy, etc.
-     * @return uim.cake.Http\Client\Request
+     * @return uim.cake.http.Client\Request
      */
     protected Request _createRequest(string method, string myUrl, myData, myOptions) {
         /** @var array<non-empty-string, non-empty-string> $headers */
@@ -577,10 +577,10 @@ class Client : ClientInterface
         }
 
         myRequest = new Request(myUrl, $method, $headers, myData);
-        /** @var uim.cake.Http\Client\Request myRequest */
+        /** @var uim.cake.http.Client\Request myRequest */
         myRequest = myRequest.withProtocolVersion(this.getConfig("protocolVersion"));
         $cookies = myOptions["cookies"] ?? [];
-        /** @var uim.cake.Http\Client\Request myRequest */
+        /** @var uim.cake.http.Client\Request myRequest */
         myRequest = _cookies.addToRequest(myRequest, $cookies);
         if (isset(myOptions["auth"])) {
             myRequest = _addAuthentication(myRequest, myOptions);
@@ -629,13 +629,13 @@ class Client : ClientInterface
      * Uses the authentication type to choose the correct strategy
      * and use its methods to add headers.
      *
-     * @param uim.cake.Http\Client\Request myRequest The request to modify.
+     * @param uim.cake.http.Client\Request myRequest The request to modify.
      * @param array<string, mixed> myOptions Array of options containing the "auth" key.
-     * @return uim.cake.Http\Client\Request The updated request object.
+     * @return uim.cake.http.Client\Request The updated request object.
      */
     protected Request _addAuthentication(Request myRequest, array myOptions) {
         $auth = myOptions["auth"];
-        /** @var uim.cake.Http\Client\Auth\Basic $adapter */
+        /** @var uim.cake.http.Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, myOptions);
 
         return $adapter.authentication(myRequest, myOptions["auth"]);
@@ -647,13 +647,13 @@ class Client : ClientInterface
      * Uses the authentication type to choose the correct strategy
      * and use its methods to add headers.
      *
-     * @param uim.cake.Http\Client\Request myRequest The request to modify.
+     * @param uim.cake.http.Client\Request myRequest The request to modify.
      * @param array<string, mixed> myOptions Array of options containing the "proxy" key.
-     * @return uim.cake.Http\Client\Request The updated request object.
+     * @return uim.cake.http.Client\Request The updated request object.
      */
     protected Request _addProxy(Request myRequest, array myOptions) {
         $auth = myOptions["proxy"];
-        /** @var uim.cake.Http\Client\Auth\Basic $adapter */
+        /** @var uim.cake.http.Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, myOptions);
 
         return $adapter.proxyAuthentication(myRequest, myOptions["proxy"]);

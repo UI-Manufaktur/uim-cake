@@ -7,13 +7,13 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Middleware;
+module uim.cake.http.Middleware;
 
 use ArrayAccess;
-import uim.cake.https.Cookie\Cookie;
-import uim.cake.https.Cookie\CookieInterface;
-import uim.cake.https.Exception\InvalidCsrfTokenException;
-import uim.cake.https.Response;
+import uim.cake.http.Cookie\Cookie;
+import uim.cake.http.Cookie\CookieInterface;
+import uim.cake.http.Exception\InvalidCsrfTokenException;
+import uim.cake.http.Response;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 use InvalidArgumentException;
@@ -370,7 +370,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
      * @return void
-     * @throws uim.cake.Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
+     * @throws uim.cake.http.Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
     protected function _validateToken(IServerRequest $request): void
     {
@@ -415,7 +415,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param string $value Cookie value
      * @param \Psr\Http\Message\IServerRequest $request The request object.
-     * @return uim.cake.Http\Cookie\CookieInterface
+     * @return uim.cake.http.Cookie\CookieInterface
      */
     protected function _createCookie(string $value, IServerRequest $request): CookieInterface
     {

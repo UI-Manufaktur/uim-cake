@@ -7,10 +7,10 @@
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.TestSuite;
+module uim.cake.http.TestSuite;
 
-import uim.cake.https.Client;
-import uim.cake.https.Client\Response;
+import uim.cake.http.Client;
+import uim.cake.http.Client\Response;
 
 /**
  * Define mock responses and have mocks automatically cleared.
@@ -34,7 +34,7 @@ trait HttpClientTrait
      * @param int $code The response code to use. Defaults to 200
      * @param array<string> $headers A list of headers for the response. Example `Content-Type: application/json`
      * @param string $body The body for the response.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function newClientResponse(int $code = 200, array $headers = [], string $body = ""): Response
     {
@@ -47,7 +47,7 @@ trait HttpClientTrait
      * Add a mock response for a POST request.
      *
      * @param string $url The URL to mock
-     * @param uim.cake.Http\Client\Response $response The response for the mock.
+     * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
@@ -60,7 +60,7 @@ trait HttpClientTrait
      * Add a mock response for a GET request.
      *
      * @param string $url The URL to mock
-     * @param uim.cake.Http\Client\Response $response The response for the mock.
+     * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
@@ -73,7 +73,7 @@ trait HttpClientTrait
      * Add a mock response for a PATCH request.
      *
      * @param string $url The URL to mock
-     * @param uim.cake.Http\Client\Response $response The response for the mock.
+     * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
@@ -86,7 +86,7 @@ trait HttpClientTrait
      * Add a mock response for a PUT request.
      *
      * @param string $url The URL to mock
-     * @param uim.cake.Http\Client\Response $response The response for the mock.
+     * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
@@ -99,7 +99,7 @@ trait HttpClientTrait
      * Add a mock response for a DELETE request.
      *
      * @param string $url The URL to mock
-     * @param uim.cake.Http\Client\Response $response The response for the mock.
+     * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */

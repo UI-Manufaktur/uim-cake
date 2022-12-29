@@ -7,9 +7,9 @@
  * @since         3.6.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Middleware;
+module uim.cake.http.Middleware;
 
-import uim.cake.https.Exception\BadRequestException;
+import uim.cake.http.Exception\BadRequestException;
 import uim.cake.utilities.exceptions.XmlException;
 import uim.cake.utilities.Xml;
 use Closure;

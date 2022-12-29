@@ -38,7 +38,7 @@ abstract class BaseApplication :
     /**
      * Controller factory
      *
-     * @var uim.cake.Http\IControllerFactory|null
+     * @var uim.cake.http.IControllerFactory|null
      */
     protected controllerFactory;
 
@@ -54,7 +54,7 @@ abstract class BaseApplication :
      *
      * @param string myConfigDir The directory the bootstrap configuration is held in.
      * @param uim.cake.Event\IEventManager|null myEventManager Application event manager instance.
-     * @param uim.cake.Http\IControllerFactory|null $controllerFactory Controller factory.
+     * @param uim.cake.http.IControllerFactory|null $controllerFactory Controller factory.
      */
     this(
         string myConfigDir,
@@ -68,8 +68,8 @@ abstract class BaseApplication :
     }
 
     /**
-     * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
-     * @return uim.cake.Http\MiddlewareQueue
+     * @param uim.cake.http.MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
+     * @return uim.cake.http.MiddlewareQueue
      */
     abstract MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
 

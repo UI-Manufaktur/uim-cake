@@ -12,7 +12,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Cookie;
+module uim.cake.http.Cookie;
 
 use ArrayIterator;
 use Countable;
@@ -107,7 +107,7 @@ class CookieCollection : IteratorAggregate, Countable
      * cookies if a cookie collection is used for cookies across multiple
      * domains. This can impact how get(), has() and remove() behave.
      *
-     * @param uim.cake.Http\Cookie\CookieInterface $cookie Cookie instance to add.
+     * @param uim.cake.http.Cookie\CookieInterface $cookie Cookie instance to add.
      * @return static
      */
     function add(CookieInterface $cookie) {
@@ -121,7 +121,7 @@ class CookieCollection : IteratorAggregate, Countable
      * Get the first cookie by name.
      *
      * @param string $name The name of the cookie.
-     * @return uim.cake.Http\Cookie\CookieInterface
+     * @return uim.cake.http.Cookie\CookieInterface
      * @throws \InvalidArgumentException If cookie not found.
      */
     function get(string $name): CookieInterface
