@@ -53,8 +53,8 @@ class ControllerAuthorize : BaseAuthorize
      * Get/set the controller this authorize object will be working with. Also
      * checks that isAuthorized is implemented.
      *
-     * @param uim.cake.Controller\Controller|null $controller null to get, a controller to set.
-     * @return uim.cake.Controller\Controller
+     * @param uim.cake.controllers.Controller|null $controller null to get, a controller to set.
+     * @return uim.cake.controllers.Controller
      */
     function controller(?Controller $controller = null): Controller
     {

@@ -68,7 +68,7 @@ class DigestAuthenticate : BasicAuthenticate
      *    Defaults to `md5(myConfig["realm"])`
      * - `nonceLifetime` The number of seconds that nonces are valid for. Defaults to 300.
      *
-     * @param uim.cake.Controller\ComponentRegistry $registry The Component registry
+     * @param uim.cake.controllers.ComponentRegistry $registry The Component registry
      *   used on this request.
      * @param array<string, mixed> myConfig Array of config to use.
      */

@@ -95,7 +95,7 @@ class ExceptionRenderer : IExceptionRenderer
      * This method returns the built in `ErrorController` normally, or if an error is repeated
      * a bare controller will be used.
      *
-     * @return uim.cake.Controller\Controller
+     * @return uim.cake.controllers.Controller
      * @triggers Controller.startup $controller
      */
     protected Controller _getController() {

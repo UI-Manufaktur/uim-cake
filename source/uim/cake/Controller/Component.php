@@ -90,7 +90,7 @@ class Component : IEventListener
     /**
      * Constructor
      *
-     * @param uim.cake.Controller\ComponentRegistry $registry A component registry
+     * @param uim.cake.controllers.ComponentRegistry $registry A component registry
      *  this component can use to lazy load its components.
      * @param array<string, mixed> $config Array of configuration settings.
      */
@@ -108,7 +108,7 @@ class Component : IEventListener
     /**
      * Get the controller this component is bound to.
      *
-     * @return uim.cake.Controller\Controller The bound controller.
+     * @return uim.cake.controllers.Controller The bound controller.
      */
     function getController(): Controller
     {
@@ -132,7 +132,7 @@ class Component : IEventListener
      * Magic method for lazy loading $components.
      *
      * @param string $name Name of component to get.
-     * @return uim.cake.Controller\Component|null A Component object or null.
+     * @return uim.cake.controllers.Component|null A Component object or null.
      */
     function __get(string $name) {
         if (isset(_componentMap[$name]) && !isset(this.{$name})) {

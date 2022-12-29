@@ -314,7 +314,7 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Checks whether current action is accessible without authentication.
      *
-     * @param uim.cake.Controller\Controller $controller A reference to the instantiating
+     * @param uim.cake.controllers.Controller $controller A reference to the instantiating
      *   controller object
      * @return bool True if action is accessible without authentication else false
      */
@@ -332,7 +332,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * indicate no further action is necessary. If authenticator returns null this
      * method redirects user to login action.
      *
-     * @param uim.cake.Controller\Controller $controller A reference to the controller object.
+     * @param uim.cake.controllers.Controller $controller A reference to the controller object.
      * @return uim.cake.http.Response|null Null if current action is login action
      *   else response object returned by authenticate object or Controller::redirect().
      * @throws uim.cake.Core\Exception\CakeException
@@ -389,7 +389,7 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Normalizes config `loginAction` and checks if current request URL is same as login action.
      *
-     * @param uim.cake.Controller\Controller $controller A reference to the controller object.
+     * @param uim.cake.controllers.Controller $controller A reference to the controller object.
      * @return bool True if current action is login action else false.
      */
     protected function _isLoginAction(Controller $controller): bool
@@ -404,7 +404,7 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Handle unauthorized access attempt
      *
-     * @param uim.cake.Controller\Controller $controller A reference to the controller object
+     * @param uim.cake.controllers.Controller $controller A reference to the controller object
      * @return uim.cake.http.Response|null
      * @throws uim.cake.http.Exception\ForbiddenException
      */

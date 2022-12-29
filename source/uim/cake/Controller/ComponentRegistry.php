@@ -37,7 +37,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Constructor.
      *
-     * @param uim.cake.Controller\Controller|null $controller Controller instance.
+     * @param uim.cake.controllers.Controller|null $controller Controller instance.
      */
     public this(?Controller $controller = null) {
         if ($controller) {
@@ -48,7 +48,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Get the controller associated with the collection.
      *
-     * @return uim.cake.Controller\Controller Controller instance or null if not set.
+     * @return uim.cake.controllers.Controller Controller instance or null if not set.
      */
     function getController(): Controller
     {
@@ -62,7 +62,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Set the controller associated with the collection.
      *
-     * @param uim.cake.Controller\Controller $controller Controller instance.
+     * @param uim.cake.controllers.Controller $controller Controller instance.
      * @return this
      */
     function setController(Controller $controller) {
@@ -95,7 +95,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the component is missing in.
      * @return void
-     * @throws uim.cake.Controller\Exception\MissingComponentException
+     * @throws uim.cake.controllers.Exception\MissingComponentException
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
@@ -114,7 +114,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname to create.
      * @param string $alias The alias of the component.
      * @param array<string, mixed> $config An array of config to use for the component.
-     * @return uim.cake.Controller\Component The constructed component class.
+     * @return uim.cake.controllers.Component The constructed component class.
      * @psalm-suppress MoreSpecificImplementedParamType
      * @psalm-param class-string $class
      */

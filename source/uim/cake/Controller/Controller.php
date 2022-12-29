@@ -174,7 +174,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @param uim.cake.http.Response|null $response Response object for this controller.
      * @param string|null $name Override the name useful in testing when using mocks.
      * @param uim.cake.Event\IEventManager|null $eventManager The event manager. Defaults to a new instance.
-     * @param uim.cake.Controller\ComponentRegistry|null $components The component registry. Defaults to a new instance.
+     * @param uim.cake.controllers.ComponentRegistry|null $components The component registry. Defaults to a new instance.
      */
     public this(
         ?ServerRequest $request = null,
@@ -255,8 +255,8 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * If called with the first parameter, it will be set as the controller _components property
      *
-     * @param uim.cake.Controller\ComponentRegistry|null $components Component registry.
-     * @return uim.cake.Controller\ComponentRegistry
+     * @param uim.cake.controllers.ComponentRegistry|null $components Component registry.
+     * @return uim.cake.controllers.ComponentRegistry
      */
     function components(?ComponentRegistry $components = null): ComponentRegistry
     {
@@ -287,7 +287,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * @param string $name The name of the component to load.
      * @param array<string, mixed> $config The config for the component.
-     * @return uim.cake.Controller\Component
+     * @return uim.cake.controllers.Component
      * @throws \Exception
      */
     function loadComponent(string $name, array $config = []): Component
@@ -501,7 +501,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Get the closure for action to be invoked by ControllerFactory.
      *
      * @return \Closure
-     * @throws uim.cake.Controller\Exception\MissingActionException
+     * @throws uim.cake.controllers.Exception\MissingActionException
      */
     function getAction(): Closure
     {

@@ -145,9 +145,9 @@ class SecurityComponent : Component
      * Black-hole an invalid request with a 400 error or custom callback. If SecurityComponent::$blackHoleCallback
      * is specified, it will use this callback by executing the method indicated in $error
      *
-     * @param uim.cake.Controller\Controller $controller Instantiating controller
+     * @param uim.cake.controllers.Controller $controller Instantiating controller
      * @param string $error Error method
-     * @param uim.cake.Controller\Exception\SecurityException|null $exception Additional debug info describing the cause
+     * @param uim.cake.controllers.Exception\SecurityException|null $exception Additional debug info describing the cause
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
      * @see uim.cake.controllers.Component\SecurityComponent::$blackHoleCallback
      * @link https://book.cakephp.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
@@ -164,7 +164,7 @@ class SecurityComponent : Component
     /**
      * Check debug status and throw an Exception based on the existing one
      *
-     * @param uim.cake.Controller\Exception\SecurityException|null $exception Additional debug info describing the cause
+     * @param uim.cake.controllers.Exception\SecurityException|null $exception Additional debug info describing the cause
      * @throws uim.cake.http.Exception\BadRequestException
      * @return void
      */
@@ -183,9 +183,9 @@ class SecurityComponent : Component
     /**
      * Check if access requires secure connection
      *
-     * @param uim.cake.Controller\Controller $controller Instantiating controller
+     * @param uim.cake.controllers.Controller $controller Instantiating controller
      * @return void
-     * @throws uim.cake.Controller\Exception\SecurityException
+     * @throws uim.cake.controllers.Exception\SecurityException
      */
     protected function _secureRequired(Controller $controller): void
     {
@@ -212,9 +212,9 @@ class SecurityComponent : Component
     /**
      * Validate submitted form
      *
-     * @param uim.cake.Controller\Controller $controller Instantiating controller
+     * @param uim.cake.controllers.Controller $controller Instantiating controller
      * @return void
-     * @throws uim.cake.Controller\Exception\AuthSecurityException
+     * @throws uim.cake.controllers.Exception\AuthSecurityException
      */
     protected function _validatePost(Controller $controller): void
     {
@@ -237,8 +237,8 @@ class SecurityComponent : Component
     /**
      * Check if token is valid
      *
-     * @param uim.cake.Controller\Controller $controller Instantiating controller
-     * @throws uim.cake.Controller\Exception\SecurityException
+     * @param uim.cake.controllers.Controller $controller Instantiating controller
+     * @throws uim.cake.controllers.Exception\SecurityException
      * @return string fields token
      */
     protected function _validToken(Controller $controller): string
@@ -276,7 +276,7 @@ class SecurityComponent : Component
     /**
      * Return hash parts for the Token generation
      *
-     * @param uim.cake.Controller\Controller $controller Instantiating controller
+     * @param uim.cake.controllers.Controller $controller Instantiating controller
      */
     protected string[] _hashParts(Controller $controller): array
     {
@@ -399,7 +399,7 @@ class SecurityComponent : Component
     /**
      * Create a message for humans to understand why Security token is not matching
      *
-     * @param uim.cake.Controller\Controller $controller Instantiating controller
+     * @param uim.cake.controllers.Controller $controller Instantiating controller
      * @param array<string> $hashParts Elements used to generate the Token hash
      * @return string Message explaining why the tokens are not matching
      */
@@ -493,7 +493,7 @@ class SecurityComponent : Component
     /**
      * Calls a controller callback method
      *
-     * @param uim.cake.Controller\Controller $controller Instantiating controller
+     * @param uim.cake.controllers.Controller $controller Instantiating controller
      * @param string $method Method to execute
      * @param array $params Parameters to send to method
      * @return mixed Controller callback method"s response

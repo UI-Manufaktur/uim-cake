@@ -74,7 +74,7 @@ abstract class BaseAuthenticate : IEventListener
     /**
      * Constructor
      *
-     * @param uim.cake.Controller\ComponentRegistry $registry The Component registry used on this request.
+     * @param uim.cake.controllers.ComponentRegistry $registry The Component registry used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
     public this(ComponentRegistry $registry, array $config = []) {

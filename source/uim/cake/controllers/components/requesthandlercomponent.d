@@ -54,7 +54,7 @@ class RequestHandlerComponent : Component {
     /**
      * Constructor. Parses the accepted content types accepted by the client using HTTP_ACCEPT
      *
-     * @param uim.cake.Controller\ComponentRegistry $registry ComponentRegistry object.
+     * @param uim.cake.controllers.ComponentRegistry $registry ComponentRegistry object.
      * @param array<string, mixed> myConfig Array of config.
      */
     this(ComponentRegistry $registry, array myConfig = []) {
@@ -362,7 +362,7 @@ class RequestHandlerComponent : Component {
      * this.RequestHandler.renderAs(this, "xml", ["attachment":"myfile.xml"];
      * ```
      *
-     * @param uim.cake.Controller\Controller $controller A reference to a controller object
+     * @param uim.cake.controllers.Controller $controller A reference to a controller object
      * @param string myType Type of response to send (e.g: "ajax")
      * @param array<string, mixed> myOptions Array of options to use
      * @see uim.cake.controllers.Component\RequestHandlerComponent::respondAs()

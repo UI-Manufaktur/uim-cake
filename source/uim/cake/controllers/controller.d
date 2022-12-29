@@ -137,7 +137,7 @@ class Controller : IEventListener, IEventDispatcher
      * @param uim.cake.http.Response|null $response Response object for this controller.
      * @param string|null myName Override the name useful in testing when using mocks.
      * @param uim.cake.Event\IEventManager|null myEventManager The event manager. Defaults to a new instance.
-     * @param uim.cake.Controller\ComponentRegistry|null $components The component registry. Defaults to a new instance.
+     * @param uim.cake.controllers.ComponentRegistry|null $components The component registry. Defaults to a new instance.
      */
     this(
         ?ServerRequest myRequest = null,
@@ -215,8 +215,8 @@ class Controller : IEventListener, IEventDispatcher
      *
      * If called with the first parameter, it will be set as the controller _components property
      *
-     * @param uim.cake.Controller\ComponentRegistry|null $components Component registry.
-     * @return uim.cake.Controller\ComponentRegistry
+     * @param uim.cake.controllers.ComponentRegistry|null $components Component registry.
+     * @return uim.cake.controllers.ComponentRegistry
      */
     ComponentRegistry components(?ComponentRegistry $components = null) {
         if ($components  !is null) {
@@ -246,7 +246,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param string myName The name of the component to load.
      * @param array<string, mixed> myConfig The config for the component.
-     * @return uim.cake.Controller\Component
+     * @return uim.cake.controllers.Component
      * @throws \Exception
      */
     Component loadComponent(string myName, array myConfig = []) {
@@ -452,7 +452,7 @@ class Controller : IEventListener, IEventDispatcher
      * Get the closure for action to be invoked by ControllerFactory.
      *
      * @return \Closure
-     * @throws uim.cake.Controller\Exception\MissingActionException
+     * @throws uim.cake.controllers.Exception\MissingActionException
      */
     Closure getAction() {
         myRequest = this.request;

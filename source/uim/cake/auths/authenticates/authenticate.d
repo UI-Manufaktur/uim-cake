@@ -50,7 +50,7 @@ abstract class DAuthenticate : IEventListener {
     /**
      * Constructor
      *
-     * @param uim.cake.Controller\ComponentRegistry $registry The Component registry used on this request.
+     * @param uim.cake.controllers.ComponentRegistry $registry The Component registry used on this request.
      * @param array<string, mixed> myConfig Array of config to use.
      */
     this(ComponentRegistry $registry, array myConfig = []) {
