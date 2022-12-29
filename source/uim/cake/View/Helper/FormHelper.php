@@ -659,7 +659,7 @@ class FormHelper : Helper
      * Get form protector instance.
      *
      * @return uim.cake.Form\FormProtector
-     * @throws uim.cake.Core\Exception\CakeException
+     * @throws uim.cake.Core\exceptions.CakeException
      */
     function getFormProtector(): FormProtector
     {
@@ -1583,7 +1583,7 @@ class FormHelper : Helper
      * @param string $method Method name / input type to make.
      * @param array $params Parameters for the method call
      * @return string Formatted input method.
-     * @throws uim.cake.Core\Exception\CakeException When there are no params for the method call.
+     * @throws uim.cake.Core\exceptions.CakeException When there are no params for the method call.
      */
     function __call(string $method, array $params) {
         if (empty($params)) {
@@ -2170,7 +2170,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Array of options or HTML attributes.
      * @return string
      */
-    function month(string $fieldName, array $options = []): string
+    string month(string $fieldName, array $options = []): string
     {
         $options += [
             "value": null,
@@ -2194,7 +2194,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Array of options or HTML attributes.
      * @return string
      */
-    function dateTime(string $fieldName, array $options = []): string
+    string dateTime(string $fieldName, array $options = []): string
     {
         $options += [
             "value": null,
@@ -2217,7 +2217,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Array of options or HTML attributes.
      * @return string
      */
-    function time(string $fieldName, array $options = []): string
+    string time(string $fieldName, array $options = []): string
     {
         $options += [
             "value": null,
@@ -2239,7 +2239,7 @@ class FormHelper : Helper
      * @param array<string, mixed> $options Array of options or HTML attributes.
      * @return string
      */
-    function date(string $fieldName, array $options = []): string
+    string date(string $fieldName, array $options = []): string
     {
         $options += [
             "value": null,
@@ -2454,7 +2454,7 @@ class FormHelper : Helper
      * @param array $data The data to render.
      * @return string
      */
-    function widget(string $name, array $data = []): string
+    string widget(string $name, array $data = []): string
     {
         $secure = null;
         if (isset($data["secure"])) {

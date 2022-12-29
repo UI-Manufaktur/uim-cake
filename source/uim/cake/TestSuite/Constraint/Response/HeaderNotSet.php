@@ -37,7 +37,7 @@ class HeaderNotSet : HeaderSet
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return sprintf("did not have header `%s`", this.headerName);
     }

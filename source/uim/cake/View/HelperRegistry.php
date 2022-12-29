@@ -12,7 +12,7 @@ import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
-import uim.cake.View\Exception\MissingHelperException;
+import uim.cake.View\exceptions.MissingHelperException;
 
 /**
  * HelperRegistry is used as a registry for loaded helpers and handles loading
@@ -48,7 +48,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param string $helper The helper name to be loaded
      * @return bool whether the helper could be loaded or not
-     * @throws uim.cake.View\Exception\MissingHelperException When a helper could not be found.
+     * @throws uim.cake.View\exceptions.MissingHelperException When a helper could not be found.
      *    App helpers are searched, and then plugin helpers.
      */
     function __isset(string $helper): bool
@@ -115,7 +115,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the helper is missing in.
      * @return void
-     * @throws uim.cake.View\Exception\MissingHelperException
+     * @throws uim.cake.View\exceptions.MissingHelperException
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {

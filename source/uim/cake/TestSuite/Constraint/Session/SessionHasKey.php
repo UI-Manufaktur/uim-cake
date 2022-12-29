@@ -58,7 +58,7 @@ class SessionHasKey : Constraint
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return "is a path present in the session";
     }

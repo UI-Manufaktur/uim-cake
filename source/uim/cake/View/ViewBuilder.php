@@ -5,7 +5,7 @@ import uim.cake.core.App;
 import uim.cake.events.IEventManager;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
-import uim.cake.View\Exception\MissingViewException;
+import uim.cake.View\exceptions.MissingViewException;
 use Closure;
 use Exception;
 use JsonSerializable;
@@ -523,9 +523,9 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param array<string, mixed> $vars The view variables/context to use.
      * @param uim.cake.http.ServerRequest|null $request The request to use.
      * @param uim.cake.http.Response|null $response The response to use.
-     * @param uim.cake.Event\IEventManager|null $events The event manager to use.
+     * @param uim.cake.events.IEventManager|null $events The event manager to use.
      * @return uim.cake.View\View
-     * @throws uim.cake.View\Exception\MissingViewException
+     * @throws uim.cake.View\exceptions.MissingViewException
      */
     function build(
         array $vars = [],
@@ -575,7 +575,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * There are  limitations for viewVars that are good to know:
      *
-     * - ORM\Query executed and stored as resultset
+     * - orm.Query executed and stored as resultset
      * - SimpleXMLElements stored as associative array
      * - Exceptions stored as strings
      * - Resources, \Closure and \PDO are not supported.
@@ -649,7 +649,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return string
      */
-    function serialize(): string
+    string serialize(): string
     {
         $array = this.jsonSerialize();
 

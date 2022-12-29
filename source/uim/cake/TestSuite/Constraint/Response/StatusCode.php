@@ -26,7 +26,7 @@ class StatusCode : StatusCodeBase
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return sprintf("matches response status code `%d`", this.response.getStatusCode());
     }
@@ -37,7 +37,7 @@ class StatusCode : StatusCodeBase
      * @param mixed $other Expected code
      * @return string
      */
-    function failureDescription($other): string
+    string failureDescription($other): string
     {
         return "`" . $other . "` " . this.toString();
     }

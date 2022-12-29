@@ -21,9 +21,9 @@ import uim.cake.http.ServerRequest;
 import uim.cake.Log\LogTrait;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Inflector;
-import uim.cake.View\Exception\MissingElementException;
-import uim.cake.View\Exception\MissingLayoutException;
-import uim.cake.View\Exception\MissingTemplateException;
+import uim.cake.View\exceptions.MissingElementException;
+import uim.cake.View\exceptions.MissingLayoutException;
+import uim.cake.View\exceptions.MissingTemplateException;
 use InvalidArgumentException;
 use LogicException;
 use RuntimeException;
@@ -41,7 +41,7 @@ use Throwable;
  * View class supports using plugins as themes. You can set
  *
  * ```
- * function beforeRender(uim.cake.Event\IEvent $event)
+ * function beforeRender(uim.cake.events.IEvent $event)
  * {
  *      this.viewBuilder().setTheme("SuperHot");
  * }
@@ -320,7 +320,7 @@ class View : EventDispatcherInterface
      *
      * @param uim.cake.http.ServerRequest|null $request Request instance.
      * @param uim.cake.http.Response|null $response Response instance.
-     * @param uim.cake.Event\EventManager|null $eventManager Event manager instance.
+     * @param uim.cake.events.EventManager|null $eventManager Event manager instance.
      * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
      *   options which get set as class properties.
      */
@@ -452,7 +452,7 @@ class View : EventDispatcherInterface
      *
      * @return string
      */
-    function getTemplatePath(): string
+    string getTemplatePath(): string
     {
         return this.templatePath;
     }
@@ -474,7 +474,7 @@ class View : EventDispatcherInterface
      *
      * @return string
      */
-    function getLayoutPath(): string
+    string getLayoutPath(): string
     {
         return this.layoutPath;
     }
@@ -556,7 +556,7 @@ class View : EventDispatcherInterface
      *
      * @return string
      */
-    function getTemplate(): string
+    string getTemplate(): string
     {
         return this.template;
     }
@@ -581,7 +581,7 @@ class View : EventDispatcherInterface
      *
      * @return string
      */
-    function getLayout(): string
+    string getLayout(): string
     {
         return this.layout;
     }
@@ -656,7 +656,7 @@ class View : EventDispatcherInterface
      * - `plugin` - setting to false will force to use the application"s element from plugin templates, when the
      *   plugin has element with same name. Defaults to true
      * @return string Rendered Element
-     * @throws uim.cake.View\Exception\MissingElementException When an element is missing and `ignoreMissing`
+     * @throws uim.cake.View\exceptions.MissingElementException When an element is missing and `ignoreMissing`
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} $options
      */
@@ -769,7 +769,7 @@ class View : EventDispatcherInterface
      * @param string|null $template Name of template file to use
      * @param string|false|null $layout Layout to use. False to disable.
      * @return string Rendered content.
-     * @throws uim.cake.Core\Exception\CakeException If there is an error in the view.
+     * @throws uim.cake.Core\exceptions.CakeException If there is an error in the view.
      * @triggers View.beforeRender this, [$templateFileName]
      * @triggers View.afterRender this, [$templateFileName]
      */
@@ -819,7 +819,7 @@ class View : EventDispatcherInterface
      * @param string $content Content to render in a template, wrapped by the surrounding layout.
      * @param string|null $layout Layout name
      * @return string Rendered output.
-     * @throws uim.cake.Core\Exception\CakeException if there is an error in the view.
+     * @throws uim.cake.Core\exceptions.CakeException if there is an error in the view.
      * @triggers View.beforeLayout this, [$layoutFileName]
      * @triggers View.afterLayout this, [$layoutFileName]
      */
@@ -1087,7 +1087,7 @@ class View : EventDispatcherInterface
      *
      * @return string
      */
-    function getCurrentType(): string
+    string getCurrentType(): string
     {
         return _currentType;
     }
@@ -1315,7 +1315,7 @@ class View : EventDispatcherInterface
      *
      * @param string|null $name Controller action to find template filename for
      * @return string Template filename
-     * @throws uim.cake.View\Exception\MissingTemplateException when a template file could not be found.
+     * @throws uim.cake.View\exceptions.MissingTemplateException when a template file could not be found.
      * @throws \RuntimeException When template name not provided.
      */
     protected function _getTemplateFileName(?string $name = null): string
@@ -1435,7 +1435,7 @@ class View : EventDispatcherInterface
      *
      * @param string|null $name The name of the layout to find.
      * @return string Filename for layout file.
-     * @throws uim.cake.View\Exception\MissingLayoutException when a layout cannot be located
+     * @throws uim.cake.View\exceptions.MissingLayoutException when a layout cannot be located
      * @throws \RuntimeException
      */
     protected function _getLayoutFileName(?string $name = null): string

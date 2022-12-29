@@ -1,7 +1,7 @@
 
 module uim.cake.View;
 
-import uim.cake.View\Exception\SerializationFailureException;
+import uim.cake.View\exceptions.SerializationFailureException;
 use Exception;
 use TypeError;
 
@@ -72,7 +72,7 @@ abstract class SerializedView : View
      * @param string|null $template The template being rendered.
      * @param string|false|null $layout The layout being rendered.
      * @return string The rendered view.
-     * @throws uim.cake.View\Exception\SerializationFailureException When serialization fails.
+     * @throws uim.cake.View\exceptions.SerializationFailureException When serialization fails.
      */
     function render(?string $template = null, $layout = null): string
     {

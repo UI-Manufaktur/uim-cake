@@ -811,7 +811,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options HTML attributes.
      * @return string
      */
-    function tableRow(string $content, array $options = []): string
+    string tableRow(string $content, array $options = []): string
     {
         return this.formatTemplate("tablerow", [
             "attrs": this.templater().formatAttributes($options),
@@ -826,7 +826,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options HTML attributes.
      * @return string
      */
-    function tableCell(string $content, array $options = []): string
+    string tableCell(string $content, array $options = []): string
     {
         return this.formatTemplate("tablecell", [
             "attrs": this.templater().formatAttributes($options),

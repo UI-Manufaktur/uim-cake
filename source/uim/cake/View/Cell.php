@@ -11,8 +11,8 @@ import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.utilities.Inflector;
-import uim.cake.View\Exception\MissingCellTemplateException;
-import uim.cake.View\Exception\MissingTemplateException;
+import uim.cake.View\exceptions.MissingCellTemplateException;
+import uim.cake.View\exceptions.MissingTemplateException;
 use Error;
 use Exception;
 use ReflectionException;
@@ -95,7 +95,7 @@ abstract class Cell : EventDispatcherInterface
      *
      * @param uim.cake.http.ServerRequest $request The request to use in the cell.
      * @param uim.cake.http.Response $response The response to use in the cell.
-     * @param uim.cake.Event\IEventManager|null $eventManager The eventManager to bind events to.
+     * @param uim.cake.events.IEventManager|null $eventManager The eventManager to bind events to.
      * @param array<string, mixed> $cellOptions Cell options to apply.
      */
     this(
@@ -142,7 +142,7 @@ abstract class Cell : EventDispatcherInterface
      * @param string|null $template Custom template name to render. If not provided (null), the last
      * value will be used. This value is automatically set by `CellTrait::cell()`.
      * @return string The rendered cell.
-     * @throws uim.cake.View\Exception\MissingCellTemplateException
+     * @throws uim.cake.View\exceptions.MissingCellTemplateException
      *   When a MissingTemplateException is raised during rendering.
      * @throws \BadMethodCallException
      */

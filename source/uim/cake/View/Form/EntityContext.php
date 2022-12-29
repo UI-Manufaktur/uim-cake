@@ -23,7 +23,7 @@ use Traversable;
  * Important Keys:
  *
  * - `entity` The entity this context is operating on.
- * - `table` Either the ORM\Table instance to fetch schema/validators
+ * - `table` Either the orm.Table instance to fetch schema/validators
  *   from, an array of table instances in the case of a form spanning
  *   multiple entities, or the name(s) of the table.
  *   If this is null the table name(s) will be determined using naming
@@ -62,7 +62,7 @@ class EntityContext : ContextInterface
     /**
      * A dictionary of tables
      *
-     * @var array<uim.cake.ORM\Table>
+     * @var array<uim.cake.orm.Table>
      */
     protected $_tables = [];
 
@@ -105,7 +105,7 @@ class EntityContext : ContextInterface
      */
     protected function _prepare(): void
     {
-        /** @var uim.cake.ORM\Table|null $table */
+        /** @var uim.cake.orm.Table|null $table */
         $table = _context["table"];
         /** @var uim.cake.datasources.EntityInterface|iterable<uim.cake.Datasource\EntityInterface|array> $entity */
         $entity = _context["entity"];
@@ -611,7 +611,7 @@ class EntityContext : ContextInterface
      * @param uim.cake.Datasource\EntityInterface|array<string>|string $parts Each one of the parts in a path for a field name
      * @param bool $fallback Whether to fallback to the last found table
      *  when a nonexistent field/property is being encountered.
-     * @return uim.cake.ORM\Table|null Table instance or null
+     * @return uim.cake.orm.Table|null Table instance or null
      */
     protected function _getTable($parts, $fallback = true): ?Table
     {

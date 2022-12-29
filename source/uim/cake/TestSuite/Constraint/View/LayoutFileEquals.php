@@ -26,7 +26,7 @@ class LayoutFileEquals : TemplateFileEquals
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return sprintf("equals layout file `%s`", this.filename);
     }

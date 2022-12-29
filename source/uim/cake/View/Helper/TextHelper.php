@@ -67,7 +67,7 @@ class TextHelper : Helper
      *
      * @param uim.cake.View\View $view the view object the helper is attached to.
      * @param array<string, mixed> $config Settings array Settings array
-     * @throws uim.cake.Core\Exception\CakeException when the engine class could not be found.
+     * @throws uim.cake.Core\exceptions.CakeException when the engine class could not be found.
      */
     this(View $view, array $config = []) {
         super(($view, $config);

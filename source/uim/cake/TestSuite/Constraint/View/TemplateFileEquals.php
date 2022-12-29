@@ -53,7 +53,7 @@ class TemplateFileEquals : Constraint
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return sprintf("equals template file `%s`", this.filename);
     }

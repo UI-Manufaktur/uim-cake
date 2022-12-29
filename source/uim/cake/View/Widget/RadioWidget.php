@@ -79,7 +79,7 @@ class RadioWidget : BasicWidget
      * @param uim.cake.View\Form\ContextInterface $context The current form context.
      * @return string
      */
-    function render(array $data, ContextInterface $context): string
+    string render(array $data, ContextInterface $context): string
     {
         $data += this.mergeDefaults($data, $context);
 

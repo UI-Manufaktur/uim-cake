@@ -58,7 +58,7 @@ class SessionEquals : Constraint
      *
      * @return string
      */
-    function toString(): string
+    string toString(): string
     {
         return sprintf("is in session path \"%s\"", this.path);
     }
