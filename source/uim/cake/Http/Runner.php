@@ -22,7 +22,7 @@ class Runner : RequestHandlerInterface
     /**
      * The middleware queue being run.
      *
-     * @var \Cake\Http\MiddlewareQueue
+     * @var uim.cake.Http\MiddlewareQueue
      */
     protected $queue;
 

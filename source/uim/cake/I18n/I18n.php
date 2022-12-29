@@ -30,7 +30,7 @@ class I18n
     /**
      * The translators collection
      *
-     * @var \Cake\I18n\TranslatorRegistry|null
+     * @var uim.cake.I18n\TranslatorRegistry|null
      */
     protected static $_collection;
 

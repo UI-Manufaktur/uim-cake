@@ -131,21 +131,21 @@ class Client : ClientInterface
      * Cookies are indexed by the cookie"s domain or
      * request host name.
      *
-     * @var \Cake\Http\Cookie\CookieCollection
+     * @var uim.cake.Http\Cookie\CookieCollection
      */
     protected $_cookies;
 
     /**
      * Mock adapter for stubbing requests in tests.
      *
-     * @var \Cake\Http\Client\Adapter\Mock|null
+     * @var uim.cake.Http\Client\Adapter\Mock|null
      */
     protected static $_mockAdapter;
 
     /**
      * Adapter for sending requests.
      *
-     * @var \Cake\Http\Client\AdapterInterface
+     * @var uim.cake.Http\Client\AdapterInterface
      */
     protected $_adapter;
 
@@ -632,7 +632,7 @@ class Client : ClientInterface
         $request = new Request($url, $method, $headers, $data);
         $request = $request.withProtocolVersion(this.getConfig("protocolVersion"));
         $cookies = $options["cookies"] ?? [];
-        /** @var \Cake\Http\Client\Request $request */
+        /** @var uim.cake.Http\Client\Request $request */
         $request = _cookies.addToRequest($request, $cookies);
         if (isset($options["auth"])) {
             $request = _addAuthentication($request, $options);
@@ -689,7 +689,7 @@ class Client : ClientInterface
     protected function _addAuthentication(Request $request, array $options): Request
     {
         $auth = $options["auth"];
-        /** @var \Cake\Http\Client\Auth\Basic $adapter */
+        /** @var uim.cake.Http\Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, $options);
 
         return $adapter.authentication($request, $options["auth"]);
@@ -708,7 +708,7 @@ class Client : ClientInterface
     protected function _addProxy(Request $request, array $options): Request
     {
         $auth = $options["proxy"];
-        /** @var \Cake\Http\Client\Auth\Basic $adapter */
+        /** @var uim.cake.Http\Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, $options);
 
         return $adapter.proxyAuthentication($request, $options["proxy"]);

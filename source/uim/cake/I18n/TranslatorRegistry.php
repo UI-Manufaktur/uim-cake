@@ -39,14 +39,14 @@ class TranslatorRegistry
     /**
      * A package locator.
      *
-     * @var \Cake\I18n\PackageLocator
+     * @var uim.cake.I18n\PackageLocator
      */
     protected $packages;
 
     /**
      * A formatter locator.
      *
-     * @var \Cake\I18n\FormatterLocator
+     * @var uim.cake.I18n\FormatterLocator
      */
     protected $formatters;
 
@@ -335,7 +335,7 @@ class TranslatorRegistry
         }
 
         return function () use ($loader, $fallbackDomain) {
-            /** @var \Cake\I18n\Package $package */
+            /** @var uim.cake.I18n\Package $package */
             $package = $loader();
             if (!$package.getFallback()) {
                 $package.setFallback($fallbackDomain);

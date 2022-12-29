@@ -30,7 +30,7 @@ class DatabaseSession : SessionHandlerInterface
     /**
      * Reference to the table handling the session data
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $_table;
 

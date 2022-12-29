@@ -24,14 +24,14 @@ class Translator
     /**
      * A fallback translator.
      *
-     * @var \Cake\I18n\Translator|null
+     * @var uim.cake.I18n\Translator|null
      */
     protected $fallback;
 
     /**
      * The formatter to use when translating messages.
      *
-     * @var \Cake\I18n\FormatterInterface
+     * @var uim.cake.I18n\FormatterInterface
      */
     protected $formatter;
 
@@ -45,7 +45,7 @@ class Translator
     /**
      * The Package containing keys and translations.
      *
-     * @var \Cake\I18n\Package
+     * @var uim.cake.I18n\Package
      */
     protected $package;
 

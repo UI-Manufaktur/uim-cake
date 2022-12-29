@@ -136,14 +136,14 @@ class ServerRequest : IServerRequest
     /**
      * Instance of a Session object relative to this request
      *
-     * @var \Cake\Http\Session
+     * @var uim.cake.Http\Session
      */
     protected session;
 
     /**
      * Instance of a FlashMessage object relative to this request
      *
-     * @var \Cake\Http\FlashMessage
+     * @var uim.cake.Http\FlashMessage
      */
     protected flash;
 

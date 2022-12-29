@@ -31,21 +31,21 @@ abstract class BaseApplication :
     /**
      * Plugin Collection
      *
-     * @var \Cake\Core\PluginCollection
+     * @var uim.cake.Core\PluginCollection
      */
     protected myPlugins;
 
     /**
      * Controller factory
      *
-     * @var \Cake\Http\IControllerFactory|null
+     * @var uim.cake.Http\IControllerFactory|null
      */
     protected controllerFactory;
 
     /**
      * Container
      *
-     * @var \Cake\Core\IContainer|null
+     * @var uim.cake.Core\IContainer|null
      */
     protected myContainer;
 

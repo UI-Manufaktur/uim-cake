@@ -101,21 +101,21 @@ class Client : ClientInterface
      * Cookies are indexed by the cookie"s domain or
      * request host name.
      *
-     * @var \Cake\Http\Cookie\CookieCollection
+     * @var uim.cake.Http\Cookie\CookieCollection
      */
     protected _cookies;
 
     /**
      * Mock adapter for stubbing requests in tests.
      *
-     * @var \Cake\Http\Client\Adapter\Mock|null
+     * @var uim.cake.Http\Client\Adapter\Mock|null
      */
     protected static $_mockAdapter;
 
     /**
      * Adapter for sending requests.
      *
-     * @var \Cake\Http\Client\IAdapter
+     * @var uim.cake.Http\Client\IAdapter
      */
     protected _adapter;
 
@@ -577,10 +577,10 @@ class Client : ClientInterface
         }
 
         myRequest = new Request(myUrl, $method, $headers, myData);
-        /** @var \Cake\Http\Client\Request myRequest */
+        /** @var uim.cake.Http\Client\Request myRequest */
         myRequest = myRequest.withProtocolVersion(this.getConfig("protocolVersion"));
         $cookies = myOptions["cookies"] ?? [];
-        /** @var \Cake\Http\Client\Request myRequest */
+        /** @var uim.cake.Http\Client\Request myRequest */
         myRequest = _cookies.addToRequest(myRequest, $cookies);
         if (isset(myOptions["auth"])) {
             myRequest = _addAuthentication(myRequest, myOptions);
@@ -635,7 +635,7 @@ class Client : ClientInterface
      */
     protected Request _addAuthentication(Request myRequest, array myOptions) {
         $auth = myOptions["auth"];
-        /** @var \Cake\Http\Client\Auth\Basic $adapter */
+        /** @var uim.cake.Http\Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, myOptions);
 
         return $adapter.authentication(myRequest, myOptions["auth"]);
@@ -653,7 +653,7 @@ class Client : ClientInterface
      */
     protected Request _addProxy(Request myRequest, array myOptions) {
         $auth = myOptions["proxy"];
-        /** @var \Cake\Http\Client\Auth\Basic $adapter */
+        /** @var uim.cake.Http\Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, myOptions);
 
         return $adapter.proxyAuthentication(myRequest, myOptions["proxy"]);

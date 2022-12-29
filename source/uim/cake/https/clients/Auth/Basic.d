@@ -23,7 +23,7 @@ class Basic
     {
         if (isset($credentials["username"], $credentials["password"])) {
             myValue = _generateHeader($credentials["username"], $credentials["password"]);
-            /** @var \Cake\Http\Client\Request myRequest */
+            /** @var uim.cake.Http\Client\Request myRequest */
             myRequest = myRequest.withHeader("Authorization", myValue);
         }
 
@@ -42,7 +42,7 @@ class Basic
     {
         if (isset($credentials["username"], $credentials["password"])) {
             myValue = _generateHeader($credentials["username"], $credentials["password"]);
-            /** @var \Cake\Http\Client\Request myRequest */
+            /** @var uim.cake.Http\Client\Request myRequest */
             myRequest = myRequest.withHeader("Proxy-Authorization", myValue);
         }
 

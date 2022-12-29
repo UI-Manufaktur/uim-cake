@@ -122,7 +122,7 @@ class Log
     /**
      * LogEngineRegistry class
      *
-     * @var \Cake\Log\LogEngineRegistry
+     * @var uim.cake.Log\LogEngineRegistry
      */
     protected static $_registry;
 

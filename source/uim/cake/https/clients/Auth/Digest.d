@@ -14,7 +14,7 @@ class Digest
     /**
      * Instance of Cake\Http\Client
      *
-     * @var \Cake\Http\Client
+     * @var uim.cake.Http\Client
      */
     protected _client;
 

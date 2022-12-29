@@ -35,7 +35,7 @@ class FlashMessage
     ];
 
     /**
-     * @var \Cake\Http\Session
+     * @var uim.cake.Http\Session
      */
     protected $session;
 

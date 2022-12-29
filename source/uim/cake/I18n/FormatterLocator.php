@@ -79,7 +79,7 @@ class FormatterLocator
             this.converted[$name] = true;
         }
 
-        /** @var \Cake\I18n\FormatterInterface */
+        /** @var uim.cake.I18n\FormatterInterface */
         return this.registry[$name];
     }
 }

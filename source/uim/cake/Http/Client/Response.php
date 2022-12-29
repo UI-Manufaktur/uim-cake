@@ -93,7 +93,7 @@ class Response : Message : IResponse
     /**
      * Cookie Collection instance
      *
-     * @var \Cake\Http\Cookie\CookieCollection
+     * @var uim.cake.Http\Cookie\CookieCollection
      */
     protected $cookies;
 

@@ -86,7 +86,7 @@ class PackageLocator
             this.converted[$name][$locale] = true;
         }
 
-        /** @var \Cake\I18n\Package */
+        /** @var uim.cake.I18n\Package */
         return this.registry[$name][$locale];
     }
 

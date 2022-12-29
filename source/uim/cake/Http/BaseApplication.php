@@ -59,21 +59,21 @@ abstract class BaseApplication implements
     /**
      * Plugin Collection
      *
-     * @var \Cake\Core\PluginCollection
+     * @var uim.cake.Core\PluginCollection
      */
     protected $plugins;
 
     /**
      * Controller factory
      *
-     * @var \Cake\Http\ControllerFactoryInterface|null
+     * @var uim.cake.Http\ControllerFactoryInterface|null
      */
     protected $controllerFactory;
 
     /**
      * Container
      *
-     * @var \Cake\Core\IContainer|null
+     * @var uim.cake.Core\IContainer|null
      */
     protected $container;
 

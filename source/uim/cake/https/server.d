@@ -24,12 +24,12 @@ class Server : IEventDispatcher
     use EventDispatcherTrait;
 
     /**
-     * @var \Cake\Core\IHttpApplication
+     * @var uim.cake.Core\IHttpApplication
      */
     protected app;
 
     /**
-     * @var \Cake\Http\Runner
+     * @var uim.cake.Http\Runner
      */
     protected runner;
 

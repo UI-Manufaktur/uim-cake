@@ -24,7 +24,7 @@ abstract class BaseLog : AbstractLogger {
     ];
 
     /**
-     * @var \Cake\Log\Formatter\AbstractFormatter
+     * @var uim.cake.Log\Formatter\AbstractFormatter
      */
     protected formatter;
 

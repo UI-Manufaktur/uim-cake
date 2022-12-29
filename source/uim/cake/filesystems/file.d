@@ -12,7 +12,7 @@ class File {
     /**
      * Folder object of the file
      *
-     * @var \Cake\Filesystem\Folder
+     * @var uim.cake.Filesystem\Folder
      * @link https://book.UIM.org/4/en/core-libraries/file-folder.html
      */
     public $Folder;

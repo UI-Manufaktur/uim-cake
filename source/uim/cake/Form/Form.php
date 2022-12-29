@@ -68,7 +68,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
     /**
      * The schema used by this form.
      *
-     * @var \Cake\Form\Schema|null
+     * @var uim.cake.Form\Schema|null
      */
     protected $_schema;
 
