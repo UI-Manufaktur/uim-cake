@@ -9,10 +9,10 @@ use Traversable;
 /**
  * Handles caching queries and loading results from the cache.
  *
- * Used by {@link \Cake\Datasource\QueryTrait} internally.
+ * Used by {@link uim.cake.Datasource\QueryTrait} internally.
  *
  * @internal
- * @see uim.cake.datasources.QueryTrait::cache() for the public interface.
+ * @see uim.cake.datasources.QueryTrait::cache() for the interface.
  */
 class QueryCacher
 {

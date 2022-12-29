@@ -192,7 +192,7 @@ interface RepositoryInterface
      *
      * @param array $data The data to build an entity with.
      * @param array<string, mixed> $options A list of options for the objects hydration.
-     * @return array<\Cake\Datasource\EntityInterface> An array of hydrated records.
+     * @return array<uim.cake.Datasource\EntityInterface> An array of hydrated records.
      */
     function newEntities(array $data, array $options = []): array;
 
@@ -227,11 +227,11 @@ interface RepositoryInterface
      * $article = this.Articles.patchEntities($articles, this.request.getData());
      * ```
      *
-     * @param iterable<\Cake\Datasource\EntityInterface> $entities the entities that will get the
+     * @param iterable<uim.cake.Datasource\EntityInterface> $entities the entities that will get the
      * data merged in
      * @param array $data list of arrays to be merged into the entities
      * @param array<string, mixed> $options A list of options for the objects hydration.
-     * @return array<\Cake\Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\EntityInterface>
      */
     function patchEntities(iterable $entities, array $data, array $options = []): array;
 }

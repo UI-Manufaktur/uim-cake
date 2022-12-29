@@ -70,7 +70,7 @@ class ConnectionManager
      * @throws uim.cake.Core\Exception\CakeException When trying to modify an existing config.
      * @see uim.cake.Core\StaticConfigTrait::config()
      */
-    public static function setConfig($key, $config = null): void
+    static function setConfig($key, $config = null): void
     {
         if (is_array($config)) {
             $config["name"] = $key;
@@ -104,7 +104,7 @@ class ConnectionManager
      * @param string $config The DSN string to convert to a configuration array
      * @return array<string, mixed> The configuration array to be stored after parsing the DSN
      */
-    public static function parseDsn(string $config): array
+    static function parseDsn(string $config): array
     {
         $config = static::_parseDsn($config);
 
@@ -146,7 +146,7 @@ class ConnectionManager
      * @param string $alias The alias name that resolves to `$source`.
      * @return void
      */
-    public static function alias(string $source, string $alias): void
+    static function alias(string $source, string $alias): void
     {
         static::$_aliasMap[$alias] = $source;
     }
@@ -160,7 +160,7 @@ class ConnectionManager
      * @param string $alias The connection alias to drop
      * @return void
      */
-    public static function dropAlias(string $alias): void
+    static function dropAlias(string $alias): void
     {
         unset(static::$_aliasMap[$alias]);
     }
@@ -179,7 +179,7 @@ class ConnectionManager
      * @throws uim.cake.Datasource\Exception\MissingDatasourceConfigException When config
      * data is missing.
      */
-    public static function get(string $name, bool $useAliases = true) {
+    static function get(string $name, bool $useAliases = true) {
         if ($useAliases && isset(static::$_aliasMap[$name])) {
             $name = static::$_aliasMap[$name];
         }

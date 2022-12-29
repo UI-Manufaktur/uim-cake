@@ -9,7 +9,7 @@ import uim.cake.datasources.Exception\MissingDatasourceException;
  * A registry object for connection instances.
  *
  * @see uim.cake.datasources.ConnectionManager
- * @: \Cake\Core\ObjectRegistry<\Cake\Datasource\ConnectionInterface>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.Datasource\ConnectionInterface>
  */
 class ConnectionRegistry : ObjectRegistry
 {

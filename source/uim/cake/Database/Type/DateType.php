@@ -30,7 +30,7 @@ class DateType : DateTimeType
     protected $setToDateStart = true;
 
 
-    public this(?string $name = null) {
+    this(?string $name = null) {
         super(($name);
 
         _setClassName(FrozenDate::class, DateTimeImmutable::class);
@@ -91,7 +91,7 @@ class DateType : DateTimeType
 
     protected function _parseLocaleValue(string $value): ?I18nDateTimeInterface
     {
-        /** @psalm-var class-string<\Cake\I18n\I18nDateTimeInterface> $class */
+        /** @psalm-var class-string<uim.cake.I18n\I18nDateTimeInterface> $class */
         $class = _className;
 
         return $class::parseDate($value, _localeMarshalFormat);

@@ -385,7 +385,7 @@ abstract class Driver : IDriver
     TableSchema newTableSchema(string myTable, array $columns = []) {
         myClassName = TableSchema::class;
         if (isset(_config["tableSchema"])) {
-            /** @var class-string<\Cake\Database\Schema\TableSchema> myClassName */
+            /** @var class-string<uim.cake.Database\Schema\TableSchema> myClassName */
             myClassName = _config["tableSchema"];
         }
 

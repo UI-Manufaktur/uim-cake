@@ -12,16 +12,16 @@ use Psr\SimpleCache\ICache;
  * @method this setLogger($logger) Set the current logger. {@see uim.cake.Database\Connnection::setLogger()}
  * @method bool supportsDynamicConstraints() Returns whether the driver supports adding or dropping constraints to
  *   already created tables. {@see uim.cake.Database\Connnection::supportsDynamicConstraints()}
- * @method \Cake\Database\Schema\Collection getSchemaCollection() Gets a Schema\Collection object for this connection.
+ * @method uim.cake.Database\Schema\Collection getSchemaCollection() Gets a Schema\Collection object for this connection.
  *    {@see uim.cake.Database\Connnection::getSchemaCollection()}
- * @method \Cake\Database\Query newQuery() Create a new Query instance for this connection.
+ * @method uim.cake.Database\Query newQuery() Create a new Query instance for this connection.
  *    {@see uim.cake.Database\Connnection::newQuery()}
- * @method \Cake\Database\IStatement prepare(mySql) Prepares a SQL statement to be executed.
+ * @method uim.cake.Database\IStatement prepare(mySql) Prepares a SQL statement to be executed.
  *    {@see uim.cake.Database\Connnection::prepare()}
- * @method \Cake\Database\IStatement execute(myQuery, myParams = [], array myTypes = []) Executes a query using
+ * @method uim.cake.Database\IStatement execute(myQuery, myParams = [], array myTypes = []) Executes a query using
  *   `myParams` for interpolating values and myTypes as a hint for each those params.
  *   {@see uim.cake.Database\Connnection::execute()}
- * @method \Cake\Database\IStatement query(string mySql) Executes a SQL statement and returns the Statement
+ * @method uim.cake.Database\IStatement query(string mySql) Executes a SQL statement and returns the Statement
  *   object as result. {@see uim.cake.Database\Connnection::query()}
  */
 interface IConnection : ILoggerAware {

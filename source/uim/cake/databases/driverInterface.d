@@ -13,25 +13,25 @@ import uim.cake;
  */
 interface IDriver {
     // Common Table Expressions (with clause) support.
-    public const string FEATURE_CTE = "cte";
+    const string FEATURE_CTE = "cte";
 
     // Disabling constraints without being in transaction support.
-    public const string FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION = "disable-constraint-without-transaction";
+    const string FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION = "disable-constraint-without-transaction";
 
     // Native JSON data type support.
-    public const string FEATURE_JSON = "json";
+    const string FEATURE_JSON = "json";
 
     // PDO::quote() support.
-    public const string FEATURE_QUOTE = "quote";
+    const string FEATURE_QUOTE = "quote";
 
     // Transaction savepoint support.
-    public const string FEATURE_SAVEPOINT = "savepoint";
+    const string FEATURE_SAVEPOINT = "savepoint";
 
     // Truncate with foreign keys attached support.
-    public const string FEATURE_TRUNCATE_WITH_CONSTRAINTS = "truncate-with-constraints";
+    const string FEATURE_TRUNCATE_WITH_CONSTRAINTS = "truncate-with-constraints";
 
     // Window function support (all or partial clauses).
-    public const string FEATURE_WINDOW = "window";
+    const string FEATURE_WINDOW = "window";
 
     /**
      * Establishes a connection to the database server.
@@ -160,7 +160,7 @@ interface IDriver {
     /**
      * Get the schema dialect.
      *
-     * Used by {@link \Cake\Database\Schema} package to reflect schema and
+     * Used by {@link uim.cake.Database\Schema} package to reflect schema and
      * generate schema.
      *
      * If all the tables that use this Driver specify their

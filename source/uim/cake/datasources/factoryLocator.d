@@ -12,7 +12,7 @@ class FactoryLocator
     /**
      * A list of model factory functions.
      *
-     * @var array<callable|\Cake\Datasource\Locator\ILocator>
+     * @var array<callable|uim.cake.Datasource\Locator\ILocator>
      */
     protected static $_modelFactories = [];
 

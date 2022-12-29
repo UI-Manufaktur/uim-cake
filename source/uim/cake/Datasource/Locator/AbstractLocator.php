@@ -19,7 +19,7 @@ abstract class AbstractLocator : ILocator
     /**
      * Instances that belong to the registry.
      *
-     * @var array<string, \Cake\Datasource\RepositoryInterface>
+     * @var array<string, uim.cake.Datasource\RepositoryInterface>
      */
     protected $instances = [];
 

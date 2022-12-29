@@ -38,47 +38,47 @@ class RulesChecker
      *
      * @var string
      */
-    public const CREATE = "create";
+    const CREATE = "create";
 
     /**
      * Indicates that the checking rules to apply are those used for updating entities
      *
      * @var string
      */
-    public const UPDATE = "update";
+    const UPDATE = "update";
 
     /**
      * Indicates that the checking rules to apply are those used for deleting entities
      *
      * @var string
      */
-    public const DELETE = "delete";
+    const DELETE = "delete";
 
     /**
      * The list of rules to be checked on both create and update operations
      *
-     * @var array<\Cake\Datasource\RuleInvoker>
+     * @var array<uim.cake.Datasource\RuleInvoker>
      */
     protected $_rules = [];
 
     /**
      * The list of rules to check during create operations
      *
-     * @var array<\Cake\Datasource\RuleInvoker>
+     * @var array<uim.cake.Datasource\RuleInvoker>
      */
     protected $_createRules = [];
 
     /**
      * The list of rules to check during update operations
      *
-     * @var array<\Cake\Datasource\RuleInvoker>
+     * @var array<uim.cake.Datasource\RuleInvoker>
      */
     protected $_updateRules = [];
 
     /**
      * The list of rules to check during delete operations
      *
-     * @var array<\Cake\Datasource\RuleInvoker>
+     * @var array<uim.cake.Datasource\RuleInvoker>
      */
     protected $_deleteRules = [];
 
@@ -101,7 +101,7 @@ class RulesChecker
      *
      * @param array<string, mixed> $options The options to pass to every rule
      */
-    public this(array $options = []) {
+    this(array $options = []) {
         _options = $options;
         _useI18n = function_exists("__d");
     }
@@ -276,7 +276,7 @@ class RulesChecker
      *
      * @param uim.cake.Datasource\EntityInterface $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
-     * @param array<\Cake\Datasource\RuleInvoker> $rules The list of rules that must be checked.
+     * @param array<uim.cake.Datasource\RuleInvoker> $rules The list of rules that must be checked.
      * @return bool
      */
     protected function _checkRules(EntityInterface $entity, array $options = [], array $rules = []): bool
@@ -294,7 +294,7 @@ class RulesChecker
      * Utility method for decorating any callable so that if it returns false, the correct
      * property in the entity is marked as invalid.
      *
-     * @param callable|\Cake\Datasource\RuleInvoker $rule The rule to decorate
+     * @param callable|uim.cake.Datasource\RuleInvoker $rule The rule to decorate
      * @param array|string|null $name The alias for a rule or an array of options
      * @param array<string, mixed> $options The options containing the error message and field.
      * @return uim.cake.Datasource\RuleInvoker

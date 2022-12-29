@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.Datasource;
 
 use Psr\Log\LoggerAwareInterface;
@@ -20,16 +13,16 @@ use Psr\SimpleCache\ICache;
  * @method this setLogger($logger) Set the current logger. {@see uim.cake.Database\Connnection::setLogger()}
  * @method bool supportsDynamicConstraints() Returns whether the driver supports adding or dropping constraints to
  *   already created tables. {@see uim.cake.Database\Connnection::supportsDynamicConstraints()}
- * @method \Cake\Database\Schema\Collection getSchemaCollection() Gets a Schema\Collection object for this connection.
+ * @method uim.cake.Database\Schema\Collection getSchemaCollection() Gets a Schema\Collection object for this connection.
  *    {@see uim.cake.Database\Connnection::getSchemaCollection()}
- * @method \Cake\Database\Query newQuery() Create a new Query instance for this connection.
+ * @method uim.cake.Database\Query newQuery() Create a new Query instance for this connection.
  *    {@see uim.cake.Database\Connnection::newQuery()}
- * @method \Cake\Database\StatementInterface prepare($sql) Prepares a SQL statement to be executed.
+ * @method uim.cake.Database\StatementInterface prepare($sql) Prepares a SQL statement to be executed.
  *    {@see uim.cake.Database\Connnection::prepare()}
- * @method \Cake\Database\StatementInterface execute($query, $params = [], array $types = []) Executes a query using
+ * @method uim.cake.Database\StatementInterface execute($query, $params = [], array $types = []) Executes a query using
  *   `$params` for interpolating values and $types as a hint for each those params.
  *   {@see uim.cake.Database\Connnection::execute()}
- * @method \Cake\Database\StatementInterface query(string $sql) Executes a SQL statement and returns the Statement
+ * @method uim.cake.Database\StatementInterface query(string $sql) Executes a SQL statement and returns the Statement
  *   object as result. {@see uim.cake.Database\Connnection::query()}
  */
 interface ConnectionInterface : LoggerAwareInterface

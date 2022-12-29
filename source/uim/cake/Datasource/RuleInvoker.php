@@ -11,7 +11,7 @@ module uim.cake.Datasource;
 /**
  * Contains logic for invoking an application rule.
  *
- * Combined with {@link \Cake\Datasource\RulesChecker} as an implementation
+ * Combined with {@link uim.cake.Datasource\RulesChecker} as an implementation
  * detail to de-duplicate rule decoration and provide cleaner separation
  * of duties.
  *
@@ -56,7 +56,7 @@ class RuleInvoker
      * @param ?string $name The name of the rule. Used in error messages.
      * @param array<string, mixed> $options The options for the rule. See above.
      */
-    public this(callable $rule, ?string $name, array $options = []) {
+    this(callable $rule, ?string $name, array $options = []) {
         this.rule = $rule;
         this.name = $name;
         this.options = $options;

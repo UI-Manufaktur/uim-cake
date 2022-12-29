@@ -139,7 +139,7 @@ class Paginator : IPaginator {
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param uim.cake.Datasource\IRepository|\Cake\Datasource\IQuery $object The repository or query
+     * @param uim.cake.Datasource\IRepository|uim.cake.Datasource\IQuery $object The repository or query
      *   to paginate.
      * @param array myParams Request params
      * @param array $settings The settings/configuration used for pagination.

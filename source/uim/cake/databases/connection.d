@@ -134,7 +134,7 @@ class Connection : IConnection {
      */
     auto setDriver(myDriver, myConfig = []) {
         if (is_string(myDriver)) {
-            /** @psalm-var class-string<\Cake\Database\IDriver>|null myClassName */
+            /** @psalm-var class-string<uim.cake.Database\IDriver>|null myClassName */
             myClassName = App::className(myDriver, "Database/Driver");
             if (myClassName is null) {
                 throw new MissingDriverException(["driver":myDriver]);

@@ -5,7 +5,7 @@ module uim.cake.datasources;
  *
  * @method this andWhere($conditions, array myTypes = []) Connects any previously defined set of conditions to the
  *   provided list using the AND operator. {@see uim.cake.Database\Query::andWhere()}
- * @method \Cake\Datasource\IEntity|array firstOrFail() Get the first result from the executing query or raise an exception.
+ * @method uim.cake.Datasource\IEntity|array firstOrFail() Get the first result from the executing query or raise an exception.
  *   {@see uim.cake.Database\Query::firstOrFail()}
  */
 interface IQuery {
@@ -18,7 +18,7 @@ interface IQuery {
      * If `true` is passed in the second argument, any previous selections will
      * be overwritten with the list passed in the first argument.
      *
-     * @param uim.cake.Database\IExpression|\Cake\ORM\Association|\Cake\ORM\Table|callable|array|string myFields Fields.
+     * @param uim.cake.Database\IExpression|uim.cake.ORM\Association|uim.cake.ORM\Table|callable|array|string myFields Fields.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */

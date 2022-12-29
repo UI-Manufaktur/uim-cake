@@ -151,7 +151,7 @@ class NumericPaginator : PaginatorInterface
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param uim.cake.Datasource\RepositoryInterface|\Cake\Datasource\IQuery $object The repository or query
+     * @param uim.cake.Datasource\RepositoryInterface|uim.cake.Datasource\IQuery $object The repository or query
      *   to paginate.
      * @param array $params Request params
      * @param array $settings The settings/configuration used for pagination.

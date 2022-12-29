@@ -20,7 +20,7 @@ class FactoryLocator
     /**
      * A list of model factory functions.
      *
-     * @var array<callable|\Cake\Datasource\Locator\ILocator>
+     * @var array<callable|uim.cake.Datasource\Locator\ILocator>
      */
     protected static $_modelFactories = [];
 
@@ -31,7 +31,7 @@ class FactoryLocator
      * @param uim.cake.Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      * @return void
      */
-    public static function add(string $type, $factory): void
+    static function add(string $type, $factory): void
     {
         if ($factory instanceof ILocator) {
             static::$_modelFactories[$type] = $factory;
@@ -63,7 +63,7 @@ class FactoryLocator
      * @param string $type The name of the repository type to drop the factory for.
      * @return void
      */
-    public static function drop(string $type): void
+    static function drop(string $type): void
     {
         unset(static::$_modelFactories[$type]);
     }
@@ -75,7 +75,7 @@ class FactoryLocator
      * @throws \InvalidArgumentException If the specified repository type has no factory.
      * @return uim.cake.Datasource\Locator\ILocator|callable The factory for the repository type.
      */
-    public static function get(string $type) {
+    static function get(string $type) {
         if (!isset(static::$_modelFactories["Table"])) {
             static::$_modelFactories["Table"] = new TableLocator();
         }

@@ -10,10 +10,10 @@ use Traversable;
 /**
  * Handles caching queries and loading results from the cache.
  *
- * Used by {@link \Cake\Datasource\QueryTrait} internally.
+ * Used by {@link uim.cake.Datasource\QueryTrait} internally.
  *
  * @internal
- * @see uim.cake.datasources.QueryTrait::cache() for the public interface.
+ * @see uim.cake.datasources.QueryTrait::cache() for the interface.
  */
 class QueryCacher
 {
@@ -38,7 +38,7 @@ class QueryCacher
      * @param \Psr\SimpleCache\ICache|string $config The cache config name or cache engine instance.
      * @throws \RuntimeException
      */
-    public this($key, $config) {
+    this($key, $config) {
         if (!is_string($key) && !($key instanceof Closure)) {
             throw new RuntimeException("Cache keys must be strings or callables.");
         }

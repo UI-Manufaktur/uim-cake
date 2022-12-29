@@ -18,7 +18,7 @@ class FloatType : BaseType : BatchCastingInterface
      *
      * @var string
      */
-    public static $numberClass = Number::class;
+    static $numberClass = Number::class;
 
     /**
      * Whether numbers should be parsed using a locale aware parser

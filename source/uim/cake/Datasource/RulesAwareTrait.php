@@ -87,7 +87,7 @@ trait RulesAwareTrait
         if (_rulesChecker != null) {
             return _rulesChecker;
         }
-        /** @psalm-var class-string<\Cake\Datasource\RulesChecker> $class */
+        /** @psalm-var class-string<uim.cake.Datasource\RulesChecker> $class */
         $class = defined("static::RULES_CLASS") ? static::RULES_CLASS : RulesChecker::class;
         /** @psalm-suppress ArgumentTypeCoercion */
         _rulesChecker = this.buildRules(new $class(["repository": this]));

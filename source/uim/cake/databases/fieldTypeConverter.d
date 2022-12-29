@@ -13,7 +13,7 @@ class FieldTypeConverter
      * An array containing the name of the fields and the Type objects
      * each should use when converting them.
      *
-     * @var array<\Cake\Database\IType>
+     * @var array<uim.cake.Database\IType>
      */
     protected _typeMap;
 
@@ -30,7 +30,7 @@ class FieldTypeConverter
      * at the moment this object is created. Used so that the types list
      * is not fetched on each single row of the results.
      *
-     * @var array<\Cake\Database\IType|\Cake\Database\Type\BatchCastingInterface>
+     * @var array<uim.cake.Database\IType|uim.cake.Database\Type\BatchCastingInterface>
      */
     protected myTypes;
 

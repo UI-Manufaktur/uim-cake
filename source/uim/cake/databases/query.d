@@ -17,11 +17,11 @@ import uim.cake;
 class Query : IExpression, IteratorAggregate {
     use TypeMapTrait;
 
-    public const string JOIN_TYPE_INNER = "INNER";
+    const string JOIN_TYPE_INNER = "INNER";
 
-    public const string JOIN_TYPE_LEFT = "LEFT";
+    const string JOIN_TYPE_LEFT = "LEFT";
 
-    public const string JOIN_TYPE_RIGHT = "RIGHT";
+    const string JOIN_TYPE_RIGHT = "RIGHT";
 
     /**
      * Connection instance to be used to execute this query.
@@ -311,7 +311,7 @@ class Query : IExpression, IteratorAggregate {
      * objects:
      *
      * ```
-     * $cte = new \Cake\Database\Expression\CommonTableExpression(
+     * $cte = new uim.cake.Database\Expression\CommonTableExpression(
      *     "cte",
      *     myConnection
      *         .newQuery()
@@ -328,8 +328,8 @@ class Query : IExpression, IteratorAggregate {
      *
      * ```
      * myQuery.with(function (
-     *     \Cake\Database\Expression\CommonTableExpression $cte,
-     *     \Cake\Database\Query myQuery
+     *     uim.cake.Database\Expression\CommonTableExpression $cte,
+     *     uim.cake.Database\Query myQuery
      *  ) {
      *     $cteQuery = myQuery
      *         .select("*")
@@ -1601,7 +1601,7 @@ class Query : IExpression, IteratorAggregate {
      * or by providing an array of value sets. Additionally myData can be a Query
      * instance to insert data from another SELECT statement.
      *
-     * @param uim.cake.Database\Expression\ValuesExpression|\Cake\Database\Query|array myData The data to insert.
+     * @param uim.cake.Database\Expression\ValuesExpression|uim.cake.Database\Query|array myData The data to insert.
      * @return this
      * @throws uim.cake.Database\Exception\DatabaseException if you try to set values before declaring columns.
      *   Or if you try to set values on non-insert queries.
@@ -1770,7 +1770,7 @@ class Query : IExpression, IteratorAggregate {
      * if required.
      *
      * You can optionally pass a single raw SQL string or an array or expressions in
-     * any format accepted by \Cake\Database\Expression\QueryExpression:
+     * any format accepted by uim.cake.Database\Expression\QueryExpression:
      *
      * ```
      * $expression = myQuery.newExpr(); // Returns an empty expression object
@@ -1937,7 +1937,7 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Query parts traversal method used by traverseExpressions()
      *
-     * @param uim.cake.Database\IExpression|array<\Cake\Database\IExpression> $expression Query expression or
+     * @param uim.cake.Database\IExpression|array<uim.cake.Database\IExpression> $expression Query expression or
      *   array of expressions.
      * @param \Closure $callback The callback to be executed for each IExpression
      *   found inside this query.
@@ -2140,7 +2140,7 @@ class Query : IExpression, IteratorAggregate {
      * any registered callbacks.
      *
      * @param uim.cake.Database\IStatement $statement to be decorated
-     * @return uim.cake.Database\Statement\CallbackStatement|\Cake\Database\IStatement
+     * @return uim.cake.Database\Statement\CallbackStatement|uim.cake.Database\IStatement
      */
     protected auto _decorateStatement(IStatement $statement) {
         myTypeMap = this.getSelectTypeMap();
