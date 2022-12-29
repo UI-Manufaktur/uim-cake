@@ -134,7 +134,7 @@ class SecurityComponent : Component
      * @param array<string>|string|null $actions Actions list
      * @return void
      */
-    function requireSecure($actions = null): void
+    void requireSecure($actions = null): void
     {
         $actions = (array)$actions;
         this.setConfig("requireSecure", empty($actions) ? ["*"] : $actions);

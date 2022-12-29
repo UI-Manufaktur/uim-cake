@@ -34,7 +34,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.CommandCollection $commands The command collection
      * @return void
      */
-    function setCommandCollection(CommandCollection $commands): void
+    void setCommandCollection(CommandCollection $commands): void
     {
         this.commands = $commands;
     }

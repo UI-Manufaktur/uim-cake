@@ -33,7 +33,7 @@ class ClassLoader
      *
      * @return void
      */
-    function register(): void
+    void register(): void
     {
         /** @var callable $callable */
         $callable = [this, "loadClass"];
@@ -51,7 +51,7 @@ class ClassLoader
      * than last.
      * @return void
      */
-    function addNamespace(string $prefix, string $baseDir, bool $prepend = false): void
+    void addNamespace(string $prefix, string $baseDir, bool $prepend = false): void
     {
         $prefix = trim($prefix, "\\") . "\\";
 

@@ -84,7 +84,7 @@ interface DriverInterface
      *
      * @return void
      */
-    function disconnect(): void;
+    void disconnect(): void;
 
     /**
      * Returns correct connection resource or object that is internally used.

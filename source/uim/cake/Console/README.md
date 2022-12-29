@@ -52,7 +52,7 @@ class Application : IConsoleApplication
      *
      * @return void
      */
-    function bootstrap(): void
+    void bootstrap(): void
     {
         // Load configuration here. This is the first
         // method Cake\Console\CommandRunner will call on your application.

@@ -63,7 +63,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      *
      * @return void
      */
-    function boot(): void
+    void boot(): void
     {
         this.bootstrap(this.getContainer());
     }
@@ -79,7 +79,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * @param uim.cake.Core\IContainer $container The container to add services to.
      * @return void
      */
-    function bootstrap(IContainer $container): void
+    void bootstrap(IContainer $container): void
     {
     }
 
@@ -91,7 +91,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      *
      * @return void
      */
-    function register(): void
+    void register(): void
     {
         this.services(this.getContainer());
     }

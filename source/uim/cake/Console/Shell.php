@@ -224,7 +224,7 @@ class Shell
      * @param uim.cake.consoles.ConsoleIo $io The ConsoleIo object to use.
      * @return void
      */
-    function setIo(ConsoleIo $io): void
+    void setIo(ConsoleIo $io): void
     {
         _io = $io;
     }

@@ -386,7 +386,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    function help(): void
+    void help(): void
     {
         trigger_error(
             "Console help cannot be generated from Shell classes anymore. " .
@@ -400,7 +400,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    function version(): void
+    void version(): void
     {
         trigger_error(
             "Version information cannot be generated from Shell classes anymore. " .

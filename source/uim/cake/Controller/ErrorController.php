@@ -22,7 +22,7 @@ class ErrorController : Controller
      *
      * @return void
      */
-    function initialize(): void
+    void initialize(): void
     {
         this.loadComponent("RequestHandler");
     }

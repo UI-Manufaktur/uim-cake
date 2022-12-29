@@ -161,7 +161,7 @@ trait ContainerStubTrait
      * @after
      * @return void
      */
-    function cleanupContainer(): void
+    void cleanupContainer(): void
     {
         _appArgs = null;
         _appClass = null;

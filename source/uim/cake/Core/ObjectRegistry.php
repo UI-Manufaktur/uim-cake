@@ -249,7 +249,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @psalm-param TObject $object
      * @return void
      */
-    function __set(string $name, $object): void
+    void __set(string $name, $object): void
     {
         this.set($name, $object);
     }
@@ -260,7 +260,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param string $name Name of a property to unset.
      * @return void
      */
-    function __unset(string $name): void
+    void __unset(string $name): void
     {
         this.unload($name);
     }

@@ -53,7 +53,7 @@ class FlashComponent : Component
      * @param array<string, mixed> $options An array of options
      * @return void
      */
-    function set($message, array $options = []): void
+    void set($message, array $options = []): void
     {
         if ($message instanceof Throwable) {
             this.flash().setExceptionMessage($message, $options);

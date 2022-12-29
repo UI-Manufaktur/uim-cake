@@ -123,7 +123,7 @@ class BasePlugin : PluginInterface
      *
      * @return void
      */
-    function initialize(): void
+    void initialize(): void
     {
     }
 
@@ -270,7 +270,7 @@ class BasePlugin : PluginInterface
      * @param uim.cake.Core\IContainer $container The container to add services to.
      * @return void
      */
-    function services(IContainer $container): void
+    void services(IContainer $container): void
     {
     }
 }

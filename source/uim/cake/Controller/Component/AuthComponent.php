@@ -222,7 +222,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @param array<string, mixed> $config The config data.
      * @return void
      */
-    function initialize(array $config): void
+    void initialize(array $config): void
     {
         $controller = _registry.getController();
         this.setEventManager($controller.getEventManager());
@@ -893,7 +893,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @param mixed $value Value to set.
      * @return void
      */
-    function __set(string $name, $value): void
+    void __set(string $name, $value): void
     {
         if ($name == 'sessionKey') {
             _storage = null;
@@ -934,7 +934,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @param string|false $message The message to set. False to skip.
      * @return void
      */
-    function flash($message): void
+    void flash($message): void
     {
         if ($message == false) {
             return;

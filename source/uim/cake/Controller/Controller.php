@@ -238,7 +238,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * @return void
      */
-    function initialize(): void
+    void initialize(): void
     {
     }
 
@@ -331,7 +331,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @param mixed $value Value to set.
      * @return void
      */
-    function __set(string $name, $value): void
+    void __set(string $name, $value): void
     {
         if ($name == "components") {
             triggerWarning(

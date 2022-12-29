@@ -98,7 +98,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      *
      * @return void
      */
-    function next(): void
+    void next(): void
     {
         parent::next();
         _current = null;

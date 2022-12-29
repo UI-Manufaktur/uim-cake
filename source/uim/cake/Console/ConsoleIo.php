@@ -117,7 +117,7 @@ class ConsoleIo
      * @param bool $value Value
      * @return void
      */
-    function setInteractive(bool $value): void
+    void setInteractive(bool $value): void
     {
         this.interactive = $value;
     }
@@ -326,7 +326,7 @@ class ConsoleIo
      *    length of the last message output.
      * @return void
      */
-    function overwrite($message, int $newlines = 1, ?int $size = null): void
+    void overwrite($message, int $newlines = 1, ?int $size = null)
     {
         $size = $size ?: _lastWritten;
 
@@ -383,7 +383,7 @@ class ConsoleIo
      * @param int $width Width of the line, defaults to 79
      * @return void
      */
-    function hr(int $newlines = 0, int $width = 79): void
+    void hr(int $newlines = 0, int $width = 79): void
     {
         this.out("", $newlines);
         this.out(str_repeat("-", $width));
@@ -531,7 +531,7 @@ class ConsoleIo
      *   QUIET disables notice, info and debug logs.
      * @return void
      */
-    function setLoggers($enable): void
+    void setLoggers($enable): void
     {
         Log::drop("stdout");
         Log::drop("stderr");

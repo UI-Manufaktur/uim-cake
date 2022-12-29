@@ -78,7 +78,7 @@ interface PluginInterface
      * @param uim.cake.Core\IPluginApplication $app The host application
      * @return void
      */
-    function bootstrap(IPluginApplication $app): void;
+    void bootstrap(IPluginApplication $app): void;
 
     /**
      * Add console commands for the plugin.
@@ -105,7 +105,7 @@ interface PluginInterface
      * @param uim.cake.routings.RouteBuilder $routes The route builder to update.
      * @return void
      */
-    function routes(RouteBuilder $routes): void;
+    void routes(RouteBuilder $routes): void;
 
     /**
      * Disables the named hook

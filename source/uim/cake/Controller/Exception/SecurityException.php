@@ -49,7 +49,7 @@ class SecurityException : BadRequestException
      * @param string $message Exception message
      * @return void
      */
-    function setMessage(string $message): void
+    void setMessage(string $message): void
     {
         this.message = $message;
     }

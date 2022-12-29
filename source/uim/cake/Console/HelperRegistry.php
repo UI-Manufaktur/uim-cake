@@ -26,7 +26,7 @@ class HelperRegistry : ObjectRegistry
      * @param uim.cake.consoles.ConsoleIo $io An io instance.
      * @return void
      */
-    function setIo(ConsoleIo $io): void
+    void setIo(ConsoleIo $io): void
     {
         _io = $io;
     }

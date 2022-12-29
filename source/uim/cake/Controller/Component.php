@@ -123,7 +123,7 @@ class Component : IEventListener
      * @param array<string, mixed> $config The configuration settings provided to this component.
      * @return void
      */
-    function initialize(array $config): void
+    void initialize(array $config): void
     {
     }
 

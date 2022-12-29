@@ -254,7 +254,7 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    function disconnect(): void
+    void disconnect(): void
     {
         _driver.disconnect();
     }
@@ -462,7 +462,7 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    function begin(): void
+    void begin(): void
     {
         if (!_transactionStarted) {
             if (_logQueries) {
@@ -607,7 +607,7 @@ class Connection : ConnectionInterface
      * @param string|int $name Save point name or id
      * @return void
      */
-    function createSavePoint($name): void
+    void createSavePoint($name): void
     {
         this.execute(_driver.savePointSQL($name)).closeCursor();
     }
@@ -618,7 +618,7 @@ class Connection : ConnectionInterface
      * @param string|int $name Save point name or id
      * @return void
      */
-    function releaseSavePoint($name): void
+    void releaseSavePoint($name): void
     {
         $sql = _driver.releaseSavePointSQL($name);
         if ($sql) {
@@ -632,7 +632,7 @@ class Connection : ConnectionInterface
      * @param string|int $name Save point name or id
      * @return void
      */
-    function rollbackSavepoint($name): void
+    void rollbackSavepoint($name): void
     {
         this.execute(_driver.rollbackSavePointSQL($name)).closeCursor();
     }
@@ -642,7 +642,7 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    function disableForeignKeys(): void
+    void disableForeignKeys(): void
     {
         this.getDisconnectRetry().run(function (): void {
             this.execute(_driver.disableForeignKeySQL()).closeCursor();
@@ -654,7 +654,7 @@ class Connection : ConnectionInterface
      *
      * @return void
      */
-    function enableForeignKeys(): void
+    void enableForeignKeys(): void
     {
         this.getDisconnectRetry().run(function (): void {
             this.execute(_driver.enableForeignKeySQL()).closeCursor();
@@ -786,7 +786,7 @@ class Connection : ConnectionInterface
      *   true to use `_cake_model_` or the name of the cache config to use.
      * @return void
      */
-    function cacheMetadata($cache): void
+    void cacheMetadata($cache): void
     {
         _schemaCollection = null;
         _config['cacheMetadata'] = $cache;
@@ -897,7 +897,7 @@ class Connection : ConnectionInterface
      * @param string $sql string to be logged
      * @return void
      */
-    function log(string $sql): void
+    void log(string $sql): void
     {
         $query = new LoggedQuery();
         $query.query = $sql;

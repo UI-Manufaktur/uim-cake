@@ -289,7 +289,7 @@ class ConsoleOutput
      * @param array $definition The array definition of the style to change or create..
      * @return void
      */
-    function setStyle(string $style, array $definition): void
+    void setStyle(string $style, array $definition): void
     {
         if (!$definition) {
             unset(static::$_styles[$style]);

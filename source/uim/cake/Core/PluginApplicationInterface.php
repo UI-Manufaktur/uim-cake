@@ -39,7 +39,7 @@ interface IPluginApplication : EventDispatcherInterface
      *
      * @return void
      */
-    function pluginBootstrap(): void;
+    void pluginBootstrap(): void;
 
     /**
      * Run routes hooks for loaded plugins

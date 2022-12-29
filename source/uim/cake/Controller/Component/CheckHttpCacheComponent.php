@@ -37,7 +37,7 @@ class CheckHttpCacheComponent : Component
      * @param uim.cake.events.IEvent $event The Controller.beforeRender event.
      * @return void
      */
-    function beforeRender(IEvent $event): void
+    void beforeRender(IEvent $event): void
     {
         $controller = this.getController();
         $response = $controller.getResponse();

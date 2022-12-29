@@ -60,7 +60,7 @@ class IdentifierQuoter
      * @param uim.cake.Database\IExpression $expression The expression object to walk and quote.
      * @return void
      */
-    function quoteExpression(IExpression $expression): void
+    void quoteExpression(IExpression $expression): void
     {
         if ($expression instanceof FieldInterface) {
             _quoteComparison($expression);

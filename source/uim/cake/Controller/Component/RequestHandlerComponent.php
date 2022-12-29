@@ -151,7 +151,7 @@ class RequestHandlerComponent : Component
      * @param uim.cake.events.IEvent $event The startup event that was fired.
      * @return void
      */
-    function startup(IEvent $event): void
+    void startup(IEvent $event): void
     {
         $controller = this.getController();
         $request = $controller.getRequest();

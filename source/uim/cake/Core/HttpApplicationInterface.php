@@ -29,7 +29,7 @@ interface IHttpApplication : RequestHandlerInterface
      *
      * @return void
      */
-    function bootstrap(): void;
+    void bootstrap(): void;
 
     /**
      * Define the HTTP middleware layers for an application.

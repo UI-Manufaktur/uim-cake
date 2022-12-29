@@ -23,7 +23,7 @@ interface IContainerApplication
      * @param uim.cake.Core\IContainer $container The container to add services to
      * @return void
      */
-    function services(IContainer $container): void;
+    void services(IContainer $container): void;
 
     /**
      * Create a new container and register services.
