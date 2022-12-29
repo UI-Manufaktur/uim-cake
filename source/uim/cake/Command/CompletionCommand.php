@@ -5,8 +5,7 @@
 
  * @link          https://cakephp.org CakePHP Project
  * @since         2.5.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Command;
 
 import uim.cake.consoles.Arguments;

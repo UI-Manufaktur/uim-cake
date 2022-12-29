@@ -5,8 +5,7 @@
 
 
  * @since         3.0.5
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Collection\Iterator;
 
 import uim.cake.Collection\Collection;
