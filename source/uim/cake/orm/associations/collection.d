@@ -14,7 +14,7 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Stored associations
      *
-     * @var array<\Cake\ORM\Association>
+     * @var array<uim.cake.ORM\Association>
      */
     protected _items = [];
 
@@ -125,7 +125,7 @@ class AssociationCollection : IteratorAggregate {
      *
      * @param array<string>|string myClass The type of associations you want.
      *   For example "BelongsTo" or array like ["BelongsTo", "HasOne"]
-     * @return array<\Cake\ORM\Association> An array of Association objects.
+     * @return array<uim.cake.ORM\Association> An array of Association objects.
      * @since 3.5.3
      */
     array getByType(myClass) {
@@ -327,7 +327,7 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Allow looping through the associations
      *
-     * @return \Traversable<string, \Cake\ORM\Association>
+     * @return \Traversable<string, uim.cake.ORM\Association>
      */
     Traversable getIterator() {
         return new ArrayIterator(_items);

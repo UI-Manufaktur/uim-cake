@@ -9,7 +9,7 @@ import uim.cake;
  *
  * This class also provides method for checking and dispatching behavior methods.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\ORM\Behavior>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.ORM\Behavior>
  */
 class BehaviorRegistry : ObjectRegistry : IEventDispatcher
 {
@@ -177,7 +177,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Check if any loaded behavior : a method.
      *
-     * Will return true if any behavior provides a public non-finder method
+     * Will return true if any behavior provides a non-finder method
      * with the chosen name.
      *
      * @param string method The method to check for.
@@ -191,7 +191,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Check if any loaded behavior : the named finder.
      *
-     * Will return true if any behavior provides a public method with
+     * Will return true if any behavior provides a method with
      * the chosen name.
      *
      * @param string method The method to check for.

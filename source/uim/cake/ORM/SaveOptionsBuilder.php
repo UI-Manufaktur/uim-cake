@@ -44,7 +44,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param uim.cake.ORM\Table $table A table instance.
      * @param array<string, mixed> $options Options to parse when instantiating.
      */
-    public this(Table $table, array $options = []) {
+    this(Table $table, array $options = []) {
         _table = $table;
         this.parseArrayOptions($options);
 

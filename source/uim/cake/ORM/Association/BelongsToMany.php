@@ -30,14 +30,14 @@ class BelongsToMany : Association
      *
      * @var string
      */
-    public const SAVE_APPEND = "append";
+    const SAVE_APPEND = "append";
 
     /**
      * Saving strategy that will replace the links with the provided set
      *
      * @var string
      */
-    public const SAVE_REPLACE = "replace";
+    const SAVE_REPLACE = "replace";
 
     /**
      * The type of join to be used when adding the association to a query
@@ -749,7 +749,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.Datasource\EntityInterface $sourceEntity the entity from source table in this
      * association
-     * @param array<\Cake\Datasource\EntityInterface> $targetEntities list of entities to link to link to the source entity using the
+     * @param array<uim.cake.Datasource\EntityInterface> $targetEntities list of entities to link to link to the source entity using the
      * junction table
      * @param array<string, mixed> $options list of options accepted by `Table::save()`
      * @return bool success
@@ -823,7 +823,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
      *   of this association
-     * @param array<\Cake\Datasource\EntityInterface> $targetEntities list of entities belonging to the `target` side
+     * @param array<uim.cake.Datasource\EntityInterface> $targetEntities list of entities belonging to the `target` side
      *   of this association
      * @param array<string, mixed> $options list of options to be passed to the internal `save` call
      * @throws \InvalidArgumentException when any of the values in $targetEntities is
@@ -873,7 +873,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.Datasource\EntityInterface $sourceEntity An entity persisted in the source table for
      *   this association.
-     * @param array<\Cake\Datasource\EntityInterface> $targetEntities List of entities persisted in the target table for
+     * @param array<uim.cake.Datasource\EntityInterface> $targetEntities List of entities persisted in the target table for
      *   this association.
      * @param array<string>|bool $options List of options to be passed to the internal `delete` call,
      *   or a `boolean` as `cleanProperty` key shortcut.
@@ -903,13 +903,13 @@ class BelongsToMany : Association
             }
         );
 
-        /** @var array<\Cake\Datasource\EntityInterface> $existing */
+        /** @var array<uim.cake.Datasource\EntityInterface> $existing */
         $existing = $sourceEntity.get($property) ?: [];
         if (!$options["cleanProperty"] || empty($existing)) {
             return true;
         }
 
-        /** @var \SplObjectStorage<\Cake\Datasource\EntityInterface, null> $storage */
+        /** @var \SplObjectStorage<uim.cake.Datasource\EntityInterface, null> $storage */
         $storage = new SplObjectStorage();
         foreach ($targetEntities as $e) {
             $storage.attach($e);
@@ -1213,7 +1213,7 @@ class BelongsToMany : Association
      * `$targetEntities` that were not deleted from calculating the difference.
      *
      * @param uim.cake.ORM\Query $existing a query for getting existing links
-     * @param array<\Cake\Datasource\EntityInterface> $jointEntities link entities that should be persisted
+     * @param array<uim.cake.Datasource\EntityInterface> $jointEntities link entities that should be persisted
      * @param array $targetEntities entities in target table that are related to
      * the `$jointEntities`
      * @param array<string, mixed> $options list of options accepted by `Table::delete()`
@@ -1300,7 +1300,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
      *   of this association
-     * @param array<\Cake\Datasource\EntityInterface> $targetEntities list of entities belonging to the `target` side
+     * @param array<uim.cake.Datasource\EntityInterface> $targetEntities list of entities belonging to the `target` side
      *   of this association
      * @return bool
      * @throws \InvalidArgumentException
@@ -1332,7 +1332,7 @@ class BelongsToMany : Association
      *   association.
      * @throws \InvalidArgumentException if any of the entities is lacking a primary
      *   key value
-     * @return array<\Cake\Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\EntityInterface>
      */
     protected function _collectJointEntities(EntityInterface $sourceEntity, array $targetEntities): array
     {

@@ -52,7 +52,7 @@ class Socket
     protected lastError = [];
 
     /**
-     * True if the socket stream is encrypted after a {@link \Cake\Network\Socket::enableCrypto()} call
+     * True if the socket stream is encrypted after a {@link uim.cake.Network\Socket::enableCrypto()} call
      *
      * @var bool
      */

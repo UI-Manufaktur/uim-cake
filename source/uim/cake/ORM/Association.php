@@ -19,7 +19,7 @@ use RuntimeException;
  * An Association is a relationship established between two tables and is used
  * to configure and customize the way interconnected records are retrieved.
  *
- * @mixin \Cake\ORM\Table
+ * @mixin uim.cake.ORM\Table
  */
 abstract class Association
 {
@@ -31,49 +31,49 @@ abstract class Association
      *
      * @var string
      */
-    public const STRATEGY_JOIN = "join";
+    const STRATEGY_JOIN = "join";
 
     /**
      * Strategy name to use a subquery for fetching associated records
      *
      * @var string
      */
-    public const STRATEGY_SUBQUERY = "subquery";
+    const STRATEGY_SUBQUERY = "subquery";
 
     /**
      * Strategy name to use a select for fetching associated records
      *
      * @var string
      */
-    public const STRATEGY_SELECT = "select";
+    const STRATEGY_SELECT = "select";
 
     /**
      * Association type for one to one associations.
      *
      * @var string
      */
-    public const ONE_TO_ONE = "oneToOne";
+    const ONE_TO_ONE = "oneToOne";
 
     /**
      * Association type for one to many associations.
      *
      * @var string
      */
-    public const ONE_TO_MANY = "oneToMany";
+    const ONE_TO_MANY = "oneToMany";
 
     /**
      * Association type for many to many associations.
      *
      * @var string
      */
-    public const MANY_TO_MANY = "manyToMany";
+    const MANY_TO_MANY = "manyToMany";
 
     /**
      * Association type for many to one associations.
      *
      * @var string
      */
-    public const MANY_TO_ONE = "manyToOne";
+    const MANY_TO_ONE = "manyToOne";
 
     /**
      * Name given to the association, it usually represents the alias
@@ -191,7 +191,7 @@ abstract class Association
      * @param string $alias The name given to the association
      * @param array<string, mixed> $options A list of properties to be set on this object
      */
-    public this(string $alias, array $options = []) {
+    this(string $alias, array $options = []) {
         $defaults = [
             "cascadeCallbacks",
             "className",

@@ -24,42 +24,42 @@ use Traversable;
  * required.
  *
  * @see uim.cake.Collection\ICollection For a full description of the collection methods supported by this class
- * @property \Cake\ORM\Table $_repository Instance of a table object this query is bound to.
- * @method \Cake\ORM\Table getRepository() Returns the default table object that will be used by this query,
+ * @property uim.cake.ORM\Table $_repository Instance of a table object this query is bound to.
+ * @method uim.cake.ORM\Table getRepository() Returns the default table object that will be used by this query,
  *   that is, the table that will appear in the from clause.
- * @method \Cake\Collection\ICollection each(callable $c) Passes each of the query results to the callable
- * @method \Cake\Collection\ICollection sortBy(callable|string $path, int $order = \SORT_DESC, int $sort = \SORT_NUMERIC) Sorts the query with the callback
- * @method \Cake\Collection\ICollection filter(callable $c = null) Keeps the results using passing the callable test
- * @method \Cake\Collection\ICollection reject(callable $c) Removes the results passing the callable test
+ * @method uim.cake.Collection\ICollection each(callable $c) Passes each of the query results to the callable
+ * @method uim.cake.Collection\ICollection sortBy(callable|string $path, int $order = \SORT_DESC, int $sort = \SORT_NUMERIC) Sorts the query with the callback
+ * @method uim.cake.Collection\ICollection filter(callable $c = null) Keeps the results using passing the callable test
+ * @method uim.cake.Collection\ICollection reject(callable $c) Removes the results passing the callable test
  * @method bool every(callable $c) Returns true if all the results pass the callable test
  * @method bool some(callable $c) Returns true if at least one of the results pass the callable test
- * @method \Cake\Collection\ICollection map(callable $c) Modifies each of the results using the callable
+ * @method uim.cake.Collection\ICollection map(callable $c) Modifies each of the results using the callable
  * @method mixed reduce(callable $c, $zero = null) Folds all the results into a single value using the callable.
- * @method \Cake\Collection\ICollection extract($field) Extracts a single column from each row
+ * @method uim.cake.Collection\ICollection extract($field) Extracts a single column from each row
  * @method mixed max($field) Returns the maximum value for a single column in all the results.
  * @method mixed min($field) Returns the minimum value for a single column in all the results.
- * @method \Cake\Collection\ICollection groupBy(callable|string $field) In-memory group all results by the value of a column.
- * @method \Cake\Collection\ICollection indexBy(callable|string $callback) Returns the results indexed by the value of a column.
- * @method \Cake\Collection\ICollection countBy(callable|string $field) Returns the number of unique values for a column
+ * @method uim.cake.Collection\ICollection groupBy(callable|string $field) In-memory group all results by the value of a column.
+ * @method uim.cake.Collection\ICollection indexBy(callable|string $callback) Returns the results indexed by the value of a column.
+ * @method uim.cake.Collection\ICollection countBy(callable|string $field) Returns the number of unique values for a column
  * @method float sumOf(callable|string $field) Returns the sum of all values for a single column
- * @method \Cake\Collection\ICollection shuffle() In-memory randomize the order the results are returned
- * @method \Cake\Collection\ICollection sample(int $size = 10) In-memory shuffle the results and return a subset of them.
- * @method \Cake\Collection\ICollection take(int $size = 1, int $from = 0) In-memory limit and offset for the query results.
- * @method \Cake\Collection\ICollection skip(int $howMany) Skips some rows from the start of the query result.
+ * @method uim.cake.Collection\ICollection shuffle() In-memory randomize the order the results are returned
+ * @method uim.cake.Collection\ICollection sample(int $size = 10) In-memory shuffle the results and return a subset of them.
+ * @method uim.cake.Collection\ICollection take(int $size = 1, int $from = 0) In-memory limit and offset for the query results.
+ * @method uim.cake.Collection\ICollection skip(int $howMany) Skips some rows from the start of the query result.
  * @method mixed last() Return the last row of the query result
- * @method \Cake\Collection\ICollection append(array|\Traversable $items) Appends more rows to the result of the query.
- * @method \Cake\Collection\ICollection combine($k, $v, $g = null) Returns the values of the column $v index by column $k,
+ * @method uim.cake.Collection\ICollection append(array|\Traversable $items) Appends more rows to the result of the query.
+ * @method uim.cake.Collection\ICollection combine($k, $v, $g = null) Returns the values of the column $v index by column $k,
  *   and grouped by $g.
- * @method \Cake\Collection\ICollection nest($k, $p, $n = "children") Creates a tree structure by nesting the values of column $p into that
+ * @method uim.cake.Collection\ICollection nest($k, $p, $n = "children") Creates a tree structure by nesting the values of column $p into that
  *   with the same value for $k using $n as the nesting key.
  * @method array toArray() Returns a key-value array with the results of this query.
  * @method array toList() Returns a numerically indexed array with the results of this query.
- * @method \Cake\Collection\ICollection stopWhen(callable $c) Returns each row until the callable returns true.
- * @method \Cake\Collection\ICollection zip(array|\Traversable $c) Returns the first result of both the query and $c in an array,
+ * @method uim.cake.Collection\ICollection stopWhen(callable $c) Returns each row until the callable returns true.
+ * @method uim.cake.Collection\ICollection zip(array|\Traversable $c) Returns the first result of both the query and $c in an array,
  *   then the second results and so on.
- * @method \Cake\Collection\ICollection zipWith($collections, callable $callable) Returns each of the results out of calling $c
+ * @method uim.cake.Collection\ICollection zipWith($collections, callable $callable) Returns each of the results out of calling $c
  *   with the first rows of the query and each of the items, then the second rows and so on.
- * @method \Cake\Collection\ICollection chunk(int $size) Groups the results in arrays of $size rows each.
+ * @method uim.cake.Collection\ICollection chunk(int $size) Groups the results in arrays of $size rows each.
  * @method bool isEmpty() Returns true if this query found no results.
  */
 class Query : DatabaseQuery : JsonSerializable, IQuery
@@ -76,21 +76,21 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var int
      */
-    public const APPEND = 0;
+    const APPEND = 0;
 
     /**
      * Indicates that the operation should prepend to the list
      *
      * @var int
      */
-    public const PREPEND = 1;
+    const PREPEND = 1;
 
     /**
      * Indicates that the operation should overwrite the list
      *
      * @var bool
      */
-    public const OVERWRITE = true;
+    const OVERWRITE = true;
 
     /**
      * Whether the user select any fields before being executed, this is used
@@ -160,7 +160,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param uim.cake.Database\Connection $connection The connection object
      * @param uim.cake.ORM\Table $table The table this query is starting on
      */
-    public this(Connection $connection, Table $table) {
+    this(Connection $connection, Table $table) {
         super(($connection);
         this.repository($table);
 
@@ -204,7 +204,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * all the fields in the schema of the table or the association will be added to
      * the select clause.
      *
-     * @param uim.cake.Database\IExpression|\Cake\ORM\Table|\Cake\ORM\Association|callable|array|string $fields Fields
+     * @param uim.cake.Database\IExpression|uim.cake.ORM\Table|uim.cake.ORM\Association|callable|array|string $fields Fields
      * to be added to the list.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
@@ -232,7 +232,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * been added to the query by the first. If you need to change the list after the first call,
      * pass overwrite boolean true which will reset the select clause removing all previous additions.
      *
-     * @param uim.cake.ORM\Table|\Cake\ORM\Association $table The table to use to get an array of columns
+     * @param uim.cake.ORM\Table|uim.cake.ORM\Association $table The table to use to get an array of columns
      * @param array<string> $excludedFields The un-aliased column names you do not want selected from $table
      * @param bool $overwrite Whether to reset/remove previous selected fields
      * @return this
@@ -470,7 +470,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @param uim.cake.ORM\Table $table The table instance to pluck associations from.
      * @param uim.cake.Database\TypeMap $typeMap The typemap to check for columns in.
-     *   This typemap is indirectly mutated via {@link \Cake\ORM\Query::addDefaultTypes()}
+     *   This typemap is indirectly mutated via {@link uim.cake.ORM\Query::addDefaultTypes()}
      * @param array<string, array> $associations The nested tree of associations to walk.
      * @return void
      */
@@ -1284,7 +1284,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param uim.cake.ORM\Table $table The table this query is starting on
      * @return static
      */
-    public static function subquery(Table $table) {
+    static function subquery(Table $table) {
         $query = new static($table.getConnection(), $table);
         $query.aliasingEnabled = false;
 

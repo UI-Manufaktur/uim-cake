@@ -128,7 +128,7 @@ class BelongsTo : Association
      * clause for getting the results on the target table.
      *
      * @param array<string, mixed> $options list of options passed to attachTo method
-     * @return array<\Cake\Database\Expression\IdentifierExpression>
+     * @return array<uim.cake.Database\Expression\IdentifierExpression>
      * @throws \RuntimeException if the number of columns in the foreignKey do not
      * match the number of columns in the target table primaryKey
      */

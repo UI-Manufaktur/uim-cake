@@ -93,7 +93,7 @@ class SelectLoader
      *
      * @param array<string, mixed> $options Properties to be copied to this class
      */
-    public this(array $options) {
+    this(array $options) {
         this.alias = $options["alias"];
         this.sourceAlias = $options["sourceAlias"];
         this.targetAlias = $options["targetAlias"];

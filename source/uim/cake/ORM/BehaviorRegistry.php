@@ -15,7 +15,7 @@ use LogicException;
  *
  * This class also provides method for checking and dispatching behavior methods.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\ORM\Behavior>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.ORM\Behavior>
  */
 class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
 {
@@ -47,7 +47,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param uim.cake.ORM\Table|null $table The table this registry is attached to.
      */
-    public this(?Table $table = null) {
+    this(?Table $table = null) {
         if ($table != null) {
             this.setTable($table);
         }
@@ -72,7 +72,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      * @return string|null Either the correct classname or null.
      * @psalm-return class-string|null
      */
-    public static function className(string $class): ?string
+    static function className(string $class): ?string
     {
         return App::className($class, "Model/Behavior", "Behavior")
             ?: App::className($class, "ORM/Behavior", "Behavior");
@@ -190,7 +190,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Check if any loaded behavior : a method.
      *
-     * Will return true if any behavior provides a public non-finder method
+     * Will return true if any behavior provides a non-finder method
      * with the chosen name.
      *
      * @param string $method The method to check for.
@@ -206,7 +206,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Check if any loaded behavior : the named finder.
      *
-     * Will return true if any behavior provides a public method with
+     * Will return true if any behavior provides a method with
      * the chosen name.
      *
      * @param string $method The method to check for.

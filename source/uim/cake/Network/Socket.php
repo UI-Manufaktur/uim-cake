@@ -60,7 +60,7 @@ class Socket
     protected $lastError = [];
 
     /**
-     * True if the socket stream is encrypted after a {@link \Cake\Network\Socket::enableCrypto()} call
+     * True if the socket stream is encrypted after a {@link uim.cake.Network\Socket::enableCrypto()} call
      *
      * @var bool
      */
@@ -98,7 +98,7 @@ class Socket
      * @param array<string, mixed> $config Socket configuration, which will be merged with the base configuration
      * @see uim.cake.Network\Socket::$_defaultConfig
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         this.setConfig($config);
     }
 

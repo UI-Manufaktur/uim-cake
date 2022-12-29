@@ -27,8 +27,8 @@ specify a driver to use:
 import uim.cake.datasources.ConnectionManager;
 
 ConnectionManager::setConfig("default", [
-	"className": \Cake\Database\Connection::class,
-	"driver": \Cake\Database\Driver\Mysql::class,
+	"className": uim.cake.Database\Connection::class,
+	"driver": uim.cake.Database\Driver\Mysql::class,
 	"database": "test",
 	"username": "root",
 	"password": "secret",
@@ -168,7 +168,7 @@ Cache configs are optional, so you must require ``cachephp/cache`` to add one.
 
 ## Creating Custom Table and Entity Classes
 
-By default, the Cake ORM uses the `\Cake\ORM\Table` and `\Cake\ORM\Entity` classes to
+By default, the Cake ORM uses the `uim.cake.ORM\Table` and `uim.cake.ORM\Entity` classes to
 interact with the database. While using the default classes makes sense for
 quick scripts and small applications, you will often want to use your own
 classes for adding your custom logic.

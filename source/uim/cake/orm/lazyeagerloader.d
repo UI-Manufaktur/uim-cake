@@ -20,11 +20,11 @@ class LazyEagerLoader
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
      *
-     * @param uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity> $entities a single entity or list of entities
+     * @param uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.ORM\Query::contain()
      * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
-     * @return uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity>
+     * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>
      */
     function loadInto($entities, array $contain, Table $source) {
         $returnSingle = false;
@@ -116,7 +116,7 @@ class LazyEagerLoader
      * Injects the results of the eager loader query into the original list of
      * entities.
      *
-     * @param \Traversable|array<\Cake\Datasource\IEntity> $objects The original list of entities
+     * @param \Traversable|array<uim.cake.Datasource\IEntity> $objects The original list of entities
      * @param uim.cake.ORM\Query myResults The loaded results
      * @param $associations The top level associations that were loaded
      * @param uim.cake.ORM\Table $source The table where the entities came from

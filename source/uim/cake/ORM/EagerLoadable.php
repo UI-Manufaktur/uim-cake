@@ -21,7 +21,7 @@ class EagerLoadable
     /**
      * A list of other associations to load from this level.
      *
-     * @var array<\Cake\ORM\EagerLoadable>
+     * @var array<uim.cake.ORM\EagerLoadable>
      */
     protected $_associations = [];
 
@@ -113,7 +113,7 @@ class EagerLoadable
      * @param string $name The Association name.
      * @param array<string, mixed> $config The list of properties to set.
      */
-    public this(string $name, array $config = []) {
+    this(string $name, array $config = []) {
         _name = $name;
         $allowed = [
             "associations", "instance", "config", "canBeJoined",
@@ -141,7 +141,7 @@ class EagerLoadable
     /**
      * Returns the Association class instance to use for loading the records.
      *
-     * @return array<\Cake\ORM\EagerLoadable>
+     * @return array<uim.cake.ORM\EagerLoadable>
      */
     function associations(): array
     {

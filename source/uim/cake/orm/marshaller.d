@@ -277,7 +277,7 @@ class Marshaller
      * @param uim.cake.ORM\Association $assoc The association to marshall
      * @param mixed myValue The data to hydrate. If not an array, this method will return null.
      * @param array<string, mixed> myOptions List of options.
-     * @return uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
+     * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>|null
      */
     protected auto _marshalAssociation(Association $assoc, myValue, array myOptions) {
         if (!is_array(myValue)) {
@@ -326,7 +326,7 @@ class Marshaller
      *
      * @param array myData The data to hydrate.
      * @param array<string, mixed> myOptions List of options
-     * @return array<\Cake\Datasource\IEntity> An array of hydrated records.
+     * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      * @see uim.cake.ORM\Table::newEntities()
      * @see uim.cake.ORM\Entity::$_accessible
      */
@@ -351,7 +351,7 @@ class Marshaller
      * @param uim.cake.ORM\Association\BelongsToMany $assoc The association to marshal.
      * @param array myData The data to convert into entities.
      * @param array<string, mixed> myOptions List of options.
-     * @return array<\Cake\Datasource\IEntity> An array of built entities.
+     * @return array<uim.cake.Datasource\IEntity> An array of built entities.
      * @throws \BadMethodCallException
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
@@ -444,7 +444,7 @@ class Marshaller
      *
      * @param uim.cake.ORM\Association $assoc The association class for the belongsToMany association.
      * @param array $ids The list of ids to load.
-     * @return array<\Cake\Datasource\IEntity> An array of entities.
+     * @return array<uim.cake.Datasource\IEntity> An array of entities.
      */
     protected array _loadAssociatedByIds(Association $assoc, array $ids) {
         if (empty($ids)) {
@@ -621,11 +621,11 @@ class Marshaller
      *   the accessible fields list in the entity will be used.
      * - accessibleFields: A list of fields to allow or deny in entity accessible fields.
      *
-     * @param iterable<\Cake\Datasource\IEntity> $entities the entities that will get the
+     * @param iterable<uim.cake.Datasource\IEntity> $entities the entities that will get the
      *   data merged in
      * @param array myData list of arrays to be merged into the entities
      * @param array<string, mixed> myOptions List of options.
-     * @return array<\Cake\Datasource\IEntity>
+     * @return array<uim.cake.Datasource\IEntity>
      * @see uim.cake.ORM\Entity::$_accessible
      * @psalm-suppress NullArrayOffset
      */
@@ -702,11 +702,11 @@ class Marshaller
     /**
      * Creates a new sub-marshaller and merges the associated data.
      *
-     * @param uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity> $original The original entity
+     * @param uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity> $original The original entity
      * @param uim.cake.ORM\Association $assoc The association to merge
      * @param mixed myValue The array of data to hydrate. If not an array, this method will return null.
      * @param array<string, mixed> myOptions List of options.
-     * @return uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
+     * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>|null
      */
     protected auto _mergeAssociation($original, Association $assoc, myValue, array myOptions) {
         if (!$original) {
@@ -748,11 +748,11 @@ class Marshaller
      * Creates a new sub-marshaller and merges the associated data for a BelongstoMany
      * association.
      *
-     * @param array<\Cake\Datasource\IEntity> $original The original entities list.
+     * @param array<uim.cake.Datasource\IEntity> $original The original entities list.
      * @param uim.cake.ORM\Association\BelongsToMany $assoc The association to marshall
      * @param array myValue The data to hydrate
      * @param array<string, mixed> myOptions List of options.
-     * @return array<\Cake\Datasource\IEntity>
+     * @return array<uim.cake.Datasource\IEntity>
      */
     protected array _mergeBelongsToMany(array $original, BelongsToMany $assoc, array myValue, array myOptions) {
         $associated = myOptions["associated"] ?? [];
@@ -777,11 +777,11 @@ class Marshaller
     /**
      * Merge the special _joinData property into the entity set.
      *
-     * @param array<\Cake\Datasource\IEntity> $original The original entities list.
+     * @param array<uim.cake.Datasource\IEntity> $original The original entities list.
      * @param uim.cake.ORM\Association\BelongsToMany $assoc The association to marshall
      * @param array myValue The data to hydrate
      * @param array<string, mixed> myOptions List of options.
-     * @return array<\Cake\Datasource\IEntity> An array of entities
+     * @return array<uim.cake.Datasource\IEntity> An array of entities
      */
     protected array _mergeJoinData(array $original, BelongsToMany $assoc, array myValue, array myOptions) {
         $associated = myOptions["associated"] ?? [];

@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.ORM;
 
 import uim.cake.Collection\Collection;
@@ -28,11 +21,11 @@ class LazyEagerLoader
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
      *
-     * @param uim.cake.Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface> $entities a single entity or list of entities
+     * @param uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.ORM\Query::contain()
      * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
-     * @return uim.cake.Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface>
+     * @return uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface>
      */
     function loadInto($entities, array $contain, Table $source) {
         $returnSingle = false;
@@ -126,11 +119,11 @@ class LazyEagerLoader
      * Injects the results of the eager loader query into the original list of
      * entities.
      *
-     * @param iterable<\Cake\Datasource\EntityInterface> $objects The original list of entities
+     * @param iterable<uim.cake.Datasource\EntityInterface> $objects The original list of entities
      * @param uim.cake.ORM\Query $results The loaded results
      * @param array<string> $associations The top level associations that were loaded
      * @param uim.cake.ORM\Table $source The table where the entities came from
-     * @return array<\Cake\Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\EntityInterface>
      */
     protected function _injectResults(iterable $objects, $results, array $associations, Table $source): array
     {

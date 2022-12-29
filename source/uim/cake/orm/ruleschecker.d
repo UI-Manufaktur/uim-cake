@@ -75,7 +75,7 @@ class RulesChecker : BaseRulesChecker
      *
      * @param array<string>|string myField The field or list of fields to check for existence by
      * primary key lookup in the other table.
-     * @param uim.cake.ORM\Table|\Cake\ORM\Association|string myTable The table name where the fields existence will be checked.
+     * @param uim.cake.ORM\Table|uim.cake.ORM\Association|string myTable The table name where the fields existence will be checked.
      * @param array<string, mixed>|string|null myMessage The error message to show in case the rule does not pass. Can
      *   also be an array of options. When an array, the "message" key can be used to provide a message.
      * @return uim.cake.Datasource\RuleInvoker
@@ -206,7 +206,7 @@ class RulesChecker : BaseRulesChecker
             }
         } else {
             throw new \InvalidArgumentException(sprintf(
-                "Argument 1 is expected to be of type `\Cake\ORM\Association|string`, `%s` given.",
+                "Argument 1 is expected to be of type `uim.cake.ORM\Association|string`, `%s` given.",
                 getTypeName($association)
             ));
         }

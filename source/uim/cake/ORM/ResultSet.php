@@ -142,7 +142,7 @@ class ResultSet : IResultSet
      * @param uim.cake.ORM\Query $query Query from where results come
      * @param uim.cake.Database\StatementInterface $statement The statement to fetch from
      */
-    public this(Query $query, StatementInterface $statement) {
+    this(Query $query, StatementInterface $statement) {
         $repository = $query.getRepository();
         _statement = $statement;
         _driver = $query.getConnection().getDriver();

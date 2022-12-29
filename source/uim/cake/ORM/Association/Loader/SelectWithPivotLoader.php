@@ -47,7 +47,7 @@ class SelectWithPivotLoader : SelectLoader
     protected $junctionConditions;
 
 
-    public this(array $options) {
+    this(array $options) {
         super(($options);
         this.junctionAssociationName = $options["junctionAssociationName"];
         this.junctionProperty = $options["junctionProperty"];

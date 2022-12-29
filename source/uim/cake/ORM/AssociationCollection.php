@@ -23,7 +23,7 @@ class AssociationCollection : IteratorAggregate
     /**
      * Stored associations
      *
-     * @var array<\Cake\ORM\Association>
+     * @var array<uim.cake.ORM\Association>
      */
     protected $_items = [];
 
@@ -35,7 +35,7 @@ class AssociationCollection : IteratorAggregate
      *
      * @param uim.cake.ORM\Locator\ILocator|null $tableLocator Table locator instance.
      */
-    public this(?ILocator $tableLocator = null) {
+    this(?ILocator $tableLocator = null) {
         if ($tableLocator != null) {
             _tableLocator = $tableLocator;
         }
@@ -66,7 +66,7 @@ class AssociationCollection : IteratorAggregate
      * @param array<string, mixed> $options List of options to configure the association definition.
      * @return uim.cake.ORM\Association
      * @throws \InvalidArgumentException
-     * @psalm-param class-string<\Cake\ORM\Association> $className
+     * @psalm-param class-string<uim.cake.ORM\Association> $className
      */
     function load(string $className, string $associated, array $options = []): Association
     {
@@ -133,7 +133,7 @@ class AssociationCollection : IteratorAggregate
      *
      * @param array<string>|string $class The type of associations you want.
      *   For example "BelongsTo" or array like ["BelongsTo", "HasOne"]
-     * @return array<\Cake\ORM\Association> An array of Association objects.
+     * @return array<uim.cake.ORM\Association> An array of Association objects.
      * @since 3.5.3
      */
     function getByType($class): array
@@ -346,7 +346,7 @@ class AssociationCollection : IteratorAggregate
     /**
      * Allow looping through the associations
      *
-     * @return \Traversable<string, \Cake\ORM\Association>
+     * @return \Traversable<string, uim.cake.ORM\Association>
      */
     function getIterator(): Traversable
     {

@@ -111,27 +111,27 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Name of default validation set.
      */
-    public const string DEFAULT_VALIDATOR = "default";
+    const string DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
      */
-    public const string VALIDATOR_PROVIDER_NAME = "table";
+    const string VALIDATOR_PROVIDER_NAME = "table";
 
     /**
      * The name of the event dispatched when a validator has been built.
      */
-    public const string BUILD_VALIDATOR_EVENT = "Model.buildValidator";
+    const string BUILD_VALIDATOR_EVENT = "Model.buildValidator";
 
     /**
      * The rules class name that is used.
      */
-    public const string RULES_CLASS = RulesChecker::class;
+    const string RULES_CLASS = RulesChecker::class;
 
     /**
      * The IsUnique class name that is used.
      */
-    public const string IS_UNIQUE_CLASS = IsUnique::class;
+    const string IS_UNIQUE_CLASS = IsUnique::class;
 
     /**
      * Name of the table as it can be found in the database
@@ -194,7 +194,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * The name of the class that represent a single row for this table
      *
      * @var string
-     * @psalm-var class-string<\Cake\Datasource\IEntity>
+     * @psalm-var class-string<uim.cake.Datasource\IEntity>
      */
     protected _entityClass;
 
@@ -215,7 +215,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * - connection: The connection instance to use
      * - entityClass: The fully moduled class name of the entity class that will
      *   represent rows in this table.
-     * - schema: A \Cake\Database\Schema\TableSchemaInterface object or an array that can be
+     * - schema: A uim.cake.Database\Schema\TableSchemaInterface object or an array that can be
      *   passed to it.
      * - eventManager: An instance of an event manager to use for internal events
      * - behaviors: A BehaviorRegistry. Generally not used outside of tests.
@@ -530,7 +530,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ### Example:
      *
      * ```
-     * protected auto _initializeSchema(\Cake\Database\Schema\TableSchemaInterface $schema) {
+     * protected auto _initializeSchema(uim.cake.Database\Schema\TableSchemaInterface $schema) {
      *  $schema.setColumnType("preferences", "json");
      *  return $schema;
      * }
@@ -616,7 +616,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Returns the class used to hydrate rows for this table.
      *
      * @return string
-     * @psalm-return class-string<\Cake\Datasource\IEntity>
+     * @psalm-return class-string<uim.cake.Datasource\IEntity>
      */
     string getEntityClass() {
         if (!_entityClass) {
@@ -634,7 +634,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
                 return _entityClass = $default;
             }
 
-            /** @var class-string<\Cake\Datasource\IEntity>|null myClass */
+            /** @var class-string<uim.cake.Datasource\IEntity>|null myClass */
             myClass = App::className(myName, "Model/Entity");
             if (!myClass) {
                 throw new MissingEntityException([myName]);
@@ -654,7 +654,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @return this
      */
     auto setEntityClass(string myName) {
-        /** @psalm-var class-string<\Cake\Datasource\IEntity>|null */
+        /** @psalm-var class-string<uim.cake.Datasource\IEntity>|null */
         myClass = App::className(myName, "Model/Entity");
         if (myClass is null) {
             throw new MissingEntityException([myName]);
@@ -1494,7 +1494,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * entity will be saved and returned.
      *
      * If your find conditions require custom order, associations or conditions, then the $search
-     * parameter can be a callable that takes the Query as the argument, or a \Cake\ORM\Query object passed
+     * parameter can be a callable that takes the Query as the argument, or a uim.cake.ORM\Query object passed
      * as the $search parameter. Allowing you to customize the find results.
      *
      * ### Options
@@ -2064,9 +2064,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
+     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to save.
      * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false False on failure, entities list on success.
+     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity>|false False on failure, entities list on success.
      * @throws \Exception
      */
     function saveMany(iterable $entities, myOptions = []) {
@@ -2084,9 +2084,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
+     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to save.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
+     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> Entities list.
      * @throws \Exception
      * @throws uim.cake.ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      */
@@ -2096,11 +2096,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     }
 
     /**
-     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
+     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to save.
      * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @throws uim.cake.ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      * @throws \Exception If an entity couldn"t be saved.
-     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
+     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> Entities list.
      */
     protected auto _saveMany(iterable $entities, myOptions = []): iterable
     {
@@ -2115,7 +2115,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         /** @var array<bool> $isNew */
         $isNew = [];
         $cleanup = void ($entities) use (&$isNew) {
-            /** @var array<\Cake\Datasource\IEntity> $entities */
+            /** @var array<uim.cake.Datasource\IEntity> $entities */
             foreach ($entities as myKey: $entity) {
                 if (isset($isNew[myKey]) && $isNew[myKey]) {
                     $entity.unset(this.getPrimaryKey());
@@ -2217,9 +2217,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
+     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false Entities list
+     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity>|false Entities list
      *   on success, false on failure.
      * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
@@ -2240,9 +2240,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
+     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
+     * @return uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> Entities list.
      * @throws uim.cake.ORM\Exception\PersistenceFailedException
      * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
@@ -2258,7 +2258,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     }
 
     /**
-     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
+     * @param uim.cake.Datasource\IResultSet|array<uim.cake.Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used.
      * @return uim.cake.Datasource\IEntity|null
      */
@@ -2661,7 +2661,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @param array myData The data to build an entity with.
      * @param array<string, mixed> myOptions A list of options for the objects hydration.
-     * @return array<\Cake\Datasource\IEntity> An array of hydrated records.
+     * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
     function newEntities(array myData, array myOptions = []): array
     {
@@ -2755,11 +2755,11 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * You can use the `Model.beforeMarshal` event to modify request data
      * before it is converted into entities.
      *
-     * @param \Traversable|array<\Cake\Datasource\IEntity> $entities the entities that will get the
+     * @param \Traversable|array<uim.cake.Datasource\IEntity> $entities the entities that will get the
      * data merged in
      * @param array myData list of arrays to be merged into the entities
      * @param array<string, mixed> myOptions A list of options for the objects hydration.
-     * @return array<\Cake\Datasource\IEntity>
+     * @return array<uim.cake.Datasource\IEntity>
      */
     function patchEntities(iterable $entities, array myData, array myOptions = []): array
     {
@@ -2933,10 +2933,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
      *
-     * @param uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity> $entities a single entity or list of entities
+     * @param uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.ORM\Query::contain()
-     * @return uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity>
+     * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>
      */
     function loadInto($entities, array $contain) {
         return (new LazyEagerLoader()).loadInto($entities, $contain, this);

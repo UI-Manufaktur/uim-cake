@@ -57,14 +57,14 @@ class HasMany : Association
      *
      * @var string
      */
-    public const SAVE_APPEND = "append";
+    const SAVE_APPEND = "append";
 
     /**
      * Saving strategy that will replace the links with the provided set
      *
      * @var string
      */
-    public const SAVE_REPLACE = "replace";
+    const SAVE_REPLACE = "replace";
 
     /**
      * Saving strategy to be used by this association

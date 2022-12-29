@@ -680,7 +680,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.Datasource\IEntity $sourceEntity the entity from source table in this
      * association
-     * @param array<\Cake\Datasource\IEntity> myTargetEntities list of entities to link to link to the source entity using the
+     * @param array<uim.cake.Datasource\IEntity> myTargetEntities list of entities to link to link to the source entity using the
      * junction table
      * @param array<string, mixed> myOptions list of options accepted by `Table::save()`
      * @return bool success
@@ -753,7 +753,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.Datasource\IEntity $sourceEntity the row belonging to the `source` side
      *   of this association
-     * @param array<\Cake\Datasource\IEntity> myTargetEntities list of entities belonging to the `target` side
+     * @param array<uim.cake.Datasource\IEntity> myTargetEntities list of entities belonging to the `target` side
      *   of this association
      * @param array<string, mixed> myOptions list of options to be passed to the internal `save` call
      * @throws \InvalidArgumentException when any of the values in myTargetEntities is
@@ -802,7 +802,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.Datasource\IEntity $sourceEntity An entity persisted in the source table for
      *   this association.
-     * @param array<\Cake\Datasource\IEntity> myTargetEntities List of entities persisted in the target table for
+     * @param array<uim.cake.Datasource\IEntity> myTargetEntities List of entities persisted in the target table for
      *   this association.
      * @param array<string>|bool myOptions List of options to be passed to the internal `delete` call,
      *   or a `boolean` as `cleanProperty` key shortcut.
@@ -831,13 +831,13 @@ class BelongsToMany : Association
             }
         );
 
-        /** @var array<\Cake\Datasource\IEntity> $existing */
+        /** @var array<uim.cake.Datasource\IEntity> $existing */
         $existing = $sourceEntity.get($property) ?: [];
         if (!myOptions["cleanProperty"] || empty($existing)) {
             return true;
         }
 
-        /** @var \SplObjectStorage<\Cake\Datasource\IEntity, null> $storage */
+        /** @var \SplObjectStorage<uim.cake.Datasource\IEntity, null> $storage */
         $storage = new SplObjectStorage();
         foreach (myTargetEntities as $e) {
             $storage.attach($e);
@@ -1134,7 +1134,7 @@ class BelongsToMany : Association
      * `myTargetEntities` that were not deleted from calculating the difference.
      *
      * @param uim.cake.ORM\Query $existing a query for getting existing links
-     * @param array<\Cake\Datasource\IEntity> $jointEntities link entities that should be persisted
+     * @param array<uim.cake.Datasource\IEntity> $jointEntities link entities that should be persisted
      * @param array myTargetEntities entities in target table that are related to
      * the `$jointEntities`
      * @param array<string, mixed> myOptions list of options accepted by `Table::delete()`
@@ -1205,7 +1205,7 @@ class BelongsToMany : Association
      *
      * @param uim.cake.Datasource\IEntity $sourceEntity the row belonging to the `source` side
      *   of this association
-     * @param array<\Cake\Datasource\IEntity> myTargetEntities list of entities belonging to the `target` side
+     * @param array<uim.cake.Datasource\IEntity> myTargetEntities list of entities belonging to the `target` side
      *   of this association
      * @return bool
      * @throws \InvalidArgumentException
@@ -1236,7 +1236,7 @@ class BelongsToMany : Association
      *   association.
      * @throws \InvalidArgumentException if any of the entities is lacking a primary
      *   key value
-     * @return array<\Cake\Datasource\IEntity>
+     * @return array<uim.cake.Datasource\IEntity>
      */
     protected auto _collectJointEntities(IEntity $sourceEntity, array myTargetEntities): array
     {

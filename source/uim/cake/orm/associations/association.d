@@ -7,7 +7,7 @@ import uim.cake;
  * An Association is a relationship established between two tables and is used
  * to configure and customize the way interconnected records are retrieved.
  *
- * @mixin \Cake\ORM\Table
+ * @mixin uim.cake.ORM\Table
  */
 abstract class Association {
     use ConventionsTrait;

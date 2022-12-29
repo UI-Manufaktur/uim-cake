@@ -138,35 +138,35 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @var string
      */
-    public const DEFAULT_VALIDATOR = "default";
+    const DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
      *
      * @var string
      */
-    public const VALIDATOR_PROVIDER_NAME = "table";
+    const VALIDATOR_PROVIDER_NAME = "table";
 
     /**
      * The name of the event dispatched when a validator has been built.
      *
      * @var string
      */
-    public const BUILD_VALIDATOR_EVENT = "Model.buildValidator";
+    const BUILD_VALIDATOR_EVENT = "Model.buildValidator";
 
     /**
      * The rules class name that is used.
      *
      * @var string
      */
-    public const RULES_CLASS = RulesChecker::class;
+    const RULES_CLASS = RulesChecker::class;
 
     /**
      * The IsUnique class name that is used.
      *
      * @var string
      */
-    public const IS_UNIQUE_CLASS = IsUnique::class;
+    const IS_UNIQUE_CLASS = IsUnique::class;
 
     /**
      * Name of the table as it can be found in the database
@@ -229,7 +229,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * The name of the class that represent a single row for this table
      *
      * @var string
-     * @psalm-var class-string<\Cake\Datasource\EntityInterface>
+     * @psalm-var class-string<uim.cake.Datasource\EntityInterface>
      */
     protected $_entityClass;
 
@@ -250,7 +250,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * - connection: The connection instance to use
      * - entityClass: The fully namespaced class name of the entity class that will
      *   represent rows in this table.
-     * - schema: A \Cake\Database\Schema\TableSchemaInterface object or an array that can be
+     * - schema: A uim.cake.Database\Schema\TableSchemaInterface object or an array that can be
      *   passed to it.
      * - eventManager: An instance of an event manager to use for internal events
      * - behaviors: A BehaviorRegistry. Generally not used outside of tests.
@@ -261,7 +261,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param array<string, mixed> $config List of options for this table
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         if (!empty($config["registryAlias"])) {
             this.setRegistryAlias($config["registryAlias"]);
         }
@@ -318,7 +318,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return string
      * @see uim.cake.ORM\Locator\TableLocator::get()
      */
-    public static function defaultConnectionName(): string
+    static function defaultConnectionName(): string
     {
         return "default";
     }
@@ -586,7 +586,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ### Example:
      *
      * ```
-     * protected function _initializeSchema(\Cake\Database\Schema\TableSchemaInterface $schema) {
+     * protected function _initializeSchema(uim.cake.Database\Schema\TableSchemaInterface $schema) {
      *  $schema.setColumnType("preferences", "json");
      *  return $schema;
      * }
@@ -681,7 +681,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Returns the class used to hydrate rows for this table.
      *
      * @return string
-     * @psalm-return class-string<\Cake\Datasource\EntityInterface>
+     * @psalm-return class-string<uim.cake.Datasource\EntityInterface>
      */
     function getEntityClass(): string
     {
@@ -700,7 +700,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
                 return _entityClass = $default;
             }
 
-            /** @var class-string<\Cake\Datasource\EntityInterface>|null $class */
+            /** @var class-string<uim.cake.Datasource\EntityInterface>|null $class */
             $class = App::className($name, "Model/Entity");
             if (!$class) {
                 throw new MissingEntityException([$name]);
@@ -720,7 +720,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return this
      */
     function setEntityClass(string $name) {
-        /** @psalm-var class-string<\Cake\Datasource\EntityInterface>|null */
+        /** @psalm-var class-string<uim.cake.Datasource\EntityInterface>|null */
         $class = App::className($name, "Model/Entity");
         if ($class == null) {
             throw new MissingEntityException([$name]);
@@ -1568,7 +1568,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * entity will be saved and returned.
      *
      * If your find conditions require custom order, associations or conditions, then the $search
-     * parameter can be a callable that takes the Query as the argument, or a \Cake\ORM\Query object passed
+     * parameter can be a callable that takes the Query as the argument, or a uim.cake.ORM\Query object passed
      * as the $search parameter. Allowing you to customize the find results.
      *
      * ### Options
@@ -2143,9 +2143,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param iterable<\Cake\Datasource\EntityInterface> $entities Entities to save.
+     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to save.
      * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @return iterable<\Cake\Datasource\EntityInterface>|false False on failure, entities list on success.
+     * @return iterable<uim.cake.Datasource\EntityInterface>|false False on failure, entities list on success.
      * @throws \Exception
      */
     function saveMany(iterable $entities, $options = []) {
@@ -2163,9 +2163,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param iterable<\Cake\Datasource\EntityInterface> $entities Entities to save.
+     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to save.
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @return iterable<\Cake\Datasource\EntityInterface> Entities list.
+     * @return iterable<uim.cake.Datasource\EntityInterface> Entities list.
      * @throws \Exception
      * @throws uim.cake.ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      */
@@ -2175,11 +2175,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * @param iterable<\Cake\Datasource\EntityInterface> $entities Entities to save.
+     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to save.
      * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @throws uim.cake.ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      * @throws \Exception If an entity couldn"t be saved.
-     * @return iterable<\Cake\Datasource\EntityInterface> Entities list.
+     * @return iterable<uim.cake.Datasource\EntityInterface> Entities list.
      */
     protected function _saveMany(iterable $entities, $options = []): iterable
     {
@@ -2200,7 +2200,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         /** @var array<bool> $isNew */
         $isNew = [];
         $cleanupOnFailure = function ($entities) use (&$isNew): void {
-            /** @var array<\Cake\Datasource\EntityInterface> $entities */
+            /** @var array<uim.cake.Datasource\EntityInterface> $entities */
             foreach ($entities as $key: $entity) {
                 if (isset($isNew[$key]) && $isNew[$key]) {
                     $entity.unset(this.getPrimaryKey());
@@ -2323,9 +2323,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param iterable<\Cake\Datasource\EntityInterface> $entities Entities to delete.
+     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to delete.
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @return iterable<\Cake\Datasource\EntityInterface>|false Entities list
+     * @return iterable<uim.cake.Datasource\EntityInterface>|false Entities list
      *   on success, false on failure.
      * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
@@ -2346,9 +2346,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param iterable<\Cake\Datasource\EntityInterface> $entities Entities to delete.
+     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to delete.
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @return iterable<\Cake\Datasource\EntityInterface> Entities list.
+     * @return iterable<uim.cake.Datasource\EntityInterface> Entities list.
      * @throws uim.cake.ORM\Exception\PersistenceFailedException
      * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
@@ -2364,7 +2364,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * @param iterable<\Cake\Datasource\EntityInterface> $entities Entities to delete.
+     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to delete.
      * @param \ArrayAccess|array $options Options used.
      * @return uim.cake.Datasource\EntityInterface|null
      */
@@ -2768,7 +2768,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param array $data The data to build an entity with.
      * @param array<string, mixed> $options A list of options for the objects hydration.
-     * @return array<\Cake\Datasource\EntityInterface> An array of hydrated records.
+     * @return array<uim.cake.Datasource\EntityInterface> An array of hydrated records.
      */
     function newEntities(array $data, array $options = []): array
     {
@@ -2862,11 +2862,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * You can use the `Model.beforeMarshal` event to modify request data
      * before it is converted into entities.
      *
-     * @param iterable<\Cake\Datasource\EntityInterface> $entities the entities that will get the
+     * @param iterable<uim.cake.Datasource\EntityInterface> $entities the entities that will get the
      * data merged in
      * @param array $data list of arrays to be merged into the entities
      * @param array<string, mixed> $options A list of options for the objects hydration.
-     * @return array<\Cake\Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\EntityInterface>
      */
     function patchEntities(iterable $entities, array $data, array $options = []): array
     {
@@ -3042,10 +3042,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
      *
-     * @param uim.cake.Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface> $entities a single entity or list of entities
+     * @param uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.ORM\Query::contain()
-     * @return uim.cake.Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface>
+     * @return uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface>
      */
     function loadInto($entities, array $contain) {
         return (new LazyEagerLoader()).loadInto($entities, $contain, this);

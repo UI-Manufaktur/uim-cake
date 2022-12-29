@@ -18,7 +18,7 @@ class EagerLoadable
     /**
      * A list of other associations to load from this level.
      *
-     * @var array<\Cake\ORM\EagerLoadable>
+     * @var array<uim.cake.ORM\EagerLoadable>
      */
     protected _associations = [];
 
@@ -134,7 +134,7 @@ class EagerLoadable
     /**
      * Returns the Association class instance to use for loading the records.
      *
-     * @return array<\Cake\ORM\EagerLoadable>
+     * @return array<uim.cake.ORM\EagerLoadable>
      */
     array associations() {
         return _associations;

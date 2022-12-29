@@ -48,7 +48,7 @@ class TableRegistry
      *
      * @return uim.cake.ORM\Locator\ILocator
      */
-    public static function getTableLocator(): ILocator
+    static function getTableLocator(): ILocator
     {
         /** @var uim.cake.ORM\Locator\ILocator*/
         return FactoryLocator::get("Table");
@@ -60,7 +60,7 @@ class TableRegistry
      * @param uim.cake.ORM\Locator\ILocator $tableLocator Instance of a locator to use.
      * @return void
      */
-    public static function setTableLocator(ILocator $tableLocator): void
+    static function setTableLocator(ILocator $tableLocator): void
     {
         FactoryLocator::add("Table", $tableLocator);
     }
@@ -73,9 +73,9 @@ class TableRegistry
      * @param string $alias The alias name you want to get.
      * @param array<string, mixed> $options The options you want to build the table with.
      * @return uim.cake.ORM\Table
-     * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\LocatorAwareTrait::fetchTable()} instead. Will be removed in 5.0.
+     * @deprecated 3.6.0 Use {@link uim.cake.ORM\Locator\LocatorAwareTrait::fetchTable()} instead. Will be removed in 5.0.
      */
-    public static function get(string $alias, array $options = []): Table
+    static function get(string $alias, array $options = []): Table
     {
         return static::getTableLocator().get($alias, $options);
     }
@@ -85,9 +85,9 @@ class TableRegistry
      *
      * @param string $alias The alias to check for.
      * @return bool
-     * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::exists()} instead. Will be removed in 5.0
+     * @deprecated 3.6.0 Use {@link uim.cake.ORM\Locator\TableLocator::exists()} instead. Will be removed in 5.0
      */
-    public static function exists(string $alias): bool
+    static function exists(string $alias): bool
     {
         return static::getTableLocator().exists($alias);
     }
@@ -98,9 +98,9 @@ class TableRegistry
      * @param string $alias The alias to set.
      * @param uim.cake.ORM\Table $object The table to set.
      * @return uim.cake.ORM\Table
-     * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::set()} instead. Will be removed in 5.0
+     * @deprecated 3.6.0 Use {@link uim.cake.ORM\Locator\TableLocator::set()} instead. Will be removed in 5.0
      */
-    public static function set(string $alias, Table $object): Table
+    static function set(string $alias, Table $object): Table
     {
         return static::getTableLocator().set($alias, $object);
     }
@@ -110,9 +110,9 @@ class TableRegistry
      *
      * @param string $alias The alias to remove.
      * @return void
-     * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::remove()} instead. Will be removed in 5.0
+     * @deprecated 3.6.0 Use {@link uim.cake.ORM\Locator\TableLocator::remove()} instead. Will be removed in 5.0
      */
-    public static function remove(string $alias): void
+    static function remove(string $alias): void
     {
         static::getTableLocator().remove($alias);
     }
@@ -121,9 +121,9 @@ class TableRegistry
      * Clears the registry of configuration and instances.
      *
      * @return void
-     * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::clear()} instead. Will be removed in 5.0
+     * @deprecated 3.6.0 Use {@link uim.cake.ORM\Locator\TableLocator::clear()} instead. Will be removed in 5.0
      */
-    public static function clear(): void
+    static function clear(): void
     {
         static::getTableLocator().clear();
     }
