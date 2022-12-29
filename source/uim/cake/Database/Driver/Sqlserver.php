@@ -10,11 +10,11 @@
 module uim.cake.databases.Driver;
 
 import uim.cake.databases.Driver;
-import uim.cake.databases.Expression\FunctionExpression;
-import uim.cake.databases.Expression\OrderByExpression;
-import uim.cake.databases.Expression\OrderClauseExpression;
-import uim.cake.databases.Expression\TupleComparison;
-import uim.cake.databases.Expression\UnaryExpression;
+import uim.cake.databases.expressions.FunctionExpression;
+import uim.cake.databases.expressions.OrderByExpression;
+import uim.cake.databases.expressions.OrderClauseExpression;
+import uim.cake.databases.expressions.TupleComparison;
+import uim.cake.databases.expressions.UnaryExpression;
 import uim.cake.databases.IExpression;
 import uim.cake.databases.Query;
 import uim.cake.databases.QueryCompiler;

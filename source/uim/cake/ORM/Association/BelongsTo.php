@@ -9,7 +9,7 @@
  */
 module uim.cake.ORM\Association;
 
-import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.ORM\Association;
 import uim.cake.ORM\Association\Loader\SelectLoader;

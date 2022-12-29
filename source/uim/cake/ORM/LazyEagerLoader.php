@@ -11,7 +11,7 @@ module uim.cake.ORM;
 
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;
-import uim.cake.databases.Expression\TupleComparison;
+import uim.cake.databases.expressions.TupleComparison;
 import uim.cake.Datasource\EntityInterface;
 
 /**

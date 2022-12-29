@@ -9,8 +9,8 @@
  */
 module uim.cake.databases.Driver;
 
-import uim.cake.databases.Expression\ComparisonExpression;
-import uim.cake.databases.Expression\IdentifierExpression;
+import uim.cake.databases.expressions.ComparisonExpression;
+import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.databases.IdentifierQuoter;
 import uim.cake.databases.Query;
 use Closure;

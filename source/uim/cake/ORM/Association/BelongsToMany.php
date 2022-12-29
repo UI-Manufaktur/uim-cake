@@ -10,8 +10,8 @@
 module uim.cake.ORM\Association;
 
 import uim.cake.cores.App;
-import uim.cake.databases.Expression\IdentifierExpression;
-import uim.cake.databases.Expression\QueryExpression;
+import uim.cake.databases.expressions.IdentifierExpression;
+import uim.cake.databases.expressions.QueryExpression;
 import uim.cake.databases.IExpression;
 import uim.cake.Datasource\EntityInterface;
 import uim.cake.ORM\Association;
