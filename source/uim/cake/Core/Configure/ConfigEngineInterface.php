@@ -7,7 +7,7 @@
 
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.cores.Configure;
+module uim.cake.core.Configure;
 
 /**
  * An interface for creating objects compatible with Configure::load()

@@ -9,7 +9,7 @@
  */
 module uim.cake.databases.Statement;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 import uim.cake.databases.DriverInterface;
 use PDO;
 use PDOStatement as Statement;

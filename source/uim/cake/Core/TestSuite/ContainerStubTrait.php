@@ -12,10 +12,10 @@
  * @since         4.2.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.cores.TestSuite;
+module uim.cake.core.TestSuite;
 
-import uim.cake.cores.Configure;
-import uim.cake.cores.IContainer;
+import uim.cake.core.Configure;
+import uim.cake.core.IContainer;
 import uim.cake.events.EventInterface;
 use Closure;
 use League\Container\Exception\NotFoundException;

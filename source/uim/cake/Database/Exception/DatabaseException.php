@@ -9,7 +9,7 @@
  */
 module uim.cake.databases.Exception;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 
 /**
  * Exception for the database package.

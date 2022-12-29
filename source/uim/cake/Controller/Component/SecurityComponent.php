@@ -13,7 +13,7 @@ import uim.cake.controllers.Component;
 import uim.cake.controllers.Controller;
 import uim.cake.controllers.exceptions.AuthSecurityException;
 import uim.cake.controllers.exceptions.SecurityException;
-import uim.cake.cores.Configure;
+import uim.cake.core.Configure;
 import uim.cake.events.EventInterface;
 import uim.cake.http.Exception\BadRequestException;
 import uim.cake.http.Response;

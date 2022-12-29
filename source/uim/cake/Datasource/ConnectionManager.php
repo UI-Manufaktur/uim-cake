@@ -9,7 +9,7 @@
  */
 module uim.cake.Datasource;
 
-import uim.cake.cores.StaticConfigTrait;
+import uim.cake.core.StaticConfigTrait;
 import uim.cake.databases.Connection;
 import uim.cake.databases.Driver\Mysql;
 import uim.cake.databases.Driver\Postgres;

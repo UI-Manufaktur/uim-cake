@@ -7,11 +7,11 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.cores.configures.Engine;
+module uim.cake.core.configures.Engine;
 
-import uim.cake.cores.configures.ConfigEngineInterface;
-import uim.cake.cores.configures.FileConfigTrait;
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.configures.ConfigEngineInterface;
+import uim.cake.core.configures.FileConfigTrait;
+import uim.cake.core.exceptions.CakeException;
 
 /**
  * JSON engine allows Configure to load configuration values from

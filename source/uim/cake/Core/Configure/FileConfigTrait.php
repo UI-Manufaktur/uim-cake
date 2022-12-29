@@ -7,10 +7,10 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.cores.Configure;
+module uim.cake.core.Configure;
 
-import uim.cake.cores.exceptions.CakeException;
-import uim.cake.cores.Plugin;
+import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.Plugin;
 
 /**
  * Trait providing utility methods for file based config engines.

@@ -9,7 +9,7 @@
  */
 module uim.cake.databases.Retry;
 
-import uim.cake.cores.Retry\RetryStrategyInterface;
+import uim.cake.core.Retry\RetryStrategyInterface;
 import uim.cake.databases.Connection;
 use Exception;
 

@@ -7,10 +7,10 @@
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.cores.configures.Engine;
+module uim.cake.core.configures.Engine;
 
-import uim.cake.cores.configures.ConfigEngineInterface;
-import uim.cake.cores.configures.FileConfigTrait;
+import uim.cake.core.configures.ConfigEngineInterface;
+import uim.cake.core.configures.FileConfigTrait;
 import uim.cake.utilities.Hash;
 
 /**
