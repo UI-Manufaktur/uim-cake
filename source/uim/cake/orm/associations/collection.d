@@ -14,7 +14,7 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Stored associations
      *
-     * @var array<uim.cake.ORM\Association>
+     * @var array<uim.cake.orm.Association>
      */
     protected _items = [];
 
@@ -24,7 +24,7 @@ class AssociationCollection : IteratorAggregate {
      * Sets the default table locator for associations.
      * If no locator is provided, the global one will be used.
      *
-     * @param uim.cake.ORM\Locator\ILocator|null myTableLocator Table locator instance.
+     * @param uim.cake.orm.Locator\ILocator|null myTableLocator Table locator instance.
      */
     this(?ILocator myTableLocator = null) {
         if (myTableLocator  !is null) {
@@ -39,8 +39,8 @@ class AssociationCollection : IteratorAggregate {
      * This makes using plugins simpler as the Plugin.Class syntax is frequently used.
      *
      * @param string myAlias The association alias
-     * @param uim.cake.ORM\Association $association The association to add.
-     * @return uim.cake.ORM\Association The association object being added.
+     * @param uim.cake.orm.Association $association The association to add.
+     * @return uim.cake.orm.Association The association object being added.
      */
     function add(string myAlias, Association $association): Association
     {
@@ -55,7 +55,7 @@ class AssociationCollection : IteratorAggregate {
      * @param string myClassName The name of association class.
      * @param string associated The alias for the target table.
      * @param array<string, mixed> myOptions List of options to configure the association definition.
-     * @return uim.cake.ORM\Association
+     * @return uim.cake.orm.Association
      * @throws \InvalidArgumentException
      */
     function load(string myClassName, string associated, array myOptions = []): Association
@@ -81,7 +81,7 @@ class AssociationCollection : IteratorAggregate {
      * Fetch an attached association by name.
      *
      * @param string myAlias The association alias to get.
-     * @return uim.cake.ORM\Association|null Either the association or null.
+     * @return uim.cake.orm.Association|null Either the association or null.
      */
     auto get(string myAlias): ?Association
     {
@@ -92,7 +92,7 @@ class AssociationCollection : IteratorAggregate {
      * Fetch an association by property name.
      *
      * @param string prop The property to find an association by.
-     * @return uim.cake.ORM\Association|null Either the association or null.
+     * @return uim.cake.orm.Association|null Either the association or null.
      */
     auto getByProperty(string prop): ?Association
     {
@@ -125,7 +125,7 @@ class AssociationCollection : IteratorAggregate {
      *
      * @param array<string>|string myClass The type of associations you want.
      *   For example "BelongsTo" or array like ["BelongsTo", "HasOne"]
-     * @return array<uim.cake.ORM\Association> An array of Association objects.
+     * @return array<uim.cake.orm.Association> An array of Association objects.
      * @since 3.5.3
      */
     array getByType(myClass) {
@@ -168,7 +168,7 @@ class AssociationCollection : IteratorAggregate {
      * Parent associations include any association where the given table
      * is the owning side.
      *
-     * @param uim.cake.ORM\Table myTable The table entity is for.
+     * @param uim.cake.orm.Table myTable The table entity is for.
      * @param uim.cake.Datasource\IEntity $entity The entity to save associated data for.
      * @param array $associations The list of associations to save parents from.
      *   associations not in this list will not be saved.
@@ -189,7 +189,7 @@ class AssociationCollection : IteratorAggregate {
      * Child associations include any association where the given table
      * is not the owning side.
      *
-     * @param uim.cake.ORM\Table myTable The table entity is for.
+     * @param uim.cake.orm.Table myTable The table entity is for.
      * @param uim.cake.Datasource\IEntity $entity The entity to save associated data for.
      * @param array $associations The list of associations to save children from.
      *   associations not in this list will not be saved.
@@ -207,7 +207,7 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Helper method for saving an association"s data.
      *
-     * @param uim.cake.ORM\Table myTable The table the save is currently operating on
+     * @param uim.cake.orm.Table myTable The table the save is currently operating on
      * @param uim.cake.Datasource\IEntity $entity The entity to save
      * @param array $associations Array of associations to save.
      * @param array<string, mixed> myOptions Original options
@@ -252,7 +252,7 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Helper method for saving an association"s data.
      *
-     * @param uim.cake.ORM\Association $association The association object to save with.
+     * @param uim.cake.orm.Association $association The association object to save with.
      * @param uim.cake.Datasource\IEntity $entity The entity to save
      * @param array<string, mixed> $nested Options for deeper associations
      * @param array<string, mixed> myOptions Original options
@@ -327,7 +327,7 @@ class AssociationCollection : IteratorAggregate {
     /**
      * Allow looping through the associations
      *
-     * @return \Traversable<string, uim.cake.ORM\Association>
+     * @return \Traversable<string, uim.cake.orm.Association>
      */
     Traversable getIterator() {
         return new ArrayIterator(_items);

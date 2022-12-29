@@ -53,14 +53,14 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * Default strategy class name.
      *
      * @var string
-     * @psalm-var class-string<uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface>
+     * @psalm-var class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface>
      */
     protected static $defaultStrategyClass = EavStrategy::class;
 
     /**
      * Translation strategy instance.
      *
-     * @var uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface|null
+     * @var uim.cake.orm.Behavior\Translate\TranslateStrategyInterface|null
      */
     protected $strategy;
 
@@ -87,7 +87,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * - `validator`: The validator that should be used when translation records
      *   are created/modified. Default `null`.
      *
-     * @param uim.cake.ORM\Table $table The table this behavior is attached to.
+     * @param uim.cake.orm.Table $table The table this behavior is attached to.
      * @param array<string, mixed> $config The config for this behavior.
      */
     this(Table $table, array $config = []) {
@@ -117,7 +117,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param string $class Class name.
      * @return void
      * @since 4.0.0
-     * @psalm-param class-string<uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface> $class
+     * @psalm-param class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface> $class
      */
     static function setDefaultStrategyClass(string $class) {
         static::$defaultStrategyClass = $class;
@@ -128,7 +128,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *
      * @return string
      * @since 4.0.0
-     * @psalm-return class-string<uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface>
+     * @psalm-return class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface>
      */
     static function getDefaultStrategyClass(): string
     {
@@ -138,7 +138,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     /**
      * Get strategy class instance.
      *
-     * @return uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface
+     * @return uim.cake.orm.Behavior\Translate\TranslateStrategyInterface
      * @since 4.0.0
      */
     function getStrategy(): TranslateStrategyInterface
@@ -153,7 +153,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     /**
      * Create strategy instance.
      *
-     * @return uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface
+     * @return uim.cake.orm.Behavior\Translate\TranslateStrategyInterface
      * @since 4.0.0
      */
     protected function createStrategy() {
@@ -161,7 +161,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
             _config,
             ["implementedFinders", "implementedMethods", "strategyClass"]
         );
-        /** @var class-string<uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface> $className */
+        /** @var class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface> $className */
         $className = this.getConfig("strategyClass", static::$defaultStrategyClass);
 
         return new $className(_table, $config);
@@ -170,7 +170,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     /**
      * Set strategy class instance.
      *
-     * @param uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface $strategy Strategy class instance.
+     * @param uim.cake.orm.Behavior\Translate\TranslateStrategyInterface $strategy Strategy class instance.
      * @return this
      * @since 4.0.0
      */
@@ -201,7 +201,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * of translations by setting `"translations": false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
-     * @param uim.cake.ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
+     * @param uim.cake.orm.Marshaller $marshaller The marhshaller of the table the behavior is attached to.
      * @param array $map The property map being built.
      * @param array<string, mixed> $options The options array used in the marshalling call.
      * @return array A map of `[property: callable]` of additional properties to marshal.
@@ -227,7 +227,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * in order to unset the current locale, and to make the behavior fall back to using the
      * globally configured locale.
      * @return this
-     * @see uim.cake.ORM\Behavior\TranslateBehavior::getLocale()
+     * @see uim.cake.orm.Behavior\TranslateBehavior::getLocale()
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
      * @link https://book.cakephp.org/4/en/orm/behaviors/translate.html#saving-in-another-language
      */
@@ -245,7 +245,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *
      * @return string
      * @see uim.cake.I18n\I18n::getLocale()
-     * @see uim.cake.ORM\Behavior\TranslateBehavior::setLocale()
+     * @see uim.cake.orm.Behavior\TranslateBehavior::setLocale()
      */
     function getLocale(): string
     {
@@ -262,7 +262,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param string $field Field name to be aliased.
      * @return string
      */
-    function translationField(string $field): string
+    string translationField(string $field): string
     {
         return this.getStrategy().translationField($field);
     }
@@ -285,9 +285,9 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * If the `locales` array is not passed, it will bring all translations found
      * for each record.
      *
-     * @param uim.cake.ORM\Query $query The original query to modify
+     * @param uim.cake.orm.Query $query The original query to modify
      * @param array<string, mixed> $options Options
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      */
     function findTranslations(Query $query, array $options): Query
     {
@@ -325,7 +325,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * the database table the object points at - or as a last resort, the alias
      * of the autotable instance.
      *
-     * @param uim.cake.ORM\Table $table The table class to get a reference name for.
+     * @param uim.cake.orm.Table $table The table class to get a reference name for.
      * @return string
      */
     protected function referenceName(Table $table): string

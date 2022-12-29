@@ -15,7 +15,7 @@ class DependentDeleteHelper
      *
      * This method does nothing if the association is not dependent.
      *
-     * @param uim.cake.ORM\Association $association The association callbacks are being cascaded on.
+     * @param uim.cake.orm.Association $association The association callbacks are being cascaded on.
      * @param uim.cake.Datasource\IEntity $entity The entity that started the cascaded delete.
      * @param array<string, mixed> myOptions The options for the original delete.
      * @return bool Success.

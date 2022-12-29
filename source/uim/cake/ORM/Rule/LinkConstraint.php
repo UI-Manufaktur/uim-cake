@@ -27,7 +27,7 @@ class LinkConstraint
     /**
      * The association that should be checked.
      *
-     * @var uim.cake.ORM\Association|string
+     * @var uim.cake.orm.Association|string
      */
     protected $_association;
 
@@ -41,7 +41,7 @@ class LinkConstraint
     /**
      * Constructor.
      *
-     * @param uim.cake.ORM\Association|string $association The alias of the association that should be checked.
+     * @param uim.cake.orm.Association|string $association The alias of the association that should be checked.
      * @param string $requiredLinkStatus The link status that is required to be present in order for the check to
      *  succeed.
      */
@@ -51,14 +51,14 @@ class LinkConstraint
             !($association instanceof Association)
         ) {
             throw new \InvalidArgumentException(sprintf(
-                "Argument 1 is expected to be of type `uim.cake.ORM\Association|string`, `%s` given.",
+                "Argument 1 is expected to be of type `uim.cake.orm.Association|string`, `%s` given.",
                 getTypeName($association)
             ));
         }
 
         if (!in_array($requiredLinkStatus, [static::STATUS_LINKED, static::STATUS_NOT_LINKED], true)) {
             throw new \InvalidArgumentException(
-                "Argument 2 is expected to match one of the `uim.cake.ORM\Rule\LinkConstraint::STATUS_*` constants."
+                "Argument 2 is expected to match one of the `uim.cake.orm.rules.LinkConstraint::STATUS_*` constants."
             );
         }
 
@@ -80,7 +80,7 @@ class LinkConstraint
         $table = $options["repository"] ?? null;
         if (!($table instanceof Table)) {
             throw new \InvalidArgumentException(
-                "Argument 2 is expected to have a `repository` key that holds an instance of `uim.cake.ORM\Table`."
+                "Argument 2 is expected to have a `repository` key that holds an instance of `uim.cake.orm.Table`."
             );
         }
 
@@ -111,7 +111,7 @@ class LinkConstraint
      * Alias fields.
      *
      * @param array<string> $fields The fields that should be aliased.
-     * @param uim.cake.ORM\Table $source The object to use for aliasing.
+     * @param uim.cake.orm.Table $source The object to use for aliasing.
      * @return array<string> The aliased fields
      */
     protected string[] _aliasFields(array $fields, Table $source): array
@@ -146,7 +146,7 @@ class LinkConstraint
     /**
      * Count links.
      *
-     * @param uim.cake.ORM\Association $association The association for which to count links.
+     * @param uim.cake.orm.Association $association The association for which to count links.
      * @param uim.cake.Datasource\EntityInterface $entity The entity involved in the operation.
      * @return int The number of links.
      */

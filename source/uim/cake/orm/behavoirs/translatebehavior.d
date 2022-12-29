@@ -45,14 +45,14 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * Default strategy class name.
      *
      * @var string
-     * @psalm-var class-string<uim.cake.ORM\Behavior\Translate\ITranslateStrategy>
+     * @psalm-var class-string<uim.cake.orm.Behavior\Translate\ITranslateStrategy>
      */
     protected static $defaultStrategyClass = EavStrategy::class;
 
     /**
      * Translation strategy instance.
      *
-     * @var uim.cake.ORM\Behavior\Translate\ITranslateStrategy|null
+     * @var uim.cake.orm.Behavior\Translate\ITranslateStrategy|null
      */
     protected strategy;
 
@@ -79,7 +79,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * - `validator`: The validator that should be used when translation records
      *   are created/modified. Default `null`.
      *
-     * @param uim.cake.ORM\Table myTable The table this behavior is attached to.
+     * @param uim.cake.orm.Table myTable The table this behavior is attached to.
      * @param array<string, mixed> myConfig The config for this behavior.
      */
     this(Table myTable, array myConfig = []) {
@@ -107,7 +107,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * @param string myClass Class name.
      * @return void
      * @since 4.0.0
-     * @psalm-param class-string<uim.cake.ORM\Behavior\Translate\ITranslateStrategy> myClass
+     * @psalm-param class-string<uim.cake.orm.Behavior\Translate\ITranslateStrategy> myClass
      */
     static auto setDefaultStrategyClass(string myClass) {
         static::$defaultStrategyClass = myClass;
@@ -118,7 +118,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      *
      * @return string
      * @since 4.0.0
-     * @psalm-return class-string<uim.cake.ORM\Behavior\Translate\ITranslateStrategy>
+     * @psalm-return class-string<uim.cake.orm.Behavior\Translate\ITranslateStrategy>
      */
     static string getDefaultStrategyClass() {
         return static::$defaultStrategyClass;
@@ -127,7 +127,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Get strategy class instance.
      *
-     * @return uim.cake.ORM\Behavior\Translate\ITranslateStrategy
+     * @return uim.cake.orm.Behavior\Translate\ITranslateStrategy
      * @since 4.0.0
      */
     auto getStrategy(): ITranslateStrategy
@@ -142,7 +142,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Create strategy instance.
      *
-     * @return uim.cake.ORM\Behavior\Translate\ITranslateStrategy
+     * @return uim.cake.orm.Behavior\Translate\ITranslateStrategy
      * @since 4.0.0
      */
     protected auto createStrategy() {
@@ -150,7 +150,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
             _config,
             ["implementedFinders", "implementedMethods", "strategyClass"]
         );
-        /** @var class-string<uim.cake.ORM\Behavior\Translate\ITranslateStrategy> myClassName */
+        /** @var class-string<uim.cake.orm.Behavior\Translate\ITranslateStrategy> myClassName */
         myClassName = this.getConfig("strategyClass", static::$defaultStrategyClass);
 
         return new myClassName(_table, myConfig);
@@ -159,7 +159,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
     /**
      * Set strategy class instance.
      *
-     * @param uim.cake.ORM\Behavior\Translate\ITranslateStrategy $strategy Strategy class instance.
+     * @param uim.cake.orm.Behavior\Translate\ITranslateStrategy $strategy Strategy class instance.
      * @return this
      * @since 4.0.0
      */
@@ -190,7 +190,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * of translations by setting `"translations":false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
-     * @param uim.cake.ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
+     * @param uim.cake.orm.Marshaller $marshaller The marhshaller of the table the behavior is attached to.
      * @param array $map The property map being built.
      * @param array<string, mixed> myOptions The options array used in the marshalling call.
      * @return array A map of `[property: callable]` of additional properties to marshal.
@@ -216,7 +216,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * in order to unset the current locale, and to make the behavior fall back to using the
      * globally configured locale.
      * @return this
-     * @see uim.cake.ORM\Behavior\TranslateBehavior::locale()
+     * @see uim.cake.orm.Behavior\TranslateBehavior::locale()
      * @link https://book.UIM.org/4/en/orm/behaviors/translate.html#retrieving-one-language-without-using-i18n-locale
      * @link https://book.UIM.org/4/en/orm/behaviors/translate.html#saving-in-another-language
      */
@@ -234,7 +234,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      *
      * @return string
      * @see uim.cake.I18n\I18n::locale()
-     * @see uim.cake.ORM\Behavior\TranslateBehavior::locale()
+     * @see uim.cake.orm.Behavior\TranslateBehavior::locale()
      */
     string locale() {
         return this.getStrategy().locale();
@@ -271,9 +271,9 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * If the `locales` array is not passed, it will bring all translations found
      * for each record.
      *
-     * @param uim.cake.ORM\Query myQuery The original query to modify
+     * @param uim.cake.orm.Query myQuery The original query to modify
      * @param array<string, mixed> myOptions Options
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      */
     function findTranslations(Query myQuery, array myOptions): Query
     {
@@ -311,7 +311,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * the database table the object points at - or as a last resort, the alias
      * of the autotable instance.
      *
-     * @param uim.cake.ORM\Table myTable The table class to get a reference name for.
+     * @param uim.cake.orm.Table myTable The table class to get a reference name for.
      * @return string
      */
     protected string referenceName(Table myTable) {

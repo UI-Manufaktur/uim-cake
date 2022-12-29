@@ -146,7 +146,7 @@ class RouteBuilder
      *
      * @return string
      */
-    function getRouteClass(): string
+    string getRouteClass(): string
     {
         return _routeClass;
     }
@@ -194,7 +194,7 @@ class RouteBuilder
      *
      * @return string
      */
-    function path(): string
+    string path(): string
     {
         $routeKey = strpos(_path, "{");
         if ($routeKey != false && strpos(_path, "}") != false) {
@@ -239,7 +239,7 @@ class RouteBuilder
      * @param string|null $value Either the value to set or null.
      * @return string
      */
-    function namePrefix(?string $value = null): string
+    string namePrefix(?string $value = null): string
     {
         if ($value != null) {
             _namePrefix = $value;
@@ -550,7 +550,7 @@ class RouteBuilder
      *
      * @param string $name The plugin name
      * @return this
-     * @throws uim.cake.Core\Exception\MissingPluginException When the plugin has not been loaded.
+     * @throws uim.cake.Core\exceptions.MissingPluginException When the plugin has not been loaded.
      * @throws \InvalidArgumentException When the plugin does not have a routes file.
      */
     function loadPlugin(string $name) {

@@ -21,9 +21,9 @@ import uim.cake.core.exceptions.CakeException;
  * ```
  *
  * If you need a more general purpose redirect exception use
- * {@link uim.cake.Http\Exception\RedirectException} instead of this class.
+ * {@link uim.cake.Http\exceptions.RedirectException} instead of this class.
  *
- * @deprecated 4.1.0 Use {@link uim.cake.Http\Exception\RedirectException} instead.
+ * @deprecated 4.1.0 Use {@link uim.cake.Http\exceptions.RedirectException} instead.
  */
 class RedirectException : CakeException
 {

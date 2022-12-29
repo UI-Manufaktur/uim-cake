@@ -46,7 +46,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
     /**
      * Constructor
      *
-     * @param uim.cake.ORM\Table $table Table instance.
+     * @param uim.cake.orm.Table $table Table instance.
      * @param array<string, mixed> $config Configuration.
      */
     this(Table $table, array $config = []) {
@@ -100,8 +100,8 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * table. It modifies the passed query by eager loading the translated fields
      * and adding a formatter to copy the values into the main table records.
      *
-     * @param uim.cake.Event\IEvent $event The beforeFind event that was fired.
-     * @param uim.cake.ORM\Query $query Query.
+     * @param uim.cake.events.IEvent $event The beforeFind event that was fired.
+     * @param uim.cake.orm.Query $query Query.
      * @param \ArrayObject $options The options for the query.
      * @return void
      */
@@ -183,7 +183,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * Only add translations for fields that are in the main table, always
      * add the locale field though.
      *
-     * @param uim.cake.ORM\Query $query The query to check.
+     * @param uim.cake.orm.Query $query The query to check.
      * @param array<string, mixed> $config The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
@@ -223,7 +223,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * prefixing fields with the appropriate table alias. This method currently
      * expects to receive an order clause only.
      *
-     * @param uim.cake.ORM\Query $query the query to check.
+     * @param uim.cake.orm.Query $query the query to check.
      * @param string $name The clause name.
      * @param array<string, mixed> $config The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
@@ -269,7 +269,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * prefixing fields with the appropriate table alias. This method currently
      * expects to receive a where clause only.
      *
-     * @param uim.cake.ORM\Query $query the query to check.
+     * @param uim.cake.orm.Query $query the query to check.
      * @param string $name The clause name.
      * @param array<string, mixed> $config The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
@@ -318,7 +318,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * Modifies the entity before it is saved so that translated fields are persisted
      * in the database too.
      *
-     * @param uim.cake.Event\IEvent $event The beforeSave event that was fired.
+     * @param uim.cake.events.IEvent $event The beforeSave event that was fired.
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved.
      * @param \ArrayObject $options the options passed to the save method.
      * @return void
@@ -426,7 +426,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param string $field Field name to be aliased.
      * @return string
      */
-    function translationField(string $field): string
+    string translationField(string $field): string
     {
         if (this.getLocale() == this.getConfig("defaultLocale")) {
             return this.table.aliasField($field);
@@ -471,7 +471,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
                 return $row;
             }
 
-            /** @var uim.cake.ORM\Entity|array $translation */
+            /** @var uim.cake.orm.Entity|array $translation */
             $translation = $row["translation"];
 
             /**

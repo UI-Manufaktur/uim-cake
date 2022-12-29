@@ -17,7 +17,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
     /**
      * Return translation table instance.
      *
-     * @return uim.cake.ORM\Table
+     * @return uim.cake.orm.Table
      */
     function getTranslationTable(): Table;
 
@@ -46,7 +46,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      *
      * @return string
      */
-    function getLocale(): string;
+    string getLocale(): string;
 
     /**
      * Returns a fully aliased field name for translated fields.
@@ -58,7 +58,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param string $field Field name to be aliased.
      * @return string
      */
-    function translationField(string $field): string;
+    string translationField(string $field): string;
 
     /**
      * Modifies the results from a table find in order to merge full translation records
@@ -74,8 +74,8 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * table. It modifies the passed query by eager loading the translated fields
      * and adding a formatter to copy the values into the main table records.
      *
-     * @param uim.cake.Event\IEvent $event The beforeFind event that was fired.
-     * @param uim.cake.ORM\Query $query Query
+     * @param uim.cake.events.IEvent $event The beforeFind event that was fired.
+     * @param uim.cake.orm.Query $query Query
      * @param \ArrayObject $options The options for the query
      * @return void
      */
@@ -85,7 +85,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * Modifies the entity before it is saved so that translated fields are persisted
      * in the database too.
      *
-     * @param uim.cake.Event\IEvent $event The beforeSave event that was fired
+     * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
      * @param \ArrayObject $options the options passed to the save method
      * @return void
@@ -95,7 +95,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
      *
-     * @param uim.cake.Event\IEvent $event The beforeSave event that was fired
+     * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */

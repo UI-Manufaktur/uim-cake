@@ -1,8 +1,8 @@
 
 module uim.cake.Routing;
 
-import uim.cake.Routing\Exception\DuplicateNamedRouteException;
-import uim.cake.Routing\Exception\MissingRouteException;
+import uim.cake.Routing\exceptions.DuplicateNamedRouteException;
+import uim.cake.Routing\exceptions.MissingRouteException;
 import uim.cake.Routing\Route\Route;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;
@@ -103,7 +103,7 @@ class RouteCollection
      * @param string $url URL to parse.
      * @param string $method The HTTP method to use.
      * @return array An array of request parameters parsed from the URL.
-     * @throws uim.cake.Routing\Exception\MissingRouteException When a URL has no matching route.
+     * @throws uim.cake.Routing\exceptions.MissingRouteException When a URL has no matching route.
      */
     function parse(string $url, string $method = ""): array
     {
@@ -151,7 +151,7 @@ class RouteCollection
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to parse route data from.
      * @return array An array of request parameters parsed from the URL.
-     * @throws uim.cake.Routing\Exception\MissingRouteException When a URL has no matching route.
+     * @throws uim.cake.Routing\exceptions.MissingRouteException When a URL has no matching route.
      */
     function parseRequest(IServerRequest $request): array
     {
@@ -274,7 +274,7 @@ class RouteCollection
      * @param array $context The request context to use. Contains _base, _port,
      *    _host, _scheme and params keys.
      * @return string The URL string on match.
-     * @throws uim.cake.Routing\Exception\MissingRouteException When no route could be matched.
+     * @throws uim.cake.Routing\exceptions.MissingRouteException When no route could be matched.
      */
     function match(array $url, array $context): string
     {

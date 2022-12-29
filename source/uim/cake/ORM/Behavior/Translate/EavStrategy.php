@@ -54,7 +54,7 @@ class EavStrategy : TranslateStrategyInterface
     /**
      * Constructor
      *
-     * @param uim.cake.ORM\Table $table The table this strategy is attached to.
+     * @param uim.cake.orm.Table $table The table this strategy is attached to.
      * @param array<string, mixed> $config The config for this strategy.
      */
     this(Table $table, array $config = []) {
@@ -143,8 +143,8 @@ class EavStrategy : TranslateStrategyInterface
      * table. It modifies the passed query by eager loading the translated fields
      * and adding a formatter to copy the values into the main table records.
      *
-     * @param uim.cake.Event\IEvent $event The beforeFind event that was fired.
-     * @param uim.cake.ORM\Query $query Query
+     * @param uim.cake.events.IEvent $event The beforeFind event that was fired.
+     * @param uim.cake.orm.Query $query Query
      * @param \ArrayObject $options The options for the query
      * @return void
      */
@@ -207,7 +207,7 @@ class EavStrategy : TranslateStrategyInterface
      * Modifies the entity before it is saved so that translated fields are persisted
      * in the database too.
      *
-     * @param uim.cake.Event\IEvent $event The beforeSave event that was fired
+     * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
      * @param \ArrayObject $options the options passed to the save method
      * @return void
@@ -313,7 +313,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param string $field Field name to be aliased.
      * @return string
      */
-    function translationField(string $field): string
+    string translationField(string $field): string
     {
         $table = this.table;
         if (this.getLocale() == this.getConfig("defaultLocale")) {

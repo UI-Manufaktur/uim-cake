@@ -3,7 +3,7 @@ module uim.cake.Routing;
 
 import uim.cake.core.Configure;
 import uim.cake.http.ServerRequest;
-import uim.cake.Routing\Exception\MissingRouteException;
+import uim.cake.Routing\exceptions.MissingRouteException;
 import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
 use ReflectionFunction;
@@ -188,7 +188,7 @@ class Router
      *   shifted into the passed arguments, supplying patterns for routing parameters and supplying the name of a
      *   custom routing class.
      * @return void
-     * @throws uim.cake.Core\Exception\CakeException
+     * @throws uim.cake.Core\exceptions.CakeException
      * @see uim.cake.Routing\RouteBuilder::connect()
      * @see uim.cake.Routing\Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
@@ -210,7 +210,7 @@ class Router
      *
      * @param uim.cake.http.ServerRequest $request The request to parse request data from.
      * @return array Parsed elements from URL.
-     * @throws uim.cake.Routing\Exception\MissingRouteException When a route cannot be handled
+     * @throws uim.cake.Routing\exceptions.MissingRouteException When a route cannot be handled
      */
     static function parseRequest(ServerRequest $request): array
     {
@@ -397,7 +397,7 @@ class Router
      * @param bool $full If true, the full base URL will be prepended to the result.
      *   Default is false.
      * @return string Full translated URL with base path.
-     * @throws uim.cake.Core\Exception\CakeException When the route name is not found
+     * @throws uim.cake.Core\exceptions.CakeException When the route name is not found
      */
     static function url($url = null, bool $full = false): string
     {

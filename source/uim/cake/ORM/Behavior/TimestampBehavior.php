@@ -72,7 +72,7 @@ class TimestampBehavior : Behavior
     /**
      * There is only one event handler, it can be configured to be called for any event
      *
-     * @param uim.cake.Event\IEvent $event Event instance.
+     * @param uim.cake.events.IEvent $event Event instance.
      * @param uim.cake.Datasource\EntityInterface $entity Entity instance.
      * @throws \UnexpectedValueException if a field"s when value is misdefined
      * @return true Returns true irrespective of the behavior logic, the save will not be prevented.

@@ -6,7 +6,7 @@ import uim.cake.datasources.ConnectionManager;
 import uim.cake.datasources.Locator\AbstractLocator;
 import uim.cake.datasources.RepositoryInterface;
 import uim.cake.orm.AssociationCollection;
-import uim.cake.orm.Exception\MissingTableClassException;
+import uim.cake.orm.exceptions.MissingTableClassException;
 import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
 use RuntimeException;
@@ -33,7 +33,7 @@ class TableLocator : AbstractLocator : ILocator
     /**
      * Instances that belong to the registry.
      *
-     * @var array<string, uim.cake.ORM\Table>
+     * @var array<string, uim.cake.orm.Table>
      */
     protected $instances = [];
 
@@ -41,7 +41,7 @@ class TableLocator : AbstractLocator : ILocator
      * Contains a list of Table objects that were created out of the
      * built-in Table class. The list is indexed by table alias
      *
-     * @var array<uim.cake.ORM\Table>
+     * @var array<uim.cake.orm.Table>
      */
     protected $_fallbacked = [];
 
@@ -49,7 +49,7 @@ class TableLocator : AbstractLocator : ILocator
      * Fallback class to use
      *
      * @var string
-     * @psalm-var class-string<uim.cake.ORM\Table>
+     * @psalm-var class-string<uim.cake.orm.Table>
      */
     protected $fallbackClassName = Table::class;
 
@@ -98,11 +98,11 @@ class TableLocator : AbstractLocator : ILocator
      *
      * The class that should be used to create a table instance if a concrete
      * class for alias used in `get()` could not be found. Defaults to
-     * `Cake\ORM\Table`.
+     * `Cake\orm.Table`.
      *
      * @param string $className Fallback class name
      * @return this
-     * @psalm-param class-string<uim.cake.ORM\Table> $className
+     * @psalm-param class-string<uim.cake.orm.Table> $className
      */
     function setFallbackClassName($className) {
         this.fallbackClassName = $className;
@@ -148,7 +148,7 @@ class TableLocator : AbstractLocator : ILocator
      * This is important because table associations are resolved at runtime
      * and cyclic references need to be handled correctly.
      *
-     * The options that can be passed are the same as in {@link uim.cake.ORM\Table::__construct()}, but the
+     * The options that can be passed are the same as in {@link uim.cake.orm.Table::__construct()}, but the
      * `className` key is also recognized.
      *
      * ### Options
@@ -156,7 +156,7 @@ class TableLocator : AbstractLocator : ILocator
      * - `className` Define the specific class name to use. If undefined, CakePHP will generate the
      *   class name based on the alias. For example "Users" would result in
      *   `App\Model\Table\UsersTable` being used. If this class does not exist,
-     *   then the default `Cake\ORM\Table` class will be used. By setting the `className`
+     *   then the default `Cake\orm.Table` class will be used. By setting the `className`
      *   option you can define the specific class to use. The className option supports
      *   plugin short class references {@link uim.cake.Core\App::shortName()}.
      * - `table` Define the table name to use. If undefined, this option will default to the underscored
@@ -173,12 +173,12 @@ class TableLocator : AbstractLocator : ILocator
      * @param string $alias The alias name you want to get. Should be in CamelCase format.
      * @param array<string, mixed> $options The options you want to build the table with.
      *   If a table has already been loaded the options will be ignored.
-     * @return uim.cake.ORM\Table
+     * @return uim.cake.orm.Table
      * @throws \RuntimeException When you try to configure an alias that already exists.
      */
     function get(string $alias, array $options = []): Table
     {
-        /** @var uim.cake.ORM\Table */
+        /** @var uim.cake.orm.Table */
         return parent::get($alias, $options);
     }
 
@@ -221,7 +221,7 @@ class TableLocator : AbstractLocator : ILocator
             if (!empty($options["connectionName"])) {
                 $connectionName = $options["connectionName"];
             } else {
-                /** @var uim.cake.ORM\Table $className */
+                /** @var uim.cake.orm.Table $className */
                 $className = $options["className"];
                 $connectionName = $className::defaultConnectionName();
             }
@@ -273,11 +273,11 @@ class TableLocator : AbstractLocator : ILocator
      * Wrapper for creating table instances
      *
      * @param array<string, mixed> $options The alias to check for.
-     * @return uim.cake.ORM\Table
+     * @return uim.cake.orm.Table
      */
     protected function _create(array $options): Table
     {
-        /** @var uim.cake.ORM\Table */
+        /** @var uim.cake.orm.Table */
         return new $options["className"]($options);
     }
 
@@ -285,8 +285,8 @@ class TableLocator : AbstractLocator : ILocator
      * Set a Table instance.
      *
      * @param string $alias The alias to set.
-     * @param uim.cake.ORM\Table $repository The Table to set.
-     * @return uim.cake.ORM\Table
+     * @param uim.cake.orm.Table $repository The Table to set.
+     * @return uim.cake.orm.Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     function set(string $alias, RepositoryInterface $repository): Table
@@ -309,7 +309,7 @@ class TableLocator : AbstractLocator : ILocator
      * debugging common mistakes when setting up associations or created new table
      * classes.
      *
-     * @return array<uim.cake.ORM\Table>
+     * @return array<uim.cake.orm.Table>
      */
     function genericInstances(): array
     {

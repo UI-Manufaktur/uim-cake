@@ -4,7 +4,7 @@ module uim.cake.orm.Behavior;
 import uim.cake.Collection\ICollection;
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.datasources.EntityInterface;
-import uim.cake.datasources.Exception\RecordNotFoundException;
+import uim.cake.datasources.exceptions.RecordNotFoundException;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.Behavior;
 import uim.cake.orm.Query;
@@ -75,7 +75,7 @@ class TreeBehavior : Behavior
      * Transparently manages setting the lft and rght fields if the parent field is
      * included in the parameters to be saved.
      *
-     * @param uim.cake.Event\IEvent $event The beforeSave event that was fired
+     * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity the entity that is going to be saved
      * @return void
      * @throws \RuntimeException if the parent to set for the node is invalid
@@ -143,7 +143,7 @@ class TreeBehavior : Behavior
      *
      * Manages updating level of descendants of currently saved entity.
      *
-     * @param uim.cake.Event\IEvent $event The afterSave event that was fired
+     * @param uim.cake.events.IEvent $event The afterSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity the entity that is going to be saved
      * @return void
      */
@@ -195,7 +195,7 @@ class TreeBehavior : Behavior
     /**
      * Also deletes the nodes in the subtree of the entity to be delete
      *
-     * @param uim.cake.Event\IEvent $event The beforeDelete event that was fired
+     * @param uim.cake.events.IEvent $event The beforeDelete event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */
@@ -358,9 +358,9 @@ class TreeBehavior : Behavior
      * to a specific node in the tree. This custom finder requires that the key "for"
      * is passed in the options containing the id of the node to get its path for.
      *
-     * @param uim.cake.ORM\Query $query The constructed query to modify
+     * @param uim.cake.orm.Query $query The constructed query to modify
      * @param array<string, mixed> $options the list of options for the query
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      * @throws \InvalidArgumentException If the "for" key is missing in options
      */
     function findPath(Query $query, array $options): Query
@@ -422,9 +422,9 @@ class TreeBehavior : Behavior
      *
      * If the direct option is set to true, only the direct children are returned (based upon the parent_id field)
      *
-     * @param uim.cake.ORM\Query $query Query.
+     * @param uim.cake.orm.Query $query Query.
      * @param array<string, mixed> $options Array of options as described above
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      * @throws \InvalidArgumentException When the "for" key is not passed in $options
      */
     function findChildren(Query $query, array $options): Query
@@ -474,9 +474,9 @@ class TreeBehavior : Behavior
      *   return the value out of the provided row.
      * - spacer: A string to be used as prefix for denoting the depth in the tree for each item
      *
-     * @param uim.cake.ORM\Query $query Query.
+     * @param uim.cake.orm.Query $query Query.
      * @param array<string, mixed> $options Array of options as described above.
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      */
     function findTreeList(Query $query, array $options): Query
     {
@@ -504,9 +504,9 @@ class TreeBehavior : Behavior
      *   return the value from the provided row.
      * - spacer: A string to be used as prefix for denoting the depth in the tree for each item.
      *
-     * @param uim.cake.ORM\Query $query The query object to format.
+     * @param uim.cake.orm.Query $query The query object to format.
      * @param array<string, mixed> $options Array of options as described above.
-     * @return uim.cake.ORM\Query Augmented query.
+     * @return uim.cake.orm.Query Augmented query.
      */
     function formatTreeList(Query $query, array $options = []): Query
     {
@@ -591,7 +591,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\EntityInterface $node The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
-     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
      * @return uim.cake.Datasource\EntityInterface|false $node The node after being moved or false if `$number` is < 1
      */
     function moveUp(EntityInterface $node, $number = 1) {
@@ -612,7 +612,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $node The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
      * @return uim.cake.Datasource\EntityInterface $node The node after being moved
-     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
      */
     protected function _moveUp(EntityInterface $node, $number): EntityInterface
     {
@@ -682,7 +682,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\EntityInterface $node The node to move
      * @param int|true $number How many places to move the node or true to move to last position
-     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
      * @return uim.cake.Datasource\EntityInterface|false the entity after being moved or false if `$number` is < 1
      */
     function moveDown(EntityInterface $node, $number = 1) {
@@ -703,7 +703,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $node The node to move
      * @param int|true $number How many places to move the node, or true to move to last position
      * @return uim.cake.Datasource\EntityInterface $node The node after being moved
-     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
      */
     protected function _moveDown(EntityInterface $node, $number): EntityInterface
     {
@@ -770,7 +770,7 @@ class TreeBehavior : Behavior
      *
      * @param mixed $id Record id.
      * @return uim.cake.Datasource\EntityInterface
-     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
      * @psalm-suppress InvalidReturnType
      */
     protected function _getNode($id): EntityInterface
@@ -913,8 +913,8 @@ class TreeBehavior : Behavior
      * Alters the passed query so that it only returns scoped records as defined
      * in the tree configuration.
      *
-     * @param uim.cake.ORM\Query $query the Query to modify
-     * @return uim.cake.ORM\Query
+     * @param uim.cake.orm.Query $query the Query to modify
+     * @return uim.cake.orm.Query
      */
     protected function _scope(Query $query): Query
     {

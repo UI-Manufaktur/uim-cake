@@ -15,7 +15,7 @@ trait TranslateStrategyTrait
     /**
      * Table instance
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected $table;
 
@@ -30,14 +30,14 @@ trait TranslateStrategyTrait
     /**
      * Instance of Table responsible for translating
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected $translationTable;
 
     /**
      * Return translation table instance.
      *
-     * @return uim.cake.ORM\Table
+     * @return uim.cake.orm.Table
      */
     function getTranslationTable(): Table
     {
@@ -73,7 +73,7 @@ trait TranslateStrategyTrait
      *
      * @return string
      * @see uim.cake.I18n\I18n::getLocale()
-     * @see uim.cake.ORM\Behavior\TranslateBehavior::setLocale()
+     * @see uim.cake.orm.Behavior\TranslateBehavior::setLocale()
      */
     function getLocale(): string
     {
@@ -89,7 +89,7 @@ trait TranslateStrategyTrait
      * @return void
      */
     protected function unsetEmptyFields($entity) {
-        /** @var array<uim.cake.ORM\Entity> $translations */
+        /** @var array<uim.cake.orm.Entity> $translations */
         $translations = (array)$entity.get("_translations");
         foreach ($translations as $locale: $translation) {
             $fields = $translation.extract(_config["fields"], false);
@@ -122,7 +122,7 @@ trait TranslateStrategyTrait
      * of translations by setting `"translations": false` in the options
      * provided to `Table::newEntity()` or `Table::patchEntity()`.
      *
-     * @param uim.cake.ORM\Marshaller $marshaller The marhshaller of the table the behavior is attached to.
+     * @param uim.cake.orm.Marshaller $marshaller The marhshaller of the table the behavior is attached to.
      * @param array $map The property map being built.
      * @param array<string, mixed> $options The options array used in the marshalling call.
      * @return array A map of `[property: callable]` of additional properties to marshal.
@@ -172,7 +172,7 @@ trait TranslateStrategyTrait
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
      *
-     * @param uim.cake.Event\IEvent $event The beforeSave event that was fired
+     * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
      * @return void
      */

@@ -12,7 +12,7 @@ interface ITranslateStrategy : IPropertyMarshal
     /**
      * Return translation table instance.
      *
-     * @return uim.cake.ORM\Table
+     * @return uim.cake.orm.Table
      */
     auto getTranslationTable(): Table;
 
@@ -65,8 +65,8 @@ interface ITranslateStrategy : IPropertyMarshal
      * table. It modifies the passed query by eager loading the translated fields
      * and adding a formatter to copy the values into the main table records.
      *
-     * @param uim.cake.Event\IEvent myEvent The beforeFind event that was fired.
-     * @param uim.cake.ORM\Query myQuery Query
+     * @param uim.cake.events.IEvent myEvent The beforeFind event that was fired.
+     * @param uim.cake.orm.Query myQuery Query
      * @param \ArrayObject myOptions The options for the query
      */
     void beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions);
@@ -75,7 +75,7 @@ interface ITranslateStrategy : IPropertyMarshal
      * Modifies the entity before it is saved so that translated fields are persisted
      * in the database too.
      *
-     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.events.IEvent myEvent The beforeSave event that was fired
      * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject myOptions the options passed to the save method
      */
@@ -84,7 +84,7 @@ interface ITranslateStrategy : IPropertyMarshal
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
      *
-     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.events.IEvent myEvent The beforeSave event that was fired
      * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      */
     void afterSave(IEvent myEvent, IEntity $entity);

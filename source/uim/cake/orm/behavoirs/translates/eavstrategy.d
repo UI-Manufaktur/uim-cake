@@ -44,7 +44,7 @@ class EavStrategy : ITranslateStrategy
     /**
      * Constructor
      *
-     * @param uim.cake.ORM\Table myTable The table this strategy is attached to.
+     * @param uim.cake.orm.Table myTable The table this strategy is attached to.
      * @param array<string, mixed> myConfig The config for this strategy.
      */
     this(Table myTable, array myConfig = []) {
@@ -133,8 +133,8 @@ class EavStrategy : ITranslateStrategy
      * table. It modifies the passed query by eager loading the translated fields
      * and adding a formatter to copy the values into the main table records.
      *
-     * @param uim.cake.Event\IEvent myEvent The beforeFind event that was fired.
-     * @param uim.cake.ORM\Query myQuery Query
+     * @param uim.cake.events.IEvent myEvent The beforeFind event that was fired.
+     * @param uim.cake.orm.Query myQuery Query
      * @param \ArrayObject myOptions The options for the query
      * @return void
      */
@@ -197,7 +197,7 @@ class EavStrategy : ITranslateStrategy
      * Modifies the entity before it is saved so that translated fields are persisted
      * in the database too.
      *
-     * @param uim.cake.Event\IEvent myEvent The beforeSave event that was fired
+     * @param uim.cake.events.IEvent myEvent The beforeSave event that was fired
      * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject myOptions the options passed to the save method
      * @return void

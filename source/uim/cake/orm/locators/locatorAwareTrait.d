@@ -15,14 +15,14 @@ trait LocatorAwareTrait
     /**
      * Table locator instance
      *
-     * @var uim.cake.ORM\Locator\ILocator|null
+     * @var uim.cake.orm.Locator\ILocator|null
      */
     protected _tableLocator;
 
     /**
      * Sets the table locator.
      *
-     * @param uim.cake.ORM\Locator\ILocator myTableLocator ILocator instance.
+     * @param uim.cake.orm.Locator\ILocator myTableLocator ILocator instance.
      * @return this
      */
     auto setTableLocator(ILocator myTableLocator) {
@@ -34,7 +34,7 @@ trait LocatorAwareTrait
     /**
      * Gets the table locator.
      *
-     * @return uim.cake.ORM\Locator\ILocator
+     * @return uim.cake.orm.Locator\ILocator
      */
     auto getTableLocator(): ILocator
     {
@@ -43,7 +43,7 @@ trait LocatorAwareTrait
             _tableLocator = FactoryLocator::get("Table");
         }
 
-        /** @var uim.cake.ORM\Locator\ILocator */
+        /** @var uim.cake.orm.Locator\ILocator */
         return _tableLocator;
     }
 
@@ -54,9 +54,9 @@ trait LocatorAwareTrait
      *  If `null` then the value of $defaultTable property is used.
      * @param array<string, mixed> myOptions The options you want to build the table with.
      *   If a table has already been loaded the registry options will be ignored.
-     * @return uim.cake.ORM\Table
-     * @throws uim.cake.Core\Exception\CakeException If `myAlias` argument and `$defaultTable` property both are `null`.
-     * @see uim.cake.ORM\TableLocator::get()
+     * @return uim.cake.orm.Table
+     * @throws uim.cake.Core\exceptions.CakeException If `myAlias` argument and `$defaultTable` property both are `null`.
+     * @see uim.cake.orm.TableLocator::get()
      * @since 4.3.0
      */
     function fetchTable(Nullable!string myAlias = null, array myOptions = []): Table
