@@ -10,12 +10,11 @@ import uim.cake.consoles.ConsoleOptionParser;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class PluginAssetsRemoveCommand : Command
-{
+class PluginAssetsRemoveCommand : Command {
     use PluginAssetsTrait;
 
 
-    static function defaultName(): string
+    static string defaultName()
     {
         return "plugin assets remove";
     }

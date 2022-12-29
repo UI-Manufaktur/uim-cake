@@ -121,7 +121,7 @@ abstract class DAuthenticate : IEventListener {
      * Get query object for fetching user from database.
      *
      * @param string myUsername The username/identifier.
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      */
     protected Query _query(string myUsername) {
         myConfig = _config;

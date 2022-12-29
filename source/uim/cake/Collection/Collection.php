@@ -34,7 +34,7 @@ class Collection : IteratorIterator : ICollection, Serializable
      *
      * @return string
      */
-    function serialize(): string
+    string serialize(): string
     {
         return serialize(this.buffered());
     }

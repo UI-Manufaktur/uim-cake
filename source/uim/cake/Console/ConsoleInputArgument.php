@@ -118,7 +118,7 @@ class ConsoleInputArgument
      *
      * @return string
      */
-    function usage(): string
+    string usage(): string
     {
         $name = _name;
         if (_choices) {
@@ -146,7 +146,7 @@ class ConsoleInputArgument
      *
      * @param string $value The choice to validate.
      * @return true
-     * @throws uim.cake.consoles.Exception\ConsoleException
+     * @throws uim.cake.consoles.exceptions.ConsoleException
      */
     bool validChoice(string $value) {
         if (empty(_choices)) {

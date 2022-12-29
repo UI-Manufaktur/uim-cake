@@ -94,7 +94,7 @@ class ConsoleInputOption
      * @param bool $multiple Whether this option can accept multiple value definition.
      * @param bool $required Whether this option is required or not.
      * @param string|null $prompt The prompt string.
-     * @throws uim.cake.consoles.Exception\ConsoleException
+     * @throws uim.cake.consoles.exceptions.ConsoleException
      */
     this(
         string $name,
@@ -161,7 +161,7 @@ class ConsoleInputOption
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    function help(int $width = 0): string
+    string help(int $width = 0): string
     {
         $default = $short = "";
         if (_default && _default != true) {
@@ -190,7 +190,7 @@ class ConsoleInputOption
      *
      * @return string
      */
-    function usage(): string
+    string usage(): string
     {
         $name = _short == "" ? "--" . _name : "-" . _short;
         $default = "";
@@ -249,7 +249,7 @@ class ConsoleInputOption
      *
      * @param string|bool $value The choice to validate.
      * @return true
-     * @throws uim.cake.consoles.Exception\ConsoleException
+     * @throws uim.cake.consoles.exceptions.ConsoleException
      */
     bool validChoice($value) {
         if (empty(_choices)) {
@@ -284,7 +284,7 @@ class ConsoleInputOption
      *
      * @return string
      */
-    function prompt(): string
+    string prompt(): string
     {
         return (string)this.prompt;
     }

@@ -9,8 +9,7 @@ import uim.cake.Routing\Router;
 /**
  * Provides interactive CLI tools for routing.
  */
-class RoutesCommand : Command
-{
+class RoutesCommand : Command {
     /**
      * Display all routes in an application
      *

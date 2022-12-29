@@ -4,16 +4,15 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.http.Exception\RedirectException;
+import uim.cake.http.exceptions.RedirectException;
 import uim.cake.http.ServerRequest;
-import uim.cake.Routing\Exception\MissingRouteException;
+import uim.cake.Routing\exceptions.MissingRouteException;
 import uim.cake.Routing\Router;
 
 /**
  * Provides interactive CLI tool for testing routes.
  */
-class RoutesCheckCommand : Command
-{
+class RoutesCheckCommand : Command {
 
     static function defaultName(): string
     {

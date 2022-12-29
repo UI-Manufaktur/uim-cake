@@ -15,8 +15,7 @@ import uim.cake.consoles.ConsoleOptionParser;
 /**
  * Command for interactive I18N management.
  */
-class I18nCommand : Command
-{
+class I18nCommand : Command {
     /**
      * Execute interactive mode
      *

@@ -19,8 +19,7 @@ use DirectoryIterator;
 /**
  * Command for interactive I18N management.
  */
-class I18nInitCommand : Command
-{
+class I18nInitCommand : Command {
 
     static function defaultName(): string
     {

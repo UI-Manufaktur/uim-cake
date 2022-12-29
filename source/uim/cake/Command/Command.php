@@ -23,8 +23,7 @@ import uim.cake.orm.locators.LocatorAwareTrait;
  * and ORM models to console commands.
  */
 #[\AllowDynamicProperties]
-class Command : BaseCommand
-{
+class Command : BaseCommand {
     use LocatorAwareTrait;
     use LogTrait;
     use ModelAwareTrait;

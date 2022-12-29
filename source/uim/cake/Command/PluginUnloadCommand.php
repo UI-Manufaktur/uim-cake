@@ -8,8 +8,7 @@ import uim.cake.consoles.ConsoleOptionParser;
 /**
  * Command for unloading plugins.
  */
-class PluginUnloadCommand : Command
-{
+class PluginUnloadCommand : Command {
 
     static function defaultName(): string
     {

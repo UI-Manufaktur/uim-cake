@@ -17,8 +17,7 @@ import uim.cake.core.Configure;
 /**
  * built-in Server command
  */
-class ServerCommand : Command
-{
+class ServerCommand : Command {
     /**
      * Default ServerHost
      *

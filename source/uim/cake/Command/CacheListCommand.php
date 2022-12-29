@@ -9,8 +9,7 @@ import uim.cake.consoles.ConsoleOptionParser;
 /**
  * CacheList command.
  */
-class CacheListCommand : Command
-{
+class CacheListCommand : Command {
 
     static function defaultName(): string
     {

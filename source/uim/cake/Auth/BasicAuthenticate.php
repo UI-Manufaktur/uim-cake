@@ -8,7 +8,7 @@
   */
 module uim.cake.Auth;
 
-import uim.cake.http.Exception\UnauthorizedException;
+import uim.cake.http.exceptions.UnauthorizedException;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
 
@@ -80,7 +80,7 @@ class BasicAuthenticate : BaseAuthenticate
      * @param uim.cake.http.ServerRequest $request A request object.
      * @param uim.cake.http.Response $response A response object.
      * @return uim.cake.http.Response|null|void
-     * @throws uim.cake.http.Exception\UnauthorizedException
+     * @throws uim.cake.http.exceptions.UnauthorizedException
      */
     function unauthenticated(ServerRequest $request, Response $response) {
         $unauthorizedException = new UnauthorizedException();

@@ -12,8 +12,7 @@ import uim.cake.core.Plugin;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class PluginLoadCommand : Command
-{
+class PluginLoadCommand : Command {
 
     static function defaultName(): string
     {

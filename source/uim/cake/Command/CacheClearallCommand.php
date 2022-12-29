@@ -9,14 +9,13 @@ import uim.cake.consoles.ConsoleOptionParser;
 /**
  * CacheClearall command.
  */
-class CacheClearallCommand : Command
-{
+class CacheClearallCommand : Command {
     /**
      * Get the command name.
      *
      * @return string
      */
-    static function defaultName(): string
+    static string defaultName()
     {
         return "cache clear_all";
     }

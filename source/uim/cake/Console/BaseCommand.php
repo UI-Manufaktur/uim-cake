@@ -16,8 +16,7 @@ use RuntimeException;
  * - `buildOptionParser` Build/Configure the option parser for your command.
  * - `execute` Execute your command with parsed Arguments and ConsoleIo
  */
-abstract class BaseCommand : ICommand
-{
+abstract class BaseCommand : ICommand {
     /**
      * The name of this command.
      *
@@ -42,7 +41,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    function getName(): string
+    string getName()
     {
         return this.name;
     }
@@ -52,7 +51,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    static function getDescription(): string
+    static string getDescription()
     {
         return "";
     }
@@ -62,7 +61,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    function getRootName(): string
+    string getRootName()
     {
         [$root] = explode(" ", this.name);
 
@@ -78,7 +77,7 @@ abstract class BaseCommand : ICommand
      *
      * @return string
      */
-    static function defaultName(): string
+    static string defaultName()
     {
         $pos = strrpos(static::class, "\\");
         /** @psalm-suppress PossiblyFalseOperand */
@@ -218,7 +217,7 @@ abstract class BaseCommand : ICommand
      * Halt the the current process with a StopException.
      *
      * @param int $code The exit code to use.
-     * @throws uim.cake.consoles.Exception\StopException
+     * @throws uim.cake.consoles.exceptions.StopException
      * @return void
      * @psalm-return never-return
      */

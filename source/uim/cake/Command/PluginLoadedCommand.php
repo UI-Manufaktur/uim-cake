@@ -9,8 +9,7 @@ import uim.cake.core.Plugin;
 /**
  * Displays all currently loaded plugins.
  */
-class PluginLoadedCommand : Command
-{
+class PluginLoadedCommand : Command {
 
     static function defaultName(): string
     {

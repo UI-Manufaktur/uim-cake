@@ -136,7 +136,7 @@ abstract class BaseAuthenticate : IEventListener
      * Get query object for fetching user from database.
      *
      * @param string $username The username/identifier.
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      */
     protected function _query(string $username): Query
     {

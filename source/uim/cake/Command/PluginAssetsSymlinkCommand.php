@@ -10,8 +10,7 @@ import uim.cake.consoles.ConsoleOptionParser;
  *
  * @psalm-suppress PropertyNotSetInConstructor
  */
-class PluginAssetsSymlinkCommand : Command
-{
+class PluginAssetsSymlinkCommand : Command {
     use PluginAssetsTrait;
 
 

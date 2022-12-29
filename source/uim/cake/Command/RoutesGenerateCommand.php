@@ -4,14 +4,13 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.Routing\Exception\MissingRouteException;
+import uim.cake.Routing\exceptions.MissingRouteException;
 import uim.cake.Routing\Router;
 
 /**
  * Provides interactive CLI tools for URL generation
  */
-class RoutesGenerateCommand : Command
-{
+class RoutesGenerateCommand : Command {
 
     static function defaultName(): string
     {
