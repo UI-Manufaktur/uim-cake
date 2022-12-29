@@ -28,12 +28,12 @@ class YearWidget : BasicWidget
      * @var array<string, mixed>
      */
     protected $defaults = [
-        'name': '',
-        'val': null,
-        'min': null,
-        'max': null,
-        'order': 'desc',
-        'templateVars': [],
+        "name": "",
+        "val": null,
+        "min": null,
+        "max": null,
+        "order": "desc",
+        "templateVars": [],
     ];
 
     /**
@@ -65,38 +65,38 @@ class YearWidget : BasicWidget
     {
         $data += this.mergeDefaults($data, $context);
 
-        if (empty($data['min'])) {
-            $data['min'] = date('Y', strtotime('-5 years'));
+        if (empty($data["min"])) {
+            $data["min"] = date("Y", strtotime("-5 years"));
         }
 
-        if (empty($data['max'])) {
-            $data['max'] = date('Y', strtotime('+5 years'));
+        if (empty($data["max"])) {
+            $data["max"] = date("Y", strtotime("+5 years"));
         }
 
-        $data['min'] = (int)$data['min'];
-        $data['max'] = (int)$data['max'];
+        $data["min"] = (int)$data["min"];
+        $data["max"] = (int)$data["max"];
 
-        if ($data['val'] instanceof DateTimeInterface) {
-            $data['val'] = $data['val'].format('Y');
+        if ($data["val"] instanceof DateTimeInterface) {
+            $data["val"] = $data["val"].format("Y");
         }
 
-        if (!empty($data['val'])) {
-            $data['min'] = min((int)$data['val'], $data['min']);
-            $data['max'] = max((int)$data['val'], $data['max']);
+        if (!empty($data["val"])) {
+            $data["min"] = min((int)$data["val"], $data["min"]);
+            $data["max"] = max((int)$data["val"], $data["max"]);
         }
 
-        if ($data['max'] < $data['min']) {
-            throw new InvalidArgumentException('Max year cannot be less than min year');
+        if ($data["max"] < $data["min"]) {
+            throw new InvalidArgumentException("Max year cannot be less than min year");
         }
 
-        if ($data['order'] == 'desc') {
-            $data['options'] = range($data['max'], $data['min']);
+        if ($data["order"] == "desc") {
+            $data["options"] = range($data["max"], $data["min"]);
         } else {
-            $data['options'] = range($data['min'], $data['max']);
+            $data["options"] = range($data["min"], $data["max"]);
         }
-        $data['options'] = array_combine($data['options'], $data['options']);
+        $data["options"] = array_combine($data["options"], $data["options"]);
 
-        unset($data['order'], $data['min'], $data['max']);
+        unset($data["order"], $data["min"], $data["max"]);
 
         return _select.render($data, $context);
     }
