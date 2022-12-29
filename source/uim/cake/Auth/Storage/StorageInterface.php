@@ -22,14 +22,14 @@ interface IStorage
      * @param mixed $user array or \ArrayAccess User record.
      * @return void
      */
-    function write($user): void;
+    void write($user);
 
     /**
      * Delete user record.
      *
      * @return void
      */
-    function delete(): void;
+    void delete();
 
     /**
      * Get/set redirect URL.

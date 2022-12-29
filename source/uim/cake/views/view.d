@@ -278,8 +278,6 @@ class View : IEventDispatcher {
      * view class as they are overwritten by values from controller in constructor.
      * So this method allows you to manipulate them as required after view instance
      * is constructed.
-     *
-     * @return void
      */
     void initialize() {
     }

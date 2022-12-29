@@ -538,8 +538,6 @@ class Session
 
     /**
      * Helper method to destroy invalid sessions.
-     *
-     * @return void
      */
     void destroy() {
         if (_hasSession() && !this.started()) {
@@ -578,8 +576,6 @@ class Session
 
     /**
      * Restarts this session.
-     *
-     * @return void
      */
     void renew() {
         if (!_hasSession() || _isCLI) {

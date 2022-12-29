@@ -919,8 +919,6 @@ class Response : IResponse
      * conflicting headers
      *
      * *Warning* This method mutates the response in-place and should be avoided.
-     *
-     * @return void
      */
     void notModified() {
         _createStream();

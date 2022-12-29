@@ -82,8 +82,7 @@ class SessionStorage : IStorage
      * @param \ArrayAccess|array $user User record.
      * @return void
      */
-    void write($user)
-    {
+    void write($user) {
         _user = $user;
 
         _session.renew();
@@ -94,11 +93,8 @@ class SessionStorage : IStorage
      * Delete user record from session.
      *
      * The session id is also renewed to help mitigate issues with session replays.
-     *
-     * @return void
      */
-    void delete()
-    {
+    void delete() {
         _user = false;
 
         _session.delete(_config["key"]);

@@ -118,8 +118,7 @@ class I18nExtractCommand : Command
      * @param uim.cake.consoles.ConsoleIo $io The io instance.
      * @return void
      */
-    protected void _getPaths(ConsoleIo $io)
-    {
+    protected void _getPaths(ConsoleIo $io) {
         /** @psalm-suppress UndefinedConstant */
         $defaultPaths = array_merge(
             [APP],
@@ -275,8 +274,7 @@ class I18nExtractCommand : Command
      * @param array $details Context and plural form if any, file and line references
      * @return void
      */
-    protected void _addTranslation(string $domain, string $msgid, array $details = [])
-    {
+    protected void _addTranslation(string $domain, string $msgid, array $details = []) {
         $context = $details["msgctxt"] ?? "";
 
         if (empty(_translations[$domain][$msgid][$context])) {
@@ -302,8 +300,7 @@ class I18nExtractCommand : Command
      * @param uim.cake.consoles.ConsoleIo $io The io instance
      * @return void
      */
-    protected void _extract(Arguments $args, ConsoleIo $io)
-    {
+    protected void _extract(Arguments $args, ConsoleIo $io) {
         $io.out();
         $io.out();
         $io.out("Extracting...");
@@ -390,8 +387,7 @@ class I18nExtractCommand : Command
      * @param uim.cake.consoles.ConsoleIo $io The io instance
      * @return void
      */
-    protected void _extractTokens(Arguments $args, ConsoleIo $io)
-    {
+    protected void _extractTokens(Arguments $args, ConsoleIo $io) {
         /** @var uim.cake.Shell\Helper\ProgressHelper $progress */
         $progress = $io.helper("progress");
         $progress.init(["total": count(_files)]);
@@ -448,8 +444,7 @@ class I18nExtractCommand : Command
      * @param array $map Array containing what variables it will find (e.g: domain, singular, plural)
      * @return void
      */
-    protected void _parse(ConsoleIo $io, string $functionName, array $map)
-    {
+    protected void _parse(ConsoleIo $io, string $functionName, array $map) {
         $count = 0;
         $tokenCount = count(_tokens);
 
@@ -510,8 +505,7 @@ class I18nExtractCommand : Command
      * @param uim.cake.consoles.Arguments $args Console arguments
      * @return void
      */
-    protected void _buildFiles(Arguments $args)
-    {
+    protected void _buildFiles(Arguments $args) {
         $paths = _paths;
         /** @psalm-suppress UndefinedConstant */
         $paths[] = realpath(APP) . DIRECTORY_SEPARATOR;
@@ -574,8 +568,7 @@ class I18nExtractCommand : Command
      * @param string $sentence The sentence to store.
      * @return void
      */
-    protected void _store(string $domain, string $header, string $sentence)
-    {
+    protected void _store(string $domain, string $header, string $sentence) {
         _storage[$domain] = _storage[$domain] ?? [];
 
         if (!isset(_storage[$domain][$sentence])) {
@@ -592,8 +585,7 @@ class I18nExtractCommand : Command
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return void
      */
-    protected void _writeFiles(Arguments $args, ConsoleIo $io)
-    {
+    protected void _writeFiles(Arguments $args, ConsoleIo $io) {
         $io.out();
         $overwriteAll = false;
         if ($args.getOption("overwrite")) {
@@ -766,8 +758,7 @@ class I18nExtractCommand : Command
      * @param int $count Count
      * @return void
      */
-    protected void _markerError($io, string $file, int $line, string $marker, int $count)
-    {
+    protected void _markerError($io, string $file, int $line, string $marker, int $count) {
         if (strpos(_file, CAKE_CORE_INCLUDE_PATH) == false) {
             _countMarkerError++;
         }
@@ -804,8 +795,7 @@ class I18nExtractCommand : Command
      *
      * @return void
      */
-    protected void _searchFiles()
-    {
+    protected void _searchFiles() {
         $pattern = false;
         if (!empty(_exclude)) {
             $exclude = [];

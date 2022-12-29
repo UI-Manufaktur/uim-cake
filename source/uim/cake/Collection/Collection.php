@@ -55,8 +55,7 @@ class Collection : IteratorIterator : ICollection, Serializable
      * @param string $collection The serialized collection
      * @return void
      */
-    void unserialize($collection)
-    {
+    void unserialize($collection) {
         __construct(unserialize($collection));
     }
 
@@ -66,8 +65,7 @@ class Collection : IteratorIterator : ICollection, Serializable
      * @param array $data Data array.
      * @return void
      */
-    void __unserialize(array $data)
-    {
+    void __unserialize(array $data) {
         __construct($data);
     }
 

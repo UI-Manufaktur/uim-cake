@@ -780,8 +780,6 @@ class TreeBehavior : Behavior
     /**
      * Recovers the lft and right column values out of the hierarchy defined by the
      * parent column.
-     *
-     * @return void
      */
     void recover() {
         _table.getConnection().transactional(void () {

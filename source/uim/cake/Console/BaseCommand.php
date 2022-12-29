@@ -132,8 +132,7 @@ abstract class BaseCommand : ICommand
      *
      * @return void
      */
-    function initialize(): void
-    {
+    void initialize() {
     }
 
 
@@ -177,8 +176,7 @@ abstract class BaseCommand : ICommand
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return void
      */
-    protected function displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io): void
-    {
+    protected void displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io) {
         $format = "text";
         if ($args.getArgumentAt(0) == "xml") {
             $format = "xml";
@@ -195,8 +193,7 @@ abstract class BaseCommand : ICommand
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return void
      */
-    protected function setOutputLevel(Arguments $args, ConsoleIo $io): void
-    {
+    protected void setOutputLevel(Arguments $args, ConsoleIo $io) {
         $io.setLoggers(ConsoleIo::NORMAL);
         if ($args.getOption("quiet")) {
             $io.level(ConsoleIo::QUIET);
@@ -225,8 +222,7 @@ abstract class BaseCommand : ICommand
      * @return void
      * @psalm-return never-return
      */
-    function abort(int $code = self::CODE_ERROR): void
-    {
+    void abort(int $code = self::CODE_ERROR) {
         throw new StopException("Command aborted", $code);
     }
 

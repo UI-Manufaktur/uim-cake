@@ -67,11 +67,8 @@ class InsertIterator : Collection
 
     /**
      * Advances the cursor to the next record
-     *
-     * @return void
      */
-    void next()
-    {
+    void next() {
         parent::next();
         if (_validValues) {
             _values.next();
@@ -108,11 +105,8 @@ class InsertIterator : Collection
 
     /**
      * Resets the collection pointer.
-     *
-     * @return void
      */
-    void rewind()
-    {
+    void rewind() {
         parent::rewind();
         _values.rewind();
         _validValues = _values.valid();
