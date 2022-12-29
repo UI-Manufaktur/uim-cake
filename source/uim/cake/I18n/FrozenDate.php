@@ -5,8 +5,7 @@
 
 
  * @since         3.2.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.I18n;
 
 import uim.cake.Chronos\Date as ChronosDate;

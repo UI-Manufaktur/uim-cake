@@ -9,8 +9,7 @@
  *
 
  * @since         3.2.12
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.http.Exception;
 
 use Throwable;
