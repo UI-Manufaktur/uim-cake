@@ -336,7 +336,7 @@ abstract class Association
     /**
      * Sets the table instance for the source side of the association.
      *
-     * @param \Cake\ORM\Table $table the instance to be assigned as source side
+     * @param uim.cake.ORM\Table $table the instance to be assigned as source side
      * @return this
      */
     function setSource(Table $table) {
@@ -358,7 +358,7 @@ abstract class Association
     /**
      * Sets the table instance for the target side of the association.
      *
-     * @param \Cake\ORM\Table $table the instance to be assigned as target side
+     * @param uim.cake.ORM\Table $table the instance to be assigned as target side
      * @return this
      */
     function setTarget(Table $table) {
@@ -689,7 +689,7 @@ abstract class Association
      * - negateMatch: Will append a condition to the passed query for excluding matches.
      *   with this association.
      *
-     * @param \Cake\ORM\Query $query the query to be altered to include the target table data
+     * @param uim.cake.ORM\Query $query the query to be altered to include the target table data
      * @param array<string, mixed> $options Any extra options or overrides to be taken in account
      * @return void
      * @throws \RuntimeException Unable to build the query or associations.
@@ -766,7 +766,7 @@ abstract class Association
      * Conditionally adds a condition to the passed Query that will make it find
      * records where there is no match with this association.
      *
-     * @param \Cake\ORM\Query $query The query to modify
+     * @param uim.cake.ORM\Query $query The query to modify
      * @param array<string, mixed> $options Options array containing the `negateMatch` key.
      * @return void
      */
@@ -854,7 +854,7 @@ abstract class Association
      * Proxies the operation to the target table"s exists method after
      * appending the default conditions for this association
      *
-     * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions The conditions to use
+     * @param uim.cake.Database\IExpression|\Closure|array|string|null $conditions The conditions to use
      * for checking if any record matches.
      * @see uim.cake.ORM\Table::exists()
      * @return bool
@@ -872,7 +872,7 @@ abstract class Association
      * Proxies the update operation to the target table"s updateAll method
      *
      * @param array $fields A hash of field: new value.
-     * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
+     * @param uim.cake.Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @see uim.cake.ORM\Table::updateAll()
      * @return int Count Returns the affected rows.
@@ -889,7 +889,7 @@ abstract class Association
     /**
      * Proxies the delete operation to the target table"s deleteAll method
      *
-     * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
+     * @param uim.cake.Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Returns the number of affected rows.
      * @see uim.cake.ORM\Table::deleteAll()
@@ -921,7 +921,7 @@ abstract class Association
      * Triggers beforeFind on the target table for the query this association is
      * attaching to
      *
-     * @param \Cake\ORM\Query $query the query this association is attaching itself to
+     * @param uim.cake.ORM\Query $query the query this association is attaching itself to
      * @return void
      */
     protected function _dispatchBeforeFind(Query $query): void
@@ -933,8 +933,8 @@ abstract class Association
      * Helper function used to conditionally append fields to the select clause of
      * a query from the fields found in another query object.
      *
-     * @param \Cake\ORM\Query $query the query that will get the fields appended to
-     * @param \Cake\ORM\Query $surrogate the query having the fields to be copied from
+     * @param uim.cake.ORM\Query $query the query that will get the fields appended to
+     * @param uim.cake.ORM\Query $surrogate the query having the fields to be copied from
      * @param array<string, mixed> $options options passed to the method `attachTo`
      * @return void
      */
@@ -964,8 +964,8 @@ abstract class Association
      * applying the surrogate formatters to only the property corresponding to
      * such table.
      *
-     * @param \Cake\ORM\Query $query the query that will get the formatter applied to
-     * @param \Cake\ORM\Query $surrogate the query having formatters for the associated
+     * @param uim.cake.ORM\Query $query the query that will get the formatter applied to
+     * @param uim.cake.ORM\Query $surrogate the query having formatters for the associated
      * target table.
      * @param array<string, mixed> $options options passed to the method `attachTo`
      * @return void
@@ -1024,8 +1024,8 @@ abstract class Association
      * passed `$query`. Containments are altered so that they respect the associations
      * chain from which they originated.
      *
-     * @param \Cake\ORM\Query $query the query that will get the associations attached to
-     * @param \Cake\ORM\Query $surrogate the query having the containments to be attached
+     * @param uim.cake.ORM\Query $query the query that will get the associations attached to
+     * @param uim.cake.ORM\Query $surrogate the query having the containments to be attached
      * @param array<string, mixed> $options options passed to the method `attachTo`
      * @return void
      */
@@ -1210,7 +1210,7 @@ abstract class Association
      * Each implementing class should handle the cascaded delete as
      * required.
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity that started the cascaded delete.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity that started the cascaded delete.
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success
      */
@@ -1221,7 +1221,7 @@ abstract class Association
      * association. This means that rows in the "target" table would miss important
      * or required information if the row in "source" did not exist.
      *
-     * @param \Cake\ORM\Table $side The potential Table with ownership
+     * @param uim.cake.ORM\Table $side The potential Table with ownership
      * @return bool
      */
     abstract function isOwningSide(Table $side): bool;
@@ -1230,7 +1230,7 @@ abstract class Association
      * Extract the target"s association data our from the passed entity and proxies
      * the saving operation to the target table.
      *
-     * @param \Cake\Datasource\EntityInterface $entity the data to be saved
+     * @param uim.cake.Datasource\EntityInterface $entity the data to be saved
      * @param array<string, mixed> $options The options for saving associated data.
      * @return \Cake\Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity

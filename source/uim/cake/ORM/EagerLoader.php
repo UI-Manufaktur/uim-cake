@@ -281,7 +281,7 @@ class EagerLoader
      * Additionally, it will set an "instance" key per association containing the
      * association instance from the corresponding source table
      *
-     * @param \Cake\ORM\Table $repository The table containing the association that
+     * @param uim.cake.ORM\Table $repository The table containing the association that
      * will be normalized
      * @return array
      */
@@ -390,8 +390,8 @@ class EagerLoader
      * This method will not modify the query for loading external associations, i.e.
      * those that cannot be loaded without executing a separate query.
      *
-     * @param \Cake\ORM\Query $query The query to be modified
-     * @param \Cake\ORM\Table $repository The repository containing the associations
+     * @param uim.cake.ORM\Query $query The query to be modified
+     * @param uim.cake.ORM\Table $repository The repository containing the associations
      * @param bool $includeFields whether to append all fields from the associations
      * to the passed query. This can be overridden according to the settings defined
      * per association in the containments array
@@ -426,7 +426,7 @@ class EagerLoader
      * the array keys are the association aliases and the values will contain an array
      * with Cake\ORM\EagerLoadable objects.
      *
-     * @param \Cake\ORM\Table $repository The table containing the associations to be
+     * @param uim.cake.ORM\Table $repository The table containing the associations to be
      * attached
      * @return array<\Cake\ORM\EagerLoadable>
      */
@@ -444,7 +444,7 @@ class EagerLoader
      * Returns an array with the associations that need to be fetched using a
      * separate query, each array value will contain a {@link \Cake\ORM\EagerLoadable} object.
      *
-     * @param \Cake\ORM\Table $repository The table containing the associations
+     * @param uim.cake.ORM\Table $repository The table containing the associations
      * to be loaded
      * @return array<\Cake\ORM\EagerLoadable>
      */
@@ -463,7 +463,7 @@ class EagerLoader
      * Auxiliary function responsible for fully normalizing deep associations defined
      * using `contain()`
      *
-     * @param \Cake\ORM\Table $parent owning side of the association
+     * @param uim.cake.ORM\Table $parent owning side of the association
      * @param string $alias name of the association to be loaded
      * @param array<string, mixed> $options list of extra options to use for this association
      * @param array<string, mixed> $paths An array with two values, the first one is a list of dot
@@ -550,7 +550,7 @@ class EagerLoader
      * Changes the association fetching strategy if required because of duplicate
      * under the same direct associations chain
      *
-     * @param \Cake\ORM\EagerLoadable $loadable The association config
+     * @param uim.cake.ORM\EagerLoadable $loadable The association config
      * @return void
      */
     protected function _correctStrategy(EagerLoadable $loadable): void
@@ -606,9 +606,9 @@ class EagerLoader
      * Decorates the passed statement object in order to inject data from associations
      * that cannot be joined directly.
      *
-     * @param \Cake\ORM\Query $query The query for which to eager load external
+     * @param uim.cake.ORM\Query $query The query for which to eager load external
      * associations
-     * @param \Cake\Database\StatementInterface $statement The statement created after executing the $query
+     * @param uim.cake.Database\StatementInterface $statement The statement created after executing the $query
      * @return \Cake\Database\StatementInterface statement modified statement with extra loaders
      * @throws \RuntimeException
      */
@@ -681,7 +681,7 @@ class EagerLoader
      * - nestKey: A dotted path that can be used to correctly insert the data into the results.
      * - matching: Whether it is an association loaded through `matching()`.
      *
-     * @param \Cake\ORM\Table $table The table containing the association that
+     * @param uim.cake.ORM\Table $table The table containing the association that
      * will be normalized
      * @return array
      */
@@ -739,7 +739,7 @@ class EagerLoader
      * from such joined table.
      *
      * @param string $alias The table alias as it appears in the query.
-     * @param \Cake\ORM\Association $assoc The association object the alias represents;
+     * @param uim.cake.ORM\Association $assoc The association object the alias represents;
      * will be normalized
      * @param bool $asMatching Whether this join results should be treated as a
      * "matching" association.
@@ -767,8 +767,8 @@ class EagerLoader
      * to eagerly load associations.
      *
      * @param array<\Cake\ORM\EagerLoadable> $external the list of external associations to be loaded
-     * @param \Cake\ORM\Query $query The query from which the results where generated
-     * @param \Cake\Database\StatementInterface $statement The statement to work on
+     * @param uim.cake.ORM\Query $query The query from which the results where generated
+     * @param uim.cake.Database\StatementInterface $statement The statement to work on
      * @return array
      */
     protected function _collectKeys(array $external, Query $query, $statement): array
@@ -807,7 +807,7 @@ class EagerLoader
      * Helper function used to iterate a statement and extract the columns
      * defined in $collectKeys
      *
-     * @param \Cake\Database\Statement\BufferedStatement $statement The statement to read from.
+     * @param uim.cake.Database\Statement\BufferedStatement $statement The statement to read from.
      * @param array<string, array> $collectKeys The keys to collect
      * @return array
      */

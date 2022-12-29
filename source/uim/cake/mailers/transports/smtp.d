@@ -144,7 +144,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Send mail
      *
-     * @param \Cake\Mailer\Message myMessage Message instance
+     * @param uim.cake.Mailer\Message myMessage Message instance
      * @return array
      * @throws \Cake\Network\Exception\SocketException
      * @psalm-return array{headers: string, message: string}
@@ -330,7 +330,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Prepares the `from` email address.
      *
-     * @param \Cake\Mailer\Message myMessage Message instance
+     * @param uim.cake.Mailer\Message myMessage Message instance
      * @return array
      */
     protected array _prepareFromAddress(Message myMessage) {
@@ -345,7 +345,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Prepares the recipient email addresses.
      *
-     * @param \Cake\Mailer\Message myMessage Message instance
+     * @param uim.cake.Mailer\Message myMessage Message instance
      * @return array
      */
     protected array _prepareRecipientAddresses(Message myMessage) {
@@ -359,7 +359,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Prepares the message body.
      *
-     * @param \Cake\Mailer\Message myMessage Message instance
+     * @param uim.cake.Mailer\Message myMessage Message instance
      * @return string
      */
     protected string _prepareMessage(Message myMessage) {
@@ -379,7 +379,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Send emails
      *
-     * @param \Cake\Mailer\Message myMessage Message message
+     * @param uim.cake.Mailer\Message myMessage Message message
      * @throws \Cake\Network\Exception\SocketException
      * @return void
      */
@@ -396,7 +396,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Send Data
      *
-     * @param \Cake\Mailer\Message myMessage Message message
+     * @param uim.cake.Mailer\Message myMessage Message message
      * @return void
      * @throws \Cake\Network\Exception\SocketException
      */

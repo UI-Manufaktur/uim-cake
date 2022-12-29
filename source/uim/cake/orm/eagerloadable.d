@@ -125,7 +125,7 @@ class EagerLoadable
      * Adds a new association to be loaded from this level.
      *
      * @param string myName The association name.
-     * @param \Cake\ORM\EagerLoadable $association The association to load.
+     * @param uim.cake.ORM\EagerLoadable $association The association to load.
      */
     void addAssociation(string myName, EagerLoadable $association) {
         _associations[myName] = $association;

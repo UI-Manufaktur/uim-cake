@@ -29,10 +29,10 @@ class LazyEagerLoader
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
      *
-     * @param \Cake\Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface> $entities a single entity or list of entities
+     * @param uim.cake.Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.ORM\Query::contain()
-     * @param \Cake\ORM\Table $source The table to use for fetching the top level entities
+     * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
      * @return \Cake\Datasource\EntityInterface|array<\Cake\Datasource\EntityInterface>
      */
     function loadInto($entities, array $contain, Table $source) {
@@ -56,9 +56,9 @@ class LazyEagerLoader
      * Builds a query for loading the passed list of entity objects along with the
      * associations specified in $contain.
      *
-     * @param \Cake\Collection\ICollection $objects The original entities
+     * @param uim.cake.Collection\ICollection $objects The original entities
      * @param array $contain The associations to be loaded
-     * @param \Cake\ORM\Table $source The table to use for fetching the top level entities
+     * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
      * @return \Cake\ORM\Query
      */
     protected function _getQuery(ICollection $objects, array $contain, Table $source): Query
@@ -107,7 +107,7 @@ class LazyEagerLoader
      * Returns a map of property names where the association results should be injected
      * in the top level entities.
      *
-     * @param \Cake\ORM\Table $source The table having the top level associations
+     * @param uim.cake.ORM\Table $source The table having the top level associations
      * @param array<string> $associations The name of the top level associations
      * @return array<string>
      */
@@ -128,9 +128,9 @@ class LazyEagerLoader
      * entities.
      *
      * @param iterable<\Cake\Datasource\EntityInterface> $objects The original list of entities
-     * @param \Cake\ORM\Query $results The loaded results
+     * @param uim.cake.ORM\Query $results The loaded results
      * @param array<string> $associations The top level associations that were loaded
-     * @param \Cake\ORM\Table $source The table where the entities came from
+     * @param uim.cake.ORM\Table $source The table where the entities came from
      * @return array<\Cake\Datasource\EntityInterface>
      */
     protected function _injectResults(iterable $objects, $results, array $associations, Table $source): array

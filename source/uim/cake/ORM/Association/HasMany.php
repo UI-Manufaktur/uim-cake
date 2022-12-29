@@ -86,7 +86,7 @@ class HasMany : Association
      * association. This means that rows in the "target" table would miss important
      * or required information if the row in "source" did not exist.
      *
-     * @param \Cake\ORM\Table $side The potential Table with ownership
+     * @param uim.cake.ORM\Table $side The potential Table with ownership
      * @return bool
      */
     function isOwningSide(Table $side): bool
@@ -128,7 +128,7 @@ class HasMany : Association
      * saved on the target table for this association by passing supplied
      * `$options`
      *
-     * @param \Cake\Datasource\EntityInterface $entity an entity from the source table
+     * @param uim.cake.Datasource\EntityInterface $entity an entity from the source table
      * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @return \Cake\Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity
@@ -186,7 +186,7 @@ class HasMany : Association
      *
      * @param array $foreignKeyReference The foreign key reference defining the link between the
      * target entity, and the parent entity.
-     * @param \Cake\Datasource\EntityInterface $parentEntity The source entity containing the target
+     * @param uim.cake.Datasource\EntityInterface $parentEntity The source entity containing the target
      * entities to be saved.
      * @param array $entities list of entities
      * to persist in target table and to link to the parent entity
@@ -254,7 +254,7 @@ class HasMany : Association
      *
      * `$user.get("articles")` will contain all articles in `$allArticles` after linking
      *
-     * @param \Cake\Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
+     * @param uim.cake.Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
      * of this association
      * @param array $targetEntities list of entities belonging to the `target` side
      * of this association
@@ -322,7 +322,7 @@ class HasMany : Association
      *
      * `$article.get("articles")` will contain only `[$article4]` after deleting in the database
      *
-     * @param \Cake\Datasource\EntityInterface $sourceEntity an entity persisted in the source table for
+     * @param uim.cake.Datasource\EntityInterface $sourceEntity an entity persisted in the source table for
      * this association
      * @param array $targetEntities list of entities persisted in the target table for
      * this association
@@ -412,7 +412,7 @@ class HasMany : Association
      *
      * `$author.get("articles")` will contain only `[$article1, $article3]` at the end
      *
-     * @param \Cake\Datasource\EntityInterface $sourceEntity an entity persisted in the source table for
+     * @param uim.cake.Datasource\EntityInterface $sourceEntity an entity persisted in the source table for
      * this association
      * @param array $targetEntities list of entities from the target table to be linked
      * @param array<string, mixed> $options list of options to be passed to the internal `save`/`delete` calls
@@ -444,8 +444,8 @@ class HasMany : Association
      *
      * @param array $foreignKeyReference The foreign key reference defining the link between the
      * target entity, and the parent entity.
-     * @param \Cake\Datasource\EntityInterface $entity the entity which should have its associated entities unassigned
-     * @param \Cake\ORM\Table $target The associated table
+     * @param uim.cake.Datasource\EntityInterface $entity the entity which should have its associated entities unassigned
+     * @param uim.cake.ORM\Table $target The associated table
      * @param iterable $remainingEntities Entities that should not be deleted
      * @param array<string, mixed> $options list of options accepted by `Table::delete()`
      * @return bool success
@@ -493,7 +493,7 @@ class HasMany : Association
      * targets and also on foreign key nullability.
      *
      * @param array $foreignKey array of foreign key properties
-     * @param \Cake\ORM\Table $target The associated table
+     * @param uim.cake.ORM\Table $target The associated table
      * @param array $conditions The conditions that specifies what are the objects to be unlinked
      * @param array<string, mixed> $options list of options accepted by `Table::delete()`
      * @return bool success
@@ -536,7 +536,7 @@ class HasMany : Association
     /**
      * Checks the nullable flag of the foreign key
      *
-     * @param \Cake\ORM\Table $table the table containing the foreign key
+     * @param uim.cake.ORM\Table $table the table containing the foreign key
      * @param array $properties the list of fields that compose the foreign key
      * @return bool
      */

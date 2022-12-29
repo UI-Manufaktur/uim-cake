@@ -41,7 +41,7 @@ class AssociationCollection : IteratorAggregate
      * Sets the default table locator for associations.
      * If no locator is provided, the global one will be used.
      *
-     * @param \Cake\ORM\Locator\ILocator|null $tableLocator Table locator instance.
+     * @param uim.cake.ORM\Locator\ILocator|null $tableLocator Table locator instance.
      */
     public this(?ILocator $tableLocator = null) {
         if ($tableLocator != null) {
@@ -56,7 +56,7 @@ class AssociationCollection : IteratorAggregate
      * This makes using plugins simpler as the Plugin.Class syntax is frequently used.
      *
      * @param string $alias The association alias
-     * @param \Cake\ORM\Association $association The association to add.
+     * @param uim.cake.ORM\Association $association The association to add.
      * @return \Cake\ORM\Association The association object being added.
      */
     function add(string $alias, Association $association): Association
@@ -190,8 +190,8 @@ class AssociationCollection : IteratorAggregate
      * Parent associations include any association where the given table
      * is the owning side.
      *
-     * @param \Cake\ORM\Table $table The table entity is for.
-     * @param \Cake\Datasource\EntityInterface $entity The entity to save associated data for.
+     * @param uim.cake.ORM\Table $table The table entity is for.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to save associated data for.
      * @param array $associations The list of associations to save parents from.
      *   associations not in this list will not be saved.
      * @param array<string, mixed> $options The options for the save operation.
@@ -212,8 +212,8 @@ class AssociationCollection : IteratorAggregate
      * Child associations include any association where the given table
      * is not the owning side.
      *
-     * @param \Cake\ORM\Table $table The table entity is for.
-     * @param \Cake\Datasource\EntityInterface $entity The entity to save associated data for.
+     * @param uim.cake.ORM\Table $table The table entity is for.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to save associated data for.
      * @param array $associations The list of associations to save children from.
      *   associations not in this list will not be saved.
      * @param array<string, mixed> $options The options for the save operation.
@@ -231,8 +231,8 @@ class AssociationCollection : IteratorAggregate
     /**
      * Helper method for saving an association"s data.
      *
-     * @param \Cake\ORM\Table $table The table the save is currently operating on
-     * @param \Cake\Datasource\EntityInterface $entity The entity to save
+     * @param uim.cake.ORM\Table $table The table the save is currently operating on
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to save
      * @param array $associations Array of associations to save.
      * @param array<string, mixed> $options Original options
      * @param bool $owningSide Compared with association classes"
@@ -276,8 +276,8 @@ class AssociationCollection : IteratorAggregate
     /**
      * Helper method for saving an association"s data.
      *
-     * @param \Cake\ORM\Association $association The association object to save with.
-     * @param \Cake\Datasource\EntityInterface $entity The entity to save
+     * @param uim.cake.ORM\Association $association The association object to save with.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to save
      * @param array<string, mixed> $nested Options for deeper associations
      * @param array<string, mixed> $options Original options
      * @return bool Success
@@ -302,7 +302,7 @@ class AssociationCollection : IteratorAggregate
      * Cascade a delete across the various associations.
      * Cascade first across associations for which cascadeCallbacks is true.
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity to delete associations for.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to delete associations for.
      * @param array<string, mixed> $options The options used in the delete operation.
      * @return bool
      */

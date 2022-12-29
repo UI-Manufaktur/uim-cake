@@ -140,7 +140,7 @@ class Behavior : IEventListener
      *
      * Merges config with the default and store in the config property
      *
-     * @param \Cake\ORM\Table $table The table this behavior is attached to.
+     * @param uim.cake.ORM\Table $table The table this behavior is attached to.
      * @param array<string, mixed> $config The config for this behavior.
      */
     public this(Table $table, array $config = []) {

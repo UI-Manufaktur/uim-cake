@@ -408,7 +408,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Sets the connection instance.
      *
-     * @param \Cake\Database\Connection myConnection The connection instance
+     * @param uim.cake.Database\Connection myConnection The connection instance
      * @return this
      */
     auto setConnection(Connection myConnection) {
@@ -459,7 +459,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * If an array is passed, a new TableSchemaInterface will be constructed
      * out of it and used as the schema for this table.
      *
-     * @param \Cake\Database\Schema\TableSchemaInterface|array $schema Schema to be used for this table
+     * @param uim.cake.Database\Schema\TableSchemaInterface|array $schema Schema to be used for this table
      * @return this
      */
     auto setSchema($schema) {
@@ -536,7 +536,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * }
      * ```
      *
-     * @param \Cake\Database\Schema\TableSchemaInterface $schema The table definition fetched from database.
+     * @param uim.cake.Database\Schema\TableSchemaInterface $schema The table definition fetched from database.
      * @return \Cake\Database\Schema\TableSchemaInterface the altered schema
      */
     protected auto _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
@@ -1181,7 +1181,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * By default findAll() applies no conditions, you
      * can override this method in subclasses to modify how `find("all")` works.
      *
-     * @param \Cake\ORM\Query myQuery The query to find with
+     * @param uim.cake.ORM\Query myQuery The query to find with
      * @param array<string, mixed> myOptions The options to use for the find
      * @return \Cake\ORM\Query The query builder
      */
@@ -1262,7 +1262,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ]
      * ```
      *
-     * @param \Cake\ORM\Query myQuery The query to find with
+     * @param uim.cake.ORM\Query myQuery The query to find with
      * @param array<string, mixed> myOptions The options for the find
      * @return \Cake\ORM\Query The query builder
      */
@@ -1327,7 +1327,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ]);
      * ```
      *
-     * @param \Cake\ORM\Query myQuery The query to find with
+     * @param uim.cake.ORM\Query myQuery The query to find with
      * @param array<string, mixed> myOptions The options to find with
      * @return \Cake\ORM\Query The query builder
      */
@@ -1505,7 +1505,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *   transaction (default: true)
      * - defaults: Whether to use the search criteria as default values for the new entity (default: true)
      *
-     * @param \Cake\ORM\Query|callable|array $search The criteria to find existing
+     * @param uim.cake.ORM\Query|callable|array $search The criteria to find existing
      *   records by. Note that when you pass a query object you"ll have to use
      *   the 2nd arg of the method to modify the entity data before saving.
      * @param callable|null $callback A callback that will be invoked for newly
@@ -1536,7 +1536,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Performs the actual find and/or create of an entity based on the passed options.
      *
-     * @param \Cake\ORM\Query|callable|array $search The criteria to find an existing record by, or a callable tha will
+     * @param uim.cake.ORM\Query|callable|array $search The criteria to find an existing record by, or a callable tha will
      *   customize the find query.
      * @param callable|null $callback A callback that will be invoked for newly
      *   created entities. This callback will be called *before* the entity
@@ -1576,7 +1576,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Gets the query object for findOrCreate().
      *
-     * @param \Cake\ORM\Query|callable|array $search The criteria to find existing records by.
+     * @param uim.cake.ORM\Query|callable|array $search The criteria to find existing records by.
      * @return \Cake\ORM\Query
      */
     protected auto _getFindOrCreateQuery($search): Query
@@ -1735,8 +1735,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * $articles.save($entity, ["associated": false]);
      * ```
      *
-     * @param \Cake\Datasource\IEntity $entity the entity to be saved
-     * @param \Cake\ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions The options to use when saving.
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
+     * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions The options to use when saving.
      * @return \Cake\Datasource\IEntity|false
      * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction is aborted in the afterSave event.
      */
@@ -1783,7 +1783,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Try to save an entity or throw a PersistenceFailedException if the application rules checks failed,
      * the entity contains errors or the save was aborted by a callback.
      *
-     * @param \Cake\Datasource\IEntity $entity the entity to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayAccess|array myOptions The options to use when saving.
      * @return \Cake\Datasource\IEntity
      * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
@@ -1802,7 +1802,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Performs the actual saving of an entity based on the passed options.
      *
-     * @param \Cake\Datasource\IEntity $entity the entity to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayObject myOptions the options to use for the save operation
      * @return \Cake\Datasource\IEntity|false
      * @throws \RuntimeException When an entity is missing some of the primary keys.
@@ -1881,7 +1881,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Handles the saving of children associations and executing the afterSave logic
      * once the entity for this table has been saved successfully.
      *
-     * @param \Cake\Datasource\IEntity $entity the entity to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayObject myOptions the options to use for the save operation
      * @return bool True on success
      * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction
@@ -1917,7 +1917,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Auxiliary function to handle the insert of an entity"s data in the table
      *
-     * @param \Cake\Datasource\IEntity $entity the subject entity from were myData was extracted
+     * @param uim.cake.Datasource\IEntity $entity the subject entity from were myData was extracted
      * @param array myData The actual data that needs to be saved
      * @return \Cake\Datasource\IEntity|false
      * @throws \RuntimeException if not all the primary keys where supplied or could
@@ -2015,7 +2015,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Auxiliary function to handle the update of an entity"s data in the table
      *
-     * @param \Cake\Datasource\IEntity $entity the subject entity from were myData was extracted
+     * @param uim.cake.Datasource\IEntity $entity the subject entity from were myData was extracted
      * @param array myData The actual data that needs to be saved
      * @return \Cake\Datasource\IEntity|false
      * @throws \InvalidArgumentException When primary key data is missing.
@@ -2064,8 +2064,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
-     * @param \Cake\ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
+     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
+     * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false False on failure, entities list on success.
      * @throws \Exception
      */
@@ -2084,7 +2084,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
+     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      * @throws \Exception
@@ -2096,8 +2096,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     }
 
     /**
-     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
-     * @param \Cake\ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
+     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
+     * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      * @throws \Exception If an entity couldn"t be saved.
      * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
@@ -2185,7 +2185,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * for the duration of the callbacks, this allows listeners to modify
      * the options used in the delete operation.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity to remove.
+     * @param uim.cake.Datasource\IEntity $entity The entity to remove.
      * @param \ArrayAccess|array myOptions The options for the delete.
      * @return bool success
      */
@@ -2217,7 +2217,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
+     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity>|false Entities list
      *   on success, false on failure.
@@ -2240,7 +2240,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
+     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @return \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      * @throws \Cake\ORM\Exception\PersistenceFailedException
@@ -2258,7 +2258,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     }
 
     /**
-     * @param \Cake\Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
+     * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used.
      * @return \Cake\Datasource\IEntity|null
      */
@@ -2296,7 +2296,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Try to delete an entity or throw a PersistenceFailedException if the entity is new,
      * has no primary key value, application rules checks failed or the delete was aborted by a callback.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity to remove.
+     * @param uim.cake.Datasource\IEntity $entity The entity to remove.
      * @param \ArrayAccess|array myOptions The options for the delete.
      * @return true
      * @throws \Cake\ORM\Exception\PersistenceFailedException
@@ -2317,7 +2317,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Will delete the entity provided. Will remove rows from any
      * dependent associations, and clear out join tables for BelongsToMany associations.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity to delete.
+     * @param uim.cake.Datasource\IEntity $entity The entity to delete.
      * @param \ArrayObject myOptions The options for the delete.
      * @throws \InvalidArgumentException if there are no primary key values of the
      * passed entity
@@ -2390,7 +2390,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * if no query is passed a new one will be created and returned
      *
      * @param string myType name of the finder to be called
-     * @param \Cake\ORM\Query myQuery The query object to apply the finder options to
+     * @param uim.cake.ORM\Query myQuery The query object to apply the finder options to
      * @param array<string, mixed> myOptions List of options to pass to the finder
      * @return \Cake\ORM\Query
      * @throws \BadMethodCallException
@@ -2715,7 +2715,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * property will not be marked as dirty. This is an optimization to prevent unnecessary field
      * updates when persisting entities.
      *
-     * @param \Cake\Datasource\IEntity $entity the entity that will get the
+     * @param uim.cake.Datasource\IEntity $entity the entity that will get the
      * data merged in
      * @param array myData key value list of fields to be merged into the entity
      * @param array<string, mixed> myOptions A list of options for the object hydration.
@@ -2889,7 +2889,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * {@inheritDoc}
      *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @param uim.cake.ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
     function buildRules(RulesChecker $rules): RulesChecker
@@ -2933,7 +2933,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
      *
-     * @param \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity> $entities a single entity or list of entities
+     * @param uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.ORM\Query::contain()
      * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>

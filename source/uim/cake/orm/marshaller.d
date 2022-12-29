@@ -27,7 +27,7 @@ class Marshaller
     /**
      * Constructor.
      *
-     * @param \Cake\ORM\Table myTable The table this marshaller is for.
+     * @param uim.cake.ORM\Table myTable The table this marshaller is for.
      */
     this(Table myTable) {
         _table = myTable;
@@ -274,7 +274,7 @@ class Marshaller
     /**
      * Create a new sub-marshaller and marshal the associated data.
      *
-     * @param \Cake\ORM\Association $assoc The association to marshall
+     * @param uim.cake.ORM\Association $assoc The association to marshall
      * @param mixed myValue The data to hydrate. If not an array, this method will return null.
      * @param array<string, mixed> myOptions List of options.
      * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
@@ -348,7 +348,7 @@ class Marshaller
      * Builds the related entities and handles the special casing
      * for junction table entities.
      *
-     * @param \Cake\ORM\Association\BelongsToMany $assoc The association to marshal.
+     * @param uim.cake.ORM\Association\BelongsToMany $assoc The association to marshal.
      * @param array myData The data to convert into entities.
      * @param array<string, mixed> myOptions List of options.
      * @return array<\Cake\Datasource\IEntity> An array of built entities.
@@ -442,7 +442,7 @@ class Marshaller
     /**
      * Loads a list of belongs to many from ids.
      *
-     * @param \Cake\ORM\Association $assoc The association class for the belongsToMany association.
+     * @param uim.cake.ORM\Association $assoc The association class for the belongsToMany association.
      * @param array $ids The list of ids to load.
      * @return array<\Cake\Datasource\IEntity> An array of entities.
      */
@@ -504,7 +504,7 @@ class Marshaller
      * ]);
      * ```
      *
-     * @param \Cake\Datasource\IEntity $entity the entity that will get the
+     * @param uim.cake.Datasource\IEntity $entity the entity that will get the
      * data merged in
      * @param array myData key value list of fields to be merged into the entity
      * @param array<string, mixed> myOptions List of options.
@@ -702,8 +702,8 @@ class Marshaller
     /**
      * Creates a new sub-marshaller and merges the associated data.
      *
-     * @param \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity> $original The original entity
-     * @param \Cake\ORM\Association $assoc The association to merge
+     * @param uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity> $original The original entity
+     * @param uim.cake.ORM\Association $assoc The association to merge
      * @param mixed myValue The array of data to hydrate. If not an array, this method will return null.
      * @param array<string, mixed> myOptions List of options.
      * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>|null
@@ -749,7 +749,7 @@ class Marshaller
      * association.
      *
      * @param array<\Cake\Datasource\IEntity> $original The original entities list.
-     * @param \Cake\ORM\Association\BelongsToMany $assoc The association to marshall
+     * @param uim.cake.ORM\Association\BelongsToMany $assoc The association to marshall
      * @param array myValue The data to hydrate
      * @param array<string, mixed> myOptions List of options.
      * @return array<\Cake\Datasource\IEntity>
@@ -778,7 +778,7 @@ class Marshaller
      * Merge the special _joinData property into the entity set.
      *
      * @param array<\Cake\Datasource\IEntity> $original The original entities list.
-     * @param \Cake\ORM\Association\BelongsToMany $assoc The association to marshall
+     * @param uim.cake.ORM\Association\BelongsToMany $assoc The association to marshall
      * @param array myValue The data to hydrate
      * @param array<string, mixed> myOptions List of options.
      * @return array<\Cake\Datasource\IEntity> An array of entities
@@ -837,7 +837,7 @@ class Marshaller
     /**
      * dispatch Model.afterMarshal event.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity that was marshaled.
+     * @param uim.cake.Datasource\IEntity $entity The entity that was marshaled.
      * @param array myData readOnly myData to use.
      * @param array<string, mixed> myOptions List of options that are readOnly.
      */

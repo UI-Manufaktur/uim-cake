@@ -65,7 +65,7 @@ class TableRegistry
     /**
      * Sets singleton instance of ILocatorimplementation.
      *
-     * @param \Cake\ORM\Locator\ILocator $tableLocator Instance of a locator to use.
+     * @param uim.cake.ORM\Locator\ILocator $tableLocator Instance of a locator to use.
      * @return void
      */
     public static function setTableLocator(ILocator $tableLocator): void
@@ -104,7 +104,7 @@ class TableRegistry
      * Set an instance.
      *
      * @param string $alias The alias to set.
-     * @param \Cake\ORM\Table $object The table to set.
+     * @param uim.cake.ORM\Table $object The table to set.
      * @return \Cake\ORM\Table
      * @deprecated 3.6.0 Use {@link \Cake\ORM\Locator\TableLocator::set()} instead. Will be removed in 5.0
      */

@@ -130,8 +130,8 @@ class ResultSet : IResultSet
     /**
      * Constructor
      *
-     * @param \Cake\ORM\Query myQuery Query from where results come
-     * @param \Cake\Database\IStatement $statement The statement to fetch from
+     * @param uim.cake.ORM\Query myQuery Query from where results come
+     * @param uim.cake.Database\IStatement $statement The statement to fetch from
      */
     this(Query myQuery, IStatement $statement) {
         myRepository = myQuery.getRepository();
@@ -339,7 +339,7 @@ class ResultSet : IResultSet
      * Calculates the list of associations that should get eager loaded
      * when fetching each record
      *
-     * @param \Cake\ORM\Query myQuery The query from where to derive the associations
+     * @param uim.cake.ORM\Query myQuery The query from where to derive the associations
      * @return void
      */
     protected void _calculateAssociationMap(Query myQuery) {
@@ -359,7 +359,7 @@ class ResultSet : IResultSet
      * Creates a map of row keys out of the query select clause that can be
      * used to hydrate nested result sets more quickly.
      *
-     * @param \Cake\ORM\Query myQuery The query from where to derive the column map
+     * @param uim.cake.ORM\Query myQuery The query from where to derive the column map
      * @return void
      */
     protected void _calculateColumnMap(Query myQuery) {

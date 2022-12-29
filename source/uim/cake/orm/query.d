@@ -93,8 +93,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * Constructor
      *
-     * @param \Cake\Database\Connection myConnection The connection object
-     * @param \Cake\ORM\Table myTable The table this query is starting on
+     * @param uim.cake.Database\Connection myConnection The connection object
+     * @param uim.cake.ORM\Table myTable The table this query is starting on
      */
     this(Connection myConnection, Table myTable) {
         super.this(myConnection);
@@ -140,7 +140,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * all the fields in the schema of the table or the association will be added to
      * the select clause.
      *
-     * @param \Cake\Database\IExpression|\Cake\ORM\Table|\Cake\ORM\Association|callable|array|string myFields Fields
+     * @param uim.cake.Database\IExpression|\Cake\ORM\Table|\Cake\ORM\Association|callable|array|string myFields Fields
      * to be added to the list.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
@@ -168,7 +168,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * been added to the query by the first. If you need to change the list after the first call,
      * pass overwrite boolean true which will reset the select clause removing all previous additions.
      *
-     * @param \Cake\ORM\Table|\Cake\ORM\Association myTable The table to use to get an array of columns
+     * @param uim.cake.ORM\Table|\Cake\ORM\Association myTable The table to use to get an array of columns
      * @param $excludedFields The un-aliased column names you do not want selected from myTable
      * @param bool $overwrite Whether to reset/remove previous selected fields
      * @return this
@@ -199,7 +199,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * This method returns the same query object for chaining.
      *
-     * @param \Cake\ORM\Table myTable The table to pull types from
+     * @param uim.cake.ORM\Table myTable The table to pull types from
      * @return this
      */
     function addDefaultTypes(Table myTable) {
@@ -218,7 +218,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Sets the instance of the eager loader class to use for loading associations
      * and storing containments.
      *
-     * @param \Cake\ORM\EagerLoader $instance The eager loader to use.
+     * @param uim.cake.ORM\EagerLoader $instance The eager loader to use.
      * @return this
      */
     auto setEagerLoader(EagerLoader $instance) {
@@ -404,8 +404,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Used to recursively add contained association column types to
      * the query.
      *
-     * @param \Cake\ORM\Table myTable The table instance to pluck associations from.
-     * @param \Cake\Database\TypeMap myTypeMap The typemap to check for columns in.
+     * @param uim.cake.ORM\Table myTable The table instance to pluck associations from.
+     * @param uim.cake.Database\TypeMap myTypeMap The typemap to check for columns in.
      *   This typemap is indirectly mutated via {@link \Cake\ORM\Query::addDefaultTypes()}
      * @param array<string, array> $associations The nested tree of associations to walk.
      */
@@ -959,7 +959,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * @param \Closure|string|false myKey Either the cache key or a function to generate the cache key.
      *   When using a function, this query instance will be supplied as an argument.
-     * @param \Cake\Cache\CacheEngine|string myConfig Either the name of the cache config to use, or
+     * @param uim.cake.Cache\CacheEngine|string myConfig Either the name of the cache config to use, or
      *   a cache config instance.
      * @return this
      * @throws \RuntimeException When you attempt to cache a non-select query.
@@ -1143,7 +1143,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * This changes the query type to be "update".
      * Can be combined with set() and where() methods to create update queries.
      *
-     * @param \Cake\Database\IExpression|string|null myTable Unused parameter.
+     * @param uim.cake.Database\IExpression|string|null myTable Unused parameter.
      * @return this
      */
     function update(myTable = null) {
@@ -1196,7 +1196,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * Returns a new Query that has automatic field aliasing disabled.
      *
-     * @param \Cake\ORM\Table myTable The table this query is starting on
+     * @param uim.cake.ORM\Table myTable The table this query is starting on
      * @return static
      */
     static function subquery(Table myTable) {

@@ -229,7 +229,7 @@ class SelectLoader
      * has the foreignKey fields selected.
      * If the required fields are missing, throws an exception.
      *
-     * @param \Cake\ORM\Query $fetchQuery The association fetching query
+     * @param uim.cake.ORM\Query $fetchQuery The association fetching query
      * @param array<string> $key The foreign key fields to check
      * @return void
      * @throws \InvalidArgumentException
@@ -276,9 +276,9 @@ class SelectLoader
      * target table query given a filter key and some filtering values when the
      * filtering needs to be done using a subquery.
      *
-     * @param \Cake\ORM\Query $query Target table"s query
+     * @param uim.cake.ORM\Query $query Target table"s query
      * @param array<string>|string $key the fields that should be used for filtering
-     * @param \Cake\ORM\Query $subquery The Subquery to use for filtering
+     * @param uim.cake.ORM\Query $subquery The Subquery to use for filtering
      * @return \Cake\ORM\Query
      */
     protected function _addFilteringJoin(Query $query, $key, $subquery): Query
@@ -312,7 +312,7 @@ class SelectLoader
      * Appends any conditions required to load the relevant set of records in the
      * target table query given a filter key and some filtering values.
      *
-     * @param \Cake\ORM\Query $query Target table"s query
+     * @param uim.cake.ORM\Query $query Target table"s query
      * @param array<string>|string $key The fields that should be used for filtering
      * @param mixed $filter The value that should be used to match for $key
      * @return \Cake\ORM\Query
@@ -332,7 +332,7 @@ class SelectLoader
      * Returns a TupleComparison object that can be used for matching all the fields
      * from $keys with the tuple values in $filter using the provided operator.
      *
-     * @param \Cake\ORM\Query $query Target table"s query
+     * @param uim.cake.ORM\Query $query Target table"s query
      * @param array<string> $keys the fields that should be used for filtering
      * @param mixed $filter the value that should be used to match for $key
      * @param string $operator The operator for comparing the tuples
@@ -389,7 +389,7 @@ class SelectLoader
      * target table, it is constructed by cloning the original query that was used
      * to load records in the source table.
      *
-     * @param \Cake\ORM\Query $query the original query used to load source records
+     * @param uim.cake.ORM\Query $query the original query used to load source records
      * @return \Cake\ORM\Query
      */
     protected function _buildSubquery(Query $query): Query
@@ -421,7 +421,7 @@ class SelectLoader
      * those columns are also included as the fields may be calculated or constant values,
      * that need to be present to ensure the correct association data is loaded.
      *
-     * @param \Cake\ORM\Query $query The query to get fields from.
+     * @param uim.cake.ORM\Query $query The query to get fields from.
      * @return array<string, array> The list of fields for the subquery.
      */
     protected function _subqueryFields(Query $query): array
@@ -452,7 +452,7 @@ class SelectLoader
      * Builds an array containing the results from fetchQuery indexed by
      * the foreignKey value corresponding to this association.
      *
-     * @param \Cake\ORM\Query $fetchQuery The query to get results from
+     * @param uim.cake.ORM\Query $fetchQuery The query to get results from
      * @param array<string, mixed> $options The options passed to the eager loader
      * @return array<string, mixed>
      */
@@ -484,7 +484,7 @@ class SelectLoader
      * Returns a callable to be used for each row in a query result set
      * for injecting the eager loaded rows
      *
-     * @param \Cake\ORM\Query $fetchQuery the Query used to fetch results
+     * @param uim.cake.ORM\Query $fetchQuery the Query used to fetch results
      * @param array<string, mixed> $resultMap an array with the foreignKey as keys and
      * the corresponding target table results as value.
      * @param array<string, mixed> $options The options passed to the eagerLoader method

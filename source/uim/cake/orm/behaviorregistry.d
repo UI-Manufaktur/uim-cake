@@ -39,7 +39,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Constructor
      *
-     * @param \Cake\ORM\Table|null myTable The table this registry is attached to.
+     * @param uim.cake.ORM\Table|null myTable The table this registry is attached to.
      */
     this(?Table myTable = null) {
         if (myTable  !is null) {
@@ -50,7 +50,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Attaches a table instance to this registry.
      *
-     * @param \Cake\ORM\Table myTable The table this registry is attached to.
+     * @param uim.cake.ORM\Table myTable The table this registry is attached to.
      * @return void
      */
     void setTable(Table myTable) {
@@ -133,7 +133,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * Methods starting with `_` will be ignored, as will methods
      * declared on Cake\ORM\Behavior
      *
-     * @param \Cake\ORM\Behavior $instance The behavior to get methods from.
+     * @param uim.cake.ORM\Behavior $instance The behavior to get methods from.
      * @param string myClass The classname that is missing.
      * @param string myAlias The alias of the object.
      * @return array A list of implemented finders and methods.

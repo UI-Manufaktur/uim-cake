@@ -239,7 +239,7 @@ class BelongsToMany : Association
      * Sets the table instance for the junction relation. If no arguments
      * are passed, the current configured table instance is returned
      *
-     * @param \Cake\ORM\Table|string|null $table Name or instance for the join table
+     * @param uim.cake.ORM\Table|string|null $table Name or instance for the join table
      * @return \Cake\ORM\Table
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
@@ -300,9 +300,9 @@ class BelongsToMany : Association
      * You can override these generated associations by defining associations
      * with the correct aliases.
      *
-     * @param \Cake\ORM\Table $junction The junction table.
-     * @param \Cake\ORM\Table $source The source table.
-     * @param \Cake\ORM\Table $target The target table.
+     * @param uim.cake.ORM\Table $junction The junction table.
+     * @param uim.cake.ORM\Table $source The source table.
+     * @param uim.cake.ORM\Table $target The target table.
      * @return void
      */
     protected function _generateTargetAssociations(Table $junction, Table $source, Table $target): void
@@ -347,8 +347,8 @@ class BelongsToMany : Association
      * You can override these generated associations by defining associations
      * with the correct aliases.
      *
-     * @param \Cake\ORM\Table $junction The junction table.
-     * @param \Cake\ORM\Table $source The source table.
+     * @param uim.cake.ORM\Table $junction The junction table.
+     * @param uim.cake.ORM\Table $source The source table.
      * @return void
      */
     protected function _generateSourceAssociations(Table $junction, Table $source): void
@@ -382,9 +382,9 @@ class BelongsToMany : Association
      * You can override these generated associations by defining associations
      * with the correct aliases.
      *
-     * @param \Cake\ORM\Table $junction The junction table.
-     * @param \Cake\ORM\Table $source The source table.
-     * @param \Cake\ORM\Table $target The target table.
+     * @param uim.cake.ORM\Table $junction The junction table.
+     * @param uim.cake.ORM\Table $source The source table.
+     * @param uim.cake.ORM\Table $target The target table.
      * @return void
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
@@ -433,7 +433,7 @@ class BelongsToMany : Association
      * - fields: a list of fields in the target table to include in the result
      * - type: The type of join to be used (e.g. INNER)
      *
-     * @param \Cake\ORM\Query $query the query to be altered to include the target table data
+     * @param uim.cake.ORM\Query $query the query to be altered to include the target table data
      * @param array<string, mixed> $options Any extra options or overrides to be taken in account
      * @return void
      */
@@ -557,7 +557,7 @@ class BelongsToMany : Association
     /**
      * Clear out the data in the junction table for a given entity.
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity that started the cascading delete.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity that started the cascading delete.
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success.
      */
@@ -603,7 +603,7 @@ class BelongsToMany : Association
      * Returns boolean true, as both of the tables "own" rows in the other side
      * of the association via the joint table.
      *
-     * @param \Cake\ORM\Table $side The potential Table with ownership
+     * @param uim.cake.ORM\Table $side The potential Table with ownership
      * @return bool
      */
     function isOwningSide(Table $side): bool
@@ -654,7 +654,7 @@ class BelongsToMany : Association
      * of the entities intended to be saved by this method, they will be updated,
      * not deleted.
      *
-     * @param \Cake\Datasource\EntityInterface $entity an entity from the source table
+     * @param uim.cake.Datasource\EntityInterface $entity an entity from the source table
      * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @throws \InvalidArgumentException if the property representing the association
      * in the parent entity cannot be traversed
@@ -690,7 +690,7 @@ class BelongsToMany : Association
      * Persists each of the entities into the target table and creates links between
      * the parent entity and each one of the saved target entities.
      *
-     * @param \Cake\Datasource\EntityInterface $parentEntity the source entity containing the target
+     * @param uim.cake.Datasource\EntityInterface $parentEntity the source entity containing the target
      * entities to be saved.
      * @param array $entities list of entities to persist in target table and to
      * link to the parent entity
@@ -755,7 +755,7 @@ class BelongsToMany : Association
     /**
      * Creates links between the source entity and each of the passed target entities
      *
-     * @param \Cake\Datasource\EntityInterface $sourceEntity the entity from source table in this
+     * @param uim.cake.Datasource\EntityInterface $sourceEntity the entity from source table in this
      * association
      * @param array<\Cake\Datasource\EntityInterface> $targetEntities list of entities to link to link to the source entity using the
      * junction table
@@ -829,7 +829,7 @@ class BelongsToMany : Association
      *
      * `$article.get("tags")` will contain all tags in `$newTags` after liking
      *
-     * @param \Cake\Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
+     * @param uim.cake.Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
      *   of this association
      * @param array<\Cake\Datasource\EntityInterface> $targetEntities list of entities belonging to the `target` side
      *   of this association
@@ -879,7 +879,7 @@ class BelongsToMany : Association
      *
      * `$article.get("tags")` will contain only `[$tag4]` after deleting in the database
      *
-     * @param \Cake\Datasource\EntityInterface $sourceEntity An entity persisted in the source table for
+     * @param uim.cake.Datasource\EntityInterface $sourceEntity An entity persisted in the source table for
      *   this association.
      * @param array<\Cake\Datasource\EntityInterface> $targetEntities List of entities persisted in the target table for
      *   this association.
@@ -946,7 +946,7 @@ class BelongsToMany : Association
     /**
      * Sets the current join table, either the name of the Table instance or the instance itself.
      *
-     * @param \Cake\ORM\Table|string $through Name of the Table instance or the instance itself
+     * @param uim.cake.ORM\Table|string $through Name of the Table instance or the instance itself
      * @return this
      */
     function setThrough($through) {
@@ -1060,7 +1060,7 @@ class BelongsToMany : Association
     /**
      * Append a join to the junction table.
      *
-     * @param \Cake\ORM\Query $query The query to append.
+     * @param uim.cake.ORM\Query $query The query to append.
      * @param array|null $conditions The query conditions to use.
      * @return \Cake\ORM\Query The modified query.
      */
@@ -1133,7 +1133,7 @@ class BelongsToMany : Association
      *
      * `$article.get("tags")` will contain only `[$tag1, $tag3]` at the end
      *
-     * @param \Cake\Datasource\EntityInterface $sourceEntity an entity persisted in the source table for
+     * @param uim.cake.Datasource\EntityInterface $sourceEntity an entity persisted in the source table for
      *   this association
      * @param array $targetEntities list of entities from the target table to be linked
      * @param array<string, mixed> $options list of options to be passed to the internal `save`/`delete` calls
@@ -1220,7 +1220,7 @@ class BelongsToMany : Association
      * `$existing` and `$jointEntities`. This method will return the values from
      * `$targetEntities` that were not deleted from calculating the difference.
      *
-     * @param \Cake\ORM\Query $existing a query for getting existing links
+     * @param uim.cake.ORM\Query $existing a query for getting existing links
      * @param array<\Cake\Datasource\EntityInterface> $jointEntities link entities that should be persisted
      * @param array $targetEntities entities in target table that are related to
      * the `$jointEntities`
@@ -1306,7 +1306,7 @@ class BelongsToMany : Association
     /**
      * Throws an exception should any of the passed entities is not persisted.
      *
-     * @param \Cake\Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
+     * @param uim.cake.Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
      *   of this association
      * @param array<\Cake\Datasource\EntityInterface> $targetEntities list of entities belonging to the `target` side
      *   of this association
@@ -1334,7 +1334,7 @@ class BelongsToMany : Association
      * Returns the list of joint entities that exist between the source entity
      * and each of the passed target entities
      *
-     * @param \Cake\Datasource\EntityInterface $sourceEntity The row belonging to the source side
+     * @param uim.cake.Datasource\EntityInterface $sourceEntity The row belonging to the source side
      *   of this association.
      * @param array $targetEntities The rows belonging to the target side of this
      *   association.

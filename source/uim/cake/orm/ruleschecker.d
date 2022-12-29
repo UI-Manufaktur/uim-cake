@@ -75,7 +75,7 @@ class RulesChecker : BaseRulesChecker
      *
      * @param array<string>|string myField The field or list of fields to check for existence by
      * primary key lookup in the other table.
-     * @param \Cake\ORM\Table|\Cake\ORM\Association|string myTable The table name where the fields existence will be checked.
+     * @param uim.cake.ORM\Table|\Cake\ORM\Association|string myTable The table name where the fields existence will be checked.
      * @param array<string, mixed>|string|null myMessage The error message to show in case the rule does not pass. Can
      *   also be an array of options. When an array, the "message" key can be used to provide a message.
      * @return \Cake\Datasource\RuleInvoker
@@ -114,7 +114,7 @@ class RulesChecker : BaseRulesChecker
      * On a `Comments` table that has a `belongsTo Articles` association, this check would ensure that comments
      * can only be edited as long as they are associated to an existing article.
      *
-     * @param \Cake\ORM\Association|string association The association to check for links.
+     * @param uim.cake.ORM\Association|string association The association to check for links.
      * @param string|null myField The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
      * @param string|null myMessage The error message to show in case the rule does not pass.
@@ -144,7 +144,7 @@ class RulesChecker : BaseRulesChecker
      * On a `Articles` table that has a `hasMany Comments` association, this check would ensure that articles
      * can only be deleted when no associated comments exist.
      *
-     * @param \Cake\ORM\Association|string association The association to check for links.
+     * @param uim.cake.ORM\Association|string association The association to check for links.
      * @param string|null myField The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
      * @param string|null myMessage The error message to show in case the rule does not pass.
@@ -165,7 +165,7 @@ class RulesChecker : BaseRulesChecker
     /**
      * Adds a link constraint rule.
      *
-     * @param \Cake\ORM\Association|string association The association to check for links.
+     * @param uim.cake.ORM\Association|string association The association to check for links.
      * @param string|null myErrorField The name of the property to use for setting possible errors. When absent,
      *   the name is inferred from `$association`.
      * @param string|null myMessage The error message to show in case the rule does not pass.

@@ -128,7 +128,7 @@ class Behavior : IEventListener
      *
      * Merges config with the default and store in the config property
      *
-     * @param \Cake\ORM\Table myTable The table this behavior is attached to.
+     * @param uim.cake.ORM\Table myTable The table this behavior is attached to.
      * @param array<string, mixed> myConfig The config for this behavior.
      */
     this(Table myTable, array myConfig = []) {

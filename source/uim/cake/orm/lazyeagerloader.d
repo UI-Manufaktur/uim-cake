@@ -20,10 +20,10 @@ class LazyEagerLoader
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
      *
-     * @param \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity> $entities a single entity or list of entities
+     * @param uim.cake.Datasource\IEntity|array<\Cake\Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.ORM\Query::contain()
-     * @param \Cake\ORM\Table $source The table to use for fetching the top level entities
+     * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
      * @return \Cake\Datasource\IEntity|array<\Cake\Datasource\IEntity>
      */
     function loadInto($entities, array $contain, Table $source) {
@@ -47,9 +47,9 @@ class LazyEagerLoader
      * Builds a query for loading the passed list of entity objects along with the
      * associations specified in $contain.
      *
-     * @param \Cake\Collection\ICollection $objects The original entities
+     * @param uim.cake.Collection\ICollection $objects The original entities
      * @param array $contain The associations to be loaded
-     * @param \Cake\ORM\Table $source The table to use for fetching the top level entities
+     * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
      * @return \Cake\ORM\Query
      */
     protected auto _getQuery(ICollection $objects, array $contain, Table $source): Query
@@ -117,9 +117,9 @@ class LazyEagerLoader
      * entities.
      *
      * @param \Traversable|array<\Cake\Datasource\IEntity> $objects The original list of entities
-     * @param \Cake\ORM\Query myResults The loaded results
+     * @param uim.cake.ORM\Query myResults The loaded results
      * @param $associations The top level associations that were loaded
-     * @param \Cake\ORM\Table $source The table where the entities came from
+     * @param uim.cake.ORM\Table $source The table where the entities came from
      * @return array
      */
     protected array _injectResults(iterable $objects, myResults, string[] $associations, Table $source) {
