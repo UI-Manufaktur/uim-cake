@@ -31,8 +31,8 @@ class TupleComparison : ComparisonExpression
     /**
      * Constructor
      *
-     * @param \Cake\Database\IExpression|array|string $fields the fields to use to form a tuple
-     * @param \Cake\Database\IExpression|array $values the values to use to form a tuple
+     * @param uim.cake.Database\IExpression|array|string $fields the fields to use to form a tuple
+     * @param uim.cake.Database\IExpression|array $values the values to use to form a tuple
      * @param array<string|null> $types the types names to use for casting each of the values, only
      * one type per position in the value array in needed
      * @param string $conjunction the operator used for comparing field and value
@@ -105,7 +105,7 @@ class TupleComparison : ComparisonExpression
      * Returns a string with the values as placeholders in a string to be used
      * for the SQL version of this expression
      *
-     * @param \Cake\Database\ValueBinder $binder The value binder to convert expressions with.
+     * @param uim.cake.Database\ValueBinder $binder The value binder to convert expressions with.
      * @return string
      */
     protected function _stringifyValues(ValueBinder $binder): string

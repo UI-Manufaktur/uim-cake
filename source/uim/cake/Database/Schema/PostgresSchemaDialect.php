@@ -303,7 +303,7 @@ class PostgresSchemaDialect : SchemaDialect
     /**
      * Add/update a constraint into the schema object.
      *
-     * @param \Cake\Database\Schema\TableSchema $schema The table to update.
+     * @param uim.cake.Database\Schema\TableSchema $schema The table to update.
      * @param string $name The index name.
      * @param string $type The index type.
      * @param array $row The metadata record to update with.
@@ -642,7 +642,7 @@ class PostgresSchemaDialect : SchemaDialect
     /**
      * Generate the SQL to drop a table.
      *
-     * @param \Cake\Database\Schema\TableSchema $schema Table instance
+     * @param uim.cake.Database\Schema\TableSchema $schema Table instance
      * @return array SQL statements to drop a table.
      */
     function dropTableSql(TableSchema $schema): array

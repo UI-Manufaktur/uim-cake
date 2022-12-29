@@ -62,7 +62,7 @@ class ValuesExpression : IExpression
      * Constructor
      *
      * @param array $columns The list of columns that are going to be part of the values.
-     * @param \Cake\Database\TypeMap $typeMap A dictionary of column . type names
+     * @param uim.cake.Database\TypeMap $typeMap A dictionary of column . type names
      */
     public this(array $columns, TypeMap $typeMap) {
         _columns = $columns;
@@ -72,7 +72,7 @@ class ValuesExpression : IExpression
     /**
      * Add a row of data to be inserted.
      *
-     * @param \Cake\Database\Query|array $values Array of data to append into the insert, or
+     * @param uim.cake.Database\Query|array $values Array of data to append into the insert, or
      *   a query for doing INSERT INTO .. SELECT style commands
      * @return void
      * @throws \Cake\Database\Exception\DatabaseException When mixing array + Query data types.
@@ -177,7 +177,7 @@ class ValuesExpression : IExpression
      * Sets the query object to be used as the values expression to be evaluated
      * to insert records in the table.
      *
-     * @param \Cake\Database\Query $query The query to set
+     * @param uim.cake.Database\Query $query The query to set
      * @return this
      */
     function setQuery(Query $query) {

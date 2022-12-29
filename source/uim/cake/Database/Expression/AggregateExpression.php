@@ -34,7 +34,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
      * Adds conditions to the FILTER clause. The conditions are the same format as
      * `Query::where()`.
      *
-     * @param \Cake\Database\IExpression|\Closure|array|string $conditions The conditions to filter on.
+     * @param uim.cake.Database\IExpression|\Closure|array|string $conditions The conditions to filter on.
      * @param array<string, string> $types Associative array of type names used to bind values to query
      * @return this
      * @see uim.cake.Database\Query::where()

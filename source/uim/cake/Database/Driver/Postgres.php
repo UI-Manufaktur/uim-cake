@@ -222,7 +222,7 @@ class Postgres : Driver
     /**
      * Changes identifer expression into postgresql format.
      *
-     * @param \Cake\Database\Expression\IdentifierExpression $expression The expression to tranform.
+     * @param uim.cake.Database\Expression\IdentifierExpression $expression The expression to tranform.
      * @return void
      */
     protected function _transformIdentifierExpression(IdentifierExpression $expression): void
@@ -238,7 +238,7 @@ class Postgres : Driver
      * Receives a FunctionExpression and changes it so that it conforms to this
      * SQL dialect.
      *
-     * @param \Cake\Database\Expression\FunctionExpression $expression The function expression to convert
+     * @param uim.cake.Database\Expression\FunctionExpression $expression The function expression to convert
      *   to postgres SQL.
      * @return void
      */
@@ -302,7 +302,7 @@ class Postgres : Driver
     /**
      * Changes string expression into postgresql format.
      *
-     * @param \Cake\Database\Expression\StringExpression $expression The string expression to tranform.
+     * @param uim.cake.Database\Expression\StringExpression $expression The string expression to tranform.
      * @return void
      */
     protected function _transformStringExpression(StringExpression $expression): void

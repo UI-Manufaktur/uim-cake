@@ -111,7 +111,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * only be passed if you actually want to create the simple
      * case expression variant!
      *
-     * @param \Cake\Database\IExpression|object|scalar|null $value The case value.
+     * @param uim.cake.Database\IExpression|object|scalar|null $value The case value.
      * @param string|null $type The case value type. If no type is provided, the type will be tried to be inferred
      *  from the value.
      */
@@ -270,7 +270,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *      .bind(":userData", $userData, "integer")
      * ```
      *
-     * @param \Cake\Database\IExpression|\Closure|object|array|scalar $when The `WHEN` value. When using an
+     * @param uim.cake.Database\IExpression|\Closure|object|array|scalar $when The `WHEN` value. When using an
      *  array of conditions, it must be compatible with `\Cake\Database\Query::where()`. Note that this argument is
      *  _not_ completely safe for use with user data, as a user supplied array would allow for raw SQL to slip in! If
      *  you plan to use user data, either pass a single type for the `$type` argument (which forces the `$when` value to
@@ -357,7 +357,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *     // ...
      * ```
      *
-     * @param \Cake\Database\IExpression|object|scalar|null $result The result value.
+     * @param uim.cake.Database\IExpression|object|scalar|null $result The result value.
      * @param string|null $type The result type. If no type is provided, the type will be tried to be inferred from the
      *  value.
      * @return this
@@ -383,7 +383,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
     /**
      * Sets the `ELSE` result value.
      *
-     * @param \Cake\Database\IExpression|object|scalar|null $result The result value.
+     * @param uim.cake.Database\IExpression|object|scalar|null $result The result value.
      * @param string|null $type The result type. If no type is provided, the type will be tried to be inferred from the
      *  value.
      * @return this

@@ -64,7 +64,7 @@ class ComparisonExpression : IExpression, FieldInterface
     /**
      * Constructor
      *
-     * @param \Cake\Database\IExpression|string $field the field name to compare to a value
+     * @param uim.cake.Database\IExpression|string $field the field name to compare to a value
      * @param mixed $value The value to be used in comparison
      * @param string|null $type the type name used to cast the value
      * @param string $operator the operator used for comparing field and value
@@ -187,7 +187,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * Returns a template and a placeholder for the value after registering it
      * with the placeholder $binder
      *
-     * @param \Cake\Database\ValueBinder $binder The value binder to use.
+     * @param uim.cake.Database\ValueBinder $binder The value binder to use.
      * @return array First position containing the template and the second a placeholder
      */
     protected function _stringExpression(ValueBinder $binder): array
@@ -227,7 +227,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * Registers a value in the placeholder generator and returns the generated placeholder
      *
      * @param mixed $value The value to bind
-     * @param \Cake\Database\ValueBinder $binder The value binder to use
+     * @param uim.cake.Database\ValueBinder $binder The value binder to use
      * @param string|null $type The type of $value
      * @return string generated placeholder
      */
@@ -244,7 +244,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * $binder and separated by `,`
      *
      * @param iterable $value the value to flatten
-     * @param \Cake\Database\ValueBinder $binder The value binder to use
+     * @param uim.cake.Database\ValueBinder $binder The value binder to use
      * @param string|null $type the type to cast values to
      * @return string
      */
@@ -270,7 +270,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * and all IExpression objects that could be found in the second
      * position.
      *
-     * @param \Cake\Database\IExpression|iterable $values The rows to insert
+     * @param uim.cake.Database\IExpression|iterable $values The rows to insert
      * @return array
      */
     protected function _collectExpressions($values): array

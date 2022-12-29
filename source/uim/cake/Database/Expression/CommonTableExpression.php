@@ -58,7 +58,7 @@ class CommonTableExpression : IExpression
      * Constructor.
      *
      * @param string $name The CTE name.
-     * @param \Cake\Database\IExpression|\Closure $query CTE query
+     * @param uim.cake.Database\IExpression|\Closure $query CTE query
      */
     public this(string $name = "", $query = null) {
         this.name = new IdentifierExpression($name);
@@ -85,7 +85,7 @@ class CommonTableExpression : IExpression
     /**
      * Sets the query for this CTE.
      *
-     * @param \Cake\Database\IExpression|\Closure $query CTE query
+     * @param uim.cake.Database\IExpression|\Closure $query CTE query
      * @return this
      */
     function query($query) {
@@ -105,7 +105,7 @@ class CommonTableExpression : IExpression
     /**
      * Adds one or more fields (arguments) to the CTE.
      *
-     * @param \Cake\Database\Expression\IdentifierExpression|array<\Cake\Database\Expression\IdentifierExpression>|array<string>|string $fields Field names
+     * @param uim.cake.Database\Expression\IdentifierExpression|array<\Cake\Database\Expression\IdentifierExpression>|array<string>|string $fields Field names
      * @return this
      */
     function field($fields) {

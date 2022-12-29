@@ -33,7 +33,7 @@ class SchemaCache
     /**
      * Constructor
      *
-     * @param \Cake\Database\Connection $connection Connection name to get the schema for or a connection instance
+     * @param uim.cake.Database\Connection $connection Connection name to get the schema for or a connection instance
      */
     public this(Connection $connection) {
         _schema = this.getSchema($connection);
@@ -89,7 +89,7 @@ class SchemaCache
     /**
      * Helper method to get the schema collection.
      *
-     * @param \Cake\Database\Connection $connection Connection object
+     * @param uim.cake.Database\Connection $connection Connection object
      * @return \Cake\Database\Schema\CachedCollection
      * @throws \RuntimeException If given connection object is not compatible with schema caching
      */

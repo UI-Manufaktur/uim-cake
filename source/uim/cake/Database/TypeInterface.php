@@ -19,7 +19,7 @@ interface TypeInterface
      * Casts given value from a PHP type to one acceptable by a database.
      *
      * @param mixed $value Value to be converted to a database equivalent.
-     * @param \Cake\Database\DriverInterface $driver Object from which database preferences and configuration will be extracted.
+     * @param uim.cake.Database\DriverInterface $driver Object from which database preferences and configuration will be extracted.
      * @return mixed Given PHP type casted to one acceptable by a database.
      */
     function toDatabase($value, DriverInterface $driver);
@@ -28,7 +28,7 @@ interface TypeInterface
      * Casts given value from a database type to a PHP equivalent.
      *
      * @param mixed $value Value to be converted to PHP equivalent
-     * @param \Cake\Database\DriverInterface $driver Object from which database preferences and configuration will be extracted
+     * @param uim.cake.Database\DriverInterface $driver Object from which database preferences and configuration will be extracted
      * @return mixed Given value casted from a database to a PHP equivalent.
      */
     function toPHP($value, DriverInterface $driver);
@@ -37,7 +37,7 @@ interface TypeInterface
      * Casts given value to its Statement equivalent.
      *
      * @param mixed $value Value to be converted to PDO statement.
-     * @param \Cake\Database\DriverInterface $driver Object from which database preferences and configuration will be extracted.
+     * @param uim.cake.Database\DriverInterface $driver Object from which database preferences and configuration will be extracted.
      * @return mixed Given value casted to its Statement equivalent.
      */
     function toStatement($value, DriverInterface $driver);

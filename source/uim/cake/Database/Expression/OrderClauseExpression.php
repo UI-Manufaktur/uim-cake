@@ -31,7 +31,7 @@ class OrderClauseExpression : IExpression, FieldInterface
     /**
      * Constructor
      *
-     * @param \Cake\Database\IExpression|string $field The field to order on.
+     * @param uim.cake.Database\IExpression|string $field The field to order on.
      * @param string $direction The direction to sort on.
      */
     public this($field, $direction) {

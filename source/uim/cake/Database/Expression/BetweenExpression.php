@@ -46,7 +46,7 @@ class BetweenExpression : IExpression, FieldInterface
     /**
      * Constructor
      *
-     * @param \Cake\Database\IExpression|string $field The field name to compare for values inbetween the range.
+     * @param uim.cake.Database\IExpression|string $field The field name to compare for values inbetween the range.
      * @param mixed $from The initial value of the range.
      * @param mixed $to The ending value in the comparison range.
      * @param string|null $type The data type name to bind the values with.
@@ -103,7 +103,7 @@ class BetweenExpression : IExpression, FieldInterface
      * Registers a value in the placeholder generator and returns the generated placeholder
      *
      * @param mixed $value The value to bind
-     * @param \Cake\Database\ValueBinder $binder The value binder to use
+     * @param uim.cake.Database\ValueBinder $binder The value binder to use
      * @param string $type The type of $value
      * @return string generated placeholder
      */

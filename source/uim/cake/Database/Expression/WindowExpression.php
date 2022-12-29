@@ -255,8 +255,8 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * Builds frame offset sql.
      *
-     * @param \Cake\Database\ValueBinder $binder Value binder
-     * @param \Cake\Database\IExpression|string|int|null $offset Frame offset
+     * @param uim.cake.Database\ValueBinder $binder Value binder
+     * @param uim.cake.Database\IExpression|string|int|null $offset Frame offset
      * @param string $direction Frame offset direction
      * @return string
      */

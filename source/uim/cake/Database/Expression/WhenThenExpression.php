@@ -84,7 +84,7 @@ class WhenThenExpression : IExpression
     /**
      * Constructor.
      *
-     * @param \Cake\Database\TypeMap|null $typeMap The type map to use when using an array of conditions for the `WHEN`
+     * @param uim.cake.Database\TypeMap|null $typeMap The type map to use when using an array of conditions for the `WHEN`
      *  value.
      */
     public this(?TypeMap $typeMap = null) {
@@ -97,7 +97,7 @@ class WhenThenExpression : IExpression
     /**
      * Sets the `WHEN` value.
      *
-     * @param \Cake\Database\IExpression|object|array|scalar $when The `WHEN` value. When using an array of
+     * @param uim.cake.Database\IExpression|object|array|scalar $when The `WHEN` value. When using an array of
      *  conditions, it must be compatible with `\Cake\Database\Query::where()`. Note that this argument is _not_
      *  completely safe for use with user data, as a user supplied array would allow for raw SQL to slip in! If you
      *  plan to use user data, either pass a single type for the `$type` argument (which forces the `$when` value to be
@@ -191,7 +191,7 @@ class WhenThenExpression : IExpression
     /**
      * Sets the `THEN` result value.
      *
-     * @param \Cake\Database\IExpression|object|scalar|null $result The result value.
+     * @param uim.cake.Database\IExpression|object|scalar|null $result The result value.
      * @param string|null $type The result type. If no type is provided, the type will be inferred from the given
      *  result value.
      * @return this

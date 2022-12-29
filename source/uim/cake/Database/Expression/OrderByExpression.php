@@ -21,8 +21,8 @@ class OrderByExpression : QueryExpression
     /**
      * Constructor
      *
-     * @param \Cake\Database\IExpression|array|string $conditions The sort columns
-     * @param \Cake\Database\TypeMap|array<string, string> $types The types for each column.
+     * @param uim.cake.Database\IExpression|array|string $conditions The sort columns
+     * @param uim.cake.Database\TypeMap|array<string, string> $types The types for each column.
      * @param string $conjunction The glue used to join conditions together.
      */
     public this($conditions = [], $types = [], $conjunction = "") {

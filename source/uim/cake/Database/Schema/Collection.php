@@ -38,7 +38,7 @@ class Collection : ICollection
     /**
      * Constructor.
      *
-     * @param \Cake\Database\Connection $connection The connection instance.
+     * @param uim.cake.Database\Connection $connection The connection instance.
      */
     public this(Connection $connection) {
         _connection = $connection;
@@ -125,7 +125,7 @@ class Collection : ICollection
      * @param string $stage The stage name.
      * @param string $name The table name.
      * @param array<string, mixed> $config The config data.
-     * @param \Cake\Database\Schema\TableSchema $schema The table schema instance.
+     * @param uim.cake.Database\Schema\TableSchema $schema The table schema instance.
      * @return void
      * @throws \Cake\Database\Exception\DatabaseException on query failure.
      * @uses \Cake\Database\Schema\SchemaDialect::describeColumnSql

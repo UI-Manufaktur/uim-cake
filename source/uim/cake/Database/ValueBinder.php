@@ -127,7 +127,7 @@ class ValueBinder
     /**
      * Binds all the stored values in this object to the passed statement.
      *
-     * @param \Cake\Database\StatementInterface $statement The statement to add parameters to.
+     * @param uim.cake.Database\StatementInterface $statement The statement to add parameters to.
      * @return void
      */
     function attachTo(StatementInterface $statement): void

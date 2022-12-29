@@ -57,7 +57,7 @@ class ReconnectStrategy : RetryStrategyInterface
      * passed connection. This reference will be used to automatically
      * reconnect to the server in case of failure.
      *
-     * @param \Cake\Database\Connection $connection The connection to check
+     * @param uim.cake.Database\Connection $connection The connection to check
      */
     public this(Connection $connection) {
         this.connection = $connection;

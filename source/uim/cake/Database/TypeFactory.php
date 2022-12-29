@@ -93,7 +93,7 @@ class TypeFactory
      * Set TypeInterface instance capable of converting a type identified by $name
      *
      * @param string $name The type identifier you want to set.
-     * @param \Cake\Database\TypeInterface $instance The type instance you want to set.
+     * @param uim.cake.Database\TypeInterface $instance The type instance you want to set.
      * @return void
      */
     public static function set(string $name, TypeInterface $instance): void

@@ -71,8 +71,8 @@ trait CaseExpressionTrait
     /**
      * Compiles a nullable value to SQL.
      *
-     * @param \Cake\Database\ValueBinder $binder The value binder to use.
-     * @param \Cake\Database\IExpression|object|scalar|null $value The value to compile.
+     * @param uim.cake.Database\ValueBinder $binder The value binder to use.
+     * @param uim.cake.Database\IExpression|object|scalar|null $value The value to compile.
      * @param string|null $type The value type.
      * @return string
      */

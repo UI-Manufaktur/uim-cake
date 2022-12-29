@@ -25,7 +25,7 @@ trait TypeMapTrait
     /**
      * Creates a new TypeMap if $typeMap is an array, otherwise exchanges it for the given one.
      *
-     * @param \Cake\Database\TypeMap|array $typeMap Creates a TypeMap if array, otherwise sets the given TypeMap
+     * @param uim.cake.Database\TypeMap|array $typeMap Creates a TypeMap if array, otherwise sets the given TypeMap
      * @return this
      */
     function setTypeMap($typeMap) {

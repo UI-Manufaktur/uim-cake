@@ -49,9 +49,9 @@ class CaseExpression : IExpression
     /**
      * Constructs the case expression
      *
-     * @param \Cake\Database\IExpression|array $conditions The conditions to test. Must be a IExpression
+     * @param uim.cake.Database\IExpression|array $conditions The conditions to test. Must be a IExpression
      * instance, or an array of IExpression instances.
-     * @param \Cake\Database\IExpression|array $values Associative array of values to be associated with the
+     * @param uim.cake.Database\IExpression|array $values Associative array of values to be associated with the
      * conditions passed in $conditions. If there are more $values than $conditions,
      * the last $value is used as the `ELSE` value.
      * @param array<string> $types Associative array of types to be associated with the values
@@ -78,9 +78,9 @@ class CaseExpression : IExpression
      * Conditions must be a one dimensional array or a QueryExpression.
      * The trueValues must be a similar structure, but may contain a string value.
      *
-     * @param \Cake\Database\IExpression|array $conditions Must be a IExpression instance,
+     * @param uim.cake.Database\IExpression|array $conditions Must be a IExpression instance,
      *   or an array of IExpression instances.
-     * @param \Cake\Database\IExpression|array $values Associative array of values of each condition
+     * @param uim.cake.Database\IExpression|array $values Associative array of values of each condition
      * @param array<string> $types Associative array of types to be associated with the values
      * @return this
      */
@@ -154,7 +154,7 @@ class CaseExpression : IExpression
     /**
      * Sets the default value
      *
-     * @param \Cake\Database\IExpression|array|string|null $value Value to set
+     * @param uim.cake.Database\IExpression|array|string|null $value Value to set
      * @param string|null $type Type of value
      * @return void
      */
@@ -179,8 +179,8 @@ class CaseExpression : IExpression
     /**
      * Compiles the relevant parts into sql
      *
-     * @param \Cake\Database\IExpression|array|string $part The part to compile
-     * @param \Cake\Database\ValueBinder $binder Sql generator
+     * @param uim.cake.Database\IExpression|array|string $part The part to compile
+     * @param uim.cake.Database\ValueBinder $binder Sql generator
      * @return string
      */
     protected function _compile($part, ValueBinder $binder): string
@@ -199,7 +199,7 @@ class CaseExpression : IExpression
     /**
      * Converts the Node into a SQL string fragment.
      *
-     * @param \Cake\Database\ValueBinder $binder Placeholder generator object
+     * @param uim.cake.Database\ValueBinder $binder Placeholder generator object
      * @return string
      */
     function sql(ValueBinder $binder): string

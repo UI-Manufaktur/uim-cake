@@ -177,7 +177,7 @@ class Mysql : Driver
     /**
      * Prepares a sql statement to be executed
      *
-     * @param \Cake\Database\Query|string $query The query to prepare.
+     * @param uim.cake.Database\Query|string $query The query to prepare.
      * @return \Cake\Database\StatementInterface
      */
     function prepare($query): StatementInterface
