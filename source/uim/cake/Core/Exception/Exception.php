@@ -9,7 +9,6 @@
  *
 
  * @since         4.2.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 
 class_alias("Cake\Core\Exception\CakeException", "Cake\Core\Exception\Exception");
