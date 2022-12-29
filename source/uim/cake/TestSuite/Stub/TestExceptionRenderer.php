@@ -4,7 +4,7 @@
  *
 
 
- * @since         3.5.0
+
   */
 module uim.cake.TestSuite\Stub;
 
