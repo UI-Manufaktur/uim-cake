@@ -504,7 +504,7 @@ class ConsoleIo {
      *
      * @param string myName The name of the helper to render
      * @param array<string, mixed> myConfig Configuration data for the helper.
-     * @return \Cake\Console\Helper The created helper instance.
+     * @return uim.cake.Console\Helper The created helper instance.
      */
     Helper helper(string myName, array myConfig = []) 
     {

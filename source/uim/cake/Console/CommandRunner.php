@@ -193,7 +193,7 @@ class CommandRunner : EventDispatcherInterface
     /**
      * Get the application"s event manager or the global one.
      *
-     * @return \Cake\Event\IEventManager
+     * @return uim.cake.Event\IEventManager
      */
     function getEventManager(): IEventManager
     {
@@ -230,7 +230,7 @@ class CommandRunner : EventDispatcherInterface
      * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
      * @param uim.cake.Console\CommandCollection $commands The command collection to find the shell in.
      * @param string $name The command name to find
-     * @return \Cake\Console\ICommand|\Cake\Console\Shell
+     * @return uim.cake.Console\ICommand|\Cake\Console\Shell
      */
     protected function getCommand(ConsoleIo $io, CommandCollection $commands, string $name) {
         $instance = $commands.get($name);
@@ -349,7 +349,7 @@ class CommandRunner : EventDispatcherInterface
      *
      * @param string $className Shell class name.
      * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
-     * @return \Cake\Console\ICommand|\Cake\Console\Shell
+     * @return uim.cake.Console\ICommand|\Cake\Console\Shell
      */
     protected function createCommand(string $className, ConsoleIo $io) {
         if (!this.factory) {

@@ -71,7 +71,7 @@ class I18nInitCommand : Command {
      * Gets the option parser instance and configures it.
      *
      * @param uim.cake.Console\ConsoleOptionParser $parser The parser to update
-     * @return \Cake\Console\ConsoleOptionParser
+     * @return uim.cake.Console\ConsoleOptionParser
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
       $parser.setDescription("Initialize a language PO file from the POT file")

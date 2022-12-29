@@ -73,7 +73,7 @@ class HelperRegistry : ObjectRegistry
      * @param string myClass The classname to create.
      * @param string myAlias The alias of the helper.
      * @param array<string, mixed> myConfig An array of settings to use for the helper.
-     * @return \Cake\Console\Helper The constructed helper class.
+     * @return uim.cake.Console\Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Helper _create(myClass, string myAlias, array myConfig) {

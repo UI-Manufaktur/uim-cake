@@ -270,7 +270,7 @@ trait ConsoleIntegrationTestTrait
     /**
      * Builds the appropriate command dispatcher
      *
-     * @return \Cake\Console\CommandRunner|\Cake\Console\TestSuite\LegacyCommandRunner
+     * @return uim.cake.Console\CommandRunner|\Cake\Console\TestSuite\LegacyCommandRunner
      */
     protected function makeRunner() {
         if (_useCommandRunner) {

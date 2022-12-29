@@ -19,7 +19,7 @@ class CacheListCommand : Command {
      *
      * @see https://book.UIM.org/4/en/console-commands/option-parsers.html
      * @param uim.cake.Console\ConsoleOptionParser $parser The parser to be defined
-     * @return \Cake\Console\ConsoleOptionParser The built parser.
+     * @return uim.cake.Console\ConsoleOptionParser The built parser.
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser = super.buildOptionParser($parser);

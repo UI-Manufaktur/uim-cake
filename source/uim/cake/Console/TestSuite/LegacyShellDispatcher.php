@@ -46,7 +46,7 @@ class LegacyShellDispatcher : ShellDispatcher
      *
      * @param string $className Class name
      * @param string $shortName Short name
-     * @return \Cake\Console\Shell
+     * @return uim.cake.Console\Shell
      */
     protected function _createShell(string $className, string $shortName): Shell
     {

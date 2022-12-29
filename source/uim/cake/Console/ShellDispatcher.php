@@ -302,7 +302,7 @@ class ShellDispatcher
      * dereferencing
      *
      * @param string $shell Optionally the name of a plugin
-     * @return \Cake\Console\Shell A shell instance.
+     * @return uim.cake.Console\Shell A shell instance.
      * @throws \Cake\Console\Exception\MissingShellException when errors are encountered.
      */
     function findShell(string $shell): Shell
@@ -361,7 +361,7 @@ class ShellDispatcher
      *
      * @param string $className The class name to instantiate
      * @param string $shortName The plugin-prefixed shell name
-     * @return \Cake\Console\Shell A shell instance.
+     * @return uim.cake.Console\Shell A shell instance.
      */
     protected function _createShell(string $className, string $shortName): Shell
     {

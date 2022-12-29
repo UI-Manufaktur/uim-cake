@@ -63,7 +63,7 @@ class Application : IConsoleApplication
      * Define the console commands for an application.
      *
      * @param uim.cake.Console\CommandCollection $commands The CommandCollection to add commands into.
-     * @return \Cake\Console\CommandCollection The updated collection.
+     * @return uim.cake.Console\CommandCollection The updated collection.
      */
     function console(CommandCollection $commands): CommandCollection
     {

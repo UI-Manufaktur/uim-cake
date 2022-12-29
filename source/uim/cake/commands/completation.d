@@ -33,7 +33,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * Gets the option parser instance and configures it.
      *
      * @param uim.cake.Console\ConsoleOptionParser $parser The parser to build
-     * @return \Cake\Console\ConsoleOptionParser
+     * @return uim.cake.Console\ConsoleOptionParser
      */
     functConsoleOptionParserion buildOptionParser(ConsoleOptionParser $parser) {
         myModes = [

@@ -100,7 +100,7 @@ abstract class BaseCommand : ICommand
      *
      * You can override buildOptionParser() to define your options & arguments.
      *
-     * @return \Cake\Console\ConsoleOptionParser
+     * @return uim.cake.Console\ConsoleOptionParser
      * @throws \RuntimeException When the parser is invalid
      */
     function getOptionParser(): ConsoleOptionParser
@@ -124,7 +124,7 @@ abstract class BaseCommand : ICommand
      * Hook method for defining this command"s option parser.
      *
      * @param uim.cake.Console\ConsoleOptionParser $parser The parser to be defined
-     * @return \Cake\Console\ConsoleOptionParser The built parser.
+     * @return uim.cake.Console\ConsoleOptionParser The built parser.
      */
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {

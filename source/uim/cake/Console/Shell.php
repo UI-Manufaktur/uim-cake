@@ -212,7 +212,7 @@ class Shell
     /**
      * Get the io object for this shell.
      *
-     * @return \Cake\Console\ConsoleIo The current ConsoleIo object.
+     * @return uim.cake.Console\ConsoleIo The current ConsoleIo object.
      */
     function getIo(): ConsoleIo
     {
@@ -563,7 +563,7 @@ class Shell
      *
      * By overriding this method you can configure the ConsoleOptionParser before returning it.
      *
-     * @return \Cake\Console\ConsoleOptionParser
+     * @return uim.cake.Console\ConsoleOptionParser
      * @link https://book.cakephp.org/4/en/console-and-shells.html#configuring-options-and-generating-help
      */
     function getOptionParser(): ConsoleOptionParser
@@ -579,7 +579,7 @@ class Shell
      * Overload get for lazy building of tasks
      *
      * @param string $name The task to get.
-     * @return \Cake\Console\Shell Object of Task
+     * @return uim.cake.Console\Shell Object of Task
      */
     function __get(string $name) {
         if (empty(this.{$name}) && in_array($name, this.taskNames, true)) {
@@ -889,7 +889,7 @@ class Shell
      *
      * @param string $name The name of the helper to render
      * @param array<string, mixed> $config Configuration data for the helper.
-     * @return \Cake\Console\Helper The created helper instance.
+     * @return uim.cake.Console\Helper The created helper instance.
      */
     function helper(string $name, array $config = []): Helper
     {

@@ -93,7 +93,7 @@ class ConsoleInputSubCommand {
     /**
      * Get the usage value for this option
      *
-     * @return \Cake\Console\ConsoleOptionParser|null
+     * @return uim.cake.Console\ConsoleOptionParser|null
      */
     ?ConsoleOptionParser parser() {
         return _parser;
