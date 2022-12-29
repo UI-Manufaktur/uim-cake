@@ -16,7 +16,7 @@ module uim.cake.Mailer;
 use BadMethodCallException;
 import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.StaticConfigTrait;
-import uim.cake.Datasource\ModelAwareTrait;
+import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.Log\Log;
 import uim.cake.Mailer\Exception\MissingActionException;
@@ -147,7 +147,7 @@ class Mailer : IEventListener
     /**
      * The transport instance to use for sending mail.
      *
-     * @var \Cake\Mailer\AbstractTransport|null
+     * @var uim.cake.Mailer\AbstractTransport|null
      */
     protected $transport;
 
@@ -162,14 +162,14 @@ class Mailer : IEventListener
     /**
      * Message instance.
      *
-     * @var \Cake\Mailer\Message
+     * @var uim.cake.Mailer\Message
      */
     protected $message;
 
     /**
      * Email Renderer
      *
-     * @var \Cake\Mailer\Renderer|null
+     * @var uim.cake.Mailer\Renderer|null
      */
     protected $renderer;
 

@@ -13,7 +13,7 @@ import uim.cake.cores.App;
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.databases.expressions.QueryExpression;
 import uim.cake.databases.IExpression;
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.orm.Association;
 import uim.cake.orm.Association\Loader\SelectWithPivotLoader;
 import uim.cake.orm.Query;
@@ -64,7 +64,7 @@ class BelongsToMany : Association
     /**
      * Junction table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $_junctionTable;
 
@@ -108,7 +108,7 @@ class BelongsToMany : Association
     /**
      * The table instance for the junction relation.
      *
-     * @var \Cake\ORM\Table|string
+     * @var uim.cake.ORM\Table|string
      */
     protected $_through;
 

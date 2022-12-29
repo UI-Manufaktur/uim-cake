@@ -32,7 +32,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * The table using this registry.
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $_table;
 
@@ -133,7 +133,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      */
     protected function _create($class, string $alias, array $config): Behavior
     {
-        /** @var \Cake\ORM\Behavior $instance */
+        /** @var uim.cake.ORM\Behavior $instance */
         $instance = new $class(_table, $config);
         $enable = $config["enabled"] ?? true;
         if ($enable) {

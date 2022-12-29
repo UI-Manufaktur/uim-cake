@@ -24,7 +24,7 @@ object.  Before performing any operations with the connection, you need to
 specify a driver to use:
 
 ```php
-import uim.cake.Datasource\ConnectionManager;
+import uim.cake.datasources.ConnectionManager;
 
 ConnectionManager::setConfig("default", [
 	"className": \Cake\Database\Connection::class,

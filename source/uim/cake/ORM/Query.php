@@ -17,9 +17,9 @@ import uim.cake.databases.Query as DatabaseQuery;
 import uim.cake.databases.TypedResultInterface;
 import uim.cake.databases.TypeMap;
 import uim.cake.databases.ValueBinder;
-import uim.cake.Datasource\IQuery;
-import uim.cake.Datasource\QueryTrait;
-import uim.cake.Datasource\IResultSet;
+import uim.cake.datasources.IQuery;
+import uim.cake.datasources.QueryTrait;
+import uim.cake.datasources.IResultSet;
 use InvalidArgumentException;
 use JsonSerializable;
 use RuntimeException;
@@ -142,7 +142,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Instance of a class responsible for storing association containments and
      * for eager loading them when this query is executed
      *
-     * @var \Cake\ORM\EagerLoader|null
+     * @var uim.cake.ORM\EagerLoader|null
      */
     protected $_eagerLoader;
 

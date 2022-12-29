@@ -13,8 +13,8 @@ use ArrayObject;
 import uim.cake.Collection\Collection;
 import uim.cake.databases.expressions.TupleComparison;
 import uim.cake.databases.TypeFactory;
-import uim.cake.Datasource\EntityInterface;
-import uim.cake.Datasource\InvalidPropertyInterface;
+import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.InvalidPropertyInterface;
 import uim.cake.orm.Association\BelongsToMany;
 import uim.cake.utilities.Hash;
 use InvalidArgumentException;
@@ -37,7 +37,7 @@ class Marshaller
     /**
      * The table instance this marshaller is for.
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $_table;
 
@@ -101,7 +101,7 @@ class Marshaller
             }
             if (isset($options["isMerge"])) {
                 $callback = function ($value, $entity) use ($assoc, $nested) {
-                    /** @var \Cake\Datasource\EntityInterface $entity */
+                    /** @var uim.cake.datasources.EntityInterface $entity */
                     $options = $nested + ["associated": [], "association": $assoc];
 
                     return _mergeAssociation($entity.get($assoc.getProperty()), $assoc, $value, $options);
@@ -254,7 +254,7 @@ class Marshaller
                 . " use `ValidatorAwareTrait::setValidator() instead.`"
             );
 
-            /** @var \Cake\Validation\Validator $validator */
+            /** @var uim.cake.Validation\Validator $validator */
             $validator = $options["validate"];
         }
 
@@ -415,7 +415,7 @@ class Marshaller
         if (!empty($conditions)) {
             $query = $target.find();
             $query.andWhere(function ($exp) use ($conditions) {
-                /** @var \Cake\Database\Expression\QueryExpression $exp */
+                /** @var uim.cake.Database\Expression\QueryExpression $exp */
                 return $exp.or($conditions);
             });
 

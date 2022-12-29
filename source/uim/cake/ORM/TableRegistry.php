@@ -9,7 +9,7 @@
  */
 module uim.cake.ORM;
 
-import uim.cake.Datasource\FactoryLocator;
+import uim.cake.datasources.FactoryLocator;
 import uim.cake.orm.locators.ILocator;
 
 /**
@@ -58,7 +58,7 @@ class TableRegistry
      */
     public static function getTableLocator(): ILocator
     {
-        /** @var \Cake\ORM\Locator\ILocator*/
+        /** @var uim.cake.ORM\Locator\ILocator*/
         return FactoryLocator::get("Table");
     }
 

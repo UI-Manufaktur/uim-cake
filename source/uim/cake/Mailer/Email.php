@@ -71,14 +71,14 @@ class Email : JsonSerializable, Serializable
     /**
      * The transport instance to use for sending mail.
      *
-     * @var \Cake\Mailer\AbstractTransport|null
+     * @var uim.cake.Mailer\AbstractTransport|null
      */
     protected $_transport;
 
     /**
      * Email Renderer
      *
-     * @var \Cake\Mailer\Renderer|null
+     * @var uim.cake.Mailer\Renderer|null
      */
     protected $renderer;
 
@@ -101,7 +101,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Message instance.
      *
-     * @var \Cake\Mailer\Message
+     * @var uim.cake.Mailer\Message
      */
     protected $message;
 

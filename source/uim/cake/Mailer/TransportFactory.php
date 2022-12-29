@@ -22,7 +22,7 @@ class TransportFactory
     /**
      * Transport Registry used for creating and using transport instances.
      *
-     * @var \Cake\Mailer\TransportRegistry|null
+     * @var uim.cake.Mailer\TransportRegistry|null
      */
     protected static $_registry;
 

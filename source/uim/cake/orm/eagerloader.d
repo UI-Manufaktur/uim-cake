@@ -23,7 +23,7 @@ class EagerLoader
      * Contains a nested array with the compiled containments tree
      * This is a normalized version of the user provided containments array.
      *
-     * @var \Cake\ORM\EagerLoadable|array<\Cake\ORM\EagerLoadable>|null
+     * @var uim.cake.ORM\EagerLoadable|array<\Cake\ORM\EagerLoadable>|null
      */
     protected _normalized;
 
@@ -64,7 +64,7 @@ class EagerLoader
     /**
      * Another EagerLoader instance that will be used for "matching" associations.
      *
-     * @var \Cake\ORM\EagerLoader|null
+     * @var uim.cake.ORM\EagerLoader|null
      */
     protected _matching;
 
@@ -511,7 +511,7 @@ class EagerLoader
                 if (count(myConfigs) < 2) {
                     continue;
                 }
-                /** @var \Cake\ORM\EagerLoadable $loadable */
+                /** @var uim.cake.ORM\EagerLoadable $loadable */
                 foreach (myConfigs as $loadable) {
                     if (indexOf($loadable.aliasPath(), ".")) {
                         _correctStrategy($loadable);

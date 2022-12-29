@@ -13,7 +13,7 @@ import uim.cake;
  *
  * Adds ORM related features to the RulesChecker class.
  *
- * @see uim.cake.Datasource\RulesChecker
+ * @see uim.cake.datasources.RulesChecker
  */
 class RulesChecker : BaseRulesChecker
 {

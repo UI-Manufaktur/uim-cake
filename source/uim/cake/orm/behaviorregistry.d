@@ -18,7 +18,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
     /**
      * The table using this registry.
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected _table;
 
@@ -113,7 +113,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Behavior _create(myClass, string myAlias, array myConfig) {
-        /** @var \Cake\ORM\Behavior $instance */
+        /** @var uim.cake.ORM\Behavior $instance */
         $instance = new myClass(_table, myConfig);
         myEnable = myConfig["enabled"] ?? true;
         if (myEnable) {

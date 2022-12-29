@@ -66,8 +66,8 @@ class LazyEagerLoader
             .select((array)$primaryKey)
             .where(function ($exp, $q) use ($primaryKey, myKeys, $source) {
                 /**
-                 * @var \Cake\Database\Expression\QueryExpression $exp
-                 * @var \Cake\ORM\Query $q
+                 * @var uim.cake.Database\Expression\QueryExpression $exp
+                 * @var uim.cake.ORM\Query $q
                  */
                 if (is_array($primaryKey) && count($primaryKey) == 1) {
                     $primaryKey = current($primaryKey);
@@ -129,7 +129,7 @@ class LazyEagerLoader
         myResults = myResults
             .all()
             .indexBy(function ($e) use ($primaryKey) {
-                /** @var \Cake\Datasource\IEntity $e */
+                /** @var uim.cake.datasources.IEntity $e */
                 return implode(";", $e.extract($primaryKey));
             })
             .toArray();
@@ -141,7 +141,7 @@ class LazyEagerLoader
                 continue;
             }
 
-            /** @var \Cake\Datasource\IEntity $loaded */
+            /** @var uim.cake.datasources.IEntity $loaded */
             $loaded = myResults[myKey];
             foreach ($associations as $assoc) {
                 $property = $properties[$assoc];

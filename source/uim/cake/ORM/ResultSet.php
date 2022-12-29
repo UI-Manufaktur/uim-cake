@@ -13,8 +13,8 @@ import uim.cake.Collection\Collection;
 import uim.cake.Collection\CollectionTrait;
 import uim.cake.databases.exceptions.DatabaseException;
 import uim.cake.databases.StatementInterface;
-import uim.cake.Datasource\EntityInterface;
-import uim.cake.Datasource\IResultSet;
+import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IResultSet;
 use SplFixedArray;
 
 /**
@@ -30,7 +30,7 @@ class ResultSet : IResultSet
     /**
      * Database statement holding the results
      *
-     * @var \Cake\Database\StatementInterface
+     * @var uim.cake.Database\StatementInterface
      */
     protected $_statement;
 
@@ -51,7 +51,7 @@ class ResultSet : IResultSet
     /**
      * Default table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $_defaultTable;
 
@@ -140,7 +140,7 @@ class ResultSet : IResultSet
      *
      * Cached in a property to avoid multiple calls to the same function.
      *
-     * @var \Cake\Database\DriverInterface
+     * @var uim.cake.Database\DriverInterface
      */
     protected $_driver;
 
@@ -463,10 +463,10 @@ class ResultSet : IResultSet
                 array_intersect_key($row, $keys)
             );
             if (_hydrate) {
-                /** @var \Cake\ORM\Table $table */
+                /** @var uim.cake.ORM\Table $table */
                 $table = $matching["instance"];
                 $options["source"] = $table.getRegistryAlias();
-                /** @var \Cake\Datasource\EntityInterface $entity */
+                /** @var uim.cake.datasources.EntityInterface $entity */
                 $entity = new $matching["entityClass"]($results["_matchingData"][$alias], $options);
                 $results["_matchingData"][$alias] = $entity;
             }
@@ -491,7 +491,7 @@ class ResultSet : IResultSet
                 continue;
             }
 
-            /** @var \Cake\ORM\Association $instance */
+            /** @var uim.cake.ORM\Association $instance */
             $instance = $assoc["instance"];
 
             if (!$assoc["canBeJoined"] && !isset($row[$alias])) {

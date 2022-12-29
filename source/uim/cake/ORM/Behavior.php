@@ -112,7 +112,7 @@ class Behavior : IEventListener
     /**
      * Table instance.
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $_table;
 

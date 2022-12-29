@@ -70,7 +70,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Instance of a class responsible for storing association containments and
      * for eager loading them when this query is executed
      *
-     * @var \Cake\ORM\EagerLoader|null
+     * @var uim.cake.ORM\EagerLoader|null
      */
     protected _eagerLoader;
 

@@ -17,11 +17,11 @@ import uim.cake.cores.exceptions.CakeException;
 import uim.cake.databases.Connection;
 import uim.cake.databases.schemas.TableSchemaInterface;
 import uim.cake.databases.TypeFactory;
-import uim.cake.Datasource\ConnectionManager;
-import uim.cake.Datasource\EntityInterface;
-import uim.cake.Datasource\Exception\InvalidPrimaryKeyException;
-import uim.cake.Datasource\RepositoryInterface;
-import uim.cake.Datasource\RulesAwareTrait;
+import uim.cake.datasources.ConnectionManager;
+import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.Exception\InvalidPrimaryKeyException;
+import uim.cake.datasources.RepositoryInterface;
+import uim.cake.datasources.RulesAwareTrait;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.IEventListener;
@@ -194,14 +194,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Connection instance
      *
-     * @var \Cake\Database\Connection|null
+     * @var uim.cake.Database\Connection|null
      */
     protected $_connection;
 
     /**
      * The schema object containing a description of this table fields
      *
-     * @var \Cake\Database\Schema\TableSchemaInterface|null
+     * @var uim.cake.Database\Schema\TableSchemaInterface|null
      */
     protected $_schema;
 
@@ -222,14 +222,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * The associations container for this Table.
      *
-     * @var \Cake\ORM\AssociationCollection
+     * @var uim.cake.ORM\AssociationCollection
      */
     protected $_associations;
 
     /**
      * BehaviorRegistry for this table
      *
-     * @var \Cake\ORM\BehaviorRegistry
+     * @var uim.cake.ORM\BehaviorRegistry
      */
     protected $_behaviors;
 
@@ -487,7 +487,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     function getConnection(): Connection
     {
         if (!_connection) {
-            /** @var \Cake\Database\Connection $connection */
+            /** @var uim.cake.Database\Connection $connection */
             $connection = ConnectionManager::get(static::defaultConnectionName());
             _connection = $connection;
         }
@@ -1026,7 +1026,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         $options += ["sourceTable": this];
 
-        /** @var \Cake\ORM\Association\BelongsTo $association */
+        /** @var uim.cake.ORM\Association\BelongsTo $association */
         $association = _associations.load(BelongsTo::class, $associated, $options);
 
         return $association;
@@ -1072,7 +1072,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         $options += ["sourceTable": this];
 
-        /** @var \Cake\ORM\Association\HasOne $association */
+        /** @var uim.cake.ORM\Association\HasOne $association */
         $association = _associations.load(HasOne::class, $associated, $options);
 
         return $association;
@@ -1124,7 +1124,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         $options += ["sourceTable": this];
 
-        /** @var \Cake\ORM\Association\HasMany $association */
+        /** @var uim.cake.ORM\Association\HasMany $association */
         $association = _associations.load(HasMany::class, $associated, $options);
 
         return $association;
@@ -1178,7 +1178,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         $options += ["sourceTable": this];
 
-        /** @var \Cake\ORM\Association\BelongsToMany $association */
+        /** @var uim.cake.ORM\Association\BelongsToMany $association */
         $association = _associations.load(BelongsToMany::class, $associated, $options);
 
         return $association;
@@ -1370,7 +1370,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         );
 
         return $query.formatResults(function ($results) use ($options) {
-            /** @var \Cake\Collection\ICollection $results */
+            /** @var uim.cake.Collection\ICollection $results */
             return $results.combine(
                 $options["keyField"],
                 $options["valueField"],
@@ -1414,7 +1414,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $options = _setFieldMatchers($options, ["keyField", "parentField"]);
 
         return $query.formatResults(function ($results) use ($options) {
-            /** @var \Cake\Collection\ICollection $results */
+            /** @var uim.cake.Collection\ICollection $results */
             return $results.nest($options["keyField"], $options["parentField"], $options["nestingKey"]);
         });
     }
@@ -1477,7 +1477,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * could not be found
      * @throws \Cake\Datasource\Exception\InvalidPrimaryKeyException When $primaryKey has an
      *      incorrect number of elements.
-     * @see uim.cake.Datasource\RepositoryInterface::find()
+     * @see uim.cake.datasources.RepositoryInterface::find()
      * @psalm-suppress InvalidReturnType
      */
     function get($primaryKey, array $options = []): EntityInterface
@@ -2217,7 +2217,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             }
         };
 
-        /** @var \Cake\Datasource\EntityInterface|null $failed */
+        /** @var uim.cake.datasources.EntityInterface|null $failed */
         $failed = null;
         try {
             this.getConnection()
@@ -2942,7 +2942,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             }
         }
         $class = static::IS_UNIQUE_CLASS;
-        /** @var \Cake\ORM\Rule\IsUnique $rule */
+        /** @var uim.cake.ORM\Rule\IsUnique $rule */
         $rule = new $class($fields, $options);
 
         return $rule($entity, ["repository": this]);

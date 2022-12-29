@@ -20,7 +20,7 @@ class Marshaller
     /**
      * The table instance this marshaller is for.
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected _table;
 
@@ -83,7 +83,7 @@ class Marshaller
             }
             if (isset(myOptions["isMerge"])) {
                 $callback = function (myValue, $entity) use ($assoc, $nested) {
-                    /** @var \Cake\Datasource\IEntity $entity */
+                    /** @var uim.cake.datasources.IEntity $entity */
                     myOptions = $nested + ["associated": [], "association": $assoc];
 
                     return _mergeAssociation($entity.get($assoc.getProperty()), $assoc, myValue, myOptions);
@@ -235,7 +235,7 @@ class Marshaller
                 . " use `ValidatorAwareTrait::setValidator() instead.`"
             );
 
-            /** @var \Cake\Validation\Validator $validator */
+            /** @var uim.cake.Validation\Validator $validator */
             $validator = myOptions["validate"];
         }
 
@@ -393,7 +393,7 @@ class Marshaller
         if (!empty($conditions)) {
             myQuery = myTarget.find();
             myQuery.andWhere(function ($exp) use ($conditions) {
-                /** @var \Cake\Database\Expression\QueryExpression $exp */
+                /** @var uim.cake.Database\Expression\QueryExpression $exp */
                 return $exp.or($conditions);
             });
 

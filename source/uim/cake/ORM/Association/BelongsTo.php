@@ -10,7 +10,7 @@
 module uim.cake.orm.Association;
 
 import uim.cake.databases.expressions.IdentifierExpression;
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.orm.Association;
 import uim.cake.orm.Association\Loader\SelectLoader;
 import uim.cake.orm.Table;

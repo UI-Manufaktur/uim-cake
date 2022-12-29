@@ -49,7 +49,7 @@ class TableRegistry
      */
     static auto getTableLocator(): ILocator
     {
-        /** @var \Cake\ORM\Locator\ILocator */
+        /** @var uim.cake.ORM\Locator\ILocator */
         return FactoryLocator::get("Table");
     }
 

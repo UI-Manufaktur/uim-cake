@@ -43,7 +43,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Socket to SMTP server
      *
-     * @var \Cake\Network\Socket|null
+     * @var uim.cake.Network\Socket|null
      */
     protected $_socket;
 

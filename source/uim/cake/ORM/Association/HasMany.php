@@ -12,8 +12,8 @@ module uim.cake.orm.Association;
 import uim.cake.Collection\Collection;
 import uim.cake.databases.expressions.FieldInterface;
 import uim.cake.databases.expressions.QueryExpression;
-import uim.cake.Datasource\EntityInterface;
-import uim.cake.Datasource\InvalidPropertyInterface;
+import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.InvalidPropertyInterface;
 import uim.cake.orm.Association;
 import uim.cake.orm.Association\Loader\SelectLoader;
 import uim.cake.orm.Query;
@@ -353,7 +353,7 @@ class HasMany : Association
         $conditions = [
             "OR": (new Collection($targetEntities))
                 .map(function ($entity) use ($targetPrimaryKey) {
-                    /** @var \Cake\Datasource\EntityInterface $entity */
+                    /** @var uim.cake.datasources.EntityInterface $entity */
                     return $entity.extract($targetPrimaryKey);
                 })
                 .toList(),
@@ -461,7 +461,7 @@ class HasMany : Association
         $exclusions = new Collection($remainingEntities);
         $exclusions = $exclusions.map(
             function ($ent) use ($primaryKey) {
-                /** @var \Cake\Datasource\EntityInterface $ent */
+                /** @var uim.cake.datasources.EntityInterface $ent */
                 return $ent.extract($primaryKey);
             }
         )

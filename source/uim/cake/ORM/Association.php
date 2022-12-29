@@ -14,9 +14,9 @@ import uim.cake.Collection\ICollection;
 import uim.cake.cores.App;
 import uim.cake.cores.ConventionsTrait;
 import uim.cake.databases.expressions.IdentifierExpression;
-import uim.cake.Datasource\EntityInterface;
-import uim.cake.Datasource\ResultSetDecorator;
-import uim.cake.Datasource\IResultSet;
+import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.ResultSetDecorator;
+import uim.cake.datasources.IResultSet;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.utilities.Inflector;
 use Closure;
@@ -139,14 +139,14 @@ abstract class Association
     /**
      * Source table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $_sourceTable;
 
     /**
      * Target table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected $_targetTable;
 

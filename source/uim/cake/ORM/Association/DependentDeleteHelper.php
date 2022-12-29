@@ -9,7 +9,7 @@
  */
 module uim.cake.orm.Association;
 
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.orm.Association;
 
 /**

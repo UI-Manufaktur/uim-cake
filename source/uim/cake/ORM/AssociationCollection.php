@@ -10,7 +10,7 @@
 module uim.cake.ORM;
 
 use ArrayIterator;
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.orm.locators.ILocator;
 use InvalidArgumentException;

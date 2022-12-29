@@ -151,14 +151,14 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Connection instance
      *
-     * @var \Cake\Database\Connection|null
+     * @var uim.cake.Database\Connection|null
      */
     protected _connection;
 
     /**
      * The schema object containing a description of this table fields
      *
-     * @var \Cake\Database\Schema\TableSchemaInterface|null
+     * @var uim.cake.Database\Schema\TableSchemaInterface|null
      */
     protected _schema;
 
@@ -179,14 +179,14 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * The associations container for this Table.
      *
-     * @var \Cake\ORM\AssociationCollection
+     * @var uim.cake.ORM\AssociationCollection
      */
     protected _associations;
 
     /**
      * BehaviorRegistry for this table
      *
-     * @var \Cake\ORM\BehaviorRegistry
+     * @var uim.cake.ORM\BehaviorRegistry
      */
     protected _behaviors;
 
@@ -424,7 +424,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      */
     Connection getConnection() {
         if (!_connection) {
-            /** @var \Cake\Database\Connection myConnection */
+            /** @var uim.cake.Database\Connection myConnection */
             myConnection = ConnectionManager::get(static::defaultConnectionName());
             _connection = myConnection;
         }
@@ -951,7 +951,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     {
         myOptions += ["sourceTable": this];
 
-        /** @var \Cake\ORM\Association\BelongsTo $association */
+        /** @var uim.cake.ORM\Association\BelongsTo $association */
         $association = _associations.load(BelongsTo::class, $associated, myOptions);
 
         return $association;
@@ -997,7 +997,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     {
         myOptions += ["sourceTable": this];
 
-        /** @var \Cake\ORM\Association\HasOne $association */
+        /** @var uim.cake.ORM\Association\HasOne $association */
         $association = _associations.load(HasOne::class, $associated, myOptions);
 
         return $association;
@@ -1049,7 +1049,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     {
         myOptions += ["sourceTable": this];
 
-        /** @var \Cake\ORM\Association\HasMany $association */
+        /** @var uim.cake.ORM\Association\HasMany $association */
         $association = _associations.load(HasMany::class, $associated, myOptions);
 
         return $association;
@@ -1103,7 +1103,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     {
         myOptions += ["sourceTable": this];
 
-        /** @var \Cake\ORM\Association\BelongsToMany $association */
+        /** @var uim.cake.ORM\Association\BelongsToMany $association */
         $association = _associations.load(BelongsToMany::class, $associated, myOptions);
 
         return $association;
@@ -1298,7 +1298,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         );
 
         return myQuery.formatResults(function (myResults) use (myOptions) {
-            /** @var \Cake\Collection\ICollection myResults */
+            /** @var uim.cake.Collection\ICollection myResults */
             return myResults.combine(
                 myOptions["keyField"],
                 myOptions["valueField"],
@@ -1342,7 +1342,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         myOptions = _setFieldMatchers(myOptions, ["keyField", "parentField"]);
 
         return myQuery.formatResults(function (myResults) use (myOptions) {
-            /** @var \Cake\Collection\ICollection myResults */
+            /** @var uim.cake.Collection\ICollection myResults */
             return myResults.nest(myOptions["keyField"], myOptions["parentField"], myOptions["nestingKey"]);
         });
     }
@@ -1405,7 +1405,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * could not be found
      * @throws \Cake\Datasource\Exception\InvalidPrimaryKeyException When $primaryKey has an
      *      incorrect number of elements.
-     * @see uim.cake.Datasource\IRepository::find()
+     * @see uim.cake.datasources.IRepository::find()
      * @psalm-suppress InvalidReturnType
      */
     auto get($primaryKey, array myOptions = []): IEntity
@@ -2124,7 +2124,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             }
         };
 
-        /** @var \Cake\Datasource\IEntity|null $failed */
+        /** @var uim.cake.datasources.IEntity|null $failed */
         $failed = null;
         try {
             this.getConnection()
@@ -2826,7 +2826,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             }
         }
         myClass = static::IS_UNIQUE_CLASS;
-        /** @var \Cake\ORM\Rule\IsUnique $rule */
+        /** @var uim.cake.ORM\Rule\IsUnique $rule */
         $rule = new myClass(myFields, myOptions);
 
         return $rule($entity, ["repository": this]);

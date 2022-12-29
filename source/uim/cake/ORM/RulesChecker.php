@@ -9,8 +9,8 @@
  */
 module uim.cake.ORM;
 
-import uim.cake.Datasource\RuleInvoker;
-import uim.cake.Datasource\RulesChecker as BaseRulesChecker;
+import uim.cake.datasources.RuleInvoker;
+import uim.cake.datasources.RulesChecker as BaseRulesChecker;
 import uim.cake.orm.Rule\ExistsIn;
 import uim.cake.orm.Rule\IsUnique;
 import uim.cake.orm.Rule\LinkConstraint;
@@ -22,7 +22,7 @@ import uim.cake.utilities.Inflector;
  *
  * Adds ORM related features to the RulesChecker class.
  *
- * @see uim.cake.Datasource\RulesChecker
+ * @see uim.cake.datasources.RulesChecker
  */
 class RulesChecker : BaseRulesChecker
 {

@@ -21,7 +21,7 @@ class ResultSet : IResultSet
     /**
      * Database statement holding the results
      *
-     * @var \Cake\Database\IStatement
+     * @var uim.cake.Database\IStatement
      */
     protected _statement;
 
@@ -38,7 +38,7 @@ class ResultSet : IResultSet
     /**
      * Default table instance
      *
-     * @var \Cake\ORM\Table
+     * @var uim.cake.ORM\Table
      */
     protected _defaultTable;
 
@@ -123,7 +123,7 @@ class ResultSet : IResultSet
      *
      * Cached in a property to avoid multiple calls to the same function.
      *
-     * @var \Cake\Database\IDriver
+     * @var uim.cake.Database\IDriver
      */
     protected _driver;
 
@@ -429,10 +429,10 @@ class ResultSet : IResultSet
                 array_intersect_key($row, myKeys)
             );
             if (_hydrate) {
-                /** @var \Cake\ORM\Table myTable */
+                /** @var uim.cake.ORM\Table myTable */
                 myTable = $matching["instance"];
                 myOptions["source"] = myTable.getRegistryAlias();
-                /** @var \Cake\Datasource\IEntity $entity */
+                /** @var uim.cake.datasources.IEntity $entity */
                 $entity = new $matching["entityClass"](myResults["_matchingData"][myAlias], myOptions);
                 myResults["_matchingData"][myAlias] = $entity;
             }
@@ -457,7 +457,7 @@ class ResultSet : IResultSet
                 continue;
             }
 
-            /** @var \Cake\ORM\Association $instance */
+            /** @var uim.cake.ORM\Association $instance */
             $instance = $assoc["instance"];
 
             if (!$assoc["canBeJoined"] && !isset($row[myAlias])) {

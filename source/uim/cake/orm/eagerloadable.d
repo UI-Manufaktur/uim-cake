@@ -25,7 +25,7 @@ class EagerLoadable
     /**
      * The Association class instance to use for loading the records.
      *
-     * @var \Cake\ORM\Association|null
+     * @var uim.cake.ORM\Association|null
      */
     protected _instance;
 
