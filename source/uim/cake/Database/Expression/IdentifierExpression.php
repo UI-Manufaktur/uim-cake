@@ -54,7 +54,7 @@ class IdentifierExpression : IExpression
      *
      * @return string
      */
-    function getIdentifier(): string
+    string getIdentifier(): string
     {
         return _identifier;
     }

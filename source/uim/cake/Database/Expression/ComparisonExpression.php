@@ -112,7 +112,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @return string
      */
-    function getOperator(): string
+    string getOperator(): string
     {
         return _operator;
     }

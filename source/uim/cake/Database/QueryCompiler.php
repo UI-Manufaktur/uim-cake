@@ -85,7 +85,7 @@ class QueryCompiler
      * @param uim.cake.Database\ValueBinder $binder Value binder used to generate parameter placeholders
      * @return string
      */
-    function compile(Query $query, ValueBinder $binder): string
+    string compile(Query $query, ValueBinder $binder): string
     {
         $sql = "";
         $type = $query.type();

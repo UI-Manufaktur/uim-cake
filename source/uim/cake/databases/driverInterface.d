@@ -36,7 +36,7 @@ interface IDriver {
     /**
      * Establishes a connection to the database server.
      *
-     * @throws uim.cake.Database\Exception\MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.Database\exceptions.MissingConnectionException If database connection could not be established.
      * @return bool True on success, false on failure.
      */
     bool connect();

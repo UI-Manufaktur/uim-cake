@@ -74,7 +74,7 @@ interface DriverInterface
     /**
      * Establishes a connection to the database server.
      *
-     * @throws uim.cake.Database\Exception\MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.Database\exceptions.MissingConnectionException If database connection could not be established.
      * @return bool True on success, false on failure.
      */
     function connect(): bool;
@@ -143,7 +143,7 @@ interface DriverInterface
      * @param string|int $name Save point name or id
      * @return string
      */
-    function releaseSavePointSQL($name): string;
+    string releaseSavePointSQL($name): string;
 
     /**
      * Get the SQL for creating a save point.
@@ -151,7 +151,7 @@ interface DriverInterface
      * @param string|int $name Save point name or id
      * @return string
      */
-    function savePointSQL($name): string;
+    string savePointSQL($name): string;
 
     /**
      * Get the SQL for rollingback a save point.
@@ -159,21 +159,21 @@ interface DriverInterface
      * @param string|int $name Save point name or id
      * @return string
      */
-    function rollbackSavePointSQL($name): string;
+    string rollbackSavePointSQL($name): string;
 
     /**
      * Get the SQL for disabling foreign keys.
      *
      * @return string
      */
-    function disableForeignKeySQL(): string;
+    string disableForeignKeySQL(): string;
 
     /**
      * Get the SQL for enabling foreign keys.
      *
      * @return string
      */
-    function enableForeignKeySQL(): string;
+    string enableForeignKeySQL(): string;
 
     /**
      * Returns whether the driver supports adding or dropping constraints
@@ -199,7 +199,7 @@ interface DriverInterface
      * @param int $type Must be one of the \PDO::PARAM_* constants
      * @return string
      */
-    function quote($value, $type): string;
+    string quote($value, $type): string;
 
     /**
      * Checks if the driver supports quoting.
@@ -240,7 +240,7 @@ interface DriverInterface
      * @param string $identifier The identifier expression to quote.
      * @return string
      */
-    function quoteIdentifier(string $identifier): string;
+    string quoteIdentifier(string $identifier): string;
 
     /**
      * Escapes values for use in schema definitions.
@@ -255,7 +255,7 @@ interface DriverInterface
      *
      * @return string
      */
-    function schema(): string;
+    string schema(): string;
 
     /**
      * Returns last id generated for a table or sequence in database.

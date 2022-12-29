@@ -71,7 +71,7 @@ class Connection : IConnection {
      * NestedTransactionRollbackException object instance, will be stored if
      * the rollback method is called in some nested transaction.
      *
-     * @var uim.cake.Database\Exception\NestedTransactionRollbackException|null
+     * @var uim.cake.Database\exceptions.NestedTransactionRollbackException|null
      */
     protected nestedTransactionRollbackException;
 
@@ -128,8 +128,8 @@ class Connection : IConnection {
      *
      * @param uim.cake.Database\IDriver|string myDriver The driver instance to use.
      * @param array<string, mixed> myConfig Config for a new driver.
-     * @throws uim.cake.Database\Exception\MissingDriverException When a driver class is missing.
-     * @throws uim.cake.Database\Exception\MissingExtensionException When a driver"s PHP extension is missing.
+     * @throws uim.cake.Database\exceptions.MissingDriverException When a driver class is missing.
+     * @throws uim.cake.Database\exceptions.MissingExtensionException When a driver"s PHP extension is missing.
      * @return this
      */
     auto setDriver(myDriver, myConfig = []) {
@@ -173,7 +173,7 @@ class Connection : IConnection {
     /**
      * Connects to the configured database.
      *
-     * @throws uim.cake.Database\Exception\MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.Database\exceptions.MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
     bool connect() {
@@ -433,7 +433,7 @@ class Connection : IConnection {
 
         if (_transactionLevel == 0) {
             if (this.wasNestedTransactionRolledback()) {
-                /** @var uim.cake.Database\Exception\NestedTransactionRollbackException $e */
+                /** @var uim.cake.Database\exceptions.NestedTransactionRollbackException $e */
                 $e = this.nestedTransactionRollbackException;
                 this.nestedTransactionRollbackException = null;
                 throw $e;

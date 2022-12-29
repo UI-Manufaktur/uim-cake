@@ -74,7 +74,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      *
      * @return string
      */
-    function getName(): string
+    string getName(): string
     {
         return _name;
     }

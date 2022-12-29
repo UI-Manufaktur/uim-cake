@@ -148,7 +148,7 @@ class LoggedQuery : JsonSerializable
      *
      * @return string
      */
-    function __toString(): string
+    string __toString(): string
     {
         $sql = this.query;
         if (!empty(this.params)) {

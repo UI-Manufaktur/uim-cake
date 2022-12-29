@@ -14,7 +14,7 @@ interface IExpression
      * @param uim.cake.Database\ValueBinder $binder Parameter binder
      * @return string
      */
-    function sql(ValueBinder $binder): string;
+    string sql(ValueBinder $binder): string;
 
     /**
      * Iterates over each part of the expression recursively for every

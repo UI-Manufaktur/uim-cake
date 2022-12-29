@@ -3,7 +3,7 @@ module uim.cake.Datasource;
 
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
-import uim.cake.datasources.Exception\MissingDatasourceException;
+import uim.cake.datasources.exceptions.MissingDatasourceException;
 
 /**
  * A registry object for connection instances.
@@ -35,7 +35,7 @@ class ConnectionRegistry : ObjectRegistry
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the datasource is missing in.
      * @return void
-     * @throws uim.cake.Datasource\Exception\MissingDatasourceException
+     * @throws uim.cake.Datasource\exceptions.MissingDatasourceException
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {

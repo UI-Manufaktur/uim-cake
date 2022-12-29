@@ -143,7 +143,7 @@ interface EntityInterface : ArrayAccess, JsonSerializable
      *
      * @return string
      */
-    function getSource(): string;
+    string getSource(): string;
 
     /**
      * Returns an array with the requested original fields

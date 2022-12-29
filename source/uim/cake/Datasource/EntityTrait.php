@@ -131,7 +131,7 @@ trait EntityTrait
      *
      * @param string $field The field to check.
      * @return bool
-     * @see uim.cake.ORM\Entity::has()
+     * @see uim.cake.orm.Entity::has()
      */
     function __isset(string $field): bool
     {
@@ -1172,7 +1172,7 @@ trait EntityTrait
      *
      * @return string
      */
-    function getSource(): string
+    string getSource(): string
     {
         return _registryAlias;
     }
@@ -1194,7 +1194,7 @@ trait EntityTrait
      *
      * @return string
      */
-    function __toString(): string
+    string __toString(): string
     {
         return (string)json_encode(this, JSON_PRETTY_PRINT);
     }

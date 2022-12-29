@@ -74,7 +74,7 @@ class QueryExpression : IExpression, Countable
      *
      * @return string
      */
-    function getConjunction(): string
+    string getConjunction(): string
     {
         return _conjunction;
     }

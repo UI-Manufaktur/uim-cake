@@ -67,7 +67,7 @@ class ValuesExpression : IExpression
      * @param uim.cake.Database\Query|array $values Array of data to append into the insert, or
      *   a query for doing INSERT INTO .. SELECT style commands
      * @return void
-     * @throws uim.cake.Database\Exception\DatabaseException When mixing array + Query data types.
+     * @throws uim.cake.Database\exceptions.DatabaseException When mixing array + Query data types.
      */
     function add($values): void
     {

@@ -194,7 +194,7 @@ class CaseExpression : IExpression
      * @param uim.cake.Database\ValueBinder $binder Placeholder generator object
      * @return string
      */
-    function sql(ValueBinder $binder): string
+    string sql(ValueBinder $binder): string
     {
         $parts = [];
         $parts[] = "CASE";

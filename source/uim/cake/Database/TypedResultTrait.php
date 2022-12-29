@@ -25,7 +25,7 @@ trait TypedResultTrait
      *
      * @return string
      */
-    function getReturnType(): string
+    string getReturnType(): string
     {
         return _returnType;
     }

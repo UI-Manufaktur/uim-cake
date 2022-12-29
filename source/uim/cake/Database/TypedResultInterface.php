@@ -18,7 +18,7 @@ interface TypedResultInterface
      *
      * @return string
      */
-    function getReturnType(): string;
+    string getReturnType(): string;
 
     /**
      * Set the return type of the expression

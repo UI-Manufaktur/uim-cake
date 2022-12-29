@@ -52,7 +52,7 @@ class StringExpression : IExpression
      *
      * @return string
      */
-    function getCollation(): string
+    string getCollation(): string
     {
         return this.collation;
     }

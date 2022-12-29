@@ -232,7 +232,7 @@ class Query : IExpression, IteratorAggregate {
      * @param uim.cake.Database\ValueBinder|null $binder Value binder that generates parameter placeholders
      * @return string
      */
-    function sql(?ValueBinder $binder = null) {
+    string sql(?ValueBinder $binder = null) {
         if (!$binder) {
             $binder = this.getValueBinder();
             $binder.resetCount();
@@ -393,8 +393,8 @@ class Query : IExpression, IteratorAggregate {
      * })
      * ```
      *
-     * By default no fields are selected, if you have an instance of `Cake\ORM\Query` and try to append
-     * fields you should also call `Cake\ORM\Query::enableAutoFields()` to select the default fields
+     * By default no fields are selected, if you have an instance of `Cake\orm.Query` and try to append
+     * fields you should also call `Cake\orm.Query::enableAutoFields()` to select the default fields
      * from the table.
      *
      * @param uim.cake.Database\IExpression|callable|array|string myFields fields to be added to the list.
@@ -1603,7 +1603,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @param uim.cake.Database\Expression\ValuesExpression|uim.cake.Database\Query|array myData The data to insert.
      * @return this
-     * @throws uim.cake.Database\Exception\DatabaseException if you try to set values before declaring columns.
+     * @throws uim.cake.Database\exceptions.DatabaseException if you try to set values before declaring columns.
      *   Or if you try to set values on non-insert queries.
      */
     function values(myData) {

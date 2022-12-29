@@ -22,7 +22,7 @@ trait SqlDialectTrait
      * @param string $identifier The identifier to quote.
      * @return string
      */
-    function quoteIdentifier(string $identifier): string
+    string quoteIdentifier(string $identifier): string
     {
         $identifier = trim($identifier);
 
@@ -88,7 +88,7 @@ trait SqlDialectTrait
                 $query = (new IdentifierQuoter(this)).quote($query);
             }
 
-            /** @var uim.cake.ORM\Query $query */
+            /** @var uim.cake.orm.Query $query */
             $query = this.{"_" . $type . "QueryTranslator"}($query);
             $translators = _expressionTranslators();
             if (!$translators) {
@@ -264,7 +264,7 @@ trait SqlDialectTrait
      * @param string|int $name save point name
      * @return string
      */
-    function savePointSQL($name): string
+    string savePointSQL($name): string
     {
         return "SAVEPOINT LEVEL" . $name;
     }
@@ -275,7 +275,7 @@ trait SqlDialectTrait
      * @param string|int $name save point name
      * @return string
      */
-    function releaseSavePointSQL($name): string
+    string releaseSavePointSQL($name): string
     {
         return "RELEASE SAVEPOINT LEVEL" . $name;
     }
@@ -286,7 +286,7 @@ trait SqlDialectTrait
      * @param string|int $name save point name
      * @return string
      */
-    function rollbackSavePointSQL($name): string
+    string rollbackSavePointSQL($name): string
     {
         return "ROLLBACK TO SAVEPOINT LEVEL" . $name;
     }

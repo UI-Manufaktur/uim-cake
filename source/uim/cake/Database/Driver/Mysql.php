@@ -258,7 +258,7 @@ class Mysql : Driver
      *
      * @return string
      */
-    function version(): string
+    string version(): string
     {
         if (_version == null) {
             this.connect();

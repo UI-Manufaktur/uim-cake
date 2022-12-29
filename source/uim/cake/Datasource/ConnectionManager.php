@@ -14,7 +14,7 @@ import uim.cake.databases.Driver\Mysql;
 import uim.cake.databases.Driver\Postgres;
 import uim.cake.databases.Driver\Sqlite;
 import uim.cake.databases.Driver\Sqlserver;
-import uim.cake.datasources.Exception\MissingDatasourceConfigException;
+import uim.cake.datasources.exceptions.MissingDatasourceConfigException;
 
 /**
  * Manages and loads instances of Connection
@@ -67,7 +67,7 @@ class ConnectionManager
      * @param array<string, mixed>|string $key The name of the connection config, or an array of multiple configs.
      * @param array<string, mixed>|null $config An array of name: config data for adapter.
      * @return void
-     * @throws uim.cake.Core\Exception\CakeException When trying to modify an existing config.
+     * @throws uim.cake.Core\exceptions.CakeException When trying to modify an existing config.
      * @see uim.cake.Core\StaticConfigTrait::config()
      */
     static function setConfig($key, $config = null): void
@@ -176,7 +176,7 @@ class ConnectionManager
      * @param string $name The connection name.
      * @param bool $useAliases Set to false to not use aliased connections.
      * @return uim.cake.Datasource\ConnectionInterface A connection object.
-     * @throws uim.cake.Datasource\Exception\MissingDatasourceConfigException When config
+     * @throws uim.cake.Datasource\exceptions.MissingDatasourceConfigException When config
      * data is missing.
      */
     static function get(string $name, bool $useAliases = true) {

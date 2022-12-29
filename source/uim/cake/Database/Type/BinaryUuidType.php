@@ -59,7 +59,7 @@ class BinaryUuidType : BaseType
      * @param mixed $value The value to convert.
      * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
      * @return resource|string|null
-     * @throws uim.cake.Core\Exception\CakeException
+     * @throws uim.cake.Core\exceptions.CakeException
      */
     function toPHP($value, DriverInterface $driver) {
         if ($value == null) {
