@@ -5,8 +5,7 @@
 
  * @link          https://cakephp.org CakePHP Project
  * @since         4.4.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.errors.Renderer;
 
 import uim.cake.controllers.Controller;
