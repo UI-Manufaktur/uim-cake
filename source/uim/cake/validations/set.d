@@ -16,7 +16,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Holds the ValidationRule objects
      *
-     * @var array<\Cake\Validation\>
+     * @var array<uim.cake.Validation\>
      */
     protected ValidationRule[] $_rules = [];
 
@@ -95,7 +95,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns all rules for this validation set
      *
-     * @return array<\Cake\Validation\ValidationRule>
+     * @return array<uim.cake.Validation\ValidationRule>
      */
     function rules(): array
     {
@@ -188,7 +188,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns an iterator for each of the rules to be applied
      *
-     * @return \Traversable<string, \Cake\Validation\ValidationRule>
+     * @return \Traversable<string, uim.cake.Validation\ValidationRule>
      */
     Traversable getIterator() {
         return new ArrayIterator(_rules);

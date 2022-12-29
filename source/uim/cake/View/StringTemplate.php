@@ -95,7 +95,7 @@ class StringTemplate
      *
      * @param array<string, mixed> $config A set of templates to add.
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         this.add($config);
     }
 

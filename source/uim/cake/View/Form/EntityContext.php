@@ -62,14 +62,14 @@ class EntityContext : ContextInterface
     /**
      * A dictionary of tables
      *
-     * @var array<\Cake\ORM\Table>
+     * @var array<uim.cake.ORM\Table>
      */
     protected $_tables = [];
 
     /**
      * Dictionary of validators.
      *
-     * @var array<\Cake\Validation\Validator>
+     * @var array<uim.cake.Validation\Validator>
      */
     protected $_validator = [];
 
@@ -78,7 +78,7 @@ class EntityContext : ContextInterface
      *
      * @param array<string, mixed> $context Context info.
      */
-    public this(array $context) {
+    this(array $context) {
         $context += [
             "entity": null,
             "table": null,
@@ -107,14 +107,14 @@ class EntityContext : ContextInterface
     {
         /** @var uim.cake.ORM\Table|null $table */
         $table = _context["table"];
-        /** @var uim.cake.datasources.EntityInterface|iterable<\Cake\Datasource\EntityInterface|array> $entity */
+        /** @var uim.cake.datasources.EntityInterface|iterable<uim.cake.Datasource\EntityInterface|array> $entity */
         $entity = _context["entity"];
 
         _isCollection = is_iterable($entity);
 
         if (empty($table)) {
             if (_isCollection) {
-                /** @var iterable<\Cake\Datasource\EntityInterface|array> $entity */
+                /** @var iterable<uim.cake.Datasource\EntityInterface|array> $entity */
                 foreach ($entity as $e) {
                     $entity = $e;
                     break;

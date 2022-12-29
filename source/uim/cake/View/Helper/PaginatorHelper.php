@@ -20,10 +20,10 @@ import uim.cake.View\View;
  *
  * PaginationHelper encloses all methods needed when working with pagination.
  *
- * @property \Cake\View\Helper\UrlHelper $Url
- * @property \Cake\View\Helper\NumberHelper $Number
- * @property \Cake\View\Helper\HtmlHelper $Html
- * @property \Cake\View\Helper\FormHelper $Form
+ * @property uim.cake.View\Helper\UrlHelper $Url
+ * @property uim.cake.View\Helper\NumberHelper $Number
+ * @property uim.cake.View\Helper\HtmlHelper $Html
+ * @property uim.cake.View\Helper\FormHelper $Form
  * @link https://book.cakephp.org/4/en/views/helpers/paginator.html
  */
 class PaginatorHelper : Helper
@@ -93,7 +93,7 @@ class PaginatorHelper : Helper
      * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> $config Configuration settings for the helper.
      */
-    public this(View $view, array $config = []) {
+    this(View $view, array $config = []) {
         super(($view, $config);
 
         $query = _View.getRequest().getQueryParams();

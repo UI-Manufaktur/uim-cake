@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.View;
 
 import uim.cake.View\Exception\SerializationFailureException;
@@ -21,7 +14,7 @@ abstract class SerializedView : View
      * Response type.
      *
      * @var string
-     * @deprecated 4.4.0 Implement ``public static contentType(): string`` instead.
+     * @deprecated 4.4.0 Implement ``static contentType(): string`` instead.
      */
     protected $_responseType;
 

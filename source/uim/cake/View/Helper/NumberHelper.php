@@ -52,12 +52,12 @@ class NumberHelper : Helper
      * @param array<string, mixed> $config Configuration settings for the helper
      * @throws uim.cake.Core\Exception\CakeException When the engine class could not be found.
      */
-    public this(View $view, array $config = []) {
+    this(View $view, array $config = []) {
         super(($view, $config);
 
         $config = _config;
 
-        /** @psalm-var class-string<\Cake\I18n\Number>|null $engineClass */
+        /** @psalm-var class-string<uim.cake.I18n\Number>|null $engineClass */
         $engineClass = App::className($config["engine"], "Utility");
         if ($engineClass == null) {
             throw new CakeException(sprintf("Class for %s could not be found", $config["engine"]));

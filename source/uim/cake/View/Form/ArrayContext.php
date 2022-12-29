@@ -67,7 +67,7 @@ class ArrayContext : ContextInterface
      *
      * @param array $context Context info.
      */
-    public this(array $context) {
+    this(array $context) {
         $context += [
             "data": [],
             "schema": [],

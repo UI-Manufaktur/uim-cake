@@ -15,37 +15,37 @@ import uim.cake;
  */
 class Validation {
     //  Default locale
-    public const string DEFAULT_LOCALE = "en_US";
+    const string DEFAULT_LOCALE = "en_US";
 
     // Same as operator.
-    public const string COMPARE_SAME = "==";
+    const string COMPARE_SAME = "==";
 
     // Not same as comparison operator.
-    public const string COMPARE_NOT_SAME = "!==";
+    const string COMPARE_NOT_SAME = "!==";
 
     // Equal to comparison operator.
-    public const string COMPARE_EQUAL = "==";
+    const string COMPARE_EQUAL = "==";
 
     /**
      * Not equal to comparison operator.
      */
-    public const string COMPARE_NOT_EQUAL = "!=";
+    const string COMPARE_NOT_EQUAL = "!=";
 
     /**
      * Greater than comparison operator.
      */
-    public const string COMPARE_GREATER = ">";
+    const string COMPARE_GREATER = ">";
 
     /**
      * Greater than or equal to comparison operator.
      */
-    public const string COMPARE_GREATER_OR_EQUAL = ">=";
+    const string COMPARE_GREATER_OR_EQUAL = ">=";
 
     // Less than comparison operator.
-    public const string COMPARE_LESS = "<";
+    const string COMPARE_LESS = "<";
 
     // Less than or equal to comparison operator.
-    public const string COMPARE_LESS_OR_EQUAL = "<=";
+    const string COMPARE_LESS_OR_EQUAL = "<=";
 
     protected const string[] COMPARE_STRING = [
         self::COMPARE_EQUAL,
@@ -55,7 +55,7 @@ class Validation {
     ];
 
     // Datetime ISO8601 format
-    public const string DATETIME_ISO8601 = "iso8601";
+    const string DATETIME_ISO8601 = "iso8601";
 
     /**
      * Some complex patterns needed in multiple places

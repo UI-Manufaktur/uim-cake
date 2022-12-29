@@ -20,34 +20,34 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * By using "create" you can make fields required when records are first created.
      */
-    public const string WHEN_CREATE = "create";
+    const string WHEN_CREATE = "create";
 
     // By using "update", you can make fields required when they are updated.
-    public const string WHEN_UPDATE = "update";
+    const string WHEN_UPDATE = "update";
 
     // Used to flag nested rules created with addNested() and addNestedMany()
-    public const string NESTED = "_nested";
+    const string NESTED = "_nested";
 
     /**
      * A flag for allowEmptyFor()
      *
      * When `null` is given, it will be recognized as empty.
     */
-    public const int EMPTY_NULL = 0;
+    const int EMPTY_NULL = 0;
 
     /**
      * A flag for allowEmptyFor()
      *
      * When an empty string is given, it will be recognized as empty.
     */
-    public const int EMPTY_STRING = 1;
+    const int EMPTY_STRING = 1;
 
     /**
      * A flag for allowEmptyFor()
      *
      * When an empty array is given, it will be recognized as empty.
     */
-    public const int EMPTY_ARRAY = 2;
+    const int EMPTY_ARRAY = 2;
 
     /**
      * A flag for allowEmptyFor()
@@ -59,7 +59,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * When an instance of \Psr\Http\Message\UploadedFileInterface is given the
      * return value of it"s getError() method must be equal to `UPLOAD_ERR_NO_FILE`.
     */
-    public const int EMPTY_FILE = 4;
+    const int EMPTY_FILE = 4;
 
     /**
      * A flag for allowEmptyFor()
@@ -67,7 +67,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * When an array is given, if it contains the `year` key, and only empty strings
      * or null values, it will be recognized as empty.
      */
-    public const int EMPTY_DATE = 8;
+    const int EMPTY_DATE = 8;
 
     /**
      * A flag for allowEmptyFor()
@@ -75,12 +75,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * When an array is given, if it contains the `hour` key, and only empty strings
      * or null values, it will be recognized as empty.
      */
-    public const int EMPTY_TIME = 16;
+    const int EMPTY_TIME = 16;
 
     /**
      * A combination of the all EMPTY_* flags
     */
-    public const int EMPTY_ALL = self::EMPTY_STRING
+    const int EMPTY_ALL = self::EMPTY_STRING
         | self::EMPTY_ARRAY
         | self::EMPTY_FILE
         | self::EMPTY_DATE
@@ -89,7 +89,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Holds the ValidationSet objects array
      *
-     * @var array<string, \Cake\Validation\ValidationSet>
+     * @var array<string, uim.cake.Validation\ValidationSet>
      */
     protected _fields = [];
 
@@ -409,7 +409,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns an iterator for each of the fields to be validated
      *
-     * @return \Traversable<string, \Cake\Validation\ValidationSet>
+     * @return \Traversable<string, uim.cake.Validation\ValidationSet>
      */
     Traversable getIterator() {
         return new ArrayIterator(_fields);
@@ -2263,7 +2263,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @param string myField The field you want to apply the rule to.
      * @param array<string, mixed> myOptions The options for the validator. Includes the options defined in
-     *   \Cake\Validation\Validation::multiple() and the `caseInsensitive` parameter.
+     *   uim.cake.Validation\Validation::multiple() and the `caseInsensitive` parameter.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.

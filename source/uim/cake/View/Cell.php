@@ -34,7 +34,7 @@ abstract class Cell : EventDispatcherInterface
      *
      * @var string
      */
-    public const TEMPLATE_FOLDER = "cell";
+    const TEMPLATE_FOLDER = "cell";
 
     /**
      * Instance of the View created during rendering. Won"t be set until after
@@ -98,7 +98,7 @@ abstract class Cell : EventDispatcherInterface
      * @param uim.cake.Event\IEventManager|null $eventManager The eventManager to bind events to.
      * @param array<string, mixed> $cellOptions Cell options to apply.
      */
-    public this(
+    this(
         ServerRequest $request,
         Response $response,
         ?IEventManager $eventManager = null,

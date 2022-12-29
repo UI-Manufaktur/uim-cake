@@ -48,7 +48,7 @@ class MissingTemplateException : CakeException
      * @param int|null $code The code of the error.
      * @param \Throwable|null $previous the previous exception.
      */
-    public this($file, array $paths = [], ?int $code = null, ?Throwable $previous = null) {
+    this($file, array $paths = [], ?int $code = null, ?Throwable $previous = null) {
         if (is_array($file)) {
             this.filename = array_pop($file);
             this.templateName = array_pop($file);

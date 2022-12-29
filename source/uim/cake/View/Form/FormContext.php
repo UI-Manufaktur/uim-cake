@@ -6,7 +6,7 @@ import uim.cake.Form\Form;
 import uim.cake.utilities.Hash;
 
 /**
- * Provides a context provider for {@link \Cake\Form\Form} instances.
+ * Provides a context provider for {@link uim.cake.Form\Form} instances.
  *
  * This context provider simply fulfils the interface requirements
  * that FormHelper has and allows access to the form data.
@@ -37,7 +37,7 @@ class FormContext : ContextInterface
      * - `entity` The Form class instance this context is operating on. **(required)**
      * - `validator` Optional name of the validation method to call on the Form object.
      */
-    public this(array $context) {
+    this(array $context) {
         if (!isset($context["entity"]) || !$context["entity"] instanceof Form) {
             throw new CakeException("`$context[\"entity\"]` must be an instance of Cake\Form\Form");
         }

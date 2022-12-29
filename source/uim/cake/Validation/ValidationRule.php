@@ -74,7 +74,7 @@ class ValidationRule
      *
      * @param array<string, mixed> $validator [optional] The validator properties
      */
-    public this(array $validator = []) {
+    this(array $validator = []) {
         _addValidatorProps($validator);
     }
 

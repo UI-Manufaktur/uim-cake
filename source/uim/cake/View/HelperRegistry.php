@@ -18,7 +18,7 @@ import uim.cake.View\Exception\MissingHelperException;
  * HelperRegistry is used as a registry for loaded helpers and handles loading
  * and constructing helper class objects.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\View\Helper>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.View\Helper>
  */
 class HelperRegistry : ObjectRegistry : EventDispatcherInterface
 {
@@ -36,7 +36,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param uim.cake.View\View $view View object.
      */
-    public this(View $view) {
+    this(View $view) {
         _View = $view;
         this.setEventManager($view.getEventManager());
     }
@@ -76,7 +76,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
     }
 
     /**
-     * Provide public read access to the loaded objects
+     * Provide read access to the loaded objects
      *
      * @param string $name Name of property to read
      * @return uim.cake.View\Helper|null

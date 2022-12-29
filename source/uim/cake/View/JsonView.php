@@ -92,7 +92,7 @@ class JsonView : SerializedView
      *
      * @return string The JSON content type.
      */
-    public static function contentType(): string
+    static function contentType(): string
     {
         return "application/json";
     }

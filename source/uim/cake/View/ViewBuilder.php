@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.View;
 
 import uim.cake.core.App;
@@ -90,7 +83,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * or a fully namespaced classname.
      *
      * @var string|null
-     * @psalm-var class-string<\Cake\View\View>|string|null
+     * @psalm-var class-string<uim.cake.View\View>|string|null
      */
     protected $_className;
 
@@ -525,7 +518,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * Using the data in the builder, create a view instance.
      *
      * If className() is null, App\View\AppView will be used.
-     * If that class does not exist, then {@link \Cake\View\View} will be used.
+     * If that class does not exist, then {@link uim.cake.View\View} will be used.
      *
      * @param array<string, mixed> $vars The view variables/context to use.
      * @param uim.cake.http.ServerRequest|null $request The request to use.

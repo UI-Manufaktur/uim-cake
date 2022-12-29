@@ -17,7 +17,7 @@ import uim.cake.View\StringTemplateTrait;
  *
  * HtmlHelper encloses all methods needed while working with HTML pages.
  *
- * @property \Cake\View\Helper\UrlHelper $Url
+ * @property uim.cake.View\Helper\UrlHelper $Url
  * @link https://book.cakephp.org/4/en/views/helpers/html.html
  */
 class HtmlHelper : Helper

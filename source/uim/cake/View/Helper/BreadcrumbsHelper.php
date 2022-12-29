@@ -15,7 +15,7 @@ use LogicException;
 /**
  * BreadcrumbsHelper to register and display a breadcrumb trail for your views
  *
- * @property \Cake\View\Helper\UrlHelper $Url
+ * @property uim.cake.View\Helper\UrlHelper $Url
  */
 class BreadcrumbsHelper : Helper
 {

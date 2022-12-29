@@ -14,7 +14,7 @@ class NullContext : ContextInterface
      *
      * @param array $context Context info.
      */
-    public this(array $context) {
+    this(array $context) {
     }
 
     /**

@@ -38,7 +38,7 @@ class MissingCellTemplateException : MissingTemplateException
      * @param int|null $code The code of the error.
      * @param \Throwable|null $previous the previous exception.
      */
-    public this(
+    this(
         string $name,
         string $file,
         array $paths = [],

@@ -31,21 +31,21 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var string
      */
-    public const WHEN_CREATE = "create";
+    const WHEN_CREATE = "create";
 
     /**
      * By using "update", you can make fields required when they are updated.
      *
      * @var string
      */
-    public const WHEN_UPDATE = "update";
+    const WHEN_UPDATE = "update";
 
     /**
      * Used to flag nested rules created with addNested() and addNestedMany()
      *
      * @var string
      */
-    public const NESTED = "_nested";
+    const NESTED = "_nested";
 
     /**
      * A flag for allowEmptyFor()
@@ -54,7 +54,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var int
      */
-    public const EMPTY_NULL = 0;
+    const EMPTY_NULL = 0;
 
     /**
      * A flag for allowEmptyFor()
@@ -63,7 +63,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var int
      */
-    public const EMPTY_STRING = 1;
+    const EMPTY_STRING = 1;
 
     /**
      * A flag for allowEmptyFor()
@@ -72,7 +72,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var int
      */
-    public const EMPTY_ARRAY = 2;
+    const EMPTY_ARRAY = 2;
 
     /**
      * A flag for allowEmptyFor()
@@ -86,7 +86,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var int
      */
-    public const EMPTY_FILE = 4;
+    const EMPTY_FILE = 4;
 
     /**
      * A flag for allowEmptyFor()
@@ -96,7 +96,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var int
      */
-    public const EMPTY_DATE = 8;
+    const EMPTY_DATE = 8;
 
     /**
      * A flag for allowEmptyFor()
@@ -106,14 +106,14 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @var int
      */
-    public const EMPTY_TIME = 16;
+    const EMPTY_TIME = 16;
 
     /**
      * A combination of the all EMPTY_* flags
      *
      * @var int
      */
-    public const EMPTY_ALL = self::EMPTY_STRING
+    const EMPTY_ALL = self::EMPTY_STRING
         | self::EMPTY_ARRAY
         | self::EMPTY_FILE
         | self::EMPTY_DATE
@@ -122,7 +122,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Holds the ValidationSet objects array
      *
-     * @var array<string, \Cake\Validation\ValidationSet>
+     * @var array<string, uim.cake.Validation\ValidationSet>
      */
     protected $_fields = [];
 
@@ -183,7 +183,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Constructor
      */
-    public this() {
+    this() {
         _useI18n = function_exists("__d");
         _providers = self::$_defaultProviders;
     }
@@ -351,7 +351,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return object|string|null
      * @psalm-return object|class-string|null
      */
-    public static function getDefaultProvider(string $name) {
+    static function getDefaultProvider(string $name) {
         return self::$_defaultProviders[$name] ?? null;
     }
 
@@ -363,7 +363,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @psalm-param object|class-string $object
      * @return void
      */
-    public static function addDefaultProvider(string $name, $object): void
+    static function addDefaultProvider(string $name, $object): void
     {
         if (!is_string($object) && !is_object($object)) {
             deprecationWarning(sprintf(
@@ -380,7 +380,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @return array<string>
      */
-    public static function getDefaultProviders(): array
+    static function getDefaultProviders(): array
     {
         return array_keys(self::$_defaultProviders);
     }
@@ -450,7 +450,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns an iterator for each of the fields to be validated
      *
-     * @return \Traversable<string, \Cake\Validation\ValidationSet>
+     * @return \Traversable<string, uim.cake.Validation\ValidationSet>
      */
     function getIterator(): Traversable
     {
@@ -2308,7 +2308,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $field The field you want to apply the rule to.
      * @param array<string, mixed> $options The options for the validator. Includes the options defined in
-     *   \Cake\Validation\Validation::multiple() and the `caseInsensitive` parameter.
+     *   uim.cake.Validation\Validation::multiple() and the `caseInsensitive` parameter.
      * @param string|null $message The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.

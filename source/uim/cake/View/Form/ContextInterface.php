@@ -9,7 +9,7 @@ interface ContextInterface
     /**
      * @var array<string>
      */
-    public const VALID_ATTRIBUTES = ["length", "precision", "comment", "null", "default"];
+    const VALID_ATTRIBUTES = ["length", "precision", "comment", "null", "default"];
 
     /**
      * Get the fields used in the context as a primary key.

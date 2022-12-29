@@ -33,8 +33,8 @@ use RuntimeException;
  * @method string email(string $fieldName, array $options = []) Creates input of type email.
  * @method string password(string $fieldName, array $options = []) Creates input of type password.
  * @method string search(string $fieldName, array $options = []) Creates input of type search.
- * @property \Cake\View\Helper\HtmlHelper $Html
- * @property \Cake\View\Helper\UrlHelper $Url
+ * @property uim.cake.View\Helper\HtmlHelper $Html
+ * @property uim.cake.View\Helper\UrlHelper $Url
  * @link https://book.cakephp.org/4/en/views/helpers/form.html
  */
 class FormHelper : Helper
@@ -173,14 +173,14 @@ class FormHelper : Helper
      *
      * @var string
      */
-    public const SECURE_SKIP = "skip";
+    const SECURE_SKIP = "skip";
 
     /**
      * Defines the type of form being created. Set by FormHelper::create().
      *
      * @var string|null
      */
-    public $requestType;
+    $requestType;
 
     /**
      * Locator for input widgets.
@@ -250,7 +250,7 @@ class FormHelper : Helper
      * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> $config Configuration settings for the helper.
      */
-    public this(View $view, array $config = []) {
+    this(View $view, array $config = []) {
         $locator = null;
         $widgets = _defaultWidgets;
         if (isset($config["locator"])) {

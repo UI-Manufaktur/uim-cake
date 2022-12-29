@@ -23,7 +23,7 @@ class AjaxView : View
      *
      * @return string
      */
-    public static function contentType(): string
+    static function contentType(): string
     {
         return "text/html";
     }

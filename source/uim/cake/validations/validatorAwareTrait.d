@@ -37,7 +37,7 @@ trait ValidatorAwareTrait
     /**
      * A list of validation objects indexed by name
      *
-     * @var array<\Cake\Validation\Validator>
+     * @var array<uim.cake.Validation\Validator>
      */
     protected _validators = [];
 
@@ -131,7 +131,7 @@ trait ValidatorAwareTrait
      * You can build the object by yourself and store it in your object:
      *
      * ```
-     * $validator = new \Cake\Validation\Validator();
+     * $validator = new uim.cake.Validation\Validator();
      * $validator
      *     .add("email", "valid-email", ["rule": "email"])
      *     .add("password", "valid", ["rule": "notBlank"])

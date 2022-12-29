@@ -5,7 +5,7 @@ module uim.cake.utilities.Crypto;
  * OpenSSL implementation of crypto features for Cake\Utility\Security
  *
  * This class is not intended to be used directly and should only
- * be used in the context of {@link \Cake\Utility\Security}.
+ * be used in the context of {@link uim.cake.Utility\Security}.
  *
  * @internal
  */
@@ -28,7 +28,7 @@ class OpenSsl
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    public static function encrypt(string $plain, string $key): string
+    static function encrypt(string $plain, string $key): string
     {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);
@@ -46,7 +46,7 @@ class OpenSsl
      * @return string Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    public static function decrypt(string $cipher, string $key): ?string
+    static function decrypt(string $cipher, string $key): ?string
     {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);
