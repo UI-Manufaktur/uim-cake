@@ -29,20 +29,20 @@ class ReconnectStrategy : RetryStrategyInterface
      * @var array<string>
      */
     protected static $causes = [
-        'gone away',
-        'Lost connection',
-        'Transaction() on null',
-        'closed the connection unexpectedly',
-        'closed unexpectedly',
-        'deadlock avoided',
-        'decryption failed or bad record mac',
-        'is dead or not enabled',
-        'no connection to the server',
-        'query_wait_timeout',
-        'reset by peer',
-        'terminate due to client_idle_limit',
-        'while sending',
-        'writing data to the connection',
+        "gone away",
+        "Lost connection",
+        "Transaction() on null",
+        "closed the connection unexpectedly",
+        "closed unexpectedly",
+        "deadlock avoided",
+        "decryption failed or bad record mac",
+        "is dead or not enabled",
+        "no connection to the server",
+        "query_wait_timeout",
+        "reset by peer",
+        "terminate due to client_idle_limit",
+        "while sending",
+        "writing data to the connection",
     ];
 
     /**
@@ -103,12 +103,12 @@ class ReconnectStrategy : RetryStrategyInterface
         try {
             this.connection.connect();
             if (this.connection.isQueryLoggingEnabled()) {
-                this.connection.log('[RECONNECT]');
+                this.connection.log("[RECONNECT]");
             }
 
             return true;
         } catch (Exception $e) {
-            // If there was an error connecting again, don't report it back,
+            // If there was an error connecting again, don"t report it back,
             // let the retry handler do it.
             return false;
         }

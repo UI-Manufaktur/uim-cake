@@ -46,7 +46,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @param string $name Window name
      */
-    public this(string $name = '') {
+    public this(string $name = "") {
         this.name = new IdentifierExpression($name);
     }
 
@@ -84,7 +84,7 @@ class WindowExpression : IExpression, WindowInterface
         }
 
         if ($partitions instanceof Closure) {
-            $partitions = $partitions(new QueryExpression([], [], ''));
+            $partitions = $partitions(new QueryExpression([], [], ""));
         }
 
         if (!is_array($partitions)) {
@@ -115,7 +115,7 @@ class WindowExpression : IExpression, WindowInterface
         }
 
         if ($fields instanceof Closure) {
-            $fields = $fields(new QueryExpression([], [], ''));
+            $fields = $fields(new QueryExpression([], [], ""));
         }
 
         this.order.add($fields);
@@ -155,14 +155,14 @@ class WindowExpression : IExpression, WindowInterface
         string $endDirection
     ) {
         this.frame = [
-            'type': $type,
-            'start': [
-                'offset': $startOffset,
-                'direction': $startDirection,
+            "type": $type,
+            "start": [
+                "offset": $startOffset,
+                "direction": $startDirection,
             ],
-            'end': [
-                'offset': $endOffset,
-                'direction': $endDirection,
+            "end": [
+                "offset": $endOffset,
+                "direction": $endDirection,
             ],
         ];
 
@@ -173,7 +173,7 @@ class WindowExpression : IExpression, WindowInterface
      * @inheritDoc
      */
     function excludeCurrent() {
-        this.exclusion = 'CURRENT ROW';
+        this.exclusion = "CURRENT ROW";
 
         return this;
     }
@@ -182,7 +182,7 @@ class WindowExpression : IExpression, WindowInterface
      * @inheritDoc
      */
     function excludeGroup() {
-        this.exclusion = 'GROUP';
+        this.exclusion = "GROUP";
 
         return this;
     }
@@ -191,7 +191,7 @@ class WindowExpression : IExpression, WindowInterface
      * @inheritDoc
      */
     function excludeTies() {
-        this.exclusion = 'TIES';
+        this.exclusion = "TIES";
 
         return this;
     }
@@ -212,7 +212,7 @@ class WindowExpression : IExpression, WindowInterface
                 $expressions[] = $partition.sql($binder);
             }
 
-            $clauses[] = 'PARTITION BY ' . implode(', ', $expressions);
+            $clauses[] = "PARTITION BY " . implode(", ", $expressions);
         }
 
         if (this.order) {
@@ -222,25 +222,25 @@ class WindowExpression : IExpression, WindowInterface
         if (this.frame) {
             $start = this.buildOffsetSql(
                 $binder,
-                this.frame['start']['offset'],
-                this.frame['start']['direction']
+                this.frame["start"]["offset"],
+                this.frame["start"]["direction"]
             );
             $end = this.buildOffsetSql(
                 $binder,
-                this.frame['end']['offset'],
-                this.frame['end']['direction']
+                this.frame["end"]["offset"],
+                this.frame["end"]["direction"]
             );
 
-            $frameSql = sprintf('%s BETWEEN %s AND %s', this.frame['type'], $start, $end);
+            $frameSql = sprintf("%s BETWEEN %s AND %s", this.frame["type"], $start, $end);
 
             if (this.exclusion != null) {
-                $frameSql .= ' EXCLUDE ' . this.exclusion;
+                $frameSql .= " EXCLUDE " . this.exclusion;
             }
 
             $clauses[] = $frameSql;
         }
 
-        return implode(' ', $clauses);
+        return implode(" ", $clauses);
     }
 
     /**
@@ -259,12 +259,12 @@ class WindowExpression : IExpression, WindowInterface
         }
 
         if (this.frame != null) {
-            $offset = this.frame['start']['offset'];
+            $offset = this.frame["start"]["offset"];
             if ($offset instanceof IExpression) {
                 $callback($offset);
                 $offset.traverse($callback);
             }
-            $offset = this.frame['end']['offset'] ?? null;
+            $offset = this.frame["end"]["offset"] ?? null;
             if ($offset instanceof IExpression) {
                 $callback($offset);
                 $offset.traverse($callback);
@@ -285,7 +285,7 @@ class WindowExpression : IExpression, WindowInterface
     protected function buildOffsetSql(ValueBinder $binder, $offset, string $direction): string
     {
         if ($offset == 0) {
-            return 'CURRENT ROW';
+            return "CURRENT ROW";
         }
 
         if ($offset instanceof IExpression) {
@@ -293,8 +293,8 @@ class WindowExpression : IExpression, WindowInterface
         }
 
         return sprintf(
-            '%s %s',
-            $offset ?? 'UNBOUNDED',
+            "%s %s",
+            $offset ?? "UNBOUNDED",
             $direction
         );
     }

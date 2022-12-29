@@ -16,7 +16,7 @@ import uim.cake.databases.TypeFactory;
 /**
  * Represents a single table in a database schema.
  *
- * Can either be populated using the reflection API's
+ * Can either be populated using the reflection API"s
  * or by incrementally building an instance using
  * methods.
  *
@@ -102,9 +102,9 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @var array<string, int>
      */
     public static $columnLengths = [
-        'tiny': self::LENGTH_TINY,
-        'medium': self::LENGTH_MEDIUM,
-        'long': self::LENGTH_LONG,
+        "tiny": self::LENGTH_TINY,
+        "medium": self::LENGTH_MEDIUM,
+        "long": self::LENGTH_LONG,
     ];
 
     /**
@@ -114,13 +114,13 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @var array<string, mixed>
      */
     protected static $_columnKeys = [
-        'type': null,
-        'baseType': null,
-        'length': null,
-        'precision': null,
-        'null': null,
-        'default': null,
-        'comment': null,
+        "type": null,
+        "baseType": null,
+        "length": null,
+        "precision": null,
+        "null": null,
+        "default": null,
+        "comment": null,
     ];
 
     /**
@@ -129,34 +129,34 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @var array<string, array<string, mixed>>
      */
     protected static $_columnExtras = [
-        'string': [
-            'collate': null,
+        "string": [
+            "collate": null,
         ],
-        'char': [
-            'collate': null,
+        "char": [
+            "collate": null,
         ],
-        'text': [
-            'collate': null,
+        "text": [
+            "collate": null,
         ],
-        'tinyinteger': [
-            'unsigned': null,
+        "tinyinteger": [
+            "unsigned": null,
         ],
-        'smallinteger': [
-            'unsigned': null,
+        "smallinteger": [
+            "unsigned": null,
         ],
-        'integer': [
-            'unsigned': null,
-            'autoIncrement': null,
+        "integer": [
+            "unsigned": null,
+            "autoIncrement": null,
         ],
-        'biginteger': [
-            'unsigned': null,
-            'autoIncrement': null,
+        "biginteger": [
+            "unsigned": null,
+            "autoIncrement": null,
         ],
-        'decimal': [
-            'unsigned': null,
+        "decimal": [
+            "unsigned": null,
         ],
-        'float': [
-            'unsigned': null,
+        "float": [
+            "unsigned": null,
         ],
     ];
 
@@ -167,12 +167,12 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @var array<string, mixed>
      */
     protected static $_indexKeys = [
-        'type': null,
-        'columns': [],
-        'length': [],
-        'references': [],
-        'update': 'restrict',
-        'delete': 'restrict',
+        "type": null,
+        "columns": [],
+        "length": [],
+        "references": [],
+        "update": "restrict",
+        "delete": "restrict",
     ];
 
     /**
@@ -214,70 +214,70 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      *
      * @var string
      */
-    public const CONSTRAINT_PRIMARY = 'primary';
+    public const CONSTRAINT_PRIMARY = "primary";
 
     /**
      * Unique constraint type
      *
      * @var string
      */
-    public const CONSTRAINT_UNIQUE = 'unique';
+    public const CONSTRAINT_UNIQUE = "unique";
 
     /**
      * Foreign constraint type
      *
      * @var string
      */
-    public const CONSTRAINT_FOREIGN = 'foreign';
+    public const CONSTRAINT_FOREIGN = "foreign";
 
     /**
      * Index - index type
      *
      * @var string
      */
-    public const INDEX_INDEX = 'index';
+    public const INDEX_INDEX = "index";
 
     /**
      * Fulltext index type
      *
      * @var string
      */
-    public const INDEX_FULLTEXT = 'fulltext';
+    public const INDEX_FULLTEXT = "fulltext";
 
     /**
      * Foreign key cascade action
      *
      * @var string
      */
-    public const ACTION_CASCADE = 'cascade';
+    public const ACTION_CASCADE = "cascade";
 
     /**
      * Foreign key set null action
      *
      * @var string
      */
-    public const ACTION_SET_NULL = 'setNull';
+    public const ACTION_SET_NULL = "setNull";
 
     /**
      * Foreign key no action
      *
      * @var string
      */
-    public const ACTION_NO_ACTION = 'noAction';
+    public const ACTION_NO_ACTION = "noAction";
 
     /**
      * Foreign key restrict action
      *
      * @var string
      */
-    public const ACTION_RESTRICT = 'restrict';
+    public const ACTION_RESTRICT = "restrict";
 
     /**
      * Foreign key restrict default
      *
      * @var string
      */
-    public const ACTION_SET_DEFAULT = 'setDefault';
+    public const ACTION_SET_DEFAULT = "setDefault";
 
     /**
      * Constructor.
@@ -305,15 +305,15 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function addColumn(string $name, $attrs) {
         if (is_string($attrs)) {
-            $attrs = ['type': $attrs];
+            $attrs = ["type": $attrs];
         }
         $valid = static::$_columnKeys;
-        if (isset(static::$_columnExtras[$attrs['type']])) {
-            $valid += static::$_columnExtras[$attrs['type']];
+        if (isset(static::$_columnExtras[$attrs["type"]])) {
+            $valid += static::$_columnExtras[$attrs["type"]];
         }
         $attrs = array_intersect_key($attrs, $valid);
         _columns[$name] = $attrs + $valid;
-        _typeMap[$name] = _columns[$name]['type'];
+        _typeMap[$name] = _columns[$name]["type"];
 
         return this;
     }
@@ -344,7 +344,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
             return null;
         }
         $column = _columns[$name];
-        unset($column['baseType']);
+        unset($column["baseType"]);
 
         return $column;
     }
@@ -358,7 +358,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
             return null;
         }
 
-        return _columns[$name]['type'];
+        return _columns[$name]["type"];
     }
 
     /**
@@ -369,7 +369,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
             return this;
         }
 
-        _columns[$name]['type'] = $type;
+        _columns[$name]["type"] = $type;
         _typeMap[$name] = $type;
 
         return this;
@@ -388,8 +388,8 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function baseColumnType(string $column): ?string
     {
-        if (isset(_columns[$column]['baseType'])) {
-            return _columns[$column]['baseType'];
+        if (isset(_columns[$column]["baseType"])) {
+            return _columns[$column]["baseType"];
         }
 
         $type = this.getColumnType($column);
@@ -402,7 +402,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
             $type = TypeFactory::build($type).getBaseType();
         }
 
-        return _columns[$column]['baseType'] = $type;
+        return _columns[$column]["baseType"] = $type;
     }
 
     /**
@@ -422,7 +422,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
             return true;
         }
 
-        return _columns[$name]['null'] == true;
+        return _columns[$name]["null"] == true;
     }
 
     /**
@@ -432,13 +432,13 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     {
         $defaults = [];
         foreach (_columns as $name: $data) {
-            if (!array_key_exists('default', $data)) {
+            if (!array_key_exists("default", $data)) {
                 continue;
             }
-            if ($data['default'] == null && $data['null'] != true) {
+            if ($data["default"] == null && $data["null"] != true) {
                 continue;
             }
-            $defaults[$name] = $data['default'];
+            $defaults[$name] = $data["default"];
         }
 
         return $defaults;
@@ -449,33 +449,33 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function addIndex(string $name, $attrs) {
         if (is_string($attrs)) {
-            $attrs = ['type': $attrs];
+            $attrs = ["type": $attrs];
         }
         $attrs = array_intersect_key($attrs, static::$_indexKeys);
         $attrs += static::$_indexKeys;
-        unset($attrs['references'], $attrs['update'], $attrs['delete']);
+        unset($attrs["references"], $attrs["update"], $attrs["delete"]);
 
-        if (!in_array($attrs['type'], static::$_validIndexTypes, true)) {
+        if (!in_array($attrs["type"], static::$_validIndexTypes, true)) {
             throw new DatabaseException(sprintf(
-                'Invalid index type "%s" in index "%s" in table "%s".',
-                $attrs['type'],
+                "Invalid index type "%s" in index "%s" in table "%s".",
+                $attrs["type"],
                 $name,
                 _table
             ));
         }
-        if (empty($attrs['columns'])) {
+        if (empty($attrs["columns"])) {
             throw new DatabaseException(sprintf(
-                'Index "%s" in table "%s" must have at least one column.',
+                "Index "%s" in table "%s" must have at least one column.",
                 $name,
                 _table
             ));
         }
-        $attrs['columns'] = (array)$attrs['columns'];
-        foreach ($attrs['columns'] as $field) {
+        $attrs["columns"] = (array)$attrs["columns"];
+        foreach ($attrs["columns"] as $field) {
             if (empty(_columns[$field])) {
                 $msg = sprintf(
-                    'Columns used in index "%s" in table "%s" must be added to the Table schema first. ' .
-                    'The column "%s" was not found.',
+                    "Columns used in index "%s" in table "%s" must be added to the Table schema first. " .
+                    "The column "%s" was not found.",
                     $name,
                     _table,
                     $field
@@ -517,7 +517,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function primaryKey(): array
     {
-        deprecationWarning('`TableSchema::primaryKey()` is deprecated. Use `TableSchema::getPrimaryKey()`.');
+        deprecationWarning("`TableSchema::primaryKey()` is deprecated. Use `TableSchema::getPrimaryKey()`.");
 
         return this.getPrimarykey();
     }
@@ -528,8 +528,8 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     function getPrimaryKey(): array
     {
         foreach (_constraints as $data) {
-            if ($data['type'] == static::CONSTRAINT_PRIMARY) {
-                return $data['columns'];
+            if ($data["type"] == static::CONSTRAINT_PRIMARY) {
+                return $data["columns"];
             }
         }
 
@@ -541,29 +541,29 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     function addConstraint(string $name, $attrs) {
         if (is_string($attrs)) {
-            $attrs = ['type': $attrs];
+            $attrs = ["type": $attrs];
         }
         $attrs = array_intersect_key($attrs, static::$_indexKeys);
         $attrs += static::$_indexKeys;
-        if (!in_array($attrs['type'], static::$_validConstraintTypes, true)) {
+        if (!in_array($attrs["type"], static::$_validConstraintTypes, true)) {
             throw new DatabaseException(sprintf(
-                'Invalid constraint type "%s" in table "%s".',
-                $attrs['type'],
+                "Invalid constraint type "%s" in table "%s".",
+                $attrs["type"],
                 _table
             ));
         }
-        if (empty($attrs['columns'])) {
+        if (empty($attrs["columns"])) {
             throw new DatabaseException(sprintf(
-                'Constraints in table "%s" must have at least one column.',
+                "Constraints in table "%s" must have at least one column.",
                 _table
             ));
         }
-        $attrs['columns'] = (array)$attrs['columns'];
-        foreach ($attrs['columns'] as $field) {
+        $attrs["columns"] = (array)$attrs["columns"];
+        foreach ($attrs["columns"] as $field) {
             if (empty(_columns[$field])) {
                 $msg = sprintf(
-                    'Columns used in constraints must be added to the Table schema first. ' .
-                    'The column "%s" was not found in table "%s".',
+                    "Columns used in constraints must be added to the Table schema first. " .
+                    "The column "%s" was not found in table "%s".",
                     $field,
                     _table
                 );
@@ -571,26 +571,26 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
             }
         }
 
-        if ($attrs['type'] == static::CONSTRAINT_FOREIGN) {
+        if ($attrs["type"] == static::CONSTRAINT_FOREIGN) {
             $attrs = _checkForeignKey($attrs);
 
             if (isset(_constraints[$name])) {
-                _constraints[$name]['columns'] = array_unique(array_merge(
-                    _constraints[$name]['columns'],
-                    $attrs['columns']
+                _constraints[$name]["columns"] = array_unique(array_merge(
+                    _constraints[$name]["columns"],
+                    $attrs["columns"]
                 ));
 
-                if (isset(_constraints[$name]['references'])) {
-                    _constraints[$name]['references'][1] = array_unique(array_merge(
-                        (array)_constraints[$name]['references'][1],
-                        [$attrs['references'][1]]
+                if (isset(_constraints[$name]["references"])) {
+                    _constraints[$name]["references"][1] = array_unique(array_merge(
+                        (array)_constraints[$name]["references"][1],
+                        [$attrs["references"][1]]
                     ));
                 }
 
                 return this;
             }
         } else {
-            unset($attrs['references'], $attrs['update'], $attrs['delete']);
+            unset($attrs["references"], $attrs["update"], $attrs["delete"]);
         }
 
         _constraints[$name] = $attrs;
@@ -617,7 +617,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     function hasAutoincrement(): bool
     {
         foreach (_columns as $column) {
-            if (isset($column['autoIncrement']) && $column['autoIncrement']) {
+            if (isset($column["autoIncrement"]) && $column["autoIncrement"]) {
                 return true;
             }
         }
@@ -634,19 +634,19 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      */
     protected function _checkForeignKey(array $attrs): array
     {
-        if (count($attrs['references']) < 2) {
-            throw new DatabaseException('References must contain a table and column.');
+        if (count($attrs["references"]) < 2) {
+            throw new DatabaseException("References must contain a table and column.");
         }
-        if (!in_array($attrs['update'], static::$_validForeignKeyActions)) {
+        if (!in_array($attrs["update"], static::$_validForeignKeyActions)) {
             throw new DatabaseException(sprintf(
-                'Update action is invalid. Must be one of %s',
-                implode(',', static::$_validForeignKeyActions)
+                "Update action is invalid. Must be one of %s",
+                implode(",", static::$_validForeignKeyActions)
             ));
         }
-        if (!in_array($attrs['delete'], static::$_validForeignKeyActions)) {
+        if (!in_array($attrs["delete"], static::$_validForeignKeyActions)) {
             throw new DatabaseException(sprintf(
-                'Delete action is invalid. Must be one of %s',
-                implode(',', static::$_validForeignKeyActions)
+                "Delete action is invalid. Must be one of %s",
+                implode(",", static::$_validForeignKeyActions)
             ));
         }
 
@@ -771,13 +771,13 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     function __debugInfo(): array
     {
         return [
-            'table': _table,
-            'columns': _columns,
-            'indexes': _indexes,
-            'constraints': _constraints,
-            'options': _options,
-            'typeMap': _typeMap,
-            'temporary': _temporary,
+            "table": _table,
+            "columns": _columns,
+            "indexes": _indexes,
+            "constraints": _constraints,
+            "options": _options,
+            "typeMap": _typeMap,
+            "temporary": _temporary,
         ];
     }
 }

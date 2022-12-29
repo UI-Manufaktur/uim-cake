@@ -17,27 +17,27 @@ interface WindowInterface
     /**
      * @var string
      */
-    public const PRECEDING = 'PRECEDING';
+    public const PRECEDING = "PRECEDING";
 
     /**
      * @var string
      */
-    public const FOLLOWING = 'FOLLOWING';
+    public const FOLLOWING = "FOLLOWING";
 
     /**
      * @var string
      */
-    public const RANGE = 'RANGE';
+    public const RANGE = "RANGE";
 
     /**
      * @var string
      */
-    public const ROWS = 'ROWS';
+    public const ROWS = "ROWS";
 
     /**
      * @var string
      */
-    public const GROUPS = 'GROUPS';
+    public const GROUPS = "GROUPS";
 
     /**
      * Adds one or more partition expressions to the window.
@@ -59,17 +59,17 @@ interface WindowInterface
      * Adds a simple range frame to the window.
      *
      * `$start`:
-     *  - `0` - 'CURRENT ROW'
-     *  - `null` - 'UNBOUNDED PRECEDING'
-     *  - offset - 'offset PRECEDING'
+     *  - `0` - "CURRENT ROW"
+     *  - `null` - "UNBOUNDED PRECEDING"
+     *  - offset - "offset PRECEDING"
      *
      * `$end`:
-     *  - `0` - 'CURRENT ROW'
-     *  - `null` - 'UNBOUNDED FOLLOWING'
-     *  - offset - 'offset FOLLOWING'
+     *  - `0` - "CURRENT ROW"
+     *  - `null` - "UNBOUNDED FOLLOWING"
+     *  - offset - "offset FOLLOWING"
      *
-     * If you need to use 'FOLLOWING' with frame start or
-     * 'PRECEDING' with frame end, use `frame()` instead.
+     * If you need to use "FOLLOWING" with frame start or
+     * "PRECEDING" with frame end, use `frame()` instead.
      *
      * @param \Cake\Database\IExpression|string|int|null $start Frame start
      * @param \Cake\Database\IExpression|string|int|null $end Frame end
@@ -106,13 +106,13 @@ interface WindowInterface
      * Adds a frame to the window.
      *
      * Use the `range()`, `rows()` or `groups()` helpers if you need simple
-     * 'BETWEEN offset PRECEDING and offset FOLLOWING' frames.
+     * "BETWEEN offset PRECEDING and offset FOLLOWING" frames.
      *
      * You can specify any direction for both frame start and frame end.
      *
      * With both `$startOffset` and `$endOffset`:
-     *  - `0` - 'CURRENT ROW'
-     *  - `null` - 'UNBOUNDED'
+     *  - `0` - "CURRENT ROW"
+     *  - `null` - "UNBOUNDED"
      *
      * @param string $type Frame type
      * @param \Cake\Database\IExpression|string|int|null $startOffset Frame start offset

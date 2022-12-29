@@ -53,22 +53,22 @@ abstract class SchemaDialect
     protected function _foreignOnClause(string $on): string
     {
         if ($on == TableSchema::ACTION_SET_NULL) {
-            return 'SET NULL';
+            return "SET NULL";
         }
         if ($on == TableSchema::ACTION_SET_DEFAULT) {
-            return 'SET DEFAULT';
+            return "SET DEFAULT";
         }
         if ($on == TableSchema::ACTION_CASCADE) {
-            return 'CASCADE';
+            return "CASCADE";
         }
         if ($on == TableSchema::ACTION_RESTRICT) {
-            return 'RESTRICT';
+            return "RESTRICT";
         }
         if ($on == TableSchema::ACTION_NO_ACTION) {
-            return 'NO ACTION';
+            return "NO ACTION";
         }
 
-        throw new InvalidArgumentException('Invalid value for "on": ' . $on);
+        throw new InvalidArgumentException("Invalid value for "on": " . $on);
     }
 
     /**
@@ -79,10 +79,10 @@ abstract class SchemaDialect
      */
     protected function _convertOnClause(string $clause): string
     {
-        if ($clause == 'CASCADE' || $clause == 'RESTRICT') {
+        if ($clause == "CASCADE" || $clause == "RESTRICT") {
             return strtolower($clause);
         }
-        if ($clause == 'NO ACTION') {
+        if ($clause == "NO ACTION") {
             return TableSchema::ACTION_NO_ACTION;
         }
 
@@ -102,8 +102,8 @@ abstract class SchemaDialect
             return _driver.quoteIdentifier($references);
         }
 
-        return implode(', ', array_map(
-            [_driver, 'quoteIdentifier'],
+        return implode(", ", array_map(
+            [_driver, "quoteIdentifier"],
             $references
         ));
     }
@@ -115,7 +115,7 @@ abstract class SchemaDialect
      * @param string $columnType The column type.
      * @param \Cake\Database\Schema\TableSchemaInterface $schema The table schema instance the column is in.
      * @param string $column The name of the column.
-     * @return string|null An SQL fragment, or `null` in case no corresponding type was found or the type didn't provide
+     * @return string|null An SQL fragment, or `null` in case no corresponding type was found or the type didn"t provide
      *  custom column SQL.
      */
     protected function _getTypeSpecificColumnSql(
@@ -142,7 +142,7 @@ abstract class SchemaDialect
      * @param string $columnType The column type.
      * @param array $definition The column definition.
      * @return array|null Array of column information, or `null` in case no corresponding type was found or the type
-     *  didn't provide custom column information.
+     *  didn"t provide custom column information.
      */
     protected function _applyTypeSpecificColumnConversion(string $columnType, array $definition): ?array
     {
@@ -167,7 +167,7 @@ abstract class SchemaDialect
     function dropTableSql(TableSchema $schema): array
     {
         $sql = sprintf(
-            'DROP TABLE %s',
+            "DROP TABLE %s",
             _driver.quoteIdentifier($schema.name())
         );
 
@@ -219,7 +219,7 @@ abstract class SchemaDialect
      */
     function describeOptionsSql(string $tableName, array $config): array
     {
-        return ['', ''];
+        return ["", ""];
     }
 
     /**
@@ -332,5 +332,5 @@ abstract class SchemaDialect
 
 // phpcs:disable
 // Add backwards compatible alias.
-class_alias('Cake\Database\Schema\SchemaDialect', 'Cake\Database\Schema\BaseSchema');
+class_alias("Cake\Database\Schema\SchemaDialect", "Cake\Database\Schema\BaseSchema");
 // phpcs:enable

@@ -33,12 +33,12 @@ class BoolType : BaseType : BatchCastingInterface
             return $value;
         }
 
-        if (in_array($value, [1, 0, '1', '0'], true)) {
+        if (in_array($value, [1, 0, "1", "0"], true)) {
             return (bool)$value;
         }
 
         throw new InvalidArgumentException(sprintf(
-            'Cannot convert value of type `%s` to bool',
+            "Cannot convert value of type `%s` to bool",
             getTypeName($value)
         ));
     }
@@ -57,7 +57,7 @@ class BoolType : BaseType : BatchCastingInterface
         }
 
         if (!is_numeric($value)) {
-            return strtolower($value) == 'true';
+            return strtolower($value) == "true";
         }
 
         return !empty($value);
@@ -75,7 +75,7 @@ class BoolType : BaseType : BatchCastingInterface
             }
 
             if (!is_numeric($value)) {
-                $values[$field] = strtolower($value) == 'true';
+                $values[$field] = strtolower($value) == "true";
                 continue;
             }
 
@@ -109,7 +109,7 @@ class BoolType : BaseType : BatchCastingInterface
      */
     function marshal($value): ?bool
     {
-        if ($value == null || $value == '') {
+        if ($value == null || $value == "") {
             return null;
         }
 

@@ -84,7 +84,7 @@ class BufferedStatement : Iterator, StatementInterface
      * @return string|null
      */
     function __get(string $property) {
-        if ($property == 'queryString') {
+        if ($property == "queryString") {
             /** @psalm-suppress NoInterfaceProperties */
             return this.statement.queryString;
         }
@@ -95,7 +95,7 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * @inheritDoc
      */
-    function bindValue($column, $value, $type = 'string'): void
+    function bindValue($column, $value, $type = "string"): void
     {
         this.statement.bindValue($column, $value, $type);
     }

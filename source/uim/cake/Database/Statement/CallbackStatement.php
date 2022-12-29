@@ -44,7 +44,7 @@ class CallbackStatement : StatementDecorator
      *
      * The result will be processed by the callback when it is not `false`.
      *
-     * @param string|int $type Either 'num' or 'assoc' to indicate the result format you would like.
+     * @param string|int $type Either "num" or "assoc" to indicate the result format you would like.
      * @return array|false
      */
     function fetch($type = parent::FETCH_TYPE_NUM) {

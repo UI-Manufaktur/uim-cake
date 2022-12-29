@@ -75,7 +75,7 @@ class LoggingStatement : StatementDecorator
             throw $e;
         }
 
-        if (preg_match('/^(?!SELECT)/i', this.queryString)) {
+        if (preg_match("/^(?!SELECT)/i", this.queryString)) {
             this.rowCount();
         }
 
@@ -136,7 +136,7 @@ class LoggingStatement : StatementDecorator
         }
 
         this.loggedQuery.query = this.queryString;
-        this.getLogger().debug((string)this.loggedQuery, ['query': this.loggedQuery]);
+        this.getLogger().debug((string)this.loggedQuery, ["query": this.loggedQuery]);
 
         this.loggedQuery = null;
     }
@@ -150,12 +150,12 @@ class LoggingStatement : StatementDecorator
      * @param string|int|null $type PDO type or name of configured Type class
      * @return void
      */
-    function bindValue($column, $value, $type = 'string'): void
+    function bindValue($column, $value, $type = "string"): void
     {
         parent::bindValue($column, $value, $type);
 
         if ($type == null) {
-            $type = 'string';
+            $type = "string";
         }
         if (!ctype_digit($type)) {
             $value = this.cast($value, $type)[0];

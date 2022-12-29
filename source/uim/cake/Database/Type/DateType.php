@@ -24,13 +24,13 @@ class DateType : DateTimeType
     /**
      * @inheritDoc
      */
-    protected $_format = 'Y-m-d';
+    protected $_format = "Y-m-d";
 
     /**
      * @inheritDoc
      */
     protected $_marshalFormats = [
-        'Y-m-d',
+        "Y-m-d",
     ];
 
     /**
@@ -58,8 +58,8 @@ class DateType : DateTimeType
      */
     function useImmutable() {
         deprecationWarning(
-            'Configuring immutable or mutable classes is deprecated and immutable'
-            . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'
+            "Configuring immutable or mutable classes is deprecated and immutable"
+            . " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
         );
 
         _setClassName(FrozenDate::class, DateTimeImmutable::class);
@@ -75,8 +75,8 @@ class DateType : DateTimeType
      */
     function useMutable() {
         deprecationWarning(
-            'Configuring immutable or mutable classes is deprecated and immutable'
-            . ' classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary.'
+            "Configuring immutable or mutable classes is deprecated and immutable"
+            . " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
         );
 
         _setClassName(Date::class, DateTime::class);
@@ -95,7 +95,7 @@ class DateType : DateTimeType
         $date = parent::marshal($value);
         /** @psalm-var \DateTime|\DateTimeImmutable|null $date */
         if ($date && !$date instanceof I18nDateTimeInterface) {
-            // Clear time manually when I18n types aren't available and raw DateTime used
+            // Clear time manually when I18n types aren"t available and raw DateTime used
             $date = $date.setTime(0, 0, 0);
         }
 

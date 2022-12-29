@@ -26,8 +26,8 @@ class QueryLogger : BaseLog
      * @param array<string, mixed> $config Configuration array
      */
     public this(array $config = []) {
-        _defaultConfig['scopes'] = ['queriesLog'];
-        _defaultConfig['connection'] = '';
+        _defaultConfig["scopes"] = ["queriesLog"];
+        _defaultConfig["connection"] = "";
 
         super(($config);
     }
@@ -36,13 +36,13 @@ class QueryLogger : BaseLog
      * @inheritDoc
      */
     function log($level, $message, array $context = []) {
-        $context['scope'] = this.scopes() ?: ['queriesLog'];
-        $context['connection'] = this.getConfig('connection');
+        $context["scope"] = this.scopes() ?: ["queriesLog"];
+        $context["connection"] = this.getConfig("connection");
 
-        if ($context['query'] instanceof LoggedQuery) {
-            $context = $context['query'].getContext() + $context;
-            $message = 'connection={connection} duration={took} rows={numRows} ' . $message;
+        if ($context["query"] instanceof LoggedQuery) {
+            $context = $context["query"].getContext() + $context;
+            $message = "connection={connection} duration={took} rows={numRows} " . $message;
         }
-        Log::write('debug', $message, $context);
+        Log::write("debug", $message, $context);
     }
 }

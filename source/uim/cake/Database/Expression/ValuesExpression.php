@@ -90,7 +90,7 @@ class ValuesExpression : IExpression
             )
         ) {
             throw new DatabaseException(
-                'You cannot mix subqueries and array values in inserts.'
+                "You cannot mix subqueries and array values in inserts."
             );
         }
         if ($values instanceof Query) {
@@ -138,7 +138,7 @@ class ValuesExpression : IExpression
         $columns = [];
         foreach (_columns as $col) {
             if (is_string($col)) {
-                $col = trim($col, '`[]"');
+                $col = trim($col, "`[]"");
             }
             $columns[] = $col;
         }
@@ -203,7 +203,7 @@ class ValuesExpression : IExpression
     function sql(ValueBinder $binder): string
     {
         if (empty(_values) && empty(_query)) {
-            return '';
+            return "";
         }
 
         if (!_castedExpressions) {
@@ -228,24 +228,24 @@ class ValuesExpression : IExpression
                 $value = $row[$column];
 
                 if ($value instanceof IExpression) {
-                    $rowPlaceholders[] = '(' . $value.sql($binder) . ')';
+                    $rowPlaceholders[] = "(" . $value.sql($binder) . ")";
                     continue;
                 }
 
-                $placeholder = $binder.placeholder('c');
+                $placeholder = $binder.placeholder("c");
                 $rowPlaceholders[] = $placeholder;
                 $binder.bind($placeholder, $value, $types[$column]);
             }
 
-            $placeholders[] = implode(', ', $rowPlaceholders);
+            $placeholders[] = implode(", ", $rowPlaceholders);
         }
 
         $query = this.getQuery();
         if ($query) {
-            return ' ' . $query.sql($binder);
+            return " " . $query.sql($binder);
         }
 
-        return sprintf(' VALUES (%s)', implode('), (', $placeholders));
+        return sprintf(" VALUES (%s)", implode("), (", $placeholders));
     }
 
     /**

@@ -84,7 +84,7 @@ class Collection : ICollection
     /**
      * Get the column metadata for a table.
      *
-     * The name can include a database schema name in the form 'schema.table'.
+     * The name can include a database schema name in the form "schema.table".
      *
      * Caching will be applied if `cacheMetadata` key is present in the Connection
      * configuration options. Defaults to _cake_model_ when true.
@@ -102,19 +102,19 @@ class Collection : ICollection
     function describe(string $name, array $options = []): TableSchemaInterface
     {
         $config = _connection.config();
-        if (strpos($name, '.')) {
-            [$config['schema'], $name] = explode('.', $name);
+        if (strpos($name, ".")) {
+            [$config["schema"], $name] = explode(".", $name);
         }
         $table = _connection.getDriver().newTableSchema($name);
 
-        _reflect('Column', $name, $config, $table);
+        _reflect("Column", $name, $config, $table);
         if (count($table.columns()) == 0) {
-            throw new DatabaseException(sprintf('Cannot describe %s. It has 0 columns.', $name));
+            throw new DatabaseException(sprintf("Cannot describe %s. It has 0 columns.", $name));
         }
 
-        _reflect('Index', $name, $config, $table);
-        _reflect('ForeignKey', $name, $config, $table);
-        _reflect('Options', $name, $config, $table);
+        _reflect("Index", $name, $config, $table);
+        _reflect("ForeignKey", $name, $config, $table);
+        _reflect("Options", $name, $config, $table);
 
         return $table;
     }
@@ -152,7 +152,7 @@ class Collection : ICollection
             throw new DatabaseException($e.getMessage(), 500, $e);
         }
         /** @psalm-suppress PossiblyFalseIterator */
-        foreach ($statement.fetchAll('assoc') as $row) {
+        foreach ($statement.fetchAll("assoc") as $row) {
             _dialect.{$convertMethod}($schema, $row);
         }
         $statement.closeCursor();

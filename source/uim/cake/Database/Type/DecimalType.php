@@ -46,7 +46,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @throws \InvalidArgumentException
      */
     function toDatabase($value, DriverInterface $driver) {
-        if ($value == null || $value == '') {
+        if ($value == null || $value == "") {
             return null;
         }
 
@@ -56,14 +56,14 @@ class DecimalType : BaseType : BatchCastingInterface
 
         if (
             is_object($value)
-            && method_exists($value, '__toString')
+            && method_exists($value, "__toString")
             && is_numeric(strval($value))
         ) {
             return strval($value);
         }
 
         throw new InvalidArgumentException(sprintf(
-            'Cannot convert value of type `%s` to a decimal',
+            "Cannot convert value of type `%s` to a decimal",
             getTypeName($value)
         ));
     }
@@ -120,7 +120,7 @@ class DecimalType : BaseType : BatchCastingInterface
      */
     function marshal($value): ?string
     {
-        if ($value == null || $value == '') {
+        if ($value == null || $value == "") {
             return null;
         }
         if (is_string($value) && _useLocaleParser) {
@@ -129,7 +129,7 @@ class DecimalType : BaseType : BatchCastingInterface
         if (is_numeric($value)) {
             return (string)$value;
         }
-        if (is_string($value) && preg_match('/^[0-9,. ]+$/', $value)) {
+        if (is_string($value) && preg_match("/^[0-9,. ]+$/", $value)) {
             return $value;
         }
 
@@ -159,7 +159,7 @@ class DecimalType : BaseType : BatchCastingInterface
             return this;
         }
         throw new RuntimeException(
-            sprintf('Cannot use locale parsing with the %s class', static::$numberClass)
+            sprintf("Cannot use locale parsing with the %s class", static::$numberClass)
         );
     }
 

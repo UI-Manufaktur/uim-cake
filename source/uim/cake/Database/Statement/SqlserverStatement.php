@@ -29,10 +29,10 @@ class SqlserverStatement : PDOStatement
      * @param string|int|null $type PDO type or name of configured Type class
      * @return void
      */
-    function bindValue($column, $value, $type = 'string'): void
+    function bindValue($column, $value, $type = "string"): void
     {
         if ($type == null) {
-            $type = 'string';
+            $type = "string";
         }
         if (!is_int($type)) {
             [$value, $type] = this.cast($value, $type);

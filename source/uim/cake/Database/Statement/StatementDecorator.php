@@ -71,7 +71,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @return string|null
      */
     function __get(string $property) {
-        if ($property == 'queryString') {
+        if ($property == "queryString") {
             /** @psalm-suppress NoInterfaceProperties */
             return _statement.queryString;
         }
@@ -89,9 +89,9 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * ### Examples:
      *
      * ```
-     * $statement.bindValue(1, 'a title');
-     * $statement.bindValue('active', true, 'boolean');
-     * $statement.bindValue(5, new \DateTime(), 'date');
+     * $statement.bindValue(1, "a title");
+     * $statement.bindValue("active", true, "boolean");
+     * $statement.bindValue(5, new \DateTime(), "date");
      * ```
      *
      * @param string|int $column name or param position to be bound
@@ -99,14 +99,14 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * @param string|int|null $type name of configured Type class
      * @return void
      */
-    function bindValue($column, $value, $type = 'string'): void
+    function bindValue($column, $value, $type = "string"): void
     {
         _statement.bindValue($column, $value, $type);
     }
 
     /**
      * Closes a cursor in the database, freeing up any resources and memory
-     * allocated to it. In most cases you don't need to call this method, as it is
+     * allocated to it. In most cases you don"t need to call this method, as it is
      * automatically called after fetching all results from the result set.
      *
      * @return void
@@ -117,12 +117,12 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     }
 
     /**
-     * Returns the number of columns this statement's results will contain.
+     * Returns the number of columns this statement"s results will contain.
      *
      * ### Example:
      *
      * ```
-     * $statement = $connection.prepare('SELECT id, title from articles');
+     * $statement = $connection.prepare("SELECT id, title from articles");
      * $statement.execute();
      * echo $statement.columnCount(); // outputs 2
      * ```
@@ -178,12 +178,12 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * ### Example:
      *
      * ```
-     * $statement = $connection.prepare('SELECT id, title from articles');
+     * $statement = $connection.prepare("SELECT id, title from articles");
      * $statement.execute();
-     * print_r($statement.fetch('assoc')); // will show ['id': 1, 'title': 'a title']
+     * print_r($statement.fetch("assoc")); // will show ["id": 1, "title": "a title"]
      * ```
      *
-     * @param string|int $type 'num' for positional columns, assoc for named columns
+     * @param string|int $type "num" for positional columns, assoc for named columns
      * @return mixed Result array containing columns and values or false if no results
      * are left
      */
@@ -225,9 +225,9 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * ### Example:
      *
      * ```
-     * $statement = $connection.prepare('SELECT id, title from articles');
+     * $statement = $connection.prepare("SELECT id, title from articles");
      * $statement.execute();
-     * print_r($statement.fetchAll('assoc')); // will show [0: ['id': 1, 'title': 'a title']]
+     * print_r($statement.fetchAll("assoc")); // will show [0: ["id": 1, "title": "a title"]]
      * ```
      *
      * @param string|int $type num for fetching columns as positional keys or assoc for column names as keys
@@ -243,7 +243,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * ### Example:
      *
      * ```
-     * $statement = $connection.prepare('SELECT id, title from articles');
+     * $statement = $connection.prepare("SELECT id, title from articles");
      * $statement.execute();
      * print_r($statement.rowCount()); // will show 1
      * ```
@@ -262,7 +262,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * ### Example:
      *
      * ```
-     * $statement = $connection.prepare('SELECT id, title from articles');
+     * $statement = $connection.prepare("SELECT id, title from articles");
      * foreach ($statement as $row) {
      *   //do stuff
      * }
