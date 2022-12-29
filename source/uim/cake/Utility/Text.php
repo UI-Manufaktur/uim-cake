@@ -9,7 +9,7 @@
  */
 module uim.cake.Utility;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 use InvalidArgumentException;
 use Transliterator;
 

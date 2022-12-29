@@ -9,7 +9,7 @@
  */
 module uim.cake.View\Form;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 import uim.cake.Form\Form;
 import uim.cake.utilities.Hash;
 

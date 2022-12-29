@@ -9,7 +9,7 @@
  */
 module uim.cake.View;
 
-import uim.cake.cores.Configure;
+import uim.cake.core.Configure;
 use RuntimeException;
 
 /**

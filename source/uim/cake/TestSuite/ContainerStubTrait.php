@@ -1,5 +1,5 @@
 
 
-import uim.cake.cores.TestSuite\ContainerStubTrait;
+import uim.cake.core.TestSuite\ContainerStubTrait;
 
 class_alias(ContainerStubTrait::class, "Cake\TestSuite\ContainerStubTrait");

@@ -9,7 +9,7 @@
  */
 module uim.cake.View\Widget;
 
-import uim.cake.cores.Configure;
+import uim.cake.core.Configure;
 import uim.cake.View\Form\ContextInterface;
 
 /**

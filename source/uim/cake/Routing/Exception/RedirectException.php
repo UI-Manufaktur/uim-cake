@@ -9,7 +9,7 @@
  */
 module uim.cake.Routing\Exception;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 
 /**
  * An exception subclass used by the routing layer to indicate

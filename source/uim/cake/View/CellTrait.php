@@ -9,7 +9,7 @@
  */
 module uim.cake.View;
 
-import uim.cake.cores.App;
+import uim.cake.core.App;
 import uim.cake.utilities.Inflector;
 import uim.cake.View\Exception\MissingCellException;
 

@@ -9,7 +9,7 @@
  */
 module uim.cake.View;
 
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.events.IEventListener;
 
 /**

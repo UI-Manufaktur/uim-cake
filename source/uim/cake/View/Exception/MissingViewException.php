@@ -9,7 +9,7 @@
  */
 module uim.cake.View\Exception;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 
 /**
  * Used when a view class file cannot be found.

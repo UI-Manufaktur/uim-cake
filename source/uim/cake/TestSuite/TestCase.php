@@ -14,9 +14,9 @@
  */
 module uim.cake.TestSuite;
 
-import uim.cake.cores.App;
-import uim.cake.cores.Configure;
-import uim.cake.cores.Plugin;
+import uim.cake.core.App;
+import uim.cake.core.Configure;
+import uim.cake.core.Plugin;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.events.EventManager;
 import uim.cake.http.BaseApplication;

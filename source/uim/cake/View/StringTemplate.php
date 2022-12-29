@@ -9,9 +9,9 @@
  */
 module uim.cake.View;
 
-import uim.cake.cores.configures.engines.PhpConfig;
-import uim.cake.cores.exceptions.CakeException;
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.configures.engines.PhpConfig;
+import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.utilities.Hash;
 use RuntimeException;
 

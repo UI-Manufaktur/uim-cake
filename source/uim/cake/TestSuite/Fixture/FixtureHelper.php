@@ -9,8 +9,8 @@
  */
 module uim.cake.TestSuite\Fixture;
 
-import uim.cake.cores.Configure;
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.Configure;
+import uim.cake.core.exceptions.CakeException;
 import uim.cake.databases.Connection;
 import uim.cake.databases.DriverInterface;
 import uim.cake.databases.schemas.TableSchema;

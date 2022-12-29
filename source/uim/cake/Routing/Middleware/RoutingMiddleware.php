@@ -11,7 +11,7 @@ module uim.cake.Routing\Middleware;
 
 import uim.cake.caches.Cache;
 import uim.cake.caches.InvalidArgumentException;
-import uim.cake.cores.IPluginApplication;
+import uim.cake.core.IPluginApplication;
 import uim.cake.http.Exception\RedirectException;
 import uim.cake.http.MiddlewareQueue;
 import uim.cake.http.Runner;
