@@ -34,9 +34,9 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @var array<string>
      */
     protected $validClauseNames = [
-        'value',
-        'when',
-        'else',
+        "value",
+        "when",
+        "else",
     ];
 
     /**
@@ -100,7 +100,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * When a value is set, the syntax generated is
      * `CASE case_value WHEN when_value ... END` (simple case),
-     * where the `when_value`'s are compared against the
+     * where the `when_value`"s are compared against the
      * `case_value`.
      *
      * When no value is set, the syntax generated is
@@ -123,8 +123,8 @@ class CaseStatementExpression : IExpression, TypedResultInterface
                 !(is_object($value) && !($value instanceof Closure))
             ) {
                 throw new InvalidArgumentException(sprintf(
-                    'The `$value` argument must be either `null`, a scalar value, an object, ' .
-                    'or an instance of `\%s`, `%s` given.',
+                    "The `$value` argument must be either `null`, a scalar value, an object, " .
+                    "or an instance of `\%s`, `%s` given.",
                     IExpression::class,
                     getTypeName($value)
                 ));
@@ -159,12 +159,12 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $queryExpression
-     *     .case($query.identifier('Table.column'))
+     *     .case($query.identifier("Table.column"))
      *     .when(true)
-     *     .then('Yes')
+     *     .then("Yes")
      *     .when(false)
-     *     .then('No')
-     *     .else('Maybe');
+     *     .then("No")
+     *     .else("Maybe");
      * ```
      *
      * ### Self-contained expressions
@@ -184,15 +184,15 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *     .case()
      *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
-     *             .when(['Table.column': true])
-     *             .then('Yes');
+     *             .when(["Table.column": true])
+     *             .then("Yes");
      *     })
      *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
-     *             .when(['Table.column': false])
-     *             .then('No');
+     *             .when(["Table.column": false])
+     *             .then("No");
      *     })
-     *     .else('Maybe');
+     *     .else("Maybe");
      * ```
      *
      * ### Type handling
@@ -210,15 +210,15 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *     .case()
      *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
-     *             .when(['unmapped_column': true], ['unmapped_column': 'bool'])
-     *             .then('Yes');
+     *             .when(["unmapped_column": true], ["unmapped_column": "bool"])
+     *             .then("Yes");
      *     })
      *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
-     *             .when(['unmapped_column': false], ['unmapped_column': 'bool'])
-     *             .then('No');
+     *             .when(["unmapped_column": false], ["unmapped_column": "bool"])
+     *             .then("No");
      *     })
-     *     .else('Maybe');
+     *     .else("Maybe");
      * ```
      *
      * ### User data safety
@@ -239,7 +239,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $case
-     *      .when($userData, 'integer')
+     *      .when($userData, "integer")
      * ```
      *
      * This way an exception would be triggered when an array is passed for
@@ -253,7 +253,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * ```
      * $case
      *      .when([
-     *          'Table.column': $userData,
+     *          "Table.column": $userData,
      *      ])
      * ```
      *
@@ -262,12 +262,12 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * ```
      * $query
      *      .select([
-     *          'val': $query.newExpr()
+     *          "val": $query.newExpr()
      *              .case()
-     *              .when($query.newExpr(':userData'))
+     *              .when($query.newExpr(":userData"))
      *              .then(123)
      *      ])
-     *      .bind(':userData', $userData, 'integer')
+     *      .bind(":userData", $userData, "integer")
      * ```
      *
      * @param \Cake\Database\IExpression|\Closure|object|array|scalar $when The `WHEN` value. When using an
@@ -280,19 +280,19 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *  conditions, or else a string. If no type is provided, the type will be tried to be inferred from the value.
      * @return this
      * @throws \LogicException In case this a closing `then()` call is required before calling this method.
-     * @throws \LogicException In case the callable doesn't return an instance of
+     * @throws \LogicException In case the callable doesn"t return an instance of
      *  `\Cake\Database\Expression\WhenThenExpression`.
      */
     function when($when, $type = null) {
         if (this.whenBuffer != null) {
-            throw new LogicException('Cannot call `when()` between `when()` and `then()`.');
+            throw new LogicException("Cannot call `when()` between `when()` and `then()`.");
         }
 
         if ($when instanceof Closure) {
             $when = $when(new WhenThenExpression(this.getTypeMap()));
             if (!($when instanceof WhenThenExpression)) {
                 throw new LogicException(sprintf(
-                    '`when()` callables must return an instance of `\%s`, `%s` given.',
+                    "`when()` callables must return an instance of `\%s`, `%s` given.",
                     WhenThenExpression::class,
                     getTypeName($when)
                 ));
@@ -302,7 +302,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
         if ($when instanceof WhenThenExpression) {
             this.when[] = $when;
         } else {
-            this.whenBuffer = ['when': $when, 'type': $type];
+            this.whenBuffer = ["when": $when, "type": $type];
         }
 
         return this;
@@ -320,40 +320,40 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ```
      * $case
-     *     .when(['Table.column': true])
-     *     .then('Yes')
-     *     .when(['Table.column': false])
-     *     .then('No')
-     *     .else('Maybe');
+     *     .when(["Table.column": true])
+     *     .then("Yes")
+     *     .when(["Table.column": false])
+     *     .then("No")
+     *     .else("Maybe");
      * ```
      *
      * The following would all fail with an exception:
      *
      * ```
      * $case
-     *     .when(['Table.column': true])
-     *     .when(['Table.column': false])
+     *     .when(["Table.column": true])
+     *     .when(["Table.column": false])
      *     // ...
      * ```
      *
      * ```
      * $case
-     *     .when(['Table.column': true])
-     *     .else('Maybe')
+     *     .when(["Table.column": true])
+     *     .else("Maybe")
      *     // ...
      * ```
      *
      * ```
      * $case
-     *     .then('Yes')
+     *     .then("Yes")
      *     // ...
      * ```
      *
      * ```
      * $case
-     *     .when(['Table.column': true])
-     *     .then('Yes')
-     *     .then('No')
+     *     .when(["Table.column": true])
+     *     .then("Yes")
+     *     .then("No")
      *     // ...
      * ```
      *
@@ -361,16 +361,16 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @param string|null $type The result type. If no type is provided, the type will be tried to be inferred from the
      *  value.
      * @return this
-     * @throws \LogicException In case `when()` wasn't previously called with a value other than a closure or an
+     * @throws \LogicException In case `when()` wasn"t previously called with a value other than a closure or an
      *  instance of `\Cake\Database\Expression\WhenThenExpression`.
      */
     function then($result, ?string $type = null) {
         if (this.whenBuffer == null) {
-            throw new LogicException('Cannot call `then()` before `when()`.');
+            throw new LogicException("Cannot call `then()` before `when()`.");
         }
 
         $whenThen = (new WhenThenExpression(this.getTypeMap()))
-            .when(this.whenBuffer['when'], this.whenBuffer['type'])
+            .when(this.whenBuffer["when"], this.whenBuffer["type"])
             .then($result, $type);
 
         this.whenBuffer = null;
@@ -393,7 +393,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      */
     function else($result, ?string $type = null) {
         if (this.whenBuffer != null) {
-            throw new LogicException('Cannot call `else()` between `when()` and `then()`.');
+            throw new LogicException("Cannot call `else()` between `when()` and `then()`.");
         }
 
         if (
@@ -402,8 +402,8 @@ class CaseStatementExpression : IExpression, TypedResultInterface
             !(is_object($result) && !($result instanceof Closure))
         ) {
             throw new InvalidArgumentException(sprintf(
-                'The `$result` argument must be either `null`, a scalar value, an object, ' .
-                'or an instance of `\%s`, `%s` given.',
+                "The `$result` argument must be either `null`, a scalar value, an object, " .
+                "or an instance of `\%s`, `%s` given.",
                 IExpression::class,
                 getTypeName($result)
             ));
@@ -453,7 +453,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
             return $types[0];
         }
 
-        return 'string';
+        return "string";
     }
 
     /**
@@ -491,8 +491,8 @@ class CaseStatementExpression : IExpression, TypedResultInterface
         if (!in_array($clause, this.validClauseNames, true)) {
             throw new InvalidArgumentException(
                 sprintf(
-                    'The `$clause` argument must be one of `%s`, the given value `%s` is invalid.',
-                    implode('`, `', this.validClauseNames),
+                    "The `$clause` argument must be one of `%s`, the given value `%s` is invalid.",
+                    implode("`, `", this.validClauseNames),
                     $clause
                 )
             );
@@ -507,23 +507,23 @@ class CaseStatementExpression : IExpression, TypedResultInterface
     function sql(ValueBinder $binder): string
     {
         if (this.whenBuffer != null) {
-            throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
+            throw new LogicException("Case expression has incomplete when clause. Missing `then()` after `when()`.");
         }
 
         if (empty(this.when)) {
-            throw new LogicException('Case expression must have at least one when statement.');
+            throw new LogicException("Case expression must have at least one when statement.");
         }
 
-        $value = '';
+        $value = "";
         if (this.isSimpleVariant) {
-            $value = this.compileNullableValue($binder, this.value, this.valueType) . ' ';
+            $value = this.compileNullableValue($binder, this.value, this.valueType) . " ";
         }
 
         $whenThenExpressions = [];
         foreach (this.when as $whenThen) {
             $whenThenExpressions[] = $whenThen.sql($binder);
         }
-        $whenThen = implode(' ', $whenThenExpressions);
+        $whenThen = implode(" ", $whenThenExpressions);
 
         $else = this.compileNullableValue($binder, this.else, this.elseType);
 
@@ -535,7 +535,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      */
     public O traverse(this O)(Closure $callback) {
         if (this.whenBuffer != null) {
-            throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
+            throw new LogicException("Case expression has incomplete when clause. Missing `then()` after `when()`.");
         }
 
         if (this.value instanceof IExpression) {
@@ -563,7 +563,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      */
     function __clone() {
         if (this.whenBuffer != null) {
-            throw new LogicException('Case expression has incomplete when clause. Missing `then()` after `when()`.');
+            throw new LogicException("Case expression has incomplete when clause. Missing `then()` after `when()`.");
         }
 
         if (this.value instanceof IExpression) {

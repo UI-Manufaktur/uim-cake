@@ -60,7 +60,7 @@ class CommonTableExpression : IExpression
      * @param string $name The CTE name.
      * @param \Cake\Database\IExpression|\Closure $query CTE query
      */
-    public this(string $name = '', $query = null) {
+    public this(string $name = "", $query = null) {
         this.name = new IdentifierExpression($name);
         if ($query) {
             this.query($query);
@@ -93,7 +93,7 @@ class CommonTableExpression : IExpression
             $query = $query();
             if (!($query instanceof IExpression)) {
                 throw new RuntimeException(
-                    'You must return an `IExpression` from a Closure passed to `query()`.'
+                    "You must return an `IExpression` from a Closure passed to `query()`."
                 );
             }
         }
@@ -126,7 +126,7 @@ class CommonTableExpression : IExpression
      * @return this
      */
     function materialized() {
-        this.materialized = 'MATERIALIZED';
+        this.materialized = "MATERIALIZED";
 
         return this;
     }
@@ -137,7 +137,7 @@ class CommonTableExpression : IExpression
      * @return this
      */
     function notMaterialized() {
-        this.materialized = 'NOT MATERIALIZED';
+        this.materialized = "NOT MATERIALIZED";
 
         return this;
     }
@@ -168,22 +168,22 @@ class CommonTableExpression : IExpression
      */
     function sql(ValueBinder $binder): string
     {
-        $fields = '';
+        $fields = "";
         if (this.fields) {
             $expressions = array_map(function (IdentifierExpression $e) use ($binder) {
                 return $e.sql($binder);
             }, this.fields);
-            $fields = sprintf('(%s)', implode(', ', $expressions));
+            $fields = sprintf("(%s)", implode(", ", $expressions));
         }
 
-        $suffix = this.materialized ? this.materialized . ' ' : '';
+        $suffix = this.materialized ? this.materialized . " " : "";
 
         return sprintf(
-            '%s%s AS %s(%s)',
+            "%s%s AS %s(%s)",
             this.name.sql($binder),
             $fields,
             $suffix,
-            this.query ? this.query.sql($binder) : ''
+            this.query ? this.query.sql($binder) : ""
         );
     }
 

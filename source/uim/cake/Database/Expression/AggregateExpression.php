@@ -174,13 +174,13 @@ class AggregateExpression : FunctionExpression : WindowInterface
     {
         $sql = parent::sql($binder);
         if (this.filter != null) {
-            $sql .= ' FILTER (WHERE ' . this.filter.sql($binder) . ')';
+            $sql .= " FILTER (WHERE " . this.filter.sql($binder) . ")";
         }
         if (this.window != null) {
             if (this.window.isNamedOnly()) {
-                $sql .= ' OVER ' . this.window.sql($binder);
+                $sql .= " OVER " . this.window.sql($binder);
             } else {
-                $sql .= ' OVER (' . this.window.sql($binder) . ')';
+                $sql .= " OVER (" . this.window.sql($binder) . ")";
             }
         }
 

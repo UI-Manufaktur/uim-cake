@@ -40,16 +40,16 @@ class Sqlite : Driver
      * @var array<string, mixed>
      */
     protected $_baseConfig = [
-        'persistent': false,
-        'username': null,
-        'password': null,
-        'database': ':memory:',
-        'encoding': 'utf8',
-        'mask': 0644,
-        'cache': null,
-        'mode': null,
-        'flags': [],
-        'init': [],
+        "persistent": false,
+        "username": null,
+        "password": null,
+        "database": ":memory:",
+        "encoding": "utf8",
+        "mask": 0644,
+        "cache": null,
+        "mode": null,
+        "flags": [],
+        "init": [],
     ];
 
     /**
@@ -71,14 +71,14 @@ class Sqlite : Driver
      *
      * @var string
      */
-    protected $_startQuote = '"';
+    protected $_startQuote = """;
 
     /**
      * String used to end a database identifier quoting to make it safe
      *
      * @var string
      */
-    protected $_endQuote = '"';
+    protected $_endQuote = """;
 
     /**
      * Mapping of date parts.
@@ -86,13 +86,13 @@ class Sqlite : Driver
      * @var array<string, string>
      */
     protected $_dateParts = [
-        'day': 'd',
-        'hour': 'H',
-        'month': 'm',
-        'minute': 'M',
-        'second': 'S',
-        'week': 'W',
-        'year': 'Y',
+        "day": "d",
+        "hour": "H",
+        "month": "m",
+        "minute": "M",
+        "second": "S",
+        "week": "W",
+        "year": "Y",
     ];
 
     /**
@@ -101,8 +101,8 @@ class Sqlite : Driver
      * @var array<string, string>
      */
     protected $featureVersions = [
-        'cte': '3.8.3',
-        'window': '3.28.0',
+        "cte": "3.8.3",
+        "window": "3.28.0",
     ];
 
     /**
@@ -116,49 +116,49 @@ class Sqlite : Driver
             return true;
         }
         $config = _config;
-        $config['flags'] += [
-            PDO::ATTR_PERSISTENT: $config['persistent'],
+        $config["flags"] += [
+            PDO::ATTR_PERSISTENT: $config["persistent"],
             PDO::ATTR_EMULATE_PREPARES: false,
             PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
-        if (!is_string($config['database']) || $config['database'] == '') {
-            $name = $config['name'] ?? 'unknown';
+        if (!is_string($config["database"]) || $config["database"] == "") {
+            $name = $config["name"] ?? "unknown";
             throw new InvalidArgumentException(
                 "The `database` key for the `{$name}` SQLite connection needs to be a non-empty string."
             );
         }
 
         $chmodFile = false;
-        if ($config['database'] != ':memory:' && $config['mode'] != 'memory') {
-            $chmodFile = !file_exists($config['database']);
+        if ($config["database"] != ":memory:" && $config["mode"] != "memory") {
+            $chmodFile = !file_exists($config["database"]);
         }
 
         $params = [];
-        if ($config['cache']) {
-            $params[] = 'cache=' . $config['cache'];
+        if ($config["cache"]) {
+            $params[] = "cache=" . $config["cache"];
         }
-        if ($config['mode']) {
-            $params[] = 'mode=' . $config['mode'];
+        if ($config["mode"]) {
+            $params[] = "mode=" . $config["mode"];
         }
 
         if ($params) {
             if (PHP_VERSION_ID < 80100) {
-                throw new RuntimeException('SQLite URI support requires PHP 8.1.');
+                throw new RuntimeException("SQLite URI support requires PHP 8.1.");
             }
-            $dsn = 'sqlite:file:' . $config['database'] . '?' . implode('&', $params);
+            $dsn = "sqlite:file:" . $config["database"] . "?" . implode("&", $params);
         } else {
-            $dsn = 'sqlite:' . $config['database'];
+            $dsn = "sqlite:" . $config["database"];
         }
 
         _connect($dsn, $config);
         if ($chmodFile) {
             // phpcs:disable
-            @chmod($config['database'], $config['mask']);
+            @chmod($config["database"], $config["mask"]);
             // phpcs:enable
         }
 
-        if (!empty($config['init'])) {
-            foreach ((array)$config['init'] as $command) {
+        if (!empty($config["init"])) {
+            foreach ((array)$config["init"] as $command) {
                 this.getConnection().exec($command);
             }
         }
@@ -173,7 +173,7 @@ class Sqlite : Driver
      */
     function enabled(): bool
     {
-        return in_array('sqlite', PDO::getAvailableDrivers(), true);
+        return in_array("sqlite", PDO::getAvailableDrivers(), true);
     }
 
     /**
@@ -205,7 +205,7 @@ class Sqlite : Driver
      */
     function disableForeignKeySQL(): string
     {
-        return 'PRAGMA foreign_keys = OFF';
+        return "PRAGMA foreign_keys = OFF";
     }
 
     /**
@@ -213,7 +213,7 @@ class Sqlite : Driver
      */
     function enableForeignKeySQL(): string
     {
-        return 'PRAGMA foreign_keys = ON';
+        return "PRAGMA foreign_keys = ON";
     }
 
     /**
@@ -227,7 +227,7 @@ class Sqlite : Driver
                 return version_compare(
                     this.version(),
                     this.featureVersions[$feature],
-                    '>='
+                    ">="
                 );
 
             case static::FEATURE_TRUNCATE_WITH_CONSTRAINTS:
@@ -271,8 +271,8 @@ class Sqlite : Driver
     protected function _expressionTranslators(): array
     {
         return [
-            FunctionExpression::class: '_transformFunctionExpression',
-            TupleComparison::class: '_transformTupleComparison',
+            FunctionExpression::class: "_transformFunctionExpression",
+            TupleComparison::class: "_transformTupleComparison",
         ];
     }
 
@@ -286,65 +286,65 @@ class Sqlite : Driver
     protected function _transformFunctionExpression(FunctionExpression $expression): void
     {
         switch ($expression.getName()) {
-            case 'CONCAT':
+            case "CONCAT":
                 // CONCAT function is expressed as exp1 || exp2
-                $expression.setName('').setConjunction(' ||');
+                $expression.setName("").setConjunction(" ||");
                 break;
-            case 'DATEDIFF':
+            case "DATEDIFF":
                 $expression
-                    .setName('ROUND')
-                    .setConjunction('-')
+                    .setName("ROUND")
+                    .setConjunction("-")
                     .iterateParts(function ($p) {
-                        return new FunctionExpression('JULIANDAY', [$p['value']], [$p['type']]);
+                        return new FunctionExpression("JULIANDAY", [$p["value"]], [$p["type"]]);
                     });
                 break;
-            case 'NOW':
-                $expression.setName('DATETIME').add(["'now'": 'literal']);
+            case "NOW":
+                $expression.setName("DATETIME").add([""now"": "literal"]);
                 break;
-            case 'RAND':
+            case "RAND":
                 $expression
-                    .setName('ABS')
-                    .add(['RANDOM() % 1': 'literal'], [], true);
+                    .setName("ABS")
+                    .add(["RANDOM() % 1": "literal"], [], true);
                 break;
-            case 'CURRENT_DATE':
-                $expression.setName('DATE').add(["'now'": 'literal']);
+            case "CURRENT_DATE":
+                $expression.setName("DATE").add([""now"": "literal"]);
                 break;
-            case 'CURRENT_TIME':
-                $expression.setName('TIME').add(["'now'": 'literal']);
+            case "CURRENT_TIME":
+                $expression.setName("TIME").add([""now"": "literal"]);
                 break;
-            case 'EXTRACT':
+            case "EXTRACT":
                 $expression
-                    .setName('STRFTIME')
-                    .setConjunction(' ,')
+                    .setName("STRFTIME")
+                    .setConjunction(" ,")
                     .iterateParts(function ($p, $key) {
                         if ($key == 0) {
-                            $value = rtrim(strtolower($p), 's');
+                            $value = rtrim(strtolower($p), "s");
                             if (isset(_dateParts[$value])) {
-                                $p = ['value': '%' . _dateParts[$value], 'type': null];
+                                $p = ["value": "%" . _dateParts[$value], "type": null];
                             }
                         }
 
                         return $p;
                     });
                 break;
-            case 'DATE_ADD':
+            case "DATE_ADD":
                 $expression
-                    .setName('DATE')
-                    .setConjunction(',')
+                    .setName("DATE")
+                    .setConjunction(",")
                     .iterateParts(function ($p, $key) {
                         if ($key == 1) {
-                            $p = ['value': $p, 'type': null];
+                            $p = ["value": $p, "type": null];
                         }
 
                         return $p;
                     });
                 break;
-            case 'DAYOFWEEK':
+            case "DAYOFWEEK":
                 $expression
-                    .setName('STRFTIME')
-                    .setConjunction(' ')
-                    .add(["'%w', ": 'literal'], [], true)
-                    .add([') + (1': 'literal']); // Sqlite starts on index 0 but Sunday should be 1
+                    .setName("STRFTIME")
+                    .setConjunction(" ")
+                    .add([""%w", ": "literal"], [], true)
+                    .add([") + (1": "literal"]); // Sqlite starts on index 0 but Sunday should be 1
                 break;
         }
     }
@@ -357,7 +357,7 @@ class Sqlite : Driver
      */
     function supportsCTEs(): bool
     {
-        deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
+        deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_CTE);
     }
@@ -370,7 +370,7 @@ class Sqlite : Driver
      */
     function supportsWindowFunctions(): bool
     {
-        deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
+        deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_WINDOW);
     }

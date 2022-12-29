@@ -38,17 +38,17 @@ class Postgres : Driver
      * @var array<string, mixed>
      */
     protected $_baseConfig = [
-        'persistent': true,
-        'host': 'localhost',
-        'username': 'root',
-        'password': '',
-        'database': 'cake',
-        'schema': 'public',
-        'port': 5432,
-        'encoding': 'utf8',
-        'timezone': null,
-        'flags': [],
-        'init': [],
+        "persistent": true,
+        "host": "localhost",
+        "username": "root",
+        "password": "",
+        "database": "cake",
+        "schema": "public",
+        "port": 5432,
+        "encoding": "utf8",
+        "timezone": null,
+        "flags": [],
+        "init": [],
     ];
 
     /**
@@ -63,14 +63,14 @@ class Postgres : Driver
      *
      * @var string
      */
-    protected $_startQuote = '"';
+    protected $_startQuote = """;
 
     /**
      * String used to end a database identifier quoting to make it safe
      *
      * @var string
      */
-    protected $_endQuote = '"';
+    protected $_endQuote = """;
 
     /**
      * Establishes a connection to the database server
@@ -83,32 +83,32 @@ class Postgres : Driver
             return true;
         }
         $config = _config;
-        $config['flags'] += [
-            PDO::ATTR_PERSISTENT: $config['persistent'],
+        $config["flags"] += [
+            PDO::ATTR_PERSISTENT: $config["persistent"],
             PDO::ATTR_EMULATE_PREPARES: false,
             PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
-        if (empty($config['unix_socket'])) {
-            $dsn = "pgsql:host={$config['host']};port={$config['port']};dbname={$config['database']}";
+        if (empty($config["unix_socket"])) {
+            $dsn = "pgsql:host={$config["host"]};port={$config["port"]};dbname={$config["database"]}";
         } else {
-            $dsn = "pgsql:dbname={$config['database']}";
+            $dsn = "pgsql:dbname={$config["database"]}";
         }
 
         _connect($dsn, $config);
         _connection = $connection = this.getConnection();
-        if (!empty($config['encoding'])) {
-            this.setEncoding($config['encoding']);
+        if (!empty($config["encoding"])) {
+            this.setEncoding($config["encoding"]);
         }
 
-        if (!empty($config['schema'])) {
-            this.setSchema($config['schema']);
+        if (!empty($config["schema"])) {
+            this.setSchema($config["schema"]);
         }
 
-        if (!empty($config['timezone'])) {
-            $config['init'][] = sprintf('SET timezone = %s', $connection.quote($config['timezone']));
+        if (!empty($config["timezone"])) {
+            $config["init"][] = sprintf("SET timezone = %s", $connection.quote($config["timezone"]));
         }
 
-        foreach ($config['init'] as $command) {
+        foreach ($config["init"] as $command) {
             $connection.exec($command);
         }
 
@@ -122,7 +122,7 @@ class Postgres : Driver
      */
     function enabled(): bool
     {
-        return in_array('pgsql', PDO::getAvailableDrivers(), true);
+        return in_array("pgsql", PDO::getAvailableDrivers(), true);
     }
 
     /**
@@ -146,7 +146,7 @@ class Postgres : Driver
     function setEncoding(string $encoding): void
     {
         this.connect();
-        _connection.exec('SET NAMES ' . _connection.quote($encoding));
+        _connection.exec("SET NAMES " . _connection.quote($encoding));
     }
 
     /**
@@ -159,7 +159,7 @@ class Postgres : Driver
     function setSchema(string $schema): void
     {
         this.connect();
-        _connection.exec('SET search_path TO ' . _connection.quote($schema));
+        _connection.exec("SET search_path TO " . _connection.quote($schema));
     }
 
     /**
@@ -167,7 +167,7 @@ class Postgres : Driver
      */
     function disableForeignKeySQL(): string
     {
-        return 'SET CONSTRAINTS ALL DEFERRED';
+        return "SET CONSTRAINTS ALL DEFERRED";
     }
 
     /**
@@ -175,7 +175,7 @@ class Postgres : Driver
      */
     function enableForeignKeySQL(): string
     {
-        return 'SET CONSTRAINTS ALL IMMEDIATE';
+        return "SET CONSTRAINTS ALL IMMEDIATE";
     }
 
     /**
@@ -218,8 +218,8 @@ class Postgres : Driver
      */
     protected function _insertQueryTranslator(Query $query): Query
     {
-        if (!$query.clause('epilog')) {
-            $query.epilog('RETURNING *');
+        if (!$query.clause("epilog")) {
+            $query.epilog("RETURNING *");
         }
 
         return $query;
@@ -231,9 +231,9 @@ class Postgres : Driver
     protected function _expressionTranslators(): array
     {
         return [
-            IdentifierExpression::class: '_transformIdentifierExpression',
-            FunctionExpression::class: '_transformFunctionExpression',
-            StringExpression::class: '_transformStringExpression',
+            IdentifierExpression::class: "_transformIdentifierExpression",
+            FunctionExpression::class: "_transformFunctionExpression",
+            StringExpression::class: "_transformStringExpression",
         ];
     }
 
@@ -248,7 +248,7 @@ class Postgres : Driver
         $collation = $expression.getCollation();
         if ($collation) {
             // use trim() to work around expression being transformed multiple times
-            $expression.setCollation('"' . trim($collation, '"') . '"');
+            $expression.setCollation(""" . trim($collation, """) . """);
         }
     }
 
@@ -263,56 +263,56 @@ class Postgres : Driver
     protected function _transformFunctionExpression(FunctionExpression $expression): void
     {
         switch ($expression.getName()) {
-            case 'CONCAT':
+            case "CONCAT":
                 // CONCAT function is expressed as exp1 || exp2
-                $expression.setName('').setConjunction(' ||');
+                $expression.setName("").setConjunction(" ||");
                 break;
-            case 'DATEDIFF':
+            case "DATEDIFF":
                 $expression
-                    .setName('')
-                    .setConjunction('-')
+                    .setName("")
+                    .setConjunction("-")
                     .iterateParts(function ($p) {
                         if (is_string($p)) {
-                            $p = ['value': [$p: 'literal'], 'type': null];
+                            $p = ["value": [$p: "literal"], "type": null];
                         } else {
-                            $p['value'] = [$p['value']];
+                            $p["value"] = [$p["value"]];
                         }
 
-                        return new FunctionExpression('DATE', $p['value'], [$p['type']]);
+                        return new FunctionExpression("DATE", $p["value"], [$p["type"]]);
                     });
                 break;
-            case 'CURRENT_DATE':
-                $time = new FunctionExpression('LOCALTIMESTAMP', [' 0 ': 'literal']);
-                $expression.setName('CAST').setConjunction(' AS ').add([$time, 'date': 'literal']);
+            case "CURRENT_DATE":
+                $time = new FunctionExpression("LOCALTIMESTAMP", [" 0 ": "literal"]);
+                $expression.setName("CAST").setConjunction(" AS ").add([$time, "date": "literal"]);
                 break;
-            case 'CURRENT_TIME':
-                $time = new FunctionExpression('LOCALTIMESTAMP', [' 0 ': 'literal']);
-                $expression.setName('CAST').setConjunction(' AS ').add([$time, 'time': 'literal']);
+            case "CURRENT_TIME":
+                $time = new FunctionExpression("LOCALTIMESTAMP", [" 0 ": "literal"]);
+                $expression.setName("CAST").setConjunction(" AS ").add([$time, "time": "literal"]);
                 break;
-            case 'NOW':
-                $expression.setName('LOCALTIMESTAMP').add([' 0 ': 'literal']);
+            case "NOW":
+                $expression.setName("LOCALTIMESTAMP").add([" 0 ": "literal"]);
                 break;
-            case 'RAND':
-                $expression.setName('RANDOM');
+            case "RAND":
+                $expression.setName("RANDOM");
                 break;
-            case 'DATE_ADD':
+            case "DATE_ADD":
                 $expression
-                    .setName('')
-                    .setConjunction(' + INTERVAL')
+                    .setName("")
+                    .setConjunction(" + INTERVAL")
                     .iterateParts(function ($p, $key) {
                         if ($key == 1) {
-                            $p = sprintf("'%s'", $p);
+                            $p = sprintf(""%s"", $p);
                         }
 
                         return $p;
                     });
                 break;
-            case 'DAYOFWEEK':
+            case "DAYOFWEEK":
                 $expression
-                    .setName('EXTRACT')
-                    .setConjunction(' ')
-                    .add(['DOW FROM': 'literal'], [], true)
-                    .add([') + (1': 'literal']); // Postgres starts on index 0 but Sunday should be 1
+                    .setName("EXTRACT")
+                    .setConjunction(" ")
+                    .add(["DOW FROM": "literal"], [], true)
+                    .add([") + (1": "literal"]); // Postgres starts on index 0 but Sunday should be 1
                 break;
         }
     }
@@ -326,7 +326,7 @@ class Postgres : Driver
     protected function _transformStringExpression(StringExpression $expression): void
     {
         // use trim() to work around expression being transformed multiple times
-        $expression.setCollation('"' . trim($expression.getCollation(), '"') . '"');
+        $expression.setCollation(""" . trim($expression.getCollation(), """) . """);
     }
 
     /**

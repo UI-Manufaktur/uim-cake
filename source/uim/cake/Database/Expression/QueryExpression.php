@@ -57,7 +57,7 @@ class QueryExpression : IExpression, Countable
      * level of the expression tree. For example "AND", "OR", "XOR"...
      * @see \Cake\Database\Expression\QueryExpression::add() for more details on $conditions and $types
      */
-    public this($conditions = [], $types = [], $conjunction = 'AND') {
+    public this($conditions = [], $types = [], $conjunction = "AND") {
         this.setTypeMap($types);
         this.setConjunction(strtoupper($conjunction));
         if (!empty($conditions)) {
@@ -99,7 +99,7 @@ class QueryExpression : IExpression, Countable
      * value is an array, it will create as many placeholders as values are in it.
      *
      * @param \Cake\Database\IExpression|array|string $conditions single or multiple conditions to
-     * be added. When using an array and the key is 'OR' or 'AND' a new expression
+     * be added. When using an array and the key is "OR" or "AND" a new expression
      * object will be created with that conjunction and internal array value passed
      * as conditions.
      * @param array<int|string, string> $types Associative array of fields pointing to the type of the
@@ -140,7 +140,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
 
-        return this.add(new ComparisonExpression($field, $value, $type, '='));
+        return this.add(new ComparisonExpression($field, $value, $type, "="));
     }
 
     /**
@@ -158,7 +158,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
 
-        return this.add(new ComparisonExpression($field, $value, $type, '!='));
+        return this.add(new ComparisonExpression($field, $value, $type, "!="));
     }
 
     /**
@@ -174,7 +174,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
 
-        return this.add(new ComparisonExpression($field, $value, $type, '>'));
+        return this.add(new ComparisonExpression($field, $value, $type, ">"));
     }
 
     /**
@@ -190,7 +190,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
 
-        return this.add(new ComparisonExpression($field, $value, $type, '<'));
+        return this.add(new ComparisonExpression($field, $value, $type, "<"));
     }
 
     /**
@@ -206,7 +206,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
 
-        return this.add(new ComparisonExpression($field, $value, $type, '>='));
+        return this.add(new ComparisonExpression($field, $value, $type, ">="));
     }
 
     /**
@@ -222,7 +222,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
 
-        return this.add(new ComparisonExpression($field, $value, $type, '<='));
+        return this.add(new ComparisonExpression($field, $value, $type, "<="));
     }
 
     /**
@@ -237,7 +237,7 @@ class QueryExpression : IExpression, Countable
             $field = new IdentifierExpression($field);
         }
 
-        return this.add(new UnaryExpression('IS NULL', $field, UnaryExpression::POSTFIX));
+        return this.add(new UnaryExpression("IS NULL", $field, UnaryExpression::POSTFIX));
     }
 
     /**
@@ -252,7 +252,7 @@ class QueryExpression : IExpression, Countable
             $field = new IdentifierExpression($field);
         }
 
-        return this.add(new UnaryExpression('IS NOT NULL', $field, UnaryExpression::POSTFIX));
+        return this.add(new UnaryExpression("IS NOT NULL", $field, UnaryExpression::POSTFIX));
     }
 
     /**
@@ -268,7 +268,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
 
-        return this.add(new ComparisonExpression($field, $value, $type, 'LIKE'));
+        return this.add(new ComparisonExpression($field, $value, $type, "LIKE"));
     }
 
     /**
@@ -284,7 +284,7 @@ class QueryExpression : IExpression, Countable
             $type = _calculateType($field);
         }
 
-        return this.add(new ComparisonExpression($field, $value, $type, 'NOT LIKE'));
+        return this.add(new ComparisonExpression($field, $value, $type, "NOT LIKE"));
     }
 
     /**
@@ -300,11 +300,11 @@ class QueryExpression : IExpression, Countable
         if ($type == null) {
             $type = _calculateType($field);
         }
-        $type = $type ?: 'string';
-        $type .= '[]';
+        $type = $type ?: "string";
+        $type .= "[]";
         $values = $values instanceof IExpression ? $values : (array)$values;
 
-        return this.add(new ComparisonExpression($field, $values, $type, 'IN'));
+        return this.add(new ComparisonExpression($field, $values, $type, "IN"));
     }
 
     /**
@@ -321,7 +321,7 @@ class QueryExpression : IExpression, Countable
      * @deprecated 4.3.0 Use QueryExpression::case() or CaseStatementExpression instead
      */
     function addCase($conditions, $values = [], $types = []) {
-        deprecationWarning('QueryExpression::addCase() is deprecated, use case() instead.');
+        deprecationWarning("QueryExpression::addCase() is deprecated, use case() instead.");
 
         return this.add(new CaseExpression($conditions, $values, $types));
     }
@@ -331,7 +331,7 @@ class QueryExpression : IExpression, Countable
      *
      * When a value is set, the syntax generated is
      * `CASE case_value WHEN when_value ... END` (simple case),
-     * where the `when_value`'s are compared against the
+     * where the `when_value`"s are compared against the
      * `case_value`.
      *
      * When no value is set, the syntax generated is
@@ -371,11 +371,11 @@ class QueryExpression : IExpression, Countable
         if ($type == null) {
             $type = _calculateType($field);
         }
-        $type = $type ?: 'string';
-        $type .= '[]';
+        $type = $type ?: "string";
+        $type .= "[]";
         $values = $values instanceof IExpression ? $values : (array)$values;
 
-        return this.add(new ComparisonExpression($field, $values, $type, 'NOT IN'));
+        return this.add(new ComparisonExpression($field, $values, $type, "NOT IN"));
     }
 
     /**
@@ -388,7 +388,7 @@ class QueryExpression : IExpression, Countable
      * @return this
      */
     function notInOrNull($field, $values, ?string $type = null) {
-        $or = new static([], [], 'OR');
+        $or = new static([], [], "OR");
         $or
             .notIn($field, $values, $type)
             .isNull($field);
@@ -403,7 +403,7 @@ class QueryExpression : IExpression, Countable
      * @return this
      */
     function exists(IExpression $expression) {
-        return this.add(new UnaryExpression('EXISTS', $expression, UnaryExpression::PREFIX));
+        return this.add(new UnaryExpression("EXISTS", $expression, UnaryExpression::PREFIX));
     }
 
     /**
@@ -413,7 +413,7 @@ class QueryExpression : IExpression, Countable
      * @return this
      */
     function notExists(IExpression $expression) {
-        return this.add(new UnaryExpression('NOT EXISTS', $expression, UnaryExpression::PREFIX));
+        return this.add(new UnaryExpression("NOT EXISTS", $expression, UnaryExpression::PREFIX));
     }
 
     /**
@@ -462,10 +462,10 @@ class QueryExpression : IExpression, Countable
      */
     function or($conditions, $types = []) {
         if ($conditions instanceof Closure) {
-            return $conditions(new static([], this.getTypeMap().setTypes($types), 'OR'));
+            return $conditions(new static([], this.getTypeMap().setTypes($types), "OR"));
         }
 
-        return new static($conditions, this.getTypeMap().setTypes($types), 'OR');
+        return new static($conditions, this.getTypeMap().setTypes($types), "OR");
     }
 
     // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
@@ -481,7 +481,7 @@ class QueryExpression : IExpression, Countable
      * @deprecated 4.0.0 Use {@link and()} instead.
      */
     function and_($conditions, $types = []) {
-        deprecationWarning('QueryExpression::and_() is deprecated use and() instead.');
+        deprecationWarning("QueryExpression::and_() is deprecated use and() instead.");
 
         return this.and($conditions, $types);
     }
@@ -497,7 +497,7 @@ class QueryExpression : IExpression, Countable
      * @deprecated 4.0.0 Use {@link or()} instead.
      */
     function or_($conditions, $types = []) {
-        deprecationWarning('QueryExpression::or_() is deprecated use or() instead.');
+        deprecationWarning("QueryExpression::or_() is deprecated use or() instead.");
 
         return this.or($conditions, $types);
     }
@@ -516,7 +516,7 @@ class QueryExpression : IExpression, Countable
      * @return this
      */
     function not($conditions, $types = []) {
-        return this.add(['NOT': $conditions], $types);
+        return this.add(["NOT": $conditions], $types);
     }
 
     /**
@@ -557,18 +557,18 @@ class QueryExpression : IExpression, Countable
     {
         $len = this.count();
         if ($len == 0) {
-            return '';
+            return "";
         }
         $conjunction = _conjunction;
-        $template = $len == 1 ? '%s' : '(%s)';
+        $template = $len == 1 ? "%s" : "(%s)";
         $parts = [];
         foreach (_conditions as $part) {
             if ($part instanceof Query) {
-                $part = '(' . $part.sql($binder) . ')';
+                $part = "(" . $part.sql($binder) . ")";
             } elseif ($part instanceof IExpression) {
                 $part = $part.sql($binder);
             }
-            if ($part != '') {
+            if ($part != "") {
                 $parts[] = $part;
             }
         }
@@ -622,7 +622,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Check whether a callable is acceptable.
      *
-     * We don't accept ['class', 'method'] style callbacks,
+     * We don"t accept ["class", "method"] style callbacks,
      * as they often contain user input and arrays of strings
      * are easy to sneak in.
      *
@@ -672,7 +672,7 @@ class QueryExpression : IExpression, Countable
      */
     protected function _addConditions(array $conditions, array $types): void
     {
-        $operators = ['and', 'or', 'xor'];
+        $operators = ["and", "or", "xor"];
 
         $typeMap = this.getTypeMap().setTypes($types);
 
@@ -693,7 +693,7 @@ class QueryExpression : IExpression, Countable
             if (!$numericKey) {
                 $normalizedKey = strtolower($k);
                 $isOperator = in_array($normalizedKey, $operators);
-                $isNot = $normalizedKey == 'not';
+                $isNot = $normalizedKey == "not";
             }
 
             if (($isOperator || $isNot) && ($isArray || $c instanceof Countable) && count($c) == 0) {
@@ -711,12 +711,12 @@ class QueryExpression : IExpression, Countable
             }
 
             if ($numericKey && $isArray || $isOperator) {
-                _conditions[] = new static($c, $typeMap, $numericKey ? 'AND' : $k);
+                _conditions[] = new static($c, $typeMap, $numericKey ? "AND" : $k);
                 continue;
             }
 
             if ($isNot) {
-                _conditions[] = new UnaryExpression('NOT', new static($c, $typeMap));
+                _conditions[] = new UnaryExpression("NOT", new static($c, $typeMap));
                 continue;
             }
 
@@ -741,38 +741,38 @@ class QueryExpression : IExpression, Countable
      */
     protected function _parseCondition(string $field, $value) {
         $field = trim($field);
-        $operator = '=';
+        $operator = "=";
         $expression = $field;
 
-        $spaces = substr_count($field, ' ');
+        $spaces = substr_count($field, " ");
         // Handle field values that contain multiple spaces, such as
         // operators with a space in them like `field IS NOT` and
         // `field NOT LIKE`, or combinations with function expressions
-        // like `CONCAT(first_name, ' ', last_name) IN`.
+        // like `CONCAT(first_name, " ", last_name) IN`.
         if ($spaces > 1) {
-            $parts = explode(' ', $field);
-            if (preg_match('/(is not|not \w+)$/i', $field)) {
+            $parts = explode(" ", $field);
+            if (preg_match("/(is not|not \w+)$/i", $field)) {
                 $last = array_pop($parts);
                 $second = array_pop($parts);
                 $parts[] = "{$second} {$last}";
             }
             $operator = array_pop($parts);
-            $expression = implode(' ', $parts);
+            $expression = implode(" ", $parts);
         } elseif ($spaces == 1) {
-            $parts = explode(' ', $field, 2);
+            $parts = explode(" ", $field, 2);
             [$expression, $operator] = $parts;
         }
         $operator = strtolower(trim($operator));
         $type = this.getTypeMap().type($expression);
 
-        $typeMultiple = (is_string($type) && strpos($type, '[]') != false);
-        if (in_array($operator, ['in', 'not in']) || $typeMultiple) {
-            $type = $type ?: 'string';
+        $typeMultiple = (is_string($type) && strpos($type, "[]") != false);
+        if (in_array($operator, ["in", "not in"]) || $typeMultiple) {
+            $type = $type ?: "string";
             if (!$typeMultiple) {
-                $type .= '[]';
+                $type .= "[]";
             }
-            $operator = $operator == '=' ? 'IN' : $operator;
-            $operator = $operator == '!=' ? 'NOT IN' : $operator;
+            $operator = $operator == "=" ? "IN" : $operator;
+            $operator = $operator == "!=" ? "NOT IN" : $operator;
             $typeMultiple = true;
         }
 
@@ -780,33 +780,33 @@ class QueryExpression : IExpression, Countable
             $value = $value instanceof IExpression ? $value : (array)$value;
         }
 
-        if ($operator == 'is' && $value == null) {
+        if ($operator == "is" && $value == null) {
             return new UnaryExpression(
-                'IS NULL',
+                "IS NULL",
                 new IdentifierExpression($expression),
                 UnaryExpression::POSTFIX
             );
         }
 
-        if ($operator == 'is not' && $value == null) {
+        if ($operator == "is not" && $value == null) {
             return new UnaryExpression(
-                'IS NOT NULL',
+                "IS NOT NULL",
                 new IdentifierExpression($expression),
                 UnaryExpression::POSTFIX
             );
         }
 
-        if ($operator == 'is' && $value != null) {
-            $operator = '=';
+        if ($operator == "is" && $value != null) {
+            $operator = "=";
         }
 
-        if ($operator == 'is not' && $value != null) {
-            $operator = '!=';
+        if ($operator == "is not" && $value != null) {
+            $operator = "!=";
         }
 
-        if ($value == null && _conjunction != ',') {
+        if ($value == null && _conjunction != ",") {
             throw new InvalidArgumentException(
-                sprintf('Expression `%s` is missing operator (IS, IS NOT) with `null` value.', $expression)
+                sprintf("Expression `%s` is missing operator (IS, IS NOT) with `null` value.", $expression)
             );
         }
 

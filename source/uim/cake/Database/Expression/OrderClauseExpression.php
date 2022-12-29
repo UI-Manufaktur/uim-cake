@@ -36,7 +36,7 @@ class OrderClauseExpression : IExpression, FieldInterface
      */
     public this($field, $direction) {
         _field = $field;
-        _direction = strtolower($direction) == 'asc' ? 'ASC' : 'DESC';
+        _direction = strtolower($direction) == "asc" ? "ASC" : "DESC";
     }
 
     /**
@@ -47,12 +47,12 @@ class OrderClauseExpression : IExpression, FieldInterface
         /** @var \Cake\Database\IExpression|string $field */
         $field = _field;
         if ($field instanceof Query) {
-            $field = sprintf('(%s)', $field.sql($binder));
+            $field = sprintf("(%s)", $field.sql($binder));
         } elseif ($field instanceof IExpression) {
             $field = $field.sql($binder);
         }
 
-        return sprintf('%s %s', $field, _direction);
+        return sprintf("%s %s", $field, _direction);
     }
 
     /**

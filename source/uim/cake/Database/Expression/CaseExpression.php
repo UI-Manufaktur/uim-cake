@@ -33,7 +33,7 @@ class CaseExpression : IExpression
 
     /**
      * Values that are associated with the conditions in the $_conditions array.
-     * Each value represents the 'true' value for the condition with the corresponding key.
+     * Each value represents the "true" value for the condition with the corresponding key.
      *
      * @var array
      */
@@ -96,7 +96,7 @@ class CaseExpression : IExpression
 
     /**
      * Iterates over the passed in conditions and ensures that there is a matching true value for each.
-     * If no matching true value, then it is defaulted to '1'.
+     * If no matching true value, then it is defaulted to "1".
      *
      * @param array $conditions Array of IExpression instances.
      * @param array<mixed> $values Associative array of values of each condition
@@ -122,13 +122,13 @@ class CaseExpression : IExpression
             _conditions[] = $c;
             $value = $rawValues[$k] ?? 1;
 
-            if ($value == 'literal') {
+            if ($value == "literal") {
                 $value = $keyValues[$k];
                 _values[] = $value;
                 continue;
             }
 
-            if ($value == 'identifier') {
+            if ($value == "identifier") {
                 /** @var string $identifier */
                 $identifier = $keyValues[$k];
                 $value = new IdentifierExpression($identifier);
@@ -147,7 +147,7 @@ class CaseExpression : IExpression
                 continue;
             }
 
-            _values[] = ['value': $value, 'type': $type];
+            _values[] = ["value": $value, "type": $type];
         }
     }
 
@@ -170,7 +170,7 @@ class CaseExpression : IExpression
         }
 
         if (!$value instanceof IExpression) {
-            $value = ['value': $value, 'type': $type];
+            $value = ["value": $value, "type": $type];
         }
 
         _elseValue = $value;
@@ -188,8 +188,8 @@ class CaseExpression : IExpression
         if ($part instanceof IExpression) {
             $part = $part.sql($binder);
         } elseif (is_array($part)) {
-            $placeholder = $binder.placeholder('param');
-            $binder.bind($placeholder, $part['value'], $part['type']);
+            $placeholder = $binder.placeholder("param");
+            $binder.bind($placeholder, $part["value"], $part["type"]);
             $part = $placeholder;
         }
 
@@ -205,25 +205,25 @@ class CaseExpression : IExpression
     function sql(ValueBinder $binder): string
     {
         $parts = [];
-        $parts[] = 'CASE';
+        $parts[] = "CASE";
         foreach (_conditions as $k: $part) {
             $value = _values[$k];
-            $parts[] = 'WHEN ' . _compile($part, $binder) . ' THEN ' . _compile($value, $binder);
+            $parts[] = "WHEN " . _compile($part, $binder) . " THEN " . _compile($value, $binder);
         }
         if (_elseValue != null) {
-            $parts[] = 'ELSE';
+            $parts[] = "ELSE";
             $parts[] = _compile(_elseValue, $binder);
         }
-        $parts[] = 'END';
+        $parts[] = "END";
 
-        return implode(' ', $parts);
+        return implode(" ", $parts);
     }
 
     /**
      * @inheritDoc
      */
     public O traverse(this O)(Closure $callback) {
-        foreach (['_conditions', '_values'] as $part) {
+        foreach (["_conditions", "_values"] as $part) {
             foreach (this.{$part} as $c) {
                 if ($c instanceof IExpression) {
                     $callback($c);

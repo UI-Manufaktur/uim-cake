@@ -44,7 +44,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @var string
      */
-    protected $_operator = '=';
+    protected $_operator = "=";
 
     /**
      * Whether the value in this expression is a traversable
@@ -69,7 +69,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param string|null $type the type name used to cast the value
      * @param string $operator the operator used for comparing field and value
      */
-    public this($field, $value, ?string $type = null, string $operator = '=') {
+    public this($field, $value, ?string $type = null, string $operator = "=") {
         _type = $type;
         this.setField($field);
         this.setValue($value);
@@ -86,7 +86,7 @@ class ComparisonExpression : IExpression, FieldInterface
     {
         $value = _castToExpression($value, _type);
 
-        $isMultiple = _type && strpos(_type, '[]') != false;
+        $isMultiple = _type && strpos(_type, "[]") != false;
         if ($isMultiple) {
             [$value, _valueExpressions] = _collectExpressions($value);
         }
@@ -138,10 +138,10 @@ class ComparisonExpression : IExpression, FieldInterface
         }
 
         if (_value instanceof IdentifierExpression) {
-            $template = '%s %s %s';
+            $template = "%s %s %s";
             $value = _value.sql($binder);
         } elseif (_value instanceof IExpression) {
-            $template = '%s %s (%s)';
+            $template = "%s %s (%s)";
             $value = _value.sql($binder);
         } else {
             [$template, $value] = _stringExpression($binder);
@@ -180,7 +180,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @return void
      */
     function __clone() {
-        foreach (['_value', '_field'] as $prop) {
+        foreach (["_value", "_field"] as $prop) {
             if (this.{$prop} instanceof IExpression) {
                 this.{$prop} = clone this.{$prop};
             }
@@ -196,23 +196,23 @@ class ComparisonExpression : IExpression, FieldInterface
      */
     protected function _stringExpression(ValueBinder $binder): array
     {
-        $template = '%s ';
+        $template = "%s ";
 
         if (_field instanceof IExpression && !_field instanceof IdentifierExpression) {
-            $template = '(%s) ';
+            $template = "(%s) ";
         }
 
         if (_isMultiple) {
-            $template .= '%s (%s)';
+            $template .= "%s (%s)";
             $type = _type;
             if ($type != null) {
-                $type = str_replace('[]', '', $type);
+                $type = str_replace("[]", "", $type);
             }
             $value = _flattenValue(_value, $binder, $type);
 
             // To avoid SQL errors when comparing a field to a list of empty values,
             // better just throw an exception here
-            if ($value == '') {
+            if ($value == "") {
                 $field = _field instanceof IExpression ? _field.sql($binder) : _field;
                 /** @psalm-suppress PossiblyInvalidCast */
                 throw new DatabaseException(
@@ -220,7 +220,7 @@ class ComparisonExpression : IExpression, FieldInterface
                 );
             }
         } else {
-            $template .= '%s %s';
+            $template .= "%s %s";
             $value = _bindValue(_value, $binder, _type);
         }
 
@@ -237,7 +237,7 @@ class ComparisonExpression : IExpression, FieldInterface
      */
     protected function _bindValue($value, ValueBinder $binder, ?string $type = null): string
     {
-        $placeholder = $binder.placeholder('c');
+        $placeholder = $binder.placeholder("c");
         $binder.bind($placeholder, $value, $type);
 
         return $placeholder;
@@ -266,7 +266,7 @@ class ComparisonExpression : IExpression, FieldInterface
             $parts += $binder.generateManyNamed($value, $type);
         }
 
-        return implode(',', $parts);
+        return implode(",", $parts);
     }
 
     /**
@@ -306,7 +306,7 @@ class ComparisonExpression : IExpression, FieldInterface
 }
 
 // phpcs:disable
-// Comparison will not load during instanceof checks so ensure it's loaded here
+// Comparison will not load during instanceof checks so ensure it"s loaded here
 // @deprecated 4.1.0 Add backwards compatible alias.
-class_alias('Cake\Database\Expression\ComparisonExpression', 'Cake\Database\Expression\Comparison');
+class_alias("Cake\Database\Expression\ComparisonExpression", "Cake\Database\Expression\Comparison");
 // phpcs:enable

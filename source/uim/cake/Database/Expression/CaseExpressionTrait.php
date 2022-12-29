@@ -37,25 +37,25 @@ trait CaseExpressionTrait
         $type = null;
 
         if (is_string($value)) {
-            $type = 'string';
+            $type = "string";
         } elseif (is_int($value)) {
-            $type = 'integer';
+            $type = "integer";
         } elseif (is_float($value)) {
-            $type = 'float';
+            $type = "float";
         } elseif (is_bool($value)) {
-            $type = 'boolean';
+            $type = "boolean";
         } elseif (
             $value instanceof Date ||
             $value instanceof MutableDate
         ) {
-            $type = 'date';
+            $type = "date";
         } elseif ($value instanceof DateTimeInterface) {
-            $type = 'datetime';
+            $type = "datetime";
         } elseif (
             is_object($value) &&
-            method_exists($value, '__toString')
+            method_exists($value, "__toString")
         ) {
-            $type = 'string';
+            $type = "string";
         } elseif (
             _typeMap != null &&
             $value instanceof IdentifierExpression
@@ -86,13 +86,13 @@ trait CaseExpressionTrait
         }
 
         if ($value == null) {
-            $value = 'NULL';
+            $value = "NULL";
         } elseif ($value instanceof Query) {
-            $value = sprintf('(%s)', $value.sql($binder));
+            $value = sprintf("(%s)", $value.sql($binder));
         } elseif ($value instanceof IExpression) {
             $value = $value.sql($binder);
         } else {
-            $placeholder = $binder.placeholder('c');
+            $placeholder = $binder.placeholder("c");
             $binder.bind($placeholder, $value, $type);
             $value = $placeholder;
         }

@@ -34,14 +34,14 @@ class Mysql : Driver
      *
      * @var string
      */
-    protected const SERVER_TYPE_MYSQL = 'mysql';
+    protected const SERVER_TYPE_MYSQL = "mysql";
 
     /**
      * Server type MariaDB
      *
      * @var string
      */
-    protected const SERVER_TYPE_MARIADB = 'mariadb';
+    protected const SERVER_TYPE_MARIADB = "mariadb";
 
     /**
      * Base configuration settings for MySQL driver
@@ -49,16 +49,16 @@ class Mysql : Driver
      * @var array<string, mixed>
      */
     protected $_baseConfig = [
-        'persistent': true,
-        'host': 'localhost',
-        'username': 'root',
-        'password': '',
-        'database': 'cake',
-        'port': '3306',
-        'flags': [],
-        'encoding': 'utf8mb4',
-        'timezone': null,
-        'init': [],
+        "persistent": true,
+        "host": "localhost",
+        "username": "root",
+        "password": "",
+        "database": "cake",
+        "port": "3306",
+        "flags": [],
+        "encoding": "utf8mb4",
+        "timezone": null,
+        "init": [],
     ];
 
     /**
@@ -73,19 +73,19 @@ class Mysql : Driver
      *
      * @var string
      */
-    protected $_startQuote = '`';
+    protected $_startQuote = "`";
 
     /**
      * String used to end a database identifier quoting to make it safe
      *
      * @var string
      */
-    protected $_endQuote = '`';
+    protected $_endQuote = "`";
 
     /**
      * Server type.
      *
-     * If the underlying server is MariaDB, its value will get set to `'mariadb'`
+     * If the underlying server is MariaDB, its value will get set to `"mariadb"`
      * after `version()` method is called.
      *
      * @var string
@@ -98,15 +98,15 @@ class Mysql : Driver
      * @var array<string, array<string, string>>
      */
     protected $featureVersions = [
-        'mysql': [
-            'json': '5.7.0',
-            'cte': '8.0.0',
-            'window': '8.0.0',
+        "mysql": [
+            "json": "5.7.0",
+            "cte": "8.0.0",
+            "window": "8.0.0",
         ],
-        'mariadb': [
-            'json': '10.2.7',
-            'cte': '10.2.1',
-            'window': '10.2.0',
+        "mariadb": [
+            "json": "10.2.7",
+            "cte": "10.2.1",
+            "window": "10.2.0",
         ],
     ];
 
@@ -122,43 +122,43 @@ class Mysql : Driver
         }
         $config = _config;
 
-        if ($config['timezone'] == 'UTC') {
-            $config['timezone'] = '+0:00';
+        if ($config["timezone"] == "UTC") {
+            $config["timezone"] = "+0:00";
         }
 
-        if (!empty($config['timezone'])) {
-            $config['init'][] = sprintf("SET time_zone = '%s'", $config['timezone']);
+        if (!empty($config["timezone"])) {
+            $config["init"][] = sprintf("SET time_zone = "%s"", $config["timezone"]);
         }
 
-        $config['flags'] += [
-            PDO::ATTR_PERSISTENT: $config['persistent'],
+        $config["flags"] += [
+            PDO::ATTR_PERSISTENT: $config["persistent"],
             PDO::MYSQL_ATTR_USE_BUFFERED_QUERY: true,
             PDO::ATTR_ERRMODE: PDO::ERRMODE_EXCEPTION,
         ];
 
-        if (!empty($config['ssl_key']) && !empty($config['ssl_cert'])) {
-            $config['flags'][PDO::MYSQL_ATTR_SSL_KEY] = $config['ssl_key'];
-            $config['flags'][PDO::MYSQL_ATTR_SSL_CERT] = $config['ssl_cert'];
+        if (!empty($config["ssl_key"]) && !empty($config["ssl_cert"])) {
+            $config["flags"][PDO::MYSQL_ATTR_SSL_KEY] = $config["ssl_key"];
+            $config["flags"][PDO::MYSQL_ATTR_SSL_CERT] = $config["ssl_cert"];
         }
-        if (!empty($config['ssl_ca'])) {
-            $config['flags'][PDO::MYSQL_ATTR_SSL_CA] = $config['ssl_ca'];
+        if (!empty($config["ssl_ca"])) {
+            $config["flags"][PDO::MYSQL_ATTR_SSL_CA] = $config["ssl_ca"];
         }
 
-        if (empty($config['unix_socket'])) {
-            $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['database']}";
+        if (empty($config["unix_socket"])) {
+            $dsn = "mysql:host={$config["host"]};port={$config["port"]};dbname={$config["database"]}";
         } else {
-            $dsn = "mysql:unix_socket={$config['unix_socket']};dbname={$config['database']}";
+            $dsn = "mysql:unix_socket={$config["unix_socket"]};dbname={$config["database"]}";
         }
 
-        if (!empty($config['encoding'])) {
-            $dsn .= ";charset={$config['encoding']}";
+        if (!empty($config["encoding"])) {
+            $dsn .= ";charset={$config["encoding"]}";
         }
 
         _connect($dsn, $config);
 
-        if (!empty($config['init'])) {
+        if (!empty($config["init"])) {
             $connection = this.getConnection();
-            foreach ((array)$config['init'] as $command) {
+            foreach ((array)$config["init"] as $command) {
                 $connection.exec($command);
             }
         }
@@ -173,7 +173,7 @@ class Mysql : Driver
      */
     function enabled(): bool
     {
-        return in_array('mysql', PDO::getAvailableDrivers(), true);
+        return in_array("mysql", PDO::getAvailableDrivers(), true);
     }
 
     /**
@@ -217,7 +217,7 @@ class Mysql : Driver
      */
     function schema(): string
     {
-        return _config['database'];
+        return _config["database"];
     }
 
     /**
@@ -225,7 +225,7 @@ class Mysql : Driver
      */
     function disableForeignKeySQL(): string
     {
-        return 'SET foreign_key_checks = 0';
+        return "SET foreign_key_checks = 0";
     }
 
     /**
@@ -233,7 +233,7 @@ class Mysql : Driver
      */
     function enableForeignKeySQL(): string
     {
-        return 'SET foreign_key_checks = 1';
+        return "SET foreign_key_checks = 1";
     }
 
     /**
@@ -248,7 +248,7 @@ class Mysql : Driver
                 return version_compare(
                     this.version(),
                     this.featureVersions[this.serverType][$feature],
-                    '>='
+                    ">="
                 );
         }
 
@@ -286,9 +286,9 @@ class Mysql : Driver
             this.connect();
             _version = (string)_connection.getAttribute(PDO::ATTR_SERVER_VERSION);
 
-            if (strpos(_version, 'MariaDB') != false) {
+            if (strpos(_version, "MariaDB") != false) {
                 this.serverType = static::SERVER_TYPE_MARIADB;
-                preg_match('/^(?:5\.5\.5-)?(\d+\.\d+\.\d+.*-MariaDB[^:]*)/', _version, $matches);
+                preg_match("/^(?:5\.5\.5-)?(\d+\.\d+\.\d+.*-MariaDB[^:]*)/", _version, $matches);
                 _version = $matches[1];
             }
         }
@@ -304,7 +304,7 @@ class Mysql : Driver
      */
     function supportsCTEs(): bool
     {
-        deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
+        deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_CTE);
     }
@@ -317,7 +317,7 @@ class Mysql : Driver
      */
     function supportsNativeJson(): bool
     {
-        deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
+        deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_JSON);
     }
@@ -330,7 +330,7 @@ class Mysql : Driver
      */
     function supportsWindowFunctions(): bool
     {
-        deprecationWarning('Feature support checks are now implemented by `supports()` with FEATURE_* constants.');
+        deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_WINDOW);
     }

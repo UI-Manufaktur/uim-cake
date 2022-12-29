@@ -19,5 +19,5 @@ class MissingDriverException : CakeException
     /**
      * @inheritDoc
      */
-    protected $_messageTemplate = 'Could not find driver `%s` for connection `%s`.';
+    protected $_messageTemplate = "Could not find driver `%s` for connection `%s`.";
 }

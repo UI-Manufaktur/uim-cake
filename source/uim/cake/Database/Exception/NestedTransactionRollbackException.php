@@ -26,7 +26,7 @@ class NestedTransactionRollbackException : CakeException
      */
     public this(?string $message = null, ?int $code = 500, ?Throwable $previous = null) {
         if ($message == null) {
-            $message = 'Cannot commit transaction - rollback() has been already called in the nested transaction';
+            $message = "Cannot commit transaction - rollback() has been already called in the nested transaction";
         }
         super(($message, $code, $previous);
     }

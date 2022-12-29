@@ -22,21 +22,21 @@ interface StatementInterface
      *
      * @var string
      */
-    public const FETCH_TYPE_NUM = 'num';
+    public const FETCH_TYPE_NUM = "num";
 
     /**
      * Used to designate that an associated array be returned in a result when calling fetch methods
      *
      * @var string
      */
-    public const FETCH_TYPE_ASSOC = 'assoc';
+    public const FETCH_TYPE_ASSOC = "assoc";
 
     /**
      * Used to designate that a stdClass object be returned in a result when calling fetch methods
      *
      * @var string
      */
-    public const FETCH_TYPE_OBJ = 'obj';
+    public const FETCH_TYPE_OBJ = "obj";
 
     /**
      * Assign a value to a positional or named variable in prepared query. If using
@@ -48,9 +48,9 @@ interface StatementInterface
      * ### Examples:
      *
      * ```
-     * $statement.bindValue(1, 'a title');
-     * $statement.bindValue('active', true, 'boolean');
-     * $statement.bindValue(5, new \DateTime(), 'date');
+     * $statement.bindValue(1, "a title");
+     * $statement.bindValue("active", true, "boolean");
+     * $statement.bindValue(5, new \DateTime(), "date");
      * ```
      *
      * @param string|int $column name or param position to be bound
@@ -58,11 +58,11 @@ interface StatementInterface
      * @param string|int|null $type name of configured Type class, or PDO type constant.
      * @return void
      */
-    function bindValue($column, $value, $type = 'string'): void;
+    function bindValue($column, $value, $type = "string"): void;
 
     /**
      * Closes a cursor in the database, freeing up any resources and memory
-     * allocated to it. In most cases you don't need to call this method, as it is
+     * allocated to it. In most cases you don"t need to call this method, as it is
      * automatically called after fetching all results from the result set.
      *
      * @return void
@@ -70,12 +70,12 @@ interface StatementInterface
     function closeCursor(): void;
 
     /**
-     * Returns the number of columns this statement's results will contain
+     * Returns the number of columns this statement"s results will contain
      *
      * ### Example:
      *
      * ```
-     *  $statement = $connection.prepare('SELECT id, title from articles');
+     *  $statement = $connection.prepare("SELECT id, title from articles");
      *  $statement.execute();
      *  echo $statement.columnCount(); // outputs 2
      * ```
@@ -118,16 +118,16 @@ interface StatementInterface
      * ### Example:
      *
      * ```
-     *  $statement = $connection.prepare('SELECT id, title from articles');
+     *  $statement = $connection.prepare("SELECT id, title from articles");
      *  $statement.execute();
-     *  print_r($statement.fetch('assoc')); // will show ['id': 1, 'title': 'a title']
+     *  print_r($statement.fetch("assoc")); // will show ["id": 1, "title": "a title"]
      * ```
      *
-     * @param string|int $type 'num' for positional columns, assoc for named columns, or PDO fetch mode constants.
+     * @param string|int $type "num" for positional columns, assoc for named columns, or PDO fetch mode constants.
      * @return mixed Result array containing columns and values or false if no results
      * are left
      */
-    function fetch($type = 'num');
+    function fetch($type = "num");
 
     /**
      * Returns an array with all rows resulting from executing this statement
@@ -135,15 +135,15 @@ interface StatementInterface
      * ### Example:
      *
      * ```
-     *  $statement = $connection.prepare('SELECT id, title from articles');
+     *  $statement = $connection.prepare("SELECT id, title from articles");
      *  $statement.execute();
-     *  print_r($statement.fetchAll('assoc')); // will show [0: ['id': 1, 'title': 'a title']]
+     *  print_r($statement.fetchAll("assoc")); // will show [0: ["id": 1, "title": "a title"]]
      * ```
      *
      * @param string|int $type num for fetching columns as positional keys or assoc for column names as keys
      * @return array|false list of all results from database for this statement or false on failure.
      */
-    function fetchAll($type = 'num');
+    function fetchAll($type = "num");
 
     /**
      * Returns the value of the result at position.
@@ -159,7 +159,7 @@ interface StatementInterface
      * ### Example:
      *
      * ```
-     *  $statement = $connection.prepare('SELECT id, title from articles');
+     *  $statement = $connection.prepare("SELECT id, title from articles");
      *  $statement.execute();
      *  print_r($statement.rowCount()); // will show 1
      * ```

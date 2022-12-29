@@ -37,7 +37,7 @@ class TupleComparison : ComparisonExpression
      * one type per position in the value array in needed
      * @param string $conjunction the operator used for comparing field and value
      */
-    public this($fields, $values, array $types = [], string $conjunction = '=') {
+    public this($fields, $values, array $types = [], string $conjunction = "=") {
         _type = $types;
         this.setField($fields);
         _operator = $conjunction;
@@ -65,13 +65,13 @@ class TupleComparison : ComparisonExpression
         if (this.isMulti()) {
             if (is_array($value) && !is_array(current($value))) {
                 throw new InvalidArgumentException(
-                    'Multi-tuple comparisons require a multi-tuple value, single-tuple given.'
+                    "Multi-tuple comparisons require a multi-tuple value, single-tuple given."
                 );
             }
         } else {
             if (is_array($value) && is_array(current($value))) {
                 throw new InvalidArgumentException(
-                    'Single-tuple comparisons require a single-tuple value, multi-tuple given.'
+                    "Single-tuple comparisons require a single-tuple value, multi-tuple given."
                 );
             }
         }
@@ -84,7 +84,7 @@ class TupleComparison : ComparisonExpression
      */
     function sql(ValueBinder $binder): string
     {
-        $template = '(%s) %s (%s)';
+        $template = "(%s) %s (%s)";
         $fields = [];
         $originalFields = this.getField();
 
@@ -98,7 +98,7 @@ class TupleComparison : ComparisonExpression
 
         $values = _stringifyValues($binder);
 
-        $field = implode(', ', $fields);
+        $field = implode(", ", $fields);
 
         return sprintf($template, $field, _operator, $values);
     }
@@ -139,7 +139,7 @@ class TupleComparison : ComparisonExpression
                     $bound[] = _bindValue($val, $binder, $valType);
                 }
 
-                $values[] = sprintf('(%s)', implode(',', $bound));
+                $values[] = sprintf("(%s)", implode(",", $bound));
                 continue;
             }
 
@@ -148,7 +148,7 @@ class TupleComparison : ComparisonExpression
             $values[] = _bindValue($value, $binder, $valType);
         }
 
-        return implode(', ', $values);
+        return implode(", ", $values);
     }
 
     /**
@@ -156,7 +156,7 @@ class TupleComparison : ComparisonExpression
      */
     protected function _bindValue($value, ValueBinder $binder, ?string $type = null): string
     {
-        $placeholder = $binder.placeholder('tuple');
+        $placeholder = $binder.placeholder("tuple");
         $binder.bind($placeholder, $value, $type);
 
         return $placeholder;
@@ -217,6 +217,6 @@ class TupleComparison : ComparisonExpression
      */
     function isMulti(): bool
     {
-        return in_array(strtolower(_operator), ['in', 'not in']);
+        return in_array(strtolower(_operator), ["in", "not in"]);
     }
 }

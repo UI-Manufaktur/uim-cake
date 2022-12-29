@@ -19,5 +19,5 @@ class MissingConnectionException : CakeException
     /**
      * @inheritDoc
      */
-    protected $_messageTemplate = 'Connection to %s could not be established: %s';
+    protected $_messageTemplate = "Connection to %s could not be established: %s";
 }

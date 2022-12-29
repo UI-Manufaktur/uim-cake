@@ -23,7 +23,7 @@ trait TypeConverterTrait
      * @return array list containing converted value and internal type
      * @pslam-return array{mixed, int}
      */
-    function cast($value, $type = 'string'): array
+    function cast($value, $type = "string"): array
     {
         if (is_string($type)) {
             $type = TypeFactory::build($type);

@@ -26,8 +26,8 @@ trait TupleComparisonTranslatorTrait
      * Receives a TupleExpression and changes it so that it conforms to this
      * SQL dialect.
      *
-     * It transforms expressions looking like '(a, b) IN ((c, d), (e, f))' into an
-     * equivalent expression of the form '((a = c) AND (b = d)) OR ((a = e) AND (b = f))'.
+     * It transforms expressions looking like "(a, b) IN ((c, d), (e, f))" into an
+     * equivalent expression of the form "((a = c) AND (b = d)) OR ((a = e) AND (b = f))".
      *
      * It can also transform transform expressions where the right hand side is a query
      * selecting the same amount of columns as the elements in the left hand side of
@@ -50,26 +50,26 @@ trait TupleComparisonTranslatorTrait
         }
 
         $operator = strtoupper($expression.getOperator());
-        if (!in_array($operator, ['IN', '='])) {
+        if (!in_array($operator, ["IN", "="])) {
             throw new RuntimeException(
                 sprintf(
-                    'Tuple comparison transform only supports the `IN` and `=` operators, `%s` given.',
+                    "Tuple comparison transform only supports the `IN` and `=` operators, `%s` given.",
                     $operator
                 )
             );
         }
 
         $value = $expression.getValue();
-        $true = new QueryExpression('1');
+        $true = new QueryExpression("1");
 
         if ($value instanceof Query) {
-            $selected = array_values($value.clause('select'));
+            $selected = array_values($value.clause("select"));
             foreach ($fields as $i: $field) {
                 $value.andWhere([$field: new IdentifierExpression($selected[$i])]);
             }
             $value.select($true, true);
             $expression.setField($true);
-            $expression.setOperator('=');
+            $expression.setOperator("=");
 
             return;
         }
@@ -90,18 +90,18 @@ trait TupleComparisonTranslatorTrait
             $value = [$value];
         }
 
-        $conditions = ['OR': []];
+        $conditions = ["OR": []];
         foreach ($value as $tuple) {
             $item = [];
             foreach (array_values($tuple) as $i: $value2) {
                 $item[] = [$fields[$i]: $value2];
             }
-            $conditions['OR'][] = $item;
+            $conditions["OR"][] = $item;
         }
         $surrogate.where($conditions, $typeMap);
 
         $expression.setField($true);
         $expression.setValue($surrogate);
-        $expression.setOperator('=');
+        $expression.setOperator("=");
     }
 }
