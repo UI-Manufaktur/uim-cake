@@ -1,12 +1,4 @@
 
-
-
- *
-
-
-
- * @license       https://www.opensource.org/licenses/mit-license.php MIT License
- */
 module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;

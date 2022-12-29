@@ -1,12 +1,4 @@
 
-
-
- *
-
-
- * @since         3.5.0
- * @license       https://www.opensource.org/licenses/mit-license.php MIT License
- */
 module uim.cake.datasources.Paging;
 
 import uim.cake.datasources.IResultSet;

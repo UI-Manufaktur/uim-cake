@@ -5,7 +5,7 @@
 
 
  * @since         3.9.0
- * @license       https://www.opensource.org/licenses/mit-license.php MIT License
+
  */
 module uim.cake.datasources.Paging;
 

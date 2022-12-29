@@ -5,7 +5,7 @@
 
 
  * @since         4.2.0
- * @license       https://www.opensource.org/licenses/mit-license.php MIT License
+
  */
 module uim.cake.http.Middleware;
 
