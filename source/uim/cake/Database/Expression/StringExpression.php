@@ -58,9 +58,7 @@ class StringExpression : IExpression
         return this.collation;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $placeholder = $binder.placeholder("c");
@@ -69,9 +67,7 @@ class StringExpression : IExpression
         return $placeholder . " COLLATE " . this.collation;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public O traverse(this O)(Closure $callback) {
         return this;
     }

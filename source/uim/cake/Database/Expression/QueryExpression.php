@@ -550,9 +550,7 @@ class QueryExpression : IExpression, Countable
         return this.eq($wrapIdentifier($leftField), $wrapIdentifier($rightField));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $len = this.count();
@@ -576,9 +574,7 @@ class QueryExpression : IExpression, Countable
         return sprintf($template, implode(" $conjunction ", $parts));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public O traverse(this O)(Closure $callback) {
         foreach (_conditions as $c) {
             if ($c instanceof IExpression) {

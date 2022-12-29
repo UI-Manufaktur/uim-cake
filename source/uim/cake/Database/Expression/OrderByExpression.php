@@ -29,9 +29,7 @@ class OrderByExpression : QueryExpression
         super(($conditions, $types, $conjunction);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $order = [];

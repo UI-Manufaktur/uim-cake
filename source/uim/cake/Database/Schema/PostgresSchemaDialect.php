@@ -50,9 +50,7 @@ class PostgresSchemaDialect : SchemaDialect
         return [$sql, [$schema]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeColumnSql(string $tableName, array $config): array
     {
         $sql = "SELECT DISTINCT table_schema AS schema,
@@ -175,9 +173,7 @@ class PostgresSchemaDialect : SchemaDialect
         return ["type": TableSchema::TYPE_STRING, "length": $length];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertColumnDescription(TableSchema $schema, array $row): void
     {
         $field = _convertColumn($row["type"]);
@@ -251,9 +247,7 @@ class PostgresSchemaDialect : SchemaDialect
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeIndexSql(string $tableName, array $config): array
     {
         $sql = "SELECT
@@ -279,9 +273,7 @@ class PostgresSchemaDialect : SchemaDialect
         return [$sql, [$schema, $tableName]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertIndexDescription(TableSchema $schema, array $row): void
     {
         $type = TableSchema::INDEX_INDEX;
@@ -330,9 +322,7 @@ class PostgresSchemaDialect : SchemaDialect
         $schema.addConstraint($name, $constraint);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeForeignKeySql(string $tableName, array $config): array
     {
         // phpcs:disable Generic.Files.LineLength
@@ -360,9 +350,7 @@ class PostgresSchemaDialect : SchemaDialect
         return [$sql, [$schema, $tableName]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         $data = [
@@ -375,9 +363,7 @@ class PostgresSchemaDialect : SchemaDialect
         $schema.addConstraint($row["name"], $data);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _convertOnClause(string $clause): string
     {
         if ($clause == "r") {
@@ -393,9 +379,7 @@ class PostgresSchemaDialect : SchemaDialect
         return TableSchema::ACTION_SET_NULL;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function columnSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
@@ -520,9 +504,7 @@ class PostgresSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addConstraintSql(TableSchema $schema): array
     {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
@@ -540,9 +522,7 @@ class PostgresSchemaDialect : SchemaDialect
         return $sql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropConstraintSql(TableSchema $schema): array
     {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
@@ -561,9 +541,7 @@ class PostgresSchemaDialect : SchemaDialect
         return $sql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function indexSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
@@ -581,9 +559,7 @@ class PostgresSchemaDialect : SchemaDialect
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function constraintSql(TableSchema $schema, string $name): string
     {
         /** @var array<string, mixed> $data */
@@ -626,9 +602,7 @@ class PostgresSchemaDialect : SchemaDialect
         return $prefix . " (" . implode(", ", $columns) . ")";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         $content = array_merge($columns, $constraints);
@@ -655,9 +629,7 @@ class PostgresSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncateTableSql(TableSchema $schema): array
     {
         $name = _driver.quoteIdentifier($schema.name());

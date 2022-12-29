@@ -501,9 +501,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
         return this.{$clause};
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         if (this.whenBuffer != null) {
@@ -530,9 +528,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
         return "CASE {$value}{$whenThen} ELSE $else END";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public O traverse(this O)(Closure $callback) {
         if (this.whenBuffer != null) {
             throw new LogicException("Case expression has incomplete when clause. Missing `then()` after `when()`.");

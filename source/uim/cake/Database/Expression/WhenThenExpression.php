@@ -262,9 +262,7 @@ class WhenThenExpression : IExpression
         return this.{$clause};
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         if (this.when == null) {
@@ -302,9 +300,7 @@ class WhenThenExpression : IExpression
         return "WHEN $when THEN $then";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public O traverse(this O)(Closure $callback) {
         if (this.when instanceof IExpression) {
             $callback(this.when);

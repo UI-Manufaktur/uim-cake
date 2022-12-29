@@ -200,25 +200,19 @@ class Sqlite : Driver
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function disableForeignKeySQL(): string
     {
         return "PRAGMA foreign_keys = OFF";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function enableForeignKeySQL(): string
     {
         return "PRAGMA foreign_keys = ON";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function supports(string $feature): bool
     {
         switch ($feature) {
@@ -237,17 +231,13 @@ class Sqlite : Driver
         return parent::supports($feature);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function supportsDynamicConstraints(): bool
     {
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function schemaDialect(): SchemaDialect
     {
         if (_schemaDialect == null) {
@@ -257,17 +247,13 @@ class Sqlite : Driver
         return _schemaDialect;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function newCompiler(): QueryCompiler
     {
         return new SqliteCompiler();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _expressionTranslators(): array
     {
         return [

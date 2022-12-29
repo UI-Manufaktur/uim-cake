@@ -197,9 +197,7 @@ class ValuesExpression : IExpression
         return _query;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         if (empty(_values) && empty(_query)) {
@@ -248,9 +246,7 @@ class ValuesExpression : IExpression
         return sprintf(" VALUES (%s)", implode("), (", $placeholders));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public O traverse(this O)(Closure $callback) {
         if (_query) {
             return this;

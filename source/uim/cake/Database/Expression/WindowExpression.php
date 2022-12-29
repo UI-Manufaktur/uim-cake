@@ -75,9 +75,7 @@ class WindowExpression : IExpression, WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function partition($partitions) {
         if (!$partitions) {
             return this;
@@ -102,9 +100,7 @@ class WindowExpression : IExpression, WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function order($fields) {
         if (!$fields) {
             return this;
@@ -123,30 +119,22 @@ class WindowExpression : IExpression, WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function range($start, $end = 0) {
         return this.frame(self::RANGE, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function rows(?int $start, ?int $end = 0) {
         return this.frame(self::ROWS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function groups(?int $start, ?int $end = 0) {
         return this.frame(self::GROUPS, $start, self::PRECEDING, $end, self::FOLLOWING);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function frame(
         string $type,
         $startOffset,
@@ -169,36 +157,28 @@ class WindowExpression : IExpression, WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeCurrent() {
         this.exclusion = "CURRENT ROW";
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeGroup() {
         this.exclusion = "GROUP";
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeTies() {
         this.exclusion = "TIES";
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $clauses = [];
@@ -243,9 +223,7 @@ class WindowExpression : IExpression, WindowInterface
         return implode(" ", $clauses);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public O traverse(this O)(Closure $callback) {
         $callback(this.name);
         foreach (this.partitions as $partition) {

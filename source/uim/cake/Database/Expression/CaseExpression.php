@@ -219,9 +219,7 @@ class CaseExpression : IExpression
         return implode(" ", $parts);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public O traverse(this O)(Closure $callback) {
         foreach (["_conditions", "_values"] as $part) {
             foreach (this.{$part} as $c) {

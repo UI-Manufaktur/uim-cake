@@ -59,9 +59,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return [$sql, [$schema]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeColumnSql(string $tableName, array $config): array
     {
         $sql = "SELECT DISTINCT
@@ -200,9 +198,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return ["type": TableSchema::TYPE_STRING, "length": null];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertColumnDescription(TableSchema $schema, array $row): void
     {
         $field = _convertColumn(
@@ -261,9 +257,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $default;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeIndexSql(string $tableName, array $config): array
     {
         $sql = "SELECT
@@ -285,9 +279,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return [$sql, [$tableName, $schema]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertIndexDescription(TableSchema $schema, array $row): void
     {
         $type = TableSchema::INDEX_INDEX;
@@ -324,9 +316,7 @@ class SqlserverSchemaDialect : SchemaDialect
         ]);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeForeignKeySql(string $tableName, array $config): array
     {
         // phpcs:disable Generic.Files.LineLength
@@ -349,9 +339,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return [$sql, [$tableName, $schema]];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         $data = [
@@ -365,9 +353,7 @@ class SqlserverSchemaDialect : SchemaDialect
         $schema.addConstraint($name, $data);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _foreignOnClause(string $on): string
     {
         $parent = parent::_foreignOnClause($on);
@@ -375,9 +361,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $parent == "RESTRICT" ? parent::_foreignOnClause(TableSchema::ACTION_NO_ACTION) : $parent;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _convertOnClause(string $clause): string
     {
         switch ($clause) {
@@ -394,9 +378,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return TableSchema::ACTION_SET_NULL;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function columnSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
@@ -539,9 +521,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addConstraintSql(TableSchema $schema): array
     {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
@@ -559,9 +539,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $sql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropConstraintSql(TableSchema $schema): array
     {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
@@ -580,9 +558,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $sql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function indexSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
@@ -600,9 +576,7 @@ class SqlserverSchemaDialect : SchemaDialect
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function constraintSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
@@ -645,9 +619,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $prefix . " (" . implode(", ", $columns) . ")";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         $content = array_merge($columns, $constraints);
@@ -662,9 +634,7 @@ class SqlserverSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncateTableSql(TableSchema $schema): array
     {
         $name = _driver.quoteIdentifier($schema.name());

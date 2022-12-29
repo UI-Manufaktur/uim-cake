@@ -28,9 +28,7 @@ class PostgresCompiler : QueryCompiler
      */
     protected $_quotedSelectAliases = true;
 
-    /**
-     * @inheritDoc
-     */
+
     protected $_templates = [
         "delete": "DELETE",
         "where": " WHERE %s",

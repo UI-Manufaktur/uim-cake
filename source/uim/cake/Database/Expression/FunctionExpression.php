@@ -130,9 +130,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $parts = [];

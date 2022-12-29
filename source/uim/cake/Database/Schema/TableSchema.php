@@ -292,17 +292,13 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function name(): string
     {
         return _table;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addColumn(string $name, $attrs) {
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
@@ -318,26 +314,20 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function removeColumn(string $name) {
         unset(_columns[$name], _typeMap[$name]);
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function columns(): array
     {
         return array_keys(_columns);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getColumn(string $name): ?array
     {
         if (!isset(_columns[$name])) {
@@ -349,9 +339,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return $column;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getColumnType(string $name): ?string
     {
         if (!isset(_columns[$name])) {
@@ -361,9 +349,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return _columns[$name]["type"];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function setColumnType(string $name, string $type) {
         if (!isset(_columns[$name])) {
             return this;
@@ -375,17 +361,13 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function hasColumn(string $name): bool
     {
         return isset(_columns[$name]);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function baseColumnType(string $column): ?string
     {
         if (isset(_columns[$column]["baseType"])) {
@@ -405,17 +387,13 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return _columns[$column]["baseType"] = $type;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function typeMap(): array
     {
         return _typeMap;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isNullable(string $name): bool
     {
         if (!isset(_columns[$name])) {
@@ -425,9 +403,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return _columns[$name]["null"] == true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function defaultValues(): array
     {
         $defaults = [];
@@ -444,9 +420,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return $defaults;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addIndex(string $name, $attrs) {
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
@@ -488,17 +462,13 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function indexes(): array
     {
         return array_keys(_indexes);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getIndex(string $name): ?array
     {
         if (!isset(_indexes[$name])) {
@@ -522,9 +492,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return this.getPrimarykey();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getPrimaryKey(): array
     {
         foreach (_constraints as $data) {
@@ -536,9 +504,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addConstraint(string $name, $attrs) {
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
@@ -598,9 +564,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropConstraint(string $name) {
         if (isset(_constraints[$name])) {
             unset(_constraints[$name]);
@@ -653,59 +617,45 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return $attrs;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function constraints(): array
     {
         return array_keys(_constraints);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getConstraint(string $name): ?array
     {
         return _constraints[$name] ?? null;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function setOptions(array $options) {
         _options = $options + _options;
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getOptions(): array
     {
         return _options;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function setTemporary(bool $temporary) {
         _temporary = $temporary;
 
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function isTemporary(): bool
     {
         return _temporary;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createSql(Connection $connection): array
     {
         $dialect = $connection.getDriver().schemaDialect();
@@ -723,9 +673,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return $dialect.createTableSql(this, $columns, $constraints, $indexes);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropSql(Connection $connection): array
     {
         $dialect = $connection.getDriver().schemaDialect();
@@ -733,9 +681,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return $dialect.dropTableSql(this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncateSql(Connection $connection): array
     {
         $dialect = $connection.getDriver().schemaDialect();
@@ -743,9 +689,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return $dialect.truncateTableSql(this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addConstraintSql(Connection $connection): array
     {
         $dialect = $connection.getDriver().schemaDialect();
@@ -753,9 +697,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
         return $dialect.addConstraintSql(this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dropConstraintSql(Connection $connection): array
     {
         $dialect = $connection.getDriver().schemaDialect();

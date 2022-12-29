@@ -16,8 +16,6 @@ import uim.cake.cores.exceptions.CakeException;
  */
 class MissingConnectionException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = "Connection to %s could not be established: %s";
 }

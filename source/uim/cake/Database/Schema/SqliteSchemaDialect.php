@@ -177,9 +177,7 @@ class SqliteSchemaDialect : SchemaDialect
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeColumnSql(string $tableName, array $config): array
     {
         $sql = sprintf(
@@ -190,9 +188,7 @@ class SqliteSchemaDialect : SchemaDialect
         return [$sql, []];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertColumnDescription(TableSchema $schema, array $row): void
     {
         $field = _convertColumn($row["type"]);
@@ -247,9 +243,7 @@ class SqliteSchemaDialect : SchemaDialect
         return $default;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeIndexSql(string $tableName, array $config): array
     {
         $sql = sprintf(
@@ -300,9 +294,7 @@ class SqliteSchemaDialect : SchemaDialect
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function describeForeignKeySql(string $tableName, array $config): array
     {
         $sql = sprintf("PRAGMA foreign_key_list(%s)", _driver.quoteIdentifier($tableName));
@@ -310,9 +302,7 @@ class SqliteSchemaDialect : SchemaDialect
         return [$sql, []];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         $name = $row["from"] . "_fk";
@@ -561,9 +551,7 @@ class SqliteSchemaDialect : SchemaDialect
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function indexSql(TableSchema $schema, string $name): string
     {
         /** @var array $data */
@@ -581,9 +569,7 @@ class SqliteSchemaDialect : SchemaDialect
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         $lines = array_merge($columns, $constraints);
@@ -598,9 +584,7 @@ class SqliteSchemaDialect : SchemaDialect
         return $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function truncateTableSql(TableSchema $schema): array
     {
         $name = $schema.name();

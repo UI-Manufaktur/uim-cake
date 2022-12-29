@@ -34,14 +34,10 @@ class Sqlserver : Driver
     use SqlDialectTrait;
     use TupleComparisonTranslatorTrait;
 
-    /**
-     * @inheritDoc
-     */
+
     protected const MAX_ALIAS_LENGTH = 128;
 
-    /**
-     * @inheritDoc
-     */
+
     protected const RETRY_ERROR_CODES = [
         40613, // Azure Sql Database paused
     ];
@@ -221,50 +217,38 @@ class Sqlserver : Driver
         return new SqlserverStatement($statement, this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function savePointSQL($name): string
     {
         return "SAVE TRANSACTION t" . $name;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function releaseSavePointSQL($name): string
     {
         // SQLServer has no release save point operation.
         return "";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function rollbackSavePointSQL($name): string
     {
         return "ROLLBACK TRANSACTION t" . $name;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function disableForeignKeySQL(): string
     {
         return "EXEC sp_MSforeachtable "ALTER TABLE ? NOCHECK CONSTRAINT all"";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function enableForeignKeySQL(): string
     {
         return "EXEC sp_MSforeachtable "ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all"";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function supports(string $feature): bool
     {
         switch ($feature) {
@@ -282,17 +266,13 @@ class Sqlserver : Driver
         return parent::supports($feature);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function supportsDynamicConstraints(): bool
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function schemaDialect(): SchemaDialect
     {
         if (_schemaDialect == null) {
@@ -312,9 +292,7 @@ class Sqlserver : Driver
         return new SqlserverCompiler();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _selectQueryTranslator(Query $query): Query
     {
         $limit = $query.clause("limit");
@@ -409,9 +387,7 @@ class Sqlserver : Driver
         return $outer;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _transformDistinct(Query $query): Query
     {
         if (!is_array($query.clause("distinct"))) {
@@ -460,9 +436,7 @@ class Sqlserver : Driver
         return $outer;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _expressionTranslators(): array
     {
         return [

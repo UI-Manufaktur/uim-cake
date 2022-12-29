@@ -82,9 +82,7 @@ class LoggingStatement : StatementDecorator
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fetch($type = self::FETCH_TYPE_NUM) {
         $record = parent::fetch($type);
 
@@ -95,9 +93,7 @@ class LoggingStatement : StatementDecorator
         return $record;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function fetchAll($type = self::FETCH_TYPE_NUM) {
         $results = parent::fetchAll($type);
 
@@ -108,9 +104,7 @@ class LoggingStatement : StatementDecorator
         return $results;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function rowCount(): int
     {
         $result = parent::rowCount();

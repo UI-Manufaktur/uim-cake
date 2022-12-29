@@ -71,9 +71,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function partition($partitions) {
         this.over();
         this.window.partition($partitions);
@@ -81,9 +79,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function order($fields) {
         this.over();
         this.window.order($fields);
@@ -91,9 +87,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function range($start, $end = 0) {
         this.over();
         this.window.range($start, $end);
@@ -101,9 +95,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function rows(?int $start, ?int $end = 0) {
         this.over();
         this.window.rows($start, $end);
@@ -111,9 +103,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function groups(?int $start, ?int $end = 0) {
         this.over();
         this.window.groups($start, $end);
@@ -121,9 +111,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function frame(
         string $type,
         $startOffset,
@@ -137,9 +125,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeCurrent() {
         this.over();
         this.window.excludeCurrent();
@@ -147,9 +133,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeGroup() {
         this.over();
         this.window.excludeGroup();
@@ -157,9 +141,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function excludeTies() {
         this.over();
         this.window.excludeTies();
@@ -167,9 +149,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $sql = parent::sql($binder);
@@ -187,9 +167,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return $sql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public O traverse(this O)(Closure $callback) {
         parent::traverse($callback);
         if (this.filter != null) {
@@ -204,9 +182,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function count(): int
     {
         $count = parent::count();

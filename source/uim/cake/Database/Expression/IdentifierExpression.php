@@ -88,9 +88,7 @@ class IdentifierExpression : IExpression
         return this.collation;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sql(ValueBinder $binder): string
     {
         $sql = _identifier;
@@ -101,9 +99,7 @@ class IdentifierExpression : IExpression
         return $sql;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     public O traverse(this O)(Closure $callback) {
         return this;
     }

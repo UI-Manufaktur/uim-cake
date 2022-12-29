@@ -16,8 +16,6 @@ import uim.cake.cores.exceptions.CakeException;
  */
 class MissingDriverException : CakeException
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_messageTemplate = "Could not find driver `%s` for connection `%s`.";
 }
