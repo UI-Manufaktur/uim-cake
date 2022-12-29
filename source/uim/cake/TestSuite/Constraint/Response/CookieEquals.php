@@ -14,7 +14,7 @@
  */
 module uim.cake.TestSuite\Constraint\Response;
 
-import uim.cake.https.Response;
+import uim.cake.http.Response;
 
 /**
  * CookieEquals
@@ -24,7 +24,7 @@ import uim.cake.https.Response;
 class CookieEquals : ResponseBase
 {
     /**
-     * @var uim.cake.Http\Response
+     * @var uim.cake.http.Response
      */
     protected $response;
 
@@ -36,7 +36,7 @@ class CookieEquals : ResponseBase
     /**
      * Constructor.
      *
-     * @param uim.cake.Http\Response|null $response A response instance.
+     * @param uim.cake.http.Response|null $response A response instance.
      * @param string $cookieName Cookie name
      */
     public this(?Response $response, string $cookieName) {

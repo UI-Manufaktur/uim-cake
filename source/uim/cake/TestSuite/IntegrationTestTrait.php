@@ -22,8 +22,8 @@ import uim.cake.errors.Renderer\WebExceptionRenderer;
 import uim.cake.events.EventInterface;
 import uim.cake.events.EventManager;
 import uim.cake.Form\FormProtector;
-import uim.cake.https.Middleware\CsrfProtectionMiddleware;
-import uim.cake.https.Session;
+import uim.cake.http.Middleware\CsrfProtectionMiddleware;
+import uim.cake.http.Session;
 import uim.cake.Routing\Router;
 import uim.cake.TestSuite\Constraint\Response\BodyContains;
 import uim.cake.TestSuite\Constraint\Response\BodyEmpty;
@@ -137,7 +137,7 @@ trait IntegrationTestTrait
     /**
      * The session instance from the last request
      *
-     * @var uim.cake.Http\Session
+     * @var uim.cake.http.Session
      */
     protected $_requestSession;
 

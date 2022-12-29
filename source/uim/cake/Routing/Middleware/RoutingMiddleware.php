@@ -12,9 +12,9 @@ module uim.cake.Routing\Middleware;
 import uim.cake.caches.Cache;
 import uim.cake.caches.InvalidArgumentException;
 import uim.cake.cores.IPluginApplication;
-import uim.cake.https.Exception\RedirectException;
-import uim.cake.https.MiddlewareQueue;
-import uim.cake.https.Runner;
+import uim.cake.http.Exception\RedirectException;
+import uim.cake.http.MiddlewareQueue;
+import uim.cake.http.Runner;
 import uim.cake.Routing\Exception\FailedRouteCacheException;
 import uim.cake.Routing\Exception\RedirectException as DeprecatedRedirectException;
 import uim.cake.Routing\RouteCollection;
@@ -158,7 +158,7 @@ class RoutingMiddleware : IMiddleware
                 unset($params["_middleware"], $params["_route"]);
 
                 $request = $request.withAttribute("route", $route);
-                /** @var uim.cake.Http\ServerRequest $request */
+                /** @var uim.cake.http.ServerRequest $request */
                 $request = $request.withAttribute("params", $params);
                 Router::setRequest($request);
             }

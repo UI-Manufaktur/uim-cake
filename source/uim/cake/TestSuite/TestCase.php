@@ -19,7 +19,7 @@ import uim.cake.cores.Configure;
 import uim.cake.cores.Plugin;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.events.EventManager;
-import uim.cake.https.BaseApplication;
+import uim.cake.http.BaseApplication;
 import uim.cake.orm.Entity;
 import uim.cake.orm.Exception\MissingTableClassException;
 import uim.cake.orm.locators.LocatorAwareTrait;
@@ -391,11 +391,11 @@ abstract class TestCase : BaseTestCase
      * elements in CakePHP or applications.
      *
      * @param array<string, mixed> $plugins List of Plugins to load.
-     * @return uim.cake.Http\BaseApplication
+     * @return uim.cake.http.BaseApplication
      */
     function loadPlugins(array $plugins = []): BaseApplication
     {
-        /** @var uim.cake.Http\BaseApplication $app */
+        /** @var uim.cake.http.BaseApplication $app */
         $app = this.getMockForAbstractClass(
             BaseApplication::class,
             [""]

@@ -14,7 +14,7 @@
  */
 module uim.cake.TestSuite\Constraint\Session;
 
-import uim.cake.https.Session;
+import uim.cake.http.Session;
 import uim.cake.utilities.Hash;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
@@ -27,7 +27,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 class FlashParamEquals : Constraint
 {
     /**
-     * @var uim.cake.Http\Session
+     * @var uim.cake.http.Session
      */
     protected $session;
 
@@ -49,7 +49,7 @@ class FlashParamEquals : Constraint
     /**
      * Constructor
      *
-     * @param uim.cake.Http\Session|null $session Session
+     * @param uim.cake.http.Session|null $session Session
      * @param string $key Flash key
      * @param string $param Param to check
      * @param int|null $at Expected index

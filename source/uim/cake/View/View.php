@@ -16,8 +16,8 @@ import uim.cake.cores.Plugin;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventManager;
-import uim.cake.https.Response;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
 import uim.cake.Log\LogTrait;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Inflector;
@@ -183,14 +183,14 @@ class View : EventDispatcherInterface
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var uim.cake.Http\ServerRequest
+     * @var uim.cake.http.ServerRequest
      */
     protected $request;
 
     /**
      * Reference to the Response object
      *
-     * @var uim.cake.Http\Response
+     * @var uim.cake.http.Response
      */
     protected $response;
 
@@ -318,8 +318,8 @@ class View : EventDispatcherInterface
     /**
      * Constructor
      *
-     * @param uim.cake.Http\ServerRequest|null $request Request instance.
-     * @param uim.cake.Http\Response|null $response Response instance.
+     * @param uim.cake.http.ServerRequest|null $request Request instance.
+     * @param uim.cake.http.Response|null $response Response instance.
      * @param uim.cake.Event\EventManager|null $eventManager Event manager instance.
      * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
      *   options which get set as class properties.
@@ -400,7 +400,7 @@ class View : EventDispatcherInterface
     /**
      * Gets the request instance.
      *
-     * @return uim.cake.Http\ServerRequest
+     * @return uim.cake.http.ServerRequest
      * @since 3.7.0
      */
     function getRequest(): ServerRequest
@@ -415,7 +415,7 @@ class View : EventDispatcherInterface
      * - this.request - To the $request parameter
      * - this.plugin - To the value returned by $request.getParam("plugin")
      *
-     * @param uim.cake.Http\ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest $request Request instance.
      * @return this
      */
     function setRequest(ServerRequest $request) {
@@ -428,7 +428,7 @@ class View : EventDispatcherInterface
     /**
      * Gets the response instance.
      *
-     * @return uim.cake.Http\Response
+     * @return uim.cake.http.Response
      */
     function getResponse(): Response
     {
@@ -438,7 +438,7 @@ class View : EventDispatcherInterface
     /**
      * Sets the response instance.
      *
-     * @param uim.cake.Http\Response $response Response instance.
+     * @param uim.cake.http.Response $response Response instance.
      * @return this
      */
     function setResponse(Response $response) {

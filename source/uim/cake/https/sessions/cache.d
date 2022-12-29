@@ -12,7 +12,7 @@ use SessionHandlerInterface;
 /**
  * CacheSession provides method for saving sessions into a Cache engine. Used with Session
  *
- * @see uim.cake.Http\Session for configuration information.
+ * @see uim.cake.http.Session for configuration information.
  */
 class CacheSession : SessionHandlerInterface
 {

@@ -16,10 +16,10 @@ module uim.cake.TestSuite;
 
 import uim.cake.cores.IHttpApplication;
 import uim.cake.cores.IPluginApplication;
-import uim.cake.https.FlashMessage;
-import uim.cake.https.Server;
-import uim.cake.https.ServerRequest;
-import uim.cake.https.ServerRequestFactory;
+import uim.cake.http.FlashMessage;
+import uim.cake.http.Server;
+import uim.cake.http.ServerRequest;
+import uim.cake.http.ServerRequestFactory;
 import uim.cake.Routing\Router;
 import uim.cake.Routing\IRoutingApplication;
 use Psr\Http\Message\IResponse;
@@ -97,7 +97,7 @@ class MiddlewareDispatcher
      * Create a PSR7 request from the request spec.
      *
      * @param array<string, mixed> $spec The request spec.
-     * @return uim.cake.Http\ServerRequest
+     * @return uim.cake.http.ServerRequest
      */
     protected function _createRequest(array $spec): ServerRequest
     {

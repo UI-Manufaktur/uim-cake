@@ -15,8 +15,8 @@ import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.IEventManager;
-import uim.cake.https.Response;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.utilities.Inflector;
 import uim.cake.View\Exception\MissingCellTemplateException;
@@ -57,14 +57,14 @@ abstract class Cell : EventDispatcherInterface
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var uim.cake.Http\ServerRequest
+     * @var uim.cake.http.ServerRequest
      */
     protected $request;
 
     /**
      * An instance of a Response object that contains information about the impending response
      *
-     * @var uim.cake.Http\Response
+     * @var uim.cake.http.Response
      */
     protected $response;
 
@@ -101,8 +101,8 @@ abstract class Cell : EventDispatcherInterface
     /**
      * Constructor.
      *
-     * @param uim.cake.Http\ServerRequest $request The request to use in the cell.
-     * @param uim.cake.Http\Response $response The response to use in the cell.
+     * @param uim.cake.http.ServerRequest $request The request to use in the cell.
+     * @param uim.cake.http.Response $response The response to use in the cell.
      * @param uim.cake.Event\IEventManager|null $eventManager The eventManager to bind events to.
      * @param array<string, mixed> $cellOptions Cell options to apply.
      */

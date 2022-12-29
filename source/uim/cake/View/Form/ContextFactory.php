@@ -12,7 +12,7 @@ module uim.cake.View\Form;
 import uim.cake.Collection\Collection;
 import uim.cake.datasources.EntityInterface;
 import uim.cake.Form\Form;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.ServerRequest;
 use RuntimeException;
 
 /**
@@ -123,7 +123,7 @@ class ContextFactory
      *
      * If no type can be matched a NullContext will be returned.
      *
-     * @param uim.cake.Http\ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest $request Request instance.
      * @param array<string, mixed> $data The data to get a context provider for.
      * @return uim.cake.View\Form\ContextInterface Context provider.
      * @throws \RuntimeException When a context instance cannot be generated for given entity.

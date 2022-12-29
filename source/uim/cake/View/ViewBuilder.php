@@ -11,8 +11,8 @@ module uim.cake.View;
 
 import uim.cake.cores.App;
 import uim.cake.events.IEventManager;
-import uim.cake.https.Response;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
 import uim.cake.View\Exception\MissingViewException;
 use Closure;
 use Exception;
@@ -529,8 +529,8 @@ class ViewBuilder : JsonSerializable, Serializable
      * If that class does not exist, then {@link \Cake\View\View} will be used.
      *
      * @param array<string, mixed> $vars The view variables/context to use.
-     * @param uim.cake.Http\ServerRequest|null $request The request to use.
-     * @param uim.cake.Http\Response|null $response The response to use.
+     * @param uim.cake.http.ServerRequest|null $request The request to use.
+     * @param uim.cake.http.Response|null $response The response to use.
      * @param uim.cake.Event\IEventManager|null $events The event manager to use.
      * @return uim.cake.View\View
      * @throws uim.cake.View\Exception\MissingViewException

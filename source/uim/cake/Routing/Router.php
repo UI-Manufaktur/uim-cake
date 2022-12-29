@@ -10,7 +10,7 @@
 module uim.cake.Routing;
 
 import uim.cake.cores.Configure;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.ServerRequest;
 import uim.cake.Routing\Exception\MissingRouteException;
 import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
@@ -121,7 +121,7 @@ class Router
     /**
      * Maintains the request object reference.
      *
-     * @var uim.cake.Http\ServerRequest
+     * @var uim.cake.http.ServerRequest
      */
     protected static $_request;
 
@@ -216,7 +216,7 @@ class Router
     /**
      * Get the routing parameters for the request if possible.
      *
-     * @param uim.cake.Http\ServerRequest $request The request to parse request data from.
+     * @param uim.cake.http.ServerRequest $request The request to parse request data from.
      * @return array Parsed elements from URL.
      * @throws uim.cake.Routing\Exception\MissingRouteException When a route cannot be handled
      */
@@ -228,7 +228,7 @@ class Router
     /**
      * Set current request instance.
      *
-     * @param uim.cake.Http\ServerRequest $request request object.
+     * @param uim.cake.http.ServerRequest $request request object.
      * @return void
      */
     public static function setRequest(ServerRequest $request): void
@@ -249,7 +249,7 @@ class Router
     /**
      * Get the current request object.
      *
-     * @return uim.cake.Http\ServerRequest|null
+     * @return uim.cake.http.ServerRequest|null
      */
     public static function getRequest(): ?ServerRequest
     {
@@ -630,7 +630,7 @@ class Router
      * keys like "pass", "_matchedRoute" etc. those keys need to be specially
      * handled in order to reverse a params array into a string URL.
      *
-     * @param uim.cake.Http\ServerRequest|array $params The params array or
+     * @param uim.cake.http.ServerRequest|array $params The params array or
      *     Cake\Http\ServerRequest object that needs to be reversed.
      * @return array The URL array ready to be used for redirect or HTML link.
      */
@@ -677,7 +677,7 @@ class Router
      * keys like "pass", "_matchedRoute" etc. those keys need to be specially
      * handled in order to reverse a params array into a string URL.
      *
-     * @param uim.cake.Http\ServerRequest|array $params The params array or
+     * @param uim.cake.http.ServerRequest|array $params The params array or
      *     Cake\Http\ServerRequest object that needs to be reversed.
      * @param bool $full Set to true to include the full URL including the
      *     protocol when reversing the URL.

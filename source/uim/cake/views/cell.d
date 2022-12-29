@@ -31,14 +31,14 @@ abstract class Cell : IEventDispatcher
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var uim.cake.Http\ServerRequest
+     * @var uim.cake.http.ServerRequest
      */
     protected myRequest;
 
     /**
      * An instance of a Response object that contains information about the impending response
      *
-     * @var uim.cake.Http\Response
+     * @var uim.cake.http.Response
      */
     protected response;
 
@@ -73,8 +73,8 @@ abstract class Cell : IEventDispatcher
     /**
      * Constructor.
      *
-     * @param uim.cake.Http\ServerRequest myRequest The request to use in the cell.
-     * @param uim.cake.Http\Response $response The response to use in the cell.
+     * @param uim.cake.http.ServerRequest myRequest The request to use in the cell.
+     * @param uim.cake.http.Response $response The response to use in the cell.
      * @param uim.cake.Event\IEventManager|null myEventManager The eventManager to bind events to.
      * @param array<string, mixed> $cellOptions Cell options to apply.
      */

@@ -14,7 +14,7 @@
  */
 module uim.cake.TestSuite\Constraint\Response;
 
-import uim.cake.https.Response;
+import uim.cake.http.Response;
 import uim.cake.utilities.CookieCryptTrait;
 
 /**
@@ -27,7 +27,7 @@ class CookieEncryptedEquals : CookieEquals
     use CookieCryptTrait;
 
     /**
-     * @var uim.cake.Http\Response
+     * @var uim.cake.http.Response
      */
     protected $response;
 
@@ -44,7 +44,7 @@ class CookieEncryptedEquals : CookieEquals
     /**
      * Constructor.
      *
-     * @param uim.cake.Http\Response|null $response A response instance.
+     * @param uim.cake.http.Response|null $response A response instance.
      * @param string $cookieName Cookie name
      * @param string $mode Mode
      * @param string $key Key

@@ -130,7 +130,7 @@ class View : IEventDispatcher {
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var uim.cake.Http\ServerRequest
+     * @var uim.cake.http.ServerRequest
      */
     protected myRequest;
 
@@ -236,8 +236,8 @@ class View : IEventDispatcher {
     /**
      * Constructor
      *
-     * @param uim.cake.Http\ServerRequest|null myRequest Request instance.
-     * @param uim.cake.Http\Response|null $response Response instance.
+     * @param uim.cake.http.ServerRequest|null myRequest Request instance.
+     * @param uim.cake.http.Response|null $response Response instance.
      * @param uim.cake.Event\EventManager|null myEventManager Event manager instance.
      * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
      *   options which get set as class properties.
@@ -287,7 +287,7 @@ class View : IEventDispatcher {
     /**
      * Gets the request instance.
      *
-     * @return uim.cake.Http\ServerRequest
+     * @return uim.cake.http.ServerRequest
 
      */
     auto getRequest(): ServerRequest
@@ -302,7 +302,7 @@ class View : IEventDispatcher {
      * - this.request - To the myRequest parameter
      * - this.plugin - To the value returned by myRequest.getParam("plugin")
      *
-     * @param uim.cake.Http\ServerRequest myRequest Request instance.
+     * @param uim.cake.http.ServerRequest myRequest Request instance.
      * @return this
      */
     auto setRequest(ServerRequest myRequest) {
