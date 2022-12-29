@@ -9,7 +9,7 @@
  */
 module uim.cake.Console;
 
-import uim.cake.consoles.Exception\StopException;
+import uim.cake.consoles.exceptions.StopException;
 import uim.cake.Log\Engine\ConsoleLog;
 import uim.cake.Log\Log;
 use RuntimeException;

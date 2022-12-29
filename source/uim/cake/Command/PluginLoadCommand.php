@@ -12,7 +12,7 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.cores.Exception\MissingPluginException;
+import uim.cake.cores.exceptions.MissingPluginException;
 import uim.cake.cores.Plugin;
 
 /**

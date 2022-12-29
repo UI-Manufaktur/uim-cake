@@ -9,7 +9,7 @@
  */
 module uim.cake.cores.Configure;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.Plugin;
 
 /**

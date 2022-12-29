@@ -17,7 +17,7 @@ module uim.cake.consoles.TestSuite;
 import uim.cake.Command\Command;
 import uim.cake.consoles.CommandRunner;
 import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.Exception\StopException;
+import uim.cake.consoles.exceptions.StopException;
 import uim.cake.consoles.TestSuite\Constraint\ContentsContain;
 import uim.cake.consoles.TestSuite\Constraint\ContentsContainRow;
 import uim.cake.consoles.TestSuite\Constraint\ContentsEmpty;

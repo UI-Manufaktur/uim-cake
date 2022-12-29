@@ -9,8 +9,8 @@
  */
 module uim.cake.Console;
 
-import uim.cake.consoles.Exception\MissingShellException;
-import uim.cake.consoles.Exception\StopException;
+import uim.cake.consoles.exceptions.MissingShellException;
+import uim.cake.consoles.exceptions.StopException;
 import uim.cake.cores.App;
 import uim.cake.cores.Configure;
 import uim.cake.cores.Plugin;

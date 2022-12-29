@@ -13,7 +13,7 @@
  */
 module uim.cake.controllers.Exception;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 
 /**
  * Used when a component cannot be found.

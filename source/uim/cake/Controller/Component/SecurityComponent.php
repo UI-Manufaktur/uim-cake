@@ -11,8 +11,8 @@ module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;
 import uim.cake.controllers.Controller;
-import uim.cake.controllers.Exception\AuthSecurityException;
-import uim.cake.controllers.Exception\SecurityException;
+import uim.cake.controllers.exceptions.AuthSecurityException;
+import uim.cake.controllers.exceptions.SecurityException;
 import uim.cake.cores.Configure;
 import uim.cake.Event\EventInterface;
 import uim.cake.Http\Exception\BadRequestException;

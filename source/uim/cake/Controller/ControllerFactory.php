@@ -9,7 +9,7 @@
  */
 module uim.cake.Controller;
 
-import uim.cake.controllers.Exception\InvalidParameterException;
+import uim.cake.controllers.exceptions.InvalidParameterException;
 import uim.cake.cores.App;
 import uim.cake.cores.IContainer;
 import uim.cake.Http\ControllerFactoryInterface;

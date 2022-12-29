@@ -15,7 +15,7 @@
 module uim.cake.consoles.Exception;
 
 import uim.cake.consoles.ICommand;
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 
 /**
  * Exception class for Console libraries. This exception will be thrown from Console library
