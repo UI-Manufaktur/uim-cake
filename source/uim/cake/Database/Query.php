@@ -28,17 +28,17 @@ class Query : IExpression, IteratorAggregate
     /**
      * @var string
      */
-    public const JOIN_TYPE_INNER = "INNER";
+    const JOIN_TYPE_INNER = "INNER";
 
     /**
      * @var string
      */
-    public const JOIN_TYPE_LEFT = "LEFT";
+    const JOIN_TYPE_LEFT = "LEFT";
 
     /**
      * @var string
      */
-    public const JOIN_TYPE_RIGHT = "RIGHT";
+    const JOIN_TYPE_RIGHT = "RIGHT";
 
     /**
      * Connection instance to be used to execute this query.
@@ -185,7 +185,7 @@ class Query : IExpression, IteratorAggregate
      * @param uim.cake.Database\Connection $connection The connection
      * object to be used for transforming and executing this query
      */
-    public this(Connection $connection) {
+    this(Connection $connection) {
         this.setConnection($connection);
     }
 
@@ -318,7 +318,7 @@ class Query : IExpression, IteratorAggregate
      * @param callable $callback A function or callable to be executed for each part
      * @return this
      */
-    public O traverse(this O)($callback) {
+    O traverse(this O)($callback) {
         foreach (_parts as $name: $part) {
             $callback($part, $name);
         }
@@ -367,7 +367,7 @@ class Query : IExpression, IteratorAggregate
      * objects:
      *
      * ```
-     * $cte = new \Cake\Database\Expression\CommonTableExpression(
+     * $cte = new uim.cake.Database\Expression\CommonTableExpression(
      *     "cte",
      *     $connection
      *         .newQuery()
@@ -384,8 +384,8 @@ class Query : IExpression, IteratorAggregate
      *
      * ```
      * $query.with(function (
-     *     \Cake\Database\Expression\CommonTableExpression $cte,
-     *     \Cake\Database\Query $query
+     *     uim.cake.Database\Expression\CommonTableExpression $cte,
+     *     uim.cake.Database\Query $query
      *  ) {
      *     $cteQuery = $query
      *         .select("*")
@@ -1660,7 +1660,7 @@ class Query : IExpression, IteratorAggregate
      * or by providing an array of value sets. Additionally $data can be a Query
      * instance to insert data from another SELECT statement.
      *
-     * @param uim.cake.Database\Expression\ValuesExpression|\Cake\Database\Query|array $data The data to insert.
+     * @param uim.cake.Database\Expression\ValuesExpression|uim.cake.Database\Query|array $data The data to insert.
      * @return this
      * @throws uim.cake.Database\Exception\DatabaseException if you try to set values before declaring columns.
      *   Or if you try to set values on non-insert queries.
@@ -1832,7 +1832,7 @@ class Query : IExpression, IteratorAggregate
      * if required.
      *
      * You can optionally pass a single raw SQL string or an array or expressions in
-     * any format accepted by \Cake\Database\Expression\QueryExpression:
+     * any format accepted by uim.cake.Database\Expression\QueryExpression:
      *
      * ```
      * $expression = $query.expr(); // Returns an empty expression object
@@ -1854,7 +1854,7 @@ class Query : IExpression, IteratorAggregate
      * if required.
      *
      * You can optionally pass a single raw SQL string or an array or expressions in
-     * any format accepted by \Cake\Database\Expression\QueryExpression:
+     * any format accepted by uim.cake.Database\Expression\QueryExpression:
      *
      * ```
      * $expression = $query.expr(); // Returns an empty expression object
@@ -2023,7 +2023,7 @@ class Query : IExpression, IteratorAggregate
     /**
      * Query parts traversal method used by traverseExpressions()
      *
-     * @param uim.cake.Database\IExpression|array<\Cake\Database\IExpression> $expression Query expression or
+     * @param uim.cake.Database\IExpression|array<uim.cake.Database\IExpression> $expression Query expression or
      *   array of expressions.
      * @param \Closure $callback The callback to be executed for each IExpression
      *   found inside this query.
@@ -2236,7 +2236,7 @@ class Query : IExpression, IteratorAggregate
      * any registered callbacks.
      *
      * @param uim.cake.Database\StatementInterface $statement to be decorated
-     * @return uim.cake.Database\Statement\CallbackStatement|\Cake\Database\StatementInterface
+     * @return uim.cake.Database\Statement\CallbackStatement|uim.cake.Database\StatementInterface
      */
     protected function _decorateStatement(StatementInterface $statement) {
         $typeMap = this.getSelectTypeMap();

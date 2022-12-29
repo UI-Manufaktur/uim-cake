@@ -58,7 +58,7 @@ trait StaticConfigTrait
      * @throws \LogicException When trying to store an invalid structured config array.
      * @return void
      */
-    public static function setConfig($key, $config = null): void
+    static function setConfig($key, $config = null): void
     {
         if ($config == null) {
             if (!is_array($key)) {
@@ -100,7 +100,7 @@ trait StaticConfigTrait
      * @param string $key The name of the configuration.
      * @return mixed|null Configuration data at the named key or null if the key does not exist.
      */
-    public static function getConfig(string $key) {
+    static function getConfig(string $key) {
         return static::$_config[$key] ?? null;
     }
 
@@ -113,7 +113,7 @@ trait StaticConfigTrait
      * @return mixed Configuration data at the named key.
      * @throws \InvalidArgumentException If value does not exist.
      */
-    public static function getConfigOrFail(string $key) {
+    static function getConfigOrFail(string $key) {
         if (!isset(static::$_config[$key])) {
             throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", $key));
         }
@@ -133,7 +133,7 @@ trait StaticConfigTrait
      * @param string $config An existing configuration you wish to remove.
      * @return bool Success of the removal, returns false when the config does not exist.
      */
-    public static function drop(string $config): bool
+    static function drop(string $config): bool
     {
         if (!isset(static::$_config[$config])) {
             return false;
@@ -152,7 +152,7 @@ trait StaticConfigTrait
      *
      * @return array<string> Array of configurations.
      */
-    public static string[] configured(): array
+    static string[] configured(): array
     {
         $configurations = array_keys(static::$_config);
 
@@ -193,7 +193,7 @@ trait StaticConfigTrait
      * @return array<string, mixed> The configuration array to be stored after parsing the DSN
      * @throws \InvalidArgumentException If not passed a string, or passed an invalid string
      */
-    public static function parseDsn(string $dsn): array
+    static function parseDsn(string $dsn): array
     {
         if (empty($dsn)) {
             return [];
@@ -290,7 +290,7 @@ REGEXP;
      * @return void
      * @psalm-param array<string, class-string> $map
      */
-    public static function setDsnClassMap(array $map): void
+    static function setDsnClassMap(array $map): void
     {
         static::$_dsnClassMap = $map + static::$_dsnClassMap;
     }
@@ -301,7 +301,7 @@ REGEXP;
      * @return array<string, string>
      * @psalm-return array<string, class-string>
      */
-    public static function getDsnClassMap(): array
+    static function getDsnClassMap(): array
     {
         return static::$_dsnClassMap;
     }

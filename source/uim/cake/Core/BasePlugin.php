@@ -103,7 +103,7 @@ class BasePlugin : PluginInterface
      *
      * @param array<string, mixed> $options Options
      */
-    public this(array $options = []) {
+    this(array $options = []) {
         foreach (static::VALID_HOOKS as $key) {
             if (isset($options[$key])) {
                 this.{"{$key}Enabled"} = (bool)$options[$key];

@@ -32,7 +32,7 @@ class Plugin
      * @throws uim.cake.Core\Exception\MissingPluginException If the folder for plugin was not found
      *   or plugin has not been loaded.
      */
-    public static function path(string $name): string
+    static function path(string $name): string
     {
         $plugin = static::getCollection().get($name);
 
@@ -46,7 +46,7 @@ class Plugin
      * @return string Path to the plugin folder containing class files.
      * @throws uim.cake.Core\Exception\MissingPluginException If plugin has not been loaded.
      */
-    public static function classPath(string $name): string
+    static function classPath(string $name): string
     {
         $plugin = static::getCollection().get($name);
 
@@ -60,7 +60,7 @@ class Plugin
      * @return string Path to the plugin folder containing config files.
      * @throws uim.cake.Core\Exception\MissingPluginException If plugin has not been loaded.
      */
-    public static function configPath(string $name): string
+    static function configPath(string $name): string
     {
         $plugin = static::getCollection().get($name);
 
@@ -74,7 +74,7 @@ class Plugin
      * @return string Path to the plugin folder containing template files.
      * @throws uim.cake.Core\Exception\MissingPluginException If plugin has not been loaded.
      */
-    public static function templatePath(string $name): string
+    static function templatePath(string $name): string
     {
         $plugin = static::getCollection().get($name);
 
@@ -88,7 +88,7 @@ class Plugin
      * @return bool
      * @since 3.7.0
      */
-    public static function isLoaded(string $plugin): bool
+    static function isLoaded(string $plugin): bool
     {
         return static::getCollection().has($plugin);
     }
@@ -98,7 +98,7 @@ class Plugin
      *
      * @return array<string> A list of plugins that have been loaded
      */
-    public static string[] loaded(): array
+    static string[] loaded(): array
     {
         $names = [];
         foreach (static::getCollection() as $plugin) {
@@ -117,7 +117,7 @@ class Plugin
      *
      * @return uim.cake.Core\PluginCollection
      */
-    public static function getCollection(): PluginCollection
+    static function getCollection(): PluginCollection
     {
         if (!isset(static::$plugins)) {
             static::$plugins = new PluginCollection();

@@ -27,49 +27,49 @@ interface DriverInterface
      *
      * @var string
      */
-    public const FEATURE_CTE = "cte";
+    const FEATURE_CTE = "cte";
 
     /**
      * Disabling constraints without being in transaction support.
      *
      * @var string
      */
-    public const FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION = "disable-constraint-without-transaction";
+    const FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION = "disable-constraint-without-transaction";
 
     /**
      * Native JSON data type support.
      *
      * @var string
      */
-    public const FEATURE_JSON = "json";
+    const FEATURE_JSON = "json";
 
     /**
      * PDO::quote() support.
      *
      * @var string
      */
-    public const FEATURE_QUOTE = "quote";
+    const FEATURE_QUOTE = "quote";
 
     /**
      * Transaction savepoint support.
      *
      * @var string
      */
-    public const FEATURE_SAVEPOINT = "savepoint";
+    const FEATURE_SAVEPOINT = "savepoint";
 
     /**
      * Truncate with foreign keys attached support.
      *
      * @var string
      */
-    public const FEATURE_TRUNCATE_WITH_CONSTRAINTS = "truncate-with-constraints";
+    const FEATURE_TRUNCATE_WITH_CONSTRAINTS = "truncate-with-constraints";
 
     /**
      * Window function support (all or partial clauses).
      *
      * @var string
      */
-    public const FEATURE_WINDOW = "window";
+    const FEATURE_WINDOW = "window";
 
     /**
      * Establishes a connection to the database server.
@@ -223,7 +223,7 @@ interface DriverInterface
     /**
      * Get the schema dialect.
      *
-     * Used by {@link \Cake\Database\Schema} package to reflect schema and
+     * Used by {@link uim.cake.Database\Schema} package to reflect schema and
      * generate schema.
      *
      * If all the tables that use this Driver specify their

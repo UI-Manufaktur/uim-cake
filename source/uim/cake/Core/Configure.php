@@ -32,7 +32,7 @@ class Configure
      * Configured engine classes, used to load config files from resources
      *
      * @see uim.cake.Core\Configure::load()
-     * @var array<\Cake\Core\Configure\ConfigEngineInterface>
+     * @var array<uim.cake.Core\Configure\ConfigEngineInterface>
      */
     protected static $_engines = [];
 
@@ -67,7 +67,7 @@ class Configure
      * @return void
      * @link https://book.cakephp.org/4/en/development/configuration.html#writing-configuration-data
      */
-    public static function write($config, $value = null): void
+    static function write($config, $value = null): void
     {
         if (!is_array($config)) {
             $config = [$config: $value];
@@ -102,7 +102,7 @@ class Configure
      * @return mixed Value stored in configure, or null.
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-configuration-data
      */
-    public static function read(?string $var = null, $default = null) {
+    static function read(?string $var = null, $default = null) {
         if ($var == null) {
             return static::$_values;
         }
@@ -116,7 +116,7 @@ class Configure
      * @param string $var Variable name to check for
      * @return bool True if variable is there
      */
-    public static bool check(string $var)
+    static bool check(string $var)
     {
         if (empty($var)) {
             return false;
@@ -144,7 +144,7 @@ class Configure
      * @throws \RuntimeException if the requested configuration is not set.
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-configuration-data
      */
-    public static function readOrFail(string $var) {
+    static function readOrFail(string $var) {
         if (!static::check($var)) {
             throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
         }
@@ -165,7 +165,7 @@ class Configure
      * @return void
      * @link https://book.cakephp.org/4/en/development/configuration.html#deleting-configuration-data
      */
-    public static function delete(string $var): void
+    static function delete(string $var): void
     {
         static::$_values = Hash::remove(static::$_values, $var);
     }
@@ -183,7 +183,7 @@ class Configure
      * @throws \RuntimeException if the requested configuration is not set.
      * @since 3.6.0
      */
-    public static function consumeOrFail(string $var) {
+    static function consumeOrFail(string $var) {
         if (!static::check($var)) {
             throw new RuntimeException(sprintf("Expected configuration key "%s" not found.", $var));
         }
@@ -200,7 +200,7 @@ class Configure
      * @param string $var The key to read and remove.
      * @return array|string|null
      */
-    public static function consume(string $var) {
+    static function consume(string $var) {
         if (strpos($var, ".") == false) {
             if (!isset(static::$_values[$var])) {
                 return null;
@@ -232,7 +232,7 @@ class Configure
      * @param uim.cake.Core\Configure\ConfigEngineInterface $engine The engine to append.
      * @return void
      */
-    public static function config(string $name, ConfigEngineInterface $engine): void
+    static function config(string $name, ConfigEngineInterface $engine): void
     {
         static::$_engines[$name] = $engine;
     }
@@ -243,7 +243,7 @@ class Configure
      * @param string $name Engine name.
      * @return bool
      */
-    public static bool isConfigured(string $name)
+    static bool isConfigured(string $name)
     {
         return isset(static::$_engines[$name]);
     }
@@ -251,7 +251,7 @@ class Configure
     /**
      * Gets the names of the configured Engine objects.
      */
-    public static string[] configured(): array
+    static string[] configured(): array
     {
         $engines = array_keys(static::$_engines);
 
@@ -267,7 +267,7 @@ class Configure
      * @param string $name Name of the engine to drop.
      * @return bool Success
      */
-    public static bool drop(string $name)
+    static bool drop(string $name)
     {
         if (!isset(static::$_engines[$name])) {
             return false;
@@ -304,7 +304,7 @@ class Configure
      * @throws uim.cake.Core\Exception\CakeException if the $config engine is not found
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-and-writing-configuration-files
      */
-    public static bool load(string $key, string $config = "default", bool $merge = true)
+    static bool load(string $key, string $config = "default", bool $merge = true)
     {
         $engine = static::_getEngine($config);
         if (!$engine) {
@@ -357,7 +357,7 @@ class Configure
      * @return bool Success
      * @throws uim.cake.Core\Exception\CakeException if the adapter does not implement a `dump` method.
      */
-    public static bool dump(string $key, string $config = "default", array $keys = [])
+    static bool dump(string $key, string $config = "default", array $keys = [])
     {
         $engine = static::_getEngine($config);
         if (!$engine) {
@@ -400,7 +400,7 @@ class Configure
      *
      * @return string Current version of CakePHP
      */
-    public static function version(): string
+    static function version(): string
     {
         $version = static::read("Cake.version");
         if ($version != null) {
@@ -429,7 +429,7 @@ class Configure
      * @return bool Success
      * @throws \RuntimeException
      */
-    public static bool store(string $name, string $cacheConfig = "default", ?array $data = null)
+    static bool store(string $name, string $cacheConfig = "default", ?array $data = null)
     {
         if ($data == null) {
             $data = static::$_values;
@@ -450,7 +450,7 @@ class Configure
      * @return bool Success.
      * @throws \RuntimeException
      */
-    public static bool restore(string $name, string $cacheConfig = "default")
+    static bool restore(string $name, string $cacheConfig = "default")
     {
         if (!class_exists(Cache::class)) {
             throw new RuntimeException("You must install cakephp/cache to use Configure::restore()");
@@ -470,7 +470,7 @@ class Configure
      *
      * @return void
      */
-    public static function clear(): void
+    static function clear(): void
     {
         static::$_values = [];
     }

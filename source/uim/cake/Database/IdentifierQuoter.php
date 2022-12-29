@@ -24,7 +24,7 @@ class IdentifierQuoter
      *
      * @param uim.cake.Database\Driver $driver The driver instance used to do the identifier quoting
      */
-    public this(Driver $driver) {
+    this(Driver $driver) {
         _driver = $driver;
     }
 

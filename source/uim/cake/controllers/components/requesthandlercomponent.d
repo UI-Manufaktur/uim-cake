@@ -159,9 +159,9 @@ class RequestHandlerComponent : Component {
      *   `templates/Controller/xml/action.php`. Also, if `controller/action` is
      *   requested with `Accept: application/xml` in the headers the view
      *   path will become `templates/Controller/xml/action.php`. Layout and template
-     *   types will only switch to mime-types recognized by \Cake\Http\Response.
+     *   types will only switch to mime-types recognized by uim.cake.Http\Response.
      *   If you need to declare additional mime-types, you can do so using
-     *   {@link \Cake\Http\Response::setTypeMap()} in your controller"s beforeFilter() method.
+     *   {@link uim.cake.Http\Response::setTypeMap()} in your controller"s beforeFilter() method.
      * - If a helper with the same name as the extension exists, it is added to
      *   the controller.
      * - If the extension is of a type that RequestHandler understands, it will
@@ -201,7 +201,7 @@ class RequestHandlerComponent : Component {
     /**
      * Determines which content types the client accepts. Acceptance is based on
      * the file extension parsed by the Router (if present), and by the HTTP_ACCEPT
-     * header. Unlike {@link \Cake\Http\ServerRequest::accepts()} this method deals entirely with mapped content types.
+     * header. Unlike {@link uim.cake.Http\ServerRequest::accepts()} this method deals entirely with mapped content types.
      *
      * Usage:
      *
@@ -412,7 +412,7 @@ class RequestHandlerComponent : Component {
 
     /**
      * Sets the response header based on type map index name. This wraps several methods
-     * available on {@link \Cake\Http\Response}. It also allows you to use Content-Type aliases.
+     * available on {@link uim.cake.Http\Response}. It also allows you to use Content-Type aliases.
      *
      * @param string myType Friendly type name, i.e. "html" or "xml", or a full content-type,
      *    like "application/x-shockwave".

@@ -346,7 +346,7 @@ class FunctionsBuilder
      * Creates function parameter array from expression or string literal.
      *
      * @param uim.cake.Database\IExpression|string $expression function argument
-     * @return array<\Cake\Database\IExpression|string>
+     * @return array<uim.cake.Database\IExpression|string>
      */
     protected function toLiteralParam($expression) {
         if (is_string($expression)) {

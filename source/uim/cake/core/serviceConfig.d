@@ -3,7 +3,7 @@ module uim.cake.core;
 /**
  * Read-only wrapper for configuration data
  *
- * Intended for use with {@link \Cake\Core\Container} as
+ * Intended for use with {@link uim.cake.Core\Container} as
  * a typehintable way for services to have application
  * configuration injected as arrays cannot be typehinted.
  */

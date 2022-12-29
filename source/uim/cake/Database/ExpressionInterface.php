@@ -25,5 +25,5 @@ interface IExpression
      * @param \Closure $callback The callable to apply to all nodes.
      * @return this
      */
-    public O traverse(this O)(Closure $callback);
+    O traverse(this O)(Closure $callback);
 }

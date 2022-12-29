@@ -41,7 +41,7 @@ class CommandRetry
      * @param uim.cake.Core\Retry\RetryStrategyInterface $strategy The strategy to follow should the action fail
      * @param int $maxRetries The maximum number of retry attempts allowed
      */
-    public this(RetryStrategyInterface $strategy, int $maxRetries = 1) {
+    this(RetryStrategyInterface $strategy, int $maxRetries = 1) {
         this.strategy = $strategy;
         this.maxRetries = $maxRetries;
     }

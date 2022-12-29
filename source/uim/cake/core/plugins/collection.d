@@ -22,7 +22,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Plugin list
      *
-     * @var array<\Cake\Core\IPlugin>
+     * @var array<uim.cake.Core\IPlugin>
      */
     protected myPlugins = [];
 
@@ -38,7 +38,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Constructor
      *
-     * @param array<\Cake\Core\IPlugin> myPlugins The map of plugins to add to the collection.
+     * @param array<uim.cake.Core\IPlugin> myPlugins The map of plugins to add to the collection.
      */
     this(array myPlugins = []) {
         foreach (myPlugins as myPlugin) {
@@ -79,7 +79,7 @@ class PluginCollection : Iterator, Countable
      *
      * This will use the `plugins` Configure key, and fallback to enumerating `App::path("plugins")`
      *
-     * This method is not part of the official public API as plugins with
+     * This method is not part of the official API as plugins with
      * no plugin class are being phased out.
      *
      * @param string myName The plugin name to locate a path for. Will return "" when a plugin cannot be found.
@@ -191,7 +191,7 @@ class PluginCollection : Iterator, Countable
         }
 
         myConfig += ["name":myName];
-        /** @var class-string<\Cake\Core\IPlugin> myClassName */
+        /** @var class-string<uim.cake.Core\IPlugin> myClassName */
         myClassName = str_replace("/", "\\", myName) . "\\" . "Plugin";
         if (!class_exists(myClassName)) {
             myClassName = BasePlugin::class;
@@ -259,7 +259,7 @@ class PluginCollection : Iterator, Countable
      * Filter the plugins to those with the named hook enabled.
      *
      * @param string hook The hook to filter plugins by
-     * @return \Generator<\Cake\Core\IPlugin> A generator containing matching plugins.
+     * @return \Generator<uim.cake.Core\IPlugin> A generator containing matching plugins.
      * @throws \InvalidArgumentException on invalid hooks
      */
     Generator with(string hook) {

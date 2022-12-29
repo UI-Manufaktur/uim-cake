@@ -158,7 +158,7 @@ class App {
      * Will return the value of `App.paths.plugins` config.
      *
      * Deprecated: 4.0 App::path() is deprecated for class path (inside src/ directory).
-     *   Use \Cake\Core\App::classPath() instead or directly the method on \Cake\Core\Plugin class.
+     *   Use uim.cake.Core\App::classPath() instead or directly the method on uim.cake.Core\Plugin class.
      *
      * @param string aClassType Type of path
      * @param string|null myPlugin Plugin name
@@ -181,7 +181,7 @@ class App {
 
         deprecationWarning(
             "App::path() is deprecated for class path."
-            . " Use \Cake\Core\App::classPath() or \Cake\Core\Plugin::classPath() instead."
+            . " Use uim.cake.Core\App::classPath() or uim.cake.Core\Plugin::classPath() instead."
         );
 
         return static::classPath(aClassType, myPlugin);

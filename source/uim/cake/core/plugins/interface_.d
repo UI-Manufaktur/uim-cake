@@ -6,12 +6,12 @@ import uim.cake;
 /**
  * Plugin Interface
  *
- * @method void services(\Cake\Core\IContainer myContainer) Register plugin services to
+ * @method void services(uim.cake.Core\IContainer myContainer) Register plugin services to
  *   the application"s container
  */
 interface IPlugin {
     // List of valid hooks.
-    public const String[] VALID_HOOKS = ["bootstrap", "console", "middleware", "routes", "services"];
+    const String[] VALID_HOOKS = ["bootstrap", "console", "middleware", "routes", "services"];
 
     // Get the name of this plugin.
     string name();

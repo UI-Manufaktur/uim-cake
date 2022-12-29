@@ -117,7 +117,7 @@ class Connection : ConnectionInterface
      *
      * @param array<string, mixed> $config Configuration array.
      */
-    public this(array $config) {
+    this(array $config) {
         _config = $config;
 
         $driverConfig = array_diff_key($config, array_flip([
@@ -189,7 +189,7 @@ class Connection : ConnectionInterface
     {
         $driver = $name;
         if (is_string($driver)) {
-            /** @psalm-var class-string<\Cake\Database\DriverInterface>|null $className */
+            /** @psalm-var class-string<uim.cake.Database\DriverInterface>|null $className */
             $className = App::className($driver, 'Database/Driver');
             if ($className == null) {
                 throw new MissingDriverException(['driver': $driver, 'connection': this.configName()]);

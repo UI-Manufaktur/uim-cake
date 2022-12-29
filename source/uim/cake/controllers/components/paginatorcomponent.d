@@ -12,7 +12,7 @@ import uim.cake;
  * You configure pagination when calling paginate(). See that method for more details.
  *
  * @link https://book.UIM.org/4/en/controllers/components/pagination.html
- * @mixin \Cake\Datasource\Paginator
+ * @mixin uim.cake.Datasource\Paginator
  */
 class PaginatorComponent : Component
 {
@@ -162,7 +162,7 @@ class PaginatorComponent : Component
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param uim.cake.Datasource\IRepository|\Cake\Datasource\IQuery $object Table or query to paginate.
+     * @param uim.cake.Datasource\IRepository|uim.cake.Datasource\IQuery $object Table or query to paginate.
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return uim.cake.Datasource\IResultSet Query results
      * @throws uim.cake.http.Exception\NotFoundException

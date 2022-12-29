@@ -38,7 +38,7 @@ class CakeException : RuntimeException
     protected $_messageTemplate = "";
 
     /**
-     * Array of headers to be passed to {@link \Cake\Http\Response::withHeader()}
+     * Array of headers to be passed to {@link uim.cake.Http\Response::withHeader()}
      *
      * @var array|null
      */
@@ -62,7 +62,7 @@ class CakeException : RuntimeException
      * @param int|null $code The error code
      * @param \Throwable|null $previous the previous exception.
      */
-    public this($message = "", ?int $code = null, ?Throwable $previous = null) {
+    this($message = "", ?int $code = null, ?Throwable $previous = null) {
         if (is_array($message)) {
             _attributes = $message;
             $message = vsprintf(_messageTemplate, $message);
@@ -83,7 +83,7 @@ class CakeException : RuntimeException
     /**
      * Get/set the response header to be used
      *
-     * See also {@link \Cake\Http\Response::withHeader()}
+     * See also {@link uim.cake.Http\Response::withHeader()}
      *
      * @param array|string|null $header A single header string or an associative
      *   array of "header name": "header value"

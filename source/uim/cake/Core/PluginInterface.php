@@ -19,7 +19,7 @@ import uim.cake.Routing\RouteBuilder;
 /**
  * Plugin Interface
  *
- * @method void services(\Cake\Core\IContainer $container) Register plugin services to
+ * @method void services(uim.cake.Core\IContainer $container) Register plugin services to
  *   the application"s container
  */
 interface PluginInterface
@@ -29,7 +29,7 @@ interface PluginInterface
      *
      * @var array<string>
      */
-    public const VALID_HOOKS = ["bootstrap", "console", "middleware", "routes", "services"];
+    const VALID_HOOKS = ["bootstrap", "console", "middleware", "routes", "services"];
 
     /**
      * Get the name of this plugin.

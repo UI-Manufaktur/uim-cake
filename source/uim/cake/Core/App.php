@@ -44,7 +44,7 @@ class App
      * @return string|null Namespaced class name, null if the class is not found.
      * @psalm-return class-string|null
      */
-    public static function className(string $class, string $type = "", string $suffix = ""): ?string
+    static function className(string $class, string $type = "", string $suffix = ""): ?string
     {
         if (strpos($class, "\\") != false) {
             return class_exists($class) ? $class : null;
@@ -111,7 +111,7 @@ class App
      * @param string $suffix Class name suffix
      * @return string Plugin split name of class
      */
-    public static function shortName(string $class, string $type, string $suffix = ""): string
+    static function shortName(string $class, string $type, string $suffix = ""): string
     {
         $class = str_replace("\\", "/", $class);
         $type = "/" . $type . "/";
@@ -173,12 +173,12 @@ class App
      * Will return the value of `App.paths.plugins` config.
      *
      * Deprecated: 4.0 App::path() is deprecated for class path (inside src/ directory).
-     *   Use \Cake\Core\App::classPath() instead or directly the method on \Cake\Core\Plugin class.
+     *   Use uim.cake.Core\App::classPath() instead or directly the method on uim.cake.Core\Plugin class.
      *
      * @param string $type Type of path
      * @param string|null $plugin Plugin name
      */
-    public static string[] path(string $type, ?string $plugin = null): array
+    static string[] path(string $type, ?string $plugin = null): array
     {
         if ($plugin == null && $type[0] == strtolower($type[0])) {
             return (array)Configure::read("App.paths." . $type);
@@ -196,7 +196,7 @@ class App
 
         deprecationWarning(
             "App::path() is deprecated for class path."
-            . " Use \Cake\Core\App::classPath() or \Cake\Core\Plugin::classPath() instead."
+            . " Use uim.cake.Core\App::classPath() or uim.cake.Core\Plugin::classPath() instead."
         );
 
         return static::classPath($type, $plugin);
@@ -223,7 +223,7 @@ class App
      * @param string|null $plugin Plugin name.
      * @return array<string>
      */
-    public static string[] classPath(string $type, ?string $plugin = null): array
+    static string[] classPath(string $type, ?string $plugin = null): array
     {
         if ($plugin != null) {
             return [
@@ -248,7 +248,7 @@ class App
      * @param string $type Package type.
      * @return array<string> Full path to package
      */
-    public static function core(string $type): array
+    static function core(string $type): array
     {
         if ($type == "templates") {
             return [CORE_PATH . "templates" . DIRECTORY_SEPARATOR];

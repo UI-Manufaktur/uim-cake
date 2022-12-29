@@ -34,7 +34,7 @@ class SchemaCache
      *
      * @param uim.cake.Database\Connection $connection Connection name to get the schema for or a connection instance
      */
-    public this(Connection $connection) {
+    this(Connection $connection) {
         _schema = this.getSchema($connection);
     }
 

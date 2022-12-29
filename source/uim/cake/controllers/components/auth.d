@@ -13,8 +13,8 @@ import uim.cake;
  *
  * Binds access control with user authentication and session management.
  *
- * @property \Cake\Controller\Component\RequestHandlerComponent myRequestHandler
- * @property \Cake\Controller\Component\FlashComponent $Flash
+ * @property uim.cake.Controller\Component\RequestHandlerComponent myRequestHandler
+ * @property uim.cake.Controller\Component\FlashComponent $Flash
  * @link https://book.UIM.org/4/en/controllers/components/authentication.html
  * @deprecated 4.0.0 Use the UIM/authentication and UIM/authorization plugins instead.
  * @see https://github.com/UIM/authentication
@@ -28,12 +28,12 @@ class AuthComponent : Component : IEventDispatcher
      * The query string key used for remembering the referred page when getting
      * redirected to login.
      */
-    public const string QUERY_STRING_REDIRECT = "redirect";
+    const string QUERY_STRING_REDIRECT = "redirect";
 
     /**
      * Constant for "all"
      */
-    public const string ALL = "all";
+    const string ALL = "all";
 
     /**
      * Default config
@@ -153,14 +153,14 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Objects that will be used for authentication checks.
      *
-     * @var array<\Cake\Auth\BaseAuthenticate>
+     * @var array<uim.cake.Auth\BaseAuthenticate>
      */
     protected _authenticateObjects = [];
 
     /**
      * Objects that will be used for authorization checks.
      *
-     * @var array<\Cake\Auth\BaseAuthorize>
+     * @var array<uim.cake.Auth\BaseAuthorize>
      */
     protected _authorizeObjects = [];
 
@@ -177,7 +177,7 @@ class AuthComponent : Component : IEventDispatcher
      * @var array<string>
      * @see uim.cake.controllers.Component\AuthComponent::allow()
      */
-    public $allowedActions = [];
+    $allowedActions = [];
 
     /**
      * The instance of the Authenticate provider that was used for

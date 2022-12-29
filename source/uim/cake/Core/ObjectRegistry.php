@@ -19,7 +19,7 @@ use Traversable;
  * the template method load().
  *
  * The ObjectRegistry is EventManager aware, but each extending class will need to use
- * \Cake\Event\EventDispatcherTrait to attach and detach on set and bind
+ * uim.cake.Event\EventDispatcherTrait to attach and detach on set and bind
  *
  * @see uim.cake.controllers.ComponentRegistry
  * @see uim.cake.View\HelperRegistry
@@ -43,7 +43,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * If a subclass provides event support, you can use `$config["enabled"] = false`
      * to exclude constructed objects from being registered for events.
      *
-     * Using {@link \Cake\Controller\Component::$components} as an example. You can alias
+     * Using {@link uim.cake.Controller\Component::$components} as an example. You can alias
      * an object by setting the "className" key, i.e.,
      *
      * ```
@@ -220,7 +220,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     }
 
     /**
-     * Provide public read access to the loaded objects
+     * Provide read access to the loaded objects
      *
      * @param string $name Name of property to read
      * @return object|null

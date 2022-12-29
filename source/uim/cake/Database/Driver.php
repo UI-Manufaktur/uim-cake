@@ -79,7 +79,7 @@ abstract class Driver : DriverInterface
      * @param array<string, mixed> $config The configuration for the driver.
      * @throws \InvalidArgumentException
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         if (empty($config["username"]) && !empty($config["login"])) {
             throw new InvalidArgumentException(
                 "Please pass "username" instead of "login" for connecting to the database"
@@ -420,7 +420,7 @@ abstract class Driver : DriverInterface
     {
         $className = TableSchema::class;
         if (isset(_config["tableSchema"])) {
-            /** @var class-string<\Cake\Database\Schema\TableSchema> $className */
+            /** @var class-string<uim.cake.Database\Schema\TableSchema> $className */
             $className = _config["tableSchema"];
         }
 

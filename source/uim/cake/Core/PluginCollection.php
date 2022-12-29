@@ -38,7 +38,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Plugin list
      *
-     * @var array<\Cake\Core\PluginInterface>
+     * @var array<uim.cake.Core\PluginInterface>
      */
     protected $plugins = [];
 
@@ -66,9 +66,9 @@ class PluginCollection : Iterator, Countable
     /**
      * Constructor
      *
-     * @param array<\Cake\Core\PluginInterface> $plugins The map of plugins to add to the collection.
+     * @param array<uim.cake.Core\PluginInterface> $plugins The map of plugins to add to the collection.
      */
-    public this(array $plugins = []) {
+    this(array $plugins = []) {
         foreach ($plugins as $plugin) {
             this.add($plugin);
         }
@@ -109,7 +109,7 @@ class PluginCollection : Iterator, Countable
      *
      * This will use the `plugins` Configure key, and fallback to enumerating `App::path("plugins")`
      *
-     * This method is not part of the official public API as plugins with
+     * This method is not part of the official API as plugins with
      * no plugin class are being phased out.
      *
      * @param string $name The plugin name to locate a path for.
@@ -253,7 +253,7 @@ class PluginCollection : Iterator, Countable
             }
         }
 
-        /** @var class-string<\Cake\Core\PluginInterface> $className */
+        /** @var class-string<uim.cake.Core\PluginInterface> $className */
         return new $className($config);
     }
 
@@ -333,7 +333,7 @@ class PluginCollection : Iterator, Countable
      * Filter the plugins to those with the named hook enabled.
      *
      * @param string $hook The hook to filter plugins by
-     * @return \Generator<\Cake\Core\PluginInterface> A generator containing matching plugins.
+     * @return \Generator<uim.cake.Core\PluginInterface> A generator containing matching plugins.
      * @throws \InvalidArgumentException on invalid hooks
      */
     function with(string $hook): Generator
