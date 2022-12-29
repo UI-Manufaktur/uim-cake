@@ -2,7 +2,7 @@
 
 module uim.cake.Error;
 
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.errors.Renderer\ConsoleExceptionRenderer;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.Routing\Router;

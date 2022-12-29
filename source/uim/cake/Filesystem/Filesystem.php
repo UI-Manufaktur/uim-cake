@@ -9,7 +9,7 @@
  */
 module uim.cake.Filesystem;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 use CallbackFilterIterator;
 use FilesystemIterator;
 use Iterator;

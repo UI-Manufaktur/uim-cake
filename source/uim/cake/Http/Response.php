@@ -9,7 +9,7 @@
  */
 module uim.cake.Http;
 
-import uim.cake.cores.Configure;
+import uim.cake.core.Configure;
 import uim.cake.http.Cookie\CookieCollection;
 import uim.cake.http.Cookie\CookieInterface;
 import uim.cake.http.Exception\NotFoundException;

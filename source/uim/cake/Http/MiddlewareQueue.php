@@ -9,7 +9,7 @@
  */
 module uim.cake.Http;
 
-import uim.cake.cores.App;
+import uim.cake.core.App;
 import uim.cake.http.Middleware\ClosureDecoratorMiddleware;
 import uim.cake.http.Middleware\DoublePassDecoratorMiddleware;
 use Closure;

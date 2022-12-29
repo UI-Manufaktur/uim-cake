@@ -13,7 +13,7 @@
  */
 module uim.cake.datasources.Paging\Exception;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 
 /**
  * Exception raised when requested page number does not exist.

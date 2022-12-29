@@ -9,8 +9,8 @@
  */
 module uim.cake.Error;
 
-import uim.cake.cores.Configure;
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.Configure;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.Routing\Router;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;

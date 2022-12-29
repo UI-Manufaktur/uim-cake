@@ -9,9 +9,9 @@
  */
 module uim.cake.errors.Middleware;
 
-import uim.cake.cores.App;
-import uim.cake.cores.Configure;
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.App;
+import uim.cake.core.Configure;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.errors.ErrorHandler;
 import uim.cake.errors.ExceptionTrap;
 import uim.cake.errors.Renderer\WebExceptionRenderer;

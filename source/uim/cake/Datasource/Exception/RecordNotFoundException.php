@@ -9,7 +9,7 @@
  */
 module uim.cake.datasources.Exception;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 
 /**
  * Exception raised when a particular record was not found

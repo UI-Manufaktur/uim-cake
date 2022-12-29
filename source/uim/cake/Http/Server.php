@@ -9,8 +9,8 @@
  */
 module uim.cake.Http;
 
-import uim.cake.cores.IHttpApplication;
-import uim.cake.cores.IPluginApplication;
+import uim.cake.core.IHttpApplication;
+import uim.cake.core.IPluginApplication;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventManager;

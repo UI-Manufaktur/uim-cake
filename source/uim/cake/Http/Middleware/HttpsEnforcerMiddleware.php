@@ -9,7 +9,7 @@
  */
 module uim.cake.http.Middleware;
 
-import uim.cake.cores.Configure;
+import uim.cake.core.Configure;
 import uim.cake.http.Exception\BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;

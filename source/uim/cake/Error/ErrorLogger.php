@@ -9,9 +9,9 @@
  */
 module uim.cake.Error;
 
-import uim.cake.cores.Configure;
-import uim.cake.cores.exceptions.CakeException;
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.Configure;
+import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.Log\Log;
 use Psr\Http\Message\IServerRequest;
 use Throwable;

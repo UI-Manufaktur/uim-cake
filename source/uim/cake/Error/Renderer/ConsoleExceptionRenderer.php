@@ -10,8 +10,8 @@
 module uim.cake.errors.Renderer;
 
 import uim.cake.consoles.ConsoleOutput;
-import uim.cake.cores.Configure;
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.Configure;
+import uim.cake.core.exceptions.CakeException;
 use Psr\Http\Message\IServerRequest;
 use Throwable;
 

@@ -9,7 +9,7 @@
  */
 module uim.cake.Http;
 
-import uim.cake.cores.IHttpApplication;
+import uim.cake.core.IHttpApplication;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 

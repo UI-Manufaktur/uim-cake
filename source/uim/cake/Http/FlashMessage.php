@@ -9,7 +9,7 @@
  */
 module uim.cake.Http;
 
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 use Throwable;
 
 /**

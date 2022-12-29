@@ -10,8 +10,8 @@
 module uim.cake.Http;
 
 use BadMethodCallException;
-import uim.cake.cores.Configure;
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.Configure;
+import uim.cake.core.exceptions.CakeException;
 import uim.cake.http.Cookie\CookieCollection;
 import uim.cake.http.Exception\MethodNotAllowedException;
 import uim.cake.utilities.Hash;

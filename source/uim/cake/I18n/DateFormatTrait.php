@@ -11,7 +11,7 @@ module uim.cake.I18n;
 
 import uim.cake.Chronos\ChronosInterface;
 import uim.cake.Chronos\DifferenceFormatterInterface;
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 use Closure;
 use DateTime;
 use DateTimeZone;
