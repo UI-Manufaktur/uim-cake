@@ -34,32 +34,32 @@ class Router
     /**
      * Regular expression for action names
      */
-    public const string ACTION = "index|show|add|create|edit|update|remove|del|delete|view|item";
+    const string ACTION = "index|show|add|create|edit|update|remove|del|delete|view|item";
 
     /**
      * Regular expression for years
      */
-    public const string YEAR = "[12][0-9]{3}";
+    const string YEAR = "[12][0-9]{3}";
 
     /**
      * Regular expression for months
      */
-    public const string MONTH = "0[1-9]|1[012]";
+    const string MONTH = "0[1-9]|1[012]";
 
     /**
      * Regular expression for days
      */
-    public const string DAY = "0[1-9]|[12][0-9]|3[01]";
+    const string DAY = "0[1-9]|[12][0-9]|3[01]";
 
     /**
      * Regular expression for auto increment IDs
      */
-    public const string ID = "[0-9]+";
+    const string ID = "[0-9]+";
 
     /**
      * Regular expression for UUIDs
      */
-    public const string UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
+    const string UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
 
     /**
      * The route collection routes would be added to.
@@ -155,7 +155,7 @@ class Router
     /**
      * Connects a new Route in the router.
      *
-     * Compatibility proxy to \Cake\Routing\RouteBuilder::connect() in the `/` scope.
+     * Compatibility proxy to uim.cake.Routing\RouteBuilder::connect() in the `/` scope.
      *
      * @param uim.cake.Routing\Route\Route|string route A string describing the template of the route
      * @param array|string defaults An array describing the default route parameters.
@@ -862,7 +862,7 @@ class Router
     /**
      * Get the route scopes and their connected routes.
      *
-     * @return array<\Cake\Routing\Route\Route>
+     * @return array<uim.cake.Routing\Route\Route>
      */
     static function routes(): array
     {

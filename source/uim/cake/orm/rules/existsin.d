@@ -24,7 +24,7 @@ class ExistsIn {
      * Set to true to accept composite foreign keys where one or more nullable columns are null.
      *
      * @param array<string>|string myFields The field or fields to check existence as primary key.
-     * @param uim.cake.ORM\Table|\Cake\ORM\Association|string myRepository The repository where the
+     * @param uim.cake.ORM\Table|uim.cake.ORM\Association|string myRepository The repository where the
      * field will be looked for, or the association name for the repository.
      * @param array<string, mixed> myOptions The options that modify the rule"s behavior.
      *     Options "allowNullableNulls" will make the rule pass if given foreign keys are set to `null`.

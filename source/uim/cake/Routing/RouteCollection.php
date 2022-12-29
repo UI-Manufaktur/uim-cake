@@ -20,21 +20,21 @@ class RouteCollection
     /**
      * The routes connected to this collection.
      *
-     * @var array<string, array<\Cake\Routing\Route\Route>>
+     * @var array<string, array<uim.cake.Routing\Route\Route>>
      */
     protected $_routeTable = [];
 
     /**
      * The hash map of named routes that are in this collection.
      *
-     * @var array<\Cake\Routing\Route\Route>
+     * @var array<uim.cake.Routing\Route\Route>
      */
     protected $_named = [];
 
     /**
      * Routes indexed by path prefix.
      *
-     * @var array<string, array<\Cake\Routing\Route\Route>>
+     * @var array<string, array<uim.cake.Routing\Route\Route>>
      */
     protected $_paths = [];
 
@@ -314,7 +314,7 @@ class RouteCollection
     /**
      * Get all the connected routes as a flat list.
      *
-     * @return array<\Cake\Routing\Route\Route>
+     * @return array<uim.cake.Routing\Route\Route>
      */
     function routes(): array
     {
@@ -330,7 +330,7 @@ class RouteCollection
     /**
      * Get the connected named routes.
      *
-     * @return array<\Cake\Routing\Route\Route>
+     * @return array<uim.cake.Routing\Route\Route>
      */
     function named(): array
     {

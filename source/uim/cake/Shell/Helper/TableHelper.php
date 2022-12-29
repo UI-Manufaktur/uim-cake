@@ -1,10 +1,4 @@
 
-
-
- *
-
- * @since         3.1.0
-  */
 module uim.cake.Shell\Helper;
 
 import uim.cake.consoles.Helper;

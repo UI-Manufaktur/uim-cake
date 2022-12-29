@@ -25,7 +25,7 @@ class TableLocator : AbstractLocator : ILocator
     /**
      * Instances that belong to the registry.
      *
-     * @var array<string, \Cake\ORM\Table>
+     * @var array<string, uim.cake.ORM\Table>
      */
     protected instances = [];
 
@@ -33,7 +33,7 @@ class TableLocator : AbstractLocator : ILocator
      * Contains a list of Table objects that were created out of the
      * built-in Table class. The list is indexed by table alias
      *
-     * @var array<\Cake\ORM\Table>
+     * @var array<uim.cake.ORM\Table>
      */
     protected _fallbacked = [];
 
@@ -41,7 +41,7 @@ class TableLocator : AbstractLocator : ILocator
      * Fallback class to use
      *
      * @var string
-     * @psalm-var class-string<\Cake\ORM\Table>
+     * @psalm-var class-string<uim.cake.ORM\Table>
      */
     protected fallbackClassName = Table::class;
 
@@ -94,7 +94,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @param string myClassName Fallback class name
      * @return this
-     * @psalm-param class-string<\Cake\ORM\Table> myClassName
+     * @psalm-param class-string<uim.cake.ORM\Table> myClassName
      */
     auto setFallbackClassName(myClassName) {
         this.fallbackClassName = myClassName;
@@ -140,7 +140,7 @@ class TableLocator : AbstractLocator : ILocator
      * This is important because table associations are resolved at runtime
      * and cyclic references need to be handled correctly.
      *
-     * The options that can be passed are the same as in {@link \Cake\ORM\Table::this()}, but the
+     * The options that can be passed are the same as in {@link uim.cake.ORM\Table::this()}, but the
      * `className` key is also recognized.
      *
      * ### Options
@@ -150,13 +150,13 @@ class TableLocator : AbstractLocator : ILocator
      *   `App\Model\Table\UsersTable` being used. If this class does not exist,
      *   then the default `Cake\ORM\Table` class will be used. By setting the `className`
      *   option you can define the specific class to use. The className option supports
-     *   plugin short class references {@link \Cake\Core\App::shortName()}.
+     *   plugin short class references {@link uim.cake.Core\App::shortName()}.
      * - `table` Define the table name to use. If undefined, this option will default to the underscored
      *   version of the alias name.
      * - `connection` Inject the specific connection object to use. If this option and `connectionName` are undefined,
      *   The table class" `defaultConnectionName()` method will be invoked to fetch the connection name.
      * - `connectionName` Define the connection name to use. The named connection will be fetched from
-     *   {@link \Cake\Datasource\ConnectionManager}.
+     *   {@link uim.cake.Datasource\ConnectionManager}.
      *
      * *Note* If your `myAlias` uses plugin syntax only the name part will be used as
      * key in the registry. This means that if two plugins, or a plugin and app provide
@@ -301,7 +301,7 @@ class TableLocator : AbstractLocator : ILocator
      * debugging common mistakes when setting up associations or created new table
      * classes.
      *
-     * @return array<\Cake\ORM\Table>
+     * @return array<uim.cake.ORM\Table>
      */
     function genericInstances(): array {
         return _fallbacked;

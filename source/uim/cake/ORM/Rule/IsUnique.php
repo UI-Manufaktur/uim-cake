@@ -35,7 +35,7 @@ class IsUnique
      * @param array<string> $fields The list of fields to check uniqueness for
      * @param array<string, mixed> $options The options for unique checks.
      */
-    public this(array $fields, array $options = []) {
+    this(array $fields, array $options = []) {
         _fields = $fields;
         _options = $options + _options;
     }

@@ -45,7 +45,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * Default strategy class name.
      *
      * @var string
-     * @psalm-var class-string<\Cake\ORM\Behavior\Translate\ITranslateStrategy>
+     * @psalm-var class-string<uim.cake.ORM\Behavior\Translate\ITranslateStrategy>
      */
     protected static $defaultStrategyClass = EavStrategy::class;
 
@@ -107,7 +107,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * @param string myClass Class name.
      * @return void
      * @since 4.0.0
-     * @psalm-param class-string<\Cake\ORM\Behavior\Translate\ITranslateStrategy> myClass
+     * @psalm-param class-string<uim.cake.ORM\Behavior\Translate\ITranslateStrategy> myClass
      */
     static auto setDefaultStrategyClass(string myClass) {
         static::$defaultStrategyClass = myClass;
@@ -118,7 +118,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      *
      * @return string
      * @since 4.0.0
-     * @psalm-return class-string<\Cake\ORM\Behavior\Translate\ITranslateStrategy>
+     * @psalm-return class-string<uim.cake.ORM\Behavior\Translate\ITranslateStrategy>
      */
     static string getDefaultStrategyClass() {
         return static::$defaultStrategyClass;
@@ -150,7 +150,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
             _config,
             ["implementedFinders", "implementedMethods", "strategyClass"]
         );
-        /** @var class-string<\Cake\ORM\Behavior\Translate\ITranslateStrategy> myClassName */
+        /** @var class-string<uim.cake.ORM\Behavior\Translate\ITranslateStrategy> myClassName */
         myClassName = this.getConfig("strategyClass", static::$defaultStrategyClass);
 
         return new myClassName(_table, myConfig);

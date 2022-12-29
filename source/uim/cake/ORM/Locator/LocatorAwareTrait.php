@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.orm.Locator;
 
 import uim.cake.datasources.FactoryLocator;

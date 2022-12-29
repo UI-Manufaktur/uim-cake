@@ -57,7 +57,7 @@ class EavStrategy : TranslateStrategyInterface
      * @param uim.cake.ORM\Table $table The table this strategy is attached to.
      * @param array<string, mixed> $config The config for this strategy.
      */
-    public this(Table $table, array $config = []) {
+    this(Table $table, array $config = []) {
         if (isset($config["tableLocator"])) {
             _tableLocator = $config["tableLocator"];
         }

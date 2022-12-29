@@ -5,6 +5,6 @@
 **********************************************************************************************************/
 module uim.cake.routings;
 
-public import uim.cake.routings.routebuilder;
-public import uim.cake.routings.routecollection;
-public import uim.cake.routings.router;
+import uim.cake.routings.routebuilder;
+import uim.cake.routings.routecollection;
+import uim.cake.routings.router;

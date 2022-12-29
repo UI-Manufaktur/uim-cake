@@ -24,14 +24,14 @@ class RouteBuilder
      *
      * @var string
      */
-    public const ID = "[0-9]+";
+    const ID = "[0-9]+";
 
     /**
      * Regular expression for UUIDs
      *
      * @var string
      */
-    public const UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
+    const UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
 
     /**
      * Default HTTP request method: controller action map.
@@ -111,7 +111,7 @@ class RouteBuilder
      * @param array $params The scope"s routing parameters.
      * @param array<string, mixed> $options Options list.
      */
-    public this(RouteCollection $collection, string $path, array $params = [], array $options = []) {
+    this(RouteCollection $collection, string $path, array $params = [], array $options = []) {
         _collection = $collection;
         _path = $path;
         _params = $params;
@@ -623,7 +623,7 @@ class RouteBuilder
      *   reverse routing lookups. If undefined a name will be generated for each
      *   connected route.
      * - `_ext` is an array of filename extensions that will be parsed out of the url if present.
-     *   See {@link \Cake\Routing\RouteCollection::setExtensions()}.
+     *   See {@link uim.cake.Routing\RouteCollection::setExtensions()}.
      * - `_method` Only match requests with specific HTTP verbs.
      * - `_host` - Define the host name pattern if you want this route to only match
      *   specific host names. You can use `.*` and to create wildcard subdomains/hosts
@@ -699,7 +699,7 @@ class RouteBuilder
     protected function _makeRoute($route, $defaults, $options): Route
     {
         if (is_string($route)) {
-            /** @var class-string<\Cake\Routing\Route\Route>|null $routeClass */
+            /** @var class-string<uim.cake.Routing\Route\Route>|null $routeClass */
             $routeClass = App::className($options["routeClass"], "Routing/Route");
             if ($routeClass == null) {
                 throw new InvalidArgumentException(sprintf(
@@ -770,7 +770,7 @@ class RouteBuilder
      * @param array<string, mixed> $options An array matching the named elements in the route to regular expressions which that
      *   element should match. Also contains additional parameters such as which routed parameters should be
      *   shifted into the passed arguments. As well as supplying patterns for routing parameters.
-     * @return uim.cake.Routing\Route\Route|\Cake\Routing\Route\RedirectRoute
+     * @return uim.cake.Routing\Route\Route|uim.cake.Routing\Route\RedirectRoute
      */
     function redirect(string $route, $url, array $options = []): Route
     {

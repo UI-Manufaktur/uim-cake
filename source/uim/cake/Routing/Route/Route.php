@@ -27,28 +27,28 @@ class Route
      *
      * @var array
      */
-    public $keys = [];
+    $keys = [];
 
     /**
      * An array of additional parameters for the Route.
      *
      * @var array
      */
-    public $options = [];
+    $options = [];
 
     /**
      * Default parameters for a Route
      *
      * @var array
      */
-    public $defaults = [];
+    $defaults = [];
 
     /**
      * The routes template string.
      *
      * @var string
      */
-    public $template;
+    $template;
 
     /**
      * Is this route a greedy route? Greedy routes have a `/*` in their
@@ -98,7 +98,7 @@ class Route
      *
      * @var array<string>
      */
-    public const VALID_METHODS = ["GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS", "HEAD"];
+    const VALID_METHODS = ["GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS", "HEAD"];
 
     /**
      * Regex for matching braced placholders in route template.
@@ -128,7 +128,7 @@ class Route
      * @param array<string, mixed> $options Array of additional options for the Route
      * @throws \InvalidArgumentException When `$options["_method"]` are not in `VALID_METHODS` list.
      */
-    public this(string $template, array $defaults = [], array $options = []) {
+    this(string $template, array $defaults = [], array $options = []) {
         this.template = $template;
         this.defaults = $defaults;
         this.options = $options + ["_ext": [], "_middleware": []];
@@ -927,7 +927,7 @@ class Route
      * @param array<string, mixed> $fields Key/Value of object attributes
      * @return static A new instance of the route
      */
-    public static function __set_state(array $fields) {
+    static function __set_state(array $fields) {
         $class = static::class;
         $obj = new $class("");
         foreach ($fields as $field: $value) {

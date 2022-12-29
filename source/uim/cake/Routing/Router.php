@@ -45,42 +45,42 @@ class Router
      *
      * @var string
      */
-    public const ACTION = "index|show|add|create|edit|update|remove|del|delete|view|item";
+    const ACTION = "index|show|add|create|edit|update|remove|del|delete|view|item";
 
     /**
      * Regular expression for years
      *
      * @var string
      */
-    public const YEAR = "[12][0-9]{3}";
+    const YEAR = "[12][0-9]{3}";
 
     /**
      * Regular expression for months
      *
      * @var string
      */
-    public const MONTH = "0[1-9]|1[012]";
+    const MONTH = "0[1-9]|1[012]";
 
     /**
      * Regular expression for days
      *
      * @var string
      */
-    public const DAY = "0[1-9]|[12][0-9]|3[01]";
+    const DAY = "0[1-9]|[12][0-9]|3[01]";
 
     /**
      * Regular expression for auto increment IDs
      *
      * @var string
      */
-    public const ID = "[0-9]+";
+    const ID = "[0-9]+";
 
     /**
      * Regular expression for UUIDs
      *
      * @var string
      */
-    public const UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
+    const UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
 
     /**
      * The route collection routes would be added to.
@@ -154,7 +154,7 @@ class Router
      * @param string|null $routeClass Class name.
      * @return string|null
      */
-    public static function defaultRouteClass(?string $routeClass = null): ?string
+    static function defaultRouteClass(?string $routeClass = null): ?string
     {
         if ($routeClass == null) {
             return static::$_defaultRouteClass;
@@ -170,7 +170,7 @@ class Router
      * @return array<string, string> Named route elements
      * @see uim.cake.Routing\Router::$_namedExpressions
      */
-    public static function getNamedExpressions(): array
+    static function getNamedExpressions(): array
     {
         return static::$_namedExpressions;
     }
@@ -178,7 +178,7 @@ class Router
     /**
      * Connects a new Route in the router.
      *
-     * Compatibility proxy to \Cake\Routing\RouteBuilder::connect() in the `/` scope.
+     * Compatibility proxy to uim.cake.Routing\RouteBuilder::connect() in the `/` scope.
      *
      * @param uim.cake.Routing\Route\Route|string $route A string describing the template of the route
      * @param array|string $defaults An array describing the default route parameters.
@@ -193,7 +193,7 @@ class Router
      * @see uim.cake.Routing\Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
      */
-    public static function connect($route, $defaults = [], $options = []): void
+    static function connect($route, $defaults = [], $options = []): void
     {
         deprecationWarning(
             "`Router::connect()` is deprecated, use the non-static method `RouteBuilder::connect()` instead."
@@ -212,7 +212,7 @@ class Router
      * @return array Parsed elements from URL.
      * @throws uim.cake.Routing\Exception\MissingRouteException When a route cannot be handled
      */
-    public static function parseRequest(ServerRequest $request): array
+    static function parseRequest(ServerRequest $request): array
     {
         return static::$_collection.parseRequest($request);
     }
@@ -223,7 +223,7 @@ class Router
      * @param uim.cake.http.ServerRequest $request request object.
      * @return void
      */
-    public static function setRequest(ServerRequest $request): void
+    static function setRequest(ServerRequest $request): void
     {
         static::$_request = $request;
 
@@ -243,7 +243,7 @@ class Router
      *
      * @return uim.cake.http.ServerRequest|null
      */
-    public static function getRequest(): ?ServerRequest
+    static function getRequest(): ?ServerRequest
     {
         return static::$_request;
     }
@@ -254,7 +254,7 @@ class Router
      *
      * @return void
      */
-    public static function reload(): void
+    static function reload(): void
     {
         if (empty(static::$_initialState)) {
             static::$_collection = new RouteCollection();
@@ -287,7 +287,7 @@ class Router
      * @internal
      * @return void
      */
-    public static function resetRoutes(): void
+    static function resetRoutes(): void
     {
         static::$_collection = new RouteCollection();
         static::$_urlFilters = [];
@@ -322,7 +322,7 @@ class Router
      * @param callable $function The function to add
      * @return void
      */
-    public static function addUrlFilter(callable $function): void
+    static function addUrlFilter(callable $function): void
     {
         static::$_urlFilters[] = $function;
     }
@@ -399,7 +399,7 @@ class Router
      * @return string Full translated URL with base path.
      * @throws uim.cake.Core\Exception\CakeException When the route name is not found
      */
-    public static function url($url = null, bool $full = false): string
+    static function url($url = null, bool $full = false): string
     {
         $context = static::$_requestContext;
         $request = static::getRequest();
@@ -527,7 +527,7 @@ class Router
      *   Default is false.
      * @return string Full translated URL with base path.
      */
-    public static function pathUrl(string $path, array $params = [], bool $full = false): string
+    static function pathUrl(string $path, array $params = [], bool $full = false): string
     {
         return static::url(["_path": $path] + $params, $full);
     }
@@ -548,7 +548,7 @@ class Router
      *   Default is false.
      * @return bool
      */
-    public static function routeExists($url = null, bool $full = false): bool
+    static function routeExists($url = null, bool $full = false): bool
     {
         try {
             static::url($url, $full);
@@ -574,7 +574,7 @@ class Router
      * For example: `http://example.com`
      * @return string
      */
-    public static function fullBaseUrl(?string $base = null): string
+    static function fullBaseUrl(?string $base = null): string
     {
         if ($base == null && static::$_fullBaseUrl != null) {
             return static::$_fullBaseUrl;
@@ -626,7 +626,7 @@ class Router
      *     Cake\Http\ServerRequest object that needs to be reversed.
      * @return array The URL array ready to be used for redirect or HTML link.
      */
-    public static function reverseToArray($params): array
+    static function reverseToArray($params): array
     {
         $route = null;
         if ($params instanceof ServerRequest) {
@@ -675,7 +675,7 @@ class Router
      *     protocol when reversing the URL.
      * @return string The string that is the reversed result of the array
      */
-    public static function reverse($params, $full = false): string
+    static function reverse($params, $full = false): string
     {
         $params = static::reverseToArray($params);
 
@@ -691,7 +691,7 @@ class Router
      * @param array|string $url URL to normalize Either an array or a string URL.
      * @return string Normalized URL
      */
-    public static function normalize($url = "/"): string
+    static function normalize($url = "/"): string
     {
         if (is_array($url)) {
             $url = static::url($url);
@@ -741,7 +741,7 @@ class Router
      *   Defaults to `true`.
      * @return array<string> Array of extensions Router is configured to parse.
      */
-    public static function extensions($extensions = null, $merge = true): array
+    static function extensions($extensions = null, $merge = true): array
     {
         $collection = static::$_collection;
         if ($extensions == null) {
@@ -763,7 +763,7 @@ class Router
      * @param array<string, mixed> $options The options for the builder
      * @return uim.cake.Routing\RouteBuilder
      */
-    public static function createRouteBuilder(string $path, array $options = []): RouteBuilder
+    static function createRouteBuilder(string $path, array $options = []): RouteBuilder
     {
         $defaults = [
             "routeClass": static::defaultRouteClass(),
@@ -820,7 +820,7 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::scope()` instead.
      */
-    public static function scope(string $path, $params = [], $callback = null): void
+    static function scope(string $path, $params = [], $callback = null): void
     {
         deprecationWarning(
             "`Router::scope()` is deprecated, use the non-static method `RouteBuilder::scope()` instead."
@@ -859,7 +859,7 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::prefix()` instead.
      */
-    public static function prefix(string $name, $params = [], $callback = null): void
+    static function prefix(string $name, $params = [], $callback = null): void
     {
         deprecationWarning(
             "`Router::prefix()` is deprecated, use the non-static method `RouteBuilder::prefix()` instead."
@@ -896,7 +896,7 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::plugin()` instead.
      */
-    public static function plugin(string $name, $options = [], $callback = null): void
+    static function plugin(string $name, $options = [], $callback = null): void
     {
         deprecationWarning(
             "`Router::plugin()` is deprecated, use the non-static method `RouteBuilder::plugin()` instead."
@@ -917,9 +917,9 @@ class Router
     /**
      * Get the route scopes and their connected routes.
      *
-     * @return array<\Cake\Routing\Route\Route>
+     * @return array<uim.cake.Routing\Route\Route>
      */
-    public static function routes(): array
+    static function routes(): array
     {
         return static::$_collection.routes();
     }
@@ -929,7 +929,7 @@ class Router
      *
      * @return uim.cake.Routing\RouteCollection
      */
-    public static function getRouteCollection(): RouteCollection
+    static function getRouteCollection(): RouteCollection
     {
         return static::$_collection;
     }
@@ -940,7 +940,7 @@ class Router
      * @param uim.cake.Routing\RouteCollection $routeCollection route collection
      * @return void
      */
-    public static function setRouteCollection(RouteCollection $routeCollection): void
+    static function setRouteCollection(RouteCollection $routeCollection): void
     {
         static::$_collection = $routeCollection;
     }
@@ -981,7 +981,7 @@ class Router
      * @param string $url Route path in [Plugin.][Prefix/]Controller::action format
      * @return array<string, string>
      */
-    public static function parseRoutePath(string $url): array
+    static function parseRoutePath(string $url): array
     {
         if (isset(static::$_routePaths[$url])) {
             return static::$_routePaths[$url];

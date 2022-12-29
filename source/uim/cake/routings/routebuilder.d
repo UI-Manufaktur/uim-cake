@@ -18,12 +18,12 @@ class RouteBuilder {
     /**
      * Regular expression for auto increment IDs
      */
-    public const string ID = "[0-9]+";
+    const string ID = "[0-9]+";
 
     /**
      * Regular expression for UUIDs
      */
-    public const string UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
+    const string UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
 
     /**
      * Default HTTP request method: controller action map.
@@ -592,7 +592,7 @@ class RouteBuilder {
      *   reverse routing lookups. If undefined a name will be generated for each
      *   connected route.
      * - `_ext` is an array of filename extensions that will be parsed out of the url if present.
-     *   See {@link \Cake\Routing\RouteCollection::setExtensions()}.
+     *   See {@link uim.cake.Routing\RouteCollection::setExtensions()}.
      * - `_method` Only match requests with specific HTTP verbs.
      * - `_host` - Define the host name pattern if you want this route to only match
      *   specific host names. You can use `.*` and to create wildcard subdomains/hosts
@@ -743,7 +743,7 @@ class RouteBuilder {
      * @param array<string, mixed> myOptions An array matching the named elements in the route to regular expressions which that
      *   element should match. Also contains additional parameters such as which routed parameters should be
      *   shifted into the passed arguments. As well as supplying patterns for routing parameters.
-     * @return uim.cake.Routing\Route\Route|\Cake\Routing\Route\RedirectRoute
+     * @return uim.cake.Routing\Route\Route|uim.cake.Routing\Route\RedirectRoute
      */
     function redirect(string route, myUrl, array myOptions = []): Route
     {

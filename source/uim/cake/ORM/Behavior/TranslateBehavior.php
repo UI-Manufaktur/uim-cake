@@ -53,7 +53,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * Default strategy class name.
      *
      * @var string
-     * @psalm-var class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface>
+     * @psalm-var class-string<uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface>
      */
     protected static $defaultStrategyClass = EavStrategy::class;
 
@@ -90,7 +90,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param uim.cake.ORM\Table $table The table this behavior is attached to.
      * @param array<string, mixed> $config The config for this behavior.
      */
-    public this(Table $table, array $config = []) {
+    this(Table $table, array $config = []) {
         $config += [
             "defaultLocale": I18n::getDefaultLocale(),
             "referenceName": this.referenceName($table),
@@ -117,9 +117,9 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @param string $class Class name.
      * @return void
      * @since 4.0.0
-     * @psalm-param class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface> $class
+     * @psalm-param class-string<uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface> $class
      */
-    public static function setDefaultStrategyClass(string $class) {
+    static function setDefaultStrategyClass(string $class) {
         static::$defaultStrategyClass = $class;
     }
 
@@ -128,9 +128,9 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *
      * @return string
      * @since 4.0.0
-     * @psalm-return class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface>
+     * @psalm-return class-string<uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface>
      */
-    public static function getDefaultStrategyClass(): string
+    static function getDefaultStrategyClass(): string
     {
         return static::$defaultStrategyClass;
     }
@@ -161,7 +161,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
             _config,
             ["implementedFinders", "implementedMethods", "strategyClass"]
         );
-        /** @var class-string<\Cake\ORM\Behavior\Translate\TranslateStrategyInterface> $className */
+        /** @var class-string<uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface> $className */
         $className = this.getConfig("strategyClass", static::$defaultStrategyClass);
 
         return new $className(_table, $config);

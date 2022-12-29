@@ -49,7 +49,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param uim.cake.ORM\Table $table Table instance.
      * @param array<string, mixed> $config Configuration.
      */
-    public this(Table $table, array $config = []) {
+    this(Table $table, array $config = []) {
         $tableAlias = $table.getAlias();
         [$plugin] = pluginSplit($table.getRegistryAlias(), true);
         $tableReferenceName = $config["referenceName"];

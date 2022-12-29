@@ -31,7 +31,7 @@ class DuplicateNamedRouteException : CakeException
      * @param int|null $code The code of the error, is also the HTTP status code for the error. Defaults to 404.
      * @param \Throwable|null $previous the previous exception.
      */
-    public this($message, ?int $code = 404, ?Throwable $previous = null) {
+    this($message, ?int $code = 404, ?Throwable $previous = null) {
         if (is_array($message) && isset($message["message"])) {
             _messageTemplate = $message["message"];
         }

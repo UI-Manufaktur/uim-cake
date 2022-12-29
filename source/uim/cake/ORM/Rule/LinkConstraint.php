@@ -15,14 +15,14 @@ class LinkConstraint
      *
      * @var string
      */
-    public const STATUS_LINKED = "linked";
+    const STATUS_LINKED = "linked";
 
     /**
      * Status that requires a link to not be present.
      *
      * @var string
      */
-    public const STATUS_NOT_LINKED = "notLinked";
+    const STATUS_NOT_LINKED = "notLinked";
 
     /**
      * The association that should be checked.
@@ -45,20 +45,20 @@ class LinkConstraint
      * @param string $requiredLinkStatus The link status that is required to be present in order for the check to
      *  succeed.
      */
-    public this($association, string $requiredLinkStatus) {
+    this($association, string $requiredLinkStatus) {
         if (
             !is_string($association) &&
             !($association instanceof Association)
         ) {
             throw new \InvalidArgumentException(sprintf(
-                "Argument 1 is expected to be of type `\Cake\ORM\Association|string`, `%s` given.",
+                "Argument 1 is expected to be of type `uim.cake.ORM\Association|string`, `%s` given.",
                 getTypeName($association)
             ));
         }
 
         if (!in_array($requiredLinkStatus, [static::STATUS_LINKED, static::STATUS_NOT_LINKED], true)) {
             throw new \InvalidArgumentException(
-                "Argument 2 is expected to match one of the `\Cake\ORM\Rule\LinkConstraint::STATUS_*` constants."
+                "Argument 2 is expected to match one of the `uim.cake.ORM\Rule\LinkConstraint::STATUS_*` constants."
             );
         }
 
@@ -80,7 +80,7 @@ class LinkConstraint
         $table = $options["repository"] ?? null;
         if (!($table instanceof Table)) {
             throw new \InvalidArgumentException(
-                "Argument 2 is expected to have a `repository` key that holds an instance of `\Cake\ORM\Table`."
+                "Argument 2 is expected to have a `repository` key that holds an instance of `uim.cake.ORM\Table`."
             );
         }
 

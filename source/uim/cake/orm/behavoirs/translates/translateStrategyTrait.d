@@ -83,7 +83,7 @@ trait TranslateStrategyTrait {
      * @return void
      */
     protected auto unsetEmptyFields($entity) {
-        /** @var array<\Cake\ORM\Entity> $translations */
+        /** @var array<uim.cake.ORM\Entity> $translations */
         $translations = (array)$entity.get("_translations");
         foreach ($translations as $locale: $translation) {
             myFields = $translation.extract(_config["fields"], false);
@@ -133,7 +133,7 @@ trait TranslateStrategyTrait {
                     return null;
                 }
 
-                /** @var array<string, \Cake\Datasource\IEntity>|null $translations */
+                /** @var array<string, uim.cake.Datasource\IEntity>|null $translations */
                 $translations = $entity.get("_translations");
                 if ($translations is null) {
                     $translations = [];
