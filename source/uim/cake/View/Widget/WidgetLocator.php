@@ -2,7 +2,7 @@
 
 
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+
 
  * @since         3.6.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
@@ -10,7 +10,7 @@
 module uim.cake.View\Widget;
 
 import uim.cake.cores.App;
-import uim.cake.cores.configures.Engine\PhpConfig;
+import uim.cake.cores.configures.engines.PhpConfig;
 import uim.cake.View\StringTemplate;
 import uim.cake.View\View;
 use ReflectionClass;
