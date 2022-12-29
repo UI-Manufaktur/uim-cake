@@ -9,7 +9,7 @@
  */
 module uim.cake.View;
 
-import uim.cake.cores.Configure\Engine\PhpConfig;
+import uim.cake.cores.configures.Engine\PhpConfig;
 import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.utilities.Hash;

@@ -7,10 +7,10 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.cores.Configure\Engine;
+module uim.cake.cores.configures.Engine;
 
-import uim.cake.cores.Configure\ConfigEngineInterface;
-import uim.cake.cores.Configure\FileConfigTrait;
+import uim.cake.cores.configures.ConfigEngineInterface;
+import uim.cake.cores.configures.FileConfigTrait;
 import uim.cake.cores.exceptions.CakeException;
 
 /**

@@ -1,7 +1,7 @@
-module uim.cake.core.Configure\Engine;
+module uim.cake.core.configures.Engine;
 
-import uim.cake.core.Configure\IConfigEngine;
-import uim.cake.core.Configure\FileConfigTrait;
+import uim.cake.core.configures.IConfigEngine;
+import uim.cake.core.configures.FileConfigTrait;
 import uim.cake.core.exceptions\CakeException;
 
 /**
