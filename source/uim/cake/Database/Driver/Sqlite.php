@@ -55,7 +55,7 @@ class Sqlite : Driver
     /**
      * The schema dialect class for this driver
      *
-     * @var \Cake\Database\Schema\SqliteSchemaDialect|null
+     * @var uim.cake.Database\Schema\SqliteSchemaDialect|null
      */
     protected $_schemaDialect;
 

@@ -23,7 +23,7 @@ class LoggedQuery : JsonSerializable
     /**
      * Driver executing the query
      *
-     * @var \Cake\Database\DriverInterface|null
+     * @var uim.cake.Database\DriverInterface|null
      */
     public $driver = null;
 

@@ -46,7 +46,7 @@ class ValuesExpression : IExpression
     /**
      * The Query object to use as a values expression
      *
-     * @var \Cake\Database\Query|null
+     * @var uim.cake.Database\Query|null
      */
     protected $_query;
 
@@ -300,7 +300,7 @@ class ValuesExpression : IExpression
 
         foreach (_values as $row: $values) {
             foreach ($types as $col: $type) {
-                /** @var \Cake\Database\Type\ExpressionTypeInterface $type */
+                /** @var uim.cake.Database\Type\ExpressionTypeInterface $type */
                 _values[$row][$col] = $type.toExpression($values[$col]);
             }
         }

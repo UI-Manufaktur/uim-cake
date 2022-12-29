@@ -11,12 +11,12 @@ module uim.cake.Datasource;
 
 import uim.cake.cores.App;
 import uim.cake.cores.ObjectRegistry;
-import uim.cake.Datasource\Exception\MissingDatasourceException;
+import uim.cake.datasources.Exception\MissingDatasourceException;
 
 /**
  * A registry object for connection instances.
  *
- * @see uim.cake.Datasource\ConnectionManager
+ * @see uim.cake.datasources.ConnectionManager
  * @: \Cake\Core\ObjectRegistry<\Cake\Datasource\ConnectionInterface>
  */
 class ConnectionRegistry : ObjectRegistry
@@ -77,7 +77,7 @@ class ConnectionRegistry : ObjectRegistry
 
         unset($config["className"]);
 
-        /** @var \Cake\Datasource\ConnectionInterface */
+        /** @var uim.cake.datasources.ConnectionInterface */
         return new $class($config);
     }
 

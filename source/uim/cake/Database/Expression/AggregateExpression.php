@@ -21,12 +21,12 @@ use Closure;
 class AggregateExpression : FunctionExpression : WindowInterface
 {
     /**
-     * @var \Cake\Database\Expression\QueryExpression
+     * @var uim.cake.Database\Expression\QueryExpression
      */
     protected $filter;
 
     /**
-     * @var \Cake\Database\Expression\WindowExpression
+     * @var uim.cake.Database\Expression\WindowExpression
      */
     protected $window;
 

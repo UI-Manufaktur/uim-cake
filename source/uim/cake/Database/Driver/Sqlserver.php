@@ -71,7 +71,7 @@ class Sqlserver : Driver
     /**
      * The schema dialect class for this driver
      *
-     * @var \Cake\Database\Schema\SqlserverSchemaDialect|null
+     * @var uim.cake.Database\Schema\SqlserverSchemaDialect|null
      */
     protected $_schemaDialect;
 

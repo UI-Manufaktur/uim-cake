@@ -26,7 +26,7 @@ class CachedCollection : ICollection
     /**
      * The decorated schema collection
      *
-     * @var \Cake\Database\Schema\ICollection
+     * @var uim.cake.Database\Schema\ICollection
      */
     protected $collection;
 

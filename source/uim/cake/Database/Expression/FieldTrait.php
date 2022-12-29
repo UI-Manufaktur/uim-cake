@@ -17,7 +17,7 @@ trait FieldTrait
     /**
      * The field name or expression to be used in the left hand side of the operator
      *
-     * @var \Cake\Database\IExpression|array|string
+     * @var uim.cake.Database\IExpression|array|string
      */
     protected $_field;
 

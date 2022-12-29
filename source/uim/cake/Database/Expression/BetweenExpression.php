@@ -71,7 +71,7 @@ class BetweenExpression : IExpression, FieldInterface
             "to": _to,
         ];
 
-        /** @var \Cake\Database\IExpression|string $field */
+        /** @var uim.cake.Database\IExpression|string $field */
         $field = _field;
         if ($field instanceof IExpression) {
             $field = $field.sql($binder);

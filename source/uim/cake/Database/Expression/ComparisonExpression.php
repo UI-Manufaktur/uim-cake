@@ -128,7 +128,7 @@ class ComparisonExpression : IExpression, FieldInterface
 
     function sql(ValueBinder $binder): string
     {
-        /** @var \Cake\Database\IExpression|string $field */
+        /** @var uim.cake.Database\IExpression|string $field */
         $field = _field;
 
         if ($field instanceof IExpression) {

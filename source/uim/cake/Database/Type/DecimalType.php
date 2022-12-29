@@ -170,7 +170,7 @@ class DecimalType : BaseType : BatchCastingInterface
      */
     protected function _parseValue(string $value): string
     {
-        /** @var \Cake\I18n\Number $class */
+        /** @var uim.cake.I18n\Number $class */
         $class = static::$numberClass;
 
         return (string)$class::parseFloat($value);

@@ -22,7 +22,7 @@ class MysqlSchemaDialect : SchemaDialect
     /**
      * The driver instance being used.
      *
-     * @var \Cake\Database\Driver\Mysql
+     * @var uim.cake.Database\Driver\Mysql
      */
     protected $_driver;
 

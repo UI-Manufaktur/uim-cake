@@ -34,14 +34,14 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * Statement instance implementation, such as PDOStatement
      * or any other custom implementation.
      *
-     * @var \Cake\Database\StatementInterface
+     * @var uim.cake.Database\StatementInterface
      */
     protected $_statement;
 
     /**
      * Reference to the driver object associated to this statement.
      *
-     * @var \Cake\Database\DriverInterface
+     * @var uim.cake.Database\DriverInterface
      */
     protected $_driver;
 

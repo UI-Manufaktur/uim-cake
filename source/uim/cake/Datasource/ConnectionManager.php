@@ -15,7 +15,7 @@ import uim.cake.databases.Driver\Mysql;
 import uim.cake.databases.Driver\Postgres;
 import uim.cake.databases.Driver\Sqlite;
 import uim.cake.databases.Driver\Sqlserver;
-import uim.cake.Datasource\Exception\MissingDatasourceConfigException;
+import uim.cake.datasources.Exception\MissingDatasourceConfigException;
 
 /**
  * Manages and loads instances of Connection
@@ -56,7 +56,7 @@ class ConnectionManager
     /**
      * The ConnectionRegistry used by the manager.
      *
-     * @var \Cake\Datasource\ConnectionRegistry
+     * @var uim.cake.datasources.ConnectionRegistry
      */
     protected static $_registry;
 

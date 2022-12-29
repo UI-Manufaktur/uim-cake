@@ -24,14 +24,14 @@ class Collection : ICollection
     /**
      * Connection object
      *
-     * @var \Cake\Database\Connection
+     * @var uim.cake.Database\Connection
      */
     protected $_connection;
 
     /**
      * Schema dialect instance.
      *
-     * @var \Cake\Database\Schema\SchemaDialect
+     * @var uim.cake.Database\Schema\SchemaDialect
      */
     protected $_dialect;
 

@@ -48,7 +48,7 @@ class ReconnectStrategy : RetryStrategyInterface
     /**
      * The connection to check for validity
      *
-     * @var \Cake\Database\Connection
+     * @var uim.cake.Database\Connection
      */
     protected $connection;
 

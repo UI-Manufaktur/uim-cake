@@ -19,7 +19,7 @@ use Closure;
 class WindowExpression : IExpression, WindowInterface
 {
     /**
-     * @var \Cake\Database\Expression\IdentifierExpression
+     * @var uim.cake.Database\Expression\IdentifierExpression
      */
     protected $name;
 
@@ -29,7 +29,7 @@ class WindowExpression : IExpression, WindowInterface
     protected $partitions = [];
 
     /**
-     * @var \Cake\Database\Expression\OrderByExpression|null
+     * @var uim.cake.Database\Expression\OrderByExpression|null
      */
     protected $order;
 

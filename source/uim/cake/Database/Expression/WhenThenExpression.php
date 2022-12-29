@@ -41,14 +41,14 @@ class WhenThenExpression : IExpression
      * The type map to use when using an array of conditions for the
      * `WHEN` value.
      *
-     * @var \Cake\Database\TypeMap
+     * @var uim.cake.Database\TypeMap
      */
     protected $_typeMap;
 
     /**
      * Then `WHEN` value.
      *
-     * @var \Cake\Database\IExpression|object|scalar|null
+     * @var uim.cake.Database\IExpression|object|scalar|null
      */
     protected $when = null;
 
@@ -62,7 +62,7 @@ class WhenThenExpression : IExpression
     /**
      * The `THEN` value.
      *
-     * @var \Cake\Database\IExpression|object|scalar|null
+     * @var uim.cake.Database\IExpression|object|scalar|null
      */
     protected $then = null;
 

@@ -26,7 +26,7 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Connection instance to be used to execute this query.
      *
-     * @var \Cake\Database\Connection
+     * @var uim.cake.Database\Connection
      */
     protected _connection;
 
@@ -113,7 +113,7 @@ class Query : IExpression, IteratorAggregate {
      * The object responsible for generating query placeholders and temporarily store values
      * associated to each of those.
      *
-     * @var \Cake\Database\ValueBinder|null
+     * @var uim.cake.Database\ValueBinder|null
      */
     protected _valueBinder;
 

@@ -37,7 +37,7 @@ class FieldTypeConverter
     /**
      * The driver object to be used in the type conversion
      *
-     * @var \Cake\Database\IDriver
+     * @var uim.cake.Database\IDriver
      */
     protected _driver;
 

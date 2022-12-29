@@ -42,7 +42,7 @@ class CaseExpression : IExpression
     /**
      * The `ELSE` value for the case statement. If null then no `ELSE` will be included.
      *
-     * @var \Cake\Database\IExpression|array|string|null
+     * @var uim.cake.Database\IExpression|array|string|null
      */
     protected $_elseValue;
 

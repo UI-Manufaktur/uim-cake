@@ -27,7 +27,7 @@ abstract class SchemaDialect
     /**
      * The driver instance being used.
      *
-     * @var \Cake\Database\DriverInterface
+     * @var uim.cake.Database\DriverInterface
      */
     protected $_driver;
 

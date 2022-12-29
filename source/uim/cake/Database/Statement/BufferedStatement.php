@@ -34,14 +34,14 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * The decorated statement
      *
-     * @var \Cake\Database\StatementInterface
+     * @var uim.cake.Database\StatementInterface
      */
     protected $statement;
 
     /**
      * The driver for the statement
      *
-     * @var \Cake\Database\DriverInterface
+     * @var uim.cake.Database\DriverInterface
      */
     protected $_driver;
 

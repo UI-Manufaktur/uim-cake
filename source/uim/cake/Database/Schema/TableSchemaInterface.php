@@ -9,7 +9,7 @@
  */
 module uim.cake.databases.Schema;
 
-import uim.cake.Datasource\SchemaInterface;
+import uim.cake.datasources.SchemaInterface;
 
 /**
  * An interface used by database TableSchema objects.
