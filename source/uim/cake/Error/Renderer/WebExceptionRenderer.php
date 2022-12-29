@@ -17,22 +17,22 @@ import uim.cake.core.Configure;
 import uim.cake.core.Container;
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.exceptions.MissingPluginException;
-import uim.cake.datasources.Exception\RecordNotFoundException;
-import uim.cake.datasources.Paging\Exception\PageOutOfBoundsException;
+import uim.cake.datasources.exceptions.RecordNotFoundException;
+import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
 import uim.cake.errors.Debugger;
 import uim.cake.errors.ExceptionRendererInterface;
 import uim.cake.events.Event;
-import uim.cake.http.Exception\HttpException;
-import uim.cake.http.Exception\MissingControllerException;
+import uim.cake.http.exceptions.HttpException;
+import uim.cake.http.exceptions.MissingControllerException;
 import uim.cake.http.Response;
 import uim.cake.http.ResponseEmitter;
 import uim.cake.http.ServerRequest;
 import uim.cake.http.ServerRequestFactory;
-import uim.cake.Routing\Exception\MissingRouteException;
+import uim.cake.Routing\exceptions.MissingRouteException;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Inflector;
-import uim.cake.View\Exception\MissingLayoutException;
-import uim.cake.View\Exception\MissingTemplateException;
+import uim.cake.View\exceptions.MissingLayoutException;
+import uim.cake.View\exceptions.MissingTemplateException;
 use PDOException;
 use Psr\Http\Message\IResponse;
 use Throwable;
@@ -71,7 +71,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     protected $controller;
 
     /**
-     * Template to render for {@link uim.cake.Core\Exception\CakeException}
+     * Template to render for {@link uim.cake.Core\exceptions.CakeException}
      *
      * @var string
      */

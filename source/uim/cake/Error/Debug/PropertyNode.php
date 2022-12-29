@@ -56,7 +56,7 @@ class PropertyNode : NodeInterface
      *
      * @return string
      */
-    function getVisibility(): ?string
+    string getVisibility(): ?string
     {
         return this.visibility;
     }
@@ -66,7 +66,7 @@ class PropertyNode : NodeInterface
      *
      * @return string
      */
-    function getName(): string
+    string getName(): string
     {
         return this.name;
     }

@@ -180,7 +180,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @param \Psr\Http\Message\IServerRequest $request The request to read from.
      * @return string
      */
-    function getRequestContext(IServerRequest $request): string
+    string getRequestContext(IServerRequest $request): string
     {
         $message = "\nRequest URL: " . $request.getRequestTarget();
 

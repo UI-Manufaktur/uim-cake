@@ -92,7 +92,7 @@ class HtmlFormatter : FormatterInterface
      * @param uim.cake.Error\Debug\NodeInterface $node The node tree to dump.
      * @return string
      */
-    function dump(NodeInterface $node): string
+    string dump(NodeInterface $node): string
     {
         $html = this.export($node, 0);
         $head = "";

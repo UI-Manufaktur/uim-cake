@@ -3,7 +3,7 @@ module uim.cake.datasources.Paging;
 
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.datasources.Paging\Exception\PageOutOfBoundsException;
+import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
 import uim.cake.datasources.IQuery;
 import uim.cake.datasources.RepositoryInterface;
 import uim.cake.datasources.IResultSet;
@@ -148,7 +148,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $params Request params
      * @param array $settings The settings/configuration used for pagination.
      * @return uim.cake.Datasource\IResultSet Query results
-     * @throws uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException
+     * @throws uim.cake.Datasource\Paging\exceptions.PageOutOfBoundsException
      */
     function paginate(object $object, array $params = [], array $settings = []): IResultSet
     {

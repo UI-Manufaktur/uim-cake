@@ -11,7 +11,7 @@ interface SchemaInterface
      *
      * @return string
      */
-    function name(): string;
+    string name(): string;
 
     /**
      * Add a column to the table.

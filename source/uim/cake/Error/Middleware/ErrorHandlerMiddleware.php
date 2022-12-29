@@ -14,7 +14,7 @@ import uim.cake.core.InstanceConfigTrait;
 import uim.cake.errors.ErrorHandler;
 import uim.cake.errors.ExceptionTrap;
 import uim.cake.errors.Renderer\WebExceptionRenderer;
-import uim.cake.http.Exception\RedirectException;
+import uim.cake.http.exceptions.RedirectException;
 import uim.cake.http.Response;
 use InvalidArgumentException;
 use Laminas\Diactoros\Response\RedirectResponse;
@@ -166,7 +166,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Convert a redirect exception into a response.
      *
-     * @param uim.cake.http.Exception\RedirectException $exception The exception to handle
+     * @param uim.cake.http.exceptions.RedirectException $exception The exception to handle
      * @return \Psr\Http\Message\IResponse Response created from the redirect.
      */
     function handleRedirect(RedirectException $exception): IResponse

@@ -55,7 +55,7 @@ class ClassNode : NodeInterface
      *
      * @return string
      */
-    function getValue(): string
+    string getValue(): string
     {
         return this.class;
     }

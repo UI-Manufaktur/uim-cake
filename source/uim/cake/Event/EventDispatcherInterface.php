@@ -14,7 +14,7 @@ module uim.cake.Event;
  * Objects with this interface can trigger events, and have
  * an event manager retrieved from them.
  *
- * The {@link uim.cake.Event\EventDispatcherTrait} lets you easily implement
+ * The {@link uim.cake.events.EventDispatcherTrait} lets you easily implement
  * this interface.
  */
 interface EventDispatcherInterface
@@ -29,25 +29,25 @@ interface EventDispatcherInterface
      * it can be read by listeners.
      * @param object|null $subject The object that this event applies to
      * (this by default).
-     * @return uim.cake.Event\EventInterface
+     * @return uim.cake.events.EventInterface
      */
     function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface;
 
     /**
-     * Sets the Cake\Event\EventManager manager instance for this object.
+     * Sets the Cake\events.EventManager manager instance for this object.
      *
      * You can use this instance to register any new listeners or callbacks to the
      * object events, or create your own events and trigger them at will.
      *
-     * @param uim.cake.Event\IEventManager $eventManager the eventManager to set
+     * @param uim.cake.events.IEventManager $eventManager the eventManager to set
      * @return this
      */
     function setEventManager(IEventManager $eventManager);
 
     /**
-     * Returns the Cake\Event\EventManager manager instance for this object.
+     * Returns the Cake\events.EventManager manager instance for this object.
      *
-     * @return uim.cake.Event\IEventManager
+     * @return uim.cake.events.IEventManager
      */
     function getEventManager(): IEventManager;
 }

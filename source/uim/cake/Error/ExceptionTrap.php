@@ -45,7 +45,7 @@ class ExceptionTrap
      * - `skipLog` - array - List of exceptions to skip for logging. Exceptions that
      *   extend one of the listed exceptions will also not be logged. E.g.:
      *   ```
-     *   "skipLog": ["Cake\Http\Exception\NotFoundException", "Cake\Http\Exception\UnauthorizedException"]
+     *   "skipLog": ["Cake\Http\exceptions.NotFoundException", "Cake\Http\exceptions.UnauthorizedException"]
      *   ```
      *   This option is forwarded to the configured `logger`
      * - `extraFatalErrorMemory` - int - The number of megabytes to increase the memory limit by when a fatal error is

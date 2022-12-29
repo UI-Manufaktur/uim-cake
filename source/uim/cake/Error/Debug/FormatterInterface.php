@@ -21,7 +21,7 @@ interface FormatterInterface
      * @param uim.cake.Error\Debug\NodeInterface $node The node tree to dump.
      * @return string
      */
-    function dump(NodeInterface $node): string;
+    string dump(NodeInterface $node): string;
 
     /**
      * Output a dump wrapper with location context.
@@ -30,5 +30,5 @@ interface FormatterInterface
      * @param array $location The file and line the contents came from.
      * @return string
      */
-    function formatWrapper(string $contents, array $location): string;
+    string formatWrapper(string $contents, array $location): string;
 }

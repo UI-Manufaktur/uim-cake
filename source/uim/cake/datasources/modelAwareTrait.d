@@ -10,7 +10,7 @@ import uim.cake;
  * Example users of this trait are Cake\Controller\Controller and
  * Cake\Console\Shell.
  *
- * @deprecated 4.3.0 Use `Cake\ORM\Locator\LocatorAwareTrait` instead.
+ * @deprecated 4.3.0 Use `Cake\orm.Locator\LocatorAwareTrait` instead.
  */
 trait ModelAwareTrait
 {
@@ -26,7 +26,7 @@ trait ModelAwareTrait
      * controller name.
      *
      * @var string|null
-     * @deprecated 4.3.0 Use `Cake\ORM\Locator\LocatorAwareTrait::$defaultTable` instead.
+     * @deprecated 4.3.0 Use `Cake\orm.Locator\LocatorAwareTrait::$defaultTable` instead.
      */
     protected myModelClass;
 
@@ -68,7 +68,7 @@ trait ModelAwareTrait
      *  The name can be an alias like `"Post"` or FQCN like `App\Model\Table\PostsTable::class`.
      * @param string|null myModelType The type of repository to load. Defaults to the getModelType() value.
      * @return uim.cake.Datasource\IRepository The model instance created.
-     * @throws uim.cake.Datasource\Exception\MissingModelException If the model class cannot be found.
+     * @throws uim.cake.Datasource\exceptions.MissingModelException If the model class cannot be found.
      * @throws \UnexpectedValueException If myModelClass argument is not provided
      *   and ModelAwareTrait::myModelClass property value is empty.
      * @deprecated 4.3.0 Use `LocatorAwareTrait::fetchTable()` instead.

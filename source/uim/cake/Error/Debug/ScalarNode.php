@@ -39,7 +39,7 @@ class ScalarNode : NodeInterface
      *
      * @return string
      */
-    function getType(): string
+    string getType(): string
     {
         return this.type;
     }

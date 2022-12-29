@@ -121,7 +121,7 @@ class PhpError
      *
      * @return string
      */
-    function getLabel(): string
+    string getLabel(): string
     {
         return this.levelMap[this.code] ?? "error";
     }
@@ -131,7 +131,7 @@ class PhpError
      *
      * @return string
      */
-    function getMessage(): string
+    string getMessage(): string
     {
         return this.message;
     }
@@ -171,7 +171,7 @@ class PhpError
      *
      * @return string
      */
-    function getTraceAsString(): string
+    string getTraceAsString(): string
     {
         $out = [];
         foreach (this.trace as $frame) {

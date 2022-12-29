@@ -68,7 +68,7 @@ trait QueryTrait
      * Set the default Table object that will be used by this query
      * and form the `FROM` clause.
      *
-     * @param uim.cake.Datasource\IRepository|uim.cake.ORM\Table myRepository The default table object to use
+     * @param uim.cake.Datasource\IRepository|uim.cake.orm.Table myRepository The default table object to use
      * @return this
      */
     function repository(IRepository myRepository) {
@@ -459,7 +459,7 @@ trait QueryTrait
     /**
      * Get the first result from the executing query or raise an exception.
      *
-     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When there is no first record.
+     * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When there is no first record.
      * @return uim.cake.Datasource\IEntity|array The first result from the ResultSet.
      */
     function firstOrFail() {

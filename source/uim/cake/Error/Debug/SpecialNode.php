@@ -32,7 +32,7 @@ class SpecialNode : NodeInterface
      *
      * @return string
      */
-    function getValue(): string
+    string getValue(): string
     {
         return this.value;
     }

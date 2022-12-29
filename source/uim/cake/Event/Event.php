@@ -14,7 +14,7 @@ import uim.cake.core.exceptions.CakeException;
  * Class Event
  *
  * @template TSubject
- * @implements uim.cake.Event\EventInterface<TSubject>
+ * @implements uim.cake.events.EventInterface<TSubject>
  */
 class Event : EventInterface
 {
@@ -84,7 +84,7 @@ class Event : EventInterface
      *
      * @return string
      */
-    function getName(): string
+    string getName(): string
     {
         return _name;
     }
@@ -95,7 +95,7 @@ class Event : EventInterface
      * If the event has no subject an exception will be raised.
      *
      * @return object
-     * @throws uim.cake.Core\Exception\CakeException
+     * @throws uim.cake.Core\exceptions.CakeException
      * @psalm-return TSubject
      */
     function getSubject() {

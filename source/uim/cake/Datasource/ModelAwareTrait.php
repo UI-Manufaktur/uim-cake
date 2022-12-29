@@ -1,7 +1,7 @@
 
 module uim.cake.Datasource;
 
-import uim.cake.datasources.Exception\MissingModelException;
+import uim.cake.datasources.exceptions.MissingModelException;
 import uim.cake.datasources.Locator\ILocator;
 use InvalidArgumentException;
 use UnexpectedValueException;
@@ -13,7 +13,7 @@ use UnexpectedValueException;
  * Example users of this trait are Cake\Controller\Controller and
  * Cake\Console\Shell.
  *
- * @deprecated 4.3.0 Use `Cake\ORM\Locator\LocatorAwareTrait` instead.
+ * @deprecated 4.3.0 Use `Cake\orm.Locator\LocatorAwareTrait` instead.
  */
 trait ModelAwareTrait
 {
@@ -29,7 +29,7 @@ trait ModelAwareTrait
      * controller name.
      *
      * @var string|null
-     * @deprecated 4.3.0 Use `Cake\ORM\Locator\LocatorAwareTrait::$defaultTable` instead.
+     * @deprecated 4.3.0 Use `Cake\orm.Locator\LocatorAwareTrait::$defaultTable` instead.
      */
     protected $modelClass;
 
@@ -75,7 +75,7 @@ trait ModelAwareTrait
      *  The name can be an alias like `"Post"` or FQCN like `App\Model\Table\PostsTable::class`.
      * @param string|null $modelType The type of repository to load. Defaults to the getModelType() value.
      * @return uim.cake.Datasource\RepositoryInterface The model instance created.
-     * @throws uim.cake.Datasource\Exception\MissingModelException If the model class cannot be found.
+     * @throws uim.cake.Datasource\exceptions.MissingModelException If the model class cannot be found.
      * @throws \UnexpectedValueException If $modelClass argument is not provided
      *   and ModelAwareTrait::$modelClass property value is empty.
      * @deprecated 4.3.0 Use `LocatorAwareTrait::fetchTable()` instead.
@@ -145,7 +145,7 @@ trait ModelAwareTrait
      *
      * @return string
      */
-    function getModelType(): string
+    string getModelType(): string
     {
         return _modelType;
     }

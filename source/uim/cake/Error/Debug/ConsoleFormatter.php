@@ -93,7 +93,7 @@ class ConsoleFormatter : FormatterInterface
      * @param uim.cake.Error\Debug\NodeInterface $node The node tree to dump.
      * @return string
      */
-    function dump(NodeInterface $node): string
+    string dump(NodeInterface $node): string
     {
         $indent = 0;
 

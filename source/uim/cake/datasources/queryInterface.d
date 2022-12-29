@@ -18,7 +18,7 @@ interface IQuery {
      * If `true` is passed in the second argument, any previous selections will
      * be overwritten with the list passed in the first argument.
      *
-     * @param uim.cake.Database\IExpression|uim.cake.ORM\Association|uim.cake.ORM\Table|callable|array|string myFields Fields.
+     * @param uim.cake.Database\IExpression|uim.cake.orm.Association|uim.cake.orm.Table|callable|array|string myFields Fields.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */

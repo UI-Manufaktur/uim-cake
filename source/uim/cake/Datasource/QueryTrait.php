@@ -3,7 +3,7 @@ module uim.cake.Datasource;
 
 use BadMethodCallException;
 import uim.cake.Collection\Iterator\MapReduce;
-import uim.cake.datasources.Exception\RecordNotFoundException;
+import uim.cake.datasources.exceptions.RecordNotFoundException;
 use InvalidArgumentException;
 use Traversable;
 
@@ -72,7 +72,7 @@ trait QueryTrait
      * Set the default Table object that will be used by this query
      * and form the `FROM` clause.
      *
-     * @param uim.cake.Datasource\RepositoryInterface|uim.cake.ORM\Table $repository The default table object to use
+     * @param uim.cake.Datasource\RepositoryInterface|uim.cake.orm.Table $repository The default table object to use
      * @return this
      */
     function repository(RepositoryInterface $repository) {
@@ -475,7 +475,7 @@ trait QueryTrait
     /**
      * Get the first result from the executing query or raise an exception.
      *
-     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When there is no first record.
+     * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When there is no first record.
      * @return uim.cake.Datasource\EntityInterface|array The first result from the ResultSet.
      */
     function firstOrFail() {

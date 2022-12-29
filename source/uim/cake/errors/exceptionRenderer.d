@@ -37,7 +37,7 @@ class ExceptionRenderer : IExceptionRenderer
     protected controller;
 
     /**
-     * Template to render for {@link uim.cake.Core\Exception\CakeException}
+     * Template to render for {@link uim.cake.Core\exceptions.CakeException}
      */
     protected string myTemplate = "";
 
