@@ -85,9 +85,7 @@ class EventManager : IEventManager
         return static::$_generalManager;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function on($eventKey, $options = [], ?callable $callable = null) {
         if ($eventKey instanceof IEventListener) {
             _attachSubscriber($eventKey);
@@ -162,9 +160,7 @@ class EventManager : IEventManager
         return [$method, $options];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function off($eventKey, $callable = null) {
         if ($eventKey instanceof IEventListener) {
             _detachSubscriber($eventKey);
@@ -246,9 +242,7 @@ class EventManager : IEventManager
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function dispatch($event): EventInterface
     {
         if (is_string($event)) {
@@ -298,9 +292,7 @@ class EventManager : IEventManager
         return $listener($event, ...array_values($data));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function listeners(string $eventKey): array
     {
         $localListeners = [];

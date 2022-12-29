@@ -20,9 +20,7 @@ class MysqlStatement : PDOStatement
 {
     use BufferResultsTrait;
 
-    /**
-     * @inheritDoc
-     */
+
     function execute(?array $params = null): bool
     {
         $connection = _driver.getConnection();

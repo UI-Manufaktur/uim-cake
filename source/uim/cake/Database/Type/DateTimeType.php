@@ -258,9 +258,7 @@ class DateTimeType : BaseType : BatchCastingInterface
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function manyToPHP(array $values, array $fields, DriverInterface $driver): array
     {
         foreach ($fields as $field) {

@@ -69,24 +69,18 @@ abstract class AbstractLocator : ILocator
      */
     abstract protected function createInstance(string $alias, array $options);
 
-    /**
-     * @inheritDoc
-     */
+
     function set(string $alias, RepositoryInterface $repository) {
         return this.instances[$alias] = $repository;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function exists(string $alias): bool
     {
         return isset(this.instances[$alias]);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function remove(string $alias): void
     {
         unset(
@@ -95,9 +89,7 @@ abstract class AbstractLocator : ILocator
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function clear(): void
     {
         this.instances = [];

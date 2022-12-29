@@ -72,9 +72,7 @@ class PropertyNode : NodeInterface
         return this.name;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getChildren(): array
     {
         return [this.value];

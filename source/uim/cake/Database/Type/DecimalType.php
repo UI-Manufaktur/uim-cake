@@ -84,9 +84,7 @@ class DecimalType : BaseType : BatchCastingInterface
         return (string)$value;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function manyToPHP(array $values, array $fields, DriverInterface $driver): array
     {
         foreach ($fields as $field) {

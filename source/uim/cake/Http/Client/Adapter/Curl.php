@@ -34,9 +34,7 @@ use Psr\Http\Message\RequestInterface;
  */
 class Curl : AdapterInterface
 {
-    /**
-     * @inheritDoc
-     */
+
     function send(RequestInterface $request, array $options): array
     {
         if (!extension_loaded("curl")) {

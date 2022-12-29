@@ -59,9 +59,7 @@ class ReferenceNode : NodeInterface
         return this.id;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getChildren(): array
     {
         return [];

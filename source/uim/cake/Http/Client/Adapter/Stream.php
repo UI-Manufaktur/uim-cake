@@ -65,9 +65,7 @@ class Stream : AdapterInterface
      */
     protected $_connectionErrors = [];
 
-    /**
-     * @inheritDoc
-     */
+
     function send(RequestInterface $request, array $options): array
     {
         _stream = null;

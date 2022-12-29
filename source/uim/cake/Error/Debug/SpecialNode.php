@@ -38,9 +38,7 @@ class SpecialNode : NodeInterface
         return this.value;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getChildren(): array
     {
         return [];

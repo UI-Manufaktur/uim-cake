@@ -101,9 +101,7 @@ abstract class BaseApplication implements
      */
     abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 
-    /**
-     * @inheritDoc
-     */
+
     function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue
     {
         foreach (this.plugins.with("middleware") as $plugin) {
@@ -113,9 +111,7 @@ abstract class BaseApplication implements
         return $middleware;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function addPlugin($name, array $config = []) {
         if (is_string($name)) {
             $plugin = this.plugins.create($name, $config);
@@ -156,17 +152,13 @@ abstract class BaseApplication implements
         return this.plugins;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function bootstrap(): void
     {
         require_once this.configDir . "bootstrap.php";
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function pluginBootstrap(): void
     {
         foreach (this.plugins.with("bootstrap") as $plugin) {
@@ -193,9 +185,7 @@ abstract class BaseApplication implements
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function pluginRoutes(RouteBuilder $routes): RouteBuilder
     {
         foreach (this.plugins.with("routes") as $plugin) {
@@ -219,9 +209,7 @@ abstract class BaseApplication implements
         return $commands.addMany($commands.autoDiscover());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function pluginConsole(CommandCollection $commands): CommandCollection
     {
         foreach (this.plugins.with("console") as $plugin) {

@@ -53,9 +53,7 @@ class ArrayItemNode : NodeInterface
         return this.key;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getChildren(): array
     {
         return [this.value];

@@ -54,9 +54,7 @@ class ScalarNode : NodeInterface
         return this.value;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getChildren(): array
     {
         return [];

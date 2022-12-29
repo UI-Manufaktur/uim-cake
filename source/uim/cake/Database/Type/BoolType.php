@@ -63,9 +63,7 @@ class BoolType : BaseType : BatchCastingInterface
         return !empty($value);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function manyToPHP(array $values, array $fields, DriverInterface $driver): array
     {
         foreach ($fields as $field) {

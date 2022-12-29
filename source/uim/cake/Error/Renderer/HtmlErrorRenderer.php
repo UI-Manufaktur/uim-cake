@@ -20,18 +20,14 @@ import uim.cake.errors.PhpError;
  */
 class HtmlErrorRenderer : ErrorRendererInterface
 {
-    /**
-     * @inheritDoc
-     */
+
     function write(string $out): void
     {
         // Output to stdout which is the server response.
         echo $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function render(PhpError $error, bool $debug): string
     {
         if (!$debug) {

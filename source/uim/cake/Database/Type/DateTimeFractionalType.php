@@ -14,14 +14,10 @@ module uim.cake.databases.Type;
  */
 class DateTimeFractionalType : DateTimeType
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_format = "Y-m-d H:i:s.u";
 
-    /**
-     * @inheritDoc
-     */
+
     protected $_marshalFormats = [
         "Y-m-d H:i",
         "Y-m-d H:i:s",

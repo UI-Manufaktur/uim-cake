@@ -19,17 +19,13 @@ import uim.cake.errors.PhpError;
  */
 class TextErrorRenderer : ErrorRendererInterface
 {
-    /**
-     * @inheritDoc
-     */
+
     function write(string $out): void
     {
         echo $out;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function render(PhpError $error, bool $debug): string
     {
         if (!$debug) {

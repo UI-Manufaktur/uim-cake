@@ -18,9 +18,7 @@ class SqliteStatement : StatementDecorator
 {
     use BufferResultsTrait;
 
-    /**
-     * @inheritDoc
-     */
+
     function execute(?array $params = null): bool
     {
         if (_statement instanceof BufferedStatement) {

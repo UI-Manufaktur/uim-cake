@@ -26,9 +26,7 @@ use RuntimeException;
  */
 class ConditionDecorator : AbstractDecorator
 {
-    /**
-     * @inheritDoc
-     */
+
     function __invoke() {
         $args = func_get_args();
         if (!this.canTrigger($args[0])) {

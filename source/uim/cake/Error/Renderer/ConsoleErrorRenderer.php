@@ -45,17 +45,13 @@ class ConsoleErrorRenderer : ErrorRendererInterface
         this.trace = (bool)($config["trace"] ?? false);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function write(string $out): void
     {
         this.output.write($out);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function render(PhpError $error, bool $debug): string
     {
         $trace = "";

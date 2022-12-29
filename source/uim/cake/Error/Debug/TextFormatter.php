@@ -21,9 +21,7 @@ use RuntimeException;
  */
 class TextFormatter : FormatterInterface
 {
-    /**
-     * @inheritDoc
-     */
+
     function formatWrapper(string $contents, array $location): string
     {
         $template = <<<TEXT

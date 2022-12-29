@@ -70,9 +70,7 @@ class ConsoleFormatter : FormatterInterface
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function formatWrapper(string $contents, array $location): string
     {
         $lineInfo = "";

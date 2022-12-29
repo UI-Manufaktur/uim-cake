@@ -95,65 +95,47 @@ class Uri : UriInterface
         return this.webroot;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getScheme() {
         return this.uri.getScheme();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getAuthority() {
         return this.uri.getAuthority();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getUserInfo() {
         return this.uri.getUserInfo();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getHost() {
         return this.uri.getHost();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getPort() {
         return this.uri.getPort();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getPath() {
         return this.uri.getPath();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getQuery() {
         return this.uri.getQuery();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getFragment() {
         return this.uri.getFragment();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withScheme($scheme) {
         $new = clone this;
         $new.uri = this.uri.withScheme($scheme);
@@ -161,9 +143,7 @@ class Uri : UriInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withUserInfo($user, $password = null) {
         $new = clone this;
         $new.uri = this.uri.withUserInfo($user, $password);
@@ -171,9 +151,7 @@ class Uri : UriInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withHost($host) {
         $new = clone this;
         $new.uri = this.uri.withHost($host);
@@ -181,9 +159,7 @@ class Uri : UriInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withPort($port) {
         $new = clone this;
         $new.uri = this.uri.withPort($port);
@@ -191,9 +167,7 @@ class Uri : UriInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withPath($path) {
         $new = clone this;
         $new.uri = this.uri.withPath($path);
@@ -201,9 +175,7 @@ class Uri : UriInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withQuery($query) {
         $new = clone this;
         $new.uri = this.uri.withQuery($query);
@@ -211,9 +183,7 @@ class Uri : UriInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function withFragment($fragment) {
         $new = clone this;
         $new.uri = this.uri.withFragment($fragment);
@@ -221,9 +191,7 @@ class Uri : UriInterface
         return $new;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function __toString() {
         return this.uri.__toString();
     }

@@ -21,14 +21,10 @@ use DateTimeInterface;
  */
 class DateType : DateTimeType
 {
-    /**
-     * @inheritDoc
-     */
+
     protected $_format = "Y-m-d";
 
-    /**
-     * @inheritDoc
-     */
+
     protected $_marshalFormats = [
         "Y-m-d",
     ];
@@ -41,9 +37,7 @@ class DateType : DateTimeType
      */
     protected $setToDateStart = true;
 
-    /**
-     * @inheritDoc
-     */
+
     public this(?string $name = null) {
         super(($name);
 
@@ -102,9 +96,7 @@ class DateType : DateTimeType
         return $date;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _parseLocaleValue(string $value): ?I18nDateTimeInterface
     {
         /** @psalm-var class-string<\Cake\I18n\I18nDateTimeInterface> $class */
