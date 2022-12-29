@@ -123,7 +123,7 @@ class Response : Message : IResponse
      * @param array $headers Unparsed headers.
      * @param string $body The response body.
      */
-    public this(array $headers = [], string $body = "") {
+    this(array $headers = [], string $body = "") {
         _parseHeaders($headers);
         if (this.getHeaderLine("Content-Encoding") == "gzip") {
             $body = _decodeGzipBody($body);
@@ -374,7 +374,7 @@ class Response : Message : IResponse
         this.buildCookieCollection();
 
         $out = [];
-        /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
+        /** @var array<uim.cake.Http\Cookie\Cookie> $cookies */
         $cookies = this.cookies;
         foreach ($cookies as $cookie) {
             $out[$cookie.getName()] = $cookie.toArray();

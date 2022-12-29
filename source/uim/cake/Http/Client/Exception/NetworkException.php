@@ -39,7 +39,7 @@ class NetworkException : RuntimeException : NetworkExceptionInterface
      * @param \Psr\Http\Message\RequestInterface $request Request instance.
      * @param \Throwable|null $previous Previous Exception
      */
-    public this(string $message, RequestInterface $request, ?Throwable $previous = null) {
+    this(string $message, RequestInterface $request, ?Throwable $previous = null) {
         this.request = $request;
         super(($message, 0, $previous);
     }

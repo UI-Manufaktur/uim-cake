@@ -78,7 +78,7 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * @var int
      */
-    public const TOKEN_VALUE_LENGTH = 16;
+    const TOKEN_VALUE_LENGTH = 16;
 
     /**
      * Tokens have an hmac generated so we can ensure
@@ -91,14 +91,14 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @var int
      */
-    public const TOKEN_WITH_CHECKSUM_LENGTH = 56;
+    const TOKEN_WITH_CHECKSUM_LENGTH = 56;
 
     /**
      * Constructor
      *
      * @param array<string, mixed> $config Config options. See $_config for valid keys.
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         if (array_key_exists("httpOnly", $config)) {
             $config["httponly"] = $config["httpOnly"];
             deprecationWarning("Option `httpOnly` is deprecated. Use lowercased `httponly` instead.");

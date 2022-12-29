@@ -18,7 +18,7 @@ import uim.cake.http.Client\Request;
 /**
  * Basic authentication adapter for Cake\Http\Client
  *
- * Generally not directly constructed, but instead used by {@link \Cake\Http\Client}
+ * Generally not directly constructed, but instead used by {@link uim.cake.Http\Client}
  * when $options["auth"]["type"] is "basic"
  */
 class Basic

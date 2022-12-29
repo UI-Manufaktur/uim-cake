@@ -26,7 +26,7 @@ use Psr\Http\Message\RequestInterface;
 /**
  * : sending Cake\Http\Client\Request via ext/curl.
  *
- * In addition to the standard options documented in {@link \Cake\Http\Client},
+ * In addition to the standard options documented in {@link uim.cake.Http\Client},
  * this adapter supports all available curl options. Additional curl options
  * can be set via the `curl` option key when making requests or configuring
  * a client.
@@ -189,7 +189,7 @@ class Curl : AdapterInterface
      *
      * @param resource|\CurlHandle $handle Curl handle
      * @param string $responseData string The response data from curl_exec
-     * @return array<\Cake\Http\Client\Response>
+     * @return array<uim.cake.Http\Client\Response>
      * @psalm-suppress UndefinedDocblockClass
      */
     protected function createResponse($handle, $responseData): array

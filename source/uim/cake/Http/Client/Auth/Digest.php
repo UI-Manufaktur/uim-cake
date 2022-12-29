@@ -19,7 +19,7 @@ import uim.cake.http.Client\Request;
 /**
  * Digest authentication adapter for Cake\Http\Client
  *
- * Generally not directly constructed, but instead used by {@link \Cake\Http\Client}
+ * Generally not directly constructed, but instead used by {@link uim.cake.Http\Client}
  * when $options["auth"]["type"] is "digest"
  */
 class Digest
@@ -37,7 +37,7 @@ class Digest
      * @param uim.cake.http.Client $client Http client object.
      * @param array|null $options Options list.
      */
-    public this(Client $client, ?array $options = null) {
+    this(Client $client, ?array $options = null) {
         _client = $client;
     }
 

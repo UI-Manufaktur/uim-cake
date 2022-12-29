@@ -26,7 +26,7 @@ class InternalErrorException : HttpException
      * @param int|null $code Status code, defaults to 500
      * @param \Throwable|null $previous The previous exception.
      */
-    public this(?string $message = null, ?int $code = null, ?Throwable $previous = null) {
+    this(?string $message = null, ?int $code = null, ?Throwable $previous = null) {
         if (empty($message)) {
             $message = "Internal Server Error";
         }

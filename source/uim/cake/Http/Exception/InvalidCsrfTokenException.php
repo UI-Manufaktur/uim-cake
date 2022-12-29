@@ -8,7 +8,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
 
- * @since         3.1.0
+
   */
 module uim.cake.http.Exception;
 
@@ -29,7 +29,7 @@ class InvalidCsrfTokenException : HttpException
      * @param int|null $code Status code, defaults to 403
      * @param \Throwable|null $previous The previous exception.
      */
-    public this(?string $message = null, ?int $code = null, ?Throwable $previous = null) {
+    this(?string $message = null, ?int $code = null, ?Throwable $previous = null) {
         if (empty($message)) {
             $message = "Invalid CSRF Token";
         }

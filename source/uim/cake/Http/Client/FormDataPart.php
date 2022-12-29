@@ -90,7 +90,7 @@ class FormDataPart
      * @param string $disposition The type of disposition to use, defaults to form-data.
      * @param string|null $charset The charset of the data.
      */
-    public this(string $name, string $value, string $disposition = "form-data", ?string $charset = null) {
+    this(string $name, string $value, string $disposition = "form-data", ?string $charset = null) {
         _name = $name;
         _value = $value;
         _disposition = $disposition;

@@ -38,7 +38,7 @@ class Request : Message : RequestInterface
      * @param array $headers The HTTP headers to set.
      * @param array|string|null $data The request body to use.
      */
-    public this(string $url = "", string $method = self::METHOD_GET, array $headers = [], $data = null) {
+    this(string $url = "", string $method = self::METHOD_GET, array $headers = [], $data = null) {
         this.setMethod($method);
         this.uri = this.createUri($url);
         $headers += [
@@ -73,7 +73,7 @@ class Request : Message : RequestInterface
     /**
      * Set the body/payload for the message.
      *
-     * Array data will be serialized with {@link \Cake\Http\FormData},
+     * Array data will be serialized with {@link uim.cake.Http\FormData},
      * and the content-type will be set.
      *
      * @param array|string $content The body for the request.

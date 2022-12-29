@@ -38,16 +38,16 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Cookie objects
      *
-     * @var array<\Cake\Http\Cookie\CookieInterface>
+     * @var array<uim.cake.Http\Cookie\CookieInterface>
      */
     protected $cookies = [];
 
     /**
      * Constructor
      *
-     * @param array<\Cake\Http\Cookie\CookieInterface> $cookies Array of cookie objects
+     * @param array<uim.cake.Http\Cookie\CookieInterface> $cookies Array of cookie objects
      */
-    public this(array $cookies = []) {
+    this(array $cookies = []) {
         this.checkCookies($cookies);
         foreach ($cookies as $cookie) {
             this.cookies[$cookie.getId()] = $cookie;
@@ -61,7 +61,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param array<string, mixed> $defaults The defaults attributes.
      * @return static
      */
-    public static function createFromHeader(array $header, array $defaults = []) {
+    static function createFromHeader(array $header, array $defaults = []) {
         $cookies = [];
         foreach ($header as $value) {
             try {
@@ -80,7 +80,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param \Psr\Http\Message\IServerRequest $request The request to extract cookie data from
      * @return static
      */
-    public static function createFromServerRequest(IServerRequest $request) {
+    static function createFromServerRequest(IServerRequest $request) {
         $data = $request.getCookieParams();
         $cookies = [];
         foreach ($data as $name: $value) {
@@ -182,7 +182,7 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Checks if only valid cookie objects are in the array
      *
-     * @param array<\Cake\Http\Cookie\CookieInterface> $cookies Array of cookie objects
+     * @param array<uim.cake.Http\Cookie\CookieInterface> $cookies Array of cookie objects
      * @return void
      * @throws \InvalidArgumentException
      */
@@ -205,7 +205,7 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Gets the iterator
      *
-     * @return \Traversable<string, \Cake\Http\Cookie\CookieInterface>
+     * @return \Traversable<string, uim.cake.Http\Cookie\CookieInterface>
      */
     function getIterator(): Traversable
     {

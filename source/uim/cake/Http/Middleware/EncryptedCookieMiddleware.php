@@ -25,7 +25,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * times.
  *
  * Cookies in request data will be decrypted, while cookies in response headers will
- * be encrypted automatically. If the response is a {@link \Cake\Http\Response}, the cookie
+ * be encrypted automatically. If the response is a {@link uim.cake.Http\Response}, the cookie
  * data set with `withCookie()` and `cookie()`` will also be encrypted.
  *
  * The encryption types and padding are compatible with those used by CookieComponent
@@ -63,7 +63,7 @@ class EncryptedCookieMiddleware : IMiddleware
      * @param string $key The encryption key to use.
      * @param string $cipherType The cipher type to use. Defaults to "aes".
      */
-    public this(array $cookieNames, string $key, string $cipherType = "aes") {
+    this(array $cookieNames, string $key, string $cipherType = "aes") {
         this.cookieNames = $cookieNames;
         this.key = $key;
         this.cipherType = $cipherType;
@@ -131,7 +131,7 @@ class EncryptedCookieMiddleware : IMiddleware
      */
     protected function encodeCookies(Response $response): Response
     {
-        /** @var array<\Cake\Http\Cookie\CookieInterface> $cookies */
+        /** @var array<uim.cake.Http\Cookie\CookieInterface> $cookies */
         $cookies = $response.getCookieCollection();
         foreach ($cookies as $cookie) {
             if (in_array($cookie.getName(), this.cookieNames, true)) {
@@ -151,7 +151,7 @@ class EncryptedCookieMiddleware : IMiddleware
      */
     protected function encodeSetCookieHeader(IResponse $response): IResponse
     {
-        /** @var array<\Cake\Http\Cookie\CookieInterface> $cookies */
+        /** @var array<uim.cake.Http\Cookie\CookieInterface> $cookies */
         $cookies = CookieCollection::createFromHeader($response.getHeader("Set-Cookie"));
         $header = [];
         foreach ($cookies as $cookie) {

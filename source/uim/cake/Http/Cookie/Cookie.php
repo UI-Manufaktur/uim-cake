@@ -143,7 +143,7 @@ class Cookie : CookieInterface
      * @param bool|null $httpOnly HTTP Only
      * @param string|null $sameSite Samesite
      */
-    public this(
+    this(
         string $name,
         $value = "",
         ?DateTimeInterface $expiresAt = null,
@@ -193,7 +193,7 @@ class Cookie : CookieInterface
      * @param array<string, mixed> $options Default options.
      * @return void
      */
-    public static function setDefaults(array $options): void
+    static function setDefaults(array $options): void
     {
         if (isset($options["expires"])) {
             $options["expires"] = static::dateTimeInstance($options["expires"]);
@@ -214,7 +214,7 @@ class Cookie : CookieInterface
      * @return static
      * @see uim.cake.Cookie\Cookie::setDefaults()
      */
-    public static function create(string $name, $value, array $options = []) {
+    static function create(string $name, $value, array $options = []) {
         $options += static::$defaults;
         $options["expires"] = static::dateTimeInstance($options["expires"]);
 
@@ -273,7 +273,7 @@ class Cookie : CookieInterface
      * @return static
      * @see uim.cake.http.Cookie\Cookie::setDefaults()
      */
-    public static function createFromHeaderString(string $cookie, array $defaults = []) {
+    static function createFromHeaderString(string $cookie, array $defaults = []) {
         if (strpos($cookie, "";"") != false) {
             $cookie = str_replace("";"", "{__cookie_replace__}", $cookie);
             $parts = str_replace("{__cookie_replace__}", "";"", explode(";", $cookie));
