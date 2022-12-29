@@ -9,7 +9,7 @@
  *
 
 
- * @since         3.0.0
+
   */
 module uim.cake.Core;
 
