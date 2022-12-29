@@ -36,7 +36,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
      *
      * @param string helper The helper name to be loaded
      * @return bool whether the helper could be loaded or not
-     * @throws uim.cake.View\Exception\MissingHelperException When a helper could not be found.
+     * @throws uim.cake.View\exceptions.MissingHelperException When a helper could not be found.
      *    App helpers are searched, and then plugin helpers.
      */
     bool __isset(string helper) {
@@ -100,7 +100,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the helper is missing in.
-     * @throws uim.cake.View\Exception\MissingHelperException
+     * @throws uim.cake.View\exceptions.MissingHelperException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingHelperException([

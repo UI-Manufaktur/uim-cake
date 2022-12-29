@@ -455,9 +455,9 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param array<string, mixed> $vars The view variables/context to use.
      * @param uim.cake.http.ServerRequest|null myRequest The request to use.
      * @param uim.cake.http.Response|null $response The response to use.
-     * @param uim.cake.Event\IEventManager|null myEvents The event manager to use.
+     * @param uim.cake.events.IEventManager|null myEvents The event manager to use.
      * @return uim.cake.View\View
-     * @throws uim.cake.View\Exception\MissingViewException
+     * @throws uim.cake.View\exceptions.MissingViewException
      */
     function build(
         array $vars = [],
@@ -507,7 +507,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * There are  limitations for viewVars that are good to know:
      *
-     * - ORM\Query executed and stored as resultset
+     * - orm.Query executed and stored as resultset
      * - SimpleXMLElements stored as associative array
      * - Exceptions stored as strings
      * - Resources, \Closure and \PDO are not supported.

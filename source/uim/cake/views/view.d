@@ -15,7 +15,7 @@ import uim.cake;
  * View class supports using plugins as themes. You can set
  *
  * ```
- * function beforeRender(uim.cake.Event\IEvent myEvent)
+ * function beforeRender(uim.cake.events.IEvent myEvent)
  * {
  *      this.viewBuilder().setTheme("SuperHot");
  * }
@@ -238,7 +238,7 @@ class View : IEventDispatcher {
      *
      * @param uim.cake.http.ServerRequest|null myRequest Request instance.
      * @param uim.cake.http.Response|null $response Response instance.
-     * @param uim.cake.Event\EventManager|null myEventManager Event manager instance.
+     * @param uim.cake.events.EventManager|null myEventManager Event manager instance.
      * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
      *   options which get set as class properties.
      */
@@ -479,7 +479,7 @@ class View : IEventDispatcher {
      * - `plugin` - setting to false will force to use the application"s element from plugin templates, when the
      *   plugin has element with same name. Defaults to true
      * @return string Rendered Element
-     * @throws uim.cake.View\Exception\MissingElementException When an element is missing and `ignoreMissing`
+     * @throws uim.cake.View\exceptions.MissingElementException When an element is missing and `ignoreMissing`
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} myOptions
      */
@@ -589,7 +589,7 @@ class View : IEventDispatcher {
      * @param string|null myTemplate Name of template file to use
      * @param string|false|null $layout Layout to use. False to disable.
      * @return string Rendered content.
-     * @throws uim.cake.Core\Exception\CakeException If there is an error in the view.
+     * @throws uim.cake.Core\exceptions.CakeException If there is an error in the view.
      * @triggers View.beforeRender this, [myTemplateFileName]
      * @triggers View.afterRender this, [myTemplateFileName]
      */
@@ -638,7 +638,7 @@ class View : IEventDispatcher {
      * @param string myContents Content to render in a template, wrapped by the surrounding layout.
      * @param string|null $layout Layout name
      * @return string Rendered output.
-     * @throws uim.cake.Core\Exception\CakeException if there is an error in the view.
+     * @throws uim.cake.Core\exceptions.CakeException if there is an error in the view.
      * @triggers View.beforeLayout this, [$layoutFileName]
      * @triggers View.afterLayout this, [$layoutFileName]
      */
@@ -1120,7 +1120,7 @@ class View : IEventDispatcher {
      *
      * @param string|null myName Controller action to find template filename for
      * @return string Template filename
-     * @throws uim.cake.View\Exception\MissingTemplateException when a template file could not be found.
+     * @throws uim.cake.View\exceptions.MissingTemplateException when a template file could not be found.
      * @throws \RuntimeException When template name not provided.
      */
     protected string _getTemplateFileName(Nullable!string myName = null) {
@@ -1237,7 +1237,7 @@ class View : IEventDispatcher {
      *
      * @param string|null myName The name of the layout to find.
      * @return string Filename for layout file.
-     * @throws uim.cake.View\Exception\MissingLayoutException when a layout cannot be located
+     * @throws uim.cake.View\exceptions.MissingLayoutException when a layout cannot be located
      * @throws \RuntimeException
      */
     protected string _getLayoutFileName(Nullable!string myName = null) {

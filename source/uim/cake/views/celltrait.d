@@ -33,7 +33,7 @@ trait CellTrait {
      *    `cell("TagCloud::smallList", ["a1": "v1", "a2": "v2"])` maps to `View\Cell\TagCloud::smallList(v1, v2)`
      * @param array<string, mixed> myOptions Options for Cell"s constructor
      * @return uim.cake.View\Cell The cell instance
-     * @throws uim.cake.View\Exception\MissingCellException If Cell class was not found.
+     * @throws uim.cake.View\exceptions.MissingCellException If Cell class was not found.
      */
     protected Cell cell(string cell, array myData = [], array myOptions = []) {
         $parts = explode("::", $cell);

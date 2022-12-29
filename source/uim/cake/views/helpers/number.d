@@ -39,7 +39,7 @@ class NumberHelper : Helper
      *
      * @param uim.cake.View\View $view The View this helper is being attached to.
      * @param array<string, mixed> myConfig Configuration settings for the helper
-     * @throws uim.cake.Core\Exception\CakeException When the engine class could not be found.
+     * @throws uim.cake.Core\exceptions.CakeException When the engine class could not be found.
      */
     this(View $view, array myConfig = []) {
         super.this($view, myConfig);

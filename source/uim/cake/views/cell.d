@@ -75,7 +75,7 @@ abstract class Cell : IEventDispatcher
      *
      * @param uim.cake.http.ServerRequest myRequest The request to use in the cell.
      * @param uim.cake.http.Response $response The response to use in the cell.
-     * @param uim.cake.Event\IEventManager|null myEventManager The eventManager to bind events to.
+     * @param uim.cake.events.IEventManager|null myEventManager The eventManager to bind events to.
      * @param array<string, mixed> $cellOptions Cell options to apply.
      */
     this(
@@ -119,7 +119,7 @@ abstract class Cell : IEventDispatcher
      * @param string|null myTemplate Custom template name to render. If not provided (null), the last
      * value will be used. This value is automatically set by `CellTrait::cell()`.
      * @return string The rendered cell.
-     * @throws uim.cake.View\Exception\MissingCellTemplateException
+     * @throws uim.cake.View\exceptions.MissingCellTemplateException
      *   When a MissingTemplateException is raised during rendering.
      * @throws \BadMethodCallException
      */
