@@ -7,7 +7,7 @@
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+
 
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
