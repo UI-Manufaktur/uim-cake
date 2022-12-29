@@ -10,7 +10,7 @@
 module uim.cake.Routing;
 
 import uim.cake.cores.Configure;
-import uim.cake.Http\ServerRequest;
+import uim.cake.https.ServerRequest;
 import uim.cake.Routing\Exception\MissingRouteException;
 import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
@@ -176,7 +176,7 @@ class Router
      * Gets the named route patterns for use in config/routes.php
      *
      * @return array<string, string> Named route elements
-     * @see \Cake\Routing\Router::$_namedExpressions
+     * @see uim.cake.Routing\Router::$_namedExpressions
      */
     public static function getNamedExpressions(): array
     {
@@ -197,8 +197,8 @@ class Router
      *   custom routing class.
      * @return void
      * @throws \Cake\Core\Exception\CakeException
-     * @see \Cake\Routing\RouteBuilder::connect()
-     * @see \Cake\Routing\Router::scope()
+     * @see uim.cake.Routing\RouteBuilder::connect()
+     * @see uim.cake.Routing\Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
      */
     public static function connect($route, $defaults = [], $options = []): void
@@ -340,8 +340,8 @@ class Router
      *
      * @param array $url The URL array being modified.
      * @return array The modified URL.
-     * @see \Cake\Routing\Router::url()
-     * @see \Cake\Routing\Router::addUrlFilter()
+     * @see uim.cake.Routing\Router::url()
+     * @see uim.cake.Routing\Router::addUrlFilter()
      */
     protected static function _applyUrlFilters(array $url): array
     {

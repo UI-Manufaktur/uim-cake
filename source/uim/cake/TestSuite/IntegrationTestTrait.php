@@ -22,8 +22,8 @@ import uim.cake.errors.Renderer\WebExceptionRenderer;
 import uim.cake.events.EventInterface;
 import uim.cake.events.EventManager;
 import uim.cake.Form\FormProtector;
-import uim.cake.Http\Middleware\CsrfProtectionMiddleware;
-import uim.cake.Http\Session;
+import uim.cake.https.Middleware\CsrfProtectionMiddleware;
+import uim.cake.https.Session;
 import uim.cake.Routing\Router;
 import uim.cake.TestSuite\Constraint\Response\BodyContains;
 import uim.cake.TestSuite\Constraint\Response\BodyEmpty;
@@ -340,7 +340,7 @@ trait IntegrationTestTrait
      * @param string|null $key Encryption key used. Defaults
      *   to Security.salt.
      * @return void
-     * @see \Cake\Utility\CookieCryptTrait::_encrypt()
+     * @see uim.cake.Utility\CookieCryptTrait::_encrypt()
      */
     function cookieEncrypted(string $name, $value, $encrypt = "aes", $key = null): void
     {
@@ -1286,7 +1286,7 @@ trait IntegrationTestTrait
      *   to Security.salt.
      * @param string $message The failure message that will be appended to the generated message.
      * @return void
-     * @see \Cake\Utility\CookieCryptTrait::_encrypt()
+     * @see uim.cake.Utility\CookieCryptTrait::_encrypt()
      */
     function assertCookieEncrypted(
         $expected,

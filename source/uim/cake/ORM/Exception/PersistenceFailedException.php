@@ -11,7 +11,7 @@
  * @since         3.4.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Exception;
+module uim.cake.orm.Exception;
 
 import uim.cake.cores.exceptions.CakeException;
 import uim.cake.Datasource\EntityInterface;

@@ -958,7 +958,7 @@ class RouteBuilder
      * @param string $name The name of the middleware. Used when applying middleware to a scope.
      * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware The middleware to register.
      * @return this
-     * @see \Cake\Routing\RouteCollection
+     * @see uim.cake.Routing\RouteCollection
      */
     function registerMiddleware(string $name, $middleware) {
         _collection.registerMiddleware($name, $middleware);
@@ -974,7 +974,7 @@ class RouteBuilder
      * @param string ...$names The names of the middleware to apply to the current scope.
      * @return this
      * @throws \RuntimeException
-     * @see \Cake\Routing\RouteCollection::addMiddlewareToScope()
+     * @see uim.cake.Routing\RouteCollection::addMiddlewareToScope()
      */
     function applyMiddleware(string ...$names) {
         foreach ($names as $name) {

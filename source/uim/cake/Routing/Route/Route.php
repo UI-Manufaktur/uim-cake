@@ -9,7 +9,7 @@
  */
 module uim.cake.Routing\Route;
 
-import uim.cake.Http\Exception\BadRequestException;
+import uim.cake.https.Exception\BadRequestException;
 use InvalidArgumentException;
 use Psr\Http\Message\IServerRequest;
 

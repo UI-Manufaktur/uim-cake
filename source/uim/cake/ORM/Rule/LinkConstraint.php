@@ -7,11 +7,11 @@
 
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Rule;
+module uim.cake.orm.Rule;
 
 import uim.cake.Datasource\EntityInterface;
-import uim.cake.ORM\Association;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Association;
+import uim.cake.orm.Table;
 
 /**
  * Checks whether links to a given association exist / do not exist.

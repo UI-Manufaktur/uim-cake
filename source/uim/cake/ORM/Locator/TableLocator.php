@@ -7,15 +7,15 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Locator;
+module uim.cake.orm.Locator;
 
 import uim.cake.cores.App;
 import uim.cake.Datasource\ConnectionManager;
 import uim.cake.Datasource\Locator\AbstractLocator;
 import uim.cake.Datasource\RepositoryInterface;
-import uim.cake.ORM\AssociationCollection;
-import uim.cake.ORM\Exception\MissingTableClassException;
-import uim.cake.ORM\Table;
+import uim.cake.orm.AssociationCollection;
+import uim.cake.orm.Exception\MissingTableClassException;
+import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
 use RuntimeException;
 

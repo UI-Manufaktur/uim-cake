@@ -16,10 +16,10 @@ module uim.cake.TestSuite;
 
 import uim.cake.cores.IHttpApplication;
 import uim.cake.cores.IPluginApplication;
-import uim.cake.Http\FlashMessage;
-import uim.cake.Http\Server;
-import uim.cake.Http\ServerRequest;
-import uim.cake.Http\ServerRequestFactory;
+import uim.cake.https.FlashMessage;
+import uim.cake.https.Server;
+import uim.cake.https.ServerRequest;
+import uim.cake.https.ServerRequestFactory;
 import uim.cake.Routing\Router;
 import uim.cake.Routing\IRoutingApplication;
 use Psr\Http\Message\IResponse;

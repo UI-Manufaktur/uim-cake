@@ -19,10 +19,10 @@ import uim.cake.cores.Configure;
 import uim.cake.cores.Plugin;
 import uim.cake.Datasource\ConnectionManager;
 import uim.cake.events.EventManager;
-import uim.cake.Http\BaseApplication;
-import uim.cake.ORM\Entity;
-import uim.cake.ORM\Exception\MissingTableClassException;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.https.BaseApplication;
+import uim.cake.orm.Entity;
+import uim.cake.orm.Exception\MissingTableClassException;
+import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.Routing\Router;
 import uim.cake.TestSuite\Constraint\EventFired;
 import uim.cake.TestSuite\Constraint\EventFiredWith;
@@ -330,7 +330,7 @@ abstract class TestCase : BaseTestCase
      * Passing no parameters will cause all fixtures on the test case to load.
      *
      * @return void
-     * @see \Cake\TestSuite\TestCase::$autoFixtures
+     * @see uim.cake.TestSuite\TestCase::$autoFixtures
      * @throws \RuntimeException when no fixture manager is available.
      * @deprecated 4.3.0 Disabling auto-fixtures is deprecated and only available using FixtureInjector fixture system.
      */

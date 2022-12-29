@@ -9,7 +9,7 @@
  */
 module uim.cake.Routing\Route;
 
-import uim.cake.Http\Exception\RedirectException;
+import uim.cake.https.Exception\RedirectException;
 import uim.cake.Routing\Router;
 
 /**

@@ -14,7 +14,7 @@
  */
 module uim.cake.TestSuite\Constraint\Session;
 
-import uim.cake.Http\Session;
+import uim.cake.https.Session;
 import uim.cake.utilities.Hash;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;

@@ -7,11 +7,11 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Locator;
+module uim.cake.orm.Locator;
 
 import uim.cake.Datasource\Locator\ILocatoras BaseILocator;
 import uim.cake.Datasource\RepositoryInterface;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Table;
 
 /**
  * Registries for Table objects should implement this interface.

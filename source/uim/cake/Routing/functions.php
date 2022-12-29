@@ -18,7 +18,7 @@ if (!function_exists("urlArray")) {
      * @param array $params An array specifying any additional parameters.
      *   Can be also any special parameters supported by `Router::url()`.
      * @return array URL
-     * @see \Cake\Routing\Router::pathUrl()
+     * @see uim.cake.Routing\Router::pathUrl()
      */
     function urlArray(string $path, array $params = []): array
     {

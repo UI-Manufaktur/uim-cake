@@ -18,7 +18,7 @@ import uim.cake.Mailer\TransportFactory;
  *
  * Set this as the email transport to capture emails for later assertions
  *
- * @see \Cake\TestSuite\EmailTrait
+ * @see uim.cake.TestSuite\EmailTrait
  */
 class TestEmailTransport : DebugTransport
 {

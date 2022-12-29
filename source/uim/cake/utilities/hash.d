@@ -529,7 +529,7 @@ class Hash {
      * @return An array of strings extracted from `myPath` and formatted with `$format`
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::format
      * @see sprintf()
-     * @see \Cake\Utility\Hash::extract()
+     * @see uim.cake.Utility\Hash::extract()
      */
     static string[] format(array myData, string[] myPaths, string format) {
         $extracted = [];
@@ -609,7 +609,7 @@ class Hash {
      * @param array myData The data to check.
      * @param string myPath The path to check for.
      * @return bool Existence of path.
-     * @see \Cake\Utility\Hash::extract()
+     * @see uim.cake.Utility\Hash::extract()
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::check
      */
     static bool check(array myData, string myPath) {
@@ -1171,7 +1171,7 @@ class Hash {
      * @param array myData The data to nest.
      * @param array<string, mixed> myOptions Options are:
      * @return array<array> of results, nested
-     * @see \Cake\Utility\Hash::extract()
+     * @see uim.cake.Utility\Hash::extract()
      * @throws \InvalidArgumentException When providing invalid data.
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::nest
      */

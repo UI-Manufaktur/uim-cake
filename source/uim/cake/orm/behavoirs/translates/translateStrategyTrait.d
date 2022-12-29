@@ -67,8 +67,8 @@ trait TranslateStrategyTrait {
      * the currently configured global locale.
      *
      * @return string
-     * @see \Cake\I18n\I18n::locale()
-     * @see \Cake\ORM\Behavior\TranslateBehavior::locale()
+     * @see uim.cake.I18n\I18n::locale()
+     * @see uim.cake.ORM\Behavior\TranslateBehavior::locale()
      */
     string locale() {
         return this.locale ?: I18n::locale();

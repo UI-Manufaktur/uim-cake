@@ -146,7 +146,7 @@ class Router
      * Gets the named route patterns for use in config/routes.php
      *
      * @return Named route elements
-     * @see \Cake\Routing\Router::$_namedExpressions
+     * @see uim.cake.Routing\Router::$_namedExpressions
      */
     static STRINGAA getNamedExpressions() {
         return static::$_namedExpressions;
@@ -166,8 +166,8 @@ class Router
      *   custom routing class.
      * @return void
      * @throws \Cake\Core\Exception\CakeException
-     * @see \Cake\Routing\RouteBuilder::connect()
-     * @see \Cake\Routing\Router::scope()
+     * @see uim.cake.Routing\RouteBuilder::connect()
+     * @see uim.cake.Routing\Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
      */
     static void connect($route, $defaults = [], myOptions = []) {
@@ -304,8 +304,8 @@ class Router
      *
      * @param array myUrl The URL array being modified.
      * @return array The modified URL.
-     * @see \Cake\Routing\Router::url()
-     * @see \Cake\Routing\Router::addUrlFilter()
+     * @see uim.cake.Routing\Router::url()
+     * @see uim.cake.Routing\Router::addUrlFilter()
      */
     protected static auto _applyUrlFilters(array myUrl): array
     {

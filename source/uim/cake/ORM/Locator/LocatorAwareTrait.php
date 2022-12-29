@@ -7,10 +7,10 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.ORM\Locator;
+module uim.cake.orm.Locator;
 
 import uim.cake.Datasource\FactoryLocator;
-import uim.cake.ORM\Table;
+import uim.cake.orm.Table;
 use UnexpectedValueException;
 
 /**
@@ -69,7 +69,7 @@ trait LocatorAwareTrait
      *   If a table has already been loaded the registry options will be ignored.
      * @return \Cake\ORM\Table
      * @throws \Cake\Core\Exception\CakeException If `$alias` argument and `$defaultTable` property both are `null`.
-     * @see \Cake\ORM\TableLocator::get()
+     * @see uim.cake.ORM\TableLocator::get()
      * @since 4.3.0
      */
     function fetchTable(?string $alias = null, array $options = []): Table
