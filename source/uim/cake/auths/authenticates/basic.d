@@ -74,7 +74,7 @@ class BasicAuthenticate : DAuthenticate {
      *
      * @param uim.cake.Http\ServerRequest myRequest A request object.
      * @param uim.cake.Http\Response $response A response object.
-     * @return \Cake\Http\Response|null|void
+     * @return uim.cake.Http\Response|null|void
      * @throws \Cake\Http\Exception\UnauthorizedException
      */
     function unauthenticated(ServerRequest myRequest, Response $response) {

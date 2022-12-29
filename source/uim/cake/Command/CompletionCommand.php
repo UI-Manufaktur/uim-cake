@@ -44,7 +44,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * Gets the option parser instance and configures it.
      *
      * @param uim.cake.Console\ConsoleOptionParser $parser The parser to build
-     * @return \Cake\Console\ConsoleOptionParser
+     * @return uim.cake.Console\ConsoleOptionParser
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {

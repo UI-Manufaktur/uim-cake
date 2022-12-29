@@ -70,7 +70,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
      * callable returning the key value.
      * @param string spacer The string to use for prefixing the values according to
      * their depth in the tree
-     * @return \Cake\collection.iIterator\TreePrinter
+     * @return uim.cake.collection.iIterator\TreePrinter
      */
     function printer(myValuePath, myKeyPath = null, $spacer = "__") {
         if (!myKeyPath) {

@@ -46,7 +46,7 @@ trait CollectionTrait
      * type of returned collection interface
      *
      * @param mixed ...$args Constructor arguments.
-     * @return \Cake\Collection\ICollection
+     * @return uim.cake.Collection\ICollection
      */
     protected function newCollection(...$args): ICollection
     {
@@ -792,7 +792,7 @@ trait CollectionTrait
      * @param callable|null $operation A callable that allows you to customize the product result.
      * @param callable|null $filter A filtering callback that must return true for a result to be part
      *   of the final results.
-     * @return \Cake\Collection\ICollection
+     * @return uim.cake.Collection\ICollection
      * @throws \LogicException
      */
     function cartesianProduct(?callable $operation = null, ?callable $filter = null): ICollection
@@ -850,7 +850,7 @@ trait CollectionTrait
     /**
      * {@inheritDoc}
      *
-     * @return \Cake\Collection\ICollection
+     * @return uim.cake.Collection\ICollection
      * @throws \LogicException
      */
     function transpose(): ICollection

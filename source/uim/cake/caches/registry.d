@@ -45,7 +45,7 @@ class CacheRegistry : ObjectRegistry
      * @param uim.cake.Cache\CacheEngine|string myClass The classname or object to make.
      * @param string myAlias The alias of the object.
      * @param array<string, mixed> myConfig An array of settings to use for the cache engine.
-     * @return \Cake\Cache\CacheEngine The constructed CacheEngine class.
+     * @return uim.cake.Cache\CacheEngine The constructed CacheEngine class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
     protected CacheEngine _create(myClass, string myAlias, array myConfig) {

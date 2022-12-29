@@ -65,7 +65,7 @@ class SchemacacheClearCommand : Command
      * Get the option parser.
      *
      * @param uim.cake.Console\ConsoleOptionParser $parser The option parser to update
-     * @return \Cake\Console\ConsoleOptionParser
+     * @return uim.cake.Console\ConsoleOptionParser
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {

@@ -145,7 +145,7 @@ abstract class BaseAuthenticate : IEventListener
      * Get query object for fetching user from database.
      *
      * @param string $username The username/identifier.
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected function _query(string $username): Query
     {
@@ -170,7 +170,7 @@ abstract class BaseAuthenticate : IEventListener
     /**
      * Return password hasher object
      *
-     * @return \Cake\Auth\AbstractPasswordHasher Password hasher instance
+     * @return uim.cake.Auth\AbstractPasswordHasher Password hasher instance
      * @throws \RuntimeException If password hasher class not found or
      *   it does not extend AbstractPasswordHasher
      */
@@ -225,7 +225,7 @@ abstract class BaseAuthenticate : IEventListener
      *
      * @param uim.cake.Http\ServerRequest $request A request object.
      * @param uim.cake.Http\Response $response A response object.
-     * @return \Cake\Http\Response|null|void
+     * @return uim.cake.Http\Response|null|void
      */
     function unauthenticated(ServerRequest $request, Response $response) {
     }

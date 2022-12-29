@@ -42,7 +42,7 @@ class ControllerAuthorize : BaseAuthorize {
      * checks that isAuthorized is implemented.
      *
      * @param uim.cake.Controller\Controller|null $controller null to get, a controller to set.
-     * @return \Cake\Controller\Controller
+     * @return uim.cake.Controller\Controller
      */
     Controller controller(?Controller $controller = null) {
         if ($controller) {

@@ -80,7 +80,7 @@ class BasicAuthenticate : BaseAuthenticate
      *
      * @param uim.cake.Http\ServerRequest $request A request object.
      * @param uim.cake.Http\Response $response A response object.
-     * @return \Cake\Http\Response|null|void
+     * @return uim.cake.Http\Response|null|void
      * @throws \Cake\Http\Exception\UnauthorizedException
      */
     function unauthenticated(ServerRequest $request, Response $response) {

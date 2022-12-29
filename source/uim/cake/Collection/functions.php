@@ -16,7 +16,7 @@ if (!function_exists("collection")) {
      * Returns a new {@link \Cake\Collection\Collection} object wrapping the passed argument.
      *
      * @param iterable $items The items from which the collection will be built.
-     * @return \Cake\Collection\Collection
+     * @return uim.cake.Collection\Collection
      */
     function collection(iterable $items): ICollection
     {

@@ -77,7 +77,7 @@ class Cache {
     /**
      * Returns the Cache Registry instance used for creating and using cache adapters.
      *
-     * @return \Cake\Cache\CacheRegistry
+     * @return uim.cake.Cache\CacheRegistry
      */
     static CacheRegistry getRegistry() {
         if (static::$_registry is null) {

@@ -34,7 +34,7 @@ class CacheClearallCommand : Command
      *
      * @see https://book.cakephp.org/4/en/console-commands/option-parsers.html
      * @param uim.cake.Console\ConsoleOptionParser $parser The parser to be defined
-     * @return \Cake\Console\ConsoleOptionParser The built parser.
+     * @return uim.cake.Console\ConsoleOptionParser The built parser.
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
