@@ -19,9 +19,9 @@ import uim.cake.http.FlashMessage;
 import uim.cake.http.Server;
 import uim.cake.http.ServerRequest;
 import uim.cake.http.ServerRequestFactory;
-import uim.cake.Routing\Router;
-import uim.cake.Routing\IRoutingApplication;
-use Psr\Http\Message\IResponse;
+import uim.cake.routings.Router;
+import uim.cake.routings.IRoutingApplication;
+use Psr\Http\messages.IResponse;
 
 /**
  * Dispatches a request capturing the response for integration
@@ -128,7 +128,7 @@ class MiddlewareDispatcher
      * Run a request and get the response.
      *
      * @param array<string, mixed> $requestSpec The request spec to execute.
-     * @return \Psr\Http\Message\IResponse The generated response.
+     * @return \Psr\Http\messages.IResponse The generated response.
      * @throws \LogicException
      */
     function execute(array $requestSpec): IResponse

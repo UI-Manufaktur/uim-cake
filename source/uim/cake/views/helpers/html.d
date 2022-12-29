@@ -294,7 +294,7 @@ class HtmlHelper : Helper {
      *   Can be also any special parameters supported by `Router::url()`.
      * @param array<string, mixed> myOptions Array of options and HTML attributes.
      * @return string An `<a />` element.
-     * @see uim.cake.Routing\Router::pathUrl()
+     * @see uim.cake.routings.Router::pathUrl()
      * @link https://book.UIM.org/4/en/views/helpers/html.html#creating-links
      */
     string linkFromPath(string title, string myPath, array myParams = [], array myOptions = []) {

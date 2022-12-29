@@ -307,7 +307,7 @@ class HtmlHelper : Helper
      *   Can be also any special parameters supported by `Router::url()`.
      * @param array<string, mixed> $options Array of options and HTML attributes.
      * @return string An `<a />` element.
-     * @see uim.cake.Routing\Router::pathUrl()
+     * @see uim.cake.routings.Router::pathUrl()
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-links
      */
     function linkFromPath(string $title, string $path, array $params = [], array $options = []): string

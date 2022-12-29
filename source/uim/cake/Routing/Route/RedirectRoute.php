@@ -6,10 +6,10 @@
 
  * @since         2.0.0
   */
-module uim.cake.Routing\Route;
+module uim.cake.routings.Route;
 
 import uim.cake.http.exceptions.RedirectException;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 
 /**
  * Redirect route will perform an immediate redirect. Redirect routes

@@ -21,21 +21,21 @@ class RouteCollection
     /**
      * The routes connected to this collection.
      *
-     * @var array<string, array<uim.cake.Routing\Route\Route>>
+     * @var array<string, array<uim.cake.routings.Route\Route>>
      */
     protected _routeTable = [];
 
     /**
      * The hash map of named routes that are in this collection.
      *
-     * @var array<uim.cake.Routing\Route\Route>
+     * @var array<uim.cake.routings.Route\Route>
      */
     protected _named = [];
 
     /**
      * Routes indexed by path prefix.
      *
-     * @var array<string, array<uim.cake.Routing\Route\Route>>
+     * @var array<string, array<uim.cake.routings.Route\Route>>
      */
     protected _paths = [];
 
@@ -63,7 +63,7 @@ class RouteCollection
     /**
      * Add a route to the collection.
      *
-     * @param uim.cake.Routing\Route\Route $route The route object to add.
+     * @param uim.cake.routings.Route\Route $route The route object to add.
      * @param array<string, mixed> myOptions Additional options for the route. Primarily for the
      *   `_name` option, which enables named routes.
      */
@@ -102,7 +102,7 @@ class RouteCollection
      * @param string myUrl URL to parse.
      * @param string method The HTTP method to use.
      * @return array An array of request parameters parsed from the URL.
-     * @throws uim.cake.Routing\exceptions.MissingRouteException When a URL has no matching route.
+     * @throws uim.cake.routings.exceptions.MissingRouteException When a URL has no matching route.
      */
     function parse(string myUrl, string method = ""): array
     {
@@ -148,9 +148,9 @@ class RouteCollection
     /**
      * Takes the IServerRequest, iterates the routes until one is able to parse the route.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request to parse route data from.
+     * @param \Psr\Http\messages.IServerRequest myRequest The request to parse route data from.
      * @return array An array of request parameters parsed from the URL.
-     * @throws uim.cake.Routing\exceptions.MissingRouteException When a URL has no matching route.
+     * @throws uim.cake.routings.exceptions.MissingRouteException When a URL has no matching route.
      */
     function parseRequest(IServerRequest myRequest): array
     {
@@ -272,7 +272,7 @@ class RouteCollection
      * @param array $context The request context to use. Contains _base, _port,
      *    _host, _scheme and params keys.
      * @return string The URL string on match.
-     * @throws uim.cake.Routing\exceptions.MissingRouteException When no route could be matched.
+     * @throws uim.cake.routings.exceptions.MissingRouteException When no route could be matched.
      */
     string match(array myUrl, array $context) {
         // Named routes support optimization.
@@ -311,7 +311,7 @@ class RouteCollection
     /**
      * Get all the connected routes as a flat list.
      *
-     * @return array<uim.cake.Routing\Route\Route>
+     * @return array<uim.cake.routings.Route\Route>
      */
     function routes(): array
     {
@@ -365,7 +365,7 @@ class RouteCollection
      * scope or any child scopes that share the same RouteCollection.
      *
      * @param string myName The name of the middleware. Used when applying middleware to a scope.
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string middleware The middleware to register.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string middleware The middleware to register.
      * @return this
      * @throws \RuntimeException
      */

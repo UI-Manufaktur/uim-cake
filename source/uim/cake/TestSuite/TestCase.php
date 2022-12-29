@@ -22,7 +22,7 @@ import uim.cake.http.BaseApplication;
 import uim.cake.orm.Entity;
 import uim.cake.orm.exceptions.MissingTableClassException;
 import uim.cake.orm.locators.LocatorAwareTrait;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 import uim.cake.TestSuite\Constraint\EventFired;
 import uim.cake.TestSuite\Constraint\EventFiredWith;
 import uim.cake.TestSuite\Fixture\FixtureStrategyInterface;
@@ -374,7 +374,7 @@ abstract class TestCase : BaseTestCase
         $className = Configure::read("App.namespace") . "\\Application";
         try {
             $reflect = new ReflectionClass($className);
-            /** @var uim.cake.Routing\IRoutingApplication $app */
+            /** @var uim.cake.routings.IRoutingApplication $app */
             $app = $reflect.newInstanceArgs($appArgs);
         } catch (ReflectionException $e) {
             throw new LogicException(sprintf("Cannot load "%s" to load routes from.", $className), 0, $e);

@@ -21,7 +21,7 @@ class UrlHelper : Helper
      * Asset URL engine class name
      *
      * @var string
-     * @psalm-var class-string<uim.cake.Routing\Asset>
+     * @psalm-var class-string<uim.cake.routings.Asset>
      */
     protected _assetUrlClassName;
 
@@ -34,7 +34,7 @@ class UrlHelper : Helper
         super.initialize(myConfig);
         $engineClassConfig = this.getConfig("assetUrlClassName");
 
-        /** @psalm-var class-string<uim.cake.Routing\Asset>|null $engineClass */
+        /** @psalm-var class-string<uim.cake.routings.Asset>|null $engineClass */
         $engineClass = App::className($engineClassConfig, "Routing");
         if ($engineClass is null) {
             throw new CakeException(sprintf("Class for %s could not be found", $engineClassConfig));
@@ -88,7 +88,7 @@ class UrlHelper : Helper
      *   Can be also any special parameters supported by `Router::url()`.
      * @param array<string, mixed> myOptions Array of options.
      * @return string Full translated URL with base path.
-     * @see uim.cake.Routing\Router::pathUrl()
+     * @see uim.cake.routings.Router::pathUrl()
      */
     string buildFromPath(string myPath, array myParams = [], array myOptions = []) {
         return this.build(["_path": myPath] + myParams, myOptions);

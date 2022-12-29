@@ -1,5 +1,5 @@
 
-module uim.cake.Routing\Route;
+module uim.cake.routings.Route;
 
 import uim.cake.utilities.Inflector;
 

@@ -6,11 +6,11 @@
 
  * @since         1.3.0
   */
-module uim.cake.Routing\Route;
+module uim.cake.routings.Route;
 
 import uim.cake.http.exceptions.BadRequestException;
 use InvalidArgumentException;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IServerRequest;
 
 /**
  * A single Route used by the Router to connect requests to
@@ -420,7 +420,7 @@ class Route
      * If the route can be parsed an array of parameters will be returned; if not
      * `null` will be returned.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The URL to attempt to parse.
+     * @param \Psr\Http\messages.IServerRequest $request The URL to attempt to parse.
      * @return array|null An array of request parameters, or `null` on failure.
      */
     function parseRequest(IServerRequest $request): ?array

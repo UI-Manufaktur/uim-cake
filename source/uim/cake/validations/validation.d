@@ -777,7 +777,7 @@ class Validation {
     /**
      * Checks that value has a valid file extension.
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|array|string check Value to check
+     * @param \Psr\Http\messages.UploadedFileInterface|array|string check Value to check
      * @param $extensions file extensions to allow. By default extensions are "gif", "jpeg", "png", "jpg"
      * @return bool Success
      */
@@ -1125,7 +1125,7 @@ class Validation {
      * by checking the using finfo on the file, not relying on the content-type
      * sent by the client.
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|array|string check Value to check.
+     * @param \Psr\Http\messages.UploadedFileInterface|array|string check Value to check.
      * @param array|string mimeTypes Array of mime types or regex pattern to check.
      * @return bool Success
      * @throws \RuntimeException when mime type can not be determined.
@@ -1202,7 +1202,7 @@ class Validation {
      * by checking the filesize() on disk and not relying on the length
      * reported by the client.
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|array|string check Value to check.
+     * @param \Psr\Http\messages.UploadedFileInterface|array|string check Value to check.
      * @param string operator See `Validation::comparison()`.
      * @param string|int $size Size in bytes or human readable string like "5MB".
      * @return bool Success
@@ -1224,7 +1224,7 @@ class Validation {
     /**
      * Checking for upload errors
      *
-     * @param \Psr\Http\Message\UploadedFileInterface|array|string check Value to check.
+     * @param \Psr\Http\messages.UploadedFileInterface|array|string check Value to check.
      * @param bool $allowNoFile Set to true to allow UPLOAD_ERR_NO_FILE as a pass.
      * @return bool
      * @see https://secure.php.net/manual/en/features.file-upload.errors.php

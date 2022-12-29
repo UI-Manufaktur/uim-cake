@@ -13,7 +13,7 @@ use ArrayIterator;
 use Countable;
 use InvalidArgumentException;
 use IteratorAggregate;
-use Psr\Http\Message\UploadedFileInterface;
+use Psr\Http\messages.UploadedFileInterface;
 use Traversable;
 
 /**
@@ -81,7 +81,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * and the value of `error` is equal to `UPLOAD_ERR_NO_FILE`, the value will be recognized as
      * empty.
      *
-     * When an instance of \Psr\Http\Message\UploadedFileInterface is given the
+     * When an instance of \Psr\Http\messages.UploadedFileInterface is given the
      * return value of it"s getError() method must be equal to `UPLOAD_ERR_NO_FILE`.
      *
      * @var int

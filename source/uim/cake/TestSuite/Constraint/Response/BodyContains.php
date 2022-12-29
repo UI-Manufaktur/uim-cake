@@ -14,7 +14,7 @@
  */
 module uim.cake.TestSuite\Constraint\Response;
 
-use Psr\Http\Message\IResponse;
+use Psr\Http\messages.IResponse;
 
 /**
  * BodyContains
@@ -31,7 +31,7 @@ class BodyContains : ResponseBase
     /**
      * Constructor.
      *
-     * @param \Psr\Http\Message\IResponse $response A response instance.
+     * @param \Psr\Http\messages.IResponse $response A response instance.
      * @param bool $ignoreCase Ignore case
      */
     this(IResponse $response, bool $ignoreCase = false) {

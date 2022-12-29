@@ -11,7 +11,7 @@ module uim.cake.View\Helper;
 import uim.cake.core.Configure;
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.Form\FormProtector;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Inflector;
 import uim.cake.View\Form\ContextFactory;

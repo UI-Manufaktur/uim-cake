@@ -6,7 +6,7 @@
 
  * @since         3.3.0
   */
-module uim.cake.Routing\Middleware;
+module uim.cake.routings.Middleware;
 
 import uim.cake.caches.Cache;
 import uim.cake.caches.InvalidArgumentException;
@@ -14,17 +14,17 @@ import uim.cake.core.IPluginApplication;
 import uim.cake.http.exceptions.RedirectException;
 import uim.cake.http.MiddlewareQueue;
 import uim.cake.http.Runner;
-import uim.cake.Routing\exceptions.FailedRouteCacheException;
-import uim.cake.Routing\exceptions.RedirectException as DeprecatedRedirectException;
-import uim.cake.Routing\RouteCollection;
-import uim.cake.Routing\Router;
-import uim.cake.Routing\IRoutingApplication;
+import uim.cake.routings.exceptions.FailedRouteCacheException;
+import uim.cake.routings.exceptions.RedirectException as DeprecatedRedirectException;
+import uim.cake.routings.RouteCollection;
+import uim.cake.routings.Router;
+import uim.cake.routings.IRoutingApplication;
 use Exception;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
  * Applies routing rules to the request and creates the controller
@@ -42,7 +42,7 @@ class RoutingMiddleware : IMiddleware
     /**
      * The application that will have its routing hook invoked.
      *
-     * @var uim.cake.Routing\IRoutingApplication
+     * @var uim.cake.routings.IRoutingApplication
      */
     protected $app;
 
@@ -57,7 +57,7 @@ class RoutingMiddleware : IMiddleware
     /**
      * Constructor
      *
-     * @param uim.cake.Routing\IRoutingApplication $app The application instance that routes are defined on.
+     * @param uim.cake.routings.IRoutingApplication $app The application instance that routes are defined on.
      * @param string|null $cacheConfig The cache config name to use or null to disable routes cache
      */
     this(IRoutingApplication $app, ?string $cacheConfig = null) {
@@ -90,7 +90,7 @@ class RoutingMiddleware : IMiddleware
     /**
      * Check if route cache is enabled and use the configured Cache to "remember" the route collection
      *
-     * @return uim.cake.Routing\RouteCollection
+     * @return uim.cake.routings.RouteCollection
      */
     protected function buildRouteCollection(): RouteCollection
     {
@@ -118,7 +118,7 @@ class RoutingMiddleware : IMiddleware
     /**
      * Generate the route collection using the builder
      *
-     * @return uim.cake.Routing\RouteCollection
+     * @return uim.cake.routings.RouteCollection
      */
     protected function prepareRouteCollection(): RouteCollection
     {
@@ -137,9 +137,9 @@ class RoutingMiddleware : IMiddleware
      * Any route/path specific middleware will be wrapped around $next and then the new middleware stack will be
      * invoked.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {

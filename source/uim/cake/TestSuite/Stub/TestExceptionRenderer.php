@@ -10,7 +10,7 @@ module uim.cake.TestSuite\Stub;
 
 import uim.cake.errors.ExceptionRendererInterface;
 use LogicException;
-use Psr\Http\Message\IResponse;
+use Psr\Http\messages.IResponse;
 use Throwable;
 
 /**
@@ -45,7 +45,7 @@ class TestExceptionRenderer : ExceptionRendererInterface
     /**
      * Part of upcoming interface requirements
      *
-     * @param \Psr\Http\Message\IResponse|string $output The output or response to send.
+     * @param \Psr\Http\messages.IResponse|string $output The output or response to send.
      * @return void
      */
     function write($output): void

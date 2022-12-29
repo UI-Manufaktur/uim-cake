@@ -23,7 +23,7 @@ import uim.cake.events.EventManager;
 import uim.cake.Form\FormProtector;
 import uim.cake.http.Middleware\CsrfProtectionMiddleware;
 import uim.cake.http.Session;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 import uim.cake.TestSuite\Constraint\Response\BodyContains;
 import uim.cake.TestSuite\Constraint\Response\BodyEmpty;
 import uim.cake.TestSuite\Constraint\Response\BodyEquals;
@@ -87,7 +87,7 @@ trait IntegrationTestTrait
     /**
      * The response for the most recent request.
      *
-     * @var \Psr\Http\Message\IResponse|null
+     * @var \Psr\Http\messages.IResponse|null
      */
     protected $_response;
 

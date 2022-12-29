@@ -14,7 +14,7 @@
  */
 module uim.cake.TestSuite\Constraint\Response;
 
-use Psr\Http\Message\IResponse;
+use Psr\Http\messages.IResponse;
 
 /**
  * HeaderEquals
@@ -31,7 +31,7 @@ class HeaderEquals : ResponseBase
     /**
      * Constructor.
      *
-     * @param \Psr\Http\Message\IResponse $response A response instance.
+     * @param \Psr\Http\messages.IResponse $response A response instance.
      * @param string $headerName Header name
      */
     this(IResponse $response, string $headerName) {

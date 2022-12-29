@@ -6,16 +6,16 @@
 
  * @since         3.3.0
   */
-module uim.cake.Routing\Middleware;
+module uim.cake.routings.Middleware;
 
 import uim.cake.core.Plugin;
 import uim.cake.http.Response;
 import uim.cake.utilities.Inflector;
 use Laminas\Diactoros\Stream;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 use SplFileInfo;
 
 /**
@@ -48,9 +48,9 @@ class AssetMiddleware : IMiddleware
     /**
      * Serve assets if the path matches one.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
@@ -86,7 +86,7 @@ class AssetMiddleware : IMiddleware
     /**
      * Check the not modified header.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request to check.
+     * @param \Psr\Http\messages.IServerRequest $request The request to check.
      * @param \SplFileInfo $file The file object to compare.
      * @return bool
      */
@@ -131,7 +131,7 @@ class AssetMiddleware : IMiddleware
     /**
      * Sends an asset file to the client
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request object to use.
+     * @param \Psr\Http\messages.IServerRequest $request The request object to use.
      * @param \SplFileInfo $file The file wrapper for the file.
      * @return uim.cake.http.Response The response with the file & headers.
      */

@@ -16,7 +16,7 @@ module uim.cake.TestSuite\Constraint\Response;
 
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
-use Psr\Http\Message\IResponse;
+use Psr\Http\messages.IResponse;
 
 /**
  * Base constraint for response constraints
@@ -26,14 +26,14 @@ use Psr\Http\Message\IResponse;
 abstract class ResponseBase : Constraint
 {
     /**
-     * @var \Psr\Http\Message\IResponse
+     * @var \Psr\Http\messages.IResponse
      */
     protected $response;
 
     /**
      * Constructor
      *
-     * @param \Psr\Http\Message\IResponse|null $response Response
+     * @param \Psr\Http\messages.IResponse|null $response Response
      */
     this(?IResponse $response) {
         if (!$response) {

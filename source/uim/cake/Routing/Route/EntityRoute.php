@@ -6,7 +6,7 @@
 
  * @since         3.6.0
   */
-module uim.cake.Routing\Route;
+module uim.cake.routings.Route;
 
 use ArrayAccess;
 use RuntimeException;
