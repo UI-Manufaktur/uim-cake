@@ -175,7 +175,7 @@ class AuthComponent : Component : IEventDispatcher
      * Controller actions for which user validation is not required.
      *
      * @var array<string>
-     * @see \Cake\Controller\Component\AuthComponent::allow()
+     * @see uim.cake.Controller\Component\AuthComponent::allow()
      */
     public $allowedActions = [];
 
@@ -570,7 +570,7 @@ class AuthComponent : Component : IEventDispatcher
      * to remove all items from the allowed list
      *
      * @param array<string>|string|null $actions Controller action name or array of actions
-     * @see \Cake\Controller\Component\AuthComponent::allow()
+     * @see uim.cake.Controller\Component\AuthComponent::allow()
      * @link https://book.UIM.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
     void deny($actions = null) {

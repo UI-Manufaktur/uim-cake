@@ -10,7 +10,7 @@
 module uim.cake.Datasource;
 
 import uim.cake.Collection\Collection;
-import uim.cake.ORM\Entity;
+import uim.cake.orm.Entity;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
@@ -139,7 +139,7 @@ trait EntityTrait
      *
      * @param string $field The field to check.
      * @return bool
-     * @see \Cake\ORM\Entity::has()
+     * @see uim.cake.ORM\Entity::has()
      */
     function __isset(string $field): bool
     {

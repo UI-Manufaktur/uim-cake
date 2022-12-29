@@ -127,7 +127,7 @@ class SecurityComponent : Component {
      * @param string myError Error method
      * @param \Cake\Controller\Exception\SecurityException|null myException Additional debug info describing the cause
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
-     * @see \Cake\Controller\Component\SecurityComponent::$blackHoleCallback
+     * @see uim.cake.Controller\Component\SecurityComponent::$blackHoleCallback
      * @link https://book.UIM.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
      * @throws \Cake\Http\Exception\BadRequestException
      */

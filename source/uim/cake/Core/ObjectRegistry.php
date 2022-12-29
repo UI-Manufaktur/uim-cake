@@ -29,9 +29,9 @@ use Traversable;
  * The ObjectRegistry is EventManager aware, but each extending class will need to use
  * \Cake\Event\EventDispatcherTrait to attach and detach on set and bind
  *
- * @see \Cake\Controller\ComponentRegistry
- * @see \Cake\View\HelperRegistry
- * @see \Cake\Console\TaskRegistry
+ * @see uim.cake.Controller\ComponentRegistry
+ * @see uim.cake.View\HelperRegistry
+ * @see uim.cake.Console\TaskRegistry
  * @template TObject
  */
 abstract class ObjectRegistry : Countable, IteratorAggregate

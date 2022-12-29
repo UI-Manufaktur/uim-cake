@@ -78,7 +78,7 @@ interface TypeInterface
      * when entities are inserted.
      *
      * @return mixed A new primary key value.
-     * @see \Cake\Database\Type\UuidType
+     * @see uim.cake.Database\Type\UuidType
      */
     function newId();
 }

@@ -60,7 +60,7 @@ trait TypeMapTrait
      *
      * @param array<int|string, string> $types The array of types to set.
      * @return this
-     * @see \Cake\Database\TypeMap::setDefaults()
+     * @see uim.cake.Database\TypeMap::setDefaults()
      */
     function setDefaultTypes(array $types) {
         this.getTypeMap().setDefaults($types);

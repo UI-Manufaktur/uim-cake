@@ -24,7 +24,7 @@ class RequestHandlerComponent : Component {
      * Contains the file extension parsed out by the Router
      *
      * @var string|null
-     * @see \Cake\Routing\Router::extensions()
+     * @see uim.cake.Routing\Router::extensions()
      */
     protected ext;
 
@@ -365,7 +365,7 @@ class RequestHandlerComponent : Component {
      * @param \Cake\Controller\Controller $controller A reference to a controller object
      * @param string myType Type of response to send (e.g: "ajax")
      * @param array<string, mixed> myOptions Array of options to use
-     * @see \Cake\Controller\Component\RequestHandlerComponent::respondAs()
+     * @see uim.cake.Controller\Component\RequestHandlerComponent::respondAs()
      */
     void renderAs(Controller $controller, string myType, array myOptions = []) {
         $defaults = ["charset":"UTF-8"];

@@ -19,9 +19,9 @@ import uim.cake.cores.exceptions.CakeException;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventInterface;
-import uim.cake.Http\Exception\ForbiddenException;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
+import uim.cake.https.Exception\ForbiddenException;
+import uim.cake.https.Response;
+import uim.cake.https.ServerRequest;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Hash;
 
@@ -196,7 +196,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Controller actions for which user validation is not required.
      *
      * @var array<string>
-     * @see \Cake\Controller\Component\AuthComponent::allow()
+     * @see uim.cake.Controller\Component\AuthComponent::allow()
      */
     public $allowedActions = [];
 
@@ -602,7 +602,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @param array<string>|string|null $actions Controller action name or array of actions
      * @return void
-     * @see \Cake\Controller\Component\AuthComponent::allow()
+     * @see uim.cake.Controller\Component\AuthComponent::allow()
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
     function deny($actions = null): void

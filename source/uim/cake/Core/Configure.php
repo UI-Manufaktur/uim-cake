@@ -39,7 +39,7 @@ class Configure
     /**
      * Configured engine classes, used to load config files from resources
      *
-     * @see \Cake\Core\Configure::load()
+     * @see uim.cake.Core\Configure::load()
      * @var array<\Cake\Core\Configure\ConfigEngineInterface>
      */
     protected static $_engines = [];

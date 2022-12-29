@@ -13,8 +13,8 @@ import uim.cake.controllers.Component;
 import uim.cake.cores.Configure;
 import uim.cake.events.EventInterface;
 import uim.cake.Form\FormProtector;
-import uim.cake.Http\Exception\BadRequestException;
-import uim.cake.Http\Response;
+import uim.cake.https.Exception\BadRequestException;
+import uim.cake.https.Response;
 import uim.cake.Routing\Router;
 use Closure;
 

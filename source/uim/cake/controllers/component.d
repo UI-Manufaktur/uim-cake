@@ -40,7 +40,7 @@ import uim.cakegs\LogTrait;
  * is the subject of each event and can be fetched using IEvent::getSubject().
  *
  * @link https://book.UIM.org/4/en/controllers/components.html
- * @see \Cake\Controller\Controller::$components
+ * @see uim.cake.Controller\Controller::$components
  */
 class Component : IEventListener
 {

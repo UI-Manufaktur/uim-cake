@@ -15,10 +15,10 @@ import uim.cake.controllers.Controller;
 import uim.cake.cores.App;
 import uim.cake.cores.Configure;
 import uim.cake.events.EventInterface;
-import uim.cake.Http\ContentTypeNegotiation;
-import uim.cake.Http\Exception\NotFoundException;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
+import uim.cake.https.ContentTypeNegotiation;
+import uim.cake.https.Exception\NotFoundException;
+import uim.cake.https.Response;
+import uim.cake.https.ServerRequest;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Inflector;
 
@@ -41,7 +41,7 @@ class RequestHandlerComponent : Component
      * Contains the file extension parsed out by the Router
      *
      * @var string|null
-     * @see \Cake\Routing\Router::extensions()
+     * @see uim.cake.Routing\Router::extensions()
      */
     protected $ext;
 
@@ -392,7 +392,7 @@ class RequestHandlerComponent : Component
      * @param string $type Type of response to send (e.g: 'ajax')
      * @param array<string, mixed> $options Array of options to use
      * @return void
-     * @see \Cake\Controller\Component\RequestHandlerComponent::respondAs()
+     * @see uim.cake.Controller\Component\RequestHandlerComponent::respondAs()
      */
     function renderAs(Controller $controller, string $type, array $options = []): void
     {

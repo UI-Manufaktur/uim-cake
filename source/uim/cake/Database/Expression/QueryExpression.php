@@ -55,7 +55,7 @@ class QueryExpression : IExpression, Countable
      * passed in $conditions.
      * @param string $conjunction the glue that will join all the string conditions at this
      * level of the expression tree. For example "AND", "OR", "XOR"...
-     * @see \Cake\Database\Expression\QueryExpression::add() for more details on $conditions and $types
+     * @see uim.cake.Database\Expression\QueryExpression::add() for more details on $conditions and $types
      */
     public this($conditions = [], $types = [], $conjunction = "AND") {
         this.setTypeMap($types);
@@ -104,7 +104,7 @@ class QueryExpression : IExpression, Countable
      * as conditions.
      * @param array<int|string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @see \Cake\Database\Query::where() for examples on conditions
+     * @see uim.cake.Database\Query::where() for examples on conditions
      * @return this
      */
     function add($conditions, array $types = []) {

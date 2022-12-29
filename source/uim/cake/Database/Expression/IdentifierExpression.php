@@ -19,7 +19,7 @@ use Closure;
  * Identifier values are unsafe with user supplied data.
  * Values will be quoted when identifier quoting is enabled.
  *
- * @see \Cake\Database\Query::identifier()
+ * @see uim.cake.Database\Query::identifier()
  */
 class IdentifierExpression : IExpression
 {

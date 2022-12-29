@@ -35,7 +35,7 @@ import uim.cake.cores.exceptions.CakeException;
  * ];
  * ```
  *
- * @see \Cake\Core\Configure::load() for how to load custom configuration files.
+ * @see uim.cake.Core\Configure::load() for how to load custom configuration files.
  */
 class PhpConfig : ConfigEngineInterface
 {

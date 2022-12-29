@@ -412,7 +412,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * See `Cake\I18n\Time::parseDateTime()` for accepted formats.
      *
      * @param array|string $format The locale-aware format
-     * @see \Cake\I18n\Time::parseDateTime()
+     * @see uim.cake.I18n\Time::parseDateTime()
      * @return this
      */
     function setLocaleFormat($format) {

@@ -15,9 +15,9 @@ import uim.cake.controllers.exceptions.AuthSecurityException;
 import uim.cake.controllers.exceptions.SecurityException;
 import uim.cake.cores.Configure;
 import uim.cake.events.EventInterface;
-import uim.cake.Http\Exception\BadRequestException;
-import uim.cake.Http\Response;
-import uim.cake.Http\ServerRequest;
+import uim.cake.https.Exception\BadRequestException;
+import uim.cake.https.Response;
+import uim.cake.https.ServerRequest;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
@@ -149,7 +149,7 @@ class SecurityComponent : Component
      * @param string $error Error method
      * @param \Cake\Controller\Exception\SecurityException|null $exception Additional debug info describing the cause
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
-     * @see \Cake\Controller\Component\SecurityComponent::$blackHoleCallback
+     * @see uim.cake.Controller\Component\SecurityComponent::$blackHoleCallback
      * @link https://book.cakephp.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
      * @throws \Cake\Http\Exception\BadRequestException
      */

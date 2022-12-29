@@ -14,7 +14,7 @@ import uim.cake.controllers.ComponentRegistry;
 import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
 import uim.cake.Datasource\Paging\NumericPaginator;
 import uim.cake.Datasource\IResultSet;
-import uim.cake.Http\Exception\NotFoundException;
+import uim.cake.https.Exception\NotFoundException;
 use InvalidArgumentException;
 use UnexpectedValueException;
 

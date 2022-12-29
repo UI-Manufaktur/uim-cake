@@ -10,8 +10,8 @@
 module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;
-import uim.cake.Http\Exception\InternalErrorException;
-import uim.cake.Http\FlashMessage;
+import uim.cake.https.Exception\InternalErrorException;
+import uim.cake.https.FlashMessage;
 import uim.cake.utilities.Inflector;
 use Throwable;
 

@@ -14,7 +14,7 @@
  */
 module uim.cake.Core;
 
-import uim.cake.Http\MiddlewareQueue;
+import uim.cake.https.MiddlewareQueue;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**

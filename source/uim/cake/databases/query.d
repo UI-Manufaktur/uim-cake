@@ -632,7 +632,7 @@ class Query : IExpression, IteratorAggregate {
      * @param array<string, mixed>|string myTables list of tables to be joined in the query
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
      * @param bool $overwrite whether to reset joins with passed list or not
-     * @see \Cake\Database\TypeFactory
+     * @see uim.cake.Database\TypeFactory
      * @return this
      */
     function join(myTables, myTypes = [], $overwrite = false) {
@@ -916,8 +916,8 @@ class Query : IExpression, IteratorAggregate {
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions The conditions to filter on.
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
      * @param bool $overwrite whether to reset conditions with passed list or not
-     * @see \Cake\Database\TypeFactory
-     * @see \Cake\Database\Expression\QueryExpression
+     * @see uim.cake.Database\TypeFactory
+     * @see uim.cake.Database\Expression\QueryExpression
      * @return this
      */
     function where($conditions = null, array myTypes = [], bool $overwrite = false) {
@@ -1112,8 +1112,8 @@ class Query : IExpression, IteratorAggregate {
      *
      * @param \Cake\Database\IExpression|\Closure|array|string conditions The conditions to add with AND.
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
-     * @see \Cake\Database\Query::where()
-     * @see \Cake\Database\TypeFactory
+     * @see uim.cake.Database\Query::where()
+     * @see uim.cake.Database\TypeFactory
      * @return this
      */
     function andWhere($conditions, array myTypes = []) {
@@ -1318,7 +1318,7 @@ class Query : IExpression, IteratorAggregate {
      * @param \Cake\Database\IExpression|\Closure|array|string|null $conditions The having conditions.
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
      * @param bool $overwrite whether to reset conditions with passed list or not
-     * @see \Cake\Database\Query::where()
+     * @see uim.cake.Database\Query::where()
      * @return this
      */
     function having($conditions = null, myTypes = [], $overwrite = false) {
@@ -1341,7 +1341,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @param \Cake\Database\IExpression|\Closure|array|string conditions The AND conditions for HAVING.
      * @param array<string, string> myTypes Associative array of type names used to bind values to query
-     * @see \Cake\Database\Query::andWhere()
+     * @see uim.cake.Database\Query::andWhere()
      * @return this
      */
     function andHaving($conditions, myTypes = []) {
