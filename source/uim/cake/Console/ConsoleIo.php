@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Console;
 
 import uim.cake.consoles.exceptions.StopException;

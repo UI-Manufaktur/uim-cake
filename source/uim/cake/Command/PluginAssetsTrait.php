@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Command;
 
 import uim.cake.core.Configure;

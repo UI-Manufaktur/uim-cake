@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Collection\Iterator;
 
 use IteratorIterator;
