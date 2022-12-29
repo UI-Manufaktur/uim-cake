@@ -62,7 +62,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
     /**
      * The `WHEN ... THEN ...` expressions.
      *
-     * @var array<\Cake\Database\Expression\WhenThenExpression>
+     * @var array<uim.cake.Database\Expression\WhenThenExpression>
      */
     protected $when = [];
 
@@ -114,7 +114,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @param string|null $type The case value type. If no type is provided, the type will be tried to be inferred
      *  from the value.
      */
-    public this($value = null, ?string $type = null) {
+    this($value = null, ?string $type = null) {
         if (func_num_args() > 0) {
             if (
                 $value != null &&
@@ -152,7 +152,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * ### Order based syntax
      *
      * When passing a value other than a self-contained
-     * `\Cake\Database\Expression\WhenThenExpression`,
+     * `uim.cake.Database\Expression\WhenThenExpression`,
      * instance, the `WHEN ... THEN ...` statement must be closed off with
      * a call to `then()` before invoking `when()` again or `else()`:
      *
@@ -168,25 +168,25 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * ### Self-contained expressions
      *
-     * When passing an instance of `\Cake\Database\Expression\WhenThenExpression`,
+     * When passing an instance of `uim.cake.Database\Expression\WhenThenExpression`,
      * being it directly, or via a callable, then there is no need to close
      * using `then()` on this object, instead the statement will be closed
-     * on the `\Cake\Database\Expression\WhenThenExpression`
+     * on the `uim.cake.Database\Expression\WhenThenExpression`
      * object using
-     * `\Cake\Database\Expression\WhenThenExpression::then()`.
+     * `uim.cake.Database\Expression\WhenThenExpression::then()`.
      *
-     * Callables will receive an instance of `\Cake\Database\Expression\WhenThenExpression`,
+     * Callables will receive an instance of `uim.cake.Database\Expression\WhenThenExpression`,
      * and must return one, being it the same object, or a custom one:
      *
      * ```
      * $queryExpression
      *     .case()
-     *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
+     *     .when(function (uim.cake.Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
      *             .when(["Table.column": true])
      *             .then("Yes");
      *     })
-     *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
+     *     .when(function (uim.cake.Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
      *             .when(["Table.column": false])
      *             .then("No");
@@ -198,21 +198,21 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * The types provided via the `$type` argument will be merged with the
      * type map set for this expression. When using callables for `$when`,
-     * the `\Cake\Database\Expression\WhenThenExpression`
+     * the `uim.cake.Database\Expression\WhenThenExpression`
      * instance received by the callables will inherit that type map, however
      * the types passed here will _not_ be merged in case of using callables,
      * instead the types must be passed in
-     * `\Cake\Database\Expression\WhenThenExpression::when()`:
+     * `uim.cake.Database\Expression\WhenThenExpression::when()`:
      *
      * ```
      * $queryExpression
      *     .case()
-     *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
+     *     .when(function (uim.cake.Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
      *             .when(["unmapped_column": true], ["unmapped_column": "bool"])
      *             .then("Yes");
      *     })
-     *     .when(function (\Cake\Database\Expression\WhenThenExpression $whenThen) {
+     *     .when(function (uim.cake.Database\Expression\WhenThenExpression $whenThen) {
      *         return $whenThen
      *             .when(["unmapped_column": false], ["unmapped_column": "bool"])
      *             .then("No");
@@ -270,7 +270,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * ```
      *
      * @param uim.cake.Database\IExpression|\Closure|object|array|scalar $when The `WHEN` value. When using an
-     *  array of conditions, it must be compatible with `\Cake\Database\Query::where()`. Note that this argument is
+     *  array of conditions, it must be compatible with `uim.cake.Database\Query::where()`. Note that this argument is
      *  _not_ completely safe for use with user data, as a user supplied array would allow for raw SQL to slip in! If
      *  you plan to use user data, either pass a single type for the `$type` argument (which forces the `$when` value to
      *  be a non-array, and then always binds the data), use a conditions array where the user data is only passed on
@@ -280,7 +280,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @return this
      * @throws \LogicException In case this a closing `then()` call is required before calling this method.
      * @throws \LogicException In case the callable doesn"t return an instance of
-     *  `\Cake\Database\Expression\WhenThenExpression`.
+     *  `uim.cake.Database\Expression\WhenThenExpression`.
      */
     function when($when, $type = null) {
         if (this.whenBuffer != null) {
@@ -315,7 +315,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *
      * This method can only be invoked in case `when()` was previously
      * used with a value other than a closure or an instance of
-     * `\Cake\Database\Expression\WhenThenExpression`:
+     * `uim.cake.Database\Expression\WhenThenExpression`:
      *
      * ```
      * $case
@@ -361,7 +361,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      *  value.
      * @return this
      * @throws \LogicException In case `when()` wasn"t previously called with a value other than a closure or an
-     *  instance of `\Cake\Database\Expression\WhenThenExpression`.
+     *  instance of `uim.cake.Database\Expression\WhenThenExpression`.
      */
     function then($result, ?string $type = null) {
         if (this.whenBuffer == null) {
@@ -388,7 +388,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * @return this
      * @throws \LogicException In case a closing `then()` call is required before calling this method.
      * @throws \InvalidArgumentException In case the `$result` argument is neither a scalar value, nor an object, an
-     *  instance of `\Cake\Database\IExpression`, or `null`.
+     *  instance of `uim.cake.Database\IExpression`, or `null`.
      */
     function else($result, ?string $type = null) {
         if (this.whenBuffer != null) {
@@ -483,7 +483,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
      * * `else`: The `ELSE` result value.
      *
      * @param string $clause The name of the clause to obtain.
-     * @return uim.cake.Database\IExpression|object|array<\Cake\Database\Expression\WhenThenExpression>|scalar|null
+     * @return uim.cake.Database\IExpression|object|array<uim.cake.Database\Expression\WhenThenExpression>|scalar|null
      * @throws \InvalidArgumentException In case the given clause name is invalid.
      */
     function clause(string $clause) {
@@ -528,7 +528,7 @@ class CaseStatementExpression : IExpression, TypedResultInterface
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         if (this.whenBuffer != null) {
             throw new LogicException("Case expression has incomplete when clause. Missing `then()` after `when()`.");
         }

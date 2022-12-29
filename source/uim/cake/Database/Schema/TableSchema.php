@@ -72,28 +72,28 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      *
      * @var int
      */
-    public const LENGTH_TINY = 255;
+    const LENGTH_TINY = 255;
 
     /**
      * Column length when using a `medium` column type
      *
      * @var int
      */
-    public const LENGTH_MEDIUM = 16777215;
+    const LENGTH_MEDIUM = 16777215;
 
     /**
      * Column length when using a `long` column type
      *
      * @var int
      */
-    public const LENGTH_LONG = 4294967295;
+    const LENGTH_LONG = 4294967295;
 
     /**
      * Valid column length that can be used with text type columns
      *
      * @var array<string, int>
      */
-    public static $columnLengths = [
+    static $columnLengths = [
         "tiny": self::LENGTH_TINY,
         "medium": self::LENGTH_MEDIUM,
         "long": self::LENGTH_LONG,
@@ -206,70 +206,70 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      *
      * @var string
      */
-    public const CONSTRAINT_PRIMARY = "primary";
+    const CONSTRAINT_PRIMARY = "primary";
 
     /**
      * Unique constraint type
      *
      * @var string
      */
-    public const CONSTRAINT_UNIQUE = "unique";
+    const CONSTRAINT_UNIQUE = "unique";
 
     /**
      * Foreign constraint type
      *
      * @var string
      */
-    public const CONSTRAINT_FOREIGN = "foreign";
+    const CONSTRAINT_FOREIGN = "foreign";
 
     /**
      * Index - index type
      *
      * @var string
      */
-    public const INDEX_INDEX = "index";
+    const INDEX_INDEX = "index";
 
     /**
      * Fulltext index type
      *
      * @var string
      */
-    public const INDEX_FULLTEXT = "fulltext";
+    const INDEX_FULLTEXT = "fulltext";
 
     /**
      * Foreign key cascade action
      *
      * @var string
      */
-    public const ACTION_CASCADE = "cascade";
+    const ACTION_CASCADE = "cascade";
 
     /**
      * Foreign key set null action
      *
      * @var string
      */
-    public const ACTION_SET_NULL = "setNull";
+    const ACTION_SET_NULL = "setNull";
 
     /**
      * Foreign key no action
      *
      * @var string
      */
-    public const ACTION_NO_ACTION = "noAction";
+    const ACTION_NO_ACTION = "noAction";
 
     /**
      * Foreign key restrict action
      *
      * @var string
      */
-    public const ACTION_RESTRICT = "restrict";
+    const ACTION_RESTRICT = "restrict";
 
     /**
      * Foreign key restrict default
      *
      * @var string
      */
-    public const ACTION_SET_DEFAULT = "setDefault";
+    const ACTION_SET_DEFAULT = "setDefault";
 
     /**
      * Constructor.
@@ -277,7 +277,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      * @param string $table The table name.
      * @param array<string, array|string> $columns The list of columns for the schema.
      */
-    public this(string $table, array $columns = []) {
+    this(string $table, array $columns = []) {
         _table = $table;
         foreach ($columns as $field: $definition) {
             this.addColumn($field, $definition);

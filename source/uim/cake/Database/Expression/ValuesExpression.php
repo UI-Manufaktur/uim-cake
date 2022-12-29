@@ -56,7 +56,7 @@ class ValuesExpression : IExpression
      * @param array $columns The list of columns that are going to be part of the values.
      * @param uim.cake.Database\TypeMap $typeMap A dictionary of column . type names
      */
-    public this(array $columns, TypeMap $typeMap) {
+    this(array $columns, TypeMap $typeMap) {
         _columns = $columns;
         this.setTypeMap($typeMap);
     }
@@ -239,7 +239,7 @@ class ValuesExpression : IExpression
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         if (_query) {
             return this;
         }

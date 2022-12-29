@@ -58,7 +58,7 @@ class ReconnectStrategy : RetryStrategyInterface
      *
      * @param uim.cake.Database\Connection $connection The connection to check
      */
-    public this(Connection $connection) {
+    this(Connection $connection) {
         this.connection = $connection;
     }
 

@@ -31,7 +31,7 @@ abstract class SchemaDialect
      *
      * @param uim.cake.Database\DriverInterface $driver The driver to use.
      */
-    public this(DriverInterface $driver) {
+    this(DriverInterface $driver) {
         $driver.connect();
         _driver = $driver;
     }

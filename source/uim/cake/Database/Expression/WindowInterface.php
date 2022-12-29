@@ -16,32 +16,32 @@ interface WindowInterface
     /**
      * @var string
      */
-    public const PRECEDING = "PRECEDING";
+    const PRECEDING = "PRECEDING";
 
     /**
      * @var string
      */
-    public const FOLLOWING = "FOLLOWING";
+    const FOLLOWING = "FOLLOWING";
 
     /**
      * @var string
      */
-    public const RANGE = "RANGE";
+    const RANGE = "RANGE";
 
     /**
      * @var string
      */
-    public const ROWS = "ROWS";
+    const ROWS = "ROWS";
 
     /**
      * @var string
      */
-    public const GROUPS = "GROUPS";
+    const GROUPS = "GROUPS";
 
     /**
      * Adds one or more partition expressions to the window.
      *
-     * @param uim.cake.Database\IExpression|\Closure|array<\Cake\Database\IExpression|string>|string $partitions Partition expressions
+     * @param uim.cake.Database\IExpression|\Closure|array<uim.cake.Database\IExpression|string>|string $partitions Partition expressions
      * @return this
      */
     function partition($partitions);
@@ -49,7 +49,7 @@ interface WindowInterface
     /**
      * Adds one or more order clauses to the window.
      *
-     * @param uim.cake.Database\IExpression|\Closure|array<\Cake\Database\IExpression|string>|string $fields Order expressions
+     * @param uim.cake.Database\IExpression|\Closure|array<uim.cake.Database\IExpression|string>|string $fields Order expressions
      * @return this
      */
     function order($fields);

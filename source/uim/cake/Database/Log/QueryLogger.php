@@ -17,7 +17,7 @@ class QueryLogger : BaseLog
      *
      * @param array<string, mixed> $config Configuration array
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         _defaultConfig["scopes"] = ["queriesLog"];
         _defaultConfig["connection"] = "";
 

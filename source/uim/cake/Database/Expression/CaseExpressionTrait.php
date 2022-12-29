@@ -19,7 +19,7 @@ use DateTimeInterface;
 /**
  * Trait that holds shared functionality for case related expressions.
  *
- * @property \Cake\Database\TypeMap $_typeMap The type map to use when using an array of conditions for the `WHEN`
+ * @property uim.cake.Database\TypeMap $_typeMap The type map to use when using an array of conditions for the `WHEN`
  *  value.
  * @internal
  */

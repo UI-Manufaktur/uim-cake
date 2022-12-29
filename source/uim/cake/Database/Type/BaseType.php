@@ -22,7 +22,7 @@ abstract class BaseType : TypeInterface
      *
      * @param string|null $name The name identifying this type
      */
-    public this(?string $name = null) {
+    this(?string $name = null) {
         _name = $name;
     }
 

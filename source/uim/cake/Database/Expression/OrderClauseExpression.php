@@ -26,7 +26,7 @@ class OrderClauseExpression : IExpression, FieldInterface
      * @param uim.cake.Database\IExpression|string $field The field to order on.
      * @param string $direction The direction to sort on.
      */
-    public this($field, $direction) {
+    this($field, $direction) {
         _field = $field;
         _direction = strtolower($direction) == "asc" ? "ASC" : "DESC";
     }
@@ -46,7 +46,7 @@ class OrderClauseExpression : IExpression, FieldInterface
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         if (_field instanceof IExpression) {
             $callback(_field);
             _field.traverse($callback);

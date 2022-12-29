@@ -21,147 +21,147 @@ interface TableSchemaInterface : SchemaInterface
      *
      * @var string
      */
-    public const TYPE_BINARY = "binary";
+    const TYPE_BINARY = "binary";
 
     /**
      * Binary UUID column type
      *
      * @var string
      */
-    public const TYPE_BINARY_UUID = "binaryuuid";
+    const TYPE_BINARY_UUID = "binaryuuid";
 
     /**
      * Date column type
      *
      * @var string
      */
-    public const TYPE_DATE = "date";
+    const TYPE_DATE = "date";
 
     /**
      * Datetime column type
      *
      * @var string
      */
-    public const TYPE_DATETIME = "datetime";
+    const TYPE_DATETIME = "datetime";
 
     /**
      * Datetime with fractional seconds column type
      *
      * @var string
      */
-    public const TYPE_DATETIME_FRACTIONAL = "datetimefractional";
+    const TYPE_DATETIME_FRACTIONAL = "datetimefractional";
 
     /**
      * Time column type
      *
      * @var string
      */
-    public const TYPE_TIME = "time";
+    const TYPE_TIME = "time";
 
     /**
      * Timestamp column type
      *
      * @var string
      */
-    public const TYPE_TIMESTAMP = "timestamp";
+    const TYPE_TIMESTAMP = "timestamp";
 
     /**
      * Timestamp with fractional seconds column type
      *
      * @var string
      */
-    public const TYPE_TIMESTAMP_FRACTIONAL = "timestampfractional";
+    const TYPE_TIMESTAMP_FRACTIONAL = "timestampfractional";
 
     /**
      * Timestamp with time zone column type
      *
      * @var string
      */
-    public const TYPE_TIMESTAMP_TIMEZONE = "timestamptimezone";
+    const TYPE_TIMESTAMP_TIMEZONE = "timestamptimezone";
 
     /**
      * JSON column type
      *
      * @var string
      */
-    public const TYPE_JSON = "json";
+    const TYPE_JSON = "json";
 
     /**
      * String column type
      *
      * @var string
      */
-    public const TYPE_STRING = "string";
+    const TYPE_STRING = "string";
 
     /**
      * Char column type
      *
      * @var string
      */
-    public const TYPE_CHAR = "char";
+    const TYPE_CHAR = "char";
 
     /**
      * Text column type
      *
      * @var string
      */
-    public const TYPE_TEXT = "text";
+    const TYPE_TEXT = "text";
 
     /**
      * Tiny Integer column type
      *
      * @var string
      */
-    public const TYPE_TINYINTEGER = "tinyinteger";
+    const TYPE_TINYINTEGER = "tinyinteger";
 
     /**
      * Small Integer column type
      *
      * @var string
      */
-    public const TYPE_SMALLINTEGER = "smallinteger";
+    const TYPE_SMALLINTEGER = "smallinteger";
 
     /**
      * Integer column type
      *
      * @var string
      */
-    public const TYPE_INTEGER = "integer";
+    const TYPE_INTEGER = "integer";
 
     /**
      * Big Integer column type
      *
      * @var string
      */
-    public const TYPE_BIGINTEGER = "biginteger";
+    const TYPE_BIGINTEGER = "biginteger";
 
     /**
      * Float column type
      *
      * @var string
      */
-    public const TYPE_FLOAT = "float";
+    const TYPE_FLOAT = "float";
 
     /**
      * Decimal column type
      *
      * @var string
      */
-    public const TYPE_DECIMAL = "decimal";
+    const TYPE_DECIMAL = "decimal";
 
     /**
      * Boolean column type
      *
      * @var string
      */
-    public const TYPE_BOOLEAN = "boolean";
+    const TYPE_BOOLEAN = "boolean";
 
     /**
      * UUID column type
      *
      * @var string
      */
-    public const TYPE_UUID = "uuid";
+    const TYPE_UUID = "uuid";
 
     /**
      * Check whether a table has an autoIncrement column defined.

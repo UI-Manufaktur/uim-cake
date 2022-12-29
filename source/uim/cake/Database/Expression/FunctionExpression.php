@@ -51,7 +51,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      * passed arguments
      * @param string $returnType The return type of this expression
      */
-    public this(string $name, array $params = [], array $types = [], string $returnType = "string") {
+    this(string $name, array $params = [], array $types = [], string $returnType = "string") {
         _name = $name;
         _returnType = $returnType;
         super(($params, $types, ",");

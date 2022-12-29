@@ -15,14 +15,14 @@ class UnaryExpression : IExpression
      *
      * @var int
      */
-    public const PREFIX = 0;
+    const PREFIX = 0;
 
     /**
      * Indicates that the operation is in post-order
      *
      * @var int
      */
-    public const POSTFIX = 1;
+    const POSTFIX = 1;
 
     /**
      * The operator this unary expression represents
@@ -52,7 +52,7 @@ class UnaryExpression : IExpression
      * @param mixed $value the value to use as the operand for the expression
      * @param int $position either UnaryExpression::PREFIX or UnaryExpression::POSTFIX
      */
-    public this(string $operator, $value, $position = self::PREFIX) {
+    this(string $operator, $value, $position = self::PREFIX) {
         _operator = $operator;
         _value = $value;
         this.position = $position;
@@ -74,7 +74,7 @@ class UnaryExpression : IExpression
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         if (_value instanceof IExpression) {
             $callback(_value);
             _value.traverse($callback);

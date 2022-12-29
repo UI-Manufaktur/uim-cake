@@ -31,7 +31,7 @@ class TypeMap
      *
      * @param array<int|string, string> $defaults The defaults to use.
      */
-    public this(array $defaults = []) {
+    this(array $defaults = []) {
         this.setDefaults($defaults);
     }
 

@@ -49,7 +49,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * A cached list of IExpression objects that were
      * found in the value for this expression.
      *
-     * @var array<\Cake\Database\IExpression>
+     * @var array<uim.cake.Database\IExpression>
      */
     protected $_valueExpressions = [];
 
@@ -61,7 +61,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param string|null $type the type name used to cast the value
      * @param string $operator the operator used for comparing field and value
      */
-    public this($field, $value, ?string $type = null, string $operator = "=") {
+    this($field, $value, ?string $type = null, string $operator = "=") {
         _type = $type;
         this.setField($field);
         this.setValue($value);
@@ -141,7 +141,7 @@ class ComparisonExpression : IExpression, FieldInterface
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         if (_field instanceof IExpression) {
             $callback(_field);
             _field.traverse($callback);

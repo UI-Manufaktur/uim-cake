@@ -11,7 +11,7 @@ class SqlserverSchemaDialect : SchemaDialect
     /**
      * @var string
      */
-    public const DEFAULT_SCHEMA_NAME = "dbo";
+    const DEFAULT_SCHEMA_NAME = "dbo";
 
     /**
      * Generate the SQL to list the tables and views.

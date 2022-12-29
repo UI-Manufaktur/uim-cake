@@ -86,7 +86,7 @@ class WhenThenExpression : IExpression
      * @param uim.cake.Database\TypeMap|null $typeMap The type map to use when using an array of conditions for the `WHEN`
      *  value.
      */
-    public this(?TypeMap $typeMap = null) {
+    this(?TypeMap $typeMap = null) {
         if ($typeMap == null) {
             $typeMap = new TypeMap();
         }
@@ -97,7 +97,7 @@ class WhenThenExpression : IExpression
      * Sets the `WHEN` value.
      *
      * @param uim.cake.Database\IExpression|object|array|scalar $when The `WHEN` value. When using an array of
-     *  conditions, it must be compatible with `\Cake\Database\Query::where()`. Note that this argument is _not_
+     *  conditions, it must be compatible with `uim.cake.Database\Query::where()`. Note that this argument is _not_
      *  completely safe for use with user data, as a user supplied array would allow for raw SQL to slip in! If you
      *  plan to use user data, either pass a single type for the `$type` argument (which forces the `$when` value to be
      *  a non-array, and then always binds the data), use a conditions array where the user data is only passed on the
@@ -106,7 +106,7 @@ class WhenThenExpression : IExpression
      *  conditions, or else a string. If no type is provided, the type will be tried to be inferred from the value.
      * @return this
      * @throws \InvalidArgumentException In case the `$when` argument is neither a non-empty array, nor a scalar value,
-     *  an object, or an instance of `\Cake\Database\IExpression`.
+     *  an object, or an instance of `uim.cake.Database\IExpression`.
      * @throws \InvalidArgumentException In case the `$type` argument is neither an array, a string, nor null.
      * @throws \InvalidArgumentException In case the `$when` argument is an array, and the `$type` argument is neither
      * an array, nor null.
@@ -300,7 +300,7 @@ class WhenThenExpression : IExpression
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         if (this.when instanceof IExpression) {
             $callback(this.when);
             this.when.traverse($callback);

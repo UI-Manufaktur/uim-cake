@@ -29,7 +29,7 @@ class TupleComparison : ComparisonExpression
      * one type per position in the value array in needed
      * @param string $conjunction the operator used for comparing field and value
      */
-    public this($fields, $values, array $types = [], string $conjunction = "=") {
+    this($fields, $values, array $types = [], string $conjunction = "=") {
         _type = $types;
         this.setField($fields);
         _operator = $conjunction;
@@ -151,7 +151,7 @@ class TupleComparison : ComparisonExpression
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         /** @var array<string> $fields */
         $fields = this.getField();
         foreach ($fields as $field) {

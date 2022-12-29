@@ -49,7 +49,7 @@ class CaseExpression : IExpression
      * @param array<string> $types Associative array of types to be associated with the values
      * passed in $values
      */
-    public this($conditions = [], $values = [], $types = []) {
+    this($conditions = [], $values = [], $types = []) {
         $conditions = is_array($conditions) ? $conditions : [$conditions];
         $values = is_array($values) ? $values : [$values];
         $types = is_array($types) ? $types : [$types];
@@ -212,7 +212,7 @@ class CaseExpression : IExpression
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         foreach (["_conditions", "_values"] as $part) {
             foreach (this.{$part} as $c) {
                 if ($c instanceof IExpression) {

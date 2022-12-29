@@ -51,7 +51,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      *  such as PDOStatement.
      * @param uim.cake.Database\DriverInterface $driver Driver instance
      */
-    public this(StatementInterface $statement, DriverInterface $driver) {
+    this(StatementInterface $statement, DriverInterface $driver) {
         _statement = $statement;
         _driver = $driver;
     }

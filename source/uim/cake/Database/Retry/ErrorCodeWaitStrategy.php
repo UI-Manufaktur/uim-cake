@@ -33,7 +33,7 @@ class ErrorCodeWaitStrategy : RetryStrategyInterface
      * @param array<int> $errorCodes DB-specific error codes that allow retrying
      * @param int $retryInterval Seconds to wait before allowing next retry, 0 for no wait.
      */
-    public this(array $errorCodes, int $retryInterval) {
+    this(array $errorCodes, int $retryInterval) {
         this.errorCodes = $errorCodes;
         this.retryInterval = $retryInterval;
     }

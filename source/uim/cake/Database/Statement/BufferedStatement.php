@@ -64,7 +64,7 @@ class BufferedStatement : Iterator, StatementInterface
      * @param uim.cake.Database\StatementInterface $statement Statement implementation such as PDOStatement
      * @param uim.cake.Database\DriverInterface $driver Driver instance
      */
-    public this(StatementInterface $statement, DriverInterface $driver) {
+    this(StatementInterface $statement, DriverInterface $driver) {
         this.statement = $statement;
         _driver = $driver;
     }

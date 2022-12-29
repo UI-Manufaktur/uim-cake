@@ -167,7 +167,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         parent::traverse($callback);
         if (this.filter != null) {
             $callback(this.filter);

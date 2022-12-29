@@ -17,42 +17,42 @@ class LoggedQuery : JsonSerializable
      *
      * @var uim.cake.Database\DriverInterface|null
      */
-    public $driver = null;
+    $driver = null;
 
     /**
      * Query string that was executed
      *
      * @var string
      */
-    public $query = "";
+    $query = "";
 
     /**
      * Number of milliseconds this query took to complete
      *
      * @var float
      */
-    public $took = 0;
+    $took = 0;
 
     /**
      * Associative array with the params bound to the query string
      *
      * @var array
      */
-    public $params = [];
+    $params = [];
 
     /**
      * Number of rows affected or returned by the query execution
      *
      * @var int
      */
-    public $numRows = 0;
+    $numRows = 0;
 
     /**
      * The exception that was thrown by the execution of this query
      *
      * @var \Exception|null
      */
-    public $error;
+    $error;
 
     /**
      * Helper function used to replace query placeholders by the real

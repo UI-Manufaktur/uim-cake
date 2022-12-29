@@ -32,7 +32,7 @@ class Collection : ICollection
      *
      * @param uim.cake.Database\Connection $connection The connection instance.
      */
-    public this(Connection $connection) {
+    this(Connection $connection) {
         _connection = $connection;
         _dialect = $connection.getDriver().schemaDialect();
     }
@@ -120,14 +120,14 @@ class Collection : ICollection
      * @param uim.cake.Database\Schema\TableSchema $schema The table schema instance.
      * @return void
      * @throws uim.cake.Database\Exception\DatabaseException on query failure.
-     * @uses \Cake\Database\Schema\SchemaDialect::describeColumnSql
-     * @uses \Cake\Database\Schema\SchemaDialect::describeIndexSql
-     * @uses \Cake\Database\Schema\SchemaDialect::describeForeignKeySql
-     * @uses \Cake\Database\Schema\SchemaDialect::describeOptionsSql
-     * @uses \Cake\Database\Schema\SchemaDialect::convertColumnDescription
-     * @uses \Cake\Database\Schema\SchemaDialect::convertIndexDescription
-     * @uses \Cake\Database\Schema\SchemaDialect::convertForeignKeyDescription
-     * @uses \Cake\Database\Schema\SchemaDialect::convertOptionsDescription
+     * @uses uim.cake.Database\Schema\SchemaDialect::describeColumnSql
+     * @uses uim.cake.Database\Schema\SchemaDialect::describeIndexSql
+     * @uses uim.cake.Database\Schema\SchemaDialect::describeForeignKeySql
+     * @uses uim.cake.Database\Schema\SchemaDialect::describeOptionsSql
+     * @uses uim.cake.Database\Schema\SchemaDialect::convertColumnDescription
+     * @uses uim.cake.Database\Schema\SchemaDialect::convertIndexDescription
+     * @uses uim.cake.Database\Schema\SchemaDialect::convertForeignKeyDescription
+     * @uses uim.cake.Database\Schema\SchemaDialect::convertOptionsDescription
      */
     protected function _reflect(string $stage, string $name, array $config, TableSchema $schema): void
     {

@@ -49,7 +49,7 @@ class QueryExpression : IExpression, Countable
      * level of the expression tree. For example "AND", "OR", "XOR"...
      * @see uim.cake.Database\Expression\QueryExpression::add() for more details on $conditions and $types
      */
-    public this($conditions = [], $types = [], $conjunction = "AND") {
+    this($conditions = [], $types = [], $conjunction = "AND") {
         this.setTypeMap($types);
         this.setConjunction(strtoupper($conjunction));
         if (!empty($conditions)) {
@@ -567,7 +567,7 @@ class QueryExpression : IExpression, Countable
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         foreach (_conditions as $c) {
             if ($c instanceof IExpression) {
                 $callback($c);

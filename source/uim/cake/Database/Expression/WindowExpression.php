@@ -23,7 +23,7 @@ class WindowExpression : IExpression, WindowInterface
     protected $name;
 
     /**
-     * @var array<\Cake\Database\IExpression>
+     * @var array<uim.cake.Database\IExpression>
      */
     protected $partitions = [];
 
@@ -45,7 +45,7 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * @param string $name Window name
      */
-    public this(string $name = "") {
+    this(string $name = "") {
         this.name = new IdentifierExpression($name);
     }
 
@@ -223,7 +223,7 @@ class WindowExpression : IExpression, WindowInterface
     }
 
 
-    public O traverse(this O)(Closure $callback) {
+    O traverse(this O)(Closure $callback) {
         $callback(this.name);
         foreach (this.partitions as $partition) {
             $callback($partition);
