@@ -11,7 +11,7 @@ module uim.cake.Auth;
 
 import uim.cake.controllers.ComponentRegistry;
 import uim.cake.cores.InstanceConfigTrait;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.ServerRequest;
 
 /**
  * Abstract base authorization adapter for AuthComponent.
@@ -51,7 +51,7 @@ abstract class BaseAuthorize
      * Checks user authorization.
      *
      * @param \ArrayAccess|array $user Active user data
-     * @param uim.cake.Http\ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest $request Request instance.
      * @return bool
      */
     abstract bool authorize($user, ServerRequest $request);

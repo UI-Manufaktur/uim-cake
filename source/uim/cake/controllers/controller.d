@@ -72,7 +72,7 @@ class Controller : IEventListener, IEventDispatcher
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var uim.cake.Http\ServerRequest
+     * @var uim.cake.http.ServerRequest
      * @link https://book.UIM.org/4/en/controllers/request-response.html#request
      */
     protected myRequest;
@@ -80,7 +80,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * An instance of a Response object that contains information about the impending response
      *
-     * @var uim.cake.Http\Response
+     * @var uim.cake.http.Response
      * @link https://book.UIM.org/4/en/controllers/request-response.html#response
      */
     protected response;
@@ -132,9 +132,9 @@ class Controller : IEventListener, IEventDispatcher
      * Sets a number of properties based on conventions if they are empty. To override the
      * conventions UIM uses you can define properties in your class declaration.
      *
-     * @param uim.cake.Http\ServerRequest|null myRequest Request object for this controller. Can be null for testing,
+     * @param uim.cake.http.ServerRequest|null myRequest Request object for this controller. Can be null for testing,
      *   but expect that features that use the request parameters will not work.
-     * @param uim.cake.Http\Response|null $response Response object for this controller.
+     * @param uim.cake.http.Response|null $response Response object for this controller.
      * @param string|null myName Override the name useful in testing when using mocks.
      * @param uim.cake.Event\IEventManager|null myEventManager The event manager. Defaults to a new instance.
      * @param uim.cake.Controller\ComponentRegistry|null $components The component registry. Defaults to a new instance.
@@ -401,7 +401,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Gets the request instance.
      *
-     * @return uim.cake.Http\ServerRequest
+     * @return uim.cake.http.ServerRequest
 
      */
     ServerRequest getRequest() {
@@ -415,7 +415,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * - this.request - To the myRequest parameter
      *
-     * @param uim.cake.Http\ServerRequest myRequest Request instance.
+     * @param uim.cake.http.ServerRequest myRequest Request instance.
      * @return this
      */
     auto setRequest(ServerRequest myRequest) {
@@ -428,7 +428,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Gets the response instance.
      *
-     * @return uim.cake.Http\Response
+     * @return uim.cake.http.Response
 
      */
     Response getResponse() {
@@ -438,7 +438,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Sets the response instance.
      *
-     * @param uim.cake.Http\Response $response Response instance.
+     * @param uim.cake.http.Response $response Response instance.
      * @return this
 
      */
@@ -605,7 +605,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param \Psr\Http\Message\UriInterface|array|string myUrl A string, array-based URL or UriInterface instance.
      * @param int $status HTTP status code. Defaults to `302`.
-     * @return uim.cake.Http\Response|null
+     * @return uim.cake.http.Response|null
      * @link https://book.UIM.org/4/en/controllers.html#Controller::redirect
      */
     function redirect(myUrl, int $status = 302): ?Response
@@ -663,7 +663,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param string|null myTemplate Template to use for rendering
      * @param string|null $layout Layout to use
-     * @return uim.cake.Http\Response A response object containing the rendered view.
+     * @return uim.cake.http.Response A response object containing the rendered view.
      * @link https://book.UIM.org/4/en/controllers.html#rendering-a-view
      */
     Response render(Nullable!string myTemplate = null, Nullable!string layout = null) {
@@ -813,7 +813,7 @@ class Controller : IEventListener, IEventDispatcher
      * or perform logic that needs to happen before each controller action.
      *
      * @param uim.cake.Event\IEvent myEvent An Event instance
-     * @return uim.cake.Http\Response|null|void
+     * @return uim.cake.http.Response|null|void
      * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function beforeFilter(IEvent myEvent) {
@@ -824,7 +824,7 @@ class Controller : IEventListener, IEventDispatcher
      * to perform logic or set view variables that are required on every request.
      *
      * @param uim.cake.Event\IEvent myEvent An Event instance
-     * @return uim.cake.Http\Response|null|void
+     * @return uim.cake.http.Response|null|void
      * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function beforeRender(IEvent myEvent) {
@@ -842,8 +842,8 @@ class Controller : IEventListener, IEventDispatcher
      * @param uim.cake.Event\IEvent myEvent An Event instance
      * @param array|string myUrl A string or array-based URL pointing to another location within the app,
      *     or an absolute URL
-     * @param uim.cake.Http\Response $response The response object.
-     * @return uim.cake.Http\Response|null|void
+     * @param uim.cake.http.Response $response The response object.
+     * @return uim.cake.http.Response|null|void
      * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function beforeRedirect(IEvent myEvent, myUrl, Response $response) {
@@ -853,7 +853,7 @@ class Controller : IEventListener, IEventDispatcher
      * Called after the controller action is run and rendered.
      *
      * @param uim.cake.Event\IEvent myEvent An Event instance
-     * @return uim.cake.Http\Response|null|void
+     * @return uim.cake.http.Response|null|void
      * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
      */
     function afterFilter(IEvent myEvent) {

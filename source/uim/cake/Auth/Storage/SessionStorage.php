@@ -10,8 +10,8 @@
 module uim.cake.auths.Storage;
 
 import uim.cake.cores.InstanceConfigTrait;
-import uim.cake.https.Response;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
 
 /**
  * Session based persistent storage for authenticated user record.
@@ -33,7 +33,7 @@ class SessionStorage : IStorage
     /**
      * Session object.
      *
-     * @var uim.cake.Http\Session
+     * @var uim.cake.http.Session
      */
     protected $_session;
 
@@ -55,8 +55,8 @@ class SessionStorage : IStorage
     /**
      * Constructor.
      *
-     * @param uim.cake.Http\ServerRequest $request Request instance.
-     * @param uim.cake.Http\Response $response Response instance.
+     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @param uim.cake.http.Response $response Response instance.
      * @param array<string, mixed> $config Configuration list.
      */
     public this(ServerRequest $request, Response $response, array $config = []) {

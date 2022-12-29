@@ -20,7 +20,7 @@ class ErrorController : Controller {
     * beforeRender callback.
     *
     * @param uim.cake.Event\IEvent myEvent Event.
-    * @return uim.cake.Http\Response|null|void
+    * @return uim.cake.http.Response|null|void
     */
   function beforeRender(IEvent myEvent) {
     myBuilder = this.viewBuilder();

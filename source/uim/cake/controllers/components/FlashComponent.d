@@ -60,7 +60,7 @@ class FlashComponent : Component
     /**
      * Get flash message utility instance.
      *
-     * @return uim.cake.Http\FlashMessage
+     * @return uim.cake.http.FlashMessage
      */
     protected auto flash(): FlashMessage
     {
@@ -136,7 +136,7 @@ class FlashComponent : Component
      *
      * @param string myName Element name to use.
      * @param array $args Parameters to pass when calling `FlashComponent::set()`.
-     * @throws uim.cake.Http\Exception\InternalErrorException If missing the flash message.
+     * @throws uim.cake.http.Exception\InternalErrorException If missing the flash message.
      */
     void __call(string myName, array $args) {
         $element = Inflector::underscore(myName);

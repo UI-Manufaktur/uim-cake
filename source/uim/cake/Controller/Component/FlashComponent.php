@@ -10,8 +10,8 @@
 module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;
-import uim.cake.https.Exception\InternalErrorException;
-import uim.cake.https.FlashMessage;
+import uim.cake.http.Exception\InternalErrorException;
+import uim.cake.http.FlashMessage;
 import uim.cake.utilities.Inflector;
 use Throwable;
 
@@ -73,7 +73,7 @@ class FlashComponent : Component
     /**
      * Get flash message utility instance.
      *
-     * @return uim.cake.Http\FlashMessage
+     * @return uim.cake.http.FlashMessage
      */
     protected function flash(): FlashMessage
     {
@@ -150,7 +150,7 @@ class FlashComponent : Component
      * @param string $name Element name to use.
      * @param array $args Parameters to pass when calling `FlashComponent::set()`.
      * @return void
-     * @throws uim.cake.Http\Exception\InternalErrorException If missing the flash message.
+     * @throws uim.cake.http.Exception\InternalErrorException If missing the flash message.
      */
     function __call(string $name, array $args) {
         $element = Inflector::underscore($name);

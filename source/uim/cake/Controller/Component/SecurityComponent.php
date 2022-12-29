@@ -15,9 +15,9 @@ import uim.cake.controllers.exceptions.AuthSecurityException;
 import uim.cake.controllers.exceptions.SecurityException;
 import uim.cake.cores.Configure;
 import uim.cake.events.EventInterface;
-import uim.cake.https.Exception\BadRequestException;
-import uim.cake.https.Response;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.Exception\BadRequestException;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
@@ -78,7 +78,7 @@ class SecurityComponent : Component
      * Component startup. All security checking happens here.
      *
      * @param uim.cake.Event\IEvent $event An Event instance
-     * @return uim.cake.Http\Response|null
+     * @return uim.cake.http.Response|null
      */
     function startup(IEvent $event): ?Response
     {
@@ -151,7 +151,7 @@ class SecurityComponent : Component
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
      * @see uim.cake.controllers.Component\SecurityComponent::$blackHoleCallback
      * @link https://book.cakephp.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
-     * @throws uim.cake.Http\Exception\BadRequestException
+     * @throws uim.cake.http.Exception\BadRequestException
      */
     function blackHole(Controller $controller, string $error = "", ?SecurityException $exception = null) {
         if (!_config["blackHoleCallback"]) {
@@ -165,7 +165,7 @@ class SecurityComponent : Component
      * Check debug status and throw an Exception based on the existing one
      *
      * @param uim.cake.Controller\Exception\SecurityException|null $exception Additional debug info describing the cause
-     * @throws uim.cake.Http\Exception\BadRequestException
+     * @throws uim.cake.http.Exception\BadRequestException
      * @return void
      */
     protected function _throwException(?SecurityException $exception = null): void
@@ -476,8 +476,8 @@ class SecurityComponent : Component
      * Manually add form tampering prevention token information into the provided
      * request object.
      *
-     * @param uim.cake.Http\ServerRequest $request The request object to add into.
-     * @return uim.cake.Http\ServerRequest The modified request.
+     * @param uim.cake.http.ServerRequest $request The request object to add into.
+     * @return uim.cake.http.ServerRequest The modified request.
      */
     function generateToken(ServerRequest $request): ServerRequest
     {
@@ -497,7 +497,7 @@ class SecurityComponent : Component
      * @param string $method Method to execute
      * @param array $params Parameters to send to method
      * @return mixed Controller callback method"s response
-     * @throws uim.cake.Http\Exception\BadRequestException When a the blackholeCallback is not callable.
+     * @throws uim.cake.http.Exception\BadRequestException When a the blackholeCallback is not callable.
      */
     protected function _callback(Controller $controller, string $method, array $params = []) {
         $callable = [$controller, $method];

@@ -44,8 +44,8 @@ class BasicAuthenticate : DAuthenticate {
      * Authenticate a user using HTTP auth. Will use the configured User model and attempt a
      * login using HTTP auth.
      *
-     * @param uim.cake.Http\ServerRequest myRequest The request to authenticate with.
-     * @param uim.cake.Http\Response $response The response to add headers to.
+     * @param uim.cake.http.ServerRequest myRequest The request to authenticate with.
+     * @param uim.cake.http.Response $response The response to add headers to.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
     function authenticate(ServerRequest myRequest, Response $response) {
@@ -55,7 +55,7 @@ class BasicAuthenticate : DAuthenticate {
     /**
      * Get a user based on information in the request. Used by cookie-less auth for stateless clients.
      *
-     * @param uim.cake.Http\ServerRequest myRequest Request object.
+     * @param uim.cake.http.ServerRequest myRequest Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
     auto getUser(ServerRequest myRequest) {
@@ -72,10 +72,10 @@ class BasicAuthenticate : DAuthenticate {
     /**
      * Handles an unauthenticated access attempt by sending appropriate login headers
      *
-     * @param uim.cake.Http\ServerRequest myRequest A request object.
-     * @param uim.cake.Http\Response $response A response object.
-     * @return uim.cake.Http\Response|null|void
-     * @throws uim.cake.Http\Exception\UnauthorizedException
+     * @param uim.cake.http.ServerRequest myRequest A request object.
+     * @param uim.cake.http.Response $response A response object.
+     * @return uim.cake.http.Response|null|void
+     * @throws uim.cake.http.Exception\UnauthorizedException
      */
     function unauthenticated(ServerRequest myRequest, Response $response) {
         $unauthorizedException = new UnauthorizedException();
@@ -87,7 +87,7 @@ class BasicAuthenticate : DAuthenticate {
     /**
      * Generate the login headers
      *
-     * @param uim.cake.Http\ServerRequest myRequest Request object.
+     * @param uim.cake.http.ServerRequest myRequest Request object.
      * @return Headers for logging in.
      */
     STRINGAA loginHeaders(ServerRequest myRequest) {

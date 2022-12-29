@@ -13,7 +13,7 @@
  */
 module uim.cake.controllers.Exception;
 
-import uim.cake.https.Exception\BadRequestException;
+import uim.cake.http.Exception\BadRequestException;
 
 /**
  * Security exception - used when SecurityComponent detects any issue with the current request

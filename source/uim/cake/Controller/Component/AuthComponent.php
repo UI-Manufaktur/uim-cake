@@ -19,9 +19,9 @@ import uim.cake.cores.exceptions.CakeException;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventInterface;
-import uim.cake.https.Exception\ForbiddenException;
-import uim.cake.https.Response;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.Exception\ForbiddenException;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Hash;
 
@@ -233,7 +233,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Callback for Controller.startup event.
      *
      * @param uim.cake.Event\IEvent $event Event instance.
-     * @return uim.cake.Http\Response|null
+     * @return uim.cake.http.Response|null
      */
     function startup(IEvent $event): ?Response
     {
@@ -248,7 +248,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * `checkAuthIn` config.
      *
      * @param uim.cake.Event\IEvent $event Event instance.
-     * @return uim.cake.Http\Response|null
+     * @return uim.cake.http.Response|null
      * @throws \ReflectionException
      */
     function authCheck(IEvent $event): ?Response
@@ -333,7 +333,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * method redirects user to login action.
      *
      * @param uim.cake.Controller\Controller $controller A reference to the controller object.
-     * @return uim.cake.Http\Response|null Null if current action is login action
+     * @return uim.cake.http.Response|null Null if current action is login action
      *   else response object returned by authenticate object or Controller::redirect().
      * @throws uim.cake.Core\Exception\CakeException
      */
@@ -405,8 +405,8 @@ class AuthComponent : Component : EventDispatcherInterface
      * Handle unauthorized access attempt
      *
      * @param uim.cake.Controller\Controller $controller A reference to the controller object
-     * @return uim.cake.Http\Response|null
-     * @throws uim.cake.Http\Exception\ForbiddenException
+     * @return uim.cake.http.Response|null
+     * @throws uim.cake.http.Exception\ForbiddenException
      */
     protected function _unauthorized(Controller $controller): ?Response
     {
@@ -472,7 +472,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @param \ArrayAccess|array|null $user The user to check the authorization of.
      *   If empty the user fetched from storage will be used.
-     * @param uim.cake.Http\ServerRequest|null $request The request to authenticate for.
+     * @param uim.cake.http.ServerRequest|null $request The request to authenticate for.
      *   If empty, the current request will be used.
      * @return bool True if $user is authorized, otherwise false
      */

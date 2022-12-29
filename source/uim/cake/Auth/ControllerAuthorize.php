@@ -12,7 +12,7 @@ module uim.cake.Auth;
 import uim.cake.controllers.ComponentRegistry;
 import uim.cake.controllers.Controller;
 import uim.cake.cores.exceptions.CakeException;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.ServerRequest;
 
 /**
  * An authorization adapter for AuthComponent. Provides the ability to authorize
@@ -69,7 +69,7 @@ class ControllerAuthorize : BaseAuthorize
      * Checks user authorization using a controller callback.
      *
      * @param \ArrayAccess|array $user Active user data
-     * @param uim.cake.Http\ServerRequest $request Request instance.
+     * @param uim.cake.http.ServerRequest $request Request instance.
      * @throws uim.cake.Core\Exception\CakeException If controller does not have method `isAuthorized()`.
      * @return bool
      */

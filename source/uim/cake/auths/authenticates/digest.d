@@ -87,7 +87,7 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Get a user based on information in the request. Used by cookie-less auth for stateless clients.
      *
-     * @param uim.cake.Http\ServerRequest myRequest Request object.
+     * @param uim.cake.http.ServerRequest myRequest Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
     auto getUser(ServerRequest myRequest) {
@@ -125,7 +125,7 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Gets the digest headers from the request/environment.
      *
-     * @param uim.cake.Http\ServerRequest myRequest Request object.
+     * @param uim.cake.http.ServerRequest myRequest Request object.
      * @return array<string, mixed>|null Array of digest information.
      */
     protected ?array _getDigest(ServerRequest myRequest) {
@@ -200,7 +200,7 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Generate the login headers
      *
-     * @param uim.cake.Http\ServerRequest myRequest Request object.
+     * @param uim.cake.http.ServerRequest myRequest Request object.
      * @return Headers for logging in.
      */
     STRINGAA loginHeaders(ServerRequest myRequest) {

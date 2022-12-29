@@ -14,7 +14,7 @@
  */
 module uim.cake.Core;
 
-import uim.cake.https.MiddlewareQueue;
+import uim.cake.http.MiddlewareQueue;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -35,8 +35,8 @@ interface IHttpApplication : RequestHandlerInterface
     /**
      * Define the HTTP middleware layers for an application.
      *
-     * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
-     * @return uim.cake.Http\MiddlewareQueue
+     * @param uim.cake.http.MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
+     * @return uim.cake.http.MiddlewareQueue
      */
     function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 }

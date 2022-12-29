@@ -9,8 +9,8 @@
  */
 module uim.cake.Auth;
 
-import uim.cake.https.Response;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
 
 /**
  * Form authentication adapter for AuthComponent.
@@ -43,7 +43,7 @@ class FormAuthenticate : BaseAuthenticate
     /**
      * Checks the fields to ensure they are supplied.
      *
-     * @param uim.cake.Http\ServerRequest $request The request that contains login information.
+     * @param uim.cake.http.ServerRequest $request The request that contains login information.
      * @param array<string, string> $fields The fields to be checked.
      * @return bool False if the fields have not been supplied. True if they exist.
      */
@@ -63,8 +63,8 @@ class FormAuthenticate : BaseAuthenticate
      * to find POST data that is used to find a matching record in the `config.userModel`. Will return false if
      * there is no post data, either username or password is missing, or if the scope conditions have not been met.
      *
-     * @param uim.cake.Http\ServerRequest $request The request that contains login information.
-     * @param uim.cake.Http\Response $response Unused response object.
+     * @param uim.cake.http.ServerRequest $request The request that contains login information.
+     * @param uim.cake.http.Response $response Unused response object.
      * @return array<string, mixed>|false False on login failure. An array of User data on success.
      */
     function authenticate(ServerRequest $request, Response $response) {

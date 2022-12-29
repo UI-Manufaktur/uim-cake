@@ -9,9 +9,9 @@
  */
 module uim.cake.Auth;
 
-import uim.cake.https.Exception\UnauthorizedException;
-import uim.cake.https.Response;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.Exception\UnauthorizedException;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
 
 /**
  * Basic Authentication adapter for AuthComponent.
@@ -50,8 +50,8 @@ class BasicAuthenticate : BaseAuthenticate
      * Authenticate a user using HTTP auth. Will use the configured User model and attempt a
      * login using HTTP auth.
      *
-     * @param uim.cake.Http\ServerRequest $request The request to authenticate with.
-     * @param uim.cake.Http\Response $response The response to add headers to.
+     * @param uim.cake.http.ServerRequest $request The request to authenticate with.
+     * @param uim.cake.http.Response $response The response to add headers to.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
     function authenticate(ServerRequest $request, Response $response) {
@@ -61,7 +61,7 @@ class BasicAuthenticate : BaseAuthenticate
     /**
      * Get a user based on information in the request. Used by cookie-less auth for stateless clients.
      *
-     * @param uim.cake.Http\ServerRequest $request Request object.
+     * @param uim.cake.http.ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
     function getUser(ServerRequest $request) {
@@ -78,10 +78,10 @@ class BasicAuthenticate : BaseAuthenticate
     /**
      * Handles an unauthenticated access attempt by sending appropriate login headers
      *
-     * @param uim.cake.Http\ServerRequest $request A request object.
-     * @param uim.cake.Http\Response $response A response object.
-     * @return uim.cake.Http\Response|null|void
-     * @throws uim.cake.Http\Exception\UnauthorizedException
+     * @param uim.cake.http.ServerRequest $request A request object.
+     * @param uim.cake.http.Response $response A response object.
+     * @return uim.cake.http.Response|null|void
+     * @throws uim.cake.http.Exception\UnauthorizedException
      */
     function unauthenticated(ServerRequest $request, Response $response) {
         $unauthorizedException = new UnauthorizedException();
@@ -93,7 +93,7 @@ class BasicAuthenticate : BaseAuthenticate
     /**
      * Generate the login headers
      *
-     * @param uim.cake.Http\ServerRequest $request Request object.
+     * @param uim.cake.http.ServerRequest $request Request object.
      * @return array<string, string> Headers for logging in.
      */
     function loginHeaders(ServerRequest $request): array

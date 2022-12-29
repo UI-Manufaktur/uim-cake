@@ -12,11 +12,11 @@ module uim.cake.Controller;
 import uim.cake.controllers.exceptions.InvalidParameterException;
 import uim.cake.cores.App;
 import uim.cake.cores.IContainer;
-import uim.cake.https.ControllerFactoryInterface;
-import uim.cake.https.Exception\MissingControllerException;
-import uim.cake.https.MiddlewareQueue;
-import uim.cake.https.Runner;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.ControllerFactoryInterface;
+import uim.cake.http.Exception\MissingControllerException;
+import uim.cake.http.MiddlewareQueue;
+import uim.cake.http.Runner;
+import uim.cake.http.ServerRequest;
 import uim.cake.utilities.Inflector;
 use Closure;
 use Psr\Http\Message\IResponse;
@@ -57,7 +57,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to build a controller for.
      * @return uim.cake.Controller\Controller
-     * @throws uim.cake.Http\Exception\MissingControllerException
+     * @throws uim.cake.http.Exception\MissingControllerException
      */
     function create(IServerRequest $request): Controller
     {
@@ -272,7 +272,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     /**
      * Determine the controller class name based on current request and controller param
      *
-     * @param uim.cake.Http\ServerRequest $request The request to build a controller for.
+     * @param uim.cake.http.ServerRequest $request The request to build a controller for.
      * @return string|null
      * @psalm-return class-string<\Cake\Controller\Controller>|null
      */
@@ -331,8 +331,8 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
     /**
      * Throws an exception when a controller is missing.
      *
-     * @param uim.cake.Http\ServerRequest $request The request.
-     * @return uim.cake.Http\Exception\MissingControllerException
+     * @param uim.cake.http.ServerRequest $request The request.
+     * @return uim.cake.http.Exception\MissingControllerException
      */
     protected function missingController(ServerRequest $request) {
         return new MissingControllerException([

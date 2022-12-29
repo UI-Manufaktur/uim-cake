@@ -12,8 +12,8 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.https.Exception\RedirectException;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.Exception\RedirectException;
+import uim.cake.http.ServerRequest;
 import uim.cake.Routing\Exception\MissingRouteException;
 import uim.cake.Routing\Router;
 

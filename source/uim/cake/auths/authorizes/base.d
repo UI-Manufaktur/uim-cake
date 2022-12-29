@@ -39,7 +39,7 @@ abstract class BaseAuthorize {
      * Checks user authorization.
      *
      * @param \ArrayAccess|array myUser Active user data
-     * @param uim.cake.Http\ServerRequest myRequest Request instance.
+     * @param uim.cake.http.ServerRequest myRequest Request instance.
      */
     abstract bool authorize(myUser, ServerRequest myRequest);
 }

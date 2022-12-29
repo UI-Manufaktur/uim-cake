@@ -210,7 +210,7 @@ class AuthComponent : Component : IEventDispatcher
      * Callback for Controller.startup event.
      *
      * @param uim.cake.Event\IEvent myEvent Event instance.
-     * @return uim.cake.Http\Response|null
+     * @return uim.cake.http.Response|null
      */
     function startup(IEvent myEvent): ?Response
     {
@@ -225,7 +225,7 @@ class AuthComponent : Component : IEventDispatcher
      * `checkAuthIn` config.
      *
      * @param uim.cake.Event\IEvent myEvent Event instance.
-     * @return uim.cake.Http\Response|null
+     * @return uim.cake.http.Response|null
      * @throws \ReflectionException
      */
     function authCheck(IEvent myEvent): ?Response
@@ -308,7 +308,7 @@ class AuthComponent : Component : IEventDispatcher
      * method redirects user to login action.
      *
      * @param uim.cake.Controller\Controller $controller A reference to the controller object.
-     * @return uim.cake.Http\Response|null Null if current action is login action
+     * @return uim.cake.http.Response|null Null if current action is login action
      *   else response object returned by authenticate object or Controller::redirect().
      * @throws uim.cake.Core\Exception\CakeException
      */
@@ -379,8 +379,8 @@ class AuthComponent : Component : IEventDispatcher
      * Handle unauthorized access attempt
      *
      * @param uim.cake.Controller\Controller $controller A reference to the controller object
-     * @return uim.cake.Http\Response|null
-     * @throws uim.cake.Http\Exception\ForbiddenException
+     * @return uim.cake.http.Response|null
+     * @throws uim.cake.http.Exception\ForbiddenException
      */
     protected auto _unauthorized(Controller $controller): ?Response
     {
@@ -444,7 +444,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @param \ArrayAccess|array|null myUser The user to check the authorization of.
      *   If empty the user fetched from storage will be used.
-     * @param uim.cake.Http\ServerRequest|null myRequest The request to authenticate for.
+     * @param uim.cake.http.ServerRequest|null myRequest The request to authenticate for.
      *   If empty, the current request will be used.
      * @return bool True if myUser is authorized, otherwise false
      */

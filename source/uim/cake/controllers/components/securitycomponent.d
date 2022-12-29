@@ -59,7 +59,7 @@ class SecurityComponent : Component {
      * Component startup. All security checking happens here.
      *
      * @param uim.cake.Event\IEvent myEvent An Event instance
-     * @return uim.cake.Http\Response|null
+     * @return uim.cake.http.Response|null
      */
     function startup(IEvent myEvent): ?Response
     {
@@ -129,7 +129,7 @@ class SecurityComponent : Component {
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
      * @see uim.cake.controllers.Component\SecurityComponent::$blackHoleCallback
      * @link https://book.UIM.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
-     * @throws uim.cake.Http\Exception\BadRequestException
+     * @throws uim.cake.http.Exception\BadRequestException
      */
     function blackHole(Controller $controller, string myError = "", ?SecurityException myException = null) {
         if (!_config["blackHoleCallback"]) {
@@ -143,7 +143,7 @@ class SecurityComponent : Component {
      * Check debug status and throw an Exception based on the existing one
      *
      * @param uim.cake.Controller\Exception\SecurityException|null myException Additional debug info describing the cause
-     * @throws uim.cake.Http\Exception\BadRequestException
+     * @throws uim.cake.http.Exception\BadRequestException
      */
     protected void _throwException(?SecurityException myException = null) {
         if (myException  !is null) {
@@ -441,8 +441,8 @@ class SecurityComponent : Component {
      * Manually add form tampering prevention token information into the provided
      * request object.
      *
-     * @param uim.cake.Http\ServerRequest myRequest The request object to add into.
-     * @return uim.cake.Http\ServerRequest The modified request.
+     * @param uim.cake.http.ServerRequest myRequest The request object to add into.
+     * @return uim.cake.http.ServerRequest The modified request.
      */
     ServerRequest generateToken(ServerRequest myRequest) {
         $token = [
@@ -461,7 +461,7 @@ class SecurityComponent : Component {
      * @param string method Method to execute
      * @param array myParams Parameters to send to method
      * @return mixed Controller callback method"s response
-     * @throws uim.cake.Http\Exception\BadRequestException When a the blackholeCallback is not callable.
+     * @throws uim.cake.http.Exception\BadRequestException When a the blackholeCallback is not callable.
      */
     protected auto _callback(Controller $controller, string method, array myParams = []) {
         $callable = [$controller, $method];

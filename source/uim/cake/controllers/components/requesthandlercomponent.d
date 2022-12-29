@@ -92,8 +92,8 @@ class RequestHandlerComponent : Component {
      * If html is one of the preferred types, no content type will be set, this
      * is to avoid issues with browsers that prefer HTML and several other content types.
      *
-     * @param uim.cake.Http\ServerRequest myRequest The request instance.
-     * @param uim.cake.Http\Response $response The response instance.
+     * @param uim.cake.http.ServerRequest myRequest The request instance.
+     * @param uim.cake.http.Response $response The response instance.
      */
     protected void _setExtension(ServerRequest myRequest, Response $response) {
         $accept = myRequest.parseAccept();
@@ -168,7 +168,7 @@ class RequestHandlerComponent : Component {
      *   set that Content-type in the response header.
      *
      * @param uim.cake.Event\IEvent myEvent The Controller.beforeRender event.
-     * @throws uim.cake.Http\Exception\NotFoundException If invoked extension is not configured.
+     * @throws uim.cake.http.Exception\NotFoundException If invoked extension is not configured.
      */
     void beforeRender(IEvent myEvent) {
         $controller = this.getController();

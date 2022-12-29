@@ -15,10 +15,10 @@ import uim.cake.controllers.Controller;
 import uim.cake.cores.App;
 import uim.cake.cores.Configure;
 import uim.cake.events.EventInterface;
-import uim.cake.https.ContentTypeNegotiation;
-import uim.cake.https.Exception\NotFoundException;
-import uim.cake.https.Response;
-import uim.cake.https.ServerRequest;
+import uim.cake.http.ContentTypeNegotiation;
+import uim.cake.http.Exception\NotFoundException;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Inflector;
 
@@ -110,8 +110,8 @@ class RequestHandlerComponent : Component
      * If html is one of the preferred types, no content type will be set, this
      * is to avoid issues with browsers that prefer HTML and several other content types.
      *
-     * @param uim.cake.Http\ServerRequest $request The request instance.
-     * @param uim.cake.Http\Response $response The response instance.
+     * @param uim.cake.http.ServerRequest $request The request instance.
+     * @param uim.cake.http.Response $response The response instance.
      * @return void
      */
     protected function _setExtension(ServerRequest $request, Response $response): void
@@ -193,7 +193,7 @@ class RequestHandlerComponent : Component
      *
      * @param uim.cake.Event\IEvent $event The Controller.beforeRender event.
      * @return void
-     * @throws uim.cake.Http\Exception\NotFoundException If invoked extension is not configured.
+     * @throws uim.cake.http.Exception\NotFoundException If invoked extension is not configured.
      */
     function beforeRender(IEvent $event): void
     {

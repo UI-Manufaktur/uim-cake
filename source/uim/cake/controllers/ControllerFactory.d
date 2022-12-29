@@ -48,7 +48,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to build a controller for.
      * @return uim.cake.Controller\Controller
-     * @throws uim.cake.Http\Exception\MissingControllerException
+     * @throws uim.cake.http.Exception\MissingControllerException
      */
     Controller create(IServerRequest myRequest) {
         myClassName = this.getControllerClass(myRequest);
@@ -251,7 +251,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Determine the controller class name based on current request and controller param
      *
-     * @param uim.cake.Http\ServerRequest myRequest The request to build a controller for.
+     * @param uim.cake.http.ServerRequest myRequest The request to build a controller for.
      * @return string|null
      * @psalm-return class-string<\Cake\Controller\Controller>|null
      */
@@ -309,8 +309,8 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Throws an exception when a controller is missing.
      *
-     * @param uim.cake.Http\ServerRequest myRequest The request.
-     * @return uim.cake.Http\Exception\MissingControllerException
+     * @param uim.cake.http.ServerRequest myRequest The request.
+     * @return uim.cake.http.Exception\MissingControllerException
      */
     protected auto missingController(ServerRequest myRequest) {
         return new MissingControllerException([
