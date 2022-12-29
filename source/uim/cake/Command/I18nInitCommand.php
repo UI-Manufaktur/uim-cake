@@ -12,8 +12,8 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.cores.App;
-import uim.cake.cores.Plugin;
+import uim.cake.core.App;
+import uim.cake.core.Plugin;
 import uim.cake.utilities.Inflector;
 use DirectoryIterator;
 

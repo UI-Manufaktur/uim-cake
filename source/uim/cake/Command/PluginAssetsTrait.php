@@ -9,8 +9,8 @@
  */
 module uim.cake.Command;
 
-import uim.cake.cores.Configure;
-import uim.cake.cores.Plugin;
+import uim.cake.core.Configure;
+import uim.cake.core.Plugin;
 import uim.cake.Filesystem\Filesystem;
 import uim.cake.utilities.Inflector;
 

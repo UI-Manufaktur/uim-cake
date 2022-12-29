@@ -9,7 +9,7 @@
  */
 module uim.cake.Controller;
 
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.Log\LogTrait;
 

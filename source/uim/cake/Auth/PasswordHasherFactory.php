@@ -9,7 +9,7 @@
  */
 module uim.cake.Auth;
 
-import uim.cake.cores.App;
+import uim.cake.core.App;
 use RuntimeException;
 
 /**

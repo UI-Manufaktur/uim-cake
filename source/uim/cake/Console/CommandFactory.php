@@ -13,7 +13,7 @@
  */
 module uim.cake.Console;
 
-import uim.cake.cores.IContainer;
+import uim.cake.core.IContainer;
 use InvalidArgumentException;
 
 /**

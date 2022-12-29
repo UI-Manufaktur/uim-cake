@@ -24,7 +24,7 @@ import uim.cake.consoles.TestSuite\Constraint\ContentsEmpty;
 import uim.cake.consoles.TestSuite\Constraint\ContentsNotContain;
 import uim.cake.consoles.TestSuite\Constraint\ContentsRegExp;
 import uim.cake.consoles.TestSuite\Constraint\ExitCode;
-import uim.cake.cores.TestSuite\ContainerStubTrait;
+import uim.cake.core.TestSuite\ContainerStubTrait;
 use RuntimeException;
 
 /**

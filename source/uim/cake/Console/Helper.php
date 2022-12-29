@@ -9,7 +9,7 @@
  */
 module uim.cake.Console;
 
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 
 /**
  * Base class for Helpers.

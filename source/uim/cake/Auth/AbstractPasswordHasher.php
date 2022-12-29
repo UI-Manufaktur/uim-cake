@@ -9,7 +9,7 @@
  */
 module uim.cake.Auth;
 
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 
 /**
  * Abstract password hashing class

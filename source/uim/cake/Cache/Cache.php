@@ -10,7 +10,7 @@
 module uim.cake.Cache;
 
 import uim.cake.caches.engines.NullEngine;
-import uim.cake.cores.StaticConfigTrait;
+import uim.cake.core.StaticConfigTrait;
 use RuntimeException;
 
 /**

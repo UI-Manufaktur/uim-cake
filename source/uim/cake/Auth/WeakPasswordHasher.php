@@ -9,7 +9,7 @@
  */
 module uim.cake.Auth;
 
-import uim.cake.cores.Configure;
+import uim.cake.core.Configure;
 import uim.cake.errors.Debugger;
 import uim.cake.utilities.Security;
 

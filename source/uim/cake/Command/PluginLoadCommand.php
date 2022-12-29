@@ -12,8 +12,8 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.cores.exceptions.MissingPluginException;
-import uim.cake.cores.Plugin;
+import uim.cake.core.exceptions.MissingPluginException;
+import uim.cake.core.Plugin;
 
 /**
  * Command for loading plugins.

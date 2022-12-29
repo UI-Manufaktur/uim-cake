@@ -11,9 +11,9 @@ module uim.cake.Console;
 
 import uim.cake.consoles.exceptions.MissingShellException;
 import uim.cake.consoles.exceptions.StopException;
-import uim.cake.cores.App;
-import uim.cake.cores.Configure;
-import uim.cake.cores.Plugin;
+import uim.cake.core.App;
+import uim.cake.core.Configure;
+import uim.cake.core.Plugin;
 import uim.cake.Log\Log;
 import uim.cake.Shell\Task\CommandTask;
 import uim.cake.utilities.Inflector;
