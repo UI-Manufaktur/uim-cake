@@ -4,7 +4,7 @@
  *
 
 
- * @since         3.0.0
+
   */
 
 import uim.cake.I18n\I18n;
