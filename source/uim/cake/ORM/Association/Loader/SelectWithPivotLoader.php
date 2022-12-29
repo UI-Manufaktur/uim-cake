@@ -6,7 +6,7 @@
 
  * @since         3.4.0
   */
-module uim.cake.orm.Association\Loader;
+module uim.cake.orm.associations.Loader;
 
 import uim.cake.orm.Query;
 use RuntimeException;
@@ -35,7 +35,7 @@ class SelectWithPivotLoader : SelectLoader
     /**
      * The junction association instance
      *
-     * @var uim.cake.ORM\Association\HasMany
+     * @var uim.cake.orm.associations.HasMany
      */
     protected $junctionAssoc;
 
@@ -63,7 +63,7 @@ class SelectWithPivotLoader : SelectLoader
      * This is used for eager loading records on the target table based on conditions.
      *
      * @param array<string, mixed> $options options accepted by eagerLoader()
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      * @throws \InvalidArgumentException When a key is required for associations but not selected.
      */
     protected function _buildQuery(array $options): Query
@@ -150,7 +150,7 @@ class SelectWithPivotLoader : SelectLoader
      * Builds an array containing the results from fetchQuery indexed by
      * the foreignKey value corresponding to this association.
      *
-     * @param uim.cake.ORM\Query $fetchQuery The query to get results from
+     * @param uim.cake.orm.Query $fetchQuery The query to get results from
      * @param array<string, mixed> $options The options passed to the eager loader
      * @return array<string, mixed>
      * @throws \RuntimeException when the association property is not part of the results set.

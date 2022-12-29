@@ -23,8 +23,8 @@ class LazyEagerLoader
      *
      * @param uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
-     * @see uim.cake.ORM\Query::contain()
-     * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
+     * @see uim.cake.orm.Query::contain()
+     * @param uim.cake.orm.Table $source The table to use for fetching the top level entities
      * @return uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface>
      */
     function loadInto($entities, array $contain, Table $source) {
@@ -50,8 +50,8 @@ class LazyEagerLoader
      *
      * @param uim.cake.Collection\ICollection $objects The original entities
      * @param array $contain The associations to be loaded
-     * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
-     * @return uim.cake.ORM\Query
+     * @param uim.cake.orm.Table $source The table to use for fetching the top level entities
+     * @return uim.cake.orm.Query
      */
     protected function _getQuery(ICollection $objects, array $contain, Table $source): Query
     {
@@ -68,7 +68,7 @@ class LazyEagerLoader
             .where(function ($exp, $q) use ($primaryKey, $keys, $source) {
                 /**
                  * @var uim.cake.Database\Expression\QueryExpression $exp
-                 * @var uim.cake.ORM\Query $q
+                 * @var uim.cake.orm.Query $q
                  */
                 if (is_array($primaryKey) && count($primaryKey) == 1) {
                     $primaryKey = current($primaryKey);
@@ -99,7 +99,7 @@ class LazyEagerLoader
      * Returns a map of property names where the association results should be injected
      * in the top level entities.
      *
-     * @param uim.cake.ORM\Table $source The table having the top level associations
+     * @param uim.cake.orm.Table $source The table having the top level associations
      * @param array<string> $associations The name of the top level associations
      * @return array<string>
      */
@@ -120,9 +120,9 @@ class LazyEagerLoader
      * entities.
      *
      * @param iterable<uim.cake.Datasource\EntityInterface> $objects The original list of entities
-     * @param uim.cake.ORM\Query $results The loaded results
+     * @param uim.cake.orm.Query $results The loaded results
      * @param array<string> $associations The top level associations that were loaded
-     * @param uim.cake.ORM\Table $source The table where the entities came from
+     * @param uim.cake.orm.Table $source The table where the entities came from
      * @return array<uim.cake.Datasource\EntityInterface>
      */
     protected function _injectResults(iterable $objects, $results, array $associations, Table $source): array

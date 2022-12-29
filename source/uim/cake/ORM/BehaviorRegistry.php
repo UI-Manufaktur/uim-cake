@@ -6,7 +6,7 @@ import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
-import uim.cake.orm.Exception\MissingBehaviorException;
+import uim.cake.orm.exceptions.MissingBehaviorException;
 use LogicException;
 
 /**
@@ -15,7 +15,7 @@ use LogicException;
  *
  * This class also provides method for checking and dispatching behavior methods.
  *
- * @: uim.cake.Core\ObjectRegistry<uim.cake.ORM\Behavior>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.orm.Behavior>
  */
 class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
 {
@@ -24,7 +24,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * The table using this registry.
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected $_table;
 
@@ -45,7 +45,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Constructor
      *
-     * @param uim.cake.ORM\Table|null $table The table this registry is attached to.
+     * @param uim.cake.orm.Table|null $table The table this registry is attached to.
      */
     this(?Table $table = null) {
         if ($table != null) {
@@ -56,7 +56,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Attaches a table instance to this registry.
      *
-     * @param uim.cake.ORM\Table $table The table this registry is attached to.
+     * @param uim.cake.orm.Table $table The table this registry is attached to.
      * @return void
      */
     function setTable(Table $table): void
@@ -101,7 +101,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the behavior is missing in.
      * @return void
-     * @throws uim.cake.ORM\Exception\MissingBehaviorException
+     * @throws uim.cake.orm.exceptions.MissingBehaviorException
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
@@ -120,12 +120,12 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname that is missing.
      * @param string $alias The alias of the object.
      * @param array<string, mixed> $config An array of config to use for the behavior.
-     * @return uim.cake.ORM\Behavior The constructed behavior class.
+     * @return uim.cake.orm.Behavior The constructed behavior class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected function _create($class, string $alias, array $config): Behavior
     {
-        /** @var uim.cake.ORM\Behavior $instance */
+        /** @var uim.cake.orm.Behavior $instance */
         $instance = new $class(_table, $config);
         $enable = $config["enabled"] ?? true;
         if ($enable) {
@@ -143,9 +143,9 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * Use the implementedEvents() method to exclude callback methods.
      * Methods starting with `_` will be ignored, as will methods
-     * declared on Cake\ORM\Behavior
+     * declared on Cake\orm.Behavior
      *
-     * @param uim.cake.ORM\Behavior $instance The behavior to get methods from.
+     * @param uim.cake.orm.Behavior $instance The behavior to get methods from.
      * @param string $class The classname that is missing.
      * @param string $alias The alias of the object.
      * @return array A list of implemented finders and methods.
@@ -245,7 +245,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param string $type The finder type to invoke.
      * @param array $args The arguments you want to invoke the method with.
-     * @return uim.cake.ORM\Query The return value depends on the underlying behavior method.
+     * @return uim.cake.orm.Query The return value depends on the underlying behavior method.
      * @throws \BadMethodCallException When the method is unknown.
      */
     function callFinder(string $type, array $args = []): Query

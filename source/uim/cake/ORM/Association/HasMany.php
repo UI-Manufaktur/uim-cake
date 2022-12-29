@@ -7,7 +7,7 @@ import uim.cake.databases.expressions.QueryExpression;
 import uim.cake.datasources.EntityInterface;
 import uim.cake.datasources.InvalidPropertyInterface;
 import uim.cake.orm.Association;
-import uim.cake.orm.Association\Loader\SelectLoader;
+import uim.cake.orm.associations.Loader\SelectLoader;
 import uim.cake.orm.Query;
 import uim.cake.orm.Table;
 use Closure;
@@ -78,7 +78,7 @@ class HasMany : Association
      * association. This means that rows in the "target" table would miss important
      * or required information if the row in "source" did not exist.
      *
-     * @param uim.cake.ORM\Table $side The potential Table with ownership
+     * @param uim.cake.orm.Table $side The potential Table with ownership
      * @return bool
      */
     function isOwningSide(Table $side): bool
@@ -124,7 +124,7 @@ class HasMany : Association
      * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see uim.cake.ORM\Table::save()
+     * @see uim.cake.orm.Table::save()
      * @throws \InvalidArgumentException when the association data cannot be traversed.
      */
     function saveAssociated(EntityInterface $entity, array $options = []) {
@@ -437,7 +437,7 @@ class HasMany : Association
      * @param array $foreignKeyReference The foreign key reference defining the link between the
      * target entity, and the parent entity.
      * @param uim.cake.Datasource\EntityInterface $entity the entity which should have its associated entities unassigned
-     * @param uim.cake.ORM\Table $target The associated table
+     * @param uim.cake.orm.Table $target The associated table
      * @param iterable $remainingEntities Entities that should not be deleted
      * @param array<string, mixed> $options list of options accepted by `Table::delete()`
      * @return bool success
@@ -485,7 +485,7 @@ class HasMany : Association
      * targets and also on foreign key nullability.
      *
      * @param array $foreignKey array of foreign key properties
-     * @param uim.cake.ORM\Table $target The associated table
+     * @param uim.cake.orm.Table $target The associated table
      * @param array $conditions The conditions that specifies what are the objects to be unlinked
      * @param array<string, mixed> $options list of options accepted by `Table::delete()`
      * @return bool success
@@ -528,7 +528,7 @@ class HasMany : Association
     /**
      * Checks the nullable flag of the foreign key
      *
-     * @param uim.cake.ORM\Table $table the table containing the foreign key
+     * @param uim.cake.orm.Table $table the table containing the foreign key
      * @param array $properties the list of fields that compose the foreign key
      * @return bool
      */
@@ -550,7 +550,7 @@ class HasMany : Association
      *
      * @return string
      */
-    function type(): string
+    string type(): string
     {
         return self::ONE_TO_MANY;
     }

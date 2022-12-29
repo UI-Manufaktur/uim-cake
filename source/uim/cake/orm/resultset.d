@@ -38,7 +38,7 @@ class ResultSet : IResultSet
     /**
      * Default table instance
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected _defaultTable;
 
@@ -130,7 +130,7 @@ class ResultSet : IResultSet
     /**
      * Constructor
      *
-     * @param uim.cake.ORM\Query myQuery Query from where results come
+     * @param uim.cake.orm.Query myQuery Query from where results come
      * @param uim.cake.Database\IStatement $statement The statement to fetch from
      */
     this(Query myQuery, IStatement $statement) {
@@ -187,7 +187,7 @@ class ResultSet : IResultSet
      *
      * Part of Iterator interface.
      *
-     * @throws uim.cake.Database\Exception\DatabaseException
+     * @throws uim.cake.Database\exceptions.DatabaseException
      * @return void
      */
     function rewind() {
@@ -339,7 +339,7 @@ class ResultSet : IResultSet
      * Calculates the list of associations that should get eager loaded
      * when fetching each record
      *
-     * @param uim.cake.ORM\Query myQuery The query from where to derive the associations
+     * @param uim.cake.orm.Query myQuery The query from where to derive the associations
      * @return void
      */
     protected void _calculateAssociationMap(Query myQuery) {
@@ -359,7 +359,7 @@ class ResultSet : IResultSet
      * Creates a map of row keys out of the query select clause that can be
      * used to hydrate nested result sets more quickly.
      *
-     * @param uim.cake.ORM\Query myQuery The query from where to derive the column map
+     * @param uim.cake.orm.Query myQuery The query from where to derive the column map
      * @return void
      */
     protected void _calculateColumnMap(Query myQuery) {
@@ -429,7 +429,7 @@ class ResultSet : IResultSet
                 array_intersect_key($row, myKeys)
             );
             if (_hydrate) {
-                /** @var uim.cake.ORM\Table myTable */
+                /** @var uim.cake.orm.Table myTable */
                 myTable = $matching["instance"];
                 myOptions["source"] = myTable.getRegistryAlias();
                 /** @var uim.cake.datasources.IEntity $entity */
@@ -457,7 +457,7 @@ class ResultSet : IResultSet
                 continue;
             }
 
-            /** @var uim.cake.ORM\Association $instance */
+            /** @var uim.cake.orm.Association $instance */
             $instance = $assoc["instance"];
 
             if (!$assoc["canBeJoined"] && !isset($row[myAlias])) {

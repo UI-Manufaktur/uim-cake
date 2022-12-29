@@ -4,7 +4,7 @@ module uim.cake.orm.Association;
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.datasources.EntityInterface;
 import uim.cake.orm.Association;
-import uim.cake.orm.Association\Loader\SelectLoader;
+import uim.cake.orm.associations.Loader\SelectLoader;
 import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
 use Closure;
@@ -72,7 +72,7 @@ class BelongsTo : Association
      * association. This means that rows in the "target" table would miss important
      * or required information if the row in "source" did not exist.
      *
-     * @param uim.cake.ORM\Table $side The potential Table with ownership
+     * @param uim.cake.orm.Table $side The potential Table with ownership
      * @return bool
      */
     function isOwningSide(Table $side): bool
@@ -85,7 +85,7 @@ class BelongsTo : Association
      *
      * @return string
      */
-    function type(): string
+    string type(): string
     {
         return self::MANY_TO_ONE;
     }
@@ -100,7 +100,7 @@ class BelongsTo : Association
      * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see uim.cake.ORM\Table::save()
+     * @see uim.cake.orm.Table::save()
      */
     function saveAssociated(EntityInterface $entity, array $options = []) {
         $targetEntity = $entity.get(this.getProperty());

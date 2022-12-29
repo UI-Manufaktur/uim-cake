@@ -168,7 +168,7 @@ Cache configs are optional, so you must require ``cachephp/cache`` to add one.
 
 ## Creating Custom Table and Entity Classes
 
-By default, the Cake ORM uses the `uim.cake.ORM\Table` and `uim.cake.ORM\Entity` classes to
+By default, the Cake ORM uses the `uim.cake.orm.Table` and `uim.cake.orm.Entity` classes to
 interact with the database. While using the default classes makes sense for
 quick scripts and small applications, you will often want to use your own
 classes for adding your custom logic.

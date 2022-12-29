@@ -3,10 +3,10 @@ module uim.cake.ORM;
 
 import uim.cake.datasources.RuleInvoker;
 import uim.cake.datasources.RulesChecker as BaseRulesChecker;
-import uim.cake.orm.Rule\ExistsIn;
-import uim.cake.orm.Rule\IsUnique;
-import uim.cake.orm.Rule\LinkConstraint;
-import uim.cake.orm.Rule\ValidCount;
+import uim.cake.orm.rules.ExistsIn;
+import uim.cake.orm.rules.IsUnique;
+import uim.cake.orm.rules.LinkConstraint;
+import uim.cake.orm.rules.ValidCount;
 import uim.cake.utilities.Inflector;
 
 /**
@@ -76,7 +76,7 @@ class RulesChecker : BaseRulesChecker
      *
      * @param array<string>|string $field The field or list of fields to check for existence by
      * primary key lookup in the other table.
-     * @param uim.cake.ORM\Table|uim.cake.ORM\Association|string $table The table name where the fields existence will be checked.
+     * @param uim.cake.orm.Table|uim.cake.orm.Association|string $table The table name where the fields existence will be checked.
      * @param array<string, mixed>|string|null $message The error message to show in case the rule does not pass. Can
      *   also be an array of options. When an array, the "message" key can be used to provide a message.
      * @return uim.cake.Datasource\RuleInvoker
@@ -115,7 +115,7 @@ class RulesChecker : BaseRulesChecker
      * On a `Comments` table that has a `belongsTo Articles` association, this check would ensure that comments
      * can only be edited as long as they are associated to an existing article.
      *
-     * @param uim.cake.ORM\Association|string $association The association to check for links.
+     * @param uim.cake.orm.Association|string $association The association to check for links.
      * @param string|null $field The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
      * @param string|null $message The error message to show in case the rule does not pass.
@@ -145,7 +145,7 @@ class RulesChecker : BaseRulesChecker
      * On a `Articles` table that has a `hasMany Comments` association, this check would ensure that articles
      * can only be deleted when no associated comments exist.
      *
-     * @param uim.cake.ORM\Association|string $association The association to check for links.
+     * @param uim.cake.orm.Association|string $association The association to check for links.
      * @param string|null $field The name of the association property. When supplied, this is the name used to set
      *  possible errors. When absent, the name is inferred from `$association`.
      * @param string|null $message The error message to show in case the rule does not pass.
@@ -166,7 +166,7 @@ class RulesChecker : BaseRulesChecker
     /**
      * Adds a link constraint rule.
      *
-     * @param uim.cake.ORM\Association|string $association The association to check for links.
+     * @param uim.cake.orm.Association|string $association The association to check for links.
      * @param string|null $errorField The name of the property to use for setting possible errors. When absent,
      *   the name is inferred from `$association`.
      * @param string|null $message The error message to show in case the rule does not pass.
@@ -175,10 +175,10 @@ class RulesChecker : BaseRulesChecker
      * @return uim.cake.Datasource\RuleInvoker
      * @throws \InvalidArgumentException In case the `$association` argument is of an invalid type.
      * @since 4.0.0
-     * @see uim.cake.ORM\RulesChecker::isLinkedTo()
-     * @see uim.cake.ORM\RulesChecker::isNotLinkedTo()
-     * @see uim.cake.ORM\Rule\LinkConstraint::STATUS_LINKED
-     * @see uim.cake.ORM\Rule\LinkConstraint::STATUS_NOT_LINKED
+     * @see uim.cake.orm.RulesChecker::isLinkedTo()
+     * @see uim.cake.orm.RulesChecker::isNotLinkedTo()
+     * @see uim.cake.orm.rules.LinkConstraint::STATUS_LINKED
+     * @see uim.cake.orm.rules.LinkConstraint::STATUS_NOT_LINKED
      */
     protected function _addLinkConstraintRule(
         $association,
@@ -207,7 +207,7 @@ class RulesChecker : BaseRulesChecker
             }
         } else {
             throw new \InvalidArgumentException(sprintf(
-                "Argument 1 is expected to be of type `uim.cake.ORM\Association|string`, `%s` given.",
+                "Argument 1 is expected to be of type `uim.cake.orm.Association|string`, `%s` given.",
                 getTypeName($association)
             ));
         }

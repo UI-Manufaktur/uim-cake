@@ -22,8 +22,8 @@ class LazyEagerLoader
      *
      * @param uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
-     * @see uim.cake.ORM\Query::contain()
-     * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
+     * @see uim.cake.orm.Query::contain()
+     * @param uim.cake.orm.Table $source The table to use for fetching the top level entities
      * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>
      */
     function loadInto($entities, array $contain, Table $source) {
@@ -49,8 +49,8 @@ class LazyEagerLoader
      *
      * @param uim.cake.Collection\ICollection $objects The original entities
      * @param array $contain The associations to be loaded
-     * @param uim.cake.ORM\Table $source The table to use for fetching the top level entities
-     * @return uim.cake.ORM\Query
+     * @param uim.cake.orm.Table $source The table to use for fetching the top level entities
+     * @return uim.cake.orm.Query
      */
     protected auto _getQuery(ICollection $objects, array $contain, Table $source): Query
     {
@@ -67,7 +67,7 @@ class LazyEagerLoader
             .where(function ($exp, $q) use ($primaryKey, myKeys, $source) {
                 /**
                  * @var uim.cake.Database\Expression\QueryExpression $exp
-                 * @var uim.cake.ORM\Query $q
+                 * @var uim.cake.orm.Query $q
                  */
                 if (is_array($primaryKey) && count($primaryKey) == 1) {
                     $primaryKey = current($primaryKey);
@@ -117,9 +117,9 @@ class LazyEagerLoader
      * entities.
      *
      * @param \Traversable|array<uim.cake.Datasource\IEntity> $objects The original list of entities
-     * @param uim.cake.ORM\Query myResults The loaded results
+     * @param uim.cake.orm.Query myResults The loaded results
      * @param $associations The top level associations that were loaded
-     * @param uim.cake.ORM\Table $source The table where the entities came from
+     * @param uim.cake.orm.Table $source The table where the entities came from
      * @return array
      */
     protected array _injectResults(iterable $objects, myResults, string[] $associations, Table $source) {

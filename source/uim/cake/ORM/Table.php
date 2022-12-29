@@ -11,21 +11,21 @@ import uim.cake.databases.schemas.TableSchemaInterface;
 import uim.cake.databases.TypeFactory;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.datasources.EntityInterface;
-import uim.cake.datasources.Exception\InvalidPrimaryKeyException;
+import uim.cake.datasources.exceptions.InvalidPrimaryKeyException;
 import uim.cake.datasources.RepositoryInterface;
 import uim.cake.datasources.RulesAwareTrait;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.events.EventManager;
-import uim.cake.orm.Association\BelongsTo;
-import uim.cake.orm.Association\BelongsToMany;
-import uim.cake.orm.Association\HasMany;
-import uim.cake.orm.Association\HasOne;
-import uim.cake.orm.Exception\MissingEntityException;
-import uim.cake.orm.Exception\PersistenceFailedException;
-import uim.cake.orm.Exception\RolledbackTransactionException;
-import uim.cake.orm.Rule\IsUnique;
+import uim.cake.orm.associations.BelongsTo;
+import uim.cake.orm.associations.BelongsToMany;
+import uim.cake.orm.associations.HasMany;
+import uim.cake.orm.associations.HasOne;
+import uim.cake.orm.exceptions.MissingEntityException;
+import uim.cake.orm.exceptions.PersistenceFailedException;
+import uim.cake.orm.exceptions.RolledbackTransactionException;
+import uim.cake.orm.rules.IsUnique;
 import uim.cake.utilities.Inflector;
 import uim.cake.Validation\ValidatorAwareInterface;
 import uim.cake.Validation\ValidatorAwareTrait;
@@ -124,7 +124,7 @@ use RuntimeException;
  * - `afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)`
  * - `afterDeleteCommit(IEvent $event, EntityInterface $entity, ArrayObject $options)`
  *
- * @see uim.cake.Event\EventManager for reference on the events system.
+ * @see uim.cake.events.EventManager for reference on the events system.
  * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list
  */
 class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, ValidatorAwareInterface
@@ -136,37 +136,37 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Name of default validation set.
      *
-     * @var string
+     * @var 
      */
-    const DEFAULT_VALIDATOR = "default";
+    const string DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
      *
      * @var string
      */
-    const VALIDATOR_PROVIDER_NAME = "table";
+    const string VALIDATOR_PROVIDER_NAME = "table";
 
     /**
      * The name of the event dispatched when a validator has been built.
      *
      * @var string
      */
-    const BUILD_VALIDATOR_EVENT = "Model.buildValidator";
+    const string BUILD_VALIDATOR_EVENT = "Model.buildValidator";
 
     /**
      * The rules class name that is used.
      *
      * @var string
      */
-    const RULES_CLASS = RulesChecker::class;
+    const string RULES_CLASS = RulesChecker::class;
 
     /**
      * The IsUnique class name that is used.
      *
      * @var string
      */
-    const IS_UNIQUE_CLASS = IsUnique::class;
+    const string IS_UNIQUE_CLASS = IsUnique::class;
 
     /**
      * Name of the table as it can be found in the database
@@ -214,14 +214,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * The associations container for this Table.
      *
-     * @var uim.cake.ORM\AssociationCollection
+     * @var uim.cake.orm.AssociationCollection
      */
     protected $_associations;
 
     /**
      * BehaviorRegistry for this table
      *
-     * @var uim.cake.ORM\BehaviorRegistry
+     * @var uim.cake.orm.BehaviorRegistry
      */
     protected $_behaviors;
 
@@ -316,7 +316,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * instance is created through the TableLocator without a connection.
      *
      * @return string
-     * @see uim.cake.ORM\Locator\TableLocator::get()
+     * @see uim.cake.orm.Locator\TableLocator::get()
      */
     static function defaultConnectionName(): string
     {
@@ -367,7 +367,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @return string
      */
-    function getTable(): string
+    string getTable(): string
     {
         if (_table == null) {
             $table = namespaceSplit(static::class);
@@ -400,7 +400,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @return string
      */
-    function getAlias(): string
+    string getAlias(): string
     {
         if (_alias == null) {
             $alias = namespaceSplit(static::class);
@@ -450,7 +450,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @return string
      */
-    function getRegistryAlias(): string
+    string getRegistryAlias(): string
     {
         if (_registryAlias == null) {
             _registryAlias = this.getAlias();
@@ -716,7 +716,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Sets the class used to hydrate rows for this table.
      *
      * @param string $name The name of the class to use
-     * @throws uim.cake.ORM\Exception\MissingEntityException when the entity class cannot be found
+     * @throws uim.cake.orm.exceptions.MissingEntityException when the entity class cannot be found
      * @return this
      */
     function setEntityClass(string $name) {
@@ -753,7 +753,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array<string, mixed> $options The options for the behavior to use.
      * @return this
      * @throws \RuntimeException If a behavior is being reloaded.
-     * @see uim.cake.ORM\Behavior
+     * @see uim.cake.orm.Behavior
      */
     function addBehavior(string $name, array $options = []) {
         _behaviors.load($name, $options);
@@ -803,7 +803,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param string $name The alias that the behavior was added with.
      * @return this
-     * @see uim.cake.ORM\Behavior
+     * @see uim.cake.orm.Behavior
      */
     function removeBehavior(string $name) {
         _behaviors.unload($name);
@@ -814,7 +814,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Returns the behavior registry for this table.
      *
-     * @return uim.cake.ORM\BehaviorRegistry The BehaviorRegistry instance.
+     * @return uim.cake.orm.BehaviorRegistry The BehaviorRegistry instance.
      */
     function behaviors(): BehaviorRegistry
     {
@@ -825,7 +825,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Get a behavior from the registry.
      *
      * @param string $name The behavior alias to get from the registry.
-     * @return uim.cake.ORM\Behavior
+     * @return uim.cake.orm.Behavior
      * @throws \InvalidArgumentException If the behavior does not exist.
      */
     function getBehavior(string $name): Behavior
@@ -866,7 +866,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * If you are not sure, use hasAssociation() before calling this method.
      *
      * @param string $name The alias used for the association.
-     * @return uim.cake.ORM\Association The association.
+     * @return uim.cake.orm.Association The association.
      * @throws \InvalidArgumentException
      */
     function getAssociation(string $name): Association
@@ -912,7 +912,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ```
      *
      * @param string $name The alias used for the association.
-     * @return uim.cake.ORM\Association|null Either the association or null.
+     * @return uim.cake.orm.Association|null Either the association or null.
      */
     protected function findAssociation(string $name): ?Association
     {
@@ -936,7 +936,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Get the associations collection for this table.
      *
-     * @return uim.cake.ORM\AssociationCollection The collection of association objects.
+     * @return uim.cake.orm.AssociationCollection The collection of association objects.
      */
     function associations(): AssociationCollection
     {
@@ -965,10 +965,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param array $params Set of associations to bind (indexed by association type)
      * @return this
-     * @see uim.cake.ORM\Table::belongsTo()
-     * @see uim.cake.ORM\Table::hasOne()
-     * @see uim.cake.ORM\Table::hasMany()
-     * @see uim.cake.ORM\Table::belongsToMany()
+     * @see uim.cake.orm.Table::belongsTo()
+     * @see uim.cake.orm.Table::hasOne()
+     * @see uim.cake.orm.Table::hasMany()
+     * @see uim.cake.orm.Table::belongsToMany()
      */
     function addAssociations(array $params) {
         foreach ($params as $assocType: $tables) {
@@ -1012,13 +1012,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param string $associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> $options list of options to configure the association definition
-     * @return uim.cake.ORM\Association\BelongsTo
+     * @return uim.cake.orm.associations.BelongsTo
      */
     function belongsTo(string $associated, array $options = []): BelongsTo
     {
         $options += ["sourceTable": this];
 
-        /** @var uim.cake.ORM\Association\BelongsTo $association */
+        /** @var uim.cake.orm.associations.BelongsTo $association */
         $association = _associations.load(BelongsTo::class, $associated, $options);
 
         return $association;
@@ -1058,13 +1058,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param string $associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> $options list of options to configure the association definition
-     * @return uim.cake.ORM\Association\HasOne
+     * @return uim.cake.orm.associations.HasOne
      */
     function hasOne(string $associated, array $options = []): HasOne
     {
         $options += ["sourceTable": this];
 
-        /** @var uim.cake.ORM\Association\HasOne $association */
+        /** @var uim.cake.orm.associations.HasOne $association */
         $association = _associations.load(HasOne::class, $associated, $options);
 
         return $association;
@@ -1110,13 +1110,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param string $associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> $options list of options to configure the association definition
-     * @return uim.cake.ORM\Association\HasMany
+     * @return uim.cake.orm.associations.HasMany
      */
     function hasMany(string $associated, array $options = []): HasMany
     {
         $options += ["sourceTable": this];
 
-        /** @var uim.cake.ORM\Association\HasMany $association */
+        /** @var uim.cake.orm.associations.HasMany $association */
         $association = _associations.load(HasMany::class, $associated, $options);
 
         return $association;
@@ -1164,13 +1164,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param string $associated the alias for the target table. This is used to
      * uniquely identify the association
      * @param array<string, mixed> $options list of options to configure the association definition
-     * @return uim.cake.ORM\Association\BelongsToMany
+     * @return uim.cake.orm.associations.BelongsToMany
      */
     function belongsToMany(string $associated, array $options = []): BelongsToMany
     {
         $options += ["sourceTable": this];
 
-        /** @var uim.cake.ORM\Association\BelongsToMany $association */
+        /** @var uim.cake.orm.associations.BelongsToMany $association */
         $association = _associations.load(BelongsToMany::class, $associated, $options);
 
         return $association;
@@ -1232,7 +1232,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param string $type the type of query to perform
      * @param array<string, mixed> $options An array that will be passed to Query::applyOptions()
-     * @return uim.cake.ORM\Query The query builder
+     * @return uim.cake.orm.Query The query builder
      */
     function find(string $type = "all", array $options = []): Query
     {
@@ -1245,9 +1245,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * By default findAll() applies no conditions, you
      * can override this method in subclasses to modify how `find("all")` works.
      *
-     * @param uim.cake.ORM\Query $query The query to find with
+     * @param uim.cake.orm.Query $query The query to find with
      * @param array<string, mixed> $options The options to use for the find
-     * @return uim.cake.ORM\Query The query builder
+     * @return uim.cake.orm.Query The query builder
      */
     function findAll(Query $query, array $options): Query
     {
@@ -1326,9 +1326,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ]
      * ```
      *
-     * @param uim.cake.ORM\Query $query The query to find with
+     * @param uim.cake.orm.Query $query The query to find with
      * @param array<string, mixed> $options The options for the find
-     * @return uim.cake.ORM\Query The query builder
+     * @return uim.cake.orm.Query The query builder
      */
     function findList(Query $query, array $options): Query
     {
@@ -1391,9 +1391,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ]);
      * ```
      *
-     * @param uim.cake.ORM\Query $query The query to find with
+     * @param uim.cake.orm.Query $query The query to find with
      * @param array<string, mixed> $options The options to find with
-     * @return uim.cake.ORM\Query The query builder
+     * @return uim.cake.orm.Query The query builder
      */
     function findThreaded(Query $query, array $options): Query
     {
@@ -1465,9 +1465,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param mixed $primaryKey primary key value to find
      * @param array<string, mixed> $options options accepted by `Table::find()`
      * @return uim.cake.Datasource\EntityInterface
-     * @throws uim.cake.Datasource\Exception\RecordNotFoundException if the record with such id
+     * @throws uim.cake.Datasource\exceptions.RecordNotFoundException if the record with such id
      * could not be found
-     * @throws uim.cake.Datasource\Exception\InvalidPrimaryKeyException When $primaryKey has an
+     * @throws uim.cake.Datasource\exceptions.InvalidPrimaryKeyException When $primaryKey has an
      *      incorrect number of elements.
      * @see uim.cake.datasources.RepositoryInterface::find()
      * @psalm-suppress InvalidReturnType
@@ -1568,7 +1568,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * entity will be saved and returned.
      *
      * If your find conditions require custom order, associations or conditions, then the $search
-     * parameter can be a callable that takes the Query as the argument, or a uim.cake.ORM\Query object passed
+     * parameter can be a callable that takes the Query as the argument, or a uim.cake.orm.Query object passed
      * as the $search parameter. Allowing you to customize the find results.
      *
      * ### Options
@@ -1579,7 +1579,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   transaction (default: true)
      * - defaults: Whether to use the search criteria as default values for the new entity (default: true)
      *
-     * @param uim.cake.ORM\Query|callable|array $search The criteria to find existing
+     * @param uim.cake.orm.Query|callable|array $search The criteria to find existing
      *   records by. Note that when you pass a query object you"ll have to use
      *   the 2nd arg of the method to modify the entity data before saving.
      * @param callable|null $callback A callback that will be invoked for newly
@@ -1587,7 +1587,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   is persisted.
      * @param array<string, mixed> $options The options to use when saving.
      * @return uim.cake.Datasource\EntityInterface An entity.
-     * @throws uim.cake.ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
+     * @throws uim.cake.orm.exceptions.PersistenceFailedException When the entity couldn"t be saved
      */
     function findOrCreate($search, ?callable $callback = null, $options = []): EntityInterface
     {
@@ -1610,14 +1610,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Performs the actual find and/or create of an entity based on the passed options.
      *
-     * @param uim.cake.ORM\Query|callable|array $search The criteria to find an existing record by, or a callable tha will
+     * @param uim.cake.orm.Query|callable|array $search The criteria to find an existing record by, or a callable tha will
      *   customize the find query.
      * @param callable|null $callback A callback that will be invoked for newly
      *   created entities. This callback will be called *before* the entity
      *   is persisted.
      * @param array<string, mixed> $options The options to use when saving.
      * @return uim.cake.Datasource\EntityInterface|array An entity.
-     * @throws uim.cake.ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
+     * @throws uim.cake.orm.exceptions.PersistenceFailedException When the entity couldn"t be saved
      * @throws \InvalidArgumentException
      */
     protected function _processFindOrCreate($search, ?callable $callback = null, $options = []) {
@@ -1650,8 +1650,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Gets the query object for findOrCreate().
      *
-     * @param uim.cake.ORM\Query|callable|array $search The criteria to find existing records by.
-     * @return uim.cake.ORM\Query
+     * @param uim.cake.orm.Query|callable|array $search The criteria to find existing records by.
+     * @return uim.cake.orm.Query
      */
     protected function _getFindOrCreateQuery($search): Query
     {
@@ -1675,7 +1675,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Creates a new Query instance for a table.
      *
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      */
     function query(): Query
     {
@@ -1685,8 +1685,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Creates a new Query::subquery() instance for a table.
      *
-     * @return uim.cake.ORM\Query
-     * @see uim.cake.ORM\Query::subquery()
+     * @return uim.cake.orm.Query
+     * @see uim.cake.orm.Query::subquery()
      */
     function subquery(): Query
     {
@@ -1813,9 +1813,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ```
      *
      * @param uim.cake.Datasource\EntityInterface $entity the entity to be saved
-     * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array $options The options to use when saving.
+     * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array $options The options to use when saving.
      * @return uim.cake.Datasource\EntityInterface|false
-     * @throws uim.cake.ORM\Exception\RolledbackTransactionException If the transaction is aborted in the afterSave event.
+     * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction is aborted in the afterSave event.
      */
     function save(EntityInterface $entity, $options = []) {
         if ($options instanceof SaveOptionsBuilder) {
@@ -1867,8 +1867,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param uim.cake.Datasource\EntityInterface $entity the entity to be saved
      * @param \ArrayAccess|array $options The options to use when saving.
      * @return uim.cake.Datasource\EntityInterface
-     * @throws uim.cake.ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
-     * @see uim.cake.ORM\Table::save()
+     * @throws uim.cake.orm.exceptions.PersistenceFailedException When the entity couldn"t be saved
+     * @see uim.cake.orm.Table::save()
      */
     function saveOrFail(EntityInterface $entity, $options = []): EntityInterface
     {
@@ -1887,7 +1887,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \ArrayObject $options the options to use for the save operation
      * @return uim.cake.Datasource\EntityInterface|false
      * @throws \RuntimeException When an entity is missing some of the primary keys.
-     * @throws uim.cake.ORM\Exception\RolledbackTransactionException If the transaction
+     * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
     protected function _processSave(EntityInterface $entity, ArrayObject $options) {
@@ -1965,7 +1965,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param uim.cake.Datasource\EntityInterface $entity the entity to be saved
      * @param \ArrayObject $options the options to use for the save operation
      * @return bool True on success
-     * @throws uim.cake.ORM\Exception\RolledbackTransactionException If the transaction
+     * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
     protected function _onSaveSuccess(EntityInterface $entity, ArrayObject $options): bool
@@ -2144,7 +2144,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * error.
      *
      * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to save.
-     * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
+     * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @return iterable<uim.cake.Datasource\EntityInterface>|false False on failure, entities list on success.
      * @throws \Exception
      */
@@ -2167,7 +2167,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @return iterable<uim.cake.Datasource\EntityInterface> Entities list.
      * @throws \Exception
-     * @throws uim.cake.ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
+     * @throws uim.cake.orm.exceptions.PersistenceFailedException If an entity couldn"t be saved.
      */
     function saveManyOrFail(iterable $entities, $options = []): iterable
     {
@@ -2176,8 +2176,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
     /**
      * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to save.
-     * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @throws uim.cake.ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
+     * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
+     * @throws uim.cake.orm.exceptions.PersistenceFailedException If an entity couldn"t be saved.
      * @throws \Exception If an entity couldn"t be saved.
      * @return iterable<uim.cake.Datasource\EntityInterface> Entities list.
      */
@@ -2327,7 +2327,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @return iterable<uim.cake.Datasource\EntityInterface>|false Entities list
      *   on success, false on failure.
-     * @see uim.cake.ORM\Table::delete() for options and events related to this method.
+     * @see uim.cake.orm.Table::delete() for options and events related to this method.
      */
     function deleteMany(iterable $entities, $options = []) {
         $failed = _deleteMany($entities, $options);
@@ -2349,8 +2349,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to delete.
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @return iterable<uim.cake.Datasource\EntityInterface> Entities list.
-     * @throws uim.cake.ORM\Exception\PersistenceFailedException
-     * @see uim.cake.ORM\Table::delete() for options and events related to this method.
+     * @throws uim.cake.orm.exceptions.PersistenceFailedException
+     * @see uim.cake.orm.Table::delete() for options and events related to this method.
      */
     function deleteManyOrFail(iterable $entities, $options = []): iterable
     {
@@ -2405,8 +2405,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param uim.cake.Datasource\EntityInterface $entity The entity to remove.
      * @param \ArrayAccess|array $options The options for the delete.
      * @return true
-     * @throws uim.cake.ORM\Exception\PersistenceFailedException
-     * @see uim.cake.ORM\Table::delete()
+     * @throws uim.cake.orm.exceptions.PersistenceFailedException
+     * @see uim.cake.orm.Table::delete()
      */
     function deleteOrFail(EntityInterface $entity, $options = []): bool
     {
@@ -2497,9 +2497,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Calls a finder method and applies it to the passed query.
      *
      * @param string $type Name of the finder to be called.
-     * @param uim.cake.ORM\Query $query The query object to apply the finder options to.
+     * @param uim.cake.orm.Query $query The query object to apply the finder options to.
      * @param array<string, mixed> $options List of options to pass to the finder.
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      * @throws \BadMethodCallException
      * @uses findAll()
      * @uses findList()
@@ -2530,7 +2530,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param string $method The method name that was fired.
      * @param array $args List of arguments passed to the function.
-     * @return uim.cake.ORM\Query
+     * @return uim.cake.orm.Query
      * @throws \BadMethodCallException when there are missing arguments, or when
      *  and & or are combined.
      */
@@ -2616,7 +2616,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * throws an exception.
      *
      * @param string $property the association name
-     * @return uim.cake.ORM\Association
+     * @return uim.cake.orm.Association
      * @throws \RuntimeException if no association with such name exists
      */
     function __get($property) {
@@ -2651,8 +2651,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Override this method if you want a table object to use custom
      * marshalling logic.
      *
-     * @return uim.cake.ORM\Marshaller
-     * @see uim.cake.ORM\Marshaller
+     * @return uim.cake.orm.Marshaller
+     * @see uim.cake.orm.Marshaller
      */
     function marshaller(): Marshaller
     {
@@ -2728,7 +2728,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array $data The data to build an entity with.
      * @param array<string, mixed> $options A list of options for the object hydration.
      * @return uim.cake.Datasource\EntityInterface
-     * @see uim.cake.ORM\Marshaller::one()
+     * @see uim.cake.orm.Marshaller::one()
      */
     function newEntity(array $data, array $options = []): EntityInterface
     {
@@ -2827,7 +2827,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @param array $data key value list of fields to be merged into the entity
      * @param array<string, mixed> $options A list of options for the object hydration.
      * @return uim.cake.Datasource\EntityInterface
-     * @see uim.cake.ORM\Marshaller::merge()
+     * @see uim.cake.orm.Marshaller::merge()
      */
     function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
     {
@@ -2934,7 +2934,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             }
         }
         $class = static::IS_UNIQUE_CLASS;
-        /** @var uim.cake.ORM\Rule\IsUnique $rule */
+        /** @var uim.cake.orm.rules.IsUnique $rule */
         $rule = new $class($fields, $options);
 
         return $rule($entity, ["repository": this]);
@@ -2997,8 +2997,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * {@inheritDoc}
      *
-     * @param uim.cake.ORM\RulesChecker $rules The rules object to be modified.
-     * @return uim.cake.ORM\RulesChecker
+     * @param uim.cake.orm.RulesChecker $rules The rules object to be modified.
+     * @return uim.cake.orm.RulesChecker
      */
     function buildRules(RulesChecker $rules): RulesChecker
     {
@@ -3009,7 +3009,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Gets a SaveOptionsBuilder instance.
      *
      * @param array<string, mixed> $options Options to parse by the builder.
-     * @return uim.cake.ORM\SaveOptionsBuilder
+     * @return uim.cake.orm.SaveOptionsBuilder
      * @deprecated 4.4.0 Use a normal array for options instead.
      */
     function getSaveOptionsBuilder(array $options = []): SaveOptionsBuilder
@@ -3044,7 +3044,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
-     * @see uim.cake.ORM\Query::contain()
+     * @see uim.cake.orm.Query::contain()
      * @return uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface>
      */
     function loadInto($entities, array $contain) {

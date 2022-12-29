@@ -10,8 +10,8 @@ import uim.cake;
  * required.
  *
  * @see uim.cake.Collection\ICollection For a full description of the collection methods supported by this class
- * @property uim.cake.ORM\Table $_repository Instance of a table object this query is bound to.
- * @method uim.cake.ORM\Table getRepository() Returns the default table object that will be used by this query,
+ * @property uim.cake.orm.Table $_repository Instance of a table object this query is bound to.
+ * @method uim.cake.orm.Table getRepository() Returns the default table object that will be used by this query,
  *   that is, the table that will appear in the from clause.
  * @method uim.cake.Collection\ICollection each(callable $c) Passes each of the query results to the callable
  * @method uim.cake.Collection\ICollection sortBy($callback, int $dir) Sorts the query with the callback
@@ -70,7 +70,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Instance of a class responsible for storing association containments and
      * for eager loading them when this query is executed
      *
-     * @var uim.cake.ORM\EagerLoader|null
+     * @var uim.cake.orm.EagerLoader|null
      */
     protected _eagerLoader;
 
@@ -94,7 +94,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Constructor
      *
      * @param uim.cake.Database\Connection myConnection The connection object
-     * @param uim.cake.ORM\Table myTable The table this query is starting on
+     * @param uim.cake.orm.Table myTable The table this query is starting on
      */
     this(Connection myConnection, Table myTable) {
         super.this(myConnection);
@@ -132,15 +132,15 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * })
      * ```
      *
-     * By default no fields are selected, if you have an instance of `Cake\ORM\Query` and try to append
-     * fields you should also call `Cake\ORM\Query::enableAutoFields()` to select the default fields
+     * By default no fields are selected, if you have an instance of `Cake\orm.Query` and try to append
+     * fields you should also call `Cake\orm.Query::enableAutoFields()` to select the default fields
      * from the table.
      *
-     * If you pass an instance of a `Cake\ORM\Table` or `Cake\ORM\Association` class,
+     * If you pass an instance of a `Cake\orm.Table` or `Cake\orm.Association` class,
      * all the fields in the schema of the table or the association will be added to
      * the select clause.
      *
-     * @param uim.cake.Database\IExpression|uim.cake.ORM\Table|uim.cake.ORM\Association|callable|array|string myFields Fields
+     * @param uim.cake.Database\IExpression|uim.cake.orm.Table|uim.cake.orm.Association|callable|array|string myFields Fields
      * to be added to the list.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
@@ -168,7 +168,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * been added to the query by the first. If you need to change the list after the first call,
      * pass overwrite boolean true which will reset the select clause removing all previous additions.
      *
-     * @param uim.cake.ORM\Table|uim.cake.ORM\Association myTable The table to use to get an array of columns
+     * @param uim.cake.orm.Table|uim.cake.orm.Association myTable The table to use to get an array of columns
      * @param $excludedFields The un-aliased column names you do not want selected from myTable
      * @param bool $overwrite Whether to reset/remove previous selected fields
      * @return this
@@ -199,7 +199,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * This method returns the same query object for chaining.
      *
-     * @param uim.cake.ORM\Table myTable The table to pull types from
+     * @param uim.cake.orm.Table myTable The table to pull types from
      * @return this
      */
     function addDefaultTypes(Table myTable) {
@@ -218,7 +218,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Sets the instance of the eager loader class to use for loading associations
      * and storing containments.
      *
-     * @param uim.cake.ORM\EagerLoader $instance The eager loader to use.
+     * @param uim.cake.orm.EagerLoader $instance The eager loader to use.
      * @return this
      */
     auto setEagerLoader(EagerLoader $instance) {
@@ -230,7 +230,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * Returns the currently configured instance.
      *
-     * @return uim.cake.ORM\EagerLoader
+     * @return uim.cake.orm.EagerLoader
      */
     auto getEagerLoader(): EagerLoader
     {
@@ -404,9 +404,9 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * Used to recursively add contained association column types to
      * the query.
      *
-     * @param uim.cake.ORM\Table myTable The table instance to pluck associations from.
+     * @param uim.cake.orm.Table myTable The table instance to pluck associations from.
      * @param uim.cake.Database\TypeMap myTypeMap The typemap to check for columns in.
-     *   This typemap is indirectly mutated via {@link uim.cake.ORM\Query::addDefaultTypes()}
+     *   This typemap is indirectly mutated via {@link uim.cake.orm.Query::addDefaultTypes()}
      * @param array<string, array> $associations The nested tree of associations to walk.
      */
     protected void _addAssociationsToTypeMap(Table myTable, TypeMap myTypeMap, array $associations) {
@@ -593,7 +593,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * @param callable|null myBuilder a function that will receive a pre-made query object
      * that can be used to add custom conditions or selecting some fields
      * @return this
-     * @see uim.cake.ORM\Query::matching()
+     * @see uim.cake.orm.Query::matching()
      */
     function innerJoinWith(string assoc, ?callable myBuilder = null) {
         myResult = this.getEagerLoader()
@@ -1196,7 +1196,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * Returns a new Query that has automatic field aliasing disabled.
      *
-     * @param uim.cake.ORM\Table myTable The table this query is starting on
+     * @param uim.cake.orm.Table myTable The table this query is starting on
      * @return static
      */
     static function subquery(Table myTable) {

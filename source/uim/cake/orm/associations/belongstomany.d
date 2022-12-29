@@ -26,7 +26,7 @@ class BelongsToMany : Association
     /**
      * Junction table instance
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected _junctionTable;
 
@@ -58,7 +58,7 @@ class BelongsToMany : Association
     /**
      * The table instance for the junction relation.
      *
-     * @var uim.cake.ORM\Table|string
+     * @var uim.cake.orm.Table|string
      */
     protected _through;
 
@@ -176,8 +176,8 @@ class BelongsToMany : Association
      * Sets the table instance for the junction relation. If no arguments
      * are passed, the current configured table instance is returned
      *
-     * @param uim.cake.ORM\Table|string|null myTable Name or instance for the join table
-     * @return uim.cake.ORM\Table
+     * @param uim.cake.orm.Table|string|null myTable Name or instance for the join table
+     * @return uim.cake.orm.Table
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
     function junction(myTable = null): Table
@@ -237,9 +237,9 @@ class BelongsToMany : Association
      * You can override these generated associations by defining associations
      * with the correct aliases.
      *
-     * @param uim.cake.ORM\Table $junction The junction table.
-     * @param uim.cake.ORM\Table $source The source table.
-     * @param uim.cake.ORM\Table myTarget The target table.
+     * @param uim.cake.orm.Table $junction The junction table.
+     * @param uim.cake.orm.Table $source The source table.
+     * @param uim.cake.orm.Table myTarget The target table.
      * @return void
      */
     protected void _generateTargetAssociations(Table $junction, Table $source, Table myTarget) {
@@ -283,8 +283,8 @@ class BelongsToMany : Association
      * You can override these generated associations by defining associations
      * with the correct aliases.
      *
-     * @param uim.cake.ORM\Table $junction The junction table.
-     * @param uim.cake.ORM\Table $source The source table.
+     * @param uim.cake.orm.Table $junction The junction table.
+     * @param uim.cake.orm.Table $source The source table.
      * @return void
      */
     protected void _generateSourceAssociations(Table $junction, Table $source) {
@@ -317,9 +317,9 @@ class BelongsToMany : Association
      * You can override these generated associations by defining associations
      * with the correct aliases.
      *
-     * @param uim.cake.ORM\Table $junction The junction table.
-     * @param uim.cake.ORM\Table $source The source table.
-     * @param uim.cake.ORM\Table myTarget The target table.
+     * @param uim.cake.orm.Table $junction The junction table.
+     * @param uim.cake.orm.Table $source The source table.
+     * @param uim.cake.orm.Table myTarget The target table.
      * @return void
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
@@ -366,7 +366,7 @@ class BelongsToMany : Association
      * - fields: a list of fields in the target table to include in the result
      * - type: The type of join to be used (e.g. INNER)
      *
-     * @param uim.cake.ORM\Query myQuery the query to be altered to include the target table data
+     * @param uim.cake.orm.Query myQuery the query to be altered to include the target table data
      * @param array<string, mixed> myOptions Any extra options or overrides to be taken in account
      * @return void
      */
@@ -529,7 +529,7 @@ class BelongsToMany : Association
      * Returns boolean true, as both of the tables "own" rows in the other side
      * of the association via the joint table.
      *
-     * @param uim.cake.ORM\Table $side The potential Table with ownership
+     * @param uim.cake.orm.Table $side The potential Table with ownership
      */
     bool isOwningSide(Table $side) {
         return true;
@@ -583,8 +583,8 @@ class BelongsToMany : Association
      * in the parent entity cannot be traversed
      * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
-     * @see uim.cake.ORM\Table::save()
-     * @see uim.cake.ORM\Association\BelongsToMany::replaceLinks()
+     * @see uim.cake.orm.Table::save()
+     * @see uim.cake.orm.associations.BelongsToMany::replaceLinks()
      */
     function saveAssociated(IEntity $entity, array myOptions = []) {
         myTargetEntity = $entity.get(this.getProperty());
@@ -866,7 +866,7 @@ class BelongsToMany : Association
     /**
      * Sets the current join table, either the name of the Table instance or the instance itself.
      *
-     * @param uim.cake.ORM\Table|string through Name of the Table instance or the instance itself
+     * @param uim.cake.orm.Table|string through Name of the Table instance or the instance itself
      * @return this
      */
     auto setThrough($through) {
@@ -878,7 +878,7 @@ class BelongsToMany : Association
     /**
      * Gets the current join table, either the name of the Table instance or the instance itself.
      *
-     * @return uim.cake.ORM\Table|string
+     * @return uim.cake.orm.Table|string
      */
     auto getThrough() {
         return _through;
@@ -958,8 +958,8 @@ class BelongsToMany : Association
      * @param array<string, mixed>|string|null myType the type of query to perform, if an array is passed,
      *   it will be interpreted as the `myOptions` parameter
      * @param array<string, mixed> myOptions The options to for the find
-     * @see uim.cake.ORM\Table::find()
-     * @return uim.cake.ORM\Query
+     * @see uim.cake.orm.Table::find()
+     * @return uim.cake.orm.Query
      */
     function find(myType = null, array myOptions = []): Query
     {
@@ -980,9 +980,9 @@ class BelongsToMany : Association
     /**
      * Append a join to the junction table.
      *
-     * @param uim.cake.ORM\Query myQuery The query to append.
+     * @param uim.cake.orm.Query myQuery The query to append.
      * @param array|null $conditions The query conditions to use.
-     * @return uim.cake.ORM\Query The modified query.
+     * @return uim.cake.orm.Query The modified query.
      */
     protected auto _appendJunctionJoin(Query myQuery, ?array $conditions = null): Query
     {
@@ -1133,7 +1133,7 @@ class BelongsToMany : Association
      * `$existing` and `$jointEntities`. This method will return the values from
      * `myTargetEntities` that were not deleted from calculating the difference.
      *
-     * @param uim.cake.ORM\Query $existing a query for getting existing links
+     * @param uim.cake.orm.Query $existing a query for getting existing links
      * @param array<uim.cake.Datasource\IEntity> $jointEntities link entities that should be persisted
      * @param array myTargetEntities entities in target table that are related to
      * the `$jointEntities`

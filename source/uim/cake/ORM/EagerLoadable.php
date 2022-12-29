@@ -21,14 +21,14 @@ class EagerLoadable
     /**
      * A list of other associations to load from this level.
      *
-     * @var array<uim.cake.ORM\EagerLoadable>
+     * @var array<uim.cake.orm.EagerLoadable>
      */
     protected $_associations = [];
 
     /**
      * The Association class instance to use for loading the records.
      *
-     * @var uim.cake.ORM\Association|null
+     * @var uim.cake.orm.Association|null
      */
     protected $_instance;
 
@@ -130,7 +130,7 @@ class EagerLoadable
      * Adds a new association to be loaded from this level.
      *
      * @param string $name The association name.
-     * @param uim.cake.ORM\EagerLoadable $association The association to load.
+     * @param uim.cake.orm.EagerLoadable $association The association to load.
      * @return void
      */
     function addAssociation(string $name, EagerLoadable $association): void
@@ -141,7 +141,7 @@ class EagerLoadable
     /**
      * Returns the Association class instance to use for loading the records.
      *
-     * @return array<uim.cake.ORM\EagerLoadable>
+     * @return array<uim.cake.orm.EagerLoadable>
      */
     function associations(): array
     {
@@ -151,7 +151,7 @@ class EagerLoadable
     /**
      * Gets the Association class instance to use for loading the records.
      *
-     * @return uim.cake.ORM\Association
+     * @return uim.cake.orm.Association
      * @throws \RuntimeException
      */
     function instance(): Association
@@ -169,7 +169,7 @@ class EagerLoadable
      *
      * @return string
      */
-    function aliasPath(): string
+    string aliasPath(): string
     {
         return _aliasPath;
     }
@@ -271,7 +271,7 @@ class EagerLoadable
 
     /**
      * Returns a representation of this object that can be passed to
-     * Cake\ORM\EagerLoader::contain()
+     * Cake\orm.EagerLoader::contain()
      *
      * @return array<string, array>
      */

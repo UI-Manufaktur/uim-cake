@@ -29,14 +29,14 @@ class SaveOptionsBuilder : ArrayObject {
     /**
      * Table object.
      *
-     * @var uim.cake.ORM\Table
+     * @var uim.cake.orm.Table
      */
     protected _table;
 
     /**
      * Constructor.
      *
-     * @param uim.cake.ORM\Table myTable A table instance.
+     * @param uim.cake.orm.Table myTable A table instance.
      * @param array<string, mixed> myOptions Options to parse when instantiating.
      */
     this(Table myTable, array myOptions = []) {
@@ -80,7 +80,7 @@ class SaveOptionsBuilder : ArrayObject {
     /**
      * Checks that the associations exists recursively.
      *
-     * @param uim.cake.ORM\Table myTable Table object.
+     * @param uim.cake.orm.Table myTable Table object.
      * @param array $associations An associations array.
      * @return void
      */
@@ -102,7 +102,7 @@ class SaveOptionsBuilder : ArrayObject {
      * Checks if an association exists.
      *
      * @throws \RuntimeException If no such association exists for the given table.
-     * @param uim.cake.ORM\Table myTable Table object.
+     * @param uim.cake.orm.Table myTable Table object.
      * @param string association Association name.
      */
     protected void _checkAssociation(Table myTable, string association) {
