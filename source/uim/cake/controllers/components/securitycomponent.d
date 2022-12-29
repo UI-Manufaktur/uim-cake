@@ -63,7 +63,7 @@ class SecurityComponent : Component {
      */
     function startup(IEvent myEvent): ?Response
     {
-        /** @var \Cake\Controller\Controller $controller */
+        /** @var uim.cake.Controller\Controller $controller */
         $controller = myEvent.getSubject();
         myRequest = $controller.getRequest();
         _action = myRequest.getParam("action");

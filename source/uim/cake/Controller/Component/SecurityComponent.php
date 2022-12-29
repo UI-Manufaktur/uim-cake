@@ -82,7 +82,7 @@ class SecurityComponent : Component
      */
     function startup(IEvent $event): ?Response
     {
-        /** @var \Cake\Controller\Controller $controller */
+        /** @var uim.cake.Controller\Controller $controller */
         $controller = $event.getSubject();
         $request = $controller.getRequest();
         _action = $request.getParam("action");

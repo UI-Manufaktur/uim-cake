@@ -26,7 +26,7 @@ class SchemaCache
     /**
      * Schema
      *
-     * @var \Cake\Database\Schema\CachedCollection
+     * @var uim.cake.Database\Schema\CachedCollection
      */
     protected $_schema;
 
@@ -100,7 +100,7 @@ class SchemaCache
             $connection.cacheMetadata(true);
         }
 
-        /** @var \Cake\Database\Schema\CachedCollection $schemaCollection */
+        /** @var uim.cake.Database\Schema\CachedCollection $schemaCollection */
         $schemaCollection = $connection.getSchemaCollection();
 
         return $schemaCollection;

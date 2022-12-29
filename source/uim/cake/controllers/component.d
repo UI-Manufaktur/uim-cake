@@ -50,7 +50,7 @@ class Component : IEventListener
     /**
      * Component registry class used to lazy load components.
      *
-     * @var \Cake\Controller\ComponentRegistry
+     * @var uim.cake.Controller\ComponentRegistry
      */
     protected _registry;
 

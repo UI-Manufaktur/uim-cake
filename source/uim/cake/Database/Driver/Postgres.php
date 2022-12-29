@@ -52,7 +52,7 @@ class Postgres : Driver
     /**
      * The schema dialect class for this driver
      *
-     * @var \Cake\Database\Schema\PostgresSchemaDialect|null
+     * @var uim.cake.Database\Schema\PostgresSchemaDialect|null
      */
     protected $_schemaDialect;
 

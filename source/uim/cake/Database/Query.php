@@ -51,7 +51,7 @@ class Query : IExpression, IteratorAggregate
     /**
      * Connection instance to be used to execute this query.
      *
-     * @var \Cake\Database\Connection
+     * @var uim.cake.Database\Connection
      */
     protected $_connection;
 
@@ -146,7 +146,7 @@ class Query : IExpression, IteratorAggregate
     /**
      * Statement object resulting from executing this query.
      *
-     * @var \Cake\Database\StatementInterface|null
+     * @var uim.cake.Database\StatementInterface|null
      */
     protected $_iterator;
 
@@ -154,14 +154,14 @@ class Query : IExpression, IteratorAggregate
      * The object responsible for generating query placeholders and temporarily store values
      * associated to each of those.
      *
-     * @var \Cake\Database\ValueBinder|null
+     * @var uim.cake.Database\ValueBinder|null
      */
     protected $_valueBinder;
 
     /**
      * Instance of functions builder object used for generating arbitrary SQL functions.
      *
-     * @var \Cake\Database\FunctionsBuilder|null
+     * @var uim.cake.Database\FunctionsBuilder|null
      */
     protected $_functionsBuilder;
 
@@ -176,7 +176,7 @@ class Query : IExpression, IteratorAggregate
     /**
      * The Type map for fields in the select clause
      *
-     * @var \Cake\Database\TypeMap|null
+     * @var uim.cake.Database\TypeMap|null
      */
     protected $_selectTypeMap;
 

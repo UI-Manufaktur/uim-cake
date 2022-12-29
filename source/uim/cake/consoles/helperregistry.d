@@ -14,7 +14,7 @@ class HelperRegistry : ObjectRegistry
     /**
      * Shell to use to set params to tasks.
      *
-     * @var \Cake\Console\ConsoleIo
+     * @var uim.cake.Console\ConsoleIo
      */
     protected _io;
 
@@ -77,7 +77,7 @@ class HelperRegistry : ObjectRegistry
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Helper _create(myClass, string myAlias, array myConfig) {
-      /** @var \Cake\Console\Helper */
+      /** @var uim.cake.Console\Helper */
       return new myClass(_io, myConfig);
     }
 }

@@ -15,7 +15,7 @@ class TaskRegistry : ObjectRegistry
     /**
      * Shell to use to set params to tasks.
      *
-     * @var \Cake\Console\Shell
+     * @var uim.cake.Console\Shell
      */
     protected _Shell;
 
@@ -70,7 +70,7 @@ class TaskRegistry : ObjectRegistry
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Shell _create(myClass, string myAlias, array myConfig) {
-        /** @var \Cake\Console\Shell */
+        /** @var uim.cake.Console\Shell */
         return new myClass(_Shell.getIo());
     }
 }

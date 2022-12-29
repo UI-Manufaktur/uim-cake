@@ -25,12 +25,12 @@ use ReflectionNamedType;
 class ControllerFactory : IControllerFactory, IRequestHandler
 {
     /**
-     * @var \Cake\Core\IContainer
+     * @var uim.cake.Core\IContainer
      */
     protected myContainer;
 
     /**
-     * @var \Cake\Controller\Controller
+     * @var uim.cake.Controller\Controller
      */
     protected controller;
 

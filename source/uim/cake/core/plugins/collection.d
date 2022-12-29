@@ -186,7 +186,7 @@ class PluginCollection : Iterator, Countable
      */
     IPlugin create(string myName, array myConfig = []) {
         if (indexOf(myName, "\\") != false) {
-            /** @var \Cake\Core\IPlugin */
+            /** @var uim.cake.Core\IPlugin */
             return new myName(myConfig);
         }
 

@@ -23,21 +23,21 @@ class ConsoleIo {
     /**
      * The output stream
      *
-     * @var \Cake\Console\ConsoleOutput
+     * @var uim.cake.Console\ConsoleOutput
      */
     protected _out;
 
     /**
      * The error stream
      *
-     * @var \Cake\Console\ConsoleOutput
+     * @var uim.cake.Console\ConsoleOutput
      */
     protected _err;
 
     /**
      * The input stream
      *
-     * @var \Cake\Console\ConsoleInput
+     * @var uim.cake.Console\ConsoleInput
      */
     protected _in;
 

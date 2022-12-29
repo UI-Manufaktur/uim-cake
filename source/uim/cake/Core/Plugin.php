@@ -21,7 +21,7 @@ class Plugin
     /**
      * Holds a list of all loaded plugins and their configuration
      *
-     * @var \Cake\Core\PluginCollection|null
+     * @var uim.cake.Core\PluginCollection|null
      */
     protected static $plugins;
 

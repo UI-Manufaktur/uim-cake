@@ -45,7 +45,7 @@ class Shell {
     /**
      * An instance of ConsoleOptionParser that has been configured for this class.
      *
-     * @var \Cake\Console\ConsoleOptionParser
+     * @var uim.cake.Console\ConsoleOptionParser
      */
     public $OptionParser;
 
@@ -110,7 +110,7 @@ class Shell {
     /**
      * Task Collection for the command, used to create Tasks.
      *
-     * @var \Cake\Console\TaskRegistry
+     * @var uim.cake.Console\TaskRegistry
      */
     public $Tasks;
 
@@ -124,7 +124,7 @@ class Shell {
     /**
      * ConsoleIo instance.
      *
-     * @var \Cake\Console\ConsoleIo
+     * @var uim.cake.Console\ConsoleIo
      */
     protected _io;
 

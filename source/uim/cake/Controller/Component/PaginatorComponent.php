@@ -11,9 +11,9 @@ module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;
 import uim.cake.controllers.ComponentRegistry;
-import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
-import uim.cake.Datasource\Paging\NumericPaginator;
-import uim.cake.Datasource\IResultSet;
+import uim.cake.datasources.Paging\Exception\PageOutOfBoundsException;
+import uim.cake.datasources.Paging\NumericPaginator;
+import uim.cake.datasources.IResultSet;
 import uim.cake.https.Exception\NotFoundException;
 use InvalidArgumentException;
 use UnexpectedValueException;
@@ -35,7 +35,7 @@ class PaginatorComponent : Component
     /**
      * Datasource paginator instance.
      *
-     * @var \Cake\Datasource\Paging\NumericPaginator
+     * @var uim.cake.datasources.Paging\NumericPaginator
      */
     protected $_paginator;
 

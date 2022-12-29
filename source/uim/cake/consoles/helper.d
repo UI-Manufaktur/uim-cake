@@ -23,7 +23,7 @@ abstract class Helper {
     /**
      * ConsoleIo instance.
      *
-     * @var \Cake\Console\ConsoleIo
+     * @var uim.cake.Console\ConsoleIo
      */
     protected _io;
 

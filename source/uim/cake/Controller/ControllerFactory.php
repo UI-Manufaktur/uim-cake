@@ -34,12 +34,12 @@ use ReflectionNamedType;
 class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
 {
     /**
-     * @var \Cake\Core\IContainer
+     * @var uim.cake.Core\IContainer
      */
     protected $container;
 
     /**
-     * @var \Cake\Controller\Controller
+     * @var uim.cake.Controller\Controller
      */
     protected $controller;
 

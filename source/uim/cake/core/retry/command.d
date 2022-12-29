@@ -13,7 +13,7 @@ class CommandRetry {
     /**
      * The strategy to follow should the executed action fail.
      *
-     * @var \Cake\Core\Retry\IRetryStrategy
+     * @var uim.cake.Core\Retry\IRetryStrategy
      */
     protected strategy;
 

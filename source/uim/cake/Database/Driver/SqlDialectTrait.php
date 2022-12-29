@@ -96,7 +96,7 @@ trait SqlDialectTrait
                 $query = (new IdentifierQuoter(this)).quote($query);
             }
 
-            /** @var \Cake\ORM\Query $query */
+            /** @var uim.cake.ORM\Query $query */
             $query = this.{"_" . $type . "QueryTranslator"}($query);
             $translators = _expressionTranslators();
             if (!$translators) {

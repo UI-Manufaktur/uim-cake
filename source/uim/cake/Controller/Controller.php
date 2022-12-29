@@ -11,10 +11,10 @@ module uim.cake.Controller;
 
 import uim.cake.controllers.exceptions.MissingActionException;
 import uim.cake.cores.App;
-import uim.cake.Datasource\ModelAwareTrait;
-import uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException;
-import uim.cake.Datasource\Paging\NumericPaginator;
-import uim.cake.Datasource\Paging\PaginatorInterface;
+import uim.cake.datasources.ModelAwareTrait;
+import uim.cake.datasources.Paging\Exception\PageOutOfBoundsException;
+import uim.cake.datasources.Paging\NumericPaginator;
+import uim.cake.datasources.Paging\PaginatorInterface;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventInterface;
@@ -109,7 +109,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var \Cake\Http\ServerRequest
+     * @var uim.cake.Http\ServerRequest
      * @link https://book.cakephp.org/4/en/controllers/request-response.html#request
      */
     protected $request;
@@ -117,7 +117,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * An instance of a Response object that contains information about the impending response
      *
-     * @var \Cake\Http\Response
+     * @var uim.cake.Http\Response
      * @link https://book.cakephp.org/4/en/controllers/request-response.html#response
      */
     protected $response;
@@ -129,7 +129,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * tables your controller will be paginating.
      *
      * @var array
-     * @see uim.cake.Datasource\Paging\NumericPaginator
+     * @see uim.cake.datasources.Paging\NumericPaginator
      */
     public $paginate = [];
 
@@ -144,7 +144,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Instance of ComponentRegistry used to create Components
      *
-     * @var \Cake\Controller\ComponentRegistry|null
+     * @var uim.cake.Controller\ComponentRegistry|null
      */
     protected $_components;
 

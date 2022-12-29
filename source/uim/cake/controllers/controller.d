@@ -72,7 +72,7 @@ class Controller : IEventListener, IEventDispatcher
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var \Cake\Http\ServerRequest
+     * @var uim.cake.Http\ServerRequest
      * @link https://book.UIM.org/4/en/controllers/request-response.html#request
      */
     protected myRequest;
@@ -80,7 +80,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * An instance of a Response object that contains information about the impending response
      *
-     * @var \Cake\Http\Response
+     * @var uim.cake.Http\Response
      * @link https://book.UIM.org/4/en/controllers/request-response.html#response
      */
     protected response;
@@ -107,7 +107,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Instance of ComponentRegistry used to create Components
      *
-     * @var \Cake\Controller\ComponentRegistry|null
+     * @var uim.cake.Controller\ComponentRegistry|null
      */
     protected _components;
 

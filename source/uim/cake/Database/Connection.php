@@ -23,7 +23,7 @@ import uim.cake.databases.Retry\ReconnectStrategy;
 import uim.cake.databases.schemas.CachedCollection;
 import uim.cake.databases.schemas.Collection as SchemaCollection;
 import uim.cake.databases.schemas.ICollection as SchemaICollection;
-import uim.cake.Datasource\ConnectionInterface;
+import uim.cake.datasources.ConnectionInterface;
 import uim.cake.Log\Engine\BaseLog;
 import uim.cake.Log\Log;
 use Psr\Log\LoggerInterface;
@@ -49,7 +49,7 @@ class Connection : ConnectionInterface
      * Driver object, responsible for creating the real connection
      * and provide specific SQL dialect.
      *
-     * @var \Cake\Database\DriverInterface
+     * @var uim.cake.Database\DriverInterface
      */
     protected $_driver;
 
@@ -99,7 +99,7 @@ class Connection : ConnectionInterface
     /**
      * The schema collection object
      *
-     * @var \Cake\Database\Schema\ICollection|null
+     * @var uim.cake.Database\Schema\ICollection|null
      */
     protected $_schemaCollection;
 
@@ -107,7 +107,7 @@ class Connection : ConnectionInterface
      * NestedTransactionRollbackException object instance, will be stored if
      * the rollback method is called in some nested transaction.
      *
-     * @var \Cake\Database\Exception\NestedTransactionRollbackException|null
+     * @var uim.cake.Database\Exception\NestedTransactionRollbackException|null
      */
     protected $nestedTransactionRollbackException;
 
@@ -507,7 +507,7 @@ class Connection : ConnectionInterface
 
         if (_transactionLevel == 0) {
             if (this.wasNestedTransactionRolledback()) {
-                /** @var \Cake\Database\Exception\NestedTransactionRollbackException $e */
+                /** @var uim.cake.Database\Exception\NestedTransactionRollbackException $e */
                 $e = this.nestedTransactionRollbackException;
                 this.nestedTransactionRollbackException = null;
                 throw $e;

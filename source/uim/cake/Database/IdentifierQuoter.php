@@ -23,7 +23,7 @@ class IdentifierQuoter
     /**
      * The driver instance used to do the identifier quoting
      *
-     * @var \Cake\Database\Driver
+     * @var uim.cake.Database\Driver
      */
     protected $_driver;
 

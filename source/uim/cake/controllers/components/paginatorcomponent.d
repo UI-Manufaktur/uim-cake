@@ -41,7 +41,7 @@ class PaginatorComponent : Component
     /**
      * Datasource paginator instance.
      *
-     * @var \Cake\Datasource\Paginator
+     * @var uim.cake.datasources.Paginator
      */
     protected _paginator;
 

@@ -228,7 +228,7 @@ class PluginCollection : Iterator, Countable
     function create(string $name, array $config = []): PluginInterface
     {
         if (strpos($name, "\\") != false) {
-            /** @var \Cake\Core\PluginInterface */
+            /** @var uim.cake.Core\PluginInterface */
             return new $name($config);
         }
 

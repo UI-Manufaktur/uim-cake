@@ -21,7 +21,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     /**
      * The controller that this collection was initialized with.
      *
-     * @var \Cake\Controller\Controller|null
+     * @var uim.cake.Controller\Controller|null
      */
     protected _controller;
 
@@ -106,7 +106,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      * @psalm-param class-string myClass
      */
     protected Component _create(myClass, string myAlias, array myConfig) {
-        /** @var \Cake\Controller\Component $instance */
+        /** @var uim.cake.Controller\Component $instance */
         $instance = new myClass(this, myConfig);
         myEnable = myConfig["enabled"] ?? true;
         if (myEnable) {

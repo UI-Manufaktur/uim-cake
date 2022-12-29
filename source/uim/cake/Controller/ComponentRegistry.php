@@ -30,7 +30,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * The controller that this collection was initialized with.
      *
-     * @var \Cake\Controller\Controller|null
+     * @var uim.cake.Controller\Controller|null
      */
     protected $_Controller;
 
@@ -120,7 +120,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      */
     protected function _create($class, string $alias, array $config): Component
     {
-        /** @var \Cake\Controller\Component $instance */
+        /** @var uim.cake.Controller\Component $instance */
         $instance = new $class(this, $config);
         $enable = $config["enabled"] ?? true;
         if ($enable) {

@@ -167,7 +167,7 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Storage object.
      *
-     * @var \Cake\Auth\Storage\IStorage|null
+     * @var uim.cake.Auth\Storage\IStorage|null
      */
     protected _storage;
 
@@ -184,7 +184,7 @@ class AuthComponent : Component : IEventDispatcher
      * successfully logging in the current user after calling `login()`
      * in the same request
      *
-     * @var \Cake\Auth\BaseAuthenticate|null
+     * @var uim.cake.Auth\BaseAuthenticate|null
      */
     protected _authenticationProvider;
 
@@ -192,7 +192,7 @@ class AuthComponent : Component : IEventDispatcher
      * The instance of the Authorize provider that was used to grant
      * access to the current user to the URL they are requesting.
      *
-     * @var \Cake\Auth\BaseAuthorize|null
+     * @var uim.cake.Auth\BaseAuthorize|null
      */
     protected _authorizationProvider;
 
@@ -234,7 +234,7 @@ class AuthComponent : Component : IEventDispatcher
             return null;
         }
 
-        /** @var \Cake\Controller\Controller $controller */
+        /** @var uim.cake.Controller\Controller $controller */
         $controller = myEvent.getSubject();
 
         $action = $controller.getRequest().getParam("action");
@@ -829,7 +829,7 @@ class AuthComponent : Component : IEventDispatcher
         }
         myRequest = this.getController().getRequest();
         $response = this.getController().getResponse();
-        /** @var \Cake\Auth\Storage\IStorage $storage */
+        /** @var uim.cake.Auth\Storage\IStorage $storage */
         $storage = new myClassName(myRequest, $response, myConfig);
 
         return _storage = $storage;

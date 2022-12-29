@@ -18,7 +18,7 @@ module uim.cake.Database;
 trait TypeMapTrait
 {
     /**
-     * @var \Cake\Database\TypeMap|null
+     * @var uim.cake.Database\TypeMap|null
      */
     protected $_typeMap;
 
