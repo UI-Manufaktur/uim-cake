@@ -69,7 +69,7 @@ abstract class BaseApplication :
 
     /**
      * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
-     * @return \Cake\Http\MiddlewareQueue
+     * @return uim.cake.Http\MiddlewareQueue
      */
     abstract MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
 
@@ -116,7 +116,7 @@ abstract class BaseApplication :
     /**
      * Get the plugin collection in use.
      *
-     * @return \Cake\Core\PluginCollection
+     * @return uim.cake.Core\PluginCollection
      */
     PluginCollection getPlugins() {
         return this.plugins;
@@ -166,7 +166,7 @@ abstract class BaseApplication :
      * loaded using conventions based names.
      *
      * @param uim.cake.Console\CommandCollection $commands The CommandCollection to add commands into.
-     * @return \Cake\Console\CommandCollection The updated collection.
+     * @return uim.cake.Console\CommandCollection The updated collection.
      */
     CommandCollection console(CommandCollection $commands) {
         return $commands.addMany($commands.autoDiscover());
@@ -187,7 +187,7 @@ abstract class BaseApplication :
      * The first time the container is fetched it will be constructed
      * and stored for future calls.
      *
-     * @return \Cake\Core\IContainer
+     * @return uim.cake.Core\IContainer
      */
     IContainer getContainer() {
         if (this.container is null) {
@@ -203,7 +203,7 @@ abstract class BaseApplication :
      * Override this method if you need to use a custom container or
      * want to change how the container is built.
      *
-     * @return \Cake\Core\IContainer
+     * @return uim.cake.Core\IContainer
      */
     protected IContainer buildContainer() {
         myContainer = new Container();

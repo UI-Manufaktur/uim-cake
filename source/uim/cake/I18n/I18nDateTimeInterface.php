@@ -215,7 +215,7 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
     /**
      * Get the difference formatter instance.
      *
-     * @return \Cake\Chronos\DifferenceFormatterInterface The formatter instance.
+     * @return uim.cake.Chronos\DifferenceFormatterInterface The formatter instance.
      */
     public static function getDiffFormatter(): DifferenceFormatterInterface;
 

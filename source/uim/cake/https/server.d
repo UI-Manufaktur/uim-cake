@@ -116,7 +116,7 @@ class Server : IEventDispatcher
     /**
      * Get the current application.
      *
-     * @return \Cake\Core\IHttpApplication The application that will be run.
+     * @return uim.cake.Core\IHttpApplication The application that will be run.
      */
     auto getApp(): IHttpApplication
     {
@@ -126,7 +126,7 @@ class Server : IEventDispatcher
     /**
      * Get the application"s event manager or the global one.
      *
-     * @return \Cake\Event\IEventManager
+     * @return uim.cake.Event\IEventManager
      */
     auto getEventManager(): IEventManager
     {

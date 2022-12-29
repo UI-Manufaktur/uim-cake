@@ -71,7 +71,7 @@ class PackageLocator
      *
      * @param string $name The package name.
      * @param string $locale The locale for the package.
-     * @return \Cake\I18n\Package
+     * @return uim.cake.I18n\Package
      */
     function get(string $name, string $locale): Package
     {

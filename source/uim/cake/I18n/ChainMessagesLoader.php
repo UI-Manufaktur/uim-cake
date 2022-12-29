@@ -38,7 +38,7 @@ class ChainMessagesLoader
      * Executes this object returning the translations package as configured in
      * the chain.
      *
-     * @return \Cake\I18n\Package
+     * @return uim.cake.I18n\Package
      * @throws \RuntimeException if any of the loaders in the chain is not a valid callable
      */
     function __invoke(): Package

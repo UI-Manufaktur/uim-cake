@@ -93,7 +93,7 @@ class CookieCollection : IteratorAggregate, Countable {
      * Get the first cookie by name.
      *
      * @param string myName The name of the cookie.
-     * @return \Cake\Http\Cookie\ICookie
+     * @return uim.cake.Http\Cookie\ICookie
      * @throws \InvalidArgumentException If cookie not found.
      */
     auto get(string myName): ICookie

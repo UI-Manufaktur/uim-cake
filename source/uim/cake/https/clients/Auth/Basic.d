@@ -16,7 +16,7 @@ class Basic
      *
      * @param uim.cake.Http\Client\Request myRequest Request instance.
      * @param array $credentials Credentials.
-     * @return \Cake\Http\Client\Request The updated request.
+     * @return uim.cake.Http\Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
     function authentication(Request myRequest, array $credentials): Request
@@ -35,7 +35,7 @@ class Basic
      *
      * @param uim.cake.Http\Client\Request myRequest Request instance.
      * @param array $credentials Credentials.
-     * @return \Cake\Http\Client\Request The updated request.
+     * @return uim.cake.Http\Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
     function proxyAuthentication(Request myRequest, array $credentials): Request

@@ -317,7 +317,7 @@ class ServerRequest : IServerRequest
     /**
      * Returns the instance of the Session object for this request
      *
-     * @return \Cake\Http\Session
+     * @return uim.cake.Http\Session
      */
     auto getSession(): Session
     {
@@ -327,7 +327,7 @@ class ServerRequest : IServerRequest
     /**
      * Returns the instance of the FlashMessage object for this request
      *
-     * @return \Cake\Http\FlashMessage
+     * @return uim.cake.Http\FlashMessage
      */
     auto getFlash(): FlashMessage
     {
@@ -1262,7 +1262,7 @@ class ServerRequest : IServerRequest
      * `getCookie()` and `getCookieParams()` over this method. Using a CookieCollection
      * is ideal if your cookies contain complex JSON encoded data.
      *
-     * @return \Cake\Http\Cookie\CookieCollection
+     * @return uim.cake.Http\Cookie\CookieCollection
      */
     CookieCollection getCookieCollection() {
         return CookieCollection::createFromServerRequest(this);

@@ -63,7 +63,7 @@ class FormatterLocator
      * Gets a formatter from the registry by name.
      *
      * @param string $name The formatter to retrieve.
-     * @return \Cake\I18n\FormatterInterface A formatter object.
+     * @return uim.cake.I18n\FormatterInterface A formatter object.
      * @throws \Cake\I18n\Exception\I18nException
      */
     function get(string $name): FormatterInterface

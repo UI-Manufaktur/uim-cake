@@ -394,7 +394,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param string myValue Cookie value
      * @param \Psr\Http\Message\IServerRequest myRequest The request object.
-     * @return \Cake\Http\Cookie\ICookie
+     * @return uim.cake.Http\Cookie\ICookie
      */
     protected auto _createCookie(string myValue, IServerRequest myRequest): ICookie
     {

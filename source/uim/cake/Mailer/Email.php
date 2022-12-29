@@ -162,7 +162,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Get message instance.
      *
-     * @return \Cake\Mailer\Message
+     * @return uim.cake.Mailer\Message
      */
     function getMessage(): Message
     {
@@ -250,7 +250,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Gets the transport.
      *
-     * @return \Cake\Mailer\AbstractTransport|null
+     * @return uim.cake.Mailer\AbstractTransport|null
      */
     function getTransport(): ?AbstractTransport
     {
@@ -391,7 +391,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Get view builder.
      *
-     * @return \Cake\View\ViewBuilder
+     * @return uim.cake.View\ViewBuilder
      */
     function viewBuilder(): ViewBuilder
     {
@@ -401,7 +401,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Get email renderer.
      *
-     * @return \Cake\Mailer\Renderer
+     * @return uim.cake.Mailer\Renderer
      */
     function getRenderer(): Renderer
     {
@@ -472,7 +472,7 @@ class Email : JsonSerializable, Serializable
      * @param array|string|null $message String with message or array with variables to be used in render
      * @param array<string, mixed>|string $config String to use Email delivery profile from app.php or array with configs
      * @param bool $send Send the email or just return the instance pre-configured
-     * @return \Cake\Mailer\Email
+     * @return uim.cake.Mailer\Email
      * @throws \InvalidArgumentException
      */
     public static function deliver(

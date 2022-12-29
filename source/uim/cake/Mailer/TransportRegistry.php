@@ -58,7 +58,7 @@ class TransportRegistry : ObjectRegistry
      * @param uim.cake.Mailer\AbstractTransport|string $class The classname or object to make.
      * @param string $alias The alias of the object.
      * @param array<string, mixed> $config An array of settings to use for the cache engine.
-     * @return \Cake\Mailer\AbstractTransport The constructed transport class.
+     * @return uim.cake.Mailer\AbstractTransport The constructed transport class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
     protected function _create($class, string $alias, array $config): AbstractTransport

@@ -54,7 +54,7 @@ class FormData : Countable {
      *
      * @param string myName The name of the part.
      * @param string myValue The value to add.
-     * @return \Cake\Http\Client\FormDataPart
+     * @return uim.cake.Http\Client\FormDataPart
      */
     function newPart(string myName, string myValue): FormDataPart
     {
@@ -114,7 +114,7 @@ class FormData : Countable {
      *
      * @param string myName The name to use.
      * @param mixed myValue Either a string filename, or a filehandle.
-     * @return \Cake\Http\Client\FormDataPart
+     * @return uim.cake.Http\Client\FormDataPart
      */
     function addFile(string myName, myValue): FormDataPart
     {

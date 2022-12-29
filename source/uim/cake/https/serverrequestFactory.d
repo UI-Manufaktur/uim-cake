@@ -27,7 +27,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * @param array|null $parsedBody $_POST superglobal
      * @param array|null $cookies $_COOKIE superglobal
      * @param array|null myfiles $_FILES superglobal
-     * @return \Cake\Http\ServerRequest
+     * @return uim.cake.Http\ServerRequest
      * @throws \InvalidArgumentException for invalid file values
      */
     static function fromGlobals(
@@ -86,7 +86,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      *
      * @param array $parsedBody Parsed body.
      * @param uim.cake.Http\ServerRequest myRequest Request instance.
-     * @return \Cake\Http\ServerRequest
+     * @return uim.cake.Http\ServerRequest
      */
     protected static function marshalBodyAndRequestMethod(array $parsedBody, ServerRequest myRequest): ServerRequest
     {
@@ -127,7 +127,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      *
      * @param array myfiles Files array for normalization and merging in parsed body.
      * @param uim.cake.Http\ServerRequest myRequest Request instance.
-     * @return \Cake\Http\ServerRequest
+     * @return uim.cake.Http\ServerRequest
      */
     protected static function marshalFiles(array myfiles, ServerRequest myRequest): ServerRequest
     {

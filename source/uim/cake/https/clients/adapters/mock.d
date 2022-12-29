@@ -52,7 +52,7 @@ class Mock : IAdapter
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request to match
      * @param array<string, mixed> myOptions Unused.
-     * @return \Cake\Http\Client\Response[] The matched response or an empty array for no matches.
+     * @return uim.cake.Http\Client\Response[] The matched response or an empty array for no matches.
      */
     function send(RequestInterface myRequest, array myOptions): array
     {

@@ -445,7 +445,7 @@ trait DateFormatTrait
     /**
      * Get the difference formatter instance.
      *
-     * @return \Cake\Chronos\DifferenceFormatterInterface
+     * @return uim.cake.Chronos\DifferenceFormatterInterface
      */
     public static function getDiffFormatter(): DifferenceFormatterInterface
     {

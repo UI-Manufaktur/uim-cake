@@ -46,7 +46,7 @@ class I18n
      * for getting specific translators based of their name and locale
      * or to configure some aspect of future translations that are not yet constructed.
      *
-     * @return \Cake\I18n\TranslatorRegistry The translator collection.
+     * @return uim.cake.I18n\TranslatorRegistry The translator collection.
      */
     public static function translators(): TranslatorRegistry
     {
@@ -126,7 +126,7 @@ class I18n
      *
      * @param string $name The domain of the translation messages.
      * @param string|null $locale The locale for the translator.
-     * @return \Cake\I18n\Translator The configured translator.
+     * @return uim.cake.I18n\Translator The configured translator.
      * @throws \Cake\I18n\Exception\I18nException
      */
     public static function getTranslator(string $name = "default", ?string $locale = null): Translator

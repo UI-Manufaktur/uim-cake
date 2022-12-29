@@ -213,7 +213,7 @@ class Client : ClientInterface
     /**
      * Get the cookies stored in the Client.
      *
-     * @return \Cake\Http\Cookie\CookieCollection
+     * @return uim.cake.Http\Cookie\CookieCollection
      */
     CookieCollection cookies() {
         return _cookies;
@@ -246,7 +246,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param array|string myData The query data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     Response get(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -271,7 +271,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The post data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     Response post(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -286,7 +286,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     Response put(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -301,7 +301,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     Response patch(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -316,7 +316,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     Response options(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -331,7 +331,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     Response trace(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -346,7 +346,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param mixed myData The request data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     Response delete(string myUrl, myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -361,7 +361,7 @@ class Client : ClientInterface
      * @param string myUrl The url or path you want to request.
      * @param array myData The query string data you want to send.
      * @param array<string, mixed> myOptions Additional options for the request.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     Response head(string myUrl, array myData = [], array myOptions = []) {
         myOptions = _mergeOptions(myOptions);
@@ -377,7 +377,7 @@ class Client : ClientInterface
      * @param string myUrl URL to request.
      * @param mixed myData The request body.
      * @param array<string, mixed> myOptions The options to use. Contains auth, proxy, etc.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     protected Response _doRequest(string method, string myUrl, myData, myOptions) {
         myRequest = _createRequest(
@@ -419,7 +419,7 @@ class Client : ClientInterface
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request to send.
      * @param array<string, mixed> myOptions Additional options to use.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     Response send(RequestInterface myRequest, array myOptions = []) {
         $redirects = 0;
@@ -491,7 +491,7 @@ class Client : ClientInterface
      *
      * @param \Psr\Http\Message\RequestInterface myRequest The request to send.
      * @param array<string, mixed> myOptions Additional options to use.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     protected Response _sendRequest(RequestInterface myRequest, array myOptions) {
         if (static::$_mockAdapter) {
@@ -564,7 +564,7 @@ class Client : ClientInterface
      * @param string myUrl The url including query string.
      * @param mixed myData The request body.
      * @param array<string, mixed> myOptions The options to use. Contains auth, proxy, etc.
-     * @return \Cake\Http\Client\Request
+     * @return uim.cake.Http\Client\Request
      */
     protected Request _createRequest(string method, string myUrl, myData, myOptions) {
         /** @var array<non-empty-string, non-empty-string> $headers */
@@ -631,7 +631,7 @@ class Client : ClientInterface
      *
      * @param uim.cake.Http\Client\Request myRequest The request to modify.
      * @param array<string, mixed> myOptions Array of options containing the "auth" key.
-     * @return \Cake\Http\Client\Request The updated request object.
+     * @return uim.cake.Http\Client\Request The updated request object.
      */
     protected Request _addAuthentication(Request myRequest, array myOptions) {
         $auth = myOptions["auth"];
@@ -649,7 +649,7 @@ class Client : ClientInterface
      *
      * @param uim.cake.Http\Client\Request myRequest The request to modify.
      * @param array<string, mixed> myOptions Array of options containing the "proxy" key.
-     * @return \Cake\Http\Client\Request The updated request object.
+     * @return uim.cake.Http\Client\Request The updated request object.
      */
     protected Request _addProxy(Request myRequest, array myOptions) {
         $auth = myOptions["proxy"];

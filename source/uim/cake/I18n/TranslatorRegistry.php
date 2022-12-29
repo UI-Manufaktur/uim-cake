@@ -137,7 +137,7 @@ class TranslatorRegistry
     /**
      * Returns the translator packages
      *
-     * @return \Cake\I18n\PackageLocator
+     * @return uim.cake.I18n\PackageLocator
      */
     function getPackages(): PackageLocator
     {
@@ -147,7 +147,7 @@ class TranslatorRegistry
     /**
      * An object of type FormatterLocator
      *
-     * @return \Cake\I18n\FormatterLocator
+     * @return uim.cake.I18n\FormatterLocator
      */
     function getFormatters(): FormatterLocator
     {
@@ -172,7 +172,7 @@ class TranslatorRegistry
      * @param string $name The translator package to retrieve.
      * @param string|null $locale The locale to use; if empty, uses the default
      * locale.
-     * @return \Cake\I18n\Translator|null A translator object.
+     * @return uim.cake.I18n\Translator|null A translator object.
      * @throws \Cake\I18n\Exception\I18nException If no translator with that name could be found
      * for the given locale.
      */
@@ -213,7 +213,7 @@ class TranslatorRegistry
      * @param string $name The translator package to retrieve.
      * @param string $locale The locale to use; if empty, uses the default
      * locale.
-     * @return \Cake\I18n\Translator A translator object.
+     * @return uim.cake.I18n\Translator A translator object.
      */
     protected function _getTranslator(string $name, string $locale): Translator
     {
@@ -238,7 +238,7 @@ class TranslatorRegistry
      *
      * @param string $name The translator package to retrieve.
      * @param string $locale The locale to use; if empty, uses the default locale.
-     * @return \Cake\I18n\Translator A translator object.
+     * @return uim.cake.I18n\Translator A translator object.
      */
     protected function createInstance(string $name, string $locale): Translator
     {
@@ -302,7 +302,7 @@ class TranslatorRegistry
      *
      * @param string $name The name of the package.
      * @param uim.cake.I18n\Package $package Package instance
-     * @return \Cake\I18n\Package
+     * @return uim.cake.I18n\Package
      */
     function setFallbackPackage(string $name, Package $package): Package
     {

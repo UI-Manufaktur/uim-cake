@@ -269,7 +269,7 @@ class Response : Message : IResponse
      * This method exposes the response"s CookieCollection
      * instance allowing you to interact with cookie objects directly.
      *
-     * @return \Cake\Http\Cookie\CookieCollection
+     * @return uim.cake.Http\Cookie\CookieCollection
      */
     CookieCollection getCookieCollection() {
         this.buildCookieCollection();

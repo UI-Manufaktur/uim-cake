@@ -348,7 +348,7 @@ abstract class Association
     /**
      * Gets the table instance for the source side of the association.
      *
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      */
     function getSource(): Table
     {
@@ -370,7 +370,7 @@ abstract class Association
     /**
      * Gets the table instance for the target side of the association.
      *
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      */
     function getTarget(): Table
     {
@@ -838,7 +838,7 @@ abstract class Association
      *   it will be interpreted as the `$options` parameter
      * @param array<string, mixed> $options The options to for the find
      * @see uim.cake.ORM\Table::find()
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     function find($type = null, array $options = []): Query
     {
@@ -1135,7 +1135,7 @@ abstract class Association
      * association"s associations
      *
      * @param string $property the property name
-     * @return \Cake\ORM\Association
+     * @return uim.cake.ORM\Association
      * @throws \RuntimeException if no association with such name exists
      */
     function __get($property) {
@@ -1232,7 +1232,7 @@ abstract class Association
      *
      * @param uim.cake.Datasource\EntityInterface $entity the data to be saved
      * @param array<string, mixed> $options The options for saving associated data.
-     * @return \Cake\Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
+     * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.ORM\Table::save()
      */

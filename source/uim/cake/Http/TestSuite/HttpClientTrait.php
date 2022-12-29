@@ -34,7 +34,7 @@ trait HttpClientTrait
      * @param int $code The response code to use. Defaults to 200
      * @param array<string> $headers A list of headers for the response. Example `Content-Type: application/json`
      * @param string $body The body for the response.
-     * @return \Cake\Http\Client\Response
+     * @return uim.cake.Http\Client\Response
      */
     function newClientResponse(int $code = 200, array $headers = [], string $body = ""): Response
     {

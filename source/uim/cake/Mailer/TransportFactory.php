@@ -41,7 +41,7 @@ class TransportFactory
     /**
      * Returns the Transport Registry used for creating and using transport instances.
      *
-     * @return \Cake\Mailer\TransportRegistry
+     * @return uim.cake.Mailer\TransportRegistry
      */
     public static function getRegistry(): TransportRegistry
     {
@@ -94,7 +94,7 @@ class TransportFactory
      * Get transport instance.
      *
      * @param string $name Config name.
-     * @return \Cake\Mailer\AbstractTransport
+     * @return uim.cake.Mailer\AbstractTransport
      */
     public static function get(string $name): AbstractTransport
     {

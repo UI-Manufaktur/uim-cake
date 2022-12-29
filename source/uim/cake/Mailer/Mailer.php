@@ -222,7 +222,7 @@ class Mailer : IEventListener
     /**
      * Get the view builder.
      *
-     * @return \Cake\View\ViewBuilder
+     * @return uim.cake.View\ViewBuilder
      */
     function viewBuilder(): ViewBuilder
     {
@@ -232,7 +232,7 @@ class Mailer : IEventListener
     /**
      * Get email renderer.
      *
-     * @return \Cake\Mailer\Renderer
+     * @return uim.cake.Mailer\Renderer
      */
     function getRenderer(): Renderer
     {
@@ -258,7 +258,7 @@ class Mailer : IEventListener
     /**
      * Get message instance.
      *
-     * @return \Cake\Mailer\Message
+     * @return uim.cake.Mailer\Message
      */
     function getMessage(): Message
     {
@@ -500,7 +500,7 @@ class Mailer : IEventListener
     /**
      * Gets the transport.
      *
-     * @return \Cake\Mailer\AbstractTransport
+     * @return uim.cake.Mailer\AbstractTransport
      */
     function getTransport(): AbstractTransport
     {

@@ -492,7 +492,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Get socket instance.
      *
-     * @return \Cake\Network\Socket
+     * @return uim.cake.Network\Socket
      * @throws \RuntimeException If socket is not set.
      */
     protected auto _socket(): Socket

@@ -93,7 +93,7 @@ class MessagesFileLoader
      * Loads the translation file and parses it. Returns an instance of a translations
      * package containing the messages loaded from the file.
      *
-     * @return \Cake\I18n\Package|false
+     * @return uim.cake.I18n\Package|false
      * @throws \RuntimeException if no file parser class could be found for the specified
      * file extension.
      */

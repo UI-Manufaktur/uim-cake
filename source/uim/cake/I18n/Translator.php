@@ -193,7 +193,7 @@ class Translator
     /**
      * Returns the translator package
      *
-     * @return \Cake\I18n\Package
+     * @return uim.cake.I18n\Package
      */
     function getPackage(): Package
     {
