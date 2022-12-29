@@ -37,7 +37,7 @@ interface FixtureInterface
      *
      * @param uim.cake.Datasource\ConnectionInterface $connection An instance of the connection
      *   into which the records will be inserted.
-     * @return \Cake\Database\StatementInterface|bool on success or if there are no records to insert,
+     * @return uim.cake.Database\StatementInterface|bool on success or if there are no records to insert,
      *  or false on failure.
      */
     function insert(ConnectionInterface $connection);

@@ -341,7 +341,7 @@ abstract class BaseErrorHandler
     /**
      * Get exception logger.
      *
-     * @return \Cake\Error\ErrorLoggerInterface
+     * @return uim.cake.Error\ErrorLoggerInterface
      */
     function getLogger() {
         if (this.logger == null) {

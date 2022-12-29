@@ -127,7 +127,7 @@ interface IQuery {
      * $singleUser = myQuery.select(["id", "username"]).first();
      * ```
      *
-     * @return \Cake\Datasource\IEntity|array|null the first result from the ResultSet
+     * @return uim.cake.Datasource\IEntity|array|null the first result from the ResultSet
      */
     function first();
 
@@ -263,7 +263,7 @@ interface IQuery {
      * Returns the default repository object that will be used by this query,
      * that is, the repository that will appear in the from clause.
      *
-     * @return \Cake\Datasource\IRepository|null myRepository The default repository object to use
+     * @return uim.cake.Datasource\IRepository|null myRepository The default repository object to use
      */
     auto getRepository(): ?IRepository;
 

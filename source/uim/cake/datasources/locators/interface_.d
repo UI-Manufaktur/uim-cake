@@ -12,7 +12,7 @@ interface ILocator
      *
      * @param string myAlias The alias name you want to get.
      * @param array<string, mixed> myOptions The options you want to build the table with.
-     * @return \Cake\Datasource\IRepository
+     * @return uim.cake.Datasource\IRepository
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
@@ -23,7 +23,7 @@ interface ILocator
      *
      * @param string myAlias The alias to set.
      * @param uim.cake.Datasource\IRepository myRepository The repository to set.
-     * @return \Cake\Datasource\IRepository
+     * @return uim.cake.Datasource\IRepository
      */
     auto set(string myAlias, IRepository myRepository);
 

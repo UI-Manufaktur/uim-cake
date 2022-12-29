@@ -50,7 +50,7 @@ class FactoryLocator
      *
      * @param string myType The repository type to get the factory for.
      * @throws \InvalidArgumentException If the specified repository type has no factory.
-     * @return \Cake\Datasource\Locator\ILocator|callable The factory for the repository type.
+     * @return uim.cake.Datasource\Locator\ILocator|callable The factory for the repository type.
      */
     static auto get(string myType) {
         if (!isset(static::$_modelFactories["Table"])) {

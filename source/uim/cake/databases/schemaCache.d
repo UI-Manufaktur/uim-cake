@@ -84,7 +84,7 @@ class SchemaCache {
      * Helper method to get the schema collection.
      *
      * @param uim.cake.Database\Connection myConnection Connection object
-     * @return \Cake\Database\Schema\CachedCollection
+     * @return uim.cake.Database\Schema\CachedCollection
      * @throws \RuntimeException If given connection object is not compatible with schema caching
      */
     CachedCollection getSchema(Connection myConnection) {

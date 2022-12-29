@@ -44,7 +44,7 @@ interface IRepository
      *
      * @param string myType the type of query to perform
      * @param array<string, mixed> myOptions An array that will be passed to Query::applyOptions()
-     * @return \Cake\Datasource\IQuery
+     * @return uim.cake.Datasource\IQuery
      */
     function find(string myType = "all", array myOptions = []);
 
@@ -65,7 +65,7 @@ interface IRepository
      * @param array<string, mixed> myOptions options accepted by `Table::find()`
      * @throws \Cake\Datasource\Exception\RecordNotFoundException if the record with such id
      * could not be found
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.datasources.IRepository::find()
      */
     IEntity get($primaryKey, array myOptions = []);
@@ -73,7 +73,7 @@ interface IRepository
     /**
      * Creates a new Query instance for this repository
      *
-     * @return \Cake\Datasource\IQuery
+     * @return uim.cake.Datasource\IQuery
      */
     function query();
 
@@ -123,7 +123,7 @@ interface IRepository
      *
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayAccess|array myOptions The options to use when saving.
-     * @return \Cake\Datasource\IEntity|false
+     * @return uim.cake.Datasource\IEntity|false
      */
     function save(IEntity $entity, myOptions = []);
 
@@ -146,7 +146,7 @@ interface IRepository
      * This entity can be persisted without validation error as empty record.
      * Always patch in required fields before saving.
      *
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      */
     IEntity newEmptyEntity();
 
@@ -166,7 +166,7 @@ interface IRepository
      *
      * @param array myData The data to build an entity with.
      * @param array<string, mixed> myOptions A list of options for the object hydration.
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      */
     IEntity newEntity(array myData, array myOptions = []);
 
@@ -203,7 +203,7 @@ interface IRepository
      * data merged in
      * @param array myData key value list of fields to be merged into the entity
      * @param array<string, mixed> myOptions A list of options for the object hydration.
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      */
     IEntity patchEntity(IEntity $entity, array myData, array myOptions = []);
 

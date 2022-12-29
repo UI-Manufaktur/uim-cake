@@ -9,7 +9,7 @@ interface IPaginator {
      *   to paginate.
      * @param array myParams Request params
      * @param array $settings The settings/configuration used for pagination.
-     * @return \Cake\Datasource\IResultSet Query results
+     * @return uim.cake.Datasource\IResultSet Query results
      */
     function paginate(object $object, array myParams = [], array $settings = []): IResultSet;
 

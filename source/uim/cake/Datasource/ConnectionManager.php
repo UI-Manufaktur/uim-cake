@@ -176,7 +176,7 @@ class ConnectionManager
      *
      * @param string $name The connection name.
      * @param bool $useAliases Set to false to not use aliased connections.
-     * @return \Cake\Datasource\ConnectionInterface A connection object.
+     * @return uim.cake.Datasource\ConnectionInterface A connection object.
      * @throws \Cake\Datasource\Exception\MissingDatasourceConfigException When config
      * data is missing.
      */

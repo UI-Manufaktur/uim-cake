@@ -105,7 +105,7 @@ class ExceptionTrap
      *
      * @param \Throwable $exception Exception to render
      * @param \Psr\Http\Message\IServerRequest|null $request The request if possible.
-     * @return \Cake\Error\ExceptionRendererInterface
+     * @return uim.cake.Error\ExceptionRendererInterface
      */
     function renderer(Throwable $exception, $request = null) {
         $request = $request ?? Router::getRequest();
@@ -158,7 +158,7 @@ class ExceptionTrap
     /**
      * Get an instance of the logger.
      *
-     * @return \Cake\Error\ErrorLoggerInterface
+     * @return uim.cake.Error\ErrorLoggerInterface
      */
     function logger(): ErrorLoggerInterface
     {
@@ -206,7 +206,7 @@ class ExceptionTrap
      * is mutable and the object returned by this method
      * could be a stale value.
      *
-     * @return \Cake\Error\ExceptionTrap|null The global instance or null.
+     * @return uim.cake.Error\ExceptionTrap|null The global instance or null.
      */
     public static function instance(): ?self
     {

@@ -21,7 +21,7 @@ interface ILocator
      *
      * @param string $alias The alias name you want to get.
      * @param array<string, mixed> $options The options you want to build the table with.
-     * @return \Cake\Datasource\RepositoryInterface
+     * @return uim.cake.Datasource\RepositoryInterface
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
@@ -32,7 +32,7 @@ interface ILocator
      *
      * @param string $alias The alias to set.
      * @param uim.cake.Datasource\RepositoryInterface $repository The repository to set.
-     * @return \Cake\Datasource\RepositoryInterface
+     * @return uim.cake.Datasource\RepositoryInterface
      */
     function set(string $alias, RepositoryInterface $repository);
 

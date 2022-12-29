@@ -68,7 +68,7 @@ interface IQuery
      * ResultSetDecorator is a traversable object that : the methods found
      * on Cake\Collection\Collection.
      *
-     * @return \Cake\Datasource\IResultSet
+     * @return uim.cake.Datasource\IResultSet
      */
     function all(): IResultSet;
 
@@ -141,7 +141,7 @@ interface IQuery
      * $singleUser = $query.select(["id", "username"]).first();
      * ```
      *
-     * @return \Cake\Datasource\EntityInterface|array|null the first result from the ResultSet
+     * @return uim.cake.Datasource\EntityInterface|array|null the first result from the ResultSet
      */
     function first();
 
@@ -278,7 +278,7 @@ interface IQuery
      * Returns the default repository object that will be used by this query,
      * that is, the repository that will appear in the from clause.
      *
-     * @return \Cake\Datasource\RepositoryInterface|null $repository The default repository object to use
+     * @return uim.cake.Datasource\RepositoryInterface|null $repository The default repository object to use
      */
     function getRepository(): ?RepositoryInterface;
 

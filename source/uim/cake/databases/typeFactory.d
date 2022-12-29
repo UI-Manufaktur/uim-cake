@@ -51,7 +51,7 @@ class TypeFactory
      *
      * @param string myName type identifier
      * @throws \InvalidArgumentException If type identifier is unknown
-     * @return \Cake\Database\IType
+     * @return uim.cake.Database\IType
      */
     static function build(string myName): IType
     {

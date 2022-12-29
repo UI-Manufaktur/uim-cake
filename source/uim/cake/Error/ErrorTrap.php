@@ -175,7 +175,7 @@ class ErrorTrap
     /**
      * Get an instance of the renderer.
      *
-     * @return \Cake\Error\ErrorRendererInterface
+     * @return uim.cake.Error\ErrorRendererInterface
      */
     function renderer(): ErrorRendererInterface
     {
@@ -188,7 +188,7 @@ class ErrorTrap
     /**
      * Get an instance of the logger.
      *
-     * @return \Cake\Error\ErrorLoggerInterface
+     * @return uim.cake.Error\ErrorLoggerInterface
      */
     function logger(): ErrorLoggerInterface
     {

@@ -25,7 +25,7 @@ interface IFixture {
      *
      * @param uim.cake.Datasource\IConnection myConnection An instance of the connection
      *   into which the records will be inserted.
-     * @return \Cake\Database\IStatement|bool on success or if there are no records to insert,
+     * @return uim.cake.Database\IStatement|bool on success or if there are no records to insert,
      *  or false on failure.
      */
     function insert(IConnection myConnection);

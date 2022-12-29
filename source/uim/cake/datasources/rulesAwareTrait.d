@@ -70,7 +70,7 @@ trait RulesAwareTrait
      * needs to be fetched from relevant datasources.
      *
      * @see uim.cake.datasources.RulesChecker
-     * @return \Cake\Datasource\RulesChecker
+     * @return uim.cake.Datasource\RulesChecker
      */
     function rulesChecker(): RulesChecker
     {
@@ -93,7 +93,7 @@ trait RulesAwareTrait
      * entities saved by this instance.
      *
      * @param uim.cake.Datasource\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\Datasource\RulesChecker
+     * @return uim.cake.Datasource\RulesChecker
      */
     function buildRules(RulesChecker $rules): RulesChecker
     {

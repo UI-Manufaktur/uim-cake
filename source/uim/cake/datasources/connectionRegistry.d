@@ -52,7 +52,7 @@ class ConnectionRegistry : ObjectRegistry
      * @param uim.cake.Datasource\IConnection|callable|string myClass The classname or object to make.
      * @param string myAlias The alias of the object.
      * @param array<string, mixed> myConfig An array of settings to use for the datasource.
-     * @return \Cake\Datasource\IConnection A connection with the correct settings.
+     * @return uim.cake.Datasource\IConnection A connection with the correct settings.
      */
     protected auto _create(myClass, string myAlias, array myConfig) {
         if (is_callable(myClass)) {

@@ -82,7 +82,7 @@ trait ModelAwareTrait
      * @param string|null $modelClass Name of model class to load. Defaults to this.modelClass.
      *  The name can be an alias like `"Post"` or FQCN like `App\Model\Table\PostsTable::class`.
      * @param string|null $modelType The type of repository to load. Defaults to the getModelType() value.
-     * @return \Cake\Datasource\RepositoryInterface The model instance created.
+     * @return uim.cake.Datasource\RepositoryInterface The model instance created.
      * @throws \Cake\Datasource\Exception\MissingModelException If the model class cannot be found.
      * @throws \UnexpectedValueException If $modelClass argument is not provided
      *   and ModelAwareTrait::$modelClass property value is empty.

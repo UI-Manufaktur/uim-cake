@@ -81,7 +81,7 @@ trait QueryTrait
      * Returns the default table object that will be used by this query,
      * that is, the table that will appear in the from clause.
      *
-     * @return \Cake\Datasource\IRepository
+     * @return uim.cake.Datasource\IRepository
      */
     IRepository getRepository() {
         return _repository;
@@ -111,7 +111,7 @@ trait QueryTrait
      * iterated without having to call execute() manually, thus making it look like
      * a result set instead of the query itself.
      *
-     * @return \Cake\Datasource\IResultSet
+     * @return uim.cake.Datasource\IResultSet
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     auto getIterator() {
@@ -240,7 +240,7 @@ trait QueryTrait
      * ResultSetDecorator is a traversable object that : the methods found
      * on Cake\Collection\Collection.
      *
-     * @return \Cake\Datasource\IResultSet
+     * @return uim.cake.Datasource\IResultSet
      */
     IResultSet all() {
         if (_results  !is null) {
@@ -446,7 +446,7 @@ trait QueryTrait
      * $singleUser = myQuery.select(["id", "username"]).first();
      * ```
      *
-     * @return \Cake\Datasource\IEntity|array|null The first result from the ResultSet.
+     * @return uim.cake.Datasource\IEntity|array|null The first result from the ResultSet.
      */
     function first() {
         if (_dirty) {
@@ -460,7 +460,7 @@ trait QueryTrait
      * Get the first result from the executing query or raise an exception.
      *
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When there is no first record.
-     * @return \Cake\Datasource\IEntity|array The first result from the ResultSet.
+     * @return uim.cake.Datasource\IEntity|array The first result from the ResultSet.
      */
     function firstOrFail() {
         $entity = this.first();
@@ -532,7 +532,7 @@ trait QueryTrait
     /**
      * Executes this query and returns a traversable object containing the results
      *
-     * @return \Cake\Datasource\IResultSet
+     * @return uim.cake.Datasource\IResultSet
      */
     abstract protected IResultSet _execute();
 
@@ -540,7 +540,7 @@ trait QueryTrait
      * Decorates the results iterator with MapReduce routines and formatters
      *
      * @param \Traversable myResult Original results
-     * @return \Cake\Datasource\IResultSet
+     * @return uim.cake.Datasource\IResultSet
      */
     protected IResultSet _decorateResults(Traversable myResult) {
         $decorator = _decoratorClass();

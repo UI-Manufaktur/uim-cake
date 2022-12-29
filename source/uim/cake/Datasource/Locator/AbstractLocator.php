@@ -36,7 +36,7 @@ abstract class AbstractLocator : ILocator
      *
      * @param string $alias The alias name you want to get.
      * @param array<string, mixed> $options The options you want to build the table with.
-     * @return \Cake\Datasource\RepositoryInterface
+     * @return uim.cake.Datasource\RepositoryInterface
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
@@ -65,7 +65,7 @@ abstract class AbstractLocator : ILocator
      *
      * @param string $alias Repository alias.
      * @param array<string, mixed> $options The options you want to build the instance with.
-     * @return \Cake\Datasource\RepositoryInterface
+     * @return uim.cake.Datasource\RepositoryInterface
      */
     abstract protected function createInstance(string $alias, array $options);
 

@@ -275,7 +275,7 @@ class RulesChecker
      * @param callable|\Cake\Datasource\RuleInvoker $rule The rule to decorate
      * @param array|string|null myName The alias for a rule or an array of options
      * @param array<string, mixed> myOptions The options containing the error message and field.
-     * @return \Cake\Datasource\RuleInvoker
+     * @return uim.cake.Datasource\RuleInvoker
      */
     protected auto _addError(callable $rule, myName = null, array myOptions = []): RuleInvoker
     {

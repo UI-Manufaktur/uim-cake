@@ -59,7 +59,7 @@ interface RepositoryInterface
      *
      * @param string $type the type of query to perform
      * @param array<string, mixed> $options An array that will be passed to Query::applyOptions()
-     * @return \Cake\Datasource\IQuery
+     * @return uim.cake.Datasource\IQuery
      */
     function find(string $type = "all", array $options = []);
 
@@ -80,7 +80,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $options options accepted by `Table::find()`
      * @throws \Cake\Datasource\Exception\RecordNotFoundException if the record with such id
      * could not be found
-     * @return \Cake\Datasource\EntityInterface
+     * @return uim.cake.Datasource\EntityInterface
      * @see uim.cake.datasources.RepositoryInterface::find()
      */
     function get($primaryKey, array $options = []): EntityInterface;
@@ -88,7 +88,7 @@ interface RepositoryInterface
     /**
      * Creates a new Query instance for this repository
      *
-     * @return \Cake\Datasource\IQuery
+     * @return uim.cake.Datasource\IQuery
      */
     function query();
 
@@ -139,7 +139,7 @@ interface RepositoryInterface
      *
      * @param uim.cake.Datasource\EntityInterface $entity the entity to be saved
      * @param \ArrayAccess|array $options The options to use when saving.
-     * @return \Cake\Datasource\EntityInterface|false
+     * @return uim.cake.Datasource\EntityInterface|false
      */
     function save(EntityInterface $entity, $options = []);
 
@@ -162,7 +162,7 @@ interface RepositoryInterface
      * This entity can be persisted without validation error as empty record.
      * Always patch in required fields before saving.
      *
-     * @return \Cake\Datasource\EntityInterface
+     * @return uim.cake.Datasource\EntityInterface
      */
     function newEmptyEntity(): EntityInterface;
 
@@ -182,7 +182,7 @@ interface RepositoryInterface
      *
      * @param array $data The data to build an entity with.
      * @param array<string, mixed> $options A list of options for the object hydration.
-     * @return \Cake\Datasource\EntityInterface
+     * @return uim.cake.Datasource\EntityInterface
      */
     function newEntity(array $data, array $options = []): EntityInterface;
 
@@ -219,7 +219,7 @@ interface RepositoryInterface
      * data merged in
      * @param array $data key value list of fields to be merged into the entity
      * @param array<string, mixed> $options A list of options for the object hydration.
-     * @return \Cake\Datasource\EntityInterface
+     * @return uim.cake.Datasource\EntityInterface
      */
     function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface;
 
