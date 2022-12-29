@@ -13,7 +13,7 @@ import uim.cake.utilities.Inflector;
 
 /**
  * This route class will transparently inflect the controller and plugin routing
- * parameters, so that requesting `/my_controller` is parsed as `['controller': 'MyController']`
+ * parameters, so that requesting `/my_controller` is parsed as `["controller": "MyController"]`
  */
 class InflectedRoute : Route
 {
@@ -35,21 +35,21 @@ class InflectedRoute : Route
      * @param string $method The HTTP method being matched.
      * @return array|null An array of request parameters, or null on failure.
      */
-    function parse(string $url, string $method = ''): ?array
+    function parse(string $url, string $method = ""): ?array
     {
         $params = parent::parse($url, $method);
         if (!$params) {
             return null;
         }
-        if (!empty($params['controller'])) {
-            $params['controller'] = Inflector::camelize($params['controller']);
+        if (!empty($params["controller"])) {
+            $params["controller"] = Inflector::camelize($params["controller"]);
         }
-        if (!empty($params['plugin'])) {
-            if (strpos($params['plugin'], '/') == false) {
-                $params['plugin'] = Inflector::camelize($params['plugin']);
+        if (!empty($params["plugin"])) {
+            if (strpos($params["plugin"], "/") == false) {
+                $params["plugin"] = Inflector::camelize($params["plugin"]);
             } else {
-                [$vendor, $plugin] = explode('/', $params['plugin'], 2);
-                $params['plugin'] = Inflector::camelize($vendor) . '/' . Inflector::camelize($plugin);
+                [$vendor, $plugin] = explode("/", $params["plugin"], 2);
+                $params["plugin"] = Inflector::camelize($vendor) . "/" . Inflector::camelize($plugin);
             }
         }
 
@@ -85,11 +85,11 @@ class InflectedRoute : Route
      */
     protected function _underscore(array $url): array
     {
-        if (!empty($url['controller'])) {
-            $url['controller'] = Inflector::underscore($url['controller']);
+        if (!empty($url["controller"])) {
+            $url["controller"] = Inflector::underscore($url["controller"]);
         }
-        if (!empty($url['plugin'])) {
-            $url['plugin'] = Inflector::underscore($url['plugin']);
+        if (!empty($url["plugin"])) {
+            $url["plugin"] = Inflector::underscore($url["plugin"]);
         }
 
         return $url;

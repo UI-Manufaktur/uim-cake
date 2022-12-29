@@ -45,7 +45,7 @@ class Package
      * @param array<array|string> $messages The messages in this package.
      */
     public this(
-        string $formatter = 'default',
+        string $formatter = "default",
         ?string $fallback = null,
         array $messages = []
     ) {

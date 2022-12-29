@@ -39,17 +39,17 @@ class ConnectionHelper
      */
     function addTestAliases(): void
     {
-        ConnectionManager::alias('test', 'default');
+        ConnectionManager::alias("test", "default");
         foreach (ConnectionManager::configured() as $connection) {
-            if ($connection == 'test' || $connection == 'default') {
+            if ($connection == "test" || $connection == "default") {
                 continue;
             }
 
-            if (strpos($connection, 'test_') == 0) {
+            if (strpos($connection, "test_") == 0) {
                 $original = substr($connection, 5);
                 ConnectionManager::alias($connection, $original);
             } else {
-                $test = 'test_' . $connection;
+                $test = "test_" . $connection;
                 ConnectionManager::alias($test, $connection);
             }
         }
@@ -85,7 +85,7 @@ class ConnectionHelper
         $connection = ConnectionManager::get($connectionName);
         $collection = $connection.getSchemaCollection();
 
-        if (method_exists($collection, 'listTablesWithoutViews')) {
+        if (method_exists($collection, "listTablesWithoutViews")) {
             $allTables = $collection.listTablesWithoutViews();
         } else {
             $allTables = $collection.listTables();

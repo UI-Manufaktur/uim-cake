@@ -55,7 +55,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @var \Closure|array<int>|string|int
      * @see \Cake\I18n\Time::i18nFormat()
      */
-    protected static $_jsonEncodeFormat = "yyyy-MM-dd'T'HH':'mm':'ssxxx";
+    protected static $_jsonEncodeFormat = "yyyy-MM-dd"T"HH":"mm":"ssxxx";
 
     /**
      * The format to use when formatting a time using `Cake\I18n\FrozenTime::nice()`
@@ -90,13 +90,13 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @see \Cake\I18n\FrozenTime::timeAgoInWords()
      */
     public static $wordAccuracy = [
-        'year': 'day',
-        'month': 'day',
-        'week': 'day',
-        'day': 'hour',
-        'hour': 'minute',
-        'minute': 'minute',
-        'second': 'second',
+        "year": "day",
+        "month": "day",
+        "week": "day",
+        "day": "hour",
+        "hour": "minute",
+        "minute": "minute",
+        "second": "second",
     ];
 
     /**
@@ -105,14 +105,14 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @var string
      * @see \Cake\I18n\FrozenTime::timeAgoInWords()
      */
-    public static $wordEnd = '+1 month';
+    public static $wordEnd = "+1 month";
 
     /**
      * serialise the value as a Unix Timestamp
      *
      * @var string
      */
-    public const UNIX_TIMESTAMP_FORMAT = 'unixTimestampFormat';
+    public const UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
 
     /**
      * Create a new immutable time instance.
@@ -123,11 +123,11 @@ class FrozenTime : Chronos : I18nDateTimeInterface
     public this($time = null, $tz = null) {
         if ($time instanceof DateTimeInterface) {
             $tz = $time.getTimezone();
-            $time = $time.format('Y-m-d H:i:s.u');
+            $time = $time.format("Y-m-d H:i:s.u");
         }
 
         if (is_numeric($time)) {
-            $time = '@' . $time;
+            $time = "@" . $time;
         }
 
         super(($time, $tz);
@@ -162,8 +162,8 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * Default date formatting is d/M/YY e.g: on 18/2/09. Formatting is done internally using
      * `i18nFormat`, see the method for the valid formatting strings
      *
-     * The returned string includes 'ago' or 'on' and assumes you'll properly add a word
-     * like 'Posted ' before the function output.
+     * The returned string includes "ago" or "on" and assumes you"ll properly add a word
+     * like "Posted " before the function output.
      *
      * NOTE: If the difference is one week or more, the lowest level of accuracy is day
      *
@@ -195,17 +195,17 @@ class FrozenTime : Chronos : I18nDateTimeInterface
     {
         if (is_bool($options)) {
             $options = [
-                'group': $options,
+                "group": $options,
             ];
         }
         $defaults = [
-            'group': true,
-            'abbr': false,
-            'before': ' - ',
-            'after': null,
+            "group": true,
+            "abbr": false,
+            "before": " - ",
+            "after": null,
         ];
         $options += $defaults;
-        $group = $options['group'];
+        $group = $options["group"];
 
         $regex = null;
         if (is_string($filter)) {
@@ -228,18 +228,18 @@ class FrozenTime : Chronos : I18nDateTimeInterface
         if ($group) {
             $groupedIdentifiers = [];
             $now = time();
-            $before = $options['before'];
-            $after = $options['after'];
+            $before = $options["before"];
+            $after = $options["after"];
             foreach ($identifiers as $tz) {
-                $abbr = '';
-                if ($options['abbr']) {
+                $abbr = "";
+                if ($options["abbr"]) {
                     $dateTimeZone = new DateTimeZone($tz);
                     $trans = $dateTimeZone.getTransitions($now, $now);
-                    $abbr = isset($trans[0]['abbr']) ?
-                        $before . $trans[0]['abbr'] . $after :
-                        '';
+                    $abbr = isset($trans[0]["abbr"]) ?
+                        $before . $trans[0]["abbr"] . $after :
+                        "";
                 }
-                $item = explode('/', $tz, 2);
+                $item = explode("/", $tz, 2);
                 if (isset($item[1])) {
                     $groupedIdentifiers[$item[0]][$tz] = $item[1] . $abbr;
                 } else {

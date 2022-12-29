@@ -25,21 +25,21 @@ class Number
      *
      * @var string
      */
-    public const DEFAULT_LOCALE = 'en_US';
+    public const DEFAULT_LOCALE = "en_US";
 
     /**
      * Format type to format as currency
      *
      * @var string
      */
-    public const FORMAT_CURRENCY = 'currency';
+    public const FORMAT_CURRENCY = "currency";
 
     /**
      * Format type to format as currency, accounting style (negative numbers in parentheses)
      *
      * @var string
      */
-    public const FORMAT_CURRENCY_ACCOUNTING = 'currency_accounting';
+    public const FORMAT_CURRENCY_ACCOUNTING = "currency_accounting";
 
     /**
      * ICU Constant for accounting format; not yet widely supported by INTL library.
@@ -86,7 +86,7 @@ class Number
      */
     public static function precision($value, int $precision = 3, array $options = []): string
     {
-        $formatter = static::formatter(['precision': $precision, 'places': $precision] + $options);
+        $formatter = static::formatter(["precision": $precision, "places": $precision] + $options);
 
         return $formatter.format((float)$value);
     }
@@ -104,15 +104,15 @@ class Number
 
         switch (true) {
             case $size < 1024:
-                return __dn('cake', '{0,number,integer} Byte', '{0,number,integer} Bytes', $size, $size);
+                return __dn("cake", "{0,number,integer} Byte", "{0,number,integer} Bytes", $size, $size);
             case round($size / 1024) < 1024:
-                return __d('cake', '{0,number,#,###.##} KB', $size / 1024);
+                return __d("cake", "{0,number,#,###.##} KB", $size / 1024);
             case round($size / 1024 / 1024, 2) < 1024:
-                return __d('cake', '{0,number,#,###.##} MB', $size / 1024 / 1024);
+                return __d("cake", "{0,number,#,###.##} MB", $size / 1024 / 1024);
             case round($size / 1024 / 1024 / 1024, 2) < 1024:
-                return __d('cake', '{0,number,#,###.##} GB', $size / 1024 / 1024 / 1024);
+                return __d("cake", "{0,number,#,###.##} GB", $size / 1024 / 1024 / 1024);
             default:
-                return __d('cake', '{0,number,#,###.##} TB', $size / 1024 / 1024 / 1024 / 1024);
+                return __d("cake", "{0,number,#,###.##} TB", $size / 1024 / 1024 / 1024 / 1024);
         }
     }
 
@@ -132,8 +132,8 @@ class Number
      */
     public static function toPercentage($value, int $precision = 2, array $options = []): string
     {
-        $options += ['multiply': false, 'type': NumberFormatter::PERCENT];
-        if (!$options['multiply']) {
+        $options += ["multiply": false, "type": NumberFormatter::PERCENT];
+        if (!$options["multiply"]) {
             $value = (float)$value / 100;
         }
 
@@ -149,8 +149,8 @@ class Number
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `pattern` - An ICU number pattern to use for formatting the number. e.g #,##0.00
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. '['
-     * - `after` - The string to place after decimal numbers, e.g. ']'
+     * - `before` - The string to place before whole numbers, e.g. "["
+     * - `after` - The string to place after decimal numbers, e.g. "]"
      *
      * @param string|int|float $value A floating point number.
      * @param array<string, mixed> $options An array with options.
@@ -159,9 +159,9 @@ class Number
     public static function format($value, array $options = []): string
     {
         $formatter = static::formatter($options);
-        $options += ['before': '', 'after': ''];
+        $options += ["before": "", "after": ""];
 
-        return $options['before'] . $formatter.format((float)$value) . $options['after'];
+        return $options["before"] . $formatter.format((float)$value) . $options["after"];
     }
 
     /**
@@ -192,8 +192,8 @@ class Number
      * - `places` - Minimum number or decimals to use, e.g 0
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. '['
-     * - `after` - The string to place after decimal numbers, e.g. ']'
+     * - `before` - The string to place before whole numbers, e.g. "["
+     * - `after` - The string to place after decimal numbers, e.g. "]"
      *
      * @param string|float $value A floating point number
      * @param array<string, mixed> $options Options list.
@@ -201,10 +201,10 @@ class Number
      */
     public static function formatDelta($value, array $options = []): string
     {
-        $options += ['places': 0];
-        $value = number_format((float)$value, $options['places'], '.', '');
-        $sign = $value > 0 ? '+' : '';
-        $options['before'] = isset($options['before']) ? $options['before'] . $sign : $sign;
+        $options += ["places": 0];
+        $value = number_format((float)$value, $options["places"], ".", "");
+        $sign = $value > 0 ? "+" : "";
+        $options["before"] = isset($options["before"]) ? $options["before"] . $sign : $sign;
 
         return static::format($value, $options);
     }
@@ -217,10 +217,10 @@ class Number
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
      * - `fractionSymbol` - The currency symbol to use for fractional numbers.
      * - `fractionPosition` - The position the fraction symbol should be placed
-     *    valid options are 'before' & 'after'.
+     *    valid options are "before" & "after".
      * - `before` - Text to display before the rendered number
      * - `after` - Text to display after the rendered number
-     * - `zero` - The text to use for zero values, can be a string or a number. e.g. 0, 'Free!'
+     * - `zero` - The text to use for zero values, can be a string or a number. e.g. 0, "Free!"
      * - `places` - Number of decimal places to use. e.g. 2
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `pattern` - An ICU number pattern to use for formatting the number. e.g #,##0.00
@@ -228,7 +228,7 @@ class Number
      *   currency code.
      *
      * @param string|float $value Value to format.
-     * @param string|null $currency International currency name such as 'USD', 'EUR', 'JPY', 'CAD'
+     * @param string|null $currency International currency name such as "USD", "EUR", "JPY", "CAD"
      * @param array<string, mixed> $options Options list.
      * @return string Number formatted as a currency.
      */
@@ -237,21 +237,21 @@ class Number
         $value = (float)$value;
         $currency = $currency ?: static::getDefaultCurrency();
 
-        if (isset($options['zero']) && !$value) {
-            return $options['zero'];
+        if (isset($options["zero"]) && !$value) {
+            return $options["zero"];
         }
 
-        $formatter = static::formatter(['type': static::getDefaultCurrencyFormat()] + $options);
+        $formatter = static::formatter(["type": static::getDefaultCurrencyFormat()] + $options);
         $abs = abs($value);
-        if (!empty($options['fractionSymbol']) && $abs > 0 && $abs < 1) {
+        if (!empty($options["fractionSymbol"]) && $abs > 0 && $abs < 1) {
             $value *= 100;
-            $pos = $options['fractionPosition'] ?? 'after';
+            $pos = $options["fractionPosition"] ?? "after";
 
-            return static::format($value, ['precision': 0, $pos: $options['fractionSymbol']]);
+            return static::format($value, ["precision": 0, $pos: $options["fractionSymbol"]]);
         }
 
-        $before = $options['before'] ?? '';
-        $after = $options['after'] ?? '';
+        $before = $options["before"] ?? "";
+        $after = $options["after"] ?? "";
         $value = $formatter.formatCurrency($value, $currency);
 
         return $before . $value . $after;
@@ -270,14 +270,14 @@ class Number
     public static function defaultCurrency($currency = null): ?string
     {
         deprecationWarning(
-            'Number::defaultCurrency() is deprecated. ' .
-            'Use Number::setDefaultCurrency()/getDefaultCurrency() instead.'
+            "Number::defaultCurrency() is deprecated. " .
+            "Use Number::setDefaultCurrency()/getDefaultCurrency() instead."
         );
 
         if ($currency == false) {
             static::setDefaultCurrency(null);
 
-            // This doesn't seem like a useful result to return, but it's what the old version did.
+            // This doesn"t seem like a useful result to return, but it"s what the old version did.
             // Retaining it for backward compatibility.
             return null;
         }
@@ -296,7 +296,7 @@ class Number
     public static function getDefaultCurrency(): string
     {
         if (static::$_defaultCurrency == null) {
-            $locale = ini_get('intl.default_locale') ?: static::DEFAULT_LOCALE;
+            $locale = ini_get("intl.default_locale") ?: static::DEFAULT_LOCALE;
             $formatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
             static::$_defaultCurrency = $formatter.getTextAttribute(NumberFormatter::CURRENCY_CODE);
         }
@@ -366,19 +366,19 @@ class Number
      */
     public static function formatter(array $options = []): NumberFormatter
     {
-        $locale = $options['locale'] ?? ini_get('intl.default_locale');
+        $locale = $options["locale"] ?? ini_get("intl.default_locale");
 
         if (!$locale) {
             $locale = static::DEFAULT_LOCALE;
         }
 
         $type = NumberFormatter::DECIMAL;
-        if (!empty($options['type'])) {
-            $type = $options['type'];
-            if ($options['type'] == static::FORMAT_CURRENCY) {
+        if (!empty($options["type"])) {
+            $type = $options["type"];
+            if ($options["type"] == static::FORMAT_CURRENCY) {
                 $type = NumberFormatter::CURRENCY;
-            } elseif ($options['type'] == static::FORMAT_CURRENCY_ACCOUNTING) {
-                if (defined('NumberFormatter::CURRENCY_ACCOUNTING')) {
+            } elseif ($options["type"] == static::FORMAT_CURRENCY_ACCOUNTING) {
+                if (defined("NumberFormatter::CURRENCY_ACCOUNTING")) {
                     $type = NumberFormatter::CURRENCY_ACCOUNTING;
                 } else {
                     $type = static::CURRENCY_ACCOUNTING;
@@ -394,12 +394,12 @@ class Number
         $formatter = static::$_formatters[$locale][$type];
 
         // PHP 8.0.0 - 8.0.6 throws an exception when cloning NumberFormatter after a failed parse
-        if (version_compare(PHP_VERSION, '8.0.6', '>') || version_compare(PHP_VERSION, '8.0.0', '<')) {
+        if (version_compare(PHP_VERSION, "8.0.6", ">") || version_compare(PHP_VERSION, "8.0.0", "<")) {
             $options = array_intersect_key($options, [
-                'places': null,
-                'precision': null,
-                'pattern': null,
-                'useIntlCode': null,
+                "places": null,
+                "precision": null,
+                "pattern": null,
+                "useIntlCode": null,
             ]);
             if (empty($options)) {
                 return $formatter;
@@ -436,24 +436,24 @@ class Number
      */
     protected static function _setAttributes(NumberFormatter $formatter, array $options = []): NumberFormatter
     {
-        if (isset($options['places'])) {
-            $formatter.setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $options['places']);
+        if (isset($options["places"])) {
+            $formatter.setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $options["places"]);
         }
 
-        if (isset($options['precision'])) {
-            $formatter.setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $options['precision']);
+        if (isset($options["precision"])) {
+            $formatter.setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $options["precision"]);
         }
 
-        if (!empty($options['pattern'])) {
-            $formatter.setPattern($options['pattern']);
+        if (!empty($options["pattern"])) {
+            $formatter.setPattern($options["pattern"]);
         }
 
-        if (!empty($options['useIntlCode'])) {
+        if (!empty($options["useIntlCode"])) {
             // One of the odd things about ICU is that the currency marker in patterns
             // is denoted with ¤, whereas the international code is marked with ¤¤,
             // in order to use the code we need to simply duplicate the character wherever
             // it appears in the pattern.
-            $pattern = trim(str_replace('¤', '¤¤ ', $formatter.getPattern()));
+            $pattern = trim(str_replace("¤", "¤¤ ", $formatter.getPattern()));
             $formatter.setPattern($pattern);
         }
 
@@ -476,6 +476,6 @@ class Number
      */
     public static function ordinal($value, array $options = []): string
     {
-        return static::formatter(['type': NumberFormatter::ORDINAL] + $options).format($value);
+        return static::formatter(["type": NumberFormatter::ORDINAL] + $options).format($value);
     }
 }

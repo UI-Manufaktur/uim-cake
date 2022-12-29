@@ -25,7 +25,7 @@ class I18n
      *
      * @var string
      */
-    public const DEFAULT_LOCALE = 'en_US';
+    public const DEFAULT_LOCALE = "en_US";
 
     /**
      * The translators collection
@@ -57,14 +57,14 @@ class I18n
         static::$_collection = new TranslatorRegistry(
             new PackageLocator(),
             new FormatterLocator([
-                'default': IcuFormatter::class,
-                'sprintf': SprintfFormatter::class,
+                "default": IcuFormatter::class,
+                "sprintf": SprintfFormatter::class,
             ]),
             static::getLocale()
         );
 
         if (class_exists(Cache::class)) {
-            static::$_collection.setCacher(Cache::pool('_cake_core_'));
+            static::$_collection.setCacher(Cache::pool("_cake_core_"));
         }
 
         return static::$_collection;
@@ -79,16 +79,16 @@ class I18n
      * ### Example:
      *
      * ```
-     *  I18n::setTranslator('default', function () {
+     *  I18n::setTranslator("default", function () {
      *      $package = new \Cake\I18n\Package();
      *      $package.setMessages([
-     *          'Cake': 'Gâteau'
+     *          "Cake": "Gâteau"
      *      ]);
      *      return $package;
-     *  }, 'fr_FR');
+     *  }, "fr_FR");
      *
-     *  $translator = I18n::getTranslator('default', 'fr_FR');
-     *  echo $translator.translate('Cake');
+     *  $translator = I18n::getTranslator("default", "fr_FR");
+     *  echo $translator.translate("Cake");
      * ```
      *
      * You can also use the `Cake\I18n\MessagesFileLoader` class to load a specific
@@ -97,9 +97,9 @@ class I18n
      *
      * ```
      * I18n::setTranslator(
-     *  'default',
-     *  new MessagesFileLoader('my_translations', 'custom', 'po'),
-     *  'fr_FR'
+     *  "default",
+     *  new MessagesFileLoader("my_translations", "custom", "po"),
+     *  "fr_FR"
      * );
      * ```
      *
@@ -129,7 +129,7 @@ class I18n
      * @return \Cake\I18n\Translator The configured translator.
      * @throws \Cake\I18n\Exception\I18nException
      */
-    public static function getTranslator(string $name = 'default', ?string $locale = null): Translator
+    public static function getTranslator(string $name = "default", ?string $locale = null): Translator
     {
         $translators = static::translators();
 
@@ -141,7 +141,7 @@ class I18n
         $translator = $translators.get($name);
         if ($translator == null) {
             throw new I18nException(sprintf(
-                'Translator for domain "%s" could not be found.',
+                "Translator for domain "%s" could not be found.",
                 $name
             ));
         }
@@ -160,7 +160,7 @@ class I18n
      * loaded already.
      *
      * Registering loaders is useful when you need to lazily use translations in multiple
-     * different locales for the same domain, and don't want to use the built-in
+     * different locales for the same domain, and don"t want to use the built-in
      * translation service based of `gettext` files.
      *
      * Loader objects will receive two arguments: The domain name that needs to be
@@ -171,9 +171,9 @@ class I18n
      *
      * ```
      *  import uim.cake.I18n\MessagesFileLoader;
-     *  I18n::config('my_domain', function ($name, $locale) {
+     *  I18n::config("my_domain", function ($name, $locale) {
      *      // Load resources/locales/$locale/filename.po
-     *      $fileLoader = new MessagesFileLoader('filename', $locale, 'po');
+     *      $fileLoader = new MessagesFileLoader("filename", $locale, "po");
      *      return $fileLoader();
      *  });
      * ```
@@ -182,11 +182,11 @@ class I18n
      *
      * ```
      *  import uim.cake.I18n\Package;
-     *  I18n::config('my_domain', function ($name, $locale) {
-     *      $package = new Package('default');
+     *  I18n::config("my_domain", function ($name, $locale) {
+     *      $package = new Package("default");
      *      $messages = (...); // Fetch messages for locale from external service.
      *      $package.setMessages($message);
-     *      $package.setFallback('default');
+     *      $package.setFallback("default");
      *      return $package;
      *  });
      * ```
@@ -227,7 +227,7 @@ class I18n
     {
         static::getDefaultLocale();
         $current = Locale::getDefault();
-        if ($current == '') {
+        if ($current == "") {
             $current = static::DEFAULT_LOCALE;
             Locale::setDefault($current);
         }

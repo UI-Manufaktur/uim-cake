@@ -20,7 +20,7 @@ use RuntimeException;
  * The ProgressHelper can be accessed from shells using the helper() method
  *
  * ```
- * this.helper('Progress').output(['callback': function ($progress) {
+ * this.helper("Progress").output(["callback": function ($progress) {
  *     // Do work
  *     $progress.increment();
  * });
@@ -36,7 +36,7 @@ class ProgressHelper : Helper
     protected $_progress = 0;
 
     /**
-     * The total number of 'items' to progress through.
+     * The total number of "items" to progress through.
      *
      * @var int
      */
@@ -64,23 +64,23 @@ class ProgressHelper : Helper
      */
     function output(array $args): void
     {
-        $args += ['callback': null];
+        $args += ["callback": null];
         if (isset($args[0])) {
-            $args['callback'] = $args[0];
+            $args["callback"] = $args[0];
         }
-        if (!$args['callback'] || !is_callable($args['callback'])) {
-            throw new RuntimeException('Callback option must be a callable.');
+        if (!$args["callback"] || !is_callable($args["callback"])) {
+            throw new RuntimeException("Callback option must be a callable.");
         }
         this.init($args);
 
-        $callback = $args['callback'];
+        $callback = $args["callback"];
 
-        _io.out('', 0);
+        _io.out("", 0);
         while (_progress < _total) {
             $callback(this);
             this.draw();
         }
-        _io.out('');
+        _io.out("");
     }
 
     /**
@@ -94,10 +94,10 @@ class ProgressHelper : Helper
      * @return this
      */
     function init(array $args = []) {
-        $args += ['total': 100, 'width': 80];
+        $args += ["total": 100, "width": 80];
         _progress = 0;
-        _width = $args['width'];
-        _total = $args['total'];
+        _width = $args["width"];
+        _total = $args["total"];
 
         return this;
     }
@@ -120,20 +120,20 @@ class ProgressHelper : Helper
      * @return this
      */
     function draw() {
-        $numberLen = strlen(' 100%');
+        $numberLen = strlen(" 100%");
         $complete = round(_progress / _total, 2);
         $barLen = (_width - $numberLen) * _progress / _total;
-        $bar = '';
+        $bar = "";
         if ($barLen > 1) {
-            $bar = str_repeat('=', (int)$barLen - 1) . '>';
+            $bar = str_repeat("=", (int)$barLen - 1) . ">";
         }
 
         $pad = ceil(_width - $numberLen - $barLen);
         if ($pad > 0) {
-            $bar .= str_repeat(' ', (int)$pad);
+            $bar .= str_repeat(" ", (int)$pad);
         }
-        $percent = ($complete * 100) . '%';
-        $bar .= str_pad($percent, $numberLen, ' ', STR_PAD_LEFT);
+        $percent = ($complete * 100) . "%";
+        $bar .= str_pad($percent, $numberLen, " ", STR_PAD_LEFT);
 
         _io.overwrite($bar, 0);
 

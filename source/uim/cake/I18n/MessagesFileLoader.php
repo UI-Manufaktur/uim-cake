@@ -59,21 +59,21 @@ class MessagesFileLoader
      * Load and parse resources/locales/fr/validation.po
      *
      * ```
-     * $loader = new MessagesFileLoader('validation', 'fr_FR', 'po');
+     * $loader = new MessagesFileLoader("validation", "fr_FR", "po");
      * $package = $loader();
      * ```
      *
      * Load and parse resources/locales/fr_FR/validation.mo
      *
      * ```
-     * $loader = new MessagesFileLoader('validation', 'fr_FR', 'mo');
+     * $loader = new MessagesFileLoader("validation", "fr_FR", "mo");
      * $package = $loader();
      * ```
      *
      * Load the plugins/MyPlugin/resources/locales/fr/my_plugin.po file:
      *
      * ```
-     * $loader = new MessagesFileLoader('my_plugin', 'fr_FR', 'mo');
+     * $loader = new MessagesFileLoader("my_plugin", "fr_FR", "mo");
      * $package = $loader();
      * ```
      *
@@ -83,7 +83,7 @@ class MessagesFileLoader
      * @param string $extension The file extension to use. This will also be mapped
      * to a messages parser class.
      */
-    public this(string $name, string $locale, string $extension = 'po') {
+    public this(string $name, string $locale, string $extension = "po") {
         _name = $name;
         _locale = $locale;
         _extension = $extension;
@@ -103,7 +103,7 @@ class MessagesFileLoader
         $file = false;
 
         $fileName = _name;
-        $pos = strpos($fileName, '/');
+        $pos = strpos($fileName, "/");
         if ($pos != false) {
             $fileName = substr($fileName, $pos + 1);
         }
@@ -120,14 +120,14 @@ class MessagesFileLoader
         }
 
         $name = ucfirst($ext);
-        $class = App::className($name, 'I18n\Parser', 'FileParser');
+        $class = App::className($name, "I18n\Parser", "FileParser");
 
         if (!$class) {
-            throw new RuntimeException(sprintf('Could not find class %s', "{$name}FileParser"));
+            throw new RuntimeException(sprintf("Could not find class %s", "{$name}FileParser"));
         }
 
         $messages = (new $class()).parse($file);
-        $package = new Package('default');
+        $package = new Package("default");
         $package.setMessages($messages);
 
         return $package;
@@ -141,18 +141,18 @@ class MessagesFileLoader
      */
     function translationsFolders(): array
     {
-        $locale = Locale::parseLocale(_locale) + ['region': null];
+        $locale = Locale::parseLocale(_locale) + ["region": null];
 
         $folders = [
-            implode('_', [$locale['language'], $locale['region']]),
-            $locale['language'],
+            implode("_", [$locale["language"], $locale["region"]]),
+            $locale["language"],
         ];
 
         $searchPaths = [];
 
-        $localePaths = App::path('locales');
-        if (empty($localePaths) && defined('APP')) {
-            $localePaths[] = ROOT . 'resources' . DIRECTORY_SEPARATOR . 'locales' . DIRECTORY_SEPARATOR;
+        $localePaths = App::path("locales");
+        if (empty($localePaths) && defined("APP")) {
+            $localePaths[] = ROOT . "resources" . DIRECTORY_SEPARATOR . "locales" . DIRECTORY_SEPARATOR;
         }
         foreach ($localePaths as $path) {
             foreach ($folders as $folder) {
@@ -161,9 +161,9 @@ class MessagesFileLoader
         }
 
         // If space is not added after slash, the character after it remains lowercased
-        $pluginName = Inflector::camelize(str_replace('/', '/ ', _name));
+        $pluginName = Inflector::camelize(str_replace("/", "/ ", _name));
         if (Plugin::isLoaded($pluginName)) {
-            $basePath = App::path('locales', $pluginName)[0];
+            $basePath = App::path("locales", $pluginName)[0];
             foreach ($folders as $folder) {
                 $searchPaths[] = $basePath . $folder . DIRECTORY_SEPARATOR;
             }

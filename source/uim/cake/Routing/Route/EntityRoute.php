@@ -40,8 +40,8 @@ class EntityRoute : Route
             this.compile();
         }
 
-        if (isset($url['_entity'])) {
-            $entity = $url['_entity'];
+        if (isset($url["_entity"])) {
+            $entity = $url["_entity"];
             _checkEntity($entity);
 
             foreach (this.keys as $field) {
@@ -65,8 +65,8 @@ class EntityRoute : Route
     {
         if (!$entity instanceof ArrayAccess && !is_array($entity)) {
             throw new RuntimeException(sprintf(
-                'Route `%s` expects the URL option `_entity` to be an array or object implementing \ArrayAccess, '
-                . 'but `%s` passed.',
+                "Route `%s` expects the URL option `_entity` to be an array or object implementing \ArrayAccess, "
+                . "but `%s` passed.",
                 this.template,
                 getTypeName($entity)
             ));

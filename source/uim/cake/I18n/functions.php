@@ -12,12 +12,12 @@ import uim.cake.I18n\I18n;
 
 // Backwards compatibility alias for custom translation messages loaders which return a Package instance.
 // phpcs:disable
-if (!class_exists('Aura\Intl\Package')) {
-    class_alias('Cake\I18n\Package', 'Aura\Intl\Package');
+if (!class_exists("Aura\Intl\Package")) {
+    class_alias("Cake\I18n\Package", "Aura\Intl\Package");
 }
 // phpcs:enable
 
-if (!function_exists('__')) {
+if (!function_exists("__")) {
     /**
      * Returns a translated string if one is found; Otherwise, the submitted message.
      *
@@ -29,7 +29,7 @@ if (!function_exists('__')) {
     function __(string $singular, ...$args): string
     {
         if (!$singular) {
-            return '';
+            return "";
         }
         if (isset($args[0]) && is_array($args[0])) {
             $args = $args[0];
@@ -40,7 +40,7 @@ if (!function_exists('__')) {
 
 }
 
-if (!function_exists('__n')) {
+if (!function_exists("__n")) {
     /**
      * Returns correct plural form of message identified by $singular and $plural for count $count.
      * Some languages have more than one form for plural messages dependent on the count.
@@ -55,7 +55,7 @@ if (!function_exists('__n')) {
     function __n(string $singular, string $plural, int $count, ...$args): string
     {
         if (!$singular) {
-            return '';
+            return "";
         }
         if (isset($args[0]) && is_array($args[0])) {
             $args = $args[0];
@@ -63,13 +63,13 @@ if (!function_exists('__n')) {
 
         return I18n::getTranslator().translate(
             $plural,
-            ['_count': $count, '_singular': $singular] + $args
+            ["_count": $count, "_singular": $singular] + $args
         );
     }
 
 }
 
-if (!function_exists('__d')) {
+if (!function_exists("__d")) {
     /**
      * Allows you to override the current domain for a single message lookup.
      *
@@ -82,7 +82,7 @@ if (!function_exists('__d')) {
     function __d(string $domain, string $msg, ...$args): string
     {
         if (!$msg) {
-            return '';
+            return "";
         }
         if (isset($args[0]) && is_array($args[0])) {
             $args = $args[0];
@@ -93,7 +93,7 @@ if (!function_exists('__d')) {
 
 }
 
-if (!function_exists('__dn')) {
+if (!function_exists("__dn")) {
     /**
      * Allows you to override the current domain for a single plural message lookup.
      * Returns correct plural form of message identified by $singular and $plural for count $count
@@ -110,7 +110,7 @@ if (!function_exists('__dn')) {
     function __dn(string $domain, string $singular, string $plural, int $count, ...$args): string
     {
         if (!$singular) {
-            return '';
+            return "";
         }
         if (isset($args[0]) && is_array($args[0])) {
             $args = $args[0];
@@ -118,13 +118,13 @@ if (!function_exists('__dn')) {
 
         return I18n::getTranslator($domain).translate(
             $plural,
-            ['_count': $count, '_singular': $singular] + $args
+            ["_count": $count, "_singular": $singular] + $args
         );
     }
 
 }
 
-if (!function_exists('__x')) {
+if (!function_exists("__x")) {
     /**
      * Returns a translated string if one is found; Otherwise, the submitted message.
      * The context is a unique identifier for the translations string that makes it unique
@@ -139,18 +139,18 @@ if (!function_exists('__x')) {
     function __x(string $context, string $singular, ...$args): string
     {
         if (!$singular) {
-            return '';
+            return "";
         }
         if (isset($args[0]) && is_array($args[0])) {
             $args = $args[0];
         }
 
-        return I18n::getTranslator().translate($singular, ['_context': $context] + $args);
+        return I18n::getTranslator().translate($singular, ["_context": $context] + $args);
     }
 
 }
 
-if (!function_exists('__xn')) {
+if (!function_exists("__xn")) {
     /**
      * Returns correct plural form of message identified by $singular and $plural for count $count.
      * Some languages have more than one form for plural messages dependent on the count.
@@ -168,7 +168,7 @@ if (!function_exists('__xn')) {
     function __xn(string $context, string $singular, string $plural, int $count, ...$args): string
     {
         if (!$singular) {
-            return '';
+            return "";
         }
         if (isset($args[0]) && is_array($args[0])) {
             $args = $args[0];
@@ -176,13 +176,13 @@ if (!function_exists('__xn')) {
 
         return I18n::getTranslator().translate(
             $plural,
-            ['_count': $count, '_singular': $singular, '_context': $context] + $args
+            ["_count": $count, "_singular": $singular, "_context": $context] + $args
         );
     }
 
 }
 
-if (!function_exists('__dx')) {
+if (!function_exists("__dx")) {
     /**
      * Allows you to override the current domain for a single message lookup.
      * The context is a unique identifier for the translations string that makes it unique
@@ -198,7 +198,7 @@ if (!function_exists('__dx')) {
     function __dx(string $domain, string $context, string $msg, ...$args): string
     {
         if (!$msg) {
-            return '';
+            return "";
         }
         if (isset($args[0]) && is_array($args[0])) {
             $args = $args[0];
@@ -206,13 +206,13 @@ if (!function_exists('__dx')) {
 
         return I18n::getTranslator($domain).translate(
             $msg,
-            ['_context': $context] + $args
+            ["_context": $context] + $args
         );
     }
 
 }
 
-if (!function_exists('__dxn')) {
+if (!function_exists("__dxn")) {
     /**
      * Returns correct plural form of message identified by $singular and $plural for count $count.
      * Allows you to override the current domain for a single message lookup.
@@ -231,7 +231,7 @@ if (!function_exists('__dxn')) {
     function __dxn(string $domain, string $context, string $singular, string $plural, int $count, ...$args): string
     {
         if (!$singular) {
-            return '';
+            return "";
         }
         if (isset($args[0]) && is_array($args[0])) {
             $args = $args[0];
@@ -239,7 +239,7 @@ if (!function_exists('__dxn')) {
 
         return I18n::getTranslator($domain).translate(
             $plural,
-            ['_count': $count, '_singular': $singular, '_context': $context] + $args
+            ["_count": $count, "_singular": $singular, "_context": $context] + $args
         );
     }
 

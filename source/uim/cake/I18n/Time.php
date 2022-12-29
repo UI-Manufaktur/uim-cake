@@ -55,7 +55,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @var \Closure|array<int>|string|int
      * @see \Cake\I18n\Time::i18nFormat()
      */
-    protected static $_jsonEncodeFormat = "yyyy-MM-dd'T'HH':'mm':'ssxxx";
+    protected static $_jsonEncodeFormat = "yyyy-MM-dd"T"HH":"mm":"ssxxx";
 
     /**
      * The format to use when formatting a time using `Cake\I18n\Time::nice()`
@@ -90,13 +90,13 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @see \Cake\I18n\Time::timeAgoInWords()
      */
     public static $wordAccuracy = [
-        'year': 'day',
-        'month': 'day',
-        'week': 'day',
-        'day': 'hour',
-        'hour': 'minute',
-        'minute': 'minute',
-        'second': 'second',
+        "year": "day",
+        "month": "day",
+        "week": "day",
+        "day": "hour",
+        "hour": "minute",
+        "minute": "minute",
+        "second": "second",
     ];
 
     /**
@@ -105,14 +105,14 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @var string
      * @see \Cake\I18n\Time::timeAgoInWords()
      */
-    public static $wordEnd = '+1 month';
+    public static $wordEnd = "+1 month";
 
     /**
      * serialise the value as a Unix Timestamp
      *
      * @var string
      */
-    public const UNIX_TIMESTAMP_FORMAT = 'unixTimestampFormat';
+    public const UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
 
     /**
      * Create a new mutable time instance.
@@ -122,17 +122,17 @@ class Time : MutableDateTime : I18nDateTimeInterface
      */
     public this($time = null, $tz = null) {
         deprecationWarning(
-            'The `Time` class has been deprecated. Use the immutable alternative `FrozenTime` instead',
+            "The `Time` class has been deprecated. Use the immutable alternative `FrozenTime` instead",
             0
         );
 
         if ($time instanceof DateTimeInterface) {
             $tz = $time.getTimezone();
-            $time = $time.format('Y-m-d H:i:s.u');
+            $time = $time.format("Y-m-d H:i:s.u");
         }
 
         if (is_numeric($time)) {
-            $time = '@' . $time;
+            $time = "@" . $time;
         }
         super(($time, $tz);
     }
@@ -160,7 +160,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      */
     function isThisWeek(): bool
     {
-        return static::now(this.getTimezone()).format('W o') == this.format('W o');
+        return static::now(this.getTimezone()).format("W o") == this.format("W o");
     }
 
     /**
@@ -170,7 +170,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      */
     function isThisMonth(): bool
     {
-        return static::now(this.getTimezone()).format('m Y') == this.format('m Y');
+        return static::now(this.getTimezone()).format("m Y") == this.format("m Y");
     }
 
     /**
@@ -180,7 +180,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      */
     function isThisYear(): bool
     {
-        return static::now(this.getTimezone()).format('Y') == this.format('Y');
+        return static::now(this.getTimezone()).format("Y") == this.format("Y");
     }
 
     /**
@@ -190,23 +190,23 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @return array<string>|int 1, 2, 3, or 4 quarter of year, or array if $range true
      */
     function toQuarter(bool $range = false) {
-        $quarter = (int)ceil((int)this.format('m') / 3);
+        $quarter = (int)ceil((int)this.format("m") / 3);
         if ($range == false) {
             return $quarter;
         }
 
-        $year = this.format('Y');
+        $year = this.format("Y");
         switch ($quarter) {
             case 1:
-                return [$year . '-01-01', $year . '-03-31'];
+                return [$year . "-01-01", $year . "-03-31"];
             case 2:
-                return [$year . '-04-01', $year . '-06-30'];
+                return [$year . "-04-01", $year . "-06-30"];
             case 3:
-                return [$year . '-07-01', $year . '-09-30'];
+                return [$year . "-07-01", $year . "-09-30"];
         }
 
         // 4th quarter
-        return [$year . '-10-01', $year . '-12-31'];
+        return [$year . "-10-01", $year . "-12-31"];
     }
 
     /**
@@ -216,7 +216,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      */
     function toUnixString(): string
     {
-        return this.format('U');
+        return this.format("U");
     }
 
     /**
@@ -248,8 +248,8 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * Default date formatting is d/M/YY e.g: on 18/2/09. Formatting is done internally using
      * `i18nFormat`, see the method for the valid formatting strings
      *
-     * The returned string includes 'ago' or 'on' and assumes you'll properly add a word
-     * like 'Posted ' before the function output.
+     * The returned string includes "ago" or "on" and assumes you"ll properly add a word
+     * like "Posted " before the function output.
      *
      * NOTE: If the difference is one week or more, the lowest level of accuracy is day
      *
@@ -281,17 +281,17 @@ class Time : MutableDateTime : I18nDateTimeInterface
     {
         if (is_bool($options)) {
             $options = [
-                'group': $options,
+                "group": $options,
             ];
         }
         $defaults = [
-            'group': true,
-            'abbr': false,
-            'before': ' - ',
-            'after': null,
+            "group": true,
+            "abbr": false,
+            "before": " - ",
+            "after": null,
         ];
         $options += $defaults;
-        $group = $options['group'];
+        $group = $options["group"];
 
         $regex = null;
         if (is_string($filter)) {
@@ -314,18 +314,18 @@ class Time : MutableDateTime : I18nDateTimeInterface
         if ($group) {
             $groupedIdentifiers = [];
             $now = time();
-            $before = $options['before'];
-            $after = $options['after'];
+            $before = $options["before"];
+            $after = $options["after"];
             foreach ($identifiers as $tz) {
-                $abbr = '';
-                if ($options['abbr']) {
+                $abbr = "";
+                if ($options["abbr"]) {
                     $dateTimeZone = new DateTimeZone($tz);
                     $trans = $dateTimeZone.getTransitions($now, $now);
-                    $abbr = isset($trans[0]['abbr']) ?
-                        $before . $trans[0]['abbr'] . $after :
-                        '';
+                    $abbr = isset($trans[0]["abbr"]) ?
+                        $before . $trans[0]["abbr"] . $after :
+                        "";
                 }
-                $item = explode('/', $tz, 2);
+                $item = explode("/", $tz, 2);
                 if (isset($item[1])) {
                     $groupedIdentifiers[$item[0]][$tz] = $item[1] . $abbr;
                 } else {

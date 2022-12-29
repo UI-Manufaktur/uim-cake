@@ -20,7 +20,7 @@ should you wish to create them manually instead of using the conventions this li
 ```php
 import uim.cake.I18n\I18n;
 
-I18n::setLocale('en_US');
+I18n::setLocale("en_US");
 ```
 
 ### Setting path to folder containing po files.
@@ -28,7 +28,7 @@ I18n::setLocale('en_US');
 ```php
 import uim.cake.cores.Configure;
 
-Configure::write('App.paths.locales', ['/path/with/trailing/slash/']);
+Configure::write("App.paths.locales", ["/path/with/trailing/slash/"]);
 ```
 
 Please refer to the [CakePHP Manual](https://book.cakephp.org/4/en/core-libraries/internationalization-and-localization.html#language-files) for details
@@ -38,8 +38,8 @@ about expected folder structure and file naming.
 
 ```php
 echo __(
-    'Hi {0,string}, your balance on the {1,date} is {2,number,currency}',
-    ['Charles', '2014-01-13 11:12:00', 1354.37]
+    "Hi {0,string}, your balance on the {1,date} is {2,number,currency}",
+    ["Charles", "2014-01-13 11:12:00", 1354.37]
 );
 
 // Returns
@@ -52,30 +52,30 @@ Hi Charles, your balance on the Jan 13, 2014, 11:12 AM is $ 1,354.37
 import uim.cake.I18n\I18n;
 import uim.cake.I18n\Package;
 
-I18n::translator('animals', 'fr_FR', function () {
+I18n::translator("animals", "fr_FR", function () {
     $package = new Package(
-        'default', // The formatting strategy (ICU)
-        'default', // The fallback domain
+        "default", // The formatting strategy (ICU)
+        "default", // The fallback domain
     );
     $package.setMessages([
-        'Dog': 'Chien',
-        'Cat': 'Chat',
-        'Bird': 'Oiseau'
+        "Dog": "Chien",
+        "Cat": "Chat",
+        "Bird": "Oiseau"
         ...
     ]);
 
     return $package;
 });
 
-I18n::getLocale('fr_FR');
-__d('animals', 'Dog'); // Returns "Chien"
+I18n::getLocale("fr_FR");
+__d("animals", "Dog"); // Returns "Chien"
 ```
 
 ### Formatting Time
 
 ```php
 $time = Time::now();
-echo $time; // shows '4/20/14, 10:10 PM' for the en-US locale
+echo $time; // shows "4/20/14, 10:10 PM" for the en-US locale
 ```
 
 ### Formatting Numbers
@@ -85,7 +85,7 @@ echo Number::format(100100100);
 ```
 
 ```php
-echo Number::currency(123456.7890, 'EUR');
+echo Number::currency(123456.7890, "EUR");
 // outputs €123,456.79
 ```
 

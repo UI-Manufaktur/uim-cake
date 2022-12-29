@@ -43,7 +43,7 @@ class MoFileParser
     public const MO_HEADER_SIZE = 28;
 
     /**
-     * Parses machine object (MO) format, independent of the machine's endian it
+     * Parses machine object (MO) format, independent of the machine"s endian it
      * was created on. Both 32bit and 64bit systems are supported.
      *
      * @param string $file The file to be parsed.
@@ -52,14 +52,14 @@ class MoFileParser
      */
     function parse($file): array
     {
-        $stream = fopen($file, 'rb');
+        $stream = fopen($file, "rb");
 
         $stat = fstat($stream);
 
-        if ($stat['size'] < self::MO_HEADER_SIZE) {
-            throw new RuntimeException('Invalid format for MO translations file');
+        if ($stat["size"] < self::MO_HEADER_SIZE) {
+            throw new RuntimeException("Invalid format for MO translations file");
         }
-        $magic = unpack('V1', fread($stream, 4));
+        $magic = unpack("V1", fread($stream, 4));
         $magic = hexdec(substr(dechex(current($magic)), -8));
 
         if ($magic == self::MO_LITTLE_ENDIAN_MAGIC) {
@@ -67,7 +67,7 @@ class MoFileParser
         } elseif ($magic == self::MO_BIG_ENDIAN_MAGIC) {
             $isBigEndian = true;
         } else {
-            throw new RuntimeException('Invalid format for MO translations file');
+            throw new RuntimeException("Invalid format for MO translations file");
         }
 
         // offset formatRevision
@@ -120,16 +120,16 @@ class MoFileParser
 
             $singular = $translated;
             if ($context != null) {
-                $messages[$singularId]['_context'][$context] = $singular;
+                $messages[$singularId]["_context"][$context] = $singular;
                 if ($pluralId != null) {
-                    $messages[$pluralId]['_context'][$context] = $plurals;
+                    $messages[$pluralId]["_context"][$context] = $plurals;
                 }
                 continue;
             }
 
-            $messages[$singularId]['_context'][''] = $singular;
+            $messages[$singularId]["_context"][""] = $singular;
             if ($pluralId != null) {
-                $messages[$pluralId]['_context'][''] = $plurals;
+                $messages[$pluralId]["_context"][""] = $plurals;
             }
         }
 
@@ -147,7 +147,7 @@ class MoFileParser
      */
     protected function _readLong($stream, $isBigEndian): int
     {
-        $result = unpack($isBigEndian ? 'N1' : 'V1', fread($stream, 4));
+        $result = unpack($isBigEndian ? "N1" : "V1", fread($stream, 4));
         $result = current($result);
 
         return (int)substr((string)$result, -8);

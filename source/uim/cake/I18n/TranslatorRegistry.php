@@ -20,7 +20,7 @@ class TranslatorRegistry
      *
      * @var string
      */
-    public const FALLBACK_LOADER = '_fallback';
+    public const FALLBACK_LOADER = "_fallback";
 
     /**
      * A registry to retain translator objects.
@@ -66,7 +66,7 @@ class TranslatorRegistry
      *
      * @var string
      */
-    protected $_defaultFormatter = 'default';
+    protected $_defaultFormatter = "default";
 
     /**
      * Use fallback-domain for translation loaders.
@@ -101,11 +101,11 @@ class TranslatorRegistry
 
         this.registerLoader(static::FALLBACK_LOADER, function ($name, $locale) {
             $loader = new ChainMessagesLoader([
-                new MessagesFileLoader($name, $locale, 'mo'),
-                new MessagesFileLoader($name, $locale, 'po'),
+                new MessagesFileLoader($name, $locale, "mo"),
+                new MessagesFileLoader($name, $locale, "po"),
             ]);
 
-            $formatter = $name == 'cake' ? 'default' : _defaultFormatter;
+            $formatter = $name == "cake" ? "default" : _defaultFormatter;
             $package = $loader();
             $package.setFormatter($formatter);
 
@@ -191,7 +191,7 @@ class TranslatorRegistry
         }
 
         // Cache keys cannot contain / if they go to file engine.
-        $keyName = str_replace('/', '.', $name);
+        $keyName = str_replace("/", ".", $name);
         $key = "translations.{$keyName}.{$locale}";
         $translator = _cacher.get($key);
 
@@ -311,8 +311,8 @@ class TranslatorRegistry
         }
 
         $fallbackDomain = null;
-        if (_useFallback && $name != 'default') {
-            $fallbackDomain = 'default';
+        if (_useFallback && $name != "default") {
+            $fallbackDomain = "default";
         }
 
         $package.setFallback($fallbackDomain);
@@ -329,7 +329,7 @@ class TranslatorRegistry
      */
     function setLoaderFallback(string $name, callable $loader): callable
     {
-        $fallbackDomain = 'default';
+        $fallbackDomain = "default";
         if (!_useFallback || $name == $fallbackDomain) {
             return $loader;
         }

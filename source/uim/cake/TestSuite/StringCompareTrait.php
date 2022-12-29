@@ -24,7 +24,7 @@ trait StringCompareTrait
      *
      * @var string
      */
-    protected $_compareBasePath = '';
+    protected $_compareBasePath = "";
 
     /**
      * Update comparisons to match test changes
@@ -49,7 +49,7 @@ trait StringCompareTrait
         }
 
         if (_updateComparisons == null) {
-            _updateComparisons = env('UPDATE_TEST_COMPARISON_FILES');
+            _updateComparisons = env("UPDATE_TEST_COMPARISON_FILES");
         }
 
         if (_updateComparisons) {
@@ -57,6 +57,6 @@ trait StringCompareTrait
         }
 
         $expected = file_get_contents($path);
-        this.assertTextEquals($expected, $result, 'Content does not match file ' . $path);
+        this.assertTextEquals($expected, $result, "Content does not match file " . $path);
     }
 }

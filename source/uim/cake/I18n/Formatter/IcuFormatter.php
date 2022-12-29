@@ -30,7 +30,7 @@ class IcuFormatter : FormatterInterface
      */
     function format(string $locale, string $message, array $tokenValues): string
     {
-        if ($message == '') {
+        if ($message == "") {
             return $message;
         }
 

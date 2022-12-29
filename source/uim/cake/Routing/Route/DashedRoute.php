@@ -14,7 +14,7 @@ import uim.cake.utilities.Inflector;
 /**
  * This route class will transparently inflect the controller, action and plugin
  * routing parameters, so that requesting `/my-plugin/my-controller/my-action`
- * is parsed as `['plugin': 'MyPlugin', 'controller': 'MyController', 'action': 'myAction']`
+ * is parsed as `["plugin": "MyPlugin", "controller": "MyController", "action": "myAction"]`
  */
 class DashedRoute : Route
 {
@@ -36,13 +36,13 @@ class DashedRoute : Route
      */
     protected function _camelizePlugin(string $plugin): string
     {
-        $plugin = str_replace('-', '_', $plugin);
-        if (strpos($plugin, '/') == false) {
+        $plugin = str_replace("-", "_", $plugin);
+        if (strpos($plugin, "/") == false) {
             return Inflector::camelize($plugin);
         }
-        [$vendor, $plugin] = explode('/', $plugin, 2);
+        [$vendor, $plugin] = explode("/", $plugin, 2);
 
-        return Inflector::camelize($vendor) . '/' . Inflector::camelize($plugin);
+        return Inflector::camelize($vendor) . "/" . Inflector::camelize($plugin);
     }
 
     /**
@@ -54,23 +54,23 @@ class DashedRoute : Route
      * @param string $method The HTTP method.
      * @return array|null An array of request parameters, or null on failure.
      */
-    function parse(string $url, string $method = ''): ?array
+    function parse(string $url, string $method = ""): ?array
     {
         $params = parent::parse($url, $method);
         if (!$params) {
             return null;
         }
-        if (!empty($params['controller'])) {
-            $params['controller'] = Inflector::camelize($params['controller'], '-');
+        if (!empty($params["controller"])) {
+            $params["controller"] = Inflector::camelize($params["controller"], "-");
         }
-        if (!empty($params['plugin'])) {
-            $params['plugin'] = _camelizePlugin($params['plugin']);
+        if (!empty($params["plugin"])) {
+            $params["plugin"] = _camelizePlugin($params["plugin"]);
         }
-        if (!empty($params['action'])) {
-            $params['action'] = Inflector::variable(str_replace(
-                '-',
-                '_',
-                $params['action']
+        if (!empty($params["action"])) {
+            $params["action"] = Inflector::variable(str_replace(
+                "-",
+                "_",
+                $params["action"]
             ));
         }
 
@@ -106,7 +106,7 @@ class DashedRoute : Route
      */
     protected function _dasherize(array $url): array
     {
-        foreach (['controller', 'plugin', 'action'] as $element) {
+        foreach (["controller", "plugin", "action"] as $element) {
             if (!empty($url[$element])) {
                 $url[$element] = Inflector::dasherize($url[$element]);
             }

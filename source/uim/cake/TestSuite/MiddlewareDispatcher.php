@@ -78,7 +78,7 @@ class MiddlewareDispatcher
         if (this.app instanceof IPluginApplication) {
             this.app.pluginBootstrap();
         }
-        $builder = Router::createRouteBuilder('/');
+        $builder = Router::createRouteBuilder("/");
 
         if (this.app instanceof IRoutingApplication) {
             this.app.routes($builder);
@@ -101,28 +101,28 @@ class MiddlewareDispatcher
      */
     protected function _createRequest(array $spec): ServerRequest
     {
-        if (isset($spec['input'])) {
-            $spec['post'] = [];
-            $spec['environment']['CAKEPHP_INPUT'] = $spec['input'];
+        if (isset($spec["input"])) {
+            $spec["post"] = [];
+            $spec["environment"]["CAKEPHP_INPUT"] = $spec["input"];
         }
         $environment = array_merge(
-            array_merge($_SERVER, ['REQUEST_URI': $spec['url']]),
-            $spec['environment']
+            array_merge($_SERVER, ["REQUEST_URI": $spec["url"]]),
+            $spec["environment"]
         );
-        if (strpos($environment['PHP_SELF'], 'phpunit') != false) {
-            $environment['PHP_SELF'] = '/';
+        if (strpos($environment["PHP_SELF"], "phpunit") != false) {
+            $environment["PHP_SELF"] = "/";
         }
         $request = ServerRequestFactory::fromGlobals(
             $environment,
-            $spec['query'],
-            $spec['post'],
-            $spec['cookies'],
-            $spec['files']
+            $spec["query"],
+            $spec["post"],
+            $spec["cookies"],
+            $spec["files"]
         );
 
         return $request
-            .withAttribute('session', $spec['session'])
-            .withAttribute('flash', new FlashMessage($spec['session']));
+            .withAttribute("session", $spec["session"])
+            .withAttribute("flash", new FlashMessage($spec["session"]));
     }
 
     /**

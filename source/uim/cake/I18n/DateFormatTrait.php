@@ -134,12 +134,12 @@ trait DateFormatTrait
      * ### Examples
      *
      * ```
-     * $time = new Time('2014-04-20 22:10');
-     * $time.i18nFormat(); // outputs '4/20/14, 10:10 PM' for the en-US locale
+     * $time = new Time("2014-04-20 22:10");
+     * $time.i18nFormat(); // outputs "4/20/14, 10:10 PM" for the en-US locale
      * $time.i18nFormat(\IntlDateFormatter::FULL); // Use the full date and time format
      * $time.i18nFormat([\IntlDateFormatter::FULL, \IntlDateFormatter::SHORT]); // Use full date but short time format
-     * $time.i18nFormat('yyyy-MM-dd HH:mm:ss'); // outputs '2014-04-20 22:10'
-     * $time.i18nFormat(Time::UNIX_TIMESTAMP_FORMAT); // outputs '1398031800'
+     * $time.i18nFormat("yyyy-MM-dd HH:mm:ss"); // outputs "2014-04-20 22:10"
+     * $time.i18nFormat(Time::UNIX_TIMESTAMP_FORMAT); // outputs "1398031800"
      * ```
      *
      * You can control the default format used through `Time::setToStringFormat()`.
@@ -157,9 +157,9 @@ trait DateFormatTrait
      * ### Examples
      *
      * ```
-     * $time = new Time('2014-04-20 22:10');
-     * $time.i18nFormat(null, null, 'de-DE');
-     * $time.i18nFormat(\IntlDateFormatter::FULL, 'Europe/Berlin', 'de-DE');
+     * $time = new Time("2014-04-20 22:10");
+     * $time.i18nFormat(null, null, "de-DE");
+     * $time.i18nFormat(\IntlDateFormatter::FULL, "Europe/Berlin", "de-DE");
      * ```
      *
      * You can control the default locale used through `Time::setDefaultLocale()`.
@@ -202,7 +202,7 @@ trait DateFormatTrait
      */
     protected function _formatObject($date, $format, ?string $locale): string
     {
-        $pattern = '';
+        $pattern = "";
 
         if (is_array($format)) {
             [$dateFormat, $timeFormat] = $format;
@@ -219,7 +219,7 @@ trait DateFormatTrait
 
         if (
             preg_match(
-                '/@calendar=(japanese|buddhist|chinese|persian|indian|islamic|hebrew|coptic|ethiopic)/',
+                "/@calendar=(japanese|buddhist|chinese|persian|indian|islamic|hebrew|coptic|ethiopic)/",
                 $locale
             )
         ) {
@@ -232,10 +232,10 @@ trait DateFormatTrait
         $key = "{$locale}.{$dateFormat}.{$timeFormat}.{$timezone}.{$calendar}.{$pattern}";
 
         if (!isset(static::$_formatters[$key])) {
-            if ($timezone == '+00:00' || $timezone == 'Z') {
-                $timezone = 'UTC';
-            } elseif ($timezone[0] == '+' || $timezone[0] == '-') {
-                $timezone = 'GMT' . $timezone;
+            if ($timezone == "+00:00" || $timezone == "Z") {
+                $timezone = "UTC";
+            } elseif ($timezone[0] == "+" || $timezone[0] == "-") {
+                $timezone = "GMT" . $timezone;
             }
             $formatter = datefmt_create(
                 $locale,
@@ -247,14 +247,14 @@ trait DateFormatTrait
             );
             if (empty($formatter)) {
                 throw new RuntimeException(
-                    'Your version of icu does not support creating a date formatter for ' .
+                    "Your version of icu does not support creating a date formatter for " .
                     "`$key`. You should try to upgrade libicu and the intl extension."
                 );
             }
             static::$_formatters[$key] = $formatter;
         }
 
-        return static::$_formatters[$key].format($date.format('U'));
+        return static::$_formatters[$key].format($date.format("U"));
     }
 
     /**
@@ -320,9 +320,9 @@ trait DateFormatTrait
      * Example:
      *
      * ```
-     *  $time = Time::parseDateTime('10/13/2013 12:54am');
-     *  $time = Time::parseDateTime('13 Oct, 2013 13:54', 'dd MMM, y H:mm');
-     *  $time = Time::parseDateTime('10/10/2015', [IntlDateFormatter::SHORT, IntlDateFormatter::NONE]);
+     *  $time = Time::parseDateTime("10/13/2013 12:54am");
+     *  $time = Time::parseDateTime("13 Oct, 2013 13:54", "dd MMM, y H:mm");
+     *  $time = Time::parseDateTime("10/10/2015", [IntlDateFormatter::SHORT, IntlDateFormatter::NONE]);
      * ```
      *
      * @param string $time The time string to parse.
@@ -332,7 +332,7 @@ trait DateFormatTrait
      */
     public static function parseDateTime(string $time, $format = null, $tz = null) {
         $format = $format ?? static::$_toStringFormat;
-        $pattern = '';
+        $pattern = "";
 
         if (is_array($format)) {
             [$dateFormat, $timeFormat] = $format;
@@ -353,13 +353,13 @@ trait DateFormatTrait
             $pattern
         );
         if (!$formatter) {
-            throw new CakeException('Unable to create IntlDateFormatter instance');
+            throw new CakeException("Unable to create IntlDateFormatter instance");
         }
         $formatter.setLenient(static::$lenientParsing);
 
         $time = $formatter.parse($time);
         if ($time != false) {
-            $dateTime = new DateTime('@' . $time);
+            $dateTime = new DateTime("@" . $time);
 
             if (!($tz instanceof DateTimeZone)) {
                 $tz = new DateTimeZone($tz ?? date_default_timezone_get());
@@ -385,9 +385,9 @@ trait DateFormatTrait
      * Example:
      *
      * ```
-     *  $time = Time::parseDate('10/13/2013');
-     *  $time = Time::parseDate('13 Oct, 2013', 'dd MMM, y');
-     *  $time = Time::parseDate('13 Oct, 2013', IntlDateFormatter::SHORT);
+     *  $time = Time::parseDate("10/13/2013");
+     *  $time = Time::parseDate("13 Oct, 2013", "dd MMM, y");
+     *  $time = Time::parseDate("13 Oct, 2013", IntlDateFormatter::SHORT);
      * ```
      *
      * @param string $date The date string to parse.
@@ -416,7 +416,7 @@ trait DateFormatTrait
      * Example:
      *
      * ```
-     *  $time = Time::parseTime('11:23pm');
+     *  $time = Time::parseTime("11:23pm");
      * ```
      *
      * @param string $time The time string to parse.
@@ -509,9 +509,9 @@ trait DateFormatTrait
     {
         /** @psalm-suppress PossiblyNullReference */
         return [
-            'time': this.format('Y-m-d H:i:s.uP'),
-            'timezone': this.getTimezone().getName(),
-            'fixedNowTime': static::hasTestNow() ? static::getTestNow().format('Y-m-d\TH:i:s.uP') : false,
+            "time": this.format("Y-m-d H:i:s.uP"),
+            "timezone": this.getTimezone().getName(),
+            "fixedNowTime": static::hasTestNow() ? static::getTestNow().format("Y-m-d\TH:i:s.uP") : false,
         ];
     }
 }

@@ -38,7 +38,7 @@ class LocaleSelectorMiddleware : IMiddleware
     /**
      * Constructor.
      *
-     * @param array $locales A list of accepted locales, or ['*'] to accept any
+     * @param array $locales A list of accepted locales, or ["*"] to accept any
      *   locale header value.
      */
     public this(array $locales = []) {
@@ -54,14 +54,14 @@ class LocaleSelectorMiddleware : IMiddleware
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
-        $locale = Locale::acceptFromHttp($request.getHeaderLine('Accept-Language'));
+        $locale = Locale::acceptFromHttp($request.getHeaderLine("Accept-Language"));
         if (!$locale) {
             return $handler.handle($request);
         }
-        if (this.locales != ['*']) {
+        if (this.locales != ["*"]) {
             $locale = Locale::lookup(this.locales, $locale, true);
         }
-        if ($locale || this.locales == ['*']) {
+        if ($locale || this.locales == ["*"]) {
             I18n::setLocale($locale);
         }
 

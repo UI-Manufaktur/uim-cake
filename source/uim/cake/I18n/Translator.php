@@ -19,7 +19,7 @@ class Translator
     /**
      * @var string
      */
-    public const PLURAL_PREFIX = 'p:';
+    public const PLURAL_PREFIX = "p:";
 
     /**
      * A fallback translator.
@@ -103,7 +103,7 @@ class Translator
      */
     function translate(string $key, array $tokensValues = []): string
     {
-        if (isset($tokensValues['_count'])) {
+        if (isset($tokensValues["_count"])) {
             $message = this.getMessage(static::PLURAL_PREFIX . $key);
             if (!$message) {
                 $message = this.getMessage($key);
@@ -121,48 +121,48 @@ class Translator
         }
 
         // Check for missing/invalid context
-        if (is_array($message) && isset($message['_context'])) {
+        if (is_array($message) && isset($message["_context"])) {
             $message = this.resolveContext($key, $message, $tokensValues);
-            unset($tokensValues['_context']);
+            unset($tokensValues["_context"]);
         }
 
         if (empty($tokensValues)) {
             // Fallback for plurals that were using the singular key
             if (is_array($message)) {
-                return array_values($message + [''])[0];
+                return array_values($message + [""])[0];
             }
 
             return $message;
         }
 
         // Singular message, but plural call
-        if (is_string($message) && isset($tokensValues['_singular'])) {
-            $message = [$tokensValues['_singular'], $message];
+        if (is_string($message) && isset($tokensValues["_singular"])) {
+            $message = [$tokensValues["_singular"], $message];
         }
 
         // Resolve plural form.
         if (is_array($message)) {
-            $count = $tokensValues['_count'] ?? 0;
+            $count = $tokensValues["_count"] ?? 0;
             $form = PluralRules::calculate(this.locale, (int)$count);
             $message = $message[$form] ?? (string)end($message);
         }
 
-        if ($message == '') {
+        if ($message == "") {
             $message = $key;
 
-            // If singular haven't been translated, fallback to the key.
-            if (isset($tokensValues['_singular']) && $tokensValues['_count'] == 1) {
-                $message = $tokensValues['_singular'];
+            // If singular haven"t been translated, fallback to the key.
+            if (isset($tokensValues["_singular"]) && $tokensValues["_count"] == 1) {
+                $message = $tokensValues["_singular"];
             }
         }
 
-        unset($tokensValues['_count'], $tokensValues['_singular']);
+        unset($tokensValues["_count"], $tokensValues["_singular"]);
 
         return this.formatter.format(this.locale, $message, $tokensValues);
     }
 
     /**
-     * Resolve a message's context structure.
+     * Resolve a message"s context structure.
      *
      * @param string $key The message key being handled.
      * @param array $message The message content.
@@ -170,24 +170,24 @@ class Translator
      * @return array|string
      */
     protected function resolveContext(string $key, array $message, array $vars) {
-        $context = $vars['_context'] ?? null;
+        $context = $vars["_context"] ?? null;
 
         // No or missing context, fallback to the key/first message
         if ($context == null) {
-            if (isset($message['_context'][''])) {
-                return $message['_context'][''] == '' ? $key : $message['_context'][''];
+            if (isset($message["_context"][""])) {
+                return $message["_context"][""] == "" ? $key : $message["_context"][""];
             }
 
-            return current($message['_context']);
+            return current($message["_context"]);
         }
-        if (!isset($message['_context'][$context])) {
+        if (!isset($message["_context"][$context])) {
             return $key;
         }
-        if ($message['_context'][$context] == '') {
+        if ($message["_context"][$context] == "") {
             return $key;
         }
 
-        return $message['_context'][$context];
+        return $message["_context"][$context];
     }
 
     /**
