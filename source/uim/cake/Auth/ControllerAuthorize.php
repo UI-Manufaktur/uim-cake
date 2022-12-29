@@ -70,7 +70,7 @@ class ControllerAuthorize : BaseAuthorize
      *
      * @param \ArrayAccess|array $user Active user data
      * @param uim.cake.Http\ServerRequest $request Request instance.
-     * @throws \Cake\Core\Exception\CakeException If controller does not have method `isAuthorized()`.
+     * @throws uim.cake.Core\Exception\CakeException If controller does not have method `isAuthorized()`.
      * @return bool
      */
     function authorize($user, ServerRequest $request): bool

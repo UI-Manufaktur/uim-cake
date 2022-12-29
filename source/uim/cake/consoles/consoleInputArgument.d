@@ -106,7 +106,7 @@ class ConsoleInputArgument {
      *
      * @param string myValue The choice to validate.
      * @return true
-     * @throws \Cake\Console\Exception\ConsoleException
+     * @throws uim.cake.Console\Exception\ConsoleException
      */
     bool validChoice(string myValue) {
         if (empty(_choices)) {

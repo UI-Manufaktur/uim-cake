@@ -151,7 +151,7 @@ class SecurityComponent : Component
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
      * @see uim.cake.controllers.Component\SecurityComponent::$blackHoleCallback
      * @link https://book.cakephp.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
-     * @throws \Cake\Http\Exception\BadRequestException
+     * @throws uim.cake.Http\Exception\BadRequestException
      */
     function blackHole(Controller $controller, string $error = "", ?SecurityException $exception = null) {
         if (!_config["blackHoleCallback"]) {
@@ -165,7 +165,7 @@ class SecurityComponent : Component
      * Check debug status and throw an Exception based on the existing one
      *
      * @param uim.cake.Controller\Exception\SecurityException|null $exception Additional debug info describing the cause
-     * @throws \Cake\Http\Exception\BadRequestException
+     * @throws uim.cake.Http\Exception\BadRequestException
      * @return void
      */
     protected function _throwException(?SecurityException $exception = null): void
@@ -185,7 +185,7 @@ class SecurityComponent : Component
      *
      * @param uim.cake.Controller\Controller $controller Instantiating controller
      * @return void
-     * @throws \Cake\Controller\Exception\SecurityException
+     * @throws uim.cake.Controller\Exception\SecurityException
      */
     protected function _secureRequired(Controller $controller): void
     {
@@ -214,7 +214,7 @@ class SecurityComponent : Component
      *
      * @param uim.cake.Controller\Controller $controller Instantiating controller
      * @return void
-     * @throws \Cake\Controller\Exception\AuthSecurityException
+     * @throws uim.cake.Controller\Exception\AuthSecurityException
      */
     protected function _validatePost(Controller $controller): void
     {
@@ -238,7 +238,7 @@ class SecurityComponent : Component
      * Check if token is valid
      *
      * @param uim.cake.Controller\Controller $controller Instantiating controller
-     * @throws \Cake\Controller\Exception\SecurityException
+     * @throws uim.cake.Controller\Exception\SecurityException
      * @return string fields token
      */
     protected function _validToken(Controller $controller): string
@@ -497,7 +497,7 @@ class SecurityComponent : Component
      * @param string $method Method to execute
      * @param array $params Parameters to send to method
      * @return mixed Controller callback method"s response
-     * @throws \Cake\Http\Exception\BadRequestException When a the blackholeCallback is not callable.
+     * @throws uim.cake.Http\Exception\BadRequestException When a the blackholeCallback is not callable.
      */
     protected function _callback(Controller $controller, string $method, array $params = []) {
         $callable = [$controller, $method];

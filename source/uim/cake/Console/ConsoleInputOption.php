@@ -95,7 +95,7 @@ class ConsoleInputOption
      * @param bool $multiple Whether this option can accept multiple value definition.
      * @param bool $required Whether this option is required or not.
      * @param string|null $prompt The prompt string.
-     * @throws \Cake\Console\Exception\ConsoleException
+     * @throws uim.cake.Console\Exception\ConsoleException
      */
     public this(
         string $name,
@@ -250,7 +250,7 @@ class ConsoleInputOption
      *
      * @param string|bool $value The choice to validate.
      * @return true
-     * @throws \Cake\Console\Exception\ConsoleException
+     * @throws uim.cake.Console\Exception\ConsoleException
      */
     bool validChoice($value) {
         if (empty(_choices)) {

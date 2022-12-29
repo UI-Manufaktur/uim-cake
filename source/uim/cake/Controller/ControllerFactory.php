@@ -57,7 +57,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to build a controller for.
      * @return uim.cake.Controller\Controller
-     * @throws \Cake\Http\Exception\MissingControllerException
+     * @throws uim.cake.Http\Exception\MissingControllerException
      */
     function create(IServerRequest $request): Controller
     {
@@ -87,7 +87,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      *
      * @param uim.cake.Controller\Controller $controller The controller to invoke.
      * @return \Psr\Http\Message\IResponse The response
-     * @throws \Cake\Controller\Exception\MissingActionException If controller action is not found.
+     * @throws uim.cake.Controller\Exception\MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
      */
     function invoke($controller): IResponse

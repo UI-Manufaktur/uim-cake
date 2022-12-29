@@ -193,7 +193,7 @@ class RequestHandlerComponent : Component
      *
      * @param uim.cake.Event\IEvent $event The Controller.beforeRender event.
      * @return void
-     * @throws \Cake\Http\Exception\NotFoundException If invoked extension is not configured.
+     * @throws uim.cake.Http\Exception\NotFoundException If invoked extension is not configured.
      */
     function beforeRender(IEvent $event): void
     {

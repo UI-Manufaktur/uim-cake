@@ -611,7 +611,7 @@ class ConsoleOptionParser {
      *
      * @param array $argv Array of args (argv) to parse.
      * @return array [myParams, $args]
-     * @throws \Cake\Console\Exception\ConsoleException When an invalid parameter is encountered.
+     * @throws uim.cake.Console\Exception\ConsoleException When an invalid parameter is encountered.
      */
     array parse(array $argv) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
@@ -766,7 +766,7 @@ class ConsoleOptionParser {
      * @param string option The option to parse.
      * @param array<string, mixed> myParams The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
-     * @throws \Cake\Console\Exception\ConsoleException When unknown short options are encountered.
+     * @throws uim.cake.Console\Exception\ConsoleException When unknown short options are encountered.
      */
     protected array _parseShortOption(string option, array myParams) {
         myKey = substr($option, 1);
@@ -799,7 +799,7 @@ class ConsoleOptionParser {
      * @param string myName The name to parse.
      * @param array<string, mixed> myParams The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
-     * @throws \Cake\Console\Exception\ConsoleException
+     * @throws uim.cake.Console\Exception\ConsoleException
      */
     protected array _parseOption(string myName, array myParams) {
         if (myName !in _options) {
@@ -855,7 +855,7 @@ class ConsoleOptionParser {
      * @param string argument The argument to append
      * @param array $args The array of parsed args to append to.
      * @return array<string> Args
-     * @throws \Cake\Console\Exception\ConsoleException
+     * @throws uim.cake.Console\Exception\ConsoleException
      */
     protected string[] _parseArg(string argument, array $args) {
         if (empty(_args)) {

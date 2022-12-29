@@ -49,7 +49,7 @@ class TaskRegistry : ObjectRegistry
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the task is missing in.
-     * @throws \Cake\Console\Exception\MissingTaskException
+     * @throws uim.cake.Console\Exception\MissingTaskException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingTaskException([

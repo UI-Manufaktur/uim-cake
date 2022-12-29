@@ -97,7 +97,7 @@ class ShellDispatcher {
     /**
      * Defines current working environment.
      *
-     * @throws \Cake\Core\Exception\CakeException
+     * @throws uim.cake.Core\Exception\CakeException
      */
     protected void _initEnvironment() {
         _bootstrap();
@@ -160,7 +160,7 @@ class ShellDispatcher {
      *
      * - `requested` : if used, will prevent the Shell welcome message to be displayed
      * @return int|bool|null
-     * @throws \Cake\Console\Exception\MissingShellMethodException
+     * @throws uim.cake.Console\Exception\MissingShellMethodException
      */
     protected auto _dispatch(array $extra = []) {
         myShellName = this.shiftArgs();
@@ -269,7 +269,7 @@ class ShellDispatcher {
      *
      * @param string myShell Optionally the name of a plugin
      * @return uim.cake.Console\Shell A shell instance.
-     * @throws \Cake\Console\Exception\MissingShellException when errors are encountered.
+     * @throws uim.cake.Console\Exception\MissingShellException when errors are encountered.
      */
     Shell findShell(string myShell) {
         myClassName = _shellExists(myShell);

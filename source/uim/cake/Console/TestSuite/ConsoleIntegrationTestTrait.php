@@ -78,7 +78,7 @@ trait ConsoleIntegrationTestTrait
      *
      * @param string $command Command to run
      * @param array $input Input values to pass to an interactive shell
-     * @throws \Cake\Console\TestSuite\MissingConsoleInputException
+     * @throws uim.cake.Console\TestSuite\MissingConsoleInputException
      * @throws \RuntimeException
      * @return void
      */

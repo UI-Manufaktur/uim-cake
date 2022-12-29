@@ -501,7 +501,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Get the closure for action to be invoked by ControllerFactory.
      *
      * @return \Closure
-     * @throws \Cake\Controller\Exception\MissingActionException
+     * @throws uim.cake.Controller\Exception\MissingActionException
      */
     function getAction(): Closure
     {

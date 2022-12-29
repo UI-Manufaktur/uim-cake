@@ -335,7 +335,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @param uim.cake.Controller\Controller $controller A reference to the controller object.
      * @return uim.cake.Http\Response|null Null if current action is login action
      *   else response object returned by authenticate object or Controller::redirect().
-     * @throws \Cake\Core\Exception\CakeException
+     * @throws uim.cake.Core\Exception\CakeException
      */
     protected function _unauthenticated(Controller $controller): ?Response
     {
@@ -406,7 +406,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @param uim.cake.Controller\Controller $controller A reference to the controller object
      * @return uim.cake.Http\Response|null
-     * @throws \Cake\Http\Exception\ForbiddenException
+     * @throws uim.cake.Http\Exception\ForbiddenException
      */
     protected function _unauthorized(Controller $controller): ?Response
     {
@@ -505,7 +505,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Loads the authorization objects configured.
      *
      * @return array|null The loaded authorization objects, or null when authorize is empty.
-     * @throws \Cake\Core\Exception\CakeException
+     * @throws uim.cake.Core\Exception\CakeException
      */
     function constructAuthorize(): ?array
     {
@@ -798,7 +798,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Loads the configured authentication objects.
      *
      * @return array<string, object>|null The loaded authorization objects, or null on empty authenticate value.
-     * @throws \Cake\Core\Exception\CakeException
+     * @throws uim.cake.Core\Exception\CakeException
      */
     function constructAuthenticate(): ?array
     {

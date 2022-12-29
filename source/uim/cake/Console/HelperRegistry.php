@@ -70,7 +70,7 @@ class HelperRegistry : ObjectRegistry
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the helper is missing in.
      * @return void
-     * @throws \Cake\Console\Exception\MissingHelperException
+     * @throws uim.cake.Console\Exception\MissingHelperException
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {

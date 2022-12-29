@@ -777,7 +777,7 @@ class Shell
      *
      * @param string $message The error message
      * @param int $exitCode The exit code for the shell task.
-     * @throws \Cake\Console\Exception\StopException
+     * @throws uim.cake.Console\Exception\StopException
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#styling-output
      * @psalm-return never-return
@@ -901,7 +901,7 @@ class Shell
      * Raises a StopException to try and halt the execution.
      *
      * @param int $status see https://secure.php.net/exit for values
-     * @throws \Cake\Console\Exception\StopException
+     * @throws uim.cake.Console\Exception\StopException
      * @return void
      */
     protected function _stop(int $status = self::CODE_SUCCESS): void

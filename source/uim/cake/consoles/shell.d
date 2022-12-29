@@ -710,7 +710,7 @@ class Shell {
      *
      * @param string myMessage The error message
      * @param int $exitCode The exit code for the shell task.
-     * @throws \Cake\Console\Exception\StopException
+     * @throws uim.cake.Console\Exception\StopException
      * 
      * @link https://book.UIM.org/4/en/console-and-shells.html#styling-output
      * @psalm-return never-return
@@ -828,7 +828,7 @@ class Shell {
      * Raises a StopException to try and halt the execution.
      *
      * @param int $status see https://secure.php.net/exit for values
-     * @throws \Cake\Console\Exception\StopException
+     * @throws uim.cake.Console\Exception\StopException
      */
     protected void _stop(int $status = self::CODE_SUCCESS) {
         throw new StopException("Halting error reached", $status);

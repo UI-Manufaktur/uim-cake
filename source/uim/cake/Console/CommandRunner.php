@@ -286,7 +286,7 @@ class CommandRunner : EventDispatcherInterface
      * @param uim.cake.Console\ConsoleIo $io ConsoleIo object for errors.
      * @param string|null $name The name from the CLI args.
      * @return string The resolved name.
-     * @throws \Cake\Console\Exception\MissingOptionException
+     * @throws uim.cake.Console\Exception\MissingOptionException
      */
     protected function resolveName(CommandCollection $commands, ConsoleIo $io, ?string $name): string
     {

@@ -74,7 +74,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Ensure the validity of the given cache key.
      *
      * @param string myKey Key to check.
-     * @throws \Cake\Cache\InvalidArgumentException When the key is not valid.
+     * @throws uim.cake.Cache\InvalidArgumentException When the key is not valid.
      */
     protected void ensureValidKey(myKey) {
         if (!is_string(myKey) || strlen(myKey) == 0) {
@@ -87,7 +87,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @param iterable $iterable The iterable to check.
      * @param string check Whether to check keys or values.
-     * @throws \Cake\Cache\InvalidArgumentException
+     * @throws uim.cake.Cache\InvalidArgumentException
      */
     protected void ensureValidType($iterable, string check = self::CHECK_VALUE) {
         if (!is_iterable($iterable)) {
@@ -112,7 +112,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param iterable myKeys A list of keys that can obtained in a single operation.
      * @param mixed $default Default value to return for keys that do not exist.
      * @return iterable A list of key value pairs. Cache keys that do not exist or are stale will have $default as value.
-     * @throws \Cake\Cache\InvalidArgumentException If myKeys is neither an array nor a Traversable,
+     * @throws uim.cake.Cache\InvalidArgumentException If myKeys is neither an array nor a Traversable,
      *   or if any of the myKeys are not a legal value.
      */
     iterable getMultiple(myKeys, $default = null) {
@@ -134,7 +134,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      *   the driver supports TTL then the library may set a default value
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
-     * @throws \Cake\Cache\InvalidArgumentException If myValues is neither an array nor a Traversable,
+     * @throws uim.cake.Cache\InvalidArgumentException If myValues is neither an array nor a Traversable,
      *   or if any of the myValues are not a legal value.
      */
     bool setMultiple(myValues, $ttl = null) {
@@ -165,7 +165,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @param iterable myKeys A list of string-based keys to be deleted.
      * @return bool True if the items were successfully removed. False if there was an error.
-     * @throws \Cake\Cache\InvalidArgumentException If myKeys is neither an array nor a Traversable,
+     * @throws uim.cake.Cache\InvalidArgumentException If myKeys is neither an array nor a Traversable,
      *   or if any of the myKeys are not a legal value.
      */
     bool deleteMultiple(myKeys) {
@@ -191,7 +191,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @param string myKey The cache item key.
      * @return bool
-     * @throws \Cake\Cache\InvalidArgumentException If the myKey string is not a legal value.
+     * @throws uim.cake.Cache\InvalidArgumentException If the myKey string is not a legal value.
      */
     bool has(myKey) {
         return this.get(myKey)  !is null;
@@ -203,7 +203,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param string myKey The unique key of this item in the cache.
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The value of the item from the cache, or $default in case of cache miss.
-     * @throws \Cake\Cache\InvalidArgumentException If the myKey string is not a legal value.
+     * @throws uim.cake.Cache\InvalidArgumentException If the myKey string is not a legal value.
      */
     abstract auto get(myKey, $default = null);
 
@@ -216,7 +216,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      *   the driver supports TTL then the library may set a default value
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
-     * @throws \Cake\Cache\InvalidArgumentException
+     * @throws uim.cake.Cache\InvalidArgumentException
      *   MUST be thrown if the myKey string is not a legal value.
      */
     abstract bool set(myKey, myValue, $ttl = null);
@@ -300,7 +300,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @param string myKey the key passed over
      * @return  Prefixed key with potentially unsafe characters replaced.
-     * @throws \Cake\Cache\InvalidArgumentException If key"s value is invalid.
+     * @throws uim.cake.Cache\InvalidArgumentException If key"s value is invalid.
      */
     protected string _key(myKey) {
         this.ensureValidKey(myKey);

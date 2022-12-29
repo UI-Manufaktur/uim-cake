@@ -129,7 +129,7 @@ class Cache
      * Finds and builds the instance of the required engine class.
      *
      * @param string $name Name of the config array that needs an engine instance built
-     * @throws \Cake\Cache\InvalidArgumentException When a cache engine cannot be created.
+     * @throws uim.cake.Cache\InvalidArgumentException When a cache engine cannot be created.
      * @throws \RuntimeException If loading of the engine failed.
      * @return void
      */
@@ -289,7 +289,7 @@ class Cache
      * @param iterable $data An array or Traversable of data to be stored in the cache
      * @param string $config Optional string configuration name to write to. Defaults to "default"
      * @return bool True on success, false on failure
-     * @throws \Cake\Cache\InvalidArgumentException
+     * @throws uim.cake.Cache\InvalidArgumentException
      */
     public static bool writeMany(iterable $data, string $config = "default") {
         return static::pool($config).setMultiple($data);
@@ -342,7 +342,7 @@ class Cache
      * @param string $config optional name of the configuration to use. Defaults to "default"
      * @return iterable An array containing, for each of the given $keys,
      *   the cached data or false if cached data could not be retrieved.
-     * @throws \Cake\Cache\InvalidArgumentException
+     * @throws uim.cake.Cache\InvalidArgumentException
      */
     public static function readMany(iterable $keys, string $config = "default"): iterable
     {
@@ -357,7 +357,7 @@ class Cache
      * @param string $config Optional string configuration name. Defaults to "default"
      * @return int|false New value, or false if the data doesn"t exist, is not integer,
      *    or if there was an error fetching it.
-     * @throws \Cake\Cache\InvalidArgumentException When offset < 0
+     * @throws uim.cake.Cache\InvalidArgumentException When offset < 0
      */
     public static function increment(string $key, int $offset = 1, string $config = "default") {
         if ($offset < 0) {
@@ -375,7 +375,7 @@ class Cache
      * @param string $config Optional string configuration name. Defaults to "default"
      * @return int|false New value, or false if the data doesn"t exist, is not integer,
      *   or if there was an error fetching it
-     * @throws \Cake\Cache\InvalidArgumentException when offset < 0
+     * @throws uim.cake.Cache\InvalidArgumentException when offset < 0
      */
     public static function decrement(string $key, int $offset = 1, string $config = "default") {
         if ($offset < 0) {
@@ -430,7 +430,7 @@ class Cache
      * @param iterable $keys Array or Traversable of cache keys to be deleted
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True on success, false on failure.
-     * @throws \Cake\Cache\InvalidArgumentException
+     * @throws uim.cake.Cache\InvalidArgumentException
      */
     public static bool deleteMany(iterable $keys, string $config = "default") {
         return static::pool($config).deleteMultiple($keys);
@@ -488,7 +488,7 @@ class Cache
      *
      * @param string|null $group Group name or null to retrieve all group mappings
      * @return array<string, array> Map of group and all configuration that has the same group
-     * @throws \Cake\Cache\InvalidArgumentException
+     * @throws uim.cake.Cache\InvalidArgumentException
      */
     public static function groupConfigs(?string $group = null): array
     {

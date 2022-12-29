@@ -229,7 +229,7 @@ abstract class BaseCommand : ICommand
      * Halt the the current process with a StopException.
      *
      * @param int $code The exit code to use.
-     * @throws \Cake\Console\Exception\StopException
+     * @throws uim.cake.Console\Exception\StopException
      * @return void
      * @psalm-return never-return
      */
