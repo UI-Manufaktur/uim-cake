@@ -5,7 +5,7 @@ import uim.cake.core.Configure;
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.Log\Log;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IServerRequest;
 use Throwable;
 
 /**
@@ -39,7 +39,7 @@ class ErrorLogger : ErrorLoggerInterface
      * Log an error to Cake"s Log subsystem
      *
      * @param uim.cake.Error\PhpError $error The error to log
-     * @param ?\Psr\Http\Message\IServerRequest $request The request if in an HTTP context.
+     * @param ?\Psr\Http\messages.IServerRequest $request The request if in an HTTP context.
      * @param bool $includeTrace Should the log message include a stacktrace
      * @return void
      */
@@ -66,7 +66,7 @@ class ErrorLogger : ErrorLoggerInterface
      * Log an exception to Cake"s Log subsystem
      *
      * @param \Throwable $exception The exception to log a message for.
-     * @param \Psr\Http\Message\IServerRequest|null $request The current request if available.
+     * @param \Psr\Http\messages.IServerRequest|null $request The current request if available.
      * @param bool $includeTrace Whether or not a stack trace should be logged.
      * @return void
      */
@@ -109,7 +109,7 @@ class ErrorLogger : ErrorLoggerInterface
 
     /**
      * @param \Throwable $exception The exception to log a message for.
-     * @param \Psr\Http\Message\IServerRequest|null $request The current request if available.
+     * @param \Psr\Http\messages.IServerRequest|null $request The current request if available.
      * @return bool
      * @deprecated 4.4.0 Use logException instead.
      */
@@ -177,7 +177,7 @@ class ErrorLogger : ErrorLoggerInterface
     /**
      * Get the request context for an error/exception trace.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request to read from.
+     * @param \Psr\Http\messages.IServerRequest $request The request to read from.
      * @return string
      */
     string getRequestContext(IServerRequest $request): string

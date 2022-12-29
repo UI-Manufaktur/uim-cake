@@ -3,7 +3,7 @@ module uim.cake.errors;
 import uim.cake.core.App;
 import uim.caketps\ResponseEmitter;
 import uim.cake.routings\Router;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IServerRequest;
 use RuntimeException;
 use Throwable;
 
@@ -127,7 +127,7 @@ class ErrorHandler : BaseErrorHandler
      * Get a renderer instance.
      *
      * @param \Throwable myException The exception being rendered.
-     * @param \Psr\Http\Message\IServerRequest|null myRequest The request.
+     * @param \Psr\Http\messages.IServerRequest|null myRequest The request.
      * @return uim.cake.Error\IExceptionRenderer The exception renderer.
      * @throws \RuntimeException When the renderer class cannot be found.
      */

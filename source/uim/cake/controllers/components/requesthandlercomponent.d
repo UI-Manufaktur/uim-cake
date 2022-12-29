@@ -24,7 +24,7 @@ class RequestHandlerComponent : Component {
      * Contains the file extension parsed out by the Router
      *
      * @var string|null
-     * @see uim.cake.Routing\Router::extensions()
+     * @see uim.cake.routings.Router::extensions()
      */
     protected ext;
 

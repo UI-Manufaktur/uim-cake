@@ -18,7 +18,7 @@ import uim.cake.http.ContentTypeNegotiation;
 import uim.cake.http.exceptions.NotFoundException;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 import uim.cake.utilities.Inflector;
 
 /**
@@ -40,7 +40,7 @@ class RequestHandlerComponent : Component
      * Contains the file extension parsed out by the Router
      *
      * @var string|null
-     * @see uim.cake.Routing\Router::extensions()
+     * @see uim.cake.routings.Router::extensions()
      */
     protected $ext;
 

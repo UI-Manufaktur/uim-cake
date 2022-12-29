@@ -4,7 +4,7 @@ module uim.cake.Command;
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 
 /**
  * Provides interactive CLI tools for routing.

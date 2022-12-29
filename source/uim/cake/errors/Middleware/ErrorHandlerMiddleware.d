@@ -87,9 +87,9 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Wrap the remaining middleware with error handling.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request.
-     * @param \Psr\Http\Server\IRequestHandler $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest myRequest The request.
+     * @param \Psr\Http\servers.IRequestHandler $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     IResponse process(IServerRequest myRequest, IRequestHandler $handler) {
         try {
@@ -105,8 +105,8 @@ class ErrorHandlerMiddleware : IMiddleware
      * Handle an exception and generate an error response
      *
      * @param \Throwable myException The exception to handle.
-     * @param \Psr\Http\Message\IServerRequest myRequest The request.
-     * @return \Psr\Http\Message\IResponse A response
+     * @param \Psr\Http\messages.IServerRequest myRequest The request.
+     * @return \Psr\Http\messages.IResponse A response
      */
     IResponse handleException(Throwable myException, IServerRequest myRequest) {
         myErrorHandler = this.getErrorHandler();
@@ -127,7 +127,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * Convert a redirect exception into a response.
      *
      * @param uim.cake.http.exceptions.RedirectException myException The exception to handle
-     * @return \Psr\Http\Message\IResponse Response created from the redirect.
+     * @return \Psr\Http\messages.IResponse Response created from the redirect.
      */
     IResponse handleRedirect(RedirectException myException) {
         return new RedirectResponse(
@@ -140,7 +140,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Handle internal errors.
      *
-     * @return \Psr\Http\Message\IResponse A response
+     * @return \Psr\Http\messages.IResponse A response
      */
     protected IResponse handleInternalError() {
         $response = new Response(["body":"An Internal Server Error Occurred"]);

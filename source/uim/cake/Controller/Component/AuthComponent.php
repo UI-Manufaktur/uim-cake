@@ -21,7 +21,7 @@ import uim.cake.events.EventInterface;
 import uim.cake.http.exceptions.ForbiddenException;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 import uim.cake.utilities.Hash;
 
 /**

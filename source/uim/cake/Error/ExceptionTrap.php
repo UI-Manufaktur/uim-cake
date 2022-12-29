@@ -5,9 +5,9 @@ module uim.cake.Error;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.errors.Renderer\ConsoleExceptionRenderer;
 import uim.cake.events.EventDispatcherTrait;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 use InvalidArgumentException;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IServerRequest;
 use Throwable;
 
 /**
@@ -104,7 +104,7 @@ class ExceptionTrap
      * Get an instance of the renderer.
      *
      * @param \Throwable $exception Exception to render
-     * @param \Psr\Http\Message\IServerRequest|null $request The request if possible.
+     * @param \Psr\Http\messages.IServerRequest|null $request The request if possible.
      * @return uim.cake.Error\ExceptionRendererInterface
      */
     function renderer(Throwable $exception, $request = null) {
@@ -335,7 +335,7 @@ class ExceptionTrap
      * After logging is attempted the `Exception.beforeRender` event is triggered.
      *
      * @param \Throwable $exception The exception to log
-     * @param \Psr\Http\Message\IServerRequest|null $request The optional request
+     * @param \Psr\Http\messages.IServerRequest|null $request The optional request
      * @return void
      */
     function logException(Throwable $exception, ?IServerRequest $request = null): void

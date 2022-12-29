@@ -7,7 +7,7 @@ import uim.cake.core.InstanceConfigTrait;
 import uim.cake.errors.Renderer\ConsoleErrorRenderer;
 import uim.cake.errors.Renderer\HtmlErrorRenderer;
 import uim.cake.events.EventDispatcherTrait;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 use Exception;
 
 /**

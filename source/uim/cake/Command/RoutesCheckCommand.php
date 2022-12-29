@@ -6,8 +6,8 @@ import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.ConsoleOptionParser;
 import uim.cake.http.exceptions.RedirectException;
 import uim.cake.http.ServerRequest;
-import uim.cake.Routing\exceptions.MissingRouteException;
-import uim.cake.Routing\Router;
+import uim.cake.routings.exceptions.MissingRouteException;
+import uim.cake.routings.Router;
 
 /**
  * Provides interactive CLI tool for testing routes.

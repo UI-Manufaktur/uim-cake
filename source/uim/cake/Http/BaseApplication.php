@@ -23,12 +23,12 @@ import uim.cake.core.PluginCollection;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventManager;
 import uim.cake.events.IEventManager;
-import uim.cake.Routing\RouteBuilder;
-import uim.cake.Routing\Router;
-import uim.cake.Routing\IRoutingApplication;
+import uim.cake.routings.RouteBuilder;
+import uim.cake.routings.Router;
+import uim.cake.routings.IRoutingApplication;
 use Closure;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
 
 /**
  * Base class for full-stack applications
@@ -170,7 +170,7 @@ abstract class BaseApplication implements
      *
      * By default, this will load `config/routes.php` for ease of use and backwards compatibility.
      *
-     * @param uim.cake.Routing\RouteBuilder $routes A route builder to add routes into.
+     * @param uim.cake.routings.RouteBuilder $routes A route builder to add routes into.
      * @return void
      */
     function routes(RouteBuilder $routes): void
@@ -276,8 +276,8 @@ abstract class BaseApplication implements
      * - Create the controller that will handle this request.
      * - Invoke the controller.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest $request The request
+     * @return \Psr\Http\messages.IResponse
      */
     function handle(
         IServerRequest $request

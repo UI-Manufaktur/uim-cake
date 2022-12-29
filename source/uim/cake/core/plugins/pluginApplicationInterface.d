@@ -33,8 +33,8 @@ interface IPluginApplication : IEventDispatcher
     /**
      * Run routes hooks for loaded plugins
      *
-     * @param uim.cake.Routing\RouteBuilder $routes The route builder to use.
-     * @return uim.cake.Routing\RouteBuilder
+     * @param uim.cake.routings.RouteBuilder $routes The route builder to use.
+     * @return uim.cake.routings.RouteBuilder
      */
     function pluginRoutes(RouteBuilder $routes): RouteBuilder;
 

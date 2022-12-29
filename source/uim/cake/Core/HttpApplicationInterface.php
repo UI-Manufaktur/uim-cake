@@ -14,7 +14,7 @@
 module uim.cake.Core;
 
 import uim.cake.http.MiddlewareQueue;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
  * An interface defining the methods that the

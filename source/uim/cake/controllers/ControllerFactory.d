@@ -10,9 +10,9 @@ import uim.caketps\Runner;
 import uim.caketps\ServerRequest;
 import uim.cakeilities.Inflector;
 use Closure;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IRequestHandler;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IRequestHandler;
 use ReflectionClass;
 use ReflectionFunction;
 use ReflectionNamedType;
@@ -46,7 +46,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Create a controller for a given request.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request to build a controller for.
+     * @param \Psr\Http\messages.IServerRequest myRequest The request to build a controller for.
      * @return uim.cake.controllers.Controller
      * @throws uim.cake.http.exceptions.MissingControllerException
      */
@@ -77,7 +77,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * Invoke a controller"s action and wrapping methods.
      *
      * @param uim.cake.controllers.Controller $controller The controller to invoke.
-     * @return \Psr\Http\Message\IResponse The response
+     * @return \Psr\Http\messages.IResponse The response
      * @throws uim.cake.controllers.exceptions.MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
      */
@@ -99,8 +99,8 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Invoke the action.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest Request instance.
-     * @return \Psr\Http\Message\IResponse
+     * @param \Psr\Http\messages.IServerRequest myRequest Request instance.
+     * @return \Psr\Http\messages.IResponse
      */
     IResponse handle(IServerRequest myRequest) {
         $controller = this.controller;

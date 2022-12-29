@@ -11,7 +11,7 @@ module uim.cake.Core;
 import uim.cake.consoles.CommandCollection;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.http.MiddlewareQueue;
-import uim.cake.Routing\RouteBuilder;
+import uim.cake.routings.RouteBuilder;
 
 /**
  * Interface for Applications that leverage plugins & events.
@@ -44,8 +44,8 @@ interface IPluginApplication : EventDispatcherInterface
     /**
      * Run routes hooks for loaded plugins
      *
-     * @param uim.cake.Routing\RouteBuilder $routes The route builder to use.
-     * @return uim.cake.Routing\RouteBuilder
+     * @param uim.cake.routings.RouteBuilder $routes The route builder to use.
+     * @return uim.cake.routings.RouteBuilder
      */
     function pluginRoutes(RouteBuilder $routes): RouteBuilder;
 

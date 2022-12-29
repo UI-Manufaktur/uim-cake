@@ -11,7 +11,7 @@ module uim.cake.errors.Renderer;
 import uim.cake.consoles.ConsoleOutput;
 import uim.cake.core.Configure;
 import uim.cake.core.exceptions.CakeException;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IServerRequest;
 use Throwable;
 
 /**
@@ -43,7 +43,7 @@ class ConsoleExceptionRenderer
      * Constructor.
      *
      * @param \Throwable $error The error to render.
-     * @param \Psr\Http\Message\IServerRequest|null $request Not used.
+     * @param \Psr\Http\messages.IServerRequest|null $request Not used.
      * @param array $config Error handling configuration.
      */
     this(Throwable $error, ?IServerRequest $request, array $config) {
@@ -55,7 +55,7 @@ class ConsoleExceptionRenderer
     /**
      * Render an exception into a plain text message.
      *
-     * @return \Psr\Http\Message\IResponse|string
+     * @return \Psr\Http\messages.IResponse|string
      */
     function render() {
         $exceptions = [this.error];

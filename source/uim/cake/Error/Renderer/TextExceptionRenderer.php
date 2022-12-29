@@ -37,7 +37,7 @@ class TextExceptionRenderer
     /**
      * Render an exception into a plain text message.
      *
-     * @return \Psr\Http\Message\IResponse|string
+     * @return \Psr\Http\messages.IResponse|string
      */
     function render() {
         return sprintf(

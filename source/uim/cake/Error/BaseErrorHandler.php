@@ -10,8 +10,8 @@ module uim.cake.Error;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Routing\Router;
-use Psr\Http\Message\IServerRequest;
+import uim.cake.routings.Router;
+use Psr\Http\messages.IServerRequest;
 use RuntimeException;
 use Throwable;
 
@@ -320,7 +320,7 @@ abstract class BaseErrorHandler
      * Log an error for the exception if applicable.
      *
      * @param \Throwable $exception The exception to log a message for.
-     * @param \Psr\Http\Message\IServerRequest|null $request The current request.
+     * @param \Psr\Http\messages.IServerRequest|null $request The current request.
      * @return bool
      */
     function logException(Throwable $exception, ?IServerRequest $request = null): bool

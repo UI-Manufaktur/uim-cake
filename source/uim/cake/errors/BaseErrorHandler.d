@@ -3,7 +3,7 @@ module uim.cake.errors;
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.routings\Router;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IServerRequest;
 use RuntimeException;
 use Throwable;
 
@@ -290,7 +290,7 @@ abstract class BaseErrorHandler
      * Log an error for the exception if applicable.
      *
      * @param \Throwable myException The exception to log a message for.
-     * @param \Psr\Http\Message\IServerRequest|null myRequest The current request.
+     * @param \Psr\Http\messages.IServerRequest|null myRequest The current request.
      */
     bool logException(Throwable myException, ?IServerRequest myRequest = null) {
         if (empty(_config["log"])) {

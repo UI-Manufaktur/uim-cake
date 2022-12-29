@@ -18,12 +18,12 @@ import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
 import uim.cake.Log\LogTrait;
 import uim.cake.orm.locators.LocatorAwareTrait;
-import uim.cake.Routing\Router;
+import uim.cake.routings.Router;
 import uim.cake.View\View;
 import uim.cake.View\ViewVarsTrait;
 use Closure;
 use InvalidArgumentException;
-use Psr\Http\Message\IResponse;
+use Psr\Http\messages.IResponse;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
@@ -151,7 +151,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Middlewares list.
      *
      * @var array
-     * @psalm-var array<int, array{middleware:\Psr\Http\Server\IMiddleware|\Closure|string, options:array{only?: array|string, except?: array|string}}>
+     * @psalm-var array<int, array{middleware:\Psr\Http\servers.IMiddleware|\Closure|string, options:array{only?: array|string, except?: array|string}}>
      */
     protected $middlewares = [];
 
@@ -540,7 +540,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Register middleware for the controller.
      *
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string $middleware Middleware.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware Middleware.
      * @param array<string, mixed> $options Valid options:
      *  - `only`: (array|string) Only run the middleware for specified actions.
      *  - `except`: (array|string) Run the middleware for all actions except the specified ones.
@@ -613,7 +613,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * - Calls the controller `beforeFilter`.
      * - triggers Component `startup` methods.
      *
-     * @return \Psr\Http\Message\IResponse|null
+     * @return \Psr\Http\messages.IResponse|null
      */
     function startupProcess(): ?IResponse
     {
@@ -636,7 +636,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * - triggers the component `shutdown` callback.
      * - calls the Controller"s `afterFilter` method.
      *
-     * @return \Psr\Http\Message\IResponse|null
+     * @return \Psr\Http\messages.IResponse|null
      */
     function shutdownProcess(): ?IResponse
     {
@@ -651,7 +651,7 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Redirects to given $url, after turning off this.autoRender.
      *
-     * @param \Psr\Http\Message\UriInterface|array|string $url A string, array-based URL or UriInterface instance.
+     * @param \Psr\Http\messages.UriInterface|array|string $url A string, array-based URL or UriInterface instance.
      * @param int $status HTTP status code. Defaults to `302`.
      * @return uim.cake.http.Response|null
      * @link https://book.cakephp.org/4/en/controllers.html#Controller::redirect

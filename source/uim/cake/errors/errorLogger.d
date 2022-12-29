@@ -4,7 +4,7 @@ import uim.cake.core.Configure;
 import uim.cake.core.exceptions\CakeException;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cakegs\Log;
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IServerRequest;
 use Throwable;
 
 /**
@@ -117,7 +117,7 @@ class ErrorLogger : IErrorLogger
     /**
      * Get the request context for an error/exception trace.
      *
-     * @param \Psr\Http\Message\IServerRequest myRequest The request to read from.
+     * @param \Psr\Http\messages.IServerRequest myRequest The request to read from.
      */
     string getRequestContext(IServerRequest myRequest) {
         myMessage = "\nRequest URL: " . myRequest.getRequestTarget();

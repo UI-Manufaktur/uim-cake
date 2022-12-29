@@ -18,10 +18,10 @@ import uim.cake.http.exceptions.RedirectException;
 import uim.cake.http.Response;
 use InvalidArgumentException;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Psr\Http\Message\IResponse;
-use Psr\Http\Message\IServerRequest;
-use Psr\Http\Server\IMiddleware;
-use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\messages.IResponse;
+use Psr\Http\messages.IServerRequest;
+use Psr\Http\servers.IMiddleware;
+use Psr\Http\servers.RequestHandlerInterface;
 use Throwable;
 
 /**
@@ -112,9 +112,9 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Wrap the remaining middleware with error handling.
      *
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
-     * @return \Psr\Http\Message\IResponse A response
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @param \Psr\Http\servers.RequestHandlerInterface $handler The request handler.
+     * @return \Psr\Http\messages.IResponse A response
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {
@@ -131,8 +131,8 @@ class ErrorHandlerMiddleware : IMiddleware
      * Handle an exception and generate an error response
      *
      * @param \Throwable $exception The exception to handle.
-     * @param \Psr\Http\Message\IServerRequest $request The request.
-     * @return \Psr\Http\Message\IResponse A response.
+     * @param \Psr\Http\messages.IServerRequest $request The request.
+     * @return \Psr\Http\messages.IResponse A response.
      */
     function handleException(Throwable $exception, IServerRequest $request): IResponse
     {
@@ -149,7 +149,7 @@ class ErrorHandlerMiddleware : IMiddleware
         }
 
         try {
-            /** @var \Psr\Http\Message\IResponse|string $response */
+            /** @var \Psr\Http\messages.IResponse|string $response */
             $response = $renderer.render();
             if (is_string($response)) {
                 return new Response(["body": $response, "status": 500]);
@@ -167,7 +167,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * Convert a redirect exception into a response.
      *
      * @param uim.cake.http.exceptions.RedirectException $exception The exception to handle
-     * @return \Psr\Http\Message\IResponse Response created from the redirect.
+     * @return \Psr\Http\messages.IResponse Response created from the redirect.
      */
     function handleRedirect(RedirectException $exception): IResponse
     {
@@ -181,7 +181,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Handle internal errors.
      *
-     * @return \Psr\Http\Message\IResponse A response
+     * @return \Psr\Http\messages.IResponse A response
      */
     protected function handleInternalError(): IResponse
     {

@@ -63,7 +63,7 @@ interface IPlugin {
      * The default implementation of this method will include the `config/routes.php` in the plugin if it exists. You
      * can override this method to replace that behavior.
      *
-     * @param uim.cake.Routing\RouteBuilder $routes The route builder to update.
+     * @param uim.cake.routings.RouteBuilder $routes The route builder to update.
      */
     IPlugin routes(RouteBuilder $routes);
 

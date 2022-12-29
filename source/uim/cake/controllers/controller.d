@@ -122,7 +122,7 @@ class Controller : IEventListener, IEventDispatcher
      * Middlewares list.
      *
      * @var array
-     * @psalm-var array<int, array{middleware:\Psr\Http\Server\IMiddleware|\Closure|string, options:array{only?: array|string, except?: array|string}}>
+     * @psalm-var array<int, array{middleware:\Psr\Http\servers.IMiddleware|\Closure|string, options:array{only?: array|string, except?: array|string}}>
      */
     protected middlewares = [];
 
@@ -497,7 +497,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Register middleware for the controller.
      *
-     * @param \Psr\Http\Server\IMiddleware|\Closure|string middleware Middleware.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string middleware Middleware.
      * @param array<string, mixed> myOptions Valid options:
      *  - `only`: (array|string) Only run the middleware for specified actions.
      *  - `except`: (array|string) Run the middleware for all actions except the specified ones.
@@ -565,7 +565,7 @@ class Controller : IEventListener, IEventDispatcher
      * - Calls the controller `beforeFilter`.
      * - triggers Component `startup` methods.
      *
-     * @return \Psr\Http\Message\IResponse|null
+     * @return \Psr\Http\messages.IResponse|null
      */
     function startupProcess(): ?IResponse
     {
@@ -588,7 +588,7 @@ class Controller : IEventListener, IEventDispatcher
      * - triggers the component `shutdown` callback.
      * - calls the Controller"s `afterFilter` method.
      *
-     * @return \Psr\Http\Message\IResponse|null
+     * @return \Psr\Http\messages.IResponse|null
      */
     function shutdownProcess(): ?IResponse
     {
@@ -603,7 +603,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Redirects to given myUrl, after turning off this.autoRender.
      *
-     * @param \Psr\Http\Message\UriInterface|array|string myUrl A string, array-based URL or UriInterface instance.
+     * @param \Psr\Http\messages.UriInterface|array|string myUrl A string, array-based URL or UriInterface instance.
      * @param int $status HTTP status code. Defaults to `302`.
      * @return uim.cake.http.Response|null
      * @link https://book.UIM.org/4/en/controllers.html#Controller::redirect

@@ -15,7 +15,7 @@ interface IErrorLogger
      * Log an error for an exception with optional request context.
      *
      * @param \Throwable myException The exception to log a message for.
-     * @param \Psr\Http\Message\IServerRequest|null myRequest The current request if available.
+     * @param \Psr\Http\messages.IServerRequest|null myRequest The current request if available.
      */
     bool log(
         Throwable myException,

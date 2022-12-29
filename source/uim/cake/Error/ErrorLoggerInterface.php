@@ -8,7 +8,7 @@
   */
 module uim.cake.Error;
 
-use Psr\Http\Message\IServerRequest;
+use Psr\Http\messages.IServerRequest;
 use Throwable;
 
 /**
@@ -17,9 +17,9 @@ use Throwable;
  * Used by the ErrorHandlerMiddleware and global
  * error handlers to log exceptions and errors.
  *
- * @method void logException(\Throwable $exception, ?\Psr\Http\Message\IServerRequest $request = null, bool $includeTrace = false)
+ * @method void logException(\Throwable $exception, ?\Psr\Http\messages.IServerRequest $request = null, bool $includeTrace = false)
  *   Log an exception with an optional HTTP request.
- * @method void logError(uim.cake.Error\PhpError $error, ?\Psr\Http\Message\IServerRequest $request = null, bool $includeTrace = false)
+ * @method void logError(uim.cake.Error\PhpError $error, ?\Psr\Http\messages.IServerRequest $request = null, bool $includeTrace = false)
  *   Log an error with an optional HTTP request.
  */
 interface ErrorLoggerInterface
@@ -28,7 +28,7 @@ interface ErrorLoggerInterface
      * Log an error for an exception with optional request context.
      *
      * @param \Throwable $exception The exception to log a message for.
-     * @param \Psr\Http\Message\IServerRequest|null $request The current request if available.
+     * @param \Psr\Http\messages.IServerRequest|null $request The current request if available.
      * @return bool
      * @deprecated 4.4.0 Implement `logException` instead.
      */

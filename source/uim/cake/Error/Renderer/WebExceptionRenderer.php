@@ -28,13 +28,13 @@ import uim.cake.http.Response;
 import uim.cake.http.ResponseEmitter;
 import uim.cake.http.ServerRequest;
 import uim.cake.http.ServerRequestFactory;
-import uim.cake.Routing\exceptions.MissingRouteException;
-import uim.cake.Routing\Router;
+import uim.cake.routings.exceptions.MissingRouteException;
+import uim.cake.routings.Router;
 import uim.cake.utilities.Inflector;
 import uim.cake.View\exceptions.MissingLayoutException;
 import uim.cake.View\exceptions.MissingTemplateException;
 use PDOException;
-use Psr\Http\Message\IResponse;
+use Psr\Http\messages.IResponse;
 use Throwable;
 
 /**
@@ -286,7 +286,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     /**
      * Emit the response content
      *
-     * @param \Psr\Http\Message\IResponse|string $output The response to output.
+     * @param \Psr\Http\messages.IResponse|string $output The response to output.
      * @return void
      */
     function write($output): void
