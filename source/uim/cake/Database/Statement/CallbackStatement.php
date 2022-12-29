@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.databases.Statement;
 
 import uim.cake.databases.DriverInterface;

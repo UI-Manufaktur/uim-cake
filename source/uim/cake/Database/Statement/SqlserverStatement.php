@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.databases.Statement;
 
 use PDO;

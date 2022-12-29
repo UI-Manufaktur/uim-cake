@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.databases.Schema;
 
 use Psr\SimpleCache\ICache;
