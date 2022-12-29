@@ -24,7 +24,7 @@ import uim.cake.consoles.ShellDispatcher;
 class LegacyShellDispatcher : ShellDispatcher
 {
     /**
-     * @var uim.cake.Console\ConsoleIo
+     * @var uim.cake.consoles.ConsoleIo
      */
     protected $_io;
 
@@ -33,7 +33,7 @@ class LegacyShellDispatcher : ShellDispatcher
      *
      * @param array $args Argument array
      * @param bool $bootstrap Initialize environment
-     * @param uim.cake.Console\ConsoleIo|null $io ConsoleIo
+     * @param uim.cake.consoles.ConsoleIo|null $io ConsoleIo
      */
     this(array $args = [], bool $bootstrap = true, ?ConsoleIo $io = null) {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
@@ -46,12 +46,12 @@ class LegacyShellDispatcher : ShellDispatcher
      *
      * @param string $className Class name
      * @param string $shortName Short name
-     * @return uim.cake.Console\Shell
+     * @return uim.cake.consoles.Shell
      */
     protected function _createShell(string $className, string $shortName): Shell
     {
         [$plugin] = pluginSplit($shortName);
-        /** @var uim.cake.Console\Shell $instance */
+        /** @var uim.cake.consoles.Shell $instance */
         $instance = new $className(_io);
         if ($plugin) {
             $instance.plugin = trim($plugin, ".");

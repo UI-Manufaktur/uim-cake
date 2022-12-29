@@ -15,7 +15,7 @@ use SimpleXMLElement;
  * An object to represent a single option used in the command line.
  * ConsoleOptionParser creates these when you use addOption()
  *
- * @see uim.cake.Console\ConsoleOptionParser::addOption()
+ * @see uim.cake.consoles.ConsoleOptionParser::addOption()
  */
 class ConsoleInputOption
 {
@@ -94,7 +94,7 @@ class ConsoleInputOption
      * @param bool $multiple Whether this option can accept multiple value definition.
      * @param bool $required Whether this option is required or not.
      * @param string|null $prompt The prompt string.
-     * @throws uim.cake.Console\Exception\ConsoleException
+     * @throws uim.cake.consoles.Exception\ConsoleException
      */
     this(
         string $name,
@@ -249,7 +249,7 @@ class ConsoleInputOption
      *
      * @param string|bool $value The choice to validate.
      * @return true
-     * @throws uim.cake.Console\Exception\ConsoleException
+     * @throws uim.cake.consoles.Exception\ConsoleException
      */
     bool validChoice($value) {
         if (empty(_choices)) {

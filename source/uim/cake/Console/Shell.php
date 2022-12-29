@@ -78,7 +78,7 @@ class Shell
     /**
      * An instance of ConsoleOptionParser that has been configured for this class.
      *
-     * @var uim.cake.Console\ConsoleOptionParser
+     * @var uim.cake.consoles.ConsoleOptionParser
      */
     $OptionParser;
 
@@ -143,7 +143,7 @@ class Shell
     /**
      * Task Collection for the command, used to create Tasks.
      *
-     * @var uim.cake.Console\TaskRegistry
+     * @var uim.cake.consoles.TaskRegistry
      */
     $Tasks;
 
@@ -157,7 +157,7 @@ class Shell
     /**
      * ConsoleIo instance.
      *
-     * @var uim.cake.Console\ConsoleIo
+     * @var uim.cake.consoles.ConsoleIo
      */
     protected $_io;
 
@@ -171,7 +171,7 @@ class Shell
     /**
      * Constructs this Shell instance.
      *
-     * @param uim.cake.Console\ConsoleIo|null $io An io instance.
+     * @param uim.cake.consoles.ConsoleIo|null $io An io instance.
      * @param uim.cake.ORM\Locator\ILocator|null $locator Table locator instance.
      * @link https://book.cakephp.org/4/en/console-commands/shells.html
      */
@@ -211,7 +211,7 @@ class Shell
     /**
      * Get the io object for this shell.
      *
-     * @return uim.cake.Console\ConsoleIo The current ConsoleIo object.
+     * @return uim.cake.consoles.ConsoleIo The current ConsoleIo object.
      */
     function getIo(): ConsoleIo
     {
@@ -221,7 +221,7 @@ class Shell
     /**
      * Set the io object for this shell.
      *
-     * @param uim.cake.Console\ConsoleIo $io The ConsoleIo object to use.
+     * @param uim.cake.consoles.ConsoleIo $io The ConsoleIo object to use.
      * @return void
      */
     function setIo(ConsoleIo $io): void
@@ -559,7 +559,7 @@ class Shell
      *
      * By overriding this method you can configure the ConsoleOptionParser before returning it.
      *
-     * @return uim.cake.Console\ConsoleOptionParser
+     * @return uim.cake.consoles.ConsoleOptionParser
      * @link https://book.cakephp.org/4/en/console-and-shells.html#configuring-options-and-generating-help
      */
     function getOptionParser(): ConsoleOptionParser
@@ -575,7 +575,7 @@ class Shell
      * Overload get for lazy building of tasks
      *
      * @param string $name The task to get.
-     * @return uim.cake.Console\Shell Object of Task
+     * @return uim.cake.consoles.Shell Object of Task
      */
     function __get(string $name) {
         if (empty(this.{$name}) && in_array($name, this.taskNames, true)) {
@@ -773,7 +773,7 @@ class Shell
      *
      * @param string $message The error message
      * @param int $exitCode The exit code for the shell task.
-     * @throws uim.cake.Console\Exception\StopException
+     * @throws uim.cake.consoles.Exception\StopException
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#styling-output
      * @psalm-return never-return
@@ -884,7 +884,7 @@ class Shell
      *
      * @param string $name The name of the helper to render
      * @param array<string, mixed> $config Configuration data for the helper.
-     * @return uim.cake.Console\Helper The created helper instance.
+     * @return uim.cake.consoles.Helper The created helper instance.
      */
     function helper(string $name, array $config = []): Helper
     {
@@ -896,7 +896,7 @@ class Shell
      * Raises a StopException to try and halt the execution.
      *
      * @param int $status see https://secure.php.net/exit for values
-     * @throws uim.cake.Console\Exception\StopException
+     * @throws uim.cake.consoles.Exception\StopException
      * @return void
      */
     protected function _stop(int $status = self::CODE_SUCCESS): void

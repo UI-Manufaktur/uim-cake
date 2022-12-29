@@ -15,7 +15,7 @@ use SimpleXMLElement;
  * An object to represent a single argument used in the command line.
  * ConsoleOptionParser creates these when you use addArgument()
  *
- * @see uim.cake.Console\ConsoleOptionParser::addArgument()
+ * @see uim.cake.consoles.ConsoleOptionParser::addArgument()
  */
 class ConsoleInputArgument
 {
@@ -82,7 +82,7 @@ class ConsoleInputArgument
     /**
      * Checks if this argument is equal to another argument.
      *
-     * @param uim.cake.Console\ConsoleInputArgument $argument ConsoleInputArgument to compare to.
+     * @param uim.cake.consoles.ConsoleInputArgument $argument ConsoleInputArgument to compare to.
      * @return bool
      */
     bool isEqualTo(ConsoleInputArgument $argument) {
@@ -146,7 +146,7 @@ class ConsoleInputArgument
      *
      * @param string $value The choice to validate.
      * @return true
-     * @throws uim.cake.Console\Exception\ConsoleException
+     * @throws uim.cake.consoles.Exception\ConsoleException
      */
     bool validChoice(string $value) {
         if (empty(_choices)) {

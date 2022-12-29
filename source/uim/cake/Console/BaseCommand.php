@@ -92,7 +92,7 @@ abstract class BaseCommand : ICommand
      *
      * You can override buildOptionParser() to define your options & arguments.
      *
-     * @return uim.cake.Console\ConsoleOptionParser
+     * @return uim.cake.consoles.ConsoleOptionParser
      * @throws \RuntimeException When the parser is invalid
      */
     function getOptionParser(): ConsoleOptionParser
@@ -115,8 +115,8 @@ abstract class BaseCommand : ICommand
     /**
      * Hook method for defining this command"s option parser.
      *
-     * @param uim.cake.Console\ConsoleOptionParser $parser The parser to be defined
-     * @return uim.cake.Console\ConsoleOptionParser The built parser.
+     * @param uim.cake.consoles.ConsoleOptionParser $parser The parser to be defined
+     * @return uim.cake.consoles.ConsoleOptionParser The built parser.
      */
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
@@ -172,9 +172,9 @@ abstract class BaseCommand : ICommand
     /**
      * Output help content
      *
-     * @param uim.cake.Console\ConsoleOptionParser $parser The option parser.
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.ConsoleOptionParser $parser The option parser.
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return void
      */
     protected function displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io): void
@@ -191,8 +191,8 @@ abstract class BaseCommand : ICommand
     /**
      * Set the output level based on the Arguments.
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return void
      */
     protected function setOutputLevel(Arguments $args, ConsoleIo $io): void
@@ -211,8 +211,8 @@ abstract class BaseCommand : ICommand
     /**
      * Implement this method with your command"s logic.
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null|void The exit code or null for success
      */
     abstract function execute(Arguments $args, ConsoleIo $io);
@@ -221,7 +221,7 @@ abstract class BaseCommand : ICommand
      * Halt the the current process with a StopException.
      *
      * @param int $code The exit code to use.
-     * @throws uim.cake.Console\Exception\StopException
+     * @throws uim.cake.consoles.Exception\StopException
      * @return void
      * @psalm-return never-return
      */
@@ -237,9 +237,9 @@ abstract class BaseCommand : ICommand
      * will not be resolved with the application container. Instead you will
      * need to pass the command as an object with all of its dependencies.
      *
-     * @param uim.cake.Console\ICommand|string $command The command class name or command instance.
+     * @param uim.cake.consoles.ICommand|string $command The command class name or command instance.
      * @param array $args The arguments to invoke the command with.
-     * @param uim.cake.Console\ConsoleIo|null $io The ConsoleIo instance to use for the executed command.
+     * @param uim.cake.consoles.ConsoleIo|null $io The ConsoleIo instance to use for the executed command.
      * @return int|null The exit code or null for success of the command.
      */
     function executeCommand($command, array $args = [], ?ConsoleIo $io = null): ?int

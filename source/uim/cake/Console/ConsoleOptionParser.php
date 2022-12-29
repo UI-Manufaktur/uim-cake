@@ -70,7 +70,7 @@ class ConsoleOptionParser
     /**
      * Description text - displays before options when help is generated
      *
-     * @see uim.cake.Console\ConsoleOptionParser::description()
+     * @see uim.cake.consoles.ConsoleOptionParser::description()
      * @var string
      */
     protected $_description = "";
@@ -78,7 +78,7 @@ class ConsoleOptionParser
     /**
      * Epilog text - displays after options when help is generated
      *
-     * @see uim.cake.Console\ConsoleOptionParser::epilog()
+     * @see uim.cake.consoles.ConsoleOptionParser::epilog()
      * @var string
      */
     protected $_epilog = "";
@@ -86,8 +86,8 @@ class ConsoleOptionParser
     /**
      * Option definitions.
      *
-     * @see uim.cake.Console\ConsoleOptionParser::addOption()
-     * @var array<string, uim.cake.Console\ConsoleInputOption>
+     * @see uim.cake.consoles.ConsoleOptionParser::addOption()
+     * @var array<string, uim.cake.consoles.ConsoleInputOption>
      */
     protected $_options = [];
 
@@ -101,16 +101,16 @@ class ConsoleOptionParser
     /**
      * Positional argument definitions.
      *
-     * @see uim.cake.Console\ConsoleOptionParser::addArgument()
-     * @var array<uim.cake.Console\ConsoleInputArgument>
+     * @see uim.cake.consoles.ConsoleOptionParser::addArgument()
+     * @var array<uim.cake.consoles.ConsoleInputArgument>
      */
     protected $_args = [];
 
     /**
      * Subcommands for this Shell.
      *
-     * @see uim.cake.Console\ConsoleOptionParser::addSubcommand()
-     * @var array<string, uim.cake.Console\ConsoleInputSubcommand>
+     * @see uim.cake.consoles.ConsoleOptionParser::addSubcommand()
+     * @var array<string, uim.cake.consoles.ConsoleInputSubcommand>
      */
     protected $_subcommands = [];
 
@@ -138,7 +138,7 @@ class ConsoleOptionParser
     /**
      * Root alias used in help output
      *
-     * @see uim.cake.Console\HelpFormatter::setAlias()
+     * @see uim.cake.consoles.HelpFormatter::setAlias()
      * @var string
      */
     protected $rootName = "cake";
@@ -247,7 +247,7 @@ class ConsoleOptionParser
     /**
      * Get or set the command name for shell/task.
      *
-     * @param uim.cake.Console\ConsoleOptionParser|array $spec ConsoleOptionParser or spec to merge with.
+     * @param uim.cake.consoles.ConsoleOptionParser|array $spec ConsoleOptionParser or spec to merge with.
      * @return this
      */
     function merge($spec) {
@@ -388,7 +388,7 @@ class ConsoleOptionParser
      * - `choices` A list of valid choices for this option. If left empty all values are valid..
      *   An exception will be raised when parse() encounters an invalid value.
      *
-     * @param uim.cake.Console\ConsoleInputOption|string $name The long name you want to the value to be parsed out
+     * @param uim.cake.consoles.ConsoleInputOption|string $name The long name you want to the value to be parsed out
      *   as when options are parsed. Will also accept an instance of ConsoleInputOption.
      * @param array<string, mixed> $options An array of parameters that define the behavior of the option
      * @return this
@@ -456,7 +456,7 @@ class ConsoleOptionParser
      * - `choices` A list of valid choices for this argument. If left empty all values are valid..
      *   An exception will be raised when parse() encounters an invalid value.
      *
-     * @param uim.cake.Console\ConsoleInputArgument|string $name The name of the argument.
+     * @param uim.cake.consoles.ConsoleInputArgument|string $name The name of the argument.
      *   Will also accept an instance of ConsoleInputArgument.
      * @param array<string, mixed> $params Parameters for the argument, see above.
      * @return this
@@ -497,7 +497,7 @@ class ConsoleOptionParser
      * The keys are used as the argument names, and the values as params for the argument.
      *
      * @param array $args Array of arguments to add.
-     * @see uim.cake.Console\ConsoleOptionParser::addArgument()
+     * @see uim.cake.consoles.ConsoleOptionParser::addArgument()
      * @return this
      */
     function addArguments(array $args) {
@@ -517,7 +517,7 @@ class ConsoleOptionParser
      * The keys are used as option names, and the values as params for the option.
      *
      * @param array<string, mixed> $options Array of options to add.
-     * @see uim.cake.Console\ConsoleOptionParser::addOption()
+     * @see uim.cake.consoles.ConsoleOptionParser::addOption()
      * @return this
      */
     function addOptions(array $options) {
@@ -543,7 +543,7 @@ class ConsoleOptionParser
      *    specific option parsers. When help is generated for a subcommand, if a parser is present
      *    it will be used.
      *
-     * @param uim.cake.Console\ConsoleInputSubcommand|string $name Name of the subcommand.
+     * @param uim.cake.consoles.ConsoleInputSubcommand|string $name Name of the subcommand.
      *   Will also accept an instance of ConsoleInputSubcommand.
      * @param array<string, mixed> $options Array of params, see above.
      * @return this
@@ -604,7 +604,7 @@ class ConsoleOptionParser
     /**
      * Gets the arguments defined in the parser.
      *
-     * @return array<uim.cake.Console\ConsoleInputArgument>
+     * @return array<uim.cake.consoles.ConsoleInputArgument>
      */
     function arguments() {
         return _args;
@@ -625,7 +625,7 @@ class ConsoleOptionParser
     /**
      * Get the defined options in the parser.
      *
-     * @return array<string, uim.cake.Console\ConsoleInputOption>
+     * @return array<string, uim.cake.consoles.ConsoleInputOption>
      */
     function options() {
         return _options;
@@ -634,7 +634,7 @@ class ConsoleOptionParser
     /**
      * Get the array of defined subcommands
      *
-     * @return array<string, uim.cake.Console\ConsoleInputSubcommand>
+     * @return array<string, uim.cake.consoles.ConsoleInputSubcommand>
      */
     function subcommands() {
         return _subcommands;
@@ -646,9 +646,9 @@ class ConsoleOptionParser
      * to parse the $argv
      *
      * @param array $argv Array of args (argv) to parse.
-     * @param uim.cake.Console\ConsoleIo|null $io A ConsoleIo instance or null. If null prompt options will error.
+     * @param uim.cake.consoles.ConsoleIo|null $io A ConsoleIo instance or null. If null prompt options will error.
      * @return array [$params, $args]
-     * @throws uim.cake.Console\Exception\ConsoleException When an invalid parameter is encountered.
+     * @throws uim.cake.consoles.Exception\ConsoleException When an invalid parameter is encountered.
      */
     function parse(array $argv, ?ConsoleIo $io = null): array
     {
@@ -828,7 +828,7 @@ class ConsoleOptionParser
      * @param string $option The option to parse.
      * @param array<string, mixed> $params The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
-     * @throws uim.cake.Console\Exception\ConsoleException When unknown short options are encountered.
+     * @throws uim.cake.consoles.Exception\ConsoleException When unknown short options are encountered.
      */
     protected function _parseShortOption(string $option, array $params): array
     {
@@ -862,7 +862,7 @@ class ConsoleOptionParser
      * @param string $name The name to parse.
      * @param array<string, mixed> $params The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
-     * @throws uim.cake.Console\Exception\ConsoleException
+     * @throws uim.cake.consoles.Exception\ConsoleException
      */
     protected function _parseOption(string $name, array $params): array
     {
@@ -920,7 +920,7 @@ class ConsoleOptionParser
      * @param string $argument The argument to append
      * @param array $args The array of parsed args to append to.
      * @return array<string> Args
-     * @throws uim.cake.Console\Exception\ConsoleException
+     * @throws uim.cake.consoles.Exception\ConsoleException
      */
     protected function _parseArg(string $argument, array $args): array
     {

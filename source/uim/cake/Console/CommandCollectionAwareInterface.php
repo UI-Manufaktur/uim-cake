@@ -10,7 +10,7 @@ interface CommandCollectionAwareInterface
     /**
      * Set the command collection being used.
      *
-     * @param uim.cake.Console\CommandCollection $commands The commands to use.
+     * @param uim.cake.consoles.CommandCollection $commands The commands to use.
      * @return void
      */
     function setCommandCollection(CommandCollection $commands): void;

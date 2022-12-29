@@ -55,21 +55,21 @@ trait ConsoleIntegrationTestTrait
     /**
      * Console output stub
      *
-     * @var uim.cake.Console\TestSuite\StubConsoleOutput
+     * @var uim.cake.consoles.TestSuite\StubConsoleOutput
      */
     protected $_out;
 
     /**
      * Console error output stub
      *
-     * @var uim.cake.Console\TestSuite\StubConsoleOutput
+     * @var uim.cake.consoles.TestSuite\StubConsoleOutput
      */
     protected $_err;
 
     /**
      * Console input mock
      *
-     * @var uim.cake.Console\TestSuite\StubConsoleInput
+     * @var uim.cake.consoles.TestSuite\StubConsoleInput
      */
     protected $_in;
 
@@ -78,7 +78,7 @@ trait ConsoleIntegrationTestTrait
      *
      * @param string $command Command to run
      * @param array $input Input values to pass to an interactive shell
-     * @throws uim.cake.Console\TestSuite\MissingConsoleInputException
+     * @throws uim.cake.consoles.TestSuite\MissingConsoleInputException
      * @throws \RuntimeException
      * @return void
      */
@@ -270,7 +270,7 @@ trait ConsoleIntegrationTestTrait
     /**
      * Builds the appropriate command dispatcher
      *
-     * @return uim.cake.Console\CommandRunner|uim.cake.Console\TestSuite\LegacyCommandRunner
+     * @return uim.cake.consoles.CommandRunner|uim.cake.consoles.TestSuite\LegacyCommandRunner
      */
     protected function makeRunner() {
         if (_useCommandRunner) {

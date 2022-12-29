@@ -26,7 +26,7 @@ class LegacyCommandRunner
      * Mimics functionality of Cake\Console\CommandRunner
      *
      * @param array $argv Argument array
-     * @param uim.cake.Console\ConsoleIo|null $io A ConsoleIo instance.
+     * @param uim.cake.consoles.ConsoleIo|null $io A ConsoleIo instance.
      * @return int
      */
     function run(array $argv, ?ConsoleIo $io = null): int

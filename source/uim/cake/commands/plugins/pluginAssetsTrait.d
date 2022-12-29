@@ -15,14 +15,14 @@ trait PluginAssetsTrait
     /**
      * Arguments
      *
-     * @var uim.cake.Console\Arguments
+     * @var uim.cake.consoles.Arguments
      */
     protected args;
 
     /**
      * Console IO
      *
-     * @var uim.cake.Console\ConsoleIo
+     * @var uim.cake.consoles.ConsoleIo
      */
     protected io;
 

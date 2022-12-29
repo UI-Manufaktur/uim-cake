@@ -24,14 +24,14 @@ abstract class Helper
     /**
      * ConsoleIo instance.
      *
-     * @var uim.cake.Console\ConsoleIo
+     * @var uim.cake.consoles.ConsoleIo
      */
     protected $_io;
 
     /**
      * Constructor.
      *
-     * @param uim.cake.Console\ConsoleIo $io The ConsoleIo instance to use.
+     * @param uim.cake.consoles.ConsoleIo $io The ConsoleIo instance to use.
      * @param array<string, mixed> $config The settings for this helper.
      */
     this(ConsoleIo $io, array $config = []) {

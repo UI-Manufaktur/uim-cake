@@ -40,28 +40,28 @@ class ConsoleIo
     /**
      * The output stream
      *
-     * @var uim.cake.Console\ConsoleOutput
+     * @var uim.cake.consoles.ConsoleOutput
      */
     protected $_out;
 
     /**
      * The error stream
      *
-     * @var uim.cake.Console\ConsoleOutput
+     * @var uim.cake.consoles.ConsoleOutput
      */
     protected $_err;
 
     /**
      * The input stream
      *
-     * @var uim.cake.Console\ConsoleInput
+     * @var uim.cake.consoles.ConsoleInput
      */
     protected $_in;
 
     /**
      * The helper registry.
      *
-     * @var uim.cake.Console\HelperRegistry
+     * @var uim.cake.consoles.HelperRegistry
      */
     protected $_helpers;
 
@@ -95,10 +95,10 @@ class ConsoleIo
     /**
      * Constructor
      *
-     * @param uim.cake.Console\ConsoleOutput|null $out A ConsoleOutput object for stdout.
-     * @param uim.cake.Console\ConsoleOutput|null $err A ConsoleOutput object for stderr.
-     * @param uim.cake.Console\ConsoleInput|null $in A ConsoleInput object for stdin.
-     * @param uim.cake.Console\HelperRegistry|null $helpers A HelperRegistry instance
+     * @param uim.cake.consoles.ConsoleOutput|null $out A ConsoleOutput object for stdout.
+     * @param uim.cake.consoles.ConsoleOutput|null $err A ConsoleOutput object for stderr.
+     * @param uim.cake.consoles.ConsoleInput|null $in A ConsoleInput object for stdin.
+     * @param uim.cake.consoles.HelperRegistry|null $helpers A HelperRegistry instance
      */
     this(
         ?ConsoleOutput $out = null,
@@ -284,7 +284,7 @@ class ConsoleIo
      * @param int $code Error code.
      * @return void
      * @psalm-return never-return
-     * @throws uim.cake.Console\Exception\StopException
+     * @throws uim.cake.consoles.Exception\StopException
      */
     function abort($message, $code = ICommand::CODE_ERROR): void
     {
@@ -407,7 +407,7 @@ class ConsoleIo
      *
      * @param int $mode The output mode.
      * @return void
-     * @see uim.cake.Console\ConsoleOutput::setOutputAs()
+     * @see uim.cake.consoles.ConsoleOutput::setOutputAs()
      */
     function setOutputAs(int $mode): void
     {
@@ -418,7 +418,7 @@ class ConsoleIo
      * Gets defined styles.
      *
      * @return array
-     * @see uim.cake.Console\ConsoleOutput::styles()
+     * @see uim.cake.consoles.ConsoleOutput::styles()
      */
     function styles(): array
     {
@@ -430,7 +430,7 @@ class ConsoleIo
      *
      * @param string $style The style to get.
      * @return array
-     * @see uim.cake.Console\ConsoleOutput::getStyle()
+     * @see uim.cake.consoles.ConsoleOutput::getStyle()
      */
     function getStyle(string $style): array
     {
@@ -443,7 +443,7 @@ class ConsoleIo
      * @param string $style The style to set.
      * @param array $definition The array definition of the style to change or create.
      * @return void
-     * @see uim.cake.Console\ConsoleOutput::setStyle()
+     * @see uim.cake.consoles.ConsoleOutput::setStyle()
      */
     function setStyle(string $style, array $definition): void
     {
@@ -564,7 +564,7 @@ class ConsoleIo
      *
      * @param string $name The name of the helper to render
      * @param array<string, mixed> $config Configuration data for the helper.
-     * @return uim.cake.Console\Helper The created helper instance.
+     * @return uim.cake.consoles.Helper The created helper instance.
      */
     function helper(string $name, array $config = []): Helper
     {
@@ -588,7 +588,7 @@ class ConsoleIo
      * @param bool $forceOverwrite Whether the file should be overwritten.
      *   If true, no question will be asked about whether to overwrite existing files.
      * @return bool Success.
-     * @throws uim.cake.Console\Exception\StopException When `q` is given as an answer
+     * @throws uim.cake.consoles.Exception\StopException When `q` is given as an answer
      *   to whether a file should be overwritten.
      */
     bool createFile(string $path, string $contents, bool $forceOverwrite = false) {

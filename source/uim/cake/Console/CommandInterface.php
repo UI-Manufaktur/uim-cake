@@ -38,7 +38,7 @@ interface ICommand
      * Run the command.
      *
      * @param array $argv Arguments from the CLI environment.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null Exit code or null for success.
      */
     function run(array $argv, ConsoleIo $io): ?int;

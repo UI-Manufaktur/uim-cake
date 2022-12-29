@@ -35,7 +35,7 @@ class CommandRunner : EventDispatcherInterface
     /**
      * The application console commands are being run for.
      *
-     * @var uim.cake.Console\CommandFactoryInterface|null
+     * @var uim.cake.consoles.CommandFactoryInterface|null
      */
     protected $factory;
 
@@ -58,7 +58,7 @@ class CommandRunner : EventDispatcherInterface
      *
      * @param uim.cake.Core\IConsoleApplication $app The application to run CLI commands for.
      * @param string $root The root command name to be removed from argv.
-     * @param uim.cake.Console\CommandFactoryInterface|null $factory Command factory instance.
+     * @param uim.cake.consoles.CommandFactoryInterface|null $factory Command factory instance.
      */
     this(
         IConsoleApplication $app,
@@ -108,7 +108,7 @@ class CommandRunner : EventDispatcherInterface
      * - Run the requested command.
      *
      * @param array $argv The arguments from the CLI environment.
-     * @param uim.cake.Console\ConsoleIo|null $io The ConsoleIo instance. Used primarily for testing.
+     * @param uim.cake.consoles.ConsoleIo|null $io The ConsoleIo instance. Used primarily for testing.
      * @return int The exit code of the command.
      * @throws \RuntimeException
      */
@@ -219,10 +219,10 @@ class CommandRunner : EventDispatcherInterface
     /**
      * Get the shell instance for a given command name
      *
-     * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
-     * @param uim.cake.Console\CommandCollection $commands The command collection to find the shell in.
+     * @param uim.cake.consoles.ConsoleIo $io The IO wrapper for the created shell class.
+     * @param uim.cake.consoles.CommandCollection $commands The command collection to find the shell in.
      * @param string $name The command name to find
-     * @return uim.cake.Console\ICommand|uim.cake.Console\Shell
+     * @return uim.cake.consoles.ICommand|uim.cake.consoles.Shell
      */
     protected function getCommand(ConsoleIo $io, CommandCollection $commands, string $name) {
         $instance = $commands.get($name);
@@ -248,7 +248,7 @@ class CommandRunner : EventDispatcherInterface
      * Build the longest command name that matches a
      * defined command. This will traverse a maximum of 3 tokens.
      *
-     * @param uim.cake.Console\CommandCollection $commands The command collection to check.
+     * @param uim.cake.consoles.CommandCollection $commands The command collection to check.
      * @param array $argv The CLI arguments.
      * @return array An array of the resolved name and modified argv.
      */
@@ -274,11 +274,11 @@ class CommandRunner : EventDispatcherInterface
      * a command name in the CommandCollection. More specific
      * command names take precedence over less specific ones.
      *
-     * @param uim.cake.Console\CommandCollection $commands The command collection to check.
-     * @param uim.cake.Console\ConsoleIo $io ConsoleIo object for errors.
+     * @param uim.cake.consoles.CommandCollection $commands The command collection to check.
+     * @param uim.cake.consoles.ConsoleIo $io ConsoleIo object for errors.
      * @param string|null $name The name from the CLI args.
      * @return string The resolved name.
-     * @throws uim.cake.Console\Exception\MissingOptionException
+     * @throws uim.cake.consoles.Exception\MissingOptionException
      */
     protected function resolveName(CommandCollection $commands, ConsoleIo $io, ?string $name): string
     {
@@ -305,9 +305,9 @@ class CommandRunner : EventDispatcherInterface
     /**
      * Execute a Command class.
      *
-     * @param uim.cake.Console\ICommand $command The command to run.
+     * @param uim.cake.consoles.ICommand $command The command to run.
      * @param array $argv The CLI arguments to invoke.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null Exit code
      */
     protected function runCommand(ICommand $command, array $argv, ConsoleIo $io): ?int
@@ -322,7 +322,7 @@ class CommandRunner : EventDispatcherInterface
     /**
      * Execute a Shell class.
      *
-     * @param uim.cake.Console\Shell $shell The shell to run.
+     * @param uim.cake.consoles.Shell $shell The shell to run.
      * @param array $argv The CLI arguments to invoke.
      * @return int|bool|null Exit code
      */
@@ -340,8 +340,8 @@ class CommandRunner : EventDispatcherInterface
      * The wrapper for creating shell instances.
      *
      * @param string $className Shell class name.
-     * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
-     * @return uim.cake.Console\ICommand|uim.cake.Console\Shell
+     * @param uim.cake.consoles.ConsoleIo $io The IO wrapper for the created shell class.
+     * @return uim.cake.consoles.ICommand|uim.cake.consoles.Shell
      */
     protected function createCommand(string $className, ConsoleIo $io) {
         if (!this.factory) {

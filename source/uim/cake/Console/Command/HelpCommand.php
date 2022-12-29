@@ -28,7 +28,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * The command collection to get help on.
      *
-     * @var uim.cake.Console\CommandCollection
+     * @var uim.cake.consoles.CommandCollection
      */
     protected $commands;
 
@@ -41,8 +41,8 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Main function Prints out the list of commands.
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
@@ -66,7 +66,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Output text.
      *
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @param iterable $commands The command collection to output.
      * @return void
      */
@@ -132,7 +132,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Output relevant paths if defined
      *
-     * @param uim.cake.Console\ConsoleIo $io IO object.
+     * @param uim.cake.consoles.ConsoleIo $io IO object.
      * @return void
      */
     protected function outputPaths(ConsoleIo $io): void
@@ -179,7 +179,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Output as XML
      *
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @param iterable $commands The command collection to output
      * @return void
      */
@@ -203,8 +203,8 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * Gets the option parser instance and configures it.
      *
-     * @param uim.cake.Console\ConsoleOptionParser $parser The parser to build
-     * @return uim.cake.Console\ConsoleOptionParser
+     * @param uim.cake.consoles.ConsoleOptionParser $parser The parser to build
+     * @return uim.cake.consoles.ConsoleOptionParser
      */
     protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {

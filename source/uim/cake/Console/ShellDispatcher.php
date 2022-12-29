@@ -192,7 +192,7 @@ class ShellDispatcher
      *
      * - `requested` : if used, will prevent the Shell welcome message to be displayed
      * @return int|bool|null
-     * @throws uim.cake.Console\Exception\MissingShellMethodException
+     * @throws uim.cake.consoles.Exception\MissingShellMethodException
      */
     protected function _dispatch(array $extra = []) {
         $shellName = this.shiftArgs();
@@ -301,8 +301,8 @@ class ShellDispatcher
      * dereferencing
      *
      * @param string $shell Optionally the name of a plugin
-     * @return uim.cake.Console\Shell A shell instance.
-     * @throws uim.cake.Console\Exception\MissingShellException when errors are encountered.
+     * @return uim.cake.consoles.Shell A shell instance.
+     * @throws uim.cake.consoles.Exception\MissingShellException when errors are encountered.
      */
     function findShell(string $shell): Shell
     {
@@ -360,12 +360,12 @@ class ShellDispatcher
      *
      * @param string $className The class name to instantiate
      * @param string $shortName The plugin-prefixed shell name
-     * @return uim.cake.Console\Shell A shell instance.
+     * @return uim.cake.consoles.Shell A shell instance.
      */
     protected function _createShell(string $className, string $shortName): Shell
     {
         [$plugin] = pluginSplit($shortName);
-        /** @var uim.cake.Console\Shell $instance */
+        /** @var uim.cake.consoles.Shell $instance */
         $instance = new $className();
         $instance.plugin = trim((string)$plugin, ".");
 

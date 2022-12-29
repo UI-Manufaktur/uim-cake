@@ -23,7 +23,7 @@ use SimpleXMLElement;
  * An object to represent a single subcommand used in the command line.
  * Created when you call ConsoleOptionParser::addSubcommand()
  *
- * @see uim.cake.Console\ConsoleOptionParser::addSubcommand()
+ * @see uim.cake.consoles.ConsoleOptionParser::addSubcommand()
  */
 class ConsoleInputSubcommand
 {
@@ -44,7 +44,7 @@ class ConsoleInputSubcommand
     /**
      * The ConsoleOptionParser for this subcommand.
      *
-     * @var uim.cake.Console\ConsoleOptionParser|null
+     * @var uim.cake.consoles.ConsoleOptionParser|null
      */
     protected $_parser;
 
@@ -53,7 +53,7 @@ class ConsoleInputSubcommand
      *
      * @param array<string, mixed>|string $name The long name of the subcommand, or an array with all the properties.
      * @param string $help The help text for this option.
-     * @param uim.cake.Console\ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
+     * @param uim.cake.consoles.ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
      *   Either a ConsoleOptionParser, or an array that can be used with ConsoleOptionParser::buildFromArray().
      */
     this($name, $help = "", $parser = null) {
@@ -117,7 +117,7 @@ class ConsoleInputSubcommand
     /**
      * Get the usage value for this option
      *
-     * @return uim.cake.Console\ConsoleOptionParser|null
+     * @return uim.cake.consoles.ConsoleOptionParser|null
      */
     function parser(): ?ConsoleOptionParser
     {

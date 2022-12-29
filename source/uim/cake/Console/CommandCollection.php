@@ -19,8 +19,8 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Command list
      *
-     * @var array<string, uim.cake.Console\Shell|uim.cake.Console\ICommand|string>
-     * @psalm-var array<string, uim.cake.Console\Shell|uim.cake.Console\ICommand|class-string>
+     * @var array<string, uim.cake.consoles.Shell|uim.cake.consoles.ICommand|string>
+     * @psalm-var array<string, uim.cake.consoles.Shell|uim.cake.consoles.ICommand|class-string>
      * @psalm-suppress DeprecatedClass
      */
     protected $commands = [];
@@ -28,7 +28,7 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Constructor
      *
-     * @param array<string, uim.cake.Console\Shell|uim.cake.Console\ICommand|string> $commands The map of commands to add to the collection.
+     * @param array<string, uim.cake.consoles.Shell|uim.cake.consoles.ICommand|string> $commands The map of commands to add to the collection.
      */
     this(array $commands = []) {
         foreach ($commands as $name: $command) {
@@ -40,7 +40,7 @@ class CommandCollection : IteratorAggregate, Countable
      * Add a command to the collection
      *
      * @param string $name The name of the command you want to map.
-     * @param uim.cake.Console\ICommand|uim.cake.Console\Shell|string $command The command to map.
+     * @param uim.cake.consoles.ICommand|uim.cake.consoles.Shell|string $command The command to map.
      *   Can be a FQCN, Shell instance or ICommand instance.
      * @return this
      * @throws \InvalidArgumentException
@@ -69,9 +69,9 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Add multiple commands at once.
      *
-     * @param array<string, uim.cake.Console\Shell|uim.cake.Console\ICommand|string> $commands A map of command names: command classes/instances.
+     * @param array<string, uim.cake.consoles.Shell|uim.cake.consoles.ICommand|string> $commands A map of command names: command classes/instances.
      * @return this
-     * @see uim.cake.Console\CommandCollection::add()
+     * @see uim.cake.consoles.CommandCollection::add()
      */
     function addMany(array $commands) {
         foreach ($commands as $name: $class) {
@@ -108,9 +108,9 @@ class CommandCollection : IteratorAggregate, Countable
      * Get the target for a command.
      *
      * @param string $name The named shell.
-     * @return uim.cake.Console\ICommand|uim.cake.Console\Shell|string Either the command class or an instance.
+     * @return uim.cake.consoles.ICommand|uim.cake.consoles.Shell|string Either the command class or an instance.
      * @throws \InvalidArgumentException when unknown commands are fetched.
-     * @psalm-return uim.cake.Console\ICommand|uim.cake.Console\Shell|class-string
+     * @psalm-return uim.cake.consoles.ICommand|uim.cake.consoles.Shell|class-string
      */
     function get(string $name) {
         if (!this.has($name)) {
@@ -124,7 +124,7 @@ class CommandCollection : IteratorAggregate, Countable
      * Implementation of IteratorAggregate.
      *
      * @return \Traversable
-     * @psalm-return \Traversable<string, uim.cake.Console\Shell|uim.cake.Console\ICommand|class-string>
+     * @psalm-return \Traversable<string, uim.cake.consoles.Shell|uim.cake.consoles.ICommand|class-string>
      */
     function getIterator(): Traversable
     {

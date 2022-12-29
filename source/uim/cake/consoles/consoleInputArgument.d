@@ -7,7 +7,7 @@ import uim.cake;
  * An object to represent a single argument used in the command line.
  * ConsoleOptionParser creates these when you use addArgument()
  *
- * @see uim.cake.Console\ConsoleOptionParser::addArgument()
+ * @see uim.cake.consoles.ConsoleOptionParser::addArgument()
  */
 class ConsoleInputArgument {
     // Name of the argument.
@@ -54,7 +54,7 @@ class ConsoleInputArgument {
     /**
      * Checks if this argument is equal to another argument.
      *
-     * @param uim.cake.Console\ConsoleInputArgument $argument ConsoleInputArgument to compare to.
+     * @param uim.cake.consoles.ConsoleInputArgument $argument ConsoleInputArgument to compare to.
      */
     bool isEqualTo(ConsoleInputArgument $argument) {
         return this.usage() == $argument.usage();
@@ -106,7 +106,7 @@ class ConsoleInputArgument {
      *
      * @param string myValue The choice to validate.
      * @return true
-     * @throws uim.cake.Console\Exception\ConsoleException
+     * @throws uim.cake.consoles.Exception\ConsoleException
      */
     bool validChoice(string myValue) {
         if (empty(_choices)) {
