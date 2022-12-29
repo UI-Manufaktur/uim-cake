@@ -15,7 +15,7 @@
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Session;
+module uim.cake.https.Session;
 
 import uim.cake.caches.Cache;
 use InvalidArgumentException;
@@ -24,7 +24,7 @@ use SessionHandlerInterface;
 /**
  * CacheSession provides method for saving sessions into a Cache engine. Used with Session
  *
- * @see \Cake\Http\Session for configuration information.
+ * @see uim.cake.Http\Session for configuration information.
  */
 class CacheSession : SessionHandlerInterface
 {

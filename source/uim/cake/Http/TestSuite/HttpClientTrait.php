@@ -7,10 +7,10 @@
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\TestSuite;
+module uim.cake.https.TestSuite;
 
-import uim.cake.Http\Client;
-import uim.cake.Http\Client\Response;
+import uim.cake.https.Client;
+import uim.cake.https.Client\Response;
 
 /**
  * Define mock responses and have mocks automatically cleared.

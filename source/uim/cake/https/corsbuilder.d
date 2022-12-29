@@ -12,7 +12,7 @@ use Psr\Http\Message\IMessage;
  *
  * It is most convenient to get this object via `Request::cors()`.
  *
- * @see \Cake\Http\Response::cors()
+ * @see uim.cake.Http\Response::cors()
  */
 class CorsBuilder
 {

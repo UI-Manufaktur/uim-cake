@@ -11,8 +11,8 @@ module uim.cake.ORM;
 
 use ArrayIterator;
 import uim.cake.Datasource\EntityInterface;
-import uim.cake.ORM\Locator\LocatorAwareTrait;
-import uim.cake.ORM\Locator\ILocator;
+import uim.cake.orm.locators.LocatorAwareTrait;
+import uim.cake.orm.locators.ILocator;
 use InvalidArgumentException;
 use IteratorAggregate;
 use Traversable;

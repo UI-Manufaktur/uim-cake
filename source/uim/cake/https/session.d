@@ -71,7 +71,7 @@ class Session
      *
      * @param array $sessionConfig Session config.
      * @return static
-     * @see \Cake\Http\Session::this()
+     * @see uim.cake.Http\Session::this()
      */
     static function create(array $sessionConfig = []) {
         if (isset($sessionConfig["defaults"])) {

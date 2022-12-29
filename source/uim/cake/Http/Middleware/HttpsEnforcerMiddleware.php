@@ -7,10 +7,10 @@
 
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Middleware;
+module uim.cake.https.Middleware;
 
 import uim.cake.cores.Configure;
-import uim.cake.Http\Exception\BadRequestException;
+import uim.cake.https.Exception\BadRequestException;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
@@ -53,7 +53,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * Constructor
      *
      * @param array<string, mixed> $config The options to use.
-     * @see \Cake\Http\Middleware\HttpsEnforcerMiddleware::$config
+     * @see uim.cake.Http\Middleware\HttpsEnforcerMiddleware::$config
      */
     public this(array $config = []) {
         this.config = $config + this.config;

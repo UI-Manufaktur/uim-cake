@@ -37,7 +37,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * will be used to format the time part.
      *
      * @var array<int>|string|int
-     * @see \Cake\I18n\FrozenTime::i18nFormat()
+     * @see uim.cake.I18n\FrozenTime::i18nFormat()
      */
     protected static $_toStringFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::SHORT];
 
@@ -53,7 +53,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * will be used to format the time part.
      *
      * @var \Closure|array<int>|string|int
-     * @see \Cake\I18n\Time::i18nFormat()
+     * @see uim.cake.I18n\Time::i18nFormat()
      */
     protected static $_jsonEncodeFormat = "yyyy-MM-dd"T"HH":"mm":"ssxxx";
 
@@ -69,7 +69,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * will be used to format the time part.
      *
      * @var array<int>|string|int
-     * @see \Cake\I18n\FrozenTime::nice()
+     * @see uim.cake.I18n\FrozenTime::nice()
      */
     public static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::SHORT];
 
@@ -78,7 +78,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * and the difference is more than `Cake\I18n\FrozenTime::$wordEnd`
      *
      * @var array<int>|string|int
-     * @see \Cake\I18n\FrozenTime::timeAgoInWords()
+     * @see uim.cake.I18n\FrozenTime::timeAgoInWords()
      */
     public static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
 
@@ -87,7 +87,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * and the difference is less than `Time::$wordEnd`
      *
      * @var array<string>
-     * @see \Cake\I18n\FrozenTime::timeAgoInWords()
+     * @see uim.cake.I18n\FrozenTime::timeAgoInWords()
      */
     public static $wordAccuracy = [
         "year": "day",
@@ -103,7 +103,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * The end of relative time telling
      *
      * @var string
-     * @see \Cake\I18n\FrozenTime::timeAgoInWords()
+     * @see uim.cake.I18n\FrozenTime::timeAgoInWords()
      */
     public static $wordEnd = "+1 month";
 

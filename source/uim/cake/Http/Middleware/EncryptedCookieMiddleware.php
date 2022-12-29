@@ -7,10 +7,10 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Middleware;
+module uim.cake.https.Middleware;
 
-import uim.cake.Http\Cookie\CookieCollection;
-import uim.cake.Http\Response;
+import uim.cake.https.Cookie\CookieCollection;
+import uim.cake.https.Response;
 import uim.cake.utilities.CookieCryptTrait;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;

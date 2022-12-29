@@ -11,7 +11,7 @@ module uim.cake.Mailer;
 
 import uim.cake.cores.Configure;
 import uim.cake.cores.exceptions.CakeException;
-import uim.cake.Http\Client\FormDataPart;
+import uim.cake.https.Client\FormDataPart;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 import uim.cake.utilities.Text;
@@ -1195,7 +1195,7 @@ class Message : JsonSerializable, Serializable
      * @param array $attachments Array of filenames.
      * @return this
      * @throws \InvalidArgumentException
-     * @see \Cake\Mailer\Email::setAttachments()
+     * @see uim.cake.Mailer\Email::setAttachments()
      */
     function addAttachments(array $attachments) {
         $current = this.attachments;

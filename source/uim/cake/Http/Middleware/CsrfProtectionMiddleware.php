@@ -7,13 +7,13 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Middleware;
+module uim.cake.https.Middleware;
 
 use ArrayAccess;
-import uim.cake.Http\Cookie\Cookie;
-import uim.cake.Http\Cookie\CookieInterface;
-import uim.cake.Http\Exception\InvalidCsrfTokenException;
-import uim.cake.Http\Response;
+import uim.cake.https.Cookie\Cookie;
+import uim.cake.https.Cookie\CookieInterface;
+import uim.cake.https.Exception\InvalidCsrfTokenException;
+import uim.cake.https.Response;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 use InvalidArgumentException;

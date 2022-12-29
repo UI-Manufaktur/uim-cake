@@ -36,7 +36,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * will be used to format the time part.
      *
      * @var array<int>|string|int
-     * @see \Cake\I18n\DateFormatTrait::i18nFormat()
+     * @see uim.cake.I18n\DateFormatTrait::i18nFormat()
      */
     protected static $_toStringFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
 
@@ -52,7 +52,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * will be used to format the time part.
      *
      * @var \Closure|array<int>|string|int
-     * @see \Cake\I18n\Time::i18nFormat()
+     * @see uim.cake.I18n\Time::i18nFormat()
      */
     protected static $_jsonEncodeFormat = "yyyy-MM-dd";
 
@@ -61,7 +61,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * and the difference is more than `Cake\I18n\Date::$wordEnd`
      *
      * @var array<int>|string|int
-     * @see \Cake\I18n\DateFormatTrait::parseDate()
+     * @see uim.cake.I18n\DateFormatTrait::parseDate()
      */
     public static $wordFormat = [IntlDateFormatter::SHORT, IntlDateFormatter::NONE];
 
@@ -77,7 +77,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * will be used to format the time part.
      *
      * @var array<int>|string|int
-     * @see \Cake\I18n\DateFormatTrait::nice()
+     * @see uim.cake.I18n\DateFormatTrait::nice()
      */
     public static $niceFormat = [IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE];
 
@@ -86,7 +86,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * and the difference is less than `Date::$wordEnd`
      *
      * @var array<string>
-     * @see \Cake\I18n\Date::timeAgoInWords()
+     * @see uim.cake.I18n\Date::timeAgoInWords()
      */
     public static $wordAccuracy = [
         "year": "day",
@@ -102,7 +102,7 @@ class Date : MutableDate : I18nDateTimeInterface
      * The end of relative time telling
      *
      * @var string
-     * @see \Cake\I18n\Date::timeAgoInWords()
+     * @see uim.cake.I18n\Date::timeAgoInWords()
      */
     public static $wordEnd = "+1 month";
 

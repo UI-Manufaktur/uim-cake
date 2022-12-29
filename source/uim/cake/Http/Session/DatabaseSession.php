@@ -15,9 +15,9 @@
  * @since         2.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Session;
+module uim.cake.https.Session;
 
-import uim.cake.ORM\Locator\LocatorAwareTrait;
+import uim.cake.orm.locators.LocatorAwareTrait;
 use SessionHandlerInterface;
 
 /**

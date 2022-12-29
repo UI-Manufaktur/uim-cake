@@ -88,7 +88,7 @@ class Socket
      * Constructor.
      *
      * @param array<string, mixed> myConfig Socket configuration, which will be merged with the base configuration
-     * @see \Cake\Network\Socket::$_defaultConfig
+     * @see uim.cake.Network\Socket::$_defaultConfig
      */
     this(array myConfig = []) {
         this.setConfig(myConfig);

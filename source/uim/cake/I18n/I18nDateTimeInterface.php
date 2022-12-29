@@ -134,7 +134,7 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
      * Alternatively, the format can provide a callback. In this case, the callback
      * can receive this datetime object and return a formatted string.
      *
-     * @see \Cake\I18n\Time::i18nFormat()
+     * @see uim.cake.I18n\Time::i18nFormat()
      * @param \Closure|array|string|int $format Format.
      * @return void
      */

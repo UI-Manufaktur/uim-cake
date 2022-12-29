@@ -7,11 +7,11 @@
  * @since         4.2.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Middleware;
+module uim.cake.https.Middleware;
 
 use ArrayAccess;
-import uim.cake.Http\Exception\InvalidCsrfTokenException;
-import uim.cake.Http\Session;
+import uim.cake.https.Exception\InvalidCsrfTokenException;
+import uim.cake.https.Session;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 use Psr\Http\Message\IResponse;

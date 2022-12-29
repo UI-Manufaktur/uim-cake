@@ -37,7 +37,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * Constructor
      *
      * @param array<string, mixed> myConfig The options to use.
-     * @see \Cake\Http\Middleware\HttpsEnforcerMiddleware::myConfig
+     * @see uim.cake.Http\Middleware\HttpsEnforcerMiddleware::myConfig
      */
     this(array myConfig = []) {
         this.config = myConfig + this.config;

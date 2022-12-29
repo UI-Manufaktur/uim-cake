@@ -466,7 +466,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Static method to fast create an instance of \Cake\Mailer\Email
      *
-     * @param array|string|null $to Address to send ({@see \Cake\Mailer\Email::setTo()}).
+     * @param array|string|null $to Address to send ({@see uim.cake.Mailer\Email::setTo()}).
      *   If null, will try to use "to" from transport config
      * @param string|null $subject String of subject or null to use "subject" from transport config
      * @param array|string|null $message String with message or array with variables to be used in render

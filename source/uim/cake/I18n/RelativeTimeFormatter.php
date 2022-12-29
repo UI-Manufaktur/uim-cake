@@ -26,7 +26,7 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
      * @param \Cake\Chronos\ChronosInterface|null $other The datetime to compare against.
      * @param bool $absolute Removes time difference modifiers ago, after, etc.
      * @return string The difference between the two days in a human readable format.
-     * @see \Cake\Chronos\ChronosInterface::diffForHumans
+     * @see uim.cake.Chronos\ChronosInterface::diffForHumans
      */
     function diffForHumans(
         ChronosInterface $date,
@@ -88,7 +88,7 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
      * @param \Cake\I18n\I18nDateTimeInterface $time The time instance to format.
      * @param array<string, mixed> $options Array of options.
      * @return string Relative time string.
-     * @see \Cake\I18n\Time::timeAgoInWords()
+     * @see uim.cake.I18n\Time::timeAgoInWords()
      */
     function timeAgoInWords(I18nDateTimeInterface $time, array $options = []): string
     {
@@ -310,7 +310,7 @@ class RelativeTimeFormatter : DifferenceFormatterInterface
      * @param \Cake\I18n\I18nDateTimeInterface $date The date to format.
      * @param array<string, mixed> $options Array of options.
      * @return string Relative date string.
-     * @see \Cake\I18n\Date::timeAgoInWords()
+     * @see uim.cake.I18n\Date::timeAgoInWords()
      */
     function dateAgoInWords(I18nDateTimeInterface $date, array $options = []): string
     {

@@ -595,7 +595,7 @@ class ServerRequest : IServerRequest
      *
      * @param myTypes The types to check.
      * @return bool Success.
-     * @see \Cake\Http\ServerRequest::is()
+     * @see uim.cake.Http\ServerRequest::is()
      */
     bool isAll(string[] myTypes) {
         foreach (myTypes as myType) {
