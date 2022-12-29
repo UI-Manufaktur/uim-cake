@@ -128,8 +128,8 @@ class Connection : IConnection {
      *
      * @param uim.cake.Database\IDriver|string myDriver The driver instance to use.
      * @param array<string, mixed> myConfig Config for a new driver.
-     * @throws \Cake\Database\Exception\MissingDriverException When a driver class is missing.
-     * @throws \Cake\Database\Exception\MissingExtensionException When a driver"s PHP extension is missing.
+     * @throws uim.cake.Database\Exception\MissingDriverException When a driver class is missing.
+     * @throws uim.cake.Database\Exception\MissingExtensionException When a driver"s PHP extension is missing.
      * @return this
      */
     auto setDriver(myDriver, myConfig = []) {
@@ -173,7 +173,7 @@ class Connection : IConnection {
     /**
      * Connects to the configured database.
      *
-     * @throws \Cake\Database\Exception\MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.Database\Exception\MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
     bool connect() {

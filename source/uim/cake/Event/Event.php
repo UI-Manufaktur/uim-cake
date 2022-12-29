@@ -96,7 +96,7 @@ class Event : EventInterface
      * If the event has no subject an exception will be raised.
      *
      * @return object
-     * @throws \Cake\Core\Exception\CakeException
+     * @throws uim.cake.Core\Exception\CakeException
      * @psalm-return TSubject
      */
     function getSubject() {

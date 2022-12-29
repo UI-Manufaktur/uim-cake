@@ -32,7 +32,7 @@ class ConnectionRegistry : ObjectRegistry
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the datasource is missing in.
-     * @throws \Cake\Datasource\Exception\MissingDatasourceException
+     * @throws uim.cake.Datasource\Exception\MissingDatasourceException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingDatasourceException([

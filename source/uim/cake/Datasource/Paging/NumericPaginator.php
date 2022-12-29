@@ -156,7 +156,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $params Request params
      * @param array $settings The settings/configuration used for pagination.
      * @return uim.cake.Datasource\IResultSet Query results
-     * @throws \Cake\Datasource\Paging\Exception\PageOutOfBoundsException
+     * @throws uim.cake.Datasource\Paging\Exception\PageOutOfBoundsException
      */
     function paginate(object $object, array $params = [], array $settings = []): IResultSet
     {

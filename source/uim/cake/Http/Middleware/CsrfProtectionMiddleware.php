@@ -370,7 +370,7 @@ class CsrfProtectionMiddleware : IMiddleware
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to validate against.
      * @return void
-     * @throws \Cake\Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
+     * @throws uim.cake.Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
     protected function _validateToken(IServerRequest $request): void
     {

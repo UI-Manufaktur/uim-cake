@@ -63,7 +63,7 @@ class ConnectionManager
      *
      * @param array<string, mixed>|string myKey The name of the connection config, or an array of multiple configs.
      * @param array<string, mixed>|null myConfig An array of name: config data for adapter.
-     * @throws \Cake\Core\Exception\CakeException When trying to modify an existing config.
+     * @throws uim.cake.Core\Exception\CakeException When trying to modify an existing config.
      * @see uim.cake.Core\StaticConfigTrait::config()
      */
     static void setConfig(myKey, myConfig = null) {
@@ -166,7 +166,7 @@ class ConnectionManager
      * @param string myName The connection name.
      * @param bool $useAliases Set to false to not use aliased connections.
      * @return uim.cake.Datasource\IConnection A connection object.
-     * @throws \Cake\Datasource\Exception\MissingDatasourceConfigException When config
+     * @throws uim.cake.Datasource\Exception\MissingDatasourceConfigException When config
      * data is missing.
      */
     static auto get(string myName, bool $useAliases = true) {

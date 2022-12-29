@@ -1316,7 +1316,7 @@ class Response : IResponse
      * @param string myPath Absolute path to file.
      * @param array<string, mixed> myOptions Options See above.
      * @return static
-     * @throws \Cake\Http\Exception\NotFoundException
+     * @throws uim.cake.Http\Exception\NotFoundException
      */
     function withFile(string myPath, array myOptions = []) {
         myfile = this.validateFile(myPath);
@@ -1385,7 +1385,7 @@ class Response : IResponse
      * Validate a file path is a valid response body.
      *
      * @param string myPath The path to the file.
-     * @throws \Cake\Http\Exception\NotFoundException
+     * @throws uim.cake.Http\Exception\NotFoundException
      * @return \SplFileInfo
      */
     protected auto validateFile(string myPath): SplFileInfo

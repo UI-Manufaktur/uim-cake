@@ -198,7 +198,7 @@ class Debugger
      * @param mixed|null myValue The value to set.
      * @param bool myMerge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return mixed Config value being read, or the object itself on write operations.
-     * @throws \Cake\Core\Exception\CakeException When trying to set a key that is invalid.
+     * @throws uim.cake.Core\Exception\CakeException When trying to set a key that is invalid.
      */
     static function configInstance(myKey = null, myValue = null, bool myMerge = true) {
         if (myKey is null) {

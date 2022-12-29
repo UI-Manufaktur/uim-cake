@@ -144,7 +144,7 @@ class Paginator : IPaginator {
      * @param array myParams Request params
      * @param array $settings The settings/configuration used for pagination.
      * @return uim.cake.Datasource\IResultSet Query results
-     * @throws \Cake\Datasource\Exception\PageOutOfBoundsException
+     * @throws uim.cake.Datasource\Exception\PageOutOfBoundsException
      */
     function paginate(object $object, array myParams = [], array $settings = []): IResultSet
     {

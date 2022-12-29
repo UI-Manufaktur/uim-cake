@@ -1453,7 +1453,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string>|string $methods Allowed HTTP request methods.
      * @return true
-     * @throws \Cake\Http\Exception\MethodNotAllowedException
+     * @throws uim.cake.Http\Exception\MethodNotAllowedException
      */
     function allowMethod($methods): bool
     {

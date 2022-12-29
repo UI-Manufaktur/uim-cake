@@ -459,7 +459,7 @@ trait QueryTrait
     /**
      * Get the first result from the executing query or raise an exception.
      *
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When there is no first record.
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When there is no first record.
      * @return uim.cake.Datasource\IEntity|array The first result from the ResultSet.
      */
     function firstOrFail() {

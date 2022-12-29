@@ -106,7 +106,7 @@ class Filesystem
      *
      * @param string myfilename File path.
      * @param string myContents Content to dump.
-     * @throws \Cake\Core\Exception\CakeException When dumping fails.
+     * @throws uim.cake.Core\Exception\CakeException When dumping fails.
      */
     void dumpFile(string myfilename, string myContents) {
         $dir = dirname(myfilename);
@@ -139,7 +139,7 @@ class Filesystem
      * @param string dir Directory path.
      * @param int myMode Octal mode passed to mkdir(). Defaults to 0755.
      * @return void
-     * @throws \Cake\Core\Exception\CakeException When directory creation fails.
+     * @throws uim.cake.Core\Exception\CakeException When directory creation fails.
      */
     void mkdir(string dir, int myMode = 0755) {
         if (is_dir($dir)) {
@@ -161,7 +161,7 @@ class Filesystem
      *
      * @param string myPath Directory path.
      * @return bool
-     * @throws \Cake\Core\Exception\CakeException If path is not a directory.
+     * @throws uim.cake.Core\Exception\CakeException If path is not a directory.
      */
     bool deleteDir(string myPath) {
         if (!file_exists(myPath)) {

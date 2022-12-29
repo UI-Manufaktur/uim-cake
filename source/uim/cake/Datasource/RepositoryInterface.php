@@ -78,7 +78,7 @@ interface RepositoryInterface
      *
      * @param mixed $primaryKey primary key value to find
      * @param array<string, mixed> $options options accepted by `Table::find()`
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException if the record with such id
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException if the record with such id
      * could not be found
      * @return uim.cake.Datasource\EntityInterface
      * @see uim.cake.datasources.RepositoryInterface::find()

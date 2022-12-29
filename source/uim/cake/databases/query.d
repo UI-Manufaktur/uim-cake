@@ -1603,7 +1603,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @param uim.cake.Database\Expression\ValuesExpression|\Cake\Database\Query|array myData The data to insert.
      * @return this
-     * @throws \Cake\Database\Exception\DatabaseException if you try to set values before declaring columns.
+     * @throws uim.cake.Database\Exception\DatabaseException if you try to set values before declaring columns.
      *   Or if you try to set values on non-insert queries.
      */
     function values(myData) {

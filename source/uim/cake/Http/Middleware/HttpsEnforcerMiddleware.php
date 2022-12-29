@@ -68,7 +68,7 @@ class HttpsEnforcerMiddleware : IMiddleware
      * @param \Psr\Http\Message\IServerRequest $request The request.
      * @param \Psr\Http\Server\RequestHandlerInterface $handler The request handler.
      * @return \Psr\Http\Message\IResponse A response.
-     * @throws \Cake\Http\Exception\BadRequestException
+     * @throws uim.cake.Http\Exception\BadRequestException
      */
     function process(IServerRequest $request, RequestHandlerInterface $handler): IResponse
     {

@@ -68,7 +68,7 @@ trait ModelAwareTrait
      *  The name can be an alias like `"Post"` or FQCN like `App\Model\Table\PostsTable::class`.
      * @param string|null myModelType The type of repository to load. Defaults to the getModelType() value.
      * @return uim.cake.Datasource\IRepository The model instance created.
-     * @throws \Cake\Datasource\Exception\MissingModelException If the model class cannot be found.
+     * @throws uim.cake.Datasource\Exception\MissingModelException If the model class cannot be found.
      * @throws \UnexpectedValueException If myModelClass argument is not provided
      *   and ModelAwareTrait::myModelClass property value is empty.
      * @deprecated 4.3.0 Use `LocatorAwareTrait::fetchTable()` instead.
