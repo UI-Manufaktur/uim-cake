@@ -13,7 +13,7 @@
  */
 module uim.cake.ORM\Exception;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 
 /**
  * Used when a transaction was rolled back from a callback event.

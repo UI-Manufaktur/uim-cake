@@ -10,7 +10,7 @@
 module uim.cake.TestSuite\Fixture;
 
 import uim.cake.cores.Configure;
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 import uim.cake.databases.ConstraintsInterface;
 import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;

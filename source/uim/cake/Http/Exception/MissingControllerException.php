@@ -13,7 +13,7 @@
  */
 module uim.cake.Http\Exception;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 
 /**
  * Missing Controller exception - used when a controller

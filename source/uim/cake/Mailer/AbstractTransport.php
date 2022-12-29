@@ -9,7 +9,7 @@
  */
 module uim.cake.Mailer;
 
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.InstanceConfigTrait;
 
 /**

@@ -17,7 +17,7 @@ module uim.cake.TestSuite;
 import uim.cake.controllers.Controller;
 import uim.cake.cores.Configure;
 import uim.cake.cores.TestSuite\ContainerStubTrait;
-import uim.cake.databases.Exception\DatabaseException;
+import uim.cake.databases.exceptions.DatabaseException;
 import uim.cake.errors.Renderer\WebExceptionRenderer;
 import uim.cake.Event\EventInterface;
 import uim.cake.Event\EventManager;

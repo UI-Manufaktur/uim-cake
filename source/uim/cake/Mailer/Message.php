@@ -10,7 +10,7 @@
 module uim.cake.Mailer;
 
 import uim.cake.cores.Configure;
-import uim.cake.cores.Exception\CakeException;
+import uim.cake.cores.exceptions.CakeException;
 import uim.cake.Http\Client\FormDataPart;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;

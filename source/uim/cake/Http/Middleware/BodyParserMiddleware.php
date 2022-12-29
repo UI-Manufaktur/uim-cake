@@ -10,7 +10,7 @@
 module uim.cake.Http\Middleware;
 
 import uim.cake.Http\Exception\BadRequestException;
-import uim.cake.utilities.Exception\XmlException;
+import uim.cake.utilities.exceptions.XmlException;
 import uim.cake.utilities.Xml;
 use Closure;
 use Psr\Http\Message\IResponse;
