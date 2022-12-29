@@ -31,7 +31,7 @@ class LabelWidget : IWidget
      * - `label` Used to generate the label for a radio button.
      *   Can use the following variables `attrs`, `text` and `input`.
      *
-     * @param \Cake\View\StringTemplate myTemplates Templates list.
+     * @param uim.cake.View\StringTemplate myTemplates Templates list.
      */
     this(StringTemplate myTemplates) {
         _templates = myTemplates;
@@ -49,7 +49,7 @@ class LabelWidget : IWidget
      * All other attributes will be converted into HTML attributes.
      *
      * @param array<string, mixed> myData Data array.
-     * @param \Cake\View\Form\IContext $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string
      */
     string render(array myData, IContext $context) {

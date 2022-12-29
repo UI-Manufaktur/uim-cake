@@ -35,8 +35,8 @@ class YearWidget : BasicWidget
     /**
      * Constructor
      *
-     * @param \Cake\View\StringTemplate myTemplates Templates list.
-     * @param \Cake\View\Widget\SelectBoxWidget $selectBox Selectbox widget instance.
+     * @param uim.cake.View\StringTemplate myTemplates Templates list.
+     * @param uim.cake.View\Widget\SelectBoxWidget $selectBox Selectbox widget instance.
      */
     this(StringTemplate myTemplates, SelectBoxWidget $selectBox) {
         _select = $selectBox;
@@ -47,7 +47,7 @@ class YearWidget : BasicWidget
      * Renders a year select box.
      *
      * @param array<string, mixed> myData Data to render with.
-     * @param \Cake\View\Form\IContext $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return A generated select box.
      */
     string render(array myData, IContext $context) {

@@ -49,8 +49,8 @@ class MultiCheckboxWidget : BasicWidget
      * - `multicheckboxWrapper` Renders a wrapper around grouped inputs.
      * - `multicheckboxTitle` Renders the title element for grouped inputs.
      *
-     * @param \Cake\View\StringTemplate myTemplates Templates list.
-     * @param \Cake\View\Widget\LabelWidget $label Label widget instance.
+     * @param uim.cake.View\StringTemplate myTemplates Templates list.
+     * @param uim.cake.View\Widget\LabelWidget $label Label widget instance.
      */
     this(StringTemplate myTemplates, LabelWidget $label) {
         _templates = myTemplates;
@@ -96,7 +96,7 @@ class MultiCheckboxWidget : BasicWidget
      * If either is not set options will not be generated correctly.
      *
      * @param array<string, mixed> myData The data to generate a checkbox set with.
-     * @param \Cake\View\Form\IContext $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string
      */
     string render(array myData, IContext $context) {
@@ -112,7 +112,7 @@ class MultiCheckboxWidget : BasicWidget
      * Render the checkbox inputs.
      *
      * @param array<string, mixed> myData The data array defining the checkboxes.
-     * @param \Cake\View\Form\IContext $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return An array of rendered inputs.
      */
     protected string[] _renderInputs(array myData, IContext $context) {
@@ -169,7 +169,7 @@ class MultiCheckboxWidget : BasicWidget
      * Render a single checkbox & wrapper.
      *
      * @param array<string, mixed> $checkbox An array containing checkbox key/value option pairs
-     * @param \Cake\View\Form\IContext $context Context object.
+     * @param uim.cake.View\Form\IContext $context Context object.
      * @return string
      */
     protected string _renderInput(array $checkbox, IContext $context) {

@@ -35,7 +35,7 @@ class FileWidget : BasicWidget
      * ignored.
      *
      * @param array<string, mixed> myData The data to build a file input with.
-     * @param \Cake\View\Form\IContext $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string HTML elements.
      */
     string render(array myData, IContext $context) {

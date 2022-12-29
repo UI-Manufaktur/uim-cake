@@ -36,7 +36,7 @@ class TextareaWidget : BasicWidget
      * All other keys will be converted into HTML attributes.
      *
      * @param array<string, mixed> myData The data to build a textarea with.
-     * @param \Cake\View\Form\IContext $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string HTML elements.
      */
     string render(array myData, IContext $context) {
