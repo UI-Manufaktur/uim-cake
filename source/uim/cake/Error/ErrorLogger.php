@@ -46,7 +46,7 @@ class ErrorLogger : ErrorLoggerInterface
     /**
      * Log an error to Cake"s Log subsystem
      *
-     * @param \Cake\Error\PhpError $error The error to log
+     * @param uim.cake.Error\PhpError $error The error to log
      * @param ?\Psr\Http\Message\IServerRequest $request The request if in an HTTP context.
      * @param bool $includeTrace Should the log message include a stacktrace
      * @return void

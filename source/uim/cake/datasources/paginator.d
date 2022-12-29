@@ -139,7 +139,7 @@ class Paginator : IPaginator {
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param \Cake\Datasource\IRepository|\Cake\Datasource\IQuery $object The repository or query
+     * @param uim.cake.Datasource\IRepository|\Cake\Datasource\IQuery $object The repository or query
      *   to paginate.
      * @param array myParams Request params
      * @param array $settings The settings/configuration used for pagination.
@@ -181,8 +181,8 @@ class Paginator : IPaginator {
     /**
      * Get query for fetching paginated results.
      *
-     * @param \Cake\Datasource\IRepository $object Repository instance.
-     * @param \Cake\Datasource\IQuery|null myQuery Query Instance.
+     * @param uim.cake.Datasource\IRepository $object Repository instance.
+     * @param uim.cake.Datasource\IQuery|null myQuery Query Instance.
      * @param array<string, mixed> myData Pagination data.
      * @return \Cake\Datasource\IQuery
      */
@@ -200,7 +200,7 @@ class Paginator : IPaginator {
     /**
      * Get total count of records.
      *
-     * @param \Cake\Datasource\IQuery myQuery Query instance.
+     * @param uim.cake.Datasource\IQuery myQuery Query instance.
      * @param array myData Pagination data.
      * @return int|null
      */
@@ -211,7 +211,7 @@ class Paginator : IPaginator {
     /**
      * Extract pagination data needed
      *
-     * @param \Cake\Datasource\IRepository $object The repository object.
+     * @param uim.cake.Datasource\IRepository $object The repository object.
      * @param array<string, mixed> myParams Request params
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return array Array with keys "defaults", "options" and "finder"
@@ -505,7 +505,7 @@ class Paginator : IPaginator {
      * The default order options provided to paginate() will be merged with the user"s
      * requested sorting field/direction.
      *
-     * @param \Cake\Datasource\IRepository $object Repository object.
+     * @param uim.cake.Datasource\IRepository $object Repository object.
      * @param array<string, mixed> myOptions The pagination options being used for this request.
      * @return array<string, mixed> An array of options with sort + direction removed and
      *   replaced with order if possible.
@@ -599,7 +599,7 @@ class Paginator : IPaginator {
     /**
      * Prefixes the field with the table alias if possible.
      *
-     * @param \Cake\Datasource\IRepository $object Repository object.
+     * @param uim.cake.Datasource\IRepository $object Repository object.
      * @param array $order Order array.
      * @param bool $allowed Whether the field was allowed.
      * @return array Final order array.

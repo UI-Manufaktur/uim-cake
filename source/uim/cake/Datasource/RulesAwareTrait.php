@@ -35,7 +35,7 @@ trait RulesAwareTrait
      * Returns whether the passed entity complies with all the rules stored in
      * the rules checker.
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity to check for validity.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to check for validity.
      * @param string $operation The operation being run. Either "create", "update" or "delete".
      * @param \ArrayObject|array|null $options The options To be passed to the rules.
      * @return bool
@@ -103,7 +103,7 @@ trait RulesAwareTrait
      * Subclasses should override this method in order to initialize the rules to be applied to
      * entities saved by this instance.
      *
-     * @param \Cake\Datasource\RulesChecker $rules The rules object to be modified.
+     * @param uim.cake.Datasource\RulesChecker $rules The rules object to be modified.
      * @return \Cake\Datasource\RulesChecker
      */
     function buildRules(RulesChecker $rules): RulesChecker

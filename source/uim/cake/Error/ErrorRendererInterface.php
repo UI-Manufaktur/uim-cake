@@ -20,7 +20,7 @@ interface ErrorRendererInterface
     /**
      * Render output for the provided error.
      *
-     * @param \Cake\Error\PhpError $error The error to be rendered.
+     * @param uim.cake.Error\PhpError $error The error to be rendered.
      * @param bool $debug Whether or not the application is in debug mode.
      * @return string The output to be echoed.
      */

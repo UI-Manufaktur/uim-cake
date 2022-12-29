@@ -151,7 +151,7 @@ class NumericPaginator : PaginatorInterface
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param \Cake\Datasource\RepositoryInterface|\Cake\Datasource\IQuery $object The repository or query
+     * @param uim.cake.Datasource\RepositoryInterface|\Cake\Datasource\IQuery $object The repository or query
      *   to paginate.
      * @param array $params Request params
      * @param array $settings The settings/configuration used for pagination.
@@ -193,8 +193,8 @@ class NumericPaginator : PaginatorInterface
     /**
      * Get query for fetching paginated results.
      *
-     * @param \Cake\Datasource\RepositoryInterface $object Repository instance.
-     * @param \Cake\Datasource\IQuery|null $query Query Instance.
+     * @param uim.cake.Datasource\RepositoryInterface $object Repository instance.
+     * @param uim.cake.Datasource\IQuery|null $query Query Instance.
      * @param array<string, mixed> $data Pagination data.
      * @return \Cake\Datasource\IQuery
      */
@@ -212,7 +212,7 @@ class NumericPaginator : PaginatorInterface
     /**
      * Get total count of records.
      *
-     * @param \Cake\Datasource\IQuery $query Query instance.
+     * @param uim.cake.Datasource\IQuery $query Query instance.
      * @param array $data Pagination data.
      * @return int|null
      */
@@ -224,7 +224,7 @@ class NumericPaginator : PaginatorInterface
     /**
      * Extract pagination data needed
      *
-     * @param \Cake\Datasource\RepositoryInterface $object The repository object.
+     * @param uim.cake.Datasource\RepositoryInterface $object The repository object.
      * @param array<string, mixed> $params Request params
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return array Array with keys "defaults", "options" and "finder"
@@ -524,7 +524,7 @@ class NumericPaginator : PaginatorInterface
      * The default order options provided to paginate() will be merged with the user"s
      * requested sorting field/direction.
      *
-     * @param \Cake\Datasource\RepositoryInterface $object Repository object.
+     * @param uim.cake.Datasource\RepositoryInterface $object Repository object.
      * @param array<string, mixed> $options The pagination options being used for this request.
      * @return array<string, mixed> An array of options with sort + direction removed and
      *   replaced with order if possible.
@@ -618,7 +618,7 @@ class NumericPaginator : PaginatorInterface
     /**
      * Prefixes the field with the table alias if possible.
      *
-     * @param \Cake\Datasource\RepositoryInterface $object Repository object.
+     * @param uim.cake.Datasource\RepositoryInterface $object Repository object.
      * @param array $order Order array.
      * @param bool $allowed Whether the field was allowed.
      * @return array Final order array.

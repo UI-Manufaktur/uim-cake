@@ -31,7 +31,7 @@ interface ILocator
      * Set a repository instance.
      *
      * @param string $alias The alias to set.
-     * @param \Cake\Datasource\RepositoryInterface $repository The repository to set.
+     * @param uim.cake.Datasource\RepositoryInterface $repository The repository to set.
      * @return \Cake\Datasource\RepositoryInterface
      */
     function set(string $alias, RepositoryInterface $repository);

@@ -43,7 +43,7 @@ class ClassNode : NodeInterface
     /**
      * Add a property
      *
-     * @param \Cake\Error\Debug\PropertyNode $node The property to add.
+     * @param uim.cake.Error\Debug\PropertyNode $node The property to add.
      * @return void
      */
     function addProperty(PropertyNode $node): void

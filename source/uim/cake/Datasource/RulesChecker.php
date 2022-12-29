@@ -209,7 +209,7 @@ class RulesChecker
      * of them pass. The rules to be applied are depended on the $mode parameter which
      * can only be RulesChecker::CREATE, RulesChecker::UPDATE or RulesChecker::DELETE
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity to check for validity.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to check for validity.
      * @param string $mode Either "create, "update" or "delete".
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @return bool
@@ -236,7 +236,7 @@ class RulesChecker
      * Runs each of the rules by passing the provided entity and returns true if all
      * of them pass. The rules selected will be only those specified to be run on "create"
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity to check for validity.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @return bool
      */
@@ -249,7 +249,7 @@ class RulesChecker
      * Runs each of the rules by passing the provided entity and returns true if all
      * of them pass. The rules selected will be only those specified to be run on "update"
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity to check for validity.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @return bool
      */
@@ -262,7 +262,7 @@ class RulesChecker
      * Runs each of the rules by passing the provided entity and returns true if all
      * of them pass. The rules selected will be only those specified to be run on "delete"
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity to check for validity.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @return bool
      */
@@ -275,7 +275,7 @@ class RulesChecker
      * Used by top level functions checkDelete, checkCreate and checkUpdate, this function
      * iterates an array containing the rules to be checked and checks them all.
      *
-     * @param \Cake\Datasource\EntityInterface $entity The entity to check for validity.
+     * @param uim.cake.Datasource\EntityInterface $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @param array<\Cake\Datasource\RuleInvoker> $rules The list of rules that must be checked.
      * @return bool

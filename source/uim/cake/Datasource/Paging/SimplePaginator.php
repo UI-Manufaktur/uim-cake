@@ -24,7 +24,7 @@ class SimplePaginator : NumericPaginator
     /**
      * Simple pagination does not perform any count query, so this method returns `null`.
      *
-     * @param \Cake\Datasource\IQuery $query Query instance.
+     * @param uim.cake.Datasource\IQuery $query Query instance.
      * @param array $data Pagination data.
      * @return int|null
      */

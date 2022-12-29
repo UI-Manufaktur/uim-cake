@@ -5,7 +5,7 @@ interface IFixture {
     /**
      * Create the fixture schema/mapping/definition
      *
-     * @param \Cake\Datasource\IConnection myConnection An instance of the connection the fixture should be created on.
+     * @param uim.cake.Datasource\IConnection myConnection An instance of the connection the fixture should be created on.
      * @return bool True on success, false on failure.
      */
     bool create(IConnection myConnection);
@@ -13,7 +13,7 @@ interface IFixture {
     /**
      * Run after all tests executed, should remove the table/collection from the connection.
      *
-     * @param \Cake\Datasource\IConnection myConnection An instance of the connection the fixture should be removed from.
+     * @param uim.cake.Datasource\IConnection myConnection An instance of the connection the fixture should be removed from.
      * @return bool True on success, false on failure.
      */
     bool drop(IConnection myConnection);
@@ -23,7 +23,7 @@ interface IFixture {
      *
      * Should insert all the records into the test database.
      *
-     * @param \Cake\Datasource\IConnection myConnection An instance of the connection
+     * @param uim.cake.Datasource\IConnection myConnection An instance of the connection
      *   into which the records will be inserted.
      * @return \Cake\Database\IStatement|bool on success or if there are no records to insert,
      *  or false on failure.
@@ -33,7 +33,7 @@ interface IFixture {
     /**
      * Truncates the current fixture.
      *
-     * @param \Cake\Datasource\IConnection myConnection A reference to a db instance
+     * @param uim.cake.Datasource\IConnection myConnection A reference to a db instance
      */
     bool truncate(IConnection myConnection);
 

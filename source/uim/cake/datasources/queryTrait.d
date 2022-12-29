@@ -68,7 +68,7 @@ trait QueryTrait
      * Set the default Table object that will be used by this query
      * and form the `FROM` clause.
      *
-     * @param \Cake\Datasource\IRepository|\Cake\ORM\Table myRepository The default table object to use
+     * @param uim.cake.Datasource\IRepository|\Cake\ORM\Table myRepository The default table object to use
      * @return this
      */
     function repository(IRepository myRepository) {

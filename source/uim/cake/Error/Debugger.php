@@ -675,7 +675,7 @@ class Debugger
      * Protected export function used to keep track of indentation and recursion.
      *
      * @param mixed $var The variable to dump.
-     * @param \Cake\Error\Debug\DebugContext $context Dump context
+     * @param uim.cake.Error\Debug\DebugContext $context Dump context
      * @return \Cake\Error\Debug\NodeInterface The dumped variable.
      */
     protected static function export($var, DebugContext $context): NodeInterface
@@ -715,7 +715,7 @@ class Debugger
      * - schema
      *
      * @param array $var The array to export.
-     * @param \Cake\Error\Debug\DebugContext $context The current dump context.
+     * @param uim.cake.Error\Debug\DebugContext $context The current dump context.
      * @return \Cake\Error\Debug\ArrayNode Exported array.
      */
     protected static function exportArray(array $var, DebugContext $context): ArrayNode
@@ -751,7 +751,7 @@ class Debugger
      * Handles object to node conversion.
      *
      * @param object $var Object to convert.
-     * @param \Cake\Error\Debug\DebugContext $context The dump context.
+     * @param uim.cake.Error\Debug\DebugContext $context The dump context.
      * @return \Cake\Error\Debug\NodeInterface
      * @see uim.cake.Error\Debugger::exportVar()
      */

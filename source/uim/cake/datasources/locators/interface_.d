@@ -22,7 +22,7 @@ interface ILocator
      * Set a repository instance.
      *
      * @param string myAlias The alias to set.
-     * @param \Cake\Datasource\IRepository myRepository The repository to set.
+     * @param uim.cake.Datasource\IRepository myRepository The repository to set.
      * @return \Cake\Datasource\IRepository
      */
     auto set(string myAlias, IRepository myRepository);

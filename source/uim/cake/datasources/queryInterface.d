@@ -18,7 +18,7 @@ interface IQuery {
      * If `true` is passed in the second argument, any previous selections will
      * be overwritten with the list passed in the first argument.
      *
-     * @param \Cake\Database\IExpression|\Cake\ORM\Association|\Cake\ORM\Table|callable|array|string myFields Fields.
+     * @param uim.cake.Database\IExpression|\Cake\ORM\Association|\Cake\ORM\Table|callable|array|string myFields Fields.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */
@@ -149,7 +149,7 @@ interface IQuery {
      * myQuery.limit(myQuery.newExpr().add(["1 + 1"])); // LIMIT (1 + 1)
      * ```
      *
-     * @param \Cake\Database\IExpression|int|null $limit number of records to be returned
+     * @param uim.cake.Database\IExpression|int|null $limit number of records to be returned
      * @return this
      */
     function limit($limit);
@@ -220,7 +220,7 @@ interface IQuery {
      * If you need to set complex expressions as order conditions, you
      * should use `orderAsc()` or `orderDesc()`.
      *
-     * @param \Cake\Database\IExpression|\Closure|array|string myFields fields to be added to the list
+     * @param uim.cake.Database\IExpression|\Closure|array|string myFields fields to be added to the list
      * @param bool $overwrite whether to reset order with field list or not
      * @return this
      */
@@ -254,7 +254,7 @@ interface IQuery {
      * Set the default Table object that will be used by this query
      * and form the `FROM` clause.
      *
-     * @param \Cake\Datasource\IRepository myRepository The default repository object to use
+     * @param uim.cake.Datasource\IRepository myRepository The default repository object to use
      * @return this
      */
     function repository(IRepository myRepository);

@@ -34,7 +34,7 @@ class PropertyNode : NodeInterface
      *
      * @param string $name The property name
      * @param string|null $visibility The visibility of the property.
-     * @param \Cake\Error\Debug\NodeInterface $value The property value node.
+     * @param uim.cake.Error\Debug\NodeInterface $value The property value node.
      */
     public this(string $name, ?string $visibility, NodeInterface $value) {
         this.name = $name;

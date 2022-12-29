@@ -935,7 +935,7 @@ trait EntityTrait
     /**
      * Reads if there are errors for one or many objects.
      *
-     * @param \Cake\Datasource\IEntity|array $object The object to read errors from.
+     * @param uim.cake.Datasource\IEntity|array $object The object to read errors from.
      * @return bool
      */
     protected      */
@@ -958,7 +958,7 @@ trait EntityTrait
     /**
      * Read the error(s) from one or many objects.
      *
-     * @param \Cake\Datasource\IEntity|iterable $object The object to read errors from.
+     * @param uim.cake.Datasource\IEntity|iterable $object The object to read errors from.
      * @param string|null myPath The field name for errors.
      * @return array
      */

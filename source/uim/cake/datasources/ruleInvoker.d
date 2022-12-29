@@ -92,7 +92,7 @@ class RuleInvoker
     /**
      * Invoke the rule.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity the rule
+     * @param uim.cake.Datasource\IEntity $entity The entity the rule
      *   should apply to.
      * @param array $scope The rule"s scope/options.
      * @return bool Whether the rule passed.

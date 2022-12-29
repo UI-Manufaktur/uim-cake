@@ -84,7 +84,7 @@ interface IRepository
      * This method will *not* trigger beforeSave/afterSave events. If you need those
      * first load a collection of records and update them.
      *
-     * @param \Cake\Database\Expression\QueryExpression|\Closure|array|string myFields A hash of field: new value.
+     * @param uim.cake.Database\Expression\QueryExpression|\Closure|array|string myFields A hash of field: new value.
      * @param mixed $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Count Returns the affected rows.
@@ -121,7 +121,7 @@ interface IRepository
      * returns the same entity after a successful save or false in case
      * of any error.
      *
-     * @param \Cake\Datasource\IEntity $entity the entity to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayAccess|array myOptions The options to use when saving.
      * @return \Cake\Datasource\IEntity|false
      */
@@ -133,7 +133,7 @@ interface IRepository
      * Deletes an entity and possibly related associations from the database
      * based on the "dependent" option used when defining the association.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity to remove.
+     * @param uim.cake.Datasource\IEntity $entity The entity to remove.
      * @param \ArrayAccess|array myOptions The options for the delete.
      * @return bool success
      */
@@ -199,7 +199,7 @@ interface IRepository
      * $article = this.Articles.patchEntity($article, this.request.getData());
      * ```
      *
-     * @param \Cake\Datasource\IEntity $entity the entity that will get the
+     * @param uim.cake.Datasource\IEntity $entity the entity that will get the
      * data merged in
      * @param array myData key value list of fields to be merged into the entity
      * @param array<string, mixed> myOptions A list of options for the object hydration.

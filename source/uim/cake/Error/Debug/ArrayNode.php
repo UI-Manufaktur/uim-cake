@@ -34,7 +34,7 @@ class ArrayNode : NodeInterface
     /**
      * Add an item
      *
-     * @param \Cake\Error\Debug\ArrayItemNode $node The item to add.
+     * @param uim.cake.Error\Debug\ArrayItemNode $node The item to add.
      * @return void
      */
     function add(ArrayItemNode $node): void
