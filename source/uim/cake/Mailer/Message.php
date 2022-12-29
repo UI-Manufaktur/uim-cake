@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Mailer;
 
 import uim.cake.core.Configure;

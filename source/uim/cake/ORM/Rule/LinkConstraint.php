@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.orm.Rule;
 
 import uim.cake.datasources.EntityInterface;

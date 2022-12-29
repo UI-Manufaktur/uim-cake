@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.orm.Association;
 
 import uim.cake.databases.expressions.IdentifierExpression;

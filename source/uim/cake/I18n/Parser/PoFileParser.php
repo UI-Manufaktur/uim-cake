@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.I18n\Parser;
 
 import uim.cake.I18n\Translator;

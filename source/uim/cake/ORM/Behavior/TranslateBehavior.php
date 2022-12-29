@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.orm.Behavior;
 
 import uim.cake.I18n\I18n;

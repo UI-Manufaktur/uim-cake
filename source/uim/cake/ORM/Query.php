@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.ORM;
 
 use ArrayObject;

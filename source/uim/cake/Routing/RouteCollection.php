@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Routing;
 
 import uim.cake.Routing\Exception\DuplicateNamedRouteException;
