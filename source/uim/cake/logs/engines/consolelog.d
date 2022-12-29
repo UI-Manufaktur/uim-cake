@@ -32,7 +32,7 @@ class ConsoleLog : BaseLog
     /**
      * Output stream
      *
-     * @var uim.cake.Console\ConsoleOutput
+     * @var uim.cake.consoles.ConsoleOutput
      */
     protected _output;
 

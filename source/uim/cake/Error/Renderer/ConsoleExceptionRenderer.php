@@ -30,7 +30,7 @@ class ConsoleExceptionRenderer
     private $error;
 
     /**
-     * @var uim.cake.Console\ConsoleOutput
+     * @var uim.cake.consoles.ConsoleOutput
      */
     private $output;
 

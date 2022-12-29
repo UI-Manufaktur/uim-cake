@@ -8,21 +8,21 @@ import uim.cake.core.ObjectRegistry;
  * Registry for Tasks. Provides features
  * for lazily loading tasks.
  *
- * @: uim.cake.Core\ObjectRegistry<uim.cake.Console\Shell>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.consoles.Shell>
  */
 class TaskRegistry : ObjectRegistry
 {
     /**
      * Shell to use to set params to tasks.
      *
-     * @var uim.cake.Console\Shell
+     * @var uim.cake.consoles.Shell
      */
     protected _Shell;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Console\Shell myShell Shell instance
+     * @param uim.cake.consoles.Shell myShell Shell instance
      */
     this(Shell myShell) {
         _Shell = myShell;
@@ -49,7 +49,7 @@ class TaskRegistry : ObjectRegistry
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the task is missing in.
-     * @throws uim.cake.Console\Exception\MissingTaskException
+     * @throws uim.cake.consoles.Exception\MissingTaskException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingTaskException([
@@ -66,11 +66,11 @@ class TaskRegistry : ObjectRegistry
      * @param string myClass The classname to create.
      * @param string myAlias The alias of the task.
      * @param array<string, mixed> myConfig An array of settings to use for the task.
-     * @return uim.cake.Console\Shell The constructed task class.
+     * @return uim.cake.consoles.Shell The constructed task class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Shell _create(myClass, string myAlias, array myConfig) {
-        /** @var uim.cake.Console\Shell */
+        /** @var uim.cake.consoles.Shell */
         return new myClass(_Shell.getIo());
     }
 }

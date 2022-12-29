@@ -22,7 +22,7 @@ use Traversable;
  *
  * @see uim.cake.controllers.ComponentRegistry
  * @see uim.cake.View\HelperRegistry
- * @see uim.cake.Console\TaskRegistry
+ * @see uim.cake.consoles.TaskRegistry
  * @template TObject
  */
 abstract class ObjectRegistry : Countable, IteratorAggregate

@@ -165,8 +165,8 @@ abstract class BaseApplication :
      * By default, all commands in UIM, plugins and the application will be
      * loaded using conventions based names.
      *
-     * @param uim.cake.Console\CommandCollection $commands The CommandCollection to add commands into.
-     * @return uim.cake.Console\CommandCollection The updated collection.
+     * @param uim.cake.consoles.CommandCollection $commands The CommandCollection to add commands into.
+     * @return uim.cake.consoles.CommandCollection The updated collection.
      */
     CommandCollection console(CommandCollection $commands) {
         return $commands.addMany($commands.autoDiscover());

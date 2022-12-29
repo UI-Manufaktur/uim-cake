@@ -83,8 +83,8 @@ interface PluginInterface
     /**
      * Add console commands for the plugin.
      *
-     * @param uim.cake.Console\CommandCollection $commands The command collection to update
-     * @return uim.cake.Console\CommandCollection
+     * @param uim.cake.consoles.CommandCollection $commands The command collection to update
+     * @return uim.cake.consoles.CommandCollection
      */
     function console(CommandCollection $commands): CommandCollection;
 

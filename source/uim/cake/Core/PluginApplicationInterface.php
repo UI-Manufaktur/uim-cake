@@ -60,8 +60,8 @@ interface IPluginApplication : EventDispatcherInterface
     /**
      * Run console hooks for plugins
      *
-     * @param uim.cake.Console\CommandCollection $commands The CommandCollection to use.
-     * @return uim.cake.Console\CommandCollection
+     * @param uim.cake.consoles.CommandCollection $commands The CommandCollection to use.
+     * @return uim.cake.consoles.CommandCollection
      */
     function pluginConsole(CommandCollection $commands): CommandCollection;
 }

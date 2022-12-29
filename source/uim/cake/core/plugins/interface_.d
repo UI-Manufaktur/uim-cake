@@ -44,8 +44,8 @@ interface IPlugin {
     /**
      * Add console commands for the plugin.
      *
-     * @param uim.cake.Console\CommandCollection someCommands The command collection to update
-     * @return uim.cake.Console\CommandCollection
+     * @param uim.cake.consoles.CommandCollection someCommands The command collection to update
+     * @return uim.cake.consoles.CommandCollection
      */
     CommandCollection console(CommandCollection someCommands);
 

@@ -7,21 +7,21 @@ import uim.cake;
  * Registry for Helpers. Provides features
  * for lazily loading helpers.
  *
- * @: uim.cake.Core\ObjectRegistry<uim.cake.Console\Helper>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.consoles.Helper>
  */
 class HelperRegistry : ObjectRegistry
 {
     /**
      * Shell to use to set params to tasks.
      *
-     * @var uim.cake.Console\ConsoleIo
+     * @var uim.cake.consoles.ConsoleIo
      */
     protected _io;
 
     /**
      * Sets The IO instance that should be passed to the shell helpers
      *
-     * @param uim.cake.Console\ConsoleIo $io An io instance.
+     * @param uim.cake.consoles.ConsoleIo $io An io instance.
      */
     void setIo(ConsoleIo $io) {
         _io = $io;
@@ -56,7 +56,7 @@ class HelperRegistry : ObjectRegistry
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the helper is missing in.
-     * @throws uim.cake.Console\Exception\MissingHelperException
+     * @throws uim.cake.consoles.Exception\MissingHelperException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
       throw new MissingHelperException([
@@ -73,11 +73,11 @@ class HelperRegistry : ObjectRegistry
      * @param string myClass The classname to create.
      * @param string myAlias The alias of the helper.
      * @param array<string, mixed> myConfig An array of settings to use for the helper.
-     * @return uim.cake.Console\Helper The constructed helper class.
+     * @return uim.cake.consoles.Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected Helper _create(myClass, string myAlias, array myConfig) {
-      /** @var uim.cake.Console\Helper */
+      /** @var uim.cake.consoles.Helper */
       return new myClass(_io, myConfig);
     }
 }

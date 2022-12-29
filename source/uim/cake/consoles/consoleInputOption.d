@@ -7,7 +7,7 @@ import uim.cake;
  * An object to represent a single option used in the command line.
  * ConsoleOptionParser creates these when you use addOption()
  *
- * @see uim.cake.Console\ConsoleOptionParser::addOption()
+ * @see uim.cake.consoles.ConsoleOptionParser::addOption()
  */
 class ConsoleInputOption {
     // Name of the option
@@ -53,7 +53,7 @@ class ConsoleInputOption {
      * @param array<string> $choices Valid choices for this option.
      * @param bool $multiple Whether this option can accept multiple value definition.
      * @param bool $required Whether this option is required or not.
-     * @throws uim.cake.Console\Exception\ConsoleException
+     * @throws uim.cake.consoles.Exception\ConsoleException
      */
     this(
       string myName,
@@ -175,7 +175,7 @@ class ConsoleInputOption {
      * Check that a value is a valid choice for this option.
      *
      * @param string|bool myValue The choice to validate.
-     * @throws uim.cake.Console\Exception\ConsoleException
+     * @throws uim.cake.consoles.Exception\ConsoleException
      */
     bool validChoice(myValue) {
         if (empty(_choices)) {

@@ -12,7 +12,7 @@ import uim.cake;
  * An object to represent a single subcommand used in the command line.
  * Created when you call ConsoleOptionParser::addSubcommand()
  *
- * @see uim.cake.Console\ConsoleOptionParser::addSubcommand()
+ * @see uim.cake.consoles.ConsoleOptionParser::addSubcommand()
  */
 class ConsoleInputSubCommand {
     // Name of the subcommand
@@ -26,7 +26,7 @@ class ConsoleInputSubCommand {
     /**
      * The ConsoleOptionParser for this subcommand.
      *
-     * @var uim.cake.Console\ConsoleOptionParser|null
+     * @var uim.cake.consoles.ConsoleOptionParser|null
      */
     protected _parser;
 
@@ -35,7 +35,7 @@ class ConsoleInputSubCommand {
      *
      * @param array<string, mixed>|string myName The long name of the subcommand, or an array with all the properties.
      * @param string help The help text for this option.
-     * @param uim.cake.Console\ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
+     * @param uim.cake.consoles.ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
      *   Either a ConsoleOptionParser, or an array that can be used with ConsoleOptionParser::buildFromArray().
      */
     this(myName, $help = "", $parser = null) {
@@ -93,7 +93,7 @@ class ConsoleInputSubCommand {
     /**
      * Get the usage value for this option
      *
-     * @return uim.cake.Console\ConsoleOptionParser|null
+     * @return uim.cake.consoles.ConsoleOptionParser|null
      */
     ?ConsoleOptionParser parser() {
         return _parser;

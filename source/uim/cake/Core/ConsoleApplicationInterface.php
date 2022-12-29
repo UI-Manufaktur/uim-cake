@@ -33,8 +33,8 @@ interface IConsoleApplication
     /**
      * Define the console commands for an application.
      *
-     * @param uim.cake.Console\CommandCollection $commands The CommandCollection to add commands into.
-     * @return uim.cake.Console\CommandCollection The updated collection.
+     * @param uim.cake.consoles.CommandCollection $commands The CommandCollection to add commands into.
+     * @return uim.cake.consoles.CommandCollection The updated collection.
      */
     function console(CommandCollection $commands): CommandCollection;
 }

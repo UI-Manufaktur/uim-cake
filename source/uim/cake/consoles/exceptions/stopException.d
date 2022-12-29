@@ -11,8 +11,8 @@ import uim.cake;
 /**
  * Exception class for halting errors in console tasks
  *
- * @see uim.cake.Console\Shell::_stop()
- * @see uim.cake.Console\Shell::error()
+ * @see uim.cake.consoles.Shell::_stop()
+ * @see uim.cake.consoles.Shell::error()
  * @see uim.cake.Command\BaseCommand::abort()
  */
 class StopException : ConsoleException {

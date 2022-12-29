@@ -15,8 +15,8 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
     /**
      * Main function Prints out the list of commands.
      *
-     * @param uim.cake.Console\Arguments $args The command arguments.
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.Arguments $args The command arguments.
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int
      */
     Nullable!int execute(Arguments $args, ConsoleIo $io) {
@@ -39,7 +39,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
     /**
      * Output text.
      *
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @param iterable $commands The command collection to output.
      */
     protected void asText(ConsoleIo $io, iterable $commands) {
@@ -97,7 +97,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
     /**
      * Output relevant paths if defined
      *
-     * @param uim.cake.Console\ConsoleIo $io IO object.
+     * @param uim.cake.consoles.ConsoleIo $io IO object.
      */
     protected void outputPaths(ConsoleIo $io) {
         myPaths = [];
@@ -141,7 +141,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
     /**
      * Output as XML
      *
-     * @param uim.cake.Console\ConsoleIo $io The console io
+     * @param uim.cake.consoles.ConsoleIo $io The console io
      * @param iterable $commands The command collection to output
      */
     protected void asXml(ConsoleIo $io, iterable $commands) {
@@ -163,8 +163,8 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
     /**
      * Gets the option parser instance and configures it.
      *
-     * @param uim.cake.Console\ConsoleOptionParser $parser The parser to build
-     * @return uim.cake.Console\ConsoleOptionParser
+     * @param uim.cake.consoles.ConsoleOptionParser $parser The parser to build
+     * @return uim.cake.consoles.ConsoleOptionParser
      */
     protected ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription(
