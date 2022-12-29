@@ -11,8 +11,7 @@
 
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         2.2.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Log\Engine;
 
 import uim.cake.consoles.ConsoleOutput;

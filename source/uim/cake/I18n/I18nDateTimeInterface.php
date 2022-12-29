@@ -5,8 +5,7 @@
 
 
 
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.I18n;
 
 import uim.cake.Chronos\ChronosInterface;

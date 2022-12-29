@@ -5,8 +5,7 @@
 
 
 
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Mailer;
 
 import uim.cake.View\View;

@@ -9,9 +9,8 @@
  *
 
 
- * @since         0.2.9
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+
+  */
 module uim.cake.Log;
 
 import uim.cake.core.StaticConfigTrait;
