@@ -15,7 +15,7 @@
  */
 module uim.cake.Log\Engine;
 
-import uim.cake.cores.Configure;
+import uim.cake.core.Configure;
 import uim.cake.Log\Formatter\DefaultFormatter;
 import uim.cake.utilities.Text;
 

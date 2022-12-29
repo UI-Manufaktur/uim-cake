@@ -9,7 +9,7 @@
  */
 module uim.cake.Mailer\Exception;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 
 /**
  * Used when a mailer cannot be found.

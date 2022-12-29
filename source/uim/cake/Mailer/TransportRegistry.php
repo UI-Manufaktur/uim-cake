@@ -10,8 +10,8 @@
 module uim.cake.Mailer;
 
 use BadMethodCallException;
-import uim.cake.cores.App;
-import uim.cake.cores.ObjectRegistry;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
 use RuntimeException;
 
 /**

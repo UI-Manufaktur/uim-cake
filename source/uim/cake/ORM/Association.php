@@ -11,8 +11,8 @@ module uim.cake.ORM;
 
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;
-import uim.cake.cores.App;
-import uim.cake.cores.ConventionsTrait;
+import uim.cake.core.App;
+import uim.cake.core.ConventionsTrait;
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.datasources.EntityInterface;
 import uim.cake.datasources.ResultSetDecorator;

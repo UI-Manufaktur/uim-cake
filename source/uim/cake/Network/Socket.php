@@ -9,8 +9,8 @@
  */
 module uim.cake.Network;
 
-import uim.cake.cores.exceptions.CakeException;
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.Network\Exception\SocketException;
 import uim.cake.Validation\Validation;
 use Composer\CaBundle\CaBundle;

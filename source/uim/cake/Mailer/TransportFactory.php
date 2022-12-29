@@ -9,7 +9,7 @@
  */
 module uim.cake.Mailer;
 
-import uim.cake.cores.StaticConfigTrait;
+import uim.cake.core.StaticConfigTrait;
 use InvalidArgumentException;
 
 /**

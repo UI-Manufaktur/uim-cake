@@ -15,7 +15,7 @@
  */
 module uim.cake.orm.Exception;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 
 /**
  * Exception raised when a Table could not be found.

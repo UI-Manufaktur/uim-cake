@@ -9,8 +9,8 @@
  */
 module uim.cake.Mailer;
 
-import uim.cake.cores.exceptions.CakeException;
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.InstanceConfigTrait;
 
 /**
  * Abstract transport for sending email

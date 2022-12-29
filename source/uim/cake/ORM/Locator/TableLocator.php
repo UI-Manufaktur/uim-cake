@@ -9,7 +9,7 @@
  */
 module uim.cake.orm.Locator;
 
-import uim.cake.cores.App;
+import uim.cake.core.App;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.datasources.Locator\AbstractLocator;
 import uim.cake.datasources.RepositoryInterface;

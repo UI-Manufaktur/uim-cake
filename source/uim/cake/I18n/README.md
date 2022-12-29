@@ -26,7 +26,7 @@ I18n::setLocale("en_US");
 ### Setting path to folder containing po files.
 
 ```php
-import uim.cake.cores.Configure;
+import uim.cake.core.Configure;
 
 Configure::write("App.paths.locales", ["/path/with/trailing/slash/"]);
 ```

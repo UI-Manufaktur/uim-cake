@@ -13,7 +13,7 @@
  */
 module uim.cake.orm.Exception;
 
-import uim.cake.cores.exceptions.CakeException;
+import uim.cake.core.exceptions.CakeException;
 import uim.cake.datasources.EntityInterface;
 import uim.cake.utilities.Hash;
 use Throwable;

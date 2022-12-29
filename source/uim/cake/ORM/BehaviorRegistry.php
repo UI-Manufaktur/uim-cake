@@ -10,8 +10,8 @@
 module uim.cake.ORM;
 
 use BadMethodCallException;
-import uim.cake.cores.App;
-import uim.cake.cores.ObjectRegistry;
+import uim.cake.core.App;
+import uim.cake.core.ObjectRegistry;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.orm.Exception\MissingBehaviorException;

@@ -9,8 +9,8 @@
  */
 module uim.cake.Routing;
 
-import uim.cake.cores.Configure;
-import uim.cake.cores.Plugin;
+import uim.cake.core.Configure;
+import uim.cake.core.Plugin;
 import uim.cake.utilities.Inflector;
 
 /**

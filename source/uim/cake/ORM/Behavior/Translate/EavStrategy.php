@@ -12,7 +12,7 @@ module uim.cake.orm.Behavior\Translate;
 use ArrayObject;
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;
-import uim.cake.cores.InstanceConfigTrait;
+import uim.cake.core.InstanceConfigTrait;
 import uim.cake.datasources.EntityInterface;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.Entity;

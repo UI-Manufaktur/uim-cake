@@ -9,7 +9,7 @@
  */
 module uim.cake.Mailer;
 
-import uim.cake.cores.App;
+import uim.cake.core.App;
 import uim.cake.Mailer\Exception\MissingMailerException;
 
 /**

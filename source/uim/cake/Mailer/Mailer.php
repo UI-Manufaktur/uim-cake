@@ -14,8 +14,8 @@
 module uim.cake.Mailer;
 
 use BadMethodCallException;
-import uim.cake.cores.exceptions.CakeException;
-import uim.cake.cores.StaticConfigTrait;
+import uim.cake.core.exceptions.CakeException;
+import uim.cake.core.StaticConfigTrait;
 import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.Log\Log;
