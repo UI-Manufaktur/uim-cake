@@ -101,9 +101,9 @@ abstract class Cell : EventDispatcherInterface
     /**
      * Constructor.
      *
-     * @param \Cake\Http\ServerRequest $request The request to use in the cell.
-     * @param \Cake\Http\Response $response The response to use in the cell.
-     * @param \Cake\Event\IEventManager|null $eventManager The eventManager to bind events to.
+     * @param uim.cake.Http\ServerRequest $request The request to use in the cell.
+     * @param uim.cake.Http\Response $response The response to use in the cell.
+     * @param uim.cake.Event\IEventManager|null $eventManager The eventManager to bind events to.
      * @param array<string, mixed> $cellOptions Cell options to apply.
      */
     public this(

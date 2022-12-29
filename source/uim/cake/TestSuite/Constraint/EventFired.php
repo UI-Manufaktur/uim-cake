@@ -35,7 +35,7 @@ class EventFired : Constraint
     /**
      * Constructor
      *
-     * @param \Cake\Event\EventManager $eventManager Event manager to check
+     * @param uim.cake.Event\EventManager $eventManager Event manager to check
      */
     public this(EventManager $eventManager) {
         _eventManager = $eventManager;

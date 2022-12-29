@@ -30,7 +30,7 @@ class TestEmailTransport : DebugTransport
     /**
      * Stores email for later assertions
      *
-     * @param \Cake\Mailer\Message $message Message
+     * @param uim.cake.Mailer\Message $message Message
      * @return array{headers: string, message: string}
      */
     function send(Message $message): array

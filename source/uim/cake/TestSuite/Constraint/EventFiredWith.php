@@ -38,7 +38,7 @@ class EventFiredWith : Constraint
     /**
      * Constructor
      *
-     * @param \Cake\Event\EventManager $eventManager Event manager to check
+     * @param uim.cake.Event\EventManager $eventManager Event manager to check
      * @param string $dataKey Data key
      * @param mixed $dataValue Data value
      */

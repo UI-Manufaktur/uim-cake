@@ -116,7 +116,7 @@ trait IntegrationTestTrait
     /**
      * The controller used in the last request.
      *
-     * @var uim.cake.Controller\Controller|null
+     * @var uim.cake.controllers.Controller|null
      */
     protected $_controller;
 
@@ -506,14 +506,14 @@ trait IntegrationTestTrait
     /**
      * Adds additional event spies to the controller/view event manager.
      *
-     * @param \Cake\Event\IEvent $event A dispatcher event.
-     * @param \Cake\Controller\Controller|null $controller Controller instance.
+     * @param uim.cake.Event\IEvent $event A dispatcher event.
+     * @param uim.cake.Controller\Controller|null $controller Controller instance.
      * @return void
      */
     function controllerSpy(IEvent $event, ?Controller $controller = null): void
     {
         if (!$controller) {
-            /** @var uim.cake.Controller\Controller $controller */
+            /** @var uim.cake.controllers.Controller $controller */
             $controller = $event.getSubject();
         }
         _controller = $controller;

@@ -144,7 +144,7 @@ class ConnectionHelper
     /**
      * Runs callback with constraints disabled correctly per-database
      *
-     * @param \Cake\Database\Connection $connection Database connection
+     * @param uim.cake.Database\Connection $connection Database connection
      * @param \Closure $callback callback
      * @return void
      */

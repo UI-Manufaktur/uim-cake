@@ -243,7 +243,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * before
      *
      * @param string myName [optional] The fieldname to fetch.
-     * @param \Cake\Validation\ValidationSet|null $set The set of rules for field
+     * @param uim.cake.Validation\ValidationSet|null $set The set of rules for field
      * @return \Cake\Validation\ValidationSet
      */
     function field(string myName, ?ValidationSet $set = null): ValidationSet
@@ -383,7 +383,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Sets the rule set for a field
      *
      * @param string myField name of the field to set
-     * @param \Cake\Validation\ValidationSet|array $rules set of rules to apply to field
+     * @param uim.cake.Validation\ValidationSet|array $rules set of rules to apply to field
      */
     void offsetSet(myField, $rules) {
         if (!$rules instanceof ValidationSet) {
@@ -442,7 +442,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @param string myField The name of the field from which the rule will be added
      * @param array|string myName The alias for a single rule or multiple rules array
-     * @param \Cake\Validation\ValidationRule|array $rule the rule to add
+     * @param uim.cake.Validation\ValidationRule|array $rule the rule to add
      * @throws \InvalidArgumentException If numeric index cannot be resolved to a string one
      * @return this
      */
@@ -499,7 +499,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * in the parent will have the same values in the nested validator when rules are evaluated.
      *
      * @param string myField The root field for the nested validator.
-     * @param \Cake\Validation\Validator $validator The nested validator.
+     * @param uim.cake.Validation\Validator $validator The nested validator.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
@@ -541,7 +541,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * in the parent will have the same values in the nested validator when rules are evaluated.
      *
      * @param string myField The root field for the nested validator.
-     * @param \Cake\Validation\Validator $validator The nested validator.
+     * @param uim.cake.Validation\Validator $validator The nested validator.
      * @param string|null myMessage The error message when the rule fails.
      * @param callable|string|null $when Either "create" or "update" or a callable that returns
      *   true when the validation rule should be applied.
@@ -2428,7 +2428,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Returns false if any validation for the passed rule set should be stopped
      * due to the field missing in the data array
      *
-     * @param \Cake\Validation\ValidationSet myField The set of rules for a field.
+     * @param uim.cake.Validation\ValidationSet myField The set of rules for a field.
      * @param array<string, mixed> $context A key value list of data containing the validation context.
      */
     protected bool _checkPresence(ValidationSet myField, array $context) {
@@ -2450,7 +2450,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Returns whether the field can be left blank according to `allowEmpty`
      *
-     * @param \Cake\Validation\ValidationSet myField the set of rules for a field
+     * @param uim.cake.Validation\ValidationSet myField the set of rules for a field
      * @param array<string, mixed> $context a key value list of data containing the validation context.
      */
     protected bool _canBeEmpty(ValidationSet myField, array $context) {
@@ -2544,7 +2544,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * from executing them
      *
      * @param string myField The name of the field that is being processed
-     * @param \Cake\Validation\ValidationSet $rules the list of rules for a field
+     * @param uim.cake.Validation\ValidationSet $rules the list of rules for a field
      * @param array myData the full data passed to the validator
      * @param bool $newRecord whether is it a new record or an existing one
      * @return array<string, mixed>

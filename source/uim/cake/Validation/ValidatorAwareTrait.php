@@ -146,7 +146,7 @@ trait ValidatorAwareTrait
      * ```
      *
      * @param string $name The name of a validator to be set.
-     * @param \Cake\Validation\Validator $validator Validator object to be set.
+     * @param uim.cake.Validation\Validator $validator Validator object to be set.
      * @return this
      */
     function setValidator(string $name, Validator $validator) {
@@ -187,7 +187,7 @@ trait ValidatorAwareTrait
      * Returns the default validator object. Subclasses can override this function
      * to add a default validation set to the validator object.
      *
-     * @param \Cake\Validation\Validator $validator The validator that can be modified to
+     * @param uim.cake.Validation\Validator $validator The validator that can be modified to
      * add some rules to it.
      * @return \Cake\Validation\Validator
      */

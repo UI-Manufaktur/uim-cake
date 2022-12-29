@@ -149,7 +149,7 @@ class FixtureHelper
     /**
      * Inserts all fixtures for a connection and provides friendly errors for bad data.
      *
-     * @param \Cake\Datasource\ConnectionInterface $connection Fixture connection
+     * @param uim.cake.Datasource\ConnectionInterface $connection Fixture connection
      * @param array<\Cake\Datasource\FixtureInterface> $fixtures Connection fixtures
      * @return void
      */
@@ -206,7 +206,7 @@ class FixtureHelper
     /**
      * Truncates all fixtures for a connection and provides friendly errors for bad data.
      *
-     * @param \Cake\Datasource\ConnectionInterface $connection Fixture connection
+     * @param uim.cake.Datasource\ConnectionInterface $connection Fixture connection
      * @param array<\Cake\Datasource\FixtureInterface> $fixtures Connection fixtures
      * @return void
      */
@@ -230,7 +230,7 @@ class FixtureHelper
     /**
      * Sort fixtures with foreign constraints last if possible, otherwise returns null.
      *
-     * @param \Cake\Database\Connection $connection Database connection
+     * @param uim.cake.Database\Connection $connection Database connection
      * @param array<\Cake\Datasource\FixtureInterface> $fixtures Database fixtures
      * @return array|null
      */
@@ -263,8 +263,8 @@ class FixtureHelper
     /**
      * Gets array of foreign references for fixtures table.
      *
-     * @param \Cake\Database\Connection $connection Database connection
-     * @param \Cake\Datasource\FixtureInterface $fixture Database fixture
+     * @param uim.cake.Database\Connection $connection Database connection
+     * @param uim.cake.Datasource\FixtureInterface $fixture Database fixture
      * @return array<string>
      */
     protected function getForeignReferences(Connection $connection, FixtureInterface $fixture): array

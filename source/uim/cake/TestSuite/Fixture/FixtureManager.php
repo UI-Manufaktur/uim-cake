@@ -82,7 +82,7 @@ class FixtureManager
     }
 
     /**
-     * @param \Cake\TestSuite\TestCase $test Test case
+     * @param uim.cake.TestSuite\TestCase $test Test case
      * @return void
      */
     function fixturize(TestCase $test): void
@@ -167,7 +167,7 @@ class FixtureManager
     /**
      * Looks for fixture files and instantiates the classes accordingly
      *
-     * @param \Cake\TestSuite\TestCase $test The test suite to load fixtures for.
+     * @param uim.cake.TestSuite\TestCase $test The test suite to load fixtures for.
      * @return void
      * @throws \UnexpectedValueException when a referenced fixture does not exist.
      */
@@ -238,8 +238,8 @@ class FixtureManager
     /**
      * Runs the drop and create commands on the fixtures if necessary.
      *
-     * @param \Cake\Datasource\FixtureInterface $fixture the fixture object to create
-     * @param \Cake\Datasource\ConnectionInterface $db The Connection object instance to use
+     * @param uim.cake.Datasource\FixtureInterface $fixture the fixture object to create
+     * @param uim.cake.Datasource\ConnectionInterface $db The Connection object instance to use
      * @param array<string> $sources The existing tables in the datasource.
      * @param bool $drop whether drop the fixture if it is already created or not
      * @return void
@@ -274,7 +274,7 @@ class FixtureManager
     }
 
     /**
-     * @param \Cake\TestSuite\TestCase $test Test case
+     * @param uim.cake.TestSuite\TestCase $test Test case
      * @return void
      * @throws \RuntimeException
      */
@@ -417,7 +417,7 @@ class FixtureManager
     /**
      * Truncates the fixtures tables
      *
-     * @param \Cake\TestSuite\TestCase $test The test to inspect for fixture unloading.
+     * @param uim.cake.TestSuite\TestCase $test The test to inspect for fixture unloading.
      * @return void
      */
     function unload(TestCase $test): void
@@ -443,7 +443,7 @@ class FixtureManager
 
     /**
      * @param string $name Name
-     * @param \Cake\Datasource\ConnectionInterface|null $connection Connection
+     * @param uim.cake.Datasource\ConnectionInterface|null $connection Connection
      * @param bool $dropTables Drop all tables prior to loading schema files
      * @return void
      * @throws \UnexpectedValueException
@@ -502,7 +502,7 @@ class FixtureManager
      * Check whether a fixture has been inserted in a given connection name.
      *
      * @param string $connection The connection name.
-     * @param \Cake\Datasource\FixtureInterface $fixture The fixture to check.
+     * @param uim.cake.Datasource\FixtureInterface $fixture The fixture to check.
      * @return bool
      */
     function isFixtureSetup(string $connection, FixtureInterface $fixture): bool

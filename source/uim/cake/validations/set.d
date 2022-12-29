@@ -114,7 +114,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
      * ```
      *
      * @param string myName The name under which the rule should be set
-     * @param \Cake\Validation\ValidationRule|array $rule The validation rule to be set
+     * @param uim.cake.Validation\ValidationRule|array $rule The validation rule to be set
      * @return this
      */
     function add(string myName, $rule) {
@@ -170,7 +170,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
      * Sets or replace a validation rule
      *
      * @param string index name of the rule
-     * @param \Cake\Validation\ValidationRule|array $rule Rule to add to $index
+     * @param uim.cake.Validation\ValidationRule|array $rule Rule to add to $index
      */
     void offsetSet($index, $rule) {
         this.add($index, $rule);

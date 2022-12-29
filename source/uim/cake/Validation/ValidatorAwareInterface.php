@@ -30,7 +30,7 @@ interface ValidatorAwareInterface
      * This method stores a custom validator under the given name.
      *
      * @param string $name The name of a validator to be set.
-     * @param \Cake\Validation\Validator $validator Validator object to be set.
+     * @param uim.cake.Validation\Validator $validator Validator object to be set.
      * @return this
      */
     function setValidator(string $name, Validator $validator);

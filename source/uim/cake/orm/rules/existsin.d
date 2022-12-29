@@ -24,7 +24,7 @@ class ExistsIn {
      * Set to true to accept composite foreign keys where one or more nullable columns are null.
      *
      * @param array<string>|string myFields The field or fields to check existence as primary key.
-     * @param \Cake\ORM\Table|\Cake\ORM\Association|string myRepository The repository where the
+     * @param uim.cake.ORM\Table|\Cake\ORM\Association|string myRepository The repository where the
      * field will be looked for, or the association name for the repository.
      * @param array<string, mixed> myOptions The options that modify the rule"s behavior.
      *     Options "allowNullableNulls" will make the rule pass if given foreign keys are set to `null`.
@@ -41,7 +41,7 @@ class ExistsIn {
     /**
      * Performs the existence check
      *
-     * @param \Cake\Datasource\IEntity $entity The entity from where to extract the fields
+     * @param uim.cake.Datasource\IEntity $entity The entity from where to extract the fields
      * @param array<string, mixed> myOptions Options passed to the check,
      * where the `repository` key is required.
      * @throws \RuntimeException When the rule refers to an undefined association.
@@ -115,8 +115,8 @@ class ExistsIn {
     /**
      * Checks whether the given entity fields are nullable and null.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity to check.
-     * @param \Cake\ORM\Table $source The table to use schema from.
+     * @param uim.cake.Datasource\IEntity $entity The entity to check.
+     * @param uim.cake.ORM\Table $source The table to use schema from.
      */
     protected bool _fieldsAreNull(IEntity $entity, Table $source) {
         $nulls = 0;

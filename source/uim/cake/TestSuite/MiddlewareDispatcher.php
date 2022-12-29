@@ -42,7 +42,7 @@ class MiddlewareDispatcher
     /**
      * Constructor
      *
-     * @param \Cake\Core\IHttpApplication $app The test case to run.
+     * @param uim.cake.Core\IHttpApplication $app The test case to run.
      */
     public this(IHttpApplication $app) {
         this.app = $app;

@@ -13,7 +13,7 @@ class LinkConstraint
     /**
      * Constructor.
      *
-     * @param \Cake\ORM\Association|string association The alias of the association that should be checked.
+     * @param uim.cake.ORM\Association|string association The alias of the association that should be checked.
      * @param string requiredLinkStatus The link status that is required to be present in order for the check to
      *  succeed.
      */
@@ -43,7 +43,7 @@ class LinkConstraint
      *
      * Performs the actual link check.
      *
-     * @param \Cake\Datasource\IEntity $entity The entity involved in the operation.
+     * @param uim.cake.Datasource\IEntity $entity The entity involved in the operation.
      * @param array<string, mixed> myOptions Options passed from the rules checker.
      * @return bool Whether the check was successful.
      */
@@ -82,7 +82,7 @@ class LinkConstraint
      * Alias fields.
      *
      * @param array<string> myFields The fields that should be aliased.
-     * @param \Cake\ORM\Table $source The object to use for aliasing.
+     * @param uim.cake.ORM\Table $source The object to use for aliasing.
      * @return The aliased fields
      */
     protected string[] _aliasFields(array myFields, Table $source): array
@@ -117,8 +117,8 @@ class LinkConstraint
     /**
      * Count links.
      *
-     * @param \Cake\ORM\Association $association The association for which to count links.
-     * @param \Cake\Datasource\IEntity $entity The entity involved in the operation.
+     * @param uim.cake.ORM\Association $association The association for which to count links.
+     * @param uim.cake.Datasource\IEntity $entity The entity involved in the operation.
      * @return int The number of links.
      */
     protected int _countLinks(Association $association, IEntity $entity) {

@@ -44,7 +44,7 @@ class CookieEncryptedEquals : CookieEquals
     /**
      * Constructor.
      *
-     * @param \Cake\Http\Response|null $response A response instance.
+     * @param uim.cake.Http\Response|null $response A response instance.
      * @param string $cookieName Cookie name
      * @param string $mode Mode
      * @param string $key Key

@@ -36,7 +36,7 @@ class CookieEquals : ResponseBase
     /**
      * Constructor.
      *
-     * @param \Cake\Http\Response|null $response A response instance.
+     * @param uim.cake.Http\Response|null $response A response instance.
      * @param string $cookieName Cookie name
      */
     public this(?Response $response, string $cookieName) {

@@ -90,7 +90,7 @@ class RouteBuilder {
      * - `namePrefix` - The prefix to prepend to all route names.
      * - `middleware` - The names of the middleware routes should have applied.
      *
-     * @param \Cake\Routing\RouteCollection myCollection The route collection to append routes into.
+     * @param uim.cake.Routing\RouteCollection myCollection The route collection to append routes into.
      * @param string myPath The path prefix the scope is for.
      * @param array myParams The scope"s routing parameters.
      * @param array<string, mixed> myOptions Options list.
@@ -607,7 +607,7 @@ class RouteBuilder {
      *
      * The above route will only be matched for GET requests. POST requests will fail to match this route.
      *
-     * @param \Cake\Routing\Route\Route|string route A string describing the template of the route
+     * @param uim.cake.Routing\Route\Route|string route A string describing the template of the route
      * @param array|string defaults An array describing the default route parameters.
      *   These parameters will be used by default and can supply routing parameters that are not dynamic. See above.
      * @param array<string, mixed> myOptions An array matching the named elements in the route to regular expressions which that
@@ -658,7 +658,7 @@ class RouteBuilder {
     /**
      * Create a route object, or return the provided object.
      *
-     * @param \Cake\Routing\Route\Route|string route The route template or route object.
+     * @param uim.cake.Routing\Route\Route|string route The route template or route object.
      * @param array $defaults Default parameters.
      * @param array<string, mixed> myOptions Additional options parameters.
      * @return \Cake\Routing\Route\Route

@@ -49,7 +49,7 @@ class FlashParamEquals : Constraint
     /**
      * Constructor
      *
-     * @param \Cake\Http\Session|null $session Session
+     * @param uim.cake.Http\Session|null $session Session
      * @param string $key Flash key
      * @param string $param Param to check
      * @param int|null $at Expected index

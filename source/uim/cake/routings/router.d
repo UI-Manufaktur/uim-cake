@@ -157,7 +157,7 @@ class Router
      *
      * Compatibility proxy to \Cake\Routing\RouteBuilder::connect() in the `/` scope.
      *
-     * @param \Cake\Routing\Route\Route|string route A string describing the template of the route
+     * @param uim.cake.Routing\Route\Route|string route A string describing the template of the route
      * @param array|string defaults An array describing the default route parameters.
      *   These parameters will be used by default and can supply routing parameters that are not dynamic. See above.
      * @param array<string, mixed> myOptions An array matching the named elements in the route to regular expressions which that
@@ -184,7 +184,7 @@ class Router
     /**
      * Get the routing parameters for the request is possible.
      *
-     * @param \Cake\Http\ServerRequest myRequest The request to parse request data from.
+     * @param uim.cake.Http\ServerRequest myRequest The request to parse request data from.
      * @return array Parsed elements from URL.
      * @throws \Cake\Routing\Exception\MissingRouteException When a route cannot be handled
      */
@@ -196,7 +196,7 @@ class Router
     /**
      * Set current request instance.
      *
-     * @param \Cake\Http\ServerRequest myRequest request object.
+     * @param uim.cake.Http\ServerRequest myRequest request object.
      * @return void
      */
     static void setRequest(ServerRequest myRequest) {
@@ -590,7 +590,7 @@ class Router
      * keys like "pass", "_matchedRoute" etc. those keys need to be specially
      * handled in order to reverse a params array into a string URL.
      *
-     * @param \Cake\Http\ServerRequest|array myParams The params array or
+     * @param uim.cake.Http\ServerRequest|array myParams The params array or
      *     Cake\Http\ServerRequest object that needs to be reversed.
      * @return array The URL array ready to be used for redirect or HTML link.
      */
@@ -620,7 +620,7 @@ class Router
      * keys like "pass", "_matchedRoute" etc. those keys need to be specially
      * handled in order to reverse a params array into a string URL.
      *
-     * @param \Cake\Http\ServerRequest|array myParams The params array or
+     * @param uim.cake.Http\ServerRequest|array myParams The params array or
      *     Cake\Http\ServerRequest object that needs to be reversed.
      * @param bool $full Set to true to include the full URL including the
      *     protocol when reversing the URL.
@@ -882,7 +882,7 @@ class Router
     /**
      * Set the RouteCollection inside the Router
      *
-     * @param \Cake\Routing\RouteCollection $routeCollection route collection
+     * @param uim.cake.Routing\RouteCollection $routeCollection route collection
      * @return void
      */
     static void setRouteCollection(RouteCollection $routeCollection) {

@@ -42,7 +42,7 @@ class FixtureInjector : TestListener
     /**
      * Constructor. Save internally the reference to the passed fixture manager
      *
-     * @param \Cake\TestSuite\Fixture\FixtureManager $manager The fixture manager
+     * @param uim.cake.TestSuite\Fixture\FixtureManager $manager The fixture manager
      */
     public this(FixtureManager $manager) {
         if (isset($_SERVER["argv"])) {

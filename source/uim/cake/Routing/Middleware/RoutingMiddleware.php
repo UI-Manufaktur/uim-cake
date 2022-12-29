@@ -58,7 +58,7 @@ class RoutingMiddleware : IMiddleware
     /**
      * Constructor
      *
-     * @param \Cake\Routing\IRoutingApplication $app The application instance that routes are defined on.
+     * @param uim.cake.Routing\IRoutingApplication $app The application instance that routes are defined on.
      * @param string|null $cacheConfig The cache config name to use or null to disable routes cache
      */
     public this(IRoutingApplication $app, ?string $cacheConfig = null) {
