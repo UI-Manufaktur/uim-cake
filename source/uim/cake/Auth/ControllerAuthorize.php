@@ -32,14 +32,14 @@ import uim.cake.https.ServerRequest;
  * The above is simple implementation that would only authorize users of the
  * "admin" role to access admin routing.
  *
- * @see uim.cake.Controller\Component\AuthComponent::$authenticate
+ * @see uim.cake.controllers.Component\AuthComponent::$authenticate
  */
 class ControllerAuthorize : BaseAuthorize
 {
     /**
      * Controller for the request.
      *
-     * @var uim.cake.Controller\Controller
+     * @var uim.cake.controllers.Controller
      */
     protected $_Controller;
 
@@ -53,7 +53,7 @@ class ControllerAuthorize : BaseAuthorize
      * Get/set the controller this authorize object will be working with. Also
      * checks that isAuthorized is implemented.
      *
-     * @param \Cake\Controller\Controller|null $controller null to get, a controller to set.
+     * @param uim.cake.Controller\Controller|null $controller null to get, a controller to set.
      * @return \Cake\Controller\Controller
      */
     function controller(?Controller $controller = null): Controller
@@ -69,7 +69,7 @@ class ControllerAuthorize : BaseAuthorize
      * Checks user authorization using a controller callback.
      *
      * @param \ArrayAccess|array $user Active user data
-     * @param \Cake\Http\ServerRequest $request Request instance.
+     * @param uim.cake.Http\ServerRequest $request Request instance.
      * @throws \Cake\Core\Exception\CakeException If controller does not have method `isAuthorized()`.
      * @return bool
      */

@@ -66,8 +66,8 @@ class ServerCommand : Command
      * Starts up the Command and displays the welcome message.
      * Allows for checking and configuring prior to command or main execution
      *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\Arguments $args The command arguments.
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @return void
      * @link https://book.cakephp.org/4/en/console-and-shells.html#hook-methods
      */
@@ -112,8 +112,8 @@ class ServerCommand : Command
     /**
      * Execute.
      *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\Arguments $args The command arguments.
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
@@ -145,7 +145,7 @@ class ServerCommand : Command
     /**
      * Hook method for defining this command"s option parser.
      *
-     * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
+     * @param uim.cake.Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser

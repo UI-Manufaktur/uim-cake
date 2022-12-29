@@ -35,8 +35,8 @@ class PluginAssetsSymlinkCommand : Command
      * fallbacks to copying the assets. For vendor namespaced plugin, parent folder
      * for vendor name are created if required.
      *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\Arguments $args The command arguments.
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
@@ -54,7 +54,7 @@ class PluginAssetsSymlinkCommand : Command
     /**
      * Get the option parser.
      *
-     * @param \Cake\Console\ConsoleOptionParser $parser The option parser to update
+     * @param uim.cake.Console\ConsoleOptionParser $parser The option parser to update
      * @return \Cake\Console\ConsoleOptionParser
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser

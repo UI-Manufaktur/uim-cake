@@ -7,7 +7,7 @@
  * @since         3.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Auth\Storage;
+module uim.cake.auths.Storage;
 
 import uim.cake.cores.InstanceConfigTrait;
 import uim.cake.https.Response;
@@ -55,8 +55,8 @@ class SessionStorage : IStorage
     /**
      * Constructor.
      *
-     * @param \Cake\Http\ServerRequest $request Request instance.
-     * @param \Cake\Http\Response $response Response instance.
+     * @param uim.cake.Http\ServerRequest $request Request instance.
+     * @param uim.cake.Http\Response $response Response instance.
      * @param array<string, mixed> $config Configuration list.
      */
     public this(ServerRequest $request, Response $response, array $config = []) {

@@ -16,7 +16,7 @@ import uim.cake.https.ServerRequest;
 /**
  * Abstract base authorization adapter for AuthComponent.
  *
- * @see uim.cake.Controller\Component\AuthComponent::$authenticate
+ * @see uim.cake.controllers.Component\AuthComponent::$authenticate
  */
 abstract class BaseAuthorize
 {
@@ -25,7 +25,7 @@ abstract class BaseAuthorize
     /**
      * ComponentRegistry instance for getting more components.
      *
-     * @var uim.cake.Controller\ComponentRegistry
+     * @var uim.cake.controllers.ComponentRegistry
      */
     protected $_registry;
 
@@ -39,7 +39,7 @@ abstract class BaseAuthorize
     /**
      * Constructor
      *
-     * @param \Cake\Controller\ComponentRegistry $registry The controller for this request.
+     * @param uim.cake.Controller\ComponentRegistry $registry The controller for this request.
      * @param array<string, mixed> $config An array of config. This class does not use any config.
      */
     public this(ComponentRegistry $registry, array $config = []) {
@@ -51,7 +51,7 @@ abstract class BaseAuthorize
      * Checks user authorization.
      *
      * @param \ArrayAccess|array $user Active user data
-     * @param \Cake\Http\ServerRequest $request Request instance.
+     * @param uim.cake.Http\ServerRequest $request Request instance.
      * @return bool
      */
     abstract bool authorize($user, ServerRequest $request);

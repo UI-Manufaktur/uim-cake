@@ -73,7 +73,7 @@ class DigestAuthenticate : BasicAuthenticate
      *    Defaults to `md5($config["realm"])`
      * - `nonceLifetime` The number of seconds that nonces are valid for. Defaults to 300.
      *
-     * @param \Cake\Controller\ComponentRegistry $registry The Component registry
+     * @param uim.cake.Controller\ComponentRegistry $registry The Component registry
      *   used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
@@ -92,7 +92,7 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Get a user based on information in the request. Used by cookie-less auth for stateless clients.
      *
-     * @param \Cake\Http\ServerRequest $request Request object.
+     * @param uim.cake.Http\ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
     function getUser(ServerRequest $request) {
@@ -130,7 +130,7 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Gets the digest headers from the request/environment.
      *
-     * @param \Cake\Http\ServerRequest $request Request object.
+     * @param uim.cake.Http\ServerRequest $request Request object.
      * @return array<string, mixed>|null Array of digest information.
      */
     protected function _getDigest(ServerRequest $request): ?array
@@ -209,7 +209,7 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Generate the login headers
      *
-     * @param \Cake\Http\ServerRequest $request Request object.
+     * @param uim.cake.Http\ServerRequest $request Request object.
      * @return array<string, string> Headers for logging in.
      */
     function loginHeaders(ServerRequest $request): array

@@ -21,8 +21,8 @@ class VersionCommand : Command
     /**
      * Print out the version of CakePHP in use.
      *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\Arguments $args The command arguments.
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @return int
      */
     function execute(Arguments $args, ConsoleIo $io): ?int

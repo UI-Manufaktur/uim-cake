@@ -116,7 +116,7 @@ class I18nExtractCommand : Command
     /**
      * Method to interact with the user and get path selections.
      *
-     * @param \Cake\Console\ConsoleIo $io The io instance.
+     * @param uim.cake.Console\ConsoleIo $io The io instance.
      * @return void
      */
     protected function _getPaths(ConsoleIo $io): void
@@ -159,8 +159,8 @@ class I18nExtractCommand : Command
     /**
      * Execute the command
      *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\Arguments $args The command arguments.
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
     function execute(Arguments $args, ConsoleIo $io): ?int
@@ -299,8 +299,8 @@ class I18nExtractCommand : Command
     /**
      * Extract text
      *
-     * @param \Cake\Console\Arguments $args The Arguments instance
-     * @param \Cake\Console\ConsoleIo $io The io instance
+     * @param uim.cake.Console\Arguments $args The Arguments instance
+     * @param uim.cake.Console\ConsoleIo $io The io instance
      * @return void
      */
     protected function _extract(Arguments $args, ConsoleIo $io): void
@@ -332,7 +332,7 @@ class I18nExtractCommand : Command
     /**
      * Gets the option parser instance and configures it.
      *
-     * @param \Cake\Console\ConsoleOptionParser $parser The parser to configure
+     * @param uim.cake.Console\ConsoleOptionParser $parser The parser to configure
      * @return \Cake\Console\ConsoleOptionParser
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
@@ -387,8 +387,8 @@ class I18nExtractCommand : Command
     /**
      * Extract tokens out of all files to be processed
      *
-     * @param \Cake\Console\Arguments $args The io instance
-     * @param \Cake\Console\ConsoleIo $io The io instance
+     * @param uim.cake.Console\Arguments $args The io instance
+     * @param uim.cake.Console\ConsoleIo $io The io instance
      * @return void
      */
     protected function _extractTokens(Arguments $args, ConsoleIo $io): void
@@ -444,7 +444,7 @@ class I18nExtractCommand : Command
     /**
      * Parse tokens
      *
-     * @param \Cake\Console\ConsoleIo $io The io instance
+     * @param uim.cake.Console\ConsoleIo $io The io instance
      * @param string $functionName Function name that indicates translatable string (e.g: "__")
      * @param array $map Array containing what variables it will find (e.g: domain, singular, plural)
      * @return void
@@ -508,7 +508,7 @@ class I18nExtractCommand : Command
     /**
      * Build the translate template file contents out of obtained strings
      *
-     * @param \Cake\Console\Arguments $args Console arguments
+     * @param uim.cake.Console\Arguments $args Console arguments
      * @return void
      */
     protected function _buildFiles(Arguments $args): void
@@ -589,8 +589,8 @@ class I18nExtractCommand : Command
     /**
      * Write the files that need to be stored
      *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\Arguments $args The command arguments.
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @return void
      */
     protected function _writeFiles(Arguments $args, ConsoleIo $io): void
@@ -761,7 +761,7 @@ class I18nExtractCommand : Command
     /**
      * Indicate an invalid marker on a processed file
      *
-     * @param \Cake\Console\ConsoleIo $io The io instance.
+     * @param uim.cake.Console\ConsoleIo $io The io instance.
      * @param string $file File where invalid marker resides
      * @param int $line Line number
      * @param string $marker Marker found

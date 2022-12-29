@@ -52,14 +52,14 @@ abstract class BaseAuthenticate : IEventListener
     /**
      * A Component registry, used to get more components.
      *
-     * @var uim.cake.Controller\ComponentRegistry
+     * @var uim.cake.controllers.ComponentRegistry
      */
     protected $_registry;
 
     /**
      * Password hasher instance.
      *
-     * @var uim.cake.Auth\AbstractPasswordHasher|null
+     * @var uim.cake.auths.AbstractPasswordHasher|null
      */
     protected $_passwordHasher;
 
@@ -74,7 +74,7 @@ abstract class BaseAuthenticate : IEventListener
     /**
      * Constructor
      *
-     * @param \Cake\Controller\ComponentRegistry $registry The Component registry used on this request.
+     * @param uim.cake.Controller\ComponentRegistry $registry The Component registry used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
     public this(ComponentRegistry $registry, array $config = []) {
@@ -198,8 +198,8 @@ abstract class BaseAuthenticate : IEventListener
     /**
      * Authenticate a user based on the request information.
      *
-     * @param \Cake\Http\ServerRequest $request Request to get authentication information from.
-     * @param \Cake\Http\Response $response A response object that can have headers added.
+     * @param uim.cake.Http\ServerRequest $request Request to get authentication information from.
+     * @param uim.cake.Http\Response $response A response object that can have headers added.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
     abstract function authenticate(ServerRequest $request, Response $response);
@@ -208,7 +208,7 @@ abstract class BaseAuthenticate : IEventListener
      * Get a user based on information in the request. Primarily used by stateless authentication
      * systems like basic and digest auth.
      *
-     * @param \Cake\Http\ServerRequest $request Request object.
+     * @param uim.cake.Http\ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
     function getUser(ServerRequest $request) {
@@ -223,8 +223,8 @@ abstract class BaseAuthenticate : IEventListener
      * - \Cake\Http\Response - A response object, which will cause AuthComponent to
      *   simply return that response.
      *
-     * @param \Cake\Http\ServerRequest $request A request object.
-     * @param \Cake\Http\Response $response A response object.
+     * @param uim.cake.Http\ServerRequest $request A request object.
+     * @param uim.cake.Http\Response $response A response object.
      * @return \Cake\Http\Response|null|void
      */
     function unauthenticated(ServerRequest $request, Response $response) {
