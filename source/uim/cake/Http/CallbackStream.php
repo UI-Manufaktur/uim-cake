@@ -5,8 +5,7 @@
 
 
  * @since         3.3.4
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
+  */
 module uim.cake.Http;
 
 use Laminas\Diactoros\CallbackStream as BaseCallbackStream;
