@@ -45,7 +45,7 @@ interface ILocator: BaseILocator
      *
      * @param string $alias The alias name you want to get.
      * @param array<string, mixed> $options The options you want to build the table with.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      */
     function get(string $alias, array $options = []): Table;
 
@@ -54,7 +54,7 @@ interface ILocator: BaseILocator
      *
      * @param string $alias The alias to set.
      * @param uim.cake.ORM\Table $repository The table to set.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     function set(string $alias, RepositoryInterface $repository): Table;

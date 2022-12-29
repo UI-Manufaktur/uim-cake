@@ -96,7 +96,7 @@ class FixtureManager
     }
 
     /**
-     * @return \Cake\Datasource\FixtureInterface[]
+     * @return uim.cake.Datasource\FixtureInterface[]
      */
     function loaded(): array
     {

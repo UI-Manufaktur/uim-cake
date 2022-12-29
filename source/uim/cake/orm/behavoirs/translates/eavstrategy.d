@@ -322,7 +322,7 @@ class EavStrategy : ITranslateStrategy
      *
      * @param uim.cake.Datasource\IResultSet myResults Results to map.
      * @param string locale Locale string
-     * @return \Cake\Collection\ICollection
+     * @return uim.cake.Collection\ICollection
      */
     protected auto rowMapper(myResults, $locale) {
         return myResults.map(function ($row) use ($locale) {
@@ -364,7 +364,7 @@ class EavStrategy : ITranslateStrategy
      * records into each entity under the `_translations` key.
      *
      * @param uim.cake.Datasource\IResultSet myResults Results to modify.
-     * @return \Cake\Collection\ICollection
+     * @return uim.cake.Collection\ICollection
      */
     ICollection groupTranslations(myResults) {
         return myResults.map(function ($row) {

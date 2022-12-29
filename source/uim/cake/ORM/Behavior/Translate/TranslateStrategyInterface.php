@@ -25,7 +25,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
     /**
      * Return translation table instance.
      *
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      */
     function getTranslationTable(): Table;
 
@@ -73,7 +73,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * into each entity under the `_translations` key
      *
      * @param uim.cake.Datasource\IResultSet $results Results to modify.
-     * @return \Cake\Collection\ICollection
+     * @return uim.cake.Collection\ICollection
      */
     function groupTranslations($results): ICollection;
 

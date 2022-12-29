@@ -146,7 +146,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     /**
      * Get strategy class instance.
      *
-     * @return \Cake\ORM\Behavior\Translate\TranslateStrategyInterface
+     * @return uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface
      * @since 4.0.0
      */
     function getStrategy(): TranslateStrategyInterface
@@ -161,7 +161,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
     /**
      * Create strategy instance.
      *
-     * @return \Cake\ORM\Behavior\Translate\TranslateStrategyInterface
+     * @return uim.cake.ORM\Behavior\Translate\TranslateStrategyInterface
      * @since 4.0.0
      */
     protected function createStrategy() {
@@ -295,7 +295,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *
      * @param uim.cake.ORM\Query $query The original query to modify
      * @param array<string, mixed> $options Options
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     function findTranslations(Query $query, array $options): Query
     {

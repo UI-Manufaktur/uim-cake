@@ -12,7 +12,7 @@ interface ITranslateStrategy : IPropertyMarshal
     /**
      * Return translation table instance.
      *
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      */
     auto getTranslationTable(): Table;
 
@@ -57,7 +57,7 @@ interface ITranslateStrategy : IPropertyMarshal
      * into each entity under the `_translations` key
      *
      * @param uim.cake.Datasource\IResultSet myResults Results to modify.
-     * @return \Cake\Collection\ICollection
+     * @return uim.cake.Collection\ICollection
      */
     ICollection
     /**

@@ -47,7 +47,7 @@ trait LocatorAwareTrait
     /**
      * Gets the table locator.
      *
-     * @return \Cake\ORM\Locator\ILocator
+     * @return uim.cake.ORM\Locator\ILocator
      */
     function getTableLocator(): ILocator
     {
@@ -67,7 +67,7 @@ trait LocatorAwareTrait
      *  If `null` then the value of $defaultTable property is used.
      * @param array<string, mixed> $options The options you want to build the table with.
      *   If a table has already been loaded the registry options will be ignored.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      * @throws \Cake\Core\Exception\CakeException If `$alias` argument and `$defaultTable` property both are `null`.
      * @see uim.cake.ORM\TableLocator::get()
      * @since 4.3.0

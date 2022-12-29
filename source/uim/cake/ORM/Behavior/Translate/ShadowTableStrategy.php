@@ -454,7 +454,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @param uim.cake.Datasource\IResultSet $results Results to map.
      * @param string $locale Locale string
-     * @return \Cake\Collection\ICollection
+     * @return uim.cake.Collection\ICollection
      */
     protected function rowMapper($results, $locale) {
         $allowEmpty = _config["allowEmptyTranslations"];
@@ -517,7 +517,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * records into each entity under the `_translations` key.
      *
      * @param uim.cake.Datasource\IResultSet $results Results to modify.
-     * @return \Cake\Collection\ICollection
+     * @return uim.cake.Collection\ICollection
      */
     function groupTranslations($results): ICollection
     {

@@ -216,7 +216,7 @@ class Router
     /**
      * Get the current request object.
      *
-     * @return \Cake\Http\ServerRequest|null
+     * @return uim.cake.Http\ServerRequest|null
      */
     static auto getRequest(): ?ServerRequest
     {
@@ -709,7 +709,7 @@ class Router
      *
      * @param string myPath The path to set the builder to.
      * @param array<string, mixed> myOptions The options for the builder
-     * @return \Cake\Routing\RouteBuilder
+     * @return uim.cake.Routing\RouteBuilder
      */
     static function createRouteBuilder(string myPath, array myOptions = []): RouteBuilder
     {
@@ -872,7 +872,7 @@ class Router
     /**
      * Get the RouteCollection inside the Router
      *
-     * @return \Cake\Routing\RouteCollection
+     * @return uim.cake.Routing\RouteCollection
      */
     static auto getRouteCollection(): RouteCollection
     {

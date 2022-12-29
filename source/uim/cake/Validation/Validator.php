@@ -278,7 +278,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $name [optional] The fieldname to fetch.
      * @param uim.cake.Validation\ValidationSet|null $set The set of rules for field
-     * @return \Cake\Validation\ValidationSet
+     * @return uim.cake.Validation\ValidationSet
      */
     function field(string $name, ?ValidationSet $set = null): ValidationSet
     {
@@ -411,7 +411,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * Returns the rule set for a field
      *
      * @param string $field name of the field to check
-     * @return \Cake\Validation\ValidationSet
+     * @return uim.cake.Validation\ValidationSet
      */
     function offsetGet($field): ValidationSet
     {

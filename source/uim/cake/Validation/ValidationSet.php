@@ -89,7 +89,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * Gets a rule for a given name if exists
      *
      * @param string $name The name under which the rule is set.
-     * @return \Cake\Validation\ValidationRule|null
+     * @return uim.cake.Validation\ValidationRule|null
      */
     function rule(string $name): ?ValidationRule
     {
@@ -169,7 +169,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * Returns a rule object by its index
      *
      * @param string $index name of the rule
-     * @return \Cake\Validation\ValidationRule
+     * @return uim.cake.Validation\ValidationRule
      */
     function offsetGet($index): ValidationRule
     {

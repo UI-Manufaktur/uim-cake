@@ -32,7 +32,7 @@ trait TranslateStrategyTrait {
     /**
      * Return translation table instance.
      *
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      */
     auto getTranslationTable(): Table
     {

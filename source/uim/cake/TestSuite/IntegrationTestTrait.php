@@ -492,7 +492,7 @@ trait IntegrationTestTrait
     /**
      * Get the correct dispatcher instance.
      *
-     * @return \Cake\TestSuite\MiddlewareDispatcher A dispatcher instance
+     * @return uim.cake.TestSuite\MiddlewareDispatcher A dispatcher instance
      */
     protected function _makeDispatcher(): MiddlewareDispatcher
     {
@@ -1377,7 +1377,7 @@ trait IntegrationTestTrait
     }
 
     /**
-     * @return \Cake\TestSuite\TestSession
+     * @return uim.cake.TestSuite\TestSession
      */
     protected function getSession(): TestSession
     {

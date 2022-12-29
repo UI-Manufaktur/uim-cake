@@ -119,7 +119,7 @@ class TimestampBehavior : Behavior {
      *
      * @param \IDateTime|null $ts Timestamp
      * @param bool $refreshTimestamp If true timestamp is refreshed.
-     * @return \Cake\I18n\FrozenTime
+     * @return uim.cake.I18n\FrozenTime
      */
     function timestamp(?IDateTime $ts = null, bool $refreshTimestamp = false): IDateTime
     {

@@ -91,7 +91,7 @@ class RoutingMiddleware : IMiddleware
     /**
      * Check if route cache is enabled and use the configured Cache to "remember" the route collection
      *
-     * @return \Cake\Routing\RouteCollection
+     * @return uim.cake.Routing\RouteCollection
      */
     protected function buildRouteCollection(): RouteCollection
     {
@@ -119,7 +119,7 @@ class RoutingMiddleware : IMiddleware
     /**
      * Generate the route collection using the builder
      *
-     * @return \Cake\Routing\RouteCollection
+     * @return uim.cake.Routing\RouteCollection
      */
     protected function prepareRouteCollection(): RouteCollection
     {

@@ -24,7 +24,7 @@ trait TranslateTrait
      * it.
      *
      * @param string $language Language to return entity for.
-     * @return \Cake\Datasource\EntityInterface|this
+     * @return uim.cake.Datasource\EntityInterface|this
      */
     function translation(string $language) {
         if ($language == this.get("_locale")) {

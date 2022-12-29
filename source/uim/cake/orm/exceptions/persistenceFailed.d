@@ -50,7 +50,7 @@ class PersistenceFailedException : CakeException
     /**
      * Get the passed in entity
      *
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      */
     auto getEntity(): IEntity
     {

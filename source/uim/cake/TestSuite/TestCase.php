@@ -316,7 +316,7 @@ abstract class TestCase : BaseTestCase
     /**
      * Returns fixture strategy used by these tests.
      *
-     * @return \Cake\TestSuite\Fixture\FixtureStrategyInterface
+     * @return uim.cake.TestSuite\Fixture\FixtureStrategyInterface
      */
     protected function getFixtureStrategy(): FixtureStrategyInterface
     {
@@ -391,7 +391,7 @@ abstract class TestCase : BaseTestCase
      * elements in CakePHP or applications.
      *
      * @param array<string, mixed> $plugins List of Plugins to load.
-     * @return \Cake\Http\BaseApplication
+     * @return uim.cake.Http\BaseApplication
      */
     function loadPlugins(array $plugins = []): BaseApplication
     {
@@ -981,7 +981,7 @@ abstract class TestCase : BaseTestCase
      * @param array<string> $methods The list of methods to mock
      * @param array<string, mixed> $options The config data for the mock"s constructor.
      * @throws \Cake\ORM\Exception\MissingTableClassException
-     * @return \Cake\ORM\Table|\PHPUnit\Framework\MockObject\MockObject
+     * @return uim.cake.ORM\Table|\PHPUnit\Framework\MockObject\MockObject
      */
     function getMockForModel(string $alias, array $methods = [], array $options = []) {
         $className = _getTableClassName($alias, $options);

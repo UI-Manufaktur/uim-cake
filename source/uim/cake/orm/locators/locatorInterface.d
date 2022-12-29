@@ -36,7 +36,7 @@ interface ILocator : BaseILocator
      *
      * @param string myAlias The alias name you want to get.
      * @param array<string, mixed> myOptions The options you want to build the table with.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      */
     auto get(string myAlias, array myOptions = []): Table;
 
@@ -45,7 +45,7 @@ interface ILocator : BaseILocator
      *
      * @param string myAlias The alias to set.
      * @param uim.cake.ORM\Table myRepository The table to set.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     auto set(string myAlias, IRepository myRepository): Table;

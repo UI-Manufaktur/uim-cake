@@ -342,7 +342,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.ORM\Query myQuery The constructed query to modify
      * @param array<string, mixed> myOptions the list of options for the query
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      * @throws \InvalidArgumentException If the "for" key is missing in options
      */
     function findPath(Query myQuery, array myOptions): Query
@@ -405,7 +405,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.ORM\Query myQuery Query.
      * @param array<string, mixed> myOptions Array of options as described above
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      * @throws \InvalidArgumentException When the "for" key is not passed in myOptions
      */
     function findChildren(Query myQuery, array myOptions): Query
@@ -457,7 +457,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.ORM\Query myQuery Query.
      * @param array<string, mixed> myOptions Array of options as described above.
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     function findTreeList(Query myQuery, array myOptions): Query
     {
@@ -487,7 +487,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.ORM\Query myQuery The query object to format.
      * @param array<string, mixed> myOptions Array of options as described above.
-     * @return \Cake\ORM\Query Augmented query.
+     * @return uim.cake.ORM\Query Augmented query.
      */
     function formatTreeList(Query myQuery, array myOptions = []): Query
     {
@@ -513,7 +513,7 @@ class TreeBehavior : Behavior
      * without moving its children with it.
      *
      * @param uim.cake.Datasource\IEntity myNode The node to remove from the tree
-     * @return \Cake\Datasource\IEntity|false the node after being removed from the tree or
+     * @return uim.cake.Datasource\IEntity|false the node after being removed from the tree or
      * false on error
      */
     function removeFromTree(IEntity myNode) {
@@ -528,7 +528,7 @@ class TreeBehavior : Behavior
      * Helper function containing the actual code for removeFromTree
      *
      * @param uim.cake.Datasource\IEntity myNode The node to remove from the tree
-     * @return \Cake\Datasource\IEntity|false the node after being removed from the tree or
+     * @return uim.cake.Datasource\IEntity|false the node after being removed from the tree or
      * false on error
      */
     protected auto _removeFromTree(IEntity myNode) {
@@ -573,7 +573,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
-     * @return \Cake\Datasource\IEntity|false myNode The node after being moved or false if `$number` is < 1
+     * @return uim.cake.Datasource\IEntity|false myNode The node after being moved or false if `$number` is < 1
      */
     function moveUp(IEntity myNode, $number = 1) {
         if ($number < 1) {
@@ -592,7 +592,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
-     * @return \Cake\Datasource\IEntity myNode The node after being moved
+     * @return uim.cake.Datasource\IEntity myNode The node after being moved
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
      */
     protected auto _moveUp(IEntity myNode, $number): IEntity
@@ -664,7 +664,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node or true to move to last position
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
-     * @return \Cake\Datasource\IEntity|false the entity after being moved or false if `$number` is < 1
+     * @return uim.cake.Datasource\IEntity|false the entity after being moved or false if `$number` is < 1
      */
     function moveDown(IEntity myNode, $number = 1) {
         if ($number < 1) {
@@ -683,7 +683,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node, or true to move to last position
-     * @return \Cake\Datasource\IEntity myNode The node after being moved
+     * @return uim.cake.Datasource\IEntity myNode The node after being moved
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
      */
     protected auto _moveDown(IEntity myNode, $number): IEntity
@@ -750,7 +750,7 @@ class TreeBehavior : Behavior
      * Returns a single node from the tree from its primary key
      *
      * @param mixed $id Record id.
-     * @return \Cake\Datasource\IEntity
+     * @return uim.cake.Datasource\IEntity
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
      * @psalm-suppress InvalidReturnType
      */
@@ -891,7 +891,7 @@ class TreeBehavior : Behavior
      * in the tree configuration.
      *
      * @param uim.cake.ORM\Query myQuery the Query to modify
-     * @return \Cake\ORM\Query
+     * @return uim.cake.ORM\Query
      */
     protected auto _scope(Query myQuery): Query
     {

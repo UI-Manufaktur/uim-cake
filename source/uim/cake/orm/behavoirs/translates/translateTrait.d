@@ -12,7 +12,7 @@ trait TranslateTrait {
      * it.
      *
      * @param string myLanguage Language to return entity for.
-     * @return \Cake\Datasource\IEntity|this
+     * @return uim.cake.Datasource\IEntity|this
      */
     function translation(string myLanguage) {
         if (myLanguage == this.get("_locale")) {

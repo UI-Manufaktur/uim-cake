@@ -60,7 +60,7 @@ class PersistenceFailedException : CakeException
     /**
      * Get the passed in entity
      *
-     * @return \Cake\Datasource\EntityInterface
+     * @return uim.cake.Datasource\EntityInterface
      */
     function getEntity(): EntityInterface
     {

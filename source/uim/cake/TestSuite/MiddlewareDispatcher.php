@@ -97,7 +97,7 @@ class MiddlewareDispatcher
      * Create a PSR7 request from the request spec.
      *
      * @param array<string, mixed> $spec The request spec.
-     * @return \Cake\Http\ServerRequest
+     * @return uim.cake.Http\ServerRequest
      */
     protected function _createRequest(array $spec): ServerRequest
     {

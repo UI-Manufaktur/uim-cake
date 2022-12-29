@@ -134,7 +134,7 @@ class AssetMiddleware : IMiddleware
      *
      * @param \Psr\Http\Message\IServerRequest $request The request object to use.
      * @param \SplFileInfo $file The file wrapper for the file.
-     * @return \Cake\Http\Response The response with the file & headers.
+     * @return uim.cake.Http\Response The response with the file & headers.
      */
     protected function deliverAsset(IServerRequest $request, SplFileInfo $file): Response
     {

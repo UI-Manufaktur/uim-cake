@@ -150,7 +150,7 @@ class Security
      * You can use this method to forcibly decide between openssl/custom implementations.
      *
      * @param uim.cake.Utility\Crypto\OpenSsl|null $instance The crypto instance to use.
-     * @return \Cake\Utility\Crypto\OpenSsl Crypto instance.
+     * @return uim.cake.Utility\Crypto\OpenSsl Crypto instance.
      * @throws \InvalidArgumentException When no compatible crypto extension is available.
      * @psalm-suppress MoreSpecificReturnType
      */

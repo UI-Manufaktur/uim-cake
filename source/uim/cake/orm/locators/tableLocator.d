@@ -165,7 +165,7 @@ class TableLocator : AbstractLocator : ILocator
      * @param string myAlias The alias name you want to get. Should be in CamelCase format.
      * @param array<string, mixed> myOptions The options you want to build the table with.
      *   If a table has already been loaded the options will be ignored.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      * @throws \RuntimeException When you try to configure an alias that already exists.
      */
     auto get(string myAlias, array myOptions = []): Table
@@ -266,7 +266,7 @@ class TableLocator : AbstractLocator : ILocator
      * Wrapper for creating table instances
      *
      * @param array<string, mixed> myOptions The alias to check for.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      */
     protected auto _create(array myOptions): Table
     {
@@ -279,7 +279,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @param string myAlias The alias to set.
      * @param uim.cake.ORM\Table myRepository The Table to set.
-     * @return \Cake\ORM\Table
+     * @return uim.cake.ORM\Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     auto set(string myAlias, IRepository myRepository): Table
