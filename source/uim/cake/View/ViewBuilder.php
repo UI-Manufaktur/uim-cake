@@ -573,7 +573,7 @@ class ViewBuilder : JsonSerializable, Serializable
         ];
         $data += _options;
 
-        /** @var \Cake\View\View */
+        /** @var uim.cake.View\View */
         return new $className($request, $response, $events, $data);
     }
 

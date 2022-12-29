@@ -27,7 +27,7 @@ use PHPUnit\Framework\Constraint\Constraint;
 class FlashParamEquals : Constraint
 {
     /**
-     * @var \Cake\Http\Session
+     * @var uim.cake.Http\Session
      */
     protected $session;
 

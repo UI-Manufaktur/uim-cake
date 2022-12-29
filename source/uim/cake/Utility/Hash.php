@@ -152,7 +152,7 @@ class Hash
 
             foreach ($context[$_key] as $item) {
                 if (is_object($item) && method_exists($item, "toArray")) {
-                    /** @var \Cake\Datasource\EntityInterface $item */
+                    /** @var uim.cake.datasources.EntityInterface $item */
                     $item = $item.toArray();
                 }
                 foreach ((array)$item as $k: $v) {

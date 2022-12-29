@@ -28,7 +28,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * View object to use when making helpers.
      *
-     * @var \Cake\View\View
+     * @var uim.cake.View\View
      */
     protected $_View;
 
@@ -140,7 +140,7 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
      */
     protected function _create($class, string $alias, array $config): Helper
     {
-        /** @var \Cake\View\Helper $instance */
+        /** @var uim.cake.View\Helper $instance */
         $instance = new $class(_View, $config);
 
         $enable = $config["enabled"] ?? true;

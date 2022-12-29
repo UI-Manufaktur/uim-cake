@@ -17,7 +17,7 @@ class EventFiredWith : Constraint
     /**
      * Array of fired events
      *
-     * @var \Cake\Event\EventManager
+     * @var uim.cake.Event\EventManager
      */
     protected $_eventManager;
 

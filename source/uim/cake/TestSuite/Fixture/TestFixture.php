@@ -18,9 +18,9 @@ import uim.cake.cores.exceptions.CakeException;
 import uim.cake.databases.ConstraintsInterface;
 import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;
-import uim.cake.Datasource\ConnectionInterface;
-import uim.cake.Datasource\ConnectionManager;
-import uim.cake.Datasource\FixtureInterface;
+import uim.cake.datasources.ConnectionInterface;
+import uim.cake.datasources.ConnectionManager;
+import uim.cake.datasources.FixtureInterface;
 import uim.cake.Log\Log;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.utilities.Inflector;
@@ -81,7 +81,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     /**
      * The schema for this fixture.
      *
-     * @var \Cake\Database\Schema\TableSchemaInterface&\Cake\Database\Schema\SqlGeneratorInterface
+     * @var uim.cake.Database\Schema\TableSchemaInterface&\Cake\Database\Schema\SqlGeneratorInterface
      * @psalm-suppress PropertyNotSetInConstructor
      */
     protected $_schema;
@@ -243,7 +243,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
             $name = Inflector::camelize(this.table);
             $ormTable = this.fetchTable($name, ["connection": $db]);
 
-            /** @var \Cake\Database\Schema\TableSchema $schema */
+            /** @var uim.cake.Database\Schema\TableSchema $schema */
             $schema = $ormTable.getSchema();
             _schema = $schema;
 

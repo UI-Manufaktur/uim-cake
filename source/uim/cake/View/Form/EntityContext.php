@@ -11,8 +11,8 @@ module uim.cake.View\Form;
 
 use ArrayAccess;
 import uim.cake.Collection\Collection;
-import uim.cake.Datasource\EntityInterface;
-import uim.cake.Datasource\InvalidPropertyInterface;
+import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.InvalidPropertyInterface;
 import uim.cake.orm.Entity;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.orm.Table;
@@ -113,9 +113,9 @@ class EntityContext : ContextInterface
      */
     protected function _prepare(): void
     {
-        /** @var \Cake\ORM\Table|null $table */
+        /** @var uim.cake.ORM\Table|null $table */
         $table = _context["table"];
-        /** @var \Cake\Datasource\EntityInterface|iterable<\Cake\Datasource\EntityInterface|array> $entity */
+        /** @var uim.cake.datasources.EntityInterface|iterable<\Cake\Datasource\EntityInterface|array> $entity */
         $entity = _context["entity"];
 
         _isCollection = is_iterable($entity);

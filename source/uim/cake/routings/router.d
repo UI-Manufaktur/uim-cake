@@ -64,7 +64,7 @@ class Router
     /**
      * The route collection routes would be added to.
      *
-     * @var \Cake\Routing\RouteCollection
+     * @var uim.cake.Routing\RouteCollection
      */
     protected static $_collection;
 
@@ -92,7 +92,7 @@ class Router
     /**
      * Maintains the request object reference.
      *
-     * @var \Cake\Http\ServerRequest
+     * @var uim.cake.Http\ServerRequest
      */
     protected static $_request;
 
@@ -176,7 +176,7 @@ class Router
         );
 
         static::scope("/", void ($routes) use ($route, $defaults, myOptions) {
-            /** @var \Cake\Routing\RouteBuilder $routes */
+            /** @var uim.cake.Routing\RouteBuilder $routes */
             $routes.connect($route, $defaults, myOptions);
         });
     }

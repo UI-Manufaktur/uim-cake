@@ -35,7 +35,7 @@ class MiddlewareDispatcher
     /**
      * The application that is being dispatched.
      *
-     * @var \Cake\Core\IHttpApplication
+     * @var uim.cake.Core\IHttpApplication
      */
     protected $app;
 

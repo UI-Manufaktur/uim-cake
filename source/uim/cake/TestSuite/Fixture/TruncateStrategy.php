@@ -15,7 +15,7 @@ module uim.cake.TestSuite\Fixture;
 class TruncateStrategy : FixtureStrategyInterface
 {
     /**
-     * @var \Cake\TestSuite\Fixture\FixtureHelper
+     * @var uim.cake.TestSuite\Fixture\FixtureHelper
      */
     protected $helper;
 

@@ -27,7 +27,7 @@ class CookieEncryptedEquals : CookieEquals
     use CookieCryptTrait;
 
     /**
-     * @var \Cake\Http\Response
+     * @var uim.cake.Http\Response
      */
     protected $response;
 

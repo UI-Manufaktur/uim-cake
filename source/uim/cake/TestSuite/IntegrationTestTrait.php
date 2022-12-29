@@ -116,7 +116,7 @@ trait IntegrationTestTrait
     /**
      * The controller used in the last request.
      *
-     * @var \Cake\Controller\Controller|null
+     * @var uim.cake.Controller\Controller|null
      */
     protected $_controller;
 
@@ -137,7 +137,7 @@ trait IntegrationTestTrait
     /**
      * The session instance from the last request
      *
-     * @var \Cake\Http\Session
+     * @var uim.cake.Http\Session
      */
     protected $_requestSession;
 
@@ -497,7 +497,7 @@ trait IntegrationTestTrait
     protected function _makeDispatcher(): MiddlewareDispatcher
     {
         EventManager::instance().on("Controller.initialize", [this, "controllerSpy"]);
-        /** @var \Cake\Core\IHttpApplication $app */
+        /** @var uim.cake.Core\IHttpApplication $app */
         $app = this.createApp();
 
         return new MiddlewareDispatcher($app);
@@ -513,7 +513,7 @@ trait IntegrationTestTrait
     function controllerSpy(IEvent $event, ?Controller $controller = null): void
     {
         if (!$controller) {
-            /** @var \Cake\Controller\Controller $controller */
+            /** @var uim.cake.Controller\Controller $controller */
             $controller = $event.getSubject();
         }
         _controller = $controller;
@@ -555,7 +555,7 @@ trait IntegrationTestTrait
         if (empty($class) || !class_exists($class)) {
             $class = WebExceptionRenderer::class;
         }
-        /** @var \Cake\Error\Renderer\WebExceptionRenderer $instance */
+        /** @var uim.cake.Error\Renderer\WebExceptionRenderer $instance */
         $instance = new $class($exception);
         _response = $instance.render();
     }

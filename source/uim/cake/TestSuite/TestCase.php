@@ -17,7 +17,7 @@ module uim.cake.TestSuite;
 import uim.cake.cores.App;
 import uim.cake.cores.Configure;
 import uim.cake.cores.Plugin;
-import uim.cake.Datasource\ConnectionManager;
+import uim.cake.datasources.ConnectionManager;
 import uim.cake.events.EventManager;
 import uim.cake.https.BaseApplication;
 import uim.cake.orm.Entity;
@@ -49,7 +49,7 @@ abstract class TestCase : BaseTestCase
     /**
      * The class responsible for managing the creation, loading and removing of fixtures
      *
-     * @var \Cake\TestSuite\Fixture\FixtureManager|null
+     * @var uim.cake.TestSuite\Fixture\FixtureManager|null
      */
     public static $fixtureManager;
 
@@ -83,7 +83,7 @@ abstract class TestCase : BaseTestCase
     public $dropTables = false;
 
     /**
-     * @var \Cake\TestSuite\Fixture\FixtureStrategyInterface|null
+     * @var uim.cake.TestSuite\Fixture\FixtureStrategyInterface|null
      */
     protected $fixtureStrategy = null;
 
@@ -375,7 +375,7 @@ abstract class TestCase : BaseTestCase
         $className = Configure::read("App.namespace") . "\\Application";
         try {
             $reflect = new ReflectionClass($className);
-            /** @var \Cake\Routing\IRoutingApplication $app */
+            /** @var uim.cake.Routing\IRoutingApplication $app */
             $app = $reflect.newInstanceArgs($appArgs);
         } catch (ReflectionException $e) {
             throw new LogicException(sprintf("Cannot load "%s" to load routes from.", $className), 0, $e);
@@ -395,7 +395,7 @@ abstract class TestCase : BaseTestCase
      */
     function loadPlugins(array $plugins = []): BaseApplication
     {
-        /** @var \Cake\Http\BaseApplication $app */
+        /** @var uim.cake.Http\BaseApplication $app */
         $app = this.getMockForAbstractClass(
             BaseApplication::class,
             [""]
@@ -1012,7 +1012,7 @@ abstract class TestCase : BaseTestCase
             $builder.addMethods($nonExistingMethods);
         }
 
-        /** @var \Cake\ORM\Table $mock */
+        /** @var uim.cake.ORM\Table $mock */
         $mock = $builder.getMock();
 
         if (empty($options["entityClass"]) && $mock.getEntityClass() == Entity::class) {

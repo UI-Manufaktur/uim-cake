@@ -2620,7 +2620,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
         }
 
         /**
-         * @var \Cake\Validation\ValidationRule $rule
+         * @var uim.cake.Validation\ValidationRule $rule
          */
         foreach ($rules as $name: $rule) {
             $result = $rule.process($data[$field], _providers, compact("newRecord", "data", "field"));

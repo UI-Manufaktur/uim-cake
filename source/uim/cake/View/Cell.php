@@ -11,7 +11,7 @@ module uim.cake.View;
 
 use BadMethodCallException;
 import uim.cake.caches.Cache;
-import uim.cake.Datasource\ModelAwareTrait;
+import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.events.EventDispatcherInterface;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.IEventManager;
@@ -48,7 +48,7 @@ abstract class Cell : EventDispatcherInterface
      * Instance of the View created during rendering. Won"t be set until after
      * Cell::__toString()/render() is called.
      *
-     * @var \Cake\View\View
+     * @var uim.cake.View\View
      */
     protected $View;
 
@@ -57,14 +57,14 @@ abstract class Cell : EventDispatcherInterface
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var \Cake\Http\ServerRequest
+     * @var uim.cake.Http\ServerRequest
      */
     protected $request;
 
     /**
      * An instance of a Response object that contains information about the impending response
      *
-     * @var \Cake\Http\Response
+     * @var uim.cake.Http\Response
      */
     protected $response;
 

@@ -24,7 +24,7 @@ class FormContext : ContextInterface
     /**
      * The form object.
      *
-     * @var \Cake\Form\Form
+     * @var uim.cake.Form\Form
      */
     protected $_form;
 

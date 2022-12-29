@@ -21,7 +21,7 @@ use RuntimeException;
 class TransactionStrategy : FixtureStrategyInterface
 {
     /**
-     * @var \Cake\TestSuite\Fixture\FixtureHelper
+     * @var uim.cake.TestSuite\Fixture\FixtureHelper
      */
     protected $helper;
 

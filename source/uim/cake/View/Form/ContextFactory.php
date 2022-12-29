@@ -10,7 +10,7 @@
 module uim.cake.View\Form;
 
 import uim.cake.Collection\Collection;
-import uim.cake.Datasource\EntityInterface;
+import uim.cake.datasources.EntityInterface;
 import uim.cake.Form\Form;
 import uim.cake.https.ServerRequest;
 use RuntimeException;

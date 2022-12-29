@@ -22,7 +22,7 @@ module uim.cake.TestSuite\Constraint\Response;
 class CookieSet : ResponseBase
 {
     /**
-     * @var \Cake\Http\Response
+     * @var uim.cake.Http\Response
      */
     protected $response;
 

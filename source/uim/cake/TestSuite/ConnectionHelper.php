@@ -16,7 +16,7 @@ module uim.cake.TestSuite;
 
 import uim.cake.databases.Connection;
 import uim.cake.databases.DriverInterface;
-import uim.cake.Datasource\ConnectionManager;
+import uim.cake.datasources.ConnectionManager;
 use Closure;
 
 /**
@@ -81,7 +81,7 @@ class ConnectionHelper
      */
     function dropTables(string $connectionName, ?array $tables = null): void
     {
-        /** @var \Cake\Database\Connection $connection */
+        /** @var uim.cake.Database\Connection $connection */
         $connection = ConnectionManager::get($connectionName);
         $collection = $connection.getSchemaCollection();
 
@@ -97,13 +97,13 @@ class ConnectionHelper
         }, $tables);
 
         $dialect = $connection.getDriver().schemaDialect();
-        /** @var \Cake\Database\Schema\TableSchema $schema */
+        /** @var uim.cake.Database\Schema\TableSchema $schema */
         foreach ($schemas as $schema) {
             foreach ($dialect.dropConstraintSql($schema) as $statement) {
                 $connection.execute($statement).closeCursor();
             }
         }
-        /** @var \Cake\Database\Schema\TableSchema $schema */
+        /** @var uim.cake.Database\Schema\TableSchema $schema */
         foreach ($schemas as $schema) {
             foreach ($dialect.dropTableSql($schema) as $statement) {
                 $connection.execute($statement).closeCursor();
@@ -120,7 +120,7 @@ class ConnectionHelper
      */
     function truncateTables(string $connectionName, ?array $tables = null): void
     {
-        /** @var \Cake\Database\Connection $connection */
+        /** @var uim.cake.Database\Connection $connection */
         $connection = ConnectionManager::get($connectionName);
         $collection = $connection.getSchemaCollection();
 
@@ -132,7 +132,7 @@ class ConnectionHelper
 
         this.runWithoutConstraints($connection, function (Connection $connection) use ($schemas): void {
             $dialect = $connection.getDriver().schemaDialect();
-            /** @var \Cake\Database\Schema\TableSchema $schema */
+            /** @var uim.cake.Database\Schema\TableSchema $schema */
             foreach ($schemas as $schema) {
                 foreach ($dialect.truncateTableSql($schema) as $statement) {
                     $connection.execute($statement).closeCursor();

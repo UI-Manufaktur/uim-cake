@@ -14,9 +14,9 @@ import uim.cake.cores.exceptions.CakeException;
 import uim.cake.databases.ConstraintsInterface;
 import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;
-import uim.cake.Datasource\ConnectionInterface;
-import uim.cake.Datasource\ConnectionManager;
-import uim.cake.Datasource\FixtureInterface;
+import uim.cake.datasources.ConnectionInterface;
+import uim.cake.datasources.ConnectionManager;
+import uim.cake.datasources.FixtureInterface;
 import uim.cake.TestSuite\TestCase;
 use PDOException;
 use RuntimeException;
@@ -111,7 +111,7 @@ class FixtureManager
         $inserted = [];
         foreach (_insertionMap as $fixtures) {
             foreach ($fixtures as $fixture) {
-                /** @var \Cake\TestSuite\Fixture\TestFixture $fixture */
+                /** @var uim.cake.TestSuite\Fixture\TestFixture $fixture */
                 $inserted[] = $fixture.table;
             }
         }
@@ -486,7 +486,7 @@ class FixtureManager
     {
         $shutdown = function (ConnectionInterface $db, array $fixtures): void {
             $connection = $db.configName();
-            /** @var \Cake\Datasource\FixtureInterface $fixture */
+            /** @var uim.cake.datasources.FixtureInterface $fixture */
             foreach ($fixtures as $fixture) {
                 if (this.isFixtureSetup($connection, $fixture)) {
                     $fixture.drop($db);

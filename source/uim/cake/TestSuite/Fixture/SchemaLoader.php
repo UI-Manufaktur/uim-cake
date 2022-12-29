@@ -15,7 +15,7 @@
 module uim.cake.TestSuite\Fixture;
 
 import uim.cake.databases.schemas.TableSchema;
-import uim.cake.Datasource\ConnectionManager;
+import uim.cake.datasources.ConnectionManager;
 import uim.cake.TestSuite\ConnectionHelper;
 use InvalidArgumentException;
 
@@ -33,7 +33,7 @@ use InvalidArgumentException;
 class SchemaLoader
 {
     /**
-     * @var \Cake\TestSuite\ConnectionHelper
+     * @var uim.cake.TestSuite\ConnectionHelper
      */
     protected $helper;
 
@@ -70,7 +70,7 @@ class SchemaLoader
             this.helper.dropTables($connectionName);
         }
 
-        /** @var \Cake\Database\Connection $connection */
+        /** @var uim.cake.Database\Connection $connection */
         $connection = ConnectionManager::get($connectionName);
         foreach ($files as $file) {
             if (!file_exists($file)) {

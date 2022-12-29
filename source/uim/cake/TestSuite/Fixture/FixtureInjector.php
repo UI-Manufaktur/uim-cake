@@ -28,7 +28,7 @@ class FixtureInjector : TestListener
     /**
      * The instance of the fixture manager to use
      *
-     * @var \Cake\TestSuite\Fixture\FixtureManager
+     * @var uim.cake.TestSuite\Fixture\FixtureManager
      */
     protected $_fixtureManager;
 

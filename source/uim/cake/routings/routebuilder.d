@@ -70,7 +70,7 @@ class RouteBuilder {
     /**
      * The route collection routes should be added to.
      *
-     * @var \Cake\Routing\RouteCollection
+     * @var uim.cake.Routing\RouteCollection
      */
     protected _collection;
 

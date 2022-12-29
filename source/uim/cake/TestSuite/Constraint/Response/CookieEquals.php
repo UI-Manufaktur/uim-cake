@@ -24,7 +24,7 @@ import uim.cake.https.Response;
 class CookieEquals : ResponseBase
 {
     /**
-     * @var \Cake\Http\Response
+     * @var uim.cake.Http\Response
      */
     protected $response;
 

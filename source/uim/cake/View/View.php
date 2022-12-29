@@ -78,14 +78,14 @@ class View : EventDispatcherInterface
     /**
      * Helpers collection
      *
-     * @var \Cake\View\HelperRegistry
+     * @var uim.cake.View\HelperRegistry
      */
     protected $_helpers;
 
     /**
      * ViewBlock instance.
      *
-     * @var \Cake\View\ViewBlock
+     * @var uim.cake.View\ViewBlock
      */
     protected $Blocks;
 
@@ -183,14 +183,14 @@ class View : EventDispatcherInterface
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
-     * @var \Cake\Http\ServerRequest
+     * @var uim.cake.Http\ServerRequest
      */
     protected $request;
 
     /**
      * Reference to the Response object
      *
-     * @var \Cake\Http\Response
+     * @var uim.cake.Http\Response
      */
     protected $response;
 
