@@ -41,8 +41,8 @@ class SessionStorage : IStorage {
     /**
      * Constructor.
      *
-     * @param \Cake\Http\ServerRequest myRequest Request instance.
-     * @param \Cake\Http\Response $response Response instance.
+     * @param uim.cake.Http\ServerRequest myRequest Request instance.
+     * @param uim.cake.Http\Response $response Response instance.
      * @param array<string, mixed> myConfig Configuration list.
      */
     this(ServerRequest myRequest, Response $response, array myConfig = []) {

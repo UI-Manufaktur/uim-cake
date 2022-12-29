@@ -248,7 +248,7 @@ class ConsoleOptionParser
     /**
      * Get or set the command name for shell/task.
      *
-     * @param \Cake\Console\ConsoleOptionParser|array $spec ConsoleOptionParser or spec to merge with.
+     * @param uim.cake.Console\ConsoleOptionParser|array $spec ConsoleOptionParser or spec to merge with.
      * @return this
      */
     function merge($spec) {
@@ -390,7 +390,7 @@ class ConsoleOptionParser
      * - `choices` A list of valid choices for this option. If left empty all values are valid..
      *   An exception will be raised when parse() encounters an invalid value.
      *
-     * @param \Cake\Console\ConsoleInputOption|string $name The long name you want to the value to be parsed out
+     * @param uim.cake.Console\ConsoleInputOption|string $name The long name you want to the value to be parsed out
      *   as when options are parsed. Will also accept an instance of ConsoleInputOption.
      * @param array<string, mixed> $options An array of parameters that define the behavior of the option
      * @return this
@@ -458,7 +458,7 @@ class ConsoleOptionParser
      * - `choices` A list of valid choices for this argument. If left empty all values are valid..
      *   An exception will be raised when parse() encounters an invalid value.
      *
-     * @param \Cake\Console\ConsoleInputArgument|string $name The name of the argument.
+     * @param uim.cake.Console\ConsoleInputArgument|string $name The name of the argument.
      *   Will also accept an instance of ConsoleInputArgument.
      * @param array<string, mixed> $params Parameters for the argument, see above.
      * @return this
@@ -545,7 +545,7 @@ class ConsoleOptionParser
      *    specific option parsers. When help is generated for a subcommand, if a parser is present
      *    it will be used.
      *
-     * @param \Cake\Console\ConsoleInputSubcommand|string $name Name of the subcommand.
+     * @param uim.cake.Console\ConsoleInputSubcommand|string $name Name of the subcommand.
      *   Will also accept an instance of ConsoleInputSubcommand.
      * @param array<string, mixed> $options Array of params, see above.
      * @return this
@@ -648,7 +648,7 @@ class ConsoleOptionParser
      * to parse the $argv
      *
      * @param array $argv Array of args (argv) to parse.
-     * @param \Cake\Console\ConsoleIo|null $io A ConsoleIo instance or null. If null prompt options will error.
+     * @param uim.cake.Console\ConsoleIo|null $io A ConsoleIo instance or null. If null prompt options will error.
      * @return array [$params, $args]
      * @throws \Cake\Console\Exception\ConsoleException When an invalid parameter is encountered.
      */

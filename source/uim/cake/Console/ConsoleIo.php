@@ -103,10 +103,10 @@ class ConsoleIo
     /**
      * Constructor
      *
-     * @param \Cake\Console\ConsoleOutput|null $out A ConsoleOutput object for stdout.
-     * @param \Cake\Console\ConsoleOutput|null $err A ConsoleOutput object for stderr.
-     * @param \Cake\Console\ConsoleInput|null $in A ConsoleInput object for stdin.
-     * @param \Cake\Console\HelperRegistry|null $helpers A HelperRegistry instance
+     * @param uim.cake.Console\ConsoleOutput|null $out A ConsoleOutput object for stdout.
+     * @param uim.cake.Console\ConsoleOutput|null $err A ConsoleOutput object for stderr.
+     * @param uim.cake.Console\ConsoleInput|null $in A ConsoleInput object for stdin.
+     * @param uim.cake.Console\HelperRegistry|null $helpers A HelperRegistry instance
      */
     public this(
         ?ConsoleOutput $out = null,

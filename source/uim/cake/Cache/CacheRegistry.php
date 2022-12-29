@@ -57,7 +57,7 @@ class CacheRegistry : ObjectRegistry
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param \Cake\Cache\CacheEngine|string $class The classname or object to make.
+     * @param uim.cake.Cache\CacheEngine|string $class The classname or object to make.
      * @param string $alias The alias of the object.
      * @param array<string, mixed> $config An array of settings to use for the cache engine.
      * @return \Cake\Cache\CacheEngine The constructed CacheEngine class.

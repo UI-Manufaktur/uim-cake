@@ -54,7 +54,7 @@ class ConsoleInputSubcommand
      *
      * @param array<string, mixed>|string $name The long name of the subcommand, or an array with all the properties.
      * @param string $help The help text for this option.
-     * @param \Cake\Console\ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
+     * @param uim.cake.Console\ConsoleOptionParser|array<string, mixed>|null $parser A parser for this subcommand.
      *   Either a ConsoleOptionParser, or an array that can be used with ConsoleOptionParser::buildFromArray().
      */
     public this($name, $help = "", $parser = null) {

@@ -18,7 +18,7 @@ class CacheListCommand : Command {
      * Hook method for defining this command"s option parser.
      *
      * @see https://book.UIM.org/4/en/console-commands/option-parsers.html
-     * @param \Cake\Console\ConsoleOptionParser $parser The parser to be defined
+     * @param uim.cake.Console\ConsoleOptionParser $parser The parser to be defined
      * @return \Cake\Console\ConsoleOptionParser The built parser.
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
@@ -31,8 +31,8 @@ class CacheListCommand : Command {
     /**
      * Get the list of cache prefixes
      *
-     * @param \Cake\Console\Arguments $args The command arguments.
-     * @param \Cake\Console\ConsoleIo $io The console io
+     * @param uim.cake.Console\Arguments $args The command arguments.
+     * @param uim.cake.Console\ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
     Nullable!int execute(Arguments $args, ConsoleIo $io) {

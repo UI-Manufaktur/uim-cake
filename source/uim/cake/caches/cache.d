@@ -91,7 +91,7 @@ class Cache {
      * Sets the Cache Registry instance used for creating and using cache adapters.
      *
      * Also allows for injecting of a new registry instance.
-     * @param \Cake\Cache\CacheRegistry $registry Injectable registry object.
+     * @param uim.cake.Cache\CacheRegistry $registry Injectable registry object.
      * 
      */
     static void setRegistry(CacheRegistry $registry) {

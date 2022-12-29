@@ -50,7 +50,7 @@ abstract class DAuthenticate : IEventListener {
     /**
      * Constructor
      *
-     * @param \Cake\Controller\ComponentRegistry $registry The Component registry used on this request.
+     * @param uim.cake.Controller\ComponentRegistry $registry The Component registry used on this request.
      * @param array<string, mixed> myConfig Array of config to use.
      */
     this(ComponentRegistry $registry, array myConfig = []) {
@@ -170,8 +170,8 @@ abstract class DAuthenticate : IEventListener {
     /**
      * Authenticate a user based on the request information.
      *
-     * @param \Cake\Http\ServerRequest myRequest Request to get authentication information from.
-     * @param \Cake\Http\Response $response A response object that can have headers added.
+     * @param uim.cake.Http\ServerRequest myRequest Request to get authentication information from.
+     * @param uim.cake.Http\Response $response A response object that can have headers added.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
     abstract function authenticate(ServerRequest myRequest, Response $response);
@@ -180,7 +180,7 @@ abstract class DAuthenticate : IEventListener {
      * Get a user based on information in the request. Primarily used by stateless authentication
      * systems like basic and digest auth.
      *
-     * @param \Cake\Http\ServerRequest myRequest Request object.
+     * @param uim.cake.Http\ServerRequest myRequest Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
     auto getUser(ServerRequest myRequest) {
@@ -195,8 +195,8 @@ abstract class DAuthenticate : IEventListener {
      * - \Cake\Http\Response - A response object, which will cause AuthComponent to
      *   simply return that response.
      *
-     * @param \Cake\Http\ServerRequest myRequest A request object.
-     * @param \Cake\Http\Response $response A response object.
+     * @param uim.cake.Http\ServerRequest myRequest A request object.
+     * @param uim.cake.Http\Response $response A response object.
      * @return \Cake\Http\Response|null|void
      */
     function unauthenticated(ServerRequest myRequest, Response $response) {

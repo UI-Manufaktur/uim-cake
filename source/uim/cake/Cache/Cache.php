@@ -117,7 +117,7 @@ class Cache
      *
      * Also allows for injecting of a new registry instance.
      *
-     * @param \Cake\Cache\CacheRegistry $registry Injectable registry object.
+     * @param uim.cake.Cache\CacheRegistry $registry Injectable registry object.
      * @return void
      */
     public static function setRegistry(CacheRegistry $registry): void

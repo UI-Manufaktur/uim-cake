@@ -32,7 +32,7 @@ class CommandFactory : CommandFactoryInterface
     /**
      * Constructor
      *
-     * @param \Cake\Core\IContainer|null $container The container to use if available.
+     * @param uim.cake.Core\IContainer|null $container The container to use if available.
      */
     public this(?IContainer $container = null) {
         this.container = $container;
