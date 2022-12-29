@@ -12,9 +12,9 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Client;
+module uim.cake.http.Client;
 
-import uim.cake.https.Cookie\CookieCollection;
+import uim.cake.http.Cookie\CookieCollection;
 use Laminas\Diactoros\MessageTrait;
 use Laminas\Diactoros\Stream;
 use Psr\Http\Message\IResponse;
@@ -93,7 +93,7 @@ class Response : Message : IResponse
     /**
      * Cookie Collection instance
      *
-     * @var uim.cake.Http\Cookie\CookieCollection
+     * @var uim.cake.http.Cookie\CookieCollection
      */
     protected $cookies;
 
@@ -310,7 +310,7 @@ class Response : Message : IResponse
      * This method exposes the response"s CookieCollection
      * instance allowing you to interact with cookie objects directly.
      *
-     * @return uim.cake.Http\Cookie\CookieCollection
+     * @return uim.cake.http.Cookie\CookieCollection
      */
     function getCookieCollection(): CookieCollection
     {

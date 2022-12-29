@@ -14,7 +14,7 @@
 module uim.cake.Core;
 
 import uim.cake.consoles.CommandCollection;
-import uim.cake.https.MiddlewareQueue;
+import uim.cake.http.MiddlewareQueue;
 import uim.cake.Routing\RouteBuilder;
 
 /**
@@ -92,8 +92,8 @@ interface PluginInterface
     /**
      * Add middleware for the plugin.
      *
-     * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to update.
-     * @return uim.cake.Http\MiddlewareQueue
+     * @param uim.cake.http.MiddlewareQueue $middlewareQueue The middleware queue to update.
+     * @return uim.cake.http.MiddlewareQueue
      */
     function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 

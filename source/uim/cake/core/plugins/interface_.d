@@ -52,8 +52,8 @@ interface IPlugin {
     /**
      * Add middleware for the plugin.
      *
-     * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to update.
-     * @return uim.cake.Http\MiddlewareQueue
+     * @param uim.cake.http.MiddlewareQueue $middlewareQueue The middleware queue to update.
+     * @return uim.cake.http.MiddlewareQueue
      */
     MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
 

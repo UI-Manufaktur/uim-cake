@@ -21,7 +21,7 @@ use Psr\Http\Message\MessageInterface;
  *
  * It is most convenient to get this object via `Request::cors()`.
  *
- * @see uim.cake.Http\Response::cors()
+ * @see uim.cake.http.Response::cors()
  */
 class CorsBuilder
 {

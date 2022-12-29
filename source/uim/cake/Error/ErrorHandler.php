@@ -18,7 +18,7 @@
 module uim.cake.Error;
 
 import uim.cake.cores.App;
-import uim.cake.https.ResponseEmitter;
+import uim.cake.http.ResponseEmitter;
 import uim.cake.Routing\Router;
 use Psr\Http\Message\IServerRequest;
 use RuntimeException;

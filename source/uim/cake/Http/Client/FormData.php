@@ -12,7 +12,7 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Client;
+module uim.cake.http.Client;
 
 use Countable;
 use finfo;
@@ -75,7 +75,7 @@ class FormData : Countable
      *
      * @param string $name The name of the part.
      * @param string $value The value to add.
-     * @return uim.cake.Http\Client\FormDataPart
+     * @return uim.cake.http.Client\FormDataPart
      */
     function newPart(string $name, string $value): FormDataPart
     {
@@ -91,7 +91,7 @@ class FormData : Countable
      * If the $value is an array, multiple parts will be added.
      * Files will be read from their current position and saved in memory.
      *
-     * @param uim.cake.Http\Client\FormDataPart|string $name The name of the part to add,
+     * @param uim.cake.http.Client\FormDataPart|string $name The name of the part to add,
      *   or the part data object.
      * @param mixed $value The value for the part.
      * @return this
@@ -136,7 +136,7 @@ class FormData : Countable
      * @param string $name The name to use.
      * @param string|resource|\Psr\Http\Message\UploadedFileInterface $value Either a string filename, or a filehandle,
      *  or a UploadedFileInterface instance.
-     * @return uim.cake.Http\Client\FormDataPart
+     * @return uim.cake.http.Client\FormDataPart
      */
     function addFile(string $name, $value): FormDataPart
     {

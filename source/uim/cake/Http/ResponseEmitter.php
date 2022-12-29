@@ -13,7 +13,7 @@
  */
 module uim.cake.Http;
 
-import uim.cake.https.Cookie\Cookie;
+import uim.cake.http.Cookie\Cookie;
 use Laminas\Diactoros\RelativeStream;
 use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Psr\Http\Message\IResponse;
@@ -214,7 +214,7 @@ class ResponseEmitter : EmitterInterface
     /**
      * Helper methods to set cookie.
      *
-     * @param uim.cake.Http\Cookie\CookieInterface|string $cookie Cookie.
+     * @param uim.cake.http.Cookie\CookieInterface|string $cookie Cookie.
      * @return bool
      */
     protected function setCookie($cookie): bool

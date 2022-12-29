@@ -23,12 +23,12 @@ import uim.cake.datasources.Paging\Exception\PageOutOfBoundsException;
 import uim.cake.errors.Debugger;
 import uim.cake.errors.ExceptionRendererInterface;
 import uim.cake.events.Event;
-import uim.cake.https.Exception\HttpException;
-import uim.cake.https.Exception\MissingControllerException;
-import uim.cake.https.Response;
-import uim.cake.https.ResponseEmitter;
-import uim.cake.https.ServerRequest;
-import uim.cake.https.ServerRequestFactory;
+import uim.cake.http.Exception\HttpException;
+import uim.cake.http.Exception\MissingControllerException;
+import uim.cake.http.Response;
+import uim.cake.http.ResponseEmitter;
+import uim.cake.http.ServerRequest;
+import uim.cake.http.ServerRequestFactory;
 import uim.cake.Routing\Exception\MissingRouteException;
 import uim.cake.Routing\Router;
 import uim.cake.utilities.Inflector;
@@ -89,7 +89,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * If set, this will be request used to create the controller that will render
      * the error.
      *
-     * @var uim.cake.Http\ServerRequest|null
+     * @var uim.cake.http.ServerRequest|null
      */
     protected $request;
 
@@ -119,7 +119,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * Creates the controller to perform rendering on the error response.
      *
      * @param \Throwable $exception Exception.
-     * @param uim.cake.Http\ServerRequest|null $request The request if this is set it will be used
+     * @param uim.cake.http.ServerRequest|null $request The request if this is set it will be used
      *   instead of creating a new one.
      */
     public this(Throwable $exception, ?ServerRequest $request = null) {
@@ -209,7 +209,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     /**
      * Renders the response for the exception.
      *
-     * @return uim.cake.Http\Response The response to be sent.
+     * @return uim.cake.http.Response The response to be sent.
      */
     function render(): IResponse
     {
@@ -307,7 +307,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      *
      * @param string $method The method name to invoke.
      * @param \Throwable $exception The exception to render.
-     * @return uim.cake.Http\Response The response to send.
+     * @return uim.cake.http.Response The response to send.
      */
     protected function _customMethod(string $method, Throwable $exception): Response
     {
@@ -405,7 +405,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * Generate the response using the controller object.
      *
      * @param string $template The template to render.
-     * @return uim.cake.Http\Response A response object that can be sent.
+     * @return uim.cake.http.Response A response object that can be sent.
      */
     protected function _outputMessage(string $template): Response
     {
@@ -444,7 +444,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * and doesn"t call component methods.
      *
      * @param string $template The template to render.
-     * @return uim.cake.Http\Response A response object that can be sent.
+     * @return uim.cake.http.Response A response object that can be sent.
      */
     protected function _outputMessageSafe(string $template): Response
     {
@@ -468,7 +468,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      *
      * Triggers the afterFilter and afterDispatch events.
      *
-     * @return uim.cake.Http\Response The response to serve.
+     * @return uim.cake.http.Response The response to serve.
      */
     protected function _shutdown(): Response
     {

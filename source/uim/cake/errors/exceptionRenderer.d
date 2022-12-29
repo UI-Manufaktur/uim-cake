@@ -50,7 +50,7 @@ class ExceptionRenderer : IExceptionRenderer
      * If set, this will be request used to create the controller that will render
      * the error.
      *
-     * @var uim.cake.Http\ServerRequest|null
+     * @var uim.cake.http.ServerRequest|null
      */
     protected myRequest;
 
@@ -80,7 +80,7 @@ class ExceptionRenderer : IExceptionRenderer
      * Creates the controller to perform rendering on the error response.
      *
      * @param \Throwable myException Exception.
-     * @param uim.cake.Http\ServerRequest|null myRequest The request if this is set it will be used
+     * @param uim.cake.http.ServerRequest|null myRequest The request if this is set it will be used
      *   instead of creating a new one.
      */
     this(Throwable myException, ?ServerRequest myRequest = null) {
@@ -240,7 +240,7 @@ class ExceptionRenderer : IExceptionRenderer
      *
      * @param string method The method name to invoke.
      * @param \Throwable myException The exception to render.
-     * @return uim.cake.Http\Response The response to send.
+     * @return uim.cake.http.Response The response to send.
      */
     protected Response _customMethod(string method, Throwable myException) {
         myResult = this.{$method}(myException);
@@ -333,7 +333,7 @@ class ExceptionRenderer : IExceptionRenderer
      * Generate the response using the controller object.
      *
      * @param string myTemplate The template to render.
-     * @return uim.cake.Http\Response A response object that can be sent.
+     * @return uim.cake.http.Response A response object that can be sent.
      */
     protected Response _outputMessage(string myTemplate) {
         try {
@@ -367,7 +367,7 @@ class ExceptionRenderer : IExceptionRenderer
      * and doesn"t call component methods.
      *
      * @param string myTemplate The template to render.
-     * @return uim.cake.Http\Response A response object that can be sent.
+     * @return uim.cake.http.Response A response object that can be sent.
      */
     protected Response _outputMessageSafe(string myTemplate) {
         myBuilder = this.controller.viewBuilder();
@@ -390,7 +390,7 @@ class ExceptionRenderer : IExceptionRenderer
      *
      * Triggers the afterFilter and afterDispatch events.
      *
-     * @return uim.cake.Http\Response The response to serve.
+     * @return uim.cake.http.Response The response to serve.
      */
     protected Response _shutdown() {
         this.controller.dispatchEvent("Controller.shutdown");

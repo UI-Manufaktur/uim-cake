@@ -10,7 +10,7 @@
 module uim.cake.Http;
 
 import uim.cake.cores.Configure;
-import uim.cake.https.Uri as CakeUri;
+import uim.cake.http.Uri as CakeUri;
 import uim.cake.utilities.Hash;
 use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\IServerRequest;
@@ -40,7 +40,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * @param array|null $parsedBody $_POST superglobal
      * @param array|null $cookies $_COOKIE superglobal
      * @param array|null $files $_FILES superglobal
-     * @return uim.cake.Http\ServerRequest
+     * @return uim.cake.http.ServerRequest
      * @throws \InvalidArgumentException for invalid file values
      */
     public static function fromGlobals(
@@ -102,8 +102,8 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * into array for PUT/PATCH/DELETE requests.
      *
      * @param array $parsedBody Parsed body.
-     * @param uim.cake.Http\ServerRequest $request Request instance.
-     * @return uim.cake.Http\ServerRequest
+     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @return uim.cake.http.ServerRequest
      */
     protected static function marshalBodyAndRequestMethod(array $parsedBody, ServerRequest $request): ServerRequest
     {
@@ -143,8 +143,8 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * Process uploaded files and move things onto the parsed body.
      *
      * @param array $files Files array for normalization and merging in parsed body.
-     * @param uim.cake.Http\ServerRequest $request Request instance.
-     * @return uim.cake.Http\ServerRequest
+     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @return uim.cake.http.ServerRequest
      */
     protected static function marshalFiles(array $files, ServerRequest $request): ServerRequest
     {
@@ -233,7 +233,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      *
      * @param array $server The server parameters.
      * @param array $headers The normalized headers
-     * @return uim.cake.Http\Uri A constructed Uri
+     * @return uim.cake.http.Uri A constructed Uri
      */
     protected static function marshalUriFromSapi(array $server, array $headers): UriInterface
     {

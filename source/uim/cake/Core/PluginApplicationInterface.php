@@ -11,7 +11,7 @@ module uim.cake.Core;
 
 import uim.cake.consoles.CommandCollection;
 import uim.cake.events.EventDispatcherInterface;
-import uim.cake.https.MiddlewareQueue;
+import uim.cake.http.MiddlewareQueue;
 import uim.cake.Routing\RouteBuilder;
 
 /**
@@ -53,8 +53,8 @@ interface IPluginApplication : EventDispatcherInterface
     /**
      * Run middleware hooks for plugins
      *
-     * @param uim.cake.Http\MiddlewareQueue $middleware The MiddlewareQueue to use.
-     * @return uim.cake.Http\MiddlewareQueue
+     * @param uim.cake.http.MiddlewareQueue $middleware The MiddlewareQueue to use.
+     * @return uim.cake.http.MiddlewareQueue
      */
     function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue;
 

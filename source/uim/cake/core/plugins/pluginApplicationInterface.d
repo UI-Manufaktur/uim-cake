@@ -41,8 +41,8 @@ interface IPluginApplication : IEventDispatcher
     /**
      * Run middleware hooks for plugins
      *
-     * @param uim.cake.Http\MiddlewareQueue $middleware The MiddlewareQueue to use.
-     * @return uim.cake.Http\MiddlewareQueue
+     * @param uim.cake.http.MiddlewareQueue $middleware The MiddlewareQueue to use.
+     * @return uim.cake.http.MiddlewareQueue
      */
     function pluginMiddleware(MiddlewareQueue $middleware): MiddlewareQueue;
 

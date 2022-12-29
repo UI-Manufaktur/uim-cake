@@ -10,9 +10,9 @@
 module uim.cake.Http;
 
 import uim.cake.cores.Configure;
-import uim.cake.https.Cookie\CookieCollection;
-import uim.cake.https.Cookie\CookieInterface;
-import uim.cake.https.Exception\NotFoundException;
+import uim.cake.http.Cookie\CookieCollection;
+import uim.cake.http.Cookie\CookieInterface;
+import uim.cake.http.Exception\NotFoundException;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
@@ -401,7 +401,7 @@ class Response : IResponse
     /**
      * Collection of cookies to send to the client
      *
-     * @var uim.cake.Http\Cookie\CookieCollection
+     * @var uim.cake.http.Cookie\CookieCollection
      */
     protected $_cookies;
 
@@ -1175,7 +1175,7 @@ class Response : IResponse
      * You need to set at least one of the `Last-Modified` or `Etag` response headers
      * before calling this method. Otherwise, a comparison will not be possible.
      *
-     * @param uim.cake.Http\ServerRequest $request Request object
+     * @param uim.cake.http.ServerRequest $request Request object
      * @return bool Whether the response is "modified" based on cache headers.
      */
     function isNotModified(ServerRequest $request): bool
@@ -1211,7 +1211,7 @@ class Response : IResponse
      *
      * *Warning* This method mutates the response in-place and should be avoided.
      *
-     * @param uim.cake.Http\ServerRequest $request Request object
+     * @param uim.cake.http.ServerRequest $request Request object
      * @return bool Whether the response was marked as not modified or not.
      * @deprecated 4.4.0 Use `isNotModified()` and `withNotModified()` instead.
      */
@@ -1254,7 +1254,7 @@ class Response : IResponse
      * $response = $response.withCookie(new Cookie("remember_me", 1));
      * ```
      *
-     * @param uim.cake.Http\Cookie\CookieInterface $cookie cookie object
+     * @param uim.cake.http.Cookie\CookieInterface $cookie cookie object
      * @return static
      */
     function withCookie(CookieInterface $cookie) {
@@ -1274,7 +1274,7 @@ class Response : IResponse
      * $response = $response.withExpiredCookie(new Cookie("remember_me"));
      * ```
      *
-     * @param uim.cake.Http\Cookie\CookieInterface $cookie cookie object
+     * @param uim.cake.http.Cookie\CookieInterface $cookie cookie object
      * @return static
      */
     function withExpiredCookie(CookieInterface $cookie) {
@@ -1326,7 +1326,7 @@ class Response : IResponse
     /**
      * Get the CookieCollection from the response
      *
-     * @return uim.cake.Http\Cookie\CookieCollection
+     * @return uim.cake.http.Cookie\CookieCollection
      */
     function getCookieCollection(): CookieCollection
     {
@@ -1336,7 +1336,7 @@ class Response : IResponse
     /**
      * Get a new instance with provided cookie collection.
      *
-     * @param uim.cake.Http\Cookie\CookieCollection $cookieCollection Cookie collection to set.
+     * @param uim.cake.http.Cookie\CookieCollection $cookieCollection Cookie collection to set.
      * @return static
      */
     function withCookieCollection(CookieCollection $cookieCollection) {
@@ -1349,8 +1349,8 @@ class Response : IResponse
     /**
      * Get a CorsBuilder instance for defining CORS headers.
      *
-     * @param uim.cake.Http\ServerRequest $request Request object
-     * @return uim.cake.Http\CorsBuilder A builder object the provides a fluent interface for defining
+     * @param uim.cake.http.ServerRequest $request Request object
+     * @return uim.cake.http.CorsBuilder A builder object the provides a fluent interface for defining
      *   additional CORS headers.
      */
     function cors(ServerRequest $request): CorsBuilder
@@ -1378,7 +1378,7 @@ class Response : IResponse
      * @param string $path Absolute path to file.
      * @param array<string, mixed> $options Options See above.
      * @return static
-     * @throws uim.cake.Http\Exception\NotFoundException
+     * @throws uim.cake.http.Exception\NotFoundException
      */
     function withFile(string $path, array $options = []) {
         $file = this.validateFile($path);
@@ -1447,7 +1447,7 @@ class Response : IResponse
      * Validate a file path is a valid response body.
      *
      * @param string $path The path to the file.
-     * @throws uim.cake.Http\Exception\NotFoundException
+     * @throws uim.cake.http.Exception\NotFoundException
      * @return \SplFileInfo
      */
     protected function validateFile(string $path): SplFileInfo

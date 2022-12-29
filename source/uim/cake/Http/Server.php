@@ -33,7 +33,7 @@ class Server : EventDispatcherInterface
     protected $app;
 
     /**
-     * @var uim.cake.Http\Runner
+     * @var uim.cake.http.Runner
      */
     protected $runner;
 
@@ -41,7 +41,7 @@ class Server : EventDispatcherInterface
      * Constructor
      *
      * @param uim.cake.Core\IHttpApplication $app The application to use.
-     * @param uim.cake.Http\Runner|null $runner Application runner.
+     * @param uim.cake.http.Runner|null $runner Application runner.
      */
     public this(IHttpApplication $app, ?Runner $runner = null) {
         this.app = $app;
@@ -60,7 +60,7 @@ class Server : EventDispatcherInterface
      * - Run the middleware queue including the application.
      *
      * @param \Psr\Http\Message\IServerRequest|null $request The request to use or null.
-     * @param uim.cake.Http\MiddlewareQueue|null $middlewareQueue MiddlewareQueue or null.
+     * @param uim.cake.http.MiddlewareQueue|null $middlewareQueue MiddlewareQueue or null.
      * @return \Psr\Http\Message\IResponse
      * @throws \RuntimeException When the application does not make a response.
      */

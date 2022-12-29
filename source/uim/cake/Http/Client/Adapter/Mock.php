@@ -12,11 +12,11 @@
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Client\Adapter;
+module uim.cake.http.Client\Adapter;
 
-import uim.cake.https.Client\AdapterInterface;
-import uim.cake.https.Client\Exception\MissingResponseException;
-import uim.cake.https.Client\Response;
+import uim.cake.http.Client\AdapterInterface;
+import uim.cake.http.Client\Exception\MissingResponseException;
+import uim.cake.http.Client\Response;
 use Closure;
 use InvalidArgumentException;
 use Psr\Http\Message\RequestInterface;
@@ -46,7 +46,7 @@ class Mock : AdapterInterface
      * - `match` An additional closure to match requests with.
      *
      * @param \Psr\Http\Message\RequestInterface $request A partial request to use for matching.
-     * @param uim.cake.Http\Client\Response $response The response that matches the request.
+     * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
      * @return void
      */
@@ -68,7 +68,7 @@ class Mock : AdapterInterface
      *
      * @param \Psr\Http\Message\RequestInterface $request The request to match
      * @param array<string, mixed> $options Unused.
-     * @return uim.cake.Http\Client\Response[] The matched response or an empty array for no matches.
+     * @return uim.cake.http.Client\Response[] The matched response or an empty array for no matches.
      */
     function send(RequestInterface $request, array $options): array
     {

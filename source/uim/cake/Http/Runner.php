@@ -22,7 +22,7 @@ class Runner : RequestHandlerInterface
     /**
      * The middleware queue being run.
      *
-     * @var uim.cake.Http\MiddlewareQueue
+     * @var uim.cake.http.MiddlewareQueue
      */
     protected $queue;
 
@@ -34,7 +34,7 @@ class Runner : RequestHandlerInterface
     protected $fallbackHandler;
 
     /**
-     * @param uim.cake.Http\MiddlewareQueue $queue The middleware queue
+     * @param uim.cake.http.MiddlewareQueue $queue The middleware queue
      * @param \Psr\Http\Message\IServerRequest $request The Server Request
      * @param \Psr\Http\Server\RequestHandlerInterface|null $fallbackHandler Fallback request handler.
      * @return \Psr\Http\Message\IResponse A response object

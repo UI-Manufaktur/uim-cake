@@ -35,14 +35,14 @@ class FlashMessage
     ];
 
     /**
-     * @var uim.cake.Http\Session
+     * @var uim.cake.http.Session
      */
     protected $session;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Http\Session $session Session instance.
+     * @param uim.cake.http.Session $session Session instance.
      * @param array<string, mixed> $config Config array.
      * @see FlashMessage::set() For list of valid config keys.
      */

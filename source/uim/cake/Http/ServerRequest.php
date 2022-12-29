@@ -12,8 +12,8 @@ module uim.cake.Http;
 use BadMethodCallException;
 import uim.cake.cores.Configure;
 import uim.cake.cores.exceptions.CakeException;
-import uim.cake.https.Cookie\CookieCollection;
-import uim.cake.https.Exception\MethodNotAllowedException;
+import uim.cake.http.Cookie\CookieCollection;
+import uim.cake.http.Exception\MethodNotAllowedException;
 import uim.cake.utilities.Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\PhpInputStream;
@@ -154,14 +154,14 @@ class ServerRequest : IServerRequest
     /**
      * Instance of a Session object relative to this request
      *
-     * @var uim.cake.Http\Session
+     * @var uim.cake.http.Session
      */
     protected $session;
 
     /**
      * Instance of a FlashMessage object relative to this request
      *
-     * @var uim.cake.Http\FlashMessage
+     * @var uim.cake.http.FlashMessage
      */
     protected $flash;
 
@@ -339,7 +339,7 @@ class ServerRequest : IServerRequest
     /**
      * Returns the instance of the Session object for this request
      *
-     * @return uim.cake.Http\Session
+     * @return uim.cake.http.Session
      */
     function getSession(): Session
     {
@@ -349,7 +349,7 @@ class ServerRequest : IServerRequest
     /**
      * Returns the instance of the FlashMessage object for this request
      *
-     * @return uim.cake.Http\FlashMessage
+     * @return uim.cake.http.FlashMessage
      */
     function getFlash(): FlashMessage
     {
@@ -648,7 +648,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string> $types The types to check.
      * @return bool Success.
-     * @see uim.cake.Http\ServerRequest::is()
+     * @see uim.cake.http.ServerRequest::is()
      */
     function isAll(array $types): bool
     {
@@ -1283,7 +1283,7 @@ class ServerRequest : IServerRequest
      * `getCookie()` and `getCookieParams()` over this method. Using a CookieCollection
      * is ideal if your cookies contain complex JSON encoded data.
      *
-     * @return uim.cake.Http\Cookie\CookieCollection
+     * @return uim.cake.http.Cookie\CookieCollection
      */
     function getCookieCollection(): CookieCollection
     {
@@ -1294,7 +1294,7 @@ class ServerRequest : IServerRequest
      * Replace the cookies in the request with those contained in
      * the provided CookieCollection.
      *
-     * @param uim.cake.Http\Cookie\CookieCollection $cookies The cookie collection
+     * @param uim.cake.http.Cookie\CookieCollection $cookies The cookie collection
      * @return static
      */
     function withCookieCollection(CookieCollection $cookies) {
@@ -1453,7 +1453,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string>|string $methods Allowed HTTP request methods.
      * @return true
-     * @throws uim.cake.Http\Exception\MethodNotAllowedException
+     * @throws uim.cake.http.Exception\MethodNotAllowedException
      */
     function allowMethod($methods): bool
     {

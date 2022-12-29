@@ -180,7 +180,7 @@ class ErrorHandler : BaseErrorHandler
     /**
      * Method that can be easily stubbed in testing.
      *
-     * @param uim.cake.Http\Response|string response Either the message or response object.
+     * @param uim.cake.http.Response|string response Either the message or response object.
      * @return void
      */
     protected auto _sendResponse($response): void

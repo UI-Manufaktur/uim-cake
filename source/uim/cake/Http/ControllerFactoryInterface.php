@@ -24,7 +24,7 @@ interface ControllerFactoryInterface
      *
      * @param \Psr\Http\Message\IServerRequest $request The request to build a controller for.
      * @return mixed
-     * @throws uim.cake.Http\Exception\MissingControllerException
+     * @throws uim.cake.http.Exception\MissingControllerException
      * @psalm-return TController
      */
     function create(IServerRequest $request);

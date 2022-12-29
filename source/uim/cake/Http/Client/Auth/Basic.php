@@ -12,9 +12,9 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Client\Auth;
+module uim.cake.http.Client\Auth;
 
-import uim.cake.https.Client\Request;
+import uim.cake.http.Client\Request;
 
 /**
  * Basic authentication adapter for Cake\Http\Client
@@ -27,16 +27,16 @@ class Basic
     /**
      * Add Authorization header to the request.
      *
-     * @param uim.cake.Http\Client\Request $request Request instance.
+     * @param uim.cake.http.Client\Request $request Request instance.
      * @param array $credentials Credentials.
-     * @return uim.cake.Http\Client\Request The updated request.
+     * @return uim.cake.http.Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
     function authentication(Request $request, array $credentials): Request
     {
         if (isset($credentials["username"], $credentials["password"])) {
             $value = _generateHeader($credentials["username"], $credentials["password"]);
-            /** @var uim.cake.Http\Client\Request $request */
+            /** @var uim.cake.http.Client\Request $request */
             $request = $request.withHeader("Authorization", $value);
         }
 
@@ -46,16 +46,16 @@ class Basic
     /**
      * Proxy Authentication
      *
-     * @param uim.cake.Http\Client\Request $request Request instance.
+     * @param uim.cake.http.Client\Request $request Request instance.
      * @param array $credentials Credentials.
-     * @return uim.cake.Http\Client\Request The updated request.
+     * @return uim.cake.http.Client\Request The updated request.
      * @see https://www.ietf.org/rfc/rfc2617.txt
      */
     function proxyAuthentication(Request $request, array $credentials): Request
     {
         if (isset($credentials["username"], $credentials["password"])) {
             $value = _generateHeader($credentials["username"], $credentials["password"]);
-            /** @var uim.cake.Http\Client\Request $request */
+            /** @var uim.cake.http.Client\Request $request */
             $request = $request.withHeader("Proxy-Authorization", $value);
         }
 

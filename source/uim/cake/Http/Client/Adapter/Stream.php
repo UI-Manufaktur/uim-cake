@@ -12,13 +12,13 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Client\Adapter;
+module uim.cake.http.Client\Adapter;
 
-import uim.cake.https.Client\AdapterInterface;
-import uim.cake.https.Client\Exception\ClientException;
-import uim.cake.https.Client\Exception\NetworkException;
-import uim.cake.https.Client\Exception\RequestException;
-import uim.cake.https.Client\Response;
+import uim.cake.http.Client\AdapterInterface;
+import uim.cake.http.Client\Exception\ClientException;
+import uim.cake.http.Client\Exception\NetworkException;
+import uim.cake.http.Client\Exception\RequestException;
+import uim.cake.http.Client\Response;
 use Composer\CaBundle\CaBundle;
 use Psr\Http\Message\RequestInterface;
 
@@ -284,7 +284,7 @@ class Stream : AdapterInterface
      *
      * @param array $headers Unparsed headers.
      * @param string $body The response body.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     protected function _buildResponse(array $headers, string $body): Response
     {

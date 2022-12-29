@@ -12,15 +12,15 @@
  * @since         3.7.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.https.Client\Adapter;
+module uim.cake.http.Client\Adapter;
 
-import uim.cake.https.Client\AdapterInterface;
-import uim.cake.https.Client\Exception\ClientException;
-import uim.cake.https.Client\Exception\NetworkException;
-import uim.cake.https.Client\Exception\RequestException;
-import uim.cake.https.Client\Request;
-import uim.cake.https.Client\Response;
-import uim.cake.https.Exception\HttpException;
+import uim.cake.http.Client\AdapterInterface;
+import uim.cake.http.Client\Exception\ClientException;
+import uim.cake.http.Client\Exception\NetworkException;
+import uim.cake.http.Client\Exception\RequestException;
+import uim.cake.http.Client\Request;
+import uim.cake.http.Client\Response;
+import uim.cake.http.Exception\HttpException;
 use Composer\CaBundle\CaBundle;
 use Psr\Http\Message\RequestInterface;
 

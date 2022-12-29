@@ -17,14 +17,14 @@ module uim.cake.Http;
 import uim.cake.cores.App;
 import uim.cake.cores.exceptions.CakeException;
 import uim.cake.cores.InstanceConfigTrait;
-import uim.cake.https.Client\Adapter\Curl;
-import uim.cake.https.Client\Adapter\Mock as MockAdapter;
-import uim.cake.https.Client\Adapter\Stream;
-import uim.cake.https.Client\AdapterInterface;
-import uim.cake.https.Client\Request;
-import uim.cake.https.Client\Response;
-import uim.cake.https.Cookie\CookieCollection;
-import uim.cake.https.Cookie\CookieInterface;
+import uim.cake.http.Client\Adapter\Curl;
+import uim.cake.http.Client\Adapter\Mock as MockAdapter;
+import uim.cake.http.Client\Adapter\Stream;
+import uim.cake.http.Client\AdapterInterface;
+import uim.cake.http.Client\Request;
+import uim.cake.http.Client\Response;
+import uim.cake.http.Cookie\CookieCollection;
+import uim.cake.http.Cookie\CookieInterface;
 import uim.cake.utilities.Hash;
 use InvalidArgumentException;
 use Laminas\Diactoros\Uri;
@@ -131,21 +131,21 @@ class Client : ClientInterface
      * Cookies are indexed by the cookie"s domain or
      * request host name.
      *
-     * @var uim.cake.Http\Cookie\CookieCollection
+     * @var uim.cake.http.Cookie\CookieCollection
      */
     protected $_cookies;
 
     /**
      * Mock adapter for stubbing requests in tests.
      *
-     * @var uim.cake.Http\Client\Adapter\Mock|null
+     * @var uim.cake.http.Client\Adapter\Mock|null
      */
     protected static $_mockAdapter;
 
     /**
      * Adapter for sending requests.
      *
-     * @var uim.cake.Http\Client\AdapterInterface
+     * @var uim.cake.http.Client\AdapterInterface
      */
     protected $_adapter;
 
@@ -247,7 +247,7 @@ class Client : ClientInterface
     /**
      * Get the cookies stored in the Client.
      *
-     * @return uim.cake.Http\Cookie\CookieCollection
+     * @return uim.cake.http.Cookie\CookieCollection
      */
     function cookies(): CookieCollection
     {
@@ -257,7 +257,7 @@ class Client : ClientInterface
     /**
      * Adds a cookie to the Client collection.
      *
-     * @param uim.cake.Http\Cookie\CookieInterface $cookie Cookie object.
+     * @param uim.cake.http.Cookie\CookieInterface $cookie Cookie object.
      * @return this
      * @throws \InvalidArgumentException
      */
@@ -281,7 +281,7 @@ class Client : ClientInterface
      * @param string $url The url or path you want to request.
      * @param array|string $data The query data you want to send.
      * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function get(string $url, $data = [], array $options = []): Response
     {
@@ -307,7 +307,7 @@ class Client : ClientInterface
      * @param string $url The url or path you want to request.
      * @param mixed $data The post data you want to send.
      * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function post(string $url, $data = [], array $options = []): Response
     {
@@ -323,7 +323,7 @@ class Client : ClientInterface
      * @param string $url The url or path you want to request.
      * @param mixed $data The request data you want to send.
      * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function put(string $url, $data = [], array $options = []): Response
     {
@@ -339,7 +339,7 @@ class Client : ClientInterface
      * @param string $url The url or path you want to request.
      * @param mixed $data The request data you want to send.
      * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function patch(string $url, $data = [], array $options = []): Response
     {
@@ -355,7 +355,7 @@ class Client : ClientInterface
      * @param string $url The url or path you want to request.
      * @param mixed $data The request data you want to send.
      * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function options(string $url, $data = [], array $options = []): Response
     {
@@ -371,7 +371,7 @@ class Client : ClientInterface
      * @param string $url The url or path you want to request.
      * @param mixed $data The request data you want to send.
      * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function trace(string $url, $data = [], array $options = []): Response
     {
@@ -387,7 +387,7 @@ class Client : ClientInterface
      * @param string $url The url or path you want to request.
      * @param mixed $data The request data you want to send.
      * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function delete(string $url, $data = [], array $options = []): Response
     {
@@ -403,7 +403,7 @@ class Client : ClientInterface
      * @param string $url The url or path you want to request.
      * @param array $data The query string data you want to send.
      * @param array<string, mixed> $options Additional options for the request.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function head(string $url, array $data = [], array $options = []): Response
     {
@@ -420,7 +420,7 @@ class Client : ClientInterface
      * @param string $url URL to request.
      * @param mixed $data The request body.
      * @param array<string, mixed> $options The options to use. Contains auth, proxy, etc.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     protected function _doRequest(string $method, string $url, $data, $options): Response
     {
@@ -465,7 +465,7 @@ class Client : ClientInterface
      *
      * @param \Psr\Http\Message\RequestInterface $request The request to send.
      * @param array<string, mixed> $options Additional options to use.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     function send(RequestInterface $request, array $options = []): Response
     {
@@ -523,7 +523,7 @@ class Client : ClientInterface
      *
      * @param string $method The HTTP method being mocked.
      * @param string $url The URL being matched. See above for examples.
-     * @param uim.cake.Http\Client\Response $response The response that matches the request.
+     * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
      * @return void
      */
@@ -541,7 +541,7 @@ class Client : ClientInterface
      *
      * @param \Psr\Http\Message\RequestInterface $request The request to send.
      * @param array<string, mixed> $options Additional options to use.
-     * @return uim.cake.Http\Client\Response
+     * @return uim.cake.http.Client\Response
      */
     protected function _sendRequest(RequestInterface $request, array $options): Response
     {
@@ -616,7 +616,7 @@ class Client : ClientInterface
      * @param string $url The url including query string.
      * @param mixed $data The request body.
      * @param array<string, mixed> $options The options to use. Contains auth, proxy, etc.
-     * @return uim.cake.Http\Client\Request
+     * @return uim.cake.http.Client\Request
      */
     protected function _createRequest(string $method, string $url, $data, $options): Request
     {
@@ -632,7 +632,7 @@ class Client : ClientInterface
         $request = new Request($url, $method, $headers, $data);
         $request = $request.withProtocolVersion(this.getConfig("protocolVersion"));
         $cookies = $options["cookies"] ?? [];
-        /** @var uim.cake.Http\Client\Request $request */
+        /** @var uim.cake.http.Client\Request $request */
         $request = _cookies.addToRequest($request, $cookies);
         if (isset($options["auth"])) {
             $request = _addAuthentication($request, $options);
@@ -682,14 +682,14 @@ class Client : ClientInterface
      * Uses the authentication type to choose the correct strategy
      * and use its methods to add headers.
      *
-     * @param uim.cake.Http\Client\Request $request The request to modify.
+     * @param uim.cake.http.Client\Request $request The request to modify.
      * @param array<string, mixed> $options Array of options containing the "auth" key.
-     * @return uim.cake.Http\Client\Request The updated request object.
+     * @return uim.cake.http.Client\Request The updated request object.
      */
     protected function _addAuthentication(Request $request, array $options): Request
     {
         $auth = $options["auth"];
-        /** @var uim.cake.Http\Client\Auth\Basic $adapter */
+        /** @var uim.cake.http.Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, $options);
 
         return $adapter.authentication($request, $options["auth"]);
@@ -701,14 +701,14 @@ class Client : ClientInterface
      * Uses the authentication type to choose the correct strategy
      * and use its methods to add headers.
      *
-     * @param uim.cake.Http\Client\Request $request The request to modify.
+     * @param uim.cake.http.Client\Request $request The request to modify.
      * @param array<string, mixed> $options Array of options containing the "proxy" key.
-     * @return uim.cake.Http\Client\Request The updated request object.
+     * @return uim.cake.http.Client\Request The updated request object.
      */
     protected function _addProxy(Request $request, array $options): Request
     {
         $auth = $options["proxy"];
-        /** @var uim.cake.Http\Client\Auth\Basic $adapter */
+        /** @var uim.cake.http.Client\Auth\Basic $adapter */
         $adapter = _createAuth($auth, $options);
 
         return $adapter.proxyAuthentication($request, $options["proxy"]);

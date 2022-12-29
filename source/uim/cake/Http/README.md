@@ -12,7 +12,7 @@ handle incoming server requests and send outgoing HTTP requests.
 Sending requests is straight forward. Doing a GET request looks like:
 
 ```php
-import uim.cake.https.Client;
+import uim.cake.http.Client;
 
 $http = new Client();
 
@@ -40,8 +40,8 @@ emit responses. To get started first implement the
 namespace App;
 
 import uim.cake.cores.IHttpApplication;
-import uim.cake.https.MiddlewareQueue;
-import uim.cake.https.Response;
+import uim.cake.http.MiddlewareQueue;
+import uim.cake.http.Response;
 use Psr\Http\Message\IResponse;
 use Psr\Http\Message\IServerRequest;
 
@@ -61,8 +61,8 @@ class Application : IHttpApplication
     /**
      * Define the HTTP middleware layers for an application.
      *
-     * @param uim.cake.Http\MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
-     * @return uim.cake.Http\MiddlewareQueue
+     * @param uim.cake.http.MiddlewareQueue $middlewareQueue The middleware queue to set in your App Class
+     * @return uim.cake.http.MiddlewareQueue
      */
     function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
@@ -93,7 +93,7 @@ requests:
 require dirname(__DIR__) . "/vendor/autoload.php";
 
 use App\Application;
-import uim.cake.https.Server;
+import uim.cake.http.Server;
 
 // Bind your application to the server.
 $server = new Server(new Application());

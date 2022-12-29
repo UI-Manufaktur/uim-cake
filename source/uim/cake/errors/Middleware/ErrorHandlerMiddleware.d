@@ -126,7 +126,7 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Convert a redirect exception into a response.
      *
-     * @param uim.cake.Http\Exception\RedirectException myException The exception to handle
+     * @param uim.cake.http.Exception\RedirectException myException The exception to handle
      * @return \Psr\Http\Message\IResponse Response created from the redirect.
      */
     IResponse handleRedirect(RedirectException myException) {
