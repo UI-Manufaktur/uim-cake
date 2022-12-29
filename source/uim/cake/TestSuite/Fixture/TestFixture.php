@@ -96,7 +96,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     /**
      * Instantiate the fixture.
      *
-     * @throws \Cake\Core\Exception\CakeException on invalid datasource usage.
+     * @throws uim.cake.Core\Exception\CakeException on invalid datasource usage.
      */
     public this() {
         if (!empty(this.connection)) {
@@ -129,7 +129,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      * Initialize the fixture.
      *
      * @return void
-     * @throws \Cake\ORM\Exception\MissingTableClassException When importing from a table that does not exist.
+     * @throws uim.cake.ORM\Exception\MissingTableClassException When importing from a table that does not exist.
      */
     function init(): void
     {
@@ -202,7 +202,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      * Build fixture schema from a table in another datasource.
      *
      * @return void
-     * @throws \Cake\Core\Exception\CakeException when trying to import from an empty table.
+     * @throws uim.cake.Core\Exception\CakeException when trying to import from an empty table.
      */
     protected function _schemaFromImport(): void
     {
@@ -234,7 +234,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
      * Build fixture schema directly from the datasource
      *
      * @return void
-     * @throws \Cake\Core\Exception\CakeException when trying to reflect a table that does not exist
+     * @throws uim.cake.Core\Exception\CakeException when trying to reflect a table that does not exist
      */
     protected function _schemaFromReflection(): void
     {

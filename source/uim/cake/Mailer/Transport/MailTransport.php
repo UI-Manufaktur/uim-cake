@@ -74,7 +74,7 @@ class MailTransport : AbstractTransport
      * @param string $message email"s body
      * @param string $headers email"s custom headers
      * @param string $params additional params for sending email
-     * @throws \Cake\Network\Exception\SocketException if mail could not be sent
+     * @throws uim.cake.Network\Exception\SocketException if mail could not be sent
      * @return void
      */
     protected function _mail(

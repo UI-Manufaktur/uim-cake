@@ -64,7 +64,7 @@ class FormatterLocator
      *
      * @param string $name The formatter to retrieve.
      * @return uim.cake.I18n\FormatterInterface A formatter object.
-     * @throws \Cake\I18n\Exception\I18nException
+     * @throws uim.cake.I18n\Exception\I18nException
      */
     function get(string $name): FormatterInterface
     {

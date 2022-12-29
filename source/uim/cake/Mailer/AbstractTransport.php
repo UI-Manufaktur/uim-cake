@@ -49,7 +49,7 @@ abstract class AbstractTransport
      *
      * @param uim.cake.Mailer\Message $message Message instance.
      * @return void
-     * @throws \Cake\Core\Exception\CakeException If at least one of to, cc or bcc is not specified.
+     * @throws uim.cake.Core\Exception\CakeException If at least one of to, cc or bcc is not specified.
      */
     protected function checkRecipient(Message $message): void
     {

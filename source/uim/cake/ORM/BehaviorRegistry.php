@@ -109,7 +109,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the behavior is missing in.
      * @return void
-     * @throws \Cake\ORM\Exception\MissingBehaviorException
+     * @throws uim.cake.ORM\Exception\MissingBehaviorException
      */
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {

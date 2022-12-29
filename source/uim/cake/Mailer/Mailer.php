@@ -328,7 +328,7 @@ class Mailer : IEventListener
      * @param array $args Arguments to pass to the triggered mailer action.
      * @param array $headers Headers to set.
      * @return array
-     * @throws \Cake\Mailer\Exception\MissingActionException
+     * @throws uim.cake.Mailer\Exception\MissingActionException
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */

@@ -219,7 +219,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to validate against.
      * @param uim.cake.Http\Session $session The session instance.
-     * @throws \Cake\Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
+     * @throws uim.cake.Http\Exception\InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
     protected void validateToken(IServerRequest myRequest, Session $session) {
         $token = $session.read(_config["key"]);

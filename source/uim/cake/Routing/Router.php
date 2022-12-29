@@ -196,7 +196,7 @@ class Router
      *   shifted into the passed arguments, supplying patterns for routing parameters and supplying the name of a
      *   custom routing class.
      * @return void
-     * @throws \Cake\Core\Exception\CakeException
+     * @throws uim.cake.Core\Exception\CakeException
      * @see uim.cake.Routing\RouteBuilder::connect()
      * @see uim.cake.Routing\Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
@@ -218,7 +218,7 @@ class Router
      *
      * @param uim.cake.Http\ServerRequest $request The request to parse request data from.
      * @return array Parsed elements from URL.
-     * @throws \Cake\Routing\Exception\MissingRouteException When a route cannot be handled
+     * @throws uim.cake.Routing\Exception\MissingRouteException When a route cannot be handled
      */
     public static function parseRequest(ServerRequest $request): array
     {
@@ -405,7 +405,7 @@ class Router
      * @param bool $full If true, the full base URL will be prepended to the result.
      *   Default is false.
      * @return string Full translated URL with base path.
-     * @throws \Cake\Core\Exception\CakeException When the route name is not found
+     * @throws uim.cake.Core\Exception\CakeException When the route name is not found
      */
     public static function url($url = null, bool $full = false): string
     {

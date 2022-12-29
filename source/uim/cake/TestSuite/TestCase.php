@@ -980,7 +980,7 @@ abstract class TestCase : BaseTestCase
      * @param string $alias The model to get a mock for.
      * @param array<string> $methods The list of methods to mock
      * @param array<string, mixed> $options The config data for the mock"s constructor.
-     * @throws \Cake\ORM\Exception\MissingTableClassException
+     * @throws uim.cake.ORM\Exception\MissingTableClassException
      * @return uim.cake.ORM\Table|\PHPUnit\Framework\MockObject\MockObject
      */
     function getMockForModel(string $alias, array $methods = [], array $options = []) {
@@ -1040,7 +1040,7 @@ abstract class TestCase : BaseTestCase
      * @param string $alias The model to get a mock for.
      * @param array<string, mixed> $options The config data for the mock"s constructor.
      * @return string
-     * @throws \Cake\ORM\Exception\MissingTableClassException
+     * @throws uim.cake.ORM\Exception\MissingTableClassException
      * @psalm-return class-string<\Cake\ORM\Table>
      */
     protected function _getTableClassName(string $alias, array $options): string

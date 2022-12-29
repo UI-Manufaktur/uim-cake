@@ -234,7 +234,7 @@ class Behavior : IEventListener
      * Checks that implemented keys contain values pointing at callable.
      *
      * @return void
-     * @throws \Cake\Core\Exception\CakeException if config are invalid
+     * @throws uim.cake.Core\Exception\CakeException if config are invalid
      */
     function verifyConfig(): void
     {

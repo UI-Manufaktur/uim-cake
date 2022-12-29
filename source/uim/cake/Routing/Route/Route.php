@@ -443,7 +443,7 @@ class Route
      * @param string $url The URL to attempt to parse.
      * @param string $method The HTTP method of the request being parsed.
      * @return array|null An array of request parameters, or `null` on failure.
-     * @throws \Cake\Http\Exception\BadRequestException When method is not an empty string and not in `VALID_METHODS` list.
+     * @throws uim.cake.Http\Exception\BadRequestException When method is not an empty string and not in `VALID_METHODS` list.
      */
     function parse(string $url, string $method): ?array
     {

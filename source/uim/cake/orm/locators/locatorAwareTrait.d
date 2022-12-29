@@ -55,7 +55,7 @@ trait LocatorAwareTrait
      * @param array<string, mixed> myOptions The options you want to build the table with.
      *   If a table has already been loaded the registry options will be ignored.
      * @return uim.cake.ORM\Table
-     * @throws \Cake\Core\Exception\CakeException If `myAlias` argument and `$defaultTable` property both are `null`.
+     * @throws uim.cake.Core\Exception\CakeException If `myAlias` argument and `$defaultTable` property both are `null`.
      * @see uim.cake.ORM\TableLocator::get()
      * @since 4.3.0
      */

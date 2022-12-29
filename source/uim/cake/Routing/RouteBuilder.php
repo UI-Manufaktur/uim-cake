@@ -558,7 +558,7 @@ class RouteBuilder
      *
      * @param string $name The plugin name
      * @return this
-     * @throws \Cake\Core\Exception\MissingPluginException When the plugin has not been loaded.
+     * @throws uim.cake.Core\Exception\MissingPluginException When the plugin has not been loaded.
      * @throws \InvalidArgumentException When the plugin does not have a routes file.
      */
     function loadPlugin(string $name) {

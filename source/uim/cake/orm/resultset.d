@@ -187,7 +187,7 @@ class ResultSet : IResultSet
      *
      * Part of Iterator interface.
      *
-     * @throws \Cake\Database\Exception\DatabaseException
+     * @throws uim.cake.Database\Exception\DatabaseException
      * @return void
      */
     function rewind() {

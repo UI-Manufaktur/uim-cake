@@ -107,7 +107,7 @@ class Socket
      * Connect the socket to the given host and port.
      *
      * @return bool Success
-     * @throws \Cake\Network\Exception\SocketException
+     * @throws uim.cake.Network\Exception\SocketException
      */
     function connect(): bool
     {
@@ -455,7 +455,7 @@ class Socket
      * @param bool $enable enable or disable encryption. Default is true (enable)
      * @return void
      * @throws \InvalidArgumentException When an invalid encryption scheme is chosen.
-     * @throws \Cake\Network\Exception\SocketException When attempting to enable SSL/TLS fails
+     * @throws uim.cake.Network\Exception\SocketException When attempting to enable SSL/TLS fails
      * @see stream_socket_enable_crypto
      */
     function enableCrypto(string $type, string $clientOrServer = "client", bool $enable = true): void

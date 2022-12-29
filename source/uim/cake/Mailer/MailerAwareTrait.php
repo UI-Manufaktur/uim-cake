@@ -27,7 +27,7 @@ trait MailerAwareTrait
      * @param string $name Mailer"s name.
      * @param array<string, mixed>|string|null $config Array of configs, or profile name string.
      * @return uim.cake.Mailer\Mailer
-     * @throws \Cake\Mailer\Exception\MissingMailerException if undefined mailer class.
+     * @throws uim.cake.Mailer\Exception\MissingMailerException if undefined mailer class.
      */
     protected function getMailer(string $name, $config = null): Mailer
     {

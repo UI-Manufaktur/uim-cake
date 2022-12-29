@@ -599,7 +599,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\EntityInterface $node The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      * @return uim.cake.Datasource\EntityInterface|false $node The node after being moved or false if `$number` is < 1
      */
     function moveUp(EntityInterface $node, $number = 1) {
@@ -620,7 +620,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $node The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
      * @return uim.cake.Datasource\EntityInterface $node The node after being moved
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      */
     protected function _moveUp(EntityInterface $node, $number): EntityInterface
     {
@@ -690,7 +690,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\EntityInterface $node The node to move
      * @param int|true $number How many places to move the node or true to move to last position
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      * @return uim.cake.Datasource\EntityInterface|false the entity after being moved or false if `$number` is < 1
      */
     function moveDown(EntityInterface $node, $number = 1) {
@@ -711,7 +711,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $node The node to move
      * @param int|true $number How many places to move the node, or true to move to last position
      * @return uim.cake.Datasource\EntityInterface $node The node after being moved
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      */
     protected function _moveDown(EntityInterface $node, $number): EntityInterface
     {
@@ -778,7 +778,7 @@ class TreeBehavior : Behavior
      *
      * @param mixed $id Record id.
      * @return uim.cake.Datasource\EntityInterface
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      * @psalm-suppress InvalidReturnType
      */
     protected function _getNode($id): EntityInterface

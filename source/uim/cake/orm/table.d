@@ -650,7 +650,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * Sets the class used to hydrate rows for this table.
      *
      * @param string myName The name of the class to use
-     * @throws \Cake\ORM\Exception\MissingEntityException when the entity class cannot be found
+     * @throws uim.cake.ORM\Exception\MissingEntityException when the entity class cannot be found
      * @return this
      */
     auto setEntityClass(string myName) {
@@ -1401,9 +1401,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param mixed $primaryKey primary key value to find
      * @param array<string, mixed> myOptions options accepted by `Table::find()`
      * @return uim.cake.Datasource\IEntity
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException if the record with such id
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException if the record with such id
      * could not be found
-     * @throws \Cake\Datasource\Exception\InvalidPrimaryKeyException When $primaryKey has an
+     * @throws uim.cake.Datasource\Exception\InvalidPrimaryKeyException When $primaryKey has an
      *      incorrect number of elements.
      * @see uim.cake.datasources.IRepository::find()
      * @psalm-suppress InvalidReturnType
@@ -1513,7 +1513,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *   is persisted.
      * @param array<string, mixed> myOptions The options to use when saving.
      * @return uim.cake.Datasource\IEntity An entity.
-     * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
+     * @throws uim.cake.ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      */
     function findOrCreate($search, ?callable $callback = null, myOptions = []): IEntity
     {
@@ -1543,7 +1543,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *   is persisted.
      * @param array<string, mixed> myOptions The options to use when saving.
      * @return uim.cake.Datasource\IEntity|array An entity.
-     * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
+     * @throws uim.cake.ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      * @throws \InvalidArgumentException
      */
     protected auto _processFindOrCreate($search, ?callable $callback = null, myOptions = []) {
@@ -1738,7 +1738,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions The options to use when saving.
      * @return uim.cake.Datasource\IEntity|false
-     * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction is aborted in the afterSave event.
+     * @throws uim.cake.ORM\Exception\RolledbackTransactionException If the transaction is aborted in the afterSave event.
      */
     function save(IEntity $entity, myOptions = []) {
         if (myOptions instanceof SaveOptionsBuilder) {
@@ -1786,7 +1786,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayAccess|array myOptions The options to use when saving.
      * @return uim.cake.Datasource\IEntity
-     * @throws \Cake\ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
+     * @throws uim.cake.ORM\Exception\PersistenceFailedException When the entity couldn"t be saved
      * @see uim.cake.ORM\Table::save()
      */
     function saveOrFail(IEntity $entity, myOptions = []): IEntity
@@ -1806,7 +1806,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param \ArrayObject myOptions the options to use for the save operation
      * @return uim.cake.Datasource\IEntity|false
      * @throws \RuntimeException When an entity is missing some of the primary keys.
-     * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction
+     * @throws uim.cake.ORM\Exception\RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
     protected auto _processSave(IEntity $entity, ArrayObject myOptions) {
@@ -1884,7 +1884,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayObject myOptions the options to use for the save operation
      * @return bool True on success
-     * @throws \Cake\ORM\Exception\RolledbackTransactionException If the transaction
+     * @throws uim.cake.ORM\Exception\RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
     protected bool _onSaveSuccess(IEntity $entity, ArrayObject myOptions) {
@@ -2088,7 +2088,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      * @throws \Exception
-     * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
+     * @throws uim.cake.ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      */
     function saveManyOrFail(iterable $entities, myOptions = []): iterable
     {
@@ -2098,7 +2098,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to save.
      * @param uim.cake.ORM\SaveOptionsBuilder|\ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
-     * @throws \Cake\ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
+     * @throws uim.cake.ORM\Exception\PersistenceFailedException If an entity couldn"t be saved.
      * @throws \Exception If an entity couldn"t be saved.
      * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
      */
@@ -2243,7 +2243,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array myOptions Options used when calling Table::save() for each entity.
      * @return uim.cake.Datasource\IResultSet|array<\Cake\Datasource\IEntity> Entities list.
-     * @throws \Cake\ORM\Exception\PersistenceFailedException
+     * @throws uim.cake.ORM\Exception\PersistenceFailedException
      * @see uim.cake.ORM\Table::delete() for options and events related to this method.
      */
     function deleteManyOrFail(iterable $entities, myOptions = []): iterable
@@ -2299,7 +2299,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.Datasource\IEntity $entity The entity to remove.
      * @param \ArrayAccess|array myOptions The options for the delete.
      * @return true
-     * @throws \Cake\ORM\Exception\PersistenceFailedException
+     * @throws uim.cake.ORM\Exception\PersistenceFailedException
      * @see uim.cake.ORM\Table::delete()
      */
     bool deleteOrFail(IEntity $entity, myOptions = []) {

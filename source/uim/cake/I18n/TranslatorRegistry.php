@@ -173,7 +173,7 @@ class TranslatorRegistry
      * @param string|null $locale The locale to use; if empty, uses the default
      * locale.
      * @return uim.cake.I18n\Translator|null A translator object.
-     * @throws \Cake\I18n\Exception\I18nException If no translator with that name could be found
+     * @throws uim.cake.I18n\Exception\I18nException If no translator with that name could be found
      * for the given locale.
      */
     function get(string $name, ?string $locale = null): ?Translator

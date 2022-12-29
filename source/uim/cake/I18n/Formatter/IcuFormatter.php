@@ -26,7 +26,7 @@ class IcuFormatter : FormatterInterface
      * @param string $message The message to be translated
      * @param array $tokenValues The list of values to interpolate in the message
      * @return string The formatted message
-     * @throws \Cake\I18n\Exception\I18nException
+     * @throws uim.cake.I18n\Exception\I18nException
      */
     function format(string $locale, string $message, array $tokenValues): string
     {

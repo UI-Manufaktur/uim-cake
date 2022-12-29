@@ -102,7 +102,7 @@ class RouteCollection
      * @param string myUrl URL to parse.
      * @param string method The HTTP method to use.
      * @return array An array of request parameters parsed from the URL.
-     * @throws \Cake\Routing\Exception\MissingRouteException When a URL has no matching route.
+     * @throws uim.cake.Routing\Exception\MissingRouteException When a URL has no matching route.
      */
     function parse(string myUrl, string method = ""): array
     {
@@ -150,7 +150,7 @@ class RouteCollection
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to parse route data from.
      * @return array An array of request parameters parsed from the URL.
-     * @throws \Cake\Routing\Exception\MissingRouteException When a URL has no matching route.
+     * @throws uim.cake.Routing\Exception\MissingRouteException When a URL has no matching route.
      */
     function parseRequest(IServerRequest myRequest): array
     {
@@ -272,7 +272,7 @@ class RouteCollection
      * @param array $context The request context to use. Contains _base, _port,
      *    _host, _scheme and params keys.
      * @return string The URL string on match.
-     * @throws \Cake\Routing\Exception\MissingRouteException When no route could be matched.
+     * @throws uim.cake.Routing\Exception\MissingRouteException When no route could be matched.
      */
     string match(array myUrl, array $context) {
         // Named routes support optimization.

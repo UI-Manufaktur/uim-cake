@@ -572,7 +572,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      * @return uim.cake.Datasource\IEntity|false myNode The node after being moved or false if `$number` is < 1
      */
     function moveUp(IEntity myNode, $number = 1) {
@@ -593,7 +593,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
      * @return uim.cake.Datasource\IEntity myNode The node after being moved
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      */
     protected auto _moveUp(IEntity myNode, $number): IEntity
     {
@@ -663,7 +663,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node or true to move to last position
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      * @return uim.cake.Datasource\IEntity|false the entity after being moved or false if `$number` is < 1
      */
     function moveDown(IEntity myNode, $number = 1) {
@@ -684,7 +684,7 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity myNode The node to move
      * @param int|true $number How many places to move the node, or true to move to last position
      * @return uim.cake.Datasource\IEntity myNode The node after being moved
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      */
     protected auto _moveDown(IEntity myNode, $number): IEntity
     {
@@ -751,7 +751,7 @@ class TreeBehavior : Behavior
      *
      * @param mixed $id Record id.
      * @return uim.cake.Datasource\IEntity
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When node was not found
+     * @throws uim.cake.Datasource\Exception\RecordNotFoundException When node was not found
      * @psalm-suppress InvalidReturnType
      */
     protected auto _getNode($id): IEntity

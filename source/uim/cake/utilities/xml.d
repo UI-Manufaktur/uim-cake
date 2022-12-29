@@ -78,7 +78,7 @@ class Xml {
      * @param object|array|string input XML string, a path to a file, a URL or an array
      * @param array<string, mixed> myOptions The options to use
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
-     * @throws \Cake\Utility\Exception\XmlException
+     * @throws uim.cake.Utility\Exception\XmlException
      */
     static function build($input, array myOptions = []) {
         $defaults = [
@@ -115,7 +115,7 @@ class Xml {
      * @param string input The input to load.
      * @param array<string, mixed> myOptions The options to use. See Xml::build()
      * @return \SimpleXMLElement|\DOMDocument
-     * @throws \Cake\Utility\Exception\XmlException
+     * @throws uim.cake.Utility\Exception\XmlException
      */
     protected static auto _loadXml(string input, array myOptions) {
         return static::load(
@@ -141,7 +141,7 @@ class Xml {
      * @param string input The input html string to load.
      * @param array<string, mixed> myOptions The options to use. See Xml::build()
      * @return \SimpleXMLElement|\DOMDocument
-     * @throws \Cake\Utility\Exception\XmlException
+     * @throws uim.cake.Utility\Exception\XmlException
      */
     static function loadHtml(string input, array myOptions = []) {
         $defaults = [
@@ -173,7 +173,7 @@ class Xml {
      * @param array<string, mixed> myOptions The options to use. See Xml::build()
      * @param \Closure $callable Closure that should return SimpleXMLElement or DOMDocument instance.
      * @return \SimpleXMLElement|\DOMDocument
-     * @throws \Cake\Utility\Exception\XmlException
+     * @throws uim.cake.Utility\Exception\XmlException
      */
     protected static function load(string input, array myOptions, Closure $callable) {
         $flags = 0;
@@ -238,7 +238,7 @@ class Xml {
      * @param object|array $input Array with data or a collection instance.
      * @param array<string, mixed> myOptions The options to use.
      * @return \SimpleXMLElement|\DOMDocument SimpleXMLElement or DOMDocument
-     * @throws \Cake\Utility\Exception\XmlException
+     * @throws uim.cake.Utility\Exception\XmlException
      */
     static function fromArray($input, array myOptions = []) {
         if (is_object($input) && method_exists($input, "toArray") && is_callable([$input, "toArray"])) {
@@ -283,7 +283,7 @@ class Xml {
      * @param array myData Array of data to append to the myNode.
      * @param string format Either "attributes" or "tags". This determines where nested keys go.
      * @return void
-     * @throws \Cake\Utility\Exception\XmlException
+     * @throws uim.cake.Utility\Exception\XmlException
      */
     protected static void _fromArray(DOMDocument $dom, myNode, &myData, $format) {
         if (empty(myData) || !is_array(myData)) {
@@ -402,7 +402,7 @@ class Xml {
      *
      * @param \SimpleXMLElement|\DOMDocument|\DOMNode $obj SimpleXMLElement, DOMDocument or DOMNode instance
      * @return array Array representation of the XML structure.
-     * @throws \Cake\Utility\Exception\XmlException
+     * @throws uim.cake.Utility\Exception\XmlException
      */
     static function toArray($obj): array
     {
