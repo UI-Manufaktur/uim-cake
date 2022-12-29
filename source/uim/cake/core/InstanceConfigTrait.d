@@ -42,7 +42,7 @@ trait InstanceConfigTrait {
      * @param mixed|null myValue The value to set.
      * @param bool myMerge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
-     * @throws uim.cake.Core\Exception\CakeException When trying to set a key that is invalid.
+     * @throws uim.cake.Core\exceptions.CakeException When trying to set a key that is invalid.
      */
     auto setConfig(myKey, myValue = null, myMerge = true) {
         if (!_configInitialized) {
@@ -190,7 +190,7 @@ trait InstanceConfigTrait {
      * @param mixed myValue Value to write.
      * @param string|bool myMerge True to merge recursively, "shallow" for simple merge,
      *   false to overwrite, defaults to false.
-     * @throws uim.cake.Core\Exception\CakeException if attempting to clobber existing config
+     * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
      */
     protected void _configWrite(myKey, myValue, myMerge = false) {
         if (is_string(myKey) && myValue is null) {
@@ -244,7 +244,7 @@ trait InstanceConfigTrait {
      * Deletes a single config key.
      *
      * @param string myKey Key to delete.
-     * @throws uim.cake.Core\Exception\CakeException if attempting to clobber existing config
+     * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
      */
     protected void _configDelete(string myKey) {
         if (indexOf(myKey, ".") == false) {

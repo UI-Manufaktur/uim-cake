@@ -29,7 +29,7 @@ class Plugin
      *
      * @param string $name name of the plugin in CamelCase format
      * @return string path to the plugin folder
-     * @throws uim.cake.Core\Exception\MissingPluginException If the folder for plugin was not found
+     * @throws uim.cake.Core\exceptions.MissingPluginException If the folder for plugin was not found
      *   or plugin has not been loaded.
      */
     static function path(string $name): string
@@ -44,7 +44,7 @@ class Plugin
      *
      * @param string $name name of the plugin in CamelCase format.
      * @return string Path to the plugin folder containing class files.
-     * @throws uim.cake.Core\Exception\MissingPluginException If plugin has not been loaded.
+     * @throws uim.cake.Core\exceptions.MissingPluginException If plugin has not been loaded.
      */
     static function classPath(string $name): string
     {
@@ -58,7 +58,7 @@ class Plugin
      *
      * @param string $name name of the plugin in CamelCase format.
      * @return string Path to the plugin folder containing config files.
-     * @throws uim.cake.Core\Exception\MissingPluginException If plugin has not been loaded.
+     * @throws uim.cake.Core\exceptions.MissingPluginException If plugin has not been loaded.
      */
     static function configPath(string $name): string
     {
@@ -72,7 +72,7 @@ class Plugin
      *
      * @param string $name name of the plugin in CamelCase format.
      * @return string Path to the plugin folder containing template files.
-     * @throws uim.cake.Core\Exception\MissingPluginException If plugin has not been loaded.
+     * @throws uim.cake.Core\exceptions.MissingPluginException If plugin has not been loaded.
      */
     static function templatePath(string $name): string
     {

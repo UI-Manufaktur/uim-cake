@@ -19,7 +19,7 @@ class ErrorController : Controller {
   /**
     * beforeRender callback.
     *
-    * @param uim.cake.Event\IEvent myEvent Event.
+    * @param uim.cake.events.IEvent myEvent Event.
     * @return uim.cake.http.Response|null|void
     */
   function beforeRender(IEvent myEvent) {

@@ -11,4 +11,4 @@
  * @since         4.2.0
   */
 
-class_alias("Cake\Core\Exception\CakeException", "Cake\Core\Exception\Exception");
+class_alias("Cake\Core\exceptions.CakeException", "Cake\Core\exceptions.Exception");

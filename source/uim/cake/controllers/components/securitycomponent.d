@@ -58,7 +58,7 @@ class SecurityComponent : Component {
     /**
      * Component startup. All security checking happens here.
      *
-     * @param uim.cake.Event\IEvent myEvent An Event instance
+     * @param uim.cake.events.IEvent myEvent An Event instance
      * @return uim.cake.http.Response|null
      */
     function startup(IEvent myEvent): ?Response
@@ -125,11 +125,11 @@ class SecurityComponent : Component {
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
      * @param string myError Error method
-     * @param uim.cake.controllers.Exception\SecurityException|null myException Additional debug info describing the cause
+     * @param uim.cake.controllers.exceptions.SecurityException|null myException Additional debug info describing the cause
      * @return mixed If specified, controller blackHoleCallback"s response, or no return otherwise
      * @see uim.cake.controllers.Component\SecurityComponent::$blackHoleCallback
      * @link https://book.UIM.org/4/en/controllers/components/security.html#handling-blackhole-callbacks
-     * @throws uim.cake.http.Exception\BadRequestException
+     * @throws uim.cake.http.exceptions.BadRequestException
      */
     function blackHole(Controller $controller, string myError = "", ?SecurityException myException = null) {
         if (!_config["blackHoleCallback"]) {
@@ -142,8 +142,8 @@ class SecurityComponent : Component {
     /**
      * Check debug status and throw an Exception based on the existing one
      *
-     * @param uim.cake.controllers.Exception\SecurityException|null myException Additional debug info describing the cause
-     * @throws uim.cake.http.Exception\BadRequestException
+     * @param uim.cake.controllers.exceptions.SecurityException|null myException Additional debug info describing the cause
+     * @throws uim.cake.http.exceptions.BadRequestException
      */
     protected void _throwException(?SecurityException myException = null) {
         if (myException  !is null) {
@@ -160,7 +160,7 @@ class SecurityComponent : Component {
      * Check if access requires secure connection
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
-     * @throws uim.cake.controllers.Exception\SecurityException
+     * @throws uim.cake.controllers.exceptions.SecurityException
      */
     protected void _secureRequired(Controller $controller) {
         if (
@@ -187,7 +187,7 @@ class SecurityComponent : Component {
      * Validate submitted form
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
-     * @throws uim.cake.controllers.Exception\AuthSecurityException
+     * @throws uim.cake.controllers.exceptions.AuthSecurityException
      */
     protected void _validatePost(Controller $controller) {
         $token = _validToken($controller);
@@ -210,7 +210,7 @@ class SecurityComponent : Component {
      * Check if token is valid
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
-     * @throws uim.cake.controllers.Exception\SecurityException
+     * @throws uim.cake.controllers.exceptions.SecurityException
      * @return string fields token
      */
     protected string _validToken(Controller $controller) {
@@ -461,7 +461,7 @@ class SecurityComponent : Component {
      * @param string method Method to execute
      * @param array myParams Parameters to send to method
      * @return mixed Controller callback method"s response
-     * @throws uim.cake.http.Exception\BadRequestException When a the blackholeCallback is not callable.
+     * @throws uim.cake.http.exceptions.BadRequestException When a the blackholeCallback is not callable.
      */
     protected auto _callback(Controller $controller, string method, array myParams = []) {
         $callable = [$controller, $method];

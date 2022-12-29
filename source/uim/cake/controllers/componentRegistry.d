@@ -1,6 +1,6 @@
 module uim.cake.controllers;
 
-import uim.cake.controllers\Exception\MissingComponentException;
+import uim.cake.controllers\exceptions.MissingComponentException;
 import uim.cake.core.App;
 import uim.cake.core.exceptions\CakeException;
 import uim.cake.core.ObjectRegistry;
@@ -83,7 +83,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the component is missing in.
-     * @throws uim.cake.controllers.Exception\MissingComponentException
+     * @throws uim.cake.controllers.exceptions.MissingComponentException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingComponentException([

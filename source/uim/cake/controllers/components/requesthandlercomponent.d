@@ -127,7 +127,7 @@ class RequestHandlerComponent : Component {
      * If the XML data is POSTed, the data is parsed into an XML object, which is assigned
      * to the myData property of the controller, which can then be saved to a model object.
      *
-     * @param uim.cake.Event\IEvent myEvent The startup event that was fired.
+     * @param uim.cake.events.IEvent myEvent The startup event that was fired.
      */
     void startup(IEvent myEvent) {
         $controller = this.getController();
@@ -167,8 +167,8 @@ class RequestHandlerComponent : Component {
      * - If the extension is of a type that RequestHandler understands, it will
      *   set that Content-type in the response header.
      *
-     * @param uim.cake.Event\IEvent myEvent The Controller.beforeRender event.
-     * @throws uim.cake.http.Exception\NotFoundException If invoked extension is not configured.
+     * @param uim.cake.events.IEvent myEvent The Controller.beforeRender event.
+     * @throws uim.cake.http.exceptions.NotFoundException If invoked extension is not configured.
      */
     void beforeRender(IEvent myEvent) {
         $controller = this.getController();

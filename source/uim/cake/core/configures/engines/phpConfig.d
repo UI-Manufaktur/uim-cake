@@ -58,7 +58,7 @@ class PhpConfig : IConfigEngine
      * @param string myKey The identifier to read from. If the key has a . it will be treated
      *  as a plugin prefix.
      * @return array Parsed configuration values.
-     * @throws uim.cake.Core\Exception\CakeException when files don"t exist or they don"t contain `myConfig`.
+     * @throws uim.cake.Core\exceptions.CakeException when files don"t exist or they don"t contain `myConfig`.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
     array read(string myKey) {

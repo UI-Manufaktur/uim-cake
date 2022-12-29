@@ -1,7 +1,7 @@
 module uim.cake.controllerss.components;
 
 import uim.cake.controllerss.components;
-import uim.caketps\Exception\InternalErrorException;
+import uim.caketps\exceptions.InternalErrorException;
 import uim.caketps\FlashMessage;
 import uim.cakeilities.Inflector;
 use Throwable;
@@ -74,7 +74,7 @@ class FlashComponent : Component
      * @param mixed|null myValue The value to set.
      * @param bool myMerge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
-     * @throws uim.cake.Core\Exception\CakeException When trying to set a key that is invalid.
+     * @throws uim.cake.Core\exceptions.CakeException When trying to set a key that is invalid.
      */
     auto setConfig(myKey, myValue = null, myMerge = true) {
         this.flash().setConfig(myKey, myValue, myMerge);
@@ -136,7 +136,7 @@ class FlashComponent : Component
      *
      * @param string myName Element name to use.
      * @param array $args Parameters to pass when calling `FlashComponent::set()`.
-     * @throws uim.cake.http.Exception\InternalErrorException If missing the flash message.
+     * @throws uim.cake.http.exceptions.InternalErrorException If missing the flash message.
      */
     void __call(string myName, array $args) {
         $element = Inflector::underscore(myName);

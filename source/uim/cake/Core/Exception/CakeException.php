@@ -112,5 +112,5 @@ class CakeException : RuntimeException
 }
 
 // phpcs:disable
-class_exists("Cake\Core\Exception\Exception");
+class_exists("Cake\Core\exceptions.Exception");
 // phpcs:enable

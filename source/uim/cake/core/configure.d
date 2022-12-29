@@ -288,7 +288,7 @@ class Configure
      * @param string myConfig Name of the configured engine to use to read the resource identified by myKey.
      * @param bool myMerge if config files should be merged instead of simply overridden
      * @return bool True if load successful.
-     * @throws uim.cake.Core\Exception\CakeException if the myConfig engine is not found
+     * @throws uim.cake.Core\exceptions.CakeException if the myConfig engine is not found
      * @link https://book.UIM.org/4/en/development/configuration.html#reading-and-writing-configuration-files
      */
     static bool load(string myKey, string myConfig = "default", bool myMerge = true) {
@@ -341,7 +341,7 @@ class Configure
      * @param myKeys The name of the top-level keys you want to dump.
      *   This allows you save only some data stored in Configure.
      * @return bool Success
-     * @throws uim.cake.Core\Exception\CakeException if the adapter does not implement a `dump` method.
+     * @throws uim.cake.Core\exceptions.CakeException if the adapter does not implement a `dump` method.
      */
     static bool dump(string myKey, string myConfig = "default", string[] myKeys = []) {
         $engine = static::_getEngine(myConfig);

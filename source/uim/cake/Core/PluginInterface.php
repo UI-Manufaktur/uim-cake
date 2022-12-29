@@ -36,35 +36,35 @@ interface PluginInterface
      *
      * @return string
      */
-    function getName(): string;
+    string getName(): string;
 
     /**
      * Get the filesystem path to this plugin
      *
      * @return string
      */
-    function getPath(): string;
+    string getPath(): string;
 
     /**
      * Get the filesystem path to configuration for this plugin
      *
      * @return string
      */
-    function getConfigPath(): string;
+    string getConfigPath(): string;
 
     /**
      * Get the filesystem path to configuration for this plugin
      *
      * @return string
      */
-    function getClassPath(): string;
+    string getClassPath(): string;
 
     /**
      * Get the filesystem path to templates for this plugin
      *
      * @return string
      */
-    function getTemplatePath(): string;
+    string getTemplatePath(): string;
 
     /**
      * Load all the application configuration and bootstrap logic.

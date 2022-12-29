@@ -19,7 +19,7 @@ use Traversable;
  * the template method load().
  *
  * The ObjectRegistry is EventManager aware, but each extending class will need to use
- * uim.cake.Event\EventDispatcherTrait to attach and detach on set and bind
+ * uim.cake.events.EventDispatcherTrait to attach and detach on set and bind
  *
  * @see uim.cake.controllers.ComponentRegistry
  * @see uim.cake.View\HelperRegistry

@@ -1,10 +1,10 @@
 module uim.cake.controllers;
 
-import uim.cake.controllers\Exception\InvalidParameterException;
+import uim.cake.controllers\exceptions.InvalidParameterException;
 import uim.cake.core.App;
 import uim.cake.core.IContainer;
 import uim.caketps\IControllerFactory;
-import uim.caketps\Exception\MissingControllerException;
+import uim.caketps\exceptions.MissingControllerException;
 import uim.caketps\MiddlewareQueue;
 import uim.caketps\Runner;
 import uim.caketps\ServerRequest;
@@ -48,7 +48,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      *
      * @param \Psr\Http\Message\IServerRequest myRequest The request to build a controller for.
      * @return uim.cake.controllers.Controller
-     * @throws uim.cake.http.Exception\MissingControllerException
+     * @throws uim.cake.http.exceptions.MissingControllerException
      */
     Controller create(IServerRequest myRequest) {
         myClassName = this.getControllerClass(myRequest);
@@ -78,7 +78,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      *
      * @param uim.cake.controllers.Controller $controller The controller to invoke.
      * @return \Psr\Http\Message\IResponse The response
-     * @throws uim.cake.controllers.Exception\MissingActionException If controller action is not found.
+     * @throws uim.cake.controllers.exceptions.MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
      */
     IResponse invoke($controller) {
@@ -310,7 +310,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * Throws an exception when a controller is missing.
      *
      * @param uim.cake.http.ServerRequest myRequest The request.
-     * @return uim.cake.http.Exception\MissingControllerException
+     * @return uim.cake.http.exceptions.MissingControllerException
      */
     protected auto missingController(ServerRequest myRequest) {
         return new MissingControllerException([

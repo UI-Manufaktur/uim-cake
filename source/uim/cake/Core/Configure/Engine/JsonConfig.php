@@ -55,7 +55,7 @@ class JsonConfig : ConfigEngineInterface
      * @param string $key The identifier to read from. If the key has a . it will be treated
      *   as a plugin prefix.
      * @return array Parsed configuration values.
-     * @throws uim.cake.Core\Exception\CakeException When files don"t exist or when
+     * @throws uim.cake.Core\exceptions.CakeException When files don"t exist or when
      *   files contain ".." (as this could lead to abusive reads) or when there
      *   is an error parsing the JSON string.
      */

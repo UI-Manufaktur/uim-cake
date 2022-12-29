@@ -53,7 +53,7 @@ trait InstanceConfigTrait
      * @param mixed|null $value The value to set.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
-     * @throws uim.cake.Core\Exception\CakeException When trying to set a key that is invalid.
+     * @throws uim.cake.Core\exceptions.CakeException When trying to set a key that is invalid.
      */
     function setConfig($key, $value = null, $merge = true) {
         if (!_configInitialized) {
@@ -202,7 +202,7 @@ trait InstanceConfigTrait
      * @param string|bool $merge True to merge recursively, "shallow" for simple merge,
      *   false to overwrite, defaults to false.
      * @return void
-     * @throws uim.cake.Core\Exception\CakeException if attempting to clobber existing config
+     * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
      */
     protected function _configWrite($key, $value, $merge = false): void
     {
@@ -258,7 +258,7 @@ trait InstanceConfigTrait
      *
      * @param string $key Key to delete.
      * @return void
-     * @throws uim.cake.Core\Exception\CakeException if attempting to clobber existing config
+     * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
      */
     protected function _configDelete(string $key): void
     {

@@ -12,7 +12,7 @@
   */
 module uim.cake.controllers.Exception;
 
-import uim.cake.http.Exception\BadRequestException;
+import uim.cake.http.exceptions.BadRequestException;
 
 /**
  * Security exception - used when SecurityComponent detects any issue with the current request
@@ -38,7 +38,7 @@ class SecurityException : BadRequestException
      *
      * @return string
      */
-    function getType(): string
+    string getType(): string
     {
         return _type;
     }

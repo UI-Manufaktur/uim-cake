@@ -18,7 +18,7 @@ import uim.cake.core.Configure;
 import uim.cake.core.IContainer;
 import uim.cake.events.EventInterface;
 use Closure;
-use League\Container\Exception\NotFoundException;
+use League\Container\exceptions.NotFoundException;
 use LogicException;
 
 /**
@@ -130,7 +130,7 @@ trait ContainerStubTrait
      * will be replaced with one containing mocks. The original
      * container will be set as a delegate to the mock container.
      *
-     * @param uim.cake.Event\IEvent $event The event
+     * @param uim.cake.events.IEvent $event The event
      * @param uim.cake.Core\IContainer $container The container to wrap.
      * @return uim.cake.Core\IContainer|null
      */

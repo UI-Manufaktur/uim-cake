@@ -209,7 +209,7 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Callback for Controller.startup event.
      *
-     * @param uim.cake.Event\IEvent myEvent Event instance.
+     * @param uim.cake.events.IEvent myEvent Event instance.
      * @return uim.cake.http.Response|null
      */
     function startup(IEvent myEvent): ?Response
@@ -224,7 +224,7 @@ class AuthComponent : Component : IEventDispatcher
      * The auth check is done when event name is same as the one configured in
      * `checkAuthIn` config.
      *
-     * @param uim.cake.Event\IEvent myEvent Event instance.
+     * @param uim.cake.events.IEvent myEvent Event instance.
      * @return uim.cake.http.Response|null
      * @throws \ReflectionException
      */
@@ -310,7 +310,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param uim.cake.controllers.Controller $controller A reference to the controller object.
      * @return uim.cake.http.Response|null Null if current action is login action
      *   else response object returned by authenticate object or Controller::redirect().
-     * @throws uim.cake.Core\Exception\CakeException
+     * @throws uim.cake.Core\exceptions.CakeException
      */
     protected auto _unauthenticated(Controller $controller): ?Response
     {
@@ -380,7 +380,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @param uim.cake.controllers.Controller $controller A reference to the controller object
      * @return uim.cake.http.Response|null
-     * @throws uim.cake.http.Exception\ForbiddenException
+     * @throws uim.cake.http.exceptions.ForbiddenException
      */
     protected auto _unauthorized(Controller $controller): ?Response
     {
@@ -476,7 +476,7 @@ class AuthComponent : Component : IEventDispatcher
      * Loads the authorization objects configured.
      *
      * @return array|null The loaded authorization objects, or null when authorize is empty.
-     * @throws uim.cake.Core\Exception\CakeException
+     * @throws uim.cake.Core\exceptions.CakeException
      */
     function constructAuthorize(): ?array
     {
@@ -760,7 +760,7 @@ class AuthComponent : Component : IEventDispatcher
      * Loads the configured authentication objects.
      *
      * @return array<string, object>|null The loaded authorization objects, or null on empty authenticate value.
-     * @throws uim.cake.Core\Exception\CakeException
+     * @throws uim.cake.Core\exceptions.CakeException
      */
     function constructAuthenticate(): ?array
     {

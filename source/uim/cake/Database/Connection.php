@@ -99,7 +99,7 @@ class Connection : ConnectionInterface
      * NestedTransactionRollbackException object instance, will be stored if
      * the rollback method is called in some nested transaction.
      *
-     * @var uim.cake.Database\Exception\NestedTransactionRollbackException|null
+     * @var uim.cake.Database\exceptions.NestedTransactionRollbackException|null
      */
     protected $nestedTransactionRollbackException;
 
@@ -163,8 +163,8 @@ class Connection : ConnectionInterface
      *
      * @param uim.cake.Database\DriverInterface|string $driver The driver instance to use.
      * @param array<string, mixed> $config Config for a new driver.
-     * @throws uim.cake.Database\Exception\MissingDriverException When a driver class is missing.
-     * @throws uim.cake.Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
+     * @throws uim.cake.Database\exceptions.MissingDriverException When a driver class is missing.
+     * @throws uim.cake.Database\exceptions.MissingExtensionException When a driver's PHP extension is missing.
      * @return this
      * @deprecated 4.4.0 Setting the driver is deprecated. Use the connection config instead.
      */
@@ -182,8 +182,8 @@ class Connection : ConnectionInterface
      * @param uim.cake.Database\DriverInterface|string $name Driver name, class name or instance.
      * @param array $config Driver config if $name is not an instance.
      * @return uim.cake.Database\DriverInterface
-     * @throws uim.cake.Database\Exception\MissingDriverException When a driver class is missing.
-     * @throws uim.cake.Database\Exception\MissingExtensionException When a driver's PHP extension is missing.
+     * @throws uim.cake.Database\exceptions.MissingDriverException When a driver class is missing.
+     * @throws uim.cake.Database\exceptions.MissingExtensionException When a driver's PHP extension is missing.
      */
     protected function createDriver($name, array $config): DriverInterface
     {
@@ -228,7 +228,7 @@ class Connection : ConnectionInterface
     /**
      * Connects to the configured database.
      *
-     * @throws uim.cake.Database\Exception\MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.Database\exceptions.MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
     function connect(): bool
@@ -318,7 +318,7 @@ class Connection : ConnectionInterface
      * @param uim.cake.Database\ValueBinder $binder Value binder
      * @return string
      */
-    function compileQuery(Query $query, ValueBinder $binder): string
+    string compileQuery(Query $query, ValueBinder $binder): string
     {
         return this.getDriver().compileQuery($query, $binder)[1];
     }
@@ -499,7 +499,7 @@ class Connection : ConnectionInterface
 
         if (_transactionLevel == 0) {
             if (this.wasNestedTransactionRolledback()) {
-                /** @var uim.cake.Database\Exception\NestedTransactionRollbackException $e */
+                /** @var uim.cake.Database\exceptions.NestedTransactionRollbackException $e */
                 $e = this.nestedTransactionRollbackException;
                 this.nestedTransactionRollbackException = null;
                 throw $e;
@@ -772,7 +772,7 @@ class Connection : ConnectionInterface
      * @param string $identifier The identifier to quote.
      * @return string
      */
-    function quoteIdentifier(string $identifier): string
+    string quoteIdentifier(string $identifier): string
     {
         return _driver.quoteIdentifier($identifier);
     }

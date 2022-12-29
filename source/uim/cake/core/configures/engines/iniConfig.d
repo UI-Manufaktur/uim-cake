@@ -69,7 +69,7 @@ class IniConfig : IConfigEngine
      * @param string myKey The identifier to read from. If the key has a . it will be treated
      *  as a plugin prefix. The chosen file must be on the engine"s path.
      * @return array Parsed configuration values.
-     * @throws uim.cake.Core\Exception\CakeException when files don"t exist.
+     * @throws uim.cake.Core\exceptions.CakeException when files don"t exist.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
     array read(string myKey) {

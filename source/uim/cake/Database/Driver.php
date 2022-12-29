@@ -145,7 +145,7 @@ abstract class Driver : DriverInterface
      *
      * @return string
      */
-    function version(): string
+    string version(): string
     {
         if (_version == null) {
             this.connect();
