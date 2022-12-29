@@ -19,9 +19,7 @@ import uim.cake.cores.Plugin;
  */
 class PluginLoadedCommand : Command
 {
-    /**
-     * @inheritDoc
-     */
+
     public static function defaultName(): string
     {
         return "plugin loaded";

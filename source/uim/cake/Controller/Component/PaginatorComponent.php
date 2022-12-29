@@ -39,9 +39,7 @@ class PaginatorComponent : Component
      */
     protected $_paginator;
 
-    /**
-     * @inheritDoc
-     */
+
     public this(ComponentRegistry $registry, array $config = []) {
         deprecationWarning(
             "PaginatorComponent is deprecated, use a Cake\Datasource\Pagination\NumericPaginator instance directly."

@@ -51,9 +51,7 @@ class FilterIterator : Collection
         super(($wrapper);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function unwrap(): Traversable
     {
         /** @var \IteratorIterator $filter */

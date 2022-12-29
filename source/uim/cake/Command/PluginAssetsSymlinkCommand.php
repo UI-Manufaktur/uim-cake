@@ -22,9 +22,7 @@ class PluginAssetsSymlinkCommand : Command
 {
     use PluginAssetsTrait;
 
-    /**
-     * @inheritDoc
-     */
+
     public static function defaultName(): string
     {
         return "plugin assets symlink";

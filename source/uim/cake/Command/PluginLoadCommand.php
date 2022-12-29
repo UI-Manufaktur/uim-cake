@@ -22,9 +22,7 @@ import uim.cake.cores.Plugin;
  */
 class PluginLoadCommand : Command
 {
-    /**
-     * @inheritDoc
-     */
+
     public static function defaultName(): string
     {
         return "plugin load";

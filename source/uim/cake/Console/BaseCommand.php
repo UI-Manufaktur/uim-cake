@@ -33,9 +33,7 @@ abstract class BaseCommand : ICommand
      */
     protected $name = "cake unknown";
 
-    /**
-     * @inheritDoc
-     */
+
     function setName(string $name) {
         if (strpos($name, " ") < 1) {
             throw new InvalidArgumentException(
@@ -146,9 +144,7 @@ abstract class BaseCommand : ICommand
     {
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function run(array $argv, ConsoleIo $io): ?int
     {
         this.initialize();

@@ -22,9 +22,7 @@ use DirectoryIterator;
  */
 class I18nInitCommand : Command
 {
-    /**
-     * @inheritDoc
-     */
+
     public static function defaultName(): string
     {
         return "i18n init";

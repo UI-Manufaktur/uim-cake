@@ -33,9 +33,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      */
     protected $commands;
 
-    /**
-     * @inheritDoc
-     */
+
     function setCommandCollection(CommandCollection $commands): void
     {
         this.commands = $commands;

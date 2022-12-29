@@ -75,9 +75,7 @@ class StoppableIterator : Collection
         return !$condition($current, $key, _innerIterator);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function unwrap(): Traversable
     {
         $iterator = _innerIterator;

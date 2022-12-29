@@ -64,9 +64,7 @@ class ReplaceIterator : Collection
         return $callback(parent::current(), this.key(), _innerIterator);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function unwrap(): Traversable
     {
         $iterator = _innerIterator;

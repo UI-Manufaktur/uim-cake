@@ -53,9 +53,7 @@ trait CollectionTrait
         return new Collection(...$args);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function each(callable $callback) {
         foreach (this.optimizeUnwrap() as $k: $v) {
             $callback($v, $k);
@@ -64,9 +62,7 @@ trait CollectionTrait
         return this;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function filter(?callable $callback = null): ICollection
     {
         if ($callback == null) {
@@ -78,9 +74,7 @@ trait CollectionTrait
         return new FilterIterator(this.unwrap(), $callback);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function reject(callable $callback): ICollection
     {
         return new FilterIterator(this.unwrap(), function ($key, $value, $items) use ($callback) {
@@ -88,10 +82,8 @@ trait CollectionTrait
         });
     }
 
-    /**
-     * @inheritDoc
-     */
-    function every(callable $callback): bool
+
+    bool every(callable $callback)
     {
         foreach (this.optimizeUnwrap() as $key: $value) {
             if (!$callback($value, $key)) {
@@ -102,10 +94,8 @@ trait CollectionTrait
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
-    function some(callable $callback): bool
+
+    bool some(callable $callback): bool
     {
         foreach (this.optimizeUnwrap() as $key: $value) {
             if ($callback($value, $key) == true) {
@@ -116,9 +106,7 @@ trait CollectionTrait
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function contains($value): bool
     {
         foreach (this.optimizeUnwrap() as $v) {
@@ -130,17 +118,13 @@ trait CollectionTrait
         return false;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function map(callable $callback): ICollection
     {
         return new ReplaceIterator(this.unwrap(), $callback);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function reduce(callable $callback, $initial = null) {
         $isFirst = false;
         if (func_num_args() < 2) {
@@ -160,9 +144,7 @@ trait CollectionTrait
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function extract($path): ICollection
     {
         $extractor = new ExtractIterator(this.unwrap(), $path);
@@ -177,23 +159,17 @@ trait CollectionTrait
         return $extractor;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function max($path, int $sort = \SORT_NUMERIC) {
         return (new SortIterator(this.unwrap(), $path, \SORT_DESC, $sort)).first();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function min($path, int $sort = \SORT_NUMERIC) {
         return (new SortIterator(this.unwrap(), $path, \SORT_ASC, $sort)).first();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function avg($path = null) {
         $result = this;
         if ($path != null) {
@@ -213,9 +189,7 @@ trait CollectionTrait
         return $result[1] / $result[0];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function median($path = null) {
         $items = this;
         if ($path != null) {
@@ -238,17 +212,13 @@ trait CollectionTrait
         return ($values[$middle - 1] + $values[$middle]) / 2;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sortBy($path, int $order = \SORT_DESC, int $sort = \SORT_NUMERIC): ICollection
     {
         return new SortIterator(this.unwrap(), $path, $order, $sort);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function groupBy($path): ICollection
     {
         $callback = _propertyExtractor($path);
@@ -267,9 +237,7 @@ trait CollectionTrait
         return this.newCollection($group);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function indexBy($path): ICollection
     {
         $callback = _propertyExtractor($path);
@@ -288,9 +256,7 @@ trait CollectionTrait
         return this.newCollection($group);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function countBy($path): ICollection
     {
         $callback = _propertyExtractor($path);
@@ -308,9 +274,7 @@ trait CollectionTrait
         return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sumOf($path = null) {
         if ($path == null) {
             return array_sum(this.toList());
@@ -325,9 +289,7 @@ trait CollectionTrait
         return $sum;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function shuffle(): ICollection
     {
         $items = this.toList();
@@ -336,48 +298,36 @@ trait CollectionTrait
         return this.newCollection($items);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function sample(int $length = 10): ICollection
     {
         return this.newCollection(new LimitIterator(this.shuffle(), 0, $length));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function take(int $length = 1, int $offset = 0): ICollection
     {
         return this.newCollection(new LimitIterator(this, $offset, $length));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function skip(int $length): ICollection
     {
         return this.newCollection(new LimitIterator(this, $length));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function match(array $conditions): ICollection
     {
         return this.filter(_createMatcherFilter($conditions));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function firstMatch(array $conditions) {
         return this.match($conditions).first();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function first() {
         $iterator = new LimitIterator(this, 0, 1);
         foreach ($iterator as $result) {
@@ -385,9 +335,7 @@ trait CollectionTrait
         }
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function last() {
         $iterator = this.optimizeUnwrap();
         if (is_array($iterator)) {
@@ -411,9 +359,7 @@ trait CollectionTrait
         return $result;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function takeLast(int $length): ICollection
     {
         if ($length < 1) {
@@ -510,9 +456,7 @@ trait CollectionTrait
         return this.newCollection($generator($iterator, $length));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function append($items): ICollection
     {
         $list = new AppendIterator();
@@ -522,9 +466,7 @@ trait CollectionTrait
         return this.newCollection($list);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function appendItem($item, $key = null): ICollection
     {
         if ($key != null) {
@@ -536,17 +478,13 @@ trait CollectionTrait
         return this.append($data);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function prepend($items): ICollection
     {
         return this.newCollection($items).append(this);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function prependItem($item, $key = null): ICollection
     {
         if ($key != null) {
@@ -558,9 +496,7 @@ trait CollectionTrait
         return this.prepend($data);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function combine($keyPath, $valuePath, $groupPath = null): ICollection
     {
         $options = [
@@ -597,9 +533,7 @@ trait CollectionTrait
         return this.newCollection(new MapReduce(this.unwrap(), $mapper, $reducer));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function nest($idPath, $parentPath, string $nestingKey = "children"): ICollection
     {
         $parents = [];
@@ -645,17 +579,13 @@ trait CollectionTrait
             });
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function insert(string $path, $values): ICollection
     {
         return new InsertIterator(this.unwrap(), $path, $values);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function toArray(bool $keepKeys = true): array
     {
         $iterator = this.unwrap();
@@ -673,33 +603,25 @@ trait CollectionTrait
         return iterator_to_array(this, $keepKeys);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function toList(): array
     {
         return this.toArray(false);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function jsonSerialize(): array
     {
         return this.toArray();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function compile(bool $keepKeys = true): ICollection
     {
         return this.newCollection(this.toArray($keepKeys));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function lazy(): ICollection
     {
         $generator = function () {
@@ -711,17 +633,13 @@ trait CollectionTrait
         return this.newCollection($generator());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function buffered(): ICollection
     {
         return new BufferedIterator(this.unwrap());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function listNested($order = "desc", $nestingKey = "children"): ICollection
     {
         if (is_string($order)) {
@@ -747,9 +665,7 @@ trait CollectionTrait
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function stopWhen($condition): ICollection
     {
         if (!is_callable($condition)) {
@@ -759,9 +675,7 @@ trait CollectionTrait
         return new StoppableIterator(this.unwrap(), $condition);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function unfold(?callable $callback = null): ICollection
     {
         if ($callback == null) {
@@ -778,9 +692,7 @@ trait CollectionTrait
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function through(callable $callback): ICollection
     {
         $result = $callback(this);
@@ -788,17 +700,13 @@ trait CollectionTrait
         return $result instanceof ICollection ? $result : this.newCollection($result);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function zip(iterable $items): ICollection
     {
         return new ZipIterator(array_merge([this.unwrap()], func_get_args()));
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function zipWith(iterable $items, $callback): ICollection
     {
         if (func_num_args() > 2) {
@@ -811,9 +719,7 @@ trait CollectionTrait
         return new ZipIterator(array_merge([this.unwrap()], $items), $callback);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function chunk(int $chunkSize): ICollection
     {
         return this.map(function ($v, $k, $iterator) use ($chunkSize) {
@@ -830,9 +736,7 @@ trait CollectionTrait
         });
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function chunkWithKeys(int $chunkSize, bool $keepKeys = true): ICollection
     {
         return this.map(function ($v, $k, $iterator) use ($chunkSize, $keepKeys) {
@@ -857,10 +761,8 @@ trait CollectionTrait
         });
     }
 
-    /**
-     * @inheritDoc
-     */
-    function isEmpty(): bool
+
+    bool isEmpty()
     {
         foreach (this as $el) {
             return false;
@@ -869,9 +771,7 @@ trait CollectionTrait
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function unwrap(): Traversable
     {
         $iterator = this;
@@ -974,9 +874,7 @@ trait CollectionTrait
         return this.newCollection($result);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function count(): int
     {
         $traversable = this.optimizeUnwrap();
@@ -988,9 +886,7 @@ trait CollectionTrait
         return iterator_count($traversable);
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function countKeys(): int
     {
         return count(this.toArray());

@@ -18,87 +18,65 @@ import uim.cake.caches.CacheEngine;
  */
 class NullEngine : CacheEngine
 {
-    /**
-     * @inheritDoc
-     */
-    function init(array $config = []): bool
+
+    bool init(array $config = [])
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
-    function set($key, $value, $ttl = null): bool
+
+    bool set($key, $value, $ttl = null)
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
-    function setMultiple($values, $ttl = null): bool
+
+    bool setMultiple($values, $ttl = null)
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function get($key, $default = null) {
         return $default;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function getMultiple($keys, $default = null): iterable
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function increment(string $key, int $offset = 1) {
         return 1;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function decrement(string $key, int $offset = 1) {
         return 0;
     }
 
-    /**
-     * @inheritDoc
-     */
-    function delete($key): bool
+
+    bool delete($key)
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
-    function deleteMultiple($keys): bool
+
+    bool deleteMultiple($keys)
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
-    function clear(): bool
+
+    bool clear()
     {
         return true;
     }
 
-    /**
-     * @inheritDoc
-     */
-    function clearGroup(string $group): bool
+
+    bool clearGroup(string $group)
     {
         return true;
     }

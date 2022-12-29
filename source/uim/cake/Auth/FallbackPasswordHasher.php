@@ -71,7 +71,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    function check(string $password, string $hashedPassword): bool
+    bool check(string $password, string $hashedPassword)
     {
         foreach (_hashers as $hasher) {
             if ($hasher.check($password, $hashedPassword)) {
@@ -89,7 +89,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher
      * @param string $password The password to verify
      * @return bool
      */
-    function needsRehash(string $password): bool
+    bool needsRehash(string $password)
     {
         return _hashers[0].needsRehash($password);
     }

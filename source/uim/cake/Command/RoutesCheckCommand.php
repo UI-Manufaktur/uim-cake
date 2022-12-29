@@ -22,9 +22,7 @@ import uim.cake.Routing\Router;
  */
 class RoutesCheckCommand : Command
 {
-    /**
-     * @inheritDoc
-     */
+
     public static function defaultName(): string
     {
         return "routes check";

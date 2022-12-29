@@ -113,9 +113,7 @@ class SessionStorage : IStorage
         _session.renew();
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function redirectUrl($url = null) {
         if ($url == null) {
             return _session.read(_config["redirect"]);

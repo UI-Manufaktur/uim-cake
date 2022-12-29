@@ -20,9 +20,7 @@ import uim.cake.Routing\Router;
  */
 class RoutesGenerateCommand : Command
 {
-    /**
-     * @inheritDoc
-     */
+
     public static function defaultName(): string
     {
         return "routes generate";

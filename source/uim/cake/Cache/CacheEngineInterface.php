@@ -28,7 +28,7 @@ interface ICacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      *   Or if the key existed already.
      */
-    function add(string $key, $value): bool;
+    bool add(string $key, $value);
 
     /**
      * Increment a number under the key and return incremented value
@@ -58,5 +58,5 @@ interface ICacheEngine
      * @param string $group name of the group to be cleared
      * @return bool
      */
-    function clearGroup(string $group): bool;
+    bool clearGroup(string $group);
 }

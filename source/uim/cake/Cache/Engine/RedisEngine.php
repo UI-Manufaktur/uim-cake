@@ -70,7 +70,7 @@ class RedisEngine : CacheEngine
      * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    function init(array $config = []): bool
+    bool init(array $config = [])
     {
         if (!extension_loaded("redis")) {
             throw new RuntimeException("The `redis` extension must be enabled to use RedisEngine.");
@@ -90,7 +90,7 @@ class RedisEngine : CacheEngine
      *
      * @return bool True if Redis server was connected
      */
-    protected function _connect(): bool
+    protected bool _connect()
     {
         try {
             _Redis = new Redis();
@@ -138,7 +138,7 @@ class RedisEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      */
-    function set($key, $value, $ttl = null): bool
+    bool set($key, $value, $ttl = null)
     {
         $key = _key($key);
         $value = this.serialize($value);
@@ -212,7 +212,7 @@ class RedisEngine : CacheEngine
      * @param string $key Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    function delete($key): bool
+    bool delete($key)
     {
         $key = _key($key);
 
@@ -227,7 +227,7 @@ class RedisEngine : CacheEngine
      * @param string $key Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    function deleteAsync(string $key): bool
+    bool deleteAsync(string $key)
     {
         $key = _key($key);
 
@@ -239,7 +239,7 @@ class RedisEngine : CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    function clear(): bool
+    bool clear()
     {
         _Redis.setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
 
@@ -270,7 +270,7 @@ class RedisEngine : CacheEngine
      *
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    function clearBlocking(): bool
+    bool clearBlocking()
     {
         _Redis.setOption(Redis::OPT_SCAN, (string)Redis::SCAN_RETRY);
 
@@ -303,7 +303,7 @@ class RedisEngine : CacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      * @link https://github.com/phpredis/phpredis#set
      */
-    function add(string $key, $value): bool
+    bool add(string $key, $value)
     {
         $duration = _config["duration"];
         $key = _key($key);
@@ -345,7 +345,7 @@ class RedisEngine : CacheEngine
      * @param string $group name of the group to be cleared
      * @return bool success
      */
-    function clearGroup(string $group): bool
+    bool clearGroup(string $group)
     {
         return (bool)_Redis.incr(_config["prefix"] . $group);
     }

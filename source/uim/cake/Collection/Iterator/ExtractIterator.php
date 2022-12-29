@@ -67,9 +67,7 @@ class ExtractIterator : Collection
         return $extractor(parent::current());
     }
 
-    /**
-     * @inheritDoc
-     */
+
     function unwrap(): Traversable
     {
         $iterator = this.getInnerIterator();

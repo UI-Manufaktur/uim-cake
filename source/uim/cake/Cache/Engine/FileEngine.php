@@ -418,9 +418,7 @@ class FileEngine : CacheEngine
         return $success;
     }
 
-    /**
-     * @inheritDoc
-     */
+
     protected function _key($key): string
     {
         $key = parent::_key($key);

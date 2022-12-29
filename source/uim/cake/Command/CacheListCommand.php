@@ -19,9 +19,7 @@ import uim.cake.consoles.ConsoleOptionParser;
  */
 class CacheListCommand : Command
 {
-    /**
-     * @inheritDoc
-     */
+
     public static function defaultName(): string
     {
         return "cache list";

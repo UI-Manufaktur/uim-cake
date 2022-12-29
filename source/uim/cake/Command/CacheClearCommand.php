@@ -22,9 +22,7 @@ import uim.cake.consoles.ConsoleOptionParser;
  */
 class CacheClearCommand : Command
 {
-    /**
-     * @inheritDoc
-     */
+
     public static function defaultName(): string
     {
         return "cache clear";
