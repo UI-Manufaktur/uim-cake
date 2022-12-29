@@ -14,7 +14,7 @@ module uim.cake.Event;
  * Objects with this interface can trigger events, and have
  * an event manager retrieved from them.
  *
- * The {@link \Cake\Event\EventDispatcherTrait} lets you easily implement
+ * The {@link uim.cake.Event\EventDispatcherTrait} lets you easily implement
  * this interface.
  */
 interface EventDispatcherInterface

@@ -47,7 +47,7 @@ In the above example we see the 3 hook methods that forms provide:
 - `validationDefault()` Gets a `Cake\Validation\Validator` instance that you can attach validators to.
 - `_execute()` lets you define the behavior you want to happen when `execute()` is called and the data is valid.
 
-You can always define additional public methods as you need as well.
+You can always define additional methods as you need as well.
 
 ```php
 $contact = new ContactForm();

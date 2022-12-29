@@ -30,21 +30,21 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Name of default validation set.
      */
-    public const string DEFAULT_VALIDATOR = "default";
+    const string DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
      */
-    public const string VALIDATOR_PROVIDER_NAME = "form";
+    const string VALIDATOR_PROVIDER_NAME = "form";
 
     /**
      * The name of the event dispatched when a validator has been built.
      */
-    public const string BUILD_VALIDATOR_EVENT = "Form.buildValidator";
+    const string BUILD_VALIDATOR_EVENT = "Form.buildValidator";
 
     /**
      * Schema class.
-     * @psalm-var class-string<\Cake\Form\Schema>
+     * @psalm-var class-string<uim.cake.Form\Schema>
      */
     protected string _schemaClass = Schema::class;
 
@@ -163,7 +163,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * A hook method intended to be implemented by subclasses.
      *
      * You can use this method to define the schema using
-     * the methods on {@link \Cake\Form\Schema}, or loads a pre-defined
+     * the methods on {@link uim.cake.Form\Schema}, or loads a pre-defined
      * schema from a concrete class.
      *
      * @param uim.cake.Form\Schema $schema The schema to customize.

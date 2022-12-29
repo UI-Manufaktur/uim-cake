@@ -83,7 +83,7 @@ abstract class BaseApplication implements
      * @param uim.cake.Event\IEventManager|null $eventManager Application event manager instance.
      * @param uim.cake.http.ControllerFactoryInterface|null $controllerFactory Controller factory.
      */
-    public this(
+    this(
         string $configDir,
         ?IEventManager $eventManager = null,
         ?ControllerFactoryInterface $controllerFactory = null

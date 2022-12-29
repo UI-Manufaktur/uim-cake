@@ -15,7 +15,7 @@ class File {
      * @var uim.cake.Filesystem\Folder
      * @link https://book.UIM.org/4/en/core-libraries/file-folder.html
      */
-    public $Folder;
+    $Folder;
 
     /**
      * File name
@@ -23,7 +23,7 @@ class File {
      * @var string
      * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::myName
      */
-    public myName;
+    myName;
 
     /**
      * File info
@@ -31,7 +31,7 @@ class File {
      * @var array<string, mixed>
      * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$info
      */
-    public $info = [];
+    $info = [];
 
     /**
      * Holds the file handler resource if the file is opened
@@ -39,7 +39,7 @@ class File {
      * @var resource|null
      * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$handle
      */
-    public $handle;
+    $handle;
 
     /**
      * Enable locking for file reading and writing
@@ -47,7 +47,7 @@ class File {
      * @var bool|null
      * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$lock
      */
-    public $lock;
+    $lock;
 
     /**
      * Path property
@@ -57,7 +57,7 @@ class File {
      * @var string|null
      * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::myPath
      */
-    public myPath;
+    myPath;
 
     /**
      * Constructor

@@ -42,7 +42,7 @@ class Server : EventDispatcherInterface
      * @param uim.cake.Core\IHttpApplication $app The application to use.
      * @param uim.cake.http.Runner|null $runner Application runner.
      */
-    public this(IHttpApplication $app, ?Runner $runner = null) {
+    this(IHttpApplication $app, ?Runner $runner = null) {
         this.app = $app;
         this.runner = $runner ?? new Runner();
     }

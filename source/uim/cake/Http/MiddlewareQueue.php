@@ -22,7 +22,7 @@ use SeekableIterator;
 
 /**
  * Provides methods for creating and manipulating a "queue" of middlewares.
- * This queue is used to process a request and generate response via \Cake\Http\Runner.
+ * This queue is used to process a request and generate response via uim.cake.Http\Runner.
  *
  * @template-implements \SeekableIterator<int, \Psr\Http\Server\IMiddleware>
  */
@@ -47,7 +47,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      *
      * @param array $middleware The list of middleware to append.
      */
-    public this(array $middleware = []) {
+    this(array $middleware = []) {
         this.queue = $middleware;
     }
 

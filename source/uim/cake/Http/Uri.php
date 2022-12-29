@@ -45,7 +45,7 @@ class Uri : UriInterface
      * @param string $base The base path.
      * @param string $webroot The webroot path.
      */
-    public this(UriInterface $uri, string $base, string $webroot) {
+    this(UriInterface $uri, string $base, string $webroot) {
         this.uri = $uri;
         this.base = $base;
         this.webroot = $webroot;

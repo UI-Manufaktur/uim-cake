@@ -20,36 +20,36 @@ class Folder
      * Default scheme for Folder::copy
      * Recursively merges subfolders with the same name
      */
-    public const string MERGE = "merge";
+    const string MERGE = "merge";
 
     /**
      * Overwrite scheme for Folder::copy
      * subfolders with the same name will be replaced
      */
-    public const string OVERWRITE = "overwrite";
+    const string OVERWRITE = "overwrite";
 
     /**
      * Skip scheme for Folder::copy
      * if a subfolder with the same name exists it will be skipped
      */
-    public const string SKIP = "skip";
+    const string SKIP = "skip";
 
     /**
      * Sort mode by name
      */
-    public const string SORT_NAME = "name";
+    const string SORT_NAME = "name";
 
     /**
      * Sort mode by time
      */
-    public const string SORT_TIME = "time";
+    const string SORT_TIME = "time";
 
     /**
      * Path to Folder.
      *
      * @var string
      */
-    public myPath;
+    myPath;
 
     /**
      * Sortedness. Whether list results
@@ -57,7 +57,7 @@ class Folder
      *
      * @var bool
      */
-    public $sort = false;
+    $sort = false;
 
     /**
      * Mode to be used on create. Does nothing on windows platforms.
@@ -65,7 +65,7 @@ class Folder
      * @var int
      * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\Folder::myMode
      */
-    public myMode = 0755;
+    myMode = 0755;
 
     /**
      * Functions array to be called depending on the sort type chosen.

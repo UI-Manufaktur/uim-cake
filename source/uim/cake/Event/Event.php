@@ -14,7 +14,7 @@ import uim.cake.core.exceptions.CakeException;
  * Class Event
  *
  * @template TSubject
- * @implements \Cake\Event\EventInterface<TSubject>
+ * @implements uim.cake.Event\EventInterface<TSubject>
  */
 class Event : EventInterface
 {
@@ -73,7 +73,7 @@ class Event : EventInterface
      *   with this event to it can be read by listeners.
      * @psalm-param TSubject|null $subject
      */
-    public this(string $name, $subject = null, $data = null) {
+    this(string $name, $subject = null, $data = null) {
         _name = $name;
         _subject = $subject;
         _data = (array)$data;

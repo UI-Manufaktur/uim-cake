@@ -28,8 +28,8 @@ class ErrorHandlerMiddleware : IMiddleware
      *
      * - `trace` Should error logs include stack traces?
      * - `exceptionRenderer` The renderer instance or class name to use or a callable factory
-     *   which returns a \Cake\Error\IExceptionRenderer instance.
-     *   Defaults to \Cake\Error\ExceptionRenderer
+     *   which returns a uim.cake.Error\IExceptionRenderer instance.
+     *   Defaults to uim.cake.Error\ExceptionRenderer
      *
      * @var array<string, mixed>
      */
@@ -156,7 +156,7 @@ class ErrorHandlerMiddleware : IMiddleware
     protected auto getErrorHandler(): ErrorHandler
     {
         if (this.errorHandler is null) {
-            /** @var class-string<\Cake\Error\ErrorHandler> myClassName */
+            /** @var class-string<uim.cake.Error\ErrorHandler> myClassName */
             myClassName = App::className("ErrorHandler", "Error");
             this.errorHandler = new myClassName(this.getConfig());
         }

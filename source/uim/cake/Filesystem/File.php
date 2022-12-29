@@ -17,7 +17,7 @@ class File
      * @var uim.cake.Filesystem\Folder
      * @link https://book.cakephp.org/4/en/core-libraries/file-folder.html
      */
-    public $Folder;
+    $Folder;
 
     /**
      * File name
@@ -25,7 +25,7 @@ class File
      * @var string
      * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$name
      */
-    public $name;
+    $name;
 
     /**
      * File info
@@ -33,7 +33,7 @@ class File
      * @var array<string, mixed>
      * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$info
      */
-    public $info = [];
+    $info = [];
 
     /**
      * Holds the file handler resource if the file is opened
@@ -41,7 +41,7 @@ class File
      * @var resource|null
      * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$handle
      */
-    public $handle;
+    $handle;
 
     /**
      * Enable locking for file reading and writing
@@ -49,7 +49,7 @@ class File
      * @var bool|null
      * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$lock
      */
-    public $lock;
+    $lock;
 
     /**
      * Path property
@@ -59,7 +59,7 @@ class File
      * @var string|null
      * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$path
      */
-    public $path;
+    $path;
 
     /**
      * Constructor
@@ -69,7 +69,7 @@ class File
      * @param int $mode Mode to apply to the folder holding the file
      * @link https://book.cakephp.org/4/en/core-libraries/file-folder.html#file-api
      */
-    public this(string $path, bool $create = false, int $mode = 0755) {
+    this(string $path, bool $create = false, int $mode = 0755) {
         $splInfo = new SplFileInfo($path);
         this.Folder = new Folder($splInfo.getPath(), $create, $mode);
         if (!is_dir($path)) {
@@ -189,7 +189,7 @@ class File
      * @param bool $forceWindows If true forces Windows new line string.
      * @return string The with converted line endings.
      */
-    public static function prepare(string $data, bool $forceWindows = false): string
+    static function prepare(string $data, bool $forceWindows = false): string
     {
         $lineBreak = "\n";
         if (DIRECTORY_SEPARATOR == "\\" || $forceWindows == true) {

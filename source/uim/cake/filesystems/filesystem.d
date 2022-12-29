@@ -23,7 +23,7 @@ class Filesystem
     /**
      * Directory type constant
      */
-    public const string TYPE_DIR = "dir";
+    const string TYPE_DIR = "dir";
 
     /**
      * Find files / directories (non-recursively) in given directory path.

@@ -61,7 +61,7 @@ use Psr\Http\Message\IResponse;
  *
  * You can use the "cookieJar" constructor option to provide a custom
  * cookie jar instance you"ve restored from cache/disk. By default,
- * an empty instance of {@link \Cake\Http\Client\CookieCollection} will be created.
+ * an empty instance of {@link uim.cake.Http\Client\CookieCollection} will be created.
  *
  * ### Sending request bodies
  *
@@ -170,8 +170,8 @@ class Client : ClientInterface
      *   Defaults to true.
      * - redirect - Number of redirects to follow. Defaults to false.
      * - adapter - The adapter class name or instance. Defaults to
-     *   \Cake\Http\Client\Adapter\Curl if `curl` extension is loaded else
-     *   \Cake\Http\Client\Adapter\Stream.
+     *   uim.cake.Http\Client\Adapter\Curl if `curl` extension is loaded else
+     *   uim.cake.Http\Client\Adapter\Stream.
      * - protocolVersion - The HTTP protocol version to use. Defaults to 1.1
      * - auth - The authentication credentials to use. If a `username` and `password`
      *   key are provided without a `type` key Basic authentication will be assumed.
@@ -181,7 +181,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $config Config options for scoped clients.
      * @throws \InvalidArgumentException
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         this.setConfig($config);
 
         $adapter = _config["adapter"];
@@ -222,7 +222,7 @@ class Client : ClientInterface
      * @return static
      * @throws \InvalidArgumentException
      */
-    public static function createFromUrl(string $url) {
+    static function createFromUrl(string $url) {
         $parts = parse_url($url);
 
         if ($parts == false) {
@@ -501,7 +501,7 @@ class Client : ClientInterface
      *
      * @return void
      */
-    public static function clearMockResponses(): void
+    static function clearMockResponses(): void
     {
         static::$_mockAdapter = null;
     }
@@ -526,7 +526,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options See above.
      * @return void
      */
-    public static function addMockResponse(string $method, string $url, Response $response, array $options = []): void
+    static function addMockResponse(string $method, string $url, Response $response, array $options = []): void
     {
         if (!static::$_mockAdapter) {
             static::$_mockAdapter = new MockAdapter();

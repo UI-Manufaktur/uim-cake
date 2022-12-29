@@ -33,27 +33,27 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
      *
      * @var string
      */
-    public const DEFAULT_VALIDATOR = "default";
+    const DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
      *
      * @var string
      */
-    public const VALIDATOR_PROVIDER_NAME = "form";
+    const VALIDATOR_PROVIDER_NAME = "form";
 
     /**
      * The name of the event dispatched when a validator has been built.
      *
      * @var string
      */
-    public const BUILD_VALIDATOR_EVENT = "Form.buildValidator";
+    const BUILD_VALIDATOR_EVENT = "Form.buildValidator";
 
     /**
      * Schema class.
      *
      * @var string
-     * @psalm-var class-string<\Cake\Form\Schema>
+     * @psalm-var class-string<uim.cake.Form\Schema>
      */
     protected $_schemaClass = Schema::class;
 
@@ -84,7 +84,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
      * @param uim.cake.Event\EventManager|null $eventManager The event manager.
      *  Defaults to a new instance.
      */
-    public this(?EventManager $eventManager = null) {
+    this(?EventManager $eventManager = null) {
         if ($eventManager != null) {
             this.setEventManager($eventManager);
         }
@@ -177,7 +177,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
      * A hook method intended to be implemented by subclasses.
      *
      * You can use this method to define the schema using
-     * the methods on {@link \Cake\Form\Schema}, or loads a pre-defined
+     * the methods on {@link uim.cake.Form\Schema}, or loads a pre-defined
      * schema from a concrete class.
      *
      * @param uim.cake.Form\Schema $schema The schema to customize.

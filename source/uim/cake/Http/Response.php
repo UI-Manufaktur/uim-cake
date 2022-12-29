@@ -38,12 +38,12 @@ class Response : IResponse
     /**
      * @var int
      */
-    public const STATUS_CODE_MIN = 100;
+    const STATUS_CODE_MIN = 100;
 
     /**
      * @var int
      */
-    public const STATUS_CODE_MAX = 599;
+    const STATUS_CODE_MAX = 599;
 
     /**
      * Allowed HTTP status codes and their default description.
@@ -436,7 +436,7 @@ class Response : IResponse
      *  - charset: the charset for the response body
      * @throws \InvalidArgumentException
      */
-    public this(array $options = []) {
+    this(array $options = []) {
         _streamTarget = $options["streamTarget"] ?? _streamTarget;
         _streamMode = $options["streamMode"] ?? _streamMode;
         if (isset($options["stream"])) {
@@ -821,7 +821,7 @@ class Response : IResponse
     /**
      * Create a new instace with the public/private Cache-Control directive set.
      *
-     * @param bool $public If set to true, the Cache-Control header will be set as public
+     * @param bool $If set to true, the Cache-Control header will be set as public
      *   if set to false, the response will be set to private.
      * @param int|null $time time in seconds after which the response should no longer be considered fresh.
      * @return static
@@ -830,7 +830,7 @@ class Response : IResponse
         $new = clone this;
         unset($new._cacheDirectives["private"], $new._cacheDirectives["public"]);
 
-        $key = $public ? "public" : "private";
+        $key = $? "public" : "private";
         $new._cacheDirectives[$key] = true;
 
         if ($time != null) {
@@ -1313,7 +1313,7 @@ class Response : IResponse
     function getCookies(): array
     {
         $out = [];
-        /** @var array<\Cake\Http\Cookie\Cookie> $cookies */
+        /** @var array<uim.cake.Http\Cookie\Cookie> $cookies */
         $cookies = _cookies;
         foreach ($cookies as $cookie) {
             $out[$cookie.getName()] = $cookie.toArray();

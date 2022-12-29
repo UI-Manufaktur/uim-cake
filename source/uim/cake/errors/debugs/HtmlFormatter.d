@@ -161,7 +161,7 @@ class HtmlFormatter : IFormatter
     /**
      * Handles object to string conversion.
      *
-     * @param uim.cake.Error\Debug\ClassNode|\Cake\Error\Debug\ReferenceNode $var Object to convert.
+     * @param uim.cake.Error\Debug\ClassNode|uim.cake.Error\Debug\ReferenceNode $var Object to convert.
      * @param int $indent The current indentation level.
      * @return string
      * @see uim.cake.Error\Debugger::exportVar()

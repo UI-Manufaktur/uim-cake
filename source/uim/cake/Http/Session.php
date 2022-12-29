@@ -84,7 +84,7 @@ class Session
      * @return static
      * @see uim.cake.http.Session::__construct()
      */
-    public static function create(array $sessionConfig = []) {
+    static function create(array $sessionConfig = []) {
         if (isset($sessionConfig["defaults"])) {
             $defaults = static::_defaultConfig($sessionConfig["defaults"]);
             if ($defaults) {
@@ -193,7 +193,7 @@ class Session
      *
      * @param array<string, mixed> $config The Configuration to apply to this session object
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         $config += [
             "timeout": null,
             "cookie": null,

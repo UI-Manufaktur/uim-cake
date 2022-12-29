@@ -22,7 +22,7 @@ class Folder
      *
      * @var string
      */
-    public const MERGE = "merge";
+    const MERGE = "merge";
 
     /**
      * Overwrite scheme for Folder::copy
@@ -30,7 +30,7 @@ class Folder
      *
      * @var string
      */
-    public const OVERWRITE = "overwrite";
+    const OVERWRITE = "overwrite";
 
     /**
      * Skip scheme for Folder::copy
@@ -38,28 +38,28 @@ class Folder
      *
      * @var string
      */
-    public const SKIP = "skip";
+    const SKIP = "skip";
 
     /**
      * Sort mode by name
      *
      * @var string
      */
-    public const SORT_NAME = "name";
+    const SORT_NAME = "name";
 
     /**
      * Sort mode by time
      *
      * @var string
      */
-    public const SORT_TIME = "time";
+    const SORT_TIME = "time";
 
     /**
      * Path to Folder.
      *
      * @var string
      */
-    public $path;
+    $path;
 
     /**
      * Sortedness. Whether list results
@@ -67,7 +67,7 @@ class Folder
      *
      * @var bool
      */
-    public $sort = false;
+    $sort = false;
 
     /**
      * Mode to be used on create. Does nothing on windows platforms.
@@ -75,7 +75,7 @@ class Folder
      * @var int
      * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\Folder::$mode
      */
-    public $mode = 0755;
+    $mode = 0755;
 
     /**
      * Functions array to be called depending on the sort type chosen.
@@ -122,7 +122,7 @@ class Folder
      * @param bool $create Create folder if not found
      * @param int|null $mode Mode (CHMOD) to apply to created folder, false to ignore
      */
-    public this(?string $path = null, bool $create = false, ?int $mode = null) {
+    this(?string $path = null, bool $create = false, ?int $mode = null) {
         if (empty($path)) {
             $path = TMP;
         }
@@ -301,7 +301,7 @@ class Folder
      * @param string $path Path to check
      * @return bool true if windows path, false otherwise
      */
-    public static function isWindowsPath(string $path): bool
+    static function isWindowsPath(string $path): bool
     {
         return preg_match("/^[A-Z]:\\\\/i", $path) || substr($path, 0, 2) == "\\\\";
     }
@@ -312,7 +312,7 @@ class Folder
      * @param string $path Path to check
      * @return bool true if path is absolute.
      */
-    public static function isAbsolute(string $path): bool
+    static function isAbsolute(string $path): bool
     {
         if (empty($path)) {
             return false;
@@ -330,7 +330,7 @@ class Folder
      * @param string $path Path to check
      * @return bool True if path is registered stream wrapper.
      */
-    public static function isRegisteredStreamWrapper(string $path): bool
+    static function isRegisteredStreamWrapper(string $path): bool
     {
         return preg_match("/^[^:\/]+?(?=:\/\/)/", $path, $matches) &&
             in_array($matches[0], stream_get_wrappers(), true);
@@ -342,7 +342,7 @@ class Folder
      * @param string $path Path to transform
      * @return string Path with the correct set of slashes ("\\" or "/")
      */
-    public static function normalizeFullPath(string $path): string
+    static function normalizeFullPath(string $path): string
     {
         $to = Folder::correctSlashFor($path);
         $from = ($to == "/" ? "\\" : "/");
@@ -356,7 +356,7 @@ class Folder
      * @param string $path Path to check
      * @return string Set of slashes ("\\" or "/")
      */
-    public static function correctSlashFor(string $path): string
+    static function correctSlashFor(string $path): string
     {
         return Folder::isWindowsPath($path) ? "\\" : "/";
     }
@@ -367,7 +367,7 @@ class Folder
      * @param string $path Path to check
      * @return string Path with ending slash
      */
-    public static function slashTerm(string $path): string
+    static function slashTerm(string $path): string
     {
         if (Folder::isSlashTerm($path)) {
             return $path;
@@ -383,7 +383,7 @@ class Folder
      * @param array<string>|string $element Element to add at end of path
      * @return string Combined path
      */
-    public static function addPathElement(string $path, $element): string
+    static function addPathElement(string $path, $element): string
     {
         $element = (array)$element;
         array_unshift($element, rtrim($path, DIRECTORY_SEPARATOR));
@@ -960,7 +960,7 @@ class Folder
      * @param string $path Path to check
      * @return bool true if path ends with slash, false otherwise
      */
-    public static function isSlashTerm(string $path): bool
+    static function isSlashTerm(string $path): bool
     {
         $lastChar = $path[strlen($path) - 1];
 

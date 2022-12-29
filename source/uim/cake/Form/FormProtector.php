@@ -82,7 +82,7 @@ class FormProtector
      *
      * @param array<string, mixed> $data Data array, can contain key `unlockedFields` with list of unlocked fields.
      */
-    public this(array $data = []) {
+    this(array $data = []) {
         if (!empty($data["unlockedFields"])) {
             this.unlockedFields = $data["unlockedFields"];
         }

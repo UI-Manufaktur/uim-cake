@@ -59,7 +59,7 @@ class CorsBuilder
      * @param string $origin The request"s Origin header.
      * @param bool $isSsl Whether the request was over SSL.
      */
-    public this(MessageInterface $response, string $origin, bool $isSsl = false) {
+    this(MessageInterface $response, string $origin, bool $isSsl = false) {
         _origin = $origin;
         _isSsl = $isSsl;
         _response = $response;

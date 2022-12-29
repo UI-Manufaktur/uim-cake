@@ -40,7 +40,7 @@ class ResponseEmitter : EmitterInterface
      *
      * @param int $maxBufferLength Maximum output buffering size for each iteration.
      */
-    public this(int $maxBufferLength = 8192) {
+    this(int $maxBufferLength = 8192) {
         this.maxBufferLength = $maxBufferLength;
     }
 
@@ -200,7 +200,7 @@ class ResponseEmitter : EmitterInterface
     /**
      * Emit cookies using setcookie()
      *
-     * @param array<\Cake\Http\Cookie\CookieInterface|string> $cookies An array of cookies.
+     * @param array<uim.cake.Http\Cookie\CookieInterface|string> $cookies An array of cookies.
      * @return void
      */
     protected function emitCookies(array $cookies): void

@@ -93,7 +93,7 @@ class ServerRequest : IServerRequest
      *
      * @var bool
      */
-    public $trustProxy = false;
+    $trustProxy = false;
 
     /**
      * Trusted proxies list
@@ -105,7 +105,7 @@ class ServerRequest : IServerRequest
     /**
      * The built in detectors used with `is()` can be modified with `addDetector()`.
      *
-     * There are several ways to specify a detector, see \Cake\Http\ServerRequest::addDetector() for the
+     * There are several ways to specify a detector, see uim.cake.Http\ServerRequest::addDetector() for the
      * various formats and ways to define detectors.
      *
      * @var array<callable|array>
@@ -221,7 +221,7 @@ class ServerRequest : IServerRequest
      *
      * @param array<string, mixed> $config An array of request data to create a request with.
      */
-    public this(array $config = []) {
+    this(array $config = []) {
         $config += [
             "params": this.params,
             "query": [],
@@ -468,7 +468,7 @@ class ServerRequest : IServerRequest
      * Check whether a Request is a certain type.
      *
      * Uses the built-in detection rules as well as additional rules
-     * defined with {@link \Cake\Http\ServerRequest::addDetector()}. Any detector can be called
+     * defined with {@link uim.cake.Http\ServerRequest::addDetector()}. Any detector can be called
      * as `is($type)` or `is$Type()`.
      *
      * @param array<string>|string $type The type of request you want to check. If an array
@@ -510,7 +510,7 @@ class ServerRequest : IServerRequest
     }
 
     /**
-     * Worker for the public is() function
+     * Worker for the is() function
      *
      * @param string $type The type of request you want to check.
      * @param array $args Array of custom detector arguments.
@@ -736,7 +736,7 @@ class ServerRequest : IServerRequest
      * @param callable|array $detector A callable or options array for the detector definition.
      * @return void
      */
-    public static function addDetector(string $name, $detector): void
+    static function addDetector(string $name, $detector): void
     {
         $name = strtolower($name);
         if (is_callable($detector)) {
@@ -1111,7 +1111,7 @@ class ServerRequest : IServerRequest
      * Parse the HTTP_ACCEPT header and return a sorted array with content types
      * as the keys, and pref values as the values.
      *
-     * Generally you want to use {@link \Cake\Http\ServerRequest::accepts()} to get a simple list
+     * Generally you want to use {@link uim.cake.Http\ServerRequest::accepts()} to get a simple list
      * of the accepted content types.
      *
      * @return array An array of `prefValue: [content/types]`
@@ -1273,7 +1273,7 @@ class ServerRequest : IServerRequest
      * Get a cookie collection based on the request"s cookies
      *
      * The CookieCollection lets you interact with request cookies using
-     * `\Cake\Http\Cookie\Cookie` objects and can make converting request cookies
+     * `uim.cake.Http\Cookie\Cookie` objects and can make converting request cookies
      * into response cookies easier.
      *
      * This method will create a new cookie collection each time it is called.

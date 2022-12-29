@@ -19,7 +19,7 @@ class EventList : ArrayAccess, Countable
     /**
      * Events list
      *
-     * @var array<\Cake\Event\EventInterface>
+     * @var array<uim.cake.Event\EventInterface>
      */
     protected $_events = [];
 

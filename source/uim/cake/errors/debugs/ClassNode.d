@@ -16,7 +16,7 @@ class ClassNode : INode
     private $id;
 
     /**
-     * @var array<\Cake\Error\Debug\PropertyNode>
+     * @var array<uim.cake.Error\Debug\PropertyNode>
      */
     private $properties = [];
 
@@ -59,7 +59,7 @@ class ClassNode : INode
     /**
      * Get property nodes
      *
-     * @return array<\Cake\Error\Debug\PropertyNode>
+     * @return array<uim.cake.Error\Debug\PropertyNode>
      */
     auto getChildren(): array
     {

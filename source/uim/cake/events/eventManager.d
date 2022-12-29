@@ -130,7 +130,7 @@ class EventManager : IEventManager
 
     /**
      * Auxiliary function to extract and return a PHP callback type out of the callable definition
-     * from the return value of the `implementedEvents()` method on a {@link \Cake\Event\IEventListener}
+     * from the return value of the `implementedEvents()` method on a {@link uim.cake.Event\IEventListener}
      *
      * @param array $function the array taken from a handler definition for an event
      * @param uim.cake.Event\IEventListener $object The handler object

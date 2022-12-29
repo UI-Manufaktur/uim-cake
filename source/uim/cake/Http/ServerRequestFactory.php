@@ -42,7 +42,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * @return uim.cake.http.ServerRequest
      * @throws \InvalidArgumentException for invalid file values
      */
-    public static function fromGlobals(
+    static function fromGlobals(
         ?array $server = null,
         ?array $query = null,
         ?array $parsedBody = null,
@@ -215,7 +215,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      *   $_SERVER will be added into the $server parameter.
      * @return \Psr\Http\Message\UriInterface New instance.
      */
-    public static function createUri(array $server = []): UriInterface
+    static function createUri(array $server = []): UriInterface
     {
         $server += $_SERVER;
         $server = normalizeServer($server);

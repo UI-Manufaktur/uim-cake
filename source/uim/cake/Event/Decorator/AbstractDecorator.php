@@ -39,7 +39,7 @@ abstract class AbstractDecorator
      * @param callable $callable Callable.
      * @param array<string, mixed> $options Decorator options.
      */
-    public this(callable $callable, array $options = []) {
+    this(callable $callable, array $options = []) {
         _callable = $callable;
         _options = $options;
     }

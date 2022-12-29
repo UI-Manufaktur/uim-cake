@@ -23,7 +23,7 @@ class EventManager : IEventManager
      *
      * @var int
      */
-    public static $defaultPriority = 10;
+    static $defaultPriority = 10;
 
     /**
      * The globally available instance, used for dispatching events attached from any scope
@@ -71,7 +71,7 @@ class EventManager : IEventManager
      * @param uim.cake.Event\EventManager|null $manager Event manager instance.
      * @return uim.cake.Event\EventManager The global event manager
      */
-    public static function instance(?EventManager $manager = null) {
+    static function instance(?EventManager $manager = null) {
         if ($manager instanceof EventManager) {
             static::$_generalManager = $manager;
         }
@@ -139,7 +139,7 @@ class EventManager : IEventManager
 
     /**
      * Auxiliary function to extract and return a PHP callback type out of the callable definition
-     * from the return value of the `implementedEvents()` method on a {@link \Cake\Event\IEventListener}
+     * from the return value of the `implementedEvents()` method on a {@link uim.cake.Event\IEventListener}
      *
      * @param array $function the array taken from a handler definition for an event
      * @param uim.cake.Event\IEventListener $object The handler object
