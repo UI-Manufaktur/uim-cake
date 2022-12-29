@@ -28,7 +28,7 @@ use ReflectionNamedType;
 /**
  * Factory method for building controllers for request.
  *
- * @implements \Cake\Http\ControllerFactoryInterface<\Cake\Controller\Controller>
+ * @implements uim.cake.Http\ControllerFactoryInterface<uim.cake.Controller\Controller>
  */
 class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
 {
@@ -47,7 +47,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      *
      * @param uim.cake.Core\IContainer $container The container to build controllers with.
      */
-    public this(IContainer $container) {
+    this(IContainer $container) {
         this.container = $container;
     }
 
@@ -273,7 +273,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      *
      * @param uim.cake.http.ServerRequest $request The request to build a controller for.
      * @return string|null
-     * @psalm-return class-string<\Cake\Controller\Controller>|null
+     * @psalm-return class-string<uim.cake.Controller\Controller>|null
      */
     function getControllerClass(ServerRequest $request): ?string
     {
@@ -323,7 +323,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
             throw this.missingController($request);
         }
 
-        /** @var class-string<\Cake\Controller\Controller>|null */
+        /** @var class-string<uim.cake.Controller\Controller>|null */
         return App::className($pluginPath . $controller, $namespace, "Controller");
     }
 

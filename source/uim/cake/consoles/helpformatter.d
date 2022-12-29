@@ -163,7 +163,7 @@ class HelpFormatter {
     /**
      * Iterate over a collection and find the longest named thing.
      *
-     * @param array<\Cake\Console\ConsoleInputOption|\Cake\Console\ConsoleInputArgument|\Cake\Console\ConsoleInputSubcommand> myCollection The collection to find a max length of.
+     * @param array<uim.cake.Console\ConsoleInputOption|uim.cake.Console\ConsoleInputArgument|uim.cake.Console\ConsoleInputSubcommand> myCollection The collection to find a max length of.
      * @return int
      */
     protected int _getMaxLength(array myCollection) {

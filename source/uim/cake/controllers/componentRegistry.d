@@ -12,7 +12,7 @@ import uim.cakeents\EventDispatcherTrait;
  *
  * Handles loading, constructing and binding events for component class objects.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\Controller\Component>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.Controller\Component>
  */
 class ComponentRegistry : ObjectRegistry : IEventDispatcher
 {
@@ -65,7 +65,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Resolve a component classname.
      *
-     * Part of the template method for {@link \Cake\Core\ObjectRegistry::load()}.
+     * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}.
      *
      * @param string myClass Partial classname to resolve.
      * @return string|null Either the correct class name or null.
@@ -78,8 +78,8 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Throws an exception when a component is missing.
      *
-     * Part of the template method for {@link \Cake\Core\ObjectRegistry::load()}
-     * and {@link \Cake\Core\ObjectRegistry::unload()}
+     * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}
+     * and {@link uim.cake.Core\ObjectRegistry::unload()}
      *
      * @param string myClass The classname that is missing.
      * @param string|null myPlugin The plugin the component is missing in.
@@ -95,7 +95,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
     /**
      * Create the component instance.
      *
-     * Part of the template method for {@link \Cake\Core\ObjectRegistry::load()}
+     * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}
      * Enabled components will be registered with the event manager.
      *
      * @param string myClass The classname to create.

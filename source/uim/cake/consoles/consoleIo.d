@@ -12,13 +12,13 @@ import uim.cake;
  */
 class ConsoleIo {
     // Output constant making verbose shells.
-    public const int VERBOSE = 2;
+    const int VERBOSE = 2;
 
     // Output constant for making normal shells.
-    public const int NORMAL = 1;
+    const int NORMAL = 1;
 
     // Output constants for making quiet shells.
-    public const int QUIET = 0;
+    const int QUIET = 0;
 
     /**
      * The output stream

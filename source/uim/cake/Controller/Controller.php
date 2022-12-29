@@ -70,12 +70,12 @@ use UnexpectedValueException;
  * - `afterFilter(IEvent $event)`
  *   Called after each action is complete and after the view is rendered.
  *
- * @property \Cake\Controller\Component\FlashComponent $Flash
- * @property \Cake\Controller\Component\FormProtectionComponent $FormProtection
- * @property \Cake\Controller\Component\PaginatorComponent $Paginator
- * @property \Cake\Controller\Component\RequestHandlerComponent $RequestHandler
- * @property \Cake\Controller\Component\SecurityComponent $Security
- * @property \Cake\Controller\Component\AuthComponent $Auth
+ * @property uim.cake.Controller\Component\FlashComponent $Flash
+ * @property uim.cake.Controller\Component\FormProtectionComponent $FormProtection
+ * @property uim.cake.Controller\Component\PaginatorComponent $Paginator
+ * @property uim.cake.Controller\Component\RequestHandlerComponent $RequestHandler
+ * @property uim.cake.Controller\Component\SecurityComponent $Security
+ * @property uim.cake.Controller\Component\AuthComponent $Auth
  * @link https://book.cakephp.org/4/en/controllers.html
  */
 #[\AllowDynamicProperties]
@@ -97,7 +97,7 @@ class Controller : IEventListener, EventDispatcherInterface
     protected $name;
 
     /**
-     * An instance of a \Cake\Http\ServerRequest object that contains information about the current request.
+     * An instance of a uim.cake.Http\ServerRequest object that contains information about the current request.
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
@@ -123,7 +123,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @var array
      * @see uim.cake.datasources.Paging\NumericPaginator
      */
-    public $paginate = [];
+    $paginate = [];
 
     /**
      * Set to true to automatically render the view
@@ -168,7 +168,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @param uim.cake.Event\IEventManager|null $eventManager The event manager. Defaults to a new instance.
      * @param uim.cake.controllers.ComponentRegistry|null $components The component registry. Defaults to a new instance.
      */
-    public this(
+    this(
         ?ServerRequest $request = null,
         ?Response $response = null,
         ?string $name = null,
@@ -873,10 +873,10 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * This method will also make the PaginatorHelper available in the view.
      *
-     * @param uim.cake.ORM\Table|\Cake\ORM\Query|string|null $object Table to paginate
+     * @param uim.cake.ORM\Table|uim.cake.ORM\Query|string|null $object Table to paginate
      * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
-     * @return uim.cake.ORM\ResultSet|\Cake\Datasource\IResultSet Query results
+     * @return uim.cake.ORM\ResultSet|uim.cake.Datasource\IResultSet Query results
      * @link https://book.cakephp.org/4/en/controllers.html#paginating-a-model
      * @throws \RuntimeException When no compatible table object can be found.
      */
@@ -954,7 +954,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * Override this method to change which controller methods can be reached.
      * The default implementation disallows access to all methods defined on Cake\Controller\Controller,
-     * and allows all public methods on all subclasses of this class.
+     * and allows all methods on all subclasses of this class.
      *
      * @param string $action The action to check.
      * @return bool Whether the method is accessible from a URL.

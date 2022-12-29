@@ -26,7 +26,7 @@ use UnexpectedValueException;
  * You configure pagination when calling paginate(). See that method for more details.
  *
  * @link https://book.cakephp.org/4/en/controllers/components/pagination.html
- * @mixin \Cake\Datasource\Paging\NumericPaginator
+ * @mixin uim.cake.Datasource\Paging\NumericPaginator
  * @deprecated 4.4.0 Use Cake\Datasource\Paging\Paginator directly.
  */
 class PaginatorComponent : Component
@@ -39,7 +39,7 @@ class PaginatorComponent : Component
     protected $_paginator;
 
 
-    public this(ComponentRegistry $registry, array $config = []) {
+    this(ComponentRegistry $registry, array $config = []) {
         deprecationWarning(
             "PaginatorComponent is deprecated, use a Cake\Datasource\Pagination\NumericPaginator instance directly."
         );
@@ -172,7 +172,7 @@ class PaginatorComponent : Component
      * /dashboard?articles[page]=1&tags[page]=2
      * ```
      *
-     * @param uim.cake.Datasource\RepositoryInterface|\Cake\Datasource\IQuery $object Table or query to paginate.
+     * @param uim.cake.Datasource\RepositoryInterface|uim.cake.Datasource\IQuery $object Table or query to paginate.
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return uim.cake.Datasource\IResultSet Query results
      * @throws uim.cake.http.Exception\NotFoundException

@@ -35,7 +35,7 @@ class LegacyShellDispatcher : ShellDispatcher
      * @param bool $bootstrap Initialize environment
      * @param uim.cake.Console\ConsoleIo|null $io ConsoleIo
      */
-    public this(array $args = [], bool $bootstrap = true, ?ConsoleIo $io = null) {
+    this(array $args = [], bool $bootstrap = true, ?ConsoleIo $io = null) {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
         _io = $io;
         super(($args, $bootstrap);

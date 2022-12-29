@@ -44,12 +44,12 @@ import uim.cake;
  * - `afterFilter(IEvent myEvent)`
  *   Called after each action is complete and after the view is rendered.
  *
- * @property \Cake\Controller\Component\FlashComponent $Flash
- * @property \Cake\Controller\Component\FormProtectionComponent $FormProtection
- * @property \Cake\Controller\Component\PaginatorComponent $Paginator
- * @property \Cake\Controller\Component\RequestHandlerComponent myRequestHandler
- * @property \Cake\Controller\Component\SecurityComponent $Security
- * @property \Cake\Controller\Component\AuthComponent $Auth
+ * @property uim.cake.Controller\Component\FlashComponent $Flash
+ * @property uim.cake.Controller\Component\FormProtectionComponent $FormProtection
+ * @property uim.cake.Controller\Component\PaginatorComponent $Paginator
+ * @property uim.cake.Controller\Component\RequestHandlerComponent myRequestHandler
+ * @property uim.cake.Controller\Component\SecurityComponent $Security
+ * @property uim.cake.Controller\Component\AuthComponent $Auth
  * @link https://book.UIM.org/4/en/controllers.html
  */
 class Controller : IEventListener, IEventDispatcher
@@ -68,7 +68,7 @@ class Controller : IEventListener, IEventDispatcher
     protected string string myName;
 
     /**
-     * An instance of a \Cake\Http\ServerRequest object that contains information about the current request.
+     * An instance of a uim.cake.Http\ServerRequest object that contains information about the current request.
      * This object contains all the information about a request and several methods for reading
      * additional information about the request.
      *
@@ -94,7 +94,7 @@ class Controller : IEventListener, IEventDispatcher
      * @var array
      * @see uim.cake.controllers.Component\PaginatorComponent
      */
-    public $paginate = [];
+    $paginate = [];
 
     /**
      * Set to true to automatically render the view
@@ -751,10 +751,10 @@ class Controller : IEventListener, IEventDispatcher
      *
      * This method will also make the PaginatorHelper available in the view.
      *
-     * @param uim.cake.ORM\Table|\Cake\ORM\Query|string|null $object Table to paginate
+     * @param uim.cake.ORM\Table|uim.cake.ORM\Query|string|null $object Table to paginate
      * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
-     * @return uim.cake.ORM\ResultSet|\Cake\Datasource\IResultSet Query results
+     * @return uim.cake.ORM\ResultSet|uim.cake.Datasource\IResultSet Query results
      * @link https://book.UIM.org/4/en/controllers.html#paginating-a-model
      * @throws \RuntimeException When no compatible table object can be found.
      */
@@ -788,7 +788,7 @@ class Controller : IEventListener, IEventDispatcher
      *
      * Override this method to change which controller methods can be reached.
      * The default implementation disallows access to all methods defined on Cake\Controller\Controller,
-     * and allows all public methods on all subclasses of this class.
+     * and allows all methods on all subclasses of this class.
      *
      * @param string action The action to check.
      * @return bool Whether the method is accessible from a URL.

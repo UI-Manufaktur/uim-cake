@@ -16,7 +16,7 @@ import uim.cake.core.ObjectRegistry;
  * Registry for Tasks. Provides features
  * for lazily loading tasks.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\Console\Shell>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.Console\Shell>
  */
 class TaskRegistry : ObjectRegistry
 {
@@ -32,14 +32,14 @@ class TaskRegistry : ObjectRegistry
      *
      * @param uim.cake.Console\Shell $shell Shell instance
      */
-    public this(Shell $shell) {
+    this(Shell $shell) {
         _Shell = $shell;
     }
 
     /**
      * Resolve a task classname.
      *
-     * Part of the template method for {@link \Cake\Core\ObjectRegistry::load()}.
+     * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}.
      *
      * @param string $class Partial classname to resolve.
      * @return string|null Either the correct class name or null.

@@ -7,7 +7,7 @@ import uim.cake;
  * Registry for Helpers. Provides features
  * for lazily loading helpers.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\Console\Helper>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.Console\Helper>
  */
 class HelperRegistry : ObjectRegistry
 {
@@ -33,7 +33,7 @@ class HelperRegistry : ObjectRegistry
      * Will prefer helpers defined in Command\Helper over those
      * defined in Shell\Helper.
      *
-     * Part of the template method for {@link \Cake\Core\ObjectRegistry::load()}.
+     * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}.
      *
      * @param string myClass Partial classname to resolve.
      * @return string|null Either the correct class name or null.

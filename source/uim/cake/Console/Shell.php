@@ -45,77 +45,77 @@ class Shell
      *
      * @var int
      */
-    public const CODE_ERROR = 1;
+    const CODE_ERROR = 1;
 
     /**
      * Default success code
      *
      * @var int
      */
-    public const CODE_SUCCESS = 0;
+    const CODE_SUCCESS = 0;
 
     /**
      * Output constant making verbose shells.
      *
      * @var int
      */
-    public const VERBOSE = ConsoleIo::VERBOSE;
+    const VERBOSE = ConsoleIo::VERBOSE;
 
     /**
      * Output constant for making normal shells.
      *
      * @var int
      */
-    public const NORMAL = ConsoleIo::NORMAL;
+    const NORMAL = ConsoleIo::NORMAL;
 
     /**
      * Output constants for making quiet shells.
      *
      * @var int
      */
-    public const QUIET = ConsoleIo::QUIET;
+    const QUIET = ConsoleIo::QUIET;
 
     /**
      * An instance of ConsoleOptionParser that has been configured for this class.
      *
      * @var uim.cake.Console\ConsoleOptionParser
      */
-    public $OptionParser;
+    $OptionParser;
 
     /**
      * If true, the script will ask for permission to perform actions.
      *
      * @var bool
      */
-    public $interactive = true;
+    $interactive = true;
 
     /**
      * Contains command switches parsed from the command line.
      *
      * @var array
      */
-    public $params = [];
+    $params = [];
 
     /**
      * The command (method/task) that is being run.
      *
      * @var string|null
      */
-    public $command;
+    $command;
 
     /**
      * Contains arguments parsed from the command line.
      *
      * @var array
      */
-    public $args = [];
+    $args = [];
 
     /**
      * The name of the shell in camelized.
      *
      * @var string
      */
-    public $name;
+    $name;
 
     /**
      * The name of the plugin the shell belongs to.
@@ -123,7 +123,7 @@ class Shell
      *
      * @var string
      */
-    public $plugin;
+    $plugin;
 
     /**
      * Contains tasks to load and instantiate
@@ -131,21 +131,21 @@ class Shell
      * @var array|bool
      * @link https://book.cakephp.org/4/en/console-commands/shells.html#shell-tasks
      */
-    public $tasks = [];
+    $tasks = [];
 
     /**
      * Contains the loaded tasks
      *
      * @var array<string>
      */
-    public $taskNames = [];
+    $taskNames = [];
 
     /**
      * Task Collection for the command, used to create Tasks.
      *
      * @var uim.cake.Console\TaskRegistry
      */
-    public $Tasks;
+    $Tasks;
 
     /**
      * Normalized map of tasks.
@@ -175,7 +175,7 @@ class Shell
      * @param uim.cake.ORM\Locator\ILocator|null $locator Table locator instance.
      * @link https://book.cakephp.org/4/en/console-commands/shells.html
      */
-    public this(?ConsoleIo $io = null, ?ILocator $locator = null) {
+    this(?ConsoleIo $io = null, ?ILocator $locator = null) {
         if (!this.name) {
             [, $class] = namespaceSplit(static::class);
             this.name = str_replace(["Shell", "Task"], "", $class);
@@ -269,7 +269,7 @@ class Shell
     }
 
     /**
-     * Loads tasks defined in public $tasks
+     * Loads tasks defined in $tasks
      *
      * @return true
      */
@@ -444,7 +444,7 @@ class Shell
      * or methods on tasks.
      *
      * @param array $argv Array of arguments to run the shell with. This array should be missing the shell name.
-     * @param bool $autoMethod Set to true to allow any public method to be called even if it
+     * @param bool $autoMethod Set to true to allow any method to be called even if it
      *   was not defined as a subcommand. This is used by ShellDispatcher to make building simple shells easy.
      * @param array $extra Extra parameters that you can manually pass to the Shell
      * to be dispatched.

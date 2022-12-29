@@ -185,7 +185,7 @@ class CommandRunner : IEventDispatcher {
      * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
      * @param uim.cake.Console\CommandCollection $commands The command collection to find the shell in.
      * @param string myName The command name to find
-     * @return uim.cake.Console\ICommand|\Cake\Console\Shell
+     * @return uim.cake.Console\ICommand|uim.cake.Console\Shell
      */
     protected auto getCommand(ConsoleIo $io, CommandCollection $commands, string myName) {
         $instance = $commands.get(myName);
@@ -301,7 +301,7 @@ class CommandRunner : IEventDispatcher {
      *
      * @param string myClassName Shell class name.
      * @param uim.cake.Console\ConsoleIo $io The IO wrapper for the created shell class.
-     * @return uim.cake.Console\ICommand|\Cake\Console\Shell
+     * @return uim.cake.Console\ICommand|uim.cake.Console\Shell
      */
     protected auto createCommand(string myClassName, ConsoleIo $io) {
         if (!this.factory) {

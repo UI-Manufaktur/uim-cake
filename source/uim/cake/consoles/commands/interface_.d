@@ -6,10 +6,10 @@ import uim.cake;
 // Describe the interface between a command and the surrounding console libraries.
 interface ICommand {
     // Default error code
-    public const int CODE_ERROR = 1;
+    const int CODE_ERROR = 1;
 
     // Default success code
-    public const int CODE_SUCCESS = 0;
+    const int CODE_SUCCESS = 0;
 
     // Set the name this command uses in the collection.
     auto name(string myName);

@@ -55,7 +55,7 @@ class HelpFormatter
      *
      * @param uim.cake.Console\ConsoleOptionParser $parser The option parser help is being generated for.
      */
-    public this(ConsoleOptionParser $parser) {
+    this(ConsoleOptionParser $parser) {
         _parser = $parser;
     }
 
@@ -183,7 +183,7 @@ class HelpFormatter
     /**
      * Iterate over a collection and find the longest named thing.
      *
-     * @param array<\Cake\Console\ConsoleInputOption|\Cake\Console\ConsoleInputArgument|\Cake\Console\ConsoleInputSubcommand> $collection The collection to find a max length of.
+     * @param array<uim.cake.Console\ConsoleInputOption|uim.cake.Console\ConsoleInputArgument|uim.cake.Console\ConsoleInputSubcommand> $collection The collection to find a max length of.
      * @return int
      */
     protected function _getMaxLength(array $collection): int

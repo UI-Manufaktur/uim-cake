@@ -39,7 +39,7 @@ class SecurityComponent : Component
      *
      * @var string
      */
-    public const DEFAULT_EXCEPTION_MESSAGE = "The request has been black-holed";
+    const DEFAULT_EXCEPTION_MESSAGE = "The request has been black-holed";
 
     /**
      * Default config

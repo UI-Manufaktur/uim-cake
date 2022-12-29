@@ -20,7 +20,7 @@ use ReflectionNamedType;
 /**
  * Factory method for building controllers for request.
  *
- * @: \Cake\Http\IControllerFactory<\Cake\Controller\Controller>
+ * @: uim.cake.Http\IControllerFactory<uim.cake.Controller\Controller>
  */
 class ControllerFactory : IControllerFactory, IRequestHandler
 {
@@ -253,7 +253,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      *
      * @param uim.cake.http.ServerRequest myRequest The request to build a controller for.
      * @return string|null
-     * @psalm-return class-string<\Cake\Controller\Controller>|null
+     * @psalm-return class-string<uim.cake.Controller\Controller>|null
      */
     Nullable!string getControllerClass(ServerRequest myRequest) {
         myPluginPath = "";
@@ -302,7 +302,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
             throw this.missingController(myRequest);
         }
 
-        /** @var class-string<\Cake\Controller\Controller>|null */
+        /** @var class-string<uim.cake.Controller\Controller>|null */
         return App::className(myPluginPath . $controller, $module, "Controller");
     }
 

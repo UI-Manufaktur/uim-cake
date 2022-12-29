@@ -31,7 +31,7 @@ class ShellDispatcher
      *
      * @var array
      */
-    public $args = [];
+    $args = [];
 
     /**
      * List of connected aliases.
@@ -49,7 +49,7 @@ class ShellDispatcher
      * @param array $args the argv from PHP
      * @param bool $bootstrap Should the environment be bootstrapped.
      */
-    public this(array $args = [], bool $bootstrap = true) {
+    this(array $args = [], bool $bootstrap = true) {
         set_time_limit(0);
         this.args = $args;
 
@@ -87,7 +87,7 @@ class ShellDispatcher
      * @param string|null $original The original full name for the shell.
      * @return string|null The aliased class name, or null if the alias does not exist
      */
-    public static function alias(string $short, ?string $original = null): ?string
+    static function alias(string $short, ?string $original = null): ?string
     {
         $short = Inflector::camelize($short);
         if ($original) {
@@ -102,7 +102,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    public static function resetAliases(): void
+    static function resetAliases(): void
     {
         static::$_aliases = [];
     }
@@ -114,7 +114,7 @@ class ShellDispatcher
      * @param array $extra Extra parameters
      * @return int The exit code of the shell process.
      */
-    public static function run(array $argv, array $extra = []): int
+    static function run(array $argv, array $extra = []): int
     {
         $dispatcher = new ShellDispatcher($argv);
 

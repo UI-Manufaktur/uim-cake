@@ -12,7 +12,7 @@ import uim.cake;
  */
 class ShellDispatcher {
     // Contains arguments parsed from the command line.
-    public array $args = [];
+    array $args = [];
 
     // List of connected aliases.
     protected static STRINGAA $_aliases = [];

@@ -33,7 +33,7 @@ class ExitCode : Constraint
      *
      * @param int|null $exitCode Exit code
      */
-    public this(?int $exitCode) {
+    this(?int $exitCode) {
         this.exitCode = $exitCode;
     }
 

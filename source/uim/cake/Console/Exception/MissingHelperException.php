@@ -8,7 +8,7 @@
  * Redistributions of files must retain the above copyright notice.
  *
 
- * @since         3.1.0
+
   */
 module uim.cake.consoles.Exception;
 

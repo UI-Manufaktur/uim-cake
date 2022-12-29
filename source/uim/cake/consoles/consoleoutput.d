@@ -34,18 +34,18 @@ class ConsoleOutput {
     /**
      * Raw output constant - no modification of output text.
     */
-    public const int RAW = 0;
+    const int RAW = 0;
 
     // Plain output - tags will be stripped.
-    public const int PLAIN = 1;
+    const int PLAIN = 1;
 
     // Color output - Convert known tags in to ANSI color escape codes.
-    public const int COLOR = 2;
+    const int COLOR = 2;
 
     /**
      * Constant for a newline.
      */
-    public const string LF = PHP_EOL;
+    const string LF = PHP_EOL;
 
     /**
      * File handle for output.

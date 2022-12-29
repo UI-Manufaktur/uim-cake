@@ -29,8 +29,8 @@ import uim.cake.utilities.Hash;
  *
  * Binds access control with user authentication and session management.
  *
- * @property \Cake\Controller\Component\RequestHandlerComponent $RequestHandler
- * @property \Cake\Controller\Component\FlashComponent $Flash
+ * @property uim.cake.Controller\Component\RequestHandlerComponent $RequestHandler
+ * @property uim.cake.Controller\Component\FlashComponent $Flash
  * @link https://book.cakephp.org/4/en/controllers/components/authentication.html
  * @deprecated 4.0.0 Use the cakephp/authentication and cakephp/authorization plugins instead.
  * @see https://github.com/cakephp/authentication
@@ -46,14 +46,14 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @var string
      */
-    public const QUERY_STRING_REDIRECT = 'redirect';
+    const QUERY_STRING_REDIRECT = 'redirect';
 
     /**
      * Constant for 'all'
      *
      * @var string
      */
-    public const ALL = 'all';
+    const ALL = 'all';
 
     /**
      * Default config
@@ -173,14 +173,14 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Objects that will be used for authentication checks.
      *
-     * @var array<\Cake\Auth\BaseAuthenticate>
+     * @var array<uim.cake.Auth\BaseAuthenticate>
      */
     protected $_authenticateObjects = [];
 
     /**
      * Objects that will be used for authorization checks.
      *
-     * @var array<\Cake\Auth\BaseAuthorize>
+     * @var array<uim.cake.Auth\BaseAuthorize>
      */
     protected $_authorizeObjects = [];
 
@@ -197,7 +197,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @var array<string>
      * @see uim.cake.controllers.Component\AuthComponent::allow()
      */
-    public $allowedActions = [];
+    $allowedActions = [];
 
     /**
      * The instance of the Authenticate provider that was used for

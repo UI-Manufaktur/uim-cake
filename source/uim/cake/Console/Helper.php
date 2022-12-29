@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.1.0
-  */
 module uim.cake.Console;
 
 import uim.cake.core.InstanceConfigTrait;
@@ -41,7 +34,7 @@ abstract class Helper
      * @param uim.cake.Console\ConsoleIo $io The ConsoleIo instance to use.
      * @param array<string, mixed> $config The settings for this helper.
      */
-    public this(ConsoleIo $io, array $config = []) {
+    this(ConsoleIo $io, array $config = []) {
         _io = $io;
         this.setConfig($config);
     }

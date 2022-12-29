@@ -20,7 +20,7 @@ import uim.cake.events.EventDispatcherTrait;
  *
  * Handles loading, constructing and binding events for component class objects.
  *
- * @: \Cake\Core\ObjectRegistry<\Cake\Controller\Component>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.Controller\Component>
  */
 class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
 {
@@ -38,7 +38,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
      *
      * @param uim.cake.controllers.Controller|null $controller Controller instance.
      */
-    public this(?Controller $controller = null) {
+    this(?Controller $controller = null) {
         if ($controller) {
             this.setController($controller);
         }
@@ -74,7 +74,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Resolve a component classname.
      *
-     * Part of the template method for {@link \Cake\Core\ObjectRegistry::load()}.
+     * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}.
      *
      * @param string $class Partial classname to resolve.
      * @return string|null Either the correct class name or null.
@@ -88,8 +88,8 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Throws an exception when a component is missing.
      *
-     * Part of the template method for {@link \Cake\Core\ObjectRegistry::load()}
-     * and {@link \Cake\Core\ObjectRegistry::unload()}
+     * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}
+     * and {@link uim.cake.Core\ObjectRegistry::unload()}
      *
      * @param string $class The classname that is missing.
      * @param string|null $plugin The plugin the component is missing in.
@@ -107,7 +107,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Create the component instance.
      *
-     * Part of the template method for {@link \Cake\Core\ObjectRegistry::load()}
+     * Part of the template method for {@link uim.cake.Core\ObjectRegistry::load()}
      * Enabled components will be registered with the event manager.
      *
      * @param string $class The classname to create.

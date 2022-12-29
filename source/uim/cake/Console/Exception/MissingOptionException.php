@@ -43,7 +43,7 @@ class MissingOptionException : ConsoleException
      * @param int|null $code The exception code if relevant.
      * @param \Throwable|null $previous the previous exception.
      */
-    public this(
+    this(
         string $message,
         string $requested = "",
         array $suggestions = [],

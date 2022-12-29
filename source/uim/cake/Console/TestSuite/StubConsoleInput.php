@@ -43,7 +43,7 @@ class StubConsoleInput : ConsoleInput
      *
      * @param array<string> $replies A list of replies for read()
      */
-    public this(array $replies) {
+    this(array $replies) {
         super(();
 
         this.replies = $replies;
