@@ -12,10 +12,10 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Client\Auth;
+module uim.cake.https.Client\Auth;
 
 import uim.cake.cores.exceptions.CakeException;
-import uim.cake.Http\Client\Request;
+import uim.cake.https.Client\Request;
 import uim.cake.utilities.Security;
 use Psr\Http\Message\UriInterface;
 use RuntimeException;

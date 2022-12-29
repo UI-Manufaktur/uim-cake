@@ -7,7 +7,7 @@
  * @since         4.1.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Exception;
+module uim.cake.https.Exception;
 
 /**
  * An exception subclass used by routing and application code to

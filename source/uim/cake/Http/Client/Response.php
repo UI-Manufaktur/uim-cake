@@ -12,9 +12,9 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Client;
+module uim.cake.https.Client;
 
-import uim.cake.Http\Cookie\CookieCollection;
+import uim.cake.https.Cookie\CookieCollection;
 use Laminas\Diactoros\MessageTrait;
 use Laminas\Diactoros\Stream;
 use Psr\Http\Message\IResponse;

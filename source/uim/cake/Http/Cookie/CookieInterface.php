@@ -12,7 +12,7 @@
  * @since         3.5.0
  * @license       https://www.opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Cookie;
+module uim.cake.https.Cookie;
 
 /**
  * Cookie Interface

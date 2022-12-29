@@ -12,10 +12,10 @@
  * @since         3.0.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Client\Auth;
+module uim.cake.https.Client\Auth;
 
-import uim.cake.Http\Client;
-import uim.cake.Http\Client\Request;
+import uim.cake.https.Client;
+import uim.cake.https.Client\Request;
 
 /**
  * Digest authentication adapter for Cake\Http\Client

@@ -12,7 +12,7 @@
  * @since         4.3.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-module uim.cake.Http\Client\Exception;
+module uim.cake.https.Client\Exception;
 
 import uim.cake.cores.exceptions.CakeException;
 
