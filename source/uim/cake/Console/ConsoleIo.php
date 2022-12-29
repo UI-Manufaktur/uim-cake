@@ -599,7 +599,7 @@ class ConsoleIo
      * @throws \Cake\Console\Exception\StopException When `q` is given as an answer
      *   to whether a file should be overwritten.
      */
-    function createFile(string $path, string $contents, bool $forceOverwrite = false): bool
+    bool createFile(string $path, string $contents, bool $forceOverwrite = false)
     {
         this.out();
         $forceOverwrite = $forceOverwrite || this.forceOverwrite;

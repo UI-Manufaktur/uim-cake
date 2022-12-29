@@ -683,7 +683,7 @@ class I18nExtractCommand : Command
      * @param string $newFileContent The content of the new file.
      * @return bool Whether the old and new file are unchanged.
      */
-    protected function checkUnchanged(string $oldFile, int $headerLength, string $newFileContent): bool
+    protected bool checkUnchanged(string $oldFile, int $headerLength, string $newFileContent)
     {
         if (!file_exists($oldFile)) {
             return false;
@@ -841,7 +841,7 @@ class I18nExtractCommand : Command
      *
      * @return bool
      */
-    protected function _isExtractingApp(): bool
+    protected bool _isExtractingApp()
     {
         /** @psalm-suppress UndefinedConstant */
         return _paths == [APP];
@@ -853,7 +853,7 @@ class I18nExtractCommand : Command
      * @param string $path Path to folder
      * @return bool true if it exists and is writable, false otherwise
      */
-    protected function _isPathUsable($path): bool
+    protected bool _isPathUsable($path)
     {
         if (!is_dir($path)) {
             mkdir($path, 0770, true);

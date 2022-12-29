@@ -274,7 +274,7 @@ class Shell
      *
      * @return true
      */
-    function loadTasks(): bool
+    bool loadTasks()
     {
         if (this.tasks == true || empty(this.tasks)) {
             return true;
@@ -313,7 +313,7 @@ class Shell
      * @return bool Success
      * @link https://book.cakephp.org/4/en/console-and-shells.html#shell-tasks
      */
-    function hasTask(string $task): bool
+    bool hasTask(string $task)
     {
         return isset(_taskMap[Inflector::camelize($task)]);
     }
@@ -325,7 +325,7 @@ class Shell
      * @return bool
      * @link https://book.cakephp.org/4/en/console-and-shells.html#shell-tasks
      */
-    function hasMethod(string $name): bool
+    bool hasMethod(string $name)
     {
         try {
             $method = new ReflectionMethod(this, $name);
@@ -815,7 +815,7 @@ class Shell
      * @return bool Success
      * @link https://book.cakephp.org/4/en/console-and-shells.html#creating-files
      */
-    function createFile(string $path, string $contents): bool
+    bool createFile(string $path, string $contents)
     {
         $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
 

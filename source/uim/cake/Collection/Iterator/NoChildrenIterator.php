@@ -24,7 +24,7 @@ class NoChildrenIterator : Collection : RecursiveIterator
      *
      * @return bool
      */
-    function hasChildren(): bool
+    bool hasChildren()
     {
         return false;
     }

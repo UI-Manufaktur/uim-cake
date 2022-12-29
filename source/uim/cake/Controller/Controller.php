@@ -416,7 +416,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @return bool
      * @since 3.6.0
      */
-    function isAutoRenderEnabled(): bool
+    bool isAutoRenderEnabled()
     {
         return this.autoRender;
     }
@@ -968,7 +968,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @return bool Whether the method is accessible from a URL.
      * @throws \ReflectionException
      */
-    function isAction(string $action): bool
+    bool isAction(string $action)
     {
         $baseClass = new ReflectionClass(self::class);
         if ($baseClass.hasMethod($action)) {

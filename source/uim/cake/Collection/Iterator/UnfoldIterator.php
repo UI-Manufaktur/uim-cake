@@ -58,7 +58,7 @@ class UnfoldIterator : IteratorIterator : RecursiveIterator
      *
      * @return bool
      */
-    function hasChildren(): bool
+    bool hasChildren()
     {
         return true;
     }

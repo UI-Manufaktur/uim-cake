@@ -28,7 +28,7 @@ class ContentsContainRow : ContentsRegExp
      * @return bool
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    function matches($other): bool
+    bool matches($other)
     {
         $row = array_map(function ($cell) {
             return preg_quote($cell, "/");
