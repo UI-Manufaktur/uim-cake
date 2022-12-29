@@ -289,7 +289,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * @param \Psr\Http\messages.IResponse|string $output The response to output.
      * @return void
      */
-    function write($output): void
+    void write($output): void
     {
         if (is_string($output)) {
             echo $output;

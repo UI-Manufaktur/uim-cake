@@ -37,7 +37,7 @@ interface EventInterface
      *
      * @return void
      */
-    function stopPropagation(): void;
+    void stopPropagation(): void;
 
     /**
      * Checks if the event is stopped.

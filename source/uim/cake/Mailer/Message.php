@@ -1870,7 +1870,7 @@ class Message : JsonSerializable, Serializable
      * @param string $data Serialized string.
      * @return void
      */
-    function unserialize($data) {
+    void unserialize($data) {
         $array = unserialize($data);
         if (!is_array($array)) {
             throw new CakeException("Unable to unserialize message.");
@@ -1885,7 +1885,7 @@ class Message : JsonSerializable, Serializable
      * @param array $data Data array.
      * @return void
      */
-    function __unserialize(array $data): void
+    void __unserialize(array $data): void
     {
         this.createFromArray($data);
     }

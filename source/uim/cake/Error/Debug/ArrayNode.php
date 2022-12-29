@@ -36,7 +36,7 @@ class ArrayNode : NodeInterface
      * @param uim.cake.Error\Debug\ArrayItemNode $node The item to add.
      * @return void
      */
-    function add(ArrayItemNode $node): void
+    void add(ArrayItemNode $node): void
     {
         this.items[] = $node;
     }

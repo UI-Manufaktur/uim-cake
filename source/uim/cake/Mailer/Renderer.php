@@ -94,7 +94,7 @@ class Renderer
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         if (_viewBuilder != null) {
             _viewBuilder = clone _viewBuilder;
         }

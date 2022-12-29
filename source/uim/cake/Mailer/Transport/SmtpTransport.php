@@ -88,7 +88,7 @@ class SmtpTransport : AbstractTransport
      *
      * @return void
      */
-    function __wakeup(): void
+    void __wakeup(): void
     {
         _socket = null;
     }
@@ -101,7 +101,7 @@ class SmtpTransport : AbstractTransport
      *
      * @return void
      */
-    function connect(): void
+    void connect(): void
     {
         if (!this.connected()) {
             _connect();
@@ -127,7 +127,7 @@ class SmtpTransport : AbstractTransport
      *
      * @return void
      */
-    function disconnect(): void
+    void disconnect(): void
     {
         if (!this.connected()) {
             return;

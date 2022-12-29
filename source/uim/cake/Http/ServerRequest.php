@@ -396,7 +396,7 @@ class ServerRequest : IServerRequest
      * @param array<string> $proxies ips list of trusted proxies
      * @return void
      */
-    function setTrustedProxies(array $proxies): void
+    void setTrustedProxies(array $proxies): void
     {
         this.trustedProxies = $proxies;
         this.trustProxy = true;
@@ -504,7 +504,7 @@ class ServerRequest : IServerRequest
      *
      * @return void
      */
-    function clearDetectorCache(): void
+    void clearDetectorCache(): void
     {
         _detectorCache = [];
     }

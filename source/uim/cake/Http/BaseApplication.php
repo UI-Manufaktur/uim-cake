@@ -173,7 +173,7 @@ abstract class BaseApplication implements
      * @param uim.cake.routings.RouteBuilder $routes A route builder to add routes into.
      * @return void
      */
-    function routes(RouteBuilder $routes): void
+    void routes(RouteBuilder $routes): void
     {
         // Only load routes if the router is empty
         if (!Router::routes()) {
@@ -265,7 +265,7 @@ abstract class BaseApplication implements
      * @param uim.cake.Core\IContainer $container The Container to update.
      * @return void
      */
-    function services(IContainer $container): void
+    void services(IContainer $container): void
     {
     }
 

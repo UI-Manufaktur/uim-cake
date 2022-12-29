@@ -154,7 +154,7 @@ class FormData : Countable {
      * @param mixed myValue The value to add.
      * @return void
      */
-    function addRecursive(string myName, myValue): void
+    void addRecursive(string myName, myValue): void
     {
         foreach (myValue as myKey: myValue) {
             myKey = myName . "[" . myKey . "]";

@@ -475,7 +475,7 @@ class Session
      * @param mixed $value Value to write
      * @return void
      */
-    function write($name, $value = null): void
+    void write($name, $value = null): void
     {
         if (!this.started()) {
             this.start();
@@ -523,7 +523,7 @@ class Session
      * @param string $name Session variable to remove
      * @return void
      */
-    function delete(string $name): void
+    void delete(string $name): void
     {
         if (this.check($name)) {
             /** @psalm-suppress InvalidScalarArgument */
@@ -556,7 +556,7 @@ class Session
      *
      * @return void
      */
-    function destroy(): void
+    void destroy(): void
     {
         if (_hasSession() && !this.started()) {
             this.start();
@@ -578,7 +578,7 @@ class Session
      * @param bool $renew If session should be renewed, as well. Defaults to false.
      * @return void
      */
-    function clear(bool $renew = false): void
+    void clear(bool $renew = false): void
     {
         $_SESSION = [];
         if ($renew) {
@@ -604,7 +604,7 @@ class Session
      *
      * @return void
      */
-    function renew(): void
+    void renew(): void
     {
         if (!_hasSession() || _isCLI) {
             return;

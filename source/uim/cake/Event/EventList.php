@@ -28,7 +28,7 @@ class EventList : ArrayAccess, Countable
      *
      * @return void
      */
-    function flush(): void
+    void flush(): void
     {
         _events = [];
     }
@@ -39,7 +39,7 @@ class EventList : ArrayAccess, Countable
      * @param uim.cake.events.IEvent $event An event to the list of dispatched events.
      * @return void
      */
-    function add(IEvent $event): void
+    void add(IEvent $event): void
     {
         _events[] = $event;
     }
@@ -80,7 +80,7 @@ class EventList : ArrayAccess, Countable
      * @param mixed $value The value to set.
      * @return void
      */
-    function offsetSet($offset, $value): void
+    void offsetSet($offset, $value): void
     {
         _events[$offset] = $value;
     }
@@ -92,7 +92,7 @@ class EventList : ArrayAccess, Countable
      * @param mixed $offset The offset to unset.
      * @return void
      */
-    function offsetUnset($offset): void
+    void offsetUnset($offset): void
     {
         unset(_events[$offset]);
     }

@@ -22,7 +22,7 @@ trait HttpClientTrait
      * @after
      * @return void
      */
-    function cleanupMockResponses(): void
+    void cleanupMockResponses(): void
     {
         Client::clearMockResponses();
     }
@@ -50,7 +50,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    function mockClientPost(string $url, Response $response, array $options = []): void
+    void mockClientPost(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse("POST", $url, $response, $options);
     }
@@ -63,7 +63,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    function mockClientGet(string $url, Response $response, array $options = []): void
+    void mockClientGet(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse("GET", $url, $response, $options);
     }
@@ -76,7 +76,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    function mockClientPatch(string $url, Response $response, array $options = []): void
+    void mockClientPatch(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse("PATCH", $url, $response, $options);
     }
@@ -89,7 +89,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    function mockClientPut(string $url, Response $response, array $options = []): void
+    void mockClientPut(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse("PUT", $url, $response, $options);
     }
@@ -102,7 +102,7 @@ trait HttpClientTrait
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      * @return void
      */
-    function mockClientDelete(string $url, Response $response, array $options = []): void
+    void mockClientDelete(string $url, Response $response, array $options = []): void
     {
         Client::addMockResponse("DELETE", $url, $response, $options);
     }

@@ -337,7 +337,7 @@ class Socket
      * @param string $errStr Error string
      * @return void
      */
-    function setLastError(?int $errNum, string $errStr): void
+    void setLastError(?int $errNum, string $errStr): void
     {
         this.lastError = ["num": $errNum, "str": $errStr];
     }
@@ -431,7 +431,7 @@ class Socket
      * @param array|null $state Array with key and values to reset
      * @return void
      */
-    function reset(?array $state = null): void
+    void reset(?array $state = null): void
     {
         if (empty($state)) {
             static $initialState = [];

@@ -668,7 +668,7 @@ class Response : IResponse
      * @param array<string>|string $mimeType Definition of the mime type.
      * @return void
      */
-    function setTypeMap(string $type, $mimeType): void
+    void setTypeMap(string $type, $mimeType): void
     {
         _mimeTypes[$type] = $mimeType;
     }
@@ -969,7 +969,7 @@ class Response : IResponse
      * @deprecated 4.4.0 Use `withNotModified()` instead.
      * @return void
      */
-    function notModified(): void
+    void notModified(): void
     {
         deprecationWarning(
             "The `notModified()` method is deprecated. " .

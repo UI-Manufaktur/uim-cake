@@ -874,7 +874,7 @@ class Debugger
      * @param array myData Data to output.
      * @return void
      */
-    function outputError(array myData): void
+    void outputError(array myData): void
     {
         $defaults = [
             "level":0,

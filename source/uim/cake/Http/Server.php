@@ -111,7 +111,7 @@ class Server : EventDispatcherInterface
      *   When null, a SAPI Stream Emitter will be used.
      * @return void
      */
-    function emit(IResponse $response, ?EmitterInterface $emitter = null): void
+    void emit(IResponse $response, ?EmitterInterface $emitter = null): void
     {
         if (!$emitter) {
             $emitter = new ResponseEmitter();

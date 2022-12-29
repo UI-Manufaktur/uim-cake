@@ -179,7 +179,7 @@ class FormData : Countable
      * @param mixed $value The value to add.
      * @return void
      */
-    function addRecursive(string $name, $value): void
+    void addRecursive(string $name, $value): void
     {
         foreach ($value as $key: $value) {
             $key = $name . "[" . $key . "]";

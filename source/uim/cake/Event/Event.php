@@ -111,7 +111,7 @@ class Event : EventInterface
      *
      * @return void
      */
-    function stopPropagation(): void
+    void stopPropagation(): void
     {
         _stopped = true;
     }

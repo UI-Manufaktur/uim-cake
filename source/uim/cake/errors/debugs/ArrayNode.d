@@ -28,7 +28,7 @@ class ArrayNode : INode
      * @param uim.cake.Error\Debug\ArrayItemNode myNode The item to add.
      * @return void
      */
-    function add(ArrayItemNode myNode): void
+    void add(ArrayItemNode myNode): void
     {
         this.items[] = myNode;
     }

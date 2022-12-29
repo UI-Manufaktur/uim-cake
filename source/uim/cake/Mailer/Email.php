@@ -126,7 +126,7 @@ class Email : JsonSerializable, Serializable
      *
      * @return void
      */
-    function __clone() {
+    void __clone() {
         if (this.renderer) {
             this.renderer = clone this.renderer;
         }
@@ -373,7 +373,7 @@ class Email : JsonSerializable, Serializable
      * @param array<string>|string|null $content Content array or string
      * @return void
      */
-    function render($content = null): void
+    void render($content = null): void
     {
         if (is_array($content)) {
             $content = implode("\n", $content) . "\n";
@@ -596,7 +596,7 @@ class Email : JsonSerializable, Serializable
      * @param string $data Serialized string.
      * @return void
      */
-    function unserialize($data): void
+    void unserialize($data): void
     {
         this.createFromArray(unserialize($data));
     }
@@ -607,7 +607,7 @@ class Email : JsonSerializable, Serializable
      * @param array $data Data array.
      * @return void
      */
-    function __unserialize(array $data): void
+    void __unserialize(array $data): void
     {
         this.createFromArray($data);
     }

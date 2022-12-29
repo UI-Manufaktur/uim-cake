@@ -51,7 +51,7 @@ class Application : IHttpApplication
      *
      * @return void
      */
-    function bootstrap(): void
+    void bootstrap(): void
     {
         // Load configuration here. This is the first
         // method Cake\Http\Server will call on your application.

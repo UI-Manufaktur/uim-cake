@@ -587,7 +587,7 @@ class File
      *   the stat cache for the current path only.
      * @return void
      */
-    function clearStatCache($all = false): void
+    void clearStatCache($all = false): void
     {
         if ($all == false && this.path) {
             clearstatcache(true, this.path);

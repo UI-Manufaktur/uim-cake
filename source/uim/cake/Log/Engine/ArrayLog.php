@@ -75,7 +75,7 @@ class ArrayLog : BaseLog
      *
      * @return void
      */
-    function clear(): void
+    void clear(): void
     {
         this.content = [];
     }
