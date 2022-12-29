@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.View\Widget;
 
 import uim.cake.View\Form\ContextInterface;
