@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Database;
 
 use InvalidArgumentException;

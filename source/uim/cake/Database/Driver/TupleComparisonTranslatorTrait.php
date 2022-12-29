@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.databases.Driver;
 
 import uim.cake.databases.expressions.IdentifierExpression;

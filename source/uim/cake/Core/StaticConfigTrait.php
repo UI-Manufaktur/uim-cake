@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Core;
 
 use BadMethodCallException;

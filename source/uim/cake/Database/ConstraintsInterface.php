@@ -1,11 +1,4 @@
 
-
-
- *
-
-
-
-  */
 module uim.cake.Database;
 
 import uim.cake.datasources.ConnectionInterface;
