@@ -50,7 +50,6 @@ class FormatterLocator
      *
      * @param string $name The formatter name.
      * @param class-string<uim.cake.I18n\FormatterInterface> $className A FQCN for a formatter.
-     * @return void
      */
     void set(string $name, string $className): void
     {

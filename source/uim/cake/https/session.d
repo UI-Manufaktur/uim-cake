@@ -462,7 +462,6 @@ class Session
      *
      * @param array|string myName Name of variable
      * @param mixed myValue Value to write
-     * @return void
      */
     void write(myName, myValue = null) {
         if (!this.started()) {
@@ -508,7 +507,6 @@ class Session
      * Removes a variable from session.
      *
      * @param string myName Session variable to remove
-     * @return void
      */
     void delete(string myName) {
         if (this.check(myName)) {

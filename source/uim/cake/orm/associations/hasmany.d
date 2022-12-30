@@ -298,7 +298,6 @@ class HasMany : Association
      *   If boolean it will be used a value for "cleanProperty" option.
      * @throws \InvalidArgumentException if non persisted entities are passed or if
      * any of them is lacking a primary key value
-     * @return void
      */
     void unlink(IEntity $sourceEntity, array myTargetEntities, myOptions = []) {
         if (is_bool(myOptions)) {

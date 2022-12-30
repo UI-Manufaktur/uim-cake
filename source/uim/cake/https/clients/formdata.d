@@ -152,7 +152,6 @@ class FormData : Countable {
      *
      * @param string myName The name to use.
      * @param mixed myValue The value to add.
-     * @return void
      */
     void addRecursive(string myName, myValue): void
     {

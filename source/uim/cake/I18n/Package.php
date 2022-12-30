@@ -57,7 +57,6 @@ class Package
      * Sets the messages for this package.
      *
      * @param array<array|string> $messages The messages for this package.
-     * @return void
      */
     void setMessages(array $messages): void
     {
@@ -69,7 +68,6 @@ class Package
      *
      * @param string $key the key of the message
      * @param array|string $message the actual message
-     * @return void
      */
     void addMessage(string $key, $message): void
     {
@@ -80,7 +78,6 @@ class Package
      * Adds new messages for this package.
      *
      * @param array<array|string> $messages The messages to add in this package.
-     * @return void
      */
     void addMessages(array $messages): void
     {
@@ -111,7 +108,6 @@ class Package
      * Sets the formatter name for this package.
      *
      * @param string $formatter The formatter name for this package.
-     * @return void
      */
     void setFormatter(string $formatter): void
     {
@@ -130,7 +126,6 @@ class Package
      * Sets the fallback package name.
      *
      * @param string|null $fallback The fallback package name.
-     * @return void
      */
     void setFallback(?string $fallback): void
     {

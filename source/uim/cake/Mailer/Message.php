@@ -1833,7 +1833,6 @@ class Message : JsonSerializable, Serializable
      * Unserializes the Message object.
      *
      * @param string $data Serialized string.
-     * @return void
      */
     void unserialize($data) {
         $array = unserialize($data);
@@ -1848,7 +1847,6 @@ class Message : JsonSerializable, Serializable
      * Magic method used to rebuild the Message object.
      *
      * @param array $data Data array.
-     * @return void
      */
     void __unserialize(array $data): void
     {

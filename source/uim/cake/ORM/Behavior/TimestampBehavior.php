@@ -60,7 +60,6 @@ class TimestampBehavior : Behavior
      * overwrite the events to listen on
      *
      * @param array<string, mixed> $config The config for this behavior.
-     * @return void
      */
     void initialize(array $config): void
     {

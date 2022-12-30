@@ -57,7 +57,6 @@ class PackageLocator
      * @param string $name The package name.
      * @param string $locale The locale for the package.
      * @param uim.cake.I18n\Package|callable $spec A callable that returns a package or Package instance.
-     * @return void
      */
     void set(string $name, string $locale, $spec): void
     {

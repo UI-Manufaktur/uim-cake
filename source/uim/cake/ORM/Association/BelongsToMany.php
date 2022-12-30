@@ -425,7 +425,6 @@ class BelongsToMany : Association
      *
      * @param uim.cake.orm.Query $query the query to be altered to include the target table data
      * @param array<string, mixed> $options Any extra options or overrides to be taken in account
-     * @return void
      */
     void attachTo(Query $query, array $options = []): void
     {

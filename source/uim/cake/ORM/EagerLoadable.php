@@ -131,7 +131,6 @@ class EagerLoadable
      *
      * @param string $name The association name.
      * @param uim.cake.orm.EagerLoadable $association The association to load.
-     * @return void
      */
     void addAssociation(string $name, EagerLoadable $association): void
     {

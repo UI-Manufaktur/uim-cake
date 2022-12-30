@@ -473,7 +473,6 @@ class Session
      *
      * @param array|string $name Name of variable
      * @param mixed $value Value to write
-     * @return void
      */
     void write($name, $value = null): void
     {
@@ -521,7 +520,6 @@ class Session
      * Removes a variable from session.
      *
      * @param string $name Session variable to remove
-     * @return void
      */
     void delete(string $name): void
     {
@@ -573,7 +571,6 @@ class Session
      * Optionally it also clears the session id and renews the session.
      *
      * @param bool $renew If session should be renewed, as well. Defaults to false.
-     * @return void
      */
     void clear(bool $renew = false): void
     {

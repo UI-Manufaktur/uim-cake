@@ -201,7 +201,6 @@ class ResultSet : IResultSet
      * Part of Iterator interface.
      *
      * @throws uim.cake.Database\exceptions.DatabaseException
-     * @return void
      */
     void rewind(): void
     {
@@ -311,7 +310,6 @@ class ResultSet : IResultSet
      * Part of Serializable interface.
      *
      * @param string $serialized Serialized object
-     * @return void
      */
     void unserialize($serialized) {
         __unserialize((array)(unserialize($serialized) ?: []));
@@ -321,7 +319,6 @@ class ResultSet : IResultSet
      * Unserializes a resultset.
      *
      * @param array $data Data array.
-     * @return void
      */
     void __unserialize(array $data): void
     {

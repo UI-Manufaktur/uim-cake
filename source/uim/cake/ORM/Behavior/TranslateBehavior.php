@@ -104,7 +104,6 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * Initialize hook
      *
      * @param array<string, mixed> $config The config for this behavior.
-     * @return void
      */
     void initialize(array $config): void
     {

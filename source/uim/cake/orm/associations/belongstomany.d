@@ -366,7 +366,6 @@ class BelongsToMany : Association
      *
      * @param uim.cake.orm.Query myQuery the query to be altered to include the target table data
      * @param array<string, mixed> myOptions Any extra options or overrides to be taken in account
-     * @return void
      */
     void attachTo(Query myQuery, array myOptions = []) {
         if (!empty(myOptions["negateMatch"])) {

@@ -109,7 +109,6 @@ class TranslatorRegistry
      * Sets the default locale code.
      *
      * @param string $locale The new locale code.
-     * @return void
      */
     void setLocale(string $locale): void
     {
@@ -149,7 +148,6 @@ class TranslatorRegistry
      * requests.
      *
      * @param \Psr\SimpleCache\ICache&uim.cake.Cache\ICacheEngine $cacher The cacher instance.
-     * @return void
      */
     void setCacher($cacher): void
     {
@@ -251,7 +249,6 @@ class TranslatorRegistry
      *
      * @param string $name The name of the translator package to register a loader for
      * @param callable $loader A callable object that should return a Package
-     * @return void
      */
     void registerLoader(string $name, callable $loader): void
     {
@@ -280,7 +277,6 @@ class TranslatorRegistry
      * Set if the default domain fallback is used.
      *
      * @param bool $enable flag to enable or disable fallback
-     * @return void
      */
     void useFallback(bool $enable = true): void
     {

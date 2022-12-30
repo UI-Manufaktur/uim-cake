@@ -315,7 +315,6 @@ class Socket
      *
      * @param int|null $errNum Error code
      * @param string errStr Error string
-     * @return void
      */
     void setLastError(Nullable!int $errNum, string errStr) {
         this.lastError = ["num":$errNum, "str":$errStr];
@@ -405,7 +404,6 @@ class Socket
      * Resets the state of this Socket instance to it"s initial state (before Object::__construct got executed)
      *
      * @param array|null $state Array with key and values to reset
-     * @return void
      */
     void reset(?array $state = null) {
         if (empty($state)) {

@@ -175,7 +175,6 @@ class FormData : Countable
      *
      * @param string $name The name to use.
      * @param mixed $value The value to add.
-     * @return void
      */
     void addRecursive(string $name, $value): void
     {

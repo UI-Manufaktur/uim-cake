@@ -188,7 +188,6 @@ class ResultSet : IResultSet
      * Part of Iterator interface.
      *
      * @throws uim.cake.Database\exceptions.DatabaseException
-     * @return void
      */
     void rewind() {
         if (_index == 0) {
@@ -295,7 +294,6 @@ class ResultSet : IResultSet
      * Part of Serializable interface.
      *
      * @param string serialized Serialized object
-     * @return void
      */
     void unserialize($serialized) {
         __unserialize((array)(unserialize($serialized) ?: []));
@@ -305,7 +303,6 @@ class ResultSet : IResultSet
      * Unserializes a resultset.
      *
      * @param array myData Data array.
-     * @return void
      */
     void __unserialize(array myData) {
         _results = SplFixedArray::fromArray(myData);

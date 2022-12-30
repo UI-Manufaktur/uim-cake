@@ -303,7 +303,6 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ```
      *
      * @param array<string, mixed> myConfig Configuration options passed to the constructor
-     * @return void
      */
     void initialize(array myConfig) {
     }

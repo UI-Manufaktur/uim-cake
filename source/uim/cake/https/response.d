@@ -627,7 +627,6 @@ class Response : IResponse
      *
      * @param string myType Content type.
      * @param array<string>|string mimeType Definition of the mime type.
-     * @return void
      */
     void setTypeMap(string myType, $mimeType) {
         _mimeTypes[myType] = $mimeType;

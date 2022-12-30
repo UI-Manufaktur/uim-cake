@@ -158,7 +158,6 @@ class Behavior : IEventListener
      * the constructor and call parent.
      *
      * @param array<string, mixed> $config The configuration settings provided to this behavior.
-     * @return void
      */
     void initialize(array $config): void
     {

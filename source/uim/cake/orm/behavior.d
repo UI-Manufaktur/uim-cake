@@ -154,7 +154,6 @@ class Behavior : IEventListener
      * the constructor and call parent.
      *
      * @param array<string, mixed> myConfig The configuration settings provided to this behavior.
-     * @return void
      */
     void initialize(array myConfig) {
     }

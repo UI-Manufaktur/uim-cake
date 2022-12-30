@@ -103,7 +103,6 @@ class CounterCacheBehavior : Behavior
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
      * @param \ArrayObject $options The options for the query
-     * @return void
      */
     void beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options) {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
@@ -140,7 +139,6 @@ class CounterCacheBehavior : Behavior
      * @param uim.cake.events.IEvent $event The afterSave event that was fired.
      * @param uim.cake.Datasource\EntityInterface $entity The entity that was saved.
      * @param \ArrayObject $options The options for the query
-     * @return void
      */
     void afterSave(IEvent $event, EntityInterface $entity, ArrayObject $options): void
     {
@@ -160,7 +158,6 @@ class CounterCacheBehavior : Behavior
      * @param uim.cake.events.IEvent $event The afterDelete event that was fired.
      * @param uim.cake.Datasource\EntityInterface $entity The entity that was deleted.
      * @param \ArrayObject $options The options for the query
-     * @return void
      */
     void afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options) {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {

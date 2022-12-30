@@ -47,7 +47,6 @@ class Mock : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request A partial request to use for matching.
      * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
-     * @return void
      */
     void addResponse(RequestInterface $request, Response $response, array $options): void
     {

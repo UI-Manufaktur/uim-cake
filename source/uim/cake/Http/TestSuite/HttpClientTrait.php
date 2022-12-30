@@ -20,7 +20,6 @@ trait HttpClientTrait
      * Resets mocked responses
      *
      * @after
-     * @return void
      */
     void cleanupMockResponses(): void
     {
@@ -48,7 +47,6 @@ trait HttpClientTrait
      * @param string $url The URL to mock
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
-     * @return void
      */
     void mockClientPost(string $url, Response $response, array $options = []): void
     {
@@ -61,7 +59,6 @@ trait HttpClientTrait
      * @param string $url The URL to mock
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
-     * @return void
      */
     void mockClientGet(string $url, Response $response, array $options = []): void
     {
@@ -74,7 +71,6 @@ trait HttpClientTrait
      * @param string $url The URL to mock
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
-     * @return void
      */
     void mockClientPatch(string $url, Response $response, array $options = []): void
     {
@@ -87,7 +83,6 @@ trait HttpClientTrait
      * @param string $url The URL to mock
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
-     * @return void
      */
     void mockClientPut(string $url, Response $response, array $options = []): void
     {
@@ -100,7 +95,6 @@ trait HttpClientTrait
      * @param string $url The URL to mock
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
-     * @return void
      */
     void mockClientDelete(string $url, Response $response, array $options = []): void
     {

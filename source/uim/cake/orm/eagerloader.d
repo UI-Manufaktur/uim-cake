@@ -374,7 +374,6 @@ class EagerLoader
      * @param bool $includeFields whether to append all fields from the associations
      * to the passed query. This can be overridden according to the settings defined
      * per association in the containments array
-     * @return void
      */
     void attachAssociations(Query myQuery, Table myRepository, bool $includeFields) {
         if (empty(_containments) && _matching is null) {
@@ -715,7 +714,6 @@ class EagerLoader
      * "matching" association.
      * @param string|null myTargetProperty The property name where the results of the join should be nested at.
      * If not passed, the default property for the association will be used.
-     * @return void
      */
     void addToJoinsMap(
         string myAlias,

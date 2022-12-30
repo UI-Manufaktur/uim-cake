@@ -51,7 +51,6 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * Attaches a table instance to this registry.
      *
      * @param uim.cake.orm.Table myTable The table this registry is attached to.
-     * @return void
      */
     void setTable(Table myTable) {
         _table = myTable;

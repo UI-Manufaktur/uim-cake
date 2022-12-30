@@ -369,7 +369,6 @@ class Email : JsonSerializable, Serializable
      * Render email.
      *
      * @param array<string>|string|null $content Content array or string
-     * @return void
      */
     void render($content = null): void
     {
@@ -587,7 +586,6 @@ class Email : JsonSerializable, Serializable
      * Unserializes the Email object.
      *
      * @param string $data Serialized string.
-     * @return void
      */
     void unserialize($data): void
     {
@@ -598,7 +596,6 @@ class Email : JsonSerializable, Serializable
      * Magic method used to rebuild the Email object.
      *
      * @param array $data Data array.
-     * @return void
      */
     void __unserialize(array $data): void
     {

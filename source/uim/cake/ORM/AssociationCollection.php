@@ -155,7 +155,6 @@ class AssociationCollection : IteratorAggregate
      * Once removed the association will no longer be reachable
      *
      * @param string $alias The alias name.
-     * @return void
      */
     void remove(string $alias): void
     {
