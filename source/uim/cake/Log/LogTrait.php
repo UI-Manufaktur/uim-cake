@@ -13,7 +13,7 @@
   */
 module uim.cake.Log;
 
-use Psr\Log\LogLevel;
+use Psr\logs.LogLevel;
 
 /**
  * A trait providing an object short-cut method

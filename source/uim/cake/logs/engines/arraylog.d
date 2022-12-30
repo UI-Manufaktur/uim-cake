@@ -45,7 +45,7 @@ class ArrayLog : BaseLog
      * @param string myMessage The message you want to log.
      * @param array $context Additional information about the logged message
      * @return void success of write.
-     * @see uim.cake.Log\Log::$_levels
+     * @see uim.cake.logs.Log::$_levels
      */
     function log($level, myMessage, array $context = []) {
         myMessage = _format(myMessage, $context);

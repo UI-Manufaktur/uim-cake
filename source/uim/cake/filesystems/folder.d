@@ -63,7 +63,7 @@ class Folder
      * Mode to be used on create. Does nothing on windows platforms.
      *
      * @var int
-     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\Folder::myMode
+     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\filesystems.Folder::myMode
      */
     myMode = 0755;
 

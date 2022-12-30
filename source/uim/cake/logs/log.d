@@ -8,7 +8,7 @@ module uim.cake.logs;
 import uim.cake.core.StaticConfigTrait;
 import uim.cake.logs.engines\BaseLog;
 use InvalidArgumentException;
-use Psr\Log\LoggerInterface;
+use Psr\logs.LoggerInterface;
 
 /**
  * Logs messages to configured Log adapters. One or more adapters
@@ -26,11 +26,11 @@ use Psr\Log\LoggerInterface;
  * ```
  *
  * You can define the className as any fully moduled classname or use a short hand
- * classname to use loggers in the `App\Log\Engine` & `Cake\Log\Engine` modules.
+ * classname to use loggers in the `App\logs.Engine` & `Cake\logs.Engine` modules.
  * You can also use plugin short hand to use logging classes provided by plugins.
  *
- * Log adapters are required to implement `Psr\Log\LoggerInterface`, and there is a
- * built-in base class (`Cake\Log\Engine\BaseLog`) that can be used for custom loggers.
+ * Log adapters are required to implement `Psr\logs.LoggerInterface`, and there is a
+ * built-in base class (`Cake\logs.Engine\BaseLog`) that can be used for custom loggers.
  *
  * Outside of the `className` key, all other configuration values will be passed to the
  * logging adapter"s constructor as an array.
@@ -122,7 +122,7 @@ class Log
     /**
      * LogEngineRegistry class
      *
-     * @var uim.cake.Log\LogEngineRegistry
+     * @var uim.cake.logs.LogEngineRegistry
      */
     protected static $_registry;
 
@@ -268,7 +268,7 @@ class Log
      * Get a logging engine.
      *
      * @param string myName Key name of a configured adapter to get.
-     * @return \Psr\Log\LoggerInterface|null Instance of LoggerInterface or false if not found
+     * @return \Psr\logs.LoggerInterface|null Instance of LoggerInterface or false if not found
      */
     static function engine(string myName): ?LoggerInterface
     {
@@ -330,7 +330,7 @@ class Log
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
-     *  See {@link uim.cake.Log\Log::setConfig()} for more information on logging scopes.
+     *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      * @throws \InvalidArgumentException If invalid level is passed.
      */
@@ -385,7 +385,7 @@ class Log
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
-     *  See {@link uim.cake.Log\Log::setConfig()} for more information on logging scopes.
+     *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
     static bool emergency(string myMessage, $context = []) {
@@ -400,7 +400,7 @@ class Log
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
-     *  See {@link uim.cake.Log\Log::setConfig()} for more information on logging scopes.
+     *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
     static bool alert(string myMessage, $context = []) {
@@ -415,7 +415,7 @@ class Log
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
-     *  See {@link uim.cake.Log\Log::setConfig()} for more information on logging scopes.
+     *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
     static bool critical(string myMessage, $context = []) {
@@ -430,7 +430,7 @@ class Log
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
-     *  See {@link uim.cake.Log\Log::setConfig()} for more information on logging scopes.
+     *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
     static bool error(string myMessage, $context = []) {
@@ -445,7 +445,7 @@ class Log
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
-     *  See {@link uim.cake.Log\Log::setConfig()} for more information on logging scopes.
+     *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
     static bool warning(string myMessage, $context = []) {
@@ -460,7 +460,7 @@ class Log
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
-     *  See {@link uim.cake.Log\Log::setConfig()} for more information on logging scopes.
+     *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
     static bool notice(string myMessage, $context = []) {
@@ -475,7 +475,7 @@ class Log
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
-     *  See {@link uim.cake.Log\Log::setConfig()} for more information on logging scopes.
+     *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
     static bool debug(string myMessage, $context = []) {
@@ -490,7 +490,7 @@ class Log
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically indexed array is passed, it
      *  will be treated as the `scope` key.
-     *  See {@link uim.cake.Log\Log::setConfig()} for more information on logging scopes.
+     *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
     static bool info(string myMessage, $context = []) {

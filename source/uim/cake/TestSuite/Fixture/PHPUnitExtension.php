@@ -8,7 +8,7 @@
   */
 module uim.cake.TestSuite\Fixture;
 
-import uim.cake.Log\Log;
+import uim.cake.logs.Log;
 import uim.cake.TestSuite\ConnectionHelper;
 use PHPUnit\Runner\BeforeFirstTestHook;
 

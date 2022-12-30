@@ -9,7 +9,7 @@
 module uim.cake.Mailer;
 
 use BadMethodCallException;
-import uim.cake.Log\Log;
+import uim.cake.logs.Log;
 import uim.cake.View\ViewBuilder;
 use InvalidArgumentException;
 use JsonSerializable;

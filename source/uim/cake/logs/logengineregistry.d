@@ -7,13 +7,13 @@ module uim.cake.logs;
 
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
-use Psr\Log\LoggerInterface;
+use Psr\logs.LoggerInterface;
 use RuntimeException;
 
 /**
  * Registry of loaded log engines
  *
- * @: uim.cake.Core\ObjectRegistry<\Psr\Log\LoggerInterface>
+ * @: uim.cake.Core\ObjectRegistry<\Psr\logs.LoggerInterface>
  */
 class LogEngineRegistry : ObjectRegistry
 {
@@ -48,10 +48,10 @@ class LogEngineRegistry : ObjectRegistry
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param \Psr\Log\LoggerInterface|string myClass The classname or object to make.
+     * @param \Psr\logs.LoggerInterface|string myClass The classname or object to make.
      * @param string myAlias The alias of the object.
      * @param array<string, mixed> myConfig An array of settings to use for the logger.
-     * @return \Psr\Log\LoggerInterface The constructed logger class.
+     * @return \Psr\logs.LoggerInterface The constructed logger class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
     protected auto _create(myClass, string myAlias, array myConfig): LoggerInterface

@@ -230,7 +230,7 @@ You can also set a longer namaspace up to the place where the `Model` folder is:
 <?php
 import uim.cake.core.Configure;
 
-Configure::write("App.namespace", "My\Log\SubNamespace");
+Configure::write("App.namespace", "My\logs.SubNamespace");
 ```
 
 

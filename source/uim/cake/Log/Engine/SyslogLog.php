@@ -12,10 +12,10 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         2.4.0
   */
-module uim.cake.Log\Engine;
+module uim.cake.logs.Engine;
 
-import uim.cake.Log\Formatter\DefaultFormatter;
-import uim.cake.Log\Formatter\LegacySyslogFormatter;
+import uim.cake.logs.Formatter\DefaultFormatter;
+import uim.cake.logs.Formatter\LegacySyslogFormatter;
 
 /**
  * Syslog stream for Logging. Writes logs to the system logger
@@ -111,7 +111,7 @@ class SyslogLog : BaseLog
      * @param string $message The message you want to log.
      * @param array $context Additional information about the logged message
      * @return void
-     * @see uim.cake.Log\Log::$_levels
+     * @see uim.cake.logs.Log::$_levels
      */
     function log($level, $message, array $context = []): void
     {

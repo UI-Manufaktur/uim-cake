@@ -12,10 +12,10 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         1.3.0
   */
-module uim.cake.Log\Engine;
+module uim.cake.logs.Engine;
 
 import uim.cake.core.Configure;
-import uim.cake.Log\Formatter\DefaultFormatter;
+import uim.cake.logs.Formatter\DefaultFormatter;
 import uim.cake.utilities.Text;
 
 /**
@@ -119,7 +119,7 @@ class FileLog : BaseLog
      * @param string $message The message you want to log.
      * @param array $context Additional information about the logged message
      * @return void
-     * @see uim.cake.Log\Log::$_levels
+     * @see uim.cake.logs.Log::$_levels
      */
     function log($level, $message, array $context = []): void
     {

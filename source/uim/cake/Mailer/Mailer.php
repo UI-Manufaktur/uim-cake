@@ -17,7 +17,7 @@ import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.StaticConfigTrait;
 import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.events.IEventListener;
-import uim.cake.Log\Log;
+import uim.cake.logs.Log;
 import uim.cake.Mailer\exceptions.MissingActionException;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.View\ViewBuilder;

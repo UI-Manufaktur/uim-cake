@@ -12,10 +12,10 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         2.2.0
   */
-module uim.cake.Log\Engine;
+module uim.cake.logs.Engine;
 
 import uim.cake.consoles.ConsoleOutput;
-import uim.cake.Log\Formatter\DefaultFormatter;
+import uim.cake.logs.Formatter\DefaultFormatter;
 use InvalidArgumentException;
 
 /**
@@ -89,7 +89,7 @@ class ConsoleLog : BaseLog
      * @param string $message The message you want to log.
      * @param array $context Additional information about the logged message
      * @return void success of write.
-     * @see uim.cake.Log\Log::$_levels
+     * @see uim.cake.logs.Log::$_levels
      */
     function log($level, $message, array $context = []) {
         $message = _format($message, $context);

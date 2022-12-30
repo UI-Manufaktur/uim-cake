@@ -12,15 +12,15 @@
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         2.2.0
   */
-module uim.cake.Log\Engine;
+module uim.cake.logs.Engine;
 
 use ArrayObject;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Log\Formatter\AbstractFormatter;
-import uim.cake.Log\Formatter\DefaultFormatter;
+import uim.cake.logs.Formatter\AbstractFormatter;
+import uim.cake.logs.Formatter\DefaultFormatter;
 use InvalidArgumentException;
 use JsonSerializable;
-use Psr\Log\AbstractLogger;
+use Psr\logs.AbstractLogger;
 use Serializable;
 
 /**
@@ -42,7 +42,7 @@ abstract class BaseLog : AbstractLogger
     ];
 
     /**
-     * @var uim.cake.Log\Formatter\AbstractFormatter
+     * @var uim.cake.logs.Formatter\AbstractFormatter
      */
     protected $formatter;
 
@@ -75,7 +75,7 @@ abstract class BaseLog : AbstractLogger
                 $class = $formatter;
                 $options = [];
             }
-            /** @var class-string<uim.cake.Log\Formatter\AbstractFormatter> $class */
+            /** @var class-string<uim.cake.logs.Formatter\AbstractFormatter> $class */
             $formatter = new $class($options);
         }
 

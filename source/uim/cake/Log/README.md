@@ -9,15 +9,15 @@ possible to send a single message to multiple logging backends at the same time
 or just a subset of them based on the log level or context.
 
 By default, you can use `File` or `Syslog` as logging backends, but you can use any
-object implementing `Psr\Log\LoggerInterface` as an engine for the `Log` class.
+object implementing `Psr\logs.LoggerInterface` as an engine for the `Log` class.
 
 ## Usage
 
 You can define as many or as few loggers as your application needs. Loggers
-should be configured using `Cake\Log\Log.` An example would be:
+should be configured using `Cake\logs.Log.` An example would be:
 
 ```php
-import uim.cake.Log\Log;
+import uim.cake.logs.Log;
 
 // Short classname
 Log::setConfig("local", [
@@ -28,7 +28,7 @@ Log::setConfig("local", [
 
 // Fully namespaced name.
 Log::setConfig("production", [
-    "className": uim.cake.Log\Engine\SyslogLog::class,
+    "className": uim.cake.logs.Engine\SyslogLog::class,
     "levels": ["warning", "error", "critical", "alert", "emergency"],
 ]);
 ```

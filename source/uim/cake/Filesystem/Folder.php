@@ -73,7 +73,7 @@ class Folder
      * Mode to be used on create. Does nothing on windows platforms.
      *
      * @var int
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\Folder::$mode
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.Folder::$mode
      */
     $mode = 0755;
 
