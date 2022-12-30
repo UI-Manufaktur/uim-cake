@@ -62,7 +62,6 @@ class ViewBlock
      *   If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
      * @throws uim.cake.Core\exceptions.CakeException When starting a block twice
-     * @return void
      */
     void start(string myName, string myMode = ViewBlock::OVERRIDE) {
         if (array_key_exists(myName, _active)) {
@@ -114,7 +113,6 @@ class ViewBlock
      *   to string.
      * @param string myMode If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
-     * @return void
      */
     void concat(string myName, myValue = null, myMode = ViewBlock::APPEND) {
         if (myValue is null) {
@@ -140,7 +138,6 @@ class ViewBlock
      * @param string myName Name of the block
      * @param mixed myValue The content for the block. Value will be type cast
      *   to string.
-     * @return void
      */
     void set(string myName, myValue) {
         _blocks[myName] = (string)myValue;

@@ -2301,7 +2301,6 @@ class FormHelper : Helper
      *   can be used to overwrite existing providers.
      * @param callable $check A callable that returns an object
      *   when the form context is the correct type.
-     * @return void
      */
     void addContextProvider(string myType, callable $check) {
         this.contextFactory().addProvider(myType, $check);
@@ -2351,7 +2350,6 @@ class FormHelper : Helper
      * @param string myName The name of the widget. e.g. "text".
      * @param uim.cake.View\Widget\IWidget|array $spec Either a string class
      *   name or an object implementing the IWidget.
-     * @return void
      */
     void addWidget(string myName, $spec) {
         _locator.add([myName: $spec]);
