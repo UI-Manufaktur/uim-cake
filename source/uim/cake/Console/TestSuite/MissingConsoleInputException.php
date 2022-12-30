@@ -24,7 +24,6 @@ class MissingConsoleInputException : RuntimeException
      * Update the exception message with the question text
      *
      * @param string $question The question text.
-     * @return void
      */
     void setQuestion($question) {
         this.message .= "\nThe question asked was: " . $question;

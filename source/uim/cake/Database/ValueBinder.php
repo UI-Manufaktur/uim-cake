@@ -32,7 +32,6 @@ class ValueBinder
      * @param mixed $value The value to be bound
      * @param string|int|null $type the mapped type name, used for casting when sending
      * to database
-     * @return void
      */
     void bind($param, $value, $type = null): void
     {
@@ -114,7 +113,6 @@ class ValueBinder
      * Binds all the stored values in this object to the passed statement.
      *
      * @param uim.cake.Database\StatementInterface $statement The statement to add parameters to.
-     * @return void
      */
     void attachTo(StatementInterface $statement): void
     {

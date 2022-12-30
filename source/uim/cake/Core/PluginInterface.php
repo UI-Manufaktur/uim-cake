@@ -66,7 +66,6 @@ interface PluginInterface
      * plugin dependencies, or attach events.
      *
      * @param uim.cake.Core\IPluginApplication $app The host application
-     * @return void
      */
     void bootstrap(IPluginApplication $app): void;
 
@@ -93,7 +92,6 @@ interface PluginInterface
      * can override this method to replace that behavior.
      *
      * @param uim.cake.routings.RouteBuilder $routes The route builder to update.
-     * @return void
      */
     void routes(RouteBuilder $routes): void;
 

@@ -80,7 +80,6 @@ trait ConsoleIntegrationTestTrait
      * @param array $input Input values to pass to an interactive shell
      * @throws uim.cake.consoles.TestSuite\MissingConsoleInputException
      * @throws \RuntimeException
-     * @return void
      */
     void exec(string $command, array $input = []) {
         $runner = this.makeRunner();
@@ -141,7 +140,6 @@ trait ConsoleIntegrationTestTrait
      *
      * @param int $expected Expected exit code
      * @param string $message Failure message
-     * @return void
      */
     void assertExitCode(int $expected, string $message = "") {
         this.assertThat($expected, new ExitCode(_exitCode), $message);
@@ -151,7 +149,6 @@ trait ConsoleIntegrationTestTrait
      * Asserts shell exited with the Command::CODE_SUCCESS
      *
      * @param string $message Failure message
-     * @return void
      */
     void assertExitSuccess($message = "") {
         this.assertThat(Command::CODE_SUCCESS, new ExitCode(_exitCode), $message);
@@ -161,7 +158,6 @@ trait ConsoleIntegrationTestTrait
      * Asserts shell exited with Command::CODE_ERROR
      *
      * @param string $message Failure message
-     * @return void
      */
     void assertExitError($message = "") {
         this.assertThat(Command::CODE_ERROR, new ExitCode(_exitCode), $message);
@@ -171,7 +167,6 @@ trait ConsoleIntegrationTestTrait
      * Asserts that `stdout` is empty
      *
      * @param string $message The message to output when the assertion fails.
-     * @return void
      */
     void assertOutputEmpty(string $message = "") {
         this.assertThat(null, new ContentsEmpty(_out.messages(), "output"), $message);
@@ -182,7 +177,6 @@ trait ConsoleIntegrationTestTrait
      *
      * @param string $expected Expected output
      * @param string $message Failure message
-     * @return void
      */
     void assertOutputContains(string $expected, string $message = "") {
         this.assertThat($expected, new ContentsContain(_out.messages(), "output"), $message);
@@ -193,7 +187,6 @@ trait ConsoleIntegrationTestTrait
      *
      * @param string $expected Expected output
      * @param string $message Failure message
-     * @return void
      */
     void assertOutputNotContains(string $expected, string $message = "") {
         this.assertThat($expected, new ContentsNotContain(_out.messages(), "output"), $message);
@@ -204,7 +197,6 @@ trait ConsoleIntegrationTestTrait
      *
      * @param string $pattern Expected pattern
      * @param string $message Failure message
-     * @return void
      */
     void assertOutputRegExp(string $pattern, string $message = "") {
         this.assertThat($pattern, new ContentsRegExp(_out.messages(), "output"), $message);
@@ -225,7 +217,6 @@ trait ConsoleIntegrationTestTrait
      *
      * @param string $expected Expected output
      * @param string $message Failure message
-     * @return void
      */
     void assertErrorContains(string $expected, string $message = "") {
         this.assertThat($expected, new ContentsContain(_err.messages(), "error output"), $message);
@@ -236,7 +227,6 @@ trait ConsoleIntegrationTestTrait
      *
      * @param string $pattern Expected pattern
      * @param string $message Failure message
-     * @return void
      */
     void assertErrorRegExp(string $pattern, string $message = "") {
         this.assertThat($pattern, new ContentsRegExp(_err.messages(), "error output"), $message);
@@ -246,7 +236,6 @@ trait ConsoleIntegrationTestTrait
      * Asserts that `stderr` is empty
      *
      * @param string $message The message to output when the assertion fails.
-     * @return void
      */
     void assertErrorEmpty(string $message = "") {
         this.assertThat(null, new ContentsEmpty(_err.messages(), "error output"), $message);

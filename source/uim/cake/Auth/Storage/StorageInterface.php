@@ -20,7 +20,6 @@ interface IStorage
      * Write user record.
      *
      * @param mixed $user array or \ArrayAccess User record.
-     * @return void
      */
     void write($user);
 

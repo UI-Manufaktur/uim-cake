@@ -148,7 +148,6 @@ class RequestHandlerComponent : Component
      * to the $data property of the controller, which can then be saved to a model object.
      *
      * @param uim.cake.events.IEvent $event The startup event that was fired.
-     * @return void
      */
     void startup(IEvent $event): void
     {

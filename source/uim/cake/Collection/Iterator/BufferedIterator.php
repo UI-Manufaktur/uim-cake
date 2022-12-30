@@ -193,7 +193,6 @@ class BufferedIterator : Collection : Countable, Serializable
      * Unserializes the passed string and rebuilds the BufferedIterator instance
      *
      * @param string $collection The serialized buffer iterator
-     * @return void
      */
     void unserialize($collection) {
         __construct([]);
@@ -206,7 +205,6 @@ class BufferedIterator : Collection : Countable, Serializable
      * Magic method used to rebuild the iterator instance.
      *
      * @param array $data Data array.
-     * @return void
      */
     void __unserialize(array $data) {
         __construct([]);

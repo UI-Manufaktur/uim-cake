@@ -327,7 +327,6 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * @param string $name Property name.
      * @param mixed $value Value to set.
-     * @return void
      */
     void __set(string $name, $value): void
     {

@@ -265,7 +265,6 @@ class BasePlugin : PluginInterface
      * Register container services for this plugin.
      *
      * @param uim.cake.Core\IContainer $container The container to add services to.
-     * @return void
      */
     void services(IContainer $container): void
     {

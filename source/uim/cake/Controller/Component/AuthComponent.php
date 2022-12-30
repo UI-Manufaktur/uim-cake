@@ -220,7 +220,6 @@ class AuthComponent : Component : EventDispatcherInterface
      * Initialize properties.
      *
      * @param array<string, mixed> $config The config data.
-     * @return void
      */
     void initialize(array $config): void
     {
@@ -890,7 +889,6 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @param string $name Property name.
      * @param mixed $value Value to set.
-     * @return void
      */
     void __set(string $name, $value): void
     {
@@ -931,7 +929,6 @@ class AuthComponent : Component : EventDispatcherInterface
      * Set a flash message. Uses the Flash component with values from `flash` config.
      *
      * @param string|false $message The message to set. False to skip.
-     * @return void
      */
     void flash($message): void
     {

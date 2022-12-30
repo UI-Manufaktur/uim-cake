@@ -159,7 +159,6 @@ trait ContainerStubTrait
      * up application class configuration.
      *
      * @after
-     * @return void
      */
     void cleanupContainer(): void
     {

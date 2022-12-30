@@ -80,7 +80,6 @@ class SessionStorage : IStorage
      * The session id is also renewed to help mitigate issues with session replays.
      *
      * @param \ArrayAccess|array $user User record.
-     * @return void
      */
     void write($user) {
         _user = $user;

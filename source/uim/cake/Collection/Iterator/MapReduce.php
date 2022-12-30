@@ -127,7 +127,6 @@ class MapReduce : IteratorAggregate
      *
      * @param mixed $val The record itself to store in the bucket
      * @param mixed $bucket the name of the bucket where to put the record
-     * @return void
      */
     void emitIntermediate($val, $bucket) {
         _intermediate[$bucket][] = $val;
@@ -139,7 +138,6 @@ class MapReduce : IteratorAggregate
      *
      * @param mixed $val The value to be appended to the final list of results
      * @param mixed $key and optional key to assign to the value
-     * @return void
      */
     void emit($val, $key = null) {
         _result[$key ?? _counter] = $val;

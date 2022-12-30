@@ -49,7 +49,6 @@ class Collection : IteratorIterator : ICollection, Serializable
      * Unserializes the passed string and rebuilds the Collection instance
      *
      * @param string $collection The serialized collection
-     * @return void
      */
     void unserialize($collection) {
         __construct(unserialize($collection));
@@ -59,7 +58,6 @@ class Collection : IteratorIterator : ICollection, Serializable
      * Rebuilds the Collection instance.
      *
      * @param array $data Data array.
-     * @return void
      */
     void __unserialize(array $data) {
         __construct($data);

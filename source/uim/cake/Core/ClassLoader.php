@@ -47,7 +47,6 @@ class ClassLoader
      * @param bool $prepend If true, prepend the base directory to the stack
      * instead of appending it; this causes it to be searched first rather
      * than last.
-     * @return void
      */
     void addNamespace(string $prefix, string $baseDir, bool $prepend = false): void
     {

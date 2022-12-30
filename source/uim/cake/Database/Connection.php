@@ -601,7 +601,6 @@ class Connection : ConnectionInterface
      * Creates a new save point for nested transactions.
      *
      * @param string|int $name Save point name or id
-     * @return void
      */
     void createSavePoint($name): void
     {
@@ -612,7 +611,6 @@ class Connection : ConnectionInterface
      * Releases a save point by its name.
      *
      * @param string|int $name Save point name or id
-     * @return void
      */
     void releaseSavePoint($name): void
     {
@@ -626,7 +624,6 @@ class Connection : ConnectionInterface
      * Rollback a save point by its name.
      *
      * @param string|int $name Save point name or id
-     * @return void
      */
     void rollbackSavepoint($name): void
     {
@@ -776,7 +773,6 @@ class Connection : ConnectionInterface
      *
      * @param string|bool $cache Either boolean false to disable metadata caching, or
      *   true to use `_cake_model_` or the name of the cache config to use.
-     * @return void
      */
     void cacheMetadata($cache): void
     {
@@ -887,7 +883,6 @@ class Connection : ConnectionInterface
      * Logs a Query string using the configured logger object.
      *
      * @param string $sql string to be logged
-     * @return void
      */
     void log(string $sql): void
     {

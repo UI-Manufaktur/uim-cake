@@ -45,7 +45,6 @@ class SecurityException : BadRequestException
      * Set Message
      *
      * @param string $message Exception message
-     * @return void
      */
     void setMessage(string $message): void
     {

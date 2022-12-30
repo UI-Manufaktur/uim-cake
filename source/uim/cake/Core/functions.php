@@ -231,7 +231,6 @@ if (!function_exists("triggerWarning")) {
      * Triggers an E_USER_WARNING.
      *
      * @param string $message The warning message.
-     * @return void
      */
     void triggerWarning(string $message): void
     {
@@ -257,7 +256,6 @@ if (!function_exists("deprecationWarning")) {
      * @param string $message The message to output as a deprecation warning.
      * @param int $stackFrame The stack frame to include in the error. Defaults to 1
      *   as that should point to application/plugin code.
-     * @return void
      */
     void deprecationWarning(string $message, int $stackFrame = 1): void
     {

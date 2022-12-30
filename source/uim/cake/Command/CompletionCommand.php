@@ -32,7 +32,6 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * Set the command collection used to get completion data on.
      *
      * @param uim.cake.consoles.CommandCollection $commands The command collection
-     * @return void
      */
     void setCommandCollection(CommandCollection $commands): void
     {

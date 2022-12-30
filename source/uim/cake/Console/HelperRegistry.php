@@ -24,7 +24,6 @@ class HelperRegistry : ObjectRegistry
      * Sets The IO instance that should be passed to the shell helpers
      *
      * @param uim.cake.consoles.ConsoleIo $io An io instance.
-     * @return void
      */
     void setIo(ConsoleIo $io): void
     {

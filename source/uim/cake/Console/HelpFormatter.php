@@ -63,7 +63,6 @@ class HelpFormatter
      * Set the alias
      *
      * @param string $alias The alias
-     * @return void
      */
     void setAlias(string $alias) {
         _alias = $alias;

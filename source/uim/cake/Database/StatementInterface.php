@@ -48,7 +48,6 @@ interface StatementInterface
      * @param string|int $column name or param position to be bound
      * @param mixed $value The value to bind to variable in query
      * @param string|int|null $type name of configured Type class, or PDO type constant.
-     * @return void
      */
     void bindValue($column, $value, $type = "string"): void;
 
@@ -169,7 +168,6 @@ interface StatementInterface
      *
      * @param array $params list of values to be bound
      * @param array $types list of types to be used, keys should match those in $params
-     * @return void
      */
     void bind(array $params, array $types): void;
 

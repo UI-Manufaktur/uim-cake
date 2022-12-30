@@ -58,7 +58,6 @@ class IdentifierQuoter
      * Quotes identifiers inside expression objects
      *
      * @param uim.cake.Database\IExpression $expression The expression object to walk and quote.
-     * @return void
      */
     void quoteExpression(IExpression $expression): void
     {

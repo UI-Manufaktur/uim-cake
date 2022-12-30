@@ -51,7 +51,6 @@ class FlashComponent : Component
      *   of \Throwable the throwable message will be used and code will be set
      *   in params.
      * @param array<string, mixed> $options An array of options
-     * @return void
      */
     void set($message, array $options = []): void
     {

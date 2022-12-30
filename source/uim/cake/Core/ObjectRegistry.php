@@ -247,7 +247,6 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param string $name Name of a property to set.
      * @param object $object Object to set.
      * @psalm-param TObject $object
-     * @return void
      */
     void __set(string $name, $object): void
     {
@@ -258,7 +257,6 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * Unsets an object.
      *
      * @param string $name Name of a property to unset.
-     * @return void
      */
     void __unset(string $name): void
     {

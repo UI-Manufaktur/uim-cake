@@ -60,7 +60,6 @@ if (!function_exists("stackTrace")) {
      * - `start` - The stack frame to start generating a trace from. Defaults to 1
      *
      * @param array<string, mixed> $options Format for outputting stack trace
-     * @return void
      */
     void stackTrace(array $options = []) {
         if (!Configure::read("debug")) {

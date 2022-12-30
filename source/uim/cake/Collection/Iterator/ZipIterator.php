@@ -111,7 +111,6 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      * Unserializes the passed string and rebuilds the ZipIterator instance
      *
      * @param string $iterators The serialized iterators
-     * @return void
      */
     void unserialize($iterators) {
         super((MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);
@@ -125,7 +124,6 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      * Magic method used to rebuild the iterator instance.
      *
      * @param array $data Data array.
-     * @return void
      */
     void __unserialize(array $data) {
         super((MultipleIterator::MIT_NEED_ALL | MultipleIterator::MIT_KEYS_NUMERIC);

@@ -79,7 +79,6 @@ class TypeMap
      * If a key already exists it will not be overwritten.
      *
      * @param array<int|string, string> $types The additional types to add.
-     * @return void
      */
     void addDefaults(array $types): void
     {
