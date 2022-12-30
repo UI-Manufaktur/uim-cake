@@ -11,5 +11,5 @@ class DatabaseException : CakeException
 }
 
 // phpcs:disable
-class_exists("Cake\Database\Exception");
+class_exists("Cake\databases.Exception");
 // phpcs:enable

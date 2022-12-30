@@ -47,7 +47,7 @@ class Sqlite : Driver
     /**
      * The schema dialect class for this driver
      *
-     * @var uim.cake.Database\Schema\SqliteSchemaDialect|null
+     * @var uim.cake.databases.Schema\SqliteSchemaDialect|null
      */
     protected $_schemaDialect;
 
@@ -171,8 +171,8 @@ class Sqlite : Driver
     /**
      * Prepares a sql statement to be executed
      *
-     * @param uim.cake.Database\Query|string $query The query to prepare.
-     * @return uim.cake.Database\StatementInterface
+     * @param uim.cake.databases.Query|string $query The query to prepare.
+     * @return uim.cake.databases.StatementInterface
      */
     function prepare($query): StatementInterface
     {
@@ -258,10 +258,9 @@ class Sqlite : Driver
      * Receives a FunctionExpression and changes it so that it conforms to this
      * SQL dialect.
      *
-     * @param uim.cake.Database\Expression\FunctionExpression $expression The function expression to convert to TSQL.
+     * @param uim.cake.databases.Expression\FunctionExpression $expression The function expression to convert to TSQL.
      */
-    protected void _transformFunctionExpression(FunctionExpression $expression): void
-    {
+    protected void _transformFunctionExpression(FunctionExpression $expression) {
         switch ($expression.getName()) {
             case "CONCAT":
                 // CONCAT function is expressed as exp1 || exp2

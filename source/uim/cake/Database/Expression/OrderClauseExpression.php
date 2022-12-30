@@ -23,7 +23,7 @@ class OrderClauseExpression : IExpression, FieldInterface
     /**
      * Constructor
      *
-     * @param uim.cake.Database\IExpression|string $field The field to order on.
+     * @param uim.cake.databases.IExpression|string $field The field to order on.
      * @param string $direction The direction to sort on.
      */
     this($field, $direction) {
@@ -34,7 +34,7 @@ class OrderClauseExpression : IExpression, FieldInterface
 
     function sql(ValueBinder $binder): string
     {
-        /** @var uim.cake.Database\IExpression|string $field */
+        /** @var uim.cake.databases.IExpression|string $field */
         $field = _field;
         if ($field instanceof Query) {
             $field = sprintf("(%s)", $field.sql($binder));

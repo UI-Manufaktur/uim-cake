@@ -36,7 +36,7 @@ class LoggingStatement : StatementDecorator
     /**
      * Logged query
      *
-     * @var uim.cake.Database\Log\LoggedQuery|null
+     * @var uim.cake.databases.Log\LoggedQuery|null
      */
     protected $loggedQuery;
 
@@ -114,8 +114,7 @@ class LoggingStatement : StatementDecorator
      * to the logging system.
      *
      */
-    protected void _log(): void
-    {
+    protected void _log() {
         if (this.loggedQuery == null) {
             return;
         }
@@ -134,8 +133,7 @@ class LoggingStatement : StatementDecorator
      * @param mixed $value The value to bind to variable in query
      * @param string|int|null $type PDO type or name of configured Type class
      */
-    void bindValue($column, $value, $type = "string"): void
-    {
+    void bindValue($column, $value, $type = "string") {
         parent::bindValue($column, $value, $type);
 
         if ($type == null) {
@@ -152,8 +150,7 @@ class LoggingStatement : StatementDecorator
      *
      * @param \Psr\Log\LoggerInterface $logger Logger object
      */
-    void setLogger(LoggerInterface $logger): void
-    {
+    void setLogger(LoggerInterface $logger) {
         _logger = $logger;
     }
 

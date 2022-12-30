@@ -19,7 +19,7 @@ use DateTimeInterface;
 /**
  * Trait that holds shared functionality for case related expressions.
  *
- * @property uim.cake.Database\TypeMap $_typeMap The type map to use when using an array of conditions for the `WHEN`
+ * @property uim.cake.databases.TypeMap $_typeMap The type map to use when using an array of conditions for the `WHEN`
  *  value.
  * @internal
  */
@@ -70,8 +70,8 @@ trait CaseExpressionTrait
     /**
      * Compiles a nullable value to SQL.
      *
-     * @param uim.cake.Database\ValueBinder $binder The value binder to use.
-     * @param uim.cake.Database\IExpression|object|scalar|null $value The value to compile.
+     * @param uim.cake.databases.ValueBinder $binder The value binder to use.
+     * @param uim.cake.databases.IExpression|object|scalar|null $value The value to compile.
      * @param string|null $type The value type.
      * @return string
      */

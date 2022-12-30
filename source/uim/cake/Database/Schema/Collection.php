@@ -16,21 +16,21 @@ class Collection : ICollection
     /**
      * Connection object
      *
-     * @var uim.cake.Database\Connection
+     * @var uim.cake.databases.Connection
      */
     protected $_connection;
 
     /**
      * Schema dialect instance.
      *
-     * @var uim.cake.Database\Schema\SchemaDialect
+     * @var uim.cake.databases.Schema\SchemaDialect
      */
     protected $_dialect;
 
     /**
      * Constructor.
      *
-     * @param uim.cake.Database\Connection $connection The connection instance.
+     * @param uim.cake.databases.Connection $connection The connection instance.
      */
     this(Connection $connection) {
         _connection = $connection;
@@ -88,8 +88,8 @@ class Collection : ICollection
      *
      * @param string $name The name of the table to describe.
      * @param array<string, mixed> $options The options to use, see above.
-     * @return uim.cake.Database\Schema\TableSchema Object with column metadata.
-     * @throws uim.cake.Database\exceptions.DatabaseException when table cannot be described.
+     * @return uim.cake.databases.Schema\TableSchema Object with column metadata.
+     * @throws uim.cake.databases.exceptions.DatabaseException when table cannot be described.
      */
     function describe(string $name, array $options = []): TableSchemaInterface
     {
@@ -117,19 +117,19 @@ class Collection : ICollection
      * @param string $stage The stage name.
      * @param string $name The table name.
      * @param array<string, mixed> $config The config data.
-     * @param uim.cake.Database\Schema\TableSchema $schema The table schema instance.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table schema instance.
      * @return void
-     * @throws uim.cake.Database\exceptions.DatabaseException on query failure.
-     * @uses uim.cake.Database\Schema\SchemaDialect::describeColumnSql
-     * @uses uim.cake.Database\Schema\SchemaDialect::describeIndexSql
-     * @uses uim.cake.Database\Schema\SchemaDialect::describeForeignKeySql
-     * @uses uim.cake.Database\Schema\SchemaDialect::describeOptionsSql
-     * @uses uim.cake.Database\Schema\SchemaDialect::convertColumnDescription
-     * @uses uim.cake.Database\Schema\SchemaDialect::convertIndexDescription
-     * @uses uim.cake.Database\Schema\SchemaDialect::convertForeignKeyDescription
-     * @uses uim.cake.Database\Schema\SchemaDialect::convertOptionsDescription
+     * @throws uim.cake.databases.exceptions.DatabaseException on query failure.
+     * @uses uim.cake.databases.Schema\SchemaDialect::describeColumnSql
+     * @uses uim.cake.databases.Schema\SchemaDialect::describeIndexSql
+     * @uses uim.cake.databases.Schema\SchemaDialect::describeForeignKeySql
+     * @uses uim.cake.databases.Schema\SchemaDialect::describeOptionsSql
+     * @uses uim.cake.databases.Schema\SchemaDialect::convertColumnDescription
+     * @uses uim.cake.databases.Schema\SchemaDialect::convertIndexDescription
+     * @uses uim.cake.databases.Schema\SchemaDialect::convertForeignKeyDescription
+     * @uses uim.cake.databases.Schema\SchemaDialect::convertOptionsDescription
      */
-    protected function _reflect(string $stage, string $name, array $config, TableSchema $schema): void
+    protected void _reflect(string $stage, string $name, array $config, TableSchema $schema): void
     {
         $describeMethod = "describe{$stage}Sql";
         $convertMethod = "convert{$stage}Description";

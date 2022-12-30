@@ -11,7 +11,7 @@ use Closure;
  * Identifier values are unsafe with user supplied data.
  * Values will be quoted when identifier quoting is enabled.
  *
- * @see uim.cake.Database\Query::identifier()
+ * @see uim.cake.databases.Query::identifier()
  */
 class IdentifierExpression : IExpression
 {
@@ -43,8 +43,7 @@ class IdentifierExpression : IExpression
      *
      * @param string $identifier The identifier
      */
-    void setIdentifier(string $identifier): void
-    {
+    void setIdentifier(string $identifier) {
         _identifier = $identifier;
     }
 
@@ -61,8 +60,7 @@ class IdentifierExpression : IExpression
      *
      * @param string $collation Identifier collation
      */
-    void setCollation(string $collation): void
-    {
+    void setCollation(string $collation) {
         this.collation = $collation;
     }
 

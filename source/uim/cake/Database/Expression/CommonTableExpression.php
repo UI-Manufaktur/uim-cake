@@ -21,21 +21,21 @@ class CommonTableExpression : IExpression
     /**
      * The CTE name.
      *
-     * @var uim.cake.Database\Expression\IdentifierExpression
+     * @var uim.cake.databases.Expression\IdentifierExpression
      */
     protected $name;
 
     /**
      * The field names to use for the CTE.
      *
-     * @var array<uim.cake.Database\Expression\IdentifierExpression>
+     * @var array<uim.cake.databases.Expression\IdentifierExpression>
      */
     protected $fields = [];
 
     /**
      * The CTE query definition.
      *
-     * @var uim.cake.Database\IExpression|null
+     * @var uim.cake.databases.IExpression|null
      */
     protected $query;
 
@@ -57,7 +57,7 @@ class CommonTableExpression : IExpression
      * Constructor.
      *
      * @param string $name The CTE name.
-     * @param uim.cake.Database\IExpression|\Closure $query CTE query
+     * @param uim.cake.databases.IExpression|\Closure $query CTE query
      */
     this(string $name = "", $query = null) {
         this.name = new IdentifierExpression($name);
@@ -84,7 +84,7 @@ class CommonTableExpression : IExpression
     /**
      * Sets the query for this CTE.
      *
-     * @param uim.cake.Database\IExpression|\Closure $query CTE query
+     * @param uim.cake.databases.IExpression|\Closure $query CTE query
      * @return this
      */
     function query($query) {
@@ -104,7 +104,7 @@ class CommonTableExpression : IExpression
     /**
      * Adds one or more fields (arguments) to the CTE.
      *
-     * @param uim.cake.Database\Expression\IdentifierExpression|array<uim.cake.Database\Expression\IdentifierExpression>|array<string>|string $fields Field names
+     * @param uim.cake.databases.Expression\IdentifierExpression|array<uim.cake.databases.Expression\IdentifierExpression>|array<string>|string $fields Field names
      * @return this
      */
     function field($fields) {

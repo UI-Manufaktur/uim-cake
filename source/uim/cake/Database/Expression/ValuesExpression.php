@@ -38,7 +38,7 @@ class ValuesExpression : IExpression
     /**
      * The Query object to use as a values expression
      *
-     * @var uim.cake.Database\Query|null
+     * @var uim.cake.databases.Query|null
      */
     protected $_query;
 
@@ -54,7 +54,7 @@ class ValuesExpression : IExpression
      * Constructor
      *
      * @param array $columns The list of columns that are going to be part of the values.
-     * @param uim.cake.Database\TypeMap $typeMap A dictionary of column . type names
+     * @param uim.cake.databases.TypeMap $typeMap A dictionary of column . type names
      */
     this(array $columns, TypeMap $typeMap) {
         _columns = $columns;
@@ -64,13 +64,12 @@ class ValuesExpression : IExpression
     /**
      * Add a row of data to be inserted.
      *
-     * @param uim.cake.Database\Query|array $values Array of data to append into the insert, or
+     * @param uim.cake.databases.Query|array $values Array of data to append into the insert, or
      *   a query for doing INSERT INTO .. SELECT style commands
      * @return void
-     * @throws uim.cake.Database\exceptions.DatabaseException When mixing array + Query data types.
+     * @throws uim.cake.databases.exceptions.DatabaseException When mixing array + Query data types.
      */
-    function add($values): void
-    {
+    void add($values) {
         if (
             (
                 count(_values) &&
@@ -165,7 +164,7 @@ class ValuesExpression : IExpression
      * Sets the query object to be used as the values expression to be evaluated
      * to insert records in the table.
      *
-     * @param uim.cake.Database\Query $query The query to set
+     * @param uim.cake.databases.Query $query The query to set
      * @return this
      */
     function setQuery(Query $query) {
@@ -178,7 +177,7 @@ class ValuesExpression : IExpression
      * Gets the query object to be used as the values expression to be evaluated
      * to insert records in the table.
      *
-     * @return uim.cake.Database\Query|null
+     * @return uim.cake.databases.Query|null
      */
     function getQuery(): ?Query
     {
@@ -266,8 +265,7 @@ class ValuesExpression : IExpression
      * Converts values that need to be casted to expressions
      *
      */
-    protected void _processExpressions(): void
-    {
+    protected void _processExpressions() {
         $types = [];
         $typeMap = this.getTypeMap();
 
@@ -287,7 +285,7 @@ class ValuesExpression : IExpression
 
         foreach (_values as $row: $values) {
             foreach ($types as $col: $type) {
-                /** @var uim.cake.Database\Type\ExpressionTypeInterface $type */
+                /** @var uim.cake.databases.Type\ExpressionTypeInterface $type */
                 _values[$row][$col] = $type.toExpression($values[$col]);
             }
         }

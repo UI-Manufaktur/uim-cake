@@ -41,13 +41,13 @@ class QueryExpression : IExpression, Countable
      * expression objects. Optionally, you can set the conjunction keyword to be used
      * for joining each part of this level of the expression tree.
      *
-     * @param uim.cake.Database\IExpression|array|string $conditions Tree like array structure
+     * @param uim.cake.databases.IExpression|array|string $conditions Tree like array structure
      * containing all the conditions to be added or nested inside this expression object.
-     * @param uim.cake.Database\TypeMap|array $types Associative array of types to be associated with the values
+     * @param uim.cake.databases.TypeMap|array $types Associative array of types to be associated with the values
      * passed in $conditions.
      * @param string $conjunction the glue that will join all the string conditions at this
      * level of the expression tree. For example "AND", "OR", "XOR"...
-     * @see uim.cake.Database\Expression\QueryExpression::add() for more details on $conditions and $types
+     * @see uim.cake.databases.Expression\QueryExpression::add() for more details on $conditions and $types
      */
     this($conditions = [], $types = [], $conjunction = "AND") {
         this.setTypeMap($types);
@@ -88,13 +88,13 @@ class QueryExpression : IExpression, Countable
      * then it will cause the placeholder to be re-written dynamically so if the
      * value is an array, it will create as many placeholders as values are in it.
      *
-     * @param uim.cake.Database\IExpression|array|string $conditions single or multiple conditions to
+     * @param uim.cake.databases.IExpression|array|string $conditions single or multiple conditions to
      * be added. When using an array and the key is "OR" or "AND" a new expression
      * object will be created with that conjunction and internal array value passed
      * as conditions.
      * @param array<int|string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @see uim.cake.Database\Query::where() for examples on conditions
+     * @see uim.cake.databases.Query::where() for examples on conditions
      * @return this
      */
     function add($conditions, array $types = []) {
@@ -118,7 +118,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field = value".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
      * @param mixed $value The value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * If it is suffixed with "[]" and the value is an array then multiple placeholders
@@ -136,7 +136,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field != value".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
      * @param mixed $value The value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * If it is suffixed with "[]" and the value is an array then multiple placeholders
@@ -154,7 +154,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field > value".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
      * @param mixed $value The value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
@@ -170,7 +170,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field < value".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
      * @param mixed $value The value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
@@ -186,7 +186,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field >= value".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
      * @param mixed $value The value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
@@ -202,7 +202,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field <= value".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
      * @param mixed $value The value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
@@ -218,7 +218,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field IS NULL".
      *
-     * @param uim.cake.Database\IExpression|string $field database field to be
+     * @param uim.cake.databases.IExpression|string $field database field to be
      * tested for null
      * @return this
      */
@@ -233,7 +233,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field IS NOT NULL".
      *
-     * @param uim.cake.Database\IExpression|string $field database field to be
+     * @param uim.cake.databases.IExpression|string $field database field to be
      * tested for not null
      * @return this
      */
@@ -248,7 +248,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field LIKE value".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
      * @param mixed $value The value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
@@ -264,7 +264,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "field NOT LIKE value".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
      * @param mixed $value The value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
@@ -281,8 +281,8 @@ class QueryExpression : IExpression, Countable
      * Adds a new condition to the expression object in the form
      * "field IN (value1, value2)".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
-     * @param uim.cake.Database\IExpression|array|string $values the value to be bound to $field for comparison
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|array|string $values the value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
@@ -300,9 +300,9 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new case expression to the expression object
      *
-     * @param uim.cake.Database\IExpression|array $conditions The conditions to test. Must be a IExpression
+     * @param uim.cake.databases.IExpression|array $conditions The conditions to test. Must be a IExpression
      * instance, or an array of IExpression instances.
-     * @param uim.cake.Database\IExpression|array $values Associative array of values to be associated with the
+     * @param uim.cake.databases.IExpression|array $values Associative array of values to be associated with the
      * conditions passed in $conditions. If there are more $values than $conditions,
      * the last $value is used as the `ELSE` value.
      * @param array<string> $types Associative array of types to be associated with the values
@@ -332,10 +332,10 @@ class QueryExpression : IExpression, Countable
      * only be passed if you actually want to create the simple
      * case expression variant!
      *
-     * @param uim.cake.Database\IExpression|object|scalar|null $value The case value.
+     * @param uim.cake.databases.IExpression|object|scalar|null $value The case value.
      * @param string|null $type The case value type. If no type is provided, the type will be tried to be inferred
      *  from the value.
-     * @return uim.cake.Database\Expression\CaseStatementExpression
+     * @return uim.cake.databases.Expression\CaseStatementExpression
      */
     function case($value = null, ?string $type = null): CaseStatementExpression
     {
@@ -352,8 +352,8 @@ class QueryExpression : IExpression, Countable
      * Adds a new condition to the expression object in the form
      * "field NOT IN (value1, value2)".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
-     * @param uim.cake.Database\IExpression|array|string $values the value to be bound to $field for comparison
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|array|string $values the value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
@@ -372,8 +372,8 @@ class QueryExpression : IExpression, Countable
      * Adds a new condition to the expression object in the form
      * "(field NOT IN (value1, value2) OR field IS NULL".
      *
-     * @param uim.cake.Database\IExpression|string $field Database field to be compared against value
-     * @param uim.cake.Database\IExpression|array|string $values the value to be bound to $field for comparison
+     * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
+     * @param uim.cake.databases.IExpression|array|string $values the value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
@@ -389,7 +389,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "EXISTS (...)".
      *
-     * @param uim.cake.Database\IExpression $expression the inner query
+     * @param uim.cake.databases.IExpression $expression the inner query
      * @return this
      */
     function exists(IExpression $expression) {
@@ -399,7 +399,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Adds a new condition to the expression object in the form "NOT EXISTS (...)".
      *
-     * @param uim.cake.Database\IExpression $expression the inner query
+     * @param uim.cake.databases.IExpression $expression the inner query
      * @return this
      */
     function notExists(IExpression $expression) {
@@ -410,7 +410,7 @@ class QueryExpression : IExpression, Countable
      * Adds a new condition to the expression object in the form
      * "field BETWEEN from AND to".
      *
-     * @param uim.cake.Database\IExpression|string $field The field name to compare for values inbetween the range.
+     * @param uim.cake.databases.IExpression|string $field The field name to compare for values inbetween the range.
      * @param mixed $from The initial value of the range.
      * @param mixed $to The ending value in the comparison range.
      * @param string|null $type the type name for $value as configured using the Type map.
@@ -428,10 +428,10 @@ class QueryExpression : IExpression, Countable
      * Returns a new QueryExpression object containing all the conditions passed
      * and set up the conjunction to be "AND"
      *
-     * @param uim.cake.Database\IExpression|\Closure|array|string $conditions to be joined with AND
+     * @param uim.cake.databases.IExpression|\Closure|array|string $conditions to be joined with AND
      * @param array<string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @return uim.cake.Database\Expression\QueryExpression
+     * @return uim.cake.databases.Expression\QueryExpression
      */
     function and($conditions, $types = []) {
         if ($conditions instanceof Closure) {
@@ -445,10 +445,10 @@ class QueryExpression : IExpression, Countable
      * Returns a new QueryExpression object containing all the conditions passed
      * and set up the conjunction to be "OR"
      *
-     * @param uim.cake.Database\IExpression|\Closure|array|string $conditions to be joined with OR
+     * @param uim.cake.databases.IExpression|\Closure|array|string $conditions to be joined with OR
      * @param array<string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @return uim.cake.Database\Expression\QueryExpression
+     * @return uim.cake.databases.Expression\QueryExpression
      */
     function or($conditions, $types = []) {
         if ($conditions instanceof Closure) {
@@ -464,10 +464,10 @@ class QueryExpression : IExpression, Countable
      * Returns a new QueryExpression object containing all the conditions passed
      * and set up the conjunction to be "AND"
      *
-     * @param uim.cake.Database\IExpression|\Closure|array|string $conditions to be joined with AND
+     * @param uim.cake.databases.IExpression|\Closure|array|string $conditions to be joined with AND
      * @param array<string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @return uim.cake.Database\Expression\QueryExpression
+     * @return uim.cake.databases.Expression\QueryExpression
      * @deprecated 4.0.0 Use {@link and()} instead.
      */
     function and_($conditions, $types = []) {
@@ -480,10 +480,10 @@ class QueryExpression : IExpression, Countable
      * Returns a new QueryExpression object containing all the conditions passed
      * and set up the conjunction to be "OR"
      *
-     * @param uim.cake.Database\IExpression|\Closure|array|string $conditions to be joined with OR
+     * @param uim.cake.databases.IExpression|\Closure|array|string $conditions to be joined with OR
      * @param array<string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
-     * @return uim.cake.Database\Expression\QueryExpression
+     * @return uim.cake.databases.Expression\QueryExpression
      * @deprecated 4.0.0 Use {@link or()} instead.
      */
     function or_($conditions, $types = []) {
@@ -500,7 +500,7 @@ class QueryExpression : IExpression, Countable
      * "NOT ( (condition1) AND (conditions2) )" conjunction depends on the one
      * currently configured for this object.
      *
-     * @param uim.cake.Database\IExpression|\Closure|array|string $conditions to be added and negated
+     * @param uim.cake.databases.IExpression|\Closure|array|string $conditions to be added and negated
      * @param array<string, string> $types Associative array of fields pointing to the type of the
      * values that are being passed. Used for correctly binding values to statements.
      * @return this
@@ -612,7 +612,7 @@ class QueryExpression : IExpression, Countable
      * as they often contain user input and arrays of strings
      * are easy to sneak in.
      *
-     * @param uim.cake.Database\IExpression|callable|array|string $callable The callable to check.
+     * @param uim.cake.databases.IExpression|callable|array|string $callable The callable to check.
      * @return bool Valid callable.
      * @deprecated 4.2.0 This method is unused.
      * @codeCoverageIgnore
@@ -655,8 +655,7 @@ class QueryExpression : IExpression, Countable
      * @param array $conditions list of conditions to be stored in this object
      * @param array<int|string, string> $types list of types associated on fields referenced in $conditions
      */
-    protected void _addConditions(array $conditions, array $types): void
-    {
+    protected void _addConditions(array $conditions, array $types) {
         $operators = ["and", "or", "xor"];
 
         $typeMap = this.getTypeMap().setTypes($types);
@@ -721,7 +720,7 @@ class QueryExpression : IExpression, Countable
      * @param string $field The value from which the actual field and operator will
      * be extracted.
      * @param mixed $value The value to be bound to a placeholder for the field
-     * @return uim.cake.Database\IExpression
+     * @return uim.cake.databases.IExpression
      * @throws \InvalidArgumentException If operator is invalid or missing on NULL usage.
      */
     protected function _parseCondition(string $field, $value) {
@@ -801,7 +800,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Returns the type name for the passed field if it was stored in the typeMap
      *
-     * @param uim.cake.Database\IExpression|string $field The field name to get a type for.
+     * @param uim.cake.databases.IExpression|string $field The field name to get a type for.
      * @return string|null The computed type or null, if the type is unknown.
      */
     protected function _calculateType($field): ?string

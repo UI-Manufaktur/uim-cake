@@ -10,14 +10,14 @@ module uim.cake.Database;
 trait TypeMapTrait
 {
     /**
-     * @var uim.cake.Database\TypeMap|null
+     * @var uim.cake.databases.TypeMap|null
      */
     protected $_typeMap;
 
     /**
      * Creates a new TypeMap if $typeMap is an array, otherwise exchanges it for the given one.
      *
-     * @param uim.cake.Database\TypeMap|array $typeMap Creates a TypeMap if array, otherwise sets the given TypeMap
+     * @param uim.cake.databases.TypeMap|array $typeMap Creates a TypeMap if array, otherwise sets the given TypeMap
      * @return this
      */
     function setTypeMap($typeMap) {
@@ -29,7 +29,7 @@ trait TypeMapTrait
     /**
      * Returns the existing type map.
      *
-     * @return uim.cake.Database\TypeMap
+     * @return uim.cake.databases.TypeMap
      */
     function getTypeMap(): TypeMap
     {
@@ -52,7 +52,7 @@ trait TypeMapTrait
      *
      * @param array<int|string, string> $types The array of types to set.
      * @return this
-     * @see uim.cake.Database\TypeMap::setDefaults()
+     * @see uim.cake.databases.TypeMap::setDefaults()
      */
     function setDefaultTypes(array $types) {
         this.getTypeMap().setDefaults($types);

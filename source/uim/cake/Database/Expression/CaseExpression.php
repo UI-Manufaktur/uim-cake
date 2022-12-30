@@ -34,16 +34,16 @@ class CaseExpression : IExpression
     /**
      * The `ELSE` value for the case statement. If null then no `ELSE` will be included.
      *
-     * @var uim.cake.Database\IExpression|array|string|null
+     * @var uim.cake.databases.IExpression|array|string|null
      */
     protected $_elseValue;
 
     /**
      * Constructs the case expression
      *
-     * @param uim.cake.Database\IExpression|array $conditions The conditions to test. Must be a IExpression
+     * @param uim.cake.databases.IExpression|array $conditions The conditions to test. Must be a IExpression
      * instance, or an array of IExpression instances.
-     * @param uim.cake.Database\IExpression|array $values Associative array of values to be associated with the
+     * @param uim.cake.databases.IExpression|array $values Associative array of values to be associated with the
      * conditions passed in $conditions. If there are more $values than $conditions,
      * the last $value is used as the `ELSE` value.
      * @param array<string> $types Associative array of types to be associated with the values
@@ -70,9 +70,9 @@ class CaseExpression : IExpression
      * Conditions must be a one dimensional array or a QueryExpression.
      * The trueValues must be a similar structure, but may contain a string value.
      *
-     * @param uim.cake.Database\IExpression|array $conditions Must be a IExpression instance,
+     * @param uim.cake.databases.IExpression|array $conditions Must be a IExpression instance,
      *   or an array of IExpression instances.
-     * @param uim.cake.Database\IExpression|array $values Associative array of values of each condition
+     * @param uim.cake.databases.IExpression|array $values Associative array of values of each condition
      * @param array<string> $types Associative array of types to be associated with the values
      * @return this
      */
@@ -94,8 +94,7 @@ class CaseExpression : IExpression
      * @param array<mixed> $values Associative array of values of each condition
      * @param array<string> $types Associative array of types to be associated with the values
      */
-    protected void _addExpressions(array $conditions, array $values, array $types): void
-    {
+    protected void _addExpressions(array $conditions, array $values, array $types) {
         $rawValues = array_values($values);
         $keyValues = array_keys($values);
 
@@ -145,11 +144,10 @@ class CaseExpression : IExpression
     /**
      * Sets the default value
      *
-     * @param uim.cake.Database\IExpression|array|string|null $value Value to set
+     * @param uim.cake.databases.IExpression|array|string|null $value Value to set
      * @param string|null $type Type of value
      */
-    void elseValue($value = null, ?string $type = null): void
-    {
+    void elseValue($value = null, ?string $type = null) {
         if (is_array($value)) {
             end($value);
             $value = key($value);
@@ -169,8 +167,8 @@ class CaseExpression : IExpression
     /**
      * Compiles the relevant parts into sql
      *
-     * @param uim.cake.Database\IExpression|array|string $part The part to compile
-     * @param uim.cake.Database\ValueBinder $binder Sql generator
+     * @param uim.cake.databases.IExpression|array|string $part The part to compile
+     * @param uim.cake.databases.ValueBinder $binder Sql generator
      * @return string
      */
     protected function _compile($part, ValueBinder $binder): string
@@ -189,7 +187,7 @@ class CaseExpression : IExpression
     /**
      * Converts the Node into a SQL string fragment.
      *
-     * @param uim.cake.Database\ValueBinder $binder Placeholder generator object
+     * @param uim.cake.databases.ValueBinder $binder Placeholder generator object
      * @return string
      */
     string sql(ValueBinder $binder): string

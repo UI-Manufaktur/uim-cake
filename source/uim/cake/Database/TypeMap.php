@@ -80,8 +80,7 @@ class TypeMap
      *
      * @param array<int|string, string> $types The additional types to add.
      */
-    void addDefaults(array $types): void
-    {
+    void addDefaults(array $types) {
         _defaults += $types;
     }
 

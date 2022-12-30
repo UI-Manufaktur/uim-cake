@@ -23,8 +23,8 @@ class TupleComparison : ComparisonExpression
     /**
      * Constructor
      *
-     * @param uim.cake.Database\IExpression|array|string $fields the fields to use to form a tuple
-     * @param uim.cake.Database\IExpression|array $values the values to use to form a tuple
+     * @param uim.cake.databases.IExpression|array|string $fields the fields to use to form a tuple
+     * @param uim.cake.databases.IExpression|array $values the values to use to form a tuple
      * @param array<string|null> $types the types names to use for casting each of the values, only
      * one type per position in the value array in needed
      * @param string $conjunction the operator used for comparing field and value
@@ -51,8 +51,7 @@ class TupleComparison : ComparisonExpression
      *
      * @param mixed $value The value to compare
      */
-    void setValue($value): void
-    {
+    void setValue($value) {
         if (this.isMulti()) {
             if (is_array($value) && !is_array(current($value))) {
                 throw new InvalidArgumentException(
@@ -96,7 +95,7 @@ class TupleComparison : ComparisonExpression
      * Returns a string with the values as placeholders in a string to be used
      * for the SQL version of this expression
      *
-     * @param uim.cake.Database\ValueBinder $binder The value binder to convert expressions with.
+     * @param uim.cake.databases.ValueBinder $binder The value binder to convert expressions with.
      * @return string
      */
     protected function _stringifyValues(ValueBinder $binder): string
@@ -185,8 +184,7 @@ class TupleComparison : ComparisonExpression
      * @param mixed $value The value to traverse
      * @param \Closure $callback The callable to use when traversing
      */
-    protected void _traverseValue($value, Closure $callback): void
-    {
+    protected void _traverseValue($value, Closure $callback) {
         if ($value instanceof IExpression) {
             $callback($value);
             $value.traverse($callback);

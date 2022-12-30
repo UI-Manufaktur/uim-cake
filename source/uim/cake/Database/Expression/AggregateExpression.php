@@ -20,12 +20,12 @@ use Closure;
 class AggregateExpression : FunctionExpression : WindowInterface
 {
     /**
-     * @var uim.cake.Database\Expression\QueryExpression
+     * @var uim.cake.databases.Expression\QueryExpression
      */
     protected $filter;
 
     /**
-     * @var uim.cake.Database\Expression\WindowExpression
+     * @var uim.cake.databases.Expression\WindowExpression
      */
     protected $window;
 
@@ -33,10 +33,10 @@ class AggregateExpression : FunctionExpression : WindowInterface
      * Adds conditions to the FILTER clause. The conditions are the same format as
      * `Query::where()`.
      *
-     * @param uim.cake.Database\IExpression|\Closure|array|string $conditions The conditions to filter on.
+     * @param uim.cake.databases.IExpression|\Closure|array|string $conditions The conditions to filter on.
      * @param array<string, string> $types Associative array of type names used to bind values to query
      * @return this
-     * @see uim.cake.Database\Query::where()
+     * @see uim.cake.databases.Query::where()
      */
     function filter($conditions, array $types = []) {
         if (this.filter == null) {

@@ -18,7 +18,7 @@ class CachedCollection : ICollection
     /**
      * The decorated schema collection
      *
-     * @var uim.cake.Database\Schema\ICollection
+     * @var uim.cake.databases.Schema\ICollection
      */
     protected $collection;
 
@@ -32,7 +32,7 @@ class CachedCollection : ICollection
     /**
      * Constructor.
      *
-     * @param uim.cake.Database\Schema\ICollection $collection The collection to wrap.
+     * @param uim.cake.databases.Schema\ICollection $collection The collection to wrap.
      * @param string $prefix The cache key prefix to use. Typically the connection name.
      * @param \Psr\SimpleCache\ICache $cacher Cacher instance.
      */

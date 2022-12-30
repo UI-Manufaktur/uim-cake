@@ -15,7 +15,7 @@ class LoggedQuery : JsonSerializable
     /**
      * Driver executing the query
      *
-     * @var uim.cake.Database\DriverInterface|null
+     * @var uim.cake.databases.DriverInterface|null
      */
     $driver = null;
 

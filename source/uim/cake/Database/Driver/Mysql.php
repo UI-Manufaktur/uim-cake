@@ -54,7 +54,7 @@ class Mysql : Driver
     /**
      * The schema dialect for this driver
      *
-     * @var uim.cake.Database\Schema\MysqlSchemaDialect|null
+     * @var uim.cake.databases.Schema\MysqlSchemaDialect|null
      */
     protected $_schemaDialect;
 
@@ -169,8 +169,8 @@ class Mysql : Driver
     /**
      * Prepares a sql statement to be executed
      *
-     * @param uim.cake.Database\Query|string $query The query to prepare.
-     * @return uim.cake.Database\StatementInterface
+     * @param uim.cake.databases.Query|string $query The query to prepare.
+     * @return uim.cake.databases.StatementInterface
      */
     function prepare($query): StatementInterface
     {

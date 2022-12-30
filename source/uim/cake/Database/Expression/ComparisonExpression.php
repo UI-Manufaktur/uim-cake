@@ -49,14 +49,14 @@ class ComparisonExpression : IExpression, FieldInterface
      * A cached list of IExpression objects that were
      * found in the value for this expression.
      *
-     * @var array<uim.cake.Database\IExpression>
+     * @var array<uim.cake.databases.IExpression>
      */
     protected $_valueExpressions = [];
 
     /**
      * Constructor
      *
-     * @param uim.cake.Database\IExpression|string $field the field name to compare to a value
+     * @param uim.cake.databases.IExpression|string $field the field name to compare to a value
      * @param mixed $value The value to be used in comparison
      * @param string|null $type the type name used to cast the value
      * @param string $operator the operator used for comparing field and value
@@ -73,8 +73,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @param mixed $value The value to compare
      */
-    void setValue($value): void
-    {
+    void setValue($value) {
         $value = _castToExpression($value, _type);
 
         $isMultiple = _type && strpos(_type, "[]") != false;
@@ -100,8 +99,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @param string $operator The operator to be used for the comparison.
      */
-    void setOperator(string $operator): void
-    {
+    void setOperator(string $operator) {
         _operator = $operator;
     }
 
@@ -116,7 +114,7 @@ class ComparisonExpression : IExpression, FieldInterface
 
     function sql(ValueBinder $binder): string
     {
-        /** @var uim.cake.Database\IExpression|string $field */
+        /** @var uim.cake.databases.IExpression|string $field */
         $field = _field;
 
         if ($field instanceof IExpression) {
@@ -173,7 +171,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * Returns a template and a placeholder for the value after registering it
      * with the placeholder $binder
      *
-     * @param uim.cake.Database\ValueBinder $binder The value binder to use.
+     * @param uim.cake.databases.ValueBinder $binder The value binder to use.
      * @return array First position containing the template and the second a placeholder
      */
     protected function _stringExpression(ValueBinder $binder): array
@@ -213,7 +211,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * Registers a value in the placeholder generator and returns the generated placeholder
      *
      * @param mixed $value The value to bind
-     * @param uim.cake.Database\ValueBinder $binder The value binder to use
+     * @param uim.cake.databases.ValueBinder $binder The value binder to use
      * @param string|null $type The type of $value
      * @return string generated placeholder
      */
@@ -230,7 +228,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * $binder and separated by `,`
      *
      * @param iterable $value the value to flatten
-     * @param uim.cake.Database\ValueBinder $binder The value binder to use
+     * @param uim.cake.databases.ValueBinder $binder The value binder to use
      * @param string|null $type the type to cast values to
      * @return string
      */
@@ -256,7 +254,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * and all IExpression objects that could be found in the second
      * position.
      *
-     * @param uim.cake.Database\IExpression|iterable $values The rows to insert
+     * @param uim.cake.databases.IExpression|iterable $values The rows to insert
      * @return array
      */
     protected function _collectExpressions($values): array
@@ -290,5 +288,5 @@ class ComparisonExpression : IExpression, FieldInterface
 // phpcs:disable
 // Comparison will not load during instanceof checks so ensure it"s loaded here
 // @deprecated 4.1.0 Add backwards compatible alias.
-class_alias("Cake\Database\Expression\ComparisonExpression", "Cake\Database\Expression\Comparison");
+class_alias("Cake\databases.Expression\ComparisonExpression", "Cake\databases.Expression\Comparison");
 // phpcs:enable

@@ -10,14 +10,14 @@ interface FieldInterface
     /**
      * Sets the field name
      *
-     * @param uim.cake.Database\IExpression|array|string $field The field to compare with.
+     * @param uim.cake.databases.IExpression|array|string $field The field to compare with.
      */
     void setField($field): void;
 
     /**
      * Returns the field name
      *
-     * @return uim.cake.Database\IExpression|array|string
+     * @return uim.cake.databases.IExpression|array|string
      */
     function getField();
 }

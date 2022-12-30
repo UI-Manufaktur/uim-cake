@@ -41,8 +41,7 @@ class StringExpression : IExpression
      *
      * @param string $collation String collation
      */
-    void setCollation(string $collation): void
-    {
+    void setCollation(string $collation) {
         this.collation = $collation;
     }
 

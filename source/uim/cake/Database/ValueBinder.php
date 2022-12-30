@@ -33,8 +33,7 @@ class ValueBinder
      * @param string|int|null $type the mapped type name, used for casting when sending
      * to database
      */
-    void bind($param, $value, $type = null): void
-    {
+    void bind($param, $value, $type = null) {
         _bindings[$param] = compact("value", "type") + [
             "placeholder": is_int($param) ? $param : substr($param, 1),
         ];
@@ -95,8 +94,7 @@ class ValueBinder
     /**
      * Clears any bindings that were previously registered
      */
-    void reset(): void
-    {
+    void reset() {
         _bindings = [];
         _bindingsCount = 0;
     }
@@ -104,18 +102,16 @@ class ValueBinder
     /**
      * Resets the bindings count without clearing previously bound values
      */
-    void resetCount(): void
-    {
+    void resetCount() {
         _bindingsCount = 0;
     }
 
     /**
      * Binds all the stored values in this object to the passed statement.
      *
-     * @param uim.cake.Database\StatementInterface $statement The statement to add parameters to.
+     * @param uim.cake.databases.StatementInterface $statement The statement to add parameters to.
      */
-    void attachTo(StatementInterface $statement): void
-    {
+    void attachTo(StatementInterface $statement) {
         $bindings = this.bindings();
         if (empty($bindings)) {
             return;

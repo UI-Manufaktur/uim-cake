@@ -40,14 +40,14 @@ class WhenThenExpression : IExpression
      * The type map to use when using an array of conditions for the
      * `WHEN` value.
      *
-     * @var uim.cake.Database\TypeMap
+     * @var uim.cake.databases.TypeMap
      */
     protected $_typeMap;
 
     /**
      * Then `WHEN` value.
      *
-     * @var uim.cake.Database\IExpression|object|scalar|null
+     * @var uim.cake.databases.IExpression|object|scalar|null
      */
     protected $when = null;
 
@@ -61,7 +61,7 @@ class WhenThenExpression : IExpression
     /**
      * The `THEN` value.
      *
-     * @var uim.cake.Database\IExpression|object|scalar|null
+     * @var uim.cake.databases.IExpression|object|scalar|null
      */
     protected $then = null;
 
@@ -83,7 +83,7 @@ class WhenThenExpression : IExpression
     /**
      * Constructor.
      *
-     * @param uim.cake.Database\TypeMap|null $typeMap The type map to use when using an array of conditions for the `WHEN`
+     * @param uim.cake.databases.TypeMap|null $typeMap The type map to use when using an array of conditions for the `WHEN`
      *  value.
      */
     this(?TypeMap $typeMap = null) {
@@ -96,8 +96,8 @@ class WhenThenExpression : IExpression
     /**
      * Sets the `WHEN` value.
      *
-     * @param uim.cake.Database\IExpression|object|array|scalar $when The `WHEN` value. When using an array of
-     *  conditions, it must be compatible with `uim.cake.Database\Query::where()`. Note that this argument is _not_
+     * @param uim.cake.databases.IExpression|object|array|scalar $when The `WHEN` value. When using an array of
+     *  conditions, it must be compatible with `uim.cake.databases.Query::where()`. Note that this argument is _not_
      *  completely safe for use with user data, as a user supplied array would allow for raw SQL to slip in! If you
      *  plan to use user data, either pass a single type for the `$type` argument (which forces the `$when` value to be
      *  a non-array, and then always binds the data), use a conditions array where the user data is only passed on the
@@ -106,7 +106,7 @@ class WhenThenExpression : IExpression
      *  conditions, or else a string. If no type is provided, the type will be tried to be inferred from the value.
      * @return this
      * @throws \InvalidArgumentException In case the `$when` argument is neither a non-empty array, nor a scalar value,
-     *  an object, or an instance of `uim.cake.Database\IExpression`.
+     *  an object, or an instance of `uim.cake.databases.IExpression`.
      * @throws \InvalidArgumentException In case the `$type` argument is neither an array, a string, nor null.
      * @throws \InvalidArgumentException In case the `$when` argument is an array, and the `$type` argument is neither
      * an array, nor null.
@@ -190,7 +190,7 @@ class WhenThenExpression : IExpression
     /**
      * Sets the `THEN` result value.
      *
-     * @param uim.cake.Database\IExpression|object|scalar|null $result The result value.
+     * @param uim.cake.databases.IExpression|object|scalar|null $result The result value.
      * @param string|null $type The result type. If no type is provided, the type will be inferred from the given
      *  result value.
      * @return this
@@ -244,7 +244,7 @@ class WhenThenExpression : IExpression
      * * `then`: The `THEN` result value.
      *
      * @param string $clause The name of the clause to obtain.
-     * @return uim.cake.Database\IExpression|object|scalar|null
+     * @return uim.cake.databases.IExpression|object|scalar|null
      * @throws \InvalidArgumentException In case the given clause name is invalid.
      */
     function clause(string $clause) {

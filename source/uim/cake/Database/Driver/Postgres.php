@@ -44,7 +44,7 @@ class Postgres : Driver
     /**
      * The schema dialect class for this driver
      *
-     * @var uim.cake.Database\Schema\PostgresSchemaDialect|null
+     * @var uim.cake.databases.Schema\PostgresSchemaDialect|null
      */
     protected $_schemaDialect;
 
@@ -130,8 +130,7 @@ class Postgres : Driver
      *
      * @param string $encoding The encoding to use.
      */
-    void setEncoding(string $encoding): void
-    {
+    void setEncoding(string $encoding) {
         this.connect();
         _connection.exec("SET NAMES " . _connection.quote($encoding));
     }
@@ -142,8 +141,7 @@ class Postgres : Driver
      *
      * @param string $schema The schema names to set `search_path` to.
      */
-    void setSchema(string $schema): void
-    {
+    void setSchema(string $schema) {
         this.connect();
         _connection.exec("SET search_path TO " . _connection.quote($schema));
     }
@@ -212,10 +210,9 @@ class Postgres : Driver
     /**
      * Changes identifer expression into postgresql format.
      *
-     * @param uim.cake.Database\Expression\IdentifierExpression $expression The expression to tranform.
+     * @param uim.cake.databases.Expression\IdentifierExpression $expression The expression to tranform.
      */
-    protected void _transformIdentifierExpression(IdentifierExpression $expression): void
-    {
+    protected void _transformIdentifierExpression(IdentifierExpression $expression) {
         $collation = $expression.getCollation();
         if ($collation) {
             // use trim() to work around expression being transformed multiple times
@@ -227,11 +224,10 @@ class Postgres : Driver
      * Receives a FunctionExpression and changes it so that it conforms to this
      * SQL dialect.
      *
-     * @param uim.cake.Database\Expression\FunctionExpression $expression The function expression to convert
+     * @param uim.cake.databases.Expression\FunctionExpression $expression The function expression to convert
      *   to postgres SQL.
      */
-    protected void _transformFunctionExpression(FunctionExpression $expression): void
-    {
+    protected void _transformFunctionExpression(FunctionExpression $expression) {
         switch ($expression.getName()) {
             case "CONCAT":
                 // CONCAT function is expressed as exp1 || exp2
@@ -290,10 +286,9 @@ class Postgres : Driver
     /**
      * Changes string expression into postgresql format.
      *
-     * @param uim.cake.Database\Expression\StringExpression $expression The string expression to tranform.
+     * @param uim.cake.databases.Expression\StringExpression $expression The string expression to tranform.
      */
-    protected void _transformStringExpression(StringExpression $expression): void
-    {
+    protected void _transformStringExpression(StringExpression $expression) {
         // use trim() to work around expression being transformed multiple times
         $expression.setCollation(""" . trim($expression.getCollation(), """) . """);
     }
@@ -301,7 +296,7 @@ class Postgres : Driver
     /**
      * {@inheritDoc}
      *
-     * @return uim.cake.Database\PostgresCompiler
+     * @return uim.cake.databases.PostgresCompiler
      */
     function newCompiler(): QueryCompiler
     {

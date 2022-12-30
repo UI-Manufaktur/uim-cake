@@ -85,7 +85,7 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      * @param array<string, string> $types Associative array of types to be associated with the
      * passed arguments
      * @param bool $prepend Whether to prepend or append to the list of arguments
-     * @see uim.cake.Database\Expression\FunctionExpression::__construct() for more details.
+     * @see uim.cake.databases.Expression\FunctionExpression::__construct() for more details.
      * @return this
      * @psalm-suppress MoreSpecificImplementedParamType
      */

@@ -18,17 +18,17 @@ use Closure;
 class WindowExpression : IExpression, WindowInterface
 {
     /**
-     * @var uim.cake.Database\Expression\IdentifierExpression
+     * @var uim.cake.databases.Expression\IdentifierExpression
      */
     protected $name;
 
     /**
-     * @var array<uim.cake.Database\IExpression>
+     * @var array<uim.cake.databases.IExpression>
      */
     protected $partitions = [];
 
     /**
-     * @var uim.cake.Database\Expression\OrderByExpression|null
+     * @var uim.cake.databases.Expression\OrderByExpression|null
      */
     protected $order;
 
@@ -254,8 +254,8 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * Builds frame offset sql.
      *
-     * @param uim.cake.Database\ValueBinder $binder Value binder
-     * @param uim.cake.Database\IExpression|string|int|null $offset Frame offset
+     * @param uim.cake.databases.ValueBinder $binder Value binder
+     * @param uim.cake.databases.IExpression|string|int|null $offset Frame offset
      * @param string $direction Frame offset direction
      * @return string
      */

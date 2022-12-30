@@ -13,8 +13,8 @@ class OrderByExpression : QueryExpression
     /**
      * Constructor
      *
-     * @param uim.cake.Database\IExpression|array|string $conditions The sort columns
-     * @param uim.cake.Database\TypeMap|array<string, string> $types The types for each column.
+     * @param uim.cake.databases.IExpression|array|string $conditions The sort columns
+     * @param uim.cake.databases.TypeMap|array<string, string> $types The types for each column.
      * @param string $conjunction The glue used to join conditions together.
      */
     this($conditions = [], $types = [], $conjunction = "") {
@@ -44,8 +44,7 @@ class OrderByExpression : QueryExpression
      * @param array $conditions list of order by expressions
      * @param array $types list of types associated on fields referenced in $conditions
      */
-    protected void _addConditions(array $conditions, array $types): void
-    {
+    protected void _addConditions(array $conditions, array $types) {
         foreach ($conditions as $key: $val) {
             if (
                 is_string($key) &&

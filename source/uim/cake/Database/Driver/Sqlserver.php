@@ -63,7 +63,7 @@ class Sqlserver : Driver
     /**
      * The schema dialect class for this driver
      *
-     * @var uim.cake.Database\Schema\SqlserverSchemaDialect|null
+     * @var uim.cake.databases.Schema\SqlserverSchemaDialect|null
      */
     protected $_schemaDialect;
 
@@ -175,8 +175,8 @@ class Sqlserver : Driver
     /**
      * Prepares a sql statement to be executed
      *
-     * @param uim.cake.Database\Query|string $query The query to prepare.
-     * @return uim.cake.Database\StatementInterface
+     * @param uim.cake.databases.Query|string $query The query to prepare.
+     * @return uim.cake.databases.StatementInterface
      */
     function prepare($query): StatementInterface
     {
@@ -277,7 +277,7 @@ class Sqlserver : Driver
     /**
      * {@inheritDoc}
      *
-     * @return uim.cake.Database\SqlserverCompiler
+     * @return uim.cake.databases.SqlserverCompiler
      */
     function newCompiler(): QueryCompiler
     {
@@ -311,10 +311,10 @@ class Sqlserver : Driver
      * Prior to SQLServer 2012 there was no equivalent to LIMIT OFFSET, so a subquery must
      * be used.
      *
-     * @param uim.cake.Database\Query $original The query to wrap in a subquery.
+     * @param uim.cake.databases.Query $original The query to wrap in a subquery.
      * @param int|null $limit The number of rows to fetch.
      * @param int|null $offset The number of rows to offset.
-     * @return uim.cake.Database\Query Modified query object.
+     * @return uim.cake.databases.Query Modified query object.
      */
     protected function _pagingSubquery(Query $original, ?int $limit, ?int $offset): Query
     {
@@ -441,10 +441,9 @@ class Sqlserver : Driver
      * Receives a FunctionExpression and changes it so that it conforms to this
      * SQL dialect.
      *
-     * @param uim.cake.Database\Expression\FunctionExpression $expression The function expression to convert to TSQL.
+     * @param uim.cake.databases.Expression\FunctionExpression $expression The function expression to convert to TSQL.
      */
-    protected void _transformFunctionExpression(FunctionExpression $expression): void
-    {
+    protected void _transformFunctionExpression(FunctionExpression $expression) {
         switch ($expression.getName()) {
             case "CONCAT":
                 // CONCAT function is expressed as exp1 + exp2
