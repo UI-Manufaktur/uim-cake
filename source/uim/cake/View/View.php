@@ -369,7 +369,6 @@ class View : EventDispatcherInterface
     /**
      * Set the response content-type based on the view"s contentType()
      *
-     * @return void
      */
     protected void setContentType(): void
     {

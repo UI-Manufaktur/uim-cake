@@ -166,7 +166,6 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     /**
      * Build the fixtures table schema from the fields property.
      *
-     * @return void
      */
     protected void _schemaFromFields(): void
     {

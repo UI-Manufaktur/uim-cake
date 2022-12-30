@@ -502,7 +502,6 @@ class FormHelper : Helper
      * Correctly store the last created form action URL.
      *
      * @param array|string|null $url The URL of the last form.
-     * @return void
      */
     protected void _lastAction($url = null): void
     {

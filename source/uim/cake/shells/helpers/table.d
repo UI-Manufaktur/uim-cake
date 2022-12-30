@@ -85,7 +85,6 @@ class TableHelper : Helper {
      * @param array $row The row to output.
      * @param array<int> $widths The widths of each column to output.
      * @param array<string, mixed> myOptions Options to be passed.
-     * @return void
      */
     protected void _render(array $row, array $widths, array myOptions = []) {
         if (count($row) == 0) {

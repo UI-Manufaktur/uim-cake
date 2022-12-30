@@ -69,7 +69,6 @@ class TableHelper : Helper
      * Output a row separator.
      *
      * @param array<int> $widths The widths of each column to output.
-     * @return void
      */
     protected void _rowSeparator(array $widths): void
     {
@@ -87,7 +86,6 @@ class TableHelper : Helper
      * @param array $row The row to output.
      * @param array<int> $widths The widths of each column to output.
      * @param array<string, mixed> $options Options to be passed.
-     * @return void
      */
     protected void _render(array $row, array $widths, array $options = []): void
     {

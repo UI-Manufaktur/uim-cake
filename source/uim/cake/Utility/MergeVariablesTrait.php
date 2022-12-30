@@ -29,7 +29,6 @@ trait MergeVariablesTrait
      *
      * @param array<string> $properties An array of properties and the merge strategy for them.
      * @param array<string, mixed> $options The options to use when merging properties.
-     * @return void
      */
     protected void _mergeVars(array $properties, array $options = []): void
     {
@@ -61,7 +60,6 @@ trait MergeVariablesTrait
      * @param string $property The name of the property being merged.
      * @param array<string> $parentClasses An array of classes you want to merge with.
      * @param array<string, mixed> $options Options for merging the property, see _mergeVars()
-     * @return void
      */
     protected void _mergeProperty(string $property, array $parentClasses, array $options): void
     {

@@ -542,7 +542,6 @@ trait IntegrationTestTrait
      * If that class does not exist, the built-in renderer will be used.
      *
      * @param \Throwable $exception Exception to handle.
-     * @return void
      */
     protected void _handleError(Throwable $exception): void
     {

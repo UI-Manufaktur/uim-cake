@@ -124,7 +124,6 @@ class FixtureManager
      * This allows models to use the test connections without
      * a pile of configuration work.
      *
-     * @return void
      */
     protected void _aliasConnections(): void
     {
@@ -152,7 +151,6 @@ class FixtureManager
     /**
      * Initializes this class with a DataSource object to use as default for all fixtures
      *
-     * @return void
      */
     protected void _initDb(): void
     {
@@ -241,7 +239,6 @@ class FixtureManager
      * @param uim.cake.Datasource\ConnectionInterface $db The Connection object instance to use
      * @param array<string> $sources The existing tables in the datasource.
      * @param bool $drop whether drop the fixture if it is already created or not
-     * @return void
      */
     protected void _setupTable(
         FixtureInterface $fixture,
@@ -371,7 +368,6 @@ class FixtureManager
      *
      * @param array<string> $fixtures A list of fixtures to operate on.
      * @param callable $operation The operation to run on each connection + fixture set.
-     * @return void
      */
     protected void _runOperation(array $fixtures, callable $operation): void
     {

@@ -478,7 +478,6 @@ class FormHelper : Helper
      * Correctly store the last created form action URL.
      *
      * @param array|string|null myUrl The URL of the last form.
-     * @return void
      */
     protected void _lastAction(myUrl = null) {
         $action = Router::url(myUrl, true);

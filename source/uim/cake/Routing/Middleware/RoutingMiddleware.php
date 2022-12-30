@@ -79,7 +79,6 @@ class RoutingMiddleware : IMiddleware
      * If the middleware is created without an Application, routes will be
      * loaded via the automatic route loading that pre-dates the routes() hook.
      *
-     * @return void
      */
     protected void loadRoutes(): void
     {

@@ -58,7 +58,6 @@ class EntityRoute : Route
      *
      * @throws \RuntimeException
      * @param \ArrayAccess|array $entity Entity value from the URL options
-     * @return void
      */
     protected void _checkEntity($entity): void
     {

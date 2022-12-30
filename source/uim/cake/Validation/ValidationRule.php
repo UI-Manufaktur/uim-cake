@@ -181,7 +181,6 @@ class ValidationRule
      * Sets the rule properties from the rule entry in validate
      *
      * @param array<string, mixed> $validator [optional]
-     * @return void
      */
     protected void _addValidatorProps(array $validator = []): void
     {

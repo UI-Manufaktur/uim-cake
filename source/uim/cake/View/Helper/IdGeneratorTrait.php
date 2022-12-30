@@ -26,7 +26,6 @@ trait IdGeneratorTrait
     /**
      * Clear the stored ID suffixes.
      *
-     * @return void
      */
     protected void _clearIds(): void
     {

@@ -147,7 +147,6 @@ class StringTemplate
      * Compile templates into a more efficient printf() compatible format.
      *
      * @param array<string> $templates The template names to compile. If empty all templates will be compiled.
-     * @return void
      */
     protected void _compileTemplates(array $templates = []): void
     {
