@@ -20,7 +20,6 @@ import uim.cake.core.exceptions.CakeException;
 class MissingDatasourceException : CakeException
 {
     /**
-     * @var string
      */
-    protected $_messageTemplate = "Datasource class %s could not be found. %s";
+    protected string $_messageTemplate = "Datasource class %s could not be found. %s";
 }

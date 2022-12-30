@@ -63,9 +63,8 @@ class Debugger
     /**
      * The current output format.
      *
-     * @var string
      */
-    protected $_outputFormat = 'js';
+    protected string $_outputFormat = 'js';
 
     /**
      * Templates used when generating trace or error strings. Can be global or indexed by the format

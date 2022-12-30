@@ -27,9 +27,8 @@ class UnaryExpression : IExpression
     /**
      * The operator this unary expression represents
      *
-     * @var string
      */
-    protected $_operator;
+    protected string $_operator;
 
     /**
      * Holds the value which the unary expression operates

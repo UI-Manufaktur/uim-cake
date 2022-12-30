@@ -18,14 +18,12 @@ use Closure;
 class StringExpression : IExpression
 {
     /**
-     * @var string
      */
-    protected $string;
+    protected string $string;
 
     /**
-     * @var string
      */
-    protected $collation;
+    protected string $collation;
 
     /**
      * @param string $string String value

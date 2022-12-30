@@ -29,9 +29,8 @@ class FormData : Countable
     /**
      * Boundary marker.
      *
-     * @var string
      */
-    protected $_boundary;
+    protected string $_boundary;
 
     /**
      * Whether this formdata object has attached files.

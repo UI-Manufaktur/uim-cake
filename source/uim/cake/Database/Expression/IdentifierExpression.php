@@ -18,9 +18,8 @@ class IdentifierExpression : IExpression
     /**
      * Holds the identifier string
      *
-     * @var string
      */
-    protected $_identifier;
+    protected string $_identifier;
 
     /**
      * @var string|null

@@ -24,9 +24,8 @@ trait EventDispatcherTrait
     /**
      * Default class name for new event objects.
      *
-     * @var string
      */
-    protected $_eventClass = Event::class;
+    protected string $_eventClass = Event::class;
 
     /**
      * Returns the Cake\events.EventManager manager instance for this object.

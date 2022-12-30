@@ -32,9 +32,8 @@ class Package
     /**
      * The name of the formatter to use when formatting translated messages.
      *
-     * @var string
      */
-    protected $formatter;
+    protected string $formatter;
 
     /**
      * Constructor.

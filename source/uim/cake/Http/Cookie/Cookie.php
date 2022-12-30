@@ -51,9 +51,8 @@ class Cookie : CookieInterface
     /**
      * Cookie name
      *
-     * @var string
      */
-    protected $name = "";
+    protected string $name = "";
 
     /**
      * Raw Cookie value.
@@ -79,16 +78,14 @@ class Cookie : CookieInterface
     /**
      * Path
      *
-     * @var string
      */
-    protected $path = "/";
+    protected string $path = "/";
 
     /**
      * Domain
      *
-     * @var string
      */
-    protected $domain = "";
+    protected string $domain = "";
 
     /**
      * Secure

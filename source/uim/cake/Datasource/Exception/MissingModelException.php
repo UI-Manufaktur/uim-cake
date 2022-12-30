@@ -9,7 +9,6 @@ import uim.cake.core.exceptions.CakeException;
 class MissingModelException : CakeException
 {
     /**
-     * @var string
      */
-    protected $_messageTemplate = "Model class "%s" of type "%s" could not be found.";
+    protected string $_messageTemplate = "Model class "%s" of type "%s" could not be found.";
 }

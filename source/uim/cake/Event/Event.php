@@ -21,9 +21,8 @@ class Event : EventInterface
     /**
      * Name of the event
      *
-     * @var string
      */
-    protected $_name;
+    protected string $_name;
 
     /**
      * The object this event applies to (usually the same object that generates the event)

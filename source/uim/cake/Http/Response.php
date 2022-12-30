@@ -385,9 +385,8 @@ class Response : IResponse
     /**
      * The charset the response body is encoded with
      *
-     * @var string
      */
-    protected $_charset = "UTF-8";
+    protected string $_charset = "UTF-8";
 
     /**
      * Holds all the cache directives that will be converted
@@ -407,16 +406,14 @@ class Response : IResponse
     /**
      * Reason Phrase
      *
-     * @var string
      */
-    protected $_reasonPhrase = "OK";
+    protected string $_reasonPhrase = "OK";
 
     /**
      * Stream mode options.
      *
-     * @var string
      */
-    protected $_streamMode = "wb+";
+    protected string $_streamMode = "wb+";
 
     /**
      * Stream target or resource object.

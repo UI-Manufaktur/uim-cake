@@ -24,9 +24,8 @@ class TranslatorRegistry
     /**
      * The current locale code.
      *
-     * @var string
      */
-    protected $locale;
+    protected string $locale;
 
     /**
      * A package locator.
@@ -56,9 +55,8 @@ class TranslatorRegistry
      * The name of the default formatter to use for newly created
      * translators from the fallback loader
      *
-     * @var string
      */
-    protected $_defaultFormatter = "default";
+    protected string $_defaultFormatter = "default";
 
     /**
      * Use fallback-domain for translation loaders.

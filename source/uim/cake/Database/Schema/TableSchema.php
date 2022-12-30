@@ -21,9 +21,8 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * The name of the table
      *
-     * @var string
      */
-    protected $_table;
+    protected string $_table;
 
     /**
      * Columns in the table.

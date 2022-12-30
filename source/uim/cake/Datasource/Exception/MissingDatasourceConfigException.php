@@ -20,7 +20,6 @@ import uim.cake.core.exceptions.CakeException;
 class MissingDatasourceConfigException : CakeException
 {
     /**
-     * @var string
      */
-    protected $_messageTemplate = "The datasource configuration "%s" was not found.";
+    protected string $_messageTemplate = "The datasource configuration "%s" was not found.";
 }

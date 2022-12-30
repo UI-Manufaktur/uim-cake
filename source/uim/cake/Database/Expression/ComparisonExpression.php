@@ -34,9 +34,8 @@ class ComparisonExpression : IExpression, FieldInterface
     /**
      * The operator used for comparing field and value
      *
-     * @var string
      */
-    protected $_operator = "=";
+    protected string $_operator = "=";
 
     /**
      * Whether the value in this expression is a traversable

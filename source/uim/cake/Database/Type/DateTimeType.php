@@ -34,9 +34,8 @@ class DateTimeType : BaseType : BatchCastingInterface
     /**
      * The DateTime format used when converting to string.
      *
-     * @var string
      */
-    protected $_format = "Y-m-d H:i:s";
+    protected string $_format = "Y-m-d H:i:s";
 
     /**
      * The DateTime formats allowed by `marshal()`.

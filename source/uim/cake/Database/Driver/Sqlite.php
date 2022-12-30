@@ -61,16 +61,14 @@ class Sqlite : Driver
     /**
      * String used to start a database identifier quoting to make it safe
      *
-     * @var string
      */
-    protected $_startQuote = """;
+    protected string $_startQuote = """;
 
     /**
      * String used to end a database identifier quoting to make it safe
      *
-     * @var string
      */
-    protected $_endQuote = """;
+    protected string $_endQuote = """;
 
     /**
      * Mapping of date parts.

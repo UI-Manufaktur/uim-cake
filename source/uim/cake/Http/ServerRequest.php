@@ -75,16 +75,14 @@ class ServerRequest : IServerRequest
     /**
      * Base URL path.
      *
-     * @var string
      */
-    protected $base;
+    protected string $base;
 
     /**
      * webroot path segment for the request.
      *
-     * @var string
      */
-    protected $webroot = "/";
+    protected string $webroot = "/";
 
     /**
      * Whether to trust HTTP_X headers set by most load balancers.

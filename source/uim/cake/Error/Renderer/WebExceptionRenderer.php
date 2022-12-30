@@ -73,16 +73,14 @@ class WebExceptionRenderer : ExceptionRendererInterface
     /**
      * Template to render for {@link uim.cake.Core\exceptions.CakeException}
      *
-     * @var string
      */
-    protected $template = "";
+    protected string $template = "";
 
     /**
      * The method corresponding to the Exception this object is for.
      *
-     * @var string
      */
-    protected $method = "";
+    protected string $method = "";
 
     /**
      * If set, this will be request used to create the controller that will render

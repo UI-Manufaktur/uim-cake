@@ -37,16 +37,14 @@ class EncryptedCookieMiddleware : IMiddleware
     /**
      * Encryption key to use.
      *
-     * @var string
      */
-    protected $key;
+    protected string $key;
 
     /**
      * Encryption type.
      *
-     * @var string
      */
-    protected $cipherType;
+    protected string $cipherType;
 
     /**
      * Constructor

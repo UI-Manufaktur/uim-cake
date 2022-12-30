@@ -22,9 +22,8 @@ class QueryExpression : IExpression, Countable
      * String to be used for joining each of the internal expressions
      * this object internally stores for example "AND", "OR", etc.
      *
-     * @var string
      */
-    protected $_conjunction;
+    protected string $_conjunction;
 
     /**
      * A list of strings or other expression objects that represent the "branches" of

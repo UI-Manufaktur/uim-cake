@@ -25,9 +25,8 @@ class CachedCollection : ICollection
     /**
      * The cache key prefix
      *
-     * @var string
      */
-    protected $prefix;
+    protected string $prefix;
 
     /**
      * Constructor.

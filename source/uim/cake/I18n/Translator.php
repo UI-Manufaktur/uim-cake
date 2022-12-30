@@ -37,9 +37,8 @@ class Translator
     /**
      * The locale being used for translations.
      *
-     * @var string
      */
-    protected $locale;
+    protected string $locale;
 
     /**
      * The Package containing keys and translations.
