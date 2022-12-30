@@ -6,7 +6,6 @@
 
  * @since         3.3.0
   */
-
 module uim.cake.Http;
 
 import uim.cake.consoles.CommandCollection;

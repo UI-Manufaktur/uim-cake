@@ -11,8 +11,7 @@
 
  * @link          https://cakephp.org CakePHP Project
  * @since         3.3.0
-  */
-module uim.cake.events.Decorator;
+  */module uim.cake.events.Decorator;
 
 /**
  * Common base class for event decorator subclasses.

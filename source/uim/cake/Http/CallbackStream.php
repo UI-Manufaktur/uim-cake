@@ -5,8 +5,7 @@
 
 
  * @since         3.3.4
-  */
-module uim.cake.Http;
+  */module uim.cake.Http;
 
 use Laminas\Diactoros\CallbackStream as BaseCallbackStream;
 

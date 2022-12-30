@@ -5,8 +5,7 @@
 
 
  * @since         4.4.0
-  */
-module uim.cake.errors.Renderer;
+  */module uim.cake.errors.Renderer;
 
 use Throwable;
 

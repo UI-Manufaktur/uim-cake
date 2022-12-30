@@ -5,8 +5,7 @@
 
 
  * @since         2.1.0
-  */
-module uim.cake.Event;
+  */module uim.cake.Event;
 
 /**
  * Objects implementing this interface should declare the `implementedEvents()` method

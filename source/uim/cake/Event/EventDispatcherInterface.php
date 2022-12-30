@@ -5,8 +5,7 @@
 
 
  * @since         3.0.7
-  */
-module uim.cake.Event;
+  */module uim.cake.Event;
 
 /**
  * Objects implementing this interface can emit events.

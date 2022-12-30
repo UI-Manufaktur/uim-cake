@@ -5,8 +5,7 @@
 
 
  * @since         3.3.0
-  */
-module uim.cake.Event;
+  */module uim.cake.Event;
 
 use ArrayAccess;
 use Countable;

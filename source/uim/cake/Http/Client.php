@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.Http;
+  */module uim.cake.Http;
 
 import uim.cake.core.App;
 import uim.cake.core.exceptions.CakeException;

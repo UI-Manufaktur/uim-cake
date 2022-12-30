@@ -5,8 +5,7 @@
 
 
  * @since         2.1.0
-  */
-module uim.cake.Event;
+  */module uim.cake.Event;
 
 import uim.cake.core.exceptions.CakeException;
 

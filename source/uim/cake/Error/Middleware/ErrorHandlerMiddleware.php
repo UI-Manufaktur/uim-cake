@@ -5,8 +5,7 @@
 
 
  * @since         3.3.0
-  */
-module uim.cake.errors.Middleware;
+  */module uim.cake.errors.Middleware;
 
 import uim.cake.core.App;
 import uim.cake.core.Configure;

@@ -5,8 +5,7 @@
 
  * @link          https://cakephp.org CakePHP Project
  * @since         4.4.0
-  */
-module uim.cake.errors.Renderer;
+  */module uim.cake.errors.Renderer;
 
 import uim.cake.controllers.Controller;
 import uim.cake.controllers.ControllerFactory;
