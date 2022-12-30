@@ -6,8 +6,7 @@
 
  * @since         3.6.0
 
- */
-module uim.cake.http.Middleware;
+ */module uim.cake.http.Middleware;
 
 import uim.cake.http.exceptions.BadRequestException;
 import uim.cake.utilities.exceptions.XmlException;

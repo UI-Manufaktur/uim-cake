@@ -6,8 +6,7 @@
 
  * @since         4.2.0
 
- */
-module uim.cake.http.Middleware;
+ */module uim.cake.http.Middleware;
 
 use ArrayAccess;
 import uim.cake.http.exceptions.InvalidCsrfTokenException;
