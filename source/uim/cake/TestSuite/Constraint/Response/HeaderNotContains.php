@@ -21,8 +21,7 @@ class HeaderNotContains : HeaderContains
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf(
             "is not in header "%s" (`%s`)",
             this.headerName,

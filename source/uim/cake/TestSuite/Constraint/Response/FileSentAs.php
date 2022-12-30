@@ -31,8 +31,7 @@ class FileSentAs : ResponseBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "file was sent";
     }
 }

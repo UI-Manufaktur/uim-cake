@@ -21,8 +21,7 @@ class CookieNotSet : CookieSet
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "cookie is not set";
     }
 }

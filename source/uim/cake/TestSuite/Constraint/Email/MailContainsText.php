@@ -15,8 +15,7 @@ class MailContainsText : MailContains
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         if (this.at) {
             return sprintf("is in the text message of email #%d", this.at) . this.getAssertedMessages();
         }

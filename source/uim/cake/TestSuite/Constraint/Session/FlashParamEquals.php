@@ -84,8 +84,7 @@ class FlashParamEquals : Constraint
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         if (this.at != null) {
             return sprintf("is in \"%s\" %s #%d", this.key, this.param, this.at);
         }

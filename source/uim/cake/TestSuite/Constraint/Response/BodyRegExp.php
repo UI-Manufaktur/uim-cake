@@ -21,8 +21,7 @@ class BodyRegExp : ResponseBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "PCRE pattern found in response body";
     }
 

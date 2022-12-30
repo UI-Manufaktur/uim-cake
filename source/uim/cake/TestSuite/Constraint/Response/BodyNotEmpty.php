@@ -21,8 +21,7 @@ class BodyNotEmpty : BodyEmpty
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "response body is not empty";
     }
 }

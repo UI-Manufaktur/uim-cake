@@ -21,8 +21,7 @@ class BodyNotRegExp : BodyRegExp
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "PCRE pattern not found in response body";
     }
 }

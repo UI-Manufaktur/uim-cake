@@ -21,8 +21,7 @@ class BodyNotEquals : BodyEquals
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "does not match response body";
     }
 }

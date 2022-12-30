@@ -45,8 +45,7 @@ class SessionHasKey : Constraint
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "is a path present in the session";
     }
 }

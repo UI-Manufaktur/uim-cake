@@ -21,8 +21,7 @@ class BodyEquals : ResponseBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "matches response body";
     }
 }

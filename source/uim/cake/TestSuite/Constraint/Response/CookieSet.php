@@ -28,8 +28,7 @@ class CookieSet : ResponseBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "cookie is set";
     }
 }

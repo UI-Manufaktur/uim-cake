@@ -64,8 +64,7 @@ class MailSubjectContains : MailConstraintBase
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         if (this.at) {
             return sprintf("is in an email subject #%d", this.at) . this.getAssertedMessages();
         }

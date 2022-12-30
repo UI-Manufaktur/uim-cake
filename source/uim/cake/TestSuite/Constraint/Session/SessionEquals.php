@@ -41,8 +41,7 @@ class SessionEquals : Constraint
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("is in session path \"%s\"", this.path);
     }
 }

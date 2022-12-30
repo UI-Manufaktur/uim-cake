@@ -15,8 +15,7 @@ class StatusFailure : StatusCodeBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("%d is between 500 and 505", this.response.getStatusCode());
     }
 }

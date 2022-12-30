@@ -21,8 +21,7 @@ class NoMailSent : MailConstraintBase
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         return "no emails were sent";
     }
 

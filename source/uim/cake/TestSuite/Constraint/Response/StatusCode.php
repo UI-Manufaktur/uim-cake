@@ -10,8 +10,7 @@ class StatusCode : StatusCodeBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("matches response status code `%d`", this.response.getStatusCode());
     }
 

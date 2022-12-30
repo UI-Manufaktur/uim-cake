@@ -56,8 +56,7 @@ class CookieEncryptedEquals : CookieEquals
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("is encrypted in cookie \"%s\"", this.cookieName);
     }
 

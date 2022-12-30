@@ -46,8 +46,7 @@ class CookieEquals : ResponseBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("is in cookie \"%s\"", this.cookieName);
     }
 }

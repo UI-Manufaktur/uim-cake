@@ -21,8 +21,7 @@ class BodyNotContains : BodyContains
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "is not in response body";
     }
 }

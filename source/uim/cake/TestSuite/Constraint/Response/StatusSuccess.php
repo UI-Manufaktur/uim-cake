@@ -15,8 +15,7 @@ class StatusSuccess : StatusCodeBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("%d is between 200 and 308", this.response.getStatusCode());
     }
 }

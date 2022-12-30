@@ -21,8 +21,7 @@ class MailCount : MailConstraintBase
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         return "emails were sent";
     }
 }

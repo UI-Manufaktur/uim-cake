@@ -10,8 +10,7 @@ class LayoutFileEquals : TemplateFileEquals
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("equals layout file `%s`", this.filename);
     }
 }

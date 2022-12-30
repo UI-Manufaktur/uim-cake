@@ -44,8 +44,7 @@ class BodyContains : ResponseBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return "is in response body";
     }
 }

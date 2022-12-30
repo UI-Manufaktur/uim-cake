@@ -21,8 +21,7 @@ class HeaderContains : HeaderEquals
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf(
             "is in header \"%s\" (`%s`)",
             this.headerName,

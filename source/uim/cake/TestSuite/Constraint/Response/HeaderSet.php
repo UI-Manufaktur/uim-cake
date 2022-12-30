@@ -39,8 +39,7 @@ class HeaderSet : ResponseBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("response has header \"%s\"", this.headerName);
     }
 

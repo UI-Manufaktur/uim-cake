@@ -21,8 +21,7 @@ class HeaderNotSet : HeaderSet
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("did not have header `%s`", this.headerName);
     }
 }

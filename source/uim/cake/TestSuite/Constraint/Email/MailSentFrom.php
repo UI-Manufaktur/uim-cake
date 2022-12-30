@@ -14,8 +14,7 @@ class MailSentFrom : MailSentWith
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         if (this.at) {
             return sprintf("sent email #%d", this.at);
         }
