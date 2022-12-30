@@ -84,10 +84,10 @@ class ConnectionManager
      * $dsn = "mysql://user:pass@localhost/database";
      * myConfig = ConnectionManager::parseDsn($dsn);
      *
-     * $dsn = "Cake\Database\Driver\Mysql://localhost:3306/database?className=Cake\Database\Connection";
+     * $dsn = "Cake\databases.Driver\Mysql://localhost:3306/database?className=Cake\databases.Connection";
      * myConfig = ConnectionManager::parseDsn($dsn);
      *
-     * $dsn = "Cake\Database\Connection://localhost:3306/database?driver=Cake\Database\Driver\Mysql";
+     * $dsn = "Cake\databases.Connection://localhost:3306/database?driver=Cake\databases.Driver\Mysql";
      * myConfig = ConnectionManager::parseDsn($dsn);
      * ```
      *

@@ -8,21 +8,21 @@ use Psr\SimpleCache\ICache;
  * This interface defines the methods you can depend on in
  * a connection.
  *
- * @method object getDriver() Gets the driver instance. {@see uim.cake.Database\Connnection::getDriver()}
- * @method this setLogger($logger) Set the current logger. {@see uim.cake.Database\Connnection::setLogger()}
+ * @method object getDriver() Gets the driver instance. {@see uim.cake.databases.Connnection::getDriver()}
+ * @method this setLogger($logger) Set the current logger. {@see uim.cake.databases.Connnection::setLogger()}
  * @method bool supportsDynamicConstraints() Returns whether the driver supports adding or dropping constraints to
- *   already created tables. {@see uim.cake.Database\Connnection::supportsDynamicConstraints()}
- * @method uim.cake.Database\Schema\Collection getSchemaCollection() Gets a Schema\Collection object for this connection.
- *    {@see uim.cake.Database\Connnection::getSchemaCollection()}
- * @method uim.cake.Database\Query newQuery() Create a new Query instance for this connection.
- *    {@see uim.cake.Database\Connnection::newQuery()}
- * @method uim.cake.Database\IStatement prepare(mySql) Prepares a SQL statement to be executed.
- *    {@see uim.cake.Database\Connnection::prepare()}
- * @method uim.cake.Database\IStatement execute(myQuery, myParams = [], array myTypes = []) Executes a query using
+ *   already created tables. {@see uim.cake.databases.Connnection::supportsDynamicConstraints()}
+ * @method uim.cake.databases.Schema\Collection getSchemaCollection() Gets a Schema\Collection object for this connection.
+ *    {@see uim.cake.databases.Connnection::getSchemaCollection()}
+ * @method uim.cake.databases.Query newQuery() Create a new Query instance for this connection.
+ *    {@see uim.cake.databases.Connnection::newQuery()}
+ * @method uim.cake.databases.IStatement prepare(mySql) Prepares a SQL statement to be executed.
+ *    {@see uim.cake.databases.Connnection::prepare()}
+ * @method uim.cake.databases.IStatement execute(myQuery, myParams = [], array myTypes = []) Executes a query using
  *   `myParams` for interpolating values and myTypes as a hint for each those params.
- *   {@see uim.cake.Database\Connnection::execute()}
- * @method uim.cake.Database\IStatement query(string mySql) Executes a SQL statement and returns the Statement
- *   object as result. {@see uim.cake.Database\Connnection::query()}
+ *   {@see uim.cake.databases.Connnection::execute()}
+ * @method uim.cake.databases.IStatement query(string mySql) Executes a SQL statement and returns the Statement
+ *   object as result. {@see uim.cake.databases.Connnection::query()}
  */
 interface IConnection : ILoggerAware {
     /**

@@ -393,7 +393,7 @@ class Marshaller
         if (!empty($conditions)) {
             myQuery = myTarget.find();
             myQuery.andWhere(function ($exp) use ($conditions) {
-                /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                /** @var uim.cake.databases.Expression\QueryExpression $exp */
                 return $exp.or($conditions);
             });
 

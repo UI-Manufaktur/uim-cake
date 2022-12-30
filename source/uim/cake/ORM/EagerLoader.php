@@ -594,8 +594,8 @@ class EagerLoader
      *
      * @param uim.cake.orm.Query $query The query for which to eager load external
      * associations
-     * @param uim.cake.Database\StatementInterface $statement The statement created after executing the $query
-     * @return uim.cake.Database\StatementInterface statement modified statement with extra loaders
+     * @param uim.cake.databases.StatementInterface $statement The statement created after executing the $query
+     * @return uim.cake.databases.StatementInterface statement modified statement with extra loaders
      * @throws \RuntimeException
      */
     function loadExternal(Query $query, StatementInterface $statement): StatementInterface
@@ -752,7 +752,7 @@ class EagerLoader
      *
      * @param array<uim.cake.orm.EagerLoadable> $external the list of external associations to be loaded
      * @param uim.cake.orm.Query $query The query from which the results where generated
-     * @param uim.cake.Database\StatementInterface $statement The statement to work on
+     * @param uim.cake.databases.StatementInterface $statement The statement to work on
      * @return array
      */
     protected function _collectKeys(array $external, Query $query, $statement): array
@@ -791,7 +791,7 @@ class EagerLoader
      * Helper function used to iterate a statement and extract the columns
      * defined in $collectKeys
      *
-     * @param uim.cake.Database\Statement\BufferedStatement $statement The statement to read from.
+     * @param uim.cake.databases.Statement\BufferedStatement $statement The statement to read from.
      * @param array<string, array> $collectKeys The keys to collect
      * @return array
      */

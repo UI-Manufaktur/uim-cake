@@ -8,7 +8,7 @@ interface IExpression {
     /**
      * Converts the Node into a SQL string fragment.
      *
-     * @param uim.cake.Database\ValueBinder $binder Parameter binder
+     * @param uim.cake.databases.ValueBinder $binder Parameter binder
      */
     string sql(ValueBinder $binder);
 

@@ -13,9 +13,9 @@ module uim.cake.Datasource;
  * The basis for every query object
  *
  * @method this andWhere($conditions, array $types = []) Connects any previously defined set of conditions to the
- *   provided list using the AND operator. {@see uim.cake.Database\Query::andWhere()}
+ *   provided list using the AND operator. {@see uim.cake.databases.Query::andWhere()}
  * @method uim.cake.Datasource\EntityInterface|array firstOrFail() Get the first result from the executing query or raise an exception.
- *   {@see uim.cake.Database\Query::firstOrFail()}
+ *   {@see uim.cake.databases.Query::firstOrFail()}
  */
 interface IQuery
 {
@@ -28,7 +28,7 @@ interface IQuery
      * If `true` is passed in the second argument, any previous selections will
      * be overwritten with the list passed in the first argument.
      *
-     * @param uim.cake.Database\IExpression|uim.cake.orm.Association|uim.cake.orm.Table|callable|array|string $fields Fields.
+     * @param uim.cake.databases.IExpression|uim.cake.orm.Association|uim.cake.orm.Table|callable|array|string $fields Fields.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */
@@ -164,7 +164,7 @@ interface IQuery
      * $query.limit($query.newExpr().add(["1 + 1"])); // LIMIT (1 + 1)
      * ```
      *
-     * @param uim.cake.Database\IExpression|int|null $limit number of records to be returned
+     * @param uim.cake.databases.IExpression|int|null $limit number of records to be returned
      * @return this
      */
     function limit($limit);
@@ -184,7 +184,7 @@ interface IQuery
      *  $query.offset($query.newExpr().add(["1 + 1"])); // OFFSET (1 + 1)
      * ```
      *
-     * @param uim.cake.Database\IExpression|int|null $offset number of records to be skipped
+     * @param uim.cake.databases.IExpression|int|null $offset number of records to be skipped
      * @return this
      */
     function offset($offset);
@@ -234,7 +234,7 @@ interface IQuery
      * If you need to set complex expressions as order conditions, you
      * should use `orderAsc()` or `orderDesc()`.
      *
-     * @param uim.cake.Database\IExpression|\Closure|array|string $fields fields to be added to the list
+     * @param uim.cake.databases.IExpression|\Closure|array|string $fields fields to be added to the list
      * @param bool $overwrite whether to reset order with field list or not
      * @return this
      */
@@ -309,7 +309,7 @@ interface IQuery
      * `WHERE posted >= 2012-01-27 AND title LIKE "Hello W%" AND author_id = 1`
      *
      * Second parameter is used to specify what type is expected for each passed
-     * key. Valid types can be used from the mapped with Database\Type class.
+     * key. Valid types can be used from the mapped with databases.Type class.
      *
      * ### Nesting conditions with conjunctions:
      *

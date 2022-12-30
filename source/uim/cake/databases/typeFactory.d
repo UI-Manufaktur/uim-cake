@@ -13,7 +13,7 @@ class TypeFactory
      * representing the class that will do actual type conversions.
      *
      * @var array<string, string>
-     * @psalm-var array<string, class-string<uim.cake.Database\IType>>
+     * @psalm-var array<string, class-string<uim.cake.databases.IType>>
      */
     protected static $_types = [
         "tinyinteger": Type\IntegerType::class,
@@ -42,7 +42,7 @@ class TypeFactory
     /**
      * Contains a map of type object instances to be reused if needed.
      *
-     * @var array<uim.cake.Database\IType>
+     * @var array<uim.cake.databases.IType>
      */
     protected static $_builtTypes = [];
 
@@ -51,7 +51,7 @@ class TypeFactory
      *
      * @param string myName type identifier
      * @throws \InvalidArgumentException If type identifier is unknown
-     * @return uim.cake.Database\IType
+     * @return uim.cake.databases.IType
      */
     static function build(string myName): IType
     {
@@ -68,7 +68,7 @@ class TypeFactory
     /**
      * Returns an arrays with all the mapped type objects, indexed by name.
      *
-     * @return array<uim.cake.Database\IType>
+     * @return array<uim.cake.databases.IType>
      */
     static array buildAll() {
         myResult = [];
@@ -83,7 +83,7 @@ class TypeFactory
      * Set IType instance capable of converting a type identified by myName
      *
      * @param string myName The type identifier you want to set.
-     * @param uim.cake.Database\IType $instance The type instance you want to set.
+     * @param uim.cake.databases.IType $instance The type instance you want to set.
      */
     static void set(string myName, IType $instance) {
         static::$_builtTypes[myName] = $instance;
@@ -95,7 +95,7 @@ class TypeFactory
      *
      * @param string myType Name of type to map.
      * @param string myClassName The classname to register.
-     * @psalm-param class-string<uim.cake.Database\IType> myClassName
+     * @psalm-param class-string<uim.cake.databases.IType> myClassName
      */
     static void map(string myType, string myClassName) {
         static::$_types[myType] = myClassName;
@@ -106,7 +106,7 @@ class TypeFactory
      * Set type to classname mapping.
      *
      * @param $map List of types to be mapped.
-     * @psalm-param array<string, class-string<uim.cake.Database\IType>> $map
+     * @psalm-param array<string, class-string<uim.cake.databases.IType>> $map
      */
     static void setMap(string[] $map) {
         static::$_types = $map;

@@ -157,7 +157,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Constructor
      *
-     * @param uim.cake.Database\Connection $connection The connection object
+     * @param uim.cake.databases.Connection $connection The connection object
      * @param uim.cake.orm.Table $table The table this query is starting on
      */
     this(Connection $connection, Table $table) {
@@ -204,7 +204,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * all the fields in the schema of the table or the association will be added to
      * the select clause.
      *
-     * @param uim.cake.Database\IExpression|uim.cake.orm.Table|uim.cake.orm.Association|callable|array|string $fields Fields
+     * @param uim.cake.databases.IExpression|uim.cake.orm.Table|uim.cake.orm.Association|callable|array|string $fields Fields
      * to be added to the list.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
@@ -468,7 +468,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * the query.
      *
      * @param uim.cake.orm.Table $table The table instance to pluck associations from.
-     * @param uim.cake.Database\TypeMap $typeMap The typemap to check for columns in.
+     * @param uim.cake.databases.TypeMap $typeMap The typemap to check for columns in.
      *   This typemap is indirectly mutated via {@link uim.cake.orm.Query::addDefaultTypes()}
      * @param array<string, array> $associations The nested tree of associations to walk.
      */
@@ -1119,7 +1119,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * It also sets the default types for the columns in the select clause
      *
-     * @see uim.cake.Database\Query::execute()
+     * @see uim.cake.databases.Query::execute()
      */
     protected void _transformQuery(): void
     {
@@ -1220,7 +1220,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * This changes the query type to be "update".
      * Can be combined with set() and where() methods to create update queries.
      *
-     * @param uim.cake.Database\IExpression|string|null $table Unused parameter.
+     * @param uim.cake.databases.IExpression|string|null $table Unused parameter.
      * @return this
      */
     function update($table = null) {

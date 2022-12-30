@@ -12,7 +12,7 @@ class FunctionsBuilder {
     /**
      * Returns a FunctionExpression representing a call to SQL RAND function.
      *
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function rand(): FunctionExpression {
         return new FunctionExpression("RAND", [], [], "float");
@@ -21,9 +21,9 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL SUM function.
      *
-     * @param uim.cake.Database\IExpression|string expression the function argument
+     * @param uim.cake.databases.IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\AggregateExpression
+     * @return uim.cake.databases.Expression\AggregateExpression
      */
     function sum($expression, myTypes = []): AggregateExpression
     {
@@ -38,9 +38,9 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL AVG function.
      *
-     * @param uim.cake.Database\IExpression|string expression the function argument
+     * @param uim.cake.databases.IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\AggregateExpression
+     * @return uim.cake.databases.Expression\AggregateExpression
      */
     function avg($expression, myTypes = []): AggregateExpression
     {
@@ -50,9 +50,9 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL MAX function.
      *
-     * @param uim.cake.Database\IExpression|string expression the function argument
+     * @param uim.cake.databases.IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\AggregateExpression
+     * @return uim.cake.databases.Expression\AggregateExpression
      */
     function max($expression, myTypes = []): AggregateExpression
     {
@@ -62,9 +62,9 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL MIN function.
      *
-     * @param uim.cake.Database\IExpression|string expression the function argument
+     * @param uim.cake.databases.IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\AggregateExpression
+     * @return uim.cake.databases.Expression\AggregateExpression
      */
     function min($expression, myTypes = []): AggregateExpression
     {
@@ -74,9 +74,9 @@ class FunctionsBuilder {
     /**
      * Returns a AggregateExpression representing a call to SQL COUNT function.
      *
-     * @param uim.cake.Database\IExpression|string expression the function argument
+     * @param uim.cake.databases.IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\AggregateExpression
+     * @return uim.cake.databases.Expression\AggregateExpression
      */
     function count($expression, myTypes = []): AggregateExpression
     {
@@ -88,7 +88,7 @@ class FunctionsBuilder {
      *
      * @param array $args List of strings or expressions to concatenate
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function concat(array $args, array myTypes = []): FunctionExpression
     {
@@ -100,7 +100,7 @@ class FunctionsBuilder {
      *
      * @param array $args List of expressions to evaluate as function parameters
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function coalesce(array $args, array myTypes = []): FunctionExpression
     {
@@ -113,9 +113,9 @@ class FunctionsBuilder {
      * The `myType` parameter is a SQL type. The return type for the returned expression
      * is the default type name. Use `setReturnType()` to update it.
      *
-     * @param uim.cake.Database\IExpression|string myField Field or expression to cast.
+     * @param uim.cake.databases.IExpression|string myField Field or expression to cast.
      * @param string myType The SQL data type
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function cast(myField, string myType = ""): FunctionExpression
     {
@@ -144,7 +144,7 @@ class FunctionsBuilder {
      *
      * @param array $args List of expressions to obtain the difference in days.
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function dateDiff(array $args, array myTypes = []): FunctionExpression
     {
@@ -155,9 +155,9 @@ class FunctionsBuilder {
      * Returns the specified date part from the SQL expression.
      *
      * @param string part Part of the date to return.
-     * @param uim.cake.Database\IExpression|string expression Expression to obtain the date part from.
+     * @param uim.cake.databases.IExpression|string expression Expression to obtain the date part from.
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function datePart(string part, $expression, array myTypes = []): FunctionExpression
     {
@@ -168,9 +168,9 @@ class FunctionsBuilder {
      * Returns the specified date part from the SQL expression.
      *
      * @param string part Part of the date to return.
-     * @param uim.cake.Database\IExpression|string expression Expression to obtain the date part from.
+     * @param uim.cake.databases.IExpression|string expression Expression to obtain the date part from.
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function extract(string part, $expression, array myTypes = []): FunctionExpression
     {
@@ -183,11 +183,11 @@ class FunctionsBuilder {
     /**
      * Add the time unit to the date expression
      *
-     * @param uim.cake.Database\IExpression|string expression Expression to obtain the date part from.
+     * @param uim.cake.databases.IExpression|string expression Expression to obtain the date part from.
      * @param string|int myValue Value to be added. Use negative to subtract.
      * @param string unit Unit of the value e.g. hour or day.
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function dateAdd($expression, myValue, string unit, array myTypes = []): FunctionExpression
     {
@@ -205,9 +205,9 @@ class FunctionsBuilder {
      * Returns a FunctionExpression representing a call to SQL WEEKDAY function.
      * 1 - Sunday, 2 - Monday, 3 - Tuesday...
      *
-     * @param uim.cake.Database\IExpression|string expression the function argument
+     * @param uim.cake.databases.IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function dayOfWeek($expression, myTypes = []): FunctionExpression
     {
@@ -218,9 +218,9 @@ class FunctionsBuilder {
      * Returns a FunctionExpression representing a call to SQL WEEKDAY function.
      * 1 - Sunday, 2 - Monday, 3 - Tuesday...
      *
-     * @param uim.cake.Database\IExpression|string expression the function argument
+     * @param uim.cake.databases.IExpression|string expression the function argument
      * @param array myTypes list of types to bind to the arguments
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function weekday($expression, myTypes = []): FunctionExpression
     {
@@ -233,7 +233,7 @@ class FunctionsBuilder {
      * make it generate only the date or only the time.
      *
      * @param string myType (datetime|date|time)
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     function now(string myType = "datetime"): FunctionExpression
     {
@@ -253,7 +253,7 @@ class FunctionsBuilder {
     /**
      * Returns an AggregateExpression representing call to SQL ROW_NUMBER().
      *
-     * @return uim.cake.Database\Expression\AggregateExpression
+     * @return uim.cake.databases.Expression\AggregateExpression
      */
     function rowNumber(): AggregateExpression
     {
@@ -263,11 +263,11 @@ class FunctionsBuilder {
     /**
      * Returns an AggregateExpression representing call to SQL LAG().
      *
-     * @param uim.cake.Database\IExpression|string expression The value evaluated at offset
+     * @param uim.cake.databases.IExpression|string expression The value evaluated at offset
      * @param int $offset The row offset
      * @param mixed $default The default value if offset doesn"t exist
      * @param string myType The output type of the lag expression. Defaults to float.
-     * @return uim.cake.Database\Expression\AggregateExpression
+     * @return uim.cake.databases.Expression\AggregateExpression
      */
     function lag($expression, int $offset, $default = null, myType = null): AggregateExpression
     {
@@ -287,11 +287,11 @@ class FunctionsBuilder {
     /**
      * Returns an AggregateExpression representing call to SQL LEAD().
      *
-     * @param uim.cake.Database\IExpression|string expression The value evaluated at offset
+     * @param uim.cake.databases.IExpression|string expression The value evaluated at offset
      * @param int $offset The row offset
      * @param mixed $default The default value if offset doesn"t exist
      * @param string myType The output type of the lead expression. Defaults to float.
-     * @return uim.cake.Database\Expression\AggregateExpression
+     * @return uim.cake.databases.Expression\AggregateExpression
      */
     function lead($expression, int $offset, $default = null, myType = null): AggregateExpression
     {
@@ -318,7 +318,7 @@ class FunctionsBuilder {
      * @param array myTypes Array of types that match the names used in `myParams`:
      *     `["name":"type"]`
      * @param string return Return type of the entire expression. Defaults to float.
-     * @return uim.cake.Database\Expression\AggregateExpression
+     * @return uim.cake.databases.Expression\AggregateExpression
      */
     function aggregate(string myName, array myParams = [], array myTypes = [], string return = "float") {
         return new AggregateExpression(myName, myParams, myTypes, $return);
@@ -331,7 +331,7 @@ class FunctionsBuilder {
      * @param array $args list with up to 3 arguments, first one being an array with
      * parameters for the SQL function, the second one a list of types to bind to those
      * params, and the third one the return type of the function
-     * @return uim.cake.Database\Expression\FunctionExpression
+     * @return uim.cake.databases.Expression\FunctionExpression
      */
     auto __call(string myName, array $args): FunctionExpression
     {
@@ -341,8 +341,8 @@ class FunctionsBuilder {
     /**
      * Creates function parameter array from expression or string literal.
      *
-     * @param uim.cake.Database\IExpression|string expression function argument
-     * @return array<uim.cake.Database\IExpression|string>
+     * @param uim.cake.databases.IExpression|string expression function argument
+     * @return array<uim.cake.databases.IExpression|string>
      */
     protected auto toLiteralParam($expression) {
         if (is_string($expression)) {

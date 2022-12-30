@@ -66,7 +66,7 @@ class LazyEagerLoader
             .select((array)$primaryKey)
             .where(function ($exp, $q) use ($primaryKey, myKeys, $source) {
                 /**
-                 * @var uim.cake.Database\Expression\QueryExpression $exp
+                 * @var uim.cake.databases.Expression\QueryExpression $exp
                  * @var uim.cake.orm.Query $q
                  */
                 if (is_array($primaryKey) && count($primaryKey) == 1) {

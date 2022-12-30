@@ -27,8 +27,8 @@ specify a driver to use:
 import uim.cake.datasources.ConnectionManager;
 
 ConnectionManager::setConfig("default", [
-	"className": uim.cake.Database\Connection::class,
-	"driver": uim.cake.Database\Driver\Mysql::class,
+	"className": uim.cake.databases.Connection::class,
+	"driver": uim.cake.databases.Driver\Mysql::class,
 	"database": "test",
 	"username": "root",
 	"password": "secret",

@@ -34,8 +34,8 @@ class SqlserverCompiler : QueryCompiler
      * keyword that is neither required nor valid.
      *
      * @param array $parts List of CTEs to be transformed to string
-     * @param uim.cake.Database\Query myQuery The query that is being compiled
-     * @param uim.cake.Database\ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.Query myQuery The query that is being compiled
+     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
      * @return string
      */
     protected string _buildWithPart(array $parts, Query myQuery, ValueBinder $binder) {
@@ -55,8 +55,8 @@ class SqlserverCompiler : QueryCompiler
      * row"s data back.
      *
      * @param array $parts The parts to build
-     * @param uim.cake.Database\Query myQuery The query that is being compiled
-     * @param uim.cake.Database\ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.Query myQuery The query that is being compiled
+     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
      * @return string
      */
     protected string _buildInsertPart(array $parts, Query myQuery, ValueBinder $binder) {
@@ -82,7 +82,7 @@ class SqlserverCompiler : QueryCompiler
      * Generates the LIMIT part of a SQL query
      *
      * @param int $limit the limit clause
-     * @param uim.cake.Database\Query myQuery The query that is being compiled
+     * @param uim.cake.databases.Query myQuery The query that is being compiled
      * @return string
      */
     protected string _buildLimitPart(int $limit, Query myQuery) {
@@ -99,8 +99,8 @@ class SqlserverCompiler : QueryCompiler
      * converting expression objects to string.
      *
      * @param array $parts list of fields to be transformed to string
-     * @param uim.cake.Database\Query myQuery The query that is being compiled
-     * @param uim.cake.Database\ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.Query myQuery The query that is being compiled
+     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
      * @return string
      */
     protected auto _buildHavingPart($parts, myQuery, $binder) {
