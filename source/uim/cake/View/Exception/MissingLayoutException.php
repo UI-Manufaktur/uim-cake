@@ -9,8 +9,7 @@
  *
 
 
-  */
-module uim.cake.View\Exception;
+  */module uim.cake.View\Exception;
 
 /**
  * Used when a layout file cannot be found.

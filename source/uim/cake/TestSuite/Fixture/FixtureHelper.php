@@ -5,8 +5,7 @@
 
 
  * @since         4.3.0
-  */
-module uim.cake.TestSuite\Fixture;
+  */module uim.cake.TestSuite\Fixture;
 
 import uim.cake.core.Configure;
 import uim.cake.core.exceptions.CakeException;

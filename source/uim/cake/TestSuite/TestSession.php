@@ -13,8 +13,7 @@
 
 
  * @since         4.0.5
-  */
-module uim.cake.TestSuite;
+  */module uim.cake.TestSuite;
 
 import uim.cake.utilities.Hash;
 

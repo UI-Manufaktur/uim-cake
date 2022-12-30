@@ -10,8 +10,7 @@
  *
 
  * @since         3.3.0
-  */
-module uim.cake.TestSuite;
+  */module uim.cake.TestSuite;
 
 import uim.cake.core.IHttpApplication;
 import uim.cake.core.IPluginApplication;

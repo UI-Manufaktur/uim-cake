@@ -11,8 +11,7 @@
 
  * @since         3.7.0
 
- */
-module uim.cake.TestSuite\Constraint\Response;
+ */module uim.cake.TestSuite\Constraint\Response;
 
 import uim.cake.http.Response;
 

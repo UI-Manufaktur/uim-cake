@@ -6,8 +6,7 @@
 
  * @since         0.10.0
 
- */
-module uim.cake.View;
+ */module uim.cake.View;
 
 import uim.cake.caches.Cache;
 import uim.cake.core.App;

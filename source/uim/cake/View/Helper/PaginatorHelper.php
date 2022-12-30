@@ -5,8 +5,7 @@
 
 
  * @since         1.2.0
-  */
-module uim.cake.View\Helper;
+  */module uim.cake.View\Helper;
 
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Inflector;

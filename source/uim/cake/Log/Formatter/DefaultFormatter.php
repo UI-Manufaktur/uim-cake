@@ -11,8 +11,7 @@
 
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         4.3.0
-  */
-module uim.cake.logs.Formatter;
+  */module uim.cake.logs.Formatter;
 
 use DateTime;
 

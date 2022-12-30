@@ -5,8 +5,7 @@
 
 
  * @since         0.10.3
-  */
-module uim.cake.Utility;
+  */module uim.cake.Utility;
 
 import uim.cake.utilities.exceptions.XmlException;
 use Closure;

@@ -5,8 +5,7 @@
 
 
  * @since         2.5.0
-  */
-module uim.cake.Shell\Task;
+  */module uim.cake.Shell\Task;
 
 import uim.cake.consoles.Shell;
 import uim.cake.core.App;

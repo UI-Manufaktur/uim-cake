@@ -5,8 +5,7 @@
 
 
  * @since         3.0
-  */
-module uim.cake.View;
+  */module uim.cake.View;
 
 /**
  * A view class that is used for AJAX responses.

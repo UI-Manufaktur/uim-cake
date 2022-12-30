@@ -5,8 +5,7 @@
 
 
  * @since         1.2.0
-  */
-module uim.cake.Network;
+  */module uim.cake.Network;
 
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.InstanceConfigTrait;

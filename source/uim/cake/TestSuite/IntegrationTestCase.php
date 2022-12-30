@@ -10,8 +10,7 @@
  *
 
 
-  */
-module uim.cake.TestSuite;
+  */module uim.cake.TestSuite;
 
 /**
  * A test case class intended to make integration tests of

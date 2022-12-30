@@ -5,8 +5,7 @@
 
 
  * @since         4.3.0
-  */
-module uim.cake.TestSuite\Fixture;
+  */module uim.cake.TestSuite\Fixture;
 
 /**
  * Base interface for strategies used to manage fixtures for TestCase.

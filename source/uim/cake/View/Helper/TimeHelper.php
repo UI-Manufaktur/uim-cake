@@ -5,8 +5,7 @@
 
 
  * @since         0.10.0
-  */
-module uim.cake.View\Helper;
+  */module uim.cake.View\Helper;
 
 import uim.cake.I18n\FrozenTime;
 import uim.cake.View\Helper;

@@ -5,8 +5,7 @@
 
 
  * @since         3.0.3
-  */
-module uim.cake.Validation;
+  */module uim.cake.Validation;
 
 import uim.cake.events.EventDispatcherInterface;
 use RuntimeException;

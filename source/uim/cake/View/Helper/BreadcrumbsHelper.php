@@ -5,8 +5,7 @@
 
 
  * @since         3.3.6
-  */
-module uim.cake.View\Helper;
+  */module uim.cake.View\Helper;
 
 import uim.cake.View\Helper;
 import uim.cake.View\StringTemplateTrait;

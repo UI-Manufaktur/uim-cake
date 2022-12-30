@@ -5,8 +5,7 @@
 
 
  * @since         3.2.9
-  */
-module uim.cake.orm.Rule;
+  */module uim.cake.orm.Rule;
 
 import uim.cake.datasources.EntityInterface;
 import uim.cake.Validation\Validation;

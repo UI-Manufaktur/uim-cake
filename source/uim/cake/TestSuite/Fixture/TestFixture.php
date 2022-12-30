@@ -10,8 +10,7 @@
  *
 
  * @since         1.2.0
-  */
-module uim.cake.TestSuite\Fixture;
+  */module uim.cake.TestSuite\Fixture;
 
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.databases.ConstraintsInterface;

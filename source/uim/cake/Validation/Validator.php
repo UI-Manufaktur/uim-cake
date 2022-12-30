@@ -5,8 +5,7 @@
 
 
  * @since         2.2.0
-  */
-module uim.cake.Validation;
+  */module uim.cake.Validation;
 
 use ArrayAccess;
 use ArrayIterator;

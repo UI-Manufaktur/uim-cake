@@ -13,8 +13,7 @@
 
 
  * @since         2.0.0
-  */
-module uim.cake.TestSuite;
+  */module uim.cake.TestSuite;
 
 import uim.cake.filesystems.Filesystem;
 use PHPUnit\Framework\TestSuite as BaseTestSuite;

@@ -9,8 +9,7 @@
  *
 
 
-  */
-module uim.cake.Network\Exception;
+  */module uim.cake.Network\Exception;
 
 import uim.cake.core.exceptions.CakeException;
 

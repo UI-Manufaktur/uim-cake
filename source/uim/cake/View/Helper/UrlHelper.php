@@ -1,4 +1,3 @@
-
 module uim.cake.View\Helper;
 
 import uim.cake.core.App;

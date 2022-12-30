@@ -10,8 +10,7 @@
  * @copyright     Copyright (c), Cake Software Foundation, Inc. (https://cakefoundation.org)
 
 
-  */
-module uim.cake.View;
+  */module uim.cake.View;
 
 import uim.cake.events.EventDispatcherInterface;
 

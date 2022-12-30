@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.Utility;
+  */module uim.cake.Utility;
 
 /**
  * Provides features for merging object properties recursively with

@@ -1,4 +1,3 @@
-
 module uim.cake.View\Widget;
 
 import uim.cake.databases.schemas.TableSchema;

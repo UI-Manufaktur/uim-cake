@@ -1,4 +1,3 @@
-
 module uim.cake.Mailer;
 
 use BadMethodCallException;

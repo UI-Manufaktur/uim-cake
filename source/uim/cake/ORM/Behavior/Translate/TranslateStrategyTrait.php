@@ -1,4 +1,3 @@
-
 module uim.cake.orm.Behavior\Translate;
 
 import uim.cake.datasources.EntityInterface;

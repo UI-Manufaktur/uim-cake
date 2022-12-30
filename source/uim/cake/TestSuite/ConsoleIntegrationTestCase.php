@@ -11,8 +11,7 @@
 
 
 
- */
-module uim.cake.TestSuite;
+ */module uim.cake.TestSuite;
 
 import uim.cake.consoles.TestSuite\ConsoleIntegrationTestTrait;
 

@@ -1,4 +1,3 @@
-
 module uim.cakeuting.router;
 
 @safe:

@@ -5,8 +5,7 @@
 
 
  * @since         1.3.0
-  */
-module uim.cake.routings.Route;
+  */module uim.cake.routings.Route;
 
 /**
  * Plugin short route, that copies the plugin param to the controller parameters

@@ -1,4 +1,3 @@
-
 module uim.cake.views;
 
 import uim.cake.core.InstanceConfigTrait;

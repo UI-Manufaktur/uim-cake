@@ -9,8 +9,7 @@
  *
 
 
-  */
-module uim.cake.Mailer;
+  */module uim.cake.Mailer;
 
 use BadMethodCallException;
 import uim.cake.core.exceptions.CakeException;

@@ -5,8 +5,7 @@
 
 
  * @since         4.2.0
-  */
-module uim.cake.TestSuite\Constraint\Email;
+  */module uim.cake.TestSuite\Constraint\Email;
 
 use InvalidArgumentException;
 

@@ -5,8 +5,7 @@
 
 
  * @since         1.2.0
-  */
-module uim.cake.Utility;
+  */module uim.cake.Utility;
 
 import uim.cake.core.exceptions.CakeException;
 use InvalidArgumentException;

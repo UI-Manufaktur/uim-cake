@@ -9,8 +9,7 @@
  *
 
  * @since         3.4.0
-  */
-module uim.cake.orm.Exception;
+  */module uim.cake.orm.Exception;
 
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.datasources.EntityInterface;

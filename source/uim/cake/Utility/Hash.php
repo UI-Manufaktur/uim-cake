@@ -4,8 +4,7 @@
  *
 
  * @since         2.2.0
-  */
-module uim.cake.Utility;
+  */module uim.cake.Utility;
 
 use ArrayAccess;
 use InvalidArgumentException;

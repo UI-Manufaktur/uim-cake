@@ -5,8 +5,7 @@
 
 
  * @since         0.10.0
-  */
-module uim.cake.View\Helper;
+  */module uim.cake.View\Helper;
 
 import uim.cake.core.Configure;
 import uim.cake.core.exceptions.CakeException;

@@ -5,8 +5,7 @@
 
 
  * @since         4.3.0
-  */
-module uim.cake.TestSuite\Fixture;
+  */module uim.cake.TestSuite\Fixture;
 
 import uim.cake.logs.Log;
 import uim.cake.TestSuite\ConnectionHelper;

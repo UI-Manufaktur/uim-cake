@@ -5,8 +5,7 @@
 
 
  * @since         3.3.0
-  */
-module uim.cake.ORM;
+  */module uim.cake.ORM;
 
 use ArrayObject;
 use RuntimeException;

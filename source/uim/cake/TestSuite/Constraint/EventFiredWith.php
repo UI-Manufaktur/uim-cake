@@ -1,5 +1,4 @@
 
-
 module uim.cake.TestSuite\Constraint;
 
 import uim.cake.events.EventInterface;

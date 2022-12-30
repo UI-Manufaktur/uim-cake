@@ -1,4 +1,3 @@
-
 module uim.cake.View;
 
 use BadMethodCallException;

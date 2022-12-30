@@ -11,8 +11,7 @@
 
  * @since         3.2.0
 
- */
-module uim.cake.TestSuite\Constraint;
+ */module uim.cake.TestSuite\Constraint;
 
 import uim.cake.events.EventManager;
 use PHPUnit\Framework\AssertionFailedError;

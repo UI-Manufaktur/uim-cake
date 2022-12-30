@@ -1,4 +1,3 @@
-
 module uim.cake.Mailer\Transport;
 
 import uim.cake.Mailer\AbstractTransport;

@@ -5,8 +5,7 @@
 
  * @link          https://cakephp.org CakePHP Project
 
-  */
-module uim.cake.Shell\Helper;
+  */module uim.cake.Shell\Helper;
 
 import uim.cake.consoles.Helper;
 use RuntimeException;

@@ -1,4 +1,3 @@
-
 module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;

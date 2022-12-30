@@ -5,8 +5,7 @@
 
 
  * @since         3.4.0
-  */
-module uim.cake.orm.associations.Loader;
+  */module uim.cake.orm.associations.Loader;
 
 import uim.cake.orm.Query;
 use RuntimeException;

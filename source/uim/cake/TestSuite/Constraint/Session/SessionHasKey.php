@@ -11,8 +11,7 @@
 
  * @since         4.1.0
 
- */
-module uim.cake.TestSuite\Constraint\Session;
+ */module uim.cake.TestSuite\Constraint\Session;
 
 import uim.cake.utilities.Hash;
 use PHPUnit\Framework\Constraint\Constraint;

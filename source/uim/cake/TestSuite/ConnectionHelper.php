@@ -10,8 +10,7 @@
  *
 
  * @since         4.3.0
-  */
-module uim.cake.TestSuite;
+  */module uim.cake.TestSuite;
 
 import uim.cake.databases.Connection;
 import uim.cake.databases.DriverInterface;

@@ -5,8 +5,7 @@
 
 
  * @since         3.2.0
-  */
-module uim.cake.routings.Exception;
+  */module uim.cake.routings.Exception;
 
 import uim.cake.core.exceptions.CakeException;
 

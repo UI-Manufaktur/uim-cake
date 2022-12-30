@@ -9,8 +9,7 @@
  *
 
  * @since         3.3.1
-  */
-module uim.cake.routings.Exception;
+  */module uim.cake.routings.Exception;
 
 import uim.cake.core.exceptions.CakeException;
 use Throwable;

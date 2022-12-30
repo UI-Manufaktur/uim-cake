@@ -1,4 +1,3 @@
-
 module uim.cake.Shell\Helper;
 
 import uim.cake.consoles.Helper;

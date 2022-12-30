@@ -13,8 +13,7 @@
 
 
  * @since         2.0.0
-  */
-module uim.cake.Mailer\Transport;
+  */module uim.cake.Mailer\Transport;
 
 import uim.cake.Mailer\AbstractTransport;
 import uim.cake.Mailer\Message;

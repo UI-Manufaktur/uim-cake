@@ -5,8 +5,7 @@
 
 
  * @since         4.3.0
-  */
-module uim.cake.TestSuite\Fixture;
+  */module uim.cake.TestSuite\Fixture;
 
 /**
  * Fixture strategy that truncates all fixture ables at the end of test.

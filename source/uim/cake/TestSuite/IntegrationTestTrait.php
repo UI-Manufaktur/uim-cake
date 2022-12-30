@@ -10,8 +10,7 @@
  *
 
  * @since         3.7.0
-  */
-module uim.cake.TestSuite;
+  */module uim.cake.TestSuite;
 
 import uim.cake.controllers.Controller;
 import uim.cake.core.Configure;

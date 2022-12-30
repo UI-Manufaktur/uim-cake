@@ -5,8 +5,7 @@
 
 
  * @since         0.10.0
-  */
-module uim.cake.Utility;
+  */module uim.cake.Utility;
 
 import uim.cake.utilities.Crypto\OpenSsl;
 use InvalidArgumentException;
