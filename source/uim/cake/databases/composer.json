@@ -33,7 +33,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Cake\\Database\\": "."
+            "Cake\\databases.\": "."
         }
     }
 }

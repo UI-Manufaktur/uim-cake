@@ -1,1 +1,1 @@
-class_alias("Cake\Database\exceptions.DatabaseException", "Cake\Database\Exception");
+class_alias("Cake\databases.exceptions.DatabaseException", "Cake\databases.Exception");

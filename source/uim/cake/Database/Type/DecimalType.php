@@ -40,7 +40,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * Convert decimal strings into the database format.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
      * @return string|float|int|null
      * @throws \InvalidArgumentException
      */
@@ -71,7 +71,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
      * @return string|null
      */
     function toPHP($value, DriverInterface $driver): ?string
@@ -101,7 +101,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for decimal data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.Database\DriverInterface $driver The driver.
+     * @param uim.cake.databases.DriverInterface $driver The driver.
      * @return int
      */
     function toStatement($value, DriverInterface $driver): int

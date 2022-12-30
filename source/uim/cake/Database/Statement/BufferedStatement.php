@@ -26,14 +26,14 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * The decorated statement
      *
-     * @var uim.cake.Database\StatementInterface
+     * @var uim.cake.databases.StatementInterface
      */
     protected $statement;
 
     /**
      * The driver for the statement
      *
-     * @var uim.cake.Database\DriverInterface
+     * @var uim.cake.databases.DriverInterface
      */
     protected $_driver;
 
@@ -61,8 +61,8 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * Constructor
      *
-     * @param uim.cake.Database\StatementInterface $statement Statement implementation such as PDOStatement
-     * @param uim.cake.Database\DriverInterface $driver Driver instance
+     * @param uim.cake.databases.StatementInterface $statement Statement implementation such as PDOStatement
+     * @param uim.cake.databases.DriverInterface $driver Driver instance
      */
     this(StatementInterface $statement, DriverInterface $driver) {
         this.statement = $statement;
@@ -288,7 +288,7 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * Get the wrapped statement
      *
-     * @return uim.cake.Database\StatementInterface
+     * @return uim.cake.databases.StatementInterface
      */
     function getInnerStatement(): StatementInterface
     {

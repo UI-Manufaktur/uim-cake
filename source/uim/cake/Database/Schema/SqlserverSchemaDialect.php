@@ -81,7 +81,7 @@ class SqlserverSchemaDialect : SchemaDialect
      * Convert a column definition to the abstract types.
      *
      * The returned type will be a type that
-     * Cake\Database\TypeFactory  can handle.
+     * Cake\databases.TypeFactory  can handle.
      *
      * @param string $col The column type
      * @param int|null $length the column length
@@ -655,5 +655,5 @@ class SqlserverSchemaDialect : SchemaDialect
 
 // phpcs:disable
 // Add backwards compatible alias.
-class_alias("Cake\Database\Schema\SqlserverSchemaDialect", "Cake\Database\Schema\SqlserverSchema");
+class_alias("Cake\databases.Schema\SqlserverSchemaDialect", "Cake\databases.Schema\SqlserverSchema");
 // phpcs:enable

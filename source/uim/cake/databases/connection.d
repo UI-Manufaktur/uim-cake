@@ -23,7 +23,7 @@ class Connection : IConnection {
      * Driver object, responsible for creating the real connection
      * and provide specific SQL dialect.
      *
-     * @var uim.cake.Database\IDriver
+     * @var uim.cake.databases.IDriver
      */
     protected _driver;
 
@@ -63,7 +63,7 @@ class Connection : IConnection {
     /**
      * The schema collection object
      *
-     * @var uim.cake.Database\Schema\ICollection|null
+     * @var uim.cake.databases.Schema\ICollection|null
      */
     protected _schemaCollection;
 
@@ -71,7 +71,7 @@ class Connection : IConnection {
      * NestedTransactionRollbackException object instance, will be stored if
      * the rollback method is called in some nested transaction.
      *
-     * @var uim.cake.Database\exceptions.NestedTransactionRollbackException|null
+     * @var uim.cake.databases.exceptions.NestedTransactionRollbackException|null
      */
     protected nestedTransactionRollbackException;
 
@@ -126,15 +126,15 @@ class Connection : IConnection {
      * Sets the driver instance. If a string is passed it will be treated
      * as a class name and will be instantiated.
      *
-     * @param uim.cake.Database\IDriver|string myDriver The driver instance to use.
+     * @param uim.cake.databases.IDriver|string myDriver The driver instance to use.
      * @param array<string, mixed> myConfig Config for a new driver.
-     * @throws uim.cake.Database\exceptions.MissingDriverException When a driver class is missing.
-     * @throws uim.cake.Database\exceptions.MissingExtensionException When a driver"s PHP extension is missing.
+     * @throws uim.cake.databases.exceptions.MissingDriverException When a driver class is missing.
+     * @throws uim.cake.databases.exceptions.MissingExtensionException When a driver"s PHP extension is missing.
      * @return this
      */
     auto setDriver(myDriver, myConfig = []) {
         if (is_string(myDriver)) {
-            /** @psalm-var class-string<uim.cake.Database\IDriver>|null myClassName */
+            /** @psalm-var class-string<uim.cake.databases.IDriver>|null myClassName */
             myClassName = App::className(myDriver, "Database/Driver");
             if (myClassName is null) {
                 throw new MissingDriverException(["driver":myDriver]);
@@ -163,7 +163,7 @@ class Connection : IConnection {
     /**
      * Gets the driver instance.
      *
-     * @return uim.cake.Database\IDriver
+     * @return uim.cake.databases.IDriver
      */
     auto getDriver(): IDriver
     {
@@ -173,7 +173,7 @@ class Connection : IConnection {
     /**
      * Connects to the configured database.
      *
-     * @throws uim.cake.Database\exceptions.MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.databases.exceptions.MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
     bool connect() {
@@ -211,8 +211,8 @@ class Connection : IConnection {
     /**
      * Prepares a SQL statement to be executed.
      *
-     * @param uim.cake.Database\Query|string myQuery The SQL to convert into a prepared statement.
-     * @return uim.cake.Database\IStatement
+     * @param uim.cake.databases.Query|string myQuery The SQL to convert into a prepared statement.
+     * @return uim.cake.databases.IStatement
      */
     function prepare(myQuery): IStatement
     {
@@ -234,7 +234,7 @@ class Connection : IConnection {
      * @param string mySql SQL to be executed and interpolated with myParams
      * @param array myParams list or associative array of params to be interpolated in mySql as values
      * @param array myTypes list or associative array of types to be used for casting values in query
-     * @return uim.cake.Database\IStatement executed statement
+     * @return uim.cake.databases.IStatement executed statement
      */
     auto execute(string mySql, array myParams = [], array myTypes = []): IStatement
     {
@@ -253,8 +253,8 @@ class Connection : IConnection {
      * Compiles a Query object into a SQL string according to the dialect for this
      * connection"s driver
      *
-     * @param uim.cake.Database\Query myQuery The query to be compiled
-     * @param uim.cake.Database\ValueBinder $binder Value binder
+     * @param uim.cake.databases.Query myQuery The query to be compiled
+     * @param uim.cake.databases.ValueBinder $binder Value binder
      */
     string compileQuery(Query myQuery, ValueBinder $binder) {
         return this.getDriver().compileQuery(myQuery, $binder)[1];
@@ -264,8 +264,8 @@ class Connection : IConnection {
      * Executes the provided query after compiling it for the specific driver
      * dialect and returns the executed Statement object.
      *
-     * @param uim.cake.Database\Query myQuery The query to be executed
-     * @return uim.cake.Database\IStatement executed statement
+     * @param uim.cake.databases.Query myQuery The query to be executed
+     * @return uim.cake.databases.IStatement executed statement
      */
     function run(Query myQuery): IStatement
     {
@@ -282,7 +282,7 @@ class Connection : IConnection {
      * Executes a SQL statement and returns the Statement object as result.
      *
      * @param string mySql The SQL query to execute.
-     * @return uim.cake.Database\IStatement
+     * @return uim.cake.databases.IStatement
      */
     function query(string mySql): IStatement
     {
@@ -297,7 +297,7 @@ class Connection : IConnection {
     /**
      * Create a new Query instance for this connection.
      *
-     * @return uim.cake.Database\Query
+     * @return uim.cake.databases.Query
      */
     function newQuery(): Query
     {
@@ -307,7 +307,7 @@ class Connection : IConnection {
     /**
      * Sets a Schema\Collection object for this connection.
      *
-     * @param uim.cake.Database\Schema\ICollection myCollection The schema collection object
+     * @param uim.cake.databases.Schema\ICollection myCollection The schema collection object
      * @return this
      */
     auto setSchemaCollection(SchemaICollection myCollection) {
@@ -319,7 +319,7 @@ class Connection : IConnection {
     /**
      * Gets a Schema\Collection object for this connection.
      *
-     * @return uim.cake.Database\Schema\ICollection
+     * @return uim.cake.databases.Schema\ICollection
      */
     auto getSchemaCollection(): SchemaICollection
     {
@@ -344,7 +344,7 @@ class Connection : IConnection {
      * @param string myTable the table to insert values in
      * @param array myValues values to be inserted
      * @param array<string, string> myTypes list of associative array containing the types to be used for casting
-     * @return uim.cake.Database\IStatement
+     * @return uim.cake.databases.IStatement
      */
     function insert(string myTable, array myValues, array myTypes = []): IStatement
     {
@@ -365,7 +365,7 @@ class Connection : IConnection {
      * @param array myValues values to be updated
      * @param array $conditions conditions to be set for update statement
      * @param array myTypes list of associative array containing the types to be used for casting
-     * @return uim.cake.Database\IStatement
+     * @return uim.cake.databases.IStatement
      */
     function update(string myTable, array myValues, array $conditions = [], array myTypes = []): IStatement
     {
@@ -383,7 +383,7 @@ class Connection : IConnection {
      * @param string myTable the table to delete rows from
      * @param array $conditions conditions to be set for delete statement
      * @param array myTypes list of associative array containing the types to be used for casting
-     * @return uim.cake.Database\IStatement
+     * @return uim.cake.databases.IStatement
      */
     function delete(string myTable, array $conditions = [], array myTypes = []): IStatement
     {
@@ -433,7 +433,7 @@ class Connection : IConnection {
 
         if (_transactionLevel == 0) {
             if (this.wasNestedTransactionRolledback()) {
-                /** @var uim.cake.Database\exceptions.NestedTransactionRollbackException $e */
+                /** @var uim.cake.databases.exceptions.NestedTransactionRollbackException $e */
                 $e = this.nestedTransactionRollbackException;
                 this.nestedTransactionRollbackException = null;
                 throw $e;
@@ -658,7 +658,7 @@ class Connection : IConnection {
      * This uses `PDO::quote()` and requires `supportsQuoting()` to work.
      *
      * @param mixed myValue The value to quote.
-     * @param uim.cake.Database\IType|string|int myType Type to be used for determining kind of quoting to perform
+     * @param uim.cake.databases.IType|string|int myType Type to be used for determining kind of quoting to perform
      * @return  Quoted value
      */
     string quote(myValue, myType = "string") {
@@ -812,8 +812,8 @@ class Connection : IConnection {
      * Returns a new statement object that will log the activity
      * for the passed original statement instance.
      *
-     * @param uim.cake.Database\IStatement $statement the instance to be decorated
-     * @return uim.cake.Database\Log\LoggingStatement
+     * @param uim.cake.databases.IStatement $statement the instance to be decorated
+     * @return uim.cake.databases.Log\LoggingStatement
      */
     protected auto _newLogger(IStatement $statement): LoggingStatement
     {

@@ -586,7 +586,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
      *
      * @param array<string, mixed> $attrs Attributes to set.
      * @return array<string, mixed>
-     * @throws uim.cake.Database\exceptions.DatabaseException When foreign key definition is not valid.
+     * @throws uim.cake.databases.exceptions.DatabaseException When foreign key definition is not valid.
      */
     protected function _checkForeignKey(array $attrs): array
     {

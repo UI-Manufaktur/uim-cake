@@ -22,7 +22,7 @@ interface ExpressionTypeInterface
      * be used in queries.
      *
      * @param mixed $value The value to be converted to an expression
-     * @return uim.cake.Database\IExpression
+     * @return uim.cake.databases.IExpression
      */
     function toExpression($value): IExpression;
 }

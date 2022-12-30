@@ -119,7 +119,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * Convert DateTime instance into strings.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
      * @return string|null
      */
     function toDatabase($value, DriverInterface $driver): ?string
@@ -198,7 +198,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value Value to be converted to PHP equivalent
-     * @param uim.cake.Database\DriverInterface $driver Object from which database preferences and configuration will be extracted
+     * @param uim.cake.databases.DriverInterface $driver Object from which database preferences and configuration will be extracted
      * @return \DateTimeInterface|null
      */
     function toPHP($value, DriverInterface $driver) {
@@ -522,7 +522,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * Casts given value to Statement equivalent
      *
      * @param mixed $value value to be converted to PDO statement
-     * @param uim.cake.Database\DriverInterface $driver object from which database preferences and configuration will be extracted
+     * @param uim.cake.databases.DriverInterface $driver object from which database preferences and configuration will be extracted
      * @return mixed
      */
     function toStatement($value, DriverInterface $driver) {

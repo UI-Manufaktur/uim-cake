@@ -22,8 +22,8 @@ class CallbackStatement : StatementDecorator
     /**
      * Constructor
      *
-     * @param uim.cake.Database\StatementInterface $statement The statement to decorate.
-     * @param uim.cake.Database\DriverInterface $driver The driver instance used by the statement.
+     * @param uim.cake.databases.StatementInterface $statement The statement to decorate.
+     * @param uim.cake.databases.DriverInterface $driver The driver instance used by the statement.
      * @param callable $callback The callback to apply to results before they are returned.
      */
     this(StatementInterface $statement, DriverInterface $driver, callable $callback) {

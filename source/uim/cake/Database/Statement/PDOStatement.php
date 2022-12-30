@@ -23,7 +23,7 @@ class PDOStatement : StatementDecorator
      * Constructor
      *
      * @param \PDOStatement $statement Original statement to be decorated.
-     * @param uim.cake.Database\DriverInterface $driver Driver instance.
+     * @param uim.cake.databases.DriverInterface $driver Driver instance.
      */
     this(Statement $statement, DriverInterface $driver) {
         _statement = $statement;

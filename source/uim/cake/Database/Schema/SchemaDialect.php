@@ -19,7 +19,7 @@ abstract class SchemaDialect
     /**
      * The driver instance being used.
      *
-     * @var uim.cake.Database\DriverInterface
+     * @var uim.cake.databases.DriverInterface
      */
     protected $_driver;
 
@@ -29,7 +29,7 @@ abstract class SchemaDialect
      * This constructor will connect the driver so that methods like columnSql() and others
      * will fail when the driver has not been connected.
      *
-     * @param uim.cake.Database\DriverInterface $driver The driver to use.
+     * @param uim.cake.databases.DriverInterface $driver The driver to use.
      */
     this(DriverInterface $driver) {
         $driver.connect();
@@ -105,7 +105,7 @@ abstract class SchemaDialect
      * fragment for a single column in a table.
      *
      * @param string $columnType The column type.
-     * @param uim.cake.Database\Schema\TableSchemaInterface $schema The table schema instance the column is in.
+     * @param uim.cake.databases.Schema\TableSchemaInterface $schema The table schema instance the column is in.
      * @param string $column The name of the column.
      * @return string|null An SQL fragment, or `null` in case no corresponding type was found or the type didn"t provide
      *  custom column SQL.
@@ -153,7 +153,7 @@ abstract class SchemaDialect
     /**
      * Generate the SQL to drop a table.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema Schema instance
+     * @param uim.cake.databases.Schema\TableSchema $schema Schema instance
      * @return array SQL statements to drop a table.
      */
     function dropTableSql(TableSchema $schema): array
@@ -217,7 +217,7 @@ abstract class SchemaDialect
     /**
      * Convert field description results into abstract schema fields.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table object to append fields to.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table object to append fields to.
      * @param array $row The row data from `describeColumnSql`.
      * @return void
      */
@@ -226,7 +226,7 @@ abstract class SchemaDialect
     /**
      * Convert an index description results into abstract schema indexes or constraints.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table object to append
+     * @param uim.cake.databases.Schema\TableSchema $schema The table object to append
      *    an index or constraint to.
      * @param array $row The row data from `describeIndexSql`.
      * @return void
@@ -236,7 +236,7 @@ abstract class SchemaDialect
     /**
      * Convert a foreign key description into constraints on the Table object.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table object to append
+     * @param uim.cake.databases.Schema\TableSchema $schema The table object to append
      *    a constraint to.
      * @param array $row The row data from `describeForeignKeySql`.
      * @return void
@@ -246,7 +246,7 @@ abstract class SchemaDialect
     /**
      * Convert options data into table options.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema Table instance.
+     * @param uim.cake.databases.Schema\TableSchema $schema Table instance.
      * @param array $row The row of data.
      */
     void convertOptionsDescription(TableSchema $schema, array $row): void
@@ -256,7 +256,7 @@ abstract class SchemaDialect
     /**
      * Generate the SQL to create a table.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema Table instance.
+     * @param uim.cake.databases.Schema\TableSchema $schema Table instance.
      * @param array<string> $columns The columns to go inside the table.
      * @param array<string> $constraints The constraints for the table.
      * @param array<string> $indexes The indexes for the table.
@@ -272,7 +272,7 @@ abstract class SchemaDialect
     /**
      * Generate the SQL fragment for a single column in a table.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table instance the column is in.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table instance the column is in.
      * @param string $name The name of the column.
      * @return string SQL fragment.
      */
@@ -281,7 +281,7 @@ abstract class SchemaDialect
     /**
      * Generate the SQL queries needed to add foreign key constraints to the table
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table instance the foreign key constraints are.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
     abstract function addConstraintSql(TableSchema $schema): array;
@@ -289,7 +289,7 @@ abstract class SchemaDialect
     /**
      * Generate the SQL queries needed to drop foreign key constraints from the table
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table instance the foreign key constraints are.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
     abstract function dropConstraintSql(TableSchema $schema): array;
@@ -297,7 +297,7 @@ abstract class SchemaDialect
     /**
      * Generate the SQL fragments for defining table constraints.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table instance the column is in.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table instance the column is in.
      * @param string $name The name of the column.
      * @return string SQL fragment.
      */
@@ -306,7 +306,7 @@ abstract class SchemaDialect
     /**
      * Generate the SQL fragment for a single index in a table.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table object the column is in.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table object the column is in.
      * @param string $name The name of the column.
      * @return string SQL fragment.
      */
@@ -315,7 +315,7 @@ abstract class SchemaDialect
     /**
      * Generate the SQL to truncate a table.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema Table instance.
+     * @param uim.cake.databases.Schema\TableSchema $schema Table instance.
      * @return array SQL statements to truncate a table.
      */
     abstract function truncateTableSql(TableSchema $schema): array;
@@ -323,5 +323,5 @@ abstract class SchemaDialect
 
 // phpcs:disable
 // Add backwards compatible alias.
-class_alias("Cake\Database\Schema\SchemaDialect", "Cake\Database\Schema\BaseSchema");
+class_alias("Cake\databases.Schema\SchemaDialect", "Cake\databases.Schema\BaseSchema");
 // phpcs:enable

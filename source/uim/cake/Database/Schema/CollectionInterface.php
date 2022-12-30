@@ -32,8 +32,8 @@ interface ICollection
      *
      * @param string $name The name of the table to describe.
      * @param array<string, mixed> $options The options to use, see above.
-     * @return uim.cake.Database\Schema\TableSchemaInterface Object with column metadata.
-     * @throws uim.cake.Database\exceptions.DatabaseException when table cannot be described.
+     * @return uim.cake.databases.Schema\TableSchemaInterface Object with column metadata.
+     * @throws uim.cake.databases.exceptions.DatabaseException when table cannot be described.
      */
     function describe(string $name, array $options = []): TableSchemaInterface;
 }

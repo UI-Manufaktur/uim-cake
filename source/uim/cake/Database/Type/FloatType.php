@@ -32,7 +32,7 @@ class FloatType : BaseType : BatchCastingInterface
      * Convert integer data into the database format.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
      * @return float|null
      */
     function toDatabase($value, DriverInterface $driver): ?float
@@ -48,7 +48,7 @@ class FloatType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
      * @return float|null
      * @throws uim.cake.Core\exceptions.CakeException
      */
@@ -79,7 +79,7 @@ class FloatType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for float data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.Database\DriverInterface $driver The driver.
+     * @param uim.cake.databases.DriverInterface $driver The driver.
      * @return int
      */
     function toStatement($value, DriverInterface $driver): int

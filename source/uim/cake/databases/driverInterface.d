@@ -36,7 +36,7 @@ interface IDriver {
     /**
      * Establishes a connection to the database server.
      *
-     * @throws uim.cake.Database\exceptions.MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.databases.exceptions.MissingConnectionException If database connection could not be established.
      * @return bool True on success, false on failure.
      */
     bool connect();
@@ -69,8 +69,8 @@ interface IDriver {
     /**
      * Prepares a sql statement to be executed.
      *
-     * @param uim.cake.Database\Query|string myQuery The query to turn into a prepared statement.
-     * @return uim.cake.Database\IStatement
+     * @param uim.cake.databases.Query|string myQuery The query to turn into a prepared statement.
+     * @return uim.cake.databases.IStatement
      */
     IStatement prepare(myQuery);
 
@@ -160,13 +160,13 @@ interface IDriver {
     /**
      * Get the schema dialect.
      *
-     * Used by {@link uim.cake.Database\Schema} package to reflect schema and
+     * Used by {@link uim.cake.databases.Schema} package to reflect schema and
      * generate schema.
      *
      * If all the tables that use this Driver specify their
      * own schemas, then this may return null.
      *
-     * @return uim.cake.Database\Schema\SchemaDialect
+     * @return uim.cake.databases.Schema\SchemaDialect
      */
     SchemaDialect schemaDialect();
 
@@ -219,8 +219,8 @@ interface IDriver {
      * Transforms the passed query to this Driver"s dialect and returns an instance
      * of the transformed query and the full compiled SQL string.
      *
-     * @param uim.cake.Database\Query myQuery The query to compile.
-     * @param uim.cake.Database\ValueBinder $binder The value binder to use.
+     * @param uim.cake.databases.Query myQuery The query to compile.
+     * @param uim.cake.databases.ValueBinder $binder The value binder to use.
      * @return array containing 2 entries. The first entity is the transformed query
      * and the second one the compiled SQL.
      */
@@ -234,7 +234,7 @@ interface IDriver {
      *
      * @param string myTable The table name.
      * @param array $columns The list of columns for the schema.
-     * @return uim.cake.Database\Schema\TableSchema
+     * @return uim.cake.databases.Schema\TableSchema
      */
     TableSchema newTableSchema(string myTable, array $columns = []);
 }

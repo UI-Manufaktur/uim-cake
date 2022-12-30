@@ -29,10 +29,10 @@ class SqliteSchemaDialect : SchemaDialect
      * Convert a column definition to the abstract types.
      *
      * The returned type will be a type that
-     * Cake\Database\TypeFactory can handle.
+     * Cake\databases.TypeFactory can handle.
      *
      * @param string $column The column type + length
-     * @throws uim.cake.Database\exceptions.DatabaseException when unable to parse column type
+     * @throws uim.cake.databases.exceptions.DatabaseException when unable to parse column type
      * @return array<string, mixed> Array of column information.
      */
     protected function _convertColumn(string $column): array
@@ -254,7 +254,7 @@ class SqliteSchemaDialect : SchemaDialect
      * stable, and the names for constraints will not match those used to create
      * the table. This is a limitation in Sqlite"s metadata features.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table object to append
+     * @param uim.cake.databases.Schema\TableSchema $schema The table object to append
      *    an index or constraint to.
      * @param array $row The row data from `describeIndexSql`.
      */
@@ -320,10 +320,10 @@ class SqliteSchemaDialect : SchemaDialect
     /**
      * {@inheritDoc}
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table instance the column is in.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table instance the column is in.
      * @param string $name The name of the column.
      * @return string SQL fragment.
-     * @throws uim.cake.Database\exceptions.DatabaseException when the column type is unknown
+     * @throws uim.cake.databases.exceptions.DatabaseException when the column type is unknown
      */
     function columnSql(TableSchema $schema, string $name): string
     {
@@ -465,7 +465,7 @@ class SqliteSchemaDialect : SchemaDialect
      * Note integer primary keys will return "". This is intentional as Sqlite requires
      * that integer primary keys be defined in the column definition.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table instance the column is in.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table instance the column is in.
      * @param string $name The name of the column.
      * @return string SQL fragment.
      */
@@ -520,7 +520,7 @@ class SqliteSchemaDialect : SchemaDialect
      * SQLite can not properly handle adding a constraint to an existing table.
      * This method is no-op
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table instance the foreign key constraints are.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
     function addConstraintSql(TableSchema $schema): array
@@ -534,7 +534,7 @@ class SqliteSchemaDialect : SchemaDialect
      * SQLite can not properly handle dropping a constraint to an existing table.
      * This method is no-op
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table instance the foreign key constraints are.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
     function dropConstraintSql(TableSchema $schema): array
@@ -610,5 +610,5 @@ class SqliteSchemaDialect : SchemaDialect
 
 // phpcs:disable
 // Add backwards compatible alias.
-class_alias("Cake\Database\Schema\SqliteSchemaDialect", "Cake\Database\Schema\SqliteSchema");
+class_alias("Cake\databases.Schema\SqliteSchemaDialect", "Cake\databases.Schema\SqliteSchema");
 // phpcs:enable

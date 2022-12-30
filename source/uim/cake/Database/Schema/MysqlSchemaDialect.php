@@ -14,7 +14,7 @@ class MysqlSchemaDialect : SchemaDialect
     /**
      * The driver instance being used.
      *
-     * @var uim.cake.Database\Driver\Mysql
+     * @var uim.cake.databases.Driver\Mysql
      */
     protected $_driver;
 
@@ -75,11 +75,11 @@ class MysqlSchemaDialect : SchemaDialect
     /**
      * Convert a MySQL column type into an abstract type.
      *
-     * The returned type will be a type that Cake\Database\TypeFactory can handle.
+     * The returned type will be a type that Cake\databases.TypeFactory can handle.
      *
      * @param string $column The column type + length
      * @return array<string, mixed> Array of column information.
-     * @throws uim.cake.Database\exceptions.DatabaseException When column type cannot be parsed.
+     * @throws uim.cake.databases.exceptions.DatabaseException When column type cannot be parsed.
      */
     protected function _convertColumn(string $column): array
     {
@@ -618,5 +618,5 @@ class MysqlSchemaDialect : SchemaDialect
 
 // phpcs:disable
 // Add backwards compatible alias.
-class_alias("Cake\Database\Schema\MysqlSchemaDialect", "Cake\Database\Schema\MysqlSchema");
+class_alias("Cake\databases.Schema\MysqlSchemaDialect", "Cake\databases.Schema\MysqlSchema");
 // phpcs:enable

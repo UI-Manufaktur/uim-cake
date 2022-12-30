@@ -75,10 +75,10 @@ class PostgresSchemaDialect : SchemaDialect
      * Convert a column definition to the abstract types.
      *
      * The returned type will be a type that
-     * Cake\Database\TypeFactory can handle.
+     * Cake\databases.TypeFactory can handle.
      *
      * @param string $column The column type + length
-     * @throws uim.cake.Database\exceptions.DatabaseException when column cannot be parsed.
+     * @throws uim.cake.databases.exceptions.DatabaseException when column cannot be parsed.
      * @return array<string, mixed> Array of column information.
      */
     protected function _convertColumn(string $column): array
@@ -295,7 +295,7 @@ class PostgresSchemaDialect : SchemaDialect
     /**
      * Add/update a constraint into the schema object.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema The table to update.
+     * @param uim.cake.databases.Schema\TableSchema $schema The table to update.
      * @param string $name The index name.
      * @param string $type The index type.
      * @param array $row The metadata record to update with.
@@ -633,7 +633,7 @@ class PostgresSchemaDialect : SchemaDialect
     /**
      * Generate the SQL to drop a table.
      *
-     * @param uim.cake.Database\Schema\TableSchema $schema Table instance
+     * @param uim.cake.databases.Schema\TableSchema $schema Table instance
      * @return array SQL statements to drop a table.
      */
     function dropTableSql(TableSchema $schema): array
@@ -649,5 +649,5 @@ class PostgresSchemaDialect : SchemaDialect
 
 // phpcs:disable
 // Add backwards compatible alias.
-class_alias("Cake\Database\Schema\PostgresSchemaDialect", "Cake\Database\Schema\PostgresSchema");
+class_alias("Cake\databases.Schema\PostgresSchemaDialect", "Cake\databases.Schema\PostgresSchema");
 // phpcs:enable

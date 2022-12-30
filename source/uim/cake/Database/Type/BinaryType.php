@@ -19,7 +19,7 @@ class BinaryType : BaseType
      * As PDO will handle reading file handles.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
      * @return resource|string
      */
     function toDatabase($value, DriverInterface $driver) {
@@ -30,7 +30,7 @@ class BinaryType : BaseType
      * Convert binary into resource handles
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.Database\DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
      * @return resource|null
      * @throws uim.cake.Core\exceptions.CakeException
      */
@@ -51,7 +51,7 @@ class BinaryType : BaseType
      * Get the correct PDO binding type for Binary data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.Database\DriverInterface $driver The driver.
+     * @param uim.cake.databases.DriverInterface $driver The driver.
      * @return int
      */
     function toStatement($value, DriverInterface $driver): int
