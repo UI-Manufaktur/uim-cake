@@ -34,8 +34,6 @@ class CookieNotSet : CookieSet
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

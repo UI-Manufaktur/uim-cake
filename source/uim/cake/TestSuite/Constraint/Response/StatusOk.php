@@ -28,8 +28,6 @@ class StatusOk : StatusCodeBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

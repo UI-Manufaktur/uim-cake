@@ -55,8 +55,6 @@ class SessionHasKey : Constraint
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

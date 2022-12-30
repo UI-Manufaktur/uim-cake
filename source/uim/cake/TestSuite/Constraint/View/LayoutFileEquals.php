@@ -23,8 +23,6 @@ class LayoutFileEquals : TemplateFileEquals
 {
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

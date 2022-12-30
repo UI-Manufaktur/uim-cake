@@ -34,8 +34,6 @@ class BodyNotContains : BodyContains
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

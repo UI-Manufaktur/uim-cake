@@ -22,8 +22,6 @@ class MailSentFrom : MailSentWith
 
     /**
      * Assertion message string
-     *
-     * @return string
      */
     string toString()
     {

@@ -34,8 +34,6 @@ class BodyNotRegExp : BodyRegExp
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

@@ -44,8 +44,6 @@ class FileSentAs : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

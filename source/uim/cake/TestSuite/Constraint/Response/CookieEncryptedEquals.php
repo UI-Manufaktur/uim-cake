@@ -71,8 +71,6 @@ class CookieEncryptedEquals : CookieEquals
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

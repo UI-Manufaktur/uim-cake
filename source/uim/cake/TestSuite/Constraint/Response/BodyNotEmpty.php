@@ -34,8 +34,6 @@ class BodyNotEmpty : BodyEmpty
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

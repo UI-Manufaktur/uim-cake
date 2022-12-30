@@ -28,8 +28,6 @@ class StatusFailure : StatusCodeBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

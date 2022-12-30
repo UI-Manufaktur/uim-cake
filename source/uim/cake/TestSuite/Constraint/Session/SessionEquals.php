@@ -55,8 +55,6 @@ class SessionEquals : Constraint
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

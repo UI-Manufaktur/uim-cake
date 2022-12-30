@@ -53,8 +53,6 @@ class HeaderEquals : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

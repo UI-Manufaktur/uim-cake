@@ -53,8 +53,6 @@ class HeaderSet : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

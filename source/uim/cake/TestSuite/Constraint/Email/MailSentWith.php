@@ -63,8 +63,6 @@ class MailSentWith : MailConstraintBase
 
     /**
      * Assertion message string
-     *
-     * @return string
      */
     string toString()
     {

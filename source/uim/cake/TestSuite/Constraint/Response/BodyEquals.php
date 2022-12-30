@@ -34,8 +34,6 @@ class BodyEquals : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

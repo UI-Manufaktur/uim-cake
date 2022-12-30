@@ -39,8 +39,6 @@ class FileSent : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

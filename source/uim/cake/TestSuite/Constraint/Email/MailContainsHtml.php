@@ -22,8 +22,6 @@ class MailContainsHtml : MailContains
 
     /**
      * Assertion message string
-     *
-     * @return string
      */
     string toString()
     {

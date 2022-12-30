@@ -41,8 +41,6 @@ class CookieSet : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

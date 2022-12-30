@@ -64,8 +64,6 @@ class MailSubjectContains : MailConstraintBase
 
     /**
      * Assertion message string
-     *
-     * @return string
      */
     string toString()
     {

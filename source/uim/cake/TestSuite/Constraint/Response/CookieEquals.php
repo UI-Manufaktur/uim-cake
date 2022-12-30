@@ -60,8 +60,6 @@ class CookieEquals : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

@@ -34,8 +34,6 @@ class BodyNotEquals : BodyEquals
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

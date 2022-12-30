@@ -28,8 +28,6 @@ class NoMailSent : MailConstraintBase
 
     /**
      * Assertion message string
-     *
-     * @return string
      */
     string toString()
     {

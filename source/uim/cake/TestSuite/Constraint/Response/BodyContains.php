@@ -58,8 +58,6 @@ class BodyContains : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

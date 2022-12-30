@@ -34,8 +34,6 @@ class HeaderNotContains : HeaderContains
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

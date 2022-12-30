@@ -34,8 +34,6 @@ class BodyRegExp : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

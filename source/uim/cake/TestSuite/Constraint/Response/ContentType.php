@@ -44,8 +44,6 @@ class ContentType : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

@@ -34,8 +34,6 @@ class BodyEmpty : ResponseBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

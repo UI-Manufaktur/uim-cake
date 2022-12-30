@@ -23,8 +23,6 @@ class StatusCode : StatusCodeBase
 {
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

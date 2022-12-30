@@ -34,8 +34,6 @@ class HeaderNotSet : HeaderSet
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {
