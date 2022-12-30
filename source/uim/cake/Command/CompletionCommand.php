@@ -1,11 +1,4 @@
-
-
-
- *
-
- * @link          https://cakephp.org CakePHP Project
- * @since         2.5.0
-  */module uim.cake.commands;
+module uim.cake.commands;
 
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.CommandCollection;

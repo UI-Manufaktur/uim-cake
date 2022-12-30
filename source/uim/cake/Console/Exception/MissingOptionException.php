@@ -1,16 +1,4 @@
-
-
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
-
- * @link          https://book.cakephp.org/4/en/development/errors.html#error-exception-configuration
-
-  */module uim.cake.consoles.Exception;
+module uim.cake.consoles.Exception;
 
 use Throwable;
 

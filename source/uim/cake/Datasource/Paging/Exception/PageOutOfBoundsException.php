@@ -6,11 +6,7 @@
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
- *
-
-
-
- */module uim.cake.datasources.Paging\Exception;
+ *module uim.cake.datasources.Paging\Exception;
 
 import uim.cake.core.exceptions.CakeException;
 

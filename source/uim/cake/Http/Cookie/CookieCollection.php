@@ -7,11 +7,7 @@
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
-
-
-
-
- */module uim.cake.http.Cookie;
+module uim.cake.http.Cookie;
 
 use ArrayIterator;
 use Countable;

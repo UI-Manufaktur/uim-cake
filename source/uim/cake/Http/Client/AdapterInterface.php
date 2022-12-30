@@ -9,7 +9,7 @@
  *
 
 
- * @since         3.7.0
+
   */module uim.cake.http.Client;
 
 use Psr\Http\messages.RequestInterface;
