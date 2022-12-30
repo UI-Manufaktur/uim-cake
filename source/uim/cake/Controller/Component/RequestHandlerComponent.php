@@ -111,7 +111,6 @@ class RequestHandlerComponent : Component
      *
      * @param uim.cake.http.ServerRequest $request The request instance.
      * @param uim.cake.http.Response $response The response instance.
-     * @return void
      */
     protected void _setExtension(ServerRequest $request, Response $response): void
     {

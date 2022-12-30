@@ -141,7 +141,6 @@ class ShellDispatcher
     /**
      * Initializes the environment and loads the CakePHP core.
      *
-     * @return void
      */
     protected void _bootstrap() {
         if (!Configure::read("App.fullBaseUrl")) {

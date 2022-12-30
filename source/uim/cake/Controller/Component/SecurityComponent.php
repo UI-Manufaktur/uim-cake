@@ -165,7 +165,6 @@ class SecurityComponent : Component
      *
      * @param uim.cake.controllers.exceptions.SecurityException|null $exception Additional debug info describing the cause
      * @throws uim.cake.http.exceptions.BadRequestException
-     * @return void
      */
     protected void _throwException(?SecurityException $exception = null): void
     {

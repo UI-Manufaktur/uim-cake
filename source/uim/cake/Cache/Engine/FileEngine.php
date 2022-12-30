@@ -276,7 +276,6 @@ class FileEngine : CacheEngine
      * Used to clear a directory of matching files.
      *
      * @param string $path The path to search.
-     * @return void
      */
     protected void _clearDirectory(string $path) {
         if (!is_dir($path)) {

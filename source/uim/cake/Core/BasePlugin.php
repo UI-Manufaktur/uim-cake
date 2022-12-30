@@ -218,7 +218,6 @@ class BasePlugin : PluginInterface
      *
      * @param string $hook The hook name to check
      * @throws \InvalidArgumentException on invalid hooks
-     * @return void
      */
     protected void checkHook(string $hook): void
     {

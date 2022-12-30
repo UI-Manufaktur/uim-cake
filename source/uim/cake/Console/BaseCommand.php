@@ -167,7 +167,6 @@ abstract class BaseCommand : ICommand {
      * @param uim.cake.consoles.ConsoleOptionParser $parser The option parser.
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
-     * @return void
      */
     protected void displayHelp(ConsoleOptionParser $parser, Arguments $args, ConsoleIo $io) {
         $format = "text";
@@ -184,7 +183,6 @@ abstract class BaseCommand : ICommand {
      *
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
-     * @return void
      */
     protected void setOutputLevel(Arguments $args, ConsoleIo $io) {
         $io.setLoggers(ConsoleIo::NORMAL);

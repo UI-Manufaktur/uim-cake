@@ -7,7 +7,7 @@
  * @since         2.3.0
   */
 
-module uim.cake.Command;
+module uim.cake.commands;
 
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;

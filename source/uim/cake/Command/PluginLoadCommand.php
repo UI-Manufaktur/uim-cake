@@ -1,5 +1,5 @@
 
-module uim.cake.Command;
+module uim.cake.commands;
 
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.ConsoleIo;
@@ -14,7 +14,7 @@ import uim.cake.core.Plugin;
  */
 class PluginLoadCommand : Command {
 
-    static string defaultName()string
+    static string defaultName()
     {
         return "plugin load";
     }
@@ -70,7 +70,6 @@ class PluginLoadCommand : Command {
      *
      * @param string $app The Application file to modify.
      * @param string $plugin The plugin name to add.
-     * @return void
      */
     protected void modifyApplication(string $app, string $plugin) {
         $contents = file_get_contents($app);

@@ -259,7 +259,6 @@ class Shell
     /**
      * Displays a header for the shell
      *
-     * @return void
      */
     protected void _welcome() {
     }
@@ -285,7 +284,6 @@ class Shell
      * Checks that the tasks in the task map are actually available
      *
      * @throws \RuntimeException
-     * @return void
      */
     protected void _validateTasks() {
         foreach (_taskMap as $taskName: $task) {
@@ -511,7 +509,6 @@ class Shell
      * This reconfigures both the output level for out()
      * and the configured stdout/stderr logging
      *
-     * @return void
      */
     protected void _setOutputLevel() {
         _io.setLoggers(ConsoleIo::NORMAL);
@@ -888,7 +885,6 @@ class Shell
      *
      * @param int $status see https://secure.php.net/exit for values
      * @throws uim.cake.consoles.exceptions.StopException
-     * @return void
      */
     protected void _stop(int $status = self::CODE_SUCCESS) {
         throw new StopException("Halting error reached", $status);

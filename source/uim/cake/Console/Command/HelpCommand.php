@@ -68,7 +68,6 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      *
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @param iterable $commands The command collection to output.
-     * @return void
      */
     protected void asText(ConsoleIo $io, iterable $commands): void
     {
@@ -133,7 +132,6 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      * Output relevant paths if defined
      *
      * @param uim.cake.consoles.ConsoleIo $io IO object.
-     * @return void
      */
     protected void outputPaths(ConsoleIo $io): void
     {
@@ -181,7 +179,6 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      *
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @param iterable $commands The command collection to output
-     * @return void
      */
     protected void asXml(ConsoleIo $io, iterable $commands): void
     {

@@ -249,7 +249,6 @@ class PaginatorComponent : Component
     /**
      * Set paging params to request instance.
      *
-     * @return void
      */
     protected void _setPagingParams(): void
     {

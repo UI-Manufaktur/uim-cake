@@ -215,7 +215,6 @@ trait ConsoleIntegrationTestTrait
      *
      * @param array $row Row of cells to ensure exist in the output.
      * @param string $message Failure message.
-     * @return void
      */
     protected void assertOutputContainsRow(array $row, string $message = "") {
         this.assertThat($row, new ContentsContainRow(_out.messages(), "output"), $message);

@@ -172,7 +172,6 @@ class CommandRunner : EventDispatcherInterface
      * Calls the application"s `bootstrap()` hook. After the application the
      * plugins are bootstrapped.
      *
-     * @return void
      */
     protected void bootstrap() {
         this.app.bootstrap();
@@ -364,7 +363,6 @@ class CommandRunner : EventDispatcherInterface
      *
      * Console commands and shells often need to generate URLs.
      *
-     * @return void
      */
     protected void loadRoutes() {
         if (!(this.app instanceof IRoutingApplication)) {

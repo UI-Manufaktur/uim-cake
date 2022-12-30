@@ -1,5 +1,5 @@
 
-module uim.cake.Command;
+module uim.cake.commands;
 
 import uim.cake.caches.Cache;
 import uim.cake.caches.engines.ApcuEngine;

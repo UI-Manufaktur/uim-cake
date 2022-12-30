@@ -1,5 +1,5 @@
 
-module uim.cake.Command;
+module uim.cake.commands;
 
 import uim.cake.core.Configure;
 import uim.cake.core.Plugin;
@@ -83,7 +83,6 @@ trait PluginAssetsTrait
      * @param array<string, mixed> $plugins List of plugins to process
      * @param bool $copy Force copy mode. Default false.
      * @param bool $overwrite Overwrite existing files.
-     * @return void
      */
     protected void _process(array $plugins, bool $copy = false, bool $overwrite = false) {
         foreach ($plugins as $plugin: $config) {

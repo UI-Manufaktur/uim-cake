@@ -340,7 +340,6 @@ abstract class CacheEngine : ICache, ICacheEngine
      * if option warnOnWriteFailures is set to true.
      *
      * @param string $message The warning message.
-     * @return void
      */
     protected void warning(string $message) {
         if (this.getConfig("warnOnWriteFailures") != true) {

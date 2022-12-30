@@ -433,7 +433,6 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Sets defaults for configs.
      *
-     * @return void
      */
     protected void _setDefaults(): void
     {

@@ -85,7 +85,6 @@ class IdentifierQuoter
      * Quotes all identifiers in each of the clauses of a query
      *
      * @param uim.cake.Database\Query $query The query to quote.
-     * @return void
      */
     protected void _quoteParts(Query $query): void
     {
@@ -158,7 +157,6 @@ class IdentifierQuoter
      * Quotes the table name and columns for an insert query
      *
      * @param uim.cake.Database\Query $query The insert query to quote.
-     * @return void
      */
     protected void _quoteInsert(Query $query): void
     {
@@ -180,7 +178,6 @@ class IdentifierQuoter
      * Quotes the table name for an update query
      *
      * @param uim.cake.Database\Query $query The update query to quote.
-     * @return void
      */
     protected void _quoteUpdate(Query $query): void
     {
@@ -195,7 +192,6 @@ class IdentifierQuoter
      * Quotes identifiers in expression objects implementing the field interface
      *
      * @param uim.cake.Database\Expression\FieldInterface $expression The expression to quote.
-     * @return void
      */
     protected void _quoteComparison(FieldInterface $expression): void
     {
@@ -220,7 +216,6 @@ class IdentifierQuoter
      * and will not have identifiers quoted.
      *
      * @param uim.cake.Database\Expression\OrderByExpression $expression The expression to quote.
-     * @return void
      */
     protected void _quoteOrderBy(OrderByExpression $expression): void
     {
@@ -242,7 +237,6 @@ class IdentifierQuoter
      * Quotes identifiers in "order by" expression objects
      *
      * @param uim.cake.Database\Expression\IdentifierExpression $expression The identifiers to quote.
-     * @return void
      */
     protected void _quoteIdentifierExpression(IdentifierExpression $expression): void
     {
