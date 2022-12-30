@@ -1,4 +1,3 @@
-
 module uim.cake.databases.Schema;
 
 import uim.cake.databases.exceptions.DatabaseException;

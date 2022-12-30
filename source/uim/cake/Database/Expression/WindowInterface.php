@@ -5,8 +5,7 @@
 
 
  * @since         4.1.0
-  */
-module uim.cake.databases.Expression;
+  */module uim.cake.databases.Expression;
 
 /**
  * This defines the functions used for building window expressions.

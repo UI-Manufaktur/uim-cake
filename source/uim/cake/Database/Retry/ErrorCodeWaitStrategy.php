@@ -5,8 +5,7 @@
 
 
  * @since         4.2.0
-  */
-module uim.cake.databases.Retry;
+  */module uim.cake.databases.Retry;
 
 import uim.cake.core.Retry\RetryStrategyInterface;
 use Exception;

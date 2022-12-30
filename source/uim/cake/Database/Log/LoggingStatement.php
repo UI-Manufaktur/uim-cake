@@ -1,4 +1,3 @@
-
 module uim.cake.databases.Log;
 
 import uim.cake.databases.statements.StatementDecorator;

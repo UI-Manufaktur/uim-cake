@@ -1,4 +1,3 @@
-
 module uim.cake.databases.Type;
 
 import uim.cake.core.exceptions.CakeException;
