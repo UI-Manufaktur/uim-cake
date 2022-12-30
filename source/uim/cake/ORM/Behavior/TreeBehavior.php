@@ -206,7 +206,7 @@ class TreeBehavior : Behavior
         if ($diff > 2) {
             $query = _scope(_table.query())
                 .where(function ($exp) use ($config, $left, $right) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp
                         .gte($config["leftField"], $left + 1)
                         .lte($config["leftField"], $right - 1);
@@ -332,7 +332,7 @@ class TreeBehavior : Behavior
         $config = this.getConfig();
         _table.updateAll(
             function ($exp) use ($config) {
-                /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                /** @var uim.cake.databases.Expression\QueryExpression $exp */
                 $leftInverse = clone $exp;
                 $leftInverse.setConjunction("*").add("-1");
                 $rightInverse = clone $leftInverse;
@@ -342,7 +342,7 @@ class TreeBehavior : Behavior
                     .eq($config["rightField"], $rightInverse.add($config["rightField"]));
             },
             function ($exp) use ($config) {
-                /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                /** @var uim.cake.databases.Expression\QueryExpression $exp */
                 return $exp.lt($config["leftField"], 0);
             }
         );
@@ -622,7 +622,7 @@ class TreeBehavior : Behavior
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
                 .where(function ($exp) use ($config, $nodeLeft) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp.lt($config["rightField"], $nodeLeft);
                 })
                 .orderDesc($config["leftField"])
@@ -636,7 +636,7 @@ class TreeBehavior : Behavior
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
                 .where(function ($exp) use ($config, $nodeLeft) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp.lt($config["rightField"], $nodeLeft);
                 })
                 .orderAsc($config["leftField"])
@@ -713,7 +713,7 @@ class TreeBehavior : Behavior
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
                 .where(function ($exp) use ($config, $nodeRight) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp.gt($config["leftField"], $nodeRight);
                 })
                 .orderAsc($config["leftField"])
@@ -727,7 +727,7 @@ class TreeBehavior : Behavior
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
                 .where(function ($exp) use ($config, $nodeRight) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp.gt($config["leftField"], $nodeRight);
                 })
                 .orderDesc($config["leftField"])

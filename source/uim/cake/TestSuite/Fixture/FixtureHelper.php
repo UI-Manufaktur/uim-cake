@@ -226,7 +226,7 @@ class FixtureHelper
     /**
      * Sort fixtures with foreign constraints last if possible, otherwise returns null.
      *
-     * @param uim.cake.Database\Connection $connection Database connection
+     * @param uim.cake.databases.Connection $connection Database connection
      * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Database fixtures
      * @return array|null
      */
@@ -259,7 +259,7 @@ class FixtureHelper
     /**
      * Gets array of foreign references for fixtures table.
      *
-     * @param uim.cake.Database\Connection $connection Database connection
+     * @param uim.cake.databases.Connection $connection Database connection
      * @param uim.cake.Datasource\FixtureInterface $fixture Database fixture
      * @return array<string>
      */

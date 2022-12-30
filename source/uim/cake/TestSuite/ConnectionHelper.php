@@ -76,7 +76,7 @@ class ConnectionHelper
      */
     void dropTables(string $connectionName, ?array $tables = null): void
     {
-        /** @var uim.cake.Database\Connection $connection */
+        /** @var uim.cake.databases.Connection $connection */
         $connection = ConnectionManager::get($connectionName);
         $collection = $connection.getSchemaCollection();
 
@@ -92,13 +92,13 @@ class ConnectionHelper
         }, $tables);
 
         $dialect = $connection.getDriver().schemaDialect();
-        /** @var uim.cake.Database\Schema\TableSchema $schema */
+        /** @var uim.cake.databases.Schema\TableSchema $schema */
         foreach ($schemas as $schema) {
             foreach ($dialect.dropConstraintSql($schema) as $statement) {
                 $connection.execute($statement).closeCursor();
             }
         }
-        /** @var uim.cake.Database\Schema\TableSchema $schema */
+        /** @var uim.cake.databases.Schema\TableSchema $schema */
         foreach ($schemas as $schema) {
             foreach ($dialect.dropTableSql($schema) as $statement) {
                 $connection.execute($statement).closeCursor();
@@ -114,7 +114,7 @@ class ConnectionHelper
      */
     void truncateTables(string $connectionName, ?array $tables = null): void
     {
-        /** @var uim.cake.Database\Connection $connection */
+        /** @var uim.cake.databases.Connection $connection */
         $connection = ConnectionManager::get($connectionName);
         $collection = $connection.getSchemaCollection();
 
@@ -126,7 +126,7 @@ class ConnectionHelper
 
         this.runWithoutConstraints($connection, function (Connection $connection) use ($schemas): void {
             $dialect = $connection.getDriver().schemaDialect();
-            /** @var uim.cake.Database\Schema\TableSchema $schema */
+            /** @var uim.cake.databases.Schema\TableSchema $schema */
             foreach ($schemas as $schema) {
                 foreach ($dialect.truncateTableSql($schema) as $statement) {
                     $connection.execute($statement).closeCursor();
@@ -138,7 +138,7 @@ class ConnectionHelper
     /**
      * Runs callback with constraints disabled correctly per-database
      *
-     * @param uim.cake.Database\Connection $connection Database connection
+     * @param uim.cake.databases.Connection $connection Database connection
      * @param \Closure $callback callback
      */
     void runWithoutConstraints(Connection $connection, Closure $callback): void

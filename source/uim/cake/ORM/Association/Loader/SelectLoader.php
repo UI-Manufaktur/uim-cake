@@ -335,7 +335,7 @@ class SelectLoader
      * @param array<string> $keys the fields that should be used for filtering
      * @param mixed $filter the value that should be used to match for $key
      * @param string $operator The operator for comparing the tuples
-     * @return uim.cake.Database\Expression\TupleComparison
+     * @return uim.cake.databases.Expression\TupleComparison
      */
     protected function _createTupleCondition(Query $query, array $keys, $filter, $operator): TupleComparison
     {

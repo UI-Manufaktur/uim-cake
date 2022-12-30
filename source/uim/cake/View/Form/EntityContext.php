@@ -665,7 +665,7 @@ class EntityContext : ContextInterface
      *
      * @param string $field A dot separated path to get a schema type for.
      * @return string|null An abstract data type or null.
-     * @see uim.cake.Database\TypeFactory
+     * @see uim.cake.databases.TypeFactory
      */
     function type(string $field): ?string
     {

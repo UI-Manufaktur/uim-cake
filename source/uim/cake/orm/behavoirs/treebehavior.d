@@ -199,7 +199,7 @@ class TreeBehavior : Behavior
             myQuery = _scope(_table.query())
                 .delete()
                 .where(function ($exp) use (myConfig, $left, $right) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp
                         .gte(myConfig["leftField"], $left + 1)
                         .lte(myConfig["leftField"], $right - 1);
@@ -314,7 +314,7 @@ class TreeBehavior : Behavior
         myConfig = this.getConfig();
         _table.updateAll(
             function ($exp) use (myConfig) {
-                /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                /** @var uim.cake.databases.Expression\QueryExpression $exp */
                 $leftInverse = clone $exp;
                 $leftInverse.setConjunction("*").add("-1");
                 $rightInverse = clone $leftInverse;
@@ -324,7 +324,7 @@ class TreeBehavior : Behavior
                     .eq(myConfig["rightField"], $rightInverse.add(myConfig["rightField"]));
             },
             function ($exp) use (myConfig) {
-                /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                /** @var uim.cake.databases.Expression\QueryExpression $exp */
                 return $exp.lt(myConfig["leftField"], 0);
             }
         );
@@ -603,7 +603,7 @@ class TreeBehavior : Behavior
                 .select([$left, $right])
                 .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeLeft) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp.lt(myConfig["rightField"], myNodeLeft);
                 })
                 .orderDesc(myConfig["leftField"])
@@ -617,7 +617,7 @@ class TreeBehavior : Behavior
                 .select([$left, $right])
                 .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeLeft) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp.lt(myConfig["rightField"], myNodeLeft);
                 })
                 .orderAsc(myConfig["leftField"])
@@ -694,7 +694,7 @@ class TreeBehavior : Behavior
                 .select([$left, $right])
                 .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeRight) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp.gt(myConfig["leftField"], myNodeRight);
                 })
                 .orderAsc(myConfig["leftField"])
@@ -708,7 +708,7 @@ class TreeBehavior : Behavior
                 .select([$left, $right])
                 .where(["$parent IS":myNodeParent])
                 .where(function ($exp) use (myConfig, myNodeRight) {
-                    /** @var uim.cake.Database\Expression\QueryExpression $exp */
+                    /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp.gt(myConfig["leftField"], myNodeRight);
                 })
                 .orderDesc(myConfig["leftField"])

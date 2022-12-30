@@ -285,7 +285,7 @@ abstract class Association {
      * the target association.
      *
      * @param \Closure|array $conditions list of conditions to be used
-     * @see uim.cake.Database\Query::where() for examples on the format of the array
+     * @see uim.cake.databases.Query::where() for examples on the format of the array
      * @return uim.cake.orm.Association
      */
     auto setConditions($conditions) {
@@ -298,7 +298,7 @@ abstract class Association {
      * Gets a list of conditions to be always included when fetching records from
      * the target association.
      *
-     * @see uim.cake.Database\Query::where() for examples on the format of the array
+     * @see uim.cake.databases.Query::where() for examples on the format of the array
      * @return \Closure|array
      */
     auto getConditions() {
@@ -692,7 +692,7 @@ abstract class Association {
      * Proxies the operation to the target table"s exists method after
      * appending the default conditions for this association
      *
-     * @param uim.cake.Database\IExpression|\Closure|array|string|null $conditions The conditions to use
+     * @param uim.cake.databases.IExpression|\Closure|array|string|null $conditions The conditions to use
      * for checking if any record matches.
      * @see uim.cake.orm.Table::exists()
      */
@@ -708,7 +708,7 @@ abstract class Association {
      * Proxies the update operation to the target table"s updateAll method
      *
      * @param array myFields A hash of field: new value.
-     * @param uim.cake.Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
+     * @param uim.cake.databases.IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @see uim.cake.orm.Table::updateAll()
      * @return int Count Returns the affected rows.
@@ -724,7 +724,7 @@ abstract class Association {
     /**
      * Proxies the delete operation to the target table"s deleteAll method
      *
-     * @param uim.cake.Database\IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
+     * @param uim.cake.databases.IExpression|\Closure|array|string|null $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Returns the number of affected rows.
      * @see uim.cake.orm.Table::deleteAll()

@@ -22,7 +22,7 @@ class ResultSet : IResultSet
     /**
      * Database statement holding the results
      *
-     * @var uim.cake.Database\StatementInterface
+     * @var uim.cake.databases.StatementInterface
      */
     protected $_statement;
 
@@ -132,7 +132,7 @@ class ResultSet : IResultSet
      *
      * Cached in a property to avoid multiple calls to the same function.
      *
-     * @var uim.cake.Database\DriverInterface
+     * @var uim.cake.databases.DriverInterface
      */
     protected $_driver;
 
@@ -140,7 +140,7 @@ class ResultSet : IResultSet
      * Constructor
      *
      * @param uim.cake.orm.Query $query Query from where results come
-     * @param uim.cake.Database\StatementInterface $statement The statement to fetch from
+     * @param uim.cake.databases.StatementInterface $statement The statement to fetch from
      */
     this(Query $query, StatementInterface $statement) {
         $repository = $query.getRepository();
@@ -200,7 +200,7 @@ class ResultSet : IResultSet
      *
      * Part of Iterator interface.
      *
-     * @throws uim.cake.Database\exceptions.DatabaseException
+     * @throws uim.cake.databases.exceptions.DatabaseException
      */
     void rewind(): void
     {

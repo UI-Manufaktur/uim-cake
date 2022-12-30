@@ -51,7 +51,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     /**
      * Fields / Schema for the fixture.
      *
-     * This array should be compatible with {@link uim.cake.Database\Schema\Schema}.
+     * This array should be compatible with {@link uim.cake.databases.Schema\Schema}.
      * The `_constraints`, `_options` and `_indexes` keys are reserved for defining
      * constraints, options and indexes respectively.
      *
@@ -80,7 +80,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     /**
      * The schema for this fixture.
      *
-     * @var uim.cake.Database\Schema\TableSchemaInterface&uim.cake.Database\Schema\SqlGeneratorInterface
+     * @var uim.cake.databases.Schema\TableSchemaInterface&uim.cake.databases.Schema\SqlGeneratorInterface
      * @psalm-suppress PropertyNotSetInConstructor
      */
     protected $_schema;
@@ -241,7 +241,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
             $name = Inflector::camelize(this.table);
             $ormTable = this.fetchTable($name, ["connection": $db]);
 
-            /** @var uim.cake.Database\Schema\TableSchema $schema */
+            /** @var uim.cake.databases.Schema\TableSchema $schema */
             $schema = $ormTable.getSchema();
             _schema = $schema;
 

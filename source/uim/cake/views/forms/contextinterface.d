@@ -82,7 +82,7 @@ interface IContext
      *
      * @param string myField A dot separated path to get a schema type for.
      * @return string|null An abstract data type or null.
-     * @see uim.cake.Database\TypeFactory
+     * @see uim.cake.databases.TypeFactory
      */
     Nullable!string type(string myField);
 

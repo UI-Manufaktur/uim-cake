@@ -199,7 +199,7 @@ class TimestampBehavior : Behavior
             return;
         }
 
-        /** @var uim.cake.Database\Type\DateTimeType $type */
+        /** @var uim.cake.databases.Type\DateTimeType $type */
         $type = TypeFactory::build($columnType);
 
         if (!$type instanceof DateTimeType) {

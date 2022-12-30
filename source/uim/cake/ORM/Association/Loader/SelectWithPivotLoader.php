@@ -42,7 +42,7 @@ class SelectWithPivotLoader : SelectLoader
     /**
      * Custom conditions for the junction association
      *
-     * @var uim.cake.Database\IExpression|\Closure|array|string|null
+     * @var uim.cake.databases.IExpression|\Closure|array|string|null
      */
     protected $junctionConditions;
 
