@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         2.0.0
-  */
 module uim.cake.TestSuite\Fixture;
 
 import uim.cake.core.Configure;

@@ -365,7 +365,7 @@ class RequestHandlerComponent : Component {
      * @param uim.cake.controllers.Controller $controller A reference to a controller object
      * @param string myType Type of response to send (e.g: "ajax")
      * @param array<string, mixed> myOptions Array of options to use
-     * @see uim.cake.controllers.Component\RequestHandlerComponent::respondAs()
+     * @see uim.cake.controllers.components.RequestHandlerComponent::respondAs()
      */
     void renderAs(Controller $controller, string myType, array myOptions = []) {
         $defaults = ["charset":"UTF-8"];

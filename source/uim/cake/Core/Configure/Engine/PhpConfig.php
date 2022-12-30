@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         2.0.0
-  */
 module uim.cake.core.configures.Engine;
 
 import uim.cake.core.configures.ConfigEngineInterface;
