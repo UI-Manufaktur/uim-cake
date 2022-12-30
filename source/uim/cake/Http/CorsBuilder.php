@@ -5,8 +5,7 @@
 
 
  * @since         3.2.0
-  */
-module uim.cake.Http;
+  */module uim.cake.Http;
 
 use Psr\Http\messages.MessageInterface;
 

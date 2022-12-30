@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.http.Client;
+  */module uim.cake.http.Client;
 
 use Laminas\Diactoros\RequestTrait;
 use Laminas\Diactoros\Stream;

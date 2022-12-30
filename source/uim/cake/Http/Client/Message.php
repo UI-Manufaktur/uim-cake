@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.http.Client;
+  */module uim.cake.http.Client;
 
 /**
  * Base class for other HTTP requests/responses

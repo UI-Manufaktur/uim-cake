@@ -9,8 +9,7 @@
  * Parts of this file are derived from Zend-Diactoros
  * @copyright Copyright (c) 2015-2016 Zend Technologies USA Inc. (https://www.zend.com/)
  * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
- */
-module uim.cake.Http;
+ */module uim.cake.Http;
 
 import uim.cake.http.Cookie\Cookie;
 use Laminas\Diactoros\RelativeStream;

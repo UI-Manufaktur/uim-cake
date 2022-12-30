@@ -10,8 +10,7 @@
 
 
  * @since         4.3.0
-  */
-module uim.cake.http.Client\Exception;
+  */module uim.cake.http.Client\Exception;
 
 import uim.cake.core.exceptions.CakeException;
 

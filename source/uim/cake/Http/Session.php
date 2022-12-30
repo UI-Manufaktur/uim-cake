@@ -5,8 +5,7 @@
 
 
  * @since         0.10.0
-  */
-module uim.cake.Http;
+  */module uim.cake.Http;
 
 import uim.cake.core.App;
 import uim.cake.utilities.Hash;

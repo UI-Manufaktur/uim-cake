@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.http.Client;
+  */module uim.cake.http.Client;
 
 use Countable;
 use finfo;

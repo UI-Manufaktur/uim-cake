@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.http.Client;
+  */module uim.cake.http.Client;
 
 import uim.cake.utilities.Text;
 

@@ -10,8 +10,7 @@
 
 
  * @since         4.3.0
-  */
-module uim.cake.http.Client\Adapter;
+  */module uim.cake.http.Client\Adapter;
 
 import uim.cake.http.Client\AdapterInterface;
 import uim.cake.http.Client\exceptions.MissingResponseException;

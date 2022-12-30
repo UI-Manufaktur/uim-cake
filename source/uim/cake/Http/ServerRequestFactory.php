@@ -5,8 +5,7 @@
 
 
  * @since         3.3.0
-  */
-module uim.cake.Http;
+  */module uim.cake.Http;
 
 import uim.cake.core.Configure;
 import uim.cake.http.Uri as CakeUri;

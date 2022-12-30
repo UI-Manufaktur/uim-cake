@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.http.Client\Exception;
+  */module uim.cake.http.Client\Exception;
 
 use Psr\Http\Client\NetworkExceptionInterface;
 use Psr\Http\messages.RequestInterface;

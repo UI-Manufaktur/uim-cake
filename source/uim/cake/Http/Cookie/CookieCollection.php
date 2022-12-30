@@ -11,8 +11,7 @@
 
 
 
- */
-module uim.cake.http.Cookie;
+ */module uim.cake.http.Cookie;
 
 use ArrayIterator;
 use Countable;
