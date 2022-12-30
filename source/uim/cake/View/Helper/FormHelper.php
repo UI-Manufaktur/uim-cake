@@ -2481,8 +2481,6 @@ class FormHelper : Helper
      * Restores the default values built into FormHelper.
      *
      * This method will not reset any templates set in custom widgets.
-     *
-     * @return void
      */
     void resetTemplates(): void
     {

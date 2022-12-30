@@ -31,8 +31,6 @@ class NegotiationRequiredView : View
 
     /**
      * Initialization hook method.
-     *
-     * @return void
      */
     void initialize(): void
     {

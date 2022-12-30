@@ -101,8 +101,6 @@ class StringTemplate
 
     /**
      * Push the current templates into the template stack.
-     *
-     * @return void
      */
     void push(): void
     {
@@ -114,8 +112,6 @@ class StringTemplate
 
     /**
      * Restore the most recently pushed set of templates.
-     *
-     * @return void
      */
     void pop(): void
     {

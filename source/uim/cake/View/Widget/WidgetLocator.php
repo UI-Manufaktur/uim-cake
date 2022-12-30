@@ -161,8 +161,6 @@ class WidgetLocator
 
     /**
      * Clear the registry and reset the widgets.
-     *
-     * @return void
      */
     void clear(): void
     {
