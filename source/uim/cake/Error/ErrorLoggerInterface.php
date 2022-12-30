@@ -5,8 +5,7 @@
 
 
  * @since         4.1.0
-  */
-module uim.cake.Error;
+  */module uim.cake.Error;
 
 use Psr\Http\messages.IServerRequest;
 use Throwable;

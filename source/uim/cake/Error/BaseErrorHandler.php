@@ -1,4 +1,3 @@
-
 module uim.cake.Error;
 
 import uim.cake.core.Configure;

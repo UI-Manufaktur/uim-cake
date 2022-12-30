@@ -5,8 +5,7 @@
 
 
  * @since         4.1.0
-  */
-module uim.cake.datasources.Locator;
+  */module uim.cake.datasources.Locator;
 
 import uim.cake.datasources.RepositoryInterface;
 

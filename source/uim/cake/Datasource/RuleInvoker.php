@@ -5,8 +5,7 @@
 
 
  * @since         3.2.12
-  */
-module uim.cake.Datasource;
+  */module uim.cake.Datasource;
 
 /**
  * Contains logic for invoking an application rule.

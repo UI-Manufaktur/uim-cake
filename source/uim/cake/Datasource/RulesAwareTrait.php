@@ -5,8 +5,7 @@
 
 
  * @since         3.0.7
-  */
-module uim.cake.Datasource;
+  */module uim.cake.Datasource;
 
 use ArrayObject;
 import uim.cake.events.EventDispatcherInterface;

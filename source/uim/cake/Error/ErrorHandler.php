@@ -13,8 +13,7 @@
 
 
  * @since         0.10.5
-  */
-module uim.cake.Error;
+  */module uim.cake.Error;
 
 import uim.cake.core.App;
 import uim.cake.http.ResponseEmitter;

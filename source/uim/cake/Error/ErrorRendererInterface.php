@@ -5,8 +5,7 @@
 
 
  * @since         4.4.0
-  */
-module uim.cake.Error;
+  */module uim.cake.Error;
 
 /**
  * Interface for PHP error rendering implementations

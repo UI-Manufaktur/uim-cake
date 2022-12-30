@@ -5,8 +5,7 @@
 
 
  * @since         1.2.0
-  */
-module uim.cake.Error;
+  */module uim.cake.Error;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;

@@ -10,8 +10,7 @@
 
 
 
- */
-module uim.cake.datasources.Paging\Exception;
+ */module uim.cake.datasources.Paging\Exception;
 
 import uim.cake.core.exceptions.CakeException;
 

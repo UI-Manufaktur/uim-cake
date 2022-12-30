@@ -5,8 +5,7 @@
 
 
  * @since         4.1.0
-  */
-module uim.cake.errors.Debug;
+  */module uim.cake.errors.Debug;
 
 /**
  * Dump node for Array values.

@@ -6,8 +6,7 @@
 
  * @since         3.9.0
 
- */
-module uim.cake.datasources.Paging;
+ */module uim.cake.datasources.Paging;
 
 import uim.cake.datasources.IQuery;
 
