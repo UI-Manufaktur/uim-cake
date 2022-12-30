@@ -1,5 +1,5 @@
 
-module uim.cake.Auth;
+module uim.cake.auths;
 
 /**
  * Default password hashing class.

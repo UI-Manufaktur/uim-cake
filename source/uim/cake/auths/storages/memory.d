@@ -1,26 +1,28 @@
-module uim.cake.auth\Storage;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.auths.storages;
 
 @safe:
 import uim.cake
 
-/**
- * Memory based non-persistent storage for authenticated user record.
- */
-class MemoryStorage : IStorage
-{
+// Memory based non-persistent storage for authenticated user record.
+class MemoryStorage : IStorage {
     /**
      * User record.
      *
      * @var \ArrayAccess|array|null
      */
-    protected _user;
+    protected $_user;
 
     /**
      * Redirect URL.
      *
      * @var array|string|null
      */
-    protected _redirectUrl;
+    protected $_redirectUrl;
 
 
     function read() {
@@ -28,28 +30,28 @@ class MemoryStorage : IStorage
     }
 
 
-    void write(myUser) {
-        _user = myUser;
+    void write($user) {
+        _user = $user;
     }
 
 
     void delete() {
-        ._user = null;
+        _user = null;
     }
 
 
-    function redirectUrl(myUrl = null) {
-        if (myUrl is null) {
+    function redirectUrl($url = null) {
+        if ($url == null) {
             return _redirectUrl;
         }
 
-        if (myUrl == false) {
+        if ($url == false) {
             _redirectUrl = null;
 
             return null;
         }
 
-        _redirectUrl = myUrl;
+        _redirectUrl = $url;
 
         return null;
     }

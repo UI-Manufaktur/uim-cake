@@ -1,12 +1,5 @@
 
 
-
- *
-
-
- * @since         2.0.0
-  */
-
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;
 

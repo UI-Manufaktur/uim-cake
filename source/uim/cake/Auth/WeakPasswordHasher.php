@@ -1,5 +1,5 @@
 
-module uim.cake.Auth;
+module uim.cake.auths;
 
 import uim.cake.core.Configure;
 import uim.cake.errors.Debugger;

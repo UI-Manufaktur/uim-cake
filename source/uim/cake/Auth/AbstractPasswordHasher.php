@@ -6,7 +6,7 @@
 
  * @since         2.4.0
   */
-module uim.cake.Auth;
+module uim.cake.auths;
 
 import uim.cake.core.InstanceConfigTrait;
 

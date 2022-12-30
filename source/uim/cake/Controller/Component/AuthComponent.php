@@ -195,7 +195,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Controller actions for which user validation is not required.
      *
      * @var array<string>
-     * @see uim.cake.controllers.Component\AuthComponent::allow()
+     * @see uim.cake.controllers.components.AuthComponent::allow()
      */
     $allowedActions = [];
 
@@ -596,7 +596,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @param array<string>|string|null $actions Controller action name or array of actions
      * @return void
-     * @see uim.cake.controllers.Component\AuthComponent::allow()
+     * @see uim.cake.controllers.components.AuthComponent::allow()
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
     void deny($actions = null) {

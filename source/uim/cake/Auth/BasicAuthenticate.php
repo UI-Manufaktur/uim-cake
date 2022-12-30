@@ -1,12 +1,5 @@
 
-
-
- *
-
-
- * @since         2.0.0
-  */
-module uim.cake.Auth;
+module uim.cake.auths;
 
 import uim.cake.http.exceptions.UnauthorizedException;
 import uim.cake.http.Response;

@@ -1,12 +1,5 @@
 
-
-
- *
-
-
- * @since         2.0.0
-  */
-module uim.cake.Auth;
+module uim.cake.auths;
 
 import uim.cake.controllers.ComponentRegistry;
 import uim.cake.core.InstanceConfigTrait;
@@ -15,10 +8,9 @@ import uim.cake.http.ServerRequest;
 /**
  * Abstract base authorization adapter for AuthComponent.
  *
- * @see uim.cake.controllers.Component\AuthComponent::$authenticate
+ * @see uim.cake.controllers.components.AuthComponent::$authenticate
  */
-abstract class BaseAuthorize
-{
+abstract class BaseAuthorize {
     use InstanceConfigTrait;
 
     /**

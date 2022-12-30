@@ -1,5 +1,5 @@
 
-module uim.cake.Auth;
+module uim.cake.auths;
 
 /**
  * A password hasher that can use multiple different hashes where only

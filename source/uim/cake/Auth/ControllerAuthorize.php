@@ -1,12 +1,5 @@
 
-
-
- *
-
-
- * @since         2.0.0
-  */
-module uim.cake.Auth;
+module uim.cake.auths;
 
 import uim.cake.controllers.ComponentRegistry;
 import uim.cake.controllers.Controller;
@@ -31,7 +24,7 @@ import uim.cake.http.ServerRequest;
  * The above is simple implementation that would only authorize users of the
  * "admin" role to access admin routing.
  *
- * @see uim.cake.controllers.Component\AuthComponent::$authenticate
+ * @see uim.cake.controllers.components.AuthComponent::$authenticate
  */
 class ControllerAuthorize : BaseAuthorize
 {

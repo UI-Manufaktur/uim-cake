@@ -1,15 +1,23 @@
 /*********************************************************************************************************
-*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
-*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
-*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
 module uim.cake.auths.storages.session;
 
 @safe:
 import uim.cake;
 
-// Session based persistent storage for authenticated user record.
-class SessionStorage : IStorage {
+import uim.cake.core.InstanceConfigTrait;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
+
+/**
+ * Session based persistent storage for authenticated user record.
+ */
+class SessionStorage : IStorage
+{
+    use InstanceConfigTrait;
 
     /**
      * User record.
@@ -19,10 +27,14 @@ class SessionStorage : IStorage {
      *
      * @var \ArrayAccess|array|false|null
      */
-    protected _user;
+    protected $_user;
 
-    // Session object.
-    protected Session _session;
+    /**
+     * Session object.
+     *
+     * @var uim.cake.http.Session
+     */
+    protected $_session;
 
     /**
      * Default configuration for this class.
@@ -34,20 +46,21 @@ class SessionStorage : IStorage {
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA $_defaultConfig = [
+    protected $_defaultConfig = [
         "key": "Auth.User",
-        "redirect": "Auth.redirect"];
+        "redirect": "Auth.redirect",
+    ];
 
     /**
      * Constructor.
      *
-     * @param uim.cake.http.ServerRequest myRequest Request instance.
+     * @param uim.cake.http.ServerRequest $request Request instance.
      * @param uim.cake.http.Response $response Response instance.
-     * @param array<string, mixed> myConfig Configuration list.
+     * @param array<string, mixed> $config Configuration list.
      */
-    this(ServerRequest myRequest, Response $response, array myConfig = []) {
-        _session = myRequest.getSession();
-        this.setConfig(myConfig);
+    this(ServerRequest $request, Response $response, array $config = []) {
+        _session = $request.getSession();
+        this.setConfig($config);
     }
 
     /**
@@ -57,7 +70,7 @@ class SessionStorage : IStorage {
      * @psalm-suppress InvalidReturnType
      */
     function read() {
-        if (_user  !is null) {
+        if (_user != null) {
             return _user ?: null;
         }
 
@@ -73,13 +86,13 @@ class SessionStorage : IStorage {
      *
      * The session id is also renewed to help mitigate issues with session replays.
      *
-     * @param \ArrayAccess|array myUser User record.
+     * @param \ArrayAccess|array $user User record.
      */
-    void write(myUser) {
-        _user = myUser;
+    void write($user) {
+        _user = $user;
 
         _session.renew();
-        _session.write(_config["key"], myUser);
+        _session.write(_config["key"], $user);
     }
 
     /**
@@ -95,18 +108,18 @@ class SessionStorage : IStorage {
     }
 
 
-    function redirectUrl(myUrl = null) {
-        if (myUrl is null) {
+    function redirectUrl($url = null) {
+        if ($url == null) {
             return _session.read(_config["redirect"]);
         }
 
-        if (myUrl == false) {
+        if ($url == false) {
             _session.delete(_config["redirect"]);
 
             return null;
         }
 
-        _session.write(_config["redirect"], myUrl);
+        _session.write(_config["redirect"], $url);
 
         return null;
     }

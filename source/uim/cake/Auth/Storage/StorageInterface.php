@@ -1,5 +1,5 @@
 
-module uim.cake.auths.Storage;
+module uim.cake.auths.storages;
 
 /**
  * Describes the methods that any class representing an Auth data storage should
