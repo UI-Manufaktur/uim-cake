@@ -278,8 +278,6 @@ class WindowExpression : IExpression, WindowInterface
 
     /**
      * Clone this object and its subtree of expressions.
-     *
-     * @return void
      */
     void __clone() {
         this.name = clone this.name;

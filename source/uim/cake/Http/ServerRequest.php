@@ -501,8 +501,6 @@ class ServerRequest : IServerRequest
 
     /**
      * Clears the instance detector cache, used by the is() function
-     *
-     * @return void
      */
     void clearDetectorCache(): void
     {

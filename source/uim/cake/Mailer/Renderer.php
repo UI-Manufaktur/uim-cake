@@ -91,8 +91,6 @@ class Renderer
 
     /**
      * Clone ViewBuilder instance when renderer is cloned.
-     *
-     * @return void
      */
     void __clone() {
         if (_viewBuilder != null) {

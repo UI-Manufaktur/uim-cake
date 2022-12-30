@@ -160,8 +160,6 @@ class EagerLoader
      *
      * This will reset/clear out any contained associations that were not
      * added via matching().
-     *
-     * @return void
      */
     void clearContain(): void
     {
@@ -840,8 +838,6 @@ class EagerLoader
 
     /**
      * Handles cloning eager loaders and eager loadables.
-     *
-     * @return void
      */
     void __clone() {
         if (_matching) {

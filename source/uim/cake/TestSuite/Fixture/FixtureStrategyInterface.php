@@ -23,8 +23,6 @@ interface FixtureStrategyInterface
 
     /**
      * Called after each test run in each TestCase.
-     *
-     * @return void
      */
     void teardownTest(): void;
 }

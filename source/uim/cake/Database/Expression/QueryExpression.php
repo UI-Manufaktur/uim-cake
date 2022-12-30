@@ -819,8 +819,6 @@ class QueryExpression : IExpression, Countable
 
     /**
      * Clone this object and its subtree of expressions.
-     *
-     * @return void
      */
     void __clone() {
         foreach (_conditions as $i: $condition) {

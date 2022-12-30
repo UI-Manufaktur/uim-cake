@@ -108,8 +108,6 @@ class Event : EventInterface
 
     /**
      * Stops the event from being used anymore
-     *
-     * @return void
      */
     void stopPropagation(): void
     {

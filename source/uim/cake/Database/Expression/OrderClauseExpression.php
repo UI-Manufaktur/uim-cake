@@ -57,8 +57,6 @@ class OrderClauseExpression : IExpression, FieldInterface
 
     /**
      * Create a deep clone of the order clause.
-     *
-     * @return void
      */
     void __clone() {
         if (_field instanceof IExpression) {

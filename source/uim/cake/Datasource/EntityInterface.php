@@ -247,8 +247,6 @@ interface EntityInterface : ArrayAccess, JsonSerializable
      * Sets the entire entity as clean, which means that it will appear as
      * no fields being modified or added at all. This is an useful call
      * for an initial object hydration
-     *
-     * @return void
      */
     void clean(): void;
 

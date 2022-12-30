@@ -85,8 +85,6 @@ class SmtpTransport : AbstractTransport
      * Unserialize handler.
      *
      * Ensure that the socket property isn"t reinitialized in a broken state.
-     *
-     * @return void
      */
     void __wakeup(): void
     {
@@ -98,8 +96,6 @@ class SmtpTransport : AbstractTransport
      *
      * This method tries to connect only in case there is no open
      * connection available already.
-     *
-     * @return void
      */
     void connect(): void
     {
@@ -124,8 +120,6 @@ class SmtpTransport : AbstractTransport
      *
      * This method tries to disconnect only in case there is an open
      * connection available.
-     *
-     * @return void
      */
     void disconnect(): void
     {

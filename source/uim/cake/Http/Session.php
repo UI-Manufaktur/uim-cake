@@ -553,8 +553,6 @@ class Session
 
     /**
      * Helper method to destroy invalid sessions.
-     *
-     * @return void
      */
     void destroy(): void
     {
@@ -601,8 +599,6 @@ class Session
 
     /**
      * Restarts this session.
-     *
-     * @return void
      */
     void renew(): void
     {

@@ -33,8 +33,6 @@ class ConnectionHelper
      * to `test_files`.
      *
      * The `default` connection is aliased to `test`.
-     *
-     * @return void
      */
     void addTestAliases(): void
     {

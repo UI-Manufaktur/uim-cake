@@ -256,8 +256,6 @@ class BufferedStatement : Iterator, StatementInterface
 
     /**
      * Rewinds the collection
-     *
-     * @return void
      */
     void rewind(): void
     {
@@ -283,8 +281,6 @@ class BufferedStatement : Iterator, StatementInterface
 
     /**
      * Advances the iterator pointer to the next element
-     *
-     * @return void
      */
     void next(): void
     {

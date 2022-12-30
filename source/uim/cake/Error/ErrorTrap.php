@@ -78,8 +78,6 @@ class ErrorTrap
      *
      * This method will also set the global error level
      * via error_reporting().
-     *
-     * @return void
      */
     void register(): void
     {

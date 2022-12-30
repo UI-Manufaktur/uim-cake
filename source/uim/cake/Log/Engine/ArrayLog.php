@@ -72,8 +72,6 @@ class ArrayLog : BaseLog
 
     /**
      * Reset internal storage.
-     *
-     * @return void
      */
     void clear(): void
     {

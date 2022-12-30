@@ -25,8 +25,6 @@ class EventList : ArrayAccess, Countable
 
     /**
      * Empties the list of dispatched events.
-     *
-     * @return void
      */
     void flush(): void
     {

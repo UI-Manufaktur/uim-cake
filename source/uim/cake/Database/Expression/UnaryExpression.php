@@ -85,8 +85,6 @@ class UnaryExpression : IExpression
 
     /**
      * Perform a deep clone of the inner expression.
-     *
-     * @return void
      */
     void __clone() {
         if (_value instanceof IExpression) {

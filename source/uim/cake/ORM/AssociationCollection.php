@@ -166,8 +166,6 @@ class AssociationCollection : IteratorAggregate
      * Remove all registered associations.
      *
      * Once removed associations will no longer be reachable
-     *
-     * @return void
      */
     void removeAll(): void
     {

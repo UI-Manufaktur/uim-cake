@@ -189,8 +189,6 @@ class ResultSet : IResultSet
      * Advances the iterator pointer to the next record
      *
      * Part of Iterator interface.
-     *
-     * @return void
      */
     void next(): void
     {

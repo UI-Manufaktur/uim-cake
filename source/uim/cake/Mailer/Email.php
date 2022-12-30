@@ -123,8 +123,6 @@ class Email : JsonSerializable, Serializable
 
     /**
      * Clone Renderer instance when email object is cloned.
-     *
-     * @return void
      */
     void __clone() {
         if (this.renderer) {

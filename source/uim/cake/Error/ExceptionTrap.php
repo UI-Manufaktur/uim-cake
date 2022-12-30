@@ -173,8 +173,6 @@ class ExceptionTrap
      *
      * This will replace the existing exception handler, and the
      * previous exception handler will be discarded.
-     *
-     * @return void
      */
     void register(): void
     {
@@ -188,8 +186,6 @@ class ExceptionTrap
      *
      * If this instance is not currently the registered singleton
      * nothing happens.
-     *
-     * @return void
      */
     void unregister(): void
     {
@@ -249,8 +245,6 @@ class ExceptionTrap
      * Shutdown handler
      *
      * Convert fatal errors into exceptions that we can render.
-     *
-     * @return void
      */
     void handleShutdown(): void
     {

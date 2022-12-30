@@ -478,8 +478,6 @@ class FixtureManager
 
     /**
      * Drop all fixture tables loaded by this class
-     *
-     * @return void
      */
     void shutDown(): void
     {

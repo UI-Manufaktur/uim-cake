@@ -218,8 +218,6 @@ trait IntegrationTestTrait
      * Calling this method will enable a SecurityComponent
      * compatible token to be added to request data. This
      * lets you easily test actions protected by SecurityComponent.
-     *
-     * @return void
      */
     void enableSecurityToken(): void
     {
@@ -255,8 +253,6 @@ trait IntegrationTestTrait
     /**
      * Calling this method will re-store flash messages into the test session
      * after being removed by the FlashHelper
-     *
-     * @return void
      */
     void enableRetainFlashMessages(): void
     {
@@ -1263,8 +1259,6 @@ trait IntegrationTestTrait
      * By using this function, exceptions are no longer caught by the ErrorHandlerMiddleware
      * and are instead re-thrown by the TestExceptionRenderer. This can be helpful
      * when trying to diagnose/debug unexpected failures in test cases.
-     *
-     * @return void
      */
     void disableErrorHandlerMiddleware(): void
     {

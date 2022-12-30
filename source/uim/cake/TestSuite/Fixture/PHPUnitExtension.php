@@ -19,8 +19,6 @@ class PHPUnitExtension : BeforeFirstTestHook
 {
     /**
      * Initializes before any tests are run.
-     *
-     * @return void
      */
     void executeBeforeFirstTest(): void
     {

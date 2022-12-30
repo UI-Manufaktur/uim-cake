@@ -316,8 +316,6 @@ class WhenThenExpression : IExpression
 
     /**
      * Clones the inner expression objects.
-     *
-     * @return void
      */
     void __clone() {
         if (this.when instanceof IExpression) {

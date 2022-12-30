@@ -434,8 +434,6 @@ abstract class TestCase : BaseTestCase
      * Clear all plugins from the global plugin collection.
      *
      * Useful in test case teardown methods.
-     *
-     * @return void
      */
     void clearPlugins(): void
     {

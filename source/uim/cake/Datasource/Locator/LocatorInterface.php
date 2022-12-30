@@ -53,8 +53,6 @@ interface ILocator
 
     /**
      * Clears the registry of configuration and instances.
-     *
-     * @return void
      */
     void clear(): void;
 }

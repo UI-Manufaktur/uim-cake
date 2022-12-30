@@ -75,8 +75,6 @@ abstract class BaseErrorHandler
 
     /**
      * Register the error and exception handlers.
-     *
-     * @return void
      */
     void register(): void
     {

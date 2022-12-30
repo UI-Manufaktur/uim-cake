@@ -129,8 +129,6 @@ abstract class Cell : EventDispatcherInterface
      *
      * Implement this method to avoid having to overwrite
      * the constructor and calling super(().
-     *
-     * @return void
      */
     void initialize(): void
     {

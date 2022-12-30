@@ -1066,8 +1066,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Trigger the beforeFind event on the query"s repository object.
      *
      * Will not trigger more than once, and only for select queries.
-     *
-     * @return void
      */
     void triggerBeforeFind(): void
     {

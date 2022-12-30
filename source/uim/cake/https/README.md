@@ -48,8 +48,6 @@ class Application : IHttpApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.
-     *
-     * @return void
      */
     void bootstrap(): void
     {

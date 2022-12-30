@@ -296,8 +296,6 @@ class EagerLoadable
 
     /**
      * Handles cloning eager loadables.
-     *
-     * @return void
      */
     void __clone() {
         foreach (_associations as $i: $association) {
