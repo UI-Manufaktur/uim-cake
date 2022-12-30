@@ -1,7 +1,7 @@
 module uim.cake.datasources;
 
-use Psr\Log\ILoggerAware;
-use Psr\Log\LoggerInterface;
+use Psr\logs.ILoggerAware;
+use Psr\logs.LoggerInterface;
 use Psr\SimpleCache\ICache;
 
 /**
@@ -28,7 +28,7 @@ interface IConnection : ILoggerAware {
     /**
      * Gets the current logger object.
      *
-     * @return \Psr\Log\LoggerInterface logger instance
+     * @return \Psr\logs.LoggerInterface logger instance
      */
     LoggerInterface getLogger();
 

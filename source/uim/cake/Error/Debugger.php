@@ -25,7 +25,7 @@ import uim.cake.errors.Debug\SpecialNode;
 import uim.cake.errors.Debug\TextFormatter;
 import uim.cake.errors.Renderer\HtmlErrorRenderer;
 import uim.cake.errors.Renderer\TextErrorRenderer;
-import uim.cake.Log\Log;
+import uim.cake.logs.Log;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
 import uim.cake.utilities.Text;

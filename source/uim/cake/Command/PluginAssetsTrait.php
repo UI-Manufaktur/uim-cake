@@ -3,7 +3,7 @@ module uim.cake.commands;
 
 import uim.cake.core.Configure;
 import uim.cake.core.Plugin;
-import uim.cake.Filesystem\Filesystem;
+import uim.cake.filesystems.Filesystem;
 import uim.cake.utilities.Inflector;
 
 /**

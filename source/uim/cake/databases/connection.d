@@ -49,7 +49,7 @@ class Connection : IConnection {
     /**
      * Logger object instance.
      *
-     * @var \Psr\Log\LoggerInterface|null
+     * @var \Psr\logs.LoggerInterface|null
      */
     protected _logger;
 
@@ -766,7 +766,7 @@ class Connection : IConnection {
     /**
      * Sets a logger
      *
-     * @param \Psr\Log\LoggerInterface $logger Logger object
+     * @param \Psr\logs.LoggerInterface $logger Logger object
      * @return this
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
@@ -779,7 +779,7 @@ class Connection : IConnection {
     /**
      * Gets the logger object
      *
-     * @return \Psr\Log\LoggerInterface logger instance
+     * @return \Psr\logs.LoggerInterface logger instance
      */
     auto getLogger(): LoggerInterface
     {
@@ -813,7 +813,7 @@ class Connection : IConnection {
      * for the passed original statement instance.
      *
      * @param uim.cake.databases.IStatement $statement the instance to be decorated
-     * @return uim.cake.databases.Log\LoggingStatement
+     * @return uim.cake.databases.logs.LoggingStatement
      */
     protected auto _newLogger(IStatement $statement): LoggingStatement
     {

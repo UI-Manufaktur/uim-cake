@@ -14,7 +14,7 @@ class File
     /**
      * Folder object of the file
      *
-     * @var uim.cake.Filesystem\Folder
+     * @var uim.cake.filesystems.Folder
      * @link https://book.cakephp.org/4/en/core-libraries/file-folder.html
      */
     $Folder;
@@ -23,7 +23,7 @@ class File
      * File name
      *
      * @var string
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$name
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$name
      */
     $name;
 
@@ -31,7 +31,7 @@ class File
      * File info
      *
      * @var array<string, mixed>
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$info
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$info
      */
     $info = [];
 
@@ -39,7 +39,7 @@ class File
      * Holds the file handler resource if the file is opened
      *
      * @var resource|null
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$handle
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$handle
      */
     $handle;
 
@@ -47,7 +47,7 @@ class File
      * Enable locking for file reading and writing
      *
      * @var bool|null
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$lock
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$lock
      */
     $lock;
 
@@ -57,7 +57,7 @@ class File
      * Current file"s absolute path
      *
      * @var string|null
-     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\Filesystem\File::$path
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$path
      */
     $path;
 
@@ -530,7 +530,7 @@ class File
     /**
      * Returns the current folder.
      *
-     * @return uim.cake.Filesystem\Folder Current folder
+     * @return uim.cake.filesystems.Folder Current folder
      */
     function folder(): Folder
     {

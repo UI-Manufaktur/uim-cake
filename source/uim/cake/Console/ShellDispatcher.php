@@ -13,7 +13,7 @@ import uim.cake.consoles.exceptions.StopException;
 import uim.cake.core.App;
 import uim.cake.core.Configure;
 import uim.cake.core.Plugin;
-import uim.cake.Log\Log;
+import uim.cake.logs.Log;
 import uim.cake.Shell\Task\CommandTask;
 import uim.cake.utilities.Inflector;
 

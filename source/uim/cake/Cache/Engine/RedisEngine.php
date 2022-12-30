@@ -10,7 +10,7 @@
 module uim.cake.caches.Engine;
 
 import uim.cake.caches.CacheEngine;
-import uim.cake.Log\Log;
+import uim.cake.logs.Log;
 use Redis;
 use RedisException;
 use RuntimeException;

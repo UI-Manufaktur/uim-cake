@@ -4,7 +4,7 @@ module uim.cake.Console;
 import uim.cake.core.App;
 import uim.cake.core.Configure;
 import uim.cake.core.Plugin;
-import uim.cake.Filesystem\Filesystem;
+import uim.cake.filesystems.Filesystem;
 import uim.cake.utilities.Inflector;
 
 /**

@@ -8,17 +8,17 @@ import uim.cake.databases.exceptions.MissingConnectionException;
 import uim.cake.databases.exceptions.MissingDriverException;
 import uim.cake.databases.exceptions.MissingExtensionException;
 import uim.cake.databases.exceptions.NestedTransactionRollbackException;
-import uim.cake.databases.Log\LoggedQuery;
-import uim.cake.databases.Log\LoggingStatement;
-import uim.cake.databases.Log\QueryLogger;
+import uim.cake.databases.logs.LoggedQuery;
+import uim.cake.databases.logs.LoggingStatement;
+import uim.cake.databases.logs.QueryLogger;
 import uim.cake.databases.Retry\ReconnectStrategy;
 import uim.cake.databases.schemas.CachedCollection;
 import uim.cake.databases.schemas.Collection as SchemaCollection;
 import uim.cake.databases.schemas.ICollection as SchemaICollection;
 import uim.cake.datasources.ConnectionInterface;
-import uim.cake.Log\Engine\BaseLog;
-import uim.cake.Log\Log;
-use Psr\Log\LoggerInterface;
+import uim.cake.logs.Engine\BaseLog;
+import uim.cake.logs.Log;
+use Psr\logs.LoggerInterface;
 use Psr\SimpleCache\ICache;
 use RuntimeException;
 use Throwable;
@@ -77,7 +77,7 @@ class Connection : ConnectionInterface
     /**
      * Logger object instance.
      *
-     * @var \Psr\Log\LoggerInterface|null
+     * @var \Psr\logs.LoggerInterface|null
      */
     protected $_logger;
 
@@ -840,7 +840,7 @@ class Connection : ConnectionInterface
     /**
      * Sets a logger
      *
-     * @param \Psr\Log\LoggerInterface $logger Logger object
+     * @param \Psr\logs.LoggerInterface $logger Logger object
      * @return this
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
@@ -853,7 +853,7 @@ class Connection : ConnectionInterface
     /**
      * Gets the logger object
      *
-     * @return \Psr\Log\LoggerInterface logger instance
+     * @return \Psr\logs.LoggerInterface logger instance
      */
     function getLogger(): LoggerInterface
     {
@@ -887,7 +887,7 @@ class Connection : ConnectionInterface
      * for the passed original statement instance.
      *
      * @param uim.cake.databases.StatementInterface $statement the instance to be decorated
-     * @return uim.cake.databases.Log\LoggingStatement
+     * @return uim.cake.databases.logs.LoggingStatement
      */
     protected function _newLogger(StatementInterface $statement): LoggingStatement
     {

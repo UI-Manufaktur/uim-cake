@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.6.0
-  */
 module uim.cake.Core;
 
 import uim.cake.consoles.CommandCollection;

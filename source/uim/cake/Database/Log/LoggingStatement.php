@@ -3,7 +3,7 @@ module uim.cake.databases.Log;
 
 import uim.cake.databases.statements.StatementDecorator;
 use Exception;
-use Psr\Log\LoggerInterface;
+use Psr\logs.LoggerInterface;
 
 /**
  * Statement decorator used to
@@ -15,7 +15,7 @@ class LoggingStatement : StatementDecorator
     /**
      * Logger instance responsible for actually doing the logging task
      *
-     * @var \Psr\Log\LoggerInterface
+     * @var \Psr\logs.LoggerInterface
      */
     protected $_logger;
 
@@ -36,7 +36,7 @@ class LoggingStatement : StatementDecorator
     /**
      * Logged query
      *
-     * @var uim.cake.databases.Log\LoggedQuery|null
+     * @var uim.cake.databases.logs.LoggedQuery|null
      */
     protected $loggedQuery;
 
@@ -148,7 +148,7 @@ class LoggingStatement : StatementDecorator
     /**
      * Sets a logger
      *
-     * @param \Psr\Log\LoggerInterface $logger Logger object
+     * @param \Psr\logs.LoggerInterface $logger Logger object
      */
     void setLogger(LoggerInterface $logger) {
         _logger = $logger;
@@ -157,7 +157,7 @@ class LoggingStatement : StatementDecorator
     /**
      * Gets the logger object
      *
-     * @return \Psr\Log\LoggerInterface logger instance
+     * @return \Psr\logs.LoggerInterface logger instance
      */
     function getLogger(): LoggerInterface
     {

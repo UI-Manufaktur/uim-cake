@@ -4,12 +4,12 @@ module uim.cake.Error;
 import uim.cake.core.Configure;
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Log\Log;
+import uim.cake.logs.Log;
 use Psr\Http\messages.IServerRequest;
 use Throwable;
 
 /**
- * Log errors and unhandled exceptions to `Cake\Log\Log`
+ * Log errors and unhandled exceptions to `Cake\logs.Log`
  */
 class ErrorLogger : ErrorLoggerInterface
 {

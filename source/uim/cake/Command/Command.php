@@ -1,18 +1,11 @@
 
-
-
- *
-
-
- * @since         3.6.0
-  */
 module uim.cake.commands;
 
 import uim.cake.consoles.Arguments;
 import uim.cake.consoles.BaseCommand;
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.datasources.ModelAwareTrait;
-import uim.cake.Log\LogTrait;
+import uim.cake.logs.LogTrait;
 import uim.cake.orm.locators.LocatorAwareTrait;
 
 /**

@@ -170,7 +170,7 @@ trait StaticConfigTrait
      * $dsn = "mysql://user:pass@localhost/database?";
      * $config = ConnectionManager::parseDsn($dsn);
      *
-     * $dsn = "Cake\Log\Engine\FileLog://?types=notice,info,debug&file=debug&path=LOGS";
+     * $dsn = "Cake\logs.Engine\FileLog://?types=notice,info,debug&file=debug&path=LOGS";
      * $config = Log::parseDsn($dsn);
      *
      * $dsn = "smtp://user:secret@localhost:25?timeout=30&client=null&tls=null";

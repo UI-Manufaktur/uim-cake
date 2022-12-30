@@ -8,7 +8,7 @@ use Psr\Http\messages.IServerRequest;
 use Throwable;
 
 /**
- * Log errors and unhandled exceptions to `Cake\Log\Log`
+ * Log errors and unhandled exceptions to `Cake\logs.Log`
  */
 class ErrorLogger : IErrorLogger
 {

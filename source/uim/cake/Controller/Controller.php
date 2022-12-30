@@ -16,7 +16,7 @@ import uim.cake.http.ContentTypeNegotiation;
 import uim.cake.http.exceptions.NotFoundException;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
-import uim.cake.Log\LogTrait;
+import uim.cake.logs.LogTrait;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.routings.Router;
 import uim.cake.View\View;

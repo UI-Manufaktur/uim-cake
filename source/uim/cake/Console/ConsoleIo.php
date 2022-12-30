@@ -2,8 +2,8 @@
 module uim.cake.Console;
 
 import uim.cake.consoles.exceptions.StopException;
-import uim.cake.Log\Engine\ConsoleLog;
-import uim.cake.Log\Log;
+import uim.cake.logs.Engine\ConsoleLog;
+import uim.cake.logs.Log;
 use RuntimeException;
 use SplFileObject;
 

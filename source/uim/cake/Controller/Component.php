@@ -10,7 +10,7 @@ module uim.cake.Controller;
 
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.events.IEventListener;
-import uim.cake.Log\LogTrait;
+import uim.cake.logs.LogTrait;
 
 /**
  * Base class for an individual Component. Components provide reusable bits of
