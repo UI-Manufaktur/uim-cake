@@ -569,7 +569,6 @@ class File {
      *
      * @param bool $all Clear all cache or not. Passing false will clear
      *   the stat cache for the current path only.
-     * @return void
      */
     void clearStatCache($all = false): void
     {

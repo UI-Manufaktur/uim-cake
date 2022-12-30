@@ -42,7 +42,6 @@ class IdentifierExpression : IExpression
      * Sets the identifier this expression represents
      *
      * @param string $identifier The identifier
-     * @return void
      */
     void setIdentifier(string $identifier): void
     {
@@ -61,7 +60,6 @@ class IdentifierExpression : IExpression
      * Sets the collation.
      *
      * @param string $collation Identifier collation
-     * @return void
      */
     void setCollation(string $collation): void
     {

@@ -257,7 +257,6 @@ class SqliteSchemaDialect : SchemaDialect
      * @param uim.cake.Database\Schema\TableSchema $schema The table object to append
      *    an index or constraint to.
      * @param array $row The row data from `describeIndexSql`.
-     * @return void
      */
     void convertIndexDescription(TableSchema $schema, array $row): void
     {

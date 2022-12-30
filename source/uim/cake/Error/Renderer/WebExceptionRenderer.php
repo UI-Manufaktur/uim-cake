@@ -286,7 +286,6 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * Emit the response content
      *
      * @param \Psr\Http\messages.IResponse|string $output The response to output.
-     * @return void
      */
     void write($output): void
     {

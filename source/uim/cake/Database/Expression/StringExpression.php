@@ -40,7 +40,6 @@ class StringExpression : IExpression
      * Sets the string collation.
      *
      * @param string $collation String collation
-     * @return void
      */
     void setCollation(string $collation): void
     {

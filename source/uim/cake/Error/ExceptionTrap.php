@@ -280,7 +280,6 @@ class ExceptionTrap
      * in kilobytes
      *
      * @param int $additionalKb Number in kilobytes
-     * @return void
      */
     void increaseMemoryLimit(int $additionalKb): void
     {
@@ -312,7 +311,6 @@ class ExceptionTrap
      * @param string $description Error description
      * @param string $file File on which error occurred
      * @param int $line Line that triggered the error
-     * @return void
      */
     void handleFatalError(int $code, string $description, string $file, int $line): void
     {
@@ -330,7 +328,6 @@ class ExceptionTrap
      *
      * @param \Throwable $exception The exception to log
      * @param \Psr\Http\messages.IServerRequest|null $request The optional request
-     * @return void
      */
     void logException(Throwable $exception, ?IServerRequest $request = null): void
     {
@@ -366,7 +363,6 @@ class ExceptionTrap
      * and hopefully render an error page.
      *
      * @param \Throwable $exception Exception to log
-     * @return void
      */
     void logInternalError(Throwable $exception): void
     {

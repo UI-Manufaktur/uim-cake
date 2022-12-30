@@ -248,7 +248,6 @@ abstract class SchemaDialect
      *
      * @param uim.cake.Database\Schema\TableSchema $schema Table instance.
      * @param array $row The row of data.
-     * @return void
      */
     void convertOptionsDescription(TableSchema $schema, array $row): void
     {

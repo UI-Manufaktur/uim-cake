@@ -35,7 +35,6 @@ class ClassNode : INode
      * Add a property
      *
      * @param uim.cake.Error\Debug\PropertyNode myNode The property to add.
-     * @return void
      */
     void addProperty(PropertyNode myNode): void
     {

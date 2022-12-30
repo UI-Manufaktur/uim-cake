@@ -171,7 +171,6 @@ abstract class BaseApplication implements
      * By default, this will load `config/routes.php` for ease of use and backwards compatibility.
      *
      * @param uim.cake.routings.RouteBuilder $routes A route builder to add routes into.
-     * @return void
      */
     void routes(RouteBuilder $routes): void
     {
@@ -263,7 +262,6 @@ abstract class BaseApplication implements
      * Register application container services.
      *
      * @param uim.cake.Core\IContainer $container The Container to update.
-     * @return void
      */
     void services(IContainer $container): void
     {

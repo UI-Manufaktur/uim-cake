@@ -393,7 +393,6 @@ class ServerRequest : IServerRequest
      * register trusted proxies
      *
      * @param array<string> $proxies ips list of trusted proxies
-     * @return void
      */
     void setTrustedProxies(array $proxies): void
     {

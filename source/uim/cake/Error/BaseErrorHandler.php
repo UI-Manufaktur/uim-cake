@@ -259,7 +259,6 @@ abstract class BaseErrorHandler
      * in kilobytes
      *
      * @param int $additionalKb Number in kilobytes
-     * @return void
      */
     void increaseMemoryLimit(int $additionalKb): void
     {

@@ -118,7 +118,6 @@ trait EntityTrait
      *
      * @param string $field The name of the field to set
      * @param mixed $value The value to set to the field
-     * @return void
      */
     void __set(string $field, $value): void
     {
@@ -142,7 +141,6 @@ trait EntityTrait
      * Removes a field from this entity
      *
      * @param string $field The field to unset
-     * @return void
      */
     void __unset(string $field): void
     {
@@ -582,7 +580,6 @@ trait EntityTrait
      *
      * @param string $offset The offset to set.
      * @param mixed $value The value to set.
-     * @return void
      */
     void offsetSet($offset, $value): void
     {
@@ -593,7 +590,6 @@ trait EntityTrait
      * : unset($result[$offset]);
      *
      * @param string $offset The offset to remove.
-     * @return void
      */
     void offsetUnset($offset): void
     {

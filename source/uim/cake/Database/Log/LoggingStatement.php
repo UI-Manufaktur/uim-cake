@@ -133,7 +133,6 @@ class LoggingStatement : StatementDecorator
      * @param string|int $column Name or param position to be bound
      * @param mixed $value The value to bind to variable in query
      * @param string|int|null $type PDO type or name of configured Type class
-     * @return void
      */
     void bindValue($column, $value, $type = "string"): void
     {
@@ -152,7 +151,6 @@ class LoggingStatement : StatementDecorator
      * Sets a logger
      *
      * @param \Psr\Log\LoggerInterface $logger Logger object
-     * @return void
      */
     void setLogger(LoggerInterface $logger): void
     {

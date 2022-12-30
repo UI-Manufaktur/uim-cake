@@ -124,7 +124,6 @@ trait ModelAwareTrait
      *
      * @param string $type The name of the repository type the factory function is for.
      * @param uim.cake.Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
-     * @return void
      */
     void modelFactory(string $type, $factory): void
     {

@@ -118,7 +118,6 @@ class ConsoleExceptionRenderer
      * Write output to the output stream
      *
      * @param string $output The output to print.
-     * @return void
      */
     void write($output): void
     {

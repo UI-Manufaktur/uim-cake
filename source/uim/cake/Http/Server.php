@@ -108,7 +108,6 @@ class Server : EventDispatcherInterface
      * @param \Psr\Http\messages.IResponse $response The response to emit
      * @param \Laminas\HttpHandlerRunner\Emitter\EmitterInterface|null $emitter The emitter to use.
      *   When null, a SAPI Stream Emitter will be used.
-     * @return void
      */
     void emit(IResponse $response, ?EmitterInterface $emitter = null): void
     {

@@ -50,7 +50,6 @@ class TupleComparison : ComparisonExpression
      * Sets the value
      *
      * @param mixed $value The value to compare
-     * @return void
      */
     void setValue($value): void
     {

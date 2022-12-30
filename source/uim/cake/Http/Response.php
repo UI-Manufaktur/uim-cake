@@ -662,7 +662,6 @@ class Response : IResponse
      *
      * @param string $type Content type.
      * @param array<string>|string $mimeType Definition of the mime type.
-     * @return void
      */
     void setTypeMap(string $type, $mimeType): void
     {
@@ -958,7 +957,6 @@ class Response : IResponse
      * *Warning* This method mutates the response in-place and should be avoided.
      *
      * @deprecated 4.4.0 Use `withNotModified()` instead.
-     * @return void
      */
     void notModified(): void
     {

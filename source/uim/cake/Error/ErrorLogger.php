@@ -41,7 +41,6 @@ class ErrorLogger : ErrorLoggerInterface
      * @param uim.cake.Error\PhpError $error The error to log
      * @param ?\Psr\Http\messages.IServerRequest $request The request if in an HTTP context.
      * @param bool $includeTrace Should the log message include a stacktrace
-     * @return void
      */
     void logError(PhpError $error, ?IServerRequest $request = null, bool $includeTrace = false): void
     {
@@ -68,7 +67,6 @@ class ErrorLogger : ErrorLoggerInterface
      * @param \Throwable $exception The exception to log a message for.
      * @param \Psr\Http\messages.IServerRequest|null $request The current request if available.
      * @param bool $includeTrace Whether or not a stack trace should be logged.
-     * @return void
      */
     void logException(
         Throwable $exception,

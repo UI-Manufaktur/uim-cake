@@ -129,7 +129,6 @@ class Postgres : Driver
      * Sets connection encoding
      *
      * @param string $encoding The encoding to use.
-     * @return void
      */
     void setEncoding(string $encoding): void
     {
@@ -142,7 +141,6 @@ class Postgres : Driver
      * postgres will fallback to looking the relation into defined default schema
      *
      * @param string $schema The schema names to set `search_path` to.
-     * @return void
      */
     void setSchema(string $schema): void
     {

@@ -54,7 +54,6 @@ class TextExceptionRenderer
      * Write output to stdout.
      *
      * @param string $output The output to print.
-     * @return void
      */
     void write($output): void
     {

@@ -72,7 +72,6 @@ class ComparisonExpression : IExpression, FieldInterface
      * Sets the value
      *
      * @param mixed $value The value to compare
-     * @return void
      */
     void setValue($value): void
     {
@@ -100,7 +99,6 @@ class ComparisonExpression : IExpression, FieldInterface
      * Sets the operator to use for the comparison
      *
      * @param string $operator The operator to be used for the comparison.
-     * @return void
      */
     void setOperator(string $operator): void
     {

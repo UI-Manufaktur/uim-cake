@@ -872,7 +872,6 @@ class Debugger
      * Takes a processed array of data from an error and displays it in the chosen format.
      *
      * @param array myData Data to output.
-     * @return void
      */
     void outputError(array myData): void
     {

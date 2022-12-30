@@ -147,7 +147,6 @@ class CaseExpression : IExpression
      *
      * @param uim.cake.Database\IExpression|array|string|null $value Value to set
      * @param string|null $type Type of value
-     * @return void
      */
     void elseValue($value = null, ?string $type = null): void
     {

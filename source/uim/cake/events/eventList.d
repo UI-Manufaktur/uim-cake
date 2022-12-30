@@ -21,7 +21,6 @@ class EventList : ArrayAccess, Countable
      * Adds an event to the list when event listing is enabled.
      *
      * @param uim.cake.events.IEvent myEvent An event to the list of dispatched events.
-     * @return void
      */
     void add(IEvent myEvent) {
         _events[] = myEvent;
@@ -60,7 +59,6 @@ class EventList : ArrayAccess, Countable
      * @link https://secure.php.net/manual/en/arrayaccess.offsetset.php
      * @param mixed $offset The offset to assign the value to.
      * @param mixed myValue The value to set.
-     * @return void
      */
     void offsetSet($offset, myValue) {
         _events[$offset] = myValue;
@@ -71,7 +69,6 @@ class EventList : ArrayAccess, Countable
      *
      * @link https://secure.php.net/manual/en/arrayaccess.offsetunset.php
      * @param mixed $offset The offset to unset.
-     * @return void
      */
     void offsetUnset($offset) {
         unset(_events[$offset]);
