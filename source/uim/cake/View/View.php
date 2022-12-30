@@ -446,8 +446,6 @@ class View : EventDispatcherInterface
 
     /**
      * Get path for templates files.
-     *
-     * @return string
      */
     string getTemplatePath(): string
     {
@@ -468,8 +466,6 @@ class View : EventDispatcherInterface
 
     /**
      * Get path for layout files.
-     *
-     * @return string
      */
     string getLayoutPath(): string
     {
@@ -550,8 +546,6 @@ class View : EventDispatcherInterface
     /**
      * Get the name of the template file to render. The name specified is the
      * filename in `templates/<SubFolder>/` without the .php extension.
-     *
-     * @return string
      */
     string getTemplate(): string
     {
@@ -575,8 +569,6 @@ class View : EventDispatcherInterface
      * Get the name of the layout file to render the template inside of.
      * The name specified is the filename of the layout in `templates/layout/`
      * without the .php extension.
-     *
-     * @return string
      */
     string getLayout(): string
     {
@@ -1081,8 +1073,6 @@ class View : EventDispatcherInterface
 
     /**
      * Retrieve the current template type
-     *
-     * @return string
      */
     string getCurrentType(): string
     {

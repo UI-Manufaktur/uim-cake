@@ -50,8 +50,6 @@ class TemplateFileEquals : Constraint
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

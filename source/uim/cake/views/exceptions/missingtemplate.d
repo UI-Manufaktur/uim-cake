@@ -56,8 +56,6 @@ class MissingTemplateException : CakeException
 
     /**
      * Get the formatted exception message.
-     *
-     * @return string
      */
     string formatMessage() {
         myName = this.templateName ?? this.filename;

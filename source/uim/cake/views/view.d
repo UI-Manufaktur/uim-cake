@@ -378,8 +378,6 @@ class View : IEventDispatcher {
     /**
      * Get the name of the template file to render. The name specified is the
      * filename in `templates/<SubFolder>/` without the .php extension.
-     *
-     * @return string
      */
     string getTemplate() {
         return this.template;
@@ -402,8 +400,6 @@ class View : IEventDispatcher {
      * Get the name of the layout file to render the template inside of.
      * The name specified is the filename of the layout in `templates/layout/`
      * without the .php extension.
-     *
-     * @return string
      */
     string getLayout() {
         return this.layout;
@@ -896,8 +892,6 @@ class View : IEventDispatcher {
 
     /**
      * Retrieve the current template type
-     *
-     * @return string
      */
     string getCurrentType() {
         return _currentType;

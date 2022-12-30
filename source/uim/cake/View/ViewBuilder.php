@@ -646,8 +646,6 @@ class ViewBuilder : JsonSerializable, Serializable
 
     /**
      * Serializes the view builder object.
-     *
-     * @return string
      */
     string serialize(): string
     {
