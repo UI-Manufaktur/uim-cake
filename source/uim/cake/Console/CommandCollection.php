@@ -1,4 +1,3 @@
-
 module uim.cake.Console;
 
 use ArrayIterator;

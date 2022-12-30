@@ -10,8 +10,7 @@
 
 
 
- */
-module uim.cake.Console;
+ */module uim.cake.Console;
 
 /**
  * An interface for abstracting creation of command and shell instances.

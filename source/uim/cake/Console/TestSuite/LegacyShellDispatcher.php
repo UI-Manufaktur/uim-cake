@@ -11,8 +11,7 @@
 
 
 
- */
-module uim.cake.consoles.TestSuite;
+ */module uim.cake.consoles.TestSuite;
 
 import uim.cake.consoles.ConsoleIo;
 import uim.cake.consoles.Shell;

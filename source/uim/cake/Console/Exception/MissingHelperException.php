@@ -9,8 +9,7 @@
  *
 
 
-  */
-module uim.cake.consoles.Exception;
+  */module uim.cake.consoles.Exception;
 
 /**
  * Used when a Helper cannot be found.

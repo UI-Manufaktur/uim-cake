@@ -10,8 +10,7 @@
 
  * @link          https://book.cakephp.org/4/en/development/errors.html#error-exception-configuration
 
-  */
-module uim.cake.consoles.Exception;
+  */module uim.cake.consoles.Exception;
 
 use Throwable;
 

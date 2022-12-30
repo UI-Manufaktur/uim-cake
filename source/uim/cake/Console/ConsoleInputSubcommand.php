@@ -13,8 +13,7 @@
 
 
  * @since         2.0.0
-  */
-module uim.cake.Console;
+  */module uim.cake.Console;
 
 use InvalidArgumentException;
 use SimpleXMLElement;

@@ -1,4 +1,3 @@
-
 module uim.cake.Console;
 
 import uim.cake.utilities.Text;

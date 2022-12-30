@@ -11,8 +11,7 @@
 
  * @since         3.7.0
 
- */
-module uim.cake.consoles.TestSuite;
+ */module uim.cake.consoles.TestSuite;
 
 import uim.cake.Command\Command;
 import uim.cake.consoles.CommandRunner;

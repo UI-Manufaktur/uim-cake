@@ -10,8 +10,7 @@
 
 
 
- */
-module uim.cake.Console;
+ */module uim.cake.Console;
 
 import uim.cake.core.IContainer;
 use InvalidArgumentException;

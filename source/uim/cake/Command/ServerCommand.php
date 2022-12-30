@@ -6,7 +6,6 @@
 
  * @since         2.3.0
   */
-
 module uim.cake.commands;
 
 import uim.cake.consoles.Arguments;

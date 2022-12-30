@@ -10,8 +10,7 @@
  *
 
  * @link          https://cakephp.org CakePHP Project
-  */
-module uim.cake.consoles.TestSuite;
+  */module uim.cake.consoles.TestSuite;
 
 use RuntimeException;
 
