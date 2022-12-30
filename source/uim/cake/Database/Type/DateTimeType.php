@@ -27,9 +27,8 @@ class DateTimeType : BaseType : BatchCastingInterface
      *
      * This is primarily to avoid subclasses needing to re-implement the same functionality.
      *
-     * @var bool
      */
-    protected $setToDateStart = false;
+    protected bool $setToDateStart = false;
 
     /**
      * The DateTime format used when converting to string.
@@ -53,9 +52,8 @@ class DateTimeType : BaseType : BatchCastingInterface
     /**
      * Whether `marshal()` should use locale-aware parser with `_localeMarshalFormat`.
      *
-     * @var bool
      */
-    protected $_useLocaleMarshal = false;
+    protected bool $_useLocaleMarshal = false;
 
     /**
      * The locale-aware format `marshal()` uses when `_useLocaleParser` is true.
@@ -98,9 +96,8 @@ class DateTimeType : BaseType : BatchCastingInterface
     /**
      * Whether database time zone is kept when converting
      *
-     * @var bool
      */
-    protected $keepDatabaseTimezone = false;
+    protected bool $keepDatabaseTimezone = false;
 
     /**
      * {@inheritDoc}

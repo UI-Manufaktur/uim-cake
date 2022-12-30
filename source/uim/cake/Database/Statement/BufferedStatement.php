@@ -19,9 +19,8 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * If true, all rows were fetched
      *
-     * @var bool
      */
-    protected $_allFetched = false;
+    protected bool $_allFetched = false;
 
     /**
      * The decorated statement
@@ -47,16 +46,14 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * Whether this statement has already been executed
      *
-     * @var bool
      */
-    protected $_hasExecuted = false;
+    protected bool $_hasExecuted = false;
 
     /**
      * The current iterator index.
      *
-     * @var int
      */
-    protected $index = 0;
+    protected int $index = 0;
 
     /**
      * Constructor

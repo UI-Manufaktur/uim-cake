@@ -65,9 +65,8 @@ class EagerLoadable
     /**
      * Whether this level can be fetched using a join.
      *
-     * @var bool
      */
-    protected $_canBeJoined = false;
+    protected bool $_canBeJoined = false;
 
     /**
      * Whether this level was meant for a "matching" fetch

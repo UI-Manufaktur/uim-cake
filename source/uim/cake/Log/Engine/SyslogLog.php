@@ -80,9 +80,8 @@ class SyslogLog : BaseLog
     /**
      * Whether the logger connection is open or not
      *
-     * @var bool
      */
-    protected $_open = false;
+    protected bool $_open = false;
 
 
     this(array $config = []) {

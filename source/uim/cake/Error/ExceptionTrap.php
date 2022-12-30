@@ -87,9 +87,8 @@ class ExceptionTrap
     /**
      * Track if this trap was removed from the global handler.
      *
-     * @var bool
      */
-    protected $disabled = false;
+    protected bool $disabled = false;
 
     /**
      * Constructor

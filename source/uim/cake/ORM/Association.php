@@ -115,16 +115,14 @@ abstract class Association
      * often used to indicate that records should be removed if the owning record in
      * the source table is deleted.
      *
-     * @var bool
      */
-    protected $_dependent = false;
+    protected bool $_dependent = false;
 
     /**
      * Whether cascaded deletes should also fire callbacks.
      *
-     * @var bool
      */
-    protected $_cascadeCallbacks = false;
+    protected bool $_cascadeCallbacks = false;
 
     /**
      * Source table instance

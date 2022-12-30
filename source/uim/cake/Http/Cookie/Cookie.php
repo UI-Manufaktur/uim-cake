@@ -64,9 +64,8 @@ class Cookie : CookieInterface
     /**
      * Whether a JSON value has been expanded into an array.
      *
-     * @var bool
      */
-    protected $isExpanded = false;
+    protected bool $isExpanded = false;
 
     /**
      * Expiration time
@@ -90,16 +89,14 @@ class Cookie : CookieInterface
     /**
      * Secure
      *
-     * @var bool
      */
-    protected $secure = false;
+    protected bool $secure = false;
 
     /**
      * HTTP only
      *
-     * @var bool
      */
-    protected $httpOnly = false;
+    protected bool $httpOnly = false;
 
     /**
      * Samesite

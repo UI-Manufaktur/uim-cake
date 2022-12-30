@@ -61,9 +61,8 @@ class TranslatorRegistry
     /**
      * Use fallback-domain for translation loaders.
      *
-     * @var bool
      */
-    protected $_useFallback = true;
+    protected bool $_useFallback = true;
 
     /**
      * A CacheEngine object that is used to remember translator across

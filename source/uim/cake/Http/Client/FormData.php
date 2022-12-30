@@ -35,16 +35,14 @@ class FormData : Countable
     /**
      * Whether this formdata object has attached files.
      *
-     * @var bool
      */
-    protected $_hasFile = false;
+    protected bool $_hasFile = false;
 
     /**
      * Whether this formdata object has a complex part.
      *
-     * @var bool
      */
-    protected $_hasComplexPart = false;
+    protected bool $_hasComplexPart = false;
 
     /**
      * The parts in the form data.

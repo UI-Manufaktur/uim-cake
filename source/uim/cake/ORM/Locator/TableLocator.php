@@ -56,9 +56,8 @@ class TableLocator : AbstractLocator : ILocator
     /**
      * Whether fallback class should be used if a table class could not be found.
      *
-     * @var bool
      */
-    protected $allowFallbackClass = true;
+    protected bool $allowFallbackClass = true;
 
     /**
      * Constructor.

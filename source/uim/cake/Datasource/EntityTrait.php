@@ -65,9 +65,8 @@ trait EntityTrait
      * Entities default to assuming they are new. You can use Table::persisted()
      * to set the new flag on an entity based on records in the database.
      *
-     * @var bool
      */
-    protected $_new = true;
+    protected bool $_new = true;
 
     /**
      * List of errors per field as stored in this object.

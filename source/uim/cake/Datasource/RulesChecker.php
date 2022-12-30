@@ -92,9 +92,8 @@ class RulesChecker
     /**
      * Whether to use I18n functions for translating default error messages
      *
-     * @var bool
      */
-    protected $_useI18n = false;
+    protected bool $_useI18n = false;
 
     /**
      * Constructor. Takes the options to be passed to all rules.

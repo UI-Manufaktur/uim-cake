@@ -25,9 +25,8 @@ class ConsoleErrorRenderer : ErrorRendererInterface
     protected $output;
 
     /**
-     * @var bool
      */
-    protected $trace = false;
+    protected bool $trace = false;
 
     /**
      * Constructor.

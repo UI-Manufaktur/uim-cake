@@ -32,9 +32,8 @@ class DecimalType : BaseType : BatchCastingInterface
      * Whether numbers should be parsed using a locale aware parser
      * when marshalling string inputs.
      *
-     * @var bool
      */
-    protected $_useLocaleParser = false;
+    protected bool $_useLocaleParser = false;
 
     /**
      * Convert decimal strings into the database format.

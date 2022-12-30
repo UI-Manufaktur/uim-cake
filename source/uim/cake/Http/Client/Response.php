@@ -85,9 +85,8 @@ class Response : Message : IResponse
     /**
      * The status code of the response.
      *
-     * @var int
      */
-    protected $code;
+    protected int $code;
 
     /**
      * Cookie Collection instance

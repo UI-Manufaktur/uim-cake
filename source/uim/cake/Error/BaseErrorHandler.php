@@ -39,9 +39,8 @@ abstract class BaseErrorHandler
     ];
 
     /**
-     * @var bool
      */
-    protected $_handled = false;
+    protected bool $_handled = false;
 
     /**
      * Exception logger instance.

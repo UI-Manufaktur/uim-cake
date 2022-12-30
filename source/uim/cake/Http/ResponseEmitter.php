@@ -31,9 +31,8 @@ class ResponseEmitter : EmitterInterface
     /**
      * Maximum output buffering size for each iteration.
      *
-     * @var int
      */
-    protected $maxBufferLength;
+    protected int $maxBufferLength;
 
     /**
      * Constructor

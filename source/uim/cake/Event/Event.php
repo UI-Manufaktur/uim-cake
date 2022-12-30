@@ -51,9 +51,8 @@ class Event : EventInterface
     /**
      * Flags an event as stopped or not, default is false
      *
-     * @var bool
      */
-    protected $_stopped = false;
+    protected bool $_stopped = false;
 
     /**
      * Constructor

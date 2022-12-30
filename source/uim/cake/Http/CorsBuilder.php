@@ -40,9 +40,8 @@ class CorsBuilder
     /**
      * Whether the request was over SSL.
      *
-     * @var bool
      */
-    protected $_isSsl;
+    protected bool $_isSsl;
 
     /**
      * The headers that have been queued so far.

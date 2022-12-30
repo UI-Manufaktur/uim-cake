@@ -62,9 +62,8 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     /**
      * Whether the table is temporary
      *
-     * @var bool
      */
-    protected $_temporary = false;
+    protected bool $_temporary = false;
 
     /**
      * Column length when using a `tiny` column type

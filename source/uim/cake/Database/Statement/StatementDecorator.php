@@ -40,9 +40,8 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     /**
      * Whether this statement has already been executed
      *
-     * @var bool
      */
-    protected $_hasExecuted = false;
+    protected bool $_hasExecuted = false;
 
     /**
      * Constructor

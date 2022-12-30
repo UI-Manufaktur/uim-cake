@@ -25,9 +25,8 @@ class DateType : DateTimeType
      * In this class we want Date objects to  have their time
      * set to the beginning of the day.
      *
-     * @var bool
      */
-    protected $setToDateStart = true;
+    protected bool $setToDateStart = true;
 
 
     this(?string $name = null) {

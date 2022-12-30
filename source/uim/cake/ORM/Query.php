@@ -111,16 +111,14 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Whether to hydrate results into entity objects
      *
-     * @var bool
      */
-    protected $_hydrate = true;
+    protected bool $_hydrate = true;
 
     /**
      * Whether aliases are generated for fields.
      *
-     * @var bool
      */
-    protected $aliasingEnabled = true;
+    protected bool $aliasingEnabled = true;
 
     /**
      * A callable function that can be used to calculate the total amount of
@@ -141,9 +139,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * True if the beforeFind event has already been triggered for this query
      *
-     * @var bool
      */
-    protected $_beforeFindFired = false;
+    protected bool $_beforeFindFired = false;
 
     /**
      * The COUNT(*) for the query.

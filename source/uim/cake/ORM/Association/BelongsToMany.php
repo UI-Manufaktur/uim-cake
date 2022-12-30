@@ -114,9 +114,8 @@ class BelongsToMany : Association
      *
      * Defaults to true for backwards compatibility.
      *
-     * @var bool
      */
-    protected $_dependent = true;
+    protected bool $_dependent = true;
 
     /**
      * Filtered conditions that reference the target table.

@@ -48,9 +48,8 @@ class Socket
     /**
      * This boolean contains the current state of the Socket class
      *
-     * @var bool
      */
-    protected $connected = false;
+    protected bool $connected = false;
 
     /**
      * This variable contains an array with the last error number (num) and string (str)
@@ -62,9 +61,8 @@ class Socket
     /**
      * True if the socket stream is encrypted after a {@link uim.cake.Network\Socket::enableCrypto()} call
      *
-     * @var bool
      */
-    protected $encrypted = false;
+    protected bool $encrypted = false;
 
     /**
      * Contains all the encryption methods available

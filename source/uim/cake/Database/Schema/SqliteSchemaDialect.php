@@ -21,9 +21,8 @@ class SqliteSchemaDialect : SchemaDialect
     /**
      * Whether there is any table in this connection to SQLite containing sequences.
      *
-     * @var bool
      */
-    protected $_hasSequences;
+    protected bool $_hasSequences;
 
     /**
      * Convert a column definition to the abstract types.

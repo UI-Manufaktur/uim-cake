@@ -36,9 +36,8 @@ class DatabaseSession : SessionHandlerInterface
     /**
      * Number of seconds to mark the session as expired
      *
-     * @var int
      */
-    protected $_timeout;
+    protected int $_timeout;
 
     /**
      * Constructor. Looks at Session configuration information and

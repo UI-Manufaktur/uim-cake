@@ -31,9 +31,8 @@ class MiddlewareQueue : Countable, SeekableIterator
     /**
      * Internal position for iterator.
      *
-     * @var int
      */
-    protected $position = 0;
+    protected int $position = 0;
 
     /**
      * The queue of middlewares.

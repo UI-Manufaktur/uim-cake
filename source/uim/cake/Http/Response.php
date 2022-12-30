@@ -364,9 +364,8 @@ class Response : IResponse
     /**
      * Status code to send to the client
      *
-     * @var int
      */
-    protected $_status = 200;
+    protected int $_status = 200;
 
     /**
      * File object for file to be read out as response

@@ -29,9 +29,8 @@ class ResultSet : IResultSet
     /**
      * Points to the next record number that should be fetched
      *
-     * @var int
      */
-    protected $_index = 0;
+    protected int $_index = 0;
 
     /**
      * Last record fetched from the statement
@@ -94,9 +93,8 @@ class ResultSet : IResultSet
     /**
      * Whether to hydrate results into objects or not
      *
-     * @var bool
      */
-    protected $_hydrate = true;
+    protected bool $_hydrate = true;
 
     /**
      * Tracks value of $_autoFields property of $query passed to constructor.
@@ -114,16 +112,14 @@ class ResultSet : IResultSet
     /**
      * Whether to buffer results fetched from the statement
      *
-     * @var bool
      */
-    protected $_useBuffering = true;
+    protected bool $_useBuffering = true;
 
     /**
      * Holds the count of records in this result set
      *
-     * @var int
      */
-    protected $_count;
+    protected int $_count;
 
     /**
      * The Database driver object.

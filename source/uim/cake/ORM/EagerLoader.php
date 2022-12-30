@@ -85,9 +85,8 @@ class EagerLoader
      * will be eagerly loaded. When set to false, no fields will
      * be loaded from associations.
      *
-     * @var bool
      */
-    protected $_autoFields = true;
+    protected bool $_autoFields = true;
 
     /**
      * Sets the list of associations that should be eagerly loaded along for a

@@ -64,9 +64,8 @@ trait QueryTrait
     /**
      * Whether the query is standalone or the product of an eager load operation.
      *
-     * @var bool
      */
-    protected $_eagerLoaded = false;
+    protected bool $_eagerLoaded = false;
 
     /**
      * Set the default Table object that will be used by this query
