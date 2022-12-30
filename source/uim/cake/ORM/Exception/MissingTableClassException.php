@@ -22,7 +22,6 @@ import uim.cake.core.exceptions.CakeException;
 class MissingTableClassException : CakeException
 {
     /**
-     * @var string
      */
-    protected $_messageTemplate = "Table class %s could not be found.";
+    protected string $_messageTemplate = "Table class %s could not be found.";
 }

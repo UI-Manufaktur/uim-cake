@@ -122,16 +122,14 @@ trait IntegrationTestTrait
     /**
      * The last rendered view
      *
-     * @var string
      */
-    protected $_viewName;
+    protected string $_viewName;
 
     /**
      * The last rendered layout
      *
-     * @var string
      */
-    protected $_layoutName;
+    protected string $_layoutName;
 
     /**
      * The session instance from the last request
@@ -186,9 +184,8 @@ trait IntegrationTestTrait
     /**
      * The name that will be used when retrieving the csrf token.
      *
-     * @var string
      */
-    protected $_csrfKeyName = "csrfToken";
+    protected string $_csrfKeyName = "csrfToken";
 
     /**
      * Clears the state used for requests.

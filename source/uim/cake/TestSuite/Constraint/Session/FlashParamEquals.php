@@ -32,14 +32,12 @@ class FlashParamEquals : Constraint
     protected $session;
 
     /**
-     * @var string
      */
-    protected $key;
+    protected string $key;
 
     /**
-     * @var string
      */
-    protected $param;
+    protected string $param;
 
     /**
      * @var int|null

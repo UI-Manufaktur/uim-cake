@@ -8,9 +8,8 @@ module uim.cake.TestSuite\Constraint\Email;
 class MailSentFrom : MailSentWith
 {
     /**
-     * @var string
      */
-    protected $method = "from";
+    protected string $method = "from";
 
     /**
      * Assertion message string

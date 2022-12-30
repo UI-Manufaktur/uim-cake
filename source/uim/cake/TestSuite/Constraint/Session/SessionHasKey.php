@@ -25,9 +25,8 @@ use PHPUnit\Framework\Constraint\Constraint;
 class SessionHasKey : Constraint
 {
     /**
-     * @var string
      */
-    protected $path;
+    protected string $path;
 
     /**
      * Constructor

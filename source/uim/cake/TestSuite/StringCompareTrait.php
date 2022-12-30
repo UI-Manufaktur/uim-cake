@@ -14,9 +14,8 @@ trait StringCompareTrait
      *
      * Must be initialized before use
      *
-     * @var string
      */
-    protected $_compareBasePath = "";
+    protected string $_compareBasePath = "";
 
     /**
      * Update comparisons to match test changes

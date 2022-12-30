@@ -27,23 +27,20 @@ class SelectLoader
     /**
      * The alias of the association loading the results
      *
-     * @var string
      */
-    protected $alias;
+    protected string $alias;
 
     /**
      * The alias of the source association
      *
-     * @var string
      */
-    protected $sourceAlias;
+    protected string $sourceAlias;
 
     /**
      * The alias of the target association
      *
-     * @var string
      */
-    protected $targetAlias;
+    protected string $targetAlias;
 
     /**
      * The foreignKey to the target association
@@ -55,16 +52,14 @@ class SelectLoader
     /**
      * The strategy to use for loading, either select or subquery
      *
-     * @var string
      */
-    protected $strategy;
+    protected string $strategy;
 
     /**
      * The binding key for the source association.
      *
-     * @var string
      */
-    protected $bindingKey;
+    protected string $bindingKey;
 
     /**
      * A callable that will return a query object used for loading the association results
@@ -76,16 +71,14 @@ class SelectLoader
     /**
      * The type of the association triggering the load
      *
-     * @var string
      */
-    protected $associationType;
+    protected string $associationType;
 
     /**
      * The sorting options for loading the association
      *
-     * @var string
      */
-    protected $sort;
+    protected string $sort;
 
     /**
      * Copies the options array to properties in this class. The keys in the array correspond

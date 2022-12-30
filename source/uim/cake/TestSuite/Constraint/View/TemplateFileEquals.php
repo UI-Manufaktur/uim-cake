@@ -24,9 +24,8 @@ use PHPUnit\Framework\Constraint\Constraint;
 class TemplateFileEquals : Constraint
 {
     /**
-     * @var string
      */
-    protected $filename;
+    protected string $filename;
 
     /**
      * Constructor

@@ -24,9 +24,8 @@ use Psr\Http\messages.IResponse;
 class HeaderSet : ResponseBase
 {
     /**
-     * @var string
      */
-    protected $headerName;
+    protected string $headerName;
 
     /**
      * Constructor.

@@ -32,14 +32,12 @@ class CookieEncryptedEquals : CookieEquals
     protected $response;
 
     /**
-     * @var string
      */
-    protected $key;
+    protected string $key;
 
     /**
-     * @var string
      */
-    protected $mode;
+    protected string $mode;
 
     /**
      * Constructor.

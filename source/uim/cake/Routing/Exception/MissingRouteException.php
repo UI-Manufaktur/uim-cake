@@ -27,9 +27,8 @@ class MissingRouteException : CakeException
     /**
      * Message template to use when the requested method is included.
      *
-     * @var string
      */
-    protected $_messageTemplateWithMethod = "A "%s" route matching "%s" could not be found.";
+    protected string $_messageTemplateWithMethod = "A "%s" route matching "%s" could not be found.";
 
     /**
      * Constructor.

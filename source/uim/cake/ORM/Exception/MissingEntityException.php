@@ -24,7 +24,6 @@ import uim.cake.core.exceptions.CakeException;
 class MissingEntityException : CakeException
 {
     /**
-     * @var string
      */
-    protected $_messageTemplate = "Entity class %s could not be found.";
+    protected string $_messageTemplate = "Entity class %s could not be found.";
 }

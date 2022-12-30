@@ -63,9 +63,8 @@ abstract class Cell : EventDispatcherInterface
     /**
      * The cell"s action to invoke.
      *
-     * @var string
      */
-    protected $action;
+    protected string $action;
 
     /**
      * Arguments to pass to cell"s action.

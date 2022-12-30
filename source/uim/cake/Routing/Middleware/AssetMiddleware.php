@@ -30,9 +30,8 @@ class AssetMiddleware : IMiddleware
     /**
      * The amount of time to cache the asset.
      *
-     * @var string
      */
-    protected $cacheTime = "+1 day";
+    protected string $cacheTime = "+1 day";
 
     /**
      * Constructor.

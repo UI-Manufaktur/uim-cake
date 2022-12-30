@@ -29,9 +29,8 @@ class CookieEquals : ResponseBase
     protected $response;
 
     /**
-     * @var string
      */
-    protected $cookieName;
+    protected string $cookieName;
 
     /**
      * Constructor.

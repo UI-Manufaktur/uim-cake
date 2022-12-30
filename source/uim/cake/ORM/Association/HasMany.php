@@ -31,16 +31,14 @@ class HasMany : Association
     /**
      * The type of join to be used when adding the association to a query
      *
-     * @var string
      */
-    protected $_joinType = Query::JOIN_TYPE_INNER;
+    protected string $_joinType = Query::JOIN_TYPE_INNER;
 
     /**
      * The strategy name to be used to fetch associated records.
      *
-     * @var string
      */
-    protected $_strategy = self::STRATEGY_SELECT;
+    protected string $_strategy = self::STRATEGY_SELECT;
 
     /**
      * Valid strategies for this type of association
@@ -69,9 +67,8 @@ class HasMany : Association
     /**
      * Saving strategy to be used by this association
      *
-     * @var string
      */
-    protected $_saveStrategy = self::SAVE_APPEND;
+    protected string $_saveStrategy = self::SAVE_APPEND;
 
     /**
      * Returns whether the passed table is the owning side for this

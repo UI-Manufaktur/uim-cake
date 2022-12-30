@@ -34,9 +34,8 @@ class LinkConstraint
     /**
      * The link status that is required to be present in order for the check to succeed.
      *
-     * @var string
      */
-    protected $_requiredLinkState;
+    protected string $_requiredLinkState;
 
     /**
      * Constructor.

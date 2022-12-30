@@ -50,17 +50,15 @@ class ValidationRule
     /**
      * The "message" key
      *
-     * @var string
      */
-    protected $_message;
+    protected string $_message;
 
     /**
      * Key under which the object or class where the method to be used for
      * validation will be found
      *
-     * @var string
      */
-    protected $_provider = "default";
+    protected string $_provider = "default";
 
     /**
      * Extra arguments to be passed to the validation method

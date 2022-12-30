@@ -35,9 +35,8 @@ trait ValidatorAwareTrait
     /**
      * Validator class.
      *
-     * @var string
      */
-    protected $_validatorClass = Validator::class;
+    protected string $_validatorClass = Validator::class;
 
     /**
      * A list of validation objects indexed by name

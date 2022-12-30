@@ -28,9 +28,8 @@ class TreeBehavior : Behavior
     /**
      * Cached copy of the first column in a table"s primary key.
      *
-     * @var string
      */
-    protected $_primaryKey;
+    protected string $_primaryKey;
 
     /**
      * Default config

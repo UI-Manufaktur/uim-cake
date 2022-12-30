@@ -140,16 +140,14 @@ class Message : JsonSerializable, Serializable
      * Domain for messageId generation.
      * Needs to be manually set for CLI mailing as env("HTTP_HOST") is empty
      *
-     * @var string
      */
-    protected $domain = "";
+    protected string $domain = "";
 
     /**
      * The subject of the email
      *
-     * @var string
      */
-    protected $subject = "";
+    protected string $subject = "";
 
     /**
      * Associative array of a user defined headers
@@ -162,16 +160,14 @@ class Message : JsonSerializable, Serializable
     /**
      * Text message
      *
-     * @var string
      */
-    protected $textMessage = "";
+    protected string $textMessage = "";
 
     /**
      * Html message
      *
-     * @var string
      */
-    protected $htmlMessage = "";
+    protected string $htmlMessage = "";
 
     /**
      * Final message to send
@@ -190,16 +186,14 @@ class Message : JsonSerializable, Serializable
     /**
      * What format should the email be sent in
      *
-     * @var string
      */
-    protected $emailFormat = self::MESSAGE_TEXT;
+    protected string $emailFormat = self::MESSAGE_TEXT;
 
     /**
      * Charset the email body is sent in
      *
-     * @var string
      */
-    protected $charset = "utf-8";
+    protected string $charset = "utf-8";
 
     /**
      * Charset the email header is sent in

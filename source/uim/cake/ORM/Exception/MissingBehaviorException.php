@@ -20,7 +20,6 @@ import uim.cake.core.exceptions.CakeException;
 class MissingBehaviorException : CakeException
 {
     /**
-     * @var string
      */
-    protected $_messageTemplate = "Behavior class %s could not be found.";
+    protected string $_messageTemplate = "Behavior class %s could not be found.";
 }

@@ -50,9 +50,8 @@ class ResultSet : IResultSet
     /**
      * The default table alias
      *
-     * @var string
      */
-    protected $_defaultAlias;
+    protected string $_defaultAlias;
 
     /**
      * List of associations that should be placed under the `_matchingData`
@@ -109,9 +108,8 @@ class ResultSet : IResultSet
     /**
      * The fully namespaced name of the class to use for hydrating results
      *
-     * @var string
      */
-    protected $_entityClass;
+    protected string $_entityClass;
 
     /**
      * Whether to buffer results fetched from the statement
