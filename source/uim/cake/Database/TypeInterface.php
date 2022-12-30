@@ -5,8 +5,7 @@
 
 
  * @since         3.2.14
-  */
-module uim.cake.Database;
+  */module uim.cake.Database;
 
 /**
  * Encapsulates all conversion functions for values coming from a database into PHP and
