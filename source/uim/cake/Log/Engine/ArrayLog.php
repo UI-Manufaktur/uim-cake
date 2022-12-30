@@ -11,8 +11,7 @@
 
  * @link          https://cakefoundation.org CakePHP(tm) Project
 
-  */
-module uim.cake.logs.Engine;
+  */module uim.cake.logs.Engine;
 
 import uim.cake.logs.Formatter\DefaultFormatter;
 

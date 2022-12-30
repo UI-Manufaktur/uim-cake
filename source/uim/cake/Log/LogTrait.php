@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.Log;
+  */module uim.cake.Log;
 
 use Psr\logs.LogLevel;
 

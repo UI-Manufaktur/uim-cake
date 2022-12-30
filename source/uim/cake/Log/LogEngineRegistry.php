@@ -5,8 +5,7 @@
 
 
  * @since         2.2.0
-  */
-module uim.cake.Log;
+  */module uim.cake.Log;
 
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;

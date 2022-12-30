@@ -10,8 +10,7 @@
 
 
  * @since         3.3.0
-  */
-module uim.cake.I18n\Middleware;
+  */module uim.cake.I18n\Middleware;
 
 import uim.cake.I18n\I18n;
 use Locale;

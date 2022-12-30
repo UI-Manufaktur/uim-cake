@@ -11,8 +11,7 @@
 
  * @link          https://cakefoundation.org CakePHP(tm) Project
  * @since         2.2.0
-  */
-module uim.cake.logs.Engine;
+  */module uim.cake.logs.Engine;
 
 use ArrayObject;
 import uim.cake.core.InstanceConfigTrait;

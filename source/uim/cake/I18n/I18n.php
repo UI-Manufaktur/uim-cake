@@ -5,8 +5,7 @@
 
 
  * @since         1.2.0
-  */
-module uim.cake.I18n;
+  */module uim.cake.I18n;
 
 import uim.cake.caches.Cache;
 import uim.cake.I18n\exceptions.I18nException;

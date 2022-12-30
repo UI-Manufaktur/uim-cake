@@ -5,8 +5,7 @@
 
 
  * @since         3.3.12
-  */
-module uim.cake.I18n;
+  */module uim.cake.I18n;
 
 /**
  * Translator to translate the message.

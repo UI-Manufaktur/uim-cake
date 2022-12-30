@@ -5,8 +5,7 @@
 
 
  * @since         0.10.0
-  */
-module uim.cake.I18n;
+  */module uim.cake.I18n;
 
 use NumberFormatter;
 

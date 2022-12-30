@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.Log;
+  */module uim.cake.Log;
 
 import uim.cake.core.StaticConfigTrait;
 import uim.cake.logs.Engine\BaseLog;

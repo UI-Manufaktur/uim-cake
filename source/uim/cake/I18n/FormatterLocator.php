@@ -6,8 +6,7 @@
  * @copyright     Copyright (c) 2017 Aura for PHP
 
  * @since         4.2.0
-  */
-module uim.cake.I18n;
+  */module uim.cake.I18n;
 
 import uim.cake.I18n\exceptions.I18nException;
 
