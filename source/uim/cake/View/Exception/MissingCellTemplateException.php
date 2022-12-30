@@ -20,14 +20,12 @@ use Throwable;
 class MissingCellTemplateException : MissingTemplateException
 {
     /**
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
-     * @var string
      */
-    protected $type = "Cell template";
+    protected string $type = "Cell template";
 
     /**
      * Constructor

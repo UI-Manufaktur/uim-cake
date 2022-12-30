@@ -18,7 +18,6 @@ module uim.cake.View\Exception;
 class MissingLayoutException : MissingTemplateException
 {
     /**
-     * @var string
      */
-    protected $type = "Layout";
+    protected string $type = "Layout";
 }

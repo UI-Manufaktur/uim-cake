@@ -99,9 +99,8 @@ class View : EventDispatcherInterface
     /**
      * Name of the controller that created the View if any.
      *
-     * @var string
      */
-    protected $name = "";
+    protected string $name = "";
 
     /**
      * An array of names of built-in helpers to include.
@@ -113,33 +112,29 @@ class View : EventDispatcherInterface
     /**
      * The name of the subfolder containing templates for this View.
      *
-     * @var string
      */
-    protected $templatePath = "";
+    protected string $templatePath = "";
 
     /**
      * The name of the template file to render. The name specified
      * is the filename in `templates/<SubFolder>/` without the .php extension.
      *
-     * @var string
      */
-    protected $template = "";
+    protected string $template = "";
 
     /**
      * The name of the layout file to render the template inside of. The name specified
      * is the filename of the layout in `templates/layout/` without the .php
      * extension.
      *
-     * @var string
      */
-    protected $layout = "default";
+    protected string $layout = "default";
 
     /**
      * The name of the layouts subfolder containing layouts for this View.
      *
-     * @var string
      */
-    protected $layoutPath = "";
+    protected string $layoutPath = "";
 
     /**
      * Turns on or off CakePHP"s conventional mode of applying layout files. On by default.
@@ -159,17 +154,15 @@ class View : EventDispatcherInterface
     /**
      * File extension. Defaults to ".php".
      *
-     * @var string
      */
-    protected $_ext = ".php";
+    protected string $_ext = ".php";
 
     /**
      * Sub-directory for this template file. This is often used for extension based routing.
      * Eg. With an `xml` extension, $subDir would be `xml/`
      *
-     * @var string
      */
-    protected $subDir = "";
+    protected string $subDir = "";
 
     /**
      * The view theme to use.
@@ -245,17 +238,15 @@ class View : EventDispatcherInterface
     /**
      * The currently rendering view file. Used for resolving parent files.
      *
-     * @var string
      */
-    protected $_current;
+    protected string $_current;
 
     /**
      * Currently rendering an element. Used for finding parent fragments
      * for elements.
      *
-     * @var string
      */
-    protected $_currentType = "";
+    protected string $_currentType = "";
 
     /**
      * Content stack, used for nested templates that all use View::extend();

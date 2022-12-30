@@ -18,7 +18,6 @@ module uim.cake.View\Exception;
 class MissingElementException : MissingTemplateException
 {
     /**
-     * @var string
      */
-    protected $type = "Element";
+    protected string $type = "Element";
 }

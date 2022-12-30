@@ -26,9 +26,8 @@ class MissingTemplateException : CakeException
     protected $templateName;
 
     /**
-     * @var string
      */
-    protected $filename;
+    protected string $filename;
 
     /**
      * @var array<string>
@@ -36,9 +35,8 @@ class MissingTemplateException : CakeException
     protected $paths;
 
     /**
-     * @var string
      */
-    protected $type = "Template";
+    protected string $type = "Template";
 
     /**
      * Constructor
