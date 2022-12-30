@@ -139,7 +139,6 @@ class SyslogLog : BaseLog
      * @param string $ident the prefix to add to all messages logged
      * @param int $options the options flags to be used for logged messages
      * @param int $facility the stream or facility to log to
-     * @return void
      */
     protected void _open(string $ident, int $options, int $facility): void
     {

@@ -579,7 +579,6 @@ class HasMany : Association
      * Parse extra options passed in the constructor.
      *
      * @param array<string, mixed> myOptions original list of options passed in constructor
-     * @return void
      */
     protected void _options(array myOptions) {
         if (!empty(myOptions["saveStrategy"])) {

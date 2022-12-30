@@ -573,7 +573,6 @@ class Mailer : IEventListener
      * Set logging config.
      *
      * @param array<string, mixed>|string|true $log Log config.
-     * @return void
      */
     protected void setLogConfig($log) {
         $config = [

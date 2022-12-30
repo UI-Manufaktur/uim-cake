@@ -186,7 +186,6 @@ class TimestampBehavior : Behavior
      * @param uim.cake.Datasource\EntityInterface $entity Entity instance.
      * @param string $field Field name
      * @param bool $refreshTimestamp Whether to refresh timestamp.
-     * @return void
      */
     protected void _updateField(EntityInterface $entity, string $field, bool $refreshTimestamp): void
     {

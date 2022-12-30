@@ -472,7 +472,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * @param uim.cake.Database\TypeMap $typeMap The typemap to check for columns in.
      *   This typemap is indirectly mutated via {@link uim.cake.orm.Query::addDefaultTypes()}
      * @param array<string, array> $associations The nested tree of associations to walk.
-     * @return void
      */
     protected void _addAssociationsToTypeMap(Table $table, TypeMap $typeMap, array $associations): void
     {
@@ -1122,7 +1121,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * It also sets the default types for the columns in the select clause
      *
      * @see uim.cake.Database\Query::execute()
-     * @return void
      */
     protected void _transformQuery(): void
     {
@@ -1144,7 +1142,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Inspects if there are any set fields for selecting, otherwise adds all
      * the fields for the default table.
      *
-     * @return void
      */
     protected void _addDefaultFields(): void
     {
@@ -1168,7 +1165,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Sets the default types for converting the fields in the select clause
      *
-     * @return void
      */
     protected void _addDefaultSelectTypes(): void
     {
@@ -1211,7 +1207,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching such as previous results
      *
-     * @return void
      */
     protected void _dirty(): void
     {

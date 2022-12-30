@@ -204,7 +204,6 @@ class Socket
      * Configure the SSL context options.
      *
      * @param string host The host name being connected to.
-     * @return void
      */
     protected void _setSslContext(string host) {
         foreach (_config as myKey: myValue) {

@@ -616,7 +616,6 @@ class HasMany : Association
      * Parse extra options passed in the constructor.
      *
      * @param array<string, mixed> $options original list of options passed in constructor
-     * @return void
      */
     protected void _options(array $options): void
     {

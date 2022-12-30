@@ -1227,7 +1227,6 @@ class Message : JsonSerializable, Serializable
     /**
      * Create unique boundary identifier
      *
-     * @return void
      */
     protected void createBoundary(): void
     {

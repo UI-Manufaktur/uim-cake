@@ -87,7 +87,6 @@ class SaveOptionsBuilder : ArrayObject
      *
      * @param uim.cake.orm.Table $table Table object.
      * @param array $associations An associations array.
-     * @return void
      */
     protected void _associated(Table $table, array $associations): void
     {
@@ -110,7 +109,6 @@ class SaveOptionsBuilder : ArrayObject
      * @throws \RuntimeException If no such association exists for the given table.
      * @param uim.cake.orm.Table $table Table object.
      * @param string $association Association name.
-     * @return void
      */
     protected void _checkAssociation(Table $table, string $association): void
     {

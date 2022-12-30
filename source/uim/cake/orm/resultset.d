@@ -340,7 +340,6 @@ class ResultSet : IResultSet
      * when fetching each record
      *
      * @param uim.cake.orm.Query myQuery The query from where to derive the associations
-     * @return void
      */
     protected void _calculateAssociationMap(Query myQuery) {
         $map = myQuery.getEagerLoader().associationsMap(_defaultTable);
@@ -360,7 +359,6 @@ class ResultSet : IResultSet
      * used to hydrate nested result sets more quickly.
      *
      * @param uim.cake.orm.Query myQuery The query from where to derive the column map
-     * @return void
      */
     protected void _calculateColumnMap(Query myQuery) {
         $map = [];

@@ -425,7 +425,6 @@ class Email : JsonSerializable, Serializable
      * Log the email message delivery.
      *
      * @param array<string, string> $contents The content with "headers" and "message" keys.
-     * @return void
      */
     protected void _logDelivery(array $contents): void
     {

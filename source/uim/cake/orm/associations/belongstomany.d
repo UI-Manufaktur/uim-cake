@@ -240,7 +240,6 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Table $junction The junction table.
      * @param uim.cake.orm.Table $source The source table.
      * @param uim.cake.orm.Table myTarget The target table.
-     * @return void
      */
     protected void _generateTargetAssociations(Table $junction, Table $source, Table myTarget) {
         $junctionAlias = $junction.getAlias();
@@ -285,7 +284,6 @@ class BelongsToMany : Association
      *
      * @param uim.cake.orm.Table $junction The junction table.
      * @param uim.cake.orm.Table $source The source table.
-     * @return void
      */
     protected void _generateSourceAssociations(Table $junction, Table $source) {
         $junctionAlias = $junction.getAlias();
@@ -1340,7 +1338,6 @@ class BelongsToMany : Association
      * Parse extra options passed in the constructor.
      *
      * @param array<string, mixed> myOptions original list of options passed in constructor
-     * @return void
      */
     protected void _options(array myOptions) {
         if (!empty(myOptions["targetForeignKey"])) {

@@ -167,7 +167,6 @@ class SmtpTransport : AbstractTransport
      * Parses and stores the response lines in `"code":"message"` format.
      *
      * @param $responseLines Response lines to parse.
-     * @return void
      */
     protected void _bufferResponseLines(string[] $responseLines) {
         $response = [];
@@ -277,7 +276,6 @@ class SmtpTransport : AbstractTransport
      *
      * @param string myUsername Username.
      * @param string myPassword Password.
-     * @return void
      */
     protected void _authLogin(string myUsername, string myPassword) {
         $replyCode = _smtpSend("AUTH LOGIN", "334|500|502|504");
@@ -375,7 +373,6 @@ class SmtpTransport : AbstractTransport
      *
      * @param uim.cake.Mailer\Message myMessage Message message
      * @throws uim.cake.Network\exceptions.SocketException
-     * @return void
      */
     protected void _sendRcpt(Message myMessage) {
         $from = _prepareFromAddress(myMessage);

@@ -521,7 +521,6 @@ class Session
      *
      * @param array $old Set of old variables: values
      * @param array $new New set of variable: value
-     * @return void
      */
     protected void _overwrite(array &$old, array $new) {
         if (!empty($old)) {

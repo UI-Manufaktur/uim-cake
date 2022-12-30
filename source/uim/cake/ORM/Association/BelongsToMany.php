@@ -295,7 +295,6 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Table $junction The junction table.
      * @param uim.cake.orm.Table $source The source table.
      * @param uim.cake.orm.Table $target The target table.
-     * @return void
      */
     protected void _generateTargetAssociations(Table $junction, Table $source, Table $target): void
     {
@@ -341,7 +340,6 @@ class BelongsToMany : Association
      *
      * @param uim.cake.orm.Table $junction The junction table.
      * @param uim.cake.orm.Table $source The source table.
-     * @return void
      */
     protected void _generateSourceAssociations(Table $junction, Table $source): void
     {
@@ -1438,7 +1436,6 @@ class BelongsToMany : Association
      * Parse extra options passed in the constructor.
      *
      * @param array<string, mixed> $options original list of options passed in constructor
-     * @return void
      */
     protected void _options(array $options): void
     {

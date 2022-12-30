@@ -82,7 +82,6 @@ class SaveOptionsBuilder : ArrayObject {
      *
      * @param uim.cake.orm.Table myTable Table object.
      * @param array $associations An associations array.
-     * @return void
      */
     protected void _associated(Table myTable, array $associations) {
         foreach ($associations as myKey: $associated) {

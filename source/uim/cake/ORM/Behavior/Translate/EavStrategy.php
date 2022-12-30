@@ -79,7 +79,6 @@ class EavStrategy : TranslateStrategyInterface
      * Additionally it creates a `i18n` HasMany association that will be
      * used for fetching all translations for each record in the bound table.
      *
-     * @return void
      */
     protected void setupAssociations() {
         $fields = _config["fields"];
@@ -416,7 +415,6 @@ class EavStrategy : TranslateStrategyInterface
      * entity. The result will be put into its `_i18n` property.
      *
      * @param uim.cake.Datasource\EntityInterface $entity Entity
-     * @return void
      */
     protected void bundleTranslatedFields($entity) {
         $translations = (array)$entity.get("_translations");

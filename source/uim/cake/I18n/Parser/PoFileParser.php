@@ -132,7 +132,6 @@ class PoFileParser
      *
      * @param array $messages The messages array being collected from the file
      * @param array $item The current item being inspected
-     * @return void
      */
     protected void _addMessage(array &$messages, array $item): void
     {

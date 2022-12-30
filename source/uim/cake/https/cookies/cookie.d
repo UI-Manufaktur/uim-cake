@@ -413,7 +413,6 @@ class Cookie : ICookie
      * Setter for the value attribute.
      *
      * @param array|string myValue The value to store.
-     * @return void
      */
     protected void _setValue(myValue) {
         this.isExpanded = is_array(myValue);

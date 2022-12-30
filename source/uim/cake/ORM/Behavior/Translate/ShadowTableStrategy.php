@@ -80,7 +80,6 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * Don"t create a hasOne association here as the join conditions are modified
      * in before find - so create/modify it there.
      *
-     * @return void
      */
     protected void setupAssociations() {
         $config = this.getConfig();
@@ -138,7 +137,6 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @param string $locale Locale
      * @param \ArrayObject $options Find options
-     * @return void
      */
     protected void setupHasOneAssociation(string $locale, ArrayObject $options): void
     {
@@ -541,7 +539,6 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * entity. The result will be put into its `_i18n` property.
      *
      * @param uim.cake.Datasource\EntityInterface $entity Entity.
-     * @return void
      */
     protected void bundleTranslatedFields($entity) {
         $translations = (array)$entity.get("_translations");

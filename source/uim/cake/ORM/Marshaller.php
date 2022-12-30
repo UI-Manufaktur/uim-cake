@@ -858,7 +858,6 @@ class Marshaller
      * @param uim.cake.Datasource\EntityInterface $entity The entity that was marshaled.
      * @param array $data readOnly $data to use.
      * @param array<string, mixed> $options List of options that are readOnly.
-     * @return void
      */
     protected void dispatchAfterMarshal(EntityInterface $entity, array $data, array $options = []): void
     {

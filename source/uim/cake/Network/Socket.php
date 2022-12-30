@@ -216,7 +216,6 @@ class Socket
      * Configure the SSL context options.
      *
      * @param string $host The host name being connected to.
-     * @return void
      */
     protected void _setSslContext(string $host): void
     {
@@ -253,7 +252,6 @@ class Socket
      *
      * @param int $code Code number.
      * @param string $message Message.
-     * @return void
      */
     protected void _connectionErrorHandler(int $code, string $message): void
     {

@@ -86,7 +86,6 @@ trait TranslateStrategyTrait
      * Should only be called if _config["allowEmptyTranslations"] is false.
      *
      * @param uim.cake.Datasource\EntityInterface $entity The entity to check for empty translations fields inside.
-     * @return void
      */
     protected void unsetEmptyFields($entity) {
         /** @var array<uim.cake.orm.Entity> $translations */

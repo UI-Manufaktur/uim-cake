@@ -192,7 +192,6 @@ class SmtpTransport : AbstractTransport
      * Parses and stores the response lines in `"code": "message"` format.
      *
      * @param array<string> $responseLines Response lines to parse.
-     * @return void
      */
     protected void _bufferResponseLines(array $responseLines): void
     {
@@ -211,7 +210,6 @@ class SmtpTransport : AbstractTransport
     /**
      * Parses the last response line and extract the preferred authentication type.
      *
-     * @return void
      */
     protected void _parseAuthType(): void
     {
@@ -354,7 +352,6 @@ class SmtpTransport : AbstractTransport
      *
      * @param string $username Username.
      * @param string $password Password.
-     * @return void
      */
     protected void _authLogin(string $username, string $password): void
     {
@@ -458,7 +455,6 @@ class SmtpTransport : AbstractTransport
      *
      * @param uim.cake.Mailer\Message $message Message instance
      * @throws uim.cake.Network\exceptions.SocketException
-     * @return void
      */
     protected void _sendRcpt(Message $message): void
     {

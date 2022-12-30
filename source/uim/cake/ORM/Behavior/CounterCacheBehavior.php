@@ -175,7 +175,6 @@ class CounterCacheBehavior : Behavior
      *
      * @param uim.cake.events.IEvent $event Event instance.
      * @param uim.cake.Datasource\EntityInterface $entity Entity.
-     * @return void
      */
     protected void _processAssociations(IEvent $event, EntityInterface $entity): void
     {

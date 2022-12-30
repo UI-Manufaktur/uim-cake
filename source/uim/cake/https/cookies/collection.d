@@ -291,7 +291,6 @@ class CookieCollection : IteratorAggregate, Countable {
      *
      * @param string host The host to check for expired cookies on.
      * @param string myPath The path to check for expired cookies on.
-     * @return void
      */
     protected void removeExpiredCookies(string host, string myPath) {
         $time = new DateTimeImmutable("now", new DateTimeZone("UTC"));

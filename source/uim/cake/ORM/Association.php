@@ -654,7 +654,6 @@ abstract class Association
      * get passed the original list of options used in the constructor
      *
      * @param array<string, mixed> $options List of options used for initialization
-     * @return void
      */
     protected void _options(array $options): void
     {
@@ -760,7 +759,6 @@ abstract class Association
      *
      * @param uim.cake.orm.Query $query The query to modify
      * @param array<string, mixed> $options Options array containing the `negateMatch` key.
-     * @return void
      */
     protected void _appendNotMatching(Query $query, array $options): void
     {
@@ -914,7 +912,6 @@ abstract class Association
      * attaching to
      *
      * @param uim.cake.orm.Query $query the query this association is attaching itself to
-     * @return void
      */
     protected void _dispatchBeforeFind(Query $query): void
     {
@@ -928,7 +925,6 @@ abstract class Association
      * @param uim.cake.orm.Query $query the query that will get the fields appended to
      * @param uim.cake.orm.Query $surrogate the query having the fields to be copied from
      * @param array<string, mixed> $options options passed to the method `attachTo`
-     * @return void
      */
     protected void _appendFields(Query $query, Query $surrogate, array $options): void
     {
@@ -960,7 +956,6 @@ abstract class Association
      * @param uim.cake.orm.Query $surrogate the query having formatters for the associated
      * target table.
      * @param array<string, mixed> $options options passed to the method `attachTo`
-     * @return void
      */
     protected void _formatAssociationResults(Query $query, Query $surrogate, array $options): void
     {
@@ -1019,7 +1014,6 @@ abstract class Association
      * @param uim.cake.orm.Query $query the query that will get the associations attached to
      * @param uim.cake.orm.Query $surrogate the query having the containments to be attached
      * @param array<string, mixed> $options options passed to the method `attachTo`
-     * @return void
      */
     protected void _bindNewAssociations(Query $query, Query $surrogate, array $options): void
     {

@@ -507,7 +507,6 @@ abstract class Association {
      * get passed the original list of options used in the constructor
      *
      * @param array<string, mixed> myOptions List of options used for initialization
-     * @return void
      */
     protected void _options(array myOptions) {
     }
@@ -611,7 +610,6 @@ abstract class Association {
      *
      * @param uim.cake.orm.Query myQuery The query to modify
      * @param array<string, mixed> myOptions Options array containing the `negateMatch` key.
-     * @return void
      */
     protected void _appendNotMatching(Query myQuery, array myOptions) {
         myTarget = _targetTable;
@@ -757,7 +755,6 @@ abstract class Association {
      * attaching to
      *
      * @param uim.cake.orm.Query myQuery the query this association is attaching itself to
-     * @return void
      */
     protected void _dispatchBeforeFind(Query myQuery) {
         myQuery.triggerBeforeFind();
@@ -770,7 +767,6 @@ abstract class Association {
      * @param uim.cake.orm.Query myQuery the query that will get the fields appended to
      * @param uim.cake.orm.Query $surrogate the query having the fields to be copied from
      * @param array<string, mixed> myOptions options passed to the method `attachTo`
-     * @return void
      */
     protected void _appendFields(Query myQuery, Query $surrogate, array myOptions) {
         if (myQuery.getEagerLoader().isAutoFieldsEnabled() == false) {
@@ -853,7 +849,6 @@ abstract class Association {
      * @param uim.cake.orm.Query myQuery the query that will get the associations attached to
      * @param uim.cake.orm.Query $surrogate the query having the containments to be attached
      * @param array<string, mixed> myOptions options passed to the method `attachTo`
-     * @return void
      */
     protected void _bindNewAssociations(Query myQuery, Query $surrogate, array myOptions) {
         $loader = $surrogate.getEagerLoader();

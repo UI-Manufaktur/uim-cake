@@ -159,7 +159,6 @@ class TreeBehavior : Behavior
      * Set level for descendants.
      *
      * @param uim.cake.Datasource\EntityInterface $entity The entity whose descendants need to be updated.
-     * @return void
      */
     protected void _setChildrenLevel(EntityInterface $entity): void
     {
@@ -297,7 +296,6 @@ class TreeBehavior : Behavior
      * so the structure remains valid
      *
      * @param uim.cake.Datasource\EntityInterface $entity The entity to set as a new root
-     * @return void
      */
     protected void _setAsRoot(EntityInterface $entity): void
     {
@@ -330,7 +328,6 @@ class TreeBehavior : Behavior
      * less than 0. They were set to negative values before so their absolute value
      * wouldn"t change while performing other tree transformations.
      *
-     * @return void
      */
     protected void _unmarkInternalTree(): void
     {
@@ -878,7 +875,6 @@ class TreeBehavior : Behavior
      * against it.
      * @param bool $mark whether to mark the updated values so that they can not be
      * modified by future calls to this function.
-     * @return void
      */
     protected void _sync(int $shift, string $dir, string $conditions, bool $mark = false): void
     {
@@ -933,7 +929,6 @@ class TreeBehavior : Behavior
      * right fields
      *
      * @param uim.cake.Datasource\EntityInterface $entity The entity to ensure fields for
-     * @return void
      */
     protected void _ensureFields(EntityInterface $entity): void
     {

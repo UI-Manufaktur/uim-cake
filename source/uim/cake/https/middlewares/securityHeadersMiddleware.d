@@ -204,7 +204,6 @@ class SecurityHeadersMiddleware : IMiddleware {
      * @throws \InvalidArgumentException Thrown when a value is invalid.
      * @param string myValue Value to check
      * @param array<string> $allowed List of allowed values
-     * @return void
      */
     protected void checkValues(string myValue, array $allowed) {
         if (!in_array(myValue, $allowed, true)) {
