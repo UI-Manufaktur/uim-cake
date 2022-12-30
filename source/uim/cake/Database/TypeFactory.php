@@ -85,7 +85,6 @@ class TypeFactory
      *
      * @param string $name The type identifier you want to set.
      * @param uim.cake.databases.TypeInterface $instance The type instance you want to set.
-     * @return void
      */
     static void set(string $name, TypeInterface $instance) {
         static::$_builtTypes[$name] = $instance;
@@ -134,7 +133,6 @@ class TypeFactory
     /**
      * Clears out all created instances and mapped types classes, useful for testing
      *
-     * @return void
      */
     static void clear() {
         static::$_types = [];

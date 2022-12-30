@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         1.2.0
-  */module uim.cake.Cache;
+module uim.cake.Cache;
 
 import uim.cake.caches.engines.NullEngine;
 import uim.cake.core.StaticConfigTrait;
@@ -54,8 +47,7 @@ use RuntimeException;
  *
  * @see config/app.php for configuration settings
  */
-class Cache
-{
+class Cache {
     use StaticConfigTrait;
 
     /**
@@ -78,9 +70,8 @@ class Cache
     /**
      * Flag for tracking whether caching is enabled.
      *
-     * @var bool
      */
-    protected static $_enabled = true;
+    protected static bool $_enabled = true;
 
     /**
      * Group to Config mapping
@@ -116,7 +107,6 @@ class Cache
      * Also allows for injecting of a new registry instance.
      *
      * @param uim.cake.Cache\CacheRegistry $registry Injectable registry object.
-     * @return void
      */
     static void setRegistry(CacheRegistry $registry) {
         static::$_registry = $registry;
@@ -507,7 +497,6 @@ class Cache
      *
      * If caching has been disabled with Cache::disable() this method will reverse that effect.
      *
-     * @return void
      */
     static void enable() {
         static::$_enabled = true;
@@ -518,7 +507,6 @@ class Cache
      *
      * When disabled all cache operations will return null.
      *
-     * @return void
      */
     static void disable() {
         static::$_enabled = false;

@@ -453,7 +453,6 @@ class Client : ClientInterface
     /**
      * Clear all mocked responses
      *
-     * @return void
      */
     static void clearMockResponses() {
         static::$_mockAdapter = null;

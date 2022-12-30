@@ -57,7 +57,6 @@ class TableRegistry
      * Sets singleton instance of ILocator implementation.
      *
      * @param uim.cake.orm.Locator\ILocator myTableLocator Instance of a locator to use.
-     * @return void
      */
     static void setTableLocator(ILocator myTableLocator) {
         FactoryLocator::add("Table", myTableLocator);

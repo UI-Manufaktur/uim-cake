@@ -498,7 +498,6 @@ class Client : ClientInterface
     /**
      * Clear all mocked responses
      *
-     * @return void
      */
     static void clearMockResponses(): void
     {
@@ -523,7 +522,6 @@ class Client : ClientInterface
      * @param string $url The URL being matched. See above for examples.
      * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
-     * @return void
      */
     static void addMockResponse(string $method, string $url, Response $response, array $options = []): void
     {

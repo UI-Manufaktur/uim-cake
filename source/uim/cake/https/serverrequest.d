@@ -681,7 +681,6 @@ class ServerRequest : IServerRequest
      *
      * @param string myName The name of the detector.
      * @param callable|array $detector A callable or options array for the detector definition.
-     * @return void
      */
     static void addDetector(string myName, $detector) {
         myName = strtolower(myName);

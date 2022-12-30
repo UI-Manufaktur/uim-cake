@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         1.2.0
-  */module uim.cake.Error;
+module uim.cake.Error;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
@@ -257,7 +250,6 @@ class Debugger
      *
      * @param array<string, string> $value An array where keys are replaced by their values in output.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
-     * @return void
      */
     static void setOutputMask(array $value, bool $merge = true): void
     {
@@ -273,7 +265,6 @@ class Debugger
      *
      * @param string $name The name of the editor.
      * @param \Closure|string $template The string template or closure
-     * @return void
      */
     static void addEditor(string $name, $template): void
     {
@@ -289,7 +280,6 @@ class Debugger
      * Choose the editor link style you want to use.
      *
      * @param string $name The editor name.
-     * @return void
      */
     static void setEditor(string $name): void
     {
@@ -345,7 +335,6 @@ class Debugger
      * @param mixed $var Variable or content to log.
      * @param string|int $level Type of log to use. Defaults to 'debug'.
      * @param int $maxDepth The depth to output to. Defaults to 3.
-     * @return void
      */
     static void log($var, $level = 'debug', int $maxDepth = 3): void
     {
@@ -1073,7 +1062,6 @@ class Debugger
      *    data encoded as HTML. If false, plain text formatting will be used.
      *    If null, the format will be chosen based on the configured exportFormatter, or
      *    environment conditions.
-     * @return void
      */
     static void printVar($var, array $location = [], ?bool $showHtml = null): void
     {
@@ -1120,7 +1108,6 @@ class Debugger
     /**
      * Verifies that the application's salt and cipher seed value has been changed from the default value.
      *
-     * @return void
      */
     static void checkSecurityKeys(): void
     {

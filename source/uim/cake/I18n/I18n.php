@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         1.2.0
-  */module uim.cake.I18n;
+module uim.cake.I18n;
 
 import uim.cake.caches.Cache;
 import uim.cake.I18n\exceptions.I18nException;
@@ -105,7 +98,6 @@ class I18n
      * @param callable $loader A callback function or callable class responsible for
      *   constructing a translations package instance.
      * @param string|null $locale The locale for the translator.
-     * @return void
      */
     static void setTranslator(string $name, callable $loader, ?string $locale = null): void
     {
@@ -192,7 +184,6 @@ class I18n
      * @param string $name The name of the translator to create a loader for
      * @param callable $loader A callable object that should return a Package
      * instance to be used for assembling a new translator.
-     * @return void
      */
     static void config(string $name, callable $loader): void
     {
@@ -204,7 +195,6 @@ class I18n
      * This also affects the `intl.default_locale` PHP setting.
      *
      * @param string $locale The name of the locale to set as default.
-     * @return void
      */
     static void setLocale(string $locale): void
     {
@@ -267,7 +257,6 @@ class I18n
      * are available.
      *
      * @param string $name The name of the formatter to use.
-     * @return void
      */
     static void setDefaultFormatter(string $name): void
     {
@@ -278,7 +267,6 @@ class I18n
      * Set if the domain fallback is used.
      *
      * @param bool $enable flag to enable or disable fallback
-     * @return void
      */
     static void useFallback(bool $enable = true): void
     {
@@ -289,7 +277,6 @@ class I18n
      * Destroys all translator instances and creates a new empty translations
      * collection.
      *
-     * @return void
      */
     static void clear(): void
     {

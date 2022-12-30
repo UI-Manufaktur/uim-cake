@@ -57,7 +57,6 @@ class TableRegistry
      * Sets singleton instance of ILocatorimplementation.
      *
      * @param uim.cake.orm.Locator\ILocator $tableLocator Instance of a locator to use.
-     * @return void
      */
     static void setTableLocator(ILocator $tableLocator): void
     {

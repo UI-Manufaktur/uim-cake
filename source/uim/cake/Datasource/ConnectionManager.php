@@ -143,7 +143,6 @@ class ConnectionManager
      *
      * @param string $source The existing connection to alias.
      * @param string $alias The alias name that resolves to `$source`.
-     * @return void
      */
     static void alias(string $source, string $alias): void
     {
@@ -157,7 +156,6 @@ class ConnectionManager
      * connection may fail if there is no other connection with that name.
      *
      * @param string $alias The connection alias to drop
-     * @return void
      */
     static void dropAlias(string $alias): void
     {

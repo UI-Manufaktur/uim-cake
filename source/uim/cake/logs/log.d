@@ -114,9 +114,8 @@ class Log
     /**
      * Internal flag for tracking whether configuration has been changed.
      *
-     * @var bool
      */
-    protected static $_dirtyConfig = false;
+    protected static bool $_dirtyConfig = false;
 
     /**
      * LogEngineRegistry class

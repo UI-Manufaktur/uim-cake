@@ -308,7 +308,6 @@ class Number
      * @param string|null $currency Default currency string to be used by {@link currency()}
      * if $currency argument is not provided. If null is passed, it will clear the
      * currently stored value
-     * @return void
      */
     static void setDefaultCurrency(?string $currency = null): void
     {
@@ -335,7 +334,6 @@ class Number
      * @param string|null $currencyFormat Default currency format to be used by currency()
      * if $currencyFormat argument is not provided. If null is passed, it will clear the
      * currently stored value
-     * @return void
      */
     static void setDefaultCurrencyFormat($currencyFormat = null): void
     {
@@ -415,7 +413,6 @@ class Number
      * @param string $locale The locale name to use for formatting the number, e.g. fr_FR
      * @param int $type The formatter type to construct. Defaults to NumberFormatter::DECIMAL.
      * @param array<string, mixed> $options See Number::formatter() for possible options.
-     * @return void
      */
     static void config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = []): void
     {

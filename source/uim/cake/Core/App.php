@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         1.2.0
-  */module uim.cake.Core;
+module uim.cake.Core;
 
 /**
  * App is responsible for resource location, and path management.

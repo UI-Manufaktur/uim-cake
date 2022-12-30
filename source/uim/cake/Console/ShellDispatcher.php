@@ -92,7 +92,6 @@ class ShellDispatcher
     /**
      * Clear any aliases that have been set.
      *
-     * @return void
      */
     static void resetAliases() {
         static::$_aliases = [];

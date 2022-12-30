@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         1.2.0
-  */module uim.cake.Console;
+module uim.cake.Console;
 
 import uim.cake.consoles.exceptions.ConsoleException;
 import uim.cake.consoles.exceptions.StopException;

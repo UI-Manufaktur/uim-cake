@@ -184,7 +184,6 @@ class Cookie : CookieInterface
      *    `CookieInterface::SAMESITE_NONE` or `null`. Defaults to `null`.
      *
      * @param array<string, mixed> $options Default options.
-     * @return void
      */
     static void setDefaults(array $options): void
     {

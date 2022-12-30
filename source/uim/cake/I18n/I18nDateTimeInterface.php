@@ -20,7 +20,6 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
      * Sets the default locale.
      *
      * @param string|null $locale The default locale string to be used or null.
-     * @return void
      */
     static void setDefaultLocale(?string $locale = null): void;
 
@@ -99,7 +98,6 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
      * Resets the format used to the default when converting an instance of this type to
      * a string
      *
-     * @return void
      */
     static void resetToStringFormat(): void;
 
@@ -107,7 +105,6 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
      * Sets the default format used when type converting instances of this type to string
      *
      * @param array<int>|string|int $format Format.
-     * @return void
      */
     static void setToStringFormat($format): void;
 
@@ -127,7 +124,6 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
      *
      * @see uim.cake.I18n\Time::i18nFormat()
      * @param \Closure|array|string|int $format Format.
-     * @return void
      */
     static void setJsonEncodeFormat($format): void;
 
@@ -214,7 +210,6 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
      * Set the difference formatter instance.
      *
      * @param uim.cake.Chronos\DifferenceFormatterInterface $formatter The formatter instance when setting.
-     * @return void
      */
     static void setDiffFormatter(DifferenceFormatterInterface $formatter): void;
 }

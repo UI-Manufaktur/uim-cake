@@ -21,7 +21,6 @@ class FactoryLocator
      *
      * @param string myType The name of the repository type the factory function is for.
      * @param uim.cake.Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
-     * @return void
      */
     static void add(string myType, $factory) {
         if (!$factory instanceof ILocator && !is_callable($factory)) {
@@ -39,7 +38,6 @@ class FactoryLocator
      * Drop a model factory.
      *
      * @param string myType The name of the repository type to drop the factory for.
-     * @return void
      */
     static void drop(string myType) {
         unset(static::$_modelFactories[myType]);

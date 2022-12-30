@@ -49,7 +49,6 @@ class TransportFactory
      * Also allows for injecting of a new registry instance.
      *
      * @param uim.cake.Mailer\TransportRegistry $registry Injectable registry object.
-     * @return void
      */
     static void setRegistry(TransportRegistry $registry): void
     {

@@ -720,7 +720,6 @@ class ServerRequest : IServerRequest
      *
      * @param string $name The name of the detector.
      * @param callable|array $detector A callable or options array for the detector definition.
-     * @return void
      */
     static void addDetector(string $name, $detector): void
     {

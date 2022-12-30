@@ -17,9 +17,8 @@ use RuntimeException;
 class HtmlFormatter : FormatterInterface
 {
     /**
-     * @var bool
      */
-    protected static $outputHeader = false;
+    protected static bool $outputHeader = false;
 
     /**
      * Random id so that HTML ids are not shared between dump outputs.

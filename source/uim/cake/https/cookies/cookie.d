@@ -168,7 +168,6 @@ class Cookie : ICookie
      *    `ICookie::SAMESITE_NONE` or `null`. Defaults to `null`.
      *
      * @param array<string, mixed> myOptions Default options.
-     * @return void
      */
     static void setDefaults(array myOptions) {
         if (isset(myOptions["expires"])) {

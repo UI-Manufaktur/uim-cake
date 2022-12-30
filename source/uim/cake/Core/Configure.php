@@ -226,7 +226,6 @@ class Configure
      * @param string $name The name of the engine being configured. This alias is used later to
      *   read values from a specific engine.
      * @param uim.cake.Core\Configure\ConfigEngineInterface $engine The engine to append.
-     * @return void
      */
     static void config(string $name, ConfigEngineInterface $engine) {
         static::$_engines[$name] = $engine;
@@ -457,7 +456,6 @@ class Configure
     /**
      * Clear all values stored in Configure.
      *
-     * @return void
      */
     static void clear() {
         static::$_values = [];
