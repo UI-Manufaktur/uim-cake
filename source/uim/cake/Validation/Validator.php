@@ -154,9 +154,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Whether to use I18n functions for translating default error messages
      *
-     * @var bool
      */
-    protected $_useI18n = false;
+    protected bool $_useI18n = false;
 
     /**
      * Contains the validation messages associated with checking the emptiness
@@ -176,9 +175,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Whether to apply last flag to generated rule(s).
      *
-     * @var bool
      */
-    protected $_stopOnFailure = false;
+    protected bool $_stopOnFailure = false;
 
     /**
      * Constructor

@@ -24,9 +24,8 @@ use Psr\Http\messages.IResponse;
 class BodyContains : ResponseBase
 {
     /**
-     * @var bool
      */
-    protected $ignoreCase;
+    protected bool $ignoreCase;
 
     /**
      * Constructor.

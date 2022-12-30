@@ -15,9 +15,8 @@ class InflectedRoute : Route
      * Default values need to be inflected so that they match the inflections that match()
      * will create.
      *
-     * @var bool
      */
-    protected $_inflectedDefaults = false;
+    protected bool $_inflectedDefaults = false;
 
     /**
      * Parses a string URL into an array. If it matches, it will convert the prefix, controller and

@@ -140,9 +140,8 @@ class View : EventDispatcherInterface
      * Turns on or off CakePHP"s conventional mode of applying layout files. On by default.
      * Setting to off means that layouts will not be automatically applied to rendered templates.
      *
-     * @var bool
      */
-    protected $autoLayout = true;
+    protected bool $autoLayout = true;
 
     /**
      * An array of variables

@@ -22,9 +22,8 @@ trait StringCompareTrait
      *
      * Initialized with the env variable UPDATE_TEST_COMPARISON_FILES
      *
-     * @var bool
      */
-    protected $_updateComparisons;
+    protected bool $_updateComparisons;
 
     /**
      * Compare the result to the contents of the file

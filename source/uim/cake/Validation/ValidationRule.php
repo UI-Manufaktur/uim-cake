@@ -43,9 +43,8 @@ class ValidationRule
     /**
      * The "last" key
      *
-     * @var bool
      */
-    protected $_last = false;
+    protected bool $_last = false;
 
     /**
      * The "message" key

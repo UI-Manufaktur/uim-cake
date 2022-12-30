@@ -54,9 +54,8 @@ class Route
      * Is this route a greedy route? Greedy routes have a `/*` in their
      * template
      *
-     * @var bool
      */
-    protected $_greedy = false;
+    protected bool $_greedy = false;
 
     /**
      * The compiled route regular expression
@@ -89,9 +88,8 @@ class Route
     /**
      * Track whether brace keys `{var}` were used.
      *
-     * @var bool
      */
-    protected $braceKeys = true;
+    protected bool $braceKeys = true;
 
     /**
      * Valid HTTP methods.

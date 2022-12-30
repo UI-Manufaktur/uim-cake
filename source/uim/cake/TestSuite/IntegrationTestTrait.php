@@ -142,25 +142,22 @@ trait IntegrationTestTrait
      * Boolean flag for whether the request should have
      * a SecurityComponent token added.
      *
-     * @var bool
      */
-    protected $_securityToken = false;
+    protected bool $_securityToken = false;
 
     /**
      * Boolean flag for whether the request should have
      * a CSRF token added.
      *
-     * @var bool
      */
-    protected $_csrfToken = false;
+    protected bool $_csrfToken = false;
 
     /**
      * Boolean flag for whether the request should re-store
      * flash messages
      *
-     * @var bool
      */
-    protected $_retainFlashMessages = false;
+    protected bool $_retainFlashMessages = false;
 
     /**
      * Stored flash messages before render

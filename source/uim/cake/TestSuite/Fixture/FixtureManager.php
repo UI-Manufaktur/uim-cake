@@ -29,9 +29,8 @@ class FixtureManager
     /**
      * Was this instance already initialized?
      *
-     * @var bool
      */
-    protected $_initialized = false;
+    protected bool $_initialized = false;
 
     /**
      * Holds the fixture classes that where instantiated
@@ -65,9 +64,8 @@ class FixtureManager
      * Is the test runner being run with `--debug` enabled.
      * When true, fixture SQL will also be logged.
      *
-     * @var bool
      */
-    protected $_debug = false;
+    protected bool $_debug = false;
 
     /**
      * Modify the debug mode.

@@ -54,9 +54,8 @@ class EntityContext : ContextInterface
      * Boolean to track whether the entity is a
      * collection.
      *
-     * @var bool
      */
-    protected $_isCollection = false;
+    protected bool $_isCollection = false;
 
     /**
      * A dictionary of tables

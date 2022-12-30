@@ -59,9 +59,8 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Whether autoLayout should be enabled.
      *
-     * @var bool
      */
-    protected $_autoLayout = true;
+    protected bool $_autoLayout = true;
 
     /**
      * The layout path to build the view with.

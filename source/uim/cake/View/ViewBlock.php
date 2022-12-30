@@ -57,9 +57,8 @@ class ViewBlock
      * Should the currently captured content be discarded on ViewBlock::end()
      *
      * @see uim.cake.View\ViewBlock::end()
-     * @var bool
      */
-    protected $_discardActiveBufferOnEnd = false;
+    protected bool $_discardActiveBufferOnEnd = false;
 
     /**
      * Start capturing output for a "block"
