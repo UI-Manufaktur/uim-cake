@@ -58,7 +58,7 @@ class SessionHasKey : Constraint
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return "is a path present in the session";
     }

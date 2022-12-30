@@ -37,7 +37,7 @@ class HeaderNotContains : HeaderContains
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return sprintf(
             "is not in header "%s" (`%s`)",

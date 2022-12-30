@@ -56,7 +56,7 @@ class HeaderSet : ResponseBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return sprintf("response has header \"%s\"", this.headerName);
     }

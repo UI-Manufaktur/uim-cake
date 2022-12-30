@@ -37,7 +37,7 @@ class HeaderContains : HeaderEquals
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return sprintf(
             "is in header \"%s\" (`%s`)",

@@ -31,7 +31,7 @@ class StatusSuccess : StatusCodeBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return sprintf("%d is between 200 and 308", this.response.getStatusCode());
     }

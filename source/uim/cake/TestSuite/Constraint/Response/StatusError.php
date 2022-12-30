@@ -31,7 +31,7 @@ class StatusError : StatusCodeBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return sprintf("%d is between 400 and 429", this.response.getStatusCode());
     }

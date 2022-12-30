@@ -56,7 +56,7 @@ class HeaderEquals : ResponseBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         $responseHeader = this.response.getHeaderLine(this.headerName);
 

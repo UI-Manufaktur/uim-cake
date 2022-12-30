@@ -44,7 +44,7 @@ class CookieSet : ResponseBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return "cookie is set";
     }

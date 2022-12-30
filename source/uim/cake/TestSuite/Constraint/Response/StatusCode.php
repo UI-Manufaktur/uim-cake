@@ -26,7 +26,7 @@ class StatusCode : StatusCodeBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return sprintf("matches response status code `%d`", this.response.getStatusCode());
     }

@@ -47,7 +47,7 @@ class FileSentAs : ResponseBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return "file was sent";
     }
