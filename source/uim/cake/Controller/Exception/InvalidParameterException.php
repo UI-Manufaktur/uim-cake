@@ -9,8 +9,7 @@
  *
 
  * @since         4.3.0
-  */
-module uim.cake.controllers.Exception;
+  */module uim.cake.controllers.Exception;
 
 import uim.cake.core.exceptions.CakeException;
 use Throwable;

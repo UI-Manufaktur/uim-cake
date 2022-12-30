@@ -5,8 +5,7 @@
 
 
  * @since         0.10.0
-  */
-module uim.cake.controllers.Component;
+  */module uim.cake.controllers.Component;
 
 import uim.cake.auths.BaseAuthenticate;
 import uim.cake.auths.BaseAuthorize;

@@ -1,4 +1,3 @@
-
 module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;

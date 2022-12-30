@@ -5,8 +5,7 @@
 
 
  * @since         3.3.0
-  */
-module uim.cake.Controller;
+  */module uim.cake.Controller;
 
 import uim.cake.controllers.exceptions.InvalidParameterException;
 import uim.cake.core.App;

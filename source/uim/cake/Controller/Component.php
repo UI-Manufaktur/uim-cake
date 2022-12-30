@@ -5,8 +5,7 @@
 
 
  * @since         1.2.0
-  */
-module uim.cake.Controller;
+  */module uim.cake.Controller;
 
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.events.IEventListener;

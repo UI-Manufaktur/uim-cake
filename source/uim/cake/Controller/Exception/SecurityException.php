@@ -9,8 +9,7 @@
  *
 
 
-  */
-module uim.cake.controllers.Exception;
+  */module uim.cake.controllers.Exception;
 
 import uim.cake.http.exceptions.BadRequestException;
 

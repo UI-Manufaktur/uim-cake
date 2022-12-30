@@ -11,8 +11,7 @@
 
 
  * @since         4.4.0
-  */
-module uim.cake.controllers.Component;
+  */module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;
 import uim.cake.events.EventInterface;

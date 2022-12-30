@@ -5,8 +5,7 @@
 
 
  * @since         0.10.8
-  */
-module uim.cake.controllers.Component;
+  */module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;
 import uim.cake.controllers.Controller;

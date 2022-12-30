@@ -11,8 +11,7 @@
 
  * @since         3.7.0
 
- */
-module uim.cake.consoles.TestSuite\Constraint;
+ */module uim.cake.consoles.TestSuite\Constraint;
 
 /**
  * ContentsNotContain

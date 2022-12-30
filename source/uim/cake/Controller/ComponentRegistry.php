@@ -1,4 +1,3 @@
-
 module uim.cake.Controller;
 
 import uim.cake.controllers.exceptions.MissingComponentException;
