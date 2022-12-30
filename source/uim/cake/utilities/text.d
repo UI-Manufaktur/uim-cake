@@ -1031,7 +1031,6 @@ class Text {
      * Set the default transliterator.
      *
      * @param \Transliterator $transliterator A `Transliterator` instance.
-     * @return void
      */
     static void setTransliterator(Transliterator $transliterator) {
         static::$_defaultTransliterator = $transliterator;
@@ -1050,7 +1049,6 @@ class Text {
      * Set default transliterator identifier string.
      *
      * @param string transliteratorId Transliterator identifier.
-     * @return void
      */
     static void setTransliteratorId(string transliteratorId) {
         $transliterator = transliterator_create($transliteratorId);

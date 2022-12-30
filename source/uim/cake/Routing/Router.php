@@ -220,7 +220,6 @@ class Router
      * Set current request instance.
      *
      * @param uim.cake.http.ServerRequest $request request object.
-     * @return void
      */
     static void setRequest(ServerRequest $request): void
     {
@@ -251,7 +250,6 @@ class Router
      * Reloads default Router settings. Resets all class variables and
      * removes all connected routes.
      *
-     * @return void
      */
     static void reload(): void
     {
@@ -284,7 +282,6 @@ class Router
      * Extensions and default route classes will not be modified
      *
      * @internal
-     * @return void
      */
     static void resetRoutes(): void
     {
@@ -319,7 +316,6 @@ class Router
      * ```
      *
      * @param callable $function The function to add
-     * @return void
      */
     static void addUrlFilter(callable $function): void
     {
@@ -937,7 +933,6 @@ class Router
      * Set the RouteCollection inside the Router
      *
      * @param uim.cake.routings.RouteCollection $routeCollection route collection
-     * @return void
      */
     static void setRouteCollection(RouteCollection $routeCollection): void
     {

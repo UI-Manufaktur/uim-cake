@@ -290,7 +290,6 @@ class Security
      * routines.
      *
      * @param string $salt The salt to use for encryption routines.
-     * @return void
      */
     static void setSalt(string $salt): void
     {

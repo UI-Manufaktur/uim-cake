@@ -188,7 +188,6 @@ class Inflector
      * Clears Inflectors inflected value caches. And resets the inflection
      * rules to the initial values.
      *
-     * @return void
      */
     static void reset(): void
     {
@@ -221,7 +220,6 @@ class Inflector
      * @param array $rules Array of rules to be added.
      * @param bool $reset If true, will unset default inflections for all
      *        new rules that are being defined in $rules.
-     * @return void
      */
     static void rules(string $type, array $rules, bool $reset = false): void
     {

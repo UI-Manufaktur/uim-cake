@@ -188,7 +188,6 @@ class Inflector
      * Clears Inflectors inflected value caches. And resets the inflection
      * rules to the initial values.
      *
-     * @return void
      */
     static void reset() {
         if (empty(static::$_initialState)) {

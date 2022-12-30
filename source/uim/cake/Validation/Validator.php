@@ -358,7 +358,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string $name The name under which the provider should be set.
      * @param object|string $object Provider object or class name.
      * @psalm-param object|class-string $object
-     * @return void
      */
     static void addDefaultProvider(string $name, $object): void
     {

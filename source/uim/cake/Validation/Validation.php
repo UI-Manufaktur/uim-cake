@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         1.2.0
-  */module uim.cake.Validation;
+module uim.cake.Validation;
 
 import uim.cake.I18n\FrozenTime;
 import uim.cake.utilities.Text;

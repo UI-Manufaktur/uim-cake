@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         1.2.0
-  */module uim.cake.Utility;
+module uim.cake.Utility;
 
 import uim.cake.core.exceptions.CakeException;
 use InvalidArgumentException;
@@ -1063,7 +1056,6 @@ class Text
      * Set the default transliterator.
      *
      * @param \Transliterator $transliterator A `Transliterator` instance.
-     * @return void
      */
     static void setTransliterator(Transliterator $transliterator): void
     {
@@ -1084,7 +1076,6 @@ class Text
      * Set default transliterator identifier string.
      *
      * @param string $transliteratorId Transliterator identifier.
-     * @return void
      */
     static void setTransliteratorId(string $transliteratorId): void
     {

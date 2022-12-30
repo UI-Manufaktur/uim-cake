@@ -34,7 +34,6 @@ class TestEmailTransport : DebugTransport
     /**
      * Replaces all currently configured transports with this one
      *
-     * @return void
      */
     static void replaceAllTransports(): void
     {
@@ -60,7 +59,6 @@ class TestEmailTransport : DebugTransport
     /**
      * Clears list of emails that have been sent
      *
-     * @return void
      */
     static void clearMessages(): void
     {
