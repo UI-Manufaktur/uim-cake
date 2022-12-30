@@ -445,9 +445,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     }
 
     /**
-     * @return array
      */
-    function getContain(): array
+    array getContain(): array
     {
         return this.getEagerLoader().getContain();
     }

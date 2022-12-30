@@ -207,10 +207,8 @@ class RouteBuilder
 
     /**
      * Get the parameter names/values for this scope.
-     *
-     * @return array
      */
-    function params(): array
+    array params(): array
     {
         return _params;
     }
@@ -979,10 +977,8 @@ class RouteBuilder
 
     /**
      * Get the middleware that this builder will apply to routes.
-     *
-     * @return array
      */
-    function getMiddleware(): array
+    array getMiddleware(): array
     {
         return this.middleware;
     }

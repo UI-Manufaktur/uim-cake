@@ -905,10 +905,8 @@ class Route
 
     /**
      * Get the names of the middleware that should be applied to this route.
-     *
-     * @return array
      */
-    function getMiddleware(): array
+    array getMiddleware(): array
     {
         return this.middleware;
     }

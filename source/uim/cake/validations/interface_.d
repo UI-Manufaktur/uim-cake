@@ -15,7 +15,6 @@ interface IValidatable {
      * validation errors found.
      *
      * @param uim.cake.Validation\Validator $validator The validator to use when validating the entity.
-     * @return array
      */
-    function validate(Validator $validator): array;
+    array validate(Validator $validator): array;
 }
