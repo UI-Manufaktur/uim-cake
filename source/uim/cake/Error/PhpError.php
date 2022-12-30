@@ -118,8 +118,6 @@ class PhpError
 
     /**
      * Get the error code label
-     *
-     * @return string
      */
     string getLabel(): string
     {
@@ -128,8 +126,6 @@ class PhpError
 
     /**
      * Get the error message.
-     *
-     * @return string
      */
     string getMessage(): string
     {
@@ -168,8 +164,6 @@ class PhpError
 
     /**
      * Get the stacktrace as a string.
-     *
-     * @return string
      */
     string getTraceAsString(): string
     {

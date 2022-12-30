@@ -53,8 +53,6 @@ class PropertyNode : NodeInterface
 
     /**
      * Get the property visibility
-     *
-     * @return string
      */
     string getVisibility(): ?string
     {
@@ -63,8 +61,6 @@ class PropertyNode : NodeInterface
 
     /**
      * Get the property name
-     *
-     * @return string
      */
     string getName(): string
     {

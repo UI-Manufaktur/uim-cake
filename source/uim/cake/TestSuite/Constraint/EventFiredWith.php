@@ -104,8 +104,6 @@ class EventFiredWith : Constraint
 
     /**
      * Assertion message string
-     *
-     * @return string
      */
     string toString()
     {

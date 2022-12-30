@@ -547,8 +547,6 @@ class HasMany : Association
 
     /**
      * Get the relationship type.
-     *
-     * @return string
      */
     string type(): string
     {

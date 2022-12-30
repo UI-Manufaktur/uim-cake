@@ -36,8 +36,6 @@ class ScalarNode : NodeInterface
 
     /**
      * Get the type of value
-     *
-     * @return string
      */
     string getType(): string
     {

@@ -56,8 +56,6 @@ class FormData : Countable
 
     /**
      * Get the boundary marker
-     *
-     * @return string
      */
     string boundary(): string
     {
@@ -227,8 +225,6 @@ class FormData : Countable
      *
      * If this object contains files, `multipart/form-data` will be used,
      * otherwise `application/x-www-form-urlencoded` will be used.
-     *
-     * @return string
      */
     string contentType(): string
     {
@@ -242,8 +238,6 @@ class FormData : Countable
     /**
      * Converts the FormData and its parts into a string suitable
      * for use in an HTTP request.
-     *
-     * @return string
      */
     string __toString(): string
     {

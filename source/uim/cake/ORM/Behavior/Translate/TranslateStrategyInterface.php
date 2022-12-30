@@ -43,8 +43,6 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      *
      * If no locale has been explicitly set via `setLocale()`, this method will
      * return the currently configured global locale.
-     *
-     * @return string
      */
     string getLocale(): string;
 

@@ -375,8 +375,6 @@ class Route
 
     /**
      * Get the standardized plugin.controller:action name for a route.
-     *
-     * @return string
      */
     string getName(): string
     {
@@ -863,8 +861,6 @@ class Route
 
     /**
      * Get the static path portion for this route.
-     *
-     * @return string
      */
     string staticPath(): string
     {

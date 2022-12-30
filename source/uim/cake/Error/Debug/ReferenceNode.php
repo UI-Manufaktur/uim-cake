@@ -40,8 +40,6 @@ class ReferenceNode : NodeInterface
 
     /**
      * Get the class name/value
-     *
-     * @return string
      */
     string getValue(): string
     {

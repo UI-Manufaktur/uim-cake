@@ -62,8 +62,6 @@ class EventFired : Constraint
 
     /**
      * Assertion message string
-     *
-     * @return string
      */
     string toString()
     {

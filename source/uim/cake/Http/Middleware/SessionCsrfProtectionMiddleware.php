@@ -215,8 +215,6 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      *
      * This token is a simple unique random value as the compare
      * value is stored in the session where it cannot be tampered with.
-     *
-     * @return string
      */
     string createToken(): string
     {

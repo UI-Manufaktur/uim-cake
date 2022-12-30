@@ -325,8 +325,6 @@ class Cookie : CookieInterface
 
     /**
      * Returns a header value as string
-     *
-     * @return string
      */
     string toHeaderValue(): string
     {

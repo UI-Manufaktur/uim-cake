@@ -774,8 +774,6 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets subject.
-     *
-     * @return string
      */
     string getSubject(): string
     {
@@ -989,8 +987,6 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets email format.
-     *
-     * @return string
      */
     string getEmailFormat(): string
     {
@@ -1061,8 +1057,6 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets domain.
-     *
-     * @return string
      */
     string getDomain(): string
     {
@@ -1511,8 +1505,6 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Get text body of message.
-     *
-     * @return string
      */
     string getBodyText() {
         return this.textMessage;
@@ -1520,8 +1512,6 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Get HTML body of message.
-     *
-     * @return string
      */
     string getBodyHtml() {
         return this.htmlMessage;
@@ -1751,8 +1741,6 @@ class Message : JsonSerializable, Serializable
     /**
      * Return the Content-Transfer Encoding value based
      * on the set transferEncoding or set charset.
-     *
-     * @return string
      */
     string getContentTransferEncoding(): string
     {
@@ -1773,8 +1761,6 @@ class Message : JsonSerializable, Serializable
      *
      * Checks fallback/compatibility types which include workarounds
      * for legacy japanese character sets.
-     *
-     * @return string
      */
     string getContentTypeCharset(): string
     {
@@ -1835,8 +1821,6 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Serializes the Email object.
-     *
-     * @return string
      */
     string serialize(): string
     {

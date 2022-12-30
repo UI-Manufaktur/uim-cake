@@ -238,8 +238,6 @@ class CsrfProtectionMiddleware : IMiddleware
 
     /**
      * Create a new token to be used for CSRF protection
-     *
-     * @return string
      */
     string createToken(): string
     {

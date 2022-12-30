@@ -1768,8 +1768,6 @@ class ServerRequest : IServerRequest
      * or as set with `withRequestTarget()`. By default this will return the
      * application relative path without base directory, and the query string
      * defined in the SERVER environment.
-     *
-     * @return string
      */
     string getRequestTarget(): string
     {

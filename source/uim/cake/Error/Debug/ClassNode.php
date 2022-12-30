@@ -52,8 +52,6 @@ class ClassNode : NodeInterface
 
     /**
      * Get the class name
-     *
-     * @return string
      */
     string getValue(): string
     {

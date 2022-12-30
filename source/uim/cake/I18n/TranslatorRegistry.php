@@ -118,8 +118,6 @@ class TranslatorRegistry
 
     /**
      * Returns the default locale code.
-     *
-     * @return string
      */
     string getLocale(): string
     {

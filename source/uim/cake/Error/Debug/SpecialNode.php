@@ -29,8 +29,6 @@ class SpecialNode : NodeInterface
 
     /**
      * Get the message/value
-     *
-     * @return string
      */
     string getValue(): string
     {

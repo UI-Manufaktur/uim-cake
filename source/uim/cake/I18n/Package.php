@@ -120,8 +120,6 @@ class Package
 
     /**
      * Gets the formatter name for this package.
-     *
-     * @return string
      */
     string getFormatter(): string
     {

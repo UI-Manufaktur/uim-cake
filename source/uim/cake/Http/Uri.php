@@ -76,8 +76,6 @@ class Uri : UriInterface
 
     /**
      * Get the application base path.
-     *
-     * @return string
      */
     string getBase(): string
     {
@@ -86,8 +84,6 @@ class Uri : UriInterface
 
     /**
      * Get the application webroot path.
-     *
-     * @return string
      */
     string getWebroot(): string
     {

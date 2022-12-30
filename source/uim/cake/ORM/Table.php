@@ -364,8 +364,6 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Returns the database table name.
      *
      * This can include the database schema name if set using `setTable()`.
-     *
-     * @return string
      */
     string getTable(): string
     {
@@ -397,8 +395,6 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
     /**
      * Returns the table alias.
-     *
-     * @return string
      */
     string getAlias(): string
     {
@@ -447,8 +443,6 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
     /**
      * Returns the table registry key used to create this table instance.
-     *
-     * @return string
      */
     string getRegistryAlias(): string
     {

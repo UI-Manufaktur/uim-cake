@@ -143,8 +143,6 @@ class RouteBuilder
 
     /**
      * Get default route class.
-     *
-     * @return string
      */
     string getRouteClass(): string
     {
@@ -191,8 +189,6 @@ class RouteBuilder
 
     /**
      * Get the path this scope is for.
-     *
-     * @return string
      */
     string path(): string
     {

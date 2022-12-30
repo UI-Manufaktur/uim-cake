@@ -383,8 +383,6 @@ class Response : Message : IResponse
 
     /**
      * Get the response body as string.
-     *
-     * @return string
      */
     string getStringBody(): string
     {

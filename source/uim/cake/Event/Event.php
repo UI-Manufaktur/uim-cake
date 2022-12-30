@@ -81,8 +81,6 @@ class Event : EventInterface
 
     /**
      * Returns the name of this event. This is usually used as the event identifier
-     *
-     * @return string
      */
     string getName(): string
     {

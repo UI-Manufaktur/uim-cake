@@ -182,8 +182,6 @@ class FormDataPart
 
     /**
      * Get the part name.
-     *
-     * @return string
      */
     string name(): string
     {
@@ -192,8 +190,6 @@ class FormDataPart
 
     /**
      * Get the value.
-     *
-     * @return string
      */
     string value(): string
     {
@@ -204,8 +200,6 @@ class FormDataPart
      * Convert the part into a string.
      *
      * Creates a string suitable for use in HTTP requests.
-     *
-     * @return string
      */
     string __toString(): string
     {

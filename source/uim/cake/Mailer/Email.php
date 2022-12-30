@@ -559,8 +559,6 @@ class Email : JsonSerializable, Serializable
 
     /**
      * Serializes the Email object.
-     *
-     * @return string
      */
     string serialize(): string
     {

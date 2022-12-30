@@ -68,8 +68,6 @@ interface CookieInterface
 
     /**
      * Gets the cookie name
-     *
-     * @return string
      */
     string getName(): string;
 
@@ -101,15 +99,11 @@ interface CookieInterface
      * Get the id for a cookie
      *
      * Cookies are unique across name, domain, path tuples.
-     *
-     * @return string
      */
     string getId(): string;
 
     /**
      * Get the path attribute.
-     *
-     * @return string
      */
     string getPath(): string;
 
@@ -123,8 +117,6 @@ interface CookieInterface
 
     /**
      * Get the domain attribute.
-     *
-     * @return string
      */
     string getDomain(): string;
 
@@ -152,8 +144,6 @@ interface CookieInterface
 
     /**
      * Builds the expiration value part of the header string
-     *
-     * @return string
      */
     string getFormattedExpires(): string;
 
@@ -253,8 +243,6 @@ interface CookieInterface
 
     /**
      * Returns the cookie as header value
-     *
-     * @return string
      */
     string toHeaderValue(): string;
 }

@@ -671,8 +671,6 @@ class Response : IResponse
 
     /**
      * Returns the current content type.
-     *
-     * @return string
      */
     string getType(): string
     {
@@ -757,8 +755,6 @@ class Response : IResponse
 
     /**
      * Returns the current charset.
-     *
-     * @return string
      */
     string getCharset(): string
     {
@@ -1228,8 +1224,6 @@ class Response : IResponse
      * String conversion. Fetches the response body as a string.
      * Does *not* send headers.
      * If body is a callable, a blank string is returned.
-     *
-     * @return string
      */
     string __toString(): string
     {
