@@ -25,8 +25,6 @@ interface IConsoleApplication
      * Load all the application configuration and bootstrap logic.
      *
      * Override this method to add additional bootstrap logic for your application.
-     *
-     * @return void
      */
     void bootstrap(): void;
 

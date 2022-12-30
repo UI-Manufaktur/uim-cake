@@ -49,11 +49,8 @@ class Application : IConsoleApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.
-     *
-     * @return void
      */
-    void bootstrap()
-    {
+    void bootstrap() {
         // Load configuration here. This is the first
         // method Cake\Console\CommandRunner will call on your application.
     }

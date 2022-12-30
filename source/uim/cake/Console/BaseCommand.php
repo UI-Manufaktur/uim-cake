@@ -41,8 +41,7 @@ abstract class BaseCommand : ICommand {
      *
      * @return string
      */
-    string getName()
-    {
+    string getName() {
         return this.name;
     }
 
@@ -51,8 +50,7 @@ abstract class BaseCommand : ICommand {
      *
      * @return string
      */
-    static string getDescription()
-    {
+    static string getDescription() {
         return "";
     }
 
@@ -61,8 +59,7 @@ abstract class BaseCommand : ICommand {
      *
      * @return string
      */
-    string getRootName()
-    {
+    string getRootName() {
         [$root] = explode(" ", this.name);
 
         return $root;
@@ -77,8 +74,7 @@ abstract class BaseCommand : ICommand {
      *
      * @return string
      */
-    static string defaultName()
-    {
+    static string defaultName() {
         $pos = strrpos(static::class, "\\");
         /** @psalm-suppress PossiblyFalseOperand */
         $name = substr(static::class, $pos + 1, -7);
@@ -128,8 +124,6 @@ abstract class BaseCommand : ICommand {
      * Override this method and implement expensive/important setup steps that
      * should not run on every command run. This method will be called *before*
      * the options and arguments are validated and processed.
-     *
-     * @return void
      */
     void initialize() {
     }

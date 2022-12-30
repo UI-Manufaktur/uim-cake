@@ -56,8 +56,6 @@ interface StatementInterface
      * Closes a cursor in the database, freeing up any resources and memory
      * allocated to it. In most cases you don"t need to call this method, as it is
      * automatically called after fetching all results from the result set.
-     *
-     * @return void
      */
     void closeCursor(): void;
 

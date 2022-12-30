@@ -251,8 +251,6 @@ class Connection : ConnectionInterface
 
     /**
      * Disconnects from database server.
-     *
-     * @return void
      */
     void disconnect(): void
     {
@@ -459,8 +457,6 @@ class Connection : ConnectionInterface
 
     /**
      * Starts a new transaction.
-     *
-     * @return void
      */
     void begin(): void
     {
@@ -639,8 +635,6 @@ class Connection : ConnectionInterface
 
     /**
      * Run driver specific SQL to disable foreign key checks.
-     *
-     * @return void
      */
     void disableForeignKeys(): void
     {
@@ -651,8 +645,6 @@ class Connection : ConnectionInterface
 
     /**
      * Run driver specific SQL to enable foreign key checks.
-     *
-     * @return void
      */
     void enableForeignKeys(): void
     {

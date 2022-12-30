@@ -26,8 +26,6 @@ interface IStorage
 
     /**
      * Delete user record.
-     *
-     * @return void
      */
     void delete();
 

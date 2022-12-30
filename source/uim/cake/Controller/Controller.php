@@ -235,8 +235,6 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * Implement this method to avoid having to overwrite
      * the constructor and call parent.
-     *
-     * @return void
      */
     void initialize(): void
     {

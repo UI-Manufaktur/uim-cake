@@ -109,8 +109,6 @@ class BetweenExpression : IExpression, FieldInterface
 
     /**
      * Do a deep clone of this expression.
-     *
-     * @return void
      */
     void __clone() {
         foreach (["_field", "_from", "_to"] as $part) {

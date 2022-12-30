@@ -271,8 +271,6 @@ class PluginCollection : Iterator, Countable
 
     /**
      * Part of Iterator Interface
-     *
-     * @return void
      */
     void next(): void
     {
@@ -304,8 +302,6 @@ class PluginCollection : Iterator, Countable
 
     /**
      * Part of Iterator Interface
-     *
-     * @return void
      */
     void rewind(): void
     {

@@ -81,8 +81,6 @@ interface DriverInterface
 
     /**
      * Disconnects from database server.
-     *
-     * @return void
      */
     void disconnect(): void;
 

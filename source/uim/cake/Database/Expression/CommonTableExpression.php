@@ -202,8 +202,6 @@ class CommonTableExpression : IExpression
 
     /**
      * Clones the inner expression objects.
-     *
-     * @return void
      */
     void __clone() {
         this.name = clone this.name;

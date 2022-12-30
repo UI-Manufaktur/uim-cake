@@ -22,8 +22,7 @@ import uim.cake.utilities.Inflector;
  */
 class I18nExtractCommand : Command {
 
-    static string defaultName()
-    {
+    static string defaultName() {
         return "i18n extract";
     }
 
@@ -640,8 +639,7 @@ class I18nExtractCommand : Command {
      * @param string $domain Domain
      * @return string Translation template header
      */
-    protected string _writeHeader(string $domain)
-    {
+    protected string _writeHeader(string $domain) {
         $projectIdVersion = $domain == "cake" ? "CakePHP " . Configure::version() : "PROJECT VERSION";
 
         $output = "# LANGUAGE translation of CakePHP Application\n";
@@ -733,8 +731,7 @@ class I18nExtractCommand : Command {
      * @param string $string String to format
      * @return string Formatted string
      */
-    protected string _formatString(string $string)
-    {
+    protected string _formatString(string $string) {
         $quote = substr($string, 0, 1);
         $string = substr($string, 1, -1);
         if ($quote == """) {

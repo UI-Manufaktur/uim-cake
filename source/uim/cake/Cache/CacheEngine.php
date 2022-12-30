@@ -89,8 +89,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return void
      * @throws uim.cake.Cache\InvalidArgumentException When the key is not valid.
      */
-    protected function ensureValidKey($key): void
-    {
+    protected void ensureValidKey($key) {
         if (!is_string($key) || strlen($key) == 0) {
             throw new InvalidArgumentException("A cache key must be a non-empty string.");
         }
@@ -104,8 +103,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return void
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    protected function ensureValidType($iterable, string $check = self::CHECK_VALUE): void
-    {
+    protected void ensureValidType($iterable, string $check = self::CHECK_VALUE) {
         if (!is_iterable($iterable)) {
             throw new InvalidArgumentException(sprintf(
                 "A cache %s must be either an array or a Traversable.",
@@ -344,8 +342,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @param string $message The warning message.
      * @return void
      */
-    protected void warning(string $message): void
-    {
+    protected void warning(string $message) {
         if (this.getConfig("warnOnWriteFailures") != true) {
             return;
         }

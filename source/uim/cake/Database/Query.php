@@ -2305,8 +2305,6 @@ class Query : IExpression, IteratorAggregate
 
     /**
      * Handles clearing iterator and cloning all expressions and value binders.
-     *
-     * @return void
      */
     void __clone() {
         _iterator = null;

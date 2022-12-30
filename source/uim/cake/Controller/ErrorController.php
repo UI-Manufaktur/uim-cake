@@ -15,15 +15,11 @@ import uim.cake.events.EventInterface;
  *
  * Controller used by ErrorHandler to render error views.
  */
-class ErrorController : Controller
-{
+class ErrorController : Controller {
     /**
      * Initialization hook method.
-     *
-     * @return void
      */
-    void initialize(): void
-    {
+    void initialize() {
         this.loadComponent("RequestHandler");
     }
 

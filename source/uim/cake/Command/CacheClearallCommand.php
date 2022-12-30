@@ -15,8 +15,7 @@ class CacheClearallCommand : Command {
      *
      * @return string
      */
-    static string defaultName()
-    {
+    static string defaultName() {
         return "cache clear_all";
     }
 

@@ -30,8 +30,6 @@ class ClassLoader
 
     /**
      * Register loader with SPL autoloader stack.
-     *
-     * @return void
      */
     void register(): void
     {

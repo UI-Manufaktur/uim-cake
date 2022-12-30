@@ -553,8 +553,6 @@ class CaseStatementExpression : IExpression, TypedResultInterface
 
     /**
      * Clones the inner expression objects.
-     *
-     * @return void
      */
     void __clone() {
         if (this.whenBuffer != null) {

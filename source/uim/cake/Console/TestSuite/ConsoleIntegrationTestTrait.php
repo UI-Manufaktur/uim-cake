@@ -82,8 +82,7 @@ trait ConsoleIntegrationTestTrait
      * @throws \RuntimeException
      * @return void
      */
-    void exec(string $command, array $input = [])
-    {
+    void exec(string $command, array $input = []) {
         $runner = this.makeRunner();
 
         if (_out == null) {
@@ -121,8 +120,7 @@ trait ConsoleIntegrationTestTrait
      * @return void
      * @psalm-suppress PossiblyNullPropertyAssignmentValue
      */
-    void cleanupConsoleTrait()
-    {
+    void cleanupConsoleTrait() {
         _exitCode = null;
         _out = null;
         _err = null;
@@ -133,11 +131,8 @@ trait ConsoleIntegrationTestTrait
     /**
      * Set this test case to use the CommandRunner rather than the legacy
      * ShellDispatcher
-     *
-     * @return void
      */
-    void useCommandRunner()
-    {
+    void useCommandRunner() {
         _useCommandRunner = true;
     }
 
@@ -148,8 +143,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    void assertExitCode(int $expected, string $message = ""): void
-    {
+    void assertExitCode(int $expected, string $message = "") {
         this.assertThat($expected, new ExitCode(_exitCode), $message);
     }
 
@@ -179,8 +173,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message The message to output when the assertion fails.
      * @return void
      */
-    void assertOutputEmpty(string $message = ""): void
-    {
+    void assertOutputEmpty(string $message = "") {
         this.assertThat(null, new ContentsEmpty(_out.messages(), "output"), $message);
     }
 
@@ -191,8 +184,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    void assertOutputContains(string $expected, string $message = ""): void
-    {
+    void assertOutputContains(string $expected, string $message = "") {
         this.assertThat($expected, new ContentsContain(_out.messages(), "output"), $message);
     }
 
@@ -203,8 +195,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    void assertOutputNotContains(string $expected, string $message = "")
-    {
+    void assertOutputNotContains(string $expected, string $message = "") {
         this.assertThat($expected, new ContentsNotContain(_out.messages(), "output"), $message);
     }
 
@@ -215,8 +206,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    void assertOutputRegExp(string $pattern, string $message = "")
-    {
+    void assertOutputRegExp(string $pattern, string $message = "") {
         this.assertThat($pattern, new ContentsRegExp(_out.messages(), "output"), $message);
     }
 
@@ -227,8 +217,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message.
      * @return void
      */
-    protected void assertOutputContainsRow(array $row, string $message = ""): void
-    {
+    protected void assertOutputContainsRow(array $row, string $message = "") {
         this.assertThat($row, new ContentsContainRow(_out.messages(), "output"), $message);
     }
 
@@ -239,8 +228,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    void assertErrorContains(string $expected, string $message = ""): void
-    {
+    void assertErrorContains(string $expected, string $message = "") {
         this.assertThat($expected, new ContentsContain(_err.messages(), "error output"), $message);
     }
 
@@ -251,8 +239,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message Failure message
      * @return void
      */
-    void assertErrorRegExp(string $pattern, string $message = ""): void
-    {
+    void assertErrorRegExp(string $pattern, string $message = "") {
         this.assertThat($pattern, new ContentsRegExp(_err.messages(), "error output"), $message);
     }
 
@@ -262,8 +249,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $message The message to output when the assertion fails.
      * @return void
      */
-    void assertErrorEmpty(string $message = ""): void
-    {
+    void assertErrorEmpty(string $message = "") {
         this.assertThat(null, new ContentsEmpty(_err.messages(), "error output"), $message);
     }
 

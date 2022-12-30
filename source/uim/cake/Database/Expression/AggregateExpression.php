@@ -194,8 +194,6 @@ class AggregateExpression : FunctionExpression : WindowInterface
 
     /**
      * Clone this object and its subtree of expressions.
-     *
-     * @return void
      */
     void __clone() {
         parent::__clone();

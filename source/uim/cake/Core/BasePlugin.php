@@ -120,8 +120,6 @@ class BasePlugin : PluginInterface
 
     /**
      * Initialization hook called from constructor.
-     *
-     * @return void
      */
     void initialize(): void
     {

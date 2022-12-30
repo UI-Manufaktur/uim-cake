@@ -164,8 +164,6 @@ class ComparisonExpression : IExpression, FieldInterface
      * Create a deep clone.
      *
      * Clones the field and value if they are expression objects.
-     *
-     * @return void
      */
     void __clone() {
         foreach (["_value", "_field"] as $prop) {

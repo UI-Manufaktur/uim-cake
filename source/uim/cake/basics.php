@@ -62,8 +62,7 @@ if (!function_exists("stackTrace")) {
      * @param array<string, mixed> $options Format for outputting stack trace
      * @return void
      */
-    void stackTrace(array $options = [])
-    {
+    void stackTrace(array $options = []) {
         if (!Configure::read("debug")) {
             return;
         }
@@ -117,8 +116,7 @@ if (!function_exists("dd")) {
      * @return void
      * @link https://book.cakephp.org/4/en/development/debugging.html#basic-debugging
      */
-    void dd($var, $showHtml = null)
-    {
+    void dd($var, $showHtml = null) {
         if (!Configure::read("debug")) {
             return;
         }

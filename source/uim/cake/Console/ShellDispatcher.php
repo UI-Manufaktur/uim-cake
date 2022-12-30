@@ -102,8 +102,7 @@ class ShellDispatcher
      *
      * @return void
      */
-    static void resetAliases()
-    {
+    static void resetAliases() {
         static::$_aliases = [];
     }
 
@@ -127,8 +126,7 @@ class ShellDispatcher
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException
      */
-    protected void _initEnvironment()
-    {
+    protected void _initEnvironment() {
         _bootstrap();
 
         if (function_exists("ini_set")) {
@@ -383,11 +381,8 @@ class ShellDispatcher
 
     /**
      * Shows console help. Performs an internal dispatch to the CommandList Shell
-     *
-     * @return void
      */
-    void help()
-    {
+    void help() {
         trigger_error(
             "Console help cannot be generated from Shell classes anymore. " .
             "Upgrade your application to import uim.cake.consoles.CommandRunner instead.",
@@ -397,11 +392,8 @@ class ShellDispatcher
 
     /**
      * Prints the currently installed version of CakePHP. Performs an internal dispatch to the CommandList Shell
-     *
-     * @return void
      */
-    void version()
-    {
+    void version() {
         trigger_error(
             "Version information cannot be generated from Shell classes anymore. " .
             "Upgrade your application to import uim.cake.consoles.CommandRunner instead.",

@@ -36,8 +36,6 @@ interface IPluginApplication : EventDispatcherInterface
 
     /**
      * Run bootstrap logic for loaded plugins.
-     *
-     * @return void
      */
     void pluginBootstrap(): void;
 
