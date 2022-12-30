@@ -181,8 +181,7 @@ class Helper : IEventListener
      *
      * @param array<string, mixed> $config The configuration settings provided to this helper.
      */
-    void initialize(array $config)
-    {
+    void initialize(array $config) {
     }
 
     /**

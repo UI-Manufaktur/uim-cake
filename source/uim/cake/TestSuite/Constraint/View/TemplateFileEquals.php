@@ -36,8 +36,7 @@ class TemplateFileEquals : Constraint
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("equals template file `%s`", this.filename);
     }
 }
