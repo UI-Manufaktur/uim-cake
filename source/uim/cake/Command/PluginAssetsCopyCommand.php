@@ -14,7 +14,7 @@ class PluginAssetsCopyCommand : Command {
     use PluginAssetsTrait;
 
 
-    static function defaultName(): string
+    static string defaultName()
     {
         return "plugin assets copy";
     }

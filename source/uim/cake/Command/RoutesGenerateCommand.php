@@ -12,7 +12,7 @@ import uim.cake.routings.Router;
  */
 class RoutesGenerateCommand : Command {
 
-    static function defaultName(): string
+    static string defaultName()string
     {
         return "routes generate";
     }

@@ -14,7 +14,7 @@ import uim.cake.routings.Router;
  */
 class RoutesCheckCommand : Command {
 
-    static function defaultName(): string
+    static string defaultName()string
     {
         return "routes check";
     }

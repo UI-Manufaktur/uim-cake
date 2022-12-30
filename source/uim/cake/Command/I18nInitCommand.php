@@ -21,7 +21,7 @@ use DirectoryIterator;
  */
 class I18nInitCommand : Command {
 
-    static function defaultName(): string
+    static string defaultName()string
     {
         return "i18n init";
     }

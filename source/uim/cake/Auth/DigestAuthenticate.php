@@ -183,7 +183,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $method Request method
      * @return string Response hash
      */
-    function generateResponseHash(array $digest, string $password, string $method): string
+    string generateResponseHash(array $digest, string $password, string $method)
     {
         return md5(
             $password .
@@ -200,7 +200,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @param string $realm The realm the password is for.
      * @return string the hashed password that can later be used with Digest authentication.
      */
-    static function password(string $username, string $password, string $realm): string
+    static string password(string $username, string $password, string $realm)
     {
         return md5($username . ":" . $realm . ":" . $password);
     }
@@ -247,7 +247,7 @@ class DigestAuthenticate : BasicAuthenticate
      *
      * @return string
      */
-    protected function generateNonce(): string
+    protected string generateNonce()
     {
         $expiryTime = microtime(true) + this.getConfig("nonceLifetime");
         $secret = this.getConfig("secret");
