@@ -28,15 +28,11 @@ class I18nExtractCommand : Command {
 
     /**
      * Paths to use when looking for strings
-     *
-     * @var array<string>
      */
     protected string[] $_paths = [];
 
     /**
      * Files from where to extract
-     *
-     * @var array<string>
      */
     protected string[] $_files = [];
 
@@ -50,9 +46,8 @@ class I18nExtractCommand : Command {
     /**
      * Current file being processed
      *
-     * @var string
      */
-    protected $_file = "";
+    protected string $_file = "";
 
     /**
      * Contains all content waiting to be written
@@ -78,14 +73,11 @@ class I18nExtractCommand : Command {
     /**
      * Destination path
      *
-     * @var string
      */
-    protected $_output = "";
+    protected string $_output = "";
 
     /**
      * An array of directories to exclude.
-     *
-     * @var array<string>
      */
     protected string[] $_exclude = [];
 

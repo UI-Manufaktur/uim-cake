@@ -19,33 +19,17 @@ use SimpleXMLElement;
  */
 class ConsoleInputOption
 {
-    /**
-     * Name of the option
-     *
-     * @var string
-     */
-    protected $_name;
+    // Name of the option
+    protected string $_name;
 
-    /**
-     * Short (1 character) alias for the option.
-     *
-     * @var string
-     */
-    protected $_short;
+    // Short (1 character) alias for the option.
+    protected string $_short;
 
-    /**
-     * Help text for the option.
-     *
-     * @var string
-     */
-    protected $_help;
+    // Help text for the option.
+    protected string $_help;
 
-    /**
-     * Is the option a boolean option. Boolean options do not consume a parameter.
-     *
-     * @var bool
-     */
-    protected $_boolean;
+    // Is the option a boolean option. Boolean options do not consume a parameter.
+    protected bool $_boolean;
 
     /**
      * Default value for the option
@@ -54,12 +38,8 @@ class ConsoleInputOption
      */
     protected $_default;
 
-    /**
-     * Can the option accept multiple value definition.
-     *
-     * @var bool
-     */
-    protected $_multiple;
+    // Can the option accept multiple value definition.
+    protected bool $_multiple;
 
     /**
      * An array of choices for the option.

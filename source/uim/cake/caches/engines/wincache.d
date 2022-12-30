@@ -12,8 +12,6 @@ class WincacheEngine : CacheEngine {
     /**
      * Contains the compiled group names
      * (prefixed with the global configuration prefix)
-     *
-     * @var array<string>
      */
     protected string[] _compiledGroupNames = [];
 

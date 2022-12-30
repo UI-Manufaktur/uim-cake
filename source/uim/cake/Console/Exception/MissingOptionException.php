@@ -23,9 +23,8 @@ class MissingOptionException : ConsoleException
     /**
      * The requested thing that was not found.
      *
-     * @var string
      */
-    protected $requested = "";
+    protected string $requested = "";
 
     /**
      * The valid suggestions.

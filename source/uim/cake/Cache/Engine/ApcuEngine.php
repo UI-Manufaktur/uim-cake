@@ -1,27 +1,14 @@
-
-
-
- *
-
-
- * @since         3.5.4
-  */
 module uim.cake.caches.Engine;
 
 use APCUIterator;
 import uim.cake.caches.CacheEngine;
 use RuntimeException;
 
-/**
- * APCu storage engine for cache
- */
-class ApcuEngine : CacheEngine
-{
+// APCu storage engine for cache
+class ApcuEngine : CacheEngine {
     /**
      * Contains the compiled group names
      * (prefixed with the global configuration prefix)
-     *
-     * @var array<string>
      */
     protected string[] $_compiledGroupNames = [];
 

@@ -22,9 +22,8 @@ class SecurityException : BadRequestException
     /**
      * Security Exception type
      *
-     * @var string
      */
-    protected $_type = "secure";
+    protected string $_type = "secure";
 
     /**
      * Reason for request blackhole

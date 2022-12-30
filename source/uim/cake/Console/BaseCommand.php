@@ -20,9 +20,8 @@ abstract class BaseCommand : ICommand {
     /**
      * The name of this command.
      *
-     * @var string
      */
-    protected $name = "cake unknown";
+    protected string $name = "cake unknown";
 
 
     function setName(string $name) {

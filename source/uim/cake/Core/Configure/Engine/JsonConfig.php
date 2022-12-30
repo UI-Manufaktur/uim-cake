@@ -30,9 +30,8 @@ class JsonConfig : ConfigEngineInterface
     /**
      * File extension.
      *
-     * @var string
      */
-    protected $_extension = ".json";
+    protected string $_extension = ".json";
 
     /**
      * Constructor for JSON Config file reading.

@@ -35,12 +35,8 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      */
     protected $_current;
 
-    /**
-     * The string to use for prefixing the values according to their depth in the tree.
-     *
-     * @var string
-     */
-    protected $_spacer;
+    // The string to use for prefixing the values according to their depth in the tree.
+    protected string $_spacer;
 
     /**
      * Constructor

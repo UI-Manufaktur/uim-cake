@@ -66,37 +66,32 @@ class BasePlugin : PluginInterface
     /**
      * The path to this plugin.
      *
-     * @var string
      */
-    protected $path;
+    protected string $path;
 
     /**
      * The class path for this plugin.
      *
-     * @var string
      */
-    protected $classPath;
+    protected string $classPath;
 
     /**
      * The config path for this plugin.
      *
-     * @var string
      */
-    protected $configPath;
+    protected string $configPath;
 
     /**
      * The templates path for this plugin.
      *
-     * @var string
      */
-    protected $templatePath;
+    protected string $templatePath;
 
     /**
      * The name of this plugin
      *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * Constructor

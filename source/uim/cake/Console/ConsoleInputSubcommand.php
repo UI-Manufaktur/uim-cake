@@ -29,17 +29,14 @@ class ConsoleInputSubcommand
 {
     /**
      * Name of the subcommand
-     *
-     * @var string
      */
-    protected $_name = "";
+    protected string $_name = "";
 
     /**
      * Help string for the subcommand
      *
-     * @var string
      */
-    protected $_help = "";
+    protected string $_help = "";
 
     /**
      * The ConsoleOptionParser for this subcommand.

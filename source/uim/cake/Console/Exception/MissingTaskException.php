@@ -18,7 +18,6 @@ module uim.cake.consoles.Exception;
 class MissingTaskException : ConsoleException
 {
     /**
-     * @var string
      */
-    protected $_messageTemplate = "Task class %s could not be found.";
+    protected string $_messageTemplate = "Task class %s could not be found.";
 }

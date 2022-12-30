@@ -17,33 +17,18 @@ use SimpleXMLElement;
  *
  * @see uim.cake.consoles.ConsoleOptionParser::addArgument()
  */
-class ConsoleInputArgument
-{
-    /**
-     * Name of the argument.
-     *
-     * @var string
-     */
-    protected $_name;
+class ConsoleInputArgument {
+    // Name of the argument.
+    protected string $_name;
 
-    /**
-     * Help string
-     *
-     * @var string
-     */
-    protected $_help;
+    // Help string
+    protected string $_help;
 
-    /**
-     * Is this option required?
-     *
-     * @var bool
-     */
-    protected $_required;
+    // Is this option required?
+    protected bool $_required;
 
     /**
      * An array of valid choices for this argument.
-     *
-     * @var array<string>
      */
     protected string[] $_choices;
 
@@ -72,18 +57,16 @@ class ConsoleInputArgument
     /**
      * Get the value of the name attribute.
      *
-     * @return string Value of _name.
+     * @return Value of _name.
      */
-    string name()
-    {
-        return _name;
+    string name() {
+      return _name;
     }
 
     /**
      * Checks if this argument is equal to another argument.
      *
      * @param uim.cake.consoles.ConsoleInputArgument $argument ConsoleInputArgument to compare to.
-     * @return bool
      */
     bool isEqualTo(ConsoleInputArgument $argument) {
         return this.name() == $argument.name() &&

@@ -71,17 +71,15 @@ class ConsoleOptionParser
      * Description text - displays before options when help is generated
      *
      * @see uim.cake.consoles.ConsoleOptionParser::description()
-     * @var string
      */
-    protected $_description = "";
+    protected string $_description = "";
 
     /**
      * Epilog text - displays after options when help is generated
      *
      * @see uim.cake.consoles.ConsoleOptionParser::epilog()
-     * @var string
      */
-    protected $_epilog = "";
+    protected string $_epilog = "";
 
     /**
      * Option definitions.
@@ -124,9 +122,8 @@ class ConsoleOptionParser
     /**
      * Command name.
      *
-     * @var string
      */
-    protected $_command = "";
+    protected string $_command = "";
 
     /**
      * Array of args (argv).
@@ -139,9 +136,8 @@ class ConsoleOptionParser
      * Root alias used in help output
      *
      * @see uim.cake.consoles.HelpFormatter::setAlias()
-     * @var string
      */
-    protected $rootName = "cake";
+    protected string $rootName = "cake";
 
     /**
      * Construct an OptionParser so you can define its behavior

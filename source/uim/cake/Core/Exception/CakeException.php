@@ -33,9 +33,8 @@ class CakeException : RuntimeException
     /**
      * Template string that has attributes sprintf()"ed into it.
      *
-     * @var string
      */
-    protected $_messageTemplate = "";
+    protected string $_messageTemplate = "";
 
     /**
      * Array of headers to be passed to {@link uim.cake.Http\Response::withHeader()}

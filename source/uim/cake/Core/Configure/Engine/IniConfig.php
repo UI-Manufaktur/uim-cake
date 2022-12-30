@@ -52,9 +52,8 @@ class IniConfig : ConfigEngineInterface
     /**
      * File extension.
      *
-     * @var string
      */
-    protected $_extension = ".ini";
+    protected string $_extension = ".ini";
 
     /**
      * The section to read, if null all sections will be read.

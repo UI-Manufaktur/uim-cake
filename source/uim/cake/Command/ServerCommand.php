@@ -32,12 +32,8 @@ class ServerCommand : Command {
      */
     const DEFAULT_PORT = 8765;
 
-    /**
-     * server host
-     *
-     * @var string
-     */
-    protected $_host = self::DEFAULT_HOST;
+    // server host
+    protected string $_host = self::DEFAULT_HOST;
 
     /**
      * listen port
@@ -46,19 +42,11 @@ class ServerCommand : Command {
      */
     protected $_port = self::DEFAULT_PORT;
 
-    /**
-     * document root
-     *
-     * @var string
-     */
-    protected $_documentRoot = WWW_ROOT;
+    // document root
+    protected string $_documentRoot = WWW_ROOT;
 
-    /**
-     * ini path
-     *
-     * @var string
-     */
-    protected $_iniPath = "";
+    // ini path
+    protected string $_iniPath = "";
 
     /**
      * Starts up the Command and displays the welcome message.

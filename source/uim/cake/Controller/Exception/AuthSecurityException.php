@@ -20,7 +20,6 @@ class AuthSecurityException : SecurityException
     /**
      * Security Exception type
      *
-     * @var string
      */
-    protected $_type = "auth";
+    protected string $_type = "auth";
 }

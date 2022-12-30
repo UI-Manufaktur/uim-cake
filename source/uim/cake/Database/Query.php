@@ -50,9 +50,8 @@ class Query : IExpression, IteratorAggregate
     /**
      * Type of this query (select, insert, update, delete).
      *
-     * @var string
      */
-    protected $_type = "select";
+    protected string $_type = "select";
 
     /**
      * List of SQL parts that will be used to build this query.

@@ -164,9 +164,8 @@ class Shell
     /**
      * The root command name used when generating help output.
      *
-     * @var string
      */
-    protected $rootName = "cake";
+    protected string $rootName = "cake";
 
     /**
      * Constructs this Shell instance.

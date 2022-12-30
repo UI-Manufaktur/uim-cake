@@ -92,9 +92,8 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * Set automatically using conventions in Controller::__construct().
      *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * An instance of a uim.cake.Http\ServerRequest object that contains information about the current request.

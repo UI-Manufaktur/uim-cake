@@ -10,15 +10,9 @@ abstract class CacheEngine : ICache, ICacheEngine
 {
     use InstanceConfigTrait;
 
-    /**
-     * @var string
-     */
-    protected const CHECK_KEY = "key";
+    protected string const CHECK_KEY = "key";
 
-    /**
-     * @var string
-     */
-    protected const CHECK_VALUE = "value";
+    protected string const CHECK_VALUE = "value";
 
     /**
      * The default cache configuration is overridden in most cache adapters. These are

@@ -41,17 +41,11 @@ class CommandRunner : EventDispatcherInterface
 
     /**
      * The root command name. Defaults to `cake`.
-     *
-     * @var string
      */
-    protected $root;
+    protected string $root;
 
-    /**
-     * Alias mappings.
-     *
-     * @var array<string>
-     */
-    protected $aliases = [];
+    // Alias mappings.
+    protected string[] $aliases = [];
 
     /**
      * Constructor

@@ -24,14 +24,12 @@ use PHPUnit\Framework\Constraint\Constraint;
 abstract class ContentsBase : Constraint
 {
     /**
-     * @var string
      */
-    protected $contents;
+    protected string $contents;
 
     /**
-     * @var string
      */
-    protected $output;
+    protected string $output;
 
     /**
      * Constructor

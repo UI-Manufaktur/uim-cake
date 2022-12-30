@@ -28,17 +28,14 @@ class InsertIterator : Collection
     /**
      * An array containing each of the properties to be traversed to reach the
      * point where the values should be inserted.
-     *
-     * @var array<string>
      */
     protected string[] $_path;
 
     /**
      * The property name to which values will be assigned
      *
-     * @var string
      */
-    protected $_target;
+    protected string $_target;
 
     /**
      * Constructs a new collection that will dynamically add properties to it out of
