@@ -55,9 +55,8 @@ abstract class Driver : DriverInterface
      * Indicates whether the driver is doing automatic identifier quoting
      * for all queries
      *
-     * @var bool
      */
-    protected $_autoQuoting = false;
+    protected bool $_autoQuoting = false;
 
     /**
      * The server version
@@ -69,9 +68,8 @@ abstract class Driver : DriverInterface
     /**
      * The last number of connection retry attempts.
      *
-     * @var int
      */
-    protected $connectRetries = 0;
+    protected int $connectRetries = 0;
 
     /**
      * Constructor

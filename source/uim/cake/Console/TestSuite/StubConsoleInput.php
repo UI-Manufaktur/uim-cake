@@ -34,9 +34,8 @@ class StubConsoleInput : ConsoleInput
     /**
      * Current message index
      *
-     * @var int
      */
-    protected $currentIndex = -1;
+    protected int $currentIndex = -1;
 
     /**
      * Constructor

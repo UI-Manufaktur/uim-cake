@@ -40,9 +40,8 @@ class UnaryExpression : IExpression
     /**
      * Where to place the operator
      *
-     * @var int
      */
-    protected $position;
+    protected int $position;
 
     /**
      * Constructor

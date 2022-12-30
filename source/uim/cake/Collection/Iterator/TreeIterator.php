@@ -17,9 +17,8 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
     /**
      * The iteration mode
      *
-     * @var int
      */
-    protected $_mode;
+    protected int $_mode;
 
     /**
      * Constructor

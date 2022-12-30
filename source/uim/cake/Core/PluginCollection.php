@@ -59,9 +59,8 @@ class PluginCollection : Iterator, Countable
     /**
      * Loop depth
      *
-     * @var int
      */
-    protected $loopDepth = -1;
+    protected int $loopDepth = -1;
 
     /**
      * Constructor

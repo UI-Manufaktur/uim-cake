@@ -23,9 +23,8 @@ class PostgresCompiler : QueryCompiler
      *
      * Postgres auto converts unquoted identifiers to lower case.
      *
-     * @var bool
      */
-    protected $_quotedSelectAliases = true;
+    protected bool $_quotedSelectAliases = true;
 
 
     protected $_templates = [

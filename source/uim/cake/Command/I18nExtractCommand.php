@@ -39,9 +39,8 @@ class I18nExtractCommand : Command {
     /**
      * Merge all domain strings into the default.pot file
      *
-     * @var bool
      */
-    protected $_merge = false;
+    protected bool $_merge = false;
 
     /**
      * Current file being processed
@@ -84,23 +83,20 @@ class I18nExtractCommand : Command {
     /**
      * Holds whether this call should extract the CakePHP Lib messages
      *
-     * @var bool
      */
-    protected $_extractCore = false;
+    protected bool $_extractCore = false;
 
     /**
      * Displays marker error(s) if true
      *
-     * @var bool
      */
-    protected $_markerError = false;
+    protected bool $_markerError = false;
 
     /**
      * Count number of marker errors found
      *
-     * @var int
      */
-    protected $_countMarkerError = 0;
+    protected int $_countMarkerError = 0;
 
     /**
      * Method to interact with the user and get path selections.

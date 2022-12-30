@@ -19,14 +19,12 @@ class CommandRetry
     protected $strategy;
 
     /**
-     * @var int
      */
-    protected $maxRetries;
+    protected int $maxRetries;
 
     /**
-     * @var int
      */
-    protected $numRetries;
+    protected int $numRetries;
 
     /**
      * Creates the CommandRetry object with the given strategy and retry count

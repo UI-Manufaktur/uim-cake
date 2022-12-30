@@ -41,9 +41,8 @@ trait ConsoleIntegrationTestTrait
     /**
      * Whether to use the CommandRunner
      *
-     * @var bool
      */
-    protected $_useCommandRunner = false;
+    protected bool $_useCommandRunner = false;
 
     /**
      * Last exit code

@@ -41,9 +41,8 @@ class CaseStatementExpression : IExpression, TypedResultInterface
     /**
      * Whether this is a simple case expression.
      *
-     * @var bool
      */
-    protected $isSimpleVariant = false;
+    protected bool $isSimpleVariant = false;
 
     /**
      * The case value.

@@ -25,16 +25,14 @@ class HelpFormatter
     /**
      * The maximum number of arguments shown when generating usage.
      *
-     * @var int
      */
-    protected $_maxArgs = 6;
+    protected int $_maxArgs = 6;
 
     /**
      * The maximum number of options shown when generating usage.
      *
-     * @var int
      */
-    protected $_maxOptions = 6;
+    protected int $_maxOptions = 6;
 
     /**
      * Option parser.

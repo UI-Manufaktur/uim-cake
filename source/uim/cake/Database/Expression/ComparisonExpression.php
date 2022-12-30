@@ -40,9 +40,8 @@ class ComparisonExpression : IExpression, FieldInterface
     /**
      * Whether the value in this expression is a traversable
      *
-     * @var bool
      */
-    protected $_isMultiple = false;
+    protected bool $_isMultiple = false;
 
     /**
      * A cached list of IExpression objects that were

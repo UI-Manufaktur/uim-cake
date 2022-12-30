@@ -121,9 +121,8 @@ class Query : IExpression, IteratorAggregate
      * discard internal cached objects such as the transformed query or the reference
      * to the executed statement.
      *
-     * @var bool
      */
-    protected $_dirty = false;
+    protected bool $_dirty = false;
 
     /**
      * A list of callback functions to be called to alter each row from resulting
@@ -160,9 +159,8 @@ class Query : IExpression, IteratorAggregate
      * Boolean for tracking whether buffered results
      * are enabled.
      *
-     * @var bool
      */
-    protected $_useBufferedResults = true;
+    protected bool $_useBufferedResults = true;
 
     /**
      * The Type map for fields in the select clause
@@ -174,9 +172,8 @@ class Query : IExpression, IteratorAggregate
     /**
      * Tracking flag to disable casting
      *
-     * @var bool
      */
-    protected $typeCastEnabled = true;
+    protected bool $typeCastEnabled = true;
 
     /**
      * Constructor.

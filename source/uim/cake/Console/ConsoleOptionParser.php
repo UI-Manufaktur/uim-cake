@@ -115,9 +115,8 @@ class ConsoleOptionParser
     /**
      * Subcommand sorting option
      *
-     * @var bool
      */
-    protected $_subcommandSort = true;
+    protected bool $_subcommandSort = true;
 
     /**
      * Command name.

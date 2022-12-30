@@ -69,9 +69,8 @@ class WhenThenExpression : IExpression
      * Whether the `THEN` value has been defined, eg whether `then()`
      * has been invoked.
      *
-     * @var bool
      */
-    protected $hasThenBeenDefined = false;
+    protected bool $hasThenBeenDefined = false;
 
     /**
      * The `THEN` result type.

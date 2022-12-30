@@ -66,16 +66,14 @@ class QueryCompiler
      *
      * Overridden in subclasses.
      *
-     * @var bool
      */
-    protected $_orderedUnion = true;
+    protected bool $_orderedUnion = true;
 
     /**
      * Indicate whether aliases in SELECT clause need to be always quoted.
      *
-     * @var bool
      */
-    protected $_quotedSelectAliases = false;
+    protected bool $_quotedSelectAliases = false;
 
     /**
      * Returns the SQL representation of the provided query after generating

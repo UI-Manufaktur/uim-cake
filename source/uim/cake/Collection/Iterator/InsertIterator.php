@@ -21,9 +21,8 @@ class InsertIterator : Collection
     /**
      * Holds whether the values collection is still valid. (has more records)
      *
-     * @var bool
      */
-    protected $_validValues = true;
+    protected bool $_validValues = true;
 
     /**
      * An array containing each of the properties to be traversed to reach the

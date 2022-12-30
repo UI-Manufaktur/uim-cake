@@ -46,9 +46,8 @@ class CakeException : RuntimeException
     /**
      * Default exception code
      *
-     * @var int
      */
-    protected $_defaultCode = 0;
+    protected int $_defaultCode = 0;
 
     /**
      * Constructor.

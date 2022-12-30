@@ -38,9 +38,8 @@ class ServerCommand : Command {
     /**
      * listen port
      *
-     * @var int
      */
-    protected $_port = self::DEFAULT_PORT;
+    protected int $_port = self::DEFAULT_PORT;
 
     // document root
     protected string $_documentRoot = WWW_ROOT;

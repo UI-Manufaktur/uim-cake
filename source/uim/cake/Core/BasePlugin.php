@@ -31,37 +31,32 @@ class BasePlugin : PluginInterface
     /**
      * Do bootstrapping or not
      *
-     * @var bool
      */
-    protected $bootstrapEnabled = true;
+    protected bool $bootstrapEnabled = true;
 
     /**
      * Console middleware
      *
-     * @var bool
      */
-    protected $consoleEnabled = true;
+    protected bool $consoleEnabled = true;
 
     /**
      * Enable middleware
      *
-     * @var bool
      */
-    protected $middlewareEnabled = true;
+    protected bool $middlewareEnabled = true;
 
     /**
      * Register container services
      *
-     * @var bool
      */
-    protected $servicesEnabled = true;
+    protected bool $servicesEnabled = true;
 
     /**
      * Load routes or not
      *
-     * @var bool
      */
-    protected $routesEnabled = true;
+    protected bool $routesEnabled = true;
 
     /**
      * The path to this plugin.

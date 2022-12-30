@@ -22,9 +22,8 @@ class BufferedIterator : Collection : Countable, Serializable
     /**
      * Points to the next record number that should be fetched
      *
-     * @var int
      */
-    protected $_index = 0;
+    protected int $_index = 0;
 
     /**
      * Last record fetched from the inner iterator
@@ -44,16 +43,14 @@ class BufferedIterator : Collection : Countable, Serializable
      * Whether the internal iterator"s rewind method was already
      * called
      *
-     * @var bool
      */
-    protected $_started = false;
+    protected bool $_started = false;
 
     /**
      * Whether the internal iterator has reached its end.
      *
-     * @var bool
      */
-    protected $_finished = false;
+    protected bool $_finished = false;
 
     /**
      * Maintains an in-memory cache of the results yielded by the internal

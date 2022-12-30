@@ -128,9 +128,8 @@ class Controller : IEventListener, EventDispatcherInterface
      * Set to true to automatically render the view
      * after action logic.
      *
-     * @var bool
      */
-    protected $autoRender = true;
+    protected bool $autoRender = true;
 
     /**
      * Instance of ComponentRegistry used to create Components

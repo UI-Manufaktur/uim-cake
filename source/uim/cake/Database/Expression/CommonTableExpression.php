@@ -49,9 +49,8 @@ class CommonTableExpression : IExpression
     /**
      * Whether the CTE is recursive.
      *
-     * @var bool
      */
-    protected $recursive = false;
+    protected bool $recursive = false;
 
     /**
      * Constructor.

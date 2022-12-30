@@ -46,9 +46,8 @@ class ValuesExpression : IExpression
      * Whether values have been casted to expressions
      * already.
      *
-     * @var bool
      */
-    protected $_castedExpressions = false;
+    protected bool $_castedExpressions = false;
 
     /**
      * Constructor

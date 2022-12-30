@@ -58,9 +58,8 @@ class ConsoleInputOption
     /**
      * Is the option required.
      *
-     * @var bool
      */
-    protected $required;
+    protected bool $required;
 
     /**
      * Make a new Input Option

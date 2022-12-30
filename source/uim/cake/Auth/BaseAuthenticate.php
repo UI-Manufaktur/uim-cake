@@ -58,9 +58,8 @@ abstract class BaseAuthenticate : IEventListener
      * Whether the user authenticated by this class
      * requires their password to be rehashed with another algorithm.
      *
-     * @var bool
      */
-    protected $_needsPasswordRehash = false;
+    protected bool $_needsPasswordRehash = false;
 
     /**
      * Constructor
