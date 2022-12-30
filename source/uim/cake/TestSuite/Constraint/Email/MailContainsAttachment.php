@@ -35,8 +35,7 @@ class MailContainsAttachment : MailContains
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         if (this.at) {
             return sprintf("is an attachment of email #%d", this.at);
         }

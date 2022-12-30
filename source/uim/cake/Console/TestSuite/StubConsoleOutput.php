@@ -57,8 +57,7 @@ class StubConsoleOutput : ConsoleOutput
     /**
      * Get the output as a string
      */
-    string output()
-    {
+    string output() {
         return implode("\n", _out);
     }
 }

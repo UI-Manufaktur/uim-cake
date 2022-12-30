@@ -53,8 +53,7 @@ class EventFired : Constraint
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         return "was fired";
     }
 }

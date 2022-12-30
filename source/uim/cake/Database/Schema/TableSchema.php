@@ -282,8 +282,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    string name()
-    {
+    string name() {
         return _table;
     }
 

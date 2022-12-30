@@ -71,8 +71,7 @@ class ConsoleInputArgument {
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    string help(int $width = 0)
-    {
+    string help(int $width = 0) {
         $name = _name;
         if (strlen($name) < $width) {
             $name = str_pad($name, $width, " ");
@@ -91,8 +90,7 @@ class ConsoleInputArgument {
     /**
      * Get the usage value for this argument
      */
-    string usage()
-    {
+    string usage() {
         $name = _name;
         if (_choices) {
             $name = implode("|", _choices);

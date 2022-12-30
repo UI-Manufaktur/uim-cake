@@ -104,8 +104,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *
      * @param array<string, mixed> $config The config for this behavior.
      */
-    void initialize(array $config)
-    {
+    void initialize(array $config) {
         this.getStrategy();
     }
 

@@ -111,8 +111,7 @@ class ConsoleInputOption
      *
      * @return string Value of _name.
      */
-    string name()
-    {
+    string name() {
         return _name;
     }
 
@@ -121,8 +120,7 @@ class ConsoleInputOption
      *
      * @return string Value of _short.
      */
-    string short()
-    {
+    string short() {
         return _short;
     }
 
@@ -132,8 +130,7 @@ class ConsoleInputOption
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    string help(int $width = 0)
-    {
+    string help(int $width = 0) {
         $default = $short = "";
         if (_default && _default != true) {
             $default = sprintf(" <comment>(default: %s)</comment>", _default);
@@ -159,8 +156,7 @@ class ConsoleInputOption
     /**
      * Get the usage value for this option
      */
-    string usage()
-    {
+    string usage() {
         $name = _short == "" ? "--" . _name : "-" . _short;
         $default = "";
         if (_default != null && !is_bool(_default) && _default != "") {
@@ -249,8 +245,7 @@ class ConsoleInputOption
     /**
      * Get the prompt string
      */
-    string prompt()
-    {
+    string prompt() {
         return (string)this.prompt;
     }
 

@@ -13,8 +13,7 @@ class PluginAssetsCopyCommand : Command {
     use PluginAssetsTrait;
 
 
-    static string defaultName()
-    {
+    static string defaultName() {
         return "plugin assets copy";
     }
 

@@ -37,8 +37,7 @@ class ExitCode : Constraint
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("matches exit code %s", this.exitCode ?? "null");
     }
 }

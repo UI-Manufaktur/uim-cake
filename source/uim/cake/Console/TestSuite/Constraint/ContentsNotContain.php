@@ -20,8 +20,7 @@ class ContentsNotContain : ContentsBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("is not in %s", this.output);
     }
 }

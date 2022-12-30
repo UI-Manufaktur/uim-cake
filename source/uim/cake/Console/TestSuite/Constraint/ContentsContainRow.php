@@ -27,8 +27,7 @@ class ContentsContainRow : ContentsRegExp
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("row was in %s", this.output);
     }
 
@@ -36,8 +35,7 @@ class ContentsContainRow : ContentsRegExp
      * @param mixed $other Expected content
      * @return string
      */
-    string failureDescription($other)
-    {
+    string failureDescription($other) {
         return "`" . this.exporter().shortenedExport($other) . "` " . this.toString();
     }
 }

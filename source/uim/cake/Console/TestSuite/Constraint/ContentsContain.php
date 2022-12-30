@@ -21,8 +21,7 @@ class ContentsContain : ContentsBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("is in %s," . PHP_EOL . "actual result:" . PHP_EOL, this.output) . this.contents;
     }
 }

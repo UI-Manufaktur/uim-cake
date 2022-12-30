@@ -1,4 +1,4 @@
-module uim.cake.Cache;
+module uim.cake.caches;
 
 use BadMethodCallException;
 import uim.cake.core.App;

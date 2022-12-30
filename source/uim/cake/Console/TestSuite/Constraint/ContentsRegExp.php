@@ -21,8 +21,7 @@ class ContentsRegExp : ContentsBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("PCRE pattern found in %s", this.output);
     }
 
@@ -30,8 +29,7 @@ class ContentsRegExp : ContentsBase
      * @param mixed $other Expected
      * @return string
      */
-    string failureDescription($other)
-    {
+    string failureDescription($other) {
         return "`" . $other . "` " . this.toString();
     }
 }

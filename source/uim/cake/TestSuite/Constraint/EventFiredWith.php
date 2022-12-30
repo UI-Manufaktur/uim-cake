@@ -103,8 +103,7 @@ class EventFiredWith : Constraint
     /**
      * Assertion message string
      */
-    string toString()
-    {
+    string toString() {
         return "was fired with " . _dataKey . " matching " . (string)_dataValue;
     }
 }

@@ -114,8 +114,7 @@ class Component : IEventListener
      *
      * @param array<string, mixed> $config The configuration settings provided to this component.
      */
-    void initialize(array $config)
-    {
+    void initialize(array $config) {
     }
 
     /**

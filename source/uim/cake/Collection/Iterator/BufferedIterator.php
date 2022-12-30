@@ -164,8 +164,7 @@ class BufferedIterator : Collection : Countable, Serializable
      * Returns a string representation of this object that can be used
      * to reconstruct it
      */
-    string serialize()
-    {
+    string serialize() {
         if (!_finished) {
             this.count();
         }

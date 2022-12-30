@@ -302,8 +302,7 @@ class RedisEngine : CacheEngine {
      *
      * @return array<string>
      */
-    string[] groups()
-    {
+    string[] groups() {
         $result = [];
         foreach (_config["groups"] as $group) {
             $value = _Redis.get(_config["prefix"] . $group);

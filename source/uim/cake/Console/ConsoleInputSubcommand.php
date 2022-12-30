@@ -64,16 +64,14 @@ class ConsoleInputSubcommand
      *
      * @return string Value of _name.
      */
-    string name()
-    {
+    string name() {
         return _name;
     }
 
     /**
      * Get the raw help string for this command
      */
-    string getRawHelp()
-    {
+    string getRawHelp() {
         return _help;
     }
 
@@ -83,8 +81,7 @@ class ConsoleInputSubcommand
      * @param int $width The width to make the name of the subcommand.
      * @return string
      */
-    string help(int $width = 0)
-    {
+    string help(int $width = 0) {
         $name = _name;
         if (strlen($name) < $width) {
             $name = str_pad($name, $width, " ");

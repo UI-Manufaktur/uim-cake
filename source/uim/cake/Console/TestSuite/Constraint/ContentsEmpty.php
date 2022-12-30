@@ -21,8 +21,7 @@ class ContentsEmpty : ContentsBase
     /**
      * Assertion message
      */
-    string toString()
-    {
+    string toString() {
         return sprintf("%s is empty", this.output);
     }
 

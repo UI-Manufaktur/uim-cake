@@ -339,8 +339,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param array<string, mixed> $config Configuration options passed to the constructor
      */
-    void initialize(array $config)
-    {
+    void initialize(array $config) {
     }
 
     /**
