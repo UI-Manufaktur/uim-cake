@@ -159,7 +159,7 @@ class Behavior : IEventListener
      *
      * @param array<string, mixed> $config The configuration settings provided to this behavior.
      */
-    void initialize(array $config): void
+    void initialize(array $config)
     {
     }
 

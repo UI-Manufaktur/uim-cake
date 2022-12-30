@@ -193,8 +193,7 @@ class MemcachedEngine : CacheEngine
      * @throws \InvalidArgumentException When the Memcached extension is not built
      *   with the desired serializer engine.
      */
-    protected function _setOptions(): void
-    {
+    protected void _setOptions() {
         _Memcached.setOption(Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
 
         $serializer = strtolower(_config["serialize"]);

@@ -33,8 +33,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      *
      * @param uim.cake.consoles.CommandCollection $commands The command collection
      */
-    void setCommandCollection(CommandCollection $commands): void
-    {
+    void setCommandCollection(CommandCollection $commands) {
         this.commands = $commands;
     }
 

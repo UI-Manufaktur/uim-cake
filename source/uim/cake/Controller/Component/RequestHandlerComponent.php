@@ -112,8 +112,7 @@ class RequestHandlerComponent : Component
      * @param uim.cake.http.ServerRequest $request The request instance.
      * @param uim.cake.http.Response $response The response instance.
      */
-    protected void _setExtension(ServerRequest $request, Response $response): void
-    {
+    protected void _setExtension(ServerRequest $request, Response $response) {
         $content = new ContentTypeNegotiation();
         $accept = $content.parseAccept($request);
 
@@ -149,8 +148,7 @@ class RequestHandlerComponent : Component
      *
      * @param uim.cake.events.IEvent $event The startup event that was fired.
      */
-    void startup(IEvent $event): void
-    {
+    void startup(IEvent $event) {
         $controller = this.getController();
         $request = $controller.getRequest();
         $response = $controller.getResponse();
@@ -192,8 +190,7 @@ class RequestHandlerComponent : Component
      * @return void
      * @throws uim.cake.http.exceptions.NotFoundException If invoked extension is not configured.
      */
-    function beforeRender(IEvent $event): void
-    {
+    void beforeRender(IEvent $event) {
         $controller = this.getController();
         $response = $controller.getResponse();
 
@@ -391,8 +388,7 @@ class RequestHandlerComponent : Component
      * @return void
      * @see uim.cake.controllers.Component\RequestHandlerComponent::respondAs()
      */
-    function renderAs(Controller $controller, string $type, array $options = []): void
-    {
+    void renderAs(Controller $controller, string $type, array $options = []) {
         $defaults = ['charset': 'UTF-8'];
         $viewClassMap = this.getConfig('viewClassMap');
 

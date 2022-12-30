@@ -93,8 +93,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
     /**
      * Advances the cursor one position
      */
-    void next(): void
-    {
+    void next() {
         parent::next();
         _current = null;
     }

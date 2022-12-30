@@ -221,8 +221,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @param array<string, mixed> $config The config data.
      */
-    void initialize(array $config): void
-    {
+    void initialize(array $config) {
         $controller = _registry.getController();
         this.setEventManager($controller.getEventManager());
     }
@@ -433,8 +432,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * Sets defaults for configs.
      *
      */
-    protected void _setDefaults(): void
-    {
+    protected void _setDefaults() {
         $defaults = [
             'authenticate': ['Form'],
             'flash': [
@@ -571,8 +569,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @return void
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-public
      */
-    function allow($actions = null): void
-    {
+    void allow($actions = null) {
         if ($actions == null) {
             $controller = _registry.getController();
             this.allowedActions = get_class_methods($controller);
@@ -602,8 +599,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @see uim.cake.controllers.Component\AuthComponent::allow()
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#making-actions-require-authorization
      */
-    function deny($actions = null): void
-    {
+    void deny($actions = null) {
         if ($actions == null) {
             this.allowedActions = [];
 
@@ -628,8 +624,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @return void
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#identifying-users-and-logging-them-in
      */
-    function setUser($user): void
-    {
+    void setUser($user) {
         this.storage().write($user);
     }
 
@@ -890,8 +885,7 @@ class AuthComponent : Component : EventDispatcherInterface
      * @param string $name Property name.
      * @param mixed $value Value to set.
      */
-    void __set(string $name, $value): void
-    {
+    void __set(string $name, $value) {
         if ($name == 'sessionKey') {
             _storage = null;
 
@@ -930,8 +924,7 @@ class AuthComponent : Component : EventDispatcherInterface
      *
      * @param string|false $message The message to set. False to skip.
      */
-    void flash($message): void
-    {
+    void flash($message) {
         if ($message == false) {
             return;
         }

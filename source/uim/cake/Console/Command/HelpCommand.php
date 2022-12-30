@@ -33,8 +33,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     protected $commands;
 
 
-    function setCommandCollection(CommandCollection $commands): void
-    {
+    void setCommandCollection(CommandCollection $commands) {
         this.commands = $commands;
     }
 
@@ -69,8 +68,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @param iterable $commands The command collection to output.
      */
-    protected void asText(ConsoleIo $io, iterable $commands): void
-    {
+    protected void asText(ConsoleIo $io, iterable $commands) {
         $invert = [];
         foreach ($commands as $name: $class) {
             if (is_object($class)) {
@@ -133,8 +131,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      *
      * @param uim.cake.consoles.ConsoleIo $io IO object.
      */
-    protected void outputPaths(ConsoleIo $io): void
-    {
+    protected void outputPaths(ConsoleIo $io) {
         $paths = [];
         if (Configure::check("App.dir")) {
             $appPath = rtrim(Configure::read("App.dir"), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
@@ -180,8 +177,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @param iterable $commands The command collection to output
      */
-    protected void asXml(ConsoleIo $io, iterable $commands): void
-    {
+    protected void asXml(ConsoleIo $io, iterable $commands) {
         $shells = new SimpleXMLElement("<shells></shells>");
         foreach ($commands as $name: $class) {
             if (is_object($class)) {

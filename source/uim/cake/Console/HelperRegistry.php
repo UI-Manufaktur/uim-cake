@@ -25,8 +25,7 @@ class HelperRegistry : ObjectRegistry
      *
      * @param uim.cake.consoles.ConsoleIo $io An io instance.
      */
-    void setIo(ConsoleIo $io): void
-    {
+    void setIo(ConsoleIo $io) {
         _io = $io;
     }
 
@@ -63,8 +62,7 @@ class HelperRegistry : ObjectRegistry
      * @return void
      * @throws uim.cake.consoles.exceptions.MissingHelperException
      */
-    protected function _throwMissingClassError(string $class, ?string $plugin): void
-    {
+    protected void _throwMissingClassError(string $class, ?string $plugin) {
         throw new MissingHelperException([
             "class": $class,
             "plugin": $plugin,
