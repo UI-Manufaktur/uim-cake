@@ -321,10 +321,8 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets "from" address.
-     *
-     * @return array
      */
-    function getFrom(): array
+    array getFrom(): array
     {
         return this.from;
     }
@@ -369,10 +367,8 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets "Reply-To" address.
-     *
-     * @return array
      */
-    function getReplyTo(): array
+    array getReplyTo(): array
     {
         return this.replyTo;
     }
@@ -409,10 +405,8 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets Read Receipt (Disposition-Notification-To header).
-     *
-     * @return array
      */
-    function getReadReceipt(): array
+    array getReadReceipt(): array
     {
         return this.readReceipt;
     }
@@ -432,10 +426,8 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets return path.
-     *
-     * @return array
      */
-    function getReturnPath(): array
+    array getReturnPath(): array
     {
         return this.returnPath;
     }
@@ -454,10 +446,8 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets "to" address
-     *
-     * @return array
      */
-    function getTo(): array
+    array getTo(): array
     {
         return this.to;
     }
@@ -488,10 +478,8 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets "cc" address.
-     *
-     * @return array
      */
-    function getCc(): array
+    array getCc(): array
     {
         return this.cc;
     }
@@ -522,10 +510,8 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Gets "bcc" address.
-     *
-     * @return array
      */
-    function getBcc(): array
+    array getBcc(): array
     {
         return this.bcc;
     }
@@ -1193,10 +1179,8 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Get generated message body as array.
-     *
-     * @return array
      */
-    function getBody() {
+    array getBody() {
         if (empty(this.message)) {
             this.message = this.generateMessage();
         }
@@ -1831,10 +1815,8 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Magic method used for serializing the Message object.
-     *
-     * @return array
      */
-    function __serialize(): array
+    array __serialize(): array
     {
         $array = this.jsonSerialize();
         array_walk_recursive($array, function (&$item, $key): void {

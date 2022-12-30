@@ -269,10 +269,8 @@ class ConsoleInputOption
 
     /**
      * Get the list of choices this option has.
-     *
-     * @return array
      */
-    function choices(): array
+    array choices(): array
     {
         return _choices;
     }

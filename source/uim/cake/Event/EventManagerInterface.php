@@ -105,7 +105,6 @@ interface IEventManager
      * Returns a list of all listeners for an eventKey in the order they should be called
      *
      * @param string $eventKey Event key.
-     * @return array
      */
-    function listeners(string $eventKey): array;
+    array listeners(string $eventKey): array;
 }

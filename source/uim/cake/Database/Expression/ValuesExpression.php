@@ -109,10 +109,8 @@ class ValuesExpression : IExpression
 
     /**
      * Gets the columns to be inserted.
-     *
-     * @return array
      */
-    function getColumns(): array
+    array getColumns(): array
     {
         return _columns;
     }
@@ -153,10 +151,8 @@ class ValuesExpression : IExpression
 
     /**
      * Gets the values to be inserted.
-     *
-     * @return array
      */
-    function getValues(): array
+    array getValues(): array
     {
         if (!_castedExpressions) {
             _processExpressions();

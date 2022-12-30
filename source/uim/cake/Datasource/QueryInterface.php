@@ -259,10 +259,8 @@ interface IQuery
 
     /**
      * Returns an array representation of the results after executing the query.
-     *
-     * @return array
      */
-    function toArray(): array;
+    array toArray(): array;
 
     /**
      * Set the default Table object that will be used by this query

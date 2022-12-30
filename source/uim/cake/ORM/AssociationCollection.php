@@ -326,9 +326,8 @@ class AssociationCollection : IteratorAggregate
      * in this collection.
      *
      * @param array|bool $keys the list of association names to normalize
-     * @return array
      */
-    function normalizeKeys($keys): array
+    array normalizeKeys($keys): array
     {
         if ($keys == true) {
             $keys = this.keys();

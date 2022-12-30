@@ -1631,10 +1631,8 @@ class ServerRequest : IServerRequest
 
     /**
      * Get the array of uploaded files from the request.
-     *
-     * @return array
      */
-    function getUploadedFiles(): array
+    array getUploadedFiles(): array
     {
         return this.uploadedFiles;
     }

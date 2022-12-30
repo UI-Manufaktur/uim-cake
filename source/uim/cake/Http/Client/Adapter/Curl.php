@@ -74,9 +74,8 @@ class Curl : AdapterInterface
      *
      * @param \Psr\Http\messages.RequestInterface $request The request.
      * @param array<string, mixed> $options The client options
-     * @return array
      */
-    function buildOptions(RequestInterface $request, array $options): array
+    array buildOptions(RequestInterface $request, array $options): array
     {
         $headers = [];
         foreach ($request.getHeaders() as $key: $values) {

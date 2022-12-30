@@ -774,9 +774,8 @@ abstract class Association
      *   with this association
      * @param string|null $targetProperty The property name in the source results where the association
      * data shuld be nested in. Will use the default one if not provided.
-     * @return array
      */
-    function transformRow(array $row, string $nestKey, bool $joined, ?string $targetProperty = null): array
+    array transformRow(array $row, string $nestKey, bool $joined, ?string $targetProperty = null): array
     {
         $sourceAlias = this.getSource().getAlias();
         $nestKey = $nestKey ?: _name;

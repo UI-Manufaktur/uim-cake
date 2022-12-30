@@ -21,10 +21,8 @@ interface PaginatorInterface
 
     /**
      * Get paging params after pagination operation.
-     *
-     * @return array
      */
-    function getPagingParams(): array;
+    array getPagingParams(): array;
 }
 
 // phpcs:disable

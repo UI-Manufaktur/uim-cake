@@ -569,10 +569,8 @@ class Email : JsonSerializable, Serializable
 
     /**
      * Magic method used for serializing the Email object.
-     *
-     * @return array
      */
-    function __serialize(): array
+    array __serialize(): array
     {
         $array = this.jsonSerialize();
         array_walk_recursive($array, function (&$item, $key): void {

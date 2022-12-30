@@ -885,9 +885,8 @@ class Folder
      * get messages from latest method
      *
      * @param bool $reset Reset message stack after reading
-     * @return array
      */
-    function messages(bool $reset = true): array
+    array messages(bool $reset = true): array
     {
         $messages = _messages;
         if ($reset) {
@@ -901,9 +900,8 @@ class Folder
      * get error from latest method
      *
      * @param bool $reset Reset error stack after reading
-     * @return array
      */
-    function errors(bool $reset = true): array
+    array errors(bool $reset = true): array
     {
         $errors = _errors;
         if ($reset) {

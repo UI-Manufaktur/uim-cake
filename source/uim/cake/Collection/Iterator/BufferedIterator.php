@@ -179,10 +179,8 @@ class BufferedIterator : Collection : Countable, Serializable
 
     /**
      * Magic method used for serializing the iterator instance.
-     *
-     * @return array
      */
-    function __serialize(): array
+    array __serialize(): array
     {
         if (!_finished) {
             this.count();

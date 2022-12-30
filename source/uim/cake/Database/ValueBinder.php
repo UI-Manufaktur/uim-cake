@@ -87,10 +87,8 @@ class ValueBinder
     /**
      * Returns all values bound to this expression object at this nesting level.
      * Subexpression bound values will not be returned with this function.
-     *
-     * @return array
      */
-    function bindings(): array
+    array bindings(): array
     {
         return _bindings;
     }

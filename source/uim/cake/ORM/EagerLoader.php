@@ -273,9 +273,8 @@ class EagerLoader
      *
      * @param uim.cake.orm.Table $repository The table containing the association that
      * will be normalized
-     * @return array
      */
-    function normalized(Table $repository): array
+    array normalized(Table $repository): array
     {
         if (_normalized != null || empty(_containments)) {
             return (array)_normalized;
@@ -671,9 +670,8 @@ class EagerLoader
      *
      * @param uim.cake.orm.Table $table The table containing the association that
      * will be normalized
-     * @return array
      */
-    function associationsMap(Table $table): array
+    array associationsMap(Table $table): array
     {
         $map = [];
 

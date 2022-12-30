@@ -32,17 +32,15 @@ class Collection : IteratorIterator : ICollection, Serializable
      * Returns a string representation of this object that can be used
      * to reconstruct it
      */
-    string serialize(): string
+    string serialize()
     {
         return serialize(this.buffered());
     }
 
     /**
      * Returns an array for serializing this of this object.
-     *
-     * @return array
      */
-    function __serialize(): array
+    array __serialize(): array
     {
         return this.buffered().toArray();
     }

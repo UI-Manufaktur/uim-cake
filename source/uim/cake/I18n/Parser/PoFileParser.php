@@ -53,9 +53,8 @@ class PoFileParser
      * Items with an empty id are ignored.
      *
      * @param string $resource The file name to parse
-     * @return array
      */
-    function parse(string $resource): array
+    array parse(string $resource): array
     {
         $stream = fopen($resource, "rb");
 

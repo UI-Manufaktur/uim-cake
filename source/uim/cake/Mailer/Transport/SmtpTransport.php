@@ -152,10 +152,8 @@ class SmtpTransport : AbstractTransport
      *     // etc...
      * ]
      * ```
-     *
-     * @return array
      */
-    function getLastResponse(): array
+    array getLastResponse(): array
     {
         return _lastResponse;
     }

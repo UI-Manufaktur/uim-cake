@@ -321,9 +321,8 @@ class EventManager : IEventManager
      * Returns the listeners for the specified event key indexed by priority
      *
      * @param string $eventKey Event key.
-     * @return array
      */
-    function prioritisedListeners(string $eventKey): array
+    array prioritisedListeners(string $eventKey): array
     {
         if (empty(_listeners[$eventKey])) {
             return [];
@@ -336,9 +335,8 @@ class EventManager : IEventManager
      * Returns the listeners matching a specified pattern
      *
      * @param string $eventKeyPattern Pattern to match.
-     * @return array
      */
-    function matchingListeners(string $eventKeyPattern): array
+    array matchingListeners(string $eventKeyPattern): array
     {
         $matchPattern = "/" . preg_quote($eventKeyPattern, "/") . "/";
 

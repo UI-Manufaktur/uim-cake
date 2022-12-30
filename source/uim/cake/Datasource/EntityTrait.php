@@ -296,10 +296,8 @@ trait EntityTrait
 
     /**
      * Gets all original values of the entity.
-     *
-     * @return array
      */
-    function getOriginalValues(): array
+    array getOriginalValues(): array
     {
         $originals = _original;
         $originalKeys = array_keys($originals);
@@ -524,10 +522,8 @@ trait EntityTrait
      *
      * This method will recursively transform entities assigned to fields
      * into arrays as well.
-     *
-     * @return array
      */
-    function toArray(): array
+    array toArray(): array
     {
         $result = [];
         foreach (this.getVisible() as $field) {
@@ -553,10 +549,8 @@ trait EntityTrait
 
     /**
      * Returns the fields that will be serialized as JSON
-     *
-     * @return array
      */
-    function jsonSerialize(): array
+    array jsonSerialize(): array
     {
         return this.extract(this.getVisible());
     }
@@ -656,9 +650,8 @@ trait EntityTrait
      *
      * @param array<string> $fields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
-     * @return array
      */
-    function extract(array $fields, bool $onlyDirty = false): array
+    array extract(array $fields, bool $onlyDirty = false): array
     {
         $result = [];
         foreach ($fields as $field) {
@@ -678,9 +671,8 @@ trait EntityTrait
      * return of this method.
      *
      * @param array<string> $fields List of fields to be returned
-     * @return array
      */
-    function extractOriginal(array $fields): array
+    array extractOriginal(array $fields): array
     {
         $result = [];
         foreach ($fields as $field) {
@@ -698,9 +690,8 @@ trait EntityTrait
      * the entity was built. Unchanged fields will be omitted.
      *
      * @param array<string> $fields List of fields to be returned
-     * @return array
      */
-    function extractOriginalChanged(array $fields): array
+    array extractOriginalChanged(array $fields): array
     {
         $result = [];
         foreach ($fields as $field) {
@@ -836,10 +827,8 @@ trait EntityTrait
 
     /**
      * Returns all validation errors.
-     *
-     * @return array
      */
-    function getErrors(): array
+    array getErrors(): array
     {
         $diff = array_diff_key(_fields, _errors);
 
@@ -858,9 +847,8 @@ trait EntityTrait
      * Returns validation errors of a field
      *
      * @param string $field Field name to get the errors from
-     * @return array
      */
-    function getError(string $field): array
+    array getError(string $field): array
     {
         $errors = _errors[$field] ?? [];
         if ($errors) {

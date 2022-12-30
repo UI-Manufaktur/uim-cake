@@ -277,10 +277,8 @@ trait QueryTrait
 
     /**
      * Returns an array representation of the results after executing the query.
-     *
-     * @return array
      */
-    function toArray(): array
+    array toArray(): array
     {
         return this.all().toArray();
     }
@@ -319,10 +317,8 @@ trait QueryTrait
 
     /**
      * Returns the list of previously registered map reduce routines.
-     *
-     * @return array
      */
-    function getMapReducers(): array
+    array getMapReducers(): array
     {
         return _mapReduce;
     }

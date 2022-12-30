@@ -487,10 +487,8 @@ trait EntityTrait
      *
      * This method will recursively transform entities assigned to fields
      * into arrays as well.
-     *
-     * @return array
      */
-    function toArray(): array
+    array toArray(): array
     {
         myResult = [];
         foreach (this.getVisible() as myField) {
@@ -516,10 +514,8 @@ trait EntityTrait
 
     /**
      * Returns the fields that will be serialized as JSON
-     *
-     * @return array
      */
-    function jsonSerialize(): array
+    array jsonSerialize(): array
     {
         return this.extract(this.getVisible());
     }
@@ -613,9 +609,8 @@ trait EntityTrait
      *
      * @param myFields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
-     * @return array
      */
-    function extract(string[] myFields, bool $onlyDirty = false): array
+    array extract(string[] myFields, bool $onlyDirty = false): array
     {
         myResult = [];
         foreach (myFields as myField) {
@@ -635,9 +630,8 @@ trait EntityTrait
      * return of this method.
      *
      * @param myFields List of fields to be returned
-     * @return array
      */
-    function extractOriginal(string[] myFields): array
+    array extractOriginal(string[] myFields): array
     {
         myResult = [];
         foreach (myFields as myField) {
@@ -655,9 +649,8 @@ trait EntityTrait
      * the entity was built. Unchanged fields will be omitted.
      *
      * @param myFields List of fields to be returned
-     * @return array
      */
-    function extractOriginalChanged(string[] myFields): array
+    array extractOriginalChanged(string[] myFields): array
     {
         myResult = [];
         foreach (myField; myFields) {

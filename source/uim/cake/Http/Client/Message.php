@@ -156,10 +156,8 @@ class Message
 
     /**
      * Get all cookies
-     *
-     * @return array
      */
-    function cookies(): array
+    array cookies(): array
     {
         return _cookies;
     }

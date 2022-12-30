@@ -80,18 +80,15 @@ interface EntityInterface : ArrayAccess, JsonSerializable
 
     /**
      * Returns all validation errors.
-     *
-     * @return array
      */
-    function getErrors(): array;
+    array getErrors(): array;
 
     /**
      * Returns validation errors of a field
      *
      * @param string $field Field name to get the errors from
-     * @return array
      */
-    function getError(string $field): array;
+    array getError(string $field): array;
 
     /**
      * Sets error messages to the entity
@@ -148,18 +145,16 @@ interface EntityInterface : ArrayAccess, JsonSerializable
      * stored in this entity, indexed by field name.
      *
      * @param array<string> $fields List of fields to be returned
-     * @return array
      */
-    function extractOriginal(array $fields): array;
+    array extractOriginal(array $fields): array;
 
     /**
      * Returns an array with only the original fields
      * stored in this entity, indexed by field name.
      *
      * @param array<string> $fields List of fields to be returned
-     * @return array
      */
-    function extractOriginalChanged(array $fields): array;
+    array extractOriginalChanged(array $fields): array;
 
     /**
      * Sets one or multiple fields to the specified value
@@ -192,10 +187,8 @@ interface EntityInterface : ArrayAccess, JsonSerializable
 
     /**
      * Gets all original values of the entity.
-     *
-     * @return array
      */
-    function getOriginalValues(): array;
+    array getOriginalValues(): array;
 
     /**
      * Returns whether this entity contains a field named $field
@@ -226,10 +219,8 @@ interface EntityInterface : ArrayAccess, JsonSerializable
      *
      * *Note* hidden fields are not visible, and will not be output
      * by toArray().
-     *
-     * @return array
      */
-    function toArray(): array;
+    array toArray(): array;
 
     /**
      * Returns an array with the requested fields
@@ -237,9 +228,8 @@ interface EntityInterface : ArrayAccess, JsonSerializable
      *
      * @param array<string> $fields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
-     * @return array
      */
-    function extract(array $fields, bool $onlyDirty = false): array;
+    array extract(array $fields, bool $onlyDirty = false): array;
 
     /**
      * Sets the entire entity as clean, which means that it will appear as

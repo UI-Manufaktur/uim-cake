@@ -16,10 +16,8 @@ interface InvalidPropertyInterface
 {
     /**
      * Get a list of invalid fields and their data for errors upon validation/patching
-     *
-     * @return array
      */
-    function getInvalid(): array;
+    array getInvalid(): array;
 
     /**
      * Set fields as invalid and not patchable into the entity.

@@ -188,9 +188,8 @@ class BufferedStatement : Iterator, StatementInterface
     }
 
     /**
-     * @return array
      */
-    function fetchAssoc(): array
+    array fetchAssoc(): array
     {
         $result = this.fetch(static::FETCH_TYPE_ASSOC);
 

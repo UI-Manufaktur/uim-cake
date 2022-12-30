@@ -34,9 +34,8 @@ interface IQuery {
      *
      * @param string myField The field to alias
      * @param string|null myAlias the alias used to prefix the field
-     * @return array
      */
-    function aliasField(string myField, Nullable!string myAlias = null): array;
+    array aliasField(string myField, Nullable!string myAlias = null): array;
 
     /**
      * Runs `aliasField()` for each field in the provided list and returns
@@ -245,10 +244,8 @@ interface IQuery {
 
     /**
      * Returns an array representation of the results after executing the query.
-     *
-     * @return array
      */
-    function toArray(): array;
+    array toArray(): array;
 
     /**
      * Set the default Table object that will be used by this query

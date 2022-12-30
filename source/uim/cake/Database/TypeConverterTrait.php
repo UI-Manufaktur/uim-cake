@@ -36,9 +36,8 @@ trait TypeConverterTrait
      *
      * @param array $columns list or associative array of columns and parameters to be bound with types
      * @param array $types list or associative array of types
-     * @return array
      */
-    function matchTypes(array $columns, array $types): array
+    array matchTypes(array $columns, array $types): array
     {
         if (!is_int(key($types))) {
             $positions = array_intersect_key(array_flip($columns), $types);

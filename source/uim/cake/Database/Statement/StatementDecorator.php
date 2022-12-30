@@ -136,10 +136,8 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     /**
      * Returns the error information for the last error that occurred when executing
      * this statement.
-     *
-     * @return array
      */
-    function errorInfo(): array
+    array errorInfo(): array
     {
         return _statement.errorInfo();
     }
@@ -184,10 +182,8 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     /**
      * Returns the next row in a result set as an associative array. Calling this function is the same as calling
      * $statement.fetch(StatementDecorator::FETCH_TYPE_ASSOC). If no results are found an empty array is returned.
-     *
-     * @return array
      */
-    function fetchAssoc(): array
+    array fetchAssoc(): array
     {
         $result = this.fetch(static::FETCH_TYPE_ASSOC);
 
