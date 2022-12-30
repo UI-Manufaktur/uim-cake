@@ -1,4 +1,3 @@
-
 module uim.cake.Collection;
 
 use AppendIterator;

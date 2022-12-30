@@ -5,8 +5,7 @@
 
 
  * @since         3.0.5
-  */
-module uim.cake.Collection\Iterator;
+  */module uim.cake.Collection\Iterator;
 
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;
