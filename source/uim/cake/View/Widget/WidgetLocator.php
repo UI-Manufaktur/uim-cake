@@ -1,11 +1,4 @@
 
-
-
- *
-
-
- * @since         3.6.0
-  */
 module uim.cake.View\Widget;
 
 import uim.cake.core.App;

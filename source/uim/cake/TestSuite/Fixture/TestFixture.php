@@ -20,7 +20,7 @@ import uim.cake.databases.schemas.TableSchemaAwareInterface;
 import uim.cake.datasources.ConnectionInterface;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.datasources.FixtureInterface;
-import uim.cake.Log\Log;
+import uim.cake.logs.Log;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.utilities.Inflector;
 use Exception;

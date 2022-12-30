@@ -18,7 +18,7 @@ import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventManager;
 import uim.cake.http.Response;
 import uim.cake.http.ServerRequest;
-import uim.cake.Log\LogTrait;
+import uim.cake.logs.LogTrait;
 import uim.cake.routings.Router;
 import uim.cake.utilities.Inflector;
 import uim.cake.View\exceptions.MissingElementException;
