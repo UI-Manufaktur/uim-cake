@@ -1,4 +1,3 @@
-
 module uim.cake.auths;
 
 import uim.cake.controllers.ComponentRegistry;
