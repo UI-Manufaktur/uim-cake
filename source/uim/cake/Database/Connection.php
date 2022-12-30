@@ -41,7 +41,7 @@ class Connection : ConnectionInterface
      * Driver object, responsible for creating the real connection
      * and provide specific SQL dialect.
      *
-     * @var uim.cake.Database\DriverInterface
+     * @var uim.cake.databases.DriverInterface
      */
     protected $_driver;
 
@@ -91,7 +91,7 @@ class Connection : ConnectionInterface
     /**
      * The schema collection object
      *
-     * @var uim.cake.Database\Schema\ICollection|null
+     * @var uim.cake.databases.Schema\ICollection|null
      */
     protected $_schemaCollection;
 
@@ -99,7 +99,7 @@ class Connection : ConnectionInterface
      * NestedTransactionRollbackException object instance, will be stored if
      * the rollback method is called in some nested transaction.
      *
-     * @var uim.cake.Database\exceptions.NestedTransactionRollbackException|null
+     * @var uim.cake.databases.exceptions.NestedTransactionRollbackException|null
      */
     protected $nestedTransactionRollbackException;
 
@@ -161,10 +161,10 @@ class Connection : ConnectionInterface
      * Sets the driver instance. If a string is passed it will be treated
      * as a class name and will be instantiated.
      *
-     * @param uim.cake.Database\DriverInterface|string $driver The driver instance to use.
+     * @param uim.cake.databases.DriverInterface|string $driver The driver instance to use.
      * @param array<string, mixed> $config Config for a new driver.
-     * @throws uim.cake.Database\exceptions.MissingDriverException When a driver class is missing.
-     * @throws uim.cake.Database\exceptions.MissingExtensionException When a driver's PHP extension is missing.
+     * @throws uim.cake.databases.exceptions.MissingDriverException When a driver class is missing.
+     * @throws uim.cake.databases.exceptions.MissingExtensionException When a driver's PHP extension is missing.
      * @return this
      * @deprecated 4.4.0 Setting the driver is deprecated. Use the connection config instead.
      */
@@ -179,17 +179,17 @@ class Connection : ConnectionInterface
     /**
      * Creates driver from name, class name or instance.
      *
-     * @param uim.cake.Database\DriverInterface|string $name Driver name, class name or instance.
+     * @param uim.cake.databases.DriverInterface|string $name Driver name, class name or instance.
      * @param array $config Driver config if $name is not an instance.
-     * @return uim.cake.Database\DriverInterface
-     * @throws uim.cake.Database\exceptions.MissingDriverException When a driver class is missing.
-     * @throws uim.cake.Database\exceptions.MissingExtensionException When a driver's PHP extension is missing.
+     * @return uim.cake.databases.DriverInterface
+     * @throws uim.cake.databases.exceptions.MissingDriverException When a driver class is missing.
+     * @throws uim.cake.databases.exceptions.MissingExtensionException When a driver's PHP extension is missing.
      */
     protected function createDriver($name, array $config): DriverInterface
     {
         $driver = $name;
         if (is_string($driver)) {
-            /** @psalm-var class-string<uim.cake.Database\DriverInterface>|null $className */
+            /** @psalm-var class-string<uim.cake.databases.DriverInterface>|null $className */
             $className = App::className($driver, 'Database/Driver');
             if ($className == null) {
                 throw new MissingDriverException(['driver': $driver, 'connection': this.configName()]);
@@ -218,7 +218,7 @@ class Connection : ConnectionInterface
     /**
      * Gets the driver instance.
      *
-     * @return uim.cake.Database\DriverInterface
+     * @return uim.cake.databases.DriverInterface
      */
     function getDriver(): DriverInterface
     {
@@ -228,7 +228,7 @@ class Connection : ConnectionInterface
     /**
      * Connects to the configured database.
      *
-     * @throws uim.cake.Database\exceptions.MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.databases.exceptions.MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
     function connect(): bool
@@ -252,8 +252,7 @@ class Connection : ConnectionInterface
     /**
      * Disconnects from database server.
      */
-    void disconnect(): void
-    {
+    void disconnect() {
         _driver.disconnect();
     }
 
@@ -270,8 +269,8 @@ class Connection : ConnectionInterface
     /**
      * Prepares a SQL statement to be executed.
      *
-     * @param uim.cake.Database\Query|string $query The SQL to convert into a prepared statement.
-     * @return uim.cake.Database\StatementInterface
+     * @param uim.cake.databases.Query|string $query The SQL to convert into a prepared statement.
+     * @return uim.cake.databases.StatementInterface
      */
     function prepare($query): StatementInterface
     {
@@ -293,7 +292,7 @@ class Connection : ConnectionInterface
      * @param string $sql SQL to be executed and interpolated with $params
      * @param array $params list or associative array of params to be interpolated in $sql as values
      * @param array $types list or associative array of types to be used for casting values in query
-     * @return uim.cake.Database\StatementInterface executed statement
+     * @return uim.cake.databases.StatementInterface executed statement
      */
     function execute(string $sql, array $params = [], array $types = []): StatementInterface
     {
@@ -312,8 +311,8 @@ class Connection : ConnectionInterface
      * Compiles a Query object into a SQL string according to the dialect for this
      * connection's driver
      *
-     * @param uim.cake.Database\Query $query The query to be compiled
-     * @param uim.cake.Database\ValueBinder $binder Value binder
+     * @param uim.cake.databases.Query $query The query to be compiled
+     * @param uim.cake.databases.ValueBinder $binder Value binder
      * @return string
      */
     string compileQuery(Query $query, ValueBinder $binder): string
@@ -325,8 +324,8 @@ class Connection : ConnectionInterface
      * Executes the provided query after compiling it for the specific driver
      * dialect and returns the executed Statement object.
      *
-     * @param uim.cake.Database\Query $query The query to be executed
-     * @return uim.cake.Database\StatementInterface executed statement
+     * @param uim.cake.databases.Query $query The query to be executed
+     * @return uim.cake.databases.StatementInterface executed statement
      */
     function run(Query $query): StatementInterface
     {
@@ -343,7 +342,7 @@ class Connection : ConnectionInterface
      * Executes a SQL statement and returns the Statement object as result.
      *
      * @param string $sql The SQL query to execute.
-     * @return uim.cake.Database\StatementInterface
+     * @return uim.cake.databases.StatementInterface
      */
     function query(string $sql): StatementInterface
     {
@@ -358,7 +357,7 @@ class Connection : ConnectionInterface
     /**
      * Create a new Query instance for this connection.
      *
-     * @return uim.cake.Database\Query
+     * @return uim.cake.databases.Query
      */
     function newQuery(): Query
     {
@@ -368,7 +367,7 @@ class Connection : ConnectionInterface
     /**
      * Sets a Schema\Collection object for this connection.
      *
-     * @param uim.cake.Database\Schema\ICollection $collection The schema collection object
+     * @param uim.cake.databases.Schema\ICollection $collection The schema collection object
      * @return this
      */
     function setSchemaCollection(SchemaICollection $collection) {
@@ -380,7 +379,7 @@ class Connection : ConnectionInterface
     /**
      * Gets a Schema\Collection object for this connection.
      *
-     * @return uim.cake.Database\Schema\ICollection
+     * @return uim.cake.databases.Schema\ICollection
      */
     function getSchemaCollection(): SchemaICollection
     {
@@ -405,7 +404,7 @@ class Connection : ConnectionInterface
      * @param string $table the table to insert values in
      * @param array $values values to be inserted
      * @param array<int|string, string> $types Array containing the types to be used for casting
-     * @return uim.cake.Database\StatementInterface
+     * @return uim.cake.databases.StatementInterface
      */
     function insert(string $table, array $values, array $types = []): StatementInterface
     {
@@ -426,7 +425,7 @@ class Connection : ConnectionInterface
      * @param array $values values to be updated
      * @param array $conditions conditions to be set for update statement
      * @param array<string> $types list of associative array containing the types to be used for casting
-     * @return uim.cake.Database\StatementInterface
+     * @return uim.cake.databases.StatementInterface
      */
     function update(string $table, array $values, array $conditions = [], array $types = []): StatementInterface
     {
@@ -444,7 +443,7 @@ class Connection : ConnectionInterface
      * @param string $table the table to delete rows from
      * @param array $conditions conditions to be set for delete statement
      * @param array<string> $types list of associative array containing the types to be used for casting
-     * @return uim.cake.Database\StatementInterface
+     * @return uim.cake.databases.StatementInterface
      */
     function delete(string $table, array $conditions = [], array $types = []): StatementInterface
     {
@@ -458,8 +457,7 @@ class Connection : ConnectionInterface
     /**
      * Starts a new transaction.
      */
-    void begin(): void
-    {
+    void begin() {
         if (!_transactionStarted) {
             if (_logQueries) {
                 this.log('BEGIN');
@@ -495,7 +493,7 @@ class Connection : ConnectionInterface
 
         if (_transactionLevel == 0) {
             if (this.wasNestedTransactionRolledback()) {
-                /** @var uim.cake.Database\exceptions.NestedTransactionRollbackException $e */
+                /** @var uim.cake.databases.exceptions.NestedTransactionRollbackException $e */
                 $e = this.nestedTransactionRollbackException;
                 this.nestedTransactionRollbackException = null;
                 throw $e;
@@ -602,8 +600,7 @@ class Connection : ConnectionInterface
      *
      * @param string|int $name Save point name or id
      */
-    void createSavePoint($name): void
-    {
+    void createSavePoint($name) {
         this.execute(_driver.savePointSQL($name)).closeCursor();
     }
 
@@ -612,8 +609,7 @@ class Connection : ConnectionInterface
      *
      * @param string|int $name Save point name or id
      */
-    void releaseSavePoint($name): void
-    {
+    void releaseSavePoint($name) {
         $sql = _driver.releaseSavePointSQL($name);
         if ($sql) {
             this.execute($sql).closeCursor();
@@ -625,16 +621,14 @@ class Connection : ConnectionInterface
      *
      * @param string|int $name Save point name or id
      */
-    void rollbackSavepoint($name): void
-    {
+    void rollbackSavepoint($name) {
         this.execute(_driver.rollbackSavePointSQL($name)).closeCursor();
     }
 
     /**
      * Run driver specific SQL to disable foreign key checks.
      */
-    void disableForeignKeys(): void
-    {
+    void disableForeignKeys() {
         this.getDisconnectRetry().run(function (): void {
             this.execute(_driver.disableForeignKeySQL()).closeCursor();
         });
@@ -643,8 +637,7 @@ class Connection : ConnectionInterface
     /**
      * Run driver specific SQL to enable foreign key checks.
      */
-    void enableForeignKeys(): void
-    {
+    void enableForeignKeys() {
         this.getDisconnectRetry().run(function (): void {
             this.execute(_driver.enableForeignKeySQL()).closeCursor();
         });
@@ -730,7 +723,7 @@ class Connection : ConnectionInterface
      * This uses `PDO::quote()` and requires `supportsQuoting()` to work.
      *
      * @param mixed $value The value to quote.
-     * @param uim.cake.Database\TypeInterface|string|int $type Type to be used for determining kind of quoting to perform
+     * @param uim.cake.databases.TypeInterface|string|int $type Type to be used for determining kind of quoting to perform
      * @return string Quoted value
      */
     function quote($value, $type = 'string'): string
@@ -774,8 +767,7 @@ class Connection : ConnectionInterface
      * @param string|bool $cache Either boolean false to disable metadata caching, or
      *   true to use `_cake_model_` or the name of the cache config to use.
      */
-    void cacheMetadata($cache): void
-    {
+    void cacheMetadata($cache) {
         _schemaCollection = null;
         _config['cacheMetadata'] = $cache;
         if (is_string($cache)) {
@@ -884,8 +876,7 @@ class Connection : ConnectionInterface
      *
      * @param string $sql string to be logged
      */
-    void log(string $sql): void
-    {
+    void log(string $sql) {
         $query = new LoggedQuery();
         $query.query = $sql;
         this.getLogger().debug((string)$query, ['query': $query]);
@@ -895,8 +886,8 @@ class Connection : ConnectionInterface
      * Returns a new statement object that will log the activity
      * for the passed original statement instance.
      *
-     * @param uim.cake.Database\StatementInterface $statement the instance to be decorated
-     * @return uim.cake.Database\Log\LoggingStatement
+     * @param uim.cake.databases.StatementInterface $statement the instance to be decorated
+     * @return uim.cake.databases.Log\LoggingStatement
      */
     protected function _newLogger(StatementInterface $statement): LoggingStatement
     {

@@ -164,8 +164,7 @@ class SecurityComponent : Component
      * @param uim.cake.controllers.exceptions.SecurityException|null $exception Additional debug info describing the cause
      * @throws uim.cake.http.exceptions.BadRequestException
      */
-    protected void _throwException(?SecurityException $exception = null): void
-    {
+    protected void _throwException(?SecurityException $exception = null) {
         if ($exception != null) {
             if (!Configure::read("debug")) {
                 $exception.setReason($exception.getMessage());
@@ -183,8 +182,7 @@ class SecurityComponent : Component
      * @return void
      * @throws uim.cake.controllers.exceptions.SecurityException
      */
-    protected function _secureRequired(Controller $controller): void
-    {
+    protected void _secureRequired(Controller $controller) {
         if (
             empty(_config["requireSecure"]) ||
             !is_array(_config["requireSecure"])
@@ -212,8 +210,7 @@ class SecurityComponent : Component
      * @return void
      * @throws uim.cake.controllers.exceptions.AuthSecurityException
      */
-    protected function _validatePost(Controller $controller): void
-    {
+    protected void _validatePost(Controller $controller) {
         $token = _validToken($controller);
         $hashParts = _hashParts($controller);
         $check = hash_hmac("sha1", implode("", $hashParts), Security::getSalt());

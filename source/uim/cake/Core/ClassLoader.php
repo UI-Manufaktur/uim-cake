@@ -31,8 +31,7 @@ class ClassLoader
     /**
      * Register loader with SPL autoloader stack.
      */
-    void register(): void
-    {
+    void register() {
         /** @var callable $callable */
         $callable = [this, "loadClass"];
         spl_autoload_register($callable);
@@ -48,8 +47,7 @@ class ClassLoader
      * instead of appending it; this causes it to be searched first rather
      * than last.
      */
-    void addNamespace(string $prefix, string $baseDir, bool $prepend = false): void
-    {
+    void addNamespace(string $prefix, string $baseDir, bool $prepend = false) {
         $prefix = trim($prefix, "\\") . "\\";
 
         $baseDir = rtrim($baseDir, "/") . DIRECTORY_SEPARATOR;

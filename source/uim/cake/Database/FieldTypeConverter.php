@@ -21,7 +21,7 @@ class FieldTypeConverter
      * An array containing the name of the fields and the Type objects
      * each should use when converting them.
      *
-     * @var array<uim.cake.Database\TypeInterface>
+     * @var array<uim.cake.databases.TypeInterface>
      */
     protected $_typeMap;
 
@@ -38,22 +38,22 @@ class FieldTypeConverter
      * at the moment this object is created. Used so that the types list
      * is not fetched on each single row of the results.
      *
-     * @var array<uim.cake.Database\TypeInterface|uim.cake.Database\Type\BatchCastingInterface>
+     * @var array<uim.cake.databases.TypeInterface|uim.cake.databases.Type\BatchCastingInterface>
      */
     protected $types;
 
     /**
      * The driver object to be used in the type conversion
      *
-     * @var uim.cake.Database\DriverInterface
+     * @var uim.cake.databases.DriverInterface
      */
     protected $_driver;
 
     /**
      * Builds the type map
      *
-     * @param uim.cake.Database\TypeMap $typeMap Contains the types to use for converting results
-     * @param uim.cake.Database\DriverInterface $driver The driver to use for the type conversion
+     * @param uim.cake.databases.TypeMap $typeMap Contains the types to use for converting results
+     * @param uim.cake.databases.DriverInterface $driver The driver to use for the type conversion
      */
     this(TypeMap $typeMap, DriverInterface $driver) {
         _driver = $driver;

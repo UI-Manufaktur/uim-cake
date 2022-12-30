@@ -236,8 +236,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Implement this method to avoid having to overwrite
      * the constructor and call parent.
      */
-    void initialize(): void
-    {
+    void initialize() {
     }
 
     /**
@@ -328,8 +327,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @param string $name Property name.
      * @param mixed $value Value to set.
      */
-    void __set(string $name, $value): void
-    {
+    void __set(string $name, $value) {
         if ($name == "components") {
             triggerWarning(
                 "Support for loading components using $components property is removed. " .
@@ -516,8 +514,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @return void
      * @throws \UnexpectedValueException If return value of action is not `null` or `IResponse` instance.
      */
-    function invokeAction(Closure $action, array $args): void
-    {
+    void invokeAction(Closure $action, array $args) {
         $result = $action(...$args);
         if ($result != null && !$result instanceof IResponse) {
             throw new UnexpectedValueException(sprintf(

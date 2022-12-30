@@ -15,14 +15,14 @@ class IdentifierQuoter
     /**
      * The driver instance used to do the identifier quoting
      *
-     * @var uim.cake.Database\Driver
+     * @var uim.cake.databases.Driver
      */
     protected $_driver;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Database\Driver $driver The driver instance used to do the identifier quoting
+     * @param uim.cake.databases.Driver $driver The driver instance used to do the identifier quoting
      */
     this(Driver $driver) {
         _driver = $driver;
@@ -32,8 +32,8 @@ class IdentifierQuoter
      * Iterates over each of the clauses in a query looking for identifiers and
      * quotes them
      *
-     * @param uim.cake.Database\Query $query The query to have its identifiers quoted
-     * @return uim.cake.Database\Query
+     * @param uim.cake.databases.Query $query The query to have its identifiers quoted
+     * @return uim.cake.databases.Query
      */
     function quote(Query $query): Query
     {
@@ -57,10 +57,9 @@ class IdentifierQuoter
     /**
      * Quotes identifiers inside expression objects
      *
-     * @param uim.cake.Database\IExpression $expression The expression object to walk and quote.
+     * @param uim.cake.databases.IExpression $expression The expression object to walk and quote.
      */
-    void quoteExpression(IExpression $expression): void
-    {
+    void quoteExpression(IExpression $expression) {
         if ($expression instanceof FieldInterface) {
             _quoteComparison($expression);
 
@@ -83,10 +82,9 @@ class IdentifierQuoter
     /**
      * Quotes all identifiers in each of the clauses of a query
      *
-     * @param uim.cake.Database\Query $query The query to quote.
+     * @param uim.cake.databases.Query $query The query to quote.
      */
-    protected void _quoteParts(Query $query): void
-    {
+    protected void _quoteParts(Query $query) {
         foreach (["distinct", "select", "from", "group"] as $part) {
             $contents = $query.clause($part);
 
@@ -155,10 +153,9 @@ class IdentifierQuoter
     /**
      * Quotes the table name and columns for an insert query
      *
-     * @param uim.cake.Database\Query $query The insert query to quote.
+     * @param uim.cake.databases.Query $query The insert query to quote.
      */
-    protected void _quoteInsert(Query $query): void
-    {
+    protected void _quoteInsert(Query $query) {
         $insert = $query.clause("insert");
         if (!isset($insert[0]) || !isset($insert[1])) {
             return;
@@ -176,10 +173,9 @@ class IdentifierQuoter
     /**
      * Quotes the table name for an update query
      *
-     * @param uim.cake.Database\Query $query The update query to quote.
+     * @param uim.cake.databases.Query $query The update query to quote.
      */
-    protected void _quoteUpdate(Query $query): void
-    {
+    protected void _quoteUpdate(Query $query) {
         $table = $query.clause("update")[0];
 
         if (is_string($table)) {
@@ -190,10 +186,9 @@ class IdentifierQuoter
     /**
      * Quotes identifiers in expression objects implementing the field interface
      *
-     * @param uim.cake.Database\Expression\FieldInterface $expression The expression to quote.
+     * @param uim.cake.databases.Expression\FieldInterface $expression The expression to quote.
      */
-    protected void _quoteComparison(FieldInterface $expression): void
-    {
+    protected void _quoteComparison(FieldInterface $expression) {
         $field = $expression.getField();
         if (is_string($field)) {
             $expression.setField(_driver.quoteIdentifier($field));
@@ -214,10 +209,9 @@ class IdentifierQuoter
      * Strings with spaces are treated as literal expressions
      * and will not have identifiers quoted.
      *
-     * @param uim.cake.Database\Expression\OrderByExpression $expression The expression to quote.
+     * @param uim.cake.databases.Expression\OrderByExpression $expression The expression to quote.
      */
-    protected void _quoteOrderBy(OrderByExpression $expression): void
-    {
+    protected void _quoteOrderBy(OrderByExpression $expression) {
         $expression.iterateParts(function ($part, &$field) {
             if (is_string($field)) {
                 $field = _driver.quoteIdentifier($field);
@@ -235,10 +229,9 @@ class IdentifierQuoter
     /**
      * Quotes identifiers in "order by" expression objects
      *
-     * @param uim.cake.Database\Expression\IdentifierExpression $expression The identifiers to quote.
+     * @param uim.cake.databases.Expression\IdentifierExpression $expression The identifiers to quote.
      */
-    protected void _quoteIdentifierExpression(IdentifierExpression $expression): void
-    {
+    protected void _quoteIdentifierExpression(IdentifierExpression $expression) {
         $expression.setIdentifier(
             _driver.quoteIdentifier($expression.getIdentifier())
         );

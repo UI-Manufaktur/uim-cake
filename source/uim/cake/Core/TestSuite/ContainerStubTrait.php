@@ -61,8 +61,7 @@ trait ContainerStubTrait
      * @return void
      * @psalm-param class-string<uim.cake.Core\IHttpApplication>|class-string<uim.cake.Core\IConsoleApplication> $class
      */
-    function configApplication(string $class, ?array $constructorArgs): void
-    {
+    void configApplication(string $class, ?array $constructorArgs) {
         _appClass = $class;
         _appArgs = $constructorArgs;
     }
@@ -160,8 +159,7 @@ trait ContainerStubTrait
      *
      * @after
      */
-    void cleanupContainer(): void
-    {
+    void cleanupContainer() {
         _appArgs = null;
         _appClass = null;
         this.containerServices = [];

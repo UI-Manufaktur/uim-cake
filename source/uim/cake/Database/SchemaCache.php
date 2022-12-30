@@ -25,14 +25,14 @@ class SchemaCache
     /**
      * Schema
      *
-     * @var uim.cake.Database\Schema\CachedCollection
+     * @var uim.cake.databases.Schema\CachedCollection
      */
     protected $_schema;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Database\Connection $connection Connection name to get the schema for or a connection instance
+     * @param uim.cake.databases.Connection $connection Connection name to get the schema for or a connection instance
      */
     this(Connection $connection) {
         _schema = this.getSchema($connection);
@@ -88,8 +88,8 @@ class SchemaCache
     /**
      * Helper method to get the schema collection.
      *
-     * @param uim.cake.Database\Connection $connection Connection object
-     * @return uim.cake.Database\Schema\CachedCollection
+     * @param uim.cake.databases.Connection $connection Connection object
+     * @return uim.cake.databases.Schema\CachedCollection
      * @throws \RuntimeException If given connection object is not compatible with schema caching
      */
     function getSchema(Connection $connection): CachedCollection
@@ -99,7 +99,7 @@ class SchemaCache
             $connection.cacheMetadata(true);
         }
 
-        /** @var uim.cake.Database\Schema\CachedCollection $schemaCollection */
+        /** @var uim.cake.databases.Schema\CachedCollection $schemaCollection */
         $schemaCollection = $connection.getSchemaCollection();
 
         return $schemaCollection;

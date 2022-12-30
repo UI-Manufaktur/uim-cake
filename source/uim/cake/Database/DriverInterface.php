@@ -74,7 +74,7 @@ interface DriverInterface
     /**
      * Establishes a connection to the database server.
      *
-     * @throws uim.cake.Database\exceptions.MissingConnectionException If database connection could not be established.
+     * @throws uim.cake.databases.exceptions.MissingConnectionException If database connection could not be established.
      * @return bool True on success, false on failure.
      */
     function connect(): bool;
@@ -109,8 +109,8 @@ interface DriverInterface
     /**
      * Prepares a sql statement to be executed.
      *
-     * @param uim.cake.Database\Query|string $query The query to turn into a prepared statement.
-     * @return uim.cake.Database\StatementInterface
+     * @param uim.cake.databases.Query|string $query The query to turn into a prepared statement.
+     * @return uim.cake.databases.StatementInterface
      */
     function prepare($query): StatementInterface;
 
@@ -217,13 +217,13 @@ interface DriverInterface
     /**
      * Get the schema dialect.
      *
-     * Used by {@link uim.cake.Database\Schema} package to reflect schema and
+     * Used by {@link uim.cake.databases.Schema} package to reflect schema and
      * generate schema.
      *
      * If all the tables that use this Driver specify their
      * own schemas, then this may return null.
      *
-     * @return uim.cake.Database\Schema\SchemaDialect
+     * @return uim.cake.databases.Schema\SchemaDialect
      */
     function schemaDialect(): SchemaDialect;
 
@@ -293,8 +293,8 @@ interface DriverInterface
      * Transforms the passed query to this Driver"s dialect and returns an instance
      * of the transformed query and the full compiled SQL string.
      *
-     * @param uim.cake.Database\Query $query The query to compile.
-     * @param uim.cake.Database\ValueBinder $binder The value binder to use.
+     * @param uim.cake.databases.Query $query The query to compile.
+     * @param uim.cake.databases.ValueBinder $binder The value binder to use.
      * @return array containing 2 entries. The first entity is the transformed query
      * and the second one the compiled SQL.
      */
@@ -303,7 +303,7 @@ interface DriverInterface
     /**
      * Returns an instance of a QueryCompiler.
      *
-     * @return uim.cake.Database\QueryCompiler
+     * @return uim.cake.databases.QueryCompiler
      */
     function newCompiler(): QueryCompiler;
 
@@ -312,7 +312,7 @@ interface DriverInterface
      *
      * @param string $table The table name.
      * @param array $columns The list of columns for the schema.
-     * @return uim.cake.Database\Schema\TableSchema
+     * @return uim.cake.databases.Schema\TableSchema
      */
     function newTableSchema(string $table, array $columns = []): TableSchema;
 }

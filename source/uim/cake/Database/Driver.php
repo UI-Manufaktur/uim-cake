@@ -133,8 +133,7 @@ abstract class Driver : DriverInterface
     abstract function connect(): bool;
 
 
-    function disconnect(): void
-    {
+    void disconnect() {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
         _connection = null;
         _version = null;
@@ -418,7 +417,7 @@ abstract class Driver : DriverInterface
     {
         $className = TableSchema::class;
         if (isset(_config["tableSchema"])) {
-            /** @var class-string<uim.cake.Database\Schema\TableSchema> $className */
+            /** @var class-string<uim.cake.databases.Schema\TableSchema> $className */
             $className = _config["tableSchema"];
         }
 

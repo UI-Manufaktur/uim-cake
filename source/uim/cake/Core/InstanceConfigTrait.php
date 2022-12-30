@@ -204,8 +204,7 @@ trait InstanceConfigTrait
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
      */
-    protected function _configWrite($key, $value, $merge = false): void
-    {
+    protected void _configWrite($key, $value, $merge = false) {
         if (is_string($key) && $value == null) {
             _configDelete($key);
 
@@ -260,8 +259,7 @@ trait InstanceConfigTrait
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
      */
-    protected function _configDelete(string $key): void
-    {
+    protected void _configDelete(string $key) {
         if (strpos($key, ".") == false) {
             unset(_config[$key]);
 

@@ -121,8 +121,7 @@ class BasePlugin : PluginInterface
     /**
      * Initialization hook called from constructor.
      */
-    void initialize(): void
-    {
+    void initialize() {
     }
 
 
@@ -219,8 +218,7 @@ class BasePlugin : PluginInterface
      * @param string $hook The hook name to check
      * @throws \InvalidArgumentException on invalid hooks
      */
-    protected void checkHook(string $hook): void
-    {
+    protected void checkHook(string $hook) {
         if (!in_array($hook, static::VALID_HOOKS, true)) {
             throw new InvalidArgumentException(
                 "`$hook` is not a valid hook name. Must be one of " . implode(", ", static::VALID_HOOKS)
@@ -228,9 +226,7 @@ class BasePlugin : PluginInterface
         }
     }
 
-
-    function routes(RouteBuilder $routes): void
-    {
+    void routes(RouteBuilder $routes) {
         $path = this.getConfigPath() . "routes.php";
         if (is_file($path)) {
             $return = require $path;
@@ -241,8 +237,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function bootstrap(IPluginApplication $app): void
-    {
+    void bootstrap(IPluginApplication $app) {
         $bootstrap = this.getConfigPath() . "bootstrap.php";
         if (is_file($bootstrap)) {
             require $bootstrap;
@@ -266,7 +261,6 @@ class BasePlugin : PluginInterface
      *
      * @param uim.cake.Core\IContainer $container The container to add services to.
      */
-    void services(IContainer $container): void
-    {
+    void services(IContainer $container) {
     }
 }

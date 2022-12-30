@@ -73,7 +73,7 @@ either to use the shorthand methods `execute()`, `insert()`, `update()`, `delete
 `newQuery()` for using a query builder.
 
 The easiest way of executing queries is by using the `execute()` method, it will return a
-`Cake\Database\StatementInterface` that you can use to get the data back:
+`Cake\databases.StatementInterface` that you can use to get the data back:
 
 ```php
 $statement = $connection.execute('SELECT * FROM articles');

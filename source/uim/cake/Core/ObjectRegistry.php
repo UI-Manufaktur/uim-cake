@@ -113,8 +113,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return void
      * @throws \RuntimeException When a duplicate is found.
      */
-    protected function _checkDuplicate(string $name, array $config): void
-    {
+    protected void _checkDuplicate(string $name, array $config) {
         $existing = _loaded[$name];
         $msg = sprintf("The "%s" alias has already been loaded.", $name);
         $hasConfig = method_exists($existing, "getConfig");
@@ -248,8 +247,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param object $object Object to set.
      * @psalm-param TObject $object
      */
-    void __set(string $name, $object): void
-    {
+    void __set(string $name, $object) {
         this.set($name, $object);
     }
 
@@ -258,8 +256,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @param string $name Name of a property to unset.
      */
-    void __unset(string $name): void
-    {
+    void __unset(string $name) {
         this.unload($name);
     }
 

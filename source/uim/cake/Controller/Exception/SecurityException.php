@@ -46,8 +46,7 @@ class SecurityException : BadRequestException
      *
      * @param string $message Exception message
      */
-    void setMessage(string $message): void
-    {
+    void setMessage(string $message) {
         this.message = $message;
     }
 

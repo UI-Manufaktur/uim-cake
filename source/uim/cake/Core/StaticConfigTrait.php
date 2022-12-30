@@ -58,8 +58,7 @@ trait StaticConfigTrait
      * @throws \LogicException When trying to store an invalid structured config array.
      * @return void
      */
-    static void setConfig($key, $config = null): void
-    {
+    static void setConfig($key, $config = null) {
         if ($config == null) {
             if (!is_array($key)) {
                 throw new LogicException("If config is null, key must be an array.");
@@ -290,8 +289,7 @@ REGEXP;
      * @return void
      * @psalm-param array<string, class-string> $map
      */
-    static function setDsnClassMap(array $map): void
-    {
+    static void setDsnClassMap(array $map) {
         static::$_dsnClassMap = $map + static::$_dsnClassMap;
     }
 

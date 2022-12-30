@@ -67,8 +67,7 @@ class Configure
      * @return void
      * @link https://book.cakephp.org/4/en/development/configuration.html#writing-configuration-data
      */
-    static function write($config, $value = null): void
-    {
+    static void write($config, $value = null) {
         if (!is_array($config)) {
             $config = [$config: $value];
         }
@@ -164,8 +163,7 @@ class Configure
      * @return void
      * @link https://book.cakephp.org/4/en/development/configuration.html#deleting-configuration-data
      */
-    static function delete(string $var): void
-    {
+    static void delete(string $var) {
         static::$_values = Hash::remove(static::$_values, $var);
     }
 
@@ -231,8 +229,7 @@ class Configure
      * @param uim.cake.Core\Configure\ConfigEngineInterface $engine The engine to append.
      * @return void
      */
-    static void config(string $name, ConfigEngineInterface $engine): void
-    {
+    static void config(string $name, ConfigEngineInterface $engine) {
         static::$_engines[$name] = $engine;
     }
 
@@ -463,8 +460,7 @@ class Configure
      *
      * @return void
      */
-    static void clear(): void
-    {
+    static void clear() {
         static::$_values = [];
     }
 }
