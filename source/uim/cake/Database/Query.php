@@ -1817,8 +1817,6 @@ class Query : IExpression, IteratorAggregate
 
     /**
      * Returns the type of this query (select, insert, update, delete)
-     *
-     * @return string
      */
     string type(): string
     {
@@ -2338,8 +2336,6 @@ class Query : IExpression, IteratorAggregate
 
     /**
      * Returns string representation of this query (complete SQL statement).
-     *
-     * @return string
      */
     string __toString(): string
     {

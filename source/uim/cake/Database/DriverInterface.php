@@ -161,15 +161,11 @@ interface DriverInterface
 
     /**
      * Get the SQL for disabling foreign keys.
-     *
-     * @return string
      */
     string disableForeignKeySQL(): string;
 
     /**
      * Get the SQL for enabling foreign keys.
-     *
-     * @return string
      */
     string enableForeignKeySQL(): string;
 
@@ -250,8 +246,6 @@ interface DriverInterface
 
     /**
      * Returns the schema name that"s being used.
-     *
-     * @return string
      */
     string schema(): string;
 

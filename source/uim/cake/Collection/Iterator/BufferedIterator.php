@@ -167,8 +167,6 @@ class BufferedIterator : Collection : Countable, Serializable
     /**
      * Returns a string representation of this object that can be used
      * to reconstruct it
-     *
-     * @return string
      */
     string serialize()
     {

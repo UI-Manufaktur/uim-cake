@@ -145,8 +145,6 @@ class LoggedQuery : JsonSerializable
 
     /**
      * Returns the string representation of this logged query
-     *
-     * @return string
      */
     string __toString(): string
     {

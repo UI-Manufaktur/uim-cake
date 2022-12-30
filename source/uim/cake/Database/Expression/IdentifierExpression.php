@@ -51,8 +51,6 @@ class IdentifierExpression : IExpression
 
     /**
      * Returns the identifier this expression represents
-     *
-     * @return string
      */
     string getIdentifier(): string
     {

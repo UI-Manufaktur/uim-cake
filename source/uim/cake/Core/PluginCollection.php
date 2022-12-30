@@ -278,8 +278,6 @@ class PluginCollection : Iterator, Countable
 
     /**
      * Part of Iterator Interface
-     *
-     * @return string
      */
     string key(): string
     {

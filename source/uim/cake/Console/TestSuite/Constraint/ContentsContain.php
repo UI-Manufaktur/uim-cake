@@ -34,8 +34,6 @@ class ContentsContain : ContentsBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

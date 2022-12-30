@@ -57,8 +57,6 @@ class MissingOptionException : ConsoleException
 
     /**
      * Get the message with suggestions
-     *
-     * @return string
      */
     string getFullMessage(): string
     {

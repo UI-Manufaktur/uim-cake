@@ -34,8 +34,6 @@ class ContentsRegExp : ContentsBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

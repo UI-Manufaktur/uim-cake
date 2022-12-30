@@ -40,8 +40,6 @@ class ContentsContainRow : ContentsRegExp
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

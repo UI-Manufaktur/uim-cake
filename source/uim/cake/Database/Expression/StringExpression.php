@@ -49,8 +49,6 @@ class StringExpression : IExpression
 
     /**
      * Returns the string collation.
-     *
-     * @return string
      */
     string getCollation(): string
     {

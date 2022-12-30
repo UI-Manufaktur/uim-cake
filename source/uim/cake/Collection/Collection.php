@@ -31,8 +31,6 @@ class Collection : IteratorIterator : ICollection, Serializable
     /**
      * Returns a string representation of this object that can be used
      * to reconstruct it
-     *
-     * @return string
      */
     string serialize(): string
     {

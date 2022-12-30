@@ -71,8 +71,6 @@ class QueryExpression : IExpression, Countable
 
     /**
      * Gets the currently configured conjunction for the conditions at this level of the expression tree.
-     *
-     * @return string
      */
     string getConjunction(): string
     {

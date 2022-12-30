@@ -71,8 +71,6 @@ class FunctionExpression : QueryExpression : TypedResultInterface
 
     /**
      * Gets the name of the SQL function to be invoke in this expression.
-     *
-     * @return string
      */
     string getName(): string
     {

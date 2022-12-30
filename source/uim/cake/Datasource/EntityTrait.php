@@ -1167,8 +1167,6 @@ trait EntityTrait
 
     /**
      * Returns the alias of the repository from which this entity came from.
-     *
-     * @return string
      */
     string getSource(): string
     {
@@ -1189,8 +1187,6 @@ trait EntityTrait
 
     /**
      * Returns a string representation of this object in a human readable format.
-     *
-     * @return string
      */
     string __toString(): string
     {

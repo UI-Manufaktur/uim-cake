@@ -140,8 +140,6 @@ interface EntityInterface : ArrayAccess, JsonSerializable
 
     /**
      * Returns the alias of the repository from which this entity came from.
-     *
-     * @return string
      */
     string getSource(): string;
 

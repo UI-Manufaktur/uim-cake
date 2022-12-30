@@ -50,8 +50,6 @@ class ExitCode : Constraint
 
     /**
      * Assertion message string
-     *
-     * @return string
      */
     string toString()
     {

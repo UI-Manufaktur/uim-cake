@@ -69,8 +69,6 @@ class StubConsoleOutput : ConsoleOutput
 
     /**
      * Get the output as a string
-     *
-     * @return string
      */
     string output()
     {

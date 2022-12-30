@@ -141,8 +141,6 @@ trait ModelAwareTrait
 
     /**
      * Get the model type to be used by this class
-     *
-     * @return string
      */
     string getModelType(): string
     {

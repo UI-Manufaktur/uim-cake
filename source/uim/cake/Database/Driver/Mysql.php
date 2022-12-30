@@ -255,8 +255,6 @@ class Mysql : Driver
 
     /**
      * Returns connected server version.
-     *
-     * @return string
      */
     string version(): string
     {

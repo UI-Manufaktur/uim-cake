@@ -15,8 +15,6 @@ interface TypedResultInterface
 {
     /**
      * Return the abstract type this expression will return
-     *
-     * @return string
      */
     string getReturnType(): string;
 

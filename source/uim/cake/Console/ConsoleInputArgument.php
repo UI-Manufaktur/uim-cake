@@ -115,8 +115,6 @@ class ConsoleInputArgument
 
     /**
      * Get the usage value for this argument
-     *
-     * @return string
      */
     string usage()
     {

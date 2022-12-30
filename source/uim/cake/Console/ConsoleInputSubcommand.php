@@ -90,8 +90,6 @@ class ConsoleInputSubcommand
 
     /**
      * Get the raw help string for this command
-     *
-     * @return string
      */
     string getRawHelp()
     {

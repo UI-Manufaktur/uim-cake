@@ -33,8 +33,6 @@ class ContentsNotContain : ContentsBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {

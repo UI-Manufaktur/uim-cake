@@ -35,8 +35,6 @@ class SecurityException : BadRequestException
 
     /**
      * Getter for type
-     *
-     * @return string
      */
     string getType(): string
     {

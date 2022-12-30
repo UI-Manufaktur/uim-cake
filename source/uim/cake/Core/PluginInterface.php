@@ -33,36 +33,26 @@ interface PluginInterface
 
     /**
      * Get the name of this plugin.
-     *
-     * @return string
      */
     string getName(): string;
 
     /**
      * Get the filesystem path to this plugin
-     *
-     * @return string
      */
     string getPath(): string;
 
     /**
      * Get the filesystem path to configuration for this plugin
-     *
-     * @return string
      */
     string getConfigPath(): string;
 
     /**
      * Get the filesystem path to configuration for this plugin
-     *
-     * @return string
      */
     string getClassPath(): string;
 
     /**
      * Get the filesystem path to templates for this plugin
-     *
-     * @return string
      */
     string getTemplatePath(): string;
 

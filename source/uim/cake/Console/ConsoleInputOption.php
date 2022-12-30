@@ -187,8 +187,6 @@ class ConsoleInputOption
 
     /**
      * Get the usage value for this option
-     *
-     * @return string
      */
     string usage()
     {
@@ -281,8 +279,6 @@ class ConsoleInputOption
 
     /**
      * Get the prompt string
-     *
-     * @return string
      */
     string prompt()
     {

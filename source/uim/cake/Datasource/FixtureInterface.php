@@ -44,15 +44,11 @@ interface FixtureInterface
 
     /**
      * Get the connection name this fixture should be inserted into.
-     *
-     * @return string
      */
     string connection(): string;
 
     /**
      * Get the table/collection name for this fixture.
-     *
-     * @return string
      */
     string sourceName(): string;
 }

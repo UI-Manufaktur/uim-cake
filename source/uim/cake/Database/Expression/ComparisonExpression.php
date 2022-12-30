@@ -109,8 +109,6 @@ class ComparisonExpression : IExpression, FieldInterface
 
     /**
      * Returns the operator used for comparison
-     *
-     * @return string
      */
     string getOperator(): string
     {

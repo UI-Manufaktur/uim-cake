@@ -34,8 +34,6 @@ class ContentsEmpty : ContentsBase
 
     /**
      * Assertion message
-     *
-     * @return string
      */
     string toString()
     {
