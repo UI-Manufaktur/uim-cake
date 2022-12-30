@@ -1,11 +1,3 @@
-
-
-
- *
-
-
- * @since         3.7.0
-  */
 module uim.cake.Mailer;
 
 use BadMethodCallException;

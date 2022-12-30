@@ -1,12 +1,3 @@
-
-
-
- *
-
-
- * @since         2.2.0
-  */
-
 module uim.cake.caches.Engine;
 
 import uim.cake.caches.CacheEngine;
@@ -15,11 +6,8 @@ use Redis;
 use RedisException;
 use RuntimeException;
 
-/**
- * Redis storage engine for cache.
- */
-class RedisEngine : CacheEngine
-{
+// Redis storage engine for cache.
+class RedisEngine : CacheEngine {
     /**
      * Redis wrapper.
      *

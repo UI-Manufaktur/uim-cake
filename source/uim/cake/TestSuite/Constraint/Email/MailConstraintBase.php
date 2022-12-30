@@ -1,11 +1,3 @@
-
-
-
- *
-
-
- * @since         3.7.0
-  */
 module uim.cake.TestSuite\Constraint\Email;
 
 import uim.cake.TestSuite\TestEmailTransport;
