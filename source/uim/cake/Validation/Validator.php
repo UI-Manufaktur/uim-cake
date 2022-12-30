@@ -422,7 +422,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $field name of the field to set
      * @param uim.cake.Validation\ValidationSet|array $rules set of rules to apply to field
-     * @return void
      */
     void offsetSet($field, $rules): void
     {
@@ -440,7 +439,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * Unsets the rule set for a field
      *
      * @param string $field name of the field to unset
-     * @return void
      */
     void offsetUnset($field): void
     {

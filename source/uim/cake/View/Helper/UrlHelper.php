@@ -33,7 +33,6 @@ class UrlHelper : Helper
      * Check proper configuration
      *
      * @param array<string, mixed> $config The configuration settings provided to this helper.
-     * @return void
      */
     void initialize(array $config): void
     {

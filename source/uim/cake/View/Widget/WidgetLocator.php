@@ -75,7 +75,6 @@ class WidgetLocator
      * widgets.
      *
      * @param string $file The file to load
-     * @return void
      */
     void load(string $file): void
     {

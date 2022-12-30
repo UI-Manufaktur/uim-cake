@@ -2381,7 +2381,6 @@ class FormHelper : Helper
      *   can be used to overwrite existing providers.
      * @param callable $check A callable that returns an object
      *   when the form context is the correct type.
-     * @return void
      */
     void addContextProvider(string $type, callable $check): void
     {
@@ -2434,7 +2433,6 @@ class FormHelper : Helper
      * @param string $name The name of the widget. e.g. "text".
      * @param uim.cake.View\Widget\WidgetInterface|array $spec Either a string class
      *   name or an object implementing the WidgetInterface.
-     * @return void
      */
     void addWidget(string $name, $spec): void
     {

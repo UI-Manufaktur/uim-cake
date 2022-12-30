@@ -173,7 +173,6 @@ trait TranslateStrategyTrait
      *
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
-     * @return void
      */
     void afterSave(IEvent $event, EntityInterface $entity) {
         $entity.unset("_i18n");

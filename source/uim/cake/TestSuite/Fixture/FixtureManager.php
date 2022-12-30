@@ -73,7 +73,6 @@ class FixtureManager
      * Modify the debug mode.
      *
      * @param bool $debug Whether fixture debug mode is enabled.
-     * @return void
      */
     void setDebug(bool $debug): void
     {
@@ -82,7 +81,6 @@ class FixtureManager
 
     /**
      * @param uim.cake.TestSuite\TestCase $test Test case
-     * @return void
      */
     void fixturize(TestCase $test): void
     {
@@ -413,7 +411,6 @@ class FixtureManager
      * Truncates the fixtures tables
      *
      * @param uim.cake.TestSuite\TestCase $test The test to inspect for fixture unloading.
-     * @return void
      */
     void unload(TestCase $test): void
     {

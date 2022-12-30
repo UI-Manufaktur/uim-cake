@@ -181,7 +181,6 @@ class Helper : IEventListener
      * Implement this method to avoid having to overwrite the constructor and call parent.
      *
      * @param array<string, mixed> $config The configuration settings provided to this helper.
-     * @return void
      */
     void initialize(array $config): void
     {

@@ -56,7 +56,6 @@ class ConnectionHelper
      * Enables query logging for all database connections.
      *
      * @param array<int, string>|null $connections Connection names or null for all.
-     * @return void
      */
     void enableQueryLogging(?array $connections = null): void
     {
@@ -74,7 +73,6 @@ class ConnectionHelper
      *
      * @param string $connectionName Connection name
      * @param array<string>|null $tables List of tables names or null for all.
-     * @return void
      */
     void dropTables(string $connectionName, ?array $tables = null): void
     {
@@ -113,7 +111,6 @@ class ConnectionHelper
      *
      * @param string $connectionName Connection name
      * @param array<string>|null $tables List of tables names or null for all.
-     * @return void
      */
     void truncateTables(string $connectionName, ?array $tables = null): void
     {
@@ -143,7 +140,6 @@ class ConnectionHelper
      *
      * @param uim.cake.Database\Connection $connection Database connection
      * @param \Closure $callback callback
-     * @return void
      */
     void runWithoutConstraints(Connection $connection, Closure $callback): void
     {

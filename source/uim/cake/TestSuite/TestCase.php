@@ -180,7 +180,6 @@ abstract class TestCase : BaseTestCase
      *
      * @param int $errorLevel value of error_reporting() that needs to use
      * @param callable $callable callable function that will receive asserts
-     * @return void
      */
     void withErrorReporting(int $errorLevel, callable $callable): void
     {
@@ -197,7 +196,6 @@ abstract class TestCase : BaseTestCase
      * Helper method for check deprecation methods
      *
      * @param callable $callable callable function that will receive asserts
-     * @return void
      */
     void deprecated(callable $callable): void
     {
@@ -416,7 +414,6 @@ abstract class TestCase : BaseTestCase
      * Useful in test case teardown methods.
      *
      * @param array<string> $names A list of plugins you want to remove.
-     * @return void
      */
     void removePlugins(array $names = []): void
     {
@@ -442,7 +439,6 @@ abstract class TestCase : BaseTestCase
      * @param string $name Event name
      * @param uim.cake.events.EventManager|null $eventManager Event manager to check, defaults to global event manager
      * @param string $message Assertion failure message
-     * @return void
      */
     void assertEventFired(string $name, ?EventManager $eventManager = null, string $message = ""): void
     {
@@ -462,7 +458,6 @@ abstract class TestCase : BaseTestCase
      * @param mixed $dataValue Data value
      * @param uim.cake.events.EventManager|null $eventManager Event manager to check, defaults to global event manager
      * @param string $message Assertion failure message
-     * @return void
      */
     void assertEventFiredWith(
         string $name,
@@ -484,7 +479,6 @@ abstract class TestCase : BaseTestCase
      * @param string $expected The expected value.
      * @param string $result The actual value.
      * @param string $message The message to use for failure.
-     * @return void
      */
     void assertTextNotEquals(string $expected, string $result, string $message = ""): void
     {
@@ -500,7 +494,6 @@ abstract class TestCase : BaseTestCase
      * @param string $expected The expected value.
      * @param string $result The actual value.
      * @param string $message The message to use for failure.
-     * @return void
      */
     void assertTextEquals(string $expected, string $result, string $message = ""): void
     {
@@ -516,7 +509,6 @@ abstract class TestCase : BaseTestCase
      * @param string $prefix The prefix to check for.
      * @param string $string The string to search in.
      * @param string $message The message to use for failure.
-     * @return void
      */
     void assertTextStartsWith(string $prefix, string $string, string $message = ""): void
     {
@@ -532,7 +524,6 @@ abstract class TestCase : BaseTestCase
      * @param string $prefix The prefix to not find.
      * @param string $string The string to search.
      * @param string $message The message to use for failure.
-     * @return void
      */
     void assertTextStartsNotWith(string $prefix, string $string, string $message = ""): void
     {
@@ -548,7 +539,6 @@ abstract class TestCase : BaseTestCase
      * @param string $suffix The suffix to find.
      * @param string $string The string to search.
      * @param string $message The message to use for failure.
-     * @return void
      */
     void assertT:With(string $suffix, string $string, string $message = ""): void
     {
@@ -564,7 +554,6 @@ abstract class TestCase : BaseTestCase
      * @param string $suffix The suffix to not find.
      * @param string $string The string to search.
      * @param string $message The message to use for failure.
-     * @return void
      */
     void assertT:NotWith(string $suffix, string $string, string $message = ""): void
     {
@@ -581,7 +570,6 @@ abstract class TestCase : BaseTestCase
      * @param string $haystack The string to search through.
      * @param string $message The message to display on failure.
      * @param bool $ignoreCase Whether the search should be case-sensitive.
-     * @return void
      */
     void assertTextContains(
         string $needle,
@@ -607,7 +595,6 @@ abstract class TestCase : BaseTestCase
      * @param string $haystack The string to search through.
      * @param string $message The message to display on failure.
      * @param bool $ignoreCase Whether the search should be case-sensitive.
-     * @return void
      */
     void assertTextNotContains(
         string $needle,
@@ -631,7 +618,6 @@ abstract class TestCase : BaseTestCase
      * @param string $expected The expected sql
      * @param string $actual The sql to compare
      * @param string $message The message to display on failure
-     * @return void
      */
     void assertEqualsSql(
         string $expected,
@@ -650,7 +636,6 @@ abstract class TestCase : BaseTestCase
      * @param string $pattern The expected sql pattern
      * @param string $actual The sql to compare
      * @param bool $optional Whether quote characters (marked with <>) are optional
-     * @return void
      */
     void assertRegExpSql(string $pattern, string $actual, bool $optional = false): void
     {

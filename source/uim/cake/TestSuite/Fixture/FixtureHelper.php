@@ -102,7 +102,6 @@ class FixtureHelper
      *
      * @param \Closure $callback Callback run per connection
      * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Test fixtures
-     * @return void
      */
     void runPerConnection(Closure $callback, array $fixtures): void
     {

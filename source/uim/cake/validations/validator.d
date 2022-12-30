@@ -400,7 +400,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * Unsets the rule set for a field
      *
      * @param string myField name of the field to unset
-     * @return void
      */
     void offsetUnset(myField) {
         unset(_fields[myField]);

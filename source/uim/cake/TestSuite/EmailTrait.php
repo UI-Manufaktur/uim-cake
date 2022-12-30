@@ -32,7 +32,6 @@ trait EmailTrait
      * Replaces all transports with the test transport during test setup
      *
      * @before
-     * @return void
      */
     void setupTransports(): void
     {
@@ -43,7 +42,6 @@ trait EmailTrait
      * Resets transport state
      *
      * @after
-     * @return void
      */
     void cleanupEmailTrait(): void
     {
@@ -55,7 +53,6 @@ trait EmailTrait
      *
      * @param int $count Email count
      * @param string $message Message
-     * @return void
      */
     void assertMailCount(int $count, string $message = ""): void
     {
@@ -66,7 +63,6 @@ trait EmailTrait
      * Asserts that no emails were sent
      *
      * @param string $message Message
-     * @return void
      */
     void assertNoMailSent(string $message = ""): void
     {
@@ -79,7 +75,6 @@ trait EmailTrait
      * @param int $at Email index
      * @param string $address Email address
      * @param string $message Message
-     * @return void
      */
     void assertMailSentToAt(int $at, string $address, string $message = ""): void
     {
@@ -92,7 +87,6 @@ trait EmailTrait
      * @param int $at Email index
      * @param string $address Email address
      * @param string $message Message
-     * @return void
      */
     void assertMailSentFromAt(int $at, string $address, string $message = ""): void
     {
@@ -105,7 +99,6 @@ trait EmailTrait
      * @param int $at Email index
      * @param string $contents Contents
      * @param string $message Message
-     * @return void
      */
     void assertMailContainsAt(int $at, string $contents, string $message = ""): void
     {
@@ -118,7 +111,6 @@ trait EmailTrait
      * @param int $at Email index
      * @param string $contents Contents
      * @param string $message Message
-     * @return void
      */
     void assertMailContainsHtmlAt(int $at, string $contents, string $message = ""): void
     {
@@ -131,7 +123,6 @@ trait EmailTrait
      * @param int $at Email index
      * @param string $contents Contents
      * @param string $message Message
-     * @return void
      */
     void assertMailContainsTextAt(int $at, string $contents, string $message = ""): void
     {
@@ -145,7 +136,6 @@ trait EmailTrait
      * @param string $expected Contents
      * @param string $parameter Email getter parameter (e.g. "cc", "bcc")
      * @param string $message Message
-     * @return void
      */
     void assertMailSentWithAt(int $at, string $expected, string $parameter, string $message = ""): void
     {
@@ -157,7 +147,6 @@ trait EmailTrait
      *
      * @param string $address Email address
      * @param string $message Message
-     * @return void
      */
     void assertMailSentTo(string $address, string $message = ""): void
     {
@@ -169,7 +158,6 @@ trait EmailTrait
      *
      * @param array<string>|string $address Email address
      * @param string $message Message
-     * @return void
      */
     void assertMailSentFrom($address, string $message = ""): void
     {
@@ -181,7 +169,6 @@ trait EmailTrait
      *
      * @param string $contents Contents
      * @param string $message Message
-     * @return void
      */
     void assertMailContains(string $contents, string $message = ""): void
     {
@@ -194,7 +181,6 @@ trait EmailTrait
      * @param string $filename Filename
      * @param array $file Additional file properties
      * @param string $message Message
-     * @return void
      */
     void assertMailContainsAttachment(string $filename, array $file = [], string $message = ""): void
     {
@@ -206,7 +192,6 @@ trait EmailTrait
      *
      * @param string $contents Contents
      * @param string $message Message
-     * @return void
      */
     void assertMailContainsHtml(string $contents, string $message = ""): void
     {
@@ -218,7 +203,6 @@ trait EmailTrait
      *
      * @param string $expected Expected text.
      * @param string $message Message to display if assertion fails.
-     * @return void
      */
     void assertMailContainsText(string $expected, string $message = ""): void
     {
@@ -231,7 +215,6 @@ trait EmailTrait
      * @param string $expected Contents
      * @param string $parameter Email getter parameter (e.g. "cc", "subject")
      * @param string $message Message
-     * @return void
      */
     void assertMailSentWith(string $expected, string $parameter, string $message = ""): void
     {
@@ -243,7 +226,6 @@ trait EmailTrait
      *
      * @param string $contents Contents
      * @param string $message Message
-     * @return void
      */
     void assertMailSubjectContains(string $contents, string $message = ""): void
     {
@@ -256,7 +238,6 @@ trait EmailTrait
      * @param int $at Email index
      * @param string $contents Contents
      * @param string $message Message
-     * @return void
      */
     void assertMailSubjectContainsAt(int $at, string $contents, string $message = ""): void
     {

@@ -75,7 +75,6 @@ class ViewBlock
      *   If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
      * @throws uim.cake.Core\exceptions.CakeException When starting a block twice
-     * @return void
      */
     void start(string $name, string $mode = ViewBlock::OVERRIDE): void
     {
@@ -129,7 +128,6 @@ class ViewBlock
      *   to string.
      * @param string $mode If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
-     * @return void
      */
     void concat(string $name, $value = null, $mode = ViewBlock::APPEND): void
     {
@@ -156,7 +154,6 @@ class ViewBlock
      * @param string $name Name of the block
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
-     * @return void
      */
     void set(string $name, $value): void
     {

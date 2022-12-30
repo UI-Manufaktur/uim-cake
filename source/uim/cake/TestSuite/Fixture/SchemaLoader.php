@@ -50,7 +50,6 @@ class SchemaLoader
      * @param string $connectionName Connection name
      * @param bool $dropTables Drop all tables prior to loading schema files
      * @param bool $truncateTables Truncate all tables after loading schema files
-     * @return void
      */
     void loadSqlFiles(
         $paths,

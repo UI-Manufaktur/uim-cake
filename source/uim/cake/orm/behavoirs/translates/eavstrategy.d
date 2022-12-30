@@ -136,7 +136,6 @@ class EavStrategy : ITranslateStrategy
      * @param uim.cake.events.IEvent myEvent The beforeFind event that was fired.
      * @param uim.cake.orm.Query myQuery Query
      * @param \ArrayObject myOptions The options for the query
-     * @return void
      */
     void beforeFind(IEvent myEvent, Query myQuery, ArrayObject myOptions) {
         $locale = Hash::get(myOptions, "locale", this.locale());
@@ -200,7 +199,6 @@ class EavStrategy : ITranslateStrategy
      * @param uim.cake.events.IEvent myEvent The beforeSave event that was fired
      * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject myOptions the options passed to the save method
-     * @return void
      */
     void beforeSave(IEvent myEvent, IEntity $entity, ArrayObject myOptions) {
         $locale = $entity.get("_locale") ?: this.locale();

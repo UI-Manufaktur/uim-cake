@@ -176,7 +176,6 @@ class StringTemplate
      * templates.
      *
      * @param string $file The file to load
-     * @return void
      */
     void load(string $file): void
     {
@@ -193,7 +192,6 @@ class StringTemplate
      * Remove the named template.
      *
      * @param string $name The template to remove.
-     * @return void
      */
     void remove(string $name): void
     {

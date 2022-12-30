@@ -664,7 +664,6 @@ class ViewBuilder : JsonSerializable, Serializable
      * Unserializes the view builder object.
      *
      * @param string $data Serialized string.
-     * @return void
      */
     void unserialize($data): void
     {
@@ -675,7 +674,6 @@ class ViewBuilder : JsonSerializable, Serializable
      * Magic method used to rebuild the view builder object.
      *
      * @param array<string, mixed> $data Data array.
-     * @return void
      */
     void __unserialize(array $data): void
     {

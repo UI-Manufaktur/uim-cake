@@ -65,7 +65,6 @@ class RouteCollection
      * @param uim.cake.routings.Route\Route $route The route object to add.
      * @param array<string, mixed> $options Additional options for the route. Primarily for the
      *   `_name` option, which enables named routes.
-     * @return void
      */
     void add(Route $route, array $options = []): void
     {

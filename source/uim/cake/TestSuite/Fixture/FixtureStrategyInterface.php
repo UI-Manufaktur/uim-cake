@@ -17,7 +17,6 @@ interface FixtureStrategyInterface
      * Called before each test run in each TestCase.
      *
      * @param array<string> $fixtureNames Name of fixtures used by test.
-     * @return void
      */
     void setupTest(array $fixtureNames): void;
 

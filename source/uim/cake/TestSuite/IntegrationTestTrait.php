@@ -228,7 +228,6 @@ trait IntegrationTestTrait
      * Set list of fields that are excluded from field validation.
      *
      * @param array<string> $unlockedFields List of fields that are excluded from field validation.
-     * @return void
      */
     void setUnlockedFields(array $unlockedFields = []): void
     {
@@ -242,7 +241,6 @@ trait IntegrationTestTrait
      * is enabled. The default parameter names will be used.
      *
      * @param string $cookieName The name of the csrf token cookie.
-     * @return void
      */
     void enableCsrfToken(string $cookieName = "csrfToken"): void
     {
@@ -269,7 +267,6 @@ trait IntegrationTestTrait
      * Sub-keys like "headers" will be reset, though.
      *
      * @param array $data The request data to use.
-     * @return void
      */
     void configRequest(array $data): void
     {
@@ -287,7 +284,6 @@ trait IntegrationTestTrait
      * the current state.
      *
      * @param array $data The session data to use.
-     * @return void
      */
     void session(array $data): void
     {
@@ -306,7 +302,6 @@ trait IntegrationTestTrait
      *
      * @param string $name The cookie name to use.
      * @param mixed $value The value of the cookie.
-     * @return void
      */
     void cookie(string $name, $value): void
     {
@@ -351,7 +346,6 @@ trait IntegrationTestTrait
      * response.
      *
      * @param array|string $url The URL to request.
-     * @return void
      */
     void get($url): void
     {
@@ -367,7 +361,6 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
-     * @return void
      */
     void post($url, $data = []): void
     {
@@ -383,7 +376,6 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
-     * @return void
      */
     void patch($url, $data = []): void
     {
@@ -399,7 +391,6 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
-     * @return void
      */
     void put($url, $data = []): void
     {
@@ -414,7 +405,6 @@ trait IntegrationTestTrait
      * response.
      *
      * @param array|string $url The URL to request.
-     * @return void
      */
     void delete($url): void
     {
@@ -429,7 +419,6 @@ trait IntegrationTestTrait
      * response.
      *
      * @param array|string $url The URL to request.
-     * @return void
      */
     void head($url): void
     {
@@ -444,7 +433,6 @@ trait IntegrationTestTrait
      * response.
      *
      * @param array|string $url The URL to request.
-     * @return void
      */
     void options($url): void
     {
@@ -503,7 +491,6 @@ trait IntegrationTestTrait
      *
      * @param uim.cake.events.IEvent $event A dispatcher event.
      * @param uim.cake.controllers.Controller|null $controller Controller instance.
-     * @return void
      */
     void controllerSpy(IEvent $event, ?Controller $controller = null): void
     {
@@ -757,7 +744,6 @@ trait IntegrationTestTrait
      * Asserts that the response status code is in the 2xx range.
      *
      * @param string $message Custom message for failure.
-     * @return void
      */
     void assertResponseOk(string $message = ""): void
     {
@@ -769,7 +755,6 @@ trait IntegrationTestTrait
      * Asserts that the response status code is in the 2xx/3xx range.
      *
      * @param string $message Custom message for failure.
-     * @return void
      */
     void assertResponseSuccess(string $message = ""): void
     {
@@ -781,7 +766,6 @@ trait IntegrationTestTrait
      * Asserts that the response status code is in the 4xx range.
      *
      * @param string $message Custom message for failure.
-     * @return void
      */
     void assertResponseError(string $message = ""): void
     {
@@ -792,7 +776,6 @@ trait IntegrationTestTrait
      * Asserts that the response status code is in the 5xx range.
      *
      * @param string $message Custom message for failure.
-     * @return void
      */
     void assertResponseFailure(string $message = ""): void
     {
@@ -804,7 +787,6 @@ trait IntegrationTestTrait
      *
      * @param int $code Status code to assert.
      * @param string $message Custom message for failure.
-     * @return void
      */
     void assertResponseCode(int $code, string $message = ""): void
     {
@@ -818,7 +800,6 @@ trait IntegrationTestTrait
      *   can either be a string URL or an array compatible with Router::url(). Use null to
      *   simply check for the existence of this header.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertRedirect($url = null, $message = ""): void
     {
@@ -845,7 +826,6 @@ trait IntegrationTestTrait
      *   can either be a string URL or an array compatible with Router::url(). Use null to
      *   simply check for the existence of this header.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertRedirectEquals($url = null, $message = "") {
         if (!_response) {
@@ -865,7 +845,6 @@ trait IntegrationTestTrait
      *
      * @param string $url The URL you expected the client to go to.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertRedirectContains(string $url, string $message = ""): void
     {
@@ -883,7 +862,6 @@ trait IntegrationTestTrait
      *
      * @param string $url The URL you expected the client to go to.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertRedirectNotContains(string $url, string $message = ""): void
     {
@@ -900,7 +878,6 @@ trait IntegrationTestTrait
      * Asserts that the Location header is not set.
      *
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertNoRedirect(string $message = ""): void
     {
@@ -914,7 +891,6 @@ trait IntegrationTestTrait
      * @param string $header The header to check
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertHeader(string $header, string $content, string $message = ""): void
     {
@@ -933,7 +909,6 @@ trait IntegrationTestTrait
      * @param string $header The header to check
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertHeaderContains(string $header, string $content, string $message = ""): void
     {
@@ -952,7 +927,6 @@ trait IntegrationTestTrait
      * @param string $header The header to check
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertHeaderNotContains(string $header, string $content, string $message = ""): void
     {
@@ -970,7 +944,6 @@ trait IntegrationTestTrait
      *
      * @param string $type The content-type to check for.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertContentType(string $type, string $message = ""): void
     {
@@ -983,7 +956,6 @@ trait IntegrationTestTrait
      *
      * @param mixed $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertResponseEquals($content, $message = ""): void
     {
@@ -996,7 +968,6 @@ trait IntegrationTestTrait
      *
      * @param mixed $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertResponseNotEquals($content, $message = ""): void
     {
@@ -1010,7 +981,6 @@ trait IntegrationTestTrait
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
      * @param bool $ignoreCase A flag to check whether we should ignore case or not.
-     * @return void
      */
     void assertResponseContains(string $content, string $message = "", bool $ignoreCase = false): void
     {
@@ -1028,7 +998,6 @@ trait IntegrationTestTrait
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
      * @param bool $ignoreCase A flag to check whether we should ignore case or not.
-     * @return void
      */
     void assertResponseNotContains(string $content, string $message = "", bool $ignoreCase = false): void
     {
@@ -1045,7 +1014,6 @@ trait IntegrationTestTrait
      *
      * @param string $pattern The pattern to compare against.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertResponseRegExp(string $pattern, string $message = ""): void
     {
@@ -1058,7 +1026,6 @@ trait IntegrationTestTrait
      *
      * @param string $pattern The pattern to compare against.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertResponseNotRegExp(string $pattern, string $message = ""): void
     {
@@ -1070,7 +1037,6 @@ trait IntegrationTestTrait
      * Assert response content is not empty.
      *
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertResponseNotEmpty(string $message = ""): void
     {
@@ -1081,7 +1047,6 @@ trait IntegrationTestTrait
      * Assert response content is empty.
      *
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertResponseEmpty(string $message = ""): void
     {
@@ -1093,7 +1058,6 @@ trait IntegrationTestTrait
      *
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertTemplate(string $content, string $message = ""): void
     {
@@ -1106,7 +1070,6 @@ trait IntegrationTestTrait
      *
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertLayout(string $content, string $message = ""): void
     {
@@ -1120,7 +1083,6 @@ trait IntegrationTestTrait
      * @param mixed $expected The expected contents.
      * @param string $path The session data path. Uses Hash::get() compatible notation
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertSession($expected, string $path, string $message = ""): void
     {
@@ -1133,7 +1095,6 @@ trait IntegrationTestTrait
      *
      * @param string $path The session data path. Uses Hash::get() compatible notation.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertSessionHasKey(string $path, string $message = ""): void
     {
@@ -1146,7 +1107,6 @@ trait IntegrationTestTrait
      *
      * @param string $path The session data path. Uses Hash::get() compatible notation.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertSessionNotHasKey(string $path, string $message = ""): void
     {
@@ -1160,7 +1120,6 @@ trait IntegrationTestTrait
      * @param string $expected Expected message
      * @param string $key Flash key
      * @param string $message Assertion failure message
-     * @return void
      */
     void assertFlashMessage(string $expected, string $key = "flash", string $message = ""): void
     {
@@ -1175,7 +1134,6 @@ trait IntegrationTestTrait
      * @param string $expected Expected message
      * @param string $key Flash key
      * @param string $message Assertion failure message
-     * @return void
      */
     void assertFlashMessageAt(int $at, string $expected, string $key = "flash", string $message = ""): void
     {
@@ -1193,7 +1151,6 @@ trait IntegrationTestTrait
      * @param string $expected Expected element name
      * @param string $key Flash key
      * @param string $message Assertion failure message
-     * @return void
      */
     void assertFlashElement(string $expected, string $key = "flash", string $message = ""): void
     {
@@ -1212,7 +1169,6 @@ trait IntegrationTestTrait
      * @param string $expected Expected element name
      * @param string $key Flash key
      * @param string $message Assertion failure message
-     * @return void
      */
     void assertFlashElementAt(int $at, string $expected, string $key = "flash", string $message = ""): void
     {
@@ -1230,7 +1186,6 @@ trait IntegrationTestTrait
      * @param mixed $expected The expected contents.
      * @param string $name The cookie name.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertCookie($expected, string $name, string $message = ""): void
     {
@@ -1244,7 +1199,6 @@ trait IntegrationTestTrait
      *
      * @param string $cookie The cookie name to check
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertCookieNotSet(string $cookie, string $message = ""): void
     {
@@ -1302,7 +1256,6 @@ trait IntegrationTestTrait
      *
      * @param string $expected The absolute file path that should be sent in the response.
      * @param string $message The failure message that will be appended to the generated message.
-     * @return void
      */
     void assertFileResponse(string $expected, string $message = ""): void
     {

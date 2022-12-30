@@ -121,7 +121,6 @@ class TableHelper : Helper
      * in the array. The keys will not be used to align data.
      *
      * @param array $args The data to render out.
-     * @return void
      */
     void output(array $args): void
     {

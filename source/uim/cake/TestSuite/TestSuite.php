@@ -29,7 +29,6 @@ class TestSuite : BaseTestSuite
      * Adds all the files in a directory to the test suite. Does not recursive through directories.
      *
      * @param string $directory The directory to add tests from.
-     * @return void
      */
     void addTestDirectory(string $directory = "."): void
     {
@@ -44,7 +43,6 @@ class TestSuite : BaseTestSuite
      * Recursively adds all the files in a directory to the test suite.
      *
      * @param string $directory The directory subtree to add tests from.
-     * @return void
      */
     void addTestDirectoryRecursive(string $directory = "."): void
     {

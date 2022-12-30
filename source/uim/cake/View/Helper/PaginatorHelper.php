@@ -141,7 +141,6 @@ class PaginatorHelper : Helper
      *
      * @param array<string, mixed> $options Default options for pagination links.
      *   See PaginatorHelper::$options for list of keys.
-     * @return void
      */
     void options(array $options = []): void
     {

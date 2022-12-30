@@ -75,7 +75,6 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param uim.cake.events.IEvent $event The beforeFind event that was fired.
      * @param uim.cake.orm.Query $query Query
      * @param \ArrayObject $options The options for the query
-     * @return void
      */
     void beforeFind(IEvent $event, Query $query, ArrayObject $options);
 
@@ -86,7 +85,6 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
      * @param \ArrayObject $options the options passed to the save method
-     * @return void
      */
     void beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options);
 
@@ -95,7 +93,6 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      *
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
      * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
-     * @return void
      */
     void afterSave(IEvent $event, EntityInterface $entity);
 }

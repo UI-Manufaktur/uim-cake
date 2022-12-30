@@ -50,7 +50,6 @@ class FixtureInjector : TestListener
      * they were expressed inside each test case.
      *
      * @param \PHPUnit\Framework\TestSuite $suite The test suite
-     * @return void
      */
     void startTestSuite(TestSuite $suite): void
     {
@@ -71,7 +70,6 @@ class FixtureInjector : TestListener
      * suite run
      *
      * @param \PHPUnit\Framework\TestSuite $suite The test suite
-     * @return void
      */
     void endTestSuite(TestSuite $suite): void
     {
@@ -84,7 +82,6 @@ class FixtureInjector : TestListener
      * Adds fixtures to a test case when it starts.
      *
      * @param \PHPUnit\Framework\Test $test The test case
-     * @return void
      */
     void startTest(Test $test): void
     {
@@ -99,7 +96,6 @@ class FixtureInjector : TestListener
      *
      * @param \PHPUnit\Framework\Test $test The test case
      * @param float $time current time
-     * @return void
      */
     void endTest(Test $test, float $time): void
     {

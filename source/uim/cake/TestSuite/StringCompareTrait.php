@@ -32,7 +32,6 @@ trait StringCompareTrait
      *
      * @param string $path partial path to test comparison file
      * @param string $result test result as a string
-     * @return void
      */
     void assertSameAsFile(string $path, string $result): void
     {

@@ -33,7 +33,6 @@ abstract class IntegrationTestCase : TestCase
      * No-op method.
      *
      * @param bool $enable Unused.
-     * @return void
      */
     void useHttpServer(bool $enable): void
     {
