@@ -299,7 +299,6 @@ class PostgresSchemaDialect : SchemaDialect
      * @param string $name The index name.
      * @param string $type The index type.
      * @param array $row The metadata record to update with.
-     * @return void
      */
     protected void _convertConstraint(TableSchema $schema, string $name, string $type, array $row): void
     {

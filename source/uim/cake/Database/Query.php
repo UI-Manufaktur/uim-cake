@@ -2027,7 +2027,6 @@ class Query : IExpression, IteratorAggregate
      *   array of expressions.
      * @param \Closure $callback The callback to be executed for each IExpression
      *   found inside this query.
-     * @return void
      */
     protected void _expressionsVisitor($expression, Closure $callback): void
     {
@@ -2261,7 +2260,6 @@ class Query : IExpression, IteratorAggregate
      *   to append.
      * @param string $conjunction type of conjunction to be used to operate part
      * @param array<string, string> $types Associative array of type names used to bind values to query
-     * @return void
      */
     protected void _conjugate(string $part, $append, $conjunction, array $types): void
     {
@@ -2292,7 +2290,6 @@ class Query : IExpression, IteratorAggregate
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching.
      *
-     * @return void
      */
     protected void _dirty(): void
     {

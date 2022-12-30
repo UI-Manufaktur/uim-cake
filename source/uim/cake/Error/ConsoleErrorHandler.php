@@ -66,7 +66,6 @@ class ConsoleErrorHandler : BaseErrorHandler
      * Prints an exception to stderr.
      *
      * @param \Throwable $exception The exception to handle
-     * @return void
      */
     protected void _displayException(Throwable $exception): void
     {
@@ -92,7 +91,6 @@ class ConsoleErrorHandler : BaseErrorHandler
      *
      * @param array $error An array of error data.
      * @param bool $debug Whether the app is in debug mode.
-     * @return void
      */
     protected void _displayError(array $error, bool $debug): void
     {
@@ -114,7 +112,6 @@ class ConsoleErrorHandler : BaseErrorHandler
      * Stop the execution and set the exit code for the process.
      *
      * @param int $code The exit code.
-     * @return void
      */
     protected void _stop(int $code): void
     {

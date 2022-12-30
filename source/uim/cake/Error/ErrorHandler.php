@@ -108,7 +108,6 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param array $error An array of error data.
      * @param bool $debug Whether the app is in debug mode.
-     * @return void
      */
     protected void _displayError(array $error, bool $debug): void
     {
@@ -176,7 +175,6 @@ class ErrorHandler : BaseErrorHandler
      * Log internal errors.
      *
      * @param \Throwable $exception Exception.
-     * @return void
      */
     protected void _logInternalError(Throwable $exception): void
     {
@@ -197,7 +195,6 @@ class ErrorHandler : BaseErrorHandler
      * Method that can be easily stubbed in testing.
      *
      * @param \Psr\Http\messages.IResponse|string $response Either the message or response object.
-     * @return void
      */
     protected void _sendResponse($response): void
     {

@@ -17,7 +17,6 @@ class IntegerType : BaseType : BatchCastingInterface
      *
      * @throws \InvalidArgumentException
      * @param mixed $value Value to check
-     * @return void
      */
     protected void checkNumeric($value): void
     {

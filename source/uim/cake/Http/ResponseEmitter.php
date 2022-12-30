@@ -84,7 +84,6 @@ class ResponseEmitter : EmitterInterface
      * Emit the message body.
      *
      * @param \Psr\Http\messages.IResponse $response The response to emit
-     * @return void
      */
     protected void emitBody(IResponse $response): void
     {
@@ -110,7 +109,6 @@ class ResponseEmitter : EmitterInterface
      *
      * @param array $range The range data to emit
      * @param \Psr\Http\messages.IResponse $response The response to emit
-     * @return void
      */
     protected void emitBodyRange(array $range, IResponse $response): void
     {
@@ -147,7 +145,6 @@ class ResponseEmitter : EmitterInterface
      * the response; if a reason phrase is available, it, too, is emitted.
      *
      * @param \Psr\Http\messages.IResponse $response The response to emit
-     * @return void
      */
     protected void emitStatusLine(IResponse $response): void
     {
@@ -169,7 +166,6 @@ class ResponseEmitter : EmitterInterface
      * the previous).
      *
      * @param \Psr\Http\messages.IResponse $response The response to emit
-     * @return void
      */
     protected void emitHeaders(IResponse $response): void
     {
@@ -201,7 +197,6 @@ class ResponseEmitter : EmitterInterface
      * Emit cookies using setcookie()
      *
      * @param array<uim.cake.Http\Cookie\CookieInterface|string> $cookies An array of cookies.
-     * @return void
      */
     protected void emitCookies(array $cookies): void
     {
@@ -251,7 +246,6 @@ class ResponseEmitter : EmitterInterface
      * the response.
      *
      * @param int|null $maxBufferLevel Flush up to this buffer level.
-     * @return void
      */
     protected void flush(?int $maxBufferLevel = null): void
     {

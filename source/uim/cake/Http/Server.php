@@ -93,7 +93,6 @@ class Server : EventDispatcherInterface
      * Calls the application"s `bootstrap()` hook. After the application the
      * plugins are bootstrapped.
      *
-     * @return void
      */
     protected void bootstrap(): void
     {

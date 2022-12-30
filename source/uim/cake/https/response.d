@@ -450,7 +450,6 @@ class Response : IResponse
      * the charset will only be set in the header if the response is of type text/*
      *
      * @param string myType The type to set.
-     * @return void
      */
     protected void _setContentType(string myType) {
         if (in_array(_status, [304, 204], true)) {
@@ -516,7 +515,6 @@ class Response : IResponse
      *
      * @phpstan-param non-empty-string header
      * @param string header Header key.
-     * @return void
      */
     protected void _clearHeader(string header) {
         $normalized = strtolower($header);
@@ -857,7 +855,6 @@ class Response : IResponse
      * Helper method to generate a valid Cache-Control header from the options set
      * in other methods
      *
-     * @return void
      */
     protected void _setCacheControl() {
         $control = "";
@@ -1421,7 +1418,6 @@ class Response : IResponse
      *
      * @param \SplFileInfo myfile The file to set a range on.
      * @param string httpRange The range to use.
-     * @return void
      */
     protected void _fileRange(SplFileInfo myfile, string httpRange) {
         myfileSize = myfile.getSize();

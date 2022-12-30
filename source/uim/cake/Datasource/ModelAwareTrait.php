@@ -53,7 +53,6 @@ trait ModelAwareTrait
      * If the property is already set it will not be overwritten
      *
      * @param string $name Class name.
-     * @return void
      */
     protected void _setModelClass(string $name): void
     {

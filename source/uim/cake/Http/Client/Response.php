@@ -169,7 +169,6 @@ class Response : Message : IResponse
      * - Parses and normalizes header names + values.
      *
      * @param array $headers Headers to parse.
-     * @return void
      */
     protected void _parseHeaders(array $headers): void
     {
@@ -354,7 +353,6 @@ class Response : Message : IResponse
     /**
      * Lazily build the CookieCollection and cookie objects from the response header
      *
-     * @return void
      */
     protected void buildCookieCollection(): void
     {

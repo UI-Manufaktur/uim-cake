@@ -31,7 +31,6 @@ trait TupleComparisonTranslatorTrait
      *
      * @param uim.cake.Database\Expression\TupleComparison $expression The expression to transform
      * @param uim.cake.Database\Query $query The query to update.
-     * @return void
      */
     protected void _transformTupleComparison(TupleComparison $expression, Query $query): void
     {

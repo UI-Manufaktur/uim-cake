@@ -90,7 +90,6 @@ class Server : IEventDispatcher
      * Calls the application"s `bootstrap()` hook. After the application the
      * plugins are bootstrapped.
      *
-     * @return void
      */
     protected void bootstrap() {
         this.app.bootstrap();

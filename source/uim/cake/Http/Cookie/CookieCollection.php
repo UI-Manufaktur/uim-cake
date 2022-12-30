@@ -323,7 +323,6 @@ class CookieCollection : IteratorAggregate, Countable
      *
      * @param string $host The host to check for expired cookies on.
      * @param string $path The path to check for expired cookies on.
-     * @return void
      */
     protected void removeExpiredCookies(string $host, string $path): void
     {

@@ -193,7 +193,6 @@ class WebExceptionRenderer : ExceptionRendererInterface
     /**
      * Clear output buffers so error pages display properly.
      *
-     * @return void
      */
     protected void clearOutput(): void
     {

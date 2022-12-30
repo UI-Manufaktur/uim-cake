@@ -243,7 +243,6 @@ class ServerRequest : IServerRequest
      * Process the config/settings data into properties.
      *
      * @param array<string, mixed> $config The config data to use.
-     * @return void
      */
     protected void _setConfig(array $config): void
     {

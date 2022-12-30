@@ -93,7 +93,6 @@ class CaseExpression : IExpression
      * @param array $conditions Array of IExpression instances.
      * @param array<mixed> $values Associative array of values of each condition
      * @param array<string> $types Associative array of types to be associated with the values
-     * @return void
      */
     protected void _addExpressions(array $conditions, array $values, array $types): void
     {

@@ -143,7 +143,6 @@ class ErrorTrap
      * Logging helper method.
      *
      * @param uim.cake.Error\PhpError $error The error object to log.
-     * @return void
      */
     protected void logError(PhpError $error): void
     {

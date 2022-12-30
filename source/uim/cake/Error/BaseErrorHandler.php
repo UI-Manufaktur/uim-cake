@@ -223,7 +223,6 @@ abstract class BaseErrorHandler
      * Implemented in subclasses that need it.
      *
      * @param int $code Exit code.
-     * @return void
      */
     protected void _stop(int $code): void
     {

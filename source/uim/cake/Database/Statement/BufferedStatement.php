@@ -225,7 +225,6 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * Reset all properties
      *
-     * @return void
      */
     protected void _reset(): void
     {

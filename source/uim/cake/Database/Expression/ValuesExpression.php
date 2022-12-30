@@ -269,7 +269,6 @@ class ValuesExpression : IExpression
     /**
      * Converts values that need to be casted to expressions
      *
-     * @return void
      */
     protected void _processExpressions(): void
     {

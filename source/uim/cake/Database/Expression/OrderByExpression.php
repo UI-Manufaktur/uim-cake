@@ -43,7 +43,6 @@ class OrderByExpression : QueryExpression
      *
      * @param array $conditions list of order by expressions
      * @param array $types list of types associated on fields referenced in $conditions
-     * @return void
      */
     protected void _addConditions(array $conditions, array $types): void
     {

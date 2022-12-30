@@ -442,7 +442,6 @@ class Sqlserver : Driver
      * SQL dialect.
      *
      * @param uim.cake.Database\Expression\FunctionExpression $expression The function expression to convert to TSQL.
-     * @return void
      */
     protected void _transformFunctionExpression(FunctionExpression $expression): void
     {

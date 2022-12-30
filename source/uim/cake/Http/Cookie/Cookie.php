@@ -444,7 +444,6 @@ class Cookie : CookieInterface
      * Setter for the value attribute.
      *
      * @param array|string $value The value to store.
-     * @return void
      */
     protected void _setValue($value): void
     {

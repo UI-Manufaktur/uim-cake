@@ -468,7 +468,6 @@ class Response : IResponse
     /**
      * Creates the stream object.
      *
-     * @return void
      */
     protected void _createStream(): void
     {
@@ -480,7 +479,6 @@ class Response : IResponse
      * the charset will only be set in the header if the response is of type text/*
      *
      * @param string $type The type to set.
-     * @return void
      */
     protected void _setContentType(string $type): void
     {
@@ -535,7 +533,6 @@ class Response : IResponse
      * @phpstan-param non-empty-string $header
      * @param string $header Header key.
      * @param string $value Header value.
-     * @return void
      */
     protected void _setHeader(string $header, string $value): void
     {
@@ -549,7 +546,6 @@ class Response : IResponse
      *
      * @phpstan-param non-empty-string $header
      * @param string $header Header key.
-     * @return void
      */
     protected void _clearHeader(string $header): void
     {
@@ -902,7 +898,6 @@ class Response : IResponse
      * Helper method to generate a valid Cache-Control header from the options set
      * in other methods
      *
-     * @return void
      */
     protected void _setCacheControl(): void
     {
@@ -1484,7 +1479,6 @@ class Response : IResponse
      *
      * @param \SplFileInfo $file The file to set a range on.
      * @param string $httpRange The range to use.
-     * @return void
      */
     protected void _fileRange(SplFileInfo $file, string $httpRange): void
     {

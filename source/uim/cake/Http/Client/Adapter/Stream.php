@@ -114,7 +114,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\messages.RequestInterface $request The request to build context from.
      * @param array<string, mixed> $options Additional request options.
-     * @return void
      */
     protected void _buildContext(RequestInterface $request, array $options): void
     {
@@ -140,7 +139,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
-     * @return void
      */
     protected void _buildHeaders(RequestInterface $request, array $options): void
     {
@@ -159,7 +157,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
-     * @return void
      */
     protected void _buildContent(RequestInterface $request, array $options): void
     {
@@ -173,7 +170,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
-     * @return void
      */
     protected void _buildOptions(RequestInterface $request, array $options): void
     {
@@ -198,7 +194,6 @@ class Stream : AdapterInterface
      *
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
-     * @return void
      */
     protected void _buildSslContext(RequestInterface $request, array $options): void
     {

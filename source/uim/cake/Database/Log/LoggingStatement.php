@@ -113,7 +113,6 @@ class LoggingStatement : StatementDecorator
      * Copies the logging data to the passed LoggedQuery and sends it
      * to the logging system.
      *
-     * @return void
      */
     protected void _log(): void
     {
