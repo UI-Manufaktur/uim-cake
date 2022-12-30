@@ -11,8 +11,7 @@
 
  * @since         4.2.0
 
- */
-module uim.cake.core.TestSuite;
+ */module uim.cake.core.TestSuite;
 
 import uim.cake.core.Configure;
 import uim.cake.core.IContainer;

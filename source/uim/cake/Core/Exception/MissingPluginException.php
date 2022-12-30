@@ -9,8 +9,7 @@
  *
 
 
-  */
-module uim.cake.core.Exception;
+  */module uim.cake.core.Exception;
 
 /**
  * Exception raised when a plugin could not be found

@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.Core;
+  */module uim.cake.Core;
 
 import uim.cake.consoles.CommandCollection;
 

@@ -10,8 +10,7 @@
 
 
  * @since         3.6.0
-  */
-module uim.cake.Core;
+  */module uim.cake.Core;
 
 import uim.cake.core.exceptions.MissingPluginException;
 use Countable;

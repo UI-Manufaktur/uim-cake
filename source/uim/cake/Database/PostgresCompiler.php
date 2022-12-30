@@ -5,8 +5,7 @@
 
 
  * @since         4.0.3
-  */
-module uim.cake.Database;
+  */module uim.cake.Database;
 
 import uim.cake.databases.expressions.FunctionExpression;
 

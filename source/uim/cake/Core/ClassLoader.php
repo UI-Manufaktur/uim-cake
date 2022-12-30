@@ -10,8 +10,7 @@
 
 
 
-  */
-module uim.cake.Core;
+  */module uim.cake.Core;
 
 /**
  * ClassLoader

@@ -9,8 +9,7 @@
  *
 
 
-  */
-module uim.cake.core.Exception;
+  */module uim.cake.core.Exception;
 
 use RuntimeException;
 use Throwable;
