@@ -5,8 +5,7 @@
 
 
  * @since         3.1.2
-  */
-module uim.cake.databases.Type;
+  */module uim.cake.databases.Type;
 
 import uim.cake.databases.DriverInterface;
 use InvalidArgumentException;

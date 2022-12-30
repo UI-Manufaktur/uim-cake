@@ -5,8 +5,7 @@
 
 
  * @since         3.3.0
-  */
-module uim.cake.databases.Type;
+  */module uim.cake.databases.Type;
 
 import uim.cake.databases.IExpression;
 

@@ -1,4 +1,3 @@
-
 module uim.cake.databases.Type;
 
 import uim.cake.I18n\I18nDateTimeInterface;

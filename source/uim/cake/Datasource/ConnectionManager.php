@@ -5,8 +5,7 @@
 
 
  * @since         0.10.0
-  */
-module uim.cake.Datasource;
+  */module uim.cake.Datasource;
 
 import uim.cake.core.StaticConfigTrait;
 import uim.cake.databases.Connection;

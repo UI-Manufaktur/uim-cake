@@ -5,8 +5,7 @@
 
 
  * @since         3.3.0
-  */
-module uim.cake.Datasource;
+  */module uim.cake.Datasource;
 
 import uim.cake.datasources.Locator\ILocator;
 import uim.cake.orm.locators.TableLocator;

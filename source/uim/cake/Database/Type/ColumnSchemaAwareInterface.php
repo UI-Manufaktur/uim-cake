@@ -1,5 +1,4 @@
 
-
 module uim.cake.databases.Type;
 
 import uim.cake.databases.DriverInterface;
