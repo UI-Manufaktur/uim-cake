@@ -491,8 +491,6 @@ class FormHelper : Helper
     /**
      * Return a CSRF input if the request data is present.
      * Used to secure forms in conjunction with CsrfMiddleware.
-     *
-     * @return string
      */
     protected string _csrfField() {
         myRequest = _View.getRequest();

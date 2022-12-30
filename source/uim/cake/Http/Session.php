@@ -579,9 +579,8 @@ class Session
     /**
      * Returns whether a session exists
      *
-     * @return bool
      */
-    protected function _hasSession(): bool
+    protected bool _hasSession(): bool
     {
         return !ini_get("session.use_cookies")
             || isset($_COOKIE[session_name()])
@@ -619,9 +618,8 @@ class Session
      * Returns true if the session is no longer valid because the last time it was
      * accessed was after the configured timeout.
      *
-     * @return bool
      */
-    protected function _timedOut(): bool
+    protected bool _timedOut(): bool
     {
         $time = this.read("Config.time");
         $result = false;

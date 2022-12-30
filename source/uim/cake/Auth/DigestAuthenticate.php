@@ -234,8 +234,6 @@ class DigestAuthenticate : BasicAuthenticate
 
     /**
      * Generate a nonce value that is validated in future requests.
-     *
-     * @return string
      */
     protected string generateNonce() {
         $expiryTime = microtime(true) + this.getConfig("nonceLifetime");
@@ -250,9 +248,8 @@ class DigestAuthenticate : BasicAuthenticate
      * Check the nonce to ensure it is valid and not expired.
      *
      * @param string $nonce The nonce value to check.
-     * @return bool
      */
-    protected function validNonce(string $nonce): bool
+    protected bool validNonce(string $nonce): bool
     {
         $value = base64_decode($nonce);
         if ($value == false) {

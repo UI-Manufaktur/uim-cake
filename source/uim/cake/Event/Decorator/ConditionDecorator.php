@@ -53,9 +53,8 @@ class ConditionDecorator : AbstractDecorator
      *
      * @param string $condition Condition type
      * @param uim.cake.events.IEvent $event Event object
-     * @return bool
      */
-    protected function _evaluateCondition(string $condition, IEvent $event): bool
+    protected bool _evaluateCondition(string $condition, IEvent $event): bool
     {
         if (!isset(_options[$condition])) {
             return $condition != "unless";

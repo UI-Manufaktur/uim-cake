@@ -1295,8 +1295,6 @@ class BelongsToMany : Association
      * Returns the name of the association from the target table to the junction table,
      * this name is used to generate alias in the query and to later on retrieve the
      * results.
-     *
-     * @return string
      */
     protected string _junctionAssociationName() {
         if (!_junctionAssociationName) {

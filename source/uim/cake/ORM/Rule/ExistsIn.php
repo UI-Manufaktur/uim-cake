@@ -134,9 +134,8 @@ class ExistsIn
      *
      * @param uim.cake.Datasource\EntityInterface $entity The entity to check.
      * @param uim.cake.orm.Table $source The table to use schema from.
-     * @return bool
      */
-    protected function _fieldsAreNull(EntityInterface $entity, Table $source): bool
+    protected bool _fieldsAreNull(EntityInterface $entity, Table $source): bool
     {
         $nulls = 0;
         $schema = $source.getSchema();

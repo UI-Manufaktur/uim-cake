@@ -110,9 +110,8 @@ class Mock : AdapterInterface
      *
      * @param string $requestUri The request being sent.
      * @param \Psr\Http\messages.RequestInterface $mock The request being mocked.
-     * @return bool
      */
-    protected function urlMatches(string $requestUri, RequestInterface $mock): bool
+    protected bool urlMatches(string $requestUri, RequestInterface $mock): bool
     {
         $mockUri = (string)$mock.getUri();
         if ($requestUri == $mockUri) {

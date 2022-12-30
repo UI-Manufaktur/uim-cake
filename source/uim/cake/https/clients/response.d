@@ -417,8 +417,6 @@ class Response : Message : IResponse
 
     /**
      * Provides magic __get() support.
-     *
-     * @return string
      */
     protected string _getBody() {
         this.stream.rewind();

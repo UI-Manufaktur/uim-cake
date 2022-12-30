@@ -525,9 +525,8 @@ class HasMany : Association
      *
      * @param uim.cake.orm.Table $table the table containing the foreign key
      * @param array $properties the list of fields that compose the foreign key
-     * @return bool
      */
-    protected function _foreignKeyAcceptsNull(Table $table, array $properties): bool
+    protected bool _foreignKeyAcceptsNull(Table $table, array $properties): bool
     {
         return !in_array(
             false,

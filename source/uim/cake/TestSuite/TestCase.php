@@ -930,9 +930,8 @@ abstract class TestCase : BaseTestCase
      *
      * @param bool $condition Condition to trigger skipping
      * @param string $message Message for skip
-     * @return bool
      */
-    protected function skipUnless($condition, $message = "") {
+    protected bool skipUnless($condition, $message = "") {
         if (!$condition) {
             this.markTestSkipped($message);
         }

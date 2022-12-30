@@ -275,9 +275,8 @@ class RulesChecker
      * @param uim.cake.Datasource\EntityInterface $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @param array<uim.cake.Datasource\RuleInvoker> $rules The list of rules that must be checked.
-     * @return bool
      */
-    protected function _checkRules(EntityInterface $entity, array $options = [], array $rules = []): bool
+    protected bool _checkRules(EntityInterface $entity, array $options = [], array $rules = []): bool
     {
         $success = true;
         $options += _options;

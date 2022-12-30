@@ -759,9 +759,8 @@ class Route
      * Check whether the URL"s HTTP method matches.
      *
      * @param array $url The array for the URL being generated.
-     * @return bool
      */
-    protected function _matchMethod(array $url): bool
+    protected bool _matchMethod(array $url): bool
     {
         if (empty(this.defaults["_method"])) {
             return true;

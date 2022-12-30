@@ -970,9 +970,8 @@ trait EntityTrait
      * Reads if there are errors for one or many objects.
      *
      * @param uim.cake.Datasource\EntityInterface|array $object The object to read errors from.
-     * @return bool
      */
-    protected function _readHasErrors($object): bool
+    protected bool _readHasErrors($object): bool
     {
         if ($object instanceof EntityInterface && $object.hasErrors()) {
             return true;

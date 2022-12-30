@@ -45,8 +45,6 @@ class BelongsTo : Association
 
     /**
      * Returns default property name based on association name.
-     *
-     * @return string
      */
     protected string _propertyName() {
         [, myName] = pluginSplit(_name);

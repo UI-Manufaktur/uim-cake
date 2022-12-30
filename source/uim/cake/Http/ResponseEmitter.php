@@ -207,9 +207,8 @@ class ResponseEmitter : EmitterInterface
      * Helper methods to set cookie.
      *
      * @param uim.cake.http.Cookie\CookieInterface|string $cookie Cookie.
-     * @return bool
      */
-    protected function setCookie($cookie): bool
+    protected bool setCookie($cookie): bool
     {
         if (is_string($cookie)) {
             $cookie = Cookie::createFromHeaderString($cookie, ["path": ""]);

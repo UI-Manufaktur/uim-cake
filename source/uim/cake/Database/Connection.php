@@ -680,9 +680,8 @@ class Connection : ConnectionInterface
     /**
      * Returns whether some nested transaction has been already rolled back.
      *
-     * @return bool
      */
-    protected function wasNestedTransactionRolledback(): bool
+    protected bool wasNestedTransactionRolledback(): bool
     {
         return this.nestedTransactionRollbackException instanceof NestedTransactionRollbackException;
     }

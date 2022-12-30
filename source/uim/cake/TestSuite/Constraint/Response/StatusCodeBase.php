@@ -37,9 +37,8 @@ abstract class StatusCodeBase : ResponseBase
      *
      * @param int $min Min status code (inclusive)
      * @param int $max Max status code (inclusive)
-     * @return bool
      */
-    protected function statusCodeBetween(int $min, int $max): bool
+    protected bool statusCodeBetween(int $min, int $max): bool
     {
         return this.response.getStatusCode() >= $min && this.response.getStatusCode() <= $max;
     }

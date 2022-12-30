@@ -173,9 +173,8 @@ trait ValidatorAwareTrait
      * Checks if validation method exists.
      *
      * @param string $name Validation method name.
-     * @return bool
      */
-    protected function validationMethodExists(string $name): bool
+    protected bool validationMethodExists(string $name): bool
     {
         return method_exists(this, $name);
     }

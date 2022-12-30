@@ -63,8 +63,6 @@ class HtmlFormatter : IFormatter
      * Generate the CSS and Javascript for dumps
      *
      * Only output once per process as we don"t need it more than once.
-     *
-     * @return string
      */
     protected string dumpHeader() {
         ob_start();
