@@ -38,7 +38,7 @@ class MailContainsAttachment : MailContains
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         if (this.at) {
             return sprintf("is an attachment of email #%d", this.at);

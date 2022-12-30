@@ -74,7 +74,7 @@ class ConsoleInputArgument
      *
      * @return string Value of _name.
      */
-    function name(): string
+    string name()
     {
         return _name;
     }
@@ -96,7 +96,7 @@ class ConsoleInputArgument
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    bool help(int $width = 0): string
+    string help(int $width = 0)
     {
         $name = _name;
         if (strlen($name) < $width) {
@@ -118,7 +118,7 @@ class ConsoleInputArgument
      *
      * @return string
      */
-    string usage(): string
+    string usage()
     {
         $name = _name;
         if (_choices) {

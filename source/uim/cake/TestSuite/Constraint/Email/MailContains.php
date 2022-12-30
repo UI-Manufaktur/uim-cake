@@ -79,7 +79,7 @@ class MailContains : MailConstraintBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         if (this.at) {
             return sprintf("is in email #%d", this.at) . this.getAssertedMessages();

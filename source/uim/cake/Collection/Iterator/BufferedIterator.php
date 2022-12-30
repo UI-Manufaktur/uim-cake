@@ -170,7 +170,7 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @return string
      */
-    string serialize(): string
+    string serialize()
     {
         if (!_finished) {
             this.count();

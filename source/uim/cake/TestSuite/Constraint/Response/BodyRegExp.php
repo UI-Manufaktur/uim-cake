@@ -37,7 +37,7 @@ class BodyRegExp : ResponseBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return "PCRE pattern found in response body";
     }

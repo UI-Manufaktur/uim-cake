@@ -31,7 +31,7 @@ class NoMailSent : MailConstraintBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return "no emails were sent";
     }

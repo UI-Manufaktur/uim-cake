@@ -107,7 +107,7 @@ class EventFiredWith : Constraint
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return "was fired with " . _dataKey . " matching " . (string)_dataValue;
     }

@@ -66,7 +66,7 @@ class MailSentWith : MailConstraintBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         if (this.at) {
             return sprintf("is in email #%d `%s`", this.at, this.method);

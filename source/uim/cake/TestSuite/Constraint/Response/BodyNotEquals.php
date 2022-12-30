@@ -37,7 +37,7 @@ class BodyNotEquals : BodyEquals
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return "does not match response body";
     }

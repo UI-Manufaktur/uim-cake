@@ -65,7 +65,7 @@ class EventFired : Constraint
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return "was fired";
     }

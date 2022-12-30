@@ -140,7 +140,7 @@ class ConsoleInputOption
      *
      * @return string Value of _name.
      */
-    function name(): string
+    string name()
     {
         return _name;
     }
@@ -150,7 +150,7 @@ class ConsoleInputOption
      *
      * @return string Value of _short.
      */
-    function short(): string
+    string short()
     {
         return _short;
     }
@@ -161,7 +161,7 @@ class ConsoleInputOption
      * @param int $width The width to make the name of the option.
      * @return string
      */
-    string help(int $width = 0): string
+    string help(int $width = 0)
     {
         $default = $short = "";
         if (_default && _default != true) {
@@ -190,7 +190,7 @@ class ConsoleInputOption
      *
      * @return string
      */
-    string usage(): string
+    string usage()
     {
         $name = _short == "" ? "--" . _name : "-" . _short;
         $default = "";
@@ -284,7 +284,7 @@ class ConsoleInputOption
      *
      * @return string
      */
-    string prompt(): string
+    string prompt()
     {
         return (string)this.prompt;
     }

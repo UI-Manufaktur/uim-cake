@@ -37,7 +37,7 @@ class ContentsRegExp : ContentsBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return sprintf("PCRE pattern found in %s", this.output);
     }
@@ -46,7 +46,7 @@ class ContentsRegExp : ContentsBase
      * @param mixed $other Expected
      * @return string
      */
-    string failureDescription($other): string
+    string failureDescription($other)
     {
         return "`" . $other . "` " . this.toString();
     }

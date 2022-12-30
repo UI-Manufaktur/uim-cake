@@ -25,7 +25,7 @@ class MailSentTo : MailSentWith
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         if (this.at) {
             return sprintf("was sent email #%d", this.at);

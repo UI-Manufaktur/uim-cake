@@ -37,7 +37,7 @@ class BodyNotEmpty : BodyEmpty
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return "response body is not empty";
     }

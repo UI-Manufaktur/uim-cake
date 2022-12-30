@@ -324,7 +324,7 @@ class ShellDispatcher
      * @param string $shell Optionally the name of a plugin or alias
      * @return string Shell name with plugin prefix
      */
-    protected function _handleAlias(string $shell): string
+    protected string _handleAlias(string $shell)
     {
         $aliased = static::alias($shell);
         if ($aliased) {

@@ -36,7 +36,7 @@ class ContentsNotContain : ContentsBase
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return sprintf("is not in %s", this.output);
     }

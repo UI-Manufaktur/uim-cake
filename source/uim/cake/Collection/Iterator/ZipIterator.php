@@ -96,7 +96,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
      *
      * @return string
      */
-    string serialize(): string
+    string serialize()
     {
         return serialize(_iterators);
     }

@@ -43,7 +43,7 @@ class ContentsContainRow : ContentsRegExp
      *
      * @return string
      */
-    string toString(): string
+    string toString()
     {
         return sprintf("row was in %s", this.output);
     }
@@ -52,7 +52,7 @@ class ContentsContainRow : ContentsRegExp
      * @param mixed $other Expected content
      * @return string
      */
-    string failureDescription($other): string
+    string failureDescription($other)
     {
         return "`" . this.exporter().shortenedExport($other) . "` " . this.toString();
     }
