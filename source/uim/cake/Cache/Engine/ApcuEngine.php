@@ -25,7 +25,7 @@ class ApcuEngine : CacheEngine {
             throw new RuntimeException("The `apcu` extension must be enabled to use ApcuEngine.");
         }
 
-        return parent::init($config);
+        return super.init($config);
     }
 
     /**

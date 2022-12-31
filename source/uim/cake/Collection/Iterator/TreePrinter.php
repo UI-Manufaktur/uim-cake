@@ -71,7 +71,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
     function key() {
         $extractor = _key;
 
-        return $extractor(_fetchCurrent(), parent::key(), this);
+        return $extractor(_fetchCurrent(), super.key(), this);
     }
 
     /**
@@ -82,14 +82,14 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
         $current = _fetchCurrent();
         $spacer = str_repeat(_spacer, this.getDepth());
 
-        return $spacer . $extractor($current, parent::key(), this);
+        return $spacer . $extractor($current, super.key(), this);
     }
 
     /**
      * Advances the cursor one position
      */
     void next() {
-        parent::next();
+        super.next();
         _current = null;
     }
 
@@ -103,6 +103,6 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
             return _current;
         }
 
-        return _current = parent::current();
+        return _current = super.current();
     }
 }

@@ -54,7 +54,7 @@ class StoppableIterator : Collection
      * @return bool
      */
     bool valid() {
-        if (!parent::valid()) {
+        if (!super.valid()) {
             return false;
         }
 

@@ -55,7 +55,7 @@ class ExtractIterator : Collection
     function current() {
         $extractor = _extractor;
 
-        return $extractor(parent::current());
+        return $extractor(super.current());
     }
 
 

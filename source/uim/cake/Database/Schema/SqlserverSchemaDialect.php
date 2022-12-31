@@ -347,9 +347,9 @@ class SqlserverSchemaDialect : SchemaDialect
 
     protected function _foreignOnClause(string $on): string
     {
-        $parent = parent::_foreignOnClause($on);
+        $parent = super._foreignOnClause($on);
 
-        return $parent == "RESTRICT" ? parent::_foreignOnClause(TableSchema::ACTION_NO_ACTION) : $parent;
+        return $parent == "RESTRICT" ? super._foreignOnClause(TableSchema::ACTION_NO_ACTION) : $parent;
     }
 
 

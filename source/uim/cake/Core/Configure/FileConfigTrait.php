@@ -24,8 +24,7 @@ trait FileConfigTrait
      * @throws uim.cake.Core\exceptions.CakeException When files don"t exist or when
      *  files contain ".." as this could lead to abusive reads.
      */
-    protected string _getFilePath(string aKey, bool $checkExists = false)
-    {
+    protected string _getFilePath(string aKey, bool $checkExists = false) {
         if (strpos($key, "..") != false) {
             throw new CakeException("Cannot load/dump configuration files with ../ in them.");
         }

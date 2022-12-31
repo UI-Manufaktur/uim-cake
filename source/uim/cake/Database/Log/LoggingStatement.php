@@ -56,7 +56,7 @@ class LoggingStatement : StatementDecorator
         this.loggedQuery.params = $params ?: _compiledParams;
 
         try {
-            $result = parent::execute($params);
+            $result = super.execute($params);
             this.loggedQuery.took = (int)round((microtime(true) - this.startTime) * 1000, 0);
         } catch (Exception $e) {
             /** @psalm-suppress UndefinedPropertyAssignment */
@@ -75,7 +75,7 @@ class LoggingStatement : StatementDecorator
 
 
     function fetch($type = self::FETCH_TYPE_NUM) {
-        $record = parent::fetch($type);
+        $record = super.fetch($type);
 
         if (this.loggedQuery) {
             this.rowCount();
@@ -86,7 +86,7 @@ class LoggingStatement : StatementDecorator
 
 
     function fetchAll($type = self::FETCH_TYPE_NUM) {
-        $results = parent::fetchAll($type);
+        $results = super.fetchAll($type);
 
         if (this.loggedQuery) {
             this.rowCount();
@@ -98,7 +98,7 @@ class LoggingStatement : StatementDecorator
 
     function rowCount(): int
     {
-        $result = parent::rowCount();
+        $result = super.rowCount();
 
         if (this.loggedQuery) {
             this.loggedQuery.numRows = $result;
@@ -133,7 +133,7 @@ class LoggingStatement : StatementDecorator
      * @param string|int|null $type PDO type or name of configured Type class
      */
     void bindValue($column, $value, $type = "string") {
-        parent::bindValue($column, $value, $type);
+        super.bindValue($column, $value, $type);
 
         if ($type == null) {
             $type = "string";

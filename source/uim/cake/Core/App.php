@@ -103,8 +103,7 @@ class App
      * @param string $suffix Class name suffix
      * @return string Plugin split name of class
      */
-    static string shortName(string $class, string $type, string $suffix = "")
-    {
+    static string shortName(string $class, string $type, string $suffix = "") {
         $class = str_replace("\\", "/", $class);
         $type = "/" . $type . "/";
 

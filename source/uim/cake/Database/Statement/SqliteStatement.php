@@ -46,6 +46,6 @@ class SqliteStatement : StatementDecorator
             return (int)$row[0];
         }
 
-        return parent::rowCount();
+        return super.rowCount();
     }
 }

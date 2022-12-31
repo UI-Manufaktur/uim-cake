@@ -81,8 +81,7 @@ class QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholders
      */
-    string compile(Query $query, ValueBinder aBinder)
-    {
+    string compile(Query $query, ValueBinder aBinder) {
         $sql = "";
         $type = $query.type();
         $query.traverseParts(
@@ -147,8 +146,7 @@ class QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildWithPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildWithPart(array $parts, Query $query, ValueBinder aBinder) {
         $recursive = false;
         $expressions = [];
         foreach ($parts as $cte) {
@@ -171,8 +169,7 @@ class QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildSelectPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildSelectPart(array $parts, Query $query, ValueBinder aBinder) {
         $select = "SELECT%s %s%s";
         if (_orderedUnion && $query.clause("union")) {
             $select = "(SELECT%s %s%s";
@@ -217,8 +214,7 @@ class QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildFromPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildFromPart(array $parts, Query $query, ValueBinder aBinder) {
         $select = " FROM %s";
         $normalized = [];
         $parts = _stringifyExpressions($parts, $binder);
@@ -242,8 +238,7 @@ class QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildJoinPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildJoinPart(array $parts, Query $query, ValueBinder aBinder) {
         $joins = "";
         foreach ($parts as $join) {
             if (!isset($join["table"])) {
@@ -280,8 +275,7 @@ class QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildWindowPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildWindowPart(array $parts, Query $query, ValueBinder aBinder) {
         $windows = [];
         foreach ($parts as $window) {
             $windows[] = $window["name"].sql($binder) . " AS (" . $window["window"].sql($binder) . ")";
@@ -297,8 +291,7 @@ class QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildSetPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildSetPart(array $parts, Query $query, ValueBinder aBinder) {
         $set = [];
         foreach ($parts as $part) {
             if ($part instanceof IExpression) {
@@ -322,8 +315,7 @@ class QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildUnionPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildUnionPart(array $parts, Query $query, ValueBinder aBinder) {
         $parts = array_map(function ($p) use ($binder) {
             $p["query"] = $p["query"].sql($binder);
             $p["query"] = $p["query"][0] == "(" ? trim($p["query"], "()") : $p["query"];
@@ -350,8 +342,7 @@ class QueryCompiler
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string SQL fragment.
      */
-    protected string _buildInsertPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildInsertPart(array $parts, Query $query, ValueBinder aBinder) {
         if (!isset($parts[0])) {
             throw new DatabaseException(
                 "Could not compile insert query. No table was specified. " .
@@ -373,8 +364,7 @@ class QueryCompiler
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string SQL fragment.
      */
-    protected string _buildValuesPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildValuesPart(array $parts, Query $query, ValueBinder aBinder) {
         return implode("", _stringifyExpressions($parts, $binder));
     }
 
@@ -386,8 +376,7 @@ class QueryCompiler
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string SQL fragment.
      */
-    protected string _buildUpdatePart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildUpdatePart(array $parts, Query $query, ValueBinder aBinder) {
         $table = _stringifyExpressions($parts, $binder);
         $modifiers = _buildModifierPart($query.clause("modifier"), $query, $binder);
 
@@ -402,8 +391,7 @@ class QueryCompiler
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string SQL fragment.
      */
-    protected string _buildModifierPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildModifierPart(array $parts, Query $query, ValueBinder aBinder) {
         if ($parts == []) {
             return "";
         }

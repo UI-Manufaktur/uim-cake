@@ -76,10 +76,10 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
     #[\ReturnTypeWillChange]
     function current() {
         if (_callback == null) {
-            return parent::current();
+            return super.current();
         }
 
-        return call_user_func_array(_callback, parent::current());
+        return call_user_func_array(_callback, super.current());
     }
 
     /**

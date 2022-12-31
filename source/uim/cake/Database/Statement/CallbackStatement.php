@@ -38,7 +38,7 @@ class CallbackStatement : StatementDecorator
      * @param string|int $type Either "num" or "assoc" to indicate the result format you would like.
      * @return array|false
      */
-    function fetch($type = parent::FETCH_TYPE_NUM) {
+    function fetch($type = super.FETCH_TYPE_NUM) {
         $callback = _callback;
         $row = _statement.fetch($type);
 
@@ -50,7 +50,7 @@ class CallbackStatement : StatementDecorator
      *
      * Each row in the result will be processed by the callback when it is not `false.
      */
-    function fetchAll($type = parent::FETCH_TYPE_NUM) {
+    function fetchAll($type = super.FETCH_TYPE_NUM) {
         $results = _statement.fetchAll($type);
 
         return $results != false ? array_map(_callback, $results) : false;

@@ -40,7 +40,7 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      */
     function getContainer(): DefinitionIContainer
     {
-        $container = parent::getContainer();
+        $container = super.getContainer();
 
         if (!($container instanceof IContainer)) {
             $message = sprintf(

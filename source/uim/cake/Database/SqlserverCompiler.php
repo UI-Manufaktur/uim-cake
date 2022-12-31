@@ -41,8 +41,7 @@ class SqlserverCompiler : QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildWithPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildWithPart(array $parts, Query $query, ValueBinder aBinder) {
         $expressions = [];
         foreach ($parts as $cte) {
             $expressions[] = $cte.sql($binder);
@@ -62,8 +61,7 @@ class SqlserverCompiler : QueryCompiler
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildInsertPart(array $parts, Query $query, ValueBinder aBinder)
-    {
+    protected string _buildInsertPart(array $parts, Query $query, ValueBinder aBinder) {
         if (!isset($parts[0])) {
             throw new DatabaseException(
                 "Could not compile insert query. No table was specified. " .
@@ -88,8 +86,7 @@ class SqlserverCompiler : QueryCompiler
      * @param int $limit the limit clause
      * @param uim.cake.databases.Query $query The query that is being compiled
      */
-    protected string _buildLimitPart(int $limit, Query $query)
-    {
+    protected string _buildLimitPart(int $limit, Query $query) {
         if ($query.clause("offset") == null) {
             return "";
         }

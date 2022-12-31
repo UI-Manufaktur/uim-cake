@@ -76,7 +76,7 @@ class DateType : DateTimeType
      */
     function marshal($value): ?DateTimeInterface
     {
-        $date = parent::marshal($value);
+        $date = super.marshal($value);
         /** @psalm-var \DateTime|\DateTimeImmutable|null $date */
         if ($date && !$date instanceof I18nDateTimeInterface) {
             // Clear time manually when I18n types aren"t available and raw DateTime used

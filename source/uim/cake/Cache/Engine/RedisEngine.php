@@ -66,7 +66,7 @@ class RedisEngine : CacheEngine {
             $config["server"] = $config["host"];
         }
 
-        parent::init($config);
+        super.init($config);
 
         return _connect();
     }

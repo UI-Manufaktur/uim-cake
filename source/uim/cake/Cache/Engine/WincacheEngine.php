@@ -31,7 +31,7 @@ class WincacheEngine : CacheEngine
             throw new RuntimeException("The `wincache` extension must be enabled to use WincacheEngine.");
         }
 
-        parent::init($config);
+        super.init($config);
 
         return true;
     }

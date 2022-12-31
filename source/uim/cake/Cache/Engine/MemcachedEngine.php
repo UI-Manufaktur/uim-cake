@@ -106,7 +106,7 @@ class MemcachedEngine : CacheEngine
             _serializers["msgpack"] = Memcached::SERIALIZER_MSGPACK;
         }
 
-        parent::init($config);
+        super.init($config);
 
         if (!empty($config["host"])) {
             if (empty($config["port"])) {

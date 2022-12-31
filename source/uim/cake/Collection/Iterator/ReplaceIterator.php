@@ -52,7 +52,7 @@ class ReplaceIterator : Collection
     function current() {
         $callback = _callback;
 
-        return $callback(parent::current(), this.key(), _innerIterator);
+        return $callback(super.current(), this.key(), _innerIterator);
     }
 
 

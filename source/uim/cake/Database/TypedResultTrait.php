@@ -14,8 +14,7 @@ trait TypedResultTrait
     /**
      * Gets the type of the value this object will generate.
      */
-    string getReturnType()
-    {
+    string getReturnType() {
         return _returnType;
     }
 

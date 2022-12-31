@@ -252,7 +252,7 @@ class Sqlserver : Driver
                 return _connection.getAttribute(PDO::ATTR_DRIVER_NAME) != "odbc";
         }
 
-        return parent::supports($feature);
+        return super.supports($feature);
     }
 
 

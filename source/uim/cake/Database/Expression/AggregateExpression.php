@@ -148,17 +148,16 @@ class AggregateExpression : FunctionExpression : WindowInterface
     }
 
 
-    string sql(ValueBinder aBinder)
-    {
-        $sql = parent::sql($binder);
+    string sql(ValueBinder aBinder) {
+        $sql = super.sql(aBinder);
         if (this.filter != null) {
-            $sql .= " FILTER (WHERE " . this.filter.sql($binder) . ")";
+            $sql .= " FILTER (WHERE " . this.filter.sql(aBinder) . ")";
         }
         if (this.window != null) {
             if (this.window.isNamedOnly()) {
-                $sql .= " OVER " . this.window.sql($binder);
+                $sql .= " OVER " . this.window.sql(aBinder);
             } else {
-                $sql .= " OVER (" . this.window.sql($binder) . ")";
+                $sql .= " OVER (" . this.window.sql(aBinder) . ")";
             }
         }
 
@@ -167,7 +166,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
 
 
     O traverse(this O)(Closure $callback) {
-        parent::traverse($callback);
+        super.traverse($callback);
         if (this.filter != null) {
             $callback(this.filter);
             this.filter.traverse($callback);
@@ -183,7 +182,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
 
     function count(): int
     {
-        $count = parent::count();
+        $count = super.count();
         if (this.window != null) {
             $count = $count + 1;
         }
@@ -191,11 +190,9 @@ class AggregateExpression : FunctionExpression : WindowInterface
         return $count;
     }
 
-    /**
-     * Clone this object and its subtree of expressions.
-     */
+    // Clone this object and its subtree of expressions.
     void __clone() {
-        parent::__clone();
+        super.__clone();
         if (this.filter != null) {
             this.filter = clone this.filter;
         }

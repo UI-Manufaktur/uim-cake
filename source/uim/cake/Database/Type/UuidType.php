@@ -21,7 +21,7 @@ class UuidType : StringType
             return null;
         }
 
-        return parent::toDatabase($value, $driver);
+        return super.toDatabase($value, $driver);
     }
 
     /**

@@ -96,7 +96,7 @@ class PDOStatement : StatementDecorator
      * @return mixed Result array containing columns and values or false if no results
      * are left
      */
-    function fetch($type = parent::FETCH_TYPE_NUM) {
+    function fetch($type = super.FETCH_TYPE_NUM) {
         if ($type == static::FETCH_TYPE_NUM) {
             return _statement.fetch(PDO::FETCH_NUM);
         }
@@ -132,7 +132,7 @@ class PDOStatement : StatementDecorator
      * @return array|false list of all results from database for this statement, false on failure
      * @psalm-assert string $type
      */
-    function fetchAll($type = parent::FETCH_TYPE_NUM) {
+    function fetchAll($type = super.FETCH_TYPE_NUM) {
         if ($type == static::FETCH_TYPE_NUM) {
             return _statement.fetchAll(PDO::FETCH_NUM);
         }

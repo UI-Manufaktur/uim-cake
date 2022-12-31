@@ -169,7 +169,7 @@ class Postgres : Driver
                 return false;
         }
 
-        return parent::supports($feature);
+        return super.supports($feature);
     }
 
 

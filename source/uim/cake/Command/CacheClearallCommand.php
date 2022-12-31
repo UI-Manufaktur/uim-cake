@@ -27,7 +27,7 @@ class CacheClearallCommand : Command {
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser = parent::buildOptionParser($parser);
+        $parser = super.buildOptionParser($parser);
         $parser.setDescription("Clear all data in all configured cache engines.");
 
         return $parser;

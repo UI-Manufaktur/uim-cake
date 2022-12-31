@@ -64,7 +64,7 @@ class InsertIterator : Collection
      * Advances the cursor to the next record
      */
     void next() {
-        parent::next();
+        super.next();
         if (_validValues) {
             _values.next();
         }
@@ -79,7 +79,7 @@ class InsertIterator : Collection
      */
     #[\ReturnTypeWillChange]
     function current() {
-        $row = parent::current();
+        $row = super.current();
 
         if (!_validValues) {
             return $row;
@@ -102,7 +102,7 @@ class InsertIterator : Collection
      * Resets the collection pointer.
      */
     void rewind() {
-        parent::rewind();
+        super.rewind();
         _values.rewind();
         _validValues = _values.valid();
     }

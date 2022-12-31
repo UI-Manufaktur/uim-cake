@@ -190,14 +190,12 @@ class Sqlite : Driver
     }
 
 
-    string disableForeignKeySQL()
-    {
+    string disableForeignKeySQL() {
         return "PRAGMA foreign_keys = OFF";
     }
 
 
-    string enableForeignKeySQL()
-    {
+    string enableForeignKeySQL() {
         return "PRAGMA foreign_keys = ON";
     }
 
@@ -217,7 +215,7 @@ class Sqlite : Driver
                 return true;
         }
 
-        return parent::supports($feature);
+        return super.supports($feature);
     }
 
 

@@ -67,7 +67,7 @@ class FileEngine : CacheEngine
      * @return bool True if the engine has been successfully initialized, false if not
      */
     bool init(array $config = []) {
-        parent::init($config);
+        super.init($config);
 
         if (_config["path"] == null) {
             _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
@@ -408,7 +408,7 @@ class FileEngine : CacheEngine
 
 
     protected string _key($key) {
-        $key = parent::_key($key);
+        $key = super._key($key);
 
         return rawurlencode($key);
     }

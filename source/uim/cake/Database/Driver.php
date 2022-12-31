@@ -139,8 +139,7 @@ abstract class Driver : DriverInterface
     /**
      * Returns connected server version.
      */
-    string version()
-    {
+    string version() {
         if (_version == null) {
             this.connect();
             _version = (string)_connection.getAttribute(PDO::ATTR_SERVER_VERSION);
@@ -257,8 +256,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    string quote($value, $type = PDO::PARAM_STR)
-    {
+    string quote($value, $type = PDO::PARAM_STR) {
         this.connect();
 
         return _connection.quote((string)$value, $type);
@@ -287,8 +285,7 @@ abstract class Driver : DriverInterface
     abstract string quoteIdentifier(string $identifier);
 
 
-    string schemaValue($value)
-    {
+    string schemaValue($value) {
         if ($value == null) {
             return "NULL";
         }
@@ -321,8 +318,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    string schema()
-    {
+    string schema() {
         return _config["schema"];
     }
 

@@ -30,8 +30,7 @@ class ContentsEmpty : ContentsBase
      *
      * @param mixed $other Value
      */
-    protected string failureDescription($other)
-    {
+    protected string failureDescription($other) {
         return this.toString();
     }
 }

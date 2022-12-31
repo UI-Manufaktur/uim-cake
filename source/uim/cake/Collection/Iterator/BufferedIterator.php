@@ -88,7 +88,7 @@ class BufferedIterator : Collection : Countable, Serializable
     void rewind() {
         if (_index == 0 && !_started) {
             _started = true;
-            parent::rewind();
+            super.rewind();
 
             return;
         }
@@ -111,11 +111,11 @@ class BufferedIterator : Collection : Countable, Serializable
             return true;
         }
 
-        $valid = parent::valid();
+        $valid = super.valid();
 
         if ($valid) {
-            _current = parent::current();
-            _key = parent::key();
+            _current = super.current();
+            _key = super.key();
             _buffer.push([
                 "key": _key,
                 "value": _current,
@@ -138,7 +138,7 @@ class BufferedIterator : Collection : Countable, Serializable
             return;
         }
         if (!_finished) {
-            parent::next();
+            super.next();
         }
     }
 

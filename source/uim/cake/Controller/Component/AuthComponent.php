@@ -873,7 +873,7 @@ class AuthComponent : Component : EventDispatcherInterface
             return this.storage().getConfig('key');
         }
 
-        return parent::__get($name);
+        return super.__get($name);
     }
 
     /**

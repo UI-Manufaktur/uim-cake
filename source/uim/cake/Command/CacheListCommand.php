@@ -24,7 +24,7 @@ class CacheListCommand : Command {
      */
     function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
     {
-        $parser = parent::buildOptionParser($parser);
+        $parser = super.buildOptionParser($parser);
         $parser.setDescription("Show a list of configured caches.");
 
         return $parser;
