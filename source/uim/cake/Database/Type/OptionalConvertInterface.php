@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         3.2.0
-  */module uim.cake.databases.Type;
+module uim.cake.databases.Type;
 
 /**
  * An interface used by Type objects to signal whether the casting

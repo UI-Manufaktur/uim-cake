@@ -9,7 +9,7 @@
  *
 
  * @link          https://book.cakephp.org/4/en/development/errors.html#error-exception-configuration
- * @since         3.2.0
+
   */module uim.cake.consoles.Exception;
 
 /**

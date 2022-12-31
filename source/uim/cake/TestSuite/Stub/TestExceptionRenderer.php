@@ -1,11 +1,4 @@
-
-
-
- *
-
-
-
-  */module uim.cake.TestSuite\Stub;
+module uim.cake.TestSuite\Stub;
 
 import uim.cake.errors.ExceptionRendererInterface;
 use LogicException;

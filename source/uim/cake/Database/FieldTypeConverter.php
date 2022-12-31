@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         3.2.0
-  */module uim.cake.Database;
+module uim.cake.Database;
 
 import uim.cake.databases.Type\BatchCastingInterface;
 import uim.cake.databases.Type\OptionalConvertInterface;

@@ -1,11 +1,4 @@
-
-
-
- *
-
-
-
-  */module uim.cake.View\Form;
+module uim.cake.View\Form;
 
 import uim.cake.Collection\Collection;
 import uim.cake.datasources.EntityInterface;

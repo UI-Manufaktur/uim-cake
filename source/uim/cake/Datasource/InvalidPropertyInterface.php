@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         3.2.0
-  */module uim.cake.Datasource;
+module uim.cake.Datasource;
 
 /**
  * Describes the methods that any class representing a data storage should
