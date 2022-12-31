@@ -8,14 +8,15 @@ import uim.cake
  * one is the preferred one. This is useful when trying to migrate an
  * existing database of users from one password type to another.
  */
-class FallbackPasswordHasher : AbstractPasswordHasher {
+class FallbackPasswordHasher : AbstractPasswordHasher
+{
     /**
      * Default config for this object.
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [
-        "hashers":[],
+    protected $_defaultConfig = [
+        "hashers": [],
     ];
 
     /**
@@ -23,22 +24,22 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      *
      * @var array<uim.cake.Auth\AbstractPasswordHasher>
      */
-    protected _hashers = [];
+    protected $_hashers = [];
 
     /**
      * Constructor
      *
-     * @param array<string, mixed> myConfig configuration options for this object. Requires the
+     * @param array<string, mixed> $config configuration options for this object. Requires the
      * `hashers` key to be present in the array with a list of other hashers to be
      * used.
      */
-    this(array myConfig = []) {
-        super.this(myConfig);
-        foreach (_config["hashers"] as myKey: myHasher) {
-            if (is_array(myHasher) && !isset(myHasher["className"])) {
-                myHasher["className"] = myKey;
+    this(array $config = []) {
+        super(($config);
+        foreach (_config["hashers"] as $key: $hasher) {
+            if (is_array($hasher) && !isset($hasher["className"])) {
+                $hasher["className"] = $key;
             }
-            _hashers[] = PasswordHasherFactory::build(myHasher);
+            _hashers[] = PasswordHasherFactory::build($hasher);
         }
     }
 
@@ -47,11 +48,11 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      *
      * Uses the first password hasher in the list to generate the hash
      *
-     * @param string myPassword Plain text password to hash.
+     * @param string $password Plain text password to hash.
      * @return string|false Password hash or false
      */
-    function hash(string myPassword) {
-        return _hashers[0].hash(myPassword);
+    function hash(string $password) {
+        return _hashers[0].hash($password);
     }
 
     /**
@@ -60,13 +61,13 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * This will iterate over all configured hashers until one of them returns
      * true.
      *
-     * @param string myPassword Plain text password to hash.
-     * @param string myHashedPassword Existing hashed password.
+     * @param string $password Plain text password to hash.
+     * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    bool check(string myPassword, string myHashedPassword) {
-        foreach (_hashers as myHasher) {
-            if (myHasher.check(myPassword, myHashedPassword)) {
+    bool check(string $password, string $hashedPassword) {
+        foreach (_hashers as $hasher) {
+            if ($hasher.check($password, $hashedPassword)) {
                 return true;
             }
         }
@@ -78,9 +79,10 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * Returns true if the password need to be rehashed, with the first hasher present
      * in the list of hashers
      *
-     * @param string myPassword The password to verify
+     * @param string $password The password to verify
+     * @return bool
      */
-    bool needsRehash(string myPassword) {
-        return _hashers[0].needsRehash(myPassword);
+    bool needsRehash(string $password) {
+        return _hashers[0].needsRehash($password);
     }
 }

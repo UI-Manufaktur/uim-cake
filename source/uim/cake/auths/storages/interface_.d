@@ -26,7 +26,6 @@ interface IStorage
 
     /**
      * Write user record.
-     *
      * @param mixed $user array or \ArrayAccess User record.
      */
     void write($user);
@@ -37,8 +36,7 @@ interface IStorage
     /**
      * Get/set redirect URL.
      *
-     * @param mixed $url Redirect URL. If `null` returns current URL. If `false`
-     *   deletes currently set URL.
+     * @param mixed $url Redirect URL. If `null` returns current URL. If `false` deletes currently set URL.
      * @return array|string|null
      */
     function redirectUrl($url = null);

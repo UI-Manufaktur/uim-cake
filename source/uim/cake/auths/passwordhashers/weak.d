@@ -3,10 +3,10 @@ module uim.cake.auth;
 @safe:
 import uim.cake
 
-/* import uim.cake.core.Configure;
-import uim.cake.errors\Debugger;
-import uim.cakeilities.Security;
- */
+import uim.cake.core.Configure;
+import uim.cake.errors.Debugger;
+import uim.cake.utilities.Security;
+
 /**
  * Password hashing class that use weak hashing algorithms. This class is
  * intended only to be used with legacy databases where passwords have
@@ -19,32 +19,33 @@ class WeakPasswordHasher : AbstractPasswordHasher
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [
-        "hashType":null,
+    protected $_defaultConfig = [
+        "hashType": null,
     ];
 
 
-    this(array myConfig = []) {
+    this(array $config = []) {
         if (Configure::read("debug")) {
             Debugger::checkSecurityKeys();
         }
 
-        super.this(myConfig);
+        super(($config);
     }
 
 
-    function hash(string myPassword) {
-        return Security::hash(myPassword, _config["hashType"], true);
+    function hash(string $password) {
+        return Security::hash($password, _config["hashType"], true);
     }
 
     /**
      * Check hash. Generate hash for user provided password and check against existing hash.
      *
-     * @param string myPassword Plain text password to hash.
-     * @param string myHashedPassword Existing hashed password.
+     * @param string $password Plain text password to hash.
+     * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    bool check(string myPassword, string myHashedPassword) {
-        return myHashedPassword == this.hash(myPassword);
+    function check(string $password, string $hashedPassword): bool
+    {
+        return $hashedPassword == this.hash($password);
     }
 }
