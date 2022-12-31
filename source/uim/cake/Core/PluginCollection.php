@@ -113,8 +113,7 @@ class PluginCollection : Iterator, Countable
      * @throws uim.cake.Core\exceptions.MissingPluginException when a plugin path cannot be resolved.
      * @internal
      */
-    string findPath(string aName)
-    {
+    string findPath(string aName) {
         // Ensure plugin config is loaded each time. This is necessary primarily
         // for testing because the Configure::clear() call in TestCase::tearDown()
         // wipes out all configuration including plugin paths config.
@@ -274,8 +273,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Part of Iterator Interface
      */
-    string key()
-    {
+    string key() {
         return this.names[this.positions[this.loopDepth]];
     }
 

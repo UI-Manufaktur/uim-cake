@@ -407,8 +407,7 @@ class FileEngine : CacheEngine
     }
 
 
-    protected string _key($key)
-    {
+    protected string _key($key) {
         $key = parent::_key($key);
 
         return rawurlencode($key);

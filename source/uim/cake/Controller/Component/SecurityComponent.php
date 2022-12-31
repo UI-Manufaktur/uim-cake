@@ -232,8 +232,7 @@ class SecurityComponent : Component
      * @throws uim.cake.controllers.exceptions.SecurityException
      * @return string fields token
      */
-    protected string _validToken(Controller $controller)
-    {
+    protected string _validToken(Controller $controller) {
         $check = $controller.getRequest().getData();
 
         $message = "\"%s\" was not found in request data.";
@@ -366,8 +365,7 @@ class SecurityComponent : Component
      *
      * @param array $data Data array
      */
-    protected string _unlocked(array $data)
-    {
+    protected string _unlocked(array $data) {
         return urldecode($data["_Token"]["unlocked"]);
     }
 
@@ -376,8 +374,7 @@ class SecurityComponent : Component
      *
      * @param array $data Data array
      */
-    protected string _sortedUnlocked(array $data)
-    {
+    protected string _sortedUnlocked(array $data) {
         $unlocked = _unlocked($data);
         $unlocked = explode("|", $unlocked);
         sort($unlocked, SORT_STRING);
@@ -392,8 +389,7 @@ class SecurityComponent : Component
      * @param array<string> $hashParts Elements used to generate the Token hash
      * @return string Message explaining why the tokens are not matching
      */
-    protected string _debugPostTokenNotMatching(Controller $controller, array $hashParts)
-    {
+    protected string _debugPostTokenNotMatching(Controller $controller, array $hashParts) {
         $messages = [];
         $expectedParts = json_decode(urldecode($controller.getRequest().getData("_Token.debug")), true);
         if (!is_array($expectedParts) || count($expectedParts) != 3) {

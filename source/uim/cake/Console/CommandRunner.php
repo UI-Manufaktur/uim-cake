@@ -271,8 +271,7 @@ class CommandRunner : EventDispatcherInterface
      * @return string The resolved name.
      * @throws uim.cake.consoles.exceptions.MissingOptionException
      */
-    protected string resolveName(CommandCollection $commands, ConsoleIo $io, ?string aName)
-    {
+    protected string resolveName(CommandCollection $commands, ConsoleIo $io, ?string aName) {
         if (!$name) {
             $io.err("<error>No command provided. Choose one of the available commands.</error>", 2);
             $name = "help";

@@ -147,8 +147,7 @@ class Connection : ConnectionInterface
     }
 
 
-    string configName()
-    {
+    string configName() {
         return _config['name'] ?? '';
     }
 
@@ -309,8 +308,7 @@ class Connection : ConnectionInterface
      * @param uim.cake.databases.Query $query The query to be compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder
      */
-    string compileQuery(Query $query, ValueBinder $binder)
-    {
+    string compileQuery(Query $query, ValueBinder $binder) {
         return this.getDriver().compileQuery($query, $binder)[1];
     }
 
@@ -719,8 +717,7 @@ class Connection : ConnectionInterface
      * @param uim.cake.databases.TypeInterface|string|int $type Type to be used for determining kind of quoting to perform
      * @return string Quoted value
      */
-    string quote($value, $type = 'string')
-    {
+    string quote($value, $type = 'string') {
         [$value, $type] = this.cast($value, $type);
 
         return _driver.quote($value, $type);
@@ -746,8 +743,7 @@ class Connection : ConnectionInterface
      *
      * @param string $identifier The identifier to quote.
      */
-    string quoteIdentifier(string $identifier)
-    {
+    string quoteIdentifier(string $identifier) {
         return _driver.quoteIdentifier($identifier);
     }
 

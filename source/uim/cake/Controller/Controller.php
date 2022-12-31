@@ -352,8 +352,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @return string
 
      */
-    string getName()
-    {
+    string getName() {
         return this.name;
     }
 
@@ -811,8 +810,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Get the templatePath based on controller name and request prefix.
      *
      */
-    protected string _templatePath()
-    {
+    protected string _templatePath() {
         $templatePath = this.name;
         if (this.request.getParam("prefix")) {
             $prefixes = array_map(
@@ -833,8 +831,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *   Careful with trusting external sources.
      * @return string Referring URL
      */
-    string referer($default = "/", bool $local = true)
-    {
+    string referer($default = "/", bool $local = true) {
         $referer = this.request.referer($local);
         if ($referer == null) {
             $url = Router::url($default, !$local);

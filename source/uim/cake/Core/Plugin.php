@@ -24,8 +24,7 @@ class Plugin
      * @throws uim.cake.Core\exceptions.MissingPluginException If the folder for plugin was not found
      *   or plugin has not been loaded.
      */
-    static string path(string aName)
-    {
+    static string path(string aName) {
         $plugin = static::getCollection().get($name);
 
         return $plugin.getPath();
@@ -38,8 +37,7 @@ class Plugin
      * @return string Path to the plugin folder containing class files.
      * @throws uim.cake.Core\exceptions.MissingPluginException If plugin has not been loaded.
      */
-    static string classPath(string aName)
-    {
+    static string classPath(string aName) {
         $plugin = static::getCollection().get($name);
 
         return $plugin.getClassPath();
@@ -52,8 +50,7 @@ class Plugin
      * @return string Path to the plugin folder containing config files.
      * @throws uim.cake.Core\exceptions.MissingPluginException If plugin has not been loaded.
      */
-    static string configPath(string aName)
-    {
+    static string configPath(string aName) {
         $plugin = static::getCollection().get($name);
 
         return $plugin.getConfigPath();
@@ -66,8 +63,7 @@ class Plugin
      * @return string Path to the plugin folder containing template files.
      * @throws uim.cake.Core\exceptions.MissingPluginException If plugin has not been loaded.
      */
-    static string templatePath(string aName)
-    {
+    static string templatePath(string aName) {
         $plugin = static::getCollection().get($name);
 
         return $plugin.getTemplatePath();

@@ -148,8 +148,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
     /**
      * @param array<string> $names Names
      */
-    protected string getShortestName(array $names)
-    {
+    protected string getShortestName(array $names) {
         if (count($names) <= 1) {
             return array_shift($names);
         }

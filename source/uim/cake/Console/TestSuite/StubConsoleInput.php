@@ -52,8 +52,7 @@ class StubConsoleInput : ConsoleInput
      *
      * @return string The value of the reply
      */
-    string read()
-    {
+    string read() {
         this.currentIndex += 1;
 
         if (!isset(this.replies[this.currentIndex])) {
