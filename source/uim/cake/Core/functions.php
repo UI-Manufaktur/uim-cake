@@ -169,12 +169,12 @@ if (!function_exists("env")) {
      * IIS, or SCRIPT_NAME in CGI mode). Also exposes some additional custom
      * environment information.
      *
-     * @param string $key Environment variable name.
+     * @param string aKey Environment variable name.
      * @param string|bool|null $default Specify a default value in case the environment variable is not defined.
      * @return string|bool|null Environment variable setting.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#env
      */
-    function env(string $key, $default = null) {
+    function env(string aKey, $default = null) {
         if ($key == "HTTPS") {
             if (isset($_SERVER["HTTPS"])) {
                 return !empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off";

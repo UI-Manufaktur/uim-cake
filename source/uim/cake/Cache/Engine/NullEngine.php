@@ -36,12 +36,12 @@ class NullEngine : CacheEngine
     }
 
 
-    function increment(string $key, int $offset = 1) {
+    function increment(string aKey, int $offset = 1) {
         return 1;
     }
 
 
-    function decrement(string $key, int $offset = 1) {
+    function decrement(string aKey, int $offset = 1) {
         return 0;
     }
 

@@ -64,10 +64,10 @@ class Package
     /**
      * Adds one message for this package.
      *
-     * @param string $key the key of the message
+     * @param string aKey the key of the message
      * @param array|string $message the actual message
      */
-    void addMessage(string $key, $message): void
+    void addMessage(string aKey, $message): void
     {
         this.messages[$key] = $message;
     }
@@ -95,10 +95,10 @@ class Package
     /**
      * Gets the message of the given key for this package.
      *
-     * @param string $key the key of the message to return
+     * @param string aKey the key of the message to return
      * @return array|string|false The message translation, or false if not found.
      */
-    function getMessage(string $key) {
+    function getMessage(string aKey) {
         return this.messages[$key] ?? false;
     }
 

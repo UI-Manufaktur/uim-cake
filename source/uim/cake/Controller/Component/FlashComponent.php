@@ -72,7 +72,7 @@ class FlashComponent : Component
     /**
      * Proxy method to FlashMessage instance.
      *
-     * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
+     * @param array<string, mixed>|string aKey The key to set, or a complete array of configs.
      * @param mixed|null $value The value to set.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
@@ -91,25 +91,25 @@ class FlashComponent : Component
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    function getConfig(?string $key = null, $default = null) {
+    function getConfig(?string aKey = null, $default = null) {
         return this.flash().getConfig($key, $default);
     }
 
     /**
      * Proxy method to FlashMessage instance.
      *
-     * @param string $key The key to get.
+     * @param string aKey The key to get.
      * @return mixed Configuration data at the named key
      * @throws \InvalidArgumentException
      */
-    function getConfigOrFail(string $key) {
+    function getConfigOrFail(string aKey) {
         return this.flash().getConfigOrFail($key);
     }
 
     /**
      * Proxy method to FlashMessage instance.
      *
-     * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
+     * @param array<string, mixed>|string aKey The key to set, or a complete array of configs.
      * @param mixed|null $value The value to set.
      * @return this
      */

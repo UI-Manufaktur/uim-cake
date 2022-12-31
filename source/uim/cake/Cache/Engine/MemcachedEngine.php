@@ -281,7 +281,7 @@ class MemcachedEngine : CacheEngine
      * times greater than 30 days in the future. Any duration greater than 30 days
      * will be treated as real Unix time value rather than an offset from current time.
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $value Data to be cached
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
@@ -317,7 +317,7 @@ class MemcachedEngine : CacheEngine
     /**
      * Read a key from the cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
@@ -359,29 +359,29 @@ class MemcachedEngine : CacheEngine
     /**
      * Increments the value of an integer cached key
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string $key, int $offset = 1) {
+    function increment(string aKey, int $offset = 1) {
         return _Memcached.increment(_key($key), $offset);
     }
 
     /**
      * Decrements the value of an integer cached key
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string $key, int $offset = 1) {
+    function decrement(string aKey, int $offset = 1) {
         return _Memcached.decrement(_key($key), $offset);
     }
 
     /**
      * Delete a key from the cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t
      *   exist or couldn"t be removed.
      */
@@ -428,11 +428,11 @@ class MemcachedEngine : CacheEngine
     /**
      * Add a key to the cache if it does not already exist.
      *
-     * @param string $key Identifier for the data.
+     * @param string aKey Identifier for the data.
      * @param mixed $value Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      */
-    bool add(string $key, $value) {
+    bool add(string aKey, $value) {
         $duration = _config["duration"];
         $key = _key($key);
 

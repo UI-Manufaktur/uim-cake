@@ -33,7 +33,7 @@ class QueryCacher
     /**
      * Constructor.
      *
-     * @param \Closure|string $key The key or function to generate a key.
+     * @param \Closure|string aKey The key or function to generate a key.
      * @param \Psr\SimpleCache\ICache|string $config The cache config name or cache engine instance.
      * @throws \RuntimeException
      */

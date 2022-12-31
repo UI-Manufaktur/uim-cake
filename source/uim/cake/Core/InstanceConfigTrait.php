@@ -47,7 +47,7 @@ trait InstanceConfigTrait
      * this.setConfig(["one": "value", "another": "value"]);
      * ```
      *
-     * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
+     * @param array<string, mixed>|string aKey The key to set, or a complete array of configs.
      * @param mixed|null $value The value to set.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
@@ -97,7 +97,7 @@ trait InstanceConfigTrait
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    function getConfig(?string $key = null, $default = null) {
+    function getConfig(?string aKey = null, $default = null) {
         if (!_configInitialized) {
             _config = _defaultConfig;
             _configInitialized = true;
@@ -113,11 +113,11 @@ trait InstanceConfigTrait
      *
      * The config value for this key must exist, it can never be null.
      *
-     * @param string $key The key to get.
+     * @param string aKey The key to get.
      * @return mixed Configuration data at the named key
      * @throws \InvalidArgumentException
      */
-    function getConfigOrFail(string $key) {
+    function getConfigOrFail(string aKey) {
         $config = this.getConfig($key);
         if ($config == null) {
             throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", $key));
@@ -148,7 +148,7 @@ trait InstanceConfigTrait
      * this.configShallow(["one": "value", "another": "value"]);
      * ```
      *
-     * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
+     * @param array<string, mixed>|string aKey The key to set, or a complete array of configs.
      * @param mixed|null $value The value to set.
      * @return this
      */
@@ -169,7 +169,7 @@ trait InstanceConfigTrait
      * @param string|null $key Key to read.
      * @return mixed
      */
-    protected function _configRead(?string $key) {
+    protected function _configRead(?string aKey) {
         if ($key == null) {
             return _config;
         }
@@ -195,7 +195,7 @@ trait InstanceConfigTrait
     /**
      * Writes a config key.
      *
-     * @param array<string, mixed>|string $key Key to write to.
+     * @param array<string, mixed>|string aKey Key to write to.
      * @param mixed $value Value to write.
      * @param string|bool $merge True to merge recursively, "shallow" for simple merge,
      *   false to overwrite, defaults to false.
@@ -253,11 +253,11 @@ trait InstanceConfigTrait
     /**
      * Deletes a single config key.
      *
-     * @param string $key Key to delete.
+     * @param string aKey Key to delete.
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
      */
-    protected void _configDelete(string $key) {
+    protected void _configDelete(string aKey) {
         if (strpos($key, ".") == false) {
             unset(_config[$key]);
 

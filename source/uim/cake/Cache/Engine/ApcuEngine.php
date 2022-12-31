@@ -31,7 +31,7 @@ class ApcuEngine : CacheEngine {
     /**
      * Write data for key into cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $value Data to be cached
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
@@ -49,7 +49,7 @@ class ApcuEngine : CacheEngine {
     /**
      * Read a key from the cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $default Default value in case the cache misses.
      * @return mixed The cached data, or default if the data doesn"t exist,
      *   has expired, or if there was an error fetching it
@@ -67,12 +67,12 @@ class ApcuEngine : CacheEngine {
     /**
      * Increments the value of an integer cached key
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      * @link https://secure.php.net/manual/en/function.apcu-inc.php
      */
-    function increment(string $key, int $offset = 1) {
+    function increment(string aKey, int $offset = 1) {
         $key = _key($key);
 
         return apcu_inc($key, $offset);
@@ -81,12 +81,12 @@ class ApcuEngine : CacheEngine {
     /**
      * Decrements the value of an integer cached key
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      * @link https://secure.php.net/manual/en/function.apcu-dec.php
      */
-    function decrement(string $key, int $offset = 1) {
+    function decrement(string aKey, int $offset = 1) {
         $key = _key($key);
 
         return apcu_dec($key, $offset);
@@ -95,7 +95,7 @@ class ApcuEngine : CacheEngine {
     /**
      * Delete a key from the cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
@@ -137,12 +137,12 @@ class ApcuEngine : CacheEngine {
      * Write data for key into cache if it doesn"t exist already.
      * If it already exists, it fails and returns false.
      *
-     * @param string $key Identifier for the data.
+     * @param string aKey Identifier for the data.
      * @param mixed $value Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      * @link https://secure.php.net/manual/en/function.apcu-add.php
      */
-    bool add(string $key, $value) {
+    bool add(string aKey, $value) {
         $key = _key($key);
         $duration = _config["duration"];
 

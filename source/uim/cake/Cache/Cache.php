@@ -228,12 +228,12 @@ class Cache {
      * Cache::write("cached_data", $data, "long_term");
      * ```
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $value Data to be cached - anything except a resource
      * @param string $config Optional string configuration name to write to. Defaults to "default"
      * @return bool True if the data was successfully cached, false on failure
      */
-    static bool write(string $key, $value, string $config = "default") {
+    static bool write(string aKey, $value, string $config = "default") {
         if (is_resource($value)) {
             return false;
         }
@@ -298,12 +298,12 @@ class Cache {
      * Cache::read("my_data", "long_term");
      * ```
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param string $config optional name of the configuration to use. Defaults to "default"
      * @return mixed The cached data, or null if the data doesn"t exist, has expired,
      *  or if there was an error fetching it.
      */
-    static function read(string $key, string $config = "default") {
+    static function read(string aKey, string $config = "default") {
         return static::pool($config).get($key);
     }
 
@@ -338,14 +338,14 @@ class Cache {
     /**
      * Increment a number under the key and return incremented value.
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to add
      * @param string $config Optional string configuration name. Defaults to "default"
      * @return int|false New value, or false if the data doesn"t exist, is not integer,
      *    or if there was an error fetching it.
      * @throws uim.cake.Cache\InvalidArgumentException When offset < 0
      */
-    static function increment(string $key, int $offset = 1, string $config = "default") {
+    static function increment(string aKey, int $offset = 1, string $config = "default") {
         if ($offset < 0) {
             throw new InvalidArgumentException("Offset cannot be less than 0.");
         }
@@ -356,14 +356,14 @@ class Cache {
     /**
      * Decrement a number under the key and return decremented value.
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to subtract
      * @param string $config Optional string configuration name. Defaults to "default"
      * @return int|false New value, or false if the data doesn"t exist, is not integer,
      *   or if there was an error fetching it
      * @throws uim.cake.Cache\InvalidArgumentException when offset < 0
      */
-    static function decrement(string $key, int $offset = 1, string $config = "default") {
+    static function decrement(string aKey, int $offset = 1, string $config = "default") {
         if ($offset < 0) {
             throw new InvalidArgumentException("Offset cannot be less than 0.");
         }
@@ -388,11 +388,11 @@ class Cache {
      * Cache::delete("my_data", "long_term");
      * ```
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    static bool delete(string $key, string $config = "default") {
+    static bool delete(string aKey, string $config = "default") {
         return static::pool($config).delete($key);
     }
 
@@ -539,7 +539,7 @@ class Cache {
      * });
      * ```
      *
-     * @param string $key The cache key to read/store data at.
+     * @param string aKey The cache key to read/store data at.
      * @param callable $callable The callable that provides data in the case when
      *   the cache key is empty. Can be any callable type supported by your PHP.
      * @param string $config The cache configuration to use for this operation.
@@ -547,7 +547,7 @@ class Cache {
      * @return mixed If the key is found: the cached data.
      *   If the key is not found the value returned by the callable.
      */
-    static function remember(string $key, callable $callable, string $config = "default") {
+    static function remember(string aKey, callable $callable, string $config = "default") {
         $existing = self::read($key, $config);
         if ($existing != null) {
             return $existing;
@@ -575,13 +575,13 @@ class Cache {
      * Cache::add("cached_data", $data, "long_term");
      * ```
      *
-     * @param string $key Identifier for the data.
+     * @param string aKey Identifier for the data.
      * @param mixed $value Data to be cached - anything except a resource.
      * @param string $config Optional string configuration name to write to. Defaults to "default".
      * @return bool True if the data was successfully cached, false on failure.
      *   Or if the key existed already.
      */
-    static function add(string $key, $value, string $config = "default"): bool
+    static function add(string aKey, $value, string $config = "default"): bool
     {
         if (is_resource($value)) {
             return false;

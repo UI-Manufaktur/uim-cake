@@ -14,30 +14,30 @@ interface ICacheEngine
     /**
      * Write data for key into a cache engine if it doesn"t exist already.
      *
-     * @param string $key Identifier for the data.
+     * @param string aKey Identifier for the data.
      * @param mixed $value Data to be cached - anything except a resource.
      * @return bool True if the data was successfully cached, false on failure.
      *   Or if the key existed already.
      */
-    bool add(string $key, $value);
+    bool add(string aKey, $value);
 
     /**
      * Increment a number under the key and return incremented value
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to add
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string $key, int $offset = 1);
+    function increment(string aKey, int $offset = 1);
 
     /**
      * Decrement a number under the key and return decremented value
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to subtract
      * @return int|false New incremented value, false otherwise
      */
-    function decrement(string $key, int $offset = 1);
+    function decrement(string aKey, int $offset = 1);
 
     /**
      * Clear all values belonging to the named group.

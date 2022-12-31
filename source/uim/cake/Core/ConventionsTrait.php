@@ -47,10 +47,10 @@ trait ConventionsTrait
     /**
      * Creates the proper model name from a foreign key
      *
-     * @param string $key Foreign key
+     * @param string aKey Foreign key
      * @return string Model name
      */
-    protected string _modelNameFromKey(string $key)
+    protected string _modelNameFromKey(string aKey)
     {
         $key = str_replace("_id", "", $key);
 

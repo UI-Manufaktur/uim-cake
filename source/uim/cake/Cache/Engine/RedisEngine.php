@@ -116,7 +116,7 @@ class RedisEngine : CacheEngine {
     /**
      * Write data for key into cache.
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $value Data to be cached
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
@@ -138,7 +138,7 @@ class RedisEngine : CacheEngine {
     /**
      * Read a key from the cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The cached data, or the default if the data doesn"t exist, has
      *   expired, or if there was an error fetching it
@@ -155,11 +155,11 @@ class RedisEngine : CacheEngine {
     /**
      * Increments the value of an integer cached key & update the expiry time
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string $key, int $offset = 1) {
+    function increment(string aKey, int $offset = 1) {
         $duration = _config["duration"];
         $key = _key($key);
 
@@ -174,11 +174,11 @@ class RedisEngine : CacheEngine {
     /**
      * Decrements the value of an integer cached key & update the expiry time
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string $key, int $offset = 1) {
+    function decrement(string aKey, int $offset = 1) {
         $duration = _config["duration"];
         $key = _key($key);
 
@@ -193,7 +193,7 @@ class RedisEngine : CacheEngine {
     /**
      * Delete a key from the cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     bool delete($key) {
@@ -207,10 +207,10 @@ class RedisEngine : CacheEngine {
      *
      * Just unlink a key from the cache. The actual removal will happen later asynchronously.
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    bool deleteAsync(string $key) {
+    bool deleteAsync(string aKey) {
         $key = _key($key);
 
         return _Redis.unlink($key) > 0;
@@ -278,12 +278,12 @@ class RedisEngine : CacheEngine {
      * Write data for key into cache if it doesn"t exist already.
      * If it already exists, it fails and returns false.
      *
-     * @param string $key Identifier for the data.
+     * @param string aKey Identifier for the data.
      * @param mixed $value Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      * @link https://github.com/phpredis/phpredis#set
      */
-    bool add(string $key, $value) {
+    bool add(string aKey, $value) {
         $duration = _config["duration"];
         $key = _key($key);
         $value = this.serialize($value);

@@ -294,7 +294,7 @@ class Mailer : IEventListener
     /**
      * Sets email view vars.
      *
-     * @param array|string $key Variable name or hash of view variables.
+     * @param array|string aKey Variable name or hash of view variables.
      * @param mixed $value View variable value.
      * @return this
      * @deprecated 4.0.0 Use {@link Mailer::setViewVars()} instead.
@@ -308,7 +308,7 @@ class Mailer : IEventListener
     /**
      * Sets email view vars.
      *
-     * @param array|string $key Variable name or hash of view variables.
+     * @param array|string aKey Variable name or hash of view variables.
      * @param mixed $value View variable value.
      * @return this
      */

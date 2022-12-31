@@ -69,10 +69,10 @@ class Translator
     /**
      * Gets the message translation by its key.
      *
-     * @param string $key The message key.
+     * @param string aKey The message key.
      * @return mixed The message translation string, or false if not found.
      */
-    protected function getMessage(string $key) {
+    protected function getMessage(string aKey) {
         $message = this.package.getMessage($key);
         if ($message) {
             return $message;
@@ -93,12 +93,12 @@ class Translator
     /**
      * Translates the message formatting any placeholders
      *
-     * @param string $key The message key.
+     * @param string aKey The message key.
      * @param array $tokensValues Token values to interpolate into the
      *   message.
      * @return string The translated message with tokens replaced.
      */
-    function translate(string $key, array $tokensValues = []): string
+    function translate(string aKey, array $tokensValues = []): string
     {
         if (isset($tokensValues["_count"])) {
             $message = this.getMessage(static::PLURAL_PREFIX . $key);
@@ -161,12 +161,12 @@ class Translator
     /**
      * Resolve a message"s context structure.
      *
-     * @param string $key The message key being handled.
+     * @param string aKey The message key being handled.
      * @param array $message The message content.
      * @param array $vars The variables containing the `_context` key.
      * @return array|string
      */
-    protected function resolveContext(string $key, array $message, array $vars) {
+    protected function resolveContext(string aKey, array $message, array $vars) {
         $context = $vars["_context"] ?? null;
 
         // No or missing context, fallback to the key/first message

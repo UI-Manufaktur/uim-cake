@@ -85,7 +85,7 @@ class FileEngine : CacheEngine
     /**
      * Write data for key into cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $value Data to be cached
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
@@ -132,7 +132,7 @@ class FileEngine : CacheEngine
     /**
      * Read a key from the cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      *   expired, or if there was an error fetching it
@@ -187,7 +187,7 @@ class FileEngine : CacheEngine
     /**
      * Delete a key from the cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t
      *   exist or couldn"t be removed
      */
@@ -307,24 +307,24 @@ class FileEngine : CacheEngine
     /**
      * Not implemented
      *
-     * @param string $key The key to decrement
+     * @param string aKey The key to decrement
      * @param int $offset The number to offset
      * @return int|false
      * @throws \LogicException
      */
-    function decrement(string $key, int $offset = 1) {
+    function decrement(string aKey, int $offset = 1) {
         throw new LogicException("Files cannot be atomically decremented.");
     }
 
     /**
      * Not implemented
      *
-     * @param string $key The key to increment
+     * @param string aKey The key to increment
      * @param int $offset The number to offset
      * @return int|false
      * @throws \LogicException
      */
-    function increment(string $key, int $offset = 1) {
+    function increment(string aKey, int $offset = 1) {
         throw new LogicException("Files cannot be atomically incremented.");
     }
 
@@ -332,11 +332,11 @@ class FileEngine : CacheEngine
      * Sets the current cache key this class is managing, and creates a writable SplFileObject
      * for the cache file the key is referring to.
      *
-     * @param string $key The key
+     * @param string aKey The key
      * @param bool $createKey Whether the key should be created if it doesn"t exists, or not
      * @return bool true if the cache key could be set, false otherwise
      */
-    protected bool _setKey(string $key, bool $createKey = false) {
+    protected bool _setKey(string aKey, bool $createKey = false) {
         $groups = null;
         if (_groupPrefix) {
             $groups = vsprintf(_groupPrefix, this.groups());

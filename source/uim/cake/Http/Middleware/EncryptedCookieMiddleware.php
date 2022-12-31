@@ -37,7 +37,7 @@ class EncryptedCookieMiddleware : IMiddleware
      * Encryption key to use.
      *
      */
-    protected string $key;
+    protected string aKey;
 
     /**
      * Encryption type.
@@ -49,10 +49,10 @@ class EncryptedCookieMiddleware : IMiddleware
      * Constructor
      *
      * @param array<string> $cookieNames The list of cookie names that should have their values encrypted.
-     * @param string $key The encryption key to use.
+     * @param string aKey The encryption key to use.
      * @param string $cipherType The cipher type to use. Defaults to "aes".
      */
-    this(array $cookieNames, string $key, string $cipherType = "aes") {
+    this(array $cookieNames, string aKey, string $cipherType = "aes") {
         this.cookieNames = $cookieNames;
         this.key = $key;
         this.cipherType = $cipherType;

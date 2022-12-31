@@ -289,14 +289,14 @@ class Configure
      * If using `default` config and no engine has been configured for it yet,
      * one will be automatically created using PhpConfig
      *
-     * @param string $key name of configuration resource to load.
+     * @param string aKey name of configuration resource to load.
      * @param string $config Name of the configured engine to use to read the resource identified by $key.
      * @param bool $merge if config files should be merged instead of simply overridden
      * @return bool True if load successful.
      * @throws uim.cake.Core\exceptions.CakeException if the $config engine is not found
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-and-writing-configuration-files
      */
-    static bool load(string $key, string $config = "default", bool $merge = true) {
+    static bool load(string aKey, string $config = "default", bool $merge = true) {
         $engine = static::_getEngine($config);
         if (!$engine) {
             throw new CakeException(
@@ -340,7 +340,7 @@ class Configure
      * Configure::dump("error", "default", ["Error", "Exception"];
      * ```
      *
-     * @param string $key The identifier to create in the config adapter.
+     * @param string aKey The identifier to create in the config adapter.
      *   This could be a filename or a cache key depending on the adapter being used.
      * @param string $config The name of the configured adapter to dump data with.
      * @param array<string> $keys The name of the top-level keys you want to dump.
@@ -348,7 +348,7 @@ class Configure
      * @return bool Success
      * @throws uim.cake.Core\exceptions.CakeException if the adapter does not implement a `dump` method.
      */
-    static bool dump(string $key, string $config = "default", array $keys = []) {
+    static bool dump(string aKey, string $config = "default", array $keys = []) {
         $engine = static::_getEngine($config);
         if (!$engine) {
             throw new CakeException(sprintf("There is no "%s" config engine.", $config));

@@ -1246,11 +1246,11 @@ class ServerRequest : IServerRequest
     /**
      * Read cookie data from the request"s cookie data.
      *
-     * @param string $key The key or dotted path you want to read.
+     * @param string aKey The key or dotted path you want to read.
      * @param array|string|null $default The default value if the cookie is not set.
      * @return array|string|null Either the cookie value, or null if the value doesn"t exist.
      */
-    function getCookie(string $key, $default = null) {
+    function getCookie(string aKey, $default = null) {
         return Hash::get(this.cookies, $key, $default);
     }
 
@@ -1389,12 +1389,12 @@ class ServerRequest : IServerRequest
      * Get a value from the request"s environment data.
      * Fallback to using env() if the key is not set in the $environment property.
      *
-     * @param string $key The key you want to read from.
+     * @param string aKey The key you want to read from.
      * @param string|null $default Default value when trying to retrieve an environment
      *   variable"s value that does not exist.
      * @return string|null Either the environment value, or null if the value doesn"t exist.
      */
-    function getEnv(string $key, ?string $default = null): ?string
+    function getEnv(string aKey, ?string $default = null): ?string
     {
         $key = strtoupper($key);
         if (!array_key_exists($key, _environment)) {
@@ -1410,11 +1410,11 @@ class ServerRequest : IServerRequest
      * Returns an updated request object. This method returns
      * a *new* request object and does not mutate the request in-place.
      *
-     * @param string $key The key you want to write to.
+     * @param string aKey The key you want to write to.
      * @param string $value Value to set
      * @return static
      */
-    function withEnv(string $key, string $value) {
+    function withEnv(string aKey, string $value) {
         $new = clone this;
         $new._environment[$key] = $value;
         $new.clearDetectorCache();

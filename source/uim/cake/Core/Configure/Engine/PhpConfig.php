@@ -56,13 +56,13 @@ class PhpConfig : ConfigEngineInterface
      * Files with `.` in the name will be treated as values in plugins. Instead of
      * reading from the initialized path, plugin keys will be located using Plugin::path().
      *
-     * @param string $key The identifier to read from. If the key has a . it will be treated
+     * @param string aKey The identifier to read from. If the key has a . it will be treated
      *  as a plugin prefix.
      * @return array Parsed configuration values.
      * @throws uim.cake.Core\exceptions.CakeException when files don"t exist or they don"t contain `$config`.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
-    function read(string $key): array
+    function read(string aKey): array
     {
         $file = _getFilePath($key, true);
 
@@ -80,12 +80,12 @@ class PhpConfig : ConfigEngineInterface
      * Converts the provided $data into a string of PHP code that can
      * be used saved into a file and loaded later.
      *
-     * @param string $key The identifier to write to. If the key has a . it will be treated
+     * @param string aKey The identifier to write to. If the key has a . it will be treated
      *  as a plugin prefix.
      * @param array $data Data to dump.
      * @return bool Success
      */
-    function dump(string $key, array $data): bool
+    function dump(string aKey, array $data): bool
     {
         $contents = "<?php" . "\n" . "return " . var_export($data, true) . ";";
 

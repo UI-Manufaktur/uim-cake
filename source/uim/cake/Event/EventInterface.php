@@ -56,12 +56,12 @@ interface EventInterface
      * @return mixed|array|null The data payload if $key is null, or the data value for the given $key.
      *   If the $key does not exist a null value is returned.
      */
-    function getData(?string $key = null);
+    function getData(?string aKey = null);
 
     /**
      * Assigns a value to the data/payload of this event.
      *
-     * @param array|string $key An array will replace all payload data, and a key will set just that array item.
+     * @param array|string aKey An array will replace all payload data, and a key will set just that array item.
      * @param mixed $value The value to set.
      * @return this
      */

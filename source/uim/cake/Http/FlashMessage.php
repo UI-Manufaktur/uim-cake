@@ -138,10 +138,10 @@ class FlashMessage
     /**
      * Get the messages for given key and remove from session.
      *
-     * @param string $key The key for get messages for.
+     * @param string aKey The key for get messages for.
      * @return array|null
      */
-    function consume(string $key): ?array
+    function consume(string aKey): ?array
     {
         return this.session.consume("Flash.{$key}");
     }

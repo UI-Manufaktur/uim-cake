@@ -1730,7 +1730,7 @@ class Query : IExpression, IteratorAggregate
      * });
      * ```
      *
-     * @param uim.cake.databases.Expression\QueryExpression|\Closure|array|string $key The column name or array of keys
+     * @param uim.cake.databases.Expression\QueryExpression|\Closure|array|string aKey The column name or array of keys
      *    + values to set. This can also be a QueryExpression containing a SQL fragment.
      *    It can also be a Closure, that is required to return an expression object.
      * @param mixed $value The value to update $key to. Can be null if $key is an

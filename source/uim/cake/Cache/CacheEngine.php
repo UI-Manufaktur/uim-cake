@@ -76,7 +76,7 @@ abstract class CacheEngine : ICache, ICacheEngine
     /**
      * Ensure the validity of the given cache key.
      *
-     * @param string $key Key to check.
+     * @param string aKey Key to check.
      * @return void
      * @throws uim.cake.Cache\InvalidArgumentException When the key is not valid.
      */
@@ -199,7 +199,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * is subject to a race condition where your has() will return true and immediately after,
      * another script can remove it making the state of your app out of date.
      *
-     * @param string $key The cache item key.
+     * @param string aKey The cache item key.
      * @return bool
      * @throws uim.cake.Cache\InvalidArgumentException If the $key string is not a legal value.
      */
@@ -210,7 +210,7 @@ abstract class CacheEngine : ICache, ICacheEngine
     /**
      * Fetches the value for a given key from the cache.
      *
-     * @param string $key The unique key of this item in the cache.
+     * @param string aKey The unique key of this item in the cache.
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The value of the item from the cache, or $default in case of cache miss.
      * @throws uim.cake.Cache\InvalidArgumentException If the $key string is not a legal value.
@@ -220,7 +220,7 @@ abstract class CacheEngine : ICache, ICacheEngine
     /**
      * Persists data in the cache, uniquely referenced by the given key with an optional expiration TTL time.
      *
-     * @param string $key The key of the item to store.
+     * @param string aKey The key of the item to store.
      * @param mixed $value The value of the item to store, must be serializable.
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
@@ -234,25 +234,25 @@ abstract class CacheEngine : ICache, ICacheEngine
     /**
      * Increment a number under the key and return incremented value
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to add
      * @return int|false New incremented value, false otherwise
      */
-    abstract function increment(string $key, int $offset = 1);
+    abstract function increment(string aKey, int $offset = 1);
 
     /**
      * Decrement a number under the key and return decremented value
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to subtract
      * @return int|false New incremented value, false otherwise
      */
-    abstract function decrement(string $key, int $offset = 1);
+    abstract function decrement(string aKey, int $offset = 1);
 
     /**
      * Delete a key from the cache
      *
-     * @param string $key Identifier for the data
+     * @param string aKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
     abstract bool delete($key);
@@ -270,11 +270,11 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Defaults to a non-atomic implementation. Subclasses should
      * prefer atomic implementations.
      *
-     * @param string $key Identifier for the data.
+     * @param string aKey Identifier for the data.
      * @param mixed $value Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      */
-    bool add(string $key, $value) {
+    bool add(string aKey, $value) {
         $cachedValue = this.get($key);
         if ($cachedValue == null) {
             return this.set($key, $value);
@@ -309,7 +309,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * If the requested key is valid, the group prefix value and engine prefix are applied.
      * Whitespace in keys will be replaced.
      *
-     * @param string $key the key passed over
+     * @param string aKey the key passed over
      * @return string Prefixed key with potentially unsafe characters replaced.
      * @throws uim.cake.Cache\InvalidArgumentException If key"s value is invalid.
      */

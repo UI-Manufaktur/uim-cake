@@ -51,7 +51,7 @@ trait StaticConfigTrait
      * Cache::setConfig($arrayOfConfig);
      * ```
      *
-     * @param array<string, mixed>|string $key The name of the configuration, or an array of multiple configs.
+     * @param array<string, mixed>|string aKey The name of the configuration, or an array of multiple configs.
      * @param object|array<string, mixed>|null $config An array of name: configuration data for adapter.
      * @throws \BadMethodCallException When trying to modify an existing config.
      * @throws \LogicException When trying to store an invalid structured config array.
@@ -94,10 +94,10 @@ trait StaticConfigTrait
     /**
      * Reads existing configuration.
      *
-     * @param string $key The name of the configuration.
+     * @param string aKey The name of the configuration.
      * @return mixed|null Configuration data at the named key or null if the key does not exist.
      */
-    static function getConfig(string $key) {
+    static function getConfig(string aKey) {
         return static::$_config[$key] ?? null;
     }
 
@@ -106,11 +106,11 @@ trait StaticConfigTrait
      *
      * The config value for this key must exist, it can never be null.
      *
-     * @param string $key The name of the configuration.
+     * @param string aKey The name of the configuration.
      * @return mixed Configuration data at the named key.
      * @throws \InvalidArgumentException If value does not exist.
      */
-    static function getConfigOrFail(string $key) {
+    static function getConfigOrFail(string aKey) {
         if (!isset(static::$_config[$key])) {
             throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", $key));
         }

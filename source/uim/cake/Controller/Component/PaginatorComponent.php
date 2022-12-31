@@ -253,7 +253,7 @@ class PaginatorComponent : Component
     /**
      * Proxy setting config options to Paginator.
      *
-     * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
+     * @param array<string, mixed>|string aKey The key to set, or a complete array of configs.
      * @param mixed|null $value The value to set.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
@@ -271,14 +271,14 @@ class PaginatorComponent : Component
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Config value being read.
      */
-    function getConfig(?string $key = null, $default = null) {
+    function getConfig(?string aKey = null, $default = null) {
         return _paginator.getConfig($key, $default);
     }
 
     /**
      * Proxy setting config options to Paginator.
      *
-     * @param array<string, mixed>|string $key The key to set, or a complete array of configs.
+     * @param array<string, mixed>|string aKey The key to set, or a complete array of configs.
      * @param mixed|null $value The value to set.
      * @return this
      */

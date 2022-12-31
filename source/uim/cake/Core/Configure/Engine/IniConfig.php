@@ -73,13 +73,13 @@ class IniConfig : ConfigEngineInterface
     /**
      * Read an ini file and return the results as an array.
      *
-     * @param string $key The identifier to read from. If the key has a . it will be treated
+     * @param string aKey The identifier to read from. If the key has a . it will be treated
      *  as a plugin prefix. The chosen file must be on the engine"s path.
      * @return array Parsed configuration values.
      * @throws uim.cake.Core\exceptions.CakeException when files don"t exist.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
-    function read(string $key): array
+    function read(string aKey): array
     {
         $file = _getFilePath($key, true);
 
@@ -130,12 +130,12 @@ class IniConfig : ConfigEngineInterface
     /**
      * Dumps the state of Configure data into an ini formatted string.
      *
-     * @param string $key The identifier to write to. If the key has a . it will be treated
+     * @param string aKey The identifier to write to. If the key has a . it will be treated
      *  as a plugin prefix.
      * @param array $data The data to convert to ini file.
      * @return bool Success.
      */
-    function dump(string $key, array $data): bool
+    function dump(string aKey, array $data): bool
     {
         $result = [];
         foreach ($data as $k: $value) {

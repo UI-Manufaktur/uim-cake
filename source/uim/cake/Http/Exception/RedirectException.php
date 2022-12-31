@@ -58,11 +58,11 @@ class RedirectException : HttpException
     /**
      * Remove a header from the exception.
      *
-     * @param string $key The header to remove.
+     * @param string aKey The header to remove.
      * @return this
      * @deprecated 4.2.0 Use `setHeaders()` instead.
      */
-    function removeHeader(string $key) {
+    function removeHeader(string aKey) {
         deprecationWarning("RedirectException::removeHeader() is deprecated, use setHeaders() instead.");
 
         unset(this.headers[$key]);

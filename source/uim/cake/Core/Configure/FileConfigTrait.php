@@ -17,14 +17,14 @@ trait FileConfigTrait
     /**
      * Get file path
      *
-     * @param string $key The identifier to write to. If the key has a . it will be treated
+     * @param string aKey The identifier to write to. If the key has a . it will be treated
      *  as a plugin prefix.
      * @param bool $checkExists Whether to check if file exists. Defaults to false.
      * @return string Full file path
      * @throws uim.cake.Core\exceptions.CakeException When files don"t exist or when
      *  files contain ".." as this could lead to abusive reads.
      */
-    protected function _getFilePath(string $key, bool $checkExists = false): string
+    protected function _getFilePath(string aKey, bool $checkExists = false): string
     {
         if (strpos($key, "..") != false) {
             throw new CakeException("Cannot load/dump configuration files with ../ in them.");

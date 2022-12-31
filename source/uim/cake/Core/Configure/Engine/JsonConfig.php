@@ -50,14 +50,14 @@ class JsonConfig : ConfigEngineInterface
      * Files with `.` in the name will be treated as values in plugins. Instead of
      * reading from the initialized path, plugin keys will be located using Plugin::path().
      *
-     * @param string $key The identifier to read from. If the key has a . it will be treated
+     * @param string aKey The identifier to read from. If the key has a . it will be treated
      *   as a plugin prefix.
      * @return array Parsed configuration values.
      * @throws uim.cake.Core\exceptions.CakeException When files don"t exist or when
      *   files contain ".." (as this could lead to abusive reads) or when there
      *   is an error parsing the JSON string.
      */
-    function read(string $key): array
+    function read(string aKey): array
     {
         $file = _getFilePath($key, true);
 
@@ -83,12 +83,12 @@ class JsonConfig : ConfigEngineInterface
      * Converts the provided $data into a JSON string that can be used saved
      * into a file and loaded later.
      *
-     * @param string $key The identifier to write to. If the key has a . it will
+     * @param string aKey The identifier to write to. If the key has a . it will
      *  be treated as a plugin prefix.
      * @param array $data Data to dump.
      * @return bool Success
      */
-    function dump(string $key, array $data): bool
+    function dump(string aKey, array $data): bool
     {
         $filename = _getFilePath($key);
 

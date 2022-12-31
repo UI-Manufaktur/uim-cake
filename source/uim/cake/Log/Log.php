@@ -267,7 +267,7 @@ class Log
      * Log::setConfig($arrayOfConfig);
      * ```
      *
-     * @param array<string, mixed>|string $key The name of the logger config, or an array of multiple configs.
+     * @param array<string, mixed>|string aKey The name of the logger config, or an array of multiple configs.
      * @param array<string, mixed>|null $config An array of name: config data for adapter.
      * @return void
      * @throws \BadMethodCallException When trying to modify an existing config.
