@@ -358,7 +358,7 @@ class File
      * @param string|null $ext The name of the extension to make safe if different from this.ext
      * @return string The extension of the file
      */
-    function safe(?string $name = null, ?string $ext = null): string
+    function safe(?string aName = null, ?string $ext = null): string
     {
         if (!$name) {
             $name = (string)this.name;

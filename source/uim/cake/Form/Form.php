@@ -93,7 +93,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
         if (method_exists(this, "_buildValidator")) {
             deprecationWarning(
                 static::class . " : `_buildValidator` which is no longer used. " .
-                "You should implement `buildValidator(Validator $validator, string $name): void` " .
+                "You should implement `buildValidator(Validator $validator, string aName): void` " .
                 "or `validationDefault(Validator $validator): Validator` instead."
             );
         }
@@ -299,7 +299,7 @@ class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
     /**
      * Saves a variable or an associative array of variables for use inside form data.
      *
-     * @param array|string $name The key to write, can be a dot notation value.
+     * @param array|string aName The key to write, can be a dot notation value.
      * Alternatively can be an array containing key(s) and value(s).
      * @param mixed $value Value to set for var
      * @return this

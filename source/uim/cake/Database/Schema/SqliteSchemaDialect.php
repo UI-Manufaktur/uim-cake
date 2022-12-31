@@ -319,11 +319,11 @@ class SqliteSchemaDialect : SchemaDialect
      * {@inheritDoc}
      *
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the column is in.
-     * @param string $name The name of the column.
+     * @param string aName The name of the column.
      * @return string SQL fragment.
      * @throws uim.cake.databases.exceptions.DatabaseException when the column type is unknown
      */
-    function columnSql(TableSchema $schema, string $name): string
+    function columnSql(TableSchema $schema, string aName): string
     {
         /** @var array $data */
         $data = $schema.getColumn($name);
@@ -464,10 +464,10 @@ class SqliteSchemaDialect : SchemaDialect
      * that integer primary keys be defined in the column definition.
      *
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the column is in.
-     * @param string $name The name of the column.
+     * @param string aName The name of the column.
      * @return string SQL fragment.
      */
-    function constraintSql(TableSchema $schema, string $name): string
+    function constraintSql(TableSchema $schema, string aName): string
     {
         /** @var array $data */
         $data = $schema.getConstraint($name);
@@ -541,7 +541,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    function indexSql(TableSchema $schema, string $name): string
+    function indexSql(TableSchema $schema, string aName): string
     {
         /** @var array $data */
         $data = $schema.getIndex($name);

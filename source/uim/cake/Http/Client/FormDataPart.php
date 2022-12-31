@@ -81,12 +81,12 @@ class FormDataPart
     /**
      * Constructor
      *
-     * @param string $name The name of the data.
+     * @param string aName The name of the data.
      * @param string $value The value of the data.
      * @param string $disposition The type of disposition to use, defaults to form-data.
      * @param string|null $charset The charset of the data.
      */
-    this(string $name, string $value, string $disposition = "form-data", ?string $charset = null) {
+    this(string aName, string $value, string $disposition = "form-data", ?string $charset = null) {
         _name = $name;
         _value = $value;
         _disposition = $disposition;
@@ -231,10 +231,10 @@ class FormDataPart
      * If the value contains non-ASCII letters an additional header indicating
      * the charset encoding will be set.
      *
-     * @param string $name The name of the header parameter
+     * @param string aName The name of the header parameter
      * @param string $value The value of the header parameter
      */
-    protected string _headerParameterToString(string $name, string $value): string
+    protected string _headerParameterToString(string aName, string $value): string
     {
         $transliterated = Text::transliterate(str_replace(""", "", $value));
         $return = sprintf("%s="%s"", $name, $transliterated);

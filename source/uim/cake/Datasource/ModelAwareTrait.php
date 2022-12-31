@@ -50,9 +50,9 @@ trait ModelAwareTrait
      *
      * If the property is already set it will not be overwritten
      *
-     * @param string $name Class name.
+     * @param string aName Class name.
      */
-    protected void _setModelClass(string $name): void
+    protected void _setModelClass(string aName): void
     {
         if (this.modelClass == null) {
             this.modelClass = $name;

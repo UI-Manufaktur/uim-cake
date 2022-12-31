@@ -295,11 +295,11 @@ class PostgresSchemaDialect : SchemaDialect
      * Add/update a constraint into the schema object.
      *
      * @param uim.cake.databases.Schema\TableSchema $schema The table to update.
-     * @param string $name The index name.
+     * @param string aName The index name.
      * @param string $type The index type.
      * @param array $row The metadata record to update with.
      */
-    protected void _convertConstraint(TableSchema $schema, string $name, string $type, array $row): void
+    protected void _convertConstraint(TableSchema $schema, string aName, string $type, array $row): void
     {
         $constraint = $schema.getConstraint($name);
         if (!$constraint) {
@@ -370,7 +370,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function columnSql(TableSchema $schema, string $name): string
+    function columnSql(TableSchema $schema, string aName): string
     {
         /** @var array $data */
         $data = $schema.getColumn($name);
@@ -532,7 +532,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function indexSql(TableSchema $schema, string $name): string
+    function indexSql(TableSchema $schema, string aName): string
     {
         /** @var array $data */
         $data = $schema.getIndex($name);
@@ -550,7 +550,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function constraintSql(TableSchema $schema, string $name): string
+    function constraintSql(TableSchema $schema, string aName): string
     {
         /** @var array<string, mixed> $data */
         $data = $schema.getConstraint($name);

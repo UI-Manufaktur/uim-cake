@@ -370,7 +370,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function columnSql(TableSchema $schema, string $name): string
+    function columnSql(TableSchema $schema, string aName): string
     {
         /** @var array $data */
         $data = $schema.getColumn($name);
@@ -550,7 +550,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function indexSql(TableSchema $schema, string $name): string
+    function indexSql(TableSchema $schema, string aName): string
     {
         /** @var array $data */
         $data = $schema.getIndex($name);
@@ -568,7 +568,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function constraintSql(TableSchema $schema, string $name): string
+    function constraintSql(TableSchema $schema, string aName): string
     {
         /** @var array $data */
         $data = $schema.getConstraint($name);

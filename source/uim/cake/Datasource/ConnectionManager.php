@@ -170,13 +170,13 @@ class ConnectionManager
      * defined. If you want the original unaliased connections pass `false`
      * as second parameter.
      *
-     * @param string $name The connection name.
+     * @param string aName The connection name.
      * @param bool $useAliases Set to false to not use aliased connections.
      * @return uim.cake.Datasource\ConnectionInterface A connection object.
      * @throws uim.cake.Datasource\exceptions.MissingDatasourceConfigException When config
      * data is missing.
      */
-    static function get(string $name, bool $useAliases = true) {
+    static function get(string aName, bool $useAliases = true) {
         if ($useAliases && isset(static::$_aliasMap[$name])) {
             $name = static::$_aliasMap[$name];
         }

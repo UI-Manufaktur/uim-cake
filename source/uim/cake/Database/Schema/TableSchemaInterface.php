@@ -195,21 +195,21 @@ interface TableSchemaInterface : SchemaInterface
      * - `type` The type of index being added.
      * - `columns` The columns in the index.
      *
-     * @param string $name The name of the index.
+     * @param string aName The name of the index.
      * @param array<string, mixed>|string $attrs The attributes for the index.
      *   If string it will be used as `type`.
      * @return this
      * @throws uim.cake.databases.exceptions.DatabaseException
      */
-    function addIndex(string $name, $attrs);
+    function addIndex(string aName, $attrs);
 
     /**
      * Read information about an index based on name.
      *
-     * @param string $name The name of the index.
+     * @param string aName The name of the index.
      * @return array<string, mixed>|null Array of index data, or null
      */
-    function getIndex(string $name): ?array;
+    function getIndex(string aName): ?array;
 
     /**
      * Get the names of all the indexes in the table.
@@ -234,29 +234,29 @@ interface TableSchemaInterface : SchemaInterface
      *
      * The default for "update" & "delete" is "cascade".
      *
-     * @param string $name The name of the constraint.
+     * @param string aName The name of the constraint.
      * @param array<string, mixed>|string $attrs The attributes for the constraint.
      *   If string it will be used as `type`.
      * @return this
      * @throws uim.cake.databases.exceptions.DatabaseException
      */
-    function addConstraint(string $name, $attrs);
+    function addConstraint(string aName, $attrs);
 
     /**
      * Read information about a constraint based on name.
      *
-     * @param string $name The name of the constraint.
+     * @param string aName The name of the constraint.
      * @return array<string, mixed>|null Array of constraint data, or null
      */
-    function getConstraint(string $name): ?array;
+    function getConstraint(string aName): ?array;
 
     /**
      * Remove a constraint.
      *
-     * @param string $name Name of the constraint to remove
+     * @param string aName Name of the constraint to remove
      * @return this
      */
-    function dropConstraint(string $name);
+    function dropConstraint(string aName);
 
     /**
      * Get the names of all the constraints in the table.

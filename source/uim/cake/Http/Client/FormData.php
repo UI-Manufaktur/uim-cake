@@ -66,11 +66,11 @@ class FormData : Countable
     /**
      * Method for creating new instances of Part
      *
-     * @param string $name The name of the part.
+     * @param string aName The name of the part.
      * @param string $value The value to add.
      * @return uim.cake.http.Client\FormDataPart
      */
-    function newPart(string $name, string $value): FormDataPart
+    function newPart(string aName, string $value): FormDataPart
     {
         return new FormDataPart($name, $value);
     }
@@ -84,7 +84,7 @@ class FormData : Countable
      * If the $value is an array, multiple parts will be added.
      * Files will be read from their current position and saved in memory.
      *
-     * @param uim.cake.http.Client\FormDataPart|string $name The name of the part to add,
+     * @param uim.cake.http.Client\FormDataPart|string aName The name of the part to add,
      *   or the part data object.
      * @param mixed $value The value for the part.
      * @return this
@@ -126,12 +126,12 @@ class FormData : Countable
      * Add either a file reference (string starting with @)
      * or a file handle.
      *
-     * @param string $name The name to use.
+     * @param string aName The name to use.
      * @param string|resource|\Psr\Http\messages.UploadedFileInterface $value Either a string filename, or a filehandle,
      *  or a UploadedFileInterface instance.
      * @return uim.cake.http.Client\FormDataPart
      */
-    function addFile(string $name, $value): FormDataPart
+    function addFile(string aName, $value): FormDataPart
     {
         _hasFile = true;
 
@@ -169,10 +169,10 @@ class FormData : Countable
     /**
      * Recursively add data.
      *
-     * @param string $name The name to use.
+     * @param string aName The name to use.
      * @param mixed $value The value to add.
      */
-    void addRecursive(string $name, $value): void
+    void addRecursive(string aName, $value): void
     {
         foreach ($value as $key: $value) {
             $key = $name . "[" . $key . "]";

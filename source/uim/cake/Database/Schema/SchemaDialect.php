@@ -269,10 +269,10 @@ abstract class SchemaDialect
      * Generate the SQL fragment for a single column in a table.
      *
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the column is in.
-     * @param string $name The name of the column.
+     * @param string aName The name of the column.
      * @return string SQL fragment.
      */
-    abstract function columnSql(TableSchema $schema, string $name): string;
+    abstract function columnSql(TableSchema $schema, string aName): string;
 
     /**
      * Generate the SQL queries needed to add foreign key constraints to the table
@@ -294,19 +294,19 @@ abstract class SchemaDialect
      * Generate the SQL fragments for defining table constraints.
      *
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the column is in.
-     * @param string $name The name of the column.
+     * @param string aName The name of the column.
      * @return string SQL fragment.
      */
-    abstract function constraintSql(TableSchema $schema, string $name): string;
+    abstract function constraintSql(TableSchema $schema, string aName): string;
 
     /**
      * Generate the SQL fragment for a single index in a table.
      *
      * @param uim.cake.databases.Schema\TableSchema $schema The table object the column is in.
-     * @param string $name The name of the column.
+     * @param string aName The name of the column.
      * @return string SQL fragment.
      */
-    abstract function indexSql(TableSchema $schema, string $name): string;
+    abstract function indexSql(TableSchema $schema, string aName): string;
 
     /**
      * Generate the SQL to truncate a table.

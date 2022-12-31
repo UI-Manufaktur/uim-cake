@@ -63,14 +63,14 @@ class Event : EventInterface
      *  $event = new Event("User.afterRegister", $userModel);
      * ```
      *
-     * @param string $name Name of the event
+     * @param string aName Name of the event
      * @param object|null $subject the object that this event applies to
      *   (usually the object that is generating the event).
      * @param \ArrayAccess|array|null $data any value you wish to be transported
      *   with this event to it can be read by listeners.
      * @psalm-param TSubject|null $subject
      */
-    this(string $name, $subject = null, $data = null) {
+    this(string aName, $subject = null, $data = null) {
         _name = $name;
         _subject = $subject;
         _data = (array)$data;

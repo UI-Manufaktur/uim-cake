@@ -41,12 +41,12 @@ class Schema
     /**
      * Adds a field to the schema.
      *
-     * @param string $name The field name.
+     * @param string aName The field name.
      * @param array<string, mixed>|string $attrs The attributes for the field, or the type
      *   as a string.
      * @return this
      */
-    function addField(string $name, $attrs) {
+    function addField(string aName, $attrs) {
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
         }
@@ -59,10 +59,10 @@ class Schema
     /**
      * Removes a field to the schema.
      *
-     * @param string $name The field to remove.
+     * @param string aName The field to remove.
      * @return this
      */
-    function removeField(string $name) {
+    function removeField(string aName) {
         unset(_fields[$name]);
 
         return this;
@@ -81,10 +81,10 @@ class Schema
     /**
      * Get the attributes for a given field.
      *
-     * @param string $name The field name.
+     * @param string aName The field name.
      * @return array<string, mixed>|null The attributes for a field, or null.
      */
-    function field(string $name): ?array
+    function field(string aName): ?array
     {
         return _fields[$name] ?? null;
     }
@@ -92,11 +92,11 @@ class Schema
     /**
      * Get the type of the named field.
      *
-     * @param string $name The name of the field.
+     * @param string aName The name of the field.
      * @return string|null Either the field type or null if the
      *   field does not exist.
      */
-    function fieldType(string $name): ?string
+    function fieldType(string aName): ?string
     {
         $field = this.field($name);
         if (!$field) {

@@ -85,12 +85,12 @@ class Collection : ICollection
      * - `forceRefresh` - Set to true to force rebuilding the cached metadata.
      *   Defaults to false.
      *
-     * @param string $name The name of the table to describe.
+     * @param string aName The name of the table to describe.
      * @param array<string, mixed> $options The options to use, see above.
      * @return uim.cake.databases.Schema\TableSchema Object with column metadata.
      * @throws uim.cake.databases.exceptions.DatabaseException when table cannot be described.
      */
-    function describe(string $name, array $options = []): TableSchemaInterface
+    function describe(string aName, array $options = []): TableSchemaInterface
     {
         $config = _connection.config();
         if (strpos($name, ".")) {
@@ -114,7 +114,7 @@ class Collection : ICollection
      * Helper method for running each step of the reflection process.
      *
      * @param string $stage The stage name.
-     * @param string $name The table name.
+     * @param string aName The table name.
      * @param array<string, mixed> $config The config data.
      * @param uim.cake.databases.Schema\TableSchema $schema The table schema instance.
      * @return void
@@ -128,7 +128,7 @@ class Collection : ICollection
      * @uses uim.cake.databases.Schema\SchemaDialect::convertForeignKeyDescription
      * @uses uim.cake.databases.Schema\SchemaDialect::convertOptionsDescription
      */
-    protected void _reflect(string $stage, string $name, array $config, TableSchema $schema): void
+    protected void _reflect(string $stage, string aName, array $config, TableSchema $schema): void
     {
         $describeMethod = "describe{$stage}Sql";
         $convertMethod = "convert{$stage}Description";

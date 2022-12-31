@@ -53,10 +53,10 @@ class Uri : UriInterface
     /**
      * Backwards compatibility shim for previously dynamic properties.
      *
-     * @param string $name The attribute to read.
+     * @param string aName The attribute to read.
      * @return mixed
      */
-    function __get(string $name) {
+    function __get(string aName) {
         if ($name == "base" || $name == "webroot") {
             return this.{$name};
         }

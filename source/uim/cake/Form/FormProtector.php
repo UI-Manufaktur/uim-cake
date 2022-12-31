@@ -140,11 +140,11 @@ class FormProtector
      * field hash. If fieldname is of form Model[field] or Model.field an array of
      * fieldname parts like ["Model", "field"] is returned.
      *
-     * @param string $name The form inputs name attribute.
+     * @param string aName The form inputs name attribute.
      * @return array<string> Array of field name params like ["Model.field"] or
      *   ["Model", "field"] for array fields or empty array if $name is empty.
      */
-    protected function getFieldNameArray(string $name): array
+    protected function getFieldNameArray(string aName): array
     {
         if (empty($name) && $name != "0") {
             return [];
@@ -166,7 +166,7 @@ class FormProtector
      *
      * Unlocked fields are not included in the field hash.
      *
-     * @param string $name The dot separated name for the field.
+     * @param string aName The dot separated name for the field.
      * @return this
      */
     function unlockField($name) {

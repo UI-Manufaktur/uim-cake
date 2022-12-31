@@ -117,10 +117,10 @@ class Session
     /**
      * Get one of the prebaked default session configurations.
      *
-     * @param string $name Config name.
+     * @param string aName Config name.
      * @return array|false
      */
-    protected static function _defaultConfig(string $name) {
+    protected static function _defaultConfig(string aName) {
         $tmp = defined("TMP") ? TMP : sys_get_temp_dir() . DIRECTORY_SEPARATOR;
         $defaults = [
             "php": [
@@ -388,7 +388,7 @@ class Session
      * @param string|null $name Variable name to check for
      * @return bool True if variable is there
      */
-    function check(?string $name = null): bool
+    function check(?string aName = null): bool
     {
         if (_hasSession() && !this.started()) {
             this.start();
@@ -413,7 +413,7 @@ class Session
      * @return mixed|null The value of the session variable, or default value if a session
      *   is not available, can"t be started, or provided $name is not found in the session.
      */
-    function read(?string $name = null, $default = null) {
+    function read(?string aName = null, $default = null) {
         if (_hasSession() && !this.started()) {
             this.start();
         }
@@ -432,11 +432,11 @@ class Session
     /**
      * Returns given session variable, or throws Exception if not found.
      *
-     * @param string $name The name of the session variable (or a path as sent to Hash.extract)
+     * @param string aName The name of the session variable (or a path as sent to Hash.extract)
      * @throws \RuntimeException
      * @return mixed|null
      */
-    function readOrFail(string $name) {
+    function readOrFail(string aName) {
         if (!this.check($name)) {
             throw new RuntimeException(sprintf("Expected session key "%s" not found.", $name));
         }
@@ -447,11 +447,11 @@ class Session
     /**
      * Reads and deletes a variable from session.
      *
-     * @param string $name The key to read and remove (or a path as sent to Hash.extract).
+     * @param string aName The key to read and remove (or a path as sent to Hash.extract).
      * @return mixed|null The value of the session variable, null if session not available,
      *   session not started, or provided name not found in the session.
      */
-    function consume(string $name) {
+    function consume(string aName) {
         if (empty($name)) {
             return null;
         }
@@ -467,7 +467,7 @@ class Session
     /**
      * Writes value to given session variable name.
      *
-     * @param array|string $name Name of variable
+     * @param array|string aName Name of variable
      * @param mixed $value Value to write
      */
     void write($name, $value = null): void
@@ -515,9 +515,9 @@ class Session
     /**
      * Removes a variable from session.
      *
-     * @param string $name Session variable to remove
+     * @param string aName Session variable to remove
      */
-    void delete(string $name): void
+    void delete(string aName): void
     {
         if (this.check($name)) {
             /** @psalm-suppress InvalidScalarArgument */

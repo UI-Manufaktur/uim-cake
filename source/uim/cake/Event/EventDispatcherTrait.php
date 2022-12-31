@@ -63,14 +63,14 @@ trait EventDispatcherTrait
      *
      * Returns a dispatched event.
      *
-     * @param string $name Name of the event.
+     * @param string aName Name of the event.
      * @param array|null $data Any value you wish to be transported with this event to
      * it can be read by listeners.
      * @param object|null $subject The object that this event applies to
      * (this by default).
      * @return uim.cake.events.EventInterface
      */
-    function dispatchEvent(string $name, ?array $data = null, ?object $subject = null): EventInterface
+    function dispatchEvent(string aName, ?array $data = null, ?object $subject = null): EventInterface
     {
         if ($subject == null) {
             $subject = this;

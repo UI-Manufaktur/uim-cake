@@ -47,7 +47,7 @@ class Cookie : CookieInterface
      * Cookie name
      *
      */
-    protected string $name = "";
+    protected string aName = "";
 
     /**
      * Raw Cookie value.
@@ -123,7 +123,7 @@ class Cookie : CookieInterface
      * DateTime or DateTimeImmutable object instead an integer.
      *
      * @link https://php.net/manual/en/function.setcookie.php
-     * @param string $name Cookie name
+     * @param string aName Cookie name
      * @param array|string $value Value of the cookie
      * @param \DateTime|\DateTimeImmutable|null $expiresAt Expiration time and date
      * @param string|null $path Path
@@ -133,7 +133,7 @@ class Cookie : CookieInterface
      * @param string|null $sameSite Samesite
      */
     this(
-        string $name,
+        string aName,
         $value = "",
         ?DateTimeInterface $expiresAt = null,
         ?string $path = null,
@@ -196,13 +196,13 @@ class Cookie : CookieInterface
     /**
      * Factory method to create Cookie instances.
      *
-     * @param string $name Cookie name
+     * @param string aName Cookie name
      * @param array|string $value Value of the cookie
      * @param array<string, mixed> $options Cookies options.
      * @return static
      * @see uim.cake.Cookie\Cookie::setDefaults()
      */
-    static function create(string $name, $value, array $options = []) {
+    static function create(string aName, $value, array $options = []) {
         $options += static::$defaults;
         $options["expires"] = static::dateTimeInstance($options["expires"]);
 
@@ -348,7 +348,7 @@ class Cookie : CookieInterface
     }
 
 
-    function withName(string $name) {
+    function withName(string aName) {
         this.validateName($name);
         $new = clone this;
         $new.name = $name;
@@ -371,12 +371,12 @@ class Cookie : CookieInterface
     /**
      * Validates the cookie name
      *
-     * @param string $name Name of the cookie
+     * @param string aName Name of the cookie
      * @return void
      * @throws \InvalidArgumentException
      * @link https://tools.ietf.org/html/rfc2616#section-2.2 Rules for naming cookies.
      */
-    protected function validateName(string $name): void
+    protected function validateName(string aName): void
     {
         if (preg_match("/[=,;\t\r\n\013\014]/", $name)) {
             throw new InvalidArgumentException(

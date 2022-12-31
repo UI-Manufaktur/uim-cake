@@ -263,10 +263,10 @@ class Debugger
      * Closures templates must return a string, and accept two parameters:
      * The file and line.
      *
-     * @param string $name The name of the editor.
+     * @param string aName The name of the editor.
      * @param \Closure|string $template The string template or closure
      */
-    static void addEditor(string $name, $template): void
+    static void addEditor(string aName, $template): void
     {
         $instance = static::getInstance();
         if (!is_string($template) && !($template instanceof Closure)) {
@@ -279,9 +279,9 @@ class Debugger
     /**
      * Choose the editor link style you want to use.
      *
-     * @param string $name The editor name.
+     * @param string aName The editor name.
      */
-    static void setEditor(string $name): void
+    static void setEditor(string aName): void
     {
         $instance = static::getInstance();
         if (!isset($instance.editors[$name])) {
@@ -911,12 +911,12 @@ class Debugger
     /**
      * Add a renderer to the current instance.
      *
-     * @param string $name The alias for the the renderer.
+     * @param string aName The alias for the the renderer.
      * @param class-string<uim.cake.Error\ErrorRendererInterface> $class The classname of the renderer to use.
      * @return void
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    static function addRenderer(string $name, string $class): void
+    static function addRenderer(string aName, string $class): void
     {
         deprecationWarning('Debugger::addRenderer() is deprecated.');
         if (!in_array(ErrorRendererInterface::class, class_implements($class))) {

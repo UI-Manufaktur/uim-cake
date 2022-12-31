@@ -287,7 +287,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function addColumn(string $name, $attrs) {
+    function addColumn(string aName, $attrs) {
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
         }
@@ -303,7 +303,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function removeColumn(string $name) {
+    function removeColumn(string aName) {
         unset(_columns[$name], _typeMap[$name]);
 
         return this;
@@ -316,7 +316,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function getColumn(string $name): ?array
+    function getColumn(string aName): ?array
     {
         if (!isset(_columns[$name])) {
             return null;
@@ -328,7 +328,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function getColumnType(string $name): ?string
+    function getColumnType(string aName): ?string
     {
         if (!isset(_columns[$name])) {
             return null;
@@ -338,7 +338,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function setColumnType(string $name, string $type) {
+    function setColumnType(string aName, string $type) {
         if (!isset(_columns[$name])) {
             return this;
         }
@@ -350,7 +350,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function hasColumn(string $name): bool
+    function hasColumn(string aName): bool
     {
         return isset(_columns[$name]);
     }
@@ -382,7 +382,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function isNullable(string $name): bool
+    function isNullable(string aName): bool
     {
         if (!isset(_columns[$name])) {
             return true;
@@ -409,7 +409,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function addIndex(string $name, $attrs) {
+    function addIndex(string aName, $attrs) {
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
         }
@@ -457,7 +457,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function getIndex(string $name): ?array
+    function getIndex(string aName): ?array
     {
         if (!isset(_indexes[$name])) {
             return null;
@@ -493,7 +493,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function addConstraint(string $name, $attrs) {
+    function addConstraint(string aName, $attrs) {
         if (is_string($attrs)) {
             $attrs = ["type": $attrs];
         }
@@ -553,7 +553,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function dropConstraint(string $name) {
+    function dropConstraint(string aName) {
         if (isset(_constraints[$name])) {
             unset(_constraints[$name]);
         }
@@ -612,7 +612,7 @@ class TableSchema : TableSchemaInterface, SqlGeneratorInterface
     }
 
 
-    function getConstraint(string $name): ?array
+    function getConstraint(string aName): ?array
     {
         return _constraints[$name] ?? null;
     }

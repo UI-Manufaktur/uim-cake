@@ -1266,10 +1266,10 @@ class Response : IResponse
      * This method provides read access to pending cookies. It will
      * not read the `Set-Cookie` header if set.
      *
-     * @param string $name The cookie name you want to read.
+     * @param string aName The cookie name you want to read.
      * @return array|null Either the cookie data or null
      */
-    function getCookie(string $name): ?array
+    function getCookie(string aName): ?array
     {
         if (!_cookies.has($name)) {
             return null;

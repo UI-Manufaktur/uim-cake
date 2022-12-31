@@ -182,7 +182,7 @@ class Response : Message : IResponse
             }
             [$name, $value] = explode(":", $value, 2);
             $value = trim($value);
-            /** @phpstan-var non-empty-string $name */
+            /** @phpstan-var non-empty-string aName */
             $name = trim($name);
 
             $normalized = strtolower($name);
@@ -317,10 +317,10 @@ class Response : Message : IResponse
     /**
      * Get the value of a single cookie.
      *
-     * @param string $name The name of the cookie value.
+     * @param string aName The name of the cookie value.
      * @return array|string|null Either the cookie"s value or null when the cookie is undefined.
      */
-    function getCookie(string $name) {
+    function getCookie(string aName) {
         this.buildCookieCollection();
 
         if (!this.cookies.has($name)) {
@@ -333,10 +333,10 @@ class Response : Message : IResponse
     /**
      * Get the full data for a single cookie.
      *
-     * @param string $name The name of the cookie value.
+     * @param string aName The name of the cookie value.
      * @return array|null Either the cookie"s data or null when the cookie is undefined.
      */
-    function getCookieData(string $name): ?array
+    function getCookieData(string aName): ?array
     {
         this.buildCookieCollection();
 

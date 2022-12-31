@@ -126,7 +126,7 @@ abstract class BaseApplication implements
      *
      * If it isn"t available, ignore it.
      *
-     * @param uim.cake.Core\PluginInterface|string $name The plugin name or plugin object.
+     * @param uim.cake.Core\PluginInterface|string aName The plugin name or plugin object.
      * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
      * @return this
      */

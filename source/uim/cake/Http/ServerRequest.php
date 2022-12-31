@@ -436,12 +436,12 @@ class ServerRequest : IServerRequest
     /**
      * Missing method handler, handles wrapping older style isAjax() type methods
      *
-     * @param string $name The method called
+     * @param string aName The method called
      * @param array $params Array of parameters for the method call
      * @return bool
      * @throws \BadMethodCallException when an invalid method is called.
      */
-    function __call(string $name, array $params) {
+    function __call(string aName, array $params) {
         if (strpos($name, "is") == 0) {
             $type = strtolower(substr($name, 2));
 
@@ -718,10 +718,10 @@ class ServerRequest : IServerRequest
      *
      * `addDetector("extension", ["param": "_ext", "options": ["pdf", "csv"]]`
      *
-     * @param string $name The name of the detector.
+     * @param string aName The name of the detector.
      * @param callable|array $detector A callable or options array for the detector definition.
      */
-    static void addDetector(string $name, $detector): void
+    static void addDetector(string aName, $detector): void
     {
         $name = strtolower($name);
         if (is_callable($detector)) {
@@ -739,10 +739,10 @@ class ServerRequest : IServerRequest
     /**
      * Normalize a header name into the SERVER version.
      *
-     * @param string $name The header name.
+     * @param string aName The header name.
      * @return string The normalized header name.
      */
-    protected function normalizeHeaderName(string $name): string
+    protected function normalizeHeaderName(string aName): string
     {
         $name = str_replace("-", "_", strtoupper($name));
         if (!in_array($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
@@ -788,7 +788,7 @@ class ServerRequest : IServerRequest
     /**
      * Check if a header is set in the request.
      *
-     * @param string $name The header you want to get (case-insensitive)
+     * @param string aName The header you want to get (case-insensitive)
      * @return bool Whether the header is defined.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
@@ -805,7 +805,7 @@ class ServerRequest : IServerRequest
      * Return the header value as an array. If the header
      * is not present an empty array will be returned.
      *
-     * @param string $name The header you want to get (case-insensitive)
+     * @param string aName The header you want to get (case-insensitive)
      * @return array<string> An associative array of headers and their values.
      *   If the header doesn"t exist, an empty array will be returned.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
@@ -823,7 +823,7 @@ class ServerRequest : IServerRequest
     /**
      * Get a single header as a string from the request.
      *
-     * @param string $name The header you want to get (case-insensitive)
+     * @param string aName The header you want to get (case-insensitive)
      * @return string Header values collapsed into a comma separated string.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
@@ -837,7 +837,7 @@ class ServerRequest : IServerRequest
     /**
      * Get a modified request with the provided header.
      *
-     * @param string $name The header name.
+     * @param string aName The header name.
      * @param array|string $value The header value
      * @return static
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
@@ -856,7 +856,7 @@ class ServerRequest : IServerRequest
      * Existing header values will be retained. The provided value
      * will be appended into the existing values.
      *
-     * @param string $name The header name.
+     * @param string aName The header name.
      * @param array|string $value The header value
      * @return static
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
@@ -877,7 +877,7 @@ class ServerRequest : IServerRequest
     /**
      * Get a modified request without a provided header.
      *
-     * @param string $name The header name to remove.
+     * @param string aName The header name to remove.
      * @return static
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
@@ -1147,7 +1147,7 @@ class ServerRequest : IServerRequest
      * @return array|string|null Query data.
      * @see ServerRequest::getQueryParams()
      */
-    function getQuery(?string $name = null, $default = null) {
+    function getQuery(?string aName = null, $default = null) {
         if ($name == null) {
             return this.query;
         }
@@ -1187,7 +1187,7 @@ class ServerRequest : IServerRequest
      * @param mixed $default The default data.
      * @return mixed The value being read.
      */
-    function getData(?string $name = null, $default = null) {
+    function getData(?string aName = null, $default = null) {
         if ($name == null) {
             return this.data;
         }
@@ -1461,11 +1461,11 @@ class ServerRequest : IServerRequest
      *
      * Use `withParsedBody()` if you need to replace the all request data.
      *
-     * @param string $name The dot separated path to insert $value at.
+     * @param string aName The dot separated path to insert $value at.
      * @param mixed $value The value to insert into the request data.
      * @return static
      */
-    function withData(string $name, $value) {
+    function withData(string aName, $value) {
         $copy = clone this;
 
         if (is_array($copy.data)) {
@@ -1481,10 +1481,10 @@ class ServerRequest : IServerRequest
      * Returns an updated request object. This method returns
      * a *new* request object and does not mutate the request in-place.
      *
-     * @param string $name The dot separated path to remove.
+     * @param string aName The dot separated path to remove.
      * @return static
      */
-    function withoutData(string $name) {
+    function withoutData(string aName) {
         $copy = clone this;
 
         if (is_array($copy.data)) {
@@ -1500,11 +1500,11 @@ class ServerRequest : IServerRequest
      * Returns an updated request object. This method returns
      * a *new* request object and does not mutate the request in-place.
      *
-     * @param string $name The dot separated path to insert $value at.
+     * @param string aName The dot separated path to insert $value at.
      * @param mixed $value The value to insert into the the request parameters.
      * @return static
      */
-    function withParam(string $name, $value) {
+    function withParam(string aName, $value) {
         $copy = clone this;
         $copy.params = Hash::insert($copy.params, $name, $value);
 
@@ -1514,18 +1514,18 @@ class ServerRequest : IServerRequest
     /**
      * Safely access the values in this.params.
      *
-     * @param string $name The name or dotted path to parameter.
+     * @param string aName The name or dotted path to parameter.
      * @param mixed $default The default value if `$name` is not set. Default `null`.
      * @return mixed
      */
-    function getParam(string $name, $default = null) {
+    function getParam(string aName, $default = null) {
         return Hash::get(this.params, $name, $default);
     }
 
     /**
      * Return an instance with the specified request attribute.
      *
-     * @param string $name The attribute name.
+     * @param string aName The attribute name.
      * @param mixed $value The value of the attribute.
      * @return static
      */
@@ -1543,7 +1543,7 @@ class ServerRequest : IServerRequest
     /**
      * Return an instance without the specified request attribute.
      *
-     * @param string $name The attribute name.
+     * @param string aName The attribute name.
      * @return static
      * @throws \InvalidArgumentException
      */
@@ -1562,7 +1562,7 @@ class ServerRequest : IServerRequest
     /**
      * Read an attribute from the request, or get the default
      *
-     * @param string $name The attribute name.
+     * @param string aName The attribute name.
      * @param mixed|null $default The default value if the attribute has not been set.
      * @return mixed
      */

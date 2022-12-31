@@ -34,37 +34,37 @@ interface SchemaInterface
      *
      * - `comment` The comment for the column.
      *
-     * @param string $name The name of the column
+     * @param string aName The name of the column
      * @param array<string, mixed>|string $attrs The attributes for the column or the type name.
      * @return this
      */
-    function addColumn(string $name, $attrs);
+    function addColumn(string aName, $attrs);
 
     /**
      * Get column data in the table.
      *
-     * @param string $name The column name.
+     * @param string aName The column name.
      * @return array<string, mixed>|null Column data or null.
      */
-    function getColumn(string $name): ?array;
+    function getColumn(string aName): ?array;
 
     /**
      * Returns true if a column exists in the schema.
      *
-     * @param string $name Column name.
+     * @param string aName Column name.
      * @return bool
      */
-    function hasColumn(string $name): bool;
+    function hasColumn(string aName): bool;
 
     /**
      * Remove a column from the table schema.
      *
      * If the column is not defined in the table, no error will be raised.
      *
-     * @param string $name The name of the column
+     * @param string aName The name of the column
      * @return this
      */
-    function removeColumn(string $name);
+    function removeColumn(string aName);
 
     /**
      * Get the column names in the table.
@@ -76,19 +76,19 @@ interface SchemaInterface
     /**
      * Returns column type or null if a column does not exist.
      *
-     * @param string $name The column to get the type of.
+     * @param string aName The column to get the type of.
      * @return string|null
      */
-    function getColumnType(string $name): ?string;
+    function getColumnType(string aName): ?string;
 
     /**
      * Sets the type of a column.
      *
-     * @param string $name The column to set the type of.
+     * @param string aName The column to set the type of.
      * @param string $type The type to set the column to.
      * @return this
      */
-    function setColumnType(string $name, string $type);
+    function setColumnType(string aName, string $type);
 
     /**
      * Returns the base type name for the provided column.
@@ -105,10 +105,10 @@ interface SchemaInterface
      *
      * Missing columns are nullable.
      *
-     * @param string $name The column to get the type of.
+     * @param string aName The column to get the type of.
      * @return bool Whether the field is nullable.
      */
-    function isNullable(string $name): bool;
+    function isNullable(string aName): bool;
 
     /**
      * Returns an array where the keys are the column names in the schema

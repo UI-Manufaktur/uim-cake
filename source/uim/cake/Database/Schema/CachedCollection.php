@@ -53,7 +53,7 @@ class CachedCollection : ICollection
     }
 
 
-    function describe(string $name, array $options = []): TableSchemaInterface
+    function describe(string aName, array $options = []): TableSchemaInterface
     {
         $options += ["forceRefresh": false];
         $cacheKey = this.cacheKey($name);
@@ -74,10 +74,10 @@ class CachedCollection : ICollection
     /**
      * Get the cache key for a given name.
      *
-     * @param string $name The name to get a cache key for.
+     * @param string aName The name to get a cache key for.
      * @return string The cache key.
      */
-    function cacheKey(string $name): string
+    function cacheKey(string aName): string
     {
         return this.prefix . "_" . $name;
     }
