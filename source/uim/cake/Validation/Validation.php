@@ -397,7 +397,7 @@ class Validation
      * @param string $operator Comparison operator. See Validation::comparison().
      * @param array<string, mixed> $context The validation context.
      * @return bool
-     * @since 3.6.0
+
      */
     static function compareFields($check, string $field, string $operator, array $context): bool
     {

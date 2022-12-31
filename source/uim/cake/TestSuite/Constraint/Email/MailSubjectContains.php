@@ -44,9 +44,8 @@ class MailSubjectContains : MailConstraintBase
      * Returns the subjects of all messages
      * respects this.at
      *
-     * @return string
      */
-    protected function getAssertedMessages(): string
+    protected string getAssertedMessages(): string
     {
         $messageMembers = [];
         $messages = this.getMessages();

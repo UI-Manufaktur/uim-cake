@@ -1500,9 +1500,8 @@ class Message : JsonSerializable, Serializable
      *
      * @param string $text The text to be converted
      * @param string $charset the target encoding
-     * @return string
      */
-    protected function encodeString(string $text, string $charset): string
+    protected string encodeString(string $text, string $charset): string
     {
         if (this.appCharset == $charset) {
             return $text;

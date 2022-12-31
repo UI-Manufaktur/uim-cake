@@ -128,9 +128,8 @@ abstract class BaseLog : AbstractLogger
      *
      * @param string $message Formatted string
      * @param array $context Context for placeholder values.
-     * @return string
      */
-    protected function interpolate(string $message, array $context = []): string
+    protected string interpolate(string $message, array $context = []): string
     {
         if (strpos($message, "{") == false && strpos($message, "}") == false) {
             return $message;

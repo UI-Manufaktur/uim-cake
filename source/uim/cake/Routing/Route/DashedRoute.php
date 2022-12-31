@@ -22,9 +22,8 @@ class DashedRoute : Route
      * Camelizes the previously dashed plugin route taking into account plugin vendors
      *
      * @param string $plugin Plugin name
-     * @return string
      */
-    protected function _camelizePlugin(string $plugin): string
+    protected string _camelizePlugin(string $plugin): string
     {
         $plugin = str_replace("-", "_", $plugin);
         if (strpos($plugin, "/") == false) {

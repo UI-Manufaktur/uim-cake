@@ -173,9 +173,8 @@ class MultiCheckboxWidget : BasicWidget
      *
      * @param array<string, mixed> $checkbox An array containing checkbox key/value option pairs
      * @param uim.cake.View\Form\ContextInterface $context Context object.
-     * @return string
      */
-    protected function _renderInput(array $checkbox, ContextInterface $context): string
+    protected string _renderInput(array $checkbox, ContextInterface $context): string
     {
         $input = _templates.format("checkbox", [
             "name": $checkbox["name"] . "[]",

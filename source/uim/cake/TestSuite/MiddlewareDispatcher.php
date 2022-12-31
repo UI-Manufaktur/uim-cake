@@ -57,9 +57,8 @@ class MiddlewareDispatcher
      * Convert a URL array into a string URL via routing.
      *
      * @param array $url The url to resolve
-     * @return string
      */
-    protected function resolveRoute(array $url): string
+    protected string resolveRoute(array $url): string
     {
         // Simulate application bootstrap and route loading.
         // We need both to ensure plugins are loaded.

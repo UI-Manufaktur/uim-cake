@@ -192,9 +192,8 @@ trait DateFormatTrait
      * @param \DateTime|\DateTimeImmutable $date Date.
      * @param array<int>|string|int $format Format.
      * @param string|null $locale The locale name in which the date should be displayed.
-     * @return string
      */
-    protected function _formatObject($date, $format, ?string $locale): string
+    protected string _formatObject($date, $format, ?string $locale): string
     {
         $pattern = "";
 

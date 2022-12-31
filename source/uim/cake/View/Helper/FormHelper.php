@@ -281,7 +281,7 @@ class FormHelper : Helper
      * Get the widget locator currently used by the helper.
      *
      * @return uim.cake.View\Widget\WidgetLocator Current locator instance
-     * @since 3.6.0
+
      */
     function getWidgetLocator(): WidgetLocator
     {
@@ -293,7 +293,7 @@ class FormHelper : Helper
      *
      * @param uim.cake.View\Widget\WidgetLocator $instance The locator instance to set.
      * @return this
-     * @since 3.6.0
+
      */
     function setWidgetLocator(WidgetLocator $instance) {
         _locator = $instance;
@@ -515,9 +515,8 @@ class FormHelper : Helper
      * Return a CSRF input if the request data is present.
      * Used to secure forms in conjunction with CsrfMiddleware.
      *
-     * @return string
      */
-    protected function _csrfField(): string
+    protected string _csrfField(): string
     {
         $request = _View.getRequest();
 
@@ -1226,9 +1225,8 @@ class FormHelper : Helper
      *
      * @param string $fieldName the name of the field to guess a type for
      * @param array<string, mixed> $options the options passed to the input method
-     * @return string
      */
-    protected function _inputType(string $fieldName, array $options): string
+    protected string _inputType(string $fieldName, array $options): string
     {
         $context = _getContext();
 

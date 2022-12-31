@@ -142,9 +142,8 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     /**
      * Returns the table name using the fixture class
      *
-     * @return string
      */
-    protected function _tableFromClass(): string
+    protected string _tableFromClass(): string
     {
         [, $class] = namespaceSplit(static::class);
         preg_match("/^(.*)Fixture$/", $class, $matches);

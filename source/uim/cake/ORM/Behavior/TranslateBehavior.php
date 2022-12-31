@@ -323,9 +323,8 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * of the autotable instance.
      *
      * @param uim.cake.orm.Table $table The table class to get a reference name for.
-     * @return string
      */
-    protected function referenceName(Table $table): string
+    protected string referenceName(Table $table): string
     {
         $name = namespaceSplit(get_class($table));
         $name = substr(end($name), 0, -5);

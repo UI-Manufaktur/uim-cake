@@ -130,9 +130,8 @@ class RadioWidget : BasicWidget
      * @param array<string, mixed>|string $text The label text, or complex radio type.
      * @param array<string, mixed> $data Additional options for input generation.
      * @param uim.cake.View\Form\ContextInterface $context The form context
-     * @return string
      */
-    protected function _renderInput($val, $text, $data, $context): string
+    protected string _renderInput($val, $text, $data, $context): string
     {
         $escape = $data["escape"];
         if (is_array($text) && isset($text["text"], $text["value"])) {

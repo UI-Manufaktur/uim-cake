@@ -295,9 +295,8 @@ trait IntegrationTestTrait
     /**
      * Returns the encryption key to be used.
      *
-     * @return string
      */
-    protected function _getCookieEncryptionKey(): string
+    protected string _getCookieEncryptionKey(): string
     {
         return _cookieEncryptionKey ?? Security::getSalt();
     }
@@ -1257,9 +1256,8 @@ trait IntegrationTestTrait
      * Inspect controller to extract possible causes of the failed assertion
      *
      * @param string $message Original message to use as a base
-     * @return string
      */
-    protected function extractVerboseMessage(string $message): string
+    protected string extractVerboseMessage(string $message): string
     {
         if (_exception instanceof Exception) {
             $message .= this.extractExceptionMessage(_exception);
@@ -1279,9 +1277,8 @@ trait IntegrationTestTrait
      * Extract verbose message for existing exception
      *
      * @param \Exception $exception Exception to extract
-     * @return string
      */
-    protected function extractExceptionMessage(Exception $exception): string
+    protected string extractExceptionMessage(Exception $exception): string
     {
         $exceptions = [$exception];
         $previous = $exception.getPrevious();

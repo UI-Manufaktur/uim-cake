@@ -833,9 +833,8 @@ class PaginatorHelper : Helper
      *
      * @param uim.cake.View\StringTemplate $templater StringTemplate instance.
      * @param array<string, mixed> $options Options from the numbers() method.
-     * @return string
      */
-    protected function _formatNumber(StringTemplate $templater, array $options): string
+    protected string _formatNumber(StringTemplate $templater, array $options): string
     {
         $vars = [
             "text": $options["text"],

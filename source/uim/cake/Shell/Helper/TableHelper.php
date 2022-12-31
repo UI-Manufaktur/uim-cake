@@ -158,9 +158,8 @@ class TableHelper : Helper
      *
      * @param string $text The text to be surrounded
      * @param string $style The style to be applied
-     * @return string
      */
-    protected function _addStyle(string $text, string $style): string
+    protected string _addStyle(string $text, string $style): string
     {
         return "<" . $style . ">" . $text . "</" . $style . ">";
     }

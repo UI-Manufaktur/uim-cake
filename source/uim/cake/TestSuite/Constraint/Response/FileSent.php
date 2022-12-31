@@ -34,9 +34,8 @@ class FileSent : ResponseBase
      * Overwrites the descriptions so we can remove the automatic "expected" message
      *
      * @param mixed $other Value
-     * @return string
      */
-    protected function failureDescription($other): string
+    protected string failureDescription($other): string
     {
         return this.toString();
     }

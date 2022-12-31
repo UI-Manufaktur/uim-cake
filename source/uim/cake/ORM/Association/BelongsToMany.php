@@ -1382,9 +1382,8 @@ class BelongsToMany : Association
      * this name is used to generate alias in the query and to later on retrieve the
      * results.
      *
-     * @return string
      */
-    protected function _junctionAssociationName(): string
+    protected string _junctionAssociationName(): string
     {
         if (!_junctionAssociationName) {
             _junctionAssociationName = this.getTarget()
@@ -1401,9 +1400,8 @@ class BelongsToMany : Association
      * name based of the associated tables will be generated if none found.
      *
      * @param string|null $name The name of the junction table.
-     * @return string
      */
-    protected function _junctionTableName(?string $name = null): string
+    protected string _junctionTableName(?string $name = null): string
     {
         if ($name == null) {
             if (empty(_junctionTableName)) {

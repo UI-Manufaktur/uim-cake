@@ -1525,7 +1525,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @see uim.cake.Validation\Validation::compareFields()
      * @return this
-     * @since 3.6.0
+
      */
     function notSameAs(string $field, string $secondField, ?string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
@@ -1545,7 +1545,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @see uim.cake.Validation\Validation::compareFields()
      * @return this
-     * @since 3.6.0
+
      */
     function equalToField(string $field, string $secondField, ?string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
@@ -1565,7 +1565,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @see uim.cake.Validation\Validation::compareFields()
      * @return this
-     * @since 3.6.0
+
      */
     function notEqualToField(string $field, string $secondField, ?string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
@@ -1585,7 +1585,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @see uim.cake.Validation\Validation::compareFields()
      * @return this
-     * @since 3.6.0
+
      */
     function greaterThanField(string $field, string $secondField, ?string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
@@ -1605,7 +1605,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @see uim.cake.Validation\Validation::compareFields()
      * @return this
-     * @since 3.6.0
+
      */
     function greaterThanOrEqualToField(string $field, string $secondField, ?string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
@@ -1625,7 +1625,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @see uim.cake.Validation\Validation::compareFields()
      * @return this
-     * @since 3.6.0
+
      */
     function lessThanField(string $field, string $secondField, ?string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
@@ -1645,7 +1645,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @see uim.cake.Validation\Validation::compareFields()
      * @return this
-     * @since 3.6.0
+
      */
     function lessThanOrEqualToField(string $field, string $secondField, ?string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);

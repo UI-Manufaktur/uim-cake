@@ -370,9 +370,8 @@ class SmtpTransport : AbstractTransport
      * Prepares the `MAIL FROM` SMTP command.
      *
      * @param string $message The email address to send with the command.
-     * @return string
      */
-    protected function _prepareFromCmd(string $message): string
+    protected string _prepareFromCmd(string $message): string
     {
         return "MAIL FROM:<" . $message . ">";
     }
@@ -381,9 +380,8 @@ class SmtpTransport : AbstractTransport
      * Prepares the `RCPT TO` SMTP command.
      *
      * @param string $message The email address to send with the command.
-     * @return string
      */
-    protected function _prepareRcptCmd(string $message): string
+    protected string _prepareRcptCmd(string $message): string
     {
         return "RCPT TO:<" . $message . ">";
     }
@@ -423,9 +421,8 @@ class SmtpTransport : AbstractTransport
      * Prepares the message body.
      *
      * @param uim.cake.Mailer\Message $message Message instance
-     * @return string
      */
-    protected function _prepareMessage(Message $message): string
+    protected string _prepareMessage(Message $message): string
     {
         $lines = $message.getBody();
         $messages = [];

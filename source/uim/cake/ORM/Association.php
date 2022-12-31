@@ -569,9 +569,8 @@ abstract class Association
     /**
      * Returns default property name based on association name.
      *
-     * @return string
      */
-    protected function _propertyName(): string
+    protected string _propertyName(): string
     {
         [, $name] = pluginSplit(_name);
 
