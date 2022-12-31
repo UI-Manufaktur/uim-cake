@@ -8,7 +8,7 @@
   */module uim.cake.Database;
 
 /**
- * : the TypedResultInterface
+ * : the ITypedResult
  */
 trait TypedResultTrait
 {

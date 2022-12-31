@@ -11,7 +11,7 @@ import uim.cake.Chronos\Date;
 import uim.cake.Chronos\MutableDate;
 import uim.cake.databases.IExpression;
 import uim.cake.databases.Query;
-import uim.cake.databases.TypedResultInterface;
+import uim.cake.databases.ITypedResult;
 import uim.cake.databases.ValueBinder;
 use DateTimeInterface;
 
@@ -59,7 +59,7 @@ trait CaseExpressionTrait
             $value instanceof IdentifierExpression
         ) {
             $type = _typeMap.type($value.getIdentifier());
-        } elseif ($value instanceof TypedResultInterface) {
+        } elseif ($value instanceof ITypedResult) {
             $type = $value.getReturnType();
         }
 

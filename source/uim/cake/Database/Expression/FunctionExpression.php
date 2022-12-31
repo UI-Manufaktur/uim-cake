@@ -3,7 +3,7 @@ module uim.cake.databases.Expression;
 import uim.cake.databases.IExpression;
 import uim.cake.databases.Query;
 import uim.cake.databases.Type\ExpressionTypeCasterTrait;
-import uim.cake.databases.TypedResultInterface;
+import uim.cake.databases.ITypedResult;
 import uim.cake.databases.TypedResultTrait;
 import uim.cake.databases.ValueBinder;
 
@@ -13,7 +13,7 @@ import uim.cake.databases.ValueBinder;
  * For security reasons, all params passed are quoted by default unless
  * explicitly told otherwise.
  */
-class FunctionExpression : QueryExpression : TypedResultInterface
+class FunctionExpression : QueryExpression : ITypedResult
 {
     use ExpressionTypeCasterTrait;
     use TypedResultTrait;

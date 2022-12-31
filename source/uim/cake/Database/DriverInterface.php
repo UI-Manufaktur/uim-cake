@@ -132,31 +132,31 @@ interface DriverInterface
      *
      * @param string|int $name Save point name or id
      */
-    string releaseSavePointSQL($name): string;
+    string releaseSavePointSQL($name);
 
     /**
      * Get the SQL for creating a save point.
      *
      * @param string|int $name Save point name or id
      */
-    string savePointSQL($name): string;
+    string savePointSQL($name);
 
     /**
      * Get the SQL for rollingback a save point.
      *
      * @param string|int $name Save point name or id
      */
-    string rollbackSavePointSQL($name): string;
+    string rollbackSavePointSQL($name);
 
     /**
      * Get the SQL for disabling foreign keys.
      */
-    string disableForeignKeySQL(): string;
+    string disableForeignKeySQL();
 
     /**
      * Get the SQL for enabling foreign keys.
      */
-    string enableForeignKeySQL(): string;
+    string enableForeignKeySQL();
 
     /**
      * Returns whether the driver supports adding or dropping constraints
@@ -181,7 +181,7 @@ interface DriverInterface
      * @param mixed $value The value to quote.
      * @param int $type Must be one of the \PDO::PARAM_* constants
      */
-    string quote($value, $type): string;
+    string quote($value, $type);
 
     /**
      * Checks if the driver supports quoting.
@@ -221,7 +221,7 @@ interface DriverInterface
      *
      * @param string $identifier The identifier expression to quote.
      */
-    string quoteIdentifier(string $identifier): string;
+    string quoteIdentifier(string $identifier);
 
     /**
      * Escapes values for use in schema definitions.
@@ -229,12 +229,12 @@ interface DriverInterface
      * @param mixed $value The value to escape.
      * @return string String for use in schema definitions.
      */
-    function schemaValue($value): string;
+    string schemaValue($value);
 
     /**
      * Returns the schema name that"s being used.
      */
-    string schema(): string;
+    string schema();
 
     /**
      * Returns last id generated for a table or sequence in database.

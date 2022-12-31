@@ -9,7 +9,7 @@
 
 import uim.cake.databases.IExpression;
 import uim.cake.databases.Type\ExpressionTypeCasterTrait;
-import uim.cake.databases.TypedResultInterface;
+import uim.cake.databases.ITypedResult;
 import uim.cake.databases.TypeMapTrait;
 import uim.cake.databases.ValueBinder;
 use Closure;
@@ -19,7 +19,7 @@ use LogicException;
 /**
  * Represents a SQL case statement with a fluid API
  */
-class CaseStatementExpression : IExpression, TypedResultInterface
+class CaseStatementExpression : IExpression, ITypedResult
 {
     use CaseExpressionTrait;
     use ExpressionTypeCasterTrait;

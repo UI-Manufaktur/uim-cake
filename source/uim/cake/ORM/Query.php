@@ -5,7 +5,7 @@ use BadMethodCallException;
 import uim.cake.databases.Connection;
 import uim.cake.databases.IExpression;
 import uim.cake.databases.Query as DatabaseQuery;
-import uim.cake.databases.TypedResultInterface;
+import uim.cake.databases.ITypedResult;
 import uim.cake.databases.TypeMap;
 import uim.cake.databases.ValueBinder;
 import uim.cake.datasources.IQuery;
@@ -1166,7 +1166,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         $types = [];
 
         foreach ($select as $alias: $value) {
-            if ($value instanceof TypedResultInterface) {
+            if ($value instanceof ITypedResult) {
                 $types[$alias] = $value.getReturnType();
                 continue;
             }
