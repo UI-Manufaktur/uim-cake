@@ -220,11 +220,11 @@ interface IDriver {
      * of the transformed query and the full compiled SQL string.
      *
      * @param uim.cake.databases.Query myQuery The query to compile.
-     * @param uim.cake.databases.ValueBinder $binder The value binder to use.
+     * @param uim.cake.databases.ValueBinder aBinder The value binder to use.
      * @return array containing 2 entries. The first entity is the transformed query
      * and the second one the compiled SQL.
      */
-    array compileQuery(Query myQuery, ValueBinder $binder);
+    array compileQuery(Query myQuery, ValueBinder aBinder);
 
     // Returns an instance of a QueryCompiler.
     QueryCompiler newCompiler();

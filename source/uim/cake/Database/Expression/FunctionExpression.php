@@ -119,7 +119,7 @@ class FunctionExpression : QueryExpression : ITypedResult
     }
 
 
-    function sql(ValueBinder $binder): string
+    function sql(ValueBinder aBinder): string
     {
         $parts = [];
         foreach (_conditions as $condition) {

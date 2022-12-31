@@ -230,7 +230,7 @@ class Query : IExpression, IteratorAggregate {
      *
      * @param uim.cake.databases.ValueBinder|null $binder Value binder that generates parameter placeholders
      */
-    string sql(?ValueBinder $binder = null) {
+    string sql(?ValueBinder aBinder = null) {
         if (!$binder) {
             $binder = this.getValueBinder();
             $binder.resetCount();
@@ -2007,7 +2007,7 @@ class Query : IExpression, IteratorAggregate {
      * @param uim.cake.databases.ValueBinder|null $binder The binder or null to disable binding.
      * @return this
      */
-    auto setValueBinder(?ValueBinder $binder) {
+    auto setValueBinder(?ValueBinder aBinder) {
         _valueBinder = $binder;
 
         return this;

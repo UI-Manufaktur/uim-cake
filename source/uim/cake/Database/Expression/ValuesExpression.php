@@ -183,7 +183,7 @@ class ValuesExpression : IExpression
     }
 
 
-    function sql(ValueBinder $binder): string
+    function sql(ValueBinder aBinder): string
     {
         if (empty(_values) && empty(_query)) {
             return "";

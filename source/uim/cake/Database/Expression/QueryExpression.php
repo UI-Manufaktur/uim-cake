@@ -538,7 +538,7 @@ class QueryExpression : IExpression, Countable
     }
 
 
-    function sql(ValueBinder $binder): string
+    function sql(ValueBinder aBinder): string
     {
         $len = this.count();
         if ($len == 0) {

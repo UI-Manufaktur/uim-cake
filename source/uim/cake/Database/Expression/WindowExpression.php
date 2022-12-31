@@ -177,7 +177,7 @@ class WindowExpression : IExpression, WindowInterface
     }
 
 
-    function sql(ValueBinder $binder): string
+    function sql(ValueBinder aBinder): string
     {
         $clauses = [];
         if (this.name.getIdentifier()) {
@@ -253,11 +253,11 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * Builds frame offset sql.
      *
-     * @param uim.cake.databases.ValueBinder $binder Value binder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder
      * @param uim.cake.databases.IExpression|string|int|null $offset Frame offset
      * @param string $direction Frame offset direction
      */
-    protected string buildOffsetSql(ValueBinder $binder, $offset, string $direction): string
+    protected string buildOffsetSql(ValueBinder aBinder, $offset, string $direction): string
     {
         if ($offset == 0) {
             return "CURRENT ROW";

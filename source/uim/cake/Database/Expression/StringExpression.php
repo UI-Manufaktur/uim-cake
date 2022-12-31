@@ -51,7 +51,7 @@ class StringExpression : IExpression
     }
 
 
-    function sql(ValueBinder $binder): string
+    function sql(ValueBinder aBinder): string
     {
         $placeholder = $binder.placeholder("c");
         $binder.bind($placeholder, this.string, "string");

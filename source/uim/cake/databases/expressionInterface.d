@@ -8,9 +8,9 @@ interface IExpression {
     /**
      * Converts the Node into a SQL string fragment.
      *
-     * @param uim.cake.databases.ValueBinder $binder Parameter binder
+     * @param uim.cake.databases.ValueBinder aBinder Parameter binder
      */
-    string sql(ValueBinder $binder);
+    string sql(ValueBinder aBinder);
 
     /**
      * Iterates over each part of the expression recursively for every

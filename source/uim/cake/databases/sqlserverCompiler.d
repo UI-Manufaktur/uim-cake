@@ -35,10 +35,10 @@ class SqlserverCompiler : QueryCompiler
      *
      * @param array $parts List of CTEs to be transformed to string
      * @param uim.cake.databases.Query myQuery The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string
      */
-    protected string _buildWithPart(array $parts, Query myQuery, ValueBinder $binder) {
+    protected string _buildWithPart(array $parts, Query myQuery, ValueBinder aBinder) {
         $expressions = [];
         foreach ($parts as $cte) {
             $expressions[] = $cte.sql($binder);
@@ -56,10 +56,10 @@ class SqlserverCompiler : QueryCompiler
      *
      * @param array $parts The parts to build
      * @param uim.cake.databases.Query myQuery The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string
      */
-    protected string _buildInsertPart(array $parts, Query myQuery, ValueBinder $binder) {
+    protected string _buildInsertPart(array $parts, Query myQuery, ValueBinder aBinder) {
         if (!isset($parts[0])) {
             throw new DatabaseException(
                 "Could not compile insert query. No table was specified. " .
@@ -100,7 +100,7 @@ class SqlserverCompiler : QueryCompiler
      *
      * @param array $parts list of fields to be transformed to string
      * @param uim.cake.databases.Query myQuery The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string
      */
     protected auto _buildHavingPart($parts, myQuery, $binder) {

@@ -73,7 +73,7 @@ class IdentifierExpression : IExpression
     }
 
 
-    function sql(ValueBinder $binder): string
+    function sql(ValueBinder aBinder): string
     {
         $sql = _identifier;
         if (this.collation) {

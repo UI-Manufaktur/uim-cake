@@ -1074,7 +1074,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     }
 
 
-    function sql(?ValueBinder $binder = null): string
+    function sql(?ValueBinder aBinder = null): string
     {
         this.triggerBeforeFind();
 

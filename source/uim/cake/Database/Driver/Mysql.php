@@ -197,19 +197,19 @@ class Mysql : Driver
     }
 
 
-    function schema(): string
+    string schema()
     {
         return _config["database"];
     }
 
 
-    function disableForeignKeySQL(): string
+    string disableForeignKeySQL()
     {
         return "SET foreign_key_checks = 0";
     }
 
 
-    function enableForeignKeySQL(): string
+    string enableForeignKeySQL()
     {
         return "SET foreign_key_checks = 1";
     }
@@ -252,7 +252,7 @@ class Mysql : Driver
     /**
      * Returns connected server version.
      */
-    string version(): string
+    string version()
     {
         if (_version == null) {
             this.connect();

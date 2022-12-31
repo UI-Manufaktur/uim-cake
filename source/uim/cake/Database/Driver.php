@@ -394,7 +394,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    function compileQuery(Query $query, ValueBinder $binder): array
+    function compileQuery(Query $query, ValueBinder aBinder): array
     {
         $processor = this.newCompiler();
         $translator = this.queryTranslator($query.type());

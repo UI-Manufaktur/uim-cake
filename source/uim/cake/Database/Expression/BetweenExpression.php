@@ -55,7 +55,7 @@ class BetweenExpression : IExpression, FieldInterface
     }
 
 
-    function sql(ValueBinder $binder): string
+    function sql(ValueBinder aBinder): string
     {
         $parts = [
             "from": _from,
@@ -94,7 +94,7 @@ class BetweenExpression : IExpression, FieldInterface
      * Registers a value in the placeholder generator and returns the generated placeholder
      *
      * @param mixed $value The value to bind
-     * @param uim.cake.databases.ValueBinder $binder The value binder to use
+     * @param uim.cake.databases.ValueBinder aBinder The value binder to use
      * @param string $type The type of $value
      * @return string generated placeholder
      */

@@ -148,7 +148,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
     }
 
 
-    function sql(ValueBinder $binder): string
+    string sql(ValueBinder aBinder)
     {
         $sql = parent::sql($binder);
         if (this.filter != null) {

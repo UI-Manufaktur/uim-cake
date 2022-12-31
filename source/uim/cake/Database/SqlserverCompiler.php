@@ -39,9 +39,9 @@ class SqlserverCompiler : QueryCompiler
      *
      * @param array $parts List of CTEs to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildWithPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildWithPart(array $parts, Query $query, ValueBinder aBinder)
     {
         $expressions = [];
         foreach ($parts as $cte) {
@@ -60,9 +60,9 @@ class SqlserverCompiler : QueryCompiler
      *
      * @param array $parts The parts to build
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildInsertPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildInsertPart(array $parts, Query $query, ValueBinder aBinder)
     {
         if (!isset($parts[0])) {
             throw new DatabaseException(
@@ -88,7 +88,7 @@ class SqlserverCompiler : QueryCompiler
      * @param int $limit the limit clause
      * @param uim.cake.databases.Query $query The query that is being compiled
      */
-    protected string _buildLimitPart(int $limit, Query $query): string
+    protected string _buildLimitPart(int $limit, Query $query)
     {
         if ($query.clause("offset") == null) {
             return "";
@@ -104,7 +104,7 @@ class SqlserverCompiler : QueryCompiler
      *
      * @param array $parts list of fields to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
     protected string _buildHavingPart($parts, $query, $binder) {
         $selectParts = $query.clause("select");

@@ -370,7 +370,7 @@ abstract class Driver : IDriver
         return false;
     }
 
-    array compileQuery(Query myQuery, ValueBinder $binder) {
+    array compileQuery(Query myQuery, ValueBinder aBinder) {
         $processor = this.newCompiler();
         $translator = this.queryTranslator(myQuery.type());
         myQuery = $translator(myQuery);

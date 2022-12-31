@@ -109,7 +109,7 @@ class ComparisonExpression : IExpression, FieldInterface
     }
 
 
-    function sql(ValueBinder $binder): string
+    function sql(ValueBinder aBinder): string
     {
         /** @var uim.cake.databases.IExpression|string $field */
         $field = _field;
@@ -168,10 +168,10 @@ class ComparisonExpression : IExpression, FieldInterface
      * Returns a template and a placeholder for the value after registering it
      * with the placeholder $binder
      *
-     * @param uim.cake.databases.ValueBinder $binder The value binder to use.
+     * @param uim.cake.databases.ValueBinder aBinder The value binder to use.
      * @return array First position containing the template and the second a placeholder
      */
-    protected function _stringExpression(ValueBinder $binder): array
+    protected function _stringExpression(ValueBinder aBinder): array
     {
         $template = "%s ";
 
@@ -208,11 +208,11 @@ class ComparisonExpression : IExpression, FieldInterface
      * Registers a value in the placeholder generator and returns the generated placeholder
      *
      * @param mixed $value The value to bind
-     * @param uim.cake.databases.ValueBinder $binder The value binder to use
+     * @param uim.cake.databases.ValueBinder aBinder The value binder to use
      * @param string|null $type The type of $value
      * @return string generated placeholder
      */
-    protected function _bindValue($value, ValueBinder $binder, ?string $type = null): string
+    protected function _bindValue($value, ValueBinder aBinder, ?string $type = null): string
     {
         $placeholder = $binder.placeholder("c");
         $binder.bind($placeholder, $value, $type);
@@ -225,10 +225,10 @@ class ComparisonExpression : IExpression, FieldInterface
      * $binder and separated by `,`
      *
      * @param iterable $value the value to flatten
-     * @param uim.cake.databases.ValueBinder $binder The value binder to use
+     * @param uim.cake.databases.ValueBinder aBinder The value binder to use
      * @param string|null $type the type to cast values to
      */
-    protected string _flattenValue(iterable $value, ValueBinder $binder, ?string $type = null): string
+    protected string _flattenValue(iterable $value, ValueBinder aBinder, ?string $type = null): string
     {
         $parts = [];
         if (is_array($value)) {

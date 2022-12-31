@@ -79,9 +79,9 @@ class QueryCompiler
      * the placeholders for the bound values using the provided generator
      *
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholders
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholders
      */
-    string compile(Query $query, ValueBinder $binder)
+    string compile(Query $query, ValueBinder aBinder)
     {
         $sql = "";
         $type = $query.type();
@@ -110,10 +110,10 @@ class QueryCompiler
      *
      * @param string $sql initial sql string to append to
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return \Closure
      */
-    protected function _sqlCompiler(string &$sql, Query $query, ValueBinder $binder): Closure
+    protected function _sqlCompiler(string &$sql, Query $query, ValueBinder aBinder): Closure
     {
         return function ($part, $partName) use (&$sql, $query, $binder) {
             if (
@@ -145,9 +145,9 @@ class QueryCompiler
      *
      * @param array $parts List of CTEs to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildWithPart(array $parts, Query $query, ValueBinder $binder)
+    protected string _buildWithPart(array $parts, Query $query, ValueBinder aBinder)
     {
         $recursive = false;
         $expressions = [];
@@ -169,9 +169,9 @@ class QueryCompiler
      *
      * @param array $parts list of fields to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildSelectPart(array $parts, Query $query, ValueBinder $binder)
+    protected string _buildSelectPart(array $parts, Query $query, ValueBinder aBinder)
     {
         $select = "SELECT%s %s%s";
         if (_orderedUnion && $query.clause("union")) {
@@ -215,9 +215,9 @@ class QueryCompiler
      *
      * @param array $parts list of tables to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildFromPart(array $parts, Query $query, ValueBinder $binder)
+    protected string _buildFromPart(array $parts, Query $query, ValueBinder aBinder)
     {
         $select = " FROM %s";
         $normalized = [];
@@ -240,9 +240,9 @@ class QueryCompiler
      *
      * @param array $parts list of joins to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildJoinPart(array $parts, Query $query, ValueBinder $binder)
+    protected string _buildJoinPart(array $parts, Query $query, ValueBinder aBinder)
     {
         $joins = "";
         foreach ($parts as $join) {
@@ -278,9 +278,9 @@ class QueryCompiler
      *
      * @param array $parts List of windows to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildWindowPart(array $parts, Query $query, ValueBinder $binder)
+    protected string _buildWindowPart(array $parts, Query $query, ValueBinder aBinder)
     {
         $windows = [];
         foreach ($parts as $window) {
@@ -295,9 +295,9 @@ class QueryCompiler
      *
      * @param array $parts List of keys & values to set.
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildSetPart(array $parts, Query $query, ValueBinder $binder)
+    protected string _buildSetPart(array $parts, Query $query, ValueBinder aBinder)
     {
         $set = [];
         foreach ($parts as $part) {
@@ -320,9 +320,9 @@ class QueryCompiler
      *
      * @param array $parts list of queries to be operated with UNION
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      */
-    protected string _buildUnionPart(array $parts, Query $query, ValueBinder $binder)
+    protected string _buildUnionPart(array $parts, Query $query, ValueBinder aBinder)
     {
         $parts = array_map(function ($p) use ($binder) {
             $p["query"] = $p["query"].sql($binder);
@@ -347,10 +347,10 @@ class QueryCompiler
      *
      * @param array $parts The insert parts.
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string SQL fragment.
      */
-    protected string _buildInsertPart(array $parts, Query $query, ValueBinder $binder)
+    protected string _buildInsertPart(array $parts, Query $query, ValueBinder aBinder)
     {
         if (!isset($parts[0])) {
             throw new DatabaseException(
@@ -370,10 +370,10 @@ class QueryCompiler
      *
      * @param array $parts The values parts.
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string SQL fragment.
      */
-    protected string _buildValuesPart(array $parts, Query $query, ValueBinder $binder)
+    protected string _buildValuesPart(array $parts, Query $query, ValueBinder aBinder)
     {
         return implode("", _stringifyExpressions($parts, $binder));
     }
@@ -383,10 +383,10 @@ class QueryCompiler
      *
      * @param array $parts The update parts.
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string SQL fragment.
      */
-    protected function _buildUpdatePart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildUpdatePart(array $parts, Query $query, ValueBinder aBinder)
     {
         $table = _stringifyExpressions($parts, $binder);
         $modifiers = _buildModifierPart($query.clause("modifier"), $query, $binder);
@@ -399,10 +399,10 @@ class QueryCompiler
      *
      * @param array $parts The query modifier parts
      * @param uim.cake.databases.Query $query The query that is being compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @return string SQL fragment.
      */
-    protected function _buildModifierPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildModifierPart(array $parts, Query $query, ValueBinder aBinder)
     {
         if ($parts == []) {
             return "";
@@ -416,11 +416,11 @@ class QueryCompiler
      * into their string representation.
      *
      * @param array $expressions list of strings and IExpression objects
-     * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @param bool $wrap Whether to wrap each expression object with parenthesis
      * @return array
      */
-    protected function _stringifyExpressions(array $expressions, ValueBinder $binder, bool $wrap = true): array
+    protected function _stringifyExpressions(array $expressions, ValueBinder aBinder, bool $wrap = true): array
     {
         $result = [];
         foreach ($expressions as $k: $expression) {

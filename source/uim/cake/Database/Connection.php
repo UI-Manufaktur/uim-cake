@@ -306,9 +306,9 @@ class Connection : ConnectionInterface
      * connection's driver
      *
      * @param uim.cake.databases.Query $query The query to be compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder
      */
-    string compileQuery(Query $query, ValueBinder $binder) {
+    string compileQuery(Query $query, ValueBinder aBinder) {
         return this.getDriver().compileQuery($query, $binder)[1];
     }
 

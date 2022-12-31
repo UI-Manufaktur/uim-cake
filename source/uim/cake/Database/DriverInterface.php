@@ -281,11 +281,11 @@ interface DriverInterface
      * of the transformed query and the full compiled SQL string.
      *
      * @param uim.cake.databases.Query $query The query to compile.
-     * @param uim.cake.databases.ValueBinder $binder The value binder to use.
+     * @param uim.cake.databases.ValueBinder aBinder The value binder to use.
      * @return array containing 2 entries. The first entity is the transformed query
      * and the second one the compiled SQL.
      */
-    function compileQuery(Query $query, ValueBinder $binder): array;
+    function compileQuery(Query $query, ValueBinder aBinder): array;
 
     /**
      * Returns an instance of a QueryCompiler.

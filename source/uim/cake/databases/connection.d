@@ -253,9 +253,9 @@ class Connection : IConnection {
      * connection"s driver
      *
      * @param uim.cake.databases.Query myQuery The query to be compiled
-     * @param uim.cake.databases.ValueBinder $binder Value binder
+     * @param uim.cake.databases.ValueBinder aBinder Value binder
      */
-    string compileQuery(Query myQuery, ValueBinder $binder) {
+    string compileQuery(Query myQuery, ValueBinder aBinder) {
         return this.getDriver().compileQuery(myQuery, $binder)[1];
     }
 
