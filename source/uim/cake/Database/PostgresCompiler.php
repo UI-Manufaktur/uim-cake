@@ -44,9 +44,8 @@ class PostgresCompiler : QueryCompiler
      * @param array $parts list of fields to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected function _buildHavingPart($parts, $query, $binder) {
+    protected string _buildHavingPart($parts, $query, $binder) {
         $selectParts = $query.clause("select");
 
         foreach ($selectParts as $selectKey: $selectPart) {

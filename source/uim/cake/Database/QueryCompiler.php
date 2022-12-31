@@ -147,9 +147,8 @@ class QueryCompiler
      * @param array $parts List of CTEs to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected function _buildWithPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildWithPart(array $parts, Query $query, ValueBinder $binder): string
     {
         $recursive = false;
         $expressions = [];
@@ -172,9 +171,8 @@ class QueryCompiler
      * @param array $parts list of fields to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected function _buildSelectPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildSelectPart(array $parts, Query $query, ValueBinder $binder): string
     {
         $select = "SELECT%s %s%s";
         if (_orderedUnion && $query.clause("union")) {
@@ -219,9 +217,8 @@ class QueryCompiler
      * @param array $parts list of tables to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected function _buildFromPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildFromPart(array $parts, Query $query, ValueBinder $binder): string
     {
         $select = " FROM %s";
         $normalized = [];
@@ -245,9 +242,8 @@ class QueryCompiler
      * @param array $parts list of joins to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected function _buildJoinPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildJoinPart(array $parts, Query $query, ValueBinder $binder): string
     {
         $joins = "";
         foreach ($parts as $join) {
@@ -284,9 +280,8 @@ class QueryCompiler
      * @param array $parts List of windows to be transformed to string
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected function _buildWindowPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildWindowPart(array $parts, Query $query, ValueBinder $binder): string
     {
         $windows = [];
         foreach ($parts as $window) {
@@ -302,9 +297,8 @@ class QueryCompiler
      * @param array $parts List of keys & values to set.
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected function _buildSetPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildSetPart(array $parts, Query $query, ValueBinder $binder): string
     {
         $set = [];
         foreach ($parts as $part) {
@@ -328,9 +322,8 @@ class QueryCompiler
      * @param array $parts list of queries to be operated with UNION
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected function _buildUnionPart(array $parts, Query $query, ValueBinder $binder): string
+    protected string _buildUnionPart(array $parts, Query $query, ValueBinder $binder): string
     {
         $parts = array_map(function ($p) use ($binder) {
             $p["query"] = $p["query"].sql($binder);

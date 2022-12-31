@@ -104,9 +104,8 @@ class ConsoleFormatter : FormatterInterface
      *
      * @param uim.cake.Error\Debug\NodeInterface $var The node tree to dump.
      * @param int $indent The current indentation level.
-     * @return string
      */
-    protected function export(NodeInterface $var, int $indent): string
+    protected string export(NodeInterface $var, int $indent): string
     {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {

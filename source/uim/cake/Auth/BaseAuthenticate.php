@@ -162,8 +162,7 @@ abstract class BaseAuthenticate : IEventListener
      * @throws \RuntimeException If password hasher class not found or
      *   it does not extend AbstractPasswordHasher
      */
-    function passwordHasher(): AbstractPasswordHasher
-    {
+    AbstractPasswordHasher passwordHasher() {
         if (_passwordHasher != null) {
             return _passwordHasher;
         }

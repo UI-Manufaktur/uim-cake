@@ -256,9 +256,8 @@ class WindowExpression : IExpression, WindowInterface
      * @param uim.cake.databases.ValueBinder $binder Value binder
      * @param uim.cake.databases.IExpression|string|int|null $offset Frame offset
      * @param string $direction Frame offset direction
-     * @return string
      */
-    protected function buildOffsetSql(ValueBinder $binder, $offset, string $direction): string
+    protected string buildOffsetSql(ValueBinder $binder, $offset, string $direction): string
     {
         if ($offset == 0) {
             return "CURRENT ROW";

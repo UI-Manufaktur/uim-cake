@@ -313,7 +313,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return string Prefixed key with potentially unsafe characters replaced.
      * @throws uim.cake.Cache\InvalidArgumentException If key"s value is invalid.
      */
-    protected function _key($key): string
+    protected string _key($key)
     {
         this.ensureValidKey($key);
 

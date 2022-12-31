@@ -570,9 +570,8 @@ class PostgresSchemaDialect : SchemaDialect
      *
      * @param string $prefix The key prefix
      * @param array<string, mixed> $data Key data.
-     * @return string
      */
-    protected function _keySql(string $prefix, array $data): string
+    protected string _keySql(string $prefix, array $data): string
     {
         $columns = array_map(
             [_driver, "quoteIdentifier"],

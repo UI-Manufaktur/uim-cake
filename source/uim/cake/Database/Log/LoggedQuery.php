@@ -57,9 +57,8 @@ class LoggedQuery : JsonSerializable
      * Helper function used to replace query placeholders by the real
      * params used to execute the query
      *
-     * @return string
      */
-    protected function interpolate(): string
+    protected string interpolate(): string
     {
         $params = array_map(function ($p) {
             if ($p == null) {

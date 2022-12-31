@@ -1126,7 +1126,7 @@ class Response : IResponse
      * @param string $url The LinkHeader url.
      * @param array<string, mixed> $options The LinkHeader params.
      * @return static
-     * @since 3.6.0
+
      */
     function withAddedLink(string $url, array $options = []) {
         $params = [];

@@ -227,9 +227,8 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param iterable $value the value to flatten
      * @param uim.cake.databases.ValueBinder $binder The value binder to use
      * @param string|null $type the type to cast values to
-     * @return string
      */
-    protected function _flattenValue(iterable $value, ValueBinder $binder, ?string $type = null): string
+    protected string _flattenValue(iterable $value, ValueBinder $binder, ?string $type = null): string
     {
         $parts = [];
         if (is_array($value)) {

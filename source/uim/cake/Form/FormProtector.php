@@ -406,9 +406,8 @@ class FormProtector
      * @param array<string> $unlockedFields Unlocked fields.
      * @param string $url Form URL.
      * @param string $sessionId Session Id.
-     * @return string
      */
-    protected function generateHash(array $fields, array $unlockedFields, string $url, string $sessionId) {
+    protected string generateHash(array $fields, array $unlockedFields, string $url, string $sessionId) {
         $hashParts = [
             $url,
             serialize($fields),

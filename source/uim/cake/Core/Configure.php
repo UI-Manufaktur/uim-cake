@@ -177,7 +177,7 @@ class Configure
      * @param string $var Variable to consume. Use "." to access array elements.
      * @return mixed Value stored in configure.
      * @throws \RuntimeException if the requested configuration is not set.
-     * @since 3.6.0
+
      */
     static function consumeOrFail(string $var) {
         if (!static::check($var)) {

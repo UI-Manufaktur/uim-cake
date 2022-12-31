@@ -95,9 +95,8 @@ class TupleComparison : ComparisonExpression
      * for the SQL version of this expression
      *
      * @param uim.cake.databases.ValueBinder $binder The value binder to convert expressions with.
-     * @return string
      */
-    protected function _stringifyValues(ValueBinder $binder): string
+    protected string _stringifyValues(ValueBinder $binder): string
     {
         $values = [];
         $parts = this.getValue();

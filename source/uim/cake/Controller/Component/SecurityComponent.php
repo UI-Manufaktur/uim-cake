@@ -365,9 +365,8 @@ class SecurityComponent : Component
      * Get the unlocked string
      *
      * @param array $data Data array
-     * @return string
      */
-    protected function _unlocked(array $data): string
+    protected string _unlocked(array $data): string
     {
         return urldecode($data["_Token"]["unlocked"]);
     }
@@ -376,9 +375,8 @@ class SecurityComponent : Component
      * Get the sorted unlocked string
      *
      * @param array $data Data array
-     * @return string
      */
-    protected function _sortedUnlocked(array $data): string
+    protected string _sortedUnlocked(array $data): string
     {
         $unlocked = _unlocked($data);
         $unlocked = explode("|", $unlocked);

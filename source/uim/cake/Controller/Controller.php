@@ -350,9 +350,9 @@ class Controller : IEventListener, EventDispatcherInterface
      * Returns the controller name.
      *
      * @return string
-     * @since 3.6.0
+
      */
-    function getName(): string
+    string getName(): string
     {
         return this.name;
     }
@@ -362,7 +362,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * @param string $name Controller name.
      * @return this
-     * @since 3.6.0
+
      */
     function setName(string $name) {
         this.name = $name;
@@ -374,7 +374,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Returns the plugin name.
      *
      * @return string|null
-     * @since 3.6.0
+
      */
     function getPlugin(): ?string
     {
@@ -386,7 +386,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * @param string|null $name Plugin name.
      * @return this
-     * @since 3.6.0
+
      */
     function setPlugin(?string $name) {
         this.plugin = $name;
@@ -398,7 +398,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Returns true if an action should be rendered automatically.
      *
      * @return bool
-     * @since 3.6.0
+
      */
     bool isAutoRenderEnabled() {
         return this.autoRender;
@@ -408,7 +408,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Enable automatic action rendering.
      *
      * @return this
-     * @since 3.6.0
+
      */
     function enableAutoRender() {
         this.autoRender = true;
@@ -420,7 +420,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Disable automatic action rendering.
      *
      * @return this
-     * @since 3.6.0
+
      */
     function disableAutoRender() {
         this.autoRender = false;
@@ -432,7 +432,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Gets the request instance.
      *
      * @return uim.cake.http.ServerRequest
-     * @since 3.6.0
+
      */
     function getRequest(): ServerRequest
     {
@@ -460,7 +460,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Gets the response instance.
      *
      * @return uim.cake.http.Response
-     * @since 3.6.0
+
      */
     function getResponse(): Response
     {
@@ -472,7 +472,7 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * @param uim.cake.http.Response $response Response instance.
      * @return this
-     * @since 3.6.0
+
      */
     function setResponse(Response $response) {
         this.response = $response;
@@ -810,9 +810,8 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Get the templatePath based on controller name and request prefix.
      *
-     * @return string
      */
-    protected function _templatePath(): string
+    protected string _templatePath(): string
     {
         $templatePath = this.name;
         if (this.request.getParam("prefix")) {

@@ -126,9 +126,8 @@ class Oauth
      *
      * @param uim.cake.http.Client\Request $request The request object.
      * @param array $credentials Authentication credentials.
-     * @return string
      */
-    protected function _hmacSha1(Request $request, array $credentials): string
+    protected string _hmacSha1(Request $request, array $credentials): string
     {
         $nonce = $credentials["nonce"] ?? uniqid();
         $timestamp = $credentials["timestamp"] ?? time();
@@ -344,9 +343,8 @@ class Oauth
      * Builds the Oauth Authorization header value.
      *
      * @param array $data The oauth_* values to build
-     * @return string
      */
-    protected function _buildAuth(array $data): string
+    protected string _buildAuth(array $data): string
     {
         $out = "OAuth ";
         $params = [];
@@ -362,9 +360,8 @@ class Oauth
      * URL Encodes a value based on rules of rfc3986
      *
      * @param string $value Value to encode.
-     * @return string
      */
-    protected function _encode(string $value): string
+    protected string _encode(string $value): string
     {
         return str_replace(["%7E", "+"], ["~", " "], rawurlencode($value));
     }

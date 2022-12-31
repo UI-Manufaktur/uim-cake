@@ -72,9 +72,8 @@ trait CaseExpressionTrait
      * @param uim.cake.databases.ValueBinder $binder The value binder to use.
      * @param uim.cake.databases.IExpression|object|scalar|null $value The value to compile.
      * @param string|null $type The value type.
-     * @return string
      */
-    protected function compileNullableValue(ValueBinder $binder, $value, ?string $type = null): string
+    protected string compileNullableValue(ValueBinder $binder, $value, ?string $type = null): string
     {
         if (
             $type != null &&

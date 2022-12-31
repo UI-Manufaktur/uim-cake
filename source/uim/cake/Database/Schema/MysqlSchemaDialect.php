@@ -587,9 +587,8 @@ class MysqlSchemaDialect : SchemaDialect
      *
      * @param string $prefix The key prefix
      * @param array $data Key data.
-     * @return string
      */
-    protected function _keySql(string $prefix, array $data): string
+    protected string _keySql(string $prefix, array $data): string
     {
         $columns = array_map(
             [_driver, "quoteIdentifier"],

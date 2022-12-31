@@ -961,9 +961,8 @@ class AuthComponent : Component : EventDispatcherInterface
      * This method takes the referrer into account if the
      * request is not of type GET.
      *
-     * @return string
      */
-    protected function _getUrlToRedirectBackTo(): string
+    protected string _getUrlToRedirectBackTo(): string
     {
         $urlToRedirectBackTo = this.getController().getRequest().getRequestTarget();
         if (!this.getController().getRequest().is('get')) {

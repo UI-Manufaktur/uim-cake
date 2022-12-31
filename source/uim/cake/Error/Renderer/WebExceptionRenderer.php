@@ -318,9 +318,8 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * Get method name
      *
      * @param \Throwable $exception Exception instance.
-     * @return string
      */
-    protected function _method(Throwable $exception): string
+    protected string _method(Throwable $exception): string
     {
         [, $baseClass] = namespaceSplit(get_class($exception));
 

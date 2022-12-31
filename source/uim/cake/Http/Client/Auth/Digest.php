@@ -107,9 +107,8 @@ class Digest
      *
      * @param uim.cake.http.Client\Request $request The request object.
      * @param array<string, mixed> $credentials Authentication credentials.
-     * @return string
      */
-    protected function _generateHeader(Request $request, array $credentials): string
+    protected string _generateHeader(Request $request, array $credentials): string
     {
         $path = $request.getUri().getPath();
         $a1 = md5($credentials["username"] . ":" . $credentials["realm"] . ":" . $credentials["password"]);

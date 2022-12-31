@@ -39,9 +39,8 @@ abstract class SchemaDialect
      * Generate an ON clause for a foreign key.
      *
      * @param string $on The on clause
-     * @return string
      */
-    protected function _foreignOnClause(string $on): string
+    protected string _foreignOnClause(string $on): string
     {
         if ($on == TableSchema::ACTION_SET_NULL) {
             return "SET NULL";
@@ -66,9 +65,8 @@ abstract class SchemaDialect
      * Convert string on clauses to the abstract ones.
      *
      * @param string $clause The on clause to convert.
-     * @return string
      */
-    protected function _convertOnClause(string $clause): string
+    protected string _convertOnClause(string $clause): string
     {
         if ($clause == "CASCADE" || $clause == "RESTRICT") {
             return strtolower($clause);
@@ -85,9 +83,8 @@ abstract class SchemaDialect
      * stringified list
      *
      * @param array<string>|string $references The referenced columns of a foreign key constraint statement
-     * @return string
      */
-    protected function _convertConstraintColumns($references): string
+    protected string _convertConstraintColumns($references): string
     {
         if (is_string($references)) {
             return _driver.quoteIdentifier($references);

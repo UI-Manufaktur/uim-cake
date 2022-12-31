@@ -233,9 +233,8 @@ class FormDataPart
      *
      * @param string $name The name of the header parameter
      * @param string $value The value of the header parameter
-     * @return string
      */
-    protected function _headerParameterToString(string $name, string $value): string
+    protected string _headerParameterToString(string $name, string $value): string
     {
         $transliterated = Text::transliterate(str_replace(""", "", $value));
         $return = sprintf("%s="%s"", $name, $transliterated);

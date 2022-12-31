@@ -73,9 +73,8 @@ class HtmlFormatter : FormatterInterface
      *
      * Only output once per process as we don"t need it more than once.
      *
-     * @return string
      */
-    protected function dumpHeader(): string
+    protected string dumpHeader(): string
     {
         ob_start();
         include __DIR__ . DIRECTORY_SEPARATOR . "dumpHeader.html";
@@ -106,9 +105,8 @@ class HtmlFormatter : FormatterInterface
      *
      * @param uim.cake.Error\Debug\NodeInterface $var The node tree to dump.
      * @param int $indent The current indentation level.
-     * @return string
      */
-    protected function export(NodeInterface $var, int $indent): string
+    protected string export(NodeInterface $var, int $indent): string
     {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {

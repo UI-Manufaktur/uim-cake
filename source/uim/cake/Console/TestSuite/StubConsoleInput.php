@@ -52,7 +52,7 @@ class StubConsoleInput : ConsoleInput
      *
      * @return string The value of the reply
      */
-    function read(): string
+    string read()
     {
         this.currentIndex += 1;
 
