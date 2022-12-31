@@ -174,7 +174,7 @@ class Connection : ConnectionInterface
     /**
      * Creates driver from name, class name or instance.
      *
-     * @param uim.cake.databases.DriverInterface|string $name Driver name, class name or instance.
+     * @param uim.cake.databases.DriverInterface|string aName Driver name, class name or instance.
      * @param array $config Driver config if $name is not an instance.
      * @return uim.cake.databases.DriverInterface
      * @throws uim.cake.databases.exceptions.MissingDriverException When a driver class is missing.

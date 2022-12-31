@@ -38,13 +38,13 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Add a command to the collection
      *
-     * @param string $name The name of the command you want to map.
+     * @param string aName The name of the command you want to map.
      * @param uim.cake.consoles.ICommand|uim.cake.consoles.Shell|string $command The command to map.
      *   Can be a FQCN, Shell instance or ICommand instance.
      * @return this
      * @throws \InvalidArgumentException
      */
-    function add(string $name, $command) {
+    function add(string aName, $command) {
         if (!is_subclass_of($command, Shell::class) && !is_subclass_of($command, ICommand::class)) {
             $class = is_string($command) ? $command : get_class($command);
             throw new InvalidArgumentException(sprintf(
@@ -83,10 +83,10 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Remove a command from the collection if it exists.
      *
-     * @param string $name The named shell.
+     * @param string aName The named shell.
      * @return this
      */
-    function remove(string $name) {
+    function remove(string aName) {
         unset(this.commands[$name]);
 
         return this;
@@ -95,10 +95,10 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Check whether the named shell exists in the collection.
      *
-     * @param string $name The named shell.
+     * @param string aName The named shell.
      * @return bool
      */
-    function has(string $name): bool
+    function has(string aName): bool
     {
         return isset(this.commands[$name]);
     }
@@ -106,12 +106,12 @@ class CommandCollection : IteratorAggregate, Countable
     /**
      * Get the target for a command.
      *
-     * @param string $name The named shell.
+     * @param string aName The named shell.
      * @return uim.cake.consoles.ICommand|uim.cake.consoles.Shell|string Either the command class or an instance.
      * @throws \InvalidArgumentException when unknown commands are fetched.
      * @psalm-return uim.cake.consoles.ICommand|uim.cake.consoles.Shell|class-string
      */
-    function get(string $name) {
+    function get(string aName) {
         if (!this.has($name)) {
             throw new InvalidArgumentException("The $name is not a known command name.");
         }

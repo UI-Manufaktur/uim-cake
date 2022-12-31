@@ -190,10 +190,10 @@ class Shell
     /**
      * Set the root command name for help output.
      *
-     * @param string $name The name of the root command.
+     * @param string aName The name of the root command.
      * @return this
      */
-    function setRootName(string $name) {
+    function setRootName(string aName) {
         this.rootName = $name;
 
         return this;
@@ -301,11 +301,11 @@ class Shell
     /**
      * Check to see if this shell has a callable method by the given name.
      *
-     * @param string $name The method name to check.
+     * @param string aName The method name to check.
      * @return bool
      * @link https://book.cakephp.org/4/en/console-and-shells.html#shell-tasks
      */
-    bool hasMethod(string $name) {
+    bool hasMethod(string aName) {
         try {
             $method = new ReflectionMethod(this, $name);
             if (!$method.isPublic()) {
@@ -555,10 +555,10 @@ class Shell
     /**
      * Overload get for lazy building of tasks
      *
-     * @param string $name The task to get.
+     * @param string aName The task to get.
      * @return uim.cake.consoles.Shell Object of Task
      */
-    function __get(string $name) {
+    function __get(string aName) {
         if (empty(this.{$name}) && in_array($name, this.taskNames, true)) {
             $properties = _taskMap[$name];
             this.{$name} = this.Tasks.load($properties["class"], $properties["config"]);
@@ -574,10 +574,10 @@ class Shell
     /**
      * Safely access the values in this.params.
      *
-     * @param string $name The name of the parameter to get.
+     * @param string aName The name of the parameter to get.
      * @return string|bool|null Value. Will return null if it doesn"t exist.
      */
-    function param(string $name) {
+    function param(string aName) {
         return this.params[$name] ?? null;
     }
 
@@ -618,7 +618,7 @@ class Shell
      * @see uim.cake.Utility\Text::wrap()
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::wrapText
      */
-    function wrapText(string $text, $options = []): string
+    string wrapText(string $text, $options = [])
     {
         return Text::wrap($text, $options);
     }
@@ -730,7 +730,7 @@ class Shell
      * @return string
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::nl
      */
-    function nl(int $multiplier = 1): string
+    string nl(int $multiplier = 1)
     {
         return _io.nl($multiplier);
     }
@@ -845,7 +845,7 @@ class Shell
      * @return string short path
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::shortPath
      */
-    function shortPath(string $file): string
+    string shortPath(string $file)
     {
         $shortPath = str_replace(ROOT, "", $file);
         $shortPath = str_replace(".." . DIRECTORY_SEPARATOR, "", $shortPath);
@@ -860,11 +860,11 @@ class Shell
      * Create and render the output for a helper object. If the helper
      * object has not already been loaded, it will be loaded and constructed.
      *
-     * @param string $name The name of the helper to render
+     * @param string aName The name of the helper to render
      * @param array<string, mixed> $config Configuration data for the helper.
      * @return uim.cake.consoles.Helper The created helper instance.
      */
-    function helper(string $name, array $config = []): Helper
+    function helper(string aName, array $config = []): Helper
     {
         return _io.helper($name, $config);
     }

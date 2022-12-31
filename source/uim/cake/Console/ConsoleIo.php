@@ -542,11 +542,11 @@ class ConsoleIo
      * Create and render the output for a helper object. If the helper
      * object has not already been loaded, it will be loaded and constructed.
      *
-     * @param string $name The name of the helper to render
+     * @param string aName The name of the helper to render
      * @param array<string, mixed> $config Configuration data for the helper.
      * @return uim.cake.consoles.Helper The created helper instance.
      */
-    function helper(string $name, array $config = []): Helper
+    function helper(string aName, array $config = []): Helper
     {
         $name = ucfirst($name);
 

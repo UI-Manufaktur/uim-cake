@@ -79,10 +79,10 @@ class Arguments
     /**
      * Check if a positional argument exists by name
      *
-     * @param string $name The argument name to check.
+     * @param string aName The argument name to check.
      * @return bool
      */
-    bool hasArgument(string $name) {
+    bool hasArgument(string aName) {
         $offset = array_search($name, this.argNames, true);
         if ($offset == false) {
             return false;
@@ -94,10 +94,10 @@ class Arguments
     /**
      * Check if a positional argument exists by name
      *
-     * @param string $name The argument name to check.
+     * @param string aName The argument name to check.
      * @return string|null
      */
-    function getArgument(string $name): ?string
+    function getArgument(string aName): ?string
     {
         $offset = array_search($name, this.argNames, true);
         if ($offset == false || !isset(this.args[$offset])) {
@@ -120,20 +120,20 @@ class Arguments
     /**
      * Get an option"s value or null
      *
-     * @param string $name The name of the option to check.
+     * @param string aName The name of the option to check.
      * @return string|int|bool|null The option value or null.
      */
-    function getOption(string $name) {
+    function getOption(string aName) {
         return this.options[$name] ?? null;
     }
 
     /**
      * Check if an option is defined and not null.
      *
-     * @param string $name The name of the option to check.
+     * @param string aName The name of the option to check.
      * @return bool
      */
-    bool hasOption(string $name) {
+    bool hasOption(string aName) {
         return isset(this.options[$name]);
     }
 }

@@ -115,12 +115,12 @@ class Cache {
     /**
      * Finds and builds the instance of the required engine class.
      *
-     * @param string $name Name of the config array that needs an engine instance built
+     * @param string aName Name of the config array that needs an engine instance built
      * @throws uim.cake.Cache\InvalidArgumentException When a cache engine cannot be created.
      * @throws \RuntimeException If loading of the engine failed.
      * @return void
      */
-    protected static void _buildEngine(string $name) {
+    protected static void _buildEngine(string aName) {
         $registry = static::getRegistry();
 
         if (empty(static::$_config[$name]["className"])) {

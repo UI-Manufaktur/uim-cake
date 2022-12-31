@@ -136,12 +136,12 @@ class FlashComponent : Component
      * use the `warning.php` element under `plugins/PluginName/templates/element/flash/` for
      * rendering the flash message.
      *
-     * @param string $name Element name to use.
+     * @param string aName Element name to use.
      * @param array $args Parameters to pass when calling `FlashComponent::set()`.
      * @return void
      * @throws uim.cake.http.exceptions.InternalErrorException If missing the flash message.
      */
-    function __call(string $name, array $args) {
+    function __call(string aName, array $args) {
         $element = Inflector::underscore($name);
 
         if (count($args) < 1) {

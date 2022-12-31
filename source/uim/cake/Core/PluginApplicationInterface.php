@@ -20,7 +20,7 @@ interface IPluginApplication : EventDispatcherInterface
      * instance of `Cake\Core\BasePlugin` will be used. This generated class will have
      * all plugin hooks enabled.
      *
-     * @param uim.cake.Core\PluginInterface|string $name The plugin name or plugin object.
+     * @param uim.cake.Core\PluginInterface|string aName The plugin name or plugin object.
      * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
      * @return this
      */

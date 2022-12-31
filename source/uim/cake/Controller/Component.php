@@ -120,10 +120,10 @@ class Component : IEventListener
     /**
      * Magic method for lazy loading $components.
      *
-     * @param string $name Name of component to get.
+     * @param string aName Name of component to get.
      * @return uim.cake.controllers.Component|null A Component object or null.
      */
-    function __get(string $name) {
+    function __get(string aName) {
         if (isset(_componentMap[$name]) && !isset(this.{$name})) {
             $config = (array)_componentMap[$name]['config'] + ['enabled': false];
             this.{$name} = _registry.load(_componentMap[$name]['class'], $config);

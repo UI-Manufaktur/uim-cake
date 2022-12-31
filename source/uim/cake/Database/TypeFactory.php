@@ -49,11 +49,11 @@ class TypeFactory
     /**
      * Returns a Type object capable of converting a type identified by name.
      *
-     * @param string $name type identifier
+     * @param string aName type identifier
      * @throws \InvalidArgumentException If type identifier is unknown
      * @return uim.cake.databases.TypeInterface
      */
-    static function build(string $name): TypeInterface
+    static function build(string aName): TypeInterface
     {
         if (isset(static::$_builtTypes[$name])) {
             return static::$_builtTypes[$name];
@@ -83,10 +83,10 @@ class TypeFactory
     /**
      * Set TypeInterface instance capable of converting a type identified by $name
      *
-     * @param string $name The type identifier you want to set.
+     * @param string aName The type identifier you want to set.
      * @param uim.cake.databases.TypeInterface $instance The type instance you want to set.
      */
-    static void set(string $name, TypeInterface $instance) {
+    static void set(string aName, TypeInterface $instance) {
         static::$_builtTypes[$name] = $instance;
         static::$_types[$name] = get_class($instance);
     }

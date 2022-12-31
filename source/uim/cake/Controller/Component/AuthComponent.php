@@ -867,10 +867,10 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Magic accessor for backward compatibility for property `$sessionKey`.
      *
-     * @param string $name Property name
+     * @param string aName Property name
      * @return mixed
      */
-    function __get(string $name) {
+    function __get(string aName) {
         if ($name == 'sessionKey') {
             return this.storage().getConfig('key');
         }
@@ -881,10 +881,10 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Magic setter for backward compatibility for property `$sessionKey`.
      *
-     * @param string $name Property name.
+     * @param string aName Property name.
      * @param mixed $value Value to set.
      */
-    void __set(string $name, $value) {
+    void __set(string aName, $value) {
         if ($name == 'sessionKey') {
             _storage = null;
 

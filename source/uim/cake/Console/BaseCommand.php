@@ -20,10 +20,10 @@ abstract class BaseCommand : ICommand {
      * The name of this command.
      *
      */
-    protected string $name = "cake unknown";
+    protected string aName = "cake unknown";
 
 
-    function setName(string $name) {
+    function setName(string aName) {
         if (strpos($name, " ") < 1) {
             throw new InvalidArgumentException(
                 "The name "{$name}" is missing a space. Names should look like `cake routes`"

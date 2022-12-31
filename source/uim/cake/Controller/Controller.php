@@ -92,7 +92,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * Set automatically using conventions in Controller::__construct().
      *
      */
-    protected string $name;
+    protected string aName;
 
     /**
      * An instance of a uim.cake.Http\ServerRequest object that contains information about the current request.
@@ -168,7 +168,7 @@ class Controller : IEventListener, EventDispatcherInterface
     this(
         ?ServerRequest $request = null,
         ?Response $response = null,
-        ?string $name = null,
+        ?string aName = null,
         ?IEventManager $eventManager = null,
         ?ComponentRegistry $components = null
     ) {
@@ -271,12 +271,12 @@ class Controller : IEventListener, EventDispatcherInterface
      *
      * Will result in a `Authentication` property being set.
      *
-     * @param string $name The name of the component to load.
+     * @param string aName The name of the component to load.
      * @param array<string, mixed> $config The config for the component.
      * @return uim.cake.controllers.Component
      * @throws \Exception
      */
-    function loadComponent(string $name, array $config = []): Component
+    function loadComponent(string aName, array $config = []): Component
     {
         [, $prop] = pluginSplit($name);
 
@@ -286,10 +286,10 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Magic accessor for model autoloading.
      *
-     * @param string $name Property name
+     * @param string aName Property name
      * @return uim.cake.Datasource\RepositoryInterface|null The model instance or null
      */
-    function __get(string $name) {
+    function __get(string aName) {
         if (!empty(this.modelClass)) {
             if (strpos(this.modelClass, "\\") == false) {
                 [, $class] = pluginSplit(this.modelClass, true);
@@ -321,10 +321,10 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Magic setter for removed properties.
      *
-     * @param string $name Property name.
+     * @param string aName Property name.
      * @param mixed $value Value to set.
      */
-    void __set(string $name, $value) {
+    void __set(string aName, $value) {
         if ($name == "components") {
             triggerWarning(
                 "Support for loading components using $components property is removed. " .
@@ -360,11 +360,11 @@ class Controller : IEventListener, EventDispatcherInterface
     /**
      * Sets the controller name.
      *
-     * @param string $name Controller name.
+     * @param string aName Controller name.
      * @return this
 
      */
-    function setName(string $name) {
+    function setName(string aName) {
         this.name = $name;
 
         return this;
@@ -388,7 +388,7 @@ class Controller : IEventListener, EventDispatcherInterface
      * @return this
 
      */
-    function setPlugin(?string $name) {
+    function setPlugin(?string aName) {
         this.plugin = $name;
 
         return this;

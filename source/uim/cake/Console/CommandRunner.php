@@ -212,10 +212,10 @@ class CommandRunner : EventDispatcherInterface
      *
      * @param uim.cake.consoles.ConsoleIo $io The IO wrapper for the created shell class.
      * @param uim.cake.consoles.CommandCollection $commands The command collection to find the shell in.
-     * @param string $name The command name to find
+     * @param string aName The command name to find
      * @return uim.cake.consoles.ICommand|uim.cake.consoles.Shell
      */
-    protected function getCommand(ConsoleIo $io, CommandCollection $commands, string $name) {
+    protected function getCommand(ConsoleIo $io, CommandCollection $commands, string aName) {
         $instance = $commands.get($name);
         if (is_string($instance)) {
             $instance = this.createCommand($instance, $io);
@@ -271,7 +271,7 @@ class CommandRunner : EventDispatcherInterface
      * @return string The resolved name.
      * @throws uim.cake.consoles.exceptions.MissingOptionException
      */
-    protected string resolveName(CommandCollection $commands, ConsoleIo $io, ?string $name)
+    protected string resolveName(CommandCollection $commands, ConsoleIo $io, ?string aName)
     {
         if (!$name) {
             $io.err("<error>No command provided. Choose one of the available commands.</error>", 2);

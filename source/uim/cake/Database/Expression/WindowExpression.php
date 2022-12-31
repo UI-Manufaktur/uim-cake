@@ -42,9 +42,9 @@ class WindowExpression : IExpression, WindowInterface
     protected $exclusion;
 
     /**
-     * @param string $name Window name
+     * @param string aName Window name
      */
-    this(string $name = "") {
+    this(string aName = "") {
         this.name = new IdentifierExpression($name);
     }
 
@@ -64,10 +64,10 @@ class WindowExpression : IExpression, WindowInterface
     /**
      * Sets the window name.
      *
-     * @param string $name Window name
+     * @param string aName Window name
      * @return this
      */
-    function name(string $name) {
+    function name(string aName) {
         this.name = new IdentifierExpression($name);
 
         return this;

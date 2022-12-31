@@ -10,10 +10,10 @@ trait ConventionsTrait
     /**
      * Creates a fixture name
      *
-     * @param string $name Model class name
+     * @param string aName Model class name
      * @return string Singular model key
      */
-    protected string _fixtureName(string $name)
+    protected string _fixtureName(string aName)
     {
         return Inflector::camelize($name);
     }
@@ -21,10 +21,10 @@ trait ConventionsTrait
     /**
      * Creates the proper entity name (singular) for the specified name
      *
-     * @param string $name Name
+     * @param string aName Name
      * @return string Camelized and plural model name
      */
-    protected string _entityName(string $name)
+    protected string _entityName(string aName)
     {
         return Inflector::singularize(Inflector::camelize($name));
     }
@@ -34,10 +34,10 @@ trait ConventionsTrait
      *
      * If the input contains a dot, assume that the right side is the real table name.
      *
-     * @param string $name Model class name
+     * @param string aName Model class name
      * @return string Singular model key
      */
-    protected string _modelKey(string $name)
+    protected string _modelKey(string aName)
     {
         [, $name] = pluginSplit($name);
 
@@ -60,10 +60,10 @@ trait ConventionsTrait
     /**
      * Creates the singular name for use in views.
      *
-     * @param string $name Name to use
+     * @param string aName Name to use
      * @return string Variable name
      */
-    protected string _singularName(string $name)
+    protected string _singularName(string aName)
     {
         return Inflector::variable(Inflector::singularize($name));
     }
@@ -71,10 +71,10 @@ trait ConventionsTrait
     /**
      * Creates the plural variable name for views
      *
-     * @param string $name Name to use
+     * @param string aName Name to use
      * @return string Plural name for views
      */
-    protected string _variableName(string $name)
+    protected string _variableName(string aName)
     {
         return Inflector::variable($name);
     }
@@ -82,10 +82,10 @@ trait ConventionsTrait
     /**
      * Creates the singular human name used in views
      *
-     * @param string $name Controller name
+     * @param string aName Controller name
      * @return string Singular human name
      */
-    protected string _singularHumanName(string $name)
+    protected string _singularHumanName(string aName)
     {
         return Inflector::humanize(Inflector::underscore(Inflector::singularize($name)));
     }
@@ -93,10 +93,10 @@ trait ConventionsTrait
     /**
      * Creates a camelized version of $name
      *
-     * @param string $name name
+     * @param string aName name
      * @return string Camelized name
      */
-    protected string _camelize(string $name)
+    protected string _camelize(string aName)
     {
         return Inflector::camelize($name);
     }
@@ -104,10 +104,10 @@ trait ConventionsTrait
     /**
      * Creates the plural human name used in views
      *
-     * @param string $name Controller name
+     * @param string aName Controller name
      * @return string Plural human name
      */
-    protected string _pluralHumanName(string $name)
+    protected string _pluralHumanName(string aName)
     {
         return Inflector::humanize(Inflector::underscore($name));
     }

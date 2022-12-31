@@ -223,21 +223,21 @@ class Configure
      * Configure::config("ini", new IniConfig());
      * ```
      *
-     * @param string $name The name of the engine being configured. This alias is used later to
+     * @param string aName The name of the engine being configured. This alias is used later to
      *   read values from a specific engine.
      * @param uim.cake.Core\Configure\ConfigEngineInterface $engine The engine to append.
      */
-    static void config(string $name, ConfigEngineInterface $engine) {
+    static void config(string aName, ConfigEngineInterface $engine) {
         static::$_engines[$name] = $engine;
     }
 
     /**
      * Returns true if the Engine objects is configured.
      *
-     * @param string $name Engine name.
+     * @param string aName Engine name.
      * @return bool
      */
-    static bool isConfigured(string $name) {
+    static bool isConfigured(string aName) {
         return isset(static::$_engines[$name]);
     }
 
@@ -257,10 +257,10 @@ class Configure
      * Remove a configured engine. This will unset the engine
      * and make any future attempts to use it cause an Exception.
      *
-     * @param string $name Name of the engine to drop.
+     * @param string aName Name of the engine to drop.
      * @return bool Success
      */
-    static bool drop(string $name) {
+    static bool drop(string aName) {
         if (!isset(static::$_engines[$name])) {
             return false;
         }
@@ -390,7 +390,7 @@ class Configure
      *
      * @return string Current version of CakePHP
      */
-    static function version(): string
+    static string version()
     {
         $version = static::read("Cake.version");
         if ($version != null) {
@@ -413,13 +413,13 @@ class Configure
      * restored using `Configure::restore()`. These methods can be used to enable configuration managers
      * frontends, or other GUI type interfaces for configuration.
      *
-     * @param string $name The storage name for the saved configuration.
+     * @param string aName The storage name for the saved configuration.
      * @param string $cacheConfig The cache configuration to save into. Defaults to "default"
      * @param array|null $data Either an array of data to store, or leave empty to store all values.
      * @return bool Success
      * @throws \RuntimeException
      */
-    static bool store(string $name, string $cacheConfig = "default", ?array $data = null) {
+    static bool store(string aName, string $cacheConfig = "default", ?array $data = null) {
         if ($data == null) {
             $data = static::$_values;
         }
@@ -434,12 +434,12 @@ class Configure
      * Restores configuration data stored in the Cache into configure. Restored
      * values will overwrite existing ones.
      *
-     * @param string $name Name of the stored config file to load.
+     * @param string aName Name of the stored config file to load.
      * @param string $cacheConfig Name of the Cache configuration to read from.
      * @return bool Success.
      * @throws \RuntimeException
      */
-    static bool restore(string $name, string $cacheConfig = "default") {
+    static bool restore(string aName, string $cacheConfig = "default") {
         if (!class_exists(Cache::class)) {
             throw new RuntimeException("You must install cakephp/cache to use Configure::restore()");
         }

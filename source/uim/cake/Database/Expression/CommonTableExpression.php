@@ -54,10 +54,10 @@ class CommonTableExpression : IExpression
     /**
      * Constructor.
      *
-     * @param string $name The CTE name.
+     * @param string aName The CTE name.
      * @param uim.cake.databases.IExpression|\Closure $query CTE query
      */
-    this(string $name = "", $query = null) {
+    this(string aName = "", $query = null) {
         this.name = new IdentifierExpression($name);
         if ($query) {
             this.query($query);
@@ -70,10 +70,10 @@ class CommonTableExpression : IExpression
      * This is the named you used to reference the expression
      * in select, insert, etc queries.
      *
-     * @param string $name The CTE name.
+     * @param string aName The CTE name.
      * @return this
      */
-    function name(string $name) {
+    function name(string aName) {
         this.name = new IdentifierExpression($name);
 
         return this;

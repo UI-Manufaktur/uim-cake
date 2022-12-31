@@ -314,7 +314,7 @@ class FunctionsBuilder
     /**
      * Helper method to create arbitrary SQL aggregate function calls.
      *
-     * @param string $name The SQL aggregate function name
+     * @param string aName The SQL aggregate function name
      * @param array $params Array of arguments to be passed to the function.
      *     Can be an associative array with the literal value or identifier:
      *     `["value": "literal"]` or `["value": "identifier"]
@@ -323,20 +323,20 @@ class FunctionsBuilder
      * @param string $return Return type of the entire expression. Defaults to float.
      * @return uim.cake.databases.Expression\AggregateExpression
      */
-    function aggregate(string $name, array $params = [], array $types = [], string $return = "float") {
+    function aggregate(string aName, array $params = [], array $types = [], string $return = "float") {
         return new AggregateExpression($name, $params, $types, $return);
     }
 
     /**
      * Magic method dispatcher to create custom SQL function calls
      *
-     * @param string $name the SQL function name to construct
+     * @param string aName the SQL function name to construct
      * @param array $args list with up to 3 arguments, first one being an array with
      * parameters for the SQL function, the second one a list of types to bind to those
      * params, and the third one the return type of the function
      * @return uim.cake.databases.Expression\FunctionExpression
      */
-    function __call(string $name, array $args): FunctionExpression
+    function __call(string aName, array $args): FunctionExpression
     {
         return new FunctionExpression($name, ...$args);
     }

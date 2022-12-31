@@ -26,11 +26,11 @@ interface ICommand {
      * Required to have at least one space in the name so that the root
      * command can be calculated.
      *
-     * @param string $name The name the command uses in the collection.
+     * @param string aName The name the command uses in the collection.
      * @return this
      * @throws \InvalidArgumentException
      */
-    function setName(string $name);
+    function setName(string aName);
 
     /**
      * Run the command.

@@ -725,10 +725,10 @@ class Query : IExpression, IteratorAggregate
      * Useful when you are redefining joins or want to re-order
      * the join clauses.
      *
-     * @param string $name The alias/name of the join to remove.
+     * @param string aName The alias/name of the join to remove.
      * @return this
      */
-    function removeJoin(string $name) {
+    function removeJoin(string aName) {
         unset(_parts["join"][$name]);
         _dirty();
 
@@ -1407,12 +1407,12 @@ class Query : IExpression, IteratorAggregate
      *
      * You are responsible for adding windows in the order your database requires.
      *
-     * @param string $name Window name
+     * @param string aName Window name
      * @param uim.cake.databases.Expression\WindowExpression|\Closure $window Window expression
      * @param bool $overwrite Clear all previous query window expressions
      * @return this
      */
-    function window(string $name, $window, bool $overwrite = false) {
+    function window(string aName, $window, bool $overwrite = false) {
         if ($overwrite) {
             _parts["window"] = [];
         }
@@ -1935,11 +1935,11 @@ class Query : IExpression, IteratorAggregate
      * - offset: integer or QueryExpression, null when not set
      * - union: array
      *
-     * @param string $name name of the clause to be returned
+     * @param string aName name of the clause to be returned
      * @return mixed
      * @throws \InvalidArgumentException When the named clause does not exist.
      */
-    function clause(string $name) {
+    function clause(string aName) {
         if (!array_key_exists($name, _parts)) {
             $clauses = implode(", ", array_keys(_parts));
             throw new InvalidArgumentException("The "$name" clause is not defined. Valid clauses are: $clauses");

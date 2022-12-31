@@ -57,7 +57,7 @@ class AggregateExpression : FunctionExpression : WindowInterface
      * @param string|null $name Window name
      * @return this
      */
-    function over(?string $name = null) {
+    function over(?string aName = null) {
         if (this.window == null) {
             this.window = new WindowExpression();
         }

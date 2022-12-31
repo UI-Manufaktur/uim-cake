@@ -42,14 +42,14 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      *
      * Will produce `CONCAT(name, " rules")`
      *
-     * @param string $name the name of the function to be constructed
+     * @param string aName the name of the function to be constructed
      * @param array $params list of arguments to be passed to the function
      * If associative the key would be used as argument when value is "literal"
      * @param array<string, string>|array<string|null> $types Associative array of types to be associated with the
      * passed arguments
      * @param string $returnType The return type of this expression
      */
-    this(string $name, array $params = [], array $types = [], string $returnType = "string") {
+    this(string aName, array $params = [], array $types = [], string $returnType = "string") {
         _name = $name;
         _returnType = $returnType;
         super(($params, $types, ",");
@@ -58,10 +58,10 @@ class FunctionExpression : QueryExpression : TypedResultInterface
     /**
      * Sets the name of the SQL function to be invoke in this expression.
      *
-     * @param string $name The name of the function
+     * @param string aName The name of the function
      * @return this
      */
-    function setName(string $name) {
+    function setName(string aName) {
         _name = $name;
 
         return this;

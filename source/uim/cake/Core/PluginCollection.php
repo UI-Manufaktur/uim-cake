@@ -108,24 +108,24 @@ class PluginCollection : Iterator, Countable
      * This method is not part of the official API as plugins with
      * no plugin class are being phased out.
      *
-     * @param string $name The plugin name to locate a path for.
+     * @param string aName The plugin name to locate a path for.
      * @return string
      * @throws uim.cake.Core\exceptions.MissingPluginException when a plugin path cannot be resolved.
      * @internal
      */
-    function findPath(string $name): string
+    string findPath(string aName)
     {
         // Ensure plugin config is loaded each time. This is necessary primarily
         // for testing because the Configure::clear() call in TestCase::tearDown()
         // wipes out all configuration including plugin paths config.
         this.loadConfig();
 
-        $path = Configure::read("plugins." . $name);
+        $path = Configure::read("plugins." . aName);
         if ($path) {
             return $path;
         }
 
-        $pluginPath = str_replace("/", DIRECTORY_SEPARATOR, $name);
+        $pluginPath = str_replace("/", DIRECTORY_SEPARATOR, aName);
         $paths = App::path("plugins");
         foreach ($paths as $path) {
             if (is_dir($path . $pluginPath)) {
@@ -133,7 +133,7 @@ class PluginCollection : Iterator, Countable
             }
         }
 
-        throw new MissingPluginException(["plugin": $name]);
+        throw new MissingPluginException(["plugin": aName]);
     }
 
     /**
@@ -145,8 +145,8 @@ class PluginCollection : Iterator, Countable
      * @return this
      */
     function add(PluginInterface $plugin) {
-        $name = $plugin.getName();
-        this.plugins[$name] = $plugin;
+        auto myName = $plugin.getName();
+        this.plugins[myName] = $plugin;
         this.names = array_keys(this.plugins);
 
         return this;
@@ -155,11 +155,11 @@ class PluginCollection : Iterator, Countable
     /**
      * Remove a plugin from the collection if it exists.
      *
-     * @param string $name The named plugin.
+     * @param string aName The named plugin.
      * @return this
      */
-    function remove(string $name) {
-        unset(this.plugins[$name]);
+    function remove(string aName) {
+        unset(this.plugins[aName]);
         this.names = array_keys(this.plugins);
 
         return this;
@@ -182,12 +182,12 @@ class PluginCollection : Iterator, Countable
     /**
      * Check whether the named plugin exists in the collection.
      *
-     * @param string $name The named plugin.
+     * @param string aName The named plugin.
      * @return bool
      */
-    function has(string $name): bool
+    function has(string aName): bool
     {
-        return isset(this.plugins[$name]);
+        return isset(this.plugins[aName]);
     }
 
     /**
@@ -196,17 +196,17 @@ class PluginCollection : Iterator, Countable
      * If a plugin isn"t already loaded it will be autoloaded on first access
      * and that plugins loaded this way may miss some hook methods.
      *
-     * @param string $name The plugin to get.
+     * @param string aName The plugin to get.
      * @return uim.cake.Core\PluginInterface The plugin.
      * @throws uim.cake.Core\exceptions.MissingPluginException when unknown plugins are fetched.
      */
-    function get(string $name): PluginInterface
+    function get(string aName): PluginInterface
     {
-        if (this.has($name)) {
-            return this.plugins[$name];
+        if (this.has(aName)) {
+            return this.plugins[aName];
         }
 
-        $plugin = this.create($name);
+        $plugin = this.create(aName);
         this.add($plugin);
 
         return $plugin;
@@ -215,36 +215,36 @@ class PluginCollection : Iterator, Countable
     /**
      * Create a plugin instance from a name/classname and configuration.
      *
-     * @param string $name The plugin name or classname
+     * @param string aName The plugin name or classname
      * @param array<string, mixed> $config Configuration options for the plugin.
      * @return uim.cake.Core\PluginInterface
      * @throws uim.cake.Core\exceptions.MissingPluginException When plugin instance could not be created.
      */
-    function create(string $name, array $config = []): PluginInterface
+    function create(string aName, array $config = []): PluginInterface
     {
-        if (strpos($name, "\\") != false) {
+        if (strpos(aName, "\\") != false) {
             /** @var uim.cake.Core\PluginInterface */
-            return new $name($config);
+            return new aName($config);
         }
 
-        $config += ["name": $name];
-        $namespace = str_replace("/", "\\", $name);
+        $config += ["name": aName];
+        $namespace = str_replace("/", "\\", aName);
 
         $className = $namespace . "\\" . "Plugin";
         // Check for [Vendor/]Foo/Plugin class
         if (!class_exists($className)) {
-            $pos = strpos($name, "/");
+            $pos = strpos(aName, "/");
             if ($pos == false) {
-                $className = $namespace . "\\" . $name . "Plugin";
+                $className = $namespace . "\\" . aName . "Plugin";
             } else {
-                $className = $namespace . "\\" . substr($name, $pos + 1) . "Plugin";
+                $className = $namespace . "\\" . substr(aName, $pos + 1) . "Plugin";
             }
 
             // Check for [Vendor/]Foo/FooPlugin
             if (!class_exists($className)) {
                 $className = BasePlugin::class;
                 if (empty($config["path"])) {
-                    $config["path"] = this.findPath($name);
+                    $config["path"] = this.findPath(aName);
                 }
             }
         }
@@ -274,7 +274,7 @@ class PluginCollection : Iterator, Countable
     /**
      * Part of Iterator Interface
      */
-    string key(): string
+    string key()
     {
         return this.names[this.positions[this.loopDepth]];
     }

@@ -19,12 +19,12 @@ class Plugin
     /**
      * Returns the filesystem path for a plugin
      *
-     * @param string $name name of the plugin in CamelCase format
+     * @param string aName name of the plugin in CamelCase format
      * @return string path to the plugin folder
      * @throws uim.cake.Core\exceptions.MissingPluginException If the folder for plugin was not found
      *   or plugin has not been loaded.
      */
-    static string path(string $name)
+    static string path(string aName)
     {
         $plugin = static::getCollection().get($name);
 
@@ -34,11 +34,11 @@ class Plugin
     /**
      * Returns the filesystem path for plugin"s folder containing class files.
      *
-     * @param string $name name of the plugin in CamelCase format.
+     * @param string aName name of the plugin in CamelCase format.
      * @return string Path to the plugin folder containing class files.
      * @throws uim.cake.Core\exceptions.MissingPluginException If plugin has not been loaded.
      */
-    static string classPath(string $name)
+    static string classPath(string aName)
     {
         $plugin = static::getCollection().get($name);
 
@@ -48,11 +48,11 @@ class Plugin
     /**
      * Returns the filesystem path for plugin"s folder containing config files.
      *
-     * @param string $name name of the plugin in CamelCase format.
+     * @param string aName name of the plugin in CamelCase format.
      * @return string Path to the plugin folder containing config files.
      * @throws uim.cake.Core\exceptions.MissingPluginException If plugin has not been loaded.
      */
-    static string configPath(string $name)
+    static string configPath(string aName)
     {
         $plugin = static::getCollection().get($name);
 
@@ -62,11 +62,11 @@ class Plugin
     /**
      * Returns the filesystem path for plugin"s folder containing template files.
      *
-     * @param string $name name of the plugin in CamelCase format.
+     * @param string aName name of the plugin in CamelCase format.
      * @return string Path to the plugin folder containing template files.
      * @throws uim.cake.Core\exceptions.MissingPluginException If plugin has not been loaded.
      */
-    static string templatePath(string $name)
+    static string templatePath(string aName)
     {
         $plugin = static::getCollection().get($name);
 

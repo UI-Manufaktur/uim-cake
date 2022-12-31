@@ -56,7 +56,7 @@ class ConsoleInputOption
     /**
      * Make a new Input Option
      *
-     * @param string $name The long name of the option, or an array with all the properties.
+     * @param string aName The long name of the option, or an array with all the properties.
      * @param string $short The short alias for this option
      * @param string $help The help text for this option
      * @param bool $isBoolean Whether this option is a boolean option. Boolean options don"t consume extra tokens
@@ -68,7 +68,7 @@ class ConsoleInputOption
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
     this(
-        string $name,
+        string aName,
         string $short = "",
         string $help = "",
         bool $isBoolean = false,

@@ -85,7 +85,7 @@ class BasePlugin : PluginInterface
      * The name of this plugin
      *
      */
-    protected string $name;
+    protected string aName;
 
     /**
      * Constructor

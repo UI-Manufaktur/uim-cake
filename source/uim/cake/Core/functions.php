@@ -63,14 +63,14 @@ if (!function_exists("pluginSplit")) {
      * list($plugin, $name) = pluginSplit($name);
      * ```
      *
-     * @param string $name The name you want to plugin split.
+     * @param string aName The name you want to plugin split.
      * @param bool $dotAppend Set to true if you want the plugin to have a "." appended to it.
      * @param string|null $plugin Optional default plugin to use if no plugin is found. Defaults to null.
      * @return array Array with 2 indexes. 0: plugin name, 1: class name.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#pluginSplit
      * @psalm-return array{string|null, string}
      */
-    function pluginSplit(string $name, bool $dotAppend = false, ?string $plugin = null): array
+    function pluginSplit(string aName, bool $dotAppend = false, ?string $plugin = null): array
     {
         if (strpos($name, ".") != false) {
             $parts = explode(".", $name, 2);

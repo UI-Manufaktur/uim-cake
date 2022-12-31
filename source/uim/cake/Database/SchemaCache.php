@@ -36,7 +36,7 @@ class SchemaCache
      * @param string|null $name The name of the table to build cache data for.
      * @return array<string> Returns a list build table caches
      */
-    string[] build(?string $name = null): array
+    string[] build(?string aName = null): array
     {
         if ($name) {
             $tables = [$name];
@@ -58,7 +58,7 @@ class SchemaCache
      * @param string|null $name The name of the table to clear cache data for.
      * @return array<string> Returns a list of cleared table caches
      */
-    string[] clear(?string $name = null): array
+    string[] clear(?string aName = null): array
     {
         if ($name) {
             $tables = [$name];

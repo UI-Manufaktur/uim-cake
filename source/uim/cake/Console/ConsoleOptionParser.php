@@ -372,7 +372,7 @@ class ConsoleOptionParser
      * - `choices` A list of valid choices for this option. If left empty all values are valid..
      *   An exception will be raised when parse() encounters an invalid value.
      *
-     * @param uim.cake.consoles.ConsoleInputOption|string $name The long name you want to the value to be parsed out
+     * @param uim.cake.consoles.ConsoleInputOption|string aName The long name you want to the value to be parsed out
      *   as when options are parsed. Will also accept an instance of ConsoleInputOption.
      * @param array<string, mixed> $options An array of parameters that define the behavior of the option
      * @return this
@@ -418,10 +418,10 @@ class ConsoleOptionParser
     /**
      * Remove an option from the option parser.
      *
-     * @param string $name The option name to remove.
+     * @param string aName The option name to remove.
      * @return this
      */
-    function removeOption(string $name) {
+    function removeOption(string aName) {
         unset(_options[$name]);
 
         return this;
@@ -440,7 +440,7 @@ class ConsoleOptionParser
      * - `choices` A list of valid choices for this argument. If left empty all values are valid..
      *   An exception will be raised when parse() encounters an invalid value.
      *
-     * @param uim.cake.consoles.ConsoleInputArgument|string $name The name of the argument.
+     * @param uim.cake.consoles.ConsoleInputArgument|string aName The name of the argument.
      *   Will also accept an instance of ConsoleInputArgument.
      * @param array<string, mixed> $params Parameters for the argument, see above.
      * @return this
@@ -527,7 +527,7 @@ class ConsoleOptionParser
      *    specific option parsers. When help is generated for a subcommand, if a parser is present
      *    it will be used.
      *
-     * @param uim.cake.consoles.ConsoleInputSubcommand|string $name Name of the subcommand.
+     * @param uim.cake.consoles.ConsoleInputSubcommand|string aName Name of the subcommand.
      *   Will also accept an instance of ConsoleInputSubcommand.
      * @param array<string, mixed> $options Array of params, see above.
      * @return this
@@ -558,10 +558,10 @@ class ConsoleOptionParser
     /**
      * Remove a subcommand from the option parser.
      *
-     * @param string $name The subcommand name to remove.
+     * @param string aName The subcommand name to remove.
      * @return this
      */
-    function removeSubcommand(string $name) {
+    function removeSubcommand(string aName) {
         unset(_subcommands[$name]);
 
         return this;
@@ -775,10 +775,10 @@ class ConsoleOptionParser
     /**
      * Set the root name used in the HelpFormatter
      *
-     * @param string $name The root command name
+     * @param string aName The root command name
      * @return this
      */
-    function setRootName(string $name) {
+    function setRootName(string aName) {
         this.rootName = $name;
 
         return this;
@@ -842,12 +842,12 @@ class ConsoleOptionParser
     /**
      * Parse an option by its name index.
      *
-     * @param string $name The name to parse.
+     * @param string aName The name to parse.
      * @param array<string, mixed> $params The params to append the parsed value into
      * @return array<string, mixed> Params with $option added in.
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    protected function _parseOption(string $name, array $params): array
+    protected function _parseOption(string aName, array $params): array
     {
         if (!isset(_options[$name])) {
             throw new MissingOptionException(
@@ -882,10 +882,10 @@ class ConsoleOptionParser
     /**
      * Check to see if $name has an option (short/long) defined for it.
      *
-     * @param string $name The name of the option.
+     * @param string aName The name of the option.
      * @return bool
      */
-    protected bool _optionExists(string $name) {
+    protected bool _optionExists(string aName) {
         if (substr($name, 0, 2) == "--") {
             return isset(_options[substr($name, 2)]);
         }

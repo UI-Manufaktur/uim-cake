@@ -136,11 +136,11 @@ class App
      *
      * Test isolation wrapper
      *
-     * @param string $name Class name.
-     * @param string $namespace Namespace.
+     * @param string aName Class name.
+     * @param string aNamespace Namespace.
      * @return bool
      */
-    protected static function _classExistsInBase(string $name, string $namespace): bool
+    protected static function _classExistsInBase(string aName, string aNamespace): bool
     {
         return class_exists($namespace . $name);
     }

@@ -55,13 +55,13 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * All calls to the `Email` component would use `AliasedEmail` instead.
      *
-     * @param string $name The name/class of the object to load.
+     * @param string aName The name/class of the object to load.
      * @param array<string, mixed> $config Additional settings to use when loading the object.
      * @return mixed
      * @psalm-return TObject
      * @throws \Exception If the class cannot be found.
      */
-    function load(string $name, array $config = []) {
+    function load(string aName, array $config = []) {
         if (isset($config["className"])) {
             $objName = $name;
             $name = $config["className"];
@@ -107,12 +107,12 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * configuration is not a good option as we may be missing important constructor
      * logic dependent on the configuration.
      *
-     * @param string $name The name of the alias in the registry.
+     * @param string aName The name of the alias in the registry.
      * @param array<string, mixed> $config The config data for the new instance.
      * @return void
      * @throws \RuntimeException When a duplicate is found.
      */
-    protected void _checkDuplicate(string $name, array $config) {
+    protected void _checkDuplicate(string aName, array $config) {
         $existing = _loaded[$name];
         $msg = sprintf("The "%s" alias has already been loaded.", $name);
         $hasConfig = method_exists($existing, "getConfig");
@@ -193,10 +193,10 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     /**
      * Check whether a given object is loaded.
      *
-     * @param string $name The object name to check for.
+     * @param string aName The object name to check for.
      * @return bool True is object is loaded else false.
      */
-    function has(string $name): bool
+    function has(string aName): bool
     {
         return isset(_loaded[$name]);
     }
@@ -204,12 +204,12 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     /**
      * Get loaded object instance.
      *
-     * @param string $name Name of object.
+     * @param string aName Name of object.
      * @return object Object instance.
      * @throws \RuntimeException If not loaded or found.
      * @psalm-return TObject
      */
-    function get(string $name) {
+    function get(string aName) {
         if (!isset(_loaded[$name])) {
             throw new RuntimeException(sprintf("Unknown object "%s"", $name));
         }
@@ -220,21 +220,21 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     /**
      * Provide read access to the loaded objects
      *
-     * @param string $name Name of property to read
+     * @param string aName Name of property to read
      * @return object|null
      * @psalm-return TObject|null
      */
-    function __get(string $name) {
+    function __get(string aName) {
         return _loaded[$name] ?? null;
     }
 
     /**
      * Provide isset access to _loaded
      *
-     * @param string $name Name of object being checked.
+     * @param string aName Name of object being checked.
      * @return bool
      */
-    function __isset(string $name): bool
+    function __isset(string aName): bool
     {
         return this.has($name);
     }
@@ -242,20 +242,20 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     /**
      * Sets an object.
      *
-     * @param string $name Name of a property to set.
+     * @param string aName Name of a property to set.
      * @param object $object Object to set.
      * @psalm-param TObject $object
      */
-    void __set(string $name, $object) {
+    void __set(string aName, $object) {
         this.set($name, $object);
     }
 
     /**
      * Unsets an object.
      *
-     * @param string $name Name of a property to unset.
+     * @param string aName Name of a property to unset.
      */
-    void __unset(string $name) {
+    void __unset(string aName) {
         this.unload($name);
     }
 
@@ -307,13 +307,13 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * If this collection : events, the passed object will
      * be attached into the event manager
      *
-     * @param string $name The name of the object to set in the registry.
+     * @param string aName The name of the object to set in the registry.
      * @param object $object instance to store in the registry
      * @return this
      * @psalm-param TObject $object
      * @psalm-suppress MoreSpecificReturnType
      */
-    function set(string $name, object $object) {
+    function set(string aName, object $object) {
         [, $objName] = pluginSplit($name);
 
         // Just call unload if the object was loaded before
@@ -334,11 +334,11 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * If this registry has an event manager, the object will be detached from any events as well.
      *
-     * @param string $name The name of the object to remove from the registry.
+     * @param string aName The name of the object to remove from the registry.
      * @return this
      * @psalm-suppress MoreSpecificReturnType
      */
-    function unload(string $name) {
+    function unload(string aName) {
         if (empty(_loaded[$name])) {
             [$plugin, $name] = pluginSplit($name);
             _throwMissingClassError($name, $plugin);
