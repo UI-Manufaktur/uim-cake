@@ -843,9 +843,8 @@ class TreeBehavior : Behavior
     /**
      * Returns the maximum index value in the table.
      *
-     * @return int
      */
-    protected function _getMax(): int
+    protected int _getMax(): int
     {
         $field = _config["right"];
         $rightField = _config["rightField"];

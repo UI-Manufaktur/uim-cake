@@ -183,9 +183,8 @@ class FormData : Countable
     /**
      * Returns the count of parts inside this object.
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         return count(_parts);
     }

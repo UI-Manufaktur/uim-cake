@@ -454,9 +454,8 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns the number of fields having validation rules
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         return count(_fields);
     }

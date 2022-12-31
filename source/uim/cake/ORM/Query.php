@@ -884,9 +884,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * modified, and the count has already been performed the cached
      * value is returned
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         if (_resultsCount == null) {
             _resultsCount = _performCount();
@@ -898,9 +897,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Performs and returns the COUNT(*) for the query.
      *
-     * @return int
      */
-    protected function _performCount(): int
+    protected int _performCount(): int
     {
         $query = this.cleanCopy();
         $counter = _counter;

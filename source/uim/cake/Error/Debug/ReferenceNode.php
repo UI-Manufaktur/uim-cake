@@ -48,9 +48,8 @@ class ReferenceNode : NodeInterface
     /**
      * Get the reference id for this node.
      *
-     * @return int
      */
-    function getId(): int
+    int getId(): int
     {
         return this.id;
     }

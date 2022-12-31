@@ -159,9 +159,8 @@ class Curl : AdapterInterface
      * Convert HTTP version number into curl value.
      *
      * @param \Psr\Http\messages.RequestInterface $request The request to get a protocol version for.
-     * @return int
      */
-    protected function getProtocolVersion(RequestInterface $request): int
+    protected int getProtocolVersion(RequestInterface $request): int
     {
         switch ($request.getProtocolVersion()) {
             case "1.0":

@@ -171,9 +171,8 @@ class ResultSet : IResultSet
      *
      * Part of Iterator interface.
      *
-     * @return int
      */
-    function key(): int
+    int key(): int
     {
         return _index;
     }
@@ -325,9 +324,8 @@ class ResultSet : IResultSet
      *
      * Part of the Countable interface.
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         if (_count != null) {
             return _count;

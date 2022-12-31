@@ -208,9 +208,8 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns the number of rules in this set
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         return count(_rules);
     }

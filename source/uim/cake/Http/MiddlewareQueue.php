@@ -218,9 +218,8 @@ class MiddlewareQueue : Countable, SeekableIterator
      *
      * Implement the Countable interface.
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         return count(this.queue);
     }

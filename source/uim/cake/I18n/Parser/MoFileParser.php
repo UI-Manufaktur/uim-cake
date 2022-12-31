@@ -134,9 +134,8 @@ class MoFileParser
      *
      * @param resource $stream The File being read.
      * @param bool $isBigEndian Whether the current platform is Big Endian
-     * @return int
      */
-    protected function _readLong($stream, $isBigEndian): int
+    protected int _readLong($stream, $isBigEndian): int
     {
         $result = unpack($isBigEndian ? "N1" : "V1", fread($stream, 4));
         $result = current($result);
