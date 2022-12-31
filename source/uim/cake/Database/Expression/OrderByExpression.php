@@ -21,7 +21,7 @@ class OrderByExpression : QueryExpression
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $order = [];
         foreach (_conditions as $k: $direction) {

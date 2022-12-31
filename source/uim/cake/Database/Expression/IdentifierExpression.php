@@ -48,7 +48,7 @@ class IdentifierExpression : IExpression
     /**
      * Returns the identifier this expression represents
      */
-    string getIdentifier(): string
+    string getIdentifier()
     {
         return _identifier;
     }
@@ -73,7 +73,7 @@ class IdentifierExpression : IExpression
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $sql = _identifier;
         if (this.collation) {

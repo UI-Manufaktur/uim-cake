@@ -103,13 +103,13 @@ class ComparisonExpression : IExpression, FieldInterface
     /**
      * Returns the operator used for comparison
      */
-    string getOperator(): string
+    string getOperator()
     {
         return _operator;
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         /** @var uim.cake.databases.IExpression|string $field */
         $field = _field;
@@ -212,7 +212,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param string|null $type The type of $value
      * @return string generated placeholder
      */
-    protected function _bindValue($value, ValueBinder aBinder, ?string $type = null): string
+    protected string _bindValue($value, ValueBinder aBinder, ?string $type = null)
     {
         $placeholder = $binder.placeholder("c");
         $binder.bind($placeholder, $value, $type);
@@ -228,7 +228,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param uim.cake.databases.ValueBinder aBinder The value binder to use
      * @param string|null $type the type to cast values to
      */
-    protected string _flattenValue(iterable $value, ValueBinder aBinder, ?string $type = null): string
+    protected string _flattenValue(iterable $value, ValueBinder aBinder, ?string $type = null)
     {
         $parts = [];
         if (is_array($value)) {

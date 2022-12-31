@@ -34,7 +34,7 @@ class SecurityException : BadRequestException
     /**
      * Getter for type
      */
-    string getType(): string
+    string getType()
     {
         return _type;
     }

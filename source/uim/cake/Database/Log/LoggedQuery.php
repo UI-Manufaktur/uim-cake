@@ -58,7 +58,7 @@ class LoggedQuery : JsonSerializable
      * params used to execute the query
      *
      */
-    protected string interpolate(): string
+    protected string interpolate()
     {
         $params = array_map(function ($p) {
             if ($p == null) {
@@ -144,7 +144,7 @@ class LoggedQuery : JsonSerializable
     /**
      * Returns the string representation of this logged query
      */
-    string __toString(): string
+    string __toString()
     {
         $sql = this.query;
         if (!empty(this.params)) {

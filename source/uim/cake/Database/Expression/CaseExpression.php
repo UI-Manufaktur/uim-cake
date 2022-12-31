@@ -169,7 +169,7 @@ class CaseExpression : IExpression
      * @param uim.cake.databases.IExpression|array|string $part The part to compile
      * @param uim.cake.databases.ValueBinder aBinder Sql generator
      */
-    protected string _compile($part, ValueBinder aBinder): string
+    protected string _compile($part, ValueBinder aBinder)
     {
         if ($part instanceof IExpression) {
             $part = $part.sql($binder);
@@ -187,7 +187,7 @@ class CaseExpression : IExpression
      *
      * @param uim.cake.databases.ValueBinder aBinder Placeholder generator object
      */
-    string sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $parts = [];
         $parts[] = "CASE";

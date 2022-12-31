@@ -70,7 +70,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Gets the currently configured conjunction for the conditions at this level of the expression tree.
      */
-    string getConjunction(): string
+    string getConjunction()
     {
         return _conjunction;
     }
@@ -538,7 +538,7 @@ class QueryExpression : IExpression, Countable
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $len = this.count();
         if ($len == 0) {

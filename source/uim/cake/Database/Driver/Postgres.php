@@ -144,13 +144,13 @@ class Postgres : Driver
     }
 
 
-    function disableForeignKeySQL(): string
+    string disableForeignKeySQL()
     {
         return "SET CONSTRAINTS ALL DEFERRED";
     }
 
 
-    function enableForeignKeySQL(): string
+    string enableForeignKeySQL()
     {
         return "SET CONSTRAINTS ALL IMMEDIATE";
     }

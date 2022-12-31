@@ -56,7 +56,7 @@ class UnaryExpression : IExpression
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $operand = _value;
         if ($operand instanceof IExpression) {

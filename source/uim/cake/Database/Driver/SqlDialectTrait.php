@@ -20,7 +20,7 @@ trait SqlDialectTrait
      *
      * @param string $identifier The identifier to quote.
      */
-    string quoteIdentifier(string $identifier): string
+    string quoteIdentifier(string $identifier)
     {
         $identifier = trim($identifier);
 
@@ -261,7 +261,7 @@ trait SqlDialectTrait
      *
      * @param string|int $name save point name
      */
-    string savePointSQL($name): string
+    string savePointSQL($name)
     {
         return "SAVEPOINT LEVEL" . $name;
     }
@@ -271,7 +271,7 @@ trait SqlDialectTrait
      *
      * @param string|int $name save point name
      */
-    string releaseSavePointSQL($name): string
+    string releaseSavePointSQL($name)
     {
         return "RELEASE SAVEPOINT LEVEL" . $name;
     }
@@ -281,7 +281,7 @@ trait SqlDialectTrait
      *
      * @param string|int $name save point name
      */
-    string rollbackSavePointSQL($name): string
+    string rollbackSavePointSQL($name)
     {
         return "ROLLBACK TO SAVEPOINT LEVEL" . $name;
     }

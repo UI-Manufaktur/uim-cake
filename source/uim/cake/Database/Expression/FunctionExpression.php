@@ -70,7 +70,7 @@ class FunctionExpression : QueryExpression : ITypedResult
     /**
      * Gets the name of the SQL function to be invoke in this expression.
      */
-    string getName(): string
+    string getName()
     {
         return _name;
     }
@@ -119,7 +119,7 @@ class FunctionExpression : QueryExpression : ITypedResult
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $parts = [];
         foreach (_conditions as $condition) {

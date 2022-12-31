@@ -260,7 +260,7 @@ class WhenThenExpression : IExpression
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         if (this.when == null) {
             throw new LogicException("Case expression has incomplete when clause. Missing `when()`.");

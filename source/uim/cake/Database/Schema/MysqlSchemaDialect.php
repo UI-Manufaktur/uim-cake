@@ -311,7 +311,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    function columnSql(TableSchema $schema, string aName): string
+    string columnSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getColumn($name);
@@ -503,7 +503,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    function constraintSql(TableSchema $schema, string aName): string
+    string constraintSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getConstraint($name);
@@ -566,7 +566,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    function indexSql(TableSchema $schema, string aName): string
+    string indexSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getIndex($name);
@@ -588,7 +588,7 @@ class MysqlSchemaDialect : SchemaDialect
      * @param string $prefix The key prefix
      * @param array $data Key data.
      */
-    protected string _keySql(string $prefix, array $data): string
+    protected string _keySql(string $prefix, array $data)
     {
         $columns = array_map(
             [_driver, "quoteIdentifier"],

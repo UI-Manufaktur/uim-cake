@@ -354,7 +354,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    protected function _convertOnClause(string $clause): string
+    protected string _convertOnClause(string $clause)
     {
         if ($clause == "r") {
             return TableSchema::ACTION_RESTRICT;
@@ -370,7 +370,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function columnSql(TableSchema $schema, string aName): string
+    string columnSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getColumn($name);
@@ -532,7 +532,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function indexSql(TableSchema $schema, string aName): string
+    string indexSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getIndex($name);
@@ -550,7 +550,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function constraintSql(TableSchema $schema, string aName): string
+    string constraintSql(TableSchema $schema, string aName)
     {
         /** @var array<string, mixed> $data */
         $data = $schema.getConstraint($name);
@@ -571,7 +571,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @param string $prefix The key prefix
      * @param array<string, mixed> $data Key data.
      */
-    protected string _keySql(string $prefix, array $data): string
+    protected string _keySql(string $prefix, array $data)
     {
         $columns = array_map(
             [_driver, "quoteIdentifier"],

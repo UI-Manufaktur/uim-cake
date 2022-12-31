@@ -427,7 +427,7 @@ class CaseStatementExpression : IExpression, ITypedResult
      * @return string
      * @see CaseStatementExpression::then()
      */
-    function getReturnType(): string
+    string getReturnType()
     {
         if (this.returnType != null) {
             return this.returnType;
@@ -499,7 +499,7 @@ class CaseStatementExpression : IExpression, ITypedResult
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         if (this.whenBuffer != null) {
             throw new LogicException("Case expression has incomplete when clause. Missing `then()` after `when()`.");

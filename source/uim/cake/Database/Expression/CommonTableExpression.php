@@ -161,7 +161,7 @@ class CommonTableExpression : IExpression
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $fields = "";
         if (this.fields) {

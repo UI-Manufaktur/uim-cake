@@ -45,13 +45,13 @@ class StringExpression : IExpression
     /**
      * Returns the string collation.
      */
-    string getCollation(): string
+    string getCollation()
     {
         return this.collation;
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $placeholder = $binder.placeholder("c");
         $binder.bind($placeholder, this.string, "string");

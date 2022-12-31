@@ -55,7 +55,7 @@ class BetweenExpression : IExpression, FieldInterface
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $parts = [
             "from": _from,
@@ -98,7 +98,7 @@ class BetweenExpression : IExpression, FieldInterface
      * @param string $type The type of $value
      * @return string generated placeholder
      */
-    protected function _bindValue($value, $binder, $type): string
+    protected string _bindValue($value, $binder, $type)
     {
         $placeholder = $binder.placeholder("c");
         $binder.bind($placeholder, $value, $type);
