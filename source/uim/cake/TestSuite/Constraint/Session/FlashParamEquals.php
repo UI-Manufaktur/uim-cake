@@ -19,7 +19,7 @@ class FlashParamEquals : Constraint
 
     /**
      */
-    protected string $key;
+    protected string aKey;
 
     /**
      */
@@ -34,11 +34,11 @@ class FlashParamEquals : Constraint
      * Constructor
      *
      * @param uim.cake.http.Session|null $session Session
-     * @param string $key Flash key
+     * @param string aKey Flash key
      * @param string $param Param to check
      * @param int|null $at Expected index
      */
-    this(?Session $session, string $key, string $param, ?int $at = null) {
+    this(?Session $session, string aKey, string $param, ?int $at = null) {
         if (!$session) {
             $message = "There is no stored session data. Perhaps you need to run a request?";
             $message .= " Additionally, ensure `this.enableRetainFlashMessages()` has been enabled for the test.";

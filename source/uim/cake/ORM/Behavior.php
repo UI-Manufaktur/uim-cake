@@ -187,12 +187,12 @@ class Behavior : IEventListener
     /**
      * Removes aliased methods that would otherwise be duplicated by userland configuration.
      *
-     * @param string $key The key to filter.
+     * @param string aKey The key to filter.
      * @param array<string, mixed> $defaults The default method mappings.
      * @param array<string, mixed> $config The customized method mappings.
      * @return array A de-duped list of config data.
      */
-    protected function _resolveMethodAliases(string $key, array $defaults, array $config): array
+    protected function _resolveMethodAliases(string aKey, array $defaults, array $config): array
     {
         if (!isset($defaults[$key], $config[$key])) {
             return $config;

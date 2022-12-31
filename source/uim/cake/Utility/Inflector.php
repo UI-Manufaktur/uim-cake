@@ -165,11 +165,11 @@ class Inflector
      * Cache inflected values, and return if already available
      *
      * @param string $type Inflection type
-     * @param string $key Original value
+     * @param string aKey Original value
      * @param string|false $value Inflected value
      * @return string|false Inflected value on cache hit or false on cache miss.
      */
-    protected static function _cache(string $type, string $key, $value = false) {
+    protected static function _cache(string $type, string aKey, $value = false) {
         $key = "_" . $key;
         $type = "_" . $type;
         if ($value != false) {

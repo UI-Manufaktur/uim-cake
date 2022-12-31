@@ -283,12 +283,12 @@ class StringTemplate
      * Formats an individual attribute, and returns the string value of the composed attribute.
      * Works with minimized attributes that have the same value as their name such as "disabled" and "checked"
      *
-     * @param string $key The name of the attribute to create
+     * @param string aKey The name of the attribute to create
      * @param array<string>|string $value The value of the attribute to create.
      * @param bool $escape Define if the value must be escaped
      * @return string The composed attribute.
      */
-    protected function _formatAttribute(string $key, $value, $escape = true): string
+    protected function _formatAttribute(string aKey, $value, $escape = true): string
     {
         if (is_array($value)) {
             $value = implode(" ", $value);

@@ -177,13 +177,13 @@ class Security
      * with nulls prior to encryption.
      *
      * @param string $plain The value to encrypt.
-     * @param string $key The 256 bit/32 byte key to use as a cipher key.
+     * @param string aKey The 256 bit/32 byte key to use as a cipher key.
      * @param string|null $hmacSalt The salt to use for the HMAC process.
      *   Leave null to use value of Security::getSalt().
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static function encrypt(string $plain, string $key, ?string $hmacSalt = null): string
+    static function encrypt(string $plain, string aKey, ?string $hmacSalt = null): string
     {
         self::_checkKey($key, "encrypt()");
 
@@ -203,12 +203,12 @@ class Security
     /**
      * Check the encryption key for proper length.
      *
-     * @param string $key Key to check.
+     * @param string aKey Key to check.
      * @param string $method The method the key is being checked for.
      * @return void
      * @throws \InvalidArgumentException When key length is not 256 bit/32 bytes
      */
-    protected static function _checkKey(string $key, string $method): void
+    protected static function _checkKey(string aKey, string $method): void
     {
         if (mb_strlen($key, "8bit") < 32) {
             throw new InvalidArgumentException(
@@ -221,13 +221,13 @@ class Security
      * Decrypt a value using AES-256.
      *
      * @param string $cipher The ciphertext to decrypt.
-     * @param string $key The 256 bit/32 byte key to use as a cipher key.
+     * @param string aKey The 256 bit/32 byte key to use as a cipher key.
      * @param string|null $hmacSalt The salt to use for the HMAC process.
      *   Leave null to use value of Security::getSalt().
      * @return string|null Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static function decrypt(string $cipher, string $key, ?string $hmacSalt = null): ?string
+    static function decrypt(string $cipher, string aKey, ?string $hmacSalt = null): ?string
     {
         self::_checkKey($key, "decrypt()");
         if (empty($cipher)) {

@@ -127,10 +127,10 @@ class Helper : IEventListener
      *
      * @param array<string, mixed> $options Array options/attributes to add a class to
      * @param string $class The class name being added.
-     * @param string $key the key to use for class. Defaults to `"class"`.
+     * @param string aKey the key to use for class. Defaults to `"class"`.
      * @return array<string, mixed> Array of options with $key set.
      */
-    function addClass(array $options, string $class, string $key = "class"): array
+    function addClass(array $options, string $class, string aKey = "class"): array
     {
         if (isset($options[$key]) && is_array($options[$key])) {
             $options[$key][] = $class;

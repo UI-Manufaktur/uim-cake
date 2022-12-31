@@ -55,11 +55,11 @@ class CommandTask : Shell
      *
      * @param array<string, mixed> $shellList The shell listing array.
      * @param string $path The path to look in.
-     * @param string $key The key to add shells to
+     * @param string aKey The key to add shells to
      * @param array<string> $skip A list of commands to exclude.
      * @return array<string, mixed> The updated list of shells.
      */
-    protected function _findShells(array $shellList, string $path, string $key, array $skip): array
+    protected function _findShells(array $shellList, string $path, string aKey, array $skip): array
     {
         $shells = _scanDir($path);
 

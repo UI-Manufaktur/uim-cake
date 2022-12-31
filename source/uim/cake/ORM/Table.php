@@ -610,7 +610,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Sets the primary key field name.
      *
-     * @param array<string>|string $key Sets a new name to be used as primary key
+     * @param array<string>|string aKey Sets a new name to be used as primary key
      * @return this
      */
     function setPrimaryKey($key) {

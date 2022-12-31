@@ -287,10 +287,10 @@ class SelectBoxWidget : BasicWidget
     /**
      * Helper method for deciding what options are selected.
      *
-     * @param string $key The key to test.
+     * @param string aKey The key to test.
      * @param array<string>|string|int|false|null $selected The selected values.
      */
-    protected bool _isSelected(string $key, $selected): bool
+    protected bool _isSelected(string aKey, $selected): bool
     {
         if ($selected == null) {
             return false;
@@ -308,10 +308,10 @@ class SelectBoxWidget : BasicWidget
     /**
      * Helper method for deciding what options are disabled.
      *
-     * @param string $key The key to test.
+     * @param string aKey The key to test.
      * @param array<string>|null $disabled The disabled values.
      */
-    protected bool _isDisabled(string $key, ?array $disabled): bool
+    protected bool _isDisabled(string aKey, ?array $disabled): bool
     {
         if ($disabled == null) {
             return false;

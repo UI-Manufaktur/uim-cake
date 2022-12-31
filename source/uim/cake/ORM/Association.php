@@ -423,7 +423,7 @@ abstract class Association
      * Sets the name of the field representing the binding field with the target table.
      * When not manually specified the primary key of the owning side table is used.
      *
-     * @param array<string>|string $key the table field or fields to be used to link both tables together
+     * @param array<string>|string aKey the table field or fields to be used to link both tables together
      * @return this
      */
     function setBindingKey($key) {
@@ -460,7 +460,7 @@ abstract class Association
     /**
      * Sets the name of the field representing the foreign key to the target table.
      *
-     * @param array<string>|string $key the key or keys to be used to link both tables together
+     * @param array<string>|string aKey the key or keys to be used to link both tables together
      * @return this
      */
     function setForeignKey($key) {

@@ -23,11 +23,11 @@ class OpenSsl
      * with nulls prior to encryption.
      *
      * @param string $plain The value to encrypt.
-     * @param string $key The 256 bit/32 byte key to use as a cipher key.
+     * @param string aKey The 256 bit/32 byte key to use as a cipher key.
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static function encrypt(string $plain, string $key): string
+    static function encrypt(string $plain, string aKey): string
     {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);
@@ -41,11 +41,11 @@ class OpenSsl
      * Decrypt a value using AES-256.
      *
      * @param string $cipher The ciphertext to decrypt.
-     * @param string $key The 256 bit/32 byte key to use as a cipher key.
+     * @param string aKey The 256 bit/32 byte key to use as a cipher key.
      * @return string Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static function decrypt(string $cipher, string $key): ?string
+    static function decrypt(string $cipher, string aKey): ?string
     {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);

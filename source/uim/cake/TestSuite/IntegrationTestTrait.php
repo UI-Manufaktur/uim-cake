@@ -1101,10 +1101,10 @@ trait IntegrationTestTrait
      * Asserts a flash message was set
      *
      * @param string $expected Expected message
-     * @param string $key Flash key
+     * @param string aKey Flash key
      * @param string $message Assertion failure message
      */
-    void assertFlashMessage(string $expected, string $key = "flash", string $message = ""): void
+    void assertFlashMessage(string $expected, string aKey = "flash", string $message = ""): void
     {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($expected, new FlashParamEquals(_requestSession, $key, "message"), $verboseMessage);
@@ -1115,10 +1115,10 @@ trait IntegrationTestTrait
      *
      * @param int $at Flash index
      * @param string $expected Expected message
-     * @param string $key Flash key
+     * @param string aKey Flash key
      * @param string $message Assertion failure message
      */
-    void assertFlashMessageAt(int $at, string $expected, string $key = "flash", string $message = ""): void
+    void assertFlashMessageAt(int $at, string $expected, string aKey = "flash", string $message = ""): void
     {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(
@@ -1132,10 +1132,10 @@ trait IntegrationTestTrait
      * Asserts a flash element was set
      *
      * @param string $expected Expected element name
-     * @param string $key Flash key
+     * @param string aKey Flash key
      * @param string $message Assertion failure message
      */
-    void assertFlashElement(string $expected, string $key = "flash", string $message = ""): void
+    void assertFlashElement(string $expected, string aKey = "flash", string $message = ""): void
     {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(
@@ -1150,10 +1150,10 @@ trait IntegrationTestTrait
      *
      * @param int $at Flash index
      * @param string $expected Expected element name
-     * @param string $key Flash key
+     * @param string aKey Flash key
      * @param string $message Assertion failure message
      */
-    void assertFlashElementAt(int $at, string $expected, string $key = "flash", string $message = ""): void
+    void assertFlashElementAt(int $at, string $expected, string aKey = "flash", string $message = ""): void
     {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(
@@ -1221,7 +1221,7 @@ trait IntegrationTestTrait
         $expected,
         string aName,
         string $encrypt = "aes",
-        ?string $key = null,
+        ?string aKey = null,
         string $message = ""
     ): void {
         $verboseMessage = this.extractVerboseMessage($message);

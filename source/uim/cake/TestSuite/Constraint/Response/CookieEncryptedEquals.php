@@ -19,7 +19,7 @@ class CookieEncryptedEquals : CookieEquals
 
     /**
      */
-    protected string $key;
+    protected string aKey;
 
     /**
      */
@@ -31,9 +31,9 @@ class CookieEncryptedEquals : CookieEquals
      * @param uim.cake.http.Response|null $response A response instance.
      * @param string $cookieName Cookie name
      * @param string $mode Mode
-     * @param string $key Key
+     * @param string aKey Key
      */
-    this(?Response $response, string $cookieName, string $mode, string $key) {
+    this(?Response $response, string $cookieName, string $mode, string aKey) {
         super(($response, $cookieName);
 
         this.key = $key;

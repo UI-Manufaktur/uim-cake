@@ -45,13 +45,13 @@ class FlashHelper : Helper
      * If you have several messages stored in the Session, each message will be rendered in its own
      * element.
      *
-     * @param string $key The [Flash.]key you are rendering in the view.
+     * @param string aKey The [Flash.]key you are rendering in the view.
      * @param array<string, mixed> $options Additional options to use for the creation of this flash message.
      *    Supports the "params", and "element" keys that are used in the helper.
      * @return string|null Rendered flash message or null if flash key does not exist
      *   in session.
      */
-    function render(string $key = "flash", array $options = []): ?string
+    function render(string aKey = "flash", array $options = []): ?string
     {
         $messages = _View.getRequest().getFlash().consume($key);
         if ($messages == null) {

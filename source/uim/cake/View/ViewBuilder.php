@@ -602,11 +602,11 @@ class ViewBuilder : JsonSerializable, Serializable
      * Iterates through hash to clean up and normalize.
      *
      * @param mixed $item Reference to the view var value.
-     * @param string $key View var key.
+     * @param string aKey View var key.
      * @return void
      * @throws \RuntimeException
      */
-    protected function _checkViewVars(&$item, string $key): void
+    protected function _checkViewVars(&$item, string aKey): void
     {
         if ($item instanceof Exception) {
             $item = (string)$item;

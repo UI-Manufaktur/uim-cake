@@ -268,7 +268,7 @@ class SelectLoader
      * filtering needs to be done using a subquery.
      *
      * @param uim.cake.orm.Query $query Target table"s query
-     * @param array<string>|string $key the fields that should be used for filtering
+     * @param array<string>|string aKey the fields that should be used for filtering
      * @param uim.cake.orm.Query $subquery The Subquery to use for filtering
      * @return uim.cake.orm.Query
      */
@@ -304,7 +304,7 @@ class SelectLoader
      * target table query given a filter key and some filtering values.
      *
      * @param uim.cake.orm.Query $query Target table"s query
-     * @param array<string>|string $key The fields that should be used for filtering
+     * @param array<string>|string aKey The fields that should be used for filtering
      * @param mixed $filter The value that should be used to match for $key
      * @return uim.cake.orm.Query
      */

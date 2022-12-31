@@ -451,7 +451,7 @@ class Xml
         foreach ($namespaces as $namespace) {
             /**
              * @psalm-suppress PossiblyNullIterator
-             * @var string $key
+             * @var string aKey
              */
             foreach ($xml.attributes($namespace, true) as $key: $value) {
                 if (!empty($namespace)) {

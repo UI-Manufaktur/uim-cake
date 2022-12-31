@@ -590,7 +590,7 @@ class View : EventDispatcherInterface
      * @return mixed Config value being read.
      * @psalm-suppress PossiblyNullArgument
      */
-    function getConfig(?string $key = null, $default = null) {
+    function getConfig(?string aKey = null, $default = null) {
         $value = _getConfig($key);
 
         if ($value != null) {

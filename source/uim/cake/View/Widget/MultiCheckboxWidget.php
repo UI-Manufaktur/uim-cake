@@ -216,10 +216,10 @@ class MultiCheckboxWidget : BasicWidget
     /**
      * Helper method for deciding what options are selected.
      *
-     * @param string $key The key to test.
+     * @param string aKey The key to test.
      * @param array<string>|string|int|false|null $selected The selected values.
      */
-    protected bool _isSelected(string $key, $selected): bool
+    protected bool _isSelected(string aKey, $selected): bool
     {
         if ($selected == null) {
             return false;
@@ -235,10 +235,10 @@ class MultiCheckboxWidget : BasicWidget
     /**
      * Helper method for deciding what options are disabled.
      *
-     * @param string $key The key to test.
+     * @param string aKey The key to test.
      * @param mixed $disabled The disabled values.
      */
-    protected bool _isDisabled(string $key, $disabled): bool
+    protected bool _isDisabled(string aKey, $disabled): bool
     {
         if ($disabled == null || $disabled == false) {
             return false;
