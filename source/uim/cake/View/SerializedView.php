@@ -36,7 +36,7 @@ abstract class SerializedView : View
 
     function initialize(): void
     {
-        parent::initialize();
+        super.initialize();
         if (_responseType) {
             $response = this.getResponse().withType(_responseType);
             this.setResponse($response);
@@ -50,7 +50,7 @@ abstract class SerializedView : View
      */
     function loadHelpers() {
         if (!this.getConfig("serialize")) {
-            parent::loadHelpers();
+            super.loadHelpers();
         }
 
         return this;
@@ -102,6 +102,6 @@ abstract class SerializedView : View
             }
         }
 
-        return parent::render($template, false);
+        return super.render($template, false);
     }
 }

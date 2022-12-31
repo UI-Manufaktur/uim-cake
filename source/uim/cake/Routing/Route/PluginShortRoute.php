@@ -23,7 +23,7 @@ class PluginShortRoute : InflectedRoute
      */
     function parse(string $url, string $method = ""): ?array
     {
-        $params = parent::parse($url, $method);
+        $params = super.parse($url, $method);
         if (!$params) {
             return null;
         }
@@ -48,7 +48,7 @@ class PluginShortRoute : InflectedRoute
             return null;
         }
         this.defaults["controller"] = $url["controller"];
-        $result = parent::match($url, $context);
+        $result = super.match($url, $context);
         unset(this.defaults["controller"]);
 
         return $result;

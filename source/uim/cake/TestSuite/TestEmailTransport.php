@@ -28,7 +28,7 @@ class TestEmailTransport : DebugTransport
     {
         static::$messages[] = $message;
 
-        return parent::send($message);
+        return super.send($message);
     }
 
     /**

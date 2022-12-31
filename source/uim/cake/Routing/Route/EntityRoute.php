@@ -42,7 +42,7 @@ class EntityRoute : Route
             }
         }
 
-        return parent::match($url, $context);
+        return super.match($url, $context);
     }
 
     /**

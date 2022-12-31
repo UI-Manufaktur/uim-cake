@@ -47,7 +47,7 @@ class RedirectRoute : Route
      */
     function parse(string $url, string $method = ""): ?array
     {
-        $params = parent::parse($url, $method);
+        $params = super.parse($url, $method);
         if (!$params) {
             return null;
         }

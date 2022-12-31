@@ -103,7 +103,7 @@ class JsonView : SerializedView
      */
     function render(?string $template = null, $layout = null): string
     {
-        $return = parent::render($template, $layout);
+        $return = super.render($template, $layout);
 
         $jsonp = this.getConfig("jsonp");
         if ($jsonp) {

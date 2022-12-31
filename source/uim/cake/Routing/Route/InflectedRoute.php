@@ -27,7 +27,7 @@ class InflectedRoute : Route
      */
     function parse(string $url, string $method = ""): ?array
     {
-        $params = parent::parse($url, $method);
+        $params = super.parse($url, $method);
         if (!$params) {
             return null;
         }
@@ -64,7 +64,7 @@ class InflectedRoute : Route
             this.defaults = _underscore(this.defaults);
         }
 
-        return parent::match($url, $context);
+        return super.match($url, $context);
     }
 
     /**

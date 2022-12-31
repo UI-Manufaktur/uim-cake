@@ -74,7 +74,7 @@ class SelectWithPivotLoader : SelectLoader
             unset($options["queryBuilder"]);
         }
 
-        $query = parent::_buildQuery($options);
+        $query = super._buildQuery($options);
 
         if ($queryBuilder) {
             $query = $queryBuilder($query);

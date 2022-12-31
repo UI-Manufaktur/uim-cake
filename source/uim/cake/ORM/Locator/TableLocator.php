@@ -177,7 +177,7 @@ class TableLocator : AbstractLocator : ILocator
     function get(string $alias, array $options = []): Table
     {
         /** @var uim.cake.orm.Table */
-        return parent::get($alias, $options);
+        return super.get($alias, $options);
     }
 
 
@@ -295,7 +295,7 @@ class TableLocator : AbstractLocator : ILocator
 
     function clear(): void
     {
-        parent::clear();
+        super.clear();
 
         _fallbacked = [];
         _config = [];
@@ -317,7 +317,7 @@ class TableLocator : AbstractLocator : ILocator
 
     function remove(string $alias): void
     {
-        parent::remove($alias);
+        super.remove($alias);
 
         unset(_fallbacked[$alias]);
     }

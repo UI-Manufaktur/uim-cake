@@ -45,7 +45,7 @@ class DashedRoute : Route
      */
     function parse(string $url, string $method = ""): ?array
     {
-        $params = parent::parse($url, $method);
+        $params = super.parse($url, $method);
         if (!$params) {
             return null;
         }
@@ -84,7 +84,7 @@ class DashedRoute : Route
             this.defaults = _dasherize(this.defaults);
         }
 
-        return parent::match($url, $context);
+        return super.match($url, $context);
     }
 
     /**

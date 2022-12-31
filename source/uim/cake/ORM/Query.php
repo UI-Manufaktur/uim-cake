@@ -218,7 +218,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
             }
         }
 
-        return parent::select($fields, $overwrite);
+        return super.select($fields, $overwrite);
     }
 
     /**
@@ -871,7 +871,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Handles cloning eager loaders.
      */
     function __clone() {
-        parent::__clone();
+        super.__clone();
         if (_eagerLoader != null) {
             _eagerLoader = clone _eagerLoader;
         }
@@ -1080,7 +1080,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
 
         _transformQuery();
 
-        return parent::sql($binder);
+        return super.sql($binder);
     }
 
     /**
@@ -1205,7 +1205,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     {
         _results = null;
         _resultsCount = null;
-        parent::_dirty();
+        super._dirty();
     }
 
     /**
@@ -1223,7 +1223,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
             $table = $repository.getTable();
         }
 
-        return parent::update($table);
+        return super.update($table);
     }
 
     /**
@@ -1240,7 +1240,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         this.from([$repository.getAlias(): $repository.getTable()]);
 
         // We do not pass $table to parent class here
-        return parent::delete();
+        return super.delete();
     }
 
     /**
@@ -1261,7 +1261,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
         $table = $repository.getTable();
         this.into($table);
 
-        return parent::insert($columns, $types);
+        return super.insert($columns, $types);
     }
 
     /**
@@ -1300,7 +1300,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     {
         $eagerLoader = this.getEagerLoader();
 
-        return parent::__debugInfo() + [
+        return super.__debugInfo() + [
             "hydrate": _hydrate,
             "buffered": _useBufferedResults,
             "formatters": count(_formatters),

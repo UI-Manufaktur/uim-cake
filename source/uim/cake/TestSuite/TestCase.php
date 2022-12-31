@@ -230,7 +230,7 @@ abstract class TestCase : BaseTestCase
      */
     protected void setUp(): void
     {
-        parent::setUp();
+        super.setUp();
         this.setupFixtures();
 
         if (!_configure) {
@@ -249,7 +249,7 @@ abstract class TestCase : BaseTestCase
      */
     protected void tearDown(): void
     {
-        parent::tearDown();
+        super.tearDown();
         this.teardownFixtures();
 
         if (_configure) {

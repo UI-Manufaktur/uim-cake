@@ -15,7 +15,7 @@ class BodyNotEquals : BodyEquals
      */
     function matches($other): bool
     {
-        return parent::matches($other) == false;
+        return super.matches($other) == false;
     }
 
     /**

@@ -444,7 +444,7 @@ class BelongsToMany : Association
         $assoc.attachTo($query, $newOptions);
         $query.getEagerLoader().addToJoinsMap($junction.getAlias(), $assoc, true);
 
-        parent::attachTo($query, $options);
+        super.attachTo($query, $options);
 
         $foreignKey = this.getTargetForeignKey();
         thisJoin = $query.clause("join")[this.getName()];
@@ -916,7 +916,7 @@ class BelongsToMany : Association
 
 
     function setConditions($conditions) {
-        parent::setConditions($conditions);
+        super.setConditions($conditions);
         _targetConditions = _junctionConditions = null;
 
         return this;

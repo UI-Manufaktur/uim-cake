@@ -34,7 +34,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> $config The configuration settings provided to this helper.
      */
     void initialize(array $config) {
-        parent::initialize($config);
+        super.initialize($config);
         $engineClassConfig = this.getConfig("assetUrlClassName");
 
         /** @psalm-var class-string<uim.cake.routings.Asset>|null $engineClass */
