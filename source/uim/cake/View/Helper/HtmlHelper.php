@@ -840,13 +840,13 @@ class HtmlHelper : Helper
      *
      * - `escape` Whether the contents should be html_entity escaped.
      *
-     * @param string $name Tag name.
+     * @param string aName Tag name.
      * @param string|null $text String content that will appear inside the HTML element.
      *   If null, only a start tag will be printed
      * @param array<string, mixed> $options Additional HTML attributes of the HTML tag, see above.
      * @return string The formatted tag element
      */
-    function tag(string $name, ?string $text = null, array $options = []): string
+    function tag(string aName, ?string $text = null, array $options = []): string
     {
         if (isset($options["escape"]) && $options["escape"]) {
             $text = h($text);

@@ -70,10 +70,10 @@ class HelperRegistry : ObjectRegistry : EventDispatcherInterface
     /**
      * Provide read access to the loaded objects
      *
-     * @param string $name Name of property to read
+     * @param string aName Name of property to read
      * @return uim.cake.View\Helper|null
      */
-    function __get(string $name) {
+    function __get(string aName) {
         if (isset(_loaded[$name])) {
             return _loaded[$name];
         }

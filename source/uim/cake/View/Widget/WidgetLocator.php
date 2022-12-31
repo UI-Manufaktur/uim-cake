@@ -129,11 +129,11 @@ class WidgetLocator
      * the `_default` widget will be returned. An exception will be thrown if
      * the `_default` widget is undefined.
      *
-     * @param string $name The widget name to get.
+     * @param string aName The widget name to get.
      * @return uim.cake.View\Widget\WidgetInterface WidgetInterface instance.
      * @throws \RuntimeException when widget is undefined.
      */
-    function get(string $name): WidgetInterface
+    function get(string aName): WidgetInterface
     {
         if (!isset(_widgets[$name])) {
             if (empty(_widgets["_default"])) {

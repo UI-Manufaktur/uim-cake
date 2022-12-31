@@ -20,7 +20,7 @@ class MissingCellTemplateException : MissingTemplateException
 {
     /**
      */
-    protected string $name;
+    protected string aName;
 
     /**
      */
@@ -29,14 +29,14 @@ class MissingCellTemplateException : MissingTemplateException
     /**
      * Constructor
      *
-     * @param string $name The Cell name that is missing a view.
+     * @param string aName The Cell name that is missing a view.
      * @param string $file The view filename.
      * @param array<string> $paths The path list that template could not be found in.
      * @param int|null $code The code of the error.
      * @param \Throwable|null $previous the previous exception.
      */
     this(
-        string $name,
+        string aName,
         string $file,
         array $paths = [],
         ?int $code = null,

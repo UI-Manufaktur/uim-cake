@@ -99,7 +99,7 @@ class View : EventDispatcherInterface
      * Name of the controller that created the View if any.
      *
      */
-    protected string $name = "";
+    protected string aName = "";
 
     /**
      * An array of names of built-in helpers to include.
@@ -545,10 +545,10 @@ class View : EventDispatcherInterface
      * Set the name of the template file to render. The name specified is the
      * filename in `templates/<SubFolder>/` without the .php extension.
      *
-     * @param string $name Template file name to set.
+     * @param string aName Template file name to set.
      * @return this
      */
-    function setTemplate(string $name) {
+    function setTemplate(string aName) {
         this.template = $name;
 
         return this;
@@ -569,10 +569,10 @@ class View : EventDispatcherInterface
      * The name specified is the filename of the layout in `templates/layout/`
      * without the .php extension.
      *
-     * @param string $name Layout file name to set.
+     * @param string aName Layout file name to set.
      * @return this
      */
-    function setLayout(string $name) {
+    function setLayout(string aName) {
         this.layout = $name;
 
         return this;
@@ -616,7 +616,7 @@ class View : EventDispatcherInterface
      * This realizes the concept of Elements, (or "partial layouts") and the $params array is used to send
      * data to be used in the element. Elements can be cached improving performance by using the `cache` option.
      *
-     * @param string $name Name of template file in the `templates/element/` folder,
+     * @param string aName Name of template file in the `templates/element/` folder,
      *   or `MyPlugin.template` to use the template element from MyPlugin. If the element
      *   is not found in the plugin, the normal view path cascade will be searched.
      * @param array $data Array of data to be made available to the rendered view (i.e. the Element)
@@ -638,7 +638,7 @@ class View : EventDispatcherInterface
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} $options
      */
-    function element(string $name, array $data = [], array $options = []): string
+    function element(string aName, array $data = [], array $options = []): string
     {
         $options += ["callbacks": false, "cache": null, "plugin": null, "ignoreMissing": false];
         if (isset($options["cache"])) {
@@ -717,12 +717,12 @@ class View : EventDispatcherInterface
     /**
      * Checks if an element exists
      *
-     * @param string $name Name of template file in the `templates/element/` folder,
+     * @param string aName Name of template file in the `templates/element/` folder,
      *   or `MyPlugin.template` to check the template element from MyPlugin. If the element
      *   is not found in the plugin, the normal view path cascade will be searched.
      * @return bool Success
      */
-    function elementExists(string $name): bool
+    function elementExists(string aName): bool
     {
         return (bool)_getElementFileName($name);
     }
@@ -849,7 +849,7 @@ class View : EventDispatcherInterface
     /**
      * Saves a variable or an associative array of variables for use inside a template.
      *
-     * @param array|string $name A string or an array of data.
+     * @param array|string aName A string or an array of data.
      * @param mixed $value Value in case $name is a string (which then works as the key).
      *   Unused if $name is an associative array, otherwise serves as the values to $name"s keys.
      * @return this
@@ -907,11 +907,11 @@ class View : EventDispatcherInterface
      * this.end();
      * ```
      *
-     * @param string $name The name of the block to capture for.
+     * @param string aName The name of the block to capture for.
      * @return this
      * @see uim.cake.View\ViewBlock::start()
      */
-    function start(string $name) {
+    function start(string aName) {
         this.Blocks.start($name);
 
         return this;
@@ -922,13 +922,13 @@ class View : EventDispatcherInterface
      *
      * Appending to a new block will create the block.
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
      * @return this
      * @see uim.cake.View\ViewBlock::concat()
      */
-    function append(string $name, $value = null) {
+    function append(string aName, $value = null) {
         this.Blocks.concat($name, $value);
 
         return this;
@@ -939,13 +939,13 @@ class View : EventDispatcherInterface
      *
      * Prepending to a new block will create the block.
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
      * @return this
      * @see uim.cake.View\ViewBlock::concat()
      */
-    function prepend(string $name, $value) {
+    function prepend(string aName, $value) {
         this.Blocks.concat($name, $value, ViewBlock::PREPEND);
 
         return this;
@@ -955,13 +955,13 @@ class View : EventDispatcherInterface
      * Set the content for a block. This will overwrite any
      * existing content.
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
      * @return this
      * @see uim.cake.View\ViewBlock::set()
      */
-    function assign(string $name, $value) {
+    function assign(string aName, $value) {
         this.Blocks.set($name, $value);
 
         return this;
@@ -971,11 +971,11 @@ class View : EventDispatcherInterface
      * Reset the content for a block. This will overwrite any
      * existing content.
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @return this
      * @see uim.cake.View\ViewBlock::set()
      */
-    function reset(string $name) {
+    function reset(string aName) {
         this.assign($name, "");
 
         return this;
@@ -985,12 +985,12 @@ class View : EventDispatcherInterface
      * Fetch the content for a block. If a block is
      * empty or undefined "" will be returned.
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @param string $default Default text
      * @return string The block content or $default if the block does not exist.
      * @see uim.cake.View\ViewBlock::get()
      */
-    function fetch(string $name, string $default = ""): string
+    function fetch(string aName, string $default = ""): string
     {
         return this.Blocks.get($name, $default);
     }
@@ -1010,10 +1010,10 @@ class View : EventDispatcherInterface
     /**
      * Check if a block exists
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @return bool
      */
-    function exists(string $name): bool
+    function exists(string aName): bool
     {
         return this.Blocks.exists($name);
     }
@@ -1022,12 +1022,12 @@ class View : EventDispatcherInterface
      * Provides template or element extension/inheritance. Templates can : a
      * parent template and populate blocks in the parent template.
      *
-     * @param string $name The template or element to "extend" the current one with.
+     * @param string aName The template or element to "extend" the current one with.
      * @return this
      * @throws \LogicException when you extend a template with itself or make extend loops.
      * @throws \LogicException when you extend an element which doesn"t exist
      */
-    function extend(string $name) {
+    function extend(string aName) {
         $type = $name[0] == "/" ? static::TYPE_TEMPLATE : _currentType;
         switch ($type) {
             case static::TYPE_ELEMENT:
@@ -1071,10 +1071,10 @@ class View : EventDispatcherInterface
     /**
      * Magic accessor for helpers.
      *
-     * @param string $name Name of the attribute to get.
+     * @param string aName Name of the attribute to get.
      * @return uim.cake.View\Helper|null
      */
-    function __get(string $name) {
+    function __get(string aName) {
         $registry = this.helpers();
         if (!isset($registry.{$name})) {
             return null;
@@ -1194,12 +1194,12 @@ class View : EventDispatcherInterface
     /**
      * Loads a helper. Delegates to the `HelperRegistry::load()` to load the helper
      *
-     * @param string $name Name of the helper to load.
+     * @param string aName Name of the helper to load.
      * @param array<string, mixed> $config Settings for the helper
      * @return uim.cake.View\Helper a constructed helper object.
      * @see uim.cake.View\HelperRegistry::load()
      */
-    function loadHelper(string $name, array $config = []): Helper
+    function loadHelper(string aName, array $config = []): Helper
     {
         [, $class] = pluginSplit($name);
         $helpers = this.helpers();
@@ -1262,7 +1262,7 @@ class View : EventDispatcherInterface
      * @return this
 
      */
-    function setPlugin(?string $name) {
+    function setPlugin(?string aName) {
         this.plugin = $name;
 
         return this;
@@ -1294,7 +1294,7 @@ class View : EventDispatcherInterface
      * @throws uim.cake.View\exceptions.MissingTemplateException when a template file could not be found.
      * @throws \RuntimeException When template name not provided.
      */
-    protected function _getTemplateFileName(?string $name = null): string
+    protected function _getTemplateFileName(?string aName = null): string
     {
         $templatePath = $subDir = "";
 
@@ -1346,10 +1346,10 @@ class View : EventDispatcherInterface
     /**
      * Change the name of a view template file into underscored format.
      *
-     * @param string $name Name of file which should be inflected.
+     * @param string aName Name of file which should be inflected.
      * @return string File name after conversion
      */
-    protected function _inflectTemplateFileName(string $name): string
+    protected function _inflectTemplateFileName(string aName): string
     {
         return Inflector::underscore($name);
     }
@@ -1386,12 +1386,12 @@ class View : EventDispatcherInterface
      * If $name does not have a dot, then index 0 will be null.
      * It checks if the plugin is loaded, else filename will stay unchanged for filenames containing dot
      *
-     * @param string $name The name you want to plugin split.
+     * @param string aName The name you want to plugin split.
      * @param bool $fallback If true uses the plugin set in the current Request when parsed plugin is not loaded
      * @return array Array with 2 indexes. 0: plugin name, 1: filename.
      * @psalm-return array{string|null, string}
      */
-    function pluginSplit(string $name, bool $fallback = true): array
+    function pluginSplit(string aName, bool $fallback = true): array
     {
         $plugin = null;
         [$first, $second] = pluginSplit($name);
@@ -1414,7 +1414,7 @@ class View : EventDispatcherInterface
      * @throws uim.cake.View\exceptions.MissingLayoutException when a layout cannot be located
      * @throws \RuntimeException
      */
-    protected function _getLayoutFileName(?string $name = null): string
+    protected function _getLayoutFileName(?string aName = null): string
     {
         if ($name == null) {
             if (empty(this.layout)) {
@@ -1461,11 +1461,11 @@ class View : EventDispatcherInterface
     /**
      * Finds an element filename, returns false on failure.
      *
-     * @param string $name The name of the element to find.
+     * @param string aName The name of the element to find.
      * @param bool $pluginCheck - if false will ignore the request"s plugin if parsed plugin is not loaded
      * @return string|false Either a string to the element filename or false when one can"t be found.
      */
-    protected function _getElementFileName(string $name, bool $pluginCheck = true) {
+    protected function _getElementFileName(string aName, bool $pluginCheck = true) {
         [$plugin, $name] = this.pluginSplit($name, $pluginCheck);
 
         $name .= _ext;
@@ -1587,13 +1587,13 @@ class View : EventDispatcherInterface
     /**
      * Generate the cache configuration options for an element.
      *
-     * @param string $name Element name
+     * @param string aName Element name
      * @param array $data Data
      * @param array<string, mixed> $options Element options
      * @return array Element Cache configuration.
      * @psalm-return array{key:string, config:string}
      */
-    protected function _elementCache(string $name, array $data, array $options): array
+    protected function _elementCache(string aName, array $data, array $options): array
     {
         if (isset($options["cache"]["key"], $options["cache"]["config"])) {
             /** @psalm-var array{key:string, config:string}*/

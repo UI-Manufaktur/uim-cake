@@ -68,13 +68,13 @@ class ViewBlock
      * You can end capturing blocks using View::end(). Blocks can be output
      * using View::get();
      *
-     * @param string $name The name of the block to capture for.
+     * @param string aName The name of the block to capture for.
      * @param string $mode If ViewBlock::OVERRIDE existing content will be overridden by new content.
      *   If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
      * @throws uim.cake.Core\exceptions.CakeException When starting a block twice
      */
-    void start(string $name, string $mode = ViewBlock::OVERRIDE): void
+    void start(string aName, string $mode = ViewBlock::OVERRIDE): void
     {
         if (array_key_exists($name, _active)) {
             throw new CakeException(sprintf("A view block with the name "%s" is already/still open.", $name));
@@ -121,13 +121,13 @@ class ViewBlock
      * block that needs to be finished with View::end(). The content
      * of the new capturing context will be added to the existing block context.
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
      * @param string $mode If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
      */
-    void concat(string $name, $value = null, $mode = ViewBlock::APPEND): void
+    void concat(string aName, $value = null, $mode = ViewBlock::APPEND): void
     {
         if ($value == null) {
             this.start($name, $mode);
@@ -149,11 +149,11 @@ class ViewBlock
      * Set the content for a block. This will overwrite any
      * existing content.
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
      */
-    void set(string $name, $value): void
+    void set(string aName, $value): void
     {
         _blocks[$name] = (string)$value;
     }
@@ -161,11 +161,11 @@ class ViewBlock
     /**
      * Get the content for a block.
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @param string $default Default string
      * @return string The block content or $default if the block does not exist.
      */
-    function get(string $name, string $default = ""): string
+    function get(string aName, string $default = ""): string
     {
         return _blocks[$name] ?? $default;
     }
@@ -173,10 +173,10 @@ class ViewBlock
     /**
      * Check if a block exists
      *
-     * @param string $name Name of the block
+     * @param string aName Name of the block
      * @return bool
      */
-    function exists(string $name): bool
+    function exists(string aName): bool
     {
         return isset(_blocks[$name]);
     }

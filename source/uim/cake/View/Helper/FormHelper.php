@@ -626,10 +626,10 @@ class FormHelper : Helper
      *
      * Unlocked fields are not included in the form protection field hash.
      *
-     * @param string $name The dot separated name for the field.
+     * @param string aName The dot separated name for the field.
      * @return this
      */
-    function unlockField(string $name) {
+    function unlockField(string aName) {
         this.getFormProtector().unlockField($name);
 
         return this;
@@ -1395,12 +1395,12 @@ class FormHelper : Helper
     /**
      * Extracts a single option from an options array.
      *
-     * @param string $name The name of the option to pull out.
+     * @param string aName The name of the option to pull out.
      * @param array<string, mixed> $options The array of options you want to extract.
      * @param mixed $default The default option value
      * @return mixed the contents of the option or default
      */
-    protected function _extractOption(string $name, array $options, $default = null) {
+    protected function _extractOption(string aName, array $options, $default = null) {
         if (array_key_exists($name, $options)) {
             return $options[$name];
         }
@@ -2426,11 +2426,11 @@ class FormHelper : Helper
      *
      * Allows you to add or replace widget instances with custom code.
      *
-     * @param string $name The name of the widget. e.g. "text".
+     * @param string aName The name of the widget. e.g. "text".
      * @param uim.cake.View\Widget\WidgetInterface|array $spec Either a string class
      *   name or an object implementing the WidgetInterface.
      */
-    void addWidget(string $name, $spec): void
+    void addWidget(string aName, $spec): void
     {
         _locator.add([$name: $spec]);
     }
@@ -2443,11 +2443,11 @@ class FormHelper : Helper
      * widgets you should use this method render the widget without the label
      * or wrapping div.
      *
-     * @param string $name The name of the widget. e.g. "text".
+     * @param string aName The name of the widget. e.g. "text".
      * @param array $data The data to render.
      * @return string
      */
-    string widget(string $name, array $data = []): string
+    string widget(string aName, array $data = []): string
     {
         $secure = null;
         if (isset($data["secure"])) {

@@ -112,11 +112,11 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Saves a variable for use inside a template.
      *
-     * @param string $name A string or an array of data.
+     * @param string aName A string or an array of data.
      * @param mixed $value Value.
      * @return this
      */
-    function setVar(string $name, $value = null) {
+    function setVar(string aName, $value = null) {
         _vars[$name] = $value;
 
         return this;
@@ -142,10 +142,10 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Check if view var is set.
      *
-     * @param string $name Var name
+     * @param string aName Var name
      * @return bool
      */
-    function hasVar(string $name): bool
+    function hasVar(string aName): bool
     {
         return array_key_exists($name, _vars);
     }
@@ -153,10 +153,10 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Get view var
      *
-     * @param string $name Var name
+     * @param string aName Var name
      * @return mixed The var value or null if unset.
      */
-    function getVar(string $name) {
+    function getVar(string aName) {
         return _vars[$name] ?? null;
     }
 
@@ -260,7 +260,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *   Use null to remove the current plugin name.
      * @return this
      */
-    function setPlugin(?string $name) {
+    function setPlugin(?string aName) {
         _plugin = $name;
 
         return this;
@@ -370,7 +370,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name View file name to set, or null to remove the template name.
      * @return this
      */
-    function setTemplate(?string $name) {
+    function setTemplate(?string aName) {
         _template = $name;
 
         return this;
@@ -395,7 +395,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name Layout file name to set.
      * @return this
      */
-    function setLayout(?string $name) {
+    function setLayout(?string aName) {
         _layout = $name;
 
         return this;
@@ -414,21 +414,21 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Get view option.
      *
-     * @param string $name The name of the option.
+     * @param string aName The name of the option.
      * @return mixed
      */
-    function getOption(string $name) {
+    function getOption(string aName) {
         return _options[$name] ?? null;
     }
 
     /**
      * Set view option.
      *
-     * @param string $name The name of the option.
+     * @param string aName The name of the option.
      * @param mixed $value Value to set.
      * @return this
      */
-    function setOption(string $name, $value) {
+    function setOption(string aName, $value) {
         _options[$name] = $value;
 
         return this;
@@ -468,7 +468,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name The name of the view, or null to remove the current name.
      * @return this
      */
-    function setName(?string $name) {
+    function setName(?string aName) {
         _name = $name;
 
         return this;
@@ -494,7 +494,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name The class name for the view.
      * @return this
      */
-    function setClassName(?string $name) {
+    function setClassName(?string aName) {
         _className = $name;
 
         return this;

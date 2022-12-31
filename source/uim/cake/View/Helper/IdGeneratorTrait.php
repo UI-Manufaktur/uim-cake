@@ -36,11 +36,11 @@ trait IdGeneratorTrait
      *
      * Ensures that id"s for a given set of fields are unique.
      *
-     * @param string $name The ID attribute name.
+     * @param string aName The ID attribute name.
      * @param string $val The ID attribute value.
      * @return string Generated id.
      */
-    protected function _id(string $name, string $val): string
+    protected function _id(string aName, string $val): string
     {
         $name = _domId($name);
         $suffix = _idSuffix($val);

@@ -42,11 +42,11 @@ trait StringTemplateTrait
     /**
      * Formats a template string with $data
      *
-     * @param string $name The template name.
+     * @param string aName The template name.
      * @param array<string, mixed> $data The data to insert.
      * @return string
      */
-    string formatTemplate(string $name, array $data): string
+    string formatTemplate(string aName, array $data): string
     {
         return this.templater().format($name, $data);
     }

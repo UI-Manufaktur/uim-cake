@@ -190,9 +190,9 @@ class StringTemplate
     /**
      * Remove the named template.
      *
-     * @param string $name The template to remove.
+     * @param string aName The template to remove.
      */
-    void remove(string $name): void
+    void remove(string aName): void
     {
         this.setConfig($name, null);
         unset(_compiled[$name]);
@@ -201,12 +201,12 @@ class StringTemplate
     /**
      * Format a template string with $data
      *
-     * @param string $name The template name.
+     * @param string aName The template name.
      * @param array<string, mixed> $data The data to insert.
      * @return string Formatted string
      * @throws \RuntimeException If template not found.
      */
-    function format(string $name, array $data): string
+    function format(string aName, array $data): string
     {
         if (!isset(_compiled[$name])) {
             throw new RuntimeException("Cannot find template named "$name".");
