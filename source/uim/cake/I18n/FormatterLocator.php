@@ -47,10 +47,10 @@ class FormatterLocator
     /**
      * Sets a formatter into the registry by name.
      *
-     * @param string $name The formatter name.
+     * @param string aName The formatter name.
      * @param class-string<uim.cake.I18n\FormatterInterface> $className A FQCN for a formatter.
      */
-    void set(string $name, string $className): void
+    void set(string aName, string $className): void
     {
         this.registry[$name] = $className;
         this.converted[$name] = false;
@@ -59,11 +59,11 @@ class FormatterLocator
     /**
      * Gets a formatter from the registry by name.
      *
-     * @param string $name The formatter to retrieve.
+     * @param string aName The formatter to retrieve.
      * @return uim.cake.I18n\FormatterInterface A formatter object.
      * @throws uim.cake.I18n\exceptions.I18nException
      */
-    function get(string $name): FormatterInterface
+    function get(string aName): FormatterInterface
     {
         if (!isset(this.registry[$name])) {
             throw new I18nException("Formatter named `{$name}` has not been registered");

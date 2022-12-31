@@ -212,10 +212,10 @@ class RouteBuilder
     /**
      * Checks if there is already a route with a given name.
      *
-     * @param string $name Name.
+     * @param string aName Name.
      * @return bool
      */
-    function nameExists(string $name): bool
+    function nameExists(string aName): bool
     {
         return array_key_exists($name, _collection.named());
     }
@@ -319,13 +319,13 @@ class RouteBuilder
      * - "path" - Change the path so it doesn"t match the resource name. E.g ArticlesController
      *   is available at `/posts`
      *
-     * @param string $name A controller name to connect resource routes for.
+     * @param string aName A controller name to connect resource routes for.
      * @param callable|array $options Options to use when generating REST routes, or a callback.
      * @param callable|null $callback An optional callback to be executed in a nested scope. Nested
      *   scopes inherit the existing path and "id" parameter.
      * @return this
      */
-    function resources(string $name, $options = [], $callback = null) {
+    function resources(string aName, $options = [], $callback = null) {
         if (!is_array($options)) {
             $callback = $options;
             $options = [];
@@ -412,7 +412,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function get(string $template, $target, ?string $name = null): Route
+    function get(string $template, $target, ?string aName = null): Route
     {
         return _methodRoute("GET", $template, $target, $name);
     }
@@ -426,7 +426,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function post(string $template, $target, ?string $name = null): Route
+    function post(string $template, $target, ?string aName = null): Route
     {
         return _methodRoute("POST", $template, $target, $name);
     }
@@ -440,7 +440,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function put(string $template, $target, ?string $name = null): Route
+    function put(string $template, $target, ?string aName = null): Route
     {
         return _methodRoute("PUT", $template, $target, $name);
     }
@@ -454,7 +454,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function patch(string $template, $target, ?string $name = null): Route
+    function patch(string $template, $target, ?string aName = null): Route
     {
         return _methodRoute("PATCH", $template, $target, $name);
     }
@@ -468,7 +468,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function delete(string $template, $target, ?string $name = null): Route
+    function delete(string $template, $target, ?string aName = null): Route
     {
         return _methodRoute("DELETE", $template, $target, $name);
     }
@@ -482,7 +482,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function head(string $template, $target, ?string $name = null): Route
+    function head(string $template, $target, ?string aName = null): Route
     {
         return _methodRoute("HEAD", $template, $target, $name);
     }
@@ -496,7 +496,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function options(string $template, $target, ?string $name = null): Route
+    function options(string $template, $target, ?string aName = null): Route
     {
         return _methodRoute("OPTIONS", $template, $target, $name);
     }
@@ -511,7 +511,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    protected function _methodRoute(string $method, string $template, $target, ?string $name): Route
+    protected function _methodRoute(string $method, string $template, $target, ?string aName): Route
     {
         if ($name != null) {
             $name = _namePrefix . $name;
@@ -538,12 +538,12 @@ class RouteBuilder
      * The routes file will have a local variable named `$routes` made available which contains
      * the current RouteBuilder instance.
      *
-     * @param string $name The plugin name
+     * @param string aName The plugin name
      * @return this
      * @throws uim.cake.Core\exceptions.MissingPluginException When the plugin has not been loaded.
      * @throws \InvalidArgumentException When the plugin does not have a routes file.
      */
-    function loadPlugin(string $name) {
+    function loadPlugin(string aName) {
         $plugins = Plugin::getCollection();
         if (!$plugins.has($name)) {
             throw new MissingPluginException(["plugin": $name]);
@@ -797,14 +797,14 @@ class RouteBuilder
      * });
      * ```
      *
-     * @param string $name The prefix name to use.
+     * @param string aName The prefix name to use.
      * @param callable|array $params An array of routing defaults to add to each connected route.
      *   If you have no parameters, this argument can be a callable.
      * @param callable|null $callback The callback to invoke that builds the prefixed routes.
      * @return this
      * @throws \InvalidArgumentException If a valid callback is not passed
      */
-    function prefix(string $name, $params = [], $callback = null) {
+    function prefix(string aName, $params = [], $callback = null) {
         if (!is_array($params)) {
             $callback = $params;
             $params = [];
@@ -842,13 +842,13 @@ class RouteBuilder
      * - `_namePrefix` Set a prefix used for named routes. The prefix is prepended to the
      *   name of any route created in a scope callback.
      *
-     * @param string $name The plugin name to build routes for
+     * @param string aName The plugin name to build routes for
      * @param callable|array $options Either the options to use, or a callback to build routes.
      * @param callable|null $callback The callback to invoke that builds the plugin routes
      *   Only required when $options is defined.
      * @return this
      */
-    function plugin(string $name, $options = [], $callback = null) {
+    function plugin(string aName, $options = [], $callback = null) {
         if (!is_array($options)) {
             $callback = $options;
             $options = [];
@@ -937,12 +937,12 @@ class RouteBuilder
      * Once middleware has been registered, it can be applied to the current routing
      * scope or any child scopes that share the same RouteCollection.
      *
-     * @param string $name The name of the middleware. Used when applying middleware to a scope.
+     * @param string aName The name of the middleware. Used when applying middleware to a scope.
      * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to register.
      * @return this
      * @see uim.cake.routings.RouteCollection
      */
-    function registerMiddleware(string $name, $middleware) {
+    function registerMiddleware(string aName, $middleware) {
         _collection.registerMiddleware($name, $middleware);
 
         return this;
@@ -982,11 +982,11 @@ class RouteBuilder
     /**
      * Apply a set of middleware to a group
      *
-     * @param string $name Name of the middleware group
+     * @param string aName Name of the middleware group
      * @param array<string> $middlewareNames Names of the middleware
      * @return this
      */
-    function middlewareGroup(string $name, array $middlewareNames) {
+    function middlewareGroup(string aName, array $middlewareNames) {
         _collection.middlewareGroup($name, $middlewareNames);
 
         return this;

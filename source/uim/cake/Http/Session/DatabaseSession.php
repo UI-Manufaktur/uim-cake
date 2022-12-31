@@ -79,7 +79,7 @@ class DatabaseSession : SessionHandlerInterface
      * Method called on open of a database session.
      *
      * @param string $path The path where to store/retrieve the session.
-     * @param string $name The session name.
+     * @param string aName The session name.
      * @return bool Success
      */
     function open($path, $name): bool

@@ -1401,7 +1401,7 @@ class BelongsToMany : Association
      *
      * @param string|null $name The name of the junction table.
      */
-    protected string _junctionTableName(?string $name = null): string
+    protected string _junctionTableName(?string aName = null): string
     {
         if ($name == null) {
             if (empty(_junctionTableName)) {

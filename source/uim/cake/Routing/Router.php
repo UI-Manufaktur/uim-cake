@@ -847,14 +847,14 @@ class Router
      * Nested prefixes will result in prefix values like `Admin/Api` which translates
      * to the `Controller\Admin\Api\` namespace.
      *
-     * @param string $name The prefix name to use.
+     * @param string aName The prefix name to use.
      * @param callable|array $params An array of routing defaults to add to each connected route.
      *   If you have no parameters, this argument can be a callable.
      * @param callable|null $callback The callback to invoke that builds the prefixed routes.
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::prefix()` instead.
      */
-    static function prefix(string $name, $params = [], $callback = null): void
+    static function prefix(string aName, $params = [], $callback = null): void
     {
         deprecationWarning(
             "`Router::prefix()` is deprecated, use the non-static method `RouteBuilder::prefix()` instead."
@@ -884,14 +884,14 @@ class Router
      * Routes connected in the scoped collection will have the correct path segment
      * prepended, and have a matching plugin routing key set.
      *
-     * @param string $name The plugin name to build routes for
+     * @param string aName The plugin name to build routes for
      * @param callable|array $options Either the options to use, or a callback
      * @param callable|null $callback The callback to invoke that builds the plugin routes.
      *   Only required when $options is defined
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::plugin()` instead.
      */
-    static function plugin(string $name, $options = [], $callback = null): void
+    static function plugin(string aName, $options = [], $callback = null): void
     {
         deprecationWarning(
             "`Router::plugin()` is deprecated, use the non-static method `RouteBuilder::plugin()` instead."

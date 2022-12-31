@@ -469,7 +469,7 @@ class Mailer : IEventListener
      * When setting the transport you can either use the name
      * of a configured transport or supply a constructed transport.
      *
-     * @param uim.cake.Mailer\AbstractTransport|string $name Either the name of a configured
+     * @param uim.cake.Mailer\AbstractTransport|string aName Either the name of a configured
      *   transport, or a transport instance.
      * @return this
      * @throws \LogicException When the chosen transport lacks a send method.

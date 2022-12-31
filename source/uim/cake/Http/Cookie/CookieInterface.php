@@ -56,10 +56,10 @@ interface CookieInterface
     /**
      * Sets the cookie name
      *
-     * @param string $name Name of the cookie
+     * @param string aName Name of the cookie
      * @return static
      */
-    function withName(string $name);
+    function withName(string aName);
 
     /**
      * Gets the cookie name

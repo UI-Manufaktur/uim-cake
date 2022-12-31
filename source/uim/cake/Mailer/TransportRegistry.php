@@ -72,10 +72,10 @@ class TransportRegistry : ObjectRegistry
     /**
      * Remove a single adapter from the registry.
      *
-     * @param string $name The adapter name.
+     * @param string aName The adapter name.
      * @return this
      */
-    function unload(string $name) {
+    function unload(string aName) {
         unset(_loaded[$name]);
 
         return this;

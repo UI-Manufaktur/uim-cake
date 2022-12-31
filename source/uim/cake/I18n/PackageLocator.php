@@ -53,11 +53,11 @@ class PackageLocator
     /**
      * Sets a Package loader.
      *
-     * @param string $name The package name.
+     * @param string aName The package name.
      * @param string $locale The locale for the package.
      * @param uim.cake.I18n\Package|callable $spec A callable that returns a package or Package instance.
      */
-    void set(string $name, string $locale, $spec): void
+    void set(string aName, string $locale, $spec): void
     {
         this.registry[$name][$locale] = $spec;
         this.converted[$name][$locale] = $spec instanceof Package;
@@ -66,11 +66,11 @@ class PackageLocator
     /**
      * Gets a Package object.
      *
-     * @param string $name The package name.
+     * @param string aName The package name.
      * @param string $locale The locale for the package.
      * @return uim.cake.I18n\Package
      */
-    function get(string $name, string $locale): Package
+    function get(string aName, string $locale): Package
     {
         if (!isset(this.registry[$name][$locale])) {
             throw new I18nException("Package "$name" with locale "$locale" is not registered.");
@@ -90,11 +90,11 @@ class PackageLocator
     /**
      * Check if a Package object for given name and locale exists in registry.
      *
-     * @param string $name The package name.
+     * @param string aName The package name.
      * @param string $locale The locale for the package.
      * @return bool
      */
-    function has(string $name, string $locale): bool
+    function has(string aName, string $locale): bool
     {
         return isset(this.registry[$name][$locale]);
     }

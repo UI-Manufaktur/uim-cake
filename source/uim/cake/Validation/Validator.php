@@ -272,11 +272,11 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * passed a ValidationSet as second argument, it will replace any other rule set defined
      * before
      *
-     * @param string $name [optional] The fieldname to fetch.
+     * @param string aName [optional] The fieldname to fetch.
      * @param uim.cake.Validation\ValidationSet|null $set The set of rules for field
      * @return uim.cake.Validation\ValidationSet
      */
-    function field(string $name, ?ValidationSet $set = null): ValidationSet
+    function field(string aName, ?ValidationSet $set = null): ValidationSet
     {
         if (empty(_fields[$name])) {
             $set = $set ?: new ValidationSet();
@@ -289,10 +289,10 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Check whether a validator contains any rules for the given field.
      *
-     * @param string $name The field name to check.
+     * @param string aName The field name to check.
      * @return bool
      */
-    function hasField(string $name): bool
+    function hasField(string aName): bool
     {
         return isset(_fields[$name]);
     }
@@ -303,12 +303,12 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * deciding whether a validation rule can be applied. All validation methods,
      * when called will receive the full list of providers stored in this validator.
      *
-     * @param string $name The name under which the provider should be set.
+     * @param string aName The name under which the provider should be set.
      * @param object|string $object Provider object or class name.
      * @psalm-param object|class-string $object
      * @return this
      */
-    function setProvider(string $name, $object) {
+    function setProvider(string aName, $object) {
         if (!is_string($object) && !is_object($object)) {
             deprecationWarning(sprintf(
                 "The provider must be an object or class name string. Got `%s` instead.",
@@ -324,11 +324,11 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns the provider stored under that name if it exists.
      *
-     * @param string $name The name under which the provider should be set.
+     * @param string aName The name under which the provider should be set.
      * @return object|string|null
      * @psalm-return object|class-string|null
      */
-    function getProvider(string $name) {
+    function getProvider(string aName) {
         if (isset(_providers[$name])) {
             return _providers[$name];
         }
@@ -344,22 +344,22 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns the default provider stored under that name if it exists.
      *
-     * @param string $name The name under which the provider should be retrieved.
+     * @param string aName The name under which the provider should be retrieved.
      * @return object|string|null
      * @psalm-return object|class-string|null
      */
-    static function getDefaultProvider(string $name) {
+    static function getDefaultProvider(string aName) {
         return self::$_defaultProviders[$name] ?? null;
     }
 
     /**
      * Associates an object to a name so it can be used as a default provider.
      *
-     * @param string $name The name under which the provider should be set.
+     * @param string aName The name under which the provider should be set.
      * @param object|string $object Provider object or class name.
      * @psalm-param object|class-string $object
      */
-    static void addDefaultProvider(string $name, $object): void
+    static void addDefaultProvider(string aName, $object): void
     {
         if (!is_string($object) && !is_object($object)) {
             deprecationWarning(sprintf(
@@ -479,7 +479,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * ```
      *
      * @param string $field The name of the field from which the rule will be added
-     * @param array|string $name The alias for a single rule or multiple rules array
+     * @param array|string aName The alias for a single rule or multiple rules array
      * @param uim.cake.Validation\ValidationRule|array $rule the rule to add
      * @throws \InvalidArgumentException If numeric index cannot be resolved to a string one
      * @return this

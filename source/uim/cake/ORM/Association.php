@@ -222,12 +222,12 @@ abstract class Association
      * Sets the name for this association, usually the alias
      * assigned to the target associated table
      *
-     * @param string $name Name to be assigned
+     * @param string aName Name to be assigned
      * @return this
      * @deprecated 4.3.0 Changing the association name after object creation is
      *   no longer supported. The name should only be set through the constructor.
      */
-    function setName(string $name) {
+    function setName(string aName) {
         deprecationWarning(
             "Changing the association name after object creation is no longer supported."
             . " The name should only be set through the constructor"
@@ -536,10 +536,10 @@ abstract class Association
      * Sets the property name that should be filled with data from the target table
      * in the source table record.
      *
-     * @param string $name The name of the association property. Use null to read the current value.
+     * @param string aName The name of the association property. Use null to read the current value.
      * @return this
      */
-    function setProperty(string $name) {
+    function setProperty(string aName) {
         _propertyName = $name;
 
         return this;
@@ -582,11 +582,11 @@ abstract class Association
      * that some association types might not implement but a default strategy,
      * rendering any changes to this setting void.
      *
-     * @param string $name The strategy type. Use null to read the current value.
+     * @param string aName The strategy type. Use null to read the current value.
      * @return this
      * @throws \InvalidArgumentException When an invalid strategy is provided.
      */
-    function setStrategy(string $name) {
+    function setStrategy(string aName) {
         if (!in_array($name, _validStrategies, true)) {
             throw new InvalidArgumentException(sprintf(
                 "Invalid strategy "%s" was provided. Valid options are (%s).",

@@ -424,13 +424,13 @@ class FixtureManager
     }
 
     /**
-     * @param string $name Name
+     * @param string aName Name
      * @param uim.cake.Datasource\ConnectionInterface|null $connection Connection
      * @param bool $dropTables Drop all tables prior to loading schema files
      * @return void
      * @throws \UnexpectedValueException
      */
-    function loadSingle(string $name, ?ConnectionInterface $connection = null, bool $dropTables = true): void
+    function loadSingle(string aName, ?ConnectionInterface $connection = null, bool $dropTables = true): void
     {
         if (!isset(_fixtureMap[$name])) {
             throw new UnexpectedValueException(sprintf("Referenced fixture class %s not found", $name));

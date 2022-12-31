@@ -94,12 +94,12 @@ class I18n
      * );
      * ```
      *
-     * @param string $name The domain of the translation messages.
+     * @param string aName The domain of the translation messages.
      * @param callable $loader A callback function or callable class responsible for
      *   constructing a translations package instance.
      * @param string|null $locale The locale for the translator.
      */
-    static void setTranslator(string $name, callable $loader, ?string $locale = null): void
+    static void setTranslator(string aName, callable $loader, ?string $locale = null): void
     {
         $locale = $locale ?: static::getLocale();
 
@@ -114,12 +114,12 @@ class I18n
      *
      * If no locale is passed then it takes the value returned by the `getLocale()` method.
      *
-     * @param string $name The domain of the translation messages.
+     * @param string aName The domain of the translation messages.
      * @param string|null $locale The locale for the translator.
      * @return uim.cake.I18n\Translator The configured translator.
      * @throws uim.cake.I18n\exceptions.I18nException
      */
-    static function getTranslator(string $name = "default", ?string $locale = null): Translator
+    static function getTranslator(string aName = "default", ?string $locale = null): Translator
     {
         $translators = static::translators();
 
@@ -181,11 +181,11 @@ class I18n
      *  });
      * ```
      *
-     * @param string $name The name of the translator to create a loader for
+     * @param string aName The name of the translator to create a loader for
      * @param callable $loader A callable object that should return a Package
      * instance to be used for assembling a new translator.
      */
-    static void config(string $name, callable $loader): void
+    static void config(string aName, callable $loader): void
     {
         static::translators().registerLoader($name, $loader);
     }
@@ -256,9 +256,9 @@ class I18n
      * translator instances. By default, the `default` and `sprintf` formatters
      * are available.
      *
-     * @param string $name The name of the formatter to use.
+     * @param string aName The name of the formatter to use.
      */
-    static void setDefaultFormatter(string $name): void
+    static void setDefaultFormatter(string aName): void
     {
         static::translators().defaultFormatter($name);
     }

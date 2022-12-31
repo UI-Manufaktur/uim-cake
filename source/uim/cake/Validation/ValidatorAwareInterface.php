@@ -15,22 +15,22 @@ interface ValidatorAwareInterface
      * @param string|null $name The name of the validation set to return.
      * @return uim.cake.Validation\Validator
      */
-    function getValidator(?string $name = null): Validator;
+    function getValidator(?string aName = null): Validator;
 
     /**
      * This method stores a custom validator under the given name.
      *
-     * @param string $name The name of a validator to be set.
+     * @param string aName The name of a validator to be set.
      * @param uim.cake.Validation\Validator $validator Validator object to be set.
      * @return this
      */
-    function setValidator(string $name, Validator $validator);
+    function setValidator(string aName, Validator $validator);
 
     /**
      * Checks whether a validator has been set.
      *
-     * @param string $name The name of a validator.
+     * @param string aName The name of a validator.
      * @return bool
      */
-    function hasValidator(string $name): bool;
+    function hasValidator(string aName): bool;
 }

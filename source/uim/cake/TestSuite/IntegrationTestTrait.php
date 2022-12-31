@@ -284,10 +284,10 @@ trait IntegrationTestTrait
      * You can call this method multiple times to append into
      * the current state.
      *
-     * @param string $name The cookie name to use.
+     * @param string aName The cookie name to use.
      * @param mixed $value The value of the cookie.
      */
-    void cookie(string $name, $value): void
+    void cookie(string aName, $value): void
     {
         _cookie[$name] = $value;
     }
@@ -307,7 +307,7 @@ trait IntegrationTestTrait
      * The difference from cookie() is this encrypts the cookie
      * value like the CookieComponent.
      *
-     * @param string $name The cookie name to use.
+     * @param string aName The cookie name to use.
      * @param mixed $value The value of the cookie.
      * @param string|false $encrypt Encryption mode to use.
      * @param string|null $key Encryption key used. Defaults
@@ -315,7 +315,7 @@ trait IntegrationTestTrait
      * @return void
      * @see uim.cake.Utility\CookieCryptTrait::_encrypt()
      */
-    function cookieEncrypted(string $name, $value, $encrypt = "aes", $key = null): void
+    function cookieEncrypted(string aName, $value, $encrypt = "aes", $key = null): void
     {
         _cookieEncryptionKey = $key;
         _cookie[$name] = _encrypt($value, $encrypt);
@@ -716,10 +716,10 @@ trait IntegrationTestTrait
      *
      * If the view variable does not exist, null will be returned.
      *
-     * @param string $name The view variable to get.
+     * @param string aName The view variable to get.
      * @return mixed The view variable if set.
      */
-    function viewVariable(string $name) {
+    function viewVariable(string aName) {
         return _controller ? _controller.viewBuilder().getVar($name) : null;
     }
 
@@ -1167,10 +1167,10 @@ trait IntegrationTestTrait
      * Asserts cookie values
      *
      * @param mixed $expected The expected contents.
-     * @param string $name The cookie name.
+     * @param string aName The cookie name.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertCookie($expected, string $name, string $message = ""): void
+    void assertCookie($expected, string aName, string $message = ""): void
     {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($name, new CookieSet(_response), $verboseMessage);
@@ -1209,7 +1209,7 @@ trait IntegrationTestTrait
      * value like the CookieComponent for this assertion.
      *
      * @param mixed $expected The expected contents.
-     * @param string $name The cookie name.
+     * @param string aName The cookie name.
      * @param string $encrypt Encryption mode to use.
      * @param string|null $key Encryption key used. Defaults
      *   to Security.salt.
@@ -1219,7 +1219,7 @@ trait IntegrationTestTrait
      */
     function assertCookieEncrypted(
         $expected,
-        string $name,
+        string aName,
         string $encrypt = "aes",
         ?string $key = null,
         string $message = ""

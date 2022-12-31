@@ -371,12 +371,12 @@ class RouteCollection
      * Once middleware has been registered, it can be applied to the current routing
      * scope or any child scopes that share the same RouteCollection.
      *
-     * @param string $name The name of the middleware. Used when applying middleware to a scope.
+     * @param string aName The name of the middleware. Used when applying middleware to a scope.
      * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to register.
      * @return this
      * @throws \RuntimeException
      */
-    function registerMiddleware(string $name, $middleware) {
+    function registerMiddleware(string aName, $middleware) {
         _middleware[$name] = $middleware;
 
         return this;
@@ -385,12 +385,12 @@ class RouteCollection
     /**
      * Add middleware to a middleware group
      *
-     * @param string $name Name of the middleware group
+     * @param string aName Name of the middleware group
      * @param array<string> $middlewareNames Names of the middleware
      * @return this
      * @throws \RuntimeException
      */
-    function middlewareGroup(string $name, array $middlewareNames) {
+    function middlewareGroup(string aName, array $middlewareNames) {
         if (this.hasMiddleware($name)) {
             $message = "Cannot add middleware group "$name". A middleware by this name has already been registered.";
             throw new RuntimeException($message);
@@ -411,10 +411,10 @@ class RouteCollection
     /**
      * Check if the named middleware group has been created.
      *
-     * @param string $name The name of the middleware group to check.
+     * @param string aName The name of the middleware group to check.
      * @return bool
      */
-    function hasMiddlewareGroup(string $name): bool
+    function hasMiddlewareGroup(string aName): bool
     {
         return array_key_exists($name, _middlewareGroups);
     }
@@ -422,10 +422,10 @@ class RouteCollection
     /**
      * Check if the named middleware has been registered.
      *
-     * @param string $name The name of the middleware to check.
+     * @param string aName The name of the middleware to check.
      * @return bool
      */
-    function hasMiddleware(string $name): bool
+    function hasMiddleware(string aName): bool
     {
         return isset(_middleware[$name]);
     }
@@ -433,10 +433,10 @@ class RouteCollection
     /**
      * Check if the named middleware or middleware group has been registered.
      *
-     * @param string $name The name of the middleware to check.
+     * @param string aName The name of the middleware to check.
      * @return bool
      */
-    function middlewareExists(string $name): bool
+    function middlewareExists(string aName): bool
     {
         return this.hasMiddleware($name) || this.hasMiddlewareGroup($name);
     }

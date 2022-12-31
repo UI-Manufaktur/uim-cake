@@ -493,7 +493,7 @@ class Socket
      *
      * Will be removed in 5.0.
      *
-     * @param string $name Property name.
+     * @param string aName Property name.
      * @return mixed
      */
     function __get($name) {

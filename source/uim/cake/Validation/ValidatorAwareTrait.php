@@ -78,7 +78,7 @@ trait ValidatorAwareTrait
      * @param string|null $name The name of the validation set to return.
      * @return uim.cake.Validation\Validator
      */
-    function getValidator(?string $name = null): Validator
+    function getValidator(?string aName = null): Validator
     {
         $name = $name ?: static::DEFAULT_VALIDATOR;
         if (!isset(_validators[$name])) {
@@ -95,11 +95,11 @@ trait ValidatorAwareTrait
      * it in your object. If you want to build and reuse validators,
      * use getValidator() method instead.
      *
-     * @param string $name The name of the validation set to create.
+     * @param string aName The name of the validation set to create.
      * @return uim.cake.Validation\Validator
      * @throws \RuntimeException
      */
-    protected function createValidator(string $name): Validator
+    protected function createValidator(string aName): Validator
     {
         $method = "validation" . ucfirst($name);
         if (!this.validationMethodExists($method)) {
@@ -142,11 +142,11 @@ trait ValidatorAwareTrait
      * this.setValidator("forSubscription", $validator);
      * ```
      *
-     * @param string $name The name of a validator to be set.
+     * @param string aName The name of a validator to be set.
      * @param uim.cake.Validation\Validator $validator Validator object to be set.
      * @return this
      */
-    function setValidator(string $name, Validator $validator) {
+    function setValidator(string aName, Validator $validator) {
         $validator.setProvider(static::VALIDATOR_PROVIDER_NAME, this);
         _validators[$name] = $validator;
 
@@ -156,10 +156,10 @@ trait ValidatorAwareTrait
     /**
      * Checks whether a validator has been set.
      *
-     * @param string $name The name of a validator.
+     * @param string aName The name of a validator.
      * @return bool
      */
-    function hasValidator(string $name): bool
+    function hasValidator(string aName): bool
     {
         $method = "validation" . ucfirst($name);
         if (this.validationMethodExists($method)) {
@@ -172,9 +172,9 @@ trait ValidatorAwareTrait
     /**
      * Checks if validation method exists.
      *
-     * @param string $name Validation method name.
+     * @param string aName Validation method name.
      */
-    protected bool validationMethodExists(string $name): bool
+    protected bool validationMethodExists(string aName): bool
     {
         return method_exists(this, $name);
     }

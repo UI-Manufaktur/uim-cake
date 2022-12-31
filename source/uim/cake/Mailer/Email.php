@@ -210,7 +210,7 @@ class Email : JsonSerializable, Serializable
      * When setting the transport you can either use the name
      * of a configured transport or supply a constructed transport.
      *
-     * @param uim.cake.Mailer\AbstractTransport|string $name Either the name of a configured
+     * @param uim.cake.Mailer\AbstractTransport|string aName Either the name of a configured
      *   transport, or a transport instance.
      * @return this
      * @throws \LogicException When the chosen transport lacks a send method.
@@ -596,7 +596,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Proxy all static method calls (for methods provided by StaticConfigTrait) to Mailer.
      *
-     * @param string $name Method name.
+     * @param string aName Method name.
      * @param array $arguments Method argument.
      * @return mixed
      */

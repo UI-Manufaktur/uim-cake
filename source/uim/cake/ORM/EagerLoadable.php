@@ -106,10 +106,10 @@ class EagerLoadable
      *
      * The keys maps to the settable properties in this class.
      *
-     * @param string $name The Association name.
+     * @param string aName The Association name.
      * @param array<string, mixed> $config The list of properties to set.
      */
-    this(string $name, array $config = []) {
+    this(string aName, array $config = []) {
         _name = $name;
         $allowed = [
             "associations", "instance", "config", "canBeJoined",
@@ -125,10 +125,10 @@ class EagerLoadable
     /**
      * Adds a new association to be loaded from this level.
      *
-     * @param string $name The association name.
+     * @param string aName The association name.
      * @param uim.cake.orm.EagerLoadable $association The association to load.
      */
-    void addAssociation(string $name, EagerLoadable $association): void
+    void addAssociation(string aName, EagerLoadable $association): void
     {
         _associations[$name] = $association;
     }

@@ -88,10 +88,10 @@ class Helper : IEventListener
     /**
      * Lazy loads helpers.
      *
-     * @param string $name Name of the property being accessed.
+     * @param string aName Name of the property being accessed.
      * @return uim.cake.View\Helper|null|void Helper instance if helper with provided name exists
      */
-    function __get(string $name) {
+    function __get(string aName) {
         if (isset(_helperMap[$name]) && !isset(this.{$name})) {
             $config = ["enabled": false] + (array)_helperMap[$name]["config"];
             this.{$name} = _View.loadHelper(_helperMap[$name]["class"], $config);

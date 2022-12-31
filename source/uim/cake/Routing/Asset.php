@@ -337,11 +337,11 @@ class Asset
      * If $name does not have a dot, then index 0 will be null.
      * It checks if the plugin is loaded, else filename will stay unchanged for filenames containing dot.
      *
-     * @param string $name The name you want to plugin split.
+     * @param string aName The name you want to plugin split.
      * @return array Array with 2 indexes. 0: plugin name, 1: filename.
      * @psalm-return array{string|null, string}
      */
-    protected static function pluginSplit(string $name): array
+    protected static function pluginSplit(string aName): array
     {
         $plugin = null;
         [$first, $second] = pluginSplit($name);

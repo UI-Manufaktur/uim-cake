@@ -86,10 +86,10 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
     /**
      * Gets a rule for a given name if exists
      *
-     * @param string $name The name under which the rule is set.
+     * @param string aName The name under which the rule is set.
      * @return uim.cake.Validation\ValidationRule|null
      */
-    function rule(string $name): ?ValidationRule
+    function rule(string aName): ?ValidationRule
     {
         if (!empty(_rules[$name])) {
             return _rules[$name];
@@ -119,11 +119,11 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *          .add("inRange", ["rule": ["between", 4, 10])
      * ```
      *
-     * @param string $name The name under which the rule should be set
+     * @param string aName The name under which the rule should be set
      * @param uim.cake.Validation\ValidationRule|array $rule The validation rule to be set
      * @return this
      */
-    function add(string $name, $rule) {
+    function add(string aName, $rule) {
         if (!($rule instanceof ValidationRule)) {
             $rule = new ValidationRule($rule);
         }
@@ -143,10 +143,10 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *          .remove("inRange")
      * ```
      *
-     * @param string $name The name under which the rule should be unset
+     * @param string aName The name under which the rule should be unset
      * @return this
      */
-    function remove(string $name) {
+    function remove(string aName) {
         unset(_rules[$name]);
 
         return this;

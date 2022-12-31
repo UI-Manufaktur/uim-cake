@@ -88,10 +88,10 @@ class LogEngineRegistry : ObjectRegistry
     /**
      * Remove a single logger from the registry.
      *
-     * @param string $name The logger name.
+     * @param string aName The logger name.
      * @return this
      */
-    function unload(string $name) {
+    function unload(string aName) {
         unset(_loaded[$name]);
 
         return this;

@@ -114,11 +114,11 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Get the first cookie by name.
      *
-     * @param string $name The name of the cookie.
+     * @param string aName The name of the cookie.
      * @return uim.cake.http.Cookie\CookieInterface
      * @throws \InvalidArgumentException If cookie not found.
      */
-    function get(string $name): CookieInterface
+    function get(string aName): CookieInterface
     {
         $key = mb_strtolower($name);
         foreach (this.cookies as $cookie) {
@@ -138,10 +138,10 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Check if a cookie with the given name exists
      *
-     * @param string $name The cookie name to check.
+     * @param string aName The cookie name to check.
      * @return bool True if the cookie exists, otherwise false.
      */
-    function has(string $name): bool
+    function has(string aName): bool
     {
         $key = mb_strtolower($name);
         foreach (this.cookies as $cookie) {
@@ -158,10 +158,10 @@ class CookieCollection : IteratorAggregate, Countable
      *
      * If the cookie is not in the collection, this method will do nothing.
      *
-     * @param string $name The name of the cookie to remove.
+     * @param string aName The name of the cookie to remove.
      * @return static
      */
-    function remove(string $name) {
+    function remove(string aName) {
         $new = clone this;
         $key = mb_strtolower($name);
         foreach ($new.cookies as $i: $cookie) {

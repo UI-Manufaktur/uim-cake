@@ -281,10 +281,10 @@ class Log
     /**
      * Get a logging engine.
      *
-     * @param string $name Key name of a configured adapter to get.
+     * @param string aName Key name of a configured adapter to get.
      * @return \Psr\logs.LoggerInterface|null Instance of LoggerInterface or false if not found
      */
-    static function engine(string $name): ?LoggerInterface
+    static function engine(string aName): ?LoggerInterface
     {
         static::_init();
         if (static::$_registry.{$name}) {

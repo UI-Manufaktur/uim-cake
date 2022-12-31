@@ -426,11 +426,11 @@ abstract class TestCase : BaseTestCase
     /**
      * Asserts that a global event was fired. You must track events in your event manager for this assertion to work
      *
-     * @param string $name Event name
+     * @param string aName Event name
      * @param uim.cake.events.EventManager|null $eventManager Event manager to check, defaults to global event manager
      * @param string $message Assertion failure message
      */
-    void assertEventFired(string $name, ?EventManager $eventManager = null, string $message = ""): void
+    void assertEventFired(string aName, ?EventManager $eventManager = null, string $message = ""): void
     {
         if (!$eventManager) {
             $eventManager = EventManager::instance();
@@ -443,14 +443,14 @@ abstract class TestCase : BaseTestCase
      *
      * If a third argument is passed, that value is used to compare with the value in $dataKey
      *
-     * @param string $name Event name
+     * @param string aName Event name
      * @param string $dataKey Data key
      * @param mixed $dataValue Data value
      * @param uim.cake.events.EventManager|null $eventManager Event manager to check, defaults to global event manager
      * @param string $message Assertion failure message
      */
     void assertEventFiredWith(
-        string $name,
+        string aName,
         string $dataKey,
         $dataValue,
         ?EventManager $eventManager = null,

@@ -65,13 +65,13 @@ class MessagesFileLoader
      * $package = $loader();
      * ```
      *
-     * @param string $name The name (domain) of the translations package.
+     * @param string aName The name (domain) of the translations package.
      * @param string $locale The locale to load, this will be mapped to a folder
      * in the system.
      * @param string $extension The file extension to use. This will also be mapped
      * to a messages parser class.
      */
-    this(string $name, string $locale, string $extension = "po") {
+    this(string aName, string $locale, string $extension = "po") {
         _name = $name;
         _locale = $locale;
         _extension = $extension;

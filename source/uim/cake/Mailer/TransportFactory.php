@@ -58,11 +58,11 @@ class TransportFactory
     /**
      * Finds and builds the instance of the required tranport class.
      *
-     * @param string $name Name of the config array that needs a tranport instance built
+     * @param string aName Name of the config array that needs a tranport instance built
      * @return void
      * @throws \InvalidArgumentException When a tranport cannot be created.
      */
-    protected static function _buildTransport(string $name): void
+    protected static function _buildTransport(string aName): void
     {
         if (!isset(static::$_config[$name])) {
             throw new InvalidArgumentException(
@@ -83,10 +83,10 @@ class TransportFactory
     /**
      * Get transport instance.
      *
-     * @param string $name Config name.
+     * @param string aName Config name.
      * @return uim.cake.Mailer\AbstractTransport
      */
-    static function get(string $name): AbstractTransport
+    static function get(string aName): AbstractTransport
     {
         $registry = static::getRegistry();
 

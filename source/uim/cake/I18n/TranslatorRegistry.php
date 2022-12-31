@@ -153,14 +153,14 @@ class TranslatorRegistry
     /**
      * Gets a translator from the registry by package for a locale.
      *
-     * @param string $name The translator package to retrieve.
+     * @param string aName The translator package to retrieve.
      * @param string|null $locale The locale to use; if empty, uses the default
      * locale.
      * @return uim.cake.I18n\Translator|null A translator object.
      * @throws uim.cake.I18n\exceptions.I18nException If no translator with that name could be found
      * for the given locale.
      */
-    function get(string $name, ?string $locale = null): ?Translator
+    function get(string aName, ?string $locale = null): ?Translator
     {
         if ($locale == null) {
             $locale = this.getLocale();
@@ -194,12 +194,12 @@ class TranslatorRegistry
     /**
      * Gets a translator from the registry by package for a locale.
      *
-     * @param string $name The translator package to retrieve.
+     * @param string aName The translator package to retrieve.
      * @param string $locale The locale to use; if empty, uses the default
      * locale.
      * @return uim.cake.I18n\Translator A translator object.
      */
-    protected function _getTranslator(string $name, string $locale): Translator
+    protected function _getTranslator(string aName, string $locale): Translator
     {
         if (this.packages.has($name, $locale)) {
             return this.createInstance($name, $locale);
@@ -220,11 +220,11 @@ class TranslatorRegistry
     /**
      * Create translator instance.
      *
-     * @param string $name The translator package to retrieve.
+     * @param string aName The translator package to retrieve.
      * @param string $locale The locale to use; if empty, uses the default locale.
      * @return uim.cake.I18n\Translator A translator object.
      */
-    protected function createInstance(string $name, string $locale): Translator
+    protected function createInstance(string aName, string $locale): Translator
     {
         $package = this.packages.get($name, $locale);
         $fallback = $package.getFallback();
@@ -243,10 +243,10 @@ class TranslatorRegistry
      * Loader callbacks will get as first argument the package name and the locale as
      * the second argument.
      *
-     * @param string $name The name of the translator package to register a loader for
+     * @param string aName The name of the translator package to register a loader for
      * @param callable $loader A callable object that should return a Package
      */
-    void registerLoader(string $name, callable $loader): void
+    void registerLoader(string aName, callable $loader): void
     {
         _loaders[$name] = $loader;
     }
@@ -260,7 +260,7 @@ class TranslatorRegistry
      * @param string|null $name The name of the formatter to use.
      * @return string The name of the formatter.
      */
-    function defaultFormatter(?string $name = null): string
+    function defaultFormatter(?string aName = null): string
     {
         if ($name == null) {
             return _defaultFormatter;
@@ -282,11 +282,11 @@ class TranslatorRegistry
     /**
      * Set fallback domain for package.
      *
-     * @param string $name The name of the package.
+     * @param string aName The name of the package.
      * @param uim.cake.I18n\Package $package Package instance
      * @return uim.cake.I18n\Package
      */
-    function setFallbackPackage(string $name, Package $package): Package
+    function setFallbackPackage(string aName, Package $package): Package
     {
         if ($package.getFallback()) {
             return $package;
@@ -305,11 +305,11 @@ class TranslatorRegistry
     /**
      * Set domain fallback for loader.
      *
-     * @param string $name The name of the loader domain
+     * @param string aName The name of the loader domain
      * @param callable $loader invokable loader
      * @return callable loader
      */
-    function setLoaderFallback(string $name, callable $loader): callable
+    function setLoaderFallback(string aName, callable $loader): callable
     {
         $fallbackDomain = "default";
         if (!_useFallback || $name == $fallbackDomain) {

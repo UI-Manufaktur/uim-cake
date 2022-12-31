@@ -220,7 +220,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * expects to receive an order clause only.
      *
      * @param uim.cake.orm.Query $query the query to check.
-     * @param string $name The clause name.
+     * @param string aName The clause name.
      * @param array<string, mixed> $config The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
@@ -266,7 +266,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * expects to receive a where clause only.
      *
      * @param uim.cake.orm.Query $query the query to check.
-     * @param string $name The clause name.
+     * @param string aName The clause name.
      * @param array<string, mixed> $config The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */

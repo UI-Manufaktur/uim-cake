@@ -41,7 +41,7 @@ use ReflectionMethod;
  *   $primary parameter indicates whether this is the root query,
  *   or an associated query.
  *
- * - `buildValidator(IEvent $event, Validator $validator, string $name)`
+ * - `buildValidator(IEvent $event, Validator $validator, string aName)`
  *   Fired when the validator object identified by $name is being built. You can use this
  *   callback to add validation rules or add validation providers.
  *

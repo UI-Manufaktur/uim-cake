@@ -112,7 +112,7 @@ use RuntimeException;
  * - `beforeFind(IEvent $event, Query $query, ArrayObject $options, boolean $primary)`
  * - `beforeMarshal(IEvent $event, ArrayObject $data, ArrayObject $options)`
  * - `afterMarshal(IEvent $event, EntityInterface $entity, ArrayObject $options)`
- * - `buildValidator(IEvent $event, Validator $validator, string $name)`
+ * - `buildValidator(IEvent $event, Validator $validator, string aName)`
  * - `buildRules(RulesChecker $rules)`
  * - `beforeRules(IEvent $event, EntityInterface $entity, ArrayObject $options, string $operation)`
  * - `afterRules(IEvent $event, EntityInterface $entity, ArrayObject $options, bool $result, string $operation)`
@@ -706,11 +706,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Sets the class used to hydrate rows for this table.
      *
-     * @param string $name The name of the class to use
+     * @param string aName The name of the class to use
      * @throws uim.cake.orm.exceptions.MissingEntityException when the entity class cannot be found
      * @return this
      */
-    function setEntityClass(string $name) {
+    function setEntityClass(string aName) {
         /** @psalm-var class-string<uim.cake.Datasource\EntityInterface>|null */
         $class = App::className($name, "Model/Entity");
         if ($class == null) {
@@ -740,13 +740,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * Behaviors are generally loaded during Table::initialize().
      *
-     * @param string $name The name of the behavior. Can be a short class reference.
+     * @param string aName The name of the behavior. Can be a short class reference.
      * @param array<string, mixed> $options The options for the behavior to use.
      * @return this
      * @throws \RuntimeException If a behavior is being reloaded.
      * @see uim.cake.orm.Behavior
      */
-    function addBehavior(string $name, array $options = []) {
+    function addBehavior(string aName, array $options = []) {
         _behaviors.load($name, $options);
 
         return this;
@@ -792,11 +792,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * this.removeBehavior("Tree");
      * ```
      *
-     * @param string $name The alias that the behavior was added with.
+     * @param string aName The alias that the behavior was added with.
      * @return this
      * @see uim.cake.orm.Behavior
      */
-    function removeBehavior(string $name) {
+    function removeBehavior(string aName) {
         _behaviors.unload($name);
 
         return this;
@@ -815,11 +815,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Get a behavior from the registry.
      *
-     * @param string $name The behavior alias to get from the registry.
+     * @param string aName The behavior alias to get from the registry.
      * @return uim.cake.orm.Behavior
      * @throws \InvalidArgumentException If the behavior does not exist.
      */
-    function getBehavior(string $name): Behavior
+    function getBehavior(string aName): Behavior
     {
         if (!_behaviors.has($name)) {
             throw new InvalidArgumentException(sprintf(
@@ -835,10 +835,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Check if a behavior with the given alias has been loaded.
      *
-     * @param string $name The behavior alias to check.
+     * @param string aName The behavior alias to check.
      * @return bool Whether the behavior exists.
      */
-    function hasBehavior(string $name): bool
+    function hasBehavior(string aName): bool
     {
         return _behaviors.has($name);
     }
@@ -856,11 +856,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * throws an exception.
      * If you are not sure, use hasAssociation() before calling this method.
      *
-     * @param string $name The alias used for the association.
+     * @param string aName The alias used for the association.
      * @return uim.cake.orm.Association The association.
      * @throws \InvalidArgumentException
      */
-    function getAssociation(string $name): Association
+    function getAssociation(string aName): Association
     {
         $association = this.findAssociation($name);
         if (!$association) {
@@ -885,10 +885,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * $hasUsers = this.hasAssociation("Articles.Comments.Users");
      * ```
      *
-     * @param string $name The alias used for the association.
+     * @param string aName The alias used for the association.
      * @return bool
      */
-    function hasAssociation(string $name): bool
+    function hasAssociation(string aName): bool
     {
         return this.findAssociation($name) != null;
     }
@@ -902,10 +902,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * $users = this.getAssociation("Articles.Comments.Users");
      * ```
      *
-     * @param string $name The alias used for the association.
+     * @param string aName The alias used for the association.
      * @return uim.cake.orm.Association|null Either the association or null.
      */
-    protected function findAssociation(string $name): ?Association
+    protected function findAssociation(string aName): ?Association
     {
         if (strpos($name, ".") == false) {
             return _associations.get($name);
@@ -3043,7 +3043,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
 
-    protected function validationMethodExists(string $name): bool
+    protected function validationMethodExists(string aName): bool
     {
         return method_exists(this, $name) || this.behaviors().hasMethod($name);
     }
