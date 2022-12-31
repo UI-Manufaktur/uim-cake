@@ -34,7 +34,7 @@ class CommandRunner : EventDispatcherInterface
     /**
      * The application console commands are being run for.
      *
-     * @var uim.cake.consoles.CommandFactoryInterface|null
+     * @var uim.cake.consoles.ICommandFactory|null
      */
     protected $factory;
 
@@ -51,12 +51,12 @@ class CommandRunner : EventDispatcherInterface
      *
      * @param uim.cake.Core\IConsoleApplication $app The application to run CLI commands for.
      * @param string $root The root command name to be removed from argv.
-     * @param uim.cake.consoles.CommandFactoryInterface|null $factory Command factory instance.
+     * @param uim.cake.consoles.ICommandFactory|null $factory Command factory instance.
      */
     this(
         IConsoleApplication $app,
         string $root = "cake",
-        ?CommandFactoryInterface $factory = null
+        ?ICommandFactory $factory = null
     ) {
         this.app = $app;
         this.root = $root;

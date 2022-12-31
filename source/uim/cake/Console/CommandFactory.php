@@ -1,12 +1,4 @@
-
-
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *module uim.cake.Console;
+module uim.cake.Console;
 
 import uim.cake.core.IContainer;
 use InvalidArgumentException;
@@ -17,7 +9,7 @@ use InvalidArgumentException;
  * This factory can be replaced or extended if you need to customize building
  * your command and shell objects.
  */
-class CommandFactory : CommandFactoryInterface
+class CommandFactory : ICommandFactory
 {
     /**
      * @var uim.cake.Core\IContainer|null
@@ -32,7 +24,6 @@ class CommandFactory : CommandFactoryInterface
     this(?IContainer $container = null) {
         this.container = $container;
     }
-
 
     function create(string $className) {
         if (this.container && this.container.has($className)) {

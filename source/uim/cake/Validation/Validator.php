@@ -845,7 +845,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * Valid values are true, false, "create", "update". If a callable is passed then
      * the field will allowed to be empty only when the callback returns true.
      * @param string|null $message The message to show if the field is not
-     * @since 3.7.0
+
      * @return this
      */
     function allowEmptyFor(string $field, ?int $flags = null, $when = true, ?string $message = null) {
@@ -910,7 +910,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * Valid values are true, false, "create", "update". If a callable is passed then
      * the field will allowed to be empty only when the callback returns true.
      * @return this
-     * @since 3.7.0
+
      * @see uim.cake.Validation\Validator::allowEmptyFor() for examples.
      */
     function allowEmptyArray(string $field, ?string $message = null, $when = true) {
@@ -950,7 +950,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   Valid values are true, "create", "update". If a callable is passed then
      *   the field will allowed to be empty only when the callback returns true.
      * @return this
-     * @since 3.7.0
+
      * @see uim.cake.Validation\Validator::allowEmptyFor() For detail usage
      */
     function allowEmptyFile(string $field, ?string $message = null, $when = true) {
@@ -1029,7 +1029,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * Valid values are true, false, "create", "update". If a callable is passed then
      * the field will allowed to be empty only when the callback returns true.
      * @return this
-     * @since 3.7.0
+
      * @see uim.cake.Validation\Validator::allowEmptyFor() for examples.
      */
     function allowEmptyTime(string $field, ?string $message = null, $when = true) {
@@ -1072,7 +1072,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   Valid values are true, false, "create", "update". If a callable is passed then
      *   the field will allowed to be empty only when the callback returns false.
      * @return this
-     * @since 3.7.0
+
      * @see uim.cake.Validation\Validator::allowEmptyFor() for examples.
      */
     function allowEmptyDateTime(string $field, ?string $message = null, $when = true) {

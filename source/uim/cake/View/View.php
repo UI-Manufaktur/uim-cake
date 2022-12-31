@@ -387,7 +387,7 @@ class View : EventDispatcherInterface
      * Gets the request instance.
      *
      * @return uim.cake.http.ServerRequest
-     * @since 3.7.0
+
      */
     function getRequest(): ServerRequest
     {
@@ -1213,7 +1213,7 @@ class View : EventDispatcherInterface
      * @param string $subDir Sub-directory name.
      * @return this
      * @see uim.cake.View\View::$subDir
-     * @since 3.7.0
+
      */
     function setSubDir(string $subDir) {
         this.subDir = $subDir;
@@ -1226,7 +1226,7 @@ class View : EventDispatcherInterface
      *
      * @return string
      * @see uim.cake.View\View::$subDir
-     * @since 3.7.0
+
      */
     function getSubDir(): string
     {
@@ -1248,7 +1248,7 @@ class View : EventDispatcherInterface
      * Returns the plugin name.
      *
      * @return string|null
-     * @since 3.7.0
+
      */
     function getPlugin(): ?string
     {
@@ -1260,7 +1260,7 @@ class View : EventDispatcherInterface
      *
      * @param string|null $name Plugin name.
      * @return this
-     * @since 3.7.0
+
      */
     function setPlugin(?string $name) {
         this.plugin = $name;
@@ -1274,7 +1274,7 @@ class View : EventDispatcherInterface
      * @param string $elementCache Cache config name.
      * @return this
      * @see uim.cake.View\View::$elementCache
-     * @since 3.7.0
+
      */
     function setElementCache(string $elementCache) {
         this.elementCache = $elementCache;

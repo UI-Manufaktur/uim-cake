@@ -13,7 +13,7 @@ trait ConventionsTrait
      * @param string $name Model class name
      * @return string Singular model key
      */
-    protected function _fixtureName(string $name): string
+    protected string _fixtureName(string $name)
     {
         return Inflector::camelize($name);
     }
@@ -24,7 +24,7 @@ trait ConventionsTrait
      * @param string $name Name
      * @return string Camelized and plural model name
      */
-    protected function _entityName(string $name): string
+    protected string _entityName(string $name)
     {
         return Inflector::singularize(Inflector::camelize($name));
     }
@@ -37,7 +37,7 @@ trait ConventionsTrait
      * @param string $name Model class name
      * @return string Singular model key
      */
-    protected function _modelKey(string $name): string
+    protected string _modelKey(string $name)
     {
         [, $name] = pluginSplit($name);
 
@@ -50,7 +50,7 @@ trait ConventionsTrait
      * @param string $key Foreign key
      * @return string Model name
      */
-    protected function _modelNameFromKey(string $key): string
+    protected string _modelNameFromKey(string $key)
     {
         $key = str_replace("_id", "", $key);
 
@@ -63,7 +63,7 @@ trait ConventionsTrait
      * @param string $name Name to use
      * @return string Variable name
      */
-    protected function _singularName(string $name): string
+    protected string _singularName(string $name)
     {
         return Inflector::variable(Inflector::singularize($name));
     }
@@ -74,7 +74,7 @@ trait ConventionsTrait
      * @param string $name Name to use
      * @return string Plural name for views
      */
-    protected function _variableName(string $name): string
+    protected string _variableName(string $name)
     {
         return Inflector::variable($name);
     }
@@ -85,7 +85,7 @@ trait ConventionsTrait
      * @param string $name Controller name
      * @return string Singular human name
      */
-    protected function _singularHumanName(string $name): string
+    protected string _singularHumanName(string $name)
     {
         return Inflector::humanize(Inflector::underscore(Inflector::singularize($name)));
     }
@@ -96,7 +96,7 @@ trait ConventionsTrait
      * @param string $name name
      * @return string Camelized name
      */
-    protected function _camelize(string $name): string
+    protected string _camelize(string $name)
     {
         return Inflector::camelize($name);
     }
@@ -107,7 +107,7 @@ trait ConventionsTrait
      * @param string $name Controller name
      * @return string Plural human name
      */
-    protected function _pluralHumanName(string $name): string
+    protected string _pluralHumanName(string $name)
     {
         return Inflector::humanize(Inflector::underscore($name));
     }
@@ -118,7 +118,7 @@ trait ConventionsTrait
      * @param string $pluginName Name of the plugin you want ie. DebugKit
      * @return string path path to the correct plugin.
      */
-    protected function _pluginPath(string $pluginName): string
+    protected string _pluginPath(string $pluginName)
     {
         if (Plugin::isLoaded($pluginName)) {
             return Plugin::path($pluginName);
@@ -133,7 +133,7 @@ trait ConventionsTrait
      * @param string $pluginName Plugin name
      * @return string Plugin"s namespace
      */
-    protected function _pluginNamespace(string $pluginName): string
+    protected string _pluginNamespace(string $pluginName)
     {
         return str_replace("/", "\\", $pluginName);
     }

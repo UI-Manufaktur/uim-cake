@@ -114,7 +114,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function getName(): string
+    string getName()
     {
         if (this.name) {
             return this.name;
@@ -127,7 +127,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function getPath(): string
+    string getPath()
     {
         if (this.path) {
             return this.path;
@@ -145,7 +145,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function getConfigPath(): string
+    string getConfigPath()
     {
         if (this.configPath) {
             return this.configPath;
@@ -156,7 +156,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function getClassPath(): string
+    string getClassPath()
     {
         if (this.classPath) {
             return this.classPath;
@@ -167,7 +167,7 @@ class BasePlugin : PluginInterface
     }
 
 
-    function getTemplatePath(): string
+    string getTemplatePath()
     {
         if (this.templatePath) {
             return this.templatePath;

@@ -407,7 +407,7 @@ class FileEngine : CacheEngine
     }
 
 
-    protected function _key($key): string
+    protected string _key($key)
     {
         $key = parent::_key($key);
 
