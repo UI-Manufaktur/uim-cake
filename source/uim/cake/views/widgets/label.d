@@ -50,7 +50,6 @@ class LabelWidget : IWidget
      *
      * @param array<string, mixed> myData Data array.
      * @param uim.cake.View\Form\IContext $context The current form context.
-     * @return string
      */
     string render(array myData, IContext $context) {
         myData += [

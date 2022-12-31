@@ -784,7 +784,6 @@ class HtmlHelper : Helper {
      *
      * @param string myContents The content of the row.
      * @param array<string, mixed> myOptions HTML attributes.
-     * @return string
      */
     string tableRow(string myContents, array myOptions = []) {
         return this.formatTemplate("tablerow", [
@@ -798,7 +797,6 @@ class HtmlHelper : Helper {
      *
      * @param string myContents The content of the cell.
      * @param array<string, mixed> myOptions HTML attributes.
-     * @return string
      */
     string tableCell(string myContents, array myOptions = []) {
         return this.formatTemplate("tablecell", [

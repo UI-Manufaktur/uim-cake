@@ -175,7 +175,6 @@ class ErrorLogger : ErrorLoggerInterface
      * Get the request context for an error/exception trace.
      *
      * @param \Psr\Http\messages.IServerRequest $request The request to read from.
-     * @return string
      */
     string getRequestContext(IServerRequest $request): string
     {

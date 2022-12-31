@@ -359,7 +359,6 @@ class ConsoleIo
      * Returns a single or multiple linefeeds sequences.
      *
      * @param int $multiplier Number of times the linefeed sequence should be repeated
-     * @return string
      */
     string nl(int $multiplier = 1) {
         return str_repeat(ConsoleOutput::LF, $multiplier);

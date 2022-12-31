@@ -227,7 +227,6 @@ class RouteBuilder
      * used for routes connected after the prefix is changed.
      *
      * @param string|null $value Either the value to set or null.
-     * @return string
      */
     string namePrefix(?string $value = null): string
     {

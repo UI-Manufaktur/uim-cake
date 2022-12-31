@@ -53,7 +53,6 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * field name is returned for all other fields.
      *
      * @param string $field Field name to be aliased.
-     * @return string
      */
     string translationField(string $field): string;
 

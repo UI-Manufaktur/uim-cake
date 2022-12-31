@@ -80,7 +80,6 @@ class QueryCompiler
      *
      * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder $binder Value binder used to generate parameter placeholders
-     * @return string
      */
     string compile(Query $query, ValueBinder $binder): string
     {

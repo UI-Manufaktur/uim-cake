@@ -229,7 +229,6 @@ class Query : IExpression, IteratorAggregate {
      * prepared statements.
      *
      * @param uim.cake.databases.ValueBinder|null $binder Value binder that generates parameter placeholders
-     * @return string
      */
     string sql(?ValueBinder $binder = null) {
         if (!$binder) {

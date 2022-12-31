@@ -79,7 +79,6 @@ class ConsoleInputSubcommand
      * Generate the help for this this subcommand.
      *
      * @param int $width The width to make the name of the subcommand.
-     * @return string
      */
     string help(int $width = 0) {
         $name = _name;

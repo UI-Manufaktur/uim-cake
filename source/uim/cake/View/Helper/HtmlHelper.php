@@ -808,7 +808,6 @@ class HtmlHelper : Helper
      *
      * @param string $content The content of the row.
      * @param array<string, mixed> $options HTML attributes.
-     * @return string
      */
     string tableRow(string $content, array $options = []): string
     {
@@ -823,7 +822,6 @@ class HtmlHelper : Helper
      *
      * @param string $content The content of the cell.
      * @param array<string, mixed> $options HTML attributes.
-     * @return string
      */
     string tableCell(string $content, array $options = []): string
     {

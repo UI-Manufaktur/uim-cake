@@ -2163,7 +2163,6 @@ class FormHelper : Helper
      *
      * @param string $fieldName The field name.
      * @param array<string, mixed> $options Array of options or HTML attributes.
-     * @return string
      */
     string month(string $fieldName, array $options = []): string
     {
@@ -2187,7 +2186,6 @@ class FormHelper : Helper
      *
      * @param string $fieldName The field name.
      * @param array<string, mixed> $options Array of options or HTML attributes.
-     * @return string
      */
     string dateTime(string $fieldName, array $options = []): string
     {
@@ -2210,7 +2208,6 @@ class FormHelper : Helper
      *
      * @param string $fieldName The field name.
      * @param array<string, mixed> $options Array of options or HTML attributes.
-     * @return string
      */
     string time(string $fieldName, array $options = []): string
     {
@@ -2232,7 +2229,6 @@ class FormHelper : Helper
      *
      * @param string $fieldName The field name.
      * @param array<string, mixed> $options Array of options or HTML attributes.
-     * @return string
      */
     string date(string $fieldName, array $options = []): string
     {
@@ -2445,7 +2441,6 @@ class FormHelper : Helper
      *
      * @param string aName The name of the widget. e.g. "text".
      * @param array $data The data to render.
-     * @return string
      */
     string widget(string aName, array $data = []): string
     {

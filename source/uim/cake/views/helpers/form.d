@@ -2091,7 +2091,6 @@ class FormHelper : Helper
      *
      * @param string myFieldName The field name.
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
-     * @return string
      */
     string month(string myFieldName, array myOptions = []) {
         myOptions += [
@@ -2114,7 +2113,6 @@ class FormHelper : Helper
      *
      * @param string myFieldName The field name.
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
-     * @return string
      */
     string dateTime(string myFieldName, array myOptions = []) {
         myOptions += [
@@ -2136,7 +2134,6 @@ class FormHelper : Helper
      *
      * @param string myFieldName The field name.
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
-     * @return string
      */
     string time(string myFieldName, array myOptions = []) {
         myOptions += [
@@ -2157,7 +2154,6 @@ class FormHelper : Helper
      *
      * @param string myFieldName The field name.
      * @param array<string, mixed> myOptions Array of options or HTML attributes.
-     * @return string
      */
     string date(string myFieldName, array myOptions = []) {
         myOptions += [
@@ -2363,7 +2359,6 @@ class FormHelper : Helper
      *
      * @param string myName The name of the widget. e.g. "text".
      * @param array myData The data to render.
-     * @return string
      */
     string widget(string myName, array myData = []) {
         $secure = null;

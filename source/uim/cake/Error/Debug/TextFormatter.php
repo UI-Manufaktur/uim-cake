@@ -41,7 +41,6 @@ TEXT;
      * Convert a tree of NodeInterface objects into a plain text string.
      *
      * @param uim.cake.Error\Debug\NodeInterface $node The node tree to dump.
-     * @return string
      */
     string dump(NodeInterface $node): string
     {

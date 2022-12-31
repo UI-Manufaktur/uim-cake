@@ -51,7 +51,6 @@ class LabelWidget : WidgetInterface
      *
      * @param array<string, mixed> $data Data array.
      * @param uim.cake.View\Form\ContextInterface $context The current form context.
-     * @return string
      */
     string render(array $data, ContextInterface $context): string
     {

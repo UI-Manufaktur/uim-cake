@@ -61,7 +61,6 @@ class HelpFormatter
      * Get the help as formatted text suitable for output on the command line.
      *
      * @param int $width The width of the help output.
-     * @return string
      */
     string text(int $width = 72) {
         $parser = _parser;

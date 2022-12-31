@@ -33,27 +33,27 @@ interface PluginInterface
     /**
      * Get the name of this plugin.
      */
-    string getName(): string;
+    string getName();
 
     /**
      * Get the filesystem path to this plugin
      */
-    string getPath(): string;
+    string getPath();
 
     /**
      * Get the filesystem path to configuration for this plugin
      */
-    string getConfigPath(): string;
+    string getConfigPath();
 
     /**
      * Get the filesystem path to configuration for this plugin
      */
-    string getClassPath(): string;
+    string getClassPath();
 
     /**
      * Get the filesystem path to templates for this plugin
      */
-    string getTemplatePath(): string;
+    string getTemplatePath();
 
     /**
      * Load all the application configuration and bootstrap logic.

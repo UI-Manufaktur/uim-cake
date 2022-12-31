@@ -186,7 +186,6 @@ class CaseExpression : IExpression
      * Converts the Node into a SQL string fragment.
      *
      * @param uim.cake.databases.ValueBinder $binder Placeholder generator object
-     * @return string
      */
     string sql(ValueBinder $binder): string
     {

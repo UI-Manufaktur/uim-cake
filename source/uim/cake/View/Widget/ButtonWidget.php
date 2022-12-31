@@ -43,7 +43,6 @@ class ButtonWidget : WidgetInterface
      *
      * @param array<string, mixed> $data The data to build a button with.
      * @param uim.cake.View\Form\ContextInterface $context The current form context.
-     * @return string
      */
     string render(array $data, ContextInterface $context): string
     {

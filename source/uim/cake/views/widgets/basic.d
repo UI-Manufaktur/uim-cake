@@ -49,7 +49,6 @@ class BasicWidget : IWidget {
      *
      * @param array<string, mixed> myData The data to build an input with.
      * @param uim.cake.View\Form\IContext $context The current form context.
-     * @return string
      */
     string render(array myData, IContext $context) {
         myData = this.mergeDefaults(myData, $context);

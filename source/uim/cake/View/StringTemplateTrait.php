@@ -44,7 +44,6 @@ trait StringTemplateTrait
      *
      * @param string aName The template name.
      * @param array<string, mixed> $data The data to insert.
-     * @return string
      */
     string formatTemplate(string aName, array $data): string
     {

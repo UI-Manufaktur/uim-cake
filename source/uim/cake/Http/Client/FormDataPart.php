@@ -100,7 +100,6 @@ class FormDataPart
      * header from being added.
      *
      * @param string|null $disposition Use null to get/string to set.
-     * @return string
      */
     string disposition(?string $disposition = null): string
     {

@@ -131,7 +131,6 @@ interface DriverInterface
      * Get the SQL for releasing a save point.
      *
      * @param string|int $name Save point name or id
-     * @return string
      */
     string releaseSavePointSQL($name): string;
 
@@ -139,7 +138,6 @@ interface DriverInterface
      * Get the SQL for creating a save point.
      *
      * @param string|int $name Save point name or id
-     * @return string
      */
     string savePointSQL($name): string;
 
@@ -147,7 +145,6 @@ interface DriverInterface
      * Get the SQL for rollingback a save point.
      *
      * @param string|int $name Save point name or id
-     * @return string
      */
     string rollbackSavePointSQL($name): string;
 
@@ -183,7 +180,6 @@ interface DriverInterface
      *
      * @param mixed $value The value to quote.
      * @param int $type Must be one of the \PDO::PARAM_* constants
-     * @return string
      */
     string quote($value, $type): string;
 
@@ -224,7 +220,6 @@ interface DriverInterface
      * be used safely in queries without the risk of using reserved words.
      *
      * @param string $identifier The identifier expression to quote.
-     * @return string
      */
     string quoteIdentifier(string $identifier): string;
 

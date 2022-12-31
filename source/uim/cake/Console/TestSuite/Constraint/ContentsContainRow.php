@@ -33,7 +33,6 @@ class ContentsContainRow : ContentsRegExp
 
     /**
      * @param mixed $other Expected content
-     * @return string
      */
     string failureDescription($other) {
         return "`" . this.exporter().shortenedExport($other) . "` " . this.toString();

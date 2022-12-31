@@ -86,7 +86,6 @@ class HtmlFormatter : FormatterInterface
      * Convert a tree of NodeInterface objects into HTML
      *
      * @param uim.cake.Error\Debug\NodeInterface $node The node tree to dump.
-     * @return string
      */
     string dump(NodeInterface $node): string
     {

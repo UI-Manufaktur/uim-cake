@@ -479,7 +479,6 @@ trait DateFormatTrait
      *
      * @param uim.cake.Chronos\ChronosInterface|null $other The datetime to compare with.
      * @param bool $absolute removes time difference modifiers ago, after, etc
-     * @return string
      */
     string diffForHumans(?ChronosInterface $other = null, bool $absolute = false): string
     {

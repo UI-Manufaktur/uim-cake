@@ -27,7 +27,6 @@ class BodyRegExp : ResponseBase
 
     /**
      * @param mixed $other Expected
-     * @return string
      */
     string failureDescription($other): string
     {

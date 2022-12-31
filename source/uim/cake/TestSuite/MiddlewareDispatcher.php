@@ -41,7 +41,6 @@ class MiddlewareDispatcher
      * Resolve the provided URL into a string.
      *
      * @param array|string $url The URL array/string to resolve.
-     * @return string
      */
     string resolveUrl($url): string
     {

@@ -242,7 +242,6 @@ class Oauth
      *
      * @param uim.cake.http.Client\Request $request The request object.
      * @param array $oauthValues Oauth values.
-     * @return string
      */
     string baseString(Request $request, array $oauthValues): string
     {

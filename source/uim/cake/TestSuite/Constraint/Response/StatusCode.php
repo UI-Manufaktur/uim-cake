@@ -18,7 +18,6 @@ class StatusCode : StatusCodeBase
      * Failure description
      *
      * @param mixed $other Expected code
-     * @return string
      */
     string failureDescription($other): string
     {

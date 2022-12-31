@@ -19,7 +19,6 @@ trait SqlDialectTrait
      * be used safely in queries without the risk of using reserved words
      *
      * @param string $identifier The identifier to quote.
-     * @return string
      */
     string quoteIdentifier(string $identifier): string
     {
@@ -261,7 +260,6 @@ trait SqlDialectTrait
      * Returns a SQL snippet for creating a new transaction savepoint
      *
      * @param string|int $name save point name
-     * @return string
      */
     string savePointSQL($name): string
     {
@@ -272,7 +270,6 @@ trait SqlDialectTrait
      * Returns a SQL snippet for releasing a previously created save point
      *
      * @param string|int $name save point name
-     * @return string
      */
     string releaseSavePointSQL($name): string
     {
@@ -283,7 +280,6 @@ trait SqlDialectTrait
      * Returns a SQL snippet for rollbacking a previously created save point
      *
      * @param string|int $name save point name
-     * @return string
      */
     string rollbackSavePointSQL($name): string
     {
