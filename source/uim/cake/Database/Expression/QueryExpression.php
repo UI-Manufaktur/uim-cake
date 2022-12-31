@@ -512,9 +512,8 @@ class QueryExpression : IExpression, Countable
      * Useful to determine if this expression object is void or it will generate
      * a non-empty string when compiled
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         return count(_conditions);
     }

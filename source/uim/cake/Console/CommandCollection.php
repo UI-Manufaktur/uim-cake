@@ -135,9 +135,8 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * Get the number of commands in the collection.
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         return count(this.commands);
     }

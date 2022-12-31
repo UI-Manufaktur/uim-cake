@@ -368,9 +368,8 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     /**
      * Returns the number of loaded objects.
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         return count(_loaded);
     }

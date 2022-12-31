@@ -68,9 +68,8 @@ interface StatementInterface
      *  echo $statement.columnCount(); // outputs 2
      * ```
      *
-     * @return int
      */
-    function columnCount(): int;
+    int columnCount(): int;
 
     /**
      * Returns the error code for the last error that occurred when executing this statement
@@ -150,17 +149,15 @@ interface StatementInterface
      *  print_r($statement.rowCount()); // will show 1
      * ```
      *
-     * @return int
      */
-    function rowCount(): int;
+    int rowCount(): int;
 
     /**
      * Statements can be passed as argument for count()
      * to return the number for affected rows from last execution
      *
-     * @return int
      */
-    function count(): int;
+    int count(): int;
 
     /**
      * Binds a set of values to statement object with corresponding type

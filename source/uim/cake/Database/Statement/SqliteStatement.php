@@ -26,9 +26,8 @@ class SqliteStatement : StatementDecorator
     /**
      * Returns the number of rows returned of affected by last execution
      *
-     * @return int
      */
-    function rowCount(): int
+    int rowCount(): int
     {
         /** @psalm-suppress NoInterfaceProperties */
         if (

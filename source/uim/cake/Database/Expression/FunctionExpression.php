@@ -145,9 +145,8 @@ class FunctionExpression : QueryExpression : TypedResultInterface
      * The name of the function is in itself an expression to generate, thus
      * always adding 1 to the amount of expressions stored in this object.
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         return 1 + count(_conditions);
     }

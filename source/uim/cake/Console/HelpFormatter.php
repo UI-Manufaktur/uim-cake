@@ -167,9 +167,8 @@ class HelpFormatter
      * Iterate over a collection and find the longest named thing.
      *
      * @param array<uim.cake.consoles.ConsoleInputOption|uim.cake.consoles.ConsoleInputArgument|uim.cake.consoles.ConsoleInputSubcommand> $collection The collection to find a max length of.
-     * @return int
      */
-    protected function _getMaxLength(array $collection): int
+    protected int _getMaxLength(array $collection): int
     {
         $max = 0;
         foreach ($collection as $item) {

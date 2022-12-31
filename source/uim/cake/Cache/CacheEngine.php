@@ -345,9 +345,8 @@ abstract class CacheEngine : ICache, ICacheEngine
      *
      * @param \DateInterval|int|null $ttl The TTL value of this item. If null is sent, the
      *   driver"s default duration will be used.
-     * @return int
      */
-    protected function duration($ttl): int
+    protected int duration($ttl): int
     {
         if ($ttl == null) {
             return _config["duration"];

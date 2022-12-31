@@ -146,9 +146,8 @@ interface IQuery
     /**
      * Returns the total amount of results for the query.
      *
-     * @return int
      */
-    function count(): int;
+    int count(): int;
 
     /**
      * Sets the number of records that should be retrieved from database,

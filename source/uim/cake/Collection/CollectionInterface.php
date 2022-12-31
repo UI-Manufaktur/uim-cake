@@ -1124,9 +1124,8 @@ interface ICollection : Iterator, JsonSerializable
      * If you need the count of elements after taking the keys in consideration
      * (the count of unique keys), you can call `countKeys()`
      *
-     * @return int
      */
-    function count(): int;
+    int count(): int;
 
     /**
      * Returns the number of unique keys in this iterator. This is the same as the number of
@@ -1136,9 +1135,8 @@ interface ICollection : Iterator, JsonSerializable
      * for details.
      *
      * @see uim.cake.Collection\ICollection::count()
-     * @return int
      */
-    function countKeys(): int;
+    int countKeys(): int;
 
     /**
      * Create a new collection that is the cartesian product of the current collection

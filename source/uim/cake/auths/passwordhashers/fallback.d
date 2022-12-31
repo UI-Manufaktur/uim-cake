@@ -8,11 +8,9 @@ import uim.cake
  * one is the preferred one. This is useful when trying to migrate an
  * existing database of users from one password type to another.
  */
-class FallbackPasswordHasher : AbstractPasswordHasher
-{
+class FallbackPasswordHasher : AbstractPasswordHasher {
     /**
      * Default config for this object.
-     *
      * @var array<string, mixed>
      */
     protected $_defaultConfig = [

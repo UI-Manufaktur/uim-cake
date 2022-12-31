@@ -56,7 +56,6 @@ abstract class BaseAuthenticate : IEventListener
     /**
      * Whether the user authenticated by this class
      * requires their password to be rehashed with another algorithm.
-     *
      */
     protected bool $_needsPasswordRehash = false;
 
@@ -66,8 +65,8 @@ abstract class BaseAuthenticate : IEventListener
      * @param uim.cake.controllers.ComponentRegistry $registry The Component registry used on this request.
      * @param array<string, mixed> $config Array of config to use.
      */
-    this(ComponentRegistry $registry, array $config = []) {
-        _registry = $registry;
+    this(ComponentRegistry aRegistry, array $config = []) {
+        _registry = aRegistry;
         this.setConfig($config);
     }
 

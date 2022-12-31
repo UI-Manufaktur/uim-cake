@@ -13,9 +13,8 @@ class VersionCommand : Command {
      *
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
-     * @return int
      */
-    function execute(Arguments $args, ConsoleIo $io): ?int
+    int execute(Arguments $args, ConsoleIo $io): ?int
     {
         $io.out(Configure::version());
 

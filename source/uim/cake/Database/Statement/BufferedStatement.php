@@ -132,9 +132,8 @@ class BufferedStatement : Iterator, StatementInterface
      * Statements can be passed as argument for count() to return the number
      * for affected rows from last execution.
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         return this.rowCount();
     }

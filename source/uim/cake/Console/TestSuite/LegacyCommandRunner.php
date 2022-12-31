@@ -13,9 +13,8 @@ class LegacyCommandRunner
      *
      * @param array $argv Argument array
      * @param uim.cake.consoles.ConsoleIo|null $io A ConsoleIo instance.
-     * @return int
      */
-    function run(array $argv, ?ConsoleIo $io = null): int
+    int run(array $argv, ?ConsoleIo $io = null): int
     {
         $dispatcher = new LegacyShellDispatcher($argv, true, $io);
 

@@ -145,9 +145,8 @@ class BufferedIterator : Collection : Countable, Serializable
     /**
      * Returns the number or items in this collection
      *
-     * @return int
      */
-    function count(): int
+    int count(): int
     {
         if (!_started) {
             this.rewind();

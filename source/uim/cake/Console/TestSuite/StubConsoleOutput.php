@@ -30,9 +30,8 @@ class StubConsoleOutput : ConsoleOutput
      *
      * @param array<string>|string $message A string or an array of strings to output
      * @param int $newlines Number of newlines to append
-     * @return int
      */
-    function write($message, int $newlines = 1): int
+    int write($message, int $newlines = 1): int
     {
         foreach ((array)$message as $line) {
             _out[] = $line;

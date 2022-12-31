@@ -51,9 +51,8 @@ class BinaryType : BaseType
      *
      * @param mixed $value The value being bound.
      * @param uim.cake.databases.DriverInterface $driver The driver.
-     * @return int
      */
-    function toStatement($value, DriverInterface $driver): int
+    int toStatement($value, DriverInterface $driver): int
     {
         return PDO::PARAM_LOB;
     }

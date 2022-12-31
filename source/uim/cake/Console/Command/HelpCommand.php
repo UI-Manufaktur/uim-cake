@@ -34,9 +34,8 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
      *
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
-     * @return int
      */
-    function execute(Arguments $args, ConsoleIo $io): ?int
+    int execute(Arguments $args, ConsoleIo $io): ?int
     {
         $commands = this.commands.getIterator();
         if ($commands instanceof ArrayIterator) {

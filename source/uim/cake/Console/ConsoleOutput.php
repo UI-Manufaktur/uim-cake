@@ -302,9 +302,8 @@ class ConsoleOutput
     /**
      * Get the output type on how formatting tags are treated.
      *
-     * @return int
      */
-    function getOutputAs(): int
+    int getOutputAs(): int
     {
         return _outputAs;
     }

@@ -435,9 +435,8 @@ abstract class Driver : DriverInterface
     /**
      * Returns the number of connection retry attempts made.
      *
-     * @return int
      */
-    function getConnectRetries(): int
+    int getConnectRetries(): int
     {
         return this.connectRetries;
     }
