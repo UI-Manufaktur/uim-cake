@@ -43,7 +43,7 @@ class ApcuEngine : CacheEngine {
      * @return bool True on success and false on failure.
      * @link https://secure.php.net/manual/en/function.apcu-store.php
      */
-    bool set($key, $value, $ttl = null) {
+    bool set(string aKey, $value, $ttl = null) {
         $key = _key($key);
         $duration = this.duration($ttl);
 

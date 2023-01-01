@@ -125,13 +125,13 @@ class RedisEngine : CacheEngine {
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      */
-    bool set($key, $value, $ttl = null) {
+    bool set(string aKey, $value, $ttl = null) {
         $key = _key($key);
         $value = this.serialize($value);
 
         $duration = this.duration($ttl);
         if ($duration == 0) {
-            return _Redis.set($key, $value);
+            return _Redis.set(string aKey, $value);
         }
 
         return _Redis.setEx($key, $duration, $value);
@@ -290,7 +290,7 @@ class RedisEngine : CacheEngine {
         $key = _key($key);
         $value = this.serialize($value);
 
-        if (_Redis.set($key, $value, ["nx", "ex": $duration])) {
+        if (_Redis.set(string aKey, $value, ["nx", "ex": $duration])) {
             return true;
         }
 

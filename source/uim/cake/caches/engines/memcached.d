@@ -284,7 +284,7 @@ class MemcachedEngine : CacheEngine {
      * @return bool True if the data was successfully cached, false on failure
      * @see https://www.php.net/manual/en/memcached.set.php
      */
-    bool set($key, $value, $ttl = null) {
+    bool set(string aKey, $value, $ttl = null) {
         $duration = this.duration($ttl);
 
         return _Memcached.set(_key($key), $value, $duration);

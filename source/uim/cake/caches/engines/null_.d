@@ -21,7 +21,7 @@ class NullEngine : CacheEngine
     }
 
 
-    bool set($key, $value, $ttl = null) {
+    bool set(string aKey, $value, $ttl = null) {
         return true;
     }
 

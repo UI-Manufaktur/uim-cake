@@ -152,7 +152,7 @@ abstract class CacheEngine : ICache, ICacheEngine
         }
         try {
             foreach ($values as $key: $value) {
-                $success = this.set($key, $value);
+                $success = this.set(string aKey, $value);
                 if ($success == false) {
                     return false;
                 }
@@ -229,7 +229,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws uim.cake.Cache\InvalidArgumentException
      *   MUST be thrown if the $key string is not a legal value.
      */
-    abstract bool set($key, $value, $ttl = null);
+    abstract bool set(string aKey, $value, $ttl = null);
 
     /**
      * Increment a number under the key and return incremented value
@@ -277,7 +277,7 @@ abstract class CacheEngine : ICache, ICacheEngine
     bool add(string aKey, $value) {
         $cachedValue = this.get($key);
         if ($cachedValue == null) {
-            return this.set($key, $value);
+            return this.set(string aKey, $value);
         }
 
         return false;

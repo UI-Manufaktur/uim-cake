@@ -288,7 +288,7 @@ class Mailer : IEventListener
      * @return this
      * @deprecated 4.0.0 Use {@link Mailer::setViewVars()} instead.
      */
-    function set($key, $value = null) {
+    function set(string aKey, $value = null) {
         deprecationWarning("Mailer::set() is deprecated. Use setViewVars() instead.");
 
         return this.setViewVars($key, $value);
@@ -302,7 +302,7 @@ class Mailer : IEventListener
      * @return this
      */
     function setViewVars($key, $value = null) {
-        this.getRenderer().set($key, $value);
+        this.getRenderer().set(string aKey, $value);
 
         return this;
     }

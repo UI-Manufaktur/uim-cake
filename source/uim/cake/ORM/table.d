@@ -2051,7 +2051,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
                     $id = $statement.lastInsertId(this.getTable(), $key);
                     /** @var string $type */
                     $type = $schema.getColumnType($key);
-                    $entity.set($key, TypeFactory::build($type).toPHP($id, $driver));
+                    $entity.set(string aKey, TypeFactory::build($type).toPHP($id, $driver));
                     break;
                 }
             }

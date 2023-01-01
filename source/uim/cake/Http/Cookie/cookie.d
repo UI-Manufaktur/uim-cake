@@ -735,7 +735,7 @@ class Cookie : CookieInterface
         $array = [];
         foreach (explode(",", $string) as $pair) {
             $key = explode("|", $pair);
-            if (!isset($key[1])) {
+            if (!isset(string aKey[1])) {
                 return $key[0];
             }
             $array[$key[0]] = $key[1];

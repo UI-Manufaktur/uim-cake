@@ -78,7 +78,7 @@ class QueryCacher
         $key = _resolveKey($query);
         $storage = _resolveCacher();
 
-        return $storage.set($key, $results);
+        return $storage.set(string aKey, $results);
     }
 
     /**

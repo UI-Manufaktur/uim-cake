@@ -90,7 +90,7 @@ class FileEngine : CacheEngine
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
      */
-    bool set($key, $value, $ttl = null) {
+    bool set(string aKey, $value, $ttl = null) {
         if ($value == "" || !_init) {
             return false;
         }

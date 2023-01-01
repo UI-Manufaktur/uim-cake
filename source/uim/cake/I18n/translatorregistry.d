@@ -185,7 +185,7 @@ class TranslatorRegistry
 
         if (!$translator || !$translator.getPackage()) {
             $translator = _getTranslator($name, $locale);
-            _cacher.set($key, $translator);
+            _cacher.set(string aKey, $translator);
         }
 
         return this.registry[$name][$locale] = $translator;

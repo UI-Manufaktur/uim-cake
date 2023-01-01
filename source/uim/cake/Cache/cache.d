@@ -239,7 +239,7 @@ class Cache {
         }
 
         $backend = static::pool($config);
-        $success = $backend.set($key, $value);
+        $success = $backend.set(string aKey, $value);
         if ($success == false && $value != "") {
             trigger_error(
                 sprintf(

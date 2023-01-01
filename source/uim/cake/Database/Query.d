@@ -1737,7 +1737,7 @@ class Query : IExpression, IteratorAggregate
      * @param array<string, string>|string $types The column types to treat data as.
      * @return this
      */
-    function set($key, $value = null, $types = []) {
+    function set(string aKey, $value = null, $types = []) {
         if (empty(_parts["set"])) {
             _parts["set"] = this.newExpr().setConjunction(",");
         }

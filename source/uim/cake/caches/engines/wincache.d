@@ -50,11 +50,11 @@ class WincacheEngine : CacheEngine {
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      */
-    bool set($key, $value, $ttl = null) {
+    bool set(string aKey, $value, $ttl = null) {
         $key = _key($key);
         $duration = this.duration($ttl);
 
-        return wincache_ucache_set($key, $value, $duration);
+        return wincache_ucache_set(string aKey, $value, $duration);
     }
 
     /**
