@@ -1,23 +1,15 @@
 /*********************************************************************************************************
-*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
-*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
-*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
 module uim.cake.auths.passwordhashers.factory;
 
 @safe:
 import uim.cake
 
-module 
-
-import uim.cake.core.App;
-use RuntimeException;
-
-/**
- * Builds password hashing objects
- */
-class PasswordHasherFactory
-{
+// Builds password hashing objects
+class PasswordHasherFactory {
     /**
      * Returns password hasher object out of a hasher name or a configuration array
      *

@@ -1,8 +1,9 @@
 /*********************************************************************************************************
-*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
-*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
-*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
-**********************************************************************************************************/module uim.cake.auth;
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.auths.controllerauthorize;
 
 @safe:
 import uim.cake;
@@ -13,12 +14,12 @@ import uim.cake;
  * return a boolean to indicate whether the user is authorized.
  *
  * ```
- *  function isAuthorized(myUser)
+ *  function isAuthorized($user)
  *  {
  *      if (this.request.getParam("admin")) {
- *          return myUser["role"] == "admin";
+ *          return $user["role"] == "admin";
  *      }
- *      return !empty(myUser);
+ *      return !empty($user);
  *  }
  * ```
  *
@@ -27,12 +28,18 @@ import uim.cake;
  *
  * @see uim.cake.controllers.components.AuthComponent::$authenticate
  */
-class ControllerAuthorize : BaseAuthorize {
-    // Controller for the request.
-    protected Controller _Controller;
+class ControllerAuthorize : BaseAuthorize
+{
+    /**
+     * Controller for the request.
+     *
+     * @var uim.cake.controllers.Controller
+     */
+    protected $_Controller;
 
-    this(ComponentRegistry $registry, array myConfig = []) {
-        super.this($registry, myConfig);
+
+    this(ComponentRegistry $registry, array $config = []) {
+        super(($registry, $config);
         this.controller($registry.getController());
     }
 
@@ -43,7 +50,8 @@ class ControllerAuthorize : BaseAuthorize {
      * @param uim.cake.controllers.Controller|null $controller null to get, a controller to set.
      * @return uim.cake.controllers.Controller
      */
-    Controller controller(?Controller $controller = null) {
+    function controller(?Controller $controller = null): Controller
+    {
         if ($controller) {
             _Controller = $controller;
         }
@@ -54,11 +62,13 @@ class ControllerAuthorize : BaseAuthorize {
     /**
      * Checks user authorization using a controller callback.
      *
-     * @param \ArrayAccess|array myUser Active user data
-     * @param uim.cake.http.ServerRequest myRequest Request instance.
+     * @param \ArrayAccess|array $user Active user data
+     * @param uim.cake.http.ServerRequest $request Request instance.
      * @throws uim.cake.Core\exceptions.CakeException If controller does not have method `isAuthorized()`.
+     * @return bool
      */
-    bool authorize(myUser, ServerRequest myRequest) {
+    function authorize($user, ServerRequest $request): bool
+    {
         if (!method_exists(_Controller, "isAuthorized")) {
             throw new CakeException(sprintf(
                 "%s does not implement an isAuthorized() method.",
@@ -66,6 +76,6 @@ class ControllerAuthorize : BaseAuthorize {
             ));
         }
 
-        return (bool)_Controller.isAuthorized(myUser);
+        return (bool)_Controller.isAuthorized($user);
     }
 }

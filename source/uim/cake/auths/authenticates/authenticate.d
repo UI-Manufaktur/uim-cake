@@ -1,14 +1,18 @@
 /*********************************************************************************************************
-*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
-*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
-*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
-**********************************************************************************************************/module uim.cake.auths.authenticates.authenticate;
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.auths.baseauthenticate;
 
 @safe:
-import uim.cake:
+import uim.cake
 
 // Base Authentication class with common methods and properties.
-abstract class DAuthenticate : IEventListener {
+abstract class BaseAuthenticate : IEventListener {
+    use InstanceConfigTrait;
+    use LocatorAwareTrait;
+
     /**
      * Default config for this object.
      *
@@ -17,44 +21,52 @@ abstract class DAuthenticate : IEventListener {
      * - `finder` The finder method to use to fetch user record. Defaults to "all".
      *   You can set finder name as string or an array where key is finder name and value
      *   is an array passed to `Table::find()` options.
-     *   E.g. ["finderName":["some_finder_option":"some_value"]]
+     *   E.g. ["finderName": ["some_finder_option": "some_value"]]
      * - `passwordHasher` Password hasher class. Can be a string specifying class name
      *    or an array containing `className` key, any other keys will be passed as
      *    config to the class. Defaults to "Default".
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [
-        "fields":[
-            "username":"username",
-            "password":"password",
+    protected $_defaultConfig = [
+        "fields": [
+            "username": "username",
+            "password": "password",
         ],
-        "userModel":"Users",
-        "finder":"all",
-        "passwordHasher":"Default",
+        "userModel": "Users",
+        "finder": "all",
+        "passwordHasher": "Default",
     ];
 
-    // A Component registry, used to get more components.
-    protected ComponentRegistry $_registry;
+    /**
+     * A Component registry, used to get more components.
+     *
+     * @var uim.cake.controllers.ComponentRegistry
+     */
+    protected $_registry;
 
-    // Password hasher instance.
-    protected AbstractPasswordHasher _passwordHasher;
+    /**
+     * Password hasher instance.
+     *
+     * @var uim.cake.auths.AbstractPasswordHasher|null
+     */
+    protected $_passwordHasher;
 
     /**
      * Whether the user authenticated by this class
      * requires their password to be rehashed with another algorithm.
      */
-    protected bool _needsPasswordRehash = false;
+    protected bool $_needsPasswordRehash = false;
 
     /**
      * Constructor
      *
      * @param uim.cake.controllers.ComponentRegistry $registry The Component registry used on this request.
-     * @param array<string, mixed> myConfig Array of config to use.
+     * @param array<string, mixed> $config Array of config to use.
      */
-    this(ComponentRegistry $registry, array myConfig = []) {
-        _registry = $registry;
-        this.setConfig(myConfig);
+    this(ComponentRegistry aRegistry, array $config = []) {
+        _registry = aRegistry;
+        this.setConfig($config);
     }
 
     /**
@@ -63,82 +75,83 @@ abstract class DAuthenticate : IEventListener {
      * Input passwords will be hashed even when a user doesn"t exist. This
      * helps mitigate timing attacks that are attempting to find valid usernames.
      *
-     * @param string myUsername The username/identifier.
-     * @param string|null myPassword The password, if not provided password checking is skipped
+     * @param string $username The username/identifier.
+     * @param string|null $password The password, if not provided password checking is skipped
      *   and result of find is returned.
      * @return array<string, mixed>|false Either false on failure, or an array of user data.
      */
-    protected auto _findUser(string myUsername, Nullable!string myPassword = null) {
-        myResult = _query(myUsername).first();
+    protected function _findUser(string $username, ?string $password = null) {
+        $result = _query($username).first();
 
-        if (myResult is null) {
+        if ($result == null) {
             // Waste time hashing the password, to prevent
             // timing side-channels. However, don"t hash
             // null passwords as authentication systems
             // like digest auth don"t use passwords
             // and hashing *could* create a timing side-channel.
-            if (myPassword  !is null) {
-                myHasher = this.passwordHasher();
-                myHasher.hash(myPassword);
+            if ($password != null) {
+                $hasher = this.passwordHasher();
+                $hasher.hash($password);
             }
 
             return false;
         }
 
-        myPasswordField = _config["fields"]["password"];
-        if (myPassword  !is null) {
-            myHasher = this.passwordHasher();
-            myHashedPassword = myResult.get(myPasswordField);
+        $passwordField = _config["fields"]["password"];
+        if ($password != null) {
+            $hasher = this.passwordHasher();
+            $hashedPassword = $result.get($passwordField);
 
-            if (myHashedPassword is null || myHashedPassword == "") {
+            if ($hashedPassword == null || $hashedPassword == "") {
                 // Waste time hashing the password, to prevent
                 // timing side-channels to distinguish whether
                 // user has password or not.
-                myHasher.hash(myPassword);
+                $hasher.hash($password);
 
                 return false;
             }
 
-            if (!myHasher.check(myPassword, myHashedPassword)) {
+            if (!$hasher.check($password, $hashedPassword)) {
                 return false;
             }
 
-            _needsPasswordRehash = myHasher.needsRehash(myHashedPassword);
-            myResult.unset(myPasswordField);
+            _needsPasswordRehash = $hasher.needsRehash($hashedPassword);
+            $result.unset($passwordField);
         }
-        myHidden = myResult.getHidden();
-        if (myPassword is null && in_array(myPasswordField, myHidden, true)) {
-            myKey = array_search(myPasswordField, myHidden, true);
-            unset(myHidden[myKey]);
-            myResult.setHidden(myHidden);
+        $hidden = $result.getHidden();
+        if ($password == null && in_array($passwordField, $hidden, true)) {
+            $key = array_search($passwordField, $hidden, true);
+            unset($hidden[$key]);
+            $result.setHidden($hidden);
         }
 
-        return myResult.toArray();
+        return $result.toArray();
     }
 
     /**
      * Get query object for fetching user from database.
      *
-     * @param string myUsername The username/identifier.
+     * @param string $username The username/identifier.
      * @return uim.cake.orm.Query
      */
-    protected Query _query(string myUsername) {
-        myConfig = _config;
-        myTable = this.getTableLocator().get(myConfig["userModel"]);
+    protected function _query(string $username): Query
+    {
+        $config = _config;
+        $table = this.getTableLocator().get($config["userModel"]);
 
-        myOptions = [
-            "conditions":[myTable.aliasField(myConfig["fields"]["username"]): myUsername],
+        $options = [
+            "conditions": [$table.aliasField($config["fields"]["username"]): $username],
         ];
 
-        myFinder = myConfig["finder"];
-        if (is_array(myFinder)) {
-            myOptions += current(myFinder);
-            myFinder = key(myFinder);
+        $finder = $config["finder"];
+        if (is_array($finder)) {
+            $options += current($finder);
+            $finder = key($finder);
         }
 
-        myOptions["username"] = myOptions["username"] ?? myUsername;
+        $options["username"] = $options["username"] ?? $username;
 
-        return myTable.find(myFinder, myOptions);
+        return $table.find($finder, $options);
     }
 
     /**
@@ -149,18 +162,20 @@ abstract class DAuthenticate : IEventListener {
      *   it does not extend AbstractPasswordHasher
      */
     AbstractPasswordHasher passwordHasher() {
-        if (_passwordHasher  !is null) {
+        if (_passwordHasher != null) {
             return _passwordHasher;
         }
 
-        myPasswordHasher = _config["passwordHasher"];
+        $passwordHasher = _config["passwordHasher"];
 
-        return _passwordHasher = PasswordHasherFactory::build(myPasswordHasher);
+        return _passwordHasher = PasswordHasherFactory::build($passwordHasher);
     }
 
     /**
      * Returns whether the password stored in the repository for the logged in user
      * requires to be rehashed with another algorithm
+     *
+     * @return bool
      */
     bool needsPasswordRehash() {
         return _needsPasswordRehash;
@@ -169,20 +184,20 @@ abstract class DAuthenticate : IEventListener {
     /**
      * Authenticate a user based on the request information.
      *
-     * @param uim.cake.http.ServerRequest myRequest Request to get authentication information from.
+     * @param uim.cake.http.ServerRequest $request Request to get authentication information from.
      * @param uim.cake.http.Response $response A response object that can have headers added.
      * @return array<string, mixed>|false Either false on failure, or an array of user data on success.
      */
-    abstract function authenticate(ServerRequest myRequest, Response $response);
+    abstract function authenticate(ServerRequest $request, Response $response);
 
     /**
      * Get a user based on information in the request. Primarily used by stateless authentication
      * systems like basic and digest auth.
      *
-     * @param uim.cake.http.ServerRequest myRequest Request object.
+     * @param uim.cake.http.ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    auto getUser(ServerRequest myRequest) {
+    function getUser(ServerRequest $request) {
         return false;
     }
 
@@ -194,11 +209,11 @@ abstract class DAuthenticate : IEventListener {
      * - uim.cake.Http\Response - A response object, which will cause AuthComponent to
      *   simply return that response.
      *
-     * @param uim.cake.http.ServerRequest myRequest A request object.
+     * @param uim.cake.http.ServerRequest $request A request object.
      * @param uim.cake.http.Response $response A response object.
      * @return uim.cake.http.Response|null|void
      */
-    function unauthenticated(ServerRequest myRequest, Response $response) {
+    function unauthenticated(ServerRequest $request, Response $response) {
     }
 
     /**
@@ -208,16 +223,17 @@ abstract class DAuthenticate : IEventListener {
      *
      * - `Auth.afterIdentify` - Fired after a user has been identified using one of
      *   configured authenticate class. The callback function should have signature
-     *   like `afterIdentify(IEvent myEvent, array myUser)` when `myUser` is the
+     *   like `afterIdentify(IEvent $event, array $user)` when `$user` is the
      *   identified user record.
      *
      * - `Auth.logout` - Fired when AuthComponent::logout() is called. The callback
-     *   function should have signature like `logout(IEvent myEvent, array myUser)`
-     *   where `myUser` is the user about to be logged out.
+     *   function should have signature like `logout(IEvent $event, array $user)`
+     *   where `$user` is the user about to be logged out.
      *
      * @return array<string, mixed> List of events this class listens to. Defaults to `[]`.
      */
-    array implementedEvents() {
+    function implementedEvents(): array
+    {
         return [];
     }
 }

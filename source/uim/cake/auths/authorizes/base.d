@@ -1,11 +1,12 @@
 /*********************************************************************************************************
-*	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        *
-*	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  *
-*	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      *
-**********************************************************************************************************/module uim.cake.auths.authorizes.base;
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.auths.baseauthorize;
 
 @safe:
-import uim.cake
+import uim.cake;
 
 /**
  * Abstract base authorization adapter for AuthComponent.
@@ -13,32 +14,39 @@ import uim.cake
  * @see uim.cake.controllers.components.AuthComponent::$authenticate
  */
 abstract class BaseAuthorize {
-    // ComponentRegistry instance for getting more components.
-    protected ComponentRegistry _registry;
+    use InstanceConfigTrait;
+
+    /**
+     * ComponentRegistry instance for getting more components.
+     *
+     * @var uim.cake.controllers.ComponentRegistry
+     */
+    protected $_registry;
 
     /**
      * Default config for authorize objects.
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [];
+    protected $_defaultConfig = [];
 
     /**
      * Constructor
      *
      * @param uim.cake.controllers.ComponentRegistry $registry The controller for this request.
-     * @param array<string, mixed> myConfig An array of config. This class does not use any config.
+     * @param array<string, mixed> $config An array of config. This class does not use any config.
      */
-    this(ComponentRegistry $registry, array myConfig = []) {
+    this(ComponentRegistry $registry, array $config = []) {
         _registry = $registry;
-        this.setConfig(myConfig);
+        this.setConfig($config);
     }
 
     /**
      * Checks user authorization.
      *
-     * @param \ArrayAccess|array myUser Active user data
-     * @param uim.cake.http.ServerRequest myRequest Request instance.
+     * @param \ArrayAccess|array $user Active user data
+     * @param uim.cake.http.ServerRequest $request Request instance.
+     * @return bool
      */
-    abstract bool authorize(myUser, ServerRequest myRequest);
+    abstract bool authorize($user, ServerRequest $request);
 }
