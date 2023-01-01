@@ -59,7 +59,7 @@ class ApcuEngine : CacheEngine {
      *   has expired, or if there was an error fetching it
      * @link https://secure.php.net/manual/en/function.apcu-fetch.php
      */
-    function get($key, $default = null) {
+    function get(string aKey, $default = null) {
         $value = apcu_fetch(_key($key), $success);
         if ($success == false) {
             return $default;

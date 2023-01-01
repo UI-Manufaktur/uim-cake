@@ -553,7 +553,7 @@ class Marshaller
                 }
                 continue;
             }
-            $original = $entity.get($key);
+            $original = $entity.get(string aKey);
 
             if (isset($propertyMap[$key])) {
                 $value = $propertyMap[$key]($value, $entity);

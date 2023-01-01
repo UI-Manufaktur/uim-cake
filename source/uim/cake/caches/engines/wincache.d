@@ -65,7 +65,7 @@ class WincacheEngine : CacheEngine {
      * @return mixed The cached data, or default value if the data doesn"t exist,
      *   has expired, or if there was an error fetching it
      */
-    function get($key, $default = null) {
+    function get(string aKey, $default = null) {
         $value = wincache_ucache_get(_key($key), $success);
         if ($success == false) {
             return $default;

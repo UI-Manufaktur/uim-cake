@@ -317,9 +317,9 @@ class MemcachedEngine : CacheEngine {
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
      */
-    function get($key, $default = null) {
+    function get(string aKey, $default = null) {
         $key = _key($key);
-        $value = _Memcached.get($key);
+        $value = _Memcached.get(string aKey);
         if (_Memcached.getResultCode() == Memcached::RES_NOTFOUND) {
             return $default;
         }

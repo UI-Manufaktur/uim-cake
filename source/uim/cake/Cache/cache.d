@@ -304,7 +304,7 @@ class Cache {
      *  or if there was an error fetching it.
      */
     static function read(string aKey, string $config = "default") {
-        return static::pool($config).get($key);
+        return static::pool($config).get(string aKey);
     }
 
     /**

@@ -126,7 +126,7 @@ abstract class CacheEngine : ICache, ICacheEngine
 
         $results = [];
         foreach ($keys as $key) {
-            $results[$key] = this.get($key, $default);
+            $results[$key] = this.get(string aKey, $default);
         }
 
         return $results;
@@ -204,7 +204,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @throws uim.cake.Cache\InvalidArgumentException If the $key string is not a legal value.
      */
     bool has($key) {
-        return this.get($key) != null;
+        return this.get(string aKey) != null;
     }
 
     /**
@@ -215,7 +215,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return mixed The value of the item from the cache, or $default in case of cache miss.
      * @throws uim.cake.Cache\InvalidArgumentException If the $key string is not a legal value.
      */
-    abstract function get($key, $default = null);
+    abstract function get(string aKey, $default = null);
 
     /**
      * Persists data in the cache, uniquely referenced by the given key with an optional expiration TTL time.
@@ -275,7 +275,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * @return bool True if the data was successfully cached, false on failure.
      */
     bool add(string aKey, $value) {
-        $cachedValue = this.get($key);
+        $cachedValue = this.get(string aKey);
         if ($cachedValue == null) {
             return this.set(string aKey, $value);
         }

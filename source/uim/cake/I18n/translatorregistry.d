@@ -177,7 +177,7 @@ class TranslatorRegistry
         // Cache keys cannot contain / if they go to file engine.
         $keyName = str_replace("/", ".", $name);
         $key = "translations.{$keyName}.{$locale}";
-        $translator = _cacher.get($key);
+        $translator = _cacher.get(string aKey);
 
         // PHP <8.1 does not correctly garbage collect strings created
         // by unserialized arrays.

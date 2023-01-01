@@ -145,7 +145,7 @@ class RedisEngine : CacheEngine {
      * @return mixed The cached data, or the default if the data doesn"t exist, has
      *   expired, or if there was an error fetching it
      */
-    function get($key, $default = null) {
+    function get(string aKey, $default = null) {
         $value = _Redis.get(_key($key));
         if ($value == false) {
             return $default;

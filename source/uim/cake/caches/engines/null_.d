@@ -31,7 +31,7 @@ class NullEngine : CacheEngine
     }
 
 
-    function get($key, $default = null) {
+    function get(string aKey, $default = null) {
         return $default;
     }
 

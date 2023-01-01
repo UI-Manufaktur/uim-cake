@@ -58,7 +58,7 @@ class QueryCacher
     function fetch(object $query) {
         $key = _resolveKey($query);
         $storage = _resolveCacher();
-        $result = $storage.get($key);
+        $result = $storage.get(string aKey);
         if (empty($result)) {
             return null;
         }

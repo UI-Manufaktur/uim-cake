@@ -135,7 +135,7 @@ class FileEngine : CacheEngine
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      *   expired, or if there was an error fetching it
      */
-    function get($key, $default = null) {
+    function get(string aKey, $default = null) {
         $key = _key($key);
 
         if (!_init || _setKey($key) == false) {
