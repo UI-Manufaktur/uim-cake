@@ -1,7 +1,7 @@
 module uim.cake.I18n;
 
 import uim.cake.Chronos\ChronosInterface;
-import uim.cake.Chronos\DifferenceFormatterInterface;
+import uim.cake.Chronos\DifferenceIFormatter;
 use JsonSerializable;
 
 /**
@@ -202,14 +202,14 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
     /**
      * Get the difference formatter instance.
      *
-     * @return uim.cake.Chronos\DifferenceFormatterInterface The formatter instance.
+     * @return uim.cake.Chronos\DifferenceIFormatter The formatter instance.
      */
-    static function getDiffFormatter(): DifferenceFormatterInterface;
+    static function getDiffFormatter(): DifferenceIFormatter;
 
     /**
      * Set the difference formatter instance.
      *
-     * @param uim.cake.Chronos\DifferenceFormatterInterface $formatter The formatter instance when setting.
+     * @param uim.cake.Chronos\DifferenceIFormatter $formatter The formatter instance when setting.
      */
-    static void setDiffFormatter(DifferenceFormatterInterface $formatter): void;
+    static void setDiffFormatter(DifferenceIFormatter $formatter): void;
 }

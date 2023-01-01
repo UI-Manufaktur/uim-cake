@@ -1,13 +1,13 @@
 module uim.cake.I18n\Formatter;
 
 import uim.cake.I18n\exceptions.I18nException;
-import uim.cake.I18n\FormatterInterface;
+import uim.cake.I18n\IFormatter;
 use MessageFormatter;
 
 /**
  * A formatter that will interpolate variables using the MessageFormatter class
  */
-class IcuFormatter : FormatterInterface
+class IcuFormatter : IFormatter
 {
     /**
      * Returns a string with all passed variables interpolated into the original

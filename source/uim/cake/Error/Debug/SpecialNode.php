@@ -10,7 +10,7 @@
 /**
  * Debug node for special messages like errors or recursion warnings.
  */
-class SpecialNode : NodeInterface
+class SpecialNode : INode
 {
     /**
      * @var string

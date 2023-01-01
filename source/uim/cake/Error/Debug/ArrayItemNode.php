@@ -10,25 +10,25 @@
 /**
  * Dump node for Array Items.
  */
-class ArrayItemNode : NodeInterface
+class ArrayItemNode : INode
 {
     /**
-     * @var uim.cake.Error\debugs.NodeInterface
+     * @var uim.cake.Error\debugs.INode
      */
     private $key;
 
     /**
-     * @var uim.cake.Error\debugs.NodeInterface
+     * @var uim.cake.Error\debugs.INode
      */
     private $value;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Error\debugs.NodeInterface $key The node for the item key
-     * @param uim.cake.Error\debugs.NodeInterface $value The node for the array value
+     * @param uim.cake.Error\debugs.INode $key The node for the item key
+     * @param uim.cake.Error\debugs.INode $value The node for the array value
      */
-    this(NodeInterface $key, NodeInterface $value) {
+    this(INode $key, INode $value) {
         this.key = $key;
         this.value = $value;
     }
@@ -36,7 +36,7 @@ class ArrayItemNode : NodeInterface
     /**
      * Get the value
      *
-     * @return uim.cake.Error\debugs.NodeInterface
+     * @return uim.cake.Error\debugs.INode
      */
     function getValue() {
         return this.value;
@@ -45,7 +45,7 @@ class ArrayItemNode : NodeInterface
     /**
      * Get the key
      *
-     * @return uim.cake.Error\debugs.NodeInterface
+     * @return uim.cake.Error\debugs.INode
      */
     function getKey() {
         return this.key;

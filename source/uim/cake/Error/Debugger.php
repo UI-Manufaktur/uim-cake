@@ -7,9 +7,9 @@ import uim.cake.errors.debugs.ArrayNode;
 import uim.cake.errors.debugs.ClassNode;
 import uim.cake.errors.debugs.ConsoleFormatter;
 import uim.cake.errors.debugs.DebugContext;
-import uim.cake.errors.debugs.FormatterInterface;
+import uim.cake.errors.debugs.IFormatter;
 import uim.cake.errors.debugs.HtmlFormatter;
-import uim.cake.errors.debugs.NodeInterface;
+import uim.cake.errors.debugs.INode;
 import uim.cake.errors.debugs.PropertyNode;
 import uim.cake.errors.debugs.ReferenceNode;
 import uim.cake.errors.debugs.ScalarNode;
@@ -572,11 +572,11 @@ class Debugger
     /**
      * Get the configured export formatter or infer one based on the environment.
      *
-     * @return uim.cake.Error\debugs.FormatterInterface
+     * @return uim.cake.Error\debugs.IFormatter
      * @unstable This method is not stable and may change in the future.
      * @since 4.1.0
      */
-    function getExportFormatter(): FormatterInterface
+    function getExportFormatter(): IFormatter
     {
         $instance = static::getInstance();
         $class = $instance.getConfig('exportFormatter');
@@ -590,9 +590,9 @@ class Debugger
             }
         }
         $instance = new $class();
-        if (!$instance instanceof FormatterInterface) {
+        if (!$instance instanceof IFormatter) {
             throw new RuntimeException(
-                "The `{$class}` formatter does not implement " . FormatterInterface::class
+                "The `{$class}` formatter does not implement " . IFormatter::class
             );
         }
 
@@ -650,9 +650,9 @@ class Debugger
      *
      * @param mixed $var Variable to convert.
      * @param int $maxDepth The depth to generate nodes to. Defaults to 3.
-     * @return uim.cake.Error\debugs.NodeInterface The root node of the tree.
+     * @return uim.cake.Error\debugs.INode The root node of the tree.
      */
-    static function exportVarAsNodes($var, int $maxDepth = 3): NodeInterface
+    static function exportVarAsNodes($var, int $maxDepth = 3): INode
     {
         return static::export($var, new DebugContext($maxDepth));
     }
@@ -662,9 +662,9 @@ class Debugger
      *
      * @param mixed $var The variable to dump.
      * @param uim.cake.Error\debugs.DebugContext $context Dump context
-     * @return uim.cake.Error\debugs.NodeInterface The dumped variable.
+     * @return uim.cake.Error\debugs.INode The dumped variable.
      */
-    protected static function export($var, DebugContext $context): NodeInterface
+    protected static function export($var, DebugContext $context): INode
     {
         $type = static::getType($var);
         switch ($type) {
@@ -738,10 +738,10 @@ class Debugger
      *
      * @param object $var Object to convert.
      * @param uim.cake.Error\debugs.DebugContext $context The dump context.
-     * @return uim.cake.Error\debugs.NodeInterface
+     * @return uim.cake.Error\debugs.INode
      * @see uim.cake.Error\Debugger::exportVar()
      */
-    protected static function exportObject(object $var, DebugContext $context): NodeInterface
+    protected static function exportObject(object $var, DebugContext $context): INode
     {
         $isRef = $context.hasReference($var);
         $refNum = $context.getReferenceId($var);

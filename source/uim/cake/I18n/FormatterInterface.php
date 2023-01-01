@@ -11,7 +11,7 @@
 /**
  * Formatter Interface
  */
-interface FormatterInterface
+interface IFormatter
 {
     /**
      * Returns a string with all passed variables interpolated into the original

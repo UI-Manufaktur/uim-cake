@@ -10,7 +10,7 @@
 /**
  * Dump node for object properties.
  */
-class PropertyNode : NodeInterface
+class PropertyNode : INode
 {
     /**
      * @var string
@@ -23,7 +23,7 @@ class PropertyNode : NodeInterface
     private $visibility;
 
     /**
-     * @var uim.cake.Error\debugs.NodeInterface
+     * @var uim.cake.Error\debugs.INode
      */
     private $value;
 
@@ -32,9 +32,9 @@ class PropertyNode : NodeInterface
      *
      * @param string aName The property name
      * @param string|null $visibility The visibility of the property.
-     * @param uim.cake.Error\debugs.NodeInterface $value The property value node.
+     * @param uim.cake.Error\debugs.INode $value The property value node.
      */
-    this(string aName, ?string $visibility, NodeInterface $value) {
+    this(string aName, ?string $visibility, INode $value) {
         this.name = $name;
         this.visibility = $visibility;
         this.value = $value;
@@ -43,9 +43,9 @@ class PropertyNode : NodeInterface
     /**
      * Get the value
      *
-     * @return uim.cake.Error\debugs.NodeInterface
+     * @return uim.cake.Error\debugs.INode
      */
-    function getValue(): NodeInterface
+    function getValue(): INode
     {
         return this.value;
     }

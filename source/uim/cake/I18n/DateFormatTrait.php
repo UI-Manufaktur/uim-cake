@@ -1,7 +1,7 @@
 module uim.cake.I18n;
 
 import uim.cake.Chronos\ChronosInterface;
-import uim.cake.Chronos\DifferenceFormatterInterface;
+import uim.cake.Chronos\DifferenceIFormatter;
 import uim.cake.core.exceptions.CakeException;
 use Closure;
 use DateTime;
@@ -429,9 +429,9 @@ trait DateFormatTrait
     /**
      * Get the difference formatter instance.
      *
-     * @return uim.cake.Chronos\DifferenceFormatterInterface
+     * @return uim.cake.Chronos\DifferenceIFormatter
      */
-    static function getDiffFormatter(): DifferenceFormatterInterface
+    static function getDiffFormatter(): DifferenceIFormatter
     {
         // Use the static property defined in chronos.
         if (static::$diffFormatter == null) {
@@ -444,9 +444,9 @@ trait DateFormatTrait
     /**
      * Set the difference formatter instance.
      *
-     * @param uim.cake.Chronos\DifferenceFormatterInterface $formatter The formatter instance when setting.
+     * @param uim.cake.Chronos\DifferenceIFormatter $formatter The formatter instance when setting.
      */
-    static void setDiffFormatter(DifferenceFormatterInterface $formatter): void
+    static void setDiffFormatter(DifferenceIFormatter $formatter): void
     {
         static::$diffFormatter = $formatter;
     }

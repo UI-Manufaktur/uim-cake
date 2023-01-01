@@ -17,7 +17,7 @@ use RuntimeException;
  *
  * @internal
  */
-class TextFormatter : FormatterInterface
+class TextFormatter : IFormatter
 {
 
     function formatWrapper(string $contents, array $location): string
@@ -38,11 +38,11 @@ TEXT;
     }
 
     /**
-     * Convert a tree of NodeInterface objects into a plain text string.
+     * Convert a tree of INode objects into a plain text string.
      *
-     * @param uim.cake.Error\debugs.NodeInterface $node The node tree to dump.
+     * @param uim.cake.Error\debugs.INode $node The node tree to dump.
      */
-    string dump(NodeInterface $node): string
+    string dump(INode $node): string
     {
         $indent = 0;
 
@@ -50,12 +50,12 @@ TEXT;
     }
 
     /**
-     * Convert a tree of NodeInterface objects into a plain text string.
+     * Convert a tree of INode objects into a plain text string.
      *
-     * @param uim.cake.Error\debugs.NodeInterface $var The node tree to dump.
+     * @param uim.cake.Error\debugs.INode $var The node tree to dump.
      * @param int $indent The current indentation level.
      */
-    protected string export(NodeInterface $var, int $indent): string
+    protected string export(INode $var, int $indent): string
     {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {

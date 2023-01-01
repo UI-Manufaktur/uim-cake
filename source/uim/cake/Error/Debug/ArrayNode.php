@@ -10,7 +10,7 @@
 /**
  * Dump node for Array values.
  */
-class ArrayNode : NodeInterface
+class ArrayNode : INode
 {
     /**
      * @var array<uim.cake.Error\debugs.ArrayItemNode>

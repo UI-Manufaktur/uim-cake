@@ -12,14 +12,14 @@
  *
  * @unstable This interface is not stable and may change in the future.
  */
-interface FormatterInterface
+interface IFormatter
 {
     /**
-     * Convert a tree of NodeInterface objects into a plain text string.
+     * Convert a tree of INode objects into a plain text string.
      *
-     * @param uim.cake.Error\debugs.NodeInterface $node The node tree to dump.
+     * @param uim.cake.Error\debugs.INode $node The node tree to dump.
      */
-    string dump(NodeInterface $node): string;
+    string dump(INode $node): string;
 
     /**
      * Output a dump wrapper with location context.

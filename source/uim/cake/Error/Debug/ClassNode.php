@@ -10,7 +10,7 @@
 /**
  * Dump node for objects/class instances.
  */
-class ClassNode : NodeInterface
+class ClassNode : INode
 {
     /**
      * @var string

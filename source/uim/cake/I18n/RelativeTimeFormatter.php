@@ -1,14 +1,14 @@
 module uim.cake.I18n;
 
 import uim.cake.Chronos\ChronosInterface;
-import uim.cake.Chronos\DifferenceFormatterInterface;
+import uim.cake.Chronos\DifferenceIFormatter;
 
 /**
  * Helper class for formatting relative dates & times.
  *
  * @internal
  */
-class RelativeTimeFormatter : DifferenceFormatterInterface
+class RelativeTimeFormatter : DifferenceIFormatter
 {
     /**
      * Get the difference in a human readable format.

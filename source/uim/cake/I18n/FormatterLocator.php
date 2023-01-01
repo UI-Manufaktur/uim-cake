@@ -20,7 +20,7 @@ class FormatterLocator
     /**
      * A registry to retain formatter objects.
      *
-     * @var array<string, uim.cake.I18n\FormatterInterface|class-string<uim.cake.I18n\FormatterInterface>>
+     * @var array<string, uim.cake.I18n\IFormatter|class-string<uim.cake.I18n\IFormatter>>
      */
     protected $registry = [];
 
@@ -35,7 +35,7 @@ class FormatterLocator
     /**
      * Constructor.
      *
-     * @param array<string, class-string<uim.cake.I18n\FormatterInterface>> $registry An array of key-value pairs where the key is the
+     * @param array<string, class-string<uim.cake.I18n\IFormatter>> $registry An array of key-value pairs where the key is the
      * formatter name the value is a FQCN for the formatter.
      */
     this(array $registry = []) {
@@ -48,7 +48,7 @@ class FormatterLocator
      * Sets a formatter into the registry by name.
      *
      * @param string aName The formatter name.
-     * @param class-string<uim.cake.I18n\FormatterInterface> $className A FQCN for a formatter.
+     * @param class-string<uim.cake.I18n\IFormatter> $className A FQCN for a formatter.
      */
     void set(string aName, string $className): void
     {
@@ -60,23 +60,23 @@ class FormatterLocator
      * Gets a formatter from the registry by name.
      *
      * @param string aName The formatter to retrieve.
-     * @return uim.cake.I18n\FormatterInterface A formatter object.
+     * @return uim.cake.I18n\IFormatter A formatter object.
      * @throws uim.cake.I18n\exceptions.I18nException
      */
-    function get(string aName): FormatterInterface
+    function get(string aName): IFormatter
     {
         if (!isset(this.registry[$name])) {
             throw new I18nException("Formatter named `{$name}` has not been registered");
         }
 
         if (!this.converted[$name]) {
-            /** @var class-string<uim.cake.I18n\FormatterInterface> $formatter */
+            /** @var class-string<uim.cake.I18n\IFormatter> $formatter */
             $formatter = this.registry[$name];
             this.registry[$name] = new $formatter();
             this.converted[$name] = true;
         }
 
-        /** @var uim.cake.I18n\FormatterInterface */
+        /** @var uim.cake.I18n\IFormatter */
         return this.registry[$name];
     }
 }

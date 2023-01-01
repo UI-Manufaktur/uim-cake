@@ -14,7 +14,7 @@ use RuntimeException;
  *
  * @internal
  */
-class HtmlFormatter : FormatterInterface
+class HtmlFormatter : IFormatter
 {
     /**
      */
@@ -83,11 +83,11 @@ class HtmlFormatter : FormatterInterface
     }
 
     /**
-     * Convert a tree of NodeInterface objects into HTML
+     * Convert a tree of INode objects into HTML
      *
-     * @param uim.cake.Error\debugs.NodeInterface $node The node tree to dump.
+     * @param uim.cake.Error\debugs.INode $node The node tree to dump.
      */
-    string dump(NodeInterface $node): string
+    string dump(INode $node): string
     {
         $html = this.export($node, 0);
         $head = "";
@@ -100,12 +100,12 @@ class HtmlFormatter : FormatterInterface
     }
 
     /**
-     * Convert a tree of NodeInterface objects into HTML
+     * Convert a tree of INode objects into HTML
      *
-     * @param uim.cake.Error\debugs.NodeInterface $var The node tree to dump.
+     * @param uim.cake.Error\debugs.INode $var The node tree to dump.
      * @param int $indent The current indentation level.
      */
-    protected string export(NodeInterface $var, int $indent): string
+    protected string export(INode $var, int $indent): string
     {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {

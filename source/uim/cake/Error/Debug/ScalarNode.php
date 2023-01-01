@@ -10,7 +10,7 @@
 /**
  * Dump node for scalar values.
  */
-class ScalarNode : NodeInterface
+class ScalarNode : INode
 {
     /**
      * @var string

@@ -29,7 +29,7 @@ class Translator
     /**
      * The formatter to use when translating messages.
      *
-     * @var uim.cake.I18n\FormatterInterface
+     * @var uim.cake.I18n\IFormatter
      */
     protected $formatter;
 
@@ -51,13 +51,13 @@ class Translator
      *
      * @param string $locale The locale being used.
      * @param uim.cake.I18n\Package $package The Package containing keys and translations.
-     * @param uim.cake.I18n\FormatterInterface $formatter A message formatter.
+     * @param uim.cake.I18n\IFormatter $formatter A message formatter.
      * @param uim.cake.I18n\Translator|null $fallback A fallback translator.
      */
     this(
         string $locale,
         Package $package,
-        FormatterInterface $formatter,
+        IFormatter $formatter,
         ?Translator $fallback = null
     ) {
         this.locale = $locale;

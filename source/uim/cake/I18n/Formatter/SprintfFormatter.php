@@ -1,12 +1,12 @@
 module uim.cake.I18n\Formatter;
 
-import uim.cake.I18n\FormatterInterface;
+import uim.cake.I18n\IFormatter;
 
 /**
  * A formatter that will interpolate variables using sprintf and
  * select the correct plural form when required
  */
-class SprintfFormatter : FormatterInterface
+class SprintfFormatter : IFormatter
 {
     /**
      * Returns a string with all passed variables interpolated into the original

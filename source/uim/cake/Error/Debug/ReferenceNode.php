@@ -14,7 +14,7 @@
  * a reference node can be used after an object has been seen the
  * first time.
  */
-class ReferenceNode : NodeInterface
+class ReferenceNode : INode
 {
     /**
      * @var string

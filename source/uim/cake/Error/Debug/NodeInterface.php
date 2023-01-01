@@ -12,12 +12,12 @@
  *
  * Provides methods to look at contained value and iterate child nodes in the tree.
  */
-interface NodeInterface
+interface INode
 {
     /**
      * Get the child nodes of this node.
      *
-     * @return array<uim.cake.Error\debugs.NodeInterface>
+     * @return array<uim.cake.Error\debugs.INode>
      */
     function getChildren(): array;
 
