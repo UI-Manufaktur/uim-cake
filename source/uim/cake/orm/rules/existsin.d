@@ -50,7 +50,7 @@ class ExistsIn {
         if (is_string(_repository)) {
             if (!myOptions["repository"].hasAssociation(_repository)) {
                 throw new RuntimeException(sprintf(
-                    "ExistsIn rule for "%s" is invalid. "%s" is not associated with "%s".",
+                    "ExistsIn rule for "%s" is invalid~ "%s" is not associated with "%s".",
                     implode(", ", _fields),
                     _repository,
                     get_class(myOptions["repository"])
@@ -100,7 +100,7 @@ class ExistsIn {
 
         $primary = array_map(
             function (myKey) use (myTarget) {
-                return myTarget.aliasField(myKey) . " IS";
+                return myTarget.aliasField(myKey) ~ " IS";
             },
             $bindingKey
         );

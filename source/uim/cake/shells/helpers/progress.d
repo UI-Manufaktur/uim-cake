@@ -118,14 +118,14 @@ class ProgressHelper : Helper
         $barLen = (_width - $numberLen) * _progress / _total;
         $bar = "";
         if ($barLen > 1) {
-            $bar = str_repeat("=", (int)$barLen - 1) . ">";
+            $bar = str_repeat("=", (int)$barLen - 1) ~ ">";
         }
 
         $pad = ceil(_width - $numberLen - $barLen);
         if ($pad > 0) {
             $bar .= str_repeat(" ", (int)$pad);
         }
-        $percent = ($complete * 100) . "%";
+        $percent = ($complete * 100) ~ "%";
         $bar .= str_pad($percent, $numberLen, " ", STR_PAD_LEFT);
 
         _io.overwrite($bar, 0);

@@ -27,11 +27,11 @@ class CommandTask : Shell {
         $corePath = dirname(__DIR__);
         myShellList = _findShells(myShellList, $corePath, "CORE", $skipCore);
 
-        $corePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "Command";
+        $corePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ~ "Command";
         myShellList = _findShells(myShellList, $corePath, "CORE", $skipCore);
 
         foreach (myPlugins as myPlugin) {
-            myPluginPath = Plugin::classPath(myPlugin) . "Shell";
+            myPluginPath = Plugin::classPath(myPlugin) ~ "Shell";
             myShellList = _findShells(myShellList, myPluginPath, myPlugin, []);
         }
 

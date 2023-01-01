@@ -143,9 +143,9 @@ class Asset
             $pathPrefix = $options["pathPrefix"];
             $placeHolderVal = "";
             if (!empty($options["theme"])) {
-                $placeHolderVal = static::inflectString($options["theme"]) . "/";
+                $placeHolderVal = static::inflectString($options["theme"]) ~ "/";
             } elseif (isset($plugin)) {
-                $placeHolderVal = static::inflectString($plugin) . "/";
+                $placeHolderVal = static::inflectString($plugin) ~ "/";
             }
 
             $path = str_replace("{plugin}", $placeHolderVal, $pathPrefix) . $path;
@@ -164,7 +164,7 @@ class Asset
         }
 
         if (isset($plugin)) {
-            $path = static::inflectString($plugin) . "/" . $path;
+            $path = static::inflectString($plugin) ~ "/" ~ $path;
         }
 
         $optionTimestamp = null;
@@ -182,7 +182,7 @@ class Asset
             $fullBaseUrl = is_string($options["fullBase"])
                 ? $options["fullBase"]
                 : Router::fullBaseUrl();
-            $path = rtrim($fullBaseUrl, "/") . "/" . ltrim($path, "/");
+            $path = rtrim($fullBaseUrl, "/") ~ "/" ~ ltrim($path, "/");
         }
 
         return $path;
@@ -229,13 +229,13 @@ class Asset
         $timestampEnabled = $timestamp == "force" || ($timestamp == true && Configure::read("debug"));
         if ($timestampEnabled) {
             $filepath = preg_replace(
-                "/^" . preg_quote(static::requestWebroot(), "/") . "/",
+                "/^" ~ preg_quote(static::requestWebroot(), "/") ~ "/",
                 "",
                 urldecode($path)
             );
             $webrootPath = Configure::read("App.wwwRoot") . str_replace("/", DIRECTORY_SEPARATOR, $filepath);
             if (is_file($webrootPath)) {
-                return $path . "?" . filemtime($webrootPath);
+                return $path ~ "?" ~ filemtime($webrootPath);
             }
             // Check for plugins and org prefixed plugins.
             $segments = explode("/", ltrim($filepath, "/"));
@@ -247,11 +247,11 @@ class Asset
             if (Plugin::isLoaded($plugin)) {
                 unset($segments[0]);
                 $pluginPath = Plugin::path($plugin)
-                    . "webroot"
+                    ~ "webroot"
                     . DIRECTORY_SEPARATOR
                     . implode(DIRECTORY_SEPARATOR, $segments);
                 if (is_file($pluginPath)) {
-                    return $path . "?" . filemtime($pluginPath);
+                    return $path ~ "?" ~ filemtime($pluginPath);
                 }
             }
         }
@@ -276,14 +276,14 @@ class Asset
         $requestWebroot = static::requestWebroot();
 
         $asset = explode("?", $file);
-        $asset[1] = isset($asset[1]) ? "?" . $asset[1] : "";
+        $asset[1] = isset($asset[1]) ? "?" ~ $asset[1] : "";
         $webPath = $requestWebroot . $asset[0];
         $file = $asset[0];
 
         $themeName = $options["theme"];
         if ($themeName) {
             $file = trim($file, "/");
-            $theme = static::inflectString($themeName) . "/";
+            $theme = static::inflectString($themeName) ~ "/";
 
             if (DIRECTORY_SEPARATOR == "\\") {
                 $file = str_replace("/", "\\", $file);
@@ -293,7 +293,7 @@ class Asset
                 $webPath = $requestWebroot . $theme . $asset[0];
             } else {
                 $themePath = Plugin::path($themeName);
-                $path = $themePath . "webroot/" . $file;
+                $path = $themePath ~ "webroot/" ~ $file;
                 if (is_file($path)) {
                     $webPath = $requestWebroot . $theme . $asset[0];
                 }

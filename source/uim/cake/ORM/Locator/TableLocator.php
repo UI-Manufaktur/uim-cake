@@ -208,9 +208,9 @@ class TableLocator : AbstractLocator : ILocator
             $options["className"] = this.fallbackClassName;
         } else {
             $message = $options["className"] ?? $alias;
-            $message = "`" . $message . "`";
+            $message = "`" ~ $message ~ "`";
             if (strpos($message, "\\") == false) {
-                $message = "for alias " . $message;
+                $message = "for alias " ~ $message;
             }
             throw new MissingTableClassException([$message]);
         }

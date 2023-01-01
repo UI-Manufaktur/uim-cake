@@ -56,7 +56,7 @@ class EntityRoute : Route
         if (!$entity instanceof ArrayAccess && !is_array($entity)) {
             throw new RuntimeException(sprintf(
                 "Route `%s` expects the URL option `_entity` to be an array or object implementing \ArrayAccess, "
-                . "but `%s` passed.",
+                ~ "but `%s` passed.",
                 this.template,
                 getTypeName($entity)
             ));

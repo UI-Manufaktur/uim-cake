@@ -39,7 +39,7 @@ class InflectedRoute : Route
                 $params["plugin"] = Inflector::camelize($params["plugin"]);
             } else {
                 [$vendor, $plugin] = explode("/", $params["plugin"], 2);
-                $params["plugin"] = Inflector::camelize($vendor) . "/" . Inflector::camelize($plugin);
+                $params["plugin"] = Inflector::camelize($vendor) ~ "/" ~ Inflector::camelize($plugin);
             }
         }
 

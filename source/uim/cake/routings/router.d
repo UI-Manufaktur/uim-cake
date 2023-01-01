@@ -407,7 +407,7 @@ class Router
                 $full = true;
             }
             if (isset(myUrl["#"])) {
-                $frag = "#" . myUrl["#"];
+                $frag = "#" ~ myUrl["#"];
             }
             unset(myUrl["_ssl"], myUrl["_full"], myUrl["#"]);
 
@@ -468,7 +468,7 @@ class Router
 
         $protocol = preg_match("#^[a-z][a-z0-9+\-.]*\://#i", $output);
         if ($protocol == 0) {
-            $output = str_replace("//", "/", "/" . $output);
+            $output = str_replace("//", "/", "/" ~ $output);
             if ($full) {
                 $output = static::fullBaseUrl() . $output;
             }
@@ -557,7 +557,7 @@ class Router
                     static::$_requestContext["_host"]
                 );
                 if (!empty(static::$_requestContext["_port"])) {
-                    $base .= ":" . static::$_requestContext["_port"];
+                    $base .= ":" ~ static::$_requestContext["_port"];
                 }
 
                 Configure.write("App.fullBaseUrl", $base);
@@ -648,10 +648,10 @@ class Router
         if (myRequest) {
             $base = myRequest.getAttribute("base", "");
             if ($base != "" && stristr(myUrl, $base)) {
-                myUrl = preg_replace("/^" . preg_quote($base, "/") . "/", "", myUrl, 1);
+                myUrl = preg_replace("/^" ~ preg_quote($base, "/") ~ "/", "", myUrl, 1);
             }
         }
-        myUrl = "/" . myUrl;
+        myUrl = "/" ~ myUrl;
 
         while (indexOf(myUrl, "//") != false) {
             myUrl = str_replace("//", "/", myUrl);
@@ -811,7 +811,7 @@ class Router
             myParams = [];
         }
 
-        myPath = myParams["path"] ?? "/" . Inflector::dasherize(myName);
+        myPath = myParams["path"] ?? "/" ~ Inflector::dasherize(myName);
         unset(myParams["path"]);
 
         myParams = array_merge(myParams, ["prefix": Inflector::camelize(myName)]);
@@ -847,7 +847,7 @@ class Router
             myOptions = [];
         }
         myParams = ["plugin": myName];
-        myPath = myOptions["path"] ?? "/" . Inflector::dasherize(myName);
+        myPath = myOptions["path"] ?? "/" ~ Inflector::dasherize(myName);
         if (isset(myOptions["_namePrefix"])) {
             myParams["_namePrefix"] = myOptions["_namePrefix"];
         }

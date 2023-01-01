@@ -204,9 +204,9 @@ class TableLocator : AbstractLocator : ILocator
             myOptions["className"] = this.fallbackClassName;
         } else {
             myMessage = myOptions["className"] ?? myAlias;
-            myMessage = "`" . myMessage . "`";
+            myMessage = "`" ~ myMessage ~ "`";
             if (indexOf(myMessage, "\\") == false) {
-                myMessage = "for alias " . myMessage;
+                myMessage = "for alias " ~ myMessage;
             }
             throw new MissingTableClassException([myMessage]);
         }

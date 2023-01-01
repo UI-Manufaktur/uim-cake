@@ -39,11 +39,11 @@ class CommandTask : Shell
         $corePath = dirname(__DIR__);
         $shellList = _findShells($shellList, $corePath, "CORE", $skipCore);
 
-        $corePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "Command";
+        $corePath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ~ "Command";
         $shellList = _findShells($shellList, $corePath, "CORE", $skipCore);
 
         foreach ($plugins as $plugin) {
-            $pluginPath = Plugin::classPath($plugin) . "Shell";
+            $pluginPath = Plugin::classPath($plugin) ~ "Shell";
             $shellList = _findShells($shellList, $pluginPath, $plugin, []);
         }
 

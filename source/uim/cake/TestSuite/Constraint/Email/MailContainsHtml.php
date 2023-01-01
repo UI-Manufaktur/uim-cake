@@ -20,6 +20,6 @@ class MailContainsHtml : MailContains
             return sprintf("is in the html message of email #%d", this.at) . this.getAssertedMessages();
         }
 
-        return "is in the html message of an email" . this.getAssertedMessages();
+        return "is in the html message of an email" ~ this.getAssertedMessages();
     }
 }

@@ -542,7 +542,7 @@ trait IntegrationTestTrait
         $tokenUrl = $url;
 
         if ($query) {
-            $tokenUrl .= "?" . $query;
+            $tokenUrl .= "?" ~ $query;
         }
 
         parse_str($query, $queryData);
@@ -562,7 +562,7 @@ trait IntegrationTestTrait
             foreach (_request["headers"] as $k: $v) {
                 $name = strtoupper(str_replace("-", "_", $k));
                 if (!in_array($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
-                    $name = "HTTP_" . $name;
+                    $name = "HTTP_" ~ $name;
                 }
                 $env[$name] = $v;
             }

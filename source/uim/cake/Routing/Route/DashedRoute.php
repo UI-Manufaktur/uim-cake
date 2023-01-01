@@ -31,7 +31,7 @@ class DashedRoute : Route
         }
         [$vendor, $plugin] = explode("/", $plugin, 2);
 
-        return Inflector::camelize($vendor) . "/" . Inflector::camelize($plugin);
+        return Inflector::camelize($vendor) ~ "/" ~ Inflector::camelize($plugin);
     }
 
     /**

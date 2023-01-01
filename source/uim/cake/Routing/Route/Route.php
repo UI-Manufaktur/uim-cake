@@ -319,14 +319,14 @@ class Route
             if ($hasMatches) {
                 deprecationWarning(
                     "Colon prefixed route placeholders like `:foo` are deprecated."
-                    . " Use braced placeholders like `{foo}` instead."
+                    ~ " Use braced placeholders like `{foo}` instead."
                 );
             }
         }
         foreach ($namedElements as $matchArray) {
-            // Placeholder name, e.g. "foo"
+            // Placeholder name, e.g~ "foo"
             $name = $matchArray[1][0];
-            // Placeholder with colon/braces, e.g. "{foo}"
+            // Placeholder with colon/braces, e.g~ "{foo}"
             $search = preg_quote($matchArray[0][0]);
             if (isset(this.options[$name])) {
                 $option = "";
@@ -336,13 +336,13 @@ class Route
                 // phpcs:disable Generic.Files.LineLength
                 // Offset of the colon/braced placeholder in the full template string
                 if ($parsed[$matchArray[0][1] - 1] == "/") {
-                    $routeParams["/" . $search] = "(?:/(?P<" . $name . ">" . this.options[$name] . ")" . $option . ")" . $option;
+                    $routeParams["/" ~ $search] = "(?:/(?P<" ~ $name ~ ">" ~ this.options[$name] ~ ")" ~ $option ~ ")" ~ $option;
                 } else {
-                    $routeParams[$search] = "(?:(?P<" . $name . ">" . this.options[$name] . ")" . $option . ")" . $option;
+                    $routeParams[$search] = "(?:(?P<" ~ $name ~ ">" ~ this.options[$name] ~ ")" ~ $option ~ ")" ~ $option;
                 }
                 // phpcs:disable Generic.Files.LineLength
             } else {
-                $routeParams[$search] = "(?:(?P<" . $name . ">[^/]+))";
+                $routeParams[$search] = "(?:(?P<" ~ $name ~ ">[^/]+))";
             }
             $names[] = $name;
         }
@@ -357,7 +357,7 @@ class Route
         $mode = empty(this.options["multibytePattern"]) ? "" : "u";
         krsort($routeParams);
         $parsed = str_replace(array_keys($routeParams), $routeParams, $parsed);
-        _compiledRoute = "#^" . $parsed . "[/]*$#" . $mode;
+        _compiledRoute = "#^" ~ $parsed ~ "[/]*$#" ~ $mode;
         this.keys = $names;
 
         // Remove defaults that are also keys. They can cause match failures
@@ -388,10 +388,10 @@ class Route
         foreach ($keys as $key: $glue) {
             $value = null;
             if (
-                strpos(this.template, "{" . $key . "}") != false
-                || strpos(this.template, ":" . $key) != false
+                strpos(this.template, "{" ~ $key ~ "}") != false
+                || strpos(this.template, ":" ~ $key) != false
             ) {
-                $value = "_" . $key;
+                $value = "_" ~ $key;
             } elseif (isset(this.defaults[$key])) {
                 $value = this.defaults[$key];
             }
@@ -535,7 +535,7 @@ class Route
      */
     function hostMatches(string $host): bool
     {
-        $pattern = "@^" . str_replace("\*", ".*", preg_quote(this.options["_host"], "@")) . "$@";
+        $pattern = "@^" ~ str_replace("\*", ".*", preg_quote(this.options["_host"], "@")) ~ "$@";
 
         return preg_match($pattern, $host) != 0;
     }
@@ -552,7 +552,7 @@ class Route
         if (count(_extensions) && strpos($url, ".") != false) {
             foreach (_extensions as $ext) {
                 $len = strlen($ext) + 1;
-                if (substr($url, -$len) == "." . $ext) {
+                if (substr($url, -$len) == "." ~ $ext) {
                     return [substr($url, 0, $len * -1), $ext];
                 }
             }
@@ -737,7 +737,7 @@ class Route
         // check patterns for routed params
         if (!empty(this.options)) {
             foreach (this.options as $key: $pattern) {
-                if (isset($url[$key]) && !preg_match("#^" . $pattern . "$#u", (string)$url[$key])) {
+                if (isset($url[$key]) && !preg_match("#^" ~ $pattern ~ "$#u", (string)$url[$key])) {
                     return null;
                 }
             }
@@ -807,7 +807,7 @@ class Route
             if (this.braceKeys) {
                 $search[] = "{{$key}}";
             } else {
-                $search[] = ":" . $key;
+                $search[] = ":" ~ $key;
             }
             $replace[] = $string;
         }
@@ -837,7 +837,7 @@ class Route
 
             // append the port & scheme if they exists.
             if (isset($params["_port"])) {
-                $host .= ":" . $params["_port"];
+                $host .= ":" ~ $params["_port"];
             }
             $scheme = $params["_scheme"] ?? "http";
             $out = "{$scheme}://{$host}{$out}";
@@ -846,10 +846,10 @@ class Route
             $out = rtrim($out, "/");
         }
         if (!empty($params["_ext"])) {
-            $out .= "." . $params["_ext"];
+            $out .= "." ~ $params["_ext"];
         }
         if (!empty($query)) {
-            $out .= rtrim("?" . http_build_query($query), "?");
+            $out .= rtrim("?" ~ http_build_query($query), "?");
         }
 
         return $out;

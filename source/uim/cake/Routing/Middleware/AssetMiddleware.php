@@ -116,7 +116,7 @@ class AssetMiddleware : IMiddleware
             if (Plugin::isLoaded($plugin)) {
                 $parts = array_slice($parts, $i + 1);
                 $fileFragment = implode(DIRECTORY_SEPARATOR, $parts);
-                $pluginWebroot = Plugin::path($plugin) . "webroot" . DIRECTORY_SEPARATOR;
+                $pluginWebroot = Plugin::path($plugin) ~ "webroot" ~ DIRECTORY_SEPARATOR;
 
                 return $pluginWebroot . $fileFragment;
             }
@@ -145,7 +145,7 @@ class AssetMiddleware : IMiddleware
 
         return $response
             .withHeader("Content-Type", $contentType[0])
-            .withHeader("Cache-Control", "public,max-age=" . $maxAge)
+            .withHeader("Cache-Control", "public,max-age=" ~ $maxAge)
             .withHeader("Date", gmdate(DATE_RFC7231, time()))
             .withHeader("Last-Modified", gmdate(DATE_RFC7231, $modified))
             .withHeader("Expires", gmdate(DATE_RFC7231, $expire));

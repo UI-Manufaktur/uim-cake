@@ -332,7 +332,7 @@ class RouteBuilder
         $options += [
             "connectOptions": [],
             "inflect": "dasherize",
-            "id": static::ID . "|" . static::UUID,
+            "id": static::ID ~ "|" ~ static::UUID,
             "only": [],
             "actions": [],
             "map": [],
@@ -366,7 +366,7 @@ class RouteBuilder
             $prefix = $options["prefix"];
         }
         if (isset(_params["prefix"]) && $prefix) {
-            $prefix = _params["prefix"] . "/" . $prefix;
+            $prefix = _params["prefix"] ~ "/" ~ $prefix;
         }
 
         foreach ($resourceMap as $method: $params) {
@@ -376,7 +376,7 @@ class RouteBuilder
 
             $action = $options["actions"][$method] ?? $params["action"];
 
-            $url = "/" . implode("/", array_filter([$options["path"], $params["path"]]));
+            $url = "/" ~ implode("/", array_filter([$options["path"], $params["path"]]));
             $params = [
                 "controller": $name,
                 "action": $action,
@@ -394,8 +394,8 @@ class RouteBuilder
         }
 
         if ($callback != null) {
-            $idName = Inflector::singularize(Inflector::underscore($name)) . "_id";
-            $path = "/" . $options["path"] . "/{" . $idName . "}";
+            $idName = Inflector::singularize(Inflector::underscore($name)) ~ "_id";
+            $path = "/" ~ $options["path"] ~ "/{" ~ $idName ~ "}";
             this.scope($path, [], $callback);
         }
 
@@ -704,7 +704,7 @@ class RouteBuilder
 
             foreach (_params as $param: $val) {
                 if (isset($defaults[$param]) && $param != "prefix" && $defaults[$param] != $val) {
-                    $msg = "You cannot define routes that conflict with the scope. " .
+                    $msg = "You cannot define routes that conflict with the scope~ " ~
                         "Scope had %s = %s, while route had %s = %s";
                     throw new BadMethodCallException(sprintf(
                         $msg,
@@ -808,14 +808,14 @@ class RouteBuilder
             $callback = $params;
             $params = [];
         }
-        $path = "/" . Inflector::dasherize($name);
+        $path = "/" ~ Inflector::dasherize($name);
         $name = Inflector::camelize($name);
         if (isset($params["path"])) {
             $path = $params["path"];
             unset($params["path"]);
         }
         if (isset(_params["prefix"])) {
-            $name = _params["prefix"] . "/" . $name;
+            $name = _params["prefix"] ~ "/" ~ $name;
         }
         $params = array_merge($params, ["prefix": $name]);
         this.scope($path, $params, $callback);
@@ -853,7 +853,7 @@ class RouteBuilder
             $options = [];
         }
 
-        $path = $options["path"] ?? "/" . Inflector::dasherize($name);
+        $path = $options["path"] ?? "/" ~ Inflector::dasherize($name);
         unset($options["path"]);
         $options = ["plugin": $name] + $options;
         this.scope($path, $options, $callback);
@@ -960,7 +960,7 @@ class RouteBuilder
     function applyMiddleware(string ...$names) {
         foreach ($names as $name) {
             if (!_collection.middlewareExists($name)) {
-                $message = "Cannot apply "$name" middleware or middleware group. " .
+                $message = "Cannot apply "$name" middleware or middleware group~ " ~
                     "Use registerMiddleware() to register middleware.";
                 throw new RuntimeException($message);
             }

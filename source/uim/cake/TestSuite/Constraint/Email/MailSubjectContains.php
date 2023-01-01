@@ -57,7 +57,7 @@ class MailSubjectContains : MailConstraintBase
         }
         $result = implode(PHP_EOL, $messageMembers);
 
-        return PHP_EOL . "was: " . mb_substr($result, 0, 1000);
+        return PHP_EOL ~ "was: " ~ mb_substr($result, 0, 1000);
     }
 
     /**
@@ -68,6 +68,6 @@ class MailSubjectContains : MailConstraintBase
             return sprintf("is in an email subject #%d", this.at) . this.getAssertedMessages();
         }
 
-        return "is in an email subject" . this.getAssertedMessages();
+        return "is in an email subject" ~ this.getAssertedMessages();
     }
 }

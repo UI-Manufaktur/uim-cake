@@ -436,7 +436,7 @@ class Router
                 $full = true;
             }
             if (isset($url["#"])) {
-                $frag = "#" . $url["#"];
+                $frag = "#" ~ $url["#"];
             }
             unset($url["_ssl"], $url["_full"], $url["#"]);
 
@@ -497,7 +497,7 @@ class Router
 
         $protocol = preg_match("#^[a-z][a-z0-9+\-.]*\://#i", $output);
         if ($protocol == 0) {
-            $output = str_replace("//", "/", "/" . $output);
+            $output = str_replace("//", "/", "/" ~ $output);
             if ($full) {
                 $output = static::fullBaseUrl() . $output;
             }
@@ -589,7 +589,7 @@ class Router
                     static::$_requestContext["_host"]
                 );
                 if (!empty(static::$_requestContext["_port"])) {
-                    $base .= ":" . static::$_requestContext["_port"];
+                    $base .= ":" ~ static::$_requestContext["_port"];
                 }
 
                 Configure::write("App.fullBaseUrl", $base);
@@ -699,10 +699,10 @@ class Router
         if ($request) {
             $base = $request.getAttribute("base", "");
             if ($base != "" && stristr($url, $base)) {
-                $url = preg_replace("/^" . preg_quote($base, "/") . "/", "", $url, 1);
+                $url = preg_replace("/^" ~ preg_quote($base, "/") ~ "/", "", $url, 1);
             }
         }
-        $url = "/" . $url;
+        $url = "/" ~ $url;
 
         while (strpos($url, "//") != false) {
             $url = str_replace("//", "/", $url);
@@ -865,7 +865,7 @@ class Router
             $params = [];
         }
 
-        $path = $params["path"] ?? "/" . Inflector::dasherize($name);
+        $path = $params["path"] ?? "/" ~ Inflector::dasherize($name);
         unset($params["path"]);
 
         $params = array_merge($params, ["prefix": Inflector::camelize($name)]);
@@ -902,7 +902,7 @@ class Router
             $options = [];
         }
         $params = ["plugin": $name];
-        $path = $options["path"] ?? "/" . Inflector::dasherize($name);
+        $path = $options["path"] ?? "/" ~ Inflector::dasherize($name);
         if (isset($options["_namePrefix"])) {
             $params["_namePrefix"] = $options["_namePrefix"];
         }

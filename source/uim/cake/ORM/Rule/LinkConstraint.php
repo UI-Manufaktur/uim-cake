@@ -155,7 +155,7 @@ class LinkConstraint
         $primaryKey = (array)$source.getPrimaryKey();
         if (!$entity.has($primaryKey)) {
             throw new \RuntimeException(sprintf(
-                "LinkConstraint rule on `%s` requires all primary key values for building the counting " .
+                "LinkConstraint rule on `%s` requires all primary key values for building the counting " ~
                 "conditions, expected values for `(%s)`, got `(%s)`.",
                 $source.getAlias(),
                 implode(", ", $primaryKey),

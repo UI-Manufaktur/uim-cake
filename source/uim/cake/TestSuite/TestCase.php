@@ -309,7 +309,7 @@ abstract class TestCase : BaseTestCase
     /**
      * Chooses which fixtures to load for a given test
      *
-     * Each parameter is a model name that corresponds to a fixture, i.e. "Posts", "Authors", etc.
+     * Each parameter is a model name that corresponds to a fixture, i.e~ "Posts", "Authors", etc.
      * Passing no parameters will cause all fixtures on the test case to load.
      *
      * @return void
@@ -355,7 +355,7 @@ abstract class TestCase : BaseTestCase
     {
         $appArgs = $appArgs ?? [rtrim(CONFIG, DIRECTORY_SEPARATOR)];
         /** @psalm-var class-string */
-        $className = Configure::read("App.namespace") . "\\Application";
+        $className = Configure::read("App.namespace") ~ "\\Application";
         try {
             $reflect = new ReflectionClass($className);
             /** @var uim.cake.routings.IRoutingApplication $app */
@@ -630,9 +630,9 @@ abstract class TestCase : BaseTestCase
     void assertRegExpSql(string $pattern, string $actual, bool $optional = false): void
     {
         $optional = $optional ? "?" : "";
-        $pattern = str_replace("<", "[`"\[]" . $optional, $pattern);
-        $pattern = str_replace(">", "[`"\]]" . $optional, $pattern);
-        this.assertMatchesRegularExpression("#" . $pattern . "#", $actual);
+        $pattern = str_replace("<", "[`"\[]" ~ $optional, $pattern);
+        $pattern = str_replace(">", "[`"\]]" ~ $optional, $pattern);
+        this.assertMatchesRegularExpression("#" ~ $pattern ~ "#", $actual);
     }
 
     /**
@@ -719,7 +719,7 @@ abstract class TestCase : BaseTestCase
                     $tags = $matches[1];
                     $type = "Regex matches";
                 } else {
-                    $tags = "\s*" . preg_quote($tags, "/");
+                    $tags = "\s*" ~ preg_quote($tags, "/");
                     $type = "Text equals";
                 }
                 $regex[] = [
@@ -768,7 +768,7 @@ abstract class TestCase : BaseTestCase
                         $explanations[] = sprintf("Attribute "%s" == "%s"", $attr, $val);
                         $val = preg_quote($val, "/");
                     }
-                    $attrs[] = "[\s]+" . preg_quote($attr, "/") . "=" . $quotes . $val . $quotes;
+                    $attrs[] = "[\s]+" ~ preg_quote($attr, "/") ~ "=" ~ $quotes . $val . $quotes;
                     $i++;
                 }
                 if ($attrs) {
@@ -860,7 +860,7 @@ abstract class TestCase : BaseTestCase
                     debug($string);
                     debug($regex);
                 }
-                this.assertTrue(false, "Attribute did not match. Was expecting " . $explains[$j]);
+                this.assertTrue(false, "Attribute did not match. Was expecting " ~ $explains[$j]);
             }
             $len = count($asserts);
         } while ($len > 0);
@@ -985,7 +985,7 @@ abstract class TestCase : BaseTestCase
         if (empty($options["entityClass"]) && $mock.getEntityClass() == Entity::class) {
             $parts = explode("\\", $className);
             $entityAlias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
-            $entityClass = implode("\\", array_slice($parts, 0, -1)) . "\\Entity\\" . $entityAlias;
+            $entityClass = implode("\\", array_slice($parts, 0, -1)) ~ "\\Entity\\" ~ $entityAlias;
             if (class_exists($entityClass)) {
                 $mock.setEntityClass($entityClass);
             }

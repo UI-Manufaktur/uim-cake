@@ -126,7 +126,7 @@ trait EmailTrait
      *
      * @param int $at Email index
      * @param string $expected Contents
-     * @param string $parameter Email getter parameter (e.g. "cc", "bcc")
+     * @param string $parameter Email getter parameter (e.g~ "cc", "bcc")
      * @param string $message Message
      */
     void assertMailSentWithAt(int $at, string $expected, string $parameter, string $message = ""): void
@@ -205,7 +205,7 @@ trait EmailTrait
      * Asserts an email contains the expected value within an Email getter
      *
      * @param string $expected Contents
-     * @param string $parameter Email getter parameter (e.g. "cc", "subject")
+     * @param string $parameter Email getter parameter (e.g~ "cc", "subject")
      * @param string $message Message
      */
     void assertMailSentWith(string $expected, string $parameter, string $message = ""): void

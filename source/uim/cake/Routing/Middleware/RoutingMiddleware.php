@@ -62,8 +62,8 @@ class RoutingMiddleware : IMiddleware
     this(IRoutingApplication $app, ?string $cacheConfig = null) {
         if ($cacheConfig != null) {
             deprecationWarning(
-                "Use of routing cache is deprecated and will be removed in 5.0. " .
-                "Upgrade to the new `CakeDC/CachedRouting` plugin. " .
+                "Use of routing cache is deprecated and will be removed in 5.0~ " ~
+                "Upgrade to the new `CakeDC/CachedRouting` plugin~ " ~
                 "See https://github.com/CakeDC/cakephp-cached-routing"
             );
         }

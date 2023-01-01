@@ -36,7 +36,7 @@ class ConnectionHelper
                 $original = substr($connection, 5);
                 ConnectionManager::alias($connection, $original);
             } else {
-                $test = "test_" . $connection;
+                $test = "test_" ~ $connection;
                 ConnectionManager::alias($test, $connection);
             }
         }
