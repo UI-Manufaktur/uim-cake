@@ -19,7 +19,7 @@ class ContentsContainRow : ContentsRegExp
             return preg_quote($cell, "/");
         }, $other);
         $cells = implode("\s+\|\s+", $row);
-        $pattern = "/" . $cells . "/";
+        $pattern = "/" ~ $cells ~ "/";
 
         return preg_match($pattern, this.contents) > 0;
     }
@@ -35,6 +35,6 @@ class ContentsContainRow : ContentsRegExp
      * @param mixed $other Expected content
      */
     string failureDescription($other) {
-        return "`" . this.exporter().shortenedExport($other) . "` " . this.toString();
+        return "`" ~ this.exporter().shortenedExport($other) ~ "` " ~ this.toString();
     }
 }

@@ -25,7 +25,7 @@ bootstrap logic, and binds your commands. Lets put our entrypoint script in
 #!/usr/bin/php -q
 <?php
 // Check platform requirements
-require dirname(__DIR__) . "/vendor/autoload.php";
+require dirname(__DIR__) ~ "/vendor/autoload.php";
 
 use App\Application;
 import uim.cake.console.commandRunner;

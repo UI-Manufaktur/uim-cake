@@ -440,7 +440,7 @@ class Shell
         try {
             [this.params, this.args] = this.OptionParser.parse($argv, _io);
         } catch (ConsoleException $e) {
-            this.err("Error: " . $e.getMessage());
+            this.err("Error: " ~ $e.getMessage());
 
             return false;
         }
@@ -487,7 +487,7 @@ class Shell
         try {
             _io.err(this.OptionParser.help($command));
         } catch (ConsoleException $e) {
-            this.err("Error: " . $e.getMessage());
+            this.err("Error: " ~ $e.getMessage());
         }
 
         return false;
@@ -545,7 +545,7 @@ class Shell
      */
     function getOptionParser(): ConsoleOptionParser
     {
-        $name = (this.plugin ? this.plugin . "." : "") . this.name;
+        $name = (this.plugin ? this.plugin ~ "." : "") . this.name;
         $parser = new ConsoleOptionParser($name);
         $parser.setRootName(this.rootName);
 
@@ -757,7 +757,7 @@ class Shell
      * @psalm-return never-return
      */
     void abort(string $message, int $exitCode = self::CODE_ERROR) {
-        _io.err("<error>" . $message . "</error>");
+        _io.err("<error>" ~ $message ~ "</error>");
         throw new StopException($message, $exitCode);
     }
 
@@ -845,7 +845,7 @@ class Shell
      */
     string shortPath(string $file) {
         $shortPath = str_replace(ROOT, "", $file);
-        $shortPath = str_replace(".." . DIRECTORY_SEPARATOR, "", $shortPath);
+        $shortPath = str_replace(".." ~ DIRECTORY_SEPARATOR, "", $shortPath);
         $shortPath = str_replace(DIRECTORY_SEPARATOR, "/", $shortPath);
 
         return str_replace("//", DIRECTORY_SEPARATOR, $shortPath);

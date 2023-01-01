@@ -29,6 +29,6 @@ class ContentsRegExp : ContentsBase
      * @param mixed $other Expected
      */
     string failureDescription($other) {
-        return "`" . $other . "` " . this.toString();
+        return "`" ~ $other ~ "` " ~ this.toString();
     }
 }

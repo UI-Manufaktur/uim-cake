@@ -100,7 +100,7 @@ class ConsoleInputOption
         }
         if (isset(_default) && this.prompt) {
             throw new ConsoleException(
-                "You cannot set both `prompt` and `default` options. " .
+                "You cannot set both `prompt` and `default` options~ " ~
                 "Use either a static `default` or interactive `prompt`"
             );
         }
@@ -138,7 +138,7 @@ class ConsoleInputOption
             $default .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
         if (_short != "") {
-            $short = ", -" . _short;
+            $short = ", -" ~ _short;
         }
         $name = sprintf("--%s%s", _name, $short);
         if (strlen($name) < $width) {
@@ -156,13 +156,13 @@ class ConsoleInputOption
      * Get the usage value for this option
      */
     string usage() {
-        $name = _short == "" ? "--" . _name : "-" . _short;
+        $name = _short == "" ? "--" ~ _name : "-" ~ _short;
         $default = "";
         if (_default != null && !is_bool(_default) && _default != "") {
-            $default = " " . _default;
+            $default = " " ~ _default;
         }
         if (_choices) {
-            $default = " " . implode("|", _choices);
+            $default = " " ~ implode("|", _choices);
         }
         $template = "[%s%s]";
         if (this.isRequired()) {
@@ -257,10 +257,10 @@ class ConsoleInputOption
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent.addChild("option");
-        $option.addAttribute("name", "--" . _name);
+        $option.addAttribute("name", "--" ~ _name);
         $short = "";
         if (_short != "") {
-            $short = "-" . _short;
+            $short = "-" ~ _short;
         }
         $default = _default;
         if ($default == true) {

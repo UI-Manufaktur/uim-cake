@@ -409,7 +409,7 @@ class Shell {
         try {
             [this.params, this.args] = this.OptionParser.parse($argv);
         } catch (ConsoleException $e) {
-            this.err("Error: " . $e.getMessage());
+            this.err("Error: " ~ $e.getMessage());
 
             return false;
         }
@@ -456,7 +456,7 @@ class Shell {
         try {
             _io.err(this.OptionParser.help($command));
         } catch (ConsoleException $e) {
-            this.err("Error: " . $e.getMessage());
+            this.err("Error: " ~ $e.getMessage());
         }
 
         return false;
@@ -513,7 +513,7 @@ class Shell {
      * @link https://book.UIM.org/4/en/console-and-shells.html#configuring-options-and-generating-help
      */
     ConsoleOptionParser getOptionParser() {
-        myName = (this.plugin ? this.plugin . "." : "") . this.name;
+        myName = (this.plugin ? this.plugin ~ "." : "") . this.name;
         $parser = new ConsoleOptionParser(myName);
         $parser.setRootName(this.rootName);
 
@@ -716,7 +716,7 @@ class Shell {
      * @psalm-return never-return
      */
     void abort(string myMessage, int $exitCode = self::CODE_ERROR) {
-        _io.err("<error>" . myMessage . "</error>");
+        _io.err("<error>" ~ myMessage ~ "</error>");
         throw new StopException(myMessage, $exitCode);
     }
 
@@ -803,7 +803,7 @@ class Shell {
      */
     string shortPath(string absoluteFilePath) {
         $shortPath = str_replace(ROOT, "", absoluteFilePath);
-        $shortPath = str_replace(".." . DIRECTORY_SEPARATOR, "", $shortPath);
+        $shortPath = str_replace(".." ~ DIRECTORY_SEPARATOR, "", $shortPath);
         $shortPath = str_replace(DIRECTORY_SEPARATOR, "/", $shortPath);
 
         return str_replace("//", DIRECTORY_SEPARATOR, $shortPath);

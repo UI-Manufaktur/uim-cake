@@ -707,7 +707,7 @@ class ConsoleOptionParser {
             if ($subparser.getDescription() == "") {
                 $subparser.setDescription($command.getRawHelp());
             }
-            $subparser.setCommand(this.getCommand() . " " . $subcommand);
+            $subparser.setCommand(this.getCommand() ~ " " ~ $subcommand);
             $subparser.setRootName(this.rootName);
 
             return $subparser.help(null, $format, $width);
@@ -774,7 +774,7 @@ class ConsoleOptionParser {
             $flags = str_split(myKey);
             myKey = $flags[0];
             for ($i = 1, $len = count($flags); $i < $len; $i++) {
-                array_unshift(_tokens, "-" . $flags[$i]);
+                array_unshift(_tokens, "-" ~ $flags[$i]);
             }
         }
         if (!isset(_shortOptions[myKey])) {

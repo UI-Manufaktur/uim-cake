@@ -253,7 +253,7 @@ class CommandRunner : IEventDispatcher {
       }
       if (!$commands.has(myName)) {
           throw new MissingOptionException(
-              "Unknown command `{this.root} {myName}`. " .
+              "Unknown command `{this.root} {myName}`~ " ~
               "Run `{this.root} --help` to get the list of commands.",
               myName,
               $commands.keys()

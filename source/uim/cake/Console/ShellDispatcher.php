@@ -373,7 +373,7 @@ class ShellDispatcher
      */
     void help() {
         trigger_error(
-            "Console help cannot be generated from Shell classes anymore. " .
+            "Console help cannot be generated from Shell classes anymore~ " ~
             "Upgrade your application to import uim.cake.consoles.CommandRunner instead.",
             E_USER_WARNING
         );
@@ -384,7 +384,7 @@ class ShellDispatcher
      */
     void version() {
         trigger_error(
-            "Version information cannot be generated from Shell classes anymore. " .
+            "Version information cannot be generated from Shell classes anymore~ " ~
             "Upgrade your application to import uim.cake.consoles.CommandRunner instead.",
             E_USER_WARNING
         );

@@ -198,7 +198,7 @@ class ConsoleOutput
         if (_outputAs == static::PLAIN) {
             $tags = implode("|", array_keys(static::$_styles));
 
-            return preg_replace("#</?(?:" . $tags . ")>#", "", $text);
+            return preg_replace("#</?(?:" ~ $tags ~ ")>#", "", $text);
         }
 
         return preg_replace_callback(
@@ -217,7 +217,7 @@ class ConsoleOutput
     protected string _replaceTags(array $matches) {
         $style = this.getStyle($matches["tag"]);
         if (empty($style)) {
-            return "<" . $matches["tag"] . ">" . $matches["text"] . "</" . $matches["tag"] . ">";
+            return "<" ~ $matches["tag"] ~ ">" ~ $matches["text"] ~ "</" ~ $matches["tag"] ~ ">";
         }
 
         $styleInfo = [];
@@ -234,7 +234,7 @@ class ConsoleOutput
             }
         }
 
-        return "\033[" . implode(";", $styleInfo) . "m" . $matches["text"] . "\033[0m";
+        return "\033[" ~ implode(";", $styleInfo) ~ "m" ~ $matches["text"] ~ "\033[0m";
     }
 
     /**

@@ -69,10 +69,10 @@ class RoutesGenerateCommand : Command {
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription(
-            "Check a routing array against the routes. " .
-            "Will output the URL if there is a match." .
-            "\n\n" .
-            "Routing parameters should be supplied in a key:value format. " .
+            "Check a routing array against the routes~ " ~
+            "Will output the URL if there is a match." ~
+            "\n\n" ~
+            "Routing parameters should be supplied in a key:value format~ " ~
             "For example `controller:Articles action:view 2`"
         );
 

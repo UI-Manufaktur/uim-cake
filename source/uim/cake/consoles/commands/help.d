@@ -84,7 +84,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
             $io.out("<info>{$prefix}</info>:");
             sort(myNames);
             foreach (myNames as myName) {
-                $io.out(" - " . myName);
+                $io.out(" - " ~ myName);
             }
             $io.out("");
         }
@@ -104,7 +104,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
         if (Configure::check("App.dir")) {
             $appPath = rtrim(Configure::read("App.dir"), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
             // Extra space is to align output
-            myPaths["app"] = " " . $appPath;
+            myPaths["app"] = " " ~ $appPath;
         }
         if (defined("ROOT")) {
             myPaths["root"] = rtrim(ROOT, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
@@ -154,7 +154,7 @@ class HelpCommand : BaseCommand : ICommandCollectionAware {
             myShell.addAttribute("name", myName);
             myShell.addAttribute("call_as", myName);
             myShell.addAttribute("provider", myClass);
-            myShell.addAttribute("help", myName . " -h");
+            myShell.addAttribute("help", myName ~ " -h");
         }
         $io.setOutputAs(ConsoleOutput::RAW);
         $io.out(myShells.saveXML());

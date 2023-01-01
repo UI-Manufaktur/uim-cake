@@ -66,7 +66,7 @@ class RoutesCheckCommand : Command {
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription(
-            "Check a URL string against the routes. " .
+            "Check a URL string against the routes~ " ~
             "Will output the routing parameters the route resolves to."
         )
         .addArgument("url", [

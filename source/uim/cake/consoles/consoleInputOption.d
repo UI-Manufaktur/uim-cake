@@ -110,7 +110,7 @@ class ConsoleInputOption {
             $default .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
         if (_short != "") {
-            $short = ", -" . _short;
+            $short = ", -" ~ _short;
         }
         myName = sprintf("--%s%s", name, $short);
         if (strlen(myName) < $width) {
@@ -128,13 +128,13 @@ class ConsoleInputOption {
      * Get the usage value for this option
      */
     string usage() {
-        myName = _short == "" ? "--" . name : "-" . _short;
+        myName = _short == "" ? "--" ~ name : "-" ~ _short;
         $default = "";
         if (_default  !is null && !is_bool(_default) && _default != "") {
-            $default = " " . _default;
+            $default = " " ~ _default;
         }
         if (_choices) {
-            $default = " " . implode("|", _choices);
+            $default = " " ~ implode("|", _choices);
         }
         myTemplate = "[%s%s]";
         if (this.isRequired()) {
@@ -204,10 +204,10 @@ class ConsoleInputOption {
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent.addChild("option");
-        $option.addAttribute("name", "--" . name);
+        $option.addAttribute("name", "--" ~ name);
         $short = "";
         if (_short != "") {
-            $short = "-" . _short;
+            $short = "-" ~ _short;
         }
         $default = _default;
         if ($default == true) {

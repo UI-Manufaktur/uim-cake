@@ -136,7 +136,7 @@ abstract class BaseCommand : ICommand {
                 $parser.argumentNames()
             );
         } catch (ConsoleException $e) {
-            $io.err("Error: " . $e.getMessage());
+            $io.err("Error: " ~ $e.getMessage());
 
             return static::CODE_ERROR;
         }

@@ -21,13 +21,13 @@ class CommandScanner
      */
     array scanCore() {
         $coreShells = this.scanDir(
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . "Shell" . DIRECTORY_SEPARATOR,
+            dirname(__DIR__) . DIRECTORY_SEPARATOR ~ "Shell" ~ DIRECTORY_SEPARATOR,
             "Cake\Shell\\",
             "",
             ["command_list"]
         );
         $coreCommands = this.scanDir(
-            dirname(__DIR__) . DIRECTORY_SEPARATOR . "Command" . DIRECTORY_SEPARATOR,
+            dirname(__DIR__) . DIRECTORY_SEPARATOR ~ "Command" ~ DIRECTORY_SEPARATOR,
             "Cake\Command\\",
             "",
             ["command_list"]
@@ -45,13 +45,13 @@ class CommandScanner
         $appmodule = Configure::read("App.module");
         $appShells = this.scanDir(
             App::classPath("Shell")[0],
-            $appmodule . "\Shell\\",
+            $appmodule ~ "\Shell\\",
             "",
             []
         );
         $appCommands = this.scanDir(
             App::classPath("Command")[0],
-            $appmodule . "\Command\\",
+            $appmodule ~ "\Command\\",
             "",
             []
         );
@@ -71,10 +71,10 @@ class CommandScanner
         }
         myPath = Plugin::classPath(myPlugin);
         $module = str_replace("/", "\\", myPlugin);
-        $prefix = Inflector::underscore(myPlugin) . ".";
+        $prefix = Inflector::underscore(myPlugin) ~ ".";
 
-        $commands = this.scanDir(myPath . "Command", $module . "\Command\\", $prefix, []);
-        myShells = this.scanDir(myPath . "Shell", $module . "\Shell\\", $prefix, []);
+        $commands = this.scanDir(myPath ~ "Command", $module ~ "\Command\\", $prefix, []);
+        myShells = this.scanDir(myPath ~ "Shell", $module ~ "\Shell\\", $prefix, []);
 
         return array_merge(myShells, $commands);
     }

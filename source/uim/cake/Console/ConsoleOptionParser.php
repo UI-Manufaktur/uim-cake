@@ -687,7 +687,7 @@ class ConsoleOptionParser
             if (!isset($params[$name]) && $prompt) {
                 if (!$io) {
                     throw new ConsoleException(
-                        "Cannot use interactive option prompts without a ConsoleIo instance. " .
+                        "Cannot use interactive option prompts without a ConsoleIo instance~ " ~
                         "Please provide a `$io` parameter to `parse()`."
                     );
                 }
@@ -751,7 +751,7 @@ class ConsoleOptionParser
             if ($subparser.getDescription() == "") {
                 $subparser.setDescription($command.getRawHelp());
             }
-            $subparser.setCommand(this.getCommand() . " " . $subcommand);
+            $subparser.setCommand(this.getCommand() ~ " " ~ $subcommand);
             $subparser.setRootName(this.rootName);
 
             return $subparser.help(null, $format, $width);
@@ -820,7 +820,7 @@ class ConsoleOptionParser
             $flags = str_split($key);
             $key = $flags[0];
             for ($i = 1, $len = count($flags); $i < $len; $i++) {
-                array_unshift(_tokens, "-" . $flags[$i]);
+                array_unshift(_tokens, "-" ~ $flags[$i]);
             }
         }
         if (!isset(_shortOptions[$key])) {

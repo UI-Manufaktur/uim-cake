@@ -254,7 +254,7 @@ class ConsoleIo {
     /**
      * Wraps a message with a given message type, e.g. <warning>
      *
-     * @param string myMessageType The message type, e.g. "warning".
+     * @param string myMessageType The message type, e.g~ "warning".
      * @param array<string>|string myMessage The message to wrap.
      * @return The message wrapped with the given message type.
      */
@@ -413,7 +413,7 @@ class ConsoleIo {
             }
         }
 
-        $printOptions = "(" . implode("/", myOptions) . ")";
+        $printOptions = "(" ~ implode("/", myOptions) ~ ")";
         myOptions = array_merge(
             array_map("strtolower", myOptions),
             array_map("strtoupper", myOptions),
@@ -449,7 +449,7 @@ class ConsoleIo {
         if ($default  !is null) {
             $defaultText = "[$default] ";
         }
-        _out.write("<question>" . $prompt . "</question>myOptionsText\n$defaultText> ", 0);
+        _out.write("<question>" ~ $prompt ~ "</question>myOptionsText\n$defaultText> ", 0);
         myResult = _in.read();
 
         myResult = myResult is null ? "" : trim(myResult);

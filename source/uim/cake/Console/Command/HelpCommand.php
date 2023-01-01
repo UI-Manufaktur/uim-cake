@@ -104,9 +104,9 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
             $io.out("<info>{$prefix}</info>:");
             sort($names);
             foreach ($names as $data) {
-                $io.out(" - " . $data["name"]);
+                $io.out(" - " ~ $data["name"]);
                 if ($data["description"]) {
-                    $io.info(str_pad(" \u{2514}", 13, "\u{2500}") . " " . $data["description"]);
+                    $io.info(str_pad(" \u{2514}", 13, "\u{2500}") ~ " " ~ $data["description"]);
                 }
             }
             $io.out("");
@@ -127,7 +127,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
         if (Configure::check("App.dir")) {
             $appPath = rtrim(Configure::read("App.dir"), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
             // Extra space is to align output
-            $paths["app"] = " " . $appPath;
+            $paths["app"] = " " ~ $appPath;
         }
         if (defined("ROOT")) {
             $paths["root"] = rtrim(ROOT, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
@@ -176,7 +176,7 @@ class HelpCommand : BaseCommand : CommandCollectionAwareInterface
             $shell.addAttribute("name", $name);
             $shell.addAttribute("call_as", $name);
             $shell.addAttribute("provider", $class);
-            $shell.addAttribute("help", $name . " -h");
+            $shell.addAttribute("help", $name ~ " -h");
         }
         $io.setOutputAs(ConsoleOutput::RAW);
         $io.out($shells.saveXML());

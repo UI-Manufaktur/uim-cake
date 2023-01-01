@@ -61,7 +61,7 @@ class StubConsoleInput : ConsoleInput
             $nth = $formatter.format(this.currentIndex + 1);
 
             $replies = implode(", ", this.replies);
-            $message = "There are no more input replies available. This is the {$nth} read operation, " .
+            $message = "There are no more input replies available. This is the {$nth} read operation, " ~
                 "only {$total} replies were set.\nThe provided replies are: {$replies}";
             throw new MissingConsoleInputException($message);
         }

@@ -85,7 +85,7 @@ class HelpFormatter {
             }
             $out[] = "";
             $out[] = sprintf(
-                "To see help on a subcommand use <info>`" . _alias . " %s [subcommand] --help`</info>",
+                "To see help on a subcommand use <info>`" ~ _alias ~ " %s [subcommand] --help`</info>",
                 $parser.getCommand()
             );
             $out[] = "";
@@ -135,7 +135,7 @@ class HelpFormatter {
      * be indicated with []
      */
     protected string _generateUsage() {
-        $usage = [_alias . " " . _parser.getCommand()];
+        $usage = [_alias ~ " " ~ _parser.getCommand()];
         $subcommands = _parser.subcommands();
         if (!empty($subcommands)) {
             $usage[] = "[subcommand]";

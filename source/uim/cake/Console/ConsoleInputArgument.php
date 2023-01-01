@@ -35,7 +35,7 @@ class ConsoleInputArgument {
     this($name, $help = "", $required = false, $choices = []) {
         if (is_array($name) && isset($name["name"])) {
             foreach ($name as $key: $value) {
-                this.{"_" . $key} = $value;
+                this.{"_" ~ $key} = $value;
             }
         } else {
             /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
@@ -94,9 +94,9 @@ class ConsoleInputArgument {
         if (_choices) {
             $name = implode("|", _choices);
         }
-        $name = "<" . $name . ">";
+        $name = "<" ~ $name ~ ">";
         if (!this.isRequired()) {
-            $name = "[" . $name . "]";
+            $name = "[" ~ $name ~ "]";
         }
 
         return $name;
