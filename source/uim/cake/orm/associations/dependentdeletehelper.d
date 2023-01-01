@@ -1,7 +1,12 @@
-module uim.cake.orm.associations;
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.caches.associations.dependentdeletehelper;
 
-import uim.cake.datasources\IEntity;
-import uim.cake.orm.associations;
+@safe:
+import uim.cake;
 
 /**
  * Helper class for cascading deletes in associations.
@@ -17,14 +22,15 @@ class DependentDeleteHelper
      *
      * @param uim.cake.orm.Association $association The association callbacks are being cascaded on.
      * @param uim.cake.Datasource\IEntity $entity The entity that started the cascaded delete.
-     * @param array<string, mixed> myOptions The options for the original delete.
+     * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success.
      */
-    bool cascadeDelete(Association $association, IEntity $entity, array myOptions = []) {
+    function cascadeDelete(Association $association, IEntity $entity, array $options = []): bool
+    {
         if (!$association.getDependent()) {
             return true;
         }
-        myTable = $association.getTarget();
+        $table = $association.getTarget();
         /** @psalm-suppress InvalidArgument */
         $foreignKey = array_map([$association, "aliasField"], (array)$association.getForeignKey());
         $bindingKey = (array)$association.getBindingKey();
@@ -36,7 +42,7 @@ class DependentDeleteHelper
 
         if ($association.getCascadeCallbacks()) {
             foreach ($association.find().where($conditions).all().toList() as $related) {
-                $success = myTable.delete($related, myOptions);
+                $success = $table.delete($related, $options);
                 if (!$success) {
                     return false;
                 }

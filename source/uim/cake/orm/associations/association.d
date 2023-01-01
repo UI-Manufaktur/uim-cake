@@ -822,7 +822,7 @@ abstract class Association {
                 $extracted = new ResultSetDecorator($callable($extracted, myQuery));
             }
 
-            /** @var uim.cake.Collection\ICollection myResults */
+            /** @var uim.cake.collections.ICollection myResults */
             myResults = myResults.insert($property, $extracted);
             if (myQuery.isHydrationEnabled()) {
                 myResults = myResults.map(function (myResult) {

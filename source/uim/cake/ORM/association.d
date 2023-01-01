@@ -1,7 +1,7 @@
 module uim.cake.ORM;
 
-import uim.cake.Collection\Collection;
-import uim.cake.Collection\ICollection;
+import uim.cake.collections.Collection;
+import uim.cake.collections.ICollection;
 import uim.cake.core.App;
 import uim.cake.core.ConventionsTrait;
 import uim.cake.databases.expressions.IdentifierExpression;

@@ -1,7 +1,7 @@
 module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;
-import uim.cake.Collection\ICollection;
+import uim.cake.collections.ICollection;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.databases.expressions.FieldInterface;
 import uim.cake.datasources.IEntity;
@@ -440,7 +440,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @param uim.cake.Datasource\IResultSet $results Results to map.
      * @param string $locale Locale string
-     * @return uim.cake.Collection\ICollection
+     * @return uim.cake.collections.ICollection
      */
     protected function rowMapper($results, $locale) {
         $allowEmpty = _config["allowEmptyTranslations"];
@@ -503,7 +503,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * records into each entity under the `_translations` key.
      *
      * @param uim.cake.Datasource\IResultSet $results Results to modify.
-     * @return uim.cake.Collection\ICollection
+     * @return uim.cake.collections.ICollection
      */
     function groupTranslations($results): ICollection
     {

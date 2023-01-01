@@ -1,8 +1,8 @@
 module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;
-import uim.cake.Collection\Collection;
-import uim.cake.Collection\ICollection;
+import uim.cake.collections.Collection;
+import uim.cake.collections.ICollection;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.datasources.IEntity;
 import uim.cake.events.EventInterface;
@@ -329,7 +329,7 @@ class EavStrategy : TranslateStrategyInterface
      *
      * @param uim.cake.Datasource\IResultSet $results Results to map.
      * @param string $locale Locale string
-     * @return uim.cake.Collection\ICollection
+     * @return uim.cake.collections.ICollection
      */
     protected function rowMapper($results, $locale) {
         return $results.map(function ($row) use ($locale) {
@@ -371,7 +371,7 @@ class EavStrategy : TranslateStrategyInterface
      * records into each entity under the `_translations` key.
      *
      * @param uim.cake.Datasource\IResultSet $results Results to modify.
-     * @return uim.cake.Collection\ICollection
+     * @return uim.cake.collections.ICollection
      */
     function groupTranslations($results): ICollection
     {

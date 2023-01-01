@@ -1,7 +1,7 @@
 module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;
-import uim.cake.Collection\ICollection;
+import uim.cake.collections.ICollection;
 import uim.cake.datasources.IEntity;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.PropertyMarshalInterface;
@@ -61,7 +61,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * into each entity under the `_translations` key
      *
      * @param uim.cake.Datasource\IResultSet $results Results to modify.
-     * @return uim.cake.Collection\ICollection
+     * @return uim.cake.collections.ICollection
      */
     function groupTranslations($results): ICollection;
 

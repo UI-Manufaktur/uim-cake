@@ -1,11 +1,12 @@
-module uim.cake.orm.Association;
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.caches.associations.hasone;
 
-import uim.cake.datasources.IEntity;
-import uim.cake.orm.Association;
-import uim.cake.orm.associations.loaders.SelectLoader;
-import uim.cake.orm.Table;
-import uim.cake.utilities.Inflector;
-use Closure;
+@safe:
+import uim.cake;
 
 /**
  * Represents an 1 - 1 relationship where the source side of the relation is
@@ -13,14 +14,13 @@ use Closure;
  *
  * An example of a HasOne association would be User has one Profile.
  */
-class HasOne : Association
-{
+class HasOne : Association {
     /**
      * Valid strategies for this type of association
      *
      * @var array<string>
      */
-    protected $_validStrategies = [
+    protected string[] $_validStrategies = [
         self::STRATEGY_JOIN,
         self::STRATEGY_SELECT,
     ];
@@ -38,12 +38,8 @@ class HasOne : Association
         return _foreignKey;
     }
 
-    /**
-     * Returns default property name based on association name.
-     *
-     */
-    protected string _propertyName(): string
-    {
+    // Returns default property name based on association name.
+    protected string _propertyName() {
         [, $name] = pluginSplit(_name);
 
         return Inflector::underscore(Inflector::singularize($name));

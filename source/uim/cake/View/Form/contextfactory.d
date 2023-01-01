@@ -1,6 +1,6 @@
 module uim.cake.View\Form;
 
-import uim.cake.Collection\Collection;
+import uim.cake.collections.Collection;
 import uim.cake.datasources.IEntity;
 import uim.cake.Form\Form;
 import uim.cake.http.ServerRequest;

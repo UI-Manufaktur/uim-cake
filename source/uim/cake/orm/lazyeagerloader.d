@@ -47,7 +47,7 @@ class LazyEagerLoader
      * Builds a query for loading the passed list of entity objects along with the
      * associations specified in $contain.
      *
-     * @param uim.cake.Collection\ICollection $objects The original entities
+     * @param uim.cake.collections.ICollection $objects The original entities
      * @param array $contain The associations to be loaded
      * @param uim.cake.orm.Table $source The table to use for fetching the top level entities
      * @return uim.cake.orm.Query

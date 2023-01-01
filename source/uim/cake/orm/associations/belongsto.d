@@ -1,4 +1,9 @@
-module uim.cake.orm.associations.belongsto;
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.caches.associations.belongsto;
 
 @safe:
 import uim.cake;
@@ -9,21 +14,24 @@ import uim.cake;
  *
  * An example of a BelongsTo association would be Article belongs to Author.
  */
-class BelongsTo : Association
-{
+class BelongsTo : Association {
     /**
      * Valid strategies for this type of association
      *
      * @var array<string>
      */
-    protected _validStrategies = [
+    protected string[] $_validStrategies = [
         self::STRATEGY_JOIN,
         self::STRATEGY_SELECT,
     ];
 
-    // Gets the name of the field representing the foreign key to the target table.
+    /**
+     * Gets the name of the field representing the foreign key to the target table.
+     *
+     * @return array<string>|string
+     */
     string[] getForeignKey() {
-        if (_foreignKey is null) {
+        if (_foreignKey == null) {
             _foreignKey = _modelKey(this.getTarget().getAlias());
         }
 
@@ -36,20 +44,23 @@ class BelongsTo : Association
      * BelongsTo associations are never cleared in a cascading delete scenario.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity that started the cascaded delete.
-     * @param array<string, mixed> myOptions The options for the original delete.
+     * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success.
      */
-    bool cascadeDelete(IEntity $entity, array myOptions = []) {
+    function cascadeDelete(IEntity $entity, array $options = []): bool
+    {
         return true;
     }
 
     /**
      * Returns default property name based on association name.
+     *
      */
-    protected string _propertyName() {
-        [, myName] = pluginSplit(_name);
+    protected string _propertyName(): string
+    {
+        [, $name] = pluginSplit(_name);
 
-        return Inflector::underscore(Inflector::singularize(myName));
+        return Inflector::underscore(Inflector::singularize($name));
     }
 
     /**
@@ -58,15 +69,18 @@ class BelongsTo : Association
      * or required information if the row in "source" did not exist.
      *
      * @param uim.cake.orm.Table $side The potential Table with ownership
+     * @return bool
      */
-    bool isOwningSide(Table $side) {
+    function isOwningSide(Table $side): bool
+    {
         return $side == this.getTarget();
     }
 
     /**
      * Get the relationship type.
      */
-    string type() {
+    string type(): string
+    {
         return self::MANY_TO_ONE;
     }
 
@@ -74,31 +88,31 @@ class BelongsTo : Association
      * Takes an entity from the source table and looks if there is a field
      * matching the property name for this association. The found entity will be
      * saved on the target table for this association by passing supplied
-     * `myOptions`
+     * `$options`
      *
      * @param uim.cake.Datasource\IEntity $entity an entity from the source table
-     * @param array<string, mixed> myOptions options to be passed to the save method in the target table
+     * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.orm.Table::save()
      */
-    function saveAssociated(IEntity $entity, array myOptions = []) {
-        myTargetEntity = $entity.get(this.getProperty());
-        if (empty(myTargetEntity) || !(myTargetEntity instanceof IEntity)) {
+    function saveAssociated(IEntity $entity, array $options = []) {
+        $targetEntity = $entity.get(this.getProperty());
+        if (empty($targetEntity) || !($targetEntity instanceof IEntity)) {
             return $entity;
         }
 
-        myTable = this.getTarget();
-        myTargetEntity = myTable.save(myTargetEntity, myOptions);
-        if (!myTargetEntity) {
+        $table = this.getTarget();
+        $targetEntity = $table.save($targetEntity, $options);
+        if (!$targetEntity) {
             return false;
         }
 
         $properties = array_combine(
             (array)this.getForeignKey(),
-            myTargetEntity.extract((array)this.getBindingKey())
+            $targetEntity.extract((array)this.getBindingKey())
         );
-        $entity.set($properties, ["guard":false]);
+        $entity.set($properties, ["guard": false]);
 
         return $entity;
     }
@@ -107,17 +121,17 @@ class BelongsTo : Association
      * Returns a single or multiple conditions to be appended to the generated join
      * clause for getting the results on the target table.
      *
-     * @param array<string, mixed> myOptions list of options passed to attachTo method
+     * @param array<string, mixed> $options list of options passed to attachTo method
      * @return array<uim.cake.databases.Expression\IdentifierExpression>
      * @throws \RuntimeException if the number of columns in the foreignKey do not
      * match the number of columns in the target table primaryKey
      */
-    protected auto _joinCondition(array myOptions): array
+    protected function _joinCondition(array $options): array
     {
         $conditions = [];
         $tAlias = _name;
         $sAlias = _sourceTable.getAlias();
-        $foreignKey = (array)myOptions["foreignKey"];
+        $foreignKey = (array)$options["foreignKey"];
         $bindingKey = (array)this.getBindingKey();
 
         if (count($foreignKey) != count($bindingKey)) {
@@ -136,27 +150,28 @@ class BelongsTo : Association
         }
 
         foreach ($foreignKey as $k: $f) {
-            myField = sprintf("%s.%s", $tAlias, $bindingKey[$k]);
-            myValue = new IdentifierExpression(sprintf("%s.%s", $sAlias, $f));
-            $conditions[myField] = myValue;
+            $field = sprintf("%s.%s", $tAlias, $bindingKey[$k]);
+            $value = new IdentifierExpression(sprintf("%s.%s", $sAlias, $f));
+            $conditions[$field] = $value;
         }
 
         return $conditions;
     }
 
 
-    Closure eagerLoader(array myOptions) {
+    function eagerLoader(array $options): Closure
+    {
         $loader = new SelectLoader([
-            "alias":this.getAlias(),
-            "sourceAlias":this.getSource().getAlias(),
-            "targetAlias":this.getTarget().getAlias(),
-            "foreignKey":this.getForeignKey(),
-            "bindingKey":this.getBindingKey(),
-            "strategy":this.getStrategy(),
-            "associationType":this.type(),
-            "finder":[this, "find"],
+            "alias": this.getAlias(),
+            "sourceAlias": this.getSource().getAlias(),
+            "targetAlias": this.getTarget().getAlias(),
+            "foreignKey": this.getForeignKey(),
+            "bindingKey": this.getBindingKey(),
+            "strategy": this.getStrategy(),
+            "associationType": this.type(),
+            "finder": [this, "find"],
         ]);
 
-        return $loader.buildEagerLoader(myOptions);
+        return $loader.buildEagerLoader($options);
     }
 }

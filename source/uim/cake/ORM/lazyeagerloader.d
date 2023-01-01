@@ -1,7 +1,7 @@
 module uim.cake.ORM;
 
-import uim.cake.Collection\Collection;
-import uim.cake.Collection\ICollection;
+import uim.cake.collections.Collection;
+import uim.cake.collections.ICollection;
 import uim.cake.databases.expressions.TupleComparison;
 import uim.cake.datasources.IEntity;
 
@@ -47,7 +47,7 @@ class LazyEagerLoader
      * Builds a query for loading the passed list of entity objects along with the
      * associations specified in $contain.
      *
-     * @param uim.cake.Collection\ICollection $objects The original entities
+     * @param uim.cake.collections.ICollection $objects The original entities
      * @param array $contain The associations to be loaded
      * @param uim.cake.orm.Table $source The table to use for fetching the top level entities
      * @return uim.cake.orm.Query

@@ -1,16 +1,12 @@
-module uim.cake.orm.Association;
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.caches.associations.hasmany;
 
-import uim.cake.Collection\Collection;
-import uim.cake.databases.expressions.FieldInterface;
-import uim.cake.databases.expressions.QueryExpression;
-import uim.cake.datasources.IEntity;
-import uim.cake.datasources.InvalidPropertyInterface;
-import uim.cake.orm.Association;
-import uim.cake.orm.associations.loaders.SelectLoader;
-import uim.cake.orm.Query;
-import uim.cake.orm.Table;
-use Closure;
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * Represents an N - 1 relationship where the target side of the relationship

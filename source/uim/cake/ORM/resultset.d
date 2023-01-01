@@ -1,7 +1,7 @@
 module uim.cake.ORM;
 
-import uim.cake.Collection\Collection;
-import uim.cake.Collection\CollectionTrait;
+import uim.cake.collections.Collection;
+import uim.cake.collections.CollectionTrait;
 import uim.cake.databases.exceptions.DatabaseException;
 import uim.cake.databases.StatementInterface;
 import uim.cake.datasources.IEntity;

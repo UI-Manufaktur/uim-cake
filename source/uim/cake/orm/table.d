@@ -1296,7 +1296,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         );
 
         return myQuery.formatResults(function (myResults) use (myOptions) {
-            /** @var uim.cake.Collection\ICollection myResults */
+            /** @var uim.cake.collections.ICollection myResults */
             return myResults.combine(
                 myOptions["keyField"],
                 myOptions["valueField"],
@@ -1340,7 +1340,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         myOptions = _setFieldMatchers(myOptions, ["keyField", "parentField"]);
 
         return myQuery.formatResults(function (myResults) use (myOptions) {
-            /** @var uim.cake.Collection\ICollection myResults */
+            /** @var uim.cake.collections.ICollection myResults */
             return myResults.nest(myOptions["keyField"], myOptions["parentField"], myOptions["nestingKey"]);
         });
     }

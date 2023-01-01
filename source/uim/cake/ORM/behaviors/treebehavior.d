@@ -1,6 +1,6 @@
 module uim.cake.orm.Behavior;
 
-import uim.cake.Collection\ICollection;
+import uim.cake.collections.ICollection;
 import uim.cake.databases.expressions.IdentifierExpression;
 import uim.cake.datasources.IEntity;
 import uim.cake.datasources.exceptions.RecordNotFoundException;
@@ -510,7 +510,7 @@ class TreeBehavior : Behavior
                 "spacer": "_",
             ];
 
-            /** @var uim.cake.Collection\Iterator\TreeIterator $nested */
+            /** @var uim.cake.collections.Iterator\TreeIterator $nested */
             $nested = $results.listNested();
 
             return $nested.printer($options["valuePath"], $options["keyPath"], $options["spacer"]);

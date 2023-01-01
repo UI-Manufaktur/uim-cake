@@ -1,7 +1,7 @@
 module uim.cake.View\Form;
 
 use ArrayAccess;
-import uim.cake.Collection\Collection;
+import uim.cake.collections.Collection;
 import uim.cake.datasources.IEntity;
 import uim.cake.datasources.InvalidPropertyInterface;
 import uim.cake.orm.Entity;
