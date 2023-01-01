@@ -34,7 +34,7 @@ use Throwable;
  *
  * If you don"t want to take control of the exception handling, but want to change how exceptions are
  * rendered you can use `exceptionRenderer` option to choose a class to render exception pages. By default
- * `Cake\Error\ExceptionRenderer` is used. Your custom exception renderer class should be placed in src/Error.
+ * `Cake\errors.ExceptionRenderer` is used. Your custom exception renderer class should be placed in src/Error.
  *
  * Your custom renderer should expect an exception in its constructor, and implement a render method.
  * Failing to do so will cause additional errors.
@@ -68,7 +68,7 @@ use Throwable;
  *
  * Would enable handling for all non Notice errors.
  *
- * @see uim.cake.Error\ExceptionRenderer for more information on how to customize exception rendering.
+ * @see uim.cake.errors.ExceptionRenderer for more information on how to customize exception rendering.
  */
 class ErrorHandler : BaseErrorHandler
 {
@@ -128,7 +128,7 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param \Throwable myException The exception being rendered.
      * @param \Psr\Http\messages.IServerRequest|null myRequest The request.
-     * @return uim.cake.Error\IExceptionRenderer The exception renderer.
+     * @return uim.cake.errors.IExceptionRenderer The exception renderer.
      * @throws \RuntimeException When the renderer class cannot be found.
      */
     auto getRenderer(
@@ -138,7 +138,7 @@ class ErrorHandler : BaseErrorHandler
         $renderer = _config["exceptionRenderer"];
 
         if (is_string($renderer)) {
-            /** @var class-string<uim.cake.Error\IExceptionRenderer>|null myClass */
+            /** @var class-string<uim.cake.errors.IExceptionRenderer>|null myClass */
             myClass = App::className($renderer, "Error");
             if (!myClass) {
                 throw new RuntimeException(sprintf(

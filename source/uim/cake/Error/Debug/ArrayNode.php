@@ -13,14 +13,14 @@
 class ArrayNode : INode
 {
     /**
-     * @var array<uim.cake.Error\debugs.ArrayItemNode>
+     * @var array<uim.cake.errors.debugs.ArrayItemNode>
      */
     private $items;
 
     /**
      * Constructor
      *
-     * @param array<uim.cake.Error\debugs.ArrayItemNode> $items The items for the array
+     * @param array<uim.cake.errors.debugs.ArrayItemNode> $items The items for the array
      */
     this(array $items = []) {
         this.items = [];
@@ -32,7 +32,7 @@ class ArrayNode : INode
     /**
      * Add an item
      *
-     * @param uim.cake.Error\debugs.ArrayItemNode $node The item to add.
+     * @param uim.cake.errors.debugs.ArrayItemNode $node The item to add.
      */
     void add(ArrayItemNode $node): void
     {
@@ -42,7 +42,7 @@ class ArrayNode : INode
     /**
      * Get the contained items
      *
-     * @return array<uim.cake.Error\debugs.ArrayItemNode>
+     * @return array<uim.cake.errors.debugs.ArrayItemNode>
      */
     function getValue(): array
     {
@@ -52,7 +52,7 @@ class ArrayNode : INode
     /**
      * Get Item nodes
      *
-     * @return array<uim.cake.Error\debugs.ArrayItemNode>
+     * @return array<uim.cake.errors.debugs.ArrayItemNode>
      */
     function getChildren(): array
     {

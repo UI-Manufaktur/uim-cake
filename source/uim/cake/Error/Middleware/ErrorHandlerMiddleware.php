@@ -43,7 +43,7 @@ class ErrorHandlerMiddleware : IMiddleware
      * class if you are using the array style constructor.
      *
      * @var array<string, mixed>
-     * @see uim.cake.Error\ExceptionTrap
+     * @see uim.cake.errors.ExceptionTrap
      */
     protected $_defaultConfig = [
         "exceptionRenderer": WebExceptionRenderer::class,
@@ -52,21 +52,21 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Error handler instance.
      *
-     * @var uim.cake.Error\ErrorHandler|null
+     * @var uim.cake.errors.ErrorHandler|null
      */
     protected $errorHandler = null;
 
     /**
      * ExceptionTrap instance
      *
-     * @var uim.cake.Error\ExceptionTrap|null
+     * @var uim.cake.errors.ExceptionTrap|null
      */
     protected $exceptionTrap = null;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Error\ErrorHandler|uim.cake.Error\ExceptionTrap|array $errorHandler The error handler instance
+     * @param uim.cake.errors.ErrorHandler|uim.cake.errors.ExceptionTrap|array $errorHandler The error handler instance
      *  or config array.
      * @throws \InvalidArgumentException
      */
@@ -193,12 +193,12 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Get a error handler instance
      *
-     * @return uim.cake.Error\ErrorHandler The error handler.
+     * @return uim.cake.errors.ErrorHandler The error handler.
      */
     protected function getErrorHandler(): ErrorHandler
     {
         if (this.errorHandler == null) {
-            /** @var class-string<uim.cake.Error\ErrorHandler> $className */
+            /** @var class-string<uim.cake.errors.ErrorHandler> $className */
             $className = App::className("ErrorHandler", "Error");
             this.errorHandler = new $className(this.getConfig());
         }
@@ -209,12 +209,12 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Get a exception trap instance
      *
-     * @return uim.cake.Error\ExceptionTrap The exception trap.
+     * @return uim.cake.errors.ExceptionTrap The exception trap.
      */
     protected function getExceptionTrap(): ExceptionTrap
     {
         if (this.exceptionTrap == null) {
-            /** @var class-string<uim.cake.Error\ExceptionTrap> $className */
+            /** @var class-string<uim.cake.errors.ExceptionTrap> $className */
             $className = App::className("ExceptionTrap", "Error");
             this.exceptionTrap = new $className(this.getConfig());
         }

@@ -74,7 +74,7 @@ class HtmlFormatter : IFormatter
     /**
      * Convert a tree of INode objects into HTML
      *
-     * @param uim.cake.Error\debugs.INode myNode The node tree to dump.
+     * @param uim.cake.errors.debugs.INode myNode The node tree to dump.
      */
     string dump(INode myNode) {
         $html = this.export(myNode, 0);
@@ -90,7 +90,7 @@ class HtmlFormatter : IFormatter
     /**
      * Convert a tree of INode objects into HTML
      *
-     * @param uim.cake.Error\debugs.INode $var The node tree to dump.
+     * @param uim.cake.errors.debugs.INode $var The node tree to dump.
      * @param int $indent The current indentation level.
      * @return string
      */
@@ -126,7 +126,7 @@ class HtmlFormatter : IFormatter
     /**
      * Export an array type object
      *
-     * @param uim.cake.Error\debugs.ArrayNode $var The array to export.
+     * @param uim.cake.errors.debugs.ArrayNode $var The array to export.
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
@@ -158,10 +158,10 @@ class HtmlFormatter : IFormatter
     /**
      * Handles object to string conversion.
      *
-     * @param uim.cake.Error\debugs.ClassNode|uim.cake.Error\debugs.ReferenceNode $var Object to convert.
+     * @param uim.cake.errors.debugs.ClassNode|uim.cake.errors.debugs.ReferenceNode $var Object to convert.
      * @param int $indent The current indentation level.
      * @return string
-     * @see uim.cake.Error\Debugger::exportVar()
+     * @see uim.cake.errors.Debugger::exportVar()
      */
     protected string exportObject($var, int $indent) {
         $objectId = "cake-db-object-{this.id}-{$var.getId()}";

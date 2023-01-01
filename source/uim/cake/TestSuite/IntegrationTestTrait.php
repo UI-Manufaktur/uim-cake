@@ -519,7 +519,7 @@ trait IntegrationTestTrait
         if (empty($class) || !class_exists($class)) {
             $class = WebExceptionRenderer::class;
         }
-        /** @var uim.cake.Error\renderers.WebExceptionRenderer $instance */
+        /** @var uim.cake.errors.renderers.WebExceptionRenderer $instance */
         $instance = new $class($exception);
         _response = $instance.render();
     }

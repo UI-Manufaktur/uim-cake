@@ -69,7 +69,7 @@ class TupleComparison : ComparisonExpression
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $template = "(%s) %s (%s)";
         $fields = [];
@@ -96,7 +96,7 @@ class TupleComparison : ComparisonExpression
      *
      * @param uim.cake.databases.ValueBinder aBinder The value binder to convert expressions with.
      */
-    protected string _stringifyValues(ValueBinder aBinder): string
+    protected string _stringifyValues(ValueBinder aBinder)
     {
         $values = [];
         $parts = this.getValue();
@@ -138,7 +138,7 @@ class TupleComparison : ComparisonExpression
     }
 
 
-    protected function _bindValue($value, ValueBinder aBinder, ?string $type = null): string
+    protected string _bindValue($value, ValueBinder aBinder, ?string $type = null)
     {
         $placeholder = $binder.placeholder("tuple");
         $binder.bind($placeholder, $value, $type);

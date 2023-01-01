@@ -13,20 +13,20 @@
 class ArrayItemNode : INode
 {
     /**
-     * @var uim.cake.Error\debugs.INode
+     * @var uim.cake.errors.debugs.INode
      */
     private $key;
 
     /**
-     * @var uim.cake.Error\debugs.INode
+     * @var uim.cake.errors.debugs.INode
      */
     private $value;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Error\debugs.INode $key The node for the item key
-     * @param uim.cake.Error\debugs.INode $value The node for the array value
+     * @param uim.cake.errors.debugs.INode $key The node for the item key
+     * @param uim.cake.errors.debugs.INode $value The node for the array value
      */
     this(INode $key, INode $value) {
         this.key = $key;
@@ -36,7 +36,7 @@ class ArrayItemNode : INode
     /**
      * Get the value
      *
-     * @return uim.cake.Error\debugs.INode
+     * @return uim.cake.errors.debugs.INode
      */
     function getValue() {
         return this.value;
@@ -45,7 +45,7 @@ class ArrayItemNode : INode
     /**
      * Get the key
      *
-     * @return uim.cake.Error\debugs.INode
+     * @return uim.cake.errors.debugs.INode
      */
     function getKey() {
         return this.key;

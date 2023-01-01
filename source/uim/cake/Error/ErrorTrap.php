@@ -56,7 +56,7 @@ class ErrorTrap
     /**
      * Choose an error renderer based on config or the SAPI
      *
-     * @return class-string<uim.cake.Error\ErrorRendererInterface>
+     * @return class-string<uim.cake.errors.ErrorRendererInterface>
      */
     protected function chooseErrorRenderer(): string
     {
@@ -65,7 +65,7 @@ class ErrorTrap
             return $config;
         }
 
-        /** @var class-string<uim.cake.Error\ErrorRendererInterface> */
+        /** @var class-string<uim.cake.errors.ErrorRendererInterface> */
         return PHP_SAPI == "cli" ? ConsoleErrorRenderer::class : HtmlErrorRenderer::class;
     }
 
@@ -141,7 +141,7 @@ class ErrorTrap
     /**
      * Logging helper method.
      *
-     * @param uim.cake.Error\PhpError $error The error object to log.
+     * @param uim.cake.errors.PhpError $error The error object to log.
      */
     protected void logError(PhpError $error): void
     {
@@ -171,11 +171,11 @@ class ErrorTrap
     /**
      * Get an instance of the renderer.
      *
-     * @return uim.cake.Error\ErrorRendererInterface
+     * @return uim.cake.errors.ErrorRendererInterface
      */
     function renderer(): ErrorRendererInterface
     {
-        /** @var class-string<uim.cake.Error\ErrorRendererInterface> $class */
+        /** @var class-string<uim.cake.errors.ErrorRendererInterface> $class */
         $class = this.getConfig("errorRenderer") ?: this.chooseErrorRenderer();
 
         return new $class(_config);
@@ -184,7 +184,7 @@ class ErrorTrap
     /**
      * Get an instance of the logger.
      *
-     * @return uim.cake.Error\ErrorLoggerInterface
+     * @return uim.cake.errors.ErrorLoggerInterface
      */
     function logger(): ErrorLoggerInterface
     {
@@ -194,7 +194,7 @@ class ErrorTrap
             this.setConfig(["logger": $oldConfig, "errorLogger": null]);
         }
 
-        /** @var class-string<uim.cake.Error\ErrorLoggerInterface> $class */
+        /** @var class-string<uim.cake.errors.ErrorLoggerInterface> $class */
         $class = this.getConfig("logger", _defaultConfig["logger"]);
 
         return new $class(_config);

@@ -113,7 +113,7 @@ class ConsoleErrorHandler : BaseErrorHandler
 
 // phpcs:disable
 class_alias(
-    "Cake\Error\ConsoleErrorHandler",
+    "Cake\errors.ConsoleErrorHandler",
     "Cake\Console\ConsoleErrorHandler"
 );
 // phpcs:enable

@@ -23,13 +23,13 @@ class ErrorHandlerMiddleware : IMiddleware
      *   extend one of the listed exceptions will also not be logged. Example:
      *
      *   ```
-     *   "skipLog":["Cake\Error\NotFoundException", "Cake\Error\UnauthorizedException"]
+     *   "skipLog":["Cake\errors.NotFoundException", "Cake\errors.UnauthorizedException"]
      *   ```
      *
      * - `trace` Should error logs include stack traces?
      * - `exceptionRenderer` The renderer instance or class name to use or a callable factory
-     *   which returns a uim.cake.Error\IExceptionRenderer instance.
-     *   Defaults to uim.cake.Error\ExceptionRenderer
+     *   which returns a uim.cake.errors.IExceptionRenderer instance.
+     *   Defaults to uim.cake.errors.ExceptionRenderer
      *
      * @var array<string, mixed>
      */
@@ -43,14 +43,14 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Error handler instance.
      *
-     * @var uim.cake.Error\ErrorHandler|null
+     * @var uim.cake.errors.ErrorHandler|null
      */
     protected myErrorHandler;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Error\ErrorHandler|array myErrorHandler The error handler instance
+     * @param uim.cake.errors.ErrorHandler|array myErrorHandler The error handler instance
      *  or config array.
      * @throws \InvalidArgumentException
      */
@@ -151,12 +151,12 @@ class ErrorHandlerMiddleware : IMiddleware
     /**
      * Get a error handler instance
      *
-     * @return uim.cake.Error\ErrorHandler The error handler.
+     * @return uim.cake.errors.ErrorHandler The error handler.
      */
     protected auto getErrorHandler(): ErrorHandler
     {
         if (this.errorHandler is null) {
-            /** @var class-string<uim.cake.Error\ErrorHandler> myClassName */
+            /** @var class-string<uim.cake.errors.ErrorHandler> myClassName */
             myClassName = App::className("ErrorHandler", "Error");
             this.errorHandler = new myClassName(this.getConfig());
         }

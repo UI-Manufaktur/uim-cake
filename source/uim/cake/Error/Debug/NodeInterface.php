@@ -17,7 +17,7 @@ interface INode
     /**
      * Get the child nodes of this node.
      *
-     * @return array<uim.cake.Error\debugs.INode>
+     * @return array<uim.cake.errors.debugs.INode>
      */
     function getChildren(): array;
 

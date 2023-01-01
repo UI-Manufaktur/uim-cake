@@ -79,7 +79,7 @@ class ExceptionTrap
      * This is best effort as we can"t know if/when another
      * exception handler is registered.
      *
-     * @var uim.cake.Error\ExceptionTrap|null
+     * @var uim.cake.errors.ExceptionTrap|null
      */
     protected static $registeredTrap = null;
 
@@ -103,7 +103,7 @@ class ExceptionTrap
      *
      * @param \Throwable $exception Exception to render
      * @param \Psr\Http\messages.IServerRequest|null $request The request if possible.
-     * @return uim.cake.Error\ExceptionRendererInterface
+     * @return uim.cake.errors.ExceptionRendererInterface
      */
     function renderer(Throwable $exception, $request = null) {
         $request = $request ?? Router::getRequest();
@@ -115,7 +115,7 @@ class ExceptionTrap
             deprecationWarning(
                 "Your application is using a deprecated `Error.exceptionRenderer`. " .
                 "You can either remove the `Error.exceptionRenderer` config key to have CakePHP choose " .
-                "one of the default exception renderers, or define a class that is not `Cake\Error\ExceptionRenderer`."
+                "one of the default exception renderers, or define a class that is not `Cake\errors.ExceptionRenderer`."
             );
         }
         if (!$class || $deprecatedConfig) {
@@ -135,7 +135,7 @@ class ExceptionTrap
                 );
             }
 
-            /** @var class-string<uim.cake.Error\ExceptionRendererInterface> $class */
+            /** @var class-string<uim.cake.errors.ExceptionRendererInterface> $class */
             return new $class($exception, $request, _config);
         }
 
@@ -145,22 +145,22 @@ class ExceptionTrap
     /**
      * Choose an exception renderer based on config or the SAPI
      *
-     * @return class-string<uim.cake.Error\ExceptionRendererInterface>
+     * @return class-string<uim.cake.errors.ExceptionRendererInterface>
      */
     protected function chooseRenderer(): string
     {
-        /** @var class-string<uim.cake.Error\ExceptionRendererInterface> */
+        /** @var class-string<uim.cake.errors.ExceptionRendererInterface> */
         return PHP_SAPI == "cli" ? ConsoleExceptionRenderer::class : ExceptionRenderer::class;
     }
 
     /**
      * Get an instance of the logger.
      *
-     * @return uim.cake.Error\ErrorLoggerInterface
+     * @return uim.cake.errors.ErrorLoggerInterface
      */
     function logger(): ErrorLoggerInterface
     {
-        /** @var class-string<uim.cake.Error\ErrorLoggerInterface> $class */
+        /** @var class-string<uim.cake.errors.ErrorLoggerInterface> $class */
         $class = this.getConfig("logger", _defaultConfig["logger"]);
 
         return new $class(_config);
@@ -200,7 +200,7 @@ class ExceptionTrap
      * is mutable and the object returned by this method
      * could be a stale value.
      *
-     * @return uim.cake.Error\ExceptionTrap|null The global instance or null.
+     * @return uim.cake.errors.ExceptionTrap|null The global instance or null.
      */
     static function instance(): ?self
     {

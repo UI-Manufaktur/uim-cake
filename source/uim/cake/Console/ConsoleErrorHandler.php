@@ -1,6 +1,6 @@
 
 
-class_exists("Cake\Error\ConsoleErrorHandler");
+class_exists("Cake\errors.ConsoleErrorHandler");
 deprecationWarning(
-    "Use Cake\Error\ConsoleErrorHandler instead of Cake\Console\ConsoleErrorHandler."
+    "Use Cake\errors.ConsoleErrorHandler instead of Cake\Console\ConsoleErrorHandler."
 );

@@ -38,7 +38,7 @@ abstract class BaseErrorHandler
     /**
      * Exception logger instance.
      *
-     * @var uim.cake.Error\IErrorLogger|null
+     * @var uim.cake.errors.IErrorLogger|null
      */
     protected logger;
 
@@ -303,11 +303,11 @@ abstract class BaseErrorHandler
     /**
      * Get exception logger.
      *
-     * @return uim.cake.Error\IErrorLogger
+     * @return uim.cake.errors.IErrorLogger
      */
     auto getLogger() {
         if (this.logger is null) {
-            /** @var uim.cake.Error\IErrorLogger $logger */
+            /** @var uim.cake.errors.IErrorLogger $logger */
             $logger = new _config["errorLogger"](_config);
 
             if (!$logger instanceof IErrorLogger) {

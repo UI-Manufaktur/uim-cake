@@ -6,14 +6,14 @@ module uim.cake.errors\Debug;
 class ArrayNode : INode
 {
     /**
-     * @var array<uim.cake.Error\debugs.ArrayItemNode>
+     * @var array<uim.cake.errors.debugs.ArrayItemNode>
      */
     private myItems;
 
     /**
      * Constructor
      *
-     * @param array<uim.cake.Error\debugs.ArrayItemNode> myItems The items for the array
+     * @param array<uim.cake.errors.debugs.ArrayItemNode> myItems The items for the array
      */
     this(array myItems = []) {
         this.items = [];
@@ -25,7 +25,7 @@ class ArrayNode : INode
     /**
      * Add an item
      *
-     * @param uim.cake.Error\debugs.ArrayItemNode myNode The item to add.
+     * @param uim.cake.errors.debugs.ArrayItemNode myNode The item to add.
      */
     void add(ArrayItemNode myNode): void
     {
@@ -35,7 +35,7 @@ class ArrayNode : INode
     /**
      * Get the contained items
      *
-     * @return array<uim.cake.Error\debugs.ArrayItemNode>
+     * @return array<uim.cake.errors.debugs.ArrayItemNode>
      */
     auto getValue(): array
     {
@@ -45,7 +45,7 @@ class ArrayNode : INode
     /**
      * Get Item nodes
      *
-     * @return array<uim.cake.Error\debugs.ArrayItemNode>
+     * @return array<uim.cake.errors.debugs.ArrayItemNode>
      */
     auto getChildren(): array
     {

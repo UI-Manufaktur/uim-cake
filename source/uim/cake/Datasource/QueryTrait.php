@@ -583,7 +583,7 @@ trait QueryTrait
      * @return string
      * @psalm-return class-string<uim.cake.Datasource\IResultSet>
      */
-    protected function _decoratorClass(): string
+    protected string _decoratorClass()
     {
         return ResultSetDecorator::class;
     }

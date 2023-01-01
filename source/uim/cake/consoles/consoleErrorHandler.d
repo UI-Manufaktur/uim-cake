@@ -1,7 +1,7 @@
 
 
 class_alias(
-    "Cake\Error\ConsoleErrorHandler",
+    "Cake\errors.ConsoleErrorHandler",
     "Cake\Console\ConsoleErrorHandler"
 );
 deprecationWarning(
