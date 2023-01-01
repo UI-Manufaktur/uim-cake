@@ -624,13 +624,13 @@ class Paginator : IPaginator {
             if ($correctAlias && $allowed) {
                 // Disambiguate fields in schema. As id is quite common.
                 if ($object.hasField(myField)) {
-                    myField = myAlias . "." . myField;
+                    myField = myAlias ~ "." ~ myField;
                 }
                 myTableOrder[myField] = myValue;
             } elseif ($correctAlias && $object.hasField(myField)) {
-                myTableOrder[myTableAlias . "." . myField] = myValue;
+                myTableOrder[myTableAlias ~ "." ~ myField] = myValue;
             } elseif (!$correctAlias && $allowed) {
-                myTableOrder[myAlias . "." . myField] = myValue;
+                myTableOrder[myAlias ~ "." ~ myField] = myValue;
             }
         }
 

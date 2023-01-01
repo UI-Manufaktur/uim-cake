@@ -255,7 +255,7 @@ abstract class BaseErrorHandler
         }
 
         if ($units == "K") {
-            ini_set("memory_limit", ceil($current + $additionalKb) . "K");
+            ini_set("memory_limit", ceil($current + $additionalKb) ~ "K");
         }
     }
 

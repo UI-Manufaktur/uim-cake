@@ -104,11 +104,11 @@ class ConsoleFormatter : IFormatter
                 case "null":
                     return this.style("const", "null");
                 case "string":
-                    return this.style("string", """ . (string)$var.getValue() . """);
+                    return this.style("string", """ ~ (string)$var.getValue() ~ """);
                 case "int":
                 case "float":
                     return this.style("visibility", "({$var.getType()})") .
-                        " " . this.style("number", "{$var.getValue()}");
+                        " " ~ this.style("number", "{$var.getValue()}");
                 default:
                     return "({$var.getType()}) {$var.getValue()}";
             }
@@ -122,7 +122,7 @@ class ConsoleFormatter : IFormatter
         if ($var instanceof SpecialNode) {
             return this.style("special", $var.getValue());
         }
-        throw new RuntimeException("Unknown node received " . get_class($var));
+        throw new RuntimeException("Unknown node received " ~ get_class($var));
     }
 
     /**
@@ -134,8 +134,8 @@ class ConsoleFormatter : IFormatter
      */
     protected string exportArray(ArrayNode $var, int $indent) {
         $out = this.style("punct", "[");
-        $break = "\n" . str_repeat("  ", $indent);
-        $end = "\n" . str_repeat("  ", $indent - 1);
+        $break = "\n" ~ str_repeat("  ", $indent);
+        $end = "\n" ~ str_repeat("  ", $indent - 1);
         $vars = [];
 
         $arrow = this.style("punct", ":");
@@ -177,8 +177,8 @@ class ConsoleFormatter : IFormatter
             this.style("number", (string)$var.getId()) .
             this.style("punct", " {");
 
-        $break = "\n" . str_repeat("  ", $indent);
-        $end = "\n" . str_repeat("  ", $indent - 1) . this.style("punct", "}");
+        $break = "\n" ~ str_repeat("  ", $indent);
+        $end = "\n" ~ str_repeat("  ", $indent - 1) . this.style("punct", "}");
 
         $arrow = this.style("punct", ":");
         foreach ($var.getChildren() as $property) {
@@ -186,7 +186,7 @@ class ConsoleFormatter : IFormatter
             myName = $property.getName();
             if ($visibility && $visibility != "public") {
                 $props[] = this.style("visibility", $visibility) .
-                    " " .
+                    " " ~
                     this.style("property", myName) .
                     $arrow .
                     this.export($property.getValue(), $indent);

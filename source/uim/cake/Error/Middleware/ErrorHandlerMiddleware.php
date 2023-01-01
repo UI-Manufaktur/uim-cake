@@ -73,8 +73,8 @@ class ErrorHandlerMiddleware : IMiddleware
     this($errorHandler = []) {
         if (func_num_args() > 1) {
             deprecationWarning(
-                "The signature of ErrorHandlerMiddleware::__construct() has changed. "
-                . "Pass the config array as 1st argument instead."
+                "The signature of ErrorHandlerMiddleware::__construct() has changed~ "
+                ~ "Pass the config array as 1st argument instead."
             );
 
             $errorHandler = func_get_arg(1);

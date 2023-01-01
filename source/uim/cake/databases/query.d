@@ -997,7 +997,7 @@ class Query : IExpression, IteratorAggregate {
             return this.where("1=0");
         }
 
-        return this.where([myField . " IN":myValues], myOptions["types"]);
+        return this.where([myField ~ " IN":myValues], myOptions["types"]);
     }
 
     /**
@@ -1020,10 +1020,10 @@ class Query : IExpression, IteratorAggregate {
         ];
 
         if (myOptions["allowEmpty"] && !myValues) {
-            return this.where([myField . " IS NOT":null]);
+            return this.where([myField ~ " IS NOT":null]);
         }
 
-        return this.where([myField . " NOT IN":myValues], myOptions["types"]);
+        return this.where([myField ~ " NOT IN":myValues], myOptions["types"]);
     }
 
     /**
@@ -1047,12 +1047,12 @@ class Query : IExpression, IteratorAggregate {
         ];
 
         if (myOptions["allowEmpty"] && !myValues) {
-            return this.where([myField . " IS NOT":null]);
+            return this.where([myField ~ " IS NOT":null]);
         }
 
         return this.where(
             [
-                "OR":[myField . " NOT IN":myValues, myField . " IS":null],
+                "OR":[myField ~ " NOT IN":myValues, myField ~ " IS":null],
             ],
             myOptions["types"]
         );

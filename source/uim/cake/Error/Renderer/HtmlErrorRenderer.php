@@ -26,12 +26,12 @@ class HtmlErrorRenderer : ErrorRendererInterface
     }
 
 
-    function render(PhpError $error, bool $debug): string
+    string render(PhpError $error, bool $debug)
     {
         if (!$debug) {
             return "";
         }
-        $id = "cakeErr" . uniqid();
+        $id = "cakeErr" ~ uniqid();
         $file = $error.getFile();
 
         // Some of the error data is not HTML safe so we escape everything.
@@ -74,9 +74,9 @@ HTML;
      * @param string $suffix The element selector.
      * @return string
      */
-    private function renderToggle(string $text, string $id, string $suffix): string
+    private string renderToggle(string $text, string $id, string $suffix)
     {
-        $selector = $id . "-" . $suffix;
+        $selector = $id ~ "-" ~ $suffix;
 
         // phpcs:disable
         return <<<HTML

@@ -214,7 +214,7 @@ class RulesChecker
             return this.checkDelete($entity, myOptions);
         }
 
-        throw new InvalidArgumentException("Wrong checking mode: " . myMode);
+        throw new InvalidArgumentException("Wrong checking mode: " ~ myMode);
     }
 
     /**

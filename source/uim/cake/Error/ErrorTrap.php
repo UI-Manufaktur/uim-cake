@@ -130,7 +130,7 @@ class ErrorTrap
             $renderer.write($renderer.render($error, $debug));
         } catch (Exception $e) {
             // Fatal errors always log.
-            this.logger().logMessage("error", "Could not render error. Got: " . $e.getMessage());
+            this.logger().logMessage("error", "Could not render error. Got: " ~ $e.getMessage());
 
             return false;
         }
@@ -154,7 +154,7 @@ class ErrorTrap
         } else {
             $loggerClass = get_class($logger);
             deprecationWarning(
-                "The configured logger `{$loggerClass}` does not implement `logError()` " .
+                "The configured logger `{$loggerClass}` does not implement `logError()` " ~
                 "which will be required in future versions of CakePHP."
             );
             $context = [];

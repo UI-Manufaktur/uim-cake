@@ -51,7 +51,7 @@ class ClassNode : INode
     /**
      * Get the class name
      */
-    string getValue(): string
+    string getValue()
     {
         return this.class;
     }

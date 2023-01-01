@@ -48,7 +48,7 @@ class ErrorLogger : ErrorLoggerInterface
             $message .= this.getRequestContext($request);
         }
         if ($includeTrace) {
-            $message .= "\nTrace:\n" . $error.getTraceAsString() . "\n";
+            $message .= "\nTrace:\n" ~ $error.getTraceAsString() ~ "\n";
         }
         $logMap = [
             "strict": LOG_NOTICE,
@@ -93,7 +93,7 @@ class ErrorLogger : ErrorLoggerInterface
             $message .= this.getRequestContext($context["request"]);
         }
         if (!empty($context["trace"])) {
-            $message .= "\nTrace:\n" . $context["trace"] . "\n";
+            $message .= "\nTrace:\n" ~ $context["trace"] ~ "\n";
         }
         $logMap = [
             "strict": LOG_NOTICE,
@@ -131,7 +131,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @param bool $includeTrace Whether or not to include a stack trace.
      * @return string Error message
      */
-    protected function getMessage(Throwable $exception, bool $isPrevious = false, bool $includeTrace = false): string
+    protected string getMessage(Throwable $exception, bool $isPrevious = false, bool $includeTrace = false)
     {
         $message = sprintf(
             "%s[%s] %s in %s on line %s",
@@ -146,7 +146,7 @@ class ErrorLogger : ErrorLoggerInterface
         if ($debug && $exception instanceof CakeException) {
             $attributes = $exception.getAttributes();
             if ($attributes) {
-                $message .= "\nException Attributes: " . var_export($exception.getAttributes(), true);
+                $message .= "\nException Attributes: " ~ var_export($exception.getAttributes(), true);
             }
         }
 
@@ -156,7 +156,7 @@ class ErrorLogger : ErrorLoggerInterface
             $message .= "\nStack Trace:\n";
             foreach ($trace as $line) {
                 if (is_string($line)) {
-                    $message .= "- " . $line;
+                    $message .= "- " ~ $line;
                 } else {
                     $message .= "- {$line["file"]}:{$line["line"]}\n";
                 }
@@ -176,19 +176,19 @@ class ErrorLogger : ErrorLoggerInterface
      *
      * @param \Psr\Http\messages.IServerRequest $request The request to read from.
      */
-    string getRequestContext(IServerRequest $request): string
+    string getRequestContext(IServerRequest $request)
     {
-        $message = "\nRequest URL: " . $request.getRequestTarget();
+        $message = "\nRequest URL: " ~ $request.getRequestTarget();
 
         $referer = $request.getHeaderLine("Referer");
         if ($referer) {
-            $message .= "\nReferer URL: " . $referer;
+            $message .= "\nReferer URL: " ~ $referer;
         }
 
         if (method_exists($request, "clientIp")) {
             $clientIp = $request.clientIp();
             if ($clientIp && $clientIp != "::1") {
-                $message .= "\nClient IP: " . $clientIp;
+                $message .= "\nClient IP: " ~ $clientIp;
             }
         }
 

@@ -40,7 +40,7 @@ class FactoryLocator
         if (is_callable($factory)) {
             deprecationWarning(
                 "Using a callable as a locator has been deprecated."
-                . " Use an instance of Cake\Datasource\Locator\ILocatorinstead."
+                ~ " Use an instance of Cake\Datasource\Locator\ILocatorinstead."
             );
 
             static::$_modelFactories[$type] = $factory;
@@ -50,7 +50,7 @@ class FactoryLocator
 
         throw new InvalidArgumentException(sprintf(
             "`$factory` must be an instance of Cake\Datasource\Locator\ILocatoror a callable."
-            . " Got type `%s` instead.",
+            ~ " Got type `%s` instead.",
             getTypeName($factory)
         ));
     }

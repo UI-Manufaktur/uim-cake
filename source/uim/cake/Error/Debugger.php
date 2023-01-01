@@ -344,7 +344,7 @@ class Debugger
 
         Log::write(
             $level,
-            "\n" . $source . static::exportVarAsPlainText($var, $maxDepth)
+            "\n" ~ $source . static::exportVarAsPlainText($var, $maxDepth)
         );
     }
 
@@ -555,7 +555,7 @@ class Debugger
         $added = false;
         if (strpos($str, '<?php') == false) {
             $added = true;
-            $str = "<?php \n" . $str;
+            $str = "<?php \n" ~ $str;
         }
         $highlight = highlight_string($str, true);
         if ($added) {
@@ -592,7 +592,7 @@ class Debugger
         $instance = new $class();
         if (!$instance instanceof IFormatter) {
             throw new RuntimeException(
-                "The `{$class}` formatter does not implement " . IFormatter::class
+                "The `{$class}` formatter does not implement " ~ IFormatter::class
             );
         }
 
@@ -978,7 +978,7 @@ class Debugger
         $info = '';
 
         foreach ((array)$data['context'] as $var: $value) {
-            $context[] = "\${$var} = " . static::exportVar($value, 3);
+            $context[] = "\${$var} = " ~ static::exportVar($value, 3);
         }
 
         switch (_outputFormat) {

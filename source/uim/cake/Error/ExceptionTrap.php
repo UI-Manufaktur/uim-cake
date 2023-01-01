@@ -113,8 +113,8 @@ class ExceptionTrap
         $deprecatedConfig = ($class == ExceptionRenderer::class && PHP_SAPI == "cli");
         if ($deprecatedConfig) {
             deprecationWarning(
-                "Your application is using a deprecated `Error.exceptionRenderer`. " .
-                "You can either remove the `Error.exceptionRenderer` config key to have CakePHP choose " .
+                "Your application is using a deprecated `Error.exceptionRenderer`~ " ~
+                "You can either remove the `Error.exceptionRenderer` config key to have CakePHP choose " ~
                 "one of the default exception renderers, or define a class that is not `Cake\errors.ExceptionRenderer`."
             );
         }
@@ -130,7 +130,7 @@ class ExceptionTrap
             /** @psalm-suppress ArgumentTypeCoercion */
             if (!(method_exists($class, "render") && method_exists($class, "write"))) {
                 throw new InvalidArgumentException(
-                    "Cannot use {$class} as an `exceptionRenderer`. " .
+                    "Cannot use {$class} as an `exceptionRenderer`~ " ~
                     "It must implement render() and write() methods."
                 );
             }
@@ -298,7 +298,7 @@ class ExceptionTrap
         }
 
         if ($units == "K") {
-            ini_set("memory_limit", ceil($current + $additionalKb) . "K");
+            ini_set("memory_limit", ceil($current + $additionalKb) ~ "K");
         }
     }
 
@@ -312,7 +312,7 @@ class ExceptionTrap
      */
     void handleFatalError(int $code, string $description, string $file, int $line): void
     {
-        this.handleException(new FatalErrorException("Fatal Error: " . $description, 500, $file, $line));
+        this.handleException(new FatalErrorException("Fatal Error: " ~ $description, 500, $file, $line));
     }
 
     /**
@@ -344,7 +344,7 @@ class ExceptionTrap
             } else {
                 $loggerClass = get_class($logger);
                 deprecationWarning(
-                    "The configured logger `{$loggerClass}` should implement `logException()` " .
+                    "The configured logger `{$loggerClass}` should implement `logException()` " ~
                     "to be compatible with future versions of CakePHP."
                 );
                 this.logger().log($exception, $request);

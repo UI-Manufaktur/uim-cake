@@ -26,7 +26,7 @@ class FactoryLocator
         if (!$factory instanceof ILocator && !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(
                 "`$factory` must be an instance of Cake\Datasource\Locator\ILocator or a callable."
-                . " Got type `%s` instead.",
+                ~ " Got type `%s` instead.",
                 getTypeName($factory)
             ));
         }

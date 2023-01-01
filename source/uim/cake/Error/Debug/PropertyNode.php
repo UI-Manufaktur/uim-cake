@@ -61,7 +61,7 @@ class PropertyNode : INode
     /**
      * Get the property name
      */
-    string getName(): string
+    string getName()
     {
         return this.name;
     }

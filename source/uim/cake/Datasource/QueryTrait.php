@@ -208,7 +208,7 @@ trait QueryTrait
     {
         if (strpos($field, ".") == false) {
             $alias = $alias ?: this.getRepository().getAlias();
-            $aliasedField = $alias . "." . $field;
+            $aliasedField = $alias ~ "." ~ $field;
         } else {
             $aliasedField = $field;
             [$alias, $field] = explode(".", $field);
@@ -518,7 +518,7 @@ trait QueryTrait
         $resultSetClass = _decoratorClass();
         if (in_array($method, get_class_methods($resultSetClass), true)) {
             deprecationWarning(sprintf(
-                "Calling `%s` methods, such as `%s()`, on queries is deprecated. " .
+                "Calling `%s` methods, such as `%s()`, on queries is deprecated~ " ~
                 "You must call `all()` first (for example, `all().%s()`).",
                 IResultSet::class,
                 $method,

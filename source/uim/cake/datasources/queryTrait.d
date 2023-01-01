@@ -200,7 +200,7 @@ trait QueryTrait
     array aliasField(string myField, Nullable!string myAlias = null) {
         if (indexOf(myField, ".") == false) {
             myAlias = myAlias ?: this.getRepository().getAlias();
-            myAliasedField = myAlias . "." . myField;
+            myAliasedField = myAlias ~ "." ~ myField;
         } else {
             myAliasedField = myField;
             [myAlias, myField] = explode(".", myField);
@@ -507,7 +507,7 @@ trait QueryTrait
         myResultSetClass = _decoratorClass();
         if (in_array($method, get_class_methods(myResultSetClass), true)) {
             deprecationWarning(sprintf(
-                "Calling result set method `%s()` directly on query instance is deprecated. " .
+                "Calling result set method `%s()` directly on query instance is deprecated~ " ~
                 "You must call `all()` to retrieve the results first.",
                 $method
             ), 2);

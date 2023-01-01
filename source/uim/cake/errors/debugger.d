@@ -323,7 +323,7 @@ class Debugger
 
         Log::write(
             $level,
-            "\n" . $source . static::exportVarAsPlainText($var, $maxDepth)
+            "\n" ~ $source . static::exportVarAsPlainText($var, $maxDepth)
         );
     }
 
@@ -398,8 +398,8 @@ class Debugger
                 $signature = $reference = $next["function"];
 
                 if (!empty($next["class"])) {
-                    $signature = $next["class"] . "::" . $next["function"];
-                    $reference = $signature . "(";
+                    $signature = $next["class"] ~ "::" ~ $next["function"];
+                    $reference = $signature ~ "(";
                     if (myOptions["args"] && isset($next["args"])) {
                         $args = [];
                         foreach ($next["args"] as $arg) {
@@ -502,7 +502,7 @@ class Debugger
             }
             $string = str_replace(["\r\n", "\n"], "", static::_highlight(myData[$i]));
             if ($i == $line) {
-                $lines[] = "<span class="code-highlight">" . $string . "</span>";
+                $lines[] = "<span class="code-highlight">" ~ $string ~ "</span>";
             } else {
                 $lines[] = $string;
             }
@@ -525,7 +525,7 @@ class Debugger
         $added = false;
         if (indexOf($str, "<?php") == false) {
             $added = true;
-            $str = "<?php \n" . $str;
+            $str = "<?php \n" ~ $str;
         }
         $highlight = highlight_string($str, true);
         if ($added) {
@@ -562,7 +562,7 @@ class Debugger
         $instance = new myClass();
         if (!$instance instanceof IFormatter) {
             throw new RuntimeException(
-                "The `{myClass}` formatter does not implement " . IFormatter::class
+                "The `{myClass}` formatter does not implement " ~ IFormatter::class
             );
         }
 
@@ -903,7 +903,7 @@ class Debugger
         $info = "";
 
         foreach ((array)myData["context"] as $var: myValue) {
-            $context[] = "\${$var} = " . static::exportVar(myValue, 3);
+            $context[] = "\${$var} = " ~ static::exportVar(myValue, 3);
         }
 
         switch (_outputFormat) {
@@ -918,7 +918,7 @@ class Debugger
         }
 
         myData["trace"] = $trace;
-        myData["id"] = "cakeErr" . uniqid();
+        myData["id"] = "cakeErr" ~ uniqid();
         $tpl = _templates[_outputFormat] + _templates["base"];
 
         if (isset($tpl["links"])) {
@@ -1038,7 +1038,7 @@ class Debugger
         $salt = Security::getSalt();
         if ($salt == "__SALT__" || strlen($salt) < 32) {
             trigger_error(
-                "Please change the value of `Security.salt` in `ROOT/config/app_local.php` " .
+                "Please change the value of `Security.salt` in `ROOT/config/app_local.php` " ~
                 "to a random value of at least 32 characters.",
                 E_USER_NOTICE
             );

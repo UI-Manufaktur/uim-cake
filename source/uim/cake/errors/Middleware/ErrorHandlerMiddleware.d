@@ -57,8 +57,8 @@ class ErrorHandlerMiddleware : IMiddleware
     this(myErrorHandler = []) {
         if (func_num_args() > 1) {
             deprecationWarning(
-                "The signature of ErrorHandlerMiddleware::this() has changed. "
-                . "Pass the config array as 1st argument instead."
+                "The signature of ErrorHandlerMiddleware::this() has changed~ "
+                ~ "Pass the config array as 1st argument instead."
             );
 
             myErrorHandler = func_get_arg(1);

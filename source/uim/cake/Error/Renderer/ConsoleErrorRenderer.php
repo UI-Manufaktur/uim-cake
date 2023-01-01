@@ -53,7 +53,7 @@ class ConsoleErrorRenderer : ErrorRendererInterface
     {
         $trace = "";
         if (this.trace) {
-            $trace = "\n<info>Stack Trace:</info>\n\n" . $error.getTraceAsString();
+            $trace = "\n<info>Stack Trace:</info>\n\n" ~ $error.getTraceAsString();
         }
 
         return sprintf(

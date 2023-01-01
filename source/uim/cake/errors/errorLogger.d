@@ -43,7 +43,7 @@ class ErrorLogger : IErrorLogger
             myMessage .= this.getRequestContext($context["request"]);
         }
         if (!empty($context["trace"])) {
-            myMessage .= "\nTrace:\n" . $context["trace"] . "\n";
+            myMessage .= "\nTrace:\n" ~ $context["trace"] ~ "\n";
         }
 
         return Log::write($level, myMessage);
@@ -89,7 +89,7 @@ class ErrorLogger : IErrorLogger
         if ($debug && myException instanceof CakeException) {
             $attributes = myException.getAttributes();
             if ($attributes) {
-                myMessage .= "\nException Attributes: " . var_export(myException.getAttributes(), true);
+                myMessage .= "\nException Attributes: " ~ var_export(myException.getAttributes(), true);
             }
         }
 
@@ -99,7 +99,7 @@ class ErrorLogger : IErrorLogger
             myMessage .= "\nStack Trace:\n";
             foreach ($trace as $line) {
                 if (is_string($line)) {
-                    myMessage .= "- " . $line;
+                    myMessage .= "- " ~ $line;
                 } else {
                     myMessage .= "- {$line["file"]}:{$line["line"]}\n";
                 }
@@ -120,17 +120,17 @@ class ErrorLogger : IErrorLogger
      * @param \Psr\Http\messages.IServerRequest myRequest The request to read from.
      */
     string getRequestContext(IServerRequest myRequest) {
-        myMessage = "\nRequest URL: " . myRequest.getRequestTarget();
+        myMessage = "\nRequest URL: " ~ myRequest.getRequestTarget();
 
         $referer = myRequest.getHeaderLine("Referer");
         if ($referer) {
-            myMessage .= "\nReferer URL: " . $referer;
+            myMessage .= "\nReferer URL: " ~ $referer;
         }
 
         if (method_exists(myRequest, "clientIp")) {
             $clientIp = myRequest.clientIp();
             if ($clientIp && $clientIp != "::1") {
-                myMessage .= "\nClient IP: " . $clientIp;
+                myMessage .= "\nClient IP: " ~ $clientIp;
             }
         }
 

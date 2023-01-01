@@ -70,8 +70,8 @@ abstract class BaseErrorHandler
     void register(): void
     {
         deprecationWarning(
-            "Use of `BaseErrorHandler` and subclasses are deprecated. " .
-            "Upgrade to the new `ErrorTrap` and `ExceptionTrap` subsystem. " .
+            "Use of `BaseErrorHandler` and subclasses are deprecated~ " ~
+            "Upgrade to the new `ErrorTrap` and `ExceptionTrap` subsystem~ " ~
             "See https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html"
         );
 
@@ -270,7 +270,7 @@ abstract class BaseErrorHandler
         }
 
         if ($units == "K") {
-            ini_set("memory_limit", ceil($current + $additionalKb) . "K");
+            ini_set("memory_limit", ceil($current + $additionalKb) ~ "K");
         }
     }
 

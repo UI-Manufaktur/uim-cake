@@ -634,13 +634,13 @@ class NumericPaginator : PaginatorInterface
             if ($correctAlias && $allowed) {
                 // Disambiguate fields in schema. As id is quite common.
                 if ($object.hasField($field)) {
-                    $field = $alias . "." . $field;
+                    $field = $alias ~ "." ~ $field;
                 }
                 $tableOrder[$field] = $value;
             } elseif ($correctAlias && $object.hasField($field)) {
-                $tableOrder[$tableAlias . "." . $field] = $value;
+                $tableOrder[$tableAlias ~ "." ~ $field] = $value;
             } elseif (!$correctAlias && $allowed) {
-                $tableOrder[$alias . "." . $field] = $value;
+                $tableOrder[$alias ~ "." ~ $field] = $value;
             }
         }
 
