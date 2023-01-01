@@ -29,8 +29,7 @@ class SpecialNode : INode
     /**
      * Get the message/value
      */
-    string getValue()
-    {
+    string getValue() {
         return this.value;
     }
 

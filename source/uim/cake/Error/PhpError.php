@@ -116,16 +116,14 @@ class PhpError
     /**
      * Get the error code label
      */
-    string getLabel()
-    {
+    string getLabel() {
         return this.levelMap[this.code] ?? "error";
     }
 
     /**
      * Get the error message.
      */
-    string getMessage()
-    {
+    string getMessage() {
         return this.message;
     }
 
@@ -160,8 +158,7 @@ class PhpError
     /**
      * Get the stacktrace as a string.
      */
-    string getTraceAsString()
-    {
+    string getTraceAsString() {
         $out = [];
         foreach (this.trace as $frame) {
             $out[] = "{$frame["reference"]} {$frame["file"]}, line {$frame["line"]}";

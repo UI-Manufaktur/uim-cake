@@ -69,8 +69,7 @@ class ConsoleFormatter : IFormatter
     }
 
 
-    string formatWrapper(string $contents, array $location)
-    {
+    string formatWrapper(string $contents, array $location) {
         $lineInfo = "";
         if (isset($location["file"], $location["file"])) {
             $lineInfo = sprintf("%s (line %s)", $location["file"], $location["line"]);
@@ -91,8 +90,7 @@ class ConsoleFormatter : IFormatter
      *
      * @param uim.cake.errors.debugs.INode $node The node tree to dump.
      */
-    string dump(INode $node)
-    {
+    string dump(INode $node) {
         $indent = 0;
 
         return this.export($node, $indent);
@@ -104,8 +102,7 @@ class ConsoleFormatter : IFormatter
      * @param uim.cake.errors.debugs.INode $var The node tree to dump.
      * @param int $indent The current indentation level.
      */
-    protected string export(INode $var, int $indent)
-    {
+    protected string export(INode $var, int $indent) {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {
                 case "bool":
@@ -141,8 +138,7 @@ class ConsoleFormatter : IFormatter
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
-    protected string exportArray(ArrayNode $var, int $indent)
-    {
+    protected string exportArray(ArrayNode $var, int $indent) {
         $out = this.style("punct", "[");
         $break = "\n" ~ str_repeat("  ", $indent);
         $end = "\n" ~ str_repeat("  ", $indent - 1);
@@ -170,8 +166,7 @@ class ConsoleFormatter : IFormatter
      * @return string
      * @see uim.cake.errors.Debugger::exportVar()
      */
-    protected string exportObject($var, int $indent)
-    {
+    protected string exportObject($var, int $indent) {
         $props = [];
 
         if ($var instanceof ReferenceNode) {
@@ -221,8 +216,7 @@ class ConsoleFormatter : IFormatter
      * @param string $text The text to style.
      * @return string The styled output.
      */
-    protected string style(string $style, string $text)
-    {
+    protected string style(string $style, string $text) {
         $code = this.styles[$style];
 
         return "\033[{$code}m{$text}\033[0m";

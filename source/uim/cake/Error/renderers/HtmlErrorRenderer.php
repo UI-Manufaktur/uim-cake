@@ -26,8 +26,7 @@ class HtmlErrorRenderer : ErrorRendererInterface
     }
 
 
-    string render(PhpError $error, bool $debug)
-    {
+    string render(PhpError $error, bool $debug) {
         if (!$debug) {
             return "";
         }
@@ -74,8 +73,7 @@ HTML;
      * @param string $suffix The element selector.
      * @return string
      */
-    private string renderToggle(string $text, string $id, string $suffix)
-    {
+    private string renderToggle(string $text, string $id, string $suffix) {
         $selector = $id ~ "-" ~ $suffix;
 
         // phpcs:disable

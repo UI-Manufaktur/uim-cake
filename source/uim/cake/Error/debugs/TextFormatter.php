@@ -12,8 +12,7 @@ use RuntimeException;
  */
 class TextFormatter : IFormatter {
 
-    string formatWrapper(string $contents, array $location)
-    {
+    string formatWrapper(string $contents, array $location) {
         $template = <<<TEXT
 %s
 ########## DEBUG ##########
@@ -34,8 +33,7 @@ TEXT;
      *
      * @param uim.cake.errors.debugs.INode $node The node tree to dump.
      */
-    string dump(INode $node)
-    {
+    string dump(INode $node) {
         $indent = 0;
 
         return this.export($node, $indent);
@@ -47,8 +45,7 @@ TEXT;
      * @param uim.cake.errors.debugs.INode $var The node tree to dump.
      * @param int $indent The current indentation level.
      */
-    protected string export(INode $var, int $indent)
-    {
+    protected string export(INode $var, int $indent) {
         if ($var instanceof ScalarNode) {
             switch ($var.getType()) {
                 case "bool":
@@ -80,8 +77,7 @@ TEXT;
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
-    protected string exportArray(ArrayNode $var, int $indent)
-    {
+    protected string exportArray(ArrayNode $var, int $indent) {
         $out = "[";
         $break = "\n" ~ str_repeat("  ", $indent);
         $end = "\n" ~ str_repeat("  ", $indent - 1);
@@ -106,8 +102,7 @@ TEXT;
      * @return string
      * @see uim.cake.errors.Debugger::exportVar()
      */
-    protected string exportObject($var, int $indent)
-    {
+    protected string exportObject($var, int $indent) {
         $out = "";
         $props = [];
 

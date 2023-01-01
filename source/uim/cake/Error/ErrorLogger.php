@@ -131,8 +131,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @param bool $includeTrace Whether or not to include a stack trace.
      * @return string Error message
      */
-    protected string getMessage(Throwable $exception, bool $isPrevious = false, bool $includeTrace = false)
-    {
+    protected string getMessage(Throwable $exception, bool $isPrevious = false, bool $includeTrace = false) {
         $message = sprintf(
             "%s[%s] %s in %s on line %s",
             $isPrevious ? "\nCaused by: " : "",
@@ -176,8 +175,7 @@ class ErrorLogger : ErrorLoggerInterface
      *
      * @param \Psr\Http\messages.IServerRequest $request The request to read from.
      */
-    string getRequestContext(IServerRequest $request)
-    {
+    string getRequestContext(IServerRequest $request) {
         $message = "\nRequest URL: " ~ $request.getRequestTarget();
 
         $referer = $request.getHeaderLine("Referer");
