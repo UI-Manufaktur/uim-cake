@@ -93,8 +93,8 @@ class QueryCompiler
         // placeholders can be found in the SQL statement.
         if ($query.getValueBinder() != $binder) {
             foreach ($query.getValueBinder().bindings() as $binding) {
-                $placeholder = ":" . $binding["placeholder"];
-                if (preg_match("/" . $placeholder . "(?:\W|$)/", $sql) > 0) {
+                $placeholder = ":" ~ $binding["placeholder"];
+                if (preg_match("/" ~ $placeholder ~ "(?:\W|$)/", $sql) > 0) {
                     $binder.bind($placeholder, $binding["value"], $binding["type"]);
                 }
             }
@@ -133,7 +133,7 @@ class QueryCompiler
                 return;
             }
 
-            $sql .= this.{"_build" . $partName . "Part"}($part, $query, $binder);
+            $sql .= this.{"_build" ~ $partName ~ "Part"}($part, $query, $binder);
         };
     }
 
@@ -183,7 +183,7 @@ class QueryCompiler
         $parts = _stringifyExpressions($parts, $binder);
         foreach ($parts as $k: $p) {
             if (!is_numeric($k)) {
-                $p = $p . " AS ";
+                $p = $p ~ " AS ";
                 if ($quoteIdentifiers) {
                     $p .= $driver.quoteIdentifier($k);
                 } else {
@@ -220,7 +220,7 @@ class QueryCompiler
         $parts = _stringifyExpressions($parts, $binder);
         foreach ($parts as $k: $p) {
             if (!is_numeric($k)) {
-                $p = $p . " " . $k;
+                $p = $p ~ " " ~ $k;
             }
             $normalized[] = $p;
         }
@@ -243,13 +243,13 @@ class QueryCompiler
         foreach ($parts as $join) {
             if (!isset($join["table"])) {
                 throw new DatabaseException(sprintf(
-                    "Could not compile join clause for alias `%s`. No table was specified. " .
+                    "Could not compile join clause for alias `%s`. No table was specified~ " ~
                     "Use the `table` key to define a table.",
                     $join["alias"]
                 ));
             }
             if ($join["table"] instanceof IExpression) {
-                $join["table"] = "(" . $join["table"].sql($binder) . ")";
+                $join["table"] = "(" ~ $join["table"].sql($binder) ~ ")";
             }
 
             $joins .= sprintf(" %s JOIN %s %s", $join["type"], $join["table"], $join["alias"]);
@@ -278,10 +278,10 @@ class QueryCompiler
     protected string _buildWindowPart(array $parts, Query $query, ValueBinder aBinder) {
         $windows = [];
         foreach ($parts as $window) {
-            $windows[] = $window["name"].sql($binder) . " AS (" . $window["window"].sql($binder) . ")";
+            $windows[] = $window["name"].sql($binder) ~ " AS (" ~ $window["window"].sql($binder) ~ ")";
         }
 
-        return " WINDOW " . implode(", ", $windows);
+        return " WINDOW " ~ implode(", ", $windows);
     }
 
     /**
@@ -303,7 +303,7 @@ class QueryCompiler
             $set[] = $part;
         }
 
-        return " SET " . implode("", $set);
+        return " SET " ~ implode("", $set);
     }
 
     /**
@@ -345,7 +345,7 @@ class QueryCompiler
     protected string _buildInsertPart(array $parts, Query $query, ValueBinder aBinder) {
         if (!isset($parts[0])) {
             throw new DatabaseException(
-                "Could not compile insert query. No table was specified. " .
+                "Could not compile insert query. No table was specified~ " ~
                 "Use `into()` to define a table."
             );
         }
@@ -396,7 +396,7 @@ class QueryCompiler
             return "";
         }
 
-        return " " . implode(" ", _stringifyExpressions($parts, $binder, false));
+        return " " ~ implode(" ", _stringifyExpressions($parts, $binder, false));
     }
 
     /**
@@ -414,7 +414,7 @@ class QueryCompiler
         foreach ($expressions as $k: $expression) {
             if ($expression instanceof IExpression) {
                 $value = $expression.sql($binder);
-                $expression = $wrap ? "(" . $value . ")" : $value;
+                $expression = $wrap ? "(" ~ $value ~ ")" : $value;
             }
             $result[$k] = $expression;
         }

@@ -124,7 +124,7 @@ class DateTimeType : BaseType : BatchCastingInterface
         }
         if (is_int($value)) {
             $class = _className;
-            $value = new $class("@" . $value);
+            $value = new $class("@" ~ $value);
         }
 
         if (
@@ -203,7 +203,7 @@ class DateTimeType : BaseType : BatchCastingInterface
 
         $class = _className;
         if (is_int($value)) {
-            $instance = new $class("@" . $value);
+            $instance = new $class("@" ~ $value);
         } else {
             if (strpos($value, "0000-00-00") == 0) {
                 return null;
@@ -261,7 +261,7 @@ class DateTimeType : BaseType : BatchCastingInterface
 
             $class = _className;
             if (is_int($value)) {
-                $instance = new $class("@" . $value);
+                $instance = new $class("@" ~ $value);
             } else {
                 $instance = new $class($value, this.dbTimezone);
             }
@@ -309,7 +309,7 @@ class DateTimeType : BaseType : BatchCastingInterface
 
             if (is_int($value) || (is_string($value) && ctype_digit($value))) {
                 /** @var \DateTime|\DateTimeImmutable $dateTime */
-                $dateTime = new $class("@" . $value);
+                $dateTime = new $class("@" ~ $value);
 
                 return $dateTime.setTimezone(this.defaultTimezone);
             }
@@ -417,7 +417,7 @@ class DateTimeType : BaseType : BatchCastingInterface
     function useImmutable() {
         deprecationWarning(
             "Configuring immutable or mutable classes is deprecated and immutable"
-            . " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
+            ~ " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
         );
 
         _setClassName(FrozenTime::class, DateTimeImmutable::class);
@@ -462,7 +462,7 @@ class DateTimeType : BaseType : BatchCastingInterface
     function useMutable() {
         deprecationWarning(
             "Configuring immutable or mutable classes is deprecated and immutable"
-            . " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
+            ~ " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
         );
 
         _setClassName(Time::class, DateTime::class);

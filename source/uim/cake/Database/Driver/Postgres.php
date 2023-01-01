@@ -129,7 +129,7 @@ class Postgres : Driver
      */
     void setEncoding(string $encoding) {
         this.connect();
-        _connection.exec("SET NAMES " . _connection.quote($encoding));
+        _connection.exec("SET NAMES " ~ _connection.quote($encoding));
     }
 
     /**
@@ -140,7 +140,7 @@ class Postgres : Driver
      */
     void setSchema(string $schema) {
         this.connect();
-        _connection.exec("SET search_path TO " . _connection.quote($schema));
+        _connection.exec("SET search_path TO " ~ _connection.quote($schema));
     }
 
 
@@ -213,7 +213,7 @@ class Postgres : Driver
         $collation = $expression.getCollation();
         if ($collation) {
             // use trim() to work around expression being transformed multiple times
-            $expression.setCollation(""" . trim($collation, """) . """);
+            $expression.setCollation(""" ~ trim($collation, """) ~ """);
         }
     }
 
@@ -287,7 +287,7 @@ class Postgres : Driver
      */
     protected void _transformStringExpression(StringExpression $expression) {
         // use trim() to work around expression being transformed multiple times
-        $expression.setCollation(""" . trim($expression.getCollation(), """) . """);
+        $expression.setCollation(""" ~ trim($expression.getCollation(), """) ~ """);
     }
 
     /**

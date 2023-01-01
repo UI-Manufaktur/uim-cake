@@ -211,7 +211,7 @@ class ValuesExpression : IExpression
                 $value = $row[$column];
 
                 if ($value instanceof IExpression) {
-                    $rowPlaceholders[] = "(" . $value.sql($binder) . ")";
+                    $rowPlaceholders[] = "(" ~ $value.sql($binder) ~ ")";
                     continue;
                 }
 
@@ -225,7 +225,7 @@ class ValuesExpression : IExpression
 
         $query = this.getQuery();
         if ($query) {
-            return " " . $query.sql($binder);
+            return " " ~ $query.sql($binder);
         }
 
         return sprintf(" VALUES (%s)", implode("), (", $placeholders));

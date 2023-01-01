@@ -421,7 +421,7 @@ class PostgresSchemaDialect : SchemaDialect
         }
 
         if ($data["type"] == TableSchema::TYPE_CHAR) {
-            $out .= "(" . $data["length"] . ")";
+            $out .= "(" ~ $data["length"] ~ ")";
         }
 
         if (
@@ -433,13 +433,13 @@ class PostgresSchemaDialect : SchemaDialect
         ) {
             $out .= " VARCHAR";
             if (isset($data["length"]) && $data["length"] != "") {
-                $out .= "(" . $data["length"] . ")";
+                $out .= "(" ~ $data["length"] ~ ")";
             }
         }
 
         $hasCollate = [TableSchema::TYPE_TEXT, TableSchema::TYPE_STRING, TableSchema::TYPE_CHAR];
         if (in_array($data["type"], $hasCollate, true) && isset($data["collate"]) && $data["collate"] != "") {
-            $out .= " COLLATE "" . $data["collate"] . """;
+            $out .= " COLLATE "" ~ $data["collate"] ~ """;
         }
 
         $hasPrecision = [
@@ -451,7 +451,7 @@ class PostgresSchemaDialect : SchemaDialect
             TableSchema::TYPE_TIMESTAMP_TIMEZONE,
         ];
         if (in_array($data["type"], $hasPrecision) && isset($data["precision"])) {
-            $out .= "(" . $data["precision"] . ")";
+            $out .= "(" ~ $data["precision"] ~ ")";
         }
 
         if (
@@ -461,7 +461,7 @@ class PostgresSchemaDialect : SchemaDialect
                 isset($data["precision"])
             )
         ) {
-            $out .= "(" . $data["length"] . "," . (int)$data["precision"] . ")";
+            $out .= "(" ~ $data["length"] ~ "," ~ (int)$data["precision"] ~ ")";
         }
 
         if (isset($data["null"]) && $data["null"] == false) {
@@ -486,7 +486,7 @@ class PostgresSchemaDialect : SchemaDialect
             if ($data["type"] == "boolean") {
                 $defaultValue = (bool)$defaultValue;
             }
-            $out .= " DEFAULT " . _driver.schemaValue($defaultValue);
+            $out .= " DEFAULT " ~ _driver.schemaValue($defaultValue);
         } elseif (isset($data["null"]) && $data["null"] != false) {
             $out .= " DEFAULT NULL";
         }
@@ -554,7 +554,7 @@ class PostgresSchemaDialect : SchemaDialect
     {
         /** @var array<string, mixed> $data */
         $data = $schema.getConstraint($name);
-        $out = "CONSTRAINT " . _driver.quoteIdentifier($name);
+        $out = "CONSTRAINT " ~ _driver.quoteIdentifier($name);
         if ($data["type"] == TableSchema::CONSTRAINT_PRIMARY) {
             $out = "PRIMARY KEY";
         }
@@ -588,7 +588,7 @@ class PostgresSchemaDialect : SchemaDialect
             );
         }
 
-        return $prefix . " (" . implode(", ", $columns) . ")";
+        return $prefix ~ " (" ~ implode(", ", $columns) ~ ")";
     }
 
 

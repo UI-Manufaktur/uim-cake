@@ -124,7 +124,7 @@ class FunctionsBuilder
     {
         if (is_array($field)) {
             deprecationWarning(
-                "Build cast function by FunctionsBuilder::cast(array $args) is deprecated. " .
+                "Build cast function by FunctionsBuilder::cast(array $args) is deprecated~ " ~
                 "Use FunctionsBuilder::cast($field, string $type) instead."
             );
 
@@ -197,7 +197,7 @@ class FunctionsBuilder
         if (!is_numeric($value)) {
             $value = 0;
         }
-        $interval = $value . " " . $unit;
+        $interval = $value ~ " " ~ $unit;
         $expression = new FunctionExpression("DATE_ADD", this.toLiteralParam($expression), $types, "datetime");
         $expression.setConjunction(", INTERVAL").add([$interval: "literal"]);
 
@@ -250,7 +250,7 @@ class FunctionsBuilder
             return new FunctionExpression("CURRENT_TIME", [], [], "time");
         }
 
-        throw new InvalidArgumentException("Invalid argument for FunctionsBuilder::now(): " . $type);
+        throw new InvalidArgumentException("Invalid argument for FunctionsBuilder::now(): " ~ $type);
     }
 
     /**

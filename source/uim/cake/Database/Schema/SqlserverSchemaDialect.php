@@ -418,7 +418,7 @@ class SqlserverSchemaDialect : SchemaDialect
         }
 
         if ($data["type"] == TableSchema::TYPE_CHAR) {
-            $out .= "(" . $data["length"] . ")";
+            $out .= "(" ~ $data["length"] ~ ")";
         }
 
         if ($data["type"] == TableSchema::TYPE_BINARY) {
@@ -452,7 +452,7 @@ class SqlserverSchemaDialect : SchemaDialect
 
         $hasCollate = [TableSchema::TYPE_TEXT, TableSchema::TYPE_STRING, TableSchema::TYPE_CHAR];
         if (in_array($data["type"], $hasCollate, true) && isset($data["collate"]) && $data["collate"] != "") {
-            $out .= " COLLATE " . $data["collate"];
+            $out .= " COLLATE " ~ $data["collate"];
         }
 
         $precisionTypes = [
@@ -463,7 +463,7 @@ class SqlserverSchemaDialect : SchemaDialect
             TableSchema::TYPE_TIMESTAMP_FRACTIONAL,
         ];
         if (in_array($data["type"], $precisionTypes, true) && isset($data["precision"])) {
-            $out .= "(" . (int)$data["precision"] . ")";
+            $out .= "(" ~ (int)$data["precision"] ~ ")";
         }
 
         if (
@@ -473,7 +473,7 @@ class SqlserverSchemaDialect : SchemaDialect
                 isset($data["precision"])
             )
         ) {
-            $out .= "(" . (int)$data["length"] . "," . (int)$data["precision"] . ")";
+            $out .= "(" ~ (int)$data["length"] ~ "," ~ (int)$data["precision"] ~ ")";
         }
 
         if (isset($data["null"]) && $data["null"] == false) {
@@ -499,12 +499,12 @@ class SqlserverSchemaDialect : SchemaDialect
             in_array($data["type"], $dateTimeTypes, true) &&
             in_array(strtolower($data["default"]), $dateTimeDefaults, true)
         ) {
-            $out .= " DEFAULT " . strtoupper($data["default"]);
+            $out .= " DEFAULT " ~ strtoupper($data["default"]);
         } elseif (isset($data["default"])) {
             $default = is_bool($data["default"])
                 ? (int)$data["default"]
                 : _driver.schemaValue($data["default"]);
-            $out .= " DEFAULT " . $default;
+            $out .= " DEFAULT " ~ $default;
         } elseif (isset($data["null"]) && $data["null"] != false) {
             $out .= " DEFAULT NULL";
         }
@@ -572,7 +572,7 @@ class SqlserverSchemaDialect : SchemaDialect
     {
         /** @var array $data */
         $data = $schema.getConstraint($name);
-        $out = "CONSTRAINT " . _driver.quoteIdentifier($name);
+        $out = "CONSTRAINT " ~ _driver.quoteIdentifier($name);
         if ($data["type"] == TableSchema::CONSTRAINT_PRIMARY) {
             $out = "PRIMARY KEY";
         }
@@ -606,7 +606,7 @@ class SqlserverSchemaDialect : SchemaDialect
             );
         }
 
-        return $prefix . " (" . implode(", ", $columns) . ")";
+        return $prefix ~ " (" ~ implode(", ", $columns) ~ ")";
     }
 
 
@@ -639,7 +639,7 @@ class SqlserverSchemaDialect : SchemaDialect
             $column = $schema.getColumn($pk[0]);
             if (in_array($column["type"], ["integer", "biginteger"])) {
                 $queries[] = sprintf(
-                    "IF EXISTS (SELECT * FROM sys.identity_columns WHERE OBJECT_NAME(OBJECT_ID) = "%s" AND " .
+                    "IF EXISTS (SELECT * FROM sys.identity_columns WHERE OBJECT_NAME(OBJECT_ID) = "%s" AND " ~
                     "last_value IS NOT NULL) DBCC CHECKIDENT("%s", RESEED, 0)",
                     $schema.name(),
                     $schema.name()

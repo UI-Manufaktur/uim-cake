@@ -436,7 +436,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
         foreach ($attrs["columns"] as $field) {
             if (empty(_columns[$field])) {
                 $msg = sprintf(
-                    "Columns used in index "%s" in table "%s" must be added to the Table schema first. " .
+                    "Columns used in index "%s" in table "%s" must be added to the Table schema first~ " ~
                     "The column "%s" was not found.",
                     $name,
                     _table,
@@ -516,7 +516,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
         foreach ($attrs["columns"] as $field) {
             if (empty(_columns[$field])) {
                 $msg = sprintf(
-                    "Columns used in constraints must be added to the Table schema first. " .
+                    "Columns used in constraints must be added to the Table schema first~ " ~
                     "The column "%s" was not found in table "%s".",
                     $field,
                     _table

@@ -549,7 +549,7 @@ class QueryExpression : IExpression, Countable
         $parts = [];
         foreach (_conditions as $part) {
             if ($part instanceof Query) {
-                $part = "(" . $part.sql($binder) . ")";
+                $part = "(" ~ $part.sql($binder) ~ ")";
             } elseif ($part instanceof IExpression) {
                 $part = $part.sql($binder);
             }

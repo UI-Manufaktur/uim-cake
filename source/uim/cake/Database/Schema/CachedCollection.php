@@ -79,7 +79,7 @@ class CachedCollection : ICollection
      */
     string cacheKey(string aName)
     {
-        return this.prefix . "_" . $name;
+        return this.prefix ~ "_" ~ $name;
     }
 
     /**

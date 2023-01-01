@@ -1049,7 +1049,7 @@ class Query : IExpression, IteratorAggregate
             return this.where("1=0");
         }
 
-        return this.where([$field . " IN": $values], $options["types"]);
+        return this.where([$field ~ " IN": $values], $options["types"]);
     }
 
     /**
@@ -1072,10 +1072,10 @@ class Query : IExpression, IteratorAggregate
         ];
 
         if ($options["allowEmpty"] && !$values) {
-            return this.where([$field . " IS NOT": null]);
+            return this.where([$field ~ " IS NOT": null]);
         }
 
-        return this.where([$field . " NOT IN": $values], $options["types"]);
+        return this.where([$field ~ " NOT IN": $values], $options["types"]);
     }
 
     /**
@@ -1099,12 +1099,12 @@ class Query : IExpression, IteratorAggregate
         ];
 
         if ($options["allowEmpty"] && !$values) {
-            return this.where([$field . " IS NOT": null]);
+            return this.where([$field ~ " IS NOT": null]);
         }
 
         return this.where(
             [
-                "OR": [$field . " NOT IN": $values, $field . " IS": null],
+                "OR": [$field ~ " NOT IN": $values, $field ~ " IS": null],
             ],
             $options["types"]
         );

@@ -64,7 +64,7 @@ class SqlserverCompiler : QueryCompiler
     protected string _buildInsertPart(array $parts, Query $query, ValueBinder aBinder) {
         if (!isset($parts[0])) {
             throw new DatabaseException(
-                "Could not compile insert query. No table was specified. " .
+                "Could not compile insert query. No table was specified~ " ~
                 "Use `into()` to define a table."
             );
         }
@@ -115,7 +115,7 @@ class SqlserverCompiler : QueryCompiler
                     continue;
                 }
                 preg_match_all(
-                    "/\b" . trim($selectKey, "[]") . "\b/i",
+                    "/\b" ~ trim($selectKey, "[]") ~ "\b/i",
                     $p,
                     $matches
                 );
@@ -125,7 +125,7 @@ class SqlserverCompiler : QueryCompiler
                 }
 
                 $parts[$k] = preg_replace(
-                    ["/\[|\]/", "/\b" . trim($selectKey, "[]") . "\b/i"],
+                    ["/\[|\]/", "/\b" ~ trim($selectKey, "[]") ~ "\b/i"],
                     ["", $selectPart.sql($binder)],
                     $p
                 );

@@ -193,7 +193,7 @@ class CaseExpression : IExpression
         $parts[] = "CASE";
         foreach (_conditions as $k: $part) {
             $value = _values[$k];
-            $parts[] = "WHEN " . _compile($part, $binder) . " THEN " . _compile($value, $binder);
+            $parts[] = "WHEN " ~ _compile($part, $binder) ~ " THEN " ~ _compile($value, $binder);
         }
         if (_elseValue != null) {
             $parts[] = "ELSE";

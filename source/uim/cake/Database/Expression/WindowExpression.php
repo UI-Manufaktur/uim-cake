@@ -190,7 +190,7 @@ class WindowExpression : IExpression, WindowInterface
                 $expressions[] = $partition.sql($binder);
             }
 
-            $clauses[] = "PARTITION BY " . implode(", ", $expressions);
+            $clauses[] = "PARTITION BY " ~ implode(", ", $expressions);
         }
 
         if (this.order) {
@@ -212,7 +212,7 @@ class WindowExpression : IExpression, WindowInterface
             $frameSql = sprintf("%s BETWEEN %s AND %s", this.frame["type"], $start, $end);
 
             if (this.exclusion != null) {
-                $frameSql .= " EXCLUDE " . this.exclusion;
+                $frameSql .= " EXCLUDE " ~ this.exclusion;
             }
 
             $clauses[] = $frameSql;

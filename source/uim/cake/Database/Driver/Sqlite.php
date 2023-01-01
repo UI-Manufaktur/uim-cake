@@ -124,19 +124,19 @@ class Sqlite : Driver
 
         $params = [];
         if ($config["cache"]) {
-            $params[] = "cache=" . $config["cache"];
+            $params[] = "cache=" ~ $config["cache"];
         }
         if ($config["mode"]) {
-            $params[] = "mode=" . $config["mode"];
+            $params[] = "mode=" ~ $config["mode"];
         }
 
         if ($params) {
             if (PHP_VERSION_ID < 80100) {
                 throw new RuntimeException("SQLite URI support requires PHP 8.1.");
             }
-            $dsn = "sqlite:file:" . $config["database"] . "?" . implode("&", $params);
+            $dsn = "sqlite:file:" ~ $config["database"] ~ "?" ~ implode("&", $params);
         } else {
-            $dsn = "sqlite:" . $config["database"];
+            $dsn = "sqlite:" ~ $config["database"];
         }
 
         _connect($dsn, $config);
@@ -291,7 +291,7 @@ class Sqlite : Driver
                         if ($key == 0) {
                             $value = rtrim(strtolower($p), "s");
                             if (isset(_dateParts[$value])) {
-                                $p = ["value": "%" . _dateParts[$value], "type": null];
+                                $p = ["value": "%" ~ _dateParts[$value], "type": null];
                             }
                         }
 

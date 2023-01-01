@@ -26,7 +26,7 @@ class MysqlSchemaDialect : SchemaDialect
      */
     function listTablesSql(array $config): array
     {
-        return ["SHOW FULL TABLES FROM " . _driver.quoteIdentifier($config["database"]), []];
+        return ["SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier($config["database"]), []];
     }
 
     /**
@@ -39,21 +39,21 @@ class MysqlSchemaDialect : SchemaDialect
     function listTablesWithoutViewsSql(array $config): array
     {
         return [
-            "SHOW FULL TABLES FROM " . _driver.quoteIdentifier($config["database"])
-            . " WHERE TABLE_TYPE = "BASE TABLE""
+            "SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier($config["database"])
+            ~ " WHERE TABLE_TYPE = "BASE TABLE""
         , []];
     }
 
 
     function describeColumnSql(string $tableName, array $config): array
     {
-        return ["SHOW FULL COLUMNS FROM " . _driver.quoteIdentifier($tableName), []];
+        return ["SHOW FULL COLUMNS FROM " ~ _driver.quoteIdentifier($tableName), []];
     }
 
 
     function describeIndexSql(string $tableName, array $config): array
     {
-        return ["SHOW INDEXES FROM " . _driver.quoteIdentifier($tableName), []];
+        return ["SHOW INDEXES FROM " ~ _driver.quoteIdentifier($tableName), []];
     }
 
 
@@ -112,7 +112,7 @@ class MysqlSchemaDialect : SchemaDialect
         if (in_array($col, ["datetime", "timestamp"])) {
             $typeName = $col;
             if ($length > 0) {
-                $typeName = $col . "fractional";
+                $typeName = $col ~ "fractional";
             }
 
             return ["type": $typeName, "length": null, "precision": $length];
@@ -370,7 +370,7 @@ class MysqlSchemaDialect : SchemaDialect
 
                     /** @var string $length */
                     $length = array_search($data["length"], TableSchema::$columnLengths);
-                    $out .= " " . strtoupper($length) . "TEXT";
+                    $out .= " " ~ strtoupper($length) ~ "TEXT";
 
                     break;
                 case TableSchema::TYPE_BINARY:
@@ -378,7 +378,7 @@ class MysqlSchemaDialect : SchemaDialect
                     if ($isKnownLength) {
                         /** @var string $length */
                         $length = array_search($data["length"], TableSchema::$columnLengths);
-                        $out .= " " . strtoupper($length) . "BLOB";
+                        $out .= " " ~ strtoupper($length) ~ "BLOB";
                         break;
                     }
 
@@ -388,9 +388,9 @@ class MysqlSchemaDialect : SchemaDialect
                     }
 
                     if ($data["length"] > 2) {
-                        $out .= " VARBINARY(" . $data["length"] . ")";
+                        $out .= " VARBINARY(" ~ $data["length"] ~ ")";
                     } else {
-                        $out .= " BINARY(" . $data["length"] . ")";
+                        $out .= " BINARY(" ~ $data["length"] ~ ")";
                     }
                     break;
             }
@@ -403,21 +403,21 @@ class MysqlSchemaDialect : SchemaDialect
             TableSchema::TYPE_STRING,
         ];
         if (in_array($data["type"], $hasLength, true) && isset($data["length"])) {
-            $out .= "(" . $data["length"] . ")";
+            $out .= "(" ~ $data["length"] ~ ")";
         }
 
         $lengthAndPrecisionTypes = [TableSchema::TYPE_FLOAT, TableSchema::TYPE_DECIMAL];
         if (in_array($data["type"], $lengthAndPrecisionTypes, true) && isset($data["length"])) {
             if (isset($data["precision"])) {
-                $out .= "(" . (int)$data["length"] . "," . (int)$data["precision"] . ")";
+                $out .= "(" ~ (int)$data["length"] ~ "," ~ (int)$data["precision"] ~ ")";
             } else {
-                $out .= "(" . (int)$data["length"] . ")";
+                $out .= "(" ~ (int)$data["length"] ~ ")";
             }
         }
 
         $precisionTypes = [TableSchema::TYPE_DATETIME_FRACTIONAL, TableSchema::TYPE_TIMESTAMP_FRACTIONAL];
         if (in_array($data["type"], $precisionTypes, true) && isset($data["precision"])) {
-            $out .= "(" . (int)$data["precision"] . ")";
+            $out .= "(" ~ (int)$data["precision"] ~ ")";
         }
 
         $hasUnsigned = [
@@ -442,7 +442,7 @@ class MysqlSchemaDialect : SchemaDialect
             TableSchema::TYPE_STRING,
         ];
         if (in_array($data["type"], $hasCollate, true) && isset($data["collate"]) && $data["collate"] != "") {
-            $out .= " COLLATE " . $data["collate"];
+            $out .= " COLLATE " ~ $data["collate"];
         }
 
         if (isset($data["null"]) && $data["null"] == false) {
@@ -487,16 +487,16 @@ class MysqlSchemaDialect : SchemaDialect
         ) {
             $out .= " DEFAULT CURRENT_TIMESTAMP";
             if (isset($data["precision"])) {
-                $out .= "(" . $data["precision"] . ")";
+                $out .= "(" ~ $data["precision"] ~ ")";
             }
             unset($data["default"]);
         }
         if (isset($data["default"])) {
-            $out .= " DEFAULT " . _driver.schemaValue($data["default"]);
+            $out .= " DEFAULT " ~ _driver.schemaValue($data["default"]);
             unset($data["default"]);
         }
         if (isset($data["comment"]) && $data["comment"] != "") {
-            $out .= " COMMENT " . _driver.schemaValue($data["comment"]);
+            $out .= " COMMENT " ~ _driver.schemaValue($data["comment"]);
         }
 
         return $out;
@@ -610,7 +610,7 @@ class MysqlSchemaDialect : SchemaDialect
             );
         }
 
-        return $prefix . " (" . implode(", ", $columns) . ")";
+        return $prefix ~ " (" ~ implode(", ", $columns) ~ ")";
     }
 }
 

@@ -58,7 +58,7 @@ abstract class SchemaDialect
             return "NO ACTION";
         }
 
-        throw new InvalidArgumentException("Invalid value for "on": " . $on);
+        throw new InvalidArgumentException("Invalid value for "on": " ~ $on);
     }
 
     /**

@@ -37,28 +37,28 @@ trait SqlDialectTrait
         if (preg_match("/^[\w-]+\.[^ \*]*$/u", $identifier)) {
             $items = explode(".", $identifier);
 
-            return _startQuote . implode(_endQuote . "." . _startQuote, $items) . _endQuote;
+            return _startQuote . implode(_endQuote ~ "." ~ _startQuote, $items) . _endQuote;
         }
 
         // string.*
         if (preg_match("/^[\w-]+\.\*$/u", $identifier)) {
-            return _startQuote . str_replace(".*", _endQuote . ".*", $identifier);
+            return _startQuote . str_replace(".*", _endQuote ~ ".*", $identifier);
         }
 
         // Functions
         if (preg_match("/^([\w-]+)\((.*)\)$/", $identifier, $matches)) {
-            return $matches[1] . "(" . this.quoteIdentifier($matches[2]) . ")";
+            return $matches[1] ~ "(" ~ this.quoteIdentifier($matches[2]) ~ ")";
         }
 
         // Alias.field AS thing
         if (preg_match("/^([\w-]+(\.[\w\s-]+|\(.*\))*)\s+AS\s*([\w-]+)$/ui", $identifier, $matches)) {
-            return this.quoteIdentifier($matches[1]) . " AS " . this.quoteIdentifier($matches[3]);
+            return this.quoteIdentifier($matches[1]) ~ " AS " ~ this.quoteIdentifier($matches[3]);
         }
 
         // string.string with spaces
         if (preg_match("/^([\w-]+\.[\w][\w\s-]*[\w])(.*)/u", $identifier, $matches)) {
             $items = explode(".", $matches[1]);
-            $field = implode(_endQuote . "." . _startQuote, $items);
+            $field = implode(_endQuote ~ "." ~ _startQuote, $items);
 
             return _startQuote . $field . _endQuote . $matches[2];
         }
@@ -87,7 +87,7 @@ trait SqlDialectTrait
             }
 
             /** @var uim.cake.orm.Query $query */
-            $query = this.{"_" . $type . "QueryTranslator"}($query);
+            $query = this.{"_" ~ $type ~ "QueryTranslator"}($query);
             $translators = _expressionTranslators();
             if (!$translators) {
                 return $query;
@@ -207,7 +207,7 @@ trait SqlDialectTrait
     {
         if ($query.clause("join")) {
             throw new RuntimeException(
-                "Aliases are being removed from conditions for UPDATE/DELETE queries, " .
+                "Aliases are being removed from conditions for UPDATE/DELETE queries, " ~
                 "this can break references to joined tables."
             );
         }
@@ -263,7 +263,7 @@ trait SqlDialectTrait
      */
     string savePointSQL($name)
     {
-        return "SAVEPOINT LEVEL" . $name;
+        return "SAVEPOINT LEVEL" ~ $name;
     }
 
     /**
@@ -273,7 +273,7 @@ trait SqlDialectTrait
      */
     string releaseSavePointSQL($name)
     {
-        return "RELEASE SAVEPOINT LEVEL" . $name;
+        return "RELEASE SAVEPOINT LEVEL" ~ $name;
     }
 
     /**
@@ -283,6 +283,6 @@ trait SqlDialectTrait
      */
     string rollbackSavePointSQL($name)
     {
-        return "ROLLBACK TO SAVEPOINT LEVEL" . $name;
+        return "ROLLBACK TO SAVEPOINT LEVEL" ~ $name;
     }
 }

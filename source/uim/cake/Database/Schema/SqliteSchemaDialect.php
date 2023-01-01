@@ -144,8 +144,8 @@ class SqliteSchemaDialect : SchemaDialect
     function listTablesSql(array $config): array
     {
         return [
-            "SELECT name FROM sqlite_master " .
-            "WHERE (type="table" OR type="view") " .
+            "SELECT name FROM sqlite_master " ~
+            "WHERE (type="table" OR type="view") " ~
             "AND name != "sqlite_sequence" ORDER BY name",
             [],
         ];
@@ -161,7 +161,7 @@ class SqliteSchemaDialect : SchemaDialect
     function listTablesWithoutViewsSql(array $config): array
     {
         return [
-            "SELECT name FROM sqlite_master WHERE type="table" " .
+            "SELECT name FROM sqlite_master WHERE type="table" " ~
             "AND name != "sqlite_sequence" ORDER BY name",
             [],
         ];
@@ -294,7 +294,7 @@ class SqliteSchemaDialect : SchemaDialect
 
     function convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
-        $name = $row["from"] . "_fk";
+        $name = $row["from"] ~ "_fk";
 
         $update = $row["on_update"] ?? "";
         $delete = $row["on_delete"] ?? "";
@@ -383,7 +383,7 @@ class SqliteSchemaDialect : SchemaDialect
         }
 
         if ($data["type"] == TableSchema::TYPE_CHAR) {
-            $out .= "(" . $data["length"] . ")";
+            $out .= "(" ~ $data["length"] ~ ")";
         }
 
         if (
@@ -396,13 +396,13 @@ class SqliteSchemaDialect : SchemaDialect
             $out .= " VARCHAR";
 
             if (isset($data["length"])) {
-                $out .= "(" . $data["length"] . ")";
+                $out .= "(" ~ $data["length"] ~ ")";
             }
         }
 
         if ($data["type"] == TableSchema::TYPE_BINARY) {
             if (isset($data["length"])) {
-                $out .= " BLOB(" . $data["length"] . ")";
+                $out .= " BLOB(" ~ $data["length"] ~ ")";
             } else {
                 $out .= " BLOB";
             }
@@ -418,7 +418,7 @@ class SqliteSchemaDialect : SchemaDialect
             isset($data["length"]) &&
             $schema.getPrimaryKey() != [$name]
         ) {
-            $out .= "(" . (int)$data["length"] . ")";
+            $out .= "(" ~ (int)$data["length"] ~ ")";
         }
 
         $hasPrecision = [TableSchema::TYPE_FLOAT, TableSchema::TYPE_DECIMAL];
@@ -429,7 +429,7 @@ class SqliteSchemaDialect : SchemaDialect
                 isset($data["precision"])
             )
         ) {
-            $out .= "(" . (int)$data["length"] . "," . (int)$data["precision"] . ")";
+            $out .= "(" ~ (int)$data["length"] ~ "," ~ (int)$data["precision"] ~ ")";
         }
 
         if (isset($data["null"]) && $data["null"] == false) {
@@ -451,7 +451,7 @@ class SqliteSchemaDialect : SchemaDialect
             $out .= " DEFAULT NULL";
         }
         if (isset($data["default"])) {
-            $out .= " DEFAULT " . _driver.schemaValue($data["default"]);
+            $out .= " DEFAULT " ~ _driver.schemaValue($data["default"]);
         }
 
         return $out;

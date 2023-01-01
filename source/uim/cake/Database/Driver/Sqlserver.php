@@ -99,7 +99,7 @@ class Sqlserver : Driver
         if (isset($config["persistent"]) && $config["persistent"]) {
             throw new InvalidArgumentException(
                 "Config setting "persistent" cannot be set to true, "
-                . "as the Sqlserver PDO driver does not support PDO::ATTR_PERSISTENT"
+                ~ "as the Sqlserver PDO driver does not support PDO::ATTR_PERSISTENT"
             );
         }
 
@@ -112,7 +112,7 @@ class Sqlserver : Driver
         }
         $port = "";
         if ($config["port"]) {
-            $port = "," . $config["port"];
+            $port = "," ~ $config["port"];
         }
 
         $dsn = "sqlsrv:Server={$config["host"]}{$port};Database={$config["database"]};MultipleActiveResultSets=false";
@@ -188,9 +188,9 @@ class Sqlserver : Driver
             $sql = $query.sql();
             if (count($query.getValueBinder().bindings()) > 2100) {
                 throw new InvalidArgumentException(
-                    "Exceeded maximum number of parameters (2100) for prepared statements in Sql Server. " .
-                    "This is probably due to a very large WHERE IN () clause which generates a parameter " .
-                    "for each value in the array. " .
+                    "Exceeded maximum number of parameters (2100) for prepared statements in Sql Server~ " ~
+                    "This is probably due to a very large WHERE IN () clause which generates a parameter " ~
+                    "for each value in the array~ " ~
                     "If using an Association, try changing the `strategy` from select to subquery."
                 );
             }
@@ -209,7 +209,7 @@ class Sqlserver : Driver
 
     string savePointSQL($name)
     {
-        return "SAVE TRANSACTION t" . $name;
+        return "SAVE TRANSACTION t" ~ $name;
     }
 
 
@@ -222,7 +222,7 @@ class Sqlserver : Driver
 
     string rollbackSavePointSQL($name)
     {
-        return "ROLLBACK TRANSACTION t" . $name;
+        return "ROLLBACK TRANSACTION t" ~ $name;
     }
 
 
@@ -356,7 +356,7 @@ class Sqlserver : Driver
             .from(["_cake_paging_": $query]);
 
         if ($offset) {
-            $outer.where(["$field > " . $offset]);
+            $outer.where(["$field > " ~ $offset]);
         }
         if ($limit) {
             $value = (int)$offset + $limit;

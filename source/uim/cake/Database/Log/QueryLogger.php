@@ -30,7 +30,7 @@ class QueryLogger : BaseLog
 
         if ($context["query"] instanceof LoggedQuery) {
             $context = $context["query"].getContext() + $context;
-            $message = "connection={connection} duration={took} rows={numRows} " . $message;
+            $message = "connection={connection} duration={took} rows={numRows} " ~ $message;
         }
         Log::write("debug", $message, $context);
     }

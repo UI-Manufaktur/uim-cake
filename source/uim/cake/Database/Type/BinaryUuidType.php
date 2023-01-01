@@ -40,7 +40,7 @@ class BinaryUuidType : BaseType
      *
      * @return string A new primary key value.
      */
-    function newId(): string
+    string newId()
     {
         return Text::uuid();
     }
@@ -97,7 +97,7 @@ class BinaryUuidType : BaseType
      * @param mixed $binary The value to convert.
      * @return string Converted value.
      */
-    protected function convertBinaryUuidToString($binary): string
+    protected string convertBinaryUuidToString($binary)
     {
         $string = unpack("H*", $binary);
 
@@ -116,7 +116,7 @@ class BinaryUuidType : BaseType
      * @param string $string The value to convert.
      * @return string Converted value.
      */
-    protected function convertStringToBinaryUuid($string): string
+    protected string convertStringToBinaryUuid($string)
     {
         $string = str_replace("-", "", $string);
 

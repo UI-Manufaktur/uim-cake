@@ -119,7 +119,7 @@ class WhenThenExpression : IExpression
             !is_object($when)
         ) {
             throw new InvalidArgumentException(sprintf(
-                "The `$when` argument must be either a non-empty array, a scalar value, an object, " .
+                "The `$when` argument must be either a non-empty array, a scalar value, an object, " ~
                 "or an instance of `\%s`, `%s` given.",
                 IExpression::class,
                 is_array($when) ? "[]" : getTypeName($when) // @phpstan-ignore-line
@@ -143,7 +143,7 @@ class WhenThenExpression : IExpression
                 !is_array($type)
             ) {
                 throw new InvalidArgumentException(sprintf(
-                    "When using an array for the `$when` argument, the `$type` argument must be an " .
+                    "When using an array for the `$when` argument, the `$type` argument must be an " ~
                     "array too, `%s` given.",
                     getTypeName($type)
                 ));
@@ -165,7 +165,7 @@ class WhenThenExpression : IExpression
                 !is_string($type)
             ) {
                 throw new InvalidArgumentException(sprintf(
-                    "When using a non-array value for the `$when` argument, the `$type` argument must " .
+                    "When using a non-array value for the `$when` argument, the `$type` argument must " ~
                     "be a string, `%s` given.",
                     getTypeName($type)
                 ));
@@ -200,7 +200,7 @@ class WhenThenExpression : IExpression
             !(is_object($result) && !($result instanceof Closure))
         ) {
             throw new InvalidArgumentException(sprintf(
-                "The `$result` argument must be either `null`, a scalar value, an object, " .
+                "The `$result` argument must be either `null`, a scalar value, an object, " ~
                 "or an instance of `\%s`, `%s` given.",
                 IExpression::class,
                 getTypeName($result)

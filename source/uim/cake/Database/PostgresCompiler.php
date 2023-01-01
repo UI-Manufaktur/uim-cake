@@ -57,7 +57,7 @@ class PostgresCompiler : QueryCompiler
                     continue;
                 }
                 preg_match_all(
-                    "/\b" . trim($selectKey, """) . "\b/i",
+                    "/\b" ~ trim($selectKey, """) ~ "\b/i",
                     $p,
                     $matches
                 );
@@ -67,7 +67,7 @@ class PostgresCompiler : QueryCompiler
                 }
 
                 $parts[$k] = preg_replace(
-                    ["/"/", "/\b" . trim($selectKey, """) . "\b/i"],
+                    ["/"/", "/\b" ~ trim($selectKey, """) ~ "\b/i"],
                     ["", $selectPart.sql($binder)],
                     $p
                 );

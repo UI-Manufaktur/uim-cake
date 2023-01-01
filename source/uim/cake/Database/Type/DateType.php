@@ -43,7 +43,7 @@ class DateType : DateTimeType
     function useImmutable() {
         deprecationWarning(
             "Configuring immutable or mutable classes is deprecated and immutable"
-            . " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
+            ~ " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
         );
 
         _setClassName(FrozenDate::class, DateTimeImmutable::class);
@@ -60,7 +60,7 @@ class DateType : DateTimeType
     function useMutable() {
         deprecationWarning(
             "Configuring immutable or mutable classes is deprecated and immutable"
-            . " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
+            ~ " classes will be the permanent configuration in 5.0. Calling `useImmutable()` is unnecessary."
         );
 
         _setClassName(Date::class, DateTime::class);

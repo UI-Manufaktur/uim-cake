@@ -77,7 +77,7 @@ class IdentifierExpression : IExpression
     {
         $sql = _identifier;
         if (this.collation) {
-            $sql .= " COLLATE " . this.collation;
+            $sql .= " COLLATE " ~ this.collation;
         }
 
         return $sql;

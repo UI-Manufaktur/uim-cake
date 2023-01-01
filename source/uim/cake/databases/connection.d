@@ -724,7 +724,7 @@ class Connection : IConnection {
 
         if (!class_exists(Cache::class)) {
             throw new RuntimeException(
-                "To use caching you must either set a cacher using Connection::setCacher()" .
+                "To use caching you must either set a cacher using Connection::setCacher()" ~
                 " or require the UIM/cache package in your composer config."
             );
         }
@@ -788,7 +788,7 @@ class Connection : IConnection {
 
         if (!class_exists(QueryLogger::class)) {
             throw new RuntimeException(
-                "For logging you must either set a logger using Connection::setLogger()" .
+                "For logging you must either set a logger using Connection::setLogger()" ~
                 " or require the UIM/log package in your composer config."
             );
         }

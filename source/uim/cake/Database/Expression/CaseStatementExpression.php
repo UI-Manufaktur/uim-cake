@@ -120,7 +120,7 @@ class CaseStatementExpression : IExpression, ITypedResult
                 !(is_object($value) && !($value instanceof Closure))
             ) {
                 throw new InvalidArgumentException(sprintf(
-                    "The `$value` argument must be either `null`, a scalar value, an object, " .
+                    "The `$value` argument must be either `null`, a scalar value, an object, " ~
                     "or an instance of `\%s`, `%s` given.",
                     IExpression::class,
                     getTypeName($value)
@@ -399,7 +399,7 @@ class CaseStatementExpression : IExpression, ITypedResult
             !(is_object($result) && !($result instanceof Closure))
         ) {
             throw new InvalidArgumentException(sprintf(
-                "The `$result` argument must be either `null`, a scalar value, an object, " .
+                "The `$result` argument must be either `null`, a scalar value, an object, " ~
                 "or an instance of `\%s`, `%s` given.",
                 IExpression::class,
                 getTypeName($result)
@@ -511,7 +511,7 @@ class CaseStatementExpression : IExpression, ITypedResult
 
         $value = "";
         if (this.isSimpleVariant) {
-            $value = this.compileNullableValue($binder, this.value, this.valueType) . " ";
+            $value = this.compileNullableValue($binder, this.value, this.valueType) ~ " ";
         }
 
         $whenThenExpressions = [];

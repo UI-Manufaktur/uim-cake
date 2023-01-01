@@ -52,8 +52,8 @@ class OrderByExpression : QueryExpression
             ) {
                 throw new RuntimeException(
                     sprintf(
-                        "Passing extra expressions by associative array (`\"%s\": \"%s\"`) " .
-                        "is not allowed to avoid potential SQL injection. " .
+                        "Passing extra expressions by associative array (`\"%s\": \"%s\"`) " ~
+                        "is not allowed to avoid potential SQL injection~ " ~
                         "Use QueryExpression or numeric array instead.",
                         $key,
                         $val

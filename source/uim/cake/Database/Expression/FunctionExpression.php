@@ -136,7 +136,7 @@ class FunctionExpression : QueryExpression : ITypedResult
         }
 
         return _name . sprintf("(%s)", implode(
-            _conjunction . " ",
+            _conjunction ~ " ",
             $parts
         ));
     }
