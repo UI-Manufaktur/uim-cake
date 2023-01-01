@@ -1,3 +1,8 @@
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
 module uim.cake.caches.engines.wincache;
 
 @safe:
@@ -12,23 +17,25 @@ class WincacheEngine : CacheEngine {
     /**
      * Contains the compiled group names
      * (prefixed with the global configuration prefix)
+     *
+     * @var array<string>
      */
-    protected string[] _compiledGroupNames = [];
+    protected $_compiledGroupNames = [];
 
     /**
      * Initialize the Cache Engine
      *
      * Called automatically by the cache frontend
      *
-     * @param array<string, mixed> myConfig array of setting for the engine
+     * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array myConfig = []) {
+    bool init(array $config = []) {
         if (!extension_loaded("wincache")) {
             throw new RuntimeException("The `wincache` extension must be enabled to use WincacheEngine.");
         }
 
-        super.init(myConfig);
+        super.init($config);
 
         return true;
     }
@@ -36,71 +43,71 @@ class WincacheEngine : CacheEngine {
     /**
      * Write data for key into cache
      *
-     * @param string myKey Identifier for the data
-     * @param mixed myValue Data to be cached
+     * @param string aKey Identifier for the data
+     * @param mixed $value Data to be cached
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      */
-    bool set(myKey, myValue, $ttl = null) {
-        myKey = _key(myKey);
+    bool set($key, $value, $ttl = null) {
+        $key = _key($key);
         $duration = this.duration($ttl);
 
-        return wincache_ucache_set(myKey, myValue, $duration);
+        return wincache_ucache_set($key, $value, $duration);
     }
 
     /**
      * Read a key from the cache
      *
-     * @param string myKey Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The cached data, or default value if the data doesn"t exist,
      *   has expired, or if there was an error fetching it
      */
-    auto get(myKey, $default = null) {
-        myValue = wincache_ucache_get(_key(myKey), $success);
+    function get($key, $default = null) {
+        $value = wincache_ucache_get(_key($key), $success);
         if ($success == false) {
             return $default;
         }
 
-        return myValue;
+        return $value;
     }
 
     /**
      * Increments the value of an integer cached key
      *
-     * @param string myKey Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string myKey, int $offset = 1) {
-        myKey = _key(myKey);
+    function increment(string aKey, int $offset = 1) {
+        $key = _key($key);
 
-        return wincache_ucache_inc(myKey, $offset);
+        return wincache_ucache_inc($key, $offset);
     }
 
     /**
      * Decrements the value of an integer cached key
      *
-     * @param string myKey Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string myKey, int $offset = 1) {
-        myKey = _key(myKey);
+    function decrement(string aKey, int $offset = 1) {
+        $key = _key($key);
 
-        return wincache_ucache_dec(myKey, $offset);
+        return wincache_ucache_dec($key, $offset);
     }
 
     /**
      * Delete a key from the cache
      *
-     * @param string myKey Identifier for the data
+     * @param string aKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    bool delete(myKey) {
-        myKey = _key(myKey);
+    bool delete(string aKey) {
+        auto myKey = _key(aKey);
 
         return wincache_ucache_delete(myKey);
     }
@@ -115,9 +122,9 @@ class WincacheEngine : CacheEngine {
         $info = wincache_ucache_info();
         $cacheKeys = $info["ucache_entries"];
         unset($info);
-        foreach ($cacheKeys as myKey) {
-            if (indexOf(myKey["key_name"], _config["prefix"]) == 0) {
-                wincache_ucache_delete(myKey["key_name"]);
+        foreach ($cacheKeys as $key) {
+            if (strpos($key["key_name"], _config["prefix"]) == 0) {
+                wincache_ucache_delete($key["key_name"]);
             }
         }
 
@@ -131,41 +138,41 @@ class WincacheEngine : CacheEngine {
      */
     string[] groups() {
         if (empty(_compiledGroupNames)) {
-            foreach (_config["groups"] as myGroup) {
-                _compiledGroupNames[] = _config["prefix"] . myGroup;
+            foreach (_config["groups"] as $group) {
+                _compiledGroupNames[] = _config["prefix"] . $group;
             }
         }
 
-        myGroups = wincache_ucache_get(_compiledGroupNames);
-        if (count(myGroups) != count(_config["groups"])) {
-            foreach (_compiledGroupNames as myGroup) {
-                if (!isset(myGroups[myGroup])) {
-                    wincache_ucache_set(myGroup, 1);
-                    myGroups[myGroup] = 1;
+        $groups = wincache_ucache_get(_compiledGroupNames);
+        if (count($groups) != count(_config["groups"])) {
+            foreach (_compiledGroupNames as $group) {
+                if (!isset($groups[$group])) {
+                    wincache_ucache_set($group, 1);
+                    $groups[$group] = 1;
                 }
             }
-            ksort(myGroups);
+            ksort($groups);
         }
 
-        myResult = [];
-        myGroups = array_values(myGroups);
-        foreach (_config["groups"] as $i: myGroup) {
-            myResult[] = myGroup . myGroups[$i];
+        $result = [];
+        $groups = array_values($groups);
+        foreach (_config["groups"] as $i: $group) {
+            $result[] = $group . $groups[$i];
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
      * Increments the group value to simulate deletion of all keys under a group
      * old values will remain in storage until they expire.
      *
-     * @param string myGroup The group to clear.
+     * @param string $group The group to clear.
      * @return bool success
      */
-    bool clearGroup(string myGroup) {
+    bool clearGroup(string $group) {
         $success = false;
-        wincache_ucache_inc(_config["prefix"] . myGroup, 1, $success);
+        wincache_ucache_inc(_config["prefix"] . $group, 1, $success);
 
         return $success;
     }

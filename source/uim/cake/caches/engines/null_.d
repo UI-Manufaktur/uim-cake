@@ -1,3 +1,8 @@
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
 module uim.cake.caches.engines.null_;
 
 @safe:
@@ -10,50 +15,59 @@ import uim.cake;
  */
 class NullEngine : CacheEngine
 {
-    bool init(array myConfig = []) {
+
+    bool init(array $config = []) {
         return true;
     }
 
-    bool set(myKey, myValue, $ttl = null) {
+
+    bool set($key, $value, $ttl = null) {
         return true;
     }
 
-    bool setMultiple(myValues, $ttl = null) {
+
+    bool setMultiple($values, $ttl = null) {
         return true;
     }
 
-    
-    auto get(myKey, $default = null) {
+
+    function get($key, $default = null) {
         return $default;
     }
 
-    iterable getMultiple(myKeys, $default = null) {
+
+    function getMultiple($keys, $default = null): iterable
+    {
         return [];
     }
 
-    
-    function increment(string myKey, int $offset = 1) {
+
+    function increment(string aKey, int $offset = 1) {
         return 1;
     }
 
-    
-    function decrement(string myKey, int $offset = 1) {
+
+    function decrement(string aKey, int $offset = 1) {
         return 0;
     }
 
-    bool delete(myKey) {
+
+    bool delete($key) {
         return true;
     }
 
-    bool deleteMultiple(myKeys) {
+
+    bool deleteMultiple($keys) {
         return true;
     }
+
 
     bool clear() {
         return true;
     }
 
-    bool clearGroup(string myGroup) {
+
+    bool clearGroup(string $group) {
         return true;
     }
 }

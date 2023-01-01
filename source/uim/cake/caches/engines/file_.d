@@ -1,8 +1,9 @@
 /*********************************************************************************************************
-	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
-	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
-	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.caches.engines.file_;
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.caches.engines.file;
 
 @safe:
 import uim.cake;
@@ -14,13 +15,14 @@ import uim.cake;
  *
  * You can configure a FileEngine cache, using Cache::config()
  */
-class FileEngine : CacheEngine {
+class FileEngine : CacheEngine
+{
     /**
      * Instance of SplFileObject class
      *
      * @var \SplFileObject|null
      */
-    protected _File;
+    protected $_File;
 
     /**
      * The default config used unless overridden by runtime configuration
@@ -38,17 +40,20 @@ class FileEngine : CacheEngine {
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [
-        "duration":3600,
-        "groups":[],
-        "lock":true,
-        "mask":0664,
-        "path":null,
-        "prefix":"cake_",
-        "serialize":true,
+    protected $_defaultConfig = [
+        "duration": 3600,
+        "groups": [],
+        "lock": true,
+        "mask": 0664,
+        "path": null,
+        "prefix": "cake_",
+        "serialize": true,
     ];
 
-    // True unless FileEngine::__active(); fails
+    /**
+     * True unless FileEngine::__active(); fails
+     *
+     */
     protected bool $_init = true;
 
     /**
@@ -56,52 +61,52 @@ class FileEngine : CacheEngine {
      *
      * Called automatically by the cache frontend.
      *
-     * @param array<string, mixed> myConfig array of setting for the engine
+     * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
-    bool init(array myConfig = []) {
-      super.init(myConfig);
+    bool init(array $config = []) {
+        super.init($config);
 
-      if (_config["path"] is null) {
-          _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR ~ "cake_cache" ~ DIRECTORY_SEPARATOR;
-      }
-      if (substr(_config["path"], -1) != DIRECTORY_SEPARATOR) {
-          _config["path"] .= DIRECTORY_SEPARATOR;
-      }
-      if (_groupPrefix) {
-          _groupPrefix = _groupPrefix.replace("_", DIRECTORY_SEPARATOR);
-      }
+        if (_config["path"] == null) {
+            _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR ~ "cake_cache" ~ DIRECTORY_SEPARATOR;
+        }
+        if (substr(_config["path"], -1) != DIRECTORY_SEPARATOR) {
+            _config["path"] .= DIRECTORY_SEPARATOR;
+        }
+        if (_groupPrefix) {
+            _groupPrefix = str_replace("_", DIRECTORY_SEPARATOR, _groupPrefix);
+        }
 
-      return _active();
+        return _active();
     }
 
     /**
      * Write data for key into cache
      *
-     * @param string myKey Identifier for the data
-     * @param mixed myValue Data to be cached
+     * @param string aKey Identifier for the data
+     * @param mixed $value Data to be cached
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
      *   for it or let the driver take care of that.
      * @return bool True on success and false on failure.
      */
-    bool set(string myDataId, myValue, $ttl = null) {
-        if (myValue == "" || !_init) {
+    bool set($key, $value, $ttl = null) {
+        if ($value == "" || !_init) {
             return false;
         }
 
-        myDataId = _key(myDataId);
+        $key = _key($key);
 
-        if (_setKey(myDataId, true) == false) {
+        if (_setKey($key, true) == false) {
             return false;
         }
 
         if (!empty(_config["serialize"])) {
-            myValue = serialize(myValue);
+            $value = serialize($value);
         }
 
         $expires = time() + this.duration($ttl);
-        myContentss = implode([$expires, PHP_EOL, myValue, PHP_EOL]);
+        $contents = implode([$expires, PHP_EOL, $value, PHP_EOL]);
 
         if (_config["lock"]) {
             /** @psalm-suppress PossiblyNullReference */
@@ -111,7 +116,7 @@ class FileEngine : CacheEngine {
         /** @psalm-suppress PossiblyNullReference */
         _File.rewind();
         $success = _File.ftruncate(0) &&
-            _File.fwrite(myContentss) &&
+            _File.fwrite($contents) &&
             _File.fflush();
 
         if (_config["lock"]) {
@@ -125,15 +130,15 @@ class FileEngine : CacheEngine {
     /**
      * Read a key from the cache
      *
-     * @param string myDataId Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      *   expired, or if there was an error fetching it
      */
-    auto get(myDataId, $default = null) {
-        myDataId = _key(myDataId);
+    function get($key, $default = null) {
+        $key = _key($key);
 
-        if (!_init || _setKey(myDataId) == false) {
+        if (!_init || _setKey($key) == false) {
             return $default;
         }
 
@@ -145,6 +150,7 @@ class FileEngine : CacheEngine {
         /** @psalm-suppress PossiblyNullReference */
         _File.rewind();
         $time = time();
+        /** @psalm-suppress RiskyCast */
         $cachetime = (int)_File.current();
 
         if ($cachetime < $time) {
@@ -155,11 +161,11 @@ class FileEngine : CacheEngine {
             return $default;
         }
 
-        myData = "";
+        $data = "";
         _File.next();
         while (_File.valid()) {
             /** @psalm-suppress PossiblyInvalidOperand */
-            myData .= _File.current();
+            $data .= _File.current();
             _File.next();
         }
 
@@ -167,35 +173,39 @@ class FileEngine : CacheEngine {
             _File.flock(LOCK_UN);
         }
 
-        myData = trim(myData);
+        $data = trim($data);
 
-        if (myData != "" && !empty(_config["serialize"])) {
-            myData = unserialize(myData);
+        if ($data != "" && !empty(_config["serialize"])) {
+            $data = unserialize($data);
         }
 
-        return myData;
+        return $data;
     }
 
     /**
      * Delete a key from the cache
      *
-     * @param string myDataId Identifier for the data
+     * @param string aKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t
      *   exist or couldn"t be removed
      */
-    bool delete(myDataId) {
-        myDataId = _key(myDataId);
+    bool delete($key) {
+        $key = _key($key);
 
-        if (_setKey(myDataId) == false || !_init) {
+        if (_setKey($key) == false || !_init) {
             return false;
         }
 
         /** @psalm-suppress PossiblyNullReference */
-        myPath = _File.getRealPath();
+        $path = _File.getRealPath();
         _File = null;
 
+        if ($path == false) {
+            return false;
+        }
+
         // phpcs:disable
-        return @unlink(myPath);
+        return @unlink($path);
         // phpcs:enable
     }
 
@@ -216,37 +226,37 @@ class FileEngine : CacheEngine {
             _config["path"],
             FilesystemIterator::SKIP_DOTS
         );
-        myContentss = new RecursiveIteratorIterator(
+        $contents = new RecursiveIteratorIterator(
             $directory,
             RecursiveIteratorIterator::SELF_FIRST
         );
         $cleared = [];
-        /** @var \SplFileInfo myfileInfo */
-        foreach (myContentss as myfileInfo) {
-            if (myfileInfo.isFile()) {
-                unset(myfileInfo);
+        /** @var \SplFileInfo $fileInfo */
+        foreach ($contents as $fileInfo) {
+            if ($fileInfo.isFile()) {
+                unset($fileInfo);
                 continue;
             }
 
-            $realPath = myfileInfo.getRealPath();
+            $realPath = $fileInfo.getRealPath();
             if (!$realPath) {
-                unset(myfileInfo);
+                unset($fileInfo);
                 continue;
             }
 
-            myPath = $realPath . DIRECTORY_SEPARATOR;
-            if (!in_array(myPath, $cleared, true)) {
-                _clearDirectory(myPath);
-                $cleared[] = myPath;
+            $path = $realPath . DIRECTORY_SEPARATOR;
+            if (!in_array($path, $cleared, true)) {
+                _clearDirectory($path);
+                $cleared[] = $path;
             }
 
             // possible inner iterators need to be unset too in order for locks on parents to be released
-            unset(myfileInfo);
+            unset($fileInfo);
         }
 
         // unsetting iterators helps releasing possible locks in certain environments,
         // which could otherwise make `rmdir()` fail
-        unset($directory, myContentss);
+        unset($directory, $contents);
 
         return true;
     }
@@ -254,14 +264,14 @@ class FileEngine : CacheEngine {
     /**
      * Used to clear a directory of matching files.
      *
-     * @param string myPath The path to search.
+     * @param string $path The path to search.
      */
-    protected void _clearDirectory(string myPath) {
-        if (!is_dir(myPath)) {
+    protected void _clearDirectory(string $path) {
+        if (!is_dir($path)) {
             return;
         }
 
-        $dir = dir(myPath);
+        $dir = dir($path);
         if (!$dir) {
             return;
         }
@@ -274,17 +284,17 @@ class FileEngine : CacheEngine {
             }
 
             try {
-                myfile = new SplFileObject(myPath . $entry, "r");
+                $file = new SplFileObject($path . $entry, "r");
             } catch (Exception $e) {
                 continue;
             }
 
-            if (myfile.isFile()) {
-                myfilePath = myfile.getRealPath();
-                unset(myfile);
+            if ($file.isFile()) {
+                $filePath = $file.getRealPath();
+                unset($file);
 
                 // phpcs:disable
-                @unlink(myfilePath);
+                @unlink($filePath);
                 // phpcs:enable
             }
         }
@@ -295,24 +305,24 @@ class FileEngine : CacheEngine {
     /**
      * Not implemented
      *
-     * @param string myKey The key to decrement
+     * @param string aKey The key to decrement
      * @param int $offset The number to offset
      * @return int|false
      * @throws \LogicException
      */
-    function decrement(string myKey, int $offset = 1) {
+    function decrement(string aKey, int $offset = 1) {
         throw new LogicException("Files cannot be atomically decremented.");
     }
 
     /**
      * Not implemented
      *
-     * @param string myKey The key to increment
+     * @param string aKey The key to increment
      * @param int $offset The number to offset
      * @return int|false
      * @throws \LogicException
      */
-    function increment(string myKey, int $offset = 1) {
+    function increment(string aKey, int $offset = 1) {
         throw new LogicException("Files cannot be atomically incremented.");
     }
 
@@ -320,40 +330,40 @@ class FileEngine : CacheEngine {
      * Sets the current cache key this class is managing, and creates a writable SplFileObject
      * for the cache file the key is referring to.
      *
-     * @param string myKey The key
+     * @param string aKey The key
      * @param bool $createKey Whether the key should be created if it doesn"t exists, or not
      * @return bool true if the cache key could be set, false otherwise
      */
-    protected bool _setKey(string myKey, bool $createKey = false) {
-        myGroups = null;
+    protected bool _setKey(string aKey, bool $createKey = false) {
+        $groups = null;
         if (_groupPrefix) {
-            myGroups = vsprintf(_groupPrefix, this.groups());
+            $groups = vsprintf(_groupPrefix, this.groups());
         }
-        $dir = _config["path"] . myGroups;
+        $dir = _config["path"] . $groups;
 
         if (!is_dir($dir)) {
             mkdir($dir, 0775, true);
         }
 
-        myPath = new SplFileInfo($dir . myKey);
+        $path = new SplFileInfo($dir . $key);
 
-        if (!$createKey && !myPath.isFile()) {
+        if (!$createKey && !$path.isFile()) {
             return false;
         }
         if (
             empty(_File) ||
-            _File.getBasename() != myKey ||
+            _File.getBasename() != $key ||
             _File.valid() == false
         ) {
-            $exists = is_file(myPath.getPathname());
+            $exists = is_file($path.getPathname());
             try {
-                _File = myPath.openFile("c+");
+                _File = $path.openFile("c+");
             } catch (Exception $e) {
                 trigger_error($e.getMessage(), E_USER_WARNING);
 
                 return false;
             }
-            unset(myPath);
+            unset($path);
 
             if (!$exists && !chmod(_File.getPathname(), (int)_config["mask"])) {
                 trigger_error(sprintf(
@@ -370,14 +380,15 @@ class FileEngine : CacheEngine {
     /**
      * Determine if cache directory is writable
      *
+     * @return bool
      */
     protected bool _active() {
         $dir = new SplFileInfo(_config["path"]);
-        myPath = $dir.getPathname();
+        $path = $dir.getPathname();
         $success = true;
-        if (!is_dir(myPath)) {
+        if (!is_dir($path)) {
             // phpcs:disable
-            $success = @mkdir(myPath, 0775, true);
+            $success = @mkdir($path, 0775, true);
             // phpcs:enable
         }
 
@@ -393,67 +404,60 @@ class FileEngine : CacheEngine {
         return $success;
     }
 
-    
-    protected string _key(myKey) {
-        myKey = super._key(myKey);
 
-        if (preg_match("/[\/\\<>?:|*"]/", myKey)) {
-            throw new InvalidArgumentException(
-                "Cache key `{myKey}` contains invalid characters~ " ~
-                "You cannot use /, \\, <, >, ?, :, |, *, or " in cache keys."
-            );
-        }
+    protected string _key($key) {
+        $key = super._key($key);
 
-        return myKey;
+        return rawurlencode($key);
     }
 
     /**
-     * Recursively deletes all files under any directory named as myGroup
+     * Recursively deletes all files under any directory named as $group
      *
-     * @param string myGroup The group to clear.
+     * @param string $group The group to clear.
      * @return bool success
      */
-    bool clearGroup(string myGroup) {
+    bool clearGroup(string $group) {
         _File = null;
 
         $prefix = (string)_config["prefix"];
 
         $directoryIterator = new RecursiveDirectoryIterator(_config["path"]);
-        myContentss = new RecursiveIteratorIterator(
+        $contents = new RecursiveIteratorIterator(
             $directoryIterator,
             RecursiveIteratorIterator::CHILD_FIRST
         );
         $filtered = new CallbackFilterIterator(
-            myContentss,
-            function (SplFileInfo $current) use (myGroup, $prefix) {
+            $contents,
+            function (SplFileInfo $current) use ($group, $prefix) {
                 if (!$current.isFile()) {
                     return false;
                 }
 
                 $hasPrefix = $prefix == ""
-                    || indexOf($current.getBasename(), $prefix) == 0;
+                    || strpos($current.getBasename(), $prefix) == 0;
                 if ($hasPrefix == false) {
                     return false;
                 }
 
-                $pos = indexOf(
+                $pos = strpos(
                     $current.getPathname(),
-                    DIRECTORY_SEPARATOR . myGroup . DIRECTORY_SEPARATOR
+                    DIRECTORY_SEPARATOR . $group . DIRECTORY_SEPARATOR
                 );
 
                 return $pos != false;
             }
         );
-        foreach ($object; $filtered) {
-            myPath = $object.getPathname();
+        foreach ($filtered as $object) {
+            $path = $object.getPathname();
             unset($object);
             // phpcs:ignore
-            @unlink(myPath);
+            @unlink($path);
         }
 
         // unsetting iterators helps releasing possible locks in certain environments,
         // which could otherwise make `rmdir()` fail
-        unset($directoryIterator, myContentss, $filtered);
+        unset($directoryIterator, $contents, $filtered);
 
         return true;
     }

@@ -1,3 +1,8 @@
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
 module uim.cake.caches.engines.memcached;
 
 @safe:
@@ -12,14 +17,13 @@ import uim.cake;
  * serialization (if memcached extension is compiled with --enable-igbinary).
  * Compressed keys can also be incremented/decremented.
  */
-class MemcachedEngine : CacheEngine
-{
+class MemcachedEngine : CacheEngine {
     /**
      * memcached wrapper.
      *
      * @var \Memcached
      */
-    protected _Memcached;
+    protected $_Memcached;
 
     /**
      * The default config used unless overridden by runtime configuration
@@ -44,19 +48,19 @@ class MemcachedEngine : CacheEngine
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [
-        "compress":false,
-        "duration":3600,
-        "groups":[],
-        "host":null,
-        "username":null,
-        "password":null,
-        "persistent":null,
-        "port":null,
-        "prefix":"cake_",
-        "serialize":"php",
-        "servers":["127.0.0.1"],
-        "options":[],
+    protected $_defaultConfig = [
+        "compress": false,
+        "duration": 3600,
+        "groups": [],
+        "host": null,
+        "username": null,
+        "password": null,
+        "persistent": null,
+        "port": null,
+        "prefix": "cake_",
+        "serialize": "php",
+        "servers": ["127.0.0.1"],
+        "options": [],
     ];
 
     /**
@@ -66,8 +70,11 @@ class MemcachedEngine : CacheEngine
      *
      * @var array<string, int>
      */
-    protected _serializers = [];
+    protected $_serializers = [];
 
+    /**
+     * @var array<string>
+     */
     protected string[] $_compiledGroupNames = [];
 
     /**
@@ -75,57 +82,54 @@ class MemcachedEngine : CacheEngine
      *
      * Called automatically by the cache frontend
      *
-     * @param array<string, mixed> myConfig array of setting for the engine
+     * @param array<string, mixed> $config array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      * @throws \InvalidArgumentException When you try use authentication without
      *   Memcached compiled with SASL support
      */
-    bool init(array myConfig = []) {
+    bool init(array $config = []) {
         if (!extension_loaded("memcached")) {
             throw new RuntimeException("The `memcached` extension must be enabled to use MemcachedEngine.");
         }
 
         _serializers = [
-            "igbinary":Memcached::SERIALIZER_IGBINARY,
-            "json":Memcached::SERIALIZER_JSON,
-            "php":Memcached::SERIALIZER_PHP,
+            "igbinary": Memcached::SERIALIZER_IGBINARY,
+            "json": Memcached::SERIALIZER_JSON,
+            "php": Memcached::SERIALIZER_PHP,
         ];
         if (defined("Memcached::HAVE_MSGPACK")) {
             _serializers["msgpack"] = Memcached::SERIALIZER_MSGPACK;
         }
 
-        super.init(myConfig);
+        super.init($config);
 
-        if (!empty(myConfig["host"])) {
-            if (empty(myConfig["port"])) {
-                myConfig["servers"] = [myConfig["host"]];
+        if (!empty($config["host"])) {
+            if (empty($config["port"])) {
+                $config["servers"] = [$config["host"]];
             } else {
-                myConfig["servers"] = [sprintf("%s:%d", myConfig["host"], myConfig["port"])];
+                $config["servers"] = [sprintf("%s:%d", $config["host"], $config["port"])];
             }
         }
 
-        if (isset(myConfig["servers"])) {
-            this.setConfig("servers", myConfig["servers"], false);
+        if (isset($config["servers"])) {
+            this.setConfig("servers", $config["servers"], false);
         }
 
         if (!is_array(_config["servers"])) {
             _config["servers"] = [_config["servers"]];
         }
 
-        /** @psalm-suppress RedundantPropertyInitializationCheck */
-        if (isset(_Memcached)) {
-            return true;
+        if (_config["persistent"]) {
+            _Memcached = new Memcached(_config["persistent"]);
+        } else {
+            _Memcached = new Memcached();
         }
-
-        _Memcached = _config["persistent"] ? 
-          new Memcached(_config["persistent"])
-          : new Memcached();
         _setOptions();
 
         $serverList = _Memcached.getServerList();
         if ($serverList) {
             if (_Memcached.isPersistent()) {
-                foreach ($server; $serverList) {
+                foreach ($serverList as $server) {
                     if (!in_array($server["host"] ~ ":" ~ $server["port"], _config["servers"], true)) {
                         throw new InvalidArgumentException(
                             "Invalid cache configuration. Multiple persistent cache configurations are detected" ~
@@ -140,7 +144,7 @@ class MemcachedEngine : CacheEngine
         }
 
         $servers = [];
-        foreach ($server; _config["servers"]) {
+        foreach (_config["servers"] as $server) {
             $servers[] = this.parseServerString($server);
         }
 
@@ -149,8 +153,8 @@ class MemcachedEngine : CacheEngine
         }
 
         if (is_array(_config["options"])) {
-            foreach (_config["options"] as $opt: myValue) {
-                _Memcached.setOption($opt, myValue);
+            foreach (_config["options"] as $opt: $value) {
+                _Memcached.setOption($opt, $value);
             }
         }
 
@@ -160,7 +164,7 @@ class MemcachedEngine : CacheEngine
             );
         }
 
-        if (_config["username"]  !is null && _config["password"]  !is null) {
+        if (_config["username"] != null && _config["password"] != null) {
             if (!method_exists(_Memcached, "setSaslAuthData")) {
                 throw new InvalidArgumentException(
                     "Memcached extension is not built with SASL support"
@@ -179,6 +183,7 @@ class MemcachedEngine : CacheEngine
     /**
      * Settings the memcached instance
      *
+     * @return void
      * @throws \InvalidArgumentException When the Memcached extension is not built
      *   with the desired serializer engine.
      */
@@ -227,21 +232,22 @@ class MemcachedEngine : CacheEngine
      * Parses the server address into the host/port. Handles both IPv6 and IPv4
      * addresses and Unix sockets
      *
-     * @param string server The server address string.
+     * @param string $server The server address string.
      * @return array Array containing host, port
      */
-    array parseServerString(string server) {
+    function parseServerString(string $server): array
+    {
         $socketTransport = "unix://";
-        if (indexOf($server, $socketTransport) == 0) {
+        if (strpos($server, $socketTransport) == 0) {
             return [substr($server, strlen($socketTransport)), 0];
         }
         if (substr($server, 0, 1) == "[") {
-            $position = indexOf($server, "]:");
+            $position = strpos($server, "]:");
             if ($position != false) {
                 $position++;
             }
         } else {
-            $position = indexOf($server, ":");
+            $position = strpos($server, ":");
         }
         $port = 11211;
         $host = $server;
@@ -256,12 +262,12 @@ class MemcachedEngine : CacheEngine
     /**
      * Read an option value from the memcached connection.
      *
-     * @param int myName The option name to read.
+     * @param int $name The option name to read.
      * @return string|int|bool|null
      * @see https://secure.php.net/manual/en/memcached.getoption.php
      */
-    auto getOption(int myName) {
-        return _Memcached.getOption(myName);
+    function getOption(int $name) {
+        return _Memcached.getOption($name);
     }
 
     /**
@@ -270,75 +276,76 @@ class MemcachedEngine : CacheEngine
      * times greater than 30 days in the future. Any duration greater than 30 days
      * will be treated as real Unix time value rather than an offset from current time.
      *
-     * @param string myKey Identifier for the data
-     * @param mixed myValue Data to be cached
+     * @param string aKey Identifier for the data
+     * @param mixed $value Data to be cached
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
      *   for it or let the driver take care of that.
      * @return bool True if the data was successfully cached, false on failure
      * @see https://www.php.net/manual/en/memcached.set.php
      */
-    bool set(myKey, myValue, $ttl = null) {
+    bool set($key, $value, $ttl = null) {
         $duration = this.duration($ttl);
 
-        return _Memcached.set(_key(myKey), myValue, $duration);
+        return _Memcached.set(_key($key), $value, $duration);
     }
 
     /**
      * Write many cache entries to the cache at once
      *
-     * @param iterable myValues An array of data to be stored in the cache
+     * @param iterable $values An array of data to be stored in the cache
      * @param \DateInterval|int|null $ttl Optional. The TTL value of this item. If no value is sent and
      *   the driver supports TTL then the library may set a default value
      *   for it or let the driver take care of that.
      * @return bool Whether the write was successful or not.
      */
-    bool setMultiple(myValues, $ttl = null) {
-      $cacheData = [];
-      foreach (myValues as myKey: myValue) {
-        $cacheData[_key(myKey)] = myValue;
-      }
-      $duration = this.duration($ttl);
+    bool setMultiple($values, $ttl = null) {
+        $cacheData = [];
+        foreach ($values as $key: $value) {
+            $cacheData[_key($key)] = $value;
+        }
+        $duration = this.duration($ttl);
 
-      return _Memcached.setMulti($cacheData, $duration);
+        return _Memcached.setMulti($cacheData, $duration);
     }
 
     /**
      * Read a key from the cache
      *
-     * @param myKey Identifier for the data
+     * @param string aKey Identifier for the data
      * @param mixed $default Default value to return if the key does not exist.
      * @return mixed The cached data, or default value if the data doesn"t exist, has
      * expired, or if there was an error fetching it.
      */
-    auto get(string myKey, $default = null) {
-      myKey = _key(myKey);
-      myValue = _Memcached.get(myKey);
-      if (_Memcached.getResultCode() == Memcached::RES_NOTFOUND) {
-          return $default;
-      }
+    function get($key, $default = null) {
+        $key = _key($key);
+        $value = _Memcached.get($key);
+        if (_Memcached.getResultCode() == Memcached::RES_NOTFOUND) {
+            return $default;
+        }
 
-      return myValue;
+        return $value;
     }
 
     /**
      * Read many keys from the cache at once
      *
-     * @param iterable myKeys An array of identifiers for the data
+     * @param iterable $keys An array of identifiers for the data
      * @param mixed $default Default value to return for keys that do not exist.
-     * @return array An array containing, for each of the given myKeys, the cached data or
+     * @return array An array containing, for each of the given $keys, the cached data or
      *   false if cached data could not be retrieved.
      */
-    array getMultiple(myKeys, $default = null) {
+    function getMultiple($keys, $default = null): array
+    {
         $cacheKeys = [];
-        foreach (myKey; myKeys) {
-            $cacheKeys[myKey] = _key(myKey);
+        foreach ($keys as $key) {
+            $cacheKeys[$key] = _key($key);
         }
 
-        myValues = _Memcached.getMulti($cacheKeys);
+        $values = _Memcached.getMulti($cacheKeys);
         $return = [];
         foreach ($cacheKeys as $original: $prefixed) {
-            $return[$original] = myValues[$prefixed] ?? $default;
+            $return[$original] = $values[$prefixed] ?? $default;
         }
 
         return $return;
@@ -347,47 +354,47 @@ class MemcachedEngine : CacheEngine
     /**
      * Increments the value of an integer cached key
      *
-     * @param string myKey Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to increment
      * @return int|false New incremented value, false otherwise
      */
-    function increment(string myKey, int $offset = 1) {
-        return _Memcached.increment(_key(myKey), $offset);
+    function increment(string aKey, int $offset = 1) {
+        return _Memcached.increment(_key($key), $offset);
     }
 
     /**
      * Decrements the value of an integer cached key
      *
-     * @param string myKey Identifier for the data
+     * @param string aKey Identifier for the data
      * @param int $offset How much to subtract
      * @return int|false New decremented value, false otherwise
      */
-    function decrement(string myKey, int $offset = 1) {
-        return _Memcached.decrement(_key(myKey), $offset);
+    function decrement(string aKey, int $offset = 1) {
+        return _Memcached.decrement(_key($key), $offset);
     }
 
     /**
      * Delete a key from the cache
      *
-     * @param string myKey Identifier for the data
+     * @param string aKey Identifier for the data
      * @return bool True if the value was successfully deleted, false if it didn"t
      *   exist or couldn"t be removed.
      */
-    bool delete(myKey) {
-        return _Memcached.delete(_key(myKey));
+    bool delete($key) {
+        return _Memcached.delete(_key($key));
     }
 
     /**
      * Delete many keys from the cache at once
      *
-     * @param iterable myKeys An array of identifiers for the data
+     * @param iterable $keys An array of identifiers for the data
      * @return bool of boolean values that are true if the key was successfully
      *   deleted, false if it didn"t exist or couldn"t be removed.
      */
-    bool deleteMultiple(myKeys) {
+    bool deleteMultiple($keys) {
         $cacheKeys = [];
-        foreach (myKey; myKeys) {
-            $cacheKeys[] = _key(myKey);
+        foreach ($keys as $key) {
+            $cacheKeys[] = _key($key);
         }
 
         return (bool)_Memcached.deleteMulti($cacheKeys);
@@ -399,30 +406,32 @@ class MemcachedEngine : CacheEngine
      * @return bool True if the cache was successfully cleared, false otherwise
      */
     bool clear() {
-        if (auto myKeys = _Memcached.getAllKeys()) {
-            foreach (myKey; myKeys) {
-                if (indexOf(myKey, _config["prefix"]) == 0) {
-                    _Memcached.delete(myKey);
-                }
-            }
-
-            return true;
+        $keys = _Memcached.getAllKeys();
+        if ($keys == false) {
+            return false;
         }
-        return false;
+
+        foreach ($keys as $key) {
+            if (strpos($key, _config["prefix"]) == 0) {
+                _Memcached.delete($key);
+            }
+        }
+
+        return true;
     }
 
     /**
      * Add a key to the cache if it does not already exist.
      *
-     * @param string myKey Identifier for the data.
-     * @param mixed myValue Data to be cached.
+     * @param string aKey Identifier for the data.
+     * @param mixed $value Data to be cached.
      * @return bool True if the data was successfully cached, false on failure.
      */
-    bool add(string myKey, myValue) {
+    bool add(string aKey, $value) {
         $duration = _config["duration"];
-        myKey = _key(myKey);
+        $key = _key($key);
 
-        return _Memcached.add(myKey, myValue, $duration);
+        return _Memcached.add($key, $value, $duration);
     }
 
     /**
@@ -430,41 +439,42 @@ class MemcachedEngine : CacheEngine
      * If the group initial value was not found, then it initializes
      * the group accordingly.
      */
-    string[]  groups() {
+    string[] groups(): array
+    {
         if (empty(_compiledGroupNames)) {
-            foreach (_config["groups"] as myGroup) {
-                _compiledGroupNames[] = _config["prefix"] . myGroup;
+            foreach (_config["groups"] as $group) {
+                _compiledGroupNames[] = _config["prefix"] . $group;
             }
         }
 
-        myGroups = _Memcached.getMulti(_compiledGroupNames) ?: [];
-        if (count(myGroups) != count(_config["groups"])) {
-            foreach (_compiledGroupNames as myGroup) {
-                if (!isset(myGroups[myGroup])) {
-                    _Memcached.set(myGroup, 1, 0);
-                    myGroups[myGroup] = 1;
+        $groups = _Memcached.getMulti(_compiledGroupNames) ?: [];
+        if (count($groups) != count(_config["groups"])) {
+            foreach (_compiledGroupNames as $group) {
+                if (!isset($groups[$group])) {
+                    _Memcached.set($group, 1, 0);
+                    $groups[$group] = 1;
                 }
             }
-            ksort(myGroups);
+            ksort($groups);
         }
 
-        myResult = [];
-        myGroups = array_values(myGroups);
-        foreach ($i, myGroup; _config["groups"]) {
-            myResult[] = myGroup . myGroups[$i];
+        $result = [];
+        $groups = array_values($groups);
+        foreach (_config["groups"] as $i: $group) {
+            $result[] = $group . $groups[$i];
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
      * Increments the group value to simulate deletion of all keys under a group
      * old values will remain in storage until they expire.
      *
-     * @param string myGroup name of the group to be cleared
+     * @param string $group name of the group to be cleared
      * @return bool success
      */
-    bool clearGroup(string myGroup) {
-        return (bool)_Memcached.increment(_config["prefix"] . myGroup);
+    bool clearGroup(string $group) {
+        return (bool)_Memcached.increment(_config["prefix"] . $group);
     }
 }
