@@ -73,7 +73,7 @@ class PhpConfig : ConfigEngineInterface
             return $return;
         }
 
-        throw new CakeException(sprintf("Config file "%s" did not return an array", $key . ".php"));
+        throw new CakeException(sprintf("Config file "%s" did not return an array", $key ~ ".php"));
     }
 
     /**
@@ -87,7 +87,7 @@ class PhpConfig : ConfigEngineInterface
      */
     function dump(string aKey, array $data): bool
     {
-        $contents = "<?php" . "\n" . "return " . var_export($data, true) . ";";
+        $contents = "<?php" ~ "\n" ~ "return " ~ var_export($data, true) ~ ";";
 
         $filename = _getFilePath($key);
 

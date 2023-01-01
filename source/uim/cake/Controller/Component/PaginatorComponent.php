@@ -44,13 +44,13 @@ class PaginatorComponent : Component
             $config["className"] = $config["paginator"];
             deprecationWarning(
                 "`paginator` option is deprecated,"
-                . " use `className` instead a specify a paginator name/FQCN."
+                ~ " use `className` instead a specify a paginator name/FQCN."
             );
         }
 
         if (isset($config["className"])) {
             if (!$config["className"] instanceof NumericPaginator) {
-                throw new InvalidArgumentException("Paginator must be an instance of " . NumericPaginator::class);
+                throw new InvalidArgumentException("Paginator must be an instance of " ~ NumericPaginator::class);
             }
             _paginator = $config["className"];
             unset($config["className"]);

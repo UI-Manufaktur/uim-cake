@@ -198,7 +198,7 @@ class Controller : IEventListener, EventDispatcherInterface
 
         if (this.modelClass == null) {
             $plugin = this.request.getParam("plugin");
-            $modelClass = ($plugin ? $plugin . "." : "") . this.name;
+            $modelClass = ($plugin ? $plugin ~ "." : "") . this.name;
             _setModelClass($modelClass);
 
             this.defaultTable = $modelClass;
@@ -212,14 +212,14 @@ class Controller : IEventListener, EventDispatcherInterface
 
         if (isset(this.components)) {
             triggerWarning(
-                "Support for loading components using $components property is removed. " .
+                "Support for loading components using $components property is removed~ " ~
                 "Use this.loadComponent() instead in initialize()."
             );
         }
 
         if (isset(this.helpers)) {
             triggerWarning(
-                "Support for loading helpers using $helpers property is removed. " .
+                "Support for loading helpers using $helpers property is removed~ " ~
                 "Use this.viewBuilder().setHelpers() instead."
             );
         }
@@ -327,7 +327,7 @@ class Controller : IEventListener, EventDispatcherInterface
     void __set(string aName, $value) {
         if ($name == "components") {
             triggerWarning(
-                "Support for loading components using $components property is removed. " .
+                "Support for loading components using $components property is removed~ " ~
                 "Use this.loadComponent() instead in initialize()."
             );
 
@@ -336,7 +336,7 @@ class Controller : IEventListener, EventDispatcherInterface
 
         if ($name == "helpers") {
             triggerWarning(
-                "Support for loading helpers using $helpers property is removed. " .
+                "Support for loading helpers using $helpers property is removed~ " ~
                 "Use this.viewBuilder().setHelpers() instead."
             );
 
@@ -492,7 +492,7 @@ class Controller : IEventListener, EventDispatcherInterface
 
         if (!this.isAction($action)) {
             throw new MissingActionException([
-                "controller": this.name . "Controller",
+                "controller": this.name ~ "Controller",
                 "action": $request.getParam("action"),
                 "prefix": $request.getParam("prefix") ?: "",
                 "plugin": $request.getParam("plugin"),
@@ -514,8 +514,8 @@ class Controller : IEventListener, EventDispatcherInterface
         $result = $action(...$args);
         if ($result != null && !$result instanceof IResponse) {
             throw new UnexpectedValueException(sprintf(
-                "Controller actions can only return IResponse instance or null. "
-                . "Got %s instead.",
+                "Controller actions can only return IResponse instance or null~ "
+                ~ "Got %s instead.",
                 getTypeName($result)
             ));
         }
@@ -688,7 +688,7 @@ class Controller : IEventListener, EventDispatcherInterface
      */
     function setAction(string $action, ...$args) {
         deprecationWarning(
-            "Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, " .
+            "Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, " ~
             "or call the other action as a method."
         );
         this.setRequest(this.request.withParam("action", $action));
@@ -839,7 +839,7 @@ class Controller : IEventListener, EventDispatcherInterface
             if ($local && $base && strpos($url, $base) == 0) {
                 $url = substr($url, strlen($base));
                 if ($url[0] != "/") {
-                    $url = "/" . $url;
+                    $url = "/" ~ $url;
                 }
 
                 return $url;
@@ -896,7 +896,7 @@ class Controller : IEventListener, EventDispatcherInterface
             $settings["className"] = $settings["paginator"];
             deprecationWarning(
                 "`paginator` option is deprecated,"
-                . " use `className` instead a specify a paginator name/FQCN."
+                ~ " use `className` instead a specify a paginator name/FQCN."
             );
         }
 
@@ -905,12 +905,12 @@ class Controller : IEventListener, EventDispatcherInterface
         if (is_string($paginator)) {
             $className = App::className($paginator, "Datasource/Paging", "Paginator");
             if ($className == null) {
-                throw new InvalidArgumentException("Invalid paginator: " . $paginator);
+                throw new InvalidArgumentException("Invalid paginator: " ~ $paginator);
             }
             $paginator = new $className();
         }
         if (!$paginator instanceof PaginatorInterface) {
-            throw new InvalidArgumentException("Paginator must be an instance of " . PaginatorInterface::class);
+            throw new InvalidArgumentException("Paginator must be an instance of " ~ PaginatorInterface::class);
         }
 
         $results = null;

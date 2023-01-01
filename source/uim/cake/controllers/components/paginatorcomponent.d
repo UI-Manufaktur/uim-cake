@@ -49,7 +49,7 @@ class PaginatorComponent : Component
     this(ComponentRegistry $registry, array myConfig = []) {
         if (isset(myConfig["paginator"])) {
             if (!myConfig["paginator"] instanceof Paginator) {
-                throw new InvalidArgumentException("Paginator must be an instance of " . Paginator::class);
+                throw new InvalidArgumentException("Paginator must be an instance of " ~ Paginator::class);
             }
             _paginator = myConfig["paginator"];
             unset(myConfig["paginator"]);

@@ -43,7 +43,7 @@ class App
         }
 
         [$plugin, $name] = pluginSplit($class);
-        $fullname = "\\" . str_replace("/", "\\", $type . "\\" . $name) . $suffix;
+        $fullname = "\\" ~ str_replace("/", "\\", $type ~ "\\" ~ $name) . $suffix;
 
         $base = $plugin ?: Configure::read("App.namespace");
         if ($base != null) {
@@ -60,7 +60,7 @@ class App
         }
 
         /** @var class-string */
-        return "Cake" . $fullname;
+        return "Cake" ~ $fullname;
     }
 
     /**
@@ -105,7 +105,7 @@ class App
      */
     static string shortName(string $class, string $type, string $suffix = "") {
         $class = str_replace("\\", "/", $class);
-        $type = "/" . $type . "/";
+        $type = "/" ~ $type ~ "/";
 
         $pos = strrpos($class, $type);
         if ($pos == false) {
@@ -127,7 +127,7 @@ class App
             return $name;
         }
 
-        return $pluginName . "." . $name;
+        return $pluginName ~ "." ~ $name;
     }
 
     /**
@@ -172,7 +172,7 @@ class App
     static string[] path(string $type, ?string $plugin = null): array
     {
         if ($plugin == null && $type[0] == strtolower($type[0])) {
-            return (array)Configure::read("App.paths." . $type);
+            return (array)Configure::read("App.paths." ~ $type);
         }
 
         if ($type == "templates") {
@@ -182,12 +182,12 @@ class App
 
         if ($type == "locales") {
             /** @psalm-suppress PossiblyNullArgument */
-            return [Plugin::path($plugin) . "resources" . DIRECTORY_SEPARATOR . "locales" . DIRECTORY_SEPARATOR];
+            return [Plugin::path($plugin) ~ "resources" ~ DIRECTORY_SEPARATOR ~ "locales" ~ DIRECTORY_SEPARATOR];
         }
 
         deprecationWarning(
             "App::path() is deprecated for class path."
-            . " Use uim.cake.Core\App::classPath() or uim.cake.Core\Plugin::classPath() instead."
+            ~ " Use uim.cake.Core\App::classPath() or uim.cake.Core\Plugin::classPath() instead."
         );
 
         return static::classPath($type, $plugin);
@@ -242,7 +242,7 @@ class App
     static function core(string $type): array
     {
         if ($type == "templates") {
-            return [CORE_PATH . "templates" . DIRECTORY_SEPARATOR];
+            return [CORE_PATH ~ "templates" ~ DIRECTORY_SEPARATOR];
         }
 
         return [CAKE . str_replace("/", DIRECTORY_SEPARATOR, $type) . DIRECTORY_SEPARATOR];

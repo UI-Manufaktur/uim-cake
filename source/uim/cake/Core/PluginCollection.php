@@ -86,9 +86,9 @@ class PluginCollection : Iterator, Countable
         if (Configure::check("plugins")) {
             return;
         }
-        $vendorFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "cakephp-plugins.php";
+        $vendorFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ~ "cakephp-plugins.php";
         if (!is_file($vendorFile)) {
-            $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . "cakephp-plugins.php";
+            $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR ~ "cakephp-plugins.php";
             if (!is_file($vendorFile)) {
                 Configure::write(["plugins": []]);
 
@@ -119,7 +119,7 @@ class PluginCollection : Iterator, Countable
         // wipes out all configuration including plugin paths config.
         this.loadConfig();
 
-        $path = Configure::read("plugins." . aName);
+        $path = Configure::read("plugins." ~ aName);
         if ($path) {
             return $path;
         }
@@ -229,14 +229,14 @@ class PluginCollection : Iterator, Countable
         $config += ["name": aName];
         $namespace = str_replace("/", "\\", aName);
 
-        $className = $namespace . "\\" . "Plugin";
+        $className = $namespace ~ "\\" ~ "Plugin";
         // Check for [Vendor/]Foo/Plugin class
         if (!class_exists($className)) {
             $pos = strpos(aName, "/");
             if ($pos == false) {
-                $className = $namespace . "\\" . aName . "Plugin";
+                $className = $namespace ~ "\\" ~ aName ~ "Plugin";
             } else {
-                $className = $namespace . "\\" . substr(aName, $pos + 1) . "Plugin";
+                $className = $namespace ~ "\\" ~ substr(aName, $pos + 1) ~ "Plugin";
             }
 
             // Check for [Vendor/]Foo/FooPlugin

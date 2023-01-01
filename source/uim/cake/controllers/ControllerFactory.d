@@ -260,7 +260,7 @@ class ControllerFactory : IControllerFactory, IRequestHandler
         $module = "Controller";
         $controller = myRequest.getParam("controller", "");
         if (myRequest.getParam("plugin")) {
-            myPluginPath = myRequest.getParam("plugin") . ".";
+            myPluginPath = myRequest.getParam("plugin") ~ ".";
         }
         if (myRequest.getParam("prefix")) {
             $prefix = myRequest.getParam("prefix");
@@ -268,13 +268,13 @@ class ControllerFactory : IControllerFactory, IRequestHandler
             $firstChar = substr($prefix, 0, 1);
             if ($firstChar != strtoupper($firstChar)) {
                 deprecationWarning(
-                    "The `{$prefix}` prefix did not start with an upper case character. " .
-                    "Routing prefixes should be defined as CamelCase values. " .
+                    "The `{$prefix}` prefix did not start with an upper case character~ " ~
+                    "Routing prefixes should be defined as CamelCase values~ " ~
                     "Prefix inflection will be removed in 5.0"
                 );
 
                 if (indexOf($prefix, "/") == false) {
-                    $module .= "/" . Inflector::camelize($prefix);
+                    $module .= "/" ~ Inflector::camelize($prefix);
                 } else {
                     $prefixes = array_map(
                         function ($val) {
@@ -282,10 +282,10 @@ class ControllerFactory : IControllerFactory, IRequestHandler
                         },
                         explode("/", $prefix)
                     );
-                    $module .= "/" . implode("/", $prefixes);
+                    $module .= "/" ~ implode("/", $prefixes);
                 }
             } else {
-                $module .= "/" . $prefix;
+                $module .= "/" ~ $prefix;
             }
         }
         $firstChar = substr($controller, 0, 1);

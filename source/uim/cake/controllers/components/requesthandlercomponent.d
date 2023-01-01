@@ -175,7 +175,7 @@ class RequestHandlerComponent : Component {
 
         if (this.ext && !in_array(this.ext, ["html", "htm"], true)) {
             if (!$response.getMimeType(this.ext)) {
-                throw new NotFoundException("Invoked extension not recognized/configured: " . this.ext);
+                throw new NotFoundException("Invoked extension not recognized/configured: " ~ this.ext);
             }
 
             this.renderAs($controller, this.ext);
@@ -413,7 +413,7 @@ class RequestHandlerComponent : Component {
      * Sets the response header based on type map index name. This wraps several methods
      * available on {@link uim.cake.Http\Response}. It also allows you to use Content-Type aliases.
      *
-     * @param string myType Friendly type name, i.e. "html" or "xml", or a full content-type,
+     * @param string myType Friendly type name, i.e~ "html" or "xml", or a full content-type,
      *    like "application/x-shockwave".
      * @param array<string, mixed> myOptions If myType is a friendly type name that is associated with
      *    more than one type of content, $index is used to select which content-type to use.

@@ -30,7 +30,7 @@ class ErrorController : Controller {
             in_array($builder.getTemplate(), ["error400", "error500"], true)
         ) {
             $parts = explode(DIRECTORY_SEPARATOR, (string)$builder.getTemplatePath(), -1);
-            $templatePath = implode(DIRECTORY_SEPARATOR, $parts) . DIRECTORY_SEPARATOR . "Error";
+            $templatePath = implode(DIRECTORY_SEPARATOR, $parts) . DIRECTORY_SEPARATOR ~ "Error";
         }
 
         $builder.setTemplatePath($templatePath);

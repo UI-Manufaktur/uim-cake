@@ -94,8 +94,8 @@ class CakeException : RuntimeException
         }
 
         deprecationWarning(
-            "Setting HTTP response headers from Exception directly is deprecated. " .
-            "If your exceptions extend Exception, they must now extend HttpException. " .
+            "Setting HTTP response headers from Exception directly is deprecated~ " ~
+            "If your exceptions extend Exception, they must now extend HttpException~ " ~
             "You should only set HTTP headers on HttpException instances via the `setHeaders()` method."
         );
         if (is_array($header)) {

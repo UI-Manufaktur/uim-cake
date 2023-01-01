@@ -71,7 +71,7 @@ class PhpConfig : IConfigEngine
             return $return;
         }
 
-        throw new CakeException(sprintf("Config file "%s" did not return an array", myKey . ".php"));
+        throw new CakeException(sprintf("Config file "%s" did not return an array", myKey ~ ".php"));
     }
 
     /**
@@ -84,7 +84,7 @@ class PhpConfig : IConfigEngine
      * @return bool Success
      */
     bool dump(string myKey, array myData) {
-        myContentss = "<?php" . "\n" . "return " . var_export(myData, true) . ";";
+        myContentss = "<?php" ~ "\n" ~ "return " ~ var_export(myData, true) ~ ";";
 
         myfilename = _getFilePath(myKey);
 

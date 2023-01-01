@@ -38,7 +38,7 @@ trait ConventionsTrait
     protected string _modelKey(string aName) {
         [, $name] = pluginSplit($name);
 
-        return Inflector::underscore(Inflector::singularize($name)) . "_id";
+        return Inflector::underscore(Inflector::singularize($name)) ~ "_id";
     }
 
     /**

@@ -68,7 +68,7 @@ trait ContainerStubTrait
             $appClass = _appClass;
         } else {
             /** @psalm-var class-string<uim.cake.Http\BaseApplication> */
-            $appClass = Configure::read("App.namespace") . "\Application";
+            $appClass = Configure::read("App.namespace") ~ "\Application";
         }
         if (!class_exists($appClass)) {
             throw new LogicException("Cannot load `{$appClass}` for use in integration testing.");

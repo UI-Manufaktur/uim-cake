@@ -91,7 +91,7 @@ class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingComponentException([
-            "class": $class . "Component",
+            "class": $class ~ "Component",
             "plugin": $plugin,
         ]);
     }

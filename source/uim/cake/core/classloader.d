@@ -36,10 +36,10 @@ class ClassLoader
      * than last.
      */
     void addmodule(string prefix, string baseDir, bool $prepend = false) {
-        $prefix = trim($prefix, "\\") . "\\";
+        $prefix = trim($prefix, "\\") ~ "\\";
 
         $baseDir = rtrim($baseDir, "/") . DIRECTORY_SEPARATOR;
-        $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) . "/";
+        $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) ~ "/";
 
         _prefixes[$prefix] = _prefixes[$prefix] ?? [];
 
@@ -89,7 +89,7 @@ class ClassLoader
         }
 
         foreach (_prefixes[$prefix] as $baseDir) {
-            myfile = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) . ".php";
+            myfile = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) ~ ".php";
 
             if (_requireFile(myfile)) {
                 return myfile;

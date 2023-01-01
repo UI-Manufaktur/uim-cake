@@ -37,7 +37,7 @@ if (!function_exists("h")) {
             if (method_exists($text, "__toString")) {
                 $text = $text.__toString();
             } else {
-                $text = "(object)" . get_class($text);
+                $text = "(object)" ~ get_class($text);
             }
         } elseif ($text == null || is_scalar($text)) {
             return $text;
@@ -276,9 +276,9 @@ if (!function_exists("deprecationWarning")) {
             }
 
             $message = sprintf(
-                "%s\n%s, line: %s\n" .
-                "You can disable all deprecation warnings by setting `Error.errorLevel` to " .
-                "`E_ALL & ~E_USER_DEPRECATED`. Adding `%s` to `Error.ignoredDeprecationPaths` " .
+                "%s\n%s, line: %s\n" ~
+                "You can disable all deprecation warnings by setting `Error.errorLevel` to " ~
+                "`E_ALL & ~E_USER_DEPRECATED`. Adding `%s` to `Error.ignoredDeprecationPaths` " ~
                 "in your `config/app.php` config will mute deprecations from that file only.",
                 $message,
                 $frame["file"],

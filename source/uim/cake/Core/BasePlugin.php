@@ -149,7 +149,7 @@ class BasePlugin : PluginInterface
         }
         $path = this.getPath();
 
-        return $path . "config" . DIRECTORY_SEPARATOR;
+        return $path ~ "config" ~ DIRECTORY_SEPARATOR;
     }
 
 
@@ -159,7 +159,7 @@ class BasePlugin : PluginInterface
         }
         $path = this.getPath();
 
-        return $path . "src" . DIRECTORY_SEPARATOR;
+        return $path ~ "src" ~ DIRECTORY_SEPARATOR;
     }
 
 
@@ -169,7 +169,7 @@ class BasePlugin : PluginInterface
         }
         $path = this.getPath();
 
-        return this.templatePath = $path . "templates" . DIRECTORY_SEPARATOR;
+        return this.templatePath = $path ~ "templates" ~ DIRECTORY_SEPARATOR;
     }
 
 
@@ -205,13 +205,13 @@ class BasePlugin : PluginInterface
     protected void checkHook(string $hook) {
         if (!in_array($hook, static::VALID_HOOKS, true)) {
             throw new InvalidArgumentException(
-                "`$hook` is not a valid hook name. Must be one of " . implode(", ", static::VALID_HOOKS)
+                "`$hook` is not a valid hook name. Must be one of " ~ implode(", ", static::VALID_HOOKS)
             );
         }
     }
 
     void routes(RouteBuilder $routes) {
-        $path = this.getConfigPath() . "routes.php";
+        $path = this.getConfigPath() ~ "routes.php";
         if (is_file($path)) {
             $return = require $path;
             if ($return instanceof Closure) {
@@ -222,7 +222,7 @@ class BasePlugin : PluginInterface
 
 
     void bootstrap(IPluginApplication $app) {
-        $bootstrap = this.getConfigPath() . "bootstrap.php";
+        $bootstrap = this.getConfigPath() ~ "bootstrap.php";
         if (is_file($bootstrap)) {
             require $bootstrap;
         }

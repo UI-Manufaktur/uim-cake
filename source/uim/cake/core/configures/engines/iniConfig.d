@@ -138,7 +138,7 @@ class IniConfig : IConfigEngine
             if (is_array(myValue)) {
                 $kValues = Hash::flatten(myValue, ".");
                 foreach ($kValues as $k2: $v) {
-                    myResult[] = "$k2 = " . _value($v);
+                    myResult[] = "$k2 = " ~ _value($v);
                 }
             }
             if ($isSection) {

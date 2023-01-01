@@ -391,7 +391,7 @@ class Configure
             return $version;
         }
 
-        myPath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "config/config.php";
+        myPath = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ~ "config/config.php";
         if (is_file(myPath)) {
             myConfig = require myPath;
             static::write(myConfig);

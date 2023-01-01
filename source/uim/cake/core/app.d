@@ -43,7 +43,7 @@ class App {
         [myPlugin, myName] = pluginSplit(aClassName);
         $base = myPlugin ?: Configure::read("App.module");
         $base = str_replace("/", "\\", rtrim($base, "\\"));
-        $fullname = "\\" . str_replace("/", "\\", aClassType . "\\" . myName) . aClassNameSuffix;
+        $fullname = "\\" ~ str_replace("/", "\\", aClassType ~ "\\" ~ myName) . aClassNameSuffix;
 
         if (static::_classExistsInBase($fullname, $base)) {
             /** @var class-string */
@@ -55,7 +55,7 @@ class App {
         }
 
         /** @var class-string */
-        return "Cake" . $fullname;
+        return "Cake" ~ $fullname;
     }
 
     /**
@@ -100,7 +100,7 @@ class App {
      */
     static string shortName(string aClassName, string aClassType, string aClassNameSuffix = "") {
         aClassName = str_replace("\\", "/", aClassName);
-        aClassType = "/" . aClassType . "/";
+        aClassType = "/" ~ aClassType ~ "/";
 
         $pos = strrpos(aClassName, aClassType);
         if ($pos == false) {
@@ -122,7 +122,7 @@ class App {
             return myName;
         }
 
-        return myPluginName . "." . myName;
+        return myPluginName ~ "." ~ myName;
     }
 
     /**
@@ -166,7 +166,7 @@ class App {
      */
     static string[] path(string aClassType, Nullable!string myPlugin = null) {
         if (myPlugin is null && aClassType[0] == strtolower(aClassType[0])) {
-            return (array)Configure::read("App.paths." . aClassType);
+            return (array)Configure::read("App.paths." ~ aClassType);
         }
 
         if (aClassType == "templates") {
@@ -176,12 +176,12 @@ class App {
 
         if (aClassType == "locales") {
             /** @psalm-suppress PossiblyNullArgument */
-            return [Plugin::path(myPlugin) . "resources" . DIRECTORY_SEPARATOR . "locales" . DIRECTORY_SEPARATOR];
+            return [Plugin::path(myPlugin) ~ "resources" ~ DIRECTORY_SEPARATOR ~ "locales" ~ DIRECTORY_SEPARATOR];
         }
 
         deprecationWarning(
             "App::path() is deprecated for class path."
-            . " Use uim.cake.Core\App::classPath() or uim.cake.Core\Plugin::classPath() instead."
+            ~ " Use uim.cake.Core\App::classPath() or uim.cake.Core\Plugin::classPath() instead."
         );
 
         return static::classPath(aClassType, myPlugin);
@@ -233,7 +233,7 @@ class App {
      */
     static string[] core(string aClassType) {
         if (aClassType == "templates") {
-            return [CORE_PATH . "templates" . DIRECTORY_SEPARATOR];
+            return [CORE_PATH ~ "templates" ~ DIRECTORY_SEPARATOR];
         }
 
         return [CAKE . str_replace("/", DIRECTORY_SEPARATOR, aClassType) . DIRECTORY_SEPARATOR];

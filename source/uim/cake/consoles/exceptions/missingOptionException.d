@@ -52,12 +52,12 @@ class MissingOptionException : ConsoleException
         $good = [];
         foreach (this.suggestions as $option) {
             if (levenshtein($option, this.requested) < 8) {
-                $good[] = "- " . $option;
+                $good[] = "- " ~ $option;
             }
         }
 
         if ($good) {
-            $out .= "\n\nOther valid choices:\n\n" . implode("\n", $good);
+            $out .= "\n\nOther valid choices:\n\n" ~ implode("\n", $good);
         }
 
         return $out;
@@ -73,7 +73,7 @@ class MissingOptionException : ConsoleException
     protected Nullable!string findClosestItem($needle, string[] $haystack) {
         $bestGuess = null;
         foreach ($haystack as $item) {
-            if (preg_match("/^" . $needle . "/", $item)) {
+            if (preg_match("/^" ~ $needle ~ "/", $item)) {
                 return $item;
             }
         }

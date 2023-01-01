@@ -149,7 +149,7 @@ class FlashComponent : Component
 
         if (!empty($args[1])) {
             if (!empty($args[1]["plugin"])) {
-                myOptions = ["element":$args[1]["plugin"] . "." . $element];
+                myOptions = ["element":$args[1]["plugin"] ~ "." ~ $element];
                 unset($args[1]["plugin"]);
             }
             myOptions += (array)$args[1];

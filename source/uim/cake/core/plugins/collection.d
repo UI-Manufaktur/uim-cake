@@ -60,9 +60,9 @@ class PluginCollection : Iterator, Countable
         if (Configure::check("plugins")) {
             return;
         }
-        $vendorFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . "UIM-plugins.php";
+        $vendorFile = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ~ "UIM-plugins.php";
         if (!is_file($vendorFile)) {
-            $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR . "UIM-plugins.php";
+            $vendorFile = dirname(dirname(dirname(dirname(__DIR__)))) . DIRECTORY_SEPARATOR ~ "UIM-plugins.php";
             if (!is_file($vendorFile)) {
                 Configure.write(["plugins":[]]);
 
@@ -93,7 +93,7 @@ class PluginCollection : Iterator, Countable
         // wipes out all configuration including plugin paths config.
         this.loadConfig();
 
-        myPath = Configure::read("plugins." . myName);
+        myPath = Configure::read("plugins." ~ myName);
         if (myPath) { return myPath; }
 
         myPluginPath = str_replace("/", DIRECTORY_SEPARATOR, myName);
@@ -192,7 +192,7 @@ class PluginCollection : Iterator, Countable
 
         myConfig += ["name":myName];
         /** @var class-string<uim.cake.Core\IPlugin> myClassName */
-        myClassName = str_replace("/", "\\", myName) . "\\" . "Plugin";
+        myClassName = str_replace("/", "\\", myName) ~ "\\" ~ "Plugin";
         if (!class_exists(myClassName)) {
             myClassName = BasePlugin::class;
             if (empty(myConfig["path"])) {

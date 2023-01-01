@@ -171,7 +171,7 @@ class Controller : IEventListener, IEventDispatcher
 
         if (this.modelClass is null) {
             myPlugin = this.request.getParam("plugin");
-            myModelClass = (myPlugin ? myPlugin . "." : "") . this.name;
+            myModelClass = (myPlugin ? myPlugin ~ "." : "") . this.name;
             _setModelClass(myModelClass);
 
             this.defaultTable = myModelClass;
@@ -185,14 +185,14 @@ class Controller : IEventListener, IEventDispatcher
 
         if (isset(this.components)) {
             triggerWarning(
-                "Support for loading components using $components property is removed. " .
+                "Support for loading components using $components property is removed~ " ~
                 "Use this.loadComponent() instead in initialize()."
             );
         }
 
         if (isset(this.helpers)) {
             triggerWarning(
-                "Support for loading helpers using $helpers property is removed. " .
+                "Support for loading helpers using $helpers property is removed~ " ~
                 "Use this.viewBuilder().setHelpers() instead."
             );
         }
@@ -298,7 +298,7 @@ class Controller : IEventListener, IEventDispatcher
     void __set(string propertyName, myValue) {
         if (propertyName == "components") {
             triggerWarning(
-                "Support for loading components using $components property is removed. " .
+                "Support for loading components using $components property is removed~ " ~
                 "Use this.loadComponent() instead in initialize()."
             );
 
@@ -307,7 +307,7 @@ class Controller : IEventListener, IEventDispatcher
 
         if (propertyName == "helpers") {
             triggerWarning(
-                "Support for loading helpers using $helpers property is removed. " .
+                "Support for loading helpers using $helpers property is removed~ " ~
                 "Use this.viewBuilder().setHelpers() instead."
             );
 
@@ -459,7 +459,7 @@ class Controller : IEventListener, IEventDispatcher
 
         if (!this.isAction($action)) {
             throw new MissingActionException([
-                "controller":this.name . "Controller",
+                "controller":this.name ~ "Controller",
                 "action":myRequest.getParam("action"),
                 "prefix":myRequest.getParam("prefix") ?: "",
                 "plugin":myRequest.getParam("plugin"),
@@ -480,8 +480,8 @@ class Controller : IEventListener, IEventDispatcher
         myResult = $action(...$args);
         if (myResult  !is null && !myResult instanceof IResponse) {
             throw new UnexpectedValueException(sprintf(
-                "Controller actions can only return IResponse instance or null. "
-                . "Got %s instead.",
+                "Controller actions can only return IResponse instance or null~ "
+                ~ "Got %s instead.",
                 getTypeName(myResult)
             ));
         }
@@ -649,7 +649,7 @@ class Controller : IEventListener, IEventDispatcher
      */
     auto setAction(string action, ...$args) {
         deprecationWarning(
-            "Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, " .
+            "Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, " ~
             "or call the other action as a method."
         );
         this.setRequest(this.request.withParam("action", $action));
@@ -730,7 +730,7 @@ class Controller : IEventListener, IEventDispatcher
             if ($local && $base && indexOf(myUrl, $base) == 0) {
                 myUrl = substr(myUrl, strlen($base));
                 if (myUrl[0] != "/") {
-                    myUrl = "/" . myUrl;
+                    myUrl = "/" ~ myUrl;
                 }
 
                 return myUrl;

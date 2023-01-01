@@ -87,7 +87,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingComponentException([
-            "class":myClass . "Component",
+            "class":myClass ~ "Component",
             "plugin":myPlugin,
         ]);
     }

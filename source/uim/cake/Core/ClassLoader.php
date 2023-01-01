@@ -47,10 +47,10 @@ class ClassLoader
      * than last.
      */
     void addNamespace(string $prefix, string $baseDir, bool $prepend = false) {
-        $prefix = trim($prefix, "\\") . "\\";
+        $prefix = trim($prefix, "\\") ~ "\\";
 
         $baseDir = rtrim($baseDir, "/") . DIRECTORY_SEPARATOR;
-        $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) . "/";
+        $baseDir = rtrim($baseDir, DIRECTORY_SEPARATOR) ~ "/";
 
         _prefixes[$prefix] = _prefixes[$prefix] ?? [];
 
@@ -100,7 +100,7 @@ class ClassLoader
         }
 
         foreach (_prefixes[$prefix] as $baseDir) {
-            $file = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) . ".php";
+            $file = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) ~ ".php";
 
             if (_requireFile($file)) {
                 return $file;
