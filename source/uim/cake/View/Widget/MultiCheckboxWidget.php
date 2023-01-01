@@ -153,7 +153,7 @@ class MultiCheckboxWidget : BasicWidget
             $checkbox["disabled"] = _isDisabled((string)$checkbox["value"], $data["disabled"]);
             if (empty($checkbox["id"])) {
                 if (isset($data["id"])) {
-                    $checkbox["id"] = $data["id"] . "-" . trim(
+                    $checkbox["id"] = $data["id"] ~ "-" ~ trim(
                         _idSuffix((string)$checkbox["value"]),
                         "-"
                     );
@@ -176,7 +176,7 @@ class MultiCheckboxWidget : BasicWidget
     protected string _renderInput(array $checkbox, ContextInterface $context): string
     {
         $input = _templates.format("checkbox", [
-            "name": $checkbox["name"] . "[]",
+            "name": $checkbox["name"] ~ "[]",
             "value": $checkbox["escape"] ? h($checkbox["value"]) : $checkbox["value"],
             "templateVars": $checkbox["templateVars"],
             "attrs": _templates.formatAttributes(

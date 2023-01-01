@@ -174,7 +174,7 @@ class TextHelper : Helper
             $link = myUrl = myContents["content"];
             $envelope = myContents["envelope"];
             if (!preg_match("#^[a-z]+\://#i", myUrl)) {
-                myUrl = "http://" . myUrl;
+                myUrl = "http://" ~ myUrl;
             }
             $replace[$hash] = $envelope[0] . this.Html.link($link, myUrl, $htmlOptions) . $envelope[1];
         }
@@ -195,7 +195,7 @@ class TextHelper : Helper
         foreach (_placeholders as $hash: myContents) {
             myUrl = myContents["content"];
             $envelope = myContents["envelope"];
-            $replace[$hash] = $envelope[0] . this.Html.link(myUrl, "mailto:" . myUrl, myOptions) . $envelope[1];
+            $replace[$hash] = $envelope[0] . this.Html.link(myUrl, "mailto:" ~ myUrl, myOptions) . $envelope[1];
         }
 
         return strtr($text, $replace);
@@ -219,7 +219,7 @@ class TextHelper : Helper
 
         $atom = "[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]";
         $text = preg_replace_callback(
-            "/(?<=\s|^|\(|\>|\;)(" . $atom . "*(?:\." . $atom . "+)*@[\p{L}0-9-]+(?:\.[\p{L}0-9-]+)+)/ui",
+            "/(?<=\s|^|\(|\>|\;)(" ~ $atom ~ "*(?:\." ~ $atom ~ "+)*@[\p{L}0-9-]+(?:\.[\p{L}0-9-]+)+)/ui",
             [&this, "_insertPlaceholder"],
             $text
         );
@@ -275,12 +275,12 @@ class TextHelper : Helper
     string autoParagraph(Nullable!string text) {
         $text = $text ?? "";
         if (trim($text) != "") {
-            $text = preg_replace("|<br[^>]*>\s*<br[^>]*>|i", "\n\n", $text . "\n");
+            $text = preg_replace("|<br[^>]*>\s*<br[^>]*>|i", "\n\n", $text ~ "\n");
             $text = preg_replace("/\n\n+/", "\n\n", str_replace(["\r\n", "\r"], "\n", $text));
             $texts = preg_split("/\n\s*\n/", $text, -1, PREG_SPLIT_NO_EMPTY);
             $text = "";
             foreach ($texts as $txt) {
-                $text .= "<p>" . nl2br(trim($txt, "\n")) . "</p>\n";
+                $text .= "<p>" ~ nl2br(trim($txt, "\n")) ~ "</p>\n";
             }
             $text = preg_replace("|<p>\s*</p>|", "", $text);
         }

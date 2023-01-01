@@ -377,10 +377,10 @@ class HtmlHelper : Helper
         if (is_array($path)) {
             $out = "";
             foreach ($path as $i) {
-                $out .= "\n\t" . (string)this.css($i, $options);
+                $out .= "\n\t" ~ (string)this.css($i, $options);
             }
             if (empty($options["block"])) {
-                return $out . "\n";
+                return $out ~ "\n";
             }
 
             return null;
@@ -399,7 +399,7 @@ class HtmlHelper : Helper
         if ($options["rel"] == "import") {
             $out = $templater.format("style", [
                 "attrs": $templater.formatAttributes($options, ["rel", "block"]),
-                "content": "@import url(" . $url . ");",
+                "content": "@import url(" ~ $url ~ ");",
             ]);
         } else {
             $out = $templater.format("css", [
@@ -477,10 +477,10 @@ class HtmlHelper : Helper
         if (is_array($url)) {
             $out = "";
             foreach ($url as $i) {
-                $out .= "\n\t" . (string)this.script($i, $options);
+                $out .= "\n\t" ~ (string)this.script($i, $options);
             }
             if (empty($options["block"])) {
-                return $out . "\n";
+                return $out ~ "\n";
             }
 
             return null;
@@ -602,7 +602,7 @@ class HtmlHelper : Helper
     {
         $out = [];
         foreach ($data as $key: $value) {
-            $out[] = $key . ":" . $value . ";";
+            $out[] = $key ~ ":" ~ $value ~ ";";
         }
         if ($oneLine) {
             return implode(" ", $out);
@@ -791,9 +791,9 @@ class HtmlHelper : Helper
             if ($useCount) {
                 $i += 1;
                 if (isset($cellOptions["class"])) {
-                    $cellOptions["class"] .= " column-" . $i;
+                    $cellOptions["class"] .= " column-" ~ $i;
                 } else {
-                    $cellOptions["class"] = "column-" . $i;
+                    $cellOptions["class"] = "column-" ~ $i;
                 }
             }
 

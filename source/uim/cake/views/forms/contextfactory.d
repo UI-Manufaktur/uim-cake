@@ -131,7 +131,7 @@ class ContextFactory
         if (!isset($context)) {
             throw new RuntimeException(sprintf(
                 "No context provider found for value of type `%s`."
-                . " Use `null` as 1st argument of FormHelper::create() to create a context-less form.",
+                ~ " Use `null` as 1st argument of FormHelper::create() to create a context-less form.",
                 getTypeName(myData["entity"])
             ));
         }

@@ -427,15 +427,15 @@ class PaginatorHelper : Helper
         $sortKey = (string)this.sortKey($options["model"]);
         $defaultModel = this.defaultModel();
         $model = $options["model"] ?: $defaultModel;
-        [$table, $field] = explode(".", $key . ".");
+        [$table, $field] = explode(".", $key ~ ".");
         if (!$field) {
             $field = $table;
             $table = $model;
         }
         $isSorted = (
-            $sortKey == $table . "." . $field ||
-            $sortKey == $model . "." . $key ||
-            $table . "." . $field == $model . "." . $sortKey
+            $sortKey == $table ~ "." ~ $field ||
+            $sortKey == $model ~ "." ~ $key ||
+            $table ~ "." ~ $field == $model ~ "." ~ $sortKey
         );
 
         $template = "sort";
@@ -644,7 +644,7 @@ class PaginatorHelper : Helper
     {
         $params = this.params($model);
 
-        return !empty($params) && $params[$dir . "Page"];
+        return !empty($params) && $params[$dir ~ "Page"];
     }
 
     /**
@@ -701,7 +701,7 @@ class PaginatorHelper : Helper
         switch ($format) {
             case "range":
             case "pages":
-                $template = "counter" . ucfirst($format);
+                $template = "counter" ~ ucfirst($format);
                 break;
             default:
                 $template = "counterCustom";
@@ -1220,7 +1220,7 @@ class PaginatorHelper : Helper
         $params = this.params($model);
         $scope = "";
         if (!empty($params["scope"])) {
-            $scope = $params["scope"] . ".";
+            $scope = $params["scope"] ~ ".";
         }
 
         if (empty($default)) {
@@ -1235,7 +1235,7 @@ class PaginatorHelper : Helper
             ];
         }
         $out = this.Form.create(null, ["type": "get"]);
-        $out .= this.Form.control($scope . "limit", $options + [
+        $out .= this.Form.control($scope ~ "limit", $options + [
             "type": "select",
             "label": __("View"),
             "default": $default,

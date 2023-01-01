@@ -147,7 +147,7 @@ class RadioWidget : BasicWidget
 
         if (empty($radio["id"])) {
             if (isset($data["id"])) {
-                $radio["id"] = $data["id"] . "-" . rtrim(
+                $radio["id"] = $data["id"] ~ "-" ~ rtrim(
                     _idSuffix((string)$radio["value"]),
                     "-"
                 );

@@ -72,7 +72,7 @@ abstract class SerializedView : View
         if ($serialize == true) {
             myOptions = array_map(
                 function ($v) {
-                    return "_" . $v;
+                    return "_" ~ $v;
                 },
                 array_keys(_defaultConfig)
             );

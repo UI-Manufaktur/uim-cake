@@ -174,7 +174,7 @@ class DateTimeWidget : BasicWidget
             } elseif (is_string($value) && !is_numeric($value)) {
                 $dateTime = new DateTime($value);
             } elseif (is_numeric($value)) {
-                $dateTime = new DateTime("@" . $value);
+                $dateTime = new DateTime("@" ~ $value);
             } else {
                 $dateTime = new DateTime();
             }

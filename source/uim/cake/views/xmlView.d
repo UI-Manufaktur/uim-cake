@@ -72,7 +72,7 @@ class XmlView : SerializedView
      *   names. If true all view variables will be serialized. If null or false
      *   normal view template will be rendered.
      * - `xmlOptions`: Option to allow setting an array of custom options for Xml::fromArray().
-     *   For e.g. "format" as "attributes" instead of "tags".
+     *   For e.g~ "format" as "attributes" instead of "tags".
      * - `rootNode`: Root node name. Defaults to "response".
      *
      * @var array<string, mixed>

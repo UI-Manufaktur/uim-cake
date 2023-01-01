@@ -163,7 +163,7 @@ class BasicWidget : IWidget {
 
         if ($dbType == "decimal" && isset(myFieldDef["precision"])) {
             $decimalPlaces = myFieldDef["precision"];
-            myData["step"] = sprintf("%." . $decimalPlaces . "F", pow(10, -1 * $decimalPlaces));
+            myData["step"] = sprintf("%." ~ $decimalPlaces ~ "F", pow(10, -1 * $decimalPlaces));
         } elseif ($dbType == "float") {
             myData["step"] = "any";
         }

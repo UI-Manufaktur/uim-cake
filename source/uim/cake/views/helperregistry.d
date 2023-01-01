@@ -49,7 +49,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
         } catch (MissingHelperException myException) {
             myPlugin = _View.getPlugin();
             if (!empty(myPlugin)) {
-                this.load(myPlugin . "." . $helper);
+                this.load(myPlugin ~ "." ~ $helper);
 
                 return true;
             }
@@ -104,7 +104,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher {
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingHelperException([
-            "class": myClass . "Helper",
+            "class": myClass ~ "Helper",
             "plugin": myPlugin,
         ]);
     }

@@ -554,7 +554,7 @@ class EntityContext : IContext {
 
         myTable = _getTable($parts);
         if (!myTable) {
-            throw new RuntimeException("Validator not found: " . myKey);
+            throw new RuntimeException("Validator not found: " ~ myKey);
         }
         myAlias = myTable.getAlias();
 

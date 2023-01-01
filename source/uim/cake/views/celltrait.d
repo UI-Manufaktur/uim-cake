@@ -48,7 +48,7 @@ trait CellTrait {
         myClassName = App::className(myPluginAndCell, "View/Cell", "Cell");
 
         if (!myClassName) {
-            throw new MissingCellException(["className": myPluginAndCell . "Cell"]);
+            throw new MissingCellException(["className": myPluginAndCell ~ "Cell"]);
         }
 
         if (!empty(myData)) {

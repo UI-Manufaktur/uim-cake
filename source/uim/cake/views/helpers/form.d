@@ -482,7 +482,7 @@ class FormHelper : Helper
     protected void _lastAction(myUrl = null) {
         $action = Router::url(myUrl, true);
         myQuery = parse_url($action, PHP_URL_QUERY);
-        myQuery = myQuery ? "?" . myQuery : "";
+        myQuery = myQuery ? "?" ~ myQuery : "";
 
         myPath = parse_url($action, PHP_URL_PATH) ?: "";
         _lastAction = myPath . myQuery;
@@ -634,7 +634,7 @@ class FormHelper : Helper
         if (this.formProtector is null) {
             throw new CakeException(
                 "`FormProtector` instance has not been created. Ensure you have loaded the `FormProtectionComponent`"
-                . " in your controller and called `FormHelper::create()` before calling `FormHelper::unlockField()`."
+                ~ " in your controller and called `FormHelper::create()` before calling `FormHelper::unlockField()`."
             );
         }
 
@@ -720,7 +720,7 @@ class FormHelper : Helper
 
         return this.formatTemplate("error", [
             "content": myError,
-            "id": _domId(myField) . "-error",
+            "id": _domId(myField) ~ "-error",
         ]);
     }
 
@@ -1019,7 +1019,7 @@ class FormHelper : Helper
                 indexOf(myTemplater.get("inputContainerError"), "{{error}}") != false
             ) {
                 myOptions += [
-                   "aria-describedby": $isFieldError ? _domId(myFieldName) . "-error" : null,
+                   "aria-describedby": $isFieldError ? _domId(myFieldName) ~ "-error" : null,
                 ];
             }
             if (isset(myOptions["placeholder"]) && myOptions["label"] == false) {
@@ -1099,7 +1099,7 @@ class FormHelper : Helper
      * @return string The generated group template
      */
     protected string _groupTemplate(array myOptions) {
-        myGroupTemplate = myOptions["options"]["type"] . "FormGroup";
+        myGroupTemplate = myOptions["options"]["type"] ~ "FormGroup";
         if (!this.templater().get(myGroupTemplate)) {
             myGroupTemplate = "formGroup";
         }
@@ -1119,9 +1119,9 @@ class FormHelper : Helper
      * @return string The generated input container template
      */
     protected string _inputContainerTemplate(array myOptions) {
-        $inputContainerTemplate = myOptions["options"]["type"] . "Container" . myOptions["errorSuffix"];
+        $inputContainerTemplate = myOptions["options"]["type"] ~ "Container" ~ myOptions["errorSuffix"];
         if (!this.templater().get($inputContainerTemplate)) {
-            $inputContainerTemplate = "inputContainer" . myOptions["errorSuffix"];
+            $inputContainerTemplate = "inputContainer" ~ myOptions["errorSuffix"];
         }
 
         return this.formatTemplate($inputContainerTemplate, [
@@ -1323,7 +1323,7 @@ class FormHelper : Helper
             if (this.getConfig("autoSetCustomValidity")) {
                 myOptions["data-validity-message"] = myMessage;
                 myOptions["oninvalid"] = "this.setCustomValidity(""); "
-                    . "if (!this.value) this.setCustomValidity(this.dataset.validityMessage)";
+                    ~ "if (!this.value) this.setCustomValidity(this.dataset.validityMessage)";
                 myOptions["oninput"] = "this.setCustomValidity("")";
             }
         }
@@ -1792,10 +1792,10 @@ class FormHelper : Helper
         unset(myOptions["block"]);
 
         myUrl = "#";
-        $onClick = "document." . $formName . ".submit();";
+        $onClick = "document." ~ $formName ~ ".submit();";
         if ($confirmMessage) {
             $onClick = _confirm($onClick, "");
-            $onClick = $onClick . "event.returnValue = false; return false;";
+            $onClick = $onClick ~ "event.returnValue = false; return false;";
             $onClick = this.templater().format("confirmJs", [
                 "confirmMessage": h($confirmMessage),
                 "formName": $formName,
@@ -1862,8 +1862,8 @@ class FormHelper : Helper
                 $unlockFields = ["x", "y"];
                 if (isset(myOptions["name"])) {
                     $unlockFields = [
-                        myOptions["name"] . "_x",
-                        myOptions["name"] . "_y",
+                        myOptions["name"] ~ "_x",
+                        myOptions["name"] ~ "_y",
                     ];
                 }
                 foreach ($unlockFields as $ignore) {
@@ -2217,7 +2217,7 @@ class FormHelper : Helper
             }
             $parts = explode(".", myField);
             $first = array_shift($parts);
-            myOptions["name"] = $first . (!empty($parts) ? "[" . implode("][", $parts) . "]" : "") . $endsWithBrackets;
+            myOptions["name"] = $first . (!empty($parts) ? "[" ~ implode("][", $parts) ~ "]" : "") . $endsWithBrackets;
         }
 
         if (isset(myOptions["value"]) && !isset(myOptions["val"])) {
@@ -2341,7 +2341,7 @@ class FormHelper : Helper
      *
      * Allows you to add or replace widget instances with custom code.
      *
-     * @param string myName The name of the widget. e.g. "text".
+     * @param string myName The name of the widget. e.g~ "text".
      * @param uim.cake.View\Widget\IWidget|array $spec Either a string class
      *   name or an object implementing the IWidget.
      */
@@ -2357,7 +2357,7 @@ class FormHelper : Helper
      * widgets you should use this method render the widget without the label
      * or wrapping div.
      *
-     * @param string myName The name of the widget. e.g. "text".
+     * @param string myName The name of the widget. e.g~ "text".
      * @param array myData The data to render.
      */
     string widget(string myName, array myData = []) {

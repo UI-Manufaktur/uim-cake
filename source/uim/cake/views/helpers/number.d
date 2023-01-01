@@ -118,8 +118,8 @@ class NumberHelper : Helper
      * - `places` - Minimum number or decimals to use, e.g 0
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. "["
-     * - `after` - The string to place after decimal numbers, e.g. "]"
+     * - `before` - The string to place before whole numbers, e.g~ "["
+     * - `after` - The string to place after decimal numbers, e.g~ "]"
      * - `escape` - Whether to escape html in resulting string
      *
      * @param string|float $number A floating point number.
@@ -173,8 +173,8 @@ class NumberHelper : Helper
      * - `places` - Minimum number or decimals to use, e.g 0
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. "["
-     * - `after` - The string to place after decimal numbers, e.g. "]"
+     * - `before` - The string to place before whole numbers, e.g~ "["
+     * - `after` - The string to place after decimal numbers, e.g~ "]"
      * - `escape` - Set to false to prevent escaping
      *
      * @param string|float myValue A floating point number

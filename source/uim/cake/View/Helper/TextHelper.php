@@ -188,7 +188,7 @@ class TextHelper : Helper
             $link = $url = $content["content"];
             $envelope = $content["envelope"];
             if (!preg_match("#^[a-z]+\://#i", $url)) {
-                $url = "http://" . $url;
+                $url = "http://" ~ $url;
             }
             $replace[$hash] = $envelope[0] . this.Html.link($link, $url, $htmlOptions) . $envelope[1];
         }
@@ -210,7 +210,7 @@ class TextHelper : Helper
         foreach (_placeholders as $hash: $content) {
             $url = $content["content"];
             $envelope = $content["envelope"];
-            $replace[$hash] = $envelope[0] . this.Html.link($url, "mailto:" . $url, $options) . $envelope[1];
+            $replace[$hash] = $envelope[0] . this.Html.link($url, "mailto:" ~ $url, $options) . $envelope[1];
         }
 
         return strtr($text, $replace);
@@ -235,7 +235,7 @@ class TextHelper : Helper
 
         $atom = "[\p{L}0-9!#$%&\"*+\/=?^_`{|}~-]";
         $text = preg_replace_callback(
-            "/(?<=\s|^|\(|\>|\;)(" . $atom . "*(?:\." . $atom . "+)*@[\p{L}0-9-]+(?:\.[\p{L}0-9-]+)+)/ui",
+            "/(?<=\s|^|\(|\>|\;)(" ~ $atom ~ "*(?:\." ~ $atom ~ "+)*@[\p{L}0-9-]+(?:\.[\p{L}0-9-]+)+)/ui",
             [&this, "_insertPlaceholder"],
             $text
         );
@@ -294,12 +294,12 @@ class TextHelper : Helper
     {
         $text = $text ?? "";
         if (trim($text) != "") {
-            $text = preg_replace("|<br[^>]*>\s*<br[^>]*>|i", "\n\n", $text . "\n");
+            $text = preg_replace("|<br[^>]*>\s*<br[^>]*>|i", "\n\n", $text ~ "\n");
             $text = preg_replace("/\n\n+/", "\n\n", str_replace(["\r\n", "\r"], "\n", $text));
             $texts = preg_split("/\n\s*\n/", $text, -1, PREG_SPLIT_NO_EMPTY);
             $text = "";
             foreach ($texts as $txt) {
-                $text .= "<p>" . nl2br(trim($txt, "\n")) . "</p>\n";
+                $text .= "<p>" ~ nl2br(trim($txt, "\n")) ~ "</p>\n";
             }
             $text = preg_replace("|<p>\s*</p>|", "", $text);
         }

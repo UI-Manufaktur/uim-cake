@@ -196,7 +196,7 @@ abstract class Cell : IEventDispatcher
             return [];
         }
         myTemplate = myTemplate ?: "default";
-        myKey = "cell_" . Inflector::underscore(static::class) . "_" . $action . "_" . myTemplate;
+        myKey = "cell_" ~ Inflector::underscore(static::class) ~ "_" ~ $action ~ "_" ~ myTemplate;
         myKey = str_replace("\\", "_", myKey);
         $default = [
             "config": "default",

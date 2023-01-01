@@ -35,7 +35,7 @@ trait IdGeneratorTrait
         myName = _domId(myName);
         $suffix = _idSuffix($val);
 
-        return trim(myName . "-" . $suffix, "-");
+        return trim(myName ~ "-" ~ $suffix, "-");
     }
 
     /**
@@ -67,7 +67,7 @@ trait IdGeneratorTrait
     protected string _domId(string myValue) {
         $domId = mb_strtolower(Text::slug(myValue, "-"));
         if (_idPrefix) {
-            $domId = _idPrefix . "-" . $domId;
+            $domId = _idPrefix ~ "-" ~ $domId;
         }
 
         return $domId;

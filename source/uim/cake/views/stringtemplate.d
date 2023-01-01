@@ -298,7 +298,7 @@ class StringTemplate {
             return "";
         }
 
-        return myKey . "="" . ($escape ? h(myValue) : myValue) . """;
+        return myKey ~ "="" ~ ($escape ? h(myValue) : myValue) ~ """;
     }
 
     /**

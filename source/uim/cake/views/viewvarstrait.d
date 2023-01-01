@@ -49,7 +49,7 @@ trait ViewVarsTrait {
 
         foreach (["name", "plugin"] as $prop) {
             if (isset(this.{$prop})) {
-                $method = "set" . ucfirst($prop);
+                $method = "set" ~ ucfirst($prop);
                 myBuilder.{$method}(this.{$prop});
             }
         }

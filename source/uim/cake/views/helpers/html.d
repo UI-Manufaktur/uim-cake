@@ -363,10 +363,10 @@ class HtmlHelper : Helper {
         if (is_array(myPath)) {
             $out = "";
             foreach (myPath as $i) {
-                $out .= "\n\t" . (string)this.css($i, myOptions);
+                $out .= "\n\t" ~ (string)this.css($i, myOptions);
             }
             if (empty(myOptions["block"])) {
-                return $out . "\n";
+                return $out ~ "\n";
             }
 
             return null;
@@ -385,7 +385,7 @@ class HtmlHelper : Helper {
         if (myOptions["rel"] == "import") {
             $out = myTemplater.format("style", [
                 "attrs": myTemplater.formatAttributes(myOptions, ["rel", "block"]),
-                "content": "@import url(" . myUrl . ");",
+                "content": "@import url(" ~ myUrl ~ ");",
             ]);
         } else {
             $out = myTemplater.format("css", [
@@ -462,10 +462,10 @@ class HtmlHelper : Helper {
         if (is_array(myUrl)) {
             $out = "";
             foreach (myUrl as $i) {
-                $out .= "\n\t" . (string)this.script($i, myOptions);
+                $out .= "\n\t" ~ (string)this.script($i, myOptions);
             }
             if (empty(myOptions["block"])) {
-                return $out . "\n";
+                return $out ~ "\n";
             }
 
             return null;
@@ -582,7 +582,7 @@ class HtmlHelper : Helper {
     string style(array myData, bool $oneLine = true) {
         $out = [];
         foreach (myData as myKey: myValue) {
-            $out[] = myKey . ":" . myValue . ";";
+            $out[] = myKey ~ ":" ~ myValue ~ ";";
         }
         if ($oneLine) {
             return implode(" ", $out);
@@ -767,9 +767,9 @@ class HtmlHelper : Helper {
             if ($useCount) {
                 $i += 1;
                 if (isset($cellOptions["class"])) {
-                    $cellOptions["class"] .= " column-" . $i;
+                    $cellOptions["class"] .= " column-" ~ $i;
                 } else {
-                    $cellOptions["class"] = "column-" . $i;
+                    $cellOptions["class"] = "column-" ~ $i;
                 }
             }
 

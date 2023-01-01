@@ -414,15 +414,15 @@ class PaginatorHelper : Helper
         $sortKey = (string)this.sortKey(myOptions["model"]);
         $defaultModel = this.defaultModel();
         myModel = myOptions["model"] ?: $defaultModel;
-        [myTable, myField] = explode(".", myKey . ".");
+        [myTable, myField] = explode(".", myKey ~ ".");
         if (!myField) {
             myField = myTable;
             myTable = myModel;
         }
         $isSorted = (
-            $sortKey == myTable . "." . myField ||
-            $sortKey == myModel . "." . myKey ||
-            myTable . "." . myField == myModel . "." . $sortKey
+            $sortKey == myTable ~ "." ~ myField ||
+            $sortKey == myModel ~ "." ~ myKey ||
+            myTable ~ "." ~ myField == myModel ~ "." ~ $sortKey
         );
 
         myTemplate = "sort";
@@ -626,7 +626,7 @@ class PaginatorHelper : Helper
     protected bool _hasPage(Nullable!string myModel, string dir) {
         myParams = this.params(myModel);
 
-        return !empty(myParams) && myParams[$dir . "Page"];
+        return !empty(myParams) && myParams[$dir ~ "Page"];
     }
 
     /**
@@ -681,7 +681,7 @@ class PaginatorHelper : Helper
         switch ($format) {
             case "range":
             case "pages":
-                myTemplate = "counter" . ucfirst($format);
+                myTemplate = "counter" ~ ucfirst($format);
                 break;
             default:
                 myTemplate = "counterCustom";
