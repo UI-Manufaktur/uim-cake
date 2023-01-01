@@ -7,10 +7,7 @@ import uim.cake.http.exceptions.BadRequestException;
  */
 class SecurityException : BadRequestException
 {
-    /**
-     * Security Exception type
-     *
-     */
+    // Security Exception type
     protected string $_type = "secure";
 
     /**
@@ -20,9 +17,7 @@ class SecurityException : BadRequestException
      */
     protected $_reason;
 
-    /**
-     * Getter for type
-     */
+    // Getter for type
     string getType() {
         return _type;
     }
@@ -32,8 +27,8 @@ class SecurityException : BadRequestException
      *
      * @param string $message Exception message
      */
-    void setMessage(string $message) {
-        this.message = $message;
+    void setMessage(string aMessage) {
+        this.message = aMessage;
     }
 
     /**
