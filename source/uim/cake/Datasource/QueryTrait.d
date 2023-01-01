@@ -456,7 +456,7 @@ trait QueryTrait
      * $singleUser = $query.select(["id", "username"]).first();
      * ```
      *
-     * @return uim.cake.Datasource\EntityInterface|array|null The first result from the ResultSet.
+     * @return uim.cake.Datasource\IEntity|array|null The first result from the ResultSet.
      */
     function first() {
         if (_dirty) {
@@ -470,7 +470,7 @@ trait QueryTrait
      * Get the first result from the executing query or raise an exception.
      *
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When there is no first record.
-     * @return uim.cake.Datasource\EntityInterface|array The first result from the ResultSet.
+     * @return uim.cake.Datasource\IEntity|array The first result from the ResultSet.
      */
     function firstOrFail() {
         $entity = this.first();

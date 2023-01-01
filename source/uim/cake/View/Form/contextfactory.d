@@ -1,7 +1,7 @@
 module uim.cake.View\Form;
 
 import uim.cake.Collection\Collection;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.Form\Form;
 import uim.cake.http.ServerRequest;
 use RuntimeException;
@@ -42,7 +42,7 @@ class ContextFactory
             [
                 "type": "orm",
                 "callable": function ($request, $data) {
-                    if ($data["entity"] instanceof EntityInterface) {
+                    if ($data["entity"] instanceof IEntity) {
                         return new EntityContext($data);
                     }
                     if (isset($data["table"])) {

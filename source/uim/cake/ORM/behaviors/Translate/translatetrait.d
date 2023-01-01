@@ -1,6 +1,6 @@
 module uim.cake.orm.Behavior\Translate;
 
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 
 /**
  * Contains a translation method aimed to help managing multiple translations
@@ -15,7 +15,7 @@ trait TranslateTrait
      * it.
      *
      * @param string $language Language to return entity for.
-     * @return uim.cake.Datasource\EntityInterface|this
+     * @return uim.cake.Datasource\IEntity|this
      */
     function translation(string $language) {
         if ($language == this.get("_locale")) {
@@ -30,7 +30,7 @@ trait TranslateTrait
             $created = true;
         }
 
-        if ($created || empty($i18n[$language]) || !($i18n[$language] instanceof EntityInterface)) {
+        if ($created || empty($i18n[$language]) || !($i18n[$language] instanceof IEntity)) {
             $className = static::class;
 
             $i18n[$language] = new $className();

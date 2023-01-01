@@ -13,7 +13,7 @@ module uim.cake.Datasource;
  *
  * @method this andWhere($conditions, array $types = []) Connects any previously defined set of conditions to the
  *   provided list using the AND operator. {@see uim.cake.databases.Query::andWhere()}
- * @method uim.cake.Datasource\EntityInterface|array firstOrFail() Get the first result from the executing query or raise an exception.
+ * @method uim.cake.Datasource\IEntity|array firstOrFail() Get the first result from the executing query or raise an exception.
  *   {@see uim.cake.databases.Query::firstOrFail()}
  */
 interface IQuery
@@ -139,7 +139,7 @@ interface IQuery
      * $singleUser = $query.select(["id", "username"]).first();
      * ```
      *
-     * @return uim.cake.Datasource\EntityInterface|array|null the first result from the ResultSet
+     * @return uim.cake.Datasource\IEntity|array|null the first result from the ResultSet
      */
     function first();
 

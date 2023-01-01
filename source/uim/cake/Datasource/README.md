@@ -20,12 +20,12 @@ This library exposes the following interfaces for creating a system that : the
 repository pattern and is compatible with the CakePHP framework:
 
 * `RepositoryInterface` - Describes the methods for a base repository class.
-* `EntityInterface` - Describes the methods for a single result object.
+* `IEntity` - Describes the methods for a single result object.
 * `IResultSet` - Represents the idea of a collection of Entities as a result of a query.
 
 Additionally, this package provides a few traits and classes you can use in your own implementations:
 
-* `EntityTrait` - Contains the default implementation for the `EntityInterface`.
+* `EntityTrait` - Contains the default implementation for the `IEntity`.
 * `QueryTrait` - Exposes the methods for creating a query object capable of returning decoratable collections.
 * `ResultSetDecorator` - Decorates any traversable object, so it complies with `IResultSet`.
 
