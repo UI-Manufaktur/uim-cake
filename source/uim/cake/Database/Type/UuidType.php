@@ -29,7 +29,7 @@ class UuidType : StringType
      *
      * @return string A new primary key value.
      */
-    function newId(): string
+    string newId()
     {
         return Text::uuid();
     }

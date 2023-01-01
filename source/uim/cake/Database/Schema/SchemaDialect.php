@@ -101,14 +101,14 @@ abstract class SchemaDialect
      * fragment for a single column in a table.
      *
      * @param string $columnType The column type.
-     * @param uim.cake.databases.Schema\TableSchemaInterface $schema The table schema instance the column is in.
+     * @param uim.cake.databases.Schema\TableISchema $schema The table schema instance the column is in.
      * @param string $column The name of the column.
      * @return string|null An SQL fragment, or `null` in case no corresponding type was found or the type didn"t provide
      *  custom column SQL.
      */
     protected function _getTypeSpecificColumnSql(
         string $columnType,
-        TableSchemaInterface $schema,
+        TableISchema $schema,
         string $column
     ): ?string {
         if (!TypeFactory::getMap($columnType)) {

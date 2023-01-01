@@ -157,7 +157,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * The schema object containing a description of this table fields
      *
-     * @var uim.cake.databases.Schema\TableSchemaInterface|null
+     * @var uim.cake.databases.Schema\TableISchema|null
      */
     protected _schema;
 
@@ -214,7 +214,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * - connection: The connection instance to use
      * - entityClass: The fully moduled class name of the entity class that will
      *   represent rows in this table.
-     * - schema: A uim.cake.databases.Schema\TableSchemaInterface object or an array that can be
+     * - schema: A uim.cake.databases.Schema\TableISchema object or an array that can be
      *   passed to it.
      * - eventManager: An instance of an event manager to use for internal events
      * - behaviors: A BehaviorRegistry. Generally not used outside of tests.
@@ -433,9 +433,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Returns the schema table object describing this table"s properties.
      *
-     * @return uim.cake.databases.Schema\TableSchemaInterface
+     * @return uim.cake.databases.Schema\TableISchema
      */
-    auto getSchema(): TableSchemaInterface
+    auto getSchema(): TableISchema
     {
         if (_schema is null) {
             _schema = _initializeSchema(
@@ -454,10 +454,10 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Sets the schema table object describing this table"s properties.
      *
-     * If an array is passed, a new TableSchemaInterface will be constructed
+     * If an array is passed, a new TableISchema will be constructed
      * out of it and used as the schema for this table.
      *
-     * @param uim.cake.databases.Schema\TableSchemaInterface|array $schema Schema to be used for this table
+     * @param uim.cake.databases.Schema\TableISchema|array $schema Schema to be used for this table
      * @return this
      */
     auto setSchema($schema) {
@@ -528,16 +528,16 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * ### Example:
      *
      * ```
-     * protected auto _initializeSchema(uim.cake.databases.Schema\TableSchemaInterface $schema) {
+     * protected auto _initializeSchema(uim.cake.databases.Schema\TableISchema $schema) {
      *  $schema.setColumnType("preferences", "json");
      *  return $schema;
      * }
      * ```
      *
-     * @param uim.cake.databases.Schema\TableSchemaInterface $schema The table definition fetched from database.
-     * @return uim.cake.databases.Schema\TableSchemaInterface the altered schema
+     * @param uim.cake.databases.Schema\TableISchema $schema The table definition fetched from database.
+     * @return uim.cake.databases.Schema\TableISchema the altered schema
      */
-    protected auto _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
+    protected auto _initializeSchema(TableISchema $schema): TableISchema
     {
         return $schema;
     }

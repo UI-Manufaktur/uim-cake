@@ -323,7 +323,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @return string SQL fragment.
      * @throws uim.cake.databases.exceptions.DatabaseException when the column type is unknown
      */
-    function columnSql(TableSchema $schema, string aName): string
+    string columnSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getColumn($name);
@@ -467,7 +467,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @param string aName The name of the column.
      * @return string SQL fragment.
      */
-    function constraintSql(TableSchema $schema, string aName): string
+    string constraintSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getConstraint($name);
@@ -541,7 +541,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    function indexSql(TableSchema $schema, string aName): string
+    string indexSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getIndex($name);

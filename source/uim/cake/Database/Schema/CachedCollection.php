@@ -53,7 +53,7 @@ class CachedCollection : ICollection
     }
 
 
-    function describe(string aName, array $options = []): TableSchemaInterface
+    function describe(string aName, array $options = []): TableISchema
     {
         $options += ["forceRefresh": false];
         $cacheKey = this.cacheKey($name);

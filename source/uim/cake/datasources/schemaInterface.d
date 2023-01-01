@@ -3,7 +3,7 @@ module uim.cake.datasources;
 /**
  * An interface used by TableSchema objects.
  */
-interface SchemaInterface
+interface ISchema
 {
     /**
      * Get the name of the table.

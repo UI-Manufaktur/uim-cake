@@ -41,13 +41,9 @@ interface FixtureInterface
      */
     function truncate(ConnectionInterface $connection): bool;
 
-    /**
-     * Get the connection name this fixture should be inserted into.
-     */
-    string connection(): string;
+    // Get the connection name this fixture should be inserted into.
+    string connection();
 
-    /**
-     * Get the table/collection name for this fixture.
-     */
-    string sourceName(): string;
+    // Get the table/collection name for this fixture.
+    string sourceName();
 }

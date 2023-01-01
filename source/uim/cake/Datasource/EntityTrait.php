@@ -601,7 +601,7 @@ trait EntityTrait
      * @param string $type the accessor type ("get" or "set")
      * @return string method name or empty string (no method available)
      */
-    protected static function _accessor(string $property, string $type): string
+    protected static string _accessor(string $property, string $type)
     {
         $class = static::class;
 
@@ -1148,7 +1148,7 @@ trait EntityTrait
     /**
      * Returns the alias of the repository from which this entity came from.
      */
-    string getSource(): string
+    string getSource()
     {
         return _registryAlias;
     }
@@ -1168,7 +1168,7 @@ trait EntityTrait
     /**
      * Returns a string representation of this object in a human readable format.
      */
-    string __toString(): string
+    string __toString()
     {
         return (string)json_encode(this, JSON_PRETTY_PRINT);
     }

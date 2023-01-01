@@ -15,7 +15,7 @@ import uim.cake.databases.TypeFactory;
  * Schema\Collection objects. They can also be converted into SQL using the
  * createSql(), dropSql() and truncateSql() methods.
  */
-class TableSchema : TableSchemaInterface, SqlGeneratorInterface
+class TableSchema : TableISchema, SqlGeneratorInterface
 {
     /**
      * The name of the table

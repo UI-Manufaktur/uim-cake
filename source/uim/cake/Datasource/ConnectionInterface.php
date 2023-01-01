@@ -51,7 +51,7 @@ interface ConnectionInterface : LoggerAwareInterface
     /**
      * Get the configuration name for this connection.
      */
-    string configName(): string;
+    string configName();
 
     /**
      * Get the configuration data used to create the connection.

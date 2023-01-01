@@ -6,7 +6,7 @@ import uim.cake.core.App;
 import uim.cake.core.Configure;
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.databases.Connection;
-import uim.cake.databases.schemas.TableSchemaInterface;
+import uim.cake.databases.schemas.TableISchema;
 import uim.cake.databases.TypeFactory;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.datasources.EntityInterface;
@@ -192,7 +192,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * The schema object containing a description of this table fields
      *
-     * @var uim.cake.databases.Schema\TableSchemaInterface|null
+     * @var uim.cake.databases.Schema\TableISchema|null
      */
     protected $_schema;
 
@@ -249,7 +249,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * - connection: The connection instance to use
      * - entityClass: The fully namespaced class name of the entity class that will
      *   represent rows in this table.
-     * - schema: A uim.cake.databases.Schema\TableSchemaInterface object or an array that can be
+     * - schema: A uim.cake.databases.Schema\TableISchema object or an array that can be
      *   passed to it.
      * - eventManager: An instance of an event manager to use for internal events
      * - behaviors: A BehaviorRegistry. Generally not used outside of tests.
@@ -481,9 +481,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Returns the schema table object describing this table"s properties.
      *
-     * @return uim.cake.databases.Schema\TableSchemaInterface
+     * @return uim.cake.databases.Schema\TableISchema
      */
-    function getSchema(): TableSchemaInterface
+    function getSchema(): TableISchema
     {
         if (_schema == null) {
             _schema = _initializeSchema(
@@ -502,10 +502,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Sets the schema table object describing this table"s properties.
      *
-     * If an array is passed, a new TableSchemaInterface will be constructed
+     * If an array is passed, a new TableISchema will be constructed
      * out of it and used as the schema for this table.
      *
-     * @param uim.cake.databases.Schema\TableSchemaInterface|array $schema Schema to be used for this table
+     * @param uim.cake.databases.Schema\TableISchema|array $schema Schema to be used for this table
      * @return this
      */
     function setSchema($schema) {
@@ -577,16 +577,16 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ### Example:
      *
      * ```
-     * protected function _initializeSchema(uim.cake.databases.Schema\TableSchemaInterface $schema) {
+     * protected function _initializeSchema(uim.cake.databases.Schema\TableISchema $schema) {
      *  $schema.setColumnType("preferences", "json");
      *  return $schema;
      * }
      * ```
      *
-     * @param uim.cake.databases.Schema\TableSchemaInterface $schema The table definition fetched from database.
-     * @return uim.cake.databases.Schema\TableSchemaInterface the altered schema
+     * @param uim.cake.databases.Schema\TableISchema $schema The table definition fetched from database.
+     * @return uim.cake.databases.Schema\TableISchema the altered schema
      */
-    protected function _initializeSchema(TableSchemaInterface $schema): TableSchemaInterface
+    protected function _initializeSchema(TableISchema $schema): TableISchema
     {
         return $schema;
     }

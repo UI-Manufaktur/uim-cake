@@ -1,11 +1,11 @@
 module uim.cake.databases.Schema;
 
-import uim.cake.datasources.SchemaInterface;
+import uim.cake.datasources.ISchema;
 
 /**
  * An interface used by database TableSchema objects.
  */
-interface TableSchemaInterface : SchemaInterface
+interface TableISchema : ISchema
 {
     /**
      * Binary column type

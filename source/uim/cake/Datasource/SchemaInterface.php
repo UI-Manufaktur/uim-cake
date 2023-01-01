@@ -3,12 +3,12 @@ module uim.cake.Datasource;
 /**
  * An interface used by TableSchema objects.
  */
-interface SchemaInterface
+interface ISchema
 {
     /**
      * Get the name of the table.
      */
-    string name(): string;
+    string name();
 
     /**
      * Add a column to the table.
