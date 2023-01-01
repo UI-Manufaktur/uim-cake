@@ -44,7 +44,7 @@ class ApcuEngine : CacheEngine {
      * @link https://secure.php.net/manual/en/function.apcu-store.php
      */
     bool set(string aKey, $value, $ttl = null) {
-        $key = _key($key);
+        $key = _key(aKey);
         $duration = this.duration($ttl);
 
         return apcu_store($key, $value, $duration);
@@ -60,7 +60,7 @@ class ApcuEngine : CacheEngine {
      * @link https://secure.php.net/manual/en/function.apcu-fetch.php
      */
     function get(string aKey, $default = null) {
-        $value = apcu_fetch(_key($key), $success);
+        $value = apcu_fetch(_key(aKey), $success);
         if ($success == false) {
             return $default;
         }
@@ -77,7 +77,7 @@ class ApcuEngine : CacheEngine {
      * @link https://secure.php.net/manual/en/function.apcu-inc.php
      */
     function increment(string aKey, int $offset = 1) {
-        $key = _key($key);
+        $key = _key(aKey);
 
         return apcu_inc($key, $offset);
     }
@@ -91,7 +91,7 @@ class ApcuEngine : CacheEngine {
      * @link https://secure.php.net/manual/en/function.apcu-dec.php
      */
     function decrement(string aKey, int $offset = 1) {
-        $key = _key($key);
+        $key = _key(aKey);
 
         return apcu_dec($key, $offset);
     }
@@ -103,8 +103,8 @@ class ApcuEngine : CacheEngine {
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      * @link https://secure.php.net/manual/en/function.apcu-delete.php
      */
-    bool delete($key) {
-        $key = _key($key);
+    bool delete(string aKey) {
+        $key = _key(aKey);
 
         return apcu_delete($key);
     }
@@ -128,9 +128,9 @@ class ApcuEngine : CacheEngine {
         }
 
         $cache = apcu_cache_info(); // Raises warning by itself already
-        foreach ($cache["cache_list"] as $key) {
-            if (strpos($key["info"], _config["prefix"]) == 0) {
-                apcu_delete($key["info"]);
+        foreach (myKey; $cache["cache_list"]) {
+            if (strpos(myKey["info"], _config["prefix"]) == 0) {
+                apcu_delete(myKey["info"]);
             }
         }
 

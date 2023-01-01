@@ -199,22 +199,22 @@ class Folder
             $methodName = _fsorts[self::SORT_NAME];
         }
 
-        foreach ($iterator as $item) {
-            if ($item.isDot()) {
+        foreach (myItem; $iterator) {
+            if (myItem.isDot()) {
                 continue;
             }
-            $name = $item.getFilename();
+            $name = myItem.getFilename();
             if ($skipHidden && $name[0] == "." || isset($exceptions[$name])) {
                 continue;
             }
             if ($fullPath) {
-                $name = $item.getPathname();
+                $name = myItem.getPathname();
             }
 
-            if ($item.isDir()) {
-                $dirs[$item.{$methodName}()][] = $name;
+            if (myItem.isDir()) {
+                $dirs[myItem.{$methodName}()][] = $name;
             } else {
-                $files[$item.{$methodName}()][] = $name;
+                $files[myItem.{$methodName}()][] = $name;
             }
         }
 
@@ -279,15 +279,15 @@ class Folder
         [$dirs, $files] = this.read($sort);
         $found = [];
 
-        foreach ($files as $file) {
-            if (preg_match("/^" ~ $pattern ~ "$/i", $file)) {
-                $found[] = Folder::addPathElement(this.path, $file);
+        foreach (myFile; $files) {
+            if (preg_match("/^" ~ $pattern ~ "$/i", myFile)) {
+                $found[] = Folder::addPathElement(this.path, myFile);
             }
         }
         $start = this.path;
 
-        foreach ($dirs as $dir) {
-            this.cd(Folder::addPathElement($start, $dir));
+        foreach (myDir, $dirs) {
+            this.cd(Folder::addPathElement($start, myDir));
             $found = array_merge($found, this.findRecursive($pattern, $sort));
         }
 
@@ -495,11 +495,11 @@ class Folder
             return [];
         }
 
-        foreach ($iterator as $item) {
-            if (!$item.isDir() || $item.isDot()) {
+        foreach (myItem; $iterator) {
+            if (!myItem.isDir() || myItem.isDot()) {
                 continue;
             }
-            $subdirectories[] = $fullPath ? $item.getRealPath() : $item.getFilename();
+            $subdirectories[] = $fullPath ? myItem.getRealPath() : myItem.getFilename();
         }
 
         return $subdirectories;
@@ -550,10 +550,10 @@ class Folder
         }
 
         /**
-         * @var string $itemPath
+         * @var string myItemPath
          * @var \RecursiveDirectoryIterator $fsIterator
          */
-        foreach ($iterator as $itemPath: $fsIterator) {
+        foreach (myItem; $iteratorPath: $fsIterator) {
             if ($skipHidden) {
                 $subPathName = $fsIterator.getSubPathname();
                 if ($subPathName[0] == "." || strpos($subPathName, DIRECTORY_SEPARATOR ~ ".") != false) {
@@ -561,21 +561,21 @@ class Folder
                     continue;
                 }
             }
-            /** @var \FilesystemIterator $item */
-            $item = $fsIterator.current();
-            if (!empty($exceptions) && isset($exceptions[$item.getFilename()])) {
-                unset($fsIterator, $item);
+            /** @var \FilesystemIterator myItem */
+            myItem = $fsIterator.current();
+            if (!empty($exceptions) && isset($exceptions[myItem.getFilename()])) {
+                unset($fsIterator, myItem);
                 continue;
             }
 
-            if ($item.isFile()) {
-                $files[] = $itemPath;
-            } elseif ($item.isDir() && !$item.isDot()) {
-                $directories[] = $itemPath;
+            if (myItem.isFile()) {
+                $files[] = myItemPath;
+            } elseif (myItem.isDir() && !myItem.isDot()) {
+                $directories[] = myItemPath;
             }
 
             // inner iterators need to be unset too in order for locks on parents to be released
-            unset($fsIterator, $item);
+            unset($fsIterator, myItem);
         }
 
         // unsetting iterators helps releasing possible locks in certain environments,
@@ -706,9 +706,9 @@ class Folder
                 return false;
             }
 
-            foreach ($iterator as $item) {
-                $filePath = $item.getPathname();
-                if ($item.isFile() || $item.isLink()) {
+            foreach (myItem; $iterator) {
+                $filePath = myItem.getPathname();
+                if (myItem.isFile() || myItem.isLink()) {
                     // phpcs:disable
                     if (@unlink($filePath)) {
                         // phpcs:enable
@@ -716,7 +716,7 @@ class Folder
                     } else {
                         _errors[] = sprintf("%s NOT removed", $filePath);
                     }
-                } elseif ($item.isDir() && !$item.isDot()) {
+                } elseif (myItem.isDir() && !myItem.isDot()) {
                     // phpcs:disable
                     if (@rmdir($filePath)) {
                         // phpcs:enable
@@ -724,14 +724,14 @@ class Folder
                     } else {
                         _errors[] = sprintf("%s NOT removed", $filePath);
 
-                        unset($directory, $iterator, $item);
+                        unset($directory, $iterator, myItem);
 
                         return false;
                     }
                 }
 
                 // inner iterators need to be unset too in order for locks on parents to be released
-                unset($item);
+                unset(myItem);
             }
 
             // unsetting iterators helps releasing possible locks in certain environments,
@@ -805,10 +805,10 @@ class Folder
         // phpcs:disable
         if ($handle = @opendir($fromDir)) {
             // phpcs:enable
-            while (($item = readdir($handle)) != false) {
-                $to = Folder::addPathElement($toDir, $item);
-                if (($options["scheme"] != Folder::SKIP || !is_dir($to)) && !in_array($item, $exceptions, true)) {
-                    $from = Folder::addPathElement($fromDir, $item);
+            while ((myItem = readdir($handle)) != false) {
+                $to = Folder::addPathElement($toDir, myItem);
+                if (($options["scheme"] != Folder::SKIP || !is_dir($to)) && !in_array(myItem, $exceptions, true)) {
+                    $from = Folder::addPathElement($fromDir, myItem);
                     if (is_file($from) && (!is_file($to) || $options["scheme"] != Folder::SKIP)) {
                         if (copy($from, $to)) {
                             chmod($to, intval($mode, 8));

@@ -188,7 +188,7 @@ class Folder
             $methodName = _fsorts[self::SORT_NAME];
         }
 
-        foreach ($iterator as $item) {
+        foreach (myItem; $iterator) {
             if ($item.isDot()) {
                 continue;
             }
@@ -474,7 +474,7 @@ class Folder
             return [];
         }
 
-        foreach ($iterator as $item) {
+        foreach (myItem; $iterator) {
             if (!$item.isDir() || $item.isDot()) {
                 continue;
             }
@@ -532,7 +532,7 @@ class Folder
          * @var string itemPath
          * @var \RecursiveDirectoryIterator $fsIterator
          */
-        foreach ($iterator as $itemPath: $fsIterator) {
+        foreach (myItem; $iteratorPath: $fsIterator) {
             if ($skipHidden) {
                 $subPathName = $fsIterator.getSubPathname();
                 if ($subPathName[0] == "." || indexOf($subPathName, DIRECTORY_SEPARATOR ~ ".") != false) {
@@ -681,7 +681,7 @@ class Folder
                 return false;
             }
 
-            foreach ($iterator as $item) {
+            foreach (myItem; $iterator) {
                 myfilePath = $item.getPathname();
                 if ($item.isFile() || $item.isLink()) {
                     // phpcs:disable

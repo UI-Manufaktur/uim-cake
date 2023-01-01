@@ -417,7 +417,7 @@ class EventManager : IEventManager
         $properties = get_object_vars(this);
         $properties["_generalManager"] = "(object) EventManager";
         $properties["_listeners"] = [];
-        foreach (_listeners as myKey: $priorities) {
+        foreach (myKey, $priorities; _listeners) {
             $listenerCount = 0;
             foreach ($priorities as $listeners) {
                 $listenerCount += count($listeners);
