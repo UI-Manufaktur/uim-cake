@@ -293,12 +293,8 @@ REGEXP;
 
     /**
      * Returns the DSN class map for this class.
-     *
-     * @return array<string, string>
-     * @psalm-return array<string, class-string>
      */
-    static STRINGAA getDsnClassMap()
-    {
+    static STRINGAA getDsnClassMap() {
         return static::$_dsnClassMap;
     }
 }

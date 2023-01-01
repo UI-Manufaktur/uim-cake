@@ -168,8 +168,7 @@ class IniConfig : ConfigEngineInterface
      * @param mixed $value Value to export.
      * @return string String value for ini file.
      */
-    protected string _value($value)
-    {
+    protected string _value($value) {
         if ($value == null) {
             return "null";
         }

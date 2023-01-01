@@ -23,8 +23,7 @@ class SecurityException : BadRequestException
     /**
      * Getter for type
      */
-    string getType()
-    {
+    string getType() {
         return _type;
     }
 

@@ -308,8 +308,7 @@ if (!function_exists("getTypeName")) {
      * @param mixed $var Variable to check
      * @return string Returns the class name or variable type
      */
-    string getTypeName($var)
-    {
+    string getTypeName($var) {
         return is_object($var) ? get_class($var) : gettype($var);
     }
 }
