@@ -2,7 +2,7 @@ module uim.cake.orm.Behavior\Translate;
 
 use ArrayObject;
 import uim.cake.Collection\ICollection;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.PropertyMarshalInterface;
 import uim.cake.orm.Query;
@@ -81,16 +81,16 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * in the database too.
      *
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject $options the options passed to the save method
      */
-    void beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options);
+    void beforeSave(IEvent $event, IEntity $entity, ArrayObject $options);
 
     /**
      * Unsets the temporary `_i18n` property after the entity has been saved
      *
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      */
-    void afterSave(IEvent $event, EntityInterface $entity);
+    void afterSave(IEvent $event, IEntity $entity);
 }

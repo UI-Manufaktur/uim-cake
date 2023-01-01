@@ -33,12 +33,12 @@ trait RulesAwareTrait
      * Returns whether the passed entity complies with all the rules stored in
      * the rules checker.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to check for validity.
+     * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param string $operation The operation being run. Either "create", "update" or "delete".
      * @param \ArrayObject|array|null $options The options To be passed to the rules.
      * @return bool
      */
-    function checkRules(EntityInterface $entity, string $operation = RulesChecker::CREATE, $options = null): bool
+    function checkRules(IEntity $entity, string $operation = RulesChecker::CREATE, $options = null): bool
     {
         $rules = this.rulesChecker();
         $options = $options ?: new ArrayObject();

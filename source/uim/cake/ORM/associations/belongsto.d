@@ -1,13 +1,12 @@
-module uim.cake.orm.Association;
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.caches.associations.belongsto;
 
-import uim.cake.databases.expressions.IdentifierExpression;
-import uim.cake.datasources.EntityInterface;
-import uim.cake.orm.Association;
-import uim.cake.orm.associations.Loader\SelectLoader;
-import uim.cake.orm.Table;
-import uim.cake.utilities.Inflector;
-use Closure;
-use RuntimeException;
+@safe:
+import uim.cake;
 
 /**
  * Represents an 1 - N relationship where the source side of the relation is
@@ -15,14 +14,13 @@ use RuntimeException;
  *
  * An example of a BelongsTo association would be Article belongs to Author.
  */
-class BelongsTo : Association
-{
+class BelongsTo : Association {
     /**
      * Valid strategies for this type of association
      *
      * @var array<string>
      */
-    protected $_validStrategies = [
+    protected string[] $_validStrategies = [
         self::STRATEGY_JOIN,
         self::STRATEGY_SELECT,
     ];
@@ -45,11 +43,11 @@ class BelongsTo : Association
      *
      * BelongsTo associations are never cleared in a cascading delete scenario.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that started the cascaded delete.
+     * @param uim.cake.Datasource\IEntity $entity The entity that started the cascaded delete.
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success.
      */
-    function cascadeDelete(EntityInterface $entity, array $options = []): bool
+    function cascadeDelete(IEntity $entity, array $options = []): bool
     {
         return true;
     }
@@ -92,15 +90,15 @@ class BelongsTo : Association
      * saved on the target table for this association by passing supplied
      * `$options`
      *
-     * @param uim.cake.Datasource\EntityInterface $entity an entity from the source table
+     * @param uim.cake.Datasource\IEntity $entity an entity from the source table
      * @param array<string, mixed> $options options to be passed to the save method in the target table
-     * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
+     * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.orm.Table::save()
      */
-    function saveAssociated(EntityInterface $entity, array $options = []) {
+    function saveAssociated(IEntity $entity, array $options = []) {
         $targetEntity = $entity.get(this.getProperty());
-        if (empty($targetEntity) || !($targetEntity instanceof EntityInterface)) {
+        if (empty($targetEntity) || !($targetEntity instanceof IEntity)) {
             return $entity;
         }
 

@@ -10,7 +10,7 @@ use JsonSerializable;
  * @property mixed $id Alias for commonly used primary key.
  * @method bool[] getAccessible() Accessible configuration for this entity.
  */
-interface EntityInterface : ArrayAccess, JsonSerializable
+interface IEntity : ArrayAccess, JsonSerializable
 {
     /**
      * Sets hidden fields.

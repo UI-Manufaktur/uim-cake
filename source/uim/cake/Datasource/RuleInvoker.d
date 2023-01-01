@@ -94,12 +94,12 @@ class RuleInvoker
     /**
      * Invoke the rule.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity the rule
+     * @param uim.cake.Datasource\IEntity $entity The entity the rule
      *   should apply to.
      * @param array $scope The rule"s scope/options.
      * @return bool Whether the rule passed.
      */
-    function __invoke(EntityInterface $entity, array $scope): bool
+    function __invoke(IEntity $entity, array $scope): bool
     {
         $rule = this.rule;
         $pass = $rule($entity, this.options + $scope);

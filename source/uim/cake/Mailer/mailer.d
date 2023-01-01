@@ -62,7 +62,7 @@ use InvalidArgumentException;
  *     ];
  * }
  *
- * function onRegistration(IEvent $event, EntityInterface $entity, ArrayObject $options)
+ * function onRegistration(IEvent $event, IEntity $entity, ArrayObject $options)
  * {
  *     if ($entity.isNew()) {
  *          this.send("welcome", [$entity]);

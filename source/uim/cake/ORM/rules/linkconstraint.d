@@ -1,6 +1,6 @@
 module uim.cake.orm.Rule;
 
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.orm.Association;
 import uim.cake.orm.Table;
 
@@ -69,11 +69,11 @@ class LinkConstraint
      *
      * Performs the actual link check.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity involved in the operation.
+     * @param uim.cake.Datasource\IEntity $entity The entity involved in the operation.
      * @param array<string, mixed> $options Options passed from the rules checker.
      * @return bool Whether the check was successful.
      */
-    function __invoke(EntityInterface $entity, array $options): bool
+    function __invoke(IEntity $entity, array $options): bool
     {
         $table = $options["repository"] ?? null;
         if (!($table instanceof Table)) {
@@ -145,10 +145,10 @@ class LinkConstraint
      * Count links.
      *
      * @param uim.cake.orm.Association $association The association for which to count links.
-     * @param uim.cake.Datasource\EntityInterface $entity The entity involved in the operation.
+     * @param uim.cake.Datasource\IEntity $entity The entity involved in the operation.
      * @return int The number of links.
      */
-    protected function _countLinks(Association $association, EntityInterface $entity): int
+    protected function _countLinks(Association $association, IEntity $entity): int
     {
         $source = $association.getSource();
 

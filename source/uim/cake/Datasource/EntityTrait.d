@@ -526,13 +526,13 @@ trait EntityTrait
             if (is_array($value)) {
                 $result[$field] = [];
                 foreach ($value as $k: $entity) {
-                    if ($entity instanceof EntityInterface) {
+                    if ($entity instanceof IEntity) {
                         $result[$field][$k] = $entity.toArray();
                     } else {
                         $result[$field][$k] = $entity;
                     }
                 }
-            } elseif ($value instanceof EntityInterface) {
+            } elseif ($value instanceof IEntity) {
                 $result[$field] = $value.toArray();
             } else {
                 $result[$field] = $value;
@@ -826,7 +826,7 @@ trait EntityTrait
 
         return _errors + (new Collection($diff))
             .filter(function ($value) {
-                return is_array($value) || $value instanceof EntityInterface;
+                return is_array($value) || $value instanceof IEntity;
             })
             .map(function ($value) {
                 return _readError($value);
@@ -941,7 +941,7 @@ trait EntityTrait
             $part = array_shift($path);
             $len = count($path);
             $val = null;
-            if ($entity instanceof EntityInterface) {
+            if ($entity instanceof IEntity) {
                 $val = $entity.get($part);
             } elseif (is_array($entity)) {
                 $val = $entity[$part] ?? false;
@@ -950,7 +950,7 @@ trait EntityTrait
             if (
                 is_array($val) ||
                 $val instanceof Traversable ||
-                $val instanceof EntityInterface
+                $val instanceof IEntity
             ) {
                 $entity = $val;
             } else {
@@ -968,11 +968,11 @@ trait EntityTrait
     /**
      * Reads if there are errors for one or many objects.
      *
-     * @param uim.cake.Datasource\EntityInterface|array $object The object to read errors from.
+     * @param uim.cake.Datasource\IEntity|array $object The object to read errors from.
      */
     protected bool _readHasErrors($object): bool
     {
-        if ($object instanceof EntityInterface && $object.hasErrors()) {
+        if ($object instanceof IEntity && $object.hasErrors()) {
             return true;
         }
 
@@ -990,21 +990,21 @@ trait EntityTrait
     /**
      * Read the error(s) from one or many objects.
      *
-     * @param uim.cake.Datasource\EntityInterface|iterable $object The object to read errors from.
+     * @param uim.cake.Datasource\IEntity|iterable $object The object to read errors from.
      * @param string|null $path The field name for errors.
      * @return array
      */
     protected function _readError($object, $path = null): array
     {
-        if ($path != null && $object instanceof EntityInterface) {
+        if ($path != null && $object instanceof IEntity) {
             return $object.getError($path);
         }
-        if ($object instanceof EntityInterface) {
+        if ($object instanceof IEntity) {
             return $object.getErrors();
         }
         if (is_iterable($object)) {
             $array = array_map(function ($val) {
-                if ($val instanceof EntityInterface) {
+                if ($val instanceof IEntity) {
                     return $val.getErrors();
                 }
 

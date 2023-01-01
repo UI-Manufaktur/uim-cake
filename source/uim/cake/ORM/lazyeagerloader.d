@@ -3,7 +3,7 @@ module uim.cake.ORM;
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;
 import uim.cake.databases.expressions.TupleComparison;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 
 /**
  * Contains methods that are capable of injecting eagerly loaded associations into
@@ -20,16 +20,16 @@ class LazyEagerLoader
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
      *
-     * @param uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface> $entities a single entity or list of entities
+     * @param uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.orm.Query::contain()
      * @param uim.cake.orm.Table $source The table to use for fetching the top level entities
-     * @return uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface>
+     * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>
      */
     function loadInto($entities, array $contain, Table $source) {
         $returnSingle = false;
 
-        if ($entities instanceof EntityInterface) {
+        if ($entities instanceof IEntity) {
             $entities = [$entities];
             $returnSingle = true;
         }
@@ -118,11 +118,11 @@ class LazyEagerLoader
      * Injects the results of the eager loader query into the original list of
      * entities.
      *
-     * @param iterable<uim.cake.Datasource\EntityInterface> $objects The original list of entities
+     * @param iterable<uim.cake.Datasource\IEntity> $objects The original list of entities
      * @param uim.cake.orm.Query $results The loaded results
      * @param array<string> $associations The top level associations that were loaded
      * @param uim.cake.orm.Table $source The table where the entities came from
-     * @return array<uim.cake.Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\IEntity>
      */
     protected function _injectResults(iterable $objects, $results, array $associations, Table $source): array
     {
@@ -132,7 +132,7 @@ class LazyEagerLoader
         $results = $results
             .all()
             .indexBy(function ($e) use ($primaryKey) {
-                /** @var uim.cake.datasources.EntityInterface $e */
+                /** @var uim.cake.datasources.IEntity $e */
                 return implode(";", $e.extract($primaryKey));
             })
             .toArray();
@@ -144,7 +144,7 @@ class LazyEagerLoader
                 continue;
             }
 
-            /** @var uim.cake.datasources.EntityInterface $loaded */
+            /** @var uim.cake.datasources.IEntity $loaded */
             $loaded = $results[$key];
             foreach ($associations as $assoc) {
                 $property = $properties[$assoc];

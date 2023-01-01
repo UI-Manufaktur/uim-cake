@@ -49,26 +49,26 @@ use ReflectionMethod;
  *   Fired when the rules checking object for the table is being built. You can use this
  *   callback to add more rules to the set.
  *
- * - `beforeRules(IEvent $event, EntityInterface $entity, ArrayObject $options, $operation)`
+ * - `beforeRules(IEvent $event, IEntity $entity, ArrayObject $options, $operation)`
  *   Fired before an entity is validated using by a rules checker. By stopping this event,
  *   you can return the final value of the rules checking operation.
  *
- * - `afterRules(IEvent $event, EntityInterface $entity, ArrayObject $options, bool $result, $operation)`
+ * - `afterRules(IEvent $event, IEntity $entity, ArrayObject $options, bool $result, $operation)`
  *   Fired after the rules have been checked on the entity. By stopping this event,
  *   you can return the final value of the rules checking operation.
  *
- * - `beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `beforeSave(IEvent $event, IEntity $entity, ArrayObject $options)`
  *   Fired before each entity is saved. Stopping this event will abort the save
  *   operation. When the event is stopped the result of the event will be returned.
  *
- * - `afterSave(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `afterSave(IEvent $event, IEntity $entity, ArrayObject $options)`
  *   Fired after an entity is saved.
  *
- * - `beforeDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `beforeDelete(IEvent $event, IEntity $entity, ArrayObject $options)`
  *   Fired before an entity is deleted. By stopping this event you will abort
  *   the delete operation.
  *
- * - `afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `afterDelete(IEvent $event, IEntity $entity, ArrayObject $options)`
  *   Fired after an entity has been deleted.
  *
  * In addition to the core events, behaviors can respond to any

@@ -12,7 +12,7 @@
   */module uim.cake.orm.Exception;
 
 import uim.cake.core.exceptions.CakeException;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.utilities.Hash;
 use Throwable;
 
@@ -24,7 +24,7 @@ class PersistenceFailedException : CakeException
     /**
      * The entity on which the persistence operation failed
      *
-     * @var uim.cake.datasources.EntityInterface
+     * @var uim.cake.datasources.IEntity
      */
     protected $_entity;
 
@@ -34,13 +34,13 @@ class PersistenceFailedException : CakeException
     /**
      * Constructor.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity on which the persistence operation failed
+     * @param uim.cake.Datasource\IEntity $entity The entity on which the persistence operation failed
      * @param array<string>|string $message Either the string of the error message, or an array of attributes
      *   that are made available in the view, and sprintf()"d into Exception::$_messageTemplate
      * @param int|null $code The code of the error, is also the HTTP status code for the error.
      * @param \Throwable|null $previous the previous exception.
      */
-    this(EntityInterface $entity, $message, ?int $code = null, ?Throwable $previous = null) {
+    this(IEntity $entity, $message, ?int $code = null, ?Throwable $previous = null) {
         _entity = $entity;
         if (is_array($message)) {
             $errors = [];
@@ -58,9 +58,9 @@ class PersistenceFailedException : CakeException
     /**
      * Get the passed in entity
      *
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      */
-    function getEntity(): EntityInterface
+    function getEntity(): IEntity
     {
         return _entity;
     }

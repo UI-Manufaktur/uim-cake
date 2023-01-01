@@ -1,6 +1,6 @@
 module uim.cake.orm.Behavior\Translate;
 
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.events.EventInterface;
 import uim.cake.I18n\I18n;
 import uim.cake.orm.Marshaller;
@@ -84,7 +84,7 @@ trait TranslateStrategyTrait
      *
      * Should only be called if _config["allowEmptyTranslations"] is false.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to check for empty translations fields inside.
+     * @param uim.cake.Datasource\IEntity $entity The entity to check for empty translations fields inside.
      */
     protected void unsetEmptyFields($entity) {
         /** @var array<uim.cake.orm.Entity> $translations */
@@ -137,7 +137,7 @@ trait TranslateStrategyTrait
                     return null;
                 }
 
-                /** @var array<string, uim.cake.Datasource\EntityInterface>|null $translations */
+                /** @var array<string, uim.cake.Datasource\IEntity>|null $translations */
                 $translations = $entity.get("_translations");
                 if ($translations == null) {
                     $translations = [];
@@ -171,9 +171,9 @@ trait TranslateStrategyTrait
      * Unsets the temporary `_i18n` property after the entity has been saved
      *
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      */
-    void afterSave(IEvent $event, EntityInterface $entity) {
+    void afterSave(IEvent $event, IEntity $entity) {
         $entity.unset("_i18n");
     }
 }

@@ -1,6 +1,6 @@
 module uim.cake.orm.Rule;
 
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.utilities.Hash;
 
 /**
@@ -42,12 +42,12 @@ class IsUnique
     /**
      * Performs the uniqueness check
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity from where to extract the fields
+     * @param uim.cake.Datasource\IEntity $entity The entity from where to extract the fields
      *   where the `repository` key is required.
      * @param array<string, mixed> $options Options passed to the check,
      * @return bool
      */
-    function __invoke(EntityInterface $entity, array $options): bool
+    function __invoke(IEntity $entity, array $options): bool
     {
         if (!$entity.extract(_fields, true)) {
             return true;

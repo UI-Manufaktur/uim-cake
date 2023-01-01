@@ -1,19 +1,12 @@
-module uim.cake.orm.Association;
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.caches.associations.belongstomany;
 
-import uim.cake.core.App;
-import uim.cake.databases.expressions.IdentifierExpression;
-import uim.cake.databases.expressions.QueryExpression;
-import uim.cake.databases.IExpression;
-import uim.cake.datasources.EntityInterface;
-import uim.cake.orm.Association;
-import uim.cake.orm.associations.Loader\SelectWithPivotLoader;
-import uim.cake.orm.Query;
-import uim.cake.orm.Table;
-import uim.cake.utilities.Hash;
-import uim.cake.utilities.Inflector;
-use Closure;
-use InvalidArgumentException;
-use SplObjectStorage;
+@safe:
+import uim.cake;
 
 /**
  * Represents an M - N relationship where there exists a junction - or join - table
@@ -536,11 +529,11 @@ class BelongsToMany : Association
     /**
      * Clear out the data in the junction table for a given entity.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that started the cascading delete.
+     * @param uim.cake.Datasource\IEntity $entity The entity that started the cascading delete.
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success.
      */
-    function cascadeDelete(EntityInterface $entity, array $options = []): bool
+    function cascadeDelete(IEntity $entity, array $options = []): bool
     {
         if (!this.getDependent()) {
             return true;
@@ -633,16 +626,16 @@ class BelongsToMany : Association
      * of the entities intended to be saved by this method, they will be updated,
      * not deleted.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity an entity from the source table
+     * @param uim.cake.Datasource\IEntity $entity an entity from the source table
      * @param array<string, mixed> $options options to be passed to the save method in the target table
      * @throws \InvalidArgumentException if the property representing the association
      * in the parent entity cannot be traversed
-     * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
+     * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.orm.Table::save()
      * @see uim.cake.orm.associations.BelongsToMany::replaceLinks()
      */
-    function saveAssociated(EntityInterface $entity, array $options = []) {
+    function saveAssociated(IEntity $entity, array $options = []) {
         $targetEntity = $entity.get(this.getProperty());
         $strategy = this.getSaveStrategy();
 
@@ -669,17 +662,17 @@ class BelongsToMany : Association
      * Persists each of the entities into the target table and creates links between
      * the parent entity and each one of the saved target entities.
      *
-     * @param uim.cake.Datasource\EntityInterface $parentEntity the source entity containing the target
+     * @param uim.cake.Datasource\IEntity $parentEntity the source entity containing the target
      * entities to be saved.
      * @param array $entities list of entities to persist in target table and to
      * link to the parent entity
      * @param array<string, mixed> $options list of options accepted by `Table::save()`
      * @throws \InvalidArgumentException if the property representing the association
      * in the parent entity cannot be traversed
-     * @return uim.cake.Datasource\EntityInterface|false The parent entity after all links have been
+     * @return uim.cake.Datasource\IEntity|false The parent entity after all links have been
      * created if no errors happened, false otherwise
      */
-    protected function _saveTarget(EntityInterface $parentEntity, array $entities, $options) {
+    protected function _saveTarget(IEntity $parentEntity, array $entities, $options) {
         $joinAssociations = false;
         if (isset($options["associated"]) && is_array($options["associated"])) {
             if (!empty($options["associated"][_junctionProperty]["associated"])) {
@@ -693,7 +686,7 @@ class BelongsToMany : Association
         $persisted = [];
 
         foreach ($entities as $k: $entity) {
-            if (!($entity instanceof EntityInterface)) {
+            if (!($entity instanceof IEntity)) {
                 break;
             }
 
@@ -734,14 +727,14 @@ class BelongsToMany : Association
     /**
      * Creates links between the source entity and each of the passed target entities
      *
-     * @param uim.cake.Datasource\EntityInterface $sourceEntity the entity from source table in this
+     * @param uim.cake.Datasource\IEntity $sourceEntity the entity from source table in this
      * association
-     * @param array<uim.cake.Datasource\EntityInterface> $targetEntities list of entities to link to link to the source entity using the
+     * @param array<uim.cake.Datasource\IEntity> $targetEntities list of entities to link to link to the source entity using the
      * junction table
      * @param array<string, mixed> $options list of options accepted by `Table::save()`
      * @return bool success
      */
-    protected function _saveLinks(EntityInterface $sourceEntity, array $targetEntities, array $options): bool
+    protected function _saveLinks(IEntity $sourceEntity, array $targetEntities, array $options): bool
     {
         $target = this.getTarget();
         $junction = this.junction();
@@ -756,7 +749,7 @@ class BelongsToMany : Association
 
         foreach ($targetEntities as $e) {
             $joint = $e.get($jointProperty);
-            if (!$joint || !($joint instanceof EntityInterface)) {
+            if (!$joint || !($joint instanceof IEntity)) {
                 $joint = new $entityClass([], ["markNew": true, "source": $junctionRegistryAlias]);
             }
             $sourceKeys = array_combine($foreignKey, $sourceEntity.extract($bindingKey));
@@ -808,16 +801,16 @@ class BelongsToMany : Association
      *
      * `$article.get("tags")` will contain all tags in `$newTags` after liking
      *
-     * @param uim.cake.Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
+     * @param uim.cake.Datasource\IEntity $sourceEntity the row belonging to the `source` side
      *   of this association
-     * @param array<uim.cake.Datasource\EntityInterface> $targetEntities list of entities belonging to the `target` side
+     * @param array<uim.cake.Datasource\IEntity> $targetEntities list of entities belonging to the `target` side
      *   of this association
      * @param array<string, mixed> $options list of options to be passed to the internal `save` call
      * @throws \InvalidArgumentException when any of the values in $targetEntities is
      *   detected to not be already persisted
      * @return bool true on success, false otherwise
      */
-    function link(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
+    function link(IEntity $sourceEntity, array $targetEntities, array $options = []): bool
     {
         _checkPersistenceStatus($sourceEntity, $targetEntities);
         $property = this.getProperty();
@@ -858,9 +851,9 @@ class BelongsToMany : Association
      *
      * `$article.get("tags")` will contain only `[$tag4]` after deleting in the database
      *
-     * @param uim.cake.Datasource\EntityInterface $sourceEntity An entity persisted in the source table for
+     * @param uim.cake.Datasource\IEntity $sourceEntity An entity persisted in the source table for
      *   this association.
-     * @param array<uim.cake.Datasource\EntityInterface> $targetEntities List of entities persisted in the target table for
+     * @param array<uim.cake.Datasource\IEntity> $targetEntities List of entities persisted in the target table for
      *   this association.
      * @param array<string>|bool $options List of options to be passed to the internal `delete` call,
      *   or a `boolean` as `cleanProperty` key shortcut.
@@ -868,7 +861,7 @@ class BelongsToMany : Association
      *   any of them is lacking a primary key value.
      * @return bool Success
      */
-    function unlink(EntityInterface $sourceEntity, array $targetEntities, $options = []): bool
+    function unlink(IEntity $sourceEntity, array $targetEntities, $options = []): bool
     {
         if (is_bool($options)) {
             $options = [
@@ -890,13 +883,13 @@ class BelongsToMany : Association
             }
         );
 
-        /** @var array<uim.cake.Datasource\EntityInterface> $existing */
+        /** @var array<uim.cake.Datasource\IEntity> $existing */
         $existing = $sourceEntity.get($property) ?: [];
         if (!$options["cleanProperty"] || empty($existing)) {
             return true;
         }
 
-        /** @var \SplObjectStorage<uim.cake.Datasource\EntityInterface, null> $storage */
+        /** @var \SplObjectStorage<uim.cake.Datasource\IEntity, null> $storage */
         $storage = new SplObjectStorage();
         foreach ($targetEntities as $e) {
             $storage.attach($e);
@@ -1112,7 +1105,7 @@ class BelongsToMany : Association
      *
      * `$article.get("tags")` will contain only `[$tag1, $tag3]` at the end
      *
-     * @param uim.cake.Datasource\EntityInterface $sourceEntity an entity persisted in the source table for
+     * @param uim.cake.Datasource\IEntity $sourceEntity an entity persisted in the source table for
      *   this association
      * @param array $targetEntities list of entities from the target table to be linked
      * @param array<string, mixed> $options list of options to be passed to the internal `save`/`delete` calls
@@ -1121,7 +1114,7 @@ class BelongsToMany : Association
      *   any of them is lacking a primary key value
      * @return bool success
      */
-    function replaceLinks(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
+    function replaceLinks(IEntity $sourceEntity, array $targetEntities, array $options = []): bool
     {
         $bindingKey = (array)this.getBindingKey();
         $primaryValue = $sourceEntity.extract($bindingKey);
@@ -1200,7 +1193,7 @@ class BelongsToMany : Association
      * `$targetEntities` that were not deleted from calculating the difference.
      *
      * @param uim.cake.orm.Query $existing a query for getting existing links
-     * @param array<uim.cake.Datasource\EntityInterface> $jointEntities link entities that should be persisted
+     * @param array<uim.cake.Datasource\IEntity> $jointEntities link entities that should be persisted
      * @param array $targetEntities entities in target table that are related to
      * the `$jointEntities`
      * @param array<string, mixed> $options list of options accepted by `Table::delete()`
@@ -1261,7 +1254,7 @@ class BelongsToMany : Association
         $primary = (array)$target.getPrimaryKey();
         $jointProperty = _junctionProperty;
         foreach ($targetEntities as $k: $entity) {
-            if (!($entity instanceof EntityInterface)) {
+            if (!($entity instanceof IEntity)) {
                 continue;
             }
             $key = array_values($entity.extract($primary));
@@ -1285,14 +1278,14 @@ class BelongsToMany : Association
     /**
      * Throws an exception should any of the passed entities is not persisted.
      *
-     * @param uim.cake.Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
+     * @param uim.cake.Datasource\IEntity $sourceEntity the row belonging to the `source` side
      *   of this association
-     * @param array<uim.cake.Datasource\EntityInterface> $targetEntities list of entities belonging to the `target` side
+     * @param array<uim.cake.Datasource\IEntity> $targetEntities list of entities belonging to the `target` side
      *   of this association
      * @return bool
      * @throws \InvalidArgumentException
      */
-    protected function _checkPersistenceStatus(EntityInterface $sourceEntity, array $targetEntities): bool
+    protected function _checkPersistenceStatus(IEntity $sourceEntity, array $targetEntities): bool
     {
         if ($sourceEntity.isNew()) {
             $error = "Source entity needs to be persisted before links can be created or removed.";
@@ -1313,15 +1306,15 @@ class BelongsToMany : Association
      * Returns the list of joint entities that exist between the source entity
      * and each of the passed target entities
      *
-     * @param uim.cake.Datasource\EntityInterface $sourceEntity The row belonging to the source side
+     * @param uim.cake.Datasource\IEntity $sourceEntity The row belonging to the source side
      *   of this association.
      * @param array $targetEntities The rows belonging to the target side of this
      *   association.
      * @throws \InvalidArgumentException if any of the entities is lacking a primary
      *   key value
-     * @return array<uim.cake.Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\IEntity>
      */
-    protected function _collectJointEntities(EntityInterface $sourceEntity, array $targetEntities): array
+    protected function _collectJointEntities(IEntity $sourceEntity, array $targetEntities): array
     {
         $target = this.getTarget();
         $source = this.getSource();
@@ -1333,12 +1326,12 @@ class BelongsToMany : Association
         $missing = [];
 
         foreach ($targetEntities as $entity) {
-            if (!($entity instanceof EntityInterface)) {
+            if (!($entity instanceof IEntity)) {
                 continue;
             }
             $joint = $entity.get($jointProperty);
 
-            if (!$joint || !($joint instanceof EntityInterface)) {
+            if (!$joint || !($joint instanceof IEntity)) {
                 $missing[] = $entity.extract($primary);
                 continue;
             }

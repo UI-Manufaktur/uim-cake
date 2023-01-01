@@ -1,8 +1,8 @@
 module uim.cake.orm.Association;
 
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.orm.Association;
-import uim.cake.orm.associations.Loader\SelectLoader;
+import uim.cake.orm.associations.loaders.SelectLoader;
 import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
 use Closure;
@@ -76,15 +76,15 @@ class HasOne : Association
      * saved on the target table for this association by passing supplied
      * `$options`
      *
-     * @param uim.cake.Datasource\EntityInterface $entity an entity from the source table
+     * @param uim.cake.Datasource\IEntity $entity an entity from the source table
      * @param array<string, mixed> $options options to be passed to the save method in the target table
-     * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
+     * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.orm.Table::save()
      */
-    function saveAssociated(EntityInterface $entity, array $options = []) {
+    function saveAssociated(IEntity $entity, array $options = []) {
         $targetEntity = $entity.get(this.getProperty());
-        if (empty($targetEntity) || !($targetEntity instanceof EntityInterface)) {
+        if (empty($targetEntity) || !($targetEntity instanceof IEntity)) {
             return $entity;
         }
 
@@ -121,7 +121,7 @@ class HasOne : Association
     }
 
 
-    function cascadeDelete(EntityInterface $entity, array $options = []): bool
+    function cascadeDelete(IEntity $entity, array $options = []): bool
     {
         $helper = new DependentDeleteHelper();
 

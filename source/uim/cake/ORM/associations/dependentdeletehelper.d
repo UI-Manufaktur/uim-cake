@@ -1,6 +1,6 @@
 module uim.cake.orm.Association;
 
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.orm.Association;
 
 /**
@@ -16,11 +16,11 @@ class DependentDeleteHelper
      * This method does nothing if the association is not dependent.
      *
      * @param uim.cake.orm.Association $association The association callbacks are being cascaded on.
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that started the cascaded delete.
+     * @param uim.cake.Datasource\IEntity $entity The entity that started the cascaded delete.
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success.
      */
-    function cascadeDelete(Association $association, EntityInterface $entity, array $options = []): bool
+    function cascadeDelete(Association $association, IEntity $entity, array $options = []): bool
     {
         if (!$association.getDependent()) {
             return true;

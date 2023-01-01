@@ -2,7 +2,7 @@ module uim.cake.View\Form;
 
 use ArrayAccess;
 import uim.cake.Collection\Collection;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.datasources.InvalidPropertyInterface;
 import uim.cake.orm.Entity;
 import uim.cake.orm.locators.LocatorAwareTrait;
@@ -104,20 +104,20 @@ class EntityContext : ContextInterface
     {
         /** @var uim.cake.orm.Table|null $table */
         $table = _context["table"];
-        /** @var uim.cake.datasources.EntityInterface|iterable<uim.cake.Datasource\EntityInterface|array> $entity */
+        /** @var uim.cake.datasources.IEntity|iterable<uim.cake.Datasource\IEntity|array> $entity */
         $entity = _context["entity"];
 
         _isCollection = is_iterable($entity);
 
         if (empty($table)) {
             if (_isCollection) {
-                /** @var iterable<uim.cake.Datasource\EntityInterface|array> $entity */
+                /** @var iterable<uim.cake.Datasource\IEntity|array> $entity */
                 foreach ($entity as $e) {
                     $entity = $e;
                     break;
                 }
             }
-            $isEntity = $entity instanceof EntityInterface;
+            $isEntity = $entity instanceof IEntity;
 
             if ($isEntity) {
                 /** @psalm-suppress PossiblyInvalidMethodCall */
@@ -203,7 +203,7 @@ class EntityContext : ContextInterface
                 break;
             }
         }
-        if ($entity instanceof EntityInterface) {
+        if ($entity instanceof IEntity) {
             return $entity.isNew() != false;
         }
 
@@ -240,7 +240,7 @@ class EntityContext : ContextInterface
             return _extractMultiple($entity, $parts);
         }
 
-        if ($entity instanceof EntityInterface) {
+        if ($entity instanceof IEntity) {
             $part = end($parts);
 
             if ($entity instanceof InvalidPropertyInterface) {
@@ -322,7 +322,7 @@ class EntityContext : ContextInterface
      *
      * @param array|null $path Each one of the parts in a path for a field name
      *  or null to get the entity passed in constructor context.
-     * @return uim.cake.Datasource\EntityInterface|iterable|null
+     * @return uim.cake.Datasource\IEntity|iterable|null
      * @throws \RuntimeException When properties cannot be read.
      */
     function entity(?array $path = null) {
@@ -358,7 +358,7 @@ class EntityContext : ContextInterface
 
             $isTraversable = (
                 is_iterable($next) ||
-                $next instanceof EntityInterface
+                $next instanceof IEntity
             );
             if ($isLast || !$isTraversable) {
                 return $entity;
@@ -411,11 +411,11 @@ class EntityContext : ContextInterface
             $next = _getProp($entity, $prop);
 
             // Did not dig into an entity, return the current one.
-            if (is_array($entity) && !($next instanceof EntityInterface || $next instanceof Traversable)) {
+            if (is_array($entity) && !($next instanceof IEntity || $next instanceof Traversable)) {
                 return [$leafEntity, array_slice($path, $i - 1)];
             }
 
-            if ($next instanceof EntityInterface) {
+            if ($next instanceof IEntity) {
                 $leafEntity = $next;
             }
 
@@ -424,7 +424,7 @@ class EntityContext : ContextInterface
             $isTraversable = (
                 is_array($next) ||
                 $next instanceof Traversable ||
-                $next instanceof EntityInterface
+                $next instanceof IEntity
             );
             if (!$isTraversable) {
                 return [$leafEntity, array_slice($path, $i)];
@@ -448,7 +448,7 @@ class EntityContext : ContextInterface
         if (is_array($target) && isset($target[$field])) {
             return $target[$field];
         }
-        if ($target instanceof EntityInterface) {
+        if ($target instanceof IEntity) {
             return $target.get($field);
         }
         if ($target instanceof Traversable) {
@@ -476,7 +476,7 @@ class EntityContext : ContextInterface
         $entity = this.entity($parts);
 
         $isNew = true;
-        if ($entity instanceof EntityInterface) {
+        if ($entity instanceof IEntity) {
             $isNew = $entity.isNew();
         }
 
@@ -605,7 +605,7 @@ class EntityContext : ContextInterface
     /**
      * Get the table instance from a property path
      *
-     * @param uim.cake.Datasource\EntityInterface|array<string>|string $parts Each one of the parts in a path for a field name
+     * @param uim.cake.Datasource\IEntity|array<string>|string $parts Each one of the parts in a path for a field name
      * @param bool $fallback Whether to fallback to the last found table
      *  when a nonexistent field/property is being encountered.
      * @return uim.cake.orm.Table|null Table instance or null
@@ -724,7 +724,7 @@ class EntityContext : ContextInterface
             return $entity.getErrors();
         }
 
-        if ($entity instanceof EntityInterface) {
+        if ($entity instanceof IEntity) {
             $error = $entity.getError(implode(".", $remainingParts));
             if ($error) {
                 return $error;

@@ -9,7 +9,7 @@ import uim.cake.databases.Connection;
 import uim.cake.databases.schemas.TableISchema;
 import uim.cake.databases.TypeFactory;
 import uim.cake.datasources.ConnectionManager;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.datasources.exceptions.InvalidPrimaryKeyException;
 import uim.cake.datasources.RepositoryInterface;
 import uim.cake.datasources.RulesAwareTrait;
@@ -111,17 +111,17 @@ use RuntimeException;
  *
  * - `beforeFind(IEvent $event, Query $query, ArrayObject $options, boolean $primary)`
  * - `beforeMarshal(IEvent $event, ArrayObject $data, ArrayObject $options)`
- * - `afterMarshal(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `afterMarshal(IEvent $event, IEntity $entity, ArrayObject $options)`
  * - `buildValidator(IEvent $event, Validator $validator, string aName)`
  * - `buildRules(RulesChecker $rules)`
- * - `beforeRules(IEvent $event, EntityInterface $entity, ArrayObject $options, string $operation)`
- * - `afterRules(IEvent $event, EntityInterface $entity, ArrayObject $options, bool $result, string $operation)`
- * - `beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options)`
- * - `afterSave(IEvent $event, EntityInterface $entity, ArrayObject $options)`
- * - `afterSaveCommit(IEvent $event, EntityInterface $entity, ArrayObject $options)`
- * - `beforeDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)`
- * - `afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options)`
- * - `afterDeleteCommit(IEvent $event, EntityInterface $entity, ArrayObject $options)`
+ * - `beforeRules(IEvent $event, IEntity $entity, ArrayObject $options, string $operation)`
+ * - `afterRules(IEvent $event, IEntity $entity, ArrayObject $options, bool $result, string $operation)`
+ * - `beforeSave(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `afterSave(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `afterSaveCommit(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `beforeDelete(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `afterDelete(IEvent $event, IEntity $entity, ArrayObject $options)`
+ * - `afterDeleteCommit(IEvent $event, IEntity $entity, ArrayObject $options)`
  *
  * @see uim.cake.events.EventManager for reference on the events system.
  * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list
@@ -228,7 +228,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * The name of the class that represent a single row for this table
      *
      * @var string
-     * @psalm-var class-string<uim.cake.Datasource\EntityInterface>
+     * @psalm-var class-string<uim.cake.Datasource\IEntity>
      */
     protected $_entityClass;
 
@@ -672,7 +672,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Returns the class used to hydrate rows for this table.
      *
      * @return string
-     * @psalm-return class-string<uim.cake.Datasource\EntityInterface>
+     * @psalm-return class-string<uim.cake.Datasource\IEntity>
      */
     function getEntityClass(): string
     {
@@ -691,7 +691,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
                 return _entityClass = $default;
             }
 
-            /** @var class-string<uim.cake.Datasource\EntityInterface>|null $class */
+            /** @var class-string<uim.cake.Datasource\IEntity>|null $class */
             $class = App::className($name, "Model/Entity");
             if (!$class) {
                 throw new MissingEntityException([$name]);
@@ -711,7 +711,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @return this
      */
     function setEntityClass(string aName) {
-        /** @psalm-var class-string<uim.cake.Datasource\EntityInterface>|null */
+        /** @psalm-var class-string<uim.cake.Datasource\IEntity>|null */
         $class = App::className($name, "Model/Entity");
         if ($class == null) {
             throw new MissingEntityException([$name]);
@@ -1455,7 +1455,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param mixed $primaryKey primary key value to find
      * @param array<string, mixed> $options options accepted by `Table::find()`
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException if the record with such id
      * could not be found
      * @throws uim.cake.Datasource\exceptions.InvalidPrimaryKeyException When $primaryKey has an
@@ -1463,7 +1463,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * @see uim.cake.datasources.RepositoryInterface::find()
      * @psalm-suppress InvalidReturnType
      */
-    function get($primaryKey, array $options = []): EntityInterface
+    function get($primaryKey, array $options = []): IEntity
     {
         if ($primaryKey == null) {
             throw new InvalidPrimaryKeyException(sprintf(
@@ -1577,10 +1577,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   created entities. This callback will be called *before* the entity
      *   is persisted.
      * @param array<string, mixed> $options The options to use when saving.
-     * @return uim.cake.Datasource\EntityInterface An entity.
+     * @return uim.cake.Datasource\IEntity An entity.
      * @throws uim.cake.orm.exceptions.PersistenceFailedException When the entity couldn"t be saved
      */
-    function findOrCreate($search, ?callable $callback = null, $options = []): EntityInterface
+    function findOrCreate($search, ?callable $callback = null, $options = []): IEntity
     {
         $options = new ArrayObject($options + [
             "atomic": true,
@@ -1607,7 +1607,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   created entities. This callback will be called *before* the entity
      *   is persisted.
      * @param array<string, mixed> $options The options to use when saving.
-     * @return uim.cake.Datasource\EntityInterface|array An entity.
+     * @return uim.cake.Datasource\IEntity|array An entity.
      * @throws uim.cake.orm.exceptions.PersistenceFailedException When the entity couldn"t be saved
      * @throws \InvalidArgumentException
      */
@@ -1803,12 +1803,12 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * $articles.save($entity, ["associated": false]);
      * ```
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the entity to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array $options The options to use when saving.
-     * @return uim.cake.Datasource\EntityInterface|false
+     * @return uim.cake.Datasource\IEntity|false
      * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction is aborted in the afterSave event.
      */
-    function save(EntityInterface $entity, $options = []) {
+    function save(IEntity $entity, $options = []) {
         if ($options instanceof SaveOptionsBuilder) {
             deprecationWarning("SaveOptionsBuilder is deprecated. Use a normal array for options instead.");
             $options = $options.toArray();
@@ -1855,13 +1855,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Try to save an entity or throw a PersistenceFailedException if the application rules checks failed,
      * the entity contains errors or the save was aborted by a callback.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the entity to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayAccess|array $options The options to use when saving.
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      * @throws uim.cake.orm.exceptions.PersistenceFailedException When the entity couldn"t be saved
      * @see uim.cake.orm.Table::save()
      */
-    function saveOrFail(EntityInterface $entity, $options = []): EntityInterface
+    function saveOrFail(IEntity $entity, $options = []): IEntity
     {
         $saved = this.save($entity, $options);
         if ($saved == false) {
@@ -1874,14 +1874,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Performs the actual saving of an entity based on the passed options.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the entity to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayObject $options the options to use for the save operation
-     * @return uim.cake.Datasource\EntityInterface|false
+     * @return uim.cake.Datasource\IEntity|false
      * @throws \RuntimeException When an entity is missing some of the primary keys.
      * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
-    protected function _processSave(EntityInterface $entity, ArrayObject $options) {
+    protected function _processSave(IEntity $entity, ArrayObject $options) {
         $primaryColumns = (array)this.getPrimaryKey();
 
         if ($options["checkExisting"] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
@@ -1907,9 +1907,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
                 return false;
             }
 
-            if ($result != false && !($result instanceof EntityInterface)) {
+            if ($result != false && !($result instanceof IEntity)) {
                 throw new RuntimeException(sprintf(
-                    "The beforeSave callback must return `false` or `EntityInterface` instance. Got `%s` instead.",
+                    "The beforeSave callback must return `false` or `IEntity` instance. Got `%s` instead.",
                     getTypeName($result)
                 ));
             }
@@ -1953,13 +1953,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Handles the saving of children associations and executing the afterSave logic
      * once the entity for this table has been saved successfully.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the entity to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayObject $options the options to use for the save operation
      * @return bool True on success
      * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
-    protected function _onSaveSuccess(EntityInterface $entity, ArrayObject $options): bool
+    protected function _onSaveSuccess(IEntity $entity, ArrayObject $options): bool
     {
         $success = _associations.saveChildren(
             this,
@@ -1990,13 +1990,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Auxiliary function to handle the insert of an entity"s data in the table
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the subject entity from were $data was extracted
+     * @param uim.cake.Datasource\IEntity $entity the subject entity from were $data was extracted
      * @param array $data The actual data that needs to be saved
-     * @return uim.cake.Datasource\EntityInterface|false
+     * @return uim.cake.Datasource\IEntity|false
      * @throws \RuntimeException if not all the primary keys where supplied or could
      * be generated when the table has composite primary keys. Or when the table has no primary key.
      */
-    protected function _insert(EntityInterface $entity, array $data) {
+    protected function _insert(IEntity $entity, array $data) {
         $primary = (array)this.getPrimaryKey();
         if (empty($primary)) {
             $msg = sprintf(
@@ -2088,12 +2088,12 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * Auxiliary function to handle the update of an entity"s data in the table
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the subject entity from were $data was extracted
+     * @param uim.cake.Datasource\IEntity $entity the subject entity from were $data was extracted
      * @param array $data The actual data that needs to be saved
-     * @return uim.cake.Datasource\EntityInterface|false
+     * @return uim.cake.Datasource\IEntity|false
      * @throws \InvalidArgumentException When primary key data is missing.
      */
-    protected function _update(EntityInterface $entity, array $data) {
+    protected function _update(IEntity $entity, array $data) {
         $primaryColumns = (array)this.getPrimaryKey();
         $primaryKey = $entity.extract($primaryColumns);
 
@@ -2134,9 +2134,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to save.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to save.
      * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @return iterable<uim.cake.Datasource\EntityInterface>|false False on failure, entities list on success.
+     * @return iterable<uim.cake.Datasource\IEntity>|false False on failure, entities list on success.
      * @throws \Exception
      */
     function saveMany(iterable $entities, $options = []) {
@@ -2154,9 +2154,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * any one of the records fails to save due to failed validation or database
      * error.
      *
-     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to save.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to save.
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @return iterable<uim.cake.Datasource\EntityInterface> Entities list.
+     * @return iterable<uim.cake.Datasource\IEntity> Entities list.
      * @throws \Exception
      * @throws uim.cake.orm.exceptions.PersistenceFailedException If an entity couldn"t be saved.
      */
@@ -2166,11 +2166,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to save.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to save.
      * @param uim.cake.orm.SaveOptionsBuilder|\ArrayAccess|array $options Options used when calling Table::save() for each entity.
      * @throws uim.cake.orm.exceptions.PersistenceFailedException If an entity couldn"t be saved.
      * @throws \Exception If an entity couldn"t be saved.
-     * @return iterable<uim.cake.Datasource\EntityInterface> Entities list.
+     * @return iterable<uim.cake.Datasource\IEntity> Entities list.
      */
     protected function _saveMany(iterable $entities, $options = []): iterable
     {
@@ -2191,7 +2191,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         /** @var array<bool> $isNew */
         $isNew = [];
         $cleanupOnFailure = function ($entities) use (&$isNew): void {
-            /** @var array<uim.cake.Datasource\EntityInterface> $entities */
+            /** @var array<uim.cake.Datasource\IEntity> $entities */
             foreach ($entities as $key: $entity) {
                 if (isset($isNew[$key]) && $isNew[$key]) {
                     $entity.unset(this.getPrimaryKey());
@@ -2200,7 +2200,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             }
         };
 
-        /** @var uim.cake.datasources.EntityInterface|null $failed */
+        /** @var uim.cake.datasources.IEntity|null $failed */
         $failed = null;
         try {
             this.getConnection()
@@ -2226,16 +2226,16 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             throw new PersistenceFailedException($failed, ["saveMany"]);
         }
 
-        $cleanupOnSuccess = function (EntityInterface $entity) use (&$cleanupOnSuccess) {
+        $cleanupOnSuccess = function (IEntity $entity) use (&$cleanupOnSuccess) {
             $entity.clean();
             $entity.setNew(false);
 
             foreach (array_keys($entity.toArray()) as $field) {
                 $value = $entity.get($field);
 
-                if ($value instanceof EntityInterface) {
+                if ($value instanceof IEntity) {
                     $cleanupOnSuccess($value);
-                } elseif (is_array($value) && current($value) instanceof EntityInterface) {
+                } elseif (is_array($value) && current($value) instanceof IEntity) {
                     foreach ($value as $associated) {
                         $cleanupOnSuccess($associated);
                     }
@@ -2281,11 +2281,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * for the duration of the callbacks, this allows listeners to modify
      * the options used in the delete operation.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to remove.
+     * @param uim.cake.Datasource\IEntity $entity The entity to remove.
      * @param \ArrayAccess|array $options The options for the delete.
      * @return bool success
      */
-    function delete(EntityInterface $entity, $options = []): bool
+    function delete(IEntity $entity, $options = []): bool
     {
         $options = new ArrayObject((array)$options + [
             "atomic": true,
@@ -2314,9 +2314,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to delete.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @return iterable<uim.cake.Datasource\EntityInterface>|false Entities list
+     * @return iterable<uim.cake.Datasource\IEntity>|false Entities list
      *   on success, false on failure.
      * @see uim.cake.orm.Table::delete() for options and events related to this method.
      */
@@ -2337,9 +2337,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * any one of the records fails to delete due to failed validation or database
      * error.
      *
-     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to delete.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array $options Options used when calling Table::save() for each entity.
-     * @return iterable<uim.cake.Datasource\EntityInterface> Entities list.
+     * @return iterable<uim.cake.Datasource\IEntity> Entities list.
      * @throws uim.cake.orm.exceptions.PersistenceFailedException
      * @see uim.cake.orm.Table::delete() for options and events related to this method.
      */
@@ -2355,11 +2355,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     }
 
     /**
-     * @param iterable<uim.cake.Datasource\EntityInterface> $entities Entities to delete.
+     * @param iterable<uim.cake.Datasource\IEntity> $entities Entities to delete.
      * @param \ArrayAccess|array $options Options used.
-     * @return uim.cake.Datasource\EntityInterface|null
+     * @return uim.cake.Datasource\IEntity|null
      */
-    protected function _deleteMany(iterable $entities, $options = []): ?EntityInterface
+    protected function _deleteMany(iterable $entities, $options = []): ?IEntity
     {
         $options = new ArrayObject((array)$options + [
                 "atomic": true,
@@ -2393,13 +2393,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Try to delete an entity or throw a PersistenceFailedException if the entity is new,
      * has no primary key value, application rules checks failed or the delete was aborted by a callback.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to remove.
+     * @param uim.cake.Datasource\IEntity $entity The entity to remove.
      * @param \ArrayAccess|array $options The options for the delete.
      * @return true
      * @throws uim.cake.orm.exceptions.PersistenceFailedException
      * @see uim.cake.orm.Table::delete()
      */
-    function deleteOrFail(EntityInterface $entity, $options = []): bool
+    function deleteOrFail(IEntity $entity, $options = []): bool
     {
         $deleted = this.delete($entity, $options);
         if ($deleted == false) {
@@ -2415,13 +2415,13 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Will delete the entity provided. Will remove rows from any
      * dependent associations, and clear out join tables for BelongsToMany associations.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to delete.
+     * @param uim.cake.Datasource\IEntity $entity The entity to delete.
      * @param \ArrayObject $options The options for the delete.
      * @throws \InvalidArgumentException if there are no primary key values of the
      * passed entity
      * @return bool success
      */
-    protected function _processDelete(EntityInterface $entity, ArrayObject $options): bool
+    protected function _processDelete(IEntity $entity, ArrayObject $options): bool
     {
         if ($entity.isNew()) {
             return false;
@@ -2653,9 +2653,9 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * {@inheritDoc}
      *
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      */
-    function newEmptyEntity(): EntityInterface
+    function newEmptyEntity(): IEntity
     {
         $class = this.getEntityClass();
 
@@ -2718,10 +2718,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param array $data The data to build an entity with.
      * @param array<string, mixed> $options A list of options for the object hydration.
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.orm.Marshaller::one()
      */
-    function newEntity(array $data, array $options = []): EntityInterface
+    function newEntity(array $data, array $options = []): IEntity
     {
         $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
@@ -2759,7 +2759,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * @param array $data The data to build an entity with.
      * @param array<string, mixed> $options A list of options for the objects hydration.
-     * @return array<uim.cake.Datasource\EntityInterface> An array of hydrated records.
+     * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
     function newEntities(array $data, array $options = []): array
     {
@@ -2813,14 +2813,14 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * property will not be marked as dirty. This is an optimization to prevent unnecessary field
      * updates when persisting entities.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the entity that will get the
+     * @param uim.cake.Datasource\IEntity $entity the entity that will get the
      * data merged in
      * @param array $data key value list of fields to be merged into the entity
      * @param array<string, mixed> $options A list of options for the object hydration.
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.orm.Marshaller::merge()
      */
-    function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface
+    function patchEntity(IEntity $entity, array $data, array $options = []): IEntity
     {
         $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
@@ -2853,11 +2853,11 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * You can use the `Model.beforeMarshal` event to modify request data
      * before it is converted into entities.
      *
-     * @param iterable<uim.cake.Datasource\EntityInterface> $entities the entities that will get the
+     * @param iterable<uim.cake.Datasource\IEntity> $entities the entities that will get the
      * data merged in
      * @param array $data list of arrays to be merged into the entities
      * @param array<string, mixed> $options A list of options for the objects hydration.
-     * @return array<uim.cake.Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\IEntity>
      */
     function patchEntities(iterable $entities, array $data, array $options = []): array
     {
@@ -3033,10 +3033,10 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *
      * The properties for the associations to be loaded will be overwritten on each entity.
      *
-     * @param uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface> $entities a single entity or list of entities
+     * @param uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity> $entities a single entity or list of entities
      * @param array $contain A `contain()` compatible array.
      * @see uim.cake.orm.Query::contain()
-     * @return uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface>
+     * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>
      */
     function loadInto($entities, array $contain) {
         return (new LazyEagerLoader()).loadInto($entities, $contain, this);

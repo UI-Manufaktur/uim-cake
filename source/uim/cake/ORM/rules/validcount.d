@@ -7,7 +7,7 @@
  * @since         3.2.9
   */module uim.cake.orm.Rule;
 
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.Validation\Validation;
 use Countable;
 
@@ -34,11 +34,11 @@ class ValidCount
     /**
      * Performs the count check
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity from where to extract the fields.
+     * @param uim.cake.Datasource\IEntity $entity The entity from where to extract the fields.
      * @param array<string, mixed> $options Options passed to the check.
      * @return bool True if successful, else false.
      */
-    function __invoke(EntityInterface $entity, array $options): bool
+    function __invoke(IEntity $entity, array $options): bool
     {
         $value = $entity.{_field};
         if (!is_array($value) && !$value instanceof Countable) {

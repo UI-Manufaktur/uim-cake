@@ -1,24 +1,12 @@
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.testsuite
 
-
-
- *
-
-
- * @since         4.3.0
-  */module uim.cake.TestSuite\Fixture;
-
-import uim.cake.core.Configure;
-import uim.cake.core.exceptions.CakeException;
-import uim.cake.databases.Connection;
-import uim.cake.databases.DriverInterface;
-import uim.cake.databases.schemas.TableSchema;
-import uim.cake.datasources.ConnectionInterface;
-import uim.cake.datasources.ConnectionManager;
-import uim.cake.datasources.FixtureInterface;
-import uim.cake.TestSuite\ConnectionHelper;
-use Closure;
-use PDOException;
-use UnexpectedValueException;
+@safe:
+import uim.cake;
 
 /**
  * Helper for managing fixtures.

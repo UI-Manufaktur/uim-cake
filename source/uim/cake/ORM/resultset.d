@@ -4,7 +4,7 @@ import uim.cake.Collection\Collection;
 import uim.cake.Collection\CollectionTrait;
 import uim.cake.databases.exceptions.DatabaseException;
 import uim.cake.databases.StatementInterface;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.datasources.IResultSet;
 use SplFixedArray;
 
@@ -418,7 +418,7 @@ class ResultSet : IResultSet
      * Correctly nests results keys including those coming from associations
      *
      * @param array $row Array containing columns and values or false if there is no results
-     * @return uim.cake.Datasource\EntityInterface|array Results
+     * @return uim.cake.Datasource\IEntity|array Results
      */
     protected function _groupResult(array $row) {
         $defaultAlias = _defaultAlias;
@@ -440,7 +440,7 @@ class ResultSet : IResultSet
                 /** @var uim.cake.orm.Table $table */
                 $table = $matching["instance"];
                 $options["source"] = $table.getRegistryAlias();
-                /** @var uim.cake.datasources.EntityInterface $entity */
+                /** @var uim.cake.datasources.IEntity $entity */
                 $entity = new $matching["entityClass"]($results["_matchingData"][$alias], $options);
                 $results["_matchingData"][$alias] = $entity;
             }
@@ -518,7 +518,7 @@ class ResultSet : IResultSet
         if (isset($results[$defaultAlias])) {
             $results = $results[$defaultAlias];
         }
-        if (_hydrate && !($results instanceof EntityInterface)) {
+        if (_hydrate && !($results instanceof IEntity)) {
             $results = new _entityClass($results, $options);
         }
 

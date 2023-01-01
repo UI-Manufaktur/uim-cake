@@ -4,7 +4,7 @@ use ArrayObject;
 import uim.cake.Collection\Collection;
 import uim.cake.Collection\ICollection;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.Entity;
 import uim.cake.orm.locators.LocatorAwareTrait;
@@ -205,10 +205,10 @@ class EavStrategy : TranslateStrategyInterface
      * in the database too.
      *
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject $options the options passed to the save method
      */
-    void beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options) {
+    void beforeSave(IEvent $event, IEntity $entity, ArrayObject $options) {
         $locale = $entity.get("_locale") ?: this.getLocale();
         $newOptions = [this.translationTable.getAlias(): ["validate": false]];
         $options["associated"] = $newOptions + $options["associated"];
@@ -333,7 +333,7 @@ class EavStrategy : TranslateStrategyInterface
      */
     protected function rowMapper($results, $locale) {
         return $results.map(function ($row) use ($locale) {
-            /** @var uim.cake.datasources.EntityInterface|array|null $row */
+            /** @var uim.cake.datasources.IEntity|array|null $row */
             if ($row == null) {
                 return $row;
             }
@@ -376,7 +376,7 @@ class EavStrategy : TranslateStrategyInterface
     function groupTranslations($results): ICollection
     {
         return $results.map(function ($row) {
-            if (!$row instanceof EntityInterface) {
+            if (!$row instanceof IEntity) {
                 return $row;
             }
             $translations = (array)$row.get("_i18n");
@@ -410,7 +410,7 @@ class EavStrategy : TranslateStrategyInterface
      * out of the data found in the `_translations` property in the passed
      * entity. The result will be put into its `_i18n` property.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity Entity
+     * @param uim.cake.Datasource\IEntity $entity Entity
      */
     protected void bundleTranslatedFields($entity) {
         $translations = (array)$entity.get("_translations");

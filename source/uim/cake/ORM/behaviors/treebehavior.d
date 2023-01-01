@@ -2,7 +2,7 @@ module uim.cake.orm.Behavior;
 
 import uim.cake.Collection\ICollection;
 import uim.cake.databases.expressions.IdentifierExpression;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.datasources.exceptions.RecordNotFoundException;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.Behavior;
@@ -74,11 +74,11 @@ class TreeBehavior : Behavior
      * included in the parameters to be saved.
      *
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
-     * @param uim.cake.Datasource\EntityInterface $entity the entity that is going to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity that is going to be saved
      * @return void
      * @throws \RuntimeException if the parent to set for the node is invalid
      */
-    function beforeSave(IEvent $event, EntityInterface $entity) {
+    function beforeSave(IEvent $event, IEntity $entity) {
         $isNew = $entity.isNew();
         $config = this.getConfig();
         $parent = $entity.get($config["parent"]);
@@ -142,9 +142,9 @@ class TreeBehavior : Behavior
      * Manages updating level of descendants of currently saved entity.
      *
      * @param uim.cake.events.IEvent $event The afterSave event that was fired
-     * @param uim.cake.Datasource\EntityInterface $entity the entity that is going to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity that is going to be saved
      */
-    void afterSave(IEvent $event, EntityInterface $entity) {
+    void afterSave(IEvent $event, IEntity $entity) {
         if (!_config["level"] || $entity.isNew()) {
             return;
         }
@@ -155,9 +155,9 @@ class TreeBehavior : Behavior
     /**
      * Set level for descendants.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity whose descendants need to be updated.
+     * @param uim.cake.Datasource\IEntity $entity The entity whose descendants need to be updated.
      */
-    protected void _setChildrenLevel(EntityInterface $entity): void
+    protected void _setChildrenLevel(IEntity $entity): void
     {
         $config = this.getConfig();
 
@@ -175,7 +175,7 @@ class TreeBehavior : Behavior
             "order": $config["left"],
         ]);
 
-        /** @var uim.cake.datasources.EntityInterface $node */
+        /** @var uim.cake.datasources.IEntity $node */
         foreach ($children as $node) {
             $parentIdValue = $node.get($config["parent"]);
             $depth = $depths[$parentIdValue] + 1;
@@ -192,9 +192,9 @@ class TreeBehavior : Behavior
      * Also deletes the nodes in the subtree of the entity to be delete
      *
      * @param uim.cake.events.IEvent $event The beforeDelete event that was fired
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      */
-    void beforeDelete(IEvent $event, EntityInterface $entity) {
+    void beforeDelete(IEvent $event, IEntity $entity) {
         $config = this.getConfig();
         _ensureFields($entity);
         $left = $entity.get($config["left"]);
@@ -229,12 +229,12 @@ class TreeBehavior : Behavior
      * updated to a new parent. It also makes the hole in the tree so the node
      * move can be done without corrupting the structure.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to re-parent
+     * @param uim.cake.Datasource\IEntity $entity The entity to re-parent
      * @param mixed $parent the id of the parent to set
      * @return void
      * @throws \RuntimeException if the parent to set to the entity is not valid
      */
-    protected function _setParent(EntityInterface $entity, $parent): void
+    protected function _setParent(IEntity $entity, $parent): void
     {
         $config = this.getConfig();
         $parentNode = _getNode($parent);
@@ -291,9 +291,9 @@ class TreeBehavior : Behavior
      * a new root in the tree. It also modifies the ordering in the rest of the tree
      * so the structure remains valid
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to set as a new root
+     * @param uim.cake.Datasource\IEntity $entity The entity to set as a new root
      */
-    protected void _setAsRoot(EntityInterface $entity): void
+    protected void _setAsRoot(IEntity $entity): void
     {
         $config = this.getConfig();
         $edge = _getMax();
@@ -383,12 +383,12 @@ class TreeBehavior : Behavior
     /**
      * Get the number of children nodes.
      *
-     * @param uim.cake.Datasource\EntityInterface $node The entity to count children for
+     * @param uim.cake.Datasource\IEntity $node The entity to count children for
      * @param bool $direct whether to count all nodes in the subtree or just
      * direct children
      * @return int Number of children nodes.
      */
-    function childCount(EntityInterface $node, bool $direct = false): int
+    function childCount(IEntity $node, bool $direct = false): int
     {
         $config = this.getConfig();
         $parent = _table.aliasField($config["parent"]);
@@ -524,11 +524,11 @@ class TreeBehavior : Behavior
      * Note that the node will not be deleted just moved away from its current position
      * without moving its children with it.
      *
-     * @param uim.cake.Datasource\EntityInterface $node The node to remove from the tree
-     * @return uim.cake.Datasource\EntityInterface|false the node after being removed from the tree or
+     * @param uim.cake.Datasource\IEntity $node The node to remove from the tree
+     * @return uim.cake.Datasource\IEntity|false the node after being removed from the tree or
      * false on error
      */
-    function removeFromTree(EntityInterface $node) {
+    function removeFromTree(IEntity $node) {
         return _table.getConnection().transactional(function () use ($node) {
             _ensureFields($node);
 
@@ -539,11 +539,11 @@ class TreeBehavior : Behavior
     /**
      * Helper function containing the actual code for removeFromTree
      *
-     * @param uim.cake.Datasource\EntityInterface $node The node to remove from the tree
-     * @return uim.cake.Datasource\EntityInterface|false the node after being removed from the tree or
+     * @param uim.cake.Datasource\IEntity $node The node to remove from the tree
+     * @return uim.cake.Datasource\IEntity|false the node after being removed from the tree or
      * false on error
      */
-    protected function _removeFromTree(EntityInterface $node) {
+    protected function _removeFromTree(IEntity $node) {
         $config = this.getConfig();
         $left = $node.get($config["left"]);
         $right = $node.get($config["right"]);
@@ -582,12 +582,12 @@ class TreeBehavior : Behavior
      * If the node is the first child, or is a top level node with no previous node
      * this method will return the same node without any changes
      *
-     * @param uim.cake.Datasource\EntityInterface $node The node to move
+     * @param uim.cake.Datasource\IEntity $node The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
-     * @return uim.cake.Datasource\EntityInterface|false $node The node after being moved or false if `$number` is < 1
+     * @return uim.cake.Datasource\IEntity|false $node The node after being moved or false if `$number` is < 1
      */
-    function moveUp(EntityInterface $node, $number = 1) {
+    function moveUp(IEntity $node, $number = 1) {
         if ($number < 1) {
             return false;
         }
@@ -602,12 +602,12 @@ class TreeBehavior : Behavior
     /**
      * Helper function used with the actual code for moveUp
      *
-     * @param uim.cake.Datasource\EntityInterface $node The node to move
+     * @param uim.cake.Datasource\IEntity $node The node to move
      * @param int|true $number How many places to move the node, or true to move to first position
-     * @return uim.cake.Datasource\EntityInterface $node The node after being moved
+     * @return uim.cake.Datasource\IEntity $node The node after being moved
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
      */
-    protected function _moveUp(EntityInterface $node, $number): EntityInterface
+    protected function _moveUp(IEntity $node, $number): IEntity
     {
         $config = this.getConfig();
         [$parent, $left, $right] = [$config["parent"], $config["left"], $config["right"]];
@@ -615,7 +615,7 @@ class TreeBehavior : Behavior
 
         $targetNode = null;
         if ($number != true) {
-            /** @var uim.cake.datasources.EntityInterface|null $targetNode */
+            /** @var uim.cake.datasources.IEntity|null $targetNode */
             $targetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
@@ -629,7 +629,7 @@ class TreeBehavior : Behavior
                 .first();
         }
         if (!$targetNode) {
-            /** @var uim.cake.datasources.EntityInterface|null $targetNode */
+            /** @var uim.cake.datasources.IEntity|null $targetNode */
             $targetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
@@ -673,12 +673,12 @@ class TreeBehavior : Behavior
      * If the node is the last child, or is a top level node with no subsequent node
      * this method will return the same node without any changes
      *
-     * @param uim.cake.Datasource\EntityInterface $node The node to move
+     * @param uim.cake.Datasource\IEntity $node The node to move
      * @param int|true $number How many places to move the node or true to move to last position
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
-     * @return uim.cake.Datasource\EntityInterface|false the entity after being moved or false if `$number` is < 1
+     * @return uim.cake.Datasource\IEntity|false the entity after being moved or false if `$number` is < 1
      */
-    function moveDown(EntityInterface $node, $number = 1) {
+    function moveDown(IEntity $node, $number = 1) {
         if ($number < 1) {
             return false;
         }
@@ -693,12 +693,12 @@ class TreeBehavior : Behavior
     /**
      * Helper function used with the actual code for moveDown
      *
-     * @param uim.cake.Datasource\EntityInterface $node The node to move
+     * @param uim.cake.Datasource\IEntity $node The node to move
      * @param int|true $number How many places to move the node, or true to move to last position
-     * @return uim.cake.Datasource\EntityInterface $node The node after being moved
+     * @return uim.cake.Datasource\IEntity $node The node after being moved
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
      */
-    protected function _moveDown(EntityInterface $node, $number): EntityInterface
+    protected function _moveDown(IEntity $node, $number): IEntity
     {
         $config = this.getConfig();
         [$parent, $left, $right] = [$config["parent"], $config["left"], $config["right"]];
@@ -706,7 +706,7 @@ class TreeBehavior : Behavior
 
         $targetNode = null;
         if ($number != true) {
-            /** @var uim.cake.datasources.EntityInterface|null $targetNode */
+            /** @var uim.cake.datasources.IEntity|null $targetNode */
             $targetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
@@ -720,7 +720,7 @@ class TreeBehavior : Behavior
                 .first();
         }
         if (!$targetNode) {
-            /** @var uim.cake.datasources.EntityInterface|null $targetNode */
+            /** @var uim.cake.datasources.IEntity|null $targetNode */
             $targetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
@@ -762,11 +762,11 @@ class TreeBehavior : Behavior
      * Returns a single node from the tree from its primary key
      *
      * @param mixed $id Record id.
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException When node was not found
      * @psalm-suppress InvalidReturnType
      */
-    protected function _getNode($id): EntityInterface
+    protected function _getNode($id): IEntity
     {
         $config = this.getConfig();
         [$parent, $left, $right] = [$config["parent"], $config["left"], $config["right"]];
@@ -923,9 +923,9 @@ class TreeBehavior : Behavior
      * Ensures that the provided entity contains non-empty values for the left and
      * right fields
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to ensure fields for
+     * @param uim.cake.Datasource\IEntity $entity The entity to ensure fields for
      */
-    protected void _ensureFields(EntityInterface $entity): void
+    protected void _ensureFields(IEntity $entity): void
     {
         $config = this.getConfig();
         $fields = [$config["left"], $config["right"]];
@@ -959,13 +959,13 @@ class TreeBehavior : Behavior
     /**
      * Returns the depth level of a node in the tree.
      *
-     * @param uim.cake.Datasource\EntityInterface|string|int $entity The entity or primary key get the level of.
+     * @param uim.cake.Datasource\IEntity|string|int $entity The entity or primary key get the level of.
      * @return int|false Integer of the level or false if the node does not exist.
      */
     function getLevel($entity) {
         $primaryKey = _getPrimaryKey();
         $id = $entity;
-        if ($entity instanceof EntityInterface) {
+        if ($entity instanceof IEntity) {
             $id = $entity.get($primaryKey);
         }
         $config = this.getConfig();

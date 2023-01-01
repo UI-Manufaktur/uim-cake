@@ -1,7 +1,7 @@
 module uim.cake.orm.Behavior;
 
 use ArrayObject;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.events.EventInterface;
 import uim.cake.orm.Association;
 import uim.cake.orm.Behavior;
@@ -53,7 +53,7 @@ use Closure;
  * ```
  * [
  *     "Users": [
- *         "posts_published": function (IEvent $event, EntityInterface $entity, Table $table) {
+ *         "posts_published": function (IEvent $event, IEntity $entity, Table $table) {
  *             $query = $table.find("all").where([
  *                 "published": true,
  *                 "user_id": $entity.get("user_id")
@@ -100,10 +100,10 @@ class CounterCacheBehavior : Behavior
      * Check if a field, which should be ignored, is dirty
      *
      * @param uim.cake.events.IEvent $event The beforeSave event that was fired
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that is going to be saved
+     * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      * @param \ArrayObject $options The options for the query
      */
-    void beforeSave(IEvent $event, EntityInterface $entity, ArrayObject $options) {
+    void beforeSave(IEvent $event, IEntity $entity, ArrayObject $options) {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
         }
@@ -136,10 +136,10 @@ class CounterCacheBehavior : Behavior
      * Makes sure to update counter cache when a new record is created or updated.
      *
      * @param uim.cake.events.IEvent $event The afterSave event that was fired.
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that was saved.
+     * @param uim.cake.Datasource\IEntity $entity The entity that was saved.
      * @param \ArrayObject $options The options for the query
      */
-    void afterSave(IEvent $event, EntityInterface $entity, ArrayObject $options): void
+    void afterSave(IEvent $event, IEntity $entity, ArrayObject $options): void
     {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
@@ -155,10 +155,10 @@ class CounterCacheBehavior : Behavior
      * Makes sure to update counter cache when a record is deleted.
      *
      * @param uim.cake.events.IEvent $event The afterDelete event that was fired.
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that was deleted.
+     * @param uim.cake.Datasource\IEntity $entity The entity that was deleted.
      * @param \ArrayObject $options The options for the query
      */
-    void afterDelete(IEvent $event, EntityInterface $entity, ArrayObject $options) {
+    void afterDelete(IEvent $event, IEntity $entity, ArrayObject $options) {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
         }
@@ -170,9 +170,9 @@ class CounterCacheBehavior : Behavior
      * Iterate all associations and update counter caches.
      *
      * @param uim.cake.events.IEvent $event Event instance.
-     * @param uim.cake.Datasource\EntityInterface $entity Entity.
+     * @param uim.cake.Datasource\IEntity $entity Entity.
      */
-    protected void _processAssociations(IEvent $event, EntityInterface $entity): void
+    protected void _processAssociations(IEvent $event, IEntity $entity): void
     {
         foreach (_config as $assoc: $settings) {
             $assoc = _table.getAssociation($assoc);
@@ -184,7 +184,7 @@ class CounterCacheBehavior : Behavior
      * Updates counter cache for a single association
      *
      * @param uim.cake.events.IEvent $event Event instance.
-     * @param uim.cake.Datasource\EntityInterface $entity Entity
+     * @param uim.cake.Datasource\IEntity $entity Entity
      * @param uim.cake.orm.Association $assoc The association object
      * @param array $settings The settings for counter cache for this association
      * @return void
@@ -192,7 +192,7 @@ class CounterCacheBehavior : Behavior
      */
     protected function _processAssociation(
         IEvent $event,
-        EntityInterface $entity,
+        IEntity $entity,
         Association $assoc,
         array $settings
     ): void {

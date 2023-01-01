@@ -63,10 +63,10 @@ interface RepositoryInterface
      * @param array<string, mixed> $options options accepted by `Table::find()`
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException if the record with such id
      * could not be found
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.datasources.RepositoryInterface::find()
      */
-    function get($primaryKey, array $options = []): EntityInterface;
+    function get($primaryKey, array $options = []): IEntity;
 
     /**
      * Creates a new Query instance for this repository
@@ -120,11 +120,11 @@ interface RepositoryInterface
      * returns the same entity after a successful save or false in case
      * of any error.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the entity to be saved
+     * @param uim.cake.Datasource\IEntity $entity the entity to be saved
      * @param \ArrayAccess|array $options The options to use when saving.
-     * @return uim.cake.Datasource\EntityInterface|false
+     * @return uim.cake.Datasource\IEntity|false
      */
-    function save(EntityInterface $entity, $options = []);
+    function save(IEntity $entity, $options = []);
 
     /**
      * Delete a single entity.
@@ -132,11 +132,11 @@ interface RepositoryInterface
      * Deletes an entity and possibly related associations from the database
      * based on the "dependent" option used when defining the association.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to remove.
+     * @param uim.cake.Datasource\IEntity $entity The entity to remove.
      * @param \ArrayAccess|array $options The options for the delete.
      * @return bool success
      */
-    function delete(EntityInterface $entity, $options = []): bool;
+    function delete(IEntity $entity, $options = []): bool;
 
     /**
      * This creates a new entity object.
@@ -145,9 +145,9 @@ interface RepositoryInterface
      * This entity can be persisted without validation error as empty record.
      * Always patch in required fields before saving.
      *
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      */
-    function newEmptyEntity(): EntityInterface;
+    function newEmptyEntity(): IEntity;
 
     /**
      * Create a new entity + associated entities from an array.
@@ -165,9 +165,9 @@ interface RepositoryInterface
      *
      * @param array $data The data to build an entity with.
      * @param array<string, mixed> $options A list of options for the object hydration.
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      */
-    function newEntity(array $data, array $options = []): EntityInterface;
+    function newEntity(array $data, array $options = []): IEntity;
 
     /**
      * Create a list of entities + associated entities from an array.
@@ -183,7 +183,7 @@ interface RepositoryInterface
      *
      * @param array $data The data to build an entity with.
      * @param array<string, mixed> $options A list of options for the objects hydration.
-     * @return array<uim.cake.Datasource\EntityInterface> An array of hydrated records.
+     * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
     function newEntities(array $data, array $options = []): array;
 
@@ -198,13 +198,13 @@ interface RepositoryInterface
      * $article = this.Articles.patchEntity($article, this.request.getData());
      * ```
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the entity that will get the
+     * @param uim.cake.Datasource\IEntity $entity the entity that will get the
      * data merged in
      * @param array $data key value list of fields to be merged into the entity
      * @param array<string, mixed> $options A list of options for the object hydration.
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      */
-    function patchEntity(EntityInterface $entity, array $data, array $options = []): EntityInterface;
+    function patchEntity(IEntity $entity, array $data, array $options = []): IEntity;
 
     /**
      * Merges each of the elements passed in `$data` into the entities
@@ -218,11 +218,11 @@ interface RepositoryInterface
      * $article = this.Articles.patchEntities($articles, this.request.getData());
      * ```
      *
-     * @param iterable<uim.cake.Datasource\EntityInterface> $entities the entities that will get the
+     * @param iterable<uim.cake.Datasource\IEntity> $entities the entities that will get the
      * data merged in
      * @param array $data list of arrays to be merged into the entities
      * @param array<string, mixed> $options A list of options for the objects hydration.
-     * @return array<uim.cake.Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\IEntity>
      */
     function patchEntities(iterable $entities, array $data, array $options = []): array;
 }

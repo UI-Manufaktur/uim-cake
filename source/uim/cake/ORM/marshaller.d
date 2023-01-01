@@ -4,7 +4,7 @@ use ArrayObject;
 import uim.cake.Collection\Collection;
 import uim.cake.databases.expressions.TupleComparison;
 import uim.cake.databases.TypeFactory;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.datasources.InvalidPropertyInterface;
 import uim.cake.orm.associations.BelongsToMany;
 import uim.cake.utilities.Hash;
@@ -92,7 +92,7 @@ class Marshaller
             }
             if (isset($options["isMerge"])) {
                 $callback = function ($value, $entity) use ($assoc, $nested) {
-                    /** @var uim.cake.datasources.EntityInterface $entity */
+                    /** @var uim.cake.datasources.IEntity $entity */
                     $options = $nested + ["associated": [], "association": $assoc];
 
                     return _mergeAssociation($entity.get($assoc.getProperty()), $assoc, $value, $options);
@@ -153,11 +153,11 @@ class Marshaller
      *
      * @param array $data The data to hydrate.
      * @param array<string, mixed> $options List of options
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.orm.Table::newEntity()
      * @see uim.cake.orm.Entity::$_accessible
      */
-    function one(array $data, array $options = []): EntityInterface
+    function one(array $data, array $options = []): IEntity
     {
         [$data, $options] = _prepareDataAndOptions($data, $options);
 
@@ -208,7 +208,7 @@ class Marshaller
         // Don"t flag clean association entities as
         // dirty so we don"t persist empty records.
         foreach ($properties as $field: $value) {
-            if ($value instanceof EntityInterface) {
+            if ($value instanceof IEntity) {
                 $entity.setDirty($field, $value.isDirty());
             }
         }
@@ -288,7 +288,7 @@ class Marshaller
      * @param uim.cake.orm.Association $assoc The association to marshall
      * @param mixed $value The data to hydrate. If not an array, this method will return null.
      * @param array<string, mixed> $options List of options.
-     * @return uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface>|null
+     * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>|null
      */
     protected function _marshalAssociation(Association $assoc, $value, array $options) {
         if (!is_array($value)) {
@@ -337,7 +337,7 @@ class Marshaller
      *
      * @param array $data The data to hydrate.
      * @param array<string, mixed> $options List of options
-     * @return array<uim.cake.Datasource\EntityInterface> An array of hydrated records.
+     * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      * @see uim.cake.orm.Table::newEntities()
      * @see uim.cake.orm.Entity::$_accessible
      */
@@ -363,7 +363,7 @@ class Marshaller
      * @param uim.cake.orm.associations.BelongsToMany $assoc The association to marshal.
      * @param array $data The data to convert into entities.
      * @param array<string, mixed> $options List of options.
-     * @return array<uim.cake.Datasource\EntityInterface> An array of built entities.
+     * @return array<uim.cake.Datasource\IEntity> An array of built entities.
      * @throws \BadMethodCallException
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
@@ -457,7 +457,7 @@ class Marshaller
      *
      * @param uim.cake.orm.Association $assoc The association class for the belongsToMany association.
      * @param array $ids The list of ids to load.
-     * @return array<uim.cake.Datasource\EntityInterface> An array of entities.
+     * @return array<uim.cake.Datasource\IEntity> An array of entities.
      */
     protected function _loadAssociatedByIds(Association $assoc, array $ids): array
     {
@@ -518,14 +518,14 @@ class Marshaller
      * ]);
      * ```
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the entity that will get the
+     * @param uim.cake.Datasource\IEntity $entity the entity that will get the
      * data merged in
      * @param array $data key value list of fields to be merged into the entity
      * @param array<string, mixed> $options List of options.
-     * @return uim.cake.Datasource\EntityInterface
+     * @return uim.cake.Datasource\IEntity
      * @see uim.cake.orm.Entity::$_accessible
      */
-    function merge(EntityInterface $entity, array $data, array $options = []): EntityInterface
+    function merge(IEntity $entity, array $data, array $options = []): IEntity
     {
         [$data, $options] = _prepareDataAndOptions($data, $options);
 
@@ -573,7 +573,7 @@ class Marshaller
                     )
                     || (
                         is_object($value)
-                        && !($value instanceof EntityInterface)
+                        && !($value instanceof IEntity)
                         && $original == $value
                     )
                 ) {
@@ -588,7 +588,7 @@ class Marshaller
             $entity.set($properties);
 
             foreach ($properties as $field: $value) {
-                if ($value instanceof EntityInterface) {
+                if ($value instanceof IEntity) {
                     $entity.setDirty($field, $value.isDirty());
                 }
             }
@@ -602,7 +602,7 @@ class Marshaller
                 continue;
             }
             $entity.set($field, $properties[$field]);
-            if ($properties[$field] instanceof EntityInterface) {
+            if ($properties[$field] instanceof IEntity) {
                 $entity.setDirty($field, $properties[$field].isDirty());
             }
         }
@@ -635,11 +635,11 @@ class Marshaller
      *   the accessible fields list in the entity will be used.
      * - accessibleFields: A list of fields to allow or deny in entity accessible fields.
      *
-     * @param iterable<uim.cake.Datasource\EntityInterface> $entities the entities that will get the
+     * @param iterable<uim.cake.Datasource\IEntity> $entities the entities that will get the
      *   data merged in
      * @param array $data list of arrays to be merged into the entities
      * @param array<string, mixed> $options List of options.
-     * @return array<uim.cake.Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\IEntity>
      * @see uim.cake.orm.Entity::$_accessible
      * @psalm-suppress NullArrayOffset
      */
@@ -666,7 +666,7 @@ class Marshaller
         $output = [];
 
         foreach ($entities as $entity) {
-            if (!($entity instanceof EntityInterface)) {
+            if (!($entity instanceof IEntity)) {
                 continue;
             }
 
@@ -717,11 +717,11 @@ class Marshaller
     /**
      * Creates a new sub-marshaller and merges the associated data.
      *
-     * @param uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface> $original The original entity
+     * @param uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity> $original The original entity
      * @param uim.cake.orm.Association $assoc The association to merge
      * @param mixed $value The array of data to hydrate. If not an array, this method will return null.
      * @param array<string, mixed> $options List of options.
-     * @return uim.cake.Datasource\EntityInterface|array<uim.cake.Datasource\EntityInterface>|null
+     * @return uim.cake.Datasource\IEntity|array<uim.cake.Datasource\IEntity>|null
      */
     protected function _mergeAssociation($original, Association $assoc, $value, array $options) {
         if (!$original) {
@@ -763,11 +763,11 @@ class Marshaller
      * Creates a new sub-marshaller and merges the associated data for a BelongstoMany
      * association.
      *
-     * @param array<uim.cake.Datasource\EntityInterface> $original The original entities list.
+     * @param array<uim.cake.Datasource\IEntity> $original The original entities list.
      * @param uim.cake.orm.associations.BelongsToMany $assoc The association to marshall
      * @param array $value The data to hydrate
      * @param array<string, mixed> $options List of options.
-     * @return array<uim.cake.Datasource\EntityInterface>
+     * @return array<uim.cake.Datasource\IEntity>
      */
     protected function _mergeBelongsToMany(array $original, BelongsToMany $assoc, array $value, array $options): array
     {
@@ -793,11 +793,11 @@ class Marshaller
     /**
      * Merge the special _joinData property into the entity set.
      *
-     * @param array<uim.cake.Datasource\EntityInterface> $original The original entities list.
+     * @param array<uim.cake.Datasource\IEntity> $original The original entities list.
      * @param uim.cake.orm.associations.BelongsToMany $assoc The association to marshall
      * @param array $value The data to hydrate
      * @param array<string, mixed> $options List of options.
-     * @return array<uim.cake.Datasource\EntityInterface> An array of entities
+     * @return array<uim.cake.Datasource\IEntity> An array of entities
      */
     protected function _mergeJoinData(array $original, BelongsToMany $assoc, array $value, array $options): array
     {
@@ -808,7 +808,7 @@ class Marshaller
             $entity.setAccess("_joinData", true);
 
             $joinData = $entity.get("_joinData");
-            if ($joinData && $joinData instanceof EntityInterface) {
+            if ($joinData && $joinData instanceof IEntity) {
                 $extra[spl_object_hash($entity)] = $joinData;
             }
         }
@@ -829,7 +829,7 @@ class Marshaller
             $value = $record.get("_joinData");
 
             // Already an entity, no further marshalling required.
-            if ($value instanceof EntityInterface) {
+            if ($value instanceof IEntity) {
                 continue;
             }
 
@@ -854,11 +854,11 @@ class Marshaller
     /**
      * dispatch Model.afterMarshal event.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that was marshaled.
+     * @param uim.cake.Datasource\IEntity $entity The entity that was marshaled.
      * @param array $data readOnly $data to use.
      * @param array<string, mixed> $options List of options that are readOnly.
      */
-    protected void dispatchAfterMarshal(EntityInterface $entity, array $data, array $options = []): void
+    protected void dispatchAfterMarshal(IEntity $entity, array $data, array $options = []): void
     {
         $data = new ArrayObject($data);
         $options = new ArrayObject($options);

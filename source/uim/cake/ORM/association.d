@@ -5,7 +5,7 @@ import uim.cake.Collection\ICollection;
 import uim.cake.core.App;
 import uim.cake.core.ConventionsTrait;
 import uim.cake.databases.expressions.IdentifierExpression;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.datasources.ResultSetDecorator;
 import uim.cake.datasources.IResultSet;
 import uim.cake.orm.locators.LocatorAwareTrait;
@@ -1176,11 +1176,11 @@ abstract class Association
      * Each implementing class should handle the cascaded delete as
      * required.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity that started the cascaded delete.
+     * @param uim.cake.Datasource\IEntity $entity The entity that started the cascaded delete.
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success
      */
-    abstract function cascadeDelete(EntityInterface $entity, array $options = []): bool;
+    abstract function cascadeDelete(IEntity $entity, array $options = []): bool;
 
     /**
      * Returns whether the passed table is the owning side for this
@@ -1196,11 +1196,11 @@ abstract class Association
      * Extract the target"s association data our from the passed entity and proxies
      * the saving operation to the target table.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity the data to be saved
+     * @param uim.cake.Datasource\IEntity $entity the data to be saved
      * @param array<string, mixed> $options The options for saving associated data.
-     * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
+     * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.orm.Table::save()
      */
-    abstract function saveAssociated(EntityInterface $entity, array $options = []);
+    abstract function saveAssociated(IEntity $entity, array $options = []);
 }

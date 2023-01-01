@@ -3,10 +3,10 @@ module uim.cake.orm.Association;
 import uim.cake.Collection\Collection;
 import uim.cake.databases.expressions.FieldInterface;
 import uim.cake.databases.expressions.QueryExpression;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.datasources.InvalidPropertyInterface;
 import uim.cake.orm.Association;
-import uim.cake.orm.associations.Loader\SelectLoader;
+import uim.cake.orm.associations.loaders.SelectLoader;
 import uim.cake.orm.Query;
 import uim.cake.orm.Table;
 use Closure;
@@ -116,14 +116,14 @@ class HasMany : Association
      * saved on the target table for this association by passing supplied
      * `$options`
      *
-     * @param uim.cake.Datasource\EntityInterface $entity an entity from the source table
+     * @param uim.cake.Datasource\IEntity $entity an entity from the source table
      * @param array<string, mixed> $options options to be passed to the save method in the target table
-     * @return uim.cake.Datasource\EntityInterface|false false if $entity could not be saved, otherwise it returns
+     * @return uim.cake.Datasource\IEntity|false false if $entity could not be saved, otherwise it returns
      * the saved entity
      * @see uim.cake.orm.Table::save()
      * @throws \InvalidArgumentException when the association data cannot be traversed.
      */
-    function saveAssociated(EntityInterface $entity, array $options = []) {
+    function saveAssociated(IEntity $entity, array $options = []) {
         $targetEntities = $entity.get(this.getProperty());
 
         $isEmpty = in_array($targetEntities, [null, [], "", false], true);
@@ -174,7 +174,7 @@ class HasMany : Association
      *
      * @param array $foreignKeyReference The foreign key reference defining the link between the
      * target entity, and the parent entity.
-     * @param uim.cake.Datasource\EntityInterface $parentEntity The source entity containing the target
+     * @param uim.cake.Datasource\IEntity $parentEntity The source entity containing the target
      * entities to be saved.
      * @param array $entities list of entities
      * to persist in target table and to link to the parent entity
@@ -183,7 +183,7 @@ class HasMany : Association
      */
     protected function _saveTarget(
         array $foreignKeyReference,
-        EntityInterface $parentEntity,
+        IEntity $parentEntity,
         array $entities,
         array $options
     ): bool {
@@ -192,7 +192,7 @@ class HasMany : Association
         $original = $entities;
 
         foreach ($entities as $k: $entity) {
-            if (!($entity instanceof EntityInterface)) {
+            if (!($entity instanceof IEntity)) {
                 break;
             }
 
@@ -242,14 +242,14 @@ class HasMany : Association
      *
      * `$user.get("articles")` will contain all articles in `$allArticles` after linking
      *
-     * @param uim.cake.Datasource\EntityInterface $sourceEntity the row belonging to the `source` side
+     * @param uim.cake.Datasource\IEntity $sourceEntity the row belonging to the `source` side
      * of this association
      * @param array $targetEntities list of entities belonging to the `target` side
      * of this association
      * @param array<string, mixed> $options list of options to be passed to the internal `save` call
      * @return bool true on success, false otherwise
      */
-    function link(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
+    function link(IEntity $sourceEntity, array $targetEntities, array $options = []): bool
     {
         $saveStrategy = this.getSaveStrategy();
         this.setSaveStrategy(self::SAVE_APPEND);
@@ -268,7 +268,7 @@ class HasMany : Association
             return this.saveAssociated($sourceEntity, $options);
         });
 
-        $ok = ($savedEntity instanceof EntityInterface);
+        $ok = ($savedEntity instanceof IEntity);
 
         this.setSaveStrategy($saveStrategy);
 
@@ -310,7 +310,7 @@ class HasMany : Association
      *
      * `$article.get("articles")` will contain only `[$article4]` after deleting in the database
      *
-     * @param uim.cake.Datasource\EntityInterface $sourceEntity an entity persisted in the source table for
+     * @param uim.cake.Datasource\IEntity $sourceEntity an entity persisted in the source table for
      * this association
      * @param array $targetEntities list of entities persisted in the target table for
      * this association
@@ -319,7 +319,7 @@ class HasMany : Association
      * @throws \InvalidArgumentException if non persisted entities are passed or if
      * any of them is lacking a primary key value
      */
-    void unlink(EntityInterface $sourceEntity, array $targetEntities, $options = []): void
+    void unlink(IEntity $sourceEntity, array $targetEntities, $options = []): void
     {
         if (is_bool($options)) {
             $options = [
@@ -340,7 +340,7 @@ class HasMany : Association
         $conditions = [
             "OR": (new Collection($targetEntities))
                 .map(function ($entity) use ($targetPrimaryKey) {
-                    /** @var uim.cake.datasources.EntityInterface $entity */
+                    /** @var uim.cake.datasources.IEntity $entity */
                     return $entity.extract($targetPrimaryKey);
                 })
                 .toList(),
@@ -399,7 +399,7 @@ class HasMany : Association
      *
      * `$author.get("articles")` will contain only `[$article1, $article3]` at the end
      *
-     * @param uim.cake.Datasource\EntityInterface $sourceEntity an entity persisted in the source table for
+     * @param uim.cake.Datasource\IEntity $sourceEntity an entity persisted in the source table for
      * this association
      * @param array $targetEntities list of entities from the target table to be linked
      * @param array<string, mixed> $options list of options to be passed to the internal `save`/`delete` calls
@@ -408,14 +408,14 @@ class HasMany : Association
      * any of them is lacking a primary key value
      * @return bool success
      */
-    function replace(EntityInterface $sourceEntity, array $targetEntities, array $options = []): bool
+    function replace(IEntity $sourceEntity, array $targetEntities, array $options = []): bool
     {
         $property = this.getProperty();
         $sourceEntity.set($property, $targetEntities);
         $saveStrategy = this.getSaveStrategy();
         this.setSaveStrategy(self::SAVE_REPLACE);
         $result = this.saveAssociated($sourceEntity, $options);
-        $ok = ($result instanceof EntityInterface);
+        $ok = ($result instanceof IEntity);
 
         if ($ok) {
             $sourceEntity = $result;
@@ -431,7 +431,7 @@ class HasMany : Association
      *
      * @param array $foreignKeyReference The foreign key reference defining the link between the
      * target entity, and the parent entity.
-     * @param uim.cake.Datasource\EntityInterface $entity the entity which should have its associated entities unassigned
+     * @param uim.cake.Datasource\IEntity $entity the entity which should have its associated entities unassigned
      * @param uim.cake.orm.Table $target The associated table
      * @param iterable $remainingEntities Entities that should not be deleted
      * @param array<string, mixed> $options list of options accepted by `Table::delete()`
@@ -439,7 +439,7 @@ class HasMany : Association
      */
     protected function _unlinkAssociated(
         array $foreignKeyReference,
-        EntityInterface $entity,
+        IEntity $entity,
         Table $target,
         iterable $remainingEntities = [],
         array $options = []
@@ -448,7 +448,7 @@ class HasMany : Association
         $exclusions = new Collection($remainingEntities);
         $exclusions = $exclusions.map(
             function ($ent) use ($primaryKey) {
-                /** @var uim.cake.datasources.EntityInterface $ent */
+                /** @var uim.cake.datasources.IEntity $ent */
                 return $ent.extract($primaryKey);
             }
         )
@@ -638,7 +638,7 @@ class HasMany : Association
     }
 
 
-    function cascadeDelete(EntityInterface $entity, array $options = []): bool
+    function cascadeDelete(IEntity $entity, array $options = []): bool
     {
         $helper = new DependentDeleteHelper();
 

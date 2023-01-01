@@ -1,7 +1,7 @@
 module uim.cake.ORM;
 
 use ArrayIterator;
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.orm.locators.ILocator;
 use InvalidArgumentException;
@@ -179,13 +179,13 @@ class AssociationCollection : IteratorAggregate
      * is the owning side.
      *
      * @param uim.cake.orm.Table $table The table entity is for.
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to save associated data for.
+     * @param uim.cake.Datasource\IEntity $entity The entity to save associated data for.
      * @param array $associations The list of associations to save parents from.
      *   associations not in this list will not be saved.
      * @param array<string, mixed> $options The options for the save operation.
      * @return bool Success
      */
-    function saveParents(Table $table, EntityInterface $entity, array $associations, array $options = []): bool
+    function saveParents(Table $table, IEntity $entity, array $associations, array $options = []): bool
     {
         if (empty($associations)) {
             return true;
@@ -201,13 +201,13 @@ class AssociationCollection : IteratorAggregate
      * is not the owning side.
      *
      * @param uim.cake.orm.Table $table The table entity is for.
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to save associated data for.
+     * @param uim.cake.Datasource\IEntity $entity The entity to save associated data for.
      * @param array $associations The list of associations to save children from.
      *   associations not in this list will not be saved.
      * @param array<string, mixed> $options The options for the save operation.
      * @return bool Success
      */
-    function saveChildren(Table $table, EntityInterface $entity, array $associations, array $options): bool
+    function saveChildren(Table $table, IEntity $entity, array $associations, array $options): bool
     {
         if (empty($associations)) {
             return true;
@@ -220,7 +220,7 @@ class AssociationCollection : IteratorAggregate
      * Helper method for saving an association"s data.
      *
      * @param uim.cake.orm.Table $table The table the save is currently operating on
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to save
+     * @param uim.cake.Datasource\IEntity $entity The entity to save
      * @param array $associations Array of associations to save.
      * @param array<string, mixed> $options Original options
      * @param bool $owningSide Compared with association classes"
@@ -230,7 +230,7 @@ class AssociationCollection : IteratorAggregate
      */
     protected function _saveAssociations(
         Table $table,
-        EntityInterface $entity,
+        IEntity $entity,
         array $associations,
         array $options,
         bool $owningSide
@@ -265,14 +265,14 @@ class AssociationCollection : IteratorAggregate
      * Helper method for saving an association"s data.
      *
      * @param uim.cake.orm.Association $association The association object to save with.
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to save
+     * @param uim.cake.Datasource\IEntity $entity The entity to save
      * @param array<string, mixed> $nested Options for deeper associations
      * @param array<string, mixed> $options Original options
      * @return bool Success
      */
     protected function _save(
         Association $association,
-        EntityInterface $entity,
+        IEntity $entity,
         array $nested,
         array $options
     ): bool {
@@ -290,11 +290,11 @@ class AssociationCollection : IteratorAggregate
      * Cascade a delete across the various associations.
      * Cascade first across associations for which cascadeCallbacks is true.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to delete associations for.
+     * @param uim.cake.Datasource\IEntity $entity The entity to delete associations for.
      * @param array<string, mixed> $options The options used in the delete operation.
      * @return bool
      */
-    function cascadeDelete(EntityInterface $entity, array $options): bool
+    function cascadeDelete(IEntity $entity, array $options): bool
     {
         $noCascade = [];
         foreach (_items as $assoc) {

@@ -1,6 +1,6 @@
 module uim.cake.orm.Rule;
 
-import uim.cake.datasources.EntityInterface;
+import uim.cake.datasources.IEntity;
 import uim.cake.orm.Association;
 import uim.cake.orm.Table;
 use RuntimeException;
@@ -56,13 +56,13 @@ class ExistsIn
     /**
      * Performs the existence check
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity from where to extract the fields
+     * @param uim.cake.Datasource\IEntity $entity The entity from where to extract the fields
      * @param array<string, mixed> $options Options passed to the check,
      * where the `repository` key is required.
      * @throws \RuntimeException When the rule refers to an undefined association.
      * @return bool
      */
-    function __invoke(EntityInterface $entity, array $options): bool
+    function __invoke(IEntity $entity, array $options): bool
     {
         if (is_string(_repository)) {
             if (!$options["repository"].hasAssociation(_repository)) {
@@ -132,10 +132,10 @@ class ExistsIn
     /**
      * Checks whether the given entity fields are nullable and null.
      *
-     * @param uim.cake.Datasource\EntityInterface $entity The entity to check.
+     * @param uim.cake.Datasource\IEntity $entity The entity to check.
      * @param uim.cake.orm.Table $source The table to use schema from.
      */
-    protected bool _fieldsAreNull(EntityInterface $entity, Table $source): bool
+    protected bool _fieldsAreNull(IEntity $entity, Table $source): bool
     {
         $nulls = 0;
         $schema = $source.getSchema();
