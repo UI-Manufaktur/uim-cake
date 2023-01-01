@@ -70,7 +70,7 @@ class FileEngine : CacheEngine
         super.init($config);
 
         if (_config["path"] == null) {
-            _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
+            _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR ~ "cake_cache" ~ DIRECTORY_SEPARATOR;
         }
         if (substr(_config["path"], -1) != DIRECTORY_SEPARATOR) {
             _config["path"] .= DIRECTORY_SEPARATOR;

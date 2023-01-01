@@ -216,7 +216,7 @@ trait CollectionTrait
             $pathValue = $callback($value);
             if ($pathValue == null) {
                 throw new InvalidArgumentException(
-                    "Cannot group by path that does not exist or contains a null value. " .
+                    "Cannot group by path that does not exist or contains a null value~ " ~
                     "Use a callback to return a default value for that path."
                 );
             }
@@ -235,7 +235,7 @@ trait CollectionTrait
             $pathValue = $callback($value);
             if ($pathValue == null) {
                 throw new InvalidArgumentException(
-                    "Cannot index by path that does not exist or contains a null value. " .
+                    "Cannot index by path that does not exist or contains a null value~ " ~
                     "Use a callback to return a default value for that path."
                 );
             }

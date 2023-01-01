@@ -65,7 +65,7 @@ class CompletionCommand : Command : ICommandCollectionAware
             "",
             myModeHelp,
             "",
-            "This command is not intended to be called manually, and should be invoked from a " .
+            "This command is not intended to be called manually, and should be invoked from a " ~
                 "terminal completion script.",
         ]);
 

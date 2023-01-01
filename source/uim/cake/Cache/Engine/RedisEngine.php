@@ -98,7 +98,7 @@ class RedisEngine : CacheEngine {
             }
         } catch (RedisException $e) {
             if (class_exists(Log::class)) {
-                Log::error("RedisEngine could not connect. Got error: " . $e.getMessage());
+                Log::error("RedisEngine could not connect. Got error: " ~ $e.getMessage());
             }
 
             return false;
@@ -226,7 +226,7 @@ class RedisEngine : CacheEngine {
 
         $isAllDeleted = true;
         $iterator = null;
-        $pattern = _config["prefix"] . "*";
+        $pattern = _config["prefix"] ~ "*";
 
         while (true) {
             $keys = _Redis.scan($iterator, $pattern, (int)_config["scanCount"]);
@@ -256,7 +256,7 @@ class RedisEngine : CacheEngine {
 
         $isAllDeleted = true;
         $iterator = null;
-        $pattern = _config["prefix"] . "*";
+        $pattern = _config["prefix"] ~ "*";
 
         while (true) {
             $keys = _Redis.scan($iterator, $pattern, (int)_config["scanCount"]);

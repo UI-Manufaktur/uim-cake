@@ -55,7 +55,7 @@ class SchemacacheBuildCommand : Command {
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription(
-            "Build all metadata caches for the connection. If a " .
+            "Build all metadata caches for the connection. If a " ~
             "table name is provided, only that table will be cached."
         ).addOption("connection", [
             "help":"The connection to build/clear metadata cache data for.",

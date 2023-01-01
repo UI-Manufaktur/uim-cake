@@ -126,10 +126,10 @@ class MemcachedEngine : CacheEngine
         if ($serverList) {
             if (_Memcached.isPersistent()) {
                 foreach ($server; $serverList) {
-                    if (!in_array($server["host"] . ":" . $server["port"], _config["servers"], true)) {
+                    if (!in_array($server["host"] ~ ":" ~ $server["port"], _config["servers"], true)) {
                         throw new InvalidArgumentException(
-                            "Invalid cache configuration. Multiple persistent cache configurations are detected" .
-                            " with different `servers` values. `servers` values for persistent cache configurations" .
+                            "Invalid cache configuration. Multiple persistent cache configurations are detected" ~
+                            " with different `servers` values. `servers` values for persistent cache configurations" ~
                             " must be the same when using the same persistence id."
                         );
                     }
@@ -194,7 +194,7 @@ class MemcachedEngine : CacheEngine
 
         if (
             $serializer != "php" &&
-            !constant("Memcached::HAVE_" . strtoupper($serializer))
+            !constant("Memcached::HAVE_" ~ strtoupper($serializer))
         ) {
             throw new InvalidArgumentException(
                 sprintf("Memcached extension is not compiled with %s support", $serializer)

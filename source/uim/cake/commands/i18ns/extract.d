@@ -180,13 +180,13 @@ class I18nExtractCommand : Command {
             _output = (string)$args.getOption("output");
         } elseif ($args.hasOption("plugin")) {
             _output = Plugin::path(myPlugin)
-                . "resources" . DIRECTORY_SEPARATOR
-                . "locales" . DIRECTORY_SEPARATOR;
+                ~ "resources" ~ DIRECTORY_SEPARATOR
+                ~ "locales" ~ DIRECTORY_SEPARATOR;
         } else {
             myMessage = "What is the path you would like to output?\n[Q]uit";
             $localePaths = App::path("locales");
             if (!$localePaths) {
-                $localePaths[] = ROOT . "resources" . DIRECTORY_SEPARATOR . "locales";
+                $localePaths[] = ROOT ~ "resources" ~ DIRECTORY_SEPARATOR ~ "locales";
             }
             while (true) {
                 $response = $io.ask(
@@ -205,7 +205,7 @@ class I18nExtractCommand : Command {
 
                 $io.err("");
                 $io.err(
-                    "<error>The directory path you supplied was " .
+                    "<error>The directory path you supplied was " ~
                     "not found. Please try again.</error>"
                 );
                 $io.err("");
@@ -283,9 +283,9 @@ class I18nExtractCommand : Command {
         $io.hr();
         $io.out("Paths:");
         foreach (myPath; _paths) {
-            $io.out("   " . myPath);
+            $io.out("   " ~ myPath);
         }
-        $io.out("Output Directory: " . _output);
+        $io.out("Output Directory: " ~ _output);
         $io.hr();
         _extractTokens($args, $io);
         _buildFiles($args);
@@ -309,8 +309,8 @@ class I18nExtractCommand : Command {
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription(
-            "Extract i18n POT files from application source files. " .
-            "Source files are parsed and string literal format strings " .
+            "Extract i18n POT files from application source files~ " ~
+            "Source files are parsed and string literal format strings " ~
             "provided to the <info>__</info> family of functions are extracted."
         ).addOption("app", [
             "help":"Directory where your application is located.",
@@ -330,10 +330,10 @@ class I18nExtractCommand : Command {
             "help":"Ignores all files in plugins if this command is run inside from the same app directory.",
         ]).addOption("plugin", [
             "help":"Extracts tokens only from the plugin specified and "
-                . "puts the result in the plugin\"s `locales` directory.",
+                ~ "puts the result in the plugin\"s `locales` directory.",
             "short":"p",
         ]).addOption("exclude", [
-            "help":"Comma separated list of directories to exclude." .
+            "help":"Comma separated list of directories to exclude." ~
                 " Any path containing a path segment with the provided values will be skipped. E.g. test,vendors",
         ]).addOption("overwrite", [
             "boolean":true,
@@ -382,7 +382,7 @@ class I18nExtractCommand : Command {
             "__dx":["domain", "context", "singular"],
             "__dxn":["domain", "context", "singular", "plural"],
         ];
-        $pattern = "/(" . implode("|", array_keys($functions)) . ")\s*\(/";
+        $pattern = "/(" ~ implode("|", array_keys($functions)) ~ ")\s*\(/";
 
         foreach (myfile; _files) {
             _file = myfile;
@@ -461,7 +461,7 @@ class I18nExtractCommand : Command {
                         "file":_file,
                         "line":$line,
                     ];
-                    $details["file"] = "." . str_replace(ROOT, "", $details["file"]);
+                    $details["file"] = "." ~ str_replace(ROOT, "", $details["file"]);
                     if ($plural  !is null) {
                         $details["msgid_plural"] = $plural;
                     }
@@ -503,14 +503,14 @@ class I18nExtractCommand : Command {
                         foreach (myfile, $lines; myfiles) {
                             $lines = array_unique($lines);
                             foreach ($lines as $line) {
-                                $occurrences[] = myfile . ":" . $line;
+                                $occurrences[] = myfile ~ ":" ~ $line;
                             }
                         }
                         $occurrences = implode("\n#: ", $occurrences);
 
                         $header = "#: "
                             . str_replace(DIRECTORY_SEPARATOR, "/", $occurrences)
-                            . "\n";
+                            ~ "\n";
                     }
 
                     $sentence = "";
@@ -579,11 +579,11 @@ class I18nExtractCommand : Command {
                 $domain = substr($domain, $slashPosition + 1);
             }
 
-            myfilename = str_replace("/", "_", $domain) . ".pot";
+            myfilename = str_replace("/", "_", $domain) ~ ".pot";
             $outputPath = _output . myfilename;
 
             if (this.checkUnchanged($outputPath, $headerLength, $output) == true) {
-                $io.out(myfilename . " is unchanged. Skipping.");
+                $io.out(myfilename ~ " is unchanged. Skipping.");
                 continue;
             }
 
@@ -598,7 +598,7 @@ class I18nExtractCommand : Command {
                 if (strtoupper($response) == "N") {
                     $response = "";
                     while (!$response) {
-                        $response = $io.ask("What would you like to name this file?", "new_" . myfilename);
+                        $response = $io.ask("What would you like to name this file?", "new_" ~ myfilename);
                         myfilename = $response;
                     }
                 } elseif (strtoupper($response) == "A") {
@@ -617,7 +617,7 @@ class I18nExtractCommand : Command {
      * @return Translation template header
      */
     protected string _writeHeader(string domain) {
-        $projectIdVersion = $domain == "cake" ? "UIM " . Configure::version() : "PROJECT VERSION";
+        $projectIdVersion = $domain == "cake" ? "UIM " ~ Configure::version() : "PROJECT VERSION";
 
         $output = "# LANGUAGE translation of UIM Application\n";
         $output .= "# Copyright YEAR NAME <EMAIL@ADDRESS>\n";
@@ -625,8 +625,8 @@ class I18nExtractCommand : Command {
         $output .= "#, fuzzy\n";
         $output .= "msgid \"\"\n";
         $output .= "msgstr \"\"\n";
-        $output .= ""Project-Id-Version: " . $projectIdVersion . "\\n\"\n";
-        $output .= ""POT-Creation-Date: " . date("Y-m-d H:iO") . "\\n\"\n";
+        $output .= ""Project-Id-Version: " ~ $projectIdVersion ~ "\\n\"\n";
+        $output .= ""POT-Creation-Date: " ~ date("Y-m-d H:iO") ~ "\\n\"\n";
         $output .= "\"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\\n\"\n";
         $output .= "\"Last-Translator: NAME <EMAIL@ADDRESS>\\n\"\n";
         $output .= "\"Language-Team: LANGUAGE <EMAIL@ADDRESS>\\n\"\n";
@@ -775,7 +775,7 @@ class I18nExtractCommand : Command {
                 }
                 $exclude[] = preg_quote($e, "/");
             }
-            $pattern = "/" . implode("|", $exclude) . "/";
+            $pattern = "/" ~ implode("|", $exclude) ~ "/";
         }
 
         foreach (_paths as myPath) {

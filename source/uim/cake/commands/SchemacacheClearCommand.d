@@ -55,7 +55,7 @@ class SchemacacheClearCommand : Command {
      */
     ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
       $parser.setDescription(
-          "Clear all metadata caches for the connection. If a " .
+          "Clear all metadata caches for the connection. If a " ~
           "table name is provided, only that table will be removed."
       ).addOption("connection", [
           "help":"The connection to build/clear metadata cache data for.",

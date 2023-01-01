@@ -42,7 +42,7 @@ class I18nCommand : Command {
                     break;
                 default:
                     $io.err(
-                        "You have made an invalid selection. " .
+                        "You have made an invalid selection~ " ~
                         "Please choose a command to execute by entering E, I, H, or Q."
                     );
             }

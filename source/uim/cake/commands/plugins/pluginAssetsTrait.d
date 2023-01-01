@@ -43,7 +43,7 @@ trait PluginAssetsTrait
         myPlugins = [];
 
         foreach (myPlugin; myPluginsList) {
-            myPath = Plugin::path(myPlugin) . "webroot";
+            myPath = Plugin::path(myPlugin) ~ "webroot";
             if (!is_dir(myPath)) {
                 this.io.verbose("", 1);
                 this.io.verbose(
@@ -65,7 +65,7 @@ trait PluginAssetsTrait
             }
 
             myPlugins[myPlugin] = [
-                "srcPath":Plugin::path(myPlugin) . "webroot",
+                "srcPath":Plugin::path(myPlugin) ~ "webroot",
                 "destDir":$dir,
                 "link":$link,
                 "moduled":$moduled,
@@ -85,7 +85,7 @@ trait PluginAssetsTrait
     protected void _process(array myPlugins, bool shouldCopy = false, bool shouldOverwrite = false) {
         foreach (myPlugin; myConfig; myPlugins) {
             this.io.out();
-            this.io.out("For plugin: " . myPlugin);
+            this.io.out("For plugin: " ~ myPlugin);
             this.io.hr();
 
             if (
@@ -102,7 +102,7 @@ trait PluginAssetsTrait
                     continue;
                 } elseif (!shouldOverwrite) {
                     this.io.verbose(
-                        myDestination . " already exists",
+                        myDestination ~ " already exists",
                         1
                     );
 
@@ -138,7 +138,7 @@ trait PluginAssetsTrait
     protected bool _remove(array myConfig) {
         if (myConfig["moduled"] && !is_dir(myConfig["destDir"])) {
             this.io.verbose(
-                myConfig["destDir"] . myConfig["link"] . " does not exist",
+                myConfig["destDir"] . myConfig["link"] ~ " does not exist",
                 1
             );
 
@@ -149,7 +149,7 @@ trait PluginAssetsTrait
 
         if (!file_exists(myDestination)) {
             this.io.verbose(
-                myDestination . " does not exist",
+                myDestination ~ " does not exist",
                 1
             );
 
@@ -160,11 +160,11 @@ trait PluginAssetsTrait
             // phpcs:ignore
             $success = DS == "\\" ? @rmdir(myDestination) : @unlink(myDestination);
             if ($success) {
-                this.io.out("Unlinked " . myDestination);
+                this.io.out("Unlinked " ~ myDestination);
 
                 return true;
             } else {
-                this.io.err("Failed to unlink  " . myDestination);
+                this.io.err("Failed to unlink  " ~ myDestination);
 
                 return false;
             }
@@ -172,11 +172,11 @@ trait PluginAssetsTrait
 
         $fs = new Filesystem();
         if ($fs.deleteDir(myDestination)) {
-            this.io.out("Deleted " . myDestination);
+            this.io.out("Deleted " ~ myDestination);
 
             return true;
         } else {
-            this.io.err("Failed to delete " . myDestination);
+            this.io.err("Failed to delete " ~ myDestination);
 
             return false;
         }
@@ -195,12 +195,12 @@ trait PluginAssetsTrait
         umask($old);
 
         if (myResult) {
-            this.io.out("Created directory " . $dir);
+            this.io.out("Created directory " ~ $dir);
 
             return true;
         }
 
-        this.io.err("Failed creating directory " . $dir);
+        this.io.err("Failed creating directory " ~ $dir);
 
         return false;
     }
@@ -217,7 +217,7 @@ trait PluginAssetsTrait
         // phpcs:enable
 
         if (myResult) {
-            this.io.out("Created symlink " . $link);
+            this.io.out("Created symlink " ~ $link);
 
             return true;
         }
@@ -234,12 +234,12 @@ trait PluginAssetsTrait
     protected bool _copyDirectory(string source, string myDestinationination) {
         $fs = new Filesystem();
         if ($fs.copyDir($source, myDestinationination)) {
-            this.io.out("Copied assets to directory " . myDestinationination);
+            this.io.out("Copied assets to directory " ~ myDestinationination);
 
             return true;
         }
 
-        this.io.err("Error copying assets to directory " . myDestinationination);
+        this.io.err("Error copying assets to directory " ~ myDestinationination);
 
         return false;
     }

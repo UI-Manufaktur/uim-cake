@@ -178,8 +178,8 @@ class DigestAuthenticate : BasicAuthenticate
     string generateResponseHash(array $digest, string $password, string $method) {
         return md5(
             $password .
-            ":" . $digest["nonce"] . ":" . $digest["nc"] . ":" . $digest["cnonce"] . ":" . $digest["qop"] . ":" .
-            md5($method . ":" . $digest["uri"])
+            ":" ~ $digest["nonce"] ~ ":" ~ $digest["nc"] ~ ":" ~ $digest["cnonce"] ~ ":" ~ $digest["qop"] ~ ":" ~
+            md5($method ~ ":" ~ $digest["uri"])
         );
     }
 
@@ -192,7 +192,7 @@ class DigestAuthenticate : BasicAuthenticate
      * @return string the hashed password that can later be used with Digest authentication.
      */
     static string password(string $username, string $password, string $realm) {
-        return md5($username . ":" . $realm . ":" . $password);
+        return md5($username ~ ":" ~ $realm ~ ":" ~ $password);
     }
 
     /**
@@ -228,7 +228,7 @@ class DigestAuthenticate : BasicAuthenticate
         }
 
         return [
-            "WWW-Authenticate": "Digest " . implode(",", $opts),
+            "WWW-Authenticate": "Digest " ~ implode(",", $opts),
         ];
     }
 
@@ -238,8 +238,8 @@ class DigestAuthenticate : BasicAuthenticate
     protected string generateNonce() {
         $expiryTime = microtime(true) + this.getConfig("nonceLifetime");
         $secret = this.getConfig("secret");
-        $signatureValue = hash_hmac("sha256", $expiryTime . ":" . $secret, $secret);
-        $nonceValue = $expiryTime . ":" . $signatureValue;
+        $signatureValue = hash_hmac("sha256", $expiryTime ~ ":" ~ $secret, $secret);
+        $nonceValue = $expiryTime ~ ":" ~ $signatureValue;
 
         return base64_encode($nonceValue);
     }
@@ -264,7 +264,7 @@ class DigestAuthenticate : BasicAuthenticate
             return false;
         }
         $secret = this.getConfig("secret");
-        $check = hash_hmac("sha256", $expires . ":" . $secret, $secret);
+        $check = hash_hmac("sha256", $expires ~ ":" ~ $secret, $secret);
 
         return hash_equals($check, $checksum);
     }

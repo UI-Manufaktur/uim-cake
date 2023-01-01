@@ -38,7 +38,7 @@ class I18nInitCommand : Command {
         myPaths = App::path("locales");
         if ($args.hasOption("plugin")) {
             myPlugin = Inflector::camelize((string)$args.getOption("plugin"));
-            myPaths = [Plugin::path(myPlugin) . "resources" . DIRECTORY_SEPARATOR . "locales" . DIRECTORY_SEPARATOR];
+            myPaths = [Plugin::path(myPlugin) ~ "resources" ~ DIRECTORY_SEPARATOR ~ "locales" ~ DIRECTORY_SEPARATOR];
         }
 
         $response = $io.ask("What folder?", rtrim(myPaths[0], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR);
@@ -62,7 +62,7 @@ class I18nInitCommand : Command {
             myCount++;
         }
 
-        $io.out("Generated " . myCount . " PO files in " . myTargetFolder);
+        $io.out("Generated " ~ myCount ~ " PO files in " ~ myTargetFolder);
 
         return static::CODE_SUCCESS;
     }

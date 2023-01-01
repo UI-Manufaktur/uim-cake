@@ -63,7 +63,7 @@ class FileEngine : CacheEngine {
       super.init(myConfig);
 
       if (_config["path"] is null) {
-          _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR . "cake_cache" . DIRECTORY_SEPARATOR;
+          _config["path"] = sys_get_temp_dir() . DIRECTORY_SEPARATOR ~ "cake_cache" ~ DIRECTORY_SEPARATOR;
       }
       if (substr(_config["path"], -1) != DIRECTORY_SEPARATOR) {
           _config["path"] .= DIRECTORY_SEPARATOR;
@@ -399,7 +399,7 @@ class FileEngine : CacheEngine {
 
         if (preg_match("/[\/\\<>?:|*"]/", myKey)) {
             throw new InvalidArgumentException(
-                "Cache key `{myKey}` contains invalid characters. " .
+                "Cache key `{myKey}` contains invalid characters~ " ~
                 "You cannot use /, \\, <, >, ?, :, |, *, or " in cache keys."
             );
         }

@@ -30,7 +30,7 @@ class PluginUnloadCommand : Command {
             return static::CODE_ERROR;
         }
 
-        $app = APP . "Application.php";
+        $app = APP ~ "Application.php";
         if (file_exists($app) && this.modifyApplication($app, $plugin)) {
             $io.out("");
             $io.out(sprintf("%s modified", $app));

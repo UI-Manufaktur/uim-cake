@@ -121,7 +121,7 @@ class ApcuEngine : CacheEngine
     bool clear() {
         if (class_exists(APCUIterator::class, false)) {
             $iterator = new APCUIterator(
-                "/^" . preg_quote(_config["prefix"], "/") . "/",
+                "/^" ~ preg_quote(_config["prefix"], "/") ~ "/",
                 APC_ITER_NONE
             );
             apcu_delete($iterator);

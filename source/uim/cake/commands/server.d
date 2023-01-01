@@ -58,16 +58,16 @@ class ServerCommand : Command {
             _documentRoot = substr(_documentRoot, 0, strlen(_documentRoot) - 1);
         }
         if (preg_match("/^([a-z]:)[\\\]+(.+)$/i", _documentRoot, $m)) {
-            _documentRoot = $m[1] . "\\" . $m[2];
+            _documentRoot = $m[1] ~ "\\" ~ $m[2];
         }
 
         _iniPath = rtrim(_iniPath, DIRECTORY_SEPARATOR);
         if (preg_match("/^([a-z]:)[\\\]+(.+)$/i", _iniPath, $m)) {
-            _iniPath = $m[1] . "\\" . $m[2];
+            _iniPath = $m[1] ~ "\\" ~ $m[2];
         }
 
         $io.out();
-        $io.out(sprintf("<info>Welcome to UIM %s Console</info>", "v" . Configure::version()));
+        $io.out(sprintf("<info>Welcome to UIM %s Console</info>", "v" ~ Configure::version()));
         $io.hr();
         $io.out(sprintf("App : %s", Configure::read("App.dir")));
         $io.out(sprintf("Path: %s", APP));
@@ -98,9 +98,9 @@ class ServerCommand : Command {
         $command = sprintf("%s -c %s", $command, _iniPath);
       }
 
-      $command = sprintf("%s %s", $command, escapeshellarg(_documentRoot . "/index.php"));
+      $command = sprintf("%s %s", $command, escapeshellarg(_documentRoot ~ "/index.php"));
 
-      $port = ":" . _port;
+      $port = ":" ~ _port;
       $io.out(sprintf("built-in server is running in http://%s%s/", _host, $port));
       $io.out("You can exit with <info>`CTRL-C`</info>");
       system($command);
