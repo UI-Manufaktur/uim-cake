@@ -1,8 +1,8 @@
-module uim.cake.Collection\Iterator;
+module uim.cake.collections.Iterator;
 
 use ArrayIterator;
-import uim.cake.Collection\Collection;
-import uim.cake.Collection\ICollection;
+import uim.cake.collections.Collection;
+import uim.cake.collections.ICollection;
 use Traversable;
 
 /**
@@ -11,7 +11,7 @@ use Traversable;
  * results.
  *
  * @internal
- * @see uim.cake.Collection\Collection::stopWhen()
+ * @see uim.cake.collections.Collection::stopWhen()
  */
 class StoppableIterator : Collection
 {

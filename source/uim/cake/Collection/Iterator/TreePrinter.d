@@ -1,7 +1,7 @@
-module uim.cake.Collection\Iterator;
+module uim.cake.collections.Iterator;
 
-import uim.cake.Collection\ICollection;
-import uim.cake.Collection\CollectionTrait;
+import uim.cake.collections.ICollection;
+import uim.cake.collections.CollectionTrait;
 use RecursiveIterator;
 use RecursiveIteratorIterator;
 

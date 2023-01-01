@@ -1,6 +1,6 @@
 module uim.cake.Datasource;
 
-import uim.cake.Collection\Collection;
+import uim.cake.collections.Collection;
 use Countable;
 
 /**

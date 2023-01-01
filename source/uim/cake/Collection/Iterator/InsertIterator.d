@@ -1,6 +1,6 @@
-module uim.cake.Collection\Iterator;
+module uim.cake.collections.Iterator;
 
-import uim.cake.Collection\Collection;
+import uim.cake.collections.Collection;
 
 /**
  * This iterator will insert values into a property of each of the records returned.
@@ -13,7 +13,7 @@ class InsertIterator : Collection
     /**
      * The collection from which to extract the values to be inserted
      *
-     * @var uim.cake.Collection\Collection
+     * @var uim.cake.collections.Collection
      */
     protected $_values;
 

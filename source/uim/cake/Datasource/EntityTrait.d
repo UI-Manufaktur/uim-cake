@@ -1,6 +1,6 @@
 module uim.cake.Datasource;
 
-import uim.cake.Collection\Collection;
+import uim.cake.collections.Collection;
 import uim.cake.orm.Entity;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Inflector;

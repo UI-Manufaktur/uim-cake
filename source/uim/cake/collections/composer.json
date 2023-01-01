@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Cake\\Collection\\": "."
+            "Cake\\collections.\": "."
         },
         "files": [
             "functions.php"

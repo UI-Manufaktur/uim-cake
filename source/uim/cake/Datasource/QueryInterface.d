@@ -64,7 +64,7 @@ interface IQuery
      * and return the ResultSetDecorator object ready for streaming of results.
      *
      * ResultSetDecorator is a traversable object that : the methods found
-     * on Cake\Collection\Collection.
+     * on Cake\collections.Collection.
      *
      * @return uim.cake.Datasource\IResultSet
      */

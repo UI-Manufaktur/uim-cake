@@ -13,7 +13,7 @@ class InsertIterator : Collection {
     /**
      * The collection from which to extract the values to be inserted
      *
-     * @var uim.cake.Collection\Collection
+     * @var uim.cake.collections.Collection
      */
     protected _values;
 

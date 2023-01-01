@@ -1,6 +1,6 @@
-module uim.cake.Collection\Iterator;
+module uim.cake.collections.Iterator;
 
-import uim.cake.Collection\Collection;
+import uim.cake.collections.Collection;
 use RecursiveIterator;
 
 /**

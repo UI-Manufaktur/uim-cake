@@ -1,7 +1,7 @@
-module uim.cake.Collection\Iterator;
+module uim.cake.collections.Iterator;
 
-import uim.cake.Collection\ICollection;
-import uim.cake.Collection\CollectionTrait;
+import uim.cake.collections.ICollection;
+import uim.cake.collections.CollectionTrait;
 use RecursiveIterator;
 use RecursiveIteratorIterator;
 
@@ -71,7 +71,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
      * callable returning the key value.
      * @param string $spacer The string to use for prefixing the values according to
      * their depth in the tree
-     * @return uim.cake.Collection\Iterator\TreePrinter
+     * @return uim.cake.collections.Iterator\TreePrinter
      */
     function printer($valuePath, $keyPath = null, $spacer = "__") {
         if (!$keyPath) {

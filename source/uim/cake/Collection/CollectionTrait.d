@@ -2,18 +2,18 @@ module uim.cake.Collection;
 
 use AppendIterator;
 use ArrayIterator;
-import uim.cake.Collection\Iterator\BufferedIterator;
-import uim.cake.Collection\Iterator\ExtractIterator;
-import uim.cake.Collection\Iterator\FilterIterator;
-import uim.cake.Collection\Iterator\InsertIterator;
-import uim.cake.Collection\Iterator\MapReduce;
-import uim.cake.Collection\Iterator\NestIterator;
-import uim.cake.Collection\Iterator\ReplaceIterator;
-import uim.cake.Collection\Iterator\SortIterator;
-import uim.cake.Collection\Iterator\StoppableIterator;
-import uim.cake.Collection\Iterator\TreeIterator;
-import uim.cake.Collection\Iterator\UnfoldIterator;
-import uim.cake.Collection\Iterator\ZipIterator;
+import uim.cake.collections.Iterator\BufferedIterator;
+import uim.cake.collections.Iterator\ExtractIterator;
+import uim.cake.collections.Iterator\FilterIterator;
+import uim.cake.collections.Iterator\InsertIterator;
+import uim.cake.collections.Iterator\MapReduce;
+import uim.cake.collections.Iterator\NestIterator;
+import uim.cake.collections.Iterator\ReplaceIterator;
+import uim.cake.collections.Iterator\SortIterator;
+import uim.cake.collections.Iterator\StoppableIterator;
+import uim.cake.collections.Iterator\TreeIterator;
+import uim.cake.collections.Iterator\UnfoldIterator;
+import uim.cake.collections.Iterator\ZipIterator;
 use Countable;
 use InvalidArgumentException;
 use LimitIterator;
@@ -37,7 +37,7 @@ trait CollectionTrait
      * type of returned collection interface
      *
      * @param mixed ...$args Constructor arguments.
-     * @return uim.cake.Collection\ICollection
+     * @return uim.cake.collections.ICollection
      */
     protected function newCollection(...$args): ICollection
     {
@@ -251,12 +251,12 @@ trait CollectionTrait
         $callback = _propertyExtractor($path);
 
         $mapper = void ($value, $key, $mr) use ($callback) {
-            /** @var uim.cake.Collection\Iterator\MapReduce $mr */
+            /** @var uim.cake.collections.Iterator\MapReduce $mr */
             $mr.emitIntermediate($value, $callback($value));
         };
 
         $reducer = void ($values, $key, $mr) {
-            /** @var uim.cake.Collection\Iterator\MapReduce $mr */
+            /** @var uim.cake.collections.Iterator\MapReduce $mr */
             $mr.emit(count($values), $key);
         };
 
@@ -783,7 +783,7 @@ trait CollectionTrait
      * @param callable|null $operation A callable that allows you to customize the product result.
      * @param callable|null $filter A filtering callback that must return true for a result to be part
      *   of the final results.
-     * @return uim.cake.Collection\ICollection
+     * @return uim.cake.collections.ICollection
      * @throws \LogicException
      */
     function cartesianProduct(?callable $operation = null, ?callable $filter = null): ICollection
@@ -841,7 +841,7 @@ trait CollectionTrait
     /**
      * {@inheritDoc}
      *
-     * @return uim.cake.Collection\ICollection
+     * @return uim.cake.collections.ICollection
      * @throws \LogicException
      */
     function transpose(): ICollection

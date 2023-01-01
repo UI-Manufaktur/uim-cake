@@ -1,6 +1,6 @@
 module uim.cake.Datasource;
 
-import uim.cake.Collection\ICollection;
+import uim.cake.collections.ICollection;
 use Countable;
 use Serializable;
 

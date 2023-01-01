@@ -1,7 +1,7 @@
 module uim.cake.Datasource;
 
 use BadMethodCallException;
-import uim.cake.Collection\Iterator\MapReduce;
+import uim.cake.collections.Iterator\MapReduce;
 import uim.cake.datasources.exceptions.RecordNotFoundException;
 use InvalidArgumentException;
 use Traversable;
@@ -248,7 +248,7 @@ trait QueryTrait
      * and return the ResultSetDecorator object ready for streaming of results.
      *
      * ResultSetDecorator is a traversable object that : the methods found
-     * on Cake\Collection\Collection.
+     * on Cake\collections.Collection.
      *
      * @return uim.cake.Datasource\IResultSet
      */
@@ -295,7 +295,7 @@ trait QueryTrait
      * @param callable|null $reducer The reducing function.
      * @param bool $overwrite Set to true to overwrite existing map + reduce functions.
      * @return this
-     * @see uim.cake.Collection\Iterator\MapReduce for details on how to use emit data to the map reducer.
+     * @see uim.cake.collections.Iterator\MapReduce for details on how to use emit data to the map reducer.
      */
     function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false) {
         if ($overwrite) {
@@ -333,7 +333,7 @@ trait QueryTrait
      * after all the `MapReduce` routines for this query have been executed.
      *
      * Formatting callbacks will receive two arguments, the first one being an object
-     * implementing `uim.cake.Collection\ICollection`, that can be traversed and
+     * implementing `uim.cake.collections.ICollection`, that can be traversed and
      * modified at will. The second one being the query instance on which the formatter
      * callback is being applied.
      *

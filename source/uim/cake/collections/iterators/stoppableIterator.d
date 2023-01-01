@@ -9,7 +9,7 @@ import uim.cake;
  * results.
  *
  * @internal
- * @see uim.cake.Collection\Collection::stopWhen()
+ * @see uim.cake.collections.Collection::stopWhen()
  */
 class StoppableIterator : Collection {
     /**

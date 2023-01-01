@@ -23,7 +23,7 @@ $overOne = myCollection.filter(function (myValue, myKey, $iterator) {
 });
 ```
 
-The `Collection\CollectionTrait` allows you to integrate collection-like features into any Traversable object
+The `collections.CollectionTrait` allows you to integrate collection-like features into any Traversable object
 you have in your application as well.
 
 ## Documentation

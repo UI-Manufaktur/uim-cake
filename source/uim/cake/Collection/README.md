@@ -11,7 +11,7 @@ If you have ever used underscore.js, you have an idea of what you can expect fro
 Collections can be created using an array or Traversable object.  A simple use of a Collection would be:
 
 ```php
-import uim.cake.Collection\Collection;
+import uim.cake.collections.Collection;
 
 $items = ["a": 1, "b": 2, "c": 3];
 $collection = new Collection($items);
@@ -23,7 +23,7 @@ $overOne = $collection.filter(function ($value, $key, $iterator) {
 });
 ```
 
-The `Collection\CollectionTrait` allows you to integrate collection-like features into any Traversable object
+The `collections.CollectionTrait` allows you to integrate collection-like features into any Traversable object
 you have in your application as well.
 
 ## Documentation
