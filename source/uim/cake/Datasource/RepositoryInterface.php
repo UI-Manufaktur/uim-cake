@@ -14,10 +14,8 @@ interface RepositoryInterface
      */
     function setAlias(string $alias);
 
-    /**
-     * Returns the repository alias.
-     */
-    string getAlias(): string;
+    // Returns the repository alias.
+    string getAlias();
 
     /**
      * Sets the table registry key used to create this table instance.
@@ -27,10 +25,8 @@ interface RepositoryInterface
      */
     function setRegistryAlias(string $registryAlias);
 
-    /**
-     * Returns the table registry key used to create this table instance.
-     */
-    string getRegistryAlias(): string;
+    // Returns the table registry key used to create this table instance.
+    string getRegistryAlias();
 
     /**
      * Test to see if a Repository has a specific field/column.

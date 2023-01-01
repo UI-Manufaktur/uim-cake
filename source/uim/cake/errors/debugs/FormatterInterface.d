@@ -10,7 +10,7 @@ interface IFormatter
     /**
      * Convert a tree of INode objects into a plain text string.
      *
-     * @param uim.cake.Error\Debug\INode myNode The node tree to dump.
+     * @param uim.cake.Error\debugs.INode myNode The node tree to dump.
      */
     string dump(INode myNode);
 

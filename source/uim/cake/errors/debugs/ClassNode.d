@@ -16,7 +16,7 @@ class ClassNode : INode
     private $id;
 
     /**
-     * @var array<uim.cake.Error\Debug\PropertyNode>
+     * @var array<uim.cake.Error\debugs.PropertyNode>
      */
     private $properties = [];
 
@@ -34,7 +34,7 @@ class ClassNode : INode
     /**
      * Add a property
      *
-     * @param uim.cake.Error\Debug\PropertyNode myNode The property to add.
+     * @param uim.cake.Error\debugs.PropertyNode myNode The property to add.
      */
     void addProperty(PropertyNode myNode): void
     {
@@ -58,7 +58,7 @@ class ClassNode : INode
     /**
      * Get property nodes
      *
-     * @return array<uim.cake.Error\Debug\PropertyNode>
+     * @return array<uim.cake.Error\debugs.PropertyNode>
      */
     auto getChildren(): array
     {

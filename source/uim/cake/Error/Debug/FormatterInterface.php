@@ -17,7 +17,7 @@ interface FormatterInterface
     /**
      * Convert a tree of NodeInterface objects into a plain text string.
      *
-     * @param uim.cake.Error\Debug\NodeInterface $node The node tree to dump.
+     * @param uim.cake.Error\debugs.NodeInterface $node The node tree to dump.
      */
     string dump(NodeInterface $node): string;
 

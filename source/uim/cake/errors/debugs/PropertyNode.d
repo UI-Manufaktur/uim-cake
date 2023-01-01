@@ -13,7 +13,7 @@ class PropertyNode : INode {
     private $visibility;
 
     /**
-     * @var uim.cake.Error\Debug\INode
+     * @var uim.cake.Error\debugs.INode
      */
     private myValue;
 
@@ -22,7 +22,7 @@ class PropertyNode : INode {
      *
      * @param string myName The property name
      * @param string|null $visibility The visibility of the property.
-     * @param uim.cake.Error\Debug\INode myValue The property value node.
+     * @param uim.cake.Error\debugs.INode myValue The property value node.
      */
     this(string myName, Nullable!string visibility, INode myValue) {
         this.name = myName;
@@ -33,7 +33,7 @@ class PropertyNode : INode {
     /**
      * Get the value
      *
-     * @return uim.cake.Error\Debug\INode
+     * @return uim.cake.Error\debugs.INode
      */
     INode getValue() {
       return this.value;

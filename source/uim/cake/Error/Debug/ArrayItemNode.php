@@ -13,20 +13,20 @@
 class ArrayItemNode : NodeInterface
 {
     /**
-     * @var uim.cake.Error\Debug\NodeInterface
+     * @var uim.cake.Error\debugs.NodeInterface
      */
     private $key;
 
     /**
-     * @var uim.cake.Error\Debug\NodeInterface
+     * @var uim.cake.Error\debugs.NodeInterface
      */
     private $value;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Error\Debug\NodeInterface $key The node for the item key
-     * @param uim.cake.Error\Debug\NodeInterface $value The node for the array value
+     * @param uim.cake.Error\debugs.NodeInterface $key The node for the item key
+     * @param uim.cake.Error\debugs.NodeInterface $value The node for the array value
      */
     this(NodeInterface $key, NodeInterface $value) {
         this.key = $key;
@@ -36,7 +36,7 @@ class ArrayItemNode : NodeInterface
     /**
      * Get the value
      *
-     * @return uim.cake.Error\Debug\NodeInterface
+     * @return uim.cake.Error\debugs.NodeInterface
      */
     function getValue() {
         return this.value;
@@ -45,7 +45,7 @@ class ArrayItemNode : NodeInterface
     /**
      * Get the key
      *
-     * @return uim.cake.Error\Debug\NodeInterface
+     * @return uim.cake.Error\debugs.NodeInterface
      */
     function getKey() {
         return this.key;

@@ -10,7 +10,7 @@ interface INode
     /**
      * Get the child nodes of this node.
      *
-     * @return array<uim.cake.Error\Debug\INode>
+     * @return array<uim.cake.Error\debugs.INode>
      */
     auto getChildren(): array;
 

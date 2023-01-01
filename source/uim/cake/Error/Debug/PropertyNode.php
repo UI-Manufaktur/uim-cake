@@ -23,7 +23,7 @@ class PropertyNode : NodeInterface
     private $visibility;
 
     /**
-     * @var uim.cake.Error\Debug\NodeInterface
+     * @var uim.cake.Error\debugs.NodeInterface
      */
     private $value;
 
@@ -32,7 +32,7 @@ class PropertyNode : NodeInterface
      *
      * @param string aName The property name
      * @param string|null $visibility The visibility of the property.
-     * @param uim.cake.Error\Debug\NodeInterface $value The property value node.
+     * @param uim.cake.Error\debugs.NodeInterface $value The property value node.
      */
     this(string aName, ?string $visibility, NodeInterface $value) {
         this.name = $name;
@@ -43,7 +43,7 @@ class PropertyNode : NodeInterface
     /**
      * Get the value
      *
-     * @return uim.cake.Error\Debug\NodeInterface
+     * @return uim.cake.Error\debugs.NodeInterface
      */
     function getValue(): NodeInterface
     {

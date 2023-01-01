@@ -345,7 +345,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    protected function _foreignOnClause(string $on): string
+    protected string _foreignOnClause(string $on)
     {
         $parent = super._foreignOnClause($on);
 
@@ -353,7 +353,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    protected function _convertOnClause(string $clause): string
+    protected string _convertOnClause(string $clause)
     {
         switch ($clause) {
             case "NO_ACTION":
@@ -370,7 +370,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function columnSql(TableSchema $schema, string aName): string
+    string columnSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getColumn($name);
@@ -550,7 +550,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function indexSql(TableSchema $schema, string aName): string
+    string indexSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getIndex($name);
@@ -568,7 +568,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function constraintSql(TableSchema $schema, string aName): string
+    string constraintSql(TableSchema $schema, string aName)
     {
         /** @var array $data */
         $data = $schema.getConstraint($name);
@@ -589,7 +589,7 @@ class SqlserverSchemaDialect : SchemaDialect
      * @param string $prefix The key prefix
      * @param array $data Key data.
      */
-    protected string _keySql(string $prefix, array $data): string
+    protected string _keySql(string $prefix, array $data)
     {
         $columns = array_map(
             [_driver, "quoteIdentifier"],

@@ -77,7 +77,7 @@ class CachedCollection : ICollection
      * @param string aName The name to get a cache key for.
      * @return string The cache key.
      */
-    function cacheKey(string aName): string
+    string cacheKey(string aName)
     {
         return this.prefix . "_" . $name;
     }

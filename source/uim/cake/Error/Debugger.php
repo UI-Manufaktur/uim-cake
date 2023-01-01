@@ -2,21 +2,21 @@ module uim.cake.Error;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.errors.Debug\ArrayItemNode;
-import uim.cake.errors.Debug\ArrayNode;
-import uim.cake.errors.Debug\ClassNode;
-import uim.cake.errors.Debug\ConsoleFormatter;
-import uim.cake.errors.Debug\DebugContext;
-import uim.cake.errors.Debug\FormatterInterface;
-import uim.cake.errors.Debug\HtmlFormatter;
-import uim.cake.errors.Debug\NodeInterface;
-import uim.cake.errors.Debug\PropertyNode;
-import uim.cake.errors.Debug\ReferenceNode;
-import uim.cake.errors.Debug\ScalarNode;
-import uim.cake.errors.Debug\SpecialNode;
-import uim.cake.errors.Debug\TextFormatter;
-import uim.cake.errors.Renderer\HtmlErrorRenderer;
-import uim.cake.errors.Renderer\TextErrorRenderer;
+import uim.cake.errors.debugs.ArrayItemNode;
+import uim.cake.errors.debugs.ArrayNode;
+import uim.cake.errors.debugs.ClassNode;
+import uim.cake.errors.debugs.ConsoleFormatter;
+import uim.cake.errors.debugs.DebugContext;
+import uim.cake.errors.debugs.FormatterInterface;
+import uim.cake.errors.debugs.HtmlFormatter;
+import uim.cake.errors.debugs.NodeInterface;
+import uim.cake.errors.debugs.PropertyNode;
+import uim.cake.errors.debugs.ReferenceNode;
+import uim.cake.errors.debugs.ScalarNode;
+import uim.cake.errors.debugs.SpecialNode;
+import uim.cake.errors.debugs.TextFormatter;
+import uim.cake.errors.renderers.HtmlErrorRenderer;
+import uim.cake.errors.renderers.TextErrorRenderer;
 import uim.cake.logs.Log;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Security;
@@ -298,7 +298,7 @@ class Debugger
      * @param int $line The line number to create a link for.
      * @return string The formatted URL.
      */
-    static function editorUrl(string $file, int $line): string
+    static string editorUrl(string $file, int $line)
     {
         $instance = static::getInstance();
         $editor = $instance.getConfig('editor');
@@ -472,7 +472,7 @@ class Debugger
      * @param string $path Path to shorten.
      * @return string Normalized path
      */
-    static function trimPath(string $path): string
+    static string trimPath(string $path)
     {
         if (defined('APP') && strpos($path, APP) == 0) {
             return str_replace(APP, 'APP/', $path);
@@ -547,7 +547,7 @@ class Debugger
      * @param string $str The string to convert.
      * @return string
      */
-    protected static function _highlight(string $str): string
+    protected static string _highlight(string $str)
     {
         if (function_exists('hphp_log') || function_exists('hphp_gettid')) {
             return htmlentities($str);
@@ -572,7 +572,7 @@ class Debugger
     /**
      * Get the configured export formatter or infer one based on the environment.
      *
-     * @return uim.cake.Error\Debug\FormatterInterface
+     * @return uim.cake.Error\debugs.FormatterInterface
      * @unstable This method is not stable and may change in the future.
      * @since 4.1.0
      */
@@ -620,7 +620,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return string Variable as a formatted string
      */
-    static function exportVar($var, int $maxDepth = 3): string
+    static string exportVar($var, int $maxDepth = 3)
     {
         $context = new DebugContext($maxDepth);
         $node = static::export($var, $context);
@@ -635,7 +635,7 @@ class Debugger
      * @param int $maxDepth The depth to output to. Defaults to 3.
      * @return string Variable as a string
      */
-    static function exportVarAsPlainText($var, int $maxDepth = 3): string
+    static string exportVarAsPlainText($var, int $maxDepth = 3)
     {
         return (new TextFormatter()).dump(
             static::export($var, new DebugContext($maxDepth))
@@ -650,7 +650,7 @@ class Debugger
      *
      * @param mixed $var Variable to convert.
      * @param int $maxDepth The depth to generate nodes to. Defaults to 3.
-     * @return uim.cake.Error\Debug\NodeInterface The root node of the tree.
+     * @return uim.cake.Error\debugs.NodeInterface The root node of the tree.
      */
     static function exportVarAsNodes($var, int $maxDepth = 3): NodeInterface
     {
@@ -661,8 +661,8 @@ class Debugger
      * Protected export function used to keep track of indentation and recursion.
      *
      * @param mixed $var The variable to dump.
-     * @param uim.cake.Error\Debug\DebugContext $context Dump context
-     * @return uim.cake.Error\Debug\NodeInterface The dumped variable.
+     * @param uim.cake.Error\debugs.DebugContext $context Dump context
+     * @return uim.cake.Error\debugs.NodeInterface The dumped variable.
      */
     protected static function export($var, DebugContext $context): NodeInterface
     {
@@ -701,8 +701,8 @@ class Debugger
      * - schema
      *
      * @param array $var The array to export.
-     * @param uim.cake.Error\Debug\DebugContext $context The current dump context.
-     * @return uim.cake.Error\Debug\ArrayNode Exported array.
+     * @param uim.cake.Error\debugs.DebugContext $context The current dump context.
+     * @return uim.cake.Error\debugs.ArrayNode Exported array.
      */
     protected static function exportArray(array $var, DebugContext $context): ArrayNode
     {
@@ -737,8 +737,8 @@ class Debugger
      * Handles object to node conversion.
      *
      * @param object $var Object to convert.
-     * @param uim.cake.Error\Debug\DebugContext $context The dump context.
-     * @return uim.cake.Error\Debug\NodeInterface
+     * @param uim.cake.Error\debugs.DebugContext $context The dump context.
+     * @return uim.cake.Error\debugs.NodeInterface
      * @see uim.cake.Error\Debugger::exportVar()
      */
     protected static function exportObject(object $var, DebugContext $context): NodeInterface
@@ -817,7 +817,7 @@ class Debugger
      * @return string Returns the current format when getting.
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    static function getOutputFormat(): string
+    static string getOutputFormat()
     {
         deprecationWarning('Debugger::getOutputFormat() is deprecated.');
 
@@ -1033,7 +1033,7 @@ class Debugger
      * @param mixed $var The variable to get the type of.
      * @return string The type of variable.
      */
-    static function getType($var): string
+    static string getType($var)
     {
         $type = getTypeName($var);
 

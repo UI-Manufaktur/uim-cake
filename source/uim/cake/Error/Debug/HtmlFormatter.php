@@ -85,7 +85,7 @@ class HtmlFormatter : FormatterInterface
     /**
      * Convert a tree of NodeInterface objects into HTML
      *
-     * @param uim.cake.Error\Debug\NodeInterface $node The node tree to dump.
+     * @param uim.cake.Error\debugs.NodeInterface $node The node tree to dump.
      */
     string dump(NodeInterface $node): string
     {
@@ -102,7 +102,7 @@ class HtmlFormatter : FormatterInterface
     /**
      * Convert a tree of NodeInterface objects into HTML
      *
-     * @param uim.cake.Error\Debug\NodeInterface $var The node tree to dump.
+     * @param uim.cake.Error\debugs.NodeInterface $var The node tree to dump.
      * @param int $indent The current indentation level.
      */
     protected string export(NodeInterface $var, int $indent): string
@@ -138,7 +138,7 @@ class HtmlFormatter : FormatterInterface
     /**
      * Export an array type object
      *
-     * @param uim.cake.Error\Debug\ArrayNode $var The array to export.
+     * @param uim.cake.Error\debugs.ArrayNode $var The array to export.
      * @param int $indent The current indentation level.
      * @return string Exported array.
      */
@@ -171,7 +171,7 @@ class HtmlFormatter : FormatterInterface
     /**
      * Handles object to string conversion.
      *
-     * @param uim.cake.Error\Debug\ClassNode|uim.cake.Error\Debug\ReferenceNode $var Object to convert.
+     * @param uim.cake.Error\debugs.ClassNode|uim.cake.Error\debugs.ReferenceNode $var Object to convert.
      * @param int $indent The current indentation level.
      * @return string
      * @see uim.cake.Error\Debugger::exportVar()

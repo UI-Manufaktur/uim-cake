@@ -207,38 +207,38 @@ class Sqlserver : Driver
     }
 
 
-    function savePointSQL($name): string
+    string savePointSQL($name)
     {
         return "SAVE TRANSACTION t" . $name;
     }
 
 
-    function releaseSavePointSQL($name): string
+    string releaseSavePointSQL($name)
     {
         // SQLServer has no release save point operation.
         return "";
     }
 
 
-    function rollbackSavePointSQL($name): string
+    string rollbackSavePointSQL($name)
     {
         return "ROLLBACK TRANSACTION t" . $name;
     }
 
 
-    function disableForeignKeySQL(): string
+    string disableForeignKeySQL()
     {
         return "EXEC sp_MSforeachtable "ALTER TABLE ? NOCHECK CONSTRAINT all"";
     }
 
 
-    function enableForeignKeySQL(): string
+    string enableForeignKeySQL()
     {
         return "EXEC sp_MSforeachtable "ALTER TABLE ? WITH CHECK CHECK CONSTRAINT all"";
     }
 
 
-    function supports(string $feature): bool
+    string supports(string $feature): bool
     {
         switch ($feature) {
             case static::FEATURE_CTE:

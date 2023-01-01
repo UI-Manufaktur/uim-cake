@@ -2,19 +2,19 @@ module uim.cake.errors;
 
 import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
-import uim.cake.errors\Debug\ArrayItemNode;
-import uim.cake.errors\Debug\ArrayNode;
-import uim.cake.errors\Debug\ClassNode;
-import uim.cake.errors\Debug\ConsoleFormatter;
-import uim.cake.errors\Debug\DebugContext;
-import uim.cake.errors\Debug\IFormatter;
-import uim.cake.errors\Debug\HtmlFormatter;
-import uim.cake.errors\Debug\INode;
-import uim.cake.errors\Debug\PropertyNode;
-import uim.cake.errors\Debug\ReferenceNode;
-import uim.cake.errors\Debug\ScalarNode;
-import uim.cake.errors\Debug\SpecialNode;
-import uim.cake.errors\Debug\TextFormatter;
+import uim.cake.errors\debugs.ArrayItemNode;
+import uim.cake.errors\debugs.ArrayNode;
+import uim.cake.errors\debugs.ClassNode;
+import uim.cake.errors\debugs.ConsoleFormatter;
+import uim.cake.errors\debugs.DebugContext;
+import uim.cake.errors\debugs.IFormatter;
+import uim.cake.errors\debugs.HtmlFormatter;
+import uim.cake.errors\debugs.INode;
+import uim.cake.errors\debugs.PropertyNode;
+import uim.cake.errors\debugs.ReferenceNode;
+import uim.cake.errors\debugs.ScalarNode;
+import uim.cake.errors\debugs.SpecialNode;
+import uim.cake.errors\debugs.TextFormatter;
 import uim.cakegs\Log;
 import uim.cakeilities.Hash;
 import uim.cakeilities.Security;
@@ -542,7 +542,7 @@ class Debugger
     /**
      * Get the configured export formatter or infer one based on the environment.
      *
-     * @return uim.cake.Error\Debug\IFormatter
+     * @return uim.cake.Error\debugs.IFormatter
      * @unstable This method is not stable and may change in the future.
      * @since 4.1.0
      */
@@ -618,7 +618,7 @@ class Debugger
      *
      * @param mixed $var Variable to convert.
      * @param int $maxDepth The depth to generate nodes to. Defaults to 3.
-     * @return uim.cake.Error\Debug\INode The root node of the tree.
+     * @return uim.cake.Error\debugs.INode The root node of the tree.
      */
     static function exportVarAsNodes($var, int $maxDepth = 3): INode
     {
@@ -629,8 +629,8 @@ class Debugger
      * Protected export function used to keep track of indentation and recursion.
      *
      * @param mixed $var The variable to dump.
-     * @param uim.cake.Error\Debug\DebugContext $context Dump context
-     * @return uim.cake.Error\Debug\INode The dumped variable.
+     * @param uim.cake.Error\debugs.DebugContext $context Dump context
+     * @return uim.cake.Error\debugs.INode The dumped variable.
      */
     protected static function export($var, DebugContext $context): INode
     {
@@ -669,8 +669,8 @@ class Debugger
      * - schema
      *
      * @param array $var The array to export.
-     * @param uim.cake.Error\Debug\DebugContext $context The current dump context.
-     * @return uim.cake.Error\Debug\ArrayNode Exported array.
+     * @param uim.cake.Error\debugs.DebugContext $context The current dump context.
+     * @return uim.cake.Error\debugs.ArrayNode Exported array.
      */
     protected static function exportArray(array $var, DebugContext $context): ArrayNode
     {
@@ -705,8 +705,8 @@ class Debugger
      * Handles object to node conversion.
      *
      * @param object $var Object to convert.
-     * @param uim.cake.Error\Debug\DebugContext $context The dump context.
-     * @return uim.cake.Error\Debug\INode
+     * @param uim.cake.Error\debugs.DebugContext $context The dump context.
+     * @return uim.cake.Error\debugs.INode
      * @see uim.cake.Error\Debugger::exportVar()
      */
     protected static function exportObject(object $var, DebugContext $context): INode

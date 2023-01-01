@@ -12,7 +12,7 @@ import uim.cake.core.Configure;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.errors.ErrorHandler;
 import uim.cake.errors.ExceptionTrap;
-import uim.cake.errors.Renderer\WebExceptionRenderer;
+import uim.cake.errors.renderers.WebExceptionRenderer;
 import uim.cake.http.exceptions.RedirectException;
 import uim.cake.http.Response;
 use InvalidArgumentException;

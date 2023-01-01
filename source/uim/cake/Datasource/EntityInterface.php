@@ -134,10 +134,8 @@ interface EntityInterface : ArrayAccess, JsonSerializable
      */
     function setSource(string $alias);
 
-    /**
-     * Returns the alias of the repository from which this entity came from.
-     */
-    string getSource(): string;
+    // Returns the alias of the repository from which this entity came from.
+    string getSource();
 
     /**
      * Returns an array with the requested original fields

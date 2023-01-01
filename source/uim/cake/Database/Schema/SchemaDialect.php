@@ -40,7 +40,7 @@ abstract class SchemaDialect
      *
      * @param string $on The on clause
      */
-    protected string _foreignOnClause(string $on): string
+    protected string _foreignOnClause(string $on)
     {
         if ($on == TableSchema::ACTION_SET_NULL) {
             return "SET NULL";
@@ -66,7 +66,7 @@ abstract class SchemaDialect
      *
      * @param string $clause The on clause to convert.
      */
-    protected string _convertOnClause(string $clause): string
+    protected string _convertOnClause(string $clause)
     {
         if ($clause == "CASCADE" || $clause == "RESTRICT") {
             return strtolower($clause);
@@ -84,7 +84,7 @@ abstract class SchemaDialect
      *
      * @param array<string>|string $references The referenced columns of a foreign key constraint statement
      */
-    protected string _convertConstraintColumns($references): string
+    protected string _convertConstraintColumns($references)
     {
         if (is_string($references)) {
             return _driver.quoteIdentifier($references);
@@ -272,7 +272,7 @@ abstract class SchemaDialect
      * @param string aName The name of the column.
      * @return string SQL fragment.
      */
-    abstract function columnSql(TableSchema $schema, string aName): string;
+    abstract string columnSql(TableSchema $schema, string aName);
 
     /**
      * Generate the SQL queries needed to add foreign key constraints to the table
@@ -297,7 +297,7 @@ abstract class SchemaDialect
      * @param string aName The name of the column.
      * @return string SQL fragment.
      */
-    abstract function constraintSql(TableSchema $schema, string aName): string;
+    abstract string constraintSql(TableSchema $schema, string aName);
 
     /**
      * Generate the SQL fragment for a single index in a table.
@@ -306,7 +306,7 @@ abstract class SchemaDialect
      * @param string aName The name of the column.
      * @return string SQL fragment.
      */
-    abstract function indexSql(TableSchema $schema, string aName): string;
+    abstract string indexSql(TableSchema $schema, string aName);
 
     /**
      * Generate the SQL to truncate a table.

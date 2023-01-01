@@ -23,7 +23,7 @@ class ClassNode : NodeInterface
     private $id;
 
     /**
-     * @var array<uim.cake.Error\Debug\PropertyNode>
+     * @var array<uim.cake.Error\debugs.PropertyNode>
      */
     private $properties = [];
 
@@ -41,7 +41,7 @@ class ClassNode : NodeInterface
     /**
      * Add a property
      *
-     * @param uim.cake.Error\Debug\PropertyNode $node The property to add.
+     * @param uim.cake.Error\debugs.PropertyNode $node The property to add.
      */
     void addProperty(PropertyNode $node): void
     {
@@ -68,7 +68,7 @@ class ClassNode : NodeInterface
     /**
      * Get property nodes
      *
-     * @return array<uim.cake.Error\Debug\PropertyNode>
+     * @return array<uim.cake.Error\debugs.PropertyNode>
      */
     function getChildren(): array
     {

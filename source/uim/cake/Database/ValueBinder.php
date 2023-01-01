@@ -46,7 +46,7 @@ class ValueBinder
      * if it starts with a colon, then the same string is returned
      * @return string to be used as a placeholder in a query expression
      */
-    function placeholder(string $token): string
+    string placeholder(string $token)
     {
         $number = _bindingsCount++;
         if ($token[0] != ":" && $token != "?") {
