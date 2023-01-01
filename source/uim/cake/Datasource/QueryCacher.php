@@ -88,7 +88,7 @@ class QueryCacher
      * @return string
      * @throws \RuntimeException
      */
-    protected function _resolveKey(object $query): string
+    protected string _resolveKey(object $query)
     {
         if (is_string(_key)) {
             return _key;
