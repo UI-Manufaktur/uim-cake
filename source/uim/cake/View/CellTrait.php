@@ -53,7 +53,7 @@ trait CellTrait
         $className = App::className($pluginAndCell, "View/Cell", "Cell");
 
         if (!$className) {
-            throw new MissingCellException(["className": $pluginAndCell . "Cell"]);
+            throw new MissingCellException(["className": $pluginAndCell ~ "Cell"]);
         }
 
         if (!empty($data)) {

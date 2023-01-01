@@ -48,14 +48,14 @@ class TransactionStrategy : FixtureStrategyInterface
             if ($connection instanceof Connection) {
                 assert(
                     $connection.inTransaction() == false,
-                    "Cannot start transaction strategy inside a transaction. " .
+                    "Cannot start transaction strategy inside a transaction~ " ~
                     "Ensure you have closed all open transactions."
                 );
                 $connection.enableSavePoints();
                 if (!$connection.isSavePointsEnabled()) {
                     throw new RuntimeException(
-                        "Could not enable save points for the `{$connection.configName()}` connection. " .
-                            "Your database needs to support savepoints in order to use " .
+                        "Could not enable save points for the `{$connection.configName()}` connection~ " ~
+                            "Your database needs to support savepoints in order to use " ~
                             "TransactionStrategy."
                     );
                 }

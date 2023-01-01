@@ -54,9 +54,9 @@ class FixtureInjector : TestListener
     {
         if (empty(_first)) {
             deprecationWarning(
-                "You are using the listener based PHPUnit integration. " .
-                "This fixture system is deprecated, and we recommend you " .
-                "upgrade to the extension based PHPUnit integration. " .
+                "You are using the listener based PHPUnit integration~ " ~
+                "This fixture system is deprecated, and we recommend you " ~
+                "upgrade to the extension based PHPUnit integration~ " ~
                 "See https://book.cakephp.org/4/en/appendices/fixture-upgrade.html",
                 0
             );

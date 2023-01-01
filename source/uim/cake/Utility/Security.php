@@ -164,7 +164,7 @@ class Security
             return static::$_instance = new OpenSsl();
         }
         throw new InvalidArgumentException(
-            "No compatible crypto engine available. " .
+            "No compatible crypto engine available~ " ~
             "Load the openssl extension."
         );
     }

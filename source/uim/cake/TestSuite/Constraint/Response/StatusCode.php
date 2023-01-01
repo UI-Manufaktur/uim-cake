@@ -21,6 +21,6 @@ class StatusCode : StatusCodeBase
      */
     string failureDescription($other): string
     {
-        return "`" . $other . "` " . this.toString();
+        return "`" ~ $other ~ "` " ~ this.toString();
     }
 }

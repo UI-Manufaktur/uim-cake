@@ -201,7 +201,7 @@ class ValidationRule
      * @return mixed
      */
     function get(string $property) {
-        $property = "_" . $property;
+        $property = "_" ~ $property;
 
         return this.{$property} ?? null;
     }

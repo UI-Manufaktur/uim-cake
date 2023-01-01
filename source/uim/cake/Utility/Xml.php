@@ -204,7 +204,7 @@ class Xml
         try {
             return $callable($input, $options, $flags);
         } catch (Exception $e) {
-            throw new XmlException("Xml cannot be read. " . $e.getMessage(), null, $e);
+            throw new XmlException("Xml cannot be read~ " ~ $e.getMessage(), null, $e);
         } finally {
             if (isset($previousDisabledEntityLoader)) {
                 libxml_disable_entity_loader($previousDisabledEntityLoader);
@@ -455,9 +455,9 @@ class Xml
              */
             foreach ($xml.attributes($namespace, true) as $key: $value) {
                 if (!empty($namespace)) {
-                    $key = $namespace . ":" . $key;
+                    $key = $namespace ~ ":" ~ $key;
                 }
-                $data["@" . $key] = (string)$value;
+                $data["@" ~ $key] = (string)$value;
             }
 
             foreach ($xml.children($namespace, true) as $child) {

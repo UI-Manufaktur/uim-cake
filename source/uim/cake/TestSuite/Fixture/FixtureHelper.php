@@ -64,7 +64,7 @@ class FixtureHelper
                     $baseNamespace,
                     "Test\Fixture",
                     $additionalPath,
-                    $name . "Fixture",
+                    $name ~ "Fixture",
                 ];
                 /** @psalm-var class-string<uim.cake.Datasource\FixtureInterface> */
                 $className = implode("\\", array_filter($nameSegments));
@@ -157,7 +157,7 @@ class FixtureHelper
             } catch (PDOException $exception) {
                 $message = sprintf(
                     "Unable to insert rows for table `%s`."
-                        . " Fixture records might have invalid data or unknown contraints.\n%s",
+                        ~ " Fixture records might have invalid data or unknown contraints.\n%s",
                     $fixture.sourceName(),
                     $exception.getMessage()
                 );
@@ -213,7 +213,7 @@ class FixtureHelper
             } catch (PDOException $exception) {
                 $message = sprintf(
                     "Unable to truncate table `%s`."
-                        . " Fixture records might have invalid data or unknown contraints.\n%s",
+                        ~ " Fixture records might have invalid data or unknown contraints.\n%s",
                     $fixture.sourceName(),
                     $exception.getMessage()
                 );

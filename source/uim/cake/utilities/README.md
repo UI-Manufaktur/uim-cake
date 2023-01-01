@@ -82,7 +82,7 @@ myData = [
     "post": [
         "id": 1,
         "title": "Best post",
-        "body": " ... "
+        "body": " ~.~ "
     ]
 ];
 $xml = Xml::build(myData);

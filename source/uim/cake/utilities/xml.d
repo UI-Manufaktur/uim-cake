@@ -191,7 +191,7 @@ class Xml {
         try {
             return $callable($input, myOptions, $flags);
         } catch (Exception $e) {
-            throw new XmlException("Xml cannot be read. " . $e.getMessage(), null, $e);
+            throw new XmlException("Xml cannot be read~ " ~ $e.getMessage(), null, $e);
         } finally {
             if (isset($previousDisabledEntityLoader)) {
                 libxml_disable_entity_loader($previousDisabledEntityLoader);
@@ -438,9 +438,9 @@ class Xml {
              */
             foreach ($xml.attributes($module, true) as myKey: myValue) {
                 if (!empty($module)) {
-                    myKey = $module . ":" . myKey;
+                    myKey = $module ~ ":" ~ myKey;
                 }
-                myData["@" . myKey] = (string)myValue;
+                myData["@" ~ myKey] = (string)myValue;
             }
 
             foreach ($xml.children($module, true) as $child) {

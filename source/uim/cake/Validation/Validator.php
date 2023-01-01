@@ -508,7 +508,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
                 }
 
                 if ($validationSet.offsetExists($name)) {
-                    $message = "You cannot add a rule without a unique name, already existing rule found: " . $name;
+                    $message = "You cannot add a rule without a unique name, already existing rule found: " ~ $name;
                     throw new InvalidArgumentException($message);
                 }
 
@@ -752,9 +752,9 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      */
     function allowEmpty($field, $when = true, $message = null) {
         deprecationWarning(
-            "allowEmpty() is deprecated. "
-            . "Use allowEmptyString(), allowEmptyArray(), allowEmptyFile(), allowEmptyDate(), allowEmptyTime(), "
-            . "allowEmptyDateTime() or allowEmptyFor() instead."
+            "allowEmpty() is deprecated~ "
+            ~ "Use allowEmptyString(), allowEmptyArray(), allowEmptyFile(), allowEmptyDate(), allowEmptyTime(), "
+            ~ "allowEmptyDateTime() or allowEmptyFor() instead."
         );
 
         $defaults = [
@@ -1195,9 +1195,9 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      */
     function notEmpty($field, ?string $message = null, $when = false) {
         deprecationWarning(
-            "notEmpty() is deprecated. "
-            . "Use notEmptyString(), notEmptyArray(), notEmptyFile(), notEmptyDate(), notEmptyTime() "
-            . "or notEmptyDateTime() instead."
+            "notEmpty() is deprecated~ "
+            ~ "Use notEmptyString(), notEmptyArray(), notEmptyFile(), notEmptyDate(), notEmptyTime() "
+            ~ "or notEmptyDateTime() instead."
         );
 
         $defaults = [

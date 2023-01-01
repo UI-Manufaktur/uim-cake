@@ -30,6 +30,6 @@ class BodyRegExp : ResponseBase
      */
     string failureDescription($other): string
     {
-        return "`" . $other . "`" . " " . this.toString();
+        return "`" ~ $other ~ "`" ~ " " ~ this.toString();
     }
 }

@@ -181,7 +181,7 @@ class ValidationRule
      * @return mixed
      */
     auto get(string property) {
-      $property = "_" . $property;
+      $property = "_" ~ $property;
 
       return this.{$property} ?? null;
     }

@@ -772,7 +772,7 @@ class View : EventDispatcherInterface
         if (this.autoLayout) {
             if (empty(this.layout)) {
                 throw new RuntimeException(
-                    "View::$layout must be a non-empty string." .
+                    "View::$layout must be a non-empty string." ~
                     "To disable layout rendering use method View::disableAutoLayout() instead."
                 );
             }
@@ -1419,7 +1419,7 @@ class View : EventDispatcherInterface
         if ($name == null) {
             if (empty(this.layout)) {
                 throw new RuntimeException(
-                    "View::$layout must be a non-empty string." .
+                    "View::$layout must be a non-empty string." ~
                     "To disable layout rendering use method View::disableAutoLayout() instead."
                 );
             }
@@ -1598,7 +1598,7 @@ class View : EventDispatcherInterface
         if (isset($options["cache"]["key"], $options["cache"]["config"])) {
             /** @psalm-var array{key:string, config:string}*/
             $cache = $options["cache"];
-            $cache["key"] = "element_" . $cache["key"];
+            $cache["key"] = "element_" ~ $cache["key"];
 
             return $cache;
         }
@@ -1625,7 +1625,7 @@ class View : EventDispatcherInterface
         if (is_array($cache)) {
             $config = $cache + $config;
         }
-        $config["key"] = "element_" . $config["key"];
+        $config["key"] = "element_" ~ $config["key"];
 
         return $config;
     }

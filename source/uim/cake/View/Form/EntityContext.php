@@ -582,7 +582,7 @@ class EntityContext : ContextInterface
 
         $table = _getTable($parts);
         if (!$table) {
-            throw new RuntimeException("Validator not found: " . $key);
+            throw new RuntimeException("Validator not found: " ~ $key);
         }
         $alias = $table.getAlias();
 

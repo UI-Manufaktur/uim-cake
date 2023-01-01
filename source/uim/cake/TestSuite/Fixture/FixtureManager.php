@@ -128,7 +128,7 @@ class FixtureManager
             if (strpos($connection, "test_") == 0) {
                 $map[$connection] = substr($connection, 5);
             } else {
-                $map["test_" . $connection] = $connection;
+                $map["test_" ~ $connection] = $connection;
             }
         }
         foreach ($map as $testConnection: $normal) {
@@ -194,7 +194,7 @@ class FixtureManager
                     $baseNamespace,
                     "Test\Fixture",
                     $additionalPath,
-                    $name . "Fixture",
+                    $name ~ "Fixture",
                 ];
                 /** @psalm-var class-string<uim.cake.Datasource\FixtureInterface> */
                 $className = implode("\\", array_filter($nameSegments));
@@ -286,7 +286,7 @@ class FixtureManager
                             $fixture.dropConstraints($db);
                         } catch (PDOException $e) {
                             $msg = sprintf(
-                                "Unable to drop constraints for fixture "%s" in "%s" test case: " . "\n" . "%s",
+                                "Unable to drop constraints for fixture "%s" in "%s" test case: " ~ "\n" ~ "%s",
                                 get_class($fixture),
                                 get_class($test),
                                 $e.getMessage()
@@ -313,7 +313,7 @@ class FixtureManager
                         $fixture.createConstraints($db);
                     } catch (PDOException $e) {
                         $msg = sprintf(
-                            "Unable to create constraints for fixture "%s" in "%s" test case: " . "\n" . "%s",
+                            "Unable to create constraints for fixture "%s" in "%s" test case: " ~ "\n" ~ "%s",
                             get_class($fixture),
                             get_class($test),
                             $e.getMessage()
@@ -331,7 +331,7 @@ class FixtureManager
                         $fixture.insert($db);
                     } catch (PDOException $e) {
                         $msg = sprintf(
-                            "Unable to insert fixture "%s" in "%s" test case: " . "\n" . "%s",
+                            "Unable to insert fixture "%s" in "%s" test case: " ~ "\n" ~ "%s",
                             get_class($fixture),
                             get_class($test),
                             $e.getMessage()

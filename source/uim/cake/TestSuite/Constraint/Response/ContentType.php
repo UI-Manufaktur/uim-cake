@@ -32,6 +32,6 @@ class ContentType : ResponseBase
      * Assertion message
      */
     string toString() {
-        return "is set as the Content-Type (`" . this.response.getType() . "`)";
+        return "is set as the Content-Type (`" ~ this.response.getType() ~ "`)";
     }
 }

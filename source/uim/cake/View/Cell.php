@@ -216,7 +216,7 @@ abstract class Cell : EventDispatcherInterface
             return [];
         }
         $template = $template ?: "default";
-        $key = "cell_" . Inflector::underscore(static::class) . "_" . $action . "_" . $template;
+        $key = "cell_" ~ Inflector::underscore(static::class) ~ "_" ~ $action ~ "_" ~ $template;
         $key = str_replace("\\", "_", $key);
         $default = [
             "config": "default",

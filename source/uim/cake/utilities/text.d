@@ -178,7 +178,7 @@ class Text {
 
         if (indexOf($str, "?") != false && is_numeric(key(myData))) {
             deprecationWarning(
-                "Using Text::insert() with `?` placeholders is deprecated. " .
+                "Using Text::insert() with `?` placeholders is deprecated~ " ~
                 "Use sprintf() with `%s` placeholders instead."
             );
 
@@ -366,7 +366,7 @@ class Text {
             }
             $toRewrap = "";
             for ($i = myOptions["indentAt"]; $i < myCount; $i++) {
-                $toRewrap .= mb_substr($chunks[$i], $indentationLength) . " ";
+                $toRewrap .= mb_substr($chunks[$i], $indentationLength) ~ " ";
                 unset($chunks[$i]);
             }
             myOptions["width"] -= $indentationLength;
@@ -484,7 +484,7 @@ class Text {
             $with = [];
 
             foreach ($phrase as myKey: $segment) {
-                $segment = "(" . preg_quote($segment, "|") . ")";
+                $segment = "(" ~ preg_quote($segment, "|") ~ ")";
                 if (myOptions["html"]) {
                     $segment = "(?![^<]+>)$segment(?![^<]+>)";
                 }
@@ -496,7 +496,7 @@ class Text {
             return preg_replace($replace, $with, $text, myOptions["limit"]);
         }
 
-        $phrase = "(" . preg_quote($phrase, "|") . ")";
+        $phrase = "(" ~ preg_quote($phrase, "|") ~ ")";
         if (myOptions["html"]) {
             $phrase = "(?![^<]+>)$phrase(?![^<]+>)";
         }
@@ -633,7 +633,7 @@ class Text {
             $length = $truncateLength;
 
             foreach ($openTags as $tag) {
-                $suffix .= "</" . $tag . ">";
+                $suffix .= "</" ~ $tag ~ ">";
             }
         } else {
             if (self::_strlen($text, myOptions) <= $length) {
@@ -885,7 +885,7 @@ class Text {
             $and = __d("cake", "and");
         }
         if (count($list) > 1) {
-            return implode($separator, array_slice($list, 0, -1)) . " " . $and . " " . array_pop($list);
+            return implode($separator, array_slice($list, 0, -1)) ~ " " ~ $and ~ " " ~ array_pop($list);
         }
 
         return (string)array_pop($list);
@@ -1053,7 +1053,7 @@ class Text {
     static void setTransliteratorId(string transliteratorId) {
         $transliterator = transliterator_create($transliteratorId);
         if ($transliterator is null) {
-            throw new CakeException("Unable to create transliterator for id: " . $transliteratorId);
+            throw new CakeException("Unable to create transliterator for id: " ~ $transliteratorId);
         }
 
         static::setTransliterator($transliterator);
@@ -1125,7 +1125,7 @@ class Text {
         }
         $quotedReplacement = preg_quote((string)myOptions["replacement"], "/");
         $map = [
-            "/[" . $regex . "]/mu":myOptions["replacement"],
+            "/[" ~ $regex ~ "]/mu":myOptions["replacement"],
             sprintf("/^[%s]+|[%s]+$/", $quotedReplacement, $quotedReplacement): "",
         ];
         if (is_string(myOptions["replacement"]) && myOptions["replacement"] != "") {

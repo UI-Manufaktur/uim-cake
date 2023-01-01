@@ -101,7 +101,7 @@ trait ValidatorAwareTrait
      */
     protected function createValidator(string aName): Validator
     {
-        $method = "validation" . ucfirst($name);
+        $method = "validation" ~ ucfirst($name);
         if (!this.validationMethodExists($method)) {
             $message = sprintf("The %s::%s() validation method does not exists.", static::class, $method);
             throw new RuntimeException($message);
@@ -110,7 +110,7 @@ trait ValidatorAwareTrait
         $validator = new _validatorClass();
         $validator = this.$method($validator);
         if (this instanceof EventDispatcherInterface) {
-            $event = defined(static::class . "::BUILD_VALIDATOR_EVENT")
+            $event = defined(static::class ~ "::BUILD_VALIDATOR_EVENT")
                 ? static::BUILD_VALIDATOR_EVENT
                 : "Model.buildValidator";
             this.dispatchEvent($event, compact("validator", "name"));
@@ -161,7 +161,7 @@ trait ValidatorAwareTrait
      */
     function hasValidator(string aName): bool
     {
-        $method = "validation" . ucfirst($name);
+        $method = "validation" ~ ucfirst($name);
         if (this.validationMethodExists($method)) {
             return true;
         }
