@@ -58,8 +58,8 @@ class MailTransport : AbstractTransport
         $params = this.getConfig("additionalParameters", "");
         _mail($to, $subject, $message, $headers, $params);
 
-        $headers .= $eol . "To: " . $to;
-        $headers .= $eol . "Subject: " . $subject;
+        $headers .= $eol ~ "To: " ~ $to;
+        $headers .= $eol ~ "Subject: " ~ $subject;
 
         return ["headers": $headers, "message": $message];
     }
@@ -84,7 +84,7 @@ class MailTransport : AbstractTransport
         // phpcs:disable
         if (!@mail($to, $subject, $message, $headers, $params)) {
             $error = error_get_last();
-            $msg = "Could not send email: " . ($error["message"] ?? "unknown");
+            $msg = "Could not send email: " ~ ($error["message"] ?? "unknown");
             throw new CakeException($msg);
         }
         // phpcs:enable

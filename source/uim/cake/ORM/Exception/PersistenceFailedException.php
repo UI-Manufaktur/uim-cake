@@ -45,7 +45,7 @@ class PersistenceFailedException : CakeException
         if (is_array($message)) {
             $errors = [];
             foreach (Hash::flatten($entity.getErrors()) as $field: $error) {
-                $errors[] = $field . ": "" . $error . """;
+                $errors[] = $field ~ ": "" ~ $error ~ """;
             }
             if ($errors) {
                 $message[] = implode(", ", $errors);

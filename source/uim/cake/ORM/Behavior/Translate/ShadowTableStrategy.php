@@ -55,8 +55,8 @@ class ShadowTableStrategy : TranslateStrategyInterface
 
         $config += [
             "mainTableAlias": $tableAlias,
-            "translationTable": $plugin . $tableReferenceName . "Translations",
-            "hasOneAlias": $tableAlias . "Translation",
+            "translationTable": $plugin . $tableReferenceName ~ "Translations",
+            "hasOneAlias": $tableAlias ~ "Translation",
         ];
 
         if (isset($config["tableLocator"])) {
@@ -141,7 +141,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
         $config = this.getConfig();
 
         [$plugin] = pluginSplit($config["translationTable"]);
-        $hasOneTargetAlias = $plugin ? ($plugin . "." . $config["hasOneAlias"]) : $config["hasOneAlias"];
+        $hasOneTargetAlias = $plugin ? ($plugin ~ "." ~ $config["hasOneAlias"]) : $config["hasOneAlias"];
         if (!this.getTableLocator().exists($hasOneTargetAlias)) {
             // Load table before hand with fallback class usage enabled
             this.getTableLocator().get(
@@ -165,7 +165,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
             "propertyName": "translation",
             "className": $config["translationTable"],
             "conditions": [
-                $config["hasOneAlias"] . ".locale": $locale,
+                $config["hasOneAlias"] ~ ".locale": $locale,
             ],
         ]);
     }
@@ -428,7 +428,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
 
         $translatedFields = this.translatedFields();
         if (in_array($field, $translatedFields, true)) {
-            return this.getConfig("hasOneAlias") . "." . $field;
+            return this.getConfig("hasOneAlias") ~ "." ~ $field;
         }
 
         return this.table.aliasField($field);

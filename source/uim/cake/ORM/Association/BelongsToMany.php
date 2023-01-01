@@ -387,7 +387,7 @@ class BelongsToMany : Association
                 $target != $belongsTo.getTarget()
             ) {
                 throw new InvalidArgumentException(
-                    "The existing `{$tAlias}` association on `{$junction.getAlias()}` " .
+                    "The existing `{$tAlias}` association on `{$junction.getAlias()}` " ~
                     "is incompatible with the `{this.getName()}` association on `{$source.getAlias()}`"
                 );
             }
@@ -962,7 +962,7 @@ class BelongsToMany : Association
             return $conditions;
         }
         $matching = [];
-        $alias = this.getAlias() . ".";
+        $alias = this.getAlias() ~ ".";
         foreach ($conditions as $field: $value) {
             if (is_string($field) && strpos($field, $alias) == 0) {
                 $matching[$field] = $value;
@@ -990,7 +990,7 @@ class BelongsToMany : Association
         if (!is_array($conditions)) {
             return $matching;
         }
-        $alias = _junctionAssociationName() . ".";
+        $alias = _junctionAssociationName() ~ ".";
         foreach ($conditions as $field: $value) {
             $isString = is_string($field);
             if ($isString && strpos($field, $alias) == 0) {
@@ -1141,13 +1141,13 @@ class BelongsToMany : Association
 
                 $prefixedForeignKey = array_map([$junction, "aliasField"], $foreignKey);
                 $junctionPrimaryKey = (array)$junction.getPrimaryKey();
-                $junctionQueryAlias = $junction.getAlias() . "__matches";
+                $junctionQueryAlias = $junction.getAlias() ~ "__matches";
 
                 $keys = $matchesConditions = [];
                 foreach (array_merge($assocForeignKey, $junctionPrimaryKey) as $key) {
                     $aliased = $junction.aliasField($key);
                     $keys[$key] = $aliased;
-                    $matchesConditions[$aliased] = new IdentifierExpression($junctionQueryAlias . "." . $key);
+                    $matchesConditions[$aliased] = new IdentifierExpression($junctionQueryAlias ~ "." ~ $key);
                 }
 
                 // Use association to create row selection
@@ -1354,11 +1354,11 @@ class BelongsToMany : Association
         $hasMany = $source.getAssociation($junction.getAlias());
         $foreignKey = (array)this.getForeignKey();
         $foreignKey = array_map(function ($key) {
-            return $key . " IS";
+            return $key ~ " IS";
         }, $foreignKey);
         $assocForeignKey = (array)$belongsTo.getForeignKey();
         $assocForeignKey = array_map(function ($key) {
-            return $key . " IS";
+            return $key ~ " IS";
         }, $assocForeignKey);
         $sourceKey = $sourceEntity.extract((array)$source.getPrimaryKey());
 

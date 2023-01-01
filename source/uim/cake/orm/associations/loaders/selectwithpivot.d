@@ -82,12 +82,12 @@ class SelectWithPivotLoader : SelectLoader
         // Ensure that association conditions are applied
         // and that the required keys are in the selected columns.
 
-        $tempName = this.alias . "_CJoin";
+        $tempName = this.alias ~ "_CJoin";
         $schema = $assoc.getSchema();
         $joinFields = myTypes = [];
 
         foreach ($schema.typeMap() as $f: myType) {
-            myKey = $tempName . "__" . $f;
+            myKey = $tempName ~ "__" ~ $f;
             $joinFields[myKey] = "myName.$f";
             myTypes[myKey] = myType;
         }

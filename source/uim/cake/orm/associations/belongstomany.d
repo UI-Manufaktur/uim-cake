@@ -337,7 +337,7 @@ class BelongsToMany : Association
                 myTarget != $belongsTo.getTarget()
             ) {
                 throw new InvalidArgumentException(
-                    "The existing `{$tAlias}` association on `{$junction.getAlias()}` " .
+                    "The existing `{$tAlias}` association on `{$junction.getAlias()}` " ~
                     "is incompatible with the `{this.getName()}` association on `{$source.getAlias()}`"
                 );
             }
@@ -900,7 +900,7 @@ class BelongsToMany : Association
             return $conditions;
         }
         $matching = [];
-        myAlias = this.getAlias() . ".";
+        myAlias = this.getAlias() ~ ".";
         foreach ($conditions as myField: myValue) {
             if (is_string(myField) && indexOf(myField, myAlias) == 0) {
                 $matching[myField] = myValue;
@@ -928,7 +928,7 @@ class BelongsToMany : Association
         if (!is_array($conditions)) {
             return $matching;
         }
-        myAlias = _junctionAssociationName() . ".";
+        myAlias = _junctionAssociationName() ~ ".";
         foreach ($conditions as myField: myValue) {
             $isString = is_string(myField);
             if ($isString && indexOf(myField, myAlias) == 0) {
@@ -1268,11 +1268,11 @@ class BelongsToMany : Association
         $hasMany = $source.getAssociation($junction.getAlias());
         $foreignKey = (array)this.getForeignKey();
         $foreignKey = array_map(function (myKey) {
-            return myKey . " IS";
+            return myKey ~ " IS";
         }, $foreignKey);
         $assocForeignKey = (array)$belongsTo.getForeignKey();
         $assocForeignKey = array_map(function (myKey) {
-            return myKey . " IS";
+            return myKey ~ " IS";
         }, $assocForeignKey);
         $sourceKey = $sourceEntity.extract((array)$source.getPrimaryKey());
 

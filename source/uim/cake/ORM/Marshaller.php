@@ -242,7 +242,7 @@ class Marshaller
         } elseif (is_object($options["validate"])) {
             deprecationWarning(
                 "Passing validator instance for the `validate` option is deprecated,"
-                . " use `ValidatorAwareTrait::setValidator() instead.`"
+                ~ " use `ValidatorAwareTrait::setValidator() instead.`"
             );
 
             /** @var uim.cake.Validation\Validator $validator */
@@ -482,7 +482,7 @@ class Marshaller
             }
             $filter = new TupleComparison($primaryKey, $ids, $type, "IN");
         } else {
-            $filter = [$primaryKey[0] . " IN": $ids];
+            $filter = [$primaryKey[0] ~ " IN": $ids];
         }
 
         return $target.find().where($filter).toArray();

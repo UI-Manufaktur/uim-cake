@@ -373,7 +373,7 @@ class SmtpTransport : AbstractTransport
      */
     protected string _prepareFromCmd(string $message): string
     {
-        return "MAIL FROM:<" . $message . ">";
+        return "MAIL FROM:<" ~ $message ~ ">";
     }
 
     /**
@@ -383,7 +383,7 @@ class SmtpTransport : AbstractTransport
      */
     protected string _prepareRcptCmd(string $message): string
     {
-        return "RCPT TO:<" . $message . ">";
+        return "RCPT TO:<" ~ $message ~ ">";
     }
 
     /**
@@ -428,7 +428,7 @@ class SmtpTransport : AbstractTransport
         $messages = [];
         foreach ($lines as $line) {
             if (!empty($line) && ($line[0] == ".")) {
-                $messages[] = "." . $line;
+                $messages[] = "." ~ $line;
             } else {
                 $messages[] = $line;
             }
@@ -477,7 +477,7 @@ class SmtpTransport : AbstractTransport
         ]);
         $message = _prepareMessage($message);
 
-        _smtpSend($headers . "\r\n\r\n" . $message . "\r\n\r\n\r\n.");
+        _smtpSend($headers ~ "\r\n\r\n" ~ $message ~ "\r\n\r\n\r\n.");
         _content = ["headers": $headers, "message": $message];
     }
 
@@ -518,7 +518,7 @@ class SmtpTransport : AbstractTransport
         _lastResponse = [];
 
         if ($data != null) {
-            _socket().write($data . "\r\n");
+            _socket().write($data ~ "\r\n");
         }
 
         $timeout = _config["timeout"];
@@ -543,7 +543,7 @@ class SmtpTransport : AbstractTransport
 
             _bufferResponseLines($responseLines);
 
-            if (preg_match("/^(" . $checkCode . ")(.)/", $response, $code)) {
+            if (preg_match("/^(" ~ $checkCode ~ ")(.)/", $response, $code)) {
                 if ($code[2] == "-") {
                     continue;
                 }

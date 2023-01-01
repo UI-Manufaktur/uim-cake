@@ -111,7 +111,7 @@ class Socket
         }
         $scheme = null;
         if (!empty(_config["protocol"])) {
-            $scheme = _config["protocol"] . "://";
+            $scheme = _config["protocol"] ~ "://";
         }
 
         _setSslContext(_config["host"]);
@@ -131,7 +131,7 @@ class Socket
         $remoteSocketTarget = $scheme . _config["host"];
         $port = (int)_config["port"];
         if ($port > 0) {
-            $remoteSocketTarget .= ":" . $port;
+            $remoteSocketTarget .= ":" ~ $port;
         }
 
         $errNum = 0;
@@ -304,7 +304,7 @@ class Socket
      */
     Nullable!string lastError() {
         if (!empty(this.lastError)) {
-            return this.lastError["num"] . ": " . this.lastError["str"];
+            return this.lastError["num"] ~ ": " ~ this.lastError["str"];
         }
 
         return null;
@@ -431,10 +431,10 @@ class Socket
      * @see stream_socket_enable_crypto
      */
     void enableCrypto(string myType, string clientOrServer = "client", bool myEnable = true) {
-        if (!array_key_exists(myType . "_" . $clientOrServer, _encryptMethods)) {
+        if (!array_key_exists(myType ~ "_" ~ $clientOrServer, _encryptMethods)) {
             throw new InvalidArgumentException("Invalid encryption scheme chosen");
         }
-        $method = _encryptMethods[myType . "_" . $clientOrServer];
+        $method = _encryptMethods[myType ~ "_" ~ $clientOrServer];
 
         if ($method == STREAM_CRYPTO_METHOD_TLS_CLIENT) {
             $method |= STREAM_CRYPTO_METHOD_TLSv1_1_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;

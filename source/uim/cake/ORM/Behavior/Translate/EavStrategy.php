@@ -91,7 +91,7 @@ class EavStrategy : TranslateStrategyInterface
         $tableLocator = this.getTableLocator();
 
         foreach ($fields as $field) {
-            $name = $alias . "_" . $field . "_translation";
+            $name = $alias ~ "_" ~ $field ~ "_translation";
 
             if (!$tableLocator.exists($name)) {
                 $fieldTable = $tableLocator.get($name, [
@@ -105,11 +105,11 @@ class EavStrategy : TranslateStrategyInterface
             }
 
             $conditions = [
-                $name . ".model": $model,
-                $name . ".field": $field,
+                $name ~ ".model": $model,
+                $name ~ ".field": $field,
             ];
             if (!_config["allowEmptyTranslations"]) {
-                $conditions[$name . ".content !="] = "";
+                $conditions[$name ~ ".content !="] = "";
             }
 
             this.table.hasOne($name, [
@@ -117,7 +117,7 @@ class EavStrategy : TranslateStrategyInterface
                 "foreignKey": "foreign_key",
                 "joinType": $filter ? Query::JOIN_TYPE_INNER : Query::JOIN_TYPE_LEFT,
                 "conditions": $conditions,
-                "propertyName": $field . "_translation",
+                "propertyName": $field ~ "_translation",
             ]);
         }
 
@@ -177,7 +177,7 @@ class EavStrategy : TranslateStrategyInterface
             $options["filterByCurrentLocale"] != _config["onlyTranslated"];
 
         foreach ($fields as $field) {
-            $name = $alias . "_" . $field . "_translation";
+            $name = $alias ~ "_" ~ $field ~ "_translation";
 
             $contain[$name]["queryBuilder"] = $conditions(
                 $field,
@@ -314,10 +314,10 @@ class EavStrategy : TranslateStrategyInterface
         if (this.getLocale() == this.getConfig("defaultLocale")) {
             return $table.aliasField($field);
         }
-        $associationName = $table.getAlias() . "_" . $field . "_translation";
+        $associationName = $table.getAlias() ~ "_" ~ $field ~ "_translation";
 
         if ($table.associations().has($associationName)) {
-            return $associationName . ".content";
+            return $associationName ~ ".content";
         }
 
         return $table.aliasField($field);
@@ -340,7 +340,7 @@ class EavStrategy : TranslateStrategyInterface
             $hydrated = !is_array($row);
 
             foreach (_config["fields"] as $field) {
-                $name = $field . "_translation";
+                $name = $field ~ "_translation";
                 $translation = $row[$name] ?? null;
 
                 if ($translation == null || $translation == false) {

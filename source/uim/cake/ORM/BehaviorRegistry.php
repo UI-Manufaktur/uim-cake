@@ -104,7 +104,7 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
     protected function _throwMissingClassError(string $class, ?string $plugin): void
     {
         throw new MissingBehaviorException([
-            "class": $class . "Behavior",
+            "class": $class ~ "Behavior",
             "plugin": $plugin,
         ]);
     }

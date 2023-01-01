@@ -45,8 +45,8 @@ class ShadowTableStrategy : ITranslateStrategy {
 
         myConfig += [
             "mainTableAlias":myTableAlias,
-            "translationTable":myPlugin . myTableReferenceName . "Translations",
-            "hasOneAlias":myTableAlias . "Translation",
+            "translationTable":myPlugin . myTableReferenceName ~ "Translations",
+            "hasOneAlias":myTableAlias ~ "Translation",
         ];
 
         if (isset(myConfig["tableLocator"])) {
@@ -131,7 +131,7 @@ class ShadowTableStrategy : ITranslateStrategy {
         myConfig = this.getConfig();
 
         [myPlugin] = pluginSplit(myConfig["translationTable"]);
-        $hasOneTargetAlias = myPlugin ? (myPlugin . "." . myConfig["hasOneAlias"]) : myConfig["hasOneAlias"];
+        $hasOneTargetAlias = myPlugin ? (myPlugin ~ "." ~ myConfig["hasOneAlias"]) : myConfig["hasOneAlias"];
         if (!this.getTableLocator().exists($hasOneTargetAlias)) {
             // Load table before hand with fallback class usage enabled
             this.getTableLocator().get(
@@ -155,7 +155,7 @@ class ShadowTableStrategy : ITranslateStrategy {
             "propertyName":"translation",
             "className":myConfig["translationTable"],
             "conditions":[
-                myConfig["hasOneAlias"] . ".locale":$locale,
+                myConfig["hasOneAlias"] ~ ".locale":$locale,
             ],
         ]);
     }
@@ -415,7 +415,7 @@ class ShadowTableStrategy : ITranslateStrategy {
 
         $translatedFields = this.translatedFields();
         if (in_array(myField, $translatedFields, true)) {
-            return this.getConfig("hasOneAlias") . "." . myField;
+            return this.getConfig("hasOneAlias") ~ "." ~ myField;
         }
 
         return this.table.aliasField(myField);

@@ -201,7 +201,7 @@ class CounterCacheBehavior : Behavior
 
         foreach ($countConditions as $field: $value) {
             if ($value == null) {
-                $countConditions[$field . " IS"] = $value;
+                $countConditions[$field ~ " IS"] = $value;
                 unset($countConditions[$field]);
             }
         }

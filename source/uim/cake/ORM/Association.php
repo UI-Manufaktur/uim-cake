@@ -200,7 +200,7 @@ abstract class Association
         ];
         foreach ($defaults as $property) {
             if (isset($options[$property])) {
-                this.{"_" . $property} = $options[$property];
+                this.{"_" ~ $property} = $options[$property];
             }
         }
 
@@ -230,7 +230,7 @@ abstract class Association
     function setName(string aName) {
         deprecationWarning(
             "Changing the association name after object creation is no longer supported."
-            . " The name should only be set through the constructor"
+            ~ " The name should only be set through the constructor"
         );
 
         if (_targetTable != null) {
@@ -375,7 +375,7 @@ abstract class Association
                 $className = App::className(_className, "Model/Table", "Table") ?: Table::class;
 
                 if (!_targetTable instanceof $className) {
-                    $errorMessage = "%s association "%s" of type "%s" to "%s" doesn\"t match the expected class "%s". ";
+                    $errorMessage = "%s association "%s" of type "%s" to "%s" doesn\"t match the expected class "%s"~ ";
                     $errorMessage .= "You can\"t have an association of the same name with a different target ";
                     $errorMessage .= ""className" option anywhere in your app.";
 
@@ -554,7 +554,7 @@ abstract class Association
         if (!_propertyName) {
             _propertyName = _propertyName();
             if (in_array(_propertyName, _sourceTable.getSchema().columns(), true)) {
-                $msg = "Association property name "%s" clashes with field of same name of table "%s"." .
+                $msg = "Association property name "%s" clashes with field of same name of table "%s"." ~
                     " You should explicitly specify the "propertyName" option.";
                 trigger_error(
                     sprintf($msg, _propertyName, _sourceTable.getTable()),
@@ -1007,7 +1007,7 @@ abstract class Association
 
         $newContain = [];
         foreach ($contain as $alias: $value) {
-            $newContain[$options["aliasPath"] . "." . $alias] = $value;
+            $newContain[$options["aliasPath"] ~ "." ~ $alias] = $value;
         }
 
         $eagerLoader = $query.getEagerLoader();
@@ -1017,7 +1017,7 @@ abstract class Association
 
         foreach ($matching as $alias: $value) {
             $eagerLoader.setMatching(
-                $options["aliasPath"] . "." . $alias,
+                $options["aliasPath"] ~ "." ~ $alias,
                 $value["queryBuilder"],
                 $value
             );

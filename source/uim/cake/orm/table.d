@@ -377,7 +377,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             return myField;
         }
 
-        return this.getAlias() . "." . myField;
+        return this.getAlias() ~ "." ~ myField;
     }
 
     /**
@@ -506,12 +506,12 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
         myTable = this.getAlias();
         foreach (_schema.columns() as myName) {
-            if (strlen(myTable . "__" . myName) > $maxLength) {
+            if (strlen(myTable ~ "__" ~ myName) > $maxLength) {
                 myNameLength = $maxLength - 2;
                 throw new RuntimeException(
-                    "ORM queries generate field aliases using the table name/alias and column name. " .
-                    "The table alias `{myTable}` and column `{myName}` create an alias longer than ({myNameLength}). " .
-                    "You must change the table schema in the database and shorten either the table or column " .
+                    "ORM queries generate field aliases using the table name/alias and column name~ " ~
+                    "The table alias `{myTable}` and column `{myName}` create an alias longer than ({myNameLength})~ " ~
+                    "You must change the table schema in the database and shorten either the table or column " ~
                     "identifier so they fit within the database alias limits."
                 );
             }
@@ -627,7 +627,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             }
 
             myAlias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
-            myName = implode("\\", array_slice($parts, 0, -1)) . "\\Entity\\" . myAlias;
+            myName = implode("\\", array_slice($parts, 0, -1)) ~ "\\Entity\\" ~ myAlias;
             if (!class_exists(myName)) {
                 return _entityClass = $default;
             }
@@ -810,7 +810,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
             myMessage = "The `{myName}` association is not defined on `{this.getAlias()}`.";
             if ($assocations) {
-                myMessage .= "\nValid associations are: " . implode(", ", $assocations);
+                myMessage .= "\nValid associations are: " ~ implode(", ", $assocations);
             }
             throw new InvalidArgumentException(myMessage);
         }
@@ -933,7 +933,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *   will be used
      * - conditions: array with a list of conditions to filter the join with
      * - joinType: The type of join to be used (e.g. INNER)
-     * - strategy: The loading strategy to use. "join" and "select" are supported.
+     * - strategy: The loading strategy to use~ "join" and "select" are supported.
      * - finder: The finder method to use when loading records from this association.
      *   Defaults to "all". When the strategy is "join", only the fields, containments,
      *   and where conditions will be used from the finder.
@@ -979,7 +979,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *   When true records will be loaded and then deleted.
      * - conditions: array with a list of conditions to filter the join with
      * - joinType: The type of join to be used (e.g. LEFT)
-     * - strategy: The loading strategy to use. "join" and "select" are supported.
+     * - strategy: The loading strategy to use~ "join" and "select" are supported.
      * - finder: The finder method to use when loading records from this association.
      *   Defaults to "all". When the strategy is "join", only the fields, containments,
      *   and where conditions will be used from the finder.
@@ -1086,7 +1086,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *   for saving associated entities. The former will only create new links
      *   between both side of the relation and the latter will do a wipe and
      *   replace to create the links between the passed entities when saving.
-     * - strategy: The loading strategy to use. "select" and "subquery" are supported.
+     * - strategy: The loading strategy to use~ "select" and "subquery" are supported.
      * - finder: The finder method to use when loading records from this association.
      *   Defaults to "all".
      *
@@ -1411,7 +1411,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         myKey = (array)this.getPrimaryKey();
         myAlias = this.getAlias();
         foreach (myKey as $index: myKeyname) {
-            myKey[$index] = myAlias . "." . myKeyname;
+            myKey[$index] = myAlias ~ "." ~ myKeyname;
         }
         $primaryKey = (array)$primaryKey;
         if (count(myKey) != count($primaryKey)) {
@@ -1946,7 +1946,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
             $schema = this.getSchema();
             foreach ($primary as $k: $v) {
                 if (!isset(myData[$k]) && empty($schema.getColumn($k)["autoIncrement"])) {
-                    $msg = "Cannot insert row, some of the primary key values are missing. ";
+                    $msg = "Cannot insert row, some of the primary key values are missing~ ";
                     $msg .= sprintf(
                         "Got (%s), expecting (%s)",
                         implode(", ", $filteredKeys + $entity.extract(array_keys($primary))),
@@ -2036,7 +2036,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
         if (!$entity.has($primaryColumns)) {
             myMessage = "All primary key value(s) are needed for updating, ";
-            myMessage .= get_class($entity) . " is missing " . implode(", ", $primaryColumns);
+            myMessage .= get_class($entity) ~ " is missing " ~ implode(", ", $primaryColumns);
             throw new InvalidArgumentException(myMessage);
         }
 
@@ -2378,7 +2378,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param string myType name of finder to check
      */
     bool hasFinder(string myType) {
-        myFinder = "find" . myType;
+        myFinder = "find" ~ myType;
 
         return method_exists(this, myFinder) || _behaviors.hasFinder(myType);
     }
@@ -2400,7 +2400,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     {
         myQuery.applyOptions(myOptions);
         myOptions = myQuery.getOptions();
-        myFinder = "find" . myType;
+        myFinder = "find" ~ myType;
         if (method_exists(this, myFinder)) {
             return this.{myFinder}(myQuery, myOptions);
         }
@@ -2514,7 +2514,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
         $association = _associations.get($property);
         if (!$association) {
             throw new RuntimeException(sprintf(
-                "Undefined property `%s`. " .
+                "Undefined property `%s`~ " ~
                 "You have not defined the `%s` association on `%s`.",
                 $property,
                 $property,

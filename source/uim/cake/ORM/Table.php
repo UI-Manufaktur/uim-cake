@@ -423,7 +423,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             return $field;
         }
 
-        return this.getAlias() . "." . $field;
+        return this.getAlias() ~ "." ~ $field;
     }
 
     /**
@@ -555,12 +555,12 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
         $table = this.getAlias();
         foreach (_schema.columns() as $name) {
-            if (strlen($table . "__" . $name) > $maxLength) {
+            if (strlen($table ~ "__" ~ $name) > $maxLength) {
                 $nameLength = $maxLength - 2;
                 throw new RuntimeException(
-                    "ORM queries generate field aliases using the table name/alias and column name. " .
-                    "The table alias `{$table}` and column `{$name}` create an alias longer than ({$nameLength}). " .
-                    "You must change the table schema in the database and shorten either the table or column " .
+                    "ORM queries generate field aliases using the table name/alias and column name~ " ~
+                    "The table alias `{$table}` and column `{$name}` create an alias longer than ({$nameLength})~ " ~
+                    "You must change the table schema in the database and shorten either the table or column " ~
                     "identifier so they fit within the database alias limits."
                 );
             }
@@ -686,7 +686,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             }
 
             $alias = Inflector::classify(Inflector::underscore(substr(array_pop($parts), 0, -5)));
-            $name = implode("\\", array_slice($parts, 0, -1)) . "\\Entity\\" . $alias;
+            $name = implode("\\", array_slice($parts, 0, -1)) ~ "\\Entity\\" ~ $alias;
             if (!class_exists($name)) {
                 return _entityClass = $default;
             }
@@ -868,7 +868,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
             $message = "The `{$name}` association is not defined on `{this.getAlias()}`.";
             if ($assocations) {
-                $message .= "\nValid associations are: " . implode(", ", $assocations);
+                $message .= "\nValid associations are: " ~ implode(", ", $assocations);
             }
             throw new InvalidArgumentException($message);
         }
@@ -993,7 +993,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   will be used
      * - conditions: array with a list of conditions to filter the join with
      * - joinType: The type of join to be used (e.g. INNER)
-     * - strategy: The loading strategy to use. "join" and "select" are supported.
+     * - strategy: The loading strategy to use~ "join" and "select" are supported.
      * - finder: The finder method to use when loading records from this association.
      *   Defaults to "all". When the strategy is "join", only the fields, containments,
      *   and where conditions will be used from the finder.
@@ -1039,7 +1039,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   When true records will be loaded and then deleted.
      * - conditions: array with a list of conditions to filter the join with
      * - joinType: The type of join to be used (e.g. LEFT)
-     * - strategy: The loading strategy to use. "join" and "select" are supported.
+     * - strategy: The loading strategy to use~ "join" and "select" are supported.
      * - finder: The finder method to use when loading records from this association.
      *   Defaults to "all". When the strategy is "join", only the fields, containments,
      *   and where conditions will be used from the finder.
@@ -1146,7 +1146,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      *   for saving associated entities. The former will only create new links
      *   between both side of the relation and the latter will do a wipe and
      *   replace to create the links between the passed entities when saving.
-     * - strategy: The loading strategy to use. "select" and "subquery" are supported.
+     * - strategy: The loading strategy to use~ "select" and "subquery" are supported.
      * - finder: The finder method to use when loading records from this association.
      *   Defaults to "all".
      *
@@ -1475,7 +1475,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $key = (array)this.getPrimaryKey();
         $alias = this.getAlias();
         foreach ($key as $index: $keyname) {
-            $key[$index] = $alias . "." . $keyname;
+            $key[$index] = $alias ~ "." ~ $keyname;
         }
         if (!is_array($primaryKey)) {
             $primaryKey = [$primaryKey];
@@ -2021,7 +2021,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
             $schema = this.getSchema();
             foreach ($primary as $k: $v) {
                 if (!isset($data[$k]) && empty($schema.getColumn($k)["autoIncrement"])) {
-                    $msg = "Cannot insert row, some of the primary key values are missing. ";
+                    $msg = "Cannot insert row, some of the primary key values are missing~ ";
                     $msg .= sprintf(
                         "Got (%s), expecting (%s)",
                         implode(", ", $filteredKeys + $entity.extract(array_keys($primary))),
@@ -2111,7 +2111,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
 
         if (!$entity.has($primaryColumns)) {
             $message = "All primary key value(s) are needed for updating, ";
-            $message .= get_class($entity) . " is missing " . implode(", ", $primaryColumns);
+            $message .= get_class($entity) ~ " is missing " ~ implode(", ", $primaryColumns);
             throw new InvalidArgumentException($message);
         }
 
@@ -2479,7 +2479,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      */
     function hasFinder(string $type): bool
     {
-        $finder = "find" . $type;
+        $finder = "find" ~ $type;
 
         return method_exists(this, $finder) || _behaviors.hasFinder($type);
     }
@@ -2500,7 +2500,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     {
         $query.applyOptions($options);
         $options = $query.getOptions();
-        $finder = "find" . $type;
+        $finder = "find" ~ $type;
         if (method_exists(this, $finder)) {
             return this.{$finder}($query, $options);
         }
@@ -2614,7 +2614,7 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
         $association = _associations.get($property);
         if (!$association) {
             throw new RuntimeException(sprintf(
-                "Undefined property `%s`. " .
+                "Undefined property `%s`~ " ~
                 "You have not defined the `%s` association on `%s`.",
                 $property,
                 $property,

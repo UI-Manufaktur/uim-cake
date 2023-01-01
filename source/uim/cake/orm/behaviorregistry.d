@@ -94,7 +94,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
         throw new MissingBehaviorException([
-            "class":myClass . "Behavior",
+            "class":myClass ~ "Behavior",
             "plugin":myPlugin,
         ]);
     }

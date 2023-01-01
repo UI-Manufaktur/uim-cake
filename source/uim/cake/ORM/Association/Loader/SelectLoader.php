@@ -313,7 +313,7 @@ class SelectLoader
         if (is_array($key)) {
             $conditions = _createTupleCondition($query, $key, $filter, "IN");
         } else {
-            $conditions = [$key . " IN": $filter];
+            $conditions = [$key ~ " IN": $filter];
         }
 
         return $query.andWhere($conditions);
@@ -355,7 +355,7 @@ class SelectLoader
         $name = this.alias;
 
         if ($options["foreignKey"] == false && this.associationType == Association::ONE_TO_MANY) {
-            $msg = "Cannot have foreignKey = false for hasMany associations. " .
+            $msg = "Cannot have foreignKey = false for hasMany associations~ " ~
                    "You must provide a foreignKey column.";
             throw new RuntimeException($msg);
         }

@@ -117,7 +117,7 @@ class EagerLoadable
         ];
         foreach ($allowed as $property) {
             if (isset($config[$property])) {
-                this.{"_" . $property} = $config[$property];
+                this.{"_" ~ $property} = $config[$property];
             }
         }
     }

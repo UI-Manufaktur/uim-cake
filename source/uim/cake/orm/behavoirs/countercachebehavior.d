@@ -195,7 +195,7 @@ class CounterCacheBehavior : Behavior
 
         foreach (myCountConditions as myField: myValue) {
             if (myValue is null) {
-                myCountConditions[myField . " IS"] = myValue;
+                myCountConditions[myField ~ " IS"] = myValue;
                 unset(myCountConditions[myField]);
             }
         }

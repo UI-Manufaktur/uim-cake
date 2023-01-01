@@ -194,8 +194,8 @@ class ResultSet : IResultSet
         }
 
         if (!_useBuffering) {
-            $msg = "You cannot rewind an un-buffered ResultSet. "
-                . "Use Query::bufferResults() to get a buffered ResultSet.";
+            $msg = "You cannot rewind an un-buffered ResultSet~ "
+                ~ "Use Query::bufferResults() to get a buffered ResultSet.";
             throw new DatabaseException($msg);
         }
 
@@ -271,8 +271,8 @@ class ResultSet : IResultSet
     auto __serialize(): array
     {
         if (!_useBuffering) {
-            $msg = "You cannot serialize an un-buffered ResultSet. "
-                . "Use Query::bufferResults() to get a buffered ResultSet.";
+            $msg = "You cannot serialize an un-buffered ResultSet~ "
+                ~ "Use Query::bufferResults() to get a buffered ResultSet.";
             throw new DatabaseException($msg);
         }
 

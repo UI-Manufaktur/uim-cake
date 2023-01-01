@@ -543,7 +543,7 @@ class TreeBehavior : Behavior
             [myConfig["parent"]: $parent],
             [myConfig["parent"]: myNode.get($primary)]
         );
-        _sync(1, "-", "BETWEEN " . ($left + 1) . " AND " . ($right - 1));
+        _sync(1, "-", "BETWEEN " ~ ($left + 1) ~ " AND " ~ ($right - 1));
         _sync(2, "-", "> {$right}");
         $edge = _getMax();
         myNode.set(myConfig["left"], $edge + 1);
@@ -798,7 +798,7 @@ class TreeBehavior : Behavior
 
         myNodes = _scope(_table.query())
             .select($primaryKey)
-            .where([$parent . " IS":$parentId])
+            .where([$parent ~ " IS":$parentId])
             .order($order)
             .disableHydration()
             .all();
@@ -956,8 +956,8 @@ class TreeBehavior : Behavior
         }
 
         myQuery = _table.find("all").where([
-            myConfig["left"] . " <":$entity[myConfig["left"]],
-            myConfig["right"] . " >":$entity[myConfig["right"]],
+            myConfig["left"] ~ " <":$entity[myConfig["left"]],
+            myConfig["right"] ~ " >":$entity[myConfig["right"]],
         ]);
 
         return _scope(myQuery).count();

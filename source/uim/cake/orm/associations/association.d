@@ -128,7 +128,7 @@ abstract class Association {
         ];
         foreach ($defaults as $property) {
             if (isset(myOptions[$property])) {
-                this.{"_" . $property} = myOptions[$property];
+                this.{"_" ~ $property} = myOptions[$property];
             }
         }
 
@@ -261,7 +261,7 @@ abstract class Association {
                 myClassName = App::className(_className, "Model/Table", "Table") ?: Table::class;
 
                 if (!_targetTable instanceof myClassName) {
-                    myErrorMessage = "%s association "%s" of type "%s" to "%s" doesn\"t match the expected class "%s". ";
+                    myErrorMessage = "%s association "%s" of type "%s" to "%s" doesn\"t match the expected class "%s"~ ";
                     myErrorMessage .= "You can\"t have an association of the same name with a different target ";
                     myErrorMessage .= ""className" option anywhere in your app.";
 
@@ -427,7 +427,7 @@ abstract class Association {
         if (!_propertyName) {
             _propertyName = _propertyName();
             if (in_array(_propertyName, _sourceTable.getSchema().columns(), true)) {
-                $msg = "Association property name "%s" clashes with field of same name of table "%s"." .
+                $msg = "Association property name "%s" clashes with field of same name of table "%s"." ~
                     " You should explicitly specify the "propertyName" option.";
                 trigger_error(
                     sprintf($msg, _propertyName, _sourceTable.getTable()),
@@ -859,7 +859,7 @@ abstract class Association {
 
         $newContain = [];
         foreach ($contain as myAlias: myValue) {
-            $newContain[myOptions["aliasPath"] . "." . myAlias] = myValue;
+            $newContain[myOptions["aliasPath"] ~ "." ~ myAlias] = myValue;
         }
 
         $eagerLoader = myQuery.getEagerLoader();
@@ -869,7 +869,7 @@ abstract class Association {
 
         foreach ($matching as myAlias: myValue) {
             $eagerLoader.setMatching(
-                myOptions["aliasPath"] . "." . myAlias,
+                myOptions["aliasPath"] ~ "." ~ myAlias,
                 myValue["queryBuilder"],
                 myValue
             );

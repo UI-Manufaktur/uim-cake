@@ -207,7 +207,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
         $map = myTable.getSchema().typeMap();
         myFields = [];
         foreach ($map as $f: myType) {
-            myFields[$f] = myFields[myAlias . "." . $f] = myFields[myAlias . "__" . $f] = myType;
+            myFields[$f] = myFields[myAlias ~ "." ~ $f] = myFields[myAlias ~ "__" ~ $f] = myType;
         }
         this.getTypeMap().addDefaults(myFields);
 
