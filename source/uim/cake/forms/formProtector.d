@@ -378,7 +378,7 @@ class FormProtector
         $locked = implode("|", array_keys($locked));
 
         return [
-            "fields":urlencode(myFields . ":" . $locked),
+            "fields":urlencode(myFields ~ ":" ~ $locked),
             "unlocked":urlencode(implode("|", $unlockedFields)),
             "debug":urlencode(json_encode([
                 anURL,

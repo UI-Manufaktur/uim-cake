@@ -200,23 +200,23 @@ class FormDataPart
     {
         $out = "";
         if (_disposition) {
-            $out .= "Content-Disposition: " . _disposition;
+            $out .= "Content-Disposition: " ~ _disposition;
             if (_name) {
-                $out .= "; " . _headerParameterToString("name", _name);
+                $out .= "; " ~ _headerParameterToString("name", _name);
             }
             if (_filename) {
-                $out .= "; " . _headerParameterToString("filename", _filename);
+                $out .= "; " ~ _headerParameterToString("filename", _filename);
             }
             $out .= "\r\n";
         }
         if (_type) {
-            $out .= "Content-Type: " . _type . "\r\n";
+            $out .= "Content-Type: " ~ _type ~ "\r\n";
         }
         if (_transferEncoding) {
-            $out .= "Content-Transfer-Encoding: " . _transferEncoding . "\r\n";
+            $out .= "Content-Transfer-Encoding: " ~ _transferEncoding ~ "\r\n";
         }
         if (_contentId) {
-            $out .= "Content-ID: <" . _contentId . ">\r\n";
+            $out .= "Content-ID: <" ~ _contentId ~ ">\r\n";
         }
         $out .= "\r\n";
         $out .= _value;

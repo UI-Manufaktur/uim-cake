@@ -88,7 +88,7 @@ requests:
 ```php
 <?php
 // in webroot/index.php
-require dirname(__DIR__) . "/vendor/autoload.php";
+require dirname(__DIR__) ~ "/vendor/autoload.php";
 
 use App\Application;
 import uim.cake.http.Server;

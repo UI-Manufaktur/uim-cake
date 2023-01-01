@@ -225,7 +225,7 @@ class Client : ClientInterface
         $parts = parse_url($url);
 
         if ($parts == false) {
-            throw new InvalidArgumentException("String " . $url . " did not parse");
+            throw new InvalidArgumentException("String " ~ $url ~ " did not parse");
         }
 
         $config = array_intersect_key($parts, ["scheme": "", "port": "", "host": "", "path": ""]);
@@ -583,7 +583,7 @@ class Client : ClientInterface
         }
 
         if ($options["protocolRelative"] && preg_match("#^//#", $url)) {
-            $url = $options["scheme"] . ":" . $url;
+            $url = $options["scheme"] ~ ":" ~ $url;
         }
         if (preg_match("#^https?://#", $url)) {
             return $url;
@@ -593,14 +593,14 @@ class Client : ClientInterface
             "http": 80,
             "https": 443,
         ];
-        $out = $options["scheme"] . "://" . $options["host"];
+        $out = $options["scheme"] ~ "://" ~ $options["host"];
         if ($options["port"] && (int)$options["port"] != $defaultPorts[$options["scheme"]]) {
-            $out .= ":" . $options["port"];
+            $out .= ":" ~ $options["port"];
         }
         if (!empty($options["basePath"])) {
-            $out .= "/" . trim($options["basePath"], "/");
+            $out .= "/" ~ trim($options["basePath"], "/");
         }
-        $out .= "/" . ltrim($url, "/");
+        $out .= "/" ~ ltrim($url, "/");
 
         return $out;
     }

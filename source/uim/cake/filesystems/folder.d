@@ -233,7 +233,7 @@ class Folder
     string[] find(string regexpPattern = ".*", $sort = false) {
         [, myfiles] = this.read($sort);
 
-        return array_values(preg_grep("/^" . $regexpPattern . "$/i", myfiles));
+        return array_values(preg_grep("/^" ~ $regexpPattern ~ "$/i", myfiles));
     }
 
     /**
@@ -268,7 +268,7 @@ class Folder
         $found = [];
 
         foreach (myfiles as myfile) {
-            if (preg_match("/^" . $pattern . "$/i", myfile)) {
+            if (preg_match("/^" ~ $pattern ~ "$/i", myfile)) {
                 $found[] = Folder::addPathElement(this.path, myfile);
             }
         }
@@ -388,9 +388,9 @@ class Folder
         $current = Folder::slashTerm(this.pwd());
 
         if (!$reverse) {
-            $return = preg_match("/^" . preg_quote($dir, "/") . "(.*)/", $current);
+            $return = preg_match("/^" ~ preg_quote($dir, "/") ~ "(.*)/", $current);
         } else {
-            $return = preg_match("/^" . preg_quote($current, "/") . "(.*)/", $dir);
+            $return = preg_match("/^" ~ preg_quote($current, "/") ~ "(.*)/", $dir);
         }
 
         return (bool)$return;
@@ -535,7 +535,7 @@ class Folder
         foreach ($iterator as $itemPath: $fsIterator) {
             if ($skipHidden) {
                 $subPathName = $fsIterator.getSubPathname();
-                if ($subPathName[0] == "." || indexOf($subPathName, DIRECTORY_SEPARATOR . ".") != false) {
+                if ($subPathName[0] == "." || indexOf($subPathName, DIRECTORY_SEPARATOR ~ ".") != false) {
                     unset($fsIterator);
                     continue;
                 }

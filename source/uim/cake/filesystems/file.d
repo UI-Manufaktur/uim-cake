@@ -307,7 +307,7 @@ class File {
             this.info();
         }
         if (isset(this.info["extension"])) {
-            return static::_basename(this.name, "." . this.info["extension"]);
+            return static::_basename(this.name, "." ~ this.info["extension"]);
         }
         if (this.name) {
             return this.name;

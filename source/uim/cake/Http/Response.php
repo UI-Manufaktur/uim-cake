@@ -949,7 +949,7 @@ class Response : IResponse
     void notModified(): void
     {
         deprecationWarning(
-            "The `notModified()` method is deprecated. " .
+            "The `notModified()` method is deprecated~ " ~
             "Use `withNotModified() instead, and remember immutability of with* methods."
         );
         _createStream();
@@ -1093,7 +1093,7 @@ class Response : IResponse
      * @return static
      */
     function withDownload(string $filename) {
-        return this.withHeader("Content-Disposition", "attachment; filename="" . $filename . """);
+        return this.withHeader("Content-Disposition", "attachment; filename="" ~ $filename ~ """);
     }
 
     /**
@@ -1131,15 +1131,15 @@ class Response : IResponse
     function withAddedLink(string $url, array $options = []) {
         $params = [];
         foreach ($options as $key: $option) {
-            $params[] = $key . "="" . $option . """;
+            $params[] = $key ~ "="" ~ $option ~ """;
         }
 
         $param = "";
         if ($params) {
-            $param = "; " . implode("; ", $params);
+            $param = "; " ~ implode("; ", $params);
         }
 
-        return this.withAddedHeader("Link", "<" . $url . ">" . $param);
+        return this.withAddedHeader("Link", "<" ~ $url ~ ">" ~ $param);
     }
 
     /**
@@ -1194,7 +1194,7 @@ class Response : IResponse
     function checkNotModified(ServerRequest $request): bool
     {
         deprecationWarning(
-            "The `checkNotModified()` method is deprecated. " .
+            "The `checkNotModified()` method is deprecated~ " ~
             "Use `isNotModified() instead and `withNoModified()` instead."
         );
         if (this.isNotModified($request)) {
@@ -1483,14 +1483,14 @@ class Response : IResponse
 
         if ($start > $end || $end > $lastByte || $start > $lastByte) {
             _setStatus(416);
-            _setHeader("Content-Range", "bytes 0-" . $lastByte . "/" . $fileSize);
+            _setHeader("Content-Range", "bytes 0-" ~ $lastByte ~ "/" ~ $fileSize);
 
             return;
         }
 
         /** @psalm-suppress PossiblyInvalidOperand */
         _setHeader("Content-Length", (string)($end - $start + 1));
-        _setHeader("Content-Range", "bytes " . $start . "-" . $end . "/" . $fileSize);
+        _setHeader("Content-Range", "bytes " ~ $start ~ "-" ~ $end ~ "/" ~ $fileSize);
         _setStatus(206);
         /**
          * @var int $start

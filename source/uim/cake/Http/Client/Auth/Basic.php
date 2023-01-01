@@ -68,6 +68,6 @@ class Basic
      */
     protected string _generateHeader(string $user, string $pass): string
     {
-        return "Basic " . base64_encode($user . ":" . $pass);
+        return "Basic " ~ base64_encode($user ~ ":" ~ $pass);
     }
 }

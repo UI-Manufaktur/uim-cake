@@ -124,7 +124,7 @@ abstract class BaseApplication :
 
 
     void bootstrap() {
-        require_once this.configDir . "bootstrap.php";
+        require_once this.configDir ~ "bootstrap.php";
     }
 
 
@@ -144,7 +144,7 @@ abstract class BaseApplication :
     void routes(RouteBuilder $routes) {
       // Only load routes if the router is empty
       if (!Router::routes()) {
-        $return = require this.configDir . "routes.php";
+        $return = require this.configDir ~ "routes.php";
         if ($return instanceof Closure) {
             $return($routes);
         }

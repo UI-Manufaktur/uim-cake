@@ -274,7 +274,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         if (empty($path) || $path == "/" || $path == "//" || $path == "/index.php") {
             $path = "/";
         }
-        $endsWithIndex = "/" . (Configure::read("App.webroot") ?: "webroot") . "/index.php";
+        $endsWithIndex = "/" ~ (Configure::read("App.webroot") ?: "webroot") ~ "/index.php";
         $endsWithLength = strlen($endsWithIndex);
         if (
             strlen($path) >= $endsWithLength &&
@@ -305,7 +305,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
         $webroot = $config["webroot"];
 
         if ($base != false && $base != null) {
-            return [$base, $base . "/"];
+            return [$base, $base ~ "/"];
         }
 
         if (!$baseUrl) {
@@ -313,9 +313,9 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             // Clean up additional / which cause following code to fail..
             $base = preg_replace("#/+#", "/", $base);
 
-            $indexPos = strpos($base, "/" . $webroot . "/index.php");
+            $indexPos = strpos($base, "/" ~ $webroot ~ "/index.php");
             if ($indexPos != false) {
-                $base = substr($base, 0, $indexPos) . "/" . $webroot;
+                $base = substr($base, 0, $indexPos) ~ "/" ~ $webroot;
             }
             if ($webroot == basename($base)) {
                 $base = dirname($base);
@@ -326,23 +326,23 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
             }
             $base = implode("/", array_map("rawurlencode", explode("/", $base)));
 
-            return [$base, $base . "/"];
+            return [$base, $base ~ "/"];
         }
 
-        $file = "/" . basename($baseUrl);
+        $file = "/" ~ basename($baseUrl);
         $base = dirname($baseUrl);
 
         if ($base == DIRECTORY_SEPARATOR || $base == ".") {
             $base = "";
         }
-        $webrootDir = $base . "/";
+        $webrootDir = $base ~ "/";
 
         $docRoot = Hash::get($server, "DOCUMENT_ROOT");
         $docRootContainsWebroot = strpos($docRoot, $webroot);
 
         if (!empty($base) || !$docRootContainsWebroot) {
-            if (strpos($webrootDir, "/" . $webroot . "/") == false) {
-                $webrootDir .= $webroot . "/";
+            if (strpos($webrootDir, "/" ~ $webroot ~ "/") == false) {
+                $webrootDir .= $webroot ~ "/";
             }
         }
 

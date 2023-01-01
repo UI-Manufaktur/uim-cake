@@ -175,7 +175,7 @@ class FormData : Countable
     void addRecursive(string aName, $value): void
     {
         foreach ($value as $key: $value) {
-            $key = $name . "[" . $key . "]";
+            $key = $name ~ "[" ~ $key ~ "]";
             this.add($key, $value);
         }
     }
@@ -226,7 +226,7 @@ class FormData : Countable
             return "application/x-www-form-urlencoded";
         }
 
-        return "multipart/form-data; boundary=" . this.boundary();
+        return "multipart/form-data; boundary=" ~ this.boundary();
     }
 
     /**

@@ -75,14 +75,14 @@ class FlashMessage {
         }
 
         if (myPlugin) {
-            myOptions["element"] = myPlugin . ".flash/" . $element;
+            myOptions["element"] = myPlugin ~ ".flash/" ~ $element;
         } else {
-            myOptions["element"] = "flash/" . $element;
+            myOptions["element"] = "flash/" ~ $element;
         }
 
         myMessages = [];
         if (!myOptions["clear"]) {
-            myMessages = (array)this.session.read("Flash." . myOptions["key"]);
+            myMessages = (array)this.session.read("Flash." ~ myOptions["key"]);
         }
 
         if (!myOptions["duplicate"]) {
@@ -100,7 +100,7 @@ class FlashMessage {
             "params":myOptions["params"],
         ];
 
-        this.session.write("Flash." . myOptions["key"], myMessages);
+        this.session.write("Flash." ~ myOptions["key"], myMessages);
     }
 
     /**

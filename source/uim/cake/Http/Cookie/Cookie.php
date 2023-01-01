@@ -247,7 +247,7 @@ class Cookie : CookieInterface
         }
 
         if ($expires != null) {
-            $expires = new DateTimeImmutable("@" . (string)$expires);
+            $expires = new DateTimeImmutable("@" ~ (string)$expires);
         }
 
         return $expires;
@@ -581,7 +581,7 @@ class Cookie : CookieInterface
     protected static function validateSameSiteValue(string $sameSite) {
         if (!in_array($sameSite, CookieInterface::SAMESITE_VALUES, true)) {
             throw new InvalidArgumentException(
-                "Samesite value must be either of: " . implode(", ", CookieInterface::SAMESITE_VALUES)
+                "Samesite value must be either of: " ~ implode(", ", CookieInterface::SAMESITE_VALUES)
             );
         }
     }

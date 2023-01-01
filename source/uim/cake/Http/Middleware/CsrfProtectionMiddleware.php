@@ -122,9 +122,9 @@ class CsrfProtectionMiddleware : IMiddleware
         }
         if ($request.getAttribute("csrfToken")) {
             throw new RuntimeException(
-                "A CSRF token is already set in the request." .
-                "\n" .
-                "Ensure you do not have the CSRF middleware applied more than once. " .
+                "A CSRF token is already set in the request." ~
+                "\n" ~
+                "Ensure you do not have the CSRF middleware applied more than once~ " ~
                 "Check both your `Application::middleware()` method and `config/routes.php`."
             );
         }
@@ -231,7 +231,7 @@ class CsrfProtectionMiddleware : IMiddleware
      */
     protected bool isHexadecimalToken(string $token): bool
     {
-        return preg_match("/^[a-f0-9]{" . static::TOKEN_WITH_CHECKSUM_LENGTH . "}$/", $token) == 1;
+        return preg_match("/^[a-f0-9]{" ~ static::TOKEN_WITH_CHECKSUM_LENGTH ~ "}$/", $token) == 1;
     }
 
     /**

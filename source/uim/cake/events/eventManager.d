@@ -160,7 +160,7 @@ class EventManager : IEventManager
         if (!is_string(myEventKey)) {
             if (!is_callable(myEventKey)) {
                 throw new CakeException(
-                    "First argument of EventManager::off() must be " .
+                    "First argument of EventManager::off() must be " ~
                     " string or IEventListener instance or callable."
                 );
             }
@@ -328,7 +328,7 @@ class EventManager : IEventManager
      */
     array matchingListeners(string myEventKeyPattern): array
     {
-        $matchPattern = "/" . preg_quote(myEventKeyPattern, "/") . "/";
+        $matchPattern = "/" ~ preg_quote(myEventKeyPattern, "/") ~ "/";
         $matches = array_intersect_key(
             _listeners,
             array_flip(
@@ -422,7 +422,7 @@ class EventManager : IEventManager
             foreach ($priorities as $listeners) {
                 $listenerCount += count($listeners);
             }
-            $properties["_listeners"][myKey] = $listenerCount . " listener(s)";
+            $properties["_listeners"][myKey] = $listenerCount ~ " listener(s)";
         }
         if (_eventList) {
             myCount = count(_eventList);
@@ -430,9 +430,9 @@ class EventManager : IEventManager
                 myEvent = _eventList[$i];
                 try {
                     $subject = myEvent.getSubject();
-                    $properties["_dispatchedEvents"][] = myEvent.getName() . " with subject " . get_class($subject);
+                    $properties["_dispatchedEvents"][] = myEvent.getName() ~ " with subject " ~ get_class($subject);
                 } catch (CakeException $e) {
-                    $properties["_dispatchedEvents"][] = myEvent.getName() . " with no subject";
+                    $properties["_dispatchedEvents"][] = myEvent.getName() ~ " with no subject";
                 }
             }
         } else {

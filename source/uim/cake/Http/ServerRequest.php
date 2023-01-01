@@ -250,7 +250,7 @@ class ServerRequest : IServerRequest
 
         if (isset($config["uri"])) {
             if (!$config["uri"] instanceof UriInterface) {
-                throw new CakeException("The `uri` key must be an instance of " . UriInterface::class);
+                throw new CakeException("The `uri` key must be an instance of " ~ UriInterface::class);
             }
             $uri = $config["uri"];
         } else {
@@ -294,7 +294,7 @@ class ServerRequest : IServerRequest
     protected function processUrlOption(array $config): array
     {
         if ($config["url"][0] != "/") {
-            $config["url"] = "/" . $config["url"];
+            $config["url"] = "/" ~ $config["url"];
         }
 
         if (strpos($config["url"], "?") != false) {
@@ -420,7 +420,7 @@ class ServerRequest : IServerRequest
                     $ref = "/";
                 }
                 if ($ref[0] != "/") {
-                    $ref = "/" . $ref;
+                    $ref = "/" ~ $ref;
                 }
 
                 return $ref;
@@ -565,7 +565,7 @@ class ServerRequest : IServerRequest
     protected function _headerDetector(array $detect): bool
     {
         foreach ($detect["header"] as $header: $value) {
-            $header = this.getEnv("http_" . $header);
+            $header = this.getEnv("http_" ~ $header);
             if ($header != null) {
                 if (!is_string($value) && !is_bool($value) && is_callable($value)) {
                     return $value($header);
@@ -615,7 +615,7 @@ class ServerRequest : IServerRequest
                 return (bool)preg_match($detect["pattern"], (string)this.getEnv($detect["env"]));
             }
             if (isset($detect["options"])) {
-                $pattern = "/" . implode("|", $detect["options"]) . "/i";
+                $pattern = "/" ~ implode("|", $detect["options"]) ~ "/i";
 
                 return (bool)preg_match($pattern, (string)this.getEnv($detect["env"]));
             }
@@ -746,7 +746,7 @@ class ServerRequest : IServerRequest
     {
         $name = str_replace("-", "_", strtoupper($name));
         if (!in_array($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
-            $name = "HTTP_" . $name;
+            $name = "HTTP_" ~ $name;
         }
 
         return $name;
@@ -1003,7 +1003,7 @@ class ServerRequest : IServerRequest
     /**
      * Get the current url scheme used for the request.
      *
-     * e.g. "http", or "https"
+     * e.g~ "http", or "https"
      *
      * @return string|null The scheme used for the request.
      */
@@ -1229,8 +1229,8 @@ class ServerRequest : IServerRequest
     function input(?callable $callback = null, ...$args) {
         deprecationWarning(
             "Use `(string)$request.getBody()` to get the raw PHP input as string; "
-            . "use `BodyParserMiddleware` to parse the request body so that it\"s available as array/object "
-            . "through $request.getParsedBody()"
+            ~ "use `BodyParserMiddleware` to parse the request body so that it\"s available as array/object "
+            ~ "through $request.getParsedBody()"
         );
         this.stream.rewind();
         $input = this.stream.getContents();
@@ -1652,7 +1652,7 @@ class ServerRequest : IServerRequest
     {
         foreach ($uploadedFiles as $key: $file) {
             if (is_array($file)) {
-                this.validateUploadedFiles($file, $key . ".");
+                this.validateUploadedFiles($file, $key ~ ".");
                 continue;
             }
 
@@ -1720,7 +1720,7 @@ class ServerRequest : IServerRequest
         }
         $port = $uri.getPort();
         if ($port) {
-            $host .= ":" . $port;
+            $host .= ":" ~ $port;
         }
         $new._environment["HTTP_HOST"] = $host;
 
@@ -1763,7 +1763,7 @@ class ServerRequest : IServerRequest
 
         $target = this.uri.getPath();
         if (this.uri.getQuery()) {
-            $target .= "?" . this.uri.getQuery();
+            $target .= "?" ~ this.uri.getQuery();
         }
 
         if (empty($target)) {

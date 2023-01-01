@@ -84,14 +84,14 @@ class FlashMessage
         }
 
         if ($plugin) {
-            $options["element"] = $plugin . ".flash/" . $element;
+            $options["element"] = $plugin ~ ".flash/" ~ $element;
         } else {
-            $options["element"] = "flash/" . $element;
+            $options["element"] = "flash/" ~ $element;
         }
 
         $messages = [];
         if (!$options["clear"]) {
-            $messages = (array)this.session.read("Flash." . $options["key"]);
+            $messages = (array)this.session.read("Flash." ~ $options["key"]);
         }
 
         if (!$options["duplicate"]) {
@@ -109,7 +109,7 @@ class FlashMessage
             "params": $options["params"],
         ];
 
-        this.session.write("Flash." . $options["key"], $messages);
+        this.session.write("Flash." ~ $options["key"], $messages);
     }
 
     /**

@@ -108,7 +108,7 @@ class HttpsEnforcerMiddleware : IMiddleware
             throw new UnexpectedValueException("The `hsts` config must be an array.");
         }
 
-        $value = "max-age=" . $config["maxAge"];
+        $value = "max-age=" ~ $config["maxAge"];
         if ($config["includeSubDomains"] ?? false) {
             $value .= "; includeSubDomains";
         }

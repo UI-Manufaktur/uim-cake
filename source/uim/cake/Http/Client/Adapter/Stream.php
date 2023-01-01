@@ -261,7 +261,7 @@ class Stream : AdapterInterface
         fclose(_stream);
 
         if ($timedOut) {
-            throw new NetworkException("Connection timed out " . $url, $request);
+            throw new NetworkException("Connection timed out " ~ $url, $request);
         }
 
         $headers = $meta["wrapper_data"];

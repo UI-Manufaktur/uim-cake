@@ -111,31 +111,31 @@ class Digest
     protected string _generateHeader(Request $request, array $credentials): string
     {
         $path = $request.getUri().getPath();
-        $a1 = md5($credentials["username"] . ":" . $credentials["realm"] . ":" . $credentials["password"]);
-        $a2 = md5($request.getMethod() . ":" . $path);
+        $a1 = md5($credentials["username"] ~ ":" ~ $credentials["realm"] ~ ":" ~ $credentials["password"]);
+        $a2 = md5($request.getMethod() ~ ":" ~ $path);
         $nc = "";
 
         if (empty($credentials["qop"])) {
-            $response = md5($a1 . ":" . $credentials["nonce"] . ":" . $a2);
+            $response = md5($a1 ~ ":" ~ $credentials["nonce"] ~ ":" ~ $a2);
         } else {
             $credentials["cnonce"] = uniqid();
             $nc = sprintf("%08x", $credentials["nc"]++);
             $response = md5(
-                $a1 . ":" . $credentials["nonce"] . ":" . $nc . ":" . $credentials["cnonce"] . ":auth:" . $a2
+                $a1 ~ ":" ~ $credentials["nonce"] ~ ":" ~ $nc ~ ":" ~ $credentials["cnonce"] ~ ":auth:" ~ $a2
             );
         }
 
         $authHeader = "Digest ";
-        $authHeader .= "username="" . str_replace(["\\", """], ["\\\\", "\\""], $credentials["username"]) . "", ";
-        $authHeader .= "realm="" . $credentials["realm"] . "", ";
-        $authHeader .= "nonce="" . $credentials["nonce"] . "", ";
-        $authHeader .= "uri="" . $path . "", ";
-        $authHeader .= "response="" . $response . """;
+        $authHeader .= "username="" ~ str_replace(["\\", """], ["\\\\", "\\""], $credentials["username"]) ~ "", ";
+        $authHeader .= "realm="" ~ $credentials["realm"] ~ "", ";
+        $authHeader .= "nonce="" ~ $credentials["nonce"] ~ "", ";
+        $authHeader .= "uri="" ~ $path ~ "", ";
+        $authHeader .= "response="" ~ $response ~ """;
         if (!empty($credentials["opaque"])) {
-            $authHeader .= ", opaque="" . $credentials["opaque"] . """;
+            $authHeader .= ", opaque="" ~ $credentials["opaque"] ~ """;
         }
         if (!empty($credentials["qop"])) {
-            $authHeader .= ", qop="auth", nc=" . $nc . ", cnonce="" . $credentials["cnonce"] . """;
+            $authHeader .= ", qop="auth", nc=" ~ $nc ~ ", cnonce="" ~ $credentials["cnonce"] ~ """;
         }
 
         return $authHeader;

@@ -80,8 +80,8 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
 
         if (method_exists(this, "_buildValidator")) {
             deprecationWarning(
-                static::class . " : `_buildValidator` which is no longer used. " .
-                "You should implement `buildValidator(Validator $validator, string myName): void` " .
+                static::class ~ " : `_buildValidator` which is no longer used~ " ~
+                "You should implement `buildValidator(Validator $validator, string myName): void` " ~
                 "or `validationDefault(Validator $validator): Validator` instead."
             );
         }
