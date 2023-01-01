@@ -96,7 +96,7 @@ class MessagesFileLoader
             $fileName = substr($fileName, $pos + 1);
         }
         foreach ($folders as $folder) {
-            $path = $folder . $fileName . ".$ext";
+            $path = $folder . $fileName ~ ".$ext";
             if (is_file($path)) {
                 $file = $path;
                 break;
@@ -140,7 +140,7 @@ class MessagesFileLoader
 
         $localePaths = App::path("locales");
         if (empty($localePaths) && defined("APP")) {
-            $localePaths[] = ROOT . "resources" . DIRECTORY_SEPARATOR . "locales" . DIRECTORY_SEPARATOR;
+            $localePaths[] = ROOT ~ "resources" ~ DIRECTORY_SEPARATOR ~ "locales" ~ DIRECTORY_SEPARATOR;
         }
         foreach ($localePaths as $path) {
             foreach ($folders as $folder) {

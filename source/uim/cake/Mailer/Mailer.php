@@ -420,7 +420,7 @@ class Mailer : IEventListener
         ];
         foreach ($simpleMethods as $method) {
             if (isset($config[$method])) {
-                this.{"set" . ucfirst($method)}($config[$method]);
+                this.{"set" ~ ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
@@ -430,7 +430,7 @@ class Mailer : IEventListener
         ];
         foreach ($viewBuilderMethods as $method) {
             if (array_key_exists($method, $config)) {
-                this.viewBuilder().{"set" . ucfirst($method)}($config[$method]);
+                this.viewBuilder().{"set" ~ ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
@@ -504,8 +504,8 @@ class Mailer : IEventListener
     {
         if (this.transport == null) {
             throw new BadMethodCallException(
-                "Transport was not defined. "
-                . "You must set on using setTransport() or set `transport` option in your mailer profile."
+                "Transport was not defined~ "
+                ~ "You must set on using setTransport() or set `transport` option in your mailer profile."
             );
         }
 

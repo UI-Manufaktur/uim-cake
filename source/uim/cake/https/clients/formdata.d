@@ -156,7 +156,7 @@ class FormData : Countable {
     void addRecursive(string myName, myValue): void
     {
         foreach (myValue as myKey: myValue) {
-            myKey = myName . "[" . myKey . "]";
+            myKey = myName ~ "[" ~ myKey ~ "]";
             this.add(myKey, myValue);
         }
     }
@@ -202,7 +202,7 @@ class FormData : Countable {
             return "application/x-www-form-urlencoded";
         }
 
-        return "multipart/form-data; boundary=" . this.boundary();
+        return "multipart/form-data; boundary=" ~ this.boundary();
     }
 
     /**

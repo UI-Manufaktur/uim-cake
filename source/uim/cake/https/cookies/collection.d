@@ -250,7 +250,7 @@ class CookieCollection : IteratorAggregate, Countable {
                 continue;
             }
 
-            $pattern = "/" . preg_quote($domain, "/") . "$/";
+            $pattern = "/" ~ preg_quote($domain, "/") ~ "$/";
             if (!preg_match($pattern, $host)) {
                 continue;
             }
@@ -294,7 +294,7 @@ class CookieCollection : IteratorAggregate, Countable {
      */
     protected void removeExpiredCookies(string host, string myPath) {
         $time = new DateTimeImmutable("now", new DateTimeZone("UTC"));
-        $hostPattern = "/" . preg_quote($host, "/") . "$/";
+        $hostPattern = "/" ~ preg_quote($host, "/") ~ "$/";
 
         foreach (this.cookies as $i: $cookie) {
             if (!$cookie.isExpired($time)) {

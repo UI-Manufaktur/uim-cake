@@ -86,7 +86,7 @@ class SyslogLog : BaseLog
     this(array $config = []) {
         if (isset($config["format"])) {
             deprecationWarning(
-                "`format` option is now deprecated in favor of custom formatters. " .
+                "`format` option is now deprecated in favor of custom formatters~ " ~
                 "Switching to `LegacySyslogFormatter`.",
                 0
             );

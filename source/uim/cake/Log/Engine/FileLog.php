@@ -132,13 +132,13 @@ class FileLog : BaseLog
         $pathname = _path . $filename;
         $mask = _config["mask"];
         if (!$mask) {
-            file_put_contents($pathname, $message . "\n", FILE_APPEND);
+            file_put_contents($pathname, $message ~ "\n", FILE_APPEND);
 
             return;
         }
 
         $exists = is_file($pathname);
-        file_put_contents($pathname, $message . "\n", FILE_APPEND);
+        file_put_contents($pathname, $message ~ "\n", FILE_APPEND);
         static $selfError = false;
 
         if (!$selfError && !$exists && !chmod($pathname, (int)$mask)) {
@@ -168,7 +168,7 @@ class FileLog : BaseLog
         } elseif (in_array($level, $debugTypes, true)) {
             $filename = "debug.log";
         } else {
-            $filename = $level . ".log";
+            $filename = $level ~ ".log";
         }
 
         return $filename;
@@ -198,10 +198,10 @@ class FileLog : BaseLog
         if ($rotate == 0) {
             $result = unlink($filePath);
         } else {
-            $result = rename($filePath, $filePath . "." . time());
+            $result = rename($filePath, $filePath ~ "." ~ time());
         }
 
-        $files = glob($filePath . ".*");
+        $files = glob($filePath ~ ".*");
         if ($files) {
             $filesToDelete = count($files) - $rotate;
             while ($filesToDelete > 0) {

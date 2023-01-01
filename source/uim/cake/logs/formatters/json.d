@@ -31,6 +31,6 @@ class JsonFormatter : AbstractFormatter {
         $log = ["date":date(_config["dateFormat"]), "level":(string)$level, "message":myMessage];
         $json = json_encode($log, _config["flags"]);
 
-        return _config["appendNewline"] ? $json . "\n" : $json;
+        return _config["appendNewline"] ? $json ~ "\n" : $json;
     }
 }

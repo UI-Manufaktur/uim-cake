@@ -58,7 +58,7 @@ class Curl : IAdapter
     array buildOptions(RequestInterface myRequest, array myOptions) {
         $headers = [];
         foreach (myRequest.getHeaders() as myKey: myValues) {
-            $headers[] = myKey . ": " . implode(", ", myValues);
+            $headers[] = myKey ~ ": " ~ implode(", ", myValues);
         }
 
         $out = [
@@ -123,7 +123,7 @@ class Curl : IAdapter
         }
         if (isset(myOptions["proxy"]["username"])) {
             myPassword = !empty(myOptions["proxy"]["password"]) ? myOptions["proxy"]["password"] : "";
-            $out[CURLOPT_PROXYUSERPWD] = myOptions["proxy"]["username"] . ":" . myPassword;
+            $out[CURLOPT_PROXYUSERPWD] = myOptions["proxy"]["username"] ~ ":" ~ myPassword;
         }
         if (isset(myOptions["curl"]) && is_array(myOptions["curl"])) {
             // Can"t use array_merge() because keys will be re-ordered.

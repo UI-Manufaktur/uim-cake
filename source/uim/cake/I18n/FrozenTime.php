@@ -118,7 +118,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
         }
 
         if (is_numeric($time)) {
-            $time = "@" . $time;
+            $time = "@" ~ $time;
         }
 
         super(($time, $tz);

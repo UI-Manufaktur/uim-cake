@@ -136,7 +136,7 @@ abstract class BaseLog : AbstractLogger
         }
 
         preg_match_all(
-            "/(?<!" . preg_quote("\\", "/") . ")\{([a-z0-9-_]+)\}/i",
+            "/(?<!" ~ preg_quote("\\", "/") ~ ")\{([a-z0-9-_]+)\}/i",
             $message,
             $matches
         );
@@ -151,53 +151,53 @@ abstract class BaseLog : AbstractLogger
             $value = $context[$key];
 
             if (is_scalar($value)) {
-                $replacements["{" . $key . "}"] = (string)$value;
+                $replacements["{" ~ $key ~ "}"] = (string)$value;
                 continue;
             }
 
             if (is_array($value)) {
-                $replacements["{" . $key . "}"] = json_encode($value, JSON_UNESCAPED_UNICODE);
+                $replacements["{" ~ $key ~ "}"] = json_encode($value, JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if ($value instanceof JsonSerializable) {
-                $replacements["{" . $key . "}"] = json_encode($value, JSON_UNESCAPED_UNICODE);
+                $replacements["{" ~ $key ~ "}"] = json_encode($value, JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if ($value instanceof ArrayObject) {
-                $replacements["{" . $key . "}"] = json_encode($value.getArrayCopy(), JSON_UNESCAPED_UNICODE);
+                $replacements["{" ~ $key ~ "}"] = json_encode($value.getArrayCopy(), JSON_UNESCAPED_UNICODE);
                 continue;
             }
 
             if ($value instanceof Serializable) {
-                $replacements["{" . $key . "}"] = $value.serialize();
+                $replacements["{" ~ $key ~ "}"] = $value.serialize();
                 continue;
             }
 
             if (is_object($value)) {
                 if (method_exists($value, "toArray")) {
-                    $replacements["{" . $key . "}"] = json_encode($value.toArray(), JSON_UNESCAPED_UNICODE);
+                    $replacements["{" ~ $key ~ "}"] = json_encode($value.toArray(), JSON_UNESCAPED_UNICODE);
                     continue;
                 }
 
                 if (method_exists($value, "__serialize")) {
-                    $replacements["{" . $key . "}"] = serialize($value);
+                    $replacements["{" ~ $key ~ "}"] = serialize($value);
                     continue;
                 }
 
                 if (method_exists($value, "__toString")) {
-                    $replacements["{" . $key . "}"] = (string)$value;
+                    $replacements["{" ~ $key ~ "}"] = (string)$value;
                     continue;
                 }
 
                 if (method_exists($value, "__debugInfo")) {
-                    $replacements["{" . $key . "}"] = json_encode($value.__debugInfo(), JSON_UNESCAPED_UNICODE);
+                    $replacements["{" ~ $key ~ "}"] = json_encode($value.__debugInfo(), JSON_UNESCAPED_UNICODE);
                     continue;
                 }
             }
 
-            $replacements["{" . $key . "}"] = sprintf("[unhandled value of type %s]", getTypeName($value));
+            $replacements["{" ~ $key ~ "}"] = sprintf("[unhandled value of type %s]", getTypeName($value));
         }
 
         /** @psalm-suppress InvalidArgument */

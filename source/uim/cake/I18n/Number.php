@@ -147,8 +147,8 @@ class Number
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `pattern` - An ICU number pattern to use for formatting the number. e.g #,##0.00
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. "["
-     * - `after` - The string to place after decimal numbers, e.g. "]"
+     * - `before` - The string to place before whole numbers, e.g~ "["
+     * - `after` - The string to place after decimal numbers, e.g~ "]"
      *
      * @param string|int|float $value A floating point number.
      * @param array<string, mixed> $options An array with options.
@@ -190,8 +190,8 @@ class Number
      * - `places` - Minimum number or decimals to use, e.g 0
      * - `precision` - Maximum Number of decimal places to use, e.g. 2
      * - `locale` - The locale name to use for formatting the number, e.g. fr_FR
-     * - `before` - The string to place before whole numbers, e.g. "["
-     * - `after` - The string to place after decimal numbers, e.g. "]"
+     * - `before` - The string to place before whole numbers, e.g~ "["
+     * - `after` - The string to place after decimal numbers, e.g~ "]"
      *
      * @param string|float $value A floating point number
      * @param array<string, mixed> $options Options list.
@@ -268,7 +268,7 @@ class Number
     static function defaultCurrency($currency = null): ?string
     {
         deprecationWarning(
-            "Number::defaultCurrency() is deprecated. " .
+            "Number::defaultCurrency() is deprecated~ " ~
             "Use Number::setDefaultCurrency()/getDefaultCurrency() instead."
         );
 

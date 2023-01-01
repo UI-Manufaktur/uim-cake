@@ -242,7 +242,7 @@ class ServerRequest : IServerRequest
 
         if (isset(myConfig["uri"])) {
             if (!myConfig["uri"] instanceof UriInterface) {
-                throw new CakeException("The `uri` key must be an instance of " . UriInterface::class);
+                throw new CakeException("The `uri` key must be an instance of " ~ UriInterface::class);
             }
             $uri = myConfig["uri"];
         } else {
@@ -285,7 +285,7 @@ class ServerRequest : IServerRequest
      */
     protected array processUrlOption(array myConfig) {
         if (myConfig["url"][0] != "/") {
-            myConfig["url"] = "/" . myConfig["url"];
+            myConfig["url"] = "/" ~ myConfig["url"];
         }
 
         if (indexOf(myConfig["url"], "?") != false) {
@@ -401,7 +401,7 @@ class ServerRequest : IServerRequest
                     $ref = "/";
                 }
                 if ($ref[0] != "/") {
-                    $ref = "/" . $ref;
+                    $ref = "/" ~ $ref;
                 }
 
                 return $ref;
@@ -529,7 +529,7 @@ class ServerRequest : IServerRequest
      */
     protected bool _headerDetector(array $detect) {
         foreach ($detect["header"] as $header: myValue) {
-            $header = this.getEnv("http_" . $header);
+            $header = this.getEnv("http_" ~ $header);
             if ($header  !is null) {
                 if (!is_string(myValue) && !is_bool(myValue) && is_callable(myValue)) {
                     return myValue($header);
@@ -577,7 +577,7 @@ class ServerRequest : IServerRequest
                 return (bool)preg_match($detect["pattern"], (string)this.getEnv($detect["env"]));
             }
             if (isset($detect["options"])) {
-                $pattern = "/" . implode("|", $detect["options"]) . "/i";
+                $pattern = "/" ~ implode("|", $detect["options"]) ~ "/i";
 
                 return (bool)preg_match($pattern, (string)this.getEnv($detect["env"]));
             }
@@ -705,7 +705,7 @@ class ServerRequest : IServerRequest
     protected string normalizeHeaderName(string myName) {
         myName = str_replace("-", "_", strtoupper(myName));
         if (!in_array(myName, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
-            myName = "HTTP_" . myName;
+            myName = "HTTP_" ~ myName;
         }
 
         return myName;
@@ -953,7 +953,7 @@ class ServerRequest : IServerRequest
     /**
      * Get the current url scheme used for the request.
      *
-     * e.g. "http", or "https"
+     * e.g~ "http", or "https"
      *
      * @return string|null The scheme used for the request.
      */
@@ -1223,8 +1223,8 @@ class ServerRequest : IServerRequest
     function input(?callable $callback = null, ...$args) {
         deprecationWarning(
             "Use `(string)myRequest.getBody()` to get the raw PHP input as string; "
-            . "use `BodyParserMiddleware` to parse the request body so that it\"s available as array/object "
-            . "through myRequest.getParsedBody()"
+            ~ "use `BodyParserMiddleware` to parse the request body so that it\"s available as array/object "
+            ~ "through myRequest.getParsedBody()"
         );
         this.stream.rewind();
         $input = this.stream.getContents();
@@ -1640,7 +1640,7 @@ class ServerRequest : IServerRequest
     protected void validateUploadedFiles(array $uploadedFiles, string myPath) {
         foreach ($uploadedFiles as myKey: myfile) {
             if (is_array(myfile)) {
-                this.validateUploadedFiles(myfile, myKey . ".");
+                this.validateUploadedFiles(myfile, myKey ~ ".");
                 continue;
             }
 
@@ -1708,7 +1708,7 @@ class ServerRequest : IServerRequest
         }
         $port = $uri.getPort();
         if ($port) {
-            $host .= ":" . $port;
+            $host .= ":" ~ $port;
         }
         $new._environment["HTTP_HOST"] = $host;
 
@@ -1750,7 +1750,7 @@ class ServerRequest : IServerRequest
 
         myTarget = this.uri.getPath();
         if (this.uri.getQuery()) {
-            myTarget .= "?" . this.uri.getQuery();
+            myTarget .= "?" ~ this.uri.getQuery();
         }
 
         if (empty(myTarget)) {

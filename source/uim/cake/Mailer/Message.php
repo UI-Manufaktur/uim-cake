@@ -860,7 +860,7 @@ class Message : JsonSerializable, Serializable
         }
         if (this.messageId != false) {
             if (this.messageId == true) {
-                this.messageId = "<" . str_replace("-", "", Text::uuid()) . "@" . this.domain . ">";
+                this.messageId = "<" ~ str_replace("-", "", Text::uuid()) ~ "@" ~ this.domain ~ ">";
             }
 
             $headers["Message-ID"] = this.messageId;
@@ -876,13 +876,13 @@ class Message : JsonSerializable, Serializable
 
         $headers["MIME-Version"] = "1.0";
         if (this.attachments) {
-            $headers["Content-Type"] = "multipart/mixed; boundary="" . (string)this.boundary . """;
+            $headers["Content-Type"] = "multipart/mixed; boundary="" ~ (string)this.boundary ~ """;
         } elseif (this.emailFormat == static::MESSAGE_BOTH) {
-            $headers["Content-Type"] = "multipart/alternative; boundary="" . (string)this.boundary . """;
+            $headers["Content-Type"] = "multipart/alternative; boundary="" ~ (string)this.boundary ~ """;
         } elseif (this.emailFormat == static::MESSAGE_TEXT) {
-            $headers["Content-Type"] = "text/plain; charset=" . this.getContentTypeCharset();
+            $headers["Content-Type"] = "text/plain; charset=" ~ this.getContentTypeCharset();
         } elseif (this.emailFormat == static::MESSAGE_HTML) {
-            $headers["Content-Type"] = "text/html; charset=" . this.getContentTypeCharset();
+            $headers["Content-Type"] = "text/html; charset=" ~ this.getContentTypeCharset();
         }
         $headers["Content-Transfer-Encoding"] = this.getContentTransferEncoding();
 
@@ -913,7 +913,7 @@ class Message : JsonSerializable, Serializable
             }
 
             foreach ((array)$value as $val) {
-                $headers[] = $key . ": " . $val;
+                $headers[] = $key ~ ": " ~ $val;
             }
         }
 
@@ -939,7 +939,7 @@ class Message : JsonSerializable, Serializable
             } else {
                 $encoded = this.encodeForHeader($alias);
                 if ($encoded == $alias && preg_match("/[^a-z0-9 ]/i", $encoded)) {
-                    $encoded = """ . str_replace(""", "\"", $encoded) . """;
+                    $encoded = """ ~ str_replace(""", "\"", $encoded) ~ """;
                 }
                 $return[] = sprintf("%s <%s>", $encoded, $email);
             }
@@ -1233,17 +1233,17 @@ class Message : JsonSerializable, Serializable
         $relBoundary = $textBoundary = $boundary;
 
         if ($hasInlineAttachments) {
-            $msg[] = "--" . $boundary;
-            $msg[] = "Content-Type: multipart/related; boundary="rel-" . $boundary . """;
+            $msg[] = "--" ~ $boundary;
+            $msg[] = "Content-Type: multipart/related; boundary="rel-" ~ $boundary ~ """;
             $msg[] = "";
-            $relBoundary = $textBoundary = "rel-" . $boundary;
+            $relBoundary = $textBoundary = "rel-" ~ $boundary;
         }
 
         if ($hasMultipleTypes && $hasAttachments) {
-            $msg[] = "--" . $relBoundary;
-            $msg[] = "Content-Type: multipart/alternative; boundary="alt-" . $boundary . """;
+            $msg[] = "--" ~ $relBoundary;
+            $msg[] = "Content-Type: multipart/alternative; boundary="alt-" ~ $boundary ~ """;
             $msg[] = "";
-            $textBoundary = "alt-" . $boundary;
+            $textBoundary = "alt-" ~ $boundary;
         }
 
         if (
@@ -1251,9 +1251,9 @@ class Message : JsonSerializable, Serializable
             || this.emailFormat == static::MESSAGE_BOTH
         ) {
             if ($multiPart) {
-                $msg[] = "--" . $textBoundary;
-                $msg[] = "Content-Type: text/plain; charset=" . this.getContentTypeCharset();
-                $msg[] = "Content-Transfer-Encoding: " . this.getContentTransferEncoding();
+                $msg[] = "--" ~ $textBoundary;
+                $msg[] = "Content-Type: text/plain; charset=" ~ this.getContentTypeCharset();
+                $msg[] = "Content-Transfer-Encoding: " ~ this.getContentTransferEncoding();
                 $msg[] = "";
             }
             $content = explode("\n", this.textMessage);
@@ -1267,9 +1267,9 @@ class Message : JsonSerializable, Serializable
             || this.emailFormat == static::MESSAGE_BOTH
         ) {
             if ($multiPart) {
-                $msg[] = "--" . $textBoundary;
-                $msg[] = "Content-Type: text/html; charset=" . this.getContentTypeCharset();
-                $msg[] = "Content-Transfer-Encoding: " . this.getContentTransferEncoding();
+                $msg[] = "--" ~ $textBoundary;
+                $msg[] = "Content-Type: text/html; charset=" ~ this.getContentTypeCharset();
+                $msg[] = "Content-Transfer-Encoding: " ~ this.getContentTransferEncoding();
                 $msg[] = "";
             }
             $content = explode("\n", this.htmlMessage);
@@ -1279,7 +1279,7 @@ class Message : JsonSerializable, Serializable
         }
 
         if ($textBoundary != $relBoundary) {
-            $msg[] = "--" . $textBoundary . "--";
+            $msg[] = "--" ~ $textBoundary ~ "--";
             $msg[] = "";
         }
 
@@ -1287,7 +1287,7 @@ class Message : JsonSerializable, Serializable
             $attachments = this.attachInlineFiles($relBoundary);
             $msg = array_merge($msg, $attachments);
             $msg[] = "";
-            $msg[] = "--" . $relBoundary . "--";
+            $msg[] = "--" ~ $relBoundary ~ "--";
             $msg[] = "";
         }
 
@@ -1297,7 +1297,7 @@ class Message : JsonSerializable, Serializable
         }
         if ($hasAttachments || $hasMultipleTypes) {
             $msg[] = "";
-            $msg[] = "--" . $boundary . "--";
+            $msg[] = "--" ~ $boundary ~ "--";
             $msg[] = "";
         }
 
@@ -1336,7 +1336,7 @@ class Message : JsonSerializable, Serializable
             $part.transferEncoding("base64");
             $part.type($fileInfo["mimetype"]);
 
-            $msg[] = "--" . $boundary;
+            $msg[] = "--" ~ $boundary;
             $msg[] = (string)$part;
             $msg[] = "";
         }
@@ -1364,7 +1364,7 @@ class Message : JsonSerializable, Serializable
             }
             $data = $fileInfo["data"] ?? this.readFile($fileInfo["file"]);
 
-            $msg[] = "--" . $boundary;
+            $msg[] = "--" ~ $boundary;
             $part = new FormDataPart("", $data, "inline", this.getHeaderCharset());
             $part.type($fileInfo["mimetype"]);
             $part.transferEncoding("base64");
@@ -1413,7 +1413,7 @@ class Message : JsonSerializable, Serializable
         ];
         foreach ($simpleMethods as $method) {
             if (isset($config[$method])) {
-                this.{"set" . ucfirst($method)}($config[$method]);
+                this.{"set" ~ ucfirst($method)}($config[$method]);
             }
         }
 

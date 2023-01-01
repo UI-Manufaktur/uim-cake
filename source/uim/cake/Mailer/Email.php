@@ -257,7 +257,7 @@ class Email : JsonSerializable, Serializable
             return this.message.getBody();
         }
 
-        $method = "getBody" . ucfirst($type);
+        $method = "getBody" ~ ucfirst($type);
 
         return this.message.$method();
     }
@@ -286,7 +286,7 @@ class Email : JsonSerializable, Serializable
         ];
         foreach ($simpleMethods as $method) {
             if (isset($config[$method])) {
-                this.{"set" . ucfirst($method)}($config[$method]);
+                this.{"set" ~ ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
@@ -296,7 +296,7 @@ class Email : JsonSerializable, Serializable
         ];
         foreach ($viewBuilderMethods as $method) {
             if (array_key_exists($method, $config)) {
-                this.getRenderer().viewBuilder().{"set" . ucfirst($method)}($config[$method]);
+                this.getRenderer().viewBuilder().{"set" ~ ucfirst($method)}($config[$method]);
                 unset($config[$method]);
             }
         }
@@ -340,14 +340,14 @@ class Email : JsonSerializable, Serializable
     function send($content = null): array
     {
         if (is_array($content)) {
-            $content = implode("\n", $content) . "\n";
+            $content = implode("\n", $content) ~ "\n";
         }
 
         this.render($content);
 
         $transport = this.getTransport();
         if (!$transport) {
-            $msg = "Cannot send email, transport was not defined. Did you call transport() or define " .
+            $msg = "Cannot send email, transport was not defined. Did you call transport() or define " ~
                 " a transport in the set profile?";
             throw new BadMethodCallException($msg);
         }
@@ -365,7 +365,7 @@ class Email : JsonSerializable, Serializable
     void render($content = null): void
     {
         if (is_array($content)) {
-            $content = implode("\n", $content) . "\n";
+            $content = implode("\n", $content) ~ "\n";
         }
 
         this.message.setBody(

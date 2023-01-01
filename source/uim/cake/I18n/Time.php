@@ -123,7 +123,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
         }
 
         if (is_numeric($time)) {
-            $time = "@" . $time;
+            $time = "@" ~ $time;
         }
         super(($time, $tz);
     }
@@ -189,15 +189,15 @@ class Time : MutableDateTime : I18nDateTimeInterface
         $year = this.format("Y");
         switch ($quarter) {
             case 1:
-                return [$year . "-01-01", $year . "-03-31"];
+                return [$year ~ "-01-01", $year ~ "-03-31"];
             case 2:
-                return [$year . "-04-01", $year . "-06-30"];
+                return [$year ~ "-04-01", $year ~ "-06-30"];
             case 3:
-                return [$year . "-07-01", $year . "-09-30"];
+                return [$year ~ "-07-01", $year ~ "-09-30"];
         }
 
         // 4th quarter
-        return [$year . "-10-01", $year . "-12-31"];
+        return [$year ~ "-10-01", $year ~ "-12-31"];
     }
 
     /**

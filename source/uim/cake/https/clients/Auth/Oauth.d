@@ -242,7 +242,7 @@ class Oauth
      * @return string Normalized URL
      */
     protected string _normalizedUrl(UriInterface $uri) {
-        $out = $uri.getScheme() . "://";
+        $out = $uri.getScheme() ~ "://";
         $out .= strtolower($uri.getHost());
         $out .= $uri.getPath();
 
@@ -324,7 +324,7 @@ class Oauth
         $out = "OAuth ";
         myParams = [];
         foreach (myData as myKey: myValue) {
-            myParams[] = myKey . "="" . _encode((string)myValue) . """;
+            myParams[] = myKey ~ "="" ~ _encode((string)myValue) ~ """;
         }
         $out .= implode(",", myParams);
 

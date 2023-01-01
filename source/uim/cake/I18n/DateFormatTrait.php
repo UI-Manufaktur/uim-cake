@@ -221,7 +221,7 @@ trait DateFormatTrait
             if ($timezone == "+00:00" || $timezone == "Z") {
                 $timezone = "UTC";
             } elseif ($timezone[0] == "+" || $timezone[0] == "-") {
-                $timezone = "GMT" . $timezone;
+                $timezone = "GMT" ~ $timezone;
             }
             $formatter = datefmt_create(
                 $locale,
@@ -233,7 +233,7 @@ trait DateFormatTrait
             );
             if (empty($formatter)) {
                 throw new RuntimeException(
-                    "Your version of icu does not support creating a date formatter for " .
+                    "Your version of icu does not support creating a date formatter for " ~
                     "`$key`. You should try to upgrade libicu and the intl extension."
                 );
             }
@@ -339,7 +339,7 @@ trait DateFormatTrait
 
         $time = $formatter.parse($time);
         if ($time != false) {
-            $dateTime = new DateTime("@" . $time);
+            $dateTime = new DateTime("@" ~ $time);
 
             if (!($tz instanceof DateTimeZone)) {
                 $tz = new DateTimeZone($tz ?? date_default_timezone_get());

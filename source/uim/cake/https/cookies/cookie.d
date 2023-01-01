@@ -234,7 +234,7 @@ class Cookie : ICookie
         }
 
         if ($expires  !is null) {
-            $expires = new DateTimeImmutable("@" . (string)$expires);
+            $expires = new DateTimeImmutable("@" ~ (string)$expires);
         }
 
         return $expires;
@@ -554,7 +554,7 @@ class Cookie : ICookie
     protected static function validateSameSiteValue(string sameSite) {
       if (!in_array($sameSite, ICookie::SAMESITE_VALUES, true)) {
         throw new InvalidArgumentException(
-            "Samesite value must be either of: " . implode(", ", ICookie::SAMESITE_VALUES)
+            "Samesite value must be either of: " ~ implode(", ", ICookie::SAMESITE_VALUES)
         );
       }
     }

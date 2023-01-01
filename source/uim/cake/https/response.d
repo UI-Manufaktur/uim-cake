@@ -1053,7 +1053,7 @@ class Response : IResponse
      * @return static
      */
     function withDownload(string myfilename) {
-        return this.withHeader("Content-Disposition", "attachment; filename="" . myfilename . """);
+        return this.withHeader("Content-Disposition", "attachment; filename="" ~ myfilename ~ """);
     }
 
     /**
@@ -1091,15 +1091,15 @@ class Response : IResponse
     function withAddedLink(string myUrl, array myOptions = []) {
         myParams = [];
         foreach (myOptions as myKey: $option) {
-            myParams[] = myKey . "="" . $option . """;
+            myParams[] = myKey ~ "="" ~ $option ~ """;
         }
 
         $param = "";
         if (myParams) {
-            $param = "; " . implode("; ", myParams);
+            $param = "; " ~ implode("; ", myParams);
         }
 
-        return this.withAddedHeader("Link", "<" . myUrl . ">" . $param);
+        return this.withAddedHeader("Link", "<" ~ myUrl ~ ">" ~ $param);
     }
 
     /**
@@ -1440,14 +1440,14 @@ class Response : IResponse
 
         if ($start > $end || $end > $lastByte || $start > $lastByte) {
             _setStatus(416);
-            _setHeader("Content-Range", "bytes 0-" . $lastByte . "/" . myfileSize);
+            _setHeader("Content-Range", "bytes 0-" ~ $lastByte ~ "/" ~ myfileSize);
 
             return;
         }
 
         /** @psalm-suppress PossiblyInvalidOperand */
         _setHeader("Content-Length", (string)($end - $start + 1));
-        _setHeader("Content-Range", "bytes " . $start . "-" . $end . "/" . myfileSize);
+        _setHeader("Content-Range", "bytes " ~ $start ~ "-" ~ $end ~ "/" ~ myfileSize);
         _setStatus(206);
         /**
          * @var int $start

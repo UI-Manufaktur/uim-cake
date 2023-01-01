@@ -75,7 +75,7 @@ class SyslogLog : BaseLog {
     this(array myConfig = []) {
         if (isset(myConfig["format"])) {
             deprecationWarning(
-                "`format` option is now deprecated in favor of custom formatters. " .
+                "`format` option is now deprecated in favor of custom formatters~ " ~
                 "Switching to `LegacySyslogFormatter`.",
                 0
             );
