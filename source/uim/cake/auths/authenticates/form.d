@@ -1,11 +1,12 @@
 /*********************************************************************************************************
-	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
-	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
-	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.auths.authenticates.form;
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.auths.formauthenticate;
 
 @safe:
-import uim.cake
+import uim.cake;
 
 /**
  * Form authentication adapter for AuthComponent.
@@ -19,10 +20,10 @@ import uim.cake
  *
  * ```
  * this.loadComponent("Auth", [
- *     "authenticate":[
- *         "Form":[
- *             "fields":["username":"email", "password":"passwd"],
- *             "finder":"auth",
+ *     "authenticate": [
+ *         "Form": [
+ *             "fields": ["username": "email", "password": "passwd"],
+ *             "finder": "auth",
  *         ]
  *     ]
  * ]);
@@ -31,25 +32,26 @@ import uim.cake
  * When configuring FormAuthenticate you can pass in config to which fields, model and finder
  * are used. See `BaseAuthenticate::$_defaultConfig` for more information.
  *
- * @see https://book.UIM.org/4/en/controllers/components/authentication.html
+ * @see https://book.cakephp.org/4/en/controllers/components/authentication.html
  */
-class FormAuthenticate : BaseAuthenticate {
+class FormAuthenticate : BaseAuthenticate
+{
     /**
      * Checks the fields to ensure they are supplied.
      *
-     * @param uim.cake.http.ServerRequest myRequest The request that contains login information.
-     * @param array<string, string> myFields The fields to be checked.
+     * @param uim.cake.http.ServerRequest $request The request that contains login information.
+     * @param array<string, string> $fields The fields to be checked.
      * @return bool False if the fields have not been supplied. True if they exist.
      */
-    protected bool _checkFields(ServerRequest myRequest, array myFields) {
-      foreach (myField; [myFields["username"], myFields["password"]]) {
-        myValue = myRequest.getData(myField);
-        if (empty(myValue) || !is_string(myValue)) {
-            return false;
+    protected bool _checkFields(ServerRequest $request, STRINGAA $fields) {
+        foreach ([$fields["username"], $fields["password"]] as $field) {
+            $value = $request.getData($field);
+            if (empty($value) || !is_string($value)) {
+                return false;
+            }
         }
-      }
 
-      return true;
+        return true;
     }
 
     /**
@@ -57,19 +59,19 @@ class FormAuthenticate : BaseAuthenticate {
      * to find POST data that is used to find a matching record in the `config.userModel`. Will return false if
      * there is no post data, either username or password is missing, or if the scope conditions have not been met.
      *
-     * @param uim.cake.http.ServerRequest myRequest The request that contains login information.
+     * @param uim.cake.http.ServerRequest $request The request that contains login information.
      * @param uim.cake.http.Response $response Unused response object.
      * @return array<string, mixed>|false False on login failure. An array of User data on success.
      */
-    function authenticate(ServerRequest myRequest, Response $response) {
-        myFields = _config["fields"];
-        if (!_checkFields(myRequest, myFields)) {
+    function authenticate(ServerRequest $request, Response $response) {
+        $fields = _config["fields"];
+        if (!_checkFields($request, $fields)) {
             return false;
         }
 
         return _findUser(
-            myRequest.getData(myFields["username"]),
-            myRequest.getData(myFields["password"])
+            $request.getData($fields["username"]),
+            $request.getData($fields["password"])
         );
     }
 }

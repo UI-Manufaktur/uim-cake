@@ -1,11 +1,12 @@
 /*********************************************************************************************************
-	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
-	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
-	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.auths.authenticates.digest;
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.auths.digestauthenticate;
 
 @safe:
-import uim.cake
+import uim.cake;
 
 /**
  * Digest Authentication adapter for AuthComponent.
@@ -18,13 +19,13 @@ import uim.cake
  *
  * ```
  *  this.loadComponent("Auth", [
- *      "authenticate":["Digest"],
- *      "storage":"Memory",
- *      "unauthorizedRedirect":false,
+ *      "authenticate": ["Digest"],
+ *      "storage": "Memory",
+ *      "unauthorizedRedirect": false,
  *  ]);
  * ```
  *
- * You should set `storage` to `Memory` to prevent UIM from sending a
+ * You should set `storage` to `Memory` to prevent CakePHP from sending a
  * session cookie to the client.
  *
  * You should set `unauthorizedRedirect` to `false`. This causes `AuthComponent` to
@@ -41,7 +42,7 @@ import uim.cake
  * You can generate this password using `DigestAuthenticate::password()`
  *
  * ```
- * $digestPass = DigestAuthenticate::password(myUsername, myPassword, env("SERVER_NAME"));
+ * $digestPass = DigestAuthenticate::password($username, $password, env("SERVER_NAME"));
  * ```
  *
  * If you wish to use digest authentication alongside other authentication methods,
@@ -50,7 +51,7 @@ import uim.cake
  * `User.password` would store the password hash for use with other methods like
  * Basic or Form.
  *
- * @see https://book.UIM.org/4/en/controllers/components/authentication.html
+ * @see https://book.cakephp.org/4/en/controllers/components/authentication.html
  */
 class DigestAuthenticate : BasicAuthenticate
 {
@@ -64,39 +65,39 @@ class DigestAuthenticate : BasicAuthenticate
      * - `realm` The realm authentication is for, Defaults to the servername.
      * - `qop` Defaults to "auth", no other values are supported at this time.
      * - `opaque` A string that must be returned unchanged by clients.
-     *    Defaults to `md5(myConfig["realm"])`
+     *    Defaults to `md5($config["realm"])`
      * - `nonceLifetime` The number of seconds that nonces are valid for. Defaults to 300.
      *
      * @param uim.cake.controllers.ComponentRegistry $registry The Component registry
      *   used on this request.
-     * @param array<string, mixed> myConfig Array of config to use.
+     * @param array<string, mixed> $config Array of config to use.
      */
-    this(ComponentRegistry $registry, array myConfig = []) {
+    this(ComponentRegistry $registry, array $config = []) {
         this.setConfig([
-            "nonceLifetime":300,
-            "secret":Security::getSalt(),
-            "realm":null,
-            "qop":"auth",
-            "opaque":null,
+            "nonceLifetime": 300,
+            "secret": Security::getSalt(),
+            "realm": null,
+            "qop": "auth",
+            "opaque": null,
         ]);
 
-        super.this($registry, myConfig);
+        super(($registry, $config);
     }
 
     /**
      * Get a user based on information in the request. Used by cookie-less auth for stateless clients.
      *
-     * @param uim.cake.http.ServerRequest myRequest Request object.
+     * @param uim.cake.http.ServerRequest $request Request object.
      * @return array<string, mixed>|false Either false or an array of user information
      */
-    auto getUser(ServerRequest myRequest) {
-        $digest = _getDigest(myRequest);
+    function getUser(ServerRequest $request) {
+        $digest = _getDigest($request);
         if (empty($digest)) {
             return false;
         }
 
-        myUser = _findUser($digest["username"]);
-        if (empty(myUser)) {
+        $user = _findUser($digest["username"]);
+        if (empty($user)) {
             return false;
         }
 
@@ -104,18 +105,18 @@ class DigestAuthenticate : BasicAuthenticate
             return false;
         }
 
-        myField = _config["fields"]["password"];
-        myPassword = myUser[myField];
-        unset(myUser[myField]);
+        $field = _config["fields"]["password"];
+        $password = $user[$field];
+        unset($user[$field]);
 
-        myRequestMethod = myRequest.getEnv("ORIGINAL_REQUEST_METHOD") ?: myRequest.getMethod();
+        $requestMethod = $request.getEnv("ORIGINAL_REQUEST_METHOD") ?: $request.getMethod();
         $hash = this.generateResponseHash(
             $digest,
-            myPassword,
-            (string)myRequestMethod
+            $password,
+            (string)$requestMethod
         );
         if (hash_equals($hash, $digest["response"])) {
-            return myUser;
+            return $user;
         }
 
         return false;
@@ -124,11 +125,12 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Gets the digest headers from the request/environment.
      *
-     * @param uim.cake.http.ServerRequest myRequest Request object.
+     * @param uim.cake.http.ServerRequest $request Request object.
      * @return array<string, mixed>|null Array of digest information.
      */
-    protected ?array _getDigest(ServerRequest myRequest) {
-        $digest = myRequest.getEnv("PHP_AUTH_DIGEST");
+    protected function _getDigest(ServerRequest $request): ?array
+    {
+        $digest = $request.getEnv("PHP_AUTH_DIGEST");
         if (empty($digest) && function_exists("apache_request_headers")) {
             $headers = apache_request_headers();
             if (!empty($headers["Authorization"]) && substr($headers["Authorization"], 0, 7) == "Digest ") {
@@ -145,24 +147,25 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Parse the digest authentication headers and split them up.
      *
-     * @param string digest The raw digest authentication headers.
+     * @param string $digest The raw digest authentication headers.
      * @return array|null An array of digest authentication headers
      */
-    ?array parseAuthData(string digest) {
+    function parseAuthData(string $digest): ?array
+    {
         if (substr($digest, 0, 7) == "Digest ") {
             $digest = substr($digest, 7);
         }
-        myKeys = $match = [];
-        $req = ["nonce":1, "nc":1, "cnonce":1, "qop":1, "username":1, "uri":1, "response":1];
+        $keys = $match = [];
+        $req = ["nonce": 1, "nc": 1, "cnonce": 1, "qop": 1, "username": 1, "uri": 1, "response": 1];
         preg_match_all("/(\w+)=([\""]?)([a-zA-Z0-9\:\#\%\?\&@=\.\/_-]+)\2/", $digest, $match, PREG_SET_ORDER);
 
         foreach ($match as $i) {
-            myKeys[$i[1]] = $i[3];
+            $keys[$i[1]] = $i[3];
             unset($req[$i[1]]);
         }
 
         if (empty($req)) {
-            return myKeys;
+            return $keys;
         }
 
         return null;
@@ -172,13 +175,13 @@ class DigestAuthenticate : BasicAuthenticate
      * Generate the response hash for a given digest array.
      *
      * @param array<string, mixed> $digest Digest information containing data from DigestAuthenticate::parseAuthData().
-     * @param string myPassword The digest hash password generated with DigestAuthenticate::password()
-     * @param string method Request method
-     * @return Response hash
+     * @param string $password The digest hash password generated with DigestAuthenticate::password()
+     * @param string $method Request method
+     * @return string Response hash
      */
-    string generateResponseHash(array $digest, string myPassword, string method) {
+    string generateResponseHash(array $digest, string $password, string $method) {
         return md5(
-            myPassword .
+            $password .
             ":" ~ $digest["nonce"] ~ ":" ~ $digest["nc"] ~ ":" ~ $digest["cnonce"] ~ ":" ~ $digest["qop"] ~ ":" ~
             md5($method ~ ":" ~ $digest["uri"])
         );
@@ -187,48 +190,49 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Creates an auth digest password hash to store
      *
-     * @param string myUsername The username to use in the digest hash.
-     * @param string myPassword The unhashed password to make a digest hash for.
-     * @param string realm The realm the password is for.
-     * @return the hashed password that can later be used with Digest authentication.
+     * @param string $username The username to use in the digest hash.
+     * @param string $password The unhashed password to make a digest hash for.
+     * @param string $realm The realm the password is for.
+     * @return string the hashed password that can later be used with Digest authentication.
      */
-    static string password(string myUsername, string myPassword, string realm) {
-        return md5(myUsername ~ ":" ~ $realm ~ ":" ~ myPassword);
+    static string password(string $username, string $password, string $realm) {
+        return md5($username ~ ":" ~ $realm ~ ":" ~ $password);
     }
 
     /**
      * Generate the login headers
      *
-     * @param uim.cake.http.ServerRequest myRequest Request object.
-     * @return Headers for logging in.
+     * @param uim.cake.http.ServerRequest $request Request object.
+     * @return array<string, string> Headers for logging in.
      */
-    STRINGAA loginHeaders(ServerRequest myRequest) {
-        $realm = _config["realm"] ?: myRequest.getEnv("SERVER_NAME");
+    function loginHeaders(ServerRequest $request): array
+    {
+        $realm = _config["realm"] ?: $request.getEnv("SERVER_NAME");
 
-        myOptions = [
-            "realm":$realm,
-            "qop":_config["qop"],
-            "nonce":this.generateNonce(),
-            "opaque":_config["opaque"] ?: md5($realm),
+        $options = [
+            "realm": $realm,
+            "qop": _config["qop"],
+            "nonce": this.generateNonce(),
+            "opaque": _config["opaque"] ?: md5($realm),
         ];
 
-        $digest = _getDigest(myRequest);
+        $digest = _getDigest($request);
         if ($digest && isset($digest["nonce"]) && !this.validNonce($digest["nonce"])) {
-            myOptions["stale"] = true;
+            $options["stale"] = true;
         }
 
         $opts = [];
-        foreach (myOptions as $k: $v) {
+        foreach ($options as $k: $v) {
             if (is_bool($v)) {
                 $v = $v ? "true" : "false";
-                $opts[] = "%s=%s".format($k, $v);
+                $opts[] = sprintf("%s=%s", $k, $v);
             } else {
-                $opts[] = ˋ%s="%s"ˋ.format($k, $v);
+                $opts[] = sprintf("%s="%s"", $k, $v);
             }
         }
 
         return [
-            "WWW-Authenticate":"Digest " ~ implode(",", $opts),
+            "WWW-Authenticate": "Digest " ~ implode(",", $opts),
         ];
     }
 
@@ -247,14 +251,15 @@ class DigestAuthenticate : BasicAuthenticate
     /**
      * Check the nonce to ensure it is valid and not expired.
      *
-     * @param string nonce The nonce value to check.
+     * @param string $nonce The nonce value to check.
      */
-    protected bool validNonce(string nonce) {
-        myValue = base64_decode($nonce);
-        if (myValue == false) {
+    protected bool validNonce(string $nonce): bool
+    {
+        $value = base64_decode($nonce);
+        if ($value == false) {
             return false;
         }
-        $parts = explode(":", myValue);
+        $parts = explode(":", $value);
         if (count($parts) != 2) {
             return false;
         }
