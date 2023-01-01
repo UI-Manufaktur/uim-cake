@@ -1,28 +1,12 @@
-
-
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
-
- * @since         4.3.0
-  */module uim.cake.controllers.Exception;
+module uim.cake.controllers.Exception;
 
 import uim.cake.core.exceptions.CakeException;
 use Throwable;
 
-/**
- * Used when a passed parameter or action parameter type declaration is missing or invalid.
- */
+// Used when a passed parameter or action parameter type declaration is missing or invalid.
 class InvalidParameterException : CakeException
 {
-    /**
-     * @var array<string, string>
-     */
-    protected $templates = [
+    protected STRINGAA $templates = [
         "failed_coercion": "Unable to coerce "%s" to `%s` for `%s` in action %s::%s().",
         "missing_dependency": "Failed to inject dependency from service container for parameter `%s` " ~
             "with type `%s` in action %s::%s().",

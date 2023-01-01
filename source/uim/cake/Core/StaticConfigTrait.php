@@ -297,7 +297,7 @@ REGEXP;
      * @return array<string, string>
      * @psalm-return array<string, class-string>
      */
-    static function getDsnClassMap(): array
+    static STRINGAA getDsnClassMap()
     {
         return static::$_dsnClassMap;
     }

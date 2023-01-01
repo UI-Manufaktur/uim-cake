@@ -30,7 +30,7 @@ class ShellDispatcher
      *
      * @var array<string, string>
      */
-    protected static $_aliases = [];
+    protected static STRINGAA $_aliases = [];
 
     /**
      * Constructor
