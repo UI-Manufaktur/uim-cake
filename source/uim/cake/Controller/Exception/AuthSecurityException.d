@@ -5,9 +5,6 @@ module uim.cake.controllers.Exception;
  */
 class AuthSecurityException : SecurityException
 {
-    /**
-     * Security Exception type
-     *
-     */
+    // Security Exception type
     protected string $_type = "auth";
 }
