@@ -1,6 +1,6 @@
-module uim.cake.controllers\Exception;
+module uim.cake.controllers.Exception;
 
-import uim.caketps\exceptions.BadRequestException;
+import uim.cake.http.exceptions.BadRequestException;
 
 /**
  * Security exception - used when SecurityComponent detects any issue with the current request
@@ -9,15 +9,16 @@ class SecurityException : BadRequestException
 {
     /**
      * Security Exception type
+     *
      */
-    protected string _type = "secure";
+    protected string $_type = "secure";
 
     /**
      * Reason for request blackhole
      *
      * @var string|null
      */
-    protected _reason;
+    protected $_reason;
 
     /**
      * Getter for type
@@ -29,17 +30,19 @@ class SecurityException : BadRequestException
     /**
      * Set Message
      *
-     * @param string myMessage Exception message
+     * @param string $message Exception message
      */
-    void setMessage(string myMessage) {
-        this.message = myMessage;
+    void setMessage(string $message) {
+        this.message = $message;
     }
 
     /**
      * Set Reason
+     *
      * @param string|null $reason Reason details
+     * @return this
      */
-    auto setReason(Nullable!string reason = null) {
+    function setReason(?string $reason = null) {
         _reason = $reason;
 
         return this;
@@ -47,8 +50,11 @@ class SecurityException : BadRequestException
 
     /**
      * Get Reason
+     *
+     * @return string|null
      */
-    string getReason() {
+    function getReason(): ?string
+    {
         return _reason;
     }
 }

@@ -1,18 +1,18 @@
-module uim.cake.controllerss.components;
+module uim.cake.controllers.Component;
 
-import uim.cake.controllerss.components;
+import uim.cake.controllers.Component;
 import uim.cake.core.Configure;
-import uim.cakeents\IEvent;
-import uim.cakerm\FormProtector;
-import uim.caketps\exceptions.BadRequestException;
-import uim.caketps\Response;
-import uim.cake.routings\Router;
+import uim.cake.events.EventInterface;
+import uim.cake.Form\FormProtector;
+import uim.cake.http.exceptions.BadRequestException;
+import uim.cake.http.Response;
+import uim.cake.routings.Router;
 use Closure;
 
 /**
  * Protects against form tampering. It ensures that:
  *
- * - Form"s action (URL) is not modified.
+ * - Form's action (URL) is not modified.
  * - Unknown / extra fields are not added to the form.
  * - Existing fields have not been removed from the form.
  * - Values of hidden inputs have not been changed.
@@ -23,8 +23,9 @@ class FormProtectionComponent : Component
 {
     /**
      * Default message used for exceptions thrown.
+     *
      */
-    const string DEFAULT_EXCEPTION_MESSAGE = "Form tampering protection token validation failed.";
+    const string DEFAULT_EXCEPTION_MESSAGE = 'Form tampering protection token validation failed.';
 
     /**
      * Default config
@@ -42,11 +43,11 @@ class FormProtectionComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [
-        "validate":true,
-        "unlockedFields":[],
-        "unlockedActions":[],
-        "validationFailureCallback":null,
+    protected $_defaultConfig = [
+        'validate': true,
+        'unlockedFields': [],
+        'unlockedActions': [],
+        'validationFailureCallback': null,
     ];
 
     /**
@@ -54,26 +55,26 @@ class FormProtectionComponent : Component
      *
      * Token check happens here.
      *
-     * @param uim.cake.events.IEvent myEvent An Event instance
+     * @param uim.cake.events.IEvent $event An Event instance
      * @return uim.cake.http.Response|null
      */
-    function startup(IEvent myEvent): ?Response
+    function startup(IEvent $event): ?Response
     {
-        myRequest = this.getController().getRequest();
-        myData = myRequest.getParsedBody();
-        $hasData = (myData || myRequest.is(["put", "post", "delete", "patch"]));
+        $request = this.getController().getRequest();
+        $data = $request.getParsedBody();
+        $hasData = ($data || $request.is(['put', 'post', 'delete', 'patch']));
 
         if (
-            !in_array(myRequest.getParam("action"), _config["unlockedActions"], true)
+            !in_array($request.getParam('action'), _config['unlockedActions'], true)
             && $hasData
-            && _config["validate"]
+            && _config['validate']
         ) {
-            $session = myRequest.getSession();
+            $session = $request.getSession();
             $session.start();
-            myUrl = Router::url(myRequest.getRequestTarget());
+            $url = Router::url($request.getRequestTarget());
 
             $formProtector = new FormProtector(_config);
-            $isValid = $formProtector.validate(myData, myUrl, $session.id());
+            $isValid = $formProtector.validate($data, $url, $session.id());
 
             if (!$isValid) {
                 return this.validationFailure($formProtector);
@@ -81,18 +82,18 @@ class FormProtectionComponent : Component
         }
 
         $token = [
-            "unlockedFields":_config["unlockedFields"],
+            'unlockedFields': _config['unlockedFields'],
         ];
-        myRequest = myRequest.withAttribute("formTokenData", [
-            "unlockedFields":$token["unlockedFields"],
+        $request = $request.withAttribute('formTokenData', [
+            'unlockedFields': $token['unlockedFields'],
         ]);
 
-        if (is_array(myData)) {
-            unset(myData["_Token"]);
-            myRequest = myRequest.withParsedBody(myData);
+        if (is_array($data)) {
+            unset($data['_Token']);
+            $request = $request.withParsedBody($data);
         }
 
-        this.getController().setRequest(myRequest);
+        this.getController().setRequest($request);
 
         return null;
     }
@@ -102,9 +103,10 @@ class FormProtectionComponent : Component
      *
      * @return array<string, mixed>
      */
-    array implementedEvents() {
+    function implementedEvents(): array
+    {
         return [
-            "Controller.startup":"startup",
+            'Controller.startup': 'startup',
         ];
     }
 
@@ -115,32 +117,33 @@ class FormProtectionComponent : Component
      * callback by executing the method passing the argument as exception.
      *
      * @param uim.cake.Form\FormProtector $formProtector Form Protector instance.
-     * @return uim.cake.http.Response|null If specified, validationFailureCallback"s response, or no return otherwise.
+     * @return uim.cake.http.Response|null If specified, validationFailureCallback's response, or no return otherwise.
      * @throws uim.cake.http.exceptions.BadRequestException
      */
-    protected auto validationFailure(FormProtector $formProtector): ?Response
+    protected function validationFailure(FormProtector $formProtector): ?Response
     {
-        if (Configure::read("debug")) {
-            myException = new BadRequestException($formProtector.getError());
+        if (Configure::read('debug')) {
+            $exception = new BadRequestException($formProtector.getError());
         } else {
-            myException = new BadRequestException(static::DEFAULT_EXCEPTION_MESSAGE);
+            $exception = new BadRequestException(static::DEFAULT_EXCEPTION_MESSAGE);
         }
 
-        if (_config["validationFailureCallback"]) {
-            return this.executeCallback(_config["validationFailureCallback"], myException);
+        if (_config['validationFailureCallback']) {
+            return this.executeCallback(_config['validationFailureCallback'], $exception);
         }
 
-        throw myException;
+        throw $exception;
     }
 
     /**
      * Execute callback.
      *
      * @param \Closure $callback A valid callable
-     * @param uim.cake.http.exceptions.BadRequestException myException Exception instance.
+     * @param uim.cake.http.exceptions.BadRequestException $exception Exception instance.
      * @return uim.cake.http.Response|null
      */
-    protected auto executeCallback(Closure $callback, BadRequestException myException): ?Response {
-        return $callback(myException);
+    protected function executeCallback(Closure $callback, BadRequestException $exception): ?Response
+    {
+        return $callback($exception);
     }
 }

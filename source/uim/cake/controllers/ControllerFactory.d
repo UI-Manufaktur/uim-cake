@@ -1,18 +1,18 @@
-module uim.cake.controllers;
+module uim.cake.Controller;
 
-import uim.cake.controllers\exceptions.InvalidParameterException;
+import uim.cake.controllers.exceptions.InvalidParameterException;
 import uim.cake.core.App;
 import uim.cake.core.IContainer;
-import uim.caketps\IControllerFactory;
-import uim.caketps\exceptions.MissingControllerException;
-import uim.caketps\MiddlewareQueue;
-import uim.caketps\Runner;
-import uim.caketps\ServerRequest;
-import uim.cakeilities.Inflector;
+import uim.cake.http.ControllerFactoryInterface;
+import uim.cake.http.exceptions.MissingControllerException;
+import uim.cake.http.MiddlewareQueue;
+import uim.cake.http.Runner;
+import uim.cake.http.ServerRequest;
+import uim.cake.utilities.Inflector;
 use Closure;
 use Psr\Http\messages.IResponse;
 use Psr\Http\messages.IServerRequest;
-use Psr\Http\servers.IRequestHandler;
+use Psr\Http\servers.RequestHandlerInterface;
 use ReflectionClass;
 use ReflectionFunction;
 use ReflectionNamedType;
@@ -20,54 +20,54 @@ use ReflectionNamedType;
 /**
  * Factory method for building controllers for request.
  *
- * @: uim.cake.Http\IControllerFactory<uim.cake.Controller\Controller>
+ * @implements uim.cake.Http\ControllerFactoryInterface<uim.cake.Controller\Controller>
  */
-class ControllerFactory : IControllerFactory, IRequestHandler
+class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
 {
     /**
      * @var uim.cake.Core\IContainer
      */
-    protected myContainer;
+    protected $container;
 
     /**
      * @var uim.cake.controllers.Controller
      */
-    protected controller;
+    protected $controller;
 
     /**
      * Constructor
      *
-     * @param uim.cake.Core\IContainer myContainer The container to build controllers with.
+     * @param uim.cake.Core\IContainer $container The container to build controllers with.
      */
-    this(IContainer myContainer) {
-        this.container = myContainer;
+    this(IContainer $container) {
+        this.container = $container;
     }
 
     /**
      * Create a controller for a given request.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request to build a controller for.
+     * @param \Psr\Http\messages.IServerRequest $request The request to build a controller for.
      * @return uim.cake.controllers.Controller
      * @throws uim.cake.http.exceptions.MissingControllerException
      */
-    Controller create(IServerRequest myRequest) {
-        myClassName = this.getControllerClass(myRequest);
-        if (myClassName is null) {
-            throw this.missingController(myRequest);
+    function create(IServerRequest $request): Controller
+    {
+        $className = this.getControllerClass($request);
+        if ($className == null) {
+            throw this.missingController($request);
         }
 
-        $reflection = new ReflectionClass(myClassName);
+        $reflection = new ReflectionClass($className);
         if ($reflection.isAbstract()) {
-            throw this.missingController(myRequest);
+            throw this.missingController($request);
         }
 
-        // If the controller has a container definition
-        // add the request as a service.
-        if (this.container.has(myClassName)) {
-            this.container.add(ServerRequest::class, myRequest);
-            $controller = this.container.get(myClassName);
+        // Get the controller from the container if defined.
+        // The request is in the container by default.
+        if (this.container.has($className)) {
+            $controller = this.container.get($className);
         } else {
-            $controller = $reflection.newInstance(myRequest);
+            $controller = $reflection.newInstance($request);
         }
 
         return $controller;
@@ -81,7 +81,8 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @throws uim.cake.controllers.exceptions.MissingActionException If controller action is not found.
      * @throws \UnexpectedValueException If return value of action method is not null or IResponse instance.
      */
-    IResponse invoke($controller) {
+    function invoke($controller): IResponse
+    {
         this.controller = $controller;
 
         $middlewares = $controller.getMiddleware();
@@ -99,17 +100,18 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Invoke the action.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest Request instance.
+     * @param \Psr\Http\messages.IServerRequest $request Request instance.
      * @return \Psr\Http\messages.IResponse
      */
-    IResponse handle(IServerRequest myRequest) {
+    function handle(IServerRequest $request): IResponse
+    {
         $controller = this.controller;
         /** @psalm-suppress ArgumentTypeCoercion */
-        $controller.setRequest(myRequest);
+        $controller.setRequest($request);
 
-        myResult = $controller.startupProcess();
-        if (myResult instanceof IResponse) {
-            return myResult;
+        $result = $controller.startupProcess();
+        if ($result instanceof IResponse) {
+            return $result;
         }
 
         $action = $controller.getAction();
@@ -119,9 +121,9 @@ class ControllerFactory : IControllerFactory, IRequestHandler
         );
         $controller.invokeAction($action, $args);
 
-        myResult = $controller.shutdownProcess();
-        if (myResult instanceof IResponse) {
-            return myResult;
+        $result = $controller.shutdownProcess();
+        if ($result instanceof IResponse) {
+            return $result;
         }
 
         return $controller.getResponse();
@@ -134,27 +136,36 @@ class ControllerFactory : IControllerFactory, IRequestHandler
      * @param array $passedParams Params passed by the router.
      * @return array
      */
-    protected array getActionArgs(Closure $action, array $passedParams) {
+    protected function getActionArgs(Closure $action, array $passedParams): array
+    {
         $resolved = [];
         $function = new ReflectionFunction($action);
         foreach ($function.getParameters() as $parameter) {
-            myType = $parameter.getType();
-            if (myType && !myType instanceof ReflectionNamedType) {
+            $type = $parameter.getType();
+            if ($type && !$type instanceof ReflectionNamedType) {
                 // Only single types are supported
                 throw new InvalidParameterException([
-                    "template":"unsupported_type",
-                    "parameter":$parameter.getName(),
-                    "controller":this.controller.getName(),
-                    "action":this.controller.getRequest().getParam("action"),
-                    "prefix":this.controller.getRequest().getParam("prefix"),
-                    "plugin":this.controller.getRequest().getParam("plugin"),
+                    "template": "unsupported_type",
+                    "parameter": $parameter.getName(),
+                    "controller": this.controller.getName(),
+                    "action": this.controller.getRequest().getParam("action"),
+                    "prefix": this.controller.getRequest().getParam("prefix"),
+                    "plugin": this.controller.getRequest().getParam("plugin"),
                 ]);
             }
 
             // Check for dependency injection for classes
-            if (myType instanceof ReflectionNamedType && !myType.isBuiltin()) {
-                if (this.container.has(myType.getName())) {
-                    $resolved[] = this.container.get(myType.getName());
+            if ($type instanceof ReflectionNamedType && !$type.isBuiltin()) {
+                $typeName = $type.getName();
+                if (this.container.has($typeName)) {
+                    $resolved[] = this.container.get($typeName);
+                    continue;
+                }
+
+                // Use passedParams as a source of typed dependencies.
+                // The accepted types for passedParams was never defined and userland code relies on that.
+                if ($passedParams && is_object($passedParams[0]) && $passedParams[0] instanceof $typeName) {
+                    $resolved[] = array_shift($passedParams);
                     continue;
                 }
 
@@ -166,34 +177,35 @@ class ControllerFactory : IControllerFactory, IRequestHandler
                 }
 
                 throw new InvalidParameterException([
-                    "template":"missing_dependency",
-                    "parameter":$parameter.getName(),
-                    "controller":this.controller.getName(),
-                    "action":this.controller.getRequest().getParam("action"),
-                    "prefix":this.controller.getRequest().getParam("prefix"),
-                    "plugin":this.controller.getRequest().getParam("plugin"),
+                    "template": "missing_dependency",
+                    "parameter": $parameter.getName(),
+                    "type": $typeName,
+                    "controller": this.controller.getName(),
+                    "action": this.controller.getRequest().getParam("action"),
+                    "prefix": this.controller.getRequest().getParam("prefix"),
+                    "plugin": this.controller.getRequest().getParam("plugin"),
                 ]);
             }
 
             // Use any passed params as positional arguments
             if ($passedParams) {
                 $argument = array_shift($passedParams);
-                if (myType instanceof ReflectionNamedType) {
-                    myTypedArgument = this.coerceStringToType($argument, myType);
+                if (is_string($argument) && $type instanceof ReflectionNamedType) {
+                    $typedArgument = this.coerceStringToType($argument, $type);
 
-                    if (myTypedArgument is null) {
+                    if ($typedArgument == null) {
                         throw new InvalidParameterException([
-                            "template":"failed_coercion",
-                            "passed":$argument,
-                            "type":myType.getName(),
-                            "parameter":$parameter.getName(),
-                            "controller":this.controller.getName(),
-                            "action":this.controller.getRequest().getParam("action"),
-                            "prefix":this.controller.getRequest().getParam("prefix"),
-                            "plugin":this.controller.getRequest().getParam("plugin"),
+                            "template": "failed_coercion",
+                            "passed": $argument,
+                            "type": $type.getName(),
+                            "parameter": $parameter.getName(),
+                            "controller": this.controller.getName(),
+                            "action": this.controller.getRequest().getParam("action"),
+                            "prefix": this.controller.getRequest().getParam("prefix"),
+                            "plugin": this.controller.getRequest().getParam("plugin"),
                         ]);
                     }
-                    $argument = myTypedArgument;
+                    $argument = $typedArgument;
                 }
 
                 $resolved[] = $argument;
@@ -212,12 +224,12 @@ class ControllerFactory : IControllerFactory, IRequestHandler
             }
 
             throw new InvalidParameterException([
-                "template":"missing_parameter",
-                "parameter":$parameter.getName(),
-                "controller":this.controller.getName(),
-                "action":this.controller.getRequest().getParam("action"),
-                "prefix":this.controller.getRequest().getParam("prefix"),
-                "plugin":this.controller.getRequest().getParam("plugin"),
+                "template": "missing_parameter",
+                "parameter": $parameter.getName(),
+                "controller": this.controller.getName(),
+                "action": this.controller.getRequest().getParam("action"),
+                "prefix": this.controller.getRequest().getParam("prefix"),
+                "plugin": this.controller.getRequest().getParam("plugin"),
             ]);
         }
 
@@ -227,22 +239,22 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Coerces string argument to primitive type.
      *
-     * @param string argument Argument to coerce
-     * @param \ReflectionNamedType myType Parameter type
+     * @param string $argument Argument to coerce
+     * @param \ReflectionNamedType $type Parameter type
      * @return array|string|float|int|bool|null
      */
-    protected auto coerceStringToType(string argument, ReflectionNamedType myType) {
-        switch (myType.getName()) {
+    protected function coerceStringToType(string $argument, ReflectionNamedType $type) {
+        switch ($type.getName()) {
             case "string":
                 return $argument;
             case "float":
                 return is_numeric($argument) ? (float)$argument : null;
             case "int":
-                return ctype_digit($argument) ? (int)$argument : null;
+                return filter_var($argument, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE);
             case "bool":
                 return $argument == "0" ? false : ($argument == "1" ? true : null);
             case "array":
-                return explode(",", $argument);
+                return $argument == "" ? [] : explode(",", $argument);
         }
 
         return null;
@@ -251,19 +263,20 @@ class ControllerFactory : IControllerFactory, IRequestHandler
     /**
      * Determine the controller class name based on current request and controller param
      *
-     * @param uim.cake.http.ServerRequest myRequest The request to build a controller for.
+     * @param uim.cake.http.ServerRequest $request The request to build a controller for.
      * @return string|null
      * @psalm-return class-string<uim.cake.Controller\Controller>|null
      */
-    Nullable!string getControllerClass(ServerRequest myRequest) {
-        myPluginPath = "";
-        $module = "Controller";
-        $controller = myRequest.getParam("controller", "");
-        if (myRequest.getParam("plugin")) {
-            myPluginPath = myRequest.getParam("plugin") ~ ".";
+    function getControllerClass(ServerRequest $request): ?string
+    {
+        $pluginPath = "";
+        $namespace = "Controller";
+        $controller = $request.getParam("controller", "");
+        if ($request.getParam("plugin")) {
+            $pluginPath = $request.getParam("plugin") ~ ".";
         }
-        if (myRequest.getParam("prefix")) {
-            $prefix = myRequest.getParam("prefix");
+        if ($request.getParam("prefix")) {
+            $prefix = $request.getParam("prefix");
 
             $firstChar = substr($prefix, 0, 1);
             if ($firstChar != strtoupper($firstChar)) {
@@ -273,8 +286,8 @@ class ControllerFactory : IControllerFactory, IRequestHandler
                     "Prefix inflection will be removed in 5.0"
                 );
 
-                if (indexOf($prefix, "/") == false) {
-                    $module .= "/" ~ Inflector::camelize($prefix);
+                if (strpos($prefix, "/") == false) {
+                    $namespace .= "/" ~ Inflector::camelize($prefix);
                 } else {
                     $prefixes = array_map(
                         function ($val) {
@@ -282,10 +295,10 @@ class ControllerFactory : IControllerFactory, IRequestHandler
                         },
                         explode("/", $prefix)
                     );
-                    $module .= "/" ~ implode("/", $prefixes);
+                    $namespace .= "/" ~ implode("/", $prefixes);
                 }
             } else {
-                $module .= "/" ~ $prefix;
+                $namespace .= "/" ~ $prefix;
             }
         }
         $firstChar = substr($controller, 0, 1);
@@ -294,30 +307,30 @@ class ControllerFactory : IControllerFactory, IRequestHandler
         // controller names as they allow direct references to
         // be created.
         if (
-            indexOf($controller, "\\") != false ||
-            indexOf($controller, "/") != false ||
-            indexOf($controller, ".") != false ||
+            strpos($controller, "\\") != false ||
+            strpos($controller, "/") != false ||
+            strpos($controller, ".") != false ||
             $firstChar == strtolower($firstChar)
         ) {
-            throw this.missingController(myRequest);
+            throw this.missingController($request);
         }
 
         /** @var class-string<uim.cake.Controller\Controller>|null */
-        return App::className(myPluginPath . $controller, $module, "Controller");
+        return App::className($pluginPath . $controller, $namespace, "Controller");
     }
 
     /**
      * Throws an exception when a controller is missing.
      *
-     * @param uim.cake.http.ServerRequest myRequest The request.
+     * @param uim.cake.http.ServerRequest $request The request.
      * @return uim.cake.http.exceptions.MissingControllerException
      */
-    protected auto missingController(ServerRequest myRequest) {
+    protected function missingController(ServerRequest $request) {
         return new MissingControllerException([
-            "class":myRequest.getParam("controller"),
-            "plugin":myRequest.getParam("plugin"),
-            "prefix":myRequest.getParam("prefix"),
-            "_ext":myRequest.getParam("_ext"),
+            "class": $request.getParam("controller"),
+            "plugin": $request.getParam("plugin"),
+            "prefix": $request.getParam("prefix"),
+            "_ext": $request.getParam("_ext"),
         ]);
     }
 }
