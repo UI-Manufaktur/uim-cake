@@ -246,9 +246,9 @@ class Connection : IConnection {
      * Prepares a SQL statement to be executed.
      *
      * @param uim.cake.databases.Query|string $query The SQL to convert into a prepared statement.
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function prepare($query): StatementInterface
+    function prepare($query): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($query) {
             $statement = _driver.prepare($query);
@@ -268,9 +268,9 @@ class Connection : IConnection {
      * @param string $sql SQL to be executed and interpolated with $params
      * @param array $params list or associative array of params to be interpolated in $sql as values
      * @param array $types list or associative array of types to be used for casting values in query
-     * @return uim.cake.databases.StatementInterface executed statement
+     * @return uim.cake.databases.IStatement executed statement
      */
-    function execute(string $sql, array $params = [], array $types = []): StatementInterface
+    function execute(string $sql, array $params = [], array $types = []): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($sql, $params, $types) {
             $statement = this.prepare($sql);
@@ -299,9 +299,9 @@ class Connection : IConnection {
      * dialect and returns the executed Statement object.
      *
      * @param uim.cake.databases.Query $query The query to be executed
-     * @return uim.cake.databases.StatementInterface executed statement
+     * @return uim.cake.databases.IStatement executed statement
      */
-    function run(Query $query): StatementInterface
+    function run(Query $query): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($query) {
             $statement = this.prepare($query);
@@ -316,9 +316,9 @@ class Connection : IConnection {
      * Executes a SQL statement and returns the Statement object as result.
      *
      * @param string $sql The SQL query to execute.
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function query(string $sql): StatementInterface
+    function query(string $sql): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($sql) {
             $statement = this.prepare($sql);
@@ -378,9 +378,9 @@ class Connection : IConnection {
      * @param string $table the table to insert values in
      * @param array $values values to be inserted
      * @param array<int|string, string> $types Array containing the types to be used for casting
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function insert(string $table, array $values, array $types = []): StatementInterface
+    function insert(string $table, array $values, array $types = []): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($table, $values, $types) {
             $columns = array_keys($values);
@@ -399,9 +399,9 @@ class Connection : IConnection {
      * @param array $values values to be updated
      * @param array $conditions conditions to be set for update statement
      * @param array<string> $types list of associative array containing the types to be used for casting
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function update(string $table, array $values, array $conditions = [], array $types = []): StatementInterface
+    function update(string $table, array $values, array $conditions = [], array $types = []): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($table, $values, $conditions, $types) {
             return this.newQuery().update($table)
@@ -417,9 +417,9 @@ class Connection : IConnection {
      * @param string $table the table to delete rows from
      * @param array $conditions conditions to be set for delete statement
      * @param array<string> $types list of associative array containing the types to be used for casting
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function delete(string $table, array $conditions = [], array $types = []): StatementInterface
+    function delete(string $table, array $conditions = [], array $types = []): IStatement
     {
         return this.getDisconnectRetry().run(function () use ($table, $conditions, $types) {
             return this.newQuery().delete($table)
@@ -853,10 +853,10 @@ class Connection : IConnection {
      * Returns a new statement object that will log the activity
      * for the passed original statement instance.
      *
-     * @param uim.cake.databases.StatementInterface $statement the instance to be decorated
+     * @param uim.cake.databases.IStatement $statement the instance to be decorated
      * @return uim.cake.databases.logs.LoggingStatement
      */
-    protected function _newLogger(StatementInterface $statement): LoggingStatement
+    protected function _newLogger(IStatement $statement): LoggingStatement
     {
         $log = new LoggingStatement($statement, _driver);
         $log.setLogger(this.getLogger());

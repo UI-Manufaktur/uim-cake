@@ -1,7 +1,7 @@
 module uim.cake.databases.Statement;
 
 import uim.cake.databases.IDriver;
-import uim.cake.databases.StatementInterface;
+import uim.cake.databases.IStatement;
 import uim.cake.databases.TypeConverterTrait;
 use Iterator;
 
@@ -11,7 +11,7 @@ use Iterator;
  * This statement decorator will save fetched results in memory, allowing
  * the iterator to be rewound and reused.
  */
-class BufferedStatement : Iterator, StatementInterface
+class BufferedStatement : Iterator, IStatement
 {
     use TypeConverterTrait;
 
@@ -24,7 +24,7 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * The decorated statement
      *
-     * @var uim.cake.databases.StatementInterface
+     * @var uim.cake.databases.IStatement
      */
     protected $statement;
 
@@ -57,10 +57,10 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * Constructor
      *
-     * @param uim.cake.databases.StatementInterface $statement Statement implementation such as PDOStatement
+     * @param uim.cake.databases.IStatement $statement Statement implementation such as PDOStatement
      * @param uim.cake.databases.IDriver $driver Driver instance
      */
-    this(StatementInterface $statement, IDriver $driver) {
+    this(IStatement $statement, IDriver $driver) {
         this.statement = $statement;
         _driver = $driver;
     }
@@ -282,9 +282,9 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * Get the wrapped statement
      *
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function getInnerStatement(): StatementInterface
+    function getInnerStatement(): IStatement
     {
         return this.statement;
     }

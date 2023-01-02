@@ -1,7 +1,7 @@
 module uim.cake.databases.Statement;
 
 import uim.cake.databases.IDriver;
-import uim.cake.databases.StatementInterface;
+import uim.cake.databases.IStatement;
 import uim.cake.databases.TypeConverterTrait;
 use Countable;
 use IteratorAggregate;
@@ -17,7 +17,7 @@ use IteratorAggregate;
  *
  * @property-read string $queryString
  */
-class StatementDecorator : StatementInterface, Countable, IteratorAggregate
+class StatementDecorator : IStatement, Countable, IteratorAggregate
 {
     use TypeConverterTrait;
 
@@ -25,7 +25,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * Statement instance implementation, such as PDOStatement
      * or any other custom implementation.
      *
-     * @var uim.cake.databases.StatementInterface
+     * @var uim.cake.databases.IStatement
      */
     protected $_statement;
 
@@ -45,11 +45,11 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     /**
      * Constructor
      *
-     * @param uim.cake.databases.StatementInterface $statement Statement implementation
+     * @param uim.cake.databases.IStatement $statement Statement implementation
      *  such as PDOStatement.
      * @param uim.cake.databases.IDriver $driver Driver instance
      */
-    this(StatementInterface $statement, IDriver $driver) {
+    this(IStatement $statement, IDriver $driver) {
         _statement = $statement;
         _driver = $driver;
     }
@@ -249,7 +249,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      * }
      * ```
      *
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[\ReturnTypeWillChange]
@@ -318,7 +318,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     /**
      * Returns the statement object that was decorated by this class.
      *
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
     function getInnerStatement() {
         return _statement;

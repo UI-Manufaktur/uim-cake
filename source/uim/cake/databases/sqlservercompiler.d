@@ -11,19 +11,23 @@ import uim.cake;
  */
 class SqlserverCompiler : QueryCompiler
 {
-    // SQLserver does not support ORDER BY in UNION queries.
-    protected bool _orderedUnion = false;
+    /**
+     * SQLserver does not support ORDER BY in UNION queries.
+     */
+    protected bool $_orderedUnion = false;
 
-    protected _templates = [
-        "delete":"DELETE",
-        "where":" WHERE %s",
-        "group":" GROUP BY %s",
-        "order":" %s",
-        "offset":" OFFSET %s ROWS",
-        "epilog":" %s",
+
+    protected $_templates = [
+        "delete": "DELETE",
+        "where": " WHERE %s",
+        "group": " GROUP BY %s",
+        "order": " %s",
+        "offset": " OFFSET %s ROWS",
+        "epilog": " %s",
     ];
 
-    protected _selectParts = [
+
+    protected $_selectParts = [
         "with", "select", "from", "join", "where", "group", "having", "window", "order",
         "offset", "limit", "union", "epilog",
     ];
@@ -34,11 +38,10 @@ class SqlserverCompiler : QueryCompiler
      * keyword that is neither required nor valid.
      *
      * @param array $parts List of CTEs to be transformed to string
-     * @param uim.cake.databases.Query myQuery The query that is being compiled
+     * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected string _buildWithPart(array $parts, Query myQuery, ValueBinder aBinder) {
+    protected string _buildWithPart(array $parts, Query $query, ValueBinder aBinder) {
         $expressions = [];
         foreach ($parts as $cte) {
             $expressions[] = $cte.sql($binder);
@@ -55,25 +58,24 @@ class SqlserverCompiler : QueryCompiler
      * row"s data back.
      *
      * @param array $parts The parts to build
-     * @param uim.cake.databases.Query myQuery The query that is being compiled
+     * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected string _buildInsertPart(array $parts, Query myQuery, ValueBinder aBinder) {
+    protected string _buildInsertPart(array $parts, Query $query, ValueBinder aBinder) {
         if (!isset($parts[0])) {
             throw new DatabaseException(
                 "Could not compile insert query. No table was specified~ " ~
                 "Use `into()` to define a table."
             );
         }
-        myTable = $parts[0];
+        $table = $parts[0];
         $columns = _stringifyExpressions($parts[1], $binder);
-        $modifiers = _buildModifierPart(myQuery.clause("modifier"), myQuery, $binder);
+        $modifiers = _buildModifierPart($query.clause("modifier"), $query, $binder);
 
         return sprintf(
             "INSERT%s INTO %s (%s) OUTPUT INSERTED.*",
             $modifiers,
-            myTable,
+            $table,
             implode(", ", $columns)
         );
     }
@@ -82,11 +84,10 @@ class SqlserverCompiler : QueryCompiler
      * Generates the LIMIT part of a SQL query
      *
      * @param int $limit the limit clause
-     * @param uim.cake.databases.Query myQuery The query that is being compiled
-     * @return string
+     * @param uim.cake.databases.Query $query The query that is being compiled
      */
-    protected string _buildLimitPart(int $limit, Query myQuery) {
-        if (myQuery.clause("offset") is null) {
+    protected string _buildLimitPart(int $limit, Query $query) {
+        if ($query.clause("offset") == null) {
             return "";
         }
 
@@ -99,12 +100,11 @@ class SqlserverCompiler : QueryCompiler
      * converting expression objects to string.
      *
      * @param array $parts list of fields to be transformed to string
-     * @param uim.cake.databases.Query myQuery The query that is being compiled
+     * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected auto _buildHavingPart($parts, myQuery, $binder) {
-        $selectParts = myQuery.clause("select");
+    protected string _buildHavingPart($parts, $query, $binder) {
+        $selectParts = $query.clause("select");
 
         foreach ($selectParts as $selectKey: $selectPart) {
             if (!$selectPart instanceof FunctionExpression) {

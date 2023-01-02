@@ -7,67 +7,95 @@
 @safe:
 import uim.cake;
 
+module uim.cake.databases;
+
+import uim.cake.databases.exceptions.DatabaseException;
+import uim.cake.databases.expressions.CommonTableExpression;
+import uim.cake.databases.expressions.IdentifierExpression;
+import uim.cake.databases.expressions.OrderByExpression;
+import uim.cake.databases.expressions.OrderClauseExpression;
+import uim.cake.databases.expressions.QueryExpression;
+import uim.cake.databases.expressions.ValuesExpression;
+import uim.cake.databases.expressions.WindowExpression;
+import uim.cake.databases.statements.CallbackStatement;
+use Closure;
+use InvalidArgumentException;
+use IteratorAggregate;
+use RuntimeException;
+
 /**
  * This class represents a Relational database SQL Query. A query can be of
  * different types like select, update, insert and delete. Exposes the methods
  * for dynamically constructing each query part, execute it and transform it
  * to a specific SQL dialect.
  */
-class Query : IExpression, IteratorAggregate {
+class Query : IExpression, IteratorAggregate
+{
     use TypeMapTrait;
 
-    const string JOIN_TYPE_INNER = "INNER";
+    /**
+     * @var string
+     */
+    const JOIN_TYPE_INNER = "INNER";
 
-    const string JOIN_TYPE_LEFT = "LEFT";
+    /**
+     * @var string
+     */
+    const JOIN_TYPE_LEFT = "LEFT";
 
-    const string JOIN_TYPE_RIGHT = "RIGHT";
+    /**
+     * @var string
+     */
+    const JOIN_TYPE_RIGHT = "RIGHT";
 
     /**
      * Connection instance to be used to execute this query.
      *
      * @var uim.cake.databases.Connection
      */
-    protected _connection;
+    protected $_connection;
 
     /**
      * Type of this query (select, insert, update, delete).
+     *
      */
-    protected string _type = "select";
+    protected string $_type = "select";
 
     /**
      * List of SQL parts that will be used to build this query.
      *
      * @var array<string, mixed>
      */
-    protected _parts = [
-        "delete":true,
-        "update":[],
-        "set":[],
-        "insert":[],
-        "values":[],
-        "with":[],
-        "select":[],
-        "distinct":false,
-        "modifier":[],
-        "from":[],
-        "join":[],
-        "where":null,
-        "group":[],
-        "having":null,
-        "window":[],
-        "order":null,
-        "limit":null,
-        "offset":null,
-        "union":[],
-        "epilog":null,
+    protected $_parts = [
+        "delete": true,
+        "update": [],
+        "set": [],
+        "insert": [],
+        "values": [],
+        "with": [],
+        "select": [],
+        "distinct": false,
+        "modifier": [],
+        "from": [],
+        "join": [],
+        "where": null,
+        "group": [],
+        "having": null,
+        "window": [],
+        "order": null,
+        "limit": null,
+        "offset": null,
+        "union": [],
+        "epilog": null,
     ];
 
     /**
      * The list of query clauses to traverse for generating a SELECT statement
      *
      * @var array<string>
+     * @deprecated 4.4.3 This property is unused.
      */
-    protected _selectParts = [
+    protected $_selectParts = [
         "with", "select", "from", "join", "where", "group", "having", "order", "limit",
         "offset", "union", "epilog",
     ];
@@ -76,25 +104,33 @@ class Query : IExpression, IteratorAggregate {
      * The list of query clauses to traverse for generating an UPDATE statement
      *
      * @var array<string>
+     * @deprecated 4.4.3 This property is unused.
      */
-    protected _updateParts = ["with", "update", "set", "where", "epilog"];
+    protected $_updateParts = ["with", "update", "set", "where", "epilog"];
 
     /**
      * The list of query clauses to traverse for generating a DELETE statement
      *
      * @var array<string>
+     * @deprecated 4.4.3 This property is unused.
      */
-    protected _deleteParts = ["with", "delete", "modifier", "from", "where", "epilog"];
+    protected $_deleteParts = ["with", "delete", "modifier", "from", "where", "epilog"];
 
-    // The list of query clauses to traverse for generating an INSERT statement
-    protected string[] $_insertParts = ["with", "insert", "values", "epilog"];
+    /**
+     * The list of query clauses to traverse for generating an INSERT statement
+     *
+     * @var array<string>
+     * @deprecated 4.4.3 This property is unused.
+     */
+    protected $_insertParts = ["with", "insert", "values", "epilog"];
 
     /**
      * Indicates whether internal state of this query was changed, this is used to
      * discard internal cached objects such as the transformed query or the reference
      * to the executed statement.
+     *
      */
-    protected bool _dirty = false;
+    protected bool $_dirty = false;
 
     /**
      * A list of callback functions to be called to alter each row from resulting
@@ -103,10 +139,14 @@ class Query : IExpression, IteratorAggregate {
      *
      * @var array<callable>
      */
-    protected _resultDecorators = [];
+    protected $_resultDecorators = [];
 
-    // Statement object resulting from executing this query.
-    protected IStatement _iterator;
+    /**
+     * Statement object resulting from executing this query.
+     *
+     * @var uim.cake.databases.IStatement|null
+     */
+    protected $_iterator;
 
     /**
      * The object responsible for generating query placeholders and temporarily store values
@@ -114,39 +154,54 @@ class Query : IExpression, IteratorAggregate {
      *
      * @var uim.cake.databases.ValueBinder|null
      */
-    protected _valueBinder;
+    protected $_valueBinder;
 
-    // Instance of functions builder object used for generating arbitrary SQL functions.
-    protected FunctionsBuilder _functionsBuilder;
+    /**
+     * Instance of functions builder object used for generating arbitrary SQL functions.
+     *
+     * @var uim.cake.databases.FunctionsBuilder|null
+     */
+    protected $_functionsBuilder;
 
-    // Boolean for tracking whether buffered results are enabled.
-    protected bool _useBufferedResults = true;
+    /**
+     * Boolean for tracking whether buffered results
+     * are enabled.
+     *
+     */
+    protected bool $_useBufferedResults = true;
 
-    // The Type map for fields in the select clause
-    protected TypeMap _selectTypeMap;
+    /**
+     * The Type map for fields in the select clause
+     *
+     * @var uim.cake.databases.TypeMap|null
+     */
+    protected $_selectTypeMap;
 
-    // Tracking flag to disable casting
-    protected bool myTypeCastEnabled = true;
+    /**
+     * Tracking flag to disable casting
+     *
+     */
+    protected bool $typeCastEnabled = true;
 
     /**
      * Constructor.
      *
-     * @param uim.cake.databases.Connection myConnection The connection
+     * @param uim.cake.databases.Connection $connection The connection
      * object to be used for transforming and executing this query
      */
-    this(Connection myConnection) {
-        this.setConnection(myConnection);
+    this(Connection $connection) {
+        this.setConnection($connection);
     }
 
     /**
      * Sets the connection instance to be used for executing and transforming this query.
      *
-     * @param uim.cake.databases.Connection myConnection Connection instance
+     * @param uim.cake.databases.Connection $connection Connection instance
      * @return this
      */
-    auto setConnection(Connection myConnection) {
+    function setConnection(Connection $connection) {
         _dirty();
-        _connection = myConnection;
+        _connection = $connection;
 
         return this;
     }
@@ -156,7 +211,8 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return uim.cake.databases.Connection
      */
-    Connection getConnection() {
+    function getConnection(): Connection
+    {
         return _connection;
     }
 
@@ -180,7 +236,8 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return uim.cake.databases.IStatement
      */
-    IStatement execute() {
+    function execute(): IStatement
+    {
         $statement = _connection.run(this);
         _iterator = _decorateStatement($statement);
         _dirty = false;
@@ -198,7 +255,7 @@ class Query : IExpression, IteratorAggregate {
      * ## Example
      *
      * ```
-     * $rowCount = myQuery.update("articles")
+     * $rowCount = $query.update("articles")
      *                 .set(["published"=>true])
      *                 .where(["published"=>false])
      *                 .rowCountAndClose();
@@ -206,8 +263,10 @@ class Query : IExpression, IteratorAggregate {
      *
      * The above example will change the published column to true for all false records, and return the number of
      * records that were updated.
+     *
      */
-    int rowCountAndClose() {
+    int rowCountAndClose(): int
+    {
         $statement = this.execute();
         try {
             return $statement.rowCount();
@@ -250,9 +309,9 @@ class Query : IExpression, IteratorAggregate {
      *
      * ### Example
      * ```
-     * myQuery.select(["title"]).from("articles").traverse(function (myValue, $clause) {
+     * $query.select(["title"]).from("articles").traverse(function ($value, $clause) {
      *     if ($clause == "select") {
-     *         var_dump(myValue);
+     *         var_dump($value);
      *     }
      * });
      * ```
@@ -261,8 +320,8 @@ class Query : IExpression, IteratorAggregate {
      * @return this
      */
     O traverse(this O)($callback) {
-        foreach (_parts as myName: $part) {
-            $callback($part, myName);
+        foreach (_parts as $name: $part) {
+            $callback($part, $name);
         }
 
         return this;
@@ -281,20 +340,20 @@ class Query : IExpression, IteratorAggregate {
      * ### Example
      *
      * ```
-     * myQuery.select(["title"]).from("articles").traverse(function (myValue, $clause) {
+     * $query.select(["title"]).from("articles").traverse(function ($value, $clause) {
      *     if ($clause == "select") {
-     *         var_dump(myValue);
+     *         var_dump($value);
      *     }
      * }, ["select", "from"]);
      * ```
      *
      * @param callable $visitor A function or callable to be executed for each part
-     * @param $parts The list of query parts to traverse
+     * @param array<string> $parts The list of query parts to traverse
      * @return this
      */
-    function traverseParts(callable $visitor, string[] $parts) {
-        foreach ($parts as myName) {
-            $visitor(_parts[myName], myName);
+    function traverseParts(callable $visitor, array $parts) {
+        foreach ($parts as $name) {
+            $visitor(_parts[$name], $name);
         }
 
         return this;
@@ -311,13 +370,13 @@ class Query : IExpression, IteratorAggregate {
      * ```
      * $cte = new uim.cake.databases.Expression\CommonTableExpression(
      *     "cte",
-     *     myConnection
+     *     $connection
      *         .newQuery()
      *         .select("*")
      *         .from("articles")
      * );
      *
-     * myQuery.with($cte);
+     * $query.with($cte);
      * ```
      *
      * or returned from a closure, which will receive a new common table expression
@@ -325,11 +384,11 @@ class Query : IExpression, IteratorAggregate {
      * the second argument:
      *
      * ```
-     * myQuery.with(function (
+     * $query.with(function (
      *     uim.cake.databases.Expression\CommonTableExpression $cte,
-     *     uim.cake.databases.Query myQuery
+     *     uim.cake.databases.Query $query
      *  ) {
-     *     $cteQuery = myQuery
+     *     $cteQuery = $query
      *         .select("*")
      *         .from("articles");
      *
@@ -349,8 +408,8 @@ class Query : IExpression, IteratorAggregate {
         }
 
         if ($cte instanceof Closure) {
-            myQuery = this.getConnection().newQuery();
-            $cte = $cte(new CommonTableExpression(), myQuery);
+            $query = this.getConnection().newQuery();
+            $cte = $cte(new CommonTableExpression(), $query);
             if (!($cte instanceof CommonTableExpression)) {
                 throw new RuntimeException(
                     "You must return a `CommonTableExpression` from a Closure passed to `with()`."
@@ -382,12 +441,12 @@ class Query : IExpression, IteratorAggregate {
      * ### Examples:
      *
      * ```
-     * myQuery.select(["id", "title"]); // Produces SELECT id, title
-     * myQuery.select(["author":"author_id"]); // Appends author: SELECT id, title, author_id as author
-     * myQuery.select("id", true); // Resets the list: SELECT id
-     * myQuery.select(["total":myCountQuery]); // SELECT id, (SELECT ...) AS total
-     * myQuery.select(function (myQuery) {
-     *     return ["article_id", "total":myQuery.count("*")];
+     * $query.select(["id", "title"]); // Produces SELECT id, title
+     * $query.select(["author": "author_id"]); // Appends author: SELECT id, title, author_id as author
+     * $query.select("id", true); // Resets the list: SELECT id
+     * $query.select(["total": $countQuery]); // SELECT id, (SELECT ...) AS total
+     * $query.select(function ($query) {
+     *     return ["article_id", "total": $query.count("*")];
      * })
      * ```
      *
@@ -395,23 +454,23 @@ class Query : IExpression, IteratorAggregate {
      * fields you should also call `Cake\orm.Query::enableAutoFields()` to select the default fields
      * from the table.
      *
-     * @param uim.cake.databases.IExpression|callable|array|string myFields fields to be added to the list.
+     * @param uim.cake.databases.IExpression|callable|array|string $fields fields to be added to the list.
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */
-    function select(myFields = [], bool $overwrite = false) {
-        if (!is_string(myFields) && is_callable(myFields)) {
-            myFields = myFields(this);
+    function select($fields = [], bool $overwrite = false) {
+        if (!is_string($fields) && is_callable($fields)) {
+            $fields = $fields(this);
         }
 
-        if (!is_array(myFields)) {
-            myFields = [myFields];
+        if (!is_array($fields)) {
+            $fields = [$fields];
         }
 
         if ($overwrite) {
-            _parts["select"] = myFields;
+            _parts["select"] = $fields;
         } else {
-            _parts["select"] = array_merge(_parts["select"], myFields);
+            _parts["select"] = array_merge(_parts["select"], $fields);
         }
 
         _dirty();
@@ -432,15 +491,15 @@ class Query : IExpression, IteratorAggregate {
      *
      * ```
      * // Filters products with the same name and city
-     * myQuery.select(["name", "city"]).from("products").distinct();
+     * $query.select(["name", "city"]).from("products").distinct();
      *
      * // Filters products in the same city
-     * myQuery.distinct(["city"]);
-     * myQuery.distinct("city");
+     * $query.distinct(["city"]);
+     * $query.distinct("city");
      *
      * // Filter products with the same name
-     * myQuery.distinct(["name"], true);
-     * myQuery.distinct("name", true);
+     * $query.distinct(["name"], true);
+     * $query.distinct("name", true);
      * ```
      *
      * @param uim.cake.databases.IExpression|array|string|bool $on Enable/disable distinct class
@@ -456,11 +515,11 @@ class Query : IExpression, IteratorAggregate {
         }
 
         if (is_array($on)) {
-            myMerge = [];
+            $merge = [];
             if (is_array(_parts["distinct"])) {
-                myMerge = _parts["distinct"];
+                $merge = _parts["distinct"];
             }
-            $on = $overwrite ? array_values($on) : array_merge(myMerge, array_values($on));
+            $on = $overwrite ? array_values($on) : array_merge($merge, array_values($on));
         }
 
         _parts["distinct"] = $on;
@@ -479,15 +538,15 @@ class Query : IExpression, IteratorAggregate {
      *
      * ```
      * // Ignore cache query in MySQL
-     * myQuery.select(["name", "city"]).from("products").modifier("SQL_NO_CACHE");
+     * $query.select(["name", "city"]).from("products").modifier("SQL_NO_CACHE");
      * // It will produce the SQL: SELECT SQL_NO_CACHE name, city FROM products
      *
      * // Or with multiple modifiers
-     * myQuery.select(["name", "city"]).from("products").modifier(["HIGH_PRIORITY", "SQL_NO_CACHE"]);
+     * $query.select(["name", "city"]).from("products").modifier(["HIGH_PRIORITY", "SQL_NO_CACHE"]);
      * // It will produce the SQL: SELECT HIGH_PRIORITY SQL_NO_CACHE name, city FROM products
      * ```
      *
-     * @param uim.cake.databases.IExpression|array|string modifiers modifiers to be applied to the query
+     * @param uim.cake.databases.IExpression|array|string $modifiers modifiers to be applied to the query
      * @param bool $overwrite whether to reset order with field list or not
      * @return this
      */
@@ -521,25 +580,25 @@ class Query : IExpression, IteratorAggregate {
      * ### Examples:
      *
      * ```
-     * myQuery.from(["p":"posts"]); // Produces FROM posts p
-     * myQuery.from("authors"); // Appends authors: FROM posts p, authors
-     * myQuery.from(["products"], true); // Resets the list: FROM products
-     * myQuery.from(["sub":myCountQuery]); // FROM (SELECT ...) sub
+     * $query.from(["p": "posts"]); // Produces FROM posts p
+     * $query.from("authors"); // Appends authors: FROM posts p, authors
+     * $query.from(["products"], true); // Resets the list: FROM products
+     * $query.from(["sub": $countQuery]); // FROM (SELECT ...) sub
      * ```
      *
-     * @param array|string myTables tables to be added to the list. This argument, can be
+     * @param array|string $tables tables to be added to the list. This argument, can be
      *  passed as an array of strings, array of expression objects, or a single string. See
      *  the examples above for the valid call types.
      * @param bool $overwrite whether to reset tables with passed list or not
      * @return this
      */
-    function from(myTables = [], $overwrite = false) {
-        myTables = (array)myTables;
+    function from($tables = [], $overwrite = false) {
+        $tables = (array)$tables;
 
         if ($overwrite) {
-            _parts["from"] = myTables;
+            _parts["from"] = $tables;
         } else {
-            _parts["from"] = array_merge(_parts["from"], myTables);
+            _parts["from"] = array_merge(_parts["from"], $tables);
         }
 
         _dirty();
@@ -556,19 +615,19 @@ class Query : IExpression, IteratorAggregate {
      * to be joined, unless the third argument is set to true.
      *
      * When no join type is specified an `INNER JOIN` is used by default:
-     * `myQuery.join(["authors"])` will produce `INNER JOIN authors ON 1 = 1`
+     * `$query.join(["authors"])` will produce `INNER JOIN authors ON 1 = 1`
      *
      * It is also possible to alias joins using the array key:
-     * `myQuery.join(["a":"authors"])` will produce `INNER JOIN authors a ON 1 = 1`
+     * `$query.join(["a": "authors"])` will produce `INNER JOIN authors a ON 1 = 1`
      *
      * A join can be fully described and aliased using the array notation:
      *
      * ```
-     * myQuery.join([
-     *     "a":[
-     *         "table":"authors",
-     *         "type":"LEFT",
-     *         "conditions":"a.id = b.author_id"
+     * $query.join([
+     *     "a": [
+     *         "table": "authors",
+     *         "type": "LEFT",
+     *         "conditions": "a.id = b.author_id"
      *     ]
      * ]);
      * // Produces LEFT JOIN authors a ON a.id = b.author_id
@@ -577,16 +636,16 @@ class Query : IExpression, IteratorAggregate {
      * You can even specify multiple joins in an array, including the full description:
      *
      * ```
-     * myQuery.join([
-     *     "a":[
-     *         "table":"authors",
-     *         "type":"LEFT",
-     *         "conditions":"a.id = b.author_id"
+     * $query.join([
+     *     "a": [
+     *         "table": "authors",
+     *         "type": "LEFT",
+     *         "conditions": "a.id = b.author_id"
      *     ],
-     *     "p":[
-     *         "table":"publishers",
-     *         "type":"INNER",
-     *         "conditions":"p.id = b.publisher_id AND p.name = "Cake Software Foundation""
+     *     "p": [
+     *         "table": "publishers",
+     *         "type": "INNER",
+     *         "conditions": "p.id = b.publisher_id AND p.name = "Cake Software Foundation""
      *     ]
      * ]);
      * // LEFT JOIN authors a ON a.id = b.author_id
@@ -604,14 +663,14 @@ class Query : IExpression, IteratorAggregate {
      * using the second parameter of this function.
      *
      * ```
-     * myQuery.join(["a":[
-     *     "table":"articles",
-     *     "conditions":[
-     *         "a.posted >=":new DateTime("-3 days"),
-     *         "a.published":true,
+     * $query.join(["a": [
+     *     "table": "articles",
+     *     "conditions": [
+     *         "a.posted >=": new DateTime("-3 days"),
+     *         "a.published": true,
      *         "a.author_id = authors.id"
      *     ]
-     * ]], ["a.posted":"datetime", "a.published":"boolean"])
+     * ]], ["a.posted": "datetime", "a.published": "boolean"])
      * ```
      *
      * ### Overwriting joins
@@ -622,27 +681,27 @@ class Query : IExpression, IteratorAggregate {
      * with another list if the third parameter for this function is set to true.
      *
      * ```
-     * myQuery.join(["alias":"table"]); // joins table with as alias
-     * myQuery.join(["alias":"another_table"]); // joins another_table with as alias
-     * myQuery.join(["something":"different_table"], [], true); // resets joins list
+     * $query.join(["alias": "table"]); // joins table with as alias
+     * $query.join(["alias": "another_table"]); // joins another_table with as alias
+     * $query.join(["something": "different_table"], [], true); // resets joins list
      * ```
      *
-     * @param array<string, mixed>|string myTables list of tables to be joined in the query
-     * @param array<string, string> myTypes Associative array of type names used to bind values to query
+     * @param array<string, mixed>|string $tables list of tables to be joined in the query
+     * @param array<string, string> $types Associative array of type names used to bind values to query
      * @param bool $overwrite whether to reset joins with passed list or not
      * @see uim.cake.databases.TypeFactory
      * @return this
      */
-    function join(myTables, myTypes = [], $overwrite = false) {
-        if (is_string(myTables) || isset(myTables["table"])) {
-            myTables = [myTables];
+    function join($tables, $types = [], $overwrite = false) {
+        if (is_string($tables) || isset($tables["table"])) {
+            $tables = [$tables];
         }
 
         $joins = [];
         $i = count(_parts["join"]);
-        foreach (myTables as myAlias: $t) {
+        foreach ($tables as $alias: $t) {
             if (!is_array($t)) {
-                $t = ["table":$t, "conditions":this.newExpr()];
+                $t = ["table": $t, "conditions": this.newExpr()];
             }
 
             if (!is_string($t["conditions"]) && is_callable($t["conditions"])) {
@@ -650,10 +709,10 @@ class Query : IExpression, IteratorAggregate {
             }
 
             if (!($t["conditions"] instanceof IExpression)) {
-                $t["conditions"] = this.newExpr().add($t["conditions"], myTypes);
+                $t["conditions"] = this.newExpr().add($t["conditions"], $types);
             }
-            myAlias = is_string(myAlias) ? myAlias : null;
-            $joins[myAlias ?: $i++] = $t + ["type":static::JOIN_TYPE_INNER, "alias":myAlias];
+            $alias = is_string($alias) ? $alias : null;
+            $joins[$alias ?: $i++] = $t + ["type": static::JOIN_TYPE_INNER, "alias": $alias];
         }
 
         if ($overwrite) {
@@ -673,11 +732,11 @@ class Query : IExpression, IteratorAggregate {
      * Useful when you are redefining joins or want to re-order
      * the join clauses.
      *
-     * @param string myName The alias/name of the join to remove.
+     * @param string aName The alias/name of the join to remove.
      * @return this
      */
-    function removeJoin(string myName) {
-        unset(_parts["join"][myName]);
+    function removeJoin(string aName) {
+        unset(_parts["join"][$name]);
         _dirty();
 
         return this;
@@ -693,35 +752,35 @@ class Query : IExpression, IteratorAggregate {
      *
      * ```
      * // LEFT JOIN authors ON authors.id = posts.author_id
-     * myQuery.leftJoin("authors", "authors.id = posts.author_id");
+     * $query.leftJoin("authors", "authors.id = posts.author_id");
      *
      * // LEFT JOIN authors a ON a.id = posts.author_id
-     * myQuery.leftJoin(["a":"authors"], "a.id = posts.author_id");
+     * $query.leftJoin(["a": "authors"], "a.id = posts.author_id");
      * ```
      *
      * Conditions can be passed as strings, arrays, or expression objects. When
-     * using arrays it is possible to combine them with the `myTypes` parameter
+     * using arrays it is possible to combine them with the `$types` parameter
      * in order to define how to convert the values:
      *
      * ```
-     * myQuery.leftJoin(["a":"articles"], [
-     *      "a.posted >=":new DateTime("-3 days"),
-     *      "a.published":true,
+     * $query.leftJoin(["a": "articles"], [
+     *      "a.posted >=": new DateTime("-3 days"),
+     *      "a.published": true,
      *      "a.author_id = authors.id"
-     * ], ["a.posted":"datetime", "a.published":"boolean"]);
+     * ], ["a.posted": "datetime", "a.published": "boolean"]);
      * ```
      *
      * See `join()` for further details on conditions and types.
      *
-     * @param array<string>|string myTable The table to join with
-     * @param uim.cake.databases.IExpression|array|string conditions The conditions
+     * @param array<string, mixed>|string $table The table to join with
+     * @param uim.cake.databases.IExpression|array|string $conditions The conditions
      * to use for joining.
-     * @param array myTypes a list of types associated to the conditions used for converting
+     * @param array $types a list of types associated to the conditions used for converting
      * values to the corresponding database representation.
      * @return this
      */
-    function leftJoin(myTable, $conditions = [], myTypes = []) {
-        this.join(_makeJoin(myTable, $conditions, static::JOIN_TYPE_LEFT), myTypes);
+    function leftJoin($table, $conditions = [], $types = []) {
+        this.join(_makeJoin($table, $conditions, static::JOIN_TYPE_LEFT), $types);
 
         return this;
     }
@@ -734,15 +793,15 @@ class Query : IExpression, IteratorAggregate {
      * The arguments of this method are identical to the `leftJoin()` shorthand, please refer
      * to that methods description for further details.
      *
-     * @param array<string>|string myTable The table to join with
-     * @param uim.cake.databases.IExpression|array|string conditions The conditions
+     * @param array<string, mixed>|string $table The table to join with
+     * @param uim.cake.databases.IExpression|array|string $conditions The conditions
      * to use for joining.
-     * @param array myTypes a list of types associated to the conditions used for converting
+     * @param array $types a list of types associated to the conditions used for converting
      * values to the corresponding database representation.
      * @return this
      */
-    function rightJoin(myTable, $conditions = [], myTypes = []) {
-        this.join(_makeJoin(myTable, $conditions, static::JOIN_TYPE_RIGHT), myTypes);
+    function rightJoin($table, $conditions = [], $types = []) {
+        this.join(_makeJoin($table, $conditions, static::JOIN_TYPE_RIGHT), $types);
 
         return this;
     }
@@ -755,15 +814,15 @@ class Query : IExpression, IteratorAggregate {
      * The arguments of this method are identical to the `leftJoin()` shorthand, please refer
      * to that method"s description for further details.
      *
-     * @param array|string myTable The table to join with
-     * @param uim.cake.databases.IExpression|array|string conditions The conditions
+     * @param array<string, mixed>|string $table The table to join with
+     * @param uim.cake.databases.IExpression|array|string $conditions The conditions
      * to use for joining.
-     * @param array<string, string> myTypes a list of types associated to the conditions used for converting
+     * @param array<string, string> $types a list of types associated to the conditions used for converting
      * values to the corresponding database representation.
      * @return this
      */
-    function innerJoin(myTable, $conditions = [], myTypes = []) {
-        this.join(_makeJoin(myTable, $conditions, static::JOIN_TYPE_INNER), myTypes);
+    function innerJoin($table, $conditions = [], $types = []) {
+        this.join(_makeJoin($table, $conditions, static::JOIN_TYPE_INNER), $types);
 
         return this;
     }
@@ -771,18 +830,20 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Returns an array that can be passed to the join method describing a single join clause
      *
-     * @param array<string>|string myTable The table to join with
-     * @param uim.cake.databases.IExpression|array|string conditions The conditions
+     * @param array<string, mixed>|string $table The table to join with
+     * @param uim.cake.databases.IExpression|array|string $conditions The conditions
      * to use for joining.
-     * @param string myType the join type to use
+     * @param string $type the join type to use
+     * @return array
      * @psalm-suppress InvalidReturnType
      */
-    protected array _makeJoin(myTable, $conditions, myType) {
-        myAlias = myTable;
+    protected function _makeJoin($table, $conditions, $type): array
+    {
+        $alias = $table;
 
-        if (is_array(myTable)) {
-            myAlias = key(myTable);
-            myTable = current(myTable);
+        if (is_array($table)) {
+            $alias = key($table);
+            $table = current($table);
         }
 
         /**
@@ -790,10 +851,10 @@ class Query : IExpression, IteratorAggregate {
          * @psalm-suppress InvalidReturnStatement
          */
         return [
-            myAlias: [
-                "table":myTable,
-                "conditions":$conditions,
-                "type":myType,
+            $alias: [
+                "table": $table,
+                "conditions": $conditions,
+                "type": $type,
             ],
         ];
     }
@@ -816,11 +877,11 @@ class Query : IExpression, IteratorAggregate {
      * ### Conditions using operators:
      *
      * ```
-     * myQuery.where([
-     *     "posted >=":new DateTime("3 days ago"),
-     *     "title LIKE":"Hello W%",
-     *     "author_id":1,
-     * ], ["posted":"datetime"]);
+     * $query.where([
+     *     "posted >=": new DateTime("3 days ago"),
+     *     "title LIKE": "Hello W%",
+     *     "author_id": 1,
+     * ], ["posted": "datetime"]);
      * ```
      *
      * The previous example produces:
@@ -833,11 +894,11 @@ class Query : IExpression, IteratorAggregate {
      * ### Nesting conditions with conjunctions:
      *
      * ```
-     * myQuery.where([
-     *     "author_id !=":1,
-     *     "OR":["published":true, "posted <":new DateTime("now")],
-     *     "NOT":["title":"Hello"]
-     * ], ["published":boolean, "posted":"datetime"]
+     * $query.where([
+     *     "author_id !=": 1,
+     *     "OR": ["published": true, "posted <": new DateTime("now")],
+     *     "NOT": ["title": "Hello"]
+     * ], ["published": boolean, "posted": "datetime"]
      * ```
      *
      * The previous example produces:
@@ -848,7 +909,7 @@ class Query : IExpression, IteratorAggregate {
      * may want to define 2 different options for the same key, in that case, you can
      * wrap each condition inside a new array:
      *
-     * `myQuery.where(["OR":[["published":false], ["published":true]])`
+     * `$query.where(["OR": [["published": false], ["published": true]])`
      *
      * Would result in:
      *
@@ -862,8 +923,8 @@ class Query : IExpression, IteratorAggregate {
      * ### Using expressions objects:
      *
      * ```
-     * $exp = myQuery.newExpr().add(["id !=":100, "author_id" != 1]).tieWith("OR");
-     * myQuery.where(["published":true], ["published":"boolean"]).where($exp);
+     * $exp = $query.newExpr().add(["id !=": 100, "author_id" != 1]).tieWith("OR");
+     * $query.where(["published": true], ["published": "boolean"]).where($exp);
      * ```
      *
      * The previous example produces:
@@ -880,11 +941,11 @@ class Query : IExpression, IteratorAggregate {
      * added the list of conditions for the query using the `AND` operator.
      *
      * ```
-     * myQuery
-     *   .where(["title !=":"Hello World"])
-     *   .where(function ($exp, myQuery) {
-     *     $or = $exp.or(["id":1]);
-     *     $and = $exp.and(["id >":2, "id <":10]);
+     * $query
+     *   .where(["title !=": "Hello World"])
+     *   .where(function ($exp, $query) {
+     *     $or = $exp.or(["id": 1]);
+     *     $and = $exp.and(["id >": 2, "id <": 10]);
      *    return $or.add($and);
      *   });
      * ```
@@ -896,7 +957,7 @@ class Query : IExpression, IteratorAggregate {
      * ### Conditions as strings:
      *
      * ```
-     * myQuery.where(["articles.author_id = authors.id", "modified IS NULL"]);
+     * $query.where(["articles.author_id = authors.id", "modified IS NULL"]);
      * ```
      *
      * The previous example produces:
@@ -912,17 +973,17 @@ class Query : IExpression, IteratorAggregate {
      * The safest thing you can do is to never use string conditions.
      *
      * @param uim.cake.databases.IExpression|\Closure|array|string|null $conditions The conditions to filter on.
-     * @param array<string, string> myTypes Associative array of type names used to bind values to query
+     * @param array<string, string> $types Associative array of type names used to bind values to query
      * @param bool $overwrite whether to reset conditions with passed list or not
      * @see uim.cake.databases.TypeFactory
      * @see uim.cake.databases.Expression\QueryExpression
      * @return this
      */
-    function where($conditions = null, array myTypes = [], bool $overwrite = false) {
+    function where($conditions = null, array $types = [], bool $overwrite = false) {
         if ($overwrite) {
             _parts["where"] = this.newExpr();
         }
-        _conjugate("where", $conditions, "AND", myTypes);
+        _conjugate("where", $conditions, "AND", $types);
 
         return this;
     }
@@ -930,19 +991,19 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Convenience method that adds a NOT NULL condition to the query
      *
-     * @param uim.cake.databases.IExpression|array|string myFields A single field or expressions or a list of them
+     * @param uim.cake.databases.IExpression|array|string $fields A single field or expressions or a list of them
      *  that should be not null.
      * @return this
      */
-    function whereNotNull(myFields) {
-        if (!is_array(myFields)) {
-            myFields = [myFields];
+    function whereNotNull($fields) {
+        if (!is_array($fields)) {
+            $fields = [$fields];
         }
 
         $exp = this.newExpr();
 
-        foreach (myFields as myField) {
-            $exp.isNotNull(myField);
+        foreach ($fields as $field) {
+            $exp.isNotNull($field);
         }
 
         return this.where($exp);
@@ -951,19 +1012,19 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Convenience method that adds a IS NULL condition to the query
      *
-     * @param uim.cake.databases.IExpression|array|string myFields A single field or expressions or a list of them
+     * @param uim.cake.databases.IExpression|array|string $fields A single field or expressions or a list of them
      *   that should be null.
      * @return this
      */
-    function whereNull(myFields) {
-        if (!is_array(myFields)) {
-            myFields = [myFields];
+    function whereNull($fields) {
+        if (!is_array($fields)) {
+            $fields = [$fields];
         }
 
         $exp = this.newExpr();
 
-        foreach (myFields as myField) {
-            $exp.isNull(myField);
+        foreach ($fields as $field) {
+            $exp.isNull($field);
         }
 
         return this.where($exp);
@@ -982,22 +1043,22 @@ class Query : IExpression, IteratorAggregate {
      * - `types` - Associative array of type names used to bind values to query
      * - `allowEmpty` - Allow empty array.
      *
-     * @param string myField Field
-     * @param array myValues Array of values
-     * @param array<string, mixed> myOptions Options
+     * @param string $field Field
+     * @param array $values Array of values
+     * @param array<string, mixed> $options Options
      * @return this
      */
-    function whereInList(string myField, array myValues, array myOptions = []) {
-        myOptions += [
-            "types":[],
-            "allowEmpty":false,
+    function whereInList(string $field, array $values, array $options = []) {
+        $options += [
+            "types": [],
+            "allowEmpty": false,
         ];
 
-        if (myOptions["allowEmpty"] && !myValues) {
+        if ($options["allowEmpty"] && !$values) {
             return this.where("1=0");
         }
 
-        return this.where([myField ~ " IN":myValues], myOptions["types"]);
+        return this.where([$field ~ " IN": $values], $options["types"]);
     }
 
     /**
@@ -1008,22 +1069,22 @@ class Query : IExpression, IteratorAggregate {
      * "allowEmpty" to true.
      * Be careful about using it without proper sanity checks.
      *
-     * @param string myField Field
-     * @param array myValues Array of values
-     * @param array<string, mixed> myOptions Options
+     * @param string $field Field
+     * @param array $values Array of values
+     * @param array<string, mixed> $options Options
      * @return this
      */
-    function whereNotInList(string myField, array myValues, array myOptions = []) {
-        myOptions += [
-            "types":[],
-            "allowEmpty":false,
+    function whereNotInList(string $field, array $values, array $options = []) {
+        $options += [
+            "types": [],
+            "allowEmpty": false,
         ];
 
-        if (myOptions["allowEmpty"] && !myValues) {
-            return this.where([myField ~ " IS NOT":null]);
+        if ($options["allowEmpty"] && !$values) {
+            return this.where([$field ~ " IS NOT": null]);
         }
 
-        return this.where([myField ~ " NOT IN":myValues], myOptions["types"]);
+        return this.where([$field ~ " NOT IN": $values], $options["types"]);
     }
 
     /**
@@ -1035,26 +1096,26 @@ class Query : IExpression, IteratorAggregate {
      * "allowEmpty" to true.
      * Be careful about using it without proper sanity checks.
      *
-     * @param string myField Field
-     * @param array myValues Array of values
-     * @param array<string, mixed> myOptions Options
+     * @param string $field Field
+     * @param array $values Array of values
+     * @param array<string, mixed> $options Options
      * @return this
      */
-    function whereNotInListOrNull(string myField, array myValues, array myOptions = []) {
-        myOptions += [
-            "types":[],
-            "allowEmpty":false,
+    function whereNotInListOrNull(string $field, array $values, array $options = []) {
+        $options += [
+            "types": [],
+            "allowEmpty": false,
         ];
 
-        if (myOptions["allowEmpty"] && !myValues) {
-            return this.where([myField ~ " IS NOT":null]);
+        if ($options["allowEmpty"] && !$values) {
+            return this.where([$field ~ " IS NOT": null]);
         }
 
         return this.where(
             [
-                "OR":[myField ~ " NOT IN":myValues, myField ~ " IS":null],
+                "OR": [$field ~ " NOT IN": $values, $field ~ " IS": null],
             ],
-            myOptions["types"]
+            $options["types"]
         );
     }
 
@@ -1077,7 +1138,7 @@ class Query : IExpression, IteratorAggregate {
      * ### Examples:
      *
      * ```
-     * myQuery.where(["title":"Hello World").andWhere(["author_id":1]);
+     * $query.where(["title": "Hello World").andWhere(["author_id": 1]);
      * ```
      *
      * Will produce:
@@ -1085,9 +1146,9 @@ class Query : IExpression, IteratorAggregate {
      * `WHERE title = "Hello World" AND author_id = 1`
      *
      * ```
-     * myQuery
-     *   .where(["OR":["published":false, "published is NULL"]])
-     *   .andWhere(["author_id":1, "comments_count >":10])
+     * $query
+     *   .where(["OR": ["published": false, "published is NULL"]])
+     *   .andWhere(["author_id": 1, "comments_count >": 10])
      * ```
      *
      * Produces:
@@ -1095,12 +1156,12 @@ class Query : IExpression, IteratorAggregate {
      * `WHERE (published = 0 OR published IS NULL) AND author_id = 1 AND comments_count > 10`
      *
      * ```
-     * myQuery
-     *   .where(["title":"Foo"])
-     *   .andWhere(function ($exp, myQuery) {
+     * $query
+     *   .where(["title": "Foo"])
+     *   .andWhere(function ($exp, $query) {
      *     return $exp
-     *       .or(["author_id":1])
-     *       .add(["author_id":2]);
+     *       .or(["author_id": 1])
+     *       .add(["author_id": 2]);
      *   });
      * ```
      *
@@ -1108,14 +1169,14 @@ class Query : IExpression, IteratorAggregate {
      *
      * `WHERE (title = "Foo") AND (author_id = 1 OR author_id = 2)`
      *
-     * @param uim.cake.databases.IExpression|\Closure|array|string conditions The conditions to add with AND.
-     * @param array<string, string> myTypes Associative array of type names used to bind values to query
+     * @param uim.cake.databases.IExpression|\Closure|array|string $conditions The conditions to add with AND.
+     * @param array<string, string> $types Associative array of type names used to bind values to query
      * @see uim.cake.databases.Query::where()
      * @see uim.cake.databases.TypeFactory
      * @return this
      */
-    function andWhere($conditions, array myTypes = []) {
-        _conjugate("where", $conditions, "AND", myTypes);
+    function andWhere($conditions, array $types = []) {
+        _conjugate("where", $conditions, "AND", $types);
 
         return this;
     }
@@ -1136,7 +1197,7 @@ class Query : IExpression, IteratorAggregate {
      * ### Examples:
      *
      * ```
-     * myQuery.order(["title":"DESC", "author_id":"ASC"]);
+     * $query.order(["title": "DESC", "author_id": "ASC"]);
      * ```
      *
      * Produces:
@@ -1144,8 +1205,8 @@ class Query : IExpression, IteratorAggregate {
      * `ORDER BY title DESC, author_id ASC`
      *
      * ```
-     * myQuery
-     *     .order(["title":myQuery.newExpr("DESC NULLS FIRST")])
+     * $query
+     *     .order(["title": $query.newExpr("DESC NULLS FIRST")])
      *     .order("author_id");
      * ```
      *
@@ -1154,15 +1215,15 @@ class Query : IExpression, IteratorAggregate {
      * `ORDER BY title DESC NULLS FIRST, author_id`
      *
      * ```
-     * $expression = myQuery.newExpr().add(["id % 2 = 0"]);
-     * myQuery.order($expression).order(["title":"ASC"]);
+     * $expression = $query.newExpr().add(["id % 2 = 0"]);
+     * $query.order($expression).order(["title": "ASC"]);
      * ```
      *
      * and
      *
      * ```
-     * myQuery.order(function ($exp, myQuery) {
-     *     return [$exp.add(["id % 2 = 0"]), "title":"ASC"];
+     * $query.order(function ($exp, $query) {
+     *     return [$exp.add(["id % 2 = 0"]), "title": "ASC"];
      * });
      * ```
      *
@@ -1177,23 +1238,23 @@ class Query : IExpression, IteratorAggregate {
      * If you need to set complex expressions as order conditions, you
      * should use `orderAsc()` or `orderDesc()`.
      *
-     * @param uim.cake.databases.IExpression|\Closure|array|string myFields fields to be added to the list
+     * @param uim.cake.databases.IExpression|\Closure|array|string $fields fields to be added to the list
      * @param bool $overwrite whether to reset order with field list or not
      * @return this
      */
-    function order(myFields, $overwrite = false) {
+    function order($fields, $overwrite = false) {
         if ($overwrite) {
             _parts["order"] = null;
         }
 
-        if (!myFields) {
+        if (!$fields) {
             return this;
         }
 
         if (!_parts["order"]) {
             _parts["order"] = new OrderByExpression();
         }
-        _conjugate("order", myFields, "", []);
+        _conjugate("order", $fields, "", []);
 
         return this;
     }
@@ -1207,26 +1268,26 @@ class Query : IExpression, IteratorAggregate {
      * Order fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param uim.cake.databases.IExpression|\Closure|string myField The field to order on.
+     * @param uim.cake.databases.IExpression|\Closure|string $field The field to order on.
      * @param bool $overwrite Whether to reset the order clauses.
      * @return this
      */
-    function orderAsc(myField, $overwrite = false) {
+    function orderAsc($field, $overwrite = false) {
         if ($overwrite) {
             _parts["order"] = null;
         }
-        if (!myField) {
+        if (!$field) {
             return this;
         }
 
-        if (myField instanceof Closure) {
-            myField = myField(this.newExpr(), this);
+        if ($field instanceof Closure) {
+            $field = $field(this.newExpr(), this);
         }
 
         if (!_parts["order"]) {
             _parts["order"] = new OrderByExpression();
         }
-        _parts["order"].add(new OrderClauseExpression(myField, "ASC"));
+        _parts["order"].add(new OrderClauseExpression($field, "ASC"));
 
         return this;
     }
@@ -1240,26 +1301,26 @@ class Query : IExpression, IteratorAggregate {
      * Order fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param uim.cake.databases.IExpression|\Closure|string myField The field to order on.
+     * @param uim.cake.databases.IExpression|\Closure|string $field The field to order on.
      * @param bool $overwrite Whether to reset the order clauses.
      * @return this
      */
-    function orderDesc(myField, $overwrite = false) {
+    function orderDesc($field, $overwrite = false) {
         if ($overwrite) {
             _parts["order"] = null;
         }
-        if (!myField) {
+        if (!$field) {
             return this;
         }
 
-        if (myField instanceof Closure) {
-            myField = myField(this.newExpr(), this);
+        if ($field instanceof Closure) {
+            $field = $field(this.newExpr(), this);
         }
 
         if (!_parts["order"]) {
             _parts["order"] = new OrderByExpression();
         }
-        _parts["order"].add(new OrderClauseExpression(myField, "DESC"));
+        _parts["order"].add(new OrderClauseExpression($field, "DESC"));
 
         return this;
     }
@@ -1276,29 +1337,29 @@ class Query : IExpression, IteratorAggregate {
      *
      * ```
      * // Produces GROUP BY id, title
-     * myQuery.group(["id", "title"]);
+     * $query.group(["id", "title"]);
      *
      * // Produces GROUP BY title
-     * myQuery.group("title");
+     * $query.group("title");
      * ```
      *
      * Group fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param uim.cake.databases.IExpression|array|string myFields fields to be added to the list
+     * @param uim.cake.databases.IExpression|array|string $fields fields to be added to the list
      * @param bool $overwrite whether to reset fields with passed list or not
      * @return this
      */
-    function group(myFields, $overwrite = false) {
+    function group($fields, $overwrite = false) {
         if ($overwrite) {
             _parts["group"] = [];
         }
 
-        if (!is_array(myFields)) {
-            myFields = [myFields];
+        if (!is_array($fields)) {
+            $fields = [$fields];
         }
 
-        _parts["group"] = array_merge(_parts["group"], array_values(myFields));
+        _parts["group"] = array_merge(_parts["group"], array_values($fields));
         _dirty();
 
         return this;
@@ -1314,16 +1375,16 @@ class Query : IExpression, IteratorAggregate {
      * not sanitized by the query builder.
      *
      * @param uim.cake.databases.IExpression|\Closure|array|string|null $conditions The having conditions.
-     * @param array<string, string> myTypes Associative array of type names used to bind values to query
+     * @param array<string, string> $types Associative array of type names used to bind values to query
      * @param bool $overwrite whether to reset conditions with passed list or not
      * @see uim.cake.databases.Query::where()
      * @return this
      */
-    function having($conditions = null, myTypes = [], $overwrite = false) {
+    function having($conditions = null, $types = [], $overwrite = false) {
         if ($overwrite) {
             _parts["having"] = this.newExpr();
         }
-        _conjugate("having", $conditions, "AND", myTypes);
+        _conjugate("having", $conditions, "AND", $types);
 
         return this;
     }
@@ -1337,13 +1398,13 @@ class Query : IExpression, IteratorAggregate {
      * Having fields are not suitable for use with user supplied data as they are
      * not sanitized by the query builder.
      *
-     * @param uim.cake.databases.IExpression|\Closure|array|string conditions The AND conditions for HAVING.
-     * @param array<string, string> myTypes Associative array of type names used to bind values to query
+     * @param uim.cake.databases.IExpression|\Closure|array|string $conditions The AND conditions for HAVING.
+     * @param array<string, string> $types Associative array of type names used to bind values to query
      * @see uim.cake.databases.Query::andWhere()
      * @return this
      */
-    function andHaving($conditions, myTypes = []) {
-        _conjugate("having", $conditions, "AND", myTypes);
+    function andHaving($conditions, $types = []) {
+        _conjugate("having", $conditions, "AND", $types);
 
         return this;
     }
@@ -1353,12 +1414,12 @@ class Query : IExpression, IteratorAggregate {
      *
      * You are responsible for adding windows in the order your database requires.
      *
-     * @param string myName Window name
+     * @param string aName Window name
      * @param uim.cake.databases.Expression\WindowExpression|\Closure $window Window expression
      * @param bool $overwrite Clear all previous query window expressions
      * @return this
      */
-    function window(string myName, $window, bool $overwrite = false) {
+    function window(string aName, $window, bool $overwrite = false) {
         if ($overwrite) {
             _parts["window"] = [];
         }
@@ -1370,7 +1431,7 @@ class Query : IExpression, IteratorAggregate {
             }
         }
 
-        _parts["window"][] = ["name":new IdentifierExpression(myName), "window":$window];
+        _parts["window"][] = ["name": new IdentifierExpression($name), "window": $window];
         _dirty();
 
         return this;
@@ -1391,15 +1452,15 @@ class Query : IExpression, IteratorAggregate {
      * @return this
      * @throws \InvalidArgumentException If page number < 1.
      */
-    function page(int $num, Nullable!int $limit = null) {
+    function page(int $num, ?int $limit = null) {
         if ($num < 1) {
             throw new InvalidArgumentException("Pages must start at 1.");
         }
-        if ($limit  !is null) {
+        if ($limit != null) {
             this.limit($limit);
         }
         $limit = this.clause("limit");
-        if ($limit is null) {
+        if ($limit == null) {
             $limit = 25;
             this.limit($limit);
         }
@@ -1421,8 +1482,8 @@ class Query : IExpression, IteratorAggregate {
      * ### Examples
      *
      * ```
-     * myQuery.limit(10) // generates LIMIT 10
-     * myQuery.limit(myQuery.newExpr().add(["1 + 1"])); // LIMIT (1 + 1)
+     * $query.limit(10) // generates LIMIT 10
+     * $query.limit($query.newExpr().add(["1 + 1"])); // LIMIT (1 + 1)
      * ```
      *
      * @param uim.cake.databases.IExpression|int|null $limit number of records to be returned
@@ -1446,8 +1507,8 @@ class Query : IExpression, IteratorAggregate {
      * ### Examples
      *
      * ```
-     * myQuery.offset(10) // generates OFFSET 10
-     * myQuery.offset(myQuery.newExpr().add(["1 + 1"])); // OFFSET (1 + 1)
+     * $query.offset(10) // generates OFFSET 10
+     * $query.offset($query.newExpr().add(["1 + 1"])); // OFFSET (1 + 1)
      * ```
      *
      * @param uim.cake.databases.IExpression|int|null $offset number of records to be skipped
@@ -1472,25 +1533,25 @@ class Query : IExpression, IteratorAggregate {
      * ### Examples
      *
      * ```
-     * $union = (new Query($conn)).select(["id", "title"]).from(["a":"articles"]);
-     * myQuery.select(["id", "name"]).from(["d":"things"]).union($union);
+     * $union = (new Query($conn)).select(["id", "title"]).from(["a": "articles"]);
+     * $query.select(["id", "name"]).from(["d": "things"]).union($union);
      * ```
      *
      * Will produce:
      *
      * `SELECT id, name FROM things d UNION SELECT id, title FROM articles a`
      *
-     * @param uim.cake.databases.Query|string myQuery full SQL query to be used in UNION operator
+     * @param uim.cake.databases.Query|string $query full SQL query to be used in UNION operator
      * @param bool $overwrite whether to reset the list of queries to be operated or not
      * @return this
      */
-    function union(myQuery, $overwrite = false) {
+    function union($query, $overwrite = false) {
         if ($overwrite) {
             _parts["union"] = [];
         }
         _parts["union"][] = [
-            "all":false,
-            "query":myQuery,
+            "all": false,
+            "query": $query,
         ];
         _dirty();
 
@@ -1506,25 +1567,25 @@ class Query : IExpression, IteratorAggregate {
      * Unlike UNION, UNION ALL will not remove duplicate rows.
      *
      * ```
-     * $union = (new Query($conn)).select(["id", "title"]).from(["a":"articles"]);
-     * myQuery.select(["id", "name"]).from(["d":"things"]).unionAll($union);
+     * $union = (new Query($conn)).select(["id", "title"]).from(["a": "articles"]);
+     * $query.select(["id", "name"]).from(["d": "things"]).unionAll($union);
      * ```
      *
      * Will produce:
      *
      * `SELECT id, name FROM things d UNION ALL SELECT id, title FROM articles a`
      *
-     * @param uim.cake.databases.Query|string myQuery full SQL query to be used in UNION operator
+     * @param uim.cake.databases.Query|string $query full SQL query to be used in UNION operator
      * @param bool $overwrite whether to reset the list of queries to be operated or not
      * @return this
      */
-    function unionAll(myQuery, $overwrite = false) {
+    function unionAll($query, $overwrite = false) {
         if ($overwrite) {
             _parts["union"] = [];
         }
         _parts["union"][] = [
-            "all":true,
-            "query":myQuery,
+            "all": true,
+            "query": $query,
         ];
         _dirty();
 
@@ -1538,11 +1599,11 @@ class Query : IExpression, IteratorAggregate {
      * with Query::values().
      *
      * @param array $columns The columns to insert into.
-     * @param array<string, string> myTypes A map between columns & their datatypes.
+     * @param array<int|string, string> $types A map between columns & their datatypes.
      * @return this
      * @throws \RuntimeException When there are 0 columns.
      */
-    function insert(array $columns, array myTypes = []) {
+    function insert(array $columns, array $types = []) {
         if (empty($columns)) {
             throw new RuntimeException("At least 1 column is required to perform an insert.");
         }
@@ -1550,7 +1611,7 @@ class Query : IExpression, IteratorAggregate {
         _type = "insert";
         _parts["insert"][1] = $columns;
         if (!_parts["values"]) {
-            _parts["values"] = new ValuesExpression($columns, this.getTypeMap().setTypes(myTypes));
+            _parts["values"] = new ValuesExpression($columns, this.getTypeMap().setTypes($types));
         } else {
             _parts["values"].setColumns($columns);
         }
@@ -1561,13 +1622,13 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Set the table name for insert queries.
      *
-     * @param string myTable The table name to insert into.
+     * @param string $table The table name to insert into.
      * @return this
      */
-    function into(string myTable) {
+    function into(string $table) {
         _dirty();
         _type = "insert";
-        _parts["insert"][0] = myTable;
+        _parts["insert"][0] = $table;
 
         return this;
     }
@@ -1582,29 +1643,30 @@ class Query : IExpression, IteratorAggregate {
      * ### Example
      *
      * ```
-     * myQuery.newExpr().lte("count", myQuery.identifier("total"));
+     * $query.newExpr().lte("count", $query.identifier("total"));
      * ```
      *
-     * @param string myIdentifier The identifier for an expression
+     * @param string $identifier The identifier for an expression
      * @return uim.cake.databases.IExpression
      */
-    IExpression identifier(string myIdentifier) {
-        return new IdentifierExpression(myIdentifier);
+    function identifier(string $identifier): IExpression
+    {
+        return new IdentifierExpression($identifier);
     }
 
     /**
      * Set the values for an insert query.
      *
      * Multi inserts can be performed by calling values() more than one time,
-     * or by providing an array of value sets. Additionally myData can be a Query
+     * or by providing an array of value sets. Additionally $data can be a Query
      * instance to insert data from another SELECT statement.
      *
-     * @param uim.cake.databases.Expression\ValuesExpression|uim.cake.databases.Query|array myData The data to insert.
+     * @param uim.cake.databases.Expression\ValuesExpression|uim.cake.databases.Query|array $data The data to insert.
      * @return this
      * @throws uim.cake.databases.exceptions.DatabaseException if you try to set values before declaring columns.
      *   Or if you try to set values on non-insert queries.
      */
-    function values(myData) {
+    function values($data) {
         if (_type != "insert") {
             throw new DatabaseException(
                 "You cannot add values before defining columns to use."
@@ -1617,13 +1679,13 @@ class Query : IExpression, IteratorAggregate {
         }
 
         _dirty();
-        if (myData instanceof ValuesExpression) {
-            _parts["values"] = myData;
+        if ($data instanceof ValuesExpression) {
+            _parts["values"] = $data;
 
             return this;
         }
 
-        _parts["values"].add(myData);
+        _parts["values"].add($data);
 
         return this;
     }
@@ -1633,19 +1695,19 @@ class Query : IExpression, IteratorAggregate {
      *
      * Can be combined with set() and where() methods to create update queries.
      *
-     * @param uim.cake.databases.IExpression|string myTable The table you want to update.
+     * @param uim.cake.databases.IExpression|string $table The table you want to update.
      * @return this
      */
-    function update(myTable) {
-        if (!is_string(myTable) && !(myTable instanceof IExpression)) {
+    function update($table) {
+        if (!is_string($table) && !($table instanceof IExpression)) {
             $text = "Table must be of type string or "%s", got "%s"";
-            myMessage = sprintf($text, IExpression::class, gettype(myTable));
-            throw new InvalidArgumentException(myMessage);
+            $message = sprintf($text, IExpression::class, gettype($table));
+            throw new InvalidArgumentException($message);
         }
 
         _dirty();
         _type = "update";
-        _parts["update"][0] = myTable;
+        _parts["update"][0] = $table;
 
         return this;
     }
@@ -1658,55 +1720,55 @@ class Query : IExpression, IteratorAggregate {
      * Passing a string:
      *
      * ```
-     * myQuery.update("articles").set("title", "The Title");
+     * $query.update("articles").set("title", "The Title");
      * ```
      *
      * Passing an array:
      *
      * ```
-     * myQuery.update("articles").set(["title":"The Title"], ["title":"string"]);
+     * $query.update("articles").set(["title": "The Title"], ["title": "string"]);
      * ```
      *
      * Passing a callable:
      *
      * ```
-     * myQuery.update("articles").set(function ($exp) {
+     * $query.update("articles").set(function ($exp) {
      *   return $exp.eq("title", "The title", "string");
      * });
      * ```
      *
-     * @param uim.cake.databases.Expression\QueryExpression|\Closure|array|string myKey The column name or array of keys
+     * @param uim.cake.databases.Expression\QueryExpression|\Closure|array|string aKey The column name or array of keys
      *    + values to set. This can also be a QueryExpression containing a SQL fragment.
      *    It can also be a Closure, that is required to return an expression object.
-     * @param mixed myValue The value to update myKey to. Can be null if myKey is an
-     *    array or QueryExpression. When myKey is an array, this parameter will be
-     *    used as myTypes instead.
-     * @param array<string, string>|string myTypes The column types to treat data as.
+     * @param mixed $value The value to update $key to. Can be null if $key is an
+     *    array or QueryExpression. When $key is an array, this parameter will be
+     *    used as $types instead.
+     * @param array<string, string>|string $types The column types to treat data as.
      * @return this
      */
-    auto set(myKey, myValue = null, myTypes = []) {
+    function set(string aKey, $value = null, $types = []) {
         if (empty(_parts["set"])) {
             _parts["set"] = this.newExpr().setConjunction(",");
         }
 
-        if (myKey instanceof Closure) {
+        if ($key instanceof Closure) {
             $exp = this.newExpr().setConjunction(",");
-            _parts["set"].add(myKey($exp));
+            _parts["set"].add($key($exp));
 
             return this;
         }
 
-        if (is_array(myKey) || myKey instanceof IExpression) {
-            myTypes = (array)myValue;
-            _parts["set"].add(myKey, myTypes);
+        if (is_array($key) || $key instanceof IExpression) {
+            $types = (array)$value;
+            _parts["set"].add($key, $types);
 
             return this;
         }
 
-        if (!is_string(myTypes)) {
-            myTypes = null;
+        if (!is_string($types)) {
+            $types = null;
         }
-        _parts["set"].eq(myKey, myValue, myTypes);
+        _parts["set"].eq($key, $value, $types);
 
         return this;
     }
@@ -1717,14 +1779,14 @@ class Query : IExpression, IteratorAggregate {
      * Can be combined with from(), where() and other methods to
      * create delete queries with specific conditions.
      *
-     * @param string|null myTable The table to use when deleting.
+     * @param string|null $table The table to use when deleting.
      * @return this
      */
-    function delete(Nullable!string myTable = null) {
+    function delete(?string $table = null) {
         _dirty();
         _type = "delete";
-        if (myTable  !is null) {
-            this.from(myTable);
+        if ($table != null) {
+            this.from($table);
         }
 
         return this;
@@ -1735,10 +1797,10 @@ class Query : IExpression, IteratorAggregate {
      *
      * ### Examples:
      * ```
-     * myQuery.select("id").where(["author_id":1]).epilog("FOR UPDATE");
-     * myQuery
+     * $query.select("id").where(["author_id": 1]).epilog("FOR UPDATE");
+     * $query
      *  .insert("articles", ["title"])
-     *  .values(["author_id":1])
+     *  .values(["author_id": 1])
      *  .epilog("RETURNING id");
      * ```
      *
@@ -1771,17 +1833,40 @@ class Query : IExpression, IteratorAggregate {
      * any format accepted by uim.cake.databases.Expression\QueryExpression:
      *
      * ```
-     * $expression = myQuery.newExpr(); // Returns an empty expression object
-     * $expression = myQuery.newExpr("Table.column = Table2.column"); // Return a raw SQL expression
+     * $expression = $query.expr(); // Returns an empty expression object
+     * $expression = $query.expr("Table.column = Table2.column"); // Return a raw SQL expression
      * ```
      *
      * @param uim.cake.databases.IExpression|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
      * @return uim.cake.databases.Expression\QueryExpression
      */
-    QueryExpression newExpr($rawExpression = null) {
+    function newExpr($rawExpression = null): QueryExpression
+    {
+        return this.expr($rawExpression);
+    }
+
+    /**
+     * Returns a new QueryExpression object. This is a handy function when
+     * building complex queries using a fluent interface. You can also override
+     * this function in subclasses to use a more specialized QueryExpression class
+     * if required.
+     *
+     * You can optionally pass a single raw SQL string or an array or expressions in
+     * any format accepted by uim.cake.databases.Expression\QueryExpression:
+     *
+     * ```
+     * $expression = $query.expr(); // Returns an empty expression object
+     * $expression = $query.expr("Table.column = Table2.column"); // Return a raw SQL expression
+     * ```
+     *
+     * @param uim.cake.databases.IExpression|array|string|null $rawExpression A string, array or anything you want wrapped in an expression object
+     * @return uim.cake.databases.Expression\QueryExpression
+     */
+    function expr($rawExpression = null): QueryExpression
+    {
         $expression = new QueryExpression([], this.getTypeMap());
 
-        if ($rawExpression  !is null) {
+        if ($rawExpression != null) {
             $expression.add($rawExpression);
         }
 
@@ -1795,14 +1880,15 @@ class Query : IExpression, IteratorAggregate {
      * ### Example:
      *
      * ```
-     * myQuery.func().count("*");
-     * myQuery.func().dateDiff(["2012-01-05", "2012-01-02"])
+     * $query.func().count("*");
+     * $query.func().dateDiff(["2012-01-05", "2012-01-02"])
      * ```
      *
      * @return uim.cake.databases.FunctionsBuilder
      */
-    FunctionsBuilder func() {
-        if (_functionsBuilder is null) {
+    function func(): FunctionsBuilder
+    {
+        if (_functionsBuilder == null) {
             _functionsBuilder = new FunctionsBuilder();
         }
 
@@ -1819,8 +1905,8 @@ class Query : IExpression, IteratorAggregate {
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
     #[\ReturnTypeWillChange]
-    auto getIterator() {
-        if (_iterator is null || _dirty) {
+    function getIterator() {
+        if (_iterator == null || _dirty) {
             _iterator = this.execute();
         }
 
@@ -1855,17 +1941,17 @@ class Query : IExpression, IteratorAggregate {
      * - offset: integer or QueryExpression, null when not set
      * - union: array
      *
-     * @param string myName name of the clause to be returned
+     * @param string aName name of the clause to be returned
      * @return mixed
      * @throws \InvalidArgumentException When the named clause does not exist.
      */
-    function clause(string myName) {
-        if (!array_key_exists(myName, _parts)) {
+    function clause(string aName) {
+        if (!array_key_exists($name, _parts)) {
             $clauses = implode(", ", array_keys(_parts));
-            throw new InvalidArgumentException("The "myName" clause is not defined. Valid clauses are: $clauses");
+            throw new InvalidArgumentException("The "$name" clause is not defined. Valid clauses are: $clauses");
         }
 
-        return _parts[myName];
+        return _parts[$name];
     }
 
     /**
@@ -1886,7 +1972,7 @@ class Query : IExpression, IteratorAggregate {
      * ### Example
      *
      * ```
-     * myQuery.decorateResults(function ($row) {
+     * $query.decorateResults(function ($row) {
      *   $row["order_total"] = $row["subtotal"] + ($row["subtotal"] * $row["tax"]);
      *    return $row;
      * });
@@ -1901,7 +1987,7 @@ class Query : IExpression, IteratorAggregate {
             _resultDecorators = [];
         }
 
-        if ($callback  !is null) {
+        if ($callback != null) {
             _resultDecorators[] = $callback;
         }
 
@@ -1964,18 +2050,18 @@ class Query : IExpression, IteratorAggregate {
      * Associates a query placeholder to a value and a type.
      *
      * ```
-     * myQuery.bind(":id", 1, "integer");
+     * $query.bind(":id", 1, "integer");
      * ```
      *
      * @param string|int $param placeholder to be replaced with quoted version
-     *   of myValue
-     * @param mixed myValue The value to be bound
-     * @param string|int|null myType the mapped type name, used for casting when sending
+     *   of $value
+     * @param mixed $value The value to be bound
+     * @param string|int|null $type the mapped type name, used for casting when sending
      *   to database
      * @return this
      */
-    function bind($param, myValue, myType = null) {
-        this.getValueBinder().bind($param, myValue, myType);
+    function bind($param, $value, $type = null) {
+        this.getValueBinder().bind($param, $value, $type);
 
         return this;
     }
@@ -1989,8 +2075,9 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return uim.cake.databases.ValueBinder
      */
-    ValueBinder getValueBinder() {
-        if (_valueBinder is null) {
+    function getValueBinder(): ValueBinder
+    {
+        if (_valueBinder == null) {
             _valueBinder = new ValueBinder();
         }
 
@@ -2007,7 +2094,7 @@ class Query : IExpression, IteratorAggregate {
      * @param uim.cake.databases.ValueBinder|null $binder The binder or null to disable binding.
      * @return this
      */
-    auto setValueBinder(?ValueBinder aBinder) {
+    function setValueBinder(?ValueBinder aBinder) {
         _valueBinder = $binder;
 
         return this;
@@ -2023,12 +2110,12 @@ class Query : IExpression, IteratorAggregate {
      * When disabled it will consume less memory as fetched results are not
      * remembered for future iterations.
      *
-     * @param bool myEnable Whether to enable buffering
+     * @param bool $enable Whether to enable buffering
      * @return this
      */
-    function enableBufferedResults(bool myEnable = true) {
+    function enableBufferedResults(bool $enable = true) {
         _dirty();
-        _useBufferedResults = myEnable;
+        _useBufferedResults = $enable;
 
         return this;
     }
@@ -2057,8 +2144,10 @@ class Query : IExpression, IteratorAggregate {
      *
      * When disabled it will consume less memory as fetched results are not
      * remembered for future iterations.
+     *
      */
-    bool isBufferedResultsEnabled() {
+    bool isBufferedResultsEnabled(): bool
+    {
         return _useBufferedResults;
     }
 
@@ -2066,11 +2155,11 @@ class Query : IExpression, IteratorAggregate {
      * Sets the TypeMap class where the types for each of the fields in the
      * select clause are stored.
      *
-     * @param uim.cake.databases.TypeMap myTypeMap The map object to use
+     * @param uim.cake.databases.TypeMap $typeMap The map object to use
      * @return this
      */
-    auto setSelectTypeMap(TypeMap myTypeMap) {
-        _selectTypeMap = myTypeMap;
+    function setSelectTypeMap(TypeMap $typeMap) {
+        _selectTypeMap = $typeMap;
         _dirty();
 
         return this;
@@ -2082,8 +2171,9 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return uim.cake.databases.TypeMap
      */
-    TypeMap getSelectTypeMap() {
-        if (_selectTypeMap is null) {
+    function getSelectTypeMap(): TypeMap
+    {
+        if (_selectTypeMap == null) {
             _selectTypeMap = new TypeMap();
         }
 
@@ -2128,8 +2218,10 @@ class Query : IExpression, IteratorAggregate {
      * When disabled, the fields will be returned as received from the database
      * driver (which in most environments means they are being returned as
      * strings), which can improve performance with larger datasets.
+     *
      */
-    bool isResultsCastingEnabled() {
+    bool isResultsCastingEnabled(): bool
+    {
         return this.typeCastEnabled;
     }
 
@@ -2140,16 +2232,16 @@ class Query : IExpression, IteratorAggregate {
      * @param uim.cake.databases.IStatement $statement to be decorated
      * @return uim.cake.databases.Statement\CallbackStatement|uim.cake.databases.IStatement
      */
-    protected auto _decorateStatement(IStatement $statement) {
-        myTypeMap = this.getSelectTypeMap();
-        myDriver = this.getConnection().getDriver();
+    protected function _decorateStatement(IStatement $statement) {
+        $typeMap = this.getSelectTypeMap();
+        $driver = this.getConnection().getDriver();
 
-        if (this.typeCastEnabled && myTypeMap.toArray()) {
-            $statement = new CallbackStatement($statement, myDriver, new FieldTypeConverter(myTypeMap, myDriver));
+        if (this.typeCastEnabled && $typeMap.toArray()) {
+            $statement = new CallbackStatement($statement, $driver, new FieldTypeConverter($typeMap, $driver));
         }
 
         foreach (_resultDecorators as $f) {
-            $statement = new CallbackStatement($statement, myDriver, $f);
+            $statement = new CallbackStatement($statement, $driver, $f);
         }
 
         return $statement;
@@ -2158,13 +2250,13 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Helper function used to build conditions by composing QueryExpression objects.
      *
-     * @param string part Name of the query part to append the new part to
+     * @param string $part Name of the query part to append the new part to
      * @param uim.cake.databases.IExpression|\Closure|array|string|null $append Expression or builder function to append.
      *   to append.
-     * @param string conjunction type of conjunction to be used to operate part
-     * @param array<string, string> myTypes Associative array of type names used to bind values to query
+     * @param string $conjunction type of conjunction to be used to operate part
+     * @param array<string, string> $types Associative array of type names used to bind values to query
      */
-    protected void _conjugate(string part, $append, $conjunction, array myTypes) {
+    protected void _conjugate(string $part, $append, $conjunction, array $types) {
         $expression = _parts[$part] ?: this.newExpr();
         if (empty($append)) {
             _parts[$part] = $expression;
@@ -2177,11 +2269,11 @@ class Query : IExpression, IteratorAggregate {
         }
 
         if ($expression.getConjunction() == $conjunction) {
-            $expression.add($append, myTypes);
+            $expression.add($append, $types);
         } else {
             $expression = this.newExpr()
                 .setConjunction($conjunction)
-                .add([$expression, $append], myTypes);
+                .add([$expression, $append], $types);
         }
 
         _parts[$part] = $expression;
@@ -2191,6 +2283,7 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching.
+     *
      */
     protected void _dirty() {
         _dirty = true;
@@ -2200,36 +2293,38 @@ class Query : IExpression, IteratorAggregate {
         }
     }
 
-    // Handles clearing iterator and cloning all expressions and value binders.
+    /**
+     * Handles clearing iterator and cloning all expressions and value binders.
+     */
     void __clone() {
         _iterator = null;
-        if (_valueBinder  !is null) {
+        if (_valueBinder != null) {
             _valueBinder = clone _valueBinder;
         }
-        if (_selectTypeMap  !is null) {
+        if (_selectTypeMap != null) {
             _selectTypeMap = clone _selectTypeMap;
         }
-        foreach (_parts as myName: $part) {
+        foreach (_parts as $name: $part) {
             if (empty($part)) {
                 continue;
             }
             if (is_array($part)) {
                 foreach ($part as $i: $piece) {
                     if (is_array($piece)) {
-                        foreach ($piece as $j: myValue) {
-                            if (myValue instanceof IExpression) {
+                        foreach ($piece as $j: $value) {
+                            if ($value instanceof IExpression) {
                                 /** @psalm-suppress PossiblyUndefinedMethod */
-                                _parts[myName][$i][$j] = clone myValue;
+                                _parts[$name][$i][$j] = clone $value;
                             }
                         }
                     } elseif ($piece instanceof IExpression) {
                         /** @psalm-suppress PossiblyUndefinedMethod */
-                        _parts[myName][$i] = clone $piece;
+                        _parts[$name][$i] = clone $piece;
                     }
                 }
             }
             if ($part instanceof IExpression) {
-                _parts[myName] = clone $part;
+                _parts[$name] = clone $part;
             }
         }
     }
@@ -2237,7 +2332,7 @@ class Query : IExpression, IteratorAggregate {
     /**
      * Returns string representation of this query (complete SQL statement).
      */
-    string toString() {
+    string __toString() {
         return this.sql();
     }
 
@@ -2247,7 +2342,8 @@ class Query : IExpression, IteratorAggregate {
      *
      * @return array<string, mixed>
      */
-    array __debugInfo() {
+    function __debugInfo(): array
+    {
         try {
             set_error_handler(
                 /** @return no-return */
@@ -2256,22 +2352,22 @@ class Query : IExpression, IteratorAggregate {
                 },
                 E_ALL
             );
-            mySql = this.sql();
-            myParams = this.getValueBinder().bindings();
+            $sql = this.sql();
+            $params = this.getValueBinder().bindings();
         } catch (RuntimeException $e) {
-            mySql = "SQL could not be generated for this query as it is incomplete.";
-            myParams = [];
+            $sql = "SQL could not be generated for this query as it is incomplete.";
+            $params = [];
         } finally {
             restore_error_handler();
         }
 
         return [
-            "(help)":"This is a Query object, to get the results execute or iterate it.",
-            "sql":mySql,
-            "params":myParams,
-            "defaultTypes":this.getDefaultTypes(),
-            "decorators":count(_resultDecorators),
-            "executed":_iterator ? true : false,
+            "(help)": "This is a Query object, to get the results execute or iterate it.",
+            "sql": $sql,
+            "params": $params,
+            "defaultTypes": this.getDefaultTypes(),
+            "decorators": count(_resultDecorators),
+            "executed": _iterator ? true : false,
         ];
     }
 }

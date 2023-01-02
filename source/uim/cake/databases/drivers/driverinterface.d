@@ -101,9 +101,9 @@ interface IDriver
      * Prepares a sql statement to be executed.
      *
      * @param uim.cake.databases.Query|string $query The query to turn into a prepared statement.
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function prepare($query): StatementInterface;
+    function prepare($query): IStatement;
 
     /**
      * Starts a transaction.

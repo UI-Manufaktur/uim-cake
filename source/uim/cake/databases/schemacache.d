@@ -7,6 +7,10 @@
 @safe:
 import uim.cake;
 
+module uim.cake.databases;
+
+import uim.cake.databases.schemas.CachedCollection;
+
 /**
  * Schema Cache.
  *
@@ -17,83 +21,87 @@ import uim.cake;
  *
  * @link https://en.wikipedia.org/wiki/Thundering_herd_problem About the thundering herd problem
  */
-class SchemaCache {
+class SchemaCache
+{
     /**
      * Schema
      *
      * @var uim.cake.databases.Schema\CachedCollection
      */
-    protected _schema;
+    protected $_schema;
 
     /**
      * Constructor
      *
-     * @param uim.cake.databases.Connection myConnection Connection name to get the schema for or a connection instance
+     * @param uim.cake.databases.Connection $connection Connection name to get the schema for or a connection instance
      */
-    this(Connection myConnection) {
-        _schema = this.getSchema(myConnection);
+    this(Connection $connection) {
+        _schema = this.getSchema($connection);
     }
 
     /**
      * Build metadata.
      *
-     * @param string|null myName The name of the table to build cache data for.
-     * @return Returns a list build table caches
+     * @param string|null $name The name of the table to build cache data for.
+     * @return array<string> Returns a list build table caches
      */
-    string[] build(Nullable!string myName = null) {
-        if (myName) {
-            myTables = [myName];
+    string[] build(?string aName = null): array
+    {
+        if ($name) {
+            $tables = [$name];
         } else {
-            myTables = _schema.listTables();
+            $tables = _schema.listTables();
         }
 
-        foreach (myTables as myTable) {
+        foreach ($tables as $table) {
             /** @psalm-suppress PossiblyNullArgument */
-            _schema.describe(myTable, ["forceRefresh":true]);
+            _schema.describe($table, ["forceRefresh": true]);
         }
 
-        return myTables;
+        return $tables;
     }
 
     /**
      * Clear metadata.
      *
-     * @param string|null myName The name of the table to clear cache data for.
-     * @return Returns a list of cleared table caches
+     * @param string|null $name The name of the table to clear cache data for.
+     * @return array<string> Returns a list of cleared table caches
      */
-    string[] clear(Nullable!string myName = null) {
-        if (myName) {
-            myTables = [myName];
+    string[] clear(?string aName = null): array
+    {
+        if ($name) {
+            $tables = [$name];
         } else {
-            myTables = _schema.listTables();
+            $tables = _schema.listTables();
         }
 
         $cacher = _schema.getCacher();
 
-        foreach (myTables as myTable) {
+        foreach ($tables as $table) {
             /** @psalm-suppress PossiblyNullArgument */
-            myKey = _schema.cacheKey(myTable);
-            $cacher.delete(myKey);
+            $key = _schema.cacheKey($table);
+            $cacher.delete($key);
         }
 
-        return myTables;
+        return $tables;
     }
 
     /**
      * Helper method to get the schema collection.
      *
-     * @param uim.cake.databases.Connection myConnection Connection object
+     * @param uim.cake.databases.Connection $connection Connection object
      * @return uim.cake.databases.Schema\CachedCollection
      * @throws \RuntimeException If given connection object is not compatible with schema caching
      */
-    CachedCollection getSchema(Connection myConnection) {
-        myConfig = myConnection.config();
-        if (empty(myConfig["cacheMetadata"])) {
-            myConnection.cacheMetadata(true);
+    function getSchema(Connection $connection): CachedCollection
+    {
+        $config = $connection.config();
+        if (empty($config["cacheMetadata"])) {
+            $connection.cacheMetadata(true);
         }
 
         /** @var uim.cake.databases.Schema\CachedCollection $schemaCollection */
-        $schemaCollection = myConnection.getSchemaCollection();
+        $schemaCollection = $connection.getSchemaCollection();
 
         return $schemaCollection;
     }

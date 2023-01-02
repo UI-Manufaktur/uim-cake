@@ -13,7 +13,7 @@ import uim.cake.databases.schemas.SchemaDialect;
 import uim.cake.databases.schemas.SqlserverSchemaDialect;
 import uim.cake.databases.SqlserverCompiler;
 import uim.cake.databases.statements.SqlserverStatement;
-import uim.cake.databases.StatementInterface;
+import uim.cake.databases.IStatement;
 use InvalidArgumentException;
 use PDO;
 
@@ -173,9 +173,9 @@ class Sqlserver : Driver
      * Prepares a sql statement to be executed
      *
      * @param uim.cake.databases.Query|string $query The query to prepare.
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function prepare($query): StatementInterface
+    function prepare($query): IStatement
     {
         this.connect();
 

@@ -5,7 +5,7 @@ import uim.cake.databases.Query;
 import uim.cake.databases.schemas.MysqlSchemaDialect;
 import uim.cake.databases.schemas.SchemaDialect;
 import uim.cake.databases.statements.MysqlStatement;
-import uim.cake.databases.StatementInterface;
+import uim.cake.databases.IStatement;
 use PDO;
 
 /**
@@ -166,9 +166,9 @@ class Mysql : Driver
      * Prepares a sql statement to be executed
      *
      * @param uim.cake.databases.Query|string $query The query to prepare.
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function prepare($query): StatementInterface
+    function prepare($query): IStatement
     {
         this.connect();
         $isObject = $query instanceof Query;

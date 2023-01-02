@@ -10,7 +10,7 @@ import uim.cake.databases.schemas.SqliteSchemaDialect;
 import uim.cake.databases.SqliteCompiler;
 import uim.cake.databases.statements.PDOStatement;
 import uim.cake.databases.statements.SqliteStatement;
-import uim.cake.databases.StatementInterface;
+import uim.cake.databases.IStatement;
 use InvalidArgumentException;
 use PDO;
 use RuntimeException;
@@ -169,9 +169,9 @@ class Sqlite : Driver
      * Prepares a sql statement to be executed
      *
      * @param uim.cake.databases.Query|string $query The query to prepare.
-     * @return uim.cake.databases.StatementInterface
+     * @return uim.cake.databases.IStatement
      */
-    function prepare($query): StatementInterface
+    function prepare($query): IStatement
     {
         this.connect();
         $isObject = $query instanceof Query;
