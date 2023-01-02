@@ -45,9 +45,8 @@ class IsUnique
      * @param uim.cake.Datasource\IEntity $entity The entity from where to extract the fields
      *   where the `repository` key is required.
      * @param array<string, mixed> $options Options passed to the check,
-     * @return bool
      */
-    function __invoke(IEntity $entity, array $options): bool
+    bool __invoke(IEntity $entity, array $options): bool
     {
         if (!$entity.extract(_fields, true)) {
             return true;

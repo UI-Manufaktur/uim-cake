@@ -576,9 +576,8 @@ class BelongsToMany : Association
      * of the association via the joint table.
      *
      * @param uim.cake.orm.Table $side The potential Table with ownership
-     * @return bool
      */
-    function isOwningSide(Table $side): bool
+    bool isOwningSide(Table $side): bool
     {
         return true;
     }

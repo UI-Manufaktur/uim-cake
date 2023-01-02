@@ -29,9 +29,8 @@ class BodyContains : ResponseBase
      * Checks assertion
      *
      * @param mixed $other Expected type
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         $method = "mb_strpos";
         if (this.ignoreCase) {

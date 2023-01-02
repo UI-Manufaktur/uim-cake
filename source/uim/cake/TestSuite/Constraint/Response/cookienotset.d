@@ -11,9 +11,8 @@ class CookieNotSet : CookieSet
      * Checks assertion
      *
      * @param mixed $other Expected content
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         return super.matches($other) == false;
     }

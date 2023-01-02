@@ -11,9 +11,8 @@ class BodyNotRegExp : BodyRegExp
      * Checks assertion
      *
      * @param mixed $other Expected pattern
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         return super.matches($other) == false;
     }

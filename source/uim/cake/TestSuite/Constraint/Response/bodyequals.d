@@ -11,9 +11,8 @@ class BodyEquals : ResponseBase
      * Checks assertion
      *
      * @param mixed $other Expected type
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         return _getBodyAsString() == $other;
     }

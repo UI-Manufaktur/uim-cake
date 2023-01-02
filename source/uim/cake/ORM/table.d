@@ -886,9 +886,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * ```
      *
      * @param string aName The alias used for the association.
-     * @return bool
      */
-    function hasAssociation(string aName): bool
+    bool hasAssociation(string aName): bool
     {
         return this.findAssociation($name) != null;
     }
@@ -2475,9 +2474,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * Returns true if the finder exists for the table
      *
      * @param string $type name of finder to check
-     * @return bool
      */
-    function hasFinder(string $type): bool
+    bool hasFinder(string $type): bool
     {
         $finder = "find" ~ $type;
 
@@ -2630,9 +2628,8 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
      * exists for this table.
      *
      * @param string $property the association name
-     * @return bool
      */
-    function __isset($property) {
+    bool __isset($property) {
         return _associations.has($property);
     }
 

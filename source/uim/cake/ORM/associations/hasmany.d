@@ -71,9 +71,8 @@ class HasMany : Association
      * or required information if the row in "source" did not exist.
      *
      * @param uim.cake.orm.Table $side The potential Table with ownership
-     * @return bool
      */
-    function isOwningSide(Table $side): bool
+    bool isOwningSide(Table $side): bool
     {
         return $side == this.getSource();
     }

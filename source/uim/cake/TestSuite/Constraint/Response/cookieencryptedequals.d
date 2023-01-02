@@ -44,9 +44,8 @@ class CookieEncryptedEquals : CookieEquals
      * Checks assertion
      *
      * @param mixed $other Expected content
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         $cookie = this.response.getCookie(this.cookieName);
 

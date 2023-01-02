@@ -214,9 +214,8 @@ class ResultSet : IResultSet
      *
      * Part of Iterator interface.
      *
-     * @return bool
      */
-    function valid(): bool
+    bool valid(): bool
     {
         if (_useBuffering) {
             $valid = _index < _count;

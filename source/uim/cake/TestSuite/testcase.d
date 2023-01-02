@@ -154,9 +154,8 @@ abstract class TestCase : BaseTestCase
      *
      * @param bool $shouldSkip Whether the test should be skipped.
      * @param string $message The message to display.
-     * @return bool
      */
-    function skipIf(bool $shouldSkip, string $message = ""): bool
+    bool skipIf(bool $shouldSkip, string $message = ""): bool
     {
         if ($shouldSkip) {
             this.markTestSkipped($message);
@@ -677,9 +676,8 @@ abstract class TestCase : BaseTestCase
      * @param array $expected An array, see above
      * @param string $string An HTML/XHTML/XML string
      * @param bool $fullDebug Whether more verbose output should be used.
-     * @return bool
      */
-    function assertHtml(array $expected, string $string, bool $fullDebug = false): bool
+    bool assertHtml(array $expected, string $string, bool $fullDebug = false): bool
     {
         $regex = [];
         $normalized = [];

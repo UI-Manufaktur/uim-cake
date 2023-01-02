@@ -1012,9 +1012,8 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Returns the current hydration mode.
      *
-     * @return bool
      */
-    function isHydrationEnabled(): bool
+    bool isHydrationEnabled(): bool
     {
         return _hydrate;
     }

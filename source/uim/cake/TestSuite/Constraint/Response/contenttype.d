@@ -16,9 +16,8 @@ class ContentType : ResponseBase
      * Checks assertion
      *
      * @param mixed $other Expected type
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         $alias = this.response.getMimeType($other);
         if ($alias != false) {

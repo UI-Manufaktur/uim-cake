@@ -11,9 +11,8 @@ class MailContainsAttachment : MailContains
      * Checks constraint
      *
      * @param mixed $other Constraint check
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         [$expectedFilename, $expectedFileInfo] = $other;
 

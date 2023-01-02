@@ -213,9 +213,8 @@ class RouteBuilder
      * Checks if there is already a route with a given name.
      *
      * @param string aName Name.
-     * @return bool
      */
-    function nameExists(string aName): bool
+    bool nameExists(string aName): bool
     {
         return array_key_exists($name, _collection.named());
     }

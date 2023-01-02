@@ -11,9 +11,8 @@ class MailCount : MailConstraintBase
      * Checks constraint
      *
      * @param mixed $other Constraint check
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         return count(this.getMessages()) == $other;
     }

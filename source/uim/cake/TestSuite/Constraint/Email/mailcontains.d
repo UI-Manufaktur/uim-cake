@@ -18,9 +18,8 @@ class MailContains : MailConstraintBase
      * Checks constraint
      *
      * @param mixed $other Constraint check
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         $other = preg_quote($other, "/");
         $messages = this.getMessages();

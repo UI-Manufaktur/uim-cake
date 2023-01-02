@@ -41,9 +41,8 @@ class EventFired : Constraint
      * Checks if event is in fired array
      *
      * @param mixed $other Constraint check
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         $list = _eventManager.getEventList();
 

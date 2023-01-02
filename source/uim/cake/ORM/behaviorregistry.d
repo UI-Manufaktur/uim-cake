@@ -192,9 +192,8 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      * with the chosen name.
      *
      * @param string $method The method to check for.
-     * @return bool
      */
-    function hasMethod(string $method): bool
+    bool hasMethod(string $method): bool
     {
         $method = strtolower($method);
 
@@ -208,9 +207,8 @@ class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
      * the chosen name.
      *
      * @param string $method The method to check for.
-     * @return bool
      */
-    function hasFinder(string $method): bool
+    bool hasFinder(string $method): bool
     {
         $method = strtolower($method);
 

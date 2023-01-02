@@ -273,9 +273,8 @@ abstract class Association
     /**
      * Gets whether cascaded deletes should also fire callbacks.
      *
-     * @return bool
      */
-    function getCascadeCallbacks(): bool
+    bool getCascadeCallbacks(): bool
     {
         return _cascadeCallbacks;
     }
@@ -492,9 +491,8 @@ abstract class Association
      * This is primarily used to indicate that records should be removed if the owning record in
      * the source table is deleted.
      *
-     * @return bool
      */
-    function getDependent(): bool
+    bool getDependent(): bool
     {
         return _dependent;
     }
@@ -503,9 +501,8 @@ abstract class Association
      * Whether this association can be expressed directly in a query join
      *
      * @param array<string, mixed> $options custom options key that could alter the return value
-     * @return bool
      */
-    function canBeJoined(array $options = []): bool
+    bool canBeJoined(array $options = []): bool
     {
         $strategy = $options["strategy"] ?? this.getStrategy();
 
@@ -827,9 +824,8 @@ abstract class Association
      * @param uim.cake.databases.IExpression|\Closure|array|string|null $conditions The conditions to use
      * for checking if any record matches.
      * @see uim.cake.orm.Table::exists()
-     * @return bool
      */
-    function exists($conditions): bool
+    bool exists($conditions): bool
     {
         $conditions = this.find()
             .where($conditions)

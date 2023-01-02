@@ -262,9 +262,8 @@ class Route
     /**
      * Check if a Route has been compiled into a regular expression.
      *
-     * @return bool
      */
-    function compiled(): bool
+    bool compiled(): bool
     {
         return _compiledRoute != null;
     }

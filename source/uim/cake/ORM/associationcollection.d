@@ -292,9 +292,8 @@ class AssociationCollection : IteratorAggregate
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to delete associations for.
      * @param array<string, mixed> $options The options used in the delete operation.
-     * @return bool
      */
-    function cascadeDelete(IEntity $entity, array $options): bool
+    bool cascadeDelete(IEntity $entity, array $options): bool
     {
         $noCascade = [];
         foreach (_items as $assoc) {

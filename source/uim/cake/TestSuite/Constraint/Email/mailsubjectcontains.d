@@ -20,9 +20,8 @@ class MailSubjectContains : MailConstraintBase
      * Checks constraint
      *
      * @param mixed $other Constraint check
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         if (!is_string($other)) {
             throw new InvalidArgumentException(

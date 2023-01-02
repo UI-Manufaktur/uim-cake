@@ -11,9 +11,8 @@ class BodyRegExp : ResponseBase
      * Checks assertion
      *
      * @param mixed $other Expected pattern
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         return preg_match($other, _getBodyAsString()) > 0;
     }

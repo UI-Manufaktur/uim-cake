@@ -60,9 +60,8 @@ class ExistsIn
      * @param array<string, mixed> $options Options passed to the check,
      * where the `repository` key is required.
      * @throws \RuntimeException When the rule refers to an undefined association.
-     * @return bool
      */
-    function __invoke(IEntity $entity, array $options): bool
+    bool __invoke(IEntity $entity, array $options): bool
     {
         if (is_string(_repository)) {
             if (!$options["repository"].hasAssociation(_repository)) {
