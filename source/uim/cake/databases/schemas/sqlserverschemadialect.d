@@ -8,9 +8,8 @@ module uim.cake.databases.Schema;
 class SqlserverSchemaDialect : SchemaDialect
 {
     /**
-     * @var string
      */
-    const DEFAULT_SCHEMA_NAME = "dbo";
+    const string DEFAULT_SCHEMA_NAME = "dbo";
 
     /**
      * Generate the SQL to list the tables and views.

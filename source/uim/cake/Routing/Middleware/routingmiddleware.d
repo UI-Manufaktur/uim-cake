@@ -34,9 +34,8 @@ class RoutingMiddleware : IMiddleware
     /**
      * Key used to store the route collection in the cache engine
      *
-     * @var string
      */
-    const ROUTE_COLLECTION_CACHE_KEY = "routeCollection";
+    const string ROUTE_COLLECTION_CACHE_KEY = "routeCollection";
 
     /**
      * The application that will have its routing hook invoked.

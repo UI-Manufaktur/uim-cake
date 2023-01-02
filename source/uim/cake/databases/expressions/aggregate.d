@@ -16,7 +16,7 @@ use Closure;
  * For security reasons, all params passed are quoted by default unless
  * explicitly told otherwise.
  */
-class AggregateExpression : FunctionExpression : WindowInterface
+class AggregateExpression : FunctionExpression : IWindow
 {
     /**
      * @var uim.cake.databases.Expression\QueryExpression

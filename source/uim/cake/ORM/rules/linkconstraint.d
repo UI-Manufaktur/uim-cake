@@ -12,16 +12,14 @@ class LinkConstraint
     /**
      * Status that requires a link to be present.
      *
-     * @var string
      */
-    const STATUS_LINKED = "linked";
+    const string STATUS_LINKED = "linked";
 
     /**
      * Status that requires a link to not be present.
      *
-     * @var string
      */
-    const STATUS_NOT_LINKED = "notLinked";
+    const string STATUS_NOT_LINKED = "notLinked";
 
     /**
      * The association that should be checked.

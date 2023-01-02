@@ -48,16 +48,14 @@ class HasMany : Association
     /**
      * Saving strategy that will only append to the links set
      *
-     * @var string
      */
-    const SAVE_APPEND = "append";
+    const string SAVE_APPEND = "append";
 
     /**
      * Saving strategy that will replace the links with the provided set
      *
-     * @var string
      */
-    const SAVE_REPLACE = "replace";
+    const string SAVE_REPLACE = "replace";
 
     /**
      * Saving strategy to be used by this association

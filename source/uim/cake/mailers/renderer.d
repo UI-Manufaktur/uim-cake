@@ -13,9 +13,8 @@ class Renderer
     /**
      * Constant for folder name containing email templates.
      *
-     * @var string
      */
-    const TEMPLATE_FOLDER = "email";
+    const string TEMPLATE_FOLDER = "email";
 
     /**
      * Constructor

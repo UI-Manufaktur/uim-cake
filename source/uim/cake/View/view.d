@@ -264,45 +264,39 @@ class View : EventDispatcherInterface
     /**
      * Constant for view file type "template".
      *
-     * @var string
      */
-    const TYPE_TEMPLATE = "template";
+    const string TYPE_TEMPLATE = "template";
 
     /**
      * Constant for view file type "element"
      *
-     * @var string
      */
-    const TYPE_ELEMENT = "element";
+    const string TYPE_ELEMENT = "element";
 
     /**
      * Constant for view file type "layout"
      *
-     * @var string
      */
-    const TYPE_LAYOUT = "layout";
+    const string TYPE_LAYOUT = "layout";
 
     /**
      * Constant for type used for App::path().
      *
-     * @var string
      */
-    const NAME_TEMPLATE = "templates";
+    const string NAME_TEMPLATE = "templates";
 
     /**
      * Constant for folder name containing files for overriding plugin templates.
      *
-     * @var string
      */
-    const PLUGIN_TEMPLATE_FOLDER = "plugin";
+    const string PLUGIN_TEMPLATE_FOLDER = "plugin";
 
     /**
      * The magic "match-all" content type that views can use to
      * behave as a fallback during content-type negotiation.
      *
-     * @var string
      */
-    const TYPE_MATCH_ALL = "_match_all_";
+    const string TYPE_MATCH_ALL = "_match_all_";
 
     /**
      * Constructor

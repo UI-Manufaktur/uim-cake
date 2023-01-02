@@ -9,9 +9,8 @@ class TranslatorRegistry
     /**
      * Fallback loader name.
      *
-     * @var string
      */
-    const FALLBACK_LOADER = "_fallback";
+    const string FALLBACK_LOADER = "_fallback";
 
     /**
      * A registry to retain translator objects.

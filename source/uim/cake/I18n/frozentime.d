@@ -101,9 +101,8 @@ class FrozenTime : Chronos : I18nDateTimeInterface
     /**
      * serialise the value as a Unix Timestamp
      *
-     * @var string
      */
-    const UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
+    const string UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
 
     /**
      * Create a new immutable time instance.

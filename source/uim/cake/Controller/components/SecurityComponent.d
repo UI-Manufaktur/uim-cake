@@ -36,9 +36,8 @@ class SecurityComponent : Component
     /**
      * Default message used for exceptions thrown
      *
-     * @var string
      */
-    const DEFAULT_EXCEPTION_MESSAGE = "The request has been black-holed";
+    const string DEFAULT_EXCEPTION_MESSAGE = "The request has been black-holed";
 
     /**
      * Default config

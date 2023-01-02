@@ -1,41 +1,26 @@
+module uim.cake.databases.Expression;
 
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.databases.Expression;
-
-/**
- * This defines the functions used for building window expressions.
- */
-interface WindowInterface
-{
+// This defines the functions used for building window expressions.
+interface IWindow {
     /**
-     * @var string
      */
-    const PRECEDING = "PRECEDING";
+    const string PRECEDING = "PRECEDING";
 
     /**
-     * @var string
      */
-    const FOLLOWING = "FOLLOWING";
+    const string FOLLOWING = "FOLLOWING";
 
     /**
-     * @var string
      */
-    const RANGE = "RANGE";
+    const string RANGE = "RANGE";
 
     /**
-     * @var string
      */
-    const ROWS = "ROWS";
+    const string ROWS = "ROWS";
 
     /**
-     * @var string
      */
-    const GROUPS = "GROUPS";
+    const string GROUPS = "GROUPS";
 
     /**
      * Adds one or more partition expressions to the window.

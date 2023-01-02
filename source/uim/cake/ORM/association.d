@@ -28,51 +28,44 @@ abstract class Association
     /**
      * Strategy name to use joins for fetching associated records
      *
-     * @var string
      */
-    const STRATEGY_JOIN = "join";
+    const string STRATEGY_JOIN = "join";
 
     /**
      * Strategy name to use a subquery for fetching associated records
      *
-     * @var string
      */
-    const STRATEGY_SUBQUERY = "subquery";
+    const string STRATEGY_SUBQUERY = "subquery";
 
     /**
      * Strategy name to use a select for fetching associated records
      *
-     * @var string
      */
-    const STRATEGY_SELECT = "select";
+    const string STRATEGY_SELECT = "select";
 
     /**
      * Association type for one to one associations.
      *
-     * @var string
      */
-    const ONE_TO_ONE = "oneToOne";
+    const string ONE_TO_ONE = "oneToOne";
 
     /**
      * Association type for one to many associations.
      *
-     * @var string
      */
-    const ONE_TO_MANY = "oneToMany";
+    const string ONE_TO_MANY = "oneToMany";
 
     /**
      * Association type for many to many associations.
      *
-     * @var string
      */
-    const MANY_TO_MANY = "manyToMany";
+    const string MANY_TO_MANY = "manyToMany";
 
     /**
      * Association type for many to one associations.
      *
-     * @var string
      */
-    const MANY_TO_ONE = "manyToOne";
+    const string MANY_TO_ONE = "manyToOne";
 
     /**
      * Name given to the association, it usually represents the alias

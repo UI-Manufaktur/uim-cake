@@ -19,39 +19,34 @@ class Folder
      * Default scheme for Folder::copy
      * Recursively merges subfolders with the same name
      *
-     * @var string
      */
-    const MERGE = "merge";
+    const string MERGE = "merge";
 
     /**
      * Overwrite scheme for Folder::copy
      * subfolders with the same name will be replaced
      *
-     * @var string
      */
-    const OVERWRITE = "overwrite";
+    const string OVERWRITE = "overwrite";
 
     /**
      * Skip scheme for Folder::copy
      * if a subfolder with the same name exists it will be skipped
      *
-     * @var string
      */
-    const SKIP = "skip";
+    const string SKIP = "skip";
 
     /**
      * Sort mode by name
      *
-     * @var string
      */
-    const SORT_NAME = "name";
+    const string SORT_NAME = "name";
 
     /**
      * Sort mode by time
      *
-     * @var string
      */
-    const SORT_TIME = "time";
+    const string SORT_TIME = "time";
 
     /**
      * Path to Folder.

@@ -35,23 +35,20 @@ class RulesChecker
     /**
      * Indicates that the checking rules to apply are those used for creating entities
      *
-     * @var string
      */
-    const CREATE = "create";
+    const string CREATE = "create";
 
     /**
      * Indicates that the checking rules to apply are those used for updating entities
      *
-     * @var string
      */
-    const UPDATE = "update";
+    const string UPDATE = "update";
 
     /**
      * Indicates that the checking rules to apply are those used for deleting entities
      *
-     * @var string
      */
-    const DELETE = "delete";
+    const string DELETE = "delete";
 
     /**
      * The list of rules to be checked on both create and update operations

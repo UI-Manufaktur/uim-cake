@@ -20,9 +20,8 @@ class ServerCommand : Command {
     /**
      * Default ServerHost
      *
-     * @var string
      */
-    const DEFAULT_HOST = "localhost";
+    const string DEFAULT_HOST = "localhost";
 
     /**
      * Default ListenPort

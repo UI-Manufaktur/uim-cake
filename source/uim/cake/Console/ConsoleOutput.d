@@ -55,9 +55,8 @@ class ConsoleOutput
     /**
      * Constant for a newline.
      *
-     * @var string
      */
-    const LF = PHP_EOL;
+    const string LF = PHP_EOL;
 
     /**
      * File handle for output.

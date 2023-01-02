@@ -21,23 +21,20 @@ class Number
     /**
      * Default locale
      *
-     * @var string
      */
-    const DEFAULT_LOCALE = "en_US";
+    const string DEFAULT_LOCALE = "en_US";
 
     /**
      * Format type to format as currency
      *
-     * @var string
      */
-    const FORMAT_CURRENCY = "currency";
+    const string FORMAT_CURRENCY = "currency";
 
     /**
      * Format type to format as currency, accounting style (negative numbers in parentheses)
      *
-     * @var string
      */
-    const FORMAT_CURRENCY_ACCOUNTING = "currency_accounting";
+    const string FORMAT_CURRENCY_ACCOUNTING = "currency_accounting";
 
     /**
      * ICU Constant for accounting format; not yet widely supported by INTL library.

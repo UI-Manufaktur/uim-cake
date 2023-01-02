@@ -14,7 +14,7 @@ use Closure;
 /**
  * This represents a SQL window expression used by aggregate and window functions.
  */
-class WindowExpression : IExpression, WindowInterface
+class WindowExpression : IExpression, IWindow
 {
     /**
      * @var uim.cake.databases.Expression\IdentifierExpression

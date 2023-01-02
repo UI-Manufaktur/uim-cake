@@ -93,58 +93,50 @@ class Message
     /**
      * HTTP GET method
      *
-     * @var string
      */
-    const METHOD_GET = "GET";
+    const string METHOD_GET = "GET";
 
     /**
      * HTTP POST method
      *
-     * @var string
      */
-    const METHOD_POST = "POST";
+    const string METHOD_POST = "POST";
 
     /**
      * HTTP PUT method
      *
-     * @var string
      */
-    const METHOD_PUT = "PUT";
+    const string METHOD_PUT = "PUT";
 
     /**
      * HTTP DELETE method
      *
-     * @var string
      */
-    const METHOD_DELETE = "DELETE";
+    const string METHOD_DELETE = "DELETE";
 
     /**
      * HTTP PATCH method
      *
-     * @var string
      */
-    const METHOD_PATCH = "PATCH";
+    const string METHOD_PATCH = "PATCH";
 
     /**
      * HTTP OPTIONS method
      *
-     * @var string
      */
-    const METHOD_OPTIONS = "OPTIONS";
+    const string METHOD_OPTIONS = "OPTIONS";
 
     /**
      * HTTP TRACE method
      *
-     * @var string
      */
-    const METHOD_TRACE = "TRACE";
+    const string METHOD_TRACE = "TRACE";
 
     /**
      * HTTP HEAD method
      *
-     * @var string
      */
-    const METHOD_HEAD = "HEAD";
+    const string METHOD_HEAD = "HEAD";
 
     /**
      * The array of cookies in the response.

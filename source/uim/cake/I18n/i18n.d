@@ -14,9 +14,8 @@ class I18n
     /**
      * Default locale
      *
-     * @var string
      */
-    const DEFAULT_LOCALE = "en_US";
+    const string DEFAULT_LOCALE = "en_US";
 
     /**
      * The translators collection

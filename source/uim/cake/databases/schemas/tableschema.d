@@ -201,72 +201,62 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     /**
      * Primary constraint type
      *
-     * @var string
      */
-    const CONSTRAINT_PRIMARY = "primary";
+    const string CONSTRAINT_PRIMARY = "primary";
 
     /**
      * Unique constraint type
      *
-     * @var string
      */
-    const CONSTRAINT_UNIQUE = "unique";
+    const string CONSTRAINT_UNIQUE = "unique";
 
     /**
      * Foreign constraint type
      *
-     * @var string
      */
-    const CONSTRAINT_FOREIGN = "foreign";
+    const string CONSTRAINT_FOREIGN = "foreign";
 
     /**
      * Index - index type
      *
-     * @var string
      */
-    const INDEX_INDEX = "index";
+    const string INDEX_INDEX = "index";
 
     /**
      * Fulltext index type
      *
-     * @var string
      */
-    const INDEX_FULLTEXT = "fulltext";
+    const string INDEX_FULLTEXT = "fulltext";
 
     /**
      * Foreign key cascade action
      *
-     * @var string
      */
-    const ACTION_CASCADE = "cascade";
+    const string ACTION_CASCADE = "cascade";
 
     /**
      * Foreign key set null action
      *
-     * @var string
      */
-    const ACTION_SET_NULL = "setNull";
+    const string ACTION_SET_NULL = "setNull";
 
     /**
      * Foreign key no action
      *
-     * @var string
      */
-    const ACTION_NO_ACTION = "noAction";
+    const string ACTION_NO_ACTION = "noAction";
 
     /**
      * Foreign key restrict action
      *
-     * @var string
      */
-    const ACTION_RESTRICT = "restrict";
+    const string ACTION_RESTRICT = "restrict";
 
     /**
      * Foreign key restrict default
      *
-     * @var string
      */
-    const ACTION_SET_DEFAULT = "setDefault";
+    const string ACTION_SET_DEFAULT = "setDefault";
 
     /**
      * Constructor.

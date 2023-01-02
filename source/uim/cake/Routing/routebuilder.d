@@ -21,16 +21,14 @@ class RouteBuilder
     /**
      * Regular expression for auto increment IDs
      *
-     * @var string
      */
-    const ID = "[0-9]+";
+    const string ID = "[0-9]+";
 
     /**
      * Regular expression for UUIDs
      *
-     * @var string
      */
-    const UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
+    const string UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
 
     /**
      * Default HTTP request method: controller action map.

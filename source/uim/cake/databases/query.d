@@ -34,19 +34,16 @@ class Query : IExpression, IteratorAggregate
     use TypeMapTrait;
 
     /**
-     * @var string
      */
-    const JOIN_TYPE_INNER = "INNER";
+    const string JOIN_TYPE_INNER = "INNER";
 
     /**
-     * @var string
      */
-    const JOIN_TYPE_LEFT = "LEFT";
+    const string JOIN_TYPE_LEFT = "LEFT";
 
     /**
-     * @var string
      */
-    const JOIN_TYPE_RIGHT = "RIGHT";
+    const string JOIN_TYPE_RIGHT = "RIGHT";
 
     /**
      * Connection instance to be used to execute this query.

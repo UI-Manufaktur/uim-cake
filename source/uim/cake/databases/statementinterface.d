@@ -13,23 +13,20 @@ interface IStatement
     /**
      * Used to designate that numeric indexes be returned in a result when calling fetch methods
      *
-     * @var string
      */
-    const FETCH_TYPE_NUM = "num";
+    const string FETCH_TYPE_NUM = "num";
 
     /**
      * Used to designate that an associated array be returned in a result when calling fetch methods
      *
-     * @var string
      */
-    const FETCH_TYPE_ASSOC = "assoc";
+    const string FETCH_TYPE_ASSOC = "assoc";
 
     /**
      * Used to designate that a stdClass object be returned in a result when calling fetch methods
      *
-     * @var string
      */
-    const FETCH_TYPE_OBJ = "obj";
+    const string FETCH_TYPE_OBJ = "obj";
 
     /**
      * Assign a value to a positional or named variable in prepared query. If using

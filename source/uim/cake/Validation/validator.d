@@ -28,23 +28,20 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * By using "create" you can make fields required when records are first created.
      *
-     * @var string
      */
-    const WHEN_CREATE = "create";
+    const string WHEN_CREATE = "create";
 
     /**
      * By using "update", you can make fields required when they are updated.
      *
-     * @var string
      */
-    const WHEN_UPDATE = "update";
+    const string WHEN_UPDATE = "update";
 
     /**
      * Used to flag nested rules created with addNested() and addNestedMany()
      *
-     * @var string
      */
-    const NESTED = "_nested";
+    const string NESTED = "_nested";
 
     /**
      * A flag for allowEmptyFor()

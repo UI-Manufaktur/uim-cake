@@ -38,30 +38,26 @@ class Message : JsonSerializable, Serializable
     /**
      * Type of message - HTML
      *
-     * @var string
      */
-    const MESSAGE_HTML = "html";
+    const string MESSAGE_HTML = "html";
 
     /**
      * Type of message - TEXT
      *
-     * @var string
      */
-    const MESSAGE_TEXT = "text";
+    const string MESSAGE_TEXT = "text";
 
     /**
      * Type of message - BOTH
      *
-     * @var string
      */
-    const MESSAGE_BOTH = "both";
+    const string MESSAGE_BOTH = "both";
 
     /**
      * Holds the regex pattern for email validation
      *
-     * @var string
      */
-    const EMAIL_PATTERN = "/^((?:[\p{L}0-9.!#$%&\"*+\/=?^_`{|}~-]+)*@[\p{L}0-9-._]+)$/ui";
+    const string EMAIL_PATTERN = "/^((?:[\p{L}0-9.!#$%&\"*+\/=?^_`{|}~-]+)*@[\p{L}0-9-._]+)$/ui";
 
     /**
      * Recipient of the email

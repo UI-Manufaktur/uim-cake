@@ -170,9 +170,8 @@ class FormHelper : Helper
      * Constant used internally to skip the securing process,
      * and neither add the field to the hash or to the unlocked fields.
      *
-     * @var string
      */
-    const SECURE_SKIP = "skip";
+    const string SECURE_SKIP = "skip";
 
     /**
      * Defines the type of form being created. Set by FormHelper::create().

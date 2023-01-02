@@ -43,16 +43,14 @@ class AuthComponent : Component : EventDispatcherInterface
      * The query string key used for remembering the referred page when getting
      * redirected to login.
      *
-     * @var string
      */
-    const QUERY_STRING_REDIRECT = 'redirect';
+    const string QUERY_STRING_REDIRECT = 'redirect';
 
     /**
      * Constant for 'all'
      *
-     * @var string
      */
-    const ALL = 'all';
+    const string ALL = 'all';
 
     /**
      * Default config

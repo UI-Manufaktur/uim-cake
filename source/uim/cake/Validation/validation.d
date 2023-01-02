@@ -20,65 +20,56 @@ class Validation
     /**
      * Default locale
      *
-     * @var string
      */
-    const DEFAULT_LOCALE = "en_US";
+    const string DEFAULT_LOCALE = "en_US";
 
     /**
      * Same as operator.
      *
-     * @var string
      */
-    const COMPARE_SAME = "==";
+    const string COMPARE_SAME = "==";
 
     /**
      * Not same as comparison operator.
      *
-     * @var string
      */
-    const COMPARE_NOT_SAME = "!==";
+    const string COMPARE_NOT_SAME = "!==";
 
     /**
      * Equal to comparison operator.
      *
-     * @var string
      */
-    const COMPARE_EQUAL = "==";
+    const string COMPARE_EQUAL = "==";
 
     /**
      * Not equal to comparison operator.
      *
-     * @var string
      */
-    const COMPARE_NOT_EQUAL = "!=";
+    const string COMPARE_NOT_EQUAL = "!=";
 
     /**
      * Greater than comparison operator.
      *
-     * @var string
      */
-    const COMPARE_GREATER = ">";
+    const string COMPARE_GREATER = ">";
 
     /**
      * Greater than or equal to comparison operator.
      *
-     * @var string
      */
-    const COMPARE_GREATER_OR_EQUAL = ">=";
+    const string COMPARE_GREATER_OR_EQUAL = ">=";
 
     /**
      * Less than comparison operator.
      *
-     * @var string
      */
-    const COMPARE_LESS = "<";
+    const string COMPARE_LESS = "<";
 
     /**
      * Less than or equal to comparison operator.
      *
-     * @var string
      */
-    const COMPARE_LESS_OR_EQUAL = "<=";
+    const string COMPARE_LESS_OR_EQUAL = "<=";
 
     /**
      * @var array<string>
@@ -93,9 +84,8 @@ class Validation
     /**
      * Datetime ISO8601 format
      *
-     * @var string
      */
-    const DATETIME_ISO8601 = "iso8601";
+    const string DATETIME_ISO8601 = "iso8601";
 
     /**
      * Some complex patterns needed in multiple places

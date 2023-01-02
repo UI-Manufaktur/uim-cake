@@ -142,30 +142,26 @@ class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, Val
     /**
      * The alias this object is assigned to validators as.
      *
-     * @var string
      */
-    const string VALIDATOR_PROVIDER_NAME = "table";
+    const string string VALIDATOR_PROVIDER_NAME = "table";
 
     /**
      * The name of the event dispatched when a validator has been built.
      *
-     * @var string
      */
-    const string BUILD_VALIDATOR_EVENT = "Model.buildValidator";
+    const string string BUILD_VALIDATOR_EVENT = "Model.buildValidator";
 
     /**
      * The rules class name that is used.
      *
-     * @var string
      */
-    const string RULES_CLASS = RulesChecker::class;
+    const string string RULES_CLASS = RulesChecker::class;
 
     /**
      * The IsUnique class name that is used.
      *
-     * @var string
      */
-    const string IS_UNIQUE_CLASS = IsUnique::class;
+    const string string IS_UNIQUE_CLASS = IsUnique::class;
 
     /**
      * Name of the table as it can be found in the database
