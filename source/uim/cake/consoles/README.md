@@ -1,7 +1,7 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/UIM/http.svg?style=flat-square)](https://packagist.org/packages/UIM/console)
+[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/http.svg?style=flat-square)](https://packagist.org/packages/cakephp/console)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# UIM Console Library
+# CakePHP Console Library
 
 This library provides a framework for building command line applications from a
 set of commands. It provides abstractions for defining option and argument
@@ -12,7 +12,7 @@ parsers, and dispatching commands.
 You can install it from Composer. In your project:
 
 ```
-composer require UIM/console
+composer require cakephp/console
 ```
 
 # Getting Started
@@ -28,7 +28,7 @@ bootstrap logic, and binds your commands. Lets put our entrypoint script in
 require dirname(__DIR__) ~ "/vendor/autoload.php";
 
 use App\Application;
-import uim.cake.console.commandRunner;
+import uim.cake.consoles.CommandRunner;
 
 // Build the runner with an application and root executable name.
 $runner = new CommandRunner(new Application(), "tool");
@@ -38,17 +38,17 @@ exit($runner.run($argv));
 For our `Application` class we can start with:
 
 ```php
-<?phpmodule App;
+<?php
+namespace App;
 
 use App\Command\HelloCommand;
 import uim.cake.core.IConsoleApplication;
-import uim.cake.console.commandCollection;
+import uim.cake.consoles.CommandCollection;
 
 class Application : IConsoleApplication
 {
     /**
      * Load all the application configuration and bootstrap logic.
-     *
      */
     void bootstrap() {
         // Load configuration here. This is the first
@@ -62,7 +62,8 @@ class Application : IConsoleApplication
      * @param uim.cake.consoles.CommandCollection $commands The CommandCollection to add commands into.
      * @return uim.cake.consoles.CommandCollection The updated collection.
      */
-    CommandCollection console(CommandCollection $commands) {
+    function console(CommandCollection $commands): CommandCollection
+    {
         $commands.add("hello", HelloCommand::class);
 
         return $commands;
@@ -73,38 +74,41 @@ class Application : IConsoleApplication
 Next we"ll build a very simple `HelloCommand`:
 
 ```php
-<?phpmodule App\Command;
+<?php
+namespace App\Command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.BaseCommand;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
+import uim.cake.consoles.Arguments;
+import uim.cake.consoles.BaseCommand;
+import uim.cake.consoles.ConsoleIo;
+import uim.cake.consoles.ConsoleOptionParser;
 
 class HelloCommand : BaseCommand {
-    protected ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
-      $parser
-          .addArgument("name", [
-              "required":true,
-              "help":"The name to say hello to",
-          ])
-          .addOption("color", [
-              "choices":["none", "green"],
-              "default":"none",
-              "help":"The color to use."
-          ]);
+    protected function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
+    {
+        $parser
+            .addArgument("name", [
+                "required": true,
+                "help": "The name to say hello to",
+            ])
+            .addOption("color", [
+                "choices": ["none", "green"],
+                "default": "none",
+                "help": "The color to use."
+            ]);
 
-      return $parser;
+        return $parser;
     }
 
-    Nullable!int execute(Arguments $args, ConsoleIo $io) {
-      $color = $args.getOption("color");
-      if ($color == "none") {
-          $io.out("Hello {$args.getArgument("name")}");
-      } elseif ($color == "green") {
-          $io.out("<success>Hello {$args.getArgument("name")}</success>");
-      }
+    function execute(Arguments $args, ConsoleIo $io): ?int
+    {
+        $color = $args.getOption("color");
+        if ($color == "none") {
+            $io.out("Hello {$args.getArgument("name")}");
+        } elseif ($color == "green") {
+            $io.out("<success>Hello {$args.getArgument("name")}</success>");
+        }
 
-      return static::CODE_SUCCESS;
+        return static::CODE_SUCCESS;
     }
 }
 ```
@@ -112,6 +116,6 @@ class HelloCommand : BaseCommand {
 Next we can run our command with `php bin/tool.php hello Syd`. To learn more
 about the various features we"ve used in this example read the docs:
 
-* [Option Parsing](https://book.UIM.org/4/en/console-commands/option-parsers.html)
-* [Input & Output](https://book.UIM.org/4/en/console-commands/input-output.html)
+* [Option Parsing](https://book.cakephp.org/4/en/console-commands/option-parsers.html)
+* [Input & Output](https://book.cakephp.org/4/en/console-commands/input-output.html)
 

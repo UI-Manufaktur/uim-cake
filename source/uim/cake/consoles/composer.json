@@ -1,38 +1,38 @@
 {
-    "name": "UIM/console",
-    "description": "Build beautiful console applications with UIM",
+    "name": "cakephp/console",
+    "description": "Build beautiful console applications with CakePHP",
     "type": "library",
     "keywords": [
-        "UIM",
+        "cakephp",
         "console",
         "cli",
         "framework"
     ],
-    "homepage": "https://UIM.org",
+    "homepage": "https://cakephp.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "UIM Community",
-            "homepage": "https://github.com/UIM/cache/graphs/contributors"
+            "name": "CakePHP Community",
+            "homepage": "https://github.com/cakephp/cache/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/UIM/UIM/issues",
-        "forum": "https://stackoverflow.com/tags/UIM",
-        "irc": "irc://irc.freenode.org/UIM",
-        "source": "https://github.com/UIM/console"
+        "issues": "https://github.com/cakephp/cakephp/issues",
+        "forum": "https://stackoverflow.com/tags/cakephp",
+        "irc": "irc://irc.freenode.org/cakephp",
+        "source": "https://github.com/cakephp/console"
     },
     "require": {
-        "php": ">=7.2.0",
-        "UIM/core": "^4.0",
-        "UIM/event": "^4.0",
-        "UIM/filesystem": "^4.0",
-        "UIM/log": "^4.0",
-        "UIM/utility": "^4.0"
+        "php": ">=7.4.0",
+        "cakephp/core": "^4.0",
+        "cakephp/event": "^4.0",
+        "cakephp/filesystem": "^4.0",
+        "cakephp/log": "^4.0",
+        "cakephp/utility": "^4.0"
     },
     "suggest": {
-        "UIM/datasource": "To use the Shell or Command base classes",
-        "UIM/orm": "To use the Shell or Command base classes"
+        "cakephp/datasource": "To use the Shell or Command base classes",
+        "cakephp/orm": "To use the Shell or Command base classes"
     },
     "autoload": {
         "psr-4": {
