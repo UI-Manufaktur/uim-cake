@@ -3,7 +3,7 @@ module uim.cake.controllers.error;
 @safe:
 import uim.cake
 
-import uim.cake.events.EventInterface;
+import uim.cake.events.IEvent;
 
 /**
  * Error Handling Controller

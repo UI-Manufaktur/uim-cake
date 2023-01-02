@@ -237,7 +237,7 @@ class EventManager : IEventManager
     }
 
 
-    function dispatch($event): EventInterface
+    function dispatch($event): IEvent
     {
         if (is_string($event)) {
             $event = new Event($event);

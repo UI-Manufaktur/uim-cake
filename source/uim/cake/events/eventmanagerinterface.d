@@ -86,11 +86,11 @@ interface IEventManager
     /**
      * Dispatches a new event to all configured listeners
      *
-     * @param uim.cake.events.EventInterface|string $event The event key name or instance of EventInterface.
-     * @return uim.cake.events.EventInterface
+     * @param uim.cake.events.IEvent|string $event The event key name or instance of IEvent.
+     * @return uim.cake.events.IEvent
      * @triggers $event
      */
-    function dispatch($event): EventInterface;
+    function dispatch($event): IEvent;
 
     /**
      * Returns a list of all listeners for an eventKey in the order they should be called

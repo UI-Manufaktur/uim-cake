@@ -2,7 +2,7 @@ module uim.cake.controllers.Component;
 
 import uim.cake.controllers.Component;
 import uim.cake.core.Configure;
-import uim.cake.events.EventInterface;
+import uim.cake.events.IEvent;
 import uim.cake.Form\FormProtector;
 import uim.cake.http.exceptions.BadRequestException;
 import uim.cake.http.Response;

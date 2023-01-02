@@ -7,7 +7,7 @@ module uim.cake.Event;
  *
  * @template TSubject
  */
-interface EventInterface
+interface IEvent
 {
     /**
      * Returns the name of this event. This is usually used as the event identifier.

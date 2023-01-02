@@ -8,7 +8,7 @@ import uim.cake.core.Configure;
 import uim.cake.core.TestSuite\ContainerStubTrait;
 import uim.cake.databases.exceptions.DatabaseException;
 import uim.cake.errors.renderers.WebExceptionRenderer;
-import uim.cake.events.EventInterface;
+import uim.cake.events.IEvent;
 import uim.cake.events.EventManager;
 import uim.cake.Form\FormProtector;
 import uim.cake.http.Middleware\CsrfProtectionMiddleware;

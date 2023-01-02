@@ -1,7 +1,7 @@
 
 module uim.cake.TestSuite\Constraint;
 
-import uim.cake.events.EventInterface;
+import uim.cake.events.IEvent;
 import uim.cake.events.EventManager;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\Constraint\Constraint;
@@ -80,7 +80,7 @@ class EventFiredWith : Constraint
             return false;
         }
 
-        /** @var array<uim.cake.events.EventInterface> $events */
+        /** @var array<uim.cake.events.IEvent> $events */
         $events = $eventGroup[$other];
 
         if (count($events) > 1) {

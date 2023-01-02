@@ -13,7 +13,7 @@
  * @since         3.3.0
   */module uim.cake.events.Decorator;
 
-import uim.cake.events.EventInterface;
+import uim.cake.events.IEvent;
 use RuntimeException;
 
 /**

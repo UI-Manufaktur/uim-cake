@@ -1,3 +1,8 @@
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
 module uim.cake.controllers;
 
 @safe:
@@ -13,7 +18,7 @@ import uim.cake.datasources.Paging\NumericPaginator;
 import uim.cake.datasources.Paging\PaginatorInterface;
 import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
-import uim.cake.events.EventInterface;
+import uim.cake.events.IEvent;
 import uim.cake.events.IEventListener;
 import uim.cake.events.IEventManager;
 import uim.cake.http.ContentTypeNegotiation;

@@ -13,9 +13,9 @@ import uim.cake.core.exceptions.CakeException;
  * Class Event
  *
  * @template TSubject
- * @implements uim.cake.events.EventInterface<TSubject>
+ * @implements uim.cake.events.IEvent<TSubject>
  */
-class Event : EventInterface
+class Event : IEvent
 {
     /**
      * Name of the event

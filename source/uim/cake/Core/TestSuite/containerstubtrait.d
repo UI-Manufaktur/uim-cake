@@ -6,7 +6,7 @@
 
 import uim.cake.core.Configure;
 import uim.cake.core.IContainer;
-import uim.cake.events.EventInterface;
+import uim.cake.events.IEvent;
 use Closure;
 use League\Container\exceptions.NotFoundException;
 use LogicException;

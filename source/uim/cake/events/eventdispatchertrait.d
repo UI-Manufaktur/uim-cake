@@ -68,9 +68,9 @@ trait EventDispatcherTrait
      * it can be read by listeners.
      * @param object|null $subject The object that this event applies to
      * (this by default).
-     * @return uim.cake.events.EventInterface
+     * @return uim.cake.events.IEvent
      */
-    function dispatchEvent(string aName, ?array $data = null, ?object $subject = null): EventInterface
+    function dispatchEvent(string aName, ?array $data = null, ?object $subject = null): IEvent
     {
         if ($subject == null) {
             $subject = this;

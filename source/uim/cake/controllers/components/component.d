@@ -37,7 +37,7 @@ import uim.cake.logs.LogTrait;
  *   propagation.
  *
  * While the controller is not an explicit argument for the callback methods it
- * is the subject of each event and can be fetched using EventInterface::getSubject().
+ * is the subject of each event and can be fetched using IEvent::getSubject().
  *
  * @link https://book.cakephp.org/4/en/controllers/components.html
  * @see uim.cake.controllers.Controller::$components

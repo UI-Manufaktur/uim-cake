@@ -3,28 +3,10 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.controllerss.components;
+module uim.cake.controllerss.components.auth;
 
 @safe:
 import uim.cake;
-
-module uim.cake.controllers.Component;
-
-import uim.cake.auths.BaseAuthenticate;
-import uim.cake.auths.BaseAuthorize;
-import uim.cake.auths.storages\IStorage;
-import uim.cake.controllers.Component;
-import uim.cake.controllers.Controller;
-import uim.cake.core.App;
-import uim.cake.core.exceptions.CakeException;
-import uim.cake.events.IEventDispatcher;
-import uim.cake.events.EventDispatcherTrait;
-import uim.cake.events.EventInterface;
-import uim.cake.http.exceptions.ForbiddenException;
-import uim.cake.http.Response;
-import uim.cake.http.ServerRequest;
-import uim.cake.routings.Router;
-import uim.cake.utilities.Hash;
 
 /**
  * Authentication control component class.
