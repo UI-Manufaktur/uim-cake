@@ -1,12 +1,12 @@
-module uim.cake.Network;
+/*********************************************************************************************************
+  Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+  License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+  Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.networks.socket;
 
-import uim.cake.core.exceptions.CakeException;
-import uim.cake.core.InstanceConfigTrait;
-import uim.cake.Network\exceptions.SocketException;
-import uim.cake.validations.Validation;
-use Composer\CaBundle\CaBundle;
-use Exception;
-use InvalidArgumentException;
+@safe:
+import uim.cake;
 
 /**
  * CakePHP network socket connection class.
