@@ -7,6 +7,21 @@
 @safe:
 import uim.cake;
 
+module uim.cake.controllers.Component;
+
+import uim.cake.controllers.Component;
+import uim.cake.controllers.ComponentRegistry;
+import uim.cake.controllers.Controller;
+import uim.cake.core.App;
+import uim.cake.core.Configure;
+import uim.cake.events.EventInterface;
+import uim.cake.http.ContentTypeNegotiation;
+import uim.cake.http.exceptions.NotFoundException;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
+import uim.cake.routings.Router;
+import uim.cake.utilities.Inflector;
+
 /**
  * Request object handling for alternative HTTP requests.
  *
@@ -16,23 +31,26 @@ import uim.cake;
  * It can also check for HTTP caching headers like `Last-Modified`, `If-Modified-Since`
  * etc. and return a response accordingly.
  *
- * @link https://book.UIM.org/4/en/controllers/components/request-handling.html
+ * @link https://book.cakephp.org/4/en/controllers/components/request-handling.html
+ * @deprecated 4.4.0 See the 4.4 migration guide for how to upgrade.
+ *   https://book.cakephp.org/4/en/appendices/4-4-migration-guide.html#requesthandlercomponent
  */
-class RequestHandlerComponent : Component {
+class RequestHandlerComponent : Component
+{
     /**
      * Contains the file extension parsed out by the Router
      *
      * @var string|null
      * @see uim.cake.routings.Router::extensions()
      */
-    protected ext;
+    protected $ext;
 
     /**
      * The template type to use when rendering the given content type.
      *
      * @var string|null
      */
-    protected _renderType;
+    protected $_renderType;
 
     /**
      * Default config
@@ -45,26 +63,26 @@ class RequestHandlerComponent : Component {
      *
      * @var array<string, mixed>
      */
-    protected STRINGAA _defaultConfig = [
-        "checkHttpCache":true,
-        "viewClassMap":[],
+    protected $_defaultConfig = [
+        'checkHttpCache': true,
+        'viewClassMap': [],
     ];
 
     /**
      * Constructor. Parses the accepted content types accepted by the client using HTTP_ACCEPT
      *
      * @param uim.cake.controllers.ComponentRegistry $registry ComponentRegistry object.
-     * @param array<string, mixed> myConfig Array of config.
+     * @param array<string, mixed> $config Array of config.
      */
-    this(ComponentRegistry $registry, array myConfig = []) {
-        myConfig += [
-            "viewClassMap":[
-                "json":"Json",
-                "xml":"Xml",
-                "ajax":"Ajax",
+    this(ComponentRegistry $registry, array $config = []) {
+        $config += [
+            'viewClassMap': [
+                'json': 'Json',
+                'xml': 'Xml',
+                'ajax': 'Ajax',
             ],
         ];
-        super.this($registry, myConfig);
+        super(($registry, $config);
     }
 
     /**
@@ -72,10 +90,11 @@ class RequestHandlerComponent : Component {
      *
      * @return array<string, mixed>
      */
-    array implementedEvents() {
+    function implementedEvents(): array
+    {
         return [
-            "Controller.startup":"startup",
-            "Controller.beforeRender":"beforeRender",
+            'Controller.startup': 'startup',
+            'Controller.beforeRender': 'beforeRender',
         ];
     }
 
@@ -91,27 +110,29 @@ class RequestHandlerComponent : Component {
      * If html is one of the preferred types, no content type will be set, this
      * is to avoid issues with browsers that prefer HTML and several other content types.
      *
-     * @param uim.cake.http.ServerRequest myRequest The request instance.
+     * @param uim.cake.http.ServerRequest $request The request instance.
      * @param uim.cake.http.Response $response The response instance.
      */
-    protected void _setExtension(ServerRequest myRequest, Response $response) {
-        $accept = myRequest.parseAccept();
-        if (empty($accept) || current($accept)[0] == "text/html") {
+    protected void _setExtension(ServerRequest $request, Response $response) {
+        $content = new ContentTypeNegotiation();
+        $accept = $content.parseAccept($request);
+
+        if (empty($accept) || current($accept)[0] == 'text/html') {
             return;
         }
 
         /** @var array $accepts */
         $accepts = $response.mapType($accept);
         $preferredTypes = current($accepts);
-        if (array_intersect($preferredTypes, ["html", "xhtml"])) {
+        if (array_intersect($preferredTypes, ['html', 'xhtml'])) {
             return;
         }
 
         $extensions = array_unique(
-            array_merge(Router::extensions(), array_keys(this.getConfig("viewClassMap")))
+            array_merge(Router::extensions(), array_keys(this.getConfig('viewClassMap')))
         );
-        foreach ($accepts as myTypes) {
-            $ext = array_intersect($extensions, myTypes);
+        foreach ($accepts as $types) {
+            $ext = array_intersect($extensions, $types);
             if ($ext) {
                 this.ext = current($ext);
                 break;
@@ -124,25 +145,25 @@ class RequestHandlerComponent : Component {
      * related to the detection of certain properties of the HTTP request, including:
      *
      * If the XML data is POSTed, the data is parsed into an XML object, which is assigned
-     * to the myData property of the controller, which can then be saved to a model object.
+     * to the $data property of the controller, which can then be saved to a model object.
      *
-     * @param uim.cake.events.IEvent myEvent The startup event that was fired.
+     * @param uim.cake.events.IEvent $event The startup event that was fired.
      */
-    void startup(IEvent myEvent) {
+    void startup(IEvent $event) {
         $controller = this.getController();
-        myRequest = $controller.getRequest();
+        $request = $controller.getRequest();
         $response = $controller.getResponse();
 
-        this.ext = myRequest.getParam("_ext");
-        if (!this.ext || in_array(this.ext, ["html", "htm"], true)) {
-            _setExtension(myRequest, $response);
+        this.ext = $request.getParam('_ext');
+        if (!this.ext || in_array(this.ext, ['html', 'htm'], true)) {
+            _setExtension($request, $response);
         }
 
-        $isAjax = myRequest.is("ajax");
-        $controller.setRequest(myRequest.withAttribute("isAjax", $isAjax));
+        $isAjax = $request.is('ajax');
+        $controller.setRequest($request.withAttribute('isAjax', $isAjax));
 
         if (!this.ext && $isAjax) {
-            this.ext = "ajax";
+            this.ext = 'ajax';
         }
     }
 
@@ -160,38 +181,35 @@ class RequestHandlerComponent : Component {
      *   path will become `templates/Controller/xml/action.php`. Layout and template
      *   types will only switch to mime-types recognized by uim.cake.Http\Response.
      *   If you need to declare additional mime-types, you can do so using
-     *   {@link uim.cake.Http\Response::setTypeMap()} in your controller"s beforeFilter() method.
+     *   {@link uim.cake.Http\Response::setTypeMap()} in your controller's beforeFilter() method.
      * - If a helper with the same name as the extension exists, it is added to
      *   the controller.
      * - If the extension is of a type that RequestHandler understands, it will
      *   set that Content-type in the response header.
      *
-     * @param uim.cake.events.IEvent myEvent The Controller.beforeRender event.
+     * @param uim.cake.events.IEvent $event The Controller.beforeRender event.
+     * @return void
      * @throws uim.cake.http.exceptions.NotFoundException If invoked extension is not configured.
      */
-    void beforeRender(IEvent myEvent) {
+    void beforeRender(IEvent $event) {
         $controller = this.getController();
         $response = $controller.getResponse();
 
-        if (this.ext && !in_array(this.ext, ["html", "htm"], true)) {
+        if (this.ext && !in_array(this.ext, ['html', 'htm'], true)) {
             if (!$response.getMimeType(this.ext)) {
-                throw new NotFoundException("Invoked extension not recognized/configured: " ~ this.ext);
+                throw new NotFoundException('Invoked extension not recognized/configured: ' . this.ext);
             }
 
             this.renderAs($controller, this.ext);
             $response = $controller.getResponse();
         } else {
-            $response = $response.withCharset(Configure::read("App.encoding"));
+            $response = $response.withCharset(Configure::read('App.encoding'));
         }
 
-        if (
-            _config["checkHttpCache"] &&
-            $response.checkNotModified($controller.getRequest())
-        ) {
-            $controller.setResponse($response);
-            myEvent.stopPropagation();
-
-            return;
+        $request = $controller.getRequest();
+        if (_config['checkHttpCache'] && $response.isNotModified($request)) {
+            $response = $response.withNotModified();
+            $event.stopPropagation();
         }
 
         $controller.setResponse($response);
@@ -205,35 +223,36 @@ class RequestHandlerComponent : Component {
      * Usage:
      *
      * ```
-     * this.RequestHandler.accepts(["xml", "html", "json"]);
+     * this.RequestHandler.accepts(['xml', 'html', 'json']);
      * ```
      *
      * Returns true if the client accepts any of the supplied types.
      *
      * ```
-     * this.RequestHandler.accepts("xml");
+     * this.RequestHandler.accepts('xml');
      * ```
      *
      * Returns true if the client accepts XML.
      *
-     * @param array<string>|string|null myType Can be null (or no parameter), a string type name, or an
+     * @param array<string>|string|null $type Can be null (or no parameter), a string type name, or an
      *   array of types
      * @return array|bool|string|null If null or no parameter is passed, returns an array of content
      *   types the client accepts. If a string is passed, returns true
      *   if the client accepts it. If an array is passed, returns true
      *   if the client accepts one or more elements in the array.
+     * @deprecated 4.4.0 Use ContentTypeNegotiation::prefersChoice() or Controller::getViewClasses() instead.
      */
-    function accepts(myType = null) {
+    function accepts($type = null) {
         $controller = this.getController();
         /** @var array $accepted */
         $accepted = $controller.getRequest().accepts();
 
-        if (!myType) {
+        if (!$type) {
             return $controller.getResponse().mapType($accepted);
         }
 
-        if (is_array(myType)) {
-            foreach (myType as $t) {
+        if (is_array($type)) {
+            foreach ($type as $t) {
                 $t = this.mapAlias($t);
                 if (in_array($t, $accepted, true)) {
                     return true;
@@ -243,8 +262,8 @@ class RequestHandlerComponent : Component {
             return false;
         }
 
-        if (is_string(myType)) {
-            return in_array(this.mapAlias(myType), $accepted, true);
+        if (is_string($type)) {
+            return in_array(this.mapAlias($type), $accepted, true);
         }
 
         return false;
@@ -253,25 +272,25 @@ class RequestHandlerComponent : Component {
     /**
      * Determines the content type of the data the client has sent (i.e. in a POST request)
      *
-     * @param array<string>|string|null myType Can be null (or no parameter), a string type name, or an array of types
+     * @param array<string>|string|null $type Can be null (or no parameter), a string type name, or an array of types
      * @return mixed If a single type is supplied a boolean will be returned. If no type is provided
      *   The mapped value of CONTENT_TYPE will be returned. If an array is supplied the first type
      *   in the request content type will be returned.
      */
-    function requestedWith(myType = null) {
+    function requestedWith($type = null) {
         $controller = this.getController();
-        myRequest = $controller.getRequest();
+        $request = $controller.getRequest();
 
         if (
-            !myRequest.is("post") &&
-            !myRequest.is("put") &&
-            !myRequest.is("patch") &&
-            !myRequest.is("delete")
+            !$request.is('post') &&
+            !$request.is('put') &&
+            !$request.is('patch') &&
+            !$request.is('delete')
         ) {
             return null;
         }
-        if (is_array(myType)) {
-            foreach (myType as $t) {
+        if (is_array($type)) {
+            foreach ($type as $t) {
                 if (this.requestedWith($t)) {
                     return $t;
                 }
@@ -280,45 +299,48 @@ class RequestHandlerComponent : Component {
             return false;
         }
 
-        [myContentsType] = explode(";", myRequest.contentType() ?? "");
-        if (myType is null) {
-            return $controller.getResponse().mapType(myContentsType);
+        [$contentType] = explode(';', $request.contentType() ?? '');
+        if ($type == null) {
+            return $controller.getResponse().mapType($contentType);
         }
 
-        if (!is_string(myType)) {
+        if (!is_string($type)) {
             return null;
         }
 
-        return myType == $controller.getResponse().mapType(myContentsType);
+        return $type == $controller.getResponse().mapType($contentType);
     }
 
     /**
      * Determines which content-types the client prefers. If no parameters are given,
-     * the single content-type that the client most likely prefers is returned. If myType is
+     * the single content-type that the client most likely prefers is returned. If $type is
      * an array, the first item in the array that the client accepts is returned.
      * Preference is determined primarily by the file extension parsed by the Router
      * if provided, and secondarily by the list of content-types provided in
      * HTTP_ACCEPT.
      *
-     * @param array<string>|string|null myType An optional array of "friendly" content-type names, i.e.
-     *   "html", "xml", "js", etc.
-     * @return string|bool|null If myType is null or not provided, the first content-type in the
+     * @param array<string>|string|null $type An optional array of 'friendly' content-type names, i.e.
+     *   'html', 'xml', 'js', etc.
+     * @return string|bool|null If $type is null or not provided, the first content-type in the
      *    list, based on preference, is returned. If a single type is provided
      *    a boolean will be returned if that type is preferred.
      *    If an array of types are provided then the first preferred type is returned.
      *    If no type is provided the first preferred type is returned.
+     * @deprecated 4.4.0 Use Controller::getViewClasses() instead.
      */
-    function prefers(myType = null) {
+    function prefers($type = null) {
         $controller = this.getController();
+        $request = $controller.getRequest();
+        $content = new ContentTypeNegotiation();
 
-        $acceptRaw = $controller.getRequest().parseAccept();
+        $acceptRaw = $content.parseAccept($request);
         if (empty($acceptRaw)) {
-            return myType ? myType == this.ext : this.ext;
+            return $type ? $type == this.ext : this.ext;
         }
 
         /** @var array $accepts */
         $accepts = $controller.getResponse().mapType(array_shift($acceptRaw));
-        if (!myType) {
+        if (!$type) {
             if (empty(this.ext) && !empty($accepts)) {
                 return $accepts[0];
             }
@@ -326,16 +348,16 @@ class RequestHandlerComponent : Component {
             return this.ext;
         }
 
-        myTypes = (array)myType;
-        if (count(myTypes) == 1) {
+        $types = (array)$type;
+        if (count($types) == 1) {
             if (this.ext) {
-                return in_array(this.ext, myTypes, true);
+                return in_array(this.ext, $types, true);
             }
 
-            return in_array(myTypes[0], $accepts, true);
+            return in_array($types[0], $accepts, true);
         }
 
-        $intersect = array_values(array_intersect($accepts, myTypes));
+        $intersect = array_values(array_intersect($accepts, $types));
         if (!$intersect) {
             return false;
         }
@@ -345,67 +367,68 @@ class RequestHandlerComponent : Component {
 
     /**
      * Sets either the view class if one exists or the layout and template path of the view.
-     * The names of these are derived from the myType input parameter.
+     * The names of these are derived from the $type input parameter.
      *
      * ### Usage:
      *
-     * Render the response as an "ajax" response.
+     * Render the response as an 'ajax' response.
      *
      * ```
-     * this.RequestHandler.renderAs(this, "ajax");
+     * this.RequestHandler.renderAs(this, 'ajax');
      * ```
      *
      * Render the response as an XML file and force the result as a file download.
      *
      * ```
-     * this.RequestHandler.renderAs(this, "xml", ["attachment":"myfile.xml"];
+     * this.RequestHandler.renderAs(this, 'xml', ['attachment': 'myfile.xml'];
      * ```
      *
      * @param uim.cake.controllers.Controller $controller A reference to a controller object
-     * @param string myType Type of response to send (e.g: "ajax")
-     * @param array<string, mixed> myOptions Array of options to use
+     * @param string $type Type of response to send (e.g: 'ajax')
+     * @param array<string, mixed> $options Array of options to use
+     * @return void
      * @see uim.cake.controllers.components.RequestHandlerComponent::respondAs()
      */
-    void renderAs(Controller $controller, string myType, array myOptions = []) {
-        $defaults = ["charset":"UTF-8"];
-        $viewClassMap = this.getConfig("viewClassMap");
+    void renderAs(Controller $controller, string $type, array $options = []) {
+        $defaults = ['charset': 'UTF-8'];
+        $viewClassMap = this.getConfig('viewClassMap');
 
-        if (Configure::read("App.encoding")  !is null) {
-            $defaults["charset"] = Configure::read("App.encoding");
+        if (Configure::read('App.encoding') != null) {
+            $defaults['charset'] = Configure::read('App.encoding');
         }
-        myOptions += $defaults;
+        $options += $defaults;
 
-        myBuilder = $controller.viewBuilder();
-        if (array_key_exists(myType, $viewClassMap)) {
-            $view = $viewClassMap[myType];
+        $builder = $controller.viewBuilder();
+        if (array_key_exists($type, $viewClassMap)) {
+            $view = $viewClassMap[$type];
         } else {
-            $view = Inflector::classify(myType);
+            $view = Inflector::classify($type);
         }
 
         $viewClass = null;
-        if (myBuilder.getClassName() is null) {
-            $viewClass = App::className($view, "View", "View");
+        if ($builder.getClassName() == null) {
+            $viewClass = App::className($view, 'View', 'View');
         }
 
         if ($viewClass) {
-            myBuilder.setClassName($viewClass);
+            $builder.setClassName($viewClass);
         } else {
             if (!_renderType) {
-                myBuilder.setTemplatePath((string)myBuilder.getTemplatePath() . DIRECTORY_SEPARATOR . myType);
+                $builder.setTemplatePath((string)$builder.getTemplatePath() . DIRECTORY_SEPARATOR . $type);
             } else {
-                myBuilder.setTemplatePath(preg_replace(
+                $builder.setTemplatePath(preg_replace(
                     "/([\/\\\\]{_renderType})$/",
-                    DIRECTORY_SEPARATOR . myType,
-                    (string)myBuilder.getTemplatePath()
+                    DIRECTORY_SEPARATOR . $type,
+                    (string)$builder.getTemplatePath()
                 ));
             }
 
-            _renderType = myType;
-            myBuilder.setLayoutPath(myType);
+            _renderType = $type;
+            $builder.setLayoutPath($type);
         }
 
-        if ($controller.getResponse().getMimeType(myType)) {
-            this.respondAs(myType, myOptions);
+        if ($controller.getResponse().getMimeType($type)) {
+            this.respondAs($type, $options);
         }
     }
 
@@ -413,33 +436,29 @@ class RequestHandlerComponent : Component {
      * Sets the response header based on type map index name. This wraps several methods
      * available on {@link uim.cake.Http\Response}. It also allows you to use Content-Type aliases.
      *
-     * @param string myType Friendly type name, i.e~ "html" or "xml", or a full content-type,
-     *    like "application/x-shockwave".
-     * @param array<string, mixed> myOptions If myType is a friendly type name that is associated with
+     * @param string $type Friendly type name, i.e. 'html' or 'xml', or a full content-type,
+     *    like 'application/x-shockwave'.
+     * @param array<string, mixed> $options If $type is a friendly type name that is associated with
      *    more than one type of content, $index is used to select which content-type to use.
-     * @return bool Returns false if the friendly type name given in myType does
+     * @return bool Returns false if the friendly type name given in $type does
      *    not exist in the type map, or if the Content-type header has
      *    already been set by this method.
      */
-    bool respondAs(myType, array myOptions = []) {
-        $defaults = ["index":null, "charset":null, "attachment":false];
-        myOptions += $defaults;
+    function respondAs($type, array $options = []): bool
+    {
+        $defaults = ['index': null, 'charset': null, 'attachment': false];
+        $options += $defaults;
 
-        $cType = myType;
+        $cType = $type;
         $controller = this.getController();
         $response = $controller.getResponse();
 
-        if (indexOf(myType, "/") == false) {
-            $cType = $response.getMimeType(myType);
+        if (strpos($type, '/') == false) {
+            $cType = $response.getMimeType($type);
         }
         if (is_array($cType)) {
-            $cType = $cType[myOptions["index"]] ?? $cType;
-
-            if (this.prefers($cType)) {
-                $cType = this.prefers($cType);
-            } else {
-                $cType = $cType[0];
-            }
+            $cType = $cType[$options['index']] ?? $cType;
+            $cType = this.prefers($cType) ?: $cType[0];
         }
 
         if (!$cType) {
@@ -449,11 +468,11 @@ class RequestHandlerComponent : Component {
         /** @psalm-suppress PossiblyInvalidArgument */
         $response = $response.withType($cType);
 
-        if (!empty(myOptions["charset"])) {
-            $response = $response.withCharset(myOptions["charset"]);
+        if (!empty($options['charset'])) {
+            $response = $response.withCharset($options['charset']);
         }
-        if (!empty(myOptions["attachment"])) {
-            $response = $response.withDownload(myOptions["attachment"]);
+        if (!empty($options['attachment'])) {
+            $response = $response.withDownload($options['attachment']);
         }
         $controller.setResponse($response);
 
@@ -463,23 +482,23 @@ class RequestHandlerComponent : Component {
     /**
      * Maps a content type alias back to its mime-type(s)
      *
-     * @param array|string myAlias String alias to convert back into a content type. Or an array of aliases to map.
+     * @param array|string $alias String alias to convert back into a content type. Or an array of aliases to map.
      * @return array|string|null Null on an undefined alias. String value of the mapped alias type. If an
      *   alias maps to more than one content type, the first one will be returned. If an array is provided
-     *   for myAlias, an array of mapped types will be returned.
+     *   for $alias, an array of mapped types will be returned.
      */
-    function mapAlias(myAlias) {
-        if (is_array(myAlias)) {
-            return array_map([this, "mapAlias"], myAlias);
+    function mapAlias($alias) {
+        if (is_array($alias)) {
+            return array_map([this, 'mapAlias'], $alias);
         }
 
-        myType = this.getController().getResponse().getMimeType(myAlias);
-        if (myType) {
-            if (is_array(myType)) {
-                return myType[0];
+        $type = this.getController().getResponse().getMimeType($alias);
+        if ($type) {
+            if (is_array($type)) {
+                return $type[0];
             }
 
-            return myType;
+            return $type;
         }
 
         return null;
