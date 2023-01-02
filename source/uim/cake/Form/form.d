@@ -5,8 +5,8 @@ import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.events.EventManager;
 import uim.cake.utilities.Hash;
-import uim.cake.Validation\ValidatorAwareInterface;
-import uim.cake.Validation\ValidatorAwareTrait;
+import uim.cake.validations.ValidatorAwareInterface;
+import uim.cake.validations.ValidatorAwareTrait;
 
 /**
  * Form abstraction used to create forms not tied to ORM backed models,

@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Cake\\Validation\\": "."
+            "Cake\\validations.\": "."
         }
     }
 }

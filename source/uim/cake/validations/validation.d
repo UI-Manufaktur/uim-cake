@@ -175,7 +175,7 @@ class Validation {
      * @param bool $deep set to true this will check the Luhn algorithm of the credit card.
      * @param string|null $regex A custom regex, this will be used instead of the defined regex values.
      * @return bool Success
-     * @see uim.cake.Validation\Validation::luhn()
+     * @see uim.cake.validations.Validation::luhn()
      */
     static bool creditCard($check, myType = "fast", bool $deep = false, Nullable!string regex = null) {
         if (!(is_string($check) || is_int($check))) {
@@ -495,8 +495,8 @@ class Validation {
      * @param string|null $regex Regex for the date part. If a custom regular expression is used
      *   this is the only validation that will occur.
      * @return bool True if the value is valid, false otherwise
-     * @see uim.cake.Validation\Validation::date()
-     * @see uim.cake.Validation\Validation::time()
+     * @see uim.cake.validations.Validation::date()
+     * @see uim.cake.validations.Validation::time()
      */
     static bool datetime($check, $dateFormat = "ymd", Nullable!string regex = null) {
         if ($check instanceof IDateTime) {
@@ -534,7 +534,7 @@ class Validation {
 
     /**
      * Validates an iso8601 datetime format
-     * ISO8601 recognize datetime like 2019 as a valid date. To validate and check date integrity, use @see uim.cake.Validation\Validation::datetime()
+     * ISO8601 recognize datetime like 2019 as a valid date. To validate and check date integrity, use @see uim.cake.validations.Validation::datetime()
      *
      * @param mixed $check Value to check
      * @return bool True if the value is valid, false otherwise
@@ -1440,7 +1440,7 @@ class Validation {
      * @param array<string, mixed> myOptions Options for the validation logic.
      * @return bool
      * @link https://en.wikipedia.org/wiki/Latitude
-     * @see uim.cake.Validation\Validation::geoCoordinate()
+     * @see uim.cake.validations.Validation::geoCoordinate()
      */
     static bool latitude(myValue, array myOptions = []) {
         myOptions["format"] = "lat";
@@ -1455,7 +1455,7 @@ class Validation {
      * @param array<string, mixed> myOptions Options for the validation logic.
      * @return bool
      * @link https://en.wikipedia.org/wiki/Longitude
-     * @see uim.cake.Validation\Validation::geoCoordinate()
+     * @see uim.cake.validations.Validation::geoCoordinate()
      */
     static bool longitude(myValue, array myOptions = []) {
         myOptions["format"] = "long";

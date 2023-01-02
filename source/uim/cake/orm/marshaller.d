@@ -235,7 +235,7 @@ class Marshaller
                 ~ " use `ValidatorAwareTrait::setValidator() instead.`"
             );
 
-            /** @var uim.cake.Validation\Validator $validator */
+            /** @var uim.cake.validations.Validator $validator */
             $validator = myOptions["validate"];
         }
 

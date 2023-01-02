@@ -11,7 +11,7 @@ interface ValidatableInterface
      * Validates the internal properties using a validator object and returns any
      * validation errors found.
      *
-     * @param uim.cake.Validation\Validator $validator The validator to use when validating the entity.
+     * @param uim.cake.validations.Validator $validator The validator to use when validating the entity.
      */
     array validate(Validator $validator): array;
 }

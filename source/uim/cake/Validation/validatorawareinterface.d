@@ -13,7 +13,7 @@ interface ValidatorAwareInterface
      * class constant.
      *
      * @param string|null $name The name of the validation set to return.
-     * @return uim.cake.Validation\Validator
+     * @return uim.cake.validations.Validator
      */
     function getValidator(?string aName = null): Validator;
 
@@ -21,7 +21,7 @@ interface ValidatorAwareInterface
      * This method stores a custom validator under the given name.
      *
      * @param string aName The name of a validator to be set.
-     * @param uim.cake.Validation\Validator $validator Validator object to be set.
+     * @param uim.cake.validations.Validator $validator Validator object to be set.
      * @return this
      */
     function setValidator(string aName, Validator $validator);

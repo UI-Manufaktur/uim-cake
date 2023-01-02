@@ -36,7 +36,7 @@ trait ValidatorAwareTrait
     /**
      * A list of validation objects indexed by name
      *
-     * @var array<uim.cake.Validation\Validator>
+     * @var array<uim.cake.validations.Validator>
      */
     protected _validators = [];
 
@@ -72,7 +72,7 @@ trait ValidatorAwareTrait
      * class constant.
      *
      * @param string|null myName The name of the validation set to return.
-     * @return uim.cake.Validation\Validator
+     * @return uim.cake.validations.Validator
      */
     auto getValidator(Nullable!string myName = null): Validator
     {
@@ -92,7 +92,7 @@ trait ValidatorAwareTrait
      * use getValidator() method instead.
      *
      * @param string myName The name of the validation set to create.
-     * @return uim.cake.Validation\Validator
+     * @return uim.cake.validations.Validator
      * @throws \RuntimeException
      */
     protected auto createValidator(string myName): Validator
@@ -130,7 +130,7 @@ trait ValidatorAwareTrait
      * You can build the object by yourself and store it in your object:
      *
      * ```
-     * $validator = new uim.cake.Validation\Validator();
+     * $validator = new uim.cake.validations.Validator();
      * $validator
      *     .add("email", "valid-email", ["rule": "email"])
      *     .add("password", "valid", ["rule": "notBlank"])
@@ -139,7 +139,7 @@ trait ValidatorAwareTrait
      * ```
      *
      * @param string myName The name of a validator to be set.
-     * @param uim.cake.Validation\Validator $validator Validator object to be set.
+     * @param uim.cake.validations.Validator $validator Validator object to be set.
      * @return this
      */
     auto setValidator(string myName, Validator $validator) {
@@ -176,9 +176,9 @@ trait ValidatorAwareTrait
      * Returns the default validator object. Subclasses can override this function
      * to add a default validation set to the validator object.
      *
-     * @param uim.cake.Validation\Validator $validator The validator that can be modified to
+     * @param uim.cake.validations.Validator $validator The validator that can be modified to
      * add some rules to it.
-     * @return uim.cake.Validation\Validator
+     * @return uim.cake.validations.Validator
      */
     function validationDefault(Validator $validator): Validator
     {

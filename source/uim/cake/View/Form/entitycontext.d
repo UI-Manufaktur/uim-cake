@@ -8,7 +8,7 @@ import uim.cake.orm.Entity;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.orm.Table;
 import uim.cake.utilities.Inflector;
-import uim.cake.Validation\Validator;
+import uim.cake.validations.Validator;
 use RuntimeException;
 use Traversable;
 
@@ -27,7 +27,7 @@ use Traversable;
  *   multiple entities, or the name(s) of the table.
  *   If this is null the table name(s) will be determined using naming
  *   conventions.
- * - `validator` Either the Validation\Validator to use, or the name of the
+ * - `validator` Either the validations.Validator to use, or the name of the
  *   validation method to call on the table object. For example "default".
  *   Defaults to "default". Can be an array of table alias=>validators when
  *   dealing with associated forms.
@@ -66,7 +66,7 @@ class EntityContext : ContextInterface
     /**
      * Dictionary of validators.
      *
-     * @var array<uim.cake.Validation\Validator>
+     * @var array<uim.cake.validations.Validator>
      */
     protected $_validator = [];
 
@@ -561,7 +561,7 @@ class EntityContext : ContextInterface
      * conventions.
      *
      * @param array $parts Each one of the parts in a path for a field name
-     * @return uim.cake.Validation\Validator
+     * @return uim.cake.validations.Validator
      * @throws \RuntimeException If validator cannot be retrieved based on the parts.
      */
     protected function _getValidator(array $parts): Validator

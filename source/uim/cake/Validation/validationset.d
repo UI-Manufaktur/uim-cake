@@ -22,7 +22,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
     /**
      * Holds the ValidationRule objects
      *
-     * @var array<uim.cake.Validation\ValidationRule>
+     * @var array<uim.cake.validations.ValidationRule>
      */
     protected $_rules = [];
 
@@ -87,7 +87,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * Gets a rule for a given name if exists
      *
      * @param string aName The name under which the rule is set.
-     * @return uim.cake.Validation\ValidationRule|null
+     * @return uim.cake.validations.ValidationRule|null
      */
     function rule(string aName): ?ValidationRule
     {
@@ -101,7 +101,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns all rules for this validation set
      *
-     * @return array<uim.cake.Validation\ValidationRule>
+     * @return array<uim.cake.validations.ValidationRule>
      */
     function rules(): array
     {
@@ -120,7 +120,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * ```
      *
      * @param string aName The name under which the rule should be set
-     * @param uim.cake.Validation\ValidationRule|array $rule The validation rule to be set
+     * @param uim.cake.validations.ValidationRule|array $rule The validation rule to be set
      * @return this
      */
     function add(string aName, $rule) {
@@ -167,7 +167,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * Returns a rule object by its index
      *
      * @param string $index name of the rule
-     * @return uim.cake.Validation\ValidationRule
+     * @return uim.cake.validations.ValidationRule
      */
     function offsetGet($index): ValidationRule
     {
@@ -178,7 +178,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      * Sets or replace a validation rule
      *
      * @param string $index name of the rule
-     * @param uim.cake.Validation\ValidationRule|array $rule Rule to add to $index
+     * @param uim.cake.validations.ValidationRule|array $rule Rule to add to $index
      */
     void offsetSet($index, $rule): void
     {
@@ -198,7 +198,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns an iterator for each of the rules to be applied
      *
-     * @return \Traversable<string, uim.cake.Validation\ValidationRule>
+     * @return \Traversable<string, uim.cake.validations.ValidationRule>
      */
     function getIterator(): Traversable
     {
