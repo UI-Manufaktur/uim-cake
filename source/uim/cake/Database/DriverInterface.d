@@ -248,9 +248,8 @@ interface DriverInterface
     /**
      * Checks whether the driver is connected.
      *
-     * @return bool
      */
-    function isConnected(): bool;
+    bool isConnected(): bool;
 
     /**
      * Sets whether this driver should automatically quote identifiers
@@ -272,9 +271,8 @@ interface DriverInterface
      * Returns whether this driver should automatically quote identifiers
      * in queries.
      *
-     * @return bool
      */
-    function isAutoQuotingEnabled(): bool;
+    bool isAutoQuotingEnabled(): bool;
 
     /**
      * Transforms the passed query to this Driver"s dialect and returns an instance

@@ -13,7 +13,7 @@ class ContentsContain : ContentsBase
      * @param mixed $other Expected
      * @return bool
      */
-    function matches($other): bool
+    bool matches($other)
     {
         return mb_strpos(this.contents, $other) != false;
     }

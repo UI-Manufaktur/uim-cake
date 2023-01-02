@@ -44,7 +44,7 @@ class WeakPasswordHasher : AbstractPasswordHasher
      * @param string $hashedPassword Existing hashed password.
      * @return bool True if hashes match else false.
      */
-    function check(string $password, string $hashedPassword): bool
+    bool check(string $password, string $hashedPassword)
     {
         return $hashedPassword == this.hash($password);
     }

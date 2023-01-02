@@ -146,7 +146,7 @@ class BasePlugin : IPlugin {
     }
 
 
-    function isEnabled(string $hook): bool
+    bool isEnabled(string $hook)
     {
         this.checkHook($hook);
 

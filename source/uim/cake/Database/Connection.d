@@ -253,9 +253,8 @@ class Connection : ConnectionInterface
     /**
      * Returns whether connection to database server was already established.
      *
-     * @return bool
      */
-    function isConnected(): bool
+    bool isConnected(): bool
     {
         return _driver.isConnected();
     }
@@ -513,9 +512,8 @@ class Connection : ConnectionInterface
      *
      * @param bool|null $toBeginning Whether the transaction should be rolled back to the
      * beginning of it. Defaults to false if using savepoints, or true if not.
-     * @return bool
      */
-    function rollback(?bool $toBeginning = null): bool
+    bool rollback(?bool $toBeginning = null): bool
     {
         if (!_transactionStarted) {
             return false;
@@ -728,9 +726,8 @@ class Connection : ConnectionInterface
      *
      * This is not required to use `quoteIdentifier()`.
      *
-     * @return bool
      */
-    function supportsQuoting(): bool
+    bool supportsQuoting(): bool
     {
         return _driver.supports(DriverInterface::FEATURE_QUOTE);
     }
@@ -818,9 +815,8 @@ class Connection : ConnectionInterface
     /**
      * Check if query logging is enabled.
      *
-     * @return bool
      */
-    function isQueryLoggingEnabled(): bool
+    bool isQueryLoggingEnabled(): bool
     {
         return _logQueries;
     }

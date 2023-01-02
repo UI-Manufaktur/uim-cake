@@ -170,9 +170,8 @@ class PluginCollection : Iterator, Countable
      * Check whether the named plugin exists in the collection.
      *
      * @param string aName The named plugin.
-     * @return bool
      */
-    function has(string aName): bool
+    bool has(string aName): bool
     {
         return isset(this.plugins[aName]);
     }
@@ -289,9 +288,8 @@ class PluginCollection : Iterator, Countable
     /**
      * Part of Iterator Interface
      *
-     * @return bool
      */
-    function valid(): bool
+    bool valid(): bool
     {
         $valid = isset(this.names[this.positions[this.loopDepth]]);
         if (!$valid) {

@@ -97,7 +97,6 @@ interface IPlugin
      * Check if the named hook is enabled
      *
      * @param string $hook The hook to check
-     * @return bool
      */
-    function isEnabled(string $hook): bool;
+    bool isEnabled(string $hook): bool;
 }

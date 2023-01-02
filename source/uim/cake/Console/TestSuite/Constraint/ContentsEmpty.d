@@ -11,9 +11,8 @@ class ContentsEmpty : ContentsBase
      * Checks if contents are empty
      *
      * @param mixed $other Expected
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         return this.contents == "";
     }

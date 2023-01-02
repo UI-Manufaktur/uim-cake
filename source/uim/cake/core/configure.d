@@ -1,11 +1,12 @@
-module uim.cake.core;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.core.configure;
 
-import uim.cake.caches.Cache;
-import uim.cake.core.configures.ConfigEngineInterface;
-import uim.cake.core.configures.engines.PhpConfig;
-import uim.cake.core.exceptions.CakeException;
-import uim.cake.utilities.Hash;
-use RuntimeException;
+@safe:
+  import uim.cake;
 
 /**
  * Configuration class. Used for managing runtime configuration information.

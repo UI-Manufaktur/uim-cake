@@ -1,6 +1,6 @@
 module uim.cake.core.Configure;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.Plugin;
 
 /**
@@ -10,43 +10,44 @@ trait FileConfigTrait
 {
     /**
      * The path this engine finds files on.
+     *
      */
-    protected string _path = "";
+    protected string $_path = "";
 
     /**
      * Get file path
      *
-     * @param string myKey The identifier to write to. If the key has a . it will be treated
+     * @param string aKey The identifier to write to. If the key has a . it will be treated
      *  as a plugin prefix.
      * @param bool $checkExists Whether to check if file exists. Defaults to false.
-     * @return  Full file path
+     * @return string Full file path
      * @throws uim.cake.Core\exceptions.CakeException When files don"t exist or when
      *  files contain ".." as this could lead to abusive reads.
      */
-    protected string _getFilePath(string myKey, bool $checkExists = false) {
-        if (indexOf(myKey, "..") != false) {
+    protected string _getFilePath(string aKey, bool $checkExists = false) {
+        if (strpos($key, "..") != false) {
             throw new CakeException("Cannot load/dump configuration files with ../ in them.");
         }
 
-        [myPlugin, myKey] = pluginSplit(myKey);
+        [$plugin, $key] = pluginSplit($key);
 
-        if (myPlugin) {
-            myfile = Plugin::configPath(myPlugin) . myKey;
+        if ($plugin) {
+            $file = Plugin::configPath($plugin) . $key;
         } else {
-            myfile = _path . myKey;
+            $file = _path . $key;
         }
 
-        myfile .= _extension;
+        $file .= _extension;
 
-        if (!$checkExists || is_file(myfile)) {
-            return myfile;
+        if (!$checkExists || is_file($file)) {
+            return $file;
         }
 
-        $realPath = realpath(myfile);
+        $realPath = realpath($file);
         if ($realPath != false && is_file($realPath)) {
             return $realPath;
         }
 
-        throw new CakeException(sprintf("Could not load configuration file: %s", myfile));
+        throw new CakeException(sprintf("Could not load configuration file: %s", $file));
     }
 }

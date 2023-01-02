@@ -130,7 +130,7 @@ trait StaticConfigTrait
      * @param string $config An existing configuration you wish to remove.
      * @return bool Success of the removal, returns false when the config does not exist.
      */
-    static function drop(string $config): bool
+    static bool drop(string $config)
     {
         if (!isset(static::$_config[$config])) {
             return false;

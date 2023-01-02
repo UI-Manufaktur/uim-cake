@@ -1,8 +1,8 @@
 module uim.cake.core;
 
 use ArrayIterator;
-import uim.cakeents\IEventDispatcher;
-import uim.cakeents\IEventListener;
+import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventListener;
 use Countable;
 use IteratorAggregate;
 use RuntimeException;
@@ -12,7 +12,7 @@ use Traversable;
  * Acts as a registry/factory for objects.
  *
  * Provides registry & factory functionality for object types. Used
- * as a super class for various composition based re-use features in UIM.
+ * as a super class for various composition based re-use features in CakePHP.
  *
  * Each subclass needs to implement the various abstract methods to complete
  * the template method load().
@@ -33,56 +33,56 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @var array<object>
      * @psalm-var array<array-key, TObject>
      */
-    protected _loaded = [];
+    protected $_loaded = [];
 
     /**
      * Loads/constructs an object instance.
      *
      * Will return the instance in the registry if it already exists.
-     * If a subclass provides event support, you can use `myConfig["enabled"] = false`
+     * If a subclass provides event support, you can use `$config["enabled"] = false`
      * to exclude constructed objects from being registered for events.
      *
      * Using {@link uim.cake.Controller\Component::$components} as an example. You can alias
      * an object by setting the "className" key, i.e.,
      *
      * ```
-     * protected components = [
-     *   "Email":[
-     *     "className":"App\Controller\Component\AliasedEmailComponent"
+     * protected $components = [
+     *   "Email": [
+     *     "className": "App\Controller\Component\AliasedEmailComponent"
      *   ];
      * ];
      * ```
      *
      * All calls to the `Email` component would use `AliasedEmail` instead.
      *
-     * @param string myName The name/class of the object to load.
-     * @param array<string, mixed> myConfig Additional settings to use when loading the object.
+     * @param string aName The name/class of the object to load.
+     * @param array<string, mixed> $config Additional settings to use when loading the object.
      * @return mixed
      * @psalm-return TObject
      * @throws \Exception If the class cannot be found.
      */
-    function load(string myName, array myConfig = []) {
-        if (isset(myConfig["className"])) {
-            $objName = myName;
-            myName = myConfig["className"];
+    function load(string aName, array $config = []) {
+        if (isset($config["className"])) {
+            $objName = $name;
+            $name = $config["className"];
         } else {
-            [, $objName] = pluginSplit(myName);
+            [, $objName] = pluginSplit($name);
         }
 
         $loaded = isset(_loaded[$objName]);
-        if ($loaded && !empty(myConfig)) {
-            _checkDuplicate($objName, myConfig);
+        if ($loaded && !empty($config)) {
+            _checkDuplicate($objName, $config);
         }
         if ($loaded) {
             return _loaded[$objName];
         }
 
-        myClassName = myName;
-        if (is_string(myName)) {
-            myClassName = _resolveClassName(myName);
-            if (myClassName is null) {
-                [myPlugin, myName] = pluginSplit(myName);
-                _throwMissingClassError(myName, myPlugin);
+        $className = $name;
+        if (is_string($name)) {
+            $className = _resolveClassName($name);
+            if ($className == null) {
+                [$plugin, $name] = pluginSplit($name);
+                _throwMissingClassError($name, $plugin);
             }
         }
 
@@ -90,7 +90,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
          * @psalm-var TObject $instance
          * @psalm-suppress PossiblyNullArgument
          **/
-        $instance = _create(myClassName, $objName, myConfig);
+        $instance = _create($className, $objName, $config);
         _loaded[$objName] = $instance;
 
         return $instance;
@@ -107,35 +107,36 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * configuration is not a good option as we may be missing important constructor
      * logic dependent on the configuration.
      *
-     * @param string myName The name of the alias in the registry.
-     * @param array<string, mixed> myConfig The config data for the new instance.
+     * @param string aName The name of the alias in the registry.
+     * @param array<string, mixed> $config The config data for the new instance.
+     * @return void
      * @throws \RuntimeException When a duplicate is found.
      */
-    protected void _checkDuplicate(string myName, array myConfig) {
-        $existing = _loaded[myName];
-        $msg = sprintf("The "%s" alias has already been loaded.", myName);
+    protected void _checkDuplicate(string aName, array $config) {
+        $existing = _loaded[$name];
+        $msg = sprintf("The "%s" alias has already been loaded.", $name);
         $hasConfig = method_exists($existing, "getConfig");
         if (!$hasConfig) {
             throw new RuntimeException($msg);
         }
-        if (empty(myConfig)) {
+        if (empty($config)) {
             return;
         }
         $existingConfig = $existing.getConfig();
-        unset(myConfig["enabled"], $existingConfig["enabled"]);
+        unset($config["enabled"], $existingConfig["enabled"]);
 
         $failure = null;
-        foreach (myConfig as myKey: myValue) {
-            if (!array_key_exists(myKey, $existingConfig)) {
-                $failure = " The `{myKey}` was not defined in the previous configuration data.";
+        foreach ($config as $key: $value) {
+            if (!array_key_exists($key, $existingConfig)) {
+                $failure = " The `{$key}` was not defined in the previous configuration data.";
                 break;
             }
-            if (isset($existingConfig[myKey]) && $existingConfig[myKey] != myValue) {
+            if (isset($existingConfig[$key]) && $existingConfig[$key] != $value) {
                 $failure = sprintf(
                     " The `%s` key has a value of `%s` but previously had a value of `%s`",
-                    myKey,
-                    json_encode(myValue),
-                    json_encode($existingConfig[myKey])
+                    $key,
+                    json_encode($value),
+                    json_encode($existingConfig[$key])
                 );
                 break;
             }
@@ -148,20 +149,21 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     /**
      * Should resolve the classname for a given object type.
      *
-     * @param string myClass The class to resolve.
+     * @param string $class The class to resolve.
      * @return string|null The resolved name or null for failure.
      * @psalm-return class-string|null
      */
-    abstract protected string _resolveClassName(string myClass);
+    abstract protected function _resolveClassName(string $class): ?string;
 
     /**
      * Throw an exception when the requested object name is missing.
      *
-     * @param string myClass The class that is missing.
-     * @param string|null myPlugin The plugin myClass is missing from.
+     * @param string $class The class that is missing.
+     * @param string|null $plugin The plugin $class is missing from.
+     * @return void
      * @throws \Exception
      */
-    abstract protected void _throwMissingClassError(string myClass, Nullable!string myPlugin);
+    abstract protected function _throwMissingClassError(string $class, ?string $plugin): void;
 
     /**
      * Create an instance of a given classname.
@@ -169,88 +171,91 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * This method should construct and do any other initialization logic
      * required.
      *
-     * @param object|string myClass The class to build.
-     * @param string myAlias The alias of the object.
-     * @param array<string, mixed> myConfig The Configuration settings for construction
+     * @param object|string $class The class to build.
+     * @param string $alias The alias of the object.
+     * @param array<string, mixed> $config The Configuration settings for construction
      * @return object
-     * @psalm-param TObject|string myClass
+     * @psalm-param TObject|string $class
      * @psalm-return TObject
      */
-    abstract protected auto _create(myClass, string myAlias, array myConfig);
+    abstract protected function _create($class, string $alias, array $config);
 
     /**
      * Get the list of loaded objects.
      *
-     * @return List of object names.
+     * @return array<string> List of object names.
      */
-    string[] loaded() {
+    string[] loaded(): array
+    {
         return array_keys(_loaded);
     }
 
     /**
      * Check whether a given object is loaded.
      *
-     * @param string myName The object name to check for.
+     * @param string aName The object name to check for.
      * @return bool True is object is loaded else false.
      */
-    bool has(string myName) {
-        return isset(_loaded[myName]);
+    bool has(string aName)
+    {
+        return isset(_loaded[$name]);
     }
 
     /**
      * Get loaded object instance.
      *
-     * @param string myName Name of object.
+     * @param string aName Name of object.
      * @return object Object instance.
      * @throws \RuntimeException If not loaded or found.
      * @psalm-return TObject
      */
-    auto get(string myName) {
-        if (!isset(_loaded[myName])) {
-            throw new RuntimeException(sprintf("Unknown object "%s"", myName));
+    function get(string aName) {
+        if (!isset(_loaded[$name])) {
+            throw new RuntimeException(sprintf("Unknown object "%s"", $name));
         }
 
-        return _loaded[myName];
+        return _loaded[$name];
     }
 
     /**
      * Provide read access to the loaded objects
      *
-     * @param string myName Name of property to read
+     * @param string aName Name of property to read
      * @return object|null
      * @psalm-return TObject|null
      */
-    auto __get(string myName) {
-        return _loaded[myName] ?? null;
+    function __get(string aName) {
+        return _loaded[$name] ?? null;
     }
 
     /**
      * Provide isset access to _loaded
      *
-     * @param string myName Name of object being checked.
+     * @param string aName Name of object being checked.
      */
-    bool __isset(string myName) {
-        return this.has(myName);
+    bool __isset(string aName): bool
+    {
+        return this.has($name);
     }
 
     /**
      * Sets an object.
      *
-     * @param string myName Name of a property to set.
+     * @param string aName Name of a property to set.
      * @param object $object Object to set.
      * @psalm-param TObject $object
      */
-    void __set(string myName, $object) {
-        this.set(myName, $object);
+    void __set(string aName, $object) {
+        this.set($name, $object);
     }
 
     /**
      * Unsets an object.
      *
-     * @param string myName Name of a property to unset.
+     * @param string aName Name of a property to unset.
      */
-    void __unset(string myName) {
-        this.unload(myName);
+    void __unset(string aName) {
+        this.unload($name);
     }
 
     /**
@@ -260,19 +265,20 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param array $objects Array of child objects to normalize.
      * @return array<string, array> Array of normalized objects.
      */
-    array normalizeArray(array $objects) {
+    function normalizeArray(array $objects): array
+    {
         $normal = [];
-        foreach ($i, $objectName; $objects) {
-            myConfig = [];
+        foreach ($objects as $i: $objectName) {
+            $config = [];
             if (!is_int($i)) {
-                myConfig = (array)$objectName;
+                $config = (array)$objectName;
                 $objectName = $i;
             }
-            [, myName] = pluginSplit($objectName);
-            if (isset(myConfig["class"])) {
-                $normal[myName] = myConfig + ["config":[]];
+            [, $name] = pluginSplit($objectName);
+            if (isset($config["class"])) {
+                $normal[$name] = $config + ["config": []];
             } else {
-                $normal[myName] = ["class":$objectName, "config":myConfig];
+                $normal[$name] = ["class": $objectName, "config": $config];
             }
         }
 
@@ -287,8 +293,8 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return this
      */
     function reset() {
-        foreach (array_keys(_loaded) as myName) {
-            this.unload((string)myName);
+        foreach (array_keys(_loaded) as $name) {
+            this.unload((string)$name);
         }
 
         return this;
@@ -300,20 +306,20 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * If this collection : events, the passed object will
      * be attached into the event manager
      *
-     * @param string myName The name of the object to set in the registry.
+     * @param string aName The name of the object to set in the registry.
      * @param object $object instance to store in the registry
      * @return this
      * @psalm-param TObject $object
      * @psalm-suppress MoreSpecificReturnType
      */
-    auto set(string myName, object $object) {
-        [, $objName] = pluginSplit(myName);
+    function set(string aName, object $object) {
+        [, $objName] = pluginSplit($name);
 
         // Just call unload if the object was loaded before
-        if (array_key_exists(myName, _loaded)) {
-            this.unload(myName);
+        if (array_key_exists($name, _loaded)) {
+            this.unload($name);
         }
-        if (this instanceof IEventDispatcher && $object instanceof IEventListener) {
+        if (this instanceof EventDispatcherInterface && $object instanceof IEventListener) {
             this.getEventManager().on($object);
         }
         _loaded[$objName] = $object;
@@ -327,21 +333,21 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * If this registry has an event manager, the object will be detached from any events as well.
      *
-     * @param string myName The name of the object to remove from the registry.
+     * @param string aName The name of the object to remove from the registry.
      * @return this
      * @psalm-suppress MoreSpecificReturnType
      */
-    function unload(string myName) {
-        if (empty(_loaded[myName])) {
-            [myPlugin, myName] = pluginSplit(myName);
-            _throwMissingClassError(myName, myPlugin);
+    function unload(string aName) {
+        if (empty(_loaded[$name])) {
+            [$plugin, $name] = pluginSplit($name);
+            _throwMissingClassError($name, $plugin);
         }
 
-        $object = _loaded[myName];
-        if (this instanceof IEventDispatcher && $object instanceof IEventListener) {
+        $object = _loaded[$name];
+        if (this instanceof EventDispatcherInterface && $object instanceof IEventListener) {
             this.getEventManager().off($object);
         }
-        unset(_loaded[myName]);
+        unset(_loaded[$name]);
 
         /** @psalm-suppress LessSpecificReturnStatement */
         return this;
@@ -353,14 +359,17 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return \Traversable
      * @psalm-return \Traversable<string, TObject>
      */
-    Traversable getIterator() {
+    function getIterator(): Traversable
+    {
         return new ArrayIterator(_loaded);
     }
 
     /**
      * Returns the number of loaded objects.
+     *
      */
-    int count() {
+    int count(): int
+    {
         return count(_loaded);
     }
 
@@ -369,7 +378,8 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @return array<string, mixed>
      */
-    array __debugInfo() {
+    function __debugInfo(): array
+    {
         $properties = get_object_vars(this);
         if (isset($properties["_loaded"])) {
             $properties["_loaded"] = array_keys($properties["_loaded"]);

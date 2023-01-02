@@ -3,7 +3,7 @@ module uim.cake.core.Configure;
 /**
  * An interface for creating objects compatible with Configure::load()
  */
-interface IConfigEngine
+interface ConfigEngineInterface
 {
     /**
      * Read a configuration file/storage key
@@ -12,17 +12,17 @@ interface IConfigEngine
      * These sources can either be static resources like files, or dynamic ones like
      * a database, or other datasource.
      *
-     * @param string myKey Key to read.
+     * @param string aKey Key to read.
      * @return array An array of data to merge into the runtime configuration
      */
-    array read(string myKey);
+    function read(string aKey): array;
 
     /**
-     * Dumps the configure data into the storage key/file of the given `myKey`.
+     * Dumps the configure data into the storage key/file of the given `$key`.
      *
-     * @param string myKey The identifier to write to.
-     * @param array myData The data to dump.
+     * @param string aKey The identifier to write to.
+     * @param array $data The data to dump.
      * @return bool True on success or false on failure.
      */
-    bool dump(string myKey, array myData);
+    function dump(string aKey, array $data): bool;
 }

@@ -237,9 +237,8 @@ class Mysql : Driver
     /**
      * Returns true if the connected server is MariaDB.
      *
-     * @return bool
      */
-    function isMariadb(): bool
+    bool isMariadb(): bool
     {
         this.version();
 

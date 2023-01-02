@@ -225,9 +225,8 @@ abstract class Driver : DriverInterface
     /**
      * Returns whether a transaction is active for connection.
      *
-     * @return bool
      */
-    function inTransaction(): bool
+    bool inTransaction(): bool
     {
         this.connect();
 
@@ -375,9 +374,8 @@ abstract class Driver : DriverInterface
      * Defaults to true for FEATURE_QUOTE and FEATURE_SAVEPOINT.
      *
      * @param string $feature Driver feature name
-     * @return bool
      */
-    function supports(string $feature): bool
+    bool supports(string $feature): bool
     {
         switch ($feature) {
             case static::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION:

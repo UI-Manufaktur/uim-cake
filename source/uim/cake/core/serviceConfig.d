@@ -25,7 +25,7 @@ class ServiceConfig {
      * @param string $path The path to check.
      * @return bool True if the configuration data exists.
      */
-    function has(string $path): bool
+    bool has(string $path)
     {
         return Configure::check($path);
     }

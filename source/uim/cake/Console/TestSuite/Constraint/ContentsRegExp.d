@@ -13,7 +13,7 @@ class ContentsRegExp : ContentsBase
      * @param mixed $other Expected
      * @return bool
      */
-    function matches($other): bool
+    bool matches($other)
     {
         return preg_match($other, this.contents) > 0;
     }

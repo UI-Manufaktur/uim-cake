@@ -96,9 +96,8 @@ class CommandCollection : IteratorAggregate, Countable
      * Check whether the named shell exists in the collection.
      *
      * @param string aName The named shell.
-     * @return bool
      */
-    function has(string aName): bool
+    bool has(string aName): bool
     {
         return isset(this.commands[$name]);
     }
