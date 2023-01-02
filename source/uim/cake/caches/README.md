@@ -1,4 +1,4 @@
-# UIM Caching Library
+# CakePHP Caching Library
 
 The Cache library provides a `Cache` service locator for interfacing with multiple caching backends using
 a simple to use interface.
@@ -17,32 +17,32 @@ The caching backends supported are:
 Caching engines need to be configured with the `Cache::config()` method.
 
 ```php
-import uim.cake.caches\Cache;
+import uim.cake.caches.Cache;
 
 // Using a short name
 Cache::config("default", [
-    "className":"File",
-    "duration":"+1 hours",
-    "path":sys_get_tmp_dir(),
-    "prefix":"my_app_"
+    "className": "File",
+    "duration": "+1 hours",
+    "path": sys_get_tmp_dir(),
+    "prefix": "my_app_"
 ]);
 
-// Using a fully moduled name.
+// Using a fully namespaced name.
 Cache::config("long", [
-    "className":uim.cake.Cache\Engine\ApcuEngine::class,
-    "duration":"+1 week",
-    "prefix":"my_app_"
+    "className": uim.cake.Cache\Engine\ApcuEngine::class,
+    "duration": "+1 week",
+    "prefix": "my_app_"
 ]);
 
 // Using a constructed object.
-$object = new FileEngine(myConfig);
+$object = new FileEngine($config);
 Cache::config("other", $object);
 ```
 
 You can now read and write from the cache:
 
 ```php
-myData = Cache::remember("my_cache_key", function () {
+$data = Cache::remember("my_cache_key", function () {
 	return Service::expensiveCall();
 });
 ```
@@ -52,6 +52,6 @@ the callback will be executed and the returned data will be cached for future ca
 
 ## Documentation
 
-Please make sure you check the [official documentation](https://book.UIM.org/4/en/core-libraries/caching.html)
+Please make sure you check the [official documentation](https://book.cakephp.org/4/en/core-libraries/caching.html)
 
 
