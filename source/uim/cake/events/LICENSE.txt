@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-UIM(tm) : The Rapid Development PHP Framework (https://UIM.org)
+CakePHP(tm) : The Rapid Development PHP Framework (https://cakephp.org)
 Copyright (c) 2005-2020, Cake Software Foundation, Inc. (https://cakefoundation.org)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

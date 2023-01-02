@@ -1,7 +1,7 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/UIM/event.svg?style=flat-square)](https://packagist.org/packages/UIM/event)
+[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/event.svg?style=flat-square)](https://packagist.org/packages/cakephp/event)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# UIM Event Library
+# CakePHP Event Library
 
 This library emulates several aspects of how events are triggered and managed in popular JavaScript
 libraries such as jQuery: An event object is dispatched to all listeners. The event object holds information
@@ -26,15 +26,15 @@ class Orders
 	function placeOrder($order)
 	{
 		this.doStuff();
-		myEvent = new Event("Orders.afterPlace", this, [
-			"order":$order
+		$event = new Event("Orders.afterPlace", this, [
+			"order": $order
 		]);
-		this.getEventManager().dispatch(myEvent);
+		this.getEventManager().dispatch($event);
 	}
 }
 
 $orders = new Orders();
-$orders.getEventManager().on(function (myEvent) {
+$orders.getEventManager().on(function ($event) {
 	// Do something after the order was placed
 	...
 }, "Orders.afterPlace");
@@ -48,4 +48,4 @@ in separate objects that focus on those concerns.
 
 ## Documentation
 
-Please make sure you check the [official documentation](https://book.UIM.org/4/en/core-libraries/events.html)
+Please make sure you check the [official documentation](https://book.cakephp.org/4/en/core-libraries/events.html)

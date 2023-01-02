@@ -1,30 +1,30 @@
 {
-    "name": "UIM/event",
-    "description": "UIM event dispatcher library that helps implementing the observer pattern",
+    "name": "cakephp/event",
+    "description": "CakePHP event dispatcher library that helps implementing the observer pattern",
     "type": "library",
     "keywords": [
-        "UIM",
+        "cakephp",
         "event",
         "dispatcher",
         "observer pattern"
     ],
-    "homepage": "https://UIM.org",
+    "homepage": "https://cakephp.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "UIM Community",
-            "homepage": "https://github.com/UIM/event/graphs/contributors"
+            "name": "CakePHP Community",
+            "homepage": "https://github.com/cakephp/event/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/UIM/UIM/issues",
-        "forum": "https://stackoverflow.com/tags/UIM",
-        "irc": "irc://irc.freenode.org/UIM",
-        "source": "https://github.com/UIM/event"
+        "issues": "https://github.com/cakephp/cakephp/issues",
+        "forum": "https://stackoverflow.com/tags/cakephp",
+        "irc": "irc://irc.freenode.org/cakephp",
+        "source": "https://github.com/cakephp/event"
     },
     "require": {
-        "php": ">=7.2.0",
-        "UIM/core": "^4.0"
+        "php": ">=7.4.0",
+        "cakephp/core": "^4.0"
     },
     "autoload": {
         "psr-4": {
