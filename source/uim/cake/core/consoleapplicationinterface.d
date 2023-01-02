@@ -1,26 +1,28 @@
 module uim.cake.core;
 
-import uim.cake.console.commandCollection;
-
 /**
- * An interface defining the methods that the
- * console runner depend on.
+ * Interface for applications that configure and use a dependency injection container.
  */
-interface IConsoleApplication
+interface IContainerApplication
 {
     /**
-     * Load all the application configuration and bootstrap logic.
+     * Register services to the container
      *
-     * Override this method to add additional bootstrap logic for your application.
+     * Registered services can have instances fetched out of the container
+     * using `get()`. Dependencies and parameters will be resolved based
+     * on service definitions.
      *
+     * @param uim.cake.Core\IContainer $container The container to add services to
      */
-    void bootstrap();
+    void services(IContainer $container): void;
 
     /**
-     * Define the console commands for an application.
+     * Create a new container and register services.
      *
-     * @param uim.cake.consoles.CommandCollection $commands The CommandCollection to add commands into.
-     * @return uim.cake.consoles.CommandCollection The updated collection.
+     * This will `register()` services provided by both the application
+     * and any plugins if the application has plugin support.
+     *
+     * @return uim.cake.Core\IContainer A populated container
      */
-    CommandCollection console(CommandCollection $commands);
+    function getContainer(): IContainer;
 }

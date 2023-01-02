@@ -8,16 +8,15 @@ module uim.cake.core;
 class ClassLoader
 {
     /**
-     * An associative array where the key is a module prefix and the value
-     * is an array of base directories for classes in that module.
+     * An associative array where the key is a namespace prefix and the value
+     * is an array of base directories for classes in that namespace.
      *
      * @var array<string, array>
      */
-    protected _prefixes = [];
+    protected $_prefixes = [];
 
     /**
      * Register loader with SPL autoloader stack.
-     *
      */
     void register() {
         /** @var callable $callable */
@@ -26,16 +25,16 @@ class ClassLoader
     }
 
     /**
-     * Adds a base directory for a module prefix.
+     * Adds a base directory for a namespace prefix.
      *
-     * @param string prefix The module prefix.
-     * @param string baseDir A base directory for class files in the
-     * module.
+     * @param string $prefix The namespace prefix.
+     * @param string $baseDir A base directory for class files in the
+     * namespace.
      * @param bool $prepend If true, prepend the base directory to the stack
      * instead of appending it; this causes it to be searched first rather
      * than last.
      */
-    void addmodule(string prefix, string baseDir, bool $prepend = false) {
+    void addNamespace(string $prefix, string $baseDir, bool $prepend = false) {
         $prefix = trim($prefix, "\\") ~ "\\";
 
         $baseDir = rtrim($baseDir, "/") . DIRECTORY_SEPARATOR;
@@ -53,16 +52,16 @@ class ClassLoader
     /**
      * Loads the class file for a given class name.
      *
-     * @param string myClass The fully-qualified class name.
+     * @param string $class The fully-qualified class name.
      * @return string|false The mapped file name on success, or boolean false on
      * failure.
      */
-    function loadClass(string myClass) {
-        $prefix = myClass;
+    function loadClass(string $class) {
+        $prefix = $class;
 
         while (($pos = strrpos($prefix, "\\")) != false) {
-            $prefix = substr(myClass, 0, $pos + 1);
-            $relativeClass = substr(myClass, $pos + 1);
+            $prefix = substr($class, 0, $pos + 1);
+            $relativeClass = substr($class, $pos + 1);
 
             $mappedFile = _loadMappedFile($prefix, $relativeClass);
             if ($mappedFile) {
@@ -76,23 +75,23 @@ class ClassLoader
     }
 
     /**
-     * Load the mapped file for a module prefix and relative class.
+     * Load the mapped file for a namespace prefix and relative class.
      *
-     * @param string prefix The module prefix.
-     * @param string relativeClass The relative class name.
+     * @param string $prefix The namespace prefix.
+     * @param string $relativeClass The relative class name.
      * @return string|false Boolean false if no mapped file can be loaded, or the
      * name of the mapped file that was loaded.
      */
-    protected auto _loadMappedFile(string prefix, string relativeClass) {
+    protected function _loadMappedFile(string $prefix, string $relativeClass) {
         if (!isset(_prefixes[$prefix])) {
             return false;
         }
 
         foreach (_prefixes[$prefix] as $baseDir) {
-            myfile = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) ~ ".php";
+            $file = $baseDir . str_replace("\\", DIRECTORY_SEPARATOR, $relativeClass) ~ ".php";
 
-            if (_requireFile(myfile)) {
-                return myfile;
+            if (_requireFile($file)) {
+                return $file;
             }
         }
 
@@ -102,12 +101,13 @@ class ClassLoader
     /**
      * If a file exists, require it from the file system.
      *
-     * @param string myfile The file to require.
+     * @param string $file The file to require.
      * @return bool True if the file exists, false if not.
      */
-    protected bool _requireFile(string myfile) {
-        if (file_exists(myfile)) {
-            require myfile;
+    protected function _requireFile(string $file): bool
+    {
+        if (file_exists($file)) {
+            require $file;
 
             return true;
         }

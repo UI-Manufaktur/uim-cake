@@ -1,19 +1,28 @@
 module uim.cake.core;
 
-@safe:
-import uim.cake
+import uim.cake.core.exceptions.CakeException;
+import uim.cake.utilities.Hash;
+use InvalidArgumentException;
 
 /**
  * A trait for reading and writing instance config
  *
  * Implementing objects are expected to declare a `$_defaultConfig` property.
  */
-trait InstanceConfigTrait {
-    // Runtime config
-    protected array<string, mixed> _config = [];
+trait InstanceConfigTrait
+{
+    /**
+     * Runtime config
+     *
+     * @var array<string, mixed>
+     */
+    protected $_config = [];
 
-    // Whether the config property has already been configured with defaults
-    protected bool _configInitialized = false;
+    /**
+     * Whether the config property has already been configured with defaults
+     *
+     */
+    protected bool $_configInitialized = false;
 
     /**
      * Sets the config.
@@ -23,34 +32,34 @@ trait InstanceConfigTrait {
      * Setting a specific value:
      *
      * ```
-     * this.setConfig("key", myValue);
+     * this.setConfig("key", $value);
      * ```
      *
      * Setting a nested value:
      *
      * ```
-     * this.setConfig("some.nested.key", myValue);
+     * this.setConfig("some.nested.key", $value);
      * ```
      *
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.setConfig(["one":"value", "another":"value"]);
+     * this.setConfig(["one": "value", "another": "value"]);
      * ```
      *
-     * @param array<string, mixed>|string myKey The key to set, or a complete array of configs.
-     * @param mixed|null myValue The value to set.
-     * @param bool myMerge Whether to recursively merge or overwrite existing config, defaults to true.
+     * @param array<string, mixed>|string aKey The key to set, or a complete array of configs.
+     * @param mixed|null $value The value to set.
+     * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      * @return this
      * @throws uim.cake.Core\exceptions.CakeException When trying to set a key that is invalid.
      */
-    auto setConfig(myKey, myValue = null, myMerge = true) {
+    function setConfig($key, $value = null, $merge = true) {
         if (!_configInitialized) {
             _config = _defaultConfig;
             _configInitialized = true;
         }
 
-        _configWrite(myKey, myValue, myMerge);
+        _configWrite($key, $value, $merge);
 
         return this;
     }
@@ -84,17 +93,17 @@ trait InstanceConfigTrait {
      * this.getConfig("some-key", "default-value");
      * ```
      *
-     * @param string|null myKey The key to get or null for the whole config.
+     * @param string|null $key The key to get or null for the whole config.
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    auto getConfig(Nullable!string myKey = null, $default = null) {
+    function getConfig(?string aKey = null, $default = null) {
         if (!_configInitialized) {
             _config = _defaultConfig;
             _configInitialized = true;
         }
 
-        $return = _configRead(myKey);
+        $return = _configRead($key);
 
         return $return ?? $default;
     }
@@ -104,17 +113,17 @@ trait InstanceConfigTrait {
      *
      * The config value for this key must exist, it can never be null.
      *
-     * @param string myKey The key to get.
+     * @param string aKey The key to get.
      * @return mixed Configuration data at the named key
      * @throws \InvalidArgumentException
      */
-    auto getConfigOrFail(string myKey) {
-        myConfig = this.getConfig(myKey);
-        if (myConfig is null) {
-            throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", myKey));
+    function getConfigOrFail(string aKey) {
+        $config = this.getConfig($key);
+        if ($config == null) {
+            throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", $key));
         }
 
-        return myConfig;
+        return $config;
     }
 
     /**
@@ -124,32 +133,32 @@ trait InstanceConfigTrait {
      * Setting a specific value:
      *
      * ```
-     * this.configShallow("key", myValue);
+     * this.configShallow("key", $value);
      * ```
      *
      * Setting a nested value:
      *
      * ```
-     * this.configShallow("some.nested.key", myValue);
+     * this.configShallow("some.nested.key", $value);
      * ```
      *
      * Updating multiple config settings at the same time:
      *
      * ```
-     * this.configShallow(["one":"value", "another":"value"]);
+     * this.configShallow(["one": "value", "another": "value"]);
      * ```
      *
-     * @param array<string, mixed>|string myKey The key to set, or a complete array of configs.
-     * @param mixed|null myValue The value to set.
+     * @param array<string, mixed>|string aKey The key to set, or a complete array of configs.
+     * @param mixed|null $value The value to set.
      * @return this
      */
-    function configShallow(myKey, myValue = null) {
+    function configShallow($key, $value = null) {
         if (!_configInitialized) {
             _config = _defaultConfig;
             _configInitialized = true;
         }
 
-        _configWrite(myKey, myValue, "shallow");
+        _configWrite($key, $value, "shallow");
 
         return this;
     }
@@ -157,21 +166,21 @@ trait InstanceConfigTrait {
     /**
      * Reads a config key.
      *
-     * @param string|null myKey Key to read.
+     * @param string|null $key Key to read.
      * @return mixed
      */
-    protected auto _configRead(Nullable!string myKey) {
-        if (myKey is null) {
+    protected function _configRead(?string aKey) {
+        if ($key == null) {
             return _config;
         }
 
-        if (indexOf(myKey, ".") == false) {
-            return _config[myKey] ?? null;
+        if (strpos($key, ".") == false) {
+            return _config[$key] ?? null;
         }
 
         $return = _config;
 
-        foreach (explode(".", myKey) as $k) {
+        foreach (explode(".", $key) as $k) {
             if (!is_array($return) || !isset($return[$k])) {
                 $return = null;
                 break;
@@ -186,22 +195,23 @@ trait InstanceConfigTrait {
     /**
      * Writes a config key.
      *
-     * @param array<string, mixed>|string myKey Key to write to.
-     * @param mixed myValue Value to write.
-     * @param string|bool myMerge True to merge recursively, "shallow" for simple merge,
+     * @param array<string, mixed>|string aKey Key to write to.
+     * @param mixed $value Value to write.
+     * @param string|bool $merge True to merge recursively, "shallow" for simple merge,
      *   false to overwrite, defaults to false.
+     * @return void
      * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
      */
-    protected void _configWrite(myKey, myValue, myMerge = false) {
-        if (is_string(myKey) && myValue is null) {
-            _configDelete(myKey);
+    protected void _configWrite($key, $value, $merge = false) {
+        if (is_string($key) && $value == null) {
+            _configDelete($key);
 
             return;
         }
 
-        if (myMerge) {
-            $update = is_array(myKey) ? myKey : [myKey: myValue];
-            if (myMerge == "shallow") {
+        if ($merge) {
+            $update = is_array($key) ? $key : [$key: $value];
+            if ($merge == "shallow") {
                 _config = array_merge(_config, Hash::expand($update));
             } else {
                 _config = Hash::merge(_config, Hash::expand($update));
@@ -210,26 +220,26 @@ trait InstanceConfigTrait {
             return;
         }
 
-        if (is_array(myKey)) {
-            foreach (myKey as $k: $val) {
+        if (is_array($key)) {
+            foreach ($key as $k: $val) {
                 _configWrite($k, $val);
             }
 
             return;
         }
 
-        if (indexOf(myKey, ".") == false) {
-            _config[myKey] = myValue;
+        if (strpos($key, ".") == false) {
+            _config[$key] = $value;
 
             return;
         }
 
         $update = &_config;
-        $stack = explode(".", myKey);
+        $stack = explode(".", $key);
 
         foreach ($stack as $k) {
             if (!is_array($update)) {
-                throw new CakeException(sprintf("Cannot set %s value", myKey));
+                throw new CakeException(sprintf("Cannot set %s value", $key));
             }
 
             $update[$k] = $update[$k] ?? [];
@@ -237,29 +247,30 @@ trait InstanceConfigTrait {
             $update = &$update[$k];
         }
 
-        $update = myValue;
+        $update = $value;
     }
 
     /**
      * Deletes a single config key.
      *
-     * @param string myKey Key to delete.
+     * @param string aKey Key to delete.
+     * @return void
      * @throws uim.cake.Core\exceptions.CakeException if attempting to clobber existing config
      */
-    protected void _configDelete(string myKey) {
-        if (indexOf(myKey, ".") == false) {
-            unset(_config[myKey]);
+    protected void _configDelete(string aKey) {
+        if (strpos($key, ".") == false) {
+            unset(_config[$key]);
 
             return;
         }
 
         $update = &_config;
-        $stack = explode(".", myKey);
+        $stack = explode(".", $key);
         $length = count($stack);
 
         foreach ($stack as $i: $k) {
             if (!is_array($update)) {
-                throw new CakeException(sprintf("Cannot unset %s value", myKey));
+                throw new CakeException(sprintf("Cannot unset %s value", $key));
             }
 
             if (!isset($update[$k])) {

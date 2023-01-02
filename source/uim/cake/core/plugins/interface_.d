@@ -1,32 +1,42 @@
-module uim.cake.core.plugins.interface_;
+module uim.cake.core;
 
-@safe:
-import uim.cake;
+import uim.cake.consoles.CommandCollection;
+import uim.cake.http.MiddlewareQueue;
+import uim.cake.routings.RouteBuilder;
 
 /**
  * Plugin Interface
  *
- * @method void services(uim.cake.Core\IContainer myContainer) Register plugin services to
+ * @method void services(uim.cake.Core\IContainer $container) Register plugin services to
  *   the application"s container
  */
-interface IPlugin {
+interface IPlugin
+{
     // List of valid hooks.
-    const String[] VALID_HOOKS = ["bootstrap", "console", "middleware", "routes", "services"];
+    const string[] VALID_HOOKS = ["bootstrap", "console", "middleware", "routes", "services"];
 
     // Get the name of this plugin.
-    string name();
+    string getName();
 
-    // Get the filesystem path to this plugin
-    string filesystemPath();
+    /**
+     * Get the filesystem path to this plugin
+     */
+    string getPath();
 
-    // Get the filesystem path to configuration for this plugin
-    string configPath();
+    /**
+     * Get the filesystem path to configuration for this plugin
+     */
+    string getConfigPath();
 
-    // Get the filesystem path to configuration for this plugin
-    string classPath();
+    /**
+     * Get the filesystem path to configuration for this plugin
+     */
+    string getClassPath();
 
-    // Get the filesystem path to templates for this plugin
-    string templatePath();
+    /**
+     * Get the filesystem path to templates for this plugin
+     */
+    string getTemplatePath();
 
     /**
      * Load all the application configuration and bootstrap logic.
@@ -39,15 +49,15 @@ interface IPlugin {
      *
      * @param uim.cake.Core\IPluginApplication $app The host application
      */
-    void bootstrap(IPluginApplication $app);
+    void bootstrap(IPluginApplication $app): void;
 
     /**
      * Add console commands for the plugin.
      *
-     * @param uim.cake.consoles.CommandCollection someCommands The command collection to update
+     * @param uim.cake.consoles.CommandCollection $commands The command collection to update
      * @return uim.cake.consoles.CommandCollection
      */
-    CommandCollection console(CommandCollection someCommands);
+    function console(CommandCollection $commands): CommandCollection;
 
     /**
      * Add middleware for the plugin.
@@ -55,7 +65,7 @@ interface IPlugin {
      * @param uim.cake.http.MiddlewareQueue $middlewareQueue The middleware queue to update.
      * @return uim.cake.http.MiddlewareQueue
      */
-    MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue);
+    function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 
     /**
      * Add routes for the plugin.
@@ -65,26 +75,29 @@ interface IPlugin {
      *
      * @param uim.cake.routings.RouteBuilder $routes The route builder to update.
      */
-    IPlugin routes(RouteBuilder $routes);
+    void routes(RouteBuilder $routes): void;
 
     /**
      * Disables the named hook
      *
-     * @param string hook The hook to disable
+     * @param string $hook The hook to disable
+     * @return this
      */
-    IPlugin disable(string hook);
+    function disable(string $hook);
 
     /**
      * Enables the named hook
      *
-     * @param string hook The hook to disable
+     * @param string $hook The hook to disable
+     * @return this
      */
-    IPlugin enable(string hook);
+    function enable(string $hook);
 
     /**
      * Check if the named hook is enabled
      *
-     * @param string hook The hook to check
+     * @param string $hook The hook to check
+     * @return bool
      */
-    bool isEnabled(string hook);
+    function isEnabled(string $hook): bool;
 }

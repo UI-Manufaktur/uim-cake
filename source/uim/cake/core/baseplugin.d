@@ -2,10 +2,12 @@
 	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.core;
+**********************************************************************************************************/
+module uim.cake.core.baseplugin;
 
 @safe:
-import uim.cake;
+  import uim.cake;
+
 
 /**
  * Base Plugin Class
@@ -14,54 +16,49 @@ import uim.cake;
  * include a plugin class in its src root folder.
  */
 class BasePlugin : IPlugin {
-    /**
-     * Do bootstrapping or not
-     *
-     * @var bool
-     */
-    protected bootstrapEnabled = true;
+    // Do bootstrapping or not
+    protected bool $bootstrapEnabled = true;
 
     // Console middleware
-    protected bool consoleEnabled = true;
+    protected bool $consoleEnabled = true;
 
     // Enable middleware
-    protected bool middlewareEnabled = true;
+    protected bool $middlewareEnabled = true;
 
     // Register container services
-    protected bool servicesEnabled = true;
+    protected bool $servicesEnabled = true;
 
     // Load routes or not
-    protected bool routesEnabled = true;
+    protected bool $routesEnabled = true;
 
     // The path to this plugin.
-    protected string myPath;
+    protected string $path;
 
     // The class path for this plugin.
-    protected string myClassPath;
+    protected string $classPath;
 
     // The config path for this plugin.
-    protected string myConfigPath;
+    protected string _configPath;
 
     // The templates path for this plugin.
-    protected string myTemplatePath;
+    protected string $templatePath;
 
     // The name of this plugin
-    protected string myName;
+    protected string _name;
 
     /**
      * Constructor
-     *
-     * @param array<string, mixed> myOptions Options
+     * @param array<string, mixed> $options Options
      */
-    this(array myOptions = []) {
-        foreach (static::VALID_HOOKS as myKey) {
-            if (isset(myOptions[myKey])) {
-                this.{"{myKey}Enabled"} = (bool)myOptions[myKey];
+    this(array $options = []) {
+        foreach (static::VALID_HOOKS as $key) {
+            if (isset($options[$key])) {
+                this.{"{$key}Enabled"} = (bool)$options[$key];
             }
         }
-        foreach (["name", "path", "classPath", "configPath", "templatePath"] as myPath) {
-            if (isset(myOptions[myPath])) {
-                this.{myPath} = myOptions[myPath];
+        foreach (["name", "path", "classPath", "configPath", "templatePath"] as $path) {
+            if (isset($options[$path])) {
+                this.{$path} = $options[$path];
             }
         }
 
@@ -72,61 +69,68 @@ class BasePlugin : IPlugin {
     void initialize() {
     }
 
-    @property string Name() {
-        if (_name) return _name;
+    @propery string Name() {
+      if (_name) { // Name exists
+        return _name;
+      }
 
-        $parts = explode("\\", static::class);
-        array_pop($parts);
-        this.name = implode("/", $parts);
+      // Generate new name
+      $parts = explode("\\", static::class);
+      array_pop($parts);
+      _name = implode("/", $parts);
 
-        return this.name;
+      return _name;
     }
 
-
-    @property string Path() {
-        if (_path) return _path;
-
+    string getPath() {
+        if (this.path) {
+            return this.path;
+        }
         $reflection = new ReflectionClass(this);
-        myPath = dirname($reflection.getFileName());
+        $path = dirname($reflection.getFileName());
 
         // Trim off src
-        if (substr(myPath, -3) == "src") {
-            myPath = substr(myPath, 0, -3);
+        if (substr($path, -3) == "src") {
+            $path = substr($path, 0, -3);
         }
-        this.path = rtrim(myPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+        this.path = rtrim($path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
         return this.path;
     }
 
 
-    @property string ConfigPath() {
-        if (_configPath) return configPath;
-
-        auto myPath = this.path();
+    string getConfigPath() {
+        if (_configPath) {
+            return _configPath;
+        }
+        auto myPath = this.getPath();
 
         return myPath ~ "config" ~ DIRECTORY_SEPARATOR;
     }
 
 
-    @property string classPath() {
-        if (_classPath) return _classPath;
-
-        auto myPath = this.path();
+    string getClassPath() {
+        if (_classPath) {
+            return _classPath;
+        }
+        auto myPath = this.getPath();
 
         return myPath ~ "src" ~ DIRECTORY_SEPARATOR;
     }
 
 
-    @property string TemplatePath() {
-        if (_templatePath) return _templatePath;
-        
-        auto myPath = this.path();
+    string getTemplatePath() {
+        if (_templatePath) {
+            return _templatePath;
+        }
+        auto myPath = this.getPath();
 
-        return this.templatePath = myPath ~ "templates" ~ DIRECTORY_SEPARATOR;
+        _templatePath = myPath ~ "templates" ~ DIRECTORY_SEPARATOR;
+        return _templatePath;
     }
 
 
-    function enable(string hook) {
+    function enable(string $hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled}"} = true;
 
@@ -134,7 +138,7 @@ class BasePlugin : IPlugin {
     }
 
 
-    function disable(string hook) {
+    function disable(string $hook) {
         this.checkHook($hook);
         this.{"{$hook}Enabled"} = false;
 
@@ -142,7 +146,8 @@ class BasePlugin : IPlugin {
     }
 
 
-    bool isEnabled(string hook) {
+    function isEnabled(string $hook): bool
+    {
         this.checkHook($hook);
 
         return this.{"{$hook}Enabled"} == true;
@@ -151,10 +156,10 @@ class BasePlugin : IPlugin {
     /**
      * Check if a hook name is valid
      *
-     * @param string hook The hook name to check
+     * @param string $hook The hook name to check
      * @throws \InvalidArgumentException on invalid hooks
      */
-    protected void checkHook(string hook) {
+    protected void checkHook(string $hook) {
         if (!in_array($hook, static::VALID_HOOKS, true)) {
             throw new InvalidArgumentException(
                 "`$hook` is not a valid hook name. Must be one of " ~ implode(", ", static::VALID_HOOKS)
@@ -162,11 +167,10 @@ class BasePlugin : IPlugin {
         }
     }
 
-
     void routes(RouteBuilder $routes) {
-        myPath = this.getConfigPath() ~ "routes.php";
-        if (is_file(myPath)) {
-            $return = require myPath;
+        $path = this.getConfigPath() ~ "routes.php";
+        if (is_file($path)) {
+            $return = require $path;
             if ($return instanceof Closure) {
                 $return($routes);
             }
@@ -182,20 +186,22 @@ class BasePlugin : IPlugin {
     }
 
 
-    CommandCollection console(CommandCollection $commands) {
+    function console(CommandCollection $commands): CommandCollection
+    {
         return $commands.addMany($commands.discoverPlugin(this.getName()));
     }
 
 
-    MiddlewareQueue middleware(MiddlewareQueue $middlewareQueue) {
+    function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
+    {
         return $middlewareQueue;
     }
 
     /**
      * Register container services for this plugin.
      *
-     * @param uim.cake.Core\IContainer myContainer The container to add services to.
+     * @param uim.cake.Core\IContainer $container The container to add services to.
      */
-    void services(IContainer myContainer) {
+    void services(IContainer $container) {
     }
 }

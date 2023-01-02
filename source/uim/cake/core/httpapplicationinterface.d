@@ -1,21 +1,20 @@
 module uim.cake.core;
 
-import uim.caketps\MiddlewareQueue;
-use Psr\Http\servers.IRequestHandler;
+import uim.cake.http.MiddlewareQueue;
+use Psr\Http\servers.RequestHandlerInterface;
 
 /**
  * An interface defining the methods that the
  * http server depend on.
  */
-interface IHttpApplication : IRequestHandler
+interface IHttpApplication : RequestHandlerInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
      *
      * Override this method to add additional bootstrap logic for your application.
-     *
      */
-    void bootstrap();
+    void bootstrap(): void;
 
     /**
      * Define the HTTP middleware layers for an application.

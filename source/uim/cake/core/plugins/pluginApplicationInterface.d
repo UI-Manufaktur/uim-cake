@@ -1,7 +1,9 @@
 module uim.cake.core;
 
-@safe:
-import uim.cake;
+import uim.cake.consoles.CommandCollection;
+import uim.cake.events.EventDispatcherInterface;
+import uim.cake.http.MiddlewareQueue;
+import uim.cake.routings.RouteBuilder;
 
 /**
  * Interface for Applications that leverage plugins & events.
@@ -9,7 +11,7 @@ import uim.cake;
  * Events can be bound to the application event manager during
  * the application"s bootstrap and plugin bootstrap.
  */
-interface IPluginApplication : IEventDispatcher
+interface IPluginApplication : EventDispatcherInterface
 {
     /**
      * Add a plugin to the loaded plugin set.
@@ -18,17 +20,16 @@ interface IPluginApplication : IEventDispatcher
      * instance of `Cake\Core\BasePlugin` will be used. This generated class will have
      * all plugin hooks enabled.
      *
-     * @param uim.cake.Core\IPlugin|string myName The plugin name or plugin object.
-     * @param array<string, mixed> myConfig The configuration data for the plugin if using a string for myName
+     * @param uim.cake.Core\IPlugin|string aName The plugin name or plugin object.
+     * @param array<string, mixed> $config The configuration data for the plugin if using a string for $name
      * @return this
      */
-    function addPlugin(myName, array myConfig = []);
+    function addPlugin($name, array $config = []);
 
     /**
      * Run bootstrap logic for loaded plugins.
-     *
      */
-    void pluginBootstrap();
+    void pluginBootstrap(): void;
 
     /**
      * Run routes hooks for loaded plugins
@@ -52,5 +53,5 @@ interface IPluginApplication : IEventDispatcher
      * @param uim.cake.consoles.CommandCollection $commands The CommandCollection to use.
      * @return uim.cake.consoles.CommandCollection
      */
-    CommandCollection pluginConsole(CommandCollection $commands);
+    function pluginConsole(CommandCollection $commands): CommandCollection;
 }
