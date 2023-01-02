@@ -3,12 +3,11 @@ module uim.cake.databases;
 @safe:
 import uim.cake;
 
-
 /**
  * Represents a database driver containing all specificities for
  * a database engine including its SQL dialect.
  */
-abstract class Driver : IDriver
+abstract class Driver : DriverInterface
 {
     /**
      * @var int|null Maximum alias length or null if no limit
@@ -25,14 +24,14 @@ abstract class Driver : IDriver
      *
      * @var \PDO
      */
-    protected _connection;
+    protected $_connection;
 
     /**
      * Configuration data.
      *
      * @var array<string, mixed>
      */
-    protected _config;
+    protected $_config;
 
     /**
      * Base configuration that is merged into the user
@@ -40,45 +39,43 @@ abstract class Driver : IDriver
      *
      * @var array<string, mixed>
      */
-    protected _baseConfig = [];
+    protected $_baseConfig = [];
 
     /**
      * Indicates whether the driver is doing automatic identifier quoting
      * for all queries
      *
-     * @var bool
      */
-    protected _autoQuoting = false;
+    protected bool $_autoQuoting = false;
 
     /**
      * The server version
      *
      * @var string|null
      */
-    protected _version;
+    protected $_version;
 
     /**
      * The last number of connection retry attempts.
      *
-     * @var int
      */
-    protected connectRetries = 0;
+    protected int $connectRetries = 0;
 
     /**
      * Constructor
      *
-     * @param array<string, mixed> myConfig The configuration for the driver.
+     * @param array<string, mixed> $config The configuration for the driver.
      * @throws \InvalidArgumentException
      */
-    this(array myConfig = []) {
-        if (empty(myConfig["username"]) && !empty(myConfig["login"])) {
+    this(array $config = []) {
+        if (empty($config["username"]) && !empty($config["login"])) {
             throw new InvalidArgumentException(
                 "Please pass "username" instead of "login" for connecting to the database"
             );
         }
-        myConfig += _baseConfig;
-        _config = myConfig;
-        if (!empty(myConfig["quoteIdentifiers"])) {
+        $config += _baseConfig;
+        _config = $config;
+        if (!empty($config["quoteIdentifiers"])) {
             this.enableAutoQuoting();
         }
     }
@@ -86,17 +83,18 @@ abstract class Driver : IDriver
     /**
      * Establishes a connection to the database server
      *
-     * @param string dsn A Driver-specific PDO-DSN
-     * @param array<string, mixed> myConfig configuration to be used for creating connection
+     * @param string $dsn A Driver-specific PDO-DSN
+     * @param array<string, mixed> $config configuration to be used for creating connection
      * @return bool true on success
      */
-    protected bool _connect(string dsn, array myConfig) {
-        $action = function () use ($dsn, myConfig) {
+    protected bool _connect(string $dsn, array $config)
+    {
+        $action = function () use ($dsn, $config) {
             this.setConnection(new PDO(
                 $dsn,
-                myConfig["username"] ?: null,
-                myConfig["password"] ?: null,
-                myConfig["flags"]
+                $config["username"] ?: null,
+                $config["password"] ?: null,
+                $config["flags"]
             ));
         };
 
@@ -106,8 +104,8 @@ abstract class Driver : IDriver
         } catch (PDOException $e) {
             throw new MissingConnectionException(
                 [
-                    "driver":App::shortName(static::class, "Database/Driver"),
-                    "reason":$e.getMessage(),
+                    "driver": App::shortName(static::class, "Database/Driver"),
+                    "reason": $e.getMessage(),
                 ],
                 null,
                 $e
@@ -119,12 +117,11 @@ abstract class Driver : IDriver
         return true;
     }
 
-    
+
     abstract bool connect();
 
-    
-    function disconnect(): void
-    {
+
+    void disconnect() {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
         _connection = null;
         _version = null;
@@ -134,7 +131,7 @@ abstract class Driver : IDriver
      * Returns connected server version.
      */
     string version() {
-        if (_version is null) {
+        if (_version == null) {
             this.connect();
             _version = (string)_connection.getAttribute(PDO::ATTR_SERVER_VERSION);
         }
@@ -147,11 +144,11 @@ abstract class Driver : IDriver
      *
      * @return \PDO
      */
-    auto getConnection() {
-        if (_connection is null) {
+    function getConnection() {
+        if (_connection == null) {
             throw new MissingConnectionException([
-                "driver":App::shortName(static::class, "Database/Driver"),
-                "reason":"Unknown",
+                "driver": App::shortName(static::class, "Database/Driver"),
+                "reason": "Unknown",
             ]);
         }
 
@@ -161,30 +158,31 @@ abstract class Driver : IDriver
     /**
      * Set the internal PDO connection instance.
      *
-     * @param \PDO myConnection PDO instance.
+     * @param \PDO $connection PDO instance.
      * @return this
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    auto setConnection(myConnection) {
-        _connection = myConnection;
+    function setConnection($connection) {
+        _connection = $connection;
 
         return this;
     }
 
-    
+
     abstract bool enabled();
 
-    
-    function prepare(myQuery): IStatement
+
+    function prepare($query): StatementInterface
     {
         this.connect();
-        $statement = _connection.prepare(myQuery instanceof Query ? myQuery.sql() : myQuery);
+        $statement = _connection.prepare($query instanceof Query ? $query.sql() : $query);
 
         return new PDOStatement($statement, this);
     }
 
-    
-    bool beginTransaction() {
+
+    bool beginTransaction()
+    {
         this.connect();
         if (_connection.inTransaction()) {
             return true;
@@ -193,8 +191,9 @@ abstract class Driver : IDriver
         return _connection.beginTransaction();
     }
 
-    
-    bool commitTransaction() {
+
+    function commitTransaction(): bool
+    {
         this.connect();
         if (!_connection.inTransaction()) {
             return false;
@@ -203,8 +202,9 @@ abstract class Driver : IDriver
         return _connection.commit();
     }
 
-    
-    bool rollbackTransaction() {
+
+    bool rollbackTransaction()
+    {
         this.connect();
         if (!_connection.inTransaction()) {
             return false;
@@ -215,15 +215,18 @@ abstract class Driver : IDriver
 
     /**
      * Returns whether a transaction is active for connection.
+     *
      */
-    bool inTransaction() {
+    bool inTransaction(): bool
+    {
         this.connect();
 
         return _connection.inTransaction();
     }
 
-    
-    bool supportsSavePoints() {
+
+    bool supportsSavePoints()
+    {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_SAVEPOINT);
@@ -233,94 +236,97 @@ abstract class Driver : IDriver
      * Returns true if the server supports common table expressions.
      *
      * @return bool
-     * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
+     * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_QUOTE)` instead
      */
-    bool supportsCTEs() {
+    bool supportsCTEs()
+    {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_CTE);
     }
 
-    
-    string quote(myValue, myType = PDO::PARAM_STR) {
+
+    string quote($value, $type = PDO::PARAM_STR) {
         this.connect();
 
-        return _connection.quote((string)myValue, myType);
+        return _connection.quote((string)$value, $type);
     }
 
     /**
      * Checks if the driver supports quoting, as PDO_ODBC does not support it.
      *
      * @return bool
-     * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
+     * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_QUOTE)` instead
      */
-    bool supportsQuoting() {
+    bool supportsQuoting()
+    {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_QUOTE);
     }
 
-    
-    abstract Closure queryTranslator(string myType);
 
-    
+    abstract function queryTranslator(string $type): Closure;
+
+
     abstract function schemaDialect(): SchemaDialect;
 
-    
-    abstract string quoteIdentifier(string myIdentifier);
 
-    
-    string schemaValue(myValue) {
-        if (myValue is null) {
+    abstract string quoteIdentifier(string $identifier);
+
+
+    string schemaValue($value) {
+        if ($value == null) {
             return "NULL";
         }
-        if (myValue == false) {
+        if ($value == false) {
             return "FALSE";
         }
-        if (myValue == true) {
+        if ($value == true) {
             return "TRUE";
         }
-        if (is_float(myValue)) {
-            return str_replace(",", ".", (string)myValue);
+        if (is_float($value)) {
+            return str_replace(",", ".", (string)$value);
         }
         /** @psalm-suppress InvalidArgument */
         if (
             (
-                is_int(myValue) ||
-                myValue == "0"
+                is_int($value) ||
+                $value == "0"
             ) ||
             (
-                is_numeric(myValue) &&
-                indexOf(myValue, ",") == false &&
-                substr(myValue, 0, 1) != "0" &&
-                indexOf(myValue, "e") == false
+                is_numeric($value) &&
+                strpos($value, ",") == false &&
+                substr($value, 0, 1) != "0" &&
+                strpos($value, "e") == false
             )
         ) {
-            return (string)myValue;
+            return (string)$value;
         }
 
-        return _connection.quote((string)myValue, PDO::PARAM_STR);
+        return _connection.quote((string)$value, PDO::PARAM_STR);
     }
 
-    
+
     string schema() {
         return _config["schema"];
     }
 
-    
-    function lastInsertId(Nullable!string myTable = null, Nullable!string column = null) {
+
+    function lastInsertId(?string $table = null, ?string $column = null) {
         this.connect();
 
         if (_connection instanceof PDO) {
-            return _connection.lastInsertId(myTable);
+            return _connection.lastInsertId($table);
         }
 
-        return _connection.lastInsertId(myTable);
+        return _connection.lastInsertId($table);
     }
 
-    
-    bool isConnected() {
-        if (_connection is null) {
+
+    bool isConnected()
+    {
+        if (_connection == null) {
             $connected = false;
         } else {
             try {
@@ -333,22 +339,23 @@ abstract class Driver : IDriver
         return $connected;
     }
 
-    
-    function enableAutoQuoting(bool myEnable = true) {
-        _autoQuoting = myEnable;
+
+    function enableAutoQuoting(bool $enable = true) {
+        _autoQuoting = $enable;
 
         return this;
     }
 
-    
+
     function disableAutoQuoting() {
         _autoQuoting = false;
 
         return this;
     }
 
-    
-    bool isAutoQuotingEnabled() {
+
+    bool isAutoQuotingEnabled()
+    {
         return _autoQuoting;
     }
 
@@ -357,9 +364,10 @@ abstract class Driver : IDriver
      *
      * Defaults to true for FEATURE_QUOTE and FEATURE_SAVEPOINT.
      *
-     * @param string feature Driver feature name
+     * @param string $feature Driver feature name
      */
-    bool supports(string feature) {
+    bool supports(string $feature): bool
+    {
         switch ($feature) {
             case static::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION:
             case static::FEATURE_QUOTE:
@@ -370,26 +378,32 @@ abstract class Driver : IDriver
         return false;
     }
 
-    array compileQuery(Query myQuery, ValueBinder aBinder) {
-        $processor = this.newCompiler();
-        $translator = this.queryTranslator(myQuery.type());
-        myQuery = $translator(myQuery);
 
-        return [myQuery, $processor.compile(myQuery, $binder)];
+    function compileQuery(Query $query, ValueBinder aBinder): array
+    {
+        $processor = this.newCompiler();
+        $translator = this.queryTranslator($query.type());
+        $query = $translator($query);
+
+        return [$query, $processor.compile($query, $binder)];
     }
 
-    QueryCompiler newCompiler() {
+
+    function newCompiler(): QueryCompiler
+    {
         return new QueryCompiler();
     }
 
-    TableSchema newTableSchema(string myTable, array $columns = []) {
-        myClassName = TableSchema::class;
+
+    function newTableSchema(string $table, array $columns = []): TableSchema
+    {
+        $className = TableSchema::class;
         if (isset(_config["tableSchema"])) {
-            /** @var class-string<uim.cake.databases.Schema\TableSchema> myClassName */
-            myClassName = _config["tableSchema"];
+            /** @var class-string<uim.cake.databases.Schema\TableSchema> $className */
+            $className = _config["tableSchema"];
         }
 
-        return new myClassName(myTable, $columns);
+        return new $className($table, $columns);
     }
 
     /**
@@ -398,21 +412,24 @@ abstract class Driver : IDriver
      *
      * @return int|null Maximum alias length or null if no limit
      */
-    Nullable!int getMaxAliasLength() {
+    function getMaxAliasLength(): ?int
+    {
         return static::MAX_ALIAS_LENGTH;
     }
 
     /**
      * Returns the number of connection retry attempts made.
+     *
      */
-    int getConnectRetries() {
+    int getConnectRetries(): int
+    {
         return this.connectRetries;
     }
 
     /**
      * Destructor
      */
-    auto __destruct() {
+    function __destruct() {
         /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
         _connection = null;
     }
@@ -423,9 +440,10 @@ abstract class Driver : IDriver
      *
      * @return array<string, mixed>
      */
-    array __debugInfo() {
-      return [
-          "connected":_connection  !is null,
-      ];
+    function __debugInfo(): array
+    {
+        return [
+            "connected": _connection != null,
+        ];
     }
 }
