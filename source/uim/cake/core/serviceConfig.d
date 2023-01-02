@@ -1,4 +1,4 @@
-module uim.cake.core;
+module uim.cake.core.serviceconfig;
 
 /**
  * Read-only wrapper for configuration data
@@ -7,26 +7,26 @@ module uim.cake.core;
  * a typehintable way for services to have application
  * configuration injected as arrays cannot be typehinted.
  */
-class ServiceConfig
-{
+class ServiceConfig {
     /**
      * Read a configuration key
      *
-     * @param string myPath The path to read.
-     * @param mixed $default The default value to use if myPath does not exist.
+     * @param string $path The path to read.
+     * @param mixed $default The default value to use if $path does not exist.
      * @return mixed The configuration data or $default value.
      */
-    auto get(string myPath, $default = null) {
-        return Configure::read(myPath, $default);
+    function get(string $path, $default = null) {
+        return Configure::read($path, $default);
     }
 
     /**
-     * Check if myPath exists and has a non-null value.
+     * Check if $path exists and has a non-null value.
      *
-     * @param string myPath The path to check.
+     * @param string $path The path to check.
      * @return bool True if the configuration data exists.
      */
-    bool has(string myPath) {
-        return Configure::check(myPath);
+    function has(string $path): bool
+    {
+        return Configure::check($path);
     }
 }

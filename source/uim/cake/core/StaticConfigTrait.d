@@ -51,54 +51,54 @@ trait StaticConfigTrait
      * Cache::setConfig($arrayOfConfig);
      * ```
      *
-     * @param array<string, mixed>|string myKey The name of the configuration, or an array of multiple configs.
-     * @param object|array<string, mixed>|null myConfig An array of name: configuration data for adapter.
+     * @param array<string, mixed>|string aKey The name of the configuration, or an array of multiple configs.
+     * @param object|array<string, mixed>|null $config An array of name: configuration data for adapter.
      * @throws \BadMethodCallException When trying to modify an existing config.
      * @throws \LogicException When trying to store an invalid structured config array.
      */
-    static void setConfig(myKey, myConfig = null) {
-        if (myConfig is null) {
-            if (!is_array(myKey)) {
+    static void setConfig($key, $config = null) {
+        if ($config == null) {
+            if (!is_array($key)) {
                 throw new LogicException("If config is null, key must be an array.");
             }
-            foreach (myKey as myName: $settings) {
-                static::setConfig(myName, $settings);
+            foreach ($key as $name: $settings) {
+                static::setConfig($name, $settings);
             }
 
             return;
         }
 
-        if (isset(static::$_config[myKey])) {
+        if (isset(static::$_config[$key])) {
             /** @psalm-suppress PossiblyInvalidArgument */
-            throw new BadMethodCallException(sprintf("Cannot reconfigure existing key "%s"", myKey));
+            throw new BadMethodCallException(sprintf("Cannot reconfigure existing key "%s"", $key));
         }
 
-        if (is_object(myConfig)) {
-            myConfig = ["className":myConfig];
+        if (is_object($config)) {
+            $config = ["className": $config];
         }
 
-        if (isset(myConfig["url"])) {
-            $parsed = static::parseDsn(myConfig["url"]);
-            unset(myConfig["url"]);
-            myConfig = $parsed + myConfig;
+        if (isset($config["url"])) {
+            $parsed = static::parseDsn($config["url"]);
+            unset($config["url"]);
+            $config = $parsed + $config;
         }
 
-        if (isset(myConfig["engine"]) && empty(myConfig["className"])) {
-            myConfig["className"] = myConfig["engine"];
-            unset(myConfig["engine"]);
+        if (isset($config["engine"]) && empty($config["className"])) {
+            $config["className"] = $config["engine"];
+            unset($config["engine"]);
         }
         /** @psalm-suppress InvalidPropertyAssignmentValue */
-        static::$_config[myKey] = myConfig;
+        static::$_config[$key] = $config;
     }
 
     /**
      * Reads existing configuration.
      *
-     * @param string myKey The name of the configuration.
+     * @param string aKey The name of the configuration.
      * @return mixed|null Configuration data at the named key or null if the key does not exist.
      */
-    static auto getConfig(string myKey) {
-        return static::$_config[myKey] ?? null;
+    static function getConfig(string aKey) {
+        return static::$_config[$key] ?? null;
     }
 
     /**
@@ -106,16 +106,16 @@ trait StaticConfigTrait
      *
      * The config value for this key must exist, it can never be null.
      *
-     * @param string myKey The name of the configuration.
+     * @param string aKey The name of the configuration.
      * @return mixed Configuration data at the named key.
      * @throws \InvalidArgumentException If value does not exist.
      */
-    static auto getConfigOrFail(string myKey) {
-        if (!isset(static::$_config[myKey])) {
-            throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", myKey));
+    static function getConfigOrFail(string aKey) {
+        if (!isset(static::$_config[$key])) {
+            throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", $key));
         }
 
-        return static::$_config[myKey];
+        return static::$_config[$key];
     }
 
     /**
@@ -127,32 +127,35 @@ trait StaticConfigTrait
      * If the implementing objects supports a `$_registry` object the named configuration
      * will also be unloaded from the registry.
      *
-     * @param string myConfig An existing configuration you wish to remove.
+     * @param string $config An existing configuration you wish to remove.
      * @return bool Success of the removal, returns false when the config does not exist.
      */
-    static bool drop(string myConfig) {
-        if (!isset(static::$_config[myConfig])) {
+    static function drop(string $config): bool
+    {
+        if (!isset(static::$_config[$config])) {
             return false;
         }
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (isset(static::$_registry)) {
-            static::$_registry.unload(myConfig);
+            static::$_registry.unload($config);
         }
-        unset(static::$_config[myConfig]);
+        unset(static::$_config[$config]);
 
         return true;
     }
 
     /**
      * Returns an array containing the named configurations
-     * @return Array of configurations.
+     *
+     * @return array<string> Array of configurations.
      */
-    static string[] configured() {
-        myConfigurations = array_keys(static::$_config);
+    static string[] configured(): array
+    {
+        $configurations = array_keys(static::$_config);
 
-        return array_map(function (myKey) {
-            return (string)myKey;
-        }, myConfigurations);
+        return array_map(function ($key) {
+            return (string)$key;
+        }, $configurations);
     }
 
     /**
@@ -163,19 +166,19 @@ trait StaticConfigTrait
      *
      * ```
      * $dsn = "mysql://user:pass@localhost/database?";
-     * myConfig = ConnectionManager::parseDsn($dsn);
+     * $config = ConnectionManager::parseDsn($dsn);
      *
      * $dsn = "Cake\logs.Engine\FileLog://?types=notice,info,debug&file=debug&path=LOGS";
-     * myConfig = Log::parseDsn($dsn);
+     * $config = Log::parseDsn($dsn);
      *
      * $dsn = "smtp://user:secret@localhost:25?timeout=30&client=null&tls=null";
-     * myConfig = Email::parseDsn($dsn);
+     * $config = Email::parseDsn($dsn);
      *
      * $dsn = "file:///?className=\My\Cache\Engine\FileEngine";
-     * myConfig = Cache::parseDsn($dsn);
+     * $config = Cache::parseDsn($dsn);
      *
      * $dsn = "File://?prefix=myapp_cake_core_&serialize=true&duration=+2 minutes&path=/tmp/persistent/";
-     * myConfig = Cache::parseDsn($dsn);
+     * $config = Cache::parseDsn($dsn);
      * ```
      *
      * For all classes, the value of `scheme` is set as the value of both the `className`
@@ -183,11 +186,11 @@ trait StaticConfigTrait
      *
      * Note that querystring arguments are also parsed and set as values in the returned configuration.
      *
-     * @param string dsn The DSN string to convert to a configuration array
+     * @param string $dsn The DSN string to convert to a configuration array
      * @return array<string, mixed> The configuration array to be stored after parsing the DSN
      * @throws \InvalidArgumentException If not passed a string, or passed an invalid string
      */
-    static function parseDsn(string dsn): array
+    static function parseDsn(string $dsn): array
     {
         if (empty($dsn)) {
             return [];
@@ -235,7 +238,7 @@ REGEXP;
         foreach ($parsed as $k: $v) {
             if (is_int($k)) {
                 unset($parsed[$k]);
-            } elseif (indexOf($k, "_") == 0) {
+            } elseif (strpos($k, "_") == 0) {
                 $exists[substr($k, 1)] = ($v != "");
                 unset($parsed[$k]);
             } elseif ($v == "" && !$exists[$k]) {
@@ -243,34 +246,34 @@ REGEXP;
             }
         }
 
-        myQuery = "";
+        $query = "";
 
         if (isset($parsed["query"])) {
-            myQuery = $parsed["query"];
+            $query = $parsed["query"];
             unset($parsed["query"]);
         }
 
-        parse_str(myQuery, myQueryArgs);
+        parse_str($query, $queryArgs);
 
-        foreach (myQueryArgs as myKey: myValue) {
-            if (myValue == "true") {
-                myQueryArgs[myKey] = true;
-            } elseif (myValue == "false") {
-                myQueryArgs[myKey] = false;
-            } elseif (myValue == "null") {
-                myQueryArgs[myKey] = null;
+        foreach ($queryArgs as $key: $value) {
+            if ($value == "true") {
+                $queryArgs[$key] = true;
+            } elseif ($value == "false") {
+                $queryArgs[$key] = false;
+            } elseif ($value == "null") {
+                $queryArgs[$key] = null;
             }
         }
 
-        $parsed = myQueryArgs + $parsed;
+        $parsed = $queryArgs + $parsed;
 
         if (empty($parsed["className"])) {
-            myClassMap = static::getDsnClassMap();
+            $classMap = static::getDsnClassMap();
 
             $parsed["className"] = $parsed["scheme"];
-            if (isset(myClassMap[$parsed["scheme"]])) {
+            if (isset($classMap[$parsed["scheme"]])) {
                 /** @psalm-suppress PossiblyNullArrayOffset */
-                $parsed["className"] = myClassMap[$parsed["scheme"]];
+                $parsed["className"] = $classMap[$parsed["scheme"]];
             }
         }
 
@@ -281,6 +284,7 @@ REGEXP;
      * Updates the DSN class map for this class.
      *
      * @param array<string, string> $map Additions/edits to the class map to apply.
+     * @return void
      * @psalm-param array<string, class-string> $map
      */
     static void setDsnClassMap(array $map) {
@@ -289,7 +293,6 @@ REGEXP;
 
     /**
      * Returns the DSN class map for this class.
-     * @psalm-return array<string, class-string>
      */
     static STRINGAA getDsnClassMap() {
         return static::$_dsnClassMap;

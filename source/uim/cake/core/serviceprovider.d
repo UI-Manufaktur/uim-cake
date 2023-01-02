@@ -1,6 +1,6 @@
 module uim.cake.core;
 
-use League\Container\IDefinitionContainer;
+use League\Container\DefinitionIContainer;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
 use RuntimeException;
@@ -12,17 +12,16 @@ use RuntimeException;
  * to organize your application"s dependencies. They also help
  * improve performance of applications with many services by
  * allowing service registration to be deferred until services are needed.
- *
- * @experimental This class" interface is not stable and may change
- *   in future minor releases.
  */
 abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProviderInterface
 {
     /**
      * List of ids of services this provider provides.
+     *
+     * @var array<string>
      * @see ServiceProvider::provides()
      */
-    protected string[] $provides = [];
+    protected $provides = [];
 
     /**
      * Get the container.
@@ -32,27 +31,27 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      *
      * @return uim.cake.Core\IContainer
      */
-    IDefinitionContainer getContainer() {
-        myContainer = super.getContainer();
+    function getContainer(): DefinitionIContainer
+    {
+        $container = super.getContainer();
 
-        if (!(myContainer instanceof IContainer)) {
-            myMessage = sprintf(
+        if (!($container instanceof IContainer)) {
+            $message = sprintf(
                 "Unexpected container type. Expected `%s` got `%s` instead.",
                 IContainer::class,
-                getTypeName(myContainer)
+                getTypeName($container)
             );
-            throw new RuntimeException(myMessage);
+            throw new RuntimeException($message);
         }
 
-        return myContainer;
+        return $container;
     }
 
     /**
      * Delegate to the bootstrap() method
      *
      * This method wraps the league/container function so users
-     * only need to use the UIM bootstrap() interface.
-     *
+     * only need to use the CakePHP bootstrap() interface.
      */
     void boot() {
         this.bootstrap(this.getContainer());
@@ -66,17 +65,16 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * files or do any other work when the service provider is added to the
      * container.
      *
-     * @param uim.cake.Core\IContainer myContainer The container to add services to.
+     * @param uim.cake.Core\IContainer $container The container to add services to.
      */
-    void bootstrap(IContainer myContainer) {
+    void bootstrap(IContainer $container) {
     }
 
     /**
      * Call the abstract services() method.
      *
      * This method primarily exists as a shim between the interface
-     * that league/container has and the one we want to offer in UIM.
-     *
+     * that league/container has and the one we want to offer in CakePHP.
      */
     void register() {
         this.services(this.getContainer());
@@ -89,9 +87,11 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * Every service that is registered via this service provider must have an
      * alias added to this array or it will be ignored.
      *
-     * @param string id Identifier.
+     * @param string $id Identifier.
+     * @return bool
      */
-    bool provides(string id) {
+    function provides(string $id): bool
+    {
         return in_array($id, this.provides, true);
     }
 
@@ -101,7 +101,8 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * All services registered in this method should also be included in the $provides
      * property so that services can be located.
      *
-     * @param uim.cake.Core\IContainer myContainer The container to add services to.
+     * @param uim.cake.Core\IContainer $container The container to add services to.
+     * @return void
      */
-    abstract void services(IContainer myContainer);
+    abstract function services(IContainer $container): void;
 }
