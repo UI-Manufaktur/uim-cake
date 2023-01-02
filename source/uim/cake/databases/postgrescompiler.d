@@ -7,27 +7,35 @@
 @safe:
 import uim.cake;
 
+module uim.cake.databases;
+
+import uim.cake.databases.expressions.FunctionExpression;
+
 /**
  * Responsible for compiling a Query object into its SQL representation
  * for Postgres
  *
  * @internal
  */
-class PostgresCompiler : QueryCompiler {
+class PostgresCompiler : QueryCompiler
+{
     /**
      * Always quote aliases in SELECT clause.
+     *
      * Postgres auto converts unquoted identifiers to lower case.
+     *
      */
     protected bool $_quotedSelectAliases = true;
 
-    protected _templates = [
-        "delete":"DELETE",
-        "where":" WHERE %s",
-        "group":" GROUP BY %s",
-        "order":" %s",
-        "limit":" LIMIT %s",
-        "offset":" OFFSET %s",
-        "epilog":" %s",
+
+    protected $_templates = [
+        "delete": "DELETE",
+        "where": " WHERE %s",
+        "group": " GROUP BY %s",
+        "order": " %s",
+        "limit": " LIMIT %s",
+        "offset": " OFFSET %s",
+        "epilog": " %s",
     ];
 
     /**
@@ -36,12 +44,11 @@ class PostgresCompiler : QueryCompiler {
      * converting expression objects to string.
      *
      * @param array $parts list of fields to be transformed to string
-     * @param uim.cake.databases.Query myQuery The query that is being compiled
+     * @param uim.cake.databases.Query $query The query that is being compiled
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
-     * @return string
      */
-    protected auto _buildHavingPart($parts, myQuery, $binder) {
-        $selectParts = myQuery.clause("select");
+    protected string _buildHavingPart($parts, $query, $binder) {
+        $selectParts = $query.clause("select");
 
         foreach ($selectParts as $selectKey: $selectPart) {
             if (!$selectPart instanceof FunctionExpression) {

@@ -7,8 +7,9 @@ trait TypedResultTrait
 {
     /**
      * The type name this expression will return when executed
+     *
      */
-    protected string _returnType = "string";
+    protected string $_returnType = "string";
 
     /**
      * Gets the type of the value this object will generate.
@@ -20,11 +21,11 @@ trait TypedResultTrait
     /**
      * Sets the type of the value this object will generate.
      *
-     * @param string myType The name of the type that is to be returned
+     * @param string $type The name of the type that is to be returned
      * @return this
      */
-    auto setReturnType(string myType) {
-        _returnType = myType;
+    function setReturnType(string $type) {
+        _returnType = $type;
 
         return this;
     }
