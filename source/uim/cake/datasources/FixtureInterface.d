@@ -3,7 +3,7 @@ module uim.cake.Datasource;
 /**
  * Defines the interface that testing fixtures use.
  */
-interface FixtureInterface
+interface IFixture
 {
     /**
      * Create the fixture schema/mapping/definition

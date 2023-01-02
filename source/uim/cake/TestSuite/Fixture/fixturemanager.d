@@ -7,7 +7,7 @@ import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;
 import uim.cake.datasources.IConnection;
 import uim.cake.datasources.ConnectionManager;
-import uim.cake.datasources.FixtureInterface;
+import uim.cake.datasources.IFixture;
 import uim.cake.TestSuite\TestCase;
 use PDOException;
 use RuntimeException;
@@ -27,21 +27,21 @@ class FixtureManager
     /**
      * Holds the fixture classes that where instantiated
      *
-     * @var array<uim.cake.Datasource\FixtureInterface>
+     * @var array<uim.cake.Datasource\IFixture>
      */
     protected $_loaded = [];
 
     /**
      * Holds the fixture classes that where instantiated indexed by class name
      *
-     * @var array<uim.cake.Datasource\FixtureInterface>
+     * @var array<uim.cake.Datasource\IFixture>
      */
     protected $_fixtureMap = [];
 
     /**
      * A map of connection names and the fixture currently in it.
      *
-     * @var array<string, array<uim.cake.Datasource\FixtureInterface>>
+     * @var array<string, array<uim.cake.Datasource\IFixture>>
      */
     protected $_insertionMap = [];
 
@@ -83,7 +83,7 @@ class FixtureManager
     }
 
     /**
-     * @return uim.cake.Datasource\FixtureInterface[]
+     * @return uim.cake.Datasource\IFixture[]
      */
     function loaded(): array
     {
@@ -196,10 +196,10 @@ class FixtureManager
                     $additionalPath,
                     $name ~ "Fixture",
                 ];
-                /** @psalm-var class-string<uim.cake.Datasource\FixtureInterface> */
+                /** @psalm-var class-string<uim.cake.Datasource\IFixture> */
                 $className = implode("\\", array_filter($nameSegments));
             } else {
-                /** @psalm-var class-string<uim.cake.Datasource\FixtureInterface> */
+                /** @psalm-var class-string<uim.cake.Datasource\IFixture> */
                 $className = $fixture;
                 /** @psalm-suppress PossiblyFalseArgument */
                 $name = preg_replace("/Fixture\z/", "", substr(strrchr($fixture, "\\"), 1));
@@ -223,13 +223,13 @@ class FixtureManager
     /**
      * Runs the drop and create commands on the fixtures if necessary.
      *
-     * @param uim.cake.Datasource\FixtureInterface $fixture the fixture object to create
+     * @param uim.cake.Datasource\IFixture $fixture the fixture object to create
      * @param uim.cake.Datasource\IConnection $db The Connection object instance to use
      * @param array<string> $sources The existing tables in the datasource.
      * @param bool $drop whether drop the fixture if it is already created or not
      */
     protected void _setupTable(
-        FixtureInterface $fixture,
+        IFixture $fixture,
         IConnection $db,
         array $sources,
         bool $drop = true
@@ -271,7 +271,7 @@ class FixtureManager
 
         try {
             $createTables = function (IConnection $db, array $fixtures) use ($test): void {
-                /** @var array<uim.cake.Datasource\FixtureInterface> $fixtures */
+                /** @var array<uim.cake.Datasource\IFixture> $fixtures */
                 $tables = $db.getSchemaCollection().listTables();
                 $configName = $db.configName();
                 _insertionMap[$configName] = _insertionMap[$configName] ?? [];
@@ -466,7 +466,7 @@ class FixtureManager
     {
         $shutdown = function (IConnection $db, array $fixtures): void {
             $connection = $db.configName();
-            /** @var uim.cake.datasources.FixtureInterface $fixture */
+            /** @var uim.cake.datasources.IFixture $fixture */
             foreach ($fixtures as $fixture) {
                 if (this.isFixtureSetup($connection, $fixture)) {
                     $fixture.drop($db);
@@ -482,9 +482,9 @@ class FixtureManager
      * Check whether a fixture has been inserted in a given connection name.
      *
      * @param string $connection The connection name.
-     * @param uim.cake.Datasource\FixtureInterface $fixture The fixture to check.
+     * @param uim.cake.Datasource\IFixture $fixture The fixture to check.
      */
-    bool isFixtureSetup(string $connection, FixtureInterface $fixture): bool
+    bool isFixtureSetup(string $connection, IFixture $fixture): bool
     {
         return isset(_insertionMap[$connection]) && in_array($fixture, _insertionMap[$connection], true);
     }

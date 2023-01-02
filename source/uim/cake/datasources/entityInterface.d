@@ -3,6 +3,11 @@ module uim.cake.datasources;
 @safe:
 import uim.cake;
 
+module uim.cake.Datasource;
+
+use ArrayAccess;
+use JsonSerializable;
+
 /**
  * Describes the methods that any class representing a data storage should
  * comply with.
@@ -15,110 +20,122 @@ interface IEntity : ArrayAccess, JsonSerializable
     /**
      * Sets hidden fields.
      *
-     * @param myFields An array of fields to hide from array exports.
-     * @param bool myMerge Merge the new fields with the existing. By default false.
+     * @param array<string> $fields An array of fields to hide from array exports.
+     * @param bool $merge Merge the new fields with the existing. By default false.
      * @return this
      */
-    auto setHidden(string[] myFields, bool myMerge = false);
+    function setHidden(array $fields, bool $merge = false);
 
     /**
      * Gets the hidden fields.
+     *
+     * @return array<string>
      */
-    string[] getHidden();
+    function getHidden(): array;
 
     /**
      * Sets the virtual fields on this entity.
      *
-     * @param myFields An array of fields to treat as virtual.
-     * @param bool myMerge Merge the new fields with the existing. By default false.
+     * @param array<string> $fields An array of fields to treat as virtual.
+     * @param bool $merge Merge the new fields with the existing. By default false.
      * @return this
      */
-    auto setVirtual(string[] myFields, bool myMerge = false);
+    function setVirtual(array $fields, bool $merge = false);
 
-    // Gets the virtual fields on this entity.aaa
-    string[] getVirtual();
+    /**
+     * Gets the virtual fields on this entity.
+     *
+     * @return array<string>
+     */
+    function getVirtual(): array;
 
     /**
      * Sets the dirty status of a single field.
      *
-     * @param string myField the field to set or check status for
+     * @param string $field the field to set or check status for
      * @param bool $isDirty true means the field was changed, false means
      * it was not changed. Default true.
      * @return this
      */
-    auto setDirty(string myField, bool $isDirty = true);
+    function setDirty(string $field, bool $isDirty = true);
 
     /**
      * Checks if the entity is dirty or if a single field of it is dirty.
      *
-     * @param string|null myField The field to check the status for. Null for the whole entity.
+     * @param string|null $field The field to check the status for. Null for the whole entity.
      * @return bool Whether the field was changed or not
      */
-    bool isDirty(Nullable!string myField = null);
+    function isDirty(?string $field = null): bool;
 
-    // Gets the dirty fields.
-    string[] getDirty();
+    /**
+     * Gets the dirty fields.
+     *
+     * @return array<string>
+     */
+    function getDirty(): array;
 
     /**
      * Returns whether this entity has errors.
      *
      * @param bool $includeNested true will check nested entities for hasErrors()
      */
-    bool hasErrors(bool $includeNested = true);
+    bool hasErrors(bool $includeNested = true): bool;
 
-    // Returns all validation errors.
-    array getErrors();
+    /**
+     * Returns all validation errors.
+     */
+    array getErrors(): array;
 
     /**
      * Returns validation errors of a field
      *
-     * @param string myField Field name to get the errors from
+     * @param string $field Field name to get the errors from
      */
-    array getError(string myField);
+    array getError(string $field): array;
 
     /**
      * Sets error messages to the entity
      *
-     * @param array myErrors The array of errors to set.
-     * @param bool $overwrite Whether to overwrite pre-existing errors for myFields
+     * @param array $errors The array of errors to set.
+     * @param bool $overwrite Whether to overwrite pre-existing errors for $fields
      * @return this
      */
-    auto setErrors(array myErrors, bool $overwrite = false);
+    function setErrors(array $errors, bool $overwrite = false);
 
     /**
      * Sets errors for a single field
      *
-     * @param string myField The field to get errors for, or the array of errors to set.
-     * @param array|string myErrors The errors to be set for myField
-     * @param bool $overwrite Whether to overwrite pre-existing errors for myField
+     * @param string $field The field to get errors for, or the array of errors to set.
+     * @param array|string $errors The errors to be set for $field
+     * @param bool $overwrite Whether to overwrite pre-existing errors for $field
      * @return this
      */
-    auto setError(string myField, myErrors, bool $overwrite = false);
+    function setError(string $field, $errors, bool $overwrite = false);
 
     /**
      * Stores whether a field value can be changed or set in this entity.
      *
-     * @param array<string>|string myField single or list of fields to change its accessibility
+     * @param array<string>|string $field single or list of fields to change its accessibility
      * @param bool $set true marks the field as accessible, false will
      * mark it as protected.
      * @return this
      */
-    auto setAccess(myField, bool $set);
+    function setAccess($field, bool $set);
 
     /**
      * Checks if a field is accessible
      *
-     * @param string myField Field name to check
+     * @param string $field Field name to check
      */
-    bool isAccessible(string myField);
+    bool isAccessible(string $field): bool;
 
     /**
      * Sets the source alias
      *
-     * @param string myAlias the alias of the repository
+     * @param string $alias the alias of the repository
      * @return this
      */
-    auto setSource(string myAlias);
+    function setSource(string $alias);
 
     // Returns the alias of the repository from which this entity came from.
     string getSource();
@@ -127,67 +144,74 @@ interface IEntity : ArrayAccess, JsonSerializable
      * Returns an array with the requested original fields
      * stored in this entity, indexed by field name.
      *
-     * @param string[] myFields List of fields to be returned
+     * @param array<string> $fields List of fields to be returned
      */
-    array extractOriginal(string[] myFields);
+    array extractOriginal(array $fields): array;
 
     /**
      * Returns an array with only the original fields
      * stored in this entity, indexed by field name.
      *
-     * @param myFields List of fields to be returned
+     * @param array<string> $fields List of fields to be returned
      */
-    array extractOriginalChanged(string[] myFields);
+    array extractOriginalChanged(array $fields): array;
 
     /**
      * Sets one or multiple fields to the specified value
      *
-     * @param array<string, mixed>|string myField the name of field to set or a list of
+     * @param array<string, mixed>|string $field the name of field to set or a list of
      * fields with their respective values
-     * @param mixed myValue The value to set to the field or an array if the
-     * first argument is also an array, in which case will be treated as myOptions
-     * @param array<string, mixed> myOptions Options to be used for setting the field. Allowed option
+     * @param mixed $value The value to set to the field or an array if the
+     * first argument is also an array, in which case will be treated as $options
+     * @param array<string, mixed> $options Options to be used for setting the field. Allowed option
      * keys are `setter` and `guard`
      * @return this
      */
-    auto set(myField, myValue = null, array myOptions = []);
+    function set($field, $value = null, array $options = []);
 
     /**
      * Returns the value of a field by name
      *
-     * @param string myField the name of the field to retrieve
+     * @param string $field the name of the field to retrieve
      * @return mixed
      */
-    function &get(string myField);
+    function &get(string $field);
 
     /**
      * Returns the original value of a field.
      *
-     * @param string myField The name of the field.
+     * @param string $field The name of the field.
      * @return mixed
      */
-    auto getOriginal(string myField);
+    function getOriginal(string $field);
 
-    // Gets all original values of the entity.
-    array getOriginalValues();
+    /**
+     * Gets all original values of the entity.
+     */
+    array getOriginalValues(): array;
 
-    // Returns whether this entity contains a field named myField regardless of if it is empty.
-    // array<string>|string myField The field to check.
-    bool has(string[] myFields...);
+    /**
+     * Returns whether this entity contains a field named $field
+     * and is not set to null.
+     *
+     * @param array<string>|string $field The field to check.
+     */
+    bool has($field): bool;
 
     /**
      * Removes a field or list of fields from this entity
      *
-     * @param array<string>|string myField The field to unset.
+     * @param array<string>|string $field The field to unset.
      * @return this
      */
-    O unset(this O)(string[] myFields...);
+    function unset($field);
 
     /**
      * Get the list of visible fields.
-     * @return A list of fields that are "visible" in all representations.
+     *
+     * @return array<string> A list of fields that are "visible" in all representations.
      */
-    string[] getVisible();
+    string[] getVisible(): array;
 
     /**
      * Returns an array with all the visible fields set in this entity.
@@ -195,24 +219,23 @@ interface IEntity : ArrayAccess, JsonSerializable
      * *Note* hidden fields are not visible, and will not be output
      * by toArray().
      */
-    array toArray();
+    array toArray(): array;
 
     /**
      * Returns an array with the requested fields
      * stored in this entity, indexed by field name
      *
-     * @param myFields list of fields to be returned
+     * @param array<string> $fields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
-     * @return array
      */
-    array extract(string[] myFields, bool $onlyDirty = false);
+    array extract(array $fields, bool $onlyDirty = false): array;
 
     /**
      * Sets the entire entity as clean, which means that it will appear as
      * no fields being modified or added at all. This is an useful call
      * for an initial object hydration
      */
-    void clean();
+    void clean(): void;
 
     /**
      * Set the status of this entity.
@@ -223,11 +246,12 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param bool $new Indicate whether this entity has been persisted.
      * @return this
      */
-    auto setNew(bool $new);
+    function setNew(bool $new);
 
     /**
      * Returns whether this entity has already been persisted.
+     *
      * @return bool Whether the entity has been persisted.
      */
-    bool isNew();
+    function isNew(): bool;
 }

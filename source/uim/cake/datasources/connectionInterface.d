@@ -1,6 +1,6 @@
 module uim.cake.Datasource;
 
-use Psr\logs.LoggerAwareInterface;
+use Psr\logs.ILoggerAware;
 use Psr\logs.LoggerInterface;
 use Psr\SimpleCache\ICache;
 
@@ -24,7 +24,7 @@ use Psr\SimpleCache\ICache;
  * @method uim.cake.databases.StatementInterface query(string $sql) Executes a SQL statement and returns the Statement
  *   object as result. {@see uim.cake.databases.Connnection::query()}
  */
-interface IConnection : LoggerAwareInterface
+interface IConnection : ILoggerAware
 {
     /**
      * Gets the current logger object.
@@ -119,9 +119,6 @@ interface IConnection : LoggerAwareInterface
      */
     function disableQueryLogging();
 
-    /**
-     * Check if query logging is enabled.
-     *
-     */
+    // Check if query logging is enabled.
     bool isQueryLoggingEnabled(): bool;
 }

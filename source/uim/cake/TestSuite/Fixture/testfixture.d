@@ -9,7 +9,7 @@ import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;
 import uim.cake.datasources.IConnection;
 import uim.cake.datasources.ConnectionManager;
-import uim.cake.datasources.FixtureInterface;
+import uim.cake.datasources.IFixture;
 import uim.cake.logs.Log;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.utilities.Inflector;
@@ -19,7 +19,7 @@ use Exception;
  * Cake TestFixture is responsible for building and destroying tables to be used
  * during testing.
  */
-class TestFixture : IConstraints, FixtureInterface, TableSchemaAwareInterface
+class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
 {
     use LocatorAwareTrait;
 

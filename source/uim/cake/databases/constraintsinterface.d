@@ -14,7 +14,7 @@ import uim.cake.datasources.IConnection;
 /**
  * Defines the interface for a fixture that needs to manage constraints.
  *
- * If an implementation of `Cake\Datasource\FixtureInterface` also implements
+ * If an implementation of `Cake\Datasource\IFixture` also implements
  * this interface, the FixtureManager will use these methods to manage
  * a fixtures constraints.
  */
