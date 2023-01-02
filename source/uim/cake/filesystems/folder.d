@@ -952,8 +952,7 @@ class Folder
      * @param string $path Path to check
      * @return bool true if path ends with slash, false otherwise
      */
-    static function isSlashTerm(string $path): bool
-    {
+    static bool isSlashTerm(string $path) {
         $lastChar = $path[strlen($path) - 1];
 
         return $lastChar == "/" || $lastChar == "\\";

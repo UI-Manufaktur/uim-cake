@@ -3,6 +3,7 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/module uim.cake.logs;
+module uim.cake.Log;
 
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
@@ -21,12 +22,13 @@ class LogEngineRegistry : ObjectRegistry
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param string myClass Partial classname to resolve.
+     * @param string $class Partial classname to resolve.
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected Nullable!string _resolveClassName(string myClass) {
-        return App::className(myClass, "Log/Engine", "Log");
+    protected function _resolveClassName(string $class): ?string
+    {
+        return App::className($class, "Log/Engine", "Log");
     }
 
     /**
@@ -34,12 +36,14 @@ class LogEngineRegistry : ObjectRegistry
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param string myClass The classname that is missing.
-     * @param string|null myPlugin The plugin the logger is missing in.
+     * @param string $class The classname that is missing.
+     * @param string|null $plugin The plugin the logger is missing in.
+     * @return void
      * @throws \RuntimeException
      */
-    protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
-        throw new RuntimeException(sprintf("Could not load class %s", myClass));
+    protected function _throwMissingClassError(string $class, ?string $plugin): void
+    {
+        throw new RuntimeException(sprintf("Could not load class %s", $class));
     }
 
     /**
@@ -47,25 +51,25 @@ class LogEngineRegistry : ObjectRegistry
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param \Psr\logs.LoggerInterface|string myClass The classname or object to make.
-     * @param string myAlias The alias of the object.
-     * @param array<string, mixed> myConfig An array of settings to use for the logger.
+     * @param \Psr\logs.LoggerInterface|string $class The classname or object to make.
+     * @param string $alias The alias of the object.
+     * @param array<string, mixed> $config An array of settings to use for the logger.
      * @return \Psr\logs.LoggerInterface The constructed logger class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
-    protected auto _create(myClass, string myAlias, array myConfig): LoggerInterface
+    protected function _create($class, string $alias, array $config): LoggerInterface
     {
-        if (is_callable(myClass)) {
-            myClass = myClass(myAlias);
+        if (is_callable($class)) {
+            $class = $class($alias);
         }
 
-        if (is_object(myClass)) {
-            $instance = myClass;
+        if (is_object($class)) {
+            $instance = $class;
         }
 
         if (!isset($instance)) {
             /** @psalm-suppress UndefinedClass */
-            $instance = new myClass(myConfig);
+            $instance = new $class($config);
         }
 
         if ($instance instanceof LoggerInterface) {
@@ -82,11 +86,11 @@ class LogEngineRegistry : ObjectRegistry
     /**
      * Remove a single logger from the registry.
      *
-     * @param string myName The logger name.
+     * @param string aName The logger name.
      * @return this
      */
-    function unload(string myName) {
-        unset(_loaded[myName]);
+    function unload(string aName) {
+        unset(_loaded[$name]);
 
         return this;
     }

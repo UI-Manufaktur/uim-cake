@@ -4,8 +4,10 @@
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/module uim.cake.logs;
 
+module uim.cake.Log;
+
 import uim.cake.core.StaticConfigTrait;
-import uim.cake.logs.engines\BaseLog;
+import uim.cake.logs.Engine\BaseLog;
 use InvalidArgumentException;
 use Psr\logs.LoggerInterface;
 
@@ -21,11 +23,11 @@ use Psr\logs.LoggerInterface;
  * A sample configuration would look like:
  *
  * ```
- * Log::setConfig("my_log", ["className":"FileLog"]);
+ * Log::setConfig("my_log", ["className": "FileLog"]);
  * ```
  *
- * You can define the className as any fully moduled classname or use a short hand
- * classname to use loggers in the `App\logs.Engine` & `Cake\logs.Engine` modules.
+ * You can define the className as any fully namespaced classname or use a short hand
+ * classname to use loggers in the `App\logs.Engine` & `Cake\logs.Engine` namespaces.
  * You can also use plugin short hand to use logging classes provided by plugins.
  *
  * Log adapters are required to implement `Psr\logs.LoggerInterface`, and there is a
@@ -41,9 +43,9 @@ use Psr\logs.LoggerInterface;
  *
  * ```
  * Log::setConfig("default", [
- *     "className":"File",
- *     "path":LOGS,
- *     "levels":["error", "critical", "alert", "emergency"]
+ *     "className": "File",
+ *     "path": LOGS,
+ *     "levels": ["error", "critical", "alert", "emergency"]
  * ]);
  * ```
  *
@@ -59,8 +61,8 @@ use Psr\logs.LoggerInterface;
  *
  * ```
  * Log::setConfig("payments", [
- *     "className":"File",
- *     "scopes":["payment", "order"]
+ *     "className": "File",
+ *     "scopes": ["payment", "order"]
  * ]);
  * ```
  *
@@ -106,9 +108,9 @@ class Log
      * @psalm-var array<string, class-string>
      */
     protected static $_dsnClassMap = [
-        "console":Engine\ConsoleLog::class,
-        "file":Engine\FileLog::class,
-        "syslog":Engine\SyslogLog::class,
+        "console": Engine\ConsoleLog::class,
+        "file": Engine\FileLog::class,
+        "syslog": Engine\SyslogLog::class,
     ];
 
     /**
@@ -147,20 +149,23 @@ class Log
      * @var array<string, int>
      */
     protected static $_levelMap = [
-        "emergency":LOG_EMERG,
-        "alert":LOG_ALERT,
-        "critical":LOG_CRIT,
-        "error":LOG_ERR,
-        "warning":LOG_WARNING,
-        "notice":LOG_NOTICE,
-        "info":LOG_INFO,
-        "debug":LOG_DEBUG,
+        "emergency": LOG_EMERG,
+        "alert": LOG_ALERT,
+        "critical": LOG_CRIT,
+        "error": LOG_ERR,
+        "warning": LOG_WARNING,
+        "notice": LOG_NOTICE,
+        "info": LOG_INFO,
+        "debug": LOG_DEBUG,
     ];
 
     /**
      * Initializes registry and configurations
+     *
+     * @return void
      */
-    protected static void _init() {
+    protected static function _init(): void
+    {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(static::$_registry)) {
             static::$_registry = new LogEngineRegistry();
@@ -177,13 +182,14 @@ class Log
      *
      * @return void
      */
-    protected static void _loadConfig() {
-        foreach (static::$_config as myName: $properties) {
+    protected static function _loadConfig(): void
+    {
+        foreach (static::$_config as $name: $properties) {
             if (isset($properties["engine"])) {
                 $properties["className"] = $properties["engine"];
             }
-            if (!static::$_registry.has((string)myName)) {
-                static::$_registry.load((string)myName, $properties);
+            if (!static::$_registry.has((string)$name)) {
+                static::$_registry.load((string)$name, $properties);
             }
         }
     }
@@ -195,8 +201,10 @@ class Log
      *
      * Resets the configured logging adapters, as well as any custom logging levels.
      * This will also clear the configuration data.
+     *
      */
-    static void reset() {
+    static void reset(): void
+    {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (isset(static::$_registry)) {
             static::$_registry.reset();
@@ -211,9 +219,10 @@ class Log
      * Call this method to obtain current
      * level configuration.
      *
-     * @return Active log levels
+     * @return array<string> Active log levels
      */
-    static string[] levels() {
+    static function levels(): array
+    {
         return static::$_levels;
     }
 
@@ -252,27 +261,28 @@ class Log
      * Log::setConfig($arrayOfConfig);
      * ```
      *
-     * @param array<string, mixed>|string myKey The name of the logger config, or an array of multiple configs.
-     * @param array<string, mixed>|null myConfig An array of name: config data for adapter.
+     * @param array<string, mixed>|string aKey The name of the logger config, or an array of multiple configs.
+     * @param array<string, mixed>|null $config An array of name: config data for adapter.
      * @return void
      * @throws \BadMethodCallException When trying to modify an existing config.
      */
-    static void setConfig(myKey, myConfig = null) {
-        static::_setConfig(myKey, myConfig);
+    static function setConfig($key, $config = null): void
+    {
+        static::_setConfig($key, $config);
         static::$_dirtyConfig = true;
     }
 
     /**
      * Get a logging engine.
      *
-     * @param string myName Key name of a configured adapter to get.
+     * @param string aName Key name of a configured adapter to get.
      * @return \Psr\logs.LoggerInterface|null Instance of LoggerInterface or false if not found
      */
-    static function engine(string myName): ?LoggerInterface
+    static function engine(string aName): ?LoggerInterface
     {
         static::_init();
-        if (static::$_registry.{myName}) {
-            return static::$_registry.{myName};
+        if (static::$_registry.{$name}) {
+            return static::$_registry.{$name};
         }
 
         return null;
@@ -280,7 +290,7 @@ class Log
 
     /**
      * Writes the given message and type to all the configured log adapters.
-     * Configured adapters are passed both the $level and myMessage variables. $level
+     * Configured adapters are passed both the $level and $message variables. $level
      * is one of the following strings/values.
      *
      * ### Levels:
@@ -308,7 +318,7 @@ class Log
      * This allows you to handle messages differently based on application section/feature.
      *
      * ```
-     * Log::write("warning", "Payment failed", ["scope":"payment"]);
+     * Log::write("warning", "Payment failed", ["scope": "payment"]);
      * ```
      *
      * When configuring loggers you can configure the scopes a particular logger will handle.
@@ -323,8 +333,8 @@ class Log
      *
      * @param string|int $level The severity level of the message being written.
      *    The value must be an integer or string matching a known level.
-     * @param string myMessage Message content to log
-     * @param array|string context Additional data to be used for logging the message.
+     * @param string $message Message content to log
+     * @param array|string $context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
@@ -332,7 +342,8 @@ class Log
      * @return bool Success
      * @throws \InvalidArgumentException If invalid level is passed.
      */
-    static bool write($level, string myMessage, $context = []) {
+    static function write($level, string $message, $context = []): bool
+    {
         static::_init();
         if (is_int($level) && in_array($level, static::$_levelMap, true)) {
             $level = array_search($level, static::$_levelMap, true);
@@ -346,9 +357,9 @@ class Log
         $logged = false;
         $context = (array)$context;
         if (isset($context[0])) {
-            $context = ["scope":$context];
+            $context = ["scope": $context];
         }
-        $context += ["scope":[]];
+        $context += ["scope": []];
 
         foreach (static::$_registry.loaded() as $streamName) {
             $logger = static::$_registry.{$streamName};
@@ -358,7 +369,7 @@ class Log
                 $levels = $logger.levels();
                 $scopes = $logger.scopes();
             }
-            if ($scopes is null) {
+            if ($scopes == null) {
                 $scopes = [];
             }
 
@@ -367,7 +378,7 @@ class Log
                 is_array($scopes) && array_intersect((array)$context["scope"], $scopes);
 
             if ($correctLevel && $inScope) {
-                $logger.log($level, myMessage, $context);
+                $logger.log($level, $message, $context);
                 $logged = true;
             }
         }
@@ -378,120 +389,128 @@ class Log
     /**
      * Convenience method to log emergency messages
      *
-     * @param string myMessage log message
-     * @param array|string context Additional data to be used for logging the message.
+     * @param string $message log message
+     * @param array|string $context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
      *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool emergency(string myMessage, $context = []) {
-        return static::write(__FUNCTION__, myMessage, $context);
+    static function emergency(string $message, $context = []): bool
+    {
+        return static::write(__FUNCTION__, $message, $context);
     }
 
     /**
      * Convenience method to log alert messages
      *
-     * @param string myMessage log message
-     * @param array|string context Additional data to be used for logging the message.
+     * @param string $message log message
+     * @param array|string $context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
      *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool alert(string myMessage, $context = []) {
-        return static::write(__FUNCTION__, myMessage, $context);
+    static function alert(string $message, $context = []): bool
+    {
+        return static::write(__FUNCTION__, $message, $context);
     }
 
     /**
      * Convenience method to log critical messages
      *
-     * @param string myMessage log message
-     * @param array|string context Additional data to be used for logging the message.
+     * @param string $message log message
+     * @param array|string $context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
      *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool critical(string myMessage, $context = []) {
-        return static::write(__FUNCTION__, myMessage, $context);
+    static function critical(string $message, $context = []): bool
+    {
+        return static::write(__FUNCTION__, $message, $context);
     }
 
     /**
      * Convenience method to log error messages
      *
-     * @param string myMessage log message
-     * @param array|string context Additional data to be used for logging the message.
+     * @param string $message log message
+     * @param array|string $context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
      *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool error(string myMessage, $context = []) {
-        return static::write(__FUNCTION__, myMessage, $context);
+    static function error(string $message, $context = []): bool
+    {
+        return static::write(__FUNCTION__, $message, $context);
     }
 
     /**
      * Convenience method to log warning messages
      *
-     * @param string myMessage log message
-     * @param array|string context Additional data to be used for logging the message.
+     * @param string $message log message
+     * @param array|string $context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
      *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool warning(string myMessage, $context = []) {
-        return static::write(__FUNCTION__, myMessage, $context);
+    static function warning(string $message, $context = []): bool
+    {
+        return static::write(__FUNCTION__, $message, $context);
     }
 
     /**
      * Convenience method to log notice messages
      *
-     * @param string myMessage log message
-     * @param array|string context Additional data to be used for logging the message.
+     * @param string $message log message
+     * @param array|string $context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
      *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool notice(string myMessage, $context = []) {
-        return static::write(__FUNCTION__, myMessage, $context);
+    static function notice(string $message, $context = []): bool
+    {
+        return static::write(__FUNCTION__, $message, $context);
     }
 
     /**
      * Convenience method to log debug messages
      *
-     * @param string myMessage log message
-     * @param array|string context Additional data to be used for logging the message.
+     * @param string $message log message
+     * @param array|string $context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically index array is passed, it
      *  will be treated as the `scope` key.
      *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool debug(string myMessage, $context = []) {
-        return static::write(__FUNCTION__, myMessage, $context);
+    static function debug(string $message, $context = []): bool
+    {
+        return static::write(__FUNCTION__, $message, $context);
     }
 
     /**
      * Convenience method to log info messages
      *
-     * @param string myMessage log message
-     * @param array|string context Additional data to be used for logging the message.
+     * @param string $message log message
+     * @param array|string $context Additional data to be used for logging the message.
      *  The special `scope` key can be passed to be used for further filtering of the
      *  log engines to be used. If a string or a numerically indexed array is passed, it
      *  will be treated as the `scope` key.
      *  See {@link uim.cake.logs.Log::setConfig()} for more information on logging scopes.
      * @return bool Success
      */
-    static bool info(string myMessage, $context = []) {
-        return static::write(__FUNCTION__, myMessage, $context);
+    static function info(string $message, $context = []): bool
+    {
+        return static::write(__FUNCTION__, $message, $context);
     }
 }
