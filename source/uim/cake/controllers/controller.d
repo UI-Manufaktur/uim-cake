@@ -3,6 +3,37 @@ module uim.cake.controllers;
 @safe:
 import uim.cake;
 
+module uim.cake.Controller;
+
+import uim.cake.controllers.exceptions.MissingActionException;
+import uim.cake.core.App;
+import uim.cake.datasources.ModelAwareTrait;
+import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
+import uim.cake.datasources.Paging\NumericPaginator;
+import uim.cake.datasources.Paging\PaginatorInterface;
+import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.EventDispatcherTrait;
+import uim.cake.events.EventInterface;
+import uim.cake.events.IEventListener;
+import uim.cake.events.IEventManager;
+import uim.cake.http.ContentTypeNegotiation;
+import uim.cake.http.exceptions.NotFoundException;
+import uim.cake.http.Response;
+import uim.cake.http.ServerRequest;
+import uim.cake.logs.LogTrait;
+import uim.cake.orm.locators.LocatorAwareTrait;
+import uim.cake.routings.Router;
+import uim.cake.View\View;
+import uim.cake.View\ViewVarsTrait;
+use Closure;
+use InvalidArgumentException;
+use Psr\Http\messages.IResponse;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionMethod;
+use RuntimeException;
+use UnexpectedValueException;
+
 /**
  * Application controller class for organization of business logic.
  * Provides basic functionality, such as rendering views inside layouts,
@@ -29,29 +60,30 @@ import uim.cake;
  *
  * ### Life cycle callbacks
  *
- * UIM fires a number of life cycle callbacks during each request.
+ * CakePHP fires a number of life cycle callbacks during each request.
  * By implementing a method you can receive the related events. The available
  * callbacks are:
  *
- * - `beforeFilter(IEvent myEvent)`
+ * - `beforeFilter(IEvent $event)`
  *   Called before each action. This is a good place to do general logic that
  *   applies to all actions.
- * - `beforeRender(IEvent myEvent)`
+ * - `beforeRender(IEvent $event)`
  *   Called before the view is rendered.
- * - `beforeRedirect(IEvent myEvent, myUrl, Response $response)`
+ * - `beforeRedirect(IEvent $event, $url, Response $response)`
  *    Called before a redirect is done.
- * - `afterFilter(IEvent myEvent)`
+ * - `afterFilter(IEvent $event)`
  *   Called after each action is complete and after the view is rendered.
  *
  * @property uim.cake.Controller\Component\FlashComponent $Flash
  * @property uim.cake.Controller\Component\FormProtectionComponent $FormProtection
  * @property uim.cake.Controller\Component\PaginatorComponent $Paginator
- * @property uim.cake.Controller\Component\RequestHandlerComponent myRequestHandler
+ * @property uim.cake.Controller\Component\RequestHandlerComponent $RequestHandler
  * @property uim.cake.Controller\Component\SecurityComponent $Security
  * @property uim.cake.Controller\Component\AuthComponent $Auth
- * @link https://book.UIM.org/4/en/controllers.html
+ * @link https://book.cakephp.org/4/en/controllers.html
  */
-class Controller : IEventListener, IEventDispatcher
+#[\AllowDynamicProperties]
+class Controller : IEventListener, EventDispatcherInterface
 {
     use EventDispatcherTrait;
     use LocatorAwareTrait;
@@ -62,9 +94,10 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * The name of this controller. Controller names are plural, named after the model they manipulate.
      *
-     * Set automatically using conventions in Controller::this().
+     * Set automatically using conventions in Controller::__construct().
+     *
      */
-    protected string string myName;
+    protected string aName;
 
     /**
      * An instance of a uim.cake.Http\ServerRequest object that contains information about the current request.
@@ -72,17 +105,17 @@ class Controller : IEventListener, IEventDispatcher
      * additional information about the request.
      *
      * @var uim.cake.http.ServerRequest
-     * @link https://book.UIM.org/4/en/controllers/request-response.html#request
+     * @link https://book.cakephp.org/4/en/controllers/request-response.html#request
      */
-    protected myRequest;
+    protected $request;
 
     /**
      * An instance of a Response object that contains information about the impending response
      *
      * @var uim.cake.http.Response
-     * @link https://book.UIM.org/4/en/controllers/request-response.html#response
+     * @link https://book.cakephp.org/4/en/controllers/request-response.html#response
      */
-    protected response;
+    protected $response;
 
     /**
      * Settings for pagination.
@@ -91,7 +124,7 @@ class Controller : IEventListener, IEventDispatcher
      * tables your controller will be paginating.
      *
      * @var array
-     * @see uim.cake.controllers.components.PaginatorComponent
+     * @see uim.cake.datasources.Paging\NumericPaginator
      */
     $paginate = [];
 
@@ -99,23 +132,22 @@ class Controller : IEventListener, IEventDispatcher
      * Set to true to automatically render the view
      * after action logic.
      *
-     * @var bool
      */
-    protected autoRender = true;
+    protected bool $autoRender = true;
 
     /**
      * Instance of ComponentRegistry used to create Components
      *
      * @var uim.cake.controllers.ComponentRegistry|null
      */
-    protected _components;
+    protected $_components;
 
     /**
      * Automatically set to the name of a plugin.
      *
      * @var string|null
      */
-    protected myPlugin;
+    protected $plugin;
 
     /**
      * Middlewares list.
@@ -123,61 +155,61 @@ class Controller : IEventListener, IEventDispatcher
      * @var array
      * @psalm-var array<int, array{middleware:\Psr\Http\servers.IMiddleware|\Closure|string, options:array{only?: array|string, except?: array|string}}>
      */
-    protected middlewares = [];
+    protected $middlewares = [];
 
     /**
      * Constructor.
      *
      * Sets a number of properties based on conventions if they are empty. To override the
-     * conventions UIM uses you can define properties in your class declaration.
+     * conventions CakePHP uses you can define properties in your class declaration.
      *
-     * @param uim.cake.http.ServerRequest|null myRequest Request object for this controller. Can be null for testing,
+     * @param uim.cake.http.ServerRequest|null $request Request object for this controller. Can be null for testing,
      *   but expect that features that use the request parameters will not work.
      * @param uim.cake.http.Response|null $response Response object for this controller.
-     * @param string|null myName Override the name useful in testing when using mocks.
-     * @param uim.cake.events.IEventManager|null myEventManager The event manager. Defaults to a new instance.
+     * @param string|null $name Override the name useful in testing when using mocks.
+     * @param uim.cake.events.IEventManager|null $eventManager The event manager. Defaults to a new instance.
      * @param uim.cake.controllers.ComponentRegistry|null $components The component registry. Defaults to a new instance.
      */
     this(
-        ?ServerRequest myRequest = null,
+        ?ServerRequest $request = null,
         ?Response $response = null,
-        Nullable!string myName = null,
-        ?IEventManager myEventManager = null,
+        ?string aName = null,
+        ?IEventManager $eventManager = null,
         ?ComponentRegistry $components = null
     ) {
-        if (myName  !is null) {
-            this.name = myName;
-        } elseif (this.name is null && myRequest) {
-            this.name = myRequest.getParam("controller");
+        if ($name != null) {
+            this.name = $name;
+        } elseif (this.name == null && $request) {
+            this.name = $request.getParam("controller");
         }
 
-        if (this.name is null) {
-            [, myName] = moduleSplit(static::class);
-            this.name = substr(myName, 0, -10);
+        if (this.name == null) {
+            [, $name] = namespaceSplit(static::class);
+            this.name = substr($name, 0, -10);
         }
 
-        this.setRequest(myRequest ?: new ServerRequest());
+        this.setRequest($request ?: new ServerRequest());
         this.response = $response ?: new Response();
 
-        if (myEventManager  !is null) {
-            this.setEventManager(myEventManager);
+        if ($eventManager != null) {
+            this.setEventManager($eventManager);
         }
 
         this.modelFactory("Table", [this.getTableLocator(), "get"]);
 
-        if (this.defaultTable  !is null) {
+        if (this.defaultTable != null) {
             this.modelClass = this.defaultTable;
         }
 
-        if (this.modelClass is null) {
-            myPlugin = this.request.getParam("plugin");
-            myModelClass = (myPlugin ? myPlugin ~ "." : "") . this.name;
-            _setModelClass(myModelClass);
+        if (this.modelClass == null) {
+            $plugin = this.request.getParam("plugin");
+            $modelClass = ($plugin ? $plugin ~ "." : "") . this.name;
+            _setModelClass($modelClass);
 
-            this.defaultTable = myModelClass;
+            this.defaultTable = $modelClass;
         }
 
-        if ($components  !is null) {
+        if ($components != null) {
             this.components($components);
         }
 
@@ -206,7 +238,7 @@ class Controller : IEventListener, IEventDispatcher
      * Implement this method to avoid having to overwrite
      * the constructor and call parent.
      */
-    override void initialize() {
+    void initialize() {
     }
 
     /**
@@ -217,14 +249,15 @@ class Controller : IEventListener, IEventDispatcher
      * @param uim.cake.controllers.ComponentRegistry|null $components Component registry.
      * @return uim.cake.controllers.ComponentRegistry
      */
-    ComponentRegistry components(?ComponentRegistry $components = null) {
-        if ($components  !is null) {
+    function components(?ComponentRegistry $components = null): ComponentRegistry
+    {
+        if ($components != null) {
             $components.setController(this);
 
             return _components = $components;
         }
 
-        if (_components is null) {
+        if (_components == null) {
             _components = new ComponentRegistry(this);
         }
 
@@ -243,32 +276,33 @@ class Controller : IEventListener, IEventDispatcher
      *
      * Will result in a `Authentication` property being set.
      *
-     * @param string myName The name of the component to load.
-     * @param array<string, mixed> myConfig The config for the component.
+     * @param string aName The name of the component to load.
+     * @param array<string, mixed> $config The config for the component.
      * @return uim.cake.controllers.Component
      * @throws \Exception
      */
-    Component loadComponent(string myName, array myConfig = []) {
-        [, $prop] = pluginSplit(myName);
+    function loadComponent(string aName, array $config = []): Component
+    {
+        [, $prop] = pluginSplit($name);
 
-        return this.{$prop} = this.components().load(myName, myConfig);
+        return this.{$prop} = this.components().load($name, $config);
     }
 
     /**
      * Magic accessor for model autoloading.
      *
-     * @param string myName Property name
-     * @return uim.cake.Datasource\IRepository|null The model instance or null
+     * @param string aName Property name
+     * @return uim.cake.Datasource\RepositoryInterface|null The model instance or null
      */
-    auto __get(string myName) {
+    function __get(string aName) {
         if (!empty(this.modelClass)) {
-            if (indexOf(this.modelClass, "\\") == false) {
-                [, myClass] = pluginSplit(this.modelClass, true);
+            if (strpos(this.modelClass, "\\") == false) {
+                [, $class] = pluginSplit(this.modelClass, true);
             } else {
-                myClass = App::shortName(this.modelClass, "Model/Table", "Table");
+                $class = App::shortName(this.modelClass, "Model/Table", "Table");
             }
 
-            if (myClass == myName) {
+            if ($class == $name) {
                 return this.loadModel();
             }
         }
@@ -279,7 +313,7 @@ class Controller : IEventListener, IEventDispatcher
             sprintf(
                 "Undefined property: %s::$%s in %s on line %s",
                 array_pop($parts),
-                myName,
+                $name,
                 $trace[0]["file"],
                 $trace[0]["line"]
             ),
@@ -292,11 +326,11 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Magic setter for removed properties.
      *
-     * @param string propertyName Property name.
-     * @param mixed myValue Value to set.
+     * @param string aName Property name.
+     * @param mixed $value Value to set.
      */
-    void __set(string propertyName, myValue) {
-        if (propertyName == "components") {
+    void __set(string aName, $value) {
+        if ($name == "components") {
             triggerWarning(
                 "Support for loading components using $components property is removed~ " ~
                 "Use this.loadComponent() instead in initialize()."
@@ -305,7 +339,7 @@ class Controller : IEventListener, IEventDispatcher
             return;
         }
 
-        if (propertyName == "helpers") {
+        if ($name == "helpers") {
             triggerWarning(
                 "Support for loading helpers using $helpers property is removed~ " ~
                 "Use this.viewBuilder().setHelpers() instead."
@@ -314,7 +348,7 @@ class Controller : IEventListener, IEventDispatcher
             return;
         }
 
-        this.{propertyName} = myValue;
+        this.{$name} = $value;
     }
 
     /**
@@ -330,12 +364,12 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Sets the controller name.
      *
-     * @param string myName Controller name.
+     * @param string aName Controller name.
      * @return this
 
      */
-    auto setName(string myName) {
-        this.name = myName;
+    function setName(string aName) {
+        this.name = $name;
 
         return this;
     }
@@ -346,19 +380,20 @@ class Controller : IEventListener, IEventDispatcher
      * @return string|null
 
      */
-    string getPlugin() {
+    function getPlugin(): ?string
+    {
         return this.plugin;
     }
 
     /**
      * Sets the plugin name.
      *
-     * @param string|null myName Plugin name.
+     * @param string|null $name Plugin name.
      * @return this
 
      */
-    auto setPlugin(Nullable!string myName) {
-        this.plugin = myName;
+    function setPlugin(?string aName) {
+        this.plugin = $name;
 
         return this;
     }
@@ -403,7 +438,8 @@ class Controller : IEventListener, IEventDispatcher
      * @return uim.cake.http.ServerRequest
 
      */
-    ServerRequest getRequest() {
+    function getRequest(): ServerRequest
+    {
         return this.request;
     }
 
@@ -412,14 +448,14 @@ class Controller : IEventListener, IEventDispatcher
      * based on the contents of the request. Controller acts as a proxy for certain View variables
      * which must also be updated here. The properties that get set are:
      *
-     * - this.request - To the myRequest parameter
+     * - this.request - To the $request parameter
      *
-     * @param uim.cake.http.ServerRequest myRequest Request instance.
+     * @param uim.cake.http.ServerRequest $request Request instance.
      * @return this
      */
-    auto setRequest(ServerRequest myRequest) {
-        this.request = myRequest;
-        this.plugin = myRequest.getParam("plugin") ?: null;
+    function setRequest(ServerRequest $request) {
+        this.request = $request;
+        this.plugin = $request.getParam("plugin") ?: null;
 
         return this;
     }
@@ -430,7 +466,8 @@ class Controller : IEventListener, IEventDispatcher
      * @return uim.cake.http.Response
 
      */
-    Response getResponse() {
+    function getResponse(): Response
+    {
         return this.response;
     }
 
@@ -441,7 +478,7 @@ class Controller : IEventListener, IEventDispatcher
      * @return this
 
      */
-    auto setResponse(Response $response) {
+    function setResponse(Response $response) {
         this.response = $response;
 
         return this;
@@ -453,16 +490,17 @@ class Controller : IEventListener, IEventDispatcher
      * @return \Closure
      * @throws uim.cake.controllers.exceptions.MissingActionException
      */
-    Closure getAction() {
-        myRequest = this.request;
-        $action = myRequest.getParam("action");
+    function getAction(): Closure
+    {
+        $request = this.request;
+        $action = $request.getParam("action");
 
         if (!this.isAction($action)) {
             throw new MissingActionException([
-                "controller":this.name ~ "Controller",
-                "action":myRequest.getParam("action"),
-                "prefix":myRequest.getParam("prefix") ?: "",
-                "plugin":myRequest.getParam("plugin"),
+                "controller": this.name ~ "Controller",
+                "action": $request.getParam("action"),
+                "prefix": $request.getParam("prefix") ?: "",
+                "plugin": $request.getParam("plugin"),
             ]);
         }
 
@@ -474,38 +512,41 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @param \Closure $action The action closure.
      * @param array $args The arguments to be passed when invoking action.
+     * @return void
      * @throws \UnexpectedValueException If return value of action is not `null` or `IResponse` instance.
      */
     void invokeAction(Closure $action, array $args) {
-        myResult = $action(...$args);
-        if (myResult  !is null && !myResult instanceof IResponse) {
+        $result = $action(...$args);
+        if ($result != null && !$result instanceof IResponse) {
             throw new UnexpectedValueException(sprintf(
                 "Controller actions can only return IResponse instance or null~ "
                 ~ "Got %s instead.",
-                getTypeName(myResult)
+                getTypeName($result)
             ));
         }
-        if (myResult is null && this.isAutoRenderEnabled()) {
-            myResult = this.render();
+        if ($result == null && this.isAutoRenderEnabled()) {
+            $result = this.render();
         }
-        if (myResult) {
-            this.response = myResult;
+        if ($result) {
+            this.response = $result;
         }
     }
 
     /**
      * Register middleware for the controller.
      *
-     * @param \Psr\Http\servers.IMiddleware|\Closure|string middleware Middleware.
-     * @param array<string, mixed> myOptions Valid options:
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware Middleware.
+     * @param array<string, mixed> $options Valid options:
      *  - `only`: (array|string) Only run the middleware for specified actions.
      *  - `except`: (array|string) Run the middleware for all actions except the specified ones.
-     * @psalm-param array{only?: array|string, except?: array|string} myOptions
+     * @return void
+     * @since 4.3.0
+     * @psalm-param array{only?: array|string, except?: array|string} $options
      */
-    void middleware($middleware, array myOptions = []) {
+    function middleware($middleware, array $options = []) {
         this.middlewares[] = [
-            "middleware":$middleware,
-            "options":myOptions,
+            "middleware": $middleware,
+            "options": $options,
         ];
     }
 
@@ -513,15 +554,17 @@ class Controller : IEventListener, IEventDispatcher
      * Get middleware to be applied for this controller.
      *
      * @return array
+     * @since 4.3.0
      */
-    array getMiddleware() {
+    function getMiddleware(): array
+    {
         $matching = [];
         $action = this.request.getParam("action");
 
         foreach (this.middlewares as $middleware) {
-            myOptions = $middleware["options"];
-            if (!empty(myOptions["only"])) {
-                if (in_array($action, (array)myOptions["only"], true)) {
+            $options = $middleware["options"];
+            if (!empty($options["only"])) {
+                if (in_array($action, (array)$options["only"], true)) {
                     $matching[] = $middleware["middleware"];
                 }
 
@@ -529,8 +572,8 @@ class Controller : IEventListener, IEventDispatcher
             }
 
             if (
-                !empty(myOptions["except"]) &&
-                in_array($action, (array)myOptions["except"], true)
+                !empty($options["except"]) &&
+                in_array($action, (array)$options["except"], true)
             ) {
                 continue;
             }
@@ -547,12 +590,13 @@ class Controller : IEventListener, IEventDispatcher
      *
      * @return array<string, mixed>
      */
-    array implementedEvents() {
+    function implementedEvents(): array
+    {
         return [
-            "Controller.initialize":"beforeFilter",
-            "Controller.beforeRender":"beforeRender",
-            "Controller.beforeRedirect":"beforeRedirect",
-            "Controller.shutdown":"afterFilter",
+            "Controller.initialize": "beforeFilter",
+            "Controller.beforeRender": "beforeRender",
+            "Controller.beforeRedirect": "beforeRedirect",
+            "Controller.shutdown": "afterFilter",
         ];
     }
 
@@ -568,13 +612,13 @@ class Controller : IEventListener, IEventDispatcher
      */
     function startupProcess(): ?IResponse
     {
-        myEvent = this.dispatchEvent("Controller.initialize");
-        if (myEvent.getResult() instanceof IResponse) {
-            return myEvent.getResult();
+        $event = this.dispatchEvent("Controller.initialize");
+        if ($event.getResult() instanceof IResponse) {
+            return $event.getResult();
         }
-        myEvent = this.dispatchEvent("Controller.startup");
-        if (myEvent.getResult() instanceof IResponse) {
-            return myEvent.getResult();
+        $event = this.dispatchEvent("Controller.startup");
+        if ($event.getResult() instanceof IResponse) {
+            return $event.getResult();
         }
 
         return null;
@@ -591,23 +635,23 @@ class Controller : IEventListener, IEventDispatcher
      */
     function shutdownProcess(): ?IResponse
     {
-        myEvent = this.dispatchEvent("Controller.shutdown");
-        if (myEvent.getResult() instanceof IResponse) {
-            return myEvent.getResult();
+        $event = this.dispatchEvent("Controller.shutdown");
+        if ($event.getResult() instanceof IResponse) {
+            return $event.getResult();
         }
 
         return null;
     }
 
     /**
-     * Redirects to given myUrl, after turning off this.autoRender.
+     * Redirects to given $url, after turning off this.autoRender.
      *
-     * @param \Psr\Http\messages.UriInterface|array|string myUrl A string, array-based URL or UriInterface instance.
+     * @param \Psr\Http\messages.UriInterface|array|string $url A string, array-based URL or UriInterface instance.
      * @param int $status HTTP status code. Defaults to `302`.
      * @return uim.cake.http.Response|null
-     * @link https://book.UIM.org/4/en/controllers.html#Controller::redirect
+     * @link https://book.cakephp.org/4/en/controllers.html#Controller::redirect
      */
-    function redirect(myUrl, int $status = 302): ?Response
+    function redirect($url, int $status = 302): ?Response
     {
         this.autoRender = false;
 
@@ -615,17 +659,17 @@ class Controller : IEventListener, IEventDispatcher
             this.response = this.response.withStatus($status);
         }
 
-        myEvent = this.dispatchEvent("Controller.beforeRedirect", [myUrl, this.response]);
-        if (myEvent.getResult() instanceof Response) {
-            return this.response = myEvent.getResult();
+        $event = this.dispatchEvent("Controller.beforeRedirect", [$url, this.response]);
+        if ($event.getResult() instanceof Response) {
+            return this.response = $event.getResult();
         }
-        if (myEvent.isStopped()) {
+        if ($event.isStopped()) {
             return null;
         }
         $response = this.response;
 
         if (!$response.getHeaderLine("Location")) {
-            $response = $response.withLocation(Router::url(myUrl, true));
+            $response = $response.withLocation(Router::url($url, true));
         }
 
         return this.response = $response;
@@ -641,13 +685,13 @@ class Controller : IEventListener, IEventDispatcher
      * setAction("action_with_parameters", $parameter1);
      * ```
      *
-     * @param string action The new action to be "redirected" to.
+     * @param string $action The new action to be "redirected" to.
      *   Any other parameters passed to this method will be passed as parameters to the new action.
      * @param mixed ...$args Arguments passed to the action
      * @return mixed Returns the return value of the called action
      * @deprecated 4.2.0 Refactor your code use `redirect()` instead of forwarding actions.
      */
-    auto setAction(string action, ...$args) {
+    function setAction(string $action, ...$args) {
         deprecationWarning(
             "Controller::setAction() is deprecated. Either refactor your code to use `redirect()`, " ~
             "or call the other action as a method."
@@ -660,58 +704,128 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Instantiates the correct view class, hands it its data, and uses it to render the view output.
      *
-     * @param string|null myTemplate Template to use for rendering
+     * @param string|null $template Template to use for rendering
      * @param string|null $layout Layout to use
      * @return uim.cake.http.Response A response object containing the rendered view.
-     * @link https://book.UIM.org/4/en/controllers.html#rendering-a-view
+     * @link https://book.cakephp.org/4/en/controllers.html#rendering-a-view
      */
-    Response render(Nullable!string myTemplate = null, Nullable!string layout = null) {
-      myBuilder = this.viewBuilder();
-      if (!myBuilder.getTemplatePath()) {
-          myBuilder.setTemplatePath(_templatePath());
-      }
+    function render(?string $template = null, ?string $layout = null): Response
+    {
+        $builder = this.viewBuilder();
+        if (!$builder.getTemplatePath()) {
+            $builder.setTemplatePath(_templatePath());
+        }
 
-      this.autoRender = false;
+        this.autoRender = false;
 
-      if (myTemplate  !is null) {
-        myBuilder.setTemplate(myTemplate);
-      }
+        if ($template != null) {
+            $builder.setTemplate($template);
+        }
 
-      if ($layout  !is null) {
-        myBuilder.setLayout($layout);
-      }
+        if ($layout != null) {
+            $builder.setLayout($layout);
+        }
 
-      myEvent = this.dispatchEvent("Controller.beforeRender");
-      if (myEvent.getResult() instanceof Response) {
-        return myEvent.getResult();
-      }
-      if (myEvent.isStopped()) {
-        return this.response;
-      }
+        $event = this.dispatchEvent("Controller.beforeRender");
+        if ($event.getResult() instanceof Response) {
+            return $event.getResult();
+        }
+        if ($event.isStopped()) {
+            return this.response;
+        }
 
-      if (myBuilder.getTemplate() is null) {
-        myBuilder.setTemplate(this.request.getParam("action"));
-      }
+        if ($builder.getTemplate() == null) {
+            $builder.setTemplate(this.request.getParam("action"));
+        }
+        $viewClass = this.chooseViewClass();
+        $view = this.createView($viewClass);
 
-      $view = this.createView();
-      myContentss = $view.render();
-      this.setResponse($view.getResponse().withStringBody(myContentss));
+        $contents = $view.render();
+        $response = $view.getResponse().withStringBody($contents);
 
-      return this.response;
+        return this.setResponse($response).response;
     }
 
-    // Get the templatePath based on controller name and request prefix.
+    /**
+     * Get the View classes this controller can perform content negotiation with.
+     *
+     * Each view class must implement the `getContentType()` hook method
+     * to participate in negotiation.
+     *
+     * @see Cake\Http\ContentTypeNegotiation
+     * @return array<string>
+     */
+    string[] viewClasses(): array
+    {
+        return [];
+    }
+
+    /**
+     * Use the view classes defined on this controller to view
+     * selection based on content-type negotiation.
+     *
+     * @return string|null The chosen view class or null for no decision.
+     */
+    protected function chooseViewClass(): ?string
+    {
+        $possibleViewClasses = this.viewClasses();
+        if (empty($possibleViewClasses)) {
+            return null;
+        }
+        // Controller or component has already made a view class decision.
+        // That decision should overwrite the framework behavior.
+        if (this.viewBuilder().getClassName() != null) {
+            return null;
+        }
+
+        $typeMap = [];
+        foreach ($possibleViewClasses as $class) {
+            $viewContentType = $class::contentType();
+            if ($viewContentType && !isset($typeMap[$viewContentType])) {
+                $typeMap[$viewContentType] = $class;
+            }
+        }
+        $request = this.getRequest();
+
+        // Prefer the _ext route parameter if it is defined.
+        $ext = $request.getParam("_ext");
+        if ($ext) {
+            $extTypes = (array)(this.response.getMimeType($ext) ?: []);
+            foreach ($extTypes as $extType) {
+                if (isset($typeMap[$extType])) {
+                    return $typeMap[$extType];
+                }
+            }
+
+            throw new NotFoundException();
+        }
+
+        // Use accept header based negotiation.
+        $contentType = new ContentTypeNegotiation();
+        $preferredType = $contentType.preferredType($request, array_keys($typeMap));
+        if ($preferredType) {
+            return $typeMap[$preferredType];
+        }
+
+        // Use the match-all view if available or null for no decision.
+        return $typeMap[View::TYPE_MATCH_ALL] ?? null;
+    }
+
+    /**
+     * Get the templatePath based on controller name and request prefix.
+     *
+     */
     protected string _templatePath() {
-        myTemplatePath = this.name;
+        $templatePath = this.name;
         if (this.request.getParam("prefix")) {
             $prefixes = array_map(
                 "Cake\Utility\Inflector::camelize",
                 explode("/", this.request.getParam("prefix"))
             );
-            myTemplatePath = implode(DIRECTORY_SEPARATOR, $prefixes) . DIRECTORY_SEPARATOR . myTemplatePath;
+            $templatePath = implode(DIRECTORY_SEPARATOR, $prefixes) . DIRECTORY_SEPARATOR . $templatePath;
         }
 
-        return myTemplatePath;
+        return $templatePath;
     }
 
     /**
@@ -724,19 +838,19 @@ class Controller : IEventListener, IEventDispatcher
      */
     string referer($default = "/", bool $local = true) {
         $referer = this.request.referer($local);
-        if ($referer is null) {
-            myUrl = Router::url($default, !$local);
+        if ($referer == null) {
+            $url = Router::url($default, !$local);
             $base = this.request.getAttribute("base");
-            if ($local && $base && indexOf(myUrl, $base) == 0) {
-                myUrl = substr(myUrl, strlen($base));
-                if (myUrl[0] != "/") {
-                    myUrl = "/" ~ myUrl;
+            if ($local && $base && strpos($url, $base) == 0) {
+                $url = substr($url, strlen($base));
+                if ($url[0] != "/") {
+                    $url = "/" ~ $url;
                 }
 
-                return myUrl;
+                return $url;
             }
 
-            return myUrl;
+            return $url;
         }
 
         return $referer;
@@ -745,7 +859,7 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * Handles pagination of records in Table objects.
      *
-     * Will load the referenced Table object, and have the PaginatorComponent
+     * Will load the referenced Table object, and have the paginator
      * paginate the query using the request date and settings defined in `this.paginate`.
      *
      * This method will also make the PaginatorHelper available in the view.
@@ -754,32 +868,76 @@ class Controller : IEventListener, IEventDispatcher
      * (e.g: Table instance, "TableName" or a Query object)
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return uim.cake.orm.ResultSet|uim.cake.Datasource\IResultSet Query results
-     * @link https://book.UIM.org/4/en/controllers.html#paginating-a-model
+     * @link https://book.cakephp.org/4/en/controllers.html#paginating-a-model
      * @throws \RuntimeException When no compatible table object can be found.
      */
     function paginate($object = null, array $settings = []) {
         if (is_object($object)) {
-            myTable = $object;
+            $table = $object;
         }
 
-        if (is_string($object) || $object is null) {
+        if (is_string($object) || $object == null) {
             $try = [$object, this.modelClass];
-            foreach ($try as myTableName) {
-                if (empty(myTableName)) {
+            foreach ($try as $tableName) {
+                if (empty($tableName)) {
                     continue;
                 }
-                myTable = this.loadModel(myTableName);
+                $table = this.loadModel($tableName);
                 break;
             }
         }
 
-        this.loadComponent("Paginator");
-        if (empty(myTable)) {
+        if (empty($table)) {
             throw new RuntimeException("Unable to locate an object compatible with paginate.");
         }
+
         $settings += this.paginate;
 
-        return this.Paginator.paginate(myTable, $settings);
+        if (isset(this.Paginator)) {
+            return this.Paginator.paginate($table, $settings);
+        }
+
+        if (isset($settings["paginator"])) {
+            $settings["className"] = $settings["paginator"];
+            deprecationWarning(
+                "`paginator` option is deprecated,"
+                ~ " use `className` instead a specify a paginator name/FQCN."
+            );
+        }
+
+        $paginator = $settings["className"] ?? NumericPaginator::class;
+        unset($settings["className"]);
+        if (is_string($paginator)) {
+            $className = App::className($paginator, "Datasource/Paging", "Paginator");
+            if ($className == null) {
+                throw new InvalidArgumentException("Invalid paginator: " ~ $paginator);
+            }
+            $paginator = new $className();
+        }
+        if (!$paginator instanceof PaginatorInterface) {
+            throw new InvalidArgumentException("Paginator must be an instance of " ~ PaginatorInterface::class);
+        }
+
+        $results = null;
+        try {
+            $results = $paginator.paginate(
+                $table,
+                this.request.getQueryParams(),
+                $settings
+            );
+        } catch (PageOutOfBoundsException $e) {
+            // Exception thrown below
+        } finally {
+            $paging = $paginator.getPagingParams() + (array)this.request.getAttribute("paging", []);
+            this.request = this.request.withAttribute("paging", $paging);
+        }
+
+        if (isset($e)) {
+            throw new NotFoundException(null, null, $e);
+        }
+
+        /** @psalm-suppress NullableReturnStatement */
+        return $results;
     }
 
     /**
@@ -789,11 +947,11 @@ class Controller : IEventListener, IEventDispatcher
      * The default implementation disallows access to all methods defined on Cake\Controller\Controller,
      * and allows all methods on all subclasses of this class.
      *
-     * @param string action The action to check.
+     * @param string $action The action to check.
      * @return bool Whether the method is accessible from a URL.
      * @throws \ReflectionException
      */
-    bool isAction(string action) {
+    bool isAction(string $action) {
         $baseClass = new ReflectionClass(self::class);
         if ($baseClass.hasMethod($action)) {
             return false;
@@ -811,22 +969,22 @@ class Controller : IEventListener, IEventDispatcher
      * Called before the controller action. You can use this method to configure and customize components
      * or perform logic that needs to happen before each controller action.
      *
-     * @param uim.cake.events.IEvent myEvent An Event instance
+     * @param uim.cake.events.IEvent $event An Event instance
      * @return uim.cake.http.Response|null|void
-     * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
+     * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function beforeFilter(IEvent myEvent) {
+    function beforeFilter(IEvent $event) {
     }
 
     /**
      * Called after the controller action is run, but before the view is rendered. You can use this method
      * to perform logic or set view variables that are required on every request.
      *
-     * @param uim.cake.events.IEvent myEvent An Event instance
+     * @param uim.cake.events.IEvent $event An Event instance
      * @return uim.cake.http.Response|null|void
-     * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
+     * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function beforeRender(IEvent myEvent) {
+    function beforeRender(IEvent $event) {
     }
 
     /**
@@ -834,27 +992,27 @@ class Controller : IEventListener, IEventDispatcher
      * further action.
      *
      * If the event is stopped the controller will not continue on to redirect the request.
-     * The myUrl and $status variables have same meaning as for the controller"s method.
+     * The $url and $status variables have same meaning as for the controller"s method.
      * You can set the event result to response instance or modify the redirect location
      * using controller"s response instance.
      *
-     * @param uim.cake.events.IEvent myEvent An Event instance
-     * @param array|string myUrl A string or array-based URL pointing to another location within the app,
+     * @param uim.cake.events.IEvent $event An Event instance
+     * @param array|string $url A string or array-based URL pointing to another location within the app,
      *     or an absolute URL
      * @param uim.cake.http.Response $response The response object.
      * @return uim.cake.http.Response|null|void
-     * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
+     * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function beforeRedirect(IEvent myEvent, myUrl, Response $response) {
+    function beforeRedirect(IEvent $event, $url, Response $response) {
     }
 
     /**
      * Called after the controller action is run and rendered.
      *
-     * @param uim.cake.events.IEvent myEvent An Event instance
+     * @param uim.cake.events.IEvent $event An Event instance
      * @return uim.cake.http.Response|null|void
-     * @link https://book.UIM.org/4/en/controllers.html#request-life-cycle-callbacks
+     * @link https://book.cakephp.org/4/en/controllers.html#request-life-cycle-callbacks
      */
-    function afterFilter(IEvent myEvent) {
+    function afterFilter(IEvent $event) {
     }
 }
