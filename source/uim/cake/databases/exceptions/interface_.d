@@ -2,11 +2,8 @@ module uim.cake.databases;
 
 use Closure;
 
-/**
- * An interface used by Expression objects.
- */
-interface IExpression
-{
+// An interface used by Expression objects.
+interface IExpression {
     /**
      * Converts the Node into a SQL string fragment.
      *
@@ -23,5 +20,5 @@ interface IExpression
      * @param \Closure $callback The callable to apply to all nodes.
      * @return this
      */
-    O traverse(this O)(Closure $callback);
+    IExpression traverse(Closure aCallback);
 }

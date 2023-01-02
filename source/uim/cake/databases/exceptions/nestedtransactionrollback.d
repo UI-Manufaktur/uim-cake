@@ -1,13 +1,8 @@
+module uim.cake.databases.exceptions.nestedtransactionrollback;
 
+@safe:
+import uim.cake;
 
-
- *
-
-
- * @since         3.4.3
-  */module uim.cake.databases.exceptions;
-
-import uim.cake.core.exceptions.CakeException;
 use Throwable;
 
 /**

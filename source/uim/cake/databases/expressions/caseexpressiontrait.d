@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         4.3.0
-  */module uim.cake.databases.Expression;
+module uim.cake.databases.Expression;
 
 import uim.cake.Chronos\Date;
 import uim.cake.Chronos\MutableDate;
