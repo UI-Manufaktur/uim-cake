@@ -2,15 +2,16 @@
 	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.datasources;
+**********************************************************************************************************/
+module uim.cake.datasources;
 
 import uim.cake.core.StaticConfigTrait;
-import uim.cake.databasess.Connection;
-import uim.cake.databasess.Driver\Mysql;
-import uim.cake.databasess.Driver\Postgres;
-import uim.cake.databasess.Driver\Sqlite;
-import uim.cake.databasess.Driver\Sqlserver;
-import uim.cake.datasources.exceptions\MissingDatasourceConfigException;
+import uim.cake.databases.Connection;
+import uim.cake.databases.Driver\Mysql;
+import uim.cake.databases.Driver\Postgres;
+import uim.cake.databases.Driver\Sqlite;
+import uim.cake.databases.Driver\Sqlserver;
+import uim.cake.datasources.exceptions.MissingDatasourceConfigException;
 
 /**
  * Manages and loads instances of Connection
@@ -60,17 +61,19 @@ class ConnectionManager
      *
      * The connection will not be constructed until it is first used.
      *
-     * @param array<string, mixed>|string myKey The name of the connection config, or an array of multiple configs.
-     * @param array<string, mixed>|null myConfig An array of name: config data for adapter.
+     * @param array<string, mixed>|string aKey The name of the connection config, or an array of multiple configs.
+     * @param array<string, mixed>|null $config An array of name: config data for adapter.
+     * @return void
      * @throws uim.cake.Core\exceptions.CakeException When trying to modify an existing config.
      * @see uim.cake.Core\StaticConfigTrait::config()
      */
-    static void setConfig(myKey, myConfig = null) {
-        if (is_array(myConfig)) {
-            myConfig["name"] = myKey;
+    static function setConfig($key, $config = null): void
+    {
+        if (is_array($config)) {
+            $config["name"] = $key;
         }
 
-        static::_setConfig(myKey, myConfig);
+        static::_setConfig($key, $config);
     }
 
     /**
@@ -81,13 +84,13 @@ class ConnectionManager
      *
      * ```
      * $dsn = "mysql://user:pass@localhost/database";
-     * myConfig = ConnectionManager::parseDsn($dsn);
+     * $config = ConnectionManager::parseDsn($dsn);
      *
      * $dsn = "Cake\databases.Driver\Mysql://localhost:3306/database?className=Cake\databases.Connection";
-     * myConfig = ConnectionManager::parseDsn($dsn);
+     * $config = ConnectionManager::parseDsn($dsn);
      *
      * $dsn = "Cake\databases.Connection://localhost:3306/database?driver=Cake\databases.Driver\Mysql";
-     * myConfig = ConnectionManager::parseDsn($dsn);
+     * $config = ConnectionManager::parseDsn($dsn);
      * ```
      *
      * For all classes, the value of `scheme` is set as the value of both the `className` and `driver`
@@ -95,24 +98,25 @@ class ConnectionManager
      *
      * Note that query-string arguments are also parsed and set as values in the returned configuration.
      *
-     * @param string myConfig The DSN string to convert to a configuration array
+     * @param string $config The DSN string to convert to a configuration array
      * @return array<string, mixed> The configuration array to be stored after parsing the DSN
      */
-    static array parseDsn(string myConfig) {
-        myConfig = static::_parseDsn(myConfig);
+    static function parseDsn(string $config): array
+    {
+        $config = static::_parseDsn($config);
 
-        if (isset(myConfig["path"]) && empty(myConfig["database"])) {
-            myConfig["database"] = substr(myConfig["path"], 1);
+        if (isset($config["path"]) && empty($config["database"])) {
+            $config["database"] = substr($config["path"], 1);
         }
 
-        if (empty(myConfig["driver"])) {
-            myConfig["driver"] = myConfig["className"];
-            myConfig["className"] = Connection::class;
+        if (empty($config["driver"])) {
+            $config["driver"] = $config["className"];
+            $config["className"] = Connection::class;
         }
 
-        unset(myConfig["path"]);
+        unset($config["path"]);
 
-        return myConfig;
+        return $config;
     }
 
     /**
@@ -135,11 +139,12 @@ class ConnectionManager
      * ConnectionManager::alias("test_things", "things");
      * ```
      *
-     * @param string source The existing connection to alias.
-     * @param string myAlias The alias name that resolves to `$source`.
+     * @param string $source The existing connection to alias.
+     * @param string $alias The alias name that resolves to `$source`.
      */
-    static void alias(string source, string myAlias) {
-        static::$_aliasMap[myAlias] = $source;
+    static void alias(string $source, string $alias): void
+    {
+        static::$_aliasMap[$alias] = $source;
     }
 
     /**
@@ -148,10 +153,11 @@ class ConnectionManager
      * Removes an alias from ConnectionManager. Fetching the aliased
      * connection may fail if there is no other connection with that name.
      *
-     * @param string myAlias The connection alias to drop
+     * @param string $alias The connection alias to drop
      */
-    static void dropAlias(string myAlias) {
-        unset(static::$_aliasMap[myAlias]);
+    static void dropAlias(string $alias): void
+    {
+        unset(static::$_aliasMap[$alias]);
     }
 
     /**
@@ -162,25 +168,25 @@ class ConnectionManager
      * defined. If you want the original unaliased connections pass `false`
      * as second parameter.
      *
-     * @param string myName The connection name.
+     * @param string aName The connection name.
      * @param bool $useAliases Set to false to not use aliased connections.
      * @return uim.cake.Datasource\IConnection A connection object.
      * @throws uim.cake.Datasource\exceptions.MissingDatasourceConfigException When config
      * data is missing.
      */
-    static auto get(string myName, bool $useAliases = true) {
-        if ($useAliases && isset(static::$_aliasMap[myName])) {
-            myName = static::$_aliasMap[myName];
+    static function get(string aName, bool $useAliases = true) {
+        if ($useAliases && isset(static::$_aliasMap[$name])) {
+            $name = static::$_aliasMap[$name];
         }
-        if (empty(static::$_config[myName])) {
-            throw new MissingDatasourceConfigException(["name": myName]);
+        if (empty(static::$_config[$name])) {
+            throw new MissingDatasourceConfigException(["name": $name]);
         }
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(static::$_registry)) {
             static::$_registry = new ConnectionRegistry();
         }
 
-        return static::$_registry.{myName}
-            ?? static::$_registry.load(myName, static::$_config[myName]);
+        return static::$_registry.{$name}
+            ?? static::$_registry.load($name, static::$_config[$name]);
     }
 }

@@ -1,6 +1,6 @@
-module uim.cake.datasources;
+module uim.cake.Datasource;
 
-use Psr\logs.ILoggerAware;
+use Psr\logs.LoggerAwareInterface;
 use Psr\logs.LoggerInterface;
 use Psr\SimpleCache\ICache;
 
@@ -16,21 +16,22 @@ use Psr\SimpleCache\ICache;
  *    {@see uim.cake.databases.Connnection::getSchemaCollection()}
  * @method uim.cake.databases.Query newQuery() Create a new Query instance for this connection.
  *    {@see uim.cake.databases.Connnection::newQuery()}
- * @method uim.cake.databases.IStatement prepare(mySql) Prepares a SQL statement to be executed.
+ * @method uim.cake.databases.StatementInterface prepare($sql) Prepares a SQL statement to be executed.
  *    {@see uim.cake.databases.Connnection::prepare()}
- * @method uim.cake.databases.IStatement execute(myQuery, myParams = [], array myTypes = []) Executes a query using
- *   `myParams` for interpolating values and myTypes as a hint for each those params.
+ * @method uim.cake.databases.StatementInterface execute($query, $params = [], array $types = []) Executes a query using
+ *   `$params` for interpolating values and $types as a hint for each those params.
  *   {@see uim.cake.databases.Connnection::execute()}
- * @method uim.cake.databases.IStatement query(string mySql) Executes a SQL statement and returns the Statement
+ * @method uim.cake.databases.StatementInterface query(string $sql) Executes a SQL statement and returns the Statement
  *   object as result. {@see uim.cake.databases.Connnection::query()}
  */
-interface IConnection : ILoggerAware {
+interface IConnection : LoggerAwareInterface
+{
     /**
      * Gets the current logger object.
      *
      * @return \Psr\logs.LoggerInterface logger instance
      */
-    LoggerInterface getLogger();
+    function getLogger(): LoggerInterface;
 
     /**
      * Set a cacher.
@@ -38,14 +39,14 @@ interface IConnection : ILoggerAware {
      * @param \Psr\SimpleCache\ICache $cacher Cacher object
      * @return this
      */
-    auto setCacher(ICache $cacher);
+    function setCacher(ICache $cacher);
 
     /**
      * Get a cacher.
      *
      * @return \Psr\SimpleCache\ICache $cacher Cacher object
      */
-    ICache getCacher();
+    function getCacher(): ICache;
 
     /**
      * Get the configuration name for this connection.
@@ -54,14 +55,16 @@ interface IConnection : ILoggerAware {
 
     /**
      * Get the configuration data used to create the connection.
+     *
+     * @return array<string, mixed>
      */
-    array config();
+    function config(): array;
 
     /**
      * Executes a callable function inside a transaction, if any exception occurs
      * while executing the passed callable, the transaction will be rolled back
      * If the result of the callable function is `false`, the transaction will
-     * also be rolled back. Otherwise the transaction is committed after executing
+     * also be rolled back. Otherwise, the transaction is committed after executing
      * the callback.
      *
      * The callback will receive the connection instance as its first argument.
@@ -69,8 +72,8 @@ interface IConnection : ILoggerAware {
      * ### Example:
      *
      * ```
-     * myConnection.transactional(function (myConnection) {
-     *   myConnection.newQuery().delete("users").execute();
+     * $connection.transactional(function ($connection) {
+     *   $connection.newQuery().delete("users").execute();
      * });
      * ```
      *
@@ -89,8 +92,8 @@ interface IConnection : ILoggerAware {
      * ### Example:
      *
      * ```
-     * myConnection.disableConstraints(function (myConnection) {
-     *   myConnection.newQuery().delete("users").execute();
+     * $connection.disableConstraints(function ($connection) {
+     *   $connection.newQuery().delete("users").execute();
      * });
      * ```
      *
@@ -104,10 +107,10 @@ interface IConnection : ILoggerAware {
     /**
      * Enable/disable query logging
      *
-     * @param bool myEnable Enable/disable query logging
+     * @param bool $enable Enable/disable query logging
      * @return this
      */
-    function enableQueryLogging(bool myEnable = true);
+    function enableQueryLogging(bool $enable = true);
 
     /**
      * Disable query logging
@@ -118,6 +121,7 @@ interface IConnection : ILoggerAware {
 
     /**
      * Check if query logging is enabled.
+     *
      */
-    bool isQueryLoggingEnabled();
+    bool isQueryLoggingEnabled(): bool;
 }
