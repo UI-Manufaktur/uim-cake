@@ -3,7 +3,7 @@ module uim.cake.databases.Expression;
 import uim.cake.databases.exceptions.DatabaseException;
 import uim.cake.databases.IExpression;
 import uim.cake.databases.Query;
-import uim.cake.databases.Type\ExpressionTypeCasterTrait;
+import uim.cake.databases.types.ExpressionTypeCasterTrait;
 import uim.cake.databases.TypeMap;
 import uim.cake.databases.TypeMapTrait;
 import uim.cake.databases.ValueBinder;
@@ -282,7 +282,7 @@ class ValuesExpression : IExpression
 
         foreach (_values as $row: $values) {
             foreach ($types as $col: $type) {
-                /** @var uim.cake.databases.Type\ExpressionTypeInterface $type */
+                /** @var uim.cake.databases.types.ExpressionTypeInterface $type */
                 _values[$row][$col] = $type.toExpression($values[$col]);
             }
         }

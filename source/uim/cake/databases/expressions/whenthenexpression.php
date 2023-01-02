@@ -9,7 +9,7 @@
 
 import uim.cake.databases.IExpression;
 import uim.cake.databases.Query;
-import uim.cake.databases.Type\ExpressionTypeCasterTrait;
+import uim.cake.databases.types.ExpressionTypeCasterTrait;
 import uim.cake.databases.TypeMap;
 import uim.cake.databases.ValueBinder;
 use Closure;

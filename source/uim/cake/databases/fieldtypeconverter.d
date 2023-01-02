@@ -30,7 +30,7 @@ class FieldTypeConverter
      * at the moment this object is created. Used so that the types list
      * is not fetched on each single row of the results.
      *
-     * @var array<uim.cake.databases.IType|uim.cake.databases.Type\BatchCastingInterface>
+     * @var array<uim.cake.databases.IType|uim.cake.databases.types.BatchCastingInterface>
      */
     protected myTypes;
 

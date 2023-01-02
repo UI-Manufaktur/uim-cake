@@ -1,27 +1,35 @@
 module uim.cake.databases;
 
+module uim.cake.databases;
+
 /**
  * Represents a database statement. Concrete implementations
  * can either use PDOStatement or a native driver
  *
- * @property-read string myQueryString
+ * @property-read string $queryString
  */
 interface IStatement
 {
     /**
      * Used to designate that numeric indexes be returned in a result when calling fetch methods
+     *
+     * @var string
      */
-    const string FETCH_TYPE_NUM = "num";
+    const FETCH_TYPE_NUM = "num";
 
     /**
      * Used to designate that an associated array be returned in a result when calling fetch methods
+     *
+     * @var string
      */
-    const string FETCH_TYPE_ASSOC = "assoc";
+    const FETCH_TYPE_ASSOC = "assoc";
 
     /**
      * Used to designate that a stdClass object be returned in a result when calling fetch methods
+     *
+     * @var string
      */
-    const string FETCH_TYPE_OBJ = "obj";
+    const FETCH_TYPE_OBJ = "obj";
 
     /**
      * Assign a value to a positional or named variable in prepared query. If using
@@ -39,17 +47,17 @@ interface IStatement
      * ```
      *
      * @param string|int $column name or param position to be bound
-     * @param mixed myValue The value to bind to variable in query
-     * @param string|int|null myType name of configured Type class, or PDO type constant.
+     * @param mixed $value The value to bind to variable in query
+     * @param string|int|null $type name of configured Type class, or PDO type constant.
      */
-    void bindValue($column, myValue, myType = "string");
+    void bindValue($column, $value, $type = "string"): void;
 
     /**
      * Closes a cursor in the database, freeing up any resources and memory
      * allocated to it. In most cases you don"t need to call this method, as it is
      * automatically called after fetching all results from the result set.
      */
-    void closeCursor();
+    void closeCursor(): void;
 
     /**
      * Returns the number of columns this statement"s results will contain
@@ -57,12 +65,13 @@ interface IStatement
      * ### Example:
      *
      * ```
-     *  $statement = myConnection.prepare("SELECT id, title from articles");
+     *  $statement = $connection.prepare("SELECT id, title from articles");
      *  $statement.execute();
      *  echo $statement.columnCount(); // outputs 2
      * ```
+     *
      */
-    int columnCount();
+    int columnCount(): int;
 
     /**
      * Returns the error code for the last error that occurred when executing this statement
@@ -75,7 +84,7 @@ interface IStatement
      * Returns the error information for the last error that occurred when executing
      * this statement
      */
-    array errorInfo();
+    array errorInfo(): array;
 
     /**
      * Executes the statement by sending the SQL query to the database. It can optionally
@@ -83,10 +92,10 @@ interface IStatement
      * that binding parameters from this method will not perform any custom type conversion
      * as it would normally happen when calling `bindValue`
      *
-     * @param array|null myParams list of values to be bound to query
+     * @param array|null $params list of values to be bound to query
      * @return bool true on success, false otherwise
      */
-    bool execute(?array myParams = null);
+    function execute(?array $params = null): bool;
 
     /**
      * Returns the next row for the result set after executing this statement.
@@ -96,16 +105,16 @@ interface IStatement
      * ### Example:
      *
      * ```
-     *  $statement = myConnection.prepare("SELECT id, title from articles");
+     *  $statement = $connection.prepare("SELECT id, title from articles");
      *  $statement.execute();
-     *  print_r($statement.fetch("assoc")); // will show ["id":1, "title":"a title"]
+     *  print_r($statement.fetch("assoc")); // will show ["id": 1, "title": "a title"]
      * ```
      *
-     * @param string|int myType "num" for positional columns, assoc for named columns, or PDO fetch mode constants.
+     * @param string|int $type "num" for positional columns, assoc for named columns, or PDO fetch mode constants.
      * @return mixed Result array containing columns and values or false if no results
      * are left
      */
-    function fetch(myType = "num");
+    function fetch($type = "num");
 
     /**
      * Returns an array with all rows resulting from executing this statement
@@ -113,15 +122,15 @@ interface IStatement
      * ### Example:
      *
      * ```
-     *  $statement = myConnection.prepare("SELECT id, title from articles");
+     *  $statement = $connection.prepare("SELECT id, title from articles");
      *  $statement.execute();
-     *  print_r($statement.fetchAll("assoc")); // will show [0: ["id":1, "title":"a title"]]
+     *  print_r($statement.fetchAll("assoc")); // will show [0: ["id": 1, "title": "a title"]]
      * ```
      *
-     * @param string|int myType num for fetching columns as positional keys or assoc for column names as keys
+     * @param string|int $type num for fetching columns as positional keys or assoc for column names as keys
      * @return array|false list of all results from database for this statement or false on failure.
      */
-    function fetchAll(myType = "num");
+    function fetchAll($type = "num");
 
     /**
      * Returns the value of the result at position.
@@ -137,33 +146,35 @@ interface IStatement
      * ### Example:
      *
      * ```
-     *  $statement = myConnection.prepare("SELECT id, title from articles");
+     *  $statement = $connection.prepare("SELECT id, title from articles");
      *  $statement.execute();
      *  print_r($statement.rowCount()); // will show 1
      * ```
+     *
      */
-    int rowCount();
+    int rowCount(): int;
 
     /**
      * Statements can be passed as argument for count()
      * to return the number for affected rows from last execution
+     *
      */
-    int count();
+    int count(): int;
 
     /**
      * Binds a set of values to statement object with corresponding type
      *
-     * @param array myParams list of values to be bound
-     * @param array myTypes list of types to be used, keys should match those in myParams
+     * @param array $params list of values to be bound
+     * @param array $types list of types to be used, keys should match those in $params
      */
-    void bind(array myParams, array myTypes);
+    void bind(array $params, array $types): void;
 
     /**
      * Returns the latest primary inserted using this statement
      *
-     * @param string|null myTable table name or sequence to get last insert value from
+     * @param string|null $table table name or sequence to get last insert value from
      * @param string|null $column the name of the column representing the primary key
      * @return string|int
      */
-    function lastInsertId(Nullable!string myTable = null, Nullable!string column = null);
+    function lastInsertId(?string $table = null, ?string $column = null);
 }

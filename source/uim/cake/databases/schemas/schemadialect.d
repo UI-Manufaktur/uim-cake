@@ -1,7 +1,7 @@
 module uim.cake.databases.Schema;
 
 import uim.cake.databases.IDriver;
-import uim.cake.databases.Type\ColumnSchemaAwareInterface;
+import uim.cake.databases.types.ColumnSchemaAwareInterface;
 import uim.cake.databases.TypeFactory;
 use InvalidArgumentException;
 

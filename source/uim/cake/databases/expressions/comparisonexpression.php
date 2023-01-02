@@ -2,7 +2,7 @@ module uim.cake.databases.Expression;
 
 import uim.cake.databases.exceptions.DatabaseException;
 import uim.cake.databases.IExpression;
-import uim.cake.databases.Type\ExpressionTypeCasterTrait;
+import uim.cake.databases.types.ExpressionTypeCasterTrait;
 import uim.cake.databases.ValueBinder;
 use Closure;
 

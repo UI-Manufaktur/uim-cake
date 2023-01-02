@@ -1,7 +1,7 @@
 module uim.cake.databases;
 
-import uim.cake.databases.Type\BatchCastingInterface;
-import uim.cake.databases.Type\OptionalConvertInterface;
+import uim.cake.databases.types.BatchCastingInterface;
+import uim.cake.databases.types.OptionalConvertInterface;
 
 /**
  * A callable class to be used for processing each of the rows in a statement
@@ -30,7 +30,7 @@ class FieldTypeConverter
      * at the moment this object is created. Used so that the types list
      * is not fetched on each single row of the results.
      *
-     * @var array<uim.cake.databases.TypeInterface|uim.cake.databases.Type\BatchCastingInterface>
+     * @var array<uim.cake.databases.TypeInterface|uim.cake.databases.types.BatchCastingInterface>
      */
     protected $types;
 
