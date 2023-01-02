@@ -5,7 +5,7 @@
 
 
  * @since         3.4.3
-  */module uim.cake.databases.Exception;
+  */module uim.cake.databases.exceptions;
 
 import uim.cake.core.exceptions.CakeException;
 use Throwable;
