@@ -16,7 +16,7 @@
  * The {@link uim.cake.events.EventDispatcherTrait} lets you easily implement
  * this interface.
  */
-interface EventDispatcherInterface
+interface IEventDispatcher
 {
     /**
      * Wrapper for creating and dispatching events.

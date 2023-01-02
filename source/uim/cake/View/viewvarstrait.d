@@ -12,7 +12,7 @@
 
   */module uim.cake.View;
 
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 
 /**
  * Provides the set() method for collecting template context.
@@ -69,7 +69,7 @@ trait ViewVarsTrait
             [],
             this.request ?? null,
             this.response ?? null,
-            this instanceof EventDispatcherInterface ? this.getEventManager() : null
+            this instanceof IEventDispatcher ? this.getEventManager() : null
         );
     }
 

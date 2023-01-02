@@ -1,7 +1,7 @@
 module uim.cake.core;
 
 import uim.cake.consoles.CommandCollection;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.http.MiddlewareQueue;
 import uim.cake.routings.RouteBuilder;
 
@@ -11,7 +11,7 @@ import uim.cake.routings.RouteBuilder;
  * Events can be bound to the application event manager during
  * the application"s bootstrap and plugin bootstrap.
  */
-interface IPluginApplication : EventDispatcherInterface
+interface IPluginApplication : IEventDispatcher
 {
     /**
      * Add a plugin to the loaded plugin set.

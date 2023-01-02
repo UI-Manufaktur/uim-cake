@@ -13,7 +13,7 @@ import uim.cake.datasources.IEntity;
 import uim.cake.datasources.exceptions.InvalidPrimaryKeyException;
 import uim.cake.datasources.RepositoryInterface;
 import uim.cake.datasources.RulesAwareTrait;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.events.EventManager;
@@ -126,7 +126,7 @@ use RuntimeException;
  * @see uim.cake.events.EventManager for reference on the events system.
  * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list
  */
-class Table : RepositoryInterface, IEventListener, EventDispatcherInterface, ValidatorAwareInterface
+class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAwareInterface
 {
     use EventDispatcherTrait;
     use RulesAwareTrait;

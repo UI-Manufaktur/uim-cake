@@ -7,7 +7,7 @@
  * @since         3.0.3
   */module uim.cake.Validation;
 
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 use RuntimeException;
 
 /**
@@ -109,7 +109,7 @@ trait ValidatorAwareTrait
 
         $validator = new _validatorClass();
         $validator = this.$method($validator);
-        if (this instanceof EventDispatcherInterface) {
+        if (this instanceof IEventDispatcher) {
             $event = defined(static::class ~ "::BUILD_VALIDATOR_EVENT")
                 ? static::BUILD_VALIDATOR_EVENT
                 : "Model.buildValidator";

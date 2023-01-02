@@ -9,7 +9,7 @@
 
 import uim.cake.core.IHttpApplication;
 import uim.cake.core.IPluginApplication;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventManager;
 import uim.cake.events.IEventManager;
@@ -21,7 +21,7 @@ use Psr\Http\messages.IServerRequest;
 /**
  * Runs an application invoking all the PSR7 middleware and the registered application.
  */
-class Server : EventDispatcherInterface
+class Server : IEventDispatcher
 {
     use EventDispatcherTrait;
 
@@ -133,7 +133,7 @@ class Server : EventDispatcherInterface
      */
     function getEventManager(): IEventManager
     {
-        if (this.app instanceof EventDispatcherInterface) {
+        if (this.app instanceof IEventDispatcher) {
             return this.app.getEventManager();
         }
 
@@ -150,7 +150,7 @@ class Server : EventDispatcherInterface
      * @throws \InvalidArgumentException
      */
     function setEventManager(IEventManager $eventManager) {
-        if (this.app instanceof EventDispatcherInterface) {
+        if (this.app instanceof IEventDispatcher) {
             this.app.setEventManager($eventManager);
 
             return this;

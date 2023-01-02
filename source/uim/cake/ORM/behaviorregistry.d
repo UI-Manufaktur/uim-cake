@@ -3,7 +3,7 @@ module uim.cake.ORM;
 use BadMethodCallException;
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.orm.exceptions.MissingBehaviorException;
 use LogicException;
@@ -16,7 +16,7 @@ use LogicException;
  *
  * @: uim.cake.Core\ObjectRegistry<uim.cake.orm.Behavior>
  */
-class BehaviorRegistry : ObjectRegistry : EventDispatcherInterface
+class BehaviorRegistry : ObjectRegistry : IEventDispatcher
 {
     use EventDispatcherTrait;
 

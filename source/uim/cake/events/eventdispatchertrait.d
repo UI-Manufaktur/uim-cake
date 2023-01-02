@@ -8,7 +8,7 @@
   */module uim.cake.Event;
 
 /**
- * : Cake\events.EventDispatcherInterface.
+ * : Cake\events.IEventDispatcher.
  */
 trait EventDispatcherTrait
 {

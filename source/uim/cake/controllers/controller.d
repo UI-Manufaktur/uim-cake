@@ -11,7 +11,7 @@ import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
 import uim.cake.datasources.Paging\NumericPaginator;
 import uim.cake.datasources.Paging\PaginatorInterface;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventInterface;
 import uim.cake.events.IEventListener;
@@ -83,7 +83,7 @@ use UnexpectedValueException;
  * @link https://book.cakephp.org/4/en/controllers.html
  */
 #[\AllowDynamicProperties]
-class Controller : IEventListener, EventDispatcherInterface
+class Controller : IEventListener, IEventDispatcher
 {
     use EventDispatcherTrait;
     use LocatorAwareTrait;

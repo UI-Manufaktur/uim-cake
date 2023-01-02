@@ -3,7 +3,7 @@ module uim.cake.View;
 use BadMethodCallException;
 import uim.cake.caches.Cache;
 import uim.cake.datasources.ModelAwareTrait;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.IEventManager;
 import uim.cake.http.Response;
@@ -21,7 +21,7 @@ use ReflectionMethod;
  * Cell base.
  */
 #[\AllowDynamicProperties]
-abstract class Cell : EventDispatcherInterface
+abstract class Cell : IEventDispatcher
 {
     use EventDispatcherTrait;
     use LocatorAwareTrait;

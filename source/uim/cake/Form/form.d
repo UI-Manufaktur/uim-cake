@@ -1,6 +1,6 @@
 module uim.cake.Form;
 
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.events.EventManager;
@@ -22,7 +22,7 @@ import uim.cake.validations.ValidatorAwareTrait;
  *
  * Forms are conventionally placed in the `App\Form` namespace.
  */
-class Form : IEventListener, EventDispatcherInterface, ValidatorAwareInterface
+class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
 {
     use EventDispatcherTrait;
     use ValidatorAwareTrait;

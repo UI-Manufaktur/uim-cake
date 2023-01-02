@@ -2,7 +2,8 @@
 	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.controllerss.components;
+**********************************************************************************************************/
+module uim.cake.controllerss.components;
 
 @safe:
 import uim.cake;
@@ -11,12 +12,12 @@ module uim.cake.controllers.Component;
 
 import uim.cake.auths.BaseAuthenticate;
 import uim.cake.auths.BaseAuthorize;
-import uim.cake.auths.Storage\IStorage;
+import uim.cake.auths.storages\IStorage;
 import uim.cake.controllers.Component;
 import uim.cake.controllers.Controller;
 import uim.cake.core.App;
 import uim.cake.core.exceptions.CakeException;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventInterface;
 import uim.cake.http.exceptions.ForbiddenException;
@@ -37,7 +38,7 @@ import uim.cake.utilities.Hash;
  * @see https://github.com/cakephp/authentication
  * @see https://github.com/cakephp/authorization
  */
-class AuthComponent : Component : EventDispatcherInterface
+class AuthComponent : Component : IEventDispatcher
 {
     use EventDispatcherTrait;
 
@@ -186,7 +187,7 @@ class AuthComponent : Component : EventDispatcherInterface
     /**
      * Storage object.
      *
-     * @var uim.cake.auths.Storage\IStorage|null
+     * @var uim.cake.auths.storages\IStorage|null
      */
     protected $_storage;
 
@@ -856,7 +857,7 @@ class AuthComponent : Component : EventDispatcherInterface
         }
         $request = this.getController().getRequest();
         $response = this.getController().getResponse();
-        /** @var uim.cake.auths.Storage\IStorage $storage */
+        /** @var uim.cake.auths.storages\IStorage $storage */
         $storage = new $className($request, $response, $config);
 
         return _storage = $storage;

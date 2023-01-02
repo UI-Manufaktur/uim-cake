@@ -8,7 +8,7 @@
   */module uim.cake.Datasource;
 
 use ArrayObject;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 
 /**
  * A trait that allows a class to build and apply application.
@@ -42,7 +42,7 @@ trait RulesAwareTrait
         $rules = this.rulesChecker();
         $options = $options ?: new ArrayObject();
         $options = is_array($options) ? new ArrayObject($options) : $options;
-        $hasEvents = (this instanceof EventDispatcherInterface);
+        $hasEvents = (this instanceof IEventDispatcher);
 
         if ($hasEvents) {
             $event = this.dispatchEvent(

@@ -7,7 +7,7 @@ import uim.cake.consoles.exceptions.StopException;
 import uim.cake.core.IConsoleApplication;
 import uim.cake.core.IContainerApplication;
 import uim.cake.core.IPluginApplication;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventManager;
 import uim.cake.events.IEventManager;
@@ -20,7 +20,7 @@ use RuntimeException;
 /**
  * Run CLI commands for the provided application.
  */
-class CommandRunner : EventDispatcherInterface
+class CommandRunner : IEventDispatcher
 {
     use EventDispatcherTrait;
 

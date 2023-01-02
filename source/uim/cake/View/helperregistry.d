@@ -2,7 +2,7 @@ module uim.cake.View;
 
 import uim.cake.core.App;
 import uim.cake.core.ObjectRegistry;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.View\exceptions.MissingHelperException;
 
@@ -12,7 +12,7 @@ import uim.cake.View\exceptions.MissingHelperException;
  *
  * @: uim.cake.Core\ObjectRegistry<uim.cake.View\Helper>
  */
-class HelperRegistry : ObjectRegistry : EventDispatcherInterface
+class HelperRegistry : ObjectRegistry : IEventDispatcher
 {
     use EventDispatcherTrait;
 

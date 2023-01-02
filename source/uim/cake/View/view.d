@@ -12,7 +12,7 @@ import uim.cake.caches.Cache;
 import uim.cake.core.App;
 import uim.cake.core.InstanceConfigTrait;
 import uim.cake.core.Plugin;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 import uim.cake.events.EventManager;
 import uim.cake.http.Response;
@@ -63,7 +63,7 @@ use Throwable;
  * @property uim.cake.View\ViewBlock $Blocks
  */
 #[\AllowDynamicProperties]
-class View : EventDispatcherInterface
+class View : IEventDispatcher
 {
     use CellTrait {
         cell as public;

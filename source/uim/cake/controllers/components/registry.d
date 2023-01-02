@@ -4,7 +4,7 @@ import uim.cake.controllers.exceptions.MissingComponentException;
 import uim.cake.core.App;
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.core.ObjectRegistry;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
 
 /**
@@ -14,7 +14,7 @@ import uim.cake.events.EventDispatcherTrait;
  *
  * @: uim.cake.Core\ObjectRegistry<uim.cake.Controller\Component>
  */
-class ComponentRegistry : ObjectRegistry : EventDispatcherInterface
+class ComponentRegistry : ObjectRegistry : IEventDispatcher
 {
     use EventDispatcherTrait;
 

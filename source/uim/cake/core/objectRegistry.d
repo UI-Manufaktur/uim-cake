@@ -1,7 +1,7 @@
 module uim.cake.core;
 
 use ArrayIterator;
-import uim.cake.events.EventDispatcherInterface;
+import uim.cake.events.IEventDispatcher;
 import uim.cake.events.IEventListener;
 use Countable;
 use IteratorAggregate;
@@ -319,7 +319,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         if (array_key_exists($name, _loaded)) {
             this.unload($name);
         }
-        if (this instanceof EventDispatcherInterface && $object instanceof IEventListener) {
+        if (this instanceof IEventDispatcher && $object instanceof IEventListener) {
             this.getEventManager().on($object);
         }
         _loaded[$objName] = $object;
@@ -344,7 +344,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         }
 
         $object = _loaded[$name];
-        if (this instanceof EventDispatcherInterface && $object instanceof IEventListener) {
+        if (this instanceof IEventDispatcher && $object instanceof IEventListener) {
             this.getEventManager().off($object);
         }
         unset(_loaded[$name]);
