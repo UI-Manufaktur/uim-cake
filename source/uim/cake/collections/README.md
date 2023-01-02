@@ -1,7 +1,7 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/UIM/collection.svg?style=flat-square)](https://packagist.org/packages/UIM/collection)
+[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/collection.svg?style=flat-square)](https://packagist.org/packages/cakephp/collection)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# UIM Collection Library
+# CakePHP Collection Library
 
 The collection classes provide a set of tools to manipulate arrays or Traversable objects.
 If you have ever used underscore.js, you have an idea of what you can expect from the collection classes.
@@ -11,15 +11,15 @@ If you have ever used underscore.js, you have an idea of what you can expect fro
 Collections can be created using an array or Traversable object.  A simple use of a Collection would be:
 
 ```php
-import uim.cake.collections\Collection;
+import uim.cake.collections.Collection;
 
-myItems = ["a":1, "b":2, "c":3];
-myCollection = new Collection(myItems);
+$items = ["a": 1, "b": 2, "c": 3];
+$collection = new Collection($items);
 
 // Create a new collection containing elements
 // with a value greater than one.
-$overOne = myCollection.filter(function (myValue, myKey, $iterator) {
-    return myValue > 1;
+$overOne = $collection.filter(function ($value, $key, $iterator) {
+    return $value > 1;
 });
 ```
 
@@ -28,4 +28,4 @@ you have in your application as well.
 
 ## Documentation
 
-Please make sure you check the [official documentation](https://book.UIM.org/4/en/core-libraries/collections.html)
+Please make sure you check the [official documentation](https://book.cakephp.org/4/en/core-libraries/collections.html)

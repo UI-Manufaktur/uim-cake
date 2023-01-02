@@ -1,7 +1,7 @@
 The MIT License (MIT)
 
-D-Baklava : Layered Web Development Framework for D (https://www.sicherheitsschmiede.de/baklava)
-Copyright (c) 2000-2022, Ozan Nurettin Süel (https://www.sicherheitsschmiede.de)
+CakePHP(tm) : The Rapid Development PHP Framework (https://cakephp.org)
+Copyright (c) 2005-2019, Cake Software Foundation, Inc. (https://cakefoundation.org)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
