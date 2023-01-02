@@ -3,33 +3,11 @@
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.controllers;
+module uim.cake.controllers.controller;
 
 @safe:
 import uim.cake;
 
-module uim.cake.Controller;
-
-import uim.cake.controllers.exceptions.MissingActionException;
-import uim.cake.core.App;
-import uim.cake.datasources.ModelAwareTrait;
-import uim.cake.datasources.Paging\exceptions.PageOutOfBoundsException;
-import uim.cake.datasources.Paging\NumericPaginator;
-import uim.cake.datasources.Paging\PaginatorInterface;
-import uim.cake.events.IEventDispatcher;
-import uim.cake.events.EventDispatcherTrait;
-import uim.cake.events.IEvent;
-import uim.cake.events.IEventListener;
-import uim.cake.events.IEventManager;
-import uim.cake.http.ContentTypeNegotiation;
-import uim.cake.http.exceptions.NotFoundException;
-import uim.cake.http.Response;
-import uim.cake.http.ServerRequest;
-import uim.cake.logs.LogTrait;
-import uim.cake.orm.locators.LocatorAwareTrait;
-import uim.cake.routings.Router;
-import uim.cake.View\View;
-import uim.cake.View\ViewVarsTrait;
 use Closure;
 use InvalidArgumentException;
 use Psr\Http\messages.IResponse;
@@ -88,8 +66,7 @@ use UnexpectedValueException;
  * @link https://book.cakephp.org/4/en/controllers.html
  */
 #[\AllowDynamicProperties]
-class Controller : IEventListener, IEventDispatcher
-{
+class Controller : IEventListener, IEventDispatcher {
     use EventDispatcherTrait;
     use LocatorAwareTrait;
     use LogTrait;
@@ -98,9 +75,7 @@ class Controller : IEventListener, IEventDispatcher
 
     /**
      * The name of this controller. Controller names are plural, named after the model they manipulate.
-     *
      * Set automatically using conventions in Controller::__construct().
-     *
      */
     protected string aName;
 
@@ -117,10 +92,9 @@ class Controller : IEventListener, IEventDispatcher
     /**
      * An instance of a Response object that contains information about the impending response
      *
-     * @var uim.cake.http.Response
      * @link https://book.cakephp.org/4/en/controllers/request-response.html#response
      */
-    protected $response;
+    protected uim.cake.http.Response $response;
 
     /**
      * Settings for pagination.

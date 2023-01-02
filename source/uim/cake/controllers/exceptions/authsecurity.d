@@ -5,6 +5,9 @@
 **********************************************************************************************************/
 module uim.cake.controllers.exceptions.authsecurity;
 
+@safe:
+import uim.cake;
+
 // Auth Security exception - used when SecurityComponent detects any issue with the current request
 class AuthSecurityException : SecurityException
 {

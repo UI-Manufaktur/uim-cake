@@ -1,11 +1,12 @@
-module uim.cake.Controller;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.controllers.components.registry;
 
-import uim.cake.controllers.exceptions.MissingComponentException;
-import uim.cake.core.App;
-import uim.cake.core.exceptions.CakeException;
-import uim.cake.core.ObjectRegistry;
-import uim.cake.events.IEventDispatcher;
-import uim.cake.events.EventDispatcherTrait;
+@safe:
+import uim.cake;
 
 /**
  * ComponentRegistry is a registry for loaded components
@@ -14,8 +15,7 @@ import uim.cake.events.EventDispatcherTrait;
  *
  * @: uim.cake.Core\ObjectRegistry<uim.cake.Controller\Component>
  */
-class ComponentRegistry : ObjectRegistry : IEventDispatcher
-{
+class ComponentRegistry : ObjectRegistry, IEventDispatcher {
     use EventDispatcherTrait;
 
     /**
@@ -41,8 +41,7 @@ class ComponentRegistry : ObjectRegistry : IEventDispatcher
      *
      * @return uim.cake.controllers.Controller Controller instance or null if not set.
      */
-    function getController(): Controller
-    {
+    Controller getController() {
         if (_Controller == null) {
             throw new CakeException("Controller not set for ComponentRegistry");
         }

@@ -1,19 +1,19 @@
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
 module uim.cake.controllers.error;
 
 @safe:
-import uim.cake
-
-import uim.cake.events.IEvent;
+import uim.cake;
 
 /**
  * Error Handling Controller
- *
  * Controller used by ErrorHandler to render error views.
  */
 class ErrorController : Controller {
-    /**
-     * Initialization hook method.
-     */
+    // Initialization hook method.
     void initialize() {
         this.loadComponent("RequestHandler");
     }
