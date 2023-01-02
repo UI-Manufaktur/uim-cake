@@ -1078,9 +1078,8 @@ class Response : IResponse
     /**
      * Returns whether the resulting output will be compressed by PHP
      *
-     * @return bool
      */
-    function outputCompressed(): bool
+    bool outputCompressed(): bool
     {
         return strpos((string)env("HTTP_ACCEPT_ENCODING"), "gzip") != false
             && (ini_get("zlib.output_compression") == "1" || in_array("ob_gzhandler", ob_list_handlers(), true));

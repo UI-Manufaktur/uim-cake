@@ -588,9 +588,8 @@ class SqliteSchemaDialect : SchemaDialect
      * Returns whether there is any table in this connection to SQLite containing
      * sequences
      *
-     * @return bool
      */
-    function hasSequences(): bool
+    bool hasSequences(): bool
     {
         $result = _driver.prepare(
             "SELECT 1 FROM sqlite_master WHERE name = "sqlite_sequence""

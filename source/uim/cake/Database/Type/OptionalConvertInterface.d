@@ -10,7 +10,6 @@ interface OptionalConvertInterface
      * Returns whether the cast to PHP is required to be invoked, since
      * it is not a identity function.
      *
-     * @return bool
      */
-    function requiresToPhpCast(): bool;
+    bool requiresToPhpCast(): bool;
 }

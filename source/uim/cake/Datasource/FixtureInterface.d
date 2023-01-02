@@ -37,9 +37,8 @@ interface FixtureInterface
      * Truncates the current fixture.
      *
      * @param uim.cake.Datasource\ConnectionInterface $connection A reference to a db instance
-     * @return bool
      */
-    function truncate(ConnectionInterface $connection): bool;
+    bool truncate(ConnectionInterface $connection): bool;
 
     // Get the connection name this fixture should be inserted into.
     string connection();

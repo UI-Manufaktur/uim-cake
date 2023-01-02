@@ -106,9 +106,8 @@ class EventList : ArrayAccess, Countable
      * Checks if an event is in the list.
      *
      * @param string aName Event name.
-     * @return bool
      */
-    function hasEvent(string aName): bool
+    bool hasEvent(string aName): bool
     {
         foreach (_events as $event) {
             if ($event.getName() == $name) {

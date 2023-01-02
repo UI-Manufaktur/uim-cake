@@ -43,9 +43,8 @@ class FormProtector
      * @param mixed $formData Form data.
      * @param string $url URL form was POSTed to.
      * @param string $sessionId Session id for hash generation.
-     * @return bool
      */
-    function validate($formData, string $url, string $sessionId): bool
+    bool validate($formData, string $url, string $sessionId): bool
     {
         this.debugMessage = null;
 

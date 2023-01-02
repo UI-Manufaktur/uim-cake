@@ -258,9 +258,8 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * Returns whether the iterator has more elements
      *
-     * @return bool
      */
-    function valid(): bool
+    bool valid(): bool
     {
         $old = this.index;
         $row = this.fetch(self::FETCH_TYPE_ASSOC);

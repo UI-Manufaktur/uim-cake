@@ -227,9 +227,8 @@ abstract class BaseErrorHandler
      * @param string $description Error description
      * @param string $file File on which error occurred
      * @param int $line Line that triggered the error
-     * @return bool
      */
-    function handleFatalError(int $code, string $description, string $file, int $line): bool
+    bool handleFatalError(int $code, string $description, string $file, int $line): bool
     {
         $data = [
             "code": $code,
@@ -307,9 +306,8 @@ abstract class BaseErrorHandler
      *
      * @param \Throwable $exception The exception to log a message for.
      * @param \Psr\Http\messages.IServerRequest|null $request The current request.
-     * @return bool
      */
-    function logException(Throwable $exception, ?IServerRequest $request = null): bool
+    bool logException(Throwable $exception, ?IServerRequest $request = null): bool
     {
         if (empty(_config["log"])) {
             return false;

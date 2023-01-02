@@ -235,9 +235,8 @@ class RulesChecker
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
-     * @return bool
      */
-    function checkCreate(IEntity $entity, array $options = []): bool
+    bool checkCreate(IEntity $entity, array $options = []): bool
     {
         return _checkRules($entity, $options, array_merge(_rules, _createRules));
     }
@@ -248,9 +247,8 @@ class RulesChecker
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
-     * @return bool
      */
-    function checkUpdate(IEntity $entity, array $options = []): bool
+    bool checkUpdate(IEntity $entity, array $options = []): bool
     {
         return _checkRules($entity, $options, array_merge(_rules, _updateRules));
     }
@@ -261,9 +259,8 @@ class RulesChecker
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
-     * @return bool
      */
-    function checkDelete(IEntity $entity, array $options = []): bool
+    bool checkDelete(IEntity $entity, array $options = []): bool
     {
         return _checkRules($entity, $options, _deleteRules);
     }

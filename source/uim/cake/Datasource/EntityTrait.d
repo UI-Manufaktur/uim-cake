@@ -330,9 +330,8 @@ trait EntityTrait
      * in order for true to be returned.
      *
      * @param array<string>|string $field The field or fields to check.
-     * @return bool
      */
-    function has($field): bool
+    bool has($field): bool
     {
         foreach ((array)$field as $prop) {
             if (this.get($prop) == null) {
@@ -356,9 +355,8 @@ trait EntityTrait
      * and false in all other cases.
      *
      * @param string $field The field to check.
-     * @return bool
      */
-    function isEmpty(string $field): bool
+    bool isEmpty(string $field): bool
     {
         $value = this.get($field);
         if (
@@ -392,9 +390,8 @@ trait EntityTrait
      * and false in all other cases.
      *
      * @param string $field The field to check.
-     * @return bool
      */
-    function hasValue(string $field): bool
+    bool hasValue(string $field): bool
     {
         return !this.isEmpty($field);
     }
@@ -796,9 +793,8 @@ trait EntityTrait
      * Returns whether this entity has errors.
      *
      * @param bool $includeNested true will check nested entities for hasErrors()
-     * @return bool
      */
-    function hasErrors(bool $includeNested = true): bool
+    bool hasErrors(bool $includeNested = true): bool
     {
         if (Hash::filter(_errors)) {
             return true;
@@ -1135,9 +1131,8 @@ trait EntityTrait
      * ```
      *
      * @param string $field Field name to check
-     * @return bool
      */
-    function isAccessible(string $field): bool
+    bool isAccessible(string $field): bool
     {
         $value = _accessible[$field] ?? null;
 

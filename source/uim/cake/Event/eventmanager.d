@@ -384,9 +384,8 @@ class EventManager : IEventManager
     /**
      * Returns whether this manager is set up to track events
      *
-     * @return bool
      */
-    function isTrackingEvents(): bool
+    bool isTrackingEvents(): bool
     {
         return _trackEvents && _eventList;
     }

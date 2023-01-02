@@ -147,9 +147,8 @@ class Time : MutableDateTime : I18nDateTimeInterface
     /**
      * Returns true if this object represents a date within the current week
      *
-     * @return bool
      */
-    function isThisWeek(): bool
+    bool isThisWeek(): bool
     {
         return static::now(this.getTimezone()).format("W o") == this.format("W o");
     }
@@ -157,9 +156,8 @@ class Time : MutableDateTime : I18nDateTimeInterface
     /**
      * Returns true if this object represents a date within the current month
      *
-     * @return bool
      */
-    function isThisMonth(): bool
+    bool isThisMonth(): bool
     {
         return static::now(this.getTimezone()).format("m Y") == this.format("m Y");
     }
@@ -167,9 +165,8 @@ class Time : MutableDateTime : I18nDateTimeInterface
     /**
      * Returns true if this object represents a date within the current year
      *
-     * @return bool
      */
-    function isThisYear(): bool
+    bool isThisYear(): bool
     {
         return static::now(this.getTimezone()).format("Y") == this.format("Y");
     }

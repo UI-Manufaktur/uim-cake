@@ -49,9 +49,8 @@ class ResponseEmitter : EmitterInterface
      * according to the environment.
      *
      * @param \Psr\Http\messages.IResponse $response The response to emit.
-     * @return bool
      */
-    function emit(IResponse $response): bool
+    bool emit(IResponse $response): bool
     {
         $file = "";
         $line = 0;

@@ -73,9 +73,8 @@ interface IEntity : ArrayAccess, JsonSerializable
      * Returns whether this entity has errors.
      *
      * @param bool $includeNested true will check nested entities for hasErrors()
-     * @return bool
      */
-    function hasErrors(bool $includeNested = true): bool;
+    bool hasErrors(bool $includeNested = true): bool;
 
     /**
      * Returns all validation errors.
@@ -122,9 +121,8 @@ interface IEntity : ArrayAccess, JsonSerializable
      * Checks if a field is accessible
      *
      * @param string $field Field name to check
-     * @return bool
      */
-    function isAccessible(string $field): bool;
+    bool isAccessible(string $field): bool;
 
     /**
      * Sets the source alias
@@ -192,9 +190,8 @@ interface IEntity : ArrayAccess, JsonSerializable
      * and is not set to null.
      *
      * @param array<string>|string $field The field to check.
-     * @return bool
      */
-    function has($field): bool;
+    bool has($field): bool;
 
     /**
      * Removes a field or list of fields from this entity

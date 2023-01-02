@@ -157,9 +157,8 @@ interface TableISchema : ISchema
     /**
      * Check whether a table has an autoIncrement column defined.
      *
-     * @return bool
      */
-    function hasAutoincrement(): bool;
+    bool hasAutoincrement(): bool;
 
     /**
      * Sets whether the table is temporary in the database.

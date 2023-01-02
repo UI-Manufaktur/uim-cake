@@ -190,9 +190,8 @@ class TupleComparison : ComparisonExpression
      * Determines if each of the values in this expressions is a tuple in
      * itself
      *
-     * @return bool
      */
-    function isMulti(): bool
+    bool isMulti(): bool
     {
         return in_array(strtolower(_operator), ["in", "not in"]);
     }

@@ -564,9 +564,8 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     /**
      * Check whether a table has an autoIncrement column defined.
      *
-     * @return bool
      */
-    function hasAutoincrement(): bool
+    bool hasAutoincrement(): bool
     {
         foreach (_columns as $column) {
             if (isset($column["autoIncrement"]) && $column["autoIncrement"]) {

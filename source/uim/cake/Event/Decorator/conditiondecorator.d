@@ -38,9 +38,8 @@ class ConditionDecorator : AbstractDecorator
      * Checks if the event is triggered for this listener.
      *
      * @param uim.cake.events.IEvent $event Event object.
-     * @return bool
      */
-    function canTrigger(IEvent $event): bool
+    bool canTrigger(IEvent $event): bool
     {
         $if = _evaluateCondition("if", $event);
         $unless = _evaluateCondition("unless", $event);

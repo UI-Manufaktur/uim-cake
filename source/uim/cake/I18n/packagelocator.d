@@ -92,9 +92,8 @@ class PackageLocator
      *
      * @param string aName The package name.
      * @param string $locale The locale for the package.
-     * @return bool
      */
-    function has(string aName, string $locale): bool
+    bool has(string aName, string $locale): bool
     {
         return isset(this.registry[$name][$locale]);
     }

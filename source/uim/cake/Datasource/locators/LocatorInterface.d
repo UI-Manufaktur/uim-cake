@@ -38,9 +38,8 @@ interface ILocator
      * Check to see if an instance exists in the registry.
      *
      * @param string $alias The alias to check for.
-     * @return bool
      */
-    function exists(string $alias): bool;
+    bool exists(string $alias): bool;
 
     /**
      * Removes an repository instance from the registry.

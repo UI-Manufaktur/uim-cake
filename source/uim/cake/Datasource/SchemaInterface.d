@@ -49,9 +49,8 @@ interface ISchema {
      * Returns true if a column exists in the schema.
      *
      * @param string aName Column name.
-     * @return bool
      */
-    function hasColumn(string aName): bool;
+    bool hasColumn(string aName): bool;
 
     /**
      * Remove a column from the table schema.

@@ -111,9 +111,8 @@ interface RepositoryInterface
      * conditions.
      *
      * @param array $conditions list of conditions to pass to the query
-     * @return bool
      */
-    function exists($conditions): bool;
+    bool exists($conditions): bool;
 
     /**
      * Persists an entity based on the fields that are marked as dirty and

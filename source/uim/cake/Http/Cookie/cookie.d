@@ -593,9 +593,8 @@ class Cookie : CookieInterface
      * on first use.
      *
      * @param string $path Path to check
-     * @return bool
      */
-    function check(string $path): bool
+    bool check(string $path): bool
     {
         if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -671,9 +670,8 @@ class Cookie : CookieInterface
     /**
      * Checks if the cookie value was expanded
      *
-     * @return bool
      */
-    function isExpanded(): bool
+    bool isExpanded(): bool
     {
         return this.isExpanded;
     }

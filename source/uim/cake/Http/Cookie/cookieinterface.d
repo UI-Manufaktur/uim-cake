@@ -172,16 +172,14 @@ interface CookieInterface
      * Cookies without an expiration date always return false.
      *
      * @param \DateTime|\DateTimeImmutable $time The time to test against. Defaults to "now" in UTC.
-     * @return bool
      */
-    function isExpired($time = null): bool;
+    bool isExpired($time = null): bool;
 
     /**
      * Check if the cookie is HTTP only
      *
-     * @return bool
      */
-    function isHttpOnly(): bool;
+    bool isHttpOnly(): bool;
 
     /**
      * Create a cookie with HTTP Only updated
@@ -194,9 +192,8 @@ interface CookieInterface
     /**
      * Check if the cookie is secure
      *
-     * @return bool
      */
-    function isSecure(): bool;
+    bool isSecure(): bool;
 
     /**
      * Create a cookie with Secure updated

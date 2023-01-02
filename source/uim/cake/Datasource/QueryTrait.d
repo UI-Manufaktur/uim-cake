@@ -172,9 +172,8 @@ trait QueryTrait
     /**
      * Returns the current configured query `_eagerLoaded` value
      *
-     * @return bool
      */
-    function isEagerLoaded(): bool
+    bool isEagerLoaded(): bool
     {
         return _eagerLoaded;
     }
