@@ -22,16 +22,14 @@ interface ContextInterface
      *
      * @param string $field A dot separated path to the field a value
      *   is needed for.
-     * @return bool
      */
-    function isPrimaryKey(string $field): bool;
+    bool isPrimaryKey(string $field): bool;
 
     /**
      * Returns whether this form is for a create operation.
      *
-     * @return bool
      */
-    function isCreate(): bool;
+    bool isCreate(): bool;
 
     /**
      * Get the current value for a given field.

@@ -11,9 +11,8 @@ class HeaderContains : HeaderEquals
      * Checks assertion
      *
      * @param mixed $other Expected content
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         return mb_strpos(this.response.getHeaderLine(this.headerName), $other) != false;
     }

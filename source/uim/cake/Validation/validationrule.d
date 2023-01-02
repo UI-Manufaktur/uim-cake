@@ -78,9 +78,8 @@ class ValidationRule
      * Returns whether this rule should break validation process for associated field
      * after it fails
      *
-     * @return bool
      */
-    function isLast(): bool
+    bool isLast(): bool
     {
         return _last;
     }

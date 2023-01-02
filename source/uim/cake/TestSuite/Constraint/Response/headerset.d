@@ -29,9 +29,8 @@ class HeaderSet : ResponseBase
      * Checks assertion
      *
      * @param mixed $other Expected content
-     * @return bool
      */
-    function matches($other): bool
+    bool matches($other): bool
     {
         return this.response.hasHeader(this.headerName);
     }

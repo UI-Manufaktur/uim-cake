@@ -174,9 +174,8 @@ class ViewBlock
      * Check if a block exists
      *
      * @param string aName Name of the block
-     * @return bool
      */
-    function exists(string aName): bool
+    bool exists(string aName): bool
     {
         return isset(_blocks[$name]);
     }

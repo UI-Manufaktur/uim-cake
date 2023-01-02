@@ -143,9 +143,8 @@ class ViewBuilder : JsonSerializable, Serializable
      * Check if view var is set.
      *
      * @param string aName Var name
-     * @return bool
      */
-    function hasVar(string aName): bool
+    bool hasVar(string aName): bool
     {
         return array_key_exists($name, _vars);
     }
@@ -246,9 +245,8 @@ class ViewBuilder : JsonSerializable, Serializable
      * Returns if CakePHP"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      *
-     * @return bool
      */
-    function isAutoLayoutEnabled(): bool
+    bool isAutoLayoutEnabled(): bool
     {
         return _autoLayout;
     }

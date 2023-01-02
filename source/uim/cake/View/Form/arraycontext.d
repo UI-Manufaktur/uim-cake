@@ -127,9 +127,8 @@ class ArrayContext : ContextInterface
      * must be defined in the "schema" data, and the "defaults" data must
      * contain a value for all fields in the key.
      *
-     * @return bool
      */
-    function isCreate(): bool
+    bool isCreate(): bool
     {
         $primary = this.getPrimaryKey();
         foreach ($primary as $column) {

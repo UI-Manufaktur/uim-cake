@@ -192,9 +192,8 @@ class EntityContext : ContextInterface
      * If the context is for a collection or array the first object in the
      * collection will be used.
      *
-     * @return bool
      */
-    function isCreate(): bool
+    bool isCreate(): bool
     {
         $entity = _context["entity"];
         if (is_iterable($entity)) {

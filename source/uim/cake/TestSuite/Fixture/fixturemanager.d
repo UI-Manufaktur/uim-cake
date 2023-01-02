@@ -483,9 +483,8 @@ class FixtureManager
      *
      * @param string $connection The connection name.
      * @param uim.cake.Datasource\FixtureInterface $fixture The fixture to check.
-     * @return bool
      */
-    function isFixtureSetup(string $connection, FixtureInterface $fixture): bool
+    bool isFixtureSetup(string $connection, FixtureInterface $fixture): bool
     {
         return isset(_insertionMap[$connection]) && in_array($fixture, _insertionMap[$connection], true);
     }

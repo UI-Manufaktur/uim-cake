@@ -157,9 +157,8 @@ trait ValidatorAwareTrait
      * Checks whether a validator has been set.
      *
      * @param string aName The name of a validator.
-     * @return bool
      */
-    function hasValidator(string aName): bool
+    bool hasValidator(string aName): bool
     {
         $method = "validation" ~ ucfirst($name);
         if (this.validationMethodExists($method)) {
