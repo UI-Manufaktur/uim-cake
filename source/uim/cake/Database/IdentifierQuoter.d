@@ -1,4 +1,4 @@
-module uim.cake.Database;
+module uim.cake.databases;
 
 import uim.cake.databases.expressions.FieldInterface;
 import uim.cake.databases.expressions.IdentifierExpression;

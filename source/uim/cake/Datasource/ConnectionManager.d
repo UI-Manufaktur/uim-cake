@@ -172,7 +172,7 @@ class ConnectionManager
      *
      * @param string aName The connection name.
      * @param bool $useAliases Set to false to not use aliased connections.
-     * @return uim.cake.Datasource\ConnectionInterface A connection object.
+     * @return uim.cake.Datasource\IConnection A connection object.
      * @throws uim.cake.Datasource\exceptions.MissingDatasourceConfigException When config
      * data is missing.
      */

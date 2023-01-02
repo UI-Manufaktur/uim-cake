@@ -1,4 +1,4 @@
-module uim.cake.Database;
+module uim.cake.databases;
 
 /**
  * Responsible for compiling a Query object into its SQL representation

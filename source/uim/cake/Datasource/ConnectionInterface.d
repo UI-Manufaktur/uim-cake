@@ -24,7 +24,7 @@ use Psr\SimpleCache\ICache;
  * @method uim.cake.databases.StatementInterface query(string $sql) Executes a SQL statement and returns the Statement
  *   object as result. {@see uim.cake.databases.Connnection::query()}
  */
-interface ConnectionInterface : LoggerAwareInterface
+interface IConnection : LoggerAwareInterface
 {
     /**
      * Gets the current logger object.

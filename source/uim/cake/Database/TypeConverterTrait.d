@@ -1,4 +1,4 @@
-module uim.cake.Database;
+module uim.cake.databases;
 
 /**
  * Type converter trait

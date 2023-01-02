@@ -1,4 +1,4 @@
-module uim.cake.Database;
+module uim.cake.databases;
 
 import uim.cake.databases.expressions.AggregateExpression;
 import uim.cake.databases.expressions.FunctionExpression;

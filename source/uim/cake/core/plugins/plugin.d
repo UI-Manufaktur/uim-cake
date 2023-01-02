@@ -74,9 +74,8 @@ class Plugin
      *
      * @param string $plugin Plugin name.
      * @return bool
-
      */
-    static function isLoaded(string $plugin): bool
+    static bool isLoaded(string $plugin)
     {
         return static::getCollection().has($plugin);
     }

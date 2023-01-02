@@ -8,37 +8,37 @@ interface FixtureInterface
     /**
      * Create the fixture schema/mapping/definition
      *
-     * @param uim.cake.Datasource\ConnectionInterface $connection An instance of the connection the fixture should be created on.
+     * @param uim.cake.Datasource\IConnection $connection An instance of the connection the fixture should be created on.
      * @return bool True on success, false on failure.
      */
-    function create(ConnectionInterface $connection): bool;
+    function create(IConnection $connection): bool;
 
     /**
      * Run after all tests executed, should remove the table/collection from the connection.
      *
-     * @param uim.cake.Datasource\ConnectionInterface $connection An instance of the connection the fixture should be removed from.
+     * @param uim.cake.Datasource\IConnection $connection An instance of the connection the fixture should be removed from.
      * @return bool True on success, false on failure.
      */
-    function drop(ConnectionInterface $connection): bool;
+    function drop(IConnection $connection): bool;
 
     /**
      * Run before each test is executed.
      *
      * Should insert all the records into the test database.
      *
-     * @param uim.cake.Datasource\ConnectionInterface $connection An instance of the connection
+     * @param uim.cake.Datasource\IConnection $connection An instance of the connection
      *   into which the records will be inserted.
      * @return uim.cake.databases.StatementInterface|bool on success or if there are no records to insert,
      *  or false on failure.
      */
-    function insert(ConnectionInterface $connection);
+    function insert(IConnection $connection);
 
     /**
      * Truncates the current fixture.
      *
-     * @param uim.cake.Datasource\ConnectionInterface $connection A reference to a db instance
+     * @param uim.cake.Datasource\IConnection $connection A reference to a db instance
      */
-    bool truncate(ConnectionInterface $connection): bool;
+    bool truncate(IConnection $connection): bool;
 
     // Get the connection name this fixture should be inserted into.
     string connection();

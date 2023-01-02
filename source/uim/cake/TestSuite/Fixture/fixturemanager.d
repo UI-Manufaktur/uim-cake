@@ -2,10 +2,10 @@ module uim.cake.TestSuite\Fixture;
 
 import uim.cake.core.Configure;
 import uim.cake.core.exceptions.CakeException;
-import uim.cake.databases.ConstraintsInterface;
+import uim.cake.databases.IConstraints;
 import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;
-import uim.cake.datasources.ConnectionInterface;
+import uim.cake.datasources.IConnection;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.datasources.FixtureInterface;
 import uim.cake.TestSuite\TestCase;
@@ -224,13 +224,13 @@ class FixtureManager
      * Runs the drop and create commands on the fixtures if necessary.
      *
      * @param uim.cake.Datasource\FixtureInterface $fixture the fixture object to create
-     * @param uim.cake.Datasource\ConnectionInterface $db The Connection object instance to use
+     * @param uim.cake.Datasource\IConnection $db The Connection object instance to use
      * @param array<string> $sources The existing tables in the datasource.
      * @param bool $drop whether drop the fixture if it is already created or not
      */
     protected void _setupTable(
         FixtureInterface $fixture,
-        ConnectionInterface $db,
+        IConnection $db,
         array $sources,
         bool $drop = true
     ): void {
@@ -270,14 +270,14 @@ class FixtureManager
         }
 
         try {
-            $createTables = function (ConnectionInterface $db, array $fixtures) use ($test): void {
+            $createTables = function (IConnection $db, array $fixtures) use ($test): void {
                 /** @var array<uim.cake.Datasource\FixtureInterface> $fixtures */
                 $tables = $db.getSchemaCollection().listTables();
                 $configName = $db.configName();
                 _insertionMap[$configName] = _insertionMap[$configName] ?? [];
 
                 foreach ($fixtures as $fixture) {
-                    if (!$fixture instanceof ConstraintsInterface) {
+                    if (!$fixture instanceof IConstraints) {
                         continue;
                     }
 
@@ -305,7 +305,7 @@ class FixtureManager
                 }
 
                 foreach ($fixtures as $fixture) {
-                    if (!$fixture instanceof ConstraintsInterface) {
+                    if (!$fixture instanceof IConstraints) {
                         continue;
                     }
 
@@ -325,7 +325,7 @@ class FixtureManager
             _runOperation($fixtures, $createTables);
 
             // Use a separate transaction because of postgres.
-            $insert = function (ConnectionInterface $db, array $fixtures) use ($test): void {
+            $insert = function (IConnection $db, array $fixtures) use ($test): void {
                 foreach ($fixtures as $fixture) {
                     try {
                         $fixture.insert($db);
@@ -367,8 +367,8 @@ class FixtureManager
             if ($logQueries && !_debug) {
                 $db.disableQueryLogging();
             }
-            $db.transactional(function (ConnectionInterface $db) use ($fixtures, $operation): void {
-                $db.disableConstraints(function (ConnectionInterface $db) use ($fixtures, $operation): void {
+            $db.transactional(function (IConnection $db) use ($fixtures, $operation): void {
+                $db.disableConstraints(function (IConnection $db) use ($fixtures, $operation): void {
                     $operation($db, $fixtures);
                 });
             });
@@ -408,13 +408,13 @@ class FixtureManager
         if (!$fixtures) {
             return;
         }
-        $truncate = function (ConnectionInterface $db, array $fixtures): void {
+        $truncate = function (IConnection $db, array $fixtures): void {
             $configName = $db.configName();
 
             foreach ($fixtures as $fixture) {
                 if (
                     this.isFixtureSetup($configName, $fixture)
-                    && $fixture instanceof ConstraintsInterface
+                    && $fixture instanceof IConstraints
                 ) {
                     $fixture.dropConstraints($db);
                 }
@@ -425,12 +425,12 @@ class FixtureManager
 
     /**
      * @param string aName Name
-     * @param uim.cake.Datasource\ConnectionInterface|null $connection Connection
+     * @param uim.cake.Datasource\IConnection|null $connection Connection
      * @param bool $dropTables Drop all tables prior to loading schema files
      * @return void
      * @throws \UnexpectedValueException
      */
-    function loadSingle(string aName, ?ConnectionInterface $connection = null, bool $dropTables = true): void
+    function loadSingle(string aName, ?IConnection $connection = null, bool $dropTables = true): void
     {
         if (!isset(_fixtureMap[$name])) {
             throw new UnexpectedValueException(sprintf("Referenced fixture class %s not found", $name));
@@ -447,13 +447,13 @@ class FixtureManager
         }
 
         if (!$dropTables) {
-            if ($fixture instanceof ConstraintsInterface) {
+            if ($fixture instanceof IConstraints) {
                 $fixture.dropConstraints($connection);
             }
             $fixture.truncate($connection);
         }
 
-        if ($fixture instanceof ConstraintsInterface) {
+        if ($fixture instanceof IConstraints) {
             $fixture.createConstraints($connection);
         }
         $fixture.insert($connection);
@@ -464,7 +464,7 @@ class FixtureManager
      */
     void shutDown(): void
     {
-        $shutdown = function (ConnectionInterface $db, array $fixtures): void {
+        $shutdown = function (IConnection $db, array $fixtures): void {
             $connection = $db.configName();
             /** @var uim.cake.datasources.FixtureInterface $fixture */
             foreach ($fixtures as $fixture) {

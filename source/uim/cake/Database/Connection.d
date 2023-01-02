@@ -1,4 +1,4 @@
-module uim.cake.Database;
+module uim.cake.databases;
 
 import uim.cake.caches.Cache;
 import uim.cake.core.App;
@@ -14,7 +14,7 @@ import uim.cake.databases.Retry\ReconnectStrategy;
 import uim.cake.databases.schemas.CachedCollection;
 import uim.cake.databases.schemas.Collection as SchemaCollection;
 import uim.cake.databases.schemas.ICollection as SchemaICollection;
-import uim.cake.datasources.ConnectionInterface;
+import uim.cake.datasources.IConnection;
 import uim.cake.logs.Engine\BaseLog;
 import uim.cake.logs.Log;
 use Psr\logs.LoggerInterface;
@@ -25,7 +25,7 @@ use Throwable;
 /**
  * Represents a connection with a database server.
  */
-class Connection : ConnectionInterface
+class Connection : IConnection
 {
     use TypeConverterTrait;
 
@@ -225,7 +225,7 @@ class Connection : ConnectionInterface
      * @throws uim.cake.databases.exceptions.MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
-    function connect(): bool
+    bool connect()
     {
         try {
             return _driver.connect();
@@ -254,7 +254,7 @@ class Connection : ConnectionInterface
      * Returns whether connection to database server was already established.
      *
      */
-    bool isConnected(): bool
+    bool isConnected()
     {
         return _driver.isConnected();
     }
@@ -476,7 +476,7 @@ class Connection : ConnectionInterface
      *
      * @return bool true on success, false otherwise
      */
-    function commit(): bool
+    bool commit()
     {
         if (!_transactionStarted) {
             return false;
@@ -513,7 +513,7 @@ class Connection : ConnectionInterface
      * @param bool|null $toBeginning Whether the transaction should be rolled back to the
      * beginning of it. Defaults to false if using savepoints, or true if not.
      */
-    bool rollback(?bool $toBeginning = null): bool
+    bool rollback(?bool $toBeginning = null)
     {
         if (!_transactionStarted) {
             return false;
@@ -580,7 +580,7 @@ class Connection : ConnectionInterface
      *
      * @return bool true if enabled, false otherwise
      */
-    function isSavePointsEnabled(): bool
+    bool isSavePointsEnabled()
     {
         return _useSavePoints;
     }
@@ -640,7 +640,7 @@ class Connection : ConnectionInterface
      * @return bool true if driver supports dynamic constraints
      * @deprecated 4.3.0 Fixtures no longer dynamically drop and create constraints.
      */
-    function supportsDynamicConstraints(): bool
+    bool supportsDynamicConstraints()
     {
         return _driver.supportsDynamicConstraints();
     }
@@ -676,7 +676,7 @@ class Connection : ConnectionInterface
      * Returns whether some nested transaction has been already rolled back.
      *
      */
-    protected bool wasNestedTransactionRolledback(): bool
+    protected bool wasNestedTransactionRolledback()
     {
         return this.nestedTransactionRollbackException instanceof NestedTransactionRollbackException;
     }
@@ -701,7 +701,7 @@ class Connection : ConnectionInterface
      *
      * @return bool True if a transaction is running else false.
      */
-    function inTransaction(): bool
+    bool inTransaction()
     {
         return _transactionStarted;
     }
@@ -727,7 +727,7 @@ class Connection : ConnectionInterface
      * This is not required to use `quoteIdentifier()`.
      *
      */
-    bool supportsQuoting(): bool
+    bool supportsQuoting()
     {
         return _driver.supports(DriverInterface::FEATURE_QUOTE);
     }
@@ -816,7 +816,7 @@ class Connection : ConnectionInterface
      * Check if query logging is enabled.
      *
      */
-    bool isQueryLoggingEnabled(): bool
+    bool isQueryLoggingEnabled()
     {
         return _logQueries;
     }

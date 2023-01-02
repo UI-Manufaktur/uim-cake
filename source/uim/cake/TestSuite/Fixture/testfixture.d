@@ -4,10 +4,10 @@
   */module uim.cake.TestSuite\Fixture;
 
 import uim.cake.core.exceptions.CakeException;
-import uim.cake.databases.ConstraintsInterface;
+import uim.cake.databases.IConstraints;
 import uim.cake.databases.schemas.TableSchema;
 import uim.cake.databases.schemas.TableSchemaAwareInterface;
-import uim.cake.datasources.ConnectionInterface;
+import uim.cake.datasources.IConnection;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.datasources.FixtureInterface;
 import uim.cake.logs.Log;
@@ -19,7 +19,7 @@ use Exception;
  * Cake TestFixture is responsible for building and destroying tables to be used
  * during testing.
  */
-class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInterface
+class TestFixture : IConstraints, FixtureInterface, TableSchemaAwareInterface
 {
     use LocatorAwareTrait;
 
@@ -246,7 +246,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function create(ConnectionInterface $connection): bool
+    function create(IConnection $connection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(_schema)) {
@@ -281,7 +281,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function drop(ConnectionInterface $connection): bool
+    function drop(IConnection $connection): bool
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(_schema)) {
@@ -306,7 +306,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function insert(ConnectionInterface $connection) {
+    function insert(IConnection $connection) {
         if (!empty(this.records)) {
             [$fields, $values, $types] = _getRecords();
             $query = $connection.newQuery()
@@ -326,7 +326,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function createConstraints(ConnectionInterface $connection): bool
+    function createConstraints(IConnection $connection): bool
     {
         if (empty(_constraints)) {
             return true;
@@ -351,7 +351,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function dropConstraints(ConnectionInterface $connection): bool
+    function dropConstraints(IConnection $connection): bool
     {
         if (empty(_constraints)) {
             return true;
@@ -402,7 +402,7 @@ class TestFixture : ConstraintsInterface, FixtureInterface, TableSchemaAwareInte
     }
 
 
-    function truncate(ConnectionInterface $connection): bool
+    function truncate(IConnection $connection): bool
     {
         /** @psalm-suppress ArgumentTypeCoercion */
         $sql = _schema.truncateSql($connection);

@@ -84,7 +84,7 @@ class FixtureHelper
      *
      * The callback signature:
      * ```
-     * function callback(ConnectionInterface $connection, array $fixtures)
+     * function callback(IConnection $connection, array $fixtures)
      * ```
      *
      * @param \Closure $callback Callback run per connection
@@ -111,7 +111,7 @@ class FixtureHelper
      */
     function insert(array $fixtures): void
     {
-        this.runPerConnection(function (ConnectionInterface $connection, array $groupFixtures): void {
+        this.runPerConnection(function (IConnection $connection, array $groupFixtures): void {
             if ($connection instanceof Connection) {
                 $sortedFixtures = this.sortByConstraint($connection, $groupFixtures);
                 if ($sortedFixtures) {
@@ -134,10 +134,10 @@ class FixtureHelper
     /**
      * Inserts all fixtures for a connection and provides friendly errors for bad data.
      *
-     * @param uim.cake.Datasource\ConnectionInterface $connection Fixture connection
+     * @param uim.cake.Datasource\IConnection $connection Fixture connection
      * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Connection fixtures
      */
-    protected void insertConnection(ConnectionInterface $connection, array $fixtures): void
+    protected void insertConnection(IConnection $connection, array $fixtures): void
     {
         foreach ($fixtures as $fixture) {
             try {
@@ -163,7 +163,7 @@ class FixtureHelper
      */
     function truncate(array $fixtures): void
     {
-        this.runPerConnection(function (ConnectionInterface $connection, array $groupFixtures): void {
+        this.runPerConnection(function (IConnection $connection, array $groupFixtures): void {
             if ($connection instanceof Connection) {
                 $sortedFixtures = null;
                 if ($connection.getDriver().supports(DriverInterface::FEATURE_TRUNCATE_WITH_CONSTRAINTS)) {
@@ -190,10 +190,10 @@ class FixtureHelper
     /**
      * Truncates all fixtures for a connection and provides friendly errors for bad data.
      *
-     * @param uim.cake.Datasource\ConnectionInterface $connection Fixture connection
+     * @param uim.cake.Datasource\IConnection $connection Fixture connection
      * @param array<uim.cake.Datasource\FixtureInterface> $fixtures Connection fixtures
      */
-    protected void truncateConnection(ConnectionInterface $connection, array $fixtures): void
+    protected void truncateConnection(IConnection $connection, array $fixtures): void
     {
         foreach ($fixtures as $fixture) {
             try {

@@ -1,4 +1,4 @@
-module uim.cake.Database;
+module uim.cake.databases;
 
 import uim.cake.databases.exceptions.DatabaseException;
 use Closure;

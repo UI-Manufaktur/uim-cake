@@ -1,4 +1,4 @@
-module uim.cake.Database;
+module uim.cake.databases;
 
 import uim.cake.core.App;
 import uim.cake.core.Retry\CommandRetry;
@@ -96,7 +96,7 @@ abstract class Driver : DriverInterface
      * @param array<string, mixed> $config configuration to be used for creating connection
      * @return bool true on success
      */
-    protected function _connect(string $dsn, array $config): bool
+    protected bool _connect(string $dsn, array $config)
     {
         $action = function () use ($dsn, $config) {
             this.setConnection(new PDO(
@@ -127,7 +127,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    abstract function connect(): bool;
+    abstract bool connect();
 
 
     void disconnect() {
@@ -178,7 +178,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    abstract function enabled(): bool;
+    abstract bool enabled();
 
 
     function prepare($query): StatementInterface
@@ -190,7 +190,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    function beginTransaction(): bool
+    bool beginTransaction()
     {
         this.connect();
         if (_connection.inTransaction()) {
@@ -212,7 +212,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    function rollbackTransaction(): bool
+    bool rollbackTransaction()
     {
         this.connect();
         if (!_connection.inTransaction()) {
@@ -234,7 +234,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    function supportsSavePoints(): bool
+    bool supportsSavePoints()
     {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
@@ -247,7 +247,7 @@ abstract class Driver : DriverInterface
      * @return bool
      * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_QUOTE)` instead
      */
-    function supportsCTEs(): bool
+    bool supportsCTEs()
     {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
@@ -267,7 +267,7 @@ abstract class Driver : DriverInterface
      * @return bool
      * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_QUOTE)` instead
      */
-    function supportsQuoting(): bool
+    bool supportsQuoting()
     {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
@@ -333,7 +333,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    function isConnected(): bool
+    bool isConnected()
     {
         if (_connection == null) {
             $connected = false;
@@ -363,7 +363,7 @@ abstract class Driver : DriverInterface
     }
 
 
-    function isAutoQuotingEnabled(): bool
+    bool isAutoQuotingEnabled()
     {
         return _autoQuoting;
     }

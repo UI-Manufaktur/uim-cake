@@ -8,7 +8,7 @@ import uim.cake.datasources.exceptions.MissingDatasourceException;
  * A registry object for connection instances.
  *
  * @see uim.cake.datasources.ConnectionManager
- * @: uim.cake.Core\ObjectRegistry<uim.cake.Datasource\ConnectionInterface>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.Datasource\IConnection>
  */
 class ConnectionRegistry : ObjectRegistry
 {
@@ -52,10 +52,10 @@ class ConnectionRegistry : ObjectRegistry
      * If a callable is passed as first argument, The returned value of this
      * function will be the result of the callable.
      *
-     * @param uim.cake.Datasource\ConnectionInterface|callable|string $class The classname or object to make.
+     * @param uim.cake.Datasource\IConnection|callable|string $class The classname or object to make.
      * @param string $alias The alias of the object.
      * @param array<string, mixed> $config An array of settings to use for the datasource.
-     * @return uim.cake.Datasource\ConnectionInterface A connection with the correct settings.
+     * @return uim.cake.Datasource\IConnection A connection with the correct settings.
      */
     protected function _create($class, string $alias, array $config) {
         if (is_callable($class)) {
@@ -68,7 +68,7 @@ class ConnectionRegistry : ObjectRegistry
 
         unset($config["className"]);
 
-        /** @var uim.cake.datasources.ConnectionInterface */
+        /** @var uim.cake.datasources.IConnection */
         return new $class($config);
     }
 
