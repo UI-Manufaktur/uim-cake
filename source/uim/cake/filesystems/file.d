@@ -1,4 +1,4 @@
-module uim.cake.filesystems.file;
+module uim.cake.Filesystem;
 
 use finfo;
 use SplFileInfo;
@@ -8,12 +8,13 @@ use SplFileInfo;
  *
  * @deprecated 4.0.0 Will be removed in 5.0.
  */
-class File {
+class File
+{
     /**
      * Folder object of the file
      *
      * @var uim.cake.filesystems.Folder
-     * @link https://book.UIM.org/4/en/core-libraries/file-folder.html
+     * @link https://book.cakephp.org/4/en/core-libraries/file-folder.html
      */
     $Folder;
 
@@ -21,15 +22,15 @@ class File {
      * File name
      *
      * @var string
-     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::myName
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$name
      */
-    myName;
+    $name;
 
     /**
      * File info
      *
      * @var array<string, mixed>
-     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$info
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$info
      */
     $info = [];
 
@@ -37,7 +38,7 @@ class File {
      * Holds the file handler resource if the file is opened
      *
      * @var resource|null
-     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$handle
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$handle
      */
     $handle;
 
@@ -45,7 +46,7 @@ class File {
      * Enable locking for file reading and writing
      *
      * @var bool|null
-     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$lock
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$lock
      */
     $lock;
 
@@ -55,32 +56,32 @@ class File {
      * Current file"s absolute path
      *
      * @var string|null
-     * https://book.UIM.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::myPath
+     * https://book.cakephp.org/4/en/core-libraries/file-folder.html#Cake\filesystems.File::$path
      */
-    myPath;
+    $path;
 
     /**
      * Constructor
      *
-     * @param string myPath Path to file
+     * @param string $path Path to file
      * @param bool $create Create file if it does not exist (if true)
-     * @param int myMode Mode to apply to the folder holding the file
-     * @link https://book.UIM.org/4/en/core-libraries/file-folder.html#file-api
+     * @param int $mode Mode to apply to the folder holding the file
+     * @link https://book.cakephp.org/4/en/core-libraries/file-folder.html#file-api
      */
-    this(string myPath, bool $create = false, int myMode = 0755) {
-        $splInfo = new SplFileInfo(myPath);
-        this.Folder = new Folder($splInfo.getPath(), $create, myMode);
-        if (!is_dir(myPath)) {
+    this(string $path, bool $create = false, int $mode = 0755) {
+        $splInfo = new SplFileInfo($path);
+        this.Folder = new Folder($splInfo.getPath(), $create, $mode);
+        if (!is_dir($path)) {
             this.name = ltrim($splInfo.getFilename(), "/\\");
         }
         this.pwd();
-        $create && !this.exists() && this.safe(myPath) && this.create();
+        $create && !this.exists() && this.safe($path) && this.create();
     }
 
     /**
      * Closes the current file if it is opened
      */
-    auto __destruct() {
+    function __destruct() {
         this.close();
     }
 
@@ -89,7 +90,8 @@ class File {
      *
      * @return bool Success
      */
-    bool create() {
+    function create(): bool
+    {
         $dir = this.Folder.pwd();
 
         if (is_dir($dir) && is_writable($dir) && !this.exists() && touch(this.path)) {
@@ -100,13 +102,14 @@ class File {
     }
 
     /**
-     * Opens the current file with a given myMode
+     * Opens the current file with a given $mode
      *
-     * @param string myMode A valid "fopen" mode string (r|w|a ...)
+     * @param string $mode A valid "fopen" mode string (r|w|a ...)
      * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won"t
      * @return bool True on success, false on failure
      */
-    bool open(string myMode = "r", bool $force = false) {
+    function open(string $mode = "r", bool $force = false): bool
+    {
         if (!$force && is_resource(this.handle)) {
             return true;
         }
@@ -114,7 +117,7 @@ class File {
             return false;
         }
 
-        this.handle = fopen(this.path, myMode);
+        this.handle = fopen(this.path, $mode);
 
         return is_resource(this.handle);
     }
@@ -123,37 +126,37 @@ class File {
      * Return the contents of this file as a string.
      *
      * @param string|false $bytes where to start
-     * @param string myMode A `fread` compatible mode.
+     * @param string $mode A `fread` compatible mode.
      * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won"t
      * @return string|false String on success, false on failure
      */
-    function read($bytes = false, string myMode = "rb", bool $force = false) {
-        if ($bytes == false && this.lock is null) {
+    function read($bytes = false, string $mode = "rb", bool $force = false) {
+        if ($bytes == false && this.lock == null) {
             return file_get_contents(this.path);
         }
-        if (this.open(myMode, $force) == false) {
+        if (this.open($mode, $force) == false) {
             return false;
         }
-        if (this.lock  !is null && flock(this.handle, LOCK_SH) == false) {
+        if (this.lock != null && flock(this.handle, LOCK_SH) == false) {
             return false;
         }
         if (is_int($bytes)) {
             return fread(this.handle, $bytes);
         }
 
-        myData = "";
+        $data = "";
         while (!feof(this.handle)) {
-            myData .= fgets(this.handle, 4096);
+            $data .= fgets(this.handle, 4096);
         }
 
-        if (this.lock  !is null) {
+        if (this.lock != null) {
             flock(this.handle, LOCK_UN);
         }
         if ($bytes == false) {
             this.close();
         }
 
-        return trim(myData);
+        return trim($data);
     }
 
     /**
@@ -181,38 +184,40 @@ class File {
      * correct terminator for the current platform. If Windows, "\r\n" will be used,
      * all other platforms will use "\n"
      *
-     * @param string myData Data to prepare for writing.
+     * @param string $data Data to prepare for writing.
      * @param bool $forceWindows If true forces Windows new line string.
      * @return string The with converted line endings.
      */
-    static string prepare(string myData, bool $forceWindows = false) {
+    static function prepare(string $data, bool $forceWindows = false): string
+    {
         $lineBreak = "\n";
         if (DIRECTORY_SEPARATOR == "\\" || $forceWindows == true) {
             $lineBreak = "\r\n";
         }
 
-        return strtr(myData, ["\r\n":$lineBreak, "\n":$lineBreak, "\r":$lineBreak]);
+        return strtr($data, ["\r\n": $lineBreak, "\n": $lineBreak, "\r": $lineBreak]);
     }
 
     /**
      * Write given data to this file.
      *
-     * @param string myData Data to write to this File.
-     * @param string myMode Mode of writing. {@link https://secure.php.net/fwrite See fwrite()}.
+     * @param string $data Data to write to this File.
+     * @param string $mode Mode of writing. {@link https://secure.php.net/fwrite See fwrite()}.
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    bool write(string myData, string myMode = "w", bool $force = false) {
+    function write(string $data, string $mode = "w", bool $force = false): bool
+    {
         $success = false;
-        if (this.open(myMode, $force) == true) {
-            if (this.lock  !is null && flock(this.handle, LOCK_EX) == false) {
+        if (this.open($mode, $force) == true) {
+            if (this.lock != null && flock(this.handle, LOCK_EX) == false) {
                 return false;
             }
 
-            if (fwrite(this.handle, myData) != false) {
+            if (fwrite(this.handle, $data) != false) {
                 $success = true;
             }
-            if (this.lock  !is null) {
+            if (this.lock != null) {
                 flock(this.handle, LOCK_UN);
             }
         }
@@ -223,12 +228,13 @@ class File {
     /**
      * Append given data string to this file.
      *
-     * @param string myData Data to write
+     * @param string $data Data to write
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    bool append(string myData, bool $force = false) {
-        return this.write(myData, "a", $force);
+    function append(string $data, bool $force = false): bool
+    {
+        return this.write($data, "a", $force);
     }
 
     /**
@@ -236,7 +242,8 @@ class File {
      *
      * @return bool True if closing was successful or file was already closed, otherwise false
      */
-    bool close() {
+    function close(): bool
+    {
         if (!is_resource(this.handle)) {
             return true;
         }
@@ -249,7 +256,8 @@ class File {
      *
      * @return bool Success
      */
-    bool delete() {
+    function delete(): bool
+    {
         this.close();
         this.handle = null;
         if (this.exists()) {
@@ -319,45 +327,47 @@ class File {
     /**
      * Returns the file basename. simulate the php basename() for multibyte (mb_basename).
      *
-     * @param string myPath Path to file
+     * @param string $path Path to file
      * @param string|null $ext The name of the extension
      * @return string the file basename.
      */
-    protected static string _basename(string myPath, Nullable!string ext = null) {
+    protected static function _basename(string $path, ?string $ext = null): string
+    {
         // check for multibyte string and use basename() if not found
-        if (mb_strlen(myPath) == strlen(myPath)) {
-            return $ext is null ? basename(myPath) : basename(myPath, $ext);
+        if (mb_strlen($path) == strlen($path)) {
+            return $ext == null ? basename($path) : basename($path, $ext);
         }
 
-        $splInfo = new SplFileInfo(myPath);
-        myName = ltrim($splInfo.getFilename(), "/\\");
+        $splInfo = new SplFileInfo($path);
+        $name = ltrim($splInfo.getFilename(), "/\\");
 
-        if ($ext is null || $ext == "") {
-            return myName;
+        if ($ext == null || $ext == "") {
+            return $name;
         }
         $ext = preg_quote($ext);
-        $new = preg_replace("/({$ext})$/u", "", myName);
+        $new = preg_replace("/({$ext})$/u", "", $name);
 
         // basename of "/etc/.d" is ".d" not ""
-        return $new == "" ? myName : $new;
+        return $new == "" ? $name : $new;
     }
 
     /**
      * Makes file name safe for saving
      *
-     * @param string|null myName The name of the file to make safe if different from this.name
+     * @param string|null $name The name of the file to make safe if different from this.name
      * @param string|null $ext The name of the extension to make safe if different from this.ext
      * @return string The extension of the file
      */
-    string safe(Nullable!string myName = null, Nullable!string ext = null) {
-        if (!myName) {
-            myName = (string)this.name;
+    function safe(?string aName = null, ?string $ext = null): string
+    {
+        if (!$name) {
+            $name = (string)this.name;
         }
         if (!$ext) {
             $ext = (string)this.ext();
         }
 
-        return preg_replace("/(?:[^\w\.-]+)/", "_", static::_basename(myName, $ext));
+        return preg_replace("/(?:[^\w\.-]+)/", "_", static::_basename($name, $ext));
     }
 
     /**
@@ -386,7 +396,7 @@ class File {
      * @return string|null Full path to the file, or null on failure
      */
     function pwd() {
-        if (this.path is null) {
+        if (this.path == null) {
             $dir = this.Folder.pwd();
             if ($dir && is_dir($dir)) {
                 this.path = this.Folder.slashTerm($dir) . this.name;
@@ -401,7 +411,8 @@ class File {
      *
      * @return bool True if it exists, false otherwise
      */
-    bool exists() {
+    function exists(): bool
+    {
         this.clearStatCache();
 
         return this.path && file_exists(this.path) && is_file(this.path);
@@ -438,7 +449,8 @@ class File {
      *
      * @return bool True if it"s writable, false otherwise
      */
-    bool writable() {
+    function writable(): bool
+    {
         return is_writable(this.path);
     }
 
@@ -447,7 +459,8 @@ class File {
      *
      * @return bool True if it"s executable, false otherwise
      */
-    bool executable() {
+    function executable(): bool
+    {
         return is_executable(this.path);
     }
 
@@ -456,7 +469,8 @@ class File {
      *
      * @return bool True if file is readable, false otherwise
      */
-    bool readable() {
+    function readable(): bool
+    {
         return is_readable(this.path);
     }
 
@@ -525,11 +539,12 @@ class File {
     /**
      * Copy the File to $dest
      *
-     * @param string dest Absolute path to copy the file to.
+     * @param string $dest Absolute path to copy the file to.
      * @param bool $overwrite Overwrite $dest if exists
      * @return bool Success
      */
-    bool copy(string dest, bool $overwrite = true) {
+    function copy(string $dest, bool $overwrite = true): bool
+    {
         if (!this.exists() || is_file($dest) && !$overwrite) {
             return false;
         }
@@ -549,13 +564,13 @@ class File {
         }
         if (class_exists("finfo")) {
             $finfo = new finfo(FILEINFO_MIME);
-            myType = $finfo.file(this.pwd());
-            if (!myType) {
+            $type = $finfo.file(this.pwd());
+            if (!$type) {
                 return false;
             }
-            [myType] = explode(";", myType);
+            [$type] = explode(";", $type);
 
-            return myType;
+            return $type;
         }
         if (function_exists("mime_content_type")) {
             return mime_content_type(this.pwd());
@@ -582,22 +597,23 @@ class File {
     /**
      * Searches for a given text and replaces the text if found.
      *
-     * @param array<string>|string search Text(s) to search for.
-     * @param array<string>|string replace Text(s) to replace with.
+     * @param array<string>|string $search Text(s) to search for.
+     * @param array<string>|string $replace Text(s) to replace with.
      * @return bool Success
      */
-    bool replaceText($search, $replace) {
+    function replaceText($search, $replace): bool
+    {
         if (!this.open("r+")) {
             return false;
         }
 
-        if (this.lock  !is null && flock(this.handle, LOCK_EX) == false) {
+        if (this.lock != null && flock(this.handle, LOCK_EX) == false) {
             return false;
         }
 
         $replaced = this.write(str_replace($search, $replace, this.read()), "w", true);
 
-        if (this.lock  !is null) {
+        if (this.lock != null) {
             flock(this.handle, LOCK_UN);
         }
         this.close();

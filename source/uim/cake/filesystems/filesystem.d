@@ -1,6 +1,6 @@
-module uim.cake.filesystems;
+module uim.cake.Filesystem;
 
-import uim.cake.core.exceptions\CakeException;
+import uim.cake.core.exceptions.CakeException;
 use CallbackFilterIterator;
 use FilesystemIterator;
 use Iterator;
@@ -22,25 +22,27 @@ class Filesystem
 {
     /**
      * Directory type constant
+     *
      */
     const string TYPE_DIR = "dir";
 
     /**
      * Find files / directories (non-recursively) in given directory path.
      *
-     * @param string myPath Directory path.
+     * @param string $path Directory path.
      * @param mixed $filter If string will be used as regex for filtering using
      *   `RegexIterator`, if callable will be as callback for `CallbackFilterIterator`.
-     * @param int|null $flags Flags for FilesystemIterator::this();
+     * @param int|null $flags Flags for FilesystemIterator::__construct();
      * @return \Iterator
      */
-    Iterator find(string myPath, $filter = null, Nullable!int $flags = null) {
+    function find(string $path, $filter = null, ?int $flags = null): Iterator
+    {
         $flags = $flags ?? FilesystemIterator::KEY_AS_PATHNAME
             | FilesystemIterator::CURRENT_AS_FILEINFO
             | FilesystemIterator::SKIP_DOTS;
-        $directory = new FilesystemIterator(myPath, $flags);
+        $directory = new FilesystemIterator($path, $flags);
 
-        if ($filter is null) {
+        if ($filter == null) {
             return $directory;
         }
 
@@ -50,18 +52,19 @@ class Filesystem
     /**
      * Find files/ directories recursively in given directory path.
      *
-     * @param string myPath Directory path.
+     * @param string $path Directory path.
      * @param mixed $filter If string will be used as regex for filtering using
      *   `RegexIterator`, if callable will be as callback for `CallbackFilterIterator`.
      *   Hidden directories (starting with dot e.g. .git) are always skipped.
-     * @param int|null $flags Flags for FilesystemIterator::this();
+     * @param int|null $flags Flags for FilesystemIterator::__construct();
      * @return \Iterator
      */
-    Iterator findRecursive(string myPath, $filter = null, Nullable!int $flags = null) {
+    function findRecursive(string $path, $filter = null, ?int $flags = null): Iterator
+    {
         $flags = $flags ?? FilesystemIterator::KEY_AS_PATHNAME
             | FilesystemIterator::CURRENT_AS_FILEINFO
             | FilesystemIterator::SKIP_DOTS;
-        $directory = new RecursiveDirectoryIterator(myPath, $flags);
+        $directory = new RecursiveDirectoryIterator($path, $flags);
 
         $dirFilter = new RecursiveCallbackFilterIterator(
             $directory,
@@ -79,7 +82,7 @@ class Filesystem
             RecursiveIteratorIterator::CHILD_FIRST
         );
 
-        if ($filter is null) {
+        if ($filter == null) {
             return $flatten;
         }
 
@@ -93,7 +96,8 @@ class Filesystem
      * @param mixed $filter Regex string or callback.
      * @return \Iterator
      */
-    protected Iterator filterIterator(Iterator $iterator, $filter) {
+    protected function filterIterator(Iterator $iterator, $filter): Iterator
+    {
         if (is_string($filter)) {
             return new RegexIterator($iterator, $filter);
         }
@@ -104,24 +108,26 @@ class Filesystem
     /**
      * Dump contents to file.
      *
-     * @param string myfilename File path.
-     * @param string myContents Content to dump.
+     * @param string $filename File path.
+     * @param string $content Content to dump.
+     * @return void
      * @throws uim.cake.Core\exceptions.CakeException When dumping fails.
      */
-    void dumpFile(string myfilename, string myContents) {
-        $dir = dirname(myfilename);
+    function dumpFile(string $filename, string $content): void
+    {
+        $dir = dirname($filename);
         if (!is_dir($dir)) {
             this.mkdir($dir);
         }
 
-        $exists = file_exists(myfilename);
+        $exists = file_exists($filename);
 
-        if (this.isStream(myfilename)) {
+        if (this.isStream($filename)) {
             // phpcs:ignore
-            $success = @file_put_contents(myfilename, myContents);
+            $success = @file_put_contents($filename, $content);
         } else {
             // phpcs:ignore
-            $success = @file_put_contents(myfilename, myContents, LOCK_EX);
+            $success = @file_put_contents($filename, $content, LOCK_EX);
         }
 
         if ($success == false) {
@@ -129,26 +135,27 @@ class Filesystem
         }
 
         if (!$exists) {
-            chmod(myfilename, 0666 & ~umask());
+            chmod($filename, 0666 & ~umask());
         }
     }
 
     /**
      * Create directory.
      *
-     * @param string dir Directory path.
-     * @param int myMode Octal mode passed to mkdir(). Defaults to 0755.
+     * @param string $dir Directory path.
+     * @param int $mode Octal mode passed to mkdir(). Defaults to 0755.
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException When directory creation fails.
      */
-    void mkdir(string dir, int myMode = 0755) {
+    function mkdir(string $dir, int $mode = 0755): void
+    {
         if (is_dir($dir)) {
             return;
         }
 
         $old = umask(0);
         // phpcs:ignore
-        if (@mkdir($dir, myMode, true) == false) {
+        if (@mkdir($dir, $mode, true) == false) {
             umask($old);
             throw new CakeException(sprintf("Failed to create directory "%s"", $dir));
         }
@@ -159,38 +166,39 @@ class Filesystem
     /**
      * Delete directory along with all it"s contents.
      *
-     * @param string myPath Directory path.
+     * @param string $path Directory path.
      * @return bool
      * @throws uim.cake.Core\exceptions.CakeException If path is not a directory.
      */
-    bool deleteDir(string myPath) {
-        if (!file_exists(myPath)) {
+    function deleteDir(string $path): bool
+    {
+        if (!file_exists($path)) {
             return true;
         }
 
-        if (!is_dir(myPath)) {
-            throw new CakeException(sprintf(""%s" is not a directory", myPath));
+        if (!is_dir($path)) {
+            throw new CakeException(sprintf(""%s" is not a directory", $path));
         }
 
         $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator(myPath, FilesystemIterator::SKIP_DOTS),
+            new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS),
             RecursiveIteratorIterator::CHILD_FIRST
         );
 
-        myResult = true;
-        foreach ($iterator as myfileInfo) {
-            $isWindowsLink = DIRECTORY_SEPARATOR == "\\" && myfileInfo.getType() == "link";
-            if (myfileInfo.getType() == self::TYPE_DIR || $isWindowsLink) {
+        $result = true;
+        foreach ($iterator as $fileInfo) {
+            $isWindowsLink = DIRECTORY_SEPARATOR == "\\" && $fileInfo.getType() == "link";
+            if ($fileInfo.getType() == self::TYPE_DIR || $isWindowsLink) {
                 // phpcs:ignore
-                myResult = myResult && @rmdir(myfileInfo.getPathname());
-                unset(myfileInfo);
+                $result = $result && @rmdir($fileInfo.getPathname());
+                unset($fileInfo);
                 continue;
             }
 
             // phpcs:ignore
-            myResult = myResult && @unlink(myfileInfo.getPathname());
+            $result = $result && @unlink($fileInfo.getPathname());
             // possible inner iterators need to be unset too in order for locks on parents to be released
-            unset(myfileInfo);
+            unset($fileInfo);
         }
 
         // unsetting iterators helps releasing possible locks in certain environments,
@@ -198,18 +206,17 @@ class Filesystem
         unset($iterator);
 
         // phpcs:ignore
-        myResult = myResult && @rmdir(myPath);
-
-        return myResult;
+        return $result && @rmdir($path);
     }
 
     /**
      * Copies directory with all it"s contents.
      *
-     * @param string source Source path.
-     * @param string destination Destination path.
+     * @param string $source Source path.
+     * @param string $destination Destination path.
      */
-    bool copyDir(string source, string destination) {
+    bool copyDir(string $source, string $destination): bool
+    {
         $destination = (new SplFileInfo($destination)).getPathname();
 
         if (!is_dir($destination)) {
@@ -218,31 +225,32 @@ class Filesystem
 
         $iterator = new FilesystemIterator($source);
 
-        myResult = true;
-        foreach ($iterator as myfileInfo) {
-            if (myfileInfo.isDir()) {
-                myResult = myResult && this.copyDir(
-                    myfileInfo.getPathname(),
-                    $destination . DIRECTORY_SEPARATOR . myfileInfo.getFilename()
+        $result = true;
+        foreach ($iterator as $fileInfo) {
+            if ($fileInfo.isDir()) {
+                $result = $result && this.copyDir(
+                    $fileInfo.getPathname(),
+                    $destination . DIRECTORY_SEPARATOR . $fileInfo.getFilename()
                 );
             } else {
                 // phpcs:ignore
-                myResult = myResult && @copy(
-                    myfileInfo.getPathname(),
-                    $destination . DIRECTORY_SEPARATOR . myfileInfo.getFilename()
+                $result = $result && @copy(
+                    $fileInfo.getPathname(),
+                    $destination . DIRECTORY_SEPARATOR . $fileInfo.getFilename()
                 );
             }
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
      * Check whether the given path is a stream path.
      *
-     * @param string myPath Path.
+     * @param string $path Path.
      */
-    bool isStream(string myPath) {
-        return indexOf(myPath, "://") != false;
+    bool isStream(string $path): bool
+    {
+        return strpos($path, "://") != false;
     }
 }
