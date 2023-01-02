@@ -125,7 +125,7 @@ class ResultSet : IResultSet
      *
      * Cached in a property to avoid multiple calls to the same function.
      *
-     * @var uim.cake.databases.DriverInterface
+     * @var uim.cake.databases.IDriver
      */
     protected $_driver;
 

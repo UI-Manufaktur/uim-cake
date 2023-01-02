@@ -1,6 +1,6 @@
 module uim.cake.databases.Schema;
 
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 import uim.cake.databases.Type\ColumnSchemaAwareInterface;
 import uim.cake.databases.TypeFactory;
 use InvalidArgumentException;
@@ -18,7 +18,7 @@ abstract class SchemaDialect
     /**
      * The driver instance being used.
      *
-     * @var uim.cake.databases.DriverInterface
+     * @var uim.cake.databases.IDriver
      */
     protected $_driver;
 
@@ -28,9 +28,9 @@ abstract class SchemaDialect
      * This constructor will connect the driver so that methods like columnSql() and others
      * will fail when the driver has not been connected.
      *
-     * @param uim.cake.databases.DriverInterface $driver The driver to use.
+     * @param uim.cake.databases.IDriver $driver The driver to use.
      */
-    this(DriverInterface $driver) {
+    this(IDriver $driver) {
         $driver.connect();
         _driver = $driver;
     }

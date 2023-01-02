@@ -11,7 +11,7 @@ import uim.cake;
  * @method bool supports(string $feature) Checks whether a feature is supported by the driver.
  * @method bool inTransaction() Returns whether a transaction is active.
  */
-interface DriverInterface
+interface IDriver
 {
     /**
      * Common Table Expressions (with clause) support.
@@ -170,7 +170,7 @@ interface DriverInterface
      * Returns whether this driver supports save points for nested transactions.
      *
      * @return bool True if save points are supported, false otherwise.
-     * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_SAVEPOINT)` instead
+     * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_SAVEPOINT)` instead
      */
     function supportsSavePoints(): bool;
 
@@ -186,7 +186,7 @@ interface DriverInterface
      * Checks if the driver supports quoting.
      *
      * @return bool
-     * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_QUOTE)` instead
+     * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
      */
     function supportsQuoting(): bool;
 

@@ -7,7 +7,7 @@
  * @since         3.1.2
   */module uim.cake.databases.Type;
 
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 use InvalidArgumentException;
 use PDO;
 
@@ -22,10 +22,10 @@ class BoolType : BaseType : BatchCastingInterface
      * Convert bool data into the database format.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      * @return bool|null
      */
-    function toDatabase($value, DriverInterface $driver): ?bool
+    function toDatabase($value, IDriver $driver): ?bool
     {
         if ($value == true || $value == false || $value == null) {
             return $value;
@@ -45,10 +45,10 @@ class BoolType : BaseType : BatchCastingInterface
      * Convert bool values to PHP booleans
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      * @return bool|null
      */
-    function toPHP($value, DriverInterface $driver): ?bool
+    function toPHP($value, IDriver $driver): ?bool
     {
         if ($value == null || is_bool($value)) {
             return $value;
@@ -62,7 +62,7 @@ class BoolType : BaseType : BatchCastingInterface
     }
 
 
-    function manyToPHP(array $values, array $fields, DriverInterface $driver): array
+    function manyToPHP(array $values, array $fields, IDriver $driver): array
     {
         foreach ($fields as $field) {
             $value = $values[$field] ?? null;
@@ -85,9 +85,9 @@ class BoolType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for bool data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.databases.DriverInterface $driver The driver.
+     * @param uim.cake.databases.IDriver $driver The driver.
      */
-    int toStatement($value, DriverInterface $driver): int
+    int toStatement($value, IDriver $driver): int
     {
         if ($value == null) {
             return PDO::PARAM_NULL;

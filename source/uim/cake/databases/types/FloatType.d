@@ -1,6 +1,6 @@
 module uim.cake.databases.Type;
 
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 import uim.cake.I18n\Number;
 use PDO;
 use RuntimeException;
@@ -30,10 +30,10 @@ class FloatType : BaseType : BatchCastingInterface
      * Convert integer data into the database format.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      * @return float|null
      */
-    function toDatabase($value, DriverInterface $driver): ?float
+    function toDatabase($value, IDriver $driver): ?float
     {
         if ($value == null || $value == "") {
             return null;
@@ -46,11 +46,11 @@ class FloatType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      * @return float|null
      * @throws uim.cake.Core\exceptions.CakeException
      */
-    function toPHP($value, DriverInterface $driver): ?float
+    function toPHP($value, IDriver $driver): ?float
     {
         if ($value == null) {
             return null;
@@ -60,7 +60,7 @@ class FloatType : BaseType : BatchCastingInterface
     }
 
 
-    function manyToPHP(array $values, array $fields, DriverInterface $driver): array
+    function manyToPHP(array $values, array $fields, IDriver $driver): array
     {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
@@ -77,9 +77,9 @@ class FloatType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for float data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.databases.DriverInterface $driver The driver.
+     * @param uim.cake.databases.IDriver $driver The driver.
      */
-    int toStatement($value, DriverInterface $driver): int
+    int toStatement($value, IDriver $driver): int
     {
         return PDO::PARAM_STR;
     }

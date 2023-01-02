@@ -23,7 +23,7 @@ class Connection : IConnection {
      * Driver object, responsible for creating the real connection
      * and provide specific SQL dialect.
      *
-     * @var uim.cake.databases.DriverInterface
+     * @var uim.cake.databases.IDriver
      */
     protected $_driver;
 
@@ -138,7 +138,7 @@ class Connection : IConnection {
      * Sets the driver instance. If a string is passed it will be treated
      * as a class name and will be instantiated.
      *
-     * @param uim.cake.databases.DriverInterface|string $driver The driver instance to use.
+     * @param uim.cake.databases.IDriver|string $driver The driver instance to use.
      * @param array<string, mixed> $config Config for a new driver.
      * @throws uim.cake.databases.exceptions.MissingDriverException When a driver class is missing.
      * @throws uim.cake.databases.exceptions.MissingExtensionException When a driver's PHP extension is missing.
@@ -156,17 +156,17 @@ class Connection : IConnection {
     /**
      * Creates driver from name, class name or instance.
      *
-     * @param uim.cake.databases.DriverInterface|string aName Driver name, class name or instance.
+     * @param uim.cake.databases.IDriver|string aName Driver name, class name or instance.
      * @param array $config Driver config if $name is not an instance.
-     * @return uim.cake.databases.DriverInterface
+     * @return uim.cake.databases.IDriver
      * @throws uim.cake.databases.exceptions.MissingDriverException When a driver class is missing.
      * @throws uim.cake.databases.exceptions.MissingExtensionException When a driver's PHP extension is missing.
      */
-    protected function createDriver($name, array $config): DriverInterface
+    protected function createDriver($name, array $config): IDriver
     {
         $driver = $name;
         if (is_string($driver)) {
-            /** @psalm-var class-string<uim.cake.databases.DriverInterface>|null $className */
+            /** @psalm-var class-string<uim.cake.databases.IDriver>|null $className */
             $className = App::className($driver, 'Database/Driver');
             if ($className == null) {
                 throw new MissingDriverException(['driver': $driver, 'connection': this.configName()]);
@@ -195,9 +195,9 @@ class Connection : IConnection {
     /**
      * Gets the driver instance.
      *
-     * @return uim.cake.databases.DriverInterface
+     * @return uim.cake.databases.IDriver
      */
-    function getDriver(): DriverInterface
+    function getDriver(): IDriver
     {
         return _driver;
     }
@@ -541,7 +541,7 @@ class Connection : IConnection {
         if ($enable == false) {
             _useSavePoints = false;
         } else {
-            _useSavePoints = _driver.supports(DriverInterface::FEATURE_SAVEPOINT);
+            _useSavePoints = _driver.supports(IDriver::FEATURE_SAVEPOINT);
         }
 
         return this;
@@ -712,7 +712,7 @@ class Connection : IConnection {
      */
     bool supportsQuoting()
     {
-        return _driver.supports(DriverInterface::FEATURE_QUOTE);
+        return _driver.supports(IDriver::FEATURE_QUOTE);
     }
 
     /**

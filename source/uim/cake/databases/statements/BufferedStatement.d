@@ -1,6 +1,6 @@
 module uim.cake.databases.Statement;
 
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 import uim.cake.databases.StatementInterface;
 import uim.cake.databases.TypeConverterTrait;
 use Iterator;
@@ -31,7 +31,7 @@ class BufferedStatement : Iterator, StatementInterface
     /**
      * The driver for the statement
      *
-     * @var uim.cake.databases.DriverInterface
+     * @var uim.cake.databases.IDriver
      */
     protected $_driver;
 
@@ -58,9 +58,9 @@ class BufferedStatement : Iterator, StatementInterface
      * Constructor
      *
      * @param uim.cake.databases.StatementInterface $statement Statement implementation such as PDOStatement
-     * @param uim.cake.databases.DriverInterface $driver Driver instance
+     * @param uim.cake.databases.IDriver $driver Driver instance
      */
-    this(StatementInterface $statement, DriverInterface $driver) {
+    this(StatementInterface $statement, IDriver $driver) {
         this.statement = $statement;
         _driver = $driver;
     }

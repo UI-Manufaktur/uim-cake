@@ -7,7 +7,7 @@ import uim.cake;
  * Represents a database driver containing all specificities for
  * a database engine including its SQL dialect.
  */
-abstract class Driver : DriverInterface
+abstract class Driver : IDriver
 {
     /**
      * @var int|null Maximum alias length or null if no limit
@@ -236,7 +236,7 @@ abstract class Driver : DriverInterface
      * Returns true if the server supports common table expressions.
      *
      * @return bool
-     * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_QUOTE)` instead
+     * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
      */
     bool supportsCTEs()
     {
@@ -256,7 +256,7 @@ abstract class Driver : DriverInterface
      * Checks if the driver supports quoting, as PDO_ODBC does not support it.
      *
      * @return bool
-     * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_QUOTE)` instead
+     * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
      */
     bool supportsQuoting()
     {

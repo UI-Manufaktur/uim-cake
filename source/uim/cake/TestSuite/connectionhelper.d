@@ -4,7 +4,7 @@
   */module uim.cake.TestSuite;
 
 import uim.cake.databases.Connection;
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 import uim.cake.datasources.ConnectionManager;
 use Closure;
 
@@ -133,7 +133,7 @@ class ConnectionHelper
      */
     void runWithoutConstraints(Connection $connection, Closure $callback): void
     {
-        if ($connection.getDriver().supports(DriverInterface::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION)) {
+        if ($connection.getDriver().supports(IDriver::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION)) {
             $connection.disableConstraints(function (Connection $connection) use ($callback): void {
                 $callback($connection);
             });

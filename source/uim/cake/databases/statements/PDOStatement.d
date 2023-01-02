@@ -1,7 +1,7 @@
 module uim.cake.databases.Statement;
 
 import uim.cake.core.exceptions.CakeException;
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 use PDO;
 use PDOStatement as Statement;
 
@@ -22,9 +22,9 @@ class PDOStatement : StatementDecorator
      * Constructor
      *
      * @param \PDOStatement $statement Original statement to be decorated.
-     * @param uim.cake.databases.DriverInterface $driver Driver instance.
+     * @param uim.cake.databases.IDriver $driver Driver instance.
      */
-    this(Statement $statement, DriverInterface $driver) {
+    this(Statement $statement, IDriver $driver) {
         _statement = $statement;
         _driver = $driver;
     }

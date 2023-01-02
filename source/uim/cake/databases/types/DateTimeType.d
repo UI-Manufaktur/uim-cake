@@ -1,6 +1,6 @@
 module uim.cake.databases.Type;
 
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 import uim.cake.I18n\FrozenTime;
 import uim.cake.I18n\I18nDateTimeInterface;
 import uim.cake.I18n\Time;
@@ -114,10 +114,10 @@ class DateTimeType : BaseType : BatchCastingInterface
      * Convert DateTime instance into strings.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      * @return string|null
      */
-    function toDatabase($value, DriverInterface $driver): ?string
+    function toDatabase($value, IDriver $driver): ?string
     {
         if ($value == null || is_string($value)) {
             return $value;
@@ -193,10 +193,10 @@ class DateTimeType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value Value to be converted to PHP equivalent
-     * @param uim.cake.databases.DriverInterface $driver Object from which database preferences and configuration will be extracted
+     * @param uim.cake.databases.IDriver $driver Object from which database preferences and configuration will be extracted
      * @return \DateTimeInterface|null
      */
-    function toPHP($value, DriverInterface $driver) {
+    function toPHP($value, IDriver $driver) {
         if ($value == null) {
             return null;
         }
@@ -246,7 +246,7 @@ class DateTimeType : BaseType : BatchCastingInterface
     }
 
 
-    function manyToPHP(array $values, array $fields, DriverInterface $driver): array
+    function manyToPHP(array $values, array $fields, IDriver $driver): array
     {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
@@ -517,10 +517,10 @@ class DateTimeType : BaseType : BatchCastingInterface
      * Casts given value to Statement equivalent
      *
      * @param mixed $value value to be converted to PDO statement
-     * @param uim.cake.databases.DriverInterface $driver object from which database preferences and configuration will be extracted
+     * @param uim.cake.databases.IDriver $driver object from which database preferences and configuration will be extracted
      * @return mixed
      */
-    function toStatement($value, DriverInterface $driver) {
+    function toStatement($value, IDriver $driver) {
         return PDO::PARAM_STR;
     }
 }

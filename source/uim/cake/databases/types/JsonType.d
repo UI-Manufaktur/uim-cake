@@ -7,7 +7,7 @@
  * @since         3.3.0
   */module uim.cake.databases.Type;
 
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 use InvalidArgumentException;
 use PDO;
 
@@ -26,11 +26,11 @@ class JsonType : BaseType : BatchCastingInterface
      * Convert a value data into a JSON string
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    function toDatabase($value, DriverInterface $driver): ?string
+    function toDatabase($value, IDriver $driver): ?string
     {
         if (is_resource($value)) {
             throw new InvalidArgumentException("Cannot convert a resource value to JSON");
@@ -47,10 +47,10 @@ class JsonType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      * @return array|string|null
      */
-    function toPHP($value, DriverInterface $driver) {
+    function toPHP($value, IDriver $driver) {
         if (!is_string($value)) {
             return null;
         }
@@ -59,7 +59,7 @@ class JsonType : BaseType : BatchCastingInterface
     }
 
 
-    function manyToPHP(array $values, array $fields, DriverInterface $driver): array
+    function manyToPHP(array $values, array $fields, IDriver $driver): array
     {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
@@ -76,9 +76,9 @@ class JsonType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for string data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.databases.DriverInterface $driver The driver.
+     * @param uim.cake.databases.IDriver $driver The driver.
      */
-    int toStatement($value, DriverInterface $driver): int
+    int toStatement($value, IDriver $driver): int
     {
         return PDO::PARAM_STR;
     }

@@ -324,7 +324,7 @@ class Sqlite : Driver
      * Returns true if the server supports common table expressions.
      *
      * @return bool
-     * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_CTE)` instead
+     * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_CTE)` instead
      */
     function supportsCTEs(): bool
     {
@@ -337,7 +337,7 @@ class Sqlite : Driver
      * Returns true if the connected server supports window functions.
      *
      * @return bool
-     * @deprecated 4.3.0 Use `supports(DriverInterface::FEATURE_WINDOW)` instead
+     * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_WINDOW)` instead
      */
     function supportsWindowFunctions(): bool
     {

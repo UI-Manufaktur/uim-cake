@@ -166,7 +166,7 @@ class FixtureHelper
         this.runPerConnection(function (IConnection $connection, array $groupFixtures): void {
             if ($connection instanceof Connection) {
                 $sortedFixtures = null;
-                if ($connection.getDriver().supports(DriverInterface::FEATURE_TRUNCATE_WITH_CONSTRAINTS)) {
+                if ($connection.getDriver().supports(IDriver::FEATURE_TRUNCATE_WITH_CONSTRAINTS)) {
                     $sortedFixtures = this.sortByConstraint($connection, $groupFixtures);
                 }
 

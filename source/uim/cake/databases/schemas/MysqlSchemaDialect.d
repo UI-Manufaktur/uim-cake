@@ -1,6 +1,6 @@
 module uim.cake.databases.Schema;
 
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 import uim.cake.databases.exceptions.DatabaseException;
 
 /**
@@ -321,7 +321,7 @@ class MysqlSchemaDialect : SchemaDialect
         }
 
         $out = _driver.quoteIdentifier($name);
-        $nativeJson = _driver.supports(DriverInterface::FEATURE_JSON);
+        $nativeJson = _driver.supports(IDriver::FEATURE_JSON);
 
         $typeMap = [
             TableSchema::TYPE_TINYINTEGER: " TINYINT",

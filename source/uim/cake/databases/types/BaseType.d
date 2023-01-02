@@ -1,6 +1,6 @@
 module uim.cake.databases.Type;
 
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 import uim.cake.databases.TypeInterface;
 use PDO;
 
@@ -38,7 +38,7 @@ abstract class BaseType : TypeInterface
     }
 
 
-    function toStatement($value, DriverInterface $driver) {
+    function toStatement($value, IDriver $driver) {
         if ($value == null) {
             return PDO::PARAM_NULL;
         }

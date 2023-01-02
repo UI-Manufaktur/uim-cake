@@ -1,6 +1,6 @@
 module uim.cake.databases.Statement;
 
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 import uim.cake.databases.StatementInterface;
 import uim.cake.databases.TypeConverterTrait;
 use Countable;
@@ -32,7 +32,7 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
     /**
      * Reference to the driver object associated to this statement.
      *
-     * @var uim.cake.databases.DriverInterface
+     * @var uim.cake.databases.IDriver
      */
     protected $_driver;
 
@@ -47,9 +47,9 @@ class StatementDecorator : StatementInterface, Countable, IteratorAggregate
      *
      * @param uim.cake.databases.StatementInterface $statement Statement implementation
      *  such as PDOStatement.
-     * @param uim.cake.databases.DriverInterface $driver Driver instance
+     * @param uim.cake.databases.IDriver $driver Driver instance
      */
-    this(StatementInterface $statement, DriverInterface $driver) {
+    this(StatementInterface $statement, IDriver $driver) {
         _statement = $statement;
         _driver = $driver;
     }

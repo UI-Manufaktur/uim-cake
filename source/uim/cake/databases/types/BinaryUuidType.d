@@ -1,7 +1,7 @@
 module uim.cake.databases.Type;
 
 import uim.cake.core.exceptions.CakeException;
-import uim.cake.databases.DriverInterface;
+import uim.cake.databases.IDriver;
 import uim.cake.utilities.Text;
 use PDO;
 
@@ -19,10 +19,10 @@ class BinaryUuidType : BaseType
      * As PDO will handle reading file handles.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      * @return resource|string|null
      */
-    function toDatabase($value, DriverInterface $driver) {
+    function toDatabase($value, IDriver $driver) {
         if (!is_string($value)) {
             return $value;
         }
@@ -48,11 +48,11 @@ class BinaryUuidType : BaseType
      * Convert binary uuid into resource handles
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.DriverInterface $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
      * @return resource|string|null
      * @throws uim.cake.Core\exceptions.CakeException
      */
-    function toPHP($value, DriverInterface $driver) {
+    function toPHP($value, IDriver $driver) {
         if ($value == null) {
             return null;
         }
@@ -70,9 +70,9 @@ class BinaryUuidType : BaseType
      * Get the correct PDO binding type for Binary data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.databases.DriverInterface $driver The driver.
+     * @param uim.cake.databases.IDriver $driver The driver.
      */
-    int toStatement($value, DriverInterface $driver): int
+    int toStatement($value, IDriver $driver): int
     {
         return PDO::PARAM_LOB;
     }
