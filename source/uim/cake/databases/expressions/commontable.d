@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.databases.Expression;
+module uim.cake.databases.Expression;
 
 import uim.cake.databases.IExpression;
 import uim.cake.databases.ValueBinder;
