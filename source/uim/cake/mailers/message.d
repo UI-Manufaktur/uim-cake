@@ -1160,7 +1160,7 @@ class Message : JsonSerializable, Serializable
      * @param array $attachments Array of filenames.
      * @return this
      * @throws \InvalidArgumentException
-     * @see uim.cake.Mailer\Email::setAttachments()
+     * @see uim.cake.mailers.Email::setAttachments()
      */
     function addAttachments(array $attachments) {
         $current = this.attachments;

@@ -28,7 +28,7 @@ abstract class MailConstraintBase : Constraint
     /**
      * Gets the email or emails to check
      *
-     * @return array<uim.cake.Mailer\Message>
+     * @return array<uim.cake.mailers.Message>
      */
     function getMessages() {
         $messages = TestEmailTransport::getMessages();

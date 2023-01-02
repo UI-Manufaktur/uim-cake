@@ -1,4 +1,4 @@
-module uim.cake.Mailer\Exception;
+module uim.cake.mailers.exceptions;
 
 import uim.cake.core.exceptions.CakeException;
 

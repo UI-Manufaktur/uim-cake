@@ -13,7 +13,7 @@ class TransportFactory
     /**
      * Transport Registry used for creating and using transport instances.
      *
-     * @var uim.cake.Mailer\TransportRegistry|null
+     * @var uim.cake.mailers.TransportRegistry|null
      */
     protected static $_registry;
 
@@ -32,7 +32,7 @@ class TransportFactory
     /**
      * Returns the Transport Registry used for creating and using transport instances.
      *
-     * @return uim.cake.Mailer\TransportRegistry
+     * @return uim.cake.mailers.TransportRegistry
      */
     static function getRegistry(): TransportRegistry
     {
@@ -48,7 +48,7 @@ class TransportFactory
      *
      * Also allows for injecting of a new registry instance.
      *
-     * @param uim.cake.Mailer\TransportRegistry $registry Injectable registry object.
+     * @param uim.cake.mailers.TransportRegistry $registry Injectable registry object.
      */
     static void setRegistry(TransportRegistry $registry): void
     {
@@ -84,7 +84,7 @@ class TransportFactory
      * Get transport instance.
      *
      * @param string aName Config name.
-     * @return uim.cake.Mailer\AbstractTransport
+     * @return uim.cake.mailers.AbstractTransport
      */
     static function get(string aName): AbstractTransport
     {

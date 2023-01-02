@@ -22,8 +22,8 @@ use SimpleXMLElement;
  * Once made configuration profiles can be used to re-use across various email messages your
  * application sends.
  *
- * @mixin uim.cake.Mailer\Mailer
- * @deprecated 4.0.0 This class will be removed in CakePHP 5.0, use {@link uim.cake.Mailer\Mailer} instead.
+ * @mixin uim.cake.mailers.Mailer
+ * @deprecated 4.0.0 This class will be removed in CakePHP 5.0, use {@link uim.cake.mailers.Mailer} instead.
  */
 class Email : JsonSerializable, Serializable
 {
@@ -62,14 +62,14 @@ class Email : JsonSerializable, Serializable
     /**
      * The transport instance to use for sending mail.
      *
-     * @var uim.cake.Mailer\AbstractTransport|null
+     * @var uim.cake.mailers.AbstractTransport|null
      */
     protected $_transport;
 
     /**
      * Email Renderer
      *
-     * @var uim.cake.Mailer\Renderer|null
+     * @var uim.cake.mailers.Renderer|null
      */
     protected $renderer;
 
@@ -85,14 +85,14 @@ class Email : JsonSerializable, Serializable
      * Message class name.
      *
      * @var string
-     * @psalm-var class-string<uim.cake.Mailer\Message>
+     * @psalm-var class-string<uim.cake.mailers.Message>
      */
     protected $messageClass = Message::class;
 
     /**
      * Message instance.
      *
-     * @var uim.cake.Mailer\Message
+     * @var uim.cake.mailers.Message
      */
     protected $message;
 
@@ -151,7 +151,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Get message instance.
      *
-     * @return uim.cake.Mailer\Message
+     * @return uim.cake.mailers.Message
      */
     function getMessage(): Message
     {
@@ -210,7 +210,7 @@ class Email : JsonSerializable, Serializable
      * When setting the transport you can either use the name
      * of a configured transport or supply a constructed transport.
      *
-     * @param uim.cake.Mailer\AbstractTransport|string aName Either the name of a configured
+     * @param uim.cake.mailers.AbstractTransport|string aName Either the name of a configured
      *   transport, or a transport instance.
      * @return this
      * @throws \LogicException When the chosen transport lacks a send method.
@@ -239,7 +239,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Gets the transport.
      *
-     * @return uim.cake.Mailer\AbstractTransport|null
+     * @return uim.cake.mailers.AbstractTransport|null
      */
     function getTransport(): ?AbstractTransport
     {
@@ -389,7 +389,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Get email renderer.
      *
-     * @return uim.cake.Mailer\Renderer
+     * @return uim.cake.mailers.Renderer
      */
     function getRenderer(): Renderer
     {
@@ -403,7 +403,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Set email renderer.
      *
-     * @param uim.cake.Mailer\Renderer $renderer Render instance.
+     * @param uim.cake.mailers.Renderer $renderer Render instance.
      * @return this
      */
     function setRenderer(Renderer $renderer) {
@@ -450,15 +450,15 @@ class Email : JsonSerializable, Serializable
     }
 
     /**
-     * Static method to fast create an instance of uim.cake.Mailer\Email
+     * Static method to fast create an instance of uim.cake.mailers.Email
      *
-     * @param array|string|null $to Address to send ({@see uim.cake.Mailer\Email::setTo()}).
+     * @param array|string|null $to Address to send ({@see uim.cake.mailers.Email::setTo()}).
      *   If null, will try to use "to" from transport config
      * @param string|null $subject String of subject or null to use "subject" from transport config
      * @param array|string|null $message String with message or array with variables to be used in render
      * @param array<string, mixed>|string $config String to use Email delivery profile from app.php or array with configs
      * @param bool $send Send the email or just return the instance pre-configured
-     * @return uim.cake.Mailer\Email
+     * @return uim.cake.mailers.Email
      * @throws \InvalidArgumentException
      */
     static function deliver(

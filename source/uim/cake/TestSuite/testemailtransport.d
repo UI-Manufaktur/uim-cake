@@ -1,8 +1,8 @@
 module uim.cake.TestSuite;
 
-import uim.cake.Mailer\Message;
-import uim.cake.Mailer\Transport\DebugTransport;
-import uim.cake.Mailer\TransportFactory;
+import uim.cake.mailers.Message;
+import uim.cake.mailers.Transport\DebugTransport;
+import uim.cake.mailers.TransportFactory;
 
 /**
  * TestEmailTransport
@@ -21,7 +21,7 @@ class TestEmailTransport : DebugTransport
     /**
      * Stores email for later assertions
      *
-     * @param uim.cake.Mailer\Message $message Message
+     * @param uim.cake.mailers.Message $message Message
      * @return array{headers: string, message: string}
      */
     function send(Message $message): array
@@ -50,7 +50,7 @@ class TestEmailTransport : DebugTransport
     /**
      * Gets emails sent
      *
-     * @return array<uim.cake.Mailer\Message>
+     * @return array<uim.cake.mailers.Message>
      */
     static function getMessages() {
         return static::$messages;

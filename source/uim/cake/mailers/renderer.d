@@ -33,7 +33,7 @@ class Renderer
      * @param string $content The content.
      * @param array<string> $types Content types to render. Valid array values are Message::MESSAGE_HTML, Message::MESSAGE_TEXT.
      * @return array<string, string> The rendered content with "html" and/or "text" keys.
-     * @psalm-param array<uim.cake.Mailer\Message::MESSAGE_HTML|uim.cake.Mailer\Message::MESSAGE_TEXT> $types
+     * @psalm-param array<uim.cake.mailers.Message::MESSAGE_HTML|uim.cake.mailers.Message::MESSAGE_TEXT> $types
      * @psalm-return array{html?: string, text?: string}
      */
     function render(string $content, array $types = []): array

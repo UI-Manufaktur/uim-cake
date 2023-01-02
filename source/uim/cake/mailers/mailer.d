@@ -6,7 +6,7 @@ import uim.cake.core.StaticConfigTrait;
 import uim.cake.datasources.ModelAwareTrait;
 import uim.cake.events.IEventListener;
 import uim.cake.logs.Log;
-import uim.cake.Mailer\exceptions.MissingActionException;
+import uim.cake.mailers.exceptions.MissingActionException;
 import uim.cake.orm.locators.LocatorAwareTrait;
 import uim.cake.View\ViewBuilder;
 use InvalidArgumentException;
@@ -74,48 +74,48 @@ use InvalidArgumentException;
  * Our mailer could either be registered in the application bootstrap, or
  * in the Table class" initialize() hook.
  *
- * @method this setTo($email, $name = null) Sets "to" address. {@see uim.cake.Mailer\Message::setTo()}
- * @method array getTo() Gets "to" address. {@see uim.cake.Mailer\Message::getTo()}
- * @method this setFrom($email, $name = null) Sets "from" address. {@see uim.cake.Mailer\Message::setFrom()}
- * @method array getFrom() Gets "from" address. {@see uim.cake.Mailer\Message::getFrom()}
- * @method this setSender($email, $name = null) Sets "sender" address. {@see uim.cake.Mailer\Message::setSender()}
- * @method array getSender() Gets "sender" address. {@see uim.cake.Mailer\Message::getSender()}
- * @method this setReplyTo($email, $name = null) Sets "Reply-To" address. {@see uim.cake.Mailer\Message::setReplyTo()}
- * @method array getReplyTo() Gets "Reply-To" address. {@see uim.cake.Mailer\Message::getReplyTo()}
- * @method this addReplyTo($email, $name = null) Add "Reply-To" address. {@see uim.cake.Mailer\Message::addReplyTo()}
+ * @method this setTo($email, $name = null) Sets "to" address. {@see uim.cake.mailers.Message::setTo()}
+ * @method array getTo() Gets "to" address. {@see uim.cake.mailers.Message::getTo()}
+ * @method this setFrom($email, $name = null) Sets "from" address. {@see uim.cake.mailers.Message::setFrom()}
+ * @method array getFrom() Gets "from" address. {@see uim.cake.mailers.Message::getFrom()}
+ * @method this setSender($email, $name = null) Sets "sender" address. {@see uim.cake.mailers.Message::setSender()}
+ * @method array getSender() Gets "sender" address. {@see uim.cake.mailers.Message::getSender()}
+ * @method this setReplyTo($email, $name = null) Sets "Reply-To" address. {@see uim.cake.mailers.Message::setReplyTo()}
+ * @method array getReplyTo() Gets "Reply-To" address. {@see uim.cake.mailers.Message::getReplyTo()}
+ * @method this addReplyTo($email, $name = null) Add "Reply-To" address. {@see uim.cake.mailers.Message::addReplyTo()}
  * @method this setReadReceipt($email, $name = null) Sets Read Receipt (Disposition-Notification-To header).
- *   {@see uim.cake.Mailer\Message::setReadReceipt()}
+ *   {@see uim.cake.mailers.Message::setReadReceipt()}
  * @method array getReadReceipt() Gets Read Receipt (Disposition-Notification-To header).
- *   {@see uim.cake.Mailer\Message::getReadReceipt()}
- * @method this setReturnPath($email, $name = null) Sets return path. {@see uim.cake.Mailer\Message::setReturnPath()}
- * @method array getReturnPath() Gets return path. {@see uim.cake.Mailer\Message::getReturnPath()}
- * @method this addTo($email, $name = null) Add "To" address. {@see uim.cake.Mailer\Message::addTo()}
- * @method this setCc($email, $name = null) Sets "cc" address. {@see uim.cake.Mailer\Message::setCc()}
- * @method array getCc() Gets "cc" address. {@see uim.cake.Mailer\Message::getCc()}
- * @method this addCc($email, $name = null) Add "cc" address. {@see uim.cake.Mailer\Message::addCc()}
- * @method this setBcc($email, $name = null) Sets "bcc" address. {@see uim.cake.Mailer\Message::setBcc()}
- * @method array getBcc() Gets "bcc" address. {@see uim.cake.Mailer\Message::getBcc()}
- * @method this addBcc($email, $name = null) Add "bcc" address. {@see uim.cake.Mailer\Message::addBcc()}
- * @method this setCharset($charset) Charset setter. {@see uim.cake.Mailer\Message::setCharset()}
- * @method string getCharset() Charset getter. {@see uim.cake.Mailer\Message::getCharset()}
- * @method this setHeaderCharset($charset) HeaderCharset setter. {@see uim.cake.Mailer\Message::setHeaderCharset()}
- * @method string getHeaderCharset() HeaderCharset getter. {@see uim.cake.Mailer\Message::getHeaderCharset()}
- * @method this setSubject($subject) Sets subject. {@see uim.cake.Mailer\Message::setSubject()}
- * @method string getSubject() Gets subject. {@see uim.cake.Mailer\Message::getSubject()}
- * @method this setHeaders(array $headers) Sets headers for the message. {@see uim.cake.Mailer\Message::setHeaders()}
- * @method this addHeaders(array $headers) Add header for the message. {@see uim.cake.Mailer\Message::addHeaders()}
- * @method this getHeaders(array $include = []) Get list of headers. {@see uim.cake.Mailer\Message::getHeaders()}
- * @method this setEmailFormat($format) Sets email format. {@see uim.cake.Mailer\Message::getHeaders()}
- * @method string getEmailFormat() Gets email format. {@see uim.cake.Mailer\Message::getEmailFormat()}
- * @method this setMessageId($message) Sets message ID. {@see uim.cake.Mailer\Message::setMessageId()}
- * @method string|bool getMessageId() Gets message ID. {@see uim.cake.Mailer\Message::getMessageId()}
- * @method this setDomain($domain) Sets domain. {@see uim.cake.Mailer\Message::setDomain()}
- * @method string getDomain() Gets domain. {@see uim.cake.Mailer\Message::getDomain()}
- * @method this setAttachments($attachments) Add attachments to the email message. {@see uim.cake.Mailer\Message::setAttachments()}
- * @method array getAttachments() Gets attachments to the email message. {@see uim.cake.Mailer\Message::getAttachments()}
- * @method this addAttachments($attachments) Add attachments. {@see uim.cake.Mailer\Message::addAttachments()}
+ *   {@see uim.cake.mailers.Message::getReadReceipt()}
+ * @method this setReturnPath($email, $name = null) Sets return path. {@see uim.cake.mailers.Message::setReturnPath()}
+ * @method array getReturnPath() Gets return path. {@see uim.cake.mailers.Message::getReturnPath()}
+ * @method this addTo($email, $name = null) Add "To" address. {@see uim.cake.mailers.Message::addTo()}
+ * @method this setCc($email, $name = null) Sets "cc" address. {@see uim.cake.mailers.Message::setCc()}
+ * @method array getCc() Gets "cc" address. {@see uim.cake.mailers.Message::getCc()}
+ * @method this addCc($email, $name = null) Add "cc" address. {@see uim.cake.mailers.Message::addCc()}
+ * @method this setBcc($email, $name = null) Sets "bcc" address. {@see uim.cake.mailers.Message::setBcc()}
+ * @method array getBcc() Gets "bcc" address. {@see uim.cake.mailers.Message::getBcc()}
+ * @method this addBcc($email, $name = null) Add "bcc" address. {@see uim.cake.mailers.Message::addBcc()}
+ * @method this setCharset($charset) Charset setter. {@see uim.cake.mailers.Message::setCharset()}
+ * @method string getCharset() Charset getter. {@see uim.cake.mailers.Message::getCharset()}
+ * @method this setHeaderCharset($charset) HeaderCharset setter. {@see uim.cake.mailers.Message::setHeaderCharset()}
+ * @method string getHeaderCharset() HeaderCharset getter. {@see uim.cake.mailers.Message::getHeaderCharset()}
+ * @method this setSubject($subject) Sets subject. {@see uim.cake.mailers.Message::setSubject()}
+ * @method string getSubject() Gets subject. {@see uim.cake.mailers.Message::getSubject()}
+ * @method this setHeaders(array $headers) Sets headers for the message. {@see uim.cake.mailers.Message::setHeaders()}
+ * @method this addHeaders(array $headers) Add header for the message. {@see uim.cake.mailers.Message::addHeaders()}
+ * @method this getHeaders(array $include = []) Get list of headers. {@see uim.cake.mailers.Message::getHeaders()}
+ * @method this setEmailFormat($format) Sets email format. {@see uim.cake.mailers.Message::getHeaders()}
+ * @method string getEmailFormat() Gets email format. {@see uim.cake.mailers.Message::getEmailFormat()}
+ * @method this setMessageId($message) Sets message ID. {@see uim.cake.mailers.Message::setMessageId()}
+ * @method string|bool getMessageId() Gets message ID. {@see uim.cake.mailers.Message::getMessageId()}
+ * @method this setDomain($domain) Sets domain. {@see uim.cake.mailers.Message::setDomain()}
+ * @method string getDomain() Gets domain. {@see uim.cake.mailers.Message::getDomain()}
+ * @method this setAttachments($attachments) Add attachments to the email message. {@see uim.cake.mailers.Message::setAttachments()}
+ * @method array getAttachments() Gets attachments to the email message. {@see uim.cake.mailers.Message::getAttachments()}
+ * @method this addAttachments($attachments) Add attachments. {@see uim.cake.mailers.Message::addAttachments()}
  * @method array|string getBody(?string $type = null) Get generated message body as array.
- *   {@see uim.cake.Mailer\Message::getBody()}
+ *   {@see uim.cake.mailers.Message::getBody()}
  */
 #[\AllowDynamicProperties]
 class Mailer : IEventListener
@@ -134,7 +134,7 @@ class Mailer : IEventListener
     /**
      * The transport instance to use for sending mail.
      *
-     * @var uim.cake.Mailer\AbstractTransport|null
+     * @var uim.cake.mailers.AbstractTransport|null
      */
     protected $transport;
 
@@ -142,21 +142,21 @@ class Mailer : IEventListener
      * Message class name.
      *
      * @var string
-     * @psalm-var class-string<uim.cake.Mailer\Message>
+     * @psalm-var class-string<uim.cake.mailers.Message>
      */
     protected $messageClass = Message::class;
 
     /**
      * Message instance.
      *
-     * @var uim.cake.Mailer\Message
+     * @var uim.cake.mailers.Message
      */
     protected $message;
 
     /**
      * Email Renderer
      *
-     * @var uim.cake.Mailer\Renderer|null
+     * @var uim.cake.mailers.Renderer|null
      */
     protected $renderer;
 
@@ -219,7 +219,7 @@ class Mailer : IEventListener
     /**
      * Get email renderer.
      *
-     * @return uim.cake.Mailer\Renderer
+     * @return uim.cake.mailers.Renderer
      */
     function getRenderer(): Renderer
     {
@@ -233,7 +233,7 @@ class Mailer : IEventListener
     /**
      * Set email renderer.
      *
-     * @param uim.cake.Mailer\Renderer $renderer Render instance.
+     * @param uim.cake.mailers.Renderer $renderer Render instance.
      * @return this
      */
     function setRenderer(Renderer $renderer) {
@@ -245,7 +245,7 @@ class Mailer : IEventListener
     /**
      * Get message instance.
      *
-     * @return uim.cake.Mailer\Message
+     * @return uim.cake.mailers.Message
      */
     function getMessage(): Message
     {
@@ -255,7 +255,7 @@ class Mailer : IEventListener
     /**
      * Set message instance.
      *
-     * @param uim.cake.Mailer\Message $message Message instance.
+     * @param uim.cake.mailers.Message $message Message instance.
      * @return this
      */
     function setMessage(Message $message) {
@@ -315,7 +315,7 @@ class Mailer : IEventListener
      * @param array $args Arguments to pass to the triggered mailer action.
      * @param array $headers Headers to set.
      * @return array
-     * @throws uim.cake.Mailer\exceptions.MissingActionException
+     * @throws uim.cake.mailers.exceptions.MissingActionException
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */
@@ -458,7 +458,7 @@ class Mailer : IEventListener
      * When setting the transport you can either use the name
      * of a configured transport or supply a constructed transport.
      *
-     * @param uim.cake.Mailer\AbstractTransport|string aName Either the name of a configured
+     * @param uim.cake.mailers.AbstractTransport|string aName Either the name of a configured
      *   transport, or a transport instance.
      * @return this
      * @throws \LogicException When the chosen transport lacks a send method.
@@ -470,7 +470,7 @@ class Mailer : IEventListener
         } elseif (is_object($name)) {
             $transport = $name;
             if (!$transport instanceof AbstractTransport) {
-                throw new CakeException("Transport class must extend Cake\Mailer\AbstractTransport");
+                throw new CakeException("Transport class must extend Cake\mailers.AbstractTransport");
             }
         } else {
             throw new InvalidArgumentException(sprintf(
@@ -487,7 +487,7 @@ class Mailer : IEventListener
     /**
      * Gets the transport.
      *
-     * @return uim.cake.Mailer\AbstractTransport
+     * @return uim.cake.mailers.AbstractTransport
      */
     function getTransport(): AbstractTransport
     {

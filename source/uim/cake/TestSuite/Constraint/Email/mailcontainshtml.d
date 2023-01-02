@@ -1,6 +1,6 @@
 module uim.cake.TestSuite\Constraint\Email;
 
-import uim.cake.Mailer\Message;
+import uim.cake.mailers.Message;
 
 /**
  * MailContainsHtml

@@ -1,7 +1,7 @@
-module uim.cake.Mailer\Transport;
+module uim.cake.mailers.Transport;
 
-import uim.cake.Mailer\AbstractTransport;
-import uim.cake.Mailer\Message;
+import uim.cake.mailers.AbstractTransport;
+import uim.cake.mailers.Message;
 import uim.cake.Network\exceptions.SocketException;
 import uim.cake.Network\Socket;
 use Exception;
@@ -153,7 +153,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Send mail
      *
-     * @param uim.cake.Mailer\Message $message Message instance
+     * @param uim.cake.mailers.Message $message Message instance
      * @return array{headers: string, message: string}
      * @throws uim.cake.Network\exceptions.SocketException
      */
@@ -389,7 +389,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Prepares the `from` email address.
      *
-     * @param uim.cake.Mailer\Message $message Message instance
+     * @param uim.cake.mailers.Message $message Message instance
      * @return array
      */
     protected function _prepareFromAddress(Message $message): array
@@ -405,7 +405,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Prepares the recipient email addresses.
      *
-     * @param uim.cake.Mailer\Message $message Message instance
+     * @param uim.cake.mailers.Message $message Message instance
      * @return array
      */
     protected function _prepareRecipientAddresses(Message $message): array
@@ -420,7 +420,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Prepares the message body.
      *
-     * @param uim.cake.Mailer\Message $message Message instance
+     * @param uim.cake.mailers.Message $message Message instance
      */
     protected string _prepareMessage(Message $message): string
     {
@@ -440,7 +440,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Send emails
      *
-     * @param uim.cake.Mailer\Message $message Message instance
+     * @param uim.cake.mailers.Message $message Message instance
      * @throws uim.cake.Network\exceptions.SocketException
      */
     protected void _sendRcpt(Message $message): void
@@ -457,7 +457,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Send Data
      *
-     * @param uim.cake.Mailer\Message $message Message instance
+     * @param uim.cake.mailers.Message $message Message instance
      * @return void
      * @throws uim.cake.Network\exceptions.SocketException
      */

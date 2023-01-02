@@ -20,7 +20,7 @@ abstract class AbstractTransport
     /**
      * Send mail
      *
-     * @param uim.cake.Mailer\Message $message Email message.
+     * @param uim.cake.mailers.Message $message Email message.
      * @return array
      * @psalm-return array{headers: string, message: string}
      */
@@ -38,7 +38,7 @@ abstract class AbstractTransport
     /**
      * Check that at least one destination header is set.
      *
-     * @param uim.cake.Mailer\Message $message Message instance.
+     * @param uim.cake.mailers.Message $message Message instance.
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException If at least one of to, cc or bcc is not specified.
      */

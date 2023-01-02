@@ -8,7 +8,7 @@ use RuntimeException;
 /**
  * An object registry for mailer transports.
  *
- * @: uim.cake.Core\ObjectRegistry<uim.cake.Mailer\AbstractTransport>
+ * @: uim.cake.Core\ObjectRegistry<uim.cake.mailers.AbstractTransport>
  */
 class TransportRegistry : ObjectRegistry
 {
@@ -46,10 +46,10 @@ class TransportRegistry : ObjectRegistry
      *
      * Part of the template method for Cake\Core\ObjectRegistry::load()
      *
-     * @param uim.cake.Mailer\AbstractTransport|string $class The classname or object to make.
+     * @param uim.cake.mailers.AbstractTransport|string $class The classname or object to make.
      * @param string $alias The alias of the object.
      * @param array<string, mixed> $config An array of settings to use for the cache engine.
-     * @return uim.cake.Mailer\AbstractTransport The constructed transport class.
+     * @return uim.cake.mailers.AbstractTransport The constructed transport class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
     protected function _create($class, string $alias, array $config): AbstractTransport
@@ -65,7 +65,7 @@ class TransportRegistry : ObjectRegistry
         }
 
         throw new RuntimeException(
-            "Mailer transports must import uim.cake.Mailer\AbstractTransport as a base class."
+            "Mailer transports must import uim.cake.mailers.AbstractTransport as a base class."
         );
     }
 
