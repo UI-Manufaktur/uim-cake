@@ -9,7 +9,7 @@
 
 
  * @since         3.6.0
-  */module uim.cake.Core;
+  */module uim.cake.core;
 
 import uim.cake.consoles.CommandCollection;
 import uim.cake.http.MiddlewareQueue;

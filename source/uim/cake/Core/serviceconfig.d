@@ -5,7 +5,7 @@
 
 
  * @since         4.2.0
-  */module uim.cake.Core;
+  */module uim.cake.core;
 
 /**
  * Read-only wrapper for configuration data

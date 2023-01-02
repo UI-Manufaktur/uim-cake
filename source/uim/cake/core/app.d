@@ -22,35 +22,40 @@ module uim.cake.core;
  * Plugins can be located with App as well. Using Plugin::path("DebugKit") for example, will
  * give you the full path to the DebugKit plugin.
  *
- * @link https://book.UIM.org/4/en/core-libraries/app.html
+ * @link https://book.cakephp.org/4/en/core-libraries/app.html
  */
-class App {
+class App
+{
     /**
-     * Return the class name moduled. This method checks if the class is defined on the
-     * application/plugin, otherwise try to load from the UIM core
+     * Return the class name namespaced. This method checks if the class is defined on the
+     * application/plugin, otherwise try to load from the CakePHP core
      *
-     * @param string aClassName Class name
-     * @param string aClassType Type of class
-     * @param string aClassNameSuffix Class name suffix
-     * @return string|null moduled class name, null if the class is not found.
+     * @param string $class Class name
+     * @param string $type Type of class
+     * @param string $suffix Class name suffix
+     * @return string|null Namespaced class name, null if the class is not found.
      * @psalm-return class-string|null
      */
-    static string className(string aClassName, string aClassType = "", string aClassNameSuffix = "") {
-        if (indexOf(aClassName, "\\") != false) {
-            return class_exists(aClassName) ? aClassName : null;
+    static function className(string $class, string $type = "", string $suffix = ""): ?string
+    {
+        if (strpos($class, "\\") != false) {
+            return class_exists($class) ? $class : null;
         }
 
-        [myPlugin, myName] = pluginSplit(aClassName);
-        $base = myPlugin ?: Configure::read("App.module");
-        $base = str_replace("/", "\\", rtrim($base, "\\"));
-        $fullname = "\\" ~ str_replace("/", "\\", aClassType ~ "\\" ~ myName) . aClassNameSuffix;
+        [$plugin, $name] = pluginSplit($class);
+        $fullname = "\\" ~ str_replace("/", "\\", $type ~ "\\" ~ $name) . $suffix;
 
-        if (static::_classExistsInBase($fullname, $base)) {
-            /** @var class-string */
-            return $base . $fullname;
+        $base = $plugin ?: Configure::read("App.namespace");
+        if ($base != null) {
+            $base = str_replace("/", "\\", rtrim($base, "\\"));
+
+            if (static::_classExistsInBase($fullname, $base)) {
+                /** @var class-string */
+                return $base . $fullname;
+            }
         }
 
-        if (myPlugin || !static::_classExistsInBase($fullname, "Cake")) {
+        if ($plugin || !static::_classExistsInBase($fullname, "Cake")) {
             return null;
         }
 
@@ -93,36 +98,36 @@ class App {
      *
      * Returns: Auth
      *
-     * @param string aClassName Class name
-     * @param string aClassType Type of class
-     * @param string aClassNameSuffix Class name suffix
+     * @param string $class Class name
+     * @param string $type Type of class
+     * @param string $suffix Class name suffix
      * @return string Plugin split name of class
      */
-    static string shortName(string aClassName, string aClassType, string aClassNameSuffix = "") {
-        aClassName = str_replace("\\", "/", aClassName);
-        aClassType = "/" ~ aClassType ~ "/";
+    static string shortName(string $class, string $type, string $suffix = "") {
+        $class = str_replace("\\", "/", $class);
+        $type = "/" ~ $type ~ "/";
 
-        $pos = strrpos(aClassName, aClassType);
+        $pos = strrpos($class, $type);
         if ($pos == false) {
-            return aClassName;
+            return $class;
         }
 
-        myPluginName = (string)substr(aClassName, 0, $pos);
-        myName = (string)substr(aClassName, $pos + strlen(aClassType));
+        $pluginName = (string)substr($class, 0, $pos);
+        $name = (string)substr($class, $pos + strlen($type));
 
-        if (aClassNameSuffix) {
-            myName = (string)substr(myName, 0, -strlen(aClassNameSuffix));
+        if ($suffix) {
+            $name = (string)substr($name, 0, -strlen($suffix));
         }
 
-        $nonPluginmodules = [
+        $nonPluginNamespaces = [
             "Cake",
-            str_replace("\\", "/", (string)Configure::read("App.module")),
+            str_replace("\\", "/", (string)Configure::read("App.namespace")),
         ];
-        if (in_array(myPluginName, $nonPluginmodules, true)) {
-            return myName;
+        if (in_array($pluginName, $nonPluginNamespaces, true)) {
+            return $name;
         }
 
-        return myPluginName ~ "." ~ myName;
+        return $pluginName ~ "." ~ $name;
     }
 
     /**
@@ -130,19 +135,20 @@ class App {
      *
      * Test isolation wrapper
      *
-     * @param string myName Class name.
-     * @param string module module.
+     * @param string aName Class name.
+     * @param string aNamespace Namespace.
      * @return bool
      */
-    protected static bool _classExistsInBase(string myName, string module) {
-        return class_exists($module . myName);
+    protected static function _classExistsInBase(string aName, string aNamespace): bool
+    {
+        return class_exists($namespace . $name);
     }
 
     /**
      * Used to read information stored path.
      *
-     * The 1st character of aClassType argument should be lower cased and will return the
-     * value of `App.paths.aClassType` config.
+     * The 1st character of $type argument should be lower cased and will return the
+     * value of `App.paths.$type` config.
      *
      * Default types:
      * - plugins
@@ -160,23 +166,23 @@ class App {
      * Deprecated: 4.0 App::path() is deprecated for class path (inside src/ directory).
      *   Use uim.cake.Core\App::classPath() instead or directly the method on uim.cake.Core\Plugin class.
      *
-     * @param string aClassType Type of path
-     * @param string|null myPlugin Plugin name
-     * @link https://book.UIM.org/4/en/core-libraries/app.html#finding-paths-to-modules
+     * @param string $type Type of path
+     * @param string|null $plugin Plugin name
      */
-    static string[] path(string aClassType, Nullable!string myPlugin = null) {
-        if (myPlugin is null && aClassType[0] == strtolower(aClassType[0])) {
-            return (array)Configure::read("App.paths." ~ aClassType);
+    static string[] path(string $type, ?string $plugin = null): array
+    {
+        if ($plugin == null && $type[0] == strtolower($type[0])) {
+            return (array)Configure::read("App.paths." ~ $type);
         }
 
-        if (aClassType == "templates") {
+        if ($type == "templates") {
             /** @psalm-suppress PossiblyNullArgument */
-            return [Plugin::templatePath(myPlugin)];
+            return [Plugin::templatePath($plugin)];
         }
 
-        if (aClassType == "locales") {
+        if ($type == "locales") {
             /** @psalm-suppress PossiblyNullArgument */
-            return [Plugin::path(myPlugin) ~ "resources" ~ DIRECTORY_SEPARATOR ~ "locales" ~ DIRECTORY_SEPARATOR];
+            return [Plugin::path($plugin) ~ "resources" ~ DIRECTORY_SEPARATOR ~ "locales" ~ DIRECTORY_SEPARATOR];
         }
 
         deprecationWarning(
@@ -184,7 +190,7 @@ class App {
             ~ " Use uim.cake.Core\App::classPath() or uim.cake.Core\Plugin::classPath() instead."
         );
 
-        return static::classPath(aClassType, myPlugin);
+        return static::classPath($type, $plugin);
     }
 
     /**
@@ -204,21 +210,23 @@ class App {
      *
      * Will return the plugin based path for those.
      *
-     * @param string aClassType Package type.
-     * @param string|null myPlugin Plugin name.
+     * @param string $type Package type.
+     * @param string|null $plugin Plugin name.
+     * @return array<string>
      */
-    static string[] classPath(string aClassType, Nullable!string myPlugin = null) {
-        if (myPlugin  !is null) {
+    static string[] classPath(string $type, ?string $plugin = null): array
+    {
+        if ($plugin != null) {
             return [
-                Plugin::classPath(myPlugin) . aClassType . DIRECTORY_SEPARATOR,
+                Plugin::classPath($plugin) . $type . DIRECTORY_SEPARATOR,
             ];
         }
 
-        return [APP . aClassType . DIRECTORY_SEPARATOR];
+        return [APP . $type . DIRECTORY_SEPARATOR];
     }
 
     /**
-     * Returns the full path to a package inside the UIM core
+     * Returns the full path to a package inside the CakePHP core
      *
      * Usage:
      *
@@ -228,14 +236,15 @@ class App {
      *
      * Will return the full path to the cache engines package.
      *
-     * @param string aClassType Package type.
-     * @return Full path to package
+     * @param string $type Package type.
+     * @return array<string> Full path to package
      */
-    static string[] core(string aClassType) {
-        if (aClassType == "templates") {
+    static function core(string $type): array
+    {
+        if ($type == "templates") {
             return [CORE_PATH ~ "templates" ~ DIRECTORY_SEPARATOR];
         }
 
-        return [CAKE . str_replace("/", DIRECTORY_SEPARATOR, aClassType) . DIRECTORY_SEPARATOR];
+        return [CAKE . str_replace("/", DIRECTORY_SEPARATOR, $type) . DIRECTORY_SEPARATOR];
     }
 }

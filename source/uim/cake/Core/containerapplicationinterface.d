@@ -5,7 +5,7 @@
 
 
  * @since         4.2.0
-  */module uim.cake.Core;
+  */module uim.cake.core;
 
 /**
  * Interface for applications that configure and use a dependency injection container.
