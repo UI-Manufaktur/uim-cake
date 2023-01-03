@@ -2183,7 +2183,7 @@ class FormHelper : Helper
      * This method will convert a numerically indexed "disabled" into an associative
      * array value. FormHelper"s internals expect associative options.
      *
-     * The output of this function is a more complete set of input attributes that
+     * The output of this bool is a more complete set of input attributes that
      * can be passed to a form widget to generate the actual input.
      *
      * @param string myField Name of the field to initialize options for.

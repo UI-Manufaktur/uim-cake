@@ -65,13 +65,13 @@ class FormContext : ContextInterface
     }
 
 
-    function isPrimaryKey(string $field): bool
+    bool isPrimaryKey(string $field): bool
     {
         return false;
     }
 
 
-    function isCreate(): bool
+    bool isCreate(): bool
     {
         return true;
     }
@@ -111,7 +111,7 @@ class FormContext : ContextInterface
     }
 
 
-    function isRequired(string $field): ?bool
+    bool isRequired(string $field): ?bool
     {
         $validator = _form.getValidator(_validator);
         if (!$validator.hasField($field)) {

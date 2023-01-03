@@ -169,7 +169,7 @@ class EntityContext : ContextInterface
     }
 
 
-    function isPrimaryKey(string $field): bool
+    bool isPrimaryKey(string $field): bool
     {
         $parts = explode(".", $field);
         $table = _getTable($parts);
@@ -190,7 +190,7 @@ class EntityContext : ContextInterface
      * If the context is for a collection or array the first object in the
      * collection will be used.
      */
-    bool isCreate(): bool
+    bool isCreate()
     {
         $entity = _context["entity"];
         if (is_iterable($entity)) {
@@ -466,7 +466,7 @@ class EntityContext : ContextInterface
      * @param string $field The dot separated path to the field you want to check.
      * @return bool|null
      */
-    function isRequired(string $field): ?bool
+    bool isRequired(string $field): ?bool
     {
         $parts = explode(".", $field);
         $entity = this.entity($parts);

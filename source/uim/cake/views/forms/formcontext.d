@@ -90,7 +90,7 @@ class FormContext : IContext
     }
 
 
-    function isRequired(string myField): ?bool
+    bool isRequired(string myField): ?bool
     {
         $validator = _form.getValidator();
         if (!$validator.hasField(myField)) {

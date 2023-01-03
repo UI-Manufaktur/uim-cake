@@ -48,7 +48,7 @@ class NullContext : IContext
     }
 
 
-    function isRequired(string myField): ?bool
+    bool isRequired(string myField): ?bool
     {
         return null;
     }

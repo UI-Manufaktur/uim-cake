@@ -178,7 +178,7 @@ class ArrayContext : IContext
      * @param string myField A dot separated path to check required-ness for.
      * @return bool|null
      */
-    function isRequired(string myField): ?bool
+    bool isRequired(string myField): ?bool
     {
         if (!is_array(_context["required"])) {
             return null;

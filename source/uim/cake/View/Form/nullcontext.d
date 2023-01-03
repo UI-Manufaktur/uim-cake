@@ -36,13 +36,13 @@ class NullContext : ContextInterface
     }
 
 
-    function isPrimaryKey(string $field): bool
+    bool isPrimaryKey(string $field): bool
     {
         return false;
     }
 
 
-    function isCreate(): bool
+    bool isCreate(): bool
     {
         return true;
     }
@@ -53,7 +53,7 @@ class NullContext : ContextInterface
     }
 
 
-    function isRequired(string $field): ?bool
+    bool isRequired(string $field): ?bool
     {
         return null;
     }

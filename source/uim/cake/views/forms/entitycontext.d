@@ -447,7 +447,7 @@ class EntityContext : IContext {
      * @param string myField The dot separated path to the field you want to check.
      * @return bool|null
      */
-    function isRequired(string myField): ?bool
+    bool isRequired(string myField): ?bool
     {
         $parts = explode(".", myField);
         $entity = this.entity($parts);

@@ -672,7 +672,7 @@ class FormHelper : Helper
      * @return bool If there are errors this method returns true, else false.
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#displaying-and-checking-errors
      */
-    function isFieldError(string $field): bool
+    bool isFieldError(string $field): bool
     {
         return _getContext().hasError($field);
     }
@@ -2255,7 +2255,7 @@ class FormHelper : Helper
      * This method will convert a numerically indexed "disabled" into an associative
      * array value. FormHelper"s internals expect associative options.
      *
-     * The output of this function is a more complete set of input attributes that
+     * The output of this bool is a more complete set of input attributes that
      * can be passed to a form widget to generate the actual input.
      *
      * @param string $field Name of the field to initialize options for.
