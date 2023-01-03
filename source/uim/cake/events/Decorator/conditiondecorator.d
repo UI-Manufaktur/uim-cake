@@ -39,7 +39,7 @@ class ConditionDecorator : AbstractDecorator
      *
      * @param uim.cake.events.IEvent $event Event object.
      */
-    bool canTrigger(IEvent $event): bool
+    bool canTrigger(IEvent $event)
     {
         $if = _evaluateCondition("if", $event);
         $unless = _evaluateCondition("unless", $event);
@@ -53,7 +53,7 @@ class ConditionDecorator : AbstractDecorator
      * @param string $condition Condition type
      * @param uim.cake.events.IEvent $event Event object
      */
-    protected bool _evaluateCondition(string $condition, IEvent $event): bool
+    protected bool _evaluateCondition(string $condition, IEvent $event)
     {
         if (!isset(_options[$condition])) {
             return $condition != "unless";

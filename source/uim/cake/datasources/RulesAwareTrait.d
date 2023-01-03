@@ -37,7 +37,7 @@ trait RulesAwareTrait
      * @param string $operation The operation being run. Either "create", "update" or "delete".
      * @param \ArrayObject|array|null $options The options To be passed to the rules.
      */
-    bool checkRules(IEntity $entity, string $operation = RulesChecker::CREATE, $options = null): bool
+    bool checkRules(IEntity $entity, string $operation = RulesChecker::CREATE, $options = null)
     {
         $rules = this.rulesChecker();
         $options = $options ?: new ArrayObject();

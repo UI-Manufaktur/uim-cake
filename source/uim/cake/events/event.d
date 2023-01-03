@@ -112,7 +112,7 @@ class Event : IEvent
      *
      * @return bool True if the event is stopped
      */
-    function isStopped(): bool
+    bool isStopped()
     {
         return _stopped;
     }

@@ -125,13 +125,13 @@ abstract class BaseErrorHandler
      * @param array<string, mixed>|null $context Context
      * @return bool True if error was handled
      */
-    function handleError(
+    bool handleError(
         int $code,
         string $description,
         ?string $file = null,
         ?int $line = null,
         ?array $context = null
-    ): bool {
+    ) {
         if (!(error_reporting() & $code)) {
             return false;
         }
@@ -228,7 +228,7 @@ abstract class BaseErrorHandler
      * @param string $file File on which error occurred
      * @param int $line Line that triggered the error
      */
-    bool handleFatalError(int $code, string $description, string $file, int $line): bool
+    bool handleFatalError(int $code, string $description, string $file, int $line)
     {
         $data = [
             "code": $code,
@@ -279,7 +279,7 @@ abstract class BaseErrorHandler
      * @param string|int $level The level name of the log.
      * @param array $data Array of error data.
      */
-    protected bool _logError($level, array $data): bool
+    protected bool _logError($level, array $data)
     {
         $message = sprintf(
             "%s (%s): %s in [%s, line %s]",
@@ -307,7 +307,7 @@ abstract class BaseErrorHandler
      * @param \Throwable $exception The exception to log a message for.
      * @param \Psr\Http\messages.IServerRequest|null $request The current request.
      */
-    bool logException(Throwable $exception, ?IServerRequest $request = null): bool
+    bool logException(Throwable $exception, ?IServerRequest $request = null)
     {
         if (empty(_config["log"])) {
             return false;

@@ -24,5 +24,5 @@ interface ConfigEngineInterface
      * @param array $data The data to dump.
      * @return bool True on success or false on failure.
      */
-    function dump(string aKey, array $data): bool;
+    bool dump(string aKey, array $data);
 }

@@ -31,10 +31,10 @@ interface ErrorLoggerInterface
      * @return bool
      * @deprecated 4.4.0 Implement `logException` instead.
      */
-    function log(
+    bool log(
         Throwable $exception,
         ?IServerRequest $request = null
-    ): bool;
+    );
 
     /**
      * Log a an error message to the error logger.

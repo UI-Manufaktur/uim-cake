@@ -90,7 +90,7 @@ class File
      *
      * @return bool Success
      */
-    function create(): bool
+    bool create()
     {
         $dir = this.Folder.pwd();
 
@@ -108,7 +108,7 @@ class File
      * @param bool $force If true then the file will be re-opened even if its already opened, otherwise it won"t
      * @return bool True on success, false on failure
      */
-    function open(string $mode = "r", bool $force = false): bool
+    bool open(string $mode = "r", bool $force = false)
     {
         if (!$force && is_resource(this.handle)) {
             return true;
@@ -206,7 +206,7 @@ class File
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    function write(string $data, string $mode = "w", bool $force = false): bool
+    bool write(string $data, string $mode = "w", bool $force = false)
     {
         $success = false;
         if (this.open($mode, $force) == true) {
@@ -232,7 +232,7 @@ class File
      * @param bool $force Force the file to open
      * @return bool Success
      */
-    function append(string $data, bool $force = false): bool
+    bool append(string $data, bool $force = false)
     {
         return this.write($data, "a", $force);
     }
@@ -242,7 +242,7 @@ class File
      *
      * @return bool True if closing was successful or file was already closed, otherwise false
      */
-    function close(): bool
+    bool close()
     {
         if (!is_resource(this.handle)) {
             return true;
@@ -256,7 +256,7 @@ class File
      *
      * @return bool Success
      */
-    function delete(): bool
+    bool delete()
     {
         this.close();
         this.handle = null;
@@ -411,7 +411,7 @@ class File
      *
      * @return bool True if it exists, false otherwise
      */
-    function exists(): bool
+    bool exists()
     {
         this.clearStatCache();
 
@@ -449,7 +449,7 @@ class File
      *
      * @return bool True if it"s writable, false otherwise
      */
-    function writable(): bool
+    bool writable()
     {
         return is_writable(this.path);
     }

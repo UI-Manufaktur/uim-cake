@@ -73,7 +73,7 @@ abstract class AbstractLocator : ILocator
     }
 
 
-    function exists(string $alias): bool
+    bool exists(string $alias)
     {
         return isset(this.instances[$alias]);
     }

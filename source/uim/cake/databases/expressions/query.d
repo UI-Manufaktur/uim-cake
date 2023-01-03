@@ -626,7 +626,7 @@ class QueryExpression : IExpression, Countable
      * Returns true if this expression contains any other nested
      * IExpression objects
      */
-    bool hasNestedExpression(): bool
+    bool hasNestedExpression()
     {
         foreach (_conditions as $c) {
             if ($c instanceof IExpression) {

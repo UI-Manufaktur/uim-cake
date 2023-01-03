@@ -120,5 +120,5 @@ interface IConnection : ILoggerAware
     function disableQueryLogging();
 
     // Check if query logging is enabled.
-    bool isQueryLoggingEnabled(): bool;
+    bool isQueryLoggingEnabled();
 }

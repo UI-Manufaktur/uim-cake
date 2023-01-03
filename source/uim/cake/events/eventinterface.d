@@ -32,7 +32,7 @@ interface IEvent
      *
      * @return bool True if the event is stopped
      */
-    function isStopped(): bool;
+    bool isStopped();
 
     /**
      * The result value of the event listeners.
