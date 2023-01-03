@@ -100,7 +100,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Check whether an open connection to the SMTP server is available.
      */
-    bool connected(): bool
+    bool connected()
     {
         return _socket != null && _socket.isConnected();
     }

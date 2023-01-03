@@ -65,7 +65,7 @@ class HasMany : Association
      *
      * @param uim.cake.orm.Table $side The potential Table with ownership
      */
-    bool isOwningSide(Table $side): bool
+    bool isOwningSide(Table $side)
     {
         return $side == this.getSource();
     }
@@ -169,12 +169,12 @@ class HasMany : Association
      * @param array<string, mixed> $options list of options accepted by `Table::save()`.
      * @return bool `true` on success, `false` otherwise.
      */
-    protected function _saveTarget(
+    protected bool _saveTarget(
         array $foreignKeyReference,
         IEntity $parentEntity,
         array $entities,
         array $options
-    ): bool {
+    ) {
         $foreignKey = array_keys($foreignKeyReference);
         $table = this.getTarget();
         $original = $entities;
@@ -237,7 +237,7 @@ class HasMany : Association
      * @param array<string, mixed> $options list of options to be passed to the internal `save` call
      * @return bool true on success, false otherwise
      */
-    function link(IEntity $sourceEntity, array $targetEntities, array $options = []): bool
+    bool link(IEntity $sourceEntity, array $targetEntities, array $options = [])
     {
         $saveStrategy = this.getSaveStrategy();
         this.setSaveStrategy(self::SAVE_APPEND);
@@ -396,7 +396,7 @@ class HasMany : Association
      * any of them is lacking a primary key value
      * @return bool success
      */
-    function replace(IEntity $sourceEntity, array $targetEntities, array $options = []): bool
+    bool replace(IEntity $sourceEntity, array $targetEntities, array $options = [])
     {
         $property = this.getProperty();
         $sourceEntity.set($property, $targetEntities);
@@ -425,13 +425,13 @@ class HasMany : Association
      * @param array<string, mixed> $options list of options accepted by `Table::delete()`
      * @return bool success
      */
-    protected function _unlinkAssociated(
+    protected bool _unlinkAssociated(
         array $foreignKeyReference,
         IEntity $entity,
         Table $target,
         iterable $remainingEntities = [],
         array $options = []
-    ): bool {
+    ) {
         $primaryKey = (array)$target.getPrimaryKey();
         $exclusions = new Collection($remainingEntities);
         $exclusions = $exclusions.map(
@@ -473,7 +473,7 @@ class HasMany : Association
      * @param array<string, mixed> $options list of options accepted by `Table::delete()`
      * @return bool success
      */
-    protected function _unlink(array $foreignKey, Table $target, array $conditions = [], array $options = []): bool
+    protected bool _unlink(array $foreignKey, Table $target, array $conditions = [], array $options = [])
     {
         $mustBeDependent = (!_foreignKeyAcceptsNull($target, $foreignKey) || this.getDependent());
 
@@ -514,7 +514,7 @@ class HasMany : Association
      * @param uim.cake.orm.Table $table the table containing the foreign key
      * @param array $properties the list of fields that compose the foreign key
      */
-    protected bool _foreignKeyAcceptsNull(Table $table, array $properties): bool
+    protected bool _foreignKeyAcceptsNull(Table $table, array $properties)
     {
         return !in_array(
             false,
@@ -542,7 +542,7 @@ class HasMany : Association
      * @return bool if the "matching" key in $option is true then this function
      * will return true, false otherwise
      */
-    function canBeJoined(array $options = []): bool
+    bool canBeJoined(array $options = [])
     {
         return !empty($options["matching"]);
     }
@@ -626,7 +626,7 @@ class HasMany : Association
     }
 
 
-    function cascadeDelete(IEntity $entity, array $options = []): bool
+    bool cascadeDelete(IEntity $entity, array $options = [])
     {
         $helper = new DependentDeleteHelper();
 

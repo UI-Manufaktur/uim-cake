@@ -96,7 +96,7 @@ class Socket
      * @return bool Success
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    function connect(): bool
+    bool connect()
     {
         if (this.connection) {
             this.disconnect();
@@ -165,7 +165,7 @@ class Socket
     /**
      * Check the connection status after calling `connect()`.
      */
-    bool isConnected(): bool
+    bool isConnected()
     {
         return this.connected;
     }
@@ -384,7 +384,7 @@ class Socket
      *
      * @return bool Success
      */
-    function disconnect(): bool
+    bool disconnect()
     {
         if (!is_resource(this.connection)) {
             this.connected = false;
@@ -477,7 +477,7 @@ class Socket
     /**
      * Check the encryption status after calling `enableCrypto()`.
      */
-    bool isEncrypted(): bool
+    bool isEncrypted()
     {
         return this.encrypted;
     }

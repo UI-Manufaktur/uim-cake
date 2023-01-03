@@ -592,7 +592,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @param string $field The field to check for.
      * @return bool True if the field exists, false if it does not.
      */
-    function hasField(string $field): bool
+    bool hasField(string $field)
     {
         $schema = this.getSchema();
 
@@ -830,7 +830,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @param string aName The behavior alias to check.
      * @return bool Whether the behavior exists.
      */
-    function hasBehavior(string aName): bool
+    bool hasBehavior(string aName)
     {
         return _behaviors.has($name);
     }
@@ -879,7 +879,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *
      * @param string aName The alias used for the association.
      */
-    bool hasAssociation(string aName): bool
+    bool hasAssociation(string aName)
     {
         return this.findAssociation($name) != null;
     }
@@ -1532,7 +1532,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @param bool $primary True if a primary was used.
      * @return bool Returns true if a transaction was committed.
      */
-    protected function _transactionCommitted(bool $atomic, bool $primary): bool
+    protected bool _transactionCommitted(bool $atomic, bool $primary)
     {
         return !this.getConnection().inTransaction() && ($atomic || $primary);
     }
@@ -1701,7 +1701,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
     }
 
 
-    function exists($conditions): bool
+    bool exists($conditions)
     {
         return (bool)count(
             this.find("all")
@@ -1950,7 +1950,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @throws uim.cake.orm.exceptions.RolledbackTransactionException If the transaction
      *   is aborted in the afterSave event.
      */
-    protected function _onSaveSuccess(IEntity $entity, ArrayObject $options): bool
+    protected bool _onSaveSuccess(IEntity $entity, ArrayObject $options)
     {
         $success = _associations.saveChildren(
             this,
@@ -2276,7 +2276,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @param \ArrayAccess|array $options The options for the delete.
      * @return bool success
      */
-    function delete(IEntity $entity, $options = []): bool
+    bool delete(IEntity $entity, $options = [])
     {
         $options = new ArrayObject((array)$options + [
             "atomic": true,
@@ -2390,7 +2390,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @throws uim.cake.orm.exceptions.PersistenceFailedException
      * @see uim.cake.orm.Table::delete()
      */
-    function deleteOrFail(IEntity $entity, $options = []): bool
+    bool deleteOrFail(IEntity $entity, $options = [])
     {
         $deleted = this.delete($entity, $options);
         if ($deleted == false) {
@@ -2412,7 +2412,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * passed entity
      * @return bool success
      */
-    protected function _processDelete(IEntity $entity, ArrayObject $options): bool
+    protected bool _processDelete(IEntity $entity, ArrayObject $options)
     {
         if ($entity.isNew()) {
             return false;
@@ -2467,7 +2467,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *
      * @param string $type name of finder to check
      */
-    bool hasFinder(string $type): bool
+    bool hasFinder(string $type)
     {
         $finder = "find" ~ $type;
 
@@ -2890,7 +2890,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @param array|null $context Either the validation context or null.
      * @return bool True if the value is unique, or false if a non-scalar, non-unique value was given.
      */
-    function validateUnique($value, array $options, ?array $context = null): bool
+    bool validateUnique($value, array $options, ?array $context = null)
     {
         if ($context == null) {
             $context = $options;
@@ -3032,7 +3032,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
     }
 
 
-    protected function validationMethodExists(string aName): bool
+    protected bool validationMethodExists(string aName)
     {
         return method_exists(this, $name) || this.behaviors().hasMethod($name);
     }

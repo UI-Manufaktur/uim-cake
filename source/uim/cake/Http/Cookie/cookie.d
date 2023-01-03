@@ -460,7 +460,7 @@ class Cookie : CookieInterface
     }
 
 
-    function isSecure(): bool
+    bool isSecure()
     {
         return this.secure;
     }
@@ -482,7 +482,7 @@ class Cookie : CookieInterface
     }
 
 
-    function isHttpOnly(): bool
+    bool isHttpOnly()
     {
         return this.httpOnly;
     }
@@ -521,7 +521,7 @@ class Cookie : CookieInterface
     }
 
 
-    function isExpired($time = null): bool
+    bool isExpired($time = null)
     {
         $time = $time ?: new DateTimeImmutable("now", new DateTimeZone("UTC"));
         if (!this.expiresAt) {
@@ -588,7 +588,7 @@ class Cookie : CookieInterface
      *
      * @param string $path Path to check
      */
-    bool check(string $path): bool
+    bool check(string $path)
     {
         if (this.isExpanded == false) {
             /** @psalm-suppress PossiblyInvalidArgument */
@@ -664,7 +664,7 @@ class Cookie : CookieInterface
     /**
      * Checks if the cookie value was expanded
      */
-    bool isExpanded(): bool
+    bool isExpanded()
     {
         return this.isExpanded;
     }

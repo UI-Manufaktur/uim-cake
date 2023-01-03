@@ -47,7 +47,7 @@ class BelongsTo : Association {
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success.
      */
-    function cascadeDelete(IEntity $entity, array $options = []): bool
+    bool cascadeDelete(IEntity $entity, array $options = [])
     {
         return true;
     }
@@ -69,14 +69,12 @@ class BelongsTo : Association {
      *
      * @param uim.cake.orm.Table $side The potential Table with ownership
      */
-    bool isOwningSide(Table $side): bool
+    bool isOwningSide(Table $side)
     {
         return $side == this.getTarget();
     }
 
-    /**
-     * Get the relationship type.
-     */
+    // Get the relationship type.
     string type(): string
     {
         return self::MANY_TO_ONE;

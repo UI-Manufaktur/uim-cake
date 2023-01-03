@@ -252,7 +252,7 @@ abstract class Association
     /**
      * Gets whether cascaded deletes should also fire callbacks.
      */
-    bool getCascadeCallbacks(): bool
+    bool getCascadeCallbacks()
     {
         return _cascadeCallbacks;
     }
@@ -469,7 +469,7 @@ abstract class Association
      * This is primarily used to indicate that records should be removed if the owning record in
      * the source table is deleted.
      */
-    bool getDependent(): bool
+    bool getDependent()
     {
         return _dependent;
     }
@@ -479,7 +479,7 @@ abstract class Association
      *
      * @param array<string, mixed> $options custom options key that could alter the return value
      */
-    bool canBeJoined(array $options = []): bool
+    bool canBeJoined(array $options = [])
     {
         $strategy = $options["strategy"] ?? this.getStrategy();
 
@@ -801,7 +801,7 @@ abstract class Association
      * for checking if any record matches.
      * @see uim.cake.orm.Table::exists()
      */
-    bool exists($conditions): bool
+    bool exists($conditions)
     {
         $conditions = this.find()
             .where($conditions)
@@ -852,7 +852,7 @@ abstract class Association
      * @param array<string, mixed> $options The options containing the strategy to be used.
      * @return bool true if a list of keys will be required
      */
-    function requiresKeys(array $options = []): bool
+    bool requiresKeys(array $options = [])
     {
         $strategy = $options["strategy"] ?? this.getStrategy();
 
@@ -1152,7 +1152,7 @@ abstract class Association
      * @param array<string, mixed> $options The options for the original delete.
      * @return bool Success
      */
-    abstract function cascadeDelete(IEntity $entity, array $options = []): bool;
+    abstract bool cascadeDelete(IEntity $entity, array $options = []);
 
     /**
      * Returns whether the passed table is the owning side for this
@@ -1162,7 +1162,7 @@ abstract class Association
      * @param uim.cake.orm.Table $side The potential Table with ownership
      * @return bool
      */
-    abstract function isOwningSide(Table $side): bool;
+    abstract bool isOwningSide(Table $side);
 
     /**
      * Extract the target"s association data our from the passed entity and proxies

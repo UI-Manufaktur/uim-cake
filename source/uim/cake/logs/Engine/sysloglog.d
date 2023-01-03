@@ -149,7 +149,7 @@ class SyslogLog : BaseLog
      * @param int $priority Message priority.
      * @param string $message Message to log.
      */
-    protected bool _write(int $priority, string $message): bool
+    protected bool _write(int $priority, string $message)
     {
         return syslog($priority, $message);
     }

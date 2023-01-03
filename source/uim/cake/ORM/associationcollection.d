@@ -112,7 +112,7 @@ class AssociationCollection : IteratorAggregate
      * @param string $alias The association alias to get.
      * @return bool Whether the association exists.
      */
-    function has(string $alias): bool
+    bool has(string $alias)
     {
         return isset(_items[$alias]);
     }
@@ -185,7 +185,7 @@ class AssociationCollection : IteratorAggregate
      * @param array<string, mixed> $options The options for the save operation.
      * @return bool Success
      */
-    function saveParents(Table $table, IEntity $entity, array $associations, array $options = []): bool
+    bool saveParents(Table $table, IEntity $entity, array $associations, array $options = [])
     {
         if (empty($associations)) {
             return true;
@@ -207,7 +207,7 @@ class AssociationCollection : IteratorAggregate
      * @param array<string, mixed> $options The options for the save operation.
      * @return bool Success
      */
-    function saveChildren(Table $table, IEntity $entity, array $associations, array $options): bool
+    bool saveChildren(Table $table, IEntity $entity, array $associations, array $options)
     {
         if (empty($associations)) {
             return true;
@@ -228,13 +228,13 @@ class AssociationCollection : IteratorAggregate
      * @return bool Success
      * @throws \InvalidArgumentException When an unknown alias is used.
      */
-    protected function _saveAssociations(
+    protected bool _saveAssociations(
         Table $table,
         IEntity $entity,
         array $associations,
         array $options,
         bool $owningSide
-    ): bool {
+    ) {
         unset($options["associated"]);
         foreach ($associations as $alias: $nested) {
             if (is_int($alias)) {
@@ -270,12 +270,12 @@ class AssociationCollection : IteratorAggregate
      * @param array<string, mixed> $options Original options
      * @return bool Success
      */
-    protected function _save(
+    protected bool _save(
         Association $association,
         IEntity $entity,
         array $nested,
         array $options
-    ): bool {
+    ) {
         if (!$entity.isDirty($association.getProperty())) {
             return true;
         }
@@ -293,7 +293,7 @@ class AssociationCollection : IteratorAggregate
      * @param uim.cake.Datasource\IEntity $entity The entity to delete associations for.
      * @param array<string, mixed> $options The options used in the delete operation.
      */
-    bool cascadeDelete(IEntity $entity, array $options): bool
+    bool cascadeDelete(IEntity $entity, array $options)
     {
         $noCascade = [];
         foreach (_items as $assoc) {
