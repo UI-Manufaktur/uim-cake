@@ -1066,7 +1066,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     }
 
 
-    function sql(?ValueBinder aBinder = null): string
+    string sql(?ValueBinder aBinder = null)
     {
         this.triggerBeforeFind();
 

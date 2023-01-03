@@ -43,7 +43,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      * If no locale has been explicitly set via `setLocale()`, this method will
      * return the currently configured global locale.
      */
-    string getLocale(): string;
+    string getLocale();
 
     /**
      * Returns a fully aliased field name for translated fields.
@@ -54,7 +54,7 @@ interface TranslateStrategyInterface : PropertyMarshalInterface
      *
      * @param string $field Field name to be aliased.
      */
-    string translationField(string $field): string;
+    string translationField(string $field);
 
     /**
      * Modifies the results from a table find in order to merge full translation records

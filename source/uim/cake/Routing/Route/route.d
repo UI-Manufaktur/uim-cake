@@ -272,7 +272,7 @@ class Route
      *
      * @return string Returns a string regular expression of the compiled route.
      */
-    function compile(): string
+    string compile()
     {
         if (_compiledRoute == null) {
             _writeRoute();
@@ -781,7 +781,7 @@ class Route
      * @param array $query An array of parameters
      * @return string Composed route string.
      */
-    protected function _writeUrl(array $params, array $pass = [], array $query = []): string
+    protected string _writeUrl(array $params, array $pass = [], array $query = [])
     {
         $pass = array_map(function ($value) {
             return rawurlencode((string)$value);

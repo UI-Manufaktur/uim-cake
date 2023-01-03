@@ -309,7 +309,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @return string
      * @see uim.cake.orm.Locator\TableLocator::get()
      */
-    static function defaultConnectionName(): string
+    static function defaultConnectionName()
     {
         return "default";
     }
@@ -407,7 +407,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @param string $field The field to alias.
      * @return string The field prefixed with the table alias.
      */
-    function aliasField(string $field): string
+    function aliasField(string $field)
     {
         if (strpos($field, ".") != false) {
             return $field;
@@ -662,7 +662,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @return string
      * @psalm-return class-string<uim.cake.Datasource\IEntity>
      */
-    function getEntityClass(): string
+    string getEntityClass()
     {
         if (!_entityClass) {
             $default = Entity::class;

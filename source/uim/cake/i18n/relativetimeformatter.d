@@ -19,11 +19,11 @@ class RelativeTimeFormatter : DifferenceIFormatter
      * @return string The difference between the two days in a human readable format.
      * @see uim.cake.Chronos\ChronosInterface::diffForHumans
      */
-    function diffForHumans(
+    string diffForHumans(
         ChronosInterface $date,
         ?ChronosInterface $other = null,
         bool $absolute = false
-    ): string {
+    ) {
         $isNow = $other == null;
         if ($isNow) {
             $other = $date.now($date.getTimezone());
@@ -81,7 +81,7 @@ class RelativeTimeFormatter : DifferenceIFormatter
      * @return string Relative time string.
      * @see uim.cake.I18n\Time::timeAgoInWords()
      */
-    function timeAgoInWords(I18nDateTimeInterface $time, array $options = []): string
+    string timeAgoInWords(I18nDateTimeInterface $time, array $options = [])
     {
         $options = _options($options, FrozenTime::class);
         if ($options["timezone"]) {
@@ -303,7 +303,7 @@ class RelativeTimeFormatter : DifferenceIFormatter
      * @return string Relative date string.
      * @see uim.cake.I18n\Date::timeAgoInWords()
      */
-    function dateAgoInWords(I18nDateTimeInterface $date, array $options = []): string
+    string dateAgoInWords(I18nDateTimeInterface $date, array $options = [])
     {
         $options = _options($options, FrozenDate::class);
         if ($options["timezone"]) {

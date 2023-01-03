@@ -217,7 +217,7 @@ class RouteBuilder
      *
      * @param string|null $value Either the value to set or null.
      */
-    string namePrefix(?string $value = null): string
+    string namePrefix(?string $value = null)
     {
         if ($value != null) {
             _namePrefix = $value;

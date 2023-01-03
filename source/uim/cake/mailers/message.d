@@ -19,8 +19,7 @@ use SimpleXMLElement;
  * This class is used for sending Internet Message Format based
  * on the standard outlined in https://www.rfc-editor.org/rfc/rfc2822.txt
  */
-class Message : JsonSerializable, Serializable
-{
+class Message : JsonSerializable, Serializable {
     /**
      * Line length - no should more - RFC 2822 - 2.1.1
      *
@@ -524,7 +523,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string Charset
      */
-    function getCharset(): string
+    string getCharset()
     {
         return this.charset;
     }
@@ -546,7 +545,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string Charset
      */
-    function getHeaderCharset(): string
+    string getHeaderCharset()
     {
         return this.headerCharset ?: this.charset;
     }
@@ -750,7 +749,7 @@ class Message : JsonSerializable, Serializable
      *
      * @return string Original subject
      */
-    function getOriginalSubject(): string
+    string getOriginalSubject()
     {
         return this.decodeForHeader(this.subject);
     }
@@ -884,7 +883,7 @@ class Message : JsonSerializable, Serializable
      * @return string
      * @see Message::getHeaders()
      */
-    function getHeadersString(array $include = [], string $eol = "\r\n", ?Closure $callback = null): string
+    string getHeadersString(array $include = [], string $eol = "\r\n", ?Closure $callback = null)
     {
         $lines = this.getHeaders($include);
 
@@ -1174,7 +1173,7 @@ class Message : JsonSerializable, Serializable
      * @return string
      * @see Message::getBody()
      */
-    function getBodyString(string $eol = "\r\n"): string
+    string getBodyString(string $eol = "\r\n")
     {
         $lines = this.getBody();
 
@@ -1486,7 +1485,7 @@ class Message : JsonSerializable, Serializable
      * @param string $text The text to be converted
      * @param string $charset the target encoding
      */
-    protected string encodeString(string $text, string $charset): string
+    protected string encodeString(string $text, string $charset)
     {
         if (this.appCharset == $charset) {
             return $text;
@@ -1645,7 +1644,7 @@ class Message : JsonSerializable, Serializable
      * @param string $text String to encode
      * @return string Encoded string
      */
-    protected function encodeForHeader(string $text): string
+    protected string encodeForHeader(string $text)
     {
         if (this.appCharset == null) {
             return $text;
@@ -1666,7 +1665,7 @@ class Message : JsonSerializable, Serializable
      * @param string $text String to decode
      * @return string Decoded string
      */
-    protected function decodeForHeader(string $text): string
+    protected string decodeForHeader(string $text)
     {
         if (this.appCharset == null) {
             return $text;
@@ -1688,7 +1687,7 @@ class Message : JsonSerializable, Serializable
      *   or UploadedFileInterface instance.
      * @return string File contents in base64 encoding
      */
-    protected function readFile($file): string
+    protected string readFile($file)
     {
         if (is_string($file)) {
             $content = (string)file_get_contents($file);
@@ -1703,7 +1702,7 @@ class Message : JsonSerializable, Serializable
      * Return the Content-Transfer Encoding value based
      * on the set transferEncoding or set charset.
      */
-    string getContentTransferEncoding(): string
+    string getContentTransferEncoding()
     {
         if (this.transferEncoding) {
             return this.transferEncoding;

@@ -1097,7 +1097,7 @@ abstract class Association
      *
      * @return string Constant of either ONE_TO_ONE, MANY_TO_ONE, ONE_TO_MANY or MANY_TO_MANY.
      */
-    abstract function type(): string;
+    abstract string type();
 
     /**
      * Eager loads a list of records in the target table that are related to another

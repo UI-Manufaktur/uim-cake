@@ -127,7 +127,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @since 4.0.0
      * @psalm-return class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface>
      */
-    static function getDefaultStrategyClass(): string
+    static string getDefaultStrategyClass()
     {
         return static::$defaultStrategyClass;
     }
@@ -244,7 +244,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @see uim.cake.I18n\I18n::getLocale()
      * @see uim.cake.orm.Behavior\TranslateBehavior::setLocale()
      */
-    function getLocale(): string
+    string getLocale()
     {
         return this.getStrategy().getLocale();
     }
@@ -258,7 +258,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *
      * @param string $field Field name to be aliased.
      */
-    string translationField(string $field): string
+    string translationField(string $field)
     {
         return this.getStrategy().translationField($field);
     }
@@ -323,7 +323,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *
      * @param uim.cake.orm.Table $table The table class to get a reference name for.
      */
-    protected string referenceName(Table $table): string
+    protected string referenceName(Table $table)
     {
         $name = namespaceSplit(get_class($table));
         $name = substr(end($name), 0, -5);

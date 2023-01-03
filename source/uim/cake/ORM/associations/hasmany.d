@@ -92,7 +92,7 @@ class HasMany : Association
      *
      * @return string the strategy to be used for saving
      */
-    function getSaveStrategy(): string
+    string getSaveStrategy()
     {
         return _saveStrategy;
     }
@@ -525,7 +525,7 @@ class HasMany : Association
     /**
      * Get the relationship type.
      */
-    string type(): string
+    string type()
     {
         return self::ONE_TO_MANY;
     }

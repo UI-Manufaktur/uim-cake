@@ -259,7 +259,7 @@ class ResultSet : IResultSet
      *
      * @return string Serialized object
      */
-    function serialize(): string
+    string serialize()
     {
         return serialize(__serialize());
     }

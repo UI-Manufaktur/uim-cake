@@ -44,7 +44,7 @@ class Asset
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    static function imageUrl(string $path, array $options = []): string
+    static string imageUrl(string $path, array $options = [])
     {
         $pathPrefix = Configure::read("App.imageBaseUrl");
 
@@ -69,7 +69,7 @@ class Asset
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    static function cssUrl(string $path, array $options = []): string
+    static string cssUrl(string $path, array $options = [])
     {
         $pathPrefix = Configure::read("App.cssBaseUrl");
         $ext = ".css";
@@ -95,7 +95,7 @@ class Asset
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    static function scriptUrl(string $path, array $options = []): string
+    static string scriptUrl(string $path, array $options = [])
     {
         $pathPrefix = Configure::read("App.jsBaseUrl");
         $ext = ".js";
@@ -126,7 +126,7 @@ class Asset
      * @param array<string, mixed> $options Options array.
      * @return string Generated URL
      */
-    static function url(string $path, array $options = []): string
+    static string url(string $path, array $options = [])
     {
         if (preg_match("/^data:[a-z]+\/[a-z]+;/", $path)) {
             return $path;
@@ -194,7 +194,7 @@ class Asset
      * @param string $url The URL to encode.
      * @return string
      */
-    protected static function encodeUrl(string $url): string
+    protected static string encodeUrl(string $url)
     {
         $path = parse_url($url, PHP_URL_PATH);
         if ($path == false) {
@@ -217,7 +217,7 @@ class Asset
      * @param string|bool $timestamp If set will overrule the value of `Asset.timestamp` in Configure.
      * @return string Path with a timestamp added, or not.
      */
-    static function assetTimestamp(string $path, $timestamp = null): string
+    static string assetTimestamp(string $path, $timestamp = null)
     {
         if (strpos($path, "?") != false) {
             return $path;
@@ -270,7 +270,7 @@ class Asset
      * @param array<string, mixed> $options Options array.
      * @return string Web accessible path to file.
      */
-    static function webroot(string $file, array $options = []): string
+    static string webroot(string $file, array $options = [])
     {
         $options += ["theme": null];
         $requestWebroot = static::requestWebroot();
@@ -312,7 +312,7 @@ class Asset
      * @param string $string String inflected.
      * @return string Inflected name of the theme
      */
-    protected static function inflectString(string $string): string
+    protected static string inflectString(string $string)
     {
         return Inflector::{static::$inflectionType}($string);
     }
@@ -322,7 +322,7 @@ class Asset
      *
      * @return string
      */
-    protected static function requestWebroot(): string
+    protected static string requestWebroot()
     {
         $request = Router::getRequest();
         if ($request == null) {

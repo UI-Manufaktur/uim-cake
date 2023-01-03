@@ -274,7 +274,7 @@ class RouteCollection
      * @return string The URL string on match.
      * @throws uim.cake.routings.exceptions.MissingRouteException When no route could be matched.
      */
-    function match(array $url, array $context): string
+    string match(array $url, array $context)
     {
         // Named routes support optimization.
         if (isset($url["_name"])) {

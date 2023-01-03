@@ -49,7 +49,7 @@ class ConsoleErrorRenderer : ErrorRendererInterface
     }
 
 
-    function render(PhpError $error, bool $debug): string
+    string render(PhpError $error, bool $debug)
     {
         $trace = "";
         if (this.trace) {

@@ -942,7 +942,7 @@ class TreeBehavior : Behavior
     /**
      * Returns a single string value representing the primary key of the attached table
      */
-    protected string _getPrimaryKey(): string
+    protected string _getPrimaryKey()
     {
         if (!_primaryKey) {
             $primaryKey = (array)_table.getPrimaryKey();

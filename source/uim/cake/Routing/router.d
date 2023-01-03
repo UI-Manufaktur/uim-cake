@@ -381,7 +381,7 @@ class Router
      * @return string Full translated URL with base path.
      * @throws uim.cake.Core\exceptions.CakeException When the route name is not found
      */
-    static function url($url = null, bool $full = false): string
+    static string url($url = null, bool $full = false)
     {
         $context = static::$_requestContext;
         $request = static::getRequest();
@@ -509,7 +509,7 @@ class Router
      *   Default is false.
      * @return string Full translated URL with base path.
      */
-    static function pathUrl(string $path, array $params = [], bool $full = false): string
+    static string pathUrl(string $path, array $params = [], bool $full = false)
     {
         return static::url(["_path": $path] + $params, $full);
     }
@@ -553,7 +553,7 @@ class Router
      * @param string|null $base the prefix for URLs generated containing the domain.
      * For example: `http://example.com`
      */
-    static string fullBaseUrl(?string $base = null): string
+    static string fullBaseUrl(?string $base = null)
     {
         if ($base == null && static::$_fullBaseUrl != null) {
             return static::$_fullBaseUrl;
@@ -654,7 +654,7 @@ class Router
      *     protocol when reversing the URL.
      * @return string The string that is the reversed result of the array
      */
-    static function reverse($params, $full = false): string
+    static string reverse($params, $full = false)
     {
         $params = static::reverseToArray($params);
 
@@ -670,7 +670,7 @@ class Router
      * @param array|string $url URL to normalize Either an array or a string URL.
      * @return string Normalized URL
      */
-    static function normalize($url = "/"): string
+    static string normalize($url = "/")
     {
         if (is_array($url)) {
             $url = static::url($url);
