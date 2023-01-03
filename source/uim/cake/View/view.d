@@ -413,7 +413,7 @@ class View : IEventDispatcher
     /**
      * Get path for templates files.
      */
-    string getTemplatePath(): string
+    string getTemplatePath()
     {
         return this.templatePath;
     }
@@ -433,7 +433,7 @@ class View : IEventDispatcher
     /**
      * Get path for layout files.
      */
-    string getLayoutPath(): string
+    string getLayoutPath()
     {
         return this.layoutPath;
     }
@@ -511,7 +511,7 @@ class View : IEventDispatcher
      * Get the name of the template file to render. The name specified is the
      * filename in `templates/<SubFolder>/` without the .php extension.
      */
-    string getTemplate(): string
+    string getTemplate()
     {
         return this.template;
     }
@@ -534,7 +534,7 @@ class View : IEventDispatcher
      * The name specified is the filename of the layout in `templates/layout/`
      * without the .php extension.
      */
-    string getLayout(): string
+    string getLayout()
     {
         return this.layout;
     }

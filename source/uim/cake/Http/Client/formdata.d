@@ -50,7 +50,7 @@ class FormData : Countable
     /**
      * Get the boundary marker
      */
-    string boundary(): string
+    string boundary()
     {
         if (_boundary) {
             return _boundary;
@@ -214,7 +214,7 @@ class FormData : Countable
      * If this object contains files, `multipart/form-data` will be used,
      * otherwise `application/x-www-form-urlencoded` will be used.
      */
-    string contentType(): string
+    string contentType()
     {
         if (!this.isMultipart()) {
             return "application/x-www-form-urlencoded";
@@ -227,7 +227,7 @@ class FormData : Countable
      * Converts the FormData and its parts into a string suitable
      * for use in an HTTP request.
      */
-    string __toString(): string
+    string __toString()
     {
         if (this.isMultipart()) {
             $boundary = this.boundary();

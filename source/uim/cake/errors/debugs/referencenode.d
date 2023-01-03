@@ -40,7 +40,7 @@ class ReferenceNode : INode
     /**
      * Get the class name/value
      */
-    string getValue(): string
+    string getValue()
     {
         return this.class;
     }

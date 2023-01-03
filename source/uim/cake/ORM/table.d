@@ -354,7 +354,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *
      * This can include the database schema name if set using `setTable()`.
      */
-    string getTable(): string
+    string getTable()
     {
         if (_table == null) {
             $table = namespaceSplit(static::class);
@@ -385,7 +385,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
     /**
      * Returns the table alias.
      */
-    string getAlias(): string
+    string getAlias()
     {
         if (_alias == null) {
             $alias = namespaceSplit(static::class);
@@ -433,7 +433,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
     /**
      * Returns the table registry key used to create this table instance.
      */
-    string getRegistryAlias(): string
+    string getRegistryAlias()
     {
         if (_registryAlias == null) {
             _registryAlias = this.getAlias();

@@ -50,7 +50,7 @@ class MissingTemplateException : CakeException
     /**
      * Get the formatted exception message.
      */
-    string formatMessage(): string
+    string formatMessage()
     {
         $name = this.templateName ?? this.filename;
         $message = "{this.type} file `{$name}` could not be found.";

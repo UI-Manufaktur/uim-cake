@@ -29,7 +29,7 @@ class OrderClauseExpression : IExpression, FieldInterface
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         /** @var uim.cake.databases.IExpression|string $field */
         $field = _field;

@@ -368,7 +368,7 @@ class Route
     /**
      * Get the standardized plugin.controller:action name for a route.
      */
-    string getName(): string
+    string getName()
     {
         if (!empty(_name)) {
             return _name;

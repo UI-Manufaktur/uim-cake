@@ -58,7 +58,7 @@ class ErrorTrap
      *
      * @return class-string<uim.cake.errors.ErrorRendererInterface>
      */
-    protected function chooseErrorRenderer(): string
+    string function chooseErrorRenderer()
     {
         $config = this.getConfig("errorRenderer");
         if ($config != null) {

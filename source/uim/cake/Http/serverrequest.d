@@ -1752,7 +1752,7 @@ class ServerRequest : IServerRequest
      * application relative path without base directory, and the query string
      * defined in the SERVER environment.
      */
-    string getRequestTarget(): string
+    string getRequestTarget()
     {
         if (this.requestTarget != null) {
             return this.requestTarget;

@@ -12,7 +12,7 @@ interface IEvent
     /**
      * Returns the name of this event. This is usually used as the event identifier.
      */
-    string getName(): string;
+    string getName();
 
     /**
      * Returns the subject of this event.

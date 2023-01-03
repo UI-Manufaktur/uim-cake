@@ -236,7 +236,7 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Create a new token to be used for CSRF protection
      */
-    string createToken(): string
+    string createToken()
     {
         $value = Security::randomBytes(static::TOKEN_VALUE_LENGTH);
 
