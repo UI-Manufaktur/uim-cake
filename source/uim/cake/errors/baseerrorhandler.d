@@ -51,7 +51,7 @@ abstract class BaseErrorHandler
      * @param bool $debug Whether the app is in debug mode.
      * @return void
      */
-    abstract protected function _displayError(array $error, bool $debug): void;
+    abstract protected void _displayError(array $error, bool $debug);
 
     /**
      * Display an exception in an environment specific way.
@@ -79,7 +79,7 @@ abstract class BaseErrorHandler
         error_reporting($level);
         set_error_handler([this, "handleError"], $level);
         set_exception_handler([this, "handleException"]);
-        register_shutdown_function(function (): void {
+        register_shutdown_function(void () {
             if ((PHP_SAPI == "cli" || PHP_SAPI == "phpdbg") && _handled) {
                 return;
             }
@@ -183,7 +183,7 @@ abstract class BaseErrorHandler
      * @return void
      * @deprecated 4.0.0 Unused method will be removed in 5.0
      */
-    function wrapAndHandleException(Throwable $exception): void
+    void wrapAndHandleException(Throwable $exception)
     {
         deprecationWarning("This method is no longer in use. Call handleException instead.");
         this.handleException($exception);
@@ -200,7 +200,7 @@ abstract class BaseErrorHandler
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    function handleException(Throwable $exception): void
+    void handleException(Throwable $exception)
     {
         _displayException($exception);
         this.logException($exception);
@@ -215,7 +215,7 @@ abstract class BaseErrorHandler
      *
      * @param int $code Exit code.
      */
-    protected void _stop(int $code): void
+    protected void _stop(int $code)
     {
         // Do nothing.
     }
@@ -249,7 +249,7 @@ abstract class BaseErrorHandler
      *
      * @param int $additionalKb Number in kilobytes
      */
-    void increaseMemoryLimit(int $additionalKb): void
+    void increaseMemoryLimit(int $additionalKb)
     {
         $limit = ini_get("memory_limit");
         if ($limit == false || $limit == "" || $limit == "-1") {

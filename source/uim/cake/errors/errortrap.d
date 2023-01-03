@@ -77,7 +77,7 @@ class ErrorTrap
      * This method will also set the global error level
      * via error_reporting().
      */
-    void register(): void
+    void register()
     {
         $level = _config["errorLevel"] ?? -1;
         error_reporting($level);
@@ -142,7 +142,7 @@ class ErrorTrap
      *
      * @param uim.cake.errors.PhpError $error The error object to log.
      */
-    protected void logError(PhpError $error): void
+    protected void logError(PhpError $error)
     {
         if (!_config["log"]) {
             return;

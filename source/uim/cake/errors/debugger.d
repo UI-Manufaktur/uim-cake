@@ -250,7 +250,7 @@ class Debugger
      * @param array<string, string> $value An array where keys are replaced by their values in output.
      * @param bool $merge Whether to recursively merge or overwrite existing config, defaults to true.
      */
-    static void setOutputMask(array $value, bool $merge = true): void
+    static void setOutputMask(array $value, bool $merge = true)
     {
         static::configInstance('outputMask', $value, $merge);
     }
@@ -265,7 +265,7 @@ class Debugger
      * @param string aName The name of the editor.
      * @param \Closure|string $template The string template or closure
      */
-    static void addEditor(string aName, $template): void
+    static void addEditor(string aName, $template)
     {
         $instance = static::getInstance();
         if (!is_string($template) && !($template instanceof Closure)) {
@@ -280,7 +280,7 @@ class Debugger
      *
      * @param string aName The editor name.
      */
-    static void setEditor(string aName): void
+    static void setEditor(string aName)
     {
         $instance = static::getInstance();
         if (!isset($instance.editors[$name])) {
@@ -321,7 +321,7 @@ class Debugger
      * @see uim.cake.errors.Debugger::exportVar()
      * @link https://book.cakephp.org/4/en/development/debugging.html#outputting-values
      */
-    static function dump($var, int $maxDepth = 3): void
+    static void dump($var, int $maxDepth = 3)
     {
         pr(static::exportVar($var, $maxDepth));
     }
@@ -334,7 +334,7 @@ class Debugger
      * @param string|int $level Type of log to use. Defaults to 'debug'.
      * @param int $maxDepth The depth to output to. Defaults to 3.
      */
-    static void log($var, $level = 'debug', int $maxDepth = 3): void
+    static void log($var, $level = 'debug', int $maxDepth = 3)
     {
         /** @var string $source */
         $source = static::trace(['start': 1]);
@@ -825,7 +825,7 @@ class Debugger
      * @throws \InvalidArgumentException When choosing a format that doesn't exist.
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    static function setOutputFormat(string $format): void
+    static void setOutputFormat(string $format)
     {
         deprecationWarning('Debugger::setOutputFormat() is deprecated.');
         $self = Debugger::getInstance();
@@ -909,7 +909,7 @@ class Debugger
      * @return void
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    static function addRenderer(string aName, string $class): void
+    static void addRenderer(string aName, string $class)
     {
         deprecationWarning('Debugger::addRenderer() is deprecated.');
         if (!in_array(ErrorRendererInterface::class, class_implements($class))) {
@@ -928,7 +928,7 @@ class Debugger
      * @return void
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    function outputError(array $data): void
+    void outputError(array $data)
     {
         $defaults = [
             'level': 0,
@@ -1055,7 +1055,7 @@ class Debugger
      *    If null, the format will be chosen based on the configured exportFormatter, or
      *    environment conditions.
      */
-    static void printVar($var, array $location = [], ?bool $showHtml = null): void
+    static void printVar($var, array $location = [], ?bool $showHtml = null)
     {
         $location += ['file': null, 'line': null];
         if ($location['file']) {
@@ -1099,7 +1099,7 @@ class Debugger
     /**
      * Verifies that the application's salt and cipher seed value has been changed from the default value.
      */
-    static void checkSecurityKeys(): void
+    static void checkSecurityKeys()
     {
         $salt = Security::getSalt();
         if ($salt == '__SALT__' || strlen($salt) < 32) {

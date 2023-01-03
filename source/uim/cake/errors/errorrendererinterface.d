@@ -29,5 +29,5 @@ interface ErrorRendererInterface
      *
      * @param string $out The content to output.
      */
-    void write(string $out): void;
+    void write(string $out);
 }
