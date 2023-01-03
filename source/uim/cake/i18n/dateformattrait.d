@@ -29,7 +29,6 @@ trait DateFormatTrait
      * Whether lenient parsing is enabled for IntlDateFormatter.
      *
      * Defaults to true which is the default for IntlDateFormatter.
-     *
      */
     protected static bool $lenientParsing = true;
 
@@ -74,7 +73,6 @@ trait DateFormatTrait
 
     /**
      * Enables lenient parsing for locale formats.
-     *
      */
     static void enableLenientParsing(): void
     {
@@ -83,7 +81,6 @@ trait DateFormatTrait
 
     /**
      * Enables lenient parsing for locale formats.
-     *
      */
     static void disableLenientParsing(): void
     {
@@ -252,7 +249,6 @@ trait DateFormatTrait
     /**
      * Resets the format used to the default when converting an instance of this type to
      * a string
-     *
      */
     static void resetToStringFormat(): void
     {

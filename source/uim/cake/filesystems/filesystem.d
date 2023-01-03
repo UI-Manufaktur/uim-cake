@@ -22,7 +22,6 @@ class Filesystem
 {
     /**
      * Directory type constant
-     *
      */
     const string TYPE_DIR = "dir";
 

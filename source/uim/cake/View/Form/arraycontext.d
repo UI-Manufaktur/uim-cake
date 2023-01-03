@@ -126,7 +126,6 @@ class ArrayContext : ContextInterface
      * For this method to return true, both the primary key constraint
      * must be defined in the "schema" data, and the "defaults" data must
      * contain a value for all fields in the key.
-     *
      */
     bool isCreate(): bool
     {

@@ -78,7 +78,6 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * Don"t create a hasOne association here as the join conditions are modified
      * in before find - so create/modify it there.
-     *
      */
     protected void setupAssociations() {
         $config = this.getConfig();

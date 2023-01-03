@@ -115,7 +115,6 @@ class Log
 
     /**
      * Internal flag for tracking whether configuration has been changed.
-     *
      */
     protected static bool $_dirtyConfig = false;
 
@@ -201,7 +200,6 @@ class Log
      *
      * Resets the configured logging adapters, as well as any custom logging levels.
      * This will also clear the configuration data.
-     *
      */
     static void reset(): void
     {

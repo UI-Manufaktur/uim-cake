@@ -45,7 +45,6 @@ class Cookie : CookieInterface
 {
     /**
      * Cookie name
-     *
      */
     protected string aName = "";
 
@@ -58,7 +57,6 @@ class Cookie : CookieInterface
 
     /**
      * Whether a JSON value has been expanded into an array.
-     *
      */
     protected bool $isExpanded = false;
 
@@ -71,25 +69,21 @@ class Cookie : CookieInterface
 
     /**
      * Path
-     *
      */
     protected string $path = "/";
 
     /**
      * Domain
-     *
      */
     protected string $domain = "";
 
     /**
      * Secure
-     *
      */
     protected bool $secure = false;
 
     /**
      * HTTP only
-     *
      */
     protected bool $httpOnly = false;
 
@@ -669,7 +663,6 @@ class Cookie : CookieInterface
 
     /**
      * Checks if the cookie value was expanded
-     *
      */
     bool isExpanded(): bool
     {

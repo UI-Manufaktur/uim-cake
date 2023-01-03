@@ -141,7 +141,6 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
 
     /**
      * Returns the table name using the fixture class
-     *
      */
     protected string _tableFromClass(): string
     {
@@ -154,7 +153,6 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
 
     /**
      * Build the fixtures table schema from the fields property.
-     *
      */
     protected void _schemaFromFields(): void
     {

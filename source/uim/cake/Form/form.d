@@ -29,19 +29,16 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
 
     /**
      * Name of default validation set.
-     *
      */
     const string DEFAULT_VALIDATOR = "default";
 
     /**
      * The alias this object is assigned to validators as.
-     *
      */
     const string VALIDATOR_PROVIDER_NAME = "form";
 
     /**
      * The name of the event dispatched when a validator has been built.
-     *
      */
     const string BUILD_VALIDATOR_EVENT = "Form.buildValidator";
 

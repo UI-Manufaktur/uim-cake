@@ -19,7 +19,6 @@ class Event : IEvent
 {
     /**
      * Name of the event
-     *
      */
     protected string $_name;
 
@@ -49,7 +48,6 @@ class Event : IEvent
 
     /**
      * Flags an event as stopped or not, default is false
-     *
      */
     protected bool $_stopped = false;
 

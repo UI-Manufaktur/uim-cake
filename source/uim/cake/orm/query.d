@@ -1066,7 +1066,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * Inspects if there are any set fields for selecting, otherwise adds all
      * the fields for the default table.
-     *
      */
     protected void _addDefaultFields() {
         $select = this.clause("select");
@@ -1088,7 +1087,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
 
     /**
      * Sets the default types for converting the fields in the select clause
-     *
      */
     protected void _addDefaultSelectTypes() {
         myTypeMap = this.getTypeMap().getDefaults();
@@ -1129,7 +1127,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching such as previous results
-     *
      */
     protected void _dirty() {
         _results = null;

@@ -34,19 +34,16 @@ class RulesChecker
 {
     /**
      * Indicates that the checking rules to apply are those used for creating entities
-     *
      */
     const string CREATE = "create";
 
     /**
      * Indicates that the checking rules to apply are those used for updating entities
-     *
      */
     const string UPDATE = "update";
 
     /**
      * Indicates that the checking rules to apply are those used for deleting entities
-     *
      */
     const string DELETE = "delete";
 
@@ -87,7 +84,6 @@ class RulesChecker
 
     /**
      * Whether to use I18n functions for translating default error messages
-     *
      */
     protected bool $_useI18n = false;
 
@@ -209,7 +205,7 @@ class RulesChecker
      * @return bool
      * @throws \InvalidArgumentException if an invalid mode is passed.
      */
-    function check(IEntity $entity, string $mode, array $options = []): bool
+    bool check(IEntity $entity, string $mode, array $options = [])
     {
         if ($mode == self::CREATE) {
             return this.checkCreate($entity, $options);
@@ -233,7 +229,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkCreate(IEntity $entity, array $options = []): bool
+    bool checkCreate(IEntity $entity, array $options = [])
     {
         return _checkRules($entity, $options, array_merge(_rules, _createRules));
     }
@@ -245,7 +241,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkUpdate(IEntity $entity, array $options = []): bool
+    bool checkUpdate(IEntity $entity, array $options = [])
     {
         return _checkRules($entity, $options, array_merge(_rules, _updateRules));
     }
@@ -257,7 +253,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkDelete(IEntity $entity, array $options = []): bool
+    bool checkDelete(IEntity $entity, array $options = [])
     {
         return _checkRules($entity, $options, _deleteRules);
     }
@@ -270,7 +266,7 @@ class RulesChecker
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @param array<uim.cake.Datasource\RuleInvoker> $rules The list of rules that must be checked.
      */
-    protected bool _checkRules(IEntity $entity, array $options = [], array $rules = []): bool
+    protected bool _checkRules(IEntity $entity, array $options = [], array $rules = [])
     {
         $success = true;
         $options += _options;

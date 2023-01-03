@@ -56,7 +56,6 @@ class LoggedQuery : JsonSerializable
     /**
      * Helper function used to replace query placeholders by the real
      * params used to execute the query
-     *
      */
     protected string interpolate() {
         $params = array_map(function ($p) {

@@ -29,7 +29,6 @@ class MiddlewareQueue : Countable, SeekableIterator
 {
     /**
      * Internal position for iterator.
-     *
      */
     protected int $position = 0;
 
@@ -217,7 +216,6 @@ class MiddlewareQueue : Countable, SeekableIterator
      * Get the number of connected middleware layers.
      *
      * Implement the Countable interface.
-     *
      */
     int count(): int
     {

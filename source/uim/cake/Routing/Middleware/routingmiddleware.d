@@ -33,7 +33,6 @@ class RoutingMiddleware : IMiddleware
 {
     /**
      * Key used to store the route collection in the cache engine
-     *
      */
     const string ROUTE_COLLECTION_CACHE_KEY = "routeCollection";
 
@@ -76,7 +75,6 @@ class RoutingMiddleware : IMiddleware
      *
      * If the middleware is created without an Application, routes will be
      * loaded via the automatic route loading that pre-dates the routes() hook.
-     *
      */
     protected void loadRoutes(): void
     {

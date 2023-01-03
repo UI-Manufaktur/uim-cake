@@ -96,7 +96,6 @@ class StringTemplate {
 
     /**
      * Push the current templates into the template stack.
-     *
      */
     void push() {
       _configStack[] = [
@@ -107,7 +106,6 @@ class StringTemplate {
 
     /**
      * Restore the most recently pushed set of templates.
-     *
      */
     void pop() {
       if (empty(_configStack)) {

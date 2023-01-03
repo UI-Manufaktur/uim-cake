@@ -367,7 +367,6 @@ class Oauth
 
     /**
      * Check for SSL errors and raise if one is encountered.
-     *
      */
     protected void checkSslError(): void
     {

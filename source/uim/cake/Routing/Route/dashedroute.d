@@ -14,7 +14,6 @@ class DashedRoute : Route
      *
      * Default values need to be inflected so that they match the inflections that
      * match() will create.
-     *
      */
     protected bool $_inflectedDefaults = false;
 

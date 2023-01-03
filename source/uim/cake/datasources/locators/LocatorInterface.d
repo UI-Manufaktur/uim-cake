@@ -39,7 +39,7 @@ interface ILocator
      *
      * @param string $alias The alias to check for.
      */
-    bool exists(string $alias): bool;
+    bool exists(string $alias);
 
     /**
      * Removes an repository instance from the registry.

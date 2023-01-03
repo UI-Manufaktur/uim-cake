@@ -111,13 +111,11 @@ trait IntegrationTestTrait
 
     /**
      * The last rendered view
-     *
      */
     protected string $_viewName;
 
     /**
      * The last rendered layout
-     *
      */
     protected string $_layoutName;
 
@@ -131,21 +129,18 @@ trait IntegrationTestTrait
     /**
      * Boolean flag for whether the request should have
      * a SecurityComponent token added.
-     *
      */
     protected bool $_securityToken = false;
 
     /**
      * Boolean flag for whether the request should have
      * a CSRF token added.
-     *
      */
     protected bool $_csrfToken = false;
 
     /**
      * Boolean flag for whether the request should re-store
      * flash messages
-     *
      */
     protected bool $_retainFlashMessages = false;
 
@@ -170,7 +165,6 @@ trait IntegrationTestTrait
 
     /**
      * The name that will be used when retrieving the csrf token.
-     *
      */
     protected string $_csrfKeyName = "csrfToken";
 
@@ -294,7 +288,6 @@ trait IntegrationTestTrait
 
     /**
      * Returns the encryption key to be used.
-     *
      */
     protected string _getCookieEncryptionKey(): string
     {

@@ -100,7 +100,6 @@ class FrozenTime : Chronos : I18nDateTimeInterface
 
     /**
      * serialise the value as a Unix Timestamp
-     *
      */
     const string UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
 

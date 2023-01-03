@@ -40,7 +40,6 @@ class EventManager : IEventManager
 
     /**
      * Internal flag to distinguish a common manager from the singleton
-     *
      */
     protected bool $_isGlobal = false;
 
@@ -53,7 +52,6 @@ class EventManager : IEventManager
 
     /**
      * Enables automatic adding of events to the event list object if it is present.
-     *
      */
     protected bool $_trackEvents = false;
 
@@ -383,7 +381,6 @@ class EventManager : IEventManager
 
     /**
      * Returns whether this manager is set up to track events
-     *
      */
     bool isTrackingEvents(): bool
     {

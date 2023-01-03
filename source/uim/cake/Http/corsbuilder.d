@@ -25,13 +25,11 @@ class CorsBuilder
 
     /**
      * The request"s Origin header value
-     *
      */
     protected string $_origin;
 
     /**
      * Whether the request was over SSL.
-     *
      */
     protected bool $_isSsl;
 

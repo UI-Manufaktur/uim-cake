@@ -23,7 +23,6 @@ class CachedCollection : ICollection
 
     /**
      * The cache key prefix
-     *
      */
     protected string $prefix;
 

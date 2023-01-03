@@ -322,7 +322,6 @@ class View : IEventDispatcher {
     /**
      * Returns if UIM"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
-     *
      */
     bool isAutoLayoutEnabled() {
         return this.autoLayout;

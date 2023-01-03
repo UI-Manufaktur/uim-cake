@@ -50,7 +50,7 @@ interface ISchema {
      *
      * @param string aName Column name.
      */
-    bool hasColumn(string aName): bool;
+    bool hasColumn(string aName);
 
     /**
      * Remove a column from the table schema.
@@ -104,7 +104,7 @@ interface ISchema {
      * @param string aName The column to get the type of.
      * @return bool Whether the field is nullable.
      */
-    function isNullable(string aName): bool;
+    bool isNullable(string aName);
 
     /**
      * Returns an array where the keys are the column names in the schema

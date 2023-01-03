@@ -16,25 +16,21 @@ interface CookieInterface
 {
     /**
      * Expires attribute format.
-     *
      */
     const string EXPIRES_FORMAT = "D, d-M-Y H:i:s T";
 
     /**
      * SameSite attribute value: Lax
-     *
      */
     const string SAMESITE_LAX = "Lax";
 
     /**
      * SameSite attribute value: Strict
-     *
      */
     const string SAMESITE_STRICT = "Strict";
 
     /**
      * SameSite attribute value: None
-     *
      */
     const string SAMESITE_NONE = "None";
 
@@ -173,7 +169,6 @@ interface CookieInterface
 
     /**
      * Check if the cookie is HTTP only
-     *
      */
     bool isHttpOnly(): bool;
 
@@ -187,7 +182,6 @@ interface CookieInterface
 
     /**
      * Check if the cookie is secure
-     *
      */
     bool isSecure(): bool;
 

@@ -85,7 +85,6 @@ class ExceptionTrap
 
     /**
      * Track if this trap was removed from the global handler.
-     *
      */
     protected bool $disabled = false;
 

@@ -23,7 +23,6 @@ class DateType : DateTimeType
     /**
      * In this class we want Date objects to  have their time
      * set to the beginning of the day.
-     *
      */
     protected bool $setToDateStart = true;
 

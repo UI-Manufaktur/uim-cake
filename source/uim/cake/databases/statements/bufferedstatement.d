@@ -17,7 +17,6 @@ class BufferedStatement : Iterator, IStatement
 
     /**
      * If true, all rows were fetched
-     *
      */
     protected bool $_allFetched = false;
 
@@ -44,13 +43,11 @@ class BufferedStatement : Iterator, IStatement
 
     /**
      * Whether this statement has already been executed
-     *
      */
     protected bool $_hasExecuted = false;
 
     /**
      * The current iterator index.
-     *
      */
     protected int $index = 0;
 
@@ -131,7 +128,6 @@ class BufferedStatement : Iterator, IStatement
     /**
      * Statements can be passed as argument for count() to return the number
      * for affected rows from last execution.
-     *
      */
     int count(): int
     {
@@ -218,7 +214,6 @@ class BufferedStatement : Iterator, IStatement
 
     /**
      * Reset all properties
-     *
      */
     protected void _reset(): void
     {
@@ -257,7 +252,6 @@ class BufferedStatement : Iterator, IStatement
 
     /**
      * Returns whether the iterator has more elements
-     *
      */
     bool valid()
     {

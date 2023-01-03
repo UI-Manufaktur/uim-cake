@@ -58,7 +58,6 @@ class FileLog : BaseLog
 
     /**
      * Path to save log files on.
-     *
      */
     protected string $_path;
 

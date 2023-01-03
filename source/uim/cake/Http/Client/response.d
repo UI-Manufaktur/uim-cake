@@ -83,7 +83,6 @@ class Response : Message : IResponse
 
     /**
      * The status code of the response.
-     *
      */
     protected int $code;
 
@@ -96,7 +95,6 @@ class Response : Message : IResponse
 
     /**
      * The reason phrase for the status code
-     *
      */
     protected string $reasonPhrase;
 
@@ -198,7 +196,6 @@ class Response : Message : IResponse
 
     /**
      * Check if the response status code was in the 2xx/3xx range
-     *
      */
     bool isOk(): bool
     {
@@ -207,7 +204,6 @@ class Response : Message : IResponse
 
     /**
      * Check if the response status code was in the 2xx range
-     *
      */
     bool isSuccess(): bool
     {
@@ -216,7 +212,6 @@ class Response : Message : IResponse
 
     /**
      * Check if the response had a redirect status code.
-     *
      */
     bool isRedirect(): bool
     {
@@ -346,7 +341,6 @@ class Response : Message : IResponse
 
     /**
      * Lazily build the CookieCollection and cookie objects from the response header
-     *
      */
     protected void buildCookieCollection(): void
     {
@@ -453,7 +447,6 @@ class Response : Message : IResponse
 
     /**
      * Provides magic __get() support.
-     *
      */
     protected string _getBody(): string
     {

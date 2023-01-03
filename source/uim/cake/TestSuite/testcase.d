@@ -225,7 +225,6 @@ abstract class TestCase : BaseTestCase
      * Setup the test case, backup the static object values so they can be restored.
      * Specifically backs up the contents of Configure and paths in App if they have
      * not already been backed up.
-     *
      */
     protected void setUp(): void
     {
@@ -244,7 +243,6 @@ abstract class TestCase : BaseTestCase
 
     /**
      * teardown any static object changes and restore them.
-     *
      */
     protected void tearDown(): void
     {
@@ -262,7 +260,6 @@ abstract class TestCase : BaseTestCase
 
     /**
      * Initialized and loads any use fixtures.
-     *
      */
     protected void setupFixtures(): void
     {
@@ -285,7 +282,6 @@ abstract class TestCase : BaseTestCase
 
     /**
      * Unloads any use fixtures.
-     *
      */
     protected void teardownFixtures(): void
     {

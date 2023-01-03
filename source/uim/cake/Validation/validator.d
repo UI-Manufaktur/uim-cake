@@ -27,19 +27,16 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 {
     /**
      * By using "create" you can make fields required when records are first created.
-     *
      */
     const string WHEN_CREATE = "create";
 
     /**
      * By using "update", you can make fields required when they are updated.
-     *
      */
     const string WHEN_UPDATE = "update";
 
     /**
      * Used to flag nested rules created with addNested() and addNestedMany()
-     *
      */
     const string NESTED = "_nested";
 
@@ -149,7 +146,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
     /**
      * Whether to use I18n functions for translating default error messages
-     *
      */
     protected bool $_useI18n = false;
 
@@ -170,7 +166,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
     /**
      * Whether to apply last flag to generated rule(s).
-     *
      */
     protected bool $_stopOnFailure = false;
 
@@ -448,7 +443,6 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
     /**
      * Returns the number of fields having validation rules
-     *
      */
     int count(): int
     {

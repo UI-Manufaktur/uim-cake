@@ -30,7 +30,6 @@ class Package
 
     /**
      * The name of the formatter to use when formatting translated messages.
-     *
      */
     protected string $formatter;
 

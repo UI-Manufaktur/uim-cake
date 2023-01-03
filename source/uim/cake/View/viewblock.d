@@ -19,19 +19,16 @@ class ViewBlock
 {
     /**
      * Override content
-     *
      */
     const string OVERRIDE = "override";
 
     /**
      * Append content
-     *
      */
     const string APPEND = "append";
 
     /**
      * Prepend content
-     *
      */
     const string PREPEND = "prepend";
 

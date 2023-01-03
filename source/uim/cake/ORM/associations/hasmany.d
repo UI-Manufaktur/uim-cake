@@ -25,13 +25,11 @@ class HasMany : Association
 
     /**
      * The type of join to be used when adding the association to a query
-     *
      */
     protected string $_joinType = Query::JOIN_TYPE_INNER;
 
     /**
      * The strategy name to be used to fetch associated records.
-     *
      */
     protected string $_strategy = self::STRATEGY_SELECT;
 
@@ -47,19 +45,16 @@ class HasMany : Association
 
     /**
      * Saving strategy that will only append to the links set
-     *
      */
     const string SAVE_APPEND = "append";
 
     /**
      * Saving strategy that will replace the links with the provided set
-     *
      */
     const string SAVE_REPLACE = "replace";
 
     /**
      * Saving strategy to be used by this association
-     *
      */
     protected string $_saveStrategy = self::SAVE_APPEND;
 

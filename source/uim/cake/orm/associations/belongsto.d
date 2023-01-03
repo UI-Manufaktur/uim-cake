@@ -54,7 +54,6 @@ class BelongsTo : Association {
 
     /**
      * Returns default property name based on association name.
-     *
      */
     protected string _propertyName(): string
     {

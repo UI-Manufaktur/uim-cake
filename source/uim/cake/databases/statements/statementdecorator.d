@@ -38,7 +38,6 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
 
     /**
      * Whether this statement has already been executed
-     *
      */
     protected bool $_hasExecuted = false;
 
@@ -113,7 +112,6 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * $statement.execute();
      * echo $statement.columnCount(); // outputs 2
      * ```
-     *
      */
     int columnCount(): int
     {
@@ -229,7 +227,6 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * $statement.execute();
      * print_r($statement.rowCount()); // will show 1
      * ```
-     *
      */
     int rowCount(): int
     {
@@ -264,7 +261,6 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
     /**
      * Statements can be passed as argument for count() to return the number
      * for affected rows from last execution.
-     *
      */
     int count(): int
     {

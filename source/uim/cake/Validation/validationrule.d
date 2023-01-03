@@ -41,20 +41,17 @@ class ValidationRule
 
     /**
      * The "last" key
-     *
      */
     protected bool $_last = false;
 
     /**
      * The "message" key
-     *
      */
     protected string $_message;
 
     /**
      * Key under which the object or class where the method to be used for
      * validation will be found
-     *
      */
     protected string $_provider = "default";
 
@@ -77,7 +74,6 @@ class ValidationRule
     /**
      * Returns whether this rule should break validation process for associated field
      * after it fails
-     *
      */
     bool isLast(): bool
     {

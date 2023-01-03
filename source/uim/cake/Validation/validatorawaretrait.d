@@ -33,7 +33,6 @@ trait ValidatorAwareTrait
 {
     /**
      * Validator class.
-     *
      */
     protected string $_validatorClass = Validator::class;
 

@@ -11,13 +11,11 @@ class LinkConstraint
 {
     /**
      * Status that requires a link to be present.
-     *
      */
     const string STATUS_LINKED = "linked";
 
     /**
      * Status that requires a link to not be present.
-     *
      */
     const string STATUS_NOT_LINKED = "notLinked";
 
@@ -30,7 +28,6 @@ class LinkConstraint
 
     /**
      * The link status that is required to be present in order for the check to succeed.
-     *
      */
     protected string $_requiredLinkState;
 

@@ -71,13 +71,11 @@ class WebExceptionRenderer : ExceptionRendererInterface
 
     /**
      * Template to render for {@link uim.cake.Core\exceptions.CakeException}
-     *
      */
     protected string $template = "";
 
     /**
      * The method corresponding to the Exception this object is for.
-     *
      */
     protected string $method = "";
 
@@ -189,7 +187,6 @@ class WebExceptionRenderer : ExceptionRendererInterface
 
     /**
      * Clear output buffers so error pages display properly.
-     *
      */
     protected void clearOutput(): void
     {

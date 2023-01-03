@@ -42,7 +42,6 @@ class MailSubjectContains : MailConstraintBase
     /**
      * Returns the subjects of all messages
      * respects this.at
-     *
      */
     protected string getAssertedMessages(): string
     {

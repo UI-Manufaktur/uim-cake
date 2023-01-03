@@ -77,7 +77,6 @@ class EavStrategy : TranslateStrategyInterface
      *
      * Additionally it creates a `i18n` HasMany association that will be
      * used for fetching all translations for each record in the bound table.
-     *
      */
     protected void setupAssociations() {
         $fields = _config["fields"];

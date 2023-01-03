@@ -13,7 +13,6 @@ class I18n
 {
     /**
      * Default locale
-     *
      */
     const string DEFAULT_LOCALE = "en_US";
 
@@ -275,7 +274,6 @@ class I18n
     /**
      * Destroys all translator instances and creates a new empty translations
      * collection.
-     *
      */
     static void clear(): void
     {

@@ -39,7 +39,6 @@ class Socket
 
     /**
      * This boolean contains the current state of the Socket class
-     *
      */
     protected bool $connected = false;
 
@@ -52,7 +51,6 @@ class Socket
 
     /**
      * True if the socket stream is encrypted after a {@link uim.cake.Network\Socket::enableCrypto()} call
-     *
      */
     protected bool $encrypted = false;
 
@@ -166,7 +164,6 @@ class Socket
 
     /**
      * Check the connection status after calling `connect()`.
-     *
      */
     bool isConnected(): bool
     {
@@ -479,7 +476,6 @@ class Socket
 
     /**
      * Check the encryption status after calling `enableCrypto()`.
-     *
      */
     bool isEncrypted(): bool
     {

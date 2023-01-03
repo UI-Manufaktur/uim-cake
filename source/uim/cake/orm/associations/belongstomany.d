@@ -19,25 +19,21 @@ class BelongsToMany : Association
 {
     /**
      * Saving strategy that will only append to the links set
-     *
      */
     const string SAVE_APPEND = "append";
 
     /**
      * Saving strategy that will replace the links with the provided set
-     *
      */
     const string SAVE_REPLACE = "replace";
 
     /**
      * The type of join to be used when adding the association to a query
-     *
      */
     protected string $_joinType = Query::JOIN_TYPE_INNER;
 
     /**
      * The strategy name to be used to fetch associated records.
-     *
      */
     protected string $_strategy = self::STRATEGY_SELECT;
 
@@ -50,27 +46,23 @@ class BelongsToMany : Association
 
     /**
      * Junction table name
-     *
      */
     protected string $_junctionTableName;
 
     /**
      * The name of the hasMany association from the target table
      * to the junction table
-     *
      */
     protected string $_junctionAssociationName;
 
     /**
      * The name of the property to be set containing data from the junction table
      * once a record from the target table is hydrated
-     *
      */
     protected string $_junctionProperty = "_joinData";
 
     /**
      * Saving strategy to be used by this association
-     *
      */
     protected string $_saveStrategy = self::SAVE_REPLACE;
 
@@ -103,7 +95,6 @@ class BelongsToMany : Association
      * on the source table is deleted.
      *
      * Defaults to true for backwards compatibility.
-     *
      */
     protected bool $_dependent = true;
 
@@ -1371,7 +1362,6 @@ class BelongsToMany : Association
      * Returns the name of the association from the target table to the junction table,
      * this name is used to generate alias in the query and to later on retrieve the
      * results.
-     *
      */
     protected string _junctionAssociationName(): string
     {

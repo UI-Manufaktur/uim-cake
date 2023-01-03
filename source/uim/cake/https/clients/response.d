@@ -312,7 +312,6 @@ class Response : Message : IResponse
 
     /**
      * Lazily build the CookieCollection and cookie objects from the response header
-     *
      */
     protected void buildCookieCollection() {
         if (this.cookies  !is null) {

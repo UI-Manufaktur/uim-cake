@@ -19,7 +19,6 @@ class SqliteSchemaDialect : SchemaDialect
 
     /**
      * Whether there is any table in this connection to SQLite containing sequences.
-     *
      */
     protected bool $_hasSequences;
 
@@ -586,7 +585,6 @@ class SqliteSchemaDialect : SchemaDialect
 
     /**
      * Returns whether there is any table in this connection to SQLite containing sequences
-     *
      */
     bool hasSequences()
     {

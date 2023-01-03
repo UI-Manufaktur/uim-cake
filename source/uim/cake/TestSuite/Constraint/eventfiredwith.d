@@ -22,7 +22,6 @@ class EventFiredWith : Constraint
 
     /**
      * Event data key
-     *
      */
     protected string $_dataKey;
 

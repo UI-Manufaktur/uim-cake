@@ -66,13 +66,11 @@ class ServerRequest : IServerRequest
 
     /**
      * Base URL path.
-     *
      */
     protected string $base;
 
     /**
      * webroot path segment for the request.
-     *
      */
     protected string $webroot = "/";
 

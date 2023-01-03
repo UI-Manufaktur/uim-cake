@@ -599,7 +599,6 @@ class Session
     /**
      * Returns true if the session is no longer valid because the last time it was
      * accessed was after the configured timeout.
-     *
      */
     protected bool _timedOut() {
         $time = this.read("Config.time");

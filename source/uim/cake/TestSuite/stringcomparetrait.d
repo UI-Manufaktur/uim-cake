@@ -12,7 +12,6 @@ trait StringCompareTrait
      * The base path for output comparisons
      *
      * Must be initialized before use
-     *
      */
     protected string $_compareBasePath = "";
 
@@ -20,7 +19,6 @@ trait StringCompareTrait
      * Update comparisons to match test changes
      *
      * Initialized with the env variable UPDATE_TEST_COMPARISON_FILES
-     *
      */
     protected bool $_updateComparisons;
 

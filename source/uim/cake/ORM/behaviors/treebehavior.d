@@ -26,7 +26,6 @@ class TreeBehavior : Behavior
 {
     /**
      * Cached copy of the first column in a table"s primary key.
-     *
      */
     protected string $_primaryKey;
 
@@ -323,7 +322,6 @@ class TreeBehavior : Behavior
      * Helper method used to invert the sign of the left and right columns that are
      * less than 0. They were set to negative values before so their absolute value
      * wouldn"t change while performing other tree transformations.
-     *
      */
     protected void _unmarkInternalTree(): void
     {
@@ -842,7 +840,6 @@ class TreeBehavior : Behavior
 
     /**
      * Returns the maximum index value in the table.
-     *
      */
     protected int _getMax(): int
     {
@@ -944,7 +941,6 @@ class TreeBehavior : Behavior
 
     /**
      * Returns a single string value representing the primary key of the attached table
-     *
      */
     protected string _getPrimaryKey(): string
     {

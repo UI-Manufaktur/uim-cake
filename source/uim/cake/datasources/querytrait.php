@@ -62,7 +62,6 @@ trait QueryTrait
 
     /**
      * Whether the query is standalone or the product of an eager load operation.
-     *
      */
     protected bool $_eagerLoaded = false;
 
@@ -171,9 +170,8 @@ trait QueryTrait
 
     /**
      * Returns the current configured query `_eagerLoaded` value
-     *
      */
-    bool isEagerLoaded(): bool
+    bool isEagerLoaded()
     {
         return _eagerLoaded;
     }

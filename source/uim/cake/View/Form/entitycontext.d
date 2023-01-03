@@ -45,14 +45,12 @@ class EntityContext : ContextInterface
 
     /**
      * The name of the top level entity/table object.
-     *
      */
     protected string $_rootName;
 
     /**
      * Boolean to track whether the entity is a
      * collection.
-     *
      */
     protected bool $_isCollection = false;
 
@@ -191,7 +189,6 @@ class EntityContext : ContextInterface
      *
      * If the context is for a collection or array the first object in the
      * collection will be used.
-     *
      */
     bool isCreate(): bool
     {

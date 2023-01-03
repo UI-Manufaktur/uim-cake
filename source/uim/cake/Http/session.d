@@ -37,19 +37,16 @@ class Session
 
     /**
      * Indicates whether the sessions has already started
-     *
      */
     protected bool $_started;
 
     /**
      * The time in seconds the session will be valid for
-     *
      */
     protected int $_lifetime;
 
     /**
      * Whether this session is running under a CLI environment
-     *
      */
     protected bool $_isCLI = false;
 
@@ -578,7 +575,6 @@ class Session
 
     /**
      * Returns whether a session exists
-     *
      */
     protected bool _hasSession(): bool
     {
@@ -617,7 +613,6 @@ class Session
     /**
      * Returns true if the session is no longer valid because the last time it was
      * accessed was after the configured timeout.
-     *
      */
     protected bool _timedOut(): bool
     {

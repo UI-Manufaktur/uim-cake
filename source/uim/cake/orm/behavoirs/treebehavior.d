@@ -308,7 +308,6 @@ class TreeBehavior : Behavior
      * Helper method used to invert the sign of the left and right columns that are
      * less than 0. They were set to negative values before so their absolute value
      * wouldn"t change while performing other tree transformations.
-     *
      */
     protected void _unmarkInternalTree() {
         myConfig = this.getConfig();

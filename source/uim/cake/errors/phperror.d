@@ -95,7 +95,6 @@ class PhpError
 
     /**
      * Get the PHP error constant.
-     *
      */
     int getCode(): int
     {
@@ -104,7 +103,6 @@ class PhpError
 
     /**
      * Get the mapped LOG_ constant.
-     *
      */
     int getLogLevel(): int
     {

@@ -41,7 +41,6 @@ trait ModelAwareTrait
 
     /**
      * The model type to use.
-     *
      */
     protected string $_modelType = "Table";
 

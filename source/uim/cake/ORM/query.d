@@ -109,13 +109,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
 
     /**
      * Whether to hydrate results into entity objects
-     *
      */
     protected bool $_hydrate = true;
 
     /**
      * Whether aliases are generated for fields.
-     *
      */
     protected bool $aliasingEnabled = true;
 
@@ -137,7 +135,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
 
     /**
      * True if the beforeFind event has already been triggered for this query
-     *
      */
     protected bool $_beforeFindFired = false;
 
@@ -883,7 +880,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Returns the COUNT(*) for the query. If the query has not been
      * modified, and the count has already been performed the cached
      * value is returned
-     *
      */
     int count(): int
     {
@@ -896,7 +892,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
 
     /**
      * Performs and returns the COUNT(*) for the query.
-     *
      */
     protected int _performCount(): int
     {
@@ -1011,7 +1006,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
 
     /**
      * Returns the current hydration mode.
-     *
      */
     bool isHydrationEnabled(): bool
     {
@@ -1133,7 +1127,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Inspects if there are any set fields for selecting, otherwise adds all
      * the fields for the default table.
-     *
      */
     protected void _addDefaultFields(): void
     {
@@ -1156,7 +1149,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
 
     /**
      * Sets the default types for converting the fields in the select clause
-     *
      */
     protected void _addDefaultSelectTypes(): void
     {
@@ -1198,7 +1190,6 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching such as previous results
-     *
      */
     protected void _dirty(): void
     {

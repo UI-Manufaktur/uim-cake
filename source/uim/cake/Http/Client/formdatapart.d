@@ -27,13 +27,11 @@ class FormDataPart
 {
     /**
      * Name of the value.
-     *
      */
     protected string $_name;
 
     /**
      * Value to send.
-     *
      */
     protected string $_value;
 
@@ -46,7 +44,6 @@ class FormDataPart
 
     /**
      * Disposition to send
-     *
      */
     protected string $_disposition;
 

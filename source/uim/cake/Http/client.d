@@ -497,7 +497,6 @@ class Client : ClientInterface
 
     /**
      * Clear all mocked responses
-     *
      */
     static void clearMockResponses(): void
     {

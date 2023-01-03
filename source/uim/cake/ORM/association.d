@@ -27,56 +27,47 @@ abstract class Association
 
     /**
      * Strategy name to use joins for fetching associated records
-     *
      */
     const string STRATEGY_JOIN = "join";
 
     /**
      * Strategy name to use a subquery for fetching associated records
-     *
      */
     const string STRATEGY_SUBQUERY = "subquery";
 
     /**
      * Strategy name to use a select for fetching associated records
-     *
      */
     const string STRATEGY_SELECT = "select";
 
     /**
      * Association type for one to one associations.
-     *
      */
     const string ONE_TO_ONE = "oneToOne";
 
     /**
      * Association type for one to many associations.
-     *
      */
     const string ONE_TO_MANY = "oneToMany";
 
     /**
      * Association type for many to many associations.
-     *
      */
     const string MANY_TO_MANY = "manyToMany";
 
     /**
      * Association type for many to one associations.
-     *
      */
     const string MANY_TO_ONE = "manyToOne";
 
     /**
      * Name given to the association, it usually represents the alias
      * assigned to the target associated table
-     *
      */
     protected string $_name;
 
     /**
      * The class name of the target table object
-     *
      */
     protected string $_className;
 
@@ -106,13 +97,11 @@ abstract class Association
      * Whether the records on the target table are dependent on the source table,
      * often used to indicate that records should be removed if the owning record in
      * the source table is deleted.
-     *
      */
     protected bool $_dependent = false;
 
     /**
      * Whether cascaded deletes should also fire callbacks.
-     *
      */
     protected bool $_cascadeCallbacks = false;
 
@@ -132,21 +121,18 @@ abstract class Association
 
     /**
      * The type of join to be used when adding the association to a query
-     *
      */
     protected string $_joinType = Query::JOIN_TYPE_LEFT;
 
     /**
      * The property name that should be filled with data from the target table
      * in the source table record.
-     *
      */
     protected string $_propertyName;
 
     /**
      * The strategy name to be used to fetch associated records. Some association
      * types might not implement but one strategy to fetch records.
-     *
      */
     protected string $_strategy = self::STRATEGY_JOIN;
 
@@ -265,7 +251,6 @@ abstract class Association
 
     /**
      * Gets whether cascaded deletes should also fire callbacks.
-     *
      */
     bool getCascadeCallbacks(): bool
     {
@@ -483,7 +468,6 @@ abstract class Association
      *
      * This is primarily used to indicate that records should be removed if the owning record in
      * the source table is deleted.
-     *
      */
     bool getDependent(): bool
     {
@@ -558,7 +542,6 @@ abstract class Association
 
     /**
      * Returns default property name based on association name.
-     *
      */
     protected string _propertyName(): string
     {

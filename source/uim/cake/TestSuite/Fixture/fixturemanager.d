@@ -20,7 +20,6 @@ class FixtureManager
 {
     /**
      * Was this instance already initialized?
-     *
      */
     protected bool $_initialized = false;
 
@@ -55,7 +54,6 @@ class FixtureManager
     /**
      * Is the test runner being run with `--debug` enabled.
      * When true, fixture SQL will also be logged.
-     *
      */
     protected bool $_debug = false;
 
@@ -111,7 +109,6 @@ class FixtureManager
      *
      * This allows models to use the test connections without
      * a pile of configuration work.
-     *
      */
     protected void _aliasConnections(): void
     {
@@ -138,7 +135,6 @@ class FixtureManager
 
     /**
      * Initializes this class with a DataSource object to use as default for all fixtures
-     *
      */
     protected void _initDb(): void
     {

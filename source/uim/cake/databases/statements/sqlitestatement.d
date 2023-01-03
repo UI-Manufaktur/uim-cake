@@ -25,7 +25,6 @@ class SqliteStatement : StatementDecorator
 
     /**
      * Returns the number of rows returned of affected by last execution
-     *
      */
     int rowCount(): int
     {

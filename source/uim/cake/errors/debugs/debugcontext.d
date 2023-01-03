@@ -58,7 +58,6 @@ class DebugContext
 
     /**
      * Get the remaining depth levels
-     *
      */
     int remainingDepth(): int
     {

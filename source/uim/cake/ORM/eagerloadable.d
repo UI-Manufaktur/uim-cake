@@ -12,7 +12,6 @@ class EagerLoadable
 {
     /**
      * The name of the association to load.
-     *
      */
     protected string $_name;
 
@@ -41,7 +40,6 @@ class EagerLoadable
     /**
      * A dotted separated string representing the path of associations
      * that should be followed to fetch this level.
-     *
      */
     protected string $_aliasPath;
 
@@ -63,7 +61,6 @@ class EagerLoadable
 
     /**
      * Whether this level can be fetched using a join.
-     *
      */
     protected bool $_canBeJoined = false;
 
@@ -200,7 +197,6 @@ class EagerLoadable
 
     /**
      * Gets whether this level can be fetched using a join.
-     *
      */
     bool canBeJoined(): bool
     {

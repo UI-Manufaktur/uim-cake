@@ -169,7 +169,6 @@ class FormHelper : Helper
     /**
      * Constant used internally to skip the securing process,
      * and neither add the field to the hash or to the unlocked fields.
-     *
      */
     const string SECURE_SKIP = "skip";
 
@@ -204,7 +203,6 @@ class FormHelper : Helper
     /**
      * The action attribute value of the last created form.
      * Used to make form/request specific hashes for form tampering protection.
-     *
      */
     protected string $_lastAction = "";
 
@@ -513,7 +511,6 @@ class FormHelper : Helper
     /**
      * Return a CSRF input if the request data is present.
      * Used to secure forms in conjunction with CsrfMiddleware.
-     *
      */
     protected string _csrfField(): string
     {

@@ -853,7 +853,6 @@ class Response : IResponse
     /**
      * Helper method to generate a valid Cache-Control header from the options set
      * in other methods
-     *
      */
     protected void _setCacheControl() {
         $control = "";

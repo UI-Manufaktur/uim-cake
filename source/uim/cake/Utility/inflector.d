@@ -187,7 +187,6 @@ class Inflector
     /**
      * Clears Inflectors inflected value caches. And resets the inflection
      * rules to the initial values.
-     *
      */
     static void reset(): void
     {

@@ -355,7 +355,6 @@ class Response : IResponse
 
     /**
      * Status code to send to the client
-     *
      */
     protected int $_status = 200;
 
@@ -375,7 +374,6 @@ class Response : IResponse
 
     /**
      * The charset the response body is encoded with
-     *
      */
     protected string $_charset = "UTF-8";
 
@@ -396,13 +394,11 @@ class Response : IResponse
 
     /**
      * Reason Phrase
-     *
      */
     protected string $_reasonPhrase = "OK";
 
     /**
      * Stream mode options.
-     *
      */
     protected string $_streamMode = "wb+";
 
@@ -455,7 +451,6 @@ class Response : IResponse
 
     /**
      * Creates the stream object.
-     *
      */
     protected void _createStream(): void
     {
@@ -880,7 +875,6 @@ class Response : IResponse
     /**
      * Helper method to generate a valid Cache-Control header from the options set
      * in other methods
-     *
      */
     protected void _setCacheControl(): void
     {
@@ -1077,7 +1071,6 @@ class Response : IResponse
 
     /**
      * Returns whether the resulting output will be compressed by PHP
-     *
      */
     bool outputCompressed(): bool
     {

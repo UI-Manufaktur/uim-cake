@@ -9,135 +9,113 @@ interface TableISchema : ISchema
 {
     /**
      * Binary column type
-     *
      */
     const string TYPE_BINARY = "binary";
 
     /**
      * Binary UUID column type
-     *
      */
     const string TYPE_BINARY_UUID = "binaryuuid";
 
     /**
      * Date column type
-     *
      */
     const string TYPE_DATE = "date";
 
     /**
      * Datetime column type
-     *
      */
     const string TYPE_DATETIME = "datetime";
 
     /**
      * Datetime with fractional seconds column type
-     *
      */
     const string TYPE_DATETIME_FRACTIONAL = "datetimefractional";
 
     /**
      * Time column type
-     *
      */
     const string TYPE_TIME = "time";
 
     /**
      * Timestamp column type
-     *
      */
     const string TYPE_TIMESTAMP = "timestamp";
 
     /**
      * Timestamp with fractional seconds column type
-     *
      */
     const string TYPE_TIMESTAMP_FRACTIONAL = "timestampfractional";
 
     /**
      * Timestamp with time zone column type
-     *
      */
     const string TYPE_TIMESTAMP_TIMEZONE = "timestamptimezone";
 
     /**
      * JSON column type
-     *
      */
     const string TYPE_JSON = "json";
 
     /**
      * String column type
-     *
      */
     const string TYPE_STRING = "string";
 
     /**
      * Char column type
-     *
      */
     const string TYPE_CHAR = "char";
 
     /**
      * Text column type
-     *
      */
     const string TYPE_TEXT = "text";
 
     /**
      * Tiny Integer column type
-     *
      */
     const string TYPE_TINYINTEGER = "tinyinteger";
 
     /**
      * Small Integer column type
-     *
      */
     const string TYPE_SMALLINTEGER = "smallinteger";
 
     /**
      * Integer column type
-     *
      */
     const string TYPE_INTEGER = "integer";
 
     /**
      * Big Integer column type
-     *
      */
     const string TYPE_BIGINTEGER = "biginteger";
 
     /**
      * Float column type
-     *
      */
     const string TYPE_FLOAT = "float";
 
     /**
      * Decimal column type
-     *
      */
     const string TYPE_DECIMAL = "decimal";
 
     /**
      * Boolean column type
-     *
      */
     const string TYPE_BOOLEAN = "boolean";
 
     /**
      * UUID column type
-     *
      */
     const string TYPE_UUID = "uuid";
 
     /**
      * Check whether a table has an autoIncrement column defined.
-     *
      */
-    bool hasAutoincrement(): bool;
+    bool hasAutoincrement();
 
     /**
      * Sets whether the table is temporary in the database.
@@ -152,7 +130,7 @@ interface TableISchema : ISchema
      *
      * @return bool The current temporary setting.
      */
-    function isTemporary(): bool;
+    bool isTemporary();
 
     /**
      * Get the column(s) used for the primary key.

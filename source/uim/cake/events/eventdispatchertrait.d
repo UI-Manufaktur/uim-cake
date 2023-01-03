@@ -22,7 +22,6 @@ trait EventDispatcherTrait
 
     /**
      * Default class name for new event objects.
-     *
      */
     protected string $_eventClass = Event::class;
 

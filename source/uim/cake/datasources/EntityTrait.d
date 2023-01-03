@@ -63,7 +63,6 @@ trait EntityTrait
      * Indicates whether this entity is yet to be persisted.
      * Entities default to assuming they are new. You can use Table::persisted()
      * to set the new flag on an entity based on records in the database.
-     *
      */
     protected bool $_new = true;
 
@@ -96,7 +95,6 @@ trait EntityTrait
 
     /**
      * The alias of the repository this entity came from
-     *
      */
     protected string $_registryAlias = "";
 

@@ -30,7 +30,6 @@ abstract class Cell : IEventDispatcher
 
     /**
      * Constant for folder name containing cell templates.
-     *
      */
     const string TEMPLATE_FOLDER = "cell";
 
@@ -60,7 +59,6 @@ abstract class Cell : IEventDispatcher
 
     /**
      * The cell"s action to invoke.
-     *
      */
     protected string $action;
 

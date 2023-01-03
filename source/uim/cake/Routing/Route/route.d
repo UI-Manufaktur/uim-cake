@@ -52,7 +52,6 @@ class Route
     /**
      * Is this route a greedy route? Greedy routes have a `/*` in their
      * template
-     *
      */
     protected bool $_greedy = false;
 
@@ -86,7 +85,6 @@ class Route
 
     /**
      * Track whether brace keys `{var}` were used.
-     *
      */
     protected bool $braceKeys = true;
 
@@ -261,7 +259,6 @@ class Route
 
     /**
      * Check if a Route has been compiled into a regular expression.
-     *
      */
     bool compiled(): bool
     {
@@ -291,7 +288,6 @@ class Route
      *
      * Uses the template, defaults and options properties to compile a
      * regular expression that can be used to parse request strings.
-     *
      */
     protected void _writeRoute(): void
     {

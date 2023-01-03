@@ -8,7 +8,6 @@ class TranslatorRegistry
 {
     /**
      * Fallback loader name.
-     *
      */
     const string FALLBACK_LOADER = "_fallback";
 
@@ -21,7 +20,6 @@ class TranslatorRegistry
 
     /**
      * The current locale code.
-     *
      */
     protected string $locale;
 
@@ -52,13 +50,11 @@ class TranslatorRegistry
     /**
      * The name of the default formatter to use for newly created
      * translators from the fallback loader
-     *
      */
     protected string $_defaultFormatter = "default";
 
     /**
      * Use fallback-domain for translation loaders.
-     *
      */
     protected bool $_useFallback = true;
 

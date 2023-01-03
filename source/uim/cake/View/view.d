@@ -97,7 +97,6 @@ class View : IEventDispatcher
 
     /**
      * Name of the controller that created the View if any.
-     *
      */
     protected string aName = "";
 
@@ -110,14 +109,12 @@ class View : IEventDispatcher
 
     /**
      * The name of the subfolder containing templates for this View.
-     *
      */
     protected string $templatePath = "";
 
     /**
      * The name of the template file to render. The name specified
      * is the filename in `templates/<SubFolder>/` without the .php extension.
-     *
      */
     protected string $template = "";
 
@@ -125,20 +122,17 @@ class View : IEventDispatcher
      * The name of the layout file to render the template inside of. The name specified
      * is the filename of the layout in `templates/layout/` without the .php
      * extension.
-     *
      */
     protected string $layout = "default";
 
     /**
      * The name of the layouts subfolder containing layouts for this View.
-     *
      */
     protected string $layoutPath = "";
 
     /**
      * Turns on or off CakePHP"s conventional mode of applying layout files. On by default.
      * Setting to off means that layouts will not be automatically applied to rendered templates.
-     *
      */
     protected bool $autoLayout = true;
 
@@ -151,14 +145,12 @@ class View : IEventDispatcher
 
     /**
      * File extension. Defaults to ".php".
-     *
      */
     protected string $_ext = ".php";
 
     /**
      * Sub-directory for this template file. This is often used for extension based routing.
      * Eg. With an `xml` extension, $subDir would be `xml/`
-     *
      */
     protected string $subDir = "";
 
@@ -235,14 +227,12 @@ class View : IEventDispatcher
 
     /**
      * The currently rendering view file. Used for resolving parent files.
-     *
      */
     protected string $_current;
 
     /**
      * Currently rendering an element. Used for finding parent fragments
      * for elements.
-     *
      */
     protected string $_currentType = "";
 
@@ -263,38 +253,32 @@ class View : IEventDispatcher
 
     /**
      * Constant for view file type "template".
-     *
      */
     const string TYPE_TEMPLATE = "template";
 
     /**
      * Constant for view file type "element"
-     *
      */
     const string TYPE_ELEMENT = "element";
 
     /**
      * Constant for view file type "layout"
-     *
      */
     const string TYPE_LAYOUT = "layout";
 
     /**
      * Constant for type used for App::path().
-     *
      */
     const string NAME_TEMPLATE = "templates";
 
     /**
      * Constant for folder name containing files for overriding plugin templates.
-     *
      */
     const string PLUGIN_TEMPLATE_FOLDER = "plugin";
 
     /**
      * The magic "match-all" content type that views can use to
      * behave as a fallback during content-type negotiation.
-     *
      */
     const string TYPE_MATCH_ALL = "_match_all_";
 
@@ -351,7 +335,6 @@ class View : IEventDispatcher
 
     /**
      * Set the response content-type based on the view"s contentType()
-     *
      */
     protected void setContentType(): void
     {
@@ -470,7 +453,6 @@ class View : IEventDispatcher
     /**
      * Returns if CakePHP"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
-     *
      */
     bool isAutoLayoutEnabled(): bool
     {

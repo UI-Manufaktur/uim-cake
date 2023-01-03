@@ -25,19 +25,16 @@ class SelectLoader
 {
     /**
      * The alias of the association loading the results
-     *
      */
     protected string $alias;
 
     /**
      * The alias of the source association
-     *
      */
     protected string $sourceAlias;
 
     /**
      * The alias of the target association
-     *
      */
     protected string $targetAlias;
 
@@ -50,13 +47,11 @@ class SelectLoader
 
     /**
      * The strategy to use for loading, either select or subquery
-     *
      */
     protected string $strategy;
 
     /**
      * The binding key for the source association.
-     *
      */
     protected string $bindingKey;
 
@@ -69,13 +64,11 @@ class SelectLoader
 
     /**
      * The type of the association triggering the load
-     *
      */
     protected string $associationType;
 
     /**
      * The sorting options for loading the association
-     *
      */
     protected string $sort;
 

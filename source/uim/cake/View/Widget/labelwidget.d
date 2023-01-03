@@ -20,7 +20,6 @@ class LabelWidget : WidgetInterface
 
     /**
      * The template to use.
-     *
      */
     protected string $_labelTemplate = "label";
 

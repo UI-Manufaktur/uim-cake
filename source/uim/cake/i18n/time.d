@@ -100,7 +100,6 @@ class Time : MutableDateTime : I18nDateTimeInterface
 
     /**
      * serialise the value as a Unix Timestamp
-     *
      */
     const string UNIX_TIMESTAMP_FORMAT = "unixTimestampFormat";
 
@@ -145,7 +144,6 @@ class Time : MutableDateTime : I18nDateTimeInterface
 
     /**
      * Returns true if this object represents a date within the current week
-     *
      */
     bool isThisWeek(): bool
     {
@@ -154,7 +152,6 @@ class Time : MutableDateTime : I18nDateTimeInterface
 
     /**
      * Returns true if this object represents a date within the current month
-     *
      */
     bool isThisMonth(): bool
     {
@@ -163,7 +160,6 @@ class Time : MutableDateTime : I18nDateTimeInterface
 
     /**
      * Returns true if this object represents a date within the current year
-     *
      */
     bool isThisYear(): bool
     {

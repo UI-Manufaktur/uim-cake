@@ -20,19 +20,16 @@ class Number
 {
     /**
      * Default locale
-     *
      */
     const string DEFAULT_LOCALE = "en_US";
 
     /**
      * Format type to format as currency
-     *
      */
     const string FORMAT_CURRENCY = "currency";
 
     /**
      * Format type to format as currency, accounting style (negative numbers in parentheses)
-     *
      */
     const string FORMAT_CURRENCY_ACCOUNTING = "currency_accounting";
 

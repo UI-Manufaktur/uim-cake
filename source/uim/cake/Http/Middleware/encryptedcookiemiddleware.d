@@ -35,13 +35,11 @@ class EncryptedCookieMiddleware : IMiddleware
 
     /**
      * Encryption key to use.
-     *
      */
     protected string aKey;
 
     /**
      * Encryption type.
-     *
      */
     protected string $cipherType;
 
@@ -86,7 +84,6 @@ class EncryptedCookieMiddleware : IMiddleware
      * Fetch the cookie encryption key.
      *
      * Part of the CookieCryptTrait implementation.
-     *
      */
     protected string _getCookieEncryptionKey(): string
     {

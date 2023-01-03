@@ -25,13 +25,11 @@ class DateTimeType : BaseType : BatchCastingInterface
      * so it points to the start of the day.
      *
      * This is primarily to avoid subclasses needing to re-implement the same functionality.
-     *
      */
     protected bool $setToDateStart = false;
 
     /**
      * The DateTime format used when converting to string.
-     *
      */
     protected string $_format = "Y-m-d H:i:s";
 
@@ -50,7 +48,6 @@ class DateTimeType : BaseType : BatchCastingInterface
 
     /**
      * Whether `marshal()` should use locale-aware parser with `_localeMarshalFormat`.
-     *
      */
     protected bool $_useLocaleMarshal = false;
 
@@ -94,7 +91,6 @@ class DateTimeType : BaseType : BatchCastingInterface
 
     /**
      * Whether database time zone is kept when converting
-     *
      */
     protected bool $keepDatabaseTimezone = false;
 

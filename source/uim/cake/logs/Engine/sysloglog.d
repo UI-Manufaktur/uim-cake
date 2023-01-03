@@ -78,7 +78,6 @@ class SyslogLog : BaseLog
 
     /**
      * Whether the logger connection is open or not
-     *
      */
     protected bool $_open = false;
 

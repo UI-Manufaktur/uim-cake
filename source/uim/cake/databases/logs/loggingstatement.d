@@ -47,7 +47,7 @@ class LoggingStatement : StatementDecorator
      * @return bool True on success, false otherwise
      * @throws \Exception Re-throws any exception raised during query execution.
      */
-    function execute(?array $params = null): bool
+    bool execute(?array $params = null)
     {
         this.startTime = microtime(true);
 
@@ -111,7 +111,6 @@ class LoggingStatement : StatementDecorator
     /**
      * Copies the logging data to the passed LoggedQuery and sends it
      * to the logging system.
-     *
      */
     protected void _log() {
         if (this.loggedQuery == null) {

@@ -27,19 +27,16 @@ class FormData : Countable
 {
     /**
      * Boundary marker.
-     *
      */
     protected string $_boundary;
 
     /**
      * Whether this formdata object has attached files.
-     *
      */
     protected bool $_hasFile = false;
 
     /**
      * Whether this formdata object has a complex part.
-     *
      */
     protected bool $_hasComplexPart = false;
 
@@ -182,7 +179,6 @@ class FormData : Countable
 
     /**
      * Returns the count of parts inside this object.
-     *
      */
     int count(): int
     {

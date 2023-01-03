@@ -87,7 +87,6 @@ class CookieCollection : IteratorAggregate, Countable
 
     /**
      * Get the number of cookies in the collection.
-     *
      */
     int count(): int
     {

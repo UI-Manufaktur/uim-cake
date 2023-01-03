@@ -19,7 +19,6 @@ class TableSchema : TableISchema, SqlGeneratorInterface
 {
     /**
      * The name of the table
-     *
      */
     protected string $_table;
 
@@ -60,7 +59,6 @@ class TableSchema : TableISchema, SqlGeneratorInterface
 
     /**
      * Whether the table is temporary
-     *
      */
     protected bool $_temporary = false;
 
@@ -200,61 +198,51 @@ class TableSchema : TableISchema, SqlGeneratorInterface
 
     /**
      * Primary constraint type
-     *
      */
     const string CONSTRAINT_PRIMARY = "primary";
 
     /**
      * Unique constraint type
-     *
      */
     const string CONSTRAINT_UNIQUE = "unique";
 
     /**
      * Foreign constraint type
-     *
      */
     const string CONSTRAINT_FOREIGN = "foreign";
 
     /**
      * Index - index type
-     *
      */
     const string INDEX_INDEX = "index";
 
     /**
      * Fulltext index type
-     *
      */
     const string INDEX_FULLTEXT = "fulltext";
 
     /**
      * Foreign key cascade action
-     *
      */
     const string ACTION_CASCADE = "cascade";
 
     /**
      * Foreign key set null action
-     *
      */
     const string ACTION_SET_NULL = "setNull";
 
     /**
      * Foreign key no action
-     *
      */
     const string ACTION_NO_ACTION = "noAction";
 
     /**
      * Foreign key restrict action
-     *
      */
     const string ACTION_RESTRICT = "restrict";
 
     /**
      * Foreign key restrict default
-     *
      */
     const string ACTION_SET_DEFAULT = "setDefault";
 
@@ -553,7 +541,6 @@ class TableSchema : TableISchema, SqlGeneratorInterface
 
     /**
      * Check whether a table has an autoIncrement column defined.
-     *
      */
     bool hasAutoincrement()
     {

@@ -145,7 +145,6 @@ interface IQuery
 
     /**
      * Returns the total amount of results for the query.
-     *
      */
     int count(): int;
 

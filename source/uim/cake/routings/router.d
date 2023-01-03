@@ -224,7 +224,6 @@ class Router
     /**
      * Reloads default Router settings. Resets all class variables and
      * removes all connected routes.
-     *
      */
     static void reload() {
         if (empty(static::$_initialState)) {

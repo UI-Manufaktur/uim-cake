@@ -10,7 +10,6 @@ class NestingLabelWidget : LabelWidget
 {
     /**
      * The template to use.
-     *
      */
     protected string $_labelTemplate = "nestingLabel";
 }

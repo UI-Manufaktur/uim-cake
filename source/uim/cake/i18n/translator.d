@@ -32,7 +32,6 @@ class Translator
 
     /**
      * The locale being used for translations.
-     *
      */
     protected string $locale;
 

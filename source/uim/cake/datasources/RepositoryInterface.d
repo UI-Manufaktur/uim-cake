@@ -34,7 +34,7 @@ interface RepositoryInterface
      * @param string $field The field to check for.
      * @return bool True if the field exists, false if it does not.
      */
-    function hasField(string $field): bool;
+    bool hasField(string $field);
 
     /**
      * Creates a new Query for this repository and applies some defaults based on the
@@ -112,7 +112,7 @@ interface RepositoryInterface
      *
      * @param array $conditions list of conditions to pass to the query
      */
-    bool exists($conditions): bool;
+    bool exists($conditions);
 
     /**
      * Persists an entity based on the fields that are marked as dirty and
@@ -135,7 +135,7 @@ interface RepositoryInterface
      * @param \ArrayAccess|array $options The options for the delete.
      * @return bool success
      */
-    function delete(IEntity $entity, $options = []): bool;
+    bool delete(IEntity $entity, $options = []);
 
     /**
      * This creates a new entity object.

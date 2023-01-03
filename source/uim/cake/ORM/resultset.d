@@ -27,7 +27,6 @@ class ResultSet : IResultSet
 
     /**
      * Points to the next record number that should be fetched
-     *
      */
     protected int $_index = 0;
 
@@ -47,7 +46,6 @@ class ResultSet : IResultSet
 
     /**
      * The default table alias
-     *
      */
     protected string $_defaultAlias;
 
@@ -91,7 +89,6 @@ class ResultSet : IResultSet
 
     /**
      * Whether to hydrate results into objects or not
-     *
      */
     protected bool $_hydrate = true;
 
@@ -104,19 +101,16 @@ class ResultSet : IResultSet
 
     /**
      * The fully namespaced name of the class to use for hydrating results
-     *
      */
     protected string $_entityClass;
 
     /**
      * Whether to buffer results fetched from the statement
-     *
      */
     protected bool $_useBuffering = true;
 
     /**
      * Holds the count of records in this result set
-     *
      */
     protected int $_count;
 
@@ -170,7 +164,6 @@ class ResultSet : IResultSet
      * Returns the key of the current record in the iterator
      *
      * Part of Iterator interface.
-     *
      */
     int key(): int
     {
@@ -213,7 +206,6 @@ class ResultSet : IResultSet
      * Whether there are more results to be fetched from the iterator
      *
      * Part of Iterator interface.
-     *
      */
     bool valid(): bool
     {
@@ -322,7 +314,6 @@ class ResultSet : IResultSet
      * Gives the number of rows in the result set.
      *
      * Part of the Countable interface.
-     *
      */
     int count(): int
     {

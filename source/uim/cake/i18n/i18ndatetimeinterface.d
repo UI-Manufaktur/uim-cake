@@ -97,7 +97,6 @@ interface I18nDateTimeInterface : ChronosInterface, JsonSerializable
     /**
      * Resets the format used to the default when converting an instance of this type to
      * a string
-     *
      */
     static void resetToStringFormat(): void;
 

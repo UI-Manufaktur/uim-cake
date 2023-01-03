@@ -37,25 +37,21 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Type of message - HTML
-     *
      */
     const string MESSAGE_HTML = "html";
 
     /**
      * Type of message - TEXT
-     *
      */
     const string MESSAGE_TEXT = "text";
 
     /**
      * Type of message - BOTH
-     *
      */
     const string MESSAGE_BOTH = "both";
 
     /**
      * Holds the regex pattern for email validation
-     *
      */
     const string EMAIL_PATTERN = "/^((?:[\p{L}0-9.!#$%&\"*+\/=?^_`{|}~-]+)*@[\p{L}0-9-._]+)$/ui";
 
@@ -134,13 +130,11 @@ class Message : JsonSerializable, Serializable
     /**
      * Domain for messageId generation.
      * Needs to be manually set for CLI mailing as env("HTTP_HOST") is empty
-     *
      */
     protected string $domain = "";
 
     /**
      * The subject of the email
-     *
      */
     protected string $subject = "";
 
@@ -154,13 +148,11 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Text message
-     *
      */
     protected string $textMessage = "";
 
     /**
      * Html message
-     *
      */
     protected string $htmlMessage = "";
 
@@ -180,13 +172,11 @@ class Message : JsonSerializable, Serializable
 
     /**
      * What format should the email be sent in
-     *
      */
     protected string $emailFormat = self::MESSAGE_TEXT;
 
     /**
      * Charset the email body is sent in
-     *
      */
     protected string $charset = "utf-8";
 
@@ -1193,7 +1183,6 @@ class Message : JsonSerializable, Serializable
 
     /**
      * Create unique boundary identifier
-     *
      */
     protected void createBoundary(): void
     {

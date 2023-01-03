@@ -20,13 +20,11 @@ class RouteBuilder
 {
     /**
      * Regular expression for auto increment IDs
-     *
      */
     const string ID = "[0-9]+";
 
     /**
      * Regular expression for UUIDs
-     *
      */
     const string UUID = "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}";
 
@@ -45,7 +43,6 @@ class RouteBuilder
 
     /**
      * Default route class to use if none is provided in connect() options.
-     *
      */
     protected string $_routeClass = Route::class;
 
@@ -58,7 +55,6 @@ class RouteBuilder
 
     /**
      * The path prefix scope that this collection uses.
-     *
      */
     protected string $_path;
 
@@ -71,7 +67,6 @@ class RouteBuilder
 
     /**
      * Name prefix for connected routes.
-     *
      */
     protected string $_namePrefix = "";
 

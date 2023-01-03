@@ -22,7 +22,6 @@ class HtmlFormatter : IFormatter
 
     /**
      * Random id so that HTML ids are not shared between dump outputs.
-     *
      */
     protected string $id;
 
@@ -71,7 +70,6 @@ class HtmlFormatter : IFormatter
      * Generate the CSS and Javascript for dumps
      *
      * Only output once per process as we don"t need it more than once.
-     *
      */
     protected string dumpHeader() {
         ob_start();

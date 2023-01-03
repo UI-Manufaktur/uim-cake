@@ -47,7 +47,6 @@ class ReferenceNode : INode
 
     /**
      * Get the reference id for this node.
-     *
      */
     int getId(): int
     {

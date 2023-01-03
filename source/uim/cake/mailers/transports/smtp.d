@@ -99,7 +99,6 @@ class SmtpTransport : AbstractTransport
 
     /**
      * Check whether an open connection to the SMTP server is available.
-     *
      */
     bool connected(): bool
     {
@@ -198,7 +197,6 @@ class SmtpTransport : AbstractTransport
 
     /**
      * Parses the last response line and extract the preferred authentication type.
-     *
      */
     protected void _parseAuthType(): void
     {

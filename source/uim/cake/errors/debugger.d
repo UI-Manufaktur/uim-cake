@@ -54,7 +54,6 @@ class Debugger
 
     /**
      * The current output format.
-     *
      */
     protected string $_outputFormat = 'js';
 
@@ -1100,7 +1099,6 @@ class Debugger
 
     /**
      * Verifies that the application's salt and cipher seed value has been changed from the default value.
-     *
      */
     static void checkSecurityKeys(): void
     {
