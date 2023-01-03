@@ -101,7 +101,7 @@ class SelectBoxWidget : BasicWidget
      * @return string A generated select box.
      * @throws \RuntimeException when the name attribute is empty.
      */
-    function render(array $data, IContext $context): string
+    string render(array $data, IContext $context)
     {
         $data += this.mergeDefaults($data, $context);
 
@@ -190,14 +190,14 @@ class SelectBoxWidget : BasicWidget
      * @param bool $escape Toggle HTML escaping
      * @return string Formatted template string
      */
-    protected function _renderOptgroup(
+    protected string _renderOptgroup(
         string $label,
         $optgroup,
         ?array $disabled,
         $selected,
         $templateVars,
         $escape
-    ): string {
+    ) {
         $opts = $optgroup;
         $attrs = [];
         if (isset($optgroup["options"], $optgroup["text"])) {

@@ -26,7 +26,7 @@ class BodyRegExp : ResponseBase
     /**
      * @param mixed $other Expected
      */
-    string failureDescription($other): string
+    string failureDescription($other)
     {
         return "`" ~ $other ~ "`" ~ " " ~ this.toString();
     }

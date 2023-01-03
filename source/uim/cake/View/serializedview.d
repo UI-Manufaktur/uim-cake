@@ -63,7 +63,7 @@ abstract class SerializedView : View
      *   need(s) to be serialized
      * @return string The serialized data.
      */
-    abstract protected function _serialize($serialize): string;
+    abstract protected string _serialize($serialize);
 
     /**
      * Render view template or return serialized data.
@@ -73,7 +73,7 @@ abstract class SerializedView : View
      * @return string The rendered view.
      * @throws uim.cake.View\exceptions.SerializationFailureException When serialization fails.
      */
-    function render(?string $template = null, $layout = null): string
+    string render(?string $template = null, $layout = null)
     {
         $serialize = this.getConfig("serialize", false);
 

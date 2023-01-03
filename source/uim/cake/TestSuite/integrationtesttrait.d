@@ -695,7 +695,7 @@ trait IntegrationTestTrait
      *
      * @return string The response body.
      */
-    protected function _getBodyAsString(): string
+    protected string _getBodyAsString()
     {
         if (!_response) {
             this.fail("No response set, cannot assert content.");
@@ -1250,7 +1250,7 @@ trait IntegrationTestTrait
      *
      * @param string $message Original message to use as a base
      */
-    protected string extractVerboseMessage(string $message): string
+    protected string extractVerboseMessage(string $message)
     {
         if (_exception instanceof Exception) {
             $message .= this.extractExceptionMessage(_exception);
@@ -1271,7 +1271,7 @@ trait IntegrationTestTrait
      *
      * @param \Exception $exception Exception to extract
      */
-    protected string extractExceptionMessage(Exception $exception): string
+    protected string extractExceptionMessage(Exception $exception)
     {
         $exceptions = [$exception];
         $previous = $exception.getPrevious();

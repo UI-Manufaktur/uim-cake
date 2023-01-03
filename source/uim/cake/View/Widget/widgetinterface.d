@@ -14,7 +14,7 @@ interface WidgetInterface
      * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string Generated HTML for the widget element.
      */
-    function render(array $data, IContext $context): string;
+    string render(array $data, IContext $context);
 
     /**
      * Returns a list of fields that need to be secured for this widget.

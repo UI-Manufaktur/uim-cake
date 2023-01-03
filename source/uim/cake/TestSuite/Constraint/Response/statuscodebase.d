@@ -46,7 +46,7 @@ abstract class StatusCodeBase : ResponseBase
      *
      * @param mixed $other Value
      */
-    protected string failureDescription($other): string
+    protected string failureDescription($other)
     {
         /** @psalm-suppress InternalMethod */
         return this.toString();

@@ -61,7 +61,7 @@ class CookieEncryptedEquals : CookieEquals
     /**
      * Returns the encryption key
      */
-    protected string _getCookieEncryptionKey(): string
+    protected string _getCookieEncryptionKey()
     {
         return this.key;
     }

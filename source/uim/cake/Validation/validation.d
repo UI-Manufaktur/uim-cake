@@ -1619,7 +1619,7 @@ class Validation
      * @param array<string, mixed> $value The array representing a date or datetime.
      * @return string
      */
-    protected static function _getDateString(array $value): string
+    protected static string _getDateString(array $value)
     {
         $formatted = "";
         if (

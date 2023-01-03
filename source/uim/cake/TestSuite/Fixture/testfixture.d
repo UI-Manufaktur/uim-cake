@@ -103,13 +103,13 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    function connection(): string
+    string connection()
     {
         return this.connection;
     }
 
 
-    function sourceName(): string
+    string sourceName()
     {
         return this.table;
     }

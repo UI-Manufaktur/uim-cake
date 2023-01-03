@@ -377,7 +377,7 @@ class Inflector
      * @return string underscore_version of the input string
      * @link https://book.cakephp.org/4/en/core-libraries/inflector.html#creating-camelcase-and-under-scored-forms
      */
-    static function underscore(string $string): string
+    static string underscore(string $string)
     {
         return static::delimit(str_replace("-", "_", $string), "_");
     }

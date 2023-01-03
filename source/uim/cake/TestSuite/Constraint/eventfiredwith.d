@@ -69,7 +69,7 @@ class EventFiredWith : Constraint
         }
 
         $eventGroup = collection($firedEvents)
-            .groupBy(function (IEvent $event): string {
+            .groupBy(string (IEvent $event) {
                 return $event.getName();
             })
             .toArray();

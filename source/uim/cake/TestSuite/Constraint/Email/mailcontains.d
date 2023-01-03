@@ -36,7 +36,7 @@ class MailContains : MailConstraintBase
 
     /**
      */
-    protected string getTypeMethod(): string
+    protected string getTypeMethod()
     {
         return "getBody" ~ (this.type ? ucfirst(this.type) : "String");
     }

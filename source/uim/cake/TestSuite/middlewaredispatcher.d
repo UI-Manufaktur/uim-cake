@@ -42,7 +42,7 @@ class MiddlewareDispatcher
      *
      * @param array|string $url The URL array/string to resolve.
      */
-    string resolveUrl($url): string
+    string resolveUrl($url)
     {
         // If we need to resolve a Route URL but there are no routes, load routes.
         if (is_array($url) && count(Router::getRouteCollection().routes()) == 0) {
@@ -57,7 +57,7 @@ class MiddlewareDispatcher
      *
      * @param array $url The url to resolve
      */
-    protected string resolveRoute(array $url): string
+    protected string resolveRoute(array $url)
     {
         // Simulate application bootstrap and route loading.
         // We need both to ensure plugins are loaded.

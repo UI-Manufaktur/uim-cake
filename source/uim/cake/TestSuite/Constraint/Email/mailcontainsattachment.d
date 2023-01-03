@@ -46,7 +46,7 @@ class MailContainsAttachment : MailContains
      *
      * @param mixed $other Value
      */
-    protected string failureDescription($other): string
+    protected string failureDescription($other)
     {
         [$expectedFilename] = $other;
 

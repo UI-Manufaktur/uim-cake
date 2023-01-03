@@ -866,7 +866,7 @@ abstract class TestCase : BaseTestCase
      * @param string $path Path separated by "/" slash.
      * @return string Normalized path separated by DIRECTORY_SEPARATOR.
      */
-    protected function _normalizePath(string $path): string
+    protected string _normalizePath(string $path)
     {
         return str_replace("/", DIRECTORY_SEPARATOR, $path);
     }
@@ -1002,7 +1002,7 @@ abstract class TestCase : BaseTestCase
      * @throws uim.cake.orm.exceptions.MissingTableClassException
      * @psalm-return class-string<uim.cake.orm.Table>
      */
-    protected function _getTableClassName(string $alias, array $options): string
+    protected string _getTableClassName(string $alias, array $options)
     {
         if (empty($options["className"])) {
             $class = Inflector::camelize($alias);

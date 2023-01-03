@@ -28,7 +28,7 @@ class BodyEmpty : ResponseBase
      *
      * @param mixed $other Value
      */
-    protected string failureDescription($other): string
+    protected string failureDescription($other)
     {
         return this.toString();
     }

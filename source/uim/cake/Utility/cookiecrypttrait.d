@@ -30,7 +30,7 @@ trait CookieCryptTrait
      *
      * @return string
      */
-    abstract protected function _getCookieEncryptionKey(): string;
+    abstract protected string _getCookieEncryptionKey();
 
     /**
      * Encrypts $value using $type method in Security class
@@ -41,7 +41,7 @@ trait CookieCryptTrait
      * @param string|null $key Used as the security salt if specified.
      * @return string Encoded values
      */
-    protected function _encrypt($value, $encrypt, ?string aKey = null): string
+    protected string _encrypt($value, $encrypt, ?string aKey = null)
     {
         if (is_array($value)) {
             $value = _implode($value);
@@ -147,7 +147,7 @@ trait CookieCryptTrait
      * @param array $array Map of key and values
      * @return string A JSON encoded string.
      */
-    protected function _implode(array $array): string
+    protected string _implode(array $array)
     {
         return json_encode($array);
     }

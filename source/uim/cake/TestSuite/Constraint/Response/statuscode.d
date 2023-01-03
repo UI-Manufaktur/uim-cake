@@ -19,7 +19,7 @@ class StatusCode : StatusCodeBase
      *
      * @param mixed $other Expected code
      */
-    string failureDescription($other): string
+    string failureDescription($other)
     {
         return "`" ~ $other ~ "` " ~ this.toString();
     }
