@@ -218,7 +218,7 @@ class QueryExpression : IExpression, Countable
      * tested for null
      * @return this
      */
-    function isNull($field) {
+    bool isNull($field) {
         if (!($field instanceof IExpression)) {
             $field = new IdentifierExpression($field);
         }
@@ -233,7 +233,7 @@ class QueryExpression : IExpression, Countable
      * tested for not null
      * @return this
      */
-    function isNotNull($field) {
+    bool isNotNull($field) {
         if (!($field instanceof IExpression)) {
             $field = new IdentifierExpression($field);
         }
@@ -572,7 +572,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Executes a callable function for each of the parts that form this expression.
      *
-     * The callable function is required to return a value with which the currently
+     * The callable bool is required to return a value with which the currently
      * visited part will be replaced. If the callable function returns null then
      * the part will be discarded completely from this expression.
      *
@@ -610,7 +610,7 @@ class QueryExpression : IExpression, Countable
      * @deprecated 4.2.0 This method is unused.
      * @codeCoverageIgnore
      */
-    function isCallable($callable): bool
+    bool isCallable($callable): bool
     {
         if (is_string($callable)) {
             return false;
@@ -703,7 +703,7 @@ class QueryExpression : IExpression, Countable
     /**
      * Parses a string conditions by trying to extract the operator inside it if any
      * and finally returning either an adequate QueryExpression object or a plain
-     * string representation of the condition. This function is responsible for
+     * string representation of the condition. This bool is responsible for
      * generating the placeholders and replacing the values by them, while storing
      * the value elsewhere for future binding.
      *

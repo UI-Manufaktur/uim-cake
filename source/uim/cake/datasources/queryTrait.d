@@ -106,7 +106,7 @@ trait QueryTrait
     }
 
     /**
-     * Executes this query and returns a results iterator. This function is required
+     * Executes this query and returns a results iterator. This bool is required
      * for implementing the IteratorAggregate interface and allows the query to be
      * iterated without having to call execute() manually, thus making it look like
      * a result set instead of the query itself.

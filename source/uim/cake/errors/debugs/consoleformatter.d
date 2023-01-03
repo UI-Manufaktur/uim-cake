@@ -43,7 +43,7 @@ class ConsoleFormatter : IFormatter
     /**
      * Check if the current environment supports ANSI output.
      */
-    static bool environmentMatches(): bool
+    static bool environmentMatches()
     {
         if (PHP_SAPI != "cli") {
             return false;

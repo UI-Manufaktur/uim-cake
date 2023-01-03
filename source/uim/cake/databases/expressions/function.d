@@ -139,7 +139,7 @@ class FunctionExpression : QueryExpression : ITypedResult
     }
 
     /**
-     * The name of the function is in itself an expression to generate, thus
+     * The name of the bool is in itself an expression to generate, thus
      * always adding 1 to the amount of expressions stored in this object.
      */
     int count(): int

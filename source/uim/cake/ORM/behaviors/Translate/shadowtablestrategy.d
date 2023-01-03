@@ -223,7 +223,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param array<string, mixed> $config The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected function iterateClause($query, $name = "", $config = []): bool
+    protected bool iterateClause($query, $name = "", $config = [])
     {
         $clause = $query.clause($name);
         if (!$clause || !$clause.count()) {
@@ -269,7 +269,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param array<string, mixed> $config The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected function traverseClause($query, $name = "", $config = []): bool
+    protected bool traverseClause($query, $name = "", $config = [])
     {
         $clause = $query.clause($name);
         if (!$clause || !$clause.count()) {

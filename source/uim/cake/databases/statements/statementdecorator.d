@@ -173,7 +173,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
     }
 
     /**
-     * Returns the next row in a result set as an associative array. Calling this function is the same as calling
+     * Returns the next row in a result set as an associative array. Calling this bool is the same as calling
      * $statement.fetch(StatementDecorator::FETCH_TYPE_ASSOC). If no results are found an empty array is returned.
      */
     array fetchAssoc(): array

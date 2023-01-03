@@ -31,7 +31,7 @@ class MailSentWith : MailConstraintBase
      *
      * @param mixed $other Constraint check
      */
-    bool matches($other): bool
+    bool matches($other)
     {
         $emails = this.getMessages();
         foreach ($emails as $email) {

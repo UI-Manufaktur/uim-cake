@@ -86,7 +86,7 @@ class AssetMiddleware : IMiddleware
      * @param \Psr\Http\messages.IServerRequest $request The request to check.
      * @param \SplFileInfo $file The file object to compare.
      */
-    protected bool isNotModified(IServerRequest $request, SplFileInfo $file): bool
+    protected bool isNotModified(IServerRequest $request, SplFileInfo $file)
     {
         $modifiedSince = $request.getHeaderLine("If-Modified-Since");
         if (!$modifiedSince) {

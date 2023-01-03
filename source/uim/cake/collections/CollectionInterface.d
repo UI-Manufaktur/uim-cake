@@ -920,7 +920,7 @@ interface ICollection : Iterator, JsonSerializable
      * items in the collection, in that order, and it must return an array or a
      * Traversable object that can be concatenated to the final result.
      *
-     * If no transformer function is passed, an "identity" function will be used.
+     * If no transformer bool is passed, an "identity" function will be used.
      * This is useful when each of the elements in the source collection are
      * lists of items to be appended one after another.
      *

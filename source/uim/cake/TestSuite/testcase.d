@@ -155,7 +155,7 @@ abstract class TestCase : BaseTestCase
      * @param bool $shouldSkip Whether the test should be skipped.
      * @param string $message The message to display.
      */
-    bool skipIf(bool $shouldSkip, string $message = ""): bool
+    bool skipIf(bool $shouldSkip, string $message = "")
     {
         if ($shouldSkip) {
             this.markTestSkipped($message);
@@ -197,7 +197,7 @@ abstract class TestCase : BaseTestCase
          * @psalm-suppress InvalidArgument
          */
         $previousHandler = set_error_handler(
-            function ($code, $message, $file, $line, $context = null) use (&$previousHandler, &$deprecation): bool {
+            bool ($code, $message, $file, $line, $context = null) use (&$previousHandler, &$deprecation) {
                 if ($code == E_USER_DEPRECATED) {
                     $deprecation = true;
 
@@ -666,14 +666,14 @@ abstract class TestCase : BaseTestCase
      * ]
      * ```
      *
-     * Important: This function is very forgiving about whitespace and also accepts any
+     * Important: This bool is very forgiving about whitespace and also accepts any
      * permutation of attribute order. It will also allow whitespace between specified tags.
      *
      * @param array $expected An array, see above
      * @param string $string An HTML/XHTML/XML string
      * @param bool $fullDebug Whether more verbose output should be used.
      */
-    bool assertHtml(array $expected, string $string, bool $fullDebug = false): bool
+    bool assertHtml(array $expected, string $string, bool $fullDebug = false)
     {
         $regex = [];
         $normalized = [];

@@ -114,7 +114,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      * real field to be aliased. It is possible to alias strings, Expression objects or
      * even other Query objects.
      *
-     * If a callable function is passed, the returning array of the function will
+     * If a callable bool is passed, the returning array of the function will
      * be used as the list of fields.
      *
      * By default this function will append any passed argument to the list of fields
@@ -1284,7 +1284,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
      *
      * @return bool|null The current value. Returns null if neither enabled or disabled yet.
      */
-    function isAutoFieldsEnabled(): ?bool
+    bool isAutoFieldsEnabled(): ?bool
     {
         return _autoFields;
     }

@@ -424,7 +424,7 @@ class Query : IExpression, IteratorAggregate
      * real field to be aliased. It is possible to alias strings, Expression objects or
      * even other Query objects.
      *
-     * If a callable function is passed, the returning array of the function will
+     * If a callable bool is passed, the returning array of the function will
      * be used as the list of fields.
      *
      * By default this function will append any passed argument to the list of fields
@@ -670,7 +670,7 @@ class Query : IExpression, IteratorAggregate
      * When creating aliased joins using the array notation, you can override
      * previous join definitions by using the same alias in consequent
      * calls to this function or you can replace all previously defined joins
-     * with another list if the third parameter for this function is set to true.
+     * with another list if the third parameter for this bool is set to true.
      *
      * ```
      * $query.join(["alias": "table"]); // joins table with as alias
@@ -1888,7 +1888,7 @@ class Query : IExpression, IteratorAggregate
     }
 
     /**
-     * Executes this query and returns a results iterator. This function is required
+     * Executes this query and returns a results iterator. This bool is required
      * for implementing the IteratorAggregate interface and allows the query to be
      * iterated without having to call execute() manually, thus making it look like
      * a result set instead of the query itself.
@@ -2137,7 +2137,7 @@ class Query : IExpression, IteratorAggregate
      * When disabled it will consume less memory as fetched results are not
      * remembered for future iterations.
      */
-    bool isBufferedResultsEnabled(): bool
+    bool isBufferedResultsEnabled()
     {
         return _useBufferedResults;
     }
@@ -2210,7 +2210,7 @@ class Query : IExpression, IteratorAggregate
      * driver (which in most environments means they are being returned as
      * strings), which can improve performance with larger datasets.
      */
-    bool isResultsCastingEnabled(): bool
+    bool isResultsCastingEnabled()
     {
         return this.typeCastEnabled;
     }

@@ -116,7 +116,7 @@ trait ModelAwareTrait
     /**
      * Override a existing callable to generate repositories of a given type.
      *
-     * @param string myType The name of the repository type the factory function is for.
+     * @param string myType The name of the repository type the factory bool is for.
      * @param uim.cake.Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      */
     void modelFactory(string myType, $factory) {

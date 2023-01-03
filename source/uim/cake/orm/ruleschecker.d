@@ -35,7 +35,7 @@ class RulesChecker : BaseRulesChecker
      *   also be an array of options. When an array, the "message" key can be used to provide a message.
      * @return uim.cake.Datasource\RuleInvoker
      */
-    function isUnique(string[] myFields, myMessage = null): RuleInvoker
+    bool isUnique(string[] myFields, myMessage = null): RuleInvoker
     {
         myOptions = is_array(myMessage) ? myMessage : ["message":myMessage];
         myMessage = myOptions["message"] ?? null;
@@ -120,7 +120,7 @@ class RulesChecker : BaseRulesChecker
      * @return uim.cake.Datasource\RuleInvoker
      * @since 4.0.0
      */
-    function isLinkedTo($association, Nullable!string myField = null, Nullable!string myMessage = null): RuleInvoker
+    bool isLinkedTo($association, Nullable!string myField = null, Nullable!string myMessage = null): RuleInvoker
     {
         return _addLinkConstraintRule(
             $association,
@@ -150,7 +150,7 @@ class RulesChecker : BaseRulesChecker
      * @return uim.cake.Datasource\RuleInvoker
      * @since 4.0.0
      */
-    function isNotLinkedTo($association, Nullable!string myField = null, Nullable!string myMessage = null): RuleInvoker
+    bool isNotLinkedTo($association, Nullable!string myField = null, Nullable!string myMessage = null): RuleInvoker
     {
         return _addLinkConstraintRule(
             $association,

@@ -68,7 +68,7 @@ class LinkConstraint
      * @param array<string, mixed> $options Options passed from the rules checker.
      * @return bool Whether the check was successful.
      */
-    function __invoke(IEntity $entity, array $options): bool
+    bool __invoke(IEntity $entity, array $options)
     {
         $table = $options["repository"] ?? null;
         if (!($table instanceof Table)) {

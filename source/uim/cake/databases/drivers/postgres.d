@@ -219,7 +219,7 @@ class Postgres : Driver
     protected void _transformFunctionExpression(FunctionExpression $expression) {
         switch ($expression.getName()) {
             case "CONCAT":
-                // CONCAT function is expressed as exp1 || exp2
+                // CONCAT bool is expressed as exp1 || exp2
                 $expression.setName("").setConjunction(" ||");
                 break;
             case "DATEDIFF":

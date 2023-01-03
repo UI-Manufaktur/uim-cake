@@ -520,7 +520,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
 
     /**
      * Override this function in order to alter the schema used by this table.
-     * This function is only called after fetching the schema out of the database.
+     * This bool is only called after fetching the schema out of the database.
      * If you wish to provide your own schema to this table without touching the
      * database, you can override schema() or inject the definitions though that
      * method.

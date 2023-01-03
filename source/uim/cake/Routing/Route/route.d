@@ -260,7 +260,7 @@ class Route
     /**
      * Check if a Route has been compiled into a regular expression.
      */
-    bool compiled(): bool
+    bool compiled()
     {
         return _compiledRoute != null;
     }
@@ -528,7 +528,7 @@ class Route
      * @param string $host The request"s host name
      * @return bool Whether the host matches any conditions set in for this route.
      */
-    function hostMatches(string $host): bool
+    bool hostMatches(string $host)
     {
         $pattern = "@^" ~ str_replace("\*", ".*", preg_quote(this.options["_host"], "@")) ~ "$@";
 
@@ -755,7 +755,7 @@ class Route
      *
      * @param array $url The array for the URL being generated.
      */
-    protected bool _matchMethod(array $url): bool
+    protected bool _matchMethod(array $url)
     {
         if (empty(this.defaults["_method"])) {
             return true;

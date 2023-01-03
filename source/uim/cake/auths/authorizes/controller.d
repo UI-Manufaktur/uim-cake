@@ -14,7 +14,7 @@ import uim.cake;
  * return a boolean to indicate whether the user is authorized.
  *
  * ```
- *  function isAuthorized($user)
+ *  bool isAuthorized($user)
  *  {
  *      if (this.request.getParam("admin")) {
  *          return $user["role"] == "admin";
