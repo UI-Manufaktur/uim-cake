@@ -561,8 +561,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options The config options stored with Client::config()
      * @return string A complete url with scheme, port, host, and path.
      */
-    string buildUrl(string $url, $query = [], array $options = [])
-    {
+    string buildUrl(string $url, $query = [], array $options = []) {
         if (empty($options) && empty($query)) {
             return $url;
         }

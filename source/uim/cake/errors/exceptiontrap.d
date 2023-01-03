@@ -146,8 +146,7 @@ class ExceptionTrap
      *
      * @return class-string<uim.cake.errors.ExceptionRendererInterface>
      */
-    protected string chooseRenderer()
-    {
+    protected string chooseRenderer() {
         /** @var class-string<uim.cake.errors.ExceptionRendererInterface> */
         return PHP_SAPI == "cli" ? ConsoleExceptionRenderer::class : ExceptionRenderer::class;
     }

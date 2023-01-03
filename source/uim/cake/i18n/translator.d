@@ -94,8 +94,7 @@ class Translator
      *   message.
      * @return string The translated message with tokens replaced.
      */
-    string translate(string aKey, array $tokensValues = [])
-    {
+    string translate(string aKey, array $tokensValues = []) {
         if (isset($tokensValues["_count"])) {
             $message = this.getMessage(static::PLURAL_PREFIX . $key);
             if (!$message) {

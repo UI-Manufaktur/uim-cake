@@ -444,8 +444,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @return string
      * @psalm-return class-string<\DateTime>|class-string<\DateTimeImmutable>
      */
-    string getDateTimeClassName()
-    {
+    string getDateTimeClassName() {
         return _className;
     }
 

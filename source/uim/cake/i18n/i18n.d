@@ -209,8 +209,7 @@ class I18n
      *
      * @return string The name of the default locale.
      */
-    static string getLocale()
-    {
+    static string getLocale() {
         static::getDefaultLocale();
         $current = Locale::getDefault();
         if ($current == "") {
@@ -229,8 +228,7 @@ class I18n
      * any manipulation by this class.
      *
      */
-    static string getDefaultLocale()
-    {
+    static string getDefaultLocale() {
         if (static::$_defaultLocale == null) {
             static::$_defaultLocale = Locale::getDefault() ?: static::DEFAULT_LOCALE;
         }
@@ -243,8 +241,7 @@ class I18n
      *
      * @return string The name of the formatter.
      */
-    static string getDefaultFormatter()
-    {
+    static string getDefaultFormatter() {
         return static::translators().defaultFormatter();
     }
 

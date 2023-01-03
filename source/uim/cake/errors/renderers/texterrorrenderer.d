@@ -24,8 +24,7 @@ class TextErrorRenderer : ErrorRendererInterface
     }
 
 
-    string render(PhpError $error, bool $debug)
-    {
+    string render(PhpError $error, bool $debug) {
         if (!$debug) {
             return "";
         }

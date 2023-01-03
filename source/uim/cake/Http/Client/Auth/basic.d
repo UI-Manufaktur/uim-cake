@@ -66,8 +66,7 @@ class Basic
      * @param string $user Username.
      * @param string $pass Password.
      */
-    protected string _generateHeader(string $user, string $pass)
-    {
+    protected string _generateHeader(string $user, string $pass) {
         return "Basic " ~ base64_encode($user ~ ":" ~ $pass);
     }
 }

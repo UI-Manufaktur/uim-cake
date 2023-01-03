@@ -347,8 +347,7 @@ class ServerRequest : IServerRequest
      *
      * @return string The client IP.
      */
-    string clientIp()
-    {
+    string clientIp() {
         if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_FOR")) {
             $addresses = array_map("trim", explode(",", (string)this.getEnv("HTTP_X_FORWARDED_FOR")));
             $trusted = (count(this.trustedProxies) > 0);
@@ -733,8 +732,7 @@ class ServerRequest : IServerRequest
      * @param string aName The header name.
      * @return string The normalized header name.
      */
-    protected string normalizeHeaderName(string aName)
-    {
+    protected string normalizeHeaderName(string aName) {
         $name = str_replace("-", "_", strtoupper($name));
         if (!in_array($name, ["CONTENT_LENGTH", "CONTENT_TYPE"], true)) {
             $name = "HTTP_" ~ $name;
@@ -817,8 +815,7 @@ class ServerRequest : IServerRequest
      * @return string Header values collapsed into a comma separated string.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    string getHeaderLine($name)
-    {
+    string getHeaderLine($name) {
         $value = this.getHeader($name);
 
         return implode(", ", $value);
@@ -893,8 +890,7 @@ class ServerRequest : IServerRequest
      * @return string The name of the HTTP method used.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    string getMethod()
-    {
+    string getMethod() {
         return (string)this.getEnv("REQUEST_METHOD");
     }
 
@@ -1013,8 +1009,7 @@ class ServerRequest : IServerRequest
      *   While `example.co.uk` contains 2.
      * @return string Domain name without subdomains.
      */
-    string domain(int $tldLength = 1)
-    {
+    string domain(int $tldLength = 1) {
         $host = this.host();
         if (empty($host)) {
             return "";
@@ -1339,8 +1334,7 @@ class ServerRequest : IServerRequest
      *
      * @return string HTTP protocol version.
      */
-    string getProtocolVersion()
-    {
+    string getProtocolVersion() {
         if (this.protocol) {
             return this.protocol;
         }
@@ -1767,8 +1761,7 @@ class ServerRequest : IServerRequest
      * @return string
      * @since 3.6.1
      */
-    string getPath()
-    {
+    string getPath() {
         if (this.requestTarget == null) {
             return this.uri.getPath();
         }

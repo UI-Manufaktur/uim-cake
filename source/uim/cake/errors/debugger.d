@@ -1089,8 +1089,7 @@ class Debugger
      * @param string $message The string message to format.
      * @return string Formatted message.
      */
-    static string formatHtmlMessage(string $message)
-    {
+    static string formatHtmlMessage(string $message) {
         $message = h($message);
         $message = preg_replace('/`([^`]+)`/', '<code>$1</code>', $message);
 

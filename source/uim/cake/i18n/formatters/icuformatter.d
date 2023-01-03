@@ -19,8 +19,7 @@ class IcuFormatter : IFormatter
      * @return string The formatted message
      * @throws uim.cake.I18n\exceptions.I18nException
      */
-    string format(string $locale, string $message, array $tokenValues)
-    {
+    string format(string $locale, string $message, array $tokenValues) {
         if ($message == "") {
             return $message;
         }
