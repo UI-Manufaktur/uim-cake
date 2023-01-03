@@ -207,8 +207,7 @@ class RouteBuilder
      *
      * @param string aName Name.
      */
-    bool nameExists(string aName): bool
-    {
+    bool nameExists(string aName) {
         return array_key_exists($name, _collection.named());
     }
 

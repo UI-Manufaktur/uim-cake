@@ -193,8 +193,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string $method The method to check for.
      */
-    bool hasMethod(string $method)
-    {
+    bool hasMethod(string $method) {
         $method = strtolower($method);
 
         return isset(_methodMap[$method]);
@@ -208,8 +207,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string $method The method to check for.
      */
-    bool hasFinder(string $method)
-    {
+    bool hasFinder(string $method) {
         $method = strtolower($method);
 
         return isset(_finderMap[$method]);

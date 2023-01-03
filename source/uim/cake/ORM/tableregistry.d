@@ -85,8 +85,7 @@ class TableRegistry
      * @return bool
      * @deprecated 3.6.0 Use {@link uim.cake.orm.Locator\TableLocator::exists()} instead. Will be removed in 5.0
      */
-    static function exists(string $alias): bool
-    {
+    static bool exists(string $alias) {
         return static::getTableLocator().exists($alias);
     }
 

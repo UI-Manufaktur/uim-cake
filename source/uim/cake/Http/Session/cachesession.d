@@ -55,8 +55,7 @@ class CacheSession : SessionHandlerInterface
      * @param string aName The session name.
      * @return bool Success
      */
-    bool open($path, $name)
-    {
+    bool open($path, $name) {
         return true;
     }
 
@@ -65,8 +64,7 @@ class CacheSession : SessionHandlerInterface
      *
      * @return bool Success
      */
-    bool close()
-    {
+    bool close() {
         return true;
     }
 
@@ -94,8 +92,7 @@ class CacheSession : SessionHandlerInterface
      * @param string $data The data to be saved.
      * @return bool True for successful write, false otherwise.
      */
-    bool write($id, $data)
-    {
+    bool write($id, $data) {
         if (!$id) {
             return false;
         }
@@ -109,8 +106,7 @@ class CacheSession : SessionHandlerInterface
      * @param string $id ID that uniquely identifies session in cache.
      * @return bool Always true.
      */
-    bool destroy($id)
-    {
+    bool destroy($id) {
         Cache::delete($id, _options["config"]);
 
         return true;

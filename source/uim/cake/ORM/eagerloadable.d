@@ -198,8 +198,7 @@ class EagerLoadable
     /**
      * Gets whether this level can be fetched using a join.
      */
-    bool canBeJoined()
-    {
+    bool canBeJoined() {
         return _canBeJoined;
     }
 

@@ -290,8 +290,7 @@ class Folder
      * @param string $path Path to check
      * @return bool true if windows path, false otherwise
      */
-    static bool isWindowsPath(string $path)
-    {
+    static bool isWindowsPath(string $path) {
         return preg_match("/^[A-Z]:\\\\/i", $path) || substr($path, 0, 2) == "\\\\";
     }
 
@@ -301,8 +300,7 @@ class Folder
      * @param string $path Path to check
      * @return bool true if path is absolute.
      */
-    static bool isAbsolute(string $path)
-    {
+    static bool isAbsolute(string $path) {
         if (empty($path)) {
             return false;
         }
@@ -319,8 +317,7 @@ class Folder
      * @param string $path Path to check
      * @return bool True if path is registered stream wrapper.
      */
-    static bool isRegisteredStreamWrapper(string $path)
-    {
+    static bool isRegisteredStreamWrapper(string $path) {
         return preg_match("/^[^:\/]+?(?=:\/\/)/", $path, $matches) &&
             in_array($matches[0], stream_get_wrappers(), true);
     }
@@ -388,8 +385,7 @@ class Folder
      * @return bool
      * @throws \InvalidArgumentException When the given `$path` argument is not an absolute path.
      */
-    bool inPath(string $path, bool $reverse = false)
-    {
+    bool inPath(string $path, bool $reverse = false) {
         if (!Folder::isAbsolute($path)) {
             throw new InvalidArgumentException("The $path argument is expected to be an absolute path.");
         }
@@ -415,8 +411,7 @@ class Folder
      * @param array<string> $exceptions Array of files, directories to skip.
      * @return bool Success.
      */
-    bool chmod(string $path, ?int $mode = null, bool $recursive = true, array $exceptions = [])
-    {
+    bool chmod(string $path, ?int $mode = null, bool $recursive = true, array $exceptions = []) {
         if (!$mode) {
             $mode = this.mode;
         }
@@ -593,8 +588,7 @@ class Folder
      * @param int|null $mode octal value 0755
      * @return bool Returns TRUE on success, FALSE on failure
      */
-    bool create(string $pathname, ?int $mode = null)
-    {
+    bool create(string $pathname, ?int $mode = null) {
         if (is_dir($pathname) || empty($pathname)) {
             return true;
         }
@@ -677,8 +671,7 @@ class Folder
      * @param string|null $path Path of directory to delete
      * @return bool Success
      */
-    bool delete(?string $path = null)
-    {
+    bool delete(?string $path = null) {
         if (!$path) {
             $path = this.pwd();
         }
@@ -758,8 +751,7 @@ class Folder
      * @param array<string, mixed> $options Array of options (see above).
      * @return bool Success.
      */
-    bool copy(string $to, array $options = [])
-    {
+    bool copy(string $to, array $options = []) {
         if (!this.pwd()) {
             return false;
         }
@@ -859,8 +851,7 @@ class Folder
      * @param array<string, mixed> $options Array of options (see above).
      * @return bool Success
      */
-    bool move(string $to, array $options = [])
-    {
+    bool move(string $to, array $options = []) {
         $options += ["from": this.path, "mode": this.mode, "skip": [], "recursive": true];
 
         if (this.copy($to, $options) && this.delete($options["from"])) {

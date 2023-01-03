@@ -307,8 +307,7 @@ class Session
      * @return bool True if session was started
      * @throws \RuntimeException if the session was already started
      */
-    bool start()
-    {
+    bool start() {
         if (_started) {
             return true;
         }
@@ -348,8 +347,7 @@ class Session
      *
      * @return true
      */
-    bool close()
-    {
+    bool close() {
         if (!_started) {
             return true;
         }
@@ -374,8 +372,7 @@ class Session
      *
      * @return bool True if session has been started.
      */
-    bool started()
-    {
+    bool started() {
         return _started || session_status() == \PHP_SESSION_ACTIVE;
     }
 
@@ -385,8 +382,7 @@ class Session
      * @param string|null $name Variable name to check for
      * @return bool True if variable is there
      */
-    bool check(?string aName = null)
-    {
+    bool check(?string aName = null) {
         if (_hasSession() && !this.started()) {
             this.start();
         }
@@ -576,8 +572,7 @@ class Session
     /**
      * Returns whether a session exists
      */
-    protected bool _hasSession()
-    {
+    protected bool _hasSession() {
         return !ini_get("session.use_cookies")
             || isset($_COOKIE[session_name()])
             || _isCLI
@@ -614,8 +609,7 @@ class Session
      * Returns true if the session is no longer valid because the last time it was
      * accessed was after the configured timeout.
      */
-    protected bool _timedOut()
-    {
+    protected bool _timedOut() {
         $time = this.read("Config.time");
         $result = false;
 

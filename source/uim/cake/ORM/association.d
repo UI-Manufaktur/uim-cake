@@ -252,8 +252,7 @@ abstract class Association
     /**
      * Gets whether cascaded deletes should also fire callbacks.
      */
-    bool getCascadeCallbacks()
-    {
+    bool getCascadeCallbacks() {
         return _cascadeCallbacks;
     }
 
@@ -469,8 +468,7 @@ abstract class Association
      * This is primarily used to indicate that records should be removed if the owning record in
      * the source table is deleted.
      */
-    bool getDependent()
-    {
+    bool getDependent() {
         return _dependent;
     }
 
@@ -479,8 +477,7 @@ abstract class Association
      *
      * @param array<string, mixed> $options custom options key that could alter the return value
      */
-    bool canBeJoined(array $options = [])
-    {
+    bool canBeJoined(array $options = []) {
         $strategy = $options["strategy"] ?? this.getStrategy();
 
         return $strategy == this::STRATEGY_JOIN;
@@ -801,8 +798,7 @@ abstract class Association
      * for checking if any record matches.
      * @see uim.cake.orm.Table::exists()
      */
-    bool exists($conditions)
-    {
+    bool exists($conditions) {
         $conditions = this.find()
             .where($conditions)
             .clause("where");
@@ -852,8 +848,7 @@ abstract class Association
      * @param array<string, mixed> $options The options containing the strategy to be used.
      * @return bool true if a list of keys will be required
      */
-    bool requiresKeys(array $options = [])
-    {
+    bool requiresKeys(array $options = []) {
         $strategy = $options["strategy"] ?? this.getStrategy();
 
         return $strategy == static::STRATEGY_SELECT;

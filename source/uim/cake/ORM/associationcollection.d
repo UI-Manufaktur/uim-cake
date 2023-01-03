@@ -112,8 +112,7 @@ class AssociationCollection : IteratorAggregate
      * @param string $alias The association alias to get.
      * @return bool Whether the association exists.
      */
-    bool has(string $alias)
-    {
+    bool has(string $alias) {
         return isset(_items[$alias]);
     }
 
@@ -185,8 +184,7 @@ class AssociationCollection : IteratorAggregate
      * @param array<string, mixed> $options The options for the save operation.
      * @return bool Success
      */
-    bool saveParents(Table $table, IEntity $entity, array $associations, array $options = [])
-    {
+    bool saveParents(Table $table, IEntity $entity, array $associations, array $options = []) {
         if (empty($associations)) {
             return true;
         }
@@ -207,8 +205,7 @@ class AssociationCollection : IteratorAggregate
      * @param array<string, mixed> $options The options for the save operation.
      * @return bool Success
      */
-    bool saveChildren(Table $table, IEntity $entity, array $associations, array $options)
-    {
+    bool saveChildren(Table $table, IEntity $entity, array $associations, array $options) {
         if (empty($associations)) {
             return true;
         }
@@ -293,8 +290,7 @@ class AssociationCollection : IteratorAggregate
      * @param uim.cake.Datasource\IEntity $entity The entity to delete associations for.
      * @param array<string, mixed> $options The options used in the delete operation.
      */
-    bool cascadeDelete(IEntity $entity, array $options)
-    {
+    bool cascadeDelete(IEntity $entity, array $options) {
         $noCascade = [];
         foreach (_items as $assoc) {
             if (!$assoc.getCascadeCallbacks()) {

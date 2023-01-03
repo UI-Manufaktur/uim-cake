@@ -61,8 +61,7 @@ class ExistsIn
      * where the `repository` key is required.
      * @throws \RuntimeException When the rule refers to an undefined association.
      */
-    bool __invoke(IEntity $entity, array $options): bool
-    {
+    bool __invoke(IEntity $entity, array $options) {
         if (is_string(_repository)) {
             if (!$options["repository"].hasAssociation(_repository)) {
                 throw new RuntimeException(sprintf(
@@ -134,8 +133,7 @@ class ExistsIn
      * @param uim.cake.Datasource\IEntity $entity The entity to check.
      * @param uim.cake.orm.Table $source The table to use schema from.
      */
-    protected bool _fieldsAreNull(IEntity $entity, Table $source): bool
-    {
+    protected bool _fieldsAreNull(IEntity $entity, Table $source) {
         $nulls = 0;
         $schema = $source.getSchema();
         foreach (_fields as $field) {
