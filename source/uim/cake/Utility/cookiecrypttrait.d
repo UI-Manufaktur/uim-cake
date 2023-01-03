@@ -41,8 +41,7 @@ trait CookieCryptTrait
      * @param string|null $key Used as the security salt if specified.
      * @return string Encoded values
      */
-    protected string _encrypt($value, $encrypt, ?string aKey = null)
-    {
+    protected string _encrypt($value, $encrypt, ?string aKey = null) {
         if (is_array($value)) {
             $value = _implode($value);
         }
@@ -147,8 +146,7 @@ trait CookieCryptTrait
      * @param array $array Map of key and values
      * @return string A JSON encoded string.
      */
-    protected string _implode(array $array)
-    {
+    protected string _implode(array $array) {
         return json_encode($array);
     }
 

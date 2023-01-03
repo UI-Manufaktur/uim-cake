@@ -45,8 +45,7 @@ trait StringTemplateTrait
      * @param string aName The template name.
      * @param array<string, mixed> $data The data to insert.
      */
-    string formatTemplate(string aName, array $data)
-    {
+    string formatTemplate(string aName, array $data) {
         return this.templater().format($name, $data);
     }
 
@@ -55,8 +54,7 @@ trait StringTemplateTrait
      *
      * @return uim.cake.View\StringTemplate
      */
-    StringTemplate templater()
-    {
+    StringTemplate templater() {
         if (_templater == null) {
             /** @var class-string<uim.cake.View\StringTemplate> $class */
             $class = this.getConfig("templateClass") ?: StringTemplate::class;

@@ -87,14 +87,12 @@ class XmlView : SerializedView
      *
      * @return string The JSON content type.
      */
-    static string contentType()
-    {
+    static string contentType() {
         return "application/xml";
     }
 
 
-    protected string _serialize($serialize)
-    {
+    protected string _serialize($serialize) {
         $rootNode = this.getConfig("rootNode", "response");
 
         if (is_array($serialize)) {

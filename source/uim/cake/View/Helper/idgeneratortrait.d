@@ -39,8 +39,7 @@ trait IdGeneratorTrait
      * @param string $val The ID attribute value.
      * @return string Generated id.
      */
-    protected string _id(string aName, string $val)
-    {
+    protected string _id(string aName, string $val) {
         $name = _domId($name);
         $suffix = _idSuffix($val);
 
@@ -55,8 +54,7 @@ trait IdGeneratorTrait
      * @param string $val The ID attribute value.
      * @return string Generated id suffix.
      */
-    protected string _idSuffix(string $val)
-    {
+    protected string _idSuffix(string $val) {
         $idSuffix = mb_strtolower(str_replace(["/", "@", "<", ">", " ", """, "\""], "-", $val));
         $count = 1;
         $check = $idSuffix;
@@ -74,8 +72,7 @@ trait IdGeneratorTrait
      * @param string $value The value to convert into an ID.
      * @return string The generated id.
      */
-    protected string _domId(string $value)
-    {
+    protected string _domId(string $value) {
         $domId = mb_strtolower(Text::slug($value, "-"));
         if (_idPrefix) {
             $domId = _idPrefix ~ "-" ~ $domId;

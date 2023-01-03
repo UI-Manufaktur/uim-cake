@@ -222,8 +222,7 @@ class PaginatorHelper : Helper
      *  null if the results are not currently sorted.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    string sortDir(?string $model = null, array $options = [])
-    {
+    string sortDir(?string $model = null, array $options = []) {
         $dir = null;
 
         if (empty($options)) {
@@ -250,8 +249,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $templates An array of templates with the "active" and "disabled" keys.
      * @return string Generated HTML
      */
-    protected string _toggledLink($text, $enabled, $options, $templates)
-    {
+    protected string _toggledLink($text, $enabled, $options, $templates) {
         $template = $templates["active"];
         if (!$enabled) {
             $text = $options["disabledTitle"];
@@ -322,8 +320,7 @@ class PaginatorHelper : Helper
      * @return string A "previous" link or a disabled link.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string prev(string $title = "<< Previous", array $options = [])
-    {
+    string prev(string $title = "<< Previous", array $options = []) {
         $defaults = [
             "url": [],
             "model": this.defaultModel(),
@@ -362,8 +359,7 @@ class PaginatorHelper : Helper
      * @return string A "next" link or $disabledTitle text if the link is disabled.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string next(string $title = "Next >>", array $options = [])
-    {
+    string next(string $title = "Next >>", array $options = []) {
         $defaults = [
             "url": [],
             "model": this.defaultModel(),
@@ -402,8 +398,7 @@ class PaginatorHelper : Helper
      *  key the returned link will sort by "desc".
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    string sort(string aKey, $title = null, array $options = [])
-    {
+    string sort(string aKey, $title = null, array $options = []) {
         $options += ["url": [], "model": null, "escape": true];
         $url = $options["url"];
         unset($options["url"]);
@@ -573,8 +568,7 @@ class PaginatorHelper : Helper
      * @param string|null $model Current model alias
      * @return string Unaliased field if applicable
      */
-    protected string _removeAlias(string $field, ?string $model = null)
-    {
+    protected string _removeAlias(string $field, ?string $model = null) {
         $currentModel = $model ?: this.defaultModel();
 
         if (strpos($field, ".") == false) {
@@ -683,8 +677,7 @@ class PaginatorHelper : Helper
      * @return string Counter string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-a-page-counter
      */
-    string counter(string $format = "pages", array $options = [])
-    {
+    string counter(string $format = "pages", array $options = []) {
         $options += [
             "model": this.defaultModel(),
         ];
@@ -755,8 +748,7 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-page-number-links
      */
-    string numbers(array $options = [])
-    {
+    string numbers(array $options = []) {
         $defaults = [
             "before": null, "after": null, "model": this.defaultModel(),
             "modulus": 8, "first": null, "last": null, "url": [],
@@ -830,8 +822,7 @@ class PaginatorHelper : Helper
      * @param uim.cake.View\StringTemplate $templater StringTemplate instance.
      * @param array<string, mixed> $options Options from the numbers() method.
      */
-    protected string _formatNumber(StringTemplate $templater, array $options)
-    {
+    protected string _formatNumber(StringTemplate $templater, array $options) {
         $vars = [
             "text": $options["text"],
             "url": this.generateUrl(["page": $options["page"]], $options["model"], $options["url"]),
@@ -848,8 +839,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _modulusNumbers(StringTemplate $templater, array $params, array $options)
-    {
+    protected string _modulusNumbers(StringTemplate $templater, array $params, array $options) {
         $out = "";
         $ellipsis = $templater.format("ellipsis", []);
 
@@ -910,8 +900,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _firstNumber(string $ellipsis, array $params, int $start, array $options)
-    {
+    protected string _firstNumber(string $ellipsis, array $params, int $start, array $options) {
         $out = "";
         $first = is_int($options["first"]) ? $options["first"] : 0;
         if ($options["first"] && $start > 1) {
@@ -934,8 +923,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _lastNumber(string $ellipsis, array $params, int $end, array $options)
-    {
+    protected string _lastNumber(string $ellipsis, array $params, int $end, array $options) {
         $out = "";
         $last = is_int($options["last"]) ? $options["last"] : 0;
         if ($options["last"] && $end < $params["pageCount"]) {
@@ -957,8 +945,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return string Markup output.
      */
-    protected string _numbers(StringTemplate $templater, array $params, array $options)
-    {
+    protected string _numbers(StringTemplate $templater, array $params, array $options) {
         $out = "";
         $out .= $options["before"];
 
@@ -1009,8 +996,7 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string first($first = "<< first", array $options = [])
-    {
+    string first($first = "<< first", array $options = []) {
         $options += [
             "url": [],
             "model": this.defaultModel(),
@@ -1069,8 +1055,7 @@ class PaginatorHelper : Helper
      * @return string Numbers string.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-jump-links
      */
-    string last($last = "last >>", array $options = [])
-    {
+    string last($last = "last >>", array $options = []) {
         $options += [
             "model": this.defaultModel(),
             "escape": true,
@@ -1208,8 +1193,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Options for Select tag attributes like class, id or event
      * @return string html output.
      */
-    string limitControl(array $limits = [], ?int $default = null, array $options = [])
-    {
+    string limitControl(array $limits = [], ?int $default = null, array $options = []) {
         $model = $options["model"] ?? this.defaultModel();
         unset($options["model"]);
 

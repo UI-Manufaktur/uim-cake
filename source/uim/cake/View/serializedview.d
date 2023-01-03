@@ -73,8 +73,7 @@ abstract class SerializedView : View
      * @return string The rendered view.
      * @throws uim.cake.View\exceptions.SerializationFailureException When serialization fails.
      */
-    string render(?string $template = null, $layout = null)
-    {
+    string render(?string $template = null, $layout = null) {
         $serialize = this.getConfig("serialize", false);
 
         if ($serialize == true) {

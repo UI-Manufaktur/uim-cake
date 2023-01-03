@@ -206,8 +206,7 @@ class HtmlHelper : Helper
      * @return string A meta tag containing the specified character set.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-charset-tags
      */
-    string charset(?string $charset = null)
-    {
+    string charset(?string $charset = null) {
         if (empty($charset)) {
             $charset = strtolower((string)Configure::read("App.encoding"));
         }
@@ -241,8 +240,7 @@ class HtmlHelper : Helper
      * @return string An `<a />` element.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-links
      */
-    string link($title, $url = null, array $options = [])
-    {
+    string link($title, $url = null, array $options = []) {
         $escapeTitle = true;
         if ($url != null) {
             $url = this.Url.build($url, $options);
@@ -309,8 +307,7 @@ class HtmlHelper : Helper
      * @see uim.cake.routings.Router::pathUrl()
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-links
      */
-    string linkFromPath(string $title, string $path, array $params = [], array $options = [])
-    {
+    string linkFromPath(string $title, string $path, array $params = [], array $options = []) {
         return this.link($title, ["_path": $path] + $params, $options);
     }
 
@@ -598,8 +595,7 @@ class HtmlHelper : Helper
      * @return string CSS styling data
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-css-programatically
      */
-    string style(array $data, bool $oneLine = true)
-    {
+    string style(array $data, bool $oneLine = true) {
         $out = [];
         foreach ($data as $key: $value) {
             $out[] = $key ~ ":" ~ $value ~ ";";
@@ -642,8 +638,7 @@ class HtmlHelper : Helper
      * @return string completed img tag
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-images
      */
-    string image($path, array $options = [])
-    {
+    string image($path, array $options = []) {
         if (is_string($path)) {
             $path = this.Url.image($path, $options);
         } else {
@@ -688,8 +683,7 @@ class HtmlHelper : Helper
      * @return string Completed table headers
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-table-headings
      */
-    string tableHeaders(array $names, ?array $trOptions = null, ?array $thOptions = null)
-    {
+    string tableHeaders(array $names, ?array $trOptions = null, ?array $thOptions = null) {
         $out = [];
         foreach ($names as $arg) {
             if (!is_array($arg)) {
@@ -809,8 +803,7 @@ class HtmlHelper : Helper
      * @param string $content The content of the row.
      * @param array<string, mixed> $options HTML attributes.
      */
-    string tableRow(string $content, array $options = [])
-    {
+    string tableRow(string $content, array $options = []) {
         return this.formatTemplate("tablerow", [
             "attrs": this.templater().formatAttributes($options),
             "content": $content,
@@ -823,8 +816,7 @@ class HtmlHelper : Helper
      * @param string $content The content of the cell.
      * @param array<string, mixed> $options HTML attributes.
      */
-    string tableCell(string $content, array $options = [])
-    {
+    string tableCell(string $content, array $options = []) {
         return this.formatTemplate("tablecell", [
             "attrs": this.templater().formatAttributes($options),
             "content": $content,
@@ -844,8 +836,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the HTML tag, see above.
      * @return string The formatted tag element
      */
-    string tag(string aName, ?string $text = null, array $options = [])
-    {
+    string tag(string aName, ?string $text = null, array $options = []) {
         if (isset($options["escape"]) && $options["escape"]) {
             $text = h($text);
             unset($options["escape"]);
@@ -876,8 +867,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the DIV tag
      * @return string The formatted DIV element
      */
-    string div(?string $class = null, ?string $text = null, array $options = [])
-    {
+    string div(?string $class = null, ?string $text = null, array $options = []) {
         if (!empty($class)) {
             $options["class"] = $class;
         }
@@ -897,8 +887,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the P tag
      * @return string The formatted P element
      */
-    string para(?string $class, ?string $text, array $options = [])
-    {
+    string para(?string $class, ?string $text, array $options = []) {
         if (!empty($options["escape"])) {
             $text = h($text);
         }
@@ -976,8 +965,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Array of HTML attributes, and special options above.
      * @return string Generated media element
      */
-    string media($path, array $options = [])
-    {
+    string media($path, array $options = []) {
         $options += [
             "tag": null,
             "pathPrefix": "files/",
@@ -1068,8 +1056,7 @@ class HtmlHelper : Helper
      * @return string The nested list
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-nested-lists
      */
-    string nestedList(array $list, array $options = [], array $itemOptions = [])
-    {
+    string nestedList(array $list, array $options = [], array $itemOptions = []) {
         $options += ["tag": "ul"];
         $items = _nestedListItem($list, $options, $itemOptions);
 
@@ -1088,8 +1075,7 @@ class HtmlHelper : Helper
      * @return string The nested list element
      * @see uim.cake.View\Helper\HtmlHelper::nestedList()
      */
-    protected string _nestedListItem(array $items, array $options, array $itemOptions)
-    {
+    protected string _nestedListItem(array $items, array $options, array $itemOptions) {
         $out = "";
 
         $index = 1;

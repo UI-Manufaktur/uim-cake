@@ -16,8 +16,7 @@ class AjaxView : View {
     protected $layout = "ajax";
 
     // Get content type for this view.
-    static string contentType()
-    {
+    static string contentType() {
         return "text/html";
     }
 }

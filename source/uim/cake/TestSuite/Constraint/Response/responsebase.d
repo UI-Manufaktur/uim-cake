@@ -34,8 +34,7 @@ abstract class ResponseBase : Constraint
      *
      * @return string The response body.
      */
-    protected string _getBodyAsString()
-    {
+    protected string _getBodyAsString() {
         return (string)this.response.getBody();
     }
 }

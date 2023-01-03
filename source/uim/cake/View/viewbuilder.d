@@ -637,8 +637,7 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Serializes the view builder object.
      */
-    string serialize()
-    {
+    string serialize() {
         $array = this.jsonSerialize();
 
         return serialize($array);

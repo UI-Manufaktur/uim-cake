@@ -75,8 +75,7 @@ class TimeHelper : Helper
      * @param string|null $locale Locale string.
      * @return string Formatted date string
      */
-    string nice($dateString = null, $timezone = null, ?string $locale = null)
-    {
+    string nice($dateString = null, $timezone = null, ?string $locale = null) {
         $timezone = _getTimezone($timezone);
 
         return (new FrozenTime($dateString)).nice($timezone, $locale);
@@ -190,8 +189,7 @@ class TimeHelper : Helper
      * @return string UNIX timestamp
      * @see uim.cake.I18n\Time::toUnix()
      */
-    string toUnix($dateString, $timezone = null)
-    {
+    string toUnix($dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).toUnixString();
     }
 
@@ -203,8 +201,7 @@ class TimeHelper : Helper
      * @return string Formatted date string
      * @see uim.cake.I18n\Time::toAtom()
      */
-    string toAtom($dateString, $timezone = null)
-    {
+    string toAtom($dateString, $timezone = null) {
         $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
         return (new FrozenTime($dateString)).timezone($timezone).toAtomString();
@@ -217,8 +214,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return string Formatted date string
      */
-    string toRss($dateString, $timezone = null)
-    {
+    string toRss($dateString, $timezone = null) {
         $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
         return (new FrozenTime($dateString)).timezone($timezone).toRssString();
@@ -241,8 +237,7 @@ class TimeHelper : Helper
      * @return string Relative time string.
      * @see uim.cake.I18n\Time::timeAgoInWords()
      */
-    string timeAgoInWords($dateTime, array $options = [])
-    {
+    string timeAgoInWords($dateTime, array $options = []) {
         $element = null;
         $options += [
             "element": null,
@@ -319,8 +314,7 @@ class TimeHelper : Helper
      * @return string UNIX timestamp
      * @see uim.cake.I18n\Time::gmt()
      */
-    string gmt($string = null)
-    {
+    string gmt($string = null) {
         return (new FrozenTime($string)).toUnixString();
     }
 

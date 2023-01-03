@@ -87,8 +87,7 @@ class JsonView : SerializedView
      *
      * @return string The JSON content type.
      */
-    static string contentType()
-    {
+    static string contentType() {
         return "application/json";
     }
 
@@ -99,8 +98,7 @@ class JsonView : SerializedView
      * @param string|false|null $layout The layout being rendered.
      * @return string The rendered view.
      */
-    string render(?string $template = null, $layout = null)
-    {
+    string render(?string $template = null, $layout = null) {
         $return = super.render($template, $layout);
 
         $jsonp = this.getConfig("jsonp");
@@ -118,8 +116,7 @@ class JsonView : SerializedView
     }
 
 
-    protected string _serialize($serialize)
-    {
+    protected string _serialize($serialize) {
         $data = _dataToSerialize($serialize);
 
         $jsonOptions = this.getConfig("jsonOptions");
