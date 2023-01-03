@@ -208,8 +208,7 @@ class Connection : IConnection {
      * @throws uim.cake.databases.exceptions.MissingConnectionException If database connection could not be established.
      * @return bool true, if the connection was already established or the attempt was successful.
      */
-    bool connect()
-    {
+    bool connect() {
         try {
             return _driver.connect();
         } catch (MissingConnectionException $e) {
@@ -237,8 +236,7 @@ class Connection : IConnection {
      * Returns whether connection to database server was already established.
      *
      */
-    bool isConnected()
-    {
+    bool isConnected() {
         return _driver.isConnected();
     }
 
@@ -459,8 +457,7 @@ class Connection : IConnection {
      *
      * @return bool true on success, false otherwise
      */
-    bool commit()
-    {
+    bool commit() {
         if (!_transactionStarted) {
             return false;
         }
@@ -496,8 +493,7 @@ class Connection : IConnection {
      * @param bool|null $toBeginning Whether the transaction should be rolled back to the
      * beginning of it. Defaults to false if using savepoints, or true if not.
      */
-    bool rollback(?bool $toBeginning = null)
-    {
+    bool rollback(?bool $toBeginning = null) {
         if (!_transactionStarted) {
             return false;
         }
@@ -563,8 +559,7 @@ class Connection : IConnection {
      *
      * @return bool true if enabled, false otherwise
      */
-    bool isSavePointsEnabled()
-    {
+    bool isSavePointsEnabled() {
         return _useSavePoints;
     }
 
@@ -623,8 +618,7 @@ class Connection : IConnection {
      * @return bool true if driver supports dynamic constraints
      * @deprecated 4.3.0 Fixtures no longer dynamically drop and create constraints.
      */
-    bool supportsDynamicConstraints()
-    {
+    bool supportsDynamicConstraints() {
         return _driver.supportsDynamicConstraints();
     }
 
@@ -659,8 +653,7 @@ class Connection : IConnection {
      * Returns whether some nested transaction has been already rolled back.
      *
      */
-    protected bool wasNestedTransactionRolledback()
-    {
+    protected bool wasNestedTransactionRolledback() {
         return this.nestedTransactionRollbackException instanceof NestedTransactionRollbackException;
     }
 
@@ -684,8 +677,7 @@ class Connection : IConnection {
      *
      * @return bool True if a transaction is running else false.
      */
-    bool inTransaction()
-    {
+    bool inTransaction() {
         return _transactionStarted;
     }
 
@@ -710,8 +702,7 @@ class Connection : IConnection {
      * This is not required to use `quoteIdentifier()`.
      *
      */
-    bool supportsQuoting()
-    {
+    bool supportsQuoting() {
         return _driver.supports(IDriver::FEATURE_QUOTE);
     }
 
@@ -799,8 +790,7 @@ class Connection : IConnection {
      * Check if query logging is enabled.
      *
      */
-    bool isQueryLoggingEnabled()
-    {
+    bool isQueryLoggingEnabled() {
         return _logQueries;
     }
 

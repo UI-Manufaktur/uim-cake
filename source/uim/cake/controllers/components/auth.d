@@ -297,8 +297,7 @@ class AuthComponent : Component : IEventDispatcher
      *   controller object
      * @return bool True if action is accessible without authentication else false
      */
-    protected bool _isAllowed(Controller $controller)
-    {
+    protected bool _isAllowed(Controller $controller) {
         $action = strtolower($controller.getRequest().getParam('action', ''));
 
         return in_array($action, array_map('strtolower', this.allowedActions), true);
@@ -371,8 +370,7 @@ class AuthComponent : Component : IEventDispatcher
      * @param uim.cake.controllers.Controller $controller A reference to the controller object.
      * @return bool True if current action is login action else false.
      */
-    protected bool _isLoginAction(Controller $controller)
-    {
+    protected bool _isLoginAction(Controller $controller) {
         $uri = $controller.getRequest().getUri();
         $url = Router::normalize($uri.getPath());
         $loginAction = Router::normalize(_config['loginAction']);
@@ -453,8 +451,7 @@ class AuthComponent : Component : IEventDispatcher
      *   If empty, the current request will be used.
      * @return bool True if $user is authorized, otherwise false
      */
-    bool isAuthorized($user = null, ?ServerRequest $request = null)
-    {
+    bool isAuthorized($user = null, ?ServerRequest $request = null) {
         if (empty($user) && !this.user()) {
             return false;
         }
@@ -660,8 +657,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @return bool true If a user can be found, false if one cannot.
      */
-    protected bool _getUser()
-    {
+    protected bool _getUser() {
         $user = this.user();
         if ($user) {
             return true;

@@ -135,8 +135,7 @@ class IniConfig : ConfigEngineInterface
      * @param array $data The data to convert to ini file.
      * @return bool Success.
      */
-    bool dump(string aKey, array $data)
-    {
+    bool dump(string aKey, array $data) {
         $result = [];
         foreach ($data as $k: $value) {
             $isSection = false;

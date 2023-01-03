@@ -101,8 +101,7 @@ class Mysql : Driver
      *
      * @return bool true on success
      */
-    bool connect()
-    {
+    bool connect() {
         if (_connection) {
             return true;
         }
@@ -157,8 +156,7 @@ class Mysql : Driver
      *
      * @return bool true if it is valid to use this driver
      */
-    bool enabled()
-    {
+    bool enabled() {
         return in_array("mysql", PDO::getAvailableDrivers(), true);
     }
 
@@ -212,8 +210,7 @@ class Mysql : Driver
     }
 
 
-    bool supports(string $feature)
-    {
+    bool supports(string $feature) {
         switch ($feature) {
             case static::FEATURE_CTE:
             case static::FEATURE_JSON:
@@ -229,8 +226,7 @@ class Mysql : Driver
     }
 
 
-    bool supportsDynamicConstraints()
-    {
+    bool supportsDynamicConstraints() {
         return true;
     }
 
@@ -238,8 +234,7 @@ class Mysql : Driver
      * Returns true if the connected server is MariaDB.
      *
      */
-    bool isMariadb()
-    {
+    bool isMariadb() {
         this.version();
 
         return this.serverType == static::SERVER_TYPE_MARIADB;
@@ -269,8 +264,7 @@ class Mysql : Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_CTE)` instead
      */
-    bool supportsCTEs()
-    {
+    bool supportsCTEs() {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_CTE);
@@ -282,8 +276,7 @@ class Mysql : Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_JSON)` instead
      */
-    bool supportsNativeJson()
-    {
+    bool supportsNativeJson() {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_JSON);
@@ -295,8 +288,7 @@ class Mysql : Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_WINDOW)` instead
      */
-    bool supportsWindowFunctions()
-    {
+    bool supportsWindowFunctions() {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_WINDOW);

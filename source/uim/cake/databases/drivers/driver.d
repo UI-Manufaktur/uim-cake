@@ -87,8 +87,7 @@ abstract class Driver : IDriver
      * @param array<string, mixed> $config configuration to be used for creating connection
      * @return bool true on success
      */
-    protected bool _connect(string $dsn, array $config)
-    {
+    protected bool _connect(string $dsn, array $config) {
         $action = function () use ($dsn, $config) {
             this.setConnection(new PDO(
                 $dsn,
@@ -181,8 +180,7 @@ abstract class Driver : IDriver
     }
 
 
-    bool beginTransaction()
-    {
+    bool beginTransaction() {
         this.connect();
         if (_connection.inTransaction()) {
             return true;
@@ -203,8 +201,7 @@ abstract class Driver : IDriver
     }
 
 
-    bool rollbackTransaction()
-    {
+    bool rollbackTransaction() {
         this.connect();
         if (!_connection.inTransaction()) {
             return false;
@@ -225,8 +222,7 @@ abstract class Driver : IDriver
     }
 
 
-    bool supportsSavePoints()
-    {
+    bool supportsSavePoints() {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_SAVEPOINT);
@@ -238,8 +234,7 @@ abstract class Driver : IDriver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
      */
-    bool supportsCTEs()
-    {
+    bool supportsCTEs() {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_CTE);
@@ -258,8 +253,7 @@ abstract class Driver : IDriver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
      */
-    bool supportsQuoting()
-    {
+    bool supportsQuoting() {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_QUOTE);
@@ -324,8 +318,7 @@ abstract class Driver : IDriver
     }
 
 
-    bool isConnected()
-    {
+    bool isConnected() {
         if (_connection == null) {
             $connected = false;
         } else {
@@ -354,8 +347,7 @@ abstract class Driver : IDriver
     }
 
 
-    bool isAutoQuotingEnabled()
-    {
+    bool isAutoQuotingEnabled() {
         return _autoQuoting;
     }
 

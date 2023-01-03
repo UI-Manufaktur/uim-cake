@@ -28,8 +28,7 @@ class ExitCode : Constraint
      *
      * @param mixed $other Constraint check
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return $other == this.exitCode;
     }
 

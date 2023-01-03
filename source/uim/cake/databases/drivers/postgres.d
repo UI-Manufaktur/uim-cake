@@ -64,8 +64,7 @@ class Postgres : Driver
      *
      * @return bool true on success
      */
-    bool connect()
-    {
+    bool connect() {
         if (_connection) {
             return true;
         }
@@ -107,8 +106,7 @@ class Postgres : Driver
      *
      * @return bool true if it is valid to use this driver
      */
-    bool enabled()
-    {
+    bool enabled() {
         return in_array("pgsql", PDO::getAvailableDrivers(), true);
     }
 

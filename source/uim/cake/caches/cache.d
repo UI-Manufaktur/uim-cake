@@ -464,8 +464,7 @@ class Cache {
      * @param string $config name of the configuration to use. Defaults to "default"
      * @return bool True if the cache group was successfully cleared, false otherwise
      */
-    static bool clearGroup(string $group, string $config = "default")
-    {
+    static bool clearGroup(string $group, string $config = "default") {
         return static::pool($config).clearGroup($group);
     }
 
@@ -526,8 +525,7 @@ class Cache {
      *
      * @return bool
      */
-    static bool enabled()
-    {
+    static bool enabled() {
         return static::$_enabled;
     }
 
@@ -590,8 +588,7 @@ class Cache {
      * @return bool True if the data was successfully cached, false on failure.
      *   Or if the key existed already.
      */
-    static bool add(string aKey, $value, string $config = "default")
-    {
+    static bool add(string aKey, $value, string $config = "default") {
         if (is_resource($value)) {
             return false;
         }

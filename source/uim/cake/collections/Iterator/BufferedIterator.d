@@ -101,8 +101,7 @@ class BufferedIterator : Collection : Countable, Serializable
      *
      * @return bool
      */
-    bool valid()
-    {
+    bool valid() {
         if (_buffer.offsetExists(_index)) {
             $current = _buffer.offsetGet(_index);
             _current = $current["value"];

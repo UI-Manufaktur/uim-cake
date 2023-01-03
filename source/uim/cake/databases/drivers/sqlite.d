@@ -99,8 +99,7 @@ class Sqlite : Driver
      *
      * @return bool true on success
      */
-    bool connect()
-    {
+    bool connect() {
         if (_connection) {
             return true;
         }
@@ -160,8 +159,7 @@ class Sqlite : Driver
      *
      * @return bool true if it is valid to use this driver
      */
-    bool enabled()
-    {
+    bool enabled() {
         return in_array("sqlite", PDO::getAvailableDrivers(), true);
     }
 
@@ -200,8 +198,7 @@ class Sqlite : Driver
     }
 
 
-    bool supports(string $feature)
-    {
+    bool supports(string $feature) {
         switch ($feature) {
             case static::FEATURE_CTE:
             case static::FEATURE_WINDOW:
@@ -219,8 +216,7 @@ class Sqlite : Driver
     }
 
 
-    bool supportsDynamicConstraints()
-    {
+    bool supportsDynamicConstraints() {
         return false;
     }
 
@@ -326,8 +322,7 @@ class Sqlite : Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_CTE)` instead
      */
-    bool supportsCTEs()
-    {
+    bool supportsCTEs() {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
         return this.supports(static::FEATURE_CTE);

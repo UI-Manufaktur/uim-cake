@@ -196,8 +196,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param string aName The object name to check for.
      * @return bool True is object is loaded else false.
      */
-    bool has(string aName)
-    {
+    bool has(string aName) {
         return isset(_loaded[$name]);
     }
 

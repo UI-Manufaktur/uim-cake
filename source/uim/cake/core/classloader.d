@@ -112,8 +112,7 @@ class ClassLoader
      * @param string $file The file to require.
      * @return bool True if the file exists, false if not.
      */
-    protected bool _requireFile(string $file)
-    {
+    protected bool _requireFile(string $file) {
         if (file_exists($file)) {
             require $file;
 
