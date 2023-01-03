@@ -423,7 +423,7 @@ class FormProtector
      * @param array $hashParts Elements used to generate the Token hash
      * @return string Message explaining why the tokens are not matching
      */
-    protected function debugTokenNotMatching(array $formData, array $hashParts): string
+    protected string debugTokenNotMatching(array $formData, array $hashParts)
     {
         $messages = [];
         if (!isset($formData["_Token"]["debug"])) {

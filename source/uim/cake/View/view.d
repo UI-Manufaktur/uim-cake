@@ -1030,7 +1030,7 @@ class View : IEventDispatcher
     /**
      * Retrieve the current template type
      */
-    string getCurrentType(): string
+    string getCurrentType()
     {
         return _currentType;
     }

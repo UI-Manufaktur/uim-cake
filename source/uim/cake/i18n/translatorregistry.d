@@ -109,7 +109,7 @@ class TranslatorRegistry
     /**
      * Returns the default locale code.
      */
-    string getLocale(): string
+    string getLocale()
     {
         return this.locale;
     }
@@ -255,7 +255,7 @@ class TranslatorRegistry
      * @param string|null $name The name of the formatter to use.
      * @return string The name of the formatter.
      */
-    function defaultFormatter(?string aName = null): string
+    string defaultFormatter(?string aName = null)
     {
         if ($name == null) {
             return _defaultFormatter;

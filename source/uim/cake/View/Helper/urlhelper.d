@@ -94,7 +94,7 @@ class UrlHelper : Helper
      * @return string Full translated URL with base path.
      * @see uim.cake.routings.Router::pathUrl()
      */
-    function buildFromPath(string $path, array $params = [], array $options = []): string
+    string buildFromPath(string $path, array $params = [], array $options = [])
     {
         return this.build(["_path": $path] + $params, $options);
     }
@@ -116,7 +116,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    function image(string $path, array $options = []): string
+    string image(string $path, array $options = [])
     {
         $options += ["theme": _View.getTheme()];
 
@@ -141,7 +141,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    function css(string $path, array $options = []): string
+    string css(string $path, array $options = [])
     {
         $options += ["theme": _View.getTheme()];
 
@@ -166,7 +166,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    function script(string $path, array $options = []): string
+    string script(string $path, array $options = [])
     {
         $options += ["theme": _View.getTheme()];
 
@@ -195,7 +195,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> $options Options array.
      * @return string Generated URL
      */
-    function assetUrl(string $path, array $options = []): string
+    string assetUrl(string $path, array $options = [])
     {
         $options += ["theme": _View.getTheme()];
 

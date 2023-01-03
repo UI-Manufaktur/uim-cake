@@ -740,7 +740,7 @@ class Message : JsonSerializable, Serializable
     /**
      * Gets subject.
      */
-    string getSubject(): string
+    string getSubject()
     {
         return this.subject;
     }
@@ -953,7 +953,7 @@ class Message : JsonSerializable, Serializable
     /**
      * Gets email format.
      */
-    string getEmailFormat(): string
+    string getEmailFormat()
     {
         return this.emailFormat;
     }
@@ -1023,7 +1023,7 @@ class Message : JsonSerializable, Serializable
     /**
      * Gets domain.
      */
-    string getDomain(): string
+    string getDomain()
     {
         return this.domain;
     }
@@ -1723,7 +1723,7 @@ class Message : JsonSerializable, Serializable
      * Checks fallback/compatibility types which include workarounds
      * for legacy japanese character sets.
      */
-    string getContentTypeCharset(): string
+    string getContentTypeCharset()
     {
         $charset = strtoupper(this.charset);
         if (array_key_exists($charset, this.contentTypeCharset)) {
@@ -1783,7 +1783,7 @@ class Message : JsonSerializable, Serializable
     /**
      * Serializes the Email object.
      */
-    string serialize(): string
+    string serialize()
     {
         $array = __serialize();
 

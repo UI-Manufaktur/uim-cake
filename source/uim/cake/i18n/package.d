@@ -114,7 +114,7 @@ class Package
     /**
      * Gets the formatter name for this package.
      */
-    string getFormatter(): string
+    string getFormatter()
     {
         return this.formatter;
     }

@@ -582,7 +582,7 @@ class Mailer : IEventListener
      *
      * @param array<string>|string $value The value to convert
      */
-    protected string flatten($value): string
+    protected string flatten($value)
     {
         return is_array($value) ? implode(";", $value) : $value;
     }

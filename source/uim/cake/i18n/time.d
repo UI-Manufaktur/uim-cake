@@ -137,7 +137,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @param string|null $locale The locale name in which the date should be displayed (e.g. pt-BR)
      * @return string Formatted date string
      */
-    function nice($timezone = null, $locale = null): string
+    string nice($timezone = null, $locale = null)
     {
         return (string)this.i18nFormat(static::$niceFormat, $timezone, $locale);
     }
@@ -194,7 +194,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      *
      * @return string UNIX timestamp
      */
-    function toUnixString(): string
+    string toUnixString()
     {
         return this.format("U");
     }
@@ -236,7 +236,7 @@ class Time : MutableDateTime : I18nDateTimeInterface
      * @param array<string, mixed> $options Array of options.
      * @return string Relative time string.
      */
-    function timeAgoInWords(array $options = []): string
+    string timeAgoInWords(array $options = [])
     {
         /** @psalm-suppress UndefinedInterfaceMethod */
         return static::getDiffFormatter().timeAgoInWords(this, $options);

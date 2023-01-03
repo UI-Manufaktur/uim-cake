@@ -22,5 +22,5 @@ interface IFormatter
      * @param array $tokenValues The list of values to interpolate in the message
      * @return string The formatted message
      */
-    function format(string $locale, string $message, array $tokenValues): string;
+    string format(string $locale, string $message, array $tokenValues);
 }

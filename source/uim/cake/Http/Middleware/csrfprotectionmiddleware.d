@@ -212,7 +212,7 @@ class CsrfProtectionMiddleware : IMiddleware
      * @return string
      * @deprecated 4.0.6 Use {@link createToken()} instead.
      */
-    protected function _createToken(): string
+    protected string _createToken()
     {
         deprecationWarning("_createToken() is deprecated. Use createToken() instead.");
 
@@ -252,7 +252,7 @@ class CsrfProtectionMiddleware : IMiddleware
      * @param string $token The token to salt.
      * @return string The salted token with the salt appended.
      */
-    function saltToken(string $token): string
+    string saltToken(string $token)
     {
         if (this.isHexadecimalToken($token)) {
             return $token;
@@ -282,7 +282,7 @@ class CsrfProtectionMiddleware : IMiddleware
      * @param string $token The token that could be salty.
      * @return string An unsalted token.
      */
-    function unsaltToken(string $token): string
+    string unsaltToken(string $token)
     {
         if (this.isHexadecimalToken($token)) {
             return $token;

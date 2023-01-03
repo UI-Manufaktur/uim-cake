@@ -289,7 +289,7 @@ trait IntegrationTestTrait
     /**
      * Returns the encryption key to be used.
      */
-    protected string _getCookieEncryptionKey(): string
+    protected string _getCookieEncryptionKey()
     {
         return _cookieEncryptionKey ?? Security::getSalt();
     }

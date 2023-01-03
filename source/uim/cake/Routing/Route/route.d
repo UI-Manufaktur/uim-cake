@@ -849,7 +849,7 @@ class Route
     /**
      * Get the static path portion for this route.
      */
-    string staticPath(): string
+    string staticPath()
     {
         $matched = preg_match(
             static::PLACEHOLDER_REGEX,

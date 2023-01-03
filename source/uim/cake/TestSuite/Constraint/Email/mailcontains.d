@@ -45,7 +45,7 @@ class MailContains : MailConstraintBase
      * Returns the type-dependent strings of all messages
      * respects this.at
      */
-    protected string getAssertedMessages(): string
+    protected string getAssertedMessages()
     {
         $messageMembers = [];
         $messages = this.getMessages();

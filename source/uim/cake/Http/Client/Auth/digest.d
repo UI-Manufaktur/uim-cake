@@ -1,16 +1,4 @@
-
-
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
-
-
-
-  */module uim.cake.http.Client\Auth;
+module uim.cake.http.Client\Auth;
 
 import uim.cake.http.Client;
 import uim.cake.http.Client\Request;
@@ -108,7 +96,7 @@ class Digest
      * @param uim.cake.http.Client\Request $request The request object.
      * @param array<string, mixed> $credentials Authentication credentials.
      */
-    protected string _generateHeader(Request $request, array $credentials): string
+    protected string _generateHeader(Request $request, array $credentials)
     {
         $path = $request.getUri().getPath();
         $a1 = md5($credentials["username"] ~ ":" ~ $credentials["realm"] ~ ":" ~ $credentials["password"]);
