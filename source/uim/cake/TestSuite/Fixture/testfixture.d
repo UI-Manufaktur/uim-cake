@@ -244,7 +244,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    function create(IConnection $connection): bool
+    bool create(IConnection aConnection)
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(_schema)) {
@@ -279,7 +279,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    function drop(IConnection $connection): bool
+    bool drop(IConnection aConnection)
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(_schema)) {
@@ -304,7 +304,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    function insert(IConnection $connection) {
+    function insert(IConnection aConnection) {
         if (!empty(this.records)) {
             [$fields, $values, $types] = _getRecords();
             $query = $connection.newQuery()
@@ -324,7 +324,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    function createConstraints(IConnection $connection): bool
+    bool createConstraints(IConnection aConnection)
     {
         if (empty(_constraints)) {
             return true;
@@ -349,7 +349,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    function dropConstraints(IConnection $connection): bool
+    bool dropConstraints(IConnection aConnection)
     {
         if (empty(_constraints)) {
             return true;
@@ -400,7 +400,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    function truncate(IConnection $connection): bool
+    bool truncate(IConnection aConnection)
     {
         /** @psalm-suppress ArgumentTypeCoercion */
         $sql = _schema.truncateSql($connection);

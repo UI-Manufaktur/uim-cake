@@ -11,7 +11,7 @@ interface IFixture
      * @param uim.cake.Datasource\IConnection $connection An instance of the connection the fixture should be created on.
      * @return bool True on success, false on failure.
      */
-    bool create(IConnection $connection);
+    bool create(IConnection aConnection);
 
     /**
      * Run after all tests executed, should remove the table/collection from the connection.
@@ -19,7 +19,7 @@ interface IFixture
      * @param uim.cake.Datasource\IConnection $connection An instance of the connection the fixture should be removed from.
      * @return bool True on success, false on failure.
      */
-    bool drop(IConnection $connection);
+    bool drop(IConnection aConnection);
 
     /**
      * Run before each test is executed.
@@ -31,13 +31,13 @@ interface IFixture
      * @return uim.cake.databases.StatementInterface|bool on success or if there are no records to insert,
      *  or false on failure.
      */
-    function insert(IConnection $connection);
+    function insert(IConnection aConnection);
 
     /**
      * Truncates the current fixture.
      * @param uim.cake.Datasource\IConnection $connection A reference to a db instance
      */
-    bool truncate(IConnection $connection);
+    bool truncate(IConnection aConnection);
 
     // Get the connection name this fixture should be inserted into.
     string connection();

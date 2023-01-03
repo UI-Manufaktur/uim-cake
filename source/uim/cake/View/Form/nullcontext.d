@@ -42,7 +42,7 @@ class NullContext : ContextInterface
     }
 
 
-    bool isCreate(): bool
+    bool isCreate()
     {
         return true;
     }

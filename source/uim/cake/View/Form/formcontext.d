@@ -71,7 +71,7 @@ class FormContext : ContextInterface
     }
 
 
-    bool isCreate(): bool
+    bool isCreate()
     {
         return true;
     }

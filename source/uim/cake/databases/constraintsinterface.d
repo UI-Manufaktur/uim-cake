@@ -28,7 +28,7 @@ interface IConstraints
      *  into which the constraints will be created.
      * @return bool on success or if there are no constraints to create, or false on failure
      */
-    bool createConstraints(IConnection $connection);
+    bool createConstraints(IConnection aConnection);
 
     /**
      * Build and execute SQL queries necessary to drop the constraints for the
@@ -38,5 +38,5 @@ interface IConstraints
      *  into which the constraints will be dropped.
      * @return bool on success or if there are no constraints to drop, or false on failure
      */
-    bool dropConstraints(IConnection $connection);
+    bool dropConstraints(IConnection aConnection);
 }

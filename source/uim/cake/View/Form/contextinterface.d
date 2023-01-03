@@ -28,7 +28,7 @@ interface ContextInterface
     /**
      * Returns whether this form is for a create operation.
      */
-    bool isCreate(): bool;
+    bool isCreate();
 
     /**
      * Get the current value for a given field.

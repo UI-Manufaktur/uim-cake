@@ -58,7 +58,7 @@ class EventFiredWith : Constraint
      * @return bool
      * @throws \PHPUnit\Framework\AssertionFailedError
      */
-    function matches($other): bool
+    bool matches($other)
     {
         $firedEvents = [];
         $list = _eventManager.getEventList();

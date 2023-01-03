@@ -1082,7 +1082,7 @@ abstract class Association
      * @param string $property the property name
      * @return bool true if the property exists
      */
-    function __isSet($property) {
+    bool __isSet($property) {
         return isset(this.getTarget().{$property});
     }
 
