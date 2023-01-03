@@ -106,7 +106,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-urls
      */
-    function autoLinkUrls(string $text, array $options = []): string
+    string autoLinkUrls(string $text, array $options = [])
     {
         _placeholders = [];
         $options += ["escape": true];
@@ -154,7 +154,7 @@ class TextHelper : Helper
      * @param array $matches An array of regexp matches.
      * @return string Replaced values.
      */
-    protected function _insertPlaceHolder(array $matches): string
+    protected string _insertPlaceHolder(array $matches)
     {
         $match = $matches[0];
         $envelope = ["", ""];
@@ -181,7 +181,7 @@ class TextHelper : Helper
      * @param array<string, mixed> $htmlOptions The options for the generated links.
      * @return string The text with links inserted.
      */
-    protected function _linkUrls(string $text, array $htmlOptions): string
+    protected string _linkUrls(string $text, array $htmlOptions)
     {
         $replace = [];
         foreach (_placeholders as $hash: $content) {
@@ -204,7 +204,7 @@ class TextHelper : Helper
      * @return string
      * @see uim.cake.View\Helper\TextHelper::autoLinkEmails()
      */
-    protected function _linkEmails(string $text, array $options): string
+    protected string _linkEmails(string $text, array $options)
     {
         $replace = [];
         foreach (_placeholders as $hash: $content) {
@@ -228,7 +228,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-email-addresses
      */
-    function autoLinkEmails(string $text, array $options = []): string
+    string autoLinkEmails(string $text, array $options = [])
     {
         $options += ["escape": true];
         _placeholders = [];
@@ -258,7 +258,7 @@ class TextHelper : Helper
      * @return string The text with links
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#linking-both-urls-and-email-addresses
      */
-    function autoLink(string $text, array $options = []): string
+    string autoLink(string $text, array $options = [])
     {
         $text = this.autoLinkUrls($text, $options);
 
@@ -276,7 +276,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::highlight()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#highlighting-substrings
      */
-    function highlight(string $text, string $phrase, array $options = []): string
+    string highlight(string $text, string $phrase, array $options = [])
     {
         return _engine.highlight($text, $phrase, $options);
     }
@@ -290,7 +290,7 @@ class TextHelper : Helper
      * @return string The text with proper <p> and <br /> tags
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-text-into-paragraphs
      */
-    function autoParagraph(?string $text): string
+    string autoParagraph(?string $text)
     {
         $text = $text ?? "";
         if (trim($text) != "") {
@@ -326,7 +326,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::truncate()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-text
      */
-    function truncate(string $text, int $length = 100, array $options = []): string
+    string truncate(string $text, int $length = 100, array $options = [])
     {
         return _engine.truncate($text, $length, $options);
     }
@@ -349,7 +349,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::tail()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#truncating-the-tail-of-a-string
      */
-    function tail(string $text, int $length = 100, array $options = []): string
+    string tail(string $text, int $length = 100, array $options = [])
     {
         return _engine.tail($text, $length, $options);
     }
@@ -366,7 +366,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::excerpt()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#extracting-an-excerpt
      */
-    function excerpt(string $text, string $phrase, int $radius = 100, string $ending = "..."): string
+    string excerpt(string $text, string $phrase, int $radius = 100, string $ending = "...")
     {
         return _engine.excerpt($text, $phrase, $radius, $ending);
     }
@@ -381,7 +381,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::toList()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
      */
-    function toList(array $list, ?string $and = null, string $separator = ", "): string
+    string toList(array $list, ?string $and = null, string $separator = ", ")
     {
         return _engine.toList($list, $and, $separator);
     }
@@ -407,7 +407,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::setTransliterator()
      * @see uim.cake.Utility\Text::setTransliteratorId()
      */
-    function slug(string $string, $options = []): string
+    string slug(string $string, $options = [])
     {
         return _engine.slug($string, $options);
     }

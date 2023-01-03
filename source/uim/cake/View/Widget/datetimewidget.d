@@ -89,7 +89,7 @@ class DateTimeWidget : BasicWidget
      * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string HTML elements.
      */
-    function render(array $data, IContext $context): string
+    string render(array $data, IContext $context)
     {
         $data += this.mergeDefaults($data, $context);
 
@@ -162,7 +162,7 @@ class DateTimeWidget : BasicWidget
      * @return string
      * @throws \InvalidArgumentException If invalid input type is passed.
      */
-    protected function formatDateTime($value, array $options): string
+    protected string formatDateTime($value, array $options)
     {
         if ($value == "" || $value == null) {
             return "";

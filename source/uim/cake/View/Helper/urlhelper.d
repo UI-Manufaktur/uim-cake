@@ -61,7 +61,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> $options Array of options.
      * @return string Full translated URL with base path.
      */
-    function build($url = null, array $options = []): string
+    string build($url = null, array $options = [])
     {
         $defaults = [
             "fullBase": false,
@@ -211,7 +211,7 @@ class UrlHelper : Helper
      * @param string|bool $timestamp If set will overrule the value of `Asset.timestamp` in Configure.
      * @return string Path with a timestamp added, or not.
      */
-    function assetTimestamp(string $path, $timestamp = null): string
+    string assetTimestamp(string $path, $timestamp = null)
     {
         return h(_assetUrlClassName::assetTimestamp($path, $timestamp));
     }
@@ -222,7 +222,7 @@ class UrlHelper : Helper
      * @param string $file The file to create a webroot path to.
      * @return string Web accessible path to file.
      */
-    function webroot(string $file): string
+    string webroot(string $file)
     {
         $options = ["theme": _View.getTheme()];
 

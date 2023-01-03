@@ -75,7 +75,7 @@ class TimeHelper : Helper
      * @param string|null $locale Locale string.
      * @return string Formatted date string
      */
-    function nice($dateString = null, $timezone = null, ?string $locale = null): string
+    string nice($dateString = null, $timezone = null, ?string $locale = null)
     {
         $timezone = _getTimezone($timezone);
 
@@ -190,7 +190,7 @@ class TimeHelper : Helper
      * @return string UNIX timestamp
      * @see uim.cake.I18n\Time::toUnix()
      */
-    function toUnix($dateString, $timezone = null): string
+    string toUnix($dateString, $timezone = null)
     {
         return (new FrozenTime($dateString, $timezone)).toUnixString();
     }
@@ -203,7 +203,7 @@ class TimeHelper : Helper
      * @return string Formatted date string
      * @see uim.cake.I18n\Time::toAtom()
      */
-    function toAtom($dateString, $timezone = null): string
+    string toAtom($dateString, $timezone = null)
     {
         $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
@@ -217,7 +217,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return string Formatted date string
      */
-    function toRss($dateString, $timezone = null): string
+    string toRss($dateString, $timezone = null)
     {
         $timezone = _getTimezone($timezone) ?: date_default_timezone_get();
 
@@ -241,7 +241,7 @@ class TimeHelper : Helper
      * @return string Relative time string.
      * @see uim.cake.I18n\Time::timeAgoInWords()
      */
-    function timeAgoInWords($dateTime, array $options = []): string
+    string timeAgoInWords($dateTime, array $options = [])
     {
         $element = null;
         $options += [
@@ -319,7 +319,7 @@ class TimeHelper : Helper
      * @return string UNIX timestamp
      * @see uim.cake.I18n\Time::gmt()
      */
-    function gmt($string = null): string
+    string gmt($string = null)
     {
         return (new FrozenTime($string)).toUnixString();
     }

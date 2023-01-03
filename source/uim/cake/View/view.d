@@ -355,7 +355,7 @@ class View : IEventDispatcher
      *
      * @return string Either the content type or "" which means no type.
      */
-    static function contentType(): string
+    static string contentType()
     {
         return "";
     }
@@ -608,7 +608,7 @@ class View : IEventDispatcher
      *   is false.
      * @psalm-param array{cache?:array|true, callbacks?:bool, plugin?:string|false, ignoreMissing?:bool} $options
      */
-    function element(string aName, array $data = [], array $options = []): string
+    string element(string aName, array $data = [], array $options = [])
     {
         $options += ["callbacks": false, "cache": null, "plugin": null, "ignoreMissing": false];
         if (isset($options["cache"])) {
@@ -653,7 +653,7 @@ class View : IEventDispatcher
      * @return string The rendered content.
      * @throws \RuntimeException When $options is lacking a "key" option.
      */
-    function cache(callable $block, array $options = []): string
+    string cache(callable $block, array $options = [])
     {
         $options += ["key": "", "config": this.elementCache];
         if (empty($options["key"])) {
@@ -720,7 +720,7 @@ class View : IEventDispatcher
      * @triggers View.beforeRender this, [$templateFileName]
      * @triggers View.afterRender this, [$templateFileName]
      */
-    function render(?string $template = null, $layout = null): string
+    string render(?string $template = null, $layout = null)
     {
         $defaultLayout = "";
         $defaultAutoLayout = null;
@@ -770,7 +770,7 @@ class View : IEventDispatcher
      * @triggers View.beforeLayout this, [$layoutFileName]
      * @triggers View.afterLayout this, [$layoutFileName]
      */
-    function renderLayout(string $content, ?string $layout = null): string
+    string renderLayout(string $content, ?string $layout = null)
     {
         $layoutFileName = _getLayoutFileName($layout);
 
@@ -959,7 +959,7 @@ class View : IEventDispatcher
      * @return string The block content or $default if the block does not exist.
      * @see uim.cake.View\ViewBlock::get()
      */
-    function fetch(string aName, string $default = ""): string
+    string fetch(string aName, string $default = "")
     {
         return this.Blocks.get($name, $default);
     }
@@ -1079,7 +1079,7 @@ class View : IEventDispatcher
      * @triggers View.beforeRenderFile this, [$templateFile]
      * @triggers View.afterRenderFile this, [$templateFile, $content]
      */
-    protected function _render(string $templateFile, array $data = []): string
+    protected string _render(string $templateFile, array $data = [])
     {
         if (empty($data)) {
             $data = this.viewVars;
@@ -1123,7 +1123,7 @@ class View : IEventDispatcher
      * @param array $dataForView Data to include in rendered view.
      * @return string Rendered output
      */
-    protected function _evaluate(string $templateFile, array $dataForView): string
+    protected string _evaluate(string $templateFile, array $dataForView)
     {
         extract($dataForView);
 
@@ -1195,7 +1195,7 @@ class View : IEventDispatcher
      * @see uim.cake.View\View::$subDir
 
      */
-    function getSubDir(): string
+    string getSubDir()
     {
         return this.subDir;
     }
@@ -1206,7 +1206,7 @@ class View : IEventDispatcher
      * @return string
      * @since 3.7.7
      */
-    function getName(): string
+    string getName()
     {
         return this.name;
     }
@@ -1261,7 +1261,7 @@ class View : IEventDispatcher
      * @throws uim.cake.View\exceptions.MissingTemplateException when a template file could not be found.
      * @throws \RuntimeException When template name not provided.
      */
-    protected function _getTemplateFileName(?string aName = null): string
+    protected string _getTemplateFileName(?string aName = null)
     {
         $templatePath = $subDir = "";
 
@@ -1316,7 +1316,7 @@ class View : IEventDispatcher
      * @param string aName Name of file which should be inflected.
      * @return string File name after conversion
      */
-    protected function _inflectTemplateFileName(string aName): string
+    protected string _inflectTemplateFileName(string aName)
     {
         return Inflector::underscore($name);
     }
@@ -1332,7 +1332,7 @@ class View : IEventDispatcher
      * @return string The file path
      * @throws \InvalidArgumentException
      */
-    protected function _checkFilePath(string $file, string $path): string
+    protected string _checkFilePath(string $file, string $path)
     {
         if (strpos($file, "..") == false) {
             return $file;
@@ -1381,7 +1381,7 @@ class View : IEventDispatcher
      * @throws uim.cake.View\exceptions.MissingLayoutException when a layout cannot be located
      * @throws \RuntimeException
      */
-    protected function _getLayoutFileName(?string aName = null): string
+    protected string _getLayoutFileName(?string aName = null)
     {
         if ($name == null) {
             if (empty(this.layout)) {
@@ -1608,7 +1608,7 @@ class View : IEventDispatcher
      * @triggers View.beforeRender this, [$file]
      * @triggers View.afterRender this, [$file, $element]
      */
-    protected function _renderElement(string $file, array $data, array $options): string
+    protected string _renderElement(string $file, array $data, array $options)
     {
         $current = _current;
         $restore = _currentType;

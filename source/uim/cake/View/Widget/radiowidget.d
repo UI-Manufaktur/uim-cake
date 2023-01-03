@@ -77,7 +77,7 @@ class RadioWidget : BasicWidget
      * @param array<string, mixed> $data The data to build radio buttons with.
      * @param uim.cake.View\Form\IContext $context The current form context.
      */
-    string render(array $data, IContext $context): string
+    string render(array $data, IContext $context)
     {
         $data += this.mergeDefaults($data, $context);
 
@@ -129,7 +129,7 @@ class RadioWidget : BasicWidget
      * @param array<string, mixed> $data Additional options for input generation.
      * @param uim.cake.View\Form\IContext $context The form context
      */
-    protected string _renderInput($val, $text, $data, $context): string
+    protected string _renderInput($val, $text, $data, $context)
     {
         $escape = $data["escape"];
         if (is_array($text) && isset($text["text"], $text["value"])) {

@@ -159,7 +159,7 @@ class ViewBlock
      * @param string $default Default string
      * @return string The block content or $default if the block does not exist.
      */
-    function get(string aName, string $default = ""): string
+    string get(string aName, string $default = "")
     {
         return _blocks[$name] ?? $default;
     }

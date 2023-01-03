@@ -99,7 +99,7 @@ class MultiCheckboxWidget : BasicWidget
      * @param array<string, mixed> $data The data to generate a checkbox set with.
      * @param uim.cake.View\Form\IContext $context The current form context.
      */
-    string render(array $data, IContext $context): string
+    string render(array $data, IContext $context)
     {
         $data += this.mergeDefaults($data, $context);
 
@@ -173,7 +173,7 @@ class MultiCheckboxWidget : BasicWidget
      * @param array<string, mixed> $checkbox An array containing checkbox key/value option pairs
      * @param uim.cake.View\Form\IContext $context Context object.
      */
-    protected string _renderInput(array $checkbox, IContext $context): string
+    protected string _renderInput(array $checkbox, IContext $context)
     {
         $input = _templates.format("checkbox", [
             "name": $checkbox["name"] ~ "[]",

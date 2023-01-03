@@ -51,7 +51,7 @@ class Security
      * @throws \RuntimeException
      * @link https://book.cakephp.org/4/en/core-libraries/security.html#hashing-data
      */
-    static bool hash(string $string, ?string $algorithm = null, $salt = false): string
+    static string hash(string $string, ?string $algorithm = null, $salt = false)
     {
         if (empty($algorithm)) {
             $algorithm = static::$hashType;
@@ -99,7 +99,7 @@ class Security
      * @param int $length The number of bytes you want.
      * @return string Random bytes in binary.
      */
-    static function randomBytes(int $length): string
+    static string randomBytes(int $length)
     {
         /** @psalm-suppress ArgumentTypeCoercion */
         return random_bytes($length);
@@ -110,7 +110,7 @@ class Security
      *
      * @param int $length String length. Default 64.
      */
-    static string randomString(int $length = 64): string
+    static string randomString(int $length = 64)
     {
         return substr(
             bin2hex(Security::randomBytes((int)ceil($length / 2))),
@@ -126,7 +126,7 @@ class Security
      * @return string Random bytes in binary.
      * @see uim.cake.Utility\Security::randomBytes()
      */
-    static function insecureRandomBytes(int $length): string
+    static string insecureRandomBytes(int $length)
     {
         $length *= 2;
 
@@ -182,7 +182,7 @@ class Security
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static function encrypt(string $plain, string aKey, ?string $hmacSalt = null): string
+    static string encrypt(string $plain, string aKey, ?string $hmacSalt = null)
     {
         self::_checkKey($key, "encrypt()");
 
@@ -272,7 +272,7 @@ class Security
      *
      * @return string The currently configured salt
      */
-    static function getSalt(): string
+    static string getSalt()
     {
         if (static::$_salt == null) {
             throw new RuntimeException(

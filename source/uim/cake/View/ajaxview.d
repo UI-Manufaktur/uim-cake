@@ -12,16 +12,11 @@
  * Currently, only switches the default layout and sets the response type - which just maps to
  * text/html by default.
  */
-class AjaxView : View
-{
-
+class AjaxView : View {
     protected $layout = "ajax";
 
-    /**
-     * Get content type for this view.
-     *
-     */
-    static string contentType(): string
+    // Get content type for this view.
+    static string contentType()
     {
         return "text/html";
     }

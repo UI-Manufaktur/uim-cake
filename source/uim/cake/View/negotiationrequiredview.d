@@ -22,7 +22,7 @@ class NegotiationRequiredView : View
      * Get the content-type
      *
      */
-    static string contentType(): string
+    static string contentType()
     {
         return static::TYPE_MATCH_ALL;
     }
@@ -43,7 +43,7 @@ class NegotiationRequiredView : View
      * @param string|false|null $layout Layout to use. False to disable.
      * @return string Rendered content.
      */
-    function render(?string $template = null, $layout = null): string
+    string render(?string $template = null, $layout = null)
     {
         return "";
     }

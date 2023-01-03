@@ -46,7 +46,7 @@ class Text
      * @return string RFC 4122 UUID
      * @copyright Matt Farina MIT License https://github.com/lootils/uuid/blob/master/LICENSE
      */
-    static function uuid(): string
+    static string uuid()
     {
         return sprintf(
             "%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
@@ -175,7 +175,7 @@ class Text
      *     to be replaced with val
      * @param array<string, mixed> $options An array of options, see description above
      */
-    static string insert(string $str, array $data, array $options = []): string
+    static string insert(string $str, array $data, array $options = [])
     {
         $defaults = [
             "before": ":", "after": "", "escape": "\\", "format": null, "clean": false,
@@ -246,7 +246,7 @@ class Text
      * @return string
      * @see uim.cake.Utility\Text::insert()
      */
-    static function cleanInsert(string $str, array $options): string
+    static string cleanInsert(string $str, array $options)
     {
         $clean = $options["clean"];
         if (!$clean) {
@@ -316,7 +316,7 @@ class Text
      * @param array<string, mixed>|int $options Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static function wrap(string $text, $options = []): string
+    static string wrap(string $text, $options = [])
     {
         if (is_numeric($options)) {
             $options = ["width": $options];
@@ -353,7 +353,7 @@ class Text
      * @param array<string, mixed>|int $options Array of options to use, or an integer to wrap the text to.
      * @return string Formatted text.
      */
-    static function wrapBlock(string $text, $options = []): string
+    static string wrapBlock(string $text, $options = [])
     {
         if (is_numeric($options)) {
             $options = ["width": $options];
@@ -404,7 +404,7 @@ class Text
      * @param bool $cut If the cut is set to true, the string is always wrapped at the specified width.
      * @return string Formatted text.
      */
-    static function wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false): string
+    static string wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false)
     {
         $paragraphs = explode($break, $text);
         foreach ($paragraphs as &$paragraph) {
@@ -423,7 +423,7 @@ class Text
      * @param bool $cut If the cut is set to true, the string is always wrapped at the specified width.
      * @return string Formatted text.
      */
-    protected static function _wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false): string
+    protected static string _wordWrap(string $text, int $width = 72, string $break = "\n", bool $cut = false)
     {
         $parts = [];
         if ($cut) {
@@ -481,7 +481,7 @@ class Text
      * @return string The highlighted text
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#highlighting-substrings
      */
-    static function highlight(string $text, $phrase, array $options = []): string
+    static string highlight(string $text, $phrase, array $options = [])
     {
         if (empty($phrase)) {
             return $text;
@@ -541,7 +541,7 @@ class Text
      * @param array<string, mixed> $options An array of options.
      * @return string Trimmed string.
      */
-    static function tail(string $text, int $length = 100, array $options = []): string
+    static string tail(string $text, int $length = 100, array $options = [])
     {
         $default = [
             "ellipsis": "...", "exact": true,
@@ -581,7 +581,7 @@ class Text
      * @return string Trimmed string.
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#truncating-text
      */
-    static function truncate(string $text, int $length = 100, array $options = []): string
+    static string truncate(string $text, int $length = 100, array $options = [])
     {
         $default = [
             "ellipsis": "...", "exact": true, "html": false, "trimWidth": false,
@@ -684,7 +684,7 @@ class Text
      * @return string Trimmed string.
      * @see uim.cake.Utility\Text::truncate()
      */
-    static function truncateByWidth(string $text, int $length = 100, array $options = []): string
+    static string truncateByWidth(string $text, int $length = 100, array $options = [])
     {
         return static::truncate($text, $length, ["trimWidth": true] + $options);
     }
@@ -741,7 +741,7 @@ class Text
      * @param array<string, mixed> $options An array of options.
      * @return string
      */
-    protected static function _substr(string $text, int $start, ?int $length, array $options): string
+    protected static string _substr(string $text, int $start, ?int $length, array $options)
     {
         if (empty($options["trimWidth"])) {
             $substr = "mb_substr";
@@ -829,7 +829,7 @@ class Text
      * @param string $text The input text
      * @return string
      */
-    protected static function _removeLastWord(string $text): string
+    protected static string _removeLastWord(string $text)
     {
         $spacepos = mb_strrpos($text, " ");
 
@@ -859,7 +859,7 @@ class Text
      * @return string Modified string
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#extracting-an-excerpt
      */
-    static function excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = "..."): string
+    static string excerpt(string $text, string $phrase, int $radius = 100, string $ellipsis = "...")
     {
         if (empty($text) || empty($phrase)) {
             return static::truncate($text, $radius * 2, ["ellipsis": $ellipsis]);
@@ -901,7 +901,7 @@ class Text
      * @return string The glued together string.
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#converting-an-array-to-sentence-form
      */
-    static function toList(array $list, ?string $and = null, string $separator = ", "): string
+    static string toList(array $list, ?string $and = null, string $separator = ", ")
     {
         if ($and == null) {
             $and = __d("cake", "and");
@@ -978,7 +978,7 @@ class Text
      *
      * @param array $array Array
      */
-    static string ascii(array $array): string
+    static string ascii(array $array)
     {
         $ascii = "";
 
@@ -1063,7 +1063,7 @@ class Text
      *
      * @return string Transliterator identifier.
      */
-    static function getTransliteratorId(): string
+    static string getTransliteratorId()
     {
         return static::$_defaultTransliteratorId;
     }
@@ -1073,7 +1073,7 @@ class Text
      *
      * @param string $transliteratorId Transliterator identifier.
      */
-    static void setTransliteratorId(string $transliteratorId): void
+    static void setTransliteratorId(string aTransliteratorId): void
     {
         $transliterator = transliterator_create($transliteratorId);
         if ($transliterator == null) {
@@ -1095,7 +1095,7 @@ class Text
      * @return string
      * @see https://secure.php.net/manual/en/transliterator.transliterate.php
      */
-    static function transliterate(string $string, $transliterator = null): string
+    static string transliterate(string $string, $transliterator = null)
     {
         if (empty($transliterator)) {
             $transliterator = static::$_defaultTransliterator ?: static::$_defaultTransliteratorId;
@@ -1130,7 +1130,7 @@ class Text
      * @see setTransliterator()
      * @see setTransliteratorId()
      */
-    static function slug(string $string, $options = []): string
+    static string slug(string $string, $options = [])
     {
         if (is_string($options)) {
             $options = ["replacement": $options];

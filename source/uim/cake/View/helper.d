@@ -117,7 +117,7 @@ class Helper : IEventListener
      * @param string $cancelCode Code to be executed after user chose "Cancel"
      * @return string "onclick" JS code
      */
-    protected function _confirm(string $okCode, string $cancelCode): string
+    protected string _confirm(string $okCode, string $cancelCode)
     {
         return "if (confirm(this.dataset.confirmMessage)) { {$okCode} } {$cancelCode}";
     }

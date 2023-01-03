@@ -86,7 +86,7 @@ class NumberHelper : Helper
      * @see uim.cake.I18n\Number::precision()
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#formatting-floating-point-numbers
      */
-    function precision($number, int $precision = 3, array $options = []): string
+    string precision($number, int $precision = 3, array $options = [])
     {
         return _engine.precision($number, $precision, $options);
     }
@@ -99,7 +99,7 @@ class NumberHelper : Helper
      * @see uim.cake.I18n\Number::toReadableSize()
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#interacting-with-human-readable-values
      */
-    function toReadableSize($size): string
+    string toReadableSize($size)
     {
         return _engine.toReadableSize($size);
     }
@@ -118,7 +118,7 @@ class NumberHelper : Helper
      * @see uim.cake.I18n\Number::toPercentage()
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#formatting-percentages
      */
-    function toPercentage($number, int $precision = 2, array $options = []): string
+    string toPercentage($number, int $precision = 2, array $options = [])
     {
         return _engine.toPercentage($number, $precision, $options);
     }
@@ -140,7 +140,7 @@ class NumberHelper : Helper
      * @return string Formatted number
      * @link https://book.cakephp.org/4/en/views/helpers/number.html#formatting-numbers
      */
-    function format($number, array $options = []): string
+    string format($number, array $options = [])
     {
         $formatted = _engine.format($number, $options);
         $options += ["escape": true];
@@ -172,7 +172,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return string Number formatted as a currency.
      */
-    function currency($number, ?string $currency = null, array $options = []): string
+    string currency($number, ?string $currency = null, array $options = [])
     {
         $formatted = _engine.currency($number, $currency, $options);
         $options += ["escape": true];
@@ -196,7 +196,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return string formatted delta
      */
-    function formatDelta($value, array $options = []): string
+    string formatDelta($value, array $options = [])
     {
         $formatted = _engine.formatDelta($value, $options);
         $options += ["escape": true];
@@ -239,7 +239,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> $options An array with options.
      * @return string formatted number
      */
-    function ordinal($value, array $options = []): string
+    string ordinal($value, array $options = [])
     {
         return _engine.ordinal($value, $options);
     }

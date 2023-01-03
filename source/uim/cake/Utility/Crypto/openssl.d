@@ -27,7 +27,7 @@ class OpenSsl
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static function encrypt(string $plain, string aKey): string
+    static string encrypt(string $plain, string aKey)
     {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);

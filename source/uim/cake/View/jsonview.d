@@ -87,7 +87,7 @@ class JsonView : SerializedView
      *
      * @return string The JSON content type.
      */
-    static function contentType(): string
+    static string contentType()
     {
         return "application/json";
     }
@@ -99,7 +99,7 @@ class JsonView : SerializedView
      * @param string|false|null $layout The layout being rendered.
      * @return string The rendered view.
      */
-    function render(?string $template = null, $layout = null): string
+    string render(?string $template = null, $layout = null)
     {
         $return = super.render($template, $layout);
 
@@ -118,7 +118,7 @@ class JsonView : SerializedView
     }
 
 
-    protected function _serialize($serialize): string
+    protected string _serialize($serialize)
     {
         $data = _dataToSerialize($serialize);
 
