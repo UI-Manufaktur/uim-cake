@@ -209,7 +209,7 @@ class SecurityHeadersMiddleware : IMiddleware
      * @param string $value Value to check
      * @param array<string> $allowed List of allowed values
      */
-    protected void checkValues(string $value, array $allowed): void
+    protected void checkValues(string $value, array $allowed)
     {
         if (!in_array($value, $allowed, true)) {
             throw new InvalidArgumentException(sprintf(

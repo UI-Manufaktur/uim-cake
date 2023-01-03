@@ -59,7 +59,7 @@ class Request : Message : RequestInterface
      * @phpstan-param array<non-empty-string, non-empty-string> $headers
      * @param array<string, string> $headers The headers to add.
      */
-    protected void addHeaders(array $headers): void
+    protected void addHeaders(array $headers)
     {
         foreach ($headers as $key: $val) {
             $normalized = strtolower($key);

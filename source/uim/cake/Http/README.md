@@ -50,7 +50,7 @@ class Application : IHttpApplication
     /**
      * Load all the application configuration and bootstrap logic.
      */
-    void bootstrap(): void
+    void bootstrap()
     {
         // Load configuration here. This is the first
         // method Cake\Http\Server will call on your application.

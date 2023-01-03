@@ -92,7 +92,7 @@ class Server : IEventDispatcher
      * Calls the application"s `bootstrap()` hook. After the application the
      * plugins are bootstrapped.
      */
-    protected void bootstrap(): void
+    protected void bootstrap()
     {
         this.app.bootstrap();
         if (this.app instanceof IPluginApplication) {
@@ -107,7 +107,7 @@ class Server : IEventDispatcher
      * @param \Laminas\HttpHandlerRunner\Emitter\EmitterInterface|null $emitter The emitter to use.
      *   When null, a SAPI Stream Emitter will be used.
      */
-    void emit(IResponse $response, ?EmitterInterface $emitter = null): void
+    void emit(IResponse $response, ?EmitterInterface $emitter = null)
     {
         if (!$emitter) {
             $emitter = new ResponseEmitter();

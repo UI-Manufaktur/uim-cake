@@ -360,7 +360,7 @@ class Oauth
     /**
      * Check for SSL errors and raise if one is encountered.
      */
-    protected void checkSslError(): void
+    protected void checkSslError()
     {
         $error = "";
         while ($text = openssl_error_string()) {

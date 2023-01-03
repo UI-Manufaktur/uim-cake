@@ -175,7 +175,7 @@ class Cookie : CookieInterface
      *
      * @param array<string, mixed> $options Default options.
      */
-    static void setDefaults(array $options): void
+    static void setDefaults(array $options)
     {
         if (isset($options["expires"])) {
             $options["expires"] = static::dateTimeInstance($options["expires"]);
@@ -367,7 +367,7 @@ class Cookie : CookieInterface
      * @throws \InvalidArgumentException
      * @link https://tools.ietf.org/html/rfc2616#section-2.2 Rules for naming cookies.
      */
-    protected function validateName(string aName): void
+    protected void validateName(string aName)
     {
         if (preg_match("/[=,;\t\r\n\013\014]/", $name)) {
             throw new InvalidArgumentException(
@@ -422,7 +422,7 @@ class Cookie : CookieInterface
      *
      * @param array|string $value The value to store.
      */
-    protected void _setValue($value): void
+    protected void _setValue($value)
     {
         this.isExpanded = is_array($value);
         this.value = $value;

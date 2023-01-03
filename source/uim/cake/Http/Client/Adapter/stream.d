@@ -114,7 +114,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request to build context from.
      * @param array<string, mixed> $options Additional request options.
      */
-    protected void _buildContext(RequestInterface $request, array $options): void
+    protected void _buildContext(RequestInterface $request, array $options)
     {
         _buildContent($request, $options);
         _buildHeaders($request, $options);
@@ -139,7 +139,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildHeaders(RequestInterface $request, array $options): void
+    protected void _buildHeaders(RequestInterface $request, array $options)
     {
         $headers = [];
         foreach ($request.getHeaders() as $name: $values) {
@@ -157,7 +157,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildContent(RequestInterface $request, array $options): void
+    protected void _buildContent(RequestInterface $request, array $options)
     {
         $body = $request.getBody();
         $body.rewind();
@@ -170,7 +170,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildOptions(RequestInterface $request, array $options): void
+    protected void _buildOptions(RequestInterface $request, array $options)
     {
         _contextOptions["method"] = $request.getMethod();
         _contextOptions["protocol_version"] = $request.getProtocolVersion();
@@ -194,7 +194,7 @@ class Stream : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request being sent.
      * @param array<string, mixed> $options Array of options to use.
      */
-    protected void _buildSslContext(RequestInterface $request, array $options): void
+    protected void _buildSslContext(RequestInterface $request, array $options)
     {
         $sslOptions = [
             "ssl_verify_peer",
@@ -292,7 +292,7 @@ class Stream : AdapterInterface
      * @return void
      * @throws \Psr\Http\Client\RequestExceptionInterface
      */
-    protected function _open(string $url, RequestInterface $request): void
+    protected void _open(string $url, RequestInterface $request)
     {
         if (!(bool)ini_get("allow_url_fopen")) {
             throw new ClientException("The PHP directive `allow_url_fopen` must be enabled.");

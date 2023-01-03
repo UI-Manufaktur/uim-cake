@@ -47,7 +47,7 @@ class Mock : AdapterInterface
      * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
      */
-    void addResponse(RequestInterface $request, Response $response, array $options): void
+    void addResponse(RequestInterface $request, Response $response, array $options)
     {
         if (isset($options["match"]) && !($options["match"] instanceof Closure)) {
             $type = getTypeName($options["match"]);

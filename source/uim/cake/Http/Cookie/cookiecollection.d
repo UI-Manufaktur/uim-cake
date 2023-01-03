@@ -178,7 +178,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @return void
      * @throws \InvalidArgumentException
      */
-    protected function checkCookies(array $cookies): void
+    protected void checkCookies(array $cookies)
     {
         foreach ($cookies as $index: $cookie) {
             if (!$cookie instanceof CookieInterface) {
@@ -316,7 +316,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param string $host The host to check for expired cookies on.
      * @param string $path The path to check for expired cookies on.
      */
-    protected void removeExpiredCookies(string $host, string $path): void
+    protected void removeExpiredCookies(string $host, string $path)
     {
         $time = new DateTimeImmutable("now", new DateTimeZone("UTC"));
         $hostPattern = "/" ~ preg_quote($host, "/") ~ "$/";

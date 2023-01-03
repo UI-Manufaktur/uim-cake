@@ -17,8 +17,7 @@ use Psr\Http\messages.IServerRequest;
 abstract class MiddlewareApplication : IHttpApplication
 {
 
-    abstract function bootstrap(): void;
-
+    abstract void bootstrap();
 
     abstract function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue;
 

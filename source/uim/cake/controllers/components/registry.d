@@ -87,7 +87,7 @@ class ComponentRegistry : ObjectRegistry, IEventDispatcher {
      * @return void
      * @throws uim.cake.controllers.exceptions.MissingComponentException
      */
-    protected function _throwMissingClassError(string $class, ?string $plugin): void
+    protected void _throwMissingClassError(string $class, ?string $plugin)
     {
         throw new MissingComponentException([
             "class": $class ~ "Component",
