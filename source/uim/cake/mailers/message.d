@@ -523,8 +523,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @return string Charset
      */
-    string getCharset()
-    {
+    string getCharset() {
         return this.charset;
     }
 
@@ -545,8 +544,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @return string Charset
      */
-    string getHeaderCharset()
-    {
+    string getHeaderCharset() {
         return this.headerCharset ?: this.charset;
     }
 
@@ -739,8 +737,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets subject.
      */
-    string getSubject()
-    {
+    string getSubject() {
         return this.subject;
     }
 
@@ -749,8 +746,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @return string Original subject
      */
-    string getOriginalSubject()
-    {
+    string getOriginalSubject() {
         return this.decodeForHeader(this.subject);
     }
 
@@ -883,8 +879,7 @@ class Message : JsonSerializable, Serializable {
      * @return string
      * @see Message::getHeaders()
      */
-    string getHeadersString(array $include = [], string $eol = "\r\n", ?Closure $callback = null)
-    {
+    string getHeadersString(array $include = [], string $eol = "\r\n", ?Closure $callback = null) {
         $lines = this.getHeaders($include);
 
         if ($callback) {
@@ -952,8 +947,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets email format.
      */
-    string getEmailFormat()
-    {
+    string getEmailFormat() {
         return this.emailFormat;
     }
 
@@ -1022,8 +1016,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets domain.
      */
-    string getDomain()
-    {
+    string getDomain() {
         return this.domain;
     }
 
@@ -1173,8 +1166,7 @@ class Message : JsonSerializable, Serializable {
      * @return string
      * @see Message::getBody()
      */
-    string getBodyString(string $eol = "\r\n")
-    {
+    string getBodyString(string $eol = "\r\n") {
         $lines = this.getBody();
 
         return implode($eol, $lines);
@@ -1485,8 +1477,7 @@ class Message : JsonSerializable, Serializable {
      * @param string $text The text to be converted
      * @param string $charset the target encoding
      */
-    protected string encodeString(string $text, string $charset)
-    {
+    protected string encodeString(string $text, string $charset) {
         if (this.appCharset == $charset) {
             return $text;
         }
@@ -1644,8 +1635,7 @@ class Message : JsonSerializable, Serializable {
      * @param string $text String to encode
      * @return string Encoded string
      */
-    protected string encodeForHeader(string $text)
-    {
+    protected string encodeForHeader(string $text) {
         if (this.appCharset == null) {
             return $text;
         }
@@ -1665,8 +1655,7 @@ class Message : JsonSerializable, Serializable {
      * @param string $text String to decode
      * @return string Decoded string
      */
-    protected string decodeForHeader(string $text)
-    {
+    protected string decodeForHeader(string $text) {
         if (this.appCharset == null) {
             return $text;
         }
@@ -1687,8 +1676,7 @@ class Message : JsonSerializable, Serializable {
      *   or UploadedFileInterface instance.
      * @return string File contents in base64 encoding
      */
-    protected string readFile($file)
-    {
+    protected string readFile($file) {
         if (is_string($file)) {
             $content = (string)file_get_contents($file);
         } else {
@@ -1702,8 +1690,7 @@ class Message : JsonSerializable, Serializable {
      * Return the Content-Transfer Encoding value based
      * on the set transferEncoding or set charset.
      */
-    string getContentTransferEncoding()
-    {
+    string getContentTransferEncoding() {
         if (this.transferEncoding) {
             return this.transferEncoding;
         }
@@ -1722,8 +1709,7 @@ class Message : JsonSerializable, Serializable {
      * Checks fallback/compatibility types which include workarounds
      * for legacy japanese character sets.
      */
-    string getContentTypeCharset()
-    {
+    string getContentTypeCharset() {
         $charset = strtoupper(this.charset);
         if (array_key_exists($charset, this.contentTypeCharset)) {
             return strtoupper(this.contentTypeCharset[$charset]);
@@ -1782,8 +1768,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Serializes the Email object.
      */
-    string serialize()
-    {
+    string serialize() {
         $array = __serialize();
 
         return serialize($array);

@@ -59,8 +59,7 @@ class HasOne : Association {
     /**
      * Get the relationship type.
      */
-    string type()
-    {
+    string type() {
         return self::ONE_TO_ONE;
     }
 

@@ -35,8 +35,7 @@ class LegacySyslogFormatter : AbstractFormatter
     }
 
 
-    string format($level, string $message, array $context = [])
-    {
+    string format($level, string $message, array $context = []) {
         return sprintf(this.getConfig("format"), $level, $message);
     }
 }

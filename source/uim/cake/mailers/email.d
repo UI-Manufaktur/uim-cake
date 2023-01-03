@@ -176,8 +176,7 @@ class Email : JsonSerializable, Serializable
      * @return string
      * @psalm-suppress InvalidNullableReturnType
      */
-    string getViewRenderer()
-    {
+    string getViewRenderer() {
         /** @psalm-suppress NullableReturnStatement */
         return this.getRenderer().viewBuilder().getClassName();
     }
@@ -444,8 +443,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array<string>|string $value The value to convert
      */
-    protected string flatten($value)
-    {
+    protected string flatten($value) {
         return is_array($value) ? implode(";", $value) : $value;
     }
 
@@ -550,8 +548,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Serializes the Email object.
      */
-    string serialize()
-    {
+    string serialize() {
         $array = __serialize();
 
         return serialize($array);

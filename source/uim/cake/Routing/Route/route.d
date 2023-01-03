@@ -272,8 +272,7 @@ class Route
      *
      * @return string Returns a string regular expression of the compiled route.
      */
-    string compile()
-    {
+    string compile() {
         if (_compiledRoute == null) {
             _writeRoute();
         }
@@ -781,8 +780,7 @@ class Route
      * @param array $query An array of parameters
      * @return string Composed route string.
      */
-    protected string _writeUrl(array $params, array $pass = [], array $query = [])
-    {
+    protected string _writeUrl(array $params, array $pass = [], array $query = []) {
         $pass = array_map(function ($value) {
             return rawurlencode((string)$value);
         }, $pass);
@@ -849,8 +847,7 @@ class Route
     /**
      * Get the static path portion for this route.
      */
-    string staticPath()
-    {
+    string staticPath() {
         $matched = preg_match(
             static::PLACEHOLDER_REGEX,
             this.template,

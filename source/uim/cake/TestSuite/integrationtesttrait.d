@@ -289,8 +289,7 @@ trait IntegrationTestTrait
     /**
      * Returns the encryption key to be used.
      */
-    protected string _getCookieEncryptionKey()
-    {
+    protected string _getCookieEncryptionKey() {
         return _cookieEncryptionKey ?? Security::getSalt();
     }
 
@@ -695,8 +694,7 @@ trait IntegrationTestTrait
      *
      * @return string The response body.
      */
-    protected string _getBodyAsString()
-    {
+    protected string _getBodyAsString() {
         if (!_response) {
             this.fail("No response set, cannot assert content.");
         }
@@ -1250,8 +1248,7 @@ trait IntegrationTestTrait
      *
      * @param string $message Original message to use as a base
      */
-    protected string extractVerboseMessage(string $message)
-    {
+    protected string extractVerboseMessage(string $message) {
         if (_exception instanceof Exception) {
             $message .= this.extractExceptionMessage(_exception);
         }
@@ -1271,8 +1268,7 @@ trait IntegrationTestTrait
      *
      * @param \Exception $exception Exception to extract
      */
-    protected string extractExceptionMessage(Exception $exception)
-    {
+    protected string extractExceptionMessage(Exception $exception) {
         $exceptions = [$exception];
         $previous = $exception.getPrevious();
         while ($previous != null) {

@@ -590,8 +590,7 @@ class BelongsToMany : Association
      *
      * @return string the strategy to be used for saving
      */
-    function getSaveStrategy()
-    {
+    function getSaveStrategy() {
         return _saveStrategy;
     }
 
@@ -1354,8 +1353,7 @@ class BelongsToMany : Association
      * this name is used to generate alias in the query and to later on retrieve the
      * results.
      */
-    protected string _junctionAssociationName()
-    {
+    protected string _junctionAssociationName() {
         if (!_junctionAssociationName) {
             _junctionAssociationName = this.getTarget()
                 .getAssociation(this.junction().getAlias())
@@ -1372,8 +1370,7 @@ class BelongsToMany : Association
      *
      * @param string|null $name The name of the junction table.
      */
-    protected string _junctionTableName(?string aName = null)
-    {
+    protected string _junctionTableName(?string aName = null) {
         if ($name == null) {
             if (empty(_junctionTableName)) {
                 $tablesNames = array_map("Cake\Utility\Inflector::underscore", [

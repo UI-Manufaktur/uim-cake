@@ -1066,8 +1066,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     }
 
 
-    string sql(?ValueBinder aBinder = null)
-    {
+    string sql(?ValueBinder aBinder = null) {
         this.triggerBeforeFind();
 
         _transformQuery();

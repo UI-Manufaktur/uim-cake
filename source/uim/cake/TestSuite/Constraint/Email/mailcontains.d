@@ -36,8 +36,7 @@ class MailContains : MailConstraintBase
 
     /**
      */
-    protected string getTypeMethod()
-    {
+    protected string getTypeMethod() {
         return "getBody" ~ (this.type ? ucfirst(this.type) : "String");
     }
 
@@ -45,8 +44,7 @@ class MailContains : MailConstraintBase
      * Returns the type-dependent strings of all messages
      * respects this.at
      */
-    protected string getAssertedMessages()
-    {
+    protected string getAssertedMessages() {
         $messageMembers = [];
         $messages = this.getMessages();
         foreach ($messages as $message) {

@@ -36,8 +36,7 @@ class DefaultFormatter : AbstractFormatter
     }
 
 
-    string format($level, string $message, array $context = [])
-    {
+    string format($level, string $message, array $context = []) {
         if (_config["includeDate"]) {
             $message = sprintf("%s %s: %s", (new DateTime()).format(_config["dateFormat"]), $level, $message);
         } else {

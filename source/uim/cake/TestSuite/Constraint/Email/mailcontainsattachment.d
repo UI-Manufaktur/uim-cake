@@ -46,8 +46,7 @@ class MailContainsAttachment : MailContains
      *
      * @param mixed $other Value
      */
-    protected string failureDescription($other)
-    {
+    protected string failureDescription($other) {
         [$expectedFilename] = $other;
 
         return "\"" ~ $expectedFilename ~ "\" " ~ this.toString();

@@ -17,8 +17,7 @@ class SprintfFormatter : IFormatter
      * @param array $tokenValues The list of values to interpolate in the message
      * @return string The formatted message
      */
-    string format(string $locale, string $message, array $tokenValues)
-    {
+    string format(string $locale, string $message, array $tokenValues) {
         return vsprintf($message, $tokenValues);
     }
 }

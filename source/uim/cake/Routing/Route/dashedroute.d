@@ -22,8 +22,7 @@ class DashedRoute : Route
      *
      * @param string $plugin Plugin name
      */
-    protected string _camelizePlugin(string $plugin)
-    {
+    protected string _camelizePlugin(string $plugin) {
         $plugin = str_replace("-", "_", $plugin);
         if (strpos($plugin, "/") == false) {
             return Inflector::camelize($plugin);

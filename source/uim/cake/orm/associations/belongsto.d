@@ -54,8 +54,7 @@ class BelongsTo : Association {
     /**
      * Returns default property name based on association name.
      */
-    protected string _propertyName()
-    {
+    protected string _propertyName() {
         [, $name] = pluginSplit(_name);
 
         return Inflector::underscore(Inflector::singularize($name));

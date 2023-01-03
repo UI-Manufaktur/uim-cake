@@ -156,8 +156,7 @@ class FileLog : BaseLog
      * @param string $level The level of log.
      * @return string File name
      */
-    protected string _getFilename(string $level)
-    {
+    protected string _getFilename(string $level) {
         $debugTypes = ["notice", "info", "debug"];
 
         if (_file) {

@@ -417,8 +417,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @param string $field Field name to be aliased.
      */
-    string translationField(string $field)
-    {
+    string translationField(string $field) {
         if (this.getLocale() == this.getConfig("defaultLocale")) {
             return this.table.aliasField($field);
         }

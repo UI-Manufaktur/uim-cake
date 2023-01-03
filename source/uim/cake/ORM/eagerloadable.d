@@ -159,8 +159,7 @@ class EagerLoadable
      * Gets a dot separated string representing the path of associations
      * that should be followed to fetch this level.
      */
-    string aliasPath()
-    {
+    string aliasPath() {
         return _aliasPath;
     }
 

@@ -74,8 +74,7 @@ trait TranslateStrategyTrait
      * @see uim.cake.I18n\I18n::getLocale()
      * @see uim.cake.orm.Behavior\TranslateBehavior::setLocale()
      */
-    string getLocale()
-    {
+    string getLocale() {
         return this.locale ?: I18n::getLocale();
     }
 
