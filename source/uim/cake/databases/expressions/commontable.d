@@ -136,7 +136,7 @@ class CommonTableExpression : IExpression
      * Gets whether this CTE is recursive.
      *
      */
-    bool isRecursive(): bool
+    bool isRecursive()
     {
         return this.recursive;
     }

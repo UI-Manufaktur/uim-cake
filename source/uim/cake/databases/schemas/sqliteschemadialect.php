@@ -589,7 +589,7 @@ class SqliteSchemaDialect : SchemaDialect
      * sequences
      *
      */
-    bool hasSequences(): bool
+    bool hasSequences()
     {
         $result = _driver.prepare(
             "SELECT 1 FROM sqlite_master WHERE name = "sqlite_sequence""

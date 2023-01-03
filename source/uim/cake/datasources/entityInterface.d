@@ -65,7 +65,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param string|null $field The field to check the status for. Null for the whole entity.
      * @return bool Whether the field was changed or not
      */
-    function isDirty(?string $field = null): bool;
+    bool isDirty(?string $field = null);
 
     /**
      * Gets the dirty fields.
@@ -79,7 +79,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @param bool $includeNested true will check nested entities for hasErrors()
      */
-    bool hasErrors(bool $includeNested = true): bool;
+    bool hasErrors(bool $includeNested = true);
 
     /**
      * Returns all validation errors.
@@ -127,7 +127,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @param string $field Field name to check
      */
-    bool isAccessible(string $field): bool;
+    bool isAccessible(string $field);
 
     /**
      * Sets the source alias
@@ -196,7 +196,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @param array<string>|string $field The field to check.
      */
-    bool has($field): bool;
+    bool has($field);
 
     /**
      * Removes a field or list of fields from this entity
@@ -250,8 +250,7 @@ interface IEntity : ArrayAccess, JsonSerializable
 
     /**
      * Returns whether this entity has already been persisted.
-     *
      * @return bool Whether the entity has been persisted.
      */
-    function isNew(): bool;
+    bool isNew();
 }

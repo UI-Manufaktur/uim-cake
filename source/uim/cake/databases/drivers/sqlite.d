@@ -334,7 +334,7 @@ class Sqlite : Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_WINDOW)` instead
      */
-    function supportsWindowFunctions(): bool
+    bool supportsWindowFunctions()
     {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 

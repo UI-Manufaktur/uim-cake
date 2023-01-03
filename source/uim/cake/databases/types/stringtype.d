@@ -92,7 +92,7 @@ class StringType : BaseType : OptionalConvertInterface
      *
      * @return bool False as database results are returned already as strings
      */
-    function requiresToPhpCast(): bool
+    bool requiresToPhpCast()
     {
         return false;
     }

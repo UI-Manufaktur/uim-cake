@@ -147,7 +147,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * @param array|null $params list of values to be bound to query
      * @return bool true on success, false otherwise
      */
-    function execute(?array $params = null): bool
+    bool execute(?array $params = null)
     {
         _hasExecuted = true;
 
