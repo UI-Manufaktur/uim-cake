@@ -1,6 +1,6 @@
 module uim.cake.View\Widget;
 
-import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Form\IContext;
 import uim.cake.View\Helper\IdGeneratorTrait;
 import uim.cake.View\StringTemplate;
 
@@ -97,9 +97,9 @@ class MultiCheckboxWidget : BasicWidget
      * If either is not set options will not be generated correctly.
      *
      * @param array<string, mixed> $data The data to generate a checkbox set with.
-     * @param uim.cake.View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      */
-    string render(array $data, ContextInterface $context): string
+    string render(array $data, IContext $context): string
     {
         $data += this.mergeDefaults($data, $context);
 
@@ -113,10 +113,10 @@ class MultiCheckboxWidget : BasicWidget
      * Render the checkbox inputs.
      *
      * @param array<string, mixed> $data The data array defining the checkboxes.
-     * @param uim.cake.View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return array<string> An array of rendered inputs.
      */
-    protected function _renderInputs(array $data, ContextInterface $context): array
+    protected function _renderInputs(array $data, IContext $context): array
     {
         $out = [];
         foreach ($data["options"] as $key: $val) {
@@ -171,9 +171,9 @@ class MultiCheckboxWidget : BasicWidget
      * Render a single checkbox & wrapper.
      *
      * @param array<string, mixed> $checkbox An array containing checkbox key/value option pairs
-     * @param uim.cake.View\Form\ContextInterface $context Context object.
+     * @param uim.cake.View\Form\IContext $context Context object.
      */
-    protected string _renderInput(array $checkbox, ContextInterface $context): string
+    protected string _renderInput(array $checkbox, IContext $context): string
     {
         $input = _templates.format("checkbox", [
             "name": $checkbox["name"] ~ "[]",

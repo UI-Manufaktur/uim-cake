@@ -6,7 +6,7 @@ module uim.cake.View\Form;
  * This context provider simply fulfils the interface requirements
  * that FormHelper has.
  */
-class NullContext : ContextInterface
+class NullContext : IContext
 {
     /**
      * Constructor.

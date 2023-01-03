@@ -32,7 +32,7 @@ use Traversable;
  *   Defaults to "default". Can be an array of table alias=>validators when
  *   dealing with associated forms.
  */
-class EntityContext : ContextInterface
+class EntityContext : IContext
 {
     use LocatorAwareTrait;
 

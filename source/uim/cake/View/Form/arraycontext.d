@@ -52,7 +52,7 @@ import uim.cake.utilities.Hash;
  *  ];
  *  ```
  */
-class ArrayContext : ContextInterface
+class ArrayContext : IContext
 {
     /**
      * Context data for this object.

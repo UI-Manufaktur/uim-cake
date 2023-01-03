@@ -14,7 +14,7 @@ import uim.cake.routings.Router;
 import uim.cake.utilities.Hash;
 import uim.cake.utilities.Inflector;
 import uim.cake.View\Form\ContextFactory;
-import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Form\IContext;
 import uim.cake.View\Helper;
 import uim.cake.View\StringTemplateTrait;
 import uim.cake.View\View;
@@ -189,7 +189,7 @@ class FormHelper : Helper
     /**
      * Context for the current form.
      *
-     * @var uim.cake.View\Form\ContextInterface|null
+     * @var uim.cake.View\Form\IContext|null
      */
     protected $_context;
 
@@ -209,7 +209,7 @@ class FormHelper : Helper
     /**
      * The supported sources that can be used to populate input values.
      *
-     * `context` - Corresponds to `ContextInterface` instances.
+     * `context` - Corresponds to `IContext` instances.
      * `data` - Corresponds to request data (POST/PUT).
      * `query` - Corresponds to request"s query string.
      *
@@ -341,7 +341,7 @@ class FormHelper : Helper
      * - `templateVars` Provide template variables for the formStart template.
      *
      * @param mixed $context The context for which the form is being defined.
-     *   Can be a ContextInterface instance, ORM entity, ORM resultset, or an
+     *   Can be a IContext instance, ORM entity, ORM resultset, or an
      *   array of meta data. You can use `null` to make a context-less form.
      * @param array<string, mixed> $options An array of html attributes and options.
      * @return string An formatted opening FORM tag.
@@ -351,7 +351,7 @@ class FormHelper : Helper
     {
         $append = "";
 
-        if ($context instanceof ContextInterface) {
+        if ($context instanceof IContext) {
             this.context($context);
         } else {
             if (empty($options["context"])) {
@@ -465,11 +465,11 @@ class FormHelper : Helper
     /**
      * Create the URL for a form based on the options.
      *
-     * @param uim.cake.View\Form\ContextInterface $context The context object to use.
+     * @param uim.cake.View\Form\IContext $context The context object to use.
      * @param array<string, mixed> $options An array of options from create()
      * @return array|string The action attribute for the form.
      */
-    protected function _formUrl(ContextInterface $context, array $options) {
+    protected function _formUrl(IContext $context, array $options) {
         $request = _View.getRequest();
 
         if ($options["url"] == null) {
@@ -2380,12 +2380,12 @@ class FormHelper : Helper
      *
      * If there is no active form null will be returned.
      *
-     * @param uim.cake.View\Form\ContextInterface|null $context Either the new context when setting, or null to get.
-     * @return uim.cake.View\Form\ContextInterface The context for the form.
+     * @param uim.cake.View\Form\IContext|null $context Either the new context when setting, or null to get.
+     * @return uim.cake.View\Form\IContext The context for the form.
      */
-    function context(?ContextInterface $context = null): ContextInterface
+    function context(?IContext $context = null): IContext
     {
-        if ($context instanceof ContextInterface) {
+        if ($context instanceof IContext) {
             _context = $context;
         }
 
@@ -2398,11 +2398,11 @@ class FormHelper : Helper
      * If no type can be matched a NullContext will be returned.
      *
      * @param mixed $data The data to get a context provider for.
-     * @return uim.cake.View\Form\ContextInterface Context provider.
+     * @return uim.cake.View\Form\IContext Context provider.
      * @throws \RuntimeException when the context class does not implement the
-     *   ContextInterface.
+     *   IContext.
      */
-    protected function _getContext($data = []): ContextInterface
+    protected function _getContext($data = []): IContext
     {
         if (isset(_context) && empty($data)) {
             return _context;

@@ -1,6 +1,6 @@
 module uim.cake.View\Widget;
 
-import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Form\IContext;
 import uim.cake.View\StringTemplate;
 use DateTimeInterface;
 use InvalidArgumentException;
@@ -49,10 +49,10 @@ class YearWidget : BasicWidget
      * Renders a year select box.
      *
      * @param array<string, mixed> $data Data to render with.
-     * @param uim.cake.View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string A generated select box.
      */
-    function render(array $data, ContextInterface $context): string
+    function render(array $data, IContext $context): string
     {
         $data += this.mergeDefaults($data, $context);
 

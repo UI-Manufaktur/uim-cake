@@ -1,6 +1,6 @@
 module uim.cake.View\Widget;
 
-import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Form\IContext;
 import uim.cake.View\Helper\IdGeneratorTrait;
 import uim.cake.View\StringTemplate;
 use Traversable;
@@ -75,9 +75,9 @@ class RadioWidget : BasicWidget
      * - `idPrefix` Prefix for generated ID attributes.
      *
      * @param array<string, mixed> $data The data to build radio buttons with.
-     * @param uim.cake.View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      */
-    string render(array $data, ContextInterface $context): string
+    string render(array $data, IContext $context): string
     {
         $data += this.mergeDefaults($data, $context);
 
@@ -128,7 +128,7 @@ class RadioWidget : BasicWidget
      * @param string|int $val The value of the radio input.
      * @param array<string, mixed>|string $text The label text, or complex radio type.
      * @param array<string, mixed> $data Additional options for input generation.
-     * @param uim.cake.View\Form\ContextInterface $context The form context
+     * @param uim.cake.View\Form\IContext $context The form context
      */
     protected string _renderInput($val, $text, $data, $context): string
     {
@@ -217,7 +217,7 @@ class RadioWidget : BasicWidget
      * @param array<string, mixed> $radio The input properties.
      * @param array<string, mixed>|string|false $label The properties for a label.
      * @param string $input The input widget.
-     * @param uim.cake.View\Form\ContextInterface $context The form context.
+     * @param uim.cake.View\Form\IContext $context The form context.
      * @param bool $escape Whether to HTML escape the label.
      * @return string|false Generated label.
      */

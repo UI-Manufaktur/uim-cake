@@ -3,7 +3,7 @@ module uim.cake.View\Form;
 /**
  * Interface for FormHelper context implementations.
  */
-interface ContextInterface
+interface IContext
 {
     /**
      * @var array<string>

@@ -1,6 +1,6 @@
 module uim.cake.View\Widget;
 
-import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Form\IContext;
 
 /**
  * Input widget for creating checkbox widgets.
@@ -37,10 +37,10 @@ class CheckboxWidget : BasicWidget
      * Any other attributes passed in will be treated as HTML attributes.
      *
      * @param array<string, mixed> $data The data to create a checkbox with.
-     * @param uim.cake.View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string Generated HTML string.
      */
-    function render(array $data, ContextInterface $context): string
+    string render(array $data, IContext $context)
     {
         $data += this.mergeDefaults($data, $context);
 

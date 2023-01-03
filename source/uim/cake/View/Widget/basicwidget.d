@@ -1,6 +1,6 @@
 module uim.cake.View\Widget;
 
-import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Form\IContext;
 import uim.cake.View\StringTemplate;
 
 /**
@@ -53,9 +53,9 @@ class BasicWidget : WidgetInterface
      * Any other keys provided in $data will be converted into HTML attributes.
      *
      * @param array<string, mixed> $data The data to build an input with.
-     * @param uim.cake.View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      */
-    string render(array $data, ContextInterface $context): string
+    string render(array $data, IContext $context)
     {
         $data = this.mergeDefaults($data, $context);
 
@@ -96,10 +96,10 @@ class BasicWidget : WidgetInterface
      * Merge default values with supplied data.
      *
      * @param array<string, mixed> $data Data array
-     * @param uim.cake.View\Form\ContextInterface $context Context instance.
+     * @param uim.cake.View\Form\IContext $context Context instance.
      * @return array<string, mixed> Updated data array.
      */
-    protected function mergeDefaults(array $data, ContextInterface $context): array
+    protected function mergeDefaults(array $data, IContext $context): array
     {
         $data += this.defaults;
 
@@ -114,11 +114,11 @@ class BasicWidget : WidgetInterface
      * Set value for "required" attribute if applicable.
      *
      * @param array<string, mixed> $data Data array
-     * @param uim.cake.View\Form\ContextInterface $context Context instance.
+     * @param uim.cake.View\Form\IContext $context Context instance.
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected function setRequired(array $data, ContextInterface $context, string $fieldName): array
+    protected function setRequired(array $data, IContext $context, string $fieldName): array
     {
         if (
             empty($data["disabled"])
@@ -140,11 +140,11 @@ class BasicWidget : WidgetInterface
      * Set value for "maxlength" attribute if applicable.
      *
      * @param array<string, mixed> $data Data array
-     * @param uim.cake.View\Form\ContextInterface $context Context instance.
+     * @param uim.cake.View\Form\IContext $context Context instance.
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected function setMaxLength(array $data, ContextInterface $context, string $fieldName): array
+    protected function setMaxLength(array $data, IContext $context, string $fieldName): array
     {
         $maxLength = $context.getMaxLength($fieldName);
         if ($maxLength != null) {
@@ -158,11 +158,11 @@ class BasicWidget : WidgetInterface
      * Set value for "step" attribute if applicable.
      *
      * @param array<string, mixed> $data Data array
-     * @param uim.cake.View\Form\ContextInterface $context Context instance.
+     * @param uim.cake.View\Form\IContext $context Context instance.
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected function setStep(array $data, ContextInterface $context, string $fieldName): array
+    protected function setStep(array $data, IContext $context, string $fieldName): array
     {
         $dbType = $context.type($fieldName);
         $fieldDef = $context.attributes($fieldName);

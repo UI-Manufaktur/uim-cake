@@ -1,6 +1,6 @@
 module uim.cake.View\Widget;
 
-import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Form\IContext;
 import uim.cake.View\StringTemplate;
 
 /**
@@ -49,9 +49,9 @@ class LabelWidget : WidgetInterface
      * All other attributes will be converted into HTML attributes.
      *
      * @param array<string, mixed> $data Data array.
-     * @param uim.cake.View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      */
-    string render(array $data, ContextInterface $context): string
+    string render(array $data, IContext $context)
     {
         $data += [
             "text": "",

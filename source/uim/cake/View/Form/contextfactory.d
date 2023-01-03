@@ -116,10 +116,10 @@ class ContextFactory
      *
      * @param uim.cake.http.ServerRequest $request Request instance.
      * @param array<string, mixed> $data The data to get a context provider for.
-     * @return uim.cake.View\Form\ContextInterface Context provider.
+     * @return uim.cake.View\Form\IContext Context provider.
      * @throws \RuntimeException When a context instance cannot be generated for given entity.
      */
-    function get(ServerRequest $request, array $data = []): ContextInterface
+    function get(ServerRequest $request, array $data = []): IContext
     {
         $data += ["entity": null];
 

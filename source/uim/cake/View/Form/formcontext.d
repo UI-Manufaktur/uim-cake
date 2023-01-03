@@ -10,7 +10,7 @@ import uim.cake.utilities.Hash;
  * This context provider simply fulfils the interface requirements
  * that FormHelper has and allows access to the form data.
  */
-class FormContext : ContextInterface
+class FormContext : IContext
 {
     /**
      * The form object.

@@ -1,6 +1,6 @@
 module uim.cake.View\Widget;
 
-import uim.cake.View\Form\ContextInterface;
+import uim.cake.View\Form\IContext;
 use Traversable;
 
 /**
@@ -97,11 +97,11 @@ class SelectBoxWidget : BasicWidget
      * nest complex types as required.
      *
      * @param array<string, mixed> $data Data to render with.
-     * @param uim.cake.View\Form\ContextInterface $context The current form context.
+     * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string A generated select box.
      * @throws \RuntimeException when the name attribute is empty.
      */
-    function render(array $data, ContextInterface $context): string
+    function render(array $data, IContext $context): string
     {
         $data += this.mergeDefaults($data, $context);
 
