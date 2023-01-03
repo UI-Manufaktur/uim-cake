@@ -19,7 +19,7 @@ abstract class StatusCodeBase : ResponseBase
      * @return bool
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    function matches($other): bool
+    bool matches($other)
     {
         if (!$other) {
             $other = this.code;
@@ -38,7 +38,7 @@ abstract class StatusCodeBase : ResponseBase
      * @param int $min Min status code (inclusive)
      * @param int $max Max status code (inclusive)
      */
-    protected bool statusCodeBetween(int $min, int $max): bool
+    protected bool statusCodeBetween(int $min, int $max)
     {
         return this.response.getStatusCode() >= $min && this.response.getStatusCode() <= $max;
     }

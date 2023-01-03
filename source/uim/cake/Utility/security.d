@@ -51,7 +51,7 @@ class Security
      * @throws \RuntimeException
      * @link https://book.cakephp.org/4/en/core-libraries/security.html#hashing-data
      */
-    static function hash(string $string, ?string $algorithm = null, $salt = false): string
+    static bool hash(string $string, ?string $algorithm = null, $salt = false): string
     {
         if (empty($algorithm)) {
             $algorithm = static::$hashType;
@@ -262,7 +262,7 @@ class Security
      * @return bool
      * @since 3.6.2
      */
-    static function constantEquals($original, $compare): bool
+    static bool constantEquals($original, $compare)
     {
         return is_string($original) && is_string($compare) && hash_equals($original, $compare);
     }

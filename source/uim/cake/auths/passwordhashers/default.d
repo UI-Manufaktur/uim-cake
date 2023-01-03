@@ -33,7 +33,7 @@ class DefaultPasswordHasher : AbstractPasswordHasher
      * @psalm-suppress InvalidNullableReturnType
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#hashing-passwords
      */
-    function hash(string $password) {
+    bool hash(string $password) {
         /** @psalm-suppress NullableReturnStatement */
         return password_hash(
             $password,

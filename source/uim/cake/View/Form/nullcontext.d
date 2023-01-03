@@ -89,7 +89,7 @@ class NullContext : ContextInterface
     }
 
 
-    function hasError(string $field): bool
+    bool hasError(string $field): bool
     {
         return false;
     }

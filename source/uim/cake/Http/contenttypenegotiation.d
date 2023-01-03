@@ -154,7 +154,7 @@ class ContentTypeNegotiation
      * @param string $lang The language code to check.
      * @return bool Whether the request accepts $lang
      */
-    function acceptLanguage(RequestInterface $request, string $lang): bool
+    bool acceptLanguage(RequestInterface $request, string $lang)
     {
         $accept = this.acceptedLanguages($request);
 

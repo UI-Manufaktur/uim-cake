@@ -49,7 +49,7 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
      * @param string $password Plain text password to hash.
      * @return string|false Password hash or false
      */
-    function hash(string $password) {
+    bool hash(string $password) {
         return _hashers[0].hash($password);
     }
 

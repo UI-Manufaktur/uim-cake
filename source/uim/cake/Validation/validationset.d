@@ -157,7 +157,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $index name of the rule
      */
-    bool offsetExists($index): bool
+    bool offsetExists($index)
     {
         return isset(_rules[$index]);
     }

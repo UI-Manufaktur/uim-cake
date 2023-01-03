@@ -2319,7 +2319,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::numElements()
      * @return this
      */
-    function hasAtLeast(string $field, int $count, ?string $message = null, $when = null) {
+    bool hasAtLeast(string $field, int $count, ?string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "hasAtLeast", $extra + [
@@ -2345,7 +2345,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::numElements()
      * @return this
      */
-    function hasAtMost(string $field, int $count, ?string $message = null, $when = null) {
+    bool hasAtMost(string $field, int $count, ?string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "hasAtMost", $extra + [

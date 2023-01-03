@@ -597,7 +597,7 @@ class PaginatorHelper : Helper
      * @return bool True if the result set is not at the first page.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
-    function hasPrev(?string $model = null): bool
+    bool hasPrev(?string $model = null): bool
     {
         return _hasPage($model, "prev");
     }
@@ -609,7 +609,7 @@ class PaginatorHelper : Helper
      * @return bool True if the result set is not at the last page.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
-    function hasNext(?string $model = null): bool
+    bool hasNext(?string $model = null): bool
     {
         return _hasPage($model, "next");
     }
@@ -623,7 +623,7 @@ class PaginatorHelper : Helper
      * @throws \InvalidArgumentException
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
-    function hasPage(int $page = 1, ?string $model = null): bool
+    bool hasPage(int $page = 1, ?string $model = null): bool
     {
         $paging = this.params($model);
         if ($paging == []) {

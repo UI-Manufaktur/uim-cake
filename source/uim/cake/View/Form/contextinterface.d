@@ -104,7 +104,7 @@ interface ContextInterface
      * @param string $field A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    function hasError(string $field): bool;
+    bool hasError(string $field): bool;
 
     /**
      * Get the errors for a given field

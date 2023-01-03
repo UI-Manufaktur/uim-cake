@@ -169,7 +169,7 @@ class EntityContext : ContextInterface
     }
 
 
-    bool isPrimaryKey(string $field): bool
+    bool isPrimaryKey(string $field)
     {
         $parts = explode(".", $field);
         $table = _getTable($parts);
@@ -697,7 +697,7 @@ class EntityContext : ContextInterface
      * @param string $field A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    function hasError(string $field): bool
+    bool hasError(string $field)
     {
         return this.error($field) != [];
     }

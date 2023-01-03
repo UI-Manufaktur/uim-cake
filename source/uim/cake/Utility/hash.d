@@ -207,7 +207,7 @@ class Hash
      * @param string $token The token being matched.
      * @return bool
      */
-    protected static function _matchToken($key, string $token): bool
+    protected static bool _matchToken($key, string $token)
     {
         switch ($token) {
             case "{n}":
@@ -228,7 +228,7 @@ class Hash
      * @param string $selector The patterns to match.
      * @return bool Fitness of expression.
      */
-    protected static function _matches($data, string $selector): bool
+    protected static bool _matches($data, string $selector)
     {
         preg_match_all(
             "/(\[ (?P<attr>[^=><!]+?) (\s* (?P<op>[><!]?[=]|[><]) \s* (?P<val>(?:\/.*?\/ | [^\]]+)) )? \])/x",
@@ -575,7 +575,7 @@ class Hash
      * @return bool true If $data contains $needle, false otherwise
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::contains
      */
-    static function contains(array $data, array $needle): bool
+    static bool contains(array $data, array $needle)
     {
         if (empty($data) || empty($needle)) {
             return false;
@@ -619,7 +619,7 @@ class Hash
      * @see uim.cake.Utility\Hash::extract()
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::check
      */
-    static function check(array $data, string $path): bool
+    static bool check(array $data, string $path)
     {
         $results = static::extract($data, $path);
         if (!is_array($results)) {
@@ -655,7 +655,7 @@ class Hash
      * @param mixed $var Array to filter.
      * @return bool
      */
-    protected static function _filter($var): bool
+    protected static bool _filter($var)
     {
         return $var == 0 || $var == 0.0 || $var == "0" || !empty($var);
     }
@@ -812,7 +812,7 @@ class Hash
      * @return bool true if values are numeric, false otherwise
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::numeric
      */
-    static function numeric(array $data): bool
+    static bool numeric(array $data)
     {
         if (empty($data)) {
             return false;

@@ -186,7 +186,7 @@ class FormContext : ContextInterface
     }
 
 
-    function hasError(string $field): bool
+    bool hasError(string $field): bool
     {
         $errors = this.error($field);
 

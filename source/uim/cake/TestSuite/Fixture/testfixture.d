@@ -378,7 +378,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      *
      * @return array
      */
-    protected function _getRecords(): array
+    protected array _getRecords() 
     {
         $fields = $values = $types = [];
         $columns = _schema.columns();

@@ -991,7 +991,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param array<string, mixed> myOptions list of options to configure the association definition
      * @return uim.cake.orm.associations.HasOne
      */
-    function hasOne(string associated, array myOptions = []): HasOne
+    bool hasOne(string associated, array myOptions = []): HasOne
     {
         myOptions += ["sourceTable": this];
 
@@ -1043,7 +1043,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param array<string, mixed> myOptions list of options to configure the association definition
      * @return uim.cake.orm.associations.HasMany
      */
-    function hasMany(string associated, array myOptions = []): HasMany
+    bool hasMany(string associated, array myOptions = []): HasMany
     {
         myOptions += ["sourceTable": this];
 

@@ -31,5 +31,5 @@ interface ValidatorAwareInterface
      *
      * @param string aName The name of a validator.
      */
-    bool hasValidator(string aName): bool;
+    bool hasValidator(string aName);
 }
