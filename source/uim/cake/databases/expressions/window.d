@@ -174,7 +174,7 @@ class WindowExpression : IExpression, IWindow
     }
 
 
-    function sql(ValueBinder aBinder): string
+    string sql(ValueBinder aBinder)
     {
         $clauses = [];
         if (this.name.getIdentifier()) {
@@ -254,7 +254,7 @@ class WindowExpression : IExpression, IWindow
      * @param uim.cake.databases.IExpression|string|int|null $offset Frame offset
      * @param string $direction Frame offset direction
      */
-    protected string buildOffsetSql(ValueBinder aBinder, $offset, string $direction): string
+    protected string buildOffsetSql(ValueBinder aBinder, $offset, string $direction)
     {
         if ($offset == 0) {
             return "CURRENT ROW";

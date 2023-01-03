@@ -2319,7 +2319,7 @@ class Query : IExpression, IteratorAggregate
     /**
      * Returns string representation of this query (complete SQL statement).
      */
-    string __toString() {
+    string toString() {
         return this.sql();
     }
 

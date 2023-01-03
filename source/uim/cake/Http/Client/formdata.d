@@ -225,7 +225,7 @@ class FormData : Countable
      * Converts the FormData and its parts into a string suitable
      * for use in an HTTP request.
      */
-    string __toString() {
+    string toString() {
         if (this.isMultipart()) {
             $boundary = this.boundary();
             $out = "";

@@ -85,7 +85,7 @@ class EncryptedCookieMiddleware : IMiddleware
      *
      * Part of the CookieCryptTrait implementation.
      */
-    protected string _getCookieEncryptionKey(): string
+    protected string _getCookieEncryptionKey()
     {
         return this.key;
     }

@@ -99,7 +99,7 @@ class Oauth
      * @param array $credentials Authentication credentials.
      * @return string Authorization header.
      */
-    protected function _plaintext(Request $request, array $credentials): string
+    protected string _plaintext(Request $request, array $credentials)
     {
         $values = [
             "oauth_version": "1.0",
@@ -127,7 +127,7 @@ class Oauth
      * @param uim.cake.http.Client\Request $request The request object.
      * @param array $credentials Authentication credentials.
      */
-    protected string _hmacSha1(Request $request, array $credentials): string
+    protected string _hmacSha1(Request $request, array $credentials)
     {
         $nonce = $credentials["nonce"] ?? uniqid();
         $timestamp = $credentials["timestamp"] ?? time();
@@ -169,7 +169,7 @@ class Oauth
      * @return string
      * @throws \RuntimeException
      */
-    protected function _rsaSha1(Request $request, array $credentials): string
+    protected string _rsaSha1(Request $request, array $credentials)
     {
         if (!function_exists("openssl_pkey_get_private")) {
             throw new RuntimeException("RSA-SHA1 signature method requires the OpenSSL extension.");
@@ -243,7 +243,7 @@ class Oauth
      * @param uim.cake.http.Client\Request $request The request object.
      * @param array $oauthValues Oauth values.
      */
-    string baseString(Request $request, array $oauthValues): string
+    string baseString(Request $request, array $oauthValues)
     {
         $parts = [
             $request.getMethod(),
@@ -263,7 +263,7 @@ class Oauth
      * @param \Psr\Http\messages.UriInterface $uri Uri object to build a normalized version of.
      * @return string Normalized URL
      */
-    protected function _normalizedUrl(UriInterface $uri): string
+    protected string _normalizedUrl(UriInterface $uri)
     {
         $out = $uri.getScheme() ~ "://";
         $out .= strtolower($uri.getHost());
@@ -284,7 +284,7 @@ class Oauth
      * @param array $oauthValues Oauth values.
      * @return string sorted and normalized values
      */
-    protected function _normalizedParams(Request $request, array $oauthValues): string
+    protected string _normalizedParams(Request $request, array $oauthValues)
     {
         $query = parse_url((string)$request.getUri(), PHP_URL_QUERY);
         parse_str((string)$query, $queryArgs);
@@ -343,7 +343,7 @@ class Oauth
      *
      * @param array $data The oauth_* values to build
      */
-    protected string _buildAuth(array $data): string
+    protected string _buildAuth(array $data)
     {
         $out = "OAuth ";
         $params = [];
@@ -360,7 +360,7 @@ class Oauth
      *
      * @param string $value Value to encode.
      */
-    protected string _encode(string $value): string
+    protected string _encode(string $value)
     {
         return str_replace(["%7E", "+"], ["~", " "], rawurlencode($value));
     }

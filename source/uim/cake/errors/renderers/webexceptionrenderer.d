@@ -316,7 +316,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      *
      * @param \Throwable $exception Exception instance.
      */
-    protected string _method(Throwable $exception): string
+    protected string _method(Throwable $exception)
     {
         [, $baseClass] = namespaceSplit(get_class($exception));
 
@@ -337,7 +337,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * @param int $code Error code.
      * @return string Error message
      */
-    protected function _message(Throwable $exception, int $code): string
+    protected string _message(Throwable $exception, int $code)
     {
         $message = $exception.getMessage();
 
@@ -363,7 +363,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * @param int $code Error code.
      * @return string Template name
      */
-    protected function _template(Throwable $exception, string $method, int $code): string
+    protected string _template(Throwable $exception, string $method, int $code)
     {
         if ($exception instanceof HttpException || !Configure::read("debug")) {
             return this.template = $code < 500 ? "error400" : "error500";

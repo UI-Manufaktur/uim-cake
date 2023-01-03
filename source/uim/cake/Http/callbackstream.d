@@ -25,7 +25,7 @@ use Laminas\Diactoros\CallbackStream as BaseCallbackStream;
 class CallbackStream : BaseCallbackStream
 {
 
-    function getContents(): string
+    string getContents()
     {
         $callback = this.detach();
         $result = "";

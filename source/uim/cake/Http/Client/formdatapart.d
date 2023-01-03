@@ -98,7 +98,7 @@ class FormDataPart
      *
      * @param string|null $disposition Use null to get/string to set.
      */
-    string disposition(?string $disposition = null): string
+    string disposition(?string $disposition = null)
     {
         if ($disposition == null) {
             return _disposition;
@@ -175,7 +175,7 @@ class FormDataPart
     /**
      * Get the part name.
      */
-    string name(): string
+    string name()
     {
         return _name;
     }
@@ -183,7 +183,7 @@ class FormDataPart
     /**
      * Get the value.
      */
-    string value(): string
+    string value()
     {
         return _value;
     }
@@ -193,7 +193,7 @@ class FormDataPart
      *
      * Creates a string suitable for use in HTTP requests.
      */
-    string __toString(): string
+    string toString()
     {
         $out = "";
         if (_disposition) {
@@ -230,7 +230,7 @@ class FormDataPart
      * @param string aName The name of the header parameter
      * @param string $value The value of the header parameter
      */
-    protected string _headerParameterToString(string aName, string $value): string
+    protected string _headerParameterToString(string aName, string $value)
     {
         $transliterated = Text::transliterate(str_replace(""", "", $value));
         $return = sprintf("%s="%s"", $name, $transliterated);
