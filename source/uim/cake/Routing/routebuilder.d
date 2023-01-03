@@ -133,8 +133,7 @@ class RouteBuilder
     /**
      * Get default route class.
      */
-    string getRouteClass()
-    {
+    string getRouteClass() {
         return _routeClass;
     }
 
@@ -179,8 +178,7 @@ class RouteBuilder
     /**
      * Get the path this scope is for.
      */
-    string path()
-    {
+    string path() {
         $routeKey = strpos(_path, "{");
         if ($routeKey != false && strpos(_path, "}") != false) {
             return substr(_path, 0, $routeKey);

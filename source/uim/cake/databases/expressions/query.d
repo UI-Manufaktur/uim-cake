@@ -610,8 +610,7 @@ class QueryExpression : IExpression, Countable
      * @deprecated 4.2.0 This method is unused.
      * @codeCoverageIgnore
      */
-    bool isCallable($callable)
-    {
+    bool isCallable($callable) {
         if (is_string($callable)) {
             return false;
         }

@@ -49,8 +49,7 @@ class ResponseEmitter : EmitterInterface
      *
      * @param \Psr\Http\messages.IResponse $response The response to emit.
      */
-    bool emit(IResponse $response)
-    {
+    bool emit(IResponse $response) {
         $file = "";
         $line = 0;
         if (headers_sent($file, $line)) {
@@ -206,8 +205,7 @@ class ResponseEmitter : EmitterInterface
      *
      * @param uim.cake.http.Cookie\CookieInterface|string $cookie Cookie.
      */
-    protected bool setCookie($cookie)
-    {
+    protected bool setCookie($cookie) {
         if (is_string($cookie)) {
             $cookie = Cookie::createFromHeaderString($cookie, ["path": ""]);
         }

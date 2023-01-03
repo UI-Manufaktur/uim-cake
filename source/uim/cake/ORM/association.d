@@ -232,8 +232,7 @@ abstract class Association
      * Gets the name for this association, usually the alias
      * assigned to the target associated table
      */
-    string getName()
-    {
+    string getName() {
         return _name;
     }
 
@@ -284,8 +283,7 @@ abstract class Association
     /**
      * Gets the class name of the target table object.
      */
-    string getClassName()
-    {
+    string getClassName() {
         return _className;
     }
 
@@ -498,8 +496,7 @@ abstract class Association
     /**
      * Gets the type of join to be used when adding the association to a query.
      */
-    string getJoinType()
-    {
+    string getJoinType() {
         return _joinType;
     }
 
@@ -520,8 +517,7 @@ abstract class Association
      * Gets the property name that should be filled with data from the target table
      * in the source table record.
      */
-    string getProperty()
-    {
+    string getProperty() {
         if (!_propertyName) {
             _propertyName = _propertyName();
             if (in_array(_propertyName, _sourceTable.getSchema().columns(), true)) {
@@ -540,8 +536,7 @@ abstract class Association
     /**
      * Returns default property name based on association name.
      */
-    protected string _propertyName()
-    {
+    protected string _propertyName() {
         [, $name] = pluginSplit(_name);
 
         return Inflector::underscore($name);
@@ -574,8 +569,7 @@ abstract class Association
      * that some association types might not implement but a default strategy,
      * rendering any changes to this setting void.
      */
-    string getStrategy()
-    {
+    string getStrategy() {
         return _strategy;
     }
 

@@ -77,8 +77,7 @@ class Event : IEvent
     /**
      * Returns the name of this event. This is usually used as the event identifier
      */
-    string getName()
-    {
+    string getName() {
         return _name;
     }
 

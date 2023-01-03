@@ -194,8 +194,7 @@ class EagerLoader
      *
      * @return bool The current value.
      */
-    bool isAutoFieldsEnabled()
-    {
+    bool isAutoFieldsEnabled() {
         return _autoFields;
     }
 

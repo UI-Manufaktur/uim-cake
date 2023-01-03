@@ -2137,8 +2137,7 @@ class Query : IExpression, IteratorAggregate
      * When disabled it will consume less memory as fetched results are not
      * remembered for future iterations.
      */
-    bool isBufferedResultsEnabled()
-    {
+    bool isBufferedResultsEnabled() {
         return _useBufferedResults;
     }
 
@@ -2210,8 +2209,7 @@ class Query : IExpression, IteratorAggregate
      * driver (which in most environments means they are being returned as
      * strings), which can improve performance with larger datasets.
      */
-    bool isResultsCastingEnabled()
-    {
+    bool isResultsCastingEnabled() {
         return this.typeCastEnabled;
     }
 

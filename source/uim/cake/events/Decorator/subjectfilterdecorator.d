@@ -43,8 +43,7 @@ class SubjectFilterDecorator : AbstractDecorator
      *
      * @param uim.cake.events.IEvent $event Event object.
      */
-    bool canTrigger(IEvent $event)
-    {
+    bool canTrigger(IEvent $event) {
         if (!isset(_options["allowedSubject"])) {
             throw new RuntimeException(self::class ~ " Missing subject filter options!");
         }

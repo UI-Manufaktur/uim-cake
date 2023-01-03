@@ -29,8 +29,7 @@ class OrderClauseExpression : IExpression, FieldInterface
     }
 
 
-    string sql(ValueBinder aBinder)
-    {
+    string sql(ValueBinder aBinder) {
         /** @var uim.cake.databases.IExpression|string $field */
         $field = _field;
         if ($field instanceof Query) {

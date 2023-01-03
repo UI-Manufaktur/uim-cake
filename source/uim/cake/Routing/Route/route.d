@@ -260,8 +260,7 @@ class Route
     /**
      * Check if a Route has been compiled into a regular expression.
      */
-    bool compiled()
-    {
+    bool compiled() {
         return _compiledRoute != null;
     }
 
@@ -368,8 +367,7 @@ class Route
     /**
      * Get the standardized plugin.controller:action name for a route.
      */
-    string getName()
-    {
+    string getName() {
         if (!empty(_name)) {
             return _name;
         }
@@ -528,8 +526,7 @@ class Route
      * @param string $host The request"s host name
      * @return bool Whether the host matches any conditions set in for this route.
      */
-    bool hostMatches(string $host)
-    {
+    bool hostMatches(string $host) {
         $pattern = "@^" ~ str_replace("\*", ".*", preg_quote(this.options["_host"], "@")) ~ "$@";
 
         return preg_match($pattern, $host) != 0;
@@ -755,8 +752,7 @@ class Route
      *
      * @param array $url The array for the URL being generated.
      */
-    protected bool _matchMethod(array $url)
-    {
+    protected bool _matchMethod(array $url) {
         if (empty(this.defaults["_method"])) {
             return true;
         }

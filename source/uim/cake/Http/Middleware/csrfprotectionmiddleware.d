@@ -236,8 +236,7 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Create a new token to be used for CSRF protection
      */
-    string createToken()
-    {
+    string createToken() {
         $value = Security::randomBytes(static::TOKEN_VALUE_LENGTH);
 
         return base64_encode($value . hash_hmac("sha1", $value, Security::getSalt()));
