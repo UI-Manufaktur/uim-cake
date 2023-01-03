@@ -101,8 +101,7 @@ class SelectBoxWidget : BasicWidget
      * @return string A generated select box.
      * @throws \RuntimeException when the name attribute is empty.
      */
-    string render(array $data, IContext $context)
-    {
+    string render(array $data, IContext $context) {
         $data += this.mergeDefaults($data, $context);
 
         $options = _renderContent($data);

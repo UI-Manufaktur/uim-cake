@@ -44,8 +44,7 @@ class ButtonWidget : WidgetInterface
      * @param array<string, mixed> $data The data to build a button with.
      * @param uim.cake.View\Form\IContext $context The current form context.
      */
-    string render(array $data, IContext $context)
-    {
+    string render(array $data, IContext $context) {
         $data += [
             "text": "",
             "type": "submit",

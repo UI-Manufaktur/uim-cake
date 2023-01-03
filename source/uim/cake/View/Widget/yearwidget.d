@@ -52,8 +52,7 @@ class YearWidget : BasicWidget
      * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string A generated select box.
      */
-    string render(array $data, IContext $context)
-    {
+    string render(array $data, IContext $context) {
         $data += this.mergeDefaults($data, $context);
 
         if (empty($data["min"])) {

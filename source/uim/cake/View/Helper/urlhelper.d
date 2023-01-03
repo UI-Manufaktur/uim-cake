@@ -61,8 +61,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> $options Array of options.
      * @return string Full translated URL with base path.
      */
-    string build($url = null, array $options = [])
-    {
+    string build($url = null, array $options = []) {
         $defaults = [
             "fullBase": false,
             "escape": true,
@@ -94,8 +93,7 @@ class UrlHelper : Helper
      * @return string Full translated URL with base path.
      * @see uim.cake.routings.Router::pathUrl()
      */
-    string buildFromPath(string $path, array $params = [], array $options = [])
-    {
+    string buildFromPath(string $path, array $params = [], array $options = []) {
         return this.build(["_path": $path] + $params, $options);
     }
 
@@ -116,8 +114,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    string image(string $path, array $options = [])
-    {
+    string image(string $path, array $options = []) {
         $options += ["theme": _View.getTheme()];
 
         return h(_assetUrlClassName::imageUrl($path, $options));
@@ -141,8 +138,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    string css(string $path, array $options = [])
-    {
+    string css(string $path, array $options = []) {
         $options += ["theme": _View.getTheme()];
 
         return h(_assetUrlClassName::cssUrl($path, $options));
@@ -166,8 +162,7 @@ class UrlHelper : Helper
      *        enable timestamping regardless of debug value.
      * @return string Generated URL
      */
-    string script(string $path, array $options = [])
-    {
+    string script(string $path, array $options = []) {
         $options += ["theme": _View.getTheme()];
 
         return h(_assetUrlClassName::scriptUrl($path, $options));
@@ -195,8 +190,7 @@ class UrlHelper : Helper
      * @param array<string, mixed> $options Options array.
      * @return string Generated URL
      */
-    string assetUrl(string $path, array $options = [])
-    {
+    string assetUrl(string $path, array $options = []) {
         $options += ["theme": _View.getTheme()];
 
         return h(_assetUrlClassName::url($path, $options));
@@ -211,8 +205,7 @@ class UrlHelper : Helper
      * @param string|bool $timestamp If set will overrule the value of `Asset.timestamp` in Configure.
      * @return string Path with a timestamp added, or not.
      */
-    string assetTimestamp(string $path, $timestamp = null)
-    {
+    string assetTimestamp(string $path, $timestamp = null) {
         return h(_assetUrlClassName::assetTimestamp($path, $timestamp));
     }
 
@@ -222,8 +215,7 @@ class UrlHelper : Helper
      * @param string $file The file to create a webroot path to.
      * @return string Web accessible path to file.
      */
-    string webroot(string $file)
-    {
+    string webroot(string $file) {
         $options = ["theme": _View.getTheme()];
 
         return h(_assetUrlClassName::webroot($file, $options));
