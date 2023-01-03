@@ -12,8 +12,7 @@ class BodyEmpty : ResponseBase
      *
      * @param mixed $other Expected type
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return empty(_getBodyAsString());
     }
 

@@ -12,8 +12,7 @@ class BodyNotContains : BodyContains
      *
      * @param mixed $other Expected type
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return super.matches($other) == false;
     }
 

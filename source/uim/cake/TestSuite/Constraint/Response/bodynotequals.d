@@ -12,8 +12,7 @@ class BodyNotEquals : BodyEquals
      *
      * @param mixed $other Expected type
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return super.matches($other) == false;
     }
 

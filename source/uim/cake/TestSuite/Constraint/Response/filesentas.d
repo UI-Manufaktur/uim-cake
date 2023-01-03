@@ -17,8 +17,7 @@ class FileSentAs : ResponseBase
      *
      * @param mixed $other Expected type
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         $file = this.response.getFile();
         if (!$file) {
             return false;

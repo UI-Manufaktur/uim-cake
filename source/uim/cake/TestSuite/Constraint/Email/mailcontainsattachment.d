@@ -12,8 +12,7 @@ class MailContainsAttachment : MailContains
      *
      * @param mixed $other Constraint check
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         [$expectedFilename, $expectedFileInfo] = $other;
 
         $messages = this.getMessages();

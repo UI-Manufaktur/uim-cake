@@ -30,8 +30,7 @@ class HeaderSet : ResponseBase
      *
      * @param mixed $other Expected content
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return this.response.hasHeader(this.headerName);
     }
 

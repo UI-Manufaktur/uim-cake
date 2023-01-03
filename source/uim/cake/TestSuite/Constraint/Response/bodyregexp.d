@@ -12,8 +12,7 @@ class BodyRegExp : ResponseBase
      *
      * @param mixed $other Expected pattern
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return preg_match($other, _getBodyAsString()) > 0;
     }
 

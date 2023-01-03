@@ -207,8 +207,7 @@ class Hash
      * @param string $token The token being matched.
      * @return bool
      */
-    protected static bool _matchToken($key, string $token)
-    {
+    protected static bool _matchToken($key, string $token) {
         switch ($token) {
             case "{n}":
                 return is_numeric($key);
@@ -228,8 +227,7 @@ class Hash
      * @param string $selector The patterns to match.
      * @return bool Fitness of expression.
      */
-    protected static bool _matches($data, string $selector)
-    {
+    protected static bool _matches($data, string $selector) {
         preg_match_all(
             "/(\[ (?P<attr>[^=><!]+?) (\s* (?P<op>[><!]?[=]|[><]) \s* (?P<val>(?:\/.*?\/ | [^\]]+)) )? \])/x",
             $selector,
@@ -575,8 +573,7 @@ class Hash
      * @return bool true If $data contains $needle, false otherwise
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::contains
      */
-    static bool contains(array $data, array $needle)
-    {
+    static bool contains(array $data, array $needle) {
         if (empty($data) || empty($needle)) {
             return false;
         }
@@ -619,8 +616,7 @@ class Hash
      * @see uim.cake.Utility\Hash::extract()
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::check
      */
-    static bool check(array $data, string $path)
-    {
+    static bool check(array $data, string $path) {
         $results = static::extract($data, $path);
         if (!is_array($results)) {
             return false;
@@ -655,8 +651,7 @@ class Hash
      * @param mixed $var Array to filter.
      * @return bool
      */
-    protected static bool _filter($var)
-    {
+    protected static bool _filter($var) {
         return $var == 0 || $var == 0.0 || $var == "0" || !empty($var);
     }
 
@@ -812,8 +807,7 @@ class Hash
      * @return bool true if values are numeric, false otherwise
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::numeric
      */
-    static bool numeric(array $data)
-    {
+    static bool numeric(array $data) {
         if (empty($data)) {
             return false;
         }

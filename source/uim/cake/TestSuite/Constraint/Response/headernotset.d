@@ -12,8 +12,7 @@ class HeaderNotSet : HeaderSet
      *
      * @param mixed $other Expected content
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return super.matches($other) == false;
     }
 

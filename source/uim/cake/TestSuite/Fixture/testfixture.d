@@ -142,8 +142,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     /**
      * Returns the table name using the fixture class
      */
-    protected string _tableFromClass()
-    {
+    protected string _tableFromClass() {
         [, $class] = namespaceSplit(static::class);
         preg_match("/^(.*)Fixture$/", $class, $matches);
         $table = $matches[1] ?? $class;
@@ -244,8 +243,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    bool create(IConnection aConnection)
-    {
+    bool create(IConnection aConnection) {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(_schema)) {
             return false;
@@ -279,8 +277,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    bool drop(IConnection aConnection)
-    {
+    bool drop(IConnection aConnection) {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(_schema)) {
             return false;
@@ -324,8 +321,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    bool createConstraints(IConnection aConnection)
-    {
+    bool createConstraints(IConnection aConnection) {
         if (empty(_constraints)) {
             return true;
         }
@@ -349,8 +345,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    bool dropConstraints(IConnection aConnection)
-    {
+    bool dropConstraints(IConnection aConnection) {
         if (empty(_constraints)) {
             return true;
         }
@@ -400,8 +395,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     }
 
 
-    bool truncate(IConnection aConnection)
-    {
+    bool truncate(IConnection aConnection) {
         /** @psalm-suppress ArgumentTypeCoercion */
         $sql = _schema.truncateSql($connection);
         foreach ($sql as $stmt) {

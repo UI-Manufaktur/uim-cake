@@ -17,8 +17,7 @@ class ContentType : ResponseBase
      *
      * @param mixed $other Expected type
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         $alias = this.response.getMimeType($other);
         if ($alias != false) {
             $other = $alias;

@@ -12,8 +12,7 @@ class HeaderContains : HeaderEquals
      *
      * @param mixed $other Expected content
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return mb_strpos(this.response.getHeaderLine(this.headerName), $other) != false;
     }
 

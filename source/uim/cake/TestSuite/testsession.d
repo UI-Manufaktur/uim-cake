@@ -40,8 +40,7 @@ class TestSession
      * @param string|null $name Variable name to check for
      * @return bool True if variable is there
      */
-    bool check(?string aName = null)
-    {
+    bool check(?string aName = null) {
         if (this.session == null) {
             return false;
         }

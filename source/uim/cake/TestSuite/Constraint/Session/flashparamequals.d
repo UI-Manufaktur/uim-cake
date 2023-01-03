@@ -56,8 +56,7 @@ class FlashParamEquals : Constraint
      *
      * @param mixed $other Value to compare with
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         // Server::run calls Session::close at the end of the request.
         // Which means, that we cannot use Session object here to access the session data.
         // Call to Session::read will start new session (and will erase the data).

@@ -30,8 +30,7 @@ class HeaderEquals : ResponseBase
      *
      * @param mixed $other Expected content
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return this.response.getHeaderLine(this.headerName) == $other;
     }
 

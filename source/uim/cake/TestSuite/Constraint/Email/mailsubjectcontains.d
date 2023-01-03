@@ -21,8 +21,7 @@ class MailSubjectContains : MailConstraintBase
      *
      * @param mixed $other Constraint check
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         if (!is_string($other)) {
             throw new InvalidArgumentException(
                 "Invalid data type, must be a string."
