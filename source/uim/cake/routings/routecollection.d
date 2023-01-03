@@ -7,6 +7,14 @@
 @safe:
 import uim.cake;
 
+module uim.cake.Routing;
+
+import uim.cake.routings.exceptions.DuplicateNamedRouteException;
+import uim.cake.routings.exceptions.MissingRouteException;
+import uim.cake.routings.Route\Route;
+use Psr\Http\messages.IServerRequest;
+use RuntimeException;
+
 /**
  * Contains a collection of routes.
  *
@@ -22,72 +30,73 @@ class RouteCollection
      *
      * @var array<string, array<uim.cake.routings.Route\Route>>
      */
-    protected _routeTable = [];
+    protected $_routeTable = [];
 
     /**
      * The hash map of named routes that are in this collection.
      *
      * @var array<uim.cake.routings.Route\Route>
      */
-    protected _named = [];
+    protected $_named = [];
 
     /**
      * Routes indexed by path prefix.
      *
      * @var array<string, array<uim.cake.routings.Route\Route>>
      */
-    protected _paths = [];
+    protected $_paths = [];
 
     /**
      * A map of middleware names and the related objects.
      *
      * @var array
      */
-    protected _middleware = [];
+    protected $_middleware = [];
 
     /**
      * A map of middleware group names and the related middleware names.
      *
      * @var array
      */
-    protected _middlewareGroups = [];
+    protected $_middlewareGroups = [];
 
     /**
      * Route extensions
      *
      * @var array<string>
      */
-    protected _extensions = [];
+    protected $_extensions = [];
 
     /**
      * Add a route to the collection.
      *
      * @param uim.cake.routings.Route\Route $route The route object to add.
-     * @param array<string, mixed> myOptions Additional options for the route. Primarily for the
+     * @param array<string, mixed> $options Additional options for the route. Primarily for the
      *   `_name` option, which enables named routes.
      */
-    void add(Route $route, array myOptions = []) {
+    void add(Route $route, array $options = []): void
+    {
         // Explicit names
-        if (isset(myOptions["_name"])) {
-            if (isset(_named[myOptions["_name"]])) {
-                $matched = _named[myOptions["_name"]];
+        if (isset($options["_name"])) {
+            if (isset(_named[$options["_name"]])) {
+                $matched = _named[$options["_name"]];
                 throw new DuplicateNamedRouteException([
-                    "name": myOptions["_name"],
+                    "name": $options["_name"],
                     "url": $matched.template,
                     "duplicate": $matched,
                 ]);
             }
-            _named[myOptions["_name"]] = $route;
+            _named[$options["_name"]] = $route;
         }
 
         // Generated names.
-        myName = $route.getName();
-        _routeTable[myName] = _routeTable[myName] ?? [];
-        _routeTable[myName][] = $route;
+        $name = $route.getName();
+        _routeTable[$name] = _routeTable[$name] ?? [];
+        _routeTable[$name][] = $route;
 
         // Index path prefixes (for parsing)
-        myPath = $route.staticPath();
-        _paths[myPath][] = $route;
+        $path = $route.staticPath();
+        _paths[$path][] = $route;
 
         $extensions = $route.getExtensions();
         if (count($extensions) > 0) {
@@ -98,143 +107,144 @@ class RouteCollection
     /**
      * Takes the URL string and iterates the routes until one is able to parse the route.
      *
-     * @param string myUrl URL to parse.
-     * @param string method The HTTP method to use.
+     * @param string $url URL to parse.
+     * @param string $method The HTTP method to use.
      * @return array An array of request parameters parsed from the URL.
      * @throws uim.cake.routings.exceptions.MissingRouteException When a URL has no matching route.
      */
-    function parse(string myUrl, string method = ""): array
+    function parse(string $url, string $method = ""): array
     {
-        $decoded = urldecode(myUrl);
+        $decoded = urldecode($url);
 
         // Sort path segments matching longest paths first.
         krsort(_paths);
 
-        foreach (_paths as myPath: $routes) {
-            if (indexOf($decoded, myPath) != 0) {
+        foreach (_paths as $path: $routes) {
+            if (strpos($decoded, $path) != 0) {
                 continue;
             }
 
-            myQueryParameters = [];
-            if (indexOf(myUrl, "?") != false) {
-                [myUrl, $qs] = explode("?", myUrl, 2);
-                parse_str($qs, myQueryParameters);
+            $queryParameters = [];
+            if (strpos($url, "?") != false) {
+                [$url, $qs] = explode("?", $url, 2);
+                parse_str($qs, $queryParameters);
             }
 
             foreach ($routes as $route) {
-                $r = $route.parse(myUrl, $method);
-                if ($r is null) {
+                $r = $route.parse($url, $method);
+                if ($r == null) {
                     continue;
                 }
-                if (myQueryParameters) {
-                    $r["?"] = myQueryParameters;
+                if ($queryParameters) {
+                    $r["?"] = $queryParameters;
                 }
 
                 return $r;
             }
         }
 
-        myExceptionProperties = ["url": myUrl];
+        $exceptionProperties = ["url": $url];
         if ($method != "") {
             // Ensure that if the method is included, it is the first element of
             // the array, to match the order that the strings are printed in the
             // MissingRouteException error message, $_messageTemplateWithMethod.
-            myExceptionProperties = array_merge(["method": $method], myExceptionProperties);
+            $exceptionProperties = array_merge(["method": $method], $exceptionProperties);
         }
-        throw new MissingRouteException(myExceptionProperties);
+        throw new MissingRouteException($exceptionProperties);
     }
 
     /**
      * Takes the IServerRequest, iterates the routes until one is able to parse the route.
      *
-     * @param \Psr\Http\messages.IServerRequest myRequest The request to parse route data from.
+     * @param \Psr\Http\messages.IServerRequest $request The request to parse route data from.
      * @return array An array of request parameters parsed from the URL.
      * @throws uim.cake.routings.exceptions.MissingRouteException When a URL has no matching route.
      */
-    function parseRequest(IServerRequest myRequest): array
+    function parseRequest(IServerRequest $request): array
     {
-        $uri = myRequest.getUri();
-        myUrlPath = urldecode($uri.getPath());
+        $uri = $request.getUri();
+        $urlPath = urldecode($uri.getPath());
 
         // Sort path segments matching longest paths first.
         krsort(_paths);
 
-        foreach (_paths as myPath: $routes) {
-            if (indexOf(myUrlPath, myPath) != 0) {
+        foreach (_paths as $path: $routes) {
+            if (strpos($urlPath, $path) != 0) {
                 continue;
             }
 
             foreach ($routes as $route) {
-                $r = $route.parseRequest(myRequest);
-                if ($r is null) {
+                $r = $route.parseRequest($request);
+                if ($r == null) {
                     continue;
                 }
                 if ($uri.getQuery()) {
-                    parse_str($uri.getQuery(), myQueryParameters);
-                    $r["?"] = myQueryParameters;
+                    parse_str($uri.getQuery(), $queryParameters);
+                    $r["?"] = $queryParameters;
                 }
 
                 return $r;
             }
         }
-        throw new MissingRouteException(["url": myUrlPath]);
+        throw new MissingRouteException(["url": $urlPath]);
     }
 
     /**
-     * Get the set of names from the myUrl. Accepts both older style array urls,
+     * Get the set of names from the $url. Accepts both older style array urls,
      * and newer style urls containing "_name"
      *
-     * @param array myUrl The url to match.
-     * @return The set of names of the url
+     * @param array $url The url to match.
+     * @return array<string> The set of names of the url
      */
-    protected string[] _getNames(array myUrl) {
-        myPlugin = false;
-        if (isset(myUrl["plugin"]) && myUrl["plugin"] != false) {
-            myPlugin = strtolower(myUrl["plugin"]);
+    protected string[] _getNames(array $url): array
+    {
+        $plugin = false;
+        if (isset($url["plugin"]) && $url["plugin"] != false) {
+            $plugin = strtolower($url["plugin"]);
         }
         $prefix = false;
-        if (isset(myUrl["prefix"]) && myUrl["prefix"] != false) {
-            $prefix = strtolower(myUrl["prefix"]);
+        if (isset($url["prefix"]) && $url["prefix"] != false) {
+            $prefix = strtolower($url["prefix"]);
         }
-        $controller = isset(myUrl["controller"]) ? strtolower(myUrl["controller"]) : null;
-        $action = strtolower(myUrl["action"]);
+        $controller = isset($url["controller"]) ? strtolower($url["controller"]) : null;
+        $action = strtolower($url["action"]);
 
-        myNames = [
-            "${controller}:${action}",
-            "${controller}:_action",
-            "_controller:${action}",
+        $names = [
+            "{$controller}:{$action}",
+            "{$controller}:_action",
+            "_controller:{$action}",
             "_controller:_action",
         ];
 
         // No prefix, no plugin
-        if ($prefix == false && myPlugin == false) {
-            return myNames;
+        if ($prefix == false && $plugin == false) {
+            return $names;
         }
 
         // Only a plugin
         if ($prefix == false) {
             return [
-                "${plugin}.${controller}:${action}",
-                "${plugin}.${controller}:_action",
-                "${plugin}._controller:${action}",
-                "${plugin}._controller:_action",
-                "_plugin.${controller}:${action}",
-                "_plugin.${controller}:_action",
-                "_plugin._controller:${action}",
+                "{$plugin}.{$controller}:{$action}",
+                "{$plugin}.{$controller}:_action",
+                "{$plugin}._controller:{$action}",
+                "{$plugin}._controller:_action",
+                "_plugin.{$controller}:{$action}",
+                "_plugin.{$controller}:_action",
+                "_plugin._controller:{$action}",
                 "_plugin._controller:_action",
             ];
         }
 
         // Only a prefix
-        if (myPlugin == false) {
+        if ($plugin == false) {
             return [
-                "${prefix}:${controller}:${action}",
-                "${prefix}:${controller}:_action",
-                "${prefix}:_controller:${action}",
-                "${prefix}:_controller:_action",
-                "_prefix:${controller}:${action}",
-                "_prefix:${controller}:_action",
-                "_prefix:_controller:${action}",
+                "{$prefix}:{$controller}:{$action}",
+                "{$prefix}:{$controller}:_action",
+                "{$prefix}:_controller:{$action}",
+                "{$prefix}:_controller:_action",
+                "_prefix:{$controller}:{$action}",
+                "_prefix:{$controller}:_action",
+                "_prefix:_controller:{$action}",
                 "_prefix:_controller:_action",
             ];
         }
@@ -242,69 +252,69 @@ class RouteCollection
         // Prefix and plugin has the most options
         // as there are 4 factors.
         return [
-            "${prefix}:${plugin}.${controller}:${action}",
-            "${prefix}:${plugin}.${controller}:_action",
-            "${prefix}:${plugin}._controller:${action}",
-            "${prefix}:${plugin}._controller:_action",
-            "${prefix}:_plugin.${controller}:${action}",
-            "${prefix}:_plugin.${controller}:_action",
-            "${prefix}:_plugin._controller:${action}",
-            "${prefix}:_plugin._controller:_action",
-            "_prefix:${plugin}.${controller}:${action}",
-            "_prefix:${plugin}.${controller}:_action",
-            "_prefix:${plugin}._controller:${action}",
-            "_prefix:${plugin}._controller:_action",
-            "_prefix:_plugin.${controller}:${action}",
-            "_prefix:_plugin.${controller}:_action",
-            "_prefix:_plugin._controller:${action}",
+            "{$prefix}:{$plugin}.{$controller}:{$action}",
+            "{$prefix}:{$plugin}.{$controller}:_action",
+            "{$prefix}:{$plugin}._controller:{$action}",
+            "{$prefix}:{$plugin}._controller:_action",
+            "{$prefix}:_plugin.{$controller}:{$action}",
+            "{$prefix}:_plugin.{$controller}:_action",
+            "{$prefix}:_plugin._controller:{$action}",
+            "{$prefix}:_plugin._controller:_action",
+            "_prefix:{$plugin}.{$controller}:{$action}",
+            "_prefix:{$plugin}.{$controller}:_action",
+            "_prefix:{$plugin}._controller:{$action}",
+            "_prefix:{$plugin}._controller:_action",
+            "_prefix:_plugin.{$controller}:{$action}",
+            "_prefix:_plugin.{$controller}:_action",
+            "_prefix:_plugin._controller:{$action}",
             "_prefix:_plugin._controller:_action",
         ];
     }
 
     /**
-     * Reverse route or match a myUrl array with the connected routes.
+     * Reverse route or match a $url array with the connected routes.
      *
      * Returns either the URL string generated by the route,
      * or throws an exception on failure.
      *
-     * @param array myUrl The URL to match.
+     * @param array $url The URL to match.
      * @param array $context The request context to use. Contains _base, _port,
      *    _host, _scheme and params keys.
      * @return string The URL string on match.
      * @throws uim.cake.routings.exceptions.MissingRouteException When no route could be matched.
      */
-    string match(array myUrl, array $context) {
+    string match(array $url, array $context) {
         // Named routes support optimization.
-        if (isset(myUrl["_name"])) {
-            myName = myUrl["_name"];
-            unset(myUrl["_name"]);
-            if (isset(_named[myName])) {
-                $route = _named[myName];
-                $out = $route.match(myUrl + $route.defaults, $context);
+        if (isset($url["_name"])) {
+            $name = $url["_name"];
+            unset($url["_name"]);
+            if (isset(_named[$name])) {
+                $route = _named[$name];
+                $out = $route.match($url + $route.defaults, $context);
                 if ($out) {
                     return $out;
                 }
                 throw new MissingRouteException([
-                    "url": myName,
+                    "url": $name,
                     "context": $context,
-                    "message": "A named route was found for `{myName}`, but matching failed.",
+                    "message": "A named route was found for `{$name}`, but matching failed.",
                 ]);
             }
-            throw new MissingRouteException(["url": myName, "context": $context]);
+            throw new MissingRouteException(["url": $name, "context": $context]);
         }
 
-        foreach (_getNames(myUrl) as myName) {
-            if (empty(_routeTable[myName])) {
+        foreach (_getNames($url) as $name) {
+            if (empty(_routeTable[$name])) {
                 continue;
             }
-            foreach (_routeTable[myName] as $route) {
-                $match = $route.match(myUrl, $context);
+            foreach (_routeTable[$name] as $route) {
+                $match = $route.match($url, $context);
                 if ($match) {
                     return $match == "/" ? $match : trim($match, "/");
                 }
             }
         }
-        throw new MissingRouteException(["url": var_export(myUrl, true), "context": $context]);
+        throw new MissingRouteException(["url": var_export($url, true), "context": $context]);
     }
 
     /**
@@ -323,30 +333,36 @@ class RouteCollection
         );
     }
 
-    // Get the connected named routes.
-    Route[] named() {
+    /**
+     * Get the connected named routes.
+     *
+     * @return array<uim.cake.routings.Route\Route>
+     */
+    function named(): array
+    {
         return _named;
     }
 
     /**
      * Get the extensions that can be handled.
      *
-     * @return The valid extensions.
+     * @return array<string> The valid extensions.
      */
-    string[] getExtensions() {
+    string[] getExtensions(): array
+    {
         return _extensions;
     }
 
     /**
      * Set the extensions that the route collection can handle.
      *
-     * @param $extensions The list of extensions to set.
-     * @param bool myMerge Whether to merge with or override existing extensions.
+     * @param array<string> $extensions The list of extensions to set.
+     * @param bool $merge Whether to merge with or override existing extensions.
      *   Defaults to `true`.
      * @return this
      */
-    auto setExtensions(string[] $extensions, bool myMerge = true) {
-        if (myMerge) {
+    function setExtensions(array $extensions, bool $merge = true) {
+        if ($merge) {
             $extensions = array_unique(array_merge(
                 _extensions,
                 $extensions
@@ -363,13 +379,13 @@ class RouteCollection
      * Once middleware has been registered, it can be applied to the current routing
      * scope or any child scopes that share the same RouteCollection.
      *
-     * @param string myName The name of the middleware. Used when applying middleware to a scope.
-     * @param \Psr\Http\servers.IMiddleware|\Closure|string middleware The middleware to register.
+     * @param string aName The name of the middleware. Used when applying middleware to a scope.
+     * @param \Psr\Http\servers.IMiddleware|\Closure|string $middleware The middleware to register.
      * @return this
      * @throws \RuntimeException
      */
-    function registerMiddleware(string myName, $middleware) {
-        _middleware[myName] = $middleware;
+    function registerMiddleware(string aName, $middleware) {
+        _middleware[$name] = $middleware;
 
         return this;
     }
@@ -377,25 +393,25 @@ class RouteCollection
     /**
      * Add middleware to a middleware group
      *
-     * @param string myName Name of the middleware group
-     * @param $middlewareNames Names of the middleware
+     * @param string aName Name of the middleware group
+     * @param array<string> $middlewareNames Names of the middleware
      * @return this
      * @throws \RuntimeException
      */
-    function middlewareGroup(string myName, string[] $middlewareNames) {
-        if (this.hasMiddleware(myName)) {
-            myMessage = "Cannot add middleware group "myName". A middleware by this name has already been registered.";
-            throw new RuntimeException(myMessage);
+    function middlewareGroup(string aName, array $middlewareNames) {
+        if (this.hasMiddleware($name)) {
+            $message = "Cannot add middleware group "$name". A middleware by this name has already been registered.";
+            throw new RuntimeException($message);
         }
 
         foreach ($middlewareNames as $middlewareName) {
             if (!this.hasMiddleware($middlewareName)) {
-                myMessage = "Cannot add "$middlewareName" middleware to group "myName". It has not been registered.";
-                throw new RuntimeException(myMessage);
+                $message = "Cannot add "$middlewareName" middleware to group "$name". It has not been registered.";
+                throw new RuntimeException($message);
             }
         }
 
-        _middlewareGroups[myName] = $middlewareNames;
+        _middlewareGroups[$name] = $middlewareNames;
 
         return this;
     }
@@ -403,53 +419,53 @@ class RouteCollection
     /**
      * Check if the named middleware group has been created.
      *
-     * @param string myName The name of the middleware group to check.
+     * @param string aName The name of the middleware group to check.
      */
-    bool hasMiddlewareGroup(string myName) {
-        return array_key_exists(myName, _middlewareGroups);
+    bool hasMiddlewareGroup(string aName) {
+        return array_key_exists($name, _middlewareGroups);
     }
 
     /**
      * Check if the named middleware has been registered.
      *
-     * @param string myName The name of the middleware to check.
+     * @param string aName The name of the middleware to check.
      */
-    bool hasMiddleware(string myName) {
-        return isset(_middleware[myName]);
+    bool hasMiddleware(string aName) {
+        return isset(_middleware[$name]);
     }
 
     /**
      * Check if the named middleware or middleware group has been registered.
      *
-     * @param string myName The name of the middleware to check.
+     * @param string aName The name of the middleware to check.
      */
-    bool middlewareExists(string myName) {
-        return this.hasMiddleware(myName) || this.hasMiddlewareGroup(myName);
+    bool middlewareExists(string aName) {
+        return this.hasMiddleware($name) || this.hasMiddlewareGroup($name);
     }
 
     /**
      * Get an array of middleware given a list of names
      *
-     * @param myNames The names of the middleware or groups to fetch
+     * @param array<string> $names The names of the middleware or groups to fetch
      * @return array An array of middleware. If any of the passed names are groups,
      *   the groups middleware will be flattened into the returned list.
      * @throws \RuntimeException when a requested middleware does not exist.
      */
-    auto getMiddleware(string[] myNames): array
+    function getMiddleware(array $names): array
     {
         $out = [];
-        foreach (myNames as myName) {
-            if (this.hasMiddlewareGroup(myName)) {
-                $out = array_merge($out, this.getMiddleware(_middlewareGroups[myName]));
+        foreach ($names as $name) {
+            if (this.hasMiddlewareGroup($name)) {
+                $out = array_merge($out, this.getMiddleware(_middlewareGroups[$name]));
                 continue;
             }
-            if (!this.hasMiddleware(myName)) {
+            if (!this.hasMiddleware($name)) {
                 throw new RuntimeException(sprintf(
                     "The middleware named "%s" has not been registered. Use registerMiddleware() to define it.",
-                    myName
+                    $name
                 ));
             }
-            $out[] = _middleware[myName];
+            $out[] = _middleware[$name];
         }
 
         return $out;
