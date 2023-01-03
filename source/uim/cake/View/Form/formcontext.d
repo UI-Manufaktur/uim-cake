@@ -65,7 +65,7 @@ class FormContext : ContextInterface
     }
 
 
-    bool isPrimaryKey(string $field): bool
+    bool isPrimaryKey(string $field)
     {
         return false;
     }
@@ -186,7 +186,7 @@ class FormContext : ContextInterface
     }
 
 
-    bool hasError(string $field): bool
+    bool hasError(string $field)
     {
         $errors = this.error($field);
 

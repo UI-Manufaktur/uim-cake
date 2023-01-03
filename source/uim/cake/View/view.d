@@ -697,7 +697,7 @@ class View : IEventDispatcher
      *   is not found in the plugin, the normal view path cascade will be searched.
      * @return bool Success
      */
-    function elementExists(string aName): bool
+    function elementExists(string aName)
     {
         return (bool)_getElementFileName($name);
     }

@@ -100,12 +100,12 @@ class ErrorTrap
      * @param int|null $line Line that triggered the error
      * @return bool True if error was handled
      */
-    function handleError(
+    bool handleError(
         int $code,
         string $description,
         ?string $file = null,
         ?int $line = null
-    ): bool {
+    ) {
         if (!(error_reporting() & $code)) {
             return false;
         }

@@ -283,7 +283,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string aName The field name to check.
      */
-    bool hasField(string aName): bool
+    bool hasField(string aName)
     {
         return isset(_fields[$name]);
     }
@@ -387,7 +387,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $field name of the field to check
      */
-    bool offsetExists($field): bool
+    bool offsetExists($field)
     {
         return isset(_fields[$field]);
     }
@@ -2366,7 +2366,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string $field Field name.
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      */
-    bool isEmptyAllowed(string $field, bool $newRecord): bool
+    bool isEmptyAllowed(string $field, bool $newRecord)
     {
         $providers = _providers;
         $data = [];
@@ -2382,7 +2382,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string $field Field name.
      * @param bool $newRecord Whether the data to be validated is new or to be updated.
      */
-    bool isPresenceRequired(string $field, bool $newRecord): bool
+    bool isPresenceRequired(string $field, bool $newRecord)
     {
         $providers = _providers;
         $data = [];
@@ -2462,7 +2462,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param uim.cake.validations.ValidationSet $field The set of rules for a field.
      * @param array<string, mixed> $context A key value list of data containing the validation context.
      */
-    protected bool _checkPresence(ValidationSet $field, array $context): bool
+    protected bool _checkPresence(ValidationSet $field, array $context)
     {
         $required = $field.isPresenceRequired();
 
@@ -2485,7 +2485,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param uim.cake.validations.ValidationSet $field the set of rules for a field
      * @param array<string, mixed> $context a key value list of data containing the validation context.
      */
-    protected bool _canBeEmpty(ValidationSet $field, array $context): bool
+    protected bool _canBeEmpty(ValidationSet $field, array $context)
     {
         $allowed = $field.isEmptyAllowed();
 
@@ -2509,7 +2509,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return bool
      * @deprecated 3.7.0 Use {@link isEmpty()} instead
      */
-    protected function _fieldIsEmpty($data): bool
+    protected bool _fieldIsEmpty($data)
     {
         return this.isEmpty($data, static::EMPTY_ALL);
     }
@@ -2520,7 +2520,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param mixed $data Value to check against.
      * @param int $flags A bitmask of EMPTY_* flags which specify what is empty
      */
-    protected bool isEmpty($data, int $flags): bool
+    protected bool isEmpty($data, int $flags)
     {
         if ($data == null) {
             return true;

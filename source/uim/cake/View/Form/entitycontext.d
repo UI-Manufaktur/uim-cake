@@ -160,14 +160,10 @@ class EntityContext : ContextInterface
      * Get the primary key data for the context.
      *
      * Gets the primary key columns from the root entity"s schema.
-     *
-     * @return array<string>
      */
-    function getPrimaryKey(): array
-    {
+    string[] getPrimaryKey() {
         return (array)_tables[_rootName].getPrimaryKey();
     }
-
 
     bool isPrimaryKey(string $field)
     {

@@ -46,7 +46,7 @@ class IsUnique
      *   where the `repository` key is required.
      * @param array<string, mixed> $options Options passed to the check,
      */
-    bool __invoke(IEntity $entity, array $options): bool
+    bool __invoke(IEntity $entity, array $options)
     {
         if (!$entity.extract(_fields, true)) {
             return true;

@@ -23,7 +23,7 @@ interface ContextInterface
      * @param string $field A dot separated path to the field a value
      *   is needed for.
      */
-    bool isPrimaryKey(string $field): bool;
+    bool isPrimaryKey(string $field);
 
     /**
      * Returns whether this form is for a create operation.
@@ -104,7 +104,7 @@ interface ContextInterface
      * @param string $field A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    bool hasError(string $field): bool;
+    bool hasError(string $field);
 
     /**
      * Get the errors for a given field

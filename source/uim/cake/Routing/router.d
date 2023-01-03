@@ -529,7 +529,7 @@ class Router
      * @param bool $full If true, the full base URL will be prepended to the result.
      *   Default is false.
      */
-    static bool routeExists($url = null, bool $full = false): bool
+    static bool routeExists($url = null, bool $full = false)
     {
         try {
             static::url($url, $full);

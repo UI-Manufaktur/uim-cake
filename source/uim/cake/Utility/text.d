@@ -918,7 +918,7 @@ class Text
      *
      * @param string $string value to test
      */
-    static bool isMultibyte(string $string): bool
+    static bool isMultibyte(string $string)
     {
         $length = strlen($string);
 
