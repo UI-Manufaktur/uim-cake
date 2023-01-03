@@ -1437,7 +1437,7 @@ class ServerRequest : IServerRequest
      * @return true
      * @throws uim.cake.http.exceptions.MethodNotAllowedException
      */
-    function allowMethod($methods): bool
+    bool allowMethod($methods)
     {
         $methods = (array)$methods;
         foreach ($methods as $method) {
