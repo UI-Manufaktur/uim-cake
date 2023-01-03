@@ -498,7 +498,7 @@ class Client : ClientInterface
     /**
      * Clear all mocked responses
      */
-    static void clearMockResponses(): void
+    static void clearMockResponses()
     {
         static::$_mockAdapter = null;
     }
@@ -522,7 +522,7 @@ class Client : ClientInterface
      * @param uim.cake.http.Client\Response $response The response that matches the request.
      * @param array<string, mixed> $options See above.
      */
-    static void addMockResponse(string $method, string $url, Response $response, array $options = []): void
+    static void addMockResponse(string $method, string $url, Response $response, array $options = [])
     {
         if (!static::$_mockAdapter) {
             static::$_mockAdapter = new MockAdapter();

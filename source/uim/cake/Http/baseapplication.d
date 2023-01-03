@@ -151,13 +151,13 @@ abstract class BaseApplication implements
     }
 
 
-    function bootstrap(): void
+    void bootstrap()
     {
         require_once this.configDir ~ "bootstrap.php";
     }
 
 
-    function pluginBootstrap(): void
+    void pluginBootstrap()
     {
         foreach (this.plugins.with("bootstrap") as $plugin) {
             $plugin.bootstrap(this);
@@ -171,7 +171,7 @@ abstract class BaseApplication implements
      *
      * @param uim.cake.routings.RouteBuilder $routes A route builder to add routes into.
      */
-    void routes(RouteBuilder $routes): void
+    void routes(RouteBuilder $routes)
     {
         // Only load routes if the router is empty
         if (!Router::routes()) {
@@ -262,7 +262,7 @@ abstract class BaseApplication implements
      *
      * @param uim.cake.Core\IContainer $container The Container to update.
      */
-    void services(IContainer $container): void
+    void services(IContainer $container)
     {
     }
 

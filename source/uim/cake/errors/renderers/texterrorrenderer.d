@@ -18,7 +18,7 @@ import uim.cake.errors.PhpError;
 class TextErrorRenderer : ErrorRendererInterface
 {
 
-    function write(string $out): void
+    void write(string $out)
     {
         echo $out;
     }

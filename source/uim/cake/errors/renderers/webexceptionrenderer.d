@@ -188,7 +188,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
     /**
      * Clear output buffers so error pages display properly.
      */
-    protected void clearOutput(): void
+    protected void clearOutput()
     {
         if (in_array(PHP_SAPI, ["cli", "phpdbg"])) {
             return;
@@ -281,7 +281,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      *
      * @param \Psr\Http\messages.IResponse|string $output The response to output.
      */
-    void write($output): void
+    void write($output)
     {
         if (is_string($output)) {
             echo $output;

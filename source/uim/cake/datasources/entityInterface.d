@@ -235,7 +235,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * no fields being modified or added at all. This is an useful call
      * for an initial object hydration
      */
-    void clean(): void;
+    void clean();
 
     /**
      * Set the status of this entity.

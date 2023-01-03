@@ -25,7 +25,7 @@ class EventList : ArrayAccess, Countable
     /**
      * Empties the list of dispatched events.
      */
-    void flush(): void
+    void flush()
     {
         _events = [];
     }
@@ -35,7 +35,7 @@ class EventList : ArrayAccess, Countable
      *
      * @param uim.cake.events.IEvent $event An event to the list of dispatched events.
      */
-    void add(IEvent $event): void
+    void add(IEvent $event)
     {
         _events[] = $event;
     }
@@ -74,7 +74,7 @@ class EventList : ArrayAccess, Countable
      * @param mixed $offset The offset to assign the value to.
      * @param mixed $value The value to set.
      */
-    void offsetSet($offset, $value): void
+    void offsetSet($offset, $value)
     {
         _events[$offset] = $value;
     }
@@ -85,7 +85,7 @@ class EventList : ArrayAccess, Countable
      * @link https://secure.php.net/manual/en/arrayaccess.offsetunset.php
      * @param mixed $offset The offset to unset.
      */
-    void offsetUnset($offset): void
+    void offsetUnset($offset)
     {
         unset(_events[$offset]);
     }

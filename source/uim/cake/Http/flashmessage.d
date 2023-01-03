@@ -70,7 +70,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::$_defaultConfig For default values for the options.
      */
-    function set($message, array $options = []): void
+    void set($message, array $options = [])
     {
         $options += (array)this.getConfig();
 
@@ -126,7 +126,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    function setExceptionMessage(Throwable $exception, array $options = []): void
+    void setExceptionMessage(Throwable $exception, array $options = [])
     {
         $options["element"] = $options["element"] ?? "error";
         $options["params"]["code"] = $options["params"]["code"] ?? $exception.getCode();
@@ -156,7 +156,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    function success(string $message, array $options = []): void
+    void success(string $message, array $options = [])
     {
         $options["element"] = "success";
         this.set($message, $options);
@@ -172,7 +172,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    function error(string $message, array $options = []): void
+    void error(string $message, array $options = [])
     {
         $options["element"] = "error";
         this.set($message, $options);
@@ -188,7 +188,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    function warning(string $message, array $options = []): void
+    void warning(string $message, array $options = [])
     {
         $options["element"] = "warning";
         this.set($message, $options);
@@ -204,7 +204,7 @@ class FlashMessage
      * @return void
      * @see FlashMessage::set() For list of valid options
      */
-    function info(string $message, array $options = []): void
+    void info(string $message, array $options = [])
     {
         $options["element"] = "info";
         this.set($message, $options);

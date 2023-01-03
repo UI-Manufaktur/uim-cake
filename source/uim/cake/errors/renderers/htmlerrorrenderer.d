@@ -19,7 +19,7 @@ import uim.cake.errors.PhpError;
 class HtmlErrorRenderer : ErrorRendererInterface
 {
 
-    function write(string $out): void
+    void write(string $out)
     {
         // Output to stdout which is the server response.
         echo $out;

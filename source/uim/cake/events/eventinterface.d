@@ -25,7 +25,7 @@ interface IEvent
     /**
      * Stops the event from being used anymore.
      */
-    void stopPropagation(): void;
+    void stopPropagation();
 
     /**
      * Checks if the event is stopped.
