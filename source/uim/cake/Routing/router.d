@@ -528,9 +528,8 @@ class Router
      *   string.
      * @param bool $full If true, the full base URL will be prepended to the result.
      *   Default is false.
-     * @return bool
      */
-    static function routeExists($url = null, bool $full = false): bool
+    static bool routeExists($url = null, bool $full = false): bool
     {
         try {
             static::url($url, $full);
@@ -554,9 +553,8 @@ class Router
      *
      * @param string|null $base the prefix for URLs generated containing the domain.
      * For example: `http://example.com`
-     * @return string
      */
-    static function fullBaseUrl(?string $base = null): string
+    static string fullBaseUrl(?string $base = null): string
     {
         if ($base == null && static::$_fullBaseUrl != null) {
             return static::$_fullBaseUrl;

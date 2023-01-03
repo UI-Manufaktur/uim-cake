@@ -360,9 +360,8 @@ class Validation
      * @param mixed $check The value to find in $field.
      * @param string $field The field to check $check against. This field must be present in $context.
      * @param array<string, mixed> $context The validation context.
-     * @return bool
      */
-    static function compareWith($check, string $field, array $context): bool
+    static bool compareWith($check, string $field, array $context): bool
     {
         return self::compareFields($check, $field, static::COMPARE_SAME, $context);
     }
@@ -1329,9 +1328,8 @@ class Validation
      *
      * @param mixed $file The uploaded file data from PHP.
      * @param array<string, mixed> $options An array of options for the validation.
-     * @return bool
      */
-    static function uploadedFile($file, array $options = []): bool
+    static bool uploadedFile($file, array $options = []): bool
     {
         $options += [
             "minSize": null,
@@ -1432,9 +1430,8 @@ class Validation
      * @param mixed $file The uploaded file data from PHP.
      * @param string $operator Comparison operator.
      * @param int $width Min or max width.
-     * @return bool
      */
-    static function imageWidth($file, string $operator, int $width): bool
+    static bool imageWidth($file, string $operator, int $width): bool
     {
         return self::imageSize($file, [
             "width": [
@@ -1450,9 +1447,8 @@ class Validation
      * @param mixed $file The uploaded file data from PHP.
      * @param string $operator Comparison operator.
      * @param int $height Min or max height.
-     * @return bool
      */
-    static function imageHeight($file, string $operator, int $height): bool
+    static bool imageHeight($file, string $operator, int $height): bool
     {
         return self::imageSize($file, [
             "height": [
@@ -1477,9 +1473,8 @@ class Validation
      *
      * @param mixed $value Geographic location as string
      * @param array<string, mixed> $options Options for the validation logic.
-     * @return bool
      */
-    static function geoCoordinate($value, array $options = []): bool
+    static bool geoCoordinate($value, array $options = []): bool
     {
         if (!is_scalar($value)) {
             return false;
@@ -1544,9 +1539,8 @@ class Validation
      * This method will reject all non-string values.
      *
      * @param mixed $value The value to check
-     * @return bool
      */
-    static function ascii($value): bool
+    static bool ascii($value): bool
     {
         if (!is_string($value)) {
             return false;
@@ -1568,9 +1562,8 @@ class Validation
      *
      * @param mixed $value The value to check
      * @param array<string, mixed> $options An array of options. See above for the supported options.
-     * @return bool
      */
-    static function utf8($value, array $options = []): bool
+    static bool utf8($value, array $options = []): bool
     {
         if (!is_string($value)) {
             return false;
@@ -1590,9 +1583,8 @@ class Validation
      * as well.
      *
      * @param mixed $value The value to check
-     * @return bool
      */
-    static function isInteger($value): bool
+    static bool isInteger($value): bool
     {
         if (is_int($value)) {
             return true;
@@ -1609,9 +1601,8 @@ class Validation
      * Check that the input value is an array.
      *
      * @param mixed $value The value to check
-     * @return bool
      */
-    static function isArray($value): bool
+    static bool isArray($value): bool
     {
         return is_array($value);
     }
@@ -1623,9 +1614,8 @@ class Validation
      * not accept arrays, objects, resources and nulls.
      *
      * @param mixed $value The value to check
-     * @return bool
      */
-    static function isScalar($value): bool
+    static bool isScalar($value): bool
     {
         return is_scalar($value);
     }

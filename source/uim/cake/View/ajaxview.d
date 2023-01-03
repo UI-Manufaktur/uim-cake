@@ -20,9 +20,8 @@ class AjaxView : View
     /**
      * Get content type for this view.
      *
-     * @return string
      */
-    static function contentType(): string
+    static string contentType(): string
     {
         return "text/html";
     }

@@ -462,7 +462,7 @@ class ServerRequest : IServerRequest
      * @param mixed ...$args List of arguments
      * @return bool Whether the request is the type you are checking.
      */
-    function is($type, ...$args): bool
+    bool is($type, ...$args)
     {
         if (is_array($type)) {
             foreach ($type as $_type) {
@@ -500,7 +500,7 @@ class ServerRequest : IServerRequest
      * @param array $args Array of custom detector arguments.
      * @return bool Whether the request is the type you are checking.
      */
-    protected function _is(string $type, array $args): bool
+    protected bool _is(string $type, array $args)
     {
         $detect = static::$_detectors[$type];
         if (is_callable($detect)) {
@@ -530,7 +530,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected function _acceptHeaderDetector(array $detect): bool
+    protected bool _acceptHeaderDetector(array $detect)
     {
         $content = new ContentTypeNegotiation();
         $options = $detect["accept"];
@@ -560,7 +560,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected function _headerDetector(array $detect): bool
+    protected bool _headerDetector(array $detect)
     {
         foreach ($detect["header"] as $header: $value) {
             $header = this.getEnv("http_" ~ $header);
@@ -582,7 +582,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected function _paramDetector(array $detect): bool
+    protected bool _paramDetector(array $detect)
     {
         $key = $detect["param"];
         if (isset($detect["value"])) {
@@ -603,7 +603,7 @@ class ServerRequest : IServerRequest
      * @param array $detect Detector options array.
      * @return bool Whether the request is the type you are checking.
      */
-    protected function _environmentDetector(array $detect): bool
+    protected bool _environmentDetector(array $detect)
     {
         if (isset($detect["env"])) {
             if (isset($detect["value"])) {
@@ -633,7 +633,7 @@ class ServerRequest : IServerRequest
      * @return bool Success.
      * @see uim.cake.http.ServerRequest::is()
      */
-    function isAll(array $types): bool
+    bool isAll(array $types)
     {
         foreach ($types as $type) {
             if (!this.is($type)) {
@@ -790,7 +790,7 @@ class ServerRequest : IServerRequest
      * @return bool Whether the header is defined.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function hasHeader($name): bool
+    bool hasHeader($name)
     {
         $name = this.normalizeHeaderName($name);
 

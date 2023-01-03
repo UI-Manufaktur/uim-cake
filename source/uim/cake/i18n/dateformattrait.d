@@ -63,10 +63,8 @@ trait DateFormatTrait
 
     /**
      * Gets whether locale format parsing is set to lenient.
-     *
-     * @return bool
      */
-    static function lenientParsingEnabled(): bool
+    static bool lenientParsingEnabled()
     {
         return static::$lenientParsing;
     }

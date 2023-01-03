@@ -21,9 +21,8 @@ class NegotiationRequiredView : View
     /**
      * Get the content-type
      *
-     * @return string
      */
-    static function contentType(): string
+    static string contentType(): string
     {
         return static::TYPE_MATCH_ALL;
     }

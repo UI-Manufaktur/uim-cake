@@ -461,9 +461,8 @@ class Number
      *
      * @param float|int $value An integer
      * @param array<string, mixed> $options An array with options.
-     * @return string
      */
-    static function ordinal($value, array $options = []): string
+    static string ordinal($value, array $options = []): string
     {
         return static::formatter(["type": NumberFormatter::ORDINAL] + $options).format($value);
     }

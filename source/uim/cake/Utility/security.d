@@ -109,9 +109,8 @@ class Security
      * Creates a secure random string.
      *
      * @param int $length String length. Default 64.
-     * @return string
      */
-    static function randomString(int $length = 64): string
+    static string randomString(int $length = 64): string
     {
         return substr(
             bin2hex(Security::randomBytes((int)ceil($length / 2))),

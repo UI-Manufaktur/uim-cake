@@ -228,9 +228,8 @@ class I18n
      * the value as stored in the `intl.default_locale` PHP setting before
      * any manipulation by this class.
      *
-     * @return string
      */
-    static function getDefaultLocale(): string
+    static string getDefaultLocale(): string
     {
         if (static::$_defaultLocale == null) {
             static::$_defaultLocale = Locale::getDefault() ?: static::DEFAULT_LOCALE;

@@ -298,7 +298,7 @@ class Stream : AdapterInterface
             throw new ClientException("The PHP directive `allow_url_fopen` must be enabled.");
         }
 
-        set_error_handler(function ($code, $message): bool {
+        set_error_handler(bool ($code, $message) {
             _connectionErrors[] = $message;
 
             return true;

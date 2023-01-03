@@ -174,9 +174,8 @@ class Text
      * @param array $data A key: val array where each key stands for a placeholder variable name
      *     to be replaced with val
      * @param array<string, mixed> $options An array of options, see description above
-     * @return string
      */
-    static function insert(string $str, array $data, array $options = []): string
+    static string insert(string $str, array $data, array $options = []): string
     {
         $defaults = [
             "before": ":", "after": "", "escape": "\\", "format": null, "clean": false,
@@ -918,9 +917,8 @@ class Text
      * Check if the string contain multibyte characters
      *
      * @param string $string value to test
-     * @return bool
      */
-    static function isMultibyte(string $string): bool
+    static bool isMultibyte(string $string): bool
     {
         $length = strlen($string);
 
@@ -980,9 +978,8 @@ class Text
      * to a string
      *
      * @param array $array Array
-     * @return string
      */
-    static function ascii(array $array): string
+    static string ascii(array $array): string
     {
         $ascii = "";
 

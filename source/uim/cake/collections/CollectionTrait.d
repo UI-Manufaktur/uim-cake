@@ -107,7 +107,7 @@ trait CollectionTrait
     }
 
 
-    function map(callable $callback): ICollection
+    ICollection map(callable $callback)
     {
         return new ReplaceIterator(this.unwrap(), $callback);
     }
