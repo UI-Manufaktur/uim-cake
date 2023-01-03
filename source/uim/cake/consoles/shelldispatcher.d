@@ -75,7 +75,6 @@ class ShellDispatcher {
 
     /**
      * Clear any aliases that have been set.
-     *
      */
     static void resetAliases() {
         static::$_aliases = [];
@@ -346,7 +345,6 @@ class ShellDispatcher {
 
     /**
      * Shows console help. Performs an internal dispatch to the CommandList Shell
-     *
      */
     void help() {
         trigger_error(
@@ -358,7 +356,6 @@ class ShellDispatcher {
 
     /**
      * Prints the currently installed version of UIM. Performs an internal dispatch to the CommandList Shell
-     *
      */
     void version() {
         trigger_error(

@@ -19,7 +19,6 @@ import uim.cake.core.Configure;
 class ServerCommand : Command {
     /**
      * Default ServerHost
-     *
      */
     const string DEFAULT_HOST = "localhost";
 
@@ -35,7 +34,6 @@ class ServerCommand : Command {
 
     /**
      * listen port
-     *
      */
     protected int $_port = self::DEFAULT_PORT;
 

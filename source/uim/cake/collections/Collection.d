@@ -63,7 +63,6 @@ class Collection : IteratorIterator : ICollection, Serializable
 
     /**
      * {@inheritDoc}
-     *
      */
     int count(): int
     {
@@ -78,7 +77,6 @@ class Collection : IteratorIterator : ICollection, Serializable
 
     /**
      * {@inheritDoc}
-     *
      */
     int countKeys(): int
     {

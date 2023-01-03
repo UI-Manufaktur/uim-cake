@@ -16,13 +16,11 @@ class HelpFormatter
 {
     /**
      * The maximum number of arguments shown when generating usage.
-     *
      */
     protected int $_maxArgs = 6;
 
     /**
      * The maximum number of options shown when generating usage.
-     *
      */
     protected int $_maxOptions = 6;
 
@@ -35,7 +33,6 @@ class HelpFormatter
 
     /**
      * Alias to display in the output.
-     *
      */
     protected string $_alias = "cake";
 

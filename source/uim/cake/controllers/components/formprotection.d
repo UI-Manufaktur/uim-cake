@@ -23,7 +23,6 @@ class FormProtectionComponent : Component
 {
     /**
      * Default message used for exceptions thrown.
-     *
      */
     const string DEFAULT_EXCEPTION_MESSAGE = 'Form tampering protection token validation failed.';
 

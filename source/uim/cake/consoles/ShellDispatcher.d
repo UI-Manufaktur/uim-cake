@@ -91,7 +91,6 @@ class ShellDispatcher
 
     /**
      * Clear any aliases that have been set.
-     *
      */
     static void resetAliases() {
         static::$_aliases = [];
@@ -131,7 +130,6 @@ class ShellDispatcher
 
     /**
      * Initializes the environment and loads the CakePHP core.
-     *
      */
     protected void _bootstrap() {
         if (!Configure::read("App.fullBaseUrl")) {

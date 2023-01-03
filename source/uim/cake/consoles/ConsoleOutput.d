@@ -54,7 +54,6 @@ class ConsoleOutput
 
     /**
      * Constant for a newline.
-     *
      */
     const string LF = PHP_EOL;
 
@@ -298,7 +297,6 @@ class ConsoleOutput
 
     /**
      * Get the output type on how formatting tags are treated.
-     *
      */
     int getOutputAs(): int
     {

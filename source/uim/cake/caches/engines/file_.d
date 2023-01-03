@@ -52,7 +52,6 @@ class FileEngine : CacheEngine
 
     /**
      * True unless FileEngine::__active(); fails
-     *
      */
     protected bool $_init = true;
 

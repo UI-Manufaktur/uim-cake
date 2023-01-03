@@ -32,7 +32,6 @@ class StubConsoleInput : ConsoleInput
 
     /**
      * Current message index
-     *
      */
     protected int $currentIndex = -1;
 

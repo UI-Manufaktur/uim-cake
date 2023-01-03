@@ -66,20 +66,17 @@ class ConsoleIo
 
     /**
      * The current output level.
-     *
      */
     protected int $_level = self::NORMAL;
 
     /**
      * The number of bytes last written to the output stream
      * used when overwriting the previous message.
-     *
      */
     protected int $_lastWritten = 0;
 
     /**
      * Whether files should be overwritten
-     *
      */
     protected bool $forceOverwrite = false;
 

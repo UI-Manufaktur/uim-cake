@@ -30,13 +30,11 @@ class I18nExtractCommand : Command {
 
     /**
      * Merge all domain strings into the default.pot file
-     *
      */
     protected bool $_merge = false;
 
     /**
      * Current file being processed
-     *
      */
     protected string $_file = "";
 
@@ -63,7 +61,6 @@ class I18nExtractCommand : Command {
 
     /**
      * Destination path
-     *
      */
     protected string $_output = "";
 
@@ -74,19 +71,16 @@ class I18nExtractCommand : Command {
 
     /**
      * Holds whether this call should extract the CakePHP Lib messages
-     *
      */
     protected bool $_extractCore = false;
 
     /**
      * Displays marker error(s) if true
-     *
      */
     protected bool $_markerError = false;
 
     /**
      * Count number of marker errors found
-     *
      */
     protected int $_countMarkerError = 0;
 
@@ -759,7 +753,6 @@ class I18nExtractCommand : Command {
 
     /**
      * Search files that may contain translatable strings
-     *
      */
     protected void _searchFiles() {
         $pattern = false;

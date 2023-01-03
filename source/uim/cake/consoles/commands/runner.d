@@ -139,7 +139,6 @@ class CommandRunner : IEventDispatcher {
      *
      * Calls the application"s `bootstrap()` hook. After the application the
      * plugins are bootstrapped.
-     *
      */
     protected void bootstrap() {
         this.app.bootstrap();
@@ -324,7 +323,6 @@ class CommandRunner : IEventDispatcher {
      * Ensure that the application"s routes are loaded.
      *
      * Console commands and shells often need to generate URLs.
-     *
      */
     protected void loadRoutes() {
         if (!(this.app instanceof IRoutingApplication)) {

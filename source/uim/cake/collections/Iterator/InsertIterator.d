@@ -19,7 +19,6 @@ class InsertIterator : Collection
 
     /**
      * Holds whether the values collection is still valid. (has more records)
-     *
      */
     protected bool $_validValues = true;
 
@@ -31,7 +30,6 @@ class InsertIterator : Collection
 
     /**
      * The property name to which values will be assigned
-     *
      */
     protected string $_target;
 

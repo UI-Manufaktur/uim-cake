@@ -26,7 +26,6 @@ trait ConsoleIntegrationTestTrait
 
     /**
      * Whether to use the CommandRunner
-     *
      */
     protected bool $_useCommandRunner = false;
 

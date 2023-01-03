@@ -49,7 +49,6 @@ class ConsoleInputOption
 
     /**
      * Is the option required.
-     *
      */
     protected bool $required;
 

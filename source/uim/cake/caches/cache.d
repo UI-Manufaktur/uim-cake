@@ -78,7 +78,6 @@ class Cache {
 
     /**
      * Flag for tracking whether caching is enabled.
-     *
      */
     protected static bool $_enabled = true;
 
@@ -504,7 +503,6 @@ class Cache {
      * Re-enable caching.
      *
      * If caching has been disabled with Cache::disable() this method will reverse that effect.
-     *
      */
     static void enable() {
         static::$_enabled = true;
@@ -514,7 +512,6 @@ class Cache {
      * Disable caching.
      *
      * When disabled all cache operations will return null.
-     *
      */
     static void disable() {
         static::$_enabled = false;

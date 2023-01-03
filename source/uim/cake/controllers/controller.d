@@ -110,7 +110,6 @@ class Controller : IEventListener, IEventDispatcher {
     /**
      * Set to true to automatically render the view
      * after action logic.
-     *
      */
     protected bool $autoRender = true;
 
@@ -792,7 +791,6 @@ class Controller : IEventListener, IEventDispatcher {
 
     /**
      * Get the templatePath based on controller name and request prefix.
-     *
      */
     protected string _templatePath() {
         $templatePath = this.name;

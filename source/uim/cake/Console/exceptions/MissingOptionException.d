@@ -9,7 +9,6 @@ class MissingOptionException : ConsoleException
 {
     /**
      * The requested thing that was not found.
-     *
      */
     protected string $requested = "";
 

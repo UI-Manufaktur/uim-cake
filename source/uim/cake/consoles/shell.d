@@ -219,7 +219,6 @@ class Shell {
 
     /**
      * Displays a header for the shell
-     *
      */
     protected void _welcome() {
     }
@@ -467,7 +466,6 @@ class Shell {
      *
      * This reconfigures both the output level for out()
      * and the configured stdout/stderr logging
-     *
      */
     protected void _setOutputLevel() {
         _io.setLoggers(ConsoleIo::NORMAL);

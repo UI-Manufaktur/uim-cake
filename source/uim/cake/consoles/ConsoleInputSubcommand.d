@@ -18,7 +18,6 @@ class ConsoleInputSubcommand
 
     /**
      * Help string for the subcommand
-     *
      */
     protected string $_help = "";
 

@@ -20,7 +20,6 @@ class BufferedIterator : Collection : Countable, Serializable
 
     /**
      * Points to the next record number that should be fetched
-     *
      */
     protected int $_index = 0;
 
@@ -41,13 +40,11 @@ class BufferedIterator : Collection : Countable, Serializable
     /**
      * Whether the internal iterator"s rewind method was already
      * called
-     *
      */
     protected bool $_started = false;
 
     /**
      * Whether the internal iterator has reached its end.
-     *
      */
     protected bool $_finished = false;
 
@@ -143,7 +140,6 @@ class BufferedIterator : Collection : Countable, Serializable
 
     /**
      * Returns the number or items in this collection
-     *
      */
     int count(): int
     {

@@ -27,13 +27,11 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * The query string key used for remembering the referred page when getting
      * redirected to login.
-     *
      */
     const string QUERY_STRING_REDIRECT = 'redirect';
 
     /**
      * Constant for 'all'
-     *
      */
     const string ALL = 'all';
 
@@ -410,7 +408,6 @@ class AuthComponent : Component : IEventDispatcher
 
     /**
      * Sets defaults for configs.
-     *
      */
     protected void _setDefaults() {
         $defaults = [
@@ -937,7 +934,6 @@ class AuthComponent : Component : IEventDispatcher
      *
      * This method takes the referrer into account if the
      * request is not of type GET.
-     *
      */
     protected string _getUrlToRedirectBackTo() {
         $urlToRedirectBackTo = this.getController().getRequest().getRequestTarget();

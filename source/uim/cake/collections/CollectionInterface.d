@@ -1123,7 +1123,6 @@ interface ICollection : Iterator, JsonSerializable
      *
      * If you need the count of elements after taking the keys in consideration
      * (the count of unique keys), you can call `countKeys()`
-     *
      */
     int count(): int;
 

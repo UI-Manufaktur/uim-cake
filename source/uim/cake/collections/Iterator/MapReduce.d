@@ -30,7 +30,6 @@ class MapReduce : IteratorAggregate
 
     /**
      * Whether the Map-Reduce routine has been executed already on the data
-     *
      */
     protected bool $_executed = false;
 
@@ -58,7 +57,6 @@ class MapReduce : IteratorAggregate
 
     /**
      * Count of elements emitted during the Reduce phase
-     *
      */
     protected int $_counter = 0;
 

@@ -18,7 +18,6 @@ use RuntimeException;
 abstract class BaseCommand : ICommand {
     /**
      * The name of this command.
-     *
      */
     protected string aName = "cake unknown";
 
