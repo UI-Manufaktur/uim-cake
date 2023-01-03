@@ -29,7 +29,7 @@ interface IPluginApplication : IEventDispatcher
     /**
      * Run bootstrap logic for loaded plugins.
      */
-    void pluginBootstrap(): void;
+    void pluginBootstrap();
 
     /**
      * Run routes hooks for loaded plugins

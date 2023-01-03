@@ -214,7 +214,7 @@ abstract class SchemaDialect
      * @param array $row The row data from `describeColumnSql`.
      * @return void
      */
-    abstract function convertColumnDescription(TableSchema $schema, array $row): void;
+    abstract void convertColumnDescription(TableSchema $schema, array $row);
 
     /**
      * Convert an index description results into abstract schema indexes or constraints.
@@ -224,7 +224,7 @@ abstract class SchemaDialect
      * @param array $row The row data from `describeIndexSql`.
      * @return void
      */
-    abstract function convertIndexDescription(TableSchema $schema, array $row): void;
+    abstract void convertIndexDescription(TableSchema $schema, array $row);
 
     /**
      * Convert a foreign key description into constraints on the Table object.
@@ -234,7 +234,7 @@ abstract class SchemaDialect
      * @param array $row The row data from `describeForeignKeySql`.
      * @return void
      */
-    abstract function convertForeignKeyDescription(TableSchema $schema, array $row): void;
+    abstract void convertForeignKeyDescription(TableSchema $schema, array $row);
 
     /**
      * Convert options data into table options.
@@ -242,7 +242,7 @@ abstract class SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema Table instance.
      * @param array $row The row of data.
      */
-    void convertOptionsDescription(TableSchema $schema, array $row): void
+    void convertOptionsDescription(TableSchema $schema, array $row)
     {
     }
 

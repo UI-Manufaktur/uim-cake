@@ -63,7 +63,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    function convertOptionsDescription(TableSchema $schema, array $row): void
+    void convertOptionsDescription(TableSchema $schema, array $row)
     {
         $schema.setOptions([
             "engine": $row["Engine"],
@@ -184,7 +184,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    function convertColumnDescription(TableSchema $schema, array $row): void
+    void convertColumnDescription(TableSchema $schema, array $row)
     {
         $field = _convertColumn($row["Type"]);
         $field += [
@@ -200,7 +200,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    function convertIndexDescription(TableSchema $schema, array $row): void
+    void convertIndexDescription(TableSchema $schema, array $row)
     {
         $type = null;
         $columns = $length = [];
@@ -271,7 +271,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    function convertForeignKeyDescription(TableSchema $schema, array $row): void
+    void convertForeignKeyDescription(TableSchema $schema, array $row): void
     {
         $data = [
             "type": TableSchema::CONSTRAINT_FOREIGN,

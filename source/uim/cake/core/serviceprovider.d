@@ -102,5 +102,5 @@ abstract class ServiceProvider : AbstractServiceProvider : BootableServiceProvid
      * @param uim.cake.Core\IContainer $container The container to add services to.
      * @return void
      */
-    abstract function services(IContainer $container): void;
+    abstract void services(IContainer $container);
 }

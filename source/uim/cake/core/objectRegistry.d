@@ -163,7 +163,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @return void
      * @throws \Exception
      */
-    abstract protected function _throwMissingClassError(string $class, ?string $plugin): void;
+    abstract protected void _throwMissingClassError(string $class, ?string $plugin);
 
     /**
      * Create an instance of a given classname.

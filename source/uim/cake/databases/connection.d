@@ -430,7 +430,7 @@ class Connection : IConnection {
                 this.log('BEGIN');
             }
 
-            this.getDisconnectRetry().run(function (): void {
+            this.getDisconnectRetry().run(void () {
                 _driver.beginTransaction();
             });
 
@@ -592,7 +592,7 @@ class Connection : IConnection {
      * Run driver specific SQL to disable foreign key checks.
      */
     void disableForeignKeys() {
-        this.getDisconnectRetry().run(function (): void {
+        this.getDisconnectRetry().run(void () {
             this.execute(_driver.disableForeignKeySQL()).closeCursor();
         });
     }
@@ -601,7 +601,7 @@ class Connection : IConnection {
      * Run driver specific SQL to enable foreign key checks.
      */
     void enableForeignKeys() {
-        this.getDisconnectRetry().run(function (): void {
+        this.getDisconnectRetry().run(void () {
             this.execute(_driver.enableForeignKeySQL()).closeCursor();
         });
     }

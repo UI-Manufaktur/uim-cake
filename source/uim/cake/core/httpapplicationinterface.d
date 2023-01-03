@@ -14,7 +14,7 @@ interface IHttpApplication : RequestHandlerInterface
      *
      * Override this method to add additional bootstrap logic for your application.
      */
-    void bootstrap(): void;
+    void bootstrap();
 
     /**
      * Define the HTTP middleware layers for an application.

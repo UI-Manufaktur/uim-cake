@@ -44,14 +44,14 @@ interface IStatement
      * @param mixed $value The value to bind to variable in query
      * @param string|int|null $type name of configured Type class, or PDO type constant.
      */
-    void bindValue($column, $value, $type = "string"): void;
+    void bindValue($column, $value, $type = "string");
 
     /**
      * Closes a cursor in the database, freeing up any resources and memory
      * allocated to it. In most cases you don"t need to call this method, as it is
      * automatically called after fetching all results from the result set.
      */
-    void closeCursor(): void;
+    void closeCursor();
 
     /**
      * Returns the number of columns this statement"s results will contain
@@ -158,7 +158,7 @@ interface IStatement
      * @param array $params list of values to be bound
      * @param array $types list of types to be used, keys should match those in $params
      */
-    void bind(array $params, array $types): void;
+    void bind(array $params, array $types);
 
     /**
      * Returns the latest primary inserted using this statement
