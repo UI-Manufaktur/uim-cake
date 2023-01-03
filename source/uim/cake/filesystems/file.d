@@ -459,7 +459,7 @@ class File
      *
      * @return bool True if it"s executable, false otherwise
      */
-    function executable(): bool
+    bool executable()
     {
         return is_executable(this.path);
     }
@@ -469,7 +469,7 @@ class File
      *
      * @return bool True if file is readable, false otherwise
      */
-    function readable(): bool
+    bool readable()
     {
         return is_readable(this.path);
     }
@@ -543,7 +543,7 @@ class File
      * @param bool $overwrite Overwrite $dest if exists
      * @return bool Success
      */
-    function copy(string $dest, bool $overwrite = true): bool
+    bool copy(string $dest, bool $overwrite = true)
     {
         if (!this.exists() || is_file($dest) && !$overwrite) {
             return false;
@@ -601,7 +601,7 @@ class File
      * @param array<string>|string $replace Text(s) to replace with.
      * @return bool Success
      */
-    function replaceText($search, $replace): bool
+    bool replaceText($search, $replace)
     {
         if (!this.open("r+")) {
             return false;

@@ -45,5 +45,5 @@ interface ErrorLoggerInterface
      * @return bool
      * @deprecated 4.4.0 Implement `logError` instead.
      */
-    function logMessage($level, string $message, array $context = []): bool;
+    bool logMessage($level, string $message, array $context = []);
 }

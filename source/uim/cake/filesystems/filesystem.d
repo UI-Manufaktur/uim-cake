@@ -169,7 +169,7 @@ class Filesystem
      * @return bool
      * @throws uim.cake.Core\exceptions.CakeException If path is not a directory.
      */
-    function deleteDir(string $path): bool
+    bool deleteDir(string $path)
     {
         if (!file_exists($path)) {
             return true;
@@ -214,7 +214,7 @@ class Filesystem
      * @param string $source Source path.
      * @param string $destination Destination path.
      */
-    bool copyDir(string $source, string $destination): bool
+    bool copyDir(string $source, string $destination)
     {
         $destination = (new SplFileInfo($destination)).getPathname();
 
@@ -248,7 +248,7 @@ class Filesystem
      *
      * @param string $path Path.
      */
-    bool isStream(string $path): bool
+    bool isStream(string $path)
     {
         return strpos($path, "://") != false;
     }

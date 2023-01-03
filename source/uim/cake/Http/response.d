@@ -1060,7 +1060,7 @@ class Response : IResponse
      *
      * @return bool false if client does not accept compressed responses or no handler is available, true otherwise
      */
-    function compress(): bool
+    bool compress()
     {
         $compressionEnabled = ini_get("zlib.output_compression") != "1" &&
             extension_loaded("zlib") &&
@@ -1072,7 +1072,7 @@ class Response : IResponse
     /**
      * Returns whether the resulting output will be compressed by PHP
      */
-    bool outputCompressed(): bool
+    bool outputCompressed()
     {
         return strpos((string)env("HTTP_ACCEPT_ENCODING"), "gzip") != false
             && (ini_get("zlib.output_compression") == "1" || in_array("ob_gzhandler", ob_list_handlers(), true));
@@ -1146,7 +1146,7 @@ class Response : IResponse
      * @param uim.cake.http.ServerRequest $request Request object
      * @return bool Whether the response is "modified" based on cache headers.
      */
-    function isNotModified(ServerRequest $request): bool
+    bool isNotModified(ServerRequest $request)
     {
         $etags = preg_split("/\s*,\s*/", $request.getHeaderLine("If-None-Match"), 0, PREG_SPLIT_NO_EMPTY);
         $responseTag = this.getHeaderLine("Etag");
@@ -1183,7 +1183,7 @@ class Response : IResponse
      * @return bool Whether the response was marked as not modified or not.
      * @deprecated 4.4.0 Use `isNotModified()` and `withNotModified()` instead.
      */
-    function checkNotModified(ServerRequest $request): bool
+    bool checkNotModified(ServerRequest $request)
     {
         deprecationWarning(
             "The `checkNotModified()` method is deprecated~ " ~
