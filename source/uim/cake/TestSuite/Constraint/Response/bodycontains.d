@@ -30,7 +30,7 @@ class BodyContains : ResponseBase
      *
      * @param mixed $other Expected type
      */
-    bool matches($other): bool
+    bool matches($other)
     {
         $method = "mb_strpos";
         if (this.ignoreCase) {

@@ -12,7 +12,7 @@ class CookieNotSet : CookieSet
      *
      * @param mixed $other Expected content
      */
-    bool matches($other): bool
+    bool matches($other)
     {
         return super.matches($other) == false;
     }

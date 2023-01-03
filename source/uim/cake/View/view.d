@@ -454,7 +454,7 @@ class View : IEventDispatcher
      * Returns if CakePHP"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      */
-    bool isAutoLayoutEnabled(): bool
+    bool isAutoLayoutEnabled()
     {
         return this.autoLayout;
     }
@@ -987,7 +987,7 @@ class View : IEventDispatcher
      *
      * @param string aName Name of the block
      */
-    bool exists(string aName): bool
+    bool exists(string aName)
     {
         return this.Blocks.exists($name);
     }

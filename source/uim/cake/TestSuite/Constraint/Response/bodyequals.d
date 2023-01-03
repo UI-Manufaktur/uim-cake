@@ -12,7 +12,7 @@ class BodyEquals : ResponseBase
      *
      * @param mixed $other Expected type
      */
-    bool matches($other): bool
+    bool matches($other)
     {
         return _getBodyAsString() == $other;
     }

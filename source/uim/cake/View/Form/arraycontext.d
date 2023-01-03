@@ -113,7 +113,7 @@ class ArrayContext : ContextInterface
     }
 
 
-    function isPrimaryKey(string $field): bool
+    bool isPrimaryKey(string $field): bool
     {
         $primaryKey = this.getPrimaryKey();
 
@@ -127,7 +127,7 @@ class ArrayContext : ContextInterface
      * must be defined in the "schema" data, and the "defaults" data must
      * contain a value for all fields in the key.
      */
-    bool isCreate(): bool
+    bool isCreate()
     {
         $primary = this.getPrimaryKey();
         foreach ($primary as $column) {
@@ -187,7 +187,7 @@ class ArrayContext : ContextInterface
      * @param string $field A dot separated path to check required-ness for.
      * @return bool|null
      */
-    function isRequired(string $field): ?bool
+    bool isRequired(string $field): ?bool
     {
         if (!is_array(_context["required"])) {
             return null;

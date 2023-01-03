@@ -575,7 +575,7 @@ class Validation
      * @return bool True if the value is valid, false otherwise
      * @see Regex credits: https://www.myintervals.com/blog/2009/05/20/iso-8601-date-validation-that-doesnt-suck/
      */
-    static function iso8601($check): bool
+    static bool iso8601($check): bool
     {
         if ($check instanceof DateTimeInterface) {
             return true;

@@ -12,7 +12,7 @@ class BodyNotRegExp : BodyRegExp
      *
      * @param mixed $other Expected pattern
      */
-    bool matches($other): bool
+    bool matches($other)
     {
         return super.matches($other) == false;
     }

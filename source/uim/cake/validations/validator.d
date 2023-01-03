@@ -2211,7 +2211,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @see uim.cake.validations.Validation::isArray()
      * @return this
      */
-    function isArray(string myField, Nullable!string myMessage = null, $when = null) {
+    bool isArray(string myField, Nullable!string myMessage = null, $when = null) {
         $extra = array_filter(["on": $when, "message": myMessage]);
 
         return this.add(myField, "isArray", $extra + [

@@ -12,7 +12,7 @@ class NoMailSent : MailConstraintBase
      *
      * @param mixed $other Constraint check
      */
-    bool matches($other): bool
+    bool matches($other)
     {
         return count(this.getMessages()) == 0;
     }

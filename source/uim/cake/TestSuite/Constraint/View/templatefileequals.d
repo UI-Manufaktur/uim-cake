@@ -27,7 +27,7 @@ class TemplateFileEquals : Constraint
      *
      * @param mixed $other Expected filename
      */
-    bool matches($other): bool
+    bool matches($other)
     {
         return strpos(this.filename, $other) != false;
     }

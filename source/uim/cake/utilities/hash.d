@@ -1069,7 +1069,7 @@ class Hash {
      * @param array myData First value
      * @param array $compare Second value
      * @return array Returns the key: value pairs that are not common in myData and $compare
-     *    The expression for this function is (myData - $compare) + ($compare - (myData - $compare))
+     *    The expression for this bool is (myData - $compare) + ($compare - (myData - $compare))
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::diff
      */
     static function diff(array myData, array $compare): array

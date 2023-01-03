@@ -35,7 +35,7 @@ class CookieEquals : ResponseBase
      *
      * @param mixed $other Expected content
      */
-    bool matches($other): bool
+    bool matches($other)
     {
         $cookie = this.response.getCookie(this.cookieName);
 

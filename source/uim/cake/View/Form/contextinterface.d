@@ -56,7 +56,7 @@ interface ContextInterface
      * @param string $field A dot separated path to check required-ness for.
      * @return bool|null
      */
-    function isRequired(string $field): ?bool;
+    bool isRequired(string $field): ?bool;
 
     /**
      * Gets the default "required" error message for a field

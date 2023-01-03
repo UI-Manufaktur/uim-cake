@@ -38,7 +38,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
      *
      * @return callable|string|bool
      */
-    function isPresenceRequired() {
+    bool isPresenceRequired() {
         return _validatePresent;
     }
 
@@ -59,7 +59,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
      *
      * @return callable|string|bool
      */
-    function isEmptyAllowed() {
+    bool isEmptyAllowed() {
         return _allowEmpty;
     }
 
