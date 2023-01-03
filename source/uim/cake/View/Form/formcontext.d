@@ -65,14 +65,12 @@ class FormContext : IContext
     }
 
 
-    bool isPrimaryKey(string $field)
-    {
+    bool isPrimaryKey(string $field) {
         return false;
     }
 
 
-    bool isCreate()
-    {
+    bool isCreate() {
         return true;
     }
 
@@ -186,8 +184,7 @@ class FormContext : IContext
     }
 
 
-    bool hasError(string $field)
-    {
+    bool hasError(string $field) {
         $errors = this.error($field);
 
         return count($errors) > 0;

@@ -113,8 +113,7 @@ class ArrayContext : IContext
     }
 
 
-    bool isPrimaryKey(string $field)
-    {
+    bool isPrimaryKey(string $field) {
         $primaryKey = this.getPrimaryKey();
 
         return in_array($field, $primaryKey, true);
@@ -127,8 +126,7 @@ class ArrayContext : IContext
      * must be defined in the "schema" data, and the "defaults" data must
      * contain a value for all fields in the key.
      */
-    bool isCreate()
-    {
+    bool isCreate() {
         $primary = this.getPrimaryKey();
         foreach ($primary as $column) {
             if (!empty(_context["defaults"][$column])) {
@@ -303,8 +301,7 @@ class ArrayContext : IContext
      * @param string $field A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    bool hasError(string $field)
-    {
+    bool hasError(string $field) {
         if (empty(_context["errors"])) {
             return false;
         }

@@ -89,8 +89,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool True if the given datetime string is today.
      */
-    bool isToday($dateString, $timezone = null)
-    {
+    bool isToday($dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isToday();
     }
 
@@ -101,8 +100,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool True if the given datetime string lies in the future.
      */
-    bool isFuture($dateString, $timezone = null)
-    {
+    bool isFuture($dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isFuture();
     }
 
@@ -113,8 +111,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool True if the given datetime string lies in the past.
      */
-    bool isPast($dateString, $timezone = null)
-    {
+    bool isPast($dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isPast();
     }
 
@@ -125,8 +122,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool True if datetime string is within current week
      */
-    bool isThisWeek($dateString, $timezone = null)
-    {
+    bool isThisWeek($dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isThisWeek();
     }
 
@@ -137,8 +133,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool True if datetime string is within the current month
      */
-    bool isThisMonth($dateString, $timezone = null)
-    {
+    bool isThisMonth($dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isThisMonth();
     }
 
@@ -149,8 +144,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool True if datetime string is within current year
      */
-    bool isThisYear($dateString, $timezone = null)
-    {
+    bool isThisYear($dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isThisYear();
     }
 
@@ -161,8 +155,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool True if datetime string was yesterday
      */
-    function wasYesterday($dateString, $timezone = null)
-    {
+    function wasYesterday($dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isYesterday();
     }
 
@@ -173,8 +166,7 @@ class TimeHelper : Helper
      * @param \DateTimeZone|string|null $timezone User"s timezone string or DateTimeZone object
      * @return bool True if datetime string was yesterday
      */
-    bool isTomorrow($dateString, $timezone = null)
-    {
+    bool isTomorrow($dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isTomorrow();
     }
 
@@ -302,8 +294,7 @@ class TimeHelper : Helper
      * @return bool
      * @see uim.cake.I18n\Time::wasWithinLast()
      */
-    function wasWithinLast(string $timeInterval, $dateString, $timezone = null)
-    {
+    function wasWithinLast(string $timeInterval, $dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).wasWithinLast($timeInterval);
     }
 
@@ -317,8 +308,7 @@ class TimeHelper : Helper
      * @return bool
      * @see uim.cake.I18n\Time::wasWithinLast()
      */
-    bool isWithinNext(string $timeInterval, $dateString, $timezone = null)
-    {
+    bool isWithinNext(string $timeInterval, $dateString, $timezone = null) {
         return (new FrozenTime($dateString, $timezone)).isWithinNext($timeInterval);
     }
 

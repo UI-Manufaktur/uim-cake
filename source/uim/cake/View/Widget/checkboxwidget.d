@@ -40,8 +40,7 @@ class CheckboxWidget : BasicWidget
      * @param uim.cake.View\Form\IContext $context The current form context.
      * @return string Generated HTML string.
      */
-    string render(array $data, IContext $context)
-    {
+    string render(array $data, IContext $context) {
         $data += this.mergeDefaults($data, $context);
 
         if (_isChecked($data)) {
@@ -67,8 +66,7 @@ class CheckboxWidget : BasicWidget
      *
      * @param array<string, mixed> $data Data to look at and determine checked state.
      */
-    protected bool _isChecked(array $data)
-    {
+    protected bool _isChecked(array $data) {
         if (array_key_exists("checked", $data)) {
             return (bool)$data["checked"];
         }

@@ -290,8 +290,7 @@ class SelectBoxWidget : BasicWidget
      * @param string aKey The key to test.
      * @param array<string>|string|int|false|null $selected The selected values.
      */
-    protected bool _isSelected(string aKey, $selected)
-    {
+    protected bool _isSelected(string aKey, $selected) {
         if ($selected == null) {
             return false;
         }
@@ -311,8 +310,7 @@ class SelectBoxWidget : BasicWidget
      * @param string aKey The key to test.
      * @param array<string>|null $disabled The disabled values.
      */
-    protected bool _isDisabled(string aKey, ?array $disabled)
-    {
+    protected bool _isDisabled(string aKey, ?array $disabled) {
         if ($disabled == null) {
             return false;
         }

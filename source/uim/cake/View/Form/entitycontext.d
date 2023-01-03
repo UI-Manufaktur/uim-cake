@@ -165,8 +165,7 @@ class EntityContext : IContext
         return (array)_tables[_rootName].getPrimaryKey();
     }
 
-    bool isPrimaryKey(string $field)
-    {
+    bool isPrimaryKey(string $field) {
         $parts = explode(".", $field);
         $table = _getTable($parts);
         if (!$table) {
@@ -186,8 +185,7 @@ class EntityContext : IContext
      * If the context is for a collection or array the first object in the
      * collection will be used.
      */
-    bool isCreate()
-    {
+    bool isCreate() {
         $entity = _context["entity"];
         if (is_iterable($entity)) {
             foreach ($entity as $e) {
@@ -693,8 +691,7 @@ class EntityContext : IContext
      * @param string $field A dot separated path to check errors on.
      * @return bool Returns true if the errors for the field are not empty.
      */
-    bool hasError(string $field)
-    {
+    bool hasError(string $field) {
         return this.error($field) != [];
     }
 

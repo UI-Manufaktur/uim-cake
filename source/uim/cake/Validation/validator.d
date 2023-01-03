@@ -283,8 +283,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string aName The field name to check.
      */
-    bool hasField(string aName)
-    {
+    bool hasField(string aName) {
         return isset(_fields[$name]);
     }
 
@@ -387,8 +386,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $field name of the field to check
      */
-    bool offsetExists($field)
-    {
+    bool offsetExists($field) {
         return isset(_fields[$field]);
     }
 
@@ -2366,8 +2364,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string $field Field name.
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      */
-    bool isEmptyAllowed(string $field, bool $newRecord)
-    {
+    bool isEmptyAllowed(string $field, bool $newRecord) {
         $providers = _providers;
         $data = [];
         $context = compact("data", "newRecord", "field", "providers");
@@ -2382,8 +2379,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string $field Field name.
      * @param bool $newRecord Whether the data to be validated is new or to be updated.
      */
-    bool isPresenceRequired(string $field, bool $newRecord)
-    {
+    bool isPresenceRequired(string $field, bool $newRecord) {
         $providers = _providers;
         $data = [];
         $context = compact("data", "newRecord", "field", "providers");
@@ -2462,8 +2458,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param uim.cake.validations.ValidationSet $field The set of rules for a field.
      * @param array<string, mixed> $context A key value list of data containing the validation context.
      */
-    protected bool _checkPresence(ValidationSet $field, array $context)
-    {
+    protected bool _checkPresence(ValidationSet $field, array $context) {
         $required = $field.isPresenceRequired();
 
         if (!is_string($required) && is_callable($required)) {
@@ -2485,8 +2480,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param uim.cake.validations.ValidationSet $field the set of rules for a field
      * @param array<string, mixed> $context a key value list of data containing the validation context.
      */
-    protected bool _canBeEmpty(ValidationSet $field, array $context)
-    {
+    protected bool _canBeEmpty(ValidationSet $field, array $context) {
         $allowed = $field.isEmptyAllowed();
 
         if (!is_string($allowed) && is_callable($allowed)) {
@@ -2509,8 +2503,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return bool
      * @deprecated 3.7.0 Use {@link isEmpty()} instead
      */
-    protected bool _fieldIsEmpty($data)
-    {
+    protected bool _fieldIsEmpty($data) {
         return this.isEmpty($data, static::EMPTY_ALL);
     }
 
@@ -2520,8 +2513,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param mixed $data Value to check against.
      * @param int $flags A bitmask of EMPTY_* flags which specify what is empty
      */
-    protected bool isEmpty($data, int $flags)
-    {
+    protected bool isEmpty($data, int $flags) {
         if ($data == null) {
             return true;
         }

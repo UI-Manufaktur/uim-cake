@@ -413,8 +413,7 @@ class View : IEventDispatcher
     /**
      * Get path for templates files.
      */
-    string getTemplatePath()
-    {
+    string getTemplatePath() {
         return this.templatePath;
     }
 
@@ -433,8 +432,7 @@ class View : IEventDispatcher
     /**
      * Get path for layout files.
      */
-    string getLayoutPath()
-    {
+    string getLayoutPath() {
         return this.layoutPath;
     }
 
@@ -454,8 +452,7 @@ class View : IEventDispatcher
      * Returns if CakePHP"s conventional mode of applying layout files is enabled.
      * Disabled means that layouts will not be automatically applied to rendered views.
      */
-    bool isAutoLayoutEnabled()
-    {
+    bool isAutoLayoutEnabled() {
         return this.autoLayout;
     }
 
@@ -511,8 +508,7 @@ class View : IEventDispatcher
      * Get the name of the template file to render. The name specified is the
      * filename in `templates/<SubFolder>/` without the .php extension.
      */
-    string getTemplate()
-    {
+    string getTemplate() {
         return this.template;
     }
 
@@ -534,8 +530,7 @@ class View : IEventDispatcher
      * The name specified is the filename of the layout in `templates/layout/`
      * without the .php extension.
      */
-    string getLayout()
-    {
+    string getLayout() {
         return this.layout;
     }
 
@@ -697,8 +692,7 @@ class View : IEventDispatcher
      *   is not found in the plugin, the normal view path cascade will be searched.
      * @return bool Success
      */
-    function elementExists(string aName)
-    {
+    function elementExists(string aName) {
         return (bool)_getElementFileName($name);
     }
 
@@ -987,8 +981,7 @@ class View : IEventDispatcher
      *
      * @param string aName Name of the block
      */
-    bool exists(string aName)
-    {
+    bool exists(string aName) {
         return this.Blocks.exists($name);
     }
 

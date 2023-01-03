@@ -169,8 +169,7 @@ class ViewBlock
      *
      * @param string aName Name of the block
      */
-    bool exists(string aName)
-    {
+    bool exists(string aName) {
         return isset(_blocks[$name]);
     }
 

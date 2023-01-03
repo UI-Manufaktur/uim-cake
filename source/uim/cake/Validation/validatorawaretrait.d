@@ -157,8 +157,7 @@ trait ValidatorAwareTrait
      *
      * @param string aName The name of a validator.
      */
-    bool hasValidator(string aName)
-    {
+    bool hasValidator(string aName) {
         $method = "validation" ~ ucfirst($name);
         if (this.validationMethodExists($method)) {
             return true;
@@ -172,8 +171,7 @@ trait ValidatorAwareTrait
      *
      * @param string aName Validation method name.
      */
-    protected bool validationMethodExists(string aName)
-    {
+    protected bool validationMethodExists(string aName) {
         return method_exists(this, $name);
     }
 
