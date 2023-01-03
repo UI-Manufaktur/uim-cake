@@ -5,21 +5,16 @@ module uim.cake.TestSuite\Constraint\Response;
  *
  * @internal
  */
-class BodyNotEmpty : BodyEmpty
-{
+class BodyNotEmpty : BodyEmpty {
     /**
      * Checks assertion
-     *
      * @param mixed $other Expected type
      */
-    bool matches($other): bool
-    {
+    bool matches($other) {
         return super.matches($other) == false;
     }
 
-    /**
-     * Assertion message
-     */
+    // Assertion message
     string toString() {
         return "response body is not empty";
     }

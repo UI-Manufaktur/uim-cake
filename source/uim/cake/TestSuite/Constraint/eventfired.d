@@ -42,8 +42,7 @@ class EventFired : Constraint
      *
      * @param mixed $other Constraint check
      */
-    bool matches($other): bool
-    {
+    bool matches($other) {
         $list = _eventManager.getEventList();
 
         return $list == null ? false : $list.hasEvent($other);
