@@ -2625,7 +2625,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *
      * @param string $property the association name
      */
-    bool __isset($property) {
+    bool __isSet($property) {
         return _associations.has($property);
     }
 

@@ -61,7 +61,7 @@ interface IDriver
      * @throws uim.cake.databases.exceptions.MissingConnectionException If database connection could not be established.
      * @return bool True on success, false on failure.
      */
-    function connect(): bool;
+    bool connect();
 
     /**
      * Disconnects from database server.
@@ -88,7 +88,7 @@ interface IDriver
      *
      * @return bool True if it is valid to use this driver.
      */
-    function enabled(): bool;
+    bool enabled();
 
     /**
      * Prepares a sql statement to be executed.
@@ -103,21 +103,21 @@ interface IDriver
      *
      * @return bool True on success, false otherwise.
      */
-    function beginTransaction(): bool;
+    bool beginTransaction();
 
     /**
      * Commits a transaction.
      *
      * @return bool True on success, false otherwise.
      */
-    function commitTransaction(): bool;
+    bool commitTransaction();
 
     /**
      * Rollbacks a transaction.
      *
      * @return bool True on success, false otherwise.
      */
-    function rollbackTransaction(): bool;
+    bool rollbackTransaction();
 
     /**
      * Get the SQL for releasing a save point.
@@ -157,7 +157,7 @@ interface IDriver
      * @return bool True if driver supports dynamic constraints.
      * @deprecated 4.3.0 Fixtures no longer dynamically drop and create constraints.
      */
-    function supportsDynamicConstraints(): bool;
+    bool supportsDynamicConstraints();
 
     /**
      * Returns whether this driver supports save points for nested transactions.
@@ -165,7 +165,7 @@ interface IDriver
      * @return bool True if save points are supported, false otherwise.
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_SAVEPOINT)` instead
      */
-    function supportsSavePoints(): bool;
+    bool supportsSavePoints();
 
     /**
      * Returns a value in a safe representation to be used in a query string
@@ -181,7 +181,7 @@ interface IDriver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_QUOTE)` instead
      */
-    function supportsQuoting(): bool;
+    bool supportsQuoting();
 
     /**
      * Returns a callable function that will be used to transform a passed Query object.
@@ -241,7 +241,7 @@ interface IDriver
      * Checks whether the driver is connected.
      *
      */
-    bool isConnected(): bool;
+    bool isConnected();
 
     /**
      * Sets whether this driver should automatically quote identifiers
@@ -262,9 +262,8 @@ interface IDriver
     /**
      * Returns whether this driver should automatically quote identifiers
      * in queries.
-     *
      */
-    bool isAutoQuotingEnabled(): bool;
+    bool isAutoQuotingEnabled();
 
     /**
      * Transforms the passed query to this Driver"s dialect and returns an instance

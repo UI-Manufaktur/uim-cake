@@ -233,7 +233,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @param string aName Name of object being checked.
      */
-    bool __isset(string aName): bool
+    bool __isSet(string aName): bool
     {
         return this.has($name);
     }

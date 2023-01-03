@@ -101,7 +101,7 @@ class Mysql : Driver
      *
      * @return bool true on success
      */
-    function connect(): bool
+    bool connect()
     {
         if (_connection) {
             return true;
@@ -157,7 +157,7 @@ class Mysql : Driver
      *
      * @return bool true if it is valid to use this driver
      */
-    function enabled(): bool
+    bool enabled()
     {
         return in_array("mysql", PDO::getAvailableDrivers(), true);
     }
@@ -212,7 +212,7 @@ class Mysql : Driver
     }
 
 
-    function supports(string $feature): bool
+    bool supports(string $feature)
     {
         switch ($feature) {
             case static::FEATURE_CTE:
@@ -229,7 +229,7 @@ class Mysql : Driver
     }
 
 
-    function supportsDynamicConstraints(): bool
+    bool supportsDynamicConstraints()
     {
         return true;
     }
@@ -238,7 +238,7 @@ class Mysql : Driver
      * Returns true if the connected server is MariaDB.
      *
      */
-    bool isMariadb(): bool
+    bool isMariadb()
     {
         this.version();
 
@@ -269,7 +269,7 @@ class Mysql : Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_CTE)` instead
      */
-    function supportsCTEs(): bool
+    bool supportsCTEs()
     {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
@@ -282,7 +282,7 @@ class Mysql : Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_JSON)` instead
      */
-    function supportsNativeJson(): bool
+    bool supportsNativeJson()
     {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 
@@ -295,7 +295,7 @@ class Mysql : Driver
      * @return bool
      * @deprecated 4.3.0 Use `supports(IDriver::FEATURE_WINDOW)` instead
      */
-    function supportsWindowFunctions(): bool
+    bool supportsWindowFunctions()
     {
         deprecationWarning("Feature support checks are now implemented by `supports()` with FEATURE_* constants.");
 

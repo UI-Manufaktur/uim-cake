@@ -129,7 +129,7 @@ trait EntityTrait
      * @return bool
      * @see uim.cake.orm.Entity::has()
      */
-    function __isset(string $field): bool
+    bool __isSet(string $field)
     {
         return this.has($field);
     }
@@ -331,7 +331,7 @@ trait EntityTrait
      *
      * @param array<string>|string $field The field or fields to check.
      */
-    bool has($field): bool
+    bool has($field)
     {
         foreach ((array)$field as $prop) {
             if (this.get($prop) == null) {
@@ -356,7 +356,7 @@ trait EntityTrait
      *
      * @param string $field The field to check.
      */
-    bool isEmpty(string $field): bool
+    bool isEmpty(string $field)
     {
         $value = this.get($field);
         if (
@@ -391,7 +391,7 @@ trait EntityTrait
      *
      * @param string $field The field to check.
      */
-    bool hasValue(string $field): bool
+    bool hasValue(string $field)
     {
         return !this.isEmpty($field);
     }
@@ -553,7 +553,7 @@ trait EntityTrait
      * @param string $offset The offset to check.
      * @return bool Success
      */
-    function offsetExists($offset): bool
+    bool offsetExists($offset)
     {
         return this.has($offset);
     }
@@ -720,7 +720,7 @@ trait EntityTrait
      * @param string|null $field The field to check the status for. Null for the whole entity.
      * @return bool Whether the field was changed or not
      */
-    function isDirty(?string $field = null): bool
+    bool isDirty(?string $field = null)
     {
         if ($field == null) {
             return !empty(_dirty);
@@ -778,7 +778,7 @@ trait EntityTrait
      *
      * @return bool Whether the entity has been persisted.
      */
-    function isNew(): bool
+    bool isNew()
     {
         if (func_num_args()) {
             deprecationWarning("Using isNew() as setter is deprecated. Use setNew() instead.");
@@ -794,7 +794,7 @@ trait EntityTrait
      *
      * @param bool $includeNested true will check nested entities for hasErrors()
      */
-    bool hasErrors(bool $includeNested = true): bool
+    bool hasErrors(bool $includeNested = true)
     {
         if (Hash::filter(_errors)) {
             return true;
@@ -966,7 +966,7 @@ trait EntityTrait
      *
      * @param uim.cake.Datasource\IEntity|array $object The object to read errors from.
      */
-    protected bool _readHasErrors($object): bool
+    protected bool _readHasErrors($object)
     {
         if ($object instanceof IEntity && $object.hasErrors()) {
             return true;
@@ -1132,7 +1132,7 @@ trait EntityTrait
      *
      * @param string $field Field name to check
      */
-    bool isAccessible(string $field): bool
+    bool isAccessible(string $field)
     {
         $value = _accessible[$field] ?? null;
 

@@ -116,7 +116,7 @@ trait EntityTrait
      * @return bool
      * @see uim.cake.orm.Entity::has()
      */
-    bool __isset(string myField) {
+    bool __isSet(string myField) {
         return this.has(myField);
     }
 

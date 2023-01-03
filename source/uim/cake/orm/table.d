@@ -2532,7 +2532,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param string property the association name
      * @return bool
      */
-    auto __isset($property) {
+    auto __isSet($property) {
         return _associations.has($property);
     }
 

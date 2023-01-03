@@ -92,7 +92,7 @@ interface IStatement
      * @param array|null $params list of values to be bound to query
      * @return bool true on success, false otherwise
      */
-    function execute(?array $params = null): bool;
+    bool execute(?array $params = null);
 
     /**
      * Returns the next row for the result set after executing this statement.

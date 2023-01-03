@@ -43,7 +43,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @throws uim.cake.View\exceptions.MissingHelperException When a helper could not be found.
      *    App helpers are searched, and then plugin helpers.
      */
-    function __isset(string $helper): bool
+    function __isSet(string $helper): bool
     {
         if (isset(_loaded[$helper])) {
             return true;
