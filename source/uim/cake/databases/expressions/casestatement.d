@@ -32,7 +32,6 @@ class CaseStatementExpression : IExpression, ITypedResult
 
     /**
      * Whether this is a simple case expression.
-     *
      */
     protected bool $isSimpleVariant = false;
 

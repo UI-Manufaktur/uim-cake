@@ -28,7 +28,6 @@ class JsonConfig : ConfigEngineInterface
 
     /**
      * File extension.
-     *
      */
     protected string $_extension = ".json";
 

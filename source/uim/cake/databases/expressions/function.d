@@ -20,7 +20,6 @@ class FunctionExpression : QueryExpression : ITypedResult
 
     /**
      * The name of the function to be constructed when generating the SQL string
-     *
      */
     protected string $_name;
 
@@ -142,7 +141,6 @@ class FunctionExpression : QueryExpression : ITypedResult
     /**
      * The name of the function is in itself an expression to generate, thus
      * always adding 1 to the amount of expressions stored in this object.
-     *
      */
     int count(): int
     {

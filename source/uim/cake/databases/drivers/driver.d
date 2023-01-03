@@ -44,7 +44,6 @@ abstract class Driver : IDriver
     /**
      * Indicates whether the driver is doing automatic identifier quoting
      * for all queries
-     *
      */
     protected bool $_autoQuoting = false;
 
@@ -57,7 +56,6 @@ abstract class Driver : IDriver
 
     /**
      * The last number of connection retry attempts.
-     *
      */
     protected int $connectRetries = 0;
 
@@ -212,7 +210,6 @@ abstract class Driver : IDriver
 
     /**
      * Returns whether a transaction is active for connection.
-     *
      */
     bool inTransaction()
     {
@@ -411,7 +408,6 @@ abstract class Driver : IDriver
 
     /**
      * Returns the number of connection retry attempts made.
-     *
      */
     int getConnectRetries(): int
     {

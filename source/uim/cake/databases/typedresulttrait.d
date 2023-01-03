@@ -7,7 +7,6 @@ trait TypedResultTrait
 {
     /**
      * The type name this expression will return when executed
-     *
      */
     protected string $_returnType = "string";
 

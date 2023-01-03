@@ -45,7 +45,6 @@ class PluginCollection : Iterator, Countable
 
     /**
      * Loop depth
-     *
      */
     protected int $loopDepth = -1;
 
@@ -242,7 +241,6 @@ class PluginCollection : Iterator, Countable
      * Implementation of Countable.
      *
      * Get the number of plugins in the collection.
-     *
      */
     int count(): int
     {
@@ -286,7 +284,6 @@ class PluginCollection : Iterator, Countable
 
     /**
      * Part of Iterator Interface
-     *
      */
     bool valid() {
         $valid = isset(this.names[this.positions[this.loopDepth]]);

@@ -25,7 +25,6 @@ class UnaryExpression : IExpression
 
     /**
      * The operator this unary expression represents
-     *
      */
     protected string $_operator;
 
@@ -38,7 +37,6 @@ class UnaryExpression : IExpression
 
     /**
      * Where to place the operator
-     *
      */
     protected int $position;
 

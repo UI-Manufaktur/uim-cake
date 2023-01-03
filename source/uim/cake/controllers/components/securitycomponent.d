@@ -37,7 +37,6 @@ class SecurityComponent : Component
 {
     /**
      * Default message used for exceptions thrown
-     *
      */
     const string DEFAULT_EXCEPTION_MESSAGE = "The request has been black-holed";
 
@@ -68,7 +67,6 @@ class SecurityComponent : Component
 
     /**
      * Holds the current action of the controller
-     *
      */
     protected string $_action;
 

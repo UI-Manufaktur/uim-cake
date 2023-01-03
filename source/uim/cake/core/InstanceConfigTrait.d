@@ -20,7 +20,6 @@ trait InstanceConfigTrait
 
     /**
      * Whether the config property has already been configured with defaults
-     *
      */
     protected bool $_configInitialized = false;
 

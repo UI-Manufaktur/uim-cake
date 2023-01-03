@@ -40,7 +40,6 @@ class CommonTableExpression : IExpression
 
     /**
      * Whether the CTE is recursive.
-     *
      */
     protected bool $recursive = false;
 
@@ -134,7 +133,6 @@ class CommonTableExpression : IExpression
 
     /**
      * Gets whether this CTE is recursive.
-     *
      */
     bool isRecursive()
     {

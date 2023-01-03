@@ -12,19 +12,16 @@ interface IStatement
 {
     /**
      * Used to designate that numeric indexes be returned in a result when calling fetch methods
-     *
      */
     const string FETCH_TYPE_NUM = "num";
 
     /**
      * Used to designate that an associated array be returned in a result when calling fetch methods
-     *
      */
     const string FETCH_TYPE_ASSOC = "assoc";
 
     /**
      * Used to designate that a stdClass object be returned in a result when calling fetch methods
-     *
      */
     const string FETCH_TYPE_OBJ = "obj";
 
@@ -66,7 +63,6 @@ interface IStatement
      *  $statement.execute();
      *  echo $statement.columnCount(); // outputs 2
      * ```
-     *
      */
     int columnCount(): int;
 
@@ -147,14 +143,12 @@ interface IStatement
      *  $statement.execute();
      *  print_r($statement.rowCount()); // will show 1
      * ```
-     *
      */
     int rowCount(): int;
 
     /**
      * Statements can be passed as argument for count()
      * to return the number for affected rows from last execution
-     *
      */
     int count(): int;
 

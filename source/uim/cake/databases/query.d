@@ -54,7 +54,6 @@ class Query : IExpression, IteratorAggregate
 
     /**
      * Type of this query (select, insert, update, delete).
-     *
      */
     protected string $_type = "select";
 
@@ -125,7 +124,6 @@ class Query : IExpression, IteratorAggregate
      * Indicates whether internal state of this query was changed, this is used to
      * discard internal cached objects such as the transformed query or the reference
      * to the executed statement.
-     *
      */
     protected bool $_dirty = false;
 
@@ -163,7 +161,6 @@ class Query : IExpression, IteratorAggregate
     /**
      * Boolean for tracking whether buffered results
      * are enabled.
-     *
      */
     protected bool $_useBufferedResults = true;
 
@@ -176,7 +173,6 @@ class Query : IExpression, IteratorAggregate
 
     /**
      * Tracking flag to disable casting
-     *
      */
     protected bool $typeCastEnabled = true;
 
@@ -260,7 +256,6 @@ class Query : IExpression, IteratorAggregate
      *
      * The above example will change the published column to true for all false records, and return the number of
      * records that were updated.
-     *
      */
     int rowCountAndClose(): int
     {
@@ -2141,7 +2136,6 @@ class Query : IExpression, IteratorAggregate
      *
      * When disabled it will consume less memory as fetched results are not
      * remembered for future iterations.
-     *
      */
     bool isBufferedResultsEnabled(): bool
     {
@@ -2215,7 +2209,6 @@ class Query : IExpression, IteratorAggregate
      * When disabled, the fields will be returned as received from the database
      * driver (which in most environments means they are being returned as
      * strings), which can improve performance with larger datasets.
-     *
      */
     bool isResultsCastingEnabled(): bool
     {
@@ -2280,7 +2273,6 @@ class Query : IExpression, IteratorAggregate
     /**
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching.
-     *
      */
     protected void _dirty() {
         _dirty = true;

@@ -454,7 +454,6 @@ class Configure {
 
     /**
      * Clear all values stored in Configure.
-     *
      */
     static void clear() {
         static::$_values = [];

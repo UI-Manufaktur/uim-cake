@@ -134,7 +134,6 @@ class TypeFactory
 
     /**
      * Clears out all created instances and mapped types classes, useful for testing
-     *
      */
     static void clear() {
         static::$_types = [];

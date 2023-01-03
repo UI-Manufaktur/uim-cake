@@ -20,7 +20,6 @@ class QueryExpression : IExpression, Countable
     /**
      * String to be used for joining each of the internal expressions
      * this object internally stores for example "AND", "OR", etc.
-     *
      */
     protected string $_conjunction;
 
@@ -510,7 +509,6 @@ class QueryExpression : IExpression, Countable
      * Returns the number of internal conditions that are stored in this expression.
      * Useful to determine if this expression object is void or it will generate
      * a non-empty string when compiled
-     *
      */
     int count(): int
     {
@@ -627,7 +625,6 @@ class QueryExpression : IExpression, Countable
     /**
      * Returns true if this expression contains any other nested
      * IExpression objects
-     *
      */
     bool hasNestedExpression(): bool
     {

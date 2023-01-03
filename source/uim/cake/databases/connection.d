@@ -29,26 +29,22 @@ class Connection : IConnection {
 
     /**
      * Contains how many nested transactions have been started.
-     *
      */
     protected int $_transactionLevel = 0;
 
     /**
      * Whether a transaction is active in this connection.
-     *
      */
     protected bool $_transactionStarted = false;
 
     /**
      * Whether this connection can and should use savepoints for nested
      * transactions.
-     *
      */
     protected bool $_useSavePoints = false;
 
     /**
      * Whether to log queries generated during this connection.
-     *
      */
     protected bool $_logQueries = false;
 
@@ -234,7 +230,6 @@ class Connection : IConnection {
 
     /**
      * Returns whether connection to database server was already established.
-     *
      */
     bool isConnected() {
         return _driver.isConnected();
@@ -651,7 +646,6 @@ class Connection : IConnection {
 
     /**
      * Returns whether some nested transaction has been already rolled back.
-     *
      */
     protected bool wasNestedTransactionRolledback() {
         return this.nestedTransactionRollbackException instanceof NestedTransactionRollbackException;
@@ -700,7 +694,6 @@ class Connection : IConnection {
      * Checks if using `quote()` is supported.
      *
      * This is not required to use `quoteIdentifier()`.
-     *
      */
     bool supportsQuoting() {
         return _driver.supports(IDriver::FEATURE_QUOTE);
@@ -788,7 +781,6 @@ class Connection : IConnection {
 
     /**
      * Check if query logging is enabled.
-     *
      */
     bool isQueryLoggingEnabled() {
         return _logQueries;

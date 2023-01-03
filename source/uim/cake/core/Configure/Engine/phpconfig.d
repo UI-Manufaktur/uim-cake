@@ -34,7 +34,6 @@ class PhpConfig : ConfigEngineInterface
 
     /**
      * File extension.
-     *
      */
     protected string $_extension = ".php";
 

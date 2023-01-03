@@ -43,7 +43,6 @@ class IniConfig : ConfigEngineInterface
 
     /**
      * File extension.
-     *
      */
     protected string $_extension = ".ini";
 

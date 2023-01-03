@@ -16,7 +16,6 @@ class IdentifierExpression : IExpression
 {
     /**
      * Holds the identifier string
-     *
      */
     protected string $_identifier;
 

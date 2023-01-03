@@ -68,13 +68,11 @@ class Sqlserver : Driver
 
     /**
      * String used to start a database identifier quoting to make it safe
-     *
      */
     protected string $_startQuote = "[";
 
     /**
      * String used to end a database identifier quoting to make it safe
-     *
      */
     protected string $_endQuote = "]";
 

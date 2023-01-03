@@ -69,13 +69,11 @@ class QueryCompiler
      * Indicate whether this query dialect supports ordered unions.
      *
      * Overridden in subclasses.
-     *
      */
     protected bool $_orderedUnion = true;
 
     /**
      * Indicate whether aliases in SELECT clause need to be always quoted.
-     *
      */
     protected bool $_quotedSelectAliases = false;
 

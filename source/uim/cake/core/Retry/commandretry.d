@@ -64,7 +64,6 @@ class CommandRetry
 
     /**
      * Returns the last number of retry attemps.
-     *
      */
     int getRetries(): int
     {

@@ -20,7 +20,6 @@ class ValueBinder
 
     /**
      * A counter of the number of parameters bound in this expression object
-     *
      */
     protected int $_bindingsCount = 0;
 

@@ -59,13 +59,11 @@ class Mysql : Driver
 
     /**
      * String used to start a database identifier quoting to make it safe
-     *
      */
     protected string $_startQuote = "`";
 
     /**
      * String used to end a database identifier quoting to make it safe
-     *
      */
     protected string $_endQuote = "`";
 
@@ -74,7 +72,6 @@ class Mysql : Driver
      *
      * If the underlying server is MariaDB, its value will get set to `"mariadb"`
      * after `version()` method is called.
-     *
      */
     protected string $serverType = self::SERVER_TYPE_MYSQL;
 
@@ -232,7 +229,6 @@ class Mysql : Driver
 
     /**
      * Returns true if the connected server is MariaDB.
-     *
      */
     bool isMariadb() {
         this.version();

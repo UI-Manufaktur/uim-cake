@@ -43,7 +43,6 @@ class ValuesExpression : IExpression {
     /**
      * Whether values have been casted to expressions
      * already.
-     *
      */
     protected bool $_castedExpressions = false;
 
@@ -259,7 +258,6 @@ class ValuesExpression : IExpression {
 
     /**
      * Converts values that need to be casted to expressions
-     *
      */
     protected void _processExpressions() {
         $types = [];

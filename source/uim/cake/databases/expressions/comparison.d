@@ -32,13 +32,11 @@ class ComparisonExpression : IExpression, FieldInterface
 
     /**
      * The operator used for comparing field and value
-     *
      */
     protected string $_operator = "=";
 
     /**
      * Whether the value in this expression is a traversable
-     *
      */
     protected bool $_isMultiple = false;
 

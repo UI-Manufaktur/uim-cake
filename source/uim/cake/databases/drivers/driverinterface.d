@@ -15,43 +15,36 @@ interface IDriver
 {
     /**
      * Common Table Expressions (with clause) support.
-     *
      */
     const string FEATURE_CTE = "cte";
 
     /**
      * Disabling constraints without being in transaction support.
-     *
      */
     const string FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION = "disable-constraint-without-transaction";
 
     /**
      * Native JSON data type support.
-     *
      */
     const string FEATURE_JSON = "json";
 
     /**
      * PDO::quote() support.
-     *
      */
     const string FEATURE_QUOTE = "quote";
 
     /**
      * Transaction savepoint support.
-     *
      */
     const string FEATURE_SAVEPOINT = "savepoint";
 
     /**
      * Truncate with foreign keys attached support.
-     *
      */
     const string FEATURE_TRUNCATE_WITH_CONSTRAINTS = "truncate-with-constraints";
 
     /**
      * Window function support (all or partial clauses).
-     *
      */
     const string FEATURE_WINDOW = "window";
 
@@ -239,7 +232,6 @@ interface IDriver
 
     /**
      * Checks whether the driver is connected.
-     *
      */
     bool isConnected();
 

@@ -20,7 +20,6 @@ class CakeException : RuntimeException
 
     /**
      * Template string that has attributes sprintf()"ed into it.
-     *
      */
     protected string $_messageTemplate = "";
 
@@ -33,7 +32,6 @@ class CakeException : RuntimeException
 
     /**
      * Default exception code
-     *
      */
     protected int $_defaultCode = 0;
 

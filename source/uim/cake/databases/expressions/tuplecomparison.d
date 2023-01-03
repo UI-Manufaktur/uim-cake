@@ -189,7 +189,6 @@ class TupleComparison : ComparisonExpression
     /**
      * Determines if each of the values in this expressions is a tuple in
      * itself
-     *
      */
     bool isMulti()
     {
