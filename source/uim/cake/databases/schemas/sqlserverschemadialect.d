@@ -189,7 +189,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function convertColumnDescription(TableSchema $schema, array $row): void
+    void convertColumnDescription(TableSchema $schema, array $row)
     {
         $field = _convertColumn(
             $row["type"],
@@ -270,7 +270,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function convertIndexDescription(TableSchema $schema, array $row): void
+    void convertIndexDescription(TableSchema $schema, array $row)
     {
         $type = TableSchema::INDEX_INDEX;
         $name = $row["index_name"];
@@ -330,7 +330,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function convertForeignKeyDescription(TableSchema $schema, array $row): void
+    void convertForeignKeyDescription(TableSchema $schema, array $row)
     {
         $data = [
             "type": TableSchema::CONSTRAINT_FOREIGN,

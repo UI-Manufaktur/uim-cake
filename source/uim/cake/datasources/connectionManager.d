@@ -67,7 +67,7 @@ class ConnectionManager
      * @throws uim.cake.Core\exceptions.CakeException When trying to modify an existing config.
      * @see uim.cake.Core\StaticConfigTrait::config()
      */
-    static function setConfig($key, $config = null): void
+    static void setConfig($key, $config = null)
     {
         if (is_array($config)) {
             $config["name"] = $key;
@@ -142,7 +142,7 @@ class ConnectionManager
      * @param string $source The existing connection to alias.
      * @param string $alias The alias name that resolves to `$source`.
      */
-    static void alias(string $source, string $alias): void
+    static void alias(string $source, string $alias)
     {
         static::$_aliasMap[$alias] = $source;
     }
@@ -155,7 +155,7 @@ class ConnectionManager
      *
      * @param string $alias The connection alias to drop
      */
-    static void dropAlias(string $alias): void
+    static void dropAlias(string $alias)
     {
         unset(static::$_aliasMap[$alias]);
     }

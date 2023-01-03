@@ -114,7 +114,7 @@ trait EntityTrait
      * @param string $field The name of the field to set
      * @param mixed $value The value to set to the field
      */
-    void __set(string $field, $value): void
+    void __set(string $field, $value)
     {
         this.set($field, $value);
     }
@@ -136,7 +136,7 @@ trait EntityTrait
      *
      * @param string $field The field to unset
      */
-    void __unset(string $field): void
+    void __unset(string $field)
     {
         this.unset($field);
     }
@@ -568,7 +568,7 @@ trait EntityTrait
      * @param string $offset The offset to set.
      * @param mixed $value The value to set.
      */
-    void offsetSet($offset, $value): void
+    void offsetSet($offset, $value)
     {
         this.set($offset, $value);
     }
@@ -578,7 +578,7 @@ trait EntityTrait
      *
      * @param string $offset The offset to remove.
      */
-    void offsetUnset($offset): void
+    void offsetUnset($offset)
     {
         this.unset($offset);
     }
@@ -736,7 +736,7 @@ trait EntityTrait
      * no fields being modified or added at all. This is an useful call
      * for an initial object hydration
      */
-    void clean(): void
+    void clean()
     {
         _dirty = [];
         _errors = [];

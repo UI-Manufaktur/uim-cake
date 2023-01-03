@@ -11,7 +11,7 @@ interface FieldInterface
      *
      * @param uim.cake.databases.IExpression|array|string $field The field to compare with.
      */
-    void setField($field): void;
+    void setField($field);
 
     /**
      * Returns the field name

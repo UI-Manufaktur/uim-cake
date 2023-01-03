@@ -42,7 +42,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    function handleException(Throwable $exception): void
+    void handleException(Throwable $exception)
     {
         _displayException($exception);
         this.logException($exception);
@@ -59,7 +59,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      *
      * @param \Throwable $exception The exception to handle
      */
-    protected void _displayException(Throwable $exception): void
+    protected void _displayException(Throwable $exception)
     {
         $errorName = "Exception:";
         if ($exception instanceof FatalErrorException) {
@@ -84,7 +84,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      * @param array $error An array of error data.
      * @param bool $debug Whether the app is in debug mode.
      */
-    protected void _displayError(array $error, bool $debug): void
+    protected void _displayError(array $error, bool $debug)
     {
         $message = sprintf(
             "%s\nIn [%s, line %s]",
@@ -105,7 +105,7 @@ class ConsoleErrorHandler : BaseErrorHandler
      *
      * @param int $code The exit code.
      */
-    protected void _stop(int $code): void
+    protected void _stop(int $code)
     {
         exit($code);
     }

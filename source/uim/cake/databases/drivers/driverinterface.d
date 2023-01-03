@@ -59,7 +59,7 @@ interface IDriver
     /**
      * Disconnects from database server.
      */
-    void disconnect(): void;
+    void disconnect();
 
     /**
      * Returns correct connection resource or object that is internally used.

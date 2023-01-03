@@ -51,7 +51,7 @@ trait ModelAwareTrait
      *
      * @param string aName Class name.
      */
-    protected void _setModelClass(string aName): void
+    protected void _setModelClass(string aName)
     {
         if (this.modelClass == null) {
             this.modelClass = $name;
@@ -122,7 +122,7 @@ trait ModelAwareTrait
      * @param string $type The name of the repository type the factory bool is for.
      * @param uim.cake.Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      */
-    void modelFactory(string $type, $factory): void
+    void modelFactory(string $type, $factory)
     {
         if (!$factory instanceof ILocator&& !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(

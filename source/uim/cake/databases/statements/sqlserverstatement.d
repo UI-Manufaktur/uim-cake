@@ -19,7 +19,7 @@ class SqlserverStatement : PDOStatement
      * @param mixed $value The value to bind to variable in query
      * @param string|int|null $type PDO type or name of configured Type class
      */
-    void bindValue($column, $value, $type = "string"): void
+    void bindValue($column, $value, $type = "string")
     {
         if ($type == null) {
             $type = "string";

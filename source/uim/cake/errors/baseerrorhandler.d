@@ -62,12 +62,12 @@ abstract class BaseErrorHandler
      * @param \Throwable $exception The uncaught exception.
      * @return void
      */
-    abstract protected function _displayException(Throwable $exception): void;
+    abstract protected void _displayException(Throwable $exception);
 
     /**
      * Register the error and exception handlers.
      */
-    void register(): void
+    void register()
     {
         deprecationWarning(
             "Use of `BaseErrorHandler` and subclasses are deprecated~ " ~

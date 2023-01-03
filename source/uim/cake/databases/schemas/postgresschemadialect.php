@@ -165,7 +165,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function convertColumnDescription(TableSchema $schema, array $row): void
+    void convertColumnDescription(TableSchema $schema, array $row)
     {
         $field = _convertColumn($row["type"]);
 
@@ -265,7 +265,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function convertIndexDescription(TableSchema $schema, array $row): void
+    void convertIndexDescription(TableSchema $schema, array $row)
     {
         $type = TableSchema::INDEX_INDEX;
         $name = $row["relname"];
@@ -299,7 +299,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @param string $type The index type.
      * @param array $row The metadata record to update with.
      */
-    protected void _convertConstraint(TableSchema $schema, string aName, string $type, array $row): void
+    protected void _convertConstraint(TableSchema $schema, string aName, string $type, array $row)
     {
         $constraint = $schema.getConstraint($name);
         if (!$constraint) {
@@ -341,7 +341,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function convertForeignKeyDescription(TableSchema $schema, array $row): void
+    void convertForeignKeyDescription(TableSchema $schema, array $row)
     {
         $data = [
             "type": TableSchema::CONSTRAINT_FOREIGN,
