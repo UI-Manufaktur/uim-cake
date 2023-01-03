@@ -99,8 +99,7 @@ class RuleInvoker
      * @param array $scope The rule"s scope/options.
      * @return bool Whether the rule passed.
      */
-    bool __invoke(IEntity $entity, array $scope)
-    {
+    bool __invoke(IEntity $entity, array $scope) {
         $rule = this.rule;
         $pass = $rule($entity, this.options + $scope);
         if ($pass == true || empty(this.options["errorField"])) {

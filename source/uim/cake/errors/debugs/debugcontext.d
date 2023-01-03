@@ -88,8 +88,7 @@ class DebugContext
      *
      * @param object $object The object to get a reference for.
      */
-    bool hasReference(object $object)
-    {
+    bool hasReference(object $object) {
         return this.refs.contains($object);
     }
 }

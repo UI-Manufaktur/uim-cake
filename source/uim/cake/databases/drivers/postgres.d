@@ -150,8 +150,7 @@ class Postgres : Driver
     }
 
 
-    bool supports(string $feature)
-    {
+    bool supports(string $feature) {
         switch ($feature) {
             case static::FEATURE_CTE:
             case static::FEATURE_JSON:
@@ -167,8 +166,7 @@ class Postgres : Driver
     }
 
 
-    bool supportsDynamicConstraints()
-    {
+    bool supportsDynamicConstraints() {
         return true;
     }
 

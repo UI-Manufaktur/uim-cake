@@ -12,8 +12,7 @@ class MysqlStatement : PDOStatement
     use BufferResultsTrait;
 
 
-    bool execute(?array $params = null)
-    {
+    bool execute(?array $params = null) {
         $connection = _driver.getConnection();
 
         try {

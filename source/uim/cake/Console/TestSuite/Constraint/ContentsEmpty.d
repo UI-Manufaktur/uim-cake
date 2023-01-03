@@ -12,8 +12,7 @@ class ContentsEmpty : ContentsBase
      *
      * @param mixed $other Expected
      */
-    bool matches($other)
-    {
+    bool matches($other) {
         return this.contents == "";
     }
 

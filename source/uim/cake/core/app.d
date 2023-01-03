@@ -147,8 +147,7 @@ class App
      * @param string aNamespace Namespace.
      * @return bool
      */
-    protected static bool _classExistsInBase(string aName, string aNamespace)
-    {
+    protected static bool _classExistsInBase(string aName, string aNamespace) {
         return class_exists($namespace . $name);
     }
 

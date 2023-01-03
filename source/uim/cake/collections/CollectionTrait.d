@@ -85,8 +85,7 @@ trait CollectionTrait
     }
 
 
-    bool some(callable $callback)
-    {
+    bool some(callable $callback) {
         foreach (this.optimizeUnwrap() as $key: $value) {
             if ($callback($value, $key) == true) {
                 return true;

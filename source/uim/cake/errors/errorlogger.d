@@ -87,8 +87,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @return bool
      * @deprecated 4.4.0 Use logError instead.
      */
-    bool logMessage($level, string $message, array $context = [])
-    {
+    bool logMessage($level, string $message, array $context = []) {
         if (!empty($context["request"])) {
             $message .= this.getRequestContext($context["request"]);
         }
@@ -110,8 +109,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @return bool
      * @deprecated 4.4.0 Use logException instead.
      */
-    bool log(Throwable $exception, ?IServerRequest $request = null)
-    {
+    bool log(Throwable $exception, ?IServerRequest $request = null) {
         $message = this.getMessage($exception, false, this.getConfig("trace"));
 
         if ($request != null) {

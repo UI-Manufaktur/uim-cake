@@ -54,8 +54,7 @@ class WindowExpression : IExpression, IWindow
      * These window expressions only specify a named window and do not
      * specify their own partitions, frame or order.
      */
-    bool isNamedOnly()
-    {
+    bool isNamedOnly() {
         return this.name.getIdentifier() && (!this.partitions && !this.frame && !this.order);
     }
 

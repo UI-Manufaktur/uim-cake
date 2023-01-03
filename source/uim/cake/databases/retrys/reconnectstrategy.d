@@ -60,8 +60,7 @@ class ReconnectStrategy : RetryStrategyInterface
      * Checks whether the exception was caused by a lost connection,
      * and returns true if it was able to successfully reconnect.
      */
-    bool shouldRetry(Exception $exception, int $retryCount)
-    {
+    bool shouldRetry(Exception $exception, int $retryCount) {
         $message = $exception.getMessage();
 
         foreach (static::$causes as $cause) {
@@ -78,8 +77,7 @@ class ReconnectStrategy : RetryStrategyInterface
      *
      * @return bool Whether the connection was re-established
      */
-    protected bool reconnect()
-    {
+    protected bool reconnect() {
         if (this.connection.inTransaction()) {
             // It is not safe to blindly reconnect in the middle of a transaction
             return false;

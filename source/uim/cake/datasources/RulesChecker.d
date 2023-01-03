@@ -205,8 +205,7 @@ class RulesChecker
      * @return bool
      * @throws \InvalidArgumentException if an invalid mode is passed.
      */
-    bool check(IEntity $entity, string $mode, array $options = [])
-    {
+    bool check(IEntity $entity, string $mode, array $options = []) {
         if ($mode == self::CREATE) {
             return this.checkCreate($entity, $options);
         }
@@ -229,8 +228,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkCreate(IEntity $entity, array $options = [])
-    {
+    bool checkCreate(IEntity $entity, array $options = []) {
         return _checkRules($entity, $options, array_merge(_rules, _createRules));
     }
 
@@ -241,8 +239,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkUpdate(IEntity $entity, array $options = [])
-    {
+    bool checkUpdate(IEntity $entity, array $options = []) {
         return _checkRules($entity, $options, array_merge(_rules, _updateRules));
     }
 
@@ -253,8 +250,7 @@ class RulesChecker
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      */
-    bool checkDelete(IEntity $entity, array $options = [])
-    {
+    bool checkDelete(IEntity $entity, array $options = []) {
         return _checkRules($entity, $options, _deleteRules);
     }
 
@@ -266,8 +262,7 @@ class RulesChecker
      * @param array<string, mixed> $options Extra options to pass to checker functions.
      * @param array<uim.cake.Datasource\RuleInvoker> $rules The list of rules that must be checked.
      */
-    protected bool _checkRules(IEntity $entity, array $options = [], array $rules = [])
-    {
+    protected bool _checkRules(IEntity $entity, array $options = [], array $rules = []) {
         $success = true;
         $options += _options;
         foreach ($rules as $rule) {

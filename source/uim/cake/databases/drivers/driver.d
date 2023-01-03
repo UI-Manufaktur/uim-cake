@@ -188,8 +188,7 @@ abstract class Driver : IDriver
     }
 
 
-    bool commitTransaction()
-    {
+    bool commitTransaction() {
         this.connect();
         if (!_connection.inTransaction()) {
             return false;
@@ -211,8 +210,7 @@ abstract class Driver : IDriver
     /**
      * Returns whether a transaction is active for connection.
      */
-    bool inTransaction()
-    {
+    bool inTransaction() {
         this.connect();
 
         return _connection.inTransaction();
@@ -355,8 +353,7 @@ abstract class Driver : IDriver
      *
      * @param string $feature Driver feature name
      */
-    bool supports(string $feature)
-    {
+    bool supports(string $feature) {
         switch ($feature) {
             case static::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION:
             case static::FEATURE_QUOTE:

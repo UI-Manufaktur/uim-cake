@@ -87,8 +87,7 @@ class Sqlserver : Driver
      * @throws \InvalidArgumentException if an unsupported setting is in the driver config
      * @return bool true on success
      */
-    bool connect()
-    {
+    bool connect() {
         if (_connection) {
             return true;
         }
@@ -162,8 +161,7 @@ class Sqlserver : Driver
      *
      * @return bool true if it is valid to use this driver
      */
-    bool enabled()
-    {
+    bool enabled() {
         return in_array("sqlsrv", PDO::getAvailableDrivers(), true);
     }
 
@@ -231,8 +229,7 @@ class Sqlserver : Driver
     }
 
 
-    bool supports(string $feature)
-    {
+    bool supports(string $feature) {
         switch ($feature) {
             case static::FEATURE_CTE:
             case static::FEATURE_TRUNCATE_WITH_CONSTRAINTS:
@@ -249,8 +246,7 @@ class Sqlserver : Driver
     }
 
 
-    bool supportsDynamicConstraints()
-    {
+    bool supportsDynamicConstraints() {
         return true;
     }
 

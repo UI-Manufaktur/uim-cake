@@ -87,8 +87,7 @@ class JsonConfig : ConfigEngineInterface
      * @param array $data Data to dump.
      * @return bool Success
      */
-    bool dump(string aKey, array $data)
-    {
+    bool dump(string aKey, array $data) {
         $filename = _getFilePath($key);
 
         return file_put_contents($filename, json_encode($data, JSON_PRETTY_PRINT)) > 0;

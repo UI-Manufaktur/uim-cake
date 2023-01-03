@@ -328,8 +328,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    bool hasColumn(string aName)
-    {
+    bool hasColumn(string aName) {
         return isset(_columns[$name]);
     }
 
@@ -360,8 +359,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    bool isNullable(string aName)
-    {
+    bool isNullable(string aName) {
         if (!isset(_columns[$name])) {
             return true;
         }
@@ -542,8 +540,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     /**
      * Check whether a table has an autoIncrement column defined.
      */
-    bool hasAutoincrement()
-    {
+    bool hasAutoincrement() {
         foreach (_columns as $column) {
             if (isset($column["autoIncrement"]) && $column["autoIncrement"]) {
                 return true;
@@ -614,8 +611,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    bool isTemporary()
-    {
+    bool isTemporary() {
         return _temporary;
     }
 

@@ -171,8 +171,7 @@ trait QueryTrait
     /**
      * Returns the current configured query `_eagerLoaded` value
      */
-    bool isEagerLoaded()
-    {
+    bool isEagerLoaded() {
         return _eagerLoaded;
     }
 
