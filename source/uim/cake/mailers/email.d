@@ -361,7 +361,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array<string>|string|null $content Content array or string
      */
-    void render($content = null): void
+    void render($content = null)
     {
         if (is_array($content)) {
             $content = implode("\n", $content) ~ "\n";
@@ -575,7 +575,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param string $data Serialized string.
      */
-    void unserialize($data): void
+    void unserialize($data)
     {
         this.createFromArray(unserialize($data));
     }

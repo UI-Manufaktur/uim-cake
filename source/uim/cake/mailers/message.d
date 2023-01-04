@@ -644,7 +644,7 @@ class Message : JsonSerializable, Serializable {
      * @return void
      * @throws \InvalidArgumentException If email address does not validate
      */
-    protected function validateEmail(string $email, string $context): void
+    protected void validateEmail(string $email, string $context)
     {
         if (this.emailPattern == null) {
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -1175,7 +1175,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Create unique boundary identifier
      */
-    protected void createBoundary(): void
+    protected void createBoundary()
     {
         if (
             this.boundary == null &&
@@ -1739,7 +1739,7 @@ class Message : JsonSerializable, Serializable {
             $array[$property] = this.{$property};
         }
 
-        array_walk($array["attachments"], function (&$item, $key): void {
+        array_walk($array["attachments"], void (&$item, $key) {
             if (!empty($item["file"])) {
                 $item["data"] = this.readFile($item["file"]);
                 unset($item["file"]);
@@ -1780,7 +1780,7 @@ class Message : JsonSerializable, Serializable {
     array __serialize(): array
     {
         $array = this.jsonSerialize();
-        array_walk_recursive($array, function (&$item, $key): void {
+        array_walk_recursive($array, void (&$item, $key) {
             if ($item instanceof SimpleXMLElement) {
                 $item = json_decode(json_encode((array)$item), true);
             }
@@ -1809,7 +1809,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @param array $data Data array.
      */
-    void __unserialize(array $data): void
+    void __unserialize(array $data)
     {
         this.createFromArray($data);
     }

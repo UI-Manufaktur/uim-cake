@@ -225,7 +225,7 @@ class SessionCsrfProtectionMiddleware : IMiddleware
      * @return void
      * @throws uim.cake.http.exceptions.InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
-    protected function validateToken(IServerRequest $request, Session $session): void
+    protected void validateToken(IServerRequest $request, Session $session)
     {
         $token = $session.read(_config["key"]);
         if (!$token || !is_string($token)) {

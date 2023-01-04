@@ -158,7 +158,7 @@ class EagerLoader
      * This will reset/clear out any contained associations that were not
      * added via matching().
      */
-    void clearContain(): void
+    void clearContain()
     {
         _containments = [];
         _normalized = null;

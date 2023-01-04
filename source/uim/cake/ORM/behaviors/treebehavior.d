@@ -323,7 +323,7 @@ class TreeBehavior : Behavior
      * less than 0. They were set to negative values before so their absolute value
      * wouldn"t change while performing other tree transformations.
      */
-    protected void _unmarkInternalTree(): void
+    protected void _unmarkInternalTree()
     {
         $config = this.getConfig();
         _table.updateAll(
@@ -791,7 +791,7 @@ class TreeBehavior : Behavior
      * Recovers the lft and right column values out of the hierarchy defined by the
      * parent column.
      */
-    void recover(): void
+    void recover()
     {
         _table.getConnection().transactional(function (): void {
             _recoverTree();

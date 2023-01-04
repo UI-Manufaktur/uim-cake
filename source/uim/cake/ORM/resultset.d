@@ -175,7 +175,7 @@ class ResultSet : IResultSet
      *
      * Part of Iterator interface.
      */
-    void next(): void
+    void next()
     {
         _index++;
     }
@@ -187,7 +187,7 @@ class ResultSet : IResultSet
      *
      * @throws uim.cake.databases.exceptions.DatabaseException
      */
-    void rewind(): void
+    void rewind()
     {
         if (_index == 0) {
             return;

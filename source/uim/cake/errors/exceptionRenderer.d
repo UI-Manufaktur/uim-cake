@@ -156,7 +156,7 @@ class ExceptionRenderer : IExceptionRenderer
      *
      * @return void
      */
-    protected auto clearOutput(): void
+    protected void clearOutput()
     {
         if (in_array(PHP_SAPI, ["cli", "phpdbg"])) {
             return;

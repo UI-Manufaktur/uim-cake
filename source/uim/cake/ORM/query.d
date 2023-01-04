@@ -1148,7 +1148,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Sets the default types for converting the fields in the select clause
      */
-    protected void _addDefaultSelectTypes(): void
+    protected void _addDefaultSelectTypes()
     {
         $typeMap = this.getTypeMap().getDefaults();
         $select = this.clause("select");

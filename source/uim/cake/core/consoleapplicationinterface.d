@@ -10,12 +10,9 @@ interface ConsoleApplicationInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
-     *
      * Override this method to add additional bootstrap logic for your application.
-     *
-     * @return void
      */
-    public function bootstrap(): void;
+    public void bootstrap();
 
     /**
      * Define the console commands for an application.
@@ -23,5 +20,5 @@ interface ConsoleApplicationInterface
      * @param \Cake\Console\CommandCollection $commands The CommandCollection to add commands into.
      * @return \Cake\Console\CommandCollection The updated collection.
      */
-    public function console(CommandCollection $commands): CommandCollection;
+    public CommandCollection console(CommandCollection $commands);
 }

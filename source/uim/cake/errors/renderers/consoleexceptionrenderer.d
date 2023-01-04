@@ -118,7 +118,7 @@ class ConsoleExceptionRenderer
      *
      * @param string $output The output to print.
      */
-    void write($output): void
+    void write($output)
     {
         this.output.write($output);
     }

@@ -55,7 +55,7 @@ class Package
      *
      * @param array<array|string> $messages The messages for this package.
      */
-    void setMessages(array $messages): void
+    void setMessages(array $messages)
     {
         this.messages = $messages;
     }
@@ -66,7 +66,7 @@ class Package
      * @param string aKey the key of the message
      * @param array|string $message the actual message
      */
-    void addMessage(string aKey, $message): void
+    void addMessage(string aKey, $message)
     {
         this.messages[$key] = $message;
     }
@@ -76,7 +76,7 @@ class Package
      *
      * @param array<array|string> $messages The messages to add in this package.
      */
-    void addMessages(array $messages): void
+    void addMessages(array $messages)
     {
         this.messages = array_merge(this.messages, $messages);
     }
@@ -106,7 +106,7 @@ class Package
      *
      * @param string $formatter The formatter name for this package.
      */
-    void setFormatter(string $formatter): void
+    void setFormatter(string $formatter)
     {
         this.formatter = $formatter;
     }
@@ -123,7 +123,7 @@ class Package
      *
      * @param string|null $fallback The fallback package name.
      */
-    void setFallback(?string $fallback): void
+    void setFallback(?string $fallback)
     {
         this.fallback = $fallback;
     }

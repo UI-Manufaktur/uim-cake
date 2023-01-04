@@ -211,13 +211,13 @@ class SecurityHeadersMiddleware : IMiddleware
      */
     protected void checkValues(string $value, array $allowed)
     {
-        if (!in_array($value, $allowed, true)) {
-            throw new InvalidArgumentException(sprintf(
-                "Invalid arg `%s`, use one of these: %s",
-                $value,
-                implode(", ", $allowed)
-            ));
-        }
+      if (!in_array($value, $allowed, true)) {
+          throw new InvalidArgumentException(sprintf(
+              "Invalid arg `%s`, use one of these: %s",
+              $value,
+              implode(", ", $allowed)
+          ));
+      }
     }
 
     /**

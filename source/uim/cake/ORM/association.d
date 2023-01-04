@@ -600,7 +600,7 @@ abstract class Association
      *
      * @param array<string, mixed> $options List of options used for initialization
      */
-    protected void _options(array $options): void
+    protected void _options(array $options)
     {
     }
 

@@ -154,7 +154,7 @@ class AssociationCollection : IteratorAggregate
      *
      * @param string $alias The alias name.
      */
-    void remove(string $alias): void
+    void remove(string $alias)
     {
         unset(_items[$alias]);
     }
@@ -164,7 +164,7 @@ class AssociationCollection : IteratorAggregate
      *
      * Once removed associations will no longer be reachable
      */
-    void removeAll(): void
+    void removeAll()
     {
         foreach (_items as $alias: $object) {
             this.remove($alias);

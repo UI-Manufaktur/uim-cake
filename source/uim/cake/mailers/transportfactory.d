@@ -50,7 +50,7 @@ class TransportFactory
      *
      * @param uim.cake.mailers.TransportRegistry $registry Injectable registry object.
      */
-    static void setRegistry(TransportRegistry $registry): void
+    static void setRegistry(TransportRegistry $registry)
     {
         static::$_registry = $registry;
     }
@@ -62,7 +62,7 @@ class TransportFactory
      * @return void
      * @throws \InvalidArgumentException When a tranport cannot be created.
      */
-    protected static function _buildTransport(string aName): void
+    protected static void _buildTransport(string aName)
     {
         if (!isset(static::$_config[$name])) {
             throw new InvalidArgumentException(

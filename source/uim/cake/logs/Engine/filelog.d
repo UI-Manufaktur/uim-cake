@@ -118,7 +118,7 @@ class FileLog : BaseLog
      * @return void
      * @see uim.cake.logs.Log::$_levels
      */
-    function log($level, $message, array $context = []): void
+    void log($level, $message, array $context = [])
     {
         $message = _format($message, $context);
         $message = this.formatter.format($level, $message, $context);

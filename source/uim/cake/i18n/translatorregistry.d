@@ -101,7 +101,7 @@ class TranslatorRegistry
      *
      * @param string $locale The new locale code.
      */
-    void setLocale(string $locale): void
+    void setLocale(string $locale)
     {
         this.locale = $locale;
     }
@@ -139,7 +139,7 @@ class TranslatorRegistry
      *
      * @param \Psr\SimpleCache\ICache&uim.cake.Cache\ICacheEngine $cacher The cacher instance.
      */
-    void setCacher($cacher): void
+    void setCacher($cacher)
     {
         _cacher = $cacher;
     }
@@ -240,7 +240,7 @@ class TranslatorRegistry
      * @param string aName The name of the translator package to register a loader for
      * @param callable $loader A callable object that should return a Package
      */
-    void registerLoader(string aName, callable $loader): void
+    void registerLoader(string aName, callable $loader)
     {
         _loaders[$name] = $loader;
     }
@@ -267,7 +267,7 @@ class TranslatorRegistry
      *
      * @param bool $enable flag to enable or disable fallback
      */
-    void useFallback(bool $enable = true): void
+    void useFallback(bool $enable = true)
     {
         _useFallback = $enable;
     }
