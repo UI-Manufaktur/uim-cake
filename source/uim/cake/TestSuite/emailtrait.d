@@ -25,7 +25,7 @@ trait EmailTrait
      *
      * @before
      */
-    void setupTransports(): void
+    void setupTransports()
     {
         TestEmailTransport::replaceAllTransports();
     }
@@ -35,7 +35,7 @@ trait EmailTrait
      *
      * @after
      */
-    void cleanupEmailTrait(): void
+    void cleanupEmailTrait()
     {
         TestEmailTransport::clearMessages();
     }

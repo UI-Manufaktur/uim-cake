@@ -328,7 +328,7 @@ class View : IEventDispatcher
      * So this method allows you to manipulate them as required after view instance
      * is constructed.
      */
-    void initialize(): void
+    void initialize()
     {
         this.setContentType();
     }

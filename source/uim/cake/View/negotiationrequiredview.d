@@ -29,7 +29,7 @@ class NegotiationRequiredView : View
     /**
      * Initialization hook method.
      */
-    void initialize(): void
+    void initialize()
     {
         $response = this.getResponse().withStatus(406);
         this.setResponse($response);

@@ -125,7 +125,7 @@ abstract class Cell : IEventDispatcher
      * Implement this method to avoid having to overwrite
      * the constructor and calling super(().
      */
-    void initialize(): void
+    void initialize()
     {
     }
 

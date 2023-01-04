@@ -337,7 +337,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
      */
-    void post($url, $data = []): void
+    void post($url, $data = [])
     {
         _sendRequest($url, "POST", $data);
     }
@@ -352,7 +352,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
      */
-    void patch($url, $data = []): void
+    void patch($url, $data = [])
     {
         _sendRequest($url, "PATCH", $data);
     }
@@ -367,7 +367,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
      */
-    void put($url, $data = []): void
+    void put($url, $data = [])
     {
         _sendRequest($url, "PUT", $data);
     }
@@ -381,7 +381,7 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      */
-    void delete($url): void
+    void delete($url)
     {
         _sendRequest($url, "DELETE");
     }
@@ -395,7 +395,7 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      */
-    void head($url): void
+    void head($url)
     {
         _sendRequest($url, "HEAD");
     }
@@ -409,7 +409,7 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      */
-    void options($url): void
+    void options($url)
     {
         _sendRequest($url, "OPTIONS");
     }

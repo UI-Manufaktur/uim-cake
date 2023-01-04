@@ -62,7 +62,7 @@ class FixtureManager
      *
      * @param bool $debug Whether fixture debug mode is enabled.
      */
-    void setDebug(bool $debug): void
+    void setDebug(bool $debug)
     {
         _debug = $debug;
     }
@@ -70,7 +70,7 @@ class FixtureManager
     /**
      * @param uim.cake.TestSuite\TestCase $test Test case
      */
-    void fixturize(TestCase $test): void
+    void fixturize(TestCase $test)
     {
         _initDb();
         if (!$test.getFixtures() || !empty(_processed[get_class($test)])) {
@@ -110,7 +110,7 @@ class FixtureManager
      * This allows models to use the test connections without
      * a pile of configuration work.
      */
-    protected void _aliasConnections(): void
+    protected void _aliasConnections()
     {
         $connections = ConnectionManager::configured();
         ConnectionManager::alias("test", "default");
@@ -136,7 +136,7 @@ class FixtureManager
     /**
      * Initializes this class with a DataSource object to use as default for all fixtures
      */
-    protected void _initDb(): void
+    protected void _initDb()
     {
         if (_initialized) {
             return;
@@ -398,7 +398,7 @@ class FixtureManager
      *
      * @param uim.cake.TestSuite\TestCase $test The test to inspect for fixture unloading.
      */
-    void unload(TestCase $test): void
+    void unload(TestCase $test)
     {
         $fixtures = $test.getFixtures();
         if (!$fixtures) {
