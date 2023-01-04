@@ -78,8 +78,7 @@ class SmtpTransport : AbstractTransport
      *
      * Ensure that the socket property isn"t reinitialized in a broken state.
      */
-    void __wakeup()
-    {
+    void __wakeup() {
         _socket = null;
     }
 
@@ -89,8 +88,7 @@ class SmtpTransport : AbstractTransport
      * This method tries to connect only in case there is no open
      * connection available already.
      */
-    void connect()
-    {
+    void connect() {
         if (!this.connected()) {
             _connect();
             _auth();
@@ -110,8 +108,7 @@ class SmtpTransport : AbstractTransport
      * This method tries to disconnect only in case there is an open
      * connection available.
      */
-    void disconnect()
-    {
+    void disconnect() {
         if (!this.connected()) {
             return;
         }
@@ -180,8 +177,7 @@ class SmtpTransport : AbstractTransport
      *
      * @param array<string> $responseLines Response lines to parse.
      */
-    protected void _bufferResponseLines(array $responseLines)
-    {
+    protected void _bufferResponseLines(array $responseLines) {
         $response = [];
         foreach ($responseLines as $responseLine) {
             if (preg_match("/^(\d{3})(?:[ -]+(.*))?$/", $responseLine, $match)) {
@@ -197,8 +193,7 @@ class SmtpTransport : AbstractTransport
     /**
      * Parses the last response line and extract the preferred authentication type.
      */
-    protected void _parseAuthType()
-    {
+    protected void _parseAuthType() {
         this.authType = null;
 
         $auth = "";
@@ -228,8 +223,7 @@ class SmtpTransport : AbstractTransport
      * @return void
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    protected void _connect()
-    {
+    protected void _connect() {
         _generateSocket();
         if (!_socket().connect()) {
             throw new SocketException("Unable to connect to SMTP server.");
@@ -283,8 +277,7 @@ class SmtpTransport : AbstractTransport
      * @return void
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    protected void _auth()
-    {
+    protected void _auth() {
         if (!isset(_config["username"], _config["password"])) {
             return;
         }
@@ -339,8 +332,7 @@ class SmtpTransport : AbstractTransport
      * @param string $username Username.
      * @param string $password Password.
      */
-    protected void _authLogin(string $username, string $password)
-    {
+    protected void _authLogin(string $username, string $password) {
         $replyCode = _smtpSend("AUTH LOGIN", "334|500|502|504");
         if ($replyCode == "334") {
             try {
@@ -436,8 +428,7 @@ class SmtpTransport : AbstractTransport
      * @param uim.cake.mailers.Message $message Message instance
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    protected void _sendRcpt(Message $message)
-    {
+    protected void _sendRcpt(Message $message) {
         $from = _prepareFromAddress($message);
         _smtpSend(_prepareFromCmd(key($from)));
 
@@ -454,8 +445,7 @@ class SmtpTransport : AbstractTransport
      * @return void
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    protected void _sendData(Message $message)
-    {
+    protected void _sendData(Message $message) {
         _smtpSend("DATA", "354");
 
         $headers = $message.getHeadersString([
@@ -480,8 +470,7 @@ class SmtpTransport : AbstractTransport
      * @return void
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    protected void _disconnect()
-    {
+    protected void _disconnect() {
         _smtpSend("QUIT", false);
         _socket().disconnect();
         this.authType = null;
@@ -493,8 +482,7 @@ class SmtpTransport : AbstractTransport
      * @return void
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    protected void _generateSocket()
-    {
+    protected void _generateSocket() {
         _socket = new Socket(_config);
     }
 

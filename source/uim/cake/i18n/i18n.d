@@ -97,8 +97,7 @@ class I18n
      *   constructing a translations package instance.
      * @param string|null $locale The locale for the translator.
      */
-    static void setTranslator(string aName, callable $loader, ?string $locale = null)
-    {
+    static void setTranslator(string aName, callable $loader, ?string $locale = null) {
         $locale = $locale ?: static::getLocale();
 
         $translators = static::translators();
@@ -183,8 +182,7 @@ class I18n
      * @param callable $loader A callable object that should return a Package
      * instance to be used for assembling a new translator.
      */
-    static void config(string aName, callable $loader)
-    {
+    static void config(string aName, callable $loader) {
         static::translators().registerLoader($name, $loader);
     }
 
@@ -194,8 +192,7 @@ class I18n
      *
      * @param string $locale The name of the locale to set as default.
      */
-    static void setLocale(string $locale)
-    {
+    static void setLocale(string $locale) {
         static::getDefaultLocale();
         Locale::setDefault($locale);
         if (isset(static::$_collection)) {
@@ -252,8 +249,7 @@ class I18n
      *
      * @param string aName The name of the formatter to use.
      */
-    static void setDefaultFormatter(string aName)
-    {
+    static void setDefaultFormatter(string aName) {
         static::translators().defaultFormatter($name);
     }
 
@@ -262,8 +258,7 @@ class I18n
      *
      * @param bool $enable flag to enable or disable fallback
      */
-    static void useFallback(bool $enable = true)
-    {
+    static void useFallback(bool $enable = true) {
         static::translators().useFallback($enable);
     }
 
@@ -271,8 +266,7 @@ class I18n
      * Destroys all translator instances and creates a new empty translations
      * collection.
      */
-    static void clear()
-    {
+    static void clear() {
         static::$_collection = null;
     }
 }

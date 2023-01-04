@@ -544,8 +544,7 @@ class Mailer : IEventListener
      * @return void
      * @psalm-param array{headers: string, message: string} $contents
      */
-    protected void logDelivery(array $contents)
-    {
+    protected void logDelivery(array $contents) {
         if (empty(this.logConfig)) {
             return;
         }

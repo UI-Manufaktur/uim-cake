@@ -72,8 +72,7 @@ class ArrayLog : BaseLog
     /**
      * Reset internal storage.
      */
-    void clear()
-    {
+    void clear() {
         this.content = [];
     }
 }

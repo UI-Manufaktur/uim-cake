@@ -361,8 +361,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array<string>|string|null $content Content array or string
      */
-    void render($content = null)
-    {
+    void render($content = null) {
         if (is_array($content)) {
             $content = implode("\n", $content) ~ "\n";
         }
@@ -416,8 +415,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array<string, string> $contents The content with "headers" and "message" keys.
      */
-    protected void _logDelivery(array $contents)
-    {
+    protected void _logDelivery(array $contents) {
         if (empty(_profile["log"])) {
             return;
         }
@@ -575,8 +573,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param string $data Serialized string.
      */
-    void unserialize($data)
-    {
+    void unserialize($data) {
         this.createFromArray(unserialize($data));
     }
 
@@ -585,8 +582,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array $data Data array.
      */
-    void __unserialize(array $data)
-    {
+    void __unserialize(array $data) {
         this.createFromArray($data);
     }
 

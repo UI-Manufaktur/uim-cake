@@ -296,8 +296,7 @@ class Number
      * if $currency argument is not provided. If null is passed, it will clear the
      * currently stored value
      */
-    static void setDefaultCurrency(?string $currency = null)
-    {
+    static void setDefaultCurrency(?string $currency = null) {
         static::$_defaultCurrency = $currency;
     }
 
@@ -321,8 +320,7 @@ class Number
      * if $currencyFormat argument is not provided. If null is passed, it will clear the
      * currently stored value
      */
-    static void setDefaultCurrencyFormat($currencyFormat = null)
-    {
+    static void setDefaultCurrencyFormat($currencyFormat = null) {
         static::$_defaultCurrencyFormat = $currencyFormat;
     }
 
@@ -400,8 +398,7 @@ class Number
      * @param int $type The formatter type to construct. Defaults to NumberFormatter::DECIMAL.
      * @param array<string, mixed> $options See Number::formatter() for possible options.
      */
-    static void config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = [])
-    {
+    static void config(string $locale, int $type = NumberFormatter::DECIMAL, array $options = []) {
         static::$_formatters[$locale][$type] = static::_setAttributes(
             new NumberFormatter($locale, $type),
             $options

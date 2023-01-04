@@ -175,8 +175,7 @@ class ResultSet : IResultSet
      *
      * Part of Iterator interface.
      */
-    void next()
-    {
+    void next() {
         _index++;
     }
 
@@ -187,8 +186,7 @@ class ResultSet : IResultSet
      *
      * @throws uim.cake.databases.exceptions.DatabaseException
      */
-    void rewind()
-    {
+    void rewind() {
         if (_index == 0) {
             return;
         }
@@ -301,8 +299,7 @@ class ResultSet : IResultSet
      *
      * @param array $data Data array.
      */
-    void __unserialize(array $data)
-    {
+    void __unserialize(array $data) {
         _results = SplFixedArray::fromArray($data);
         _useBuffering = true;
         _count = _results.count();
@@ -337,8 +334,7 @@ class ResultSet : IResultSet
      *
      * @param uim.cake.orm.Query $query The query from where to derive the associations
      */
-    protected void _calculateAssociationMap(Query $query)
-    {
+    protected void _calculateAssociationMap(Query $query) {
         $map = $query.getEagerLoader().associationsMap(_defaultTable);
         _matchingMap = (new Collection($map))
             .match(["matching": true])
@@ -357,8 +353,7 @@ class ResultSet : IResultSet
      *
      * @param uim.cake.orm.Query $query The query from where to derive the column map
      */
-    protected void _calculateColumnMap(Query $query)
-    {
+    protected void _calculateColumnMap(Query $query) {
         $map = [];
         foreach ($query.clause("select") as $key: $field) {
             $key = trim($key, ""`[]");

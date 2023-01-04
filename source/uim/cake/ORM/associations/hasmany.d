@@ -304,8 +304,7 @@ class HasMany : Association
      * @throws \InvalidArgumentException if non persisted entities are passed or if
      * any of them is lacking a primary key value
      */
-    void unlink(IEntity $sourceEntity, array $targetEntities, $options = [])
-    {
+    void unlink(IEntity $sourceEntity, array $targetEntities, $options = []) {
         if (is_bool($options)) {
             $options = [
                 "cleanProperty": $options,
@@ -589,8 +588,7 @@ class HasMany : Association
      *
      * @param array<string, mixed> $options original list of options passed in constructor
      */
-    protected void _options(array $options)
-    {
+    protected void _options(array $options) {
         if (!empty($options["saveStrategy"])) {
             this.setSaveStrategy($options["saveStrategy"]);
         }

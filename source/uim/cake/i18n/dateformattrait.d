@@ -56,8 +56,7 @@ trait DateFormatTrait
      *
      * @param string|null $locale The default locale string to be used.
      */
-    static void setDefaultLocale(?string $locale = null)
-    {
+    static void setDefaultLocale(?string $locale = null) {
         static::$defaultLocale = $locale;
     }
 
@@ -71,16 +70,14 @@ trait DateFormatTrait
     /**
      * Enables lenient parsing for locale formats.
      */
-    static void enableLenientParsing()
-    {
+    static void enableLenientParsing() {
         static::$lenientParsing = true;
     }
 
     /**
      * Enables lenient parsing for locale formats.
      */
-    static void disableLenientParsing()
-    {
+    static void disableLenientParsing() {
         static::$lenientParsing = false;
     }
 
@@ -244,8 +241,7 @@ trait DateFormatTrait
      * Resets the format used to the default when converting an instance of this type to
      * a string
      */
-    static void resetToStringFormat()
-    {
+    static void resetToStringFormat() {
         static::setToStringFormat([IntlDateFormatter::SHORT, IntlDateFormatter::SHORT]);
     }
 
@@ -262,14 +258,12 @@ trait DateFormatTrait
      *
      * @param array<int>|string|int $format Format.
      */
-    static void setToStringFormat($format)
-    {
+    static void setToStringFormat($format) {
         static::$_toStringFormat = $format;
     }
 
 
-    static void setJsonEncodeFormat($format)
-    {
+    static void setJsonEncodeFormat($format) {
         static::$_jsonEncodeFormat = $format;
     }
 
@@ -436,8 +430,7 @@ trait DateFormatTrait
      *
      * @param uim.cake.Chronos\DifferenceIFormatter $formatter The formatter instance when setting.
      */
-    static void setDiffFormatter(DifferenceIFormatter $formatter)
-    {
+    static void setDiffFormatter(DifferenceIFormatter $formatter) {
         static::$diffFormatter = $formatter;
     }
 

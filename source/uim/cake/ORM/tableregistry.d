@@ -58,8 +58,7 @@ class TableRegistry
      *
      * @param uim.cake.orm.Locator\ILocator $tableLocator Instance of a locator to use.
      */
-    static void setTableLocator(ILocator $tableLocator)
-    {
+    static void setTableLocator(ILocator $tableLocator) {
         FactoryLocator::add("Table", $tableLocator);
     }
 
@@ -109,8 +108,7 @@ class TableRegistry
      * @return void
      * @deprecated 3.6.0 Use {@link uim.cake.orm.Locator\TableLocator::remove()} instead. Will be removed in 5.0
      */
-    static void remove(string $alias)
-    {
+    static void remove(string $alias) {
         static::getTableLocator().remove($alias);
     }
 
@@ -120,8 +118,7 @@ class TableRegistry
      * @return void
      * @deprecated 3.6.0 Use {@link uim.cake.orm.Locator\TableLocator::clear()} instead. Will be removed in 5.0
      */
-    static void clear()
-    {
+    static void clear() {
         static::getTableLocator().clear();
     }
 }

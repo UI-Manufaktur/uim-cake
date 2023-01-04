@@ -269,8 +269,7 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Table $source The source table.
      * @param uim.cake.orm.Table $target The target table.
      */
-    protected void _generateTargetAssociations(Table $junction, Table $source, Table $target)
-    {
+    protected void _generateTargetAssociations(Table $junction, Table $source, Table $target) {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
         $tAlias = $target.getAlias();
@@ -314,8 +313,7 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Table $junction The junction table.
      * @param uim.cake.orm.Table $source The source table.
      */
-    protected void _generateSourceAssociations(Table $junction, Table $source)
-    {
+    protected void _generateSourceAssociations(Table $junction, Table $source) {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
 
@@ -351,8 +349,7 @@ class BelongsToMany : Association
      * @return void
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
-    protected void _generateJunctionAssociations(Table $junction, Table $source, Table $target)
-    {
+    protected void _generateJunctionAssociations(Table $junction, Table $source, Table $target) {
         $tAlias = $target.getAlias();
         $sAlias = $source.getAlias();
 
@@ -399,8 +396,7 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Query $query the query to be altered to include the target table data
      * @param array<string, mixed> $options Any extra options or overrides to be taken in account
      */
-    void attachTo(Query $query, array $options = [])
-    {
+    void attachTo(Query $query, array $options = []) {
         if (!empty($options["negateMatch"])) {
             _appendNotMatching($query, $options);
 
@@ -433,8 +429,7 @@ class BelongsToMany : Association
     }
 
 
-    protected void _appendNotMatching(Query $query, array $options)
-    {
+    protected void _appendNotMatching(Query $query, array $options) {
         if (empty($options["negateMatch"])) {
             return;
         }
@@ -1392,8 +1387,7 @@ class BelongsToMany : Association
      *
      * @param array<string, mixed> $options original list of options passed in constructor
      */
-    protected void _options(array $options)
-    {
+    protected void _options(array $options) {
         if (!empty($options["targetForeignKey"])) {
             this.setTargetForeignKey($options["targetForeignKey"]);
         }

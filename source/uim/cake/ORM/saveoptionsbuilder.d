@@ -87,8 +87,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param uim.cake.orm.Table $table Table object.
      * @param array $associations An associations array.
      */
-    protected void _associated(Table $table, array $associations)
-    {
+    protected void _associated(Table $table, array $associations) {
         foreach ($associations as $key: $associated) {
             if (is_int($key)) {
                 _checkAssociation($table, $associated);
@@ -109,8 +108,7 @@ class SaveOptionsBuilder : ArrayObject
      * @param uim.cake.orm.Table $table Table object.
      * @param string $association Association name.
      */
-    protected void _checkAssociation(Table $table, string $association)
-    {
+    protected void _checkAssociation(Table $table, string $association) {
         if (!$table.associations().has($association)) {
             throw new RuntimeException(sprintf(
                 "Table `%s` is not associated with `%s`",

@@ -110,8 +110,7 @@ class SyslogLog : BaseLog
      * @return void
      * @see uim.cake.logs.Log::$_levels
      */
-    void log($level, $message, array $context = [])
-    {
+    void log($level, $message, array $context = []) {
         if (!_open) {
             $config = _config;
             _open($config["prefix"], $config["flag"], $config["facility"]);
@@ -137,8 +136,7 @@ class SyslogLog : BaseLog
      * @param int $options the options flags to be used for logged messages
      * @param int $facility the stream or facility to log to
      */
-    protected void _open(string $ident, int $options, int $facility)
-    {
+    protected void _open(string $ident, int $options, int $facility) {
         openlog($ident, $options, $facility);
     }
 

@@ -42,8 +42,7 @@ abstract class AbstractTransport
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException If at least one of to, cc or bcc is not specified.
      */
-    protected void checkRecipient(Message $message)
-    {
+    protected void checkRecipient(Message $message) {
         if (
             $message.getTo() == []
             && $message.getCc() == []

@@ -225,8 +225,7 @@ class Behavior : IEventListener
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException if config are invalid
      */
-    void verifyConfig()
-    {
+    void verifyConfig() {
         $keys = ["implementedFinders", "implementedMethods"];
         foreach ($keys as $key) {
             if (!isset(_config[$key])) {

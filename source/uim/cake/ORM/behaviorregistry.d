@@ -57,8 +57,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param uim.cake.orm.Table $table The table this registry is attached to.
      */
-    void setTable(Table $table)
-    {
+    void setTable(Table $table) {
         _table = $table;
         this.setEventManager($table.getEventManager());
     }
@@ -101,8 +100,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @return void
      * @throws uim.cake.orm.exceptions.MissingBehaviorException
      */
-    protected void _throwMissingClassError(string $class, ?string $plugin)
-    {
+    protected void _throwMissingClassError(string $class, ?string $plugin) {
         throw new MissingBehaviorException([
             "class": $class ~ "Behavior",
             "plugin": $plugin,

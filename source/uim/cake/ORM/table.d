@@ -526,8 +526,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @return void
      * @throws \RuntimeException When an alias combination is too long
      */
-    protected void checkAliasLengths()
-    {
+    protected void checkAliasLengths() {
         if (_schema == null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this.getAlias()}` without schema.");
         }

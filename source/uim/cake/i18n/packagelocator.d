@@ -57,8 +57,7 @@ class PackageLocator
      * @param string $locale The locale for the package.
      * @param uim.cake.I18n\Package|callable $spec A callable that returns a package or Package instance.
      */
-    void set(string aName, string $locale, $spec)
-    {
+    void set(string aName, string $locale, $spec) {
         this.registry[$name][$locale] = $spec;
         this.converted[$name][$locale] = $spec instanceof Package;
     }

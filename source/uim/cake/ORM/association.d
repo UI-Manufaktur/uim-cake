@@ -600,8 +600,7 @@ abstract class Association
      *
      * @param array<string, mixed> $options List of options used for initialization
      */
-    protected void _options(array $options)
-    {
+    protected void _options(array $options) {
     }
 
     /**
@@ -630,8 +629,7 @@ abstract class Association
      * @return void
      * @throws \RuntimeException Unable to build the query or associations.
      */
-    void attachTo(Query $query, array $options = [])
-    {
+    void attachTo(Query $query, array $options = []) {
         $target = this.getTarget();
         $table = $target.getTable();
 
@@ -705,8 +703,7 @@ abstract class Association
      * @param uim.cake.orm.Query $query The query to modify
      * @param array<string, mixed> $options Options array containing the `negateMatch` key.
      */
-    protected void _appendNotMatching(Query $query, array $options)
-    {
+    protected void _appendNotMatching(Query $query, array $options) {
         $target = _targetTable;
         if (!empty($options["negateMatch"])) {
             $primaryKey = $query.aliasFields((array)$target.getPrimaryKey(), _name);
@@ -854,8 +851,7 @@ abstract class Association
      *
      * @param uim.cake.orm.Query $query the query this association is attaching itself to
      */
-    protected void _dispatchBeforeFind(Query $query)
-    {
+    protected void _dispatchBeforeFind(Query $query) {
         $query.triggerBeforeFind();
     }
 
@@ -867,8 +863,7 @@ abstract class Association
      * @param uim.cake.orm.Query $surrogate the query having the fields to be copied from
      * @param array<string, mixed> $options options passed to the method `attachTo`
      */
-    protected void _appendFields(Query $query, Query $surrogate, array $options)
-    {
+    protected void _appendFields(Query $query, Query $surrogate, array $options) {
         if ($query.getEagerLoader().isAutoFieldsEnabled() == false) {
             return;
         }
@@ -898,8 +893,7 @@ abstract class Association
      * target table.
      * @param array<string, mixed> $options options passed to the method `attachTo`
      */
-    protected void _formatAssociationResults(Query $query, Query $surrogate, array $options)
-    {
+    protected void _formatAssociationResults(Query $query, Query $surrogate, array $options) {
         $formatters = $surrogate.getResultFormatters();
 
         if (!$formatters || empty($options["propertyPath"])) {
@@ -956,8 +950,7 @@ abstract class Association
      * @param uim.cake.orm.Query $surrogate the query having the containments to be attached
      * @param array<string, mixed> $options options passed to the method `attachTo`
      */
-    protected void _bindNewAssociations(Query $query, Query $surrogate, array $options)
-    {
+    protected void _bindNewAssociations(Query $query, Query $surrogate, array $options) {
         $loader = $surrogate.getEagerLoader();
         $contain = $loader.getContain();
         $matching = $loader.getMatching();

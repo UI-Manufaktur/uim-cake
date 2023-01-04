@@ -644,8 +644,7 @@ class Message : JsonSerializable, Serializable {
      * @return void
      * @throws \InvalidArgumentException If email address does not validate
      */
-    protected void validateEmail(string $email, string $context)
-    {
+    protected void validateEmail(string $email, string $context) {
         if (this.emailPattern == null) {
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 return;
@@ -1175,8 +1174,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Create unique boundary identifier
      */
-    protected void createBoundary()
-    {
+    protected void createBoundary() {
         if (
             this.boundary == null &&
             (
@@ -1809,8 +1807,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @param array $data Data array.
      */
-    void __unserialize(array $data)
-    {
+    void __unserialize(array $data) {
         this.createFromArray($data);
     }
 }

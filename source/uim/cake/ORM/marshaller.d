@@ -858,8 +858,7 @@ class Marshaller
      * @param array $data readOnly $data to use.
      * @param array<string, mixed> $options List of options that are readOnly.
      */
-    protected void dispatchAfterMarshal(IEntity $entity, array $data, array $options = [])
-    {
+    protected void dispatchAfterMarshal(IEntity $entity, array $data, array $options = []) {
         $data = new ArrayObject($data);
         $options = new ArrayObject($options);
         _table.dispatchEvent("Model.afterMarshal", compact("entity", "data", "options"));

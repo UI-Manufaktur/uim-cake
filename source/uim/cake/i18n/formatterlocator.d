@@ -50,8 +50,7 @@ class FormatterLocator
      * @param string aName The formatter name.
      * @param class-string<uim.cake.I18n\IFormatter> $className A FQCN for a formatter.
      */
-    void set(string aName, string $className)
-    {
+    void set(string aName, string $className) {
         this.registry[$name] = $className;
         this.converted[$name] = false;
     }
