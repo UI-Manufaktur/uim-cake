@@ -54,8 +54,7 @@ class TextExceptionRenderer
      *
      * @param string $output The output to print.
      */
-    void write($output)
-    {
+    void write($output) {
         echo $output;
     }
 }

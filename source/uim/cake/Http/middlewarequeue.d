@@ -229,8 +229,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return void
      * @see \SeekableIterator::seek()
      */
-    void seek($position)
-    {
+    void seek($position) {
         if (!isset(this.queue[$position])) {
             throw new OutOfBoundsException("Invalid seek position ($position)");
         }
@@ -244,8 +243,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return void
      * @see \Iterator::rewind()
      */
-    void rewind()
-    {
+    void rewind() {
         this.position = 0;
     }
 
@@ -290,8 +288,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return void
      * @see \Iterator::next()
      */
-    void next()
-    {
+    void next() {
         ++this.position;
     }
 

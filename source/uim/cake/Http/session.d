@@ -286,8 +286,7 @@ class Session
      * @return void
      * @throws \RuntimeException if any directive could not be set
      */
-    void options(array $options)
-    {
+    void options(array $options) {
         if (session_status() == \PHP_SESSION_ACTIVE || headers_sent()) {
             return;
         }
@@ -463,8 +462,7 @@ class Session
      * @param array|string aName Name of variable
      * @param mixed $value Value to write
      */
-    void write($name, $value = null)
-    {
+    void write($name, $value = null) {
         if (!this.started()) {
             this.start();
         }
@@ -509,8 +507,7 @@ class Session
      *
      * @param string aName Session variable to remove
      */
-    void delete(string aName)
-    {
+    void delete(string aName) {
         if (this.check($name)) {
             /** @psalm-suppress InvalidScalarArgument */
             _overwrite($_SESSION, Hash::remove($_SESSION, $name));
@@ -523,8 +520,7 @@ class Session
      * @param array $old Set of old variables: values
      * @param array $new New set of variable: value
      */
-    protected void _overwrite(array &$old, array $new)
-    {
+    protected void _overwrite(array &$old, array $new) {
         foreach ($old as $key: $var) {
             if (!isset($new[$key])) {
                 unset($old[$key]);
@@ -539,8 +535,7 @@ class Session
     /**
      * Helper method to destroy invalid sessions.
      */
-    void destroy()
-    {
+    void destroy() {
         if (_hasSession() && !this.started()) {
             this.start();
         }
@@ -560,8 +555,7 @@ class Session
      *
      * @param bool $renew If session should be renewed, as well. Defaults to false.
      */
-    void clear(bool $renew = false)
-    {
+    void clear(bool $renew = false) {
         $_SESSION = [];
         if ($renew) {
             this.renew();
@@ -581,8 +575,7 @@ class Session
     /**
      * Restarts this session.
      */
-    void renew()
-    {
+    void renew() {
         if (!_hasSession() || _isCLI) {
             return;
         }

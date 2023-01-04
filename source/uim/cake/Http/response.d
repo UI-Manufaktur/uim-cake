@@ -452,8 +452,7 @@ class Response : IResponse
     /**
      * Creates the stream object.
      */
-    protected void _createStream()
-    {
+    protected void _createStream() {
         this.stream = new Stream(_streamTarget, _streamMode);
     }
 
@@ -463,8 +462,7 @@ class Response : IResponse
      *
      * @param string $type The type to set.
      */
-    protected void _setContentType(string $type)
-    {
+    protected void _setContentType(string $type) {
         if (in_array(_status, [304, 204], true)) {
             _clearHeader("Content-Type");
 
@@ -517,8 +515,7 @@ class Response : IResponse
      * @param string $header Header key.
      * @param string $value Header value.
      */
-    protected void _setHeader(string $header, string $value)
-    {
+    protected void _setHeader(string $header, string $value) {
         $normalized = strtolower($header);
         this.headerNames[$normalized] = $header;
         this.headers[$header] = [$value];
@@ -530,8 +527,7 @@ class Response : IResponse
      * @phpstan-param non-empty-string $header
      * @param string $header Header key.
      */
-    protected void _clearHeader(string $header)
-    {
+    protected void _clearHeader(string $header) {
         $normalized = strtolower($header);
         if (!isset(this.headerNames[$normalized])) {
             return;
@@ -597,8 +593,7 @@ class Response : IResponse
      * @return void
      * @throws \InvalidArgumentException For invalid status code arguments.
      */
-    protected void _setStatus(int $code, string $reasonPhrase = "")
-    {
+    protected void _setStatus(int $code, string $reasonPhrase = "") {
         if ($code < static::STATUS_CODE_MIN || $code > static::STATUS_CODE_MAX) {
             throw new InvalidArgumentException(sprintf(
                 "Invalid status code: %s. Use a valid HTTP status code in range 1xx - 5xx.",
@@ -645,8 +640,7 @@ class Response : IResponse
      * @param string $type Content type.
      * @param array<string>|string $mimeType Definition of the mime type.
      */
-    void setTypeMap(string $type, $mimeType)
-    {
+    void setTypeMap(string $type, $mimeType) {
         _mimeTypes[$type] = $mimeType;
     }
 
@@ -872,8 +866,7 @@ class Response : IResponse
      * Helper method to generate a valid Cache-Control header from the options set
      * in other methods
      */
-    protected void _setCacheControl()
-    {
+    protected void _setCacheControl() {
         $control = "";
         foreach (_cacheDirectives as $key: $val) {
             $control .= $val == true ? $key : sprintf("%s=%s", $key, $val);
@@ -936,8 +929,7 @@ class Response : IResponse
      *
      * @deprecated 4.4.0 Use `withNotModified()` instead.
      */
-    void notModified()
-    {
+    void notModified() {
         deprecationWarning(
             "The `notModified()` method is deprecated~ " ~
             "Use `withNotModified() instead, and remember immutability of with* methods."
@@ -1443,8 +1435,7 @@ class Response : IResponse
      * @param \SplFileInfo $file The file to set a range on.
      * @param string $httpRange The range to use.
      */
-    protected void _fileRange(SplFileInfo $file, string $httpRange)
-    {
+    protected void _fileRange(SplFileInfo $file, string $httpRange) {
         $fileSize = $file.getSize();
         $lastByte = $fileSize - 1;
         $start = 0;

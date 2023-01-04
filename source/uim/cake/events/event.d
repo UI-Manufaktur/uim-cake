@@ -101,8 +101,7 @@ class Event : IEvent
     /**
      * Stops the event from being used anymore
      */
-    void stopPropagation()
-    {
+    void stopPropagation() {
         _stopped = true;
     }
 

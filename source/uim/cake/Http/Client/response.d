@@ -164,8 +164,7 @@ class Response : Message : IResponse
      *
      * @param array $headers Headers to parse.
      */
-    protected void _parseHeaders(array $headers)
-    {
+    protected void _parseHeaders(array $headers) {
         foreach ($headers as $value) {
             if (substr($value, 0, 5) == "HTTP/") {
                 preg_match("/HTTP\/([\d.]+) ([0-9]+)(.*)/i", $value, $matches);
@@ -337,8 +336,7 @@ class Response : Message : IResponse
     /**
      * Lazily build the CookieCollection and cookie objects from the response header
      */
-    protected void buildCookieCollection()
-    {
+    protected void buildCookieCollection() {
         if (this.cookies != null) {
             return;
         }

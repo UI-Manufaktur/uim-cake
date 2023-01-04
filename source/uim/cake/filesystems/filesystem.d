@@ -112,8 +112,7 @@ class Filesystem
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException When dumping fails.
      */
-    void dumpFile(string $filename, string $content)
-    {
+    void dumpFile(string $filename, string $content) {
         $dir = dirname($filename);
         if (!is_dir($dir)) {
             this.mkdir($dir);
@@ -146,8 +145,7 @@ class Filesystem
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException When directory creation fails.
      */
-    void mkdir(string $dir, int $mode = 0755)
-    {
+    void mkdir(string $dir, int $mode = 0755) {
         if (is_dir($dir)) {
             return;
         }

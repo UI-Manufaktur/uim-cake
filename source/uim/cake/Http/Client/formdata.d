@@ -168,8 +168,7 @@ class FormData : Countable
      * @param string aName The name to use.
      * @param mixed $value The value to add.
      */
-    void addRecursive(string aName, $value)
-    {
+    void addRecursive(string aName, $value) {
         foreach ($value as $key: $value) {
             $key = $name ~ "[" ~ $key ~ "]";
             this.add($key, $value);

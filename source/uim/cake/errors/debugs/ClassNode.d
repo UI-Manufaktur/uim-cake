@@ -36,8 +36,7 @@ class ClassNode : INode
      *
      * @param uim.cake.errors.debugs.PropertyNode myNode The property to add.
      */
-    void addProperty(PropertyNode myNode)
-    {
+    void addProperty(PropertyNode myNode) {
         this.properties[] = myNode;
     }
 

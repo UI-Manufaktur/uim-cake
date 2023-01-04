@@ -43,8 +43,7 @@ class ConsoleErrorRenderer : ErrorRendererInterface
     }
 
 
-    void write(string $out)
-    {
+    void write(string $out) {
         this.output.write($out);
     }
 

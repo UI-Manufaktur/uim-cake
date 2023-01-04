@@ -571,8 +571,7 @@ class File
      * @param bool $all Clear all cache or not. Passing false will clear
      *   the stat cache for the current path only.
      */
-    void clearStatCache($all = false)
-    {
+    void clearStatCache($all = false) {
         if ($all == false && this.path) {
             clearstatcache(true, this.path);
         }

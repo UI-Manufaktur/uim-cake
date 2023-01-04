@@ -20,8 +20,7 @@ trait HttpClientTrait
      *
      * @after
      */
-    void cleanupMockResponses()
-    {
+    void cleanupMockResponses() {
         Client::clearMockResponses();
     }
 
@@ -47,8 +46,7 @@ trait HttpClientTrait
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      */
-    void mockClientPost(string $url, Response $response, array $options = [])
-    {
+    void mockClientPost(string $url, Response $response, array $options = []) {
         Client::addMockResponse("POST", $url, $response, $options);
     }
 
@@ -59,8 +57,7 @@ trait HttpClientTrait
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      */
-    void mockClientGet(string $url, Response $response, array $options = [])
-    {
+    void mockClientGet(string $url, Response $response, array $options = []) {
         Client::addMockResponse("GET", $url, $response, $options);
     }
 
@@ -71,8 +68,7 @@ trait HttpClientTrait
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      */
-    void mockClientPatch(string $url, Response $response, array $options = [])
-    {
+    void mockClientPatch(string $url, Response $response, array $options = []) {
         Client::addMockResponse("PATCH", $url, $response, $options);
     }
 
@@ -83,8 +79,7 @@ trait HttpClientTrait
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      */
-    void mockClientPut(string $url, Response $response, array $options = [])
-    {
+    void mockClientPut(string $url, Response $response, array $options = []) {
         Client::addMockResponse("PUT", $url, $response, $options);
     }
 
@@ -95,8 +90,7 @@ trait HttpClientTrait
      * @param uim.cake.http.Client\Response $response The response for the mock.
      * @param array<string, mixed> $options Additional options. See Client::addMockResponse()
      */
-    void mockClientDelete(string $url, Response $response, array $options = [])
-    {
+    void mockClientDelete(string $url, Response $response, array $options = []) {
         Client::addMockResponse("DELETE", $url, $response, $options);
     }
 }
