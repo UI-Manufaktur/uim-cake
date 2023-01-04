@@ -335,8 +335,7 @@ class MemcachedEngine : CacheEngine {
      * @return array An array containing, for each of the given $keys, the cached data or
      *   false if cached data could not be retrieved.
      */
-    array getMultiple($keys, $default = null)
-    {
+    array getMultiple($keys, $default = null) {
         $cacheKeys = [];
         foreach ($keys as $key) {
             $cacheKeys[$key] = _key($key);
@@ -439,8 +438,7 @@ class MemcachedEngine : CacheEngine {
      * If the group initial value was not found, then it initializes
      * the group accordingly.
      */
-    string[] groups()
-    {
+    string[] groups() {
         if (empty(_compiledGroupNames)) {
             foreach (_config["groups"] as $group) {
                 _compiledGroupNames[] = _config["prefix"] . $group;

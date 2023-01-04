@@ -118,8 +118,7 @@ class SecurityComponent : Component
      *
      * @return array<string, mixed>
      */
-    function implementedEvents()
-    {
+    function implementedEvents() {
         return [
             "Controller.startup": "startup",
         ];
@@ -267,8 +266,7 @@ class SecurityComponent : Component
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
      */
-    protected string[] _hashParts(Controller $controller)
-    {
+    protected string[] _hashParts(Controller $controller) {
         $request = $controller.getRequest();
 
         // Start the session to ensure we get the correct session id.

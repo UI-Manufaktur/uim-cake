@@ -476,9 +476,8 @@ class BelongsToMany : Association
      * Return false as join conditions are defined in the junction table
      *
      * @param array<string, mixed> $options list of options passed to attachTo method
-     * @return array
      */
-    protected function _joinCondition(array $options): array
+    protected array _joinCondition(array $options): array
     {
         return [];
     }
@@ -946,9 +945,8 @@ class BelongsToMany : Association
      * Returns filtered conditions that specifically reference
      * the junction table.
      *
-     * @return array
      */
-    protected function junctionConditions(): array
+    protected array junctionConditions(): array
     {
         if (_junctionConditions != null) {
             return _junctionConditions;

@@ -217,8 +217,7 @@ class ConsoleOptionParser
      *
      * @return array<string, mixed>
      */
-    array toArray()
-    {
+    array toArray() {
         return [
             "command": _command,
             "arguments": _args,
@@ -632,8 +631,7 @@ class ConsoleOptionParser
      * @return array [$params, $args]
      * @throws uim.cake.consoles.exceptions.ConsoleException When an invalid parameter is encountered.
      */
-    array parse(array $argv, ?ConsoleIo $io = null)
-    {
+    array parse(array $argv, ?ConsoleIo $io = null) {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         if (isset(_subcommands[$command])) {
             array_shift($argv);
@@ -790,8 +788,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $params The params to append the parsed value into
      * @return array Params with $option added in.
      */
-    protected array _parseLongOption(string $option, array $params)
-    {
+    protected array _parseLongOption(string $option, array $params) {
         $name = substr($option, 2);
         if (strpos($name, "=") != false) {
             [$name, $value] = explode("=", $name, 2);
@@ -811,8 +808,7 @@ class ConsoleOptionParser
      * @return array<string, mixed> Params with $option added in.
      * @throws uim.cake.consoles.exceptions.ConsoleException When unknown short options are encountered.
      */
-    protected array _parseShortOption(string $option, array $params)
-    {
+    protected array _parseShortOption(string $option, array $params) {
         $key = substr($option, 1);
         if (strlen($key) > 1) {
             $flags = str_split($key);
@@ -845,8 +841,7 @@ class ConsoleOptionParser
      * @return array<string, mixed> Params with $option added in.
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    protected array _parseOption(string aName, array $params)
-    {
+    protected array _parseOption(string aName, array $params) {
         if (!isset(_options[$name])) {
             throw new MissingOptionException(
                 "Unknown option `{$name}`.",
@@ -903,8 +898,7 @@ class ConsoleOptionParser
      * @return array<string> Args
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    protected array _parseArg(string $argument, array $args)
-    {
+    protected array _parseArg(string $argument, array $args) {
         if (empty(_args)) {
             $args[] = $argument;
 

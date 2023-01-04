@@ -195,9 +195,8 @@ class SelectLoader
      *
      * @param array|string $finderData The finder name or an array having the name as key
      * and options as value.
-     * @return array
      */
-    protected function _extractFinder($finderData): array
+    protected array _extractFinder($finderData): array
     {
         $finderData = (array)$finderData;
 

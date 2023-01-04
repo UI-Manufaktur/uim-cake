@@ -376,9 +376,8 @@ class SmtpTransport : AbstractTransport
      * Prepares the `from` email address.
      *
      * @param uim.cake.mailers.Message $message Message instance
-     * @return array
      */
-    protected function _prepareFromAddress(Message $message): array
+    protected array _prepareFromAddress(Message $message): array
     {
         $from = $message.getReturnPath();
         if (empty($from)) {
@@ -392,9 +391,8 @@ class SmtpTransport : AbstractTransport
      * Prepares the recipient email addresses.
      *
      * @param uim.cake.mailers.Message $message Message instance
-     * @return array
      */
-    protected function _prepareRecipientAddresses(Message $message): array
+    protected array _prepareRecipientAddresses(Message $message): array
     {
         $to = $message.getTo();
         $cc = $message.getCc();

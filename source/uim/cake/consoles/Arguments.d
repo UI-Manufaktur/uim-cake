@@ -112,8 +112,7 @@ class Arguments
      *
      * @return array<string, string|int|bool|null>
      */
-    function getOptions()
-    {
+    function getOptions() {
         return this.options;
     }
 

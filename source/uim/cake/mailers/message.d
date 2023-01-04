@@ -907,9 +907,8 @@ class Message : JsonSerializable, Serializable {
      * in address header fields.
      *
      * @param array $address Addresses to format.
-     * @return array
      */
-    protected function formatAddress(array $address): array
+    protected array formatAddress(array $address): array
     {
         $return = [];
         foreach ($address as $email: $alias) {

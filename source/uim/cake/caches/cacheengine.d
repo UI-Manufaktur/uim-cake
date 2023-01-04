@@ -297,8 +297,7 @@ abstract class CacheEngine : ICache, ICacheEngine
      * and returns the `group value` for each of them, this is
      * the token representing each group in the cache key
      */
-    string[] groups()
-    {
+    string[] groups() {
         return _config["groups"];
     }
 

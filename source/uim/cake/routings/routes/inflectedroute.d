@@ -70,9 +70,8 @@ class InflectedRoute : Route
      * Helper method for underscoring keys in a URL array.
      *
      * @param array $url An array of URL keys.
-     * @return array
      */
-    protected function _underscore(array $url): array
+    protected array _underscore(array $url): array
     {
         if (!empty($url["controller"])) {
             $url["controller"] = Inflector::underscore($url["controller"]);

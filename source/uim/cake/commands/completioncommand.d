@@ -166,8 +166,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Shell $shell The shell to get commands for
      * @return array<string> A list of commands
      */
-    protected string[] shellSubcommands(Shell $shell)
-    {
+    protected string[] shellSubcommands(Shell $shell) {
         $shell.initialize();
         $shell.loadTasks();
 

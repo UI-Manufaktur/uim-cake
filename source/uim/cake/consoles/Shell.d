@@ -378,8 +378,7 @@ class Shell
      * @return array First value has to be an array of the command arguments.
      * Second value has to be an array of extra parameter to pass on to the dispatcher
      */
-    array parseDispatchArguments(array $args)
-    {
+    array parseDispatchArguments(array $args) {
         $extra = [];
 
         if (is_string($args[0]) && count($args) == 1) {
@@ -880,8 +879,7 @@ class Shell
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         return [
             "name": this.name,
             "plugin": this.plugin,

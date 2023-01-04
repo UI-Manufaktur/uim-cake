@@ -50,8 +50,7 @@ class ControllerAuthorize : BaseAuthorize
      * @param uim.cake.controllers.Controller|null $controller null to get, a controller to set.
      * @return uim.cake.controllers.Controller
      */
-    Controller controller(?Controller $controller = null)
-    {
+    Controller controller(?Controller $controller = null) {
         if ($controller) {
             _Controller = $controller;
         }

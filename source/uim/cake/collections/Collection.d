@@ -38,8 +38,7 @@ class Collection : IteratorIterator : ICollection, Serializable
     /**
      * Returns an array for serializing this of this object.
      */
-    array __serialize()
-    {
+    array __serialize() {
         return this.buffered().toArray();
     }
 
@@ -89,8 +88,7 @@ class Collection : IteratorIterator : ICollection, Serializable
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         try {
             $count = this.count();
         } catch (Exception $e) {

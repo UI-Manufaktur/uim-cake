@@ -300,9 +300,8 @@ class EagerLoader
      * @param array $associations user provided containments array
      * @param array $original The original containments array to merge
      * with the new one
-     * @return array
      */
-    protected function _reformatContain(array $associations, array $original): array
+    protected array _reformatContain(array $associations, array $original): array
     {
         $result = $original;
 
@@ -683,9 +682,8 @@ class EagerLoader
      * @param array $map An initial array for the map.
      * @param array<uim.cake.orm.EagerLoadable> $level An array of EagerLoadable instances.
      * @param bool $matching Whether it is an association loaded through `matching()`.
-     * @return array
      */
-    protected function _buildAssociationsMap(array $map, array $level, bool $matching = false): array
+    protected array _buildAssociationsMap(array $map, array $level, bool $matching = false): array
     {
         foreach ($level as $assoc: $meta) {
             $canBeJoined = $meta.canBeJoined();
@@ -744,9 +742,8 @@ class EagerLoader
      * @param array<uim.cake.orm.EagerLoadable> $external the list of external associations to be loaded
      * @param uim.cake.orm.Query $query The query from which the results where generated
      * @param uim.cake.databases.StatementInterface $statement The statement to work on
-     * @return array
      */
-    protected function _collectKeys(array $external, Query $query, $statement): array
+    protected array _collectKeys(array $external, Query $query, $statement): array
     {
         $collectKeys = [];
         foreach ($external as $meta) {
@@ -784,9 +781,8 @@ class EagerLoader
      *
      * @param uim.cake.databases.Statement\BufferedStatement $statement The statement to read from.
      * @param array<string, array> $collectKeys The keys to collect
-     * @return array
      */
-    protected function _groupKeys(BufferedStatement $statement, array $collectKeys): array
+    protected array _groupKeys(BufferedStatement $statement, array $collectKeys): array
     {
         $keys = [];
         foreach (($statement.fetchAll("assoc") ?: []) as $result) {

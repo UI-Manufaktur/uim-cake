@@ -183,9 +183,8 @@ class BodyParserMiddleware : IMiddleware
      * Decode XML into an array.
      *
      * @param string $body The request body to decode
-     * @return array
      */
-    protected function decodeXml(string $body): array
+    protected array decodeXml(string $body): array
     {
         try {
             $xml = Xml::build($body, ["return": "domdocument", "readFile": false]);

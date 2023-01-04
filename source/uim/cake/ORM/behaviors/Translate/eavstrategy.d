@@ -461,9 +461,8 @@ class EavStrategy : TranslateStrategyInterface
      * to the conditions array.
      *
      * @param array $ruleSet An array of array of conditions to be used for finding each
-     * @return array
      */
-    protected function findExistingTranslations($ruleSet) {
+    protected array findExistingTranslations($ruleSet) {
         $association = this.table.getAssociation(this.translationTable.getAlias());
 
         $query = $association.find()

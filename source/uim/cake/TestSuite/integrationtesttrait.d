@@ -623,9 +623,8 @@ trait IntegrationTestTrait
      * the real world
      *
      * @param array $data POST data
-     * @return array
      */
-    protected function _castToString(array $data): array
+    protected array _castToString(array $data): array
     {
         foreach ($data as $key: $value) {
             if (is_scalar($value)) {

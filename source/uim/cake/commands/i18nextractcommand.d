@@ -656,8 +656,7 @@ class I18nExtractCommand : Command {
      * @param int $target Number of strings to extract
      * @return array Strings extracted
      */
-    protected array _getStrings(int &$position, int $target)
-    {
+    protected array _getStrings(int &$position, int $target) {
         $strings = [];
         $count = 0;
         while (

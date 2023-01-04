@@ -573,8 +573,7 @@ trait CollectionTrait
     }
 
 
-    array toArray(bool $keepKeys = true)
-    {
+    array toArray(bool $keepKeys = true) {
         $iterator = this.unwrap();
         if ($iterator instanceof ArrayIterator) {
             $items = $iterator.getArrayCopy();
@@ -591,14 +590,12 @@ trait CollectionTrait
     }
 
 
-    array toList()
-    {
+    array toList() {
         return this.toArray(false);
     }
 
 
-    array jsonSerialize()
-    {
+    array jsonSerialize() {
         return this.toArray();
     }
 

@@ -47,9 +47,8 @@ class Marshaller
      * @param array $data The data being marshalled.
      * @param array<string, mixed> $options List of options containing the "associated" key.
      * @throws \InvalidArgumentException When associations do not exist.
-     * @return array
      */
-    protected function _buildPropertyMap(array $data, array $options): array
+    protected array _buildPropertyMap(array $data, array $options): array
     {
         $map = [];
         $schema = _table.getSchema();

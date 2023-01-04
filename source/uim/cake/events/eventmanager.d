@@ -136,9 +136,8 @@ class EventManager : IEventManager
      *
      * @param array $function the array taken from a handler definition for an event
      * @param uim.cake.events.IEventListener $object The handler object
-     * @return array
      */
-    protected function _extractCallable(array $function, IEventListener $object): array
+    protected array _extractCallable(array $function, IEventListener $object): array
     {
         /** @var callable $method */
         $method = $function["callable"];

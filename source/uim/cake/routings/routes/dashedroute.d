@@ -89,9 +89,8 @@ class DashedRoute : Route
      * Helper method for dasherizing keys in a URL array.
      *
      * @param array $url An array of URL keys.
-     * @return array
      */
-    protected function _dasherize(array $url): array
+    protected array _dasherize(array $url): array
     {
         foreach (["controller", "plugin", "action"] as $element) {
             if (!empty($url[$element])) {

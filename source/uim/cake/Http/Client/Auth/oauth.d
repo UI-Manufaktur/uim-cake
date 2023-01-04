@@ -305,9 +305,8 @@ class Oauth
      * @param array $args The arguments to normalize.
      * @param string $path The current path being converted.
      * @see https://tools.ietf.org/html/rfc5849#section-3.4.1.3.2
-     * @return array
      */
-    protected function _normalizeData(array $args, string $path = ""): array
+    protected array _normalizeData(array $args, string $path = ""): array
     {
         $data = [];
         foreach ($args as $key: $value) {

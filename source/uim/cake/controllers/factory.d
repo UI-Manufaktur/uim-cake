@@ -136,8 +136,7 @@ class ControllerFactory : ControllerFactoryInterface, RequestHandlerInterface
      * @param array $passedParams Params passed by the router.
      * @return array
      */
-    protected array getActionArgs(Closure $action, array $passedParams)
-    {
+    protected array getActionArgs(Closure $action, array $passedParams) {
         $resolved = [];
         $function = new ReflectionFunction($action);
         foreach ($function.getParameters() as $parameter) {

@@ -91,8 +91,7 @@ class BasicAuthenticate : BaseAuthenticate
      * @param uim.cake.http.ServerRequest $request Request object.
      * @return array<string, string> Headers for logging in.
      */
-    STRINGAA loginHeaders(ServerRequest $request)
-    {
+    STRINGAA loginHeaders(ServerRequest $request) {
         $realm = this.getConfig("realm") ?: $request.getEnv("SERVER_NAME");
 
         return [

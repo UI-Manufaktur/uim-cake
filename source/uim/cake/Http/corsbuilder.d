@@ -104,9 +104,8 @@ class CorsBuilder
      * Normalize the origin to regular expressions and put in an array format
      *
      * @param array<string> $domains Domain names to normalize.
-     * @return array
      */
-    protected function _normalizeDomains(array $domains): array
+    protected array _normalizeDomains(array $domains): array
     {
         $result = [];
         foreach ($domains as $domain) {

@@ -267,9 +267,8 @@ class FormProtector
      * Return the fields list for the hash calculation
      *
      * @param array $formData Data array
-     * @return array
      */
-    protected function extractFields(array $formData): array
+    protected array extractFields(array $formData): array
     {
         $locked = "";
         $token = urldecode($formData["_Token"]["fields"]);

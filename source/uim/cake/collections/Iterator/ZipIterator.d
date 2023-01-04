@@ -93,8 +93,7 @@ class ZipIterator : MultipleIterator : ICollection, Serializable
     /**
      * Magic method used for serializing the iterator instance.
      */
-    array __serialize()
-    {
+    array __serialize() {
         return _iterators;
     }
 
