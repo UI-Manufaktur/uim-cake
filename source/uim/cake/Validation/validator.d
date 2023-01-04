@@ -349,8 +349,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param object|string $object Provider object or class name.
      * @psalm-param object|class-string $object
      */
-    static void addDefaultProvider(string aName, $object)
-    {
+    static void addDefaultProvider(string aName, $object) {
         if (!is_string($object) && !is_object($object)) {
             deprecationWarning(sprintf(
                 "The provider must be an object or class name string. Got `%s` instead.",
@@ -407,8 +406,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string $field name of the field to set
      * @param uim.cake.validations.ValidationSet|array $rules set of rules to apply to field
      */
-    void offsetSet($field, $rules)
-    {
+    void offsetSet($field, $rules) {
         if (!$rules instanceof ValidationSet) {
             $set = new ValidationSet();
             foreach ($rules as $name: $rule) {
@@ -424,8 +422,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $field name of the field to unset
      */
-    void offsetUnset($field)
-    {
+    void offsetUnset($field) {
         unset(_fields[$field]);
     }
 

@@ -497,8 +497,7 @@ class FormHelper : Helper
      *
      * @param array|string|null $url The URL of the last form.
      */
-    protected void _lastAction($url = null): void
-    {
+    protected void _lastAction($url = null) {
         $action = Router::url($url, true);
         $query = parse_url($action, PHP_URL_QUERY);
         $query = $query ? "?" ~ $query : "";
@@ -2339,8 +2338,7 @@ class FormHelper : Helper
      * @param callable $check A callable that returns an object
      *   when the form context is the correct type.
      */
-    void addContextProvider(string $type, callable $check): void
-    {
+    void addContextProvider(string $type, callable $check) {
         this.contextFactory().addProvider($type, $check);
     }
 
@@ -2391,8 +2389,7 @@ class FormHelper : Helper
      * @param uim.cake.View\Widget\WidgetInterface|array $spec Either a string class
      *   name or an object implementing the WidgetInterface.
      */
-    void addWidget(string aName, $spec): void
-    {
+    void addWidget(string aName, $spec) {
         _locator.add([$name: $spec]);
     }
 
@@ -2434,8 +2431,7 @@ class FormHelper : Helper
      *
      * This method will not reset any templates set in custom widgets.
      */
-    void resetTemplates(): void
-    {
+    void resetTemplates() {
         this.setTemplates(_defaultConfig["templates"]);
     }
 
@@ -2468,8 +2464,7 @@ class FormHelper : Helper
      * @return void
      * @throws \InvalidArgumentException If sources list contains invalid value.
      */
-    protected function validateValueSources(array $sources): void
-    {
+    protected void validateValueSources(array $sources) {
         $diff = array_diff($sources, this.supportedValueSources);
 
         if ($diff) {

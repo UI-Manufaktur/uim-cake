@@ -134,8 +134,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Default options for pagination links.
      *   See PaginatorHelper::$options for list of keys.
      */
-    void options(array $options = []): void
-    {
+    void options(array $options = []) {
         $request = _View.getRequest();
 
         if (!empty($options["paging"])) {

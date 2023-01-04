@@ -84,8 +84,7 @@ class Security
      * @return void
      * @see uim.cake.Utility\Security::hash()
      */
-    static void setHash(string $hash)
-    {
+    static void setHash(string $hash) {
         static::$hashType = $hash;
     }
 
@@ -202,8 +201,7 @@ class Security
      * @return void
      * @throws \InvalidArgumentException When key length is not 256 bit/32 bytes
      */
-    protected static void _checkKey(string aKey, string $method)
-    {
+    protected static void _checkKey(string aKey, string $method) {
         if (mb_strlen($key, "8bit") < 32) {
             throw new InvalidArgumentException(
                 sprintf("Invalid key for %s, key must be at least 256 bits (32 bytes) long.", $method)
@@ -283,8 +281,7 @@ class Security
      *
      * @param string $salt The salt to use for encryption routines.
      */
-    static void setSalt(string $salt)
-    {
+    static void setSalt(string $salt) {
         static::$_salt = $salt;
     }
 }

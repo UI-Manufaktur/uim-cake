@@ -171,8 +171,7 @@ class ValidationRule
      *
      * @param array<string, mixed> $validator [optional]
      */
-    protected void _addValidatorProps(array $validator = [])
-    {
+    protected void _addValidatorProps(array $validator = []) {
         foreach ($validator as $key: $value) {
             if (empty($value)) {
                 continue;

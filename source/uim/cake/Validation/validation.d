@@ -1664,8 +1664,7 @@ class Validation
      *
      * @return void
      */
-    protected static void _populateIp()
-    {
+    protected static void _populateIp() {
         // phpcs:disable Generic.Files.LineLength
         if (!isset(static::$_pattern["IPv6"])) {
             $pattern = "((([0-9A-Fa-f]{1,4}:){7}(([0-9A-Fa-f]{1,4})|:))|(([0-9A-Fa-f]{1,4}:){6}";
@@ -1697,8 +1696,7 @@ class Validation
      *
      * @return void
      */
-    protected static void _reset()
-    {
+    protected static void _reset() {
         static::$errors = [];
     }
 }

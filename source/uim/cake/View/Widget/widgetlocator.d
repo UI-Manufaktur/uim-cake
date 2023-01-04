@@ -68,8 +68,7 @@ class WidgetLocator
      *
      * @param string $file The file to load
      */
-    void load(string $file): void
-    {
+    void load(string $file) {
         $loader = new PhpConfig();
         $widgets = $loader.read($file);
         this.add($widgets);
@@ -95,8 +94,7 @@ class WidgetLocator
      * @return void
      * @throws \RuntimeException When class does not implement WidgetInterface.
      */
-    function add(array $widgets): void
-    {
+    void add(array $widgets) {
         $files = [];
 
         foreach ($widgets as $key: $widget) {
@@ -153,8 +151,7 @@ class WidgetLocator
     /**
      * Clear the registry and reset the widgets.
      */
-    void clear(): void
-    {
+    void clear() {
         _widgets = [];
     }
 

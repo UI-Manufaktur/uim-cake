@@ -298,8 +298,7 @@ class Xml
      * @return void
      * @throws uim.cake.Utility\exceptions.XmlException
      */
-    protected static void _fromArray(DOMDocument $dom, $node, &$data, $format)
-    {
+    protected static void _fromArray(DOMDocument $dom, $node, &$data, $format) {
         if (empty($data) || !is_array($data)) {
             return;
         }
@@ -368,8 +367,7 @@ class Xml
      * @param array<string, mixed> $data Array with information to create children
      * @return void
      */
-    protected static void _createChild(array $data)
-    {
+    protected static void _createChild(array $data) {
         $data += [
             "dom": null,
             "node": null,
@@ -444,8 +442,7 @@ class Xml
      * @param array<string> $namespaces List of namespaces in XML
      * @return void
      */
-    protected static void _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, array $namespaces)
-    {
+    protected static void _toArray(SimpleXMLElement $xml, array &$parentData, string $ns, array $namespaces) {
         $data = [];
 
         foreach ($namespaces as $namespace) {

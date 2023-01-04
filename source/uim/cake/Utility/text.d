@@ -1037,8 +1037,7 @@ class Text
      *
      * @param \Transliterator $transliterator A `Transliterator` instance.
      */
-    static void setTransliterator(Transliterator $transliterator)
-    {
+    static void setTransliterator(Transliterator $transliterator) {
         static::$_defaultTransliterator = $transliterator;
     }
 
@@ -1056,8 +1055,7 @@ class Text
      *
      * @param string $transliteratorId Transliterator identifier.
      */
-    static void setTransliteratorId(string aTransliteratorId)
-    {
+    static void setTransliteratorId(string aTransliteratorId) {
         $transliterator = transliterator_create($transliteratorId);
         if ($transliterator == null) {
             throw new CakeException("Unable to create transliterator for id: " ~ $transliteratorId);

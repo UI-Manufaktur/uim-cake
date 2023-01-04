@@ -600,8 +600,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @return void
      * @throws \RuntimeException
      */
-    protected function _checkViewVars(&$item, string aKey): void
-    {
+    protected void _checkViewVars(&$item, string aKey) {
         if ($item instanceof Exception) {
             $item = (string)$item;
         }
@@ -656,8 +655,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @param string $data Serialized string.
      */
-    void unserialize($data): void
-    {
+    void unserialize($data) {
         this.createFromArray(unserialize($data));
     }
 
@@ -666,8 +664,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @param array<string, mixed> $data Data array.
      */
-    void __unserialize(array $data): void
-    {
+    void __unserialize(array $data) {
         this.createFromArray($data);
     }
 }

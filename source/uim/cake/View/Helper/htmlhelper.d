@@ -555,8 +555,7 @@ class HtmlHelper : Helper
      * @return void
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    function scriptStart(array $options = []): void
-    {
+    void scriptStart(array $options = []) {
         _scriptBlockOptions = $options;
         ob_start();
     }

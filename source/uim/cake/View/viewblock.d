@@ -68,8 +68,7 @@ class ViewBlock
      *   If ViewBlock::PREPEND it will be prepended.
      * @throws uim.cake.Core\exceptions.CakeException When starting a block twice
      */
-    void start(string aName, string $mode = ViewBlock::OVERRIDE): void
-    {
+    void start(string aName, string $mode = ViewBlock::OVERRIDE) {
         if (array_key_exists($name, _active)) {
             throw new CakeException(sprintf("A view block with the name "%s" is already/still open.", $name));
         }
@@ -83,8 +82,7 @@ class ViewBlock
      * @return void
      * @see uim.cake.View\ViewBlock::start()
      */
-    function end(): void
-    {
+    void end() {
         if (_discardActiveBufferOnEnd) {
             _discardActiveBufferOnEnd = false;
             ob_end_clean();
@@ -121,8 +119,7 @@ class ViewBlock
      * @param string $mode If ViewBlock::APPEND content will be appended to existing content.
      *   If ViewBlock::PREPEND it will be prepended.
      */
-    void concat(string aName, $value = null, $mode = ViewBlock::APPEND): void
-    {
+    void concat(string aName, $value = null, $mode = ViewBlock::APPEND) {
         if ($value == null) {
             this.start($name, $mode);
 
@@ -147,8 +144,7 @@ class ViewBlock
      * @param mixed $value The content for the block. Value will be type cast
      *   to string.
      */
-    void set(string aName, $value): void
-    {
+    void set(string aName, $value) {
         _blocks[$name] = (string)$value;
     }
 

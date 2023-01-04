@@ -328,16 +328,14 @@ class View : IEventDispatcher
      * So this method allows you to manipulate them as required after view instance
      * is constructed.
      */
-    void initialize()
-    {
+    void initialize() {
         this.setContentType();
     }
 
     /**
      * Set the response content-type based on the view"s contentType()
      */
-    protected void setContentType(): void
-    {
+    protected void setContentType() {
         $viewContentType = this.contentType();
         if (!$viewContentType || $viewContentType == static::TYPE_MATCH_ALL) {
             return;
@@ -620,7 +618,7 @@ class View : IEventDispatcher
         $pluginCheck = $options["plugin"] != false;
         $file = _getElementFileName($name, $pluginCheck);
         if ($file && $options["cache"]) {
-            return this.cache(function () use ($file, $data, $options): void {
+            return this.cache(void () use ($file, $data, $options) {
                 echo _renderElement($file, $data, $options);
             }, $options["cache"]);
         }
