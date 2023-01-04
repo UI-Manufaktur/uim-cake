@@ -93,7 +93,7 @@ abstract class TestCase : BaseTestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    static function assertMatchesRegularExpression(string $pattern, string $string, string $message = ""): void
+    static void assertMatchesRegularExpression(string $pattern, string $string, string $message = "")
     {
         static::assertThat($string, new RegularExpression($pattern), $message);
     }
@@ -107,11 +107,11 @@ abstract class TestCase : BaseTestCase
      * @return void
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    static function assertDoesNotMatchRegularExpression(
+    static void assertDoesNotMatchRegularExpression(
         string $pattern,
         string $string,
         string $message = ""
-    ): void {
+    ) {
         static::assertThat(
             $string,
             new LogicalNot(
@@ -130,7 +130,7 @@ abstract class TestCase : BaseTestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    static function assertFileDoesNotExist(string $filename, string $message = ""): void
+    static void assertFileDoesNotExist(string $filename, string $message = "")
     {
         static::assertThat($filename, new LogicalNot(new FileExists()), $message);
     }
@@ -144,7 +144,7 @@ abstract class TestCase : BaseTestCase
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      * @codeCoverageIgnore
      */
-    static function assertDirectoryDoesNotExist(string $directory, string $message = ""): void
+    static void assertDirectoryDoesNotExist(string $directory, string $message = "")
     {
         static::assertThat($directory, new LogicalNot(new DirectoryExists()), $message);
     }
@@ -169,7 +169,7 @@ abstract class TestCase : BaseTestCase
      * @param int $errorLevel value of error_reporting() that needs to use
      * @param callable $callable callable function that will receive asserts
      */
-    void withErrorReporting(int $errorLevel, callable $callable): void
+    void withErrorReporting(int $errorLevel, callable $callable)
     {
         $default = error_reporting();
         error_reporting($errorLevel);
@@ -185,7 +185,7 @@ abstract class TestCase : BaseTestCase
      *
      * @param callable $callable callable function that will receive asserts
      */
-    void deprecated(callable $callable): void
+    void deprecated(callable $callable)
     {
         $duplicate = Configure::read("Error.allowDuplicateDeprecations");
         Configure::write("Error.allowDuplicateDeprecations", true);
@@ -225,7 +225,7 @@ abstract class TestCase : BaseTestCase
      * Specifically backs up the contents of Configure and paths in App if they have
      * not already been backed up.
      */
-    protected void setUp(): void
+    protected void setUp()
     {
         super.setUp();
         this.setupFixtures();
@@ -243,7 +243,7 @@ abstract class TestCase : BaseTestCase
     /**
      * teardown any static object changes and restore them.
      */
-    protected void tearDown(): void
+    protected void tearDown()
     {
         super.tearDown();
         this.teardownFixtures();
@@ -260,7 +260,7 @@ abstract class TestCase : BaseTestCase
     /**
      * Initialized and loads any use fixtures.
      */
-    protected void setupFixtures(): void
+    protected void setupFixtures()
     {
         $fixtureNames = this.getFixtures();
 
@@ -282,7 +282,7 @@ abstract class TestCase : BaseTestCase
     /**
      * Unloads any use fixtures.
      */
-    protected void teardownFixtures(): void
+    protected void teardownFixtures()
     {
         if (this.fixtureStrategy) {
             this.fixtureStrategy.teardownTest();
@@ -311,7 +311,7 @@ abstract class TestCase : BaseTestCase
      * @throws \RuntimeException when no fixture manager is available.
      * @deprecated 4.3.0 Disabling auto-fixtures is deprecated and only available using FixtureInjector fixture system.
      */
-    function loadFixtures(): void
+    void loadFixtures()
     {
         if (this.autoFixtures) {
             throw new RuntimeException("Cannot use `loadFixtures()` with `$autoFixtures` enabled.");
@@ -345,7 +345,7 @@ abstract class TestCase : BaseTestCase
      * @return void
      * @since 4.0.1
      */
-    function loadRoutes(?array $appArgs = null): void
+    void loadRoutes(?array $appArgs = null)
     {
         $appArgs = $appArgs ?? [rtrim(CONFIG, DIRECTORY_SEPARATOR)];
         /** @psalm-var class-string */
@@ -399,7 +399,7 @@ abstract class TestCase : BaseTestCase
      *
      * @param array<string> $names A list of plugins you want to remove.
      */
-    void removePlugins(array $names = []): void
+    void removePlugins(array $names = [])
     {
         $collection = Plugin::getCollection();
         foreach ($names as $name) {
@@ -412,7 +412,7 @@ abstract class TestCase : BaseTestCase
      *
      * Useful in test case teardown methods.
      */
-    void clearPlugins(): void
+    void clearPlugins()
     {
         Plugin::getCollection().clear();
     }
@@ -424,7 +424,7 @@ abstract class TestCase : BaseTestCase
      * @param uim.cake.events.EventManager|null $eventManager Event manager to check, defaults to global event manager
      * @param string $message Assertion failure message
      */
-    void assertEventFired(string aName, ?EventManager $eventManager = null, string $message = ""): void
+    void assertEventFired(string aName, ?EventManager $eventManager = null, string $message = "")
     {
         if (!$eventManager) {
             $eventManager = EventManager::instance();
@@ -449,7 +449,7 @@ abstract class TestCase : BaseTestCase
         $dataValue,
         ?EventManager $eventManager = null,
         string $message = ""
-    ): void {
+    ) {
         if (!$eventManager) {
             $eventManager = EventManager::instance();
         }
@@ -464,7 +464,7 @@ abstract class TestCase : BaseTestCase
      * @param string $result The actual value.
      * @param string $message The message to use for failure.
      */
-    void assertTextNotEquals(string $expected, string $result, string $message = ""): void
+    void assertTextNotEquals(string $expected, string $result, string $message = "")
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
@@ -479,7 +479,7 @@ abstract class TestCase : BaseTestCase
      * @param string $result The actual value.
      * @param string $message The message to use for failure.
      */
-    void assertTextEquals(string $expected, string $result, string $message = ""): void
+    void assertTextEquals(string $expected, string $result, string $message = "")
     {
         $expected = str_replace(["\r\n", "\r"], "\n", $expected);
         $result = str_replace(["\r\n", "\r"], "\n", $result);
@@ -494,7 +494,7 @@ abstract class TestCase : BaseTestCase
      * @param string $string The string to search in.
      * @param string $message The message to use for failure.
      */
-    void assertTextStartsWith(string $prefix, string $string, string $message = ""): void
+    void assertTextStartsWith(string $prefix, string $string, string $message = "")
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -509,7 +509,7 @@ abstract class TestCase : BaseTestCase
      * @param string $string The string to search.
      * @param string $message The message to use for failure.
      */
-    void assertTextStartsNotWith(string $prefix, string $string, string $message = ""): void
+    void assertTextStartsNotWith(string $prefix, string $string, string $message = "")
     {
         $prefix = str_replace(["\r\n", "\r"], "\n", $prefix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -524,7 +524,7 @@ abstract class TestCase : BaseTestCase
      * @param string $string The string to search.
      * @param string $message The message to use for failure.
      */
-    void assertT:With(string $suffix, string $string, string $message = ""): void
+    void assertT:With(string $suffix, string $string, string $message = "")
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -539,7 +539,7 @@ abstract class TestCase : BaseTestCase
      * @param string $string The string to search.
      * @param string $message The message to use for failure.
      */
-    void assertT:NotWith(string $suffix, string $string, string $message = ""): void
+    void assertT:NotWith(string $suffix, string $string, string $message = "")
     {
         $suffix = str_replace(["\r\n", "\r"], "\n", $suffix);
         $string = str_replace(["\r\n", "\r"], "\n", $string);
@@ -560,7 +560,7 @@ abstract class TestCase : BaseTestCase
         string $haystack,
         string $message = "",
         bool $ignoreCase = false
-    ): void {
+    ) {
         $needle = str_replace(["\r\n", "\r"], "\n", $needle);
         $haystack = str_replace(["\r\n", "\r"], "\n", $haystack);
 
@@ -585,7 +585,7 @@ abstract class TestCase : BaseTestCase
         string $haystack,
         string $message = "",
         bool $ignoreCase = false
-    ): void {
+    ) {
         $needle = str_replace(["\r\n", "\r"], "\n", $needle);
         $haystack = str_replace(["\r\n", "\r"], "\n", $haystack);
 
@@ -607,7 +607,7 @@ abstract class TestCase : BaseTestCase
         string $expected,
         string $actual,
         string $message = ""
-    ): void {
+    ) {
         this.assertEquals($expected, preg_replace("/[`"\[\]]/", "", $actual), $message);
     }
 
@@ -621,7 +621,7 @@ abstract class TestCase : BaseTestCase
      * @param string $actual The sql to compare
      * @param bool $optional Whether quote characters (marked with <>) are optional
      */
-    void assertRegExpSql(string $pattern, string $actual, bool $optional = false): void
+    void assertRegExpSql(string $pattern, string $actual, bool $optional = false)
     {
         $optional = $optional ? "?" : "";
         $pattern = str_replace("<", "[`"\[]" ~ $optional, $pattern);

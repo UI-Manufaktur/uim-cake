@@ -68,7 +68,7 @@ trait CookieCryptTrait
      * @return void
      * @throws \RuntimeException When an invalid cipher is provided.
      */
-    protected function _checkCipher(string $encrypt): void
+    protected void _checkCipher(string $encrypt)
     {
         if (!in_array($encrypt, _validCiphers, true)) {
             $msg = sprintf(

@@ -19,7 +19,7 @@ class PHPUnitExtension : BeforeFirstTestHook
     /**
      * Initializes before any tests are run.
      */
-    void executeBeforeFirstTest(): void
+    void executeBeforeFirstTest()
     {
         $helper = new ConnectionHelper();
         $helper.addTestAliases();

@@ -90,7 +90,7 @@ class FixtureHelper
      * @param \Closure $callback Callback run per connection
      * @param array<uim.cake.Datasource\IFixture> $fixtures Test fixtures
      */
-    void runPerConnection(Closure $callback, array $fixtures): void
+    void runPerConnection(Closure $callback, array $fixtures)
     {
         $groups = [];
         foreach ($fixtures as $fixture) {
@@ -109,9 +109,9 @@ class FixtureHelper
      * @return void
      * @internal
      */
-    function insert(array $fixtures): void
+    void insert(array $fixtures)
     {
-        this.runPerConnection(function (IConnection $connection, array $groupFixtures): void {
+        this.runPerConnection(void (IConnection $connection, array $groupFixtures) {
             if ($connection instanceof Connection) {
                 $sortedFixtures = this.sortByConstraint($connection, $groupFixtures);
                 if ($sortedFixtures) {
@@ -120,7 +120,7 @@ class FixtureHelper
                     $helper = new ConnectionHelper();
                     $helper.runWithoutConstraints(
                         $connection,
-                        function (Connection $connection) use ($groupFixtures): void {
+                        void (Connection $connection) use ($groupFixtures) {
                             this.insertConnection($connection, $groupFixtures);
                         }
                     );
@@ -137,7 +137,7 @@ class FixtureHelper
      * @param uim.cake.Datasource\IConnection $connection Fixture connection
      * @param array<uim.cake.Datasource\IFixture> $fixtures Connection fixtures
      */
-    protected void insertConnection(IConnection $connection, array $fixtures): void
+    protected void insertConnection(IConnection $connection, array $fixtures)
     {
         foreach ($fixtures as $fixture) {
             try {
@@ -161,9 +161,9 @@ class FixtureHelper
      * @return void
      * @internal
      */
-    function truncate(array $fixtures): void
+    void truncate(array $fixtures)
     {
-        this.runPerConnection(function (IConnection $connection, array $groupFixtures): void {
+        this.runPerConnection(function (IConnection $connection, array $groupFixtures) {
             if ($connection instanceof Connection) {
                 $sortedFixtures = null;
                 if ($connection.getDriver().supports(IDriver::FEATURE_TRUNCATE_WITH_CONSTRAINTS)) {
@@ -176,7 +176,7 @@ class FixtureHelper
                     $helper = new ConnectionHelper();
                     $helper.runWithoutConstraints(
                         $connection,
-                        function (Connection $connection) use ($groupFixtures): void {
+                        void (Connection $connection) use ($groupFixtures) {
                             this.truncateConnection($connection, $groupFixtures);
                         }
                     );
@@ -193,7 +193,7 @@ class FixtureHelper
      * @param uim.cake.Datasource\IConnection $connection Fixture connection
      * @param array<uim.cake.Datasource\IFixture> $fixtures Connection fixtures
      */
-    protected void truncateConnection(IConnection $connection, array $fixtures): void
+    protected void truncateConnection(IConnection $connection, array $fixtures)
     {
         foreach ($fixtures as $fixture) {
             try {

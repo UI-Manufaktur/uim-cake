@@ -34,7 +34,7 @@ class TestEmailTransport : DebugTransport
     /**
      * Replaces all currently configured transports with this one
      */
-    static void replaceAllTransports(): void
+    static void replaceAllTransports()
     {
         $configuredTransports = TransportFactory::configured();
 
@@ -58,7 +58,7 @@ class TestEmailTransport : DebugTransport
     /**
      * Clears list of emails that have been sent
      */
-    static void clearMessages(): void
+    static void clearMessages()
     {
         static::$messages = [];
     }

@@ -416,7 +416,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array<string, string> $contents The content with "headers" and "message" keys.
      */
-    protected void _logDelivery(array $contents): void
+    protected void _logDelivery(array $contents)
     {
         if (empty(_profile["log"])) {
             return;
@@ -560,7 +560,7 @@ class Email : JsonSerializable, Serializable
     array __serialize(): array
     {
         $array = this.jsonSerialize();
-        array_walk_recursive($array, function (&$item, $key): void {
+        array_walk_recursive($array, void (&$item, $key) {
             if ($item instanceof SimpleXMLElement) {
                 $item = json_decode(json_encode((array)$item), true);
             }
@@ -585,7 +585,7 @@ class Email : JsonSerializable, Serializable
      *
      * @param array $data Data array.
      */
-    void __unserialize(array $data): void
+    void __unserialize(array $data)
     {
         this.createFromArray($data);
     }

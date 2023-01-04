@@ -349,7 +349,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param object|string $object Provider object or class name.
      * @psalm-param object|class-string $object
      */
-    static void addDefaultProvider(string aName, $object): void
+    static void addDefaultProvider(string aName, $object)
     {
         if (!is_string($object) && !is_object($object)) {
             deprecationWarning(sprintf(

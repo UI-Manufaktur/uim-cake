@@ -36,7 +36,7 @@ class TransactionStrategy : FixtureStrategyInterface
     }
 
 
-    function setupTest(array $fixtureNames): void
+    void setupTest(array $fixtureNames)
     {
         if (empty($fixtureNames)) {
             return;
@@ -69,7 +69,7 @@ class TransactionStrategy : FixtureStrategyInterface
     }
 
 
-    function teardownTest(): void
+    void teardownTest()
     {
         this.helper.runPerConnection(function ($connection) {
             if ($connection.inTransaction()) {

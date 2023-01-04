@@ -218,7 +218,7 @@ class SelectLoader
      * @return void
      * @throws \InvalidArgumentException
      */
-    protected function _assertFieldsPresent(Query $fetchQuery, array $key): void
+    protected void _assertFieldsPresent(Query $fetchQuery, array $key)
     {
         if ($fetchQuery.isAutoFieldsEnabled()) {
             return;
@@ -422,7 +422,7 @@ class SelectLoader
         $order = $query.clause("order");
         if ($order) {
             $columns = $query.clause("select");
-            $order.iterateParts(function ($direction, $field) use (&$fields, $columns): void {
+            $order.iterateParts(void ($direction, $field) use (&$fields, $columns) {
                 if (isset($columns[$field])) {
                     $fields[$field] = $columns[$field];
                 }

@@ -46,7 +46,7 @@ class SchemaLoader
         string $connectionName = "test",
         bool $dropTables = true,
         bool $truncateTables = false
-    ): void {
+    ) {
         $files = (array)$paths;
 
         // Don"t create schema if we are in a phpunit separate process test method.
@@ -85,7 +85,7 @@ class SchemaLoader
      * @return void
      * @internal
      */
-    function loadInternalFile(string $file, string $connectionName = "test"): void
+    function loadInternalFile(string $file, string $connectionName = "test")
     {
         // Don"t reload schema when we are in a separate process state.
         if (isset($GLOBALS["__PHPUNIT_BOOTSTRAP"])) {

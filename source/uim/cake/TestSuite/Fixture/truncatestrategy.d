@@ -30,7 +30,7 @@ class TruncateStrategy : FixtureStrategyInterface
     }
 
 
-    function setupTest(array $fixtureNames): void
+    void setupTest(array $fixtureNames)
     {
         if (empty($fixtureNames)) {
             return;
@@ -41,7 +41,7 @@ class TruncateStrategy : FixtureStrategyInterface
     }
 
 
-    function teardownTest(): void
+    void teardownTest()
     {
         this.helper.truncate(this.fixtures);
     }

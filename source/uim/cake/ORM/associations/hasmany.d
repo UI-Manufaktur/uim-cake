@@ -475,7 +475,7 @@ class HasMany : Association
         if ($mustBeDependent) {
             if (_cascadeCallbacks) {
                 $conditions = new QueryExpression($conditions);
-                $conditions.traverse(void ($entry) use ($target): void {
+                $conditions.traverse(void ($entry) use ($target) {
                     if ($entry instanceof FieldInterface) {
                         $field = $entry.getField();
                         if (is_string($field)) {

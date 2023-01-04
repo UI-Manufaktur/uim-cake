@@ -29,7 +29,7 @@ class TestSuite : BaseTestSuite
      *
      * @param string $directory The directory to add tests from.
      */
-    void addTestDirectory(string $directory = "."): void
+    void addTestDirectory(string $directory = ".")
     {
         $fs = new Filesystem();
         $files = $fs.find($directory, "/\.php$/");
@@ -43,7 +43,7 @@ class TestSuite : BaseTestSuite
      *
      * @param string $directory The directory subtree to add tests from.
      */
-    void addTestDirectoryRecursive(string $directory = "."): void
+    void addTestDirectoryRecursive(string $directory = ".")
     {
         $fs = new Filesystem();
         $files = $fs.findRecursive($directory, function (SplFileInfo $current) {

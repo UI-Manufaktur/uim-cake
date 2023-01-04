@@ -108,7 +108,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @return void
      * @throws uim.cake.View\exceptions.MissingHelperException
      */
-    protected function _throwMissingClassError(string $class, ?string $plugin): void
+    protected void _throwMissingClassError(string $class, ?string $plugin)
     {
         throw new MissingHelperException([
             "class": $class ~ "Helper",

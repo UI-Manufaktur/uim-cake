@@ -114,7 +114,7 @@ class ConnectionHelper
             return $collection.describe($table);
         }, $tables);
 
-        this.runWithoutConstraints($connection, function (Connection $connection) use ($schemas): void {
+        this.runWithoutConstraints($connection, void (Connection $connection) use ($schemas) {
             $dialect = $connection.getDriver().schemaDialect();
             /** @var uim.cake.databases.Schema\TableSchema $schema */
             foreach ($schemas as $schema) {
@@ -131,15 +131,15 @@ class ConnectionHelper
      * @param uim.cake.databases.Connection $connection Database connection
      * @param \Closure $callback callback
      */
-    void runWithoutConstraints(Connection $connection, Closure $callback): void
+    void runWithoutConstraints(Connection $connection, Closure $callback)
     {
         if ($connection.getDriver().supports(IDriver::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION)) {
-            $connection.disableConstraints(function (Connection $connection) use ($callback): void {
+            $connection.disableConstraints(void (Connection $connection) use ($callback) {
                 $callback($connection);
             });
         } else {
-            $connection.transactional(function (Connection $connection) use ($callback): void {
-                $connection.disableConstraints(function (Connection $connection) use ($callback): void {
+            $connection.transactional(void (Connection $connection) use ($callback) {
+                $connection.disableConstraints(void (Connection $connection) use ($callback) {
                     $callback($connection);
                 });
             });

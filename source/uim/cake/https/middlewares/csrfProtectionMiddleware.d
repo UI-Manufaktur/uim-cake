@@ -351,7 +351,7 @@ class CsrfProtectionMiddleware : IMiddleware
      * @return void
      * @throws uim.cake.http.exceptions.InvalidCsrfTokenException When the CSRF token is invalid or missing.
      */
-    protected auto _validateToken(IServerRequest myRequest): void
+    protected void _validateToken(IServerRequest myRequest)
     {
         $cookie = Hash::get(myRequest.getCookieParams(), _config["cookieName"]);
 

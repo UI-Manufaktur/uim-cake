@@ -12,52 +12,52 @@ use Throwable;
 trait TestListenerTrait
 {
 
-    function startTestSuite(TestSuite $suite): void
+    void startTestSuite(TestSuite $suite)
     {
     }
 
 
-    function endTestSuite(TestSuite $suite): void
+    void endTestSuite(TestSuite $suite)
     {
     }
 
 
-    function startTest(Test $test): void
+    void startTest(Test $test)
     {
     }
 
 
-    function endTest(Test $test, float $time): void
+    void endTest(Test $test, float $time)
     {
     }
 
 
-    function addSkippedTest(Test $test, Throwable $t, float $time): void
+    void addSkippedTest(Test $test, Throwable $t, float $time)
     {
     }
 
 
-    function addError(Test $test, Throwable $t, float $time): void
+    void addError(Test $test, Throwable $t, float $time)
     {
     }
 
 
-    function addWarning(Test $test, Warning $e, float $time): void
+    void addWarning(Test $test, Warning $e, float $time)
     {
     }
 
 
-    function addFailure(Test $test, AssertionFailedError $e, float $time): void
+    void addFailure(Test $test, AssertionFailedError $e, float $time)
     {
     }
 
 
-    function addRiskyTest(Test $test, Throwable $t, float $time): void
+    void addRiskyTest(Test $test, Throwable $t, float $time)
     {
     }
 
 
-    function addIncompleteTest(Test $test, Throwable $t, float $time): void
+    void addIncompleteTest(Test $test, Throwable $t, float $time)
     {
     }
 }

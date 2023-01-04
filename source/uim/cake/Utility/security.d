@@ -84,7 +84,7 @@ class Security
      * @return void
      * @see uim.cake.Utility\Security::hash()
      */
-    static function setHash(string $hash): void
+    static void setHash(string $hash)
     {
         static::$hashType = $hash;
     }
@@ -202,7 +202,7 @@ class Security
      * @return void
      * @throws \InvalidArgumentException When key length is not 256 bit/32 bytes
      */
-    protected static function _checkKey(string aKey, string $method): void
+    protected static void _checkKey(string aKey, string $method)
     {
         if (mb_strlen($key, "8bit") < 32) {
             throw new InvalidArgumentException(

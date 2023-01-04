@@ -867,7 +867,7 @@ abstract class Association
      * @param uim.cake.orm.Query $surrogate the query having the fields to be copied from
      * @param array<string, mixed> $options options passed to the method `attachTo`
      */
-    protected void _appendFields(Query $query, Query $surrogate, array $options): void
+    protected void _appendFields(Query $query, Query $surrogate, array $options)
     {
         if ($query.getEagerLoader().isAutoFieldsEnabled() == false) {
             return;
@@ -898,7 +898,7 @@ abstract class Association
      * target table.
      * @param array<string, mixed> $options options passed to the method `attachTo`
      */
-    protected void _formatAssociationResults(Query $query, Query $surrogate, array $options): void
+    protected void _formatAssociationResults(Query $query, Query $surrogate, array $options)
     {
         $formatters = $surrogate.getResultFormatters();
 
@@ -956,7 +956,7 @@ abstract class Association
      * @param uim.cake.orm.Query $surrogate the query having the containments to be attached
      * @param array<string, mixed> $options options passed to the method `attachTo`
      */
-    protected void _bindNewAssociations(Query $query, Query $surrogate, array $options): void
+    protected void _bindNewAssociations(Query $query, Query $surrogate, array $options)
     {
         $loader = $surrogate.getEagerLoader();
         $contain = $loader.getContain();

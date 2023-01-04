@@ -46,7 +46,7 @@ trait EmailTrait
      * @param int $count Email count
      * @param string $message Message
      */
-    void assertMailCount(int $count, string $message = ""): void
+    void assertMailCount(int $count, string $message = "")
     {
         this.assertThat($count, new MailCount(), $message);
     }
@@ -56,7 +56,7 @@ trait EmailTrait
      *
      * @param string $message Message
      */
-    void assertNoMailSent(string $message = ""): void
+    void assertNoMailSent(string $message = "")
     {
         this.assertThat(null, new NoMailSent(), $message);
     }

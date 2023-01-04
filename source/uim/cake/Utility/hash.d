@@ -772,7 +772,7 @@ class Hash
      * @param array $return The return value to operate on.
      * @return void
      */
-    protected static function _merge(array $stack, array &$return): void
+    protected static void _merge(array $stack, array &$return)
     {
         while (!empty($stack)) {
             foreach ($stack as $curKey: &$curMerge) {

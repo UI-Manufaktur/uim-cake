@@ -152,7 +152,7 @@ class FixtureManager
      * @return void
      * @throws \UnexpectedValueException when a referenced fixture does not exist.
      */
-    protected function _loadFixtures(TestCase $test): void
+    protected void _loadFixtures(TestCase $test)
     {
         $fixtures = $test.getFixtures();
         if (!$fixtures) {
@@ -229,7 +229,7 @@ class FixtureManager
         IConnection $db,
         array $sources,
         bool $drop = true
-    ): void {
+    ) {
         $configName = $db.configName();
         $isFixtureSetup = this.isFixtureSetup($configName, $fixture);
         if ($isFixtureSetup) {
@@ -258,7 +258,7 @@ class FixtureManager
      * @return void
      * @throws \RuntimeException
      */
-    function load(TestCase $test): void
+    void load(TestCase $test)
     {
         $fixtures = $test.getFixtures();
         if (!$fixtures || !$test.autoFixtures) {
@@ -266,7 +266,7 @@ class FixtureManager
         }
 
         try {
-            $createTables = function (IConnection $db, array $fixtures) use ($test): void {
+            $createTables = void (IConnection $db, array $fixtures) use ($test) {
                 /** @var array<uim.cake.Datasource\IFixture> $fixtures */
                 $tables = $db.getSchemaCollection().listTables();
                 $configName = $db.configName();
@@ -321,7 +321,7 @@ class FixtureManager
             _runOperation($fixtures, $createTables);
 
             // Use a separate transaction because of postgres.
-            $insert = function (IConnection $db, array $fixtures) use ($test): void {
+            $insert = void (IConnection $db, array $fixtures) use ($test) {
                 foreach ($fixtures as $fixture) {
                     try {
                         $fixture.insert($db);
@@ -353,7 +353,7 @@ class FixtureManager
      * @param array<string> $fixtures A list of fixtures to operate on.
      * @param callable $operation The operation to run on each connection + fixture set.
      */
-    protected void _runOperation(array $fixtures, callable $operation): void
+    protected void _runOperation(array $fixtures, callable $operation)
     {
         $dbs = _fixtureConnections($fixtures);
         foreach ($dbs as $connection: $fixtures) {
@@ -363,8 +363,8 @@ class FixtureManager
             if ($logQueries && !_debug) {
                 $db.disableQueryLogging();
             }
-            $db.transactional(function (IConnection $db) use ($fixtures, $operation): void {
-                $db.disableConstraints(function (IConnection $db) use ($fixtures, $operation): void {
+            $db.transactional(void (IConnection $db) use ($fixtures, $operation) {
+                $db.disableConstraints(void (IConnection $db) use ($fixtures, $operation) {
                     $operation($db, $fixtures);
                 });
             });
@@ -404,7 +404,7 @@ class FixtureManager
         if (!$fixtures) {
             return;
         }
-        $truncate = function (IConnection $db, array $fixtures): void {
+        $truncate = void (IConnection $db, array $fixtures) {
             $configName = $db.configName();
 
             foreach ($fixtures as $fixture) {
@@ -426,7 +426,7 @@ class FixtureManager
      * @return void
      * @throws \UnexpectedValueException
      */
-    function loadSingle(string aName, ?IConnection $connection = null, bool $dropTables = true): void
+    void loadSingle(string aName, ?IConnection $connection = null, bool $dropTables = true)
     {
         if (!isset(_fixtureMap[$name])) {
             throw new UnexpectedValueException(sprintf("Referenced fixture class %s not found", $name));
@@ -458,9 +458,9 @@ class FixtureManager
     /**
      * Drop all fixture tables loaded by this class
      */
-    void shutDown(): void
+    void shutDown()
     {
-        $shutdown = function (IConnection $db, array $fixtures): void {
+        $shutdown = void (IConnection $db, array $fixtures) {
             $connection = $db.configName();
             /** @var uim.cake.datasources.IFixture $fixture */
             foreach ($fixtures as $fixture) {
