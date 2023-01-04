@@ -430,8 +430,7 @@ class DateTimeType : BaseType : BatchCastingInterface
      * @psalm-param class-string<\DateTime>|class-string<\DateTimeImmutable> $class
      * @psalm-param class-string<\DateTime>|class-string<\DateTimeImmutable> $fallback
      */
-    protected void _setClassName(string $class, string $fallback)
-    {
+    protected void _setClassName(string $class, string $fallback) {
         if (!class_exists($class)) {
             $class = $fallback;
         }

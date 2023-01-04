@@ -67,8 +67,7 @@ abstract class BaseErrorHandler
     /**
      * Register the error and exception handlers.
      */
-    void register()
-    {
+    void register() {
         deprecationWarning(
             "Use of `BaseErrorHandler` and subclasses are deprecated~ " ~
             "Upgrade to the new `ErrorTrap` and `ExceptionTrap` subsystem~ " ~
@@ -183,8 +182,7 @@ abstract class BaseErrorHandler
      * @return void
      * @deprecated 4.0.0 Unused method will be removed in 5.0
      */
-    void wrapAndHandleException(Throwable $exception)
-    {
+    void wrapAndHandleException(Throwable $exception) {
         deprecationWarning("This method is no longer in use. Call handleException instead.");
         this.handleException($exception);
     }
@@ -200,8 +198,7 @@ abstract class BaseErrorHandler
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    void handleException(Throwable $exception)
-    {
+    void handleException(Throwable $exception) {
         _displayException($exception);
         this.logException($exception);
         $code = $exception.getCode() ?: 1;
@@ -215,8 +212,7 @@ abstract class BaseErrorHandler
      *
      * @param int $code Exit code.
      */
-    protected void _stop(int $code)
-    {
+    protected void _stop(int $code) {
         // Do nothing.
     }
 
@@ -249,8 +245,7 @@ abstract class BaseErrorHandler
      *
      * @param int $additionalKb Number in kilobytes
      */
-    void increaseMemoryLimit(int $additionalKb)
-    {
+    void increaseMemoryLimit(int $additionalKb) {
         $limit = ini_get("memory_limit");
         if ($limit == false || $limit == "" || $limit == "-1") {
             return;

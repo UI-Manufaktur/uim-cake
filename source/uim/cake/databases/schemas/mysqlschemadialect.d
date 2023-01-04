@@ -63,8 +63,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    void convertOptionsDescription(TableSchema $schema, array $row)
-    {
+    void convertOptionsDescription(TableSchema $schema, array $row) {
         $schema.setOptions([
             "engine": $row["Engine"],
             "collation": $row["Collation"],
@@ -184,8 +183,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    function convertColumnDescription(TableSchema $schema, array $row)
-    {
+    function convertColumnDescription(TableSchema $schema, array $row) {
         $field = _convertColumn($row["Type"]);
         $field += [
             "null": $row["Null"] == "YES",
@@ -200,8 +198,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    void convertIndexDescription(TableSchema $schema, array $row)
-    {
+    void convertIndexDescription(TableSchema $schema, array $row) {
         $type = null;
         $columns = $length = [];
 
@@ -271,8 +268,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    void convertForeignKeyDescription(TableSchema $schema, array $row)
-    {
+    void convertForeignKeyDescription(TableSchema $schema, array $row) {
         $data = [
             "type": TableSchema::CONSTRAINT_FOREIGN,
             "columns": [$row["COLUMN_NAME"]],

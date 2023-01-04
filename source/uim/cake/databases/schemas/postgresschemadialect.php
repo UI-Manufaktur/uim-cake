@@ -165,8 +165,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    void convertColumnDescription(TableSchema $schema, array $row)
-    {
+    void convertColumnDescription(TableSchema $schema, array $row) {
         $field = _convertColumn($row["type"]);
 
         if ($field["type"] == TableSchema::TYPE_BOOLEAN) {
@@ -265,8 +264,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    void convertIndexDescription(TableSchema $schema, array $row)
-    {
+    void convertIndexDescription(TableSchema $schema, array $row) {
         $type = TableSchema::INDEX_INDEX;
         $name = $row["relname"];
         if ($row["indisprimary"]) {
@@ -299,8 +297,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @param string $type The index type.
      * @param array $row The metadata record to update with.
      */
-    protected void _convertConstraint(TableSchema $schema, string aName, string $type, array $row)
-    {
+    protected void _convertConstraint(TableSchema $schema, string aName, string $type, array $row) {
         $constraint = $schema.getConstraint($name);
         if (!$constraint) {
             $constraint = [
@@ -341,8 +338,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    void convertForeignKeyDescription(TableSchema $schema, array $row)
-    {
+    void convertForeignKeyDescription(TableSchema $schema, array $row) {
         $data = [
             "type": TableSchema::CONSTRAINT_FOREIGN,
             "columns": $row["column_name"],

@@ -128,8 +128,7 @@ class Collection : ICollection
      * @uses uim.cake.databases.Schema\SchemaDialect::convertForeignKeyDescription
      * @uses uim.cake.databases.Schema\SchemaDialect::convertOptionsDescription
      */
-    protected void _reflect(string $stage, string aName, array $config, TableSchema $schema)
-    {
+    protected void _reflect(string $stage, string aName, array $config, TableSchema $schema) {
         $describeMethod = "describe{$stage}Sql";
         $convertMethod = "convert{$stage}Description";
 

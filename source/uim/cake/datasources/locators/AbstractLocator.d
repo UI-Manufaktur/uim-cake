@@ -78,8 +78,7 @@ abstract class AbstractLocator : ILocator
     }
 
 
-    void remove(string $alias)
-    {
+    void remove(string $alias) {
         unset(
             this.instances[$alias],
             this.options[$alias]
@@ -87,8 +86,7 @@ abstract class AbstractLocator : ILocator
     }
 
 
-    void clear()
-    {
+    void clear() {
         this.instances = [];
         this.options = [];
     }

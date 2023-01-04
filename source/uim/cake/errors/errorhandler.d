@@ -108,8 +108,7 @@ class ErrorHandler : BaseErrorHandler
      * @param array $error An array of error data.
      * @param bool $debug Whether the app is in debug mode.
      */
-    protected void _displayError(array $error, bool $debug)
-    {
+    protected void _displayError(array $error, bool $debug) {
         if (!$debug) {
             return;
         }
@@ -123,8 +122,7 @@ class ErrorHandler : BaseErrorHandler
      * @return void
      * @throws \Exception When the chosen exception renderer is invalid.
      */
-    protected void _displayException(Throwable $exception)
-    {
+    protected void _displayException(Throwable $exception) {
         try {
             $renderer = this.getRenderer(
                 $exception,
@@ -175,8 +173,7 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param \Throwable $exception Exception.
      */
-    protected void _logInternalError(Throwable $exception)
-    {
+    protected void _logInternalError(Throwable $exception) {
         // Disable trace for internal errors.
         _config["trace"] = false;
         $message = sprintf(
@@ -195,8 +192,7 @@ class ErrorHandler : BaseErrorHandler
      *
      * @param \Psr\Http\messages.IResponse|string $response Either the message or response object.
      */
-    protected void _sendResponse($response)
-    {
+    protected void _sendResponse($response) {
         if (is_string($response)) {
             echo $response;
 

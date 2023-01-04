@@ -34,8 +34,7 @@ class ArrayNode : INode
      *
      * @param uim.cake.errors.debugs.ArrayItemNode $node The item to add.
      */
-    void add(ArrayItemNode $node)
-    {
+    void add(ArrayItemNode $node) {
         this.items[] = $node;
     }
 

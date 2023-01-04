@@ -41,8 +41,7 @@ class ErrorLogger : ErrorLoggerInterface
      * @param ?\Psr\Http\messages.IServerRequest $request The request if in an HTTP context.
      * @param bool $includeTrace Should the log message include a stacktrace
      */
-    void logError(PhpError $error, ?IServerRequest $request = null, bool $includeTrace = false)
-    {
+    void logError(PhpError $error, ?IServerRequest $request = null, bool $includeTrace = false) {
         $message = $error.getMessage();
         if ($request) {
             $message .= this.getRequestContext($request);

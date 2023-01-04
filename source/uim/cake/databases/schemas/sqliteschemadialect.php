@@ -178,8 +178,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    void convertColumnDescription(TableSchema $schema, array $row)
-    {
+    void convertColumnDescription(TableSchema $schema, array $row) {
         $field = _convertColumn($row["type"]);
         $field += [
             "null": !$row["notnull"],
@@ -255,8 +254,7 @@ class SqliteSchemaDialect : SchemaDialect
      *    an index or constraint to.
      * @param array $row The row data from `describeIndexSql`.
      */
-    void convertIndexDescription(TableSchema $schema, array $row)
-    {
+    void convertIndexDescription(TableSchema $schema, array $row) {
         $sql = sprintf(
             "PRAGMA index_info(%s)",
             _driver.quoteIdentifier($row["name"])
@@ -291,8 +289,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    void convertForeignKeyDescription(TableSchema $schema, array $row)
-    {
+    void convertForeignKeyDescription(TableSchema $schema, array $row) {
         $name = $row["from"] ~ "_fk";
 
         $update = $row["on_update"] ?? "";

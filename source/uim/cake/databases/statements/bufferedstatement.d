@@ -78,14 +78,12 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    void bindValue($column, $value, $type = "string")
-    {
+    void bindValue($column, $value, $type = "string") {
         this.statement.bindValue($column, $value, $type);
     }
 
 
-    void closeCursor()
-    {
+    void closeCursor() {
         this.statement.closeCursor();
     }
 
@@ -134,8 +132,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    void bind(array $params, array $types)
-    {
+    void bind(array $params, array $types) {
         this.statement.bind($params, $types);
     }
 
@@ -214,8 +211,7 @@ class BufferedStatement : Iterator, IStatement
     /**
      * Reset all properties
      */
-    protected void _reset()
-    {
+    protected void _reset() {
         this.buffer = [];
         _allFetched = false;
         this.index = 0;
@@ -244,8 +240,7 @@ class BufferedStatement : Iterator, IStatement
     /**
      * Rewinds the collection
      */
-    void rewind()
-    {
+    void rewind() {
         this.index = 0;
     }
 
@@ -266,8 +261,7 @@ class BufferedStatement : Iterator, IStatement
     /**
      * Advances the iterator pointer to the next element
      */
-    void next()
-    {
+    void next() {
         this.index += 1;
     }
 

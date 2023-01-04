@@ -94,8 +94,7 @@ class ErrorHandler : BaseErrorHandler
      * @param bool $debug Whether the app is in debug mode.
      * @return void
      */
-    protected void _displayError(array myError, bool $debug)
-    {
+    protected void _displayError(array myError, bool $debug) {
         if (!$debug) {
             return;
         }
@@ -109,8 +108,7 @@ class ErrorHandler : BaseErrorHandler
      * @return void
      * @throws \Exception When the chosen exception renderer is invalid.
      */
-    protected void _displayException(Throwable myException)
-    {
+    protected void _displayException(Throwable myException) {
         try {
             $renderer = this.getRenderer(
                 myException,
@@ -162,8 +160,7 @@ class ErrorHandler : BaseErrorHandler
      * @param \Throwable myException Exception.
      * @return void
      */
-    protected void _logInternalError(Throwable myException)
-    {
+    protected void _logInternalError(Throwable myException) {
         // Disable trace for internal errors.
         _config["trace"] = false;
         myMessage = sprintf(
@@ -183,8 +180,7 @@ class ErrorHandler : BaseErrorHandler
      * @param uim.cake.http.Response|string response Either the message or response object.
      * @return void
      */
-    protected void _sendResponse($response)
-    {
+    protected void _sendResponse($response) {
         if (is_string($response)) {
             echo $response;
 

@@ -189,8 +189,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    void convertColumnDescription(TableSchema $schema, array $row)
-    {
+    void convertColumnDescription(TableSchema $schema, array $row) {
         $field = _convertColumn(
             $row["type"],
             $row["char_length"] != null ? (int)$row["char_length"] : null,
@@ -270,8 +269,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    void convertIndexDescription(TableSchema $schema, array $row)
-    {
+    void convertIndexDescription(TableSchema $schema, array $row) {
         $type = TableSchema::INDEX_INDEX;
         $name = $row["index_name"];
         if ($row["is_primary_key"]) {
@@ -330,8 +328,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    void convertForeignKeyDescription(TableSchema $schema, array $row)
-    {
+    void convertForeignKeyDescription(TableSchema $schema, array $row) {
         $data = [
             "type": TableSchema::CONSTRAINT_FOREIGN,
             "columns": [$row["column"]],

@@ -170,8 +170,7 @@ class ExceptionTrap
      * This will replace the existing exception handler, and the
      * previous exception handler will be discarded.
      */
-    void register()
-    {
+    void register() {
         set_exception_handler([this, "handleException"]);
         register_shutdown_function([this, "handleShutdown"]);
         static::$registeredTrap = this;
@@ -183,8 +182,7 @@ class ExceptionTrap
      * If this instance is not currently the registered singleton
      * nothing happens.
      */
-    void unregister()
-    {
+    void unregister() {
         if (static::$registeredTrap == this) {
             this.disabled = true;
             static::$registeredTrap = null;
@@ -216,8 +214,7 @@ class ExceptionTrap
      * @throws \Exception When renderer class not found
      * @see https://secure.php.net/manual/en/function.set-exception-handler.php
      */
-    void handleException(Throwable $exception)
-    {
+    void handleException(Throwable $exception) {
         if (this.disabled) {
             return;
         }
@@ -242,8 +239,7 @@ class ExceptionTrap
      *
      * Convert fatal errors into exceptions that we can render.
      */
-    void handleShutdown()
-    {
+    void handleShutdown() {
         if (this.disabled) {
             return;
         }
@@ -277,8 +273,7 @@ class ExceptionTrap
      *
      * @param int $additionalKb Number in kilobytes
      */
-    void increaseMemoryLimit(int $additionalKb)
-    {
+    void increaseMemoryLimit(int $additionalKb) {
         $limit = ini_get("memory_limit");
         if ($limit == false || $limit == "" || $limit == "-1") {
             return;
@@ -308,8 +303,7 @@ class ExceptionTrap
      * @param string $file File on which error occurred
      * @param int $line Line that triggered the error
      */
-    void handleFatalError(int $code, string $description, string $file, int $line)
-    {
+    void handleFatalError(int $code, string $description, string $file, int $line) {
         this.handleException(new FatalErrorException("Fatal Error: " ~ $description, 500, $file, $line));
     }
 
@@ -325,8 +319,7 @@ class ExceptionTrap
      * @param \Throwable $exception The exception to log
      * @param \Psr\Http\messages.IServerRequest|null $request The optional request
      */
-    void logException(Throwable $exception, ?IServerRequest $request = null)
-    {
+    void logException(Throwable $exception, ?IServerRequest $request = null) {
         $shouldLog = _config["log"];
         if ($shouldLog) {
             foreach (this.getConfig("skipLog") as $class) {
@@ -360,8 +353,7 @@ class ExceptionTrap
      *
      * @param \Throwable $exception Exception to log
      */
-    void logInternalError(Throwable $exception)
-    {
+    void logInternalError(Throwable $exception) {
         $message = sprintf(
             "[%s] %s (%s:%s)", // Keeping same message format
             get_class($exception),
