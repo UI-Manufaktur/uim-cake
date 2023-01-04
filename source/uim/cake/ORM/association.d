@@ -630,7 +630,7 @@ abstract class Association
      * @return void
      * @throws \RuntimeException Unable to build the query or associations.
      */
-    function attachTo(Query $query, array $options = []): void
+    void attachTo(Query $query, array $options = [])
     {
         $target = this.getTarget();
         $table = $target.getTable();
@@ -705,7 +705,7 @@ abstract class Association
      * @param uim.cake.orm.Query $query The query to modify
      * @param array<string, mixed> $options Options array containing the `negateMatch` key.
      */
-    protected void _appendNotMatching(Query $query, array $options): void
+    protected void _appendNotMatching(Query $query, array $options)
     {
         $target = _targetTable;
         if (!empty($options["negateMatch"])) {
@@ -854,7 +854,7 @@ abstract class Association
      *
      * @param uim.cake.orm.Query $query the query this association is attaching itself to
      */
-    protected void _dispatchBeforeFind(Query $query): void
+    protected void _dispatchBeforeFind(Query $query)
     {
         $query.triggerBeforeFind();
     }

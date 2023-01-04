@@ -526,7 +526,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @return void
      * @throws \RuntimeException When an alias combination is too long
      */
-    protected function checkAliasLengths(): void
+    protected void checkAliasLengths()
     {
         if (_schema == null) {
             throw new RuntimeException("Unable to check max alias lengths for  `{this.getAlias()}` without schema.");
@@ -2169,7 +2169,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
 
         /** @var array<bool> $isNew */
         $isNew = [];
-        $cleanupOnFailure = function ($entities) use (&$isNew): void {
+        $cleanupOnFailure = void ($entities) use (&$isNew) {
             /** @var array<uim.cake.Datasource\IEntity> $entities */
             foreach ($entities as $key: $entity) {
                 if (isset($isNew[$key]) && $isNew[$key]) {

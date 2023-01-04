@@ -465,7 +465,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *   This typemap is indirectly mutated via {@link uim.cake.orm.Query::addDefaultTypes()}
      * @param array<string, array> $associations The nested tree of associations to walk.
      */
-    protected void _addAssociationsToTypeMap(Table $table, TypeMap $typeMap, array $associations): void
+    protected void _addAssociationsToTypeMap(Table $table, TypeMap $typeMap, array $associations)
     {
         foreach ($associations as $name: $nested) {
             if (!$table.hasAssociation($name)) {
@@ -1051,7 +1051,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * Will not trigger more than once, and only for select queries.
      */
-    void triggerBeforeFind(): void
+    void triggerBeforeFind()
     {
         if (!_beforeFindFired && _type == "select") {
             _beforeFindFired = true;
@@ -1106,7 +1106,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @see uim.cake.databases.Query::execute()
      */
-    protected void _transformQuery(): void
+    protected void _transformQuery()
     {
         if (!_dirty || _type != "select") {
             return;
@@ -1126,7 +1126,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Inspects if there are any set fields for selecting, otherwise adds all
      * the fields for the default table.
      */
-    protected void _addDefaultFields(): void
+    protected void _addDefaultFields()
     {
         $select = this.clause("select");
         _hasFields = true;
@@ -1189,7 +1189,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      * Marks a query as dirty, removing any preprocessed information
      * from in memory caching such as previous results
      */
-    protected void _dirty(): void
+    protected void _dirty()
     {
         _results = null;
         _resultsCount = null;

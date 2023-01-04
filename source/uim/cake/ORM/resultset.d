@@ -301,7 +301,7 @@ class ResultSet : IResultSet
      *
      * @param array $data Data array.
      */
-    void __unserialize(array $data): void
+    void __unserialize(array $data)
     {
         _results = SplFixedArray::fromArray($data);
         _useBuffering = true;
@@ -337,7 +337,7 @@ class ResultSet : IResultSet
      *
      * @param uim.cake.orm.Query $query The query from where to derive the associations
      */
-    protected void _calculateAssociationMap(Query $query): void
+    protected void _calculateAssociationMap(Query $query)
     {
         $map = $query.getEagerLoader().associationsMap(_defaultTable);
         _matchingMap = (new Collection($map))
@@ -357,7 +357,7 @@ class ResultSet : IResultSet
      *
      * @param uim.cake.orm.Query $query The query from where to derive the column map
      */
-    protected void _calculateColumnMap(Query $query): void
+    protected void _calculateColumnMap(Query $query)
     {
         $map = [];
         foreach ($query.clause("select") as $key: $field) {

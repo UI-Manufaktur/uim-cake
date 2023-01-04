@@ -271,7 +271,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    void convertForeignKeyDescription(TableSchema $schema, array $row): void
+    void convertForeignKeyDescription(TableSchema $schema, array $row)
     {
         $data = [
             "type": TableSchema::CONSTRAINT_FOREIGN,

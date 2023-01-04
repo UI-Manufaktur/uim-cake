@@ -858,7 +858,7 @@ class Marshaller
      * @param array $data readOnly $data to use.
      * @param array<string, mixed> $options List of options that are readOnly.
      */
-    protected void dispatchAfterMarshal(IEntity $entity, array $data, array $options = []): void
+    protected void dispatchAfterMarshal(IEntity $entity, array $data, array $options = [])
     {
         $data = new ArrayObject($data);
         $options = new ArrayObject($options);

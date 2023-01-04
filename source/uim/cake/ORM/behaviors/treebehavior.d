@@ -61,7 +61,7 @@ class TreeBehavior : Behavior
     ];
 
 
-    function initialize(array $config): void
+    void initialize(array $config)
     {
         _config["leftField"] = new IdentifierExpression(_config["left"]);
         _config["rightField"] = new IdentifierExpression(_config["right"]);
@@ -156,7 +156,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity $entity The entity whose descendants need to be updated.
      */
-    protected void _setChildrenLevel(IEntity $entity): void
+    protected void _setChildrenLevel(IEntity $entity)
     {
         $config = this.getConfig();
 
@@ -233,7 +233,7 @@ class TreeBehavior : Behavior
      * @return void
      * @throws \RuntimeException if the parent to set to the entity is not valid
      */
-    protected function _setParent(IEntity $entity, $parent): void
+    protected void _setParent(IEntity $entity, $parent)
     {
         $config = this.getConfig();
         $parentNode = _getNode($parent);
@@ -292,7 +292,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to set as a new root
      */
-    protected void _setAsRoot(IEntity $entity): void
+    protected void _setAsRoot(IEntity $entity)
     {
         $config = this.getConfig();
         $edge = _getMax();
@@ -793,7 +793,7 @@ class TreeBehavior : Behavior
      */
     void recover()
     {
-        _table.getConnection().transactional(function (): void {
+        _table.getConnection().transactional(void () {
             _recoverTree();
         });
     }
@@ -868,7 +868,7 @@ class TreeBehavior : Behavior
      * @param bool $mark whether to mark the updated values so that they can not be
      * modified by future calls to this function.
      */
-    protected void _sync(int $shift, string $dir, string $conditions, bool $mark = false): void
+    protected void _sync(int $shift, string $dir, string $conditions, bool $mark = false)
     {
         $config = _config;
 
@@ -922,7 +922,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to ensure fields for
      */
-    protected void _ensureFields(IEntity $entity): void
+    protected void _ensureFields(IEntity $entity)
     {
         $config = this.getConfig();
         $fields = [$config["left"], $config["right"]];

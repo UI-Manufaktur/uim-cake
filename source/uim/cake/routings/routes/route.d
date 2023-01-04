@@ -287,7 +287,7 @@ class Route
      * Uses the template, defaults and options properties to compile a
      * regular expression that can be used to parse request strings.
      */
-    protected void _writeRoute(): void
+    protected void _writeRoute()
     {
         if (empty(this.template) || (this.template == "/")) {
             _compiledRoute = "#^/*$#";

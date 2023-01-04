@@ -163,7 +163,7 @@ class Log
      *
      * @return void
      */
-    protected static function _init(): void
+    protected static void _init()
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (!isset(static::$_registry)) {
@@ -181,7 +181,7 @@ class Log
      *
      * @return void
      */
-    protected static function _loadConfig(): void
+    protected static void _loadConfig()
     {
         foreach (static::$_config as $name: $properties) {
             if (isset($properties["engine"])) {
@@ -201,7 +201,7 @@ class Log
      * Resets the configured logging adapters, as well as any custom logging levels.
      * This will also clear the configuration data.
      */
-    static void reset(): void
+    static void reset()
     {
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (isset(static::$_registry)) {
@@ -264,7 +264,7 @@ class Log
      * @return void
      * @throws \BadMethodCallException When trying to modify an existing config.
      */
-    static function setConfig($key, $config = null): void
+    static void setConfig($key, $config = null)
     {
         static::_setConfig($key, $config);
         static::$_dirtyConfig = true;

@@ -201,7 +201,7 @@ class Socket
      *
      * @param string $host The host name being connected to.
      */
-    protected void _setSslContext(string $host): void
+    protected void _setSslContext(string $host)
     {
         foreach (_config as $key: $value) {
             if (substr($key, 0, 4) != "ssl_") {
@@ -237,7 +237,7 @@ class Socket
      * @param int $code Code number.
      * @param string $message Message.
      */
-    protected void _connectionErrorHandler(int $code, string $message): void
+    protected void _connectionErrorHandler(int $code, string $message)
     {
         _connectionErrors[] = $message;
     }
@@ -316,7 +316,7 @@ class Socket
      * @param int|null $errNum Error code
      * @param string $errStr Error string
      */
-    void setLastError(?int $errNum, string $errStr): void
+    void setLastError(?int $errNum, string $errStr)
     {
         this.lastError = ["num": $errNum, "str": $errStr];
     }
@@ -408,7 +408,7 @@ class Socket
      *
      * @param array|null $state Array with key and values to reset
      */
-    void reset(?array $state = null): void
+    void reset(?array $state = null)
     {
         if (empty($state)) {
             static $initialState = [];
@@ -434,7 +434,7 @@ class Socket
      * @throws uim.cake.Network\exceptions.SocketException When attempting to enable SSL/TLS fails
      * @see stream_socket_enable_crypto
      */
-    function enableCrypto(string $type, string $clientOrServer = "client", bool $enable = true): void
+    void enableCrypto(string $type, string $clientOrServer = "client", bool $enable = true)
     {
         if (!array_key_exists($type ~ "_" ~ $clientOrServer, _encryptMethods)) {
             throw new InvalidArgumentException("Invalid encryption scheme chosen");

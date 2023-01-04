@@ -80,7 +80,7 @@ class MailTransport : AbstractTransport
         string $message,
         string $headers = "",
         string $params = ""
-    ): void {
+    ) {
         // phpcs:disable
         if (!@mail($to, $subject, $message, $headers, $params)) {
             $error = error_get_last();

@@ -24,7 +24,7 @@ class ConnectionHelper
      *
      * The `default` connection is aliased to `test`.
      */
-    void addTestAliases(): void
+    void addTestAliases()
     {
         ConnectionManager::alias("test", "default");
         foreach (ConnectionManager::configured() as $connection) {
@@ -47,7 +47,7 @@ class ConnectionHelper
      *
      * @param array<int, string>|null $connections Connection names or null for all.
      */
-    void enableQueryLogging(?array $connections = null): void
+    void enableQueryLogging(?array $connections = null)
     {
         $connections = $connections ?? ConnectionManager::configured();
         foreach ($connections as $connection) {
@@ -64,7 +64,7 @@ class ConnectionHelper
      * @param string $connectionName Connection name
      * @param array<string>|null $tables List of tables names or null for all.
      */
-    void dropTables(string $connectionName, ?array $tables = null): void
+    void dropTables(string $connectionName, ?array $tables = null)
     {
         /** @var uim.cake.databases.Connection $connection */
         $connection = ConnectionManager::get($connectionName);
@@ -102,7 +102,7 @@ class ConnectionHelper
      * @param string $connectionName Connection name
      * @param array<string>|null $tables List of tables names or null for all.
      */
-    void truncateTables(string $connectionName, ?array $tables = null): void
+    void truncateTables(string $connectionName, ?array $tables = null)
     {
         /** @var uim.cake.databases.Connection $connection */
         $connection = ConnectionManager::get($connectionName);

@@ -55,7 +55,7 @@ class ProgressHelper : Helper
      *
      * @param array $args The arguments/options to use when outputing the progress bar.
      */
-    void output(array $args): void
+    void output(array $args)
     {
         $args += ["callback": null];
         if (isset($args[0])) {

@@ -24,7 +24,7 @@ abstract class IntegrationTestCase : TestCase
      *
      * @param bool $enable Unused.
      */
-    void useHttpServer(bool $enable): void
+    void useHttpServer(bool $enable)
     {
     }
 }

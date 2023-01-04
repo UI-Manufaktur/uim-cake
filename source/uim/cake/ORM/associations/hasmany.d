@@ -304,7 +304,7 @@ class HasMany : Association
      * @throws \InvalidArgumentException if non persisted entities are passed or if
      * any of them is lacking a primary key value
      */
-    void unlink(IEntity $sourceEntity, array $targetEntities, $options = []): void
+    void unlink(IEntity $sourceEntity, array $targetEntities, $options = [])
     {
         if (is_bool($options)) {
             $options = [
@@ -475,7 +475,7 @@ class HasMany : Association
         if ($mustBeDependent) {
             if (_cascadeCallbacks) {
                 $conditions = new QueryExpression($conditions);
-                $conditions.traverse(function ($entry) use ($target): void {
+                $conditions.traverse(void ($entry) use ($target): void {
                     if ($entry instanceof FieldInterface) {
                         $field = $entry.getField();
                         if (is_string($field)) {

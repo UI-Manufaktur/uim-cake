@@ -292,7 +292,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    function clear(): void
+    void clear()
     {
         super.clear();
 
@@ -314,7 +314,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    function remove(string $alias): void
+    void remove(string $alias)
     {
         super.remove($alias);
 

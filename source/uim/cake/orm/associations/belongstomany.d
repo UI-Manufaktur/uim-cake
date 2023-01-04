@@ -269,7 +269,7 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Table $source The source table.
      * @param uim.cake.orm.Table $target The target table.
      */
-    protected void _generateTargetAssociations(Table $junction, Table $source, Table $target): void
+    protected void _generateTargetAssociations(Table $junction, Table $source, Table $target)
     {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
@@ -314,7 +314,7 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Table $junction The junction table.
      * @param uim.cake.orm.Table $source The source table.
      */
-    protected void _generateSourceAssociations(Table $junction, Table $source): void
+    protected void _generateSourceAssociations(Table $junction, Table $source)
     {
         $junctionAlias = $junction.getAlias();
         $sAlias = $source.getAlias();
@@ -351,7 +351,7 @@ class BelongsToMany : Association
      * @return void
      * @throws \InvalidArgumentException If the expected associations are incompatible with existing associations.
      */
-    protected function _generateJunctionAssociations(Table $junction, Table $source, Table $target): void
+    protected void _generateJunctionAssociations(Table $junction, Table $source, Table $target)
     {
         $tAlias = $target.getAlias();
         $sAlias = $source.getAlias();
@@ -399,7 +399,7 @@ class BelongsToMany : Association
      * @param uim.cake.orm.Query $query the query to be altered to include the target table data
      * @param array<string, mixed> $options Any extra options or overrides to be taken in account
      */
-    void attachTo(Query $query, array $options = []): void
+    void attachTo(Query $query, array $options = [])
     {
         if (!empty($options["negateMatch"])) {
             _appendNotMatching($query, $options);
@@ -433,7 +433,7 @@ class BelongsToMany : Association
     }
 
 
-    protected function _appendNotMatching(Query $query, array $options): void
+    protected void _appendNotMatching(Query $query, array $options)
     {
         if (empty($options["negateMatch"])) {
             return;
@@ -855,7 +855,7 @@ class BelongsToMany : Association
         $property = this.getProperty();
 
         this.junction().getConnection().transactional(
-            function () use ($sourceEntity, $targetEntities, $options): void {
+            void () use ($sourceEntity, $targetEntities, $options) {
                 $links = _collectJointEntities($sourceEntity, $targetEntities);
                 foreach ($links as $entity) {
                     _junctionTable.delete($entity, $options);

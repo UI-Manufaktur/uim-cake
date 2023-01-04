@@ -139,7 +139,7 @@ class CounterCacheBehavior : Behavior
      * @param uim.cake.Datasource\IEntity $entity The entity that was saved.
      * @param \ArrayObject $options The options for the query
      */
-    void afterSave(IEvent $event, IEntity $entity, ArrayObject $options): void
+    void afterSave(IEvent $event, IEntity $entity, ArrayObject $options)
     {
         if (isset($options["ignoreCounterCache"]) && $options["ignoreCounterCache"] == true) {
             return;
@@ -172,7 +172,7 @@ class CounterCacheBehavior : Behavior
      * @param uim.cake.events.IEvent $event Event instance.
      * @param uim.cake.Datasource\IEntity $entity Entity.
      */
-    protected void _processAssociations(IEvent $event, IEntity $entity): void
+    protected void _processAssociations(IEvent $event, IEntity $entity)
     {
         foreach (_config as $assoc: $settings) {
             $assoc = _table.getAssociation($assoc);
@@ -190,12 +190,12 @@ class CounterCacheBehavior : Behavior
      * @return void
      * @throws \RuntimeException If invalid callable is passed.
      */
-    protected function _processAssociation(
+    protected void _processAssociation(
         IEvent $event,
         IEntity $entity,
         Association $assoc,
         array $settings
-    ): void {
+    ) {
         $foreignKeys = (array)$assoc.getForeignKey();
         $countConditions = $entity.extract($foreignKeys);
 
