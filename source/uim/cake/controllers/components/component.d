@@ -177,7 +177,7 @@ class Component : IEventListener
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo() array
     {
         return [
             'components': this.components,

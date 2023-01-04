@@ -52,9 +52,8 @@ trait ExpressionTypeCasterTrait
      * passed as parameter.
      *
      * @param array $types List of type names
-     * @return array
      */
-    protected function _requiresToExpressionCasting(array $types): array
+    protected array _requiresToExpressionCasting(array $types): array
     {
         $result = [];
         $types = array_filter($types);

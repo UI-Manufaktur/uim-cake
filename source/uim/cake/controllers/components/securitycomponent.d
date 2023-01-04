@@ -118,7 +118,7 @@ class SecurityComponent : Component
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    function implementedEvents()
     {
         return [
             "Controller.startup": "startup",
@@ -267,7 +267,7 @@ class SecurityComponent : Component
      *
      * @param uim.cake.controllers.Controller $controller Instantiating controller
      */
-    protected string[] _hashParts(Controller $controller): array
+    protected string[] _hashParts(Controller $controller)
     {
         $request = $controller.getRequest();
 
@@ -291,9 +291,8 @@ class SecurityComponent : Component
      * Return the fields list for the hash calculation
      *
      * @param array $check Data array
-     * @return array
      */
-    protected function _fieldsList(array $check): array
+    protected array _fieldsList(array $check): array
     {
         $locked = "";
         $token = urldecode($check["_Token"]["fields"]);

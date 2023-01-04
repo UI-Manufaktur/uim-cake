@@ -573,7 +573,7 @@ trait CollectionTrait
     }
 
 
-    function toArray(bool $keepKeys = true): array
+    array toArray(bool $keepKeys = true)
     {
         $iterator = this.unwrap();
         if ($iterator instanceof ArrayIterator) {
@@ -591,13 +591,13 @@ trait CollectionTrait
     }
 
 
-    function toList(): array
+    array toList()
     {
         return this.toArray(false);
     }
 
 
-    function jsonSerialize(): array
+    array jsonSerialize()
     {
         return this.toArray();
     }

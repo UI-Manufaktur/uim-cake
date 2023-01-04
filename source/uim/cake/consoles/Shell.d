@@ -378,7 +378,7 @@ class Shell
      * @return array First value has to be an array of the command arguments.
      * Second value has to be an array of extra parameter to pass on to the dispatcher
      */
-    function parseDispatchArguments(array $args): array
+    array parseDispatchArguments(array $args)
     {
         $extra = [];
 
@@ -880,7 +880,7 @@ class Shell
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "name": this.name,

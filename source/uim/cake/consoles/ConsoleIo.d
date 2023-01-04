@@ -401,7 +401,7 @@ class ConsoleIo
      * @return array
      * @see uim.cake.consoles.ConsoleOutput::styles()
      */
-    function styles(): array
+    array styles()
     {
         return _out.styles();
     }
@@ -413,7 +413,7 @@ class ConsoleIo
      * @return array
      * @see uim.cake.consoles.ConsoleOutput::getStyle()
      */
-    function getStyle(string $style): array
+    array getStyle(string $style)
     {
         return _out.getStyle($style);
     }

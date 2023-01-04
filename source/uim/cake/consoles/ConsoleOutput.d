@@ -252,7 +252,7 @@ class ConsoleOutput
      * @param string $style The style to get.
      * @return array The style or empty array.
      */
-    function getStyle(string $style): array
+    array getStyle(string $style)
     {
         return static::$_styles[$style] ?? [];
     }
@@ -290,7 +290,7 @@ class ConsoleOutput
      *
      * @return array<string, mixed>
      */
-    function styles(): array
+    array styles()
     {
         return static::$_styles;
     }

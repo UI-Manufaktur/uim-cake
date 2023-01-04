@@ -19,7 +19,7 @@ class CommandScanner
      *
      * @return array A list of command metadata.
      */
-    function scanCore(): array
+    array scanCore() array
     {
         $coreShells = this.scanDir(
             dirname(__DIR__) . DIRECTORY_SEPARATOR ~ "Shell" ~ DIRECTORY_SEPARATOR,
@@ -42,7 +42,7 @@ class CommandScanner
      *
      * @return array A list of command metadata.
      */
-    function scanApp(): array
+    array scanApp() array
     {
         $appNamespace = Configure::read("App.namespace");
         $appShells = this.scanDir(
@@ -67,7 +67,7 @@ class CommandScanner
      * @param string $plugin The named plugin.
      * @return array A list of command metadata.
      */
-    function scanPlugin(string $plugin): array
+    array scanPlugin(string $plugin) array
     {
         if (!Plugin::isLoaded($plugin)) {
             return [];

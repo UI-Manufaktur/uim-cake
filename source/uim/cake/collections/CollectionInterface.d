@@ -762,13 +762,13 @@ interface ICollection : Iterator, JsonSerializable
      * to return the same key for different elements, setting this value to false
      * can help getting all items if keys are not important in the result.
      */
-    array toArray(bool $keepKeys = true): array;
+    array toArray(bool $keepKeys = true);
 
     /**
      * Returns an numerically-indexed array representation of the results.
      * This is equivalent to calling `toArray(false)`
      */
-    array toList(): array;
+    array toList();
 
     /**
      * Returns the data that can be converted to JSON. This returns the same data
@@ -778,7 +778,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @return array The data to convert to JSON
      */
-    function jsonSerialize(): array;
+    array jsonSerialize();
 
     /**
      * Iterates once all elements in this collection and executes all stacked

@@ -972,9 +972,8 @@ trait EntityTrait
      *
      * @param uim.cake.Datasource\IEntity|iterable $object The object to read errors from.
      * @param string|null $path The field name for errors.
-     * @return array
      */
-    protected function _readError($object, $path = null): array
+    protected array _readError($object, $path = null): array
     {
         if ($path != null && $object instanceof IEntity) {
             return $object.getError($path);

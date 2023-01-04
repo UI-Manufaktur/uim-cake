@@ -217,7 +217,7 @@ class ConsoleOptionParser
      *
      * @return array<string, mixed>
      */
-    function toArray(): array
+    array toArray()
     {
         return [
             "command": _command,
@@ -632,7 +632,7 @@ class ConsoleOptionParser
      * @return array [$params, $args]
      * @throws uim.cake.consoles.exceptions.ConsoleException When an invalid parameter is encountered.
      */
-    function parse(array $argv, ?ConsoleIo $io = null): array
+    array parse(array $argv, ?ConsoleIo $io = null)
     {
         $command = isset($argv[0]) ? Inflector::underscore($argv[0]) : null;
         if (isset(_subcommands[$command])) {
@@ -790,7 +790,7 @@ class ConsoleOptionParser
      * @param array<string, mixed> $params The params to append the parsed value into
      * @return array Params with $option added in.
      */
-    protected function _parseLongOption(string $option, array $params): array
+    protected array _parseLongOption(string $option, array $params)
     {
         $name = substr($option, 2);
         if (strpos($name, "=") != false) {
@@ -811,7 +811,7 @@ class ConsoleOptionParser
      * @return array<string, mixed> Params with $option added in.
      * @throws uim.cake.consoles.exceptions.ConsoleException When unknown short options are encountered.
      */
-    protected function _parseShortOption(string $option, array $params): array
+    protected array _parseShortOption(string $option, array $params)
     {
         $key = substr($option, 1);
         if (strlen($key) > 1) {
@@ -845,7 +845,7 @@ class ConsoleOptionParser
      * @return array<string, mixed> Params with $option added in.
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    protected function _parseOption(string aName, array $params): array
+    protected array _parseOption(string aName, array $params)
     {
         if (!isset(_options[$name])) {
             throw new MissingOptionException(
@@ -903,7 +903,7 @@ class ConsoleOptionParser
      * @return array<string> Args
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    protected function _parseArg(string $argument, array $args): array
+    protected array _parseArg(string $argument, array $args)
     {
         if (empty(_args)) {
             $args[] = $argument;

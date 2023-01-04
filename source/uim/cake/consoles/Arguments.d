@@ -46,7 +46,7 @@ class Arguments
      *
      * @return array<int, string>
      */
-    function getArguments(): array
+    array getArguments(): array
     {
         return this.args;
     }
@@ -112,7 +112,7 @@ class Arguments
      *
      * @return array<string, string|int|bool|null>
      */
-    function getOptions(): array
+    function getOptions()
     {
         return this.options;
     }

@@ -102,7 +102,7 @@ class FormProtectionComponent : Component
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents() array
     {
         return [
             'Controller.startup': 'startup',

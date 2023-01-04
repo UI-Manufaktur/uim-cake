@@ -409,9 +409,8 @@ class QueryCompiler
      * @param array $expressions list of strings and IExpression objects
      * @param uim.cake.databases.ValueBinder aBinder Value binder used to generate parameter placeholder
      * @param bool $wrap Whether to wrap each expression object with parenthesis
-     * @return array
      */
-    protected function _stringifyExpressions(array $expressions, ValueBinder aBinder, bool $wrap = true): array
+    protected array _stringifyExpressions(array $expressions, ValueBinder aBinder, bool $wrap = true): array
     {
         $result = [];
         foreach ($expressions as $k: $expression) {

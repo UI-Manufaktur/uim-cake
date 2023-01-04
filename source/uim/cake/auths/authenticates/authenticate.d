@@ -134,7 +134,7 @@ abstract class BaseAuthenticate : IEventListener {
      * @param string $username The username/identifier.
      * @return uim.cake.orm.Query
      */
-    protected function _query(string $username): Query
+    protected Query _query(string $username) 
     {
         $config = _config;
         $table = this.getTableLocator().get($config["userModel"]);
@@ -232,7 +232,7 @@ abstract class BaseAuthenticate : IEventListener {
      *
      * @return array<string, mixed> List of events this class listens to. Defaults to `[]`.
      */
-    function implementedEvents(): array
+    array implementedEvents(): 
     {
         return [];
     }

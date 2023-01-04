@@ -245,9 +245,8 @@ class ComparisonExpression : IExpression, FieldInterface
      * position.
      *
      * @param uim.cake.databases.IExpression|iterable $values The rows to insert
-     * @return array
      */
-    protected function _collectExpressions($values): array
+    protected array _collectExpressions($values): array
     {
         if ($values instanceof IExpression) {
             return [$values, []];

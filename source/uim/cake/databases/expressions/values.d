@@ -116,9 +116,8 @@ class ValuesExpression : IExpression {
      * Because column names could be identifier quoted, we
      * need to strip the identifiers off of the columns.
      *
-     * @return array
      */
-    protected function _columnNames(): array
+    protected array _columnNames(): array
     {
         $columns = [];
         foreach (_columns as $col) {

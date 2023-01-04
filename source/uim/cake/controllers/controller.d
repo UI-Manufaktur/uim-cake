@@ -534,7 +534,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @return array
      * @since 4.3.0
      */
-    function getMiddleware(): array
+    array getMiddleware()
     {
         $matching = [];
         $action = this.request.getParam("action");
@@ -568,7 +568,7 @@ class Controller : IEventListener, IEventDispatcher {
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents()
     {
         return [
             "Controller.initialize": "beforeFilter",
@@ -733,7 +733,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @see Cake\Http\ContentTypeNegotiation
      * @return array<string>
      */
-    string[] viewClasses(): array
+    string[] viewClasses()
     {
         return [];
     }

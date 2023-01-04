@@ -100,7 +100,7 @@ class Cache {
      *
      * @return uim.cake.Cache\CacheRegistry
      */
-    static function getRegistry(): CacheRegistry
+    static CacheRegistry getRegistry() 
     {
         if (static::$_registry == null) {
             static::$_registry = new CacheRegistry();
@@ -338,7 +338,7 @@ class Cache {
      *   the cached data or false if cached data could not be retrieved.
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    static function readMany(iterable $keys, string $config = "default"): iterable
+    static iterable readMany(iterable $keys, string $config = "default") 
     {
         return static::pool($config).getMultiple($keys);
     }
@@ -445,7 +445,7 @@ class Cache {
      *
      * @return array<string, bool> Status code. For each configuration, it reports the status of the operation
      */
-    static function clearAll(): array
+    static array clearAll() 
     {
         $status = [];
 
@@ -483,7 +483,7 @@ class Cache {
      * @return array<string, array> Map of group and all configuration that has the same group
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    static function groupConfigs(?string $group = null): array
+    static array groupConfigs(?string $group = null) 
     {
         foreach (static::configured() as $config) {
             static::pool($config);

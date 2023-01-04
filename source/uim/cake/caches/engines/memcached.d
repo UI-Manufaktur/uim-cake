@@ -235,7 +235,7 @@ class MemcachedEngine : CacheEngine {
      * @param string $server The server address string.
      * @return array Array containing host, port
      */
-    function parseServerString(string $server): array
+    array parseServerString(string $server): 
     {
         $socketTransport = "unix://";
         if (strpos($server, $socketTransport) == 0) {
@@ -335,7 +335,7 @@ class MemcachedEngine : CacheEngine {
      * @return array An array containing, for each of the given $keys, the cached data or
      *   false if cached data could not be retrieved.
      */
-    function getMultiple($keys, $default = null): array
+    array getMultiple($keys, $default = null)
     {
         $cacheKeys = [];
         foreach ($keys as $key) {
@@ -439,7 +439,7 @@ class MemcachedEngine : CacheEngine {
      * If the group initial value was not found, then it initializes
      * the group accordingly.
      */
-    string[] groups(): array
+    string[] groups()
     {
         if (empty(_compiledGroupNames)) {
             foreach (_config["groups"] as $group) {
