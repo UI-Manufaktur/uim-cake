@@ -76,8 +76,7 @@ class RoutingMiddleware : IMiddleware
      * If the middleware is created without an Application, routes will be
      * loaded via the automatic route loading that pre-dates the routes() hook.
      */
-    protected void loadRoutes()
-    {
+    protected void loadRoutes() {
         $routeCollection = this.buildRouteCollection();
         Router::setRouteCollection($routeCollection);
     }

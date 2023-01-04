@@ -22,8 +22,7 @@ class Asset
      * @param string $inflectionType Inflection type. Value should be a valid
      *  method name of `Inflector` class like `"dasherize"` or `"underscore`"`.
      */
-    static void setInflectionType(string $inflectionType)
-    {
+    static void setInflectionType(string $inflectionType) {
         static::$inflectionType = $inflectionType;
     }
 

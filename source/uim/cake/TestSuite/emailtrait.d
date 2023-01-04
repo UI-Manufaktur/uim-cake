@@ -25,8 +25,7 @@ trait EmailTrait
      *
      * @before
      */
-    void setupTransports()
-    {
+    void setupTransports() {
         TestEmailTransport::replaceAllTransports();
     }
 
@@ -35,8 +34,7 @@ trait EmailTrait
      *
      * @after
      */
-    void cleanupEmailTrait()
-    {
+    void cleanupEmailTrait() {
         TestEmailTransport::clearMessages();
     }
 
@@ -46,8 +44,7 @@ trait EmailTrait
      * @param int $count Email count
      * @param string $message Message
      */
-    void assertMailCount(int $count, string $message = "")
-    {
+    void assertMailCount(int $count, string $message = "") {
         this.assertThat($count, new MailCount(), $message);
     }
 
@@ -56,8 +53,7 @@ trait EmailTrait
      *
      * @param string $message Message
      */
-    void assertNoMailSent(string $message = "")
-    {
+    void assertNoMailSent(string $message = "") {
         this.assertThat(null, new NoMailSent(), $message);
     }
 
@@ -68,8 +64,7 @@ trait EmailTrait
      * @param string $address Email address
      * @param string $message Message
      */
-    void assertMailSentToAt(int $at, string $address, string $message = "")
-    {
+    void assertMailSentToAt(int $at, string $address, string $message = "") {
         this.assertThat($address, new MailSentTo($at), $message);
     }
 
@@ -80,8 +75,7 @@ trait EmailTrait
      * @param string $address Email address
      * @param string $message Message
      */
-    void assertMailSentFromAt(int $at, string $address, string $message = "")
-    {
+    void assertMailSentFromAt(int $at, string $address, string $message = "") {
         this.assertThat($address, new MailSentFrom($at), $message);
     }
 
@@ -92,8 +86,7 @@ trait EmailTrait
      * @param string $contents Contents
      * @param string $message Message
      */
-    void assertMailContainsAt(int $at, string $contents, string $message = "")
-    {
+    void assertMailContainsAt(int $at, string $contents, string $message = "") {
         this.assertThat($contents, new MailContains($at), $message);
     }
 
@@ -104,8 +97,7 @@ trait EmailTrait
      * @param string $contents Contents
      * @param string $message Message
      */
-    void assertMailContainsHtmlAt(int $at, string $contents, string $message = "")
-    {
+    void assertMailContainsHtmlAt(int $at, string $contents, string $message = "") {
         this.assertThat($contents, new MailContainsHtml($at), $message);
     }
 
@@ -116,8 +108,7 @@ trait EmailTrait
      * @param string $contents Contents
      * @param string $message Message
      */
-    void assertMailContainsTextAt(int $at, string $contents, string $message = "")
-    {
+    void assertMailContainsTextAt(int $at, string $contents, string $message = "") {
         this.assertThat($contents, new MailContainsText($at), $message);
     }
 
@@ -129,8 +120,7 @@ trait EmailTrait
      * @param string $parameter Email getter parameter (e.g~ "cc", "bcc")
      * @param string $message Message
      */
-    void assertMailSentWithAt(int $at, string $expected, string $parameter, string $message = "")
-    {
+    void assertMailSentWithAt(int $at, string $expected, string $parameter, string $message = "") {
         this.assertThat($expected, new MailSentWith($at, $parameter), $message);
     }
 
@@ -140,8 +130,7 @@ trait EmailTrait
      * @param string $address Email address
      * @param string $message Message
      */
-    void assertMailSentTo(string $address, string $message = "")
-    {
+    void assertMailSentTo(string $address, string $message = "") {
         this.assertThat($address, new MailSentTo(), $message);
     }
 
@@ -151,8 +140,7 @@ trait EmailTrait
      * @param array<string>|string $address Email address
      * @param string $message Message
      */
-    void assertMailSentFrom($address, string $message = "")
-    {
+    void assertMailSentFrom($address, string $message = "") {
         this.assertThat($address, new MailSentFrom(), $message);
     }
 
@@ -162,8 +150,7 @@ trait EmailTrait
      * @param string $contents Contents
      * @param string $message Message
      */
-    void assertMailContains(string $contents, string $message = "")
-    {
+    void assertMailContains(string $contents, string $message = "") {
         this.assertThat($contents, new MailContains(), $message);
     }
 
@@ -174,8 +161,7 @@ trait EmailTrait
      * @param array $file Additional file properties
      * @param string $message Message
      */
-    void assertMailContainsAttachment(string $filename, array $file = [], string $message = "")
-    {
+    void assertMailContainsAttachment(string $filename, array $file = [], string $message = "") {
         this.assertThat([$filename, $file], new MailContainsAttachment(), $message);
     }
 
@@ -185,8 +171,7 @@ trait EmailTrait
      * @param string $contents Contents
      * @param string $message Message
      */
-    void assertMailContainsHtml(string $contents, string $message = "")
-    {
+    void assertMailContainsHtml(string $contents, string $message = "") {
         this.assertThat($contents, new MailContainsHtml(), $message);
     }
 
@@ -196,8 +181,7 @@ trait EmailTrait
      * @param string $expected Expected text.
      * @param string $message Message to display if assertion fails.
      */
-    void assertMailContainsText(string $expected, string $message = "")
-    {
+    void assertMailContainsText(string $expected, string $message = "") {
         this.assertThat($expected, new MailContainsText(), $message);
     }
 
@@ -208,8 +192,7 @@ trait EmailTrait
      * @param string $parameter Email getter parameter (e.g~ "cc", "subject")
      * @param string $message Message
      */
-    void assertMailSentWith(string $expected, string $parameter, string $message = "")
-    {
+    void assertMailSentWith(string $expected, string $parameter, string $message = "") {
         this.assertThat($expected, new MailSentWith(null, $parameter), $message);
     }
 
@@ -219,8 +202,7 @@ trait EmailTrait
      * @param string $contents Contents
      * @param string $message Message
      */
-    void assertMailSubjectContains(string $contents, string $message = "")
-    {
+    void assertMailSubjectContains(string $contents, string $message = "") {
         this.assertThat($contents, new MailSubjectContains(), $message);
     }
 
@@ -231,8 +213,7 @@ trait EmailTrait
      * @param string $contents Contents
      * @param string $message Message
      */
-    void assertMailSubjectContainsAt(int $at, string $contents, string $message = "")
-    {
+    void assertMailSubjectContainsAt(int $at, string $contents, string $message = "") {
         this.assertThat($contents, new MailSubjectContains($at), $message);
     }
 }

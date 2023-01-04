@@ -188,8 +188,7 @@ class Inflector
      * Clears Inflectors inflected value caches. And resets the inflection
      * rules to the initial values.
      */
-    static void reset()
-    {
+    static void reset() {
         if (empty(static::$_initialState)) {
             static::$_initialState = get_class_vars(self::class);
 
@@ -220,8 +219,7 @@ class Inflector
      * @param bool $reset If true, will unset default inflections for all
      *        new rules that are being defined in $rules.
      */
-    static void rules(string $type, array $rules, bool $reset = false)
-    {
+    static void rules(string $type, array $rules, bool $reset = false) {
         $var = "_" ~ $type;
 
         if ($reset) {

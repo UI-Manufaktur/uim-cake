@@ -218,8 +218,7 @@ class SelectLoader
      * @return void
      * @throws \InvalidArgumentException
      */
-    protected void _assertFieldsPresent(Query $fetchQuery, array $key)
-    {
+    protected void _assertFieldsPresent(Query $fetchQuery, array $key) {
         if ($fetchQuery.isAutoFieldsEnabled()) {
             return;
         }

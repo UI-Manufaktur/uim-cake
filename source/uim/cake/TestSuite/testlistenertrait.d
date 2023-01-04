@@ -12,52 +12,42 @@ use Throwable;
 trait TestListenerTrait
 {
 
-    void startTestSuite(TestSuite $suite)
-    {
+    void startTestSuite(TestSuite $suite) {
     }
 
 
-    void endTestSuite(TestSuite $suite)
-    {
+    void endTestSuite(TestSuite $suite) {
     }
 
 
-    void startTest(Test $test)
-    {
+    void startTest(Test $test) {
     }
 
 
-    void endTest(Test $test, float $time)
-    {
+    void endTest(Test $test, float $time) {
     }
 
 
-    void addSkippedTest(Test $test, Throwable $t, float $time)
-    {
+    void addSkippedTest(Test $test, Throwable $t, float $time) {
     }
 
 
-    void addError(Test $test, Throwable $t, float $time)
-    {
+    void addError(Test $test, Throwable $t, float $time) {
     }
 
 
-    void addWarning(Test $test, Warning $e, float $time)
-    {
+    void addWarning(Test $test, Warning $e, float $time) {
     }
 
 
-    void addFailure(Test $test, AssertionFailedError $e, float $time)
-    {
+    void addFailure(Test $test, AssertionFailedError $e, float $time) {
     }
 
 
-    void addRiskyTest(Test $test, Throwable $t, float $time)
-    {
+    void addRiskyTest(Test $test, Throwable $t, float $time) {
     }
 
 
-    void addIncompleteTest(Test $test, Throwable $t, float $time)
-    {
+    void addIncompleteTest(Test $test, Throwable $t, float $time) {
     }
 }

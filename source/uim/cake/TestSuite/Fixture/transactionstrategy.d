@@ -36,8 +36,7 @@ class TransactionStrategy : FixtureStrategyInterface
     }
 
 
-    void setupTest(array $fixtureNames)
-    {
+    void setupTest(array $fixtureNames) {
         if (empty($fixtureNames)) {
             return;
         }
@@ -69,8 +68,7 @@ class TransactionStrategy : FixtureStrategyInterface
     }
 
 
-    void teardownTest()
-    {
+    void teardownTest() {
         this.helper.runPerConnection(function ($connection) {
             if ($connection.inTransaction()) {
                 $connection.rollback(true);

@@ -62,16 +62,14 @@ class FixtureManager
      *
      * @param bool $debug Whether fixture debug mode is enabled.
      */
-    void setDebug(bool $debug)
-    {
+    void setDebug(bool $debug) {
         _debug = $debug;
     }
 
     /**
      * @param uim.cake.TestSuite\TestCase $test Test case
      */
-    void fixturize(TestCase $test)
-    {
+    void fixturize(TestCase $test) {
         _initDb();
         if (!$test.getFixtures() || !empty(_processed[get_class($test)])) {
             return;
@@ -110,8 +108,7 @@ class FixtureManager
      * This allows models to use the test connections without
      * a pile of configuration work.
      */
-    protected void _aliasConnections()
-    {
+    protected void _aliasConnections() {
         $connections = ConnectionManager::configured();
         ConnectionManager::alias("test", "default");
         $map = [];
@@ -136,8 +133,7 @@ class FixtureManager
     /**
      * Initializes this class with a DataSource object to use as default for all fixtures
      */
-    protected void _initDb()
-    {
+    protected void _initDb() {
         if (_initialized) {
             return;
         }
@@ -152,8 +148,7 @@ class FixtureManager
      * @return void
      * @throws \UnexpectedValueException when a referenced fixture does not exist.
      */
-    protected void _loadFixtures(TestCase $test)
-    {
+    protected void _loadFixtures(TestCase $test) {
         $fixtures = $test.getFixtures();
         if (!$fixtures) {
             return;
@@ -258,8 +253,7 @@ class FixtureManager
      * @return void
      * @throws \RuntimeException
      */
-    void load(TestCase $test)
-    {
+    void load(TestCase $test) {
         $fixtures = $test.getFixtures();
         if (!$fixtures || !$test.autoFixtures) {
             return;
@@ -353,8 +347,7 @@ class FixtureManager
      * @param array<string> $fixtures A list of fixtures to operate on.
      * @param callable $operation The operation to run on each connection + fixture set.
      */
-    protected void _runOperation(array $fixtures, callable $operation)
-    {
+    protected void _runOperation(array $fixtures, callable $operation) {
         $dbs = _fixtureConnections($fixtures);
         foreach ($dbs as $connection: $fixtures) {
             $db = ConnectionManager::get($connection);
@@ -398,8 +391,7 @@ class FixtureManager
      *
      * @param uim.cake.TestSuite\TestCase $test The test to inspect for fixture unloading.
      */
-    void unload(TestCase $test)
-    {
+    void unload(TestCase $test) {
         $fixtures = $test.getFixtures();
         if (!$fixtures) {
             return;
@@ -426,8 +418,7 @@ class FixtureManager
      * @return void
      * @throws \UnexpectedValueException
      */
-    void loadSingle(string aName, ?IConnection $connection = null, bool $dropTables = true)
-    {
+    void loadSingle(string aName, ?IConnection $connection = null, bool $dropTables = true) {
         if (!isset(_fixtureMap[$name])) {
             throw new UnexpectedValueException(sprintf("Referenced fixture class %s not found", $name));
         }
@@ -458,8 +449,7 @@ class FixtureManager
     /**
      * Drop all fixture tables loaded by this class
      */
-    void shutDown()
-    {
+    void shutDown() {
         $shutdown = void (IConnection $db, array $fixtures) {
             $connection = $db.configName();
             /** @var uim.cake.datasources.IFixture $fixture */

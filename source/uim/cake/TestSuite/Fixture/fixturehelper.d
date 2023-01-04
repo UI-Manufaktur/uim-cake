@@ -90,8 +90,7 @@ class FixtureHelper
      * @param \Closure $callback Callback run per connection
      * @param array<uim.cake.Datasource\IFixture> $fixtures Test fixtures
      */
-    void runPerConnection(Closure $callback, array $fixtures)
-    {
+    void runPerConnection(Closure $callback, array $fixtures) {
         $groups = [];
         foreach ($fixtures as $fixture) {
             $groups[$fixture.connection()][] = $fixture;
@@ -109,8 +108,7 @@ class FixtureHelper
      * @return void
      * @internal
      */
-    void insert(array $fixtures)
-    {
+    void insert(array $fixtures) {
         this.runPerConnection(void (IConnection $connection, array $groupFixtures) {
             if ($connection instanceof Connection) {
                 $sortedFixtures = this.sortByConstraint($connection, $groupFixtures);
@@ -137,8 +135,7 @@ class FixtureHelper
      * @param uim.cake.Datasource\IConnection $connection Fixture connection
      * @param array<uim.cake.Datasource\IFixture> $fixtures Connection fixtures
      */
-    protected void insertConnection(IConnection $connection, array $fixtures)
-    {
+    protected void insertConnection(IConnection $connection, array $fixtures) {
         foreach ($fixtures as $fixture) {
             try {
                 $fixture.insert($connection);
@@ -161,8 +158,7 @@ class FixtureHelper
      * @return void
      * @internal
      */
-    void truncate(array $fixtures)
-    {
+    void truncate(array $fixtures) {
         this.runPerConnection(function (IConnection $connection, array $groupFixtures) {
             if ($connection instanceof Connection) {
                 $sortedFixtures = null;
@@ -193,8 +189,7 @@ class FixtureHelper
      * @param uim.cake.Datasource\IConnection $connection Fixture connection
      * @param array<uim.cake.Datasource\IFixture> $fixtures Connection fixtures
      */
-    protected void truncateConnection(IConnection $connection, array $fixtures)
-    {
+    protected void truncateConnection(IConnection $connection, array $fixtures) {
         foreach ($fixtures as $fixture) {
             try {
                 $fixture.truncate($connection);

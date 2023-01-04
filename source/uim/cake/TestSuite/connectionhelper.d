@@ -24,8 +24,7 @@ class ConnectionHelper
      *
      * The `default` connection is aliased to `test`.
      */
-    void addTestAliases()
-    {
+    void addTestAliases() {
         ConnectionManager::alias("test", "default");
         foreach (ConnectionManager::configured() as $connection) {
             if ($connection == "test" || $connection == "default") {
@@ -47,8 +46,7 @@ class ConnectionHelper
      *
      * @param array<int, string>|null $connections Connection names or null for all.
      */
-    void enableQueryLogging(?array $connections = null)
-    {
+    void enableQueryLogging(?array $connections = null) {
         $connections = $connections ?? ConnectionManager::configured();
         foreach ($connections as $connection) {
             $connection = ConnectionManager::get($connection);
@@ -64,8 +62,7 @@ class ConnectionHelper
      * @param string $connectionName Connection name
      * @param array<string>|null $tables List of tables names or null for all.
      */
-    void dropTables(string $connectionName, ?array $tables = null)
-    {
+    void dropTables(string $connectionName, ?array $tables = null) {
         /** @var uim.cake.databases.Connection $connection */
         $connection = ConnectionManager::get($connectionName);
         $collection = $connection.getSchemaCollection();
@@ -102,8 +99,7 @@ class ConnectionHelper
      * @param string $connectionName Connection name
      * @param array<string>|null $tables List of tables names or null for all.
      */
-    void truncateTables(string $connectionName, ?array $tables = null)
-    {
+    void truncateTables(string $connectionName, ?array $tables = null) {
         /** @var uim.cake.databases.Connection $connection */
         $connection = ConnectionManager::get($connectionName);
         $collection = $connection.getSchemaCollection();
@@ -131,8 +127,7 @@ class ConnectionHelper
      * @param uim.cake.databases.Connection $connection Database connection
      * @param \Closure $callback callback
      */
-    void runWithoutConstraints(Connection $connection, Closure $callback)
-    {
+    void runWithoutConstraints(Connection $connection, Closure $callback) {
         if ($connection.getDriver().supports(IDriver::FEATURE_DISABLE_CONSTRAINT_WITHOUT_TRANSACTION)) {
             $connection.disableConstraints(void (Connection $connection) use ($callback) {
                 $callback($connection);

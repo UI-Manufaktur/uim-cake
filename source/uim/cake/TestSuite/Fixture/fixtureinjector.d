@@ -50,8 +50,7 @@ class FixtureInjector : TestListener
      *
      * @param \PHPUnit\Framework\TestSuite $suite The test suite
      */
-    void startTestSuite(TestSuite $suite)
-    {
+    void startTestSuite(TestSuite $suite) {
         if (empty(_first)) {
             deprecationWarning(
                 "You are using the listener based PHPUnit integration~ " ~
@@ -70,8 +69,7 @@ class FixtureInjector : TestListener
      *
      * @param \PHPUnit\Framework\TestSuite $suite The test suite
      */
-    void endTestSuite(TestSuite $suite)
-    {
+    void endTestSuite(TestSuite $suite) {
         if (_first == $suite) {
             _fixtureManager.shutDown();
         }
@@ -82,8 +80,7 @@ class FixtureInjector : TestListener
      *
      * @param \PHPUnit\Framework\Test $test The test case
      */
-    void startTest(Test $test)
-    {
+    void startTest(Test $test) {
         if ($test instanceof TestCase) {
             _fixtureManager.fixturize($test);
             _fixtureManager.load($test);
@@ -96,8 +93,7 @@ class FixtureInjector : TestListener
      * @param \PHPUnit\Framework\Test $test The test case
      * @param float $time current time
      */
-    void endTest(Test $test, float $time)
-    {
+    void endTest(Test $test, float $time) {
         if ($test instanceof TestCase) {
             _fixtureManager.unload($test);
         }

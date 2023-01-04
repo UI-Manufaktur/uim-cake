@@ -175,8 +175,7 @@ trait IntegrationTestTrait
      * @return void
      * @psalm-suppress PossiblyNullPropertyAssignmentValue
      */
-    void cleanup()
-    {
+    void cleanup() {
         _request = [];
         _session = [];
         _cookie = [];
@@ -197,8 +196,7 @@ trait IntegrationTestTrait
      * compatible token to be added to request data. This
      * lets you easily test actions protected by SecurityComponent.
      */
-    void enableSecurityToken()
-    {
+    void enableSecurityToken() {
         _securityToken = true;
     }
 
@@ -207,8 +205,7 @@ trait IntegrationTestTrait
      *
      * @param array<string> $unlockedFields List of fields that are excluded from field validation.
      */
-    void setUnlockedFields(array $unlockedFields = [])
-    {
+    void setUnlockedFields(array $unlockedFields = []) {
         _unlockedFields = $unlockedFields;
     }
 
@@ -220,8 +217,7 @@ trait IntegrationTestTrait
      *
      * @param string $cookieName The name of the csrf token cookie.
      */
-    void enableCsrfToken(string $cookieName = "csrfToken")
-    {
+    void enableCsrfToken(string $cookieName = "csrfToken") {
         _csrfToken = true;
         _csrfKeyName = $cookieName;
     }
@@ -230,8 +226,7 @@ trait IntegrationTestTrait
      * Calling this method will re-store flash messages into the test session
      * after being removed by the FlashHelper
      */
-    void enableRetainFlashMessages()
-    {
+    void enableRetainFlashMessages() {
         _retainFlashMessages = true;
     }
 
@@ -246,8 +241,7 @@ trait IntegrationTestTrait
      *
      * @param array $data The request data to use.
      */
-    void configRequest(array $data)
-    {
+    void configRequest(array $data) {
         _request = $data + _request;
     }
 
@@ -263,8 +257,7 @@ trait IntegrationTestTrait
      *
      * @param array $data The session data to use.
      */
-    void session(array $data)
-    {
+    void session(array $data) {
         _session = $data + _session;
     }
 
@@ -281,8 +274,7 @@ trait IntegrationTestTrait
      * @param string aName The cookie name to use.
      * @param mixed $value The value of the cookie.
      */
-    void cookie(string aName, $value)
-    {
+    void cookie(string aName, $value) {
         _cookie[$name] = $value;
     }
 
@@ -307,8 +299,7 @@ trait IntegrationTestTrait
      * @return void
      * @see uim.cake.Utility\CookieCryptTrait::_encrypt()
      */
-    void cookieEncrypted(string aName, $value, $encrypt = "aes", $key = null)
-    {
+    void cookieEncrypted(string aName, $value, $encrypt = "aes", $key = null) {
         _cookieEncryptionKey = $key;
         _cookie[$name] = _encrypt($value, $encrypt);
     }
@@ -322,8 +313,7 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      */
-    void get($url)
-    {
+    void get($url) {
         _sendRequest($url, "GET");
     }
 
@@ -337,8 +327,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
      */
-    void post($url, $data = [])
-    {
+    void post($url, $data = []) {
         _sendRequest($url, "POST", $data);
     }
 
@@ -352,8 +341,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
      */
-    void patch($url, $data = [])
-    {
+    void patch($url, $data = []) {
         _sendRequest($url, "PATCH", $data);
     }
 
@@ -367,8 +355,7 @@ trait IntegrationTestTrait
      * @param array|string $url The URL to request.
      * @param array|string $data The data for the request.
      */
-    void put($url, $data = [])
-    {
+    void put($url, $data = []) {
         _sendRequest($url, "PUT", $data);
     }
 
@@ -381,8 +368,7 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      */
-    void delete($url)
-    {
+    void delete($url) {
         _sendRequest($url, "DELETE");
     }
 
@@ -395,8 +381,7 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      */
-    void head($url)
-    {
+    void head($url) {
         _sendRequest($url, "HEAD");
     }
 
@@ -409,8 +394,7 @@ trait IntegrationTestTrait
      *
      * @param array|string $url The URL to request.
      */
-    void options($url)
-    {
+    void options($url) {
         _sendRequest($url, "OPTIONS");
     }
 
@@ -425,8 +409,7 @@ trait IntegrationTestTrait
      * @return void
      * @throws \PHPUnit\Exception|\Throwable
      */
-    protected void _sendRequest($url, $method, $data = [])
-    {
+    protected void _sendRequest($url, $method, $data = []) {
         $dispatcher = _makeDispatcher();
         $url = $dispatcher.resolveUrl($url);
 
@@ -467,8 +450,7 @@ trait IntegrationTestTrait
      * @param uim.cake.events.IEvent $event A dispatcher event.
      * @param uim.cake.controllers.Controller|null $controller Controller instance.
      */
-    void controllerSpy(IEvent $event, ?Controller $controller = null)
-    {
+    void controllerSpy(IEvent $event, ?Controller $controller = null) {
         if (!$controller) {
             /** @var uim.cake.controllers.Controller $controller */
             $controller = $event.getSubject();
@@ -505,8 +487,7 @@ trait IntegrationTestTrait
      *
      * @param \Throwable $exception Exception to handle.
      */
-    protected void _handleError(Throwable $exception)
-    {
+    protected void _handleError(Throwable $exception) {
         $class = Configure::read("Error.exceptionRenderer");
         if (empty($class) || !class_exists($class)) {
             $class = WebExceptionRenderer::class;
@@ -719,8 +700,7 @@ trait IntegrationTestTrait
      *
      * @param string $message Custom message for failure.
      */
-    void assertResponseOk(string $message = "")
-    {
+    void assertResponseOk(string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(null, new StatusOk(_response), $verboseMessage);
     }
@@ -730,8 +710,7 @@ trait IntegrationTestTrait
      *
      * @param string $message Custom message for failure.
      */
-    void assertResponseSuccess(string $message = "")
-    {
+    void assertResponseSuccess(string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(null, new StatusSuccess(_response), $verboseMessage);
     }
@@ -741,8 +720,7 @@ trait IntegrationTestTrait
      *
      * @param string $message Custom message for failure.
      */
-    void assertResponseError(string $message = "")
-    {
+    void assertResponseError(string $message = "") {
         this.assertThat(null, new StatusError(_response), $message);
     }
 
@@ -751,8 +729,7 @@ trait IntegrationTestTrait
      *
      * @param string $message Custom message for failure.
      */
-    void assertResponseFailure(string $message = "")
-    {
+    void assertResponseFailure(string $message = "") {
         this.assertThat(null, new StatusFailure(_response), $message);
     }
 
@@ -762,8 +739,7 @@ trait IntegrationTestTrait
      * @param int $code Status code to assert.
      * @param string $message Custom message for failure.
      */
-    void assertResponseCode(int $code, string $message = "")
-    {
+    void assertResponseCode(int $code, string $message = "") {
         this.assertThat($code, new StatusCode(_response), $message);
     }
 
@@ -775,8 +751,7 @@ trait IntegrationTestTrait
      *   simply check for the existence of this header.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertRedirect($url = null, $message = "")
-    {
+    void assertRedirect($url = null, $message = "") {
         if (!_response) {
             this.fail("No response set, cannot assert header.");
         }
@@ -820,8 +795,7 @@ trait IntegrationTestTrait
      * @param string $url The URL you expected the client to go to.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertRedirectContains(string $url, string $message = "")
-    {
+    void assertRedirectContains(string $url, string $message = "") {
         if (!_response) {
             this.fail("No response set, cannot assert header.");
         }
@@ -837,8 +811,7 @@ trait IntegrationTestTrait
      * @param string $url The URL you expected the client to go to.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertRedirectNotContains(string $url, string $message = "")
-    {
+    void assertRedirectNotContains(string $url, string $message = "") {
         if (!_response) {
             this.fail("No response set, cannot assert header.");
         }
@@ -853,8 +826,7 @@ trait IntegrationTestTrait
      *
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertNoRedirect(string $message = "")
-    {
+    void assertNoRedirect(string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(null, new HeaderNotSet(_response, "Location"), $verboseMessage);
     }
@@ -866,8 +838,7 @@ trait IntegrationTestTrait
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertHeader(string $header, string $content, string $message = "")
-    {
+    void assertHeader(string $header, string $content, string $message = "") {
         if (!_response) {
             this.fail("No response set, cannot assert header.");
         }
@@ -884,8 +855,7 @@ trait IntegrationTestTrait
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertHeaderContains(string $header, string $content, string $message = "")
-    {
+    void assertHeaderContains(string $header, string $content, string $message = "") {
         if (!_response) {
             this.fail("No response set, cannot assert header.");
         }
@@ -902,8 +872,7 @@ trait IntegrationTestTrait
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertHeaderNotContains(string $header, string $content, string $message = "")
-    {
+    void assertHeaderNotContains(string $header, string $content, string $message = "") {
         if (!_response) {
             this.fail("No response set, cannot assert header.");
         }
@@ -919,8 +888,7 @@ trait IntegrationTestTrait
      * @param string $type The content-type to check for.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertContentType(string $type, string $message = "")
-    {
+    void assertContentType(string $type, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($type, new ContentType(_response), $verboseMessage);
     }
@@ -931,8 +899,7 @@ trait IntegrationTestTrait
      * @param mixed $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertResponseEquals($content, $message = "")
-    {
+    void assertResponseEquals($content, $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($content, new BodyEquals(_response), $verboseMessage);
     }
@@ -943,8 +910,7 @@ trait IntegrationTestTrait
      * @param mixed $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertResponseNotEquals($content, $message = "")
-    {
+    void assertResponseNotEquals($content, $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($content, new BodyNotEquals(_response), $verboseMessage);
     }
@@ -956,8 +922,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @param bool $ignoreCase A flag to check whether we should ignore case or not.
      */
-    void assertResponseContains(string $content, string $message = "", bool $ignoreCase = false)
-    {
+    void assertResponseContains(string $content, string $message = "", bool $ignoreCase = false) {
         if (!_response) {
             this.fail("No response set, cannot assert content.");
         }
@@ -973,8 +938,7 @@ trait IntegrationTestTrait
      * @param string $message The failure message that will be appended to the generated message.
      * @param bool $ignoreCase A flag to check whether we should ignore case or not.
      */
-    void assertResponseNotContains(string $content, string $message = "", bool $ignoreCase = false)
-    {
+    void assertResponseNotContains(string $content, string $message = "", bool $ignoreCase = false) {
         if (!_response) {
             this.fail("No response set, cannot assert content.");
         }
@@ -989,8 +953,7 @@ trait IntegrationTestTrait
      * @param string $pattern The pattern to compare against.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertResponseRegExp(string $pattern, string $message = "")
-    {
+    void assertResponseRegExp(string $pattern, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($pattern, new BodyRegExp(_response), $verboseMessage);
     }
@@ -1001,8 +964,7 @@ trait IntegrationTestTrait
      * @param string $pattern The pattern to compare against.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertResponseNotRegExp(string $pattern, string $message = "")
-    {
+    void assertResponseNotRegExp(string $pattern, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($pattern, new BodyNotRegExp(_response), $verboseMessage);
     }
@@ -1012,8 +974,7 @@ trait IntegrationTestTrait
      *
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertResponseNotEmpty(string $message = "")
-    {
+    void assertResponseNotEmpty(string $message = "") {
         this.assertThat(null, new BodyNotEmpty(_response), $message);
     }
 
@@ -1022,8 +983,7 @@ trait IntegrationTestTrait
      *
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertResponseEmpty(string $message = "")
-    {
+    void assertResponseEmpty(string $message = "") {
         this.assertThat(null, new BodyEmpty(_response), $message);
     }
 
@@ -1033,8 +993,7 @@ trait IntegrationTestTrait
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertTemplate(string $content, string $message = "")
-    {
+    void assertTemplate(string $content, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($content, new TemplateFileEquals(_viewName), $verboseMessage);
     }
@@ -1045,8 +1004,7 @@ trait IntegrationTestTrait
      * @param string $content The content to check for.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertLayout(string $content, string $message = "")
-    {
+    void assertLayout(string $content, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($content, new LayoutFileEquals(_layoutName), $verboseMessage);
     }
@@ -1058,8 +1016,7 @@ trait IntegrationTestTrait
      * @param string $path The session data path. Uses Hash::get() compatible notation
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertSession($expected, string $path, string $message = "")
-    {
+    void assertSession($expected, string $path, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($expected, new SessionEquals($path), $verboseMessage);
     }
@@ -1070,8 +1027,7 @@ trait IntegrationTestTrait
      * @param string $path The session data path. Uses Hash::get() compatible notation.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertSessionHasKey(string $path, string $message = "")
-    {
+    void assertSessionHasKey(string $path, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($path, new SessionHasKey($path), $verboseMessage);
     }
@@ -1082,8 +1038,7 @@ trait IntegrationTestTrait
      * @param string $path The session data path. Uses Hash::get() compatible notation.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertSessionNotHasKey(string $path, string $message = "")
-    {
+    void assertSessionNotHasKey(string $path, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($path, this.logicalNot(new SessionHasKey($path)), $verboseMessage);
     }
@@ -1095,8 +1050,7 @@ trait IntegrationTestTrait
      * @param string aKey Flash key
      * @param string $message Assertion failure message
      */
-    void assertFlashMessage(string $expected, string aKey = "flash", string $message = "")
-    {
+    void assertFlashMessage(string $expected, string aKey = "flash", string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($expected, new FlashParamEquals(_requestSession, $key, "message"), $verboseMessage);
     }
@@ -1109,8 +1063,7 @@ trait IntegrationTestTrait
      * @param string aKey Flash key
      * @param string $message Assertion failure message
      */
-    void assertFlashMessageAt(int $at, string $expected, string aKey = "flash", string $message = "")
-    {
+    void assertFlashMessageAt(int $at, string $expected, string aKey = "flash", string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(
             $expected,
@@ -1126,8 +1079,7 @@ trait IntegrationTestTrait
      * @param string aKey Flash key
      * @param string $message Assertion failure message
      */
-    void assertFlashElement(string $expected, string aKey = "flash", string $message = "")
-    {
+    void assertFlashElement(string $expected, string aKey = "flash", string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(
             $expected,
@@ -1144,8 +1096,7 @@ trait IntegrationTestTrait
      * @param string aKey Flash key
      * @param string $message Assertion failure message
      */
-    void assertFlashElementAt(int $at, string $expected, string aKey = "flash", string $message = "")
-    {
+    void assertFlashElementAt(int $at, string $expected, string aKey = "flash", string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(
             $expected,
@@ -1161,8 +1112,7 @@ trait IntegrationTestTrait
      * @param string aName The cookie name.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertCookie($expected, string aName, string $message = "")
-    {
+    void assertCookie($expected, string aName, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($name, new CookieSet(_response), $verboseMessage);
         this.assertThat($expected, new CookieEquals(_response, $name), $verboseMessage);
@@ -1174,8 +1124,7 @@ trait IntegrationTestTrait
      * @param string $cookie The cookie name to check
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertCookieNotSet(string $cookie, string $message = "")
-    {
+    void assertCookieNotSet(string $cookie, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat($cookie, new CookieNotSet(_response), $verboseMessage);
     }
@@ -1187,8 +1136,7 @@ trait IntegrationTestTrait
      * and are instead re-thrown by the TestExceptionRenderer. This can be helpful
      * when trying to diagnose/debug unexpected failures in test cases.
      */
-    void disableErrorHandlerMiddleware()
-    {
+    void disableErrorHandlerMiddleware() {
         Configure::write("Error.exceptionRenderer", TestExceptionRenderer::class);
     }
 
@@ -1231,8 +1179,7 @@ trait IntegrationTestTrait
      * @param string $expected The absolute file path that should be sent in the response.
      * @param string $message The failure message that will be appended to the generated message.
      */
-    void assertFileResponse(string $expected, string $message = "")
-    {
+    void assertFileResponse(string $expected, string $message = "") {
         $verboseMessage = this.extractVerboseMessage($message);
         this.assertThat(null, new FileSent(_response), $verboseMessage);
         this.assertThat($expected, new FileSentAs(_response), $verboseMessage);

@@ -135,8 +135,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param string $locale Locale
      * @param \ArrayObject $options Find options
      */
-    protected void setupHasOneAssociation(string $locale, ArrayObject $options)
-    {
+    protected void setupHasOneAssociation(string $locale, ArrayObject $options) {
         $config = this.getConfig();
 
         [$plugin] = pluginSplit($config["translationTable"]);

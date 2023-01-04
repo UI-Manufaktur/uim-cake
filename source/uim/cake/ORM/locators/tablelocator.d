@@ -292,8 +292,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    void clear()
-    {
+    void clear() {
         super.clear();
 
         _fallbacked = [];
@@ -314,8 +313,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    void remove(string $alias)
-    {
+    void remove(string $alias) {
         super.remove($alias);
 
         unset(_fallbacked[$alias]);

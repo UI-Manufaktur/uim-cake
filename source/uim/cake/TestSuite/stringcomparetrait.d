@@ -28,8 +28,7 @@ trait StringCompareTrait
      * @param string $path partial path to test comparison file
      * @param string $result test result as a string
      */
-    void assertSameAsFile(string $path, string $result)
-    {
+    void assertSameAsFile(string $path, string $result) {
         if (!file_exists($path)) {
             $path = _compareBasePath . $path;
         }

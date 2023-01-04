@@ -85,8 +85,7 @@ class SchemaLoader
      * @return void
      * @internal
      */
-    function loadInternalFile(string $file, string $connectionName = "test")
-    {
+    function loadInternalFile(string $file, string $connectionName = "test") {
         // Don"t reload schema when we are in a separate process state.
         if (isset($GLOBALS["__PHPUNIT_BOOTSTRAP"])) {
             return;

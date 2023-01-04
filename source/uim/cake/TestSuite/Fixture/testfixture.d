@@ -118,8 +118,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      * @return void
      * @throws uim.cake.orm.exceptions.MissingTableClassException When importing from a table that does not exist.
      */
-    void init()
-    {
+    void init() {
         if (this.table == null) {
             this.table = _tableFromClass();
         }
@@ -151,8 +150,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     /**
      * Build the fixtures table schema from the fields property.
      */
-    protected void _schemaFromFields()
-    {
+    protected void _schemaFromFields() {
         $connection = ConnectionManager::get(this.connection());
         _schema = $connection.getDriver().newTableSchema(this.table);
         foreach (this.fields as $field: $data) {
@@ -186,8 +184,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException when trying to import from an empty table.
      */
-    protected void _schemaFromImport()
-    {
+    protected void _schemaFromImport() {
         if (!is_array(this.import)) {
             return;
         }
@@ -218,8 +215,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
      * @return void
      * @throws uim.cake.Core\exceptions.CakeException when trying to reflect a table that does not exist
      */
-    protected void _schemaFromReflection()
-    {
+    protected void _schemaFromReflection() {
         $db = ConnectionManager::get(this.connection());
         try {
             $name = Inflector::camelize(this.table);

@@ -61,8 +61,7 @@ class TreeBehavior : Behavior
     ];
 
 
-    void initialize(array $config)
-    {
+    void initialize(array $config) {
         _config["leftField"] = new IdentifierExpression(_config["left"]);
         _config["rightField"] = new IdentifierExpression(_config["right"]);
     }
@@ -156,8 +155,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity $entity The entity whose descendants need to be updated.
      */
-    protected void _setChildrenLevel(IEntity $entity)
-    {
+    protected void _setChildrenLevel(IEntity $entity) {
         $config = this.getConfig();
 
         if ($entity.get($config["left"]) + 1 == $entity.get($config["right"])) {
@@ -233,8 +231,7 @@ class TreeBehavior : Behavior
      * @return void
      * @throws \RuntimeException if the parent to set to the entity is not valid
      */
-    protected void _setParent(IEntity $entity, $parent)
-    {
+    protected void _setParent(IEntity $entity, $parent) {
         $config = this.getConfig();
         $parentNode = _getNode($parent);
         _ensureFields($entity);
@@ -292,8 +289,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to set as a new root
      */
-    protected void _setAsRoot(IEntity $entity)
-    {
+    protected void _setAsRoot(IEntity $entity) {
         $config = this.getConfig();
         $edge = _getMax();
         _ensureFields($entity);
@@ -323,8 +319,7 @@ class TreeBehavior : Behavior
      * less than 0. They were set to negative values before so their absolute value
      * wouldn"t change while performing other tree transformations.
      */
-    protected void _unmarkInternalTree()
-    {
+    protected void _unmarkInternalTree() {
         $config = this.getConfig();
         _table.updateAll(
             function ($exp) use ($config) {
@@ -791,8 +786,7 @@ class TreeBehavior : Behavior
      * Recovers the lft and right column values out of the hierarchy defined by the
      * parent column.
      */
-    void recover()
-    {
+    void recover() {
         _table.getConnection().transactional(void () {
             _recoverTree();
         });
@@ -868,8 +862,7 @@ class TreeBehavior : Behavior
      * @param bool $mark whether to mark the updated values so that they can not be
      * modified by future calls to this function.
      */
-    protected void _sync(int $shift, string $dir, string $conditions, bool $mark = false)
-    {
+    protected void _sync(int $shift, string $dir, string $conditions, bool $mark = false) {
         $config = _config;
 
         foreach ([$config["leftField"], $config["rightField"]] as $field) {
@@ -922,8 +915,7 @@ class TreeBehavior : Behavior
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to ensure fields for
      */
-    protected void _ensureFields(IEntity $entity)
-    {
+    protected void _ensureFields(IEntity $entity) {
         $config = this.getConfig();
         $fields = [$config["left"], $config["right"]];
         $values = array_filter($entity.extract($fields));

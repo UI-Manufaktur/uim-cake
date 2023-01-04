@@ -185,8 +185,7 @@ class Router
      * @see uim.cake.routings.Router::scope()
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::connect()` instead.
      */
-    static void connect($route, $defaults = [], $options = [])
-    {
+    static void connect($route, $defaults = [], $options = []) {
         deprecationWarning(
             "`Router::connect()` is deprecated, use the non-static method `RouteBuilder::connect()` instead."
         );
@@ -214,8 +213,7 @@ class Router
      *
      * @param uim.cake.http.ServerRequest $request request object.
      */
-    static void setRequest(ServerRequest $request)
-    {
+    static void setRequest(ServerRequest $request) {
         static::$_request = $request;
 
         static::$_requestContext["_base"] = $request.getAttribute("base");
@@ -243,8 +241,7 @@ class Router
      * Reloads default Router settings. Resets all class variables and
      * removes all connected routes.
      */
-    static void reload()
-    {
+    static void reload() {
         if (empty(static::$_initialState)) {
             static::$_collection = new RouteCollection();
             static::$_initialState = get_class_vars(static::class);
@@ -275,8 +272,7 @@ class Router
      *
      * @internal
      */
-    static void resetRoutes()
-    {
+    static void resetRoutes() {
         static::$_collection = new RouteCollection();
         static::$_urlFilters = [];
     }
@@ -309,8 +305,7 @@ class Router
      *
      * @param callable $function The function to add
      */
-    static void addUrlFilter(callable $function)
-    {
+    static void addUrlFilter(callable $function) {
         static::$_urlFilters[] = $function;
     }
 
@@ -799,8 +794,7 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::scope()` instead.
      */
-    static void scope(string $path, $params = [], $callback = null)
-    {
+    static void scope(string $path, $params = [], $callback = null) {
         deprecationWarning(
             "`Router::scope()` is deprecated, use the non-static method `RouteBuilder::scope()` instead."
         );
@@ -838,8 +832,7 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::prefix()` instead.
      */
-    static void prefix(string aName, $params = [], $callback = null)
-    {
+    static void prefix(string aName, $params = [], $callback = null) {
         deprecationWarning(
             "`Router::prefix()` is deprecated, use the non-static method `RouteBuilder::prefix()` instead."
         );
@@ -875,8 +868,7 @@ class Router
      * @return void
      * @deprecated 4.3.0 Use the non-static method `RouteBuilder::plugin()` instead.
      */
-    static void plugin(string aName, $options = [], $callback = null)
-    {
+    static void plugin(string aName, $options = [], $callback = null) {
         deprecationWarning(
             "`Router::plugin()` is deprecated, use the non-static method `RouteBuilder::plugin()` instead."
         );
@@ -918,8 +910,7 @@ class Router
      *
      * @param uim.cake.routings.RouteCollection $routeCollection route collection
      */
-    static void setRouteCollection(RouteCollection $routeCollection)
-    {
+    static void setRouteCollection(RouteCollection $routeCollection) {
         static::$_collection = $routeCollection;
     }
 
