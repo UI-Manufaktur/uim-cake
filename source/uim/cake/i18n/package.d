@@ -83,7 +83,7 @@ class Package
      *
      * @return array<array|string>
      */
-    function getMessages(): array
+    array getMessages()
     {
         return this.messages;
     }

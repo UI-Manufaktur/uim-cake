@@ -647,7 +647,7 @@ class Cookie : ICookie
     }
 
 
-    auto getOptions(): array
+    array getOptions()
     {
         myOptions = [
             "expires":(int)this.getExpiresTimestamp(),
@@ -665,7 +665,7 @@ class Cookie : ICookie
     }
 
 
-    function toArray(): array
+    array toArray(): array
     {
         return [
             "name":this.name,

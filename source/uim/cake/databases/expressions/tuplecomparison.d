@@ -40,7 +40,7 @@ class TupleComparison : ComparisonExpression
      *
      * @return array<string|null>
      */
-    function getType(): array
+    array getType()
     {
         return _type;
     }

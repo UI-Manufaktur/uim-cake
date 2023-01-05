@@ -380,7 +380,7 @@ class RelativeTimeFormatter : DifferenceIFormatter
      * @return array<string, mixed> Options with defaults applied.
      * @psalm-param class-string<uim.cake.I18n\FrozenDate>|class-string<uim.cake.I18n\FrozenTime> $class
      */
-    protected function _options(array $options, string $class): array
+    protected array _options(array $options, string $class)
     {
         $options += [
             "from": $class::now(),

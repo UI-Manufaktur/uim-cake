@@ -41,7 +41,7 @@ class Collection : ICollection
      *
      * @return array<string> The list of tables in the connected database/schema.
      */
-    function listTablesWithoutViews(): array
+    array listTablesWithoutViews()
     {
         [$sql, $params] = _dialect.listTablesWithoutViewsSql(_connection.config());
         $result = [];
@@ -59,7 +59,7 @@ class Collection : ICollection
      *
      * @return array<string> The list of tables and views in the connected database/schema.
      */
-    function listTables(): array
+    array listTables()
     {
         [$sql, $params] = _dialect.listTablesSql(_connection.config());
         $result = [];

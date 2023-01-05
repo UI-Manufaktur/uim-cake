@@ -727,7 +727,7 @@ abstract class Association
      * @param string|null $targetProperty The property name in the source results where the association
      * data shuld be nested in. Will use the default one if not provided.
      */
-    array transformRow(array $row, string $nestKey, bool $joined, ?string $targetProperty = null): array
+    array transformRow(array $row, string $nestKey, bool $joined, ?string $targetProperty = null)
     {
         $sourceAlias = this.getSource().getAlias();
         $nestKey = $nestKey ?: _name;
@@ -750,7 +750,7 @@ abstract class Association
      *   with this association
      * @return array<string, mixed>
      */
-    function defaultRowValue(array $row, bool $joined): array
+    array defaultRowValue(array $row, bool $joined)
     {
         $sourceAlias = this.getSource().getAlias();
         if (isset($row[$sourceAlias])) {
@@ -987,7 +987,7 @@ abstract class Association
      * @throws \RuntimeException if the number of columns in the foreignKey do not
      * match the number of columns in the source table primaryKey
      */
-    protected function _joinCondition(array $options): array
+    protected array _joinCondition(array $options)
     {
         $conditions = [];
         $tAlias = _name;
@@ -1038,7 +1038,7 @@ abstract class Association
      * @param array|string $finderData The finder name or an array having the name as key
      * and options as value.
      */
-    protected array _extractFinder($finderData): array
+    protected array _extractFinder($finderData)
     {
         $finderData = (array)$finderData;
 

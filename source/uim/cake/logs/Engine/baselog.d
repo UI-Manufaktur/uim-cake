@@ -93,7 +93,7 @@ abstract class BaseLog : AbstractLogger
      *
      * @return array<string>
      */
-    function levels(): array
+    array levels()
     {
         return _config["levels"];
     }

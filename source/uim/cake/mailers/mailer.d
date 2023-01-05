@@ -55,7 +55,7 @@ use InvalidArgumentException;
  * registration event:
  *
  * ```
- * function implementedEvents(): array
+ * array implementedEvents()
  * {
  *     return [
  *         "Model.afterSave": "onRegistration",
@@ -319,7 +319,7 @@ class Mailer : IEventListener
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */
-    function send(?string $action = null, array $args = [], array $headers = []): array
+    array send(?string $action = null, array $args = [], array $headers = [])
     {
         if ($action == null) {
             return this.deliver();
@@ -590,7 +590,7 @@ class Mailer : IEventListener
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents()
     {
         return [];
     }

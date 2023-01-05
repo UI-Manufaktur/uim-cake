@@ -16,7 +16,7 @@ interface ICollection
      *
      * @return array<string> The list of tables in the connected database/schema.
      */
-    function listTables(): array;
+    array listTables();
 
     /**
      * Get the column metadata for a table.

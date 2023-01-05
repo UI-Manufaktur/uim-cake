@@ -23,5 +23,5 @@ interface PropertyMarshalInterface
      * @param array<string, mixed> $options The options array used in the marshalling call.
      * @return array A map of `[property: callable]` of additional properties to marshal.
      */
-    function buildMarshalMap(Marshaller $marshaller, array $map, array $options): array;
+    array buildMarshalMap(Marshaller $marshaller, array $map, array $options);
 }

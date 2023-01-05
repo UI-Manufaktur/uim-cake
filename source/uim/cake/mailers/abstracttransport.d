@@ -22,9 +22,9 @@ abstract class AbstractTransport
      *
      * @param uim.cake.mailers.Message $message Email message.
      * @return array
-     * @psalm-return array{headers: string, message: string}
+
      */
-    abstract function send(Message $message): array;
+    abstract array send(Message $message);
 
     /**
      * Constructor

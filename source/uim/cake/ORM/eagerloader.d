@@ -147,7 +147,7 @@ class EagerLoader
      *
      * @return array Containments.
      */
-    function getContain(): array
+    array getContain()
     {
         return _containments;
     }

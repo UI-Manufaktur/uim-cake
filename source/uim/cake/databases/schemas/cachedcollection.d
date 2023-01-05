@@ -40,13 +40,13 @@ class CachedCollection : ICollection
     }
 
 
-    function listTablesWithoutViews(): array
+    array listTablesWithoutViews()
     {
         return this.collection.listTablesWithoutViews();
     }
 
 
-    function listTables(): array
+    array listTables()
     {
         return this.collection.listTables();
     }

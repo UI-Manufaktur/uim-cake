@@ -106,7 +106,7 @@ class LoggedQuery : JsonSerializable
      *
      * @return array<string, mixed>
      */
-    function getContext(): array
+    array getContext()
     {
         return [
             "numRows": this.numRows,
@@ -119,7 +119,7 @@ class LoggedQuery : JsonSerializable
      *
      * @return array<string, mixed>
      */
-    function jsonSerialize(): array
+    array jsonSerialize()
     {
         $error = this.error;
         if ($error != null) {

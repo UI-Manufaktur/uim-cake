@@ -198,7 +198,7 @@ class Email : JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    function getViewVars(): array
+    array getViewVars()
     {
         return this.getRenderer().viewBuilder().getVars();
     }
@@ -323,7 +323,7 @@ class Email : JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    function getProfile(): array
+    array getProfile()
     {
         return _profile;
     }
@@ -336,7 +336,7 @@ class Email : JsonSerializable, Serializable
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */
-    function send($content = null): array
+    array send($content = null)
     {
         if (is_array($content)) {
             $content = implode("\n", $content) ~ "\n";
@@ -515,7 +515,7 @@ class Email : JsonSerializable, Serializable
      * @return array Serializable array of configuration properties.
      * @throws \Exception When a view var object can not be properly serialized.
      */
-    function jsonSerialize(): array
+    array jsonSerialize()
     {
         $array = this.message.jsonSerialize();
         $array["viewConfig"] = this.getRenderer().viewBuilder().jsonSerialize();
@@ -555,7 +555,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Magic method used for serializing the Email object.
      */
-    array __serialize(): array
+    array __serialize()
     {
         $array = this.jsonSerialize();
         array_walk_recursive($array, void (&$item, $key) {

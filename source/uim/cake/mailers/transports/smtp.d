@@ -139,7 +139,7 @@ class SmtpTransport : AbstractTransport
      * ]
      * ```
      */
-    array getLastResponse(): array
+    array getLastResponse()
     {
         return _lastResponse;
     }
@@ -151,7 +151,7 @@ class SmtpTransport : AbstractTransport
      * @return array{headers: string, message: string}
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    function send(Message $message): array
+    array send(Message $message)
     {
         this.checkRecipient($message);
 
@@ -377,7 +377,7 @@ class SmtpTransport : AbstractTransport
      *
      * @param uim.cake.mailers.Message $message Message instance
      */
-    protected array _prepareFromAddress(Message $message): array
+    protected array _prepareFromAddress(Message $message)
     {
         $from = $message.getReturnPath();
         if (empty($from)) {
@@ -392,7 +392,7 @@ class SmtpTransport : AbstractTransport
      *
      * @param uim.cake.mailers.Message $message Message instance
      */
-    protected array _prepareRecipientAddresses(Message $message): array
+    protected array _prepareRecipientAddresses(Message $message)
     {
         $to = $message.getTo();
         $cc = $message.getCc();

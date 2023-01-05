@@ -391,7 +391,7 @@ class ServerRequest : IServerRequest
      *
      * @return array<string>
      */
-    string[] getTrustedProxies(): array
+    string[] getTrustedProxies()
     {
         return this.trustedProxies;
     }
@@ -794,7 +794,7 @@ class ServerRequest : IServerRequest
      *   If the header doesn"t exist, an empty array will be returned.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    string[] getHeader($name): array
+    string[] getHeader($name)
     {
         $name = this.normalizeHeaderName($name);
         if (isset(_environment[$name])) {

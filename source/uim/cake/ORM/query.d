@@ -439,7 +439,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
 
     /**
      */
-    array getContain(): array
+    array getContain()
     {
         return this.getEagerLoader().getContain();
     }
@@ -1278,7 +1278,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     }
 
 
-    function __debugInfo(): array
+    array __debugInfo()
     {
         $eagerLoader = this.getEagerLoader();
 

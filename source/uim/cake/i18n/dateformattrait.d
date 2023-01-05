@@ -465,7 +465,7 @@ trait DateFormatTrait
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo()
     {
         /** @psalm-suppress PossiblyNullReference */
         return [

@@ -64,7 +64,7 @@ class ArrayLog : BaseLog
      *
      * @return array<string>
      */
-    function read(): array
+    array read()
     {
         return this.content;
     }

@@ -167,7 +167,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param uim.cake.databases.ValueBinder aBinder The value binder to use.
      * @return array First position containing the template and the second a placeholder
      */
-    protected function _stringExpression(ValueBinder aBinder): array
+    protected array _stringExpression(ValueBinder aBinder)
     {
         $template = "%s ";
 
@@ -246,7 +246,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @param uim.cake.databases.IExpression|iterable $values The rows to insert
      */
-    protected array _collectExpressions($values): array
+    protected array _collectExpressions($values)
     {
         if ($values instanceof IExpression) {
             return [$values, []];

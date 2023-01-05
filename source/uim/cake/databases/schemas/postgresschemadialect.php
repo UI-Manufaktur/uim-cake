@@ -16,7 +16,7 @@ class PostgresSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    function listTablesSql(array $config): array
+    array listTablesSql(array $config)
     {
         $sql = "SELECT table_name as name FROM information_schema.tables
                 WHERE table_schema = ? ORDER BY name";
@@ -32,7 +32,7 @@ class PostgresSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    function listTablesWithoutViewsSql(array $config): array
+    array listTablesWithoutViewsSql(array $config)
     {
         $sql = "SELECT table_name as name FROM information_schema.tables
                 WHERE table_schema = ? AND table_type = \"BASE TABLE\" ORDER BY name";
@@ -42,7 +42,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function describeColumnSql(string $tableName, array $config): array
+    array describeColumnSql(string $tableName, array $config)
     {
         $sql = "SELECT DISTINCT table_schema AS schema,
             column_name AS name,
@@ -80,7 +80,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @throws uim.cake.databases.exceptions.DatabaseException when column cannot be parsed.
      * @return array<string, mixed> Array of column information.
      */
-    protected function _convertColumn(string $column): array
+    protected array _convertColumn(string $column)
     {
         preg_match("/([a-z\s]+)(?:\(([0-9,]+)\))?/i", $column, $matches);
         if (empty($matches)) {
@@ -238,7 +238,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function describeIndexSql(string $tableName, array $config): array
+    array describeIndexSql(string $tableName, array $config)
     {
         $sql = "SELECT
         c2.relname,
