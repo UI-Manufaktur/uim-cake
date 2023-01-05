@@ -137,5 +137,5 @@ interface ISchema
      *
      * @return array<string, mixed> An array of options.
      */
-    auto getOptions(): array;
+    array getOptions();
 }

@@ -134,8 +134,7 @@ abstract class BaseAuthenticate : IEventListener {
      * @param string $username The username/identifier.
      * @return uim.cake.orm.Query
      */
-    protected Query _query(string $username) 
-    {
+    protected Query _query(string $username) {
         $config = _config;
         $table = this.getTableLocator().get($config["userModel"]);
 

@@ -579,7 +579,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function constraints(): array
+    array constraints()
     {
         return array_keys(_constraints);
     }
@@ -598,7 +598,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function getOptions(): array
+    array getOptions()
     {
         return _options;
     }
@@ -616,7 +616,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function createSql(Connection $connection): array
+    array createSql(Connection $connection)
     {
         $dialect = $connection.getDriver().schemaDialect();
         $columns = $constraints = $indexes = [];

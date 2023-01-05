@@ -17,5 +17,5 @@ interface IPaginator {
      * Get paging params after pagination operation.
      * @return array
      */
-    auto getPagingParams(): array;
+    array getPagingParams();
 }

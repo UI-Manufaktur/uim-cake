@@ -403,7 +403,7 @@ class ExceptionRenderer : IExceptionRenderer
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "error":this.error,

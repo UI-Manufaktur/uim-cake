@@ -47,7 +47,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @return array<string>
      */
-    function getVirtual(): array;
+    string[] getVirtual();
 
     /**
      * Sets the dirty status of a single field.
@@ -72,7 +72,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @return array<string>
      */
-    function getDirty(): array;
+    string[] getDirty();
 
     /**
      * Returns whether this entity has errors.

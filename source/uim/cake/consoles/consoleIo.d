@@ -506,8 +506,7 @@ class ConsoleIo {
      * @param array<string, mixed> myConfig Configuration data for the helper.
      * @return uim.cake.consoles.Helper The created helper instance.
      */
-    Helper helper(string myName, array myConfig = []) 
-    {
+    Helper helper(string myName, array myConfig = []) {
         myName = ucfirst(myName);
 
         return _helpers.load(myName, myConfig);

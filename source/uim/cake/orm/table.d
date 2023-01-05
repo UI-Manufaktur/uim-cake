@@ -2951,7 +2951,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @return array
      */
-    auto __debugInfo() {
+    array __debugInfo() {
         $conn = this.getConnection();
 
         return [

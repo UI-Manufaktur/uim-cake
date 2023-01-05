@@ -322,7 +322,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paging data.
      * @return array<string, mixed> Updated params.
      */
-    protected function addPrevNextParams(array $params, array $data): array
+    protected array addPrevNextParams(array $params, array $data): array
     {
         $params["prevPage"] = $params["page"] > 1;
         if ($params["count"] == null) {
@@ -341,7 +341,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paging data.
      * @return array<string, mixed> Updated params.
      */
-    protected function addSortingParams(array $params, array $data): array
+    protected array addSortingParams(array $params, array $data): array
     {
         $defaults = $data["defaults"];
         $order = (array)$data["options"]["order"];

@@ -383,7 +383,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     /**
      * @return array
      */
-    auto getContain(): array
+    array getContain(): array
     {
         return this.getEagerLoader().getContain();
     }

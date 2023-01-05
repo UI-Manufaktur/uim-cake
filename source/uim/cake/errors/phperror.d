@@ -148,7 +148,7 @@ class PhpError
     /**
      * Get the stacktrace as an array.
      */
-    array getTrace(): array
+    array getTrace()
     {
         return this.trace;
     }

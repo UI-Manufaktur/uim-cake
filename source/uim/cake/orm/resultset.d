@@ -517,7 +517,7 @@ class ResultSet : IResultSet
      *
      * @return array
      */
-    auto __debugInfo() {
+    array __debugInfo() {
         return [
             "items":this.toArray(),
         ];

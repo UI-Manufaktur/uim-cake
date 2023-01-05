@@ -247,7 +247,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function describeIndexSql(string $tableName, array $config): array
+    array describeIndexSql(string $tableName, array $config): array
     {
         $sql = "SELECT
                 I.[name] AS [index_name],
@@ -524,7 +524,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function dropConstraintSql(TableSchema $schema): array
+    array dropConstraintSql(TableSchema $schema): array
     {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
         $sql = [];
@@ -600,7 +600,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));

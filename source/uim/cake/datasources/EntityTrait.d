@@ -287,7 +287,7 @@ trait EntityTrait
     /**
      * Gets all original values of the entity.
      */
-    array getOriginalValues(): array
+    array getOriginalValues()
     {
         $originals = _original;
         $originalKeys = array_keys($originals);
@@ -448,7 +448,7 @@ trait EntityTrait
      *
      * @return array<string>
      */
-    function getHidden(): array
+    string[] getHidden()
     {
         return _hidden;
     }
@@ -478,7 +478,7 @@ trait EntityTrait
      *
      * @return array<string>
      */
-    function getVirtual(): array
+    string[] getVirtual()
     {
         return _virtual;
     }
@@ -492,7 +492,7 @@ trait EntityTrait
      * @return array<string> A list of fields that are "visible" in all
      *     representations.
      */
-    function getVisible(): array
+    array getVisible()
     {
         $fields = array_keys(_fields);
         $fields = array_merge($fields, _virtual);
@@ -507,7 +507,7 @@ trait EntityTrait
      * This method will recursively transform entities assigned to fields
      * into arrays as well.
      */
-    array toArray(): array
+    array toArray()
     {
         $result = [];
         foreach (this.getVisible() as $field) {
@@ -534,7 +534,7 @@ trait EntityTrait
     /**
      * Returns the fields that will be serialized as JSON
      */
-    array jsonSerialize(): array
+    array jsonSerialize()
     {
         return this.extract(this.getVisible());
     }
@@ -629,7 +629,7 @@ trait EntityTrait
      * @param array<string> $fields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
      */
-    array extract(array $fields, bool $onlyDirty = false): array
+    array extract(array $fields, bool $onlyDirty = false)
     {
         $result = [];
         foreach ($fields as $field) {
@@ -650,7 +650,7 @@ trait EntityTrait
      *
      * @param array<string> $fields List of fields to be returned
      */
-    array extractOriginal(array $fields): array
+    array extractOriginal(array $fields)
     {
         $result = [];
         foreach ($fields as $field) {
@@ -669,7 +669,7 @@ trait EntityTrait
      *
      * @param array<string> $fields List of fields to be returned
      */
-    array extractOriginalChanged(array $fields): array
+    array extractOriginalChanged(array $fields)
     {
         $result = [];
         foreach ($fields as $field) {
@@ -722,7 +722,7 @@ trait EntityTrait
      *
      * @return array<string>
      */
-    function getDirty(): array
+    string[] getDirty()
     {
         return array_keys(_dirty);
     }
@@ -801,7 +801,7 @@ trait EntityTrait
     /**
      * Returns all validation errors.
      */
-    array getErrors(): array
+    array getErrors()
     {
         $diff = array_diff_key(_fields, _errors);
 
@@ -821,7 +821,7 @@ trait EntityTrait
      *
      * @param string $field Field name to get the errors from
      */
-    array getError(string $field): array
+    array getError(string $field)
     {
         $errors = _errors[$field] ?? [];
         if ($errors) {
@@ -901,7 +901,7 @@ trait EntityTrait
      * @param string $field the field in this entity to check for errors
      * @return array errors in nested entity if any
      */
-    protected function _nestedErrors(string $field): array
+    protected function _nestedErrors(string $field)
     {
         // Only one path element, check for nested entity with error.
         if (strpos($field, ".") == false) {
@@ -973,7 +973,7 @@ trait EntityTrait
      * @param uim.cake.Datasource\IEntity|iterable $object The object to read errors from.
      * @param string|null $path The field name for errors.
      */
-    protected array _readError($object, $path = null): array
+    protected array _readError($object, $path = null)
     {
         if ($path != null && $object instanceof IEntity) {
             return $object.getError($path);
@@ -1001,7 +1001,7 @@ trait EntityTrait
      *
      * @return array<string, mixed>
      */
-    function getInvalid(): array
+    array getInvalid()
     {
         return _invalid;
     }
@@ -1099,7 +1099,7 @@ trait EntityTrait
      *
      * @return array<bool>
      */
-    function getAccessible(): array
+    array getAccessible()
     {
         return _accessible;
     }
@@ -1153,7 +1153,7 @@ trait EntityTrait
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo()
     {
         $fields = _fields;
         foreach (_virtual as $field) {

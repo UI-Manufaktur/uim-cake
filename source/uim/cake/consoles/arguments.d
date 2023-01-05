@@ -101,8 +101,7 @@ class Arguments
      * @param string myName The argument name to check.
      * @return string|null
      */
-    Nullable!string getArgument(string myName) 
-    {
+    Nullable!string getArgument(string myName) {
         $offset = array_search(myName, this.argNames, true);
         if ($offset == false || !isset(this.args[$offset])) {
             return null;

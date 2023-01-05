@@ -45,7 +45,7 @@ class ArrayItemNode : INode
     }
 
 
-    auto getChildren(): array
+    array getChildren()
     {
         return [this.value];
     }

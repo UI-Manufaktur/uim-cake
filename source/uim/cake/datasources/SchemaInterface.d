@@ -112,7 +112,7 @@ interface ISchema {
      *
      * @return array<string, string>
      */
-    array typeMap(): array;
+    array typeMap();
 
     /**
      * Get a hash of columns and their default values.

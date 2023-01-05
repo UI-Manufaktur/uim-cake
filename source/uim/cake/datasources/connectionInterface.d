@@ -58,7 +58,7 @@ interface IConnection : ILoggerAware
      *
      * @return array<string, mixed>
      */
-    array config(): array;
+    array config();
 
     /**
      * Executes a callable function inside a transaction, if any exception occurs

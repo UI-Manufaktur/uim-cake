@@ -11,7 +11,7 @@ interface InvalidPropertyInterface
      *
      * @return array
      */
-    auto getInvalid(): array;
+    array getInvalid();
 
     /**
      * Set fields as invalid and not patchable into the entity.

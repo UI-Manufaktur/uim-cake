@@ -12,7 +12,7 @@ interface INode
      *
      * @return array<uim.cake.errors.debugs.INode>
      */
-    auto getChildren(): array;
+    array getChildren();
 
     /**
      * Get the contained value.

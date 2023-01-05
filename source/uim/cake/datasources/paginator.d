@@ -271,7 +271,7 @@ class Paginator : IPaginator {
      * @param array myData Paginator data.
      * @return array<string, mixed> Updated params.
      */
-    protected auto addPageCountParams(array myParams, array myData): array
+    protected array addPageCountParams(array myParams, array myData)
     {
         $page = myParams["page"];
         $pageCount = 0;
@@ -296,7 +296,7 @@ class Paginator : IPaginator {
      * @param array myData Paginator data.
      * @return array<string, mixed> Updated params.
      */
-    protected auto addStartEndParams(array myParams, array myData): array
+    protected array addStartEndParams(array myParams, array myData)
     {
         $start = $end = 0;
 
@@ -384,7 +384,7 @@ class Paginator : IPaginator {
      *
      * @return array
      */
-    auto getPagingParams(): array
+    array getPagingParams(): array
     {
         return _pagingParams;
     }

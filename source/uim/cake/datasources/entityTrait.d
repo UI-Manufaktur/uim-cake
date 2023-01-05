@@ -279,7 +279,7 @@ trait EntityTrait
      *
      * @return array
      */
-    auto getOriginalValues(): array
+    array getOriginalValues()
     {
         $originals = _original;
         $originalKeys = array_keys($originals);
@@ -631,7 +631,7 @@ trait EntityTrait
      *
      * @param myFields List of fields to be returned
      */
-    array extractOriginal(string[] myFields): array
+    array extractOriginal(string[] myFields)
     {
         myResult = [];
         foreach (myFields as myField) {
@@ -650,7 +650,7 @@ trait EntityTrait
      *
      * @param myFields List of fields to be returned
      */
-    array extractOriginalChanged(string[] myFields): array
+    array extractOriginalChanged(string[] myFields)
     {
         myResult = [];
         foreach (myField; myFields) {
@@ -779,7 +779,7 @@ trait EntityTrait
      *
      * @return array
      */
-    auto getErrors(): array
+    array getErrors()
     {
         $diff = array_diff_key(_fields, _errors);
 
@@ -800,7 +800,7 @@ trait EntityTrait
      * @param string myField Field name to get the errors from
      * @return array
      */
-    auto getError(string myField): array
+    array getError(string myField): array
     {
         myErrors = _errors[myField] ?? [];
         if (myErrors) {
@@ -983,7 +983,7 @@ trait EntityTrait
      *
      * @return array
      */
-    auto getInvalid(): array
+    array getInvalid(): array
     {
         return _invalid;
     }

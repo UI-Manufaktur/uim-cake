@@ -11,7 +11,7 @@ class CommandTask : Shell {
      *
      * @return array
      */
-    auto getShellList() {
+    array getShellList() {
         $skipFiles = ["app"];
         myHiddenCommands = ["command_list", "completion"];
         myPlugins = Plugin::loaded();
