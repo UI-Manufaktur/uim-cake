@@ -120,7 +120,7 @@ class Connection : IConnection {
     }
 
 
-    function config(): array
+    array config()
     {
         return _config;
     }
@@ -852,7 +852,7 @@ class Connection : IConnection {
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo()
     {
         $secrets = [
             'password': '*****',

@@ -57,7 +57,7 @@ class CakeException : RuntimeException
     /**
      * Get the passed in attributes
      */
-    array getAttributes(): array
+    array getAttributes()
     {
         return _attributes;
     }

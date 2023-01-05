@@ -116,7 +116,7 @@ class IdentifierQuoter
      * @param array<string, mixed> $part the part of the query to quote
      * @return array<string, mixed>
      */
-    protected function _basicQuoter(array $part): array
+    protected array _basicQuoter(array $part)
     {
         $result = [];
         foreach ($part as $alias: $value) {
@@ -135,7 +135,7 @@ class IdentifierQuoter
      * @param array $joins The joins to quote.
      * @return array<string, array>
      */
-    protected function _quoteJoins(array $joins): array
+    protected array _quoteJoins(array $joins)
     {
         $result = [];
         foreach ($joins as $value) {

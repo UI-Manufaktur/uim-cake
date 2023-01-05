@@ -46,7 +46,7 @@ class Arguments
      *
      * @return array<int, string>
      */
-    array getArguments(): array
+    array getArguments()
     {
         return this.args;
     }

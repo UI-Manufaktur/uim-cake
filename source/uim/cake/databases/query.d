@@ -829,7 +829,7 @@ class Query : IExpression, IteratorAggregate
      * @return array
      * @psalm-suppress InvalidReturnType
      */
-    protected function _makeJoin($table, $conditions, $type): array
+    protected array _makeJoin($table, $conditions, $type)
     {
         $alias = $table;
 
@@ -2329,7 +2329,7 @@ class Query : IExpression, IteratorAggregate
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo()
     {
         try {
             set_error_handler(

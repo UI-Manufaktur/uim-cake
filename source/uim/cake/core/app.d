@@ -176,7 +176,7 @@ class App
      * @param string $type Type of path
      * @param string|null $plugin Plugin name
      */
-    static string[] path(string $type, ?string $plugin = null): array
+    static string[] path(string $type, ?string $plugin = null)
     {
         if ($plugin == null && $type[0] == strtolower($type[0])) {
             return (array)Configure::read("App.paths." ~ $type);
@@ -221,7 +221,7 @@ class App
      * @param string|null $plugin Plugin name.
      * @return array<string>
      */
-    static string[] classPath(string $type, ?string $plugin = null): array
+    static string[] classPath(string $type, ?string $plugin = null)
     {
         if ($plugin != null) {
             return [
@@ -246,7 +246,7 @@ class App
      * @param string $type Package type.
      * @return array<string> Full path to package
      */
-    static function core(string $type): array
+    static array core(string $type)
     {
         if ($type == "templates") {
             return [CORE_PATH ~ "templates" ~ DIRECTORY_SEPARATOR];

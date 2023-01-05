@@ -64,7 +64,7 @@ trait TypeMapTrait
      *
      * @return array<int|string, string>
      */
-    function getDefaultTypes(): array
+    array getDefaultTypes()
     {
         return this.getTypeMap().getDefaults();
     }

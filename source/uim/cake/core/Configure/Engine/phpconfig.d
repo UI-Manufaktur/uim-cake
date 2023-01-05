@@ -61,7 +61,7 @@ class PhpConfig : ConfigEngineInterface
      * @throws uim.cake.Core\exceptions.CakeException when files don"t exist or they don"t contain `$config`.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
-    function read(string aKey): array
+    array read(string aKey)
     {
         $file = _getFilePath($key, true);
 

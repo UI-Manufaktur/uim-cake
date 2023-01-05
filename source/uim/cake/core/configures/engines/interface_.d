@@ -15,7 +15,7 @@ interface ConfigEngineInterface
      * @param string aKey Key to read.
      * @return array An array of data to merge into the runtime configuration
      */
-    function read(string aKey): array;
+    array read(string aKey);
 
     /**
      * Dumps the configure data into the storage key/file of the given `$key`.

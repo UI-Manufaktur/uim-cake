@@ -77,7 +77,7 @@ interface IStatement
      * Returns the error information for the last error that occurred when executing
      * this statement
      */
-    array errorInfo(): array;
+    array errorInfo();
 
     /**
      * Executes the statement by sending the SQL query to the database. It can optionally

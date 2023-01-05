@@ -64,7 +64,7 @@ class ValueBinder
      * @param string|int|null $type The type with which all values will be bound
      * @return array with the placeholders to insert in the query
      */
-    function generateManyNamed(iterable $values, $type = null): array
+    array generateManyNamed(iterable $values, $type = null)
     {
         $placeholders = [];
         foreach ($values as $k: $value) {
@@ -84,7 +84,7 @@ class ValueBinder
      * Returns all values bound to this expression object at this nesting level.
      * Subexpression bound values will not be returned with this function.
      */
-    array bindings(): array
+    array bindings()
     {
         return _bindings;
     }

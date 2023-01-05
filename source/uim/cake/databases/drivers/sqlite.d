@@ -235,7 +235,7 @@ class Sqlite : Driver
     }
 
 
-    protected function _expressionTranslators(): array
+    protected array _expressionTranslators()
     {
         return [
             FunctionExpression::class: "_transformFunctionExpression",

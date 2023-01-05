@@ -244,7 +244,7 @@ class Configure {
     /**
      * Gets the names of the configured Engine objects.
      */
-    static string[] configured(): array
+    static string[] configured()
     {
         $engines = array_keys(static::$_engines);
 

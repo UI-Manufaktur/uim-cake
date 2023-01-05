@@ -71,7 +71,7 @@ class PaginatorComponent : Component
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents()
     {
         return [];
     }
@@ -211,7 +211,7 @@ class PaginatorComponent : Component
      * @param array<string, mixed> $settings The settings to merge with the request data.
      * @return array<string, mixed> Array of merged options.
      */
-    function mergeOptions(string $alias, array $settings): array
+    array mergeOptions(string $alias, array $settings)
     {
         $request = _registry.getController().getRequest();
 

@@ -112,7 +112,7 @@ trait SqlDialectTrait
      * @psalm-return array<class-string, string>
      * @return array<string>
      */
-    protected function _expressionTranslators(): array
+    protected array _expressionTranslators()
     {
         return [];
     }

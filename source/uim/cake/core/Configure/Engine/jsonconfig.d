@@ -56,7 +56,7 @@ class JsonConfig : ConfigEngineInterface
      *   files contain ".." (as this could lead to abusive reads) or when there
      *   is an error parsing the JSON string.
      */
-    function read(string aKey): array
+    array read(string aKey)
     {
         $file = _getFilePath($key, true);
 

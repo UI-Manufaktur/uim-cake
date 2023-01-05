@@ -16,7 +16,7 @@ trait TypeConverterTrait
      * @return array list containing converted value and internal type
      * @pslam-return array{mixed, int}
      */
-    function cast($value, $type = "string"): array
+    array cast($value, $type = "string")
     {
         if (is_string($type)) {
             $type = TypeFactory::build($type);
@@ -38,7 +38,7 @@ trait TypeConverterTrait
      * @param array $columns list or associative array of columns and parameters to be bound with types
      * @param array $types list or associative array of types
      */
-    array matchTypes(array $columns, array $types): array
+    array matchTypes(array $columns, array $types)
     {
         if (!is_int(key($types))) {
             $positions = array_intersect_key(array_flip($columns), $types);

@@ -215,7 +215,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @return array<string> Command names
      */
-    string[] keys(): array
+    string[] keys()
     {
         return array_keys(this.commands);
     }

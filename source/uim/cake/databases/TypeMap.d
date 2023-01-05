@@ -67,7 +67,7 @@ class TypeMap
      *
      * @return array<int|string, string>
      */
-    function getDefaults(): array
+    array getDefaults()
     {
         return _defaults;
     }
@@ -109,7 +109,7 @@ class TypeMap
      *
      * @return array<int|string, string>
      */
-    function getTypes(): array
+    array getTypes()
     {
         return _types;
     }
@@ -132,7 +132,7 @@ class TypeMap
      *
      * @return array<int|string, string>
      */
-    function toArray(): array
+    array toArray()
     {
         return _types + _defaults;
     }

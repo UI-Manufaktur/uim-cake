@@ -290,7 +290,7 @@ class SecurityComponent : Component
      *
      * @param array $check Data array
      */
-    protected array _fieldsList(array $check): array
+    protected array _fieldsList(array $check)
     {
         $locked = "";
         $token = urldecode($check["_Token"]["fields"]);
@@ -437,13 +437,13 @@ class SecurityComponent : Component
      * @param string $missingMessage Message string if missing field
      * @return Messages
      */
-    protected strimg[] _debugCheckFields(
+    protected string[] _debugCheckFields(
         array $dataFields,
         array $expectedFields = [],
         string $intKeyMessage = "",
         string $stringKeyMessage = "",
         string $missingMessage = ""
-    ): array {
+    ) {
         $messages = _matchExistingFields($dataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = _debugExpectedFields($expectedFields, $missingMessage);
         if ($expectedFieldsMessage != null) {
@@ -501,12 +501,12 @@ class SecurityComponent : Component
      *   data fields indexed by string (protected)
      * @return array<string> Error messages
      */
-    protected function _matchExistingFields(
+    protected array _matchExistingFields(
         array $dataFields,
         array &$expectedFields,
         string $intKeyMessage,
         string $stringKeyMessage
-    ): array {
+    ) {
         $messages = [];
         foreach ($dataFields as $key: $value) {
             if (is_int($key)) {

@@ -185,7 +185,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @return array<string> List of object names.
      */
-    string[] loaded(): array
+    string[] loaded()
     {
         return array_keys(_loaded);
     }
@@ -263,7 +263,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * @param array $objects Array of child objects to normalize.
      * @return array<string, array> Array of normalized objects.
      */
-    function normalizeArray(array $objects): array
+    array normalizeArray(array $objects)
     {
         $normal = [];
         foreach ($objects as $i: $objectName) {
@@ -375,7 +375,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo()
     {
         $properties = get_object_vars(this);
         if (isset($properties["_loaded"])) {

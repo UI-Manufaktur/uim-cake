@@ -78,7 +78,7 @@ class IniConfig : ConfigEngineInterface
      * @throws uim.cake.Core\exceptions.CakeException when files don"t exist.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
-    function read(string aKey): array
+    array read(string aKey)
     {
         $file = _getFilePath($key, true);
 
@@ -106,7 +106,7 @@ class IniConfig : ConfigEngineInterface
      * @param array $values Values to be exploded.
      * @return array Array of values exploded
      */
-    protected function _parseNestedValues(array $values): array
+    protected array _parseNestedValues(array $values)
     {
         foreach ($values as $key: $value) {
             if ($value == "1") {

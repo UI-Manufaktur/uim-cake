@@ -144,7 +144,7 @@ class Component : IEventListener
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents()
     {
         $eventMap = [
             'Controller.initialize': 'beforeFilter',
