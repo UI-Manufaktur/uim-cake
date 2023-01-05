@@ -190,7 +190,7 @@ class BelongsToMany : Association
     }
 
 
-    function defaultRowValue(array $row, bool $joined): array
+    array defaultRowValue(array $row, bool $joined)
     {
         $sourceAlias = this.getSource().getAlias();
         if (isset($row[$sourceAlias])) {
@@ -477,7 +477,7 @@ class BelongsToMany : Association
      *
      * @param array<string, mixed> $options list of options passed to attachTo method
      */
-    protected array _joinCondition(array $options): array
+    protected array _joinCondition(array $options)
     {
         return [];
     }

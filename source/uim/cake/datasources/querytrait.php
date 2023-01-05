@@ -495,7 +495,7 @@ trait QueryTrait
      * @return array
      * @see applyOptions()
      */
-    array getOptions(): array
+    array getOptions()
     {
         return _options;
     }

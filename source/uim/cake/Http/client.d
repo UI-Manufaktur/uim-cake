@@ -438,7 +438,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Options to merge.
      * @return array Options merged with set config.
      */
-    protected array _mergeOptions(array $options): array
+    protected array _mergeOptions(array $options)
     {
         return Hash::merge(_config, $options);
     }
@@ -646,7 +646,7 @@ class Client : ClientInterface
      * @throws uim.cake.Core\exceptions.CakeException When an unknown type alias is used.
      * @psalm-return array<non-empty-string, non-empty-string>
      */
-    protected function _typeHeaders(string $type): array
+    protected function _typeHeaders(string $type)
     {
         if (strpos($type, "/") != false) {
             return [

@@ -88,12 +88,12 @@ class SqlserverSchemaDialect : SchemaDialect
      * @return array<string, mixed> Array of column information.
      * @link https://technet.microsoft.com/en-us/library/ms187752.aspx
      */
-    protected function _convertColumn(
+    protected array _convertColumn(
         string $col,
         ?int $length = null,
         ?int $precision = null,
         ?int $scale = null
-    ): array {
+    ) {
         $col = strtolower($col);
 
         $type = _applyTypeSpecificColumnConversion(

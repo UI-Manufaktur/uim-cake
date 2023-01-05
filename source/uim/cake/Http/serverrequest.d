@@ -1024,7 +1024,7 @@ class ServerRequest : IServerRequest
      *   While `example.co.uk` contains 2.
      * @return array<string> An array of subdomains.
      */
-    string[] subdomains(int $tldLength = 1): array
+    string[] subdomains(int $tldLength = 1)
     {
         $host = this.host();
         if (empty($host)) {
@@ -1083,7 +1083,7 @@ class ServerRequest : IServerRequest
      * @return array An array of `prefValue: [content/types]`
      * @deprecated 4.4.0 Use `accepts()` or `ContentTypeNegotiation` class instead.
      */
-    function parseAccept(): array
+    array parseAccept()
     {
         return (new ContentTypeNegotiation()).parseAccept(this);
     }
@@ -1278,7 +1278,7 @@ class ServerRequest : IServerRequest
      *
      * @return array<string, mixed> An array of cookie data.
      */
-    function getCookieParams(): array
+    array getCookieParams()
     {
         return this.cookies;
     }
@@ -1568,7 +1568,7 @@ class ServerRequest : IServerRequest
      *
      * @return array<string, mixed>
      */
-    array getAttributes(): array
+    array getAttributes()
     {
         $emulated = [
             "params": this.params,
@@ -1599,7 +1599,7 @@ class ServerRequest : IServerRequest
     /**
      * Get the array of uploaded files from the request.
      */
-    array getUploadedFiles(): array
+    array getUploadedFiles()
     {
         return this.uploadedFiles;
     }

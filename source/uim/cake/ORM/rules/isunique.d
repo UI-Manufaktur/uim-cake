@@ -76,7 +76,7 @@ class IsUnique
      * @param array $conditions The conditions to alias.
      * @return array<string, mixed>
      */
-    protected function _alias(string $alias, array $conditions): array
+    protected array _alias(string $alias, array $conditions)
     {
         $aliased = [];
         foreach ($conditions as $key: $value) {

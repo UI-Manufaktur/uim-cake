@@ -90,7 +90,7 @@ class DashedRoute : Route
      *
      * @param array $url An array of URL keys.
      */
-    protected array _dasherize(array $url): array
+    protected array _dasherize(array $url)
     {
         foreach (["controller", "plugin", "action"] as $element) {
             if (!empty($url[$element])) {

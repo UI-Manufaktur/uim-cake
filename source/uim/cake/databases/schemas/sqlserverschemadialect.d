@@ -506,7 +506,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array addConstraintSql(TableSchema $schema): array
+    array addConstraintSql(TableSchema $schema)
     {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
         $sql = [];
@@ -524,7 +524,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array dropConstraintSql(TableSchema $schema): array
+    array dropConstraintSql(TableSchema $schema)
     {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
         $sql = [];
@@ -600,7 +600,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes)
     {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
@@ -615,7 +615,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array truncateTableSql(TableSchema $schema): array
+    array truncateTableSql(TableSchema $schema)
     {
         $name = _driver.quoteIdentifier($schema.name());
         $queries = [

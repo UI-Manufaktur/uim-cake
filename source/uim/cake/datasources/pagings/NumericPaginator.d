@@ -613,7 +613,7 @@ class NumericPaginator : PaginatorInterface
      * @param bool $allowed Whether the field was allowed.
      * @return array Final order array.
      */
-    protected array _prefix(RepositoryInterface $object, array $order, bool $allowed = false): array
+    protected array _prefix(RepositoryInterface $object, array $order, bool $allowed = false)
     {
         $tableAlias = $object.getAlias();
         $tableOrder = [];
@@ -652,7 +652,7 @@ class NumericPaginator : PaginatorInterface
      * @param array<string, mixed> $options An array of options with a limit key to be checked.
      * @return array<string, mixed> An array of options for pagination.
      */
-    function checkLimit(array $options): array
+    array checkLimit(array $options)
     {
         $options["limit"] = (int)$options["limit"];
         if ($options["limit"] < 1) {

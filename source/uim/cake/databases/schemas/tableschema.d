@@ -634,7 +634,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array dropSql(Connection $connection): array
+    array dropSql(Connection $connection)
     {
         $dialect = $connection.getDriver().schemaDialect();
 
@@ -642,7 +642,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array truncateSql(Connection $connection): array
+    array truncateSql(Connection $connection)
     {
         $dialect = $connection.getDriver().schemaDialect();
 
@@ -650,7 +650,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array addConstraintSql(Connection $connection): array
+    array addConstraintSql(Connection $connection)
     {
         $dialect = $connection.getDriver().schemaDialect();
 
@@ -658,7 +658,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function dropConstraintSql(Connection $connection): array
+    array dropConstraintSql(Connection $connection)
     {
         $dialect = $connection.getDriver().schemaDialect();
 
@@ -670,7 +670,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @return array<string, mixed>
      */
-    array __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "table": _table,

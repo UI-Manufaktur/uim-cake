@@ -128,7 +128,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    function getConfig(?string $alias = null): array
+    array getConfig(?string $alias = null)
     {
         if ($alias == null) {
             return _config;
@@ -307,7 +307,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @return array<uim.cake.orm.Table>
      */
-    function genericInstances(): array
+    array genericInstances()
     {
         return _fallbacked;
     }

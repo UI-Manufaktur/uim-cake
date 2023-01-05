@@ -16,7 +16,7 @@ interface ILocator : BaseILocator
      * @param string|null myAlias Alias to get config for, null for complete config.
      * @return array The config data.
      */
-    auto getConfig(Nullable!string myAlias = null): array;
+    array getConfig(Nullable!string myAlias = null);
 
     /**
      * Stores a list of options to be used when instantiating an object

@@ -406,7 +406,7 @@ class SelectLoader
      * @param uim.cake.orm.Query $query The query to get fields from.
      * @return array<string, array> The list of fields for the subquery.
      */
-    protected array _subqueryFields(Query $query): array
+    protected array _subqueryFields(Query $query)
     {
         $keys = (array)this.bindingKey;
 
@@ -438,7 +438,7 @@ class SelectLoader
      * @param array<string, mixed> $options The options passed to the eager loader
      * @return array<string, mixed>
      */
-    protected function _buildResultMap(Query $fetchQuery, array $options): array
+    protected array _buildResultMap(Query $fetchQuery, array $options)
     {
         $resultMap = [];
         $singleResult = in_array(this.associationType, [Association::MANY_TO_ONE, Association::ONE_TO_ONE], true);

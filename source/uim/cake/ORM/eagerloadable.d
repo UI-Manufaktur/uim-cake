@@ -134,7 +134,7 @@ class EagerLoadable
      *
      * @return array<uim.cake.orm.EagerLoadable>
      */
-    function associations(): array
+    array associations()
     {
         return _associations;
     }
@@ -219,7 +219,7 @@ class EagerLoadable
      *
      * @return array<string, mixed>
      */
-    array getConfig(): array
+    array getConfig()
     {
         return _config;
     }
@@ -260,7 +260,7 @@ class EagerLoadable
      *
      * @return array<string, array>
      */
-    function asContainArray(): array
+    array asContainArray()
     {
         $associations = [];
         foreach (_associations as $assoc) {

@@ -360,7 +360,7 @@ class FormProtector
      * @return array<string, string> The token data.
      * @psalm-return array{fields: string, unlocked: string, debug: string}
      */
-    array buildTokenData(string $url = "", string $sessionId = ""): array
+    array buildTokenData(string $url = "", string $sessionId = "")
     {
         $fields = this.fields;
         $unlockedFields = this.unlockedFields;
@@ -471,13 +471,13 @@ class FormProtector
      * @param string $missingMessage Message string if missing field
      * @return array<string> Messages
      */
-    protected function debugCheckFields(
+    protected array debugCheckFields(
         array $dataFields,
         array $expectedFields = [],
         string $intKeyMessage = "",
         string $stringKeyMessage = "",
         string $missingMessage = ""
-    ): array {
+    ) {
         $messages = this.matchExistingFields($dataFields, $expectedFields, $intKeyMessage, $stringKeyMessage);
         $expectedFieldsMessage = this.debugExpectedFields($expectedFields, $missingMessage);
         if ($expectedFieldsMessage != null) {
@@ -498,12 +498,12 @@ class FormProtector
      *   data fields indexed by string (protected)
      * @return array<string> Error messages
      */
-    protected function matchExistingFields(
+    protected array matchExistingFields(
         array $dataFields,
         array &$expectedFields,
         string $intKeyMessage,
         string $stringKeyMessage
-    ): array {
+    ) {
         $messages = [];
         foreach ($dataFields as $key: $value) {
             if (is_int($key)) {
@@ -554,7 +554,7 @@ class FormProtector
      *
      * @return array<string, mixed>
      */
-    array __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "fields": this.fields,

@@ -134,7 +134,7 @@ class AssociationCollection : IteratorAggregate
      * @return array<uim.cake.orm.Association> An array of Association objects.
      * @since 3.5.3
      */
-    array getByType($class): array
+    array getByType($class)
     {
         $class = array_map("strtolower", (array)$class);
 
@@ -318,7 +318,7 @@ class AssociationCollection : IteratorAggregate
      *
      * @param array|bool $keys the list of association names to normalize
      */
-    array normalizeKeys($keys): array
+    array normalizeKeys($keys)
     {
         if ($keys == true) {
             $keys = this.keys();

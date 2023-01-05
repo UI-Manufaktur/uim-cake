@@ -121,7 +121,7 @@ trait TranslateStrategyTrait {
      * @param array<string, mixed> myOptions The options array used in the marshalling call.
      * @return array A map of `[property: callable]` of additional properties to marshal.
      */
-    function buildMarshalMap(Marshaller $marshaller, array $map, array myOptions): array
+    array buildMarshalMap(Marshaller $marshaller, array $map, array myOptions)
     {
         if (isset(myOptions["translations"]) && !myOptions["translations"]) {
             return [];

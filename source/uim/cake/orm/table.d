@@ -2758,7 +2758,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param array<string, mixed> myOptions A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity>
      */
-    function patchEntities(iterable $entities, array myData, array myOptions = []): array
+    array patchEntities(iterable $entities, array myData, array myOptions = [])
     {
         myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
@@ -2855,7 +2855,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @return array<string, mixed>
      */
-    array implementedEvents(): array
+    array implementedEvents()
     {
         myEventMap = [
             "Model.beforeMarshal": "beforeMarshal",

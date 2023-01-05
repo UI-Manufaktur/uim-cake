@@ -179,7 +179,7 @@ class FrozenTime : Chronos : I18nDateTimeInterface
      * @return array List of timezone identifiers
      * @since 2.2
      */
-    static function listTimezones($filter = null, ?string $country = null, $options = []): array
+    static array listTimezones($filter = null, ?string $country = null, $options = [])
     {
         if (is_bool($options)) {
             $options = [

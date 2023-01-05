@@ -641,7 +641,7 @@ class Paginator : IPaginator {
      * @param array<string, mixed> myOptions An array of options with a limit key to be checked.
      * @return array<string, mixed> An array of options for pagination.
      */
-    function checkLimit(array myOptions): array
+    array checkLimit(array myOptions)
     {
         myOptions["limit"] = (int)myOptions["limit"];
         if (myOptions["limit"] < 1) {

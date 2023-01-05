@@ -71,7 +71,7 @@ class InflectedRoute : Route
      *
      * @param array $url An array of URL keys.
      */
-    protected array _underscore(array $url): array
+    protected array _underscore(array $url)
     {
         if (!empty($url["controller"])) {
             $url["controller"] = Inflector::underscore($url["controller"]);

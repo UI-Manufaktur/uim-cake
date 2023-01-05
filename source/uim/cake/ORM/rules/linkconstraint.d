@@ -106,7 +106,7 @@ class LinkConstraint
      * @param uim.cake.orm.Table $source The object to use for aliasing.
      * @return array<string> The aliased fields
      */
-    protected string[] _aliasFields(array $fields, Table $source): array
+    protected string[] _aliasFields(array $fields, Table $source)
     {
         foreach ($fields as $key: $value) {
             $fields[$key] = $source.aliasField($value);
@@ -122,7 +122,7 @@ class LinkConstraint
      * @param array $values The condition values.
      * @return array A conditions array combined from the passed fields and values.
      */
-    protected function _buildConditions(array $fields, array $values): array
+    protected array _buildConditions(array $fields, array $values): array
     {
         if (count($fields) != count($values)) {
             throw new \InvalidArgumentException(sprintf(
