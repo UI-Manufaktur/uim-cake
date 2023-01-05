@@ -174,7 +174,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents(): array
     {
         return [
             "Model.beforeFind":"beforeFind",

@@ -66,9 +66,8 @@ class IsUnique {
      *
      * @param string myAlias The alias to add.
      * @param array $conditions The conditions to alias.
-     * @return array
      */
-    protected auto _alias(string myAlias, array $conditions): array
+    protected array _alias(string myAlias, array $conditions): array
     {
         myAliased = [];
         foreach ($conditions as myKey: myValue) {

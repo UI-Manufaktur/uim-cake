@@ -2614,7 +2614,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo(): array
     {
         $fields = [];
         foreach (_fields as $name: $fieldSet) {

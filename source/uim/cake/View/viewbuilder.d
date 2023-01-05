@@ -162,7 +162,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    function getVars(): array
+    array getVars(): array
     {
         return _vars;
     }
@@ -451,7 +451,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    function getOptions(): array
+    array getOptions(): array
     {
         return _options;
     }

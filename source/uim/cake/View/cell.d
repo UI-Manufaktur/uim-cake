@@ -263,7 +263,7 @@ abstract class Cell : IEventDispatcher
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo(): array
     {
         return [
             "action": this.action,

@@ -258,7 +258,7 @@ class Response : Message : IResponse
      *
      * @return array The cookie data
      */
-    auto getCookies(): array
+    array getCookies()
     {
         return _getCookies();
     }
@@ -325,7 +325,7 @@ class Response : Message : IResponse
      *
      * @return array Array of Cookie data.
      */
-    protected auto _getCookies(): array
+    protected array _getCookies()
     {
         this.buildCookieCollection();
 
@@ -404,7 +404,7 @@ class Response : Message : IResponse
      *
      * @return array<string>
      */
-    protected auto _getHeaders(): array
+    protected string[] _getHeaders()
     {
         $out = [];
         foreach (this.headers as myKey: myValues) {

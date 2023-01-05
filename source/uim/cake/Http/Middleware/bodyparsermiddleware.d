@@ -87,7 +87,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @return array<string>
      */
-    string[] getMethods(): array
+    string[] getMethods()
     {
         return this.methods;
     }
@@ -126,7 +126,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @return array<\Closure>
      */
-    array getParsers(): array
+    array getParsers()
     {
         return this.parsers;
     }
@@ -184,7 +184,7 @@ class BodyParserMiddleware : IMiddleware
      *
      * @param string $body The request body to decode
      */
-    protected array decodeXml(string $body): array
+    protected array decodeXml(string $body)
     {
         try {
             $xml = Xml::build($body, ["return": "domdocument", "readFile": false]);

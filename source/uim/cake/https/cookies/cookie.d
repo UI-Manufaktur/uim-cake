@@ -665,7 +665,7 @@ class Cookie : ICookie
     }
 
 
-    array toArray(): array
+    array toArray()
     {
         return [
             "name":this.name,

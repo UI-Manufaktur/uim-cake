@@ -182,7 +182,7 @@ class SaveOptionsBuilder : ArrayObject
     /**
      * @return array<string, mixed>
      */
-    function toArray(): array
+    array toArray()
     {
         return _options;
     }

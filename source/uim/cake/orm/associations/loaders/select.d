@@ -80,9 +80,8 @@ class SelectLoader {
     /**
      * Returns the default options to use for the eagerLoader
      *
-     * @return array
      */
-    protected auto _defaultOptions(): array
+    protected array _defaultOptions(): array
     {
         return [
             "foreignKey":this.foreignKey,
@@ -166,9 +165,8 @@ class SelectLoader {
      *
      * @param array|string myFinderData The finder name or an array having the name as key
      * and options as value.
-     * @return array
      */
-    protected auto _extractFinder(myFinderData): array
+    protected array _extractFinder(myFinderData): array
     {
         myFinderData = (array)myFinderData;
 

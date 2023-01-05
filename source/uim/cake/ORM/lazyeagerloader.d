@@ -100,9 +100,8 @@ class LazyEagerLoader
      *
      * @param uim.cake.orm.Table $source The table having the top level associations
      * @param array<string> $associations The name of the top level associations
-     * @return array<string>
      */
-    protected function _getPropertyMap(Table $source, array $associations): array
+    protected string[] _getPropertyMap(Table $source, array $associations)
     {
         $map = [];
         $container = $source.associations();
@@ -124,7 +123,7 @@ class LazyEagerLoader
      * @param uim.cake.orm.Table $source The table where the entities came from
      * @return array<uim.cake.Datasource\IEntity>
      */
-    protected function _injectResults(iterable $objects, $results, array $associations, Table $source): array
+    protected function _injectResults(iterable $objects, $results, array $associations, Table $source)
     {
         $injected = [];
         $properties = _getPropertyMap($source, $associations);

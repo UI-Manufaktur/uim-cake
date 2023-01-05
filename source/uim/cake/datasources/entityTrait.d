@@ -876,7 +876,7 @@ trait EntityTrait
      * @param string myField the field in this entity to check for errors
      * @return array errors in nested entity if any
      */
-    protected array _nestedErrors(string myField): array
+    protected array _nestedErrors(string myField)
     {
         // Only one path element, check for nested entity with error.
         if (indexOf(myField, ".") == false) {
@@ -949,9 +949,8 @@ trait EntityTrait
      *
      * @param uim.cake.Datasource\IEntity|iterable $object The object to read errors from.
      * @param string|null myPath The field name for errors.
-     * @return array
      */
-    protected auto _readError($object, myPath = null): array
+    protected array _readError($object, myPath = null): array
     {
         if (myPath  !is null && $object instanceof IEntity) {
             return $object.getError(myPath);

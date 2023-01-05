@@ -153,7 +153,7 @@ class Helper : IEventListener
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents(): array
     {
         $eventMap = [
             "View.beforeRenderFile": "beforeRenderFile",
@@ -189,7 +189,7 @@ class Helper : IEventListener
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo(): array
     {
         return [
             "helpers": this.helpers,

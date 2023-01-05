@@ -576,9 +576,8 @@ class ShadowTableStrategy : TranslateStrategyInterface
     /**
      * Lazy define and return the translation table fields.
      *
-     * @return array<string>
      */
-    protected function translatedFields() {
+    protected string[] translatedFields() {
         $fields = this.getConfig("fields");
 
         if ($fields) {

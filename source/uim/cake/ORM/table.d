@@ -2928,7 +2928,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents(): array
     {
         $eventMap = [
             "Model.beforeMarshal": "beforeMarshal",
@@ -3024,7 +3024,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *
      * @return array<string, mixed>
      */
-    function __debugInfo() {
+    array __debugInfo() {
         $conn = this.getConnection();
 
         return [

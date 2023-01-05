@@ -216,8 +216,6 @@ class EagerLoadable
     /**
      * Gets the list of options to pass to the association object for loading
      * the records.
-     *
-     * @return array
      */
     array getConfig() {
         return _config;

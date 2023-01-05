@@ -549,9 +549,8 @@ class ShadowTableStrategy : ITranslateStrategy {
     /**
      * Lazy define and return the main table fields.
      *
-     * @return array
      */
-    protected auto mainFields() {
+    protected array mainFields() {
         myFields = this.getConfig("mainTableFields");
 
         if (myFields) {
@@ -568,9 +567,8 @@ class ShadowTableStrategy : ITranslateStrategy {
     /**
      * Lazy define and return the translation table fields.
      *
-     * @return array
      */
-    protected auto translatedFields() {
+    protected array translatedFields() {
         myFields = this.getConfig("fields");
 
         if (myFields) {

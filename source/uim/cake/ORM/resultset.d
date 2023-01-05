@@ -514,7 +514,7 @@ class ResultSet : IResultSet
      *
      * @return array<string, mixed>
      */
-    function __debugInfo() {
+    array __debugInfo() {
         $currentIndex = _index;
         // toArray() adjusts the current index, so we have to reset it
         $items = this.toArray();

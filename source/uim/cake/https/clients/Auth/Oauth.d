@@ -289,7 +289,7 @@ class Oauth
      * @see https://tools.ietf.org/html/rfc5849#section-3.4.1.3.2
      * @return array
      */
-    protected auto _normalizeData(array $args, string myPath = ""): array
+    protected array _normalizeData(array $args, string myPath = "")
     {
         myData = [];
         foreach ($args as myKey: myValue) {

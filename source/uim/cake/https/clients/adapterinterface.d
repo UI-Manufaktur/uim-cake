@@ -16,5 +16,5 @@ interface IAdapter {
      * @param array<string, mixed> myOptions Array of options for the stream.
      * @return array<uim.cake.Http\Client\Response> Array of populated Response objects
      */
-    function send(IRequest myRequest, array myOptions): array;
+    array send(IRequest myRequest, array myOptions);
 }

@@ -1356,9 +1356,8 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param array<string, mixed> myOptions the original options passed to a finder
      * @param myKeys the keys to check in myOptions to build matchers from
      * the associated value
-     * @return array
      */
-    protected auto _setFieldMatchers(array myOptions, string[] myKeys): array
+    protected array _setFieldMatchers(array myOptions, string[] myKeys): array
     {
         foreach (myKeys as myField) {
             if (!is_array(myOptions[myField])) {
@@ -2856,7 +2855,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents(): array
     {
         myEventMap = [
             "Model.beforeMarshal": "beforeMarshal",
@@ -2948,8 +2947,6 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Returns an array that can be used to describe the internal state of this
      * object.
-     *
-     * @return array
      */
     array __debugInfo() {
         $conn = this.getConnection();

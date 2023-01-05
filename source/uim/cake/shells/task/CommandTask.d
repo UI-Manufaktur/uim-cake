@@ -8,8 +8,6 @@ import uim.cake;
 class CommandTask : Shell {
     /**
      * Gets the shell command listing.
-     *
-     * @return array
      */
     array getShellList() {
         $skipFiles = ["app"];
