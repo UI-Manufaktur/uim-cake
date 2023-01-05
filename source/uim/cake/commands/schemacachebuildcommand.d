@@ -1,10 +1,7 @@
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.databases.SchemaCache;
-import uim.cake.datasources.ConnectionManager;
+@safe:
+import uim.cake;
 use RuntimeException;
 
 /**
@@ -16,7 +13,7 @@ class SchemacacheBuildCommand : Command {
      *
      * @return string
      */
-    static string defaultName()string
+    static string defaultName()
     {
         return "schema_cache build";
     }

@@ -1,9 +1,7 @@
 module uim.cake.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
-import uim.cake.core.Configure;
+@safe:
+import uim.cake;
 
 /**
  * built-in Server command

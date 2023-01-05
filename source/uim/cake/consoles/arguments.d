@@ -1,5 +1,8 @@
 module uim.cake.console.arguments;
 
+@safe:
+import uim.cake;
+
 /**
  * Provides an interface for interacting with
  * a command"s options and arguments.
@@ -11,33 +14,33 @@ class Arguments
      *
      * @var array<int, string>
      */
-    protected argNames;
+    protected $argNames;
 
     /**
      * Positional arguments.
      *
      * @var array<int, string>
      */
-    protected args;
+    protected $args;
 
     /**
      * Named options
      *
      * @var array<string, string|int|bool|null>
      */
-    protected myOptions;
+    protected $options;
 
     /**
      * Constructor
      *
      * @param array<int, string> $args Positional arguments
-     * @param array<string, string|int|bool|null> myOptions Named arguments
+     * @param array<string, string|int|bool|null> $options Named arguments
      * @param array<int, string> $argNames List of argument names. Order is expected to be
      *  the same as $args.
      */
-    this(array $args, array myOptions, array $argNames) {
+    this(array $args, array $options, array $argNames) {
         this.args = $args;
-        this.options = myOptions;
+        this.options = $options;
         this.argNames = $argNames;
     }
 
@@ -56,7 +59,8 @@ class Arguments
      * @param int $index The argument index to access.
      * @return string|null The argument value or null
      */
-    Nullable!string getArgumentAt(int $index) {
+    function getArgumentAt(int $index): ?string
+    {
         if (this.hasArgumentAt($index)) {
             return this.args[$index];
         }
@@ -68,26 +72,20 @@ class Arguments
      * Check if a positional argument exists
      *
      * @param int $index The argument index to check.
+     * @return bool
      */
-<<<<<<< HEAD
     bool hasArgumentAt(int $index) {
-!==
-    bool hasArgumentAt(int $index) {
->>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
         return isset(this.args[$index]);
     }
 
     /**
      * Check if a positional argument exists by name
      *
-     * @param string myName The argument name to check.
+     * @param string aName The argument name to check.
+     * @return bool
      */
-<<<<<<< HEAD
-    bool hasArgument(string myName) {
-!==
-    bool hasArgument(string myName) {
->>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
-        $offset = array_search(myName, this.argNames, true);
+    bool hasArgument(string aName) {
+        $offset = array_search($name, this.argNames, true);
         if ($offset == false) {
             return false;
         }
@@ -98,11 +96,12 @@ class Arguments
     /**
      * Check if a positional argument exists by name
      *
-     * @param string myName The argument name to check.
+     * @param string aName The argument name to check.
      * @return string|null
      */
-    Nullable!string getArgument(string myName) {
-        $offset = array_search(myName, this.argNames, true);
+    function getArgument(string aName): ?string
+    {
+        $offset = array_search($name, this.argNames, true);
         if ($offset == false || !isset(this.args[$offset])) {
             return null;
         }
@@ -115,30 +114,27 @@ class Arguments
      *
      * @return array<string, string|int|bool|null>
      */
-    array getOptions() {
+    function getOptions() {
         return this.options;
     }
 
     /**
      * Get an option"s value or null
      *
-     * @param string myName The name of the option to check.
+     * @param string aName The name of the option to check.
      * @return string|int|bool|null The option value or null.
      */
-    auto getOption(string myName) {
-        return this.options[myName] ?? null;
+    function getOption(string aName) {
+        return this.options[$name] ?? null;
     }
 
     /**
      * Check if an option is defined and not null.
      *
-     * @param string myName The name of the option to check.
+     * @param string aName The name of the option to check.
+     * @return bool
      */
-<<<<<<< HEAD
-    bool hasOption(string myName) {
-!==
-    bool hasOption(string myName) {
->>>>>>> 239609fef6473c0db75e1e8d3858d91274903fc2
-        return isset(this.options[myName]);
+    bool hasOption(string aName) {
+        return isset(this.options[$name]);
     }
 }

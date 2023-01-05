@@ -1,19 +1,11 @@
 module uim.cake.commands;
 
-import uim.cake.caches.Cache;
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
+@safe:
+import uim.cake;
 
-/**
- * CacheClearall command.
- */
+// CacheClearall command.
 class CacheClearallCommand : Command {
-    /**
-     * Get the command name.
-     *
-     * @return string
-     */
+    //  Get the command name.
     static string defaultName() {
         return "cache clear_all";
     }

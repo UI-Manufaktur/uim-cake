@@ -34,7 +34,7 @@ class CacheRegistry : ObjectRegistry
      * @throws \BadMethodCallException
      */
     protected void _throwMissingClassError(string myClass, Nullable!string myPlugin) {
-        throw new BadMethodCallException(sprintf("Cache engine %s is not available.", myClass));
+      throw new BadMethodCallException(sprintf("Cache engine %s is not available.", myClass));
     }
 
     /**
@@ -49,29 +49,29 @@ class CacheRegistry : ObjectRegistry
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
     protected CacheEngine _create(myClass, string myAlias, array myConfig) {
-        if (is_object(myClass)) {
-            $instance = myClass;
-        } else {
-            $instance = new myClass(myConfig);
-        }
-        unset(myConfig["className"]);
+      if (is_object(myClass)) {
+          $instance = myClass;
+      } else {
+          $instance = new myClass(myConfig);
+      }
+      unset(myConfig["className"]);
 
-        if (!($instance instanceof CacheEngine)) {
-            throw new RuntimeException(
-                "Cache engines must import uim.cake.caches\CacheEngine as a base class."
-            );
-        }
+      if (!($instance instanceof CacheEngine)) {
+          throw new RuntimeException(
+              "Cache engines must import uim.cake.caches\CacheEngine as a base class."
+          );
+      }
 
-        if (!$instance.init(myConfig)) {
-            throw new RuntimeException(
-                sprintf(
-                    "Cache engine %s is not properly configured. Check error log for additional information.",
-                    get_class($instance)
-                )
-            );
-        }
+      if (!$instance.init(myConfig)) {
+          throw new RuntimeException(
+              sprintf(
+                  "Cache engine %s is not properly configured. Check error log for additional information.",
+                  get_class($instance)
+              )
+          );
+      }
 
-        return $instance;
+      return $instance;
     }
 
     /**
@@ -81,8 +81,8 @@ class CacheRegistry : ObjectRegistry
      * @return this
      */
     function unload(string myName) {
-        unset(_loaded[myName]);
+      unset(_loaded[myName]);
 
-        return this;
+      return this;
     }
 }

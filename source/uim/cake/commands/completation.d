@@ -1,12 +1,8 @@
 module uim.cake.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.commandCollection;
-import uim.cake.console.commandCollectionAwareInterface;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
-import uim.cake.console.Shell;
-import uim.cakeilities.Inflector;
+@safe:
+import uim.cake;
+
 use ReflectionClass;
 use ReflectionMethod;
 

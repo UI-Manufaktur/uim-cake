@@ -1,9 +1,7 @@
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.routings.Router;
+@safe:
+import uim.cake;
 
 /**
  * Provides interactive CLI tools for routing.

@@ -1,11 +1,8 @@
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.core.App;
-import uim.cake.core.Plugin;
-import uim.cake.utilities.Inflector;
+@safe:
+import uim.cake;
+
 use DirectoryIterator;
 
 /**
@@ -13,7 +10,7 @@ use DirectoryIterator;
  */
 class I18nInitCommand : Command {
 
-    static string defaultName()string
+    static string defaultName()
     {
         return "i18n init";
     }

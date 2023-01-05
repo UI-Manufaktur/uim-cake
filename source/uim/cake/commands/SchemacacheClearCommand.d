@@ -1,10 +1,7 @@
 module uim.cake.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.console.consoleOptionParser;
-import uim.cake.databasess.SchemaCache;
-import uim.cake.datasources\ConnectionManager;
+@safe:
+import uim.cake;
 use RuntimeException;
 
 /**

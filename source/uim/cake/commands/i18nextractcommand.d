@@ -1,17 +1,9 @@
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.core.App;
-import uim.cake.core.Configure;
-import uim.cake.core.Plugin;
-import uim.cake.filesystems.Filesystem;
-import uim.cake.utilities.Inflector;
+@safe:
+import uim.cake;
 
-/**
- * Language string extractor
- */
+// Language string extractor
 class I18nExtractCommand : Command {
 
     static string defaultName() {

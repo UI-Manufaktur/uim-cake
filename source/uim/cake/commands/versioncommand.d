@@ -1,8 +1,7 @@
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.core.Configure;
+@safe:
+import uim.cake;
 
 /**
  * Print out the version of CakePHP in use.

@@ -1,8 +1,7 @@
 module uim.cake.command;
 
-import uim.cake.console.Arguments;
-import uim.cake.console.consoleIo;
-import uim.cake.core.Configure;
+@safe:
+import uim.cake;
 
 /**
  * Print out the version of UIM in use.

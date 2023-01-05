@@ -1,8 +1,7 @@
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
+@safe:
+import uim.cake;
 
 /**
  * Command for copying plugin assets to app"s webroot.

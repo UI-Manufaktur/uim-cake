@@ -3,15 +3,6 @@ module uim.cake.command;
 @safe:
 import uim.cake;
 
-module uim.cake.commands;
-
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.BaseCommand;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.datasources.ModelAwareTrait;
-import uim.cake.logs.LogTrait;
-import uim.cake.orm.locators.LocatorAwareTrait;
-
 /**
  * Base class for commands using the full stack
  * CakePHP Framework.

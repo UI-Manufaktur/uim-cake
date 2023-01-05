@@ -1,19 +1,14 @@
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.http.exceptions.RedirectException;
-import uim.cake.http.ServerRequest;
-import uim.cake.routings.exceptions.MissingRouteException;
-import uim.cake.routings.Router;
+@safe:
+import uim.cake;
 
 /**
  * Provides interactive CLI tool for testing routes.
  */
 class RoutesCheckCommand : Command {
 
-    static string defaultName()string
+    static string defaultName()
     {
         return "routes check";
     }

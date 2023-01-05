@@ -3,6 +3,9 @@ module uim.cake.console;
 @safe:
 import uim.cake;
 
+import uim.cake.consoles.exceptions.ConsoleException;
+use SimpleXMLElement;
+
 /**
  * An object to represent a single argument used in the command line.
  * ConsoleOptionParser creates these when you use addArgument()
@@ -11,45 +14,49 @@ import uim.cake;
  */
 class ConsoleInputArgument {
     // Name of the argument.
-    protected string _name;
-    // Get the value of the name attribute.
-    @property string name() {
-        return _name;
-    }
+    protected string $_name;
 
-    /**
-     * Help string
-     */
-    protected string _help;
+    // Help string
+    protected string $_help;
 
     // Is this option required?
     protected bool $_required;
 
-    // An array of valid choices for this argument.
+    /**
+     * An array of valid choices for this argument.
+     */
     protected string[] $_choices;
 
     /**
      * Make a new Input Argument
      *
-     * @param array<string, mixed>|string myName The long name of the option, or an array with all the properties.
-     * @param string help The help text for this option
+     * @param array<string, mixed>|string aName The long name of the option, or an array with all the properties.
+     * @param string $help The help text for this option
      * @param bool $required Whether this argument is required. Missing required args will trigger exceptions
      * @param array<string> $choices Valid choices for this option.
      */
-    this(myName, $help = "", $required = false, $choices = []) {
-        if (is_array(myName) && isset(myName["name"])) {
-            foreach (myKey, myValue; myName) {
-                this.{"_" ~ myKey} = myValue;
+    this($name, $help = "", $required = false, $choices = []) {
+        if (is_array($name) && isset($name["name"])) {
+            foreach ($name as $key: $value) {
+                this.{"_" ~ $key} = $value;
             }
         } else {
             /** @psalm-suppress PossiblyInvalidPropertyAssignmentValue */
-            _name = myName;
+            _name = $name;
             _help = $help;
             _required = $required;
             _choices = $choices;
         }
     }
 
+    /**
+     * Get the value of the name attribute.
+     *
+     * @return Value of _name.
+     */
+    string name() {
+      return _name;
+    }
 
     /**
      * Checks if this argument is equal to another argument.
@@ -57,7 +64,8 @@ class ConsoleInputArgument {
      * @param uim.cake.consoles.ConsoleInputArgument $argument ConsoleInputArgument to compare to.
      */
     bool isEqualTo(ConsoleInputArgument $argument) {
-        return this.usage() == $argument.usage();
+        return this.name() == $argument.name() &&
+            this.usage() == $argument.usage();
     }
 
     /**
@@ -66,9 +74,9 @@ class ConsoleInputArgument {
      * @param int $width The width to make the name of the option.
      */
     string help(int $width = 0) {
-        string myName = this.name;
-        if (strlen(myName) < $width) {
-            myName = str_pad(myName, $width, " ");
+        $name = _name;
+        if (strlen($name) < $width) {
+            $name = str_pad($name, $width, " ");
         }
         $optional = "";
         if (!this.isRequired()) {
@@ -78,46 +86,51 @@ class ConsoleInputArgument {
             $optional .= sprintf(" <comment>(choices: %s)</comment>", implode("|", _choices));
         }
 
-        return sprintf("%s%s%s", myName, _help, $optional);
+        return sprintf("%s%s%s", $name, _help, $optional);
     }
 
-    // Get the usage value for this argument
+    /**
+     * Get the usage value for this argument
+     */
     string usage() {
-        string myName = name;
+        $name = _name;
         if (_choices) {
-            myName = implode("|", _choices);
+            $name = implode("|", _choices);
         }
-        myName = "<" ~ myName ~ ">";
+        $name = "<" ~ $name ~ ">";
         if (!this.isRequired()) {
-            myName = "[" ~ myName ~ "]";
+            $name = "[" ~ $name ~ "]";
         }
 
-        return myName;
+        return $name;
     }
 
     /**
      * Check if this argument is a required argument
+     *
+     * @return bool
+     */
     bool isRequired() {
         return _required;
     }
 
     /**
-     * Check that myValue is a valid choice for this argument.
+     * Check that $value is a valid choice for this argument.
      *
-     * @param string myValue The choice to validate.
+     * @param string $value The choice to validate.
      * @return true
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    bool validChoice(string myValue) {
+    bool validChoice(string $value) {
         if (empty(_choices)) {
             return true;
         }
-        if (!in_array(myValue, _choices, true)) {
+        if (!in_array($value, _choices, true)) {
             throw new ConsoleException(
                 sprintf(
                     ""%s" is not a valid value for %s. Please use one of "%s"",
-                    myValue,
-                    name,
+                    $value,
+                    _name,
                     implode(", ", _choices)
                 )
             );
@@ -135,11 +148,11 @@ class ConsoleInputArgument {
     function xml(SimpleXMLElement $parent): SimpleXMLElement
     {
         $option = $parent.addChild("argument");
-        $option.addAttribute("name", name);
+        $option.addAttribute("name", _name);
         $option.addAttribute("help", _help);
         $option.addAttribute("required", (string)(int)this.isRequired());
         $choices = $option.addChild("choices");
-        foreach ($valid; _choices) {
+        foreach (_choices as $valid) {
             $choices.addChild("choice", $valid);
         }
 

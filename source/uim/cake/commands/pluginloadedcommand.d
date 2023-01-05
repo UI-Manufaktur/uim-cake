@@ -1,16 +1,12 @@
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.core.Plugin;
+@safe:
+import uim.cake;
 
-/**
- * Displays all currently loaded plugins.
- */
+// Displays all currently loaded plugins.
 class PluginLoadedCommand : Command {
 
-    static string defaultName()string
+    static string defaultName()
     {
         return "plugin loaded";
     }
@@ -36,8 +32,7 @@ class PluginLoadedCommand : Command {
      * @param uim.cake.consoles.ConsoleOptionParser $parser The option parser to update
      * @return uim.cake.consoles.ConsoleOptionParser
      */
-    function buildOptionParser(ConsoleOptionParser $parser): ConsoleOptionParser
-    {
+    ConsoleOptionParser buildOptionParser(ConsoleOptionParser $parser) {
         $parser.setDescription("Displays all currently loaded plugins.");
 
         return $parser;

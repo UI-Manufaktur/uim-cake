@@ -9,10 +9,7 @@ import uim.cake.consoles.ShellDispatcher;
  */
 class LegacyShellDispatcher : ShellDispatcher
 {
-    /**
-     * @var uim.cake.consoles.ConsoleIo
-     */
-    protected $_io;
+    protected ConsoleIo _io;
 
     /**
      * Constructor
@@ -22,7 +19,6 @@ class LegacyShellDispatcher : ShellDispatcher
      * @param uim.cake.consoles.ConsoleIo|null $io ConsoleIo
      */
     this(array $args = [], bool $bootstrap = true, ?ConsoleIo $io = null) {
-        /** @psalm-suppress PossiblyNullPropertyAssignmentValue */
         _io = $io;
         super(($args, $bootstrap);
     }

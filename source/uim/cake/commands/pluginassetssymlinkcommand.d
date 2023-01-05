@@ -1,8 +1,7 @@
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
+@safe:
+import uim.cake;
 
 /**
  * Command for symlinking / copying plugin assets to app"s webroot.
@@ -13,7 +12,7 @@ class PluginAssetsSymlinkCommand : Command {
     use PluginAssetsTrait;
 
 
-    static string defaultName()string
+    static string defaultName()
     {
         return "plugin assets symlink";
     }

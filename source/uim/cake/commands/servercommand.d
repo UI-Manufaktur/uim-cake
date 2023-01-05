@@ -1,21 +1,9 @@
-
-
-
- *
-
-
- * @since         2.3.0
-  */
 module uim.cake.commands;
 
-import uim.cake.consoles.Arguments;
-import uim.cake.consoles.ConsoleIo;
-import uim.cake.consoles.ConsoleOptionParser;
-import uim.cake.core.Configure;
+@safe:
+import uim.cake;
 
-/**
- * built-in Server command
- */
+// built-in Server command
 class ServerCommand : Command {
     /**
      * Default ServerHost
