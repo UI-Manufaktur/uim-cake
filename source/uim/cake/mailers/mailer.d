@@ -319,8 +319,7 @@ class Mailer : IEventListener
      * @throws \BadMethodCallException
      * @psalm-return array{headers: string, message: string}
      */
-    array send(?string $action = null, array $args = [], array $headers = [])
-    {
+    array send(?string $action = null, array $args = [], array $headers = []) {
         if ($action == null) {
             return this.deliver();
         }
@@ -590,8 +589,7 @@ class Mailer : IEventListener
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         return [];
     }
 }

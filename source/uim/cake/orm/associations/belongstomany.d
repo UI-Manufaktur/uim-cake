@@ -190,8 +190,7 @@ class BelongsToMany : Association
     }
 
 
-    array defaultRowValue(array $row, bool $joined)
-    {
+    array defaultRowValue(array $row, bool $joined) {
         $sourceAlias = this.getSource().getAlias();
         if (isset($row[$sourceAlias])) {
             $row[$sourceAlias][this.getProperty()] = $joined ? null : [];
@@ -477,8 +476,7 @@ class BelongsToMany : Association
      *
      * @param array<string, mixed> $options list of options passed to attachTo method
      */
-    protected array _joinCondition(array $options)
-    {
+    protected array _joinCondition(array $options) {
         return [];
     }
 
@@ -946,8 +944,7 @@ class BelongsToMany : Association
      * the junction table.
      *
      */
-    protected array junctionConditions()
-    {
+    protected array junctionConditions() {
         if (_junctionConditions != null) {
             return _junctionConditions;
         }
@@ -1285,8 +1282,7 @@ class BelongsToMany : Association
      *   key value
      * @return array<uim.cake.Datasource\IEntity>
      */
-    protected array _collectJointEntities(IEntity $sourceEntity, array $targetEntities)
-    {
+    protected array _collectJointEntities(IEntity $sourceEntity, array $targetEntities) {
         $target = this.getTarget();
         $source = this.getSource();
         $junction = this.junction();

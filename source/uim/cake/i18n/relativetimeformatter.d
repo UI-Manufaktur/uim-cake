@@ -175,8 +175,7 @@ class RelativeTimeFormatter : DifferenceIFormatter
      * @param array<string, mixed> $options An array of options.
      * @return array An array of values.
      */
-    protected array _diffData($futureTime, $pastTime, bool $backwards, $options)
-    {
+    protected array _diffData($futureTime, $pastTime, bool $backwards, $options) {
         $futureTime = (int)$futureTime;
         $pastTime = (int)$pastTime;
         $diff = $futureTime - $pastTime;
@@ -380,8 +379,7 @@ class RelativeTimeFormatter : DifferenceIFormatter
      * @return array<string, mixed> Options with defaults applied.
      * @psalm-param class-string<uim.cake.I18n\FrozenDate>|class-string<uim.cake.I18n\FrozenTime> $class
      */
-    protected array _options(array $options, string $class)
-    {
+    protected array _options(array $options, string $class) {
         $options += [
             "from": $class::now(),
             "timezone": null,

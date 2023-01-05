@@ -162,8 +162,7 @@ class Router
      * @return array<string, string> Named route elements
      * @see uim.cake.routings.Router::$_namedExpressions
      */
-    static array getNamedExpressions()
-    {
+    static array getNamedExpressions() {
         return static::$_namedExpressions;
     }
 

@@ -111,8 +111,7 @@ class RouteCollection
      * @return array An array of request parameters parsed from the URL.
      * @throws uim.cake.routings.exceptions.MissingRouteException When a URL has no matching route.
      */
-    array parse(string $url, string $method = "")
-    {
+    array parse(string $url, string $method = "") {
         $decoded = urldecode($url);
 
         // Sort path segments matching longest paths first.
@@ -195,8 +194,7 @@ class RouteCollection
      * @param array $url The url to match.
      * @return array<string> The set of names of the url
      */
-    protected string[] _getNames(array $url)
-    {
+    protected string[] _getNames(array $url) {
         $plugin = false;
         if (isset($url["plugin"]) && $url["plugin"] != false) {
             $plugin = strtolower($url["plugin"]);
@@ -321,8 +319,7 @@ class RouteCollection
      *
      * @return array<uim.cake.routings.Route\Route>
      */
-    array routes()
-    {
+    array routes() {
         krsort(_paths);
 
         return array_reduce(
@@ -337,8 +334,7 @@ class RouteCollection
      *
      * @return array<uim.cake.routings.Route\Route>
      */
-    array named()
-    {
+    array named() {
         return _named;
     }
 
@@ -347,8 +343,7 @@ class RouteCollection
      *
      * @return array<string> The valid extensions.
      */
-    string[] getExtensions()
-    {
+    string[] getExtensions() {
         return _extensions;
     }
 
@@ -450,8 +445,7 @@ class RouteCollection
      *   the groups middleware will be flattened into the returned list.
      * @throws \RuntimeException when a requested middleware does not exist.
      */
-    array getMiddleware(array $names)
-    {
+    array getMiddleware(array $names) {
         $out = [];
         foreach ($names as $name) {
             if (this.hasMiddlewareGroup($name)) {

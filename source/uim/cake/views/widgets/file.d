@@ -54,8 +54,7 @@ class FileWidget : BasicWidget
     }
 
     
-    array secureFields(array myData)
-    {
+    array secureFields(array myData) {
         // PSR7 UploadedFileInterface objects are used.
         if (Configure::read("App.uploadedFilesAsObjects", true)) {
             return [myData["name"]];

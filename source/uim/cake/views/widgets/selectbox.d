@@ -160,8 +160,7 @@ class SelectBoxWidget : BasicWidget
      * @param array|string|bool myValue The provided empty value.
      * @return array The generated option key/value.
      */
-    protected array _emptyValue(myValue)
-    {
+    protected array _emptyValue(myValue) {
         if (myValue == true) {
             return ["": ""];
         }

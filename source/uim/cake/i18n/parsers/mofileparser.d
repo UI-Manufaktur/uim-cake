@@ -41,8 +41,7 @@ class MoFileParser
      * @return array List of messages extracted from the file
      * @throws \RuntimeException If stream content has an invalid format.
      */
-    array parse($file)
-    {
+    array parse($file) {
         $stream = fopen($file, "rb");
 
         $stat = fstat($stream);

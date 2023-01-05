@@ -226,8 +226,7 @@ class SelectBoxWidget : BasicWidget
      * @param bool $escape Toggle HTML escaping.
      * @return array<string> Option elements.
      */
-    protected string[] _renderOptions(iterable $options, ?array $disabled, $selected, $templateVars, $escape)
-    {
+    protected string[] _renderOptions(iterable $options, ?array $disabled, $selected, $templateVars, $escape) {
         $out = [];
         foreach ($options as $key: $val) {
             // Option groups

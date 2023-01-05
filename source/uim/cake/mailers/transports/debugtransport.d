@@ -25,8 +25,7 @@ import uim.cake.mailers.Message;
 class DebugTransport : AbstractTransport
 {
 
-    array send(Message $message)
-    {
+    array send(Message $message) {
         $headers = $message.getHeadersString(
             ["from", "sender", "replyTo", "readReceipt", "returnPath", "to", "cc", "subject"]
         );

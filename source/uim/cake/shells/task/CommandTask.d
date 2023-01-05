@@ -45,8 +45,7 @@ class CommandTask : Shell {
      * @param $skip A list of commands to exclude.
      * @return array<string, mixed> The updated list of shells.
      */
-    protected array _findShells(array myShellList, string myPath, string myKey, string[] $skip)
-    {
+    protected array _findShells(array myShellList, string myPath, string myKey, string[] $skip) {
         myShells = _scanDir(myPath);
 
         return _appendShells(myKey, myShells, myShellList, $skip);
@@ -61,8 +60,7 @@ class CommandTask : Shell {
      * @param $skip List of command names to skip.
      * @return array<string, mixed> The updated myShellList
      */
-    protected array _appendShells(string myType, string[] myShells, array myShellList, string[] $skip)
-    {
+    protected array _appendShells(string myType, string[] myShells, array myShellList, string[] $skip) {
         myShellList[myType] = myShellList[myType] ?? [];
 
         foreach (myShells as myShell) {

@@ -647,8 +647,7 @@ class Cookie : ICookie
     }
 
 
-    array getOptions()
-    {
+    array getOptions() {
         myOptions = [
             "expires":(int)this.getExpiresTimestamp(),
             "path":this.path,
@@ -665,8 +664,7 @@ class Cookie : ICookie
     }
 
 
-    array toArray()
-    {
+    array toArray() {
         return [
             "name":this.name,
             "value":this.getScalarValue(),

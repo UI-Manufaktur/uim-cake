@@ -147,8 +147,7 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      * @return array A list of implemented finders and methods.
      * @throws \LogicException when duplicate methods are connected.
      */
-    protected array _getMethods(Behavior $instance, string $class, string $alias)
-    {
+    protected array _getMethods(Behavior $instance, string $class, string $alias) {
         $finders = array_change_key_case($instance.implementedFinders());
         $methods = array_change_key_case($instance.implementedMethods());
 

@@ -656,8 +656,7 @@ class Cookie : CookieInterface
     }
 
 
-    array getOptions()
-    {
+    array getOptions() {
         $options = [
             "expires": (int)this.getExpiresTimestamp(),
             "path": this.path,
@@ -674,8 +673,7 @@ class Cookie : CookieInterface
     }
 
 
-    array toArray()
-    {
+    array toArray() {
         return [
             "name": this.name,
             "value": this.getScalarValue(),

@@ -48,8 +48,7 @@ class Marshaller
      * @param array<string, mixed> $options List of options containing the "associated" key.
      * @throws \InvalidArgumentException When associations do not exist.
      */
-    protected array _buildPropertyMap(array $data, array $options)
-    {
+    protected array _buildPropertyMap(array $data, array $options) {
         $map = [];
         $schema = _table.getSchema();
 
@@ -227,8 +226,7 @@ class Marshaller
      * @return array The list of validation errors.
      * @throws \RuntimeException If no validator can be created.
      */
-    protected function _validate(array $data, array $options, bool $isNew)
-    {
+    protected function _validate(array $data, array $options, bool $isNew) {
         if (!$options["validate"]) {
             return [];
         }
@@ -264,8 +262,7 @@ class Marshaller
      * @param array<string, mixed> $options The options passed to this marshaller.
      * @return array An array containing prepared data and options.
      */
-    protected function _prepareDataAndOptions(array $data, array $options)
-    {
+    protected function _prepareDataAndOptions(array $data, array $options) {
         $options += ["validate": true];
 
         $tableName = _table.getAlias();
@@ -340,8 +337,7 @@ class Marshaller
      * @see uim.cake.orm.Table::newEntities()
      * @see uim.cake.orm.Entity::$_accessible
      */
-    function many(array $data, array $options = [])
-    {
+    function many(array $data, array $options = []) {
         $output = [];
         foreach ($data as $record) {
             if (!is_array($record)) {
@@ -367,8 +363,7 @@ class Marshaller
      * @throws \InvalidArgumentException
      * @throws \RuntimeException
      */
-    protected function _belongsToMany(BelongsToMany $assoc, array $data, array $options = [])
-    {
+    protected function _belongsToMany(BelongsToMany $assoc, array $data, array $options = []) {
         $associated = $options["associated"] ?? [];
         $forceNew = $options["forceNew"] ?? false;
 
@@ -458,8 +453,7 @@ class Marshaller
      * @param array $ids The list of ids to load.
      * @return array<uim.cake.Datasource\IEntity> An array of entities.
      */
-    protected function _loadAssociatedByIds(Association $assoc, array $ids)
-    {
+    protected function _loadAssociatedByIds(Association $assoc, array $ids) {
         if (empty($ids)) {
             return [];
         }
@@ -642,8 +636,7 @@ class Marshaller
      * @see uim.cake.orm.Entity::$_accessible
      * @psalm-suppress NullArrayOffset
      */
-    function mergeMany(iterable $entities, array $data, array $options = [])
-    {
+    function mergeMany(iterable $entities, array $data, array $options = []) {
         $primary = (array)_table.getPrimaryKey();
 
         $indexed = (new Collection($data))
@@ -768,8 +761,7 @@ class Marshaller
      * @param array<string, mixed> $options List of options.
      * @return array<uim.cake.Datasource\IEntity>
      */
-    protected function _mergeBelongsToMany(array $original, BelongsToMany $assoc, array $value, array $options)
-    {
+    protected function _mergeBelongsToMany(array $original, BelongsToMany $assoc, array $value, array $options) {
         $associated = $options["associated"] ?? [];
 
         $hasIds = array_key_exists("_ids", $value);
@@ -798,8 +790,7 @@ class Marshaller
      * @param array<string, mixed> $options List of options.
      * @return array<uim.cake.Datasource\IEntity> An array of entities
      */
-    protected function _mergeJoinData(array $original, BelongsToMany $assoc, array $value, array $options)
-    {
+    protected function _mergeJoinData(array $original, BelongsToMany $assoc, array $value, array $options) {
         $associated = $options["associated"] ?? [];
         $extra = [];
         foreach ($original as $entity) {

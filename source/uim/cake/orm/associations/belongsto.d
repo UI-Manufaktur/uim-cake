@@ -118,8 +118,7 @@ class BelongsTo : Association {
      * @throws \RuntimeException if the number of columns in the foreignKey do not
      * match the number of columns in the target table primaryKey
      */
-    protected array _joinCondition(array $options)
-    {
+    protected array _joinCondition(array $options) {
         $conditions = [];
         $tAlias = _name;
         $sAlias = _sourceTable.getAlias();

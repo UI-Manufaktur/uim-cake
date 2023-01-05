@@ -44,8 +44,7 @@ class HttpException : CakeException
      *
      * @return array<string, mixed>
      */
-    array getHeaders()
-    {
+    array getHeaders() {
         return this.headers;
     }
 }

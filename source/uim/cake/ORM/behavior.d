@@ -192,8 +192,7 @@ class Behavior : IEventListener
      * @param array<string, mixed> $config The customized method mappings.
      * @return array A de-duped list of config data.
      */
-    protected array _resolveMethodAliases(string aKey, array $defaults, array $config)
-    {
+    protected array _resolveMethodAliases(string aKey, array $defaults, array $config) {
         if (!isset($defaults[$key], $config[$key])) {
             return $config;
         }
@@ -255,8 +254,7 @@ class Behavior : IEventListener
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         $eventMap = [
             "Model.beforeMarshal": "beforeMarshal",
             "Model.afterMarshal": "afterMarshal",
@@ -315,8 +313,7 @@ class Behavior : IEventListener
      * @return array
      * @throws \ReflectionException
      */
-    array implementedFinders()
-    {
+    array implementedFinders() {
         $methods = this.getConfig("implementedFinders");
         if (isset($methods)) {
             return $methods;
@@ -347,8 +344,7 @@ class Behavior : IEventListener
      * @return array
      * @throws \ReflectionException
      */
-    array implementedMethods()
-    {
+    array implementedMethods() {
         $methods = this.getConfig("implementedMethods");
         if (isset($methods)) {
             return $methods;
@@ -367,8 +363,7 @@ class Behavior : IEventListener
      * @return array
      * @throws \ReflectionException
      */
-    protected array _reflectionCache()
-    {
+    protected array _reflectionCache() {
         $class = static::class;
         if (isset(self::$_reflectionCache[$class])) {
             return self::$_reflectionCache[$class];

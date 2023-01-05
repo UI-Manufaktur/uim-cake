@@ -108,8 +108,7 @@ class CorsBuilder
      * @param $domains Domain names to normalize.
      * @return array
      */
-    protected array _normalizeDomains(string[] $domains)
-    {
+    protected array _normalizeDomains(string[] $domains) {
         myResult = [];
         foreach ($domains as $domain) {
             if ($domain == "*") {

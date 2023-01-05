@@ -651,8 +651,7 @@ class EntityContext : IContext {
      * @param string myField A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    array attributes(string myField)
-    {
+    array attributes(string myField) {
         $parts = explode(".", myField);
         myTable = _getTable($parts);
         if (!myTable) {
@@ -681,8 +680,7 @@ class EntityContext : IContext {
      * @param string myField A dot separated path to check errors on.
      * @return array An array of errors.
      */
-    array error(string myField)
-    {
+    array error(string myField) {
         $parts = explode(".", myField);
         try {
             [$entity, $remainingParts] = this.leafEntity($parts);

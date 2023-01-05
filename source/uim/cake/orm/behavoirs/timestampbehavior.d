@@ -105,8 +105,7 @@ class TimestampBehavior : Behavior {
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         return array_fill_keys(array_keys(_config["events"]), "handleEvent");
     }
 

@@ -25,8 +25,7 @@ import uim.cake.mailers.Message;
 class MailTransport : AbstractTransport
 {
 
-    array send(Message $message)
-    {
+    array send(Message $message) {
         this.checkRecipient($message);
 
         // https://github.com/cakephp/cakephp/issues/2209

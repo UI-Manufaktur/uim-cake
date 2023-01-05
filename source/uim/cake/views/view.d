@@ -1210,8 +1210,7 @@ class View : IEventDispatcher {
      * @return array Array with 2 indexes. 0: plugin name, 1: filename.
      * @psalm-return array{string|null, string}
      */
-    array pluginSplit(string myName, bool $fallback = true)
-    {
+    array pluginSplit(string myName, bool $fallback = true) {
         myPlugin = null;
         [$first, $second] = pluginSplit(myName);
         if ($first && Plugin::isLoaded($first)) {

@@ -176,8 +176,7 @@ class SaveOptionsBuilder : ArrayObject {
 
     /**
      */
-    array toArray()
-    {
+    array toArray() {
         return _options;
     }
 

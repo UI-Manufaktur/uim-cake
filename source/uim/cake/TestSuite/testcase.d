@@ -1033,8 +1033,7 @@ abstract class TestCase : BaseTestCase
      *
      * @return array<string>
      */
-    string[] getFixtures()
-    {
+    string[] getFixtures() {
         return this.fixtures;
     }
 }

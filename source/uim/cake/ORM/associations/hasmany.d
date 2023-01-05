@@ -573,8 +573,7 @@ class HasMany : Association
     }
 
 
-    array defaultRowValue(array $row, bool $joined)
-    {
+    array defaultRowValue(array $row, bool $joined) {
         $sourceAlias = this.getSource().getAlias();
         if (isset($row[$sourceAlias])) {
             $row[$sourceAlias][this.getProperty()] = $joined ? null : [];

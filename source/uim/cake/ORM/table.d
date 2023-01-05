@@ -1396,8 +1396,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * the associated value
      * @return array<string, mixed>
      */
-    protected array _setFieldMatchers(array $options, array $keys)
-    {
+    protected array _setFieldMatchers(array $options, array $keys) {
         foreach ($keys as $field) {
             if (!is_array($options[$field])) {
                 continue;
@@ -2733,8 +2732,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
-    array newEntities(array $data, array $options = [])
-    {
+    array newEntities(array $data, array $options = []) {
         $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
@@ -2831,8 +2829,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity>
      */
-    array patchEntities(iterable $entities, array $data, array $options = [])
-    {
+    array patchEntities(iterable $entities, array $data, array $options = []) {
         $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();
 
@@ -2928,8 +2925,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         $eventMap = [
             "Model.beforeMarshal": "beforeMarshal",
             "Model.afterMarshal": "afterMarshal",

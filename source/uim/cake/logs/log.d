@@ -216,8 +216,7 @@ class Log
      *
      * @return array<string> Active log levels
      */
-    static array levels()
-    {
+    static array levels() {
         return static::$_levels;
     }
 

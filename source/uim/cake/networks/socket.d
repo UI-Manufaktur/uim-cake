@@ -285,8 +285,7 @@ class Socket
      *
      * @return array IP addresses
      */
-    array addresses()
-    {
+    array addresses() {
         if (Validation::ip(_config["host"])) {
             return [_config["host"]];
         }

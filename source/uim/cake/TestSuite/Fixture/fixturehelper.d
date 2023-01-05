@@ -19,8 +19,7 @@ class FixtureHelper
      * @param array<string> $fixtureNames Fixture names from test case
      * @return array<uim.cake.Datasource\IFixture>
      */
-    array loadFixtures(array $fixtureNames)
-    {
+    array loadFixtures(array $fixtureNames) {
         static $cachedFixtures = [];
 
         $fixtures = [];
@@ -245,8 +244,7 @@ class FixtureHelper
      * @param uim.cake.Datasource\IFixture $fixture Database fixture
      * @return array<string>
      */
-    protected array getForeignReferences(Connection $connection, IFixture $fixture)
-    {
+    protected array getForeignReferences(Connection $connection, IFixture $fixture) {
         static $schemas = [];
 
         // Get and cache off the schema since TestFixture generates a fake schema based on $fields

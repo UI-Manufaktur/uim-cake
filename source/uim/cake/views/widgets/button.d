@@ -61,8 +61,7 @@ class ButtonWidget : IWidget
     }
 
 
-    array secureFields(array myData)
-    {
+    array secureFields(array myData) {
         if (!isset(myData["name"]) || myData["name"] == "") {
             return [];
         }

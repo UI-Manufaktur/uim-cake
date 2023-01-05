@@ -266,8 +266,7 @@ class ResultSet : IResultSet
     /**
      * Serializes a resultset.
      */
-    array __serialize()
-    {
+    array __serialize() {
         if (!_useBuffering) {
             $msg = "You cannot serialize an un-buffered ResultSet~ "
                 ~ "Use Query::bufferResults() to get a buffered ResultSet.";

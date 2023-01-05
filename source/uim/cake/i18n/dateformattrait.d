@@ -465,8 +465,7 @@ trait DateFormatTrait
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         /** @psalm-suppress PossiblyNullReference */
         return [
             "time": this.format("Y-m-d H:i:s.uP"),

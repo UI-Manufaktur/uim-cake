@@ -81,8 +81,7 @@ class SelectLoader {
      * Returns the default options to use for the eagerLoader
      *
      */
-    protected array _defaultOptions()
-    {
+    protected array _defaultOptions() {
         return [
             "foreignKey":this.foreignKey,
             "conditions":[],
@@ -166,8 +165,7 @@ class SelectLoader {
      * @param array|string myFinderData The finder name or an array having the name as key
      * and options as value.
      */
-    protected array _extractFinder(myFinderData)
-    {
+    protected array _extractFinder(myFinderData) {
         myFinderData = (array)myFinderData;
 
         if (is_numeric(key(myFinderData))) {
@@ -371,8 +369,7 @@ class SelectLoader {
      * @param uim.cake.orm.Query myQuery The query to get fields from.
      * @return array<string, array> The list of fields for the subquery.
      */
-    protected array _subqueryFields(Query myQuery)
-    {
+    protected array _subqueryFields(Query myQuery) {
         myKeys = (array)this.bindingKey;
 
         if (this.associationType == Association::MANY_TO_ONE) {
@@ -403,8 +400,7 @@ class SelectLoader {
      * @param array<string, mixed> myOptions The options passed to the eager loader
      * @return array<string, mixed>
      */
-    protected array _buildResultMap(Query $fetchQuery, array myOptions)
-    {
+    protected array _buildResultMap(Query $fetchQuery, array myOptions) {
         myResultMap = [];
         $singleResult = in_array(this.associationType, [Association::MANY_TO_ONE, Association::ONE_TO_ONE], true);
         myKeys = in_array(this.associationType, [Association::ONE_TO_ONE, Association::ONE_TO_MANY], true) ?

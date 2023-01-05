@@ -300,8 +300,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets "from" address.
      */
-    array getFrom()
-    {
+    array getFrom() {
         return this.from;
     }
 
@@ -325,8 +324,7 @@ class Message : JsonSerializable, Serializable {
      * @return array
      * @link https://tools.ietf.org/html/rfc2822.html#section-3.6.2
      */
-    array getSender()
-    {
+    array getSender() {
         return this.sender;
     }
 
@@ -346,8 +344,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets "Reply-To" address.
      */
-    array getReplyTo()
-    {
+    array getReplyTo() {
         return this.replyTo;
     }
 
@@ -384,8 +381,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets Read Receipt (Disposition-Notification-To header).
      */
-    array getReadReceipt()
-    {
+    array getReadReceipt() {
         return this.readReceipt;
     }
 
@@ -405,8 +401,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets return path.
      */
-    array getReturnPath()
-    {
+    array getReturnPath() {
         return this.returnPath;
     }
 
@@ -425,8 +420,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets "to" address
      */
-    array getTo()
-    {
+    array getTo() {
         return this.to;
     }
 
@@ -457,8 +451,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets "cc" address.
      */
-    array getCc()
-    {
+    array getCc() {
         return this.cc;
     }
 
@@ -489,8 +482,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets "bcc" address.
      */
-    array getBcc()
-    {
+    array getBcc() {
         return this.bcc;
     }
 
@@ -790,8 +782,7 @@ class Message : JsonSerializable, Serializable {
      * @param array<string> $include List of headers.
      * @return array<string>
      */
-    array getHeaders(array $include = [])
-    {
+    array getHeaders(array $include = []) {
         this.createBoundary();
 
         if ($include == array_values($include)) {
@@ -908,8 +899,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @param array $address Addresses to format.
      */
-    protected array formatAddress(array $address)
-    {
+    protected array formatAddress(array $address) {
         $return = [];
         foreach ($address as $email: $alias) {
             if ($email == $alias) {
@@ -954,8 +944,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @return array Array of types. Valid types are Email::MESSAGE_TEXT and Email::MESSAGE_HTML
      */
-    array getBodyTypes()
-    {
+    array getBodyTypes() {
         $format = this.emailFormat;
 
         if ($format == static::MESSAGE_BOTH) {
@@ -1125,8 +1114,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @return array<string, array> Array of attachments.
      */
-    array getAttachments()
-    {
+    array getAttachments() {
         return this.attachments;
     }
 
@@ -1190,8 +1178,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @return array<string>
      */
-    protected array generateMessage()
-    {
+    protected array generateMessage() {
         this.createBoundary();
         $msg = [];
 
@@ -1283,8 +1270,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $boundary Boundary to use. If null, will default to this.boundary
      * @return array<string> An array of lines to add to the message
      */
-    protected array attachFiles(?string $boundary = null)
-    {
+    protected array attachFiles(?string $boundary = null) {
         if ($boundary == null) {
             /** @var string $boundary */
             $boundary = this.boundary;
@@ -1323,8 +1309,7 @@ class Message : JsonSerializable, Serializable {
      * @param string|null $boundary Boundary to use. If null, will default to this.boundary
      * @return array<string> An array of lines to add to the message
      */
-    protected array attachInlineFiles(?string $boundary = null)
-    {
+    protected array attachInlineFiles(?string $boundary = null) {
         if ($boundary == null) {
             /** @var string $boundary */
             $boundary = this.boundary;
@@ -1493,8 +1478,7 @@ class Message : JsonSerializable, Serializable {
      * @param int $wrapLength The line length
      * @return array<string> Wrapped message
      */
-    protected array wrap(?string $message = null, int $wrapLength = self::LINE_LENGTH_MUST)
-    {
+    protected array wrap(?string $message = null, int $wrapLength = self::LINE_LENGTH_MUST) {
         if ($message == null || $message == "") {
             return [""];
         }
@@ -1722,8 +1706,7 @@ class Message : JsonSerializable, Serializable {
      * @return array Serializable array of configuration properties.
      * @throws \Exception When a view var object can not be properly serialized.
      */
-    array jsonSerialize()
-    {
+    array jsonSerialize() {
         $properties = [
             "to", "from", "sender", "replyTo", "cc", "bcc", "subject",
             "returnPath", "readReceipt", "emailFormat", "emailPattern", "domain",
@@ -1774,8 +1757,7 @@ class Message : JsonSerializable, Serializable {
     /**
      * Magic method used for serializing the Message object.
      */
-    array __serialize()
-    {
+    array __serialize() {
         $array = this.jsonSerialize();
         array_walk_recursive($array, void (&$item, $key) {
             if ($item instanceof SimpleXMLElement) {

@@ -235,8 +235,7 @@ class ArrayContext : IContext
     }
 
 
-    array fieldNames()
-    {
+    array fieldNames() {
         $schema = _context["schema"];
         unset($schema["_constraints"], $schema["_indexes"]);
 
@@ -269,8 +268,7 @@ class ArrayContext : IContext
      * @param string myField A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    array attributes(string myField)
-    {
+    array attributes(string myField) {
         if (!is_array(_context["schema"])) {
             return [];
         }
@@ -306,8 +304,7 @@ class ArrayContext : IContext
      * @return array An array of errors, an empty array will be returned when the
      *    context has no errors.
      */
-    array error(string myField)
-    {
+    array error(string myField) {
         if (empty(_context["errors"])) {
             return [];
         }

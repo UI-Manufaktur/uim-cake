@@ -123,8 +123,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    array getConfig(Nullable!string myAlias = null)
-    {
+    array getConfig(Nullable!string myAlias = null) {
         if (myAlias is null) {
             return _config;
         }

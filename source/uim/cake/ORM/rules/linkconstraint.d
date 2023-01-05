@@ -106,8 +106,7 @@ class LinkConstraint
      * @param uim.cake.orm.Table $source The object to use for aliasing.
      * @return array<string> The aliased fields
      */
-    protected string[] _aliasFields(array $fields, Table $source)
-    {
+    protected string[] _aliasFields(array $fields, Table $source) {
         foreach ($fields as $key: $value) {
             $fields[$key] = $source.aliasField($value);
         }

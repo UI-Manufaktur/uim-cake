@@ -75,8 +75,7 @@ class CommandTask : Shell
      * @param array<string> $skip List of command names to skip.
      * @return array<string, mixed> The updated $shellList
      */
-    protected array _appendShells(string $type, array $shells, array $shellList, array $skip)
-    {
+    protected array _appendShells(string $type, array $shells, array $shellList, array $skip) {
         $shellList[$type] = $shellList[$type] ?? [];
 
         foreach ($shells as $shell) {
@@ -97,8 +96,7 @@ class CommandTask : Shell
      * @param string $dir The directory to read.
      * @return array<string> The list of shell classnames based on conventions.
      */
-    protected array _scanDir(string $dir)
-    {
+    protected array _scanDir(string $dir) {
         if (!is_dir($dir)) {
             return [];
         }

@@ -114,8 +114,7 @@ class EagerLoader
      * @return array Containments.
      * @throws \InvalidArgumentException When using $queryBuilder with an array of $associations
      */
-    array contain($associations, ?callable $queryBuilder = null)
-    {
+    array contain($associations, ?callable $queryBuilder = null) {
         if ($queryBuilder) {
             if (!is_string($associations)) {
                 throw new InvalidArgumentException(
@@ -147,8 +146,7 @@ class EagerLoader
      *
      * @return array Containments.
      */
-    array getContain()
-    {
+    array getContain() {
         return _containments;
     }
 
@@ -245,8 +243,7 @@ class EagerLoader
      *
      * @return array The resulting containments array
      */
-    array getMatching()
-    {
+    array getMatching() {
         if (_matching == null) {
             _matching = new static();
         }
@@ -269,8 +266,7 @@ class EagerLoader
      * @param uim.cake.orm.Table $repository The table containing the association that
      * will be normalized
      */
-    array normalized(Table $repository)
-    {
+    array normalized(Table $repository) {
         if (_normalized != null || empty(_containments)) {
             return (array)_normalized;
         }
@@ -301,8 +297,7 @@ class EagerLoader
      * @param array $original The original containments array to merge
      * with the new one
      */
-    protected array _reformatContain(array $associations, array $original)
-    {
+    protected array _reformatContain(array $associations, array $original) {
         $result = $original;
 
         foreach ($associations as $table: $options) {
@@ -411,8 +406,7 @@ class EagerLoader
      * attached
      * @return array<uim.cake.orm.EagerLoadable>
      */
-    array attachableAssociations(Table $repository)
-    {
+    array attachableAssociations(Table $repository) {
         $contain = this.normalized($repository);
         $matching = _matching ? _matching.normalized($repository) : [];
         _fixStrategies();
@@ -429,8 +423,7 @@ class EagerLoader
      * to be loaded
      * @return array<uim.cake.orm.EagerLoadable>
      */
-    array externalAssociations(Table $repository)
-    {
+    array externalAssociations(Table $repository) {
         if (_loadExternal) {
             return _loadExternal;
         }
@@ -552,8 +545,7 @@ class EagerLoader
      * @param array<uim.cake.orm.EagerLoadable> $matching list of associations that should be forcibly joined.
      * @return array<uim.cake.orm.EagerLoadable>
      */
-    protected array _resolveJoins(array $associations, array $matching = [])
-    {
+    protected array _resolveJoins(array $associations, array $matching = []) {
         $result = [];
         foreach ($matching as $table: $loadable) {
             $result[$table] = $loadable;
@@ -660,8 +652,7 @@ class EagerLoader
      * @param uim.cake.orm.Table $table The table containing the association that
      * will be normalized
      */
-    array associationsMap(Table $table)
-    {
+    array associationsMap(Table $table) {
         $map = [];
 
         if (!this.getMatching() && !this.getContain() && empty(_joinsMap)) {
@@ -683,8 +674,7 @@ class EagerLoader
      * @param array<uim.cake.orm.EagerLoadable> $level An array of EagerLoadable instances.
      * @param bool $matching Whether it is an association loaded through `matching()`.
      */
-    protected array _buildAssociationsMap(array $map, array $level, bool $matching = false)
-    {
+    protected array _buildAssociationsMap(array $map, array $level, bool $matching = false) {
         foreach ($level as $assoc: $meta) {
             $canBeJoined = $meta.canBeJoined();
             $instance = $meta.instance();
@@ -743,8 +733,7 @@ class EagerLoader
      * @param uim.cake.orm.Query $query The query from which the results where generated
      * @param uim.cake.databases.StatementInterface $statement The statement to work on
      */
-    protected array _collectKeys(array $external, Query $query, $statement)
-    {
+    protected array _collectKeys(array $external, Query $query, $statement) {
         $collectKeys = [];
         foreach ($external as $meta) {
             $instance = $meta.instance();
@@ -782,8 +771,7 @@ class EagerLoader
      * @param uim.cake.databases.Statement\BufferedStatement $statement The statement to read from.
      * @param array<string, array> $collectKeys The keys to collect
      */
-    protected array _groupKeys(BufferedStatement $statement, array $collectKeys)
-    {
+    protected array _groupKeys(BufferedStatement $statement, array $collectKeys) {
         $keys = [];
         foreach (($statement.fetchAll("assoc") ?: []) as $result) {
             foreach ($collectKeys as $nestKey: $parts) {

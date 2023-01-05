@@ -252,8 +252,7 @@ class CookieCollection : IteratorAggregate, Countable
      * @param string $path The path to match
      * @return array<string, mixed> An array of cookie name/value pairs
      */
-    protected array findMatchingCookies(string $scheme, string $host, string $path)
-    {
+    protected array findMatchingCookies(string $scheme, string $host, string $path) {
         $out = [];
         $now = new DateTimeImmutable("now", new DateTimeZone("UTC"));
         foreach (this.cookies as $cookie) {

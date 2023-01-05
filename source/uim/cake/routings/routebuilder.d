@@ -166,8 +166,7 @@ class RouteBuilder
      *
      * @return array<string>
      */
-    string[] getExtensions()
-    {
+    string[] getExtensions() {
         return _extensions;
     }
 
@@ -204,8 +203,7 @@ class RouteBuilder
     /**
      * Get the parameter names/values for this scope.
      */
-    array params()
-    {
+    array params() {
         return _params;
     }
 
@@ -662,8 +660,7 @@ class RouteBuilder
      *
      * @param array|string $defaults Defaults array from the connect() method.
      */
-    protected array parseDefaults($defaults)
-    {
+    protected array parseDefaults($defaults) {
         if (!is_string($defaults)) {
             return $defaults;
         }
@@ -969,8 +966,7 @@ class RouteBuilder
     /**
      * Get the middleware that this builder will apply to routes.
      */
-    array getMiddleware()
-    {
+    array getMiddleware() {
         return this.middleware;
     }
 

@@ -124,8 +124,7 @@ class MessagesFileLoader
      *
      * @return array<string> The list of folders where the translation file should be looked for
      */
-    array translationsFolders()
-    {
+    array translationsFolders() {
         $locale = Locale::parseLocale(_locale) + ["region": null];
 
         $folders = [
