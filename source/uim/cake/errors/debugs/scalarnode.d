@@ -50,8 +50,7 @@ class ScalarNode : INode
     }
 
 
-    array getChildren()
-    {
+    array getChildren() {
         return [];
     }
 }

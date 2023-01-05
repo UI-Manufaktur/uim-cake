@@ -34,8 +34,7 @@ class SpecialNode : INode
     }
 
 
-    array getChildren()
-    {
+    array getChildren() {
         return [];
     }
 }

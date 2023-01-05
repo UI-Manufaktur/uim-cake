@@ -165,8 +165,7 @@ class Folder
      * @param bool $fullPath True returns the full path
      * @return array Contents of current directory as an array, an empty array on failure
      */
-    array read($sort = self::SORT_NAME, $exceptions = false, bool $fullPath = false)
-    {
+    array read($sort = self::SORT_NAME, $exceptions = false, bool $fullPath = false) {
         $dirs = $files = [];
 
         if (!this.pwd()) {
@@ -231,8 +230,7 @@ class Folder
      * @param string|bool $sort Whether results should be sorted.
      * @return array<string> Files that match given pattern
      */
-    string[] find(string $regexpPattern = ".*", $sort = false)
-    {
+    string[] find(string $regexpPattern = ".*", $sort = false) {
         [, $files] = this.read($sort);
 
         return array_values(preg_grep("/^" ~ $regexpPattern ~ "$/i", $files));
@@ -245,8 +243,7 @@ class Folder
      * @param string|bool $sort Whether results should be sorted.
      * @return array Files matching $pattern
      */
-    array findRecursive(string $pattern = ".*", $sort = false)
-    {
+    array findRecursive(string $pattern = ".*", $sort = false) {
         if (!this.pwd()) {
             return [];
         }
@@ -264,8 +261,7 @@ class Folder
      * @param bool $sort Whether results should be sorted.
      * @return array Files matching pattern
      */
-    protected array _findRecursive(string $pattern, bool $sort = false)
-    {
+    protected array _findRecursive(string $pattern, bool $sort = false) {
         [$dirs, $files] = this.read($sort);
         $found = [];
 
@@ -463,8 +459,7 @@ class Folder
      * @param bool $fullPath Whether to return the full path or only the directory name.
      * @return array Array of subdirectories for the provided or current path.
      */
-    array subdirectories(?string $path = null, bool $fullPath = true)
-    {
+    array subdirectories(?string $path = null, bool $fullPath = true) {
         if (!$path) {
             $path = this.path;
         }
@@ -495,8 +490,7 @@ class Folder
      * @param string|null $type either "file" or "dir". Null returns both files and directories
      * @return array Array of nested directories and files in each directory
      */
-    array tree(?string $path = null, $exceptions = false, ?string $type = null)
-    {
+    array tree(?string $path = null, $exceptions = false, ?string $type = null) {
         if (!$path) {
             $path = this.path;
         }
@@ -862,8 +856,7 @@ class Folder
      *
      * @param bool $reset Reset message stack after reading
      */
-    array messages(bool $reset = true)
-    {
+    array messages(bool $reset = true) {
         $messages = _messages;
         if ($reset) {
             _messages = [];
@@ -877,8 +870,7 @@ class Folder
      *
      * @param bool $reset Reset error stack after reading
      */
-    array errors(bool $reset = true)
-    {
+    array errors(bool $reset = true) {
         $errors = _errors;
         if ($reset) {
             _errors = [];

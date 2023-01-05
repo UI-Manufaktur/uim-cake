@@ -280,8 +280,7 @@ class Response : Message : IResponse
      *
      * @return array The cookie data
      */
-    array getCookies()
-    {
+    array getCookies() {
         return _getCookies();
     }
 
@@ -348,8 +347,7 @@ class Response : Message : IResponse
      *
      * @return array Array of Cookie data.
      */
-    protected array _getCookies()
-    {
+    protected array _getCookies() {
         this.buildCookieCollection();
 
         $out = [];
@@ -426,8 +424,7 @@ class Response : Message : IResponse
      * Provides magic __get() support.
      *
      */
-    protected string[] _getHeaders()
-    {
+    protected string[] _getHeaders() {
         $out = [];
         foreach (this.headers as $key: $values) {
             $out[$key] = implode(",", $values);

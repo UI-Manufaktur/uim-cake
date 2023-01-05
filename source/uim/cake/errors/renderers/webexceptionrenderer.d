@@ -468,8 +468,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         return [
             "error": this.error,
             "request": this.request,

@@ -18,8 +18,7 @@ class ContentTypeNegotiation
      * @param \Psr\Http\messages.RequestInterface $request The request to get an accept from.
      * @return array<string, array<string>> A mapping of preference values: content types
      */
-    array parseAccept(RequestInterface $request)
-    {
+    array parseAccept(RequestInterface $request) {
         $header = $request.getHeaderLine("Accept");
 
         return this.parseQualifiers($header);
@@ -34,8 +33,7 @@ class ContentTypeNegotiation
      * @param \Psr\Http\messages.RequestInterface $request The request to get an accept from.
      * @return array<string, array<string>> A mapping of preference values: languages
      */
-    array parseAcceptLanguage(RequestInterface $request)
-    {
+    array parseAcceptLanguage(RequestInterface $request) {
         $header = $request.getHeaderLine("Accept-Language");
 
         return this.parseQualifiers($header);
@@ -47,8 +45,7 @@ class ContentTypeNegotiation
      * @param string $header The header value to parse
      * @return array<string, array<string>>
      */
-    protected array parseQualifiers(string $header)
-    {
+    protected array parseQualifiers(string $header) {
         $accept = [];
         if (!$header) {
             return $accept;
@@ -127,8 +124,7 @@ class ContentTypeNegotiation
      * @param \Psr\Http\messages.RequestInterface $request The request to read headers from.
      * @return array<string> A list of language codes that are accepted.
      */
-    array acceptedLanguages(RequestInterface $request)
-    {
+    array acceptedLanguages(RequestInterface $request) {
         $raw = this.parseAcceptLanguage($request);
         $accept = [];
         foreach ($raw as $languages) {

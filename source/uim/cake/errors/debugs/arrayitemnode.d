@@ -52,8 +52,7 @@ class ArrayItemNode : INode
     }
 
 
-    array getChildren()
-    {
+    array getChildren() {
         return [this.value];
     }
 }

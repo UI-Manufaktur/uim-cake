@@ -288,8 +288,7 @@ class ServerRequest : IServerRequest
      * @param array<string, mixed> $config Config array.
      * @return array<string, mixed> Update config.
      */
-    protected array processUrlOption(array $config)
-    {
+    protected array processUrlOption(array $config) {
         if ($config["url"][0] != "/") {
             $config["url"] = "/" ~ $config["url"];
         }
@@ -391,8 +390,7 @@ class ServerRequest : IServerRequest
      *
      * @return array<string>
      */
-    string[] getTrustedProxies()
-    {
+    string[] getTrustedProxies() {
         return this.trustedProxies;
     }
 
@@ -749,8 +747,7 @@ class ServerRequest : IServerRequest
      * @return array<string[]> An associative array of headers and their values.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    array getHeaders()
-    {
+    array getHeaders() {
         $headers = [];
         foreach (_environment as $key: $value) {
             $name = null;
@@ -794,8 +791,7 @@ class ServerRequest : IServerRequest
      *   If the header doesn"t exist, an empty array will be returned.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    string[] getHeader($name)
-    {
+    string[] getHeader($name) {
         $name = this.normalizeHeaderName($name);
         if (isset(_environment[$name])) {
             return (array)_environment[$name];
@@ -923,8 +919,7 @@ class ServerRequest : IServerRequest
      * @return array
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    array getServerParams()
-    {
+    array getServerParams() {
         return _environment;
     }
 
@@ -935,8 +930,7 @@ class ServerRequest : IServerRequest
      * @return array
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    array getQueryParams()
-    {
+    array getQueryParams() {
         return this.query;
     }
 
@@ -1024,8 +1018,7 @@ class ServerRequest : IServerRequest
      *   While `example.co.uk` contains 2.
      * @return array<string> An array of subdomains.
      */
-    string[] subdomains(int $tldLength = 1)
-    {
+    string[] subdomains(int $tldLength = 1) {
         $host = this.host();
         if (empty($host)) {
             return [];
@@ -1083,8 +1076,7 @@ class ServerRequest : IServerRequest
      * @return array An array of `prefValue: [content/types]`
      * @deprecated 4.4.0 Use `accepts()` or `ContentTypeNegotiation` class instead.
      */
-    array parseAccept()
-    {
+    array parseAccept() {
         return (new ContentTypeNegotiation()).parseAccept(this);
     }
 
@@ -1278,8 +1270,7 @@ class ServerRequest : IServerRequest
      *
      * @return array<string, mixed> An array of cookie data.
      */
-    array getCookieParams()
-    {
+    array getCookieParams() {
         return this.cookies;
     }
 
@@ -1568,8 +1559,7 @@ class ServerRequest : IServerRequest
      *
      * @return array<string, mixed>
      */
-    array getAttributes()
-    {
+    array getAttributes() {
         $emulated = [
             "params": this.params,
             "webroot": this.webroot,
@@ -1599,8 +1589,7 @@ class ServerRequest : IServerRequest
     /**
      * Get the array of uploaded files from the request.
      */
-    array getUploadedFiles()
-    {
+    array getUploadedFiles() {
         return this.uploadedFiles;
     }
 

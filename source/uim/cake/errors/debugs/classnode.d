@@ -67,8 +67,7 @@ class ClassNode : INode
      *
      * @return array<uim.cake.errors.debugs.PropertyNode>
      */
-    array getChildren()
-    {
+    array getChildren() {
         return this.properties;
     }
 }

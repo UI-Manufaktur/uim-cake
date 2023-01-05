@@ -142,8 +142,7 @@ class FormProtector
      * @return array<string> Array of field name params like ["Model.field"] or
      *   ["Model", "field"] for array fields or empty array if $name is empty.
      */
-    protected array getFieldNameArray(string aName)
-    {
+    protected array getFieldNameArray(string aName) {
         if (empty($name) && $name != "0") {
             return [];
         }
@@ -252,8 +251,7 @@ class FormProtector
      * @return array<string, array>
      * @psalm-return array{fields: array, unlockedFields: array}
      */
-    protected array extractHashParts(array $formData)
-    {
+    protected array extractHashParts(array $formData) {
         $fields = this.extractFields($formData);
         $unlockedFields = this.sortedUnlockedFields($formData);
 
@@ -268,8 +266,7 @@ class FormProtector
      *
      * @param array $formData Data array
      */
-    protected array extractFields(array $formData)
-    {
+    protected array extractFields(array $formData) {
         $locked = "";
         $token = urldecode($formData["_Token"]["fields"]);
         $unlocked = urldecode($formData["_Token"]["unlocked"]);
@@ -339,8 +336,7 @@ class FormProtector
      *
      * @param array $formData Data array
      */
-    protected string[] sortedUnlockedFields(array $formData)
-    {
+    protected string[] sortedUnlockedFields(array $formData) {
         $unlocked = urldecode($formData["_Token"]["unlocked"]);
         if (empty($unlocked)) {
             return [];
@@ -360,8 +356,7 @@ class FormProtector
      * @return array<string, string> The token data.
      * @psalm-return array{fields: string, unlocked: string, debug: string}
      */
-    array buildTokenData(string $url = "", string $sessionId = "")
-    {
+    array buildTokenData(string $url = "", string $sessionId = "") {
         $fields = this.fields;
         $unlockedFields = this.unlockedFields;
 
@@ -554,8 +549,7 @@ class FormProtector
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         return [
             "fields": this.fields,
             "unlockedFields": this.unlockedFields,

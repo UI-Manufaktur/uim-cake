@@ -77,8 +77,7 @@ class ConsoleExceptionRenderer
      * @param \Throwable $exception The exception to render.
      * @param int $index Exception index in the chain
      */
-    protected array renderException(Throwable $exception, int $index)
-    {
+    protected array renderException(Throwable $exception, int $index) {
         $out = [
             sprintf(
                 "<error>%s[%s] %s</error> in %s on line %s",

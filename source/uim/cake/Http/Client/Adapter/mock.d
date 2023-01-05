@@ -66,8 +66,7 @@ class Mock : AdapterInterface
      * @param array<string, mixed> $options Unused.
      * @return uim.cake.http.Client\Response[] The matched response or an empty array for no matches.
      */
-    array send(RequestInterface $request, array $options)
-    {
+    array send(RequestInterface $request, array $options) {
         $found = null;
         $method = $request.getMethod();
         $requestUri = (string)$request.getUri();

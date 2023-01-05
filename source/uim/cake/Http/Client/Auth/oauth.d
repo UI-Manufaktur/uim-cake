@@ -306,8 +306,7 @@ class Oauth
      * @param string $path The current path being converted.
      * @see https://tools.ietf.org/html/rfc5849#section-3.4.1.3.2
      */
-    protected array _normalizeData(array $args, string $path = "")
-    {
+    protected array _normalizeData(array $args, string $path = "") {
         $data = [];
         foreach ($args as $key: $value) {
             if ($path) {

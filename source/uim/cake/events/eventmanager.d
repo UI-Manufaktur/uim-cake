@@ -137,8 +137,7 @@ class EventManager : IEventManager
      * @param array $function the array taken from a handler definition for an event
      * @param uim.cake.events.IEventListener $object The handler object
      */
-    protected array _extractCallable(array $function, IEventListener $object)
-    {
+    protected array _extractCallable(array $function, IEventListener $object) {
         /** @var callable $method */
         $method = $function["callable"];
         $options = $function;
@@ -282,8 +281,7 @@ class EventManager : IEventManager
     }
 
 
-    array listeners(string $eventKey)
-    {
+    array listeners(string $eventKey) {
         $localListeners = [];
         if (!_isGlobal) {
             $localListeners = this.prioritisedListeners($eventKey);
@@ -314,8 +312,7 @@ class EventManager : IEventManager
      *
      * @param string $eventKey Event key.
      */
-    array prioritisedListeners(string $eventKey)
-    {
+    array prioritisedListeners(string $eventKey) {
         if (empty(_listeners[$eventKey])) {
             return [];
         }
@@ -328,8 +325,7 @@ class EventManager : IEventManager
      *
      * @param string $eventKeyPattern Pattern to match.
      */
-    array matchingListeners(string $eventKeyPattern)
-    {
+    array matchingListeners(string $eventKeyPattern) {
         $matchPattern = "/" ~ preg_quote($eventKeyPattern, "/") ~ "/";
 
         return array_intersect_key(
@@ -413,8 +409,7 @@ class EventManager : IEventManager
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         $properties = get_object_vars(this);
         $properties["_generalManager"] = "(object) EventManager";
         $properties["_listeners"] = [];

@@ -66,8 +66,7 @@ class PropertyNode : INode
     }
 
 
-    array getChildren()
-    {
+    array getChildren() {
         return [this.value];
     }
 }

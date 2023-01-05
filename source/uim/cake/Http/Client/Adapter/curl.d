@@ -33,8 +33,7 @@ use Psr\Http\messages.RequestInterface;
 class Curl : AdapterInterface
 {
 
-    array send(RequestInterface $request, array $options)
-    {
+    array send(RequestInterface $request, array $options) {
         if (!extension_loaded("curl")) {
             throw new ClientException("curl extension is not loaded.");
         }
@@ -74,8 +73,7 @@ class Curl : AdapterInterface
      * @param \Psr\Http\messages.RequestInterface $request The request.
      * @param array<string, mixed> $options The client options
      */
-    array buildOptions(RequestInterface $request, array $options)
-    {
+    array buildOptions(RequestInterface $request, array $options) {
         $headers = [];
         foreach ($request.getHeaders() as $key: $values) {
             $headers[] = $key ~ ": " ~ implode(", ", $values);
@@ -189,8 +187,7 @@ class Curl : AdapterInterface
      * @return array<uim.cake.Http\Client\Response>
      * @psalm-suppress UndefinedDocblockClass
      */
-    protected array createResponse($handle, $responseData)
-    {
+    protected array createResponse($handle, $responseData) {
         /** @psalm-suppress PossiblyInvalidArgument */
         $headerSize = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
         $headers = trim(substr($responseData, 0, $headerSize));

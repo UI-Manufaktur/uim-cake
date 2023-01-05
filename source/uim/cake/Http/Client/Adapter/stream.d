@@ -64,8 +64,7 @@ class Stream : AdapterInterface
     protected $_connectionErrors = [];
 
 
-    array send(RequestInterface $request, array $options)
-    {
+    array send(RequestInterface $request, array $options) {
         _stream = null;
         _context = null;
         _contextOptions = [];
@@ -87,8 +86,7 @@ class Stream : AdapterInterface
      * @param string $content The response content.
      * @return array<uim.cake.Http\Client\Response> The list of responses from the request(s)
      */
-    array createResponses(array $headers, string $content)
-    {
+    array createResponses(array $headers, string $content) {
         $indexes = $responses = [];
         foreach ($headers as $i: $header) {
             if (strtoupper(substr($header, 0, 5)) == "HTTP/") {
@@ -224,8 +222,7 @@ class Stream : AdapterInterface
      * @return array Array of populated Response objects
      * @throws \Psr\Http\Client\NetworkExceptionInterface
      */
-    protected array _send(RequestInterface $request)
-    {
+    protected array _send(RequestInterface $request) {
         $deadline = false;
         if (isset(_contextOptions["timeout"]) && _contextOptions["timeout"] > 0) {
             $deadline = time() + _contextOptions["timeout"];
@@ -316,8 +313,7 @@ class Stream : AdapterInterface
      *
      * @return array<string, mixed>
      */
-    array contextOptions()
-    {
+    array contextOptions() {
         return array_merge(_contextOptions, _sslContextOptions);
     }
 }
