@@ -235,8 +235,7 @@ class Debugger
      *
      * @return array<string, string>
      */
-    static STRINGAA outputMask()
-    {
+    static STRINGAA outputMask() {
         return static::configInstance('outputMask');
     }
 
@@ -500,8 +499,7 @@ class Debugger
      * @see https://secure.php.net/highlight_string
      * @link https://book.cakephp.org/4/en/development/debugging.html#getting-an-excerpt-from-a-file
      */
-    static string[] excerpt(string $file, int $line, int $context = 2)
-    {
+    static string[] excerpt(string $file, int $line, int $context = 2) {
         $lines = [];
         if (!file_exists($file)) {
             return [];
@@ -874,8 +872,7 @@ class Debugger
      * @return array The resulting format string set.
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    static array addFormat(string $format, array $strings)
-    {
+    static array addFormat(string $format, array $strings) {
         deprecationWarning('Debugger::addFormat() is deprecated.');
         $self = Debugger::getInstance();
         if (isset($self._templates[$format])) {

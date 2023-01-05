@@ -216,8 +216,7 @@ class Paginator : IPaginator {
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return array Array with keys "defaults", "options" and "finder"
      */
-    protected array extractData(IRepository $object, array myParams, array $settings)
-    {
+    protected array extractData(IRepository $object, array myParams, array $settings) {
         myAlias = $object.getAlias();
         $defaults = this.getDefaults(myAlias, $settings);
         myOptions = this.mergeOptions(myParams, $defaults);
@@ -238,8 +237,7 @@ class Paginator : IPaginator {
      *   "count", "defaults", "finder", "numResults".
      * @return array<string, mixed> Paging params.
      */
-    protected array buildParams(array myData)
-    {
+    protected array buildParams(array myData) {
         $limit = myData["options"]["limit"];
 
         $paging = [
@@ -271,8 +269,7 @@ class Paginator : IPaginator {
      * @param array myData Paginator data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addPageCountParams(array myParams, array myData)
-    {
+    protected array addPageCountParams(array myParams, array myData) {
         $page = myParams["page"];
         $pageCount = 0;
 
@@ -296,8 +293,7 @@ class Paginator : IPaginator {
      * @param array myData Paginator data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addStartEndParams(array myParams, array myData)
-    {
+    protected array addStartEndParams(array myParams, array myData) {
         $start = $end = 0;
 
         if (myParams["current"] > 0) {
@@ -318,8 +314,7 @@ class Paginator : IPaginator {
      * @param array myData Paging data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addPrevNextParams(array myParams, array myData)
-    {
+    protected array addPrevNextParams(array myParams, array myData) {
         myParams["prevPage"] = myParams["page"] > 1;
         if (myParams["count"] is null) {
             myParams["nextPage"] = true;
@@ -337,8 +332,7 @@ class Paginator : IPaginator {
      * @param array myData Paging data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addSortingParams(array myParams, array myData)
-    {
+    protected array addSortingParams(array myParams, array myData) {
         $defaults = myData["defaults"];
         $order = (array)myData["options"]["order"];
         $sortDefault = $directionDefault = false;
@@ -366,8 +360,7 @@ class Paginator : IPaginator {
      * @return array An array containing in the first position the finder name
      *   and in the second the options to be passed to it.
      */
-    protected array _extractFinder(array myOptions)
-    {
+    protected array _extractFinder(array myOptions) {
         myType = !empty(myOptions["finder"]) ? myOptions["finder"] : "all";
         unset(myOptions["finder"], myOptions["maxLimit"]);
 
@@ -382,8 +375,7 @@ class Paginator : IPaginator {
     /**
      * Get paging params after pagination operation.
      */
-    array getPagingParams()
-    {
+    array getPagingParams() {
         return _pagingParams;
     }
 
@@ -438,8 +430,7 @@ class Paginator : IPaginator {
      * @param array $settings The settings to merge with the request data.
      * @return array<string, mixed> Array of merged options.
      */
-    array mergeOptions(array myParams, array $settings)
-    {
+    array mergeOptions(array myParams, array $settings) {
         if (!empty($settings["scope"])) {
             $scope = $settings["scope"];
             myParams = !empty(myParams[$scope]) ? (array)myParams[$scope] : [];
@@ -460,8 +451,7 @@ class Paginator : IPaginator {
      * @return array<string, mixed> An array of pagination settings for a model,
      *   or the general settings.
      */
-    array getDefaults(string myAlias, array $settings)
-    {
+    array getDefaults(string myAlias, array $settings) {
         if (isset($settings[myAlias])) {
             $settings = $settings[myAlias];
         }
@@ -508,8 +498,7 @@ class Paginator : IPaginator {
      * @return array<string, mixed> An array of options with sort + direction removed and
      *   replaced with order if possible.
      */
-    array validateSort(IRepository $object, array myOptions)
-    {
+    array validateSort(IRepository $object, array myOptions) {
         if (isset(myOptions["sort"])) {
             $direction = null;
             if (isset(myOptions["direction"])) {
@@ -572,8 +561,7 @@ class Paginator : IPaginator {
      * @param string myModel Current model alias
      * @return array<string, mixed> myFields Unaliased fields where applicable
      */
-    protected array _removeAliases(array myFields, string myModel)
-    {
+    protected array _removeAliases(array myFields, string myModel) {
         myResult = [];
         foreach (myFields as myField: $sort) {
             if (indexOf(myField, ".") == false) {
@@ -602,8 +590,7 @@ class Paginator : IPaginator {
      * @param bool $allowed Whether the field was allowed.
      * @return array Final order array.
      */
-    protected array _prefix(IRepository $object, array $order, bool $allowed = false)
-    {
+    protected array _prefix(IRepository $object, array $order, bool $allowed = false) {
         myTableAlias = $object.getAlias();
         myTableOrder = [];
         foreach ($order as myKey: myValue) {
@@ -641,8 +628,7 @@ class Paginator : IPaginator {
      * @param array<string, mixed> myOptions An array of options with a limit key to be checked.
      * @return array<string, mixed> An array of options for pagination.
      */
-    array checkLimit(array myOptions)
-    {
+    array checkLimit(array myOptions) {
         myOptions["limit"] = (int)myOptions["limit"];
         if (myOptions["limit"] < 1) {
             myOptions["limit"] = 1;

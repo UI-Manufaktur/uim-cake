@@ -288,8 +288,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array columns()
-    {
+    array columns() {
         return array_keys(_columns);
     }
 
@@ -353,8 +352,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array typeMap()
-    {
+    array typeMap() {
         return _typeMap;
     }
 
@@ -368,8 +366,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array defaultValues()
-    {
+    array defaultValues() {
         $defaults = [];
         foreach (_columns as $name: $data) {
             if (!array_key_exists("default", $data)) {
@@ -427,8 +424,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array indexes()
-    {
+    array indexes() {
         return array_keys(_indexes);
     }
 
@@ -449,16 +445,14 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *   empty list will be returned when the table has no primary key.
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    array primaryKey()
-    {
+    array primaryKey() {
         deprecationWarning("`TableSchema::primaryKey()` is deprecated. Use `TableSchema::getPrimaryKey()`.");
 
         return this.getPrimarykey();
     }
 
 
-    array getPrimaryKey()
-    {
+    array getPrimaryKey() {
         foreach (_constraints as $data) {
             if ($data["type"] == static::CONSTRAINT_PRIMARY) {
                 return $data["columns"];
@@ -557,8 +551,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      * @return array<string, mixed>
      * @throws uim.cake.databases.exceptions.DatabaseException When foreign key definition is not valid.
      */
-    protected array _checkForeignKey(array $attrs)
-    {
+    protected array _checkForeignKey(array $attrs) {
         if (count($attrs["references"]) < 2) {
             throw new DatabaseException("References must contain a table and column.");
         }
@@ -579,8 +572,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array constraints()
-    {
+    array constraints() {
         return array_keys(_constraints);
     }
 
@@ -598,8 +590,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array getOptions()
-    {
+    array getOptions() {
         return _options;
     }
 
@@ -616,8 +607,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array createSql(Connection $connection)
-    {
+    array createSql(Connection $connection) {
         $dialect = $connection.getDriver().schemaDialect();
         $columns = $constraints = $indexes = [];
         foreach (array_keys(_columns) as $name) {
@@ -634,32 +624,28 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    array dropSql(Connection $connection)
-    {
+    array dropSql(Connection $connection) {
         $dialect = $connection.getDriver().schemaDialect();
 
         return $dialect.dropTableSql(this);
     }
 
 
-    array truncateSql(Connection $connection)
-    {
+    array truncateSql(Connection $connection) {
         $dialect = $connection.getDriver().schemaDialect();
 
         return $dialect.truncateTableSql(this);
     }
 
 
-    array addConstraintSql(Connection $connection)
-    {
+    array addConstraintSql(Connection $connection) {
         $dialect = $connection.getDriver().schemaDialect();
 
         return $dialect.addConstraintSql(this);
     }
 
 
-    array dropConstraintSql(Connection $connection)
-    {
+    array dropConstraintSql(Connection $connection) {
         $dialect = $connection.getDriver().schemaDialect();
 
         return $dialect.dropConstraintSql(this);
@@ -670,8 +656,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         return [
             "table": _table,
             "columns": _columns,

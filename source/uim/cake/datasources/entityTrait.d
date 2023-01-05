@@ -277,8 +277,7 @@ trait EntityTrait
     /**
      * Gets all original values of the entity.
      */
-    array getOriginalValues()
-    {
+    array getOriginalValues() {
         $originals = _original;
         $originalKeys = array_keys($originals);
         foreach (_fields as myKey: myValue) {
@@ -486,8 +485,7 @@ trait EntityTrait
      * This method will recursively transform entities assigned to fields
      * into arrays as well.
      */
-    array toArray()
-    {
+    array toArray() {
         myResult = [];
         foreach (this.getVisible() as myField) {
             myValue = this.get(myField);
@@ -513,8 +511,7 @@ trait EntityTrait
     /**
      * Returns the fields that will be serialized as JSON
      */
-    array jsonSerialize()
-    {
+    array jsonSerialize() {
         return this.extract(this.getVisible());
     }
 
@@ -608,8 +605,7 @@ trait EntityTrait
      * @param myFields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
      */
-    array extract(string[] myFields, bool $onlyDirty = false)
-    {
+    array extract(string[] myFields, bool $onlyDirty = false) {
         myResult = [];
         foreach (myFields as myField) {
             if (!$onlyDirty || this.isDirty(myField)) {
@@ -629,8 +625,7 @@ trait EntityTrait
      *
      * @param myFields List of fields to be returned
      */
-    array extractOriginal(string[] myFields)
-    {
+    array extractOriginal(string[] myFields) {
         myResult = [];
         foreach (myFields as myField) {
             myResult[myField] = this.getOriginal(myField);
@@ -648,8 +643,7 @@ trait EntityTrait
      *
      * @param myFields List of fields to be returned
      */
-    array extractOriginalChanged(string[] myFields)
-    {
+    array extractOriginalChanged(string[] myFields) {
         myResult = [];
         foreach (myField; myFields) {
             $original = this.getOriginal(myField);
@@ -775,8 +769,7 @@ trait EntityTrait
     /**
      * Returns all validation errors.
      */
-    array getErrors()
-    {
+    array getErrors() {
         $diff = array_diff_key(_fields, _errors);
 
         return _errors + (new Collection($diff))
@@ -796,8 +789,7 @@ trait EntityTrait
      * @param string myField Field name to get the errors from
      * @return array
      */
-    array getError(string myField)
-    {
+    array getError(string myField) {
         myErrors = _errors[myField] ?? [];
         if (myErrors) {
             return myErrors;
@@ -876,8 +868,7 @@ trait EntityTrait
      * @param string myField the field in this entity to check for errors
      * @return array errors in nested entity if any
      */
-    protected array _nestedErrors(string myField)
-    {
+    protected array _nestedErrors(string myField) {
         // Only one path element, check for nested entity with error.
         if (indexOf(myField, ".") == false) {
             return _readError(this.get(myField));
@@ -950,8 +941,7 @@ trait EntityTrait
      * @param uim.cake.Datasource\IEntity|iterable $object The object to read errors from.
      * @param string|null myPath The field name for errors.
      */
-    protected array _readError($object, myPath = null)
-    {
+    protected array _readError($object, myPath = null) {
         if (myPath  !is null && $object instanceof IEntity) {
             return $object.getError(myPath);
         }
@@ -976,8 +966,7 @@ trait EntityTrait
     /**
      * Get a list of invalid fields and their data for errors upon validation/patching
      */
-    array getInvalid()
-    {
+    array getInvalid() {
         return _invalid;
     }
 
@@ -1074,8 +1063,7 @@ trait EntityTrait
      *
      * @return array<bool>
      */
-    array getAccessible()
-    {
+    array getAccessible() {
         return _accessible;
     }
 
@@ -1130,8 +1118,7 @@ trait EntityTrait
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         myFields = _fields;
         foreach (_virtual as myField) {
             myFields[myField] = this.myField;

@@ -18,8 +18,7 @@ class SqlserverSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    array listTablesSql(array $config)
-    {
+    array listTablesSql(array $config) {
         $sql = "SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
             WHERE TABLE_SCHEMA = ?
@@ -37,8 +36,7 @@ class SqlserverSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesWithoutViewsSql(array $config)
-    {
+    array listTablesWithoutViewsSql(array $config) {
         $sql = "SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
             WHERE TABLE_SCHEMA = ?
@@ -50,8 +48,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array describeColumnSql(string $tableName, array $config)
-    {
+    array describeColumnSql(string $tableName, array $config) {
         $sql = "SELECT DISTINCT
             AC.column_id AS [column_id],
             AC.name AS [name],
@@ -247,8 +244,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array describeIndexSql(string $tableName, array $config)
-    {
+    array describeIndexSql(string $tableName, array $config) {
         $sql = "SELECT
                 I.[name] AS [index_name],
                 IC.[index_column_id] AS [index_order],
@@ -305,8 +301,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array describeForeignKeySql(string $tableName, array $config)
-    {
+    array describeForeignKeySql(string $tableName, array $config) {
         // phpcs:disable Generic.Files.LineLength
         $sql = "SELECT FK.[name] AS [foreign_key_name], FK.[delete_referential_action_desc] AS [delete_type],
                 FK.[update_referential_action_desc] AS [update_type], C.name AS [column], RT.name AS [reference_table],
@@ -506,8 +501,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array addConstraintSql(TableSchema $schema)
-    {
+    array addConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
         $sql = [];
 
@@ -524,8 +518,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array dropConstraintSql(TableSchema $schema)
-    {
+    array dropConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
         $sql = [];
 
@@ -600,8 +593,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes)
-    {
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes) {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
         $tableName = _driver.quoteIdentifier($schema.name());
@@ -615,8 +607,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array truncateTableSql(TableSchema $schema)
-    {
+    array truncateTableSql(TableSchema $schema) {
         $name = _driver.quoteIdentifier($schema.name());
         $queries = [
             sprintf("DELETE FROM %s", $name),

@@ -99,8 +99,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    array errorInfo()
-    {
+    array errorInfo() {
         return this.statement.errorInfo();
     }
 
@@ -176,8 +175,7 @@ class BufferedStatement : Iterator, IStatement
 
     /**
      */
-    array fetchAssoc()
-    {
+    array fetchAssoc() {
         $result = this.fetch(static::FETCH_TYPE_ASSOC);
 
         return $result ?: [];

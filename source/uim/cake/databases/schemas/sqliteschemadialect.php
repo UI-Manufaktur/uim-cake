@@ -32,8 +32,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @throws uim.cake.databases.exceptions.DatabaseException when unable to parse column type
      * @return array<string, mixed> Array of column information.
      */
-    protected array _convertColumn(string $column)
-    {
+    protected array _convertColumn(string $column) {
         if ($column == "") {
             return ["type": TableSchema::TYPE_TEXT, "length": null];
         }
@@ -140,8 +139,7 @@ class SqliteSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    array listTablesSql(array $config)
-    {
+    array listTablesSql(array $config) {
         return [
             "SELECT name FROM sqlite_master " ~
             "WHERE (type="table" OR type="view") " ~
@@ -157,8 +155,7 @@ class SqliteSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesWithoutViewsSql(array $config)
-    {
+    array listTablesWithoutViewsSql(array $config) {
         return [
             "SELECT name FROM sqlite_master WHERE type="table" " ~
             "AND name != "sqlite_sequence" ORDER BY name",
@@ -167,8 +164,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    array describeColumnSql(string $tableName, array $config)
-    {
+    array describeColumnSql(string $tableName, array $config) {
         $sql = sprintf(
             "PRAGMA table_info(%s)",
             _driver.quoteIdentifier($tableName)
@@ -232,8 +228,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    array describeIndexSql(string $tableName, array $config)
-    {
+    array describeIndexSql(string $tableName, array $config) {
         $sql = sprintf(
             "PRAGMA index_list(%s)",
             _driver.quoteIdentifier($tableName)
@@ -281,8 +276,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    array describeForeignKeySql(string $tableName, array $config)
-    {
+    array describeForeignKeySql(string $tableName, array $config) {
         $sql = sprintf("PRAGMA foreign_key_list(%s)", _driver.quoteIdentifier($tableName));
 
         return [$sql, []];
@@ -515,8 +509,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    array addConstraintSql(TableSchema $schema)
-    {
+    array addConstraintSql(TableSchema $schema) {
         return [];
     }
 
@@ -529,8 +522,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    array dropConstraintSql(TableSchema $schema)
-    {
+    array dropConstraintSql(TableSchema $schema) {
         return [];
     }
 
@@ -552,8 +544,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes)
-    {
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes) {
         $lines = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($lines));
         $temporary = $schema.isTemporary() ? " TEMPORARY " : " ";
@@ -567,8 +558,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    array truncateTableSql(TableSchema $schema)
-    {
+    array truncateTableSql(TableSchema $schema) {
         $name = $schema.name();
         $sql = [];
         if (this.hasSequences()) {

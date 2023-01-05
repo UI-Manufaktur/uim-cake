@@ -53,8 +53,7 @@ trait ExpressionTypeCasterTrait
      *
      * @param array $types List of type names
      */
-    protected array _requiresToExpressionCasting(array $types)
-    {
+    protected array _requiresToExpressionCasting(array $types) {
         $result = [];
         $types = array_filter($types);
         foreach ($types as $k: $type) {

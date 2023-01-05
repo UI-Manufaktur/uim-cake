@@ -149,8 +149,7 @@ abstract class SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema Schema instance
      * @return array SQL statements to drop a table.
      */
-    array dropTableSql(TableSchema $schema)
-    {
+    array dropTableSql(TableSchema $schema) {
         $sql = sprintf(
             "DROP TABLE %s",
             _driver.quoteIdentifier($schema.name())
@@ -202,8 +201,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array SQL statements to get options for a table.
      */
-    array describeOptionsSql(string $tableName, array $config)
-    {
+    array describeOptionsSql(string $tableName, array $config) {
         return ["", ""];
     }
 

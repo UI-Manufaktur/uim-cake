@@ -16,8 +16,7 @@ class PostgresSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    array listTablesSql(array $config)
-    {
+    array listTablesSql(array $config) {
         $sql = "SELECT table_name as name FROM information_schema.tables
                 WHERE table_schema = ? ORDER BY name";
         $schema = empty($config["schema"]) ? "public" : $config["schema"];
@@ -32,8 +31,7 @@ class PostgresSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesWithoutViewsSql(array $config)
-    {
+    array listTablesWithoutViewsSql(array $config) {
         $sql = "SELECT table_name as name FROM information_schema.tables
                 WHERE table_schema = ? AND table_type = \"BASE TABLE\" ORDER BY name";
         $schema = empty($config["schema"]) ? "public" : $config["schema"];
@@ -42,8 +40,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array describeColumnSql(string $tableName, array $config)
-    {
+    array describeColumnSql(string $tableName, array $config) {
         $sql = "SELECT DISTINCT table_schema AS schema,
             column_name AS name,
             data_type AS type,
@@ -80,8 +77,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @throws uim.cake.databases.exceptions.DatabaseException when column cannot be parsed.
      * @return array<string, mixed> Array of column information.
      */
-    protected array _convertColumn(string $column)
-    {
+    protected array _convertColumn(string $column) {
         preg_match("/([a-z\s]+)(?:\(([0-9,]+)\))?/i", $column, $matches);
         if (empty($matches)) {
             throw new DatabaseException(sprintf("Unable to parse column type from "%s"", $column));
@@ -238,8 +234,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array describeIndexSql(string $tableName, array $config)
-    {
+    array describeIndexSql(string $tableName, array $config) {
         $sql = "SELECT
         c2.relname,
         a.attname,
@@ -310,8 +305,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array describeForeignKeySql(string $tableName, array $config)
-    {
+    array describeForeignKeySql(string $tableName, array $config) {
         // phpcs:disable Generic.Files.LineLength
         $sql = "SELECT
         c.conname AS name,
@@ -489,8 +483,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array addConstraintSql(TableSchema $schema)
-    {
+    array addConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
         $sql = [];
 
@@ -507,8 +500,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array dropConstraintSql(TableSchema $schema)
-    {
+    array dropConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
         $sql = [];
 
@@ -583,8 +575,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes)
-    {
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes) {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
         $tableName = _driver.quoteIdentifier($schema.name());
@@ -610,8 +601,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array truncateTableSql(TableSchema $schema)
-    {
+    array truncateTableSql(TableSchema $schema) {
         $name = _driver.quoteIdentifier($schema.name());
 
         return [
@@ -625,8 +615,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema Table instance
      * @return array SQL statements to drop a table.
      */
-    array dropTableSql(TableSchema $schema)
-    {
+    array dropTableSql(TableSchema $schema) {
         $sql = sprintf(
             "DROP TABLE %s CASCADE",
             _driver.quoteIdentifier($schema.name())

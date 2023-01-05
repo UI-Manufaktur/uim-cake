@@ -330,8 +330,7 @@ abstract class BaseErrorHandler
      * @param int $code Error code to map
      * @return array Array of error word, and log location.
      */
-    static array mapErrorCode(int $code)
-    {
+    static array mapErrorCode(int $code) {
         $levelMap = [
             E_PARSE: "error",
             E_ERROR: "error",

@@ -220,8 +220,7 @@ class NumericPaginator : PaginatorInterface
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return array Array with keys "defaults", "options" and "finder"
      */
-    protected array extractData(RepositoryInterface $object, array $params, array $settings)
-    {
+    protected array extractData(RepositoryInterface $object, array $params, array $settings) {
         $alias = $object.getAlias();
         $defaults = this.getDefaults($alias, $settings);
         $options = this.mergeOptions($params, $defaults);
@@ -242,8 +241,7 @@ class NumericPaginator : PaginatorInterface
      *   "count", "defaults", "finder", "numResults".
      * @return array<string, mixed> Paging params.
      */
-    protected array buildParams(array $data)
-    {
+    protected array buildParams(array $data) {
         $limit = $data["options"]["limit"];
 
         $paging = [
@@ -275,8 +273,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paginator data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addPageCountParams(array $params, array $data)
-    {
+    protected array addPageCountParams(array $params, array $data) {
         $page = $params["page"];
         $pageCount = 0;
 
@@ -300,8 +297,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paginator data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addStartEndParams(array $params, array $data)
-    {
+    protected array addStartEndParams(array $params, array $data) {
         $start = $end = 0;
 
         if ($params["current"] > 0) {
@@ -322,8 +318,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paging data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addPrevNextParams(array $params, array $data)
-    {
+    protected array addPrevNextParams(array $params, array $data) {
         $params["prevPage"] = $params["page"] > 1;
         if ($params["count"] == null) {
             $params["nextPage"] = true;
@@ -341,8 +336,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paging data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addSortingParams(array $params, array $data)
-    {
+    protected array addSortingParams(array $params, array $data) {
         $defaults = $data["defaults"];
         $order = (array)$data["options"]["order"];
         $sortDefault = $directionDefault = false;
@@ -370,8 +364,7 @@ class NumericPaginator : PaginatorInterface
      * @return array An array containing in the first position the finder name
      *   and in the second the options to be passed to it.
      */
-    protected array _extractFinder(array $options)
-    {
+    protected array _extractFinder(array $options) {
         $type = !empty($options["finder"]) ? $options["finder"] : "all";
         unset($options["finder"], $options["maxLimit"]);
 
@@ -388,8 +381,7 @@ class NumericPaginator : PaginatorInterface
      *
      * @return array<string, array>
      */
-    array getPagingParams()
-    {
+    array getPagingParams() {
         return _pagingParams;
     }
 
@@ -397,8 +389,7 @@ class NumericPaginator : PaginatorInterface
      * Shim method for reading the deprecated whitelist or allowedParameters options
      *
      */
-    protected string[] getAllowedParameters()
-    {
+    protected string[] getAllowedParameters() {
         $allowed = this.getConfig("allowedParameters");
         if (!$allowed) {
             $allowed = [];
@@ -449,8 +440,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $settings The settings to merge with the request data.
      * @return array<string, mixed> Array of merged options.
      */
-    array mergeOptions(array $params, array $settings)
-    {
+    array mergeOptions(array $params, array $settings) {
         if (!empty($settings["scope"])) {
             $scope = $settings["scope"];
             $params = !empty($params[$scope]) ? (array)$params[$scope] : [];
@@ -471,8 +461,7 @@ class NumericPaginator : PaginatorInterface
      * @return array<string, mixed> An array of pagination settings for a model,
      *   or the general settings.
      */
-    array getDefaults(string $alias, array $settings)
-    {
+    array getDefaults(string $alias, array $settings) {
         if (isset($settings[$alias])) {
             $settings = $settings[$alias];
         }
@@ -519,8 +508,7 @@ class NumericPaginator : PaginatorInterface
      * @return array<string, mixed> An array of options with sort + direction removed and
      *   replaced with order if possible.
      */
-    array validateSort(RepositoryInterface $object, array $options)
-    {
+    array validateSort(RepositoryInterface $object, array $options) {
         if (isset($options["sort"])) {
             $direction = null;
             if (isset($options["direction"])) {
@@ -583,8 +571,7 @@ class NumericPaginator : PaginatorInterface
      * @param string $model Current model alias
      * @return array<string, mixed> $fields Unaliased fields where applicable
      */
-    protected array _removeAliases(array $fields, string $model)
-    {
+    protected array _removeAliases(array $fields, string $model) {
         $result = [];
         foreach ($fields as $field: $sort) {
             if (strpos($field, ".") == false) {
@@ -613,8 +600,7 @@ class NumericPaginator : PaginatorInterface
      * @param bool $allowed Whether the field was allowed.
      * @return array Final order array.
      */
-    protected array _prefix(RepositoryInterface $object, array $order, bool $allowed = false)
-    {
+    protected array _prefix(RepositoryInterface $object, array $order, bool $allowed = false) {
         $tableAlias = $object.getAlias();
         $tableOrder = [];
         foreach ($order as $key: $value) {
@@ -652,8 +638,7 @@ class NumericPaginator : PaginatorInterface
      * @param array<string, mixed> $options An array of options with a limit key to be checked.
      * @return array<string, mixed> An array of options for pagination.
      */
-    array checkLimit(array $options)
-    {
+    array checkLimit(array $options) {
         $options["limit"] = (int)$options["limit"];
         if ($options["limit"] < 1) {
             $options["limit"] = 1;

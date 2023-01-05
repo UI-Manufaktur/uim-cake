@@ -24,8 +24,7 @@ class MysqlSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesSql(array $config)
-    {
+    array listTablesSql(array $config) {
         return ["SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier($config["database"]), []];
     }
 
@@ -36,8 +35,7 @@ class MysqlSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesWithoutViewsSql(array $config)
-    {
+    array listTablesWithoutViewsSql(array $config) {
         return [
             "SHOW FULL TABLES FROM " ~ _driver.quoteIdentifier($config["database"])
             ~ " WHERE TABLE_TYPE = "BASE TABLE""
@@ -45,20 +43,17 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    array describeColumnSql(string $tableName, array $config)
-    {
+    array describeColumnSql(string $tableName, array $config) {
         return ["SHOW FULL COLUMNS FROM " ~ _driver.quoteIdentifier($tableName), []];
     }
 
 
-    array describeIndexSql(string $tableName, array $config)
-    {
+    array describeIndexSql(string $tableName, array $config) {
         return ["SHOW INDEXES FROM " ~ _driver.quoteIdentifier($tableName), []];
     }
 
 
-    array describeOptionsSql(string $tableName, array $config)
-    {
+    array describeOptionsSql(string $tableName, array $config) {
         return ["SHOW TABLE STATUS WHERE Name = ?", [$tableName]];
     }
 
@@ -79,8 +74,7 @@ class MysqlSchemaDialect : SchemaDialect
      * @return array<string, mixed> Array of column information.
      * @throws uim.cake.databases.exceptions.DatabaseException When column type cannot be parsed.
      */
-    protected array _convertColumn(string $column)
-    {
+    protected array _convertColumn(string $column) {
         preg_match("/([a-z]+)(?:\(([0-9,]+)\))?\s*([a-z]+)?/i", $column, $matches);
         if (empty($matches)) {
             throw new DatabaseException(sprintf("Unable to parse column type from "%s"", $column));
@@ -253,8 +247,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    array describeForeignKeySql(string $tableName, array $config)
-    {
+    array describeForeignKeySql(string $tableName, array $config) {
         $sql = "SELECT * FROM information_schema.key_column_usage AS kcu
             INNER JOIN information_schema.referential_constraints AS rc
             ON (
@@ -281,14 +274,12 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    array truncateTableSql(TableSchema $schema)
-    {
+    array truncateTableSql(TableSchema $schema) {
         return [sprintf("TRUNCATE TABLE `%s`", $schema.name())];
     }
 
 
-    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes)
-    {
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes) {
         $content = implode(",\n", array_merge($columns, $constraints, $indexes));
         $temporary = $schema.isTemporary() ? " TEMPORARY " : " ";
         $content = sprintf("CREATE%sTABLE `%s` (\n%s\n)", $temporary, $schema.name(), $content);
@@ -523,8 +514,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    array addConstraintSql(TableSchema $schema)
-    {
+    array addConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
         $sql = [];
 
@@ -541,8 +531,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    array dropConstraintSql(TableSchema $schema)
-    {
+    array dropConstraintSql(TableSchema $schema) {
         $sqlPattern = "ALTER TABLE %s DROP FOREIGN KEY %s;";
         $sql = [];
 

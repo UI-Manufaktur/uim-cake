@@ -199,8 +199,7 @@ trait QueryTrait
      * @param string $field The field to alias
      * @param string|null $alias the alias used to prefix the field
      */
-    STRINGAA aliasField(string $field, ?string $alias = null)
-    {
+    STRINGAA aliasField(string $field, ?string $alias = null) {
         if (strpos($field, ".") == false) {
             $alias = $alias ?: this.getRepository().getAlias();
             $aliasedField = $alias ~ "." ~ $field;
@@ -221,8 +220,7 @@ trait QueryTrait
      * @param array $fields The fields to alias
      * @param string|null $defaultAlias The default alias
      */
-    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null)
-    {
+    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null) {
         $aliased = [];
         foreach ($fields as $alias: $field) {
             if (is_numeric($alias) && is_string($field)) {
@@ -270,8 +268,7 @@ trait QueryTrait
     /**
      * Returns an array representation of the results after executing the query.
      */
-    array toArray()
-    {
+    array toArray() {
         return this.all().toArray();
     }
 
@@ -310,8 +307,7 @@ trait QueryTrait
     /**
      * Returns the list of previously registered map reduce routines.
      */
-    array getMapReducers()
-    {
+    array getMapReducers() {
         return _mapReduce;
     }
 
@@ -435,8 +431,7 @@ trait QueryTrait
      *
      * @return array<callable>
      */
-    function getResultFormatters()
-    {
+    function getResultFormatters() {
         return _formatters;
     }
 
@@ -495,8 +490,7 @@ trait QueryTrait
      * @return array
      * @see applyOptions()
      */
-    array getOptions()
-    {
+    array getOptions() {
         return _options;
     }
 

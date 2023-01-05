@@ -40,14 +40,12 @@ class CachedCollection : ICollection
     }
 
 
-    array listTablesWithoutViews()
-    {
+    array listTablesWithoutViews() {
         return this.collection.listTablesWithoutViews();
     }
 
 
-    array listTables()
-    {
+    array listTables() {
         return this.collection.listTables();
     }
 
