@@ -3,31 +3,40 @@ module uim.cake.core.retry.commandretry;
 @safe:
 import uim.cake;
 
+module uim.cake.core.Retry;
+
+use Exception;
+
 /**
  * Allows any action to be retried in case of an exception.
  *
  * This class can be parametrized with a strategy, which will be followed
  * to determine whether the action should be retried.
  */
-class CommandRetry {
+class CommandRetry
+{
     /**
      * The strategy to follow should the executed action fail.
      *
-     * @var uim.cake.Core\Retry\IRetryStrategy
+     * @var uim.cake.Core\Retry\RetryStrategyInterface
      */
-    protected strategy;
+    protected $strategy;
 
-    protected int maxRetries;
+    /**
+     */
+    protected int $maxRetries;
 
-    protected int numRetries;
+    /**
+     */
+    protected int $numRetries;
 
     /**
      * Creates the CommandRetry object with the given strategy and retry count
      *
-     * @param uim.cake.Core\Retry\IRetryStrategy $strategy The strategy to follow should the action fail
+     * @param uim.cake.Core\Retry\RetryStrategyInterface $strategy The strategy to follow should the action fail
      * @param int $maxRetries The maximum number of retry attempts allowed
      */
-    this(IRetryStrategy $strategy, int $maxRetries = 1) {
+    this(RetryStrategyInterface $strategy, int $maxRetries = 1) {
         this.strategy = $strategy;
         this.maxRetries = $maxRetries;
     }
@@ -61,7 +70,8 @@ class CommandRetry {
     /**
      * Returns the last number of retry attemps.
      */
-    int getRetries() {
+    int getRetries(): int
+    {
         return this.numRetries;
     }
 }
