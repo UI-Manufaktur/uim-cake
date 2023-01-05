@@ -117,7 +117,7 @@ class DateTimeWidget : BasicWidget {
      * @param string myFieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected auto setStep(array myData, IContext $context, string myFieldName): array
+    protected array setStep(array myData, IContext $context, string myFieldName)
     {
         if (array_key_exists("step", myData)) {
             return myData;
@@ -199,7 +199,7 @@ class DateTimeWidget : BasicWidget {
         return $dateTime.format($format);
     }
 
-    function secureFields(array myData): array
+    array secureFields(array myData)
     {
         if (!isset(myData["name"]) || myData["name"] == "") {
             return [];

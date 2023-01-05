@@ -75,7 +75,7 @@ class MissingTemplateException : CakeException
      * @return array
      * @psalm-return array{file: string, paths: array}
      */
-    auto getAttributes(): array
+    array getAttributes()
     {
         return [
             "file": this.filename,

@@ -331,7 +331,7 @@ class Asset
      * @return array Array with 2 indexes. 0: plugin name, 1: filename.
      * @psalm-return array{string|null, string}
      */
-    protected static function pluginSplit(string aName): array
+    protected static array pluginSplit(string aName)
     {
         $plugin = null;
         [$first, $second] = pluginSplit($name);

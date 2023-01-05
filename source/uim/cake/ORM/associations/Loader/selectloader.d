@@ -111,7 +111,7 @@ class SelectLoader
      *
      * @return array<string, mixed>
      */
-    protected function _defaultOptions(): array
+    protected array _defaultOptions()
     {
         return [
             "foreignKey": this.foreignKey,
@@ -196,7 +196,7 @@ class SelectLoader
      * @param array|string $finderData The finder name or an array having the name as key
      * and options as value.
      */
-    protected array _extractFinder($finderData): array
+    protected array _extractFinder($finderData)
     {
         $finderData = (array)$finderData;
 
@@ -406,7 +406,7 @@ class SelectLoader
      * @param uim.cake.orm.Query $query The query to get fields from.
      * @return array<string, array> The list of fields for the subquery.
      */
-    protected function _subqueryFields(Query $query): array
+    protected array _subqueryFields(Query $query): array
     {
         $keys = (array)this.bindingKey;
 

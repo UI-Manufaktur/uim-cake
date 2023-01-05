@@ -489,7 +489,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function addConstraintSql(TableSchema $schema): array
+    array addConstraintSql(TableSchema $schema): array
     {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
         $sql = [];
@@ -583,7 +583,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
     {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
@@ -625,7 +625,7 @@ class PostgresSchemaDialect : SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema Table instance
      * @return array SQL statements to drop a table.
      */
-    function dropTableSql(TableSchema $schema): array
+    array dropTableSql(TableSchema $schema)
     {
         $sql = sprintf(
             "DROP TABLE %s CASCADE",

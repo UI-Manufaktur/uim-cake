@@ -24,7 +24,7 @@ class TestEmailTransport : DebugTransport
      * @param uim.cake.mailers.Message $message Message
      * @return array{headers: string, message: string}
      */
-    function send(Message $message): array
+    array send(Message $message)
     {
         static::$messages[] = $message;
 

@@ -59,7 +59,7 @@ class CommandTask : Shell
      * @param array<string> $skip A list of commands to exclude.
      * @return array<string, mixed> The updated list of shells.
      */
-    protected function _findShells(array $shellList, string $path, string aKey, array $skip): array
+    protected array _findShells(array $shellList, string $path, string aKey, array $skip): array
     {
         $shells = _scanDir($path);
 
@@ -75,7 +75,7 @@ class CommandTask : Shell
      * @param array<string> $skip List of command names to skip.
      * @return array<string, mixed> The updated $shellList
      */
-    protected function _appendShells(string $type, array $shells, array $shellList, array $skip): array
+    protected array _appendShells(string $type, array $shells, array $shellList, array $skip)
     {
         $shellList[$type] = $shellList[$type] ?? [];
 
@@ -97,7 +97,7 @@ class CommandTask : Shell
      * @param string $dir The directory to read.
      * @return array<string> The list of shell classnames based on conventions.
      */
-    protected function _scanDir(string $dir): array
+    protected array _scanDir(string $dir)
     {
         if (!is_dir($dir)) {
             return [];

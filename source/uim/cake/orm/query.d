@@ -1222,7 +1222,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery {
     }
 
 
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         $eagerLoader = this.getEagerLoader();
 

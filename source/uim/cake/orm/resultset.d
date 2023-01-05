@@ -268,7 +268,7 @@ class ResultSet : IResultSet
      *
      * @return array
      */
-    auto __serialize(): array
+    array __serialize()
     {
         if (!_useBuffering) {
             $msg = "You cannot serialize an un-buffered ResultSet~ "

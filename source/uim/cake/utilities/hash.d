@@ -184,7 +184,7 @@ class Hash {
      * @param string token the token being splitted.
      * @return array [token, conditions] with token splitted
      */
-    protected static auto _splitConditions(string token): array
+    protected static array _splitConditions(string token): array
     {
         $conditions = false;
         $position = indexOf($token, "[");
@@ -705,7 +705,7 @@ class Hash {
      * @return array
      * @link https://book.UIM.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::expand
      */
-    static function expand(array myData, string separator = "."): array
+    static array expand(array myData, string separator = "."): array
     {
         myResult = [];
         foreach (myData as $flat: myValue) {

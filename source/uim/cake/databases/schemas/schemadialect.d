@@ -175,7 +175,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
-    abstract function describeColumnSql(string $tableName, array $config): array;
+    abstract array describeColumnSql(string $tableName, array $config): array;
 
     /**
      * Generate the SQL to describe the indexes in a table.
@@ -184,7 +184,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
-    abstract function describeIndexSql(string $tableName, array $config): array;
+    abstract array describeIndexSql(string $tableName, array $config): array;
 
     /**
      * Generate the SQL to describe the foreign keys in a table.
@@ -193,7 +193,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
-    abstract function describeForeignKeySql(string $tableName, array $config): array;
+    abstract array describeForeignKeySql(string $tableName, array $config): array;
 
     /**
      * Generate the SQL to describe table options
@@ -276,7 +276,7 @@ abstract class SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    abstract function addConstraintSql(TableSchema $schema): array;
+    abstract array addConstraintSql(TableSchema $schema): array;
 
     /**
      * Generate the SQL queries needed to drop foreign key constraints from the table
@@ -284,7 +284,7 @@ abstract class SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    abstract function dropConstraintSql(TableSchema $schema): array;
+    abstract array dropConstraintSql(TableSchema $schema): array;
 
     /**
      * Generate the SQL fragments for defining table constraints.

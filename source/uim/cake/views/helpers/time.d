@@ -363,7 +363,7 @@ class TimeHelper : Helper
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents()
     {
         return [];
     }

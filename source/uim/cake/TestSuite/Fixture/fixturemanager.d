@@ -81,7 +81,7 @@ class FixtureManager
     /**
      * @return uim.cake.Datasource\IFixture[]
      */
-    function loaded(): array
+    array loaded(): array
     {
         return _loaded;
     }

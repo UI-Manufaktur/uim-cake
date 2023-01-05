@@ -19,7 +19,7 @@ class FixtureHelper
      * @param array<string> $fixtureNames Fixture names from test case
      * @return array<uim.cake.Datasource\IFixture>
      */
-    function loadFixtures(array $fixtureNames): array
+    array loadFixtures(array $fixtureNames)
     {
         static $cachedFixtures = [];
 
@@ -245,7 +245,7 @@ class FixtureHelper
      * @param uim.cake.Datasource\IFixture $fixture Database fixture
      * @return array<string>
      */
-    protected function getForeignReferences(Connection $connection, IFixture $fixture): array
+    protected array getForeignReferences(Connection $connection, IFixture $fixture)
     {
         static $schemas = [];
 

@@ -128,7 +128,7 @@ class Helper : IEventListener
      * @param string myKey the key to use for class. Defaults to `"class"`.
      * @return array<string, mixed> Array of options with myKey set.
      */
-    function addClass(array myOptions, string myClass, string myKey = "class"): array
+    array addClass(array myOptions, string myClass, string myKey = "class")
     {
         if (isset(myOptions[myKey]) && is_array(myOptions[myKey])) {
             myOptions[myKey][] = myClass;

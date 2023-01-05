@@ -505,7 +505,7 @@ trait IntegrationTestTrait
      * @param array|string $data The request data.
      * @return array The request context
      */
-    protected function _buildRequest(string $url, $method, $data = []): array
+    protected array _buildRequest(string $url, $method, $data = [])
     {
         $sessionConfig = (array)Configure::read("Session") + [
             "defaults": "php",
@@ -575,7 +575,7 @@ trait IntegrationTestTrait
      * @param array $data The request body data.
      * @return array The request body with tokens added.
      */
-    protected function _addTokens(string $url, array $data): array
+    protected array _addTokens(string $url, array $data)
     {
         if (_securityToken == true) {
             $fields = array_diff_key($data, array_flip(_unlockedFields));

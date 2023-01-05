@@ -111,7 +111,7 @@ class RouteCollection
      * @return array An array of request parameters parsed from the URL.
      * @throws uim.cake.routings.exceptions.MissingRouteException When a URL has no matching route.
      */
-    function parse(string $url, string $method = ""): array
+    array parse(string $url, string $method = "")
     {
         $decoded = urldecode($url);
 
@@ -195,7 +195,7 @@ class RouteCollection
      * @param array $url The url to match.
      * @return array<string> The set of names of the url
      */
-    protected string[] _getNames(array $url): array
+    protected string[] _getNames(array $url)
     {
         $plugin = false;
         if (isset($url["plugin"]) && $url["plugin"] != false) {

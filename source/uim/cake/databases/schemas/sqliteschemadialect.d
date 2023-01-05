@@ -157,7 +157,7 @@ class SqliteSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    function listTablesWithoutViewsSql(array $config): array
+    array listTablesWithoutViewsSql(array $config): array
     {
         return [
             "SELECT name FROM sqlite_master WHERE type="table" " ~
@@ -167,7 +167,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    function describeColumnSql(string $tableName, array $config): array
+    array describeColumnSql(string $tableName, array $config): array
     {
         $sql = sprintf(
             "PRAGMA table_info(%s)",

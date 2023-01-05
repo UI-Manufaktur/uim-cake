@@ -1210,7 +1210,7 @@ class View : IEventDispatcher {
      * @return array Array with 2 indexes. 0: plugin name, 1: filename.
      * @psalm-return array{string|null, string}
      */
-    function pluginSplit(string myName, bool $fallback = true): array
+    array pluginSplit(string myName, bool $fallback = true)
     {
         myPlugin = null;
         [$first, $second] = pluginSplit(myName);

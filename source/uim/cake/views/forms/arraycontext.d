@@ -235,7 +235,7 @@ class ArrayContext : IContext
     }
 
 
-    function fieldNames(): array
+    array fieldNames()
     {
         $schema = _context["schema"];
         unset($schema["_constraints"], $schema["_indexes"]);
@@ -269,7 +269,7 @@ class ArrayContext : IContext
      * @param string myField A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    function attributes(string myField): array
+    array attributes(string myField)
     {
         if (!is_array(_context["schema"])) {
             return [];

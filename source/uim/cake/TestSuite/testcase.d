@@ -1033,7 +1033,7 @@ abstract class TestCase : BaseTestCase
      *
      * @return array<string>
      */
-    function getFixtures(): array
+    string[] getFixtures()
     {
         return this.fixtures;
     }
