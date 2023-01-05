@@ -31,7 +31,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @return array<string>
      */
-    array getHidden(): array;
+    array getHidden();
 
     /**
      * Sets the virtual fields on this entity.
@@ -84,14 +84,14 @@ interface IEntity : ArrayAccess, JsonSerializable
     /**
      * Returns all validation errors.
      */
-    array getErrors(): array;
+    array getErrors();
 
     /**
      * Returns validation errors of a field
      *
      * @param string $field Field name to get the errors from
      */
-    array getError(string $field): array;
+    array getError(string $field);
 
     /**
      * Sets error messages to the entity
@@ -146,7 +146,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @param array<string> $fields List of fields to be returned
      */
-    array extractOriginal(array $fields): array;
+    array extractOriginal(array $fields);
 
     /**
      * Returns an array with only the original fields
@@ -154,7 +154,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @param array<string> $fields List of fields to be returned
      */
-    array extractOriginalChanged(array $fields): array;
+    array extractOriginalChanged(array $fields);
 
     /**
      * Sets one or multiple fields to the specified value
@@ -188,7 +188,7 @@ interface IEntity : ArrayAccess, JsonSerializable
     /**
      * Gets all original values of the entity.
      */
-    array getOriginalValues(): array;
+    array getOriginalValues();
 
     /**
      * Returns whether this entity contains a field named $field
@@ -211,7 +211,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @return array<string> A list of fields that are "visible" in all representations.
      */
-    string[] getVisible(): array;
+    string[] getVisible();
 
     /**
      * Returns an array with all the visible fields set in this entity.
@@ -219,7 +219,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * *Note* hidden fields are not visible, and will not be output
      * by toArray().
      */
-    array toArray(): array;
+    array toArray();
 
     /**
      * Returns an array with the requested fields
@@ -228,7 +228,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      * @param array<string> $fields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
      */
-    array extract(array $fields, bool $onlyDirty = false): array;
+    array extract(array $fields, bool $onlyDirty = false);
 
     /**
      * Sets the entire entity as clean, which means that it will appear as

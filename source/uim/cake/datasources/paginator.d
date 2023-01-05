@@ -238,7 +238,7 @@ class Paginator : IPaginator {
      *   "count", "defaults", "finder", "numResults".
      * @return array<string, mixed> Paging params.
      */
-    protected auto buildParams(array myData): array
+    protected array buildParams(array myData)
     {
         $limit = myData["options"]["limit"];
 

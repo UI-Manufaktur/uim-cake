@@ -288,7 +288,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function columns(): array
+    array columns()
     {
         return array_keys(_columns);
     }
@@ -353,7 +353,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function typeMap(): array
+    array typeMap()
     {
         return _typeMap;
     }
@@ -368,7 +368,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function defaultValues(): array
+    array defaultValues()
     {
         $defaults = [];
         foreach (_columns as $name: $data) {
@@ -427,7 +427,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function indexes(): array
+    array indexes()
     {
         return array_keys(_indexes);
     }
@@ -449,7 +449,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *   empty list will be returned when the table has no primary key.
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    function primaryKey(): array
+    array primaryKey()
     {
         deprecationWarning("`TableSchema::primaryKey()` is deprecated. Use `TableSchema::getPrimaryKey()`.");
 
@@ -457,7 +457,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function getPrimaryKey(): array
+    array getPrimaryKey()
     {
         foreach (_constraints as $data) {
             if ($data["type"] == static::CONSTRAINT_PRIMARY) {

@@ -9,7 +9,7 @@ interface InvalidPropertyInterface
     /**
      * Get a list of invalid fields and their data for errors upon validation/patching
      */
-    array getInvalid(): array;
+    array getInvalid();
 
     /**
      * Set fields as invalid and not patchable into the entity.

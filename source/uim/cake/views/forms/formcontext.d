@@ -40,7 +40,7 @@ class FormContext : IContext
     }
 
 
-    auto getPrimaryKey(): array
+    auto getPrimaryKey()
     {
         return [];
     }
@@ -141,7 +141,7 @@ class FormContext : IContext
     }
 
 
-    array fieldNames(): array
+    array fieldNames()
     {
         return _form.getSchema().fields();
     }
@@ -152,7 +152,7 @@ class FormContext : IContext
     }
 
 
-    array attributes(string myField): array
+    array attributes(string myField)
     {
         return array_intersect_key(
             (array)_form.getSchema().field(myField),
@@ -166,7 +166,7 @@ class FormContext : IContext
         return count(myErrors) > 0;
     }
 
-    function error(string myField): array
+    array error(string myField)
     {
         return (array)Hash::get(_form.getErrors(), myField, []);
     }

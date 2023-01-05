@@ -306,7 +306,7 @@ class ArrayContext : IContext
      * @return array An array of errors, an empty array will be returned when the
      *    context has no errors.
      */
-    array error(string myField): array
+    array error(string myField)
     {
         if (empty(_context["errors"])) {
             return [];

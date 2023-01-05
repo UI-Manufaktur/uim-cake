@@ -32,7 +32,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @throws uim.cake.databases.exceptions.DatabaseException when unable to parse column type
      * @return array<string, mixed> Array of column information.
      */
-    protected function _convertColumn(string $column): array
+    protected array _convertColumn(string $column)
     {
         if ($column == "") {
             return ["type": TableSchema::TYPE_TEXT, "length": null];
@@ -140,7 +140,7 @@ class SqliteSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    function listTablesSql(array $config): array
+    array listTablesSql(array $config)
     {
         return [
             "SELECT name FROM sqlite_master " ~
@@ -157,7 +157,7 @@ class SqliteSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    array listTablesWithoutViewsSql(array $config): array
+    array listTablesWithoutViewsSql(array $config)
     {
         return [
             "SELECT name FROM sqlite_master WHERE type="table" " ~
@@ -167,7 +167,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    array describeColumnSql(string $tableName, array $config): array
+    array describeColumnSql(string $tableName, array $config)
     {
         $sql = sprintf(
             "PRAGMA table_info(%s)",
@@ -232,7 +232,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    function describeIndexSql(string $tableName, array $config): array
+    array describeIndexSql(string $tableName, array $config)
     {
         $sql = sprintf(
             "PRAGMA index_list(%s)",
@@ -281,7 +281,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    function describeForeignKeySql(string $tableName, array $config): array
+    array describeForeignKeySql(string $tableName, array $config)
     {
         $sql = sprintf("PRAGMA foreign_key_list(%s)", _driver.quoteIdentifier($tableName));
 
@@ -529,7 +529,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    function dropConstraintSql(TableSchema $schema): array
+    array dropConstraintSql(TableSchema $schema)
     {
         return [];
     }
@@ -552,7 +552,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    function createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes)
     {
         $lines = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($lines));
@@ -567,7 +567,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    function truncateTableSql(TableSchema $schema): array
+    array truncateTableSql(TableSchema $schema)
     {
         $name = $schema.name();
         $sql = [];

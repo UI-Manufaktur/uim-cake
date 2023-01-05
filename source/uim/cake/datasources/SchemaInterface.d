@@ -112,14 +112,14 @@ interface ISchema {
      *
      * @return array<string, string>
      */
-    function typeMap(): array;
+    array typeMap(): array;
 
     /**
      * Get a hash of columns and their default values.
      *
      * @return array<string, mixed>
      */
-    function defaultValues(): array;
+    array defaultValues();
 
     /**
      * Sets the options for a table.
@@ -140,5 +140,5 @@ interface ISchema {
      *
      * @return array<string, mixed> An array of options.
      */
-    function getOptions(): array;
+    array getOptions();
 }

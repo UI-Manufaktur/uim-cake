@@ -450,7 +450,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $settings The settings to merge with the request data.
      * @return array<string, mixed> Array of merged options.
      */
-    function mergeOptions(array $params, array $settings): array
+    array mergeOptions(array $params, array $settings)
     {
         if (!empty($settings["scope"])) {
             $scope = $settings["scope"];

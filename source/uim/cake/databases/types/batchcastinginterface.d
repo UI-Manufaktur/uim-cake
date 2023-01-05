@@ -17,5 +17,5 @@ interface BatchCastingInterface
      * @param uim.cake.databases.IDriver $driver Object from which database preferences and configuration will be extracted.
      * @return array<string, mixed>
      */
-    array manyToPHP(array $values, array $fields, IDriver $driver): array;
+    array manyToPHP(array $values, array $fields, IDriver $driver);
 }

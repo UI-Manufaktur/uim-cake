@@ -138,7 +138,7 @@ interface TableISchema : ISchema
      * @return array<string> Column name(s) for the primary key. An
      *   empty list will be returned when the table has no primary key.
      */
-    string[] getPrimaryKey(): array;
+    string[] getPrimaryKey();
 
     /**
      * Add an index.

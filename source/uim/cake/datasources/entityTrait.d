@@ -488,7 +488,7 @@ trait EntityTrait
      * This method will recursively transform entities assigned to fields
      * into arrays as well.
      */
-    array toArray(): array
+    array toArray()
     {
         myResult = [];
         foreach (this.getVisible() as myField) {
@@ -515,7 +515,7 @@ trait EntityTrait
     /**
      * Returns the fields that will be serialized as JSON
      */
-    array jsonSerialize(): array
+    array jsonSerialize()
     {
         return this.extract(this.getVisible());
     }
@@ -610,7 +610,7 @@ trait EntityTrait
      * @param myFields list of fields to be returned
      * @param bool $onlyDirty Return the requested field only if it is dirty
      */
-    array extract(string[] myFields, bool $onlyDirty = false): array
+    array extract(string[] myFields, bool $onlyDirty = false)
     {
         myResult = [];
         foreach (myFields as myField) {

@@ -18,7 +18,7 @@ class SqlserverSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    function listTablesSql(array $config): array
+    array listTablesSql(array $config)
     {
         $sql = "SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
@@ -37,7 +37,7 @@ class SqlserverSchemaDialect : SchemaDialect
      *    getting tables from.
      * @return array<mixed> An array of (sql, params) to execute.
      */
-    function listTablesWithoutViewsSql(array $config): array
+    array listTablesWithoutViewsSql(array $config)
     {
         $sql = "SELECT TABLE_NAME
             FROM INFORMATION_SCHEMA.TABLES
@@ -50,7 +50,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function describeColumnSql(string $tableName, array $config): array
+    array describeColumnSql(string $tableName, array $config)
     {
         $sql = "SELECT DISTINCT
             AC.column_id AS [column_id],

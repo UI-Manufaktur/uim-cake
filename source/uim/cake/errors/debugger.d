@@ -235,7 +235,7 @@ class Debugger
      *
      * @return array<string, string>
      */
-    static function outputMask(): array
+    static STRINGAA outputMask()
     {
         return static::configInstance('outputMask');
     }
@@ -500,7 +500,7 @@ class Debugger
      * @see https://secure.php.net/highlight_string
      * @link https://book.cakephp.org/4/en/development/debugging.html#getting-an-excerpt-from-a-file
      */
-    static function excerpt(string $file, int $line, int $context = 2): array
+    static string[] excerpt(string $file, int $line, int $context = 2): array
     {
         $lines = [];
         if (!file_exists($file)) {

@@ -36,7 +36,7 @@ class ArrayNode : INode
      *
      * @return array<uim.cake.errors.debugs.ArrayItemNode>
      */
-    auto getValue(): array
+    array getValue()
     {
         return this.items;
     }
@@ -46,7 +46,7 @@ class ArrayNode : INode
      *
      * @return array<uim.cake.errors.debugs.ArrayItemNode>
      */
-    auto getChildren(): array
+    array getChildren()
     {
         return this.items;
     }

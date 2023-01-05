@@ -62,7 +62,7 @@ class BoolType : BaseType : BatchCastingInterface
     }
 
 
-    function manyToPHP(array $values, array $fields, IDriver $driver): array
+    array manyToPHP(array $values, array $fields, IDriver $driver)
     {
         foreach ($fields as $field) {
             $value = $values[$field] ?? null;

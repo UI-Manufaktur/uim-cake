@@ -28,7 +28,7 @@ interface SqlGeneratorInterface
      * @param uim.cake.databases.Connection $connection The connection to generate SQL for.
      * @return array SQL to drop a table.
      */
-    array dropSql(Connection $connection): array;
+    array dropSql(Connection $connection);
 
     /**
      * Generate the SQL statements to truncate a table
@@ -36,7 +36,7 @@ interface SqlGeneratorInterface
      * @param uim.cake.databases.Connection $connection The connection to generate SQL for.
      * @return array SQL to truncate a table.
      */
-    function truncateSql(Connection $connection): array;
+    array truncateSql(Connection $connection);
 
     /**
      * Generate the SQL statements to add the constraints to the table
@@ -44,7 +44,7 @@ interface SqlGeneratorInterface
      * @param uim.cake.databases.Connection $connection The connection to generate SQL for.
      * @return array SQL to add the constraints.
      */
-    function addConstraintSql(Connection $connection): array;
+    array addConstraintSql(Connection $connection);
 
     /**
      * Generate the SQL statements to drop the constraints to the table
@@ -52,5 +52,5 @@ interface SqlGeneratorInterface
      * @param uim.cake.databases.Connection $connection The connection to generate SQL for.
      * @return array SQL to drop a table.
      */
-    function dropConstraintSql(Connection $connection): array;
+    array dropConstraintSql(Connection $connection);
 }

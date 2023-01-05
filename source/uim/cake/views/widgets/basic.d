@@ -172,7 +172,7 @@ class BasicWidget : IWidget {
     }
 
 
-    function secureFields(array myData): array
+    array secureFields(array myData): array
     {
         if (!isset(myData["name"]) || myData["name"] == "") {
             return [];

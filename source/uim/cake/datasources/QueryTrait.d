@@ -200,7 +200,7 @@ trait QueryTrait
      * @param string|null $alias the alias used to prefix the field
      * @return array<string, string>
      */
-    function aliasField(string $field, ?string $alias = null): array
+    array aliasField(string $field, ?string $alias = null)
     {
         if (strpos($field, ".") == false) {
             $alias = $alias ?: this.getRepository().getAlias();

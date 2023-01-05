@@ -92,7 +92,7 @@ interface IContext
      * @param string myField A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    function attributes(string myField): array;
+    function attributes(string myField);
 
     /**
      * Check whether a field has an error attached to it
@@ -109,5 +109,5 @@ interface IContext
      * @return array An array of errors, an empty array will be returned when the
      *    context has no errors.
      */
-    array error(string myField): array;
+    array error(string myField);
 }

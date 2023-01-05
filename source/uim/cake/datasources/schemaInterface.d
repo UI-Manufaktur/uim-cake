@@ -109,14 +109,14 @@ interface ISchema
      * Returns an array where the keys are the column names in the schema
      * and the values the database type they have.
      */
-    STRINGAA typeMap(): array;
+    STRINGAA typeMap();
 
     /**
      * Get a hash of columns and their default values.
      *
      * @return array<string, mixed>
      */
-    function defaultValues(): array;
+    array defaultValues();
 
     /**
      * Sets the options for a table.
