@@ -54,7 +54,7 @@ class FileWidget : BasicWidget
     }
 
     
-    function secureFields(array myData): array
+    array secureFields(array myData)
     {
         // PSR7 UploadedFileInterface objects are used.
         if (Configure::read("App.uploadedFilesAsObjects", true)) {

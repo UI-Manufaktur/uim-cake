@@ -70,7 +70,7 @@ class LabelWidget : IWidget
     }
 
     
-    function secureFields(array myData): array
+    array secureFields(array myData)
     {
         return [];
     }
