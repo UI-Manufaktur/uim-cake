@@ -235,8 +235,7 @@ class Sqlite : Driver
     }
 
 
-    protected array _expressionTranslators()
-    {
+    protected array _expressionTranslators() {
         return [
             FunctionExpression::class: "_transformFunctionExpression",
             TupleComparison::class: "_transformTupleComparison",

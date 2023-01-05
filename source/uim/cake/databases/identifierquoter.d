@@ -116,8 +116,7 @@ class IdentifierQuoter
      * @param array<string, mixed> $part the part of the query to quote
      * @return array<string, mixed>
      */
-    protected array _basicQuoter(array $part)
-    {
+    protected array _basicQuoter(array $part) {
         $result = [];
         foreach ($part as $alias: $value) {
             $value = !is_string($value) ? $value : _driver.quoteIdentifier($value);
@@ -135,8 +134,7 @@ class IdentifierQuoter
      * @param array $joins The joins to quote.
      * @return array<string, array>
      */
-    protected array _quoteJoins(array $joins)
-    {
+    protected array _quoteJoins(array $joins) {
         $result = [];
         foreach ($joins as $value) {
             $alias = "";

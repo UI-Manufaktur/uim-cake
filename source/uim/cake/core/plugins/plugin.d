@@ -84,8 +84,7 @@ class Plugin
      *
      * @return array<string> A list of plugins that have been loaded
      */
-    static string[] loaded()
-    {
+    static string[] loaded() {
         $names = [];
         foreach (static::getCollection() as $plugin) {
             $names[] = $plugin.getName();

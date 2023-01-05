@@ -148,8 +148,7 @@ trait StaticConfigTrait
      *
      * @return array<string> Array of configurations.
      */
-    static string[] configured()
-    {
+    static string[] configured() {
         $configurations = array_keys(static::$_config);
 
         return array_map(function ($key) {
@@ -189,8 +188,7 @@ trait StaticConfigTrait
      * @return array<string, mixed> The configuration array to be stored after parsing the DSN
      * @throws \InvalidArgumentException If not passed a string, or passed an invalid string
      */
-    static array parseDsn(string $dsn)
-    {
+    static array parseDsn(string $dsn) {
         if (empty($dsn)) {
             return [];
         }

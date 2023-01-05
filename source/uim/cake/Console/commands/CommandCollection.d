@@ -149,8 +149,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @param string $plugin The plugin to scan.
      * @return array<string, string> Discovered plugin commands.
      */
-    array discoverPlugin(string $plugin)
-    {
+    array discoverPlugin(string $plugin) {
         $scanner = new CommandScanner();
         $shells = $scanner.scanPlugin($plugin);
 
@@ -163,8 +162,7 @@ class CommandCollection : IteratorAggregate, Countable
      * @param array $input The results of a CommandScanner operation.
      * @return array<string, string> A flat map of command names: class names.
      */
-    protected array resolveNames(array $input)
-    {
+    protected array resolveNames(array $input) {
         $out = [];
         foreach ($input as $info) {
             $name = $info["name"];
@@ -200,8 +198,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @return array<string, string> An array of command names and their classes.
      */
-    array autoDiscover()
-    {
+    array autoDiscover() {
         $scanner = new CommandScanner();
 
         $core = this.resolveNames($scanner.scanCore());
@@ -215,8 +212,7 @@ class CommandCollection : IteratorAggregate, Countable
      *
      * @return array<string> Command names
      */
-    string[] keys()
-    {
+    string[] keys() {
         return array_keys(this.commands);
     }
 }

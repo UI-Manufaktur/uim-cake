@@ -90,8 +90,7 @@ class RequestHandlerComponent : Component
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         return [
             'Controller.startup': 'startup',
             'Controller.beforeRender': 'beforeRender',

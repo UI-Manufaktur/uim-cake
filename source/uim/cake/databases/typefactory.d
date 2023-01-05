@@ -72,8 +72,7 @@ class TypeFactory
      *
      * @return array<uim.cake.databases.TypeInterface>
      */
-    static array buildAll()
-    {
+    static array buildAll() {
         $result = [];
         foreach (static::$_types as $name: $type) {
             $result[$name] = static::$_builtTypes[$name] ?? static::build($name);

@@ -290,8 +290,7 @@ class SecurityComponent : Component
      *
      * @param array $check Data array
      */
-    protected array _fieldsList(array $check)
-    {
+    protected array _fieldsList(array $check) {
         $locked = "";
         $token = urldecode($check["_Token"]["fields"]);
         $unlocked = _unlocked($check);

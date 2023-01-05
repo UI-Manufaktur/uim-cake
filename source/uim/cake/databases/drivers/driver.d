@@ -365,8 +365,7 @@ abstract class Driver : IDriver
     }
 
 
-    array compileQuery(Query $query, ValueBinder aBinder)
-    {
+    array compileQuery(Query $query, ValueBinder aBinder) {
         $processor = this.newCompiler();
         $translator = this.queryTranslator($query.type());
         $query = $translator($query);
@@ -425,8 +424,7 @@ abstract class Driver : IDriver
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         return [
             "connected": _connection != null,
         ];

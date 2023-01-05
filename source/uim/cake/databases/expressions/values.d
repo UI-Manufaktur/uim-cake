@@ -105,8 +105,7 @@ class ValuesExpression : IExpression {
     /**
      * Gets the columns to be inserted.
      */
-    array getColumns()
-    {
+    array getColumns() {
         return _columns;
     }
 
@@ -117,8 +116,7 @@ class ValuesExpression : IExpression {
      * need to strip the identifiers off of the columns.
      *
      */
-    protected array _columnNames()
-    {
+    protected array _columnNames() {
         $columns = [];
         foreach (_columns as $col) {
             if (is_string($col)) {
@@ -146,8 +144,7 @@ class ValuesExpression : IExpression {
     /**
      * Gets the values to be inserted.
      */
-    array getValues()
-    {
+    array getValues() {
         if (!_castedExpressions) {
             _processExpressions();
         }

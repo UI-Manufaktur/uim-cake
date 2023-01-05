@@ -187,8 +187,7 @@ class Postgres : Driver
     }
 
 
-    protected array _expressionTranslators()
-    {
+    protected array _expressionTranslators() {
         return [
             IdentifierExpression::class: "_transformIdentifierExpression",
             FunctionExpression::class: "_transformFunctionExpression",

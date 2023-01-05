@@ -70,8 +70,7 @@ if (!function_exists("pluginSplit")) {
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#pluginSplit
      * @psalm-return array{string|null, string}
      */
-    array pluginSplit(string aName, bool $dotAppend = false, ?string $plugin = null)
-    {
+    array pluginSplit(string aName, bool $dotAppend = false, ?string $plugin = null) {
         if (strpos($name, ".") != false) {
             $parts = explode(".", $name, 2);
             if ($dotAppend) {
@@ -96,8 +95,7 @@ if (!function_exists("namespaceSplit")) {
      * @param string $class The full class name, ie `Cake\Core\App`.
      * @return array<string> Array with 2 indexes. 0: namespace, 1: classname.
      */
-    string[] namespaceSplit(string $class)
-    {
+    string[] namespaceSplit(string $class) {
         $pos = strrpos($class, "\\");
         if ($pos == false) {
             return ["", $class];

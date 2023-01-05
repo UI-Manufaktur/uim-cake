@@ -247,8 +247,7 @@ trait ConsoleIntegrationTestTrait
      * @param string $command Command string
      * @return array<string>
      */
-    protected string[] commandStringToArgs(string $command)
-    {
+    protected string[] commandStringToArgs(string $command) {
         $charCount = strlen($command);
         $argv = [];
         $arg = "";
