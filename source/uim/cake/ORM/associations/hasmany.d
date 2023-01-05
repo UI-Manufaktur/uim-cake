@@ -573,7 +573,7 @@ class HasMany : Association
     }
 
 
-    function defaultRowValue(array $row, bool $joined): array
+    array defaultRowValue(array $row, bool $joined)
     {
         $sourceAlias = this.getSource().getAlias();
         if (isset($row[$sourceAlias])) {

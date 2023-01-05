@@ -1260,7 +1260,7 @@ class Response : IResponse
      *
      * @return array<string, array>
      */
-    function getCookies(): array
+    array getCookies()
     {
         $out = [];
         /** @var array<uim.cake.Http\Cookie\Cookie> $cookies */
@@ -1479,7 +1479,7 @@ class Response : IResponse
      *
      * @return array<string, mixed>
      */
-    array __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "status": _status,

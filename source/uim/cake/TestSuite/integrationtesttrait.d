@@ -624,7 +624,7 @@ trait IntegrationTestTrait
      *
      * @param array $data POST data
      */
-    protected array _castToString(array $data): array
+    protected array _castToString(array $data)
     {
         foreach ($data as $key: $value) {
             if (is_scalar($value)) {
@@ -652,7 +652,7 @@ trait IntegrationTestTrait
      * @param string $url The URL
      * @return array Qualified URL, the query parameters, and host data
      */
-    protected function _url(string $url): array
+    protected array _url(string $url): array
     {
         $uri = new Uri($url);
         $path = $uri.getPath();

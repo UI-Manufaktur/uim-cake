@@ -321,7 +321,7 @@ class RouteCollection
      *
      * @return array<uim.cake.routings.Route\Route>
      */
-    function routes(): array
+    array routes()
     {
         krsort(_paths);
 
@@ -337,7 +337,7 @@ class RouteCollection
      *
      * @return array<uim.cake.routings.Route\Route>
      */
-    array named(): array
+    array named()
     {
         return _named;
     }
@@ -347,7 +347,7 @@ class RouteCollection
      *
      * @return array<string> The valid extensions.
      */
-    string[] getExtensions(): array
+    string[] getExtensions()
     {
         return _extensions;
     }
@@ -450,7 +450,7 @@ class RouteCollection
      *   the groups middleware will be flattened into the returned list.
      * @throws \RuntimeException when a requested middleware does not exist.
      */
-    function getMiddleware(array $names): array
+    array getMiddleware(array $names)
     {
         $out = [];
         foreach ($names as $name) {

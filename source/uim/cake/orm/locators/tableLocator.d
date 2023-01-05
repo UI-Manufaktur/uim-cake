@@ -123,7 +123,7 @@ class TableLocator : AbstractLocator : ILocator
     }
 
 
-    auto getConfig(Nullable!string myAlias = null): array
+    array getConfig(Nullable!string myAlias = null)
     {
         if (myAlias is null) {
             return _config;
@@ -303,7 +303,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @return array<uim.cake.orm.Table>
      */
-    function genericInstances(): array {
+    array genericInstances() {
         return _fallbacked;
     }
 

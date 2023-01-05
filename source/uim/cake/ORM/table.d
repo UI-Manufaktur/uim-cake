@@ -2831,7 +2831,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity>
      */
-    function patchEntities(iterable $entities, array $data, array $options = []): array
+    array patchEntities(iterable $entities, array $data, array $options = []): array
     {
         $options["associated"] = $options["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();

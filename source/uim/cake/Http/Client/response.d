@@ -280,7 +280,7 @@ class Response : Message : IResponse
      *
      * @return array The cookie data
      */
-    array getCookies(): array
+    array getCookies()
     {
         return _getCookies();
     }
@@ -348,7 +348,7 @@ class Response : Message : IResponse
      *
      * @return array Array of Cookie data.
      */
-    protected function _getCookies(): array
+    protected array _getCookies()
     {
         this.buildCookieCollection();
 

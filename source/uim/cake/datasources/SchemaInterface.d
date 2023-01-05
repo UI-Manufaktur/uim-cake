@@ -67,7 +67,7 @@ interface ISchema {
      *
      * @return array<string>
      */
-    string[] columns(): array;
+    string[] columns();
 
     /**
      * Returns column type or null if a column does not exist.

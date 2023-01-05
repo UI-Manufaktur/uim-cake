@@ -81,7 +81,7 @@ class FixtureManager
     /**
      * @return uim.cake.Datasource\IFixture[]
      */
-    array loaded(): array
+    array loaded()
     {
         return _loaded;
     }
@@ -89,7 +89,7 @@ class FixtureManager
     /**
      * @return array<string>
      */
-    function getInserted(): array
+    string[] getInserted()
     {
         $inserted = [];
         foreach (_insertionMap as $fixtures) {
@@ -373,7 +373,7 @@ class FixtureManager
      * @param array<string> $fixtures The array of fixtures a list of connections is needed from.
      * @return array An array of connection names.
      */
-    protected function _fixtureConnections(array $fixtures): array
+    protected array _fixtureConnections(array $fixtures)
     {
         $dbs = [];
         foreach ($fixtures as $name) {

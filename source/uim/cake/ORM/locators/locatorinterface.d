@@ -16,7 +16,7 @@ interface ILocator: BaseILocator
      * @param string|null $alias Alias to get config for, null for complete config.
      * @return array The config data.
      */
-    function getConfig(?string $alias = null): array;
+    array getConfig(?string $alias = null);
 
     /**
      * Stores a list of options to be used when instantiating an object

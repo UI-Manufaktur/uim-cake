@@ -226,7 +226,7 @@ class UrlHelper : Helper
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents(): array
     {
         return [];
     }

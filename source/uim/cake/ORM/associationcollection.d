@@ -121,7 +121,7 @@ class AssociationCollection : IteratorAggregate
      *
      * @return array<string>
      */
-    function keys(): array
+    string[] keys()
     {
         return array_keys(_items);
     }
@@ -134,7 +134,7 @@ class AssociationCollection : IteratorAggregate
      * @return array<uim.cake.orm.Association> An array of Association objects.
      * @since 3.5.3
      */
-    function getByType($class): array
+    array getByType($class): array
     {
         $class = array_map("strtolower", (array)$class);
 

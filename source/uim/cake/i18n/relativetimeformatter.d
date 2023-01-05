@@ -175,7 +175,7 @@ class RelativeTimeFormatter : DifferenceIFormatter
      * @param array<string, mixed> $options An array of options.
      * @return array An array of values.
      */
-    protected function _diffData($futureTime, $pastTime, bool $backwards, $options): array
+    protected array _diffData($futureTime, $pastTime, bool $backwards, $options)
     {
         $futureTime = (int)$futureTime;
         $pastTime = (int)$pastTime;

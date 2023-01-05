@@ -114,7 +114,7 @@ class EagerLoader
      * @return array Containments.
      * @throws \InvalidArgumentException When using $queryBuilder with an array of $associations
      */
-    function contain($associations, ?callable $queryBuilder = null): array
+    array contain($associations, ?callable $queryBuilder = null): array
     {
         if ($queryBuilder) {
             if (!is_string($associations)) {
@@ -245,7 +245,7 @@ class EagerLoader
      *
      * @return array The resulting containments array
      */
-    function getMatching(): array
+    array getMatching(): array
     {
         if (_matching == null) {
             _matching = new static();

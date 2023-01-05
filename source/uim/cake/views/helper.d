@@ -152,7 +152,7 @@ class Helper : IEventListener
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents(): array
     {
         myEventMap = [
             "View.beforeRenderFile": "beforeRenderFile",

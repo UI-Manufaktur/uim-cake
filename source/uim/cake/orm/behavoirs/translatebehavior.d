@@ -174,7 +174,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      *
      * @return array<string, mixed>
      */
-    array implementedEvents(): array
+    array implementedEvents()
     {
         return [
             "Model.beforeFind":"beforeFind",
@@ -195,7 +195,7 @@ class TranslateBehavior : Behavior : IPropertyMarshal
      * @param array<string, mixed> myOptions The options array used in the marshalling call.
      * @return array A map of `[property: callable]` of additional properties to marshal.
      */
-    function buildMarshalMap(Marshaller $marshaller, array $map, array myOptions): array
+    array buildMarshalMap(Marshaller $marshaller, array $map, array myOptions)
     {
         return this.getStrategy().buildMarshalMap($marshaller, $map, myOptions);
     }

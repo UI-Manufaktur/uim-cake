@@ -1357,7 +1357,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param myKeys the keys to check in myOptions to build matchers from
      * the associated value
      */
-    protected array _setFieldMatchers(array myOptions, string[] myKeys): array
+    protected array _setFieldMatchers(array myOptions, string[] myKeys)
     {
         foreach (myKeys as myField) {
             if (!is_array(myOptions[myField])) {
@@ -2660,7 +2660,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, IValidatorAware
      * @param array<string, mixed> myOptions A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
-    function newEntities(array myData, array myOptions = []): array
+    array newEntities(array myData, array myOptions = [])
     {
         myOptions["associated"] = myOptions["associated"] ?? _associations.keys();
         $marshaller = this.marshaller();

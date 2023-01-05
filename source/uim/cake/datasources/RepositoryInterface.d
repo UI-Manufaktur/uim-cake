@@ -184,7 +184,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
-    array newEntities(array $data, array $options = []): array;
+    array newEntities(array $data, array $options = []);
 
     /**
      * Merges the passed `$data` into `$entity` respecting the accessible
@@ -223,5 +223,5 @@ interface RepositoryInterface
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity>
      */
-    function patchEntities(iterable $entities, array $data, array $options = []): array;
+    array patchEntities(iterable $entities, array $data, array $options = []);
 }

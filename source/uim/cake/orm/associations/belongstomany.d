@@ -946,7 +946,7 @@ class BelongsToMany : Association
      * the junction table.
      *
      */
-    protected array junctionConditions(): array
+    protected array junctionConditions()
     {
         if (_junctionConditions != null) {
             return _junctionConditions;
@@ -1285,7 +1285,7 @@ class BelongsToMany : Association
      *   key value
      * @return array<uim.cake.Datasource\IEntity>
      */
-    protected function _collectJointEntities(IEntity $sourceEntity, array $targetEntities): array
+    protected array _collectJointEntities(IEntity $sourceEntity, array $targetEntities)
     {
         $target = this.getTarget();
         $source = this.getSource();

@@ -288,7 +288,7 @@ class ServerRequest : IServerRequest
      * @param array<string, mixed> $config Config array.
      * @return array<string, mixed> Update config.
      */
-    protected function processUrlOption(array $config): array
+    protected array processUrlOption(array $config)
     {
         if ($config["url"][0] != "/") {
             $config["url"] = "/" ~ $config["url"];
@@ -935,7 +935,7 @@ class ServerRequest : IServerRequest
      * @return array
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function getQueryParams(): array
+    array getQueryParams()
     {
         return this.query;
     }

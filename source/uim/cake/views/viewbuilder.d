@@ -272,10 +272,8 @@ class ViewBuilder : JsonSerializable, Serializable
 
     /**
      * Gets the helpers to use.
-     *
-     * @return array
      */
-    auto getHelpers(): array
+    array getHelpers(): array
     {
         return _helpers;
     }
@@ -582,10 +580,8 @@ class ViewBuilder : JsonSerializable, Serializable
 
     /**
      * Magic method used for serializing the view builder object.
-     *
-     * @return array
      */
-    auto __serialize(): array
+    array __serialize(): array
     {
         return this.jsonSerialize();
     }

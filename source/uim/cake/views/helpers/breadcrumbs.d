@@ -203,8 +203,6 @@ class BreadcrumbsHelper : Helper
 
     /**
      * Returns the crumb list.
-     *
-     * @return array
      */
     array getCrumbs(): array
     {

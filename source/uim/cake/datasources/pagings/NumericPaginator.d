@@ -220,7 +220,7 @@ class NumericPaginator : PaginatorInterface
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return array Array with keys "defaults", "options" and "finder"
      */
-    protected array extractData(RepositoryInterface $object, array $params, array $settings): array
+    protected array extractData(RepositoryInterface $object, array $params, array $settings)
     {
         $alias = $object.getAlias();
         $defaults = this.getDefaults($alias, $settings);
@@ -242,7 +242,7 @@ class NumericPaginator : PaginatorInterface
      *   "count", "defaults", "finder", "numResults".
      * @return array<string, mixed> Paging params.
      */
-    protected function buildParams(array $data): array
+    protected array buildParams(array $data)
     {
         $limit = $data["options"]["limit"];
 
@@ -275,7 +275,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paginator data.
      * @return array<string, mixed> Updated params.
      */
-    protected function addPageCountParams(array $params, array $data): array
+    protected array addPageCountParams(array $params, array $data)
     {
         $page = $params["page"];
         $pageCount = 0;
@@ -300,7 +300,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paginator data.
      * @return array<string, mixed> Updated params.
      */
-    protected function addStartEndParams(array $params, array $data): array
+    protected array addStartEndParams(array $params, array $data)
     {
         $start = $end = 0;
 
@@ -322,7 +322,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paging data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addPrevNextParams(array $params, array $data): array
+    protected array addPrevNextParams(array $params, array $data)
     {
         $params["prevPage"] = $params["page"] > 1;
         if ($params["count"] == null) {
@@ -388,7 +388,7 @@ class NumericPaginator : PaginatorInterface
      *
      * @return array<string, array>
      */
-    array getPagingParams(): array
+    array getPagingParams()
     {
         return _pagingParams;
     }
@@ -397,7 +397,7 @@ class NumericPaginator : PaginatorInterface
      * Shim method for reading the deprecated whitelist or allowedParameters options
      *
      */
-    protected string[] getAllowedParameters(): array
+    protected string[] getAllowedParameters()
     {
         $allowed = this.getConfig("allowedParameters");
         if (!$allowed) {
@@ -471,7 +471,7 @@ class NumericPaginator : PaginatorInterface
      * @return array<string, mixed> An array of pagination settings for a model,
      *   or the general settings.
      */
-    array getDefaults(string $alias, array $settings): array
+    array getDefaults(string $alias, array $settings)
     {
         if (isset($settings[$alias])) {
             $settings = $settings[$alias];
@@ -519,7 +519,7 @@ class NumericPaginator : PaginatorInterface
      * @return array<string, mixed> An array of options with sort + direction removed and
      *   replaced with order if possible.
      */
-    function validateSort(RepositoryInterface $object, array $options): array
+    array validateSort(RepositoryInterface $object, array $options)
     {
         if (isset($options["sort"])) {
             $direction = null;
@@ -583,7 +583,7 @@ class NumericPaginator : PaginatorInterface
      * @param string $model Current model alias
      * @return array<string, mixed> $fields Unaliased fields where applicable
      */
-    protected function _removeAliases(array $fields, string $model): array
+    protected array _removeAliases(array $fields, string $model)
     {
         $result = [];
         foreach ($fields as $field: $sort) {

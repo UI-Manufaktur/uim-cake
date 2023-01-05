@@ -162,7 +162,7 @@ class Router
      * @return array<string, string> Named route elements
      * @see uim.cake.routings.Router::$_namedExpressions
      */
-    static function getNamedExpressions(): array
+    static array getNamedExpressions()
     {
         return static::$_namedExpressions;
     }
@@ -203,7 +203,7 @@ class Router
      * @return array Parsed elements from URL.
      * @throws uim.cake.routings.exceptions.MissingRouteException When a route cannot be handled
      */
-    static function parseRequest(ServerRequest $request): array
+    static array parseRequest(ServerRequest $request): array
     {
         return static::$_collection.parseRequest($request);
     }
