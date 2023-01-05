@@ -97,5 +97,5 @@ interface IEventManager
      *
      * @param string $eventKey Event key.
      */
-    array listeners(string $eventKey): array;
+    array listeners(string $eventKey);
 }

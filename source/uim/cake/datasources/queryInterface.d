@@ -35,7 +35,7 @@ interface IQuery {
      * @param string myField The field to alias
      * @param string|null myAlias the alias used to prefix the field
      */
-    array aliasField(string myField, Nullable!string myAlias = null): array;
+    array aliasField(string myField, Nullable!string myAlias = null);
 
     /**
      * Runs `aliasField()` for each field in the provided list and returns

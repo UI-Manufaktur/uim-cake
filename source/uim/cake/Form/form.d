@@ -102,7 +102,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * @return array<string, mixed>
      */
-    array implementedEvents(): array
+    array implementedEvents()
     {
         if (method_exists(this, "buildValidator")) {
             return [
@@ -204,7 +204,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * @return array Last set validation errors.
      */
-    function getErrors(): array
+    array getErrors()
     {
         return _errors;
     }
@@ -326,7 +326,7 @@ class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
      *
      * @return array<string, mixed>
      */
-    array __debugInfo(): array
+    array __debugInfo()
     {
         $special = [
             "_schema": this.getSchema().__debugInfo(),

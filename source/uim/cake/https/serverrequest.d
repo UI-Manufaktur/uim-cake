@@ -1575,8 +1575,6 @@ class ServerRequest : IServerRequest
      *
      * This will include the params, webroot, base, and here attributes that UIM
      * provides.
-     *
-     * @return array
      */
     array getAttributes() {
         $emulated = [
@@ -1607,8 +1605,6 @@ class ServerRequest : IServerRequest
 
     /**
      * Get the array of uploaded files from the request.
-     *
-     * @return array
      */
     array getUploadedFiles() {
         return this.uploadedFiles;

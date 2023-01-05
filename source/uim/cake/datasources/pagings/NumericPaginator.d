@@ -220,7 +220,7 @@ class NumericPaginator : PaginatorInterface
      * @param array<string, mixed> $settings The settings/configuration used for pagination.
      * @return array Array with keys "defaults", "options" and "finder"
      */
-    protected function extractData(RepositoryInterface $object, array $params, array $settings): array
+    protected array extractData(RepositoryInterface $object, array $params, array $settings): array
     {
         $alias = $object.getAlias();
         $defaults = this.getDefaults($alias, $settings);
@@ -341,7 +341,7 @@ class NumericPaginator : PaginatorInterface
      * @param array $data Paging data.
      * @return array<string, mixed> Updated params.
      */
-    protected array addSortingParams(array $params, array $data): array
+    protected array addSortingParams(array $params, array $data)
     {
         $defaults = $data["defaults"];
         $order = (array)$data["options"]["order"];
@@ -370,7 +370,7 @@ class NumericPaginator : PaginatorInterface
      * @return array An array containing in the first position the finder name
      *   and in the second the options to be passed to it.
      */
-    protected array _extractFinder(array $options): array
+    protected array _extractFinder(array $options)
     {
         $type = !empty($options["finder"]) ? $options["finder"] : "all";
         unset($options["finder"], $options["maxLimit"]);
@@ -388,7 +388,7 @@ class NumericPaginator : PaginatorInterface
      *
      * @return array<string, array>
      */
-    function getPagingParams(): array
+    array getPagingParams(): array
     {
         return _pagingParams;
     }
@@ -613,7 +613,7 @@ class NumericPaginator : PaginatorInterface
      * @param bool $allowed Whether the field was allowed.
      * @return array Final order array.
      */
-    protected function _prefix(RepositoryInterface $object, array $order, bool $allowed = false): array
+    protected array _prefix(RepositoryInterface $object, array $order, bool $allowed = false): array
     {
         $tableAlias = $object.getAlias();
         $tableOrder = [];

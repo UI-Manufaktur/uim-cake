@@ -650,7 +650,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function addConstraintSql(Connection $connection): array
+    array addConstraintSql(Connection $connection): array
     {
         $dialect = $connection.getDriver().schemaDialect();
 

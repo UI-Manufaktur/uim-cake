@@ -222,7 +222,7 @@ trait QueryTrait
      * @param array $fields The fields to alias
      * @param string|null $defaultAlias The default alias
      */
-    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null): array
+    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null)
     {
         $aliased = [];
         foreach ($fields as $alias: $field) {
@@ -436,7 +436,7 @@ trait QueryTrait
      *
      * @return array<callable>
      */
-    function getResultFormatters(): array
+    array getResultFormatters()
     {
         return _formatters;
     }
@@ -496,7 +496,7 @@ trait QueryTrait
      * @return array
      * @see applyOptions()
      */
-    function getOptions(): array
+    array getOptions()
     {
         return _options;
     }

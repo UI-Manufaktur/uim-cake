@@ -272,7 +272,7 @@ class File
      *
      * @return array<string, mixed> File information.
      */
-    function info(): array
+    array info()
     {
         if (!this.info) {
             this.info = pathinfo(this.path);

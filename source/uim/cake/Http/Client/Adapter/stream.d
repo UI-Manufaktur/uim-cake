@@ -316,7 +316,7 @@ class Stream : AdapterInterface
      *
      * @return array<string, mixed>
      */
-    array contextOptions(): array
+    array contextOptions()
     {
         return array_merge(_contextOptions, _sslContextOptions);
     }

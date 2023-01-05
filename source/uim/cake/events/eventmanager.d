@@ -413,7 +413,7 @@ class EventManager : IEventManager
      *
      * @return array<string, mixed>
      */
-    array __debugInfo(): array
+    array __debugInfo()
     {
         $properties = get_object_vars(this);
         $properties["_generalManager"] = "(object) EventManager";

@@ -276,8 +276,6 @@ trait EntityTrait
 
     /**
      * Gets all original values of the entity.
-     *
-     * @return array
      */
     array getOriginalValues()
     {
@@ -776,8 +774,6 @@ trait EntityTrait
 
     /**
      * Returns all validation errors.
-     *
-     * @return array
      */
     array getErrors()
     {
@@ -980,8 +976,6 @@ trait EntityTrait
 
     /**
      * Get a list of invalid fields and their data for errors upon validation/patching
-     *
-     * @return array
      */
     array getInvalid()
     {
@@ -1081,7 +1075,7 @@ trait EntityTrait
      *
      * @return array<bool>
      */
-    array getAccessible(): array
+    array getAccessible()
     {
         return _accessible;
     }
@@ -1137,7 +1131,7 @@ trait EntityTrait
      *
      * @return array<string, mixed>
      */
-    array __debugInfo(): array
+    array __debugInfo()
     {
         myFields = _fields;
         foreach (_virtual as myField) {

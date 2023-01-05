@@ -165,7 +165,7 @@ class Folder
      * @param bool $fullPath True returns the full path
      * @return array Contents of current directory as an array, an empty array on failure
      */
-    function read($sort = self::SORT_NAME, $exceptions = false, bool $fullPath = false): array
+    array read($sort = self::SORT_NAME, $exceptions = false, bool $fullPath = false)
     {
         $dirs = $files = [];
 
@@ -231,7 +231,7 @@ class Folder
      * @param string|bool $sort Whether results should be sorted.
      * @return array<string> Files that match given pattern
      */
-    function find(string $regexpPattern = ".*", $sort = false): array
+    string[] find(string $regexpPattern = ".*", $sort = false)
     {
         [, $files] = this.read($sort);
 
@@ -245,7 +245,7 @@ class Folder
      * @param string|bool $sort Whether results should be sorted.
      * @return array Files matching $pattern
      */
-    function findRecursive(string $pattern = ".*", $sort = false): array
+    array findRecursive(string $pattern = ".*", $sort = false)
     {
         if (!this.pwd()) {
             return [];
@@ -862,7 +862,7 @@ class Folder
      *
      * @param bool $reset Reset message stack after reading
      */
-    array messages(bool $reset = true): array
+    array messages(bool $reset = true)
     {
         $messages = _messages;
         if ($reset) {
@@ -877,7 +877,7 @@ class Folder
      *
      * @param bool $reset Reset error stack after reading
      */
-    array errors(bool $reset = true): array
+    array errors(bool $reset = true)
     {
         $errors = _errors;
         if ($reset) {

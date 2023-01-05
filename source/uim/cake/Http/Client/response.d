@@ -280,7 +280,7 @@ class Response : Message : IResponse
      *
      * @return array The cookie data
      */
-    function getCookies(): array
+    array getCookies(): array
     {
         return _getCookies();
     }

@@ -199,7 +199,7 @@ trait QueryTrait
      * @param string $field The field to alias
      * @param string|null $alias the alias used to prefix the field
      */
-    STRINGAA aliasField(string $field, ?string $alias = null): array
+    STRINGAA aliasField(string $field, ?string $alias = null)
     {
         if (strpos($field, ".") == false) {
             $alias = $alias ?: this.getRepository().getAlias();
@@ -221,7 +221,7 @@ trait QueryTrait
      * @param array $fields The fields to alias
      * @param string|null $defaultAlias The default alias
      */
-    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null): array
+    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null)
     {
         $aliased = [];
         foreach ($fields as $alias: $field) {
@@ -435,7 +435,7 @@ trait QueryTrait
      *
      * @return array<callable>
      */
-    function getResultFormatters(): array
+    function getResultFormatters()
     {
         return _formatters;
     }
@@ -495,7 +495,7 @@ trait QueryTrait
      * @return array
      * @see applyOptions()
      */
-    function getOptions(): array
+    array getOptions(): array
     {
         return _options;
     }

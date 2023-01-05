@@ -214,14 +214,14 @@ interface CookieInterface
      *
      * @return array<string, mixed>
      */
-    array getOptions(): array;
+    array getOptions();
 
     /**
      * Get cookie data as array.
      *
      * @return array<string, mixed> With keys `name`, `value`, `expires` etc. options.
      */
-    function toArray(): array;
+    array toArray();
 
     /**
      * Returns the cookie as header value

@@ -140,7 +140,7 @@ class Message
     /**
      * Get all cookies
      */
-    array cookies(): array
+    array cookies()
     {
         return _cookies;
     }

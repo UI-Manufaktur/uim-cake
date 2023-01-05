@@ -142,7 +142,7 @@ class FormProtector
      * @return array<string> Array of field name params like ["Model.field"] or
      *   ["Model", "field"] for array fields or empty array if $name is empty.
      */
-    protected function getFieldNameArray(string aName): array
+    protected array getFieldNameArray(string aName)
     {
         if (empty($name) && $name != "0") {
             return [];
@@ -252,7 +252,7 @@ class FormProtector
      * @return array<string, array>
      * @psalm-return array{fields: array, unlockedFields: array}
      */
-    protected function extractHashParts(array $formData): array
+    protected array extractHashParts(array $formData)
     {
         $fields = this.extractFields($formData);
         $unlockedFields = this.sortedUnlockedFields($formData);
@@ -268,7 +268,7 @@ class FormProtector
      *
      * @param array $formData Data array
      */
-    protected array extractFields(array $formData): array
+    protected array extractFields(array $formData)
     {
         $locked = "";
         $token = urldecode($formData["_Token"]["fields"]);
@@ -339,7 +339,7 @@ class FormProtector
      *
      * @param array $formData Data array
      */
-    protected string[] sortedUnlockedFields(array $formData): array
+    protected string[] sortedUnlockedFields(array $formData)
     {
         $unlocked = urldecode($formData["_Token"]["unlocked"]);
         if (empty($unlocked)) {
@@ -360,7 +360,7 @@ class FormProtector
      * @return array<string, string> The token data.
      * @psalm-return array{fields: string, unlocked: string, debug: string}
      */
-    function buildTokenData(string $url = "", string $sessionId = ""): array
+    array buildTokenData(string $url = "", string $sessionId = ""): array
     {
         $fields = this.fields;
         $unlockedFields = this.unlockedFields;

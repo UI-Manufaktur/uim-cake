@@ -184,7 +184,7 @@ interface RepositoryInterface
      * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
-    function newEntities(array $data, array $options = []): array;
+    array newEntities(array $data, array $options = []): array;
 
     /**
      * Merges the passed `$data` into `$entity` respecting the accessible

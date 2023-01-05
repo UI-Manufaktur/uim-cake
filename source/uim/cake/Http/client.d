@@ -438,7 +438,7 @@ class Client : ClientInterface
      * @param array<string, mixed> $options Options to merge.
      * @return array Options merged with set config.
      */
-    protected function _mergeOptions(array $options): array
+    protected array _mergeOptions(array $options): array
     {
         return Hash::merge(_config, $options);
     }

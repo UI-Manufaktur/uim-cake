@@ -284,7 +284,7 @@ abstract class ServerRequestFactory : ServerRequestFactoryInterface
      * @param array $server The SERVER data to use.
      * @return array An array containing the [baseDir, webroot]
      */
-    protected static auto getBase(UriInterface $uri, array $server): array
+    protected static auto getBase(UriInterface $uri, array $server)
     {
         myConfig = (array)Configure::read("App") + [
             "base":null,

@@ -63,7 +63,7 @@ class Digest
      * @param array $credentials Authentication credentials.
      * @return array modified credentials.
      */
-    protected function _getServerInfo(Request $request, array $credentials): array
+    protected array _getServerInfo(Request $request, array $credentials)
     {
         $response = _client.get(
             (string)$request.getUri(),
