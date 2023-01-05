@@ -149,7 +149,7 @@ abstract class SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema Schema instance
      * @return array SQL statements to drop a table.
      */
-    function dropTableSql(TableSchema $schema): array
+    array dropTableSql(TableSchema $schema)
     {
         $sql = sprintf(
             "DROP TABLE %s",
@@ -166,7 +166,7 @@ abstract class SchemaDialect
      *    getting tables from.
      * @return array An array of (sql, params) to execute.
      */
-    abstract array listTablesSql(array $config): array;
+    abstract array listTablesSql(array $config);
 
     /**
      * Generate the SQL to describe a table.
@@ -175,7 +175,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
-    abstract array describeColumnSql(string $tableName, array $config): array;
+    abstract array describeColumnSql(string $tableName, array $config);
 
     /**
      * Generate the SQL to describe the indexes in a table.
@@ -184,7 +184,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
-    abstract array describeIndexSql(string $tableName, array $config): array;
+    abstract array describeIndexSql(string $tableName, array $config);
 
     /**
      * Generate the SQL to describe the foreign keys in a table.
@@ -193,7 +193,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array An array of (sql, params) to execute.
      */
-    abstract array describeForeignKeySql(string $tableName, array $config): array;
+    abstract array describeForeignKeySql(string $tableName, array $config);
 
     /**
      * Generate the SQL to describe table options
@@ -202,7 +202,7 @@ abstract class SchemaDialect
      * @param array<string, mixed> $config The connection configuration.
      * @return array SQL statements to get options for a table.
      */
-    function describeOptionsSql(string $tableName, array $config): array
+    array describeOptionsSql(string $tableName, array $config)
     {
         return ["", ""];
     }
@@ -255,11 +255,11 @@ abstract class SchemaDialect
      * @return array<string> SQL statements to create a table.
      */
     abstract function createTableSql(
-        TableSchema $schema,
+        TableScarrayhema $schema,
         array $columns,
         array $constraints,
         array $indexes
-    ): array;
+    );
 
     /**
      * Generate the SQL fragment for a single column in a table.
@@ -276,7 +276,7 @@ abstract class SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    abstract array addConstraintSql(TableSchema $schema): array;
+    abstract array addConstraintSql(TableSchema $schema);
 
     /**
      * Generate the SQL queries needed to drop foreign key constraints from the table
@@ -284,7 +284,7 @@ abstract class SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    abstract array dropConstraintSql(TableSchema $schema): array;
+    abstract array dropConstraintSql(TableSchema $schema);
 
     /**
      * Generate the SQL fragments for defining table constraints.
@@ -310,7 +310,7 @@ abstract class SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema Table instance.
      * @return array SQL statements to truncate a table.
      */
-    abstract array truncateTableSql(TableSchema $schema): array;
+    abstract array truncateTableSql(TableSchema $schema);
 }
 
 // phpcs:disable

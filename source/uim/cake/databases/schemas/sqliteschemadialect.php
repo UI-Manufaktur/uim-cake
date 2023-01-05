@@ -281,7 +281,7 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
 
-    function describeForeignKeySql(string $tableName, array $config): array
+    array describeForeignKeySql(string $tableName, array $config): array
     {
         $sql = sprintf("PRAGMA foreign_key_list(%s)", _driver.quoteIdentifier($tableName));
 

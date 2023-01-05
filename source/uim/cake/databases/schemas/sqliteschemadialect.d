@@ -515,7 +515,7 @@ class SqliteSchemaDialect : SchemaDialect
      * @param uim.cake.databases.Schema\TableSchema $schema The table instance the foreign key constraints are.
      * @return array SQL fragment.
      */
-    function addConstraintSql(TableSchema $schema): array
+    array addConstraintSql(TableSchema $schema)
     {
         return [];
     }

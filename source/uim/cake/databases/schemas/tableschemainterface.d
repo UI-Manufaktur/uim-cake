@@ -172,7 +172,7 @@ interface TableISchema : ISchema
      *
      * @return array<string>
      */
-    string[] indexes(): array;
+    string[] indexes();
 
     /**
      * Add a constraint.
@@ -219,5 +219,5 @@ interface TableISchema : ISchema
      *
      * @return array<string>
      */
-    string[] constraints(): array;
+    string[] constraints();
 }

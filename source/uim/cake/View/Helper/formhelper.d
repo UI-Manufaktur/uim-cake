@@ -1294,7 +1294,7 @@ class FormHelper : Helper
      * overwrite the "type" key in options.
      * @return array<string, mixed>
      */
-    protected function _magicOptions(string $fieldName, array $options, bool $allowOverride): array
+    protected array _magicOptions(string $fieldName, array $options, bool $allowOverride): array
     {
         $options += [
             "templateVars": [],

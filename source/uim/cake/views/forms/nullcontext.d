@@ -27,7 +27,7 @@ class NullContext : IContext
     }
 
 
-    auto getPrimaryKey(): array
+    array getPrimaryKey(): array
     {
         return [];
     }
@@ -64,7 +64,7 @@ class NullContext : IContext
     }
 
 
-    function fieldNames(): array
+    array fieldNames(): array
     {
         return [];
     }
@@ -75,7 +75,7 @@ class NullContext : IContext
     }
 
 
-    function attributes(string myField): array
+    array attributes(string myField): array
     {
         return [];
     }

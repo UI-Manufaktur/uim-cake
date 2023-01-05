@@ -161,7 +161,7 @@ class BasicWidget : WidgetInterface
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected function setStep(array $data, IContext $context, string $fieldName): array
+    protected array setStep(array $data, IContext $context, string $fieldName): array
     {
         $dbType = $context.type($fieldName);
         $fieldDef = $context.attributes($fieldName);

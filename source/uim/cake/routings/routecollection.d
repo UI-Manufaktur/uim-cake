@@ -337,7 +337,7 @@ class RouteCollection
      *
      * @return array<uim.cake.routings.Route\Route>
      */
-    function named(): array
+    array named(): array
     {
         return _named;
     }

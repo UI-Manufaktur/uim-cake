@@ -513,7 +513,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return array Serializable array of configuration properties.
      */
-    function jsonSerialize(): array
+    array jsonSerialize(): array
     {
         $properties = [
             "_templatePath", "_template", "_plugin", "_theme", "_layout", "_autoLayout",

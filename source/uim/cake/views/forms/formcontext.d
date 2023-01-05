@@ -141,7 +141,7 @@ class FormContext : IContext
     }
 
 
-    function fieldNames(): array
+    array fieldNames(): array
     {
         return _form.getSchema().fields();
     }
@@ -152,7 +152,7 @@ class FormContext : IContext
     }
 
 
-    function attributes(string myField): array
+    array attributes(string myField): array
     {
         return array_intersect_key(
             (array)_form.getSchema().field(myField),

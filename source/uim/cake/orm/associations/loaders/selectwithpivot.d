@@ -145,7 +145,7 @@ class SelectWithPivotLoader : SelectLoader
      * @return array<string, mixed>
      * @throws \RuntimeException when the association property is not part of the results set.
      */
-    protected auto _buildResultMap(Query $fetchQuery, array myOptions): array
+    protected array _buildResultMap(Query $fetchQuery, array myOptions): array
     {
         myResultMap = [];
         myKey = (array)myOptions["foreignKey"];

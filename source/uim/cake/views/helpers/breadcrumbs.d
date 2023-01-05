@@ -206,7 +206,7 @@ class BreadcrumbsHelper : Helper
      *
      * @return array
      */
-    auto getCrumbs(): array
+    array getCrumbs(): array
     {
         return this.crumbs;
     }

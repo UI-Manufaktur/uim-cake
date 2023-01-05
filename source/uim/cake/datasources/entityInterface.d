@@ -31,7 +31,7 @@ interface IEntity : ArrayAccess, JsonSerializable
      *
      * @return array<string>
      */
-    function getHidden(): array;
+    array getHidden(): array;
 
     /**
      * Sets the virtual fields on this entity.

@@ -99,7 +99,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    function errorInfo(): array
+    array errorInfo(): array
     {
         return this.statement.errorInfo();
     }

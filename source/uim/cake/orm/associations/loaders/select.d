@@ -405,7 +405,7 @@ class SelectLoader {
      * @param array<string, mixed> myOptions The options passed to the eager loader
      * @return array<string, mixed>
      */
-    protected auto _buildResultMap(Query $fetchQuery, array myOptions): array
+    protected array _buildResultMap(Query $fetchQuery, array myOptions): array
     {
         myResultMap = [];
         $singleResult = in_array(this.associationType, [Association::MANY_TO_ONE, Association::ONE_TO_ONE], true);

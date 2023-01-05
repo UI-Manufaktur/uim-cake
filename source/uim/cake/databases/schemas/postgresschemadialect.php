@@ -310,7 +310,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function describeForeignKeySql(string $tableName, array $config): array
+    array describeForeignKeySql(string $tableName, array $config)
     {
         // phpcs:disable Generic.Files.LineLength
         $sql = "SELECT
@@ -489,7 +489,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array addConstraintSql(TableSchema $schema): array
+    array addConstraintSql(TableSchema $schema)
     {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
         $sql = [];
@@ -507,7 +507,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function dropConstraintSql(TableSchema $schema): array
+    array dropConstraintSql(TableSchema $schema)
     {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
         $sql = [];
@@ -583,7 +583,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes)
     {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
@@ -610,7 +610,7 @@ class PostgresSchemaDialect : SchemaDialect
     }
 
 
-    function truncateTableSql(TableSchema $schema): array
+    array truncateTableSql(TableSchema $schema)
     {
         $name = _driver.quoteIdentifier($schema.name());
 

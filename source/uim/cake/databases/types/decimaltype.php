@@ -81,7 +81,7 @@ class DecimalType : BaseType : BatchCastingInterface
     }
 
 
-    function manyToPHP(array $values, array $fields, IDriver $driver): array
+    array manyToPHP(array $values, array $fields, IDriver $driver): array
     {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {

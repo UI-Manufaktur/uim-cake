@@ -17,7 +17,7 @@ interface SqlGeneratorInterface
      * @return array List of SQL statements to create the table and the
      *    required indexes.
      */
-    function createSql(Connection $connection): array;
+    array createSql(Connection $connection);
 
     /**
      * Generate the SQL to drop a table.
@@ -28,7 +28,7 @@ interface SqlGeneratorInterface
      * @param uim.cake.databases.Connection $connection The connection to generate SQL for.
      * @return array SQL to drop a table.
      */
-    function dropSql(Connection $connection): array;
+    array dropSql(Connection $connection): array;
 
     /**
      * Generate the SQL statements to truncate a table

@@ -392,7 +392,7 @@ class ShadowTableStrategy : ITranslateStrategy {
     }
 
 
-    function buildMarshalMap(Marshaller $marshaller, array $map, array myOptions): array
+    array buildMarshalMap(Marshaller $marshaller, array $map, array myOptions): array
     {
         this.translatedFields();
 

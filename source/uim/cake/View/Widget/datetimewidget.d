@@ -123,7 +123,7 @@ class DateTimeWidget : BasicWidget
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected function setStep(array $data, IContext $context, string $fieldName): array
+    protected array setStep(array $data, IContext $context, string $fieldName): array
     {
         if (array_key_exists("step", $data)) {
             return $data;

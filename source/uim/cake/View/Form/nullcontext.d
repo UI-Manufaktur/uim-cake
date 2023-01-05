@@ -22,7 +22,7 @@ class NullContext : IContext
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    function primaryKey(): array
+    array primaryKey(): array
     {
         deprecationWarning("`NullContext::primaryKey()` is deprecated. Use `NullContext::getPrimaryKey()`.");
 
@@ -30,7 +30,7 @@ class NullContext : IContext
     }
 
 
-    function getPrimaryKey(): array
+    array getPrimaryKey(): array
     {
         return [];
     }
@@ -69,7 +69,7 @@ class NullContext : IContext
     }
 
 
-    function fieldNames(): array
+    array fieldNames(): array
     {
         return [];
     }
@@ -81,7 +81,7 @@ class NullContext : IContext
     }
 
 
-    function attributes(string $field): array
+    array attributes(string $field): array
     {
         return [];
     }
@@ -92,7 +92,7 @@ class NullContext : IContext
     }
 
 
-    function error(string $field): array
+    array error(string $field): array
     {
         return [];
     }
