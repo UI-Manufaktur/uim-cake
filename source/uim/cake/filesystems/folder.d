@@ -264,7 +264,7 @@ class Folder
      * @param bool $sort Whether results should be sorted.
      * @return array Files matching pattern
      */
-    protected function _findRecursive(string $pattern, bool $sort = false): array
+    protected array _findRecursive(string $pattern, bool $sort = false)
     {
         [$dirs, $files] = this.read($sort);
         $found = [];
@@ -463,7 +463,7 @@ class Folder
      * @param bool $fullPath Whether to return the full path or only the directory name.
      * @return array Array of subdirectories for the provided or current path.
      */
-    function subdirectories(?string $path = null, bool $fullPath = true): array
+    array subdirectories(?string $path = null, bool $fullPath = true)
     {
         if (!$path) {
             $path = this.path;
@@ -495,7 +495,7 @@ class Folder
      * @param string|null $type either "file" or "dir". Null returns both files and directories
      * @return array Array of nested directories and files in each directory
      */
-    function tree(?string $path = null, $exceptions = false, ?string $type = null): array
+    array tree(?string $path = null, $exceptions = false, ?string $type = null)
     {
         if (!$path) {
             $path = this.path;

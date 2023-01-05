@@ -749,7 +749,7 @@ class ServerRequest : IServerRequest
      * @return array<string[]> An associative array of headers and their values.
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function getHeaders(): array
+    array getHeaders()
     {
         $headers = [];
         foreach (_environment as $key: $value) {
@@ -923,7 +923,7 @@ class ServerRequest : IServerRequest
      * @return array
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
-    function getServerParams(): array
+    array getServerParams()
     {
         return _environment;
     }
@@ -1568,7 +1568,7 @@ class ServerRequest : IServerRequest
      *
      * @return array<string, mixed>
      */
-    function getAttributes(): array
+    array getAttributes(): array
     {
         $emulated = [
             "params": this.params,

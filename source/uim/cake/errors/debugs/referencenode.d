@@ -53,7 +53,7 @@ class ReferenceNode : INode
     }
 
 
-    function getChildren(): array
+    array getChildren()
     {
         return [];
     }

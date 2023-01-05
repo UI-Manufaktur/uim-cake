@@ -255,7 +255,7 @@ class Behavior : IEventListener
      *
      * @return array<string, mixed>
      */
-    function implementedEvents(): array
+    array implementedEvents(): array
     {
         $eventMap = [
             "Model.beforeMarshal": "beforeMarshal",

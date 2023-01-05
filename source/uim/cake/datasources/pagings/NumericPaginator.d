@@ -370,7 +370,7 @@ class NumericPaginator : PaginatorInterface
      * @return array An array containing in the first position the finder name
      *   and in the second the options to be passed to it.
      */
-    protected function _extractFinder(array $options): array
+    protected array _extractFinder(array $options): array
     {
         $type = !empty($options["finder"]) ? $options["finder"] : "all";
         unset($options["finder"], $options["maxLimit"]);
@@ -396,9 +396,8 @@ class NumericPaginator : PaginatorInterface
     /**
      * Shim method for reading the deprecated whitelist or allowedParameters options
      *
-     * @return array<string>
      */
-    protected function getAllowedParameters(): array
+    protected string[] getAllowedParameters(): array
     {
         $allowed = this.getConfig("allowedParameters");
         if (!$allowed) {
@@ -472,7 +471,7 @@ class NumericPaginator : PaginatorInterface
      * @return array<string, mixed> An array of pagination settings for a model,
      *   or the general settings.
      */
-    function getDefaults(string $alias, array $settings): array
+    array getDefaults(string $alias, array $settings): array
     {
         if (isset($settings[$alias])) {
             $settings = $settings[$alias];

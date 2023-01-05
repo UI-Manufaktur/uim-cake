@@ -221,9 +221,8 @@ trait QueryTrait
      *
      * @param array $fields The fields to alias
      * @param string|null $defaultAlias The default alias
-     * @return array<string, string>
      */
-    function aliasFields(array $fields, ?string $defaultAlias = null): array
+    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null): array
     {
         $aliased = [];
         foreach ($fields as $alias: $field) {

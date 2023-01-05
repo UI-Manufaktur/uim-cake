@@ -1479,7 +1479,7 @@ class Response : IResponse
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo(): array
     {
         return [
             "status": _status,

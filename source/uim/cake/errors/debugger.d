@@ -500,7 +500,7 @@ class Debugger
      * @see https://secure.php.net/highlight_string
      * @link https://book.cakephp.org/4/en/development/debugging.html#getting-an-excerpt-from-a-file
      */
-    static string[] excerpt(string $file, int $line, int $context = 2): array
+    static string[] excerpt(string $file, int $line, int $context = 2)
     {
         $lines = [];
         if (!file_exists($file)) {
@@ -874,7 +874,7 @@ class Debugger
      * @return array The resulting format string set.
      * @deprecated 4.4.0 Update your application so use ErrorTrap instead.
      */
-    static function addFormat(string $format, array $strings): array
+    static array addFormat(string $format, array $strings)
     {
         deprecationWarning('Debugger::addFormat() is deprecated.');
         $self = Debugger::getInstance();

@@ -318,7 +318,7 @@ class Paginator : IPaginator {
      * @param array myData Paging data.
      * @return array<string, mixed> Updated params.
      */
-    protected auto addPrevNextParams(array myParams, array myData): array
+    protected array addPrevNextParams(array myParams, array myData): array
     {
         myParams["prevPage"] = myParams["page"] > 1;
         if (myParams["count"] is null) {

@@ -214,7 +214,7 @@ interface CookieInterface
      *
      * @return array<string, mixed>
      */
-    function getOptions(): array;
+    array getOptions(): array;
 
     /**
      * Get cookie data as array.

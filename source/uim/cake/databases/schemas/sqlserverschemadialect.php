@@ -247,7 +247,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array describeIndexSql(string $tableName, array $config): array
+    array describeIndexSql(string $tableName, array $config)
     {
         $sql = "SELECT
                 I.[name] AS [index_name],
@@ -305,7 +305,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array describeForeignKeySql(string $tableName, array $config): array
+    array describeForeignKeySql(string $tableName, array $config)
     {
         // phpcs:disable Generic.Files.LineLength
         $sql = "SELECT FK.[name] AS [foreign_key_name], FK.[delete_referential_action_desc] AS [delete_type],
@@ -506,7 +506,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function addConstraintSql(TableSchema $schema): array
+    array addConstraintSql(TableSchema $schema)
     {
         $sqlPattern = "ALTER TABLE %s ADD %s;";
         $sql = [];
@@ -524,7 +524,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array dropConstraintSql(TableSchema $schema): array
+    array dropConstraintSql(TableSchema $schema)
     {
         $sqlPattern = "ALTER TABLE %s DROP CONSTRAINT %s;";
         $sql = [];
@@ -600,7 +600,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes): array
+    array createTableSql(TableSchema $schema, array $columns, array $constraints, array $indexes)
     {
         $content = array_merge($columns, $constraints);
         $content = implode(",\n", array_filter($content));
@@ -615,7 +615,7 @@ class SqlserverSchemaDialect : SchemaDialect
     }
 
 
-    function truncateTableSql(TableSchema $schema): array
+    array truncateTableSql(TableSchema $schema)
     {
         $name = _driver.quoteIdentifier($schema.name());
         $queries = [

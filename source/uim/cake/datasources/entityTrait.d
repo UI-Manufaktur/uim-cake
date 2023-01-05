@@ -800,7 +800,7 @@ trait EntityTrait
      * @param string myField Field name to get the errors from
      * @return array
      */
-    array getError(string myField): array
+    array getError(string myField)
     {
         myErrors = _errors[myField] ?? [];
         if (myErrors) {
@@ -880,7 +880,7 @@ trait EntityTrait
      * @param string myField the field in this entity to check for errors
      * @return array errors in nested entity if any
      */
-    protected auto _nestedErrors(string myField): array
+    protected array _nestedErrors(string myField): array
     {
         // Only one path element, check for nested entity with error.
         if (indexOf(myField, ".") == false) {
@@ -983,7 +983,7 @@ trait EntityTrait
      *
      * @return array
      */
-    array getInvalid(): array
+    array getInvalid()
     {
         return _invalid;
     }
@@ -1081,7 +1081,7 @@ trait EntityTrait
      *
      * @return array<bool>
      */
-    auto getAccessible(): array
+    array getAccessible(): array
     {
         return _accessible;
     }
@@ -1137,7 +1137,7 @@ trait EntityTrait
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo(): array
     {
         myFields = _fields;
         foreach (_virtual as myField) {

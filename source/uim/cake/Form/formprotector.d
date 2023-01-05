@@ -338,9 +338,8 @@ class FormProtector
      * Get the sorted unlocked string
      *
      * @param array $formData Data array
-     * @return array<string>
      */
-    protected function sortedUnlockedFields(array $formData): array
+    protected string[] sortedUnlockedFields(array $formData): array
     {
         $unlocked = urldecode($formData["_Token"]["unlocked"]);
         if (empty($unlocked)) {
@@ -555,7 +554,7 @@ class FormProtector
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo(): array
     {
         return [
             "fields": this.fields,

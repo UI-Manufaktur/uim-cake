@@ -43,9 +43,8 @@ interface IQuery
      *
      * @param string $field The field to alias
      * @param string|null $alias the alias used to prefix the field
-     * @return array<string, string>
      */
-    function aliasField(string $field, ?string $alias = null): array;
+    STRINGAA aliasField(string $field, ?string $alias = null): array;
 
     /**
      * Runs `aliasField()` for each field in the provided list and returns
@@ -53,9 +52,8 @@ interface IQuery
      *
      * @param array $fields The fields to alias
      * @param string|null $defaultAlias The default alias
-     * @return array<string, string>
      */
-    function aliasFields(array $fields, ?string $defaultAlias = null): array;
+    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null): array;
 
     /**
      * Fetch the results for this query.

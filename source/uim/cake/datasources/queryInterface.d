@@ -44,7 +44,7 @@ interface IQuery {
      * @param array myFields The fields to alias
      * @param string|null $defaultAlias The default alias
      */
-    string[] aliasFields(array myFields, Nullable!string defaultAlias = null): array;
+    string[] aliasFields(array myFields, Nullable!string defaultAlias = null);
 
     /**
      * Fetch the results for this query.

@@ -34,7 +34,7 @@ class ContentTypeNegotiation
      * @param \Psr\Http\messages.RequestInterface $request The request to get an accept from.
      * @return array<string, array<string>> A mapping of preference values: languages
      */
-    function parseAcceptLanguage(RequestInterface $request): array
+    array parseAcceptLanguage(RequestInterface $request)
     {
         $header = $request.getHeaderLine("Accept-Language");
 

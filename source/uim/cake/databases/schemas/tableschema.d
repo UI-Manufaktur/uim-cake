@@ -557,7 +557,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      * @return array<string, mixed>
      * @throws uim.cake.databases.exceptions.DatabaseException When foreign key definition is not valid.
      */
-    protected function _checkForeignKey(array $attrs): array
+    protected array _checkForeignKey(array $attrs)
     {
         if (count($attrs["references"]) < 2) {
             throw new DatabaseException("References must contain a table and column.");
@@ -634,7 +634,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function dropSql(Connection $connection): array
+    array dropSql(Connection $connection): array
     {
         $dialect = $connection.getDriver().schemaDialect();
 
@@ -642,7 +642,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function truncateSql(Connection $connection): array
+    array truncateSql(Connection $connection): array
     {
         $dialect = $connection.getDriver().schemaDialect();
 
@@ -670,7 +670,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo(): array
     {
         return [
             "table": _table,

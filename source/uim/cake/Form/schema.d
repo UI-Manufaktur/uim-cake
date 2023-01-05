@@ -73,7 +73,7 @@ class Schema
      *
      * @return array<string> The list of field names.
      */
-    function fields(): array
+    array fields()
     {
         return array_keys(_fields);
     }
@@ -111,7 +111,7 @@ class Schema
      *
      * @return array<string, mixed>
      */
-    function __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "_fields": _fields,

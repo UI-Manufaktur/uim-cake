@@ -118,7 +118,7 @@ class SecurityComponent : Component
      *
      * @return array<string, mixed>
      */
-    function implementedEvents() {
+    array implementedEvents() {
         return [
             "Controller.startup": "startup",
         ];

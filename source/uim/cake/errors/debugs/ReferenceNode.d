@@ -41,7 +41,7 @@ class ReferenceNode : INode {
     }
 
 
-    auto getChildren(): array
+    array getChildren()
     {
         return [];
     }

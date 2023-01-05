@@ -425,9 +425,8 @@ class Response : Message : IResponse
     /**
      * Provides magic __get() support.
      *
-     * @return array<string>
      */
-    protected function _getHeaders(): array
+    protected string[] _getHeaders(): array
     {
         $out = [];
         foreach (this.headers as $key: $values) {

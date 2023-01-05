@@ -27,7 +27,7 @@ class SpecialNode : INode
     }
 
 
-    auto getChildren(): array
+    array getChildren()
     {
         return [];
     }

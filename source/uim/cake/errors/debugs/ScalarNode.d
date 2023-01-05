@@ -43,7 +43,7 @@ class ScalarNode : INode
     }
 
 
-    auto getChildren(): array
+    array getChildren()
     {
         return [];
     }

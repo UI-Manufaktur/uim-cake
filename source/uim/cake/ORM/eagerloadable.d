@@ -219,7 +219,7 @@ class EagerLoadable
      *
      * @return array<string, mixed>
      */
-    function getConfig(): array
+    array getConfig(): array
     {
         return _config;
     }

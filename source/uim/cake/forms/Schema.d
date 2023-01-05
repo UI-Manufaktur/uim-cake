@@ -109,7 +109,7 @@ class Schema
      *
      * @return array<string, mixed>
      */
-    auto __debugInfo(): array
+    array __debugInfo()
     {
         return [
             "_fields":_fields,

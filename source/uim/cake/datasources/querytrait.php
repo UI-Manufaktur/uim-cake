@@ -198,9 +198,8 @@ trait QueryTrait
      *
      * @param string $field The field to alias
      * @param string|null $alias the alias used to prefix the field
-     * @return array<string, string>
      */
-    function aliasField(string $field, ?string $alias = null): array
+    STRINGAA aliasField(string $field, ?string $alias = null): array
     {
         if (strpos($field, ".") == false) {
             $alias = $alias ?: this.getRepository().getAlias();
@@ -221,9 +220,8 @@ trait QueryTrait
      *
      * @param array $fields The fields to alias
      * @param string|null $defaultAlias The default alias
-     * @return array<string, string>
      */
-    function aliasFields(array $fields, ?string $defaultAlias = null): array
+    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null): array
     {
         $aliased = [];
         foreach ($fields as $alias: $field) {
