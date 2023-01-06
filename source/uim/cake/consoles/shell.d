@@ -135,14 +135,14 @@ class Shell
      *
      * @var array<string, array>
      */
-    protected $_taskMap = [];
+    protected _taskMap = [];
 
     /**
      * ConsoleIo instance.
      *
      * @var uim.cake.consoles.ConsoleIo
      */
-    protected $_io;
+    protected _io;
 
     /**
      * The root command name used when generating help output.

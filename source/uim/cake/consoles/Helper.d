@@ -18,14 +18,14 @@ abstract class Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected _defaultConfig = [];
 
     /**
      * ConsoleIo instance.
      *
      * @var uim.cake.consoles.ConsoleIo
      */
-    protected $_io;
+    protected _io;
 
     /**
      * Constructor.

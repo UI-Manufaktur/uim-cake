@@ -17,7 +17,7 @@ class TaskRegistry : ObjectRegistry
      *
      * @var uim.cake.consoles.Shell
      */
-    protected $_Shell;
+    protected _Shell;
 
     /**
      * Constructor

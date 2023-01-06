@@ -57,7 +57,7 @@ class SecurityComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "blackHoleCallback": null,
         "requireSecure": [],
         "unlockedFields": [],
@@ -68,7 +68,7 @@ class SecurityComponent : Component
     /**
      * Holds the current action of the controller
      */
-    protected string $_action;
+    protected string _action;
 
     /**
      * Component startup. All security checking happens here.

@@ -12,5 +12,5 @@ class ConsoleException : CakeException
     /**
      * Default exception code
      */
-    protected int $_defaultCode = ICommand::CODE_ERROR;
+    protected int _defaultCode = ICommand::CODE_ERROR;
 }

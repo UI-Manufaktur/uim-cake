@@ -23,7 +23,7 @@ class StubConsoleOutput : ConsoleOutput
      *
      * @var array<string>
      */
-    protected $_out = [];
+    protected _out = [];
 
     /**
      * Write output to the buffer.

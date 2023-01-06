@@ -47,7 +47,7 @@ class RequestHandlerComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         'checkHttpCache': true,
         'viewClassMap': [],
     ];

@@ -63,14 +63,14 @@ class Component : IEventListener {
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected _defaultConfig = [];
 
     /**
      * A component lookup table used to lazy load component objects.
      *
      * @var array<string, array>
      */
-    protected $_componentMap = [];
+    protected _componentMap = [];
 
     /**
      * Constructor

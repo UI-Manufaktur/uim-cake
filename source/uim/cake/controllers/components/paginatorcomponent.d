@@ -33,7 +33,7 @@ class PaginatorComponent : Component
      *
      * @var uim.cake.datasources.Paging\NumericPaginator
      */
-    protected $_paginator;
+    protected _paginator;
 
 
     this(ComponentRegistry $registry, Json aConfig = []) {

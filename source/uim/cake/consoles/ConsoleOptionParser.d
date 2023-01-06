@@ -64,14 +64,14 @@ class ConsoleOptionParser
      *
      * @see uim.cake.consoles.ConsoleOptionParser::description()
      */
-    protected string $_description = "";
+    protected string _description = "";
 
     /**
      * Epilog text - displays after options when help is generated
      *
      * @see uim.cake.consoles.ConsoleOptionParser::epilog()
      */
-    protected string $_epilog = "";
+    protected string _epilog = "";
 
     /**
      * Option definitions.
@@ -79,14 +79,14 @@ class ConsoleOptionParser
      * @see uim.cake.consoles.ConsoleOptionParser::addOption()
      * @var array<string, uim.cake.consoles.ConsoleInputOption>
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Map of short . long options, generated when using addOption()
      *
      * @var array<string, string>
      */
-    protected $_shortOptions = [];
+    protected _shortOptions = [];
 
     /**
      * Positional argument definitions.
@@ -94,7 +94,7 @@ class ConsoleOptionParser
      * @see uim.cake.consoles.ConsoleOptionParser::addArgument()
      * @var array<uim.cake.consoles.ConsoleInputArgument>
      */
-    protected $_args = [];
+    protected _args = [];
 
     /**
      * Subcommands for this Shell.
@@ -102,24 +102,24 @@ class ConsoleOptionParser
      * @see uim.cake.consoles.ConsoleOptionParser::addSubcommand()
      * @var array<string, uim.cake.consoles.ConsoleInputSubcommand>
      */
-    protected $_subcommands = [];
+    protected _subcommands = [];
 
     /**
      * Subcommand sorting option
      */
-    protected bool $_subcommandSort = true;
+    protected bool _subcommandSort = true;
 
     /**
      * Command name.
      */
-    protected string $_command = "";
+    protected string _command = "";
 
     /**
      * Array of args (argv).
      *
      * @var array
      */
-    protected $_tokens = [];
+    protected _tokens = [];
 
     /**
      * Root alias used in help output

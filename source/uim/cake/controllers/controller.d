@@ -118,7 +118,7 @@ class Controller : IEventListener, IEventDispatcher {
      *
      * @var uim.cake.controllers.ComponentRegistry|null
      */
-    protected $_components;
+    protected _components;
 
     /**
      * Automatically set to the name of a plugin.

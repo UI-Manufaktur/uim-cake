@@ -30,7 +30,7 @@ class ShellDispatcher
      *
      * @var array<string, string>
      */
-    protected static STRINGAA $_aliases = [];
+    protected static STRINGAA _aliases = [];
 
     /**
      * Constructor
@@ -83,17 +83,17 @@ class ShellDispatcher
     {
         $short = Inflector::camelize($short);
         if ($original) {
-            static::$_aliases[$short] = $original;
+            static::_aliases[$short] = $original;
         }
 
-        return static::$_aliases[$short] ?? null;
+        return static::_aliases[$short] ?? null;
     }
 
     /**
      * Clear any aliases that have been set.
      */
     static void resetAliases() {
-        static::$_aliases = [];
+        static::_aliases = [];
     }
 
     /**
@@ -276,7 +276,7 @@ class ShellDispatcher
             static::alias($shell, "$plugin.$shell");
         }
 
-        return static::$_aliases;
+        return static::_aliases;
     }
 
     /**

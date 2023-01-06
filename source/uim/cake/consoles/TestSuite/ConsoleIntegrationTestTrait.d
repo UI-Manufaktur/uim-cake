@@ -27,35 +27,35 @@ trait ConsoleIntegrationTestTrait
     /**
      * Whether to use the CommandRunner
      */
-    protected bool $_useCommandRunner = false;
+    protected bool _useCommandRunner = false;
 
     /**
      * Last exit code
      *
      * @var int|null
      */
-    protected $_exitCode;
+    protected _exitCode;
 
     /**
      * Console output stub
      *
      * @var uim.cake.consoles.TestSuite\StubConsoleOutput
      */
-    protected $_out;
+    protected _out;
 
     /**
      * Console error output stub
      *
      * @var uim.cake.consoles.TestSuite\StubConsoleOutput
      */
-    protected $_err;
+    protected _err;
 
     /**
      * Console input mock
      *
      * @var uim.cake.consoles.TestSuite\StubConsoleInput
      */
-    protected $_in;
+    protected _in;
 
     /**
      * Runs CLI integration test
@@ -77,7 +77,7 @@ trait ConsoleIntegrationTestTrait
         if (_in == null) {
             _in = new StubConsoleInput($input);
         } elseif ($input) {
-            throw new RuntimeException("You can use `$input` only if `$_in` property is null and will be reset.");
+            throw new RuntimeException("You can use `$input` only if `_in` property is null and will be reset.");
         }
 
         $args = this.commandStringToArgs("cake $command");

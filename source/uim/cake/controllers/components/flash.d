@@ -23,7 +23,7 @@ class FlashComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         'key': 'flash',
         'element': 'default',
         'params': [],

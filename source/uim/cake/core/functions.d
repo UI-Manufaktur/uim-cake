@@ -174,19 +174,19 @@ if (!function_exists("env")) {
      */
     function env(string aKey, $default = null) {
         if ($key == "HTTPS") {
-            if (isset($_SERVER["HTTPS"])) {
-                return !empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off";
+            if (isset(_SERVER["HTTPS"])) {
+                return !empty(_SERVER["HTTPS"]) && _SERVER["HTTPS"] != "off";
             }
 
             return strpos((string)env("SCRIPT_URI"), "https://") == 0;
         }
 
-        if ($key == "SCRIPT_NAME" && env("CGI_MODE") && isset($_ENV["SCRIPT_URL"])) {
+        if ($key == "SCRIPT_NAME" && env("CGI_MODE") && isset(_ENV["SCRIPT_URL"])) {
             $key = "SCRIPT_URL";
         }
 
         /** @var string|null $val */
-        $val = $_SERVER[$key] ?? $_ENV[$key] ?? null;
+        $val = _SERVER[$key] ?? _ENV[$key] ?? null;
         if ($val == null && getenv($key) != false) {
             /** @var string|false $val */
             $val = getenv($key);

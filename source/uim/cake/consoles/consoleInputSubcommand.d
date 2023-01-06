@@ -22,19 +22,19 @@ class ConsoleInputSubcommand
     /**
      * Name of the subcommand
      */
-    protected string $_name = "";
+    protected string _name = "";
 
     /**
      * Help string for the subcommand
      */
-    protected string $_help = "";
+    protected string _help = "";
 
     /**
      * The ConsoleOptionParser for this subcommand.
      *
      * @var uim.cake.consoles.ConsoleOptionParser|null
      */
-    protected $_parser;
+    protected _parser;
 
     /**
      * Make a new Subcommand

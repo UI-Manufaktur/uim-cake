@@ -17,24 +17,24 @@ class HelpFormatter
     /**
      * The maximum number of arguments shown when generating usage.
      */
-    protected int $_maxArgs = 6;
+    protected int _maxArgs = 6;
 
     /**
      * The maximum number of options shown when generating usage.
      */
-    protected int $_maxOptions = 6;
+    protected int _maxOptions = 6;
 
     /**
      * Option parser.
      *
      * @var uim.cake.consoles.ConsoleOptionParser
      */
-    protected $_parser;
+    protected _parser;
 
     /**
      * Alias to display in the output.
      */
-    protected string $_alias = "cake";
+    protected string _alias = "cake";
 
     /**
      * Build the help formatter for an OptionParser

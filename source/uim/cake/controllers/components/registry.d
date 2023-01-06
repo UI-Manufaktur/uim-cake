@@ -23,7 +23,7 @@ class ComponentRegistry : ObjectRegistry, IEventDispatcher {
      *
      * @var uim.cake.controllers.Controller|null
      */
-    protected $_Controller;
+    protected _Controller;
 
     /**
      * Constructor.

@@ -15,7 +15,7 @@ class ShellDispatcher {
     array $args = [];
 
     // List of connected aliases.
-    protected static STRINGAA $_aliases = [];
+    protected static STRINGAA _aliases = [];
 
     /**
      * Constructor
@@ -67,17 +67,17 @@ class ShellDispatcher {
     static string alias(string short, Nullable!string original = null) {
         $short = Inflector::camelize($short);
         if ($original) {
-            static::$_aliases[$short] = $original;
+            static::_aliases[$short] = $original;
         }
 
-        return static::$_aliases[$short] ?? null;
+        return static::_aliases[$short] ?? null;
     }
 
     /**
      * Clear any aliases that have been set.
      */
     static void resetAliases() {
-        static::$_aliases = [];
+        static::_aliases = [];
     }
 
     /**
@@ -257,7 +257,7 @@ class ShellDispatcher {
             static::alias(myShell, "myPlugin.myShell");
         }
 
-        return static::$_aliases;
+        return static::_aliases;
     }
 
     /**

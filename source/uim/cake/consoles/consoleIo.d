@@ -42,10 +42,10 @@ class ConsoleIo {
     protected _in;
 
     // The helper registry.
-    protected HelperRegistry $_helpers;
+    protected HelperRegistry _helpers;
 
     // The current output level.
-    protected int $_level = self::NORMAL;
+    protected int _level = self::NORMAL;
 
     /**
      * The number of bytes last written to the output stream

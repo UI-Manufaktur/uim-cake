@@ -67,7 +67,7 @@ class ConsoleOutput {
      *
      * @var array<string, int>
      */
-    protected static $_foregroundColors = [
+    protected static _foregroundColors = [
         "black":30,
         "red":31,
         "green":32,
@@ -83,7 +83,7 @@ class ConsoleOutput {
      *
      * @var array<string, int>
      */
-    protected static $_backgroundColors = [
+    protected static _backgroundColors = [
         "black":40,
         "red":41,
         "green":42,
@@ -99,7 +99,7 @@ class ConsoleOutput {
      *
      * @var array<string, int>
      */
-    protected static $_options = [
+    protected static _options = [
         "bold":1,
         "underline":4,
         "blink":5,
@@ -112,7 +112,7 @@ class ConsoleOutput {
      *
      * @var array<string, array>
      */
-    protected static $_styles = [
+    protected static _styles = [
         "emergency":["text":"red"],
         "alert":["text":"red"],
         "critical":["text":"red"],
@@ -184,7 +184,7 @@ class ConsoleOutput {
             return $text;
         }
         if (_outputAs == static::PLAIN) {
-            $tags = implode("|", array_keys(static::$_styles));
+            $tags = implode("|", array_keys(static::_styles));
 
             return preg_replace("#</?(?:" ~ $tags ~ ")>#", "", $text);
         }
@@ -208,16 +208,16 @@ class ConsoleOutput {
         }
 
         $styleInfo = [];
-        if (!empty($style["text"]) && isset(static::$_foregroundColors[$style["text"]])) {
-            $styleInfo[] = static::$_foregroundColors[$style["text"]];
+        if (!empty($style["text"]) && isset(static::_foregroundColors[$style["text"]])) {
+            $styleInfo[] = static::_foregroundColors[$style["text"]];
         }
-        if (!empty($style["background"]) && isset(static::$_backgroundColors[$style["background"]])) {
-            $styleInfo[] = static::$_backgroundColors[$style["background"]];
+        if (!empty($style["background"]) && isset(static::_backgroundColors[$style["background"]])) {
+            $styleInfo[] = static::_backgroundColors[$style["background"]];
         }
         unset($style["text"], $style["background"]);
         foreach ($option: myValue; $style) {
             if (myValue) {
-                $styleInfo[] = static::$_options[$option];
+                $styleInfo[] = static::_options[$option];
             }
         }
 
@@ -241,7 +241,7 @@ class ConsoleOutput {
      * @return array The style or empty array.
      */
     auto getStyle(string style) {
-        return static::$_styles[$style] ?? [];
+        return static::_styles[$style] ?? [];
     }
 
     /**
@@ -264,12 +264,12 @@ class ConsoleOutput {
      */
     void setStyle(string style, array $definition) {
         if (!$definition) {
-            unset(static::$_styles[$style]);
+            unset(static::_styles[$style]);
 
             return;
         }
 
-        static::$_styles[$style] = $definition;
+        static::_styles[$style] = $definition;
     }
 
     /**
@@ -278,7 +278,7 @@ class ConsoleOutput {
      * @return array<string, mixed>
      */
     array styles() {
-        return static::$_styles;
+        return static::_styles;
     }
 
     /**

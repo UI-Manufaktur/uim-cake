@@ -17,7 +17,7 @@ class HelperRegistry : ObjectRegistry
      *
      * @var uim.cake.consoles.ConsoleIo
      */
-    protected $_io;
+    protected _io;
 
     /**
      * Sets The IO instance that should be passed to the shell helpers

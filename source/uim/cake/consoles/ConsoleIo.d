@@ -41,39 +41,39 @@ class ConsoleIo
      *
      * @var uim.cake.consoles.ConsoleOutput
      */
-    protected $_out;
+    protected _out;
 
     /**
      * The error stream
      *
      * @var uim.cake.consoles.ConsoleOutput
      */
-    protected $_err;
+    protected _err;
 
     /**
      * The input stream
      *
      * @var uim.cake.consoles.ConsoleInput
      */
-    protected $_in;
+    protected _in;
 
     /**
      * The helper registry.
      *
      * @var uim.cake.consoles.HelperRegistry
      */
-    protected $_helpers;
+    protected _helpers;
 
     /**
      * The current output level.
      */
-    protected int $_level = self::NORMAL;
+    protected int _level = self::NORMAL;
 
     /**
      * The number of bytes last written to the output stream
      * used when overwriting the previous message.
      */
-    protected int $_lastWritten = 0;
+    protected int _lastWritten = 0;
 
     /**
      * Whether files should be overwritten

@@ -23,7 +23,7 @@ class Configure {
      *
      * @var array<string, mixed>
      */
-    protected static $_values = [
+    protected static _values = [
         "debug": false,
     ];
 
@@ -33,14 +33,14 @@ class Configure {
      * @see uim.cake.Core\Configure::load()
      * @var array<uim.cake.Core\Configure\ConfigEngineInterface>
      */
-    protected static $_engines = [];
+    protected static _engines = [];
 
     /**
      * Flag to track whether ini_set exists.
      *
      * @var bool|null
      */
-    protected static $_hasIniSet;
+    protected static _hasIniSet;
 
     /**
      * Used to store a dynamic variable in Configure.
@@ -72,14 +72,14 @@ class Configure {
         }
 
         foreach (aConfig as $name: $value) {
-            static::$_values = Hash::insert(static::$_values, $name, $value);
+            static::_values = Hash::insert(static::_values, $name, $value);
         }
 
         if (isset(aConfig["debug"])) {
-            if (static::$_hasIniSet == null) {
-                static::$_hasIniSet = function_exists("ini_set");
+            if (static::_hasIniSet == null) {
+                static::_hasIniSet = function_exists("ini_set");
             }
-            if (static::$_hasIniSet) {
+            if (static::_hasIniSet) {
                 ini_set("display_errors", aConfig["debug"] ? "1" : "0");
             }
         }
@@ -102,10 +102,10 @@ class Configure {
      */
     static function read(?string $var = null, $default = null) {
         if ($var == null) {
-            return static::$_values;
+            return static::_values;
         }
 
-        return Hash::get(static::$_values, $var, $default);
+        return Hash::get(static::_values, $var, $default);
     }
 
     /**
@@ -163,7 +163,7 @@ class Configure {
      * @link https://book.cakephp.org/4/en/development/configuration.html#deleting-configuration-data
      */
     static void delete(string $var) {
-        static::$_values = Hash::remove(static::$_values, $var);
+        static::_values = Hash::remove(static::_values, $var);
     }
 
     /**
@@ -198,15 +198,15 @@ class Configure {
      */
     static function consume(string $var) {
         if (strpos($var, ".") == false) {
-            if (!isset(static::$_values[$var])) {
+            if (!isset(static::_values[$var])) {
                 return null;
             }
-            $value = static::$_values[$var];
-            unset(static::$_values[$var]);
+            $value = static::_values[$var];
+            unset(static::_values[$var]);
 
             return $value;
         }
-        $value = Hash::get(static::$_values, $var);
+        $value = Hash::get(static::_values, $var);
         static::delete($var);
 
         return $value;
@@ -228,7 +228,7 @@ class Configure {
      * @param uim.cake.Core\Configure\ConfigEngineInterface $engine The engine to append.
      */
     static void config(string aName, ConfigEngineInterface $engine) {
-        static::$_engines[$name] = $engine;
+        static::_engines[$name] = $engine;
     }
 
     /**
@@ -238,14 +238,14 @@ class Configure {
      * @return bool
      */
     static bool isConfigured(string aName) {
-        return isset(static::$_engines[$name]);
+        return isset(static::_engines[$name]);
     }
 
     /**
      * Gets the names of the configured Engine objects.
      */
     static string[] configured() {
-        $engines = array_keys(static::$_engines);
+        $engines = array_keys(static::_engines);
 
         return array_map(function ($key) {
             return (string)$key;
@@ -260,10 +260,10 @@ class Configure {
      * @return bool Success
      */
     static bool drop(string aName) {
-        if (!isset(static::$_engines[$name])) {
+        if (!isset(static::_engines[$name])) {
             return false;
         }
-        unset(static::$_engines[$name]);
+        unset(static::_engines[$name]);
 
         return true;
     }
@@ -310,7 +310,7 @@ class Configure {
         $values = $engine.read($key);
 
         if ($merge) {
-            $values = Hash::merge(static::$_values, $values);
+            $values = Hash::merge(static::_values, $values);
         }
 
         static::write($values);
@@ -352,7 +352,7 @@ class Configure {
         if (!$engine) {
             throw new CakeException(sprintf("There is no "%s" config engine.", aConfig));
         }
-        $values = static::$_values;
+        $values = static::_values;
         if (!empty($keys)) {
             $values = array_intersect_key($values, array_flip($keys));
         }
@@ -369,14 +369,14 @@ class Configure {
      */
     protected static function _getEngine(string aConfig): ?ConfigEngineInterface
     {
-        if (!isset(static::$_engines[aConfig])) {
+        if (!isset(static::_engines[aConfig])) {
             if (aConfig != "default") {
                 return null;
             }
             static::config(aConfig, new PhpConfig());
         }
 
-        return static::$_engines[aConfig];
+        return static::_engines[aConfig];
     }
 
     /**
@@ -419,7 +419,7 @@ class Configure {
      */
     static bool store(string aName, string $cacheConfig = "default", ?array $data = null) {
         if ($data == null) {
-            $data = static::$_values;
+            $data = static::_values;
         }
         if (!class_exists(Cache::class)) {
             throw new RuntimeException("You must install cakephp/cache to use Configure::store()");
@@ -455,6 +455,6 @@ class Configure {
      * Clear all values stored in Configure.
      */
     static void clear() {
-        static::$_values = [];
+        static::_values = [];
     }
 }

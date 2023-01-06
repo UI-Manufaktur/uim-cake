@@ -7,5 +7,5 @@ class MissingTaskException : ConsoleException
 {
     /**
      */
-    protected string $_messageTemplate = "Task class %s could not be found.";
+    protected string _messageTemplate = "Task class %s could not be found.";
 }

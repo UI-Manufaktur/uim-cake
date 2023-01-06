@@ -11,7 +11,7 @@ import uim.cake;
 // Security exception - used when SecurityComponent detects any issue with the current request
 class SecurityException : BadRequestException {
     // Security Exception type
-    protected string $_type = "secure";
+    protected string _type = "secure";
 
     /**
      * Reason for request blackhole

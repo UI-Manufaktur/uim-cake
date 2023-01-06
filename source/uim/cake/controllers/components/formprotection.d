@@ -17,7 +17,7 @@ use Closure;
  * - Existing fields have not been removed from the form.
  * - Values of hidden inputs have not been changed.
  *
- * @psalm-property array{validate:bool, unlockedFields:array, unlockedActions:array, validationFailureCallback:?\Closure} $_config
+ * @psalm-property array{validate:bool, unlockedFields:array, unlockedActions:array, validationFailureCallback:?\Closure} _config
  */
 class FormProtectionComponent : Component
 {
@@ -42,7 +42,7 @@ class FormProtectionComponent : Component
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         'validate': true,
         'unlockedFields': [],
         'unlockedActions': [],

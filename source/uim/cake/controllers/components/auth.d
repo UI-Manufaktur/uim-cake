@@ -130,7 +130,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         'authenticate': null,
         'authorize': null,
         'flash': null,
@@ -165,7 +165,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @var uim.cake.auths.storages\IStorage|null
      */
-    protected $_storage;
+    protected _storage;
 
     /**
      * Controller actions for which user validation is not required.
@@ -182,7 +182,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @var uim.cake.auths.BaseAuthenticate|null
      */
-    protected $_authenticationProvider;
+    protected _authenticationProvider;
 
     /**
      * The instance of the Authorize provider that was used to grant
@@ -190,7 +190,7 @@ class AuthComponent : Component : IEventDispatcher
      *
      * @var uim.cake.auths.BaseAuthorize|null
      */
-    protected $_authorizationProvider;
+    protected _authorizationProvider;
 
     /**
      * Initialize properties.

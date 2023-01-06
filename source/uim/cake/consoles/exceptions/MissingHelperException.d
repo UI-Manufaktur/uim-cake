@@ -7,5 +7,5 @@ class MissingHelperException : ConsoleException
 {
     /**
      */
-    protected string $_messageTemplate = "Helper class %s could not be found.";
+    protected string _messageTemplate = "Helper class %s could not be found.";
 }
