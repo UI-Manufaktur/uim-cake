@@ -46,9 +46,9 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      *
      * @param uim.cake.databases.IStatement $statement Statement implementation
      *  such as PDOStatement.
-     * @param uim.cake.databases.IDriver $driver Driver instance
+     * @param uim.cake.databases.IDriver aDriver Driver instance
      */
-    this(IStatement $statement, IDriver $driver) {
+    this(IStatement $statement, IDriver aDriver) {
         _statement = $statement;
         _driver = $driver;
     }

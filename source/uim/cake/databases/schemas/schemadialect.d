@@ -28,9 +28,9 @@ abstract class SchemaDialect
      * This constructor will connect the driver so that methods like columnSql() and others
      * will fail when the driver has not been connected.
      *
-     * @param uim.cake.databases.IDriver $driver The driver to use.
+     * @param uim.cake.databases.IDriver aDriver The driver to use.
      */
-    this(IDriver $driver) {
+    this(IDriver aDriver) {
         $driver.connect();
         _driver = $driver;
     }

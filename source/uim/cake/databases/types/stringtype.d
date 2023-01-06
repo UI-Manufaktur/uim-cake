@@ -22,9 +22,9 @@ class StringType : BaseType : OptionalConvertInterface
      * Convert string data into the database format.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      */
-    Nullable!string toDatabase($value, IDriver $driver) {
+    Nullable!string toDatabase($value, IDriver aDriver) {
         if ($value == null || is_string($value)) {
             return $value;
         }
@@ -47,9 +47,9 @@ class StringType : BaseType : OptionalConvertInterface
      * Convert string values to PHP strings.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      */
-    Nullable!string toPHP($value, IDriver $driver) {
+    Nullable!string toPHP($value, IDriver aDriver) {
         if ($value == null) {
             return null;
         }
@@ -61,9 +61,9 @@ class StringType : BaseType : OptionalConvertInterface
      * Get the correct PDO binding type for string data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.databases.IDriver $driver The driver.
+     * @param uim.cake.databases.IDriver aDriver The driver.
      */
-    int toStatement($value, IDriver $driver) {
+    int toStatement($value, IDriver aDriver) {
         return PDO::PARAM_STR;
     }
 

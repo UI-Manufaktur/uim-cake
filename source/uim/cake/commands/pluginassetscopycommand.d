@@ -26,8 +26,8 @@ class PluginAssetsCopyCommand : Command {
         this.args = $args;
 
         $name = $args.getArgument("name");
-        $overwrite = (bool)$args.getOption("overwrite");
-        _process(_list($name), true, $overwrite);
+        canOverwrite = (bool)$args.getOption("overwrite");
+        _process(_list($name), true, canOverwrite);
 
         return static::CODE_SUCCESS;
     }

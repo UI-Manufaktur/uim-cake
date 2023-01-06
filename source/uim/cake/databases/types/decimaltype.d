@@ -37,11 +37,11 @@ class DecimalType : BaseType : BatchCastingInterface
      * Convert decimal strings into the database format.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      * @return string|float|int|null
      * @throws \InvalidArgumentException
      */
-    function toDatabase($value, IDriver $driver) {
+    function toDatabase($value, IDriver aDriver) {
         if ($value == null || $value == "") {
             return null;
         }
@@ -68,9 +68,9 @@ class DecimalType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      */
-    Nullable!string toPHP($value, IDriver $driver) {
+    Nullable!string toPHP($value, IDriver aDriver) {
         if ($value == null) {
             return null;
         }
@@ -79,7 +79,7 @@ class DecimalType : BaseType : BatchCastingInterface
     }
 
 
-    array manyToPHP(array $values, array $fields, IDriver $driver) {
+    array manyToPHP(array $values, array $fields, IDriver aDriver) {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
                 continue;
@@ -95,9 +95,9 @@ class DecimalType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for decimal data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.databases.IDriver $driver The driver.
+     * @param uim.cake.databases.IDriver aDriver The driver.
      */
-    int toStatement($value, IDriver $driver) {
+    int toStatement($value, IDriver aDriver) {
         return PDO::PARAM_STR;
     }
 

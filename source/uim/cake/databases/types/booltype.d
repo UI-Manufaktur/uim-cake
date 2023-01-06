@@ -22,10 +22,10 @@ class BoolType : BaseType : BatchCastingInterface
      * Convert bool data into the database format.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      * @return bool|null
      */
-    function toDatabase($value, IDriver $driver): ?bool
+    function toDatabase($value, IDriver aDriver): ?bool
     {
         if ($value == true || $value == false || $value == null) {
             return $value;
@@ -45,10 +45,10 @@ class BoolType : BaseType : BatchCastingInterface
      * Convert bool values to PHP booleans
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      * @return bool|null
      */
-    function toPHP($value, IDriver $driver): ?bool
+    function toPHP($value, IDriver aDriver): ?bool
     {
         if ($value == null || is_bool($value)) {
             return $value;
@@ -62,7 +62,7 @@ class BoolType : BaseType : BatchCastingInterface
     }
 
 
-    array manyToPHP(array $values, array $fields, IDriver $driver) {
+    array manyToPHP(array $values, array $fields, IDriver aDriver) {
         foreach ($fields as $field) {
             $value = $values[$field] ?? null;
             if ($value == null || is_bool($value)) {
@@ -84,9 +84,9 @@ class BoolType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for bool data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.databases.IDriver $driver The driver.
+     * @param uim.cake.databases.IDriver aDriver The driver.
      */
-    int toStatement($value, IDriver $driver) {
+    int toStatement($value, IDriver aDriver) {
         if ($value == null) {
             return PDO::PARAM_NULL;
         }

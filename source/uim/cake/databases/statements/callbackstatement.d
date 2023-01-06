@@ -22,10 +22,10 @@ class CallbackStatement : StatementDecorator
      * Constructor
      *
      * @param uim.cake.databases.IStatement $statement The statement to decorate.
-     * @param uim.cake.databases.IDriver $driver The driver instance used by the statement.
+     * @param uim.cake.databases.IDriver aDriver The driver instance used by the statement.
      * @param callable $callback The callback to apply to results before they are returned.
      */
-    this(IStatement $statement, IDriver $driver, callable $callback) {
+    this(IStatement $statement, IDriver aDriver, callable $callback) {
         super(($statement, $driver);
         _callback = $callback;
     }

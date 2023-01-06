@@ -12,9 +12,9 @@ class UuidType : StringType
      * Casts given value from a PHP type to one acceptable by database
      *
      * @param mixed $value value to be converted to database equivalent
-     * @param uim.cake.databases.IDriver $driver object from which database preferences and configuration will be extracted
+     * @param uim.cake.databases.IDriver aDriver object from which database preferences and configuration will be extracted
      */
-    Nullable!string toDatabase($value, IDriver $driver) {
+    Nullable!string toDatabase($value, IDriver aDriver) {
         if ($value == null || $value == "" || $value == false) {
             return null;
         }

@@ -55,9 +55,9 @@ class BufferedStatement : Iterator, IStatement
      * Constructor
      *
      * @param uim.cake.databases.IStatement $statement Statement implementation such as PDOStatement
-     * @param uim.cake.databases.IDriver $driver Driver instance
+     * @param uim.cake.databases.IDriver aDriver Driver instance
      */
-    this(IStatement $statement, IDriver $driver) {
+    this(IStatement $statement, IDriver aDriver) {
         this.statement = $statement;
         _driver = $driver;
     }

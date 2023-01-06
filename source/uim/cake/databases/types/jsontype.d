@@ -26,11 +26,11 @@ class JsonType : BaseType : BatchCastingInterface
      * Convert a value data into a JSON string
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      * @return string|null
      * @throws \InvalidArgumentException
      */
-    Nullable!string toDatabase($value, IDriver $driver) {
+    Nullable!string toDatabase($value, IDriver aDriver) {
         if (is_resource($value)) {
             throw new InvalidArgumentException("Cannot convert a resource value to JSON");
         }
@@ -46,10 +46,10 @@ class JsonType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      * @return array|string|null
      */
-    function toPHP($value, IDriver $driver) {
+    function toPHP($value, IDriver aDriver) {
         if (!is_string($value)) {
             return null;
         }
@@ -58,7 +58,7 @@ class JsonType : BaseType : BatchCastingInterface
     }
 
 
-    array manyToPHP(array $values, array $fields, IDriver $driver) {
+    array manyToPHP(array $values, array $fields, IDriver aDriver) {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
                 continue;
@@ -74,9 +74,9 @@ class JsonType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for string data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.databases.IDriver $driver The driver.
+     * @param uim.cake.databases.IDriver aDriver The driver.
      */
-    int toStatement($value, IDriver $driver) {
+    int toStatement($value, IDriver aDriver) {
         return PDO::PARAM_STR;
     }
 

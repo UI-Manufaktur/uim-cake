@@ -188,12 +188,12 @@ class DigestAuthenticate : BasicAuthenticate {
     /**
      * Creates an auth digest password hash to store
      *
-     * @param string $username The username to use in the digest hash.
+     * @param string anUsername The username to use in the digest hash.
      * @param string $password The unhashed password to make a digest hash for.
      * @param string $realm The realm the password is for.
      * @return string the hashed password that can later be used with Digest authentication.
      */
-    static string password(string $username, string $password, string $realm) {
+    static string password(string anUsername, string $password, string $realm) {
         return md5($username ~ ":" ~ $realm ~ ":" ~ $password);
     }
 

@@ -77,10 +77,10 @@ trait PluginAssetsTrait
      * Process plugins
      *
      * @param array<string, mixed> $plugins List of plugins to process
-     * @param bool $copy Force copy mode. Default false.
-     * @param bool $overwrite Overwrite existing files.
+     * copyMode - Force copy mode. Default false.
+     * canOverwrite - Overwrite existing files.
      */
-    protected void _process(array $plugins, bool $copy = false, bool $overwrite = false) {
+    protected void _process(array $plugins, bool copyMode = false, bool canOverwrite = false) {
         foreach ($plugins as $plugin: aConfig) {
             this.io.out();
             this.io.out("For plugin: " ~ $plugin);
@@ -97,9 +97,9 @@ trait PluginAssetsTrait
             $dest = aConfig["destDir"] . aConfig["link"];
 
             if (file_exists($dest)) {
-                if ($overwrite && !_remove(aConfig)) {
+                if (canOverwrite && !_remove(aConfig)) {
                     continue;
-                } elseif (!$overwrite) {
+                } elseif (!canOverwrite) {
                     this.io.verbose(
                         $dest ~ " already exists",
                         1

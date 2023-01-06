@@ -530,20 +530,20 @@ trait CollectionTrait
         return new InsertIterator(this.unwrap(), myPath, myValues);
     }
 
-    array toArray(bool $keepKeys = true) {
+    array toArray(bool shouldKeepKeys = true) {
         $iterator = this.unwrap();
         if ($iterator instanceof ArrayIterator) {
             myItems = $iterator.getArrayCopy();
 
-            return $keepKeys ? myItems : array_values(myItems);
+            return shouldKeepKeys ? myItems : array_values(myItems);
         }
         // RecursiveIteratorIterator can return duplicate key values causing
         // data loss when converted into an array
-        if ($keepKeys && get_class($iterator) == RecursiveIteratorIterator::class) {
-            $keepKeys = false;
+        if (shouldKeepKeys && get_class($iterator) == RecursiveIteratorIterator::class) {
+            shouldKeepKeys = false;
         }
 
-        return iterator_to_array(this, $keepKeys);
+        return iterator_to_array(this, shouldKeepKeys);
     }
 
 
@@ -557,8 +557,8 @@ trait CollectionTrait
     }
 
 
-    ICollection compile(bool $keepKeys = true) {
-        return this.newCollection(this.toArray($keepKeys));
+    ICollection compile(bool shouldKeepKeys = true) {
+        return this.newCollection(this.toArray(shouldKeepKeys));
     }
 
 
@@ -668,10 +668,10 @@ trait CollectionTrait
     }
 
 
-    ICollection chunkWithKeys(int $chunkSize, bool $keepKeys = true) {
-        return this.map(function ($v, $k, $iterator) use ($chunkSize, $keepKeys) {
+    ICollection chunkWithKeys(int $chunkSize, bool shouldKeepKeys = true) {
+        return this.map(function ($v, $k, $iterator) use ($chunkSize, shouldKeepKeys) {
             myKey = 0;
-            if ($keepKeys) {
+            if (shouldKeepKeys) {
                 myKey = $k;
             }
             myValues = [myKey: $v];
@@ -680,7 +680,7 @@ trait CollectionTrait
                 if (!$iterator.valid()) {
                     break;
                 }
-                if ($keepKeys) {
+                if (shouldKeepKeys) {
                     myValues[$iterator.key()] = $iterator.current();
                 } else {
                     myValues[] = $iterator.current();

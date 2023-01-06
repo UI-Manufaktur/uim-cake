@@ -757,13 +757,13 @@ interface ICollection : Iterator, JsonSerializable
     /**
      * Returns an array representation of the results
      *
-     * @param bool $keepKeys Whether to use the keys returned by this
+     * shouldKeepKeys - Whether to use the keys returned by this
      * collection as the array keys. Keep in mind that it is valid for iterators
      * to return the same key for different elements, setting this value to false
      * can help getting all items if keys are not important in the result.
      * @return array
      */
-    array toArray(bool $keepKeys = true);
+    array toArray(bool shouldKeepKeys = true);
 
     /**
      * Returns an numerically-indexed array representation of the results.
@@ -807,13 +807,13 @@ interface ICollection : Iterator, JsonSerializable
      * You can think of this method as a way to create save points for complex
      * calculations in a collection.
      *
-     * @param bool $keepKeys Whether to use the keys returned by this
+     * shouldKeepKeys - Whether to use the keys returned by this
      * collection as the array keys. Keep in mind that it is valid for iterators
      * to return the same key for different elements, setting this value to false
      * can help getting all items if keys are not important in the result.
      * @return self
      */
-    ICollection compile(bool $keepKeys = true);
+    ICollection compile(bool shouldKeepKeys = true);
 
     /**
      * Returns a new collection where any operations chained after it are guaranteed
@@ -1032,10 +1032,10 @@ interface ICollection : Iterator, JsonSerializable
      * ```
      *
      * @param int $chunkSize The maximum size for each chunk
-     * @param bool $keepKeys If the keys of the array should be kept
+     * shouldKeepKeys - If the keys of the array should be kept
      * @return self
      */
-    ICollection chunkWithKeys(int $chunkSize, bool $keepKeys = true);
+    ICollection chunkWithKeys(int $chunkSize, bool shouldKeepKeys = true);
 
     /**
      * Returns whether there are elements in this collection

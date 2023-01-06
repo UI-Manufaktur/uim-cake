@@ -78,12 +78,12 @@ abstract class BaseAuthenticate : IEventListener {
      * Input passwords will be hashed even when a user doesn"t exist. This
      * helps mitigate timing attacks that are attempting to find valid usernames.
      *
-     * @param string $username The username/identifier.
-     * @param string|null $password The password, if not provided password checking is skipped
+     * anUsername - The username/identifier.
+     * aPassword  - The password, if not provided password checking is skipped
      *   and result of find is returned.
      * @return array<string, mixed>|false Either false on failure, or an array of user data.
      */
-    protected function _findUser(string $username, ?string $password = null) {
+    protected array _findUser(string anUsername, Nullable!string aPassword = null) {
         $result = _query($username).first();
 
         if ($result == null) {
@@ -134,10 +134,10 @@ abstract class BaseAuthenticate : IEventListener {
     /**
      * Get query object for fetching user from database.
      *
-     * @param string $username The username/identifier.
+     * @param string anUsername The username/identifier.
      * @return uim.cake.orm.Query
      */
-    protected Query _query(string $username) {
+    protected Query _query(string anUsername) {
         aConfig = _config;
         $table = this.getTableLocator().get(aConfig["userModel"]);
 

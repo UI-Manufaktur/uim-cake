@@ -50,9 +50,9 @@ class FieldTypeConverter
      * Builds the type map
      *
      * @param uim.cake.databases.TypeMap $typeMap Contains the types to use for converting results
-     * @param uim.cake.databases.IDriver $driver The driver to use for the type conversion
+     * @param uim.cake.databases.IDriver aDriver The driver to use for the type conversion
      */
-    this(TypeMap $typeMap, IDriver $driver) {
+    this(TypeMap $typeMap, IDriver aDriver) {
         _driver = $driver;
         $map = $typeMap.toArray();
         $types = TypeFactory::buildAll();

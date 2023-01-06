@@ -390,11 +390,11 @@ class Query : IExpression, IteratorAggregate
      * ```
      *
      * @param uim.cake.databases.Expression\CommonTableExpression|\Closure $cte The CTE to add.
-     * @param bool $overwrite Whether to reset the list of CTEs.
+     * @param bool canOverwrite Whether to reset the list of CTEs.
      * @return this
      */
-    function with($cte, bool $overwrite = false) {
-        if ($overwrite) {
+    function with($cte, bool canOverwrite = false) {
+        if (canOverwrite) {
             _parts["with"] = [];
         }
 
@@ -446,10 +446,10 @@ class Query : IExpression, IteratorAggregate
      * from the table.
      *
      * @param uim.cake.databases.IExpression|callable|array|string $fields fields to be added to the list.
-     * @param bool $overwrite whether to reset fields with passed list or not
+     * @param bool canOverwrite whether to reset fields with passed list or not
      * @return this
      */
-    function select($fields = [], bool $overwrite = false) {
+    function select($fields = [], bool canOverwrite = false) {
         if (!is_string($fields) && is_callable($fields)) {
             $fields = $fields(this);
         }
@@ -458,7 +458,7 @@ class Query : IExpression, IteratorAggregate
             $fields = [$fields];
         }
 
-        if ($overwrite) {
+        if (canOverwrite) {
             _parts["select"] = $fields;
         } else {
             _parts["select"] = array_merge(_parts["select"], $fields);
@@ -495,10 +495,10 @@ class Query : IExpression, IteratorAggregate
      *
      * @param uim.cake.databases.IExpression|array|string|bool $on Enable/disable distinct class
      * or list of fields to be filtered on
-     * @param bool $overwrite whether to reset fields with passed list or not
+     * @param bool canOverwrite whether to reset fields with passed list or not
      * @return this
      */
-    function distinct($on = [], $overwrite = false) {
+    function distinct($on = [], canOverwrite = false) {
         if ($on == []) {
             $on = true;
         } elseif (is_string($on)) {
@@ -510,7 +510,7 @@ class Query : IExpression, IteratorAggregate
             if (is_array(_parts["distinct"])) {
                 $merge = _parts["distinct"];
             }
-            $on = $overwrite ? array_values($on) : array_merge($merge, array_values($on));
+            $on = canOverwrite ? array_values($on) : array_merge($merge, array_values($on));
         }
 
         _parts["distinct"] = $on;
@@ -538,12 +538,12 @@ class Query : IExpression, IteratorAggregate
      * ```
      *
      * @param uim.cake.databases.IExpression|array|string $modifiers modifiers to be applied to the query
-     * @param bool $overwrite whether to reset order with field list or not
+     * @param bool canOverwrite whether to reset order with field list or not
      * @return this
      */
-    function modifier($modifiers, $overwrite = false) {
+    function modifier($modifiers, canOverwrite = false) {
         _dirty();
-        if ($overwrite) {
+        if (canOverwrite) {
             _parts["modifier"] = [];
         }
         if (!is_array($modifiers)) {
@@ -580,13 +580,13 @@ class Query : IExpression, IteratorAggregate
      * @param array|string $tables tables to be added to the list. This argument, can be
      *  passed as an array of strings, array of expression objects, or a single string. See
      *  the examples above for the valid call types.
-     * @param bool $overwrite whether to reset tables with passed list or not
+     * @param bool canOverwrite whether to reset tables with passed list or not
      * @return this
      */
-    function from($tables = [], $overwrite = false) {
+    function from($tables = [], canOverwrite = false) {
         $tables = (array)$tables;
 
-        if ($overwrite) {
+        if (canOverwrite) {
             _parts["from"] = $tables;
         } else {
             _parts["from"] = array_merge(_parts["from"], $tables);
@@ -679,11 +679,11 @@ class Query : IExpression, IteratorAggregate
      *
      * @param array<string, mixed>|string $tables list of tables to be joined in the query
      * @param array<string, string> $types Associative array of type names used to bind values to query
-     * @param bool $overwrite whether to reset joins with passed list or not
+     * @param bool canOverwrite whether to reset joins with passed list or not
      * @see uim.cake.databases.TypeFactory
      * @return this
      */
-    function join($tables, $types = [], $overwrite = false) {
+    function join($tables, $types = [], canOverwrite = false) {
         if (is_string($tables) || isset($tables["table"])) {
             $tables = [$tables];
         }
@@ -706,7 +706,7 @@ class Query : IExpression, IteratorAggregate
             $joins[$alias ?: $i++] = $t + ["type": static::JOIN_TYPE_INNER, "alias": $alias];
         }
 
-        if ($overwrite) {
+        if (canOverwrite) {
             _parts["join"] = $joins;
         } else {
             _parts["join"] = array_merge(_parts["join"], $joins);
@@ -964,13 +964,13 @@ class Query : IExpression, IteratorAggregate
      *
      * @param uim.cake.databases.IExpression|\Closure|array|string|null $conditions The conditions to filter on.
      * @param array<string, string> $types Associative array of type names used to bind values to query
-     * @param bool $overwrite whether to reset conditions with passed list or not
+     * @param bool canOverwrite whether to reset conditions with passed list or not
      * @see uim.cake.databases.TypeFactory
      * @see uim.cake.databases.Expression\QueryExpression
      * @return this
      */
-    function where($conditions = null, array $types = [], bool $overwrite = false) {
-        if ($overwrite) {
+    function where($conditions = null, array $types = [], bool canOverwrite = false) {
+        if (canOverwrite) {
             _parts["where"] = this.newExpr();
         }
         _conjugate("where", $conditions, "AND", $types);
@@ -1229,11 +1229,11 @@ class Query : IExpression, IteratorAggregate
      * should use `orderAsc()` or `orderDesc()`.
      *
      * @param uim.cake.databases.IExpression|\Closure|array|string $fields fields to be added to the list
-     * @param bool $overwrite whether to reset order with field list or not
+     * @param bool canOverwrite whether to reset order with field list or not
      * @return this
      */
-    function order($fields, $overwrite = false) {
-        if ($overwrite) {
+    function order($fields, canOverwrite = false) {
+        if (canOverwrite) {
             _parts["order"] = null;
         }
 
@@ -1259,11 +1259,11 @@ class Query : IExpression, IteratorAggregate
      * not sanitized by the query builder.
      *
      * @param uim.cake.databases.IExpression|\Closure|string $field The field to order on.
-     * @param bool $overwrite Whether to reset the order clauses.
+     * @param bool canOverwrite Whether to reset the order clauses.
      * @return this
      */
-    function orderAsc($field, $overwrite = false) {
-        if ($overwrite) {
+    function orderAsc($field, canOverwrite = false) {
+        if (canOverwrite) {
             _parts["order"] = null;
         }
         if (!$field) {
@@ -1292,11 +1292,11 @@ class Query : IExpression, IteratorAggregate
      * not sanitized by the query builder.
      *
      * @param uim.cake.databases.IExpression|\Closure|string $field The field to order on.
-     * @param bool $overwrite Whether to reset the order clauses.
+     * @param bool canOverwrite Whether to reset the order clauses.
      * @return this
      */
-    function orderDesc($field, $overwrite = false) {
-        if ($overwrite) {
+    function orderDesc($field, canOverwrite = false) {
+        if (canOverwrite) {
             _parts["order"] = null;
         }
         if (!$field) {
@@ -1337,11 +1337,11 @@ class Query : IExpression, IteratorAggregate
      * not sanitized by the query builder.
      *
      * @param uim.cake.databases.IExpression|array|string $fields fields to be added to the list
-     * @param bool $overwrite whether to reset fields with passed list or not
+     * @param bool canOverwrite whether to reset fields with passed list or not
      * @return this
      */
-    function group($fields, $overwrite = false) {
-        if ($overwrite) {
+    function group($fields, canOverwrite = false) {
+        if (canOverwrite) {
             _parts["group"] = [];
         }
 
@@ -1366,12 +1366,12 @@ class Query : IExpression, IteratorAggregate
      *
      * @param uim.cake.databases.IExpression|\Closure|array|string|null $conditions The having conditions.
      * @param array<string, string> $types Associative array of type names used to bind values to query
-     * @param bool $overwrite whether to reset conditions with passed list or not
+     * @param bool canOverwrite whether to reset conditions with passed list or not
      * @see uim.cake.databases.Query::where()
      * @return this
      */
-    function having($conditions = null, $types = [], $overwrite = false) {
-        if ($overwrite) {
+    function having($conditions = null, $types = [], canOverwrite = false) {
+        if (canOverwrite) {
             _parts["having"] = this.newExpr();
         }
         _conjugate("having", $conditions, "AND", $types);
@@ -1406,11 +1406,11 @@ class Query : IExpression, IteratorAggregate
      *
      * @param string aName Window name
      * @param uim.cake.databases.Expression\WindowExpression|\Closure $window Window expression
-     * @param bool $overwrite Clear all previous query window expressions
+     * @param bool canOverwrite Clear all previous query window expressions
      * @return this
      */
-    function window(string aName, $window, bool $overwrite = false) {
-        if ($overwrite) {
+    function window(string aName, $window, bool canOverwrite = false) {
+        if (canOverwrite) {
             _parts["window"] = [];
         }
 
@@ -1532,11 +1532,11 @@ class Query : IExpression, IteratorAggregate
      * `SELECT id, name FROM things d UNION SELECT id, title FROM articles a`
      *
      * @param uim.cake.databases.Query|string $query full SQL query to be used in UNION operator
-     * @param bool $overwrite whether to reset the list of queries to be operated or not
+     * @param bool canOverwrite whether to reset the list of queries to be operated or not
      * @return this
      */
-    function union($query, $overwrite = false) {
-        if ($overwrite) {
+    function union($query, canOverwrite = false) {
+        if (canOverwrite) {
             _parts["union"] = [];
         }
         _parts["union"][] = [
@@ -1566,11 +1566,11 @@ class Query : IExpression, IteratorAggregate
      * `SELECT id, name FROM things d UNION ALL SELECT id, title FROM articles a`
      *
      * @param uim.cake.databases.Query|string $query full SQL query to be used in UNION operator
-     * @param bool $overwrite whether to reset the list of queries to be operated or not
+     * @param bool canOverwrite whether to reset the list of queries to be operated or not
      * @return this
      */
-    function unionAll($query, $overwrite = false) {
-        if ($overwrite) {
+    function unionAll($query, canOverwrite = false) {
+        if (canOverwrite) {
             _parts["union"] = [];
         }
         _parts["union"][] = [
@@ -1969,11 +1969,11 @@ class Query : IExpression, IteratorAggregate
      * ```
      *
      * @param callable|null $callback The callback to invoke when results are fetched.
-     * @param bool $overwrite Whether this should append or replace all existing decorators.
+     * @param bool canOverwrite Whether this should append or replace all existing decorators.
      * @return this
      */
-    function decorateResults(?callable $callback, bool $overwrite = false) {
-        if ($overwrite) {
+    function decorateResults(?callable $callback, bool canOverwrite = false) {
+        if (canOverwrite) {
             _resultDecorators = [];
         }
 

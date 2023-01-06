@@ -110,9 +110,9 @@ class DateTimeType : BaseType : BatchCastingInterface
      * Convert DateTime instance into strings.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      */
-    Nullable!string toDatabase($value, IDriver $driver) {
+    Nullable!string toDatabase($value, IDriver aDriver) {
         if ($value == null || is_string($value)) {
             return $value;
         }
@@ -187,10 +187,10 @@ class DateTimeType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value Value to be converted to PHP equivalent
-     * @param uim.cake.databases.IDriver $driver Object from which database preferences and configuration will be extracted
+     * @param uim.cake.databases.IDriver aDriver Object from which database preferences and configuration will be extracted
      * @return \DateTimeInterface|null
      */
-    function toPHP($value, IDriver $driver) {
+    function toPHP($value, IDriver aDriver) {
         if ($value == null) {
             return null;
         }
@@ -240,7 +240,7 @@ class DateTimeType : BaseType : BatchCastingInterface
     }
 
 
-    array manyToPHP(array $values, array $fields, IDriver $driver) {
+    array manyToPHP(array $values, array $fields, IDriver aDriver) {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
                 continue;
@@ -508,10 +508,10 @@ class DateTimeType : BaseType : BatchCastingInterface
      * Casts given value to Statement equivalent
      *
      * @param mixed $value value to be converted to PDO statement
-     * @param uim.cake.databases.IDriver $driver object from which database preferences and configuration will be extracted
+     * @param uim.cake.databases.IDriver aDriver object from which database preferences and configuration will be extracted
      * @return mixed
      */
-    function toStatement($value, IDriver $driver) {
+    function toStatement($value, IDriver aDriver) {
         return PDO::PARAM_STR;
     }
 }

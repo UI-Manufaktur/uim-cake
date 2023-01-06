@@ -573,20 +573,20 @@ trait CollectionTrait
     }
 
 
-    array toArray(bool $keepKeys = true) {
+    array toArray(bool shouldKeepKeys = true) {
         $iterator = this.unwrap();
         if ($iterator instanceof ArrayIterator) {
             $items = $iterator.getArrayCopy();
 
-            return $keepKeys ? $items : array_values($items);
+            return shouldKeepKeys ? $items : array_values($items);
         }
         // RecursiveIteratorIterator can return duplicate key values causing
         // data loss when converted into an array
-        if ($keepKeys && get_class($iterator) == RecursiveIteratorIterator::class) {
-            $keepKeys = false;
+        if (shouldKeepKeys && get_class($iterator) == RecursiveIteratorIterator::class) {
+            shouldKeepKeys = false;
         }
 
-        return iterator_to_array(this, $keepKeys);
+        return iterator_to_array(this, shouldKeepKeys);
     }
 
 
@@ -600,9 +600,9 @@ trait CollectionTrait
     }
 
 
-    function compile(bool $keepKeys = true): ICollection
+    function compile(bool shouldKeepKeys = true): ICollection
     {
-        return this.newCollection(this.toArray($keepKeys));
+        return this.newCollection(this.toArray(shouldKeepKeys));
     }
 
 
@@ -721,11 +721,11 @@ trait CollectionTrait
     }
 
 
-    function chunkWithKeys(int $chunkSize, bool $keepKeys = true): ICollection
+    function chunkWithKeys(int $chunkSize, bool shouldKeepKeys = true): ICollection
     {
-        return this.map(function ($v, $k, $iterator) use ($chunkSize, $keepKeys) {
+        return this.map(function ($v, $k, $iterator) use ($chunkSize, shouldKeepKeys) {
             $key = 0;
-            if ($keepKeys) {
+            if (shouldKeepKeys) {
                 $key = $k;
             }
             $values = [$key: $v];
@@ -734,7 +734,7 @@ trait CollectionTrait
                 if (!$iterator.valid()) {
                     break;
                 }
-                if ($keepKeys) {
+                if (shouldKeepKeys) {
                     $values[$iterator.key()] = $iterator.current();
                 } else {
                     $values[] = $iterator.current();

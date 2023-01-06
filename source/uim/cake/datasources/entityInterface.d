@@ -97,20 +97,20 @@ interface IEntity : ArrayAccess, JsonSerializable
      * Sets error messages to the entity
      *
      * @param array $errors The array of errors to set.
-     * @param bool $overwrite Whether to overwrite pre-existing errors for $fields
+     * @param bool canOverwrite Whether to overwrite pre-existing errors for $fields
      * @return this
      */
-    function setErrors(array $errors, bool $overwrite = false);
+    function setErrors(array $errors, bool canOverwrite = false);
 
     /**
      * Sets errors for a single field
      *
      * @param string $field The field to get errors for, or the array of errors to set.
      * @param array|string $errors The errors to be set for $field
-     * @param bool $overwrite Whether to overwrite pre-existing errors for $field
+     * @param bool canOverwrite Whether to overwrite pre-existing errors for $field
      * @return this
      */
-    function setError(string $field, $errors, bool $overwrite = false);
+    function setError(string $field, $errors, bool canOverwrite = false);
 
     /**
      * Stores whether a field value can be changed or set in this entity.

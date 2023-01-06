@@ -30,9 +30,9 @@ class IntegerType : BaseType : BatchCastingInterface
      * Convert integer data into the database format.
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      */
-    Nullable!int toDatabase($value, IDriver $driver) {
+    Nullable!int toDatabase($value, IDriver aDriver) {
         if ($value == null || $value == "") {
             return null;
         }
@@ -46,9 +46,9 @@ class IntegerType : BaseType : BatchCastingInterface
      * {@inheritDoc}
      *
      * @param mixed $value The value to convert.
-     * @param uim.cake.databases.IDriver $driver The driver instance to convert with.
+     * @param uim.cake.databases.IDriver aDriver The driver instance to convert with.
      */
-    Nullable!int toPHP($value, IDriver $driver) {
+    Nullable!int toPHP($value, IDriver aDriver) {
         if ($value == null) {
             return null;
         }
@@ -57,7 +57,7 @@ class IntegerType : BaseType : BatchCastingInterface
     }
 
 
-    array manyToPHP(array $values, array $fields, IDriver $driver) {
+    array manyToPHP(array $values, array $fields, IDriver aDriver) {
         foreach ($fields as $field) {
             if (!isset($values[$field])) {
                 continue;
@@ -75,9 +75,9 @@ class IntegerType : BaseType : BatchCastingInterface
      * Get the correct PDO binding type for integer data.
      *
      * @param mixed $value The value being bound.
-     * @param uim.cake.databases.IDriver $driver The driver.
+     * @param uim.cake.databases.IDriver aDriver The driver.
      */
-    int toStatement($value, IDriver $driver) {
+    int toStatement($value, IDriver aDriver) {
         return PDO::PARAM_INT;
     }
 
