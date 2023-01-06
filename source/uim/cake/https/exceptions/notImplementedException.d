@@ -7,8 +7,7 @@
 /**
  * Not Implemented Exception - used when an API method is not implemented
  */
-class NotImplementedException : HttpException
-{
+class NotImplementedException : HttpException {
 
     protected _messageTemplate = "%s is not implemented.";
 

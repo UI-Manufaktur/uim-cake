@@ -13,8 +13,7 @@ module uim.cake.https\Exception;
  * Additional headers can also be provided in the constructor, or
  * using the addHeaders() method.
  */
-class RedirectException : HttpException
-{
+class RedirectException : HttpException {
     /**
      * Constructor
      *

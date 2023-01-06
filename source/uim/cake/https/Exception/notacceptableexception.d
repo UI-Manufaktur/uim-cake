@@ -16,8 +16,7 @@ use Throwable;
 /**
  * Represents an HTTP 406 error.
  */
-class NotAcceptableException : HttpException
-{
+class NotAcceptableException : HttpException {
 
     protected _defaultCode = 406;
 

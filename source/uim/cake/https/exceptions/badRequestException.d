@@ -4,8 +4,7 @@ module uim.cake.https\Exception;
 import uim.cake;
 
 // Represents an HTTP 400 error.
-class BadRequestException : HttpException
-{
+class BadRequestException : HttpException {
 
     protected _defaultCode = 400;
 

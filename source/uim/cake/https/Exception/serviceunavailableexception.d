@@ -16,8 +16,7 @@ use Throwable;
 /**
  * Represents an HTTP 503 error.
  */
-class ServiceUnavailableException : HttpException
-{
+class ServiceUnavailableException : HttpException {
 
     protected _defaultCode = 503;
 

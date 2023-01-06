@@ -5,8 +5,7 @@ use Throwable;
 /**
  * Represents an HTTP 404 error.
  */
-class NotFoundException : HttpException
-{
+class NotFoundException : HttpException {
 
     protected _defaultCode = 404;
 

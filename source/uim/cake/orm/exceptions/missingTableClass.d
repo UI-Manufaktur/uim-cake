@@ -9,8 +9,7 @@ import uim.cake.core.exceptions\CakeException;
 /**
  * Exception raised when a Table could not be found.
  */
-class MissingTableClassException : CakeException
-{
+class MissingTableClassException : CakeException {
     /**
      * @var string
      */

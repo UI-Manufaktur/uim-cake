@@ -9,8 +9,7 @@ use Throwable;
 /**
  * Represents an HTTP 405 error.
  */
-class MethodNotAllowedException : HttpException
-{
+class MethodNotAllowedException : HttpException {
 
     protected _defaultCode = 405;
 

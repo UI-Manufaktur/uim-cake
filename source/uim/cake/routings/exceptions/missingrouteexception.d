@@ -7,8 +7,7 @@ use Throwable;
  * Exception raised when a URL cannot be reverse routed
  * or when a URL cannot be parsed.
  */
-class MissingRouteException : CakeException
-{
+class MissingRouteException : CakeException {
 
     protected _messageTemplate = "A route matching "%s" could not be found.";
 

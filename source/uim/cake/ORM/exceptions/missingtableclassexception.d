@@ -18,8 +18,7 @@ import uim.cake.core.exceptions.CakeException;
 /**
  * Exception raised when a Table could not be found.
  */
-class MissingTableClassException : CakeException
-{
+class MissingTableClassException : CakeException {
     /**
      */
     protected string _messageTemplate = "Table class %s could not be found.";

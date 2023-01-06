@@ -20,8 +20,7 @@ import uim.cake.core.exceptions.CakeException;
 /**
  * Exception raised when an Entity could not be found.
  */
-class MissingEntityException : CakeException
-{
+class MissingEntityException : CakeException {
     /**
      */
     protected string _messageTemplate = "Entity class %s could not be found.";

@@ -13,6 +13,5 @@ import uim.cake.core.exceptions.CakeException;
 /**
  * I18n exception.
  */
-class I18nException : CakeException
-{
+class I18nException : CakeException {
 }

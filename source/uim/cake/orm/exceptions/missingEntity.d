@@ -9,8 +9,7 @@ import uim.cake.core.exceptions\CakeException;
 /**
  * Exception raised when an Entity could not be found.
  */
-class MissingEntityException : CakeException
-{
+class MissingEntityException : CakeException {
     /**
      * @var string
      */

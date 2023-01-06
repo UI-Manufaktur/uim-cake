@@ -9,8 +9,7 @@ use Throwable;
 /**
  * Represents an HTTP 451 error.
  */
-class UnavailableForLegalReasonsException : HttpException
-{
+class UnavailableForLegalReasonsException : HttpException {
 
     protected _defaultCode = 451;
 

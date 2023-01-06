@@ -9,8 +9,7 @@ use Throwable;
 /**
  * Represents an HTTP 401 error.
  */
-class UnauthorizedException : HttpException
-{
+class UnauthorizedException : HttpException {
 
     protected _defaultCode = 401;
 

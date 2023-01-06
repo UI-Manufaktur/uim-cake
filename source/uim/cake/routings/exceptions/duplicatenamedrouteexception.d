@@ -17,8 +17,7 @@ use Throwable;
 /**
  * Exception raised when a route names used twice.
  */
-class DuplicateNamedRouteException : CakeException
-{
+class DuplicateNamedRouteException : CakeException {
 
     protected _messageTemplate = "A route named "%s" has already been connected to "%s".";
 
