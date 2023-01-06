@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 /**
  * Interface for Debugs
@@ -26,5 +24,5 @@ interface INode
      *
      * @return mixed
      */
-    function getValue();
+    auto getValue();
 }

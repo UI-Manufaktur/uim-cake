@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 /**
  * Dump node for class references.
@@ -14,12 +12,8 @@
  * a reference node can be used after an object has been seen the
  * first time.
  */
-class ReferenceNode : INode
-{
-    /**
-     * @var string
-     */
-    private $class;
+class ReferenceNode : INode {
+    private string myClass;
 
     /**
      * @var int
@@ -29,11 +23,11 @@ class ReferenceNode : INode
     /**
      * Constructor
      *
-     * @param string $class The class name
+     * @param string myClass The class name
      * @param int $id The id of the referenced class.
      */
-    this(string $class, int $id) {
-        this.class = $class;
+    this(string myClass, int $id) {
+        this.class = myClass;
         this.id = $id;
     }
 

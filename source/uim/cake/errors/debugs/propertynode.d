@@ -1,21 +1,13 @@
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
-
-/**
- * Dump node for object properties.
- */
-class PropertyNode : INode
-{
-    /**
-     * @var string
-     */
-    private $name;
+// Dump node for object properties.
+class PropertyNode : INode {
+    private string myName;
 
     /**
      * @var string|null
@@ -25,19 +17,19 @@ class PropertyNode : INode
     /**
      * @var uim.cake.errors.debugs.INode
      */
-    private $value;
+    private myValue;
 
     /**
      * Constructor
      *
-     * @param string aName The property name
+     * @param string myName The property name
      * @param string|null $visibility The visibility of the property.
-     * @param uim.cake.errors.debugs.INode $value The property value node.
+     * @param uim.cake.errors.debugs.INode myValue The property value node.
      */
-    this(string aName, Nullable!string $visibility, INode $value) {
-        this.name = $name;
+    this(string myName, Nullable!string visibility, INode myValue) {
+        this.name = myName;
         this.visibility = $visibility;
-        this.value = $value;
+        this.value = myValue;
     }
 
     /**
@@ -45,27 +37,21 @@ class PropertyNode : INode
      *
      * @return uim.cake.errors.debugs.INode
      */
-    function getValue(): INode
-    {
-        return this.value;
+    INode getValue() {
+      return this.value;
     }
 
-    /**
-     * Get the property visibility
-     */
-    Nullable!string getVisibility() {
-        return this.visibility;
+    // Get the property visibility
+    string getVisibility() {
+      return this.visibility;
     }
 
-    /**
-     * Get the property name
-     */
+    // Get the property name
     string getName() {
-        return this.name;
+      return this.name;
     }
-
 
     array getChildren() {
-        return [this.value];
+      return [this.value];
     }
 }

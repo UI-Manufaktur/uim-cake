@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 /**
  * Dump node for objects/class instances.
@@ -15,7 +13,7 @@ class ClassNode : INode
     /**
      * @var string
      */
-    private $class;
+    private myClass;
 
     /**
      * @var int
@@ -30,21 +28,21 @@ class ClassNode : INode
     /**
      * Constructor
      *
-     * @param string $class The class name
+     * @param string myClass The class name
      * @param int $id The reference id of this object in the DumpContext
      */
-    this(string $class, int $id) {
-        this.class = $class;
+    this(string myClass, int $id) {
+        this.class = myClass;
         this.id = $id;
     }
 
     /**
      * Add a property
      *
-     * @param uim.cake.errors.debugs.PropertyNode $node The property to add.
+     * @param uim.cake.errors.debugs.PropertyNode myNode The property to add.
      */
-    void addProperty(PropertyNode $node) {
-        this.properties[] = $node;
+    void addProperty(PropertyNode myNode) {
+        this.properties[] = myNode;
     }
 
     /**

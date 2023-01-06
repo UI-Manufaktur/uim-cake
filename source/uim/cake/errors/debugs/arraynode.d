@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 /**
  * Dump node for Array values.
@@ -15,16 +13,16 @@ class ArrayNode : INode
     /**
      * @var array<uim.cake.errors.debugs.ArrayItemNode>
      */
-    private $items;
+    private myItems;
 
     /**
      * Constructor
      *
-     * @param array<uim.cake.errors.debugs.ArrayItemNode> $items The items for the array
+     * @param array<uim.cake.errors.debugs.ArrayItemNode> myItems The items for the array
      */
-    this(array $items = []) {
+    this(array myItems = []) {
         this.items = [];
-        foreach ($items as $item) {
+        foreach (myItems as $item) {
             this.add($item);
         }
     }
@@ -32,10 +30,10 @@ class ArrayNode : INode
     /**
      * Add an item
      *
-     * @param uim.cake.errors.debugs.ArrayItemNode $node The item to add.
+     * @param uim.cake.errors.debugs.ArrayItemNode myNode The item to add.
      */
-    void add(ArrayItemNode $node) {
-        this.items[] = $node;
+    void add(ArrayItemNode myNode) {
+        this.items[] = myNode;
     }
 
     /**

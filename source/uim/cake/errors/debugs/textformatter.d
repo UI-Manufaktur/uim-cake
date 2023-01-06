@@ -1,3 +1,8 @@
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
 module uim.cake.errors.Debug;
 
 use RuntimeException;
@@ -10,10 +15,11 @@ use RuntimeException;
  *
  * @internal
  */
-class TextFormatter : IFormatter {
+class TextFormatter : IFormatter
+{
 
-    string formatWrapper(string $contents, array $location) {
-        $template = <<<TEXT
+    string formatWrapper(string myContentss, array myLocation) {
+        myTemplate = <<<TEXT
 %s
 ########## DEBUG ##########
 %s
@@ -21,22 +27,22 @@ class TextFormatter : IFormatter {
 
 TEXT;
         $lineInfo = "";
-        if (isset($location["file"], $location["file"])) {
-            $lineInfo = sprintf("%s (line %s)", $location["file"], $location["line"]);
+        if (isset(myLocation["file"], myLocation["file"])) {
+            $lineInfo = sprintf("%s (line %s)", myLocation["file"], myLocation["line"]);
         }
 
-        return sprintf($template, $lineInfo, $contents);
+        return sprintf(myTemplate, $lineInfo, myContentss);
     }
 
     /**
      * Convert a tree of INode objects into a plain text string.
      *
-     * @param uim.cake.errors.debugs.INode $node The node tree to dump.
+     * @param uim.cake.errors.debugs.INode myNode The node tree to dump.
      */
-    string dump(INode $node) {
+    string dump(INode myNode) {
         $indent = 0;
 
-        return this.export($node, $indent);
+        return this.export(myNode, $indent);
     }
 
     /**
@@ -44,6 +50,7 @@ TEXT;
      *
      * @param uim.cake.errors.debugs.INode $var The node tree to dump.
      * @param int $indent The current indentation level.
+     * @return string
      */
     protected string export(INode $var, int $indent) {
         if ($var instanceof ScalarNode) {
@@ -85,7 +92,7 @@ TEXT;
 
         foreach ($var.getChildren() as $item) {
             $val = $item.getValue();
-            $vars[] = $break . this.export($item.getKey(), $indent) ~ ": " ~ this.export($val, $indent);
+            $vars[] = $break . this.export($item.getKey(), $indent) ~ ":" ~ this.export($val, $indent);
         }
         if (count($vars)) {
             return $out . implode(",", $vars) . $end ~ "]";
@@ -116,11 +123,11 @@ TEXT;
 
         foreach ($var.getChildren() as $property) {
             $visibility = $property.getVisibility();
-            $name = $property.getName();
+            myName = $property.getName();
             if ($visibility && $visibility != "public") {
-                $props[] = "[{$visibility}] {$name}: " ~ this.export($property.getValue(), $indent);
+                $props[] = "[{$visibility}] {myName}: " ~ this.export($property.getValue(), $indent);
             } else {
-                $props[] = "{$name}: " ~ this.export($property.getValue(), $indent);
+                $props[] = "{myName}: " ~ this.export($property.getValue(), $indent);
             }
         }
         if (count($props)) {

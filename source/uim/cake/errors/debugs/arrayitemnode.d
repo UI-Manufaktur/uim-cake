@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 /**
  * Dump node for Array Items.
@@ -15,22 +13,22 @@ class ArrayItemNode : INode
     /**
      * @var uim.cake.errors.debugs.INode
      */
-    private $key;
+    private myKey;
 
     /**
      * @var uim.cake.errors.debugs.INode
      */
-    private $value;
+    private myValue;
 
     /**
      * Constructor
      *
-     * @param uim.cake.errors.debugs.INode $key The node for the item key
-     * @param uim.cake.errors.debugs.INode $value The node for the array value
+     * @param uim.cake.errors.debugs.INode myKey The node for the item key
+     * @param uim.cake.errors.debugs.INode myValue The node for the array value
      */
-    this(INode $key, INode $value) {
-        this.key = $key;
-        this.value = $value;
+    this(INode myKey, INode myValue) {
+        this.key = myKey;
+        this.value = myValue;
     }
 
     /**
@@ -38,7 +36,7 @@ class ArrayItemNode : INode
      *
      * @return uim.cake.errors.debugs.INode
      */
-    function getValue() {
+    auto getValue() {
         return this.value;
     }
 
@@ -47,7 +45,7 @@ class ArrayItemNode : INode
      *
      * @return uim.cake.errors.debugs.INode
      */
-    function getKey() {
+    auto getKey() {
         return this.key;
     }
 

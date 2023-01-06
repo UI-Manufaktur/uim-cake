@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 /**
  * Debug node for special messages like errors or recursion warnings.
@@ -15,15 +13,15 @@ class SpecialNode : INode
     /**
      * @var string
      */
-    private $value;
+    private myValue;
 
     /**
      * Constructor
      *
-     * @param string aValue The message/value to include in dump results.
+     * @param string myValue The message/value to include in dump results.
      */
-    this(string aValue) {
-        this.value = $value;
+    this(string myValue) {
+        this.value = myValue;
     }
 
     /**

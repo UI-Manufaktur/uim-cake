@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 /**
  * Dump node for scalar values.
@@ -15,22 +13,22 @@ class ScalarNode : INode
     /**
      * @var string
      */
-    private $type;
+    private myType;
 
     /**
      * @var string|float|int|bool|null
      */
-    private $value;
+    private myValue;
 
     /**
      * Constructor
      *
-     * @param string $type The type of scalar value.
-     * @param string|float|int|bool|null $value The wrapped value.
+     * @param string myType The type of scalar value.
+     * @param string|float|int|bool|null myValue The wrapped value.
      */
-    this(string $type, $value) {
-        this.type = $type;
-        this.value = $value;
+    this(string myType, myValue) {
+        this.type = myType;
+        this.value = myValue;
     }
 
     /**
@@ -45,7 +43,7 @@ class ScalarNode : INode
      *
      * @return string|float|int|bool|null
      */
-    function getValue() {
+    auto getValue() {
         return this.value;
     }
 

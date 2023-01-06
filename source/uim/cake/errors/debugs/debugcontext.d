@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 use SplObjectStorage;
 
@@ -70,6 +68,7 @@ class DebugContext
      * it will be added and the id will be returned.
      *
      * @param object $object The object to get a reference for.
+     * @return int
      */
     int getReferenceId(object $object) {
         if (this.refs.contains($object)) {

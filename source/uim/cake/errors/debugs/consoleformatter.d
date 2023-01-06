@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 use RuntimeException;
 
@@ -21,27 +19,29 @@ class ConsoleFormatter : IFormatter
      *
      * @var array<string, string>
      */
-    protected $styles = [
+    protected styles = [
         // bold yellow
-        "const": "1;33",
+        "const":"1;33",
         // green
-        "string": "0;32",
+        "string":"0;32",
         // bold blue
-        "number": "1;34",
+        "number":"1;34",
         // cyan
-        "class": "0;36",
+        "class":"0;36",
         // grey
-        "punct": "0;90",
+        "punct":"0;90",
         // default foreground
-        "property": "0;39",
+        "property":"0;39",
         // magenta
-        "visibility": "0;35",
+        "visibility":"0;35",
         // red
-        "special": "0;31",
+        "special":"0;31",
     ];
 
     /**
      * Check if the current environment supports ANSI output.
+     *
+     * @return bool
      */
     static bool environmentMatches() {
         if (PHP_SAPI != "cli") {
@@ -54,8 +54,8 @@ class ConsoleFormatter : IFormatter
         // Windows environment checks
         if (
             DIRECTORY_SEPARATOR == "\\" &&
-            strpos(strtolower(php_uname("v")), "windows 10") == false &&
-            strpos(strtolower((string)env("SHELL")), "bash.exe") == false &&
+            indexOf(strtolower(php_uname("v")), "windows 10") == false &&
+            indexOf(strtolower((string)env("SHELL")), "bash.exe") == false &&
             !(bool)env("ANSICON") &&
             env("ConEmuANSI") != "ON"
         ) {
@@ -66,15 +66,15 @@ class ConsoleFormatter : IFormatter
     }
 
 
-    string formatWrapper(string $contents, array $location) {
+    string formatWrapper(string myContentss, array myLocation) {
         $lineInfo = "";
-        if (isset($location["file"], $location["file"])) {
-            $lineInfo = sprintf("%s (line %s)", $location["file"], $location["line"]);
+        if (isset(myLocation["file"], myLocation["file"])) {
+            $lineInfo = sprintf("%s (line %s)", myLocation["file"], myLocation["line"]);
         }
         $parts = [
             this.style("const", $lineInfo),
             this.style("special", "########## DEBUG ##########"),
-            $contents,
+            myContentss,
             this.style("special", "###########################"),
             "",
         ];
@@ -85,12 +85,12 @@ class ConsoleFormatter : IFormatter
     /**
      * Convert a tree of INode objects into a plain text string.
      *
-     * @param uim.cake.errors.debugs.INode $node The node tree to dump.
+     * @param uim.cake.errors.debugs.INode myNode The node tree to dump.
      */
-    string dump(INode $node) {
+    string dump(INode myNode) {
         $indent = 0;
 
-        return this.export($node, $indent);
+        return this.export(myNode, $indent);
     }
 
     /**
@@ -98,6 +98,7 @@ class ConsoleFormatter : IFormatter
      *
      * @param uim.cake.errors.debugs.INode $var The node tree to dump.
      * @param int $indent The current indentation level.
+     * @return string
      */
     protected string export(INode $var, int $indent) {
         if ($var instanceof ScalarNode) {
@@ -141,7 +142,7 @@ class ConsoleFormatter : IFormatter
         $end = "\n" ~ str_repeat("  ", $indent - 1);
         $vars = [];
 
-        $arrow = this.style("punct", ": ");
+        $arrow = this.style("punct", ":");
         foreach ($var.getChildren() as $item) {
             $val = $item.getValue();
             $vars[] = $break . this.export($item.getKey(), $indent) . $arrow . this.export($val, $indent);
@@ -183,18 +184,18 @@ class ConsoleFormatter : IFormatter
         $break = "\n" ~ str_repeat("  ", $indent);
         $end = "\n" ~ str_repeat("  ", $indent - 1) . this.style("punct", "}");
 
-        $arrow = this.style("punct", ": ");
+        $arrow = this.style("punct", ":");
         foreach ($var.getChildren() as $property) {
             $visibility = $property.getVisibility();
-            $name = $property.getName();
+            myName = $property.getName();
             if ($visibility && $visibility != "public") {
                 $props[] = this.style("visibility", $visibility) .
                     " " ~
-                    this.style("property", $name) .
+                    this.style("property", myName) .
                     $arrow .
                     this.export($property.getValue(), $indent);
             } else {
-                $props[] = this.style("property", $name) .
+                $props[] = this.style("property", myName) .
                     $arrow .
                     this.export($property.getValue(), $indent);
             }
@@ -209,11 +210,11 @@ class ConsoleFormatter : IFormatter
     /**
      * Style text with ANSI escape codes.
      *
-     * @param string $style The style name to use.
-     * @param string $text The text to style.
+     * @param string style The style name to use.
+     * @param string text The text to style.
      * @return string The styled output.
      */
-    protected string style(string $style, string $text) {
+    protected string style(string style, string text) {
         $code = this.styles[$style];
 
         return "\033[{$code}m{$text}\033[0m";

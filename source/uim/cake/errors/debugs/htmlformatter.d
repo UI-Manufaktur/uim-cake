@@ -1,11 +1,9 @@
-
-
-
- *
-
-
- * @since         4.1.0
-  */module uim.cake.errors.Debug;
+/*********************************************************************************************************
+	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
+	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
+	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
+**********************************************************************************************************/
+module uim.cake.errors.Debug;
 
 use RuntimeException;
 
@@ -23,7 +21,7 @@ class HtmlFormatter : IFormatter
     /**
      * Random id so that HTML ids are not shared between dump outputs.
      */
-    protected string $id;
+    protected string id;
 
     /**
      * Constructor.
@@ -46,19 +44,19 @@ class HtmlFormatter : IFormatter
     }
 
 
-    string formatWrapper(string $contents, array $location) {
+    string formatWrapper(string myContentss, array myLocation) {
         $lineInfo = "";
-        if (isset($location["file"], $location["file"])) {
+        if (isset(myLocation["file"], myLocation["file"])) {
             $lineInfo = sprintf(
                 "<span><strong>%s</strong> (line <strong>%s</strong>)</span>",
-                $location["file"],
-                $location["line"]
+                myLocation["file"],
+                myLocation["line"]
             );
         }
         $parts = [
             "<div class="cake-debug-output cake-debug" style="direction:ltr">",
             $lineInfo,
-            $contents,
+            myContentss,
             "</div>",
         ];
 
@@ -80,10 +78,10 @@ class HtmlFormatter : IFormatter
     /**
      * Convert a tree of INode objects into HTML
      *
-     * @param uim.cake.errors.debugs.INode $node The node tree to dump.
+     * @param uim.cake.errors.debugs.INode myNode The node tree to dump.
      */
-    string dump(INode $node) {
-        $html = this.export($node, 0);
+    string dump(INode myNode) {
+        $html = this.export(myNode, 0);
         $head = "";
         if (!static::$outputHeader) {
             static::$outputHeader = true;
@@ -98,6 +96,7 @@ class HtmlFormatter : IFormatter
      *
      * @param uim.cake.errors.debugs.INode $var The node tree to dump.
      * @param int $indent The current indentation level.
+     * @return string
      */
     protected string export(INode $var, int $indent) {
         if ($var instanceof ScalarNode) {
@@ -143,7 +142,7 @@ class HtmlFormatter : IFormatter
         $break = "\n" ~ str_repeat("  ", $indent);
         $endBreak = "\n" ~ str_repeat("  ", $indent - 1);
 
-        $arrow = this.style("punct", ": ");
+        $arrow = this.style("punct", ":");
         foreach ($var.getChildren() as $item) {
             $val = $item.getValue();
             $vars[] = $break ~ "<span class="cake-dbg-array-item">" ~
@@ -202,22 +201,22 @@ class HtmlFormatter : IFormatter
 
         $props = [];
         foreach ($var.getChildren() as $property) {
-            $arrow = this.style("punct", ": ");
+            $arrow = this.style("punct", ":");
             $visibility = $property.getVisibility();
-            $name = $property.getName();
+            myName = $property.getName();
             if ($visibility && $visibility != "public") {
                 $props[] = $break .
                     "<span class="cake-dbg-prop">" ~
                     this.style("visibility", $visibility) .
                     " " ~
-                    this.style("property", $name) .
+                    this.style("property", myName) .
                     $arrow .
                     this.export($property.getValue(), $indent) .
                 "</span>";
             } else {
                 $props[] = $break .
                     "<span class="cake-dbg-prop">" ~
-                    this.style("property", $name) .
+                    this.style("property", myName) .
                     $arrow .
                     this.export($property.getValue(), $indent) .
                     "</span>";
@@ -239,11 +238,11 @@ class HtmlFormatter : IFormatter
     /**
      * Style text with HTML class names
      *
-     * @param string $style The style name to use.
-     * @param string $text The text to style.
+     * @param string style The style name to use.
+     * @param string text The text to style.
      * @return string The styled output.
      */
-    protected string style(string $style, string $text) {
+    protected string style(string style, string text) {
         return sprintf(
             "<span class="cake-dbg-%s">%s</span>",
             $style,
