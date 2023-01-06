@@ -224,7 +224,7 @@ class RouteBuilder
      *
      * @param string|null $value Either the value to set or null.
      */
-    string namePrefix(?string $value = null) {
+    string namePrefix(Nullable!string $value = null) {
         if ($value != null) {
             _namePrefix = $value;
         }
@@ -406,7 +406,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function get(string $template, $target, ?string aName = null): Route
+    function get(string $template, $target, Nullable!string aName = null): Route
     {
         return _methodRoute("GET", $template, $target, $name);
     }
@@ -420,7 +420,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function post(string $template, $target, ?string aName = null): Route
+    function post(string $template, $target, Nullable!string aName = null): Route
     {
         return _methodRoute("POST", $template, $target, $name);
     }
@@ -434,7 +434,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function put(string $template, $target, ?string aName = null): Route
+    function put(string $template, $target, Nullable!string aName = null): Route
     {
         return _methodRoute("PUT", $template, $target, $name);
     }
@@ -448,7 +448,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function patch(string $template, $target, ?string aName = null): Route
+    function patch(string $template, $target, Nullable!string aName = null): Route
     {
         return _methodRoute("PATCH", $template, $target, $name);
     }
@@ -462,7 +462,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function delete(string $template, $target, ?string aName = null): Route
+    function delete(string $template, $target, Nullable!string aName = null): Route
     {
         return _methodRoute("DELETE", $template, $target, $name);
     }
@@ -476,7 +476,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function head(string $template, $target, ?string aName = null): Route
+    function head(string $template, $target, Nullable!string aName = null): Route
     {
         return _methodRoute("HEAD", $template, $target, $name);
     }
@@ -490,7 +490,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    function options(string $template, $target, ?string aName = null): Route
+    function options(string $template, $target, Nullable!string aName = null): Route
     {
         return _methodRoute("OPTIONS", $template, $target, $name);
     }
@@ -505,7 +505,7 @@ class RouteBuilder
      * @param string|null $name The name of the route.
      * @return uim.cake.routings.Route\Route
      */
-    protected function _methodRoute(string $method, string $template, $target, ?string aName): Route
+    protected function _methodRoute(string $method, string $template, $target, Nullable!string aName): Route
     {
         if ($name != null) {
             $name = _namePrefix . $name;
@@ -915,7 +915,7 @@ class RouteBuilder
      *   if not specified
      * @return this
      */
-    function fallbacks(?string $routeClass = null) {
+    function fallbacks(Nullable!string $routeClass = null) {
         $routeClass = $routeClass ?: _routeClass;
         this.connect("/{controller}", ["action": "index"], compact("routeClass"));
         this.connect("/{controller}/{action}/*", [], compact("routeClass"));

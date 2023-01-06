@@ -10,8 +10,7 @@ use Throwable;
 /**
  * Used when a template file cannot be found.
  */
-class MissingTemplateException : CakeException
-{
+class MissingTemplateException : CakeException {
     /**
      * @var string|null
      */

@@ -38,7 +38,7 @@ class FlashParamEquals : Constraint
      * @param string $param Param to check
      * @param int|null $at Expected index
      */
-    this(?Session $session, string aKey, string $param, ?int $at = null) {
+    this(?Session $session, string aKey, string $param, Nullable!int $at = null) {
         if (!$session) {
             $message = "There is no stored session data. Perhaps you need to run a request?";
             $message .= " Additionally, ensure `this.enableRetainFlashMessages()` has been enabled for the test.";

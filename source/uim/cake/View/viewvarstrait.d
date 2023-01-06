@@ -50,7 +50,7 @@ trait ViewVarsTrait
      * @return uim.cake.View\View
      * @throws uim.cake.View\exceptions.MissingViewException If view class was not found.
      */
-    function createView(?string $viewClass = null): View
+    function createView(Nullable!string $viewClass = null): View
     {
         $builder = this.viewBuilder();
         if ($viewClass) {

@@ -5,8 +5,7 @@ use Throwable;
 /**
  * Used when a template file for a cell cannot be found.
  */
-class MissingCellTemplateException : MissingTemplateException
-{
+class MissingCellTemplateException : MissingTemplateException {
     /**
      */
     protected string aName;
@@ -28,7 +27,7 @@ class MissingCellTemplateException : MissingTemplateException
         string aName,
         string $file,
         array $paths = [],
-        ?int $code = null,
+        Nullable!int $code = null,
         ?Throwable $previous = null
     ) {
         this.name = $name;

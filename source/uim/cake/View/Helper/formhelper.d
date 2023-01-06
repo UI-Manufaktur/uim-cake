@@ -801,7 +801,7 @@ class FormHelper : Helper
      * @return string The formatted LABEL element
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-labels
      */
-    string label(string $fieldName, ?string $text = null, array $options = []) {
+    string label(string $fieldName, Nullable!string $text = null, array $options = []) {
         if ($text == null) {
             $text = $fieldName;
             if (substr($text, -5) == "._ids") {
@@ -1857,7 +1857,7 @@ class FormHelper : Helper
      * @return string A HTML submit button
      * @link https://book.cakephp.org/4/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
-    string submit(?string $caption = null, array $options = []) {
+    string submit(Nullable!string $caption = null, array $options = []) {
         if ($caption == null) {
             $caption = __d("cake", "Submit");
         }

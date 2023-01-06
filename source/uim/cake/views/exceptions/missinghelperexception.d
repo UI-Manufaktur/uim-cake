@@ -10,8 +10,7 @@ import uim.cake;
 /**
  * Used when a helper cannot be found.
  */
-class MissingHelperException : CakeException
-{
+class MissingHelperException : CakeException {
     
     protected _messageTemplate = "Helper class %s could not be found.";
 }

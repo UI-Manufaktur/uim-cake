@@ -35,7 +35,7 @@ trait StringTemplateTrait
      * @param string|null $template String for reading a specific template, null for all.
      * @return array|string
      */
-    function getTemplates(?string $template = null) {
+    function getTemplates(Nullable!string $template = null) {
         return this.templater().get($template);
     }
 

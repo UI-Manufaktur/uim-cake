@@ -73,7 +73,7 @@ trait CellTrait
      * @param array<string, mixed> $options The constructor options for the cell.
      * @return uim.cake.View\Cell
      */
-    protected function _createCell(string $className, string $action, ?string $plugin, array $options): Cell
+    protected function _createCell(string $className, string $action, Nullable!string $plugin, array $options): Cell
     {
         /** @var uim.cake.View\Cell $instance */
         $instance = new $className(this.request, this.response, this.getEventManager(), $options);

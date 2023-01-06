@@ -520,7 +520,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @return this
      */
-    function addNested(string $field, Validator $validator, ?string $message = null, $when = null) {
+    function addNested(string $field, Validator $validator, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["message": $message, "on": $when]);
 
         $validationSet = this.field($field);
@@ -562,7 +562,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @return this
      */
-    function addNestedMany(string $field, Validator $validator, ?string $message = null, $when = null) {
+    function addNestedMany(string $field, Validator $validator, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["message": $message, "on": $when]);
 
         $validationSet = this.field($field);
@@ -608,7 +608,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string|null $rule the name of the rule to be removed
      * @return this
      */
-    function remove(string $field, ?string $rule = null) {
+    function remove(string $field, Nullable!string $rule = null) {
         if ($rule == null) {
             unset(_fields[$field]);
         } else {
@@ -636,7 +636,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param string|null $message The message to show if the field presence validation fails.
      * @return this
      */
-    function requirePresence($field, $mode = true, ?string $message = null) {
+    function requirePresence($field, $mode = true, Nullable!string $message = null) {
         $defaults = [
             "mode": $mode,
             "message": $message,
@@ -825,7 +825,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
      * @return this
      */
-    function allowEmptyFor(string $field, ?int $flags = null, $when = true, ?string $message = null) {
+    function allowEmptyFor(string $field, Nullable!int $flags = null, $when = true, Nullable!string $message = null) {
         this.field($field).allowEmpty($when);
         if ($message) {
             _allowEmptyMessages[$field] = $message;
@@ -850,7 +850,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
      * @see uim.cake.validations.Validator::allowEmptyFor() For detail usage
      */
-    function allowEmptyString(string $field, ?string $message = null, $when = true) {
+    function allowEmptyString(string $field, Nullable!string $message = null, $when = true) {
         return this.allowEmptyFor($field, self::EMPTY_STRING, $when, $message);
     }
 
@@ -869,7 +869,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validator::allowEmptyString()
      * @since 3.8.0
      */
-    function notEmptyString(string $field, ?string $message = null, $when = false) {
+    function notEmptyString(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
         return this.allowEmptyFor($field, self::EMPTY_STRING, $when, $message);
@@ -890,7 +890,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
      * @see uim.cake.validations.Validator::allowEmptyFor() for examples.
      */
-    function allowEmptyArray(string $field, ?string $message = null, $when = true) {
+    function allowEmptyArray(string $field, Nullable!string $message = null, $when = true) {
         return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_ARRAY, $when, $message);
     }
 
@@ -908,7 +908,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
      * @see uim.cake.validations.Validator::allowEmptyArray()
      */
-    function notEmptyArray(string $field, ?string $message = null, $when = false) {
+    function notEmptyArray(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
         return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_ARRAY, $when, $message);
@@ -930,7 +930,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
      * @see uim.cake.validations.Validator::allowEmptyFor() For detail usage
      */
-    function allowEmptyFile(string $field, ?string $message = null, $when = true) {
+    function allowEmptyFile(string $field, Nullable!string $message = null, $when = true) {
         return this.allowEmptyFor($field, self::EMPTY_FILE, $when, $message);
     }
 
@@ -949,7 +949,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @since 3.8.0
      * @see uim.cake.validations.Validator::allowEmptyFile()
      */
-    function notEmptyFile(string $field, ?string $message = null, $when = false) {
+    function notEmptyFile(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
         return this.allowEmptyFor($field, self::EMPTY_FILE, $when, $message);
@@ -969,7 +969,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
      * @see uim.cake.validations.Validator::allowEmptyFor() for examples
      */
-    function allowEmptyDate(string $field, ?string $message = null, $when = true) {
+    function allowEmptyDate(string $field, Nullable!string $message = null, $when = true) {
         return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_DATE, $when, $message);
     }
 
@@ -985,7 +985,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
      * @see uim.cake.validations.Validator::allowEmptyDate() for examples
      */
-    function notEmptyDate(string $field, ?string $message = null, $when = false) {
+    function notEmptyDate(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
         return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_DATE, $when, $message);
@@ -1009,7 +1009,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
      * @see uim.cake.validations.Validator::allowEmptyFor() for examples.
      */
-    function allowEmptyTime(string $field, ?string $message = null, $when = true) {
+    function allowEmptyTime(string $field, Nullable!string $message = null, $when = true) {
         return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_TIME, $when, $message);
     }
 
@@ -1028,7 +1028,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @since 3.8.0
      * @see uim.cake.validations.Validator::allowEmptyTime()
      */
-    function notEmptyTime(string $field, ?string $message = null, $when = false) {
+    function notEmptyTime(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
         return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_TIME, $when, $message);
@@ -1052,7 +1052,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
 
      * @see uim.cake.validations.Validator::allowEmptyFor() for examples.
      */
-    function allowEmptyDateTime(string $field, ?string $message = null, $when = true) {
+    function allowEmptyDateTime(string $field, Nullable!string $message = null, $when = true) {
         return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_DATE | self::EMPTY_TIME, $when, $message);
     }
 
@@ -1071,7 +1071,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @since 3.8.0
      * @see uim.cake.validations.Validator::allowEmptyDateTime()
      */
-    function notEmptyDateTime(string $field, ?string $message = null, $when = false) {
+    function notEmptyDateTime(string $field, Nullable!string $message = null, $when = false) {
         $when = this.invertWhenClause($when);
 
         return this.allowEmptyFor($field, self::EMPTY_STRING | self::EMPTY_DATE | self::EMPTY_TIME, $when, $message);
@@ -1169,7 +1169,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   the callback returns false.
      * @return this
      */
-    function notEmpty($field, ?string $message = null, $when = false) {
+    function notEmpty($field, Nullable!string $message = null, $when = false) {
         deprecationWarning(
             "notEmpty() is deprecated~ "
             ~ "Use notEmptyString(), notEmptyArray(), notEmptyFile(), notEmptyDate(), notEmptyTime() "
@@ -1233,7 +1233,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::notBlank()
      * @return this
      */
-    function notBlank(string $field, ?string $message = null, $when = null) {
+    function notBlank(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "notBlank", $extra + [
@@ -1251,7 +1251,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::alphaNumeric()
      * @return this
      */
-    function alphaNumeric(string $field, ?string $message = null, $when = null) {
+    function alphaNumeric(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "alphaNumeric", $extra + [
@@ -1269,7 +1269,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::notAlphaNumeric()
      * @return this
      */
-    function notAlphaNumeric(string $field, ?string $message = null, $when = null) {
+    function notAlphaNumeric(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "notAlphaNumeric", $extra + [
@@ -1287,7 +1287,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::asciiAlphaNumeric()
      * @return this
      */
-    function asciiAlphaNumeric(string $field, ?string $message = null, $when = null) {
+    function asciiAlphaNumeric(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "asciiAlphaNumeric", $extra + [
@@ -1305,7 +1305,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::notAlphaNumeric()
      * @return this
      */
-    function notAsciiAlphaNumeric(string $field, ?string $message = null, $when = null) {
+    function notAsciiAlphaNumeric(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "notAsciiAlphaNumeric", $extra + [
@@ -1325,7 +1325,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
      * @throws \InvalidArgumentException
      */
-    function lengthBetween(string $field, array $range, ?string $message = null, $when = null) {
+    function lengthBetween(string $field, array $range, Nullable!string $message = null, $when = null) {
         if (count($range) != 2) {
             throw new InvalidArgumentException("The $range argument requires 2 numbers");
         }
@@ -1348,7 +1348,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::creditCard()
      * @return this
      */
-    function creditCard(string $field, string $type = "all", ?string $message = null, $when = null) {
+    function creditCard(string $field, string $type = "all", Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "creditCard", $extra + [
@@ -1367,7 +1367,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function greaterThan(string $field, $value, ?string $message = null, $when = null) {
+    function greaterThan(string $field, $value, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "greaterThan", $extra + [
@@ -1386,7 +1386,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function greaterThanOrEqual(string $field, $value, ?string $message = null, $when = null) {
+    function greaterThanOrEqual(string $field, $value, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "greaterThanOrEqual", $extra + [
@@ -1405,7 +1405,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function lessThan(string $field, $value, ?string $message = null, $when = null) {
+    function lessThan(string $field, $value, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "lessThan", $extra + [
@@ -1424,7 +1424,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function lessThanOrEqual(string $field, $value, ?string $message = null, $when = null) {
+    function lessThanOrEqual(string $field, $value, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "lessThanOrEqual", $extra + [
@@ -1443,7 +1443,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function equals(string $field, $value, ?string $message = null, $when = null) {
+    function equals(string $field, $value, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "equals", $extra + [
@@ -1462,7 +1462,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::comparison()
      * @return this
      */
-    function notEquals(string $field, $value, ?string $message = null, $when = null) {
+    function notEquals(string $field, $value, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "notEquals", $extra + [
@@ -1483,7 +1483,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::compareFields()
      * @return this
      */
-    function sameAs(string $field, string $secondField, ?string $message = null, $when = null) {
+    function sameAs(string $field, string $secondField, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "sameAs", $extra + [
@@ -1503,7 +1503,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
 
      */
-    function notSameAs(string $field, string $secondField, ?string $message = null, $when = null) {
+    function notSameAs(string $field, string $secondField, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "notSameAs", $extra + [
@@ -1523,7 +1523,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
 
      */
-    function equalToField(string $field, string $secondField, ?string $message = null, $when = null) {
+    function equalToField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "equalToField", $extra + [
@@ -1543,7 +1543,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
 
      */
-    function notEqualToField(string $field, string $secondField, ?string $message = null, $when = null) {
+    function notEqualToField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "notEqualToField", $extra + [
@@ -1563,7 +1563,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
 
      */
-    function greaterThanField(string $field, string $secondField, ?string $message = null, $when = null) {
+    function greaterThanField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "greaterThanField", $extra + [
@@ -1583,7 +1583,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
 
      */
-    function greaterThanOrEqualToField(string $field, string $secondField, ?string $message = null, $when = null) {
+    function greaterThanOrEqualToField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "greaterThanOrEqualToField", $extra + [
@@ -1603,7 +1603,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
 
      */
-    function lessThanField(string $field, string $secondField, ?string $message = null, $when = null) {
+    function lessThanField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "lessThanField", $extra + [
@@ -1623,7 +1623,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
 
      */
-    function lessThanOrEqualToField(string $field, string $secondField, ?string $message = null, $when = null) {
+    function lessThanOrEqualToField(string $field, string $secondField, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "lessThanOrEqualToField", $extra + [
@@ -1643,7 +1643,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
      * @deprecated 4.0.0 Use {@link notAlphaNumeric()} instead. Will be removed in 5.0
      */
-    function containsNonAlphaNumeric(string $field, int $limit = 1, ?string $message = null, $when = null) {
+    function containsNonAlphaNumeric(string $field, int $limit = 1, Nullable!string $message = null, $when = null) {
         deprecationWarning("Validator::containsNonAlphaNumeric() is deprecated. Use notAlphaNumeric() instead.");
         $extra = array_filter(["on": $when, "message": $message]);
 
@@ -1663,7 +1663,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::date()
      * @return this
      */
-    function date(string $field, array $formats = ["ymd"], ?string $message = null, $when = null) {
+    function date(string $field, array $formats = ["ymd"], Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "date", $extra + [
@@ -1682,7 +1682,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::datetime()
      * @return this
      */
-    function dateTime(string $field, array $formats = ["ymd"], ?string $message = null, $when = null) {
+    function dateTime(string $field, array $formats = ["ymd"], Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "dateTime", $extra + [
@@ -1700,7 +1700,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::time()
      * @return this
      */
-    function time(string $field, ?string $message = null, $when = null) {
+    function time(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "time", $extra + [
@@ -1719,7 +1719,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::localizedTime()
      * @return this
      */
-    function localizedTime(string $field, string $type = "datetime", ?string $message = null, $when = null) {
+    function localizedTime(string $field, string $type = "datetime", Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "localizedTime", $extra + [
@@ -1737,7 +1737,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::boolean()
      * @return this
      */
-    function boolean(string $field, ?string $message = null, $when = null) {
+    function boolean(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "boolean", $extra + [
@@ -1756,7 +1756,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::decimal()
      * @return this
      */
-    function decimal(string $field, ?int $places = null, ?string $message = null, $when = null) {
+    function decimal(string $field, Nullable!int $places = null, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "decimal", $extra + [
@@ -1775,7 +1775,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::email()
      * @return this
      */
-    function email(string $field, bool $checkMX = false, ?string $message = null, $when = null) {
+    function email(string $field, bool $checkMX = false, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "email", $extra + [
@@ -1795,7 +1795,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::ip()
      * @return this
      */
-    function ip(string $field, ?string $message = null, $when = null) {
+    function ip(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "ip", $extra + [
@@ -1813,7 +1813,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::ip()
      * @return this
      */
-    function ipv4(string $field, ?string $message = null, $when = null) {
+    function ipv4(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "ipv4", $extra + [
@@ -1831,7 +1831,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::ip()
      * @return this
      */
-    function ipv6(string $field, ?string $message = null, $when = null) {
+    function ipv6(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "ipv6", $extra + [
@@ -1850,7 +1850,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::minLength()
      * @return this
      */
-    function minLength(string $field, int $min, ?string $message = null, $when = null) {
+    function minLength(string $field, int $min, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "minLength", $extra + [
@@ -1869,7 +1869,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::minLengthBytes()
      * @return this
      */
-    function minLengthBytes(string $field, int $min, ?string $message = null, $when = null) {
+    function minLengthBytes(string $field, int $min, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "minLengthBytes", $extra + [
@@ -1888,7 +1888,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::maxLength()
      * @return this
      */
-    function maxLength(string $field, int $max, ?string $message = null, $when = null) {
+    function maxLength(string $field, int $max, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "maxLength", $extra + [
@@ -1907,7 +1907,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::maxLengthBytes()
      * @return this
      */
-    function maxLengthBytes(string $field, int $max, ?string $message = null, $when = null) {
+    function maxLengthBytes(string $field, int $max, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "maxLengthBytes", $extra + [
@@ -1925,7 +1925,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::numeric()
      * @return this
      */
-    function numeric(string $field, ?string $message = null, $when = null) {
+    function numeric(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "numeric", $extra + [
@@ -1943,7 +1943,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::naturalNumber()
      * @return this
      */
-    function naturalNumber(string $field, ?string $message = null, $when = null) {
+    function naturalNumber(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "naturalNumber", $extra + [
@@ -1961,7 +1961,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::naturalNumber()
      * @return this
      */
-    function nonNegativeInteger(string $field, ?string $message = null, $when = null) {
+    function nonNegativeInteger(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "nonNegativeInteger", $extra + [
@@ -1981,7 +1981,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return this
      * @throws \InvalidArgumentException
      */
-    function range(string $field, array $range, ?string $message = null, $when = null) {
+    function range(string $field, array $range, Nullable!string $message = null, $when = null) {
         if (count($range) != 2) {
             throw new InvalidArgumentException("The $range argument requires 2 numbers");
         }
@@ -2004,7 +2004,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::url()
      * @return this
      */
-    function url(string $field, ?string $message = null, $when = null) {
+    function url(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "url", $extra + [
@@ -2024,7 +2024,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::url()
      * @return this
      */
-    function urlWithProtocol(string $field, ?string $message = null, $when = null) {
+    function urlWithProtocol(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "urlWithProtocol", $extra + [
@@ -2043,7 +2043,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::inList()
      * @return this
      */
-    function inList(string $field, array $list, ?string $message = null, $when = null) {
+    function inList(string $field, array $list, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "inList", $extra + [
@@ -2061,7 +2061,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::uuid()
      * @return this
      */
-    function uuid(string $field, ?string $message = null, $when = null) {
+    function uuid(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "uuid", $extra + [
@@ -2080,7 +2080,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::uploadedFile() For options
      * @return this
      */
-    function uploadedFile(string $field, array $options, ?string $message = null, $when = null) {
+    function uploadedFile(string $field, array $options, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "uploadedFile", $extra + [
@@ -2100,7 +2100,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::uuid()
      * @return this
      */
-    function latLong(string $field, ?string $message = null, $when = null) {
+    function latLong(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "latLong", $extra + [
@@ -2118,7 +2118,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::latitude()
      * @return this
      */
-    function latitude(string $field, ?string $message = null, $when = null) {
+    function latitude(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "latitude", $extra + [
@@ -2136,7 +2136,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::longitude()
      * @return this
      */
-    function longitude(string $field, ?string $message = null, $when = null) {
+    function longitude(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "longitude", $extra + [
@@ -2154,7 +2154,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::ascii()
      * @return this
      */
-    function ascii(string $field, ?string $message = null, $when = null) {
+    function ascii(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "ascii", $extra + [
@@ -2172,7 +2172,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::utf8()
      * @return this
      */
-    function utf8(string $field, ?string $message = null, $when = null) {
+    function utf8(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "utf8", $extra + [
@@ -2192,7 +2192,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::utf8()
      * @return this
      */
-    function utf8Extended(string $field, ?string $message = null, $when = null) {
+    function utf8Extended(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "utf8Extended", $extra + [
@@ -2210,7 +2210,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::isInteger()
      * @return this
      */
-    function integer(string $field, ?string $message = null, $when = null) {
+    function integer(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "integer", $extra + [
@@ -2228,7 +2228,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::isArray()
      * @return this
      */
-    bool isArray(string $field, ?string $message = null, $when = null) {
+    bool isArray(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "isArray", $extra + [
@@ -2246,7 +2246,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::isScalar()
      * @return this
      */
-    function scalar(string $field, ?string $message = null, $when = null) {
+    function scalar(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "scalar", $extra + [
@@ -2264,7 +2264,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::hexColor()
      * @return this
      */
-    function hexColor(string $field, ?string $message = null, $when = null) {
+    function hexColor(string $field, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "hexColor", $extra + [
@@ -2284,7 +2284,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::multiple()
      * @return this
      */
-    function multipleOptions(string $field, array $options = [], ?string $message = null, $when = null) {
+    function multipleOptions(string $field, array $options = [], Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
         $caseInsensitive = $options["caseInsensitive"] ?? false;
         unset($options["caseInsensitive"]);
@@ -2306,7 +2306,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::numElements()
      * @return this
      */
-    bool hasAtLeast(string $field, int $count, ?string $message = null, $when = null) {
+    bool hasAtLeast(string $field, int $count, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "hasAtLeast", $extra + [
@@ -2332,7 +2332,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @see uim.cake.validations.Validation::numElements()
      * @return this
      */
-    bool hasAtMost(string $field, int $count, ?string $message = null, $when = null) {
+    bool hasAtMost(string $field, int $count, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "hasAtMost", $extra + [
@@ -2386,7 +2386,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *   true when the validation rule should be applied.
      * @return this
      */
-    function regex(string $field, string $regex, ?string $message = null, $when = null) {
+    function regex(string $field, string $regex, Nullable!string $message = null, $when = null) {
         $extra = array_filter(["on": $when, "message": $message]);
 
         return this.add($field, "regex", $extra + [

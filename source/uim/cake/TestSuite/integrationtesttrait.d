@@ -1154,7 +1154,7 @@ trait IntegrationTestTrait
         $expected,
         string aName,
         string $encrypt = "aes",
-        ?string aKey = null,
+        Nullable!string aKey = null,
         string $message = ""
     ) {
         $verboseMessage = this.extractVerboseMessage($message);

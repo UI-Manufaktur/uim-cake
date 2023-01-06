@@ -471,7 +471,7 @@ class View : IEventDispatcher
      * @param string|null $theme Theme name.
      * @return this
      */
-    function setTheme(?string $theme) {
+    function setTheme(Nullable!string $theme) {
         this.theme = $theme;
 
         return this;
@@ -533,7 +533,7 @@ class View : IEventDispatcher
      * @return mixed Config value being read.
      * @psalm-suppress PossiblyNullArgument
      */
-    function getConfig(?string aKey = null, $default = null) {
+    function getConfig(Nullable!string aKey = null, $default = null) {
         $value = _getConfig($key);
 
         if ($value != null) {
@@ -691,7 +691,7 @@ class View : IEventDispatcher
      * @triggers View.beforeRender this, [$templateFileName]
      * @triggers View.afterRender this, [$templateFileName]
      */
-    string render(?string $template = null, $layout = null) {
+    string render(Nullable!string $template = null, $layout = null) {
         $defaultLayout = "";
         $defaultAutoLayout = null;
         if ($layout == false) {
@@ -740,7 +740,7 @@ class View : IEventDispatcher
      * @triggers View.beforeLayout this, [$layoutFileName]
      * @triggers View.afterLayout this, [$layoutFileName]
      */
-    string renderLayout(string $content, ?string $layout = null) {
+    string renderLayout(string $content, Nullable!string $layout = null) {
         $layoutFileName = _getLayoutFileName($layout);
 
         if (!empty($content)) {
@@ -1189,7 +1189,7 @@ class View : IEventDispatcher
      * @return this
 
      */
-    function setPlugin(?string aName) {
+    function setPlugin(Nullable!string aName) {
         this.plugin = $name;
 
         return this;
@@ -1221,7 +1221,7 @@ class View : IEventDispatcher
      * @throws uim.cake.View\exceptions.MissingTemplateException when a template file could not be found.
      * @throws \RuntimeException When template name not provided.
      */
-    protected string _getTemplateFileName(?string aName = null) {
+    protected string _getTemplateFileName(Nullable!string aName = null) {
         $templatePath = $subDir = "";
 
         if (this.templatePath) {
@@ -1337,7 +1337,7 @@ class View : IEventDispatcher
      * @throws uim.cake.View\exceptions.MissingLayoutException when a layout cannot be located
      * @throws \RuntimeException
      */
-    protected string _getLayoutFileName(?string aName = null) {
+    protected string _getLayoutFileName(Nullable!string aName = null) {
         if ($name == null) {
             if (empty(this.layout)) {
                 throw new RuntimeException(
@@ -1366,7 +1366,7 @@ class View : IEventDispatcher
      * @param string|null $plugin The plugin to fetch paths for.
      * @return \Generator
      */
-    protected function getLayoutPaths(?string $plugin) {
+    protected function getLayoutPaths(Nullable!string $plugin) {
         $subDir = "";
         if (this.layoutPath) {
             $subDir = this.layoutPath . DIRECTORY_SEPARATOR;
@@ -1406,7 +1406,7 @@ class View : IEventDispatcher
      * @param string|null $plugin The plugin to fetch paths for.
      * @return \Generator
      */
-    protected function getElementPaths(?string $plugin) {
+    protected function getElementPaths(Nullable!string $plugin) {
         $elementPaths = _getSubPaths(static::TYPE_ELEMENT);
         foreach (_paths($plugin) as $path) {
             foreach ($elementPaths as $subdir) {
@@ -1451,7 +1451,7 @@ class View : IEventDispatcher
      * @param bool $cached Set to false to force a refresh of view paths. Default true.
      * @return array<string> paths
      */
-    protected string[] _paths(?string $plugin = null, bool $cached = true) {
+    protected string[] _paths(Nullable!string $plugin = null, bool $cached = true) {
         if ($cached == true) {
             if ($plugin == null && !empty(_paths)) {
                 return _paths;

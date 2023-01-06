@@ -51,7 +51,7 @@ class Security
      * @throws \RuntimeException
      * @link https://book.cakephp.org/4/en/core-libraries/security.html#hashing-data
      */
-    static string hash(string $string, ?string $algorithm = null, $salt = false) {
+    static string hash(string $string, Nullable!string $algorithm = null, $salt = false) {
         if (empty($algorithm)) {
             $algorithm = static::$hashType;
         }
@@ -177,7 +177,7 @@ class Security
      * @return string Encrypted data.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static string encrypt(string $plain, string aKey, ?string $hmacSalt = null) {
+    static string encrypt(string $plain, string aKey, Nullable!string $hmacSalt = null) {
         self::_checkKey($key, "encrypt()");
 
         if ($hmacSalt == null) {
@@ -219,7 +219,7 @@ class Security
      * @return string|null Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static Nullable!string decrypt(string $cipher, string aKey, ?string $hmacSalt = null) {
+    static Nullable!string decrypt(string $cipher, string aKey, Nullable!string $hmacSalt = null) {
         self::_checkKey($key, "decrypt()");
         if (empty($cipher)) {
             throw new InvalidArgumentException("The data to decrypt cannot be empty.");

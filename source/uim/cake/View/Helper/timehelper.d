@@ -75,7 +75,7 @@ class TimeHelper : Helper
      * @param string|null $locale Locale string.
      * @return string Formatted date string
      */
-    string nice($dateString = null, $timezone = null, ?string $locale = null) {
+    string nice($dateString = null, $timezone = null, Nullable!string $locale = null) {
         $timezone = _getTimezone($timezone);
 
         return (new FrozenTime($dateString)).nice($timezone, $locale);

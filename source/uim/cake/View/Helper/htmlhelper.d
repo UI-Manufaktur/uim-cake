@@ -205,7 +205,7 @@ class HtmlHelper : Helper
      * @return string A meta tag containing the specified character set.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-charset-tags
      */
-    string charset(?string $charset = null) {
+    string charset(Nullable!string $charset = null) {
         if (empty($charset)) {
             $charset = strtolower((string)Configure::read("App.encoding"));
         }
@@ -829,7 +829,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the HTML tag, see above.
      * @return string The formatted tag element
      */
-    string tag(string aName, ?string $text = null, array $options = []) {
+    string tag(string aName, Nullable!string $text = null, array $options = []) {
         if (isset($options["escape"]) && $options["escape"]) {
             $text = h($text);
             unset($options["escape"]);
@@ -860,7 +860,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the DIV tag
      * @return string The formatted DIV element
      */
-    string div(?string $class = null, ?string $text = null, array $options = []) {
+    string div(Nullable!string $class = null, Nullable!string $text = null, array $options = []) {
         if (!empty($class)) {
             $options["class"] = $class;
         }
@@ -880,7 +880,7 @@ class HtmlHelper : Helper
      * @param array<string, mixed> $options Additional HTML attributes of the P tag
      * @return string The formatted P element
      */
-    string para(?string $class, ?string $text, array $options = []) {
+    string para(Nullable!string $class, Nullable!string $text, array $options = []) {
         if (!empty($options["escape"])) {
             $text = h($text);
         }

@@ -77,7 +77,7 @@ trait ValidatorAwareTrait
      * @param string|null $name The name of the validation set to return.
      * @return uim.cake.validations.Validator
      */
-    function getValidator(?string aName = null): Validator
+    function getValidator(Nullable!string aName = null): Validator
     {
         $name = $name ?: static::DEFAULT_VALIDATOR;
         if (!isset(_validators[$name])) {

@@ -729,7 +729,7 @@ class Text
      * @param array<string, mixed> $options An array of options.
      * @return string
      */
-    protected static string _substr(string $text, int $start, ?int $length, array $options) {
+    protected static string _substr(string $text, int $start, Nullable!int $length, array $options) {
         if (empty($options["trimWidth"])) {
             $substr = "mb_substr";
         } else {
@@ -886,7 +886,7 @@ class Text
      * @return string The glued together string.
      * @link https://book.cakephp.org/4/en/core-libraries/text.html#converting-an-array-to-sentence-form
      */
-    static string toList(array $list, ?string $and = null, string $separator = ", ") {
+    static string toList(array $list, Nullable!string $and = null, string $separator = ", ") {
         if ($and == null) {
             $and = __d("cake", "and");
         }

@@ -40,7 +40,7 @@ class TestSession
      * @param string|null $name Variable name to check for
      * @return bool True if variable is there
      */
-    bool check(?string aName = null) {
+    bool check(Nullable!string aName = null) {
         if (this.session == null) {
             return false;
         }
@@ -59,7 +59,7 @@ class TestSession
      * @return mixed The value of the session variable, null if session not available,
      *   session not started, or provided name not found in the session.
      */
-    function read(?string aName = null) {
+    function read(Nullable!string aName = null) {
         if (this.session == null) {
             return null;
         }

@@ -130,7 +130,7 @@ abstract class Cell : IEventDispatcher
      *   When a MissingTemplateException is raised during rendering.
      * @throws \BadMethodCallException
      */
-    string render(?string $template = null) {
+    string render(Nullable!string $template = null) {
         $cache = [];
         if (_cache) {
             $cache = _cacheConfig(this.action, $template);
@@ -197,7 +197,7 @@ abstract class Cell : IEventDispatcher
      * @param string|null $template The name of the template to be rendered.
      * @return array The cache configuration.
      */
-    protected array _cacheConfig(string $action, ?string $template = null) {
+    protected array _cacheConfig(string $action, Nullable!string $template = null) {
         if (empty(_cache)) {
             return [];
         }

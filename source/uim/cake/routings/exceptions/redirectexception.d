@@ -17,8 +17,7 @@ import uim.cake.core.exceptions.CakeException;
  *
  * @deprecated 4.1.0 Use {@link uim.cake.Http\exceptions.RedirectException} instead.
  */
-class RedirectException : CakeException
-{
+class RedirectException : CakeException {
 
     protected _defaultCode = 302;
 }

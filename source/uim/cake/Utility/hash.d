@@ -446,7 +446,7 @@ class Hash
      * @link https://book.cakephp.org/4/en/core-libraries/hash.html#Cake\Utility\Hash::combine
      * @throws \RuntimeException When keys and values count is unequal.
      */
-    static array combine(array $data, $keyPath, $valuePath = null, ?string $groupPath = null) {
+    static array combine(array $data, $keyPath, $valuePath = null, Nullable!string $groupPath = null) {
         if (empty($data)) {
             return [];
         }

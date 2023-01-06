@@ -146,7 +146,7 @@ class Router
      * @param string|null $routeClass Class name.
      * @return string|null
      */
-    static Nullable!string defaultRouteClass(?string $routeClass = null) {
+    static Nullable!string defaultRouteClass(Nullable!string $routeClass = null) {
         if ($routeClass == null) {
             return static::_defaultRouteClass;
         }
@@ -547,7 +547,7 @@ class Router
      * @param string|null $base the prefix for URLs generated containing the domain.
      * For example: `http://example.com`
      */
-    static string fullBaseUrl(?string $base = null) {
+    static string fullBaseUrl(Nullable!string $base = null) {
         if ($base == null && static::_fullBaseUrl != null) {
             return static::_fullBaseUrl;
         }

@@ -283,7 +283,7 @@ class TextHelper : Helper
      * @return string The text with proper <p> and <br /> tags
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-text-into-paragraphs
      */
-    string autoParagraph(?string $text) {
+    string autoParagraph(Nullable!string $text) {
         $text = $text ?? "";
         if (trim($text) != "") {
             $text = preg_replace("|<br[^>]*>\s*<br[^>]*>|i", "\n\n", $text ~ "\n");
@@ -370,7 +370,7 @@ class TextHelper : Helper
      * @see uim.cake.Utility\Text::toList()
      * @link https://book.cakephp.org/4/en/views/helpers/text.html#converting-an-array-to-sentence-form
      */
-    string toList(array $list, ?string $and = null, string $separator = ", ") {
+    string toList(array $list, Nullable!string $and = null, string $separator = ", ") {
         return _engine.toList($list, $and, $separator);
     }
 

@@ -198,7 +198,7 @@ class Validation
      * @return bool Success
      * @see uim.cake.validations.Validation::luhn()
      */
-    static bool creditCard($check, $type = "fast", bool $deep = false, ?string $regex = null) {
+    static bool creditCard($check, $type = "fast", bool $deep = false, Nullable!string $regex = null) {
         if (!(is_string($check) || is_int($check))) {
             return false;
         }
@@ -404,7 +404,7 @@ class Validation
      * @param string|null $regex If $check is passed as a string, $regex must also be set to valid regular expression
      * @return bool Success
      */
-    static bool custom($check, ?string $regex = null) {
+    static bool custom($check, Nullable!string $regex = null) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -441,7 +441,7 @@ class Validation
      * @param string|null $regex If a custom regular expression is used this is the only validation that will occur.
      * @return bool Success
      */
-    static bool date($check, $format = "ymd", ?string $regex = null) {
+    static bool date($check, $format = "ymd", Nullable!string $regex = null) {
         if ($check instanceof DateTimeInterface) {
             return true;
         }
@@ -518,7 +518,7 @@ class Validation
      * @see uim.cake.validations.Validation::date()
      * @see uim.cake.validations.Validation::time()
      */
-    static bool datetime($check, $dateFormat = "ymd", ?string $regex = null) {
+    static bool datetime($check, $dateFormat = "ymd", Nullable!string $regex = null) {
         if ($check instanceof DateTimeInterface) {
             return true;
         }
@@ -700,7 +700,7 @@ class Validation
      * @param string|null $regex If a custom regular expression is used, this is the only validation that will occur.
      * @return bool Success
      */
-    static bool decimal($check, $places = null, ?string $regex = null) {
+    static bool decimal($check, $places = null, Nullable!string $regex = null) {
         if (!is_scalar($check)) {
             return false;
         }
@@ -754,7 +754,7 @@ class Validation
      * @param string|null $regex Regex to use (if none it will use built in regex)
      * @return bool Success
      */
-    static bool email($check, ?bool $deep = false, ?string $regex = null) {
+    static bool email($check, ?bool $deep = false, Nullable!string $regex = null) {
         if (!is_string($check)) {
             return false;
         }

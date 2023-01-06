@@ -168,7 +168,7 @@ class NumberHelper : Helper
      * @param array<string, mixed> $options Options list.
      * @return string Number formatted as a currency.
      */
-    string currency($number, ?string $currency = null, array $options = []) {
+    string currency($number, Nullable!string $currency = null, array $options = []) {
         $formatted = _engine.currency($number, $currency, $options);
         $options += ["escape": true];
 

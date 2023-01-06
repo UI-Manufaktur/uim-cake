@@ -21,7 +21,7 @@ abstract class MailConstraintBase : Constraint
      * @param int|null $at At
      * @return void
      */
-    this(?int $at = null) {
+    this(Nullable!int $at = null) {
         this.at = $at;
     }
 

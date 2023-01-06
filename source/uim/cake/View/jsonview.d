@@ -98,7 +98,7 @@ class JsonView : SerializedView
      * @param string|false|null $layout The layout being rendered.
      * @return string The rendered view.
      */
-    string render(?string $template = null, $layout = null) {
+    string render(Nullable!string $template = null, $layout = null) {
         $return = super.render($template, $layout);
 
         $jsonp = this.getConfig("jsonp");

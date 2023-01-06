@@ -165,7 +165,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $path Path for view files.
      * @return this
      */
-    function setTemplatePath(?string $path) {
+    function setTemplatePath(Nullable!string $path) {
         _templatePath = $path;
 
         return this;
@@ -185,7 +185,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $path Path for layout files.
      * @return this
      */
-    function setLayoutPath(?string $path) {
+    function setLayoutPath(Nullable!string $path) {
         _layoutPath = $path;
 
         return this;
@@ -242,7 +242,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *   Use null to remove the current plugin name.
      * @return this
      */
-    function setPlugin(?string aName) {
+    function setPlugin(Nullable!string aName) {
         _plugin = $name;
 
         return this;
@@ -326,7 +326,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *   Use null to remove the current theme.
      * @return this
      */
-    function setTheme(?string $theme) {
+    function setTheme(Nullable!string $theme) {
         _theme = $theme;
 
         return this;
@@ -347,7 +347,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name View file name to set, or null to remove the template name.
      * @return this
      */
-    function setTemplate(?string aName) {
+    function setTemplate(Nullable!string aName) {
         _template = $name;
 
         return this;
@@ -370,7 +370,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name Layout file name to set.
      * @return this
      */
-    function setLayout(?string aName) {
+    function setLayout(Nullable!string aName) {
         _layout = $name;
 
         return this;
@@ -440,7 +440,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name The name of the view, or null to remove the current name.
      * @return this
      */
-    function setName(?string aName) {
+    function setName(Nullable!string aName) {
         _name = $name;
 
         return this;
@@ -464,7 +464,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @param string|null $name The class name for the view.
      * @return this
      */
-    function setClassName(?string aName) {
+    function setClassName(Nullable!string aName) {
         _className = $name;
 
         return this;
