@@ -39,7 +39,7 @@ class ControllerAuthorize : BaseAuthorize
 
 
     this(ComponentRegistry $registry, Json aConfig = []) {
-        super(($registry, $config);
+        super(($registry, aConfig);
         this.controller($registry.getController());
     }
 

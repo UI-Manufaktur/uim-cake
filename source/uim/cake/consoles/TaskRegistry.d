@@ -67,7 +67,7 @@ class TaskRegistry : ObjectRegistry
      *
      * @param string $class The classname to create.
      * @param string $alias The alias of the task.
-     * @param array<string, mixed> $config An array of settings to use for the task.
+     * @param array<string, mixed> aConfig An array of settings to use for the task.
      * @return uim.cake.consoles.Shell The constructed task class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */

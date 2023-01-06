@@ -42,18 +42,12 @@ import uim.cake.logs.LogTrait;
  * @link https://book.cakephp.org/4/en/controllers/components.html
  * @see uim.cake.controllers.Controller::$components
  */
-#[\AllowDynamicProperties]
-class Component : IEventListener
-{
+class Component : IEventListener {
     use InstanceConfigTrait;
     use LogTrait;
 
-    /**
-     * Component registry class used to lazy load components.
-     *
-     * @var uim.cake.controllers.ComponentRegistry
-     */
-    protected $_registry;
+    // Component registry class used to lazy load components.
+    protected ComponentRegistry _registry;
 
     /**
      * Other Components this component uses.
@@ -83,17 +77,17 @@ class Component : IEventListener
      *
      * @param uim.cake.controllers.ComponentRegistry $registry A component registry
      *  this component can use to lazy load its components.
-     * @param array<string, mixed> $config Array of configuration settings.
+     * @param array<string, mixed> aConfig Array of configuration settings.
      */
     this(ComponentRegistry $registry, Json aConfig = []) {
         _registry = $registry;
 
-        this.setConfig($config);
+        this.setConfig(aConfig);
 
         if (this.components) {
             _componentMap = $registry.normalizeArray(this.components);
         }
-        this.initialize($config);
+        this.initialize(aConfig);
     }
 
     /**
@@ -109,10 +103,9 @@ class Component : IEventListener
     /**
      * Constructor hook method.
      *
-     * Implement this method to avoid having to overwrite
-     * the constructor and call parent.
+     * Implement this method to avoid having to overwrite the constructor and call parent.
      *
-     * @param array<string, mixed> $config The configuration settings provided to this component.
+     * @param array<string, mixed> aConfig The configuration settings provided to this component.
      */
     void initialize(Json aConfig) {
     }
@@ -125,8 +118,8 @@ class Component : IEventListener
      */
     function __get(string aName) {
         if (isset(_componentMap[$name]) && !isset(this.{$name})) {
-            $config = (array)_componentMap[$name]['config'] + ['enabled': false];
-            this.{$name} = _registry.load(_componentMap[$name]['class'], $config);
+            aConfig = (array)_componentMap[$name]['config'] + ['enabled': false];
+            this.{$name} = _registry.load(_componentMap[$name]['class'], aConfig);
         }
 
         return this.{$name} ?? null;

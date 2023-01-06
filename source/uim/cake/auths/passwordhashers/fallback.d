@@ -27,12 +27,12 @@ class FallbackPasswordHasher : AbstractPasswordHasher {
     /**
      * Constructor
      *
-     * @param array<string, mixed> $config configuration options for this object. Requires the
+     * @param array<string, mixed> aConfig configuration options for this object. Requires the
      * `hashers` key to be present in the array with a list of other hashers to be
      * used.
      */
     this(Json aConfig = []) {
-        super(($config);
+        super((aConfig);
         foreach (_config["hashers"] as $key: $hasher) {
             if (is_array($hasher) && !isset($hasher["className"])) {
                 $hasher["className"] = $key;

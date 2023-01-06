@@ -32,7 +32,7 @@ use RuntimeException;
  * ```
  *
  * This would configure an APCu cache engine to the "shared" alias. You could then read and write
- * to that cache alias by using it for the `$config` parameter in the various Cache methods.
+ * to that cache alias by using it for the `aConfig` parameter in the various Cache methods.
  *
  * In general all Cache operations are supported by all cache engines.
  * However, Cache::increment() and Cache::decrement() are not supported by File caching.
@@ -137,23 +137,23 @@ class Cache {
         }
 
         /** @var Json aConfig */
-        $config = static::$_config[$name];
+        aConfig = static::$_config[$name];
 
         try {
-            $registry.load($name, $config);
+            $registry.load($name, aConfig);
         } catch (RuntimeException $e) {
-            if (!array_key_exists("fallback", $config)) {
+            if (!array_key_exists("fallback", aConfig)) {
                 $registry.set($name, new NullEngine());
                 trigger_error($e.getMessage(), E_USER_WARNING);
 
                 return;
             }
 
-            if ($config["fallback"] == false) {
+            if (aConfig["fallback"] == false) {
                 throw $e;
             }
 
-            if ($config["fallback"] == $name) {
+            if (aConfig["fallback"] == $name) {
                 throw new InvalidArgumentException(sprintf(
                     ""%s" cache configuration cannot fallback to itself.",
                     $name
@@ -161,8 +161,8 @@ class Cache {
             }
 
             /** @var uim.cake.Cache\CacheEngine $fallbackEngine */
-            $fallbackEngine = clone static::pool($config["fallback"]);
-            $newConfig = $config + ["groups": [], "prefix": null];
+            $fallbackEngine = clone static::pool(aConfig["fallback"]);
+            $newConfig = aConfig + ["groups": [], "prefix": null];
             $fallbackEngine.setConfig("groups", $newConfig["groups"], false);
             if ($newConfig["prefix"]) {
                 $fallbackEngine.setConfig("prefix", $newConfig["prefix"], false);
@@ -170,12 +170,12 @@ class Cache {
             $registry.set($name, $fallbackEngine);
         }
 
-        if ($config["className"] instanceof CacheEngine) {
-            $config = $config["className"].getConfig();
+        if (aConfig["className"] instanceof CacheEngine) {
+            aConfig = aConfig["className"].getConfig();
         }
 
-        if (!empty($config["groups"])) {
-            foreach ($config["groups"] as $group) {
+        if (!empty(aConfig["groups"])) {
+            foreach (aConfig["groups"] as $group) {
                 static::$_groups[$group][] = $name;
                 static::$_groups[$group] = array_unique(static::$_groups[$group]);
                 sort(static::$_groups[$group]);
@@ -186,36 +186,36 @@ class Cache {
     /**
      * Get a cache engine object for the named cache config.
      *
-     * @param string $config The name of the configured cache backend.
+     * @param string aConfig The name of the configured cache backend.
      * @return \Psr\SimpleCache\ICache&uim.cake.Cache\ICacheEngine
      * @deprecated 3.7.0 Use {@link pool()} instead. This method will be removed in 5.0.
      */
-    static function engine(string $config) {
+    static function engine(string aConfig) {
         deprecationWarning("Cache::engine() is deprecated. Use Cache::pool() instead.");
 
-        return static::pool($config);
+        return static::pool(aConfig);
     }
 
     /**
      * Get a SimpleCacheEngine object for the named cache pool.
      *
-     * @param string $config The name of the configured cache backend.
+     * @param string aConfig The name of the configured cache backend.
      * @return \Psr\SimpleCache\ICache &uim.cake.Cache\ICacheEngine
      */
-    static function pool(string $config) {
+    static function pool(string aConfig) {
         if (!static::$_enabled) {
             return new NullEngine();
         }
 
         $registry = static::getRegistry();
 
-        if (isset($registry.{$config})) {
-            return $registry.{$config};
+        if (isset($registry.{aConfig})) {
+            return $registry.{aConfig};
         }
 
-        static::_buildEngine($config);
+        static::_buildEngine(aConfig);
 
-        return $registry.{$config};
+        return $registry.{aConfig};
     }
 
     /**
@@ -237,21 +237,21 @@ class Cache {
      *
      * @param string aKey Identifier for the data
      * @param mixed $value Data to be cached - anything except a resource
-     * @param string $config Optional string configuration name to write to. Defaults to "default"
+     * @param string aConfig Optional string configuration name to write to. Defaults to "default"
      * @return bool True if the data was successfully cached, false on failure
      */
-    static bool write(string aKey, $value, string $config = "default") {
+    static bool write(string aKey, $value, string aConfig = "default") {
         if (is_resource($value)) {
             return false;
         }
 
-        $backend = static::pool($config);
+        $backend = static::pool(aConfig);
         $success = $backend.set(string aKey, $value);
         if ($success == false && $value != "") {
             trigger_error(
                 sprintf(
                     "%s cache was unable to write "%s" to %s cache",
-                    $config,
+                    aConfig,
                     $key,
                     get_class($backend)
                 ),
@@ -280,12 +280,12 @@ class Cache {
      * ```
      *
      * @param iterable $data An array or Traversable of data to be stored in the cache
-     * @param string $config Optional string configuration name to write to. Defaults to "default"
+     * @param string aConfig Optional string configuration name to write to. Defaults to "default"
      * @return bool True on success, false on failure
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    static bool writeMany(iterable $data, string $config = "default") {
-        return static::pool($config).setMultiple($data);
+    static bool writeMany(iterable $data, string aConfig = "default") {
+        return static::pool(aConfig).setMultiple($data);
     }
 
     /**
@@ -306,12 +306,12 @@ class Cache {
      * ```
      *
      * @param string aKey Identifier for the data
-     * @param string $config optional name of the configuration to use. Defaults to "default"
+     * @param string aConfig optional name of the configuration to use. Defaults to "default"
      * @return mixed The cached data, or null if the data doesn"t exist, has expired,
      *  or if there was an error fetching it.
      */
-    static function read(string aKey, string $config = "default") {
-        return static::pool($config).get(string aKey);
+    static function read(string aKey, string aConfig = "default") {
+        return static::pool(aConfig).get(string aKey);
     }
 
     /**
@@ -332,13 +332,13 @@ class Cache {
      * ```
      *
      * @param iterable $keys An array or Traversable of keys to fetch from the cache
-     * @param string $config optional name of the configuration to use. Defaults to "default"
+     * @param string aConfig optional name of the configuration to use. Defaults to "default"
      * @return iterable An array containing, for each of the given $keys,
      *   the cached data or false if cached data could not be retrieved.
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    static iterable readMany(iterable $keys, string $config = "default") {
-        return static::pool($config).getMultiple($keys);
+    static iterable readMany(iterable $keys, string aConfig = "default") {
+        return static::pool(aConfig).getMultiple($keys);
     }
 
     /**
@@ -346,17 +346,17 @@ class Cache {
      *
      * @param string aKey Identifier for the data
      * @param int $offset How much to add
-     * @param string $config Optional string configuration name. Defaults to "default"
+     * @param string aConfig Optional string configuration name. Defaults to "default"
      * @return int|false New value, or false if the data doesn"t exist, is not integer,
      *    or if there was an error fetching it.
      * @throws uim.cake.Cache\InvalidArgumentException When offset < 0
      */
-    static function increment(string aKey, int $offset = 1, string $config = "default") {
+    static function increment(string aKey, int $offset = 1, string aConfig = "default") {
         if ($offset < 0) {
             throw new InvalidArgumentException("Offset cannot be less than 0.");
         }
 
-        return static::pool($config).increment($key, $offset);
+        return static::pool(aConfig).increment($key, $offset);
     }
 
     /**
@@ -364,17 +364,17 @@ class Cache {
      *
      * @param string aKey Identifier for the data
      * @param int $offset How much to subtract
-     * @param string $config Optional string configuration name. Defaults to "default"
+     * @param string aConfig Optional string configuration name. Defaults to "default"
      * @return int|false New value, or false if the data doesn"t exist, is not integer,
      *   or if there was an error fetching it
      * @throws uim.cake.Cache\InvalidArgumentException when offset < 0
      */
-    static function decrement(string aKey, int $offset = 1, string $config = "default") {
+    static function decrement(string aKey, int $offset = 1, string aConfig = "default") {
         if ($offset < 0) {
             throw new InvalidArgumentException("Offset cannot be less than 0.");
         }
 
-        return static::pool($config).decrement($key, $offset);
+        return static::pool(aConfig).decrement($key, $offset);
     }
 
     /**
@@ -395,11 +395,11 @@ class Cache {
      * ```
      *
      * @param string aKey Identifier for the data
-     * @param string $config name of the configuration to use. Defaults to "default"
+     * @param string aConfig name of the configuration to use. Defaults to "default"
      * @return bool True if the value was successfully deleted, false if it didn"t exist or couldn"t be removed
      */
-    static bool delete(string aKey, string $config = "default") {
-        return static::pool($config).delete($key);
+    static bool delete(string aKey, string aConfig = "default") {
+        return static::pool(aConfig).delete($key);
     }
 
     /**
@@ -420,22 +420,22 @@ class Cache {
      * ```
      *
      * @param iterable $keys Array or Traversable of cache keys to be deleted
-     * @param string $config name of the configuration to use. Defaults to "default"
+     * @param string aConfig name of the configuration to use. Defaults to "default"
      * @return bool True on success, false on failure.
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    static bool deleteMany(iterable $keys, string $config = "default") {
-        return static::pool($config).deleteMultiple($keys);
+    static bool deleteMany(iterable $keys, string aConfig = "default") {
+        return static::pool(aConfig).deleteMultiple($keys);
     }
 
     /**
      * Delete all keys from the cache.
      *
-     * @param string $config name of the configuration to use. Defaults to "default"
+     * @param string aConfig name of the configuration to use. Defaults to "default"
      * @return bool True if the cache was successfully cleared, false otherwise
      */
-    static bool clear(string $config = "default") {
-        return static::pool($config).clear();
+    static bool clear(string aConfig = "default") {
+        return static::pool(aConfig).clear();
     }
 
     /**
@@ -446,8 +446,8 @@ class Cache {
     static array clearAll() {
         $status = [];
 
-        foreach (self::configured() as $config) {
-            $status[$config] = self::clear($config);
+        foreach (self::configured() as aConfig) {
+            $status[aConfig] = self::clear(aConfig);
         }
 
         return $status;
@@ -457,11 +457,11 @@ class Cache {
      * Delete all keys from the cache belonging to the same group.
      *
      * @param string $group name of the group to be cleared
-     * @param string $config name of the configuration to use. Defaults to "default"
+     * @param string aConfig name of the configuration to use. Defaults to "default"
      * @return bool True if the cache group was successfully cleared, false otherwise
      */
-    static bool clearGroup(string $group, string $config = "default") {
-        return static::pool($config).clearGroup($group);
+    static bool clearGroup(string $group, string aConfig = "default") {
+        return static::pool(aConfig).clearGroup($group);
     }
 
     /**
@@ -481,8 +481,8 @@ class Cache {
      * @throws uim.cake.Cache\InvalidArgumentException
      */
     static array groupConfigs(?string $group = null) {
-        foreach (static::configured() as $config) {
-            static::pool($config);
+        foreach (static::configured() as aConfig) {
+            static::pool(aConfig);
         }
         if ($group == null) {
             return static::$_groups;
@@ -525,7 +525,7 @@ class Cache {
     /**
      * Provides the ability to easily do read-through caching.
      *
-     * When called if the $key is not set in $config, the $callable function
+     * When called if the $key is not set in aConfig, the $callable function
      * will be invoked. The results will then be stored into the cache config
      * at key.
      *
@@ -542,18 +542,18 @@ class Cache {
      * @param string aKey The cache key to read/store data at.
      * @param callable $callable The callable that provides data in the case when
      *   the cache key is empty. Can be any callable type supported by your PHP.
-     * @param string $config The cache configuration to use for this operation.
+     * @param string aConfig The cache configuration to use for this operation.
      *   Defaults to default.
      * @return mixed If the key is found: the cached data.
      *   If the key is not found the value returned by the callable.
      */
-    static function remember(string aKey, callable $callable, string $config = "default") {
-        $existing = self::read($key, $config);
+    static function remember(string aKey, callable $callable, string aConfig = "default") {
+        $existing = self::read($key, aConfig);
         if ($existing != null) {
             return $existing;
         }
         $results = $callable();
-        self::write($key, $results, $config);
+        self::write($key, $results, aConfig);
 
         return $results;
     }
@@ -577,15 +577,15 @@ class Cache {
      *
      * @param string aKey Identifier for the data.
      * @param mixed $value Data to be cached - anything except a resource.
-     * @param string $config Optional string configuration name to write to. Defaults to "default".
+     * @param string aConfig Optional string configuration name to write to. Defaults to "default".
      * @return bool True if the data was successfully cached, false on failure.
      *   Or if the key existed already.
      */
-    static bool add(string aKey, $value, string $config = "default") {
+    static bool add(string aKey, $value, string aConfig = "default") {
         if (is_resource($value)) {
             return false;
         }
 
-        return static::pool($config).add($key, $value);
+        return static::pool(aConfig).add($key, $value);
     }
 }

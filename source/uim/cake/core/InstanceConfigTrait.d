@@ -117,12 +117,12 @@ trait InstanceConfigTrait
      * @throws \InvalidArgumentException
      */
     function getConfigOrFail(string aKey) {
-        $config = this.getConfig($key);
-        if ($config == null) {
+        aConfig = this.getConfig($key);
+        if (aConfig == null) {
             throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", $key));
         }
 
-        return $config;
+        return aConfig;
     }
 
     /**

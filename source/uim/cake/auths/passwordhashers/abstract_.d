@@ -28,10 +28,10 @@ abstract class AbstractPasswordHasher {
     /**
      * Constructor
      *
-     * @param array<string, mixed> $config Array of config.
+     * @param array<string, mixed> aConfig Array of config.
      */
     this(Json aConfig = []) {
-        this.setConfig($config);
+        this.setConfig(aConfig);
     }
 
     /**

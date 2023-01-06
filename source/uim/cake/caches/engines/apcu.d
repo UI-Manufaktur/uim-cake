@@ -21,7 +21,7 @@ class ApcuEngine : CacheEngine {
      *
      * Called automatically by the cache frontend
      *
-     * @param array<string, mixed> $config array of setting for the engine
+     * @param array<string, mixed> aConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
     bool init(Json aConfig = []) {
@@ -29,7 +29,7 @@ class ApcuEngine : CacheEngine {
             throw new RuntimeException("The `apcu` extension must be enabled to use ApcuEngine.");
         }
 
-        return super.init($config);
+        return super.init(aConfig);
     }
 
     /**

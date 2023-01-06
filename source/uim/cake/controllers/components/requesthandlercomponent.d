@@ -57,17 +57,17 @@ class RequestHandlerComponent : Component
      * Constructor. Parses the accepted content types accepted by the client using HTTP_ACCEPT
      *
      * @param uim.cake.controllers.ComponentRegistry $registry ComponentRegistry object.
-     * @param array<string, mixed> $config Array of config.
+     * @param array<string, mixed> aConfig Array of config.
      */
     this(ComponentRegistry $registry, Json aConfig = []) {
-        $config += [
+        aConfig += [
             'viewClassMap': [
                 'json': 'Json',
                 'xml': 'Xml',
                 'ajax': 'Ajax',
             ],
         ];
-        super(($registry, $config);
+        super(($registry, aConfig);
     }
 
     /**

@@ -75,13 +75,13 @@ class HelperRegistry : ObjectRegistry
      *
      * @param string $class The classname to create.
      * @param string $alias The alias of the helper.
-     * @param array<string, mixed> $config An array of settings to use for the helper.
+     * @param array<string, mixed> aConfig An array of settings to use for the helper.
      * @return uim.cake.consoles.Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
     protected function _create($class, string $alias, Json aConfig): Helper
     {
         /** @var uim.cake.consoles.Helper */
-        return new $class(_io, $config);
+        return new $class(_io, aConfig);
     }
 }

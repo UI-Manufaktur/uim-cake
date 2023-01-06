@@ -195,7 +195,7 @@ class AuthComponent : Component : IEventDispatcher
     /**
      * Initialize properties.
      *
-     * @param array<string, mixed> $config The config data.
+     * @param array<string, mixed> aConfig The config data.
      */
     void initialize(Json aConfig) {
         $controller = _registry.getController();
@@ -420,8 +420,8 @@ class AuthComponent : Component : IEventDispatcher
             'authError': __d('cake', 'You are not authorized to access that location.'),
         ];
 
-        $config = this.getConfig();
-        foreach ($config as $key: $value) {
+        aConfig = this.getConfig();
+        foreach (aConfig as $key: $value) {
             if ($value != null) {
                 unset($defaults[$key]);
             }
@@ -484,10 +484,10 @@ class AuthComponent : Component : IEventDispatcher
             $global = $authorize[AuthComponent::ALL];
             unset($authorize[AuthComponent::ALL]);
         }
-        foreach ($authorize as $alias: $config) {
-            if (!empty($config['className'])) {
-                $class = $config['className'];
-                unset($config['className']);
+        foreach ($authorize as $alias: aConfig) {
+            if (!empty(aConfig['className'])) {
+                $class = aConfig['className'];
+                unset(aConfig['className']);
             } else {
                 $class = $alias;
             }
@@ -498,8 +498,8 @@ class AuthComponent : Component : IEventDispatcher
             if (!method_exists($className, 'authorize')) {
                 throw new CakeException('Authorization objects must implement an authorize() method.');
             }
-            $config = (array)$config + $global;
-            _authorizeObjects[$alias] = new $className(_registry, $config);
+            aConfig = (array)aConfig + $global;
+            _authorizeObjects[$alias] = new $className(_registry, aConfig);
         }
 
         return _authorizeObjects;
@@ -771,10 +771,10 @@ class AuthComponent : Component : IEventDispatcher
             $global = $authenticate[AuthComponent::ALL];
             unset($authenticate[AuthComponent::ALL]);
         }
-        foreach ($authenticate as $alias: $config) {
-            if (!empty($config['className'])) {
-                $class = $config['className'];
-                unset($config['className']);
+        foreach ($authenticate as $alias: aConfig) {
+            if (!empty(aConfig['className'])) {
+                $class = aConfig['className'];
+                unset(aConfig['className']);
             } else {
                 $class = $alias;
             }
@@ -785,8 +785,8 @@ class AuthComponent : Component : IEventDispatcher
             if (!method_exists($className, 'authenticate')) {
                 throw new CakeException('Authentication objects must implement an authenticate() method.');
             }
-            $config = array_merge($global, (array)$config);
-            _authenticateObjects[$alias] = new $className(_registry, $config);
+            aConfig = array_merge($global, (array)aConfig);
+            _authenticateObjects[$alias] = new $className(_registry, aConfig);
             this.getEventManager().on(_authenticateObjects[$alias]);
         }
 
@@ -812,13 +812,13 @@ class AuthComponent : Component : IEventDispatcher
             return _storage;
         }
 
-        $config = _config['storage'];
-        if (is_string($config)) {
-            $class = $config;
-            $config = [];
+        aConfig = _config['storage'];
+        if (is_string(aConfig)) {
+            $class = aConfig;
+            aConfig = [];
         } else {
-            $class = $config['className'];
-            unset($config['className']);
+            $class = aConfig['className'];
+            unset(aConfig['className']);
         }
         $className = App::className($class, 'Auth/Storage', 'Storage');
         if ($className == null) {
@@ -827,7 +827,7 @@ class AuthComponent : Component : IEventDispatcher
         $request = this.getController().getRequest();
         $response = this.getController().getResponse();
         /** @var uim.cake.auths.storages\IStorage $storage */
-        $storage = new $className($request, $response, $config);
+        $storage = new $className($request, $response, aConfig);
 
         return _storage = $storage;
     }

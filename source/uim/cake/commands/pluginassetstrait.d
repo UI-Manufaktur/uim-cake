@@ -81,23 +81,23 @@ trait PluginAssetsTrait
      * @param bool $overwrite Overwrite existing files.
      */
     protected void _process(array $plugins, bool $copy = false, bool $overwrite = false) {
-        foreach ($plugins as $plugin: $config) {
+        foreach ($plugins as $plugin: aConfig) {
             this.io.out();
             this.io.out("For plugin: " ~ $plugin);
             this.io.hr();
 
             if (
-                $config["namespaced"] &&
-                !is_dir($config["destDir"]) &&
-                !_createDirectory($config["destDir"])
+                aConfig["namespaced"] &&
+                !is_dir(aConfig["destDir"]) &&
+                !_createDirectory(aConfig["destDir"])
             ) {
                 continue;
             }
 
-            $dest = $config["destDir"] . $config["link"];
+            $dest = aConfig["destDir"] . aConfig["link"];
 
             if (file_exists($dest)) {
-                if ($overwrite && !_remove($config)) {
+                if ($overwrite && !_remove(aConfig)) {
                     continue;
                 } elseif (!$overwrite) {
                     this.io.verbose(
@@ -111,7 +111,7 @@ trait PluginAssetsTrait
 
             if (!$copy) {
                 $result = _createSymlink(
-                    $config["srcPath"],
+                    aConfig["srcPath"],
                     $dest
                 );
                 if ($result) {
@@ -120,7 +120,7 @@ trait PluginAssetsTrait
             }
 
             _copyDirectory(
-                $config["srcPath"],
+                aConfig["srcPath"],
                 $dest
             );
         }
@@ -132,20 +132,20 @@ trait PluginAssetsTrait
     /**
      * Remove folder/symlink.
      *
-     * @param array<string, mixed> $config Plugin config.
+     * @param array<string, mixed> aConfig Plugin config.
      * @return bool
      */
     protected bool _remove(Json aConfig) {
-        if ($config["namespaced"] && !is_dir($config["destDir"])) {
+        if (aConfig["namespaced"] && !is_dir(aConfig["destDir"])) {
             this.io.verbose(
-                $config["destDir"] . $config["link"] ~ " does not exist",
+                aConfig["destDir"] . aConfig["link"] ~ " does not exist",
                 1
             );
 
             return false;
         }
 
-        $dest = $config["destDir"] . $config["link"];
+        $dest = aConfig["destDir"] . aConfig["link"];
 
         if (!file_exists($dest)) {
             this.io.verbose(

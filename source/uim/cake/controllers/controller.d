@@ -255,7 +255,7 @@ class Controller : IEventListener, IEventDispatcher {
      * Will result in a `Authentication` property being set.
      *
      * @param string aName The name of the component to load.
-     * @param array<string, mixed> $config The config for the component.
+     * @param array<string, mixed> aConfig The config for the component.
      * @return uim.cake.controllers.Component
      * @throws \Exception
      */
@@ -263,7 +263,7 @@ class Controller : IEventListener, IEventDispatcher {
     {
         [, $prop] = pluginSplit($name);
 
-        return this.{$prop} = this.components().load($name, $config);
+        return this.{$prop} = this.components().load($name, aConfig);
     }
 
     /**

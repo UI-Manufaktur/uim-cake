@@ -82,7 +82,7 @@ class MemcachedEngine : CacheEngine {
      *
      * Called automatically by the cache frontend
      *
-     * @param array<string, mixed> $config array of setting for the engine
+     * @param array<string, mixed> aConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      * @throws \InvalidArgumentException When you try use authentication without
      *   Memcached compiled with SASL support
@@ -101,18 +101,18 @@ class MemcachedEngine : CacheEngine {
             _serializers["msgpack"] = Memcached::SERIALIZER_MSGPACK;
         }
 
-        super.init($config);
+        super.init(aConfig);
 
-        if (!empty($config["host"])) {
-            if (empty($config["port"])) {
-                $config["servers"] = [$config["host"]];
+        if (!empty(aConfig["host"])) {
+            if (empty(aConfig["port"])) {
+                aConfig["servers"] = [aConfig["host"]];
             } else {
-                $config["servers"] = [sprintf("%s:%d", $config["host"], $config["port"])];
+                aConfig["servers"] = [sprintf("%s:%d", aConfig["host"], aConfig["port"])];
             }
         }
 
-        if (isset($config["servers"])) {
-            this.setConfig("servers", $config["servers"], false);
+        if (isset(aConfig["servers"])) {
+            this.setConfig("servers", aConfig["servers"], false);
         }
 
         if (!is_array(_config["servers"])) {

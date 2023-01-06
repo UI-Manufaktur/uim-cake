@@ -39,7 +39,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * Loads/constructs an object instance.
      *
      * Will return the instance in the registry if it already exists.
-     * If a subclass provides event support, you can use `$config["enabled"] = false`
+     * If a subclass provides event support, you can use `aConfig["enabled"] = false`
      * to exclude constructed objects from being registered for events.
      *
      * Using {@link uim.cake.Controller\Component::$components} as an example. You can alias
@@ -56,22 +56,22 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * All calls to the `Email` component would use `AliasedEmail` instead.
      *
      * @param string aName The name/class of the object to load.
-     * @param array<string, mixed> $config Additional settings to use when loading the object.
+     * @param array<string, mixed> aConfig Additional settings to use when loading the object.
      * @return mixed
      * @psalm-return TObject
      * @throws \Exception If the class cannot be found.
      */
     function load(string aName, Json aConfig = []) {
-        if (isset($config["className"])) {
+        if (isset(aConfig["className"])) {
             $objName = $name;
-            $name = $config["className"];
+            $name = aConfig["className"];
         } else {
             [, $objName] = pluginSplit($name);
         }
 
         $loaded = isset(_loaded[$objName]);
-        if ($loaded && !empty($config)) {
-            _checkDuplicate($objName, $config);
+        if ($loaded && !empty(aConfig)) {
+            _checkDuplicate($objName, aConfig);
         }
         if ($loaded) {
             return _loaded[$objName];
@@ -90,7 +90,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
          * @psalm-var TObject $instance
          * @psalm-suppress PossiblyNullArgument
          **/
-        $instance = _create($className, $objName, $config);
+        $instance = _create($className, $objName, aConfig);
         _loaded[$objName] = $instance;
 
         return $instance;
@@ -108,7 +108,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      * logic dependent on the configuration.
      *
      * @param string aName The name of the alias in the registry.
-     * @param array<string, mixed> $config The config data for the new instance.
+     * @param array<string, mixed> aConfig The config data for the new instance.
      * @return void
      * @throws \RuntimeException When a duplicate is found.
      */
@@ -119,14 +119,14 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
         if (!$hasConfig) {
             throw new RuntimeException($msg);
         }
-        if (empty($config)) {
+        if (empty(aConfig)) {
             return;
         }
         $existingConfig = $existing.getConfig();
-        unset($config["enabled"], $existingConfig["enabled"]);
+        unset(aConfig["enabled"], $existingConfig["enabled"]);
 
         $failure = null;
-        foreach ($config as $key: $value) {
+        foreach (aConfig as $key: $value) {
             if (!array_key_exists($key, $existingConfig)) {
                 $failure = " The `{$key}` was not defined in the previous configuration data.";
                 break;
@@ -173,7 +173,7 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
      *
      * @param object|string $class The class to build.
      * @param string $alias The alias of the object.
-     * @param array<string, mixed> $config The Configuration settings for construction
+     * @param array<string, mixed> aConfig The Configuration settings for construction
      * @return object
      * @psalm-param TObject|string $class
      * @psalm-return TObject
@@ -265,16 +265,16 @@ abstract class ObjectRegistry : Countable, IteratorAggregate
     array normalizeArray(array $objects) {
         $normal = [];
         foreach ($objects as $i: $objectName) {
-            $config = [];
+            aConfig = [];
             if (!is_int($i)) {
-                $config = (array)$objectName;
+                aConfig = (array)$objectName;
                 $objectName = $i;
             }
             [, $name] = pluginSplit($objectName);
-            if (isset($config["class"])) {
-                $normal[$name] = $config + ["config": []];
+            if (isset(aConfig["class"])) {
+                $normal[$name] = aConfig + ["config": []];
             } else {
-                $normal[$name] = ["class": $objectName, "config": $config];
+                $normal[$name] = ["class": $objectName, "config": aConfig];
             }
         }
 

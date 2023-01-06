@@ -55,11 +55,11 @@ abstract class CacheEngine : ICache, ICacheEngine
      * Called automatically by the cache frontend. Merge the runtime config with the defaults
      * before use.
      *
-     * @param array<string, mixed> $config Associative array of parameters for the engine
+     * @param array<string, mixed> aConfig Associative array of parameters for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
     bool init(Json aConfig = []) {
-        this.setConfig($config);
+        this.setConfig(aConfig);
 
         if (!empty(_config["groups"])) {
             sort(_config["groups"]);

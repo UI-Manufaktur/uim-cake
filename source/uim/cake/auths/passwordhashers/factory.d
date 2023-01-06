@@ -21,13 +21,13 @@ class PasswordHasherFactory {
      */
     static function build($passwordHasher): AbstractPasswordHasher
     {
-        $config = [];
+        aConfig = [];
         if (is_string($passwordHasher)) {
             $class = $passwordHasher;
         } else {
             $class = $passwordHasher["className"];
-            $config = $passwordHasher;
-            unset($config["className"]);
+            aConfig = $passwordHasher;
+            unset(aConfig["className"]);
         }
 
         $className = App::className($class, "Auth", "PasswordHasher");
@@ -35,7 +35,7 @@ class PasswordHasherFactory {
             throw new RuntimeException(sprintf("Password hasher class "%s" was not found.", $class));
         }
 
-        $hasher = new $className($config);
+        $hasher = new $className(aConfig);
         if (!($hasher instanceof AbstractPasswordHasher)) {
             throw new RuntimeException("Password hasher must extend AbstractPasswordHasher class.");
         }

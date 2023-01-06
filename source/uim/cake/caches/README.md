@@ -35,7 +35,7 @@ Cache::config("long", [
 ]);
 
 // Using a constructed object.
-$object = new FileEngine($config);
+$object = new FileEngine(aConfig);
 Cache::config("other", $object);
 ```
 

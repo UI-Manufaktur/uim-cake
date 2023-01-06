@@ -27,7 +27,7 @@ class WincacheEngine : CacheEngine {
      *
      * Called automatically by the cache frontend
      *
-     * @param array<string, mixed> $config array of setting for the engine
+     * @param array<string, mixed> aConfig array of setting for the engine
      * @return bool True if the engine has been successfully initialized, false if not
      */
     bool init(Json aConfig = []) {
@@ -35,7 +35,7 @@ class WincacheEngine : CacheEngine {
             throw new RuntimeException("The `wincache` extension must be enabled to use WincacheEngine.");
         }
 
-        super.init($config);
+        super.init(aConfig);
 
         return true;
     }

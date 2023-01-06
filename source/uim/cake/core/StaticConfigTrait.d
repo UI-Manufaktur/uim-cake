@@ -52,12 +52,12 @@ trait StaticConfigTrait
      * ```
      *
      * @param array<string, mixed>|string aKey The name of the configuration, or an array of multiple configs.
-     * @param object|array<string, mixed>|null $config An array of name: configuration data for adapter.
+     * @param object|array<string, mixed>|null aConfig An array of name: configuration data for adapter.
      * @throws \BadMethodCallException When trying to modify an existing config.
      * @throws \LogicException When trying to store an invalid structured config array.
      */
-    static void setConfig($key, $config = null) {
-        if ($config == null) {
+    static void setConfig($key, aConfig = null) {
+        if (aConfig == null) {
             if (!is_array($key)) {
                 throw new LogicException("If config is null, key must be an array.");
             }
@@ -73,22 +73,22 @@ trait StaticConfigTrait
             throw new BadMethodCallException(sprintf("Cannot reconfigure existing key "%s"", $key));
         }
 
-        if (is_object($config)) {
-            $config = ["className": $config];
+        if (is_object(aConfig)) {
+            aConfig = ["className": aConfig];
         }
 
-        if (isset($config["url"])) {
-            $parsed = static::parseDsn($config["url"]);
-            unset($config["url"]);
-            $config = $parsed + $config;
+        if (isset(aConfig["url"])) {
+            $parsed = static::parseDsn(aConfig["url"]);
+            unset(aConfig["url"]);
+            aConfig = $parsed + aConfig;
         }
 
-        if (isset($config["engine"]) && empty($config["className"])) {
-            $config["className"] = $config["engine"];
-            unset($config["engine"]);
+        if (isset(aConfig["engine"]) && empty(aConfig["className"])) {
+            aConfig["className"] = aConfig["engine"];
+            unset(aConfig["engine"]);
         }
         /** @psalm-suppress InvalidPropertyAssignmentValue */
-        static::$_config[$key] = $config;
+        static::$_config[$key] = aConfig;
     }
 
     /**
@@ -127,18 +127,18 @@ trait StaticConfigTrait
      * If the implementing objects supports a `$_registry` object the named configuration
      * will also be unloaded from the registry.
      *
-     * @param string $config An existing configuration you wish to remove.
+     * @param string aConfig An existing configuration you wish to remove.
      * @return bool Success of the removal, returns false when the config does not exist.
      */
-    static bool drop(string $config) {
-        if (!isset(static::$_config[$config])) {
+    static bool drop(string aConfig) {
+        if (!isset(static::$_config[aConfig])) {
             return false;
         }
         /** @psalm-suppress RedundantPropertyInitializationCheck */
         if (isset(static::$_registry)) {
-            static::$_registry.unload($config);
+            static::$_registry.unload(aConfig);
         }
-        unset(static::$_config[$config]);
+        unset(static::$_config[aConfig]);
 
         return true;
     }
@@ -164,19 +164,19 @@ trait StaticConfigTrait
      *
      * ```
      * $dsn = "mysql://user:pass@localhost/database?";
-     * $config = ConnectionManager::parseDsn($dsn);
+     * aConfig = ConnectionManager::parseDsn($dsn);
      *
      * $dsn = "Cake\logs.Engine\FileLog://?types=notice,info,debug&file=debug&path=LOGS";
-     * $config = Log::parseDsn($dsn);
+     * aConfig = Log::parseDsn($dsn);
      *
      * $dsn = "smtp://user:secret@localhost:25?timeout=30&client=null&tls=null";
-     * $config = Email::parseDsn($dsn);
+     * aConfig = Email::parseDsn($dsn);
      *
      * $dsn = "file:///?className=\My\Cache\Engine\FileEngine";
-     * $config = Cache::parseDsn($dsn);
+     * aConfig = Cache::parseDsn($dsn);
      *
      * $dsn = "File://?prefix=myapp_cake_core_&serialize=true&duration=+2 minutes&path=/tmp/persistent/";
-     * $config = Cache::parseDsn($dsn);
+     * aConfig = Cache::parseDsn($dsn);
      * ```
      *
      * For all classes, the value of `scheme` is set as the value of both the `className`

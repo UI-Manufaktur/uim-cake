@@ -102,7 +102,7 @@ class ComponentRegistry : ObjectRegistry, IEventDispatcher {
      *
      * @param string $class The classname to create.
      * @param string $alias The alias of the component.
-     * @param array<string, mixed> $config An array of config to use for the component.
+     * @param array<string, mixed> aConfig An array of config to use for the component.
      * @return uim.cake.controllers.Component The constructed component class.
      * @psalm-suppress MoreSpecificImplementedParamType
      * @psalm-param class-string $class
@@ -110,8 +110,8 @@ class ComponentRegistry : ObjectRegistry, IEventDispatcher {
     protected function _create($class, string $alias, Json aConfig): Component
     {
         /** @var uim.cake.controllers.Component $instance */
-        $instance = new $class(this, $config);
-        $enable = $config["enabled"] ?? true;
+        $instance = new $class(this, aConfig);
+        $enable = aConfig["enabled"] ?? true;
         if ($enable) {
             this.getEventManager().on($instance);
         }

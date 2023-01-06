@@ -45,25 +45,25 @@ class PaginatorComponent : Component
             throw new UnexpectedValueException("Default configuration must be set using a custom Paginator class.");
         }
 
-        if (isset($config["paginator"])) {
-            $config["className"] = $config["paginator"];
+        if (isset(aConfig["paginator"])) {
+            aConfig["className"] = aConfig["paginator"];
             deprecationWarning(
                 "`paginator` option is deprecated,"
                 ~ " use `className` instead a specify a paginator name/FQCN."
             );
         }
 
-        if (isset($config["className"])) {
-            if (!$config["className"] instanceof NumericPaginator) {
+        if (isset(aConfig["className"])) {
+            if (!aConfig["className"] instanceof NumericPaginator) {
                 throw new InvalidArgumentException("Paginator must be an instance of " ~ NumericPaginator::class);
             }
-            _paginator = $config["className"];
-            unset($config["className"]);
+            _paginator = aConfig["className"];
+            unset(aConfig["className"]);
         } else {
             _paginator = new NumericPaginator();
         }
 
-        super(($registry, $config);
+        super(($registry, aConfig);
     }
 
     /**

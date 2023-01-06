@@ -47,7 +47,7 @@ class CacheRegistry : ObjectRegistry
      *
      * @param uim.cake.Cache\CacheEngine|string $class The classname or object to make.
      * @param string $alias The alias of the object.
-     * @param array<string, mixed> $config An array of settings to use for the cache engine.
+     * @param array<string, mixed> aConfig An array of settings to use for the cache engine.
      * @return uim.cake.Cache\CacheEngine The constructed CacheEngine class.
      * @throws \RuntimeException when an object doesn"t implement the correct interface.
      */
@@ -55,9 +55,9 @@ class CacheRegistry : ObjectRegistry
         if (is_object($class)) {
             $instance = $class;
         } else {
-            $instance = new $class($config);
+            $instance = new $class(aConfig);
         }
-        unset($config["className"]);
+        unset(aConfig["className"]);
 
         if (!($instance instanceof CacheEngine)) {
             throw new RuntimeException(
@@ -65,7 +65,7 @@ class CacheRegistry : ObjectRegistry
             );
         }
 
-        if (!$instance.init($config)) {
+        if (!$instance.init(aConfig)) {
             throw new RuntimeException(
                 sprintf(
                     "Cache engine %s is not properly configured. Check error log for additional information.",

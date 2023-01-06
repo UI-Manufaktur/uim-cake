@@ -60,27 +60,27 @@ class Configure {
      * ]);
      * ```
      *
-     * @param array<string, mixed>|string $config The key to write, can be a dot notation value.
+     * @param array<string, mixed>|string aConfig The key to write, can be a dot notation value.
      * Alternatively can be an array containing key(s) and value(s).
      * @param mixed $value Value to set for var
      * @return void
      * @link https://book.cakephp.org/4/en/development/configuration.html#writing-configuration-data
      */
-    static void write($config, $value = null) {
-        if (!is_array($config)) {
-            $config = [$config: $value];
+    static void write(aConfig, $value = null) {
+        if (!is_array(aConfig)) {
+            aConfig = [aConfig: $value];
         }
 
-        foreach ($config as $name: $value) {
+        foreach (aConfig as $name: $value) {
             static::$_values = Hash::insert(static::$_values, $name, $value);
         }
 
-        if (isset($config["debug"])) {
+        if (isset(aConfig["debug"])) {
             if (static::$_hasIniSet == null) {
                 static::$_hasIniSet = function_exists("ini_set");
             }
             if (static::$_hasIniSet) {
-                ini_set("display_errors", $config["debug"] ? "1" : "0");
+                ini_set("display_errors", aConfig["debug"] ? "1" : "0");
             }
         }
     }
@@ -289,19 +289,19 @@ class Configure {
      * one will be automatically created using PhpConfig
      *
      * @param string aKey name of configuration resource to load.
-     * @param string $config Name of the configured engine to use to read the resource identified by $key.
+     * @param string aConfig Name of the configured engine to use to read the resource identified by $key.
      * @param bool $merge if config files should be merged instead of simply overridden
      * @return bool True if load successful.
-     * @throws uim.cake.Core\exceptions.CakeException if the $config engine is not found
+     * @throws uim.cake.Core\exceptions.CakeException if the aConfig engine is not found
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-and-writing-configuration-files
      */
-    static bool load(string aKey, string $config = "default", bool $merge = true) {
-        $engine = static::_getEngine($config);
+    static bool load(string aKey, string aConfig = "default", bool $merge = true) {
+        $engine = static::_getEngine(aConfig);
         if (!$engine) {
             throw new CakeException(
                 sprintf(
                     "Config %s engine not found when attempting to load %s.",
-                    $config,
+                    aConfig,
                     $key
                 )
             );
@@ -320,7 +320,7 @@ class Configure {
 
     /**
      * Dump data currently in Configure into $key. The serialization format
-     * is decided by the config engine attached as $config. For example, if the
+     * is decided by the config engine attached as aConfig. For example, if the
      * "default" adapter is a PhpConfig, the generated file will be a PHP
      * configuration file loadable by the PhpConfig.
      *
@@ -341,16 +341,16 @@ class Configure {
      *
      * @param string aKey The identifier to create in the config adapter.
      *   This could be a filename or a cache key depending on the adapter being used.
-     * @param string $config The name of the configured adapter to dump data with.
+     * @param string aConfig The name of the configured adapter to dump data with.
      * @param array<string> $keys The name of the top-level keys you want to dump.
      *   This allows you save only some data stored in Configure.
      * @return bool Success
      * @throws uim.cake.Core\exceptions.CakeException if the adapter does not implement a `dump` method.
      */
-    static bool dump(string aKey, string $config = "default", array $keys = []) {
-        $engine = static::_getEngine($config);
+    static bool dump(string aKey, string aConfig = "default", array $keys = []) {
+        $engine = static::_getEngine(aConfig);
         if (!$engine) {
-            throw new CakeException(sprintf("There is no "%s" config engine.", $config));
+            throw new CakeException(sprintf("There is no "%s" config engine.", aConfig));
         }
         $values = static::$_values;
         if (!empty($keys)) {
@@ -364,19 +364,19 @@ class Configure {
      * Get the configured engine. Internally used by `Configure::load()` and `Configure::dump()`
      * Will create new PhpConfig for default if not configured yet.
      *
-     * @param string $config The name of the configured adapter
+     * @param string aConfig The name of the configured adapter
      * @return uim.cake.Core\Configure\ConfigEngineInterface|null Engine instance or null
      */
-    protected static function _getEngine(string $config): ?ConfigEngineInterface
+    protected static function _getEngine(string aConfig): ?ConfigEngineInterface
     {
-        if (!isset(static::$_engines[$config])) {
-            if ($config != "default") {
+        if (!isset(static::$_engines[aConfig])) {
+            if (aConfig != "default") {
                 return null;
             }
-            static::config($config, new PhpConfig());
+            static::config(aConfig, new PhpConfig());
         }
 
-        return static::$_engines[$config];
+        return static::$_engines[aConfig];
     }
 
     /**
@@ -397,8 +397,8 @@ class Configure {
 
         $path = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR ~ "config/config.php";
         if (is_file($path)) {
-            $config = require $path;
-            static::write($config);
+            aConfig = require $path;
+            static::write(aConfig);
 
             return static::read("Cake.version");
         }

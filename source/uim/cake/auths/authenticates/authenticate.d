@@ -62,11 +62,11 @@ abstract class BaseAuthenticate : IEventListener {
      * Constructor
      *
      * @param uim.cake.controllers.ComponentRegistry $registry The Component registry used on this request.
-     * @param array<string, mixed> $config Array of config to use.
+     * @param array<string, mixed> aConfig Array of config to use.
      */
     this(ComponentRegistry aRegistry, Json aConfig = []) {
         _registry = aRegistry;
-        this.setConfig($config);
+        this.setConfig(aConfig);
     }
 
     void initialize() {
@@ -138,14 +138,14 @@ abstract class BaseAuthenticate : IEventListener {
      * @return uim.cake.orm.Query
      */
     protected Query _query(string $username) {
-        $config = _config;
-        $table = this.getTableLocator().get($config["userModel"]);
+        aConfig = _config;
+        $table = this.getTableLocator().get(aConfig["userModel"]);
 
         $options = [
-            "conditions": [$table.aliasField($config["fields"]["username"]): $username],
+            "conditions": [$table.aliasField(aConfig["fields"]["username"]): $username],
         ];
 
-        $finder = $config["finder"];
+        $finder = aConfig["finder"];
         if (is_array($finder)) {
             $options += current($finder);
             $finder = key($finder);

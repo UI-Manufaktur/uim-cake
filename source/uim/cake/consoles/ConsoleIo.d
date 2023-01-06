@@ -537,14 +537,14 @@ class ConsoleIo
      * object has not already been loaded, it will be loaded and constructed.
      *
      * @param string aName The name of the helper to render
-     * @param array<string, mixed> $config Configuration data for the helper.
+     * @param array<string, mixed> aConfig Configuration data for the helper.
      * @return uim.cake.consoles.Helper The created helper instance.
      */
     function helper(string aName, Json aConfig = []): Helper
     {
         $name = ucfirst($name);
 
-        return _helpers.load($name, $config);
+        return _helpers.load($name, aConfig);
     }
 
     /**

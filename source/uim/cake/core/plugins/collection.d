@@ -83,8 +83,8 @@ class PluginCollection : Iterator, Countable
             }
         }
 
-        $config = require $vendorFile;
-        Configure::write($config);
+        aConfig = require $vendorFile;
+        Configure::write(aConfig);
     }
 
     /**
@@ -200,7 +200,7 @@ class PluginCollection : Iterator, Countable
      * Create a plugin instance from a name/classname and configuration.
      *
      * @param string aName The plugin name or classname
-     * @param array<string, mixed> $config Configuration options for the plugin.
+     * @param array<string, mixed> aConfig Configuration options for the plugin.
      * @return uim.cake.Core\IPlugin
      * @throws uim.cake.Core\exceptions.MissingPluginException When plugin instance could not be created.
      */
@@ -208,10 +208,10 @@ class PluginCollection : Iterator, Countable
     {
         if (strpos(aName, "\\") != false) {
             /** @var uim.cake.Core\IPlugin */
-            return new aName($config);
+            return new aName(aConfig);
         }
 
-        $config += ["name": aName];
+        aConfig += ["name": aName];
         $namespace = str_replace("/", "\\", aName);
 
         $className = $namespace ~ "\\" ~ "Plugin";
@@ -227,14 +227,14 @@ class PluginCollection : Iterator, Countable
             // Check for [Vendor/]Foo/FooPlugin
             if (!class_exists($className)) {
                 $className = BasePlugin::class;
-                if (empty($config["path"])) {
-                    $config["path"] = this.findPath(aName);
+                if (empty(aConfig["path"])) {
+                    aConfig["path"] = this.findPath(aName);
                 }
             }
         }
 
         /** @var class-string<uim.cake.Core\IPlugin> $className */
-        return new $className($config);
+        return new $className(aConfig);
     }
 
     /**

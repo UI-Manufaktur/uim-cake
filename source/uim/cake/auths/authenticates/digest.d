@@ -64,12 +64,12 @@ class DigestAuthenticate : BasicAuthenticate {
      * - `realm` The realm authentication is for, Defaults to the servername.
      * - `qop` Defaults to "auth", no other values are supported at this time.
      * - `opaque` A string that must be returned unchanged by clients.
-     *    Defaults to `md5($config["realm"])`
+     *    Defaults to `md5(aConfig["realm"])`
      * - `nonceLifetime` The number of seconds that nonces are valid for. Defaults to 300.
      *
      * @param uim.cake.controllers.ComponentRegistry $registry The Component registry
      *   used on this request.
-     * @param array<string, mixed> $config Array of config to use.
+     * @param array<string, mixed> aConfig Array of config to use.
      */
     this(ComponentRegistry $registry, Json aConfig = []) {
         this.setConfig([
@@ -80,7 +80,7 @@ class DigestAuthenticate : BasicAuthenticate {
             "opaque": null,
         ]);
 
-        super(($registry, $config);
+        super(($registry, aConfig);
     }
 
     /**

@@ -29,7 +29,7 @@ class WeakPasswordHasher : AbstractPasswordHasher
             Debugger::checkSecurityKeys();
         }
 
-        super(($config);
+        super((aConfig);
     }
 
 
