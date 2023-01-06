@@ -21,7 +21,7 @@ class DateTimeWidget : BasicWidget
      *
      * @var uim.cake.View\StringTemplate
      */
-    protected $_templates;
+    protected _templates;
 
     /**
      * Data defaults.

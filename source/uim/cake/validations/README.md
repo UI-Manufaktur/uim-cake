@@ -26,7 +26,7 @@ $validator
     .requirePresence("comment")
     .notEmptyString("comment", "You need to give a comment.");
 
-myErrors = $validator.validate($_POST);
+myErrors = $validator.validate(_POST);
 if (!empty(myErrors)) {
     // display errors.
 }

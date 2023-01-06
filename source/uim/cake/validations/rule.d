@@ -33,7 +33,7 @@ class ValidationRule
     /**
      * The "last" key
      */
-    protected bool $_last = false;
+    protected bool _last = false;
 
     // The "message" key
     protected string _message;

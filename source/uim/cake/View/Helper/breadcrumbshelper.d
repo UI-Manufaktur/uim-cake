@@ -32,7 +32,7 @@ class BreadcrumbsHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "templates": [
             "wrapper": "<ul{{attrs}}>{{content}}</ul>",
             "item": "<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>{{separator}}",

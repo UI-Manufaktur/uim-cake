@@ -41,32 +41,32 @@ class EntityContext : IContext
      *
      * @var array<string, mixed>
      */
-    protected $_context;
+    protected _context;
 
     /**
      * The name of the top level entity/table object.
      */
-    protected string $_rootName;
+    protected string _rootName;
 
     /**
      * Boolean to track whether the entity is a
      * collection.
      */
-    protected bool $_isCollection = false;
+    protected bool _isCollection = false;
 
     /**
      * A dictionary of tables
      *
      * @var array<uim.cake.orm.Table>
      */
-    protected $_tables = [];
+    protected _tables = [];
 
     /**
      * Dictionary of validators.
      *
      * @var array<uim.cake.validations.Validator>
      */
-    protected $_validator = [];
+    protected _validator = [];
 
     /**
      * Constructor.

@@ -35,7 +35,7 @@ class HtmlHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "templates": [
             "meta": "<meta{{attrs}}/>",
             "metalink": "<link href="{{url}}"{{attrs}}/>",
@@ -74,14 +74,14 @@ class HtmlHelper : Helper
      *
      * @var array<string, array>
      */
-    protected $_includedAssets = [];
+    protected _includedAssets = [];
 
     /**
      * Options for the currently opened script block buffer if any.
      *
      * @var array<string, mixed>
      */
-    protected $_scriptBlockOptions = [];
+    protected _scriptBlockOptions = [];
 
     /**
      * Creates a link to an external resource and handles basic meta tags

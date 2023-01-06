@@ -37,7 +37,7 @@ class TextHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "engine": Text::class,
     ];
 
@@ -47,14 +47,14 @@ class TextHelper : Helper
      *
      * @var array<string, array>
      */
-    protected $_placeholders = [];
+    protected _placeholders = [];
 
     /**
      * Cake Utility Text instance
      *
      * @var uim.cake.Utility\Text
      */
-    protected $_engine;
+    protected _engine;
 
     /**
      * Constructor

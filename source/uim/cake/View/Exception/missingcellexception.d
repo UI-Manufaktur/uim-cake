@@ -8,5 +8,5 @@ import uim.cake.core.exceptions.CakeException;
 class MissingCellException : CakeException
 {
 
-    protected $_messageTemplate = "Cell class %s is missing.";
+    protected _messageTemplate = "Cell class %s is missing.";
 }

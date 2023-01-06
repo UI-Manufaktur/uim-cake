@@ -16,12 +16,12 @@ class LabelWidget : WidgetInterface
      *
      * @var uim.cake.View\StringTemplate
      */
-    protected $_templates;
+    protected _templates;
 
     /**
      * The template to use.
      */
-    protected string $_labelTemplate = "label";
+    protected string _labelTemplate = "label";
 
     /**
      * Constructor.

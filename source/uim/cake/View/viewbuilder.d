@@ -53,7 +53,7 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Whether autoLayout should be enabled.
      */
-    protected bool $_autoLayout = true;
+    protected bool _autoLayout = true;
 
     /**
      * The layout path to build the view with.
@@ -75,7 +75,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * @var string|null
      * @psalm-var class-string<uim.cake.View\View>|string|null
      */
-    protected $_className;
+    protected _className;
 
     /**
      * Additional options used when constructing the view.
@@ -85,21 +85,21 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @var array<string, mixed>
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * The helpers to use
      *
      * @var array
      */
-    protected $_helpers = [];
+    protected _helpers = [];
 
     /**
      * View vars
      *
      * @var array<string, mixed>
      */
-    protected $_vars = [];
+    protected _vars = [];
 
     /**
      * Saves a variable for use inside a template.

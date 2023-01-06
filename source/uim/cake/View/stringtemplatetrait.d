@@ -15,7 +15,7 @@ trait StringTemplateTrait
      *
      * @var uim.cake.View\StringTemplate|null
      */
-    protected $_templater;
+    protected _templater;
 
     /**
      * Sets templates to use.

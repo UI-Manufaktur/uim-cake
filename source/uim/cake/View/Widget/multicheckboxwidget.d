@@ -35,7 +35,7 @@ class MultiCheckboxWidget : BasicWidget
      *
      * @var uim.cake.View\Widget\LabelWidget
      */
-    protected $_label;
+    protected _label;
 
     /**
      * Render multi-checkbox widget.

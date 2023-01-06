@@ -53,7 +53,7 @@ class FormHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "idPrefix": null,
         "errorClass": "form-error",
         "typeMap": [
@@ -151,7 +151,7 @@ class FormHelper : Helper
      *
      * @var array<string, array<string>>
      */
-    protected $_defaultWidgets = [
+    protected _defaultWidgets = [
         "button": ["Button"],
         "checkbox": ["Checkbox"],
         "file": ["File"],
@@ -184,27 +184,27 @@ class FormHelper : Helper
      *
      * @var uim.cake.View\Widget\WidgetLocator
      */
-    protected $_locator;
+    protected _locator;
 
     /**
      * Context for the current form.
      *
      * @var uim.cake.View\Form\IContext|null
      */
-    protected $_context;
+    protected _context;
 
     /**
      * Context factory.
      *
      * @var uim.cake.View\Form\ContextFactory|null
      */
-    protected $_contextFactory;
+    protected _contextFactory;
 
     /**
      * The action attribute value of the last created form.
      * Used to make form/request specific hashes for form tampering protection.
      */
-    protected string $_lastAction = "";
+    protected string _lastAction = "";
 
     /**
      * The supported sources that can be used to populate input values.
@@ -223,14 +223,14 @@ class FormHelper : Helper
      * @see FormHelper::$supportedValueSources for valid values.
      * @var array<string>
      */
-    protected $_valueSources = ["data", "context"];
+    protected _valueSources = ["data", "context"];
 
     /**
      * Grouped input types.
      *
      * @var array<string>
      */
-    protected $_groupedInputTypes = ["radio", "multicheckbox"];
+    protected _groupedInputTypes = ["radio", "multicheckbox"];
 
     /**
      * Form protector

@@ -15,7 +15,7 @@ abstract class SerializedView : View
      * @var string
      * @deprecated 4.4.0 Implement ``static contentType() : string`` instead.
      */
-    protected string $_responseType;
+    protected string _responseType;
 
     /**
      * Default config options.
@@ -29,7 +29,7 @@ abstract class SerializedView : View
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "serialize": null,
     ];
 

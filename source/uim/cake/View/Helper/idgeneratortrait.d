@@ -19,7 +19,7 @@ trait IdGeneratorTrait
      *
      * @var array<string>
      */
-    protected $_idSuffixes = [];
+    protected _idSuffixes = [];
 
     /**
      * Clear the stored ID suffixes.

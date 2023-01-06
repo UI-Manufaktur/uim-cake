@@ -68,14 +68,14 @@ abstract class Cell : IEventDispatcher
      *
      * @var array<string>
      */
-    protected $_validCellOptions = [];
+    protected _validCellOptions = [];
 
     /**
      * Caching setup.
      *
      * @var array|bool
      */
-    protected $_cache = false;
+    protected _cache = false;
 
     /**
      * Constructor.

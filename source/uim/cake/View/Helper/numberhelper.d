@@ -28,7 +28,7 @@ class NumberHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "engine": Number::class,
     ];
 
@@ -37,7 +37,7 @@ class NumberHelper : Helper
      *
      * @var uim.cake.I18n\Number
      */
-    protected $_engine;
+    protected _engine;
 
     /**
      * Default Constructor

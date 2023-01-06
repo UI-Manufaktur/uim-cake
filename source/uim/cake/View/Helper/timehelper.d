@@ -30,7 +30,7 @@ class TimeHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "outputTimezone": null,
     ];
 

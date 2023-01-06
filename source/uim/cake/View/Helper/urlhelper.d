@@ -16,7 +16,7 @@ class UrlHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "assetUrlClassName": Asset::class,
     ];
 
@@ -26,7 +26,7 @@ class UrlHelper : Helper
      * @var string
      * @psalm-var class-string<uim.cake.routings.Asset>
      */
-    protected $_assetUrlClassName;
+    protected _assetUrlClassName;
 
     /**
      * Check proper configuration

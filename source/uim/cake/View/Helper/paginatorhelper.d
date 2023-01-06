@@ -50,7 +50,7 @@ class PaginatorHelper : Helper
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "options": [],
         "templates": [
             "nextActive": "<li class="next"><a rel="next" href="{{url}}">{{text}}</a></li>",

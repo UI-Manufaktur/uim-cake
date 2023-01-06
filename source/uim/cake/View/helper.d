@@ -41,21 +41,21 @@ class Helper : IEventListener
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected _defaultConfig = [];
 
     /**
      * A helper lookup table used to lazy load helper objects.
      *
      * @var array<string, array>
      */
-    protected $_helperMap = [];
+    protected _helperMap = [];
 
     /**
      * The View instance this helper is attached to
      *
      * @var uim.cake.View\View
      */
-    protected $_View;
+    protected _View;
 
     /**
      * Default Constructor

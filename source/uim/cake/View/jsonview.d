@@ -76,7 +76,7 @@ class JsonView : SerializedView
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "serialize": null,
         "jsonOptions": null,
         "jsonp": null,

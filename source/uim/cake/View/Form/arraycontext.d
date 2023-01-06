@@ -59,7 +59,7 @@ class ArrayContext : IContext
      *
      * @var array<string, mixed>
      */
-    protected $_context;
+    protected _context;
 
     /**
      * Constructor.

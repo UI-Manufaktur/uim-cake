@@ -21,7 +21,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      *
      * @var uim.cake.View\View
      */
-    protected $_View;
+    protected _View;
 
     /**
      * Constructor

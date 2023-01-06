@@ -17,7 +17,7 @@ class BasicWidget : WidgetInterface
      *
      * @var uim.cake.View\StringTemplate
      */
-    protected $_templates;
+    protected _templates;
 
     /**
      * Data defaults.

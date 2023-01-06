@@ -24,7 +24,7 @@ class StringTemplate
      *
      * @var array<string, bool>
      */
-    protected $_compactAttributes = [
+    protected _compactAttributes = [
         "allowfullscreen": true,
         "async": true,
         "autofocus": true,
@@ -73,21 +73,21 @@ class StringTemplate
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected _defaultConfig = [];
 
     /**
      * A stack of template sets that have been stashed temporarily.
      *
      * @var array
      */
-    protected $_configStack = [];
+    protected _configStack = [];
 
     /**
      * Contains the list of compiled templates
      *
      * @var array<string, array>
      */
-    protected $_compiled = [];
+    protected _compiled = [];
 
     /**
      * Constructor.
@@ -226,7 +226,7 @@ class StringTemplate
     /**
      * Returns a space-delimited string with items of the $options array. If a key
      * of $options array happens to be one of those listed
-     * in `StringTemplate::$_compactAttributes` and its value is one of:
+     * in `StringTemplate::_compactAttributes` and its value is one of:
      *
      * - "1" (string)
      * - 1 (integer)

@@ -59,7 +59,7 @@ class View : IEventDispatcher
      *
      * @var uim.cake.View\HelperRegistry
      */
-    protected $_helpers;
+    protected _helpers;
 
     /**
      * ViewBlock instance.
@@ -125,7 +125,7 @@ class View : IEventDispatcher
     /**
      * File extension. Defaults to ".php".
      */
-    protected string $_ext = ".php";
+    protected string _ext = ".php";
 
     /**
      * Sub-directory for this template file. This is often used for extension based routing.
@@ -170,7 +170,7 @@ class View : IEventDispatcher
      *
      * @var array<string>
      */
-    protected $_passedVars = [
+    protected _passedVars = [
         "viewVars", "autoLayout", "helpers", "template", "layout", "name", "theme",
         "layoutPath", "templatePath", "plugin",
     ];
@@ -180,46 +180,46 @@ class View : IEventDispatcher
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [];
+    protected _defaultConfig = [];
 
     /**
      * Holds an array of paths.
      *
      * @var array<string>
      */
-    protected $_paths = [];
+    protected _paths = [];
 
     /**
      * Holds an array of plugin paths.
      *
      * @var array<string[]>
      */
-    protected $_pathsForPlugin = [];
+    protected _pathsForPlugin = [];
 
     /**
      * The names of views and their parents used with View::extend();
      *
      * @var array<string>
      */
-    protected $_parents = [];
+    protected _parents = [];
 
     /**
      * The currently rendering view file. Used for resolving parent files.
      */
-    protected string $_current;
+    protected string _current;
 
     /**
      * Currently rendering an element. Used for finding parent fragments
      * for elements.
      */
-    protected string $_currentType = "";
+    protected string _currentType = "";
 
     /**
      * Content stack, used for nested templates that all use View::extend();
      *
      * @var array<string>
      */
-    protected $_stack = [];
+    protected _stack = [];
 
     /**
      * ViewBlock class.
@@ -227,7 +227,7 @@ class View : IEventDispatcher
      * @var string
      * @psalm-var class-string<uim.cake.View\ViewBlock>
      */
-    protected $_viewBlockClass = ViewBlock::class;
+    protected _viewBlockClass = ViewBlock::class;
 
     /**
      * Constant for view file type "template".
@@ -266,7 +266,7 @@ class View : IEventDispatcher
      * @param uim.cake.http.ServerRequest|null myServerRequest Request instance.
      * @param uim.cake.http.Response|null $response Response instance.
      * @param uim.cake.events.EventManager|null $eventManager Event manager instance.
-     * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
+     * @param array<string, mixed> $viewOptions View options. See {@link View::_passedVars} for list of
      *   options which get set as class properties.
      */
     this(

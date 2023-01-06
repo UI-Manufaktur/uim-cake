@@ -107,7 +107,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @var array<string, object|string>
      * @psalm-var array<string, object|class-string>
      */
-    protected static $_defaultProviders = [];
+    protected static _defaultProviders = [];
 
     /**
      * Contains the validation messages associated with checking the presence
@@ -151,7 +151,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      */
     this() {
         _useI18n = function_exists("__d");
-        _providers = self::$_defaultProviders;
+        _providers = self::_defaultProviders;
     }
 
     /**
@@ -316,7 +316,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @psalm-return object|class-string|null
      */
     static auto getDefaultProvider(string myName) {
-        return self::$_defaultProviders[myName] ?? null;
+        return self::_defaultProviders[myName] ?? null;
     }
 
     /**
@@ -334,7 +334,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
             ));
         }
 
-        self::$_defaultProviders[myName] = $object;
+        self::_defaultProviders[myName] = $object;
     }
 
     /**
@@ -342,7 +342,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      */
     static string[] getDefaultProviders()
     {
-        return array_keys(self::$_defaultProviders);
+        return array_keys(self::_defaultProviders);
     }
 
     /**

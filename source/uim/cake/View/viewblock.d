@@ -37,21 +37,21 @@ class ViewBlock
      *
      * @var array<string>
      */
-    protected $_blocks = [];
+    protected _blocks = [];
 
     /**
      * The active blocks being captured.
      *
      * @var array<string>
      */
-    protected $_active = [];
+    protected _active = [];
 
     /**
      * Should the currently captured content be discarded on ViewBlock::end()
      *
      * @see uim.cake.View\ViewBlock::end()
      */
-    protected bool $_discardActiveBufferOnEnd = false;
+    protected bool _discardActiveBufferOnEnd = false;
 
     /**
      * Start capturing output for a "block"
