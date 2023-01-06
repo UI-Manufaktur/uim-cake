@@ -75,7 +75,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    int execute(Arguments $args, ConsoleIo $io): ?int
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
     {
         $mode = $args.getArgument("mode");
         switch ($mode) {
@@ -198,7 +198,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    protected int getOptions(Arguments $args, ConsoleIo $io): ?int
+    protected Nullable!int getOptions(Arguments $args, ConsoleIo $io)
     {
         $name = $args.getArgument("command");
         $subcommand = $args.getArgument("subcommand");

@@ -22,7 +22,7 @@ class RoutesGenerateCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    Nullable!int execute(Arguments $args, ConsoleIo $io) {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
         try {
             $args = _splitArgs($args.getArguments());
             myUrl = Router::url($args);

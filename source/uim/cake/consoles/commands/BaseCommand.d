@@ -122,7 +122,7 @@ abstract class BaseCommand : ICommand {
     }
 
 
-    function run(array $argv, ConsoleIo $io): ?int
+    Nullable!int run(array $argv, ConsoleIo $io)
     {
         this.initialize();
 
@@ -222,7 +222,7 @@ abstract class BaseCommand : ICommand {
      * @param uim.cake.consoles.ConsoleIo|null $io The ConsoleIo instance to use for the executed command.
      * @return int|null The exit code or null for success of the command.
      */
-    function executeCommand($command, array $args = [], ?ConsoleIo $io = null): ?int
+    Nullable!int executeCommand($command, array $args = [], ?ConsoleIo $io = null)
     {
         if (is_string($command)) {
             if (!class_exists($command)) {

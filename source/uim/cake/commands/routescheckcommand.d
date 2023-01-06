@@ -20,7 +20,7 @@ class RoutesCheckCommand : Command {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null The exit code or null for success
      */
-    function execute(Arguments $args, ConsoleIo $io): ?int
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo)
     {
         $url = $args.getArgument("url");
         try {

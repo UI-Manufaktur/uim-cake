@@ -39,5 +39,5 @@ interface ICommand {
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int|null Exit code or null for success.
      */
-    function run(array $argv, ConsoleIo $io): ?int;
+    Nullable!int run(array $argv, ConsoleIo $io);
 }

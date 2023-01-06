@@ -616,7 +616,7 @@ class Shell
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    function verbose($message, int $newlines = 1): ?int
+    Nullable!int verbose($message, int $newlines = 1)
     {
         return _io.verbose($message, $newlines);
     }
@@ -628,7 +628,7 @@ class Shell
      * @param int $newlines Number of newlines to append
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    function quiet($message, int $newlines = 1): ?int
+    Nullable!int quiet($message, int $newlines = 1)
     {
         return _io.quiet($message, $newlines);
     }
@@ -650,7 +650,7 @@ class Shell
      * @return int|null The number of bytes returned from writing to stdout.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
-    function out($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
+    Nullable!int out($message, int $newlines = 1, int $level = Shell::NORMAL)
     {
         return _io.out($message, $newlines, $level);
     }
@@ -677,7 +677,7 @@ class Shell
      * @return int|null The number of bytes returned from writing to stdout.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
-    function info($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
+    Nullable!int info($message, int $newlines = 1, int $level = Shell::NORMAL)
     {
         return _io.info($message, $newlines, $level);
     }
@@ -704,7 +704,7 @@ class Shell
      * @return int|null The number of bytes returned from writing to stdout.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::out
      */
-    function success($message, int $newlines = 1, int $level = Shell::NORMAL): ?int
+    Nullable!int success($message, int $newlines = 1, int $level = Shell::NORMAL)
     {
         return _io.success($message, $newlines, $level);
     }

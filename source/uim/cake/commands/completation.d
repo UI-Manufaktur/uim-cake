@@ -75,7 +75,7 @@ class CompletionCommand : Command : ICommandCollectionAware
      * @param uim.cake.consoles.ConsoleIo $io The console io
      * @return int
      */
-    Nullable!int execute(Arguments $args, ConsoleIo $io) {
+    Nullable!int execute(Arguments someArguments, ConsoleIo aConsoleIo) {
       myMode = $args.getArgument("mode");
       switch (myMode) {
         case "commands":
