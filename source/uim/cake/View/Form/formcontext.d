@@ -22,9 +22,8 @@ class FormContext : IContext
     /**
      * Validator name.
      *
-     * @var string|null
      */
-    protected $_validator = null;
+    protected Nullable!string _validator = null;
 
     /**
      * Constructor.

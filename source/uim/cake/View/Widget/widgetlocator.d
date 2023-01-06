@@ -62,7 +62,7 @@ class WidgetLocator
     /**
      * Load a config file containing widgets.
      *
-     * Widget files should define a `$config` variable containing
+     * Widget files should define a `aConfig` variable containing
      * all the widgets to load. Loaded widgets will be merged with existing
      * widgets.
      *
@@ -158,29 +158,29 @@ class WidgetLocator
     /**
      * Resolves a widget spec into an instance.
      *
-     * @param mixed $config The widget config.
+     * @param mixed aConfig The widget config.
      * @return uim.cake.View\Widget\WidgetInterface Widget instance.
      * @throws \ReflectionException
      */
-    protected function _resolveWidget($config): WidgetInterface
+    protected function _resolveWidget(aConfig): WidgetInterface
     {
-        if (is_string($config)) {
-            $config = [$config];
+        if (is_string(aConfig)) {
+            aConfig = [aConfig];
         }
 
-        if (!is_array($config)) {
+        if (!is_array(aConfig)) {
             throw new RuntimeException("Widget config must be a string or array.");
         }
 
-        $class = array_shift($config);
+        $class = array_shift(aConfig);
         $className = App::className($class, "View/Widget", "Widget");
         if ($className == null) {
             throw new RuntimeException(sprintf("Unable to locate widget class "%s"", $class));
         }
-        if (count($config)) {
+        if (count(aConfig)) {
             $reflection = new ReflectionClass($className);
             $arguments = [_templates];
-            foreach ($config as $requirement) {
+            foreach (aConfig as $requirement) {
                 if ($requirement == "_view") {
                     $arguments[] = _view;
                 } else {

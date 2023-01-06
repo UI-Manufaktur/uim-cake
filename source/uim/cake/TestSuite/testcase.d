@@ -367,11 +367,11 @@ abstract class TestCase : BaseTestCase
             [""]
         );
 
-        foreach ($plugins as $pluginName: $config) {
-            if (is_array($config)) {
-                $app.addPlugin($pluginName, $config);
+        foreach ($plugins as $pluginName: aConfig) {
+            if (is_array(aConfig)) {
+                $app.addPlugin($pluginName, aConfig);
             } else {
-                $app.addPlugin($config);
+                $app.addPlugin(aConfig);
             }
         }
         $app.pluginBootstrap();

@@ -123,16 +123,16 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      *
      * @param string $class The class to create.
      * @param string $alias The alias of the loaded helper.
-     * @param array<string, mixed> $config An array of settings to use for the helper.
+     * @param array<string, mixed> aConfig An array of settings to use for the helper.
      * @return uim.cake.View\Helper The constructed helper class.
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    protected function _create($class, string $alias, array $config): Helper
+    protected function _create($class, string $alias, Json aConfig): Helper
     {
         /** @var uim.cake.View\Helper $instance */
-        $instance = new $class(_View, $config);
+        $instance = new $class(_View, aConfig);
 
-        $enable = $config["enabled"] ?? true;
+        $enable = aConfig["enabled"] ?? true;
         if ($enable) {
             this.getEventManager().on($instance);
         }

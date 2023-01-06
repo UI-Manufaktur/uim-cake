@@ -23,37 +23,32 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * The subdirectory to the template.
      *
-     * @var string|null
      */
-    protected $_templatePath;
+    protected Nullable!string _templatePath;
 
     /**
      * The template file to render.
      *
-     * @var string|null
      */
-    protected $_template;
+    protected Nullable!string _template;
 
     /**
      * The plugin name to use.
      *
-     * @var string|null
      */
-    protected $_plugin;
+    protected Nullable!string _plugin;
 
     /**
      * The theme name to use.
      *
-     * @var string|null
      */
-    protected $_theme;
+    protected Nullable!string _theme;
 
     /**
      * The layout name to render.
      *
-     * @var string|null
      */
-    protected $_layout;
+    protected Nullable!string _layout;
 
     /**
      * Whether autoLayout should be enabled.
@@ -63,16 +58,14 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * The layout path to build the view with.
      *
-     * @var string|null
      */
-    protected $_layoutPath;
+    protected Nullable!string _layoutPath;
 
     /**
      * The view variables to use
      *
-     * @var string|null
      */
-    protected $_name;
+    protected Nullable!string _name;
 
     /**
      * The view class name to use.
@@ -295,12 +288,12 @@ class ViewBuilder : JsonSerializable, Serializable
      * @since 4.3.0
      */
     function addHelpers(array $helpers) {
-        foreach ($helpers as $helper: $config) {
+        foreach ($helpers as $helper: aConfig) {
             if (is_int($helper)) {
-                $helper = $config;
-                $config = [];
+                $helper = aConfig;
+                aConfig = [];
             }
-            this.addHelper($helper, $config);
+            this.addHelper($helper, aConfig);
         }
 
         return this;
@@ -614,11 +607,11 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Configures a view builder instance from serialized config.
      *
-     * @param array<string, mixed> $config View builder configuration array.
+     * @param array<string, mixed> aConfig View builder configuration array.
      * @return this
      */
-    function createFromArray(array $config) {
-        foreach ($config as $property: $value) {
+    function createFromArray(Json aConfig) {
+        foreach (aConfig as $property: $value) {
             this.{$property} = $value;
         }
 

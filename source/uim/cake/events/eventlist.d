@@ -1,26 +1,14 @@
-
-
-
- *
-
-
- * @since         3.3.0
-  */module uim.cake.Event;
+module uim.cake.Event;
 
 use ArrayAccess;
 use Countable;
 
-/**
- * The Event List
+// The Event List
  */
 class EventList : ArrayAccess, Countable
 {
-    /**
-     * Events list
-     *
-     * @var array<uim.cake.events.IEvent>
-     */
-    protected $_events = [];
+    // Events list
+    protected IEvent[] _events;
 
     /**
      * Empties the list of dispatched events.
@@ -32,10 +20,10 @@ class EventList : ArrayAccess, Countable
     /**
      * Adds an event to the list when event listing is enabled.
      *
-     * @param uim.cake.events.IEvent $event An event to the list of dispatched events.
+     * @param uim.cake.events.IEvent myEvent An event to the list of dispatched events.
      */
-    void add(IEvent $event) {
-        _events[] = $event;
+    void add(IEvent myEvent) {
+        _events[] = myEvent;
     }
 
     /**
@@ -70,10 +58,10 @@ class EventList : ArrayAccess, Countable
      *
      * @link https://secure.php.net/manual/en/arrayaccess.offsetset.php
      * @param mixed $offset The offset to assign the value to.
-     * @param mixed $value The value to set.
+     * @param mixed myValue The value to set.
      */
-    void offsetSet($offset, $value) {
-        _events[$offset] = $value;
+    void offsetSet($offset, myValue) {
+        _events[$offset] = myValue;
     }
 
     /**
@@ -92,19 +80,18 @@ class EventList : ArrayAccess, Countable
      * @link https://secure.php.net/manual/en/countable.count.php
      * @return int The custom count as an integer.
      */
-    size_t count()
-    {
+    size_t count() {
         return count(_events);
     }
 
     /**
      * Checks if an event is in the list.
      *
-     * @param string aName Event name.
+     * @param string myName Event name.
      */
-    bool hasEvent(string aName) {
-        foreach (_events as $event) {
-            if ($event.getName() == $name) {
+    bool hasEvent(string myName) {
+        foreach (_events as myEvent) {
+            if (myEvent.getName() == myName) {
                 return true;
             }
         }

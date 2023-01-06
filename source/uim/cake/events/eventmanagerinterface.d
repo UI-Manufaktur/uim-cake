@@ -1,9 +1,4 @@
-
-
-
- * @since         3.6.0
-
- */module uim.cake.Event;
+module uim.cake.Event;
 
 /**
  * Interface IEventManager
@@ -18,27 +13,27 @@ interface IEventManager
      * Binding an IEventListener:
      *
      * ```
-     * $eventManager.on($listener);
+     * myEventManager.on($listener);
      * ```
      *
      * Binding with no options:
      *
      * ```
-     * $eventManager.on("Model.beforeSave", $callable);
+     * myEventManager.on("Model.beforeSave", $callable);
      * ```
      *
      * Binding with options:
      *
      * ```
-     * $eventManager.on("Model.beforeSave", ["priority": 90], $callable);
+     * myEventManager.on("Model.beforeSave", ["priority":90], $callable);
      * ```
      *
-     * @param uim.cake.events.IEventListener|string $eventKey The event unique identifier name
-     * with which the callback will be associated. If $eventKey is an instance of
+     * @param uim.cake.events.IEventListener|string myEventKey The event unique identifier name
+     * with which the callback will be associated. If myEventKey is an instance of
      * Cake\events.IEventListener its events will be bound using the `implementedEvents()` methods.
      *
-     * @param callable|array $options Either an array of options or the callable you wish to
-     * bind to $eventKey. If an array of options, the `priority` key can be used to define the order.
+     * @param callable|array myOptions Either an array of options or the callable you wish to
+     * bind to myEventKey. If an array of options, the `priority` key can be used to define the order.
      * Priorities are treated as queues. Lower values are called before higher ones, and multiple attachments
      * added to the same priority queue will be treated in the order of insertion.
      *
@@ -47,7 +42,7 @@ interface IEventManager
      * @throws \InvalidArgumentException When event key is missing or callable is not an
      *   instance of Cake\events.IEventListener.
      */
-    function on($eventKey, $options = [], ?callable $callable = null);
+    function on(myEventKey, myOptions = [], ?callable $callable = null);
 
     /**
      * Remove a listener from the active listeners.
@@ -76,26 +71,27 @@ interface IEventManager
      * $manager.off($callback);
      * ```
      *
-     * @param uim.cake.events.IEventListener|callable|string $eventKey The event unique identifier name
+     * @param uim.cake.events.IEventListener|callable|string myEventKey The event unique identifier name
      *   with which the callback has been associated, or the $listener you want to remove.
      * @param uim.cake.events.IEventListener|callable|null $callable The callback you want to detach.
      * @return this
      */
-    function off($eventKey, $callable = null);
+    function off(myEventKey, $callable = null);
 
     /**
      * Dispatches a new event to all configured listeners
      *
-     * @param uim.cake.events.IEvent|string $event The event key name or instance of IEvent.
+     * @param uim.cake.events.IEvent|string myEvent The event key name or instance of IEvent.
      * @return uim.cake.events.IEvent
-     * @triggers $event
+     * @triggers myEvent
      */
-    function dispatch($event): IEvent;
+    IEvent dispatch(myEvent);
 
     /**
      * Returns a list of all listeners for an eventKey in the order they should be called
      *
-     * @param string $eventKey Event key.
+     * @param string myEventKey Event key.
+     * @return array
      */
-    array listeners(string $eventKey);
+    array listeners(string myEventKey);
 }

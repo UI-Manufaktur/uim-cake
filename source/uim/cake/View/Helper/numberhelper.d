@@ -48,21 +48,21 @@ class NumberHelper : Helper
      *            The class needs to be placed in the `Utility` directory.
      *
      * @param uim.cake.View\View $view The View this helper is being attached to.
-     * @param array<string, mixed> $config Configuration settings for the helper
+     * @param array<string, mixed> aConfig Configuration settings for the helper
      * @throws uim.cake.Core\exceptions.CakeException When the engine class could not be found.
      */
-    this(View $view, array $config = []) {
-        super(($view, $config);
+    this(View $view, Json aConfig = []) {
+        super(($view, aConfig);
 
-        $config = _config;
+        aConfig = _config;
 
         /** @psalm-var class-string<uim.cake.I18n\Number>|null $engineClass */
-        $engineClass = App::className($config["engine"], "Utility");
+        $engineClass = App::className(aConfig["engine"], "Utility");
         if ($engineClass == null) {
-            throw new CakeException(sprintf("Class for %s could not be found", $config["engine"]));
+            throw new CakeException(sprintf("Class for %s could not be found", aConfig["engine"]));
         }
 
-        _engine = new $engineClass($config);
+        _engine = new $engineClass(aConfig);
     }
 
     /**

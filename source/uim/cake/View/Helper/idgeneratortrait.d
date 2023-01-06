@@ -11,9 +11,8 @@ trait IdGeneratorTrait
     /**
      * Prefix for id attribute.
      *
-     * @var string|null
      */
-    protected $_idPrefix;
+    protected Nullable!string _idPrefix;
 
     /**
      * A list of id suffixes used in the current rendering.

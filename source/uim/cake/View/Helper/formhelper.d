@@ -243,29 +243,29 @@ class FormHelper : Helper
      * Construct the widgets and binds the default context providers
      *
      * @param uim.cake.View\View $view The View this helper is being attached to.
-     * @param array<string, mixed> $config Configuration settings for the helper.
+     * @param array<string, mixed> aConfig Configuration settings for the helper.
      */
-    this(View $view, array $config = []) {
+    this(View $view, Json aConfig = []) {
         $locator = null;
         $widgets = _defaultWidgets;
-        if (isset($config["locator"])) {
-            $locator = $config["locator"];
-            unset($config["locator"]);
+        if (isset(aConfig["locator"])) {
+            $locator = aConfig["locator"];
+            unset(aConfig["locator"]);
         }
-        if (isset($config["widgets"])) {
-            if (is_string($config["widgets"])) {
-                $config["widgets"] = (array)$config["widgets"];
+        if (isset(aConfig["widgets"])) {
+            if (is_string(aConfig["widgets"])) {
+                aConfig["widgets"] = (array)aConfig["widgets"];
             }
-            $widgets = $config["widgets"] + $widgets;
-            unset($config["widgets"]);
+            $widgets = aConfig["widgets"] + $widgets;
+            unset(aConfig["widgets"]);
         }
 
-        if (isset($config["groupedInputTypes"])) {
-            _groupedInputTypes = $config["groupedInputTypes"];
-            unset($config["groupedInputTypes"]);
+        if (isset(aConfig["groupedInputTypes"])) {
+            _groupedInputTypes = aConfig["groupedInputTypes"];
+            unset(aConfig["groupedInputTypes"]);
         }
 
-        super(($view, $config);
+        super(($view, aConfig);
 
         if (!$locator) {
             $locator = new WidgetLocator(this.templater(), _View, $widgets);

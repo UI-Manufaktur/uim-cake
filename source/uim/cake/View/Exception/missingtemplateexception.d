@@ -9,9 +9,8 @@ use Throwable;
 class MissingTemplateException : CakeException
 {
     /**
-     * @var string|null
      */
-    protected $templateName;
+    protected Nullable!string templateName;
 
     /**
      */

@@ -75,18 +75,17 @@ class PaginatorHelper : Helper
     /**
      * Default model of the paged sets
      *
-     * @var string|null
      */
-    protected $_defaultModel;
+    protected Nullable!string _defaultModel;
 
     /**
      * Constructor. Overridden to merge passed args with URL options.
      *
      * @param uim.cake.View\View $view The View this helper is being attached to.
-     * @param array<string, mixed> $config Configuration settings for the helper.
+     * @param array<string, mixed> aConfig Configuration settings for the helper.
      */
-    this(View $view, array $config = []) {
-        super(($view, $config);
+    this(View $view, Json aConfig = []) {
+        super(($view, aConfig);
 
         $query = _View.getRequest().getQueryParams();
         unset($query["page"], $query["limit"], $query["sort"], $query["direction"]);

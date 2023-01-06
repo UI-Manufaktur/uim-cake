@@ -10,9 +10,8 @@ class MailContains : MailConstraintBase
     /**
      * Mail type to check contents of
      *
-     * @var string|null
      */
-    protected $type;
+    protected Nullable!string type;
 
     /**
      * Checks constraint

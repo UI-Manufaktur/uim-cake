@@ -71,9 +71,8 @@ class View : IEventDispatcher
     /**
      * The name of the plugin.
      *
-     * @var string|null
      */
-    protected $plugin;
+    protected Nullable!string plugin;
 
     /**
      * Name of the controller that created the View if any.
@@ -137,9 +136,8 @@ class View : IEventDispatcher
     /**
      * The view theme to use.
      *
-     * @var string|null
      */
-    protected $theme;
+    protected Nullable!string theme;
 
     /**
      * An instance of a uim.cake.Http\ServerRequest object that contains information about the current request.
@@ -1130,16 +1128,16 @@ class View : IEventDispatcher
      * Loads a helper. Delegates to the `HelperRegistry::load()` to load the helper
      *
      * @param string aName Name of the helper to load.
-     * @param array<string, mixed> $config Settings for the helper
+     * @param array<string, mixed> aConfig Settings for the helper
      * @return uim.cake.View\Helper a constructed helper object.
      * @see uim.cake.View\HelperRegistry::load()
      */
-    function loadHelper(string aName, array $config = []): Helper
+    function loadHelper(string aName, Json aConfig = []): Helper
     {
         [, $class] = pluginSplit($name);
         $helpers = this.helpers();
 
-        return this.{$class} = $helpers.load($name, $config);
+        return this.{$class} = $helpers.load($name, aConfig);
     }
 
     /**
@@ -1547,16 +1545,16 @@ class View : IEventDispatcher
             array_keys($options),
             array_keys($data)
         );
-        $config = [
+        aConfig = [
             "config": this.elementCache,
             "key": implode("_", $keys),
         ];
         if (is_array($cache)) {
-            $config = $cache + $config;
+            aConfig = $cache + aConfig;
         }
-        $config["key"] = "element_" ~ $config["key"];
+        aConfig["key"] = "element_" ~ aConfig["key"];
 
-        return $config;
+        return aConfig;
     }
 
     /**

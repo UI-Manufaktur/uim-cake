@@ -31,10 +31,10 @@ class UrlHelper : Helper
     /**
      * Check proper configuration
      *
-     * @param array<string, mixed> $config The configuration settings provided to this helper.
+     * @param array<string, mixed> aConfig The configuration settings provided to this helper.
      */
-    void initialize(array $config) {
-        super.initialize($config);
+    void initialize(Json aConfig) {
+        super.initialize(aConfig);
         $engineClassConfig = this.getConfig("assetUrlClassName");
 
         /** @psalm-var class-string<uim.cake.routings.Asset>|null $engineClass */

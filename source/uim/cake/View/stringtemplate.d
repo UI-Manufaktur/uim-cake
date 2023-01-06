@@ -92,10 +92,10 @@ class StringTemplate
     /**
      * Constructor.
      *
-     * @param array<string, mixed> $config A set of templates to add.
+     * @param array<string, mixed> aConfig A set of templates to add.
      */
-    this(array $config = []) {
-        this.add($config);
+    this(Json aConfig = []) {
+        this.add(aConfig);
     }
 
     /**
@@ -167,7 +167,7 @@ class StringTemplate
     /**
      * Load a config file containing templates.
      *
-     * Template files should define a `$config` variable containing
+     * Template files should define a `aConfig` variable containing
      * all the templates to load. Loaded templates will be merged with existing
      * templates.
      *

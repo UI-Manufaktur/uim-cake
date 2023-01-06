@@ -37,10 +37,10 @@ class TestEmailTransport : DebugTransport
         $configuredTransports = TransportFactory::configured();
 
         foreach ($configuredTransports as $configuredTransport) {
-            $config = TransportFactory::getConfig($configuredTransport);
-            $config["className"] = self::class;
+            aConfig = TransportFactory::getConfig($configuredTransport);
+            aConfig["className"] = self::class;
             TransportFactory::drop($configuredTransport);
-            TransportFactory::setConfig($configuredTransport, $config);
+            TransportFactory::setConfig($configuredTransport, aConfig);
         }
     }
 

@@ -65,21 +65,21 @@ class TextHelper : Helper
      *            The class needs to be placed in the `Utility` directory.
      *
      * @param uim.cake.View\View $view the view object the helper is attached to.
-     * @param array<string, mixed> $config Settings array Settings array
+     * @param array<string, mixed> aConfig Settings array Settings array
      * @throws uim.cake.Core\exceptions.CakeException when the engine class could not be found.
      */
-    this(View $view, array $config = []) {
-        super(($view, $config);
+    this(View $view, Json aConfig = []) {
+        super(($view, aConfig);
 
-        $config = _config;
+        aConfig = _config;
 
         /** @psalm-var class-string<uim.cake.Utility\Text>|null $engineClass */
-        $engineClass = App::className($config["engine"], "Utility");
+        $engineClass = App::className(aConfig["engine"], "Utility");
         if ($engineClass == null) {
-            throw new CakeException(sprintf("Class for %s could not be found", $config["engine"]));
+            throw new CakeException(sprintf("Class for %s could not be found", aConfig["engine"]));
         }
 
-        _engine = new $engineClass($config);
+        _engine = new $engineClass(aConfig);
     }
 
     /**

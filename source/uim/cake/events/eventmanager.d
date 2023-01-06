@@ -1,13 +1,4 @@
-
-
-
- *
-
-
- * @since         2.1.0
-  */module uim.cake.Event;
-
-import uim.cake.core.exceptions.CakeException;
+module uim.cake.Event;
 
 /**
  * The event manager is responsible for keeping track of event listeners, passing the correct
@@ -36,24 +27,28 @@ class EventManager : IEventManager
      *
      * @var array
      */
-    protected $_listeners = [];
+    protected _listeners = [];
 
     /**
      * Internal flag to distinguish a common manager from the singleton
+     *
+     * @var bool
      */
-    protected bool $_isGlobal = false;
+    protected _isGlobal = false;
 
     /**
      * The event list object.
      *
      * @var uim.cake.events.EventList|null
      */
-    protected $_eventList;
+    protected _eventList;
 
     /**
      * Enables automatic adding of events to the event list object if it is present.
+     *
+     * @var bool
      */
-    protected bool $_trackEvents = false;
+    protected _trackEvents = false;
 
     /**
      * Returns the globally available instance of a Cake\events.EventManager
@@ -80,25 +75,25 @@ class EventManager : IEventManager
     }
 
 
-    function on($eventKey, $options = [], ?callable $callable = null) {
-        if ($eventKey instanceof IEventListener) {
-            _attachSubscriber($eventKey);
+    function on(myEventKey, myOptions = [], ?callable $callable = null) {
+        if (myEventKey instanceof IEventListener) {
+            _attachSubscriber(myEventKey);
 
             return this;
         }
 
         $argCount = func_num_args();
         if ($argCount == 2) {
-            _listeners[$eventKey][static::$defaultPriority][] = [
-                "callable": $options,
+            _listeners[myEventKey][static::$defaultPriority][] = [
+                "callable":myOptions,
             ];
 
             return this;
         }
 
-        $priority = $options["priority"] ?? static::$defaultPriority;
-        _listeners[$eventKey][$priority][] = [
-            "callable": $callable,
+        $priority = myOptions["priority"] ?? static::$defaultPriority;
+        _listeners[myEventKey][$priority][] = [
+            "callable":$callable,
         ];
 
         return this;
@@ -111,22 +106,22 @@ class EventManager : IEventManager
      * @param uim.cake.events.IEventListener $subscriber Event listener.
      */
     protected void _attachSubscriber(IEventListener $subscriber) {
-        foreach ($subscriber.implementedEvents() as $eventKey: $function) {
-            $options = [];
+        foreach ($subscriber.implementedEvents() as myEventKey: $function) {
+            myOptions = [];
             $method = $function;
             if (is_array($function) && isset($function["callable"])) {
-                [$method, $options] = _extractCallable($function, $subscriber);
+                [$method, myOptions] = _extractCallable($function, $subscriber);
             } elseif (is_array($function) && is_numeric(key($function))) {
                 foreach ($function as $f) {
-                    [$method, $options] = _extractCallable($f, $subscriber);
-                    this.on($eventKey, $options, $method);
+                    [$method, myOptions] = _extractCallable($f, $subscriber);
+                    this.on(myEventKey, myOptions, $method);
                 }
                 continue;
             }
             if (is_string($method)) {
                 $method = [$subscriber, $function];
             }
-            this.on($eventKey, $options, $method);
+            this.on(myEventKey, myOptions, $method);
         }
     }
 
@@ -136,63 +131,64 @@ class EventManager : IEventManager
      *
      * @param array $function the array taken from a handler definition for an event
      * @param uim.cake.events.IEventListener $object The handler object
+     * @return array
      */
     protected array _extractCallable(array $function, IEventListener $object) {
         /** @var callable $method */
         $method = $function["callable"];
-        $options = $function;
-        unset($options["callable"]);
+        myOptions = $function;
+        unset(myOptions["callable"]);
         if (is_string($method)) {
             /** @var callable $method */
             $method = [$object, $method];
         }
 
-        return [$method, $options];
+        return [$method, myOptions];
     }
 
 
-    function off($eventKey, $callable = null) {
-        if ($eventKey instanceof IEventListener) {
-            _detachSubscriber($eventKey);
+    function off(myEventKey, $callable = null) {
+        if (myEventKey instanceof IEventListener) {
+            _detachSubscriber(myEventKey);
 
             return this;
         }
 
-        if (!is_string($eventKey)) {
-            if (!is_callable($eventKey)) {
+        if (!is_string(myEventKey)) {
+            if (!is_callable(myEventKey)) {
                 throw new CakeException(
                     "First argument of EventManager::off() must be " ~
                     " string or IEventListener instance or callable."
                 );
             }
 
-            foreach (array_keys(_listeners) as $name) {
-                this.off($name, $eventKey);
+            foreach (array_keys(_listeners) as myName) {
+                this.off(myName, myEventKey);
             }
 
             return this;
         }
 
         if ($callable instanceof IEventListener) {
-            _detachSubscriber($callable, $eventKey);
+            _detachSubscriber($callable, myEventKey);
 
             return this;
         }
 
-        if ($callable == null) {
-            unset(_listeners[$eventKey]);
+        if ($callable is null) {
+            unset(_listeners[myEventKey]);
 
             return this;
         }
 
-        if (empty(_listeners[$eventKey])) {
+        if (empty(_listeners[myEventKey])) {
             return this;
         }
 
-        foreach (_listeners[$eventKey] as $priority: $callables) {
+        foreach (_listeners[myEventKey] as $priority: $callables) {
             foreach ($callables as $k: $callback) {
                 if ($callback["callable"] == $callable) {
-                    unset(_listeners[$eventKey][$priority][$k]);
+                    unset(_listeners[myEventKey][$priority][$k]);
                     break;
                 }
             }
@@ -205,135 +201,136 @@ class EventManager : IEventManager
      * Auxiliary function to help detach all listeners provided by an object implementing IEventListener
      *
      * @param uim.cake.events.IEventListener $subscriber the subscriber to be detached
-     * @param string|null $eventKey optional event key name to unsubscribe the listener from
+     * @param string|null myEventKey optional event key name to unsubscribe the listener from
      */
-    protected void _detachSubscriber(IEventListener $subscriber, ?string $eventKey = null) {
-        $events = $subscriber.implementedEvents();
-        if (!empty($eventKey) && empty($events[$eventKey])) {
+    protected void _detachSubscriber(IEventListener $subscriber, Nullable!string myEventKey = null) {
+        myEvents = $subscriber.implementedEvents();
+        if (!empty(myEventKey) && empty(myEvents[myEventKey])) {
             return;
         }
-        if (!empty($eventKey)) {
-            $events = [$eventKey: $events[$eventKey]];
+        if (!empty(myEventKey)) {
+            myEvents = [myEventKey: myEvents[myEventKey]];
         }
-        foreach ($events as $key: $function) {
+        foreach (myEvents as myKey: $function) {
             if (is_array($function)) {
                 if (is_numeric(key($function))) {
                     foreach ($function as $handler) {
                         $handler = $handler["callable"] ?? $handler;
-                        this.off($key, [$subscriber, $handler]);
+                        this.off(myKey, [$subscriber, $handler]);
                     }
                     continue;
                 }
                 $function = $function["callable"];
             }
-            this.off($key, [$subscriber, $function]);
+            this.off(myKey, [$subscriber, $function]);
         }
     }
 
 
-    function dispatch($event): IEvent
+    function dispatch(myEvent): IEvent
     {
-        if (is_string($event)) {
-            $event = new Event($event);
+        if (is_string(myEvent)) {
+            myEvent = new Event(myEvent);
         }
 
-        $listeners = this.listeners($event.getName());
+        $listeners = this.listeners(myEvent.getName());
 
         if (_trackEvents) {
-            this.addEventToList($event);
+            this.addEventToList(myEvent);
         }
 
         if (!_isGlobal && static::instance().isTrackingEvents()) {
-            static::instance().addEventToList($event);
+            static::instance().addEventToList(myEvent);
         }
 
         if (empty($listeners)) {
-            return $event;
+            return myEvent;
         }
 
         foreach ($listeners as $listener) {
-            if ($event.isStopped()) {
+            if (myEvent.isStopped()) {
                 break;
             }
-            $result = _callListener($listener["callable"], $event);
-            if ($result == false) {
-                $event.stopPropagation();
+            myResult = _callListener($listener["callable"], myEvent);
+            if (myResult == false) {
+                myEvent.stopPropagation();
             }
-            if ($result != null) {
-                $event.setResult($result);
+            if (myResult  !is null) {
+                myEvent.setResult(myResult);
             }
         }
 
-        return $event;
+        return myEvent;
     }
 
     /**
      * Calls a listener.
      *
      * @param callable $listener The listener to trigger.
-     * @param uim.cake.events.IEvent $event Event instance.
+     * @param uim.cake.events.IEvent myEvent Event instance.
      * @return mixed The result of the $listener function.
      */
-    protected function _callListener(callable $listener, IEvent $event) {
-        $data = (array)$event.getData();
+    protected auto _callListener(callable $listener, IEvent myEvent) {
+        myData = (array)myEvent.getData();
 
-        return $listener($event, ...array_values($data));
+        return $listener(myEvent, ...array_values(myData));
     }
 
 
-    array listeners(string $eventKey) {
+    array listeners(string myEventKey) {
         $localListeners = [];
         if (!_isGlobal) {
-            $localListeners = this.prioritisedListeners($eventKey);
+            $localListeners = this.prioritisedListeners(myEventKey);
             $localListeners = empty($localListeners) ? [] : $localListeners;
         }
-        $globalListeners = static::instance().prioritisedListeners($eventKey);
+        $globalListeners = static::instance().prioritisedListeners(myEventKey);
         $globalListeners = empty($globalListeners) ? [] : $globalListeners;
 
         $priorities = array_merge(array_keys($globalListeners), array_keys($localListeners));
         $priorities = array_unique($priorities);
         asort($priorities);
 
-        $result = [];
+        myResult = [];
         foreach ($priorities as $priority) {
             if (isset($globalListeners[$priority])) {
-                $result = array_merge($result, $globalListeners[$priority]);
+                myResult = array_merge(myResult, $globalListeners[$priority]);
             }
             if (isset($localListeners[$priority])) {
-                $result = array_merge($result, $localListeners[$priority]);
+                myResult = array_merge(myResult, $localListeners[$priority]);
             }
         }
 
-        return $result;
+        return myResult;
     }
 
     /**
      * Returns the listeners for the specified event key indexed by priority
      *
-     * @param string $eventKey Event key.
+     * @param string myEventKey Event key.
      */
-    array prioritisedListeners(string $eventKey) {
-        if (empty(_listeners[$eventKey])) {
+    array prioritisedListeners(string myEventKey) {
+        if (empty(_listeners[myEventKey])) {
             return [];
         }
 
-        return _listeners[$eventKey];
+        return _listeners[myEventKey];
     }
 
     /**
      * Returns the listeners matching a specified pattern
      *
-     * @param string $eventKeyPattern Pattern to match.
+     * @param string myEventKeyPattern Pattern to match.
      */
-    array matchingListeners(string $eventKeyPattern) {
-        $matchPattern = "/" ~ preg_quote($eventKeyPattern, "/") ~ "/";
-
-        return array_intersect_key(
+    array matchingListeners(string myEventKeyPattern) {
+        $matchPattern = "/" ~ preg_quote(myEventKeyPattern, "/") ~ "/";
+        $matches = array_intersect_key(
             _listeners,
             array_flip(
                 preg_grep($matchPattern, array_keys(_listeners), 0)
             )
         );
+
+        return $matches;
     }
 
     /**
@@ -341,7 +338,7 @@ class EventManager : IEventManager
      *
      * @return uim.cake.events.EventList|null
      */
-    function getEventList(): ?EventList
+    auto getEventList(): ?EventList
     {
         return _eventList;
     }
@@ -349,12 +346,12 @@ class EventManager : IEventManager
     /**
      * Adds an event to the list if the event list object is present.
      *
-     * @param uim.cake.events.IEvent $event An event to add to the list.
+     * @param uim.cake.events.IEvent myEvent An event to add to the list.
      * @return this
      */
-    function addEventToList(IEvent $event) {
+    function addEventToList(IEvent myEvent) {
         if (_eventList) {
-            _eventList.add($event);
+            _eventList.add(myEvent);
         }
 
         return this;
@@ -363,11 +360,11 @@ class EventManager : IEventManager
     /**
      * Enables / disables event tracking at runtime.
      *
-     * @param bool $enabled True or false to enable / disable it.
+     * @param bool myEnabled True or false to enable / disable it.
      * @return this
      */
-    function trackEvents(bool $enabled) {
-        _trackEvents = $enabled;
+    function trackEvents(bool myEnabled) {
+        _trackEvents = myEnabled;
 
         return this;
     }
@@ -382,11 +379,11 @@ class EventManager : IEventManager
     /**
      * Enables the listing of dispatched events.
      *
-     * @param uim.cake.events.EventList $eventList The event list object to use.
+     * @param uim.cake.events.EventList myEventList The event list object to use.
      * @return this
      */
-    function setEventList(EventList $eventList) {
-        _eventList = $eventList;
+    auto setEventList(EventList myEventList) {
+        _eventList = myEventList;
         _trackEvents = true;
 
         return this;
@@ -413,22 +410,22 @@ class EventManager : IEventManager
         $properties = get_object_vars(this);
         $properties["_generalManager"] = "(object) EventManager";
         $properties["_listeners"] = [];
-        foreach (_listeners as $key: $priorities) {
+        foreach (myKey, $priorities; _listeners) {
             $listenerCount = 0;
             foreach ($priorities as $listeners) {
                 $listenerCount += count($listeners);
             }
-            $properties["_listeners"][$key] = $listenerCount ~ " listener(s)";
+            $properties["_listeners"][myKey] = $listenerCount ~ " listener(s)";
         }
         if (_eventList) {
-            $count = count(_eventList);
-            for ($i = 0; $i < $count; $i++) {
-                $event = _eventList[$i];
+            myCount = count(_eventList);
+            for ($i = 0; $i < myCount; $i++) {
+                myEvent = _eventList[$i];
                 try {
-                    $subject = $event.getSubject();
-                    $properties["_dispatchedEvents"][] = $event.getName() ~ " with subject " ~ get_class($subject);
+                    $subject = myEvent.getSubject();
+                    $properties["_dispatchedEvents"][] = myEvent.getName() ~ " with subject " ~ get_class($subject);
                 } catch (CakeException $e) {
-                    $properties["_dispatchedEvents"][] = $event.getName() ~ " with no subject";
+                    $properties["_dispatchedEvents"][] = myEvent.getName() ~ " with no subject";
                 }
             }
         } else {

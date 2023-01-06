@@ -61,17 +61,17 @@ class Helper : IEventListener
      * Default Constructor
      *
      * @param uim.cake.View\View $view The View this helper is being attached to.
-     * @param array<string, mixed> $config Configuration settings for the helper.
+     * @param array<string, mixed> aConfig Configuration settings for the helper.
      */
-    this(View $view, array $config = []) {
+    this(View $view, Json aConfig = []) {
         _View = $view;
-        this.setConfig($config);
+        this.setConfig(aConfig);
 
         if (!empty(this.helpers)) {
             _helperMap = $view.helpers().normalizeArray(this.helpers);
         }
 
-        this.initialize($config);
+        this.initialize(aConfig);
     }
 
     /**
@@ -93,8 +93,8 @@ class Helper : IEventListener
      */
     function __get(string aName) {
         if (isset(_helperMap[$name]) && !isset(this.{$name})) {
-            $config = ["enabled": false] + (array)_helperMap[$name]["config"];
-            this.{$name} = _View.loadHelper(_helperMap[$name]["class"], $config);
+            aConfig = ["enabled": false] + (array)_helperMap[$name]["config"];
+            this.{$name} = _View.loadHelper(_helperMap[$name]["class"], aConfig);
 
             return this.{$name};
         }
@@ -178,9 +178,9 @@ class Helper : IEventListener
      *
      * Implement this method to avoid having to overwrite the constructor and call parent.
      *
-     * @param array<string, mixed> $config The configuration settings provided to this helper.
+     * @param array<string, mixed> aConfig The configuration settings provided to this helper.
      */
-    void initialize(array $config) {
+    void initialize(Json aConfig) {
     }
 
     /**
