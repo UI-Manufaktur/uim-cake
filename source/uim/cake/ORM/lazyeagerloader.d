@@ -1,9 +1,8 @@
 module uim.cake.ORM;
 
-import uim.cake.collections.Collection;
-import uim.cake.collections.ICollection;
-import uim.cake.databases.expressions.TupleComparison;
-import uim.cake.datasources.IEntity;
+@safe:
+import uim.cake;
+
 
 /**
  * Contains methods that are capable of injecting eagerly loaded associations into

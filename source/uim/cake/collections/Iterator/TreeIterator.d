@@ -64,7 +64,7 @@ class TreeIterator : RecursiveIteratorIterator : ICollection
      *      });
      * ```
      *
-     * @param callable|string $valuePath The property to extract or a callable to return
+     * @param callable|string aValuePath The property to extract or a callable to return
      * the display value
      * @param callable|string|null $keyPath The property to use as iteration key or a
      * callable returning the key value.

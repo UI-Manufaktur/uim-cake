@@ -350,10 +350,10 @@ class RedisEngine : CacheEngine {
     /**
      * Unserialize string value fetched from Redis.
      *
-     * @param string $value Value to unserialize.
+     * @param string aValue Value to unserialize.
      * @return mixed
      */
-    protected function unserialize(string $value) {
+    protected function unserialize(string aValue) {
         if (preg_match("/^[-]?\d+$/", $value)) {
             return (int)$value;
         }

@@ -695,7 +695,7 @@ interface ICollection : Iterator, JsonSerializable
      *
      * @param callable|string aKeyPath the column name path to use for indexing
      * or a function returning the indexing key out of the provided element
-     * @param callable|string $valuePath the column name path to use as the array value
+     * @param callable|string aValuePath the column name path to use as the array value
      * or a function returning the value out of the provided element
      * @param callable|string|null $groupPath the column name path to use as the parent
      * grouping key or a function returning the key out of the provided element

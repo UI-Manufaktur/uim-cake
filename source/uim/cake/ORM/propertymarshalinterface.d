@@ -1,11 +1,7 @@
+module uim.cake.ORM;
 
-
-
- *
-
-
- * @since         3.4.0
-  */module uim.cake.ORM;
+@safe:
+import uim.cake;
 
 /**
  * Behaviors implementing this interface can participate in entity marshalling.

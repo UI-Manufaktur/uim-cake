@@ -1,11 +1,7 @@
+module uim.cake.ORM;
 
-
-
- *
-
-
- * @since         3.3.0
-  */module uim.cake.ORM;
+@safe:
+import uim.cake;
 
 use ArrayObject;
 use RuntimeException;

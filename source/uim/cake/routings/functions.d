@@ -1,13 +1,7 @@
+module uim.cake.routings.functions;
 
-
-
- *
-
-
- * @since         4.1.0
-  */
-
-import uim.cake.routings.Router;
+@safe:
+import uim.cake;
 
 if (!function_exists("urlArray")) {
     /**

@@ -512,9 +512,9 @@ class Response : IResponse
      *
      * @phpstan-param non-empty-string $header
      * @param string $header Header key.
-     * @param string $value Header value.
+     * @param string aValue Header value.
      */
-    protected void _setHeader(string $header, string $value) {
+    protected void _setHeader(string $header, string aValue) {
         $normalized = strtolower($header);
         this.headerNames[$normalized] = $header;
         this.headers[$header] = [$value];

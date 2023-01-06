@@ -134,10 +134,10 @@ class FloatType : BaseType : BatchCastingInterface
      * Converts a string into a float point after parsing it using the locale
      * aware parser.
      *
-     * @param string $value The value to parse and convert to an float.
+     * @param string aValue The value to parse and convert to an float.
      * @return float
      */
-    protected function _parseValue(string $value): float
+    protected function _parseValue(string aValue): float
     {
         $class = static::$numberClass;
 

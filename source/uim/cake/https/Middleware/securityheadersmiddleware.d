@@ -206,10 +206,10 @@ class SecurityHeadersMiddleware : IMiddleware
      * Convenience method to check if a value is in the list of allowed args
      *
      * @throws \InvalidArgumentException Thrown when a value is invalid.
-     * @param string $value Value to check
+     * @param string aValue Value to check
      * @param array<string> $allowed List of allowed values
      */
-    protected void checkValues(string $value, array $allowed) {
+    protected void checkValues(string aValue, array $allowed) {
       if (!in_array($value, $allowed, true)) {
           throw new InvalidArgumentException(sprintf(
               "Invalid arg `%s`, use one of these: %s",

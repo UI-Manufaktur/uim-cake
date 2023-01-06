@@ -465,10 +465,10 @@ class DateTimeType : BaseType : BatchCastingInterface
      * Converts a string into a DateTime object after parsing it using the locale
      * aware parser with the format set by `setLocaleFormat()`.
      *
-     * @param string $value The value to parse and convert to an object.
+     * @param string aValue The value to parse and convert to an object.
      * @return uim.cake.I18n\I18nDateTimeInterface|null
      */
-    protected function _parseLocaleValue(string $value): ?I18nDateTimeInterface
+    protected function _parseLocaleValue(string aValue): ?I18nDateTimeInterface
     {
         /** @psalm-var class-string<uim.cake.I18n\I18nDateTimeInterface> $class */
         $class = _className;
@@ -480,10 +480,10 @@ class DateTimeType : BaseType : BatchCastingInterface
      * Converts a string into a DateTime object after parsing it using the
      * formats in `_marshalFormats`.
      *
-     * @param string $value The value to parse and convert to an object.
+     * @param string aValue The value to parse and convert to an object.
      * @return \DateTimeInterface|null
      */
-    protected function _parseValue(string $value): ?DateTimeInterface
+    protected function _parseValue(string aValue): ?DateTimeInterface
     {
         $class = _className;
 

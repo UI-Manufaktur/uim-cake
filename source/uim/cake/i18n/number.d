@@ -161,11 +161,11 @@ class Number
      * - `type` - The formatter type to construct, set it to `currency` if you need to parse
      *    numbers representing money.
      *
-     * @param string $value A numeric string.
+     * @param string aValue A numeric string.
      * @param array<string, mixed> $options An array with options.
      * @return float point number
      */
-    static function parseFloat(string $value, array $options = []): float
+    static function parseFloat(string aValue, array $options = []): float
     {
         $formatter = static::formatter($options);
 

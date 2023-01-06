@@ -2,20 +2,14 @@
 	Copyright: © 2015-2023 Ozan Nurettin Süel (Sicherheitsschmiede)                                        
 	License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
-**********************************************************************************************************/module uim.cake.routings;
+**********************************************************************************************************/
+module uim.cake.routings;
 
 @safe:
 import uim.cake;
 
-module uim.cake.Routing;
 
 use BadMethodCallException;
-import uim.cake.core.App;
-import uim.cake.core.exceptions.MissingPluginException;
-import uim.cake.core.Plugin;
-import uim.cake.routings.Route\RedirectRoute;
-import uim.cake.routings.Route\Route;
-import uim.cake.utilities.Inflector;
 use InvalidArgumentException;
 use RuntimeException;
 
@@ -224,9 +218,9 @@ class RouteBuilder
      *
      * @param string|null $value Either the value to set or null.
      */
-    string namePrefix(Nullable!string $value = null) {
-        if ($value != null) {
-            _namePrefix = $value;
+    string namePrefix(Nullable!string aValue = null) {
+        if (aValue != null) {
+            _namePrefix = aValue;
         }
 
         return _namePrefix;

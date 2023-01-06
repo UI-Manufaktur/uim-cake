@@ -41,7 +41,7 @@ class TreePrinter : RecursiveIteratorIterator : ICollection
      * Constructor
      *
      * @param \RecursiveIterator $items The iterator to flatten.
-     * @param callable|string $valuePath The property to extract or a callable to return
+     * @param callable|string aValuePath The property to extract or a callable to return
      * the display value.
      * @param callable|string aKeyPath The property to use as iteration key or a
      * callable returning the key value.

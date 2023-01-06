@@ -20,9 +20,9 @@ class SpecialNode : INode
     /**
      * Constructor
      *
-     * @param string $value The message/value to include in dump results.
+     * @param string aValue The message/value to include in dump results.
      */
-    this(string $value) {
+    this(string aValue) {
         this.value = $value;
     }
 

@@ -117,7 +117,7 @@ class Cookie : CookieInterface
      *
      * @link https://php.net/manual/en/function.setcookie.php
      * @param string aName Cookie name
-     * @param array|string $value Value of the cookie
+     * @param array|string aValue Value of the cookie
      * @param \DateTime|\DateTimeImmutable|null $expiresAt Expiration time and date
      * @param string|null $path Path
      * @param string|null $domain Domain
@@ -189,7 +189,7 @@ class Cookie : CookieInterface
      * Factory method to create Cookie instances.
      *
      * @param string aName Cookie name
-     * @param array|string $value Value of the cookie
+     * @param array|string aValue Value of the cookie
      * @param array<string, mixed> $options Cookies options.
      * @return static
      * @see uim.cake.Cookie\Cookie::setDefaults()
@@ -417,7 +417,7 @@ class Cookie : CookieInterface
     /**
      * Setter for the value attribute.
      *
-     * @param array|string $value The value to store.
+     * @param array|string aValue The value to store.
      */
     protected void _setValue($value) {
         this.isExpanded = is_array($value);

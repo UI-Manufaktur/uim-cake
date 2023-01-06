@@ -63,10 +63,10 @@ class FormData : Countable
      * Method for creating new instances of Part
      *
      * @param string aName The name of the part.
-     * @param string $value The value to add.
+     * @param string aValue The value to add.
      * @return uim.cake.http.Client\FormDataPart
      */
-    function newPart(string aName, string $value): FormDataPart
+    function newPart(string aName, string aValue): FormDataPart
     {
         return new FormDataPart($name, $value);
     }

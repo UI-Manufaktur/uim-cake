@@ -436,7 +436,7 @@ class Email : JsonSerializable, Serializable
     /**
      * Converts given value to string
      *
-     * @param array<string>|string $value The value to convert
+     * @param array<string>|string aValue The value to convert
      */
     protected string flatten($value) {
         return is_array($value) ? implode(";", $value) : $value;

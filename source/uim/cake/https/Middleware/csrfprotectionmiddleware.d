@@ -393,11 +393,11 @@ class CsrfProtectionMiddleware : IMiddleware
     /**
      * Create response cookie
      *
-     * @param string $value Cookie value
+     * @param string aValue Cookie value
      * @param \Psr\Http\messages.IServerRequest $request The request object.
      * @return uim.cake.http.Cookie\CookieInterface
      */
-    protected function _createCookie(string $value, IServerRequest $request): CookieInterface
+    protected function _createCookie(string aValue, IServerRequest $request): CookieInterface
     {
         return Cookie::create(
             _config["cookieName"],

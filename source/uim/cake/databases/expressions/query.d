@@ -278,7 +278,7 @@ class QueryExpression : IExpression, Countable
      * "field IN (value1, value2)".
      *
      * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
-     * @param uim.cake.databases.IExpression|array|string $values the value to be bound to $field for comparison
+     * @param uim.cake.databases.IExpression|array|string aValues the value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
@@ -349,7 +349,7 @@ class QueryExpression : IExpression, Countable
      * "field NOT IN (value1, value2)".
      *
      * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
-     * @param uim.cake.databases.IExpression|array|string $values the value to be bound to $field for comparison
+     * @param uim.cake.databases.IExpression|array|string aValues the value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */
@@ -369,7 +369,7 @@ class QueryExpression : IExpression, Countable
      * "(field NOT IN (value1, value2) OR field IS NULL".
      *
      * @param uim.cake.databases.IExpression|string $field Database field to be compared against value
-     * @param uim.cake.databases.IExpression|array|string $values the value to be bound to $field for comparison
+     * @param uim.cake.databases.IExpression|array|string aValues the value to be bound to $field for comparison
      * @param string|null $type the type name for $value as configured using the Type map.
      * @return this
      */

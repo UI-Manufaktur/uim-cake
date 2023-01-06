@@ -74,11 +74,11 @@ class FormDataPart
      * Constructor
      *
      * @param string aName The name of the data.
-     * @param string $value The value of the data.
+     * @param string aValue The value of the data.
      * @param string $disposition The type of disposition to use, defaults to form-data.
      * @param string|null $charset The charset of the data.
      */
-    this(string aName, string $value, string $disposition = "form-data", Nullable!string $charset = null) {
+    this(string aName, string aValue, string $disposition = "form-data", Nullable!string $charset = null) {
         _name = $name;
         _value = $value;
         _disposition = $disposition;
@@ -211,9 +211,9 @@ class FormDataPart
      * the charset encoding will be set.
      *
      * @param string aName The name of the header parameter
-     * @param string $value The value of the header parameter
+     * @param string aValue The value of the header parameter
      */
-    protected string _headerParameterToString(string aName, string $value) {
+    protected string _headerParameterToString(string aName, string aValue) {
         $transliterated = Text::transliterate(str_replace(""", "", $value));
         $return = sprintf("%s="%s"", $name, $transliterated);
         if (_charset != null && $value != $transliterated) {

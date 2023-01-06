@@ -77,7 +77,7 @@ interface CookieInterface
     /**
      * Create a cookie with an updated value.
      *
-     * @param array|string $value Value of the cookie to set
+     * @param array|string aValue Value of the cookie to set
      * @return static
      */
     function withValue($value);

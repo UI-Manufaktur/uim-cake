@@ -1,7 +1,8 @@
 module uim.cake.ORM;
 
-import uim.cake.datasources.FactoryLocator;
-import uim.cake.orm.locators.ILocator;
+@safe:
+import uim.cake;
+
 
 /**
  * Provides a registry/factory for Table objects.

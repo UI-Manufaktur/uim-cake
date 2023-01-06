@@ -117,11 +117,11 @@ class ConsoleInputArgument {
     /**
      * Check that $value is a valid choice for this argument.
      *
-     * @param string $value The choice to validate.
+     * @param string aValue The choice to validate.
      * @return true
      * @throws uim.cake.consoles.exceptions.ConsoleException
      */
-    bool validChoice(string $value) {
+    bool validChoice(string aValue) {
         if (empty(_choices)) {
             return true;
         }

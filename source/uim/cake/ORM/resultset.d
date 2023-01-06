@@ -1,11 +1,8 @@
 module uim.cake.ORM;
 
-import uim.cake.collections.Collection;
-import uim.cake.collections.CollectionTrait;
-import uim.cake.databases.exceptions.DatabaseException;
-import uim.cake.databases.StatementInterface;
-import uim.cake.datasources.IEntity;
-import uim.cake.datasources.IResultSet;
+@safe:
+import uim.cake;
+
 use SplFixedArray;
 
 /**

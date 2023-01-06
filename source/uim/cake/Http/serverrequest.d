@@ -812,7 +812,7 @@ class ServerRequest : IServerRequest
      * Get a modified request with the provided header.
      *
      * @param string aName The header name.
-     * @param array|string $value The header value
+     * @param array|string aValue The header value
      * @return static
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
@@ -831,7 +831,7 @@ class ServerRequest : IServerRequest
      * will be appended into the existing values.
      *
      * @param string aName The header name.
-     * @param array|string $value The header value
+     * @param array|string aValue The header value
      * @return static
      * @link https://www.php-fig.org/psr/psr-7/ This method is part of the PSR-7 server request interface.
      */
@@ -1371,10 +1371,10 @@ class ServerRequest : IServerRequest
      * a *new* request object and does not mutate the request in-place.
      *
      * @param string aKey The key you want to write to.
-     * @param string $value Value to set
+     * @param string aValue Value to set
      * @return static
      */
-    function withEnv(string aKey, string $value) {
+    function withEnv(string aKey, string aValue) {
         $new = clone this;
         $new._environment[$key] = $value;
         $new.clearDetectorCache();

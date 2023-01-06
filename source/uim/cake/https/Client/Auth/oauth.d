@@ -349,9 +349,9 @@ class Oauth
     /**
      * URL Encodes a value based on rules of rfc3986
      *
-     * @param string $value Value to encode.
+     * @param string aValue Value to encode.
      */
-    protected string _encode(string $value) {
+    protected string _encode(string aValue) {
         return str_replace(["%7E", "+"], ["~", " "], rawurlencode($value));
     }
 

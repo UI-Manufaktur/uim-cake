@@ -155,9 +155,9 @@ class DecimalType : BaseType : BatchCastingInterface
      * Converts localized string into a decimal string after parsing it using
      * the locale aware parser.
      *
-     * @param string $value The value to parse and convert to an float.
+     * @param string aValue The value to parse and convert to an float.
      */
-    protected string _parseValue(string $value) {
+    protected string _parseValue(string aValue) {
         /** @var uim.cake.I18n\Number $class */
         $class = static::$numberClass;
 
