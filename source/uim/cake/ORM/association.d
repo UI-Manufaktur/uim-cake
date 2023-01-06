@@ -804,7 +804,7 @@ abstract class Association
      * @see uim.cake.orm.Table::updateAll()
      * @return int Count Returns the affected rows.
      */
-    function updateAll(array $fields, $conditions): int
+    int updateAll(array $fields, $conditions)
     {
         $expression = this.find()
             .where($conditions)
@@ -821,7 +821,7 @@ abstract class Association
      * @return int Returns the number of affected rows.
      * @see uim.cake.orm.Table::deleteAll()
      */
-    function deleteAll($conditions): int
+    int deleteAll($conditions)
     {
         $expression = this.find()
             .where($conditions)

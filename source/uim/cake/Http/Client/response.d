@@ -227,7 +227,7 @@ class Response : Message : IResponse
      *
      * @return int The status code.
      */
-    function getStatusCode(): int
+    int getStatusCode()
     {
         return this.code;
     }

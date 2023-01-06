@@ -268,7 +268,7 @@ class CounterCacheBehavior : Behavior
      * @param array $conditions Additional conditions given to the query
      * @return int The number of relations matching the given config and conditions
      */
-    protected function _getCount(array $config, array $conditions): int
+    protected int _getCount(array $config, array $conditions)
     {
         $finder = "all";
         if (!empty($config["finder"])) {

@@ -141,7 +141,7 @@ class LinkConstraint
      * @param uim.cake.Datasource\IEntity $entity The entity involved in the operation.
      * @return int The number of links.
      */
-    protected function _countLinks(Association $association, IEntity $entity): int
+    protected int _countLinks(Association $association, IEntity $entity)
     {
         $source = $association.getSource();
 

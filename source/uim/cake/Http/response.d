@@ -544,7 +544,7 @@ class Response : IResponse
      *
      * @return int Status code.
      */
-    function getStatusCode(): int
+    int getStatusCode()
     {
         return _status;
     }

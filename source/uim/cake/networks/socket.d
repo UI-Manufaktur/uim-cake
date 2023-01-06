@@ -323,7 +323,7 @@ class Socket
      * @param string $data The data to write to the socket.
      * @return int Bytes written.
      */
-    function write(string $data): int
+    int write(string $data)
     {
         if (!this.connected && !this.connect()) {
             return 0;

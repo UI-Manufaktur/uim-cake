@@ -891,7 +891,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
     /**
      * Performs and returns the COUNT(*) for the query.
      */
-    protected int _performCount(): int
+    protected int _performCount()
     {
         $query = this.cleanCopy();
         $counter = _counter;

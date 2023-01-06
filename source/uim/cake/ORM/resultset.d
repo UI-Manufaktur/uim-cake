@@ -165,7 +165,7 @@ class ResultSet : IResultSet
      *
      * Part of Iterator interface.
      */
-    int key(): int
+    int key()
     {
         return _index;
     }
