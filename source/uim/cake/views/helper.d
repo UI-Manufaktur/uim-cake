@@ -151,8 +151,7 @@ class Helper : IEventListener
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         myEventMap = [
             "View.beforeRenderFile": "beforeRenderFile",
             "View.afterRenderFile": "afterRenderFile",

@@ -115,8 +115,7 @@ class MultiCheckboxWidget : BasicWidget
      * @param uim.cake.View\Form\IContext $context The current form context.
      * @return array<string> An array of rendered inputs.
      */
-    protected string[] _renderInputs(array $data, IContext $context)
-    {
+    protected string[] _renderInputs(array $data, IContext $context) {
         $out = [];
         foreach ($data["options"] as $key: $val) {
             // Grouped inputs in a fieldset.

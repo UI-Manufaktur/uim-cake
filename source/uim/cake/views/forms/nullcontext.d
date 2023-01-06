@@ -27,8 +27,7 @@ class NullContext : IContext
     }
 
 
-    array getPrimaryKey()
-    {
+    array getPrimaryKey() {
         return [];
     }
 
@@ -64,8 +63,7 @@ class NullContext : IContext
     }
 
 
-    array fieldNames()
-    {
+    array fieldNames() {
         return [];
     }
 
@@ -75,8 +73,7 @@ class NullContext : IContext
     }
 
 
-    array attributes(string myField)
-    {
+    array attributes(string myField) {
         return [];
     }
 
@@ -86,8 +83,7 @@ class NullContext : IContext
     }
 
 
-    array error(string myField)
-    {
+    array error(string myField) {
         return [];
     }
 }

@@ -29,21 +29,21 @@ class WidgetLocator
      *
      * @var array
      */
-    protected $_widgets = [];
+    protected _widgets = [];
 
     /**
      * Templates to use.
      *
      * @var uim.cake.View\StringTemplate
      */
-    protected $_templates;
+    protected _templates;
 
     /**
      * View instance.
      *
      * @var uim.cake.View\View
      */
-    protected $_view;
+    protected _view;
 
     /**
      * Constructor

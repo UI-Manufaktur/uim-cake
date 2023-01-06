@@ -37,7 +37,7 @@ class RadioWidget : BasicWidget
      *
      * @var uim.cake.View\Widget\LabelWidget
      */
-    protected $_label;
+    protected _label;
 
     /**
      * Constructor

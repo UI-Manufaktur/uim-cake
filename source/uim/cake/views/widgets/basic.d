@@ -12,7 +12,7 @@ import uim.cake;
  */
 class BasicWidget : IWidget {
     // StringTemplate instance.
-    protected StringTemplate $_templates;
+    protected StringTemplate _templates;
 
     /**
      * Data defaults.
@@ -93,8 +93,7 @@ class BasicWidget : IWidget {
      * @param uim.cake.View\Form\IContext $context Context instance.
      * @return array<string, mixed> Updated data array.
      */
-    protected array mergeDefaults(array myData, IContext $context)
-    {
+    protected array mergeDefaults(array myData, IContext $context) {
         myData += this.defaults;
 
         if (isset(myData["fieldName"]) && !array_key_exists("required", myData)) {
@@ -112,8 +111,7 @@ class BasicWidget : IWidget {
      * @param string myFieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected array setRequired(array myData, IContext $context, string myFieldName)
-    {
+    protected array setRequired(array myData, IContext $context, string myFieldName) {
         if (
             empty(myData["disabled"])
             && (
@@ -138,8 +136,7 @@ class BasicWidget : IWidget {
      * @param string myFieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected array setMaxLength(array myData, IContext $context, string myFieldName)
-    {
+    protected array setMaxLength(array myData, IContext $context, string myFieldName) {
         $maxLength = $context.getMaxLength(myFieldName);
         if ($maxLength  !is null) {
             myData["maxlength"] = min($maxLength, 100000);
@@ -156,8 +153,7 @@ class BasicWidget : IWidget {
      * @param string myFieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected array setStep(array myData, IContext $context, string myFieldName)
-    {
+    protected array setStep(array myData, IContext $context, string myFieldName) {
         $dbType = $context.type(myFieldName);
         myFieldDef = $context.attributes(myFieldName);
 
@@ -172,8 +168,7 @@ class BasicWidget : IWidget {
     }
 
 
-    array secureFields(array myData)
-    {
+    array secureFields(array myData) {
         if (!isset(myData["name"]) || myData["name"] == "") {
             return [];
         }

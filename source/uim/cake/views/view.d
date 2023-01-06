@@ -239,7 +239,7 @@ class View : IEventDispatcher {
      * @param uim.cake.http.ServerRequest|null myRequest Request instance.
      * @param uim.cake.http.Response|null $response Response instance.
      * @param uim.cake.events.EventManager|null myEventManager Event manager instance.
-     * @param array<string, mixed> $viewOptions View options. See {@link View::$_passedVars} for list of
+     * @param array<string, mixed> $viewOptions View options. See {@link View::_passedVars} for list of
      *   options which get set as class properties.
      */
     this(
@@ -1408,8 +1408,7 @@ class View : IEventDispatcher {
      * @return array Element Cache configuration.
      * @psalm-return array{key:string, config:string}
      */
-    protected array _elementCache(string myName, array myData, array myOptions)
-    {
+    protected array _elementCache(string myName, array myData, array myOptions) {
         if (isset(myOptions["cache"]["key"], myOptions["cache"]["config"])) {
             /** @psalm-var array{key:string, config:string}*/
             $cache = myOptions["cache"];

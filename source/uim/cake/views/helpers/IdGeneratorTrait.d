@@ -13,7 +13,7 @@ trait IdGeneratorTrait
     protected string _idPrefix;
 
     // A list of id suffixes used in the current rendering.
-    protected string[] $_idSuffixes = [];
+    protected string[] _idSuffixes = [];
 
     /**
      * Clear the stored ID suffixes.

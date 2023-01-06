@@ -145,8 +145,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    array getVars()
-    {
+    array getVars() {
         return _vars;
     }
 
@@ -273,8 +272,7 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Gets the helpers to use.
      */
-    array getHelpers()
-    {
+    array getHelpers() {
         return _helpers;
     }
 
@@ -392,8 +390,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    array getOptions()
-    {
+    array getOptions() {
         return _options;
     }
 
@@ -511,8 +508,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return array Serializable array of configuration properties.
      */
-    array jsonSerialize()
-    {
+    array jsonSerialize() {
         $properties = [
             "_templatePath", "_template", "_plugin", "_theme", "_layout", "_autoLayout",
             "_layoutPath", "_name", "_className", "_options", "_helpers", "_vars",
@@ -581,8 +577,7 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Magic method used for serializing the view builder object.
      */
-    array __serialize()
-    {
+    array __serialize() {
         return this.jsonSerialize();
     }
 

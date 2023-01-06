@@ -132,8 +132,7 @@ class SelectBoxWidget : BasicWidget
      * @param array<string, mixed> $data The context for rendering a select.
      * @return array<string>
      */
-    protected string[] _renderContent(array $data)
-    {
+    protected string[] _renderContent(array $data) {
         $options = $data["options"];
 
         if ($options instanceof Traversable) {
@@ -163,8 +162,7 @@ class SelectBoxWidget : BasicWidget
      * @param array|string|bool $value The provided empty value.
      * @return array The generated option key/value.
      */
-    protected array _emptyValue($value)
-    {
+    protected array _emptyValue($value) {
         if ($value == true) {
             return ["": ""];
         }
