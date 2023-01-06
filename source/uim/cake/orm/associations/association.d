@@ -325,8 +325,8 @@ abstract class Association {
     string[] getBindingKey() {
         if (_bindingKey is null) {
             _bindingKey = this.isOwningSide(this.getSource()) ?
-                this.getSource().getPrimaryKey() :
-                this.getTarget().getPrimaryKey();
+                this.getSource().getPrimaryKeys() :
+                this.getTarget().getPrimaryKeys();
         }
 
         return _bindingKey;
@@ -612,7 +612,7 @@ abstract class Association {
     protected void _appendNotMatching(Query myQuery, array myOptions) {
         myTarget = _targetTable;
         if (!empty(myOptions["negateMatch"])) {
-            $primaryKey = myQuery.aliasFields((array)myTarget.getPrimaryKey(), _name);
+            $primaryKey = myQuery.aliasFields((array)myTarget.getPrimaryKeys(), _name);
             myQuery.andWhere(function ($exp) use ($primaryKey) {
                 array_map([$exp, "isNull"], $primaryKey);
 

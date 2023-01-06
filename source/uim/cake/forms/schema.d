@@ -6,8 +6,7 @@ import uim.cake;
 /**
  * Contains the schema information for Form instances.
  */
-class Schema
-{
+class Schema {
     /**
      * The fields in this schema.
      *

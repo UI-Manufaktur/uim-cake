@@ -395,7 +395,7 @@ class SqlserverSchemaDialect : SchemaDialect
         }
 
         if ($data["type"] == TableSchema::TYPE_INTEGER || $data["type"] == TableSchema::TYPE_BIGINTEGER) {
-            if ($schema.getPrimaryKey() == [$name] || $data["autoIncrement"] == true) {
+            if ($schema.getPrimaryKeys() == [$name] || $data["autoIncrement"] == true) {
                 unset($data["null"], $data["default"]);
                 $out .= " IDENTITY(1, 1)";
             }
@@ -614,7 +614,7 @@ class SqlserverSchemaDialect : SchemaDialect
         ];
 
         // Restart identity sequences
-        $pk = $schema.getPrimaryKey();
+        $pk = $schema.getPrimaryKeys();
         if (count($pk) == 1) {
             /** @var array $column */
             $column = $schema.getColumn($pk[0]);

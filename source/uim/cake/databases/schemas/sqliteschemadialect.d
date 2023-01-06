@@ -1,7 +1,5 @@
 module uim.cake.databases.schemas;
 
-import uim.cake.databases.exceptions.DatabaseException;
-
 /**
  * Schema management/reflection features for Sqlite
  *
@@ -358,7 +356,7 @@ class SqliteSchemaDialect : SchemaDialect
             isset($data["unsigned"]) &&
             $data["unsigned"] == true
         ) {
-            if ($data["type"] != TableSchema::TYPE_INTEGER || $schema.getPrimaryKey() != [$name]) {
+            if ($data["type"] != TableSchema::TYPE_INTEGER || $schema.getPrimaryKeys() != [$name]) {
                 $out .= " UNSIGNED";
             }
         }
@@ -405,7 +403,7 @@ class SqliteSchemaDialect : SchemaDialect
         if (
             in_array($data["type"], $integerTypes, true) &&
             isset($data["length"]) &&
-            $schema.getPrimaryKey() != [$name]
+            $schema.getPrimaryKeys() != [$name]
         ) {
             $out .= "(" ~ (int)$data["length"] ~ ")";
         }
@@ -425,7 +423,7 @@ class SqliteSchemaDialect : SchemaDialect
             $out .= " NOT NULL";
         }
 
-        if ($data["type"] == TableSchema::TYPE_INTEGER && $schema.getPrimaryKey() == [$name]) {
+        if ($data["type"] == TableSchema::TYPE_INTEGER && $schema.getPrimaryKeys() == [$name]) {
             $out .= " PRIMARY KEY AUTOINCREMENT";
         }
 
@@ -571,7 +569,8 @@ class SqliteSchemaDialect : SchemaDialect
     }
 
     /**
-     * Returns whether there is any table in this connection to SQLite containing sequences
+     * Returns whether there is any table in this connection to SQLite containing
+     * sequences
      */
     bool hasSequences() {
         $result = _driver.prepare(

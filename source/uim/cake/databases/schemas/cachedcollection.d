@@ -2,9 +2,7 @@ module uim.cake.databases.schemas;
 
 use Psr\SimpleCache\ICache;
 
-/**
- * Decorates a schema collection and adds caching
- */
+// Decorates a schema collection and adds caching
 class CachedCollection : ICollection {
   // The decorated schema collection
   protected ICollection $collection;

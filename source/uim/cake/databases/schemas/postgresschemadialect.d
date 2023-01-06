@@ -394,7 +394,7 @@ class PostgresSchemaDialect : SchemaDialect
 
         if ($data["type"] == TableSchema::TYPE_INTEGER || $data["type"] == TableSchema::TYPE_BIGINTEGER) {
             $type = $data["type"] == TableSchema::TYPE_INTEGER ? " INTEGER" : " BIGINT";
-            if ($schema.getPrimaryKey() == [$name] || $data["autoIncrement"] == true) {
+            if ($schema.getPrimaryKeys() == [$name] || $data["autoIncrement"] == true) {
                 $type = $data["type"] == TableSchema::TYPE_INTEGER ? " SERIAL" : " BIGSERIAL";
                 unset($data["null"], $data["default"]);
             }

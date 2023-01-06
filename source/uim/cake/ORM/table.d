@@ -583,9 +583,9 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *
      * @return array<string>|string
      */
-    function getPrimaryKey() {
+    function getPrimaryKeys() {
         if (_primaryKey == null) {
-            $key = this.getSchema().getPrimaryKey();
+            $key = this.getSchema().getPrimaryKeys();
             if (count($key) == 1) {
                 $key = $key[0];
             }
@@ -615,7 +615,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     string[] getDisplayField() {
         if (_displayField == null) {
             $schema = this.getSchema();
-            _displayField = this.getPrimaryKey();
+            _displayField = this.getPrimaryKeys();
             foreach (["title", "name", "label"] as $field) {
                 if ($schema.hasColumn($field)) {
                     _displayField = $field;
@@ -1279,7 +1279,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     function findList(Query $query, array $options): Query
     {
         $options += [
-            "keyField": this.getPrimaryKey(),
+            "keyField": this.getPrimaryKeys(),
             "valueField": this.getDisplayField(),
             "groupField": null,
             "valueSeparator": ";",
@@ -1344,7 +1344,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
     function findThreaded(Query $query, array $options): Query
     {
         $options += [
-            "keyField": this.getPrimaryKey(),
+            "keyField": this.getPrimaryKeys(),
             "parentField": "parent_id",
             "nestingKey": "children",
         ];
@@ -1426,7 +1426,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             ));
         }
 
-        $key = (array)this.getPrimaryKey();
+        $key = (array)this.getPrimaryKeys();
         $alias = this.getAlias();
         foreach ($key as $index: $keyname) {
             $key[$index] = $alias ~ "." ~ $keyname;
@@ -1832,7 +1832,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      *   is aborted in the afterSave event.
      */
     protected function _processSave(IEntity $entity, ArrayObject $options) {
-        $primaryColumns = (array)this.getPrimaryKey();
+        $primaryColumns = (array)this.getPrimaryKeys();
 
         if ($options["checkExisting"] && $primaryColumns && $entity.isNew() && $entity.has($primaryColumns)) {
             $alias = this.getAlias();
@@ -1892,7 +1892,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
         }
 
         if (!$success && $isNew) {
-            $entity.unset(this.getPrimaryKey());
+            $entity.unset(this.getPrimaryKeys());
             $entity.setNew(true);
         }
 
@@ -1946,7 +1946,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * be generated when the table has composite primary keys. Or when the table has no primary key.
      */
     protected function _insert(IEntity $entity, array $data) {
-        $primary = (array)this.getPrimaryKey();
+        $primary = (array)this.getPrimaryKeys();
         if (empty($primary)) {
             $msg = sprintf(
                 "Cannot insert row in '%s' table, it has no primary key.",
@@ -2043,7 +2043,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
      * @throws \InvalidArgumentException When primary key data is missing.
      */
     protected function _update(IEntity $entity, array $data) {
-        $primaryColumns = (array)this.getPrimaryKey();
+        $primaryColumns = (array)this.getPrimaryKeys();
         $primaryKey = $entity.extract($primaryColumns);
 
         $data = array_diff_key($data, $primaryKey);
@@ -2143,7 +2143,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             /** @var array<uim.cake.Datasource\IEntity> $entities */
             foreach ($entities as $key: $entity) {
                 if (isset($isNew[$key]) && $isNew[$key]) {
-                    $entity.unset(this.getPrimaryKey());
+                    $entity.unset(this.getPrimaryKeys());
                     $entity.setNew(true);
                 }
             }
@@ -2373,7 +2373,7 @@ class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInter
             return false;
         }
 
-        $primaryKey = (array)this.getPrimaryKey();
+        $primaryKey = (array)this.getPrimaryKeys();
         if (!$entity.has($primaryKey)) {
             $msg = "Deleting requires all primary key values.";
             throw new InvalidArgumentException($msg);

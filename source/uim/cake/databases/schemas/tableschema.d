@@ -441,16 +441,16 @@ class TableSchema : TableISchema, SqlGeneratorInterface
      *
      * @return array Column name(s) for the primary key. An
      *   empty list will be returned when the table has no primary key.
-     * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
+     * @deprecated 4.0.0 Renamed to {@link getPrimaryKeys()}.
      */
     array primaryKey() {
-        deprecationWarning("`TableSchema::primaryKey()` is deprecated. Use `TableSchema::getPrimaryKey()`.");
+        deprecationWarning("`TableSchema::primaryKey()` is deprecated. Use `TableSchema::getPrimaryKeys()`.");
 
         return this.getPrimarykey();
     }
 
 
-    array getPrimaryKey() {
+    array getPrimaryKeys() {
         foreach (_constraints as $data) {
             if ($data["type"] == static::CONSTRAINT_PRIMARY) {
                 return $data["columns"];

@@ -80,7 +80,7 @@ class TreeBehavior : Behavior
         $isNew = $entity.isNew();
         aConfig = this.getConfig();
         $parent = $entity.get(aConfig["parent"]);
-        $primaryKey = _getPrimaryKey();
+        $primaryKey = _getPrimaryKeys();
         $dirty = $entity.isDirty(aConfig["parent"]);
         $level = aConfig["level"];
 
@@ -162,13 +162,13 @@ class TreeBehavior : Behavior
             return;
         }
 
-        $primaryKey = _getPrimaryKey();
+        $primaryKey = _getPrimaryKeys();
         $primaryKeyValue = $entity.get($primaryKey);
         $depths = [$primaryKeyValue: $entity.get(aConfig["level"])];
 
         $children = _table.find("children", [
             "for": $primaryKeyValue,
-            "fields": [_getPrimaryKey(), aConfig["parent"], aConfig["level"]],
+            "fields": [_getPrimaryKeys(), aConfig["parent"], aConfig["level"]],
             "order": aConfig["left"],
         ]);
 
@@ -244,7 +244,7 @@ class TreeBehavior : Behavior
             throw new RuntimeException(sprintf(
                 "Cannot use node '%s' as parent for entity '%s'",
                 $parent,
-                $entity.get(_getPrimaryKey())
+                $entity.get(_getPrimaryKeys())
             ));
         }
 
@@ -387,7 +387,7 @@ class TreeBehavior : Behavior
 
         if ($direct) {
             return _scope(_table.find())
-                .where([$parent: $node.get(_getPrimaryKey())])
+                .where([$parent: $node.get(_getPrimaryKeys())])
                 .count();
         }
 
@@ -497,7 +497,7 @@ class TreeBehavior : Behavior
     {
         return $query.formatResults(function (ICollection $results) use ($options) {
             $options += [
-                "keyPath": _getPrimaryKey(),
+                "keyPath": _getPrimaryKeys(),
                 "valuePath": _table.getDisplayField(),
                 "spacer": "_",
             ];
@@ -547,7 +547,7 @@ class TreeBehavior : Behavior
             return _table.save($node);
         }
 
-        $primary = _getPrimaryKey();
+        $primary = _getPrimaryKeys();
         _table.updateAll(
             [aConfig["parent"]: $parent],
             [aConfig["parent"]: $node.get($primary)]
@@ -762,7 +762,7 @@ class TreeBehavior : Behavior
     {
         aConfig = this.getConfig();
         [$parent, $left, $right] = [aConfig["parent"], aConfig["left"], aConfig["right"]];
-        $primaryKey = _getPrimaryKey();
+        $primaryKey = _getPrimaryKeys();
         $fields = [$parent, $left, $right];
         if (aConfig["level"]) {
             $fields[] = aConfig["level"];
@@ -802,7 +802,7 @@ class TreeBehavior : Behavior
     protected int _recoverTree(int $lftRght = 1, $parentId = null, $level = 0) {
         aConfig = this.getConfig();
         [$parent, $left, $right] = [aConfig["parent"], aConfig["left"], aConfig["right"]];
-        $primaryKey = _getPrimaryKey();
+        $primaryKey = _getPrimaryKeys();
         $order = aConfig["recoverOrder"] ?: $primaryKey;
 
         $nodes = _scope(_table.query())
@@ -920,7 +920,7 @@ class TreeBehavior : Behavior
             return;
         }
 
-        $fresh = _table.get($entity.get(_getPrimaryKey()));
+        $fresh = _table.get($entity.get(_getPrimaryKeys()));
         $entity.set($fresh.extract($fields), ["guard": false]);
 
         foreach ($fields as $field) {
@@ -931,9 +931,9 @@ class TreeBehavior : Behavior
     /**
      * Returns a single string value representing the primary key of the attached table
      */
-    protected string _getPrimaryKey() {
+    protected string _getPrimaryKeys() {
         if (!_primaryKey) {
-            $primaryKey = (array)_table.getPrimaryKey();
+            $primaryKey = (array)_table.getPrimaryKeys();
             _primaryKey = $primaryKey[0];
         }
 
@@ -947,7 +947,7 @@ class TreeBehavior : Behavior
      * @return int|false Integer of the level or false if the node does not exist.
      */
     function getLevel($entity) {
-        $primaryKey = _getPrimaryKey();
+        $primaryKey = _getPrimaryKeys();
         $id = $entity;
         if ($entity instanceof IEntity) {
             $id = $entity.get($primaryKey);

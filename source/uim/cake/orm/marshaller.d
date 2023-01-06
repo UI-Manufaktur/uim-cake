@@ -152,7 +152,7 @@ class Marshaller
     {
         [myData, myOptions] = _prepareDataAndOptions(myData, myOptions);
 
-        $primaryKey = (array)_table.getPrimaryKey();
+        $primaryKey = (array)_table.getPrimaryKeys();
         $entityClass = _table.getEntityClass();
         $entity = new $entityClass();
         $entity.setSource(_table.getRegistryAlias());
@@ -363,7 +363,7 @@ class Marshaller
         myData = array_values(myData);
 
         myTarget = $assoc.getTarget();
-        $primaryKey = array_flip((array)myTarget.getPrimaryKey());
+        $primaryKey = array_flip((array)myTarget.getPrimaryKeys());
         $records = $conditions = [];
         $primaryCount = count($primaryKey);
 
@@ -452,7 +452,7 @@ class Marshaller
         }
 
         myTarget = $assoc.getTarget();
-        $primaryKey = (array)myTarget.getPrimaryKey();
+        $primaryKey = (array)myTarget.getPrimaryKeys();
         $multi = count($primaryKey) > 1;
         $primaryKey = array_map([myTarget, "aliasField"], $primaryKey);
 
@@ -463,7 +463,7 @@ class Marshaller
             }
             myType = [];
             $schema = myTarget.getSchema();
-            foreach ((array)myTarget.getPrimaryKey() as $column) {
+            foreach ((array)myTarget.getPrimaryKeys() as $column) {
                 myType[] = $schema.getColumnType($column);
             }
             $filter = new TupleComparison($primaryKey, $ids, myType, "IN");
@@ -519,7 +519,7 @@ class Marshaller
         myKeys = [];
 
         if (!$isNew) {
-            myKeys = $entity.extract((array)_table.getPrimaryKey());
+            myKeys = $entity.extract((array)_table.getPrimaryKeys());
         }
 
         if (isset(myOptions["accessibleFields"])) {
@@ -630,7 +630,7 @@ class Marshaller
      * @psalm-suppress NullArrayOffset
      */
     array mergeMany(iterable $entities, array myData, array myOptions = []) {
-        $primary = (array)_table.getPrimaryKey();
+        $primary = (array)_table.getPrimaryKeys();
 
         $indexed = (new Collection(myData))
             .groupBy(function ($el) use ($primary) {

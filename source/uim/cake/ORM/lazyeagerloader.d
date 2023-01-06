@@ -53,7 +53,7 @@ class LazyEagerLoader
      */
     protected function _getQuery(ICollection $objects, array $contain, Table $source): Query
     {
-        $primaryKey = $source.getPrimaryKey();
+        $primaryKey = $source.getPrimaryKeys();
         $method = is_string($primaryKey) ? "get" : "extract";
 
         $keys = $objects.map(function ($entity) use ($primaryKey, $method) {
@@ -124,7 +124,7 @@ class LazyEagerLoader
     protected function _injectResults(iterable $objects, $results, array $associations, Table $source) {
         $injected = [];
         $properties = _getPropertyMap($source, $associations);
-        $primaryKey = (array)$source.getPrimaryKey();
+        $primaryKey = (array)$source.getPrimaryKeys();
         $results = $results
             .all()
             .indexBy(function ($e) use ($primaryKey) {

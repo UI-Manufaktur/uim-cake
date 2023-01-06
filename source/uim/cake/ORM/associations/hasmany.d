@@ -318,7 +318,7 @@ class HasMany : Association
 
         $foreignKey = (array)this.getForeignKey();
         $target = this.getTarget();
-        $targetPrimaryKey = array_merge((array)$target.getPrimaryKey(), $foreignKey);
+        $targetPrimaryKey = array_merge((array)$target.getPrimaryKeys(), $foreignKey);
         $property = this.getProperty();
 
         $conditions = [
@@ -427,7 +427,7 @@ class HasMany : Association
         iterable $remainingEntities = [],
         array $options = []
     ) {
-        $primaryKey = (array)$target.getPrimaryKey();
+        $primaryKey = (array)$target.getPrimaryKeys();
         $exclusions = new Collection($remainingEntities);
         $exclusions = $exclusions.map(
             function ($ent) use ($primaryKey) {

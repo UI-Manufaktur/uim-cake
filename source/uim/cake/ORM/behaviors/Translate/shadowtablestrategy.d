@@ -347,7 +347,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
             return;
         }
 
-        $primaryKey = (array)this.table.getPrimaryKey();
+        $primaryKey = (array)this.table.getPrimaryKeys();
         $id = $entity.get(current($primaryKey));
 
         // When we have no key and bundled translations, we
@@ -537,7 +537,7 @@ class ShadowTableStrategy : TranslateStrategyInterface
             return;
         }
 
-        $primaryKey = (array)this.table.getPrimaryKey();
+        $primaryKey = (array)this.table.getPrimaryKeys();
         $key = $entity.get(current($primaryKey));
 
         foreach ($translations as $lang: $translation) {

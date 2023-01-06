@@ -103,7 +103,7 @@ class DatabaseSession : SessionHandlerInterface
     #[\ReturnTypeWillChange]
     function read($id) {
         /** @var string $pkField */
-        $pkField = _table.getPrimaryKey();
+        $pkField = _table.getPrimaryKeys();
         $result = _table
             .find("all")
             .select(["data"])
@@ -141,7 +141,7 @@ class DatabaseSession : SessionHandlerInterface
         }
 
         /** @var string $pkField */
-        $pkField = _table.getPrimaryKey();
+        $pkField = _table.getPrimaryKeys();
         $session = _table.newEntity([
             $pkField: $id,
             "data": $data,
@@ -159,7 +159,7 @@ class DatabaseSession : SessionHandlerInterface
      */
     bool destroy($id) {
         /** @var string $pkField */
-        $pkField = _table.getPrimaryKey();
+        $pkField = _table.getPrimaryKeys();
         _table.deleteAll([$pkField: $id]);
 
         return true;

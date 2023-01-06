@@ -66,7 +66,7 @@ class ExistsIn {
             $bindingKey = (array)myTarget.getBindingKey();
             $realTarget = myTarget.getTarget();
         } else {
-            $bindingKey = (array)myTarget.getPrimaryKey();
+            $bindingKey = (array)myTarget.getPrimaryKeys();
             $realTarget = myTarget;
         }
 

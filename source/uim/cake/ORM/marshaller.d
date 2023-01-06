@@ -155,7 +155,7 @@ class Marshaller
     {
         [$data, $options] = _prepareDataAndOptions($data, $options);
 
-        $primaryKey = (array)_table.getPrimaryKey();
+        $primaryKey = (array)_table.getPrimaryKeys();
         $entityClass = _table.getEntityClass();
         $entity = new $entityClass();
         $entity.setSource(_table.getRegistryAlias());
@@ -366,7 +366,7 @@ class Marshaller
         $data = array_values($data);
 
         $target = $assoc.getTarget();
-        $primaryKey = array_flip((array)$target.getPrimaryKey());
+        $primaryKey = array_flip((array)$target.getPrimaryKeys());
         $records = $conditions = [];
         $primaryCount = count($primaryKey);
 
@@ -455,7 +455,7 @@ class Marshaller
         }
 
         $target = $assoc.getTarget();
-        $primaryKey = (array)$target.getPrimaryKey();
+        $primaryKey = (array)$target.getPrimaryKeys();
         $multi = count($primaryKey) > 1;
         $primaryKey = array_map([$target, "aliasField"], $primaryKey);
 
@@ -466,7 +466,7 @@ class Marshaller
             }
             $type = [];
             $schema = $target.getSchema();
-            foreach ((array)$target.getPrimaryKey() as $column) {
+            foreach ((array)$target.getPrimaryKeys() as $column) {
                 $type[] = $schema.getColumnType($column);
             }
             $filter = new TupleComparison($primaryKey, $ids, $type, "IN");
@@ -522,7 +522,7 @@ class Marshaller
         $keys = [];
 
         if (!$isNew) {
-            $keys = $entity.extract((array)_table.getPrimaryKey());
+            $keys = $entity.extract((array)_table.getPrimaryKeys());
         }
 
         if (isset($options["accessibleFields"])) {
@@ -633,7 +633,7 @@ class Marshaller
      * @psalm-suppress NullArrayOffset
      */
     function mergeMany(iterable $entities, array $data, array $options = []) {
-        $primary = (array)_table.getPrimaryKey();
+        $primary = (array)_table.getPrimaryKeys();
 
         $indexed = (new Collection($data))
             .groupBy(function ($el) use ($primary) {

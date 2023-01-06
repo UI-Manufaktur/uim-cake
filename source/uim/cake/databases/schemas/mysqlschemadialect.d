@@ -435,7 +435,7 @@ class MysqlSchemaDialect : SchemaDialect
             $out .= " NOT NULL";
         }
         $addAutoIncrement = (
-            $schema.getPrimaryKey() == [$name] &&
+            $schema.getPrimaryKeys() == [$name] &&
             !$schema.hasAutoincrement() &&
             !isset($data["autoIncrement"])
         );

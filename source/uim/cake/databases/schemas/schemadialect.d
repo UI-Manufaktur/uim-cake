@@ -1,8 +1,5 @@
 module uim.cake.databases.schemas;
 
-import uim.cake.databases.IDriver;
-import uim.cake.databases.types.ColumnSchemaAwareInterface;
-import uim.cake.databases.TypeFactory;
 use InvalidArgumentException;
 
 /**
@@ -252,8 +249,8 @@ abstract class SchemaDialect
      * @param array<string> $indexes The indexes for the table.
      * @return array<string> SQL statements to create a table.
      */
-    abstract array createTableSql(
-        TableSchema $schema,
+    abstract function createTableSql(
+        TableScarrayhema $schema,
         array $columns,
         array $constraints,
         array $indexes

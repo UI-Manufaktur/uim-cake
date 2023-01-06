@@ -2,49 +2,30 @@ module uim.cake.databases.schemas;
 
 import uim.cake.datasources.ISchema;
 
-/**
- * An interface used by database TableSchema objects.
- */
-interface TableISchema : ISchema
-{
-    /**
-     * Binary column type
-     */
+// An interface used by database TableSchema objects.
+interface TableISchema : ISchema {
+    // Binary column type
     const string TYPE_BINARY = "binary";
 
-    /**
-     * Binary UUID column type
-     */
+    // Binary UUID column type
     const string TYPE_BINARY_UUID = "binaryuuid";
 
-    /**
-     * Date column type
-     */
+    // Date column type
     const string TYPE_DATE = "date";
 
-    /**
-     * Datetime column type
-     */
+    // Datetime column type
     const string TYPE_DATETIME = "datetime";
 
-    /**
-     * Datetime with fractional seconds column type
-     */
+    // Datetime with fractional seconds column type
     const string TYPE_DATETIME_FRACTIONAL = "datetimefractional";
 
-    /**
-     * Time column type
-     */
+    // Time column type
     const string TYPE_TIME = "time";
 
-    /**
-     * Timestamp column type
-     */
+    // Timestamp column type
     const string TYPE_TIMESTAMP = "timestamp";
 
-    /**
-     * Timestamp with fractional seconds column type
-     */
+    // Timestamp with fractional seconds column type
     const string TYPE_TIMESTAMP_FRACTIONAL = "timestampfractional";
 
     /**
@@ -52,44 +33,28 @@ interface TableISchema : ISchema
      */
     const string TYPE_TIMESTAMP_TIMEZONE = "timestamptimezone";
 
-    /**
-     * JSON column type
-     */
+    // JSON column type
     const string TYPE_JSON = "json";
 
-    /**
-     * String column type
-     */
+    // String column type
     const string TYPE_STRING = "string";
 
-    /**
-     * Char column type
-     */
+    // Char column type
     const string TYPE_CHAR = "char";
 
-    /**
-     * Text column type
-     */
+    // Text column type
     const string TYPE_TEXT = "text";
 
-    /**
-     * Tiny Integer column type
-     */
+    // Tiny Integer column type
     const string TYPE_TINYINTEGER = "tinyinteger";
 
-    /**
-     * Small Integer column type
-     */
+    // Small Integer column type
     const string TYPE_SMALLINTEGER = "smallinteger";
 
-    /**
-     * Integer column type
-     */
+    // Integer column type
     const string TYPE_INTEGER = "integer";
 
-    /**
-     * Big Integer column type
-     */
+    // Big Integer column type
     const string TYPE_BIGINTEGER = "biginteger";
 
     /**
@@ -128,17 +93,17 @@ interface TableISchema : ISchema
     /**
      * Gets whether the table is temporary in the database.
      *
-     * @return bool The current temporary setting.
+     * return _ The current temporary setting.
      */
     bool isTemporary();
 
     /**
      * Get the column(s) used for the primary key.
      *
-     * @return array<string> Column name(s) for the primary key. An
-     *   empty list will be returned when the table has no primary key.
+     * @return Column name(s) for the primary key. 
+     * An empty list will be returned when the table has no primary key.
      */
-    string[] getPrimaryKey();
+    string[] getPrimaryKeys();
 
     /**
      * Add an index.

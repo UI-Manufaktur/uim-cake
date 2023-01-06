@@ -739,7 +739,7 @@ class BelongsToMany : Association
             // or if we are updating an existing link.
             if ($changedKeys) {
                 $joint.setNew(true);
-                $joint.unset($junction.getPrimaryKey())
+                $joint.unset($junction.getPrimaryKeys())
                     .set(array_merge($sourceKeys, $targetKeys), ["guard": false]);
             }
             $saved = $junction.save($joint, $options);
@@ -1102,7 +1102,7 @@ class BelongsToMany : Association
                 $assocForeignKey = (array)$junction.getAssociation($target.getAlias()).getForeignKey();
 
                 $prefixedForeignKey = array_map([$junction, "aliasField"], $foreignKey);
-                $junctionPrimaryKey = (array)$junction.getPrimaryKey();
+                $junctionPrimaryKey = (array)$junction.getPrimaryKeys();
                 $junctionQueryAlias = $junction.getAlias() ~ "__matches";
 
                 $keys = $matchesConditions = [];
@@ -1220,7 +1220,7 @@ class BelongsToMany : Association
             }
         }
 
-        $primary = (array)$target.getPrimaryKey();
+        $primary = (array)$target.getPrimaryKeys();
         $jointProperty = _junctionProperty;
         foreach ($targetEntities as $k: $entity) {
             if (!($entity instanceof IEntity)) {
@@ -1287,7 +1287,7 @@ class BelongsToMany : Association
         $source = this.getSource();
         $junction = this.junction();
         $jointProperty = _junctionProperty;
-        $primary = (array)$target.getPrimaryKey();
+        $primary = (array)$target.getPrimaryKeys();
 
         $result = [];
         $missing = [];
@@ -1320,7 +1320,7 @@ class BelongsToMany : Association
         $assocForeignKey = array_map(function ($key) {
             return $key ~ " IS";
         }, $assocForeignKey);
-        $sourceKey = $sourceEntity.extract((array)$source.getPrimaryKey());
+        $sourceKey = $sourceEntity.extract((array)$source.getPrimaryKeys());
 
         $unions = [];
         foreach ($missing as $key) {

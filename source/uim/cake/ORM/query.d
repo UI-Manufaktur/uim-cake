@@ -465,7 +465,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
             }
             $association = $table.getAssociation($name);
             $target = $association.getTarget();
-            $primary = (array)$target.getPrimaryKey();
+            $primary = (array)$target.getPrimaryKeys();
             if (empty($primary) || $typeMap.type($target.aliasField($primary[0])) == null) {
                 this.addDefaultTypes($target);
             }

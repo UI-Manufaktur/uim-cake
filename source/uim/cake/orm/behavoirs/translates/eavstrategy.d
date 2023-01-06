@@ -233,7 +233,7 @@ class EavStrategy : ITranslateStrategy
             return;
         }
 
-        $primaryKey = (array)this.table.getPrimaryKey();
+        $primaryKey = (array)this.table.getPrimaryKeys();
         myKey = $entity.get(current($primaryKey));
 
         // When we have no key and bundled translations, we
@@ -411,7 +411,7 @@ class EavStrategy : ITranslateStrategy
         }
 
         myFields = _config["fields"];
-        $primaryKey = (array)this.table.getPrimaryKey();
+        $primaryKey = (array)this.table.getPrimaryKeys();
         myKey = $entity.get(current($primaryKey));
         $find = [];
         myContentss = [];
