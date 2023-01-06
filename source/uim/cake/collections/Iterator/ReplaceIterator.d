@@ -9,8 +9,7 @@ use Traversable;
  * Creates an iterator from another iterator that will modify each of the values
  * by converting them using a callback function.
  */
-class ReplaceIterator : Collection
-{
+class ReplaceIterator : Collection {
     /**
      * The callback function to be used to transform values
      *

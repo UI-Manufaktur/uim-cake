@@ -1,4 +1,4 @@
-module uim.cake.databases.Schema;
+module uim.cake.databases.schemas;
 
 import uim.cake.databases.IDriver;
 import uim.cake.databases.exceptions.DatabaseException;
@@ -177,7 +177,7 @@ class MysqlSchemaDialect : SchemaDialect
     }
 
 
-    function convertColumnDescription(TableSchema $schema, array $row) {
+    void convertColumnDescription(TableSchema $schema, array $row) {
         $field = _convertColumn($row["Type"]);
         $field += [
             "null": $row["Null"] == "YES",

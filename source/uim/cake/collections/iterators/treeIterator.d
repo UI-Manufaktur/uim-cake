@@ -7,8 +7,7 @@ import uim.cake;
  * A Recursive iterator used to flatten nested structures and also exposes
  * all Collection methods
  */
-class TreeIterator : RecursiveIteratorIterator : ICollection
-{
+class TreeIterator : RecursiveIteratorIterator : ICollection {
     use CollectionTrait;
 
     /**

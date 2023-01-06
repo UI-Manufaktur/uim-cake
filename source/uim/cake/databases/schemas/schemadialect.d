@@ -1,4 +1,4 @@
-module uim.cake.databases.Schema;
+module uim.cake.databases.schemas;
 
 import uim.cake.databases.IDriver;
 import uim.cake.databases.types.ColumnSchemaAwareInterface;

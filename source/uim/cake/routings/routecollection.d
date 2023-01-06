@@ -19,8 +19,7 @@ use RuntimeException;
  *
  * @internal
  */
-class RouteCollection
-{
+class RouteCollection {
     /**
      * The routes connected to this collection.
      *

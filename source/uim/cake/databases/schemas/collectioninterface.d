@@ -1,4 +1,4 @@
-module uim.cake.databases.Schema;
+module uim.cake.databases.schemas;
 
 /**
  * Represents a database schema collection
@@ -9,8 +9,7 @@ module uim.cake.databases.Schema;
  * @method array<string> listTablesWithoutViews() Get the list of tables available in the current connection.
  * This will exclude any views in the schema.
  */
-interface ICollection
-{
+interface ICollection {
     /**
      * Get the list of tables available in the current connection.
      *

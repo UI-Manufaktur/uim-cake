@@ -13,8 +13,7 @@ use Traversable;
  * @internal
  * @see uim.cake.collections.Collection::stopWhen()
  */
-class StoppableIterator : Collection
-{
+class StoppableIterator : Collection {
     /**
      * The condition to evaluate for each item of the collection
      *

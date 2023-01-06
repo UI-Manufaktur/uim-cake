@@ -1,4 +1,4 @@
-module uim.cake.databases.Schema;
+module uim.cake.databases.schemas;
 
 import uim.cake.databases.Connection;
 import uim.cake.databases.exceptions.DatabaseException;
@@ -10,8 +10,7 @@ use PDOException;
  * Used to access information about the tables,
  * and other data in a database.
  */
-class Collection : ICollection
-{
+class Collection : ICollection {
     /**
      * Connection object
      *
