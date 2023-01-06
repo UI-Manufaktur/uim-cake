@@ -132,7 +132,7 @@ class FileLog : BaseLog
         if (!$selfError && !$exists && !chmod(myPathname, (int)$mask)) {
             $selfError = true;
             trigger_error(vsprintf(
-                "Could not apply permission mask "%s" on log file "%s"",
+                "Could not apply permission mask '%s' on log file '%s'",
                 [$mask, myPathname]
             ), E_USER_WARNING);
             $selfError = false;

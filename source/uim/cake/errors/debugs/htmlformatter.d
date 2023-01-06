@@ -171,7 +171,7 @@ class HtmlFormatter : IFormatter
     protected string exportObject($var, int $indent) {
         $objectId = "cake-db-object-{this.id}-{$var.getId()}";
         $out = sprintf(
-            "<span class="cake-dbg-object" id="%s">",
+            "<span class="cake-dbg-object" id='%s'>",
             $objectId
         );
         $break = "\n" ~ str_repeat("  ", $indent);

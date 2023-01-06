@@ -398,7 +398,7 @@ class Mailer : IEventListener
             $name = aConfig;
             aConfig = static::getConfig($name);
             if (empty(aConfig)) {
-                throw new InvalidArgumentException(sprintf("Unknown email configuration "%s".", $name));
+                throw new InvalidArgumentException(sprintf("Unknown email configuration '%s'.", $name));
             }
             unset($name);
         }

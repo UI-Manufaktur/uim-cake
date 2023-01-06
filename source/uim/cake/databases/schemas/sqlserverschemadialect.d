@@ -620,8 +620,8 @@ class SqlserverSchemaDialect : SchemaDialect
             $column = $schema.getColumn($pk[0]);
             if (in_array($column["type"], ["integer", "biginteger"])) {
                 $queries[] = sprintf(
-                    "IF EXISTS (SELECT * FROM sys.identity_columns WHERE OBJECT_NAME(OBJECT_ID) = "%s" AND " ~
-                    "last_value IS NOT NULL) DBCC CHECKIDENT("%s", RESEED, 0)",
+                    "IF EXISTS (SELECT * FROM sys.identity_columns WHERE OBJECT_NAME(OBJECT_ID) = '%s' AND " ~
+                    "last_value IS NOT NULL) DBCC CHECKIDENT('%s', RESEED, 0)",
                     $schema.name(),
                     $schema.name()
                 );

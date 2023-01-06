@@ -877,7 +877,7 @@ class ServerRequest : IServerRequest
             !preg_match("/^[!#$%&\"*+.^_`\|~0-9a-z-]+$/i", $method)
         ) {
             throw new InvalidArgumentException(sprintf(
-                "Unsupported HTTP method "%s" provided",
+                "Unsupported HTTP method '%s' provided",
                 $method
             ));
         }

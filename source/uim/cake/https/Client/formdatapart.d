@@ -215,9 +215,9 @@ class FormDataPart
      */
     protected string _headerParameterToString(string aName, string aValue) {
         $transliterated = Text::transliterate(str_replace(""", "", $value));
-        $return = sprintf("%s="%s"", $name, $transliterated);
+        $return = sprintf("%s='%s'", $name, $transliterated);
         if (_charset != null && $value != $transliterated) {
-            $return .= sprintf("; %s*=%s""%s", $name, strtolower(_charset), rawurlencode($value));
+            $return .= sprintf("; %s*=%s"'%s', $name, strtolower(_charset), rawurlencode($value));
         }
 
         return $return;

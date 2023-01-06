@@ -226,7 +226,7 @@ class Email : JsonSerializable, Serializable
             ));
         }
         if (!method_exists($transport, "send")) {
-            throw new LogicException(sprintf("The "%s" do not have send method.", get_class($transport)));
+            throw new LogicException(sprintf("The '%s' do not have send method.", get_class($transport)));
         }
 
         _transport = $transport;
@@ -272,7 +272,7 @@ class Email : JsonSerializable, Serializable
             $name = aConfig;
             aConfig = Mailer::getConfig($name);
             if (empty(aConfig)) {
-                throw new InvalidArgumentException(sprintf("Unknown email configuration "%s".", $name));
+                throw new InvalidArgumentException(sprintf("Unknown email configuration '%s'.", $name));
             }
             unset($name);
         }

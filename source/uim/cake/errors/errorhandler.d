@@ -154,7 +154,7 @@ class ErrorHandler : BaseErrorHandler
             $class = App::className($renderer, "Error");
             if (!$class) {
                 throw new RuntimeException(sprintf(
-                    "The "%s" renderer class could not be found.",
+                    "The '%s' renderer class could not be found.",
                     $renderer
                 ));
             }

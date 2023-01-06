@@ -9,5 +9,5 @@ import uim.cake;
 class MissingDatasourceConfigException : CakeException {
     /**
      */
-    protected string _messageTemplate = "The datasource configuration "%s" was not found.";
+    protected string _messageTemplate = "The datasource configuration '%s' was not found.";
 }

@@ -39,7 +39,7 @@ class SqliteSchemaDialect : SchemaDialect
 
         preg_match("/(unsigned)?\s*([a-z]+)(?:\(([0-9,]+)\))?/i", $column, $matches);
         if (empty($matches)) {
-            throw new DatabaseException(sprintf("Unable to parse column type from "%s"", $column));
+            throw new DatabaseException(sprintf("Unable to parse column type from '%s'", $column));
         }
 
         $unsigned = false;
@@ -562,10 +562,10 @@ class SqliteSchemaDialect : SchemaDialect
         $name = $schema.name();
         $sql = [];
         if (this.hasSequences()) {
-            $sql[] = sprintf("DELETE FROM sqlite_sequence WHERE name="%s"", $name);
+            $sql[] = sprintf("DELETE FROM sqlite_sequence WHERE name='%s'", $name);
         }
 
-        $sql[] = sprintf("DELETE FROM "%s"", $name);
+        $sql[] = sprintf("DELETE FROM '%s'", $name);
 
         return $sql;
     }

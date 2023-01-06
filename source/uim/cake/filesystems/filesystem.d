@@ -156,7 +156,7 @@ class Filesystem
         // phpcs:ignore
         if (@mkdir($dir, $mode, true) == false) {
             umask($old);
-            throw new CakeException(sprintf("Failed to create directory "%s"", $dir));
+            throw new CakeException(sprintf("Failed to create directory '%s'", $dir));
         }
 
         umask($old);
@@ -175,7 +175,7 @@ class Filesystem
         }
 
         if (!is_dir($path)) {
-            throw new CakeException(sprintf(""%s" is not a directory", $path));
+            throw new CakeException(sprintf("'%s' is not a directory", $path));
         }
 
         $iterator = new RecursiveIteratorIterator(

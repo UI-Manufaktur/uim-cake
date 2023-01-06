@@ -674,7 +674,7 @@ class Response : IResponse
             return is_array($mapped) ? current($mapped) : $mapped;
         }
         if (indexOf(myContentsType, "/") == false) {
-            throw new InvalidArgumentException(sprintf(""%s" is an invalid content type.", myContentsType));
+            throw new InvalidArgumentException(sprintf("'%s' is an invalid content type.", myContentsType));
         }
 
         return myContentsType;
@@ -998,7 +998,7 @@ class Response : IResponse
      * @return static
      */
     function withEtag(string hash, bool $weak = false) {
-        $hash = sprintf("%s"%s"", $weak ? "W/" : "", $hash);
+        $hash = sprintf('%s'%s"", $weak ? "W/" : "", $hash);
 
         return this.withHeader("Etag", $hash);
     }

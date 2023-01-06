@@ -245,7 +245,7 @@ class Session
 
         if (!myClassName) {
             throw new InvalidArgumentException(
-                sprintf("The class "%s" does not exist and cannot be used as a session engine", myClass)
+                sprintf("The class '%s' does not exist and cannot be used as a session engine", myClass)
             );
         }
 
@@ -432,7 +432,7 @@ class Session
      */
     function readOrFail(string myName) {
         if (!this.check(myName)) {
-            throw new RuntimeException(sprintf("Expected session key "%s" not found.", myName));
+            throw new RuntimeException(sprintf("Expected session key '%s' not found.", myName));
         }
 
         return this.read(myName);

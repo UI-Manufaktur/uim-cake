@@ -128,7 +128,7 @@ class I18n
         $translator = $translators.get($name);
         if ($translator == null) {
             throw new I18nException(sprintf(
-                "Translator for domain "%s" could not be found.",
+                "Translator for domain '%s' could not be found.",
                 $name
             ));
         }

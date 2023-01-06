@@ -250,7 +250,7 @@ class Session
         $className = App::className($class, "Http/Session");
         if ($className == null) {
             throw new InvalidArgumentException(
-                sprintf("The class "%s" does not exist and cannot be used as a session engine", $class)
+                sprintf("The class '%s' does not exist and cannot be used as a session engine", $class)
             );
         }
 
@@ -430,7 +430,7 @@ class Session
      */
     function readOrFail(string aName) {
         if (!this.check($name)) {
-            throw new RuntimeException(sprintf("Expected session key "%s" not found.", $name));
+            throw new RuntimeException(sprintf("Expected session key '%s' not found.", $name));
         }
 
         return this.read($name);

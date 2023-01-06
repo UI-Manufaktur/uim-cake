@@ -61,7 +61,7 @@ class MiddlewareQueue : Countable, SeekableIterator
             $className = App::className($middleware, "Middleware", "Middleware");
             if ($className == null) {
                 throw new RuntimeException(sprintf(
-                    "Middleware "%s" was not found.",
+                    "Middleware '%s' was not found.",
                     $middleware
                 ));
             }
@@ -175,7 +175,7 @@ class MiddlewareQueue : Countable, SeekableIterator
         if ($found) {
             return this.insertAt($i, $middleware);
         }
-        throw new LogicException(sprintf("No middleware matching "%s" could be found.", $class));
+        throw new LogicException(sprintf("No middleware matching '%s' could be found.", $class));
     }
 
     /**
