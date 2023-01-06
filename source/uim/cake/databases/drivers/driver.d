@@ -405,7 +405,7 @@ abstract class Driver : IDriver
     /**
      * Returns the number of connection retry attempts made.
      */
-    int getConnectRetries(): int
+    int getConnectRetries()
     {
         return this.connectRetries;
     }

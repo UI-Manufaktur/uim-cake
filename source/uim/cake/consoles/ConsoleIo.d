@@ -118,7 +118,7 @@ class ConsoleIo
      * @param int|null $level The current output level.
      * @return int The current output level.
      */
-    function level(?int $level = null): int
+    int level(?int $level = null)
     {
         if ($level != null) {
             _level = $level;
@@ -225,7 +225,7 @@ class ConsoleIo
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    function warning($message, int $newlines = 1): int
+    int warning($message, int $newlines = 1)
     {
         $messageType = "warning";
         $message = this.wrapMessageWithType($messageType, $message);
@@ -241,7 +241,7 @@ class ConsoleIo
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#ConsoleIo::err
      */
-    function error($message, int $newlines = 1): int
+    int error($message, int $newlines = 1)
     {
         $messageType = "error";
         $message = this.wrapMessageWithType($messageType, $message);
@@ -347,7 +347,7 @@ class ConsoleIo
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    function err($message = "", int $newlines = 1): int
+    int err($message = "", int $newlines = 1)
     {
         return _err.write($message, $newlines);
     }

@@ -99,7 +99,7 @@ class DecimalType : BaseType : BatchCastingInterface
      * @param mixed $value The value being bound.
      * @param uim.cake.databases.IDriver $driver The driver.
      */
-    int toStatement($value, IDriver $driver): int
+    int toStatement($value, IDriver $driver)
     {
         return PDO::PARAM_STR;
     }

@@ -377,7 +377,7 @@ class WebExceptionRenderer : ExceptionRendererInterface
      * @param \Throwable $exception Exception.
      * @return int A valid HTTP status code.
      */
-    protected function getHttpCode(Throwable $exception): int
+    protected int getHttpCode(Throwable $exception)
     {
         if ($exception instanceof HttpException) {
             return $exception.getCode();

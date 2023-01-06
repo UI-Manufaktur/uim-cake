@@ -100,7 +100,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    protected int getCommands(Arguments $args, ConsoleIo $io): int
+    protected int getCommands(Arguments $args, ConsoleIo $io)
     {
         $options = [];
         foreach (this.commands as $key: $value) {
@@ -119,7 +119,7 @@ class CompletionCommand : Command : CommandCollectionAwareInterface
      * @param uim.cake.consoles.Arguments $args The command arguments.
      * @param uim.cake.consoles.ConsoleIo $io The console io
      */
-    protected int getSubcommands(Arguments $args, ConsoleIo $io): int
+    protected int getSubcommands(Arguments $args, ConsoleIo $io)
     {
         $name = $args.getArgument("command");
         if ($name == null || $name == "") {

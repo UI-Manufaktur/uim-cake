@@ -88,7 +88,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    function columnCount(): int
+    int columnCount()
     {
         return this.statement.columnCount();
     }
@@ -197,7 +197,7 @@ class BufferedStatement : Iterator, IStatement
     }
 
 
-    function rowCount(): int
+    int rowCount()
     {
         if (!_allFetched) {
             this.fetchAll(static::FETCH_TYPE_ASSOC);

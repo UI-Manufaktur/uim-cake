@@ -95,7 +95,7 @@ class LoggingStatement : StatementDecorator
     }
 
 
-    function rowCount(): int
+    int rowCount()
     {
         $result = super.rowCount();
 

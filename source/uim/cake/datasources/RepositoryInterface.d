@@ -87,7 +87,7 @@ interface RepositoryInterface
      * can take.
      * @return int Count Returns the affected rows.
      */
-    function updateAll($fields, $conditions): int;
+    int updateAll($fields, $conditions);
 
     /**
      * Deletes all records matching the provided conditions.
@@ -104,7 +104,7 @@ interface RepositoryInterface
      * @return int Returns the number of affected rows.
      * @see uim.cake.datasources.RepositoryInterface::delete()
      */
-    function deleteAll($conditions): int;
+    int deleteAll($conditions);
 
     /**
      * Returns true if there is any record in this repository matching the specified

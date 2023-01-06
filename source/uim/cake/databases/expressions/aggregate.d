@@ -180,7 +180,7 @@ class AggregateExpression : FunctionExpression : IWindow
     }
 
 
-    function count(): int
+    size_t count()
     {
         $count = super.count();
         if (this.window != null) {

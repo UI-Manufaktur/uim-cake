@@ -111,7 +111,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * echo $statement.columnCount(); // outputs 2
      * ```
      */
-    int columnCount(): int
+    int columnCount()
     {
         return _statement.columnCount();
     }
@@ -223,7 +223,7 @@ class StatementDecorator : IStatement, Countable, IteratorAggregate
      * print_r($statement.rowCount()); // will show 1
      * ```
      */
-    int rowCount(): int
+    int rowCount()
     {
         return _statement.rowCount();
     }

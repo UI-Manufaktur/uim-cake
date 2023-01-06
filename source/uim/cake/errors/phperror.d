@@ -96,7 +96,7 @@ class PhpError
     /**
      * Get the PHP error constant.
      */
-    int getCode(): int
+    int getCode()
     {
         return this.code;
     }
@@ -104,7 +104,7 @@ class PhpError
     /**
      * Get the mapped LOG_ constant.
      */
-    int getLogLevel(): int
+    int getLogLevel()
     {
         $label = this.getLabel();
 

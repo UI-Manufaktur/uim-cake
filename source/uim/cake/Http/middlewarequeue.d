@@ -277,7 +277,7 @@ class MiddlewareQueue : Countable, SeekableIterator
      * @return int
      * @see \Iterator::key()
      */
-    function key(): int
+    int key()
     {
         return this.position;
     }

@@ -350,7 +350,7 @@ class Shell
      * @return int The CLI command exit code. 0 is success.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#invoking-other-shells-from-your-shell
      */
-    function dispatchShell(): int
+    int dispatchShell()
     {
         [$args, $extra] = this.parseDispatchArguments(func_get_args());
 
@@ -663,7 +663,7 @@ class Shell
      * @param int $newlines Number of newlines to append
      * @return int The number of bytes returned from writing to stderr.
      */
-    function err($message, int $newlines = 1): int
+    int err($message, int $newlines = 1)
     {
         return _io.error($message, $newlines);
     }
@@ -690,7 +690,7 @@ class Shell
      * @return int The number of bytes returned from writing to stderr.
      * @see https://book.cakephp.org/4/en/console-and-shells.html#Shell::err
      */
-    function warn($message, int $newlines = 1): int
+    function warn($message, int $newlines = 1)
     {
         return _io.warning($message, $newlines);
     }
