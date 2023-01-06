@@ -46,24 +46,24 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * Constructor
      *
      * @param uim.cake.orm.Table $table Table instance.
-     * @param array<string, mixed> $config Configuration.
+     * @param array<string, mixed> aConfig Configuration.
      */
-    this(Table $table, array $config = []) {
+    this(Table $table, Json aConfig = []) {
         $tableAlias = $table.getAlias();
         [$plugin] = pluginSplit($table.getRegistryAlias(), true);
-        $tableReferenceName = $config["referenceName"];
+        $tableReferenceName = aConfig["referenceName"];
 
-        $config += [
+        aConfig += [
             "mainTableAlias": $tableAlias,
             "translationTable": $plugin . $tableReferenceName ~ "Translations",
             "hasOneAlias": $tableAlias ~ "Translation",
         ];
 
-        if (isset($config["tableLocator"])) {
-            _tableLocator = $config["tableLocator"];
+        if (isset(aConfig["tableLocator"])) {
+            _tableLocator = aConfig["tableLocator"];
         }
 
-        this.setConfig($config);
+        this.setConfig(aConfig);
         this.table = $table;
         this.translationTable = this.getTableLocator().get(
             _config["translationTable"],
@@ -80,13 +80,13 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * in before find - so create/modify it there.
      */
     protected void setupAssociations() {
-        $config = this.getConfig();
+        aConfig = this.getConfig();
 
         $targetAlias = this.translationTable.getAlias();
         this.table.hasMany($targetAlias, [
-            "className": $config["translationTable"],
+            "className": aConfig["translationTable"],
             "foreignKey": "id",
-            "strategy": $config["strategy"],
+            "strategy": aConfig["strategy"],
             "propertyName": "_i18n",
             "dependent": true,
         ]);
@@ -103,26 +103,26 @@ class ShadowTableStrategy : TranslateStrategyInterface
      */
     void beforeFind(IEvent $event, Query $query, ArrayObject $options) {
         $locale = Hash::get($options, "locale", this.getLocale());
-        $config = this.getConfig();
+        aConfig = this.getConfig();
 
-        if ($locale == $config["defaultLocale"]) {
+        if ($locale == aConfig["defaultLocale"]) {
             return;
         }
 
         this.setupHasOneAssociation($locale, $options);
 
-        $fieldsAdded = this.addFieldsToQuery($query, $config);
-        $orderByTranslatedField = this.iterateClause($query, "order", $config);
+        $fieldsAdded = this.addFieldsToQuery($query, aConfig);
+        $orderByTranslatedField = this.iterateClause($query, "order", aConfig);
         $filteredByTranslatedField =
-            this.traverseClause($query, "where", $config) ||
-            $config["onlyTranslated"] ||
+            this.traverseClause($query, "where", aConfig) ||
+            aConfig["onlyTranslated"] ||
             ($options["filterByCurrentLocale"] ?? null);
 
         if (!$fieldsAdded && !$orderByTranslatedField && !$filteredByTranslatedField) {
             return;
         }
 
-        $query.contain([$config["hasOneAlias"]]);
+        $query.contain([aConfig["hasOneAlias"]]);
 
         $query.formatResults(function ($results) use ($locale) {
             return this.rowMapper($results, $locale);
@@ -136,16 +136,16 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * @param \ArrayObject $options Find options
      */
     protected void setupHasOneAssociation(string $locale, ArrayObject $options) {
-        $config = this.getConfig();
+        aConfig = this.getConfig();
 
-        [$plugin] = pluginSplit($config["translationTable"]);
-        $hasOneTargetAlias = $plugin ? ($plugin ~ "." ~ $config["hasOneAlias"]) : $config["hasOneAlias"];
+        [$plugin] = pluginSplit(aConfig["translationTable"]);
+        $hasOneTargetAlias = $plugin ? ($plugin ~ "." ~ aConfig["hasOneAlias"]) : aConfig["hasOneAlias"];
         if (!this.getTableLocator().exists($hasOneTargetAlias)) {
             // Load table before hand with fallback class usage enabled
             this.getTableLocator().get(
                 $hasOneTargetAlias,
                 [
-                    "className": $config["translationTable"],
+                    "className": aConfig["translationTable"],
                     "allowFallbackClass": true,
                 ]
             );
@@ -154,16 +154,16 @@ class ShadowTableStrategy : TranslateStrategyInterface
         if (isset($options["filterByCurrentLocale"])) {
             $joinType = $options["filterByCurrentLocale"] ? "INNER" : "LEFT";
         } else {
-            $joinType = $config["onlyTranslated"] ? "INNER" : "LEFT";
+            $joinType = aConfig["onlyTranslated"] ? "INNER" : "LEFT";
         }
 
-        this.table.hasOne($config["hasOneAlias"], [
+        this.table.hasOne(aConfig["hasOneAlias"], [
             "foreignKey": ["id"],
             "joinType": $joinType,
             "propertyName": "translation",
-            "className": $config["translationTable"],
+            "className": aConfig["translationTable"],
             "conditions": [
-                $config["hasOneAlias"] ~ ".locale": $locale,
+                aConfig["hasOneAlias"] ~ ".locale": $locale,
             ],
         ]);
     }
@@ -178,10 +178,10 @@ class ShadowTableStrategy : TranslateStrategyInterface
      * add the locale field though.
      *
      * @param uim.cake.orm.Query $query The query to check.
-     * @param array<string, mixed> $config The config to use for adding fields.
+     * @param array<string, mixed> aConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected function addFieldsToQuery($query, array $config) {
+    protected function addFieldsToQuery($query, Json aConfig) {
         if ($query.isAutoFieldsEnabled()) {
             return true;
         }
@@ -194,17 +194,17 @@ class ShadowTableStrategy : TranslateStrategyInterface
             return true;
         }
 
-        $alias = $config["mainTableAlias"];
+        $alias = aConfig["mainTableAlias"];
         $joinRequired = false;
         foreach (this.translatedFields() as $field) {
             if (array_intersect($select, [$field, "$alias.$field"])) {
                 $joinRequired = true;
-                $query.select($query.aliasField($field, $config["hasOneAlias"]));
+                $query.select($query.aliasField($field, aConfig["hasOneAlias"]));
             }
         }
 
         if ($joinRequired) {
-            $query.select($query.aliasField("locale", $config["hasOneAlias"]));
+            $query.select($query.aliasField("locale", aConfig["hasOneAlias"]));
         }
 
         return $joinRequired;
@@ -219,18 +219,18 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @param uim.cake.orm.Query $query the query to check.
      * @param string aName The clause name.
-     * @param array<string, mixed> $config The config to use for adding fields.
+     * @param array<string, mixed> aConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected bool iterateClause($query, $name = "", $config = []) {
+    protected bool iterateClause($query, $name = "", aConfig = []) {
         $clause = $query.clause($name);
         if (!$clause || !$clause.count()) {
             return false;
         }
 
-        $alias = $config["hasOneAlias"];
+        $alias = aConfig["hasOneAlias"];
         $fields = this.translatedFields();
-        $mainTableAlias = $config["mainTableAlias"];
+        $mainTableAlias = aConfig["mainTableAlias"];
         $mainTableFields = this.mainFields();
         $joinRequired = false;
 
@@ -264,18 +264,18 @@ class ShadowTableStrategy : TranslateStrategyInterface
      *
      * @param uim.cake.orm.Query $query the query to check.
      * @param string aName The clause name.
-     * @param array<string, mixed> $config The config to use for adding fields.
+     * @param array<string, mixed> aConfig The config to use for adding fields.
      * @return bool Whether a join to the translation table is required.
      */
-    protected bool traverseClause($query, $name = "", $config = []) {
+    protected bool traverseClause($query, $name = "", aConfig = []) {
         $clause = $query.clause($name);
         if (!$clause || !$clause.count()) {
             return false;
         }
 
-        $alias = $config["hasOneAlias"];
+        $alias = aConfig["hasOneAlias"];
         $fields = this.translatedFields();
-        $mainTableAlias = $config["mainTableAlias"];
+        $mainTableAlias = aConfig["mainTableAlias"];
         $mainTableFields = this.mainFields();
         $joinRequired = false;
 

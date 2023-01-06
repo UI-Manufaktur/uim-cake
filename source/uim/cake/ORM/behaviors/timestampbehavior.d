@@ -58,11 +58,11 @@ class TimestampBehavior : Behavior
      * If events are specified - do *not* merge them with existing events,
      * overwrite the events to listen on
      *
-     * @param array<string, mixed> $config The config for this behavior.
+     * @param array<string, mixed> aConfig The config for this behavior.
      */
-    void initialize(array $config) {
-        if (isset($config["events"])) {
-            this.setConfig("events", $config["events"], false);
+    void initialize(Json aConfig) {
+        if (isset(aConfig["events"])) {
+            this.setConfig("events", aConfig["events"], false);
         }
     }
 

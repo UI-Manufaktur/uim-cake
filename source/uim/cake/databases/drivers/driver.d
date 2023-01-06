@@ -50,9 +50,8 @@ abstract class Driver : IDriver
     /**
      * The server version
      *
-     * @var string|null
      */
-    protected $_version;
+    protected Nullable!string _version;
 
     /**
      * The last number of connection retry attempts.

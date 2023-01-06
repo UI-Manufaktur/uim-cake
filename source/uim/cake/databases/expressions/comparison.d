@@ -26,9 +26,8 @@ class ComparisonExpression : IExpression, FieldInterface
     /**
      * The type to be used for casting the value to a database representation
      *
-     * @var string|null
      */
-    protected $_type;
+    protected Nullable!string _type;
 
     /**
      * The operator used for comparing field and value

@@ -33,9 +33,8 @@ class RequestHandlerComponent : Component
     /**
      * The template type to use when rendering the given content type.
      *
-     * @var string|null
      */
-    protected $_renderType;
+    protected Nullable!string _renderType;
 
     /**
      * Default config

@@ -16,9 +16,8 @@ class SecurityException : BadRequestException {
     /**
      * Reason for request blackhole
      *
-     * @var string|null
      */
-    protected $_reason;
+    protected Nullable!string _reason;
 
     /**
      * Getter for type

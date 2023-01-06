@@ -152,9 +152,8 @@ trait IntegrationTestTrait
     protected $_flashMessages = [];
 
     /**
-     * @var string|null
      */
-    protected $_cookieEncryptionKey;
+    protected Nullable!string _cookieEncryptionKey;
 
     /**
      * List of fields that are excluded from field validation.

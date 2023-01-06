@@ -54,14 +54,14 @@ class EavStrategy : TranslateStrategyInterface
      * Constructor
      *
      * @param uim.cake.orm.Table $table The table this strategy is attached to.
-     * @param array<string, mixed> $config The config for this strategy.
+     * @param array<string, mixed> aConfig The config for this strategy.
      */
-    this(Table $table, array $config = []) {
-        if (isset($config["tableLocator"])) {
-            _tableLocator = $config["tableLocator"];
+    this(Table $table, Json aConfig = []) {
+        if (isset(aConfig["tableLocator"])) {
+            _tableLocator = aConfig["tableLocator"];
         }
 
-        this.setConfig($config);
+        this.setConfig(aConfig);
         this.table = $table;
         this.translationTable = this.getTableLocator().get(
             _config["translationTable"],

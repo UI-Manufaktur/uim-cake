@@ -55,9 +55,8 @@ class EagerLoadable
      *
      * The property path of `country` will be `author.company`
      *
-     * @var string|null
      */
-    protected $_propertyPath;
+    protected Nullable!string _propertyPath;
 
     /**
      * Whether this level can be fetched using a join.
@@ -84,9 +83,8 @@ class EagerLoadable
      *
      * The target property of `country` will be just `country`
      *
-     * @var string|null
      */
-    protected $_targetProperty;
+    protected Nullable!string _targetProperty;
 
     /**
      * Constructor. The aConfig parameter accepts the following array

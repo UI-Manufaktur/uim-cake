@@ -46,9 +46,8 @@ class ConsoleInputOption
     /**
      * The prompt string
      *
-     * @var string|null
      */
-    protected $prompt;
+    protected Nullable!string prompt;
 
     /**
      * Is the option required.

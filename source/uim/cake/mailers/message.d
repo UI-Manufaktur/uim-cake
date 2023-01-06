@@ -183,17 +183,15 @@ class Message : JsonSerializable, Serializable {
      * Charset the email header is sent in
      * If null, the $charset property will be used as default
      *
-     * @var string|null
      */
-    protected $headerCharset;
+    protected Nullable!string headerCharset;
 
     /**
      * The email transfer encoding used.
      * If null, the $charset property is used for determined the transfer encoding.
      *
-     * @var string|null
      */
-    protected $transferEncoding;
+    protected Nullable!string transferEncoding;
 
     /**
      * Available encoding to be set for transfer.
@@ -211,9 +209,8 @@ class Message : JsonSerializable, Serializable {
     /**
      * The application wide charset, used to encode headers and body
      *
-     * @var string|null
      */
-    protected $appCharset;
+    protected Nullable!string appCharset;
 
     /**
      * List of files that should be attached to the email.
@@ -227,9 +224,8 @@ class Message : JsonSerializable, Serializable {
     /**
      * If set, boundary to use for multipart mime messages
      *
-     * @var string|null
      */
-    protected $boundary;
+    protected Nullable!string boundary;
 
     /**
      * Contains the optional priority of the email.
@@ -260,9 +256,8 @@ class Message : JsonSerializable, Serializable {
      * If null, filter_var() will be used. Use the emailPattern() method
      * to set a custom pattern."
      *
-     * @var string|null
      */
-    protected $emailPattern = self::EMAIL_PATTERN;
+    protected Nullable!string emailPattern = self::EMAIL_PATTERN;
 
     /**
      * Constructor

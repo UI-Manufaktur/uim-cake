@@ -110,7 +110,7 @@ class CounterCacheBehavior : Behavior
 
         foreach (_config as $assoc: $settings) {
             $assoc = _table.getAssociation($assoc);
-            foreach ($settings as $field: $config) {
+            foreach ($settings as $field: aConfig) {
                 if (is_int($field)) {
                     continue;
                 }
@@ -119,9 +119,9 @@ class CounterCacheBehavior : Behavior
                 $entityAlias = $assoc.getProperty();
 
                 if (
-                    !is_callable($config) &&
-                    isset($config["ignoreDirty"]) &&
-                    $config["ignoreDirty"] == true &&
+                    !is_callable(aConfig) &&
+                    isset(aConfig["ignoreDirty"]) &&
+                    aConfig["ignoreDirty"] == true &&
                     $entity.$entityAlias.isDirty($field)
                 ) {
                     _ignoreDirty[$registryAlias][$field] = true;
@@ -212,10 +212,10 @@ class CounterCacheBehavior : Behavior
             $updateOriginalConditions = array_combine($primaryKeys, $countOriginalConditions);
         }
 
-        foreach ($settings as $field: $config) {
+        foreach ($settings as $field: aConfig) {
             if (is_int($field)) {
-                $field = $config;
-                $config = [];
+                $field = aConfig;
+                aConfig = [];
             }
 
             if (
@@ -226,10 +226,10 @@ class CounterCacheBehavior : Behavior
             }
 
             if (_shouldUpdateCount($updateConditions)) {
-                if ($config instanceof Closure) {
-                    $count = $config($event, $entity, _table, false);
+                if (aConfig instanceof Closure) {
+                    $count = aConfig($event, $entity, _table, false);
                 } else {
-                    $count = _getCount($config, $countConditions);
+                    $count = _getCount(aConfig, $countConditions);
                 }
                 if ($count != false) {
                     $assoc.getTarget().updateAll([$field: $count], $updateConditions);
@@ -237,10 +237,10 @@ class CounterCacheBehavior : Behavior
             }
 
             if (isset($updateOriginalConditions) && _shouldUpdateCount($updateOriginalConditions)) {
-                if ($config instanceof Closure) {
-                    $count = $config($event, $entity, _table, true);
+                if (aConfig instanceof Closure) {
+                    $count = aConfig($event, $entity, _table, true);
                 } else {
-                    $count = _getCount($config, $countOriginalConditions);
+                    $count = _getCount(aConfig, $countOriginalConditions);
                 }
                 if ($count != false) {
                     $assoc.getTarget().updateAll([$field: $count], $updateOriginalConditions);
@@ -264,20 +264,20 @@ class CounterCacheBehavior : Behavior
     /**
      * Fetches and returns the count for a single field in an association
      *
-     * @param array<string, mixed> $config The counter cache configuration for a single field
+     * @param array<string, mixed> aConfig The counter cache configuration for a single field
      * @param array $conditions Additional conditions given to the query
      * @return int The number of relations matching the given config and conditions
      */
-    protected int _getCount(array $config, array $conditions)
+    protected int _getCount(Json aConfig, array $conditions)
     {
         $finder = "all";
-        if (!empty($config["finder"])) {
-            $finder = $config["finder"];
-            unset($config["finder"]);
+        if (!empty(aConfig["finder"])) {
+            $finder = aConfig["finder"];
+            unset(aConfig["finder"]);
         }
 
-        $config["conditions"] = array_merge($conditions, $config["conditions"] ?? []);
-        $query = _table.find($finder, $config);
+        aConfig["conditions"] = array_merge($conditions, aConfig["conditions"] ?? []);
+        $query = _table.find($finder, aConfig);
 
         return $query.count();
     }

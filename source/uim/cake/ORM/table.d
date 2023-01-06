@@ -162,17 +162,15 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
     /**
      * Name of the table as it can be found in the database
      *
-     * @var string|null
      */
-    protected $_table;
+    protected Nullable!string _table;
 
     /**
      * Human name giving to this particular instance. Multiple objects representing
      * the same database table can exist by using different aliases.
      *
-     * @var string|null
      */
-    protected $_alias;
+    protected Nullable!string _alias;
 
     /**
      * Connection instance
@@ -227,9 +225,8 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
     /**
      * Registry key used to create this table object
      *
-     * @var string|null
      */
-    protected $_registryAlias;
+    protected Nullable!string _registryAlias;
 
     /**
      * Initializes a new instance

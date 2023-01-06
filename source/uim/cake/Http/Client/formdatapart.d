@@ -38,9 +38,8 @@ class FormDataPart
     /**
      * Content type to use
      *
-     * @var string|null
      */
-    protected $_type;
+    protected Nullable!string _type;
 
     /**
      * Disposition to send
@@ -50,30 +49,26 @@ class FormDataPart
     /**
      * Filename to send if using files.
      *
-     * @var string|null
      */
-    protected $_filename;
+    protected Nullable!string _filename;
 
     /**
      * The encoding used in this part.
      *
-     * @var string|null
      */
-    protected $_transferEncoding;
+    protected Nullable!string _transferEncoding;
 
     /**
      * The contentId for the part
      *
-     * @var string|null
      */
-    protected $_contentId;
+    protected Nullable!string _contentId;
 
     /**
      * The charset attribute for the Content-Disposition header fields
      *
-     * @var string|null
      */
-    protected $_charset;
+    protected Nullable!string _charset;
 
     /**
      * Constructor

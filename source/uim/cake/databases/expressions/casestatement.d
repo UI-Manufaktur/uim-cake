@@ -45,9 +45,8 @@ class CaseStatementExpression : IExpression, ITypedResult
     /**
      * The case value type.
      *
-     * @var string|null
      */
-    protected $valueType = null;
+    protected Nullable!string valueType = null;
 
     /**
      * The `WHEN ... THEN ...` expressions.
@@ -73,16 +72,14 @@ class CaseStatementExpression : IExpression, ITypedResult
     /**
      * The else part result type.
      *
-     * @var string|null
      */
-    protected $elseType = null;
+    protected Nullable!string elseType = null;
 
     /**
      * The return type.
      *
-     * @var string|null
      */
-    protected $returnType = null;
+    protected Nullable!string returnType = null;
 
     /**
      * Constructor.

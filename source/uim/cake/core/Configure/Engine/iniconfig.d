@@ -49,9 +49,8 @@ class IniConfig : ConfigEngineInterface
     /**
      * The section to read, if null all sections will be read.
      *
-     * @var string|null
      */
-    protected $_section;
+    protected Nullable!string _section;
 
     /**
      * Build and construct a new ini file parser. The parser can be used to read

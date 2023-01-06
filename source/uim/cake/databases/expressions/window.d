@@ -37,9 +37,8 @@ class WindowExpression : IExpression, IWindow
     protected $frame;
 
     /**
-     * @var string|null
      */
-    protected $exclusion;
+    protected Nullable!string exclusion;
 
     /**
      * @param string aName Window name

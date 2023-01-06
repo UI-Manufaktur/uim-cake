@@ -21,9 +21,8 @@ class RuleInvoker
     /**
      * The rule name
      *
-     * @var string|null
      */
-    protected $name;
+    protected Nullable!string name;
 
     /**
      * Rule options

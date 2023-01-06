@@ -126,12 +126,12 @@ class TableHelper : Helper
 
         _io.setStyle("text-right", ["text": null]);
 
-        $config = this.getConfig();
+        aConfig = this.getConfig();
         $widths = _calculateWidths($args);
 
         _rowSeparator($widths);
-        if ($config["headers"] == true) {
-            _render(array_shift($args), $widths, ["style": $config["headerStyle"]]);
+        if (aConfig["headers"] == true) {
+            _render(array_shift($args), $widths, ["style": aConfig["headerStyle"]]);
             _rowSeparator($widths);
         }
 
@@ -141,11 +141,11 @@ class TableHelper : Helper
 
         foreach ($args as $line) {
             _render($line, $widths);
-            if ($config["rowSeparator"] == true) {
+            if (aConfig["rowSeparator"] == true) {
                 _rowSeparator($widths);
             }
         }
-        if ($config["rowSeparator"] != true) {
+        if (aConfig["rowSeparator"] != true) {
             _rowSeparator($widths);
         }
     }

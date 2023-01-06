@@ -20,9 +20,8 @@ class IdentifierExpression : IExpression
     protected string $_identifier;
 
     /**
-     * @var string|null
      */
-    protected $collation;
+    protected Nullable!string collation;
 
     /**
      * Constructor

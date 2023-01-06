@@ -34,9 +34,8 @@ class CommonTableExpression : IExpression
     /**
      * Whether the CTE is materialized or not materialized.
      *
-     * @var string|null
      */
-    protected $materialized = null;
+    protected Nullable!string materialized = null;
 
     /**
      * Whether the CTE is recursive.

@@ -55,9 +55,8 @@ class SmtpTransport : AbstractTransport
     /**
      * Detected authentication type.
      *
-     * @var string|null
      */
-    protected $authType = null;
+    protected Nullable!string authType = null;
 
     /**
      * Destructor

@@ -33,9 +33,8 @@ class FormProtector
     /**
      * Error message providing detail for failed validation.
      *
-     * @var string|null
      */
-    protected $debugMessage;
+    protected Nullable!string debugMessage;
 
     /**
      * Validate submitted form data.

@@ -25,9 +25,8 @@ trait ContainerStubTrait
      * The customized application class name.
      *
      * @psalm-var class-string<uim.cake.Core\IHttpApplication>|class-string<uim.cake.Core\IConsoleApplication>|null
-     * @var string|null
      */
-    protected $_appClass;
+    protected Nullable!string _appClass;
 
     /**
      * The customized application constructor arguments.

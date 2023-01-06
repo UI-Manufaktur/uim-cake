@@ -12,9 +12,8 @@ abstract class BaseType : TypeInterface
     /**
      * Identifier name for this type
      *
-     * @var string|null
      */
-    protected $_name;
+    protected Nullable!string _name;
 
     /**
      * Constructor

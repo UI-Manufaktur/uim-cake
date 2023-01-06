@@ -24,9 +24,8 @@ class Package
      * The name of a fallback package to use when a message key does not
      * exist.
      *
-     * @var string|null
      */
-    protected $fallback;
+    protected Nullable!string fallback;
 
     /**
      * The name of the formatter to use when formatting translated messages.

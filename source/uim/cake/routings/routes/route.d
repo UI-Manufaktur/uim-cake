@@ -58,16 +58,14 @@ class Route
     /**
      * The compiled route regular expression
      *
-     * @var string|null
      */
-    protected $_compiledRoute;
+    protected Nullable!string _compiledRoute;
 
     /**
      * The name for a route. Fetch with Route::getName();
      *
-     * @var string|null
      */
-    protected $_name;
+    protected Nullable!string _name;
 
     /**
      * List of connected extensions for this route.

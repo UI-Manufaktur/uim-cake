@@ -12,9 +12,8 @@ trait LocatorAwareTrait
     /**
      * This object"s default table alias.
      *
-     * @var string|null
      */
-    protected $defaultTable = null;
+    protected Nullable!string defaultTable = null;
 
     /**
      * Table locator instance

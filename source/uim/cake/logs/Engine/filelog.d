@@ -64,9 +64,8 @@ class FileLog : BaseLog
     /**
      * The name of the file to save logs into.
      *
-     * @var string|null
      */
-    protected $_file;
+    protected Nullable!string _file;
 
     /**
      * Max file size, used for log file rotation.

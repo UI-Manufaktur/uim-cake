@@ -22,9 +22,8 @@ trait TranslateStrategyTrait
      * The locale name that will be used to override fields in the bound table
      * from the translations table
      *
-     * @var string|null
      */
-    protected $locale;
+    protected Nullable!string locale;
 
     /**
      * Instance of Table responsible for translating

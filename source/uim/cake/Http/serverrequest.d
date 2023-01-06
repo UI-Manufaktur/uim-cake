@@ -176,16 +176,14 @@ class ServerRequest : IServerRequest
     /**
      * The HTTP protocol version used.
      *
-     * @var string|null
      */
-    protected $protocol;
+    protected Nullable!string protocol;
 
     /**
      * The request target if overridden
      *
-     * @var string|null
      */
-    protected $requestTarget;
+    protected Nullable!string requestTarget;
 
     /**
      * Create a new request object.

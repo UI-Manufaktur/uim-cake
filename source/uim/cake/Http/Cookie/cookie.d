@@ -90,9 +90,8 @@ class Cookie : CookieInterface
     /**
      * Samesite
      *
-     * @var string|null
      */
-    protected $sameSite = null;
+    protected Nullable!string sameSite = null;
 
     /**
      * Default attributes for a cookie.

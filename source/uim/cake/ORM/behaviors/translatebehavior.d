@@ -87,24 +87,24 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *   are created/modified. Default `null`.
      *
      * @param uim.cake.orm.Table $table The table this behavior is attached to.
-     * @param array<string, mixed> $config The config for this behavior.
+     * @param array<string, mixed> aConfig The config for this behavior.
      */
-    this(Table $table, array $config = []) {
-        $config += [
+    this(Table $table, Json aConfig = []) {
+        aConfig += [
             "defaultLocale": I18n::getDefaultLocale(),
             "referenceName": this.referenceName($table),
             "tableLocator": $table.associations().getTableLocator(),
         ];
 
-        super(($table, $config);
+        super(($table, aConfig);
     }
 
     /**
      * Initialize hook
      *
-     * @param array<string, mixed> $config The config for this behavior.
+     * @param array<string, mixed> aConfig The config for this behavior.
      */
-    void initialize(array $config) {
+    void initialize(Json aConfig) {
         this.getStrategy();
     }
 
@@ -153,14 +153,14 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      * @since 4.0.0
      */
     protected function createStrategy() {
-        $config = array_diff_key(
+        aConfig = array_diff_key(
             _config,
             ["implementedFinders", "implementedMethods", "strategyClass"]
         );
         /** @var class-string<uim.cake.orm.Behavior\Translate\TranslateStrategyInterface> $className */
         $className = this.getConfig("strategyClass", static::$defaultStrategyClass);
 
-        return new $className(_table, $config);
+        return new $className(_table, aConfig);
     }
 
     /**

@@ -123,9 +123,8 @@ class Controller : IEventListener, IEventDispatcher {
     /**
      * Automatically set to the name of a plugin.
      *
-     * @var string|null
      */
-    protected $plugin;
+    protected Nullable!string plugin;
 
     /**
      * Middlewares list.

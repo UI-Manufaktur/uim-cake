@@ -66,9 +66,8 @@ class WhenThenExpression : IExpression
     /**
      * The `THEN` result type.
      *
-     * @var string|null
      */
-    protected $thenType = null;
+    protected Nullable!string thenType = null;
 
     /**
      * Constructor.

@@ -61,7 +61,7 @@ class TreeBehavior : Behavior
     ];
 
 
-    void initialize(array $config) {
+    void initialize(Json aConfig) {
         _config["leftField"] = new IdentifierExpression(_config["left"]);
         _config["rightField"] = new IdentifierExpression(_config["right"]);
     }
@@ -78,11 +78,11 @@ class TreeBehavior : Behavior
      */
     function beforeSave(IEvent $event, IEntity $entity) {
         $isNew = $entity.isNew();
-        $config = this.getConfig();
-        $parent = $entity.get($config["parent"]);
+        aConfig = this.getConfig();
+        $parent = $entity.get(aConfig["parent"]);
         $primaryKey = _getPrimaryKey();
-        $dirty = $entity.isDirty($config["parent"]);
-        $level = $config["level"];
+        $dirty = $entity.isDirty(aConfig["parent"]);
+        $level = aConfig["level"];
 
         if ($parent && $entity.get($primaryKey) == $parent) {
             throw new RuntimeException("Cannot set a node"s parent as itself");
@@ -90,9 +90,9 @@ class TreeBehavior : Behavior
 
         if ($isNew && $parent) {
             $parentNode = _getNode($parent);
-            $edge = $parentNode.get($config["right"]);
-            $entity.set($config["left"], $edge);
-            $entity.set($config["right"], $edge + 1);
+            $edge = $parentNode.get(aConfig["right"]);
+            $entity.set(aConfig["left"], $edge);
+            $entity.set(aConfig["right"], $edge + 1);
             _sync(2, "+", ">= {$edge}");
 
             if ($level) {
@@ -104,8 +104,8 @@ class TreeBehavior : Behavior
 
         if ($isNew && !$parent) {
             $edge = _getMax();
-            $entity.set($config["left"], $edge + 1);
-            $entity.set($config["right"], $edge + 2);
+            $entity.set(aConfig["left"], $edge + 1);
+            $entity.set(aConfig["right"], $edge + 2);
 
             if ($level) {
                 $entity.set($level, 0);
@@ -156,30 +156,30 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity $entity The entity whose descendants need to be updated.
      */
     protected void _setChildrenLevel(IEntity $entity) {
-        $config = this.getConfig();
+        aConfig = this.getConfig();
 
-        if ($entity.get($config["left"]) + 1 == $entity.get($config["right"])) {
+        if ($entity.get(aConfig["left"]) + 1 == $entity.get(aConfig["right"])) {
             return;
         }
 
         $primaryKey = _getPrimaryKey();
         $primaryKeyValue = $entity.get($primaryKey);
-        $depths = [$primaryKeyValue: $entity.get($config["level"])];
+        $depths = [$primaryKeyValue: $entity.get(aConfig["level"])];
 
         $children = _table.find("children", [
             "for": $primaryKeyValue,
-            "fields": [_getPrimaryKey(), $config["parent"], $config["level"]],
-            "order": $config["left"],
+            "fields": [_getPrimaryKey(), aConfig["parent"], aConfig["level"]],
+            "order": aConfig["left"],
         ]);
 
         /** @var uim.cake.datasources.IEntity $node */
         foreach ($children as $node) {
-            $parentIdValue = $node.get($config["parent"]);
+            $parentIdValue = $node.get(aConfig["parent"]);
             $depth = $depths[$parentIdValue] + 1;
             $depths[$node.get($primaryKey)] = $depth;
 
             _table.updateAll(
-                [$config["level"]: $depth],
+                [aConfig["level"]: $depth],
                 [$primaryKey: $node.get($primaryKey)]
             );
         }
@@ -192,19 +192,19 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity $entity The entity that is going to be saved
      */
     void beforeDelete(IEvent $event, IEntity $entity) {
-        $config = this.getConfig();
+        aConfig = this.getConfig();
         _ensureFields($entity);
-        $left = $entity.get($config["left"]);
-        $right = $entity.get($config["right"]);
+        $left = $entity.get(aConfig["left"]);
+        $right = $entity.get(aConfig["right"]);
         $diff = $right - $left + 1;
 
         if ($diff > 2) {
             $query = _scope(_table.query())
-                .where(function ($exp) use ($config, $left, $right) {
+                .where(function ($exp) use (aConfig, $left, $right) {
                     /** @var uim.cake.databases.Expression\QueryExpression $exp */
                     return $exp
-                        .gte($config["leftField"], $left + 1)
-                        .lte($config["leftField"], $right - 1);
+                        .gte(aConfig["leftField"], $left + 1)
+                        .lte(aConfig["leftField"], $right - 1);
                 });
             if (this.getConfig("cascadeCallbacks")) {
                 $entities = $query.toArray();
@@ -232,13 +232,13 @@ class TreeBehavior : Behavior
      * @throws \RuntimeException if the parent to set to the entity is not valid
      */
     protected void _setParent(IEntity $entity, $parent) {
-        $config = this.getConfig();
+        aConfig = this.getConfig();
         $parentNode = _getNode($parent);
         _ensureFields($entity);
-        $parentLeft = $parentNode.get($config["left"]);
-        $parentRight = $parentNode.get($config["right"]);
-        $right = $entity.get($config["right"]);
-        $left = $entity.get($config["left"]);
+        $parentLeft = $parentNode.get(aConfig["left"]);
+        $parentRight = $parentNode.get(aConfig["right"]);
+        $right = $entity.get(aConfig["right"]);
+        $left = $entity.get(aConfig["left"]);
 
         if ($parentLeft > $left && $parentLeft < $right) {
             throw new RuntimeException(sprintf(
@@ -278,8 +278,8 @@ class TreeBehavior : Behavior
         }
 
         // Allocating new position
-        $entity.set($config["left"], $targetLeft);
-        $entity.set($config["right"], $targetRight);
+        $entity.set(aConfig["left"], $targetLeft);
+        $entity.set(aConfig["right"], $targetRight);
     }
 
     /**
@@ -290,11 +290,11 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity $entity The entity to set as a new root
      */
     protected void _setAsRoot(IEntity $entity) {
-        $config = this.getConfig();
+        aConfig = this.getConfig();
         $edge = _getMax();
         _ensureFields($entity);
-        $right = $entity.get($config["right"]);
-        $left = $entity.get($config["left"]);
+        $right = $entity.get(aConfig["right"]);
+        $left = $entity.get(aConfig["left"]);
         $diff = $right - $left;
 
         if ($right - $left > 1) {
@@ -310,8 +310,8 @@ class TreeBehavior : Behavior
             _unmarkInternalTree();
         }
 
-        $entity.set($config["left"], $edge - $diff);
-        $entity.set($config["right"], $edge);
+        $entity.set(aConfig["left"], $edge - $diff);
+        $entity.set(aConfig["right"], $edge);
     }
 
     /**
@@ -320,21 +320,21 @@ class TreeBehavior : Behavior
      * wouldn"t change while performing other tree transformations.
      */
     protected void _unmarkInternalTree() {
-        $config = this.getConfig();
+        aConfig = this.getConfig();
         _table.updateAll(
-            function ($exp) use ($config) {
+            function ($exp) use (aConfig) {
                 /** @var uim.cake.databases.Expression\QueryExpression $exp */
                 $leftInverse = clone $exp;
                 $leftInverse.setConjunction("*").add("-1");
                 $rightInverse = clone $leftInverse;
 
                 return $exp
-                    .eq($config["leftField"], $leftInverse.add($config["leftField"]))
-                    .eq($config["rightField"], $rightInverse.add($config["rightField"]));
+                    .eq(aConfig["leftField"], $leftInverse.add(aConfig["leftField"]))
+                    .eq(aConfig["rightField"], $rightInverse.add(aConfig["rightField"]));
             },
-            function ($exp) use ($config) {
+            function ($exp) use (aConfig) {
                 /** @var uim.cake.databases.Expression\QueryExpression $exp */
-                return $exp.lt($config["leftField"], 0);
+                return $exp.lt(aConfig["leftField"], 0);
             }
         );
     }
@@ -355,20 +355,20 @@ class TreeBehavior : Behavior
             throw new InvalidArgumentException("The "for" key is required for find("path")");
         }
 
-        $config = this.getConfig();
+        aConfig = this.getConfig();
         [$left, $right] = array_map(
             function ($field) {
                 return _table.aliasField($field);
             },
-            [$config["left"], $config["right"]]
+            [aConfig["left"], aConfig["right"]]
         );
 
         $node = _table.get($options["for"], ["fields": [$left, $right]]);
 
         return _scope($query)
             .where([
-                "$left <=": $node.get($config["left"]),
-                "$right >=": $node.get($config["right"]),
+                "$left <=": $node.get(aConfig["left"]),
+                "$right >=": $node.get(aConfig["right"]),
             ])
             .order([$left: "ASC"]);
     }
@@ -383,8 +383,8 @@ class TreeBehavior : Behavior
      */
     int childCount(IEntity $node, bool $direct = false)
     {
-        $config = this.getConfig();
-        $parent = _table.aliasField($config["parent"]);
+        aConfig = this.getConfig();
+        $parent = _table.aliasField(aConfig["parent"]);
 
         if ($direct) {
             return _scope(_table.find())
@@ -394,7 +394,7 @@ class TreeBehavior : Behavior
 
         _ensureFields($node);
 
-        return ($node.get($config["right"]) - $node.get($config["left"]) - 1) / 2;
+        return ($node.get(aConfig["right"]) - $node.get(aConfig["left"]) - 1) / 2;
     }
 
     /**
@@ -415,13 +415,13 @@ class TreeBehavior : Behavior
      */
     function findChildren(Query $query, array $options): Query
     {
-        $config = this.getConfig();
+        aConfig = this.getConfig();
         $options += ["for": null, "direct": false];
         [$parent, $left, $right] = array_map(
             function ($field) {
                 return _table.aliasField($field);
             },
-            [$config["parent"], $config["left"], $config["right"]]
+            [aConfig["parent"], aConfig["left"], aConfig["right"]]
         );
 
         [$for, $direct] = [$options["for"], $options["direct"]];
@@ -442,8 +442,8 @@ class TreeBehavior : Behavior
 
         return _scope($query)
             .where([
-                "{$right} <": $node.get($config["right"]),
-                "{$left} >": $node.get($config["left"]),
+                "{$right} <": $node.get(aConfig["right"]),
+                "{$left} >": $node.get(aConfig["left"]),
             ]);
     }
 
@@ -537,12 +537,12 @@ class TreeBehavior : Behavior
      * false on error
      */
     protected function _removeFromTree(IEntity $node) {
-        $config = this.getConfig();
-        $left = $node.get($config["left"]);
-        $right = $node.get($config["right"]);
-        $parent = $node.get($config["parent"]);
+        aConfig = this.getConfig();
+        $left = $node.get(aConfig["left"]);
+        $right = $node.get(aConfig["right"]);
+        $parent = $node.get(aConfig["parent"]);
 
-        $node.set($config["parent"], null);
+        $node.set(aConfig["parent"], null);
 
         if ($right - $left == 1) {
             return _table.save($node);
@@ -550,15 +550,15 @@ class TreeBehavior : Behavior
 
         $primary = _getPrimaryKey();
         _table.updateAll(
-            [$config["parent"]: $parent],
-            [$config["parent"]: $node.get($primary)]
+            [aConfig["parent"]: $parent],
+            [aConfig["parent"]: $node.get($primary)]
         );
         _sync(1, "-", "BETWEEN " ~ ($left + 1) ~ " AND " ~ ($right - 1));
         _sync(2, "-", "> {$right}");
         $edge = _getMax();
-        $node.set($config["left"], $edge + 1);
-        $node.set($config["right"], $edge + 2);
-        $fields = [$config["parent"], $config["left"], $config["right"]];
+        $node.set(aConfig["left"], $edge + 1);
+        $node.set(aConfig["right"], $edge + 2);
+        $fields = [aConfig["parent"], aConfig["left"], aConfig["right"]];
 
         _table.updateAll($node.extract($fields), [$primary: $node.get($primary)]);
 
@@ -602,8 +602,8 @@ class TreeBehavior : Behavior
      */
     protected function _moveUp(IEntity $node, $number): IEntity
     {
-        $config = this.getConfig();
-        [$parent, $left, $right] = [$config["parent"], $config["left"], $config["right"]];
+        aConfig = this.getConfig();
+        [$parent, $left, $right] = [aConfig["parent"], aConfig["left"], aConfig["right"]];
         [$nodeParent, $nodeLeft, $nodeRight] = array_values($node.extract([$parent, $left, $right]));
 
         $targetNode = null;
@@ -612,11 +612,11 @@ class TreeBehavior : Behavior
             $targetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
-                .where(function ($exp) use ($config, $nodeLeft) {
+                .where(function ($exp) use (aConfig, $nodeLeft) {
                     /** @var uim.cake.databases.Expression\QueryExpression $exp */
-                    return $exp.lt($config["rightField"], $nodeLeft);
+                    return $exp.lt(aConfig["rightField"], $nodeLeft);
                 })
-                .orderDesc($config["leftField"])
+                .orderDesc(aConfig["leftField"])
                 .offset($number - 1)
                 .limit(1)
                 .first();
@@ -626,11 +626,11 @@ class TreeBehavior : Behavior
             $targetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
-                .where(function ($exp) use ($config, $nodeLeft) {
+                .where(function ($exp) use (aConfig, $nodeLeft) {
                     /** @var uim.cake.databases.Expression\QueryExpression $exp */
-                    return $exp.lt($config["rightField"], $nodeLeft);
+                    return $exp.lt(aConfig["rightField"], $nodeLeft);
                 })
-                .orderAsc($config["leftField"])
+                .orderAsc(aConfig["leftField"])
                 .limit(1)
                 .first();
 
@@ -693,8 +693,8 @@ class TreeBehavior : Behavior
      */
     protected function _moveDown(IEntity $node, $number): IEntity
     {
-        $config = this.getConfig();
-        [$parent, $left, $right] = [$config["parent"], $config["left"], $config["right"]];
+        aConfig = this.getConfig();
+        [$parent, $left, $right] = [aConfig["parent"], aConfig["left"], aConfig["right"]];
         [$nodeParent, $nodeLeft, $nodeRight] = array_values($node.extract([$parent, $left, $right]));
 
         $targetNode = null;
@@ -703,11 +703,11 @@ class TreeBehavior : Behavior
             $targetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
-                .where(function ($exp) use ($config, $nodeRight) {
+                .where(function ($exp) use (aConfig, $nodeRight) {
                     /** @var uim.cake.databases.Expression\QueryExpression $exp */
-                    return $exp.gt($config["leftField"], $nodeRight);
+                    return $exp.gt(aConfig["leftField"], $nodeRight);
                 })
-                .orderAsc($config["leftField"])
+                .orderAsc(aConfig["leftField"])
                 .offset($number - 1)
                 .limit(1)
                 .first();
@@ -717,11 +717,11 @@ class TreeBehavior : Behavior
             $targetNode = _scope(_table.find())
                 .select([$left, $right])
                 .where(["$parent IS": $nodeParent])
-                .where(function ($exp) use ($config, $nodeRight) {
+                .where(function ($exp) use (aConfig, $nodeRight) {
                     /** @var uim.cake.databases.Expression\QueryExpression $exp */
-                    return $exp.gt($config["leftField"], $nodeRight);
+                    return $exp.gt(aConfig["leftField"], $nodeRight);
                 })
-                .orderDesc($config["leftField"])
+                .orderDesc(aConfig["leftField"])
                 .limit(1)
                 .first();
 
@@ -761,12 +761,12 @@ class TreeBehavior : Behavior
      */
     protected function _getNode($id): IEntity
     {
-        $config = this.getConfig();
-        [$parent, $left, $right] = [$config["parent"], $config["left"], $config["right"]];
+        aConfig = this.getConfig();
+        [$parent, $left, $right] = [aConfig["parent"], aConfig["left"], aConfig["right"]];
         $primaryKey = _getPrimaryKey();
         $fields = [$parent, $left, $right];
-        if ($config["level"]) {
-            $fields[] = $config["level"];
+        if (aConfig["level"]) {
+            $fields[] = aConfig["level"];
         }
 
         $node = _scope(_table.find())
@@ -802,10 +802,10 @@ class TreeBehavior : Behavior
      */
     protected int _recoverTree(int $lftRght = 1, $parentId = null, $level = 0)
     {
-        $config = this.getConfig();
-        [$parent, $left, $right] = [$config["parent"], $config["left"], $config["right"]];
+        aConfig = this.getConfig();
+        [$parent, $left, $right] = [aConfig["parent"], aConfig["left"], aConfig["right"]];
         $primaryKey = _getPrimaryKey();
-        $order = $config["recoverOrder"] ?: $primaryKey;
+        $order = aConfig["recoverOrder"] ?: $primaryKey;
 
         $nodes = _scope(_table.query())
             .select($primaryKey)
@@ -819,8 +819,8 @@ class TreeBehavior : Behavior
             $lftRght = _recoverTree($lftRght, $node[$primaryKey], $level + 1);
 
             $fields = [$left: $nodeLft, $right: $lftRght++];
-            if ($config["level"]) {
-                $fields[$config["level"]] = $level;
+            if (aConfig["level"]) {
+                $fields[aConfig["level"]] = $level;
             }
 
             _table.updateAll(
@@ -863,9 +863,9 @@ class TreeBehavior : Behavior
      * modified by future calls to this function.
      */
     protected void _sync(int $shift, string $dir, string $conditions, bool $mark = false) {
-        $config = _config;
+        aConfig = _config;
 
-        foreach ([$config["leftField"], $config["rightField"]] as $field) {
+        foreach ([aConfig["leftField"], aConfig["rightField"]] as $field) {
             $query = _scope(_table.query());
             $exp = $query.newExpr();
 
@@ -916,8 +916,8 @@ class TreeBehavior : Behavior
      * @param uim.cake.Datasource\IEntity $entity The entity to ensure fields for
      */
     protected void _ensureFields(IEntity $entity) {
-        $config = this.getConfig();
-        $fields = [$config["left"], $config["right"]];
+        aConfig = this.getConfig();
+        $fields = [aConfig["left"], aConfig["right"]];
         $values = array_filter($entity.extract($fields));
         if (count($values) == count($fields)) {
             return;
@@ -955,9 +955,9 @@ class TreeBehavior : Behavior
         if ($entity instanceof IEntity) {
             $id = $entity.get($primaryKey);
         }
-        $config = this.getConfig();
+        aConfig = this.getConfig();
         $entity = _table.find("all")
-            .select([$config["left"], $config["right"]])
+            .select([aConfig["left"], aConfig["right"]])
             .where([$primaryKey: $id])
             .first();
 
@@ -966,8 +966,8 @@ class TreeBehavior : Behavior
         }
 
         $query = _table.find("all").where([
-            $config["left"] ~ " <": $entity[$config["left"]],
-            $config["right"] ~ " >": $entity[$config["right"]],
+            aConfig["left"] ~ " <": $entity[aConfig["left"]],
+            aConfig["right"] ~ " >": $entity[aConfig["right"]],
         ]);
 
         return _scope($query).count();

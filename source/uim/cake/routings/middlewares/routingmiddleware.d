@@ -47,9 +47,8 @@ class RoutingMiddleware : IMiddleware
      * The cache configuration name to use for route collection caching,
      * null to disable caching
      *
-     * @var string|null
      */
-    protected $cacheConfig;
+    protected Nullable!string cacheConfig;
 
     /**
      * Constructor
