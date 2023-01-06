@@ -77,7 +77,7 @@ class ConsoleInputOption
         array $choices = [],
         bool $multiple = false,
         bool $required = false,
-        ?string $prompt = null
+        Nullable!string $prompt = null
     ) {
         _name = $name;
         _short = $short;

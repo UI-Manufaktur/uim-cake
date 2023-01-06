@@ -96,7 +96,7 @@ trait InstanceConfigTrait
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    function getConfig(?string aKey = null, $default = null) {
+    function getConfig(Nullable!string aKey = null, $default = null) {
         if (!_configInitialized) {
             _config = _defaultConfig;
             _configInitialized = true;
@@ -168,7 +168,7 @@ trait InstanceConfigTrait
      * @param string|null $key Key to read.
      * @return mixed
      */
-    protected function _configRead(?string aKey) {
+    protected function _configRead(Nullable!string aKey) {
         if ($key == null) {
             return _config;
         }

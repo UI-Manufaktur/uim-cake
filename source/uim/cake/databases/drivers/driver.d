@@ -301,7 +301,7 @@ abstract class Driver : IDriver
     }
 
 
-    function lastInsertId(?string $table = null, ?string $column = null) {
+    function lastInsertId(Nullable!string $table = null, Nullable!string $column = null) {
         this.connect();
 
         if (_connection instanceof PDO) {

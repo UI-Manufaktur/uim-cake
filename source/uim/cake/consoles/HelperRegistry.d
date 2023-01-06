@@ -60,7 +60,7 @@ class HelperRegistry : ObjectRegistry
      * @return void
      * @throws uim.cake.consoles.exceptions.MissingHelperException
      */
-    protected void _throwMissingClassError(string $class, ?string $plugin) {
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new MissingHelperException([
             "class": $class,
             "plugin": $plugin,

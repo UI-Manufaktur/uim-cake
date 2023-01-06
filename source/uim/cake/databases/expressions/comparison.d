@@ -55,7 +55,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param string|null $type the type name used to cast the value
      * @param string $operator the operator used for comparing field and value
      */
-    this($field, $value, ?string $type = null, string $operator = "=") {
+    this($field, $value, Nullable!string $type = null, string $operator = "=") {
         _type = $type;
         this.setField($field);
         this.setValue($value);
@@ -206,7 +206,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param string|null $type The type of $value
      * @return string generated placeholder
      */
-    protected string _bindValue($value, ValueBinder aBinder, ?string $type = null) {
+    protected string _bindValue($value, ValueBinder aBinder, Nullable!string $type = null) {
         $placeholder = $binder.placeholder("c");
         $binder.bind($placeholder, $value, $type);
 
@@ -221,7 +221,7 @@ class ComparisonExpression : IExpression, FieldInterface
      * @param uim.cake.databases.ValueBinder aBinder The value binder to use
      * @param string|null $type the type to cast values to
      */
-    protected string _flattenValue(iterable $value, ValueBinder aBinder, ?string $type = null) {
+    protected string _flattenValue(iterable $value, ValueBinder aBinder, Nullable!string $type = null) {
         $parts = [];
         if (is_array($value)) {
             foreach (_valueExpressions as $k: $v) {

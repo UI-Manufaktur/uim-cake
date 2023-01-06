@@ -101,7 +101,7 @@ class CaseStatementExpression : IExpression, ITypedResult
      * @param string|null $type The case value type. If no type is provided, the type will be tried to be inferred
      *  from the value.
      */
-    this($value = null, ?string $type = null) {
+    this($value = null, Nullable!string $type = null) {
         if (func_num_args() > 0) {
             if (
                 $value != null &&
@@ -350,7 +350,7 @@ class CaseStatementExpression : IExpression, ITypedResult
      * @throws \LogicException In case `when()` wasn"t previously called with a value other than a closure or an
      *  instance of `uim.cake.databases.Expression\WhenThenExpression`.
      */
-    function then($result, ?string $type = null) {
+    function then($result, Nullable!string $type = null) {
         if (this.whenBuffer == null) {
             throw new LogicException("Cannot call `then()` before `when()`.");
         }
@@ -377,7 +377,7 @@ class CaseStatementExpression : IExpression, ITypedResult
      * @throws \InvalidArgumentException In case the `$result` argument is neither a scalar value, nor an object, an
      *  instance of `uim.cake.databases.IExpression`, or `null`.
      */
-    function else($result, ?string $type = null) {
+    function else($result, Nullable!string $type = null) {
         if (this.whenBuffer != null) {
             throw new LogicException("Cannot call `else()` between `when()` and `then()`.");
         }

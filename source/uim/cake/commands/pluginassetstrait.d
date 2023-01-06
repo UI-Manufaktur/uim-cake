@@ -31,7 +31,7 @@ trait PluginAssetsTrait
      *   If null all plugins will be processed.
      * @return array<string, mixed> List of plugins with meta data.
      */
-    protected array _list(?string aName = null) {
+    protected array _list(Nullable!string aName = null) {
         if ($name == null) {
             $pluginsList = Plugin::loaded();
         } else {

@@ -91,7 +91,7 @@ class FlashComponent : Component
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Configuration data at the named key or null if the key does not exist.
      */
-    function getConfig(?string aKey = null, $default = null) {
+    function getConfig(Nullable!string aKey = null, $default = null) {
         return this.flash().getConfig($key, $default);
     }
 

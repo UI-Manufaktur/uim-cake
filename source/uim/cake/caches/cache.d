@@ -480,7 +480,7 @@ class Cache {
      * @return array<string, array> Map of group and all configuration that has the same group
      * @throws uim.cake.Cache\InvalidArgumentException
      */
-    static array groupConfigs(?string $group = null) {
+    static array groupConfigs(Nullable!string $group = null) {
         foreach (static::configured() as aConfig) {
             static::pool(aConfig);
         }

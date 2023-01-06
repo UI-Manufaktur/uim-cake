@@ -626,7 +626,7 @@ class AuthComponent : Component : IEventDispatcher
      * @return mixed|null Either User record or null if no user is logged in, or retrieved field if key is specified.
      * @link https://book.cakephp.org/4/en/controllers/components/authentication.html#accessing-the-logged-in-user
      */
-    function user(?string aKey = null) {
+    function user(Nullable!string aKey = null) {
         $user = this.storage().read();
         if (!$user) {
             return null;

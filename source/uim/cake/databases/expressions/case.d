@@ -148,7 +148,7 @@ class CaseExpression : IExpression
      * @param uim.cake.databases.IExpression|array|string|null $value Value to set
      * @param string|null $type Type of value
      */
-    void elseValue($value = null, ?string $type = null) {
+    void elseValue($value = null, Nullable!string $type = null) {
         if (is_array($value)) {
             end($value);
             $value = key($value);

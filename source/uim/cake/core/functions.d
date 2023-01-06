@@ -23,7 +23,7 @@ if (!function_exists("h")) {
      * @return mixed Wrapped text.
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#h
      */
-    function h($text, bool $double = true, ?string $charset = null) {
+    function h($text, bool $double = true, Nullable!string $charset = null) {
         if (is_string($text)) {
             //optimize for strings
         } elseif (is_array($text)) {
@@ -70,7 +70,7 @@ if (!function_exists("pluginSplit")) {
      * @link https://book.cakephp.org/4/en/core-libraries/global-constants-and-functions.html#pluginSplit
      * @psalm-return array{string|null, string}
      */
-    array pluginSplit(string aName, bool $dotAppend = false, ?string $plugin = null) {
+    array pluginSplit(string aName, bool $dotAppend = false, Nullable!string $plugin = null) {
         if (strpos($name, ".") != false) {
             $parts = explode(".", $name, 2);
             if ($dotAppend) {

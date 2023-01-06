@@ -57,7 +57,7 @@ class AggregateExpression : FunctionExpression : IWindow
      * @param string|null $name Window name
      * @return this
      */
-    function over(?string aName = null) {
+    function over(Nullable!string aName = null) {
         if (this.window == null) {
             this.window = new WindowExpression();
         }

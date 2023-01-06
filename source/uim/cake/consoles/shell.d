@@ -504,7 +504,7 @@ class Shell
      * @param string|null $command The command to get help for.
      * @return int|null The number of bytes returned from writing to stdout.
      */
-    protected function _displayHelp(?string $command = null) {
+    protected function _displayHelp(Nullable!string $command = null) {
         $format = "text";
         if (!empty(this.args[0]) && this.args[0] == "xml") {
             $format = "xml";
@@ -576,7 +576,7 @@ class Shell
      * @return string|null Either the default value, or the user-provided input.
      * @link https://book.cakephp.org/4/en/console-and-shells.html#Shell::in
      */
-    Nullable!string in(string $prompt, $options = null, ?string $default = null) {
+    Nullable!string in(string $prompt, $options = null, Nullable!string $default = null) {
         if (!this.interactive) {
             return $default;
         }

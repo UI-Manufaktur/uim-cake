@@ -60,7 +60,7 @@ class IniConfig : ConfigEngineInterface
      * @param string|null $section Only get one section, leave null to parse and fetch
      *     all sections in the ini file.
      */
-    this(?string $path = null, ?string $section = null) {
+    this(Nullable!string $path = null, Nullable!string $section = null) {
         if ($path == null) {
             $path = CONFIG;
         }

@@ -100,7 +100,7 @@ class Configure {
      * @return mixed Value stored in configure, or null.
      * @link https://book.cakephp.org/4/en/development/configuration.html#reading-configuration-data
      */
-    static function read(?string $var = null, $default = null) {
+    static function read(Nullable!string $var = null, $default = null) {
         if ($var == null) {
             return static::_values;
         }

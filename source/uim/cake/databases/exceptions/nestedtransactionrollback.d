@@ -16,7 +16,7 @@ class NestedTransactionRollbackException : CakeException {
      * @param int|null $code Status code, defaults to 500.
      * @param \Throwable|null $previous the previous exception.
      */
-    this(?string $message = null, Nullable!int $code = 500, ?Throwable $previous = null) {
+    this(Nullable!string $message = null, Nullable!int $code = 500, ?Throwable $previous = null) {
         if ($message == null) {
             $message = "Cannot commit transaction - rollback() has been already called in the nested transaction";
         }

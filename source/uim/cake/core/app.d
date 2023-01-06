@@ -175,7 +175,7 @@ class App
      * @param string $type Type of path
      * @param string|null $plugin Plugin name
      */
-    static string[] path(string $type, ?string $plugin = null) {
+    static string[] path(string $type, Nullable!string $plugin = null) {
         if ($plugin == null && $type[0] == strtolower($type[0])) {
             return (array)Configure::read("App.paths." ~ $type);
         }
@@ -219,7 +219,7 @@ class App
      * @param string|null $plugin Plugin name.
      * @return array<string>
      */
-    static string[] classPath(string $type, ?string $plugin = null) {
+    static string[] classPath(string $type, Nullable!string $plugin = null) {
         if ($plugin != null) {
             return [
                 Plugin::classPath($plugin) . $type . DIRECTORY_SEPARATOR,

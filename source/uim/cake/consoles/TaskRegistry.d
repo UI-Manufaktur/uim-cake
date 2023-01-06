@@ -52,7 +52,7 @@ class TaskRegistry : ObjectRegistry
      * @return void
      * @throws uim.cake.consoles.exceptions.MissingTaskException
      */
-    protected void _throwMissingClassError(string $class, ?string $plugin) {
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new MissingTaskException([
             "class": $class,
             "plugin": $plugin,

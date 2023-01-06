@@ -22,7 +22,7 @@ class CacheRegistry : ObjectRegistry
      * @param string $class Partial classname to resolve.
      * @return string|null Either the correct classname or null.
      */
-    protected ?string _resolveClassName(string $class) {
+    protected Nullable!string _resolveClassName(string $class) {
         return App::className($class, "Cache/Engine", "Engine");
     }
 
@@ -36,7 +36,7 @@ class CacheRegistry : ObjectRegistry
      * @return void
      * @throws \BadMethodCallException
      */
-    protected void _throwMissingClassError(string $class, ?string $plugin) {
+    protected void _throwMissingClassError(string $class, Nullable!string $plugin) {
         throw new BadMethodCallException(sprintf("Cache engine %s is not available.", $class));
     }
 

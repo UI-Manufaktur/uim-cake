@@ -42,7 +42,7 @@ class PhpConfig : ConfigEngineInterface
      *
      * @param string|null $path The path to read config files from. Defaults to CONFIG.
      */
-    this(?string $path = null) {
+    this(Nullable!string $path = null) {
         if ($path == null) {
             $path = CONFIG;
         }

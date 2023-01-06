@@ -717,7 +717,7 @@ class ConsoleOptionParser
      * @param int $width The width to format user content to. Defaults to 72
      * @return string Generated help.
      */
-    string help(?string $subcommand = null, string $format = "text", int $width = 72) {
+    string help(Nullable!string $subcommand = null, string $format = "text", int $width = 72) {
         if ($subcommand == null) {
             $formatter = new HelpFormatter(this);
             $formatter.setAlias(this.rootName);

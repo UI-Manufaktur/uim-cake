@@ -1772,7 +1772,7 @@ class Query : IExpression, IteratorAggregate
      * @param string|null $table The table to use when deleting.
      * @return this
      */
-    function delete(?string $table = null) {
+    function delete(Nullable!string $table = null) {
         _dirty();
         _type = "delete";
         if ($table != null) {

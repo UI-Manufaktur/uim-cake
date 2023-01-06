@@ -150,7 +150,7 @@ class Controller : IEventListener, IEventDispatcher {
     this(
         ?ServerRequest myServerRequest = null,
         ?Response $response = null,
-        ?string aName = null,
+        Nullable!string aName = null,
         ?IEventManager $eventManager = null,
         ?ComponentRegistry $components = null
     ) {
@@ -368,7 +368,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @return this
 
      */
-    function setPlugin(?string aName) {
+    function setPlugin(Nullable!string aName) {
         this.plugin = $name;
 
         return this;
@@ -683,7 +683,7 @@ class Controller : IEventListener, IEventDispatcher {
      * @return uim.cake.http.Response A response object containing the rendered view.
      * @link https://book.cakephp.org/4/en/controllers.html#rendering-a-view
      */
-    function render(?string $template = null, ?string $layout = null): Response
+    function render(Nullable!string $template = null, Nullable!string $layout = null): Response
     {
         $builder = this.viewBuilder();
         if (!$builder.getTemplatePath()) {

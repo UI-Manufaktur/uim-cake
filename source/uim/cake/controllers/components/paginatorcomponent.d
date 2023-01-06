@@ -273,7 +273,7 @@ class PaginatorComponent : Component
      * @param mixed $default The return value when the key does not exist.
      * @return mixed Config value being read.
      */
-    function getConfig(?string aKey = null, $default = null) {
+    function getConfig(Nullable!string aKey = null, $default = null) {
         return _paginator.getConfig($key, $default);
     }
 
