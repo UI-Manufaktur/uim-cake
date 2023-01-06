@@ -177,8 +177,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return array<array> Array of failed fields
      * @deprecated 3.9.0 Renamed to {@link validate()}.
      */
-    array errors(array myData, bool $newRecord = true)
-    {
+    array errors(array myData, bool $newRecord = true) {
         deprecationWarning("`Validator::errors()` is deprecated. Use `Validator::validate()` instead.");
 
         return this.validate(myData, $newRecord);
@@ -191,8 +190,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      * @return array<array> Array of failed fields
      */
-    array validate(array myData, bool $newRecord = true)
-    {
+    array validate(array myData, bool $newRecord = true) {
         myErrors = [];
 
         foreach (_fields as myName: myField) {
@@ -340,16 +338,14 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
     /**
      * Get the list of default providers.
      */
-    static string[] getDefaultProviders()
-    {
+    static string[] getDefaultProviders() {
         return array_keys(self::_defaultProviders);
     }
 
     /**
      * Get the list of providers in this validator.
      */
-    string[] providers()
-    {
+    string[] providers() {
         return array_keys(_providers);
     }
 
@@ -1064,8 +1060,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @return array<array>
      * @throws \InvalidArgumentException
      */
-    protected array _convertValidatorToArray(myFieldName, array $defaults = [], $settings = [])
-    {
+    protected array _convertValidatorToArray(myFieldName, array $defaults = [], $settings = []) {
         if (is_string($settings)) {
             myFieldName = $settings;
             $settings = [];
@@ -2542,8 +2537,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      * @param bool $newRecord whether is it a new record or an existing one
      * @return array<string, mixed>
      */
-    protected array _processRules(string myField, ValidationSet $rules, array myData, bool $newRecord)
-    {
+    protected array _processRules(string myField, ValidationSet $rules, array myData, bool $newRecord) {
         myErrors = [];
         // Loading default provider in case there is none
         this.getProvider("default");
@@ -2583,8 +2577,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable {
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         myFields = [];
         foreach (_fields as myName: myFieldSet) {
             myFields[myName] = [

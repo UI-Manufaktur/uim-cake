@@ -207,8 +207,7 @@ class NumberHelper : Helper
      * @return string|null Currency
      * @deprecated 3.9.0 Use setDefaultCurrency()/getDefaultCurrency() instead.
      */
-    Nullable!string defaultCurrency($currency)
-    {
+    Nullable!string defaultCurrency($currency) {
         deprecationWarning(
             "NumberHelper::defaultCurrency() is deprecated. Use setDefaultCurrency() and getDefaultCurrency() instead."
         );
@@ -221,8 +220,7 @@ class NumberHelper : Helper
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         return [];
     }
 

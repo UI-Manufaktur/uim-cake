@@ -200,8 +200,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return array<array> Array of failed fields
      * @deprecated 3.9.0 Renamed to {@link validate()}.
      */
-    array errors(array $data, bool $newRecord = true)
-    {
+    array errors(array $data, bool $newRecord = true) {
         deprecationWarning("`Validator::errors()` is deprecated. Use `Validator::validate()` instead.");
 
         return this.validate($data, $newRecord);
@@ -214,8 +213,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param bool $newRecord whether the data to be validated is new or to be updated.
      * @return array<array> Array of failed fields
      */
-    array validate(array $data, bool $newRecord = true)
-    {
+    array validate(array $data, bool $newRecord = true) {
         $errors = [];
 
         foreach (_fields as $name: $field) {
@@ -363,8 +361,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Get the list of default providers.
      */
-    static string[] getDefaultProviders()
-    {
+    static string[] getDefaultProviders() {
         return array_keys(self::_defaultProviders);
     }
 
@@ -373,8 +370,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @return array<string>
      */
-    string[] providers()
-    {
+    string[] providers() {
         return array_keys(_providers);
     }
 
@@ -437,8 +433,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns the number of fields having validation rules
      */
-    size_t count()
-    {
+    size_t count() {
         return count(_fields);
     }
 
@@ -1091,8 +1086,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @return array<array>
      * @throws \InvalidArgumentException
      */
-    protected array _convertValidatorToArray($fieldName, array $defaults = [], $settings = [])
-    {
+    protected array _convertValidatorToArray($fieldName, array $defaults = [], $settings = []) {
         if (is_string($settings)) {
             $fieldName = $settings;
             $settings = [];
@@ -2405,8 +2399,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $field Field name
      */
-    Nullable!string getRequiredMessage(string $field)
-    {
+    Nullable!string getRequiredMessage(string $field) {
         if (!isset(_fields[$field])) {
             return null;
         }
@@ -2424,8 +2417,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @param string $field Field name
      */
-    Nullable!string getNotEmptyMessage(string $field)
-    {
+    Nullable!string getNotEmptyMessage(string $field) {
         if (!isset(_fields[$field])) {
             return null;
         }
@@ -2569,8 +2561,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      * @param bool $newRecord whether is it a new record or an existing one
      * @return array<string, mixed>
      */
-    protected array _processRules(string $field, ValidationSet $rules, array $data, bool $newRecord)
-    {
+    protected array _processRules(string $field, ValidationSet $rules, array $data, bool $newRecord) {
         $errors = [];
         // Loading default provider in case there is none
         this.getProvider("default");
@@ -2610,8 +2601,7 @@ class Validator : ArrayAccess, IteratorAggregate, Countable
      *
      * @return array<string, mixed>
      */
-    array __debugInfo()
-    {
+    array __debugInfo() {
         $fields = [];
         foreach (_fields as $name: $fieldSet) {
             $fields[$name] = [

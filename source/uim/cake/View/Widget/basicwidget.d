@@ -98,8 +98,7 @@ class BasicWidget : WidgetInterface
      * @param uim.cake.View\Form\IContext $context Context instance.
      * @return array<string, mixed> Updated data array.
      */
-    protected array mergeDefaults(array $data, IContext $context)
-    {
+    protected array mergeDefaults(array $data, IContext $context) {
         $data += this.defaults;
 
         if (isset($data["fieldName"]) && !array_key_exists("required", $data)) {
@@ -117,8 +116,7 @@ class BasicWidget : WidgetInterface
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected array setRequired(array $data, IContext $context, string $fieldName)
-    {
+    protected array setRequired(array $data, IContext $context, string $fieldName) {
         if (
             empty($data["disabled"])
             && (
@@ -143,8 +141,7 @@ class BasicWidget : WidgetInterface
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected array setMaxLength(array $data, IContext $context, string $fieldName)
-    {
+    protected array setMaxLength(array $data, IContext $context, string $fieldName) {
         $maxLength = $context.getMaxLength($fieldName);
         if ($maxLength != null) {
             $data["maxlength"] = min($maxLength, 100000);
@@ -161,8 +158,7 @@ class BasicWidget : WidgetInterface
      * @param string $fieldName Field name.
      * @return array<string, mixed> Updated data array.
      */
-    protected array setStep(array $data, IContext $context, string $fieldName)
-    {
+    protected array setStep(array $data, IContext $context, string $fieldName) {
         $dbType = $context.type($fieldName);
         $fieldDef = $context.attributes($fieldName);
 
@@ -177,8 +173,7 @@ class BasicWidget : WidgetInterface
     }
 
 
-    array secureFields(array $data)
-    {
+    array secureFields(array $data) {
         if (!isset($data["name"]) || $data["name"] == "") {
             return [];
         }

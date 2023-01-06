@@ -690,8 +690,7 @@ class Text
      * @param array<string, mixed> $options An array of options.
      * @return int
      */
-    protected static int _strlen(string $text, array $options)
-    {
+    protected static int _strlen(string $text, array $options) {
         if (empty($options["trimWidth"])) {
             $strlen = "mb_strlen";
         } else {
@@ -921,8 +920,7 @@ class Text
      * to the decimal value of the character
      * @param string $string String to convert.
      */
-    static int[] utf8(string $string)
-    {
+    static int[] utf8(string $string) {
         $map = [];
 
         $values = [];

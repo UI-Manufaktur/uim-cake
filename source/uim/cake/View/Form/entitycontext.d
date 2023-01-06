@@ -148,8 +148,7 @@ class EntityContext : IContext
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    array primaryKey()
-    {
+    array primaryKey() {
         deprecationWarning("`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.");
 
         return (array)_tables[_rootName].getPrimaryKey();
@@ -482,8 +481,7 @@ class EntityContext : IContext
     }
 
 
-    Nullable!string getRequiredMessage(string $field)
-    {
+    Nullable!string getRequiredMessage(string $field) {
         $parts = explode(".", $field);
 
         $validator = _getValidator($parts);
@@ -505,8 +503,7 @@ class EntityContext : IContext
      *
      * @param string $field The dot separated path to the field you want to check.
      */
-    Nullable!int getMaxLength(string $field)
-    {
+    Nullable!int getMaxLength(string $field) {
         $parts = explode(".", $field);
         $validator = _getValidator($parts);
         $fieldName = array_pop($parts);
@@ -534,8 +531,7 @@ class EntityContext : IContext
      *
      * @return array<string> Array of field names in the table/entity.
      */
-    string[] fieldNames()
-    {
+    string[] fieldNames() {
         $table = _getTable("0");
         if (!$table) {
             return [];
@@ -652,8 +648,7 @@ class EntityContext : IContext
      * @return string|null An abstract data type or null.
      * @see uim.cake.databases.TypeFactory
      */
-    Nullable!string type(string $field)
-    {
+    Nullable!string type(string $field) {
         $parts = explode(".", $field);
         $table = _getTable($parts);
         if (!$table) {
@@ -669,8 +664,7 @@ class EntityContext : IContext
      * @param string $field A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    array attributes(string $field)
-    {
+    array attributes(string $field) {
         $parts = explode(".", $field);
         $table = _getTable($parts);
         if (!$table) {
@@ -699,8 +693,7 @@ class EntityContext : IContext
      * @param string $field A dot separated path to check errors on.
      * @return array An array of errors.
      */
-    array error(string $field)
-    {
+    array error(string $field) {
         $parts = explode(".", $field);
         try {
             [$entity, $remainingParts] = this.leafEntity($parts);

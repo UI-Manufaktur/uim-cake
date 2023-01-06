@@ -96,8 +96,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable {
      *
      * @return array<uim.cake.validations.ValidationRule>
      */
-    array rules()
-    {
+    array rules() {
         return _rules;
     }
 

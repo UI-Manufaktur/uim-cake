@@ -103,8 +103,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
      *
      * @return array<uim.cake.validations.ValidationRule>
      */
-    array rules()
-    {
+    array rules() {
         return _rules;
     }
 
@@ -204,8 +203,7 @@ class ValidationSet : ArrayAccess, IteratorAggregate, Countable
     /**
      * Returns the number of rules in this set
      */
-    size_t count()
-    {
+    size_t count() {
         return count(_rules);
     }
 }

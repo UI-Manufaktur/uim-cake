@@ -101,8 +101,7 @@ class PaginatorHelper : Helper
      * @param string|null $model Optional model name. Uses the default if none is specified.
      * @return array The array of paging parameters for the paginated resultset.
      */
-    array params(?string $model = null)
-    {
+    array params(?string $model = null) {
         $request = _View.getRequest();
 
         if (empty($model)) {
@@ -170,8 +169,7 @@ class PaginatorHelper : Helper
      * @return int The current page number of the recordset.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#checking-the-pagination-state
      */
-    int current(?string $model = null)
-    {
+    int current(?string $model = null) {
         $params = this.params($model);
 
         return $params["page"] ?? 1;
@@ -183,8 +181,7 @@ class PaginatorHelper : Helper
      * @param string|null $model Optional model name. Uses the default if none is specified.
      * @return int The total pages for the recordset.
      */
-    int total(?string $model = null)
-    {
+    int total(?string $model = null) {
         $params = this.params($model);
 
         return $params["pageCount"] ?? 0;
@@ -199,8 +196,7 @@ class PaginatorHelper : Helper
      *  null if the results are not currently sorted.
      * @link https://book.cakephp.org/4/en/views/helpers/paginator.html#creating-sort-links
      */
-    Nullable!string sortKey(?string $model = null, array $options = [])
-    {
+    Nullable!string sortKey(?string $model = null, array $options = []) {
         if (empty($options)) {
             $options = this.params($model);
         }
@@ -494,8 +490,7 @@ class PaginatorHelper : Helper
      * @param array $url URL.
      * @return array An array of URL parameters
      */
-    array generateUrlParams(array $options = [], ?string $model = null, array $url = [])
-    {
+    array generateUrlParams(array $options = [], ?string $model = null, array $url = []) {
         $paging = this.params($model);
         $paging += ["page": null, "sort": null, "direction": null, "limit": null];
 
@@ -641,8 +636,7 @@ class PaginatorHelper : Helper
      * @param string|null $model Model name to set
      * @return string|null Model name or null if the pagination isn"t initialized.
      */
-    Nullable!string defaultModel(?string $model = null)
-    {
+    Nullable!string defaultModel(?string $model = null) {
         if ($model != null) {
             _defaultModel = $model;
         }
@@ -785,8 +779,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Options from the numbers() method.
      * @return array An array with the start and end numbers.
      */
-    protected array _getNumbersStartAndEnd(array $params, array $options)
-    {
+    protected array _getNumbersStartAndEnd(array $params, array $options) {
         $half = (int)($options["modulus"] / 2);
         $end = max(1 + $options["modulus"], $params["page"] + $half);
         $start = min($params["pageCount"] - $options["modulus"], $params["page"] - $half - $options["modulus"] % 2);
@@ -1113,8 +1106,7 @@ class PaginatorHelper : Helper
      * @param array<string, mixed> $options Array of options
      * @return string|null Meta links
      */
-    Nullable!string meta(array $options = [])
-    {
+    Nullable!string meta(array $options = []) {
         $options += [
                 "model": null,
                 "block": false,
@@ -1176,8 +1168,7 @@ class PaginatorHelper : Helper
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         return [];
     }
 

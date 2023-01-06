@@ -917,8 +917,7 @@ class Text {
      * @param string string String to convert.
      * @return array
      */
-    static array utf8(string string)
-    {
+    static array utf8(string string) {
         $map = [];
 
         myValues = [];

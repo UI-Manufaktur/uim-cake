@@ -37,8 +37,7 @@ class MissingCellTemplateException : MissingTemplateException
     }
 
     // Get the passed in attributes
-    array getAttributes()
-    {
+    array getAttributes() {
         return [
             "name": this.name,
             "file": this.file,

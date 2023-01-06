@@ -92,8 +92,7 @@ class HelperRegistry : ObjectRegistry : IEventDispatcher
      * @return string|null Either the correct class name or null.
      * @psalm-return class-string|null
      */
-    protected Nullable!string _resolveClassName(string $class)
-    {
+    protected Nullable!string _resolveClassName(string $class) {
         return App::className($class, "View/Helper", "Helper");
     }
 

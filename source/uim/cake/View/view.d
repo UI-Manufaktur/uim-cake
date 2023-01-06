@@ -461,8 +461,7 @@ class View : IEventDispatcher
      * Get the current view theme.
      *
      */
-    Nullable!string getTheme()
-    {
+    Nullable!string getTheme() {
         return this.theme;
     }
 
@@ -769,8 +768,7 @@ class View : IEventDispatcher
      *
      * @return array<string> Array of the set view variable names.
      */
-    string[] getVars()
-    {
+    string[] getVars() {
         return array_keys(this.viewVars);
     }
 
@@ -821,8 +819,7 @@ class View : IEventDispatcher
      * @return array<string> An array containing the blocks.
      * @see uim.cake.View\ViewBlock::keys()
      */
-    string[] blocks()
-    {
+    string[] blocks() {
         return this.Blocks.keys();
     }
 
@@ -1181,8 +1178,7 @@ class View : IEventDispatcher
      * @return string|null
 
      */
-    Nullable!string getPlugin()
-    {
+    Nullable!string getPlugin() {
         return this.plugin;
     }
 
@@ -1319,8 +1315,7 @@ class View : IEventDispatcher
      * @return array Array with 2 indexes. 0: plugin name, 1: filename.
      * @psalm-return array{string|null, string}
      */
-    array pluginSplit(string aName, bool $fallback = true)
-    {
+    array pluginSplit(string aName, bool $fallback = true) {
         $plugin = null;
         [$first, $second] = pluginSplit($name);
         if ($first && Plugin::isLoaded($first)) {
@@ -1431,8 +1426,7 @@ class View : IEventDispatcher
      * @param string $basePath Base path on which to get the prefixed one.
      * @return array<string> Array with all the templates paths.
      */
-    protected array _getSubPaths(string $basePath)
-    {
+    protected array _getSubPaths(string $basePath) {
         $paths = [$basePath];
         if (this.request.getParam("prefix")) {
             $prefixPath = explode("/", this.request.getParam("prefix"));
@@ -1457,8 +1451,7 @@ class View : IEventDispatcher
      * @param bool $cached Set to false to force a refresh of view paths. Default true.
      * @return array<string> paths
      */
-    protected string[] _paths(?string $plugin = null, bool $cached = true)
-    {
+    protected string[] _paths(?string $plugin = null, bool $cached = true) {
         if ($cached == true) {
             if ($plugin == null && !empty(_paths)) {
                 return _paths;
@@ -1520,8 +1513,7 @@ class View : IEventDispatcher
      * @return array Element Cache configuration.
      * @psalm-return array{key:string, config:string}
      */
-    protected array _elementCache(string aName, array $data, array $options)
-    {
+    protected array _elementCache(string aName, array $data, array $options) {
         if (isset($options["cache"]["key"], $options["cache"]["config"])) {
             /** @psalm-var array{key:string, config:string}*/
             $cache = $options["cache"];

@@ -44,8 +44,7 @@ class OpenSsl
      * @return string Decrypted data. Any trailing null bytes will be removed.
      * @throws \InvalidArgumentException On invalid data or key.
      */
-    static Nullable!string decrypt(string $cipher, string aKey)
-    {
+    static Nullable!string decrypt(string $cipher, string aKey) {
         $method = static::METHOD_AES_256_CBC;
         $ivSize = openssl_cipher_iv_length($method);
 

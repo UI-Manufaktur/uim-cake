@@ -123,8 +123,7 @@ class HtmlHelper : Helper
      * @return string|null A completed `<link />` element, or null if the element was sent to a block.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-meta-tags
      */
-    Nullable!string meta($type, $content = null, array $options = [])
-    {
+    Nullable!string meta($type, $content = null, array $options = []) {
         if (!is_array($type)) {
             $types = [
                 "rss": ["type": "application/rss+xml", "rel": "alternate", "title": $type, "link": $content],
@@ -362,8 +361,7 @@ class HtmlHelper : Helper
      * @return string|null CSS `<link />` or `<style />` tag, depending on the type of link.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-css-files
      */
-    Nullable!string css($path, array $options = [])
-    {
+    Nullable!string css($path, array $options = []) {
         $options += [
             "once": true,
             "block": null,
@@ -462,8 +460,7 @@ class HtmlHelper : Helper
      *   or if $once is true and the file has been included before.
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#linking-to-javascript-files
      */
-    Nullable!string script($url, array $options = [])
-    {
+    Nullable!string script($url, array $options = []) {
         $defaults = [
             "block": null,
             "once": true,
@@ -521,8 +518,7 @@ class HtmlHelper : Helper
      * @return string|null String or null depending on the value of `$options["block"]`
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    Nullable!string scriptBlock(string $script, array $options = [])
-    {
+    Nullable!string scriptBlock(string $script, array $options = []) {
         $options += ["block": null, "nonce": _View.getRequest().getAttribute("cspScriptNonce")];
 
         $out = this.formatTemplate("javascriptblock", [
@@ -568,8 +564,7 @@ class HtmlHelper : Helper
      * @return string|null Depending on the settings of scriptStart() either a script tag or null
      * @link https://book.cakephp.org/4/en/views/helpers/html.html#creating-inline-javascript-blocks
      */
-    Nullable!string scriptEnd()
-    {
+    Nullable!string scriptEnd() {
         $buffer = ob_get_clean();
         $options = _scriptBlockOptions;
         _scriptBlockOptions = [];
@@ -769,8 +764,7 @@ class HtmlHelper : Helper
      * @param bool $useCount Renders the count into the row. Default is false.
      * @return array<string>
      */
-    protected array _renderCells(array $line, bool $useCount = false)
-    {
+    protected array _renderCells(array $line, bool $useCount = false) {
         $i = 0;
         $cellsOut = [];
         foreach ($line as $cell) {
@@ -1102,8 +1096,7 @@ class HtmlHelper : Helper
      *
      * @return array<string, mixed>
      */
-    array implementedEvents()
-    {
+    array implementedEvents() {
         return [];
     }
 }

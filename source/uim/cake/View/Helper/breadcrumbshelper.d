@@ -214,8 +214,7 @@ class BreadcrumbsHelper : Helper
     /**
      * Returns the crumb list.
      */
-    array getCrumbs()
-    {
+    array getCrumbs() {
         return this.crumbs;
     }
 
@@ -316,8 +315,7 @@ class BreadcrumbsHelper : Helper
      * @param string $title Title to find.
      * @return int|null Index of the crumb found, or null if it can not be found.
      */
-    protected Nullable!int findCrumb(string $title)
-    {
+    protected Nullable!int findCrumb(string $title) {
         foreach (this.crumbs as $key: $crumb) {
             if ($crumb["title"] == $title) {
                 return $key;

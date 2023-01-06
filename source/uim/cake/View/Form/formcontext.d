@@ -50,16 +50,14 @@ class FormContext : IContext
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    array primaryKey()
-    {
+    array primaryKey() {
         deprecationWarning("`FormContext::primaryKey()` is deprecated. Use `FormContext::getPrimaryKey()`.");
 
         return [];
     }
 
 
-    array getPrimaryKey()
-    {
+    array getPrimaryKey() {
         return [];
     }
 
@@ -122,8 +120,7 @@ class FormContext : IContext
     }
 
 
-    Nullable!string getRequiredMessage(string $field)
-    {
+    Nullable!string getRequiredMessage(string $field) {
         $parts = explode(".", $field);
 
         $validator = _form.getValidator(_validator);
@@ -141,8 +138,7 @@ class FormContext : IContext
     }
 
 
-    Nullable!int getMaxLength(string $field)
-    {
+    Nullable!int getMaxLength(string $field) {
         $validator = _form.getValidator(_validator);
         if (!$validator.hasField($field)) {
             return null;
@@ -162,20 +158,17 @@ class FormContext : IContext
     }
 
 
-    array fieldNames()
-    {
+    array fieldNames() {
         return _form.getSchema().fields();
     }
 
 
-    Nullable!string type(string $field)
-    {
+    Nullable!string type(string $field) {
         return _form.getSchema().fieldType($field);
     }
 
 
-    array attributes(string $field)
-    {
+    array attributes(string $field) {
         return array_intersect_key(
             (array)_form.getSchema().field($field),
             array_flip(static::VALID_ATTRIBUTES)
@@ -190,8 +183,7 @@ class FormContext : IContext
     }
 
 
-    array error(string $field)
-    {
+    array error(string $field) {
         return (array)Hash::get(_form.getErrors(), $field, []);
     }
 }

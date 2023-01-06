@@ -173,8 +173,7 @@ class ViewBlock
      *
      * @return array<string> An array containing the blocks.
      */
-    string[] keys()
-    {
+    string[] keys() {
         return array_keys(_blocks);
     }
 
@@ -183,8 +182,7 @@ class ViewBlock
      *
      * @return string|null Either null or the name of the last open block.
      */
-    Nullable!string active()
-    {
+    Nullable!string active() {
         end(_active);
 
         return key(_active);
@@ -195,8 +193,7 @@ class ViewBlock
      *
      * @return array<string> An array of unclosed blocks.
      */
-    string[] unclosed()
-    {
+    string[] unclosed() {
         return _active;
     }
 }

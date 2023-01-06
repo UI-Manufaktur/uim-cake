@@ -83,8 +83,7 @@ class ArrayContext : IContext
      * @return array<string>
      * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
      */
-    array primaryKey()
-    {
+    array primaryKey() {
         deprecationWarning("`ArrayContext::primaryKey()` is deprecated. Use `ArrayContext::getPrimaryKey()`.");
 
         return this.getPrimaryKey();
@@ -94,8 +93,7 @@ class ArrayContext : IContext
      * Get the fields used in the context as a primary key.
      *
      */
-    string[] getPrimaryKey()
-    {
+    string[] getPrimaryKey() {
         if (
             empty(_context["schema"]["_constraints"]) ||
             !is_array(_context["schema"]["_constraints"])
@@ -204,8 +202,7 @@ class ArrayContext : IContext
     }
 
 
-    Nullable!string getRequiredMessage(string $field)
-    {
+    Nullable!string getRequiredMessage(string $field) {
         if (!is_array(_context["required"])) {
             return null;
         }
@@ -232,8 +229,7 @@ class ArrayContext : IContext
      *
      * @param string $field A dot separated path to check required-ness for.
      */
-    Nullable!int getMaxLength(string $field)
-    {
+    Nullable!int getMaxLength(string $field) {
         if (!is_array(_context["schema"])) {
             return null;
         }
@@ -242,8 +238,7 @@ class ArrayContext : IContext
     }
 
 
-    array fieldNames()
-    {
+    array fieldNames() {
         $schema = _context["schema"];
         unset($schema["_constraints"], $schema["_indexes"]);
 
@@ -257,8 +252,7 @@ class ArrayContext : IContext
      * @return string|null An abstract data type or null.
      * @see uim.cake.databases.TypeFactory
      */
-    Nullable!string type(string $field)
-    {
+    Nullable!string type(string $field) {
         if (!is_array(_context["schema"])) {
             return null;
         }
@@ -277,8 +271,7 @@ class ArrayContext : IContext
      * @param string $field A dot separated path to get additional data on.
      * @return array An array of data describing the additional attributes on a field.
      */
-    array attributes(string $field)
-    {
+    array attributes(string $field) {
         if (!is_array(_context["schema"])) {
             return [];
         }
@@ -314,8 +307,7 @@ class ArrayContext : IContext
      * @return array An array of errors, an empty array will be returned when the
      *    context has no errors.
      */
-    array error(string $field)
-    {
+    array error(string $field) {
         if (empty(_context["errors"])) {
             return [];
         }

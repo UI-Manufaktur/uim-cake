@@ -70,8 +70,7 @@ class LabelWidget : WidgetInterface
     }
 
 
-    array secureFields(array $data)
-    {
+    array secureFields(array $data) {
         return [];
     }
 }

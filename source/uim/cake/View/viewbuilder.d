@@ -155,8 +155,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    array getVars()
-    {
+    array getVars() {
         return _vars;
     }
 
@@ -176,8 +175,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * Gets path for template files.
      *
      */
-    Nullable!string getTemplatePath()
-    {
+    Nullable!string getTemplatePath() {
         return _templatePath;
     }
 
@@ -197,8 +195,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * Gets path for layout files.
      *
      */
-    Nullable!string getLayoutPath()
-    {
+    Nullable!string getLayoutPath() {
         return _layoutPath;
     }
 
@@ -255,8 +252,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * Gets the plugin name to use.
      *
      */
-    Nullable!string getPlugin()
-    {
+    Nullable!string getPlugin() {
         return _plugin;
     }
 
@@ -319,8 +315,7 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Gets the helpers to use.
      */
-    array getHelpers()
-    {
+    array getHelpers() {
         return _helpers;
     }
 
@@ -341,8 +336,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * Gets the view theme to use.
      *
      */
-    Nullable!string getTheme()
-    {
+    Nullable!string getTheme() {
         return _theme;
     }
 
@@ -364,8 +358,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * filename in `templates/<SubFolder>/` without the .php extension.
      *
      */
-    Nullable!string getTemplate()
-    {
+    Nullable!string getTemplate() {
         return _template;
     }
 
@@ -387,8 +380,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * Gets the name of the layout file to render the view inside of.
      *
      */
-    Nullable!string getLayout()
-    {
+    Nullable!string getLayout() {
         return _layout;
     }
 
@@ -438,8 +430,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return array<string, mixed>
      */
-    array getOptions()
-    {
+    array getOptions() {
         return _options;
     }
 
@@ -459,8 +450,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * Gets the view name.
      *
      */
-    Nullable!string getName()
-    {
+    Nullable!string getName() {
         return _name;
     }
 
@@ -484,8 +474,7 @@ class ViewBuilder : JsonSerializable, Serializable
      * Gets the view classname.
      *
      */
-    Nullable!string getClassName()
-    {
+    Nullable!string getClassName() {
         return _className;
     }
 
@@ -557,8 +546,7 @@ class ViewBuilder : JsonSerializable, Serializable
      *
      * @return array Serializable array of configuration properties.
      */
-    array jsonSerialize()
-    {
+    array jsonSerialize() {
         $properties = [
             "_templatePath", "_template", "_plugin", "_theme", "_layout", "_autoLayout",
             "_layoutPath", "_name", "_className", "_options", "_helpers", "_vars",
@@ -630,8 +618,7 @@ class ViewBuilder : JsonSerializable, Serializable
     /**
      * Magic method used for serializing the view builder object.
      */
-    array __serialize()
-    {
+    array __serialize() {
         return this.jsonSerialize();
     }
 
