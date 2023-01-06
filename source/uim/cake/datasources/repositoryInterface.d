@@ -9,10 +9,10 @@ interface IRepository
     /**
      * Sets the repository alias.
      *
-     * @param string myAlias Table alias
+     * @param string $alias Table alias
      * @return this
      */
-    auto setAlias(string myAlias);
+    function setAlias(string $alias);
 
     // Returns the repository alias.
     string getAlias();
@@ -20,33 +20,31 @@ interface IRepository
     /**
      * Sets the table registry key used to create this table instance.
      *
-     * @param string registryAlias The key used to access this object.
+     * @param string $registryAlias The key used to access this object.
      * @return this
      */
-    auto setRegistryAlias(string registryAlias);
+    function setRegistryAlias(string $registryAlias);
 
-    /**
-     * Returns the table registry key used to create this table instance.
-     */
+    // Returns the table registry key used to create this table instance.
     string getRegistryAlias();
 
     /**
      * Test to see if a Repository has a specific field/column.
      *
-     * @param string myField The field to check for.
+     * @param string $field The field to check for.
      * @return bool True if the field exists, false if it does not.
      */
-    bool hasField(string myField);
+    bool hasField(string $field);
 
     /**
      * Creates a new Query for this repository and applies some defaults based on the
      * type of search that was selected.
      *
-     * @param string myType the type of query to perform
-     * @param array<string, mixed> myOptions An array that will be passed to Query::applyOptions()
+     * @param string $type the type of query to perform
+     * @param array<string, mixed> $options An array that will be passed to Query::applyOptions()
      * @return uim.cake.Datasource\IQuery
      */
-    function find(string myType = "all", array myOptions = []);
+    function find(string $type = "all", array $options = []);
 
     /**
      * Returns a single record after finding it by its primary key, if no record is
@@ -58,17 +56,17 @@ interface IRepository
      * $id = 10;
      * $article = $articles.get($id);
      *
-     * $article = $articles.get($id, ["contain":["Comments]]);
+     * $article = $articles.get($id, ["contain": ["Comments]]);
      * ```
      *
      * @param mixed $primaryKey primary key value to find
-     * @param array<string, mixed> myOptions options accepted by `Table::find()`
+     * @param array<string, mixed> $options options accepted by `Table::find()`
      * @throws uim.cake.Datasource\exceptions.RecordNotFoundException if the record with such id
      * could not be found
      * @return uim.cake.Datasource\IEntity
      * @see uim.cake.datasources.IRepository::find()
      */
-    IEntity get($primaryKey, array myOptions = []);
+    function get($primaryKey, array $options = []): IEntity;
 
     /**
      * Creates a new Query instance for this repository
@@ -80,16 +78,16 @@ interface IRepository
     /**
      * Update all matching records.
      *
-     * Sets the myFields to the provided values based on $conditions.
+     * Sets the $fields to the provided values based on $conditions.
      * This method will *not* trigger beforeSave/afterSave events. If you need those
      * first load a collection of records and update them.
      *
-     * @param uim.cake.databases.Expression\QueryExpression|\Closure|array|string myFields A hash of field: new value.
+     * @param uim.cake.databases.Expression\QueryExpression|\Closure|array|string $fields A hash of field: new value.
      * @param mixed $conditions Conditions to be used, accepts anything Query::where()
      * can take.
      * @return int Count Returns the affected rows.
      */
-    int updateAll(myFields, $conditions);
+    int updateAll($fields, $conditions);
 
     /**
      * Deletes all records matching the provided conditions.
@@ -122,10 +120,10 @@ interface IRepository
      * of any error.
      *
      * @param uim.cake.Datasource\IEntity $entity the entity to be saved
-     * @param \ArrayAccess|array myOptions The options to use when saving.
+     * @param \ArrayAccess|array $options The options to use when saving.
      * @return uim.cake.Datasource\IEntity|false
      */
-    function save(IEntity $entity, myOptions = []);
+    function save(IEntity $entity, $options = []);
 
     /**
      * Delete a single entity.
@@ -134,10 +132,10 @@ interface IRepository
      * based on the "dependent" option used when defining the association.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to remove.
-     * @param \ArrayAccess|array myOptions The options for the delete.
+     * @param \ArrayAccess|array $options The options for the delete.
      * @return bool success
      */
-    bool delete(IEntity $entity, myOptions = []);
+    bool delete(IEntity $entity, $options = []);
 
     /**
      * This creates a new entity object.
@@ -148,7 +146,7 @@ interface IRepository
      *
      * @return uim.cake.Datasource\IEntity
      */
-    IEntity newEmptyEntity();
+    function newEmptyEntity(): IEntity;
 
     /**
      * Create a new entity + associated entities from an array.
@@ -164,11 +162,11 @@ interface IRepository
      * on the primary key data existing in the database when the entity
      * is saved. Until the entity is saved, it will be a detached record.
      *
-     * @param array myData The data to build an entity with.
-     * @param array<string, mixed> myOptions A list of options for the object hydration.
+     * @param array $data The data to build an entity with.
+     * @param array<string, mixed> $options A list of options for the object hydration.
      * @return uim.cake.Datasource\IEntity
      */
-    IEntity newEntity(array myData, array myOptions = []);
+    function newEntity(array $data, array $options = []): IEntity;
 
     /**
      * Create a list of entities + associated entities from an array.
@@ -182,14 +180,14 @@ interface IRepository
      *
      * The hydrated entities can then be iterated and saved.
      *
-     * @param array myData The data to build an entity with.
-     * @param array<string, mixed> myOptions A list of options for the objects hydration.
+     * @param array $data The data to build an entity with.
+     * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      */
-    array newEntities(array myData, array myOptions = []);
+    array newEntities(array $data, array $options = []);
 
     /**
-     * Merges the passed `myData` into `$entity` respecting the accessible
+     * Merges the passed `$data` into `$entity` respecting the accessible
      * fields configured on the entity. Returns the same entity after being
      * altered.
      *
@@ -201,16 +199,16 @@ interface IRepository
      *
      * @param uim.cake.Datasource\IEntity $entity the entity that will get the
      * data merged in
-     * @param array myData key value list of fields to be merged into the entity
-     * @param array<string, mixed> myOptions A list of options for the object hydration.
+     * @param array $data key value list of fields to be merged into the entity
+     * @param array<string, mixed> $options A list of options for the object hydration.
      * @return uim.cake.Datasource\IEntity
      */
-    IEntity patchEntity(IEntity $entity, array myData, array myOptions = []);
+    function patchEntity(IEntity $entity, array $data, array $options = []): IEntity;
 
     /**
-     * Merges each of the elements passed in `myData` into the entities
+     * Merges each of the elements passed in `$data` into the entities
      * found in `$entities` respecting the accessible fields configured on the entities.
-     * Merging is done by matching the primary key in each of the elements in `myData`
+     * Merging is done by matching the primary key in each of the elements in `$data`
      * and `$entities`.
      *
      * This is most useful when editing a list of existing entities using request data:
@@ -219,11 +217,11 @@ interface IRepository
      * $article = this.Articles.patchEntities($articles, this.request.getData());
      * ```
      *
-     * @param \Traversable|array<uim.cake.Datasource\IEntity> $entities the entities that will get the
+     * @param iterable<uim.cake.Datasource\IEntity> $entities the entities that will get the
      * data merged in
-     * @param array myData list of arrays to be merged into the entities
-     * @param array<string, mixed> myOptions A list of options for the objects hydration.
+     * @param array $data list of arrays to be merged into the entities
+     * @param array<string, mixed> $options A list of options for the objects hydration.
      * @return array<uim.cake.Datasource\IEntity>
      */
-    array patchEntities(iterable $entities, array myData, array myOptions = []);
+    array patchEntities(iterable $entities, array $data, array $options = []);
 }

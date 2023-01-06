@@ -529,11 +529,11 @@ class File
      * Copy the File to $dest
      *
      * @param string $dest Absolute path to copy the file to.
-     * @param bool $overwrite Overwrite $dest if exists
+     * @param bool canOverwrite Overwrite $dest if exists
      * @return bool Success
      */
-    bool copy(string $dest, bool $overwrite = true) {
-        if (!this.exists() || is_file($dest) && !$overwrite) {
+    bool copy(string $dest, bool canOverwrite = true) {
+        if (!this.exists() || is_file($dest) && !canOverwrite) {
             return false;
         }
 

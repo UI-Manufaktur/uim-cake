@@ -308,11 +308,11 @@ class SmtpTransport : AbstractTransport
     /**
      * Authenticate using AUTH PLAIN mechanism.
      *
-     * @param string $username Username.
+     * @param string anUsername Username.
      * @param string $password Password.
      * @return string|null Response code for the command.
      */
-    protected Nullable!string _authPlain(string $username, string $password) {
+    protected Nullable!string _authPlain(string anUsername, string $password) {
         return _smtpSend(
             sprintf(
                 "AUTH PLAIN %s",
@@ -325,10 +325,10 @@ class SmtpTransport : AbstractTransport
     /**
      * Authenticate using AUTH LOGIN mechanism.
      *
-     * @param string $username Username.
+     * @param string anUsername Username.
      * @param string $password Password.
      */
-    protected void _authLogin(string $username, string $password) {
+    protected void _authLogin(string anUsername, string $password) {
         $replyCode = _smtpSend("AUTH LOGIN", "334|500|502|504");
         if ($replyCode == "334") {
             try {

@@ -3,6 +3,9 @@ module uim.cake.datasources;
 @safe:
 import uim.cake;
 
+import uim.cake.collections.Collection;
+use Countable;
+
 /**
  * Generic ResultSet decorator. This will make any traversable object appear to
  * be a database result

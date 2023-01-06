@@ -3,6 +3,12 @@ module uim.cake.datasources;
 @safe:
 import uim.cake;
 
+use BadMethodCallException;
+import uim.cake.collections.Iterator\MapReduce;
+import uim.cake.datasources.exceptions.RecordNotFoundException;
+use InvalidArgumentException;
+use Traversable;
+
 /**
  * Contains the characteristics for an object that is attached to a repository and
  * can retrieve results based on any criteria.
@@ -59,20 +65,18 @@ trait QueryTrait
 
     /**
      * Whether the query is standalone or the product of an eager load operation.
-     *
-     * @var bool
      */
-    protected _eagerLoaded = false;
+    protected bool _eagerLoaded = false;
 
     /**
      * Set the default Table object that will be used by this query
      * and form the `FROM` clause.
      *
-     * @param uim.cake.Datasource\IRepository|uim.cake.orm.Table myRepository The default table object to use
+     * @param uim.cake.Datasource\IRepository|uim.cake.orm.Table $repository The default table object to use
      * @return this
      */
-    function repository(IRepository myRepository) {
-        _repository = myRepository;
+    function repository(IRepository $repository) {
+        _repository = $repository;
 
         return this;
     }
@@ -83,7 +87,8 @@ trait QueryTrait
      *
      * @return uim.cake.Datasource\IRepository
      */
-    IRepository getRepository() {
+    function getRepository(): IRepository
+    {
         return _repository;
     }
 
@@ -96,11 +101,11 @@ trait QueryTrait
      *
      * This method is most useful when combined with results stored in a persistent cache.
      *
-     * @param iterable myResults The results this query should return.
+     * @param iterable $results The results this query should return.
      * @return this
      */
-    auto setResult(iterable myResults) {
-        _results = myResults;
+    function setResult(iterable $results) {
+        _results = $results;
 
         return this;
     }
@@ -114,7 +119,8 @@ trait QueryTrait
      * @return uim.cake.Datasource\IResultSet
      * @psalm-suppress ImplementedReturnTypeMismatch
      */
-    auto getIterator() {
+    #[\ReturnTypeWillChange]
+    function getIterator() {
         return this.all();
     }
 
@@ -123,7 +129,7 @@ trait QueryTrait
      *
      * If a query has caching enabled, it will do the following when executed:
      *
-     * - Check the cache for myKey. If there are results no SQL will be executed.
+     * - Check the cache for $key. If there are results no SQL will be executed.
      *   Instead the cached results will be returned.
      * - When the cached data is stale/missing the result set will be cached as the query
      *   is executed.
@@ -132,35 +138,35 @@ trait QueryTrait
      *
      * ```
      * // Simple string key + config
-     * myQuery.cache("my_key", "db_results");
+     * $query.cache("my_key", "db_results");
      *
      * // Function to generate key.
-     * myQuery.cache(function ($q) {
-     *   myKey = serialize($q.clause("select"));
-     *   myKey .= serialize($q.clause("where"));
-     *   return md5(myKey);
+     * $query.cache(function ($q) {
+     *   $key = serialize($q.clause("select"));
+     *   $key .= serialize($q.clause("where"));
+     *   return md5($key);
      * });
      *
      * // Using a pre-built cache engine.
-     * myQuery.cache("my_key", $engine);
+     * $query.cache("my_key", $engine);
      *
      * // Disable caching
-     * myQuery.cache(false);
+     * $query.cache(false);
      * ```
      *
-     * @param \Closure|string|false myKey Either the cache key or a function to generate the cache key.
+     * @param \Closure|string|false $key Either the cache key or a function to generate the cache key.
      *   When using a function, this query instance will be supplied as an argument.
-     * @param \Psr\SimpleCache\ICache|string myConfig Either the name of the cache config to use, or
+     * @param \Psr\SimpleCache\ICache|string aConfig Either the name of the cache config to use, or
      *   a cache engine instance.
      * @return this
      */
-    function cache(myKey, myConfig = "default") {
-        if (myKey == false) {
+    function cache($key, aConfig = "default") {
+        if ($key == false) {
             _cache = null;
 
             return this;
         }
-        _cache = new QueryCacher(myKey, myConfig);
+        _cache = new QueryCacher($key, aConfig);
 
         return this;
     }
@@ -176,11 +182,11 @@ trait QueryTrait
      * Sets the query instance to be an eager loaded query. If no argument is
      * passed, the current configured query `_eagerLoaded` value is returned.
      *
-     * @param bool myValue Whether to eager load.
+     * @param bool $value Whether to eager load.
      * @return this
      */
-    function eagerLoaded(bool myValue) {
-        _eagerLoaded = myValue;
+    function eagerLoaded(bool $value) {
+        _eagerLoaded = $value;
 
         return this;
     }
@@ -191,44 +197,43 @@ trait QueryTrait
      * The key will contain the alias and the value the actual field name.
      *
      * If the field is already aliased, then it will not be changed.
-     * If no myAlias is passed, the default table for this query will be used.
+     * If no $alias is passed, the default table for this query will be used.
      *
-     * @param string myField The field to alias
-     * @param string|null myAlias the alias used to prefix the field
-     * @return array
+     * @param string $field The field to alias
+     * @param string|null $alias the alias used to prefix the field
      */
-    array aliasField(string myField, Nullable!string myAlias = null) {
-        if (indexOf(myField, ".") == false) {
-            myAlias = myAlias ?: this.getRepository().getAlias();
-            myAliasedField = myAlias ~ "." ~ myField;
+    STRINGAA aliasField(string $field, ?string $alias = null) {
+        if (strpos($field, ".") == false) {
+            $alias = $alias ?: this.getRepository().getAlias();
+            $aliasedField = $alias ~ "." ~ $field;
         } else {
-            myAliasedField = myField;
-            [myAlias, myField] = explode(".", myField);
+            $aliasedField = $field;
+            [$alias, $field] = explode(".", $field);
         }
 
-        myKey = sprintf("%s__%s", myAlias, myField);
+        $key = sprintf("%s__%s", $alias, $field);
 
-        return [myKey: myAliasedField];
+        return [$key: $aliasedField];
     }
 
     /**
      * Runs `aliasField()` for each field in the provided list and returns
      * the result under a single array.
      *
-     * @param array myFields The fields to alias
+     * @param array $fields The fields to alias
      * @param string|null $defaultAlias The default alias
      */
-    string[] aliasFields(array myFields, Nullable!string defaultAlias = null) {
-        myAliased = [];
-        foreach (myFields as myAlias: myField) {
-            if (is_numeric(myAlias) && is_string(myField)) {
-                myAliased += this.aliasField(myField, $defaultAlias);
+    STRINGAA aliasFields(array $fields, ?string $defaultAlias = null) {
+        $aliased = [];
+        foreach ($fields as $alias: $field) {
+            if (is_numeric($alias) && is_string($field)) {
+                $aliased += this.aliasField($field, $defaultAlias);
                 continue;
             }
-            myAliased[myAlias] = myField;
+            $aliased[$alias] = $field;
         }
 
-        return myAliased;
+        return $aliased;
     }
 
     /**
@@ -242,22 +247,23 @@ trait QueryTrait
      *
      * @return uim.cake.Datasource\IResultSet
      */
-    IResultSet all() {
-        if (_results  !is null) {
+    function all(): IResultSet
+    {
+        if (_results != null) {
             return _results;
         }
 
-        myResults = null;
+        $results = null;
         if (_cache) {
-            myResults = _cache.fetch(this);
+            $results = _cache.fetch(this);
         }
-        if (myResults is null) {
-            myResults = _decorateResults(_execute());
+        if ($results == null) {
+            $results = _decorateResults(_execute());
             if (_cache) {
-                _cache.store(this, myResults);
+                _cache.store(this, $results);
             }
         }
-        _results = myResults;
+        _results = $results;
 
         return _results;
     }
@@ -281,17 +287,17 @@ trait QueryTrait
      *
      * @param callable|null $mapper The mapper callable.
      * @param callable|null $reducer The reducing function.
-     * @param bool $overwrite Set to true to overwrite existing map + reduce functions.
+     * @param bool canOverwrite Set to true to overwrite existing map + reduce functions.
      * @return this
-     * @see uim.cake.collection.iIterator\MapReduce for details on how to use emit data to the map reducer.
+     * @see uim.cake.collections.Iterator\MapReduce for details on how to use emit data to the map reducer.
      */
-    function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool $overwrite = false) {
-        if ($overwrite) {
+    function mapReduce(?callable $mapper = null, ?callable $reducer = null, bool canOverwrite = false) {
+        if (canOverwrite) {
             _mapReduce = [];
         }
-        if ($mapper is null) {
-            if (!$overwrite) {
-                throw new InvalidArgumentException("$mapper can be null only when $overwrite is true.");
+        if ($mapper == null) {
+            if (!canOverwrite) {
+                throw new InvalidArgumentException("$mapper can be null only when canOverwrite is true.");
             }
 
             return this;
@@ -335,16 +341,16 @@ trait QueryTrait
      * Return all results from the table indexed by id:
      *
      * ```
-     * myQuery.select(["id", "name"]).formatResults(function (myResults) {
-     *     return myResults.indexBy("id");
+     * $query.select(["id", "name"]).formatResults(function ($results) {
+     *     return $results.indexBy("id");
      * });
      * ```
      *
      * Add a new column to the ResultSet:
      *
      * ```
-     * myQuery.select(["name", "birth_date"]).formatResults(function (myResults) {
-     *     return myResults.map(function ($row) {
+     * $query.select(["name", "birth_date"]).formatResults(function ($results) {
+     *     return $results.map(function ($row) {
      *         $row["age"] = $row["birth_date"].diff(new DateTime).y;
      *
      *         return $row;
@@ -355,16 +361,16 @@ trait QueryTrait
      * Add a new column to the results with respect to the query"s hydration configuration:
      *
      * ```
-     * myQuery.formatResults(function (myResults, myQuery) {
-     *     return myResults.map(function ($row) use (myQuery) {
-     *         myData = [
-     *             "bar":"baz",
+     * $query.formatResults(function ($results, $query) {
+     *     return $results.map(function ($row) use ($query) {
+     *         $data = [
+     *             "bar": "baz",
      *         ];
      *
-     *         if (myQuery.isHydrationEnabled()) {
-     *             $row["foo"] = new Foo(myData)
+     *         if ($query.isHydrationEnabled()) {
+     *             $row["foo"] = new Foo($data)
      *         } else {
-     *             $row["foo"] = myData;
+     *             $row["foo"] = $data;
      *         }
      *
      *         return $row;
@@ -379,40 +385,40 @@ trait QueryTrait
      * // Assuming a `Articles belongsTo Authors` association that uses the join strategy
      *
      * $articlesQuery.contain("Authors", function ($authorsQuery) {
-     *     return $authorsQuery.formatResults(function (myResults, myQuery) use ($authorsQuery) {
+     *     return $authorsQuery.formatResults(function ($results, $query) use ($authorsQuery) {
      *         // Here `$authorsQuery` will always be the instance
      *         // where the callback was attached to.
      *
      *         // The instance passed to the callback in the second
-     *         // argument (`myQuery`), will be the one where the
+     *         // argument (`$query`), will be the one where the
      *         // callback is actually being applied to, in this
      *         // example that would be `$articlesQuery`.
      *
      *         // ...
      *
-     *         return myResults;
+     *         return $results;
      *     });
      * });
      * ```
      *
      * @param callable|null $formatter The formatting callable.
-     * @param int|bool myMode Whether to overwrite, append or prepend the formatter.
+     * @param int|bool $mode Whether to overwrite, append or prepend the formatter.
      * @return this
      * @throws \InvalidArgumentException
      */
-    function formatResults(?callable $formatter = null, myMode = self::APPEND) {
-        if (myMode == self::OVERWRITE) {
+    function formatResults(?callable $formatter = null, $mode = self::APPEND) {
+        if ($mode == self::OVERWRITE) {
             _formatters = [];
         }
-        if ($formatter is null) {
-            if (myMode != self::OVERWRITE) {
-                throw new InvalidArgumentException("$formatter can be null only when myMode is overwrite.");
+        if ($formatter == null) {
+            if ($mode != self::OVERWRITE) {
+                throw new InvalidArgumentException("$formatter can be null only when $mode is overwrite.");
             }
 
             return this;
         }
 
-        if (myMode == self::PREPEND) {
+        if ($mode == self::PREPEND) {
             array_unshift(_formatters, $formatter);
 
             return this;
@@ -428,7 +434,7 @@ trait QueryTrait
      *
      * @return array<callable>
      */
-    array getResultFormatters() {
+    function getResultFormatters() {
         return _formatters;
     }
 
@@ -439,7 +445,7 @@ trait QueryTrait
      * ### Example:
      *
      * ```
-     * $singleUser = myQuery.select(["id", "username"]).first();
+     * $singleUser = $query.select(["id", "username"]).first();
      * ```
      *
      * @return uim.cake.Datasource\IEntity|array|null The first result from the ResultSet.
@@ -461,10 +467,10 @@ trait QueryTrait
     function firstOrFail() {
         $entity = this.first();
         if (!$entity) {
-            myTable = this.getRepository();
+            $table = this.getRepository();
             throw new RecordNotFoundException(sprintf(
                 "Record not found in table "%s"",
-                myTable.getTable()
+                $table.getTable()
             ));
         }
 
@@ -478,8 +484,8 @@ trait QueryTrait
      * ### Example:
      *
      * ```
-     *  myQuery.applyOptions(["doABarrelRoll":true, "fields":["id", "name"]);
-     *  myQuery.getOptions(); // Returns ["doABarrelRoll":true]
+     *  $query.applyOptions(["doABarrelRoll": true, "fields": ["id", "name"]);
+     *  $query.getOptions(); // Returns ["doABarrelRoll": true]
      * ```
      *
      * @see uim.cake.datasources.IQuery::applyOptions() to read about the options that will
@@ -494,22 +500,24 @@ trait QueryTrait
     /**
      * Enables calling methods from the result set as if they were from this class
      *
-     * @param string method the method to call
+     * @param string $method the method to call
      * @param array $arguments list of arguments for the method to call
      * @return mixed
      * @throws \BadMethodCallException if no such method exists in result set
      */
-    auto __call(string method, array $arguments) {
-        myResultSetClass = _decoratorClass();
-        if (in_array($method, get_class_methods(myResultSetClass), true)) {
+    function __call(string $method, array $arguments) {
+        $resultSetClass = _decoratorClass();
+        if (in_array($method, get_class_methods($resultSetClass), true)) {
             deprecationWarning(sprintf(
-                "Calling result set method `%s()` directly on query instance is deprecated~ " ~
-                "You must call `all()` to retrieve the results first.",
-                $method
+                "Calling `%s` methods, such as `%s()`, on queries is deprecated~ " ~
+                "You must call `all()` first (for example, `all().%s()`).",
+                IResultSet::class,
+                $method,
+                $method,
             ), 2);
-            myResults = this.all();
+            $results = this.all();
 
-            return myResults.$method(...$arguments);
+            return $results.$method(...$arguments);
         }
         throw new BadMethodCallException(
             sprintf("Unknown method "%s"", $method)
@@ -520,43 +528,44 @@ trait QueryTrait
      * Populates or adds parts to current query clauses using an array.
      * This is handy for passing all query clauses at once.
      *
-     * @param array<string, mixed> myOptions the options to be applied
+     * @param array<string, mixed> $options the options to be applied
      * @return this
      */
-    abstract function applyOptions(array myOptions);
+    abstract function applyOptions(array $options);
 
     /**
      * Executes this query and returns a traversable object containing the results
      *
      * @return uim.cake.Datasource\IResultSet
      */
-    abstract protected IResultSet _execute();
+    abstract protected function _execute(): IResultSet;
 
     /**
      * Decorates the results iterator with MapReduce routines and formatters
      *
-     * @param \Traversable myResult Original results
+     * @param \Traversable $result Original results
      * @return uim.cake.Datasource\IResultSet
      */
-    protected IResultSet _decorateResults(Traversable myResult) {
+    protected function _decorateResults(Traversable $result): IResultSet
+    {
         $decorator = _decoratorClass();
         foreach (_mapReduce as $functions) {
-            myResult = new MapReduce(myResult, $functions["mapper"], $functions["reducer"]);
+            $result = new MapReduce($result, $functions["mapper"], $functions["reducer"]);
         }
 
         if (!empty(_mapReduce)) {
-            myResult = new $decorator(myResult);
+            $result = new $decorator($result);
         }
 
         foreach (_formatters as $formatter) {
-            myResult = $formatter(myResult, this);
+            $result = $formatter($result, this);
         }
 
-        if (!empty(_formatters) && !(myResult instanceof $decorator)) {
-            myResult = new $decorator(myResult);
+        if (!empty(_formatters) && !($result instanceof $decorator)) {
+            $result = new $decorator($result);
         }
 
-        return myResult;
+        return $result;
     }
 
     /**

@@ -3,6 +3,9 @@ module uim.cake.datasources;
 @safe:
 import uim.cake;
 
+use ArrayObject;
+import uim.cake.events.IEventDispatcher;
+
 /**
  * A trait that allows a class to build and apply application.
  * rules.
@@ -27,39 +30,39 @@ trait RulesAwareTrait
      * the rules checker.
      *
      * @param uim.cake.Datasource\IEntity $entity The entity to check for validity.
-     * @param string operation The operation being run. Either "create", "update" or "delete".
-     * @param \ArrayObject|array|null myOptions The options To be passed to the rules.
+     * @param string $operation The operation being run. Either "create", "update" or "delete".
+     * @param \ArrayObject|array|null $options The options To be passed to the rules.
      */
-    bool checkRules(IEntity $entity, string operation = RulesChecker::CREATE, myOptions = null) {
+    bool checkRules(IEntity $entity, string $operation = RulesChecker::CREATE, $options = null) {
         $rules = this.rulesChecker();
-        myOptions = myOptions ?: new ArrayObject();
-        myOptions = is_array(myOptions) ? new ArrayObject(myOptions) : myOptions;
+        $options = $options ?: new ArrayObject();
+        $options = is_array($options) ? new ArrayObject($options) : $options;
         $hasEvents = (this instanceof IEventDispatcher);
 
         if ($hasEvents) {
-            myEvent = this.dispatchEvent(
+            $event = this.dispatchEvent(
                 "Model.beforeRules",
                 compact("entity", "options", "operation")
             );
-            if (myEvent.isStopped()) {
-                return myEvent.getResult();
+            if ($event.isStopped()) {
+                return $event.getResult();
             }
         }
 
-        myResult = $rules.check($entity, $operation, myOptions.getArrayCopy());
+        $result = $rules.check($entity, $operation, $options.getArrayCopy());
 
         if ($hasEvents) {
-            myEvent = this.dispatchEvent(
+            $event = this.dispatchEvent(
                 "Model.afterRules",
                 compact("entity", "options", "result", "operation")
             );
 
-            if (myEvent.isStopped()) {
-                return myEvent.getResult();
+            if ($event.isStopped()) {
+                return $event.getResult();
             }
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
@@ -74,14 +77,14 @@ trait RulesAwareTrait
      */
     function rulesChecker(): RulesChecker
     {
-        if (_rulesChecker  !is null) {
+        if (_rulesChecker != null) {
             return _rulesChecker;
         }
-        /** @psalm-var class-string<uim.cake.Datasource\RulesChecker> myClass */
-        myClass = defined("static::RULES_CLASS") ? static::RULES_CLASS : RulesChecker::class;
+        /** @psalm-var class-string<uim.cake.Datasource\RulesChecker> $class */
+        $class = defined("static::RULES_CLASS") ? static::RULES_CLASS : RulesChecker::class;
         /** @psalm-suppress ArgumentTypeCoercion */
-        _rulesChecker = this.buildRules(new myClass(["repository":this]));
-        this.dispatchEvent("Model.buildRules", ["rules":_rulesChecker]);
+        _rulesChecker = this.buildRules(new $class(["repository": this]));
+        this.dispatchEvent("Model.buildRules", ["rules": _rulesChecker]);
 
         return _rulesChecker;
     }

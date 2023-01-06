@@ -19,10 +19,10 @@ interface InvalidPropertyInterface
      * purposes or to be able to log it away.
      *
      * @param array<string, mixed> $fields The values to set.
-     * @param bool $overwrite Whether to overwrite pre-existing values for $field.
+     * @param bool canOverwrite Whether to overwrite pre-existing values for $field.
      * @return this
      */
-    function setInvalid(array $fields, bool $overwrite = false);
+    function setInvalid(array $fields, bool canOverwrite = false);
 
     /**
      * Get a single value of an invalid field. Returns null if not set.

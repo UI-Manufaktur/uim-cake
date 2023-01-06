@@ -199,10 +199,10 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @param uim.cake.databases.IExpression|uim.cake.orm.Table|uim.cake.orm.Association|callable|array|string $fields Fields
      * to be added to the list.
-     * @param bool $overwrite whether to reset fields with passed list or not
+     * @param bool canOverwrite whether to reset fields with passed list or not
      * @return this
      */
-    function select($fields = [], bool $overwrite = false) {
+    function select($fields = [], bool canOverwrite = false) {
         if ($fields instanceof Association) {
             $fields = $fields.getTarget();
         }
@@ -215,7 +215,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
             }
         }
 
-        return super.select($fields, $overwrite);
+        return super.select($fields, canOverwrite);
     }
 
     /**
@@ -227,11 +227,11 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @param uim.cake.orm.Table|uim.cake.orm.Association $table The table to use to get an array of columns
      * @param array<string> $excludedFields The un-aliased column names you do not want selected from $table
-     * @param bool $overwrite Whether to reset/remove previous selected fields
+     * @param bool canOverwrite Whether to reset/remove previous selected fields
      * @return this
      * @throws \InvalidArgumentException If Association|Table is not passed in first argument
      */
-    function selectAllExcept($table, array $excludedFields, bool $overwrite = false) {
+    function selectAllExcept($table, array $excludedFields, bool canOverwrite = false) {
         if ($table instanceof Association) {
             $table = $table.getTarget();
         }
@@ -245,7 +245,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
             $fields = this.aliasFields($fields);
         }
 
-        return this.select($fields, $overwrite);
+        return this.select($fields, canOverwrite);
     }
 
     /**

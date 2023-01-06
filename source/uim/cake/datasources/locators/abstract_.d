@@ -1,77 +1,82 @@
-module uim.cake.datasources\Locator;
+module uim.cake.datasources.locators;
 
 @safe:
 import uim.cake;
 
-// Provides an abstract registry/factory for repository objects.
-abstract class AbstractLocator : ILocator {
+use RuntimeException;
+
+/**
+ * Provides an abstract registry/factory for repository objects.
+ */
+abstract class AbstractLocator : ILocator
+{
     /**
      * Instances that belong to the registry.
      *
      * @var array<string, uim.cake.Datasource\IRepository>
      */
-    protected instances = [];
+    protected $instances = [];
 
     /**
      * Contains a list of options that were passed to get() method.
      *
      * @var array<string, array>
      */
-    protected myOptions = [];
+    protected $options = [];
 
     /**
      * {@inheritDoc}
      *
-     * @param string myAlias The alias name you want to get.
-     * @param array<string, mixed> myOptions The options you want to build the table with.
+     * @param string $alias The alias name you want to get.
+     * @param array<string, mixed> $options The options you want to build the table with.
      * @return uim.cake.Datasource\IRepository
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
-    auto get(string myAlias, array myOptions = []) {
-        $storeOptions = myOptions;
+    function get(string $alias, array $options = []) {
+        $storeOptions = $options;
         unset($storeOptions["allowFallbackClass"]);
 
-        if (isset(this.instances[myAlias])) {
-            if (!empty($storeOptions) && this.options[myAlias] != $storeOptions) {
+        if (isset(this.instances[$alias])) {
+            if (!empty($storeOptions) && isset(this.options[$alias]) && this.options[$alias] != $storeOptions) {
                 throw new RuntimeException(sprintf(
                     "You cannot configure "%s", it already exists in the registry.",
-                    myAlias
+                    $alias
                 ));
             }
 
-            return this.instances[myAlias];
+            return this.instances[$alias];
         }
 
-        this.options[myAlias] = $storeOptions;
+        this.options[$alias] = $storeOptions;
 
-        return this.instances[myAlias] = this.createInstance(myAlias, myOptions);
+        return this.instances[$alias] = this.createInstance($alias, $options);
     }
 
     /**
      * Create an instance of a given classname.
      *
-     * @param string myAlias Repository alias.
-     * @param array<string, mixed> myOptions The options you want to build the instance with.
+     * @param string $alias Repository alias.
+     * @param array<string, mixed> $options The options you want to build the instance with.
      * @return uim.cake.Datasource\IRepository
      */
-    abstract protected auto createInstance(string myAlias, array myOptions);
+    abstract protected function createInstance(string $alias, array $options);
 
 
-    auto set(string myAlias, IRepository myRepository) {
-        return this.instances[myAlias] = myRepository;
+    function set(string $alias, IRepository $repository) {
+        return this.instances[$alias] = $repository;
     }
 
 
-    bool exists(string myAlias) {
-        return isset(this.instances[myAlias]);
+    bool exists(string $alias) {
+        return isset(this.instances[$alias]);
     }
 
 
-    void remove(string myAlias) {
+    void remove(string $alias) {
         unset(
-            this.instances[myAlias],
-            this.options[myAlias]
+            this.instances[$alias],
+            this.options[$alias]
         );
     }
 

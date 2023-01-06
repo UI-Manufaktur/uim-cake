@@ -10,37 +10,39 @@ interface ILocator
     /**
      * Get a repository instance from the registry.
      *
-     * @param string myAlias The alias name you want to get.
-     * @param array<string, mixed> myOptions The options you want to build the table with.
+     * @param string $alias The alias name you want to get.
+     * @param array<string, mixed> $options The options you want to build the table with.
      * @return uim.cake.Datasource\IRepository
      * @throws \RuntimeException When trying to get alias for which instance
      *   has already been created with different options.
      */
-    auto get(string myAlias, array myOptions = []);
+    function get(string $alias, array $options = []);
 
     /**
      * Set a repository instance.
      *
-     * @param string myAlias The alias to set.
-     * @param uim.cake.Datasource\IRepository myRepository The repository to set.
+     * @param string $alias The alias to set.
+     * @param uim.cake.Datasource\IRepository $repository The repository to set.
      * @return uim.cake.Datasource\IRepository
      */
-    auto set(string myAlias, IRepository myRepository);
+    function set(string $alias, IRepository $repository);
 
     /**
      * Check to see if an instance exists in the registry.
      *
-     * @param string myAlias The alias to check for.
+     * @param string $alias The alias to check for.
      */
-    bool exists(string myAlias);
+    bool exists(string $alias);
 
     /**
      * Removes an repository instance from the registry.
      *
-     * @param string myAlias The alias to remove.
+     * @param string $alias The alias to remove.
      */
-    void remove(string myAlias);
+    void remove(string $alias);
 
-    // Clears the registry of configuration and instances.
+    /**
+     * Clears the registry of configuration and instances.
+     */
     void clear();
 }

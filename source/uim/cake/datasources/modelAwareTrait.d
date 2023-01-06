@@ -3,6 +3,11 @@ module uim.cake.datasources;
 @safe:
 import uim.cake;
 
+import uim.cake.datasources.exceptions.MissingModelException;
+import uim.cake.datasources.Locator\ILocator;
+use InvalidArgumentException;
+use UnexpectedValueException;
+
 /**
  * Provides functionality for loading table classes
  * and other repositories onto properties of the host object.
@@ -16,7 +21,7 @@ trait ModelAwareTrait
 {
     /**
      * This object"s primary model class name. Should be a plural form.
-     * UIM will not inflect the name.
+     * CakePHP will not inflect the name.
      *
      * Example: For an object named "Comments", the modelClass would be "Comments".
      * Plugin classes should use `Plugin.Comments` style names to correctly load
@@ -28,7 +33,7 @@ trait ModelAwareTrait
      * @var string|null
      * @deprecated 4.3.0 Use `Cake\orm.Locator\LocatorAwareTrait::$defaultTable` instead.
      */
-    protected myModelClass;
+    protected $modelClass;
 
     /**
      * A list of overridden model factory functions.
@@ -47,11 +52,11 @@ trait ModelAwareTrait
      *
      * If the property is already set it will not be overwritten
      *
-     * @param string myName Class name.
+     * @param string aName Class name.
      */
-    protected void _setModelClass(string myName) {
-        if (this.modelClass is null) {
-            this.modelClass = myName;
+    protected void _setModelClass(string aName) {
+        if (this.modelClass == null) {
+            this.modelClass = $name;
         }
     }
 
@@ -64,71 +69,71 @@ trait ModelAwareTrait
      * If a repository provider does not return an object a MissingModelException will
      * be thrown.
      *
-     * @param string|null myModelClass Name of model class to load. Defaults to this.modelClass.
+     * @param string|null $modelClass Name of model class to load. Defaults to this.modelClass.
      *  The name can be an alias like `"Post"` or FQCN like `App\Model\Table\PostsTable::class`.
-     * @param string|null myModelType The type of repository to load. Defaults to the getModelType() value.
+     * @param string|null $modelType The type of repository to load. Defaults to the getModelType() value.
      * @return uim.cake.Datasource\IRepository The model instance created.
      * @throws uim.cake.Datasource\exceptions.MissingModelException If the model class cannot be found.
-     * @throws \UnexpectedValueException If myModelClass argument is not provided
-     *   and ModelAwareTrait::myModelClass property value is empty.
+     * @throws \UnexpectedValueException If $modelClass argument is not provided
+     *   and ModelAwareTrait::$modelClass property value is empty.
      * @deprecated 4.3.0 Use `LocatorAwareTrait::fetchTable()` instead.
      */
-    function loadModel(Nullable!string myModelClass = null, Nullable!string myModelType = null): IRepository
+    function loadModel(?string $modelClass = null, ?string $modelType = null): IRepository
     {
-        myModelClass = myModelClass ?? this.modelClass;
-        if (empty(myModelClass)) {
+        $modelClass = $modelClass ?? this.modelClass;
+        if (empty($modelClass)) {
             throw new UnexpectedValueException("Default modelClass is empty");
         }
-        myModelType = myModelType ?? this.getModelType();
+        $modelType = $modelType ?? this.getModelType();
 
-        myOptions = [];
-        if (indexOf(myModelClass, "\\") == false) {
-            [, myAlias] = pluginSplit(myModelClass, true);
+        $options = [];
+        if (strpos($modelClass, "\\") == false) {
+            [, $alias] = pluginSplit($modelClass, true);
         } else {
-            myOptions["className"] = myModelClass;
+            $options["className"] = $modelClass;
             /** @psalm-suppress PossiblyFalseOperand */
-            myAlias = substr(
-                myModelClass,
-                strrpos(myModelClass, "\\") + 1,
-                -strlen(myModelType)
+            $alias = substr(
+                $modelClass,
+                strrpos($modelClass, "\\") + 1,
+                -strlen($modelType)
             );
-            myModelClass = myAlias;
+            $modelClass = $alias;
         }
 
-        if (isset(this.{myAlias})) {
-            return this.{myAlias};
+        if (isset(this.{$alias})) {
+            return this.{$alias};
         }
 
-        $factory = _modelFactories[myModelType] ?? FactoryLocator::get(myModelType);
+        $factory = _modelFactories[$modelType] ?? FactoryLocator::get($modelType);
         if ($factory instanceof ILocator) {
-            this.{myAlias} = $factory.get(myModelClass, myOptions);
+            this.{$alias} = $factory.get($modelClass, $options);
         } else {
-            this.{myAlias} = $factory(myModelClass, myOptions);
+            this.{$alias} = $factory($modelClass, $options);
         }
 
-        if (!this.{myAlias}) {
-            throw new MissingModelException([myModelClass, myModelType]);
+        if (!this.{$alias}) {
+            throw new MissingModelException([$modelClass, $modelType]);
         }
 
-        return this.{myAlias};
+        return this.{$alias};
     }
 
     /**
      * Override a existing callable to generate repositories of a given type.
      *
-     * @param string myType The name of the repository type the factory bool is for.
+     * @param string $type The name of the repository type the factory bool is for.
      * @param uim.cake.Datasource\Locator\ILocator|callable $factory The factory function used to create instances.
      */
-    void modelFactory(string myType, $factory) {
-        if (!$factory instanceof ILocator && !is_callable($factory)) {
+    void modelFactory(string $type, $factory) {
+        if (!$factory instanceof ILocator&& !is_callable($factory)) {
             throw new InvalidArgumentException(sprintf(
-                "`$factory` must be an instance of Cake\Datasource\Locator\ILocator or a callable."
+                "`$factory` must be an instance of Cake\Datasource\Locator\ILocatoror a callable."
                 ~ " Got type `%s` instead.",
                 getTypeName($factory)
             ));
         }
 
-        _modelFactories[myType] = $factory;
+        _modelFactories[$type] = $factory;
     }
 
     /**
@@ -141,11 +146,11 @@ trait ModelAwareTrait
     /**
      * Set the model type to be used by this class
      *
-     * @param string myModelType The model type
+     * @param string $modelType The model type
      * @return this
      */
-    auto setModelType(string myModelType) {
-        _modelType = myModelType;
+    function setModelType(string $modelType) {
+        _modelType = $modelType;
 
         return this;
     }

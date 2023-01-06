@@ -4,6 +4,8 @@
 	Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/module uim.cake.datasources;
 
+module uim.cake.Datasource;
+
 /**
  * Contains logic for invoking an application rule.
  *
@@ -18,23 +20,22 @@ class RuleInvoker
     /**
      * The rule name
      *
-     * @var string|null
      */
-    protected string myName;
+    protected Nullable!string name;
 
     /**
      * Rule options
      *
-     * @var array
+     * @var array<string, mixed>
      */
-    protected myOptions = [];
+    protected $options = [];
 
     /**
      * Rule callable
      *
      * @var callable
      */
-    protected rule;
+    protected $rule;
 
     /**
      * Constructor
@@ -49,13 +50,13 @@ class RuleInvoker
      * rule $scope.
      *
      * @param callable $rule The rule to be invoked.
-     * @param Nullable!string myName The name of the rule. Used in error messages.
-     * @param array<string, mixed> myOptions The options for the rule. See above.
+     * @param ?string aName The name of the rule. Used in error messages.
+     * @param array<string, mixed> $options The options for the rule. See above.
      */
-    this(callable $rule, Nullable!string myName, array myOptions = []) {
+    this(callable $rule, ?string aName, array $options = []) {
         this.rule = $rule;
-        this.name = myName;
-        this.options = myOptions;
+        this.name = $name;
+        this.options = $options;
     }
 
     /**
@@ -63,11 +64,11 @@ class RuleInvoker
      *
      * Old options will be merged with the new ones.
      *
-     * @param array<string, mixed> myOptions The options to set.
+     * @param array<string, mixed> $options The options to set.
      * @return this
      */
-    auto setOptions(array myOptions) {
-        this.options = myOptions + this.options;
+    function setOptions(array $options) {
+        this.options = $options + this.options;
 
         return this;
     }
@@ -77,12 +78,12 @@ class RuleInvoker
      *
      * Only truthy names will be set.
      *
-     * @param string|null myName The name to set.
+     * @param string|null $name The name to set.
      * @return this
      */
-    auto setName(Nullable!string myName) {
-        if (myName) {
-            this.name = myName;
+    function setName(?string aName) {
+        if ($name) {
+            this.name = $name;
         }
 
         return this;
@@ -103,23 +104,24 @@ class RuleInvoker
             return $pass == true;
         }
 
-        myMessage = this.options["message"] ?? "invalid";
+        $message = this.options["message"] ?? "invalid";
         if (is_string($pass)) {
-            myMessage = $pass;
+            $message = $pass;
         }
         if (this.name) {
-            myMessage = [this.name: myMessage];
+            $message = [this.name: $message];
         } else {
-            myMessage = [myMessage];
+            $message = [$message];
         }
-        myErrorField = this.options["errorField"];
-        $entity.setError(myErrorField, myMessage);
+        $errorField = this.options["errorField"];
+        $entity.setError($errorField, $message);
 
-        if ($entity instanceof InvalidPropertyInterface && isset($entity.{myErrorField})) {
-            $invalidValue = $entity.{myErrorField};
-            $entity.setInvalidField(myErrorField, $invalidValue);
+        if ($entity instanceof InvalidPropertyInterface && isset($entity.{$errorField})) {
+            $invalidValue = $entity.{$errorField};
+            $entity.setInvalidField($errorField, $invalidValue);
         }
 
+        /** @phpstan-ignore-next-line */
         return $pass == true;
     }
 }

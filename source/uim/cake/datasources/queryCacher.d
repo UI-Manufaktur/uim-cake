@@ -1,6 +1,6 @@
 module uim.cake.datasources;
 
-import uim.cake.caches\Cache;
+import uim.cake.caches.Cache;
 use Closure;
 use Psr\SimpleCache\ICache;
 use RuntimeException;
@@ -33,72 +33,72 @@ class QueryCacher
     /**
      * Constructor.
      *
-     * @param \Closure|string myKey The key or function to generate a key.
-     * @param \Psr\SimpleCache\ICache|string myConfig The cache config name or cache engine instance.
+     * @param \Closure|string aKey The key or function to generate a key.
+     * @param \Psr\SimpleCache\ICache|string aConfig The cache config name or cache engine instance.
      * @throws \RuntimeException
      */
-    this(myKey, myConfig) {
-        if (!is_string(myKey) && !(myKey instanceof Closure)) {
+    this($key, aConfig) {
+        if (!is_string($key) && !($key instanceof Closure)) {
             throw new RuntimeException("Cache keys must be strings or callables.");
         }
-        _key = myKey;
+        _key = $key;
 
-        if (!is_string(myConfig) && !(myConfig instanceof ICache)) {
+        if (!is_string(aConfig) && !(aConfig instanceof ICache)) {
             throw new RuntimeException("Cache configs must be strings or \Psr\SimpleCache\ICache instances.");
         }
-        _config = myConfig;
+        _config = aConfig;
     }
 
     /**
      * Load the cached results from the cache or run the query.
      *
-     * @param object myQuery The query the cache read is for.
+     * @param object $query The query the cache read is for.
      * @return mixed|null Either the cached results or null.
      */
-    function fetch(object myQuery) {
-        myKey = _resolveKey(myQuery);
+    function fetch(object $query) {
+        $key = _resolveKey($query);
         $storage = _resolveCacher();
-        myResult = $storage.get(myKey);
-        if (empty(myResult)) {
+        $result = $storage.get(string aKey);
+        if (empty($result)) {
             return null;
         }
 
-        return myResult;
+        return $result;
     }
 
     /**
      * Store the result set into the cache.
      *
-     * @param object myQuery The query the cache read is for.
-     * @param \Traversable myResults The result set to store.
+     * @param object $query The query the cache read is for.
+     * @param \Traversable $results The result set to store.
      * @return bool True if the data was successfully cached, false on failure
      */
-    bool store(object myQuery, Traversable myResults) {
-        myKey = _resolveKey(myQuery);
+    bool store(object $query, Traversable $results) {
+        $key = _resolveKey($query);
         $storage = _resolveCacher();
 
-        return $storage.set(myKey, myResults);
+        return $storage.set(string aKey, $results);
     }
 
     /**
      * Get/generate the cache key.
      *
-     * @param object myQuery The query to generate a key for.
+     * @param object $query The query to generate a key for.
      * @return string
      * @throws \RuntimeException
      */
-    protected string _resolveKey(object myQuery) {
+    protected string _resolveKey(object $query) {
         if (is_string(_key)) {
             return _key;
         }
         $func = _key;
-        myKey = $func(myQuery);
-        if (!is_string(myKey)) {
-            $msg = sprintf("Cache key functions must return a string. Got %s.", var_export(myKey, true));
+        $key = $func($query);
+        if (!is_string($key)) {
+            $msg = sprintf("Cache key functions must return a string. Got %s.", var_export($key, true));
             throw new RuntimeException($msg);
         }
 
-        return myKey;
+        return $key;
     }
 
     /**
@@ -106,7 +106,7 @@ class QueryCacher
      *
      * @return \Psr\SimpleCache\ICache
      */
-    protected auto _resolveCacher() {
+    protected function _resolveCacher() {
         if (is_string(_config)) {
             return Cache::pool(_config);
         }
