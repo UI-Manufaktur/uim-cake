@@ -1,10 +1,9 @@
-module uim.cake.databases.Type;
+module uim.cake.databases.types;
 
 /**
  * : DateTimeType with support for time zones.
  */
-class DateTimeTimezoneType : DateTimeType
-{
+class DateTimeTimezoneType : DateTimeType {
 
     protected _format = "Y-m-d H:i:s.uP";
 

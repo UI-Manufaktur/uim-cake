@@ -1,4 +1,4 @@
-module uim.cake.databases.Type;
+module uim.cake.databases.types;
 
 import uim.cake.I18n\Date;
 import uim.cake.I18n\FrozenDate;
@@ -10,8 +10,7 @@ use DateTimeInterface;
 /**
  * Class DateType
  */
-class DateType : DateTimeType
-{
+class DateType : DateTimeType {
 
     protected _format = "Y-m-d";
 

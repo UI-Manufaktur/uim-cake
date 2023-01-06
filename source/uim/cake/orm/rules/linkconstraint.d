@@ -122,7 +122,7 @@ class LinkConstraint
     protected int _countLinks(Association $association, IEntity $entity) {
         $source = $association.getSource();
 
-        $primaryKey = (array)$source.getPrimaryKey();
+        $primaryKey = (array)$source.getPrimaryKeys();
         if (!$entity.has($primaryKey)) {
             throw new \RuntimeException(sprintf(
                 "LinkConstraint rule on `%s` requires all primary key values for building the counting " ~

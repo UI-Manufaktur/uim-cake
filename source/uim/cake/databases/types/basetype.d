@@ -1,4 +1,4 @@
-module uim.cake.databases.Type;
+module uim.cake.databases.types;
 
 import uim.cake.databases.IDriver;
 import uim.cake.databases.TypeInterface;

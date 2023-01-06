@@ -51,7 +51,7 @@ class IsUnique {
         myAlias = myOptions["repository"].getAlias();
         $conditions = _alias(myAlias, myFields);
         if ($entity.isNew() == false) {
-            myKeys = (array)myOptions["repository"].getPrimaryKey();
+            myKeys = (array)myOptions["repository"].getPrimaryKeys();
             myKeys = _alias(myAlias, $entity.extract(myKeys));
             if (Hash::filter(myKeys)) {
                 $conditions["NOT"] = myKeys;

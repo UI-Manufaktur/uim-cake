@@ -20,16 +20,16 @@ class NullContext : IContext
      * Get the fields used in the context as a primary key.
      *
      * @return array<string>
-     * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
+     * @deprecated 4.0.0 Renamed to {@link getPrimaryKeys()}.
      */
     array primaryKey() {
-        deprecationWarning("`NullContext::primaryKey()` is deprecated. Use `NullContext::getPrimaryKey()`.");
+        deprecationWarning("`NullContext::primaryKey()` is deprecated. Use `NullContext::getPrimaryKeys()`.");
 
         return [];
     }
 
 
-    array getPrimaryKey() {
+    array getPrimaryKeys() {
         return [];
     }
 

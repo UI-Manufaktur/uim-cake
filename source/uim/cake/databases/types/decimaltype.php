@@ -5,7 +5,7 @@
 
 
  * @since         3.3.4
-  */module uim.cake.databases.Type;
+  */module uim.cake.databases.types;
 
 import uim.cake.databases.IDriver;
 import uim.cake.I18n\Number;

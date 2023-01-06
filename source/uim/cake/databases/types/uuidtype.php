@@ -1,4 +1,4 @@
-module uim.cake.databases.Type;
+module uim.cake.databases.types;
 
 import uim.cake.databases.IDriver;
 import uim.cake.utilities.Text;
@@ -6,8 +6,7 @@ import uim.cake.utilities.Text;
 /**
  * Provides behavior for the UUID type
  */
-class UuidType : StringType
-{
+class UuidType : StringType {
     /**
      * Casts given value from a PHP type to one acceptable by database
      *

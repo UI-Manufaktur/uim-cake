@@ -5,7 +5,7 @@ import uim.cake.databases.Connection;
 /**
  * An interface used by TableSchema objects.
  */
-interface SqlGeneratorInterface
+interface ISqlGenerator
 {
     /**
      * Generate the SQL to create the Table.

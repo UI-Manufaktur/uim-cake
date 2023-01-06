@@ -81,19 +81,19 @@ class ArrayContext : IContext
      * Get the fields used in the context as a primary key.
      *
      * @return array<string>
-     * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
+     * @deprecated 4.0.0 Renamed to {@link getPrimaryKeys()}.
      */
     array primaryKey() {
-        deprecationWarning("`ArrayContext::primaryKey()` is deprecated. Use `ArrayContext::getPrimaryKey()`.");
+        deprecationWarning("`ArrayContext::primaryKey()` is deprecated. Use `ArrayContext::getPrimaryKeys()`.");
 
-        return this.getPrimaryKey();
+        return this.getPrimaryKeys();
     }
 
     /**
      * Get the fields used in the context as a primary key.
      *
      */
-    string[] getPrimaryKey() {
+    string[] getPrimaryKeys() {
         if (
             empty(_context["schema"]["_constraints"]) ||
             !is_array(_context["schema"]["_constraints"])
@@ -111,7 +111,7 @@ class ArrayContext : IContext
 
 
     bool isPrimaryKey(string $field) {
-        $primaryKey = this.getPrimaryKey();
+        $primaryKey = this.getPrimaryKeys();
 
         return in_array($field, $primaryKey, true);
     }
@@ -124,7 +124,7 @@ class ArrayContext : IContext
      * contain a value for all fields in the key.
      */
     bool isCreate() {
-        $primary = this.getPrimaryKey();
+        $primary = this.getPrimaryKeys();
         foreach ($primary as $column) {
             if (!empty(_context["defaults"][$column])) {
                 return false;

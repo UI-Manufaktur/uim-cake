@@ -134,12 +134,12 @@ class EntityContext : IContext {
      * Get the primary key data for the context.
      *
      * Gets the primary key columns from the root entity"s schema.
-     * @deprecated 4.0.0 Renamed to {@link getPrimaryKey()}.
+     * @deprecated 4.0.0 Renamed to {@link getPrimaryKeys()}.
      */
     string[] primaryKey() {
-        deprecationWarning("`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKey()`.");
+        deprecationWarning("`EntityContext::primaryKey()` is deprecated. Use `EntityContext::getPrimaryKeys()`.");
 
-        return (array)_tables[_rootName].getPrimaryKey();
+        return (array)_tables[_rootName].getPrimaryKeys();
     }
 
     /**
@@ -148,7 +148,7 @@ class EntityContext : IContext {
      * Gets the primary key columns from the root entity"s schema.
      */
     string[] primaryKeys() {
-        return (array)_tables[_rootName].getPrimaryKey();
+        return (array)_tables[_rootName].getPrimaryKeys();
     }
 
 
@@ -158,7 +158,7 @@ class EntityContext : IContext {
         if (!myTable) {
             return false;
         }
-        $primaryKey = (array)myTable.getPrimaryKey();
+        $primaryKey = (array)myTable.getPrimaryKeys();
 
         return in_array(array_pop($parts), $primaryKey, true);
     }
@@ -284,7 +284,7 @@ class EntityContext : IContext {
             return null;
         }
         myTable = _getTable(myPath, false);
-        $primary = myTable ? (array)myTable.getPrimaryKey() : ["id"];
+        $primary = myTable ? (array)myTable.getPrimaryKeys() : ["id"];
 
         return (new Collection(myValues)).extract($primary[0]).toArray();
     }

@@ -1,13 +1,11 @@
-module uim.cake.databases.Type;
+module uim.cake.databases.types;
 
 /**
  * : DateTimeType with support for fractional seconds up to microseconds.
  */
-class DateTimeFractionalType : DateTimeType
-{
+class DateTimeFractionalType : DateTimeType {
 
     protected _format = "Y-m-d H:i:s.u";
-
 
     protected _marshalFormats = [
         "Y-m-d H:i",

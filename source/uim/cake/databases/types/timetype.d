@@ -3,7 +3,7 @@
   License: Subject to the terms of the Apache 2.0 license, as written in the included LICENSE.txt file.  
   Authors: Ozan Nurettin Süel (Sicherheitsschmiede)                                                      
 **********************************************************************************************************/
-module uim.cake.databases.Type;
+module uim.cake.databases.types;
 
 import uim.cake.I18n\I18nDateTimeInterface;
 
@@ -12,8 +12,7 @@ import uim.cake.I18n\I18nDateTimeInterface;
  *
  * Use to convert time instances to strings & back.
  */
-class TimeType : DateTimeType
-{
+class TimeType : DateTimeType {
 
     protected _format = "H:i:s";
 

@@ -11,7 +11,7 @@ interface IContext
     const VALID_ATTRIBUTES = ["length", "precision", "comment", "null", "default"];
 
     // Get the fields used in the context as a primary key.
-    string[] getPrimaryKey();
+    string[] getPrimaryKeys();
 
     /**
      * Returns true if the passed field name is part of the primary key for this context

@@ -70,7 +70,7 @@ class TestFixture : IConstraints, IFixture, TableSchemaAwareInterface
     /**
      * The schema for this fixture.
      *
-     * @var uim.cake.databases.Schema\TableISchema&uim.cake.databases.Schema\SqlGeneratorInterface
+     * @var uim.cake.databases.Schema\TableISchema&uim.cake.databases.Schema\ISqlGenerator
      * @psalm-suppress PropertyNotSetInConstructor
      */
     protected _schema;

@@ -5,7 +5,7 @@
 
 
  * @since         3.1.2
-  */module uim.cake.databases.Type;
+  */module uim.cake.databases.types;
 
 import uim.cake.databases.IDriver;
 use InvalidArgumentException;

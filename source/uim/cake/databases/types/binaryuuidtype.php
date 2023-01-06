@@ -1,4 +1,4 @@
-module uim.cake.databases.Type;
+module uim.cake.databases.types;
 
 import uim.cake.core.exceptions.CakeException;
 import uim.cake.databases.IDriver;
@@ -10,8 +10,7 @@ use PDO;
  *
  * Use to convert binary uuid data between PHP and the database types.
  */
-class BinaryUuidType : BaseType
-{
+class BinaryUuidType : BaseType {
     /**
      * Convert binary uuid data into the database format.
      *
