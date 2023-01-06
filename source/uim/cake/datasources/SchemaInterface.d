@@ -74,7 +74,7 @@ interface ISchema {
      *
      * @param string aName The column to get the type of.
      */
-    Nullable!string getColumnType(string aName): ?string;
+    Nullable!string getColumnType(string aName);
 
     /**
      * Sets the type of a column.
@@ -93,7 +93,7 @@ interface ISchema {
      * @param string $column The column name to get the base type from
      * @return string|null The base type name
      */
-    function baseColumnType(string $column): ?string;
+    Nullable!string baseColumnType(string $column);
 
     /**
      * Check whether a field is nullable

@@ -260,7 +260,7 @@ class Response : Message : IResponse
      * Get the encoding if it was set.
      *
      */
-    Nullable!string getEncoding(): ?string
+    Nullable!string getEncoding()
     {
         $content = this.getHeaderLine("content-type");
         if (!$content) {

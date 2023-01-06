@@ -14,7 +14,7 @@ interface ColumnSchemaAwareInterface
      * @param uim.cake.databases.IDriver $driver The driver instance being used.
      * @return string|null An SQL fragment, or `null` in case the column isn"t processed by this type.
      */
-    function getColumnSql(TableISchema $schema, string $column, IDriver $driver): ?string;
+    Nullable!string getColumnSql(TableISchema $schema, string $column, IDriver $driver);
 
     /**
      * Convert a SQL column definition to an abstract type definition.

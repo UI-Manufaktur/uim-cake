@@ -591,9 +591,8 @@ class Message : JsonSerializable, Serializable {
     /**
      * EmailPattern setter/getter
      *
-     * @return string|null
      */
-    function getEmailPattern(): ?string
+    Nullable!string getEmailPattern(): ?string
     {
         return this.emailPattern;
     }
@@ -1350,9 +1349,8 @@ class Message : JsonSerializable, Serializable {
     /**
      * Gets priority.
      *
-     * @return int|null
      */
-    function getPriority(): ?int
+    Nullable!int getPriority(): ?int
     {
         return this.priority;
     }

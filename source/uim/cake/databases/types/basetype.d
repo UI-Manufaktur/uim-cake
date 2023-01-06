@@ -26,13 +26,13 @@ abstract class BaseType : TypeInterface
     }
 
 
-    function getName(): ?string
+    Nullable!string getName()
     {
         return _name;
     }
 
 
-    function getBaseType(): ?string
+    Nullable!string getBaseType()
     {
         return _name;
     }

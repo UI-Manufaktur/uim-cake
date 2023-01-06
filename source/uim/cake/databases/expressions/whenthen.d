@@ -218,7 +218,7 @@ class WhenThenExpression : IExpression
      * @return string|null
      * @see WhenThenExpression::then()
      */
-    function getResultType(): ?string
+    Nullable!string getResultType()
     {
         return this.thenType;
     }

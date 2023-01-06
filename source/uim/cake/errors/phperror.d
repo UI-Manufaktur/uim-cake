@@ -129,7 +129,7 @@ class PhpError
      * Get the error file
      *
      */
-    Nullable!string getFile(): ?string
+    Nullable!string getFile()
     {
         return this.file;
     }

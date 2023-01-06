@@ -89,7 +89,7 @@ if (!function_exists("breakpoint")) {
      * @return string|null
      * @link https://psysh.org/
      */
-    Nulla breakpoint(): 
+    Nullable!string breakpoint(): 
     {
         if ((PHP_SAPI == "cli" || PHP_SAPI == "phpdbg") && class_exists(PsyShell::class)) {
             return "extract(\Psy\Shell::debug(get_defined_vars(), isset(this) ? this : null));";

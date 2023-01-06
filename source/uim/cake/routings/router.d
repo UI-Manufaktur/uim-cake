@@ -146,7 +146,7 @@ class Router
      * @param string|null $routeClass Class name.
      * @return string|null
      */
-    static function defaultRouteClass(?string $routeClass = null): ?string
+    static Nullable!string defaultRouteClass(?string $routeClass = null): ?string
     {
         if ($routeClass == null) {
             return static::$_defaultRouteClass;

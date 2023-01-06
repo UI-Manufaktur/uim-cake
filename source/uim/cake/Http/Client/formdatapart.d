@@ -111,7 +111,7 @@ class FormDataPart
      *
      * @param string|null $id The content id.
      */
-    Nullable!string contentId(?string $id = null): ?string
+    Nullable!string contentId(?string $id = null)
     {
         if ($id == null) {
             return _contentId;
@@ -128,7 +128,7 @@ class FormDataPart
      *
      * @param string|null $filename Use null to get/string to set.
      */
-    Nullable!string filename(?string $filename = null): ?string
+    Nullable!string filename(?string $filename = null)
     {
         if ($filename == null) {
             return _filename;
@@ -142,7 +142,7 @@ class FormDataPart
      *
      * @param string|null $type Use null to get/string to set.
      */
-    Nullable!string type(?string $type): ?string
+    Nullable!string type(?string $type)
     {
         if ($type == null) {
             return _type;
@@ -158,7 +158,7 @@ class FormDataPart
      *
      * @param string|null $type The type of encoding the value has.
      */
-    Nullable!string transferEncoding(?string $type): ?string
+    Nullable!string transferEncoding(?string $type)
     {
         if ($type == null) {
             return _transferEncoding;

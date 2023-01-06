@@ -309,7 +309,7 @@ class ServerRequest : IServerRequest
      * Get the content type used in this request.
      *
      */
-    Nullable!string contentType(): ?string
+    Nullable!string contentType()
     {
         $type = this.getEnv("CONTENT_TYPE");
         if ($type) {
@@ -400,7 +400,7 @@ class ServerRequest : IServerRequest
      *   Local addresses do not contain hostnames.
      * @return string|null The referring address for this request or null.
      */
-    function referer(bool $local = true): ?string
+    Nullable!string referer(bool $local = true)
     {
         $ref = this.getEnv("HTTP_REFERER");
 
@@ -951,7 +951,7 @@ class ServerRequest : IServerRequest
      * Get the host that the request was handled on.
      *
      */
-    Nullable!string host(): ?string
+    Nullable!string host()
     {
         if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_HOST")) {
             return this.getEnv("HTTP_X_FORWARDED_HOST");
@@ -964,7 +964,7 @@ class ServerRequest : IServerRequest
      * Get the port the request was handled on.
      *
      */
-    Nullable!string port(): ?string
+    Nullable!string port()
     {
         if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_PORT")) {
             return this.getEnv("HTTP_X_FORWARDED_PORT");
@@ -980,7 +980,7 @@ class ServerRequest : IServerRequest
      *
      * @return string|null The scheme used for the request.
      */
-    function scheme(): ?string
+    Nullable!string scheme()
     {
         if (this.trustProxy && this.getEnv("HTTP_X_FORWARDED_PROTO")) {
             return this.getEnv("HTTP_X_FORWARDED_PROTO");
@@ -1362,7 +1362,7 @@ class ServerRequest : IServerRequest
      *   variable"s value that does not exist.
      * @return string|null Either the environment value, or null if the value doesn"t exist.
      */
-    function getEnv(string aKey, ?string $default = null): ?string
+    Nullable!string getEnv(string aKey, ?string $default = null)
     {
         $key = strtoupper($key);
         if (!array_key_exists($key, _environment)) {

@@ -792,7 +792,7 @@ class QueryExpression : IExpression, Countable
      * @param uim.cake.databases.IExpression|string $field The field name to get a type for.
      * @return string|null The computed type or null, if the type is unknown.
      */
-    protected function _calculateType($field): ?string
+    protected Nullable!string _calculateType($field)
     {
         $field = $field instanceof IdentifierExpression ? $field.getIdentifier() : $field;
         if (is_string($field)) {

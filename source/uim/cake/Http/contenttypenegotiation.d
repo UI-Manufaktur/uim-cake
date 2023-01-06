@@ -93,7 +93,7 @@ class ContentTypeNegotiation
      * @return string|null The prefered type or null if there is no match with choices or if the
      *   request had no Accept header.
      */
-    function preferredType(RequestInterface $request, array $choices = []): ?string
+    Nullable!string preferredType(RequestInterface $request, array $choices = [])
     {
         $parsed = this.parseAccept($request);
         if (empty($parsed)) {

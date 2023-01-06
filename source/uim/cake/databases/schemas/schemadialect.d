@@ -103,11 +103,11 @@ abstract class SchemaDialect
      * @return string|null An SQL fragment, or `null` in case no corresponding type was found or the type didn"t provide
      *  custom column SQL.
      */
-    protected function _getTypeSpecificColumnSql(
+    protected Nullable!string _getTypeSpecificColumnSql(
         string $columnType,
         TableISchema $schema,
         string $column
-    ): ?string {
+    ) {
         if (!TypeFactory::getMap($columnType)) {
             return null;
         }

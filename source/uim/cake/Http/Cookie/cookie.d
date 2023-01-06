@@ -536,7 +536,7 @@ class Cookie : CookieInterface
     }
 
 
-    function getSameSite(): ?string
+    Nullable!string getSameSite()
     {
         return this.sameSite;
     }

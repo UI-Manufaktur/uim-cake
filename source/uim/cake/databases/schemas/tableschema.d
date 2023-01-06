@@ -305,7 +305,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function getColumnType(string aName): ?string
+    Nullable!string getColumnType(string aName)
     {
         if (!isset(_columns[$name])) {
             return null;
@@ -332,7 +332,7 @@ class TableSchema : TableISchema, SqlGeneratorInterface
     }
 
 
-    function baseColumnType(string $column): ?string
+    Nullable!string baseColumnType(string $column)
     {
         if (isset(_columns[$column]["baseType"])) {
             return _columns[$column]["baseType"];

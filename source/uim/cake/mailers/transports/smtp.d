@@ -313,7 +313,7 @@ class SmtpTransport : AbstractTransport
      * @param string $password Password.
      * @return string|null Response code for the command.
      */
-    protected function _authPlain(string $username, string $password): ?string
+    protected Nullable!string _authPlain(string $username, string $password)
     {
         return _smtpSend(
             sprintf(
@@ -488,7 +488,7 @@ class SmtpTransport : AbstractTransport
      * @return string|null The matched code, or null if nothing matched
      * @throws uim.cake.Network\exceptions.SocketException
      */
-    protected function _smtpSend(?string $data, $checkCode = "250"): ?string
+    protected Nullable!string _smtpSend(?string $data, $checkCode = "250"): ?string
     {
         _lastResponse = [];
 

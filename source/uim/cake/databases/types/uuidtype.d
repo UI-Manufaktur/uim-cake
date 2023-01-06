@@ -14,7 +14,7 @@ class UuidType : StringType
      * @param mixed $value value to be converted to database equivalent
      * @param uim.cake.databases.IDriver $driver object from which database preferences and configuration will be extracted
      */
-    Nullable!string toDatabase($value, IDriver $driver): ?string
+    Nullable!string toDatabase($value, IDriver $driver)
     {
         if ($value == null || $value == "" || $value == false) {
             return null;
@@ -38,7 +38,7 @@ class UuidType : StringType
      * @param mixed $value The value to convert.
      * @return string|null Converted value.
      */
-    function marshal($value): ?string
+    Nullable!string marshal($value)
     {
         if ($value == null || $value == "" || is_array($value)) {
             return null;
