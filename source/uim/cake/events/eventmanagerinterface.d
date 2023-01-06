@@ -1,5 +1,8 @@
 module uim.cake.Event;
 
+@safe:
+import uim.cake;
+
 /**
  * Interface IEventManager
  */

@@ -1,11 +1,4 @@
-
-
-
- *
-
-
- * @since         3.0.10
-  */module uim.cake.Event;
+module uim.cake.Event;
 
 /**
  * : Cake\events.IEventDispatcher.

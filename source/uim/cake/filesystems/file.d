@@ -1,5 +1,8 @@
 module uim.cake.Filesystem;
 
+@safe:
+import uim.cake;
+
 use finfo;
 use SplFileInfo;
 

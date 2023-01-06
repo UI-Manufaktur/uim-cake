@@ -5,6 +5,9 @@
 **********************************************************************************************************/
 module uim.cake.Event;
 
+@safe:
+import uim.cake;
+
 /**
  * Objects implementing this interface can emit events.
  *

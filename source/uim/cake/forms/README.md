@@ -1,7 +1,7 @@
-[![Total Downloads](https://img.shields.io/packagist/dt/UIM/form.svg?style=flat-square)](https://packagist.org/packages/UIM/form)
+[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/form.svg?style=flat-square)](https://packagist.org/packages/cakephp/form)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE.txt)
 
-# UIM Form Library
+# CakePHP Form Library
 
 Form abstraction used to create forms not tied to ORM backed models,
 or to other permanent datastores. Ideal for implementing forms on top of
@@ -18,23 +18,23 @@ import uim.cake.validations.Validator;
 class ContactForm : Form
 {
 
-    protected auto _buildSchema(Schema $schema) {
+    protected function _buildSchema(Schema $schema) {
         return $schema.addField("name", "string")
-            .addField("email", ["type":"string"])
-            .addField("body", ["type":"text"]);
+            .addField("email", ["type": "string"])
+            .addField("body", ["type": "text"]);
     }
 
     function validationDefault(Validator $validator) {
         return $validator.add("name", "length", [
-                "rule":["minLength", 10],
-                "message":"A name is required"
+                "rule": ["minLength", 10],
+                "message": "A name is required"
             ]).add("email", "format", [
-                "rule":"email",
-                "message":"A valid email address is required",
+                "rule": "email",
+                "message": "A valid email address is required",
             ]);
     }
 
-    protected auto _execute(array myData) {
+    protected function _execute(array $data) {
         // Send an email.
         return true;
     }
@@ -51,10 +51,10 @@ You can always define additional methods as you need as well.
 
 ```php
 $contact = new ContactForm();
-$success = $contact.execute(myData);
-myErrors = $contact.getErrors();
+$success = $contact.execute($data);
+$errors = $contact.getErrors();
 ```
 
 ## Documentation
 
-Please make sure you check the [official documentation](https://book.UIM.org/4/en/core-libraries/form.html)
+Please make sure you check the [official documentation](https://book.cakephp.org/4/en/core-libraries/form.html)

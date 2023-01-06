@@ -1,29 +1,29 @@
 {
-    "name": "UIM/form",
-    "description": "UIM Form library",
+    "name": "cakephp/form",
+    "description": "CakePHP Form library",
     "type": "library",
     "keywords": [
-        "UIM",
+        "cakephp",
         "form"
     ],
-    "homepage": "https://UIM.org",
+    "homepage": "https://cakephp.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "UIM Community",
-            "homepage": "https://github.com/UIM/form/graphs/contributors"
+            "name": "CakePHP Community",
+            "homepage": "https://github.com/cakephp/form/graphs/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/UIM/UIM/issues",
-        "forum": "https://stackoverflow.com/tags/UIM",
-        "irc": "irc://irc.freenode.org/UIM",
-        "source": "https://github.com/UIM/form"
+        "issues": "https://github.com/cakephp/cakephp/issues",
+        "forum": "https://stackoverflow.com/tags/cakephp",
+        "irc": "irc://irc.freenode.org/cakephp",
+        "source": "https://github.com/cakephp/form"
     },
     "require": {
-        "php": ">=7.2.0",
-        "UIM/event": "^4.0",
-        "UIM/validation": "^4.0"
+        "php": ">=7.4.0",
+        "cakephp/event": "^4.0",
+        "cakephp/validation": "^4.0"
     },
     "autoload": {
         "psr-4": {

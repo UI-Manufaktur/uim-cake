@@ -1,5 +1,8 @@
 module uim.cake.Form;
 
+@safe:
+import uim.cake;
+
 /**
  * Contains the schema information for Form instances.
  */
@@ -10,29 +13,29 @@ class Schema
      *
      * @var array<string, array<string, mixed>>
      */
-    protected _fields = [];
+    protected $_fields = [];
 
     /**
      * The default values for fields.
      *
      * @var array<string, mixed>
      */
-    protected _fieldDefaults = [
-        "type":null,
-        "length":null,
-        "precision":null,
-        "default":null,
+    protected $_fieldDefaults = [
+        "type": null,
+        "length": null,
+        "precision": null,
+        "default": null,
     ];
 
     /**
      * Add multiple fields to the schema.
      *
-     * @param array<string, array<string, mixed>|string> myFields The fields to add.
+     * @param array<string, array<string, mixed>|string> $fields The fields to add.
      * @return this
      */
-    function addFields(array myFields) {
-        foreach (myFields as myName: $attrs) {
-            this.addField(myName, $attrs);
+    function addFields(array $fields) {
+        foreach ($fields as $name: $attrs) {
+            this.addField($name, $attrs);
         }
 
         return this;
@@ -41,17 +44,17 @@ class Schema
     /**
      * Adds a field to the schema.
      *
-     * @param string myName The field name.
-     * @param array<string, mixed>|string attrs The attributes for the field, or the type
+     * @param string aName The field name.
+     * @param array<string, mixed>|string $attrs The attributes for the field, or the type
      *   as a string.
      * @return this
      */
-    function addField(string myName, $attrs) {
+    function addField(string aName, $attrs) {
         if (is_string($attrs)) {
-            $attrs = ["type":$attrs];
+            $attrs = ["type": $attrs];
         }
         $attrs = array_intersect_key($attrs, _fieldDefaults);
-        _fields[myName] = $attrs + _fieldDefaults;
+        _fields[$name] = $attrs + _fieldDefaults;
 
         return this;
     }
@@ -59,11 +62,11 @@ class Schema
     /**
      * Removes a field to the schema.
      *
-     * @param string myName The field to remove.
+     * @param string aName The field to remove.
      * @return this
      */
-    function removeField(string myName) {
-        unset(_fields[myName]);
+    function removeField(string aName) {
+        unset(_fields[$name]);
 
         return this;
     }
@@ -71,37 +74,38 @@ class Schema
     /**
      * Get the list of fields in the schema.
      *
-     * @return The list of field names.
+     * @return array<string> The list of field names.
      */
-    string[] fields() {
+    array fields() {
         return array_keys(_fields);
     }
 
     /**
      * Get the attributes for a given field.
      *
-     * @param string myName The field name.
+     * @param string aName The field name.
      * @return array<string, mixed>|null The attributes for a field, or null.
      */
-    function field(string myName): ?array
+    function field(string aName): ?array
     {
-        return _fields[myName] ?? null;
+        return _fields[$name] ?? null;
     }
 
     /**
      * Get the type of the named field.
      *
-     * @param string myName The name of the field.
+     * @param string aName The name of the field.
      * @return string|null Either the field type or null if the
      *   field does not exist.
      */
-    Nullable!string fieldType(string myName) {
-        myField = this.field(myName);
-        if (!myField) {
+    Nullable!string fieldType(string aName)
+    {
+        $field = this.field($name);
+        if (!$field) {
             return null;
         }
 
-        return myField["type"];
+        return $field["type"];
     }
 
     /**
@@ -111,7 +115,7 @@ class Schema
      */
     array __debugInfo() {
         return [
-            "_fields":_fields,
+            "_fields": _fields,
         ];
     }
 }

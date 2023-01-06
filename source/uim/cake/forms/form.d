@@ -1,12 +1,8 @@
 module uim.cake.Form;
 
-import uim.cake.events.IEventDispatcher;
-import uim.cake.events.EventDispatcherTrait;
-import uim.cake.events.IEventListener;
-import uim.cake.events.EventManager;
-import uim.cake.utilities.Hash;
-import uim.cake.validations.IValidatorAware;
-import uim.cake.validations.ValidatorAwareTrait;
+@safe:
+import uim.cake;
+
 
 /**
  * Form abstraction used to create forms not tied to ORM backed models,
@@ -20,9 +16,9 @@ import uim.cake.validations.ValidatorAwareTrait;
  * the `_execute` methods. These allow you to declare your form"s
  * fields, validation and primary action respectively.
  *
- * Forms are conventionally placed in the `App\Form` module.
+ * Forms are conventionally placed in the `App\Form` namespace.
  */
-class Form : IEventListener, IEventDispatcher, IValidatorAware
+class Form : IEventListener, IEventDispatcher, ValidatorAwareInterface
 {
     use EventDispatcherTrait;
     use ValidatorAwareTrait;
@@ -44,36 +40,42 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
 
     /**
      * Schema class.
+     *
+     * @var string
      * @psalm-var class-string<uim.cake.Form\Schema>
      */
-    protected string _schemaClass = Schema::class;
+    protected $_schemaClass = Schema::class;
 
     /**
      * The schema used by this form.
      *
      * @var uim.cake.Form\Schema|null
      */
-    protected Schema $_schema;
+    protected $_schema;
 
     /**
      * The errors if any
      *
      * @var array
      */
-    protected _errors = [];
+    protected $_errors = [];
 
-    // Form"s data.
-    protected array $_data = [];
+    /**
+     * Form"s data.
+     *
+     * @var array
+     */
+    protected $_data = [];
 
     /**
      * Constructor
      *
-     * @param uim.cake.events.EventManager|null myEventManager The event manager.
+     * @param uim.cake.events.EventManager|null $eventManager The event manager.
      *  Defaults to a new instance.
      */
-    this(?EventManager myEventManager = null) {
-        if (myEventManager  !is null) {
-            this.setEventManager(myEventManager);
+    this(?EventManager $eventManager = null) {
+        if ($eventManager != null) {
+            this.setEventManager($eventManager);
         }
 
         this.getEventManager().on(this);
@@ -81,7 +83,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
         if (method_exists(this, "_buildValidator")) {
             deprecationWarning(
                 static::class ~ " : `_buildValidator` which is no longer used~ " ~
-                "You should implement `buildValidator(Validator $validator, string myName) : void` " ~
+                "You should implement `buildValidator(Validator $validator, string aName) : void` " ~
                 "or `validationDefault(Validator $validator): Validator` instead."
             );
         }
@@ -113,7 +115,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.Form\Schema $schema The schema to set
      * @return this
      */
-    auto setSchema(Schema $schema) {
+    function setSchema(Schema $schema) {
         _schema = $schema;
 
         return this;
@@ -129,9 +131,9 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * @since 4.1.0
      * @return uim.cake.Form\Schema the schema instance.
      */
-    auto getSchema(): Schema
+    function getSchema(): Schema
     {
-        if (_schema is null) {
+        if (_schema == null) {
             _schema = _buildSchema(new _schemaClass());
         }
 
@@ -152,7 +154,7 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
     function schema(?Schema $schema = null): Schema
     {
         deprecationWarning("Form::schema() is deprecated. Use setSchema() and getSchema() instead.");
-        if ($schema  !is null) {
+        if ($schema != null) {
             this.setSchema($schema);
         }
 
@@ -169,22 +171,22 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * @param uim.cake.Form\Schema $schema The schema to customize.
      * @return uim.cake.Form\Schema The schema to use.
      */
-    protected auto _buildSchema(Schema $schema): Schema
+    protected function _buildSchema(Schema $schema): Schema
     {
         return $schema;
     }
 
     /**
-     * Used to check if myData passes this form"s validation.
+     * Used to check if $data passes this form"s validation.
      *
-     * @param array myData The data to check.
+     * @param array $data The data to check.
      * @param string|null $validator Validator name.
      * @return bool Whether the data is valid.
      * @throws \RuntimeException If validator is invalid.
      */
-    bool validate(array myData, Nullable!string validator = null) {
+    bool validate(array $data, ?string $validator = null) {
         _errors = this.getValidator($validator ?: static::DEFAULT_VALIDATOR)
-            .validate(myData);
+            .validate($data);
 
         return count(_errors) == 0;
     }
@@ -205,18 +207,18 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * Set the errors in the form.
      *
      * ```
-     * myErrors = [
-     *      "field_name":["rule_name":"message"]
+     * $errors = [
+     *      "field_name": ["rule_name": "message"]
      * ];
      *
-     * $form.setErrors(myErrors);
+     * $form.setErrors($errors);
      * ```
      *
-     * @param array myErrors Errors list.
+     * @param array $errors Errors list.
      * @return this
      */
-    auto setErrors(array myErrors) {
-        _errors = myErrors;
+    function setErrors(array $errors) {
+        _errors = $errors;
 
         return this;
     }
@@ -234,23 +236,23 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      * - validate: Set to `false` to disable validation. Can also be a string of the validator ruleset to be applied.
      *   Defaults to `true`/`"default"`.
      *
-     * @param array myData Form data.
-     * @param array myOptions List of options.
+     * @param array $data Form data.
+     * @param array<string, mixed> $options List of options.
      * @return bool False on validation failure, otherwise returns the
      *   result of the `_execute()` method.
      */
-    bool execute(array myData, array myOptions = []) {
-        _data = myData;
+    bool execute(array $data, array $options = []) {
+        _data = $data;
 
-        myOptions += ["validate":true];
+        $options += ["validate": true];
 
-        if (myOptions["validate"] == false) {
-            return _execute(myData);
+        if ($options["validate"] == false) {
+            return _execute($data);
         }
 
-        $validator = myOptions["validate"] == true ? static::DEFAULT_VALIDATOR : myOptions["validate"];
+        $validator = $options["validate"] == true ? static::DEFAULT_VALIDATOR : $options["validate"];
 
-        return this.validate(myData, $validator) ? _execute(myData) : false;
+        return this.validate($data, $validator) ? _execute($data) : false;
     }
 
     /**
@@ -258,44 +260,44 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      *
      * Used by `execute()` to execute the form"s action.
      *
-     * @param array myData Form data.
+     * @param array $data Form data.
      */
-    protected bool _execute(array myData) {
+    protected bool _execute(array $data) {
         return true;
     }
 
     /**
      * Get field data.
      *
-     * @param string|null myField The field name or null to get data array with
+     * @param string|null $field The field name or null to get data array with
      *   all fields.
      * @return mixed
      */
-    auto getData(Nullable!string myField = null) {
-        if (myField is null) {
+    function getData(?string $field = null) {
+        if ($field == null) {
             return _data;
         }
 
-        return Hash::get(_data, myField);
+        return Hash::get(_data, $field);
     }
 
     /**
      * Saves a variable or an associative array of variables for use inside form data.
      *
-     * @param array|string myName The key to write, can be a dot notation value.
+     * @param array|string aName The key to write, can be a dot notation value.
      * Alternatively can be an array containing key(s) and value(s).
-     * @param mixed myValue Value to set for var
+     * @param mixed $value Value to set for var
      * @return this
      */
-    auto set(myName, myValue = null) {
-        $write = myName;
-        if (!is_array(myName)) {
-            $write = [myName: myValue];
+    function set($name, $value = null) {
+        $write = $name;
+        if (!is_array($name)) {
+            $write = [$name: $value];
         }
 
         /** @psalm-suppress PossiblyInvalidIterator */
-        foreach ($write as myKey: $val) {
-            _data = Hash::insert(_data, myKey, $val);
+        foreach ($write as $key: $val) {
+            _data = Hash::insert(_data, $key, $val);
         }
 
         return this;
@@ -304,11 +306,11 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
     /**
      * Set form data.
      *
-     * @param array myData Data array.
+     * @param array $data Data array.
      * @return this
      */
-    auto setData(array myData) {
-        _data = myData;
+    function setData(array $data) {
+        _data = $data;
 
         return this;
     }
@@ -320,9 +322,9 @@ class Form : IEventListener, IEventDispatcher, IValidatorAware
      */
     array __debugInfo() {
         $special = [
-            "_schema":this.getSchema().__debugInfo(),
-            "_errors":this.getErrors(),
-            "_validator":this.getValidator().__debugInfo(),
+            "_schema": this.getSchema().__debugInfo(),
+            "_errors": this.getErrors(),
+            "_validator": this.getValidator().__debugInfo(),
         ];
 
         return $special + get_object_vars(this);

@@ -5,6 +5,9 @@
 **********************************************************************************************************/
 module uim.cake.Event;
 
+@safe:
+import uim.cake;
+
 /**
  * Objects implementing this interface should declare the `implementedEvents()` method
  * to notify the event manager what methods should be called when an event is triggered.

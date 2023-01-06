@@ -1,6 +1,8 @@
 module uim.cake.Filesystem;
 
-import uim.cake.core.exceptions.CakeException;
+@safe:
+import uim.cake;
+
 use CallbackFilterIterator;
 use FilesystemIterator;
 use Iterator;

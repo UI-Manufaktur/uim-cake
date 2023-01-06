@@ -1,13 +1,7 @@
+module uim.cake.Event;
 
-
-
- *
-
-
- * @since         2.1.0
-  */module uim.cake.Event;
-
-import uim.cake.core.exceptions.CakeException;
+@safe:
+import uim.cake;
 
 /**
  * Class Event
