@@ -3,7 +3,6 @@ module uim.cake.core.configures.Engine;
 @safe:
 import uim.cake;
 
-
 /**
  * PHP engine allows Configure to load configuration values from
  * files containing simple PHP arrays.
@@ -16,19 +15,19 @@ import uim.cake;
  * ```
  * <?php
  * return [
- *     "debug":false,
- *     "Security":[
- *         "salt":"its-secret"
+ *     "debug": false,
+ *     "Security": [
+ *         "salt": "its-secret"
  *     ],
- *     "App":[
- *         "module":"App"
+ *     "App": [
+ *         "namespace": "App"
  *     ]
  * ];
  * ```
  *
  * @see uim.cake.Core\Configure::load() for how to load custom configuration files.
  */
-class PhpConfig : IConfigEngine
+class PhpConfig : ConfigEngineInterface
 {
     use FileConfigTrait;
 
@@ -40,13 +39,13 @@ class PhpConfig : IConfigEngine
     /**
      * Constructor for PHP Config file reading.
      *
-     * @param string|null myPath The path to read config files from. Defaults to CONFIG.
+     * @param string|null $path The path to read config files from. Defaults to CONFIG.
      */
-    this(Nullable!string myPath = null) {
-        if (myPath is null) {
-            myPath = CONFIG;
+    this(Nullable!string $path = null) {
+        if ($path == null) {
+            $path = CONFIG;
         }
-        _path = myPath;
+        _path = $path;
     }
 
     /**
@@ -55,39 +54,39 @@ class PhpConfig : IConfigEngine
      * Files with `.` in the name will be treated as values in plugins. Instead of
      * reading from the initialized path, plugin keys will be located using Plugin::path().
      *
-     * @param string myKey The identifier to read from. If the key has a . it will be treated
+     * @param string aKey The identifier to read from. If the key has a . it will be treated
      *  as a plugin prefix.
      * @return array Parsed configuration values.
-     * @throws uim.cake.Core\exceptions.CakeException when files don"t exist or they don"t contain `myConfig`.
+     * @throws uim.cake.Core\exceptions.CakeException when files don"t exist or they don"t contain `aConfig`.
      *  Or when files contain ".." as this could lead to abusive reads.
      */
-    array read(string myKey) {
-        myfile = _getFilePath(myKey, true);
+    array read(string aKey) {
+        $file = _getFilePath($key, true);
 
-        myConfig = null;
+        aConfig = null;
 
-        $return = include myfile;
+        $return = include $file;
         if (is_array($return)) {
             return $return;
         }
 
-        throw new CakeException(sprintf("Config file '%s' did not return an array", myKey ~ ".php"));
+        throw new CakeException(sprintf("Config file '%s' did not return an array", $key ~ ".php"));
     }
 
     /**
-     * Converts the provided myData into a string of PHP code that can
+     * Converts the provided $data into a string of PHP code that can
      * be used saved into a file and loaded later.
      *
-     * @param string myKey The identifier to write to. If the key has a . it will be treated
+     * @param string aKey The identifier to write to. If the key has a . it will be treated
      *  as a plugin prefix.
-     * @param array myData Data to dump.
+     * @param array $data Data to dump.
      * @return bool Success
      */
-    bool dump(string myKey, array myData) {
-        myContentss = "<?php" ~ "\n" ~ "return " ~ var_export(myData, true) ~ ";";
+    bool dump(string aKey, array $data) {
+        $contents = "<?php" ~ "\n" ~ "return " ~ var_export($data, true) ~ ";";
 
-        myfilename = _getFilePath(myKey);
+        $filename = _getFilePath($key);
 
-        return file_put_contents(myfilename, myContentss) > 0;
+        return file_put_contents($filename, $contents) > 0;
     }
 }

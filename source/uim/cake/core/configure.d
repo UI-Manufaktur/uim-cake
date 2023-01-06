@@ -6,7 +6,7 @@
 module uim.cake.core.configure;
 
 @safe:
-  import uim.cake;
+import uim.cake;
 
 /**
  * Configuration class. Used for managing runtime configuration information.
