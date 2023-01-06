@@ -38,7 +38,7 @@ class EavStrategy : TranslateStrategyInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "fields": [],
         "translationTable": "I18n",
         "defaultLocale": null,

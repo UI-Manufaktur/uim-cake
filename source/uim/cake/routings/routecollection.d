@@ -30,42 +30,42 @@ class RouteCollection
      *
      * @var array<string, array<uim.cake.routings.Route\Route>>
      */
-    protected $_routeTable = [];
+    protected _routeTable = [];
 
     /**
      * The hash map of named routes that are in this collection.
      *
      * @var array<uim.cake.routings.Route\Route>
      */
-    protected $_named = [];
+    protected _named = [];
 
     /**
      * Routes indexed by path prefix.
      *
      * @var array<string, array<uim.cake.routings.Route\Route>>
      */
-    protected $_paths = [];
+    protected _paths = [];
 
     /**
      * A map of middleware names and the related objects.
      *
      * @var array
      */
-    protected $_middleware = [];
+    protected _middleware = [];
 
     /**
      * A map of middleware group names and the related middleware names.
      *
      * @var array
      */
-    protected $_middlewareGroups = [];
+    protected _middlewareGroups = [];
 
     /**
      * Route extensions
      *
      * @var array<string>
      */
-    protected $_extensions = [];
+    protected _extensions = [];
 
     /**
      * Add a route to the collection.
@@ -145,7 +145,7 @@ class RouteCollection
         if ($method != "") {
             // Ensure that if the method is included, it is the first element of
             // the array, to match the order that the strings are printed in the
-            // MissingRouteException error message, $_messageTemplateWithMethod.
+            // MissingRouteException error message, _messageTemplateWithMethod.
             $exceptionProperties = array_merge(["method": $method], $exceptionProperties);
         }
         throw new MissingRouteException($exceptionProperties);

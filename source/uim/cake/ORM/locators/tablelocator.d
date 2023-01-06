@@ -27,7 +27,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @var array<string, array|null>
      */
-    protected $_config = [];
+    protected _config = [];
 
     /**
      * Instances that belong to the registry.
@@ -42,7 +42,7 @@ class TableLocator : AbstractLocator : ILocator
      *
      * @var array<uim.cake.orm.Table>
      */
-    protected $_fallbacked = [];
+    protected _fallbacked = [];
 
     /**
      * Fallback class to use

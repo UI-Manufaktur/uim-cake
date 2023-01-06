@@ -24,12 +24,12 @@ class LinkConstraint
      *
      * @var uim.cake.orm.Association|string
      */
-    protected $_association;
+    protected _association;
 
     /**
      * The link status that is required to be present in order for the check to succeed.
      */
-    protected string $_requiredLinkState;
+    protected string _requiredLinkState;
 
     /**
      * Constructor.

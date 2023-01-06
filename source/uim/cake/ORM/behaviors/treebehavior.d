@@ -27,7 +27,7 @@ class TreeBehavior : Behavior
     /**
      * Cached copy of the first column in a table"s primary key.
      */
-    protected string $_primaryKey;
+    protected string _primaryKey;
 
     /**
      * Default config
@@ -36,7 +36,7 @@ class TreeBehavior : Behavior
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "implementedFinders": [
             "path": "findPath",
             "children": "findChildren",

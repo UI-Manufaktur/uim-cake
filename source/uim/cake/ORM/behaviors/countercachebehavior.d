@@ -92,7 +92,7 @@ class CounterCacheBehavior : Behavior
      *
      * @var array<string, array<string, bool>>
      */
-    protected $_ignoreDirty = [];
+    protected _ignoreDirty = [];
 
     /**
      * beforeSave callback.

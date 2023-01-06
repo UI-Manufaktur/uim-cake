@@ -31,7 +31,7 @@ class TranslateBehavior : Behavior : PropertyMarshalInterface
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "implementedFinders": ["translations": "findTranslations"],
         "implementedMethods": [
             "setLocale": "setLocale",

@@ -10,7 +10,7 @@ import uim.cake;
  * required.
  *
  * @see uim.cake.collections.ICollection For a full description of the collection methods supported by this class
- * @property uim.cake.orm.Table $_repository Instance of a table object this query is bound to.
+ * @property uim.cake.orm.Table _repository Instance of a table object this query is bound to.
  * @method uim.cake.orm.Table getRepository() Returns the default table object that will be used by this query,
  *   that is, the table that will appear in the from clause.
  * @method uim.cake.collections.ICollection each(callable $c) Passes each of the query results to the callable

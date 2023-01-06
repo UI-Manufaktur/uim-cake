@@ -23,7 +23,7 @@ use Traversable;
  * required.
  *
  * @see uim.cake.collections.ICollection For a full description of the collection methods supported by this class
- * @property uim.cake.orm.Table $_repository Instance of a table object this query is bound to.
+ * @property uim.cake.orm.Table _repository Instance of a table object this query is bound to.
  * @method uim.cake.orm.Table getRepository() Returns the default table object that will be used by this query,
  *   that is, the table that will appear in the from clause.
  * @method uim.cake.collections.ICollection each(callable $c) Passes each of the query results to the callable
@@ -97,7 +97,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var bool|null
      */
-    protected $_hasFields;
+    protected _hasFields;
 
     /**
      * Tracks whether the original query should include
@@ -105,12 +105,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var bool|null
      */
-    protected $_autoFields;
+    protected _autoFields;
 
     /**
      * Whether to hydrate results into entity objects
      */
-    protected bool $_hydrate = true;
+    protected bool _hydrate = true;
 
     /**
      * Whether aliases are generated for fields.
@@ -123,7 +123,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var callable|null
      */
-    protected $_counter;
+    protected _counter;
 
     /**
      * Instance of a class responsible for storing association containments and
@@ -131,12 +131,12 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var uim.cake.orm.EagerLoader|null
      */
-    protected $_eagerLoader;
+    protected _eagerLoader;
 
     /**
      * True if the beforeFind event has already been triggered for this query
      */
-    protected bool $_beforeFindFired = false;
+    protected bool _beforeFindFired = false;
 
     /**
      * The COUNT(*) for the query.
@@ -145,7 +145,7 @@ class Query : DatabaseQuery : JsonSerializable, IQuery
      *
      * @var int|null
      */
-    protected $_resultsCount;
+    protected _resultsCount;
 
     /**
      * Constructor

@@ -30,7 +30,7 @@ class Marshaller
      *
      * @var uim.cake.orm.Table
      */
-    protected $_table;
+    protected _table;
 
     /**
      * Constructor.
@@ -153,7 +153,7 @@ class Marshaller
      * @param array<string, mixed> $options List of options
      * @return uim.cake.Datasource\IEntity
      * @see uim.cake.orm.Table::newEntity()
-     * @see uim.cake.orm.Entity::$_accessible
+     * @see uim.cake.orm.Entity::_accessible
      */
     function one(array $data, array $options = []): IEntity
     {
@@ -335,7 +335,7 @@ class Marshaller
      * @param array<string, mixed> $options List of options
      * @return array<uim.cake.Datasource\IEntity> An array of hydrated records.
      * @see uim.cake.orm.Table::newEntities()
-     * @see uim.cake.orm.Entity::$_accessible
+     * @see uim.cake.orm.Entity::_accessible
      */
     function many(array $data, array $options = []) {
         $output = [];
@@ -516,7 +516,7 @@ class Marshaller
      * @param array $data key value list of fields to be merged into the entity
      * @param array<string, mixed> $options List of options.
      * @return uim.cake.Datasource\IEntity
-     * @see uim.cake.orm.Entity::$_accessible
+     * @see uim.cake.orm.Entity::_accessible
      */
     function merge(IEntity $entity, array $data, array $options = []): IEntity
     {
@@ -633,7 +633,7 @@ class Marshaller
      * @param array $data list of arrays to be merged into the entities
      * @param array<string, mixed> $options List of options.
      * @return array<uim.cake.Datasource\IEntity>
-     * @see uim.cake.orm.Entity::$_accessible
+     * @see uim.cake.orm.Entity::_accessible
      * @psalm-suppress NullArrayOffset
      */
     function mergeMany(iterable $entities, array $data, array $options = []) {

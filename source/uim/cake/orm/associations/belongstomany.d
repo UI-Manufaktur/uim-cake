@@ -30,62 +30,62 @@ class BelongsToMany : Association
     /**
      * The type of join to be used when adding the association to a query
      */
-    protected string $_joinType = Query::JOIN_TYPE_INNER;
+    protected string _joinType = Query::JOIN_TYPE_INNER;
 
     /**
      * The strategy name to be used to fetch associated records.
      */
-    protected string $_strategy = self::STRATEGY_SELECT;
+    protected string _strategy = self::STRATEGY_SELECT;
 
     /**
      * Junction table instance
      *
      * @var uim.cake.orm.Table
      */
-    protected $_junctionTable;
+    protected _junctionTable;
 
     /**
      * Junction table name
      */
-    protected string $_junctionTableName;
+    protected string _junctionTableName;
 
     /**
      * The name of the hasMany association from the target table
      * to the junction table
      */
-    protected string $_junctionAssociationName;
+    protected string _junctionAssociationName;
 
     /**
      * The name of the property to be set containing data from the junction table
      * once a record from the target table is hydrated
      */
-    protected string $_junctionProperty = "_joinData";
+    protected string _junctionProperty = "_joinData";
 
     /**
      * Saving strategy to be used by this association
      */
-    protected string $_saveStrategy = self::SAVE_REPLACE;
+    protected string _saveStrategy = self::SAVE_REPLACE;
 
     /**
      * The name of the field representing the foreign key to the target table
      *
      * @var array<string>|string|null
      */
-    protected $_targetForeignKey;
+    protected _targetForeignKey;
 
     /**
      * The table instance for the junction relation.
      *
      * @var uim.cake.orm.Table|string
      */
-    protected $_through;
+    protected _through;
 
     /**
      * Valid strategies for this type of association
      *
      * @var array<string>
      */
-    protected $_validStrategies = [
+    protected _validStrategies = [
         self::STRATEGY_SELECT,
         self::STRATEGY_SUBQUERY,
     ];
@@ -96,28 +96,28 @@ class BelongsToMany : Association
      *
      * Defaults to true for backwards compatibility.
      */
-    protected bool $_dependent = true;
+    protected bool _dependent = true;
 
     /**
      * Filtered conditions that reference the target table.
      *
      * @var array|null
      */
-    protected $_targetConditions;
+    protected _targetConditions;
 
     /**
      * Filtered conditions that reference the junction table.
      *
      * @var array|null
      */
-    protected $_junctionConditions;
+    protected _junctionConditions;
 
     /**
      * Order in which target records should be returned
      *
      * @var mixed
      */
-    protected $_sort;
+    protected _sort;
 
     /**
      * Sets the name of the field representing the foreign key to the target table.

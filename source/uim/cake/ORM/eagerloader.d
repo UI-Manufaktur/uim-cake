@@ -20,7 +20,7 @@ class EagerLoader
      *
      * @var array<string, mixed>
      */
-    protected $_containments = [];
+    protected _containments = [];
 
     /**
      * Contains a nested array with the compiled containments tree
@@ -28,7 +28,7 @@ class EagerLoader
      *
      * @var uim.cake.orm.EagerLoadable|array<uim.cake.orm.EagerLoadable>|null
      */
-    protected $_normalized;
+    protected _normalized;
 
     /**
      * List of options accepted by associations in contain()
@@ -36,7 +36,7 @@ class EagerLoader
      *
      * @var array<string, int>
      */
-    protected $_containOptions = [
+    protected _containOptions = [
         "associations": 1,
         "foreignKey": 1,
         "conditions": 1,
@@ -55,21 +55,21 @@ class EagerLoader
      *
      * @var array<uim.cake.orm.EagerLoadable>
      */
-    protected $_loadExternal = [];
+    protected _loadExternal = [];
 
     /**
      * Contains a list of the association names that are to be eagerly loaded
      *
      * @var array
      */
-    protected $_aliasList = [];
+    protected _aliasList = [];
 
     /**
      * Another EagerLoader instance that will be used for "matching" associations.
      *
      * @var uim.cake.orm.EagerLoader|null
      */
-    protected $_matching;
+    protected _matching;
 
     /**
      * A map of table aliases pointing to the association objects they represent
@@ -77,14 +77,14 @@ class EagerLoader
      *
      * @var array<string, uim.cake.orm.EagerLoadable>
      */
-    protected $_joinsMap = [];
+    protected _joinsMap = [];
 
     /**
      * Controls whether fields from associated tables
      * will be eagerly loaded. When set to false, no fields will
      * be loaded from associations.
      */
-    protected bool $_autoFields = true;
+    protected bool _autoFields = true;
 
     /**
      * Sets the list of associations that should be eagerly loaded along for a

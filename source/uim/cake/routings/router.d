@@ -34,7 +34,7 @@ class Router
      *
      * @var string
      */
-    protected static $_defaultRouteClass = Route\Route::class;
+    protected static _defaultRouteClass = Route\Route::class;
 
     /**
      * Contains the base string that will be applied to all generated URLs
@@ -42,7 +42,7 @@ class Router
      *
      * @var string|null
      */
-    protected static $_fullBaseUrl;
+    protected static _fullBaseUrl;
 
     /**
      * Regular expression for action names
@@ -79,21 +79,21 @@ class Router
      *
      * @var uim.cake.routings.RouteCollection
      */
-    protected static $_collection;
+    protected static _collection;
 
     /**
      * A hash of request context data.
      *
      * @var array<string, mixed>
      */
-    protected static $_requestContext = [];
+    protected static _requestContext = [];
 
     /**
      * Named expressions
      *
      * @var array<string, string>
      */
-    protected static $_namedExpressions = [
+    protected static _namedExpressions = [
         "Action": Router::ACTION,
         "Year": Router::YEAR,
         "Month": Router::MONTH,
@@ -107,7 +107,7 @@ class Router
      *
      * @var uim.cake.http.ServerRequest
      */
-    protected static $_request;
+    protected static _request;
 
     /**
      * Initial state is populated the first time reload() is called which is at the bottom
@@ -116,7 +116,7 @@ class Router
      *
      * @var array
      */
-    protected static $_initialState = [];
+    protected static _initialState = [];
 
     /**
      * The stack of URL filters to apply against routing URLs before passing the
@@ -124,21 +124,21 @@ class Router
      *
      * @var array<callable>
      */
-    protected static $_urlFilters = [];
+    protected static _urlFilters = [];
 
     /**
      * Default extensions defined with Router::extensions()
      *
      * @var array<string>
      */
-    protected static $_defaultExtensions = [];
+    protected static _defaultExtensions = [];
 
     /**
      * Cache of parsed route paths
      *
      * @var array<string, mixed>
      */
-    protected static $_routePaths = [];
+    protected static _routePaths = [];
 
     /**
      * Get or set default route class.
@@ -149,9 +149,9 @@ class Router
     static Nullable!string defaultRouteClass(?string $routeClass = null)
     {
         if ($routeClass == null) {
-            return static::$_defaultRouteClass;
+            return static::_defaultRouteClass;
         }
-        static::$_defaultRouteClass = $routeClass;
+        static::_defaultRouteClass = $routeClass;
 
         return null;
     }
@@ -160,10 +160,10 @@ class Router
      * Gets the named route patterns for use in config/routes.php
      *
      * @return array<string, string> Named route elements
-     * @see uim.cake.routings.Router::$_namedExpressions
+     * @see uim.cake.routings.Router::_namedExpressions
      */
     static array getNamedExpressions() {
-        return static::$_namedExpressions;
+        return static::_namedExpressions;
     }
 
     /**
@@ -204,7 +204,7 @@ class Router
      */
     static array parseRequest(ServerRequest myServerRequest)
     {
-        return static::$_collection.parseRequest(myServerRequest);
+        return static::_collection.parseRequest(myServerRequest);
     }
 
     /**
@@ -213,13 +213,13 @@ class Router
      * @param uim.cake.http.ServerRequest myServerRequest request object.
      */
     static void setRequest(ServerRequest myServerRequest) {
-        static::$_request = myServerRequest;
+        static::_request = myServerRequest;
 
-        static::$_requestContext["_base"] = myServerRequest.getAttribute("base");
-        static::$_requestContext["params"] = myServerRequest.getAttribute("params", []);
+        static::_requestContext["_base"] = myServerRequest.getAttribute("base");
+        static::_requestContext["params"] = myServerRequest.getAttribute("params", []);
 
         $uri = myServerRequest.getUri();
-        static::$_requestContext += [
+        static::_requestContext += [
             "_scheme": $uri.getScheme(),
             "_host": $uri.getHost(),
             "_port": $uri.getPort(),
@@ -233,7 +233,7 @@ class Router
      */
     static function getRequest(): ?ServerRequest
     {
-        return static::$_request;
+        return static::_request;
     }
 
     /**
@@ -241,18 +241,18 @@ class Router
      * removes all connected routes.
      */
     static void reload() {
-        if (empty(static::$_initialState)) {
-            static::$_collection = new RouteCollection();
-            static::$_initialState = get_class_vars(static::class);
+        if (empty(static::_initialState)) {
+            static::_collection = new RouteCollection();
+            static::_initialState = get_class_vars(static::class);
 
             return;
         }
-        foreach (static::$_initialState as $key: $val) {
+        foreach (static::_initialState as $key: $val) {
             if ($key != "_initialState") {
                 static::${$key} = $val;
             }
         }
-        static::$_collection = new RouteCollection();
+        static::_collection = new RouteCollection();
     }
 
     /**
@@ -272,8 +272,8 @@ class Router
      * @internal
      */
     static void resetRoutes() {
-        static::$_collection = new RouteCollection();
-        static::$_urlFilters = [];
+        static::_collection = new RouteCollection();
+        static::_urlFilters = [];
     }
 
     /**
@@ -305,7 +305,7 @@ class Router
      * @param callable $function The function to add
      */
     static void addUrlFilter(callable $function) {
-        static::$_urlFilters[] = $function;
+        static::_urlFilters[] = $function;
     }
 
     /**
@@ -319,7 +319,7 @@ class Router
     protected static array _applyUrlFilters(array $url)
     {
         myServerRequest = static::getRequest();
-        foreach (static::$_urlFilters as $filter) {
+        foreach (static::_urlFilters as $filter) {
             try {
                 $url = $filter($url, myServerRequest);
             } catch (Throwable $e) {
@@ -381,7 +381,7 @@ class Router
      * @throws uim.cake.Core\exceptions.CakeException When the route name is not found
      */
     static string url($url = null, bool $full = false) {
-        $context = static::$_requestContext;
+        $context = static::_requestContext;
         myServerRequest = static::getRequest();
 
         $context["_base"] = $context["_base"] ?? Configure::read("App.base") ?: "";
@@ -459,7 +459,7 @@ class Router
             }
             $context["params"] = $params;
 
-            $output = static::$_collection.match($url, $context);
+            $output = static::_collection.match($url, $context);
         } else {
             $url = (string)$url;
 
@@ -551,43 +551,43 @@ class Router
      * For example: `http://example.com`
      */
     static string fullBaseUrl(?string $base = null) {
-        if ($base == null && static::$_fullBaseUrl != null) {
-            return static::$_fullBaseUrl;
+        if ($base == null && static::_fullBaseUrl != null) {
+            return static::_fullBaseUrl;
         }
 
         if ($base != null) {
-            static::$_fullBaseUrl = $base;
+            static::_fullBaseUrl = $base;
             Configure::write("App.fullBaseUrl", $base);
         } else {
             $base = (string)Configure::read("App.fullBaseUrl");
 
             // If App.fullBaseUrl is empty but context is set from request through setRequest()
-            if (!$base && !empty(static::$_requestContext["_host"])) {
+            if (!$base && !empty(static::_requestContext["_host"])) {
                 $base = sprintf(
                     "%s://%s",
-                    static::$_requestContext["_scheme"],
-                    static::$_requestContext["_host"]
+                    static::_requestContext["_scheme"],
+                    static::_requestContext["_host"]
                 );
-                if (!empty(static::$_requestContext["_port"])) {
-                    $base .= ":" ~ static::$_requestContext["_port"];
+                if (!empty(static::_requestContext["_port"])) {
+                    $base .= ":" ~ static::_requestContext["_port"];
                 }
 
                 Configure::write("App.fullBaseUrl", $base);
 
-                return static::$_fullBaseUrl = $base;
+                return static::_fullBaseUrl = $base;
             }
 
-            static::$_fullBaseUrl = $base;
+            static::_fullBaseUrl = $base;
         }
 
-        $parts = parse_url(static::$_fullBaseUrl);
-        static::$_requestContext = [
+        $parts = parse_url(static::_fullBaseUrl);
+        static::_requestContext = [
             "_scheme": $parts["scheme"] ?? null,
             "_host": $parts["host"] ?? null,
             "_port": $parts["port"] ?? null,
-        ] + static::$_requestContext;
+        ] + static::_requestContext;
 
-        return static::$_fullBaseUrl;
+        return static::_fullBaseUrl;
     }
 
     /**
@@ -716,17 +716,17 @@ class Router
      */
     static array extensions($extensions = null, $merge = true)
     {
-        $collection = static::$_collection;
+        $collection = static::_collection;
         if ($extensions == null) {
-            return array_unique(array_merge(static::$_defaultExtensions, $collection.getExtensions()));
+            return array_unique(array_merge(static::_defaultExtensions, $collection.getExtensions()));
         }
 
         $extensions = (array)$extensions;
         if ($merge) {
-            $extensions = array_unique(array_merge(static::$_defaultExtensions, $extensions));
+            $extensions = array_unique(array_merge(static::_defaultExtensions, $extensions));
         }
 
-        return static::$_defaultExtensions = $extensions;
+        return static::_defaultExtensions = $extensions;
     }
 
     /**
@@ -740,11 +740,11 @@ class Router
     {
         $defaults = [
             "routeClass": static::defaultRouteClass(),
-            "extensions": static::$_defaultExtensions,
+            "extensions": static::_defaultExtensions,
         ];
         $options += $defaults;
 
-        return new RouteBuilder(static::$_collection, $path, [], [
+        return new RouteBuilder(static::_collection, $path, [], [
             "routeClass": $options["routeClass"],
             "extensions": $options["extensions"],
         ]);
@@ -891,7 +891,7 @@ class Router
      */
     static array routes()
     {
-        return static::$_collection.routes();
+        return static::_collection.routes();
     }
 
     /**
@@ -901,7 +901,7 @@ class Router
      */
     static function getRouteCollection(): RouteCollection
     {
-        return static::$_collection;
+        return static::_collection;
     }
 
     /**
@@ -910,7 +910,7 @@ class Router
      * @param uim.cake.routings.RouteCollection $routeCollection route collection
      */
     static void setRouteCollection(RouteCollection $routeCollection) {
-        static::$_collection = $routeCollection;
+        static::_collection = $routeCollection;
     }
 
     /**
@@ -951,8 +951,8 @@ class Router
      */
     static array parseRoutePath(string $url)
     {
-        if (isset(static::$_routePaths[$url])) {
-            return static::$_routePaths[$url];
+        if (isset(static::_routePaths[$url])) {
+            return static::_routePaths[$url];
         }
 
         $regex = "#^
@@ -978,7 +978,7 @@ class Router
         $defaults["controller"] = $matches["controller"];
         $defaults["action"] = $matches["action"];
 
-        static::$_routePaths[$url] = $defaults;
+        static::_routePaths[$url] = $defaults;
 
         return $defaults;
     }

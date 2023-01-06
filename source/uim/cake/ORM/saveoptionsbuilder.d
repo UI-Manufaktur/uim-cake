@@ -28,14 +28,14 @@ class SaveOptionsBuilder : ArrayObject
      *
      * @var array<string, mixed>
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Table object.
      *
      * @var uim.cake.orm.Table
      */
-    protected $_table;
+    protected _table;
 
     /**
      * Constructor.

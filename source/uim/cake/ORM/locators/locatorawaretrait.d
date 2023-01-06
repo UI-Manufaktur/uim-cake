@@ -20,7 +20,7 @@ trait LocatorAwareTrait
      *
      * @var uim.cake.orm.Locator\ILocator|null
      */
-    protected $_tableLocator;
+    protected _tableLocator;
 
     /**
      * Sets the table locator.

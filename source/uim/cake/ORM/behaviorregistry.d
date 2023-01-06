@@ -25,21 +25,21 @@ class BehaviorRegistry : ObjectRegistry : IEventDispatcher
      *
      * @var uim.cake.orm.Table
      */
-    protected $_table;
+    protected _table;
 
     /**
      * Method mappings.
      *
      * @var array<string, array>
      */
-    protected $_methodMap = [];
+    protected _methodMap = [];
 
     /**
      * Finder method mappings.
      *
      * @var array<string, array>
      */
-    protected $_finderMap = [];
+    protected _finderMap = [];
 
     /**
      * Constructor

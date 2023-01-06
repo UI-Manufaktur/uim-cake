@@ -42,7 +42,7 @@ class RouteBuilder
      *
      * @var array<string, array>
      */
-    protected static $_resourceMap = [
+    protected static _resourceMap = [
         "index": ["action": "index", "method": "GET", "path": ""],
         "create": ["action": "add", "method": "POST", "path": ""],
         "view": ["action": "view", "method": "GET", "path": "{id}"],
@@ -53,38 +53,38 @@ class RouteBuilder
     /**
      * Default route class to use if none is provided in connect() options.
      */
-    protected string $_routeClass = Route::class;
+    protected string _routeClass = Route::class;
 
     /**
      * The extensions that should be set into the routes connected.
      *
      * @var array<string>
      */
-    protected $_extensions = [];
+    protected _extensions = [];
 
     /**
      * The path prefix scope that this collection uses.
      */
-    protected string $_path;
+    protected string _path;
 
     /**
      * The scope parameters if there are any.
      *
      * @var array
      */
-    protected $_params;
+    protected _params;
 
     /**
      * Name prefix for connected routes.
      */
-    protected string $_namePrefix = "";
+    protected string _namePrefix = "";
 
     /**
      * The route collection routes should be added to.
      *
      * @var uim.cake.routings.RouteCollection
      */
-    protected $_collection;
+    protected _collection;
 
     /**
      * The list of middleware that routes in this builder get
@@ -349,7 +349,7 @@ class RouteBuilder
             $method = $options["inflect"];
             $options["path"] = Inflector::$method($name);
         }
-        $resourceMap = array_merge(static::$_resourceMap, $options["map"]);
+        $resourceMap = array_merge(static::_resourceMap, $options["map"]);
 
         $only = (array)$options["only"];
         if (empty($only)) {

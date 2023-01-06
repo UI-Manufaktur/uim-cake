@@ -23,31 +23,31 @@ class ResultSet : IResultSet
      *
      * @var uim.cake.databases.StatementInterface
      */
-    protected $_statement;
+    protected _statement;
 
     /**
      * Points to the next record number that should be fetched
      */
-    protected int $_index = 0;
+    protected int _index = 0;
 
     /**
      * Last record fetched from the statement
      *
      * @var object|array
      */
-    protected $_current;
+    protected _current;
 
     /**
      * Default table instance
      *
      * @var uim.cake.orm.Table
      */
-    protected $_defaultTable;
+    protected _defaultTable;
 
     /**
      * The default table alias
      */
-    protected string $_defaultAlias;
+    protected string _defaultAlias;
 
     /**
      * List of associations that should be placed under the `_matchingData`
@@ -55,14 +55,14 @@ class ResultSet : IResultSet
      *
      * @var array<string, mixed>
      */
-    protected $_matchingMap = [];
+    protected _matchingMap = [];
 
     /**
      * List of associations that should be eager loaded.
      *
      * @var array
      */
-    protected $_containMap = [];
+    protected _containMap = [];
 
     /**
      * Map of fields that are fetched from the statement with
@@ -70,7 +70,7 @@ class ResultSet : IResultSet
      *
      * @var array<string, mixed>
      */
-    protected $_map = [];
+    protected _map = [];
 
     /**
      * List of matching associations and the column keys to expect
@@ -78,41 +78,41 @@ class ResultSet : IResultSet
      *
      * @var array<string, mixed>
      */
-    protected $_matchingMapColumns = [];
+    protected _matchingMapColumns = [];
 
     /**
      * Results that have been fetched or hydrated into the results.
      *
      * @var \SplFixedArray|array
      */
-    protected $_results = [];
+    protected _results = [];
 
     /**
      * Whether to hydrate results into objects or not
      */
-    protected bool $_hydrate = true;
+    protected bool _hydrate = true;
 
     /**
-     * Tracks value of $_autoFields property of $query passed to constructor.
+     * Tracks value of _autoFields property of $query passed to constructor.
      *
      * @var bool|null
      */
-    protected $_autoFields;
+    protected _autoFields;
 
     /**
      * The fully namespaced name of the class to use for hydrating results
      */
-    protected string $_entityClass;
+    protected string _entityClass;
 
     /**
      * Whether to buffer results fetched from the statement
      */
-    protected bool $_useBuffering = true;
+    protected bool _useBuffering = true;
 
     /**
      * Holds the count of records in this result set
      */
-    protected int $_count;
+    protected int _count;
 
     /**
      * The Database driver object.
@@ -121,7 +121,7 @@ class ResultSet : IResultSet
      *
      * @var uim.cake.databases.IDriver
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * Constructor

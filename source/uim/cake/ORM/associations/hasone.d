@@ -20,7 +20,7 @@ class HasOne : Association {
      *
      * @var array<string>
      */
-    protected string[] $_validStrategies = [
+    protected string[] _validStrategies = [
         self::STRATEGY_JOIN,
         self::STRATEGY_SELECT,
     ];

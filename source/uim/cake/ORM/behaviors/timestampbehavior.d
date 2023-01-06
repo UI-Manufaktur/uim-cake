@@ -30,7 +30,7 @@ class TimestampBehavior : Behavior
      *
      * @var array<string, mixed>
      */
-    protected $_defaultConfig = [
+    protected _defaultConfig = [
         "implementedFinders": [],
         "implementedMethods": [
             "timestamp": "timestamp",
@@ -50,7 +50,7 @@ class TimestampBehavior : Behavior
      *
      * @var uim.cake.I18n\FrozenTime|null
      */
-    protected $_ts;
+    protected _ts;
 
     /**
      * Initialize hook

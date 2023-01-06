@@ -13,21 +13,21 @@ class EagerLoadable
     /**
      * The name of the association to load.
      */
-    protected string $_name;
+    protected string _name;
 
     /**
      * A list of other associations to load from this level.
      *
      * @var array<uim.cake.orm.EagerLoadable>
      */
-    protected $_associations = [];
+    protected _associations = [];
 
     /**
      * The Association class instance to use for loading the records.
      *
      * @var uim.cake.orm.Association|null
      */
-    protected $_instance;
+    protected _instance;
 
     /**
      * A list of options to pass to the association object for loading
@@ -35,13 +35,13 @@ class EagerLoadable
      *
      * @var array<string, mixed>
      */
-    protected $_config = [];
+    protected _config = [];
 
     /**
      * A dotted separated string representing the path of associations
      * that should be followed to fetch this level.
      */
-    protected string $_aliasPath;
+    protected string _aliasPath;
 
     /**
      * A dotted separated string representing the path of entity properties
@@ -61,7 +61,7 @@ class EagerLoadable
     /**
      * Whether this level can be fetched using a join.
      */
-    protected bool $_canBeJoined = false;
+    protected bool _canBeJoined = false;
 
     /**
      * Whether this level was meant for a "matching" fetch
@@ -69,7 +69,7 @@ class EagerLoadable
      *
      * @var bool|null
      */
-    protected $_forMatching;
+    protected _forMatching;
 
     /**
      * The property name where the association result should be nested

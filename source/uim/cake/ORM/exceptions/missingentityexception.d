@@ -24,5 +24,5 @@ class MissingEntityException : CakeException
 {
     /**
      */
-    protected string $_messageTemplate = "Entity class %s could not be found.";
+    protected string _messageTemplate = "Entity class %s could not be found.";
 }

@@ -16,21 +16,21 @@ class ExistsIn
      *
      * @var array<string>
      */
-    protected $_fields;
+    protected _fields;
 
     /**
      * The repository where the field will be looked for
      *
      * @var uim.cake.orm.Table|uim.cake.orm.Association|string
      */
-    protected $_repository;
+    protected _repository;
 
     /**
      * Options for the constructor
      *
      * @var array<string, mixed>
      */
-    protected $_options = [];
+    protected _options = [];
 
     /**
      * Constructor.

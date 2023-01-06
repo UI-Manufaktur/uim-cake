@@ -25,7 +25,7 @@ class ResultSet : IResultSet
     protected _statement;
 
     // Points to the next record number that should be fetched
-    protected int $_index = 0;
+    protected int _index = 0;
 
     /**
      * Last record fetched from the statement
@@ -92,7 +92,7 @@ class ResultSet : IResultSet
     protected _hydrate = true;
 
     /**
-     * Tracks value of $_autoFields property of myQuery passed to constructor.
+     * Tracks value of _autoFields property of myQuery passed to constructor.
      *
      * @var bool|null
      */

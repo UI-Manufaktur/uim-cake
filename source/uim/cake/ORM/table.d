@@ -177,42 +177,42 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      *
      * @var uim.cake.databases.Connection|null
      */
-    protected $_connection;
+    protected _connection;
 
     /**
      * The schema object containing a description of this table fields
      *
      * @var uim.cake.databases.Schema\TableISchema|null
      */
-    protected $_schema;
+    protected _schema;
 
     /**
      * The name of the field that represents the primary key in the table
      *
      * @var array<string>|string|null
      */
-    protected $_primaryKey;
+    protected _primaryKey;
 
     /**
      * The name of the field that represents a human-readable representation of a row
      *
      * @var array<string>|string|null
      */
-    protected $_displayField;
+    protected _displayField;
 
     /**
      * The associations container for this Table.
      *
      * @var uim.cake.orm.AssociationCollection
      */
-    protected $_associations;
+    protected _associations;
 
     /**
      * BehaviorRegistry for this table
      *
      * @var uim.cake.orm.BehaviorRegistry
      */
-    protected $_behaviors;
+    protected _behaviors;
 
     /**
      * The name of the class that represent a single row for this table
@@ -220,7 +220,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * @var string
      * @psalm-var class-string<uim.cake.Datasource\IEntity>
      */
-    protected $_entityClass;
+    protected _entityClass;
 
     /**
      * Registry key used to create this table object
