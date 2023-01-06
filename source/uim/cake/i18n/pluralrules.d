@@ -125,8 +125,7 @@ class PluralRules
      * @link http://localization-guide.readthedocs.org/en/latest/l10n/pluralforms.html
      * @link https://developer.mozilla.org/en-US/docs/Mozilla/Localization/Localization_and_Plurals#List_of_Plural_Rules
      */
-    static int calculate(string $locale, $n)
-    {
+    static int calculate(string $locale, $n) {
         $locale = Locale::canonicalize($locale);
 
         if (!isset(static::_rulesMap[$locale])) {

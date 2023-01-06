@@ -165,8 +165,7 @@ class ResultSet : IResultSet
      *
      * Part of Iterator interface.
      */
-    int key()
-    {
+    int key() {
         return _index;
     }
 
@@ -309,8 +308,7 @@ class ResultSet : IResultSet
      *
      * Part of the Countable interface.
      */
-    size_t count()
-    {
+    size_t count() {
         if (_count != null) {
             return _count;
         }

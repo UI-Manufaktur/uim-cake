@@ -80,8 +80,7 @@ class RedirectRoute : Route
      * @param array $context Array of request context parameters.
      * @return string|null Always null, string return result unused.
      */
-    Nullable!string match(array $url, array $context = [])
-    {
+    Nullable!string match(array $url, array $context = []) {
         return null;
     }
 

@@ -88,8 +88,7 @@ class CookieCollection : IteratorAggregate, Countable
     /**
      * Get the number of cookies in the collection.
      */
-    size_t count()
-    {
+    size_t count() {
         return count(this.cookies);
     }
 

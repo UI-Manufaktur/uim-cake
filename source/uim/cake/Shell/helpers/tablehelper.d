@@ -26,8 +26,7 @@ class TableHelper : Helper
      * @param array $rows The rows on which the columns width will be calculated on.
      * @return array<int>
      */
-    protected array _calculateWidths(array $rows)
-    {
+    protected array _calculateWidths(array $rows) {
         $widths = [];
         foreach ($rows as $line) {
             foreach (array_values($line) as $k: $v) {
@@ -47,8 +46,7 @@ class TableHelper : Helper
      * @param string $text The text to calculate a width for.
      * @return int The width of the textual content in visible characters.
      */
-    protected function _cellWidth(string $text)
-    {
+    protected function _cellWidth(string $text) {
         if ($text == "") {
             return 0;
         }

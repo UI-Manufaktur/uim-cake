@@ -11,7 +11,7 @@ import uim.cake.databases.TypeFactory;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.datasources.IEntity;
 import uim.cake.datasources.exceptions.InvalidPrimaryKeyException;
-import uim.cake.datasources.RepositoryInterface;
+import uim.cake.datasources.IRepository;
 import uim.cake.datasources.RulesAwareTrait;
 import uim.cake.events.IEventDispatcher;
 import uim.cake.events.EventDispatcherTrait;
@@ -126,7 +126,7 @@ use RuntimeException;
  * @see uim.cake.events.EventManager for reference on the events system.
  * @link https://book.cakephp.org/4/en/orm/table-objects.html#event-list
  */
-class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAwareInterface
+class Table : IRepository, IEventListener, IEventDispatcher, ValidatorAwareInterface
 {
     use EventDispatcherTrait;
     use RulesAwareTrait;
@@ -1437,7 +1437,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
      * could not be found
      * @throws uim.cake.Datasource\exceptions.InvalidPrimaryKeyException When $primaryKey has an
      *      incorrect number of elements.
-     * @see uim.cake.datasources.RepositoryInterface::find()
+     * @see uim.cake.datasources.IRepository::find()
      * @psalm-suppress InvalidReturnType
      */
     function get($primaryKey, array $options = []): IEntity
@@ -1661,8 +1661,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
     }
 
 
-    int updateAll($fields, $conditions)
-    {
+    int updateAll($fields, $conditions) {
         $statement = this.query()
             .update()
             .set($fields)
@@ -1674,8 +1673,7 @@ class Table : RepositoryInterface, IEventListener, IEventDispatcher, ValidatorAw
     }
 
 
-    int deleteAll($conditions)
-    {
+    int deleteAll($conditions) {
         $statement = this.query()
             .delete()
             .where($conditions)

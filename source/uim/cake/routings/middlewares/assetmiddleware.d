@@ -101,8 +101,7 @@ class AssetMiddleware : IMiddleware
      * @param string $url Asset URL
      * @return string|null Absolute path for asset file, null on failure
      */
-    protected Nullable!string _getAssetFile(string $url)
-    {
+    protected Nullable!string _getAssetFile(string $url) {
         $parts = explode("/", ltrim($url, "/"));
         $pluginPart = [];
         for ($i = 0; $i < 2; $i++) {

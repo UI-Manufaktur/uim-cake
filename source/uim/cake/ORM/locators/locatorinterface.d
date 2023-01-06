@@ -1,7 +1,7 @@
 module uim.cake.orm.Locator;
 
 import uim.cake.datasources.Locator\ILocatoras BaseILocator;
-import uim.cake.datasources.RepositoryInterface;
+import uim.cake.datasources.IRepository;
 import uim.cake.orm.Table;
 
 /**
@@ -48,5 +48,5 @@ interface ILocator: BaseILocator
      * @return uim.cake.orm.Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    function set(string $alias, RepositoryInterface $repository): Table;
+    function set(string $alias, IRepository $repository): Table;
 }

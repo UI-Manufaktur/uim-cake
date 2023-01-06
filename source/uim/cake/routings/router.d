@@ -146,8 +146,7 @@ class Router
      * @param string|null $routeClass Class name.
      * @return string|null
      */
-    static Nullable!string defaultRouteClass(?string $routeClass = null)
-    {
+    static Nullable!string defaultRouteClass(?string $routeClass = null) {
         if ($routeClass == null) {
             return static::_defaultRouteClass;
         }
@@ -202,8 +201,7 @@ class Router
      * @return array Parsed elements from URL.
      * @throws uim.cake.routings.exceptions.MissingRouteException When a route cannot be handled
      */
-    static array parseRequest(ServerRequest myServerRequest)
-    {
+    static array parseRequest(ServerRequest myServerRequest) {
         return static::_collection.parseRequest(myServerRequest);
     }
 
@@ -316,8 +314,7 @@ class Router
      * @see uim.cake.routings.Router::url()
      * @see uim.cake.routings.Router::addUrlFilter()
      */
-    protected static array _applyUrlFilters(array $url)
-    {
+    protected static array _applyUrlFilters(array $url) {
         myServerRequest = static::getRequest();
         foreach (static::_urlFilters as $filter) {
             try {
@@ -601,8 +598,7 @@ class Router
      *     Cake\Http\ServerRequest object that needs to be reversed.
      * @return array The URL array ready to be used for redirect or HTML link.
      */
-    static array reverseToArray($params)
-    {
+    static array reverseToArray($params) {
         $route = null;
         if ($params instanceof ServerRequest) {
             $route = $params.getAttribute("route");
@@ -714,8 +710,7 @@ class Router
      *   Defaults to `true`.
      * @return array<string> Array of extensions Router is configured to parse.
      */
-    static array extensions($extensions = null, $merge = true)
-    {
+    static array extensions($extensions = null, $merge = true) {
         $collection = static::_collection;
         if ($extensions == null) {
             return array_unique(array_merge(static::_defaultExtensions, $collection.getExtensions()));
@@ -889,8 +884,7 @@ class Router
      *
      * @return array<uim.cake.routings.Route\Route>
      */
-    static array routes()
-    {
+    static array routes() {
         return static::_collection.routes();
     }
 
@@ -949,8 +943,7 @@ class Router
      * @param string $url Route path in [Plugin.][Prefix/]Controller::action format
      * @return array<string, string>
      */
-    static array parseRoutePath(string $url)
-    {
+    static array parseRoutePath(string $url) {
         if (isset(static::_routePaths[$url])) {
             return static::_routePaths[$url];
         }

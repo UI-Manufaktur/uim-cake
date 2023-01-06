@@ -565,8 +565,7 @@ class Message : JsonSerializable, Serializable {
      *
      * @return string|null Encoding
      */
-    Nullable!string getTransferEncoding()
-    {
+    Nullable!string getTransferEncoding() {
         return this.transferEncoding;
     }
 
@@ -587,8 +586,7 @@ class Message : JsonSerializable, Serializable {
      * EmailPattern setter/getter
      *
      */
-    Nullable!string getEmailPattern()
-    {
+    Nullable!string getEmailPattern() {
         return this.emailPattern;
     }
 
@@ -1345,8 +1343,7 @@ class Message : JsonSerializable, Serializable {
      * Gets priority.
      *
      */
-    Nullable!int getPriority()
-    {
+    Nullable!int getPriority() {
         return this.priority;
     }
 

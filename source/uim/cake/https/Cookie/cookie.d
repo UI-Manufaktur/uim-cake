@@ -490,8 +490,7 @@ class Cookie : CookieInterface
     }
 
 
-    Nullable!int getExpiresTimestamp()
-    {
+    Nullable!int getExpiresTimestamp() {
         if (!this.expiresAt) {
             return null;
         }
@@ -535,8 +534,7 @@ class Cookie : CookieInterface
     }
 
 
-    Nullable!string getSameSite()
-    {
+    Nullable!string getSameSite() {
         return this.sameSite;
     }
 

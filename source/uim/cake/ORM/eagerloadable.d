@@ -172,8 +172,7 @@ class EagerLoadable
      * The property path of `country` will be `author.company`
      *
      */
-    Nullable!string propertyPath()
-    {
+    Nullable!string propertyPath() {
         return _propertyPath;
     }
 
@@ -243,8 +242,7 @@ class EagerLoadable
      * The target property of `country` will be just `country`
      *
      */
-    Nullable!string targetProperty()
-    {
+    Nullable!string targetProperty() {
         return _targetProperty;
     }
 

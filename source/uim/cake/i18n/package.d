@@ -125,8 +125,7 @@ class Package
      * Gets the fallback package name.
      *
      */
-    Nullable!string getFallback()
-    {
+    Nullable!string getFallback() {
         return this.fallback;
     }
 }

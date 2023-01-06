@@ -3,7 +3,7 @@ module uim.cake.orm.Locator;
 import uim.cake.core.App;
 import uim.cake.datasources.ConnectionManager;
 import uim.cake.datasources.Locator\AbstractLocator;
-import uim.cake.datasources.RepositoryInterface;
+import uim.cake.datasources.IRepository;
 import uim.cake.orm.AssociationCollection;
 import uim.cake.orm.exceptions.MissingTableClassException;
 import uim.cake.orm.Table;
@@ -245,8 +245,7 @@ class TableLocator : AbstractLocator : ILocator
      * @param array<string, mixed> $options Table options array.
      * @return string|null
      */
-    protected Nullable!string _getClassName(string $alias, array $options = [])
-    {
+    protected Nullable!string _getClassName(string $alias, array $options = []) {
         if (empty($options["className"])) {
             $options["className"] = $alias;
         }
@@ -285,7 +284,7 @@ class TableLocator : AbstractLocator : ILocator
      * @return uim.cake.orm.Table
      * @psalm-suppress MoreSpecificImplementedParamType
      */
-    function set(string $alias, RepositoryInterface $repository): Table
+    function set(string $alias, IRepository $repository): Table
     {
         return this.instances[$alias] = $repository;
     }

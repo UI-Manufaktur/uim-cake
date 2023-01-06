@@ -74,8 +74,7 @@ class DashedRoute : Route
      *   directory.
      * @return string|null Either a string URL or null.
      */
-    Nullable!string match(array $url, array $context = [])
-    {
+    Nullable!string match(array $url, array $context = []) {
         $url = _dasherize($url);
         if (!_inflectedDefaults) {
             _inflectedDefaults = true;

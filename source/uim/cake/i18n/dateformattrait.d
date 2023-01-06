@@ -44,8 +44,7 @@ trait DateFormatTrait
      *
      * @return string|null The default locale string to be used or null.
      */
-    static Nullable!string getDefaultLocale()
-    {
+    static Nullable!string getDefaultLocale() {
         return static::$defaultLocale;
     }
 

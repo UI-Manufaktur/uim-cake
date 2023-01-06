@@ -121,8 +121,7 @@ class LinkConstraint
      * @param array $values The condition values.
      * @return array A conditions array combined from the passed fields and values.
      */
-    protected array _buildConditions(array $fields, array $values)
-    {
+    protected array _buildConditions(array $fields, array $values) {
         if (count($fields) != count($values)) {
             throw new \InvalidArgumentException(sprintf(
                 "The number of fields is expected to match the number of values, got %d field(s) and %d value(s).",
@@ -141,8 +140,7 @@ class LinkConstraint
      * @param uim.cake.Datasource\IEntity $entity The entity involved in the operation.
      * @return int The number of links.
      */
-    protected int _countLinks(Association $association, IEntity $entity)
-    {
+    protected int _countLinks(Association $association, IEntity $entity) {
         $source = $association.getSource();
 
         $primaryKey = (array)$source.getPrimaryKey();

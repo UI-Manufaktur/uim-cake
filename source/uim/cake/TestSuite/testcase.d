@@ -1000,8 +1000,7 @@ abstract class TestCase : BaseTestCase
      * @param string $appNamespace The app namespace, defaults to "TestApp".
      * @return string|null The previous app namespace or null if not set.
      */
-    static Nullable!string setAppNamespace(string $appNamespace = "TestApp")
-    {
+    static Nullable!string setAppNamespace(string $appNamespace = "TestApp") {
         $previous = Configure::read("App.namespace");
         Configure::write("App.namespace", $appNamespace);
 

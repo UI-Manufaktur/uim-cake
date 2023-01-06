@@ -150,8 +150,7 @@ class Route
      * Get the supported extensions for this route.
      *
      */
-    string[] getExtensions()
-    {
+    string[] getExtensions() {
         return _extensions;
     }
 
@@ -534,8 +533,7 @@ class Route
      * @param string $url The url to parse.
      * @return array containing url, extension
      */
-    protected array _parseExtension(string $url)
-    {
+    protected array _parseExtension(string $url) {
         if (count(_extensions) && strpos($url, ".") != false) {
             foreach (_extensions as $ext) {
                 $len = strlen($ext) + 1;
@@ -558,8 +556,7 @@ class Route
      * @param array $context The current route context, which should contain controller/action keys.
      * @return array<string> Array of passed args.
      */
-    protected array _parseArgs(string $args, array $context)
-    {
+    protected array _parseArgs(string $args, array $context) {
         $pass = [];
         $args = explode("/", $args);
         $urldecode = this.options["_urldecode"] ?? true;
@@ -583,8 +580,7 @@ class Route
      * @param array $params An array of persistent values to replace persistent ones.
      * @return array An array with persistent parameters applied.
      */
-    protected array _persistParams(array $url, array $params)
-    {
+    protected array _persistParams(array $url, array $params) {
         foreach (this.options["persist"] as $persistKey) {
             if (array_key_exists($persistKey, $params) && !isset($url[$persistKey])) {
                 $url[$persistKey] = $params[$persistKey];
@@ -607,8 +603,7 @@ class Route
      *   directory and other url params.
      * @return string|null Either a string URL for the parameters if they match or null.
      */
-    Nullable!string match(array $url, array $context = [])
-    {
+    Nullable!string match(array $url, array $context = []) {
         if (empty(_compiledRoute)) {
             this.compile();
         }
@@ -886,8 +881,7 @@ class Route
     /**
      * Get the names of the middleware that should be applied to this route.
      */
-    array getMiddleware()
-    {
+    array getMiddleware() {
         return this.middleware;
     }
 
