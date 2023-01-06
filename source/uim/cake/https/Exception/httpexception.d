@@ -10,8 +10,7 @@ import uim.cake.core.exceptions.CakeException;
  * You may also use this as a meaningful bridge to {@link uim.cake.Core\exceptions.CakeException}, e.g.:
  * throw new uim.cake.Network\exceptions.HttpException("HTTP Version Not Supported", 505);
  */
-class HttpException : CakeException
-{
+class HttpException : CakeException {
 
     protected _defaultCode = 500;
 

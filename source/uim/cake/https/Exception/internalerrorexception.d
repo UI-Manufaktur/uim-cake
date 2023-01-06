@@ -5,8 +5,7 @@ use Throwable;
 /**
  * Represents an HTTP 500 error.
  */
-class InternalErrorException : HttpException
-{
+class InternalErrorException : HttpException {
     /**
      * Constructor
      *

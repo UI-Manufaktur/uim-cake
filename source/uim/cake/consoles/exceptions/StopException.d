@@ -19,6 +19,5 @@
  * @see uim.cake.consoles.Shell::error()
  * @see uim.cake.Command\BaseCommand::abort()
  */
-class StopException : ConsoleException
-{
+class StopException : ConsoleException {
 }

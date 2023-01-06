@@ -5,8 +5,7 @@ use Throwable;
 /**
  * Represents an HTTP 403 error.
  */
-class ForbiddenException : HttpException
-{
+class ForbiddenException : HttpException {
 
     protected _defaultCode = 403;
 

@@ -5,8 +5,7 @@ import uim.cake.core.exceptions.CakeException;
 /**
  * Used when a datasource cannot be found.
  */
-class MissingDatasourceException : CakeException
-{
+class MissingDatasourceException : CakeException {
     /**
      */
     protected string _messageTemplate = "Datasource class %s could not be found. %s";

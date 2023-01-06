@@ -5,8 +5,7 @@ use RuntimeException;
 /**
  * Exception class used to indicate missing console input.
  */
-class MissingConsoleInputException : RuntimeException
-{
+class MissingConsoleInputException : RuntimeException {
     /**
      * Update the exception message with the question text
      *

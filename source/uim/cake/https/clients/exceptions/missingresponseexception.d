@@ -5,8 +5,7 @@ import uim.cake.core.exceptions\CakeException;
 /**
  * Used to indicate that a request did not have a matching mock response.
  */
-class MissingResponseException : CakeException
-{
+class MissingResponseException : CakeException {
     /**
      * @var string
      */

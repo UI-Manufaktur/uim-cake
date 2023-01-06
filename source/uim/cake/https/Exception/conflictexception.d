@@ -16,8 +16,7 @@ use Throwable;
 /**
  * Represents an HTTP 409 error.
  */
-class ConflictException : HttpException
-{
+class ConflictException : HttpException {
 
     protected _defaultCode = 409;
 

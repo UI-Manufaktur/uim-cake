@@ -6,8 +6,7 @@ import uim.cake;
 /**
  * Used when a datasource cannot be found.
  */
-class MissingDatasourceException : CakeException
-{
+class MissingDatasourceException : CakeException {
     /**
      * @var string
      */

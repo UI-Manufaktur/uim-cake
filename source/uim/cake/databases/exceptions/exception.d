@@ -5,8 +5,7 @@ import uim.cake.core.exceptions.CakeException;
 /**
  * Exception for the database package.
  */
-class DatabaseException : CakeException
-{
+class DatabaseException : CakeException {
 }
 
 // phpcs:disable

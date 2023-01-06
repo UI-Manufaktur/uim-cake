@@ -16,8 +16,7 @@ use Throwable;
 /**
  * Represents an HTTP 410 error.
  */
-class GoneException : HttpException
-{
+class GoneException : HttpException {
 
     protected _defaultCode = 410;
 

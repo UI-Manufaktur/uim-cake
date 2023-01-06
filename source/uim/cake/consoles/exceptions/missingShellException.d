@@ -7,8 +7,7 @@
 /**
  * Used when a shell cannot be found.
  */
-class MissingShellException : ConsoleException
-{
+class MissingShellException : ConsoleException {
     /**
      * @var string
      */

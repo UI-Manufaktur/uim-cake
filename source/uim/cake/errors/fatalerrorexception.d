@@ -6,8 +6,7 @@ use Throwable;
 /**
  * Represents a fatal error
  */
-class FatalErrorException : CakeException
-{
+class FatalErrorException : CakeException {
     /**
      * Constructor
      *

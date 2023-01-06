@@ -3,8 +3,7 @@ module uim.cake.console\Exception;
 /**
  * Used when a shell method cannot be found.
  */
-class MissingShellMethodException : ConsoleException
-{
+class MissingShellMethodException : ConsoleException {
     /**
      * @var string
      */
