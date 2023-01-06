@@ -22,7 +22,7 @@ class IdentifierQuoter
      *
      * @var uim.cake.databases.Driver
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * Constructor

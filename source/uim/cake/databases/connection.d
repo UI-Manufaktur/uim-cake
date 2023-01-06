@@ -17,7 +17,7 @@ class Connection : IConnection {
      *
      * @var array<string, mixed>
      */
-    protected $_config;
+    protected _config;
 
     /**
      * Driver object, responsible for creating the real connection
@@ -25,35 +25,35 @@ class Connection : IConnection {
      *
      * @var uim.cake.databases.IDriver
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * Contains how many nested transactions have been started.
      */
-    protected int $_transactionLevel = 0;
+    protected int _transactionLevel = 0;
 
     /**
      * Whether a transaction is active in this connection.
      */
-    protected bool $_transactionStarted = false;
+    protected bool _transactionStarted = false;
 
     /**
      * Whether this connection can and should use savepoints for nested
      * transactions.
      */
-    protected bool $_useSavePoints = false;
+    protected bool _useSavePoints = false;
 
     /**
      * Whether to log queries generated during this connection.
      */
-    protected bool $_logQueries = false;
+    protected bool _logQueries = false;
 
     /**
      * Logger object instance.
      *
      * @var \Psr\logs.LoggerInterface|null
      */
-    protected $_logger;
+    protected _logger;
 
     /**
      * Cacher object instance.
@@ -67,7 +67,7 @@ class Connection : IConnection {
      *
      * @var uim.cake.databases.Schema\ICollection|null
      */
-    protected $_schemaCollection;
+    protected _schemaCollection;
 
     /**
      * NestedTransactionRollbackException object instance, will be stored if

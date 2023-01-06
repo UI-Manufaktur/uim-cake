@@ -11,7 +11,7 @@ trait TypeMapTrait
     /**
      * @var uim.cake.databases.TypeMap|null
      */
-    protected $_typeMap;
+    protected _typeMap;
 
     /**
      * Creates a new TypeMap if $typeMap is an array, otherwise exchanges it for the given one.

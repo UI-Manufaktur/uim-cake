@@ -17,7 +17,7 @@ class TypeFactory
      * @var array<string, string>
      * @psalm-var array<string, class-string<uim.cake.databases.TypeInterface>>
      */
-    protected static $_types = [
+    protected static _types = [
         "tinyinteger": types.IntegerType::class,
         "smallinteger": types.IntegerType::class,
         "integer": types.IntegerType::class,
@@ -46,7 +46,7 @@ class TypeFactory
      *
      * @var array<uim.cake.databases.TypeInterface>
      */
-    protected static $_builtTypes = [];
+    protected static _builtTypes = [];
 
     /**
      * Returns a Type object capable of converting a type identified by name.
@@ -57,14 +57,14 @@ class TypeFactory
      */
     static function build(string aName): TypeInterface
     {
-        if (isset(static::$_builtTypes[$name])) {
-            return static::$_builtTypes[$name];
+        if (isset(static::_builtTypes[$name])) {
+            return static::_builtTypes[$name];
         }
-        if (!isset(static::$_types[$name])) {
+        if (!isset(static::_types[$name])) {
             throw new InvalidArgumentException(sprintf("Unknown type "%s"", $name));
         }
 
-        return static::$_builtTypes[$name] = new static::$_types[$name]($name);
+        return static::_builtTypes[$name] = new static::_types[$name]($name);
     }
 
     /**
@@ -74,8 +74,8 @@ class TypeFactory
      */
     static array buildAll() {
         $result = [];
-        foreach (static::$_types as $name: $type) {
-            $result[$name] = static::$_builtTypes[$name] ?? static::build($name);
+        foreach (static::_types as $name: $type) {
+            $result[$name] = static::_builtTypes[$name] ?? static::build($name);
         }
 
         return $result;
@@ -88,8 +88,8 @@ class TypeFactory
      * @param uim.cake.databases.TypeInterface $instance The type instance you want to set.
      */
     static void set(string aName, TypeInterface $instance) {
-        static::$_builtTypes[$name] = $instance;
-        static::$_types[$name] = get_class($instance);
+        static::_builtTypes[$name] = $instance;
+        static::_types[$name] = get_class($instance);
     }
 
     /**
@@ -101,8 +101,8 @@ class TypeFactory
      * @psalm-param class-string<uim.cake.databases.TypeInterface> $className
      */
     static void map(string $type, string $className) {
-        static::$_types[$type] = $className;
-        unset(static::$_builtTypes[$type]);
+        static::_types[$type] = $className;
+        unset(static::_builtTypes[$type]);
     }
 
     /**
@@ -113,8 +113,8 @@ class TypeFactory
      * @psalm-param array<string, class-string<uim.cake.databases.TypeInterface>> $map
      */
     static void setMap(array $map) {
-        static::$_types = $map;
-        static::$_builtTypes = [];
+        static::_types = $map;
+        static::_builtTypes = [];
     }
 
     /**
@@ -125,17 +125,17 @@ class TypeFactory
      */
     static function getMap(?string $type = null) {
         if ($type == null) {
-            return static::$_types;
+            return static::_types;
         }
 
-        return static::$_types[$type] ?? null;
+        return static::_types[$type] ?? null;
     }
 
     /**
      * Clears out all created instances and mapped types classes, useful for testing
      */
     static void clear() {
-        static::$_types = [];
-        static::$_builtTypes = [];
+        static::_types = [];
+        static::_builtTypes = [];
     }
 }

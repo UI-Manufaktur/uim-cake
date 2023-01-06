@@ -20,21 +20,21 @@ class BetweenExpression : IExpression, FieldInterface
      *
      * @var mixed
      */
-    protected $_from;
+    protected _from;
 
     /**
      * The second value in the expression
      *
      * @var mixed
      */
-    protected $_to;
+    protected _to;
 
     /**
      * The data type for the from and to arguments
      *
      * @var mixed
      */
-    protected $_type;
+    protected _type;
 
     /**
      * Constructor

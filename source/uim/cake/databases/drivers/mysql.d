@@ -37,7 +37,7 @@ class Mysql : Driver
      *
      * @var array<string, mixed>
      */
-    protected $_baseConfig = [
+    protected _baseConfig = [
         "persistent": true,
         "host": "localhost",
         "username": "root",
@@ -55,17 +55,17 @@ class Mysql : Driver
      *
      * @var uim.cake.databases.Schema\MysqlSchemaDialect|null
      */
-    protected $_schemaDialect;
+    protected _schemaDialect;
 
     /**
      * String used to start a database identifier quoting to make it safe
      */
-    protected string $_startQuote = "`";
+    protected string _startQuote = "`";
 
     /**
      * String used to end a database identifier quoting to make it safe
      */
-    protected string $_endQuote = "`";
+    protected string _endQuote = "`";
 
     /**
      * Server type.

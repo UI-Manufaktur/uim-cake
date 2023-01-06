@@ -21,7 +21,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @var mixed
      */
-    protected $_value;
+    protected _value;
 
     /**
      * The type to be used for casting the value to a database representation
@@ -32,12 +32,12 @@ class ComparisonExpression : IExpression, FieldInterface
     /**
      * The operator used for comparing field and value
      */
-    protected string $_operator = "=";
+    protected string _operator = "=";
 
     /**
      * Whether the value in this expression is a traversable
      */
-    protected bool $_isMultiple = false;
+    protected bool _isMultiple = false;
 
     /**
      * A cached list of IExpression objects that were
@@ -45,7 +45,7 @@ class ComparisonExpression : IExpression, FieldInterface
      *
      * @var array<uim.cake.databases.IExpression>
      */
-    protected $_valueExpressions = [];
+    protected _valueExpressions = [];
 
     /**
      * Constructor

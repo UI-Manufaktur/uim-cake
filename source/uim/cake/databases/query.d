@@ -50,19 +50,19 @@ class Query : IExpression, IteratorAggregate
      *
      * @var uim.cake.databases.Connection
      */
-    protected $_connection;
+    protected _connection;
 
     /**
      * Type of this query (select, insert, update, delete).
      */
-    protected string $_type = "select";
+    protected string _type = "select";
 
     /**
      * List of SQL parts that will be used to build this query.
      *
      * @var array<string, mixed>
      */
-    protected $_parts = [
+    protected _parts = [
         "delete": true,
         "update": [],
         "set": [],
@@ -91,7 +91,7 @@ class Query : IExpression, IteratorAggregate
      * @var array<string>
      * @deprecated 4.4.3 This property is unused.
      */
-    protected $_selectParts = [
+    protected _selectParts = [
         "with", "select", "from", "join", "where", "group", "having", "order", "limit",
         "offset", "union", "epilog",
     ];
@@ -102,7 +102,7 @@ class Query : IExpression, IteratorAggregate
      * @var array<string>
      * @deprecated 4.4.3 This property is unused.
      */
-    protected $_updateParts = ["with", "update", "set", "where", "epilog"];
+    protected _updateParts = ["with", "update", "set", "where", "epilog"];
 
     /**
      * The list of query clauses to traverse for generating a DELETE statement
@@ -110,7 +110,7 @@ class Query : IExpression, IteratorAggregate
      * @var array<string>
      * @deprecated 4.4.3 This property is unused.
      */
-    protected $_deleteParts = ["with", "delete", "modifier", "from", "where", "epilog"];
+    protected _deleteParts = ["with", "delete", "modifier", "from", "where", "epilog"];
 
     /**
      * The list of query clauses to traverse for generating an INSERT statement
@@ -118,14 +118,14 @@ class Query : IExpression, IteratorAggregate
      * @var array<string>
      * @deprecated 4.4.3 This property is unused.
      */
-    protected $_insertParts = ["with", "insert", "values", "epilog"];
+    protected _insertParts = ["with", "insert", "values", "epilog"];
 
     /**
      * Indicates whether internal state of this query was changed, this is used to
      * discard internal cached objects such as the transformed query or the reference
      * to the executed statement.
      */
-    protected bool $_dirty = false;
+    protected bool _dirty = false;
 
     /**
      * A list of callback functions to be called to alter each row from resulting
@@ -134,14 +134,14 @@ class Query : IExpression, IteratorAggregate
      *
      * @var array<callable>
      */
-    protected $_resultDecorators = [];
+    protected _resultDecorators = [];
 
     /**
      * Statement object resulting from executing this query.
      *
      * @var uim.cake.databases.IStatement|null
      */
-    protected $_iterator;
+    protected _iterator;
 
     /**
      * The object responsible for generating query placeholders and temporarily store values
@@ -149,27 +149,27 @@ class Query : IExpression, IteratorAggregate
      *
      * @var uim.cake.databases.ValueBinder|null
      */
-    protected $_valueBinder;
+    protected _valueBinder;
 
     /**
      * Instance of functions builder object used for generating arbitrary SQL functions.
      *
      * @var uim.cake.databases.FunctionsBuilder|null
      */
-    protected $_functionsBuilder;
+    protected _functionsBuilder;
 
     /**
      * Boolean for tracking whether buffered results
      * are enabled.
      */
-    protected bool $_useBufferedResults = true;
+    protected bool _useBufferedResults = true;
 
     /**
      * The Type map for fields in the select clause
      *
      * @var uim.cake.databases.TypeMap|null
      */
-    protected $_selectTypeMap;
+    protected _selectTypeMap;
 
     /**
      * Tracking flag to disable casting

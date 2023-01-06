@@ -9,7 +9,7 @@ use LogicException;
  * for classes that provide an adapter facade or need to have sets of
  * configuration data registered and manipulated.
  *
- * Implementing objects are expected to declare a static `$_dsnClassMap` property.
+ * Implementing objects are expected to declare a static `_dsnClassMap` property.
  */
 trait StaticConfigTrait
 {
@@ -18,7 +18,7 @@ trait StaticConfigTrait
      *
      * @var array<string, mixed>
      */
-    protected static $_config = [];
+    protected static _config = [];
 
     /**
      * This method can be used to define configuration adapters for an application.
@@ -68,7 +68,7 @@ trait StaticConfigTrait
             return;
         }
 
-        if (isset(static::$_config[$key])) {
+        if (isset(static::_config[$key])) {
             /** @psalm-suppress PossiblyInvalidArgument */
             throw new BadMethodCallException(sprintf("Cannot reconfigure existing key "%s"", $key));
         }
@@ -88,7 +88,7 @@ trait StaticConfigTrait
             unset(aConfig["engine"]);
         }
         /** @psalm-suppress InvalidPropertyAssignmentValue */
-        static::$_config[$key] = aConfig;
+        static::_config[$key] = aConfig;
     }
 
     /**
@@ -98,7 +98,7 @@ trait StaticConfigTrait
      * @return mixed|null Configuration data at the named key or null if the key does not exist.
      */
     static function getConfig(string aKey) {
-        return static::$_config[$key] ?? null;
+        return static::_config[$key] ?? null;
     }
 
     /**
@@ -111,11 +111,11 @@ trait StaticConfigTrait
      * @throws \InvalidArgumentException If value does not exist.
      */
     static function getConfigOrFail(string aKey) {
-        if (!isset(static::$_config[$key])) {
+        if (!isset(static::_config[$key])) {
             throw new InvalidArgumentException(sprintf("Expected configuration `%s` not found.", $key));
         }
 
-        return static::$_config[$key];
+        return static::_config[$key];
     }
 
     /**
@@ -124,21 +124,21 @@ trait StaticConfigTrait
      * If you wish to modify an existing configuration, you should drop it,
      * change configuration and then re-add it.
      *
-     * If the implementing objects supports a `$_registry` object the named configuration
+     * If the implementing objects supports a `_registry` object the named configuration
      * will also be unloaded from the registry.
      *
      * @param string aConfig An existing configuration you wish to remove.
      * @return bool Success of the removal, returns false when the config does not exist.
      */
     static bool drop(string aConfig) {
-        if (!isset(static::$_config[aConfig])) {
+        if (!isset(static::_config[aConfig])) {
             return false;
         }
         /** @psalm-suppress RedundantPropertyInitializationCheck */
-        if (isset(static::$_registry)) {
-            static::$_registry.unload(aConfig);
+        if (isset(static::_registry)) {
+            static::_registry.unload(aConfig);
         }
-        unset(static::$_config[aConfig]);
+        unset(static::_config[aConfig]);
 
         return true;
     }
@@ -149,7 +149,7 @@ trait StaticConfigTrait
      * @return array<string> Array of configurations.
      */
     static string[] configured() {
-        $configurations = array_keys(static::$_config);
+        $configurations = array_keys(static::_config);
 
         return array_map(function ($key) {
             return (string)$key;
@@ -285,13 +285,13 @@ REGEXP;
      * @psalm-param array<string, class-string> $map
      */
     static void setDsnClassMap(array $map) {
-        static::$_dsnClassMap = $map + static::$_dsnClassMap;
+        static::_dsnClassMap = $map + static::_dsnClassMap;
     }
 
     /**
      * Returns the DSN class map for this class.
      */
     static STRINGAA getDsnClassMap() {
-        return static::$_dsnClassMap;
+        return static::_dsnClassMap;
     }
 }

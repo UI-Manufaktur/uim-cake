@@ -14,5 +14,5 @@ class SqliteCompiler : QueryCompiler
     /**
      * SQLite does not support ORDER BY in UNION queries.
      */
-    protected bool $_orderedUnion = false;
+    protected bool _orderedUnion = false;
 }

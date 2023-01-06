@@ -28,7 +28,7 @@ class SchemaCache
      *
      * @var uim.cake.databases.Schema\CachedCollection
      */
-    protected $_schema;
+    protected _schema;
 
     /**
      * Constructor

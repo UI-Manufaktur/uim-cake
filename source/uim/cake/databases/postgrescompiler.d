@@ -24,10 +24,10 @@ class PostgresCompiler : QueryCompiler
      *
      * Postgres auto converts unquoted identifiers to lower case.
      */
-    protected bool $_quotedSelectAliases = true;
+    protected bool _quotedSelectAliases = true;
 
 
-    protected $_templates = [
+    protected _templates = [
         "delete": "DELETE",
         "where": " WHERE %s",
         "group": " GROUP BY %s",

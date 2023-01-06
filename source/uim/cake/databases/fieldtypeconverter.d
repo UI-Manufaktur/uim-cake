@@ -20,7 +20,7 @@ class FieldTypeConverter
      *
      * @var array<uim.cake.databases.TypeInterface>
      */
-    protected $_typeMap;
+    protected _typeMap;
 
     /**
      * An array containing the name of the fields and the Type objects
@@ -44,7 +44,7 @@ class FieldTypeConverter
      *
      * @var uim.cake.databases.IDriver
      */
-    protected $_driver;
+    protected _driver;
 
     /**
      * Builds the type map

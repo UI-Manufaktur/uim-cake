@@ -10,7 +10,7 @@ trait FieldTrait
      *
      * @var uim.cake.databases.IExpression|array|string
      */
-    protected $_field;
+    protected _field;
 
     /**
      * Sets the field name

@@ -16,12 +16,12 @@ class ValueBinder
      *
      * @var array
      */
-    protected $_bindings = [];
+    protected _bindings = [];
 
     /**
      * A counter of the number of parameters bound in this expression object
      */
-    protected int $_bindingsCount = 0;
+    protected int _bindingsCount = 0;
 
     /**
      * Associates a query placeholder to a value and a type

@@ -38,7 +38,7 @@ class Sqlserver : Driver
      *
      * @var array<string, mixed>
      */
-    protected $_baseConfig = [
+    protected _baseConfig = [
         "host": "localhost\SQLEXPRESS",
         "username": "",
         "password": "",
@@ -64,17 +64,17 @@ class Sqlserver : Driver
      *
      * @var uim.cake.databases.Schema\SqlserverSchemaDialect|null
      */
-    protected $_schemaDialect;
+    protected _schemaDialect;
 
     /**
      * String used to start a database identifier quoting to make it safe
      */
-    protected string $_startQuote = "[";
+    protected string _startQuote = "[";
 
     /**
      * String used to end a database identifier quoting to make it safe
      */
-    protected string $_endQuote = "]";
+    protected string _endQuote = "]";
 
     /**
      * Establishes a connection to the database server.

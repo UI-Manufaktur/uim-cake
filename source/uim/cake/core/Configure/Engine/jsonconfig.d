@@ -29,7 +29,7 @@ class JsonConfig : ConfigEngineInterface
     /**
      * File extension.
      */
-    protected string $_extension = ".json";
+    protected string _extension = ".json";
 
     /**
      * Constructor for JSON Config file reading.

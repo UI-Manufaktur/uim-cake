@@ -35,7 +35,7 @@ class PhpConfig : ConfigEngineInterface
     /**
      * File extension.
      */
-    protected string $_extension = ".php";
+    protected string _extension = ".php";
 
     /**
      * Constructor for PHP Config file reading.

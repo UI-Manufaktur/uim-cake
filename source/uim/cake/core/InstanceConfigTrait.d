@@ -7,7 +7,7 @@ use InvalidArgumentException;
 /**
  * A trait for reading and writing instance config
  *
- * Implementing objects are expected to declare a `$_defaultConfig` property.
+ * Implementing objects are expected to declare a `_defaultConfig` property.
  */
 trait InstanceConfigTrait
 {
@@ -16,12 +16,12 @@ trait InstanceConfigTrait
      *
      * @var array<string, mixed>
      */
-    protected $_config = [];
+    protected _config = [];
 
     /**
      * Whether the config property has already been configured with defaults
      */
-    protected bool $_configInitialized = false;
+    protected bool _configInitialized = false;
 
     /**
      * Sets the config.

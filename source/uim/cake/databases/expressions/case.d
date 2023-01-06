@@ -22,22 +22,22 @@ class CaseExpression : IExpression
      *
      * @var array
      */
-    protected $_conditions = [];
+    protected _conditions = [];
 
     /**
-     * Values that are associated with the conditions in the $_conditions array.
+     * Values that are associated with the conditions in the _conditions array.
      * Each value represents the "true" value for the condition with the corresponding key.
      *
      * @var array
      */
-    protected $_values = [];
+    protected _values = [];
 
     /**
      * The `ELSE` value for the case statement. If null then no `ELSE` will be included.
      *
      * @var uim.cake.databases.IExpression|array|string|null
      */
-    protected $_elseValue;
+    protected _elseValue;
 
     /**
      * Constructs the case expression

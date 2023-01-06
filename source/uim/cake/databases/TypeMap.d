@@ -13,7 +13,7 @@ class TypeMap
      *
      * @var array<int|string, string>
      */
-    protected $_defaults = [];
+    protected _defaults = [];
 
     /**
      * Array with the fields and the related types that override defaults this query might contain
@@ -23,7 +23,7 @@ class TypeMap
      *
      * @var array<int|string, string>
      */
-    protected $_types = [];
+    protected _types = [];
 
     /**
      * Creates an instance with the given defaults

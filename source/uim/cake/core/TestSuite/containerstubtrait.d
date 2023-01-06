@@ -33,7 +33,7 @@ trait ContainerStubTrait
      *
      * @var array|null
      */
-    protected $_appArgs;
+    protected _appArgs;
 
     /**
      * The collection of container services.

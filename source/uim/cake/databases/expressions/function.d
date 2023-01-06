@@ -21,7 +21,7 @@ class FunctionExpression : QueryExpression : ITypedResult
     /**
      * The name of the function to be constructed when generating the SQL string
      */
-    protected string $_name;
+    protected string _name;
 
     /**
      * Constructor. Takes a name for the function to be invoked and a list of params
